@@ -1,0 +1,148 @@
+//=== GoTvP2P Build enviroment ===//
+
+//=== supported compilers ===//
+GoTvP2P only supports compilers Visual Studio 2015 Community Edition and later or Qt 5.9.1 and later
+
+//=== supported operating systems ===//
+GoTvP2P only supports windows, android and some linux
+
+//=== windows only Visual studio compiler setup ===//
+=== installing VS 2015 Community Edition ===
+1.) Download Visual Studio 2015 Community Edition from https://www.visualstudio.com/vs/community/
+2.) When installing Visual Studio Community Edition 2015 be sure
+	Visual C++
+		Commont Tools for Visual C++ 2015
+	Universal Windows App Developemtnt Tools
+		Windows 10 SDK is checked but DO NOT check Tools(1.4.1) and Windows 10 SDK
+	Visual C++ Mobile Development is checked
+	Common Tools And Software Kits
+	Android Native Development Kit (R10E,32 bits) Is checked
+3.) Run Visual Studio then exit
+	
+//=== NASM setup ===//
+1.) download and install nasm from http://www.nasm.us/
+
+//=== YASM setup ===//
+1.) download yasm from http://yasm.tortall.net/Download.html
+2.) rename yasm execuatable yasm-1.3.0-win64.exe to yasm.exe ( note: vsyasm.exe does not work correctly when building libvbx so use the NOT visual studio specific vsyasm )
+3.) put yasm in a path accessable from command line
+	either 
+	A.) copy yasm.exe to your visual studio bin directory C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin 
+	or 
+	B.) make directory C:\workspace\tools\
+		copy yasm.exe to C:\workspace\tools\
+		add C:\workspace\tools\ to your PATH enviroment variable
+
+
+//=== installing qt 5.9.1 ===//
+When installing qt 5.9.1 Check
+	UWP armv7 (MSVC2015)
+	UWP x64 (MSVC2015)
+	UWP x86 (MSVC2015)
+	msvc2015 32-bit
+	msvc2015 64-bit
+	Android ARMv7
+	Sources
+	All of the Qt items
+Tools
+	Qt Creator 4.3.1 CDB Debugger Support
+	If you have not previously installed perl the select Strawberry Perl 5.22.1.3
+	
+//=== qt maintenance ===//
+If get error about repositories not setup then the repo url is
+http://download.qt.io/online/qtsdkrepository/windows_x86/roo‌​t/qt/ 
+Add this url to the maintenance temporary settings
+	
+//=== qt creator settings ===//
+Build And Run
+	General
+		change Projects Directory to C:\ProjectRootDirectory
+		uncheck Use jome instead of NMAKE
+Build->Open Build And Run Kit Selector
+
+//=== qt creator run ===//
+If says not yet configured then click projects mode and select android
+When buiding if get error about Could not create directory then	
+Go to Build And Run->General and press reset button at end of Default build directory
+Then Click Projects on left hand side.
+	Click Shadow Build
+	if Build directory is red the use browse to select one that works
+	
+
+//=== building Python===//
+1.) Install the windows 32 version of ActivePerl 
+2.) Install nasm from http://www.nasm.us/ and make sure nasm can be run from command line ( add C:\Program Files (x86)\NASM to PATH enviroment )
+2.) Enable path to Visual Studio NMAKE ( Path C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\ )
+
+3.) Do instructions at 
+http://p-nand-q.com/python/building-python-27-with-visual_studio.html
+if when running Tools\buildbot>external.bat you see an error about
+'nmake' is not recognized as an internal or external command,
+then do this from command line
+<set VS2015="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\vcvars32.bat">
+<set VS2015_AMD64="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\vcvars64.bat">
+if you have an amd processor then run
+<"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\vcvars64.bat">
+else for intel processor run 
+<"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\vcvars32.bat">
+
+For Visual Studio 2017 Community Edition
+F:\>"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x86 10.0.15063.0
+
+
+<cd F:\GoTvCode\GoTvCore\Sandbox\Python27Libs\Python-2.7.10\>
+Run <Tools\buildbot\external.bat>
+
+4.) in Python project _msi if running VS2015 then change Linker->Input->AdditionalDependencies from fci.lib to cabinet.lib
+
+5.) When compiling _hashlib and see error
+Error	MSB3073	The command "cd "F:\GoTvCode\GoTvCore\Sandbox\Python27Libs\Python-2.7.10\build\VS2015\"
+"F:\GoTvCode\GoTvCore\Sandbox\Python27Libs\Python-2.7.10\build\VS2015\python_d.exe" build_ssl.py Release Win32 -a
+:VCEnd" exited with code 1.	_hashlib	
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets	123	
+
+Then run it from command line to see real error
+<cd "F:\GoTvCode\GoTvCore\Sandbox\Python27Libs\Python-2.7.10\build\VS2015\">
+<python_d.exe build_ssl.py Release Win32 -a>
+
+6.) If you see error "Can not find a suitable PERL:"
+It appears perl detection does not work right.. make sure ActivePerl is installed to C:\Perl and the correct directories are added to the PATH var
+
+7.) you can check your openssl build by going to DependLibs\openssl-1.0.1f and then nmake -f ms\nt.mak 
+
+ 
+
+//=== Qt for windows compiler setup ===//
+//=== setup to use QtCreator compiler ===//
+1.) Download Qt 5.9.1 or later from https://www.qt.io/download-open-source/
+2.) Set enviroment var QTDIR to F:\Qt\5.9.1\msvc2015_64
+3.) Install and run
+5.) If when building you see QMAKE_MSC_VER isn't set then open F:/Qt/5.9/msvc2015/mkspecs/common/msvc-version.conf and add on the top: QMAKE_MSC_VER = 1900
+6.) There seems to be some bugs in Qt 5.9 and later. you will probably have to edit GoTvCode/build/Qt/.qmake.stash to match your Visual Studio includes
+
+//=== Android Studio setup ===//
+1.) Download and install Java 8u131 from http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+2.) install to F:\android\jdk1.8.0_131 and F:\android\jre1.8.0_131
+3.) Set enviroment var JAVA_HOME to F:\android\jdk1.8.0_131
+4.) Set enviroment var JRE_HOME to F:\android\jre1.8.0_131
+
+5.) Download Android Studio from https://developer.android.com/studio/install.html
+6.) Install Android Studio to F:\android\AndroidStudio
+7.) When installing AndroidStudio install the sdk to F:\android\sdk-android
+8.) In AndroidSdk manager install Android 4.4(KitKat) API 19
+9.) in AndroidSdk->SDK Tools install Google USB Driver and NDK
+
+//=== Qt for android on windows compiler setup ===//
+1.) Get unified qt installer
+2.) Install to directory F:/Qt
+3.) Select Qt 5.9 MinGW 5.3, UWP arm7, UWP x64 MSVC2017, UWP x86 MSVC2017, msvc2017 64 bit, Android ARMv7
+4.) Select tools QtCreator 4.30 CDB Debugger Support, MinGW 5.3.0, Qt Installer Framework
+
+
+//=== optional for linux/android build ===//
+1.) Install Virtal Box from https://www.virtualbox.org/
+2.) Get the Linux Mint 18 image with all the tools already setup via torrent ( root pwd is gotvpass )
+// TODO post linux image torrent
+3.) Load the image in virtual box, ( Do NOT turn on 3d acceleration because qtcreator wont run )
+4.) Build using qtcreator
+

@@ -1,0 +1,5 @@
+
+Project ERROR: You need to set the ANDROID_NDK_ROOT environment variable to point to your Android NDK.
+Set ANDROID_NDK_ROOT in This PC->Properties->Advanced system settings->Eviroment Variables
+To F:/android/android-ndk-r10e
+

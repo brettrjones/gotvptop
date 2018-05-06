@@ -1,0 +1,3 @@
+Stream Server	- Ability to stream shared audio and video files directly to media player instead of downloading
+FriendDar		- How far away are your friends on a radar (If they enable the plugin).. maybe with google map as background
+Anchor Mirror	- Mirror anchor of one network to another.. basically make them redundent and one network

@@ -1,0 +1,74 @@
+
+//=== Visual Studio Project Setup ===//
+=== General ===
+// Target Name
+$(ProjectName)D for debug or $(ProjectName) for release
+// Output Directory
+$(ProjectDir)..\..\..\..\lib\$(Platform)\
+// Intermediate Directory
+$(SolutionDir)objs\$(TargetName)\$(Configuration)\
+// Build Log File
+$(SolutionDir)objs\$(TargetName)\$(Configuration)\$(MSBuildProjectName).log
+OR leave blank
+// Character Set
+Use Multi-Byte Character Set
+
+=== C++ -> General ===
+Additional Include Directories.. add addition paths as required
+$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;
+
+
+=== C++ -> Code Generation ===
+Runtime Library Debug			Multi-threaded Debug DLL (/MDd)
+Runtime Library Release 		Multi-threaded DLL (/MD)
+
+=== C++ -> Output Files ===
+ASM List Location 				$(SolutionDir)objs\$(TargetName)\$(Configuration)\
+Object File Name  				$(SolutionDir)objs\$(TargetName)\$(Configuration)\
+Program Database File Name 		$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb
+
+Optional.. I usally disable these
+// Log name
+$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).tlog
+// precompiled header name
+$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pch
+// browse info
+$(SolutionDir)objs\$(TargetName)\$(Configuration)\$(ProjectName).bsc
+
+
+=== Librarian -> General ===
+Output File						
+$(OutDir)$(TargetName)$(TargetExt)
+
+
+==== adding yasm command to compile .asm files in visual studio ===
+1.) right click file and select properties
+2.) In Exclude From Build select No
+3.) In Item Type Select Custiom Build
+4.) Press Apply and Custom Build Tool should appear in left column under General
+5.) Click Custom Build Tool
+6.) In Command Line if ffmpeg library then put 
+yasm -Xvc -g cv8 -f win32 -Pconfig_x86.asm -I"." -I"%(ProjectDir)../../" -I"%(ProjectDir)../../../" -I"%(ProjectDir)../../../../" "%(FullPath)" -o $(SolutionDir)objs\$(TargetName)\$(Configuration)\%(Filename).obj
+else In Command Line use the above command but without the -Pconfig_x86.asm
+7.) In Description put 
+Assembling %(Filename)%(Extension)
+8.) In Outputs put 
+$(SolutionDir)objs\$(TargetName)\$(Configuration)\%(Filename).obj
+
+==== adding nasm command to compile .nas files in visual studio ===
+// Same as adding yasm command except in Command Line
+nasm -I$(ProjectDir) -I$(ProjectDir)../../ -I$(ProjectDir)../../codec/common/x86/ -f win32 -DPREFIX -DX86_32 -o $(SolutionDir)objs\$(TargetName)\$(Configuration)\%(Filename).obj %(FullPath)
+
+
+==== example copy a file in visual studio after build ===
+In Properties->Custom Build Step
+	Command Line: 				copy /B /Y "$(TargetPath)" "$(SolutionDir)..\..\system\$(TargetFileName)"
+	Description: 				Copy output
+	Outputs: 					$(SolutionDir)..\..\system\$(TargetFileName)
+	Additional Dependencies:	$(TargetPath)
+	Execute After: 				Build
+
+
+
+
+

@@ -1,0 +1,297 @@
+How To Setup Web Hosted GoTvP2P On interserver.net VPS
+
+Required applications.
+1. Putty from http://http://www.putty.org/
+2. Ultra VNC or equivelent from http://www.uvnc.com/downloads.html
+3.) Filezilla or equivelent ftp client from https://filezilla-project.org/
+Not Required but you should check if your VPS IP address is blocked using PeerBock or equivelent
+3.) PeerBlock from http://www.peerblock.com/
+
+
+I tried 2 different VPS hosts and I had fewer issues with interserver.net and they were cheaper ($6.00/month) and the IP address given to the VPS was not blocked by PeerBlock as a IP address of a spam server.  
+Your milage may vary.
+
+=========== create VPS ===========
+1.) Purchase one VPS from http://interserver.net
+I purchased two VPS's from interserver but that was because I wanted the anchor server and the connection test server to be seperate in case GoTv P2P became popular and server loading became an issue. Unless you are planning to have a huge number of users you can make the anchor server and connection test server be the same url and use the same instance of GoTv P2P.
+You only need one cpu slice and no administraion panel ( you can manage reboot etc from your VPS Home page ) 
+Select CentOS 32bit version 6 OS
+After purchase login and go to your VPS Home page and press the boot button and record your IP Address that was assigned to your VPS. 
+From here on the IP address assigned to your VPS host will be symbolized as [VPS IP]. 
+Your root password you assigned to the vps when you created it will be symbolized as [VPS PWD].
+Later in this document we will setup a linux user and a vnc client user
+The linux user name and password will be symbolized as [HOST_USER_NAME] and [HOST_USER_PWD]
+The virtual network client user name and password will be [VNC_USER_NAME] and [VNC_USER_PWD]
+shell commands will be encased in <> to distinquish from other text. Do not enter the < or > as part of the commands
+NOTE: you may want to open a ticket immediately to have administrator enable vswap for your VPS. In each case vswap was required after installing VNC and Desktop because of memory requirements. You could purchase more memory instead.. one more cpu slice should avoid the issue. 
+   
+=========== setup VPS user ===========
+1.) login to your VPS using putty ssh 
+	a.) Open putty and select connection type SSH
+	b.) Enter your [VPS IP] as the Host Name
+	c.) At the shell prompt login as root with [VPS PWD] as the password
+	
+2.) Create a new linux user and vnc user accounts 
+	a.) create linux user with command <adduser [HOST_USER_NAME]>
+	b.) set the linux users password with command <passwd [HOST_USER_NAME]>
+		at the prompt enter the users new password [HOST_USER_PWD]
+
+		
+3.) Add the new users as sudoer
+	NOTE: sudoer seems to now be missing.. can skip this step
+	a.) open sudoers with vi <vi /etc/sudoers>
+	b.) Add a line under ##Allow root to run commands anywhere in the format (DO NOT CUT AND PASTE).
+	[HOST_USER_NAME] ALL=(ALL) 	ALL
+	If you are unfamilar with vi then here are a few commands to get started
+	insert key - go to insert mode 
+	esc key - leave insert text mode
+	:q! - exit without saving changes
+	:w - write the current changes to file
+	:q - quit
+	:wq - write the current changes and quit
+
+=========== update centos and install VNC ===========	
+1.) update to latest version of packages
+	a.) <yum update -y>
+
+2.) Install desktop
+	a.) <yum groupinstall Desktop -y>
+
+3.) Install vnc
+	a.) <yum install tigervnc-server -y>
+
+#### Interserver.com VPS only ###############
+// dns does not work.. do the following
+echo nameserver 8.8.8.8 > /etc/resolv.conf
+// It must be getting reset by xwindows / network manager.
+You can add that to /etc/rc.d/rc.local as well.
+<vi /etc/rc.d/rc.local>
+at bottom add the line
+echo nameserver 8.8.8.8
+NOTE: it appears <yum -y remove NetworkManager> can be used on Interserver also with no ill effects
+#### end Interserver.com VPS only ###############
+
+#### FDCServers.com VPS only ###############
+Remove NetworkManager as this will overwrite our local name server settings and cause you to be unable to resolve domains.
+<chkconfig NetworkManager off>
+<yum -y remove NetworkManager>
+#### end FDCServers.com VPS only ###############
+
+4.) boot to gui instead of command line
+	a.) using a text editor edit /etc/inittab <vi /etc/inittab>
+		and change following line:
+		id:3:initdefault:
+		to
+		id:5:initdefault:
+
+5.) Create auto login so when boots it automaticaly logs into [HOST_USER_NAME] account
+	Edit /etc/gdm/custom.conf <vi /etc/gdm/custom.conf>  Then , under the [daemon] section, add 2 lines so it looks like the code below (obviously change [HOST_USER_NAME] to the username we created in setup VPS user )
+	[daemon]
+	AutomaticLoginEnable=true
+	AutomaticLogin=[HOST_USER_NAME]
+
+6.) Reboot the VPS
+	a. ) You can reboot by loging into interserver and using their home page or 
+	from the shell using  <reboot>
+
+=========== Setup and Test VNC ===========	
+1.) Login to the VPS using putty as root
+
+2.) Enter in as a non root user, you can use su
+	<su [HOST_USER_NAME]>
+	type the command:
+	<vncserver>
+	it should prompt you for vnc password.. enter your VNC password [VNC_USER_PWD] 
+
+3.) Edit VNC config
+	<cd /home/[HOST_USER_NAME]/.vnc> 
+	<vi xstartup>
+	at the very bottom of the file xstartup
+	change "twm &" to "exec gnome-session &" ( leave out the quotes)
+
+4.) NOTE: can change vnc password by 
+	<su [HOST_USER_NAME]>
+	<cd /home/[HOST_USER_NAME]/.vnc>
+	<vncpasswd>
+
+5.) setup [HOST_USER_NAME] as vnc user
+	a.) exit back to root
+		<exit>
+	b.) add vnc user to vnc 	
+		<vi /etc/sysconfig/vncservers>
+		if you see root in VNCSERVERS then remove it
+		add these lines
+		VNCSERVERS="1:[HOST_USER_NAME]"  
+		VNCSERVERARGS[1]="-geometry 1024x768"
+
+5.) check vnc status
+	To stop/restart or check status of a service, you can…
+	<service vncserver stop>
+	<service vncserver start>
+	<service vncserver restart>
+	<service vncserver status>
+	to make sure our changes are valid do <service vncserver restart> amd verify no errors
+	
+6.) Verify can login with VNC and use os
+	a.) Login with VNC viewer at [VPS IP]:5901 and password [VNC_USER_PWD]
+	b.) in VNC viewer then login to linux with [HOST_USER_NAME] and [HOST_USER_PWD]
+	then open a terminal and make sure you can su
+	<su>
+	<[ROOT_PWD]>
+	if you get a error about incorrect password even though you are sure it is correct you probably don't have enough memory. Enable vswap or ask your web host to enable vswap.
+	Do not do move to next section until issue is resolve or you will probably lock yourself out and have to restart install from scratch
+
+7.) Setup VNC to restart on boot
+	a.) login as root with putty ssh
+	b.) <chkconfig network on> 
+	c.) <chkconfig vncserver on> 
+	
+8.) Reboot and verify can login with VNC without running service vncserver start on command line
+	a.) From shell or host home page reboot VPS
+	b.) Attempt VNC login.. if works then everything is setup
+
+=========== Setup Other Services ===========
+1.) Disable unwanted services
+	<chkconfig sendmail off> // only if don't want email service
+	<chkconfig mysql off>	 // only if don't want msql database services
+	<chkconfig apache2 off>	 // only if don't want web server
+
+2.) Stop NetworkManager
+	</sbin/service NetworkManager stop>
+	# Disable it from starting at boot time
+	<chkconfig NetworkManager off>
+
+3.) Add Default Net Manager
+	<chkconfig network on>
+	Start Default Manager
+	<service network start>
+	</etc/init.d/network restart>
+
+	<chkconfig --list> // show services
+	//yum uninstall networkmanagement ?? not needed
+
+4.) Enable needed services
+	<chkconfig vncserver on> // this makes vncserver start every boot
+	<chkconfig network on>
+	<chkconfig sshd on>
+
+5.) Remove unneeded packages
+	Type the following command if you want to get list of all installed software
+	<yum list installed>
+	<yum remove sendmail> 
+	//<yum remove NetworkManager -y> // if on Interserver may need to completely remove
+
+=========== Install FTP ===========
+1.) Install ftp package
+	<sudo yum install vsftpd -y>
+	<sudo yum install ftp -y>
+	NOTE: if you see error about "Couldn't resolve host" then back to the problem about resolving hosts try <yum remove NetworkManager -y> <reboot> 
+	if that doesnt work go back at look at the steps involving the 
+	
+2.) Configure VSFTP
+	a.) Edit the  VSFTPconfiguration file:
+	<sudo vi /etc/vsftpd/vsftpd.conf>
+
+	One primary change you need to make is to change the Anonymous_enable to No:
+	anonymous_enable=NO
+
+	uncomment the local_enable option, changing it to yes.
+	local_enable=YES
+	
+3.) Optional make ftp run on boot
+	you could run this command by ssh with putty each time you want to run the ftp server..
+	<service vsftpd start>
+	but if your want it to start on boot then
+	<chkconfig vsftpd on> // this makes vsftpd start every boot	
+
+=========== Configure Centos Gnome ===========
+1.) Login with Ultra VNC
+	<reboot>
+	Login with Ultra VNC
+	If you see an Authenication prompt for network proxy used for downloading package then cancel it. we will do this manually
+
+2.) Dont allow automatic updates
+	go to System->Preferences->Software Updates and disable automatic updates bys setting to Never
+	go to System->Preferences->Startup Applications and uncheck Network Manager and PackageKit Update Applet
+
+3.) How to manually update
+	open a terminal and <su> to root 
+	update latest version with <yum update>
+	you can check version with <cat /etc/redhat-release>
+
+=========== INSTALL Qt with Qt installer (Qt is required for GoTv P2P ) ===========
+1.) The GoTv P2P Cent OS Linux executable was built on 32 bit Cent OS and linked against
+	Qt 5.3.2 libraries
+	For this document we will assume you created a folder on the desktop for installs 
+	and that folder name is /home/[HOST_USER_NAME]/Desktop/installs.
+	Find the linux qt 5.3.2 installer from the qt website and ftp it to your Desktop/installs folder
+	open a terminal and <su>
+	<cd /home/[HOST_USER_NAME]/Desktop/install>
+	<chmod 755 qt-opensource-linux-x86-5.3.2.run>
+	<exit> // exit su mode
+	<./qt-opensource-linux-x86-5.3.2.run>
+	If you see a empty window and some error about bad Pixmap it is because you are running as su and not as [HOST_USER_NAME]
+	If you see the following error
+	(/usr/lib/libstdc++.so.6: version `GLIBCXX_3.4.14' not found (required by /home/me/Qt5.3.2/Tools/QtCreator/lib/qtcreator/plugins/libCore.so))
+	run <yum install glib*> and try again
+
+2.) Add qt libs to path
+	make qt lib config file
+	<sudo vi /etc/ld.so.conf.d/randomLibs.conf>
+	add line
+	/home/[HOST_USER_NAME]/Qt5.3.2/5.3/gcc/lib
+
+	save file
+	<ldconfig> to update the system with these libs
+	NOTE: if you choose other than the default path to install to you will need to 
+	located the qt library files and change 
+	/home/[HOST_USER_NAME]/Qt5.3.2/5.3/gcc/lib
+	to that location instead
+	
+3.) A alternative method that might work ( I haven't tried it )
+	https://wiki.qt.io/How-to-Install-Qt-5-and-Qwt-on-CentOS-6
+	
+=========== Install GoTv P2P and set it to auto run ===========	
+1.) Upload GoTv P2P executable with ftp to your desktop at /home/[HOST_USER_NAME]/Desktop
+	make the GoTv P2P executable able to be executed from host account
+	<cd /home/[HOST_USER_NAME]/Desktop/>
+	<chown GoTv P2P [HOST_USER_NAME]>
+	<chmod 755 GoTv P2P>
+
+2.) Autorun GoTv P2P
+	Go to menu System->Preferences->Startup Applications and add the application there
+	The command line should be /home/[HOST_USER_NAME]/Desktop/GoTv P2P
+	
+	NOTE: in earlier versions of CentOS If you did not add & at the end of 
+	/home/[HOST_USER_NAME]/Desktop/GoTv P2P the gui will be frozen
+	To unfreeze edit the file in /home/[HOST_USER_NAME]/.config/autostart/GoTv P2P.desktop and add the &
+	This appears to have been corrected in at least CentOS 6.7
+
+3.) Add GoTv P2P to menu ( Optional )
+	<vi /usr/share/applications/newitem.desktop>
+	add the following lines, save and reboot
+	[Desktop Entry]
+	Version=1.0
+	Name=My P2P Web
+	Exec=/home/[HOST_USER_NAME]/Desktop/GoTv P2P
+	Terminal=false
+	Type=Application
+	StartupNotify=true
+	Categories=Network;WebBrowser;
+	X-Desktop-File-Install-Version=0.15cd ..
+	
+
+=========== Setup GoTv P2P as Anchor ===========	
+1.) run GoTv P2P and setup account as normal
+	b.) goto Options->Network Settings
+	c.) Select Assume Users Can Connect Directly and enter [VPS IP] as the extern ip
+	d.) Uncheck Enable UPNP
+	e.) Change listen port if different port desired ( prefer port 45124 for anchors and connect test services but there it can be any port not in use )
+	d.) Click Manage Anchor Settings and check this device is an anchor and save the setting
+	NOTE: application databases etc are located /home/[HOST_USER_NAME]/.local/share/GoTv P2P/
+		user files located /home/[HOST_USER_NAME]/.local/share/GoTv P2P/XXXX/accounts/[Login Name]
+	
+	
+	
+	
+

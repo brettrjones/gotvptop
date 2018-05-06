@@ -1,0 +1,3 @@
+There are many tutorials on the web but basically it is very simple
+1. Copy gotvptop.apk to your SD Card on your Android device.
+2. Use a file manager, such as Astro or ES File Explorer, locate the file on your device and install it

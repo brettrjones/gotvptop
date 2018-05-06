@@ -1,0 +1,136 @@
+
+// in Windows Defender add exclusions
+//=== excluded processes ===//
+// visual studio & tools
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\devenv.exe
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe
+C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe
+C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe
+
+//=== excluded folders ===//
+// exclude your code folder
+
+// visual studio & tools
+C:\Program Files (x86)\Microsoft Visual Studio 10.0
+C:\Program Files (x86)\Microsoft Visual Studio 14.0
+C:\Program Files (x86)\Microsoft Visual Studio
+C:\Windows\assembly
+C:\Windows\Microsoft.NET
+C:\Program Files (x86)\MSBuild
+C:\Program Files\dotnet
+C:\Program Files (x86)\Microsoft SDKs
+C:\Program Files\Microsoft SDKs
+C:\Program Files (x86)\Common Files\Microsoft Shared\MSEnv
+C:\Program Files (x86)\Microsoft Office
+
+// cache folders
+C:\ProgramData\Microsoft\VisualStudio\Packages
+C:\Program Files (x86)\Microsoft SDKs\NuGetPackages
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files
+C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Temporary ASP.NET Files
+C:\Users\{{USERNAME}}\AppData\Local\Microsoft\VisualStudio
+C:\Users\{{USERNAME}}\AppData\Roaming\Microsoft\VisualStudio
+C:\Users\{{USERNAME}}\AppData\Roaming\JetBrains
+
+//=== Visual Studio Settings ===//
+practices.
+Environment -> General
+    Uncheck “Automatically adjust visual experience based on client performance”
+    Uncheck “Enable rich client visual experience”
+    Check “Use hardware graphics acceleration if available”
+
+Environment -> AutoRecover
+    Uncheck “Save AutoRecover information every”
+
+Environment -> Documents
+    Check “Save documents as Unicode when data cannot be saved in codepage”
+
+Environment -> Keyboard
+    Set “ForceGC” to ctrl+num1
+    Set “ReSharper_Toggle” to ctrl+num0 (if ReSharper is used)
+    Set “ReSharper_EnableDaemon” to ctrl+num8 (if ReSharper is used)
+
+Environment -> Startup
+    Set “At startup” to “Show empty environment at startup”
+    Uncheck “Download content every”
+
+Environment -> Synchronized settings
+    Uncheck “Synchronize settings across devices when signed into Visual Studio”
+
+Projects and Solution
+    Uncheck “Track active item in solution explorer”
+    Check “Lightweight solution load for all solutions”
+
+Projects and Solutions -> Build and Run
+    Check “Only build startup projects and dependencies on run”
+
+Projects and Solutions -> Web Package Management
+    Set “Restore on Project Open” to false (for Bower)
+    Set “Restore on Save” to false (for Bower)
+    Set “Restore on Project Open” to false (for NPM)
+    Set “Restore on Save” to false (for NPM)
+
+Text Editor -> General
+    Uncheck “Track changes”
+
+Text Editor -> All Languages -> General
+    Uncheck “Enable virtual space”
+    check “Line numbers”
+    Uncheck “Navigation bar”
+	
+Text Editor -> All Languages -> Scroll Bars
+    Uncheck “Show annotations over vertical scroll bar”
+
+Text Editor -> All Languages -> CodeLens
+    Uncheck “Enable CodeLens”
+
+Text Editor -> Basic -> Advanced
+    Uncheck “Enable full solution analysis”
+
+Text Editor -> C# -> Advanced
+
+    Uncheck “Enable full solution analysis”
+
+Text Editor -> Basic, C# -> IntelliSense
+    Uncheck “Show completion list after a character is deleted”
+    Set “Snippets behavior” to “Never include snippets”
+
+Text Editor -> CoffeeScript -> CoffeeLint
+    Set “Enable CoffeeLint” to false
+
+Text Editor -> CSS -> CssLint
+    Set “Enable CSS Lint” to false
+
+Text Editor -> CSS, HTML, JSON, LESS, SCSS -> Advanced
+    Set “Show errors as warnings” false
+
+Text Editor -> JavaScript/TypeScript -> EsLint
+    Set “Enable ESLint” to false
+
+Text Editor -> SQL Server Tools, U-SQL -> Intellisense
+    Uncheck “Enable Intellisense”
+
+Text Editor -> [Language] -> Formatting -> General
+    Uncheck everything (if ReSharper is used for formatting assistance)
+
+Debugging
+    Uncheck “Suppress JIT optimization on module load (Managed only)”
+    Uncheck “Enable Edit and Continue”
+
+Debugging -> Just-In-Time
+    Uncheck “Script”
+
+IntelliTrace
+    Uncheck “Enable IntelliTrace”
+
+Node.js Tools
+    Set “Check for surveys/news” to “Never”
+
+Web Forms Designer
+    Uncheck “Enable Web Forms Designer”
+
+Windows Forms Designer
+    Set “Automatically Populate Toolbox” to false
+
+XAML Designer
+    Uncheck “Enable XAML Designer”

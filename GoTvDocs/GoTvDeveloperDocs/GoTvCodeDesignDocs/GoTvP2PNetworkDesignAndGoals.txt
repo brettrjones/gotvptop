@@ -1,0 +1,56 @@
+For the kodi part of gotv it is not feasible for a single programmer to add decent security so these notes are for the p2p network
+
+Goal 1. At least some semblence of security and encryption.
+		Real security like Tor requires infastructure and slows down communication too much for the average user.
+		
+		The p2p network will use lite encryption of traffic between users. This means TCP only connections.
+		
+Goal 2. Any device including old phones should be able to be a host with simple setup and not require a technical genius
+
+Goal 3. Users should be able to search/find/join groups of like minded individuals
+
+Goal 4. Redundancy so if a group list host goes down then users can still connect to the groups they have joined
+
+Here is my current thinking of how the network should be designed.
+
+All services and plugins and personal connection permissions are 5 levels of permissions
+	1 - Admin  		 - Normally reserved for host of service 
+	2 - Friend/Host Sharing  - permission for access of those accepted as friend
+	3 - Guest  		 - temporary permission or maybe auto permission for those on same network
+	4 - Annonymous   - anyone can access plugin or service
+	5 - Disabled	 - service or plugin is disabled and cannot be accessed
+
+
+
+4 tier p2p node design.
+tier 1 - a.) master group listing host and search engine
+		 b.) must have a open tcp port to connect to.
+		 c.) share group listings with other masters for redundancy
+		 d.) privider of is port open test
+		 e.) must have fixed IP Address or url
+		 
+tier 2 - a.) group listing host and search enginge
+		 b.) must have a open tcp port to connect to.
+		 c.) announces to and shares listings with tier 1 if not private
+		 d.) share group listing with other tier 2 group list hosts if not private
+		 e.) privider of is port open test
+		 
+tier 3 - a.) single group host and search engine 
+		 b.) must have a open tcp port to connect to.
+		 c.) announces to multiple tier 2 and optionally tier 1 if not private
+		 d.) privider of is port open test
+		 e.) provider of relay services for accepted users without an open port
+		 f.) might provide content
+		 
+tier 4 - a.) end user 		
+		 b.) might provide content
+		 c.) might provide relay service to other users of same group if relay plugin permission level is met and has open port
+		 d.) announces to tier 3 group host ( or multiple group hosts )
+		 e.) can communicate with users of group or muliple groups if user has accepted user with sufficient permission level
+		 f.) other users can access content of end user if they have sufficient permission
+		 
+a single device can host all 4 tiers if services are turned on. it is just a matter of settings	 
+		 
+		 
+
+		 

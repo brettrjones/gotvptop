@@ -1,0 +1,75 @@
+In order to get android support v7 to work
+=== setup files for VisualGDB ===
+If building using VisualGDB then will need the build.xml and local.properties files from AndroidV7SupportFiles
+and copy them to C:\android\android-sdk-20140702\sdk\extras\android\support\v7\appcompat
+if they dont exist
+also change the line target=android-17 in project.properties to your target api
+
+==== enable save before build in eclipse ====
+1.) Click Window > Preferences.
+2.) Select General > Workspace from the list.
+3.) check Save automatically before build
+
+==== Setup apcompat v7 support ====
+File->Import->Existing Android Code Into Workspace
+Right click MyP2PWeb->Properties
+under Android add reference link to android-support-v7-appcompat
+
+All Manifests must have same min and target sdks. seems to be api 17 only or wont actually find class
+This includes sdk\extras\android\support\v7\appcompat\project.properties
+
+If you see error 
+error android-support-v7-appcompat] Could not find android-support-v7-appcompat.apk!
+Then you probably have the android-support-v7 as a project instead of library
+
+1.) First Open SDK Manager and make sure that "Android Support Library" under "Extras" is installed there.
+inside your work space remove "appcompat_v7" from eclipse and also its directory permanently
+
+2.) File|Import|Android(Existing Android Code into Workspace) then Hit Next
+Choose Root directory as "ADT_BUNDLE_INSTALLED_DIRECTORY\sdk\extras\android\support\v7" 
+then under projects check "appcompat" then hit "Finish"
+
+3.) Right Click on your project and hit "properties" and do the following:
+
+from "Android" section, make sure target is selected there below there there is "library" 
+section remove the old one and browse for the new one "appcompat_v7"
+from "Java Build Path" section, go to "libraries" tab and remove any missing library if you found any.
+
+from "Java Build Path" section, go to "Order and Export" tab and highlight only for the following and keep the same order:
+
+projectName/src
+projectName/gen
+Android Private Libraries
+Android Dependecies
+from "Project References" section, check "appcompat_v7"
+
+==== dont know if this works but here for reference ====
+Android Support Library is obsolete.
+To Install Open SDK Manager and check the box to show obsolete 
+ Then check Android Support Library ( Obsolete)
+
+In Eclipse right click MyP2PWeb->Android Tools->Add Support Library
+
+Make sure you have downloaded the Android Support Library using the SDK Manager.
+Create a library project and ensure the required JAR files are included in the project's build path:
+Select File > Import.
+Select Existing Android Code Into Workspace and click Next.
+Browse to the SDK installation directory and then to the Support Library folder. For example, if you are adding the cardview project, 
+browse to /extras/android/support/v7/cardview/.
+Click Finish to import the project. For the v7 cardview project, you should now see a new project titled android-support-v7-cardview.
+In the new library project, expand the libs/ folder, right-click each .jar file and select Build Path > Add to Build Path. 
+For example, when creating the the v7 cardview project, add the android-support-v7-cardview.jar file to the build path.
+Right-click the library project folder and select Build Path > Configure Build Path.
+In the Order and Export tab, check the .jar files you just added to the build path, so they are available to projects that depend on this library project. 
+For example, the cardview project requires you to export the android-support-v7-cardview.jar file.
+Uncheck Android Dependencies.
+Click OK to complete the changes.
+You now have a library project for your selected Support Library that you can use with one or more application projects.
+Add the library to your application project:
+In the Project Explorer, right-click your project and select Properties.
+In the category panel on the left side of the dialog, select Android.
+In the Library pane, click the Add button.
+Select the library project and click OK. For example, the appcompat project should be listed as android-support-v7-cardview.
+In the properties window, click OK.
+
+

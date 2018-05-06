@@ -1,0 +1,19 @@
+1. Select the SYSTEM tab, and then opt for the File Manager in the sub-option.
+2. Choose the option Add Source which is listed in the left column.
+3. A window will be displayed, and there will be a None tab. Select this tab.
+4. Here you have to enter a web address, and the address is http://fusion.tvaddons.ag. After entering the web address, click on Done.
+5. The next step is to give some name to the media source file, and so we will give the name fusion, and then tap on OK.
+
+Repeat steps 2->5 for all repos you are adding ( i start then name of repo with . so is at begining of lis )
+// Exodus plugin
+.fusion  http://fusion.tvaddons.ag
+// Phonix plugin
+.fusion  http://fusion.tvaddons.ag
+
+6. Go back until back to main menu again ( upper left mouse click if in windows )
+7. Select AddOns from left menu then box icon in upper left corner.
+8. Now you have to opt for installing using a zip file
+9. select install from zip file then select .fusion
+10. select kodi-repos then english
+11. select repository.exodus.x.x.x.zip for Exodus or repository.xbmchub-x.x.x.zip for Phoenix or repository.tknorris.release-x.x.x.zip for Salts
+12. the MetalKettle 
