@@ -1,0 +1,4 @@
+module GOTVQt
+plugin GOTVQt
+typeinfo GOTVQt.qmltypes
+classname GOTVQtPlugin

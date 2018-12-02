@@ -1,25 +1,22 @@
 
-I, the author of GoTvP2P got a bit paranoid about privacy. In USA it takes 3 forms of identity to get a job but only a IP Address logged somewhere to convict you of a crime.
-In the USA "you are your IP Address" even if someone else used it. You can be sued for thousands of dollars using just your IP Address as your identity. GoTvP2P and Kodi use 3rd Party plugins, I was paranoid that they might cause copywrite infringement and in the USA copywrite infringement penalties can be over $30,000 fine per work infringed and up to 5 years in jail (In USA we have the highest percentage of our citizens in jail of any country in the world), however, I needed to be able to make GoTvP2P work with these plugins.
+As the author of GoTvPtoP got a bit paranoid about privacy. In USA it takes 3 forms of identity to get a job but only a IP Address logged somewhere to convict you of a crime.
+In the USA "you are your IP Address" even if someone else used it. You can be sued for thousands of dollars using just your IP Address as your identity. GoTvPtoP and Kodi use 3rd Party plugins, I was paranoid that they might cause copywrite infringement and in the USA copywrite infringement penalties can be over $30,000 fine per work infringed and up to 5 years in jail (In USA we have the highest percentage of our citizens in jail of any country in the world), however, I needed to be able to make GoTvPtoP work with these plugins.
 
-My personal recommendations
+You might want to
 
- 1.) Use Peerblock from https://sourceforge.net/projects/peerblock/. It's free and open source and blocks internet connections in or out from known scam/malwareware/AntiP2P/Ads etc which use up your bandwidth. It's not a guarantee of privacy but every layer of protection helps.
+1.) Use a VPN. NordVPN service seems ok. ExpressVPN is probably a good alternative to NordVPN but I have no personal experince with them and NordVPN has worked well so far.
  
- 2.) I use Tor Web Browser for Web searchs. The url of Tor is https://www.torproject.org/download/download-easy.html.en#warning
+2.) Use Tor Web Browser for Web searchs. The url of Tor is https://www.torproject.org/download/download-easy.html.en#warning
  
- 3.) I use duckduckgo as my default search engine wherever possible. duckduckgo does not track your personal data and seems to give good results. Their url is https://duckduckgo.com/ or if you like google results ( seems better for programming searches ) then use start page by ixquick https://www.ixquick.com/ which filters the google crap.
+3.) Use duckduckgo as my default search engine wherever possible. duckduckgo does not track your personal data and seems to give good results. Their url is https://duckduckgo.com/ or if you like google results ( seems better for programming searches ) then use start page by ixquick https://www.ixquick.com/ which filters the google crap.
  
- 4.) I use a VPN. Making a software VPN solution work for every device you own is to much hassle for all but the most hardcore geeks. I personaly use a Router with built in Nord VPN software from https://www.flashrouters.com/ and NordVPN service (I think I pay $6.99 per year). This setup cause about a 10% decrease in internet access speed but this seams reasonable considering all that is going on with VPN encryption etc. ExpressVPN is probably a good alternative to NordVPN but I have no personal experince with them and NordVPN has worked well so far.
+4.) Using a VPN causes google to go nuts with device verification and Are You A Robot prompts.
+ I switched email services to http://mail.com and access gmail from that account to avoid the verification crap + mail.com offers free mail management like thunderbird or outlook without having to install an application so can be accessed anywhere. 
  
- 5.) Using a VPN causes google to go nuts with device verification and Are You A Robot prompts.
- I switched email services to http://mail.com and access gmail from that account to avoid the verification crap + mail.com offers free mail management like thunderbird or outlook without having to install an application so can be accessed anywhere. Highly recommend mail.com :)
+5.) Netflix and DramaFever was ok but had to Cancel my SlingBlade account because would only show warning "We Have Detected You Are Using A Proxy" instead of showing movies :(
  
- 6.) Netflix and DramaFever was ok but had to Cancel my SlingBlade account because would only show warning "We Have Detected You Are Using A Proxy" instead of showing movies :(
+6.) Use vanilla VISA gift cards to pay for things like PeerBlock subscription etc. Vanilla VISA seem to require the least amount of personal info. There url is https://www.vanillavisa.com
  
- 7.) I use vanilla VISA gift cards to pay for things like PeerBlock subscription etc. Vanilla VISA seem to require the least amount of personal info. There url is https://www.vanillavisa.com
- 
- 8.) Microsoft has gone crazy with spyware and redirecting your searches etc to microsoft sites. I wont explain it all because it envolved a lot of work to fix Windows 10 and I wasn't completely successfull with getting rid of cortana but the Firefox plugin "Redirect To DuckDuckGo" helped.
-
+7.) Microsoft has gone crazy with spyware and redirecting your searches etc to microsoft sites. I wont explain it all because it envolved a lot of work to fix Windows 10 and I wasn't completely successfull with getting rid of cortana but the Firefox plugin "Redirect To DuckDuckGo" helped.
  
  

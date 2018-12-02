@@ -1,0 +1,10 @@
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/libdvdnav.lib
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/bin/libdvdnav.dll
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/include/dvdnav/dvd_types.h
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/include/dvdnav/dvdnav.h
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/include/dvdnav/dvdnav_events.h
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/cmake/dvdnav/dvdnav.cmake
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/cmake/dvdnav/dvdnav-debug.cmake
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/cmake/dvdnav/dvdnav-config.cmake
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/cmake/dvdnav/dvdnav-config-version.cmake
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/libdvdnav.pdb

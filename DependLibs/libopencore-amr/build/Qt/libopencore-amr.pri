@@ -1,0 +1,74 @@
+HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
+	$$PWD/../../../../GoTvConfig.h \
+	$$PWD/../../../../GoTvCpuArchDefines.h \
+	$$PWD/../../../../GoTvDependLibrariesConfig.h \
+	$$PWD/../../../../GoTvFeaturesConfig.h \
+	$$PWD/../../../../GoTvTargetOsConfig.h \
+	$$PWD/../../amrwb/dec_if.h \
+	$$PWD/../../amrwb/if_rom.h \
+	$$PWD/../../include/decoder_amr_wb.h \
+	$$PWD/../../include/pvamrwbdecoder_api.h \
+	$$PWD/../../include/pvgsmamrdecoderinterface.h \
+	$$PWD/../../oscl/oscl_base.h \
+	$$PWD/../../oscl/oscl_base_macros.h \
+	$$PWD/../../oscl/oscl_mem.h \
+	$$PWD/../../src/dtx.h \
+	$$PWD/../../src/e_pv_amrwbdec.h \
+	$$PWD/../../src/get_amr_wb_bits.h \
+	$$PWD/../../src/mime_io.h \
+	$$PWD/../../src/normalize_amr_wb.h \
+	$$PWD/../../src/pv_amr_wb_type_defs.h \
+	$$PWD/../../src/pvamrwb_math_op.h \
+	$$PWD/../../src/pvamrwbdecoder.h \
+	$$PWD/../../src/pvamrwbdecoder_acelp.h \
+	$$PWD/../../src/pvamrwbdecoder_basic_op.h \
+	$$PWD/../../src/pvamrwbdecoder_basic_op_cequivalent.h \
+	$$PWD/../../src/pvamrwbdecoder_basic_op_gcc_armv5.h \
+	$$PWD/../../src/pvamrwbdecoder_cnst.h \
+	$$PWD/../../src/pvamrwbdecoder_mem_funcs.h \
+	$$PWD/../../src/q_pulse.h \
+	$$PWD/../../src/qisf_ns.h \
+	$$PWD/../../src/qpisf_2s.h \
+	$$PWD/../../src/synthesis_amr_wb.h
+
+SOURCES += 	$$PWD/../../amrwb/wrapper.cpp \
+	$$PWD/../../src/agc2_amr_wb.cpp \
+	$$PWD/../../src/band_pass_6k_7k.cpp \
+	$$PWD/../../src/dec_acelp_2p_in_64.cpp \
+	$$PWD/../../src/dec_acelp_4p_in_64.cpp \
+	$$PWD/../../src/dec_alg_codebook.cpp \
+	$$PWD/../../src/dec_gain2_amr_wb.cpp \
+	$$PWD/../../src/deemphasis_32.cpp \
+	$$PWD/../../src/dtx_decoder_amr_wb.cpp \
+	$$PWD/../../src/get_amr_wb_bits.cpp \
+	$$PWD/../../src/highpass_400hz_at_12k8.cpp \
+	$$PWD/../../src/highpass_50hz_at_12k8.cpp \
+	$$PWD/../../src/homing_amr_wb_dec.cpp \
+	$$PWD/../../src/interpolate_isp.cpp \
+	$$PWD/../../src/isf_extrapolation.cpp \
+	$$PWD/../../src/isp_az.cpp \
+	$$PWD/../../src/isp_isf.cpp \
+	$$PWD/../../src/lagconceal.cpp \
+	$$PWD/../../src/low_pass_filt_7k.cpp \
+	$$PWD/../../src/median5.cpp \
+	$$PWD/../../src/mime_io.cpp \
+	$$PWD/../../src/noise_gen_amrwb.cpp \
+	$$PWD/../../src/normalize_amr_wb.cpp \
+	$$PWD/../../src/oversamp_12k8_to_16k.cpp \
+	$$PWD/../../src/phase_dispersion.cpp \
+	$$PWD/../../src/pit_shrp.cpp \
+	$$PWD/../../src/pred_lt4.cpp \
+	$$PWD/../../src/preemph_amrwb_dec.cpp \
+	$$PWD/../../src/pvamrwb_math_op.cpp \
+	$$PWD/../../src/pvamrwbdecoder.cpp \
+	$$PWD/../../src/q_gain2_tab.cpp \
+	$$PWD/../../src/qisf_ns.cpp \
+	$$PWD/../../src/qisf_ns_tab.cpp \
+	$$PWD/../../src/qpisf_2s.cpp \
+	$$PWD/../../src/qpisf_2s_tab.cpp \
+	$$PWD/../../src/scale_signal.cpp \
+	$$PWD/../../src/synthesis_amr_wb.cpp \
+	$$PWD/../../src/voice_factor.cpp \
+	$$PWD/../../src/wb_syn_filt.cpp \
+	$$PWD/../../src/weight_amrwb_lpc.cpp
+

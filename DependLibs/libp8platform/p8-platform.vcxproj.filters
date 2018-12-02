@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="F:\GoTvCode\DependLibs\libp8platform\src\util\StringUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\GoTvCode\DependLibs\libp8platform\src\windows\dlfcn-win32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\GoTvCode\DependLibs\libp8platform\src\windows\os-threads.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\GoTvCode\DependLibs\libp8platform\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{5774F3DA-EDCF-3C1E-A7F8-3FDFB202F57D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

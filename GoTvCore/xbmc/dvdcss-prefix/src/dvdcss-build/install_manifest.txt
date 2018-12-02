@@ -1,0 +1,7 @@
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/dvdcss.lib
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/include/dvdcss/dvdcss.h
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/include/dvdcss/version.h
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/cmake/dvdcss/dvdcss.cmake
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/cmake/dvdcss/dvdcss-debug.cmake
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/cmake/dvdcss/dvdcss-config.cmake
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/cmake/dvdcss/dvdcss-config-version.cmake

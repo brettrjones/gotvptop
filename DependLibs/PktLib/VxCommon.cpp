@@ -1,0 +1,353 @@
+//============================================================================
+// Copyright (C) 2013 Brett R. Jones
+// Issued to MIT style license by Brett R. Jones in 2017
+//
+// You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
+// provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
+//
+// This code is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//
+// brett.jones@engineer.com
+// http://www.gotvptop.net
+//============================================================================
+
+#include "VxCommon.h"
+
+#include <NetLib/VxSktBase.h>
+#include <CoreLib/VxParse.h>
+#include <CoreLib/VxDebug.h>
+#include <CoreLib/VxGlobals.h>
+
+#include <memory.h>
+#include <stdio.h>
+#include <stdarg.h>
+
+//============================================================================
+PluginPermission::PluginPermission()
+{
+	memset( m_au8Permissions, 0, sizeof( m_au8Permissions ) );
+}
+
+//============================================================================
+bool PluginPermission::isPluginEnabled( EPluginType ePlugin )		
+{ 
+	return (eFriendStateIgnore == getPluginPermission(ePlugin))?0:1; 
+}
+
+//============================================================================
+//! get type of permission user has set for givin plugin
+EFriendState PluginPermission::getPluginPermission( EPluginType ePluginType ) 
+{ 
+	if(( ePluginType > 0 ) && ( ePluginType < eMaxPluginType ) )
+	{
+		int pluginNum = (int)(ePluginType - 1);
+		int byteIdx = pluginNum >> 1;
+		int byteShift = pluginNum & 0x01 ? 4 : 0;
+		uint8_t byteWithPerm = m_au8Permissions[ byteIdx ];
+
+		return  (EFriendState)( ( byteWithPerm >> byteShift ) & 0xf ); 
+	}
+
+	return eFriendStateIgnore;
+}
+
+//============================================================================
+//! set type of permission user has set for givin plugin
+void PluginPermission::setPluginPermission( EPluginType ePluginType, EFriendState eFriendState ) 
+{ 
+	if(( ePluginType > 0 ) && ( ePluginType < eMaxPluginType ) )
+	{
+		int pluginNum = (int)(ePluginType - 1);
+		int byteIdx = pluginNum >> 1;
+		int byteShift = pluginNum & 0x01 ? 4 : 0;
+		uint8_t byteWithPerm = m_au8Permissions[ byteIdx ];
+		if( byteShift )
+		{
+			byteWithPerm &= 0x0f;
+			byteWithPerm |= (eFriendState << byteShift);
+		}
+		else
+		{
+			byteWithPerm &= 0xf0;
+			byteWithPerm |= (eFriendState);
+		}
+
+		if( ( byteIdx < PERMISSION_ARRAY_SIZE ) 
+			&& ( 0 <= byteIdx ) )
+		{
+			m_au8Permissions[ byteIdx ] = byteWithPerm;
+		}
+		else
+		{
+			LogMsg( LOG_ERROR, "setPluginPermission index out of range %d\n", byteIdx );
+		}
+	}
+}
+
+//============================================================================
+void PluginPermission::setPluginPermissionsToDefaultValues( void )	
+{ 
+	memset( m_au8Permissions, 0, sizeof( m_au8Permissions ) );
+	setPluginPermission( ePluginTypeAdmin, eFriendStateAdmin );	
+	setPluginPermission( ePluginTypeRelay, eFriendStateFriend );	
+	setPluginPermission( ePluginTypeWebServer, eFriendStateAnonymous );	
+	setPluginPermission( ePluginTypeCamServer, eFriendStateAnonymous );	
+	setPluginPermission( ePluginTypeMultiSession, eFriendStateAnonymous );	
+	setPluginPermission( ePluginTypeVoicePhone, eFriendStateAnonymous );	
+	setPluginPermission( ePluginTypeVideoPhone, eFriendStateAnonymous );	
+	setPluginPermission( ePluginTypeTruthOrDare, eFriendStateAnonymous );	
+	setPluginPermission( ePluginTypeFileOffer, eFriendStateFriend );	
+	setPluginPermission( ePluginTypeFileServer, eFriendStateAnonymous );	
+	setPluginPermission( ePluginTypeStoryBoard, eFriendStateAnonymous );	
+} 
+
+//============================================================================
+VxNetIdent::VxNetIdent()
+: m_u16AppVersion( htons( VxGetAppVersion() ) )	
+, m_u16PingTimeMs(0)
+, m_LastSessionTimeGmtMs(0)
+{
+}
+
+//============================================================================
+VxNetIdent::VxNetIdent(const VxNetIdent &rhs )
+{
+	*this = rhs;
+}
+
+//============================================================================
+void VxNetIdent::setPingTimeMs( uint16_t pingTime )
+{
+	m_u16PingTimeMs = htons( pingTime );
+}
+
+//============================================================================
+uint16_t VxNetIdent::getPingTimeMs( void )
+{
+	return ntohs( m_u16PingTimeMs );
+}
+
+//============================================================================
+EPluginAccessState	VxNetIdent::getHisAccessPermissionFromMe( EPluginType ePluginType )
+{
+	return getPluginAccessState( ePluginType, getMyFriendshipToHim() );
+}
+
+//============================================================================
+EPluginAccessState	VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePluginType )
+{
+	EPluginAccessState accessState = getPluginAccessState( ePluginType, getHisFriendshipToMe() );
+	if( ePluginAccessOk == accessState )
+	{
+		if( ( ePluginTypeFileServer == ePluginType ) 
+			&& ( false == hasSharedFiles() ) )
+		{
+			// no files shared
+			return ePluginAccessInactive;
+		}
+
+		if( ( ePluginTypeCamServer == ePluginType ) 
+			&& ( false == hasSharedWebCam() ) )
+		{
+			// no shared web cam
+			return ePluginAccessInactive;
+		}
+
+		if( ( ePluginTypeWebServer == ePluginType )
+			|| ( ePluginTypeStoryBoard == ePluginType )
+			|| ( ePluginTypeRelay == ePluginType ) )
+		{
+			if( false == isOnline() )
+			{
+				accessState = ePluginAccessRequiresOnline;
+			}
+
+			if( requiresRelay() )
+			{
+				accessState = ePluginAccessRequiresDirectConnect;
+			}
+		}
+		else if( ePluginTypeMultiSession != ePluginType )
+		{
+			if( false == isOnline() )
+			{
+				accessState = ePluginAccessRequiresOnline;
+			}
+		}		
+	}
+
+	return accessState;
+}
+
+//============================================================================
+bool VxNetIdent::isHisAccessAllowedFromMe( EPluginType ePluginType )
+{
+	return ( ePluginAccessOk == getPluginAccessState( ePluginType, getMyFriendshipToHim() ) );
+}
+
+//============================================================================
+bool VxNetIdent::isMyAccessAllowedFromHim( EPluginType ePluginType )
+{
+	return ( ePluginAccessOk == getPluginAccessState( ePluginType, getHisFriendshipToMe() ) );
+}
+
+//============================================================================
+EPluginAccessState	VxNetIdent::getPluginAccessState( EPluginType ePluginType, EFriendState eHisPermissionToMe )
+{
+	if( eFriendStateIgnore == eHisPermissionToMe )
+	{
+		return ePluginAccessIgnored;
+	}
+
+	EFriendState ePermissionLevel = this->getPluginPermission(ePluginType);
+	if( eFriendStateIgnore == ePermissionLevel )
+	{
+		return ePluginAccessDisabled;
+	}
+
+	if( ePermissionLevel > eHisPermissionToMe )
+	{
+		return ePluginAccessLocked;
+	}
+	if( (ePluginTypeFileServer == ePluginType) && 
+		(false == hasSharedFiles()) )
+	{
+		// no files shared
+		return ePluginAccessInactive;
+	}
+
+	if( (ePluginTypeCamServer == ePluginType) && 
+		(false == hasSharedWebCam()) )
+	{
+		// no files shared
+		return ePluginAccessInactive;
+	}
+
+	EPluginAccessState accessState = ePluginAccessOk;
+	if( ( ePluginTypeWebServer		== ePluginType )
+		|| ( ePluginTypeStoryBoard	== ePluginType )
+		|| ( ePluginTypeRelay		== ePluginType ) )
+	{
+		if( false == isOnline() )
+		{
+			accessState = ePluginAccessRequiresOnline;
+		}
+
+		if( requiresRelay() )
+		{
+			accessState = ePluginAccessRequiresDirectConnect;
+		}
+	}
+	else if( ePluginTypeMultiSession != ePluginType )
+	{
+		if( false == isOnline() )
+		{
+			accessState = ePluginAccessRequiresOnline;
+		}
+	}		
+
+	return accessState;
+}
+
+//============================================================================
+//! copy operator
+VxNetIdent& VxNetIdent::operator =( const VxNetIdent& rhs  )
+{
+	// we can get away with memcpy because no virtual functions
+	memcpy( this, &rhs, sizeof( VxNetIdent ) );
+	return *this;
+}
+
+//============================================================================
+//! dump identity
+void VxNetIdent::debugDumpIdent( void )
+{
+	std::string strIPv4; 
+	m_DirectConnectId.getIPv4(strIPv4);
+	std::string strIPv6; 
+	m_DirectConnectId.getIPv6(strIPv6);
+	std::string strRelayIPv4; 
+	m_RelayConnectId.getIPv4(strRelayIPv4);
+	std::string strRelayIPv6; 
+	m_RelayConnectId.getIPv6(strRelayIPv6);
+
+	LogMsg( LOG_INFO, "Ident %s id %s my friendship %s his friendship %s search 0x%x ipv4 %s ipv6 %s port %d proxy flags 0x%x proxy ipv4 %s proxy ipv6 %s port %d\n",
+		getOnlineName(),
+		getMyOnlineId().describeVxGUID().c_str(),
+		DescribeFriendState(getMyFriendshipToHim()),
+		DescribeFriendState(getHisFriendshipToMe()),
+		getSearchFlags(),
+		strIPv4.c_str(),
+		strIPv6.c_str(),
+		m_DirectConnectId.getPort(),
+		m_u8RelayFlags,
+		strRelayIPv4.c_str(),
+		strRelayIPv6.c_str(),
+		m_RelayConnectId.getPort()
+		);
+}
+
+//============================================================================
+//! describe plugin local name
+const char * DescribePluginLclName( EPluginType ePluginType )
+{
+	switch( ePluginType )
+	{
+	case	ePluginTypeWebServer:	// web server plugin ( for profile web page )
+		return "About Me Web Page";
+	case	ePluginTypeRelay:	// web server plugin ( for profile web page )
+		return "Connection Relay";
+	case 	ePluginTypeFileServer:	// file share plugin
+		return "Shared Files";	
+	case 	ePluginTypeFileOffer:	// file share plugin
+		return "Offer A File";
+	case 	ePluginTypeCamServer:	// web cam broadcast plugin
+		return "Shared Video Broadcast";
+	case 	ePluginTypeMultiSession:	// instant message p2p plugin
+		return "Chat Session";
+	case 	ePluginTypeVoicePhone:	// VOIP p2p plugin
+		return "VOIP Voice Phone";
+	case 	ePluginTypeVideoPhone:	// Video phone p2p plugin
+		return "Video Phone";
+	case 	ePluginTypeTruthOrDare:	// Web Cam Truth Or Dare game p2p plugin
+		return "Web Cam Truth Or Dare";
+	case 	ePluginTypeStoryBoard:	// Web Cam Truth Or Dare game p2p plugin
+		return "Story Board";
+	default:		
+		return "Unknown Plugin";
+	}
+};
+
+//============================================================================
+RCODE VxReportHack(	VxSktBase *	sktBase, const char *	pDescription, ... )	
+{
+	char as8Buf[ 2048 ];
+	va_list argList;
+	va_start( argList, pDescription );
+	vsnprintf( as8Buf, sizeof( as8Buf ), pDescription, argList );
+	as8Buf[sizeof( as8Buf ) - 1] = 0;
+	va_end( argList );
+	LogMsg( LOG_ERROR, "HACK ALERT: skt handle %d ip %s %s\n", 
+		sktBase->m_Socket, 
+		sktBase->getRemoteIp(),  
+		as8Buf );
+	return 0;
+}
+
+//============================================================================
+RCODE VxReportHack(	SOCKET skt, const char * ipAddr, const char * pDescription, ... )
+{
+	char as8Buf[ 2048 ];
+	va_list argList;
+	va_start( argList, pDescription );
+	vsnprintf( as8Buf, sizeof( as8Buf ), pDescription, argList );
+	as8Buf[sizeof( as8Buf ) - 1] = 0;
+	va_end( argList );
+	LogMsg( LOG_ERROR, "HACK ALERT: skt handle %d ip %s %s\n", 
+		skt, 
+		ipAddr, 
+		as8Buf );
+	return 0;
+}

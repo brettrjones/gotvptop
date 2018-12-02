@@ -1,0 +1,38 @@
+/* read-file.h -- read file contents into a string
+   Copyright (C) 2006, 2009-2016 Free Software Foundation, Inc.
+   Written by Simon Josefsson.
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 3, or (at your option)
+   any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, see <http://www.gnu.org/licenses/>.  */
+
+#ifndef READ_FILE_H
+#define READ_FILE_H
+#include <config_libgnu.h>
+
+/* Get size_t.  */
+#include <stddef.h>
+
+/* Get FILE.  */
+#include <stdio.h>
+
+//! returns file size or 0 if does not exist
+uint64_t						GnuFileExists( const char * pFileName );
+//! return true if directory exists
+bool							GnuDirectoryExists( const char * pDir );
+uint64_t						GnuGetFileLen( const char * pFileName );
+
+extern char *					fread_file (FILE * stream, uint64_t fileLen, size_t * retLengthRead );
+extern char *					read_file (const char *filename, size_t * length);
+extern char *					read_binary_file_gnu(const char *filename, size_t * length);
+
+#endif /* READ_FILE_H */

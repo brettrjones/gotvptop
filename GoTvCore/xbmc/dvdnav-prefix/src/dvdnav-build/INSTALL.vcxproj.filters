@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav-build\CMakeFiles\bc7e2dfb8f7916d5cf7c1e326f3db57c\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{BF5FF4C6-58EC-36FD-BB46-5AC5BA1144CE}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

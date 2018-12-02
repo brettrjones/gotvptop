@@ -1,0 +1,1 @@
+cmd='C:/Program Files/CMake/bin/cmake.exe;-DCMAKE_PREFIX_PATH:PATH=F:/KodiBuildsVSRuns2018-04-01/build/libdvd;-DCMAKE_INSTALL_PREFIX:PATH=F:/KodiBuildsVSRuns2018-04-01/build/libdvd;-GVisual Studio 14 2015;<SOURCE_DIR><SOURCE_SUBDIR>'

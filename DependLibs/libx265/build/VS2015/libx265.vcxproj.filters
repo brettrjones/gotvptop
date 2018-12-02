@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="GoTvConfig">
+      <UniqueIdentifier>{288ac997-5587-4a2a-ab5f-59b6678448f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig\sys">
+      <UniqueIdentifier>{b52b5442-5e90-445f-9be4-60ea884c0a41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig\arpa">
+      <UniqueIdentifier>{03cb8346-a93d-4b18-9d47-fea9f7a3a93a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig\netinet">
+      <UniqueIdentifier>{d2a82878-4e0c-4116-bb7a-d8aa7e038010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig\asm">
+      <UniqueIdentifier>{4f308cd2-fb74-4022-8762-873eec794453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvConfig\linux">
+      <UniqueIdentifier>{bee2905c-d0fb-4512-b494-54911986b5ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common">
+      <UniqueIdentifier>{d31b9ae4-58dc-4407-8ce1-84d30a249f09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common\x86">
+      <UniqueIdentifier>{e6c1fa29-2c9f-46f1-a947-aaea53cc67c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\encoder">
+      <UniqueIdentifier>{c4689ca2-a74d-4276-acc2-207aae539442}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\arpa\inet.h">
+      <Filter>GoTvConfig\arpa</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\netinet\in.h">
+      <Filter>GoTvConfig\netinet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\netinet\tcp.h">
+      <Filter>GoTvConfig\netinet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\ioctl.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\mman.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\param.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\signal.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\socket.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\un.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\utsname.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dirent.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\dlfcn.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\netdb.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\strings.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\syslog.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\unistd.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\syslog.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\time.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\select.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\asm\types.h">
+      <Filter>GoTvConfig\asm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sys\times.h">
+      <Filter>GoTvConfig\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\byteswap.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\langinfo.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\linux\ioctl.h">
+      <Filter>GoTvConfig\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\linux\param.h">
+      <Filter>GoTvConfig\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\config_lib265.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\bitstream.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\common.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\constants.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\contexts.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\cpu.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\cudata.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\deblock.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\frame.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\framedata.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lowres.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\md5.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\mv.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\param.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\piclist.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\picyuv.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\predict.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\primitives.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\quant.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\scalinglist.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\shortyuv.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\slice.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\threading.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\threadpool.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\wavefront.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\winxp.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\yuv.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\x265.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\x265cli.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\analysis.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\bitcost.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\dpb.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\encoder.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\entropy.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\frameencoder.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\framefilter.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\level.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\motion.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\nal.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\ratecontrol.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\rdcost.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\reference.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\sao.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\search.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\sei.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\encoder\slicetype.h">
+      <Filter>Source Files\encoder</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\common\bitstream.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\common.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\constants.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\cpu.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\cudata.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\dct.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\deblock.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\frame.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\framedata.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\intrapred.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\ipfilter.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\loopfilter.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lowres.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\md5.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\param.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\piclist.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\picyuv.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\pixel.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\predict.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\primitives.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\quant.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\scalinglist.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\shortyuv.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\slice.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\threading.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\threadpool.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\version.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\wavefront.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\winxp.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\yuv.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\x265.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\analysis.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\api.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\bitcost.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\dpb.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\encoder.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\entropy.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\frameencoder.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\framefilter.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\level.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\motion.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\nal.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\ratecontrol.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\reference.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\sao.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\search.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\sei.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\slicetype.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\encoder\weightPrediction.cpp">
+      <Filter>Source Files\encoder</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\common\CMakeLists.txt">
+      <Filter>Source Files\common</Filter>
+    </Text>
+    <Text Include="..\..\common\x86\README.txt">
+      <Filter>Source Files\common\x86</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

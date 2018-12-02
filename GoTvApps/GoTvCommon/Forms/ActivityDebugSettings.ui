@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DebugSettingsDialog</class>
+ <widget class="QDialog" name="DebugSettingsDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>309</width>
+    <height>515</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Debug Settings</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog#ActivityAbout
+{   
+color: transparent;
+background-color: transparent;
+border: 1px solid transparent;
+border-radius: 8px; 
+}
+
+#StyledDlgTitleBox
+{   
+color: black;
+background-color: rgb(50,238,17);
+border: 2px solid green;
+border-top-left-radius: 8px; 
+border-top-right-radius: 8px;
+}
+
+#StyledDlgTitleLabel
+{   
+color: black;
+}
+
+#StyledDlgItemsBox
+{   
+background-color: rgb(50,238,17);
+border: 2px solid green;
+border-top-color: green; 
+border-bottom-left-radius: 8px; 
+border-bottom-right-radius: 8px;
+}
+QPushButton#CancelButton
+{
+color: white;
+font: bold 14px;
+border-width: 10;
+border-image: url(:/TruthOrDare/Resources/button_green_normal.png) 10;
+padding: -10;
+}
+QPushButton#CancelButton:pressed
+{
+border-width: 10;
+border-image: url(:/TruthOrDare/Resources/button_green_pressed.png) 10;
+padding: -10;
+}
+QPushButton#AcceptButton
+{
+color: white;
+font: bold 14px;
+border-width: 10;
+border-image: url(:/TruthOrDare/Resources/button_green_normal.png) 10;
+padding: -10;
+}
+QPushButton#AcceptButton:pressed
+{
+border-width: 10;
+border-image: url(:/TruthOrDare/Resources/button_green_pressed.png) 10;
+padding: -10;
+}
+QPushButton#ViewLogButton
+{
+color: white;
+font: bold 14px;
+border-width: 10;
+border-image: url(:/TruthOrDare/Resources/button_green_normal.png) 10;
+padding: -10;
+}
+QPushButton#ViewLogButton:pressed
+{
+border-width: 10;
+border-image: url(:/TruthOrDare/Resources/button_green_pressed.png) 10;
+padding: -10;
+}
+QLabel#PermissionLabel
+{
+font: bold 14px;
+}
+QLineEdit#FileNameEdit
+{
+background-color: rgb(238,238,238);
+}
+QPlainTextEdit#OfferMsgEdit</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="TitleBarWidget" name="m_TitleBarWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>103</height>
+      </size>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <property name="spacing">
+       <number>2</number>
+      </property>
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="topMargin">
+       <number>2</number>
+      </property>
+      <property name="rightMargin">
+       <number>5</number>
+      </property>
+      <property name="bottomMargin">
+       <number>2</number>
+      </property>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="StyledDlgItemsBox">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="m_FullLogButton">
+          <property name="text">
+           <string>Full Log</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_ErrorLogButton">
+          <property name="text">
+           <string>Errors Only</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_StatusLogButton">
+          <property name="text">
+           <string>Status Log</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QPlainTextEdit" name="m_LogEdit"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TitleBarWidget</class>
+   <extends>QWidget</extends>
+   <header>TitleBarWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,15 @@
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/dvdread.lib
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/include/dvdread/bitreader.h
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/include/dvdread/dvd_reader.h
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/include/dvdread/dvd_udf.h
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/include/dvdread/ifo_print.h
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/include/dvdread/ifo_read.h
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/include/dvdread/ifo_types.h
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/include/dvdread/nav_print.h
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/include/dvdread/nav_read.h
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/include/dvdread/nav_types.h
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/include/dvdread/version.h
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/cmake/dvdread/dvdread.cmake
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/cmake/dvdread/dvdread-debug.cmake
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/cmake/dvdread/dvdread-config.cmake
+F:/KodiBuildsVSRuns2018-04-01/build/libdvd/lib/cmake/dvdread/dvdread-config-version.cmake

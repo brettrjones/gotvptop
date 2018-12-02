@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{3fe8c962-8ca0-46f5-80d7-4ac91fad5c18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bzip2 1.0.6 Header Files">
+      <UniqueIdentifier>{ca2b81b4-ad4f-49dd-a987-adc631f24f72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bzip2 1.0.6 Source Files">
+      <UniqueIdentifier>{17eebffa-16e5-4508-8aa6-4aff557362e1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Modules\bz2module.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libbzip2\blocksort.c">
+      <Filter>bzip2 1.0.6 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libbzip2\bzip2.c">
+      <Filter>bzip2 1.0.6 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libbzip2\bzlib.c">
+      <Filter>bzip2 1.0.6 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libbzip2\compress.c">
+      <Filter>bzip2 1.0.6 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libbzip2\crctable.c">
+      <Filter>bzip2 1.0.6 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libbzip2\decompress.c">
+      <Filter>bzip2 1.0.6 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libbzip2\huffman.c">
+      <Filter>bzip2 1.0.6 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libbzip2\randtable.c">
+      <Filter>bzip2 1.0.6 Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\libbzip2\bzlib.h">
+      <Filter>bzip2 1.0.6 Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libbzip2\bzlib_private.h">
+      <Filter>bzip2 1.0.6 Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,717 @@
+
+#include "IGoTv.h"
+#include "GoTvP2P/P2PEngine/P2PEngine.h"
+
+#include <CoreLib/VxGlobals.h>
+
+//============================================================================
+//=== from gui ===//
+//============================================================================
+void IGoTv::fromGuiSetupContext( void )
+{
+    //LogMsg( LOG_DEBUG, "IGoTv::fromGuiSetupContext\n");
+    //if( 0 == m_AudioMgr )
+    //{
+    //    //__android_log_write( ANDROID_LOG_INFO, ENGINE_LOG_TAG, "fromGuiSetupContext create Audio Manager" );
+    //    m_AudioMgr = new webrtc::AudioManager( *this );
+    //    //__android_log_write( ANDROID_LOG_INFO, ENGINE_LOG_TAG, "fromGuiSetupContext initAndroidAudioMgr" );
+    //    m_AudioMgr->initAndroidAudioMgr();
+    //    //__android_log_write( ANDROID_LOG_INFO, ENGINE_LOG_TAG, "fromGuiSetupContext create Audio Manager done" );
+    //}
+}
+
+//============================================================================
+void IGoTv::fromGuiSetIsAppCommercial( bool isCommercial )
+{
+    VxSetIsApplicationCommercial( isCommercial );
+}
+
+//============================================================================
+bool IGoTv::fromGuiGetIsAppCommercial( void )
+{
+    return VxGetIsApplicationCommercial();
+}
+
+//============================================================================
+uint16_t IGoTv::fromGuiGetAppVersionBinary( void )
+{
+    return VxGetAppVersion();
+}
+
+//============================================================================
+const char * IGoTv::fromGuiGetAppVersionString( void )
+{
+    return VxGetAppVersionString();
+}
+
+//============================================================================
+const char * IGoTv::fromGuiGetAppName( void )
+{
+    return VxGetApplicationName();
+}
+
+//============================================================================
+const char * IGoTv::fromGuiGetAppNameNoSpaces( void )
+{
+    return VxGetApplicationNameNoSpaces();
+}
+
+//============================================================================
+void IGoTv::fromGuiAppStartup( const char * assetDir, const char * rootDataDir )
+{
+    //LogMsg( LOG_DEBUG, "IGoTv::fromGuiAppStartup.. calling fromGuiSetupContext\n");
+    //if( 0 == m_AudioMgr )
+    //{
+    //    fromGuiSetupContext();
+    //}
+
+    getPtoP().fromGuiAppStartup( assetDir, rootDataDir );
+
+    //if( 0 != m_AudioMgr )
+    //{
+    //    m_AudioMgr->toGuiWantMicrophoneRecording( true );
+    //}
+
+    //if( 0 != m_AudioMgr )
+    //{
+    //    m_AudioMgr->toGuiWantSpeakerOutput( true );
+    //}
+}
+
+//============================================================================
+void IGoTv::fromGuiKickWatchdog( void )
+{
+    getPtoP().fromGuiKickWatchdog();
+}
+
+//============================================================================
+void IGoTv::fromGuiSetUserXferDir( const char * userDir )
+{
+    //LogMsg( LOG_DEBUG, "IGoTv::fromGuiSetUserXferDir %s\n", userDir );
+    getPtoP().fromGuiSetUserXferDir( userDir );
+}
+
+//============================================================================
+void IGoTv::fromGuiSetUserSpecificDir( const char * userDir )
+{
+    //LogMsg( LOG_DEBUG, "IGoTv::fromGuiSetUserSpecificDir %s\n", userDir);
+    getPtoP().fromGuiSetUserSpecificDir( userDir );
+}
+
+//============================================================================
+uint64_t IGoTv::fromGuiGetDiskFreeSpace( void )
+{
+    return getPtoP().fromGuiGetDiskFreeSpace();
+}
+
+//============================================================================
+void IGoTv::fromGuiAppShutdown( void )
+{
+    //__android_log_write( ANDROID_LOG_INFO, ENGINE_LOG_TAG, "---fromGuiAppShutdown start.. doing audio shutdown\n" );
+    VxSetAppIsShuttingDown( true );
+//    if( 0 != m_AudioMgr )
+//    {
+//        m_AudioMgr->Close();
+//    }
+
+    //__android_log_write( ANDROID_LOG_INFO, ENGINE_LOG_TAG, "---fromGuiAppShutdown doing engine shutdown\n" );
+    getPtoP().fromGuiAppShutdown();
+    //__android_log_write( ANDROID_LOG_INFO, ENGINE_LOG_TAG, "---fromGuiAppShutdown done\n" );
+}
+
+//============================================================================
+void IGoTv::fromGuiAppIdle( void )
+{
+    getPtoP().fromGuiAppIdle();
+}
+
+//============================================================================
+void IGoTv::fromGuiAppPauseOrResume( bool isPaused )
+{
+    if( isPaused )
+    {
+        getPtoP().fromGuiAppPause();
+    }
+    else
+    {
+        getPtoP().fromGuiAppResume();
+    }
+}
+
+//============================================================================
+void IGoTv::fromGuiUserLoggedOn( VxNetIdent * netIdent )
+{
+    getPtoP().fromGuiUserLoggedOn( netIdent );
+}
+
+//============================================================================
+void IGoTv::fromGuiOnlineNameChanged( const char * newOnlineName )
+{
+    getPtoP().fromGuiOnlineNameChanged( newOnlineName );
+}
+
+//============================================================================
+void IGoTv::fromGuiMoodMessageChanged( const char * newMoodMessage )
+{
+    getPtoP().fromGuiMoodMessageChanged( newMoodMessage );
+}
+
+//============================================================================
+void IGoTv::fromGuiSetUserHasProfilePicture( bool haveProfilePick )
+{
+    getPtoP().fromGuiSetUserHasProfilePicture( haveProfilePick );
+}
+
+//============================================================================
+bool IGoTv::fromGuiOrientationEvent( float f32RotX, float f32RotY, float f32RotZ )
+{
+    return getPtoP().fromGuiOrientationEvent( f32RotX, f32RotY, f32RotZ );
+}
+
+//============================================================================
+bool IGoTv::fromGuiMouseEvent( EMouseButtonType eMouseButType, EMouseEventType eMouseEventType, int iMouseXPos, int iMouseYPos )
+{
+    return getPtoP().fromGuiMouseEvent( eMouseButType, eMouseEventType, iMouseXPos, iMouseYPos );
+}
+
+//============================================================================
+bool IGoTv::fromGuiMouseWheel( float f32MouseWheelDist )
+{
+    return getPtoP().fromGuiMouseWheel( f32MouseWheelDist );
+}
+
+//============================================================================
+bool IGoTv::fromGuiKeyEvent( EKeyEventType eKeyEventType, EKeyCode eKey, int iFlags )
+{
+    return getPtoP().fromGuiKeyEvent( eKeyEventType, eKey, iFlags );
+}
+
+//============================================================================
+void IGoTv::fromGuiNativeGlInit( void )
+{
+    getPtoP().fromGuiNativeGlInit();
+}
+
+//============================================================================
+void IGoTv::fromGuiNativeGlResize( int width, int height )
+{
+    getPtoP().fromGuiNativeGlResize( width, height );
+}
+
+//============================================================================
+int IGoTv::fromGuiNativeGlRender( void )
+{
+    return getPtoP().fromGuiNativeGlRender();
+}
+
+//============================================================================
+void IGoTv::fromGuiNativeGlPauseRender( void )
+{
+    getPtoP().fromGuiNativeGlPauseRender();
+}
+
+//============================================================================
+void IGoTv::fromGuiNativeGlResumeRender( void )
+{
+    getPtoP().fromGuiNativeGlResumeRender();
+}
+
+//============================================================================
+void IGoTv::fromGuiNativeGlDestroy( void )
+{
+    getPtoP().fromGuiNativeGlDestroy();
+}
+
+//============================================================================
+void IGoTv::fromGuiNeedMorePlayData( int16_t * retAudioSamples, int deviceReqDataLen )
+{
+//    getPtoP().fromGuiNeedMorePlayData( retAudioSamples, deviceReqDataLen );
+}
+
+//============================================================================
+void IGoTv::fromGuiMicrophoneData( int16_t * pcmData, int pcmDataLenInBytes )
+{
+    getPtoP().fromGuiMicrophoneData( pcmData, pcmDataLenInBytes );
+}
+
+//============================================================================
+void IGoTv::fromGuiMuteMicrophone( bool mute )
+{
+    getPtoP().fromGuiMuteMicrophone( mute );
+}
+
+//============================================================================
+void IGoTv::fromGuiMuteSpeaker( bool mute )
+{
+    getPtoP().fromGuiMuteSpeaker( mute );
+}
+
+//============================================================================
+void IGoTv::fromGuiEchoCancelEnable( bool enableEchoCancel )
+{
+    getPtoP().fromGuiEchoCancelEnable( enableEchoCancel );
+}
+
+//============================================================================
+bool IGoTv::fromGuiIsMicrophoneMuted( void )
+{
+    return getPtoP().fromGuiIsMicrophoneMuted();
+}
+
+//============================================================================
+bool IGoTv::fromGuiIsSpeakerMuted( void )
+{
+    return getPtoP().fromGuiIsSpeakerMuted();
+}
+
+//============================================================================
+bool IGoTv::fromGuiIsEchoCancelEnabled( void )
+{
+    return getPtoP().fromGuiIsEchoCancelEnabled();
+}
+
+//============================================================================
+void IGoTv::fromGuiWantMediaInput( VxGUID& id, EMediaInputType eMediaType, bool bWantInput )
+{
+    getPtoP().fromGuiWantMediaInput( id, eMediaType, bWantInput );
+}
+
+//============================================================================
+void IGoTv::fromGuiVideoData( uint32_t u32FourCc, uint8_t * pu8VidDataIn, int iWidth, int iHeight, uint32_t u32VidDataLen, int iRotation )
+{
+    getPtoP().fromGuiVideoData( u32FourCc, pu8VidDataIn, iWidth, iHeight, u32VidDataLen, iRotation );
+}
+
+//============================================================================
+bool IGoTv::fromGuiMovieDone( void )
+{
+    return getPtoP().fromGuiMovieDone();
+}
+
+//============================================================================
+void IGoTv::fromGuiGetNetSettings( NetSettings& netSettings )
+{
+    getPtoP().fromGuiGetNetSettings( netSettings );
+}
+
+//============================================================================
+void IGoTv::fromGuiSetNetSettings( NetSettings& netSettings )
+{
+    getPtoP().fromGuiSetNetSettings( netSettings );
+}
+
+//============================================================================
+void IGoTv::fromGuiNetworkSettingsChanged( void )
+{
+    getPtoP().fromGuiNetworkSettingsChanged();
+}
+
+//============================================================================
+void IGoTv::fromGuiVerifyAnchorSettings( void )
+{
+    getPtoP().fromGuiVerifyAnchorSettings();
+}
+
+//============================================================================
+void IGoTv::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork )
+{
+    getPtoP().fromGuiNetworkAvailable( lclIp, isCellularNetwork );
+}
+
+//============================================================================
+void IGoTv::fromGuiNetworkLost( void )
+{
+    getPtoP().fromGuiNetworkLost();
+}
+
+//============================================================================
+void IGoTv::fromGuiRunIsPortOpenTest( uint16_t port )
+{
+    getPtoP().fromGuiRunIsPortOpenTest( port );
+}
+
+//============================================================================
+void IGoTv::fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings )
+{
+    getPtoP().fromGuiGetFileShareSettings( fileShareSettings );
+}
+
+//============================================================================
+void IGoTv::fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings )
+{
+    getPtoP().fromGuiSetFileShareSettings( fileShareSettings );
+}
+
+//============================================================================
+void IGoTv::fromGuiUpdateWebPageProfile( const char *	pProfileDir,	// directory containing user profile
+                                             const char *	strGreeting,	// greeting text
+                                             const char *	aboutMe,		// about me text
+                                             const char *	url1,			// favorite url 1
+                                             const char *	url2,			// favorite url 2
+                                             const char *	url3 )
+{
+    getPtoP().fromGuiUpdateWebPageProfile( pProfileDir,	// directory containing user profile
+                                          strGreeting,	// greeting text
+                                          aboutMe,		// about me text
+                                          url1,			// favorite url 1
+                                          url2,			// favorite url 2
+                                          url3 );
+}
+
+//============================================================================
+void IGoTv::fromGuiSetPluginPermission( EPluginType ePluginType, int eFriendState )
+{
+    getPtoP().fromGuiSetPluginPermission( ePluginType, ( EFriendState )eFriendState );
+}
+
+//============================================================================
+int IGoTv::fromGuiGetPluginPermission( EPluginType ePluginType )
+{
+    return ( int )getPtoP().fromGuiGetPluginPermission( ePluginType );
+}
+
+//============================================================================
+int IGoTv::fromGuiGetPluginServerState( EPluginType ePluginType )
+{
+    return getPtoP().fromGuiGetPluginServerState( ePluginType );
+}
+
+//============================================================================
+void IGoTv::fromGuiStartPluginSession( EPluginType ePluginType, VxGUID& oOnlineId, int pvUserData, VxGUID lclSessionId )
+{
+    getPtoP().fromGuiStartPluginSession( ePluginType, oOnlineId, pvUserData, lclSessionId );
+}
+
+//============================================================================
+void IGoTv::fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& oOnlineId, int pvUserData, VxGUID lclSessionId )
+{
+    getPtoP().fromGuiStopPluginSession( ePluginType, oOnlineId, pvUserData, lclSessionId );
+}
+
+//============================================================================
+bool IGoTv::fromGuiIsPluginInSession( EPluginType ePluginType, VxGUID& oOnlineId, int pvUserData, VxGUID lclSessionId )
+{
+    BigListInfo * bigListInfo = getPtoP().getBigListMgr().findBigListInfo( oOnlineId );
+    return getPtoP().fromGuiIsPluginInSession( ePluginType, ( VxNetIdent * )bigListInfo, pvUserData, lclSessionId );
+}
+
+//============================================================================
+bool IGoTv::fromGuiMakePluginOffer( EPluginType		ePluginType,
+                                        VxGUID&			oOnlineId,
+                                        int				pvUserData,
+                                        const char *	pOfferMsg,
+                                        const char *	pFileName,
+                                        VxGUID&			sessionId )
+{
+    return getPtoP().fromGuiMakePluginOffer( ePluginType,
+                                            oOnlineId,
+                                            pvUserData,
+                                            pOfferMsg,
+                                            pFileName,
+                                            0,
+                                            sessionId );
+}
+
+//============================================================================
+bool IGoTv::fromGuiToPluginOfferReply( EPluginType		ePluginType,
+                                           VxGUID&			oOnlineId,
+                                           int  			pvUserData,
+                                           int				iOfferResponse,
+                                           VxGUID&			lclSessionId )
+{
+    return getPtoP().fromGuiToPluginOfferReply( ePluginType,
+                                               oOnlineId,
+                                               pvUserData,
+                                               iOfferResponse,
+                                               lclSessionId );
+}
+
+//============================================================================
+int IGoTv::fromGuiPluginControl( EPluginType		ePluginType,
+                                     VxGUID&			oOnlineId,
+                                     const char *	pControl,
+                                     const char *	pAction,
+                                     uint32_t				u32ActionData,
+                                     VxGUID&			lclSessionId,
+                                     uint8_t *			fileHashData )
+{
+    return getPtoP().fromGuiPluginControl( ePluginType,
+                                          oOnlineId,
+                                          pControl,
+                                          pAction,
+                                          u32ActionData,
+                                          lclSessionId,
+                                          fileHashData );
+}
+
+//============================================================================
+bool IGoTv::fromGuiInstMsg( EPluginType		ePluginType,
+                                VxGUID&			oOnlineId,
+                                const char *	pMsg )
+{
+    return getPtoP().fromGuiInstMsg( ePluginType, oOnlineId, pMsg );
+}
+
+//============================================================================
+bool IGoTv::fromGuiChangeMyFriendshipToHim( VxGUID&			oOnlineId,
+                                                EFriendState	eMyFriendshipToHim,
+                                                EFriendState	eHisFriendshipToMe )
+{
+    return getPtoP().fromGuiChangeMyFriendshipToHim( oOnlineId, eMyFriendshipToHim, eHisFriendshipToMe );
+}
+
+//============================================================================
+void IGoTv::fromGuiSendContactList( EFriendViewType eFriendView, int maxContactsToSend )
+{
+    getPtoP().fromGuiSendContactList( eFriendView, maxContactsToSend );
+}
+
+//============================================================================
+void IGoTv::fromGuiRefreshContactList( int maxContactsToSend )
+{
+    getPtoP().fromGuiRefreshContactList( maxContactsToSend );
+}
+
+//============================================================================
+void IGoTv::fromGuiRequireRelay( bool bRequireRelay )
+{
+    getPtoP().fromGuiRequireRelay( bRequireRelay );
+}
+
+//============================================================================
+void IGoTv::fromGuiUseRelay( VxGUID& oOnlineId, bool bUseAsRelay )
+{
+    getPtoP().fromGuiUseRelay( oOnlineId, bUseAsRelay );
+}
+
+//============================================================================
+void IGoTv::fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount )
+{
+    getPtoP().fromGuiRelayPermissionCount( userPermittedCount, anonymousCount );
+}
+
+//============================================================================
+void IGoTv::fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char * pSearchPattern )
+{
+    getPtoP().fromGuiStartScan( eScanType, searchFlags, fileTypeFlags, pSearchPattern );
+}
+
+//============================================================================
+void IGoTv::fromGuiNextScan( EScanType eScanType )
+{
+    getPtoP().fromGuiNextScan( eScanType );
+}
+
+//============================================================================
+void IGoTv::fromGuiStopScan( EScanType eScanType )
+{
+    getPtoP().fromGuiStopScan( eScanType );
+}
+
+//============================================================================
+InetAddress IGoTv::fromGuiGetMyIPv4Address( void )
+{
+    return getPtoP().fromGuiGetMyIPv4Address();
+}
+
+//============================================================================
+InetAddress IGoTv::fromGuiGetMyIPv6Address( void )
+{
+    return getPtoP().fromGuiGetMyIPv6Address();
+}
+
+//============================================================================
+void IGoTv::fromGuiUpdateMyIdent( VxNetIdent * netIdent, bool permissionAndStatsOnly )
+{
+    getPtoP().fromGuiUpdateMyIdent( netIdent, permissionAndStatsOnly );
+}
+
+//============================================================================
+void IGoTv::fromGuiQueryMyIdent( VxNetIdent * poRetIdent )
+{
+    getPtoP().fromGuiQueryMyIdent( poRetIdent );
+}
+
+//============================================================================
+void IGoTv::fromGuiSetIdentHasTextOffers( VxGUID& onlineId, bool hasTextOffers )
+{
+    getPtoP().fromGuiSetIdentHasTextOffers( onlineId, hasTextOffers );
+}
+
+//============================================================================
+void IGoTv::fromGuiUserModifiedStoryboard( void )
+{
+    getPtoP().fromGuiUserModifiedStoryboard();
+}
+
+//============================================================================
+void IGoTv::fromGuiCancelDownload( VxGUID& fileInstanceId )
+{
+    getPtoP().fromGuiCancelDownload( fileInstanceId );
+}
+
+//============================================================================
+void IGoTv::fromGuiCancelUpload( VxGUID& fileInstanceId )
+{
+    getPtoP().fromGuiCancelUpload( fileInstanceId );
+}
+
+//============================================================================
+bool IGoTv::fromGuiSetGameValueVar( EPluginType	ePluginType,
+                                        VxGUID&	oOnlineId,
+                                        int32_t			s32VarId,
+                                        int32_t			s32VarValue )
+{
+    return getPtoP().fromGuiSetGameValueVar( ePluginType,
+                                            oOnlineId,
+                                            s32VarId,
+                                            s32VarValue );
+}
+
+//============================================================================
+bool IGoTv::fromGuiSetGameActionVar( EPluginType	ePluginType,
+                                         VxGUID&	oOnlineId,
+                                         int32_t			s32VarId,
+                                         int32_t			s32VarValue )
+{
+    return getPtoP().fromGuiSetGameActionVar( ePluginType,
+                                             oOnlineId,
+                                             s32VarId,
+                                             s32VarValue );
+}
+
+//============================================================================
+bool IGoTv::fromGuiTestCmd( IFromGui::ETestParam1		eTestParam1,
+                                int							testParam2,
+                                const char *				testParam3 )
+{
+    return getPtoP().fromGuiTestCmd( eTestParam1, testParam2, testParam3 );
+}
+
+//============================================================================
+void IGoTv::fromGuiMulitcastPkt( uint8_t * pktData, int dataLen )
+{
+#ifdef TARGET_OS_ANDROID
+    getPtoP().fromGuiMulitcastPkt( pktData, dataLen );
+#endif // TARGET_OS_ANDROID
+}
+
+//============================================================================
+void IGoTv::fromGuiDebugSettings( uint32_t u32LogFlags, const char *	pLogFileName )
+{
+    getPtoP().fromGuiDebugSettings( u32LogFlags, pLogFileName );
+}
+
+//============================================================================
+void IGoTv::fromGuiSendLog( uint32_t u32LogFlags )
+{
+    getPtoP().fromGuiSendLog( u32LogFlags );
+}
+
+//============================================================================
+bool IGoTv::fromGuiBrowseFiles( const char * dir, bool lookupShareStatus, uint8_t fileFilterMask )
+{
+    return getPtoP().fromGuiBrowseFiles( dir, lookupShareStatus, fileFilterMask );
+}
+
+//============================================================================
+bool IGoTv::fromGuiGetSharedFiles( uint8_t fileTypeFilter )
+{
+    return getPtoP().fromGuiGetSharedFiles( fileTypeFilter );
+}
+
+//============================================================================
+bool IGoTv::fromGuiSetFileIsShared( const char * fileName, bool isShared )
+{
+    return getPtoP().fromGuiSetFileIsShared( fileName, isShared );
+}
+
+//============================================================================
+bool IGoTv::fromGuiGetIsFileShared( const char * fileName )
+{
+    return getPtoP().fromGuiGetIsFileShared( fileName );
+}
+
+//============================================================================
+int IGoTv::fromGuiGetFileDownloadState( uint8_t * fileHashId )
+{
+    return getPtoP().fromGuiGetFileDownloadState( fileHashId );
+}
+
+//============================================================================
+bool IGoTv::fromGuiAddFileToLibrary( const char * fileName, bool addFile, uint8_t * fileHashId )
+{
+    return getPtoP().fromGuiAddFileToLibrary( fileName, addFile, fileHashId );
+}
+
+//============================================================================
+void IGoTv::fromGuiGetFileLibraryList( uint8_t fileTypeFilter )
+{
+    getPtoP().fromGuiGetFileLibraryList( fileTypeFilter );
+}
+
+//============================================================================
+bool IGoTv::fromGuiGetIsFileInLibrary( const char * fileName )
+{
+    return getPtoP().fromGuiGetIsFileInLibrary( fileName );
+}
+
+//============================================================================
+bool IGoTv::fromGuiIsMyP2PWebVideoFile( const char * fileName )
+{
+    return getPtoP().fromGuiIsMyP2PWebVideoFile( fileName );
+}
+
+//============================================================================
+bool IGoTv::fromGuiIsMyP2PWebAudioFile( const char * fileName )
+{
+    return getPtoP().fromGuiIsMyP2PWebAudioFile( fileName );
+}
+
+//============================================================================
+int IGoTv::fromGuiDeleteFile( const char * fileName, bool shredFile )
+{
+    return getPtoP().fromGuiDeleteFile( fileName, shredFile );
+}
+
+//============================================================================
+bool IGoTv::fromGuiAssetAction( EAssetAction assetAction, AssetInfo& assetInfo, int pos0to100000 )
+{
+    return getPtoP().fromGuiAssetAction( assetAction, assetInfo, pos0to100000 );
+}
+
+//============================================================================
+bool IGoTv::fromGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
+{
+    return getPtoP().fromGuiAssetAction( assetAction, assetId, pos0to100000 );
+}
+
+//============================================================================
+bool IGoTv::fromGuiSendAsset( AssetInfo& assetInfo )
+{
+    return getPtoP().fromGuiSendAsset( assetInfo );
+}
+
+//============================================================================
+bool IGoTv::fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char * fileName )
+{
+    return getPtoP().fromGuiVideoRecord( eRecState, feedId, fileName );
+}
+
+//============================================================================
+bool IGoTv::fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName )
+{
+    return getPtoP().fromGuiSndRecord( eRecState, feedId, fileName );
+}
+
+//============================================================================
+void IGoTv::fromGuiQuerySessionHistory( VxGUID& historyId )
+{
+    getPtoP().fromGuiQuerySessionHistory( historyId );
+}
+
+//============================================================================
+bool IGoTv::fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 )
+{
+    return getPtoP().fromGuiMultiSessionAction( mSessionAction, onlineId, pos0to100000 );
+}

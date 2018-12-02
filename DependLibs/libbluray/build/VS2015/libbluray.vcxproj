@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\contrib\libudfread\src\default_blockinput.c" />
+    <ClCompile Include="..\..\contrib\libudfread\src\ecma167.c" />
+    <ClCompile Include="..\..\contrib\libudfread\src\udfread.c" />
+    <ClCompile Include="..\..\DllLibbluray.cpp" />
+    <ClCompile Include="..\..\src\file\dirs_darwin.c" />
+    <ClCompile Include="..\..\src\file\dirs_win32.c" />
+    <ClCompile Include="..\..\src\file\dirs_xdg.c" />
+    <ClCompile Include="..\..\src\file\dir_posix.c" />
+    <ClCompile Include="..\..\src\file\dir_win32.c" />
+    <ClCompile Include="..\..\src\file\dl_posix.c" />
+    <ClCompile Include="..\..\src\file\dl_win32.c" />
+    <ClCompile Include="..\..\src\file\file.c" />
+    <ClCompile Include="..\..\src\file\filesystem.c" />
+    <ClCompile Include="..\..\src\file\file_posix.c" />
+    <ClCompile Include="..\..\src\file\file_win32.c" />
+    <ClCompile Include="..\..\src\file\mount.c" />
+    <ClCompile Include="..\..\src\file\mount_darwin.c" />
+    <ClCompile Include="..\..\src\libbluray\bdj\bdj.c" />
+    <ClCompile Include="..\..\src\libbluray\bdj\bdjo_parse.c" />
+    <ClCompile Include="..\..\src\libbluray\bdj\native\bdjo.c" />
+    <ClCompile Include="..\..\src\libbluray\bdj\native\java_awt_BDFontMetrics.c" />
+    <ClCompile Include="..\..\src\libbluray\bdj\native\java_awt_BDGraphics.c" />
+    <ClCompile Include="..\..\src\libbluray\bdj\native\org_videolan_Libbluray.c" />
+    <ClCompile Include="..\..\src\libbluray\bdj\native\org_videolan_Logger.c" />
+    <ClCompile Include="..\..\src\libbluray\bdj\native\register_native.c" />
+    <ClCompile Include="..\..\src\libbluray\bdj\native\util.c" />
+    <ClCompile Include="..\..\src\libbluray\bdnav\bdid_parse.c" />
+    <ClCompile Include="..\..\src\libbluray\bdnav\bdmv_parse.c" />
+    <ClCompile Include="..\..\src\libbluray\bdnav\clpi_parse.c" />
+    <ClCompile Include="..\..\src\libbluray\bdnav\extdata_parse.c" />
+    <ClCompile Include="..\..\src\libbluray\bdnav\index_parse.c" />
+    <ClCompile Include="..\..\src\libbluray\bdnav\meta_parse.c" />
+    <ClCompile Include="..\..\src\libbluray\bdnav\mpls_parse.c" />
+    <ClCompile Include="..\..\src\libbluray\bdnav\navigation.c" />
+    <ClCompile Include="..\..\src\libbluray\bdnav\sound_parse.c" />
+    <ClCompile Include="..\..\src\libbluray\bdnav\uo_mask.c" />
+    <ClCompile Include="..\..\src\libbluray\bluray.c" />
+    <ClCompile Include="..\..\src\libbluray\decoders\graphics_controller.c" />
+    <ClCompile Include="..\..\src\libbluray\decoders\graphics_processor.c" />
+    <ClCompile Include="..\..\src\libbluray\decoders\ig_decode.c" />
+    <ClCompile Include="..\..\src\libbluray\decoders\m2ts_demux.c" />
+    <ClCompile Include="..\..\src\libbluray\decoders\m2ts_filter.c" />
+    <ClCompile Include="..\..\src\libbluray\decoders\pes_buffer.c" />
+    <ClCompile Include="..\..\src\libbluray\decoders\pg_decode.c" />
+    <ClCompile Include="..\..\src\libbluray\decoders\rle.c" />
+    <ClCompile Include="..\..\src\libbluray\decoders\textst_decode.c" />
+    <ClCompile Include="..\..\src\libbluray\decoders\textst_render.c" />
+    <ClCompile Include="..\..\src\libbluray\disc\aacs.c" />
+    <ClCompile Include="..\..\src\libbluray\disc\bdplus.c" />
+    <ClCompile Include="..\..\src\libbluray\disc\dec.c" />
+    <ClCompile Include="..\..\src\libbluray\disc\disc.c" />
+    <ClCompile Include="..\..\src\libbluray\disc\properties.c" />
+    <ClCompile Include="..\..\src\libbluray\disc\udf_fs.c" />
+    <ClCompile Include="..\..\src\libbluray\hdmv\hdmv_vm.c" />
+    <ClCompile Include="..\..\src\libbluray\hdmv\mobj_parse.c" />
+    <ClCompile Include="..\..\src\libbluray\hdmv\mobj_print.c" />
+    <ClCompile Include="..\..\src\libbluray\register.c" />
+    <ClCompile Include="..\..\src\util\array.c" />
+    <ClCompile Include="..\..\src\util\bits.c" />
+    <ClCompile Include="..\..\src\util\event_queue.c" />
+    <ClCompile Include="..\..\src\util\logging.c" />
+    <ClCompile Include="..\..\src\util\mutex.c" />
+    <ClCompile Include="..\..\src\util\refcnt.c" />
+    <ClCompile Include="..\..\src\util\strutl.c" />
+    <ClCompile Include="..\..\src\util\time.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\config_libbluray.h" />
+    <ClInclude Include="..\..\contrib\libudfread\src\blockinput.h" />
+    <ClInclude Include="..\..\contrib\libudfread\src\default_blockinput.h" />
+    <ClInclude Include="..\..\contrib\libudfread\src\ecma167.h" />
+    <ClInclude Include="..\..\contrib\libudfread\src\udfread.h" />
+    <ClInclude Include="..\..\DllLibbluray.h" />
+    <ClInclude Include="..\..\src\file\dirs.h" />
+    <ClInclude Include="..\..\src\file\dl.h" />
+    <ClInclude Include="..\..\src\file\file.h" />
+    <ClInclude Include="..\..\src\file\filesystem.h" />
+    <ClInclude Include="..\..\src\file\mount.h" />
+    <ClInclude Include="..\..\src\libbluray\bdj\bdj.h" />
+    <ClInclude Include="..\..\src\libbluray\bdj\bdjo_data.h" />
+    <ClInclude Include="..\..\src\libbluray\bdj\bdjo_parse.h" />
+    <ClInclude Include="..\..\src\libbluray\bdj\native\bdjo.h" />
+    <ClInclude Include="..\..\src\libbluray\bdj\native\java_awt_BDFontMetrics.h" />
+    <ClInclude Include="..\..\src\libbluray\bdj\native\java_awt_BDGraphics.h" />
+    <ClInclude Include="..\..\src\libbluray\bdj\native\org_videolan_Libbluray.h" />
+    <ClInclude Include="..\..\src\libbluray\bdj\native\org_videolan_Logger.h" />
+    <ClInclude Include="..\..\src\libbluray\bdj\native\register_native.h" />
+    <ClInclude Include="..\..\src\libbluray\bdj\native\util.h" />
+    <ClInclude Include="..\..\src\libbluray\bdnav\bdid_parse.h" />
+    <ClInclude Include="..\..\src\libbluray\bdnav\bdmv_parse.h" />
+    <ClInclude Include="..\..\src\libbluray\bdnav\bdparse.h" />
+    <ClInclude Include="..\..\src\libbluray\bdnav\clpi_data.h" />
+    <ClInclude Include="..\..\src\libbluray\bdnav\clpi_parse.h" />
+    <ClInclude Include="..\..\src\libbluray\bdnav\extdata_parse.h" />
+    <ClInclude Include="..\..\src\libbluray\bdnav\index_parse.h" />
+    <ClInclude Include="..\..\src\libbluray\bdnav\meta_data.h" />
+    <ClInclude Include="..\..\src\libbluray\bdnav\meta_parse.h" />
+    <ClInclude Include="..\..\src\libbluray\bdnav\mpls_data.h" />
+    <ClInclude Include="..\..\src\libbluray\bdnav\mpls_parse.h" />
+    <ClInclude Include="..\..\src\libbluray\bdnav\navigation.h" />
+    <ClInclude Include="..\..\src\libbluray\bdnav\sound_parse.h" />
+    <ClInclude Include="..\..\src\libbluray\bdnav\uo_mask.h" />
+    <ClInclude Include="..\..\src\libbluray\bdnav\uo_mask_table.h" />
+    <ClInclude Include="..\..\src\libbluray\bluray-version.h" />
+    <ClInclude Include="..\..\src\libbluray\bluray.h" />
+    <ClInclude Include="..\..\src\libbluray\bluray_internal.h" />
+    <ClInclude Include="..\..\src\libbluray\decoders\graphics_controller.h" />
+    <ClInclude Include="..\..\src\libbluray\decoders\graphics_processor.h" />
+    <ClInclude Include="..\..\src\libbluray\decoders\hdmv_pids.h" />
+    <ClInclude Include="..\..\src\libbluray\decoders\ig.h" />
+    <ClInclude Include="..\..\src\libbluray\decoders\ig_decode.h" />
+    <ClInclude Include="..\..\src\libbluray\decoders\m2ts_demux.h" />
+    <ClInclude Include="..\..\src\libbluray\decoders\m2ts_filter.h" />
+    <ClInclude Include="..\..\src\libbluray\decoders\overlay.h" />
+    <ClInclude Include="..\..\src\libbluray\decoders\pes_buffer.h" />
+    <ClInclude Include="..\..\src\libbluray\decoders\pg.h" />
+    <ClInclude Include="..\..\src\libbluray\decoders\pg_decode.h" />
+    <ClInclude Include="..\..\src\libbluray\decoders\rle.h" />
+    <ClInclude Include="..\..\src\libbluray\decoders\textst.h" />
+    <ClInclude Include="..\..\src\libbluray\decoders\textst_decode.h" />
+    <ClInclude Include="..\..\src\libbluray\decoders\textst_render.h" />
+    <ClInclude Include="..\..\src\libbluray\disc\aacs.h" />
+    <ClInclude Include="..\..\src\libbluray\disc\bdplus.h" />
+    <ClInclude Include="..\..\src\libbluray\disc\dec.h" />
+    <ClInclude Include="..\..\src\libbluray\disc\disc.h" />
+    <ClInclude Include="..\..\src\libbluray\disc\enc_info.h" />
+    <ClInclude Include="..\..\src\libbluray\disc\properties.h" />
+    <ClInclude Include="..\..\src\libbluray\disc\udf_fs.h" />
+    <ClInclude Include="..\..\src\libbluray\filesystem.h" />
+    <ClInclude Include="..\..\src\libbluray\hdmv\hdmv_insn.h" />
+    <ClInclude Include="..\..\src\libbluray\hdmv\hdmv_vm.h" />
+    <ClInclude Include="..\..\src\libbluray\hdmv\mobj_data.h" />
+    <ClInclude Include="..\..\src\libbluray\hdmv\mobj_parse.h" />
+    <ClInclude Include="..\..\src\libbluray\hdmv\mobj_print.h" />
+    <ClInclude Include="..\..\src\libbluray\keys.h" />
+    <ClInclude Include="..\..\src\libbluray\log_control.h" />
+    <ClInclude Include="..\..\src\libbluray\meta_data.h" />
+    <ClInclude Include="..\..\src\libbluray\overlay.h" />
+    <ClInclude Include="..\..\src\libbluray\player_settings.h" />
+    <ClInclude Include="..\..\src\libbluray\register.h" />
+    <ClInclude Include="..\..\src\util\array.h" />
+    <ClInclude Include="..\..\src\util\attributes.h" />
+    <ClInclude Include="..\..\src\util\bits.h" />
+    <ClInclude Include="..\..\src\util\event_queue.h" />
+    <ClInclude Include="..\..\src\util\logging.h" />
+    <ClInclude Include="..\..\src\util\log_control.h" />
+    <ClInclude Include="..\..\src\util\macro.h" />
+    <ClInclude Include="..\..\src\util\mutex.h" />
+    <ClInclude Include="..\..\src\util\refcnt.h" />
+    <ClInclude Include="..\..\src\util\strutl.h" />
+    <ClInclude Include="..\..\src\util\time.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\libbluray\bluray-version.h.in" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libbluray</ProjectName>
+    <ProjectGuid>{23E1FE31-050F-4F3A-BEBD-48BD30A4F32E}</ProjectGuid>
+    <RootNamespace>GoTv</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\..\android\jdk1.8.0_131\include;$(ProjectDir)..\..\..\..\..\android\jdk1.8.0_131\include\win32;$(ProjectDir)..\..\lib\iso9660;$(ProjectDir)..\..\lib\driver;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;_DEBUG;WIN32;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <StringPooling>false</StringPooling>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;NDEBUG;WIN32;NHAVE_CONFIG_H;WIN32;_LIB;_CRT_SECURE_NO_WARNINGSHAVE_CONFIG_H;WIN32;_LIB;TARGET_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS;_LIB;TARGET_OS_WINDOWS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat />
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)\$(ProjectName).lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,52 @@
+
+//=== GoTvP2P announcement and group listing propagation ===//
+service definitions
+tier4 - end user service
+tier3 - group hosting service
+tier2 - group listing and search service
+tier1 - master group listing and search service
+
+Event trigger timers should be based on CoreLib/VxTime.h GetApplicationAliveMs
+This is so that events are staggered and reduce loading spikes for tier servers
+
+Time Events:
+
+//=== tier4 (end user)===//
+== OncePerMinute ==
+	1. check connections to other tier4 friends with ping for online status
+	2. if friend connection is lost then que event with tier3 to for check if new connection info
+	3. if have lost connection with friend(s) query tier3 for new connect info ( one query per minute )	
+== OncePer8Minutes or when services change ==
+	1. announce to tier3(s) I am alive.. keep connection open
+	2. request is port open test
+	
+//=== tier3 (group host)===//
+== OncePer8Minutes ==
+	1. announce to tier2(s) I am alive 
+	2. request is port open test
+	3. if services have changes send service info	
+== OncePer10Minutes ==
+	1.) announce to users any users that have went online/offline.. 
+	
+//=== tier2 (group listing host) ===//
+== OncePer8Minutes ==
+	1. announce to tier1(s) I am alive 
+	2. request is port open test
+	3. if services have changes send service info as changed set
+	
+//=== tier1 (master group listing host) ===//
+== OncePer8Minutes ==
+	1. announce to other tier1(s) I am alive 
+	2. port is open is assumed as part of being tier1
+	3. if services have changes send service info as changed set
+== OncePer10Minutes ==
+	4. mark any other tier1(s) that have not announced as offline and remove from searches
+	
+		 
+
+		 
+		 
+		 
+		 
+		 
+		 

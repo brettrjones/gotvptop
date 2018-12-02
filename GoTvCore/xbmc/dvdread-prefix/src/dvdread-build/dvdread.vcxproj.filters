@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdread-prefix\src\dvdread\src\bitreader.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdread-prefix\src\dvdread\src\dvd_input.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdread-prefix\src\dvdread\src\dvd_reader.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdread-prefix\src\dvdread\src\dvd_udf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdread-prefix\src\dvdread\src\ifo_print.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdread-prefix\src\dvdread\src\ifo_read.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdread-prefix\src\dvdread\src\md5.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdread-prefix\src\dvdread\src\nav_print.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdread-prefix\src\dvdread\src\nav_read.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="F:\KodiBuildsVSRuns2018-04-01\dvdread-prefix\src\dvdread\src\bswap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\KodiBuildsVSRuns2018-04-01\dvdread-prefix\src\dvdread\src\dvd_input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\KodiBuildsVSRuns2018-04-01\dvdread-prefix\src\dvdread\src\dvdread_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\KodiBuildsVSRuns2018-04-01\dvdread-prefix\src\dvdread\src\md5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\KodiBuildsVSRuns2018-04-01\dvdread-prefix\src\dvdread\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0D7F423A-5572-33F3-9AFB-13AAE9CFBB7B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{D5333F3A-AA14-336F-9694-FC24BBC95B83}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

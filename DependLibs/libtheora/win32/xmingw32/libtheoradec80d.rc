@@ -1,0 +1,3 @@
+#define TH_DEC_INTERNAL_NAME "libtheoradec80d"
+#define _DEBUG_OUT (1)
+#include "libtheoradec-all.rc"

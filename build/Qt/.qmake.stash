@@ -1,0 +1,26 @@
+
+QMAKE_CXX.INCDIRS = \
+"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Tools\\MSVC\\14.10.25017\\include" \
+"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Tools\\MSVC\\14.10.25017\\atlmfc\\include" \
+"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Auxiliary\\VS\\include" \
+"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.15063.0\\ucrt" \
+"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Auxiliary\\VS\\UnitTest\\include" \
+"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.15063.0\\um" \
+"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.15063.0\\shared" \
+"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.15063.0\\winrt" \
+
+QMAKE_CXX.LIBDIRS = \
+"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Tools\\MSVC\\14.10.25017\\lib\\x86" \
+"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Tools\\MSVC\\14.10.25017\\atlmfc\\lib\\x86" \
+"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Auxiliary\\VS\\lib\\x86" \
+"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.15063.0\\ucrt\\x86" \
+"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Auxiliary\\VS\\UnitTest\\lib" \
+"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.15063.0\\um\\x86" \
+"C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.7\\lib\\um\\x86" \
+"C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.6.1\\Lib\\um\\x86" \
+
+QMAKE_CXX.QMAKE_MSC_VER = 1900
+QMAKE_CXX.QMAKE_MSC_FULL_VER = 190024215
+QMAKE_CXX.COMPILER_MACROS = \
+    QMAKE_MSC_VER \
+    QMAKE_MSC_FULL_VER

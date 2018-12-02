@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="GoTvConfig">
+      <UniqueIdentifier>{252b704a-046c-45a3-89e7-dec197a12750}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvInterface">
+      <UniqueIdentifier>{6950eed4-7f01-4d25-955d-b77a382d52d1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\AppSource\WinMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\AppConfigCheck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GuiInterface\IToGui.cpp">
+      <Filter>GoTvInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTv.cpp">
+      <Filter>GoTvInterface</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\config_gotvapps.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h">
+      <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IDefs.h">
+      <Filter>GoTvInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IFromGui.h">
+      <Filter>GoTvInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IScan.h">
+      <Filter>GoTvInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GuiInterface\IToGui.h">
+      <Filter>GoTvInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvInterface\IGoTv.h">
+      <Filter>GoTvInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvInterface\IGoTvLib.h">
+      <Filter>GoTvInterface</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\GoTvCommon\QtSource\KodiP2P.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\GoTvCommon\QtSource\KodiP2P.rc" />
+  </ItemGroup>
+</Project>

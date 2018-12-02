@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\vm\decoder.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\vm\getset.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\vm\play.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\vm\vm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\vm\vmcmd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\vm\vmget.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\dvdnav.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\highlight.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\navigation.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\read_cache.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\searching.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\settings.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\vm\decoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\vm\getset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\vm\play.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\vm\vm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\vm\vmcmd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\dvdnav_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\src\read_cache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\KodiBuildsVSRuns2018-04-01\dvdnav-prefix\src\dvdnav\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{29980416-A5C9-315A-BBAF-924E86BC36D3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{49D61845-7077-3535-8CD9-493F8E3A0409}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

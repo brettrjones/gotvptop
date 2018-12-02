@@ -1,0 +1,11 @@
+prefix=//home/jack/xbmc-depends/arm-linux-androideabi-android-21
+exec_prefix=//home/jack/xbmc-depends/arm-linux-androideabi-android-21
+libdir=//home/jack/xbmc-depends/arm-linux-androideabi-android-21/lib
+includedir=//home/jack/xbmc-depends/arm-linux-androideabi-android-21/include
+
+Name: TagLib
+Description: Audio meta-data library
+Requires: 
+Version: 1.11
+Libs: -L${libdir} -ltag
+Cflags: -I${includedir}/taglib

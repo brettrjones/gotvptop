@@ -1,0 +1,103 @@
+gotv_icon.svg by Brett R. Jones
+
+"http://www.w3.org/2000/svg" 
+## License
+Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+
+© 2007 Nuno Pinheiro & David Vignoni & David Miller & Johann Ollivier Lapeyre & Kenneth Wimer & Riccardo Iaconelli / KDE / LGPL 3
+
+
+ SimpleIcon http://www.simpleicon.com/
+ magnifier-on-a-user.svg
+
+  
+ https://commons.wikimedia.org
+ all emocons are from creative commons
+ By Emoji One, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=37428538
+ or 	https://github.com/emojione/emojione/graphs/contributors
+ 
+ 
+ https://thenounproject.com/edward/
+ bug.svg
+ unknown by Bybzee from the Noun Project
+
+ 
+https://iconmonstr.com/
+check-mark.svg
+file-folder-cancel.svg
+file-folder-locked.svg
+file-folder-minus.svg
+file-folder-normal.svg
+file-folder-plus.svg
+file-folder-share.svg (modified)
+friend.svg
+mediatype-audio.svg
+mediatype-video.svg
+microphone.svg
+microphone-muted.svg (modified)
+notify-dot.svg (modified)
+notepad.svg
+plugin.svg
+radio-tower.svg
+remote-control.svg
+settings-gear.svg
+speech-bubble.svg
+speech-bubble-disabled.svg
+star-empty.svg
+star-full.svg
+star-half-full.svg
+storyboard.svg
+thumbs-up.svg
+thumbs-down.svg (modified)
+cam-rotate.svg (modified)
+cam-preview.svg (modified)
+image-rotate.svg (modified)
+overlay-friend.svg (modified)
+overlay-globe.svg (modified)
+overlay-minus.svg (modified)
+overlay-plus.svg (modified)
+window-expand.svg
+window-shrink.svg
+
+By Anton Barbarov, RU at https://thenounproject.com
+camera-snapshot.svg
+
+
+# Glyph, a versatile SVG icon set 
+http://glyph.smarticons.co
+Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+http://creativecommons.org/licenses/by-sa/4.0/
+align-left.svg
+ align-right.svg
+ align-center.svg
+ arrow-down.svg
+ arrow-down-left.svg
+ arrow-down-right.svg
+ arrow-left.svg
+ arrow-right.svg
+ arrow-up.svg
+ arrow-up-left.svg
+ arrow-up-right.svg
+ arrow-thick-thin-down.svg
+ arrow-thick-thin-up.svg
+ file-audio.svg ( modified )
+ file-picture.svg
+ file-text.svg ( modified )
+ file-video.svg
+ file-zip.svg
+ play.svg
+ share.svg
+arrow-expand.svg
+arrow-shrink.svg
+pause.svg
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

@@ -1,0 +1,44 @@
+#pragma once
+
+#include "GoTvInterface/IGoTvDefs.h"
+#include "GoTvInterface/IGoTvEvents.h"
+
+#include "AppParamParser.h"
+
+
+class IGoTv;
+class CAppParamParser;
+
+
+class OsInterface
+{
+public:
+    OsInterface( IGoTv& gotv );
+
+    IGoTv&                      getIGoTv() { return m_IGoTv; }
+
+    // exit of application error code
+    virtual void                setRunResultCode( int exitCode )    { m_RunResultCode = exitCode; }
+    virtual int                 getRunResultCode()                  { return m_RunResultCode; }
+
+    //=== stages of create ===//
+    virtual bool                doPreStartup( ) = 0;
+    virtual bool                doStartup( ) = 0;
+
+    //=== stages of run ===//
+    virtual bool                initRun( const CAppParamParser& cmdLineParams );
+    virtual bool                doRun( EAppModule appModule );
+
+    //=== stages of destroy ===//
+    virtual void                doPreShutdown() = 0;
+    virtual void                doShutdown() = 0;
+
+    //=== utilities ===//
+    virtual bool               initDirectories() = 0;
+
+
+protected:
+    IGoTv&                      m_IGoTv;
+    CAppParamParser             m_CmdLineParams;
+    int                         m_RunResultCode;
+};

@@ -1,0 +1,60 @@
+<sources>
+    <programs>
+        <default pathversion="1"></default>
+    </programs>
+    <video>
+        <default pathversion="1"></default>
+        <source>
+            <name>Video Playlists</name>
+            <path pathversion="1">special://videoplaylists/</path>
+            <allowsharing>true</allowsharing>
+        </source>
+        <source>
+            <name>Movies</name>
+            <path pathversion="1">/Users/defaultuser/Movies/</path>
+            <allowsharing>true</allowsharing>
+        </source>
+        <source>
+            <name>Drop.Dead.Gorgeous.[1999].FiNALLY.FLV</name>
+            <path pathversion="1">F:\TestMedia\MoreVideos\Drop.Dead.Gorgeous.[1999].FiNALLY.FLV\</path>
+            <allowsharing>true</allowsharing>
+        </source>
+        <source>
+            <name>Agents.of.S.H.I.E.L.D.S05E09</name>
+            <path pathversion="1">F:\TestMedia\video_test\Agents.of.S.H.I.E.L.D.S05E09\</path>
+            <allowsharing>true</allowsharing>
+        </source>
+    </video>
+    <music>
+        <default pathversion="1"></default>
+        <source>
+            <name>Music Playlists</name>
+            <path pathversion="1">special://musicplaylists/</path>
+            <allowsharing>true</allowsharing>
+        </source>
+        <source>
+            <name>Music</name>
+            <path pathversion="1">/Users/defaultuser/Music/</path>
+            <allowsharing>true</allowsharing>
+        </source>
+    </music>
+    <pictures>
+        <default pathversion="1"></default>
+        <source>
+            <name>Pictures</name>
+            <path pathversion="1">/Users/defaultuser/Pictures/</path>
+            <allowsharing>true</allowsharing>
+        </source>
+    </pictures>
+    <files>
+        <default pathversion="1"></default>
+        <source>
+            <name>fusion</name>
+            <path pathversion="1">http://fusion.tvaddons.co/</path>
+            <allowsharing>true</allowsharing>
+        </source>
+    </files>
+    <games>
+        <default pathversion="1"></default>
+    </games>
+</sources>
