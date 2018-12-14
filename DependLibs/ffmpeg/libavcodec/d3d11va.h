@@ -29,6 +29,8 @@
  * @ingroup lavc_codec_hwaccel_d3d11va
  * Public libavcodec D3D11VA header.
  */
+#include "config_ffmpeg.h"
+#ifdef HAS_DX
 
 #if !defined(_WIN32_WINNT) || _WIN32_WINNT < 0x0602
 #undef _WIN32_WINNT
@@ -108,5 +110,5 @@ AVD3D11VAContext *av_d3d11va_alloc_context(void);
 /**
  * @}
  */
-
+#endif // HAS_DX
 #endif /* AVCODEC_D3D11VA_H */

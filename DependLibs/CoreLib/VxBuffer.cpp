@@ -20,7 +20,7 @@
 #include <memory.h>
 #include <malloc.h>
 #include <stdlib.h>
-//#include <algorithm>    // std::min
+#include <algorithm>    // std::min
 
 //============================================================================
 VxBuffer::VxBuffer( int iPreAllocSize, int iReallocSize )
@@ -77,7 +77,7 @@ void VxBuffer::addData( char * pData, int iLen, bool nullTerminate )
 int VxBuffer::readData( char * pData, int iLenToRead, int iReadOffs, bool nullTerminate )
 {
 	int iBytesAvail = m_iBufUsedLen - iReadOffs; 
-	int iCopyLen = MIN( iLenToRead, iBytesAvail );
+    int iCopyLen = std::min( iLenToRead, iBytesAvail );
 	if( 0 < iCopyLen )
 	{
 		memcpy( pData, &m_pBuf[ iReadOffs ], iCopyLen );
@@ -107,7 +107,7 @@ int VxBuffer::removeData( int iLen, int iOffs )
 	int iBytesAvail = m_iBufUsedLen - iOffs; 
 	if( 0 < iBytesAvail )
 	{
-		iRemoveLen = MIN( iBytesAvail, iLen );
+        iRemoveLen = std::min( iBytesAvail, iLen );
 		if( 0 < iRemoveLen )
 		{
 			int iLenToMove = m_iBufUsedLen - ( iRemoveLen + iOffs );

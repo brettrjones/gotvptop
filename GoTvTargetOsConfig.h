@@ -6,7 +6,7 @@
 // determine target operating system based on compiler flags
 #if( !defined(TARGET_OS_WINDOWS) && !defined(TARGET_OS_ANDROID) && !defined(TARGET_OS_LINUX)  )
 // target OS not defined.. try to guess
-# if defined(WIN32) || defined(_WIN32) || defined(_WINDOWS)  || defined(_M_X64) || defined(__x86_64__) || defined(_M_IX86) || defined(__i386__)
+# if defined(WIN32) || defined(_WIN32) || defined(_WINDOWS)  || defined(_M_X64) || defined(_M_IX86) || defined(__i386__)
 #  define TARGET_OS_WINDOWS
 # elif defined(__ANDROID__) || defined(_M_ARM)
 #  define TARGET_OS_ANDROID

@@ -1,8 +1,7 @@
 HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
-	$$PWD/../../../../GoTvConfig.h \
+    $$PWD/../../../../GoTvAppConfig.h \
 	$$PWD/../../../../GoTvCpuArchDefines.h \
 	$$PWD/../../../../GoTvDependLibrariesConfig.h \
-	$$PWD/../../../../GoTvFeaturesConfig.h \
 	$$PWD/../../../../GoTvTargetOsConfig.h \
 	$$PWD/../../../../arpa/inet.h \
 	$$PWD/../../../../asm/types.h \
@@ -32,7 +31,6 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../AppErr.h \
 	$$PWD/../../AssetDefs.h \
 	$$PWD/../../Blowfish.h \
-	$$PWD/../../CompileConfig.h \
 	$$PWD/../../DbBase.h \
 	$$PWD/../../DbDataset.h \
 	$$PWD/../../DbQueryData.h \
@@ -83,15 +81,14 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../VxTimeDefs.h \
 	$$PWD/../../VxTimeUtil.h \
 	$$PWD/../../VxTimer.h \
-	$$PWD/../../VxUrl.h \
 	$$PWD/../../VxValuePair.h \
 	$$PWD/../../VxXml.h \
 	$$PWD/../../dirent_sim.h \
 	$$PWD/../../md5.h \
 	$$PWD/../../rsa.h \
-	$$PWD/../../sqlite3.h \
-	$$PWD/../../sqlite3ext.h \
-	$$PWD/../../sqlitedataset.h
+#	$$PWD/../../sqlite3.h \
+#	$$PWD/../../sqlite3ext.h \
+#	$$PWD/../../sqlitedataset.h
 
 SOURCES += 	$$PWD/../../AppErr.cpp \
 	$$PWD/../../Blowfish.cpp \
@@ -136,12 +133,11 @@ SOURCES += 	$$PWD/../../AppErr.cpp \
 	$$PWD/../../VxThread.cpp \
 	$$PWD/../../VxTimeUtil.cpp \
 	$$PWD/../../VxTimer.cpp \
-	$$PWD/../../VxUrl.cpp \
 	$$PWD/../../VxValuePair.cpp \
 	$$PWD/../../VxXml.cpp \
 	$$PWD/../../md5.c \
 	$$PWD/../../rsa_eay.c \
 	$$PWD/../../rsa_gen.c \
-	$$PWD/../../sqlite3.c \
-    $$PWD/../../sqlitedataset.cpp
+#	$$PWD/../../sqlite3.c \
+#    $$PWD/../../sqlitedataset.cpp
 

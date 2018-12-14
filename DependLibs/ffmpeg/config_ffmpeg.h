@@ -217,7 +217,7 @@
 #define HAVE_SIMD_ALIGN_16 1
 #define HAVE_SIMD_ALIGN_32 1
 #define HAVE_SIMD_ALIGN_64 1
-#define HAVE_ATOMICS_GCC 0
+//#define HAVE_ATOMICS_GCC 0 // defined in GoTvDependLibrariesConfig.h
 #define HAVE_ATOMICS_SUNCC 0
 #define HAVE_ATOMICS_WIN32 1
 #define HAVE_ATOMIC_CAS_PTR 0
@@ -294,7 +294,11 @@
 #define HAVE_DXVA_H 1
 #define HAVE_ES2_GL_H 0
 #define HAVE_GSM_H 0
-#define HAVE_IO_H 1
+#ifdef _MSC_VER
+# define HAVE_IO_H 1
+#else
+# define HAVE_IO_H 0
+#endif // _MSC_VER
 #define HAVE_LINUX_PERF_EVENT_H 0
 #define HAVE_MACHINE_IOCTL_BT848_H 0
 #define HAVE_MACHINE_IOCTL_METEOR_H 0
@@ -311,18 +315,18 @@
 //#define HAVE_SNDIO_H					0
 #define HAVE_SOUNDCARD_H 0
 #define HAVE_STDATOMIC_H 0
-#define HAVE_SYS_MMAN_H 0
+//#define HAVE_SYS_MMAN_H 0  // defined in GoTvCompilerConfig.h
 //#define HAVE_SYS_PARAM_H 0 // defined in GoTvCompilerConfig.h
 #define HAVE_SYS_RESOURCE_H 0
-#define HAVE_SYS_SELECT_H 0
+//#define HAVE_SYS_SELECT_H 0 // defined in GoTvCompilerConfig.h
 #define HAVE_SYS_SOUNDCARD_H 0
 
 #ifndef HAVE_SYS_TIME_H
 # define HAVE_SYS_TIME_H			0
 #endif // HAVE_SYS_TIME_H
-#define HAVE_SYS_UN_H 0
+//#define HAVE_SYS_UN_H 0  // defined in GoTvCompilerConfig.h
 #define HAVE_SYS_VIDEOIO_H			0
-#define HAVE_TERMIOS_H				0
+//#define HAVE_TERMIOS_H				0 // defined in GoTvCompilerConfig.h
 #define HAVE_UDPLITE_H				0
 //#define HAVE_UNISTD_H 0 // defined in GoTvCompilerConfig.h
 
@@ -410,13 +414,13 @@
 #define HAVE_LZO1X_999_COMPRESS 0
 #define HAVE_MACH_ABSOLUTE_TIME 0
 //#define HAVE_MAPVIEWOFFILE 0 // defined in GoTvCompilerConfig.h
-#define HAVE_MEMALIGN 0
+//#define HAVE_MEMALIGN 0 // defined in GoTvCompilerConfig.h
 //#define HAVE_MKSTEMP 0 // defined in GoTvCompilerConfig.h
-#define HAVE_MMAP 0
-#define HAVE_MPROTECT 0
+//#define HAVE_MMAP 0 // defined in GoTvCompilerConfig.h
+//#define HAVE_MPROTECT 0 // defined in GoTvCompilerConfig.h
 #define HAVE_NANOSLEEP 0
 #define HAVE_PEEKNAMEDPIPE 1
-#define HAVE_POSIX_MEMALIGN 0
+//#define HAVE_POSIX_MEMALIGN 0 // defined in GoTvCompilerConfig.h
 #define HAVE_PTHREAD_CANCEL 0
 #define HAVE_SCHED_GETAFFINITY 0
 #define HAVE_SECITEMIMPORT 0
@@ -426,12 +430,12 @@
 #define HAVE_SETMODE 1
 //#define HAVE_SETRLIMIT 0 // defined in GoTvCompilerConfig.h
 #define HAVE_SLEEP 1
-#define HAVE_STRERROR_R 0
-#define HAVE_SYSCONF 0
+//#define HAVE_STRERROR_R 0 // defined in GoTvCompilerConfig.h
+//#define HAVE_SYSCONF 0 // defined in GoTvCompilerConfig.h
 //#define HAVE_STRERROR_R 0
 //#define HAVE_SYSCONF 0
 #define HAVE_SYSCTL 0
-#define HAVE_USLEEP 0
+//#define HAVE_USLEEP 0// defined in GoTvCompilerConfig.h
 #define HAVE_UTGETOSTYPEFROMSTRING 0
 #define HAVE_VIRTUALALLOC 1
 #define HAVE_WGLGETPROCADDRESS 0
@@ -439,10 +443,15 @@
 #define HAVE_VAAPI_DRM 0
 #define HAVE_VAAPI_X11 0
 #define HAVE_VDPAU_X11 0
-#define HAVE_PTHREADS 0
 #define HAVE_OS2THREADS 0
+#ifdef _MSC_VER
+# define HAVE_PTHREADS 0
+# define HAVE_W32THREADS 1
+#else
+# define HAVE_PTHREADS 1
+# define HAVE_W32THREADS 0
+#endif // _MSC_VER
 
-#define HAVE_W32THREADS 1
 #define HAVE_AS_ARCH_DIRECTIVE 0
 
 #define HAVE_AS_DN_DIRECTIVE 0
@@ -484,7 +493,7 @@
 #define HAVE_STRUCT_SOCKADDR_IN6 1
 #define HAVE_STRUCT_SOCKADDR_SA_LEN 0
 #define HAVE_STRUCT_SOCKADDR_STORAGE 1
-#define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 0
+//#define HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC 0// defined in GoTvCompilerConfig.h
 #define HAVE_STRUCT_V4L2_FRMIVALENUM_DISCRETE 0
 #define HAVE_ATOMICS_NATIVE 1
 #define HAVE_DOS_PATHS 1
@@ -710,7 +719,7 @@
 #define CONFIG_CRYSTALHD 0
 #define CONFIG_CUDA 0
 #define CONFIG_CUVID 0
-#define CONFIG_D3D11VA 1
+#define CONFIG_D3D11VA 0
 #define CONFIG_DXVA2 0
 #define CONFIG_FFNVCODEC 0
 #define CONFIG_NVDEC 0
@@ -2895,9 +2904,62 @@
 
 #define HAVE_MMX2 HAVE_MMXEXT
 #define av_always_inline GOTV_FORCE_INLINE
-#define av_const
+
+//#if AV_GCC_VERSION_AT_LEAST(2,6) || defined(__clang__)
+//#    define av_const __attribute__((const))
+//#else
+#    define av_const
+//#endif
+
 
 // replacement for libavutil/avconfig.h
 #define AV_HAVE_BIGENDIAN GOTV_ARCH_BIGENDIAN
 #define AV_HAVE_FAST_UNALIGNED 1
 #define AV_HAVE_INCOMPATIBLE_LIBAV_ABI 0
+
+#ifndef _IOWR
+#define _IOC_NRBITS 8
+#define _IOC_TYPEBITS 8
+#ifndef _IOC_SIZEBITS
+# define _IOC_SIZEBITS 14
+#endif
+#ifndef _IOC_DIRBITS
+# define _IOC_DIRBITS 2
+#endif
+#define _IOC_NRMASK ((1 << _IOC_NRBITS) - 1)
+#define _IOC_TYPEMASK ((1 << _IOC_TYPEBITS) - 1)
+#define _IOC_SIZEMASK ((1 << _IOC_SIZEBITS) - 1)
+#define _IOC_DIRMASK ((1 << _IOC_DIRBITS) - 1)
+#define _IOC_NRSHIFT 0
+#define _IOC_TYPESHIFT (_IOC_NRSHIFT + _IOC_NRBITS)
+#define _IOC_SIZESHIFT (_IOC_TYPESHIFT + _IOC_TYPEBITS)
+#define _IOC_DIRSHIFT (_IOC_SIZESHIFT + _IOC_SIZEBITS)
+#ifndef _IOC_NONE
+#define _IOC_NONE 0U
+#endif
+#ifndef _IOC_WRITE
+#define _IOC_WRITE 1U
+#endif
+#ifndef _IOC_READ
+#define _IOC_READ 2U
+#endif
+#define _IOC(dir,type,nr,size) (((dir) << _IOC_DIRSHIFT) | ((type) << _IOC_TYPESHIFT) | ((nr) << _IOC_NRSHIFT) | ((size) << _IOC_SIZESHIFT))
+#define _IOC_TYPECHECK(t) (sizeof(t))
+#define _IO(type,nr) _IOC(_IOC_NONE, (type), (nr), 0)
+#define _IOR(type,nr,size) _IOC(_IOC_READ, (type), (nr), (_IOC_TYPECHECK(size)))
+#define _IOW(type,nr,size) _IOC(_IOC_WRITE, (type), (nr), (_IOC_TYPECHECK(size)))
+#define _IOWR(type,nr,size) _IOC(_IOC_READ | _IOC_WRITE, (type), (nr), (_IOC_TYPECHECK(size)))
+#define _IOR_BAD(type,nr,size) _IOC(_IOC_READ, (type), (nr), sizeof(size))
+#define _IOW_BAD(type,nr,size) _IOC(_IOC_WRITE, (type), (nr), sizeof(size))
+#define _IOWR_BAD(type,nr,size) _IOC(_IOC_READ | _IOC_WRITE, (type), (nr), sizeof(size))
+#define _IOC_DIR(nr) (((nr) >> _IOC_DIRSHIFT) & _IOC_DIRMASK)
+#define _IOC_TYPE(nr) (((nr) >> _IOC_TYPESHIFT) & _IOC_TYPEMASK)
+#define _IOC_NR(nr) (((nr) >> _IOC_NRSHIFT) & _IOC_NRMASK)
+#define _IOC_SIZE(nr) (((nr) >> _IOC_SIZESHIFT) & _IOC_SIZEMASK)
+#define IOC_IN (_IOC_WRITE << _IOC_DIRSHIFT)
+#define IOC_OUT (_IOC_READ << _IOC_DIRSHIFT)
+#define IOC_INOUT ((_IOC_WRITE | _IOC_READ) << _IOC_DIRSHIFT)
+#define IOCSIZE_MASK (_IOC_SIZEMASK << _IOC_SIZESHIFT)
+#define IOCSIZE_SHIFT (_IOC_SIZESHIFT)
+#endif // _IOWR
+

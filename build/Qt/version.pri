@@ -1,5 +1,5 @@
 # keep it all lowercase to match program naming convention on *nix systems
-PROJECT_NAME = GoTvP2P
+PROJECT_NAME = gotvptop
 
 # Define version numbers here
 VER_MAJOR = 3

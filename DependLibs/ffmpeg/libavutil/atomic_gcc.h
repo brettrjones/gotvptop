@@ -37,13 +37,13 @@ static GOTV_INLINE void atomic_int_set_gcc(volatile int *ptr, int val)
 {
     *ptr = val;
     __sync_synchronize();
-#}
+}
 
 #define avpriv_atomic_int_add_and_fetch atomic_int_add_and_fetch_gcc
 static GOTV_INLINE int atomic_int_add_and_fetch_gcc(volatile int *ptr, int inc)
 {
     return __sync_add_and_fetch(ptr, inc);
-#
+}
 
 #define avpriv_atomic_ptr_cas atomic_ptr_cas_gcc
 static GOTV_INLINE void *atomic_ptr_cas_gcc(void * volatile *ptr,

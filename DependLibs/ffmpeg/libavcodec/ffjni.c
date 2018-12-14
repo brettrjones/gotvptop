@@ -20,7 +20,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#ifndef TARGET_OS_WINDOWS // has linux dependencies
+#ifdef TARGET_OS_ANDROID // has linux dependencies
 
 #include <jni.h>
 #include <libpthread/pthread.h>

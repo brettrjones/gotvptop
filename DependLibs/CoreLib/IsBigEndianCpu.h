@@ -3,9 +3,13 @@
 
 #include <CoreLib/config_corelib.h>
 #ifdef TARGET_OS_WINDOWS
-//#include <WinSock2.h>
+# include <WinSock2.h>
 #else
-#include <arpa/inet.h>
+# include <arpa/inet.h>
+# ifndef ntohl
+// some systems require netinet/in.h instead of arpa/inet.h
+#  include <netinet/in.h>
+# endif // ntohl
 #endif
 
 #define IsBigEndianCpu() ((ntohl(4L) == 4L) ? true : false)

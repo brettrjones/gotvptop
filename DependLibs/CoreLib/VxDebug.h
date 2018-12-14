@@ -15,6 +15,7 @@
 //============================================================================
 
 #include "VxDefs.h"
+#include <stdarg.h>
 
 #define LOG_NONE    (0x0000)
 #define LOG_VERBOSE (0x0001)

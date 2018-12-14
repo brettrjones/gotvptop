@@ -34,6 +34,8 @@
  * library.
  * As most functions here are used without checking return values,
  * only implement return values as necessary. */
+#include "config_ffmpeg.h"
+#ifdef TARGET_OS_WINDOWS
 
 #define WIN32_LEAN_AND_MEAN
 #include <WinSock2.h>
@@ -162,5 +164,5 @@ static GOTV_INLINE int pthread_cond_signal(pthread_cond_t *cond)
     WakeConditionVariable(cond);
     return 0;
 }
-
+#endif // TARGET_OS_WINDOWS
 #endif /* COMPAT_W32PTHREADS_H */

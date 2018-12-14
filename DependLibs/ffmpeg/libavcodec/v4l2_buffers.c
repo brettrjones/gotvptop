@@ -31,7 +31,7 @@
 #include <fcntl.h>
 #include <poll.h>
 #include "libavcodec/avcodec.h"
-#include "libavcodec/internal.h"
+#include "libavcodec/avcodec_internal.h"
 #include "v4l2_context.h"
 #include "v4l2_buffers.h"
 #include "v4l2_m2m.h"

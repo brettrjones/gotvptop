@@ -43,7 +43,9 @@
 #else
 # define PRIdS       "d"
 # define PRIuS       "u"
-# define PRId64       "lld"
+# ifndef PRId64
+#  define PRId64       "lld"
+# endif // PRId64
 #endif // TARGET_OS_WINDOWS
 
 #include <stdio.h>

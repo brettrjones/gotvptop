@@ -99,7 +99,7 @@ VBI_BEGIN_DECLS
 	typedef void
 		vbi_unlock_fn( void *			user_data );
 #endif
-
+/*
 	typedef enum {
 
 		VBI_LOG_ERROR = 1 << 3,
@@ -116,6 +116,7 @@ VBI_BEGIN_DECLS
 							 const char *		context,
 							 const char *		message,
 							 void *			user_data );
+*/
 
 	extern vbi_log_fn		vbi_log_on_stderr;
 

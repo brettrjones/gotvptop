@@ -67,12 +67,6 @@
 #    define av_pure
 #endif
 
-#if AV_GCC_VERSION_AT_LEAST(2,6) || defined(__clang__)
-#    define av_const __attribute__((const))
-#else
-#    define av_const
-#endif
-
 #if AV_GCC_VERSION_AT_LEAST(4,3) || defined(__clang__)
 #    define av_cold __attribute__((cold))
 #else

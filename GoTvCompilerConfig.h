@@ -5,6 +5,8 @@
 
 #include "GoTvCpuArchDefines.h"
 
+#include <sys/types.h> // for size_t in linux
+
 #ifdef _UNICODE
 //echo configuration error..use Multibyte Character Set instead of _UNICODE
 #endif // _UNICODE
@@ -93,11 +95,11 @@
 that the values passed as arguments n, ..., m must be non-NULL pointers.
 n = 1 stands for the first argument, n = 2 for the second argument etc.  */
 #ifndef GOTV_ARG_NONNULL
-# if (__GNUC__ == 3 && __GNUC_MINOR__ >= 3) || __GNUC__ > 3
-#  define GOTV_ARG_NONNULL(params) __attribute__ ((__nonnull__ params))
-# else
+//# if (__GNUC__ == 3 && __GNUC_MINOR__ >= 3) || __GNUC__ > 3
+//#  define GOTV_ARG_NONNULL(params) __attribute__ ((__nonnull__ params))
+//# else
 #  define GOTV_ARG_NONNULL(params)
-# endif
+//# endif
 #endif
 
 #if (__GNUC__ > 4 || (__GNUC__ == 4 && (__GNUC_MINOR__ >= 5)))
@@ -613,6 +615,7 @@ typedef struct _stat64 structStatOsDef;
 #include <inttypes.h>
 #include <stdbool.h> 
 #include <sys/stat.h>
+#include <stddef.h> // required for wchar_t in linux
 
 uint64_t GetTickCount64(); // implemented in VxFunctionsMissingInPosix.cpp
 
@@ -779,7 +782,9 @@ typedef struct _TIME_ZONE_INFORMATION {
 #define _fdopen						fdopen
 #define _vsnprintf					vsnprintf
 #define _stricmp					strcasecmp
-#define stricmp						strcasecmp
+#ifdef TARGET_OS_ANDROID
+# define stricmp						strcasecmp
+#endif // TARGET_OS_ANDROID
 #define strcmpi						strcasecmp
 #define strnicmp					strncasecmp
 #define _atoi64(x)					atoll(x)
@@ -1030,6 +1035,7 @@ void VxSleep( int iMilliSec );
 # endif // _MSC_VER
 
 #if defined( _MSC_VER ) || defined( TARGET_OS_WINDOWS )
+#if defined( _MSC_VER )
 # include <io.h>
 typedef int          pid_t;
 typedef uint32_t          uid_t;
@@ -1040,6 +1046,8 @@ typedef uint8_t			  __u8;
 typedef uint16_t          __u16;
 typedef uint32_t          __u32;
 typedef uint64_t          __u64;
+#endif // defined( _MSC_VER )
+
 #else
 # include <sys/types.h> /* For pid_t */
 # include <inttypes.h>
@@ -1063,7 +1071,7 @@ typedef int64_t              time64_t;
 #ifdef _MSC_VER
 # define HAVE_ARPA_INET_H		9
 #else
-# define HAVE_ASM_TYPES_H		1
+# define HAVE_ARPA_INET_H		1
 #endif // _MSC_VER
 
 # define HAVE_ASM_TYPES_H		0
@@ -1294,15 +1302,17 @@ typedef int64_t              time64_t;
 #ifdef _MSC_VER
 /* Define to 1 if you have the <sys/mman.h> header file. */
 # define HAVE_SYS_MMAN_H			0
+/* Define to 1 if you have the <sys/select.h> header file. */
+# define HAVE_SYS_SELECT_H			0
 #else
 /* Define to 1 if you have the <sys/mman.h> header file. */
 #define HAVE_SYS_MMAN_H				1
+# define HAVE_SYS_SELECT_H			1
 #endif // _MSC_VER
 
 /* Define to 1 if you have the <sys/param.h> header file. */
 #define HAVE_SYS_PARAM_H			0
-/* Define to 1 if you have the <sys/select.h> header file. */
-#define HAVE_SYS_SELECT_H			0
+
 /* Define to 1 if you have the <sys/socket.h> header file. */
 #define HAVE_SYS_SOCKET_H			0
 /* Define to 1 if you have the <sys/stat.h> header file. */

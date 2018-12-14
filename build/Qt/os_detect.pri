@@ -10,7 +10,7 @@ win32 {
     DEFINES += _WIN32
 }
 
-linux:!android {
+unix:!android {
     DEFINES += TARGET_OS_LINUX
 }
 

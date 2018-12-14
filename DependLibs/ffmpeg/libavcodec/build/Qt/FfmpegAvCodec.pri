@@ -1,24 +1,12 @@
 HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
-	$$PWD/../../../../../GoTvCompilerEnviromentDefines.h \
-	$$PWD/../../../../../GoTvConfig.h \
-	$$PWD/../../../../../GoTvConfigAndroid.h \
-	$$PWD/../../../../../GoTvConfigLinux.h \
-	$$PWD/../../../../../GoTvConfigWindows.h \
 	$$PWD/../../../../../GoTvCpuArchDefines.h \
-	$$PWD/../../../../../GoTvCpuFeatureDefines.h \
 	$$PWD/../../../../../GoTvDependLibrariesConfig.h \
-	$$PWD/../../../../../GoTvFeaturesConfig.h \
-	$$PWD/../../../../CoreLib/CompileConfig.h \
-	$$PWD/../../../ffmpeg_config.h \
-	$$PWD/../../../ffmpeg_config_android.h \
-	$$PWD/../../../ffmpeg_config_linux.h \
-	$$PWD/../../../ffmpeg_config_windows.h \
+	$$PWD/../../../config_ffmpeg.h \
 	$$PWD/../../a64colors.h \
 	$$PWD/../../a64tables.h \
 	$$PWD/../../aac.h \
 	$$PWD/../../aac_ac3_parser.h \
 	$$PWD/../../aac_defines.h \
-	$$PWD/../../aacadtsdec.h \
 	$$PWD/../../aaccoder_trellis.h \
 	$$PWD/../../aaccoder_twoloop.h \
 	$$PWD/../../aacdectab.h \
@@ -71,7 +59,6 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../atrac3plus.h \
 	$$PWD/../../atrac3plus_data.h \
 	$$PWD/../../audio_frame_queue.h \
-	$$PWD/../../audioconvert.h \
 	$$PWD/../../audiodsp.h \
 	$$PWD/../../avcodec.h \
 	$$PWD/../../avcodec_internal.h \
@@ -109,6 +96,7 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../dca_lbr.h \
 	$$PWD/../../dca_syncwords.h \
 	$$PWD/../../dca_xll.h \
+	$$PWD/../../dcaadpcm.h \
 	$$PWD/../../dcadata.h \
 	$$PWD/../../dcadct.h \
 	$$PWD/../../dcadec.h \
@@ -119,13 +107,16 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../dct.h \
 	$$PWD/../../dct32.h \
 	$$PWD/../../dctref.h \
+	$$PWD/../../decode.h \
 	$$PWD/../../dirac.h \
 	$$PWD/../../dirac_arith.h \
 	$$PWD/../../dirac_dwt.h \
+	$$PWD/../../dirac_vlc.h \
 	$$PWD/../../diracdsp.h \
 	$$PWD/../../diractab.h \
 	$$PWD/../../dnxhddata.h \
 	$$PWD/../../dnxhdenc.h \
+	$$PWD/../../dolby_e.h \
 	$$PWD/../../dsd.h \
 	$$PWD/../../dsd_tablegen.h \
 	$$PWD/../../dv.h \
@@ -136,8 +127,8 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../dvaudio.h \
 	$$PWD/../../dvbtxt.h \
 	$$PWD/../../dvdata.h \
-	$$PWD/../../dxva2.h \
-	$$PWD/../../dxva2_internal.h \
+#	$$PWD/../../dxva2.h \
+#	$$PWD/../../dxva2_internal.h \
 	$$PWD/../../eac3_data.h \
 	$$PWD/../../eac3enc.h \
 	$$PWD/../../eaidct.h \
@@ -146,6 +137,7 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../error_resilience.h \
 	$$PWD/../../evrcdata.h \
 	$$PWD/../../exif.h \
+	$$PWD/../../exrdsp.h \
 	$$PWD/../../faandct.h \
 	$$PWD/../../faanidct.h \
 	$$PWD/../../faxcompr.h \
@@ -155,6 +147,7 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../fft.h \
 	$$PWD/../../fft_table.h \
 	$$PWD/../../ffv1.h \
+	$$PWD/../../fits.h \
 	$$PWD/../../flac.h \
 	$$PWD/../../flacdata.h \
 	$$PWD/../../flacdsp.h \
@@ -181,15 +174,22 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../h2645_parse.h \
 	$$PWD/../../h264_mvpred.h \
 	$$PWD/../../h264_parse.h \
+	$$PWD/../../h264_ps.h \
 	$$PWD/../../h264_sei.h \
 	$$PWD/../../h264chroma.h \
 	$$PWD/../../h264data.h \
+	$$PWD/../../h264dec.h \
 	$$PWD/../../h264dsp.h \
 	$$PWD/../../h264idct.h \
 	$$PWD/../../h264pred.h \
 	$$PWD/../../h264qpel.h \
 	$$PWD/../../hap.h \
 	$$PWD/../../hevc.h \
+	$$PWD/../../hevc_data.h \
+	$$PWD/../../hevc_parse.h \
+	$$PWD/../../hevc_ps.h \
+	$$PWD/../../hevc_sei.h \
+	$$PWD/../../hevcdec.h \
 	$$PWD/../../hevcdsp.h \
 	$$PWD/../../hevcpred.h \
 	$$PWD/../../hpeldsp.h \
@@ -202,6 +202,7 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../huffyuv.h \
 	$$PWD/../../huffyuvdsp.h \
 	$$PWD/../../huffyuvencdsp.h \
+	$$PWD/../../hwaccel.h \
 	$$PWD/../../idctdsp.h \
 	$$PWD/../../iirfilter.h \
 	$$PWD/../../imcdata.h \
@@ -226,6 +227,7 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../kbdwin.h \
 	$$PWD/../../lagarithrac.h \
 	$$PWD/../../lcl.h \
+	$$PWD/../../libopenh264.h \
 	$$PWD/../../libopus.h \
 	$$PWD/../../libschroedinger.h \
 	$$PWD/../../libvpx.h \
@@ -233,23 +235,30 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../libxvid.h \
 	$$PWD/../../lossless_audiodsp.h \
 	$$PWD/../../lossless_videodsp.h \
+	$$PWD/../../lossless_videoencdsp.h \
 	$$PWD/../../lpc.h \
 	$$PWD/../../lsp.h \
 	$$PWD/../../lzf.h \
 	$$PWD/../../lzw.h \
 	$$PWD/../../mathops.h \
+	$$PWD/../../mdct15.h \
 	$$PWD/../../me_cmp.h \
+	$$PWD/../../mediacodec.h \
+	$$PWD/../../mediacodec_surface.h \
 	$$PWD/../../mediacodec_sw_buffer.h \
 	$$PWD/../../mediacodec_wrapper.h \
 	$$PWD/../../mediacodecdec.h \
+	$$PWD/../../mediacodecdec_common.h \
 	$$PWD/../../metasound_data.h \
 	$$PWD/../../mjpeg.h \
 	$$PWD/../../mjpegdec.h \
 	$$PWD/../../mjpegenc.h \
 	$$PWD/../../mjpegenc_common.h \
+	$$PWD/../../mjpegenc_huffman.h \
 	$$PWD/../../mlp.h \
 	$$PWD/../../mlp_parser.h \
 	$$PWD/../../mlpdsp.h \
+	$$PWD/../../mlz.h \
 	$$PWD/../../motion_est.h \
 	$$PWD/../../motionpixels_tablegen.h \
 	$$PWD/../../motionpixels_tables.h \
@@ -293,6 +302,13 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../on2avcdata.h \
 	$$PWD/../../options_table.h \
 	$$PWD/../../opus.h \
+	$$PWD/../../opus_celt.h \
+	$$PWD/../../opus_pvq.h \
+	$$PWD/../../opus_rc.h \
+	$$PWD/../../opusenc.h \
+	$$PWD/../../opusenc_psy.h \
+	$$PWD/../../opusenc_utils.h \
+	$$PWD/../../opustab.h \
 	$$PWD/../../paf.h \
 	$$PWD/../../parser.h \
 	$$PWD/../../pcm_tablegen.h \
@@ -378,14 +394,21 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../tscc2data.h \
 	$$PWD/../../ttadata.h \
 	$$PWD/../../ttadsp.h \
+	$$PWD/../../ttaencdsp.h \
 	$$PWD/../../twinvq.h \
 	$$PWD/../../twinvq_data.h \
 	$$PWD/../../ulti_cb.h \
 	$$PWD/../../unary.h \
 	$$PWD/../../utvideo.h \
+	$$PWD/../../utvideodsp.h \
 	$$PWD/../../v210dec.h \
 	$$PWD/../../v210enc.h \
+	$$PWD/../../v4l2_buffers.h \
+	$$PWD/../../v4l2_context.h \
+	$$PWD/../../v4l2_fmt.h \
+	$$PWD/../../v4l2_m2m.h \
 	$$PWD/../../vaapi.h \
+	$$PWD/../../vaapi_decode.h \
 	$$PWD/../../vaapi_encode.h \
 	$$PWD/../../vaapi_encode_h26x.h \
 	$$PWD/../../vaapi_internal.h \
@@ -422,7 +445,9 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../vp8dsp.h \
 	$$PWD/../../vp9.h \
 	$$PWD/../../vp9data.h \
+	$$PWD/../../vp9dec.h \
 	$$PWD/../../vp9dsp.h \
+	$$PWD/../../vp9shared.h \
 	$$PWD/../../wavpack.h \
 	$$PWD/../../wavpackenc.h \
 	$$PWD/../../wma.h \
@@ -434,22 +459,6 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../wmv2.h \
 	$$PWD/../../wmv2data.h \
 	$$PWD/../../wmv2dsp.h \
-	$$PWD/../../x86/cabac.h \
-	$$PWD/../../x86/constants.h \
-	$$PWD/../../x86/fdct.h \
-	$$PWD/../../x86/fft.h \
-	$$PWD/../../x86/fpel.h \
-	$$PWD/../../x86/h264_i386.h \
-	$$PWD/../../x86/hevcdsp.h \
-	$$PWD/../../x86/hpeldsp.h \
-	$$PWD/../../x86/idctdsp.h \
-	$$PWD/../../x86/inline_asm.h \
-	$$PWD/../../x86/mathops.h \
-	$$PWD/../../x86/simple_idct.h \
-	$$PWD/../../x86/vc1dsp.h \
-	$$PWD/../../x86/vp56_arith.h \
-	$$PWD/../../x86/vp9dsp_init.h \
-	$$PWD/../../x86/xvididct.h \
 	$$PWD/../../xface.h \
 	$$PWD/../../xiph.h \
 	$$PWD/../../xvididct.h \
@@ -457,7 +466,8 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../xvmc_internal.h \
 	$$PWD/../../xwd.h
 
-SOURCES += 	$$PWD/../../012v.c \
+SOURCES += 	$$PWD/../../../libavfilter/lavfutils.c \
+	$$PWD/../../012v.c \
 	$$PWD/../../4xm.c \
 	$$PWD/../../8bps.c \
 	$$PWD/../../8svx.c \
@@ -465,7 +475,6 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../aac_ac3_parser.c \
 	$$PWD/../../aac_adtstoasc_bsf.c \
 	$$PWD/../../aac_parser.c \
-	$$PWD/../../aacadtsdec.c \
 	$$PWD/../../aaccoder.c \
 	$$PWD/../../aacdec.c \
 	$$PWD/../../aacdec_fixed.c \
@@ -512,6 +521,8 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../adpcm.c \
 	$$PWD/../../adpcm_data.c \
 	$$PWD/../../adpcmenc.c \
+	$$PWD/../../adts_header.c \
+	$$PWD/../../adts_parser.c \
 	$$PWD/../../adx.c \
 	$$PWD/../../adx_parser.c \
 	$$PWD/../../adxdec.c \
@@ -530,6 +541,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../anm.c \
 	$$PWD/../../ansi.c \
 	$$PWD/../../apedec.c \
+	$$PWD/../../aptx.c \
 	$$PWD/../../ass.c \
 	$$PWD/../../ass_split.c \
 	$$PWD/../../assdec.c \
@@ -544,7 +556,6 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../atrac3plusdec.c \
 	$$PWD/../../atrac3plusdsp.c \
 	$$PWD/../../audio_frame_queue.c \
-	$$PWD/../../audioconvert.c \
 	$$PWD/../../audiodsp.c \
 	$$PWD/../../audiotoolboxdec.c \
 	$$PWD/../../audiotoolboxenc.c \
@@ -565,6 +576,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../binkdsp.c \
 	$$PWD/../../bintext.c \
 	$$PWD/../../bit_depth_template.c \
+	$$PWD/../../bitpacked.c \
 	$$PWD/../../bitstream.c \
 	$$PWD/../../bitstream_filter.c \
 	$$PWD/../../bitstream_filters.c \
@@ -602,12 +614,15 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../chomp_bsf.c \
 	$$PWD/../../cinepak.c \
 	$$PWD/../../cinepakenc.c \
+	$$PWD/../../clearvideo.c \
 	$$PWD/../../cljrdec.c \
 	$$PWD/../../cljrenc.c \
 	$$PWD/../../cllc.c \
 	$$PWD/../../cngdec.c \
 	$$PWD/../../cngenc.c \
+	$$PWD/../../codec2utils.c \
 	$$PWD/../../codec_desc.c \
+	$$PWD/../../codec_list.c \
 	$$PWD/../../cook.c \
 	$$PWD/../../cook_parser.c \
 	$$PWD/../../cos_tablegen.c \
@@ -624,6 +639,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../dca_lbr.c \
 	$$PWD/../../dca_parser.c \
 	$$PWD/../../dca_xll.c \
+	$$PWD/../../dcaadpcm.c \
 	$$PWD/../../dcadata.c \
 	$$PWD/../../dcadct.c \
 	$$PWD/../../dcadec.c \
@@ -636,12 +652,14 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../dct32_template.c \
 	$$PWD/../../dctref.c \
 	$$PWD/../../dds.c \
+	$$PWD/../../decode.c \
 	$$PWD/../../dfa.c \
 	$$PWD/../../dirac.c \
 	$$PWD/../../dirac_arith.c \
 	$$PWD/../../dirac_dwt.c \
 	$$PWD/../../dirac_dwt_template.c \
 	$$PWD/../../dirac_parser.c \
+	$$PWD/../../dirac_vlc.c \
 	$$PWD/../../diracdec.c \
 	$$PWD/../../diracdsp.c \
 	$$PWD/../../diractab.c \
@@ -649,6 +667,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../dnxhddata.c \
 	$$PWD/../../dnxhddec.c \
 	$$PWD/../../dnxhdenc.c \
+	$$PWD/../../dolby_e.c \
 	$$PWD/../../dpcm.c \
 	$$PWD/../../dpx.c \
 	$$PWD/../../dpx_parser.c \
@@ -678,12 +697,12 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../dxa.c \
 	$$PWD/../../dxtory.c \
 	$$PWD/../../dxv.c \
-	$$PWD/../../dxva2.c \
-	$$PWD/../../dxva2_h264.c \
-	$$PWD/../../dxva2_hevc.c \
-	$$PWD/../../dxva2_mpeg2.c \
-	$$PWD/../../dxva2_vc1.c \
-	$$PWD/../../dxva2_vp9.c \
+#	$$PWD/../../dxva2.c \
+#	$$PWD/../../dxva2_h264.c \
+#	$$PWD/../../dxva2_hevc.c \
+#	$$PWD/../../dxva2_mpeg2.c \
+#	$$PWD/../../dxva2_vc1.c \
+#	$$PWD/../../dxva2_vp9.c \
 	$$PWD/../../eac3_data.c \
 	$$PWD/../../eac3dec.c \
 	$$PWD/../../eac3enc.c \
@@ -695,12 +714,15 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../eatqi.c \
 	$$PWD/../../elbg.c \
 	$$PWD/../../elsdec.c \
+	$$PWD/../../encode.c \
 	$$PWD/../../error_resilience.c \
 	$$PWD/../../escape124.c \
 	$$PWD/../../escape130.c \
 	$$PWD/../../evrcdec.c \
 	$$PWD/../../exif.c \
 	$$PWD/../../exr.c \
+	$$PWD/../../exrdsp.c \
+	$$PWD/../../extract_extradata_bsf.c \
 	$$PWD/../../faandct.c \
 	$$PWD/../../faanidct.c \
 	$$PWD/../../faxcompr.c \
@@ -712,11 +734,17 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../fft_init_table.c \
 	$$PWD/../../fft_template.c \
 	$$PWD/../../ffv1.c \
+	$$PWD/../../ffv1_template.c \
 	$$PWD/../../ffv1dec.c \
+	$$PWD/../../ffv1dec_template.c \
 	$$PWD/../../ffv1enc.c \
+	$$PWD/../../ffv1enc_template.c \
 	$$PWD/../../ffwavesynth.c \
 	$$PWD/../../fic.c \
 	$$PWD/../../file_open.c \
+	$$PWD/../../fits.c \
+	$$PWD/../../fitsdec.c \
+	$$PWD/../../fitsenc.c \
 	$$PWD/../../flac.c \
 	$$PWD/../../flac_parser.c \
 	$$PWD/../../flacdata.c \
@@ -732,6 +760,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../flvdec.c \
 	$$PWD/../../flvenc.c \
 	$$PWD/../../fmtconvert.c \
+	$$PWD/../../fmvc.c \
 	$$PWD/../../frame_thread_encoder.c \
 	$$PWD/../../fraps.c \
 	$$PWD/../../frwu.c \
@@ -747,6 +776,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../g729_parser.c \
 	$$PWD/../../g729dec.c \
 	$$PWD/../../g729postfilter.c \
+	$$PWD/../../gdv.c \
 	$$PWD/../../gif.c \
 	$$PWD/../../gifdec.c \
 	$$PWD/../../golomb.c \
@@ -764,7 +794,6 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../h263data.c \
 	$$PWD/../../h263dec.c \
 	$$PWD/../../h263dsp.c \
-	$$PWD/../../h264.c \
 	$$PWD/../../h2645_parse.c \
 	$$PWD/../../h264_cabac.c \
 	$$PWD/../../h264_cavlc.c \
@@ -785,6 +814,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../h264chroma.c \
 	$$PWD/../../h264chroma_template.c \
 	$$PWD/../../h264data.c \
+	$$PWD/../../h264dec.c \
 	$$PWD/../../h264dsp.c \
 	$$PWD/../../h264dsp_template.c \
 	$$PWD/../../h264idct.c \
@@ -796,17 +826,18 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../hap.c \
 	$$PWD/../../hapdec.c \
 	$$PWD/../../hapenc.c \
-	$$PWD/../../hevc.c \
 	$$PWD/../../hevc_cabac.c \
 	$$PWD/../../hevc_data.c \
 	$$PWD/../../hevc_filter.c \
 	$$PWD/../../hevc_mp4toannexb_bsf.c \
 	$$PWD/../../hevc_mvs.c \
+	$$PWD/../../hevc_parse.c \
 	$$PWD/../../hevc_parser.c \
 	$$PWD/../../hevc_ps.c \
 	$$PWD/../../hevc_ps_enc.c \
 	$$PWD/../../hevc_refs.c \
 	$$PWD/../../hevc_sei.c \
+	$$PWD/../../hevcdec.c \
 	$$PWD/../../hevcdsp.c \
 	$$PWD/../../hevcdsp_template.c \
 	$$PWD/../../hevcpred.c \
@@ -882,12 +913,15 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../libkvazaar.c \
 	$$PWD/../../libmp3lame.c \
 	$$PWD/../../libopencore-amr.c \
+	$$PWD/../../libopenh264.c \
+	$$PWD/../../libopenh264dec.c \
 	$$PWD/../../libopenh264enc.c \
 	$$PWD/../../libopenjpegdec.c \
 	$$PWD/../../libopenjpegenc.c \
 	$$PWD/../../libopus.c \
 	$$PWD/../../libopusdec.c \
 	$$PWD/../../libopusenc.c \
+	$$PWD/../../librsvgdec.c \
 	$$PWD/../../libschroedinger.c \
 	$$PWD/../../libschroedingerdec.c \
 	$$PWD/../../libschroedingerenc.c \
@@ -917,6 +951,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../log2_tab.c \
 	$$PWD/../../lossless_audiodsp.c \
 	$$PWD/../../lossless_videodsp.c \
+	$$PWD/../../lossless_videoencdsp.c \
 	$$PWD/../../lpc.c \
 	$$PWD/../../lsp.c \
 	$$PWD/../../lzf.c \
@@ -925,16 +960,21 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../m101.c \
 	$$PWD/../../mace.c \
 	$$PWD/../../magicyuv.c \
+	$$PWD/../../magicyuvenc.c \
 	$$PWD/../../mathtables.c \
+	$$PWD/../../mdct15.c \
 	$$PWD/../../mdct_fixed.c \
 	$$PWD/../../mdct_fixed_32.c \
 	$$PWD/../../mdct_float.c \
 	$$PWD/../../mdct_template.c \
 	$$PWD/../../mdec.c \
 	$$PWD/../../me_cmp.c \
+	$$PWD/../../mediacodec.c \
+	$$PWD/../../mediacodec_surface.c \
 	$$PWD/../../mediacodec_sw_buffer.c \
 	$$PWD/../../mediacodec_wrapper.c \
 	$$PWD/../../mediacodecdec.c \
+	$$PWD/../../mediacodecdec_common.c \
 	$$PWD/../../mediacodecdec_h264.c \
 	$$PWD/../../metasound.c \
 	$$PWD/../../metasound_data.c \
@@ -947,10 +987,13 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../mjpegdec.c \
 	$$PWD/../../mjpegenc.c \
 	$$PWD/../../mjpegenc_common.c \
+	$$PWD/../../mjpegenc_huffman.c \
 	$$PWD/../../mlp.c \
 	$$PWD/../../mlp_parser.c \
 	$$PWD/../../mlpdec.c \
 	$$PWD/../../mlpdsp.c \
+	$$PWD/../../mlpenc.c \
+	$$PWD/../../mlz.c \
 	$$PWD/../../mmaldec.c \
 	$$PWD/../../mmvideo.c \
 	$$PWD/../../motion_est.c \
@@ -968,6 +1011,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../mpeg12data.c \
 	$$PWD/../../mpeg12dec.c \
 	$$PWD/../../mpeg12enc.c \
+	$$PWD/../../mpeg12framerate.c \
 	$$PWD/../../mpeg4_unpack_bframes_bsf.c \
 	$$PWD/../../mpeg4audio.c \
 	$$PWD/../../mpeg4video.c \
@@ -1005,6 +1049,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../mqc.c \
 	$$PWD/../../mqcdec.c \
 	$$PWD/../../mqcenc.c \
+	$$PWD/../../mscc.c \
 	$$PWD/../../msgsmdec.c \
 	$$PWD/../../msmpeg4.c \
 	$$PWD/../../msmpeg4data.c \
@@ -1027,6 +1072,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../nellymoserdec.c \
 	$$PWD/../../nellymoserenc.c \
 	$$PWD/../../noise_bsf.c \
+	$$PWD/../../null_bsf.c \
 	$$PWD/../../nuv.c \
 	$$PWD/../../nvenc.c \
 	$$PWD/../../nvenc_h264.c \
@@ -1038,8 +1084,13 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../opus.c \
 	$$PWD/../../opus_celt.c \
 	$$PWD/../../opus_parser.c \
+	$$PWD/../../opus_pvq.c \
+	$$PWD/../../opus_rc.c \
 	$$PWD/../../opus_silk.c \
 	$$PWD/../../opusdec.c \
+	$$PWD/../../opusenc.c \
+	$$PWD/../../opusenc_psy.c \
+	$$PWD/../../opustab.c \
 	$$PWD/../../pafaudio.c \
 	$$PWD/../../pafvideo.c \
 	$$PWD/../../pamenc.c \
@@ -1054,6 +1105,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../pgssubdec.c \
 	$$PWD/../../pictordec.c \
 	$$PWD/../../pixblockdsp.c \
+	$$PWD/../../pixlet.c \
 	$$PWD/../../png.c \
 	$$PWD/../../png_parser.c \
 	$$PWD/../../pngdec.c \
@@ -1070,6 +1122,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../proresdsp.c \
 	$$PWD/../../proresenc_anatoliy.c \
 	$$PWD/../../proresenc_kostya.c \
+	$$PWD/../../psd.c \
 	$$PWD/../../psymodel.c \
 	$$PWD/../../pthread.c \
 	$$PWD/../../pthread_frame.c \
@@ -1078,6 +1131,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../qcelpdec.c \
 	$$PWD/../../qdm2.c \
 	$$PWD/../../qdm2_tablegen.c \
+	$$PWD/../../qdmc.c \
 	$$PWD/../../qdrw.c \
 	$$PWD/../../qpeg.c \
 	$$PWD/../../qpel_template.c \
@@ -1087,6 +1141,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../qsvdec.c \
 	$$PWD/../../qsvdec_h2645.c \
 	$$PWD/../../qsvdec_mpeg2.c \
+	$$PWD/../../qsvdec_other.c \
 	$$PWD/../../qsvdec_vc1.c \
 	$$PWD/../../qsvenc.c \
 	$$PWD/../../qsvenc_h264.c \
@@ -1109,9 +1164,8 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../rdft.c \
 	$$PWD/../../realtextdec.c \
 	$$PWD/../../remove_extradata_bsf.c \
-	$$PWD/../../resample.c \
-	$$PWD/../../resample2.c \
 	$$PWD/../../reverse.c \
+	$$PWD/../../rkmppdec.c \
 	$$PWD/../../rl.c \
 	$$PWD/../../rl2.c \
 	$$PWD/../../rle.c \
@@ -1136,9 +1190,17 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../s302menc.c \
 	$$PWD/../../samidec.c \
 	$$PWD/../../sanm.c \
+	$$PWD/../../sbc.c \
+	$$PWD/../../sbc_parser.c \
+	$$PWD/../../sbcdec.c \
+	$$PWD/../../sbcdec_data.c \
+	$$PWD/../../sbcdsp.c \
+	$$PWD/../../sbcdsp_data.c \
+	$$PWD/../../sbcenc.c \
 	$$PWD/../../sbrdsp.c \
 	$$PWD/../../sbrdsp_fixed.c \
 	$$PWD/../../sbrdsp_template.c \
+	$$PWD/../../scpr.c \
 	$$PWD/../../screenpresso.c \
 	$$PWD/../../sgidec.c \
 	$$PWD/../../sgienc.c \
@@ -1154,6 +1216,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../sinewin_tablegen_template.c \
 	$$PWD/../../sipr.c \
 	$$PWD/../../sipr16k.c \
+	$$PWD/../../sipr_parser.c \
 	$$PWD/../../smacker.c \
 	$$PWD/../../smc.c \
 	$$PWD/../../smvjpegdec.c \
@@ -1164,6 +1227,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../snowenc.c \
 	$$PWD/../../sonic.c \
 	$$PWD/../../sp5xdec.c \
+	$$PWD/../../speedhq.c \
 	$$PWD/../../srtdec.c \
 	$$PWD/../../srtenc.c \
 	$$PWD/../../startcode.c \
@@ -1204,6 +1268,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../ttadata.c \
 	$$PWD/../../ttadsp.c \
 	$$PWD/../../ttaenc.c \
+	$$PWD/../../ttaencdsp.c \
 	$$PWD/../../twinvq.c \
 	$$PWD/../../twinvqdec.c \
 	$$PWD/../../txd.c \
@@ -1211,6 +1276,7 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../utils.c \
 	$$PWD/../../utvideo.c \
 	$$PWD/../../utvideodec.c \
+	$$PWD/../../utvideodsp.c \
 	$$PWD/../../utvideoenc.c \
 	$$PWD/../../v210dec.c \
 	$$PWD/../../v210enc.c \
@@ -1221,12 +1287,22 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../v408enc.c \
 	$$PWD/../../v410dec.c \
 	$$PWD/../../v410enc.c \
+	$$PWD/../../v4l2_buffers.c \
+	$$PWD/../../v4l2_context.c \
+	$$PWD/../../v4l2_fmt.c \
+	$$PWD/../../v4l2_m2m.c \
+	$$PWD/../../v4l2_m2m_dec.c \
+	$$PWD/../../v4l2_m2m_enc.c \
 	$$PWD/../../vaapi.c \
+	$$PWD/../../vaapi_decode.c \
 	$$PWD/../../vaapi_encode.c \
 	$$PWD/../../vaapi_encode_h264.c \
 	$$PWD/../../vaapi_encode_h265.c \
 	$$PWD/../../vaapi_encode_h26x.c \
 	$$PWD/../../vaapi_encode_mjpeg.c \
+	$$PWD/../../vaapi_encode_mpeg2.c \
+	$$PWD/../../vaapi_encode_vp8.c \
+	$$PWD/../../vaapi_encode_vp9.c \
 	$$PWD/../../vaapi_h264.c \
 	$$PWD/../../vaapi_hevc.c \
 	$$PWD/../../vaapi_mpeg2.c \
@@ -1286,12 +1362,20 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../vp9.c \
 	$$PWD/../../vp9_mc_template.c \
 	$$PWD/../../vp9_parser.c \
+	$$PWD/../../vp9_raw_reorder_bsf.c \
 	$$PWD/../../vp9_superframe_bsf.c \
+	$$PWD/../../vp9_superframe_split_bsf.c \
+	$$PWD/../../vp9block.c \
+	$$PWD/../../vp9data.c \
 	$$PWD/../../vp9dsp.c \
 	$$PWD/../../vp9dsp_10bpp.c \
 	$$PWD/../../vp9dsp_12bpp.c \
 	$$PWD/../../vp9dsp_8bpp.c \
 	$$PWD/../../vp9dsp_template.c \
+	$$PWD/../../vp9lpf.c \
+	$$PWD/../../vp9mvs.c \
+	$$PWD/../../vp9prob.c \
+	$$PWD/../../vp9recon.c \
 	$$PWD/../../vqavideo.c \
 	$$PWD/../../wavpack.c \
 	$$PWD/../../wavpackenc.c \
@@ -1314,78 +1398,6 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../wnv1.c \
 	$$PWD/../../wrapped_avframe.c \
 	$$PWD/../../ws-snd1.c \
-	$$PWD/../../x86/aacpsdsp_init.c \
-	$$PWD/../../x86/ac3dsp_init.c \
-	$$PWD/../../x86/alacdsp_init.c \
-	$$PWD/../../x86/audiodsp_init.c \
-	$$PWD/../../x86/blockdsp_init.c \
-	$$PWD/../../x86/bswapdsp_init.c \
-	$$PWD/../../x86/cavsdsp_x86.c \
-	$$PWD/../../x86/constants.c \
-	$$PWD/../../x86/dcadsp_init.c \
-	$$PWD/../../x86/dct_init.c \
-	$$PWD/../../x86/dirac_dwt_init.c \
-	$$PWD/../../x86/diracdsp_init.c \
-	$$PWD/../../x86/dnxhdenc_init.c \
-	$$PWD/../../x86/fdct.c \
-	$$PWD/../../x86/fdctdsp_init.c \
-	$$PWD/../../x86/fft_init.c \
-	$$PWD/../../x86/flacdsp_init.c \
-	$$PWD/../../x86/fmtconvert_init.c \
-	$$PWD/../../x86/g722dsp_init.c \
-	$$PWD/../../x86/h263dsp_init.c \
-	$$PWD/../../x86/h264_intrapred_init.c \
-	$$PWD/../../x86/h264_qpel.c \
-	$$PWD/../../x86/h264chroma_init.c \
-	$$PWD/../../x86/h264dsp_init.c \
-	$$PWD/../../x86/hevcdsp_init.c \
-	$$PWD/../../x86/hpeldsp_init.c \
-	$$PWD/../../x86/hpeldsp_rnd_template.c \
-	$$PWD/../../x86/huffyuvdsp_init.c \
-	$$PWD/../../x86/huffyuvencdsp_mmx.c \
-	$$PWD/../../x86/idctdsp_init.c \
-	$$PWD/../../x86/jpeg2000dsp_init.c \
-	$$PWD/../../x86/lossless_audiodsp_init.c \
-	$$PWD/../../x86/lossless_videodsp_init.c \
-	$$PWD/../../x86/lpc_x86.c \
-	$$PWD/../../x86/me_cmp_init.c \
-	$$PWD/../../x86/mlpdsp_init.c \
-	$$PWD/../../x86/mpegvideo_x86.c \
-	$$PWD/../../x86/mpegvideodsp_x86.c \
-	$$PWD/../../x86/mpegvideoenc.c \
-	$$PWD/../../x86/mpegvideoenc_qns_template.c \
-	$$PWD/../../x86/mpegvideoenc_template.c \
-	$$PWD/../../x86/mpegvideoencdsp_init.c \
-	$$PWD/../../x86/pixblockdsp_init.c \
-	$$PWD/../../x86/pngdsp_init.c \
-	$$PWD/../../x86/proresdsp_init.c \
-	$$PWD/../../x86/qpeldsp_init.c \
-	$$PWD/../../x86/rnd_template.c \
-	$$PWD/../../x86/rv34dsp_init.c \
-	$$PWD/../../x86/rv40dsp_init.c \
-	$$PWD/../../x86/sbrdsp_init.c \
-	$$PWD/../../x86/simple_idct_x86.c \
-	$$PWD/../../x86/snowdsp.c \
-	$$PWD/../../x86/svq1enc_init.c \
-	$$PWD/../../x86/synth_filter_init.c \
-	$$PWD/../../x86/takdsp_init.c \
-	$$PWD/../../x86/ttadsp_init.c \
-	$$PWD/../../x86/v210-init.c \
-	$$PWD/../../x86/v210enc_init.c \
-	$$PWD/../../x86/vc1dsp_init.c \
-	$$PWD/../../x86/vc1dsp_mmx.c \
-	$$PWD/../../x86/videodsp_init.c \
-	$$PWD/../../x86/vorbisdsp_init.c \
-	$$PWD/../../x86/vp3dsp_init.c \
-	$$PWD/../../x86/vp6dsp_init.c \
-	$$PWD/../../x86/vp8dsp_init.c \
-	$$PWD/../../x86/vp9dsp_init.c \
-	$$PWD/../../x86/vp9dsp_init_10bpp.c \
-	$$PWD/../../x86/vp9dsp_init_12bpp.c \
-	$$PWD/../../x86/vp9dsp_init_16bpp.c \
-	$$PWD/../../x86/vp9dsp_init_16bpp_template.c \
-	$$PWD/../../x86/w64xmmtest.c \
-	$$PWD/../../x86/xvididct_init.c \
 	$$PWD/../../xan.c \
 	$$PWD/../../xbmdec.c \
 	$$PWD/../../xbmenc.c \
@@ -1394,6 +1406,8 @@ SOURCES += 	$$PWD/../../012v.c \
 	$$PWD/../../xfaceenc.c \
 	$$PWD/../../xiph.c \
 	$$PWD/../../xl.c \
+	$$PWD/../../xma_parser.c \
+	$$PWD/../../xpmdec.c \
 	$$PWD/../../xsubdec.c \
 	$$PWD/../../xsubenc.c \
 	$$PWD/../../xvididct.c \

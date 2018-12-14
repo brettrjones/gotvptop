@@ -19,7 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#include <opus.h>
+#include <libavcodec/opus.h>
 #include <libopus/include/opus_multistream.h>
 
 #include "libavutil/avutil_internal.h"

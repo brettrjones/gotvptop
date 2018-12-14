@@ -969,7 +969,7 @@ static int amrnb_decode_frame(AVCodecContext *avctx, void *data,
     buf_out = (float *)frame->data[0];
 
     p->cur_frame_mode = unpack_bitstream(p, buf, buf_size);
-    if (p->cur_frame_mode == NO_DATA) {
+    if (p->cur_frame_mode == MODE_NO_TRANSMISSION) {
         av_log(avctx, AV_LOG_ERROR, "Corrupt bitstream\n");
         return AVERROR_INVALIDDATA;
     }

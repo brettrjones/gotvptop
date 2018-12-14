@@ -96,38 +96,38 @@ vbi_unlock_fn			(void *			user_data);
  * @ingroup Basic
  * @{
  */
-//typedef enum {
-//	/** External error causes, for example lack of memory. */
-//	VBI_LOG_ERROR		= 1 << 3,
-//
-//	/**
-//	 * Invalid parameters and similar problems which suggest
-//	 * a bug in the application using the library.
-//	 */
-//	VBI_LOG_WARNING		= 1 << 4,
-//
-//	/**
-//	 * Causes of possibly undesired results, for example when a
-//	 * data service cannot be decoded with the current video
-//	 * standard setting.
-//	 */
-//	VBI_LOG_NOTICE		= 1 << 5,
-//
-//	/** Progress messages. */
-//	VBI_LOG_INFO		= 1 << 6,
-//
-//	/** Information useful to debug the library. */
-//	VBI_LOG_DEBUG		= 1 << 7,
-//
-//	/** Driver responses (strace). Not implemented yet. */
-//	VBI_LOG_DRIVER		= 1 << 8,
-//
-//	/** More detailed debugging information. */
-//	VBI_LOG_DEBUG2		= 1 << 9,
-//	VBI_LOG_DEBUG3		= 1 << 10
-//} vbi_log_mask;
+typedef enum {
+        /** External error causes, for example lack of memory. */
+        VBI_LOG_ERROR		= 1 << 3,
 
-typedef uint32_t vbi_log_mask;
+        /**
+         * Invalid parameters and similar problems which suggest
+         * a bug in the application using the library.
+         */
+        VBI_LOG_WARNING		= 1 << 4,
+
+        /**
+         * Causes of possibly undesired results, for example when a
+         * data service cannot be decoded with the current video
+         * standard setting.
+         */
+        VBI_LOG_NOTICE		= 1 << 5,
+
+        /** Progress messages. */
+        VBI_LOG_INFO		= 1 << 6,
+
+        /** Information useful to debug the library. */
+        VBI_LOG_DEBUG		= 1 << 7,
+
+        /** Driver responses (strace). Not implemented yet. */
+        VBI_LOG_DRIVER		= 1 << 8,
+
+        /** More detailed debugging information. */
+        VBI_LOG_DEBUG2		= 1 << 9,
+        VBI_LOG_DEBUG3		= 1 << 10
+} vbi_log_mask;
+
+//typedef uint32_t vbi_log_mask;
 typedef void vbi_log_fn( vbi_log_mask		level,
 				 const char *		context,
 				 const char *		message,
