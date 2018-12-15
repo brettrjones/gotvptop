@@ -33,8 +33,12 @@
 #include "VxFileUtil.h"
 
 #ifdef TARGET_OS_LINUX
-# include <linux/XTimeUtils.h>
+//# include <linux/XTimeUtils.h>
 #endif
+
+#include <stdio.h>
+#include <string.h>
+#include <errno.h>
 
 #include <iostream>
 

@@ -132,7 +132,7 @@
  * unique prefixes should be used for global symbols internal to the module
  * even when they are declared using this macro.
  */
-
+/*
 #if defined(_WIN32)
 #  define CP_EXPORT __declspec(dllexport)
 #  define CP_IMPORT extern __declspec(dllimport)
@@ -142,10 +142,11 @@
 #  define CP_IMPORT extern
 #  define CP_HIDDEN __attribute__ ((visibility ("hidden")))
 #else
+*/
 #  define CP_EXPORT
 #  define CP_IMPORT extern
 #  define CP_HIDDEN
-#endif
+//#endif
 
 /*@}*/
 

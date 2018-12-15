@@ -24,6 +24,7 @@
 #include "network.h"
 #include "tls.h"
 #include "url.h"
+#include "libavformat/os_support.h"
 #include "libavcodec/avcodec_internal.h"
 #include "libavutil/avutil.h"
 #include "libavutil/mem.h"

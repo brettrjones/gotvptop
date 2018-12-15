@@ -1,8 +1,9 @@
+INCLUDEPATH += $$PWD/../../inc
+INCLUDEPATH += $$PWD/../../common/include
+
 HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
-	$$PWD/../../../../GoTvConfig.h \
 	$$PWD/../../../../GoTvCpuArchDefines.h \
 	$$PWD/../../../../GoTvDependLibrariesConfig.h \
-	$$PWD/../../../../GoTvFeaturesConfig.h \
 	$$PWD/../../../../GoTvTargetOsConfig.h \
 	$$PWD/../../../../arpa/inet.h \
 	$$PWD/../../../../asm/types.h \

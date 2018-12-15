@@ -38,7 +38,7 @@ enum LimiterState {
     LIM_OUT,
     ATTACK,
     SUSTAIN,
-    RELEASE,
+    RELEASE_LIMITER,
     STATE_NB
 };
 
@@ -321,7 +321,7 @@ static void true_peak_limiter(LoudNormContext *s, double *out, int nb_samples, i
         case SUSTAIN:
             detect_peak(s, smp_cnt, nb_samples, channels, &peak_delta, &peak_value);
             if (peak_delta == -1) {
-                s->limiter_state = RELEASE;
+                s->limiter_state = RELEASE_LIMITER;
                 s->gain_reduction[0] = s->gain_reduction[1];
                 s->gain_reduction[1] = 1.;
                 s->env_cnt = 0;
@@ -363,7 +363,7 @@ static void true_peak_limiter(LoudNormContext *s, double *out, int nb_samples, i
             }
             break;
 
-        case RELEASE:
+        case RELEASE_LIMITER:
             for (; s->env_cnt < s->release_length; s->env_cnt++) {
                 for (c = 0; c < channels; c++) {
                     double env;

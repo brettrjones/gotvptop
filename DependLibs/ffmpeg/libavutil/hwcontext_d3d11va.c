@@ -17,6 +17,7 @@
  */
 
 #include "config_ffmpeg.h"
+#if CONFIG_HEVC_D3D11VA_HWACCEL
 
 #include <windows.h>
 
@@ -613,3 +614,5 @@ const HWContextType ff_hwcontext_type_d3d11va = {
 
     .pix_fmts             = (const enum AVPixelFormat[]){ AV_PIX_FMT_D3D11, AV_PIX_FMT_NONE },
 };
+
+#endif // CONFIG_HEVC_D3D11VA_HWACCEL

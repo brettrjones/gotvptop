@@ -18,7 +18,7 @@
 
 // NOTE: windows uses direct x
 #include <ffmpeg/config_ffmpeg.h>
-#ifndef TARGET_OS_WINDOWS
+#if 0
 
 #include "buffer.h"
 #include "avutil_common.h"

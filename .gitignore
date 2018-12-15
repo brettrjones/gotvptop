@@ -6,3 +6,5 @@ DependLibs/CoreLib/build/build-CoreLib-Desktop-Debug/
 DependLibs/CoreLib/build/Qt/CoreLib\.pro\.user
 
 lib/
+
+*.user

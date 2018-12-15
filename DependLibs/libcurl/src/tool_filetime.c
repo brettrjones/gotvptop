@@ -24,7 +24,7 @@
 #ifdef HAVE_UTIME_H
 #  include <utime.h>
 #elif defined(HAVE_SYS_UTIME_H)
-#  include <sys/utime.h>
+//#  include <sys/utime.h>
 #endif
 
 curl_off_t getfiletime(const char *filename, FILE *error_stream)

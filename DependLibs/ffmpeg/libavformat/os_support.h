@@ -19,26 +19,27 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#ifndef AVFORMAT_OS_SUPPORT_H
-#define AVFORMAT_OS_SUPPORT_H
+#pragma once
+
+#include "config_ffmpeg.h"
+
 
 /**
  * @file
  * miscellaneous OS support macros and functions.
  */
 
-#include <ffmpeg/config_ffmpeg.h>
-
 #include <sys/stat.h>
 
-#ifdef TARGET_OS_WINDOWS
+//#ifdef TARGET_OS_WINDOWS
 #if HAVE_DIRECT_H
 #include <dirent.h>
 #endif
+
 #if HAVE_IO_H
 #include <io.h>
 #endif
-#endif
+
 
 #if defined(TARGET_OS_WINDOWS) && !defined(__MINGW32CE__)
 #  include <fcntl.h>
@@ -67,71 +68,75 @@
 #  define lseek(f,p,w) lseek64((f), (p), (w))
 #endif
 
+#ifndef TARGET_OS_LINUX
 static GOTV_INLINE int is_dos_path(const char *path)
 {
-#if HAVE_DOS_PATHS
+# if HAVE_DOS_PATHS
     if (path[0] && path[1] == ':')
         return 1;
-#endif
+# endif
     return 0;
 }
+#endif // TARGET_OS_LINUX
 
 #if defined(__OS2__) || defined(__Plan9__)
-#define SHUT_RD 0
-#define SHUT_WR 1
-#define SHUT_RDWR 2
+# define SHUT_RD 0
+# define SHUT_WR 1
+# define SHUT_RDWR 2
 #endif
 
 #if defined(TARGET_OS_WINDOWS)
-#define SHUT_RD SD_RECEIVE
-#define SHUT_WR SD_SEND
-#define SHUT_RDWR SD_BOTH
+# define SHUT_RD SD_RECEIVE
+# define SHUT_WR SD_SEND
+# define SHUT_RDWR SD_BOTH
 
-#ifndef S_IRUSR
-#define S_IRUSR S_IREAD
-#endif
-#ifndef S_IWUSR
-#define S_IWUSR S_IWRITE
-#endif
-#endif
+# ifndef S_IRUSR
+#  define S_IRUSR S_IREAD
+# endif
+# ifndef S_IWUSR
+#  define S_IWUSR S_IWRITE
+# endif // S_IRUSR
+#endif // TARGET_OS_WINDOWS
 
 #if CONFIG_NETWORK
+
 #if !HAVE_SOCKLEN_T
 typedef int socklen_t;
 #endif
 
 /* most of the time closing a socket is just closing an fd */
 #if !HAVE_CLOSESOCKET
-#define closesocket close
+# define closesocket close
 #endif
 
 #if !HAVE_POLL_H
-typedef unsigned long nfds_t;
+ typedef unsigned long nfds_t;
 
-#if HAVE_WINSOCK2_H
-#include <winsock2.h>
-#endif
-#if !HAVE_STRUCT_POLLFD
+# if HAVE_WINSOCK2_H
+#  include <winsock2.h>
+# endif
+
+# if !HAVE_STRUCT_POLLFD
 struct pollfd {
     int fd;
     short events;  /* events to look for */
     short revents; /* events that occurred */
 };
+# endif // !HAVE_STRUCT_POLLFD
 
 /* events & revents */
-#define POLLIN     0x0001  /* any readable data available */
-#define POLLOUT    0x0002  /* file descriptor is writeable */
-#define POLLRDNORM POLLIN
-#define POLLWRNORM POLLOUT
-#define POLLRDBAND 0x0008  /* priority readable data */
-#define POLLWRBAND 0x0010  /* priority data can be written */
-#define POLLPRI    0x0020  /* high priority readable data */
+# define POLLIN     0x0001  /* any readable data available */
+# define POLLOUT    0x0002  /* file descriptor is writeable */
+# define POLLRDNORM POLLIN
+# define POLLWRNORM POLLOUT
+# define POLLRDBAND 0x0008  /* priority readable data */
+# define POLLWRBAND 0x0010  /* priority data can be written */
+# define POLLPRI    0x0020  /* high priority readable data */
 
 /* revents only */
-#define POLLERR    0x0004  /* errors pending */
-#define POLLHUP    0x0080  /* disconnected */
-#define POLLNVAL   0x1000  /* invalid file descriptor */
-#endif
+# define POLLERR    0x0004  /* errors pending */
+# define POLLHUP    0x0080  /* disconnected */
+# define POLLNVAL   0x1000  /* invalid file descriptor */
 
 
 int ff_poll(struct pollfd *fds, nfds_t numfds, int timeout);
@@ -140,7 +145,7 @@ int ff_poll(struct pollfd *fds, nfds_t numfds, int timeout);
 #endif /* CONFIG_NETWORK */
 
 #if defined(__MINGW32CE__)
-#define mkdir(a, b) _mkdir(a)
+# define mkdir(a, b) _mkdir(a)
 #elif defined(TARGET_OS_WINDOWS)
 #include <WinSock2.h>
 #include <windows.h>
@@ -253,11 +258,12 @@ fallback:
 }
 
 //#define mkdir(a, b) win32_mkdir(a)
+
 #define rename      win32_rename
 //#define rmdir       win32_rmdir
 //#define unlink      win32_unlink
 //#define access      win32_access
+#endif // TARGET_OS_WINDOWS
 
-#endif
+//#endif // TARGET_OS_WINDOWS
 
-#endif /* AVFORMAT_OS_SUPPORT_H */

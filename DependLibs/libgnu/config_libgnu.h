@@ -4803,12 +4803,12 @@ typedef int32_t		gint32;
 typedef int64_t		gint64;
 
 #ifdef _MSC_VER
-typedef size_t		gsize;
 typedef void *		gpointer;
 #else
 typedef ssize_t		gssize;
 #endif
 
+typedef size_t		gsize;
 typedef ssize_t		gssize;
 
 #include "gtypes.h"

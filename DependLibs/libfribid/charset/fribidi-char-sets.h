@@ -35,11 +35,11 @@
 #ifndef _FRIBIDI_CHAR_SETS_H
 #define _FRIBIDI_CHAR_SETS_H
 
-#include "fribidi-common.h"
+#include "../lib/fribidi-common.h"
 
-#include "fribidi-types.h"
+#include "../lib/fribidi-types.h"
 
-#include "fribidi-begindecls.h"
+#include "../lib/fribidi-begindecls.h"
 
 typedef enum
 {
@@ -110,7 +110,7 @@ FRIBIDI_ENTRY const char *fribidi_char_set_desc (
   FriBidiCharSet char_set
 );
 
-#include "fribidi-enddecls.h"
+#include "../lib/fribidi-enddecls.h"
 
 #endif /* !_FRIBIDI_CHAR_SETS_H */
 /* Editor directions:

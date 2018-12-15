@@ -27,10 +27,12 @@
 #ifndef LIST_H
 #define LIST_H
 
-#ifdef _WIN32
-#include "../libcpluff/win32/cpluffdef.h"
+#include "GoTvDependLibrariesConfig.h"
+
+#ifdef TARGET_OS_WINDOWS
+#include "libcpluff/win32/cpluffdef.h"
 #else
-#include "../libcpluff/cpluffdef.h"
+#include "libcpluff/cpluffdef_linux.h"
 #endif
 
 #include <limits.h>

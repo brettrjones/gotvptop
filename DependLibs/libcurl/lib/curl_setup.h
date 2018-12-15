@@ -237,7 +237,7 @@
  * neither HAVE_WS2TCPIP_H when __CYGWIN__ is defined.
  */
 
-#ifdef HAVE_WINDOWS_H
+#if HAVE_WINDOWS_H
 #  if defined(UNICODE) && !defined(_UNICODE)
 #    define _UNICODE
 #  endif
@@ -269,7 +269,7 @@
 
 #undef USE_WINSOCK
 
-#ifdef HAVE_WINSOCK2_H
+#ifdef _MSC_VER
 #  define USE_WINSOCK 2
 #else
 #  ifdef HAVE_WINSOCK_H
@@ -723,7 +723,7 @@ int netware_init(void);
  * Portable symbolic names for Winsock shutdown() mode flags.
  */
 
-#ifdef USE_WINSOCK
+#if USE_WINSOCK
 #  define SHUT_RD   0x00
 #  define SHUT_WR   0x01
 #  define SHUT_RDWR 0x02

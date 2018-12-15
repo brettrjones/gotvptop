@@ -95,7 +95,7 @@ static bool verifyconnect(curl_socket_t sockfd, int *error);
 #define KEEPALIVE_FACTOR(x)
 #endif
 
-#if defined(HAVE_WINSOCK2_H) && !defined(SIO_KEEPALIVE_VALS)
+#if HAVE_WINSOCK2_H && !defined(SIO_KEEPALIVE_VALS)
 #define SIO_KEEPALIVE_VALS    _WSAIOW(IOC_VENDOR,4)
 
 struct tcp_keepalive {
@@ -925,7 +925,7 @@ static void nosigpipe(struct connectdata *conn,
 #define nosigpipe(x,y) Curl_nop_stmt
 #endif
 
-#ifdef USE_WINSOCK
+#ifdef TARGET_OS_WINDOWS
 /* When you run a program that uses the Windows Sockets API, you may
    experience slow performance when you copy data to a TCP server.
 

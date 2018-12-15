@@ -656,10 +656,14 @@ typedef unsigned char		BYTE;
 typedef char				CHAR;
 typedef wchar_t				WCHAR;
 typedef int					BOOL;
+#ifndef BOOL
+//# define BOOL int // have to use define so that linux can typedef it
+#endif // BOOL
 typedef int					INT;
 typedef unsigned int		UINT;
 // typedef int INT32;              // unused; must match Xmd.h but why bother
-typedef long long			INT64;
+//typedef long long			INT64;
+//#define INT64 int64_t // have to use define so that linux can typedef it
 typedef unsigned long long    UINT64;
 typedef long				LONG;
 typedef long long			LONGLONG;
@@ -697,7 +701,7 @@ typedef intptr_t( *FARPROC )( void );
 
 typedef DWORD               LCID;
 typedef WORD*               LPWORD;
-typedef BOOL*               LPBOOL;
+#define LPBOOL BOOL*
 typedef CHAR*               LPCHAR;
 typedef CHAR*               PCHAR;
 typedef const void*         LPCVOID;
@@ -793,10 +797,10 @@ typedef struct _TIME_ZONE_INFORMATION {
 
 #define VOID    void
 #define __int8    char
-#define __int16   short
-#define __int32   int
-#define __int64   long long
-#define __uint64  unsigned long long
+#define __int16   int16_t
+#define __int32   int32_t
+#define __int64   int64_t
+#define __uint64  uint64_t
 
 #define __stdcall
 #define __cdecl
@@ -1161,7 +1165,7 @@ typedef int64_t              time64_t;
 # define HAVE_INLINE_ASM		0
 #else
 # define HAVE_GETTIMEOFDAY		1
-# define HAVE_INLINE_ASM		1
+# define HAVE_INLINE_ASM		0
 # define	HAS_CHMOD 			1		/* chmod syscall		*/
 # define	HAS_CHOWN 			1		/* chown syscall		*/
 # define	HAS_FCHMOD			1		/* fchmod syscall		*/
@@ -1460,7 +1464,8 @@ typedef int64_t              time64_t;
 #define HAVE_STRERROR			1
 /* Define to 1 if you have the `strerror_r' function. */
 #ifndef _MSC_VER
-# define HAVE_STRERROR_R			1
+# define HAVE_STRERROR_R        1
+# define HAVE_POSIX_STRERROR_R  1
 #endif // _MSC_VER
 
 /* Define to 1 if you have the <string.h> header file. */
@@ -1500,7 +1505,7 @@ typedef int64_t              time64_t;
 #  define HAVE_STRUCT_POLLFD		0
 # endif //(_WIN32_WINNT >= 0x0600)
 #else
-# define HAVE_STRUCT_POLLFD		1
+# define HAVE_STRUCT_POLLFD		0
 #endif // _MSC_VER
 
 /* Define if you have the <signal.h> header file.  */
@@ -1568,7 +1573,7 @@ typedef int64_t              time64_t;
 #ifdef _MSC_VER
 //# define HAVE_TERMIOS_H		0
 #else
-# define HAVE_TERMIOS_H			1
+//# define HAVE_TERMIOS_H			1
 #endif // _MSC_VER
 
 /* Define to 1 if you have the `uname' function. */

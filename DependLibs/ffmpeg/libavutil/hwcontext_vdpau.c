@@ -18,7 +18,7 @@
 
  // NOTE: windows use direct x
 #include <ffmpeg/config_ffmpeg.h>
-#ifndef TARGET_OS_WINDOWS
+#ifndef FFMPEG_SUPPORT_VDPAU_HWACCEL
 
 #include <stdint.h>
 #include <string.h>

@@ -21,7 +21,7 @@
  */
 
 #include <ffmpeg/config_ffmpeg.h>
-#if !defined(TARGET_OS_WINDOWS)
+#if CONFIG_HAVE_OPENCL_LIB
 
 #include "opencl_internal.h"
 #include "libavutil/log.h"

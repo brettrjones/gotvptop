@@ -25,7 +25,7 @@
  * Core plug-in management functions
  */
 
-#include <config_libcpluff.h>
+#include <libcpluff/config_libcpluff.h>
 
 #include <stdio.h>
 #include <stdlib.h>

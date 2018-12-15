@@ -21,7 +21,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *-----------------------------------------------------------------------*/
 
-#include <config_libcpluff.h>
+#include <libcpluff/config_libcpluff.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,7 +32,7 @@
 #include <libintl.h>
 #include <locale.h>
 #endif
-#include <cpluff.h>
+#include <libcpluff/cpluff.h>
 
 
 /* -----------------------------------------------------------------------

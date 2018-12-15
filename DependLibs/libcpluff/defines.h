@@ -28,7 +28,7 @@
 #ifndef DEFINES_H_
 #define DEFINES_H_
 
-#include <config_libcpluff.h>
+#include <libcpluff/config_libcpluff.h>
 
 #ifdef ENABLE_NLS
 #include <libintl.h>

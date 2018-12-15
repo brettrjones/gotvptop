@@ -15,7 +15,7 @@
    You should have received a copy of the GNU Lesser General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-#include <config_libasprintf.h>
+#include <libasprintf/config_libasprintf.h>
 
 #if !(HAVE_VASPRINTF && HAVE_POSIX_PRINTF)
 

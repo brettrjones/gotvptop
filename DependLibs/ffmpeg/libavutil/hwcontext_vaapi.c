@@ -17,7 +17,7 @@
  */
 
 #include <ffmpeg/config_ffmpeg.h>
-#ifndef TARGET_OS_WINDOWS
+#if FFMPEG_SUPPORT_VAAPI_HWACCEL
 
 #if HAVE_VAAPI_X11
 #   include <va/va_x11.h>

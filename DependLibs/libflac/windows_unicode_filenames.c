@@ -30,6 +30,7 @@
  */
 
 #include <libflac/config_libflac.h>
+#ifdef TARGET_OS_WINDOWS
 
 #include <io.h>
 #include <utime.h>
@@ -198,3 +199,4 @@ HANDLE WINAPI flac_internal_CreateFile_utf8(const char *lpFileName, DWORD dwDesi
 		return handle;
 	}
 }
+#endif // TARGET_OS_WINDOWS

@@ -138,6 +138,6 @@ SOURCES += 	$$PWD/../../AppErr.cpp \
 	$$PWD/../../md5.c \
 	$$PWD/../../rsa_eay.c \
 	$$PWD/../../rsa_gen.c \
-#	$$PWD/../../sqlite3.c \
-#    $$PWD/../../sqlitedataset.cpp
+        $$PWD/../../sqlite3.c \
+    $$PWD/../../sqlitedataset.cpp
 

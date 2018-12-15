@@ -75,7 +75,15 @@ CP_C_API const char *cp_get_version(void) {
 }
 
 CP_C_API const char *cp_get_host_type(void) {
+#ifdef TARGET_OS_WINDOWS
 	return CP_HOST;
+#elif TARGET_OS_ANDROID
+    return "android";
+#elif TARGET_OS_LINUX
+    return "linux";
+#else
+    return "unknown";
+#endif
 }
 
 CP_HIDDEN void cpi_lock_framework(void) {

@@ -26,6 +26,8 @@
 /*
  * Inclusion of common header files.
  */
+#include <GoTvDependLibrariesConfig.h>
+#define HAVE_RECV 1 // all oses we support have recv()
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -105,7 +107,7 @@
  * Definition of timeval struct for platforms that don't have it.
  */
 
-#ifndef HAVE_STRUCT_TIMEVAL
+#if !defined( HAVE_STRUCT_TIMEVAL ) && defined(TARGET_OS_WINDOWS)
 struct timeval {
  long tv_sec;
  long tv_usec;
@@ -406,8 +408,15 @@ typedef int sig_atomic_t;
  * Macro SOCKERRNO / SET_SOCKERRNO() returns / sets the *socket-related* errno
  * (or equivalent) on this platform to hide platform details to code using it.
  */
+#ifndef USE_WINSOCK
+# ifdef TARGET_OS_WINDOWS
+#  define USE_WINSOCK 1
+# else
+#  define USE_WINSOCK 0
+# endif // TARGET_OS_WINDOWS
+#endif // USE_WINSOCK
 
-#ifdef USE_WINSOCK
+#if USE_WINSOCK
 #define SOCKERRNO         ((int)WSAGetLastError())
 #define SET_SOCKERRNO(x)  (WSASetLastError((int)(x)))
 #else
@@ -420,7 +429,7 @@ typedef int sig_atomic_t;
  * Portable error number symbolic names defined to Winsock error codes.
  */
 
-#ifdef USE_WINSOCK
+#ifdef TARGET_OS_WINDOWS
 #undef  EBADF            /* override definition in errno.h */
 #define EBADF            WSAEBADF
 #undef  EINTR            /* override definition in errno.h */

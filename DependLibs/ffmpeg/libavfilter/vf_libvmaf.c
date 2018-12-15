@@ -160,8 +160,13 @@ static void compute_vmaf_score(LIBVMAFContext *s)
     }
 
     format = (char *) s->desc->name;
+ /*   score = compute_vmaf(fmt, width, height,
+                         read_frame, s, model_path, log_path,
+                         log_fmt, disable_clip, disable_avx, enable_transform,
+                         phone_model, do_psnr, do_ssim,
+                         do_ms_ssim, pool_method);*/
 
-    s->error = compute_vmaf(&s->vmaf_score, format, s->width, s->height,
+    s->error = compute_vmaf(format, s->width, s->height,
                             read_frame, s, s->model_path, s->log_path,
                             s->log_fmt, 0, 0, s->enable_transform,
                             s->phone_model, s->psnr, s->ssim,

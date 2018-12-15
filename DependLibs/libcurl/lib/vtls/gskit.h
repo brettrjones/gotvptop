@@ -21,13 +21,13 @@
  * KIND, either express or implied.
  *
  ***************************************************************************/
-#include "curl_setup.h"
+#include "libcurl/lib/curl_setup.h"
 
 /*
  * This header should only be needed to get included by vtls.c and gskit.c
  */
 
-#include "urldata.h"
+#include "libcurl/lib/urldata.h"
 
 #ifdef USE_GSKIT
 

@@ -19,6 +19,8 @@
  */
 
 /** Based on the CURL SChannel module */
+#include "config_ffmpeg.h"
+#ifdef TARGET_OS_WINDOWS
 
 #include "avformat.h"
 #include "avformat_internal.h"
@@ -609,3 +611,5 @@ const URLProtocol ff_tls_schannel_protocol = {
     .flags          = URL_PROTOCOL_FLAG_NETWORK,
     .priv_data_class = &tls_class,
 };
+
+#endif // TARGET_OS_WINDOWS

@@ -42,7 +42,10 @@ static GOTV_INLINE uint64_t read_time(void)
 
 #elif HAVE_RDTSC
 
-#include <intrin.h>
+#ifdef _MSC_VER
+# include <intrin.h>
+#endif // _MSC_VER
+
 #define AV_READ_TIME __rdtsc
 
 #endif /* HAVE_INLINE_ASM */

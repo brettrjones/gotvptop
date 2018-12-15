@@ -17,5 +17,9 @@ SOURCES += 	$$PWD/../../audioconvert.c \
 	$$PWD/../../resample_template.c \
 	$$PWD/../../soxr_resample.c \
 	$$PWD/../../swresample.c \
-	$$PWD/../../swresample_frame.c
+	$$PWD/../../swresample_frame.c \
+	$$PWD/../../x86/audio_convert_init.c \
+	$$PWD/../../x86/rematrix_init.c \
+	$$PWD/../../x86/resample_init.c \
+	$$PWD/../../x86/w64xmmtest.c
 

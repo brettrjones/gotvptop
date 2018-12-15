@@ -32,6 +32,11 @@
 #include <poll.h>
 #endif
 
+#ifndef TCP_NODELAY
+# define TCP_NODELAY 1
+#endif // TCP_NODELAY
+
+
 typedef struct TCPContext {
     const AVClass *class;
     int fd;

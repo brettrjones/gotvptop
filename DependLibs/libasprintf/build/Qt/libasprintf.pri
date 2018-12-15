@@ -1,8 +1,6 @@
 HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
-	$$PWD/../../../../GoTvConfig.h \
 	$$PWD/../../../../GoTvCpuArchDefines.h \
 	$$PWD/../../../../GoTvDependLibrariesConfig.h \
-	$$PWD/../../../../GoTvFeaturesConfig.h \
 	$$PWD/../../../../GoTvTargetOsConfig.h \
 	$$PWD/../../alloca.in.h \
 	$$PWD/../../autosprintf.h \

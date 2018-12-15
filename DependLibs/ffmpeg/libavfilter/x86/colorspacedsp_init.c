@@ -18,6 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
+#include "config_ffmpeg.h"
+
 #include "libavutil/x86/cpu_x86.h"
 
 #include "libavfilter/colorspacedsp.h"

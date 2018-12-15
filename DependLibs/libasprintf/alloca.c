@@ -21,7 +21,7 @@
    allocating any.  It is a good idea to use alloca(0) in
    your main control loop, etc. to force garbage collection.  */
 
-#include <config_libasprintf.h>
+#include <libasprintf/config_libasprintf.h>
 
 #include <libgnu/alloca_gnu.h>
 

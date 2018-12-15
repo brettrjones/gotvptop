@@ -87,7 +87,7 @@ void Curl_version_init(void);
    of win32_init() */
 static void win32_cleanup(void)
 {
-#ifdef USE_WINSOCK
+#ifdef TARGET_OS_WINDOWS
   WSACleanup();
 #endif
 #ifdef USE_WINDOWS_SSPI
@@ -99,7 +99,7 @@ static void win32_cleanup(void)
    stack to allow networking */
 static CURLcode win32_init(void)
 {
-#ifdef USE_WINSOCK
+#ifdef TARGET_OS_WINDOWS
   WORD wVersionRequested;
   WSADATA wsaData;
   int res;

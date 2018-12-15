@@ -22,14 +22,14 @@
  *
  ***************************************************************************/
 
-#include "curl_setup.h"
+#include "libcurl/lib/curl_setup.h"
 
 #ifdef USE_OPENSSL
 /*
  * This header should only be needed to get included by vtls.c and openssl.c
  */
 
-#include "urldata.h"
+#include "libcurl/lib/urldata.h"
 
 extern const struct Curl_ssl Curl_ssl_openssl;
 

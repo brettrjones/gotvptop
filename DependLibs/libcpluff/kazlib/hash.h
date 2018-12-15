@@ -30,7 +30,7 @@
 #ifdef _WIN32
 #include "../libcpluff/win32/cpluffdef.h"
 #else
-#include "../libcpluff/cpluffdef.h"
+#include "../libcpluff/cpluffdef_linux.h"
 #endif
 
 #include <limits.h>

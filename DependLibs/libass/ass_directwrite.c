@@ -17,6 +17,7 @@
  */
 
 #include "config_libass.h"
+#ifdef TARGET_OS_WINDOWS
 
 #define COBJMACROS
 
@@ -786,3 +787,5 @@ cleanup:
 
     return NULL;
 }
+
+#endif // TARGET_OS_WINDOWS

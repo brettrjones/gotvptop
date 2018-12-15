@@ -1,6 +1,6 @@
 #ifndef __DATA_TYPE_CONVERSIONS_H__
 #define __DATA_TYPE_CONVERSIONS_H__
-
+#include <config_ffmpeg.h>
 #include <stdint.h>
 #include <wchar.h>
 
@@ -10,11 +10,7 @@ namespace avxsynth {
 
 typedef int64_t __int64;
 typedef int32_t __int32;
-#ifdef __cplusplus
-typedef bool BOOL;
-#else
-typedef uint32_t BOOL;
-#endif // __cplusplus
+
 typedef void* HMODULE;
 typedef void* LPVOID;
 typedef void* PVOID;
@@ -53,12 +49,12 @@ typedef DWORD COLORREF;
 typedef DWORD FOURCC;
 typedef DWORD HRESULT;
 typedef DWORD* LPDWORD;
-typedef DWORD* DWORD_PTR;
-typedef int32_t LONG;
+//typedef DWORD* DWORD_PTR;
+//typedef int32_t LONG;
 typedef int32_t* LONG_PTR;
 typedef LONG_PTR LRESULT;
-typedef uint32_t ULONG;
-typedef uint32_t* ULONG_PTR;
+//typedef uint32_t ULONG;
+//typedef uint32_t* ULONG_PTR;
 //typedef __int64_t intptr_t;
 typedef uint64_t _fsize_t;
 

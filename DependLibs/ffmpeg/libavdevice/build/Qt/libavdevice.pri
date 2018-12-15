@@ -54,18 +54,16 @@ SOURCES += 	$$PWD/../../alldevices.c \
 	$$PWD/../../pulse_audio_common.c \
 	$$PWD/../../pulse_audio_dec.c \
 	$$PWD/../../pulse_audio_enc.c \
-	$$PWD/../../sdl.c \
 	$$PWD/../../sndio.c \
 	$$PWD/../../sndio_dec.c \
 	$$PWD/../../sndio_enc.c \
 	$$PWD/../../timefilter.c \
 	$$PWD/../../utils.c \
-	$$PWD/../../v4l.c \
 	$$PWD/../../v4l2-common.c \
 	$$PWD/../../v4l2.c \
 	$$PWD/../../v4l2enc.c \
 	$$PWD/../../vfwcap.c \
 	$$PWD/../../x11grab.c \
 	$$PWD/../../xcbgrab.c \
-	$$PWD/../../xv.c
+#	$$PWD/../../xv.c
 

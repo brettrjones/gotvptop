@@ -33,9 +33,8 @@
 /*
  * Definition of pollfd struct and constants for platforms lacking them.
  */
-
-#if !defined(HAVE_STRUCT_POLLFD) && \
-    !defined(HAVE_SYS_POLL_H) && \
+#if !HAVE_STRUCT_POLLFD
+#if !defined(HAVE_SYS_POLL_H) && \
     !defined(HAVE_POLL_H) && \
     !defined(POLLIN)
 
@@ -54,6 +53,7 @@ struct pollfd
 };
 
 #endif
+#endif // HAVE_STRUCT_POLLFD
 
 #ifndef POLLRDNORM
 #define POLLRDNORM POLLIN

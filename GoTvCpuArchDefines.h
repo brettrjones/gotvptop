@@ -109,6 +109,18 @@
 # define ARCH_32_BITS					1
 # define ARCH_64_BITS                   0
 
+
+#if ARCH_32_BITS
+# define ARCH_X86_32 1
+# define ARCH_X86_64 0
+#else
+# define ARCH_X86_32 0
+# define ARCH_X86_64 1
+# ifndef __x86_64__
+#  define __x86_64__ // needed for libgnu
+# endif // __x86_64__
+#endif // ARCH_32_BITS
+
 #elif defined(TARGET_OS_APPLE)
 echo error apple and ppc processors not supported
 # define GOTV_ARCH_LITTLE_ENDIAN		0

@@ -1,3 +1,5 @@
+INCLUDEPATH += $$PWD/../../include
+
 HEADERS += 	$$PWD/../../include/freetype/config/ftconfig.h \
 	$$PWD/../../include/freetype/config/ftconfig_android.h \
 	$$PWD/../../include/freetype/config/ftconfig_linux.h \

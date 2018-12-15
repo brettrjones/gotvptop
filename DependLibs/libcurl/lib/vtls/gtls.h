@@ -22,7 +22,7 @@
  *
  ***************************************************************************/
 
-#include "curl_setup.h"
+#include "libcurl/lib/curl_setup.h"
 
 #ifdef USE_GNUTLS
 

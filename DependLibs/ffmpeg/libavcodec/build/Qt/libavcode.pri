@@ -1,6 +1,7 @@
 HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../../../../GoTvCpuArchDefines.h \
 	$$PWD/../../../../../GoTvDependLibrariesConfig.h \
+	$$PWD/../../../../CoreLib/CompileConfig.h \
 	$$PWD/../../../config_ffmpeg.h \
 	$$PWD/../../a64colors.h \
 	$$PWD/../../a64tables.h \
@@ -127,8 +128,8 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../dvaudio.h \
 	$$PWD/../../dvbtxt.h \
 	$$PWD/../../dvdata.h \
-#	$$PWD/../../dxva2.h \
-#	$$PWD/../../dxva2_internal.h \
+	$$PWD/../../dxva2.h \
+	$$PWD/../../dxva2_internal.h \
 	$$PWD/../../eac3_data.h \
 	$$PWD/../../eac3enc.h \
 	$$PWD/../../eaidct.h \
@@ -697,12 +698,12 @@ SOURCES += 	$$PWD/../../../libavfilter/lavfutils.c \
 	$$PWD/../../dxa.c \
 	$$PWD/../../dxtory.c \
 	$$PWD/../../dxv.c \
-#	$$PWD/../../dxva2.c \
-#	$$PWD/../../dxva2_h264.c \
-#	$$PWD/../../dxva2_hevc.c \
-#	$$PWD/../../dxva2_mpeg2.c \
-#	$$PWD/../../dxva2_vc1.c \
-#	$$PWD/../../dxva2_vp9.c \
+	$$PWD/../../dxva2.c \
+	$$PWD/../../dxva2_h264.c \
+	$$PWD/../../dxva2_hevc.c \
+	$$PWD/../../dxva2_mpeg2.c \
+	$$PWD/../../dxva2_vc1.c \
+	$$PWD/../../dxva2_vp9.c \
 	$$PWD/../../eac3_data.c \
 	$$PWD/../../eac3dec.c \
 	$$PWD/../../eac3enc.c \

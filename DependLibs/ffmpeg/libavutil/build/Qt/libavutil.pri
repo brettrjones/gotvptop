@@ -8,10 +8,16 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../../../../GoTvDependLibrariesConfig.h \
 	$$PWD/../../../../../GoTvFeaturesConfig.h \
 	$$PWD/../../../../../GoTvTargetOsConfig.h \
+	$$PWD/../../../atomics/dummy/stdatomic.h \
+	$$PWD/../../../atomics/gcc/stdatomic.h \
+	$$PWD/../../../atomics/pthread/stdatomic.h \
+	$$PWD/../../../atomics/suncc/stdatomic.h \
+	$$PWD/../../../atomics/win32/stdatomic.h \
 	$$PWD/../../../ffmpeg_config.h \
 	$$PWD/../../../ffmpeg_config_android.h \
 	$$PWD/../../../ffmpeg_config_linux.h \
 	$$PWD/../../../ffmpeg_config_windows.h \
+	$$PWD/../../../stdatomic.h \
 	$$PWD/../../adler32.h \
 	$$PWD/../../aes.h \
 	$$PWD/../../aes_ctr.h \
@@ -22,15 +28,14 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../atomic_win32.h \
 	$$PWD/../../attributes.h \
 	$$PWD/../../audio_fifo.h \
-	$$PWD/../../av_attributes.h \
-	$$PWD/../../av_common.h \
-	$$PWD/../../av_intmath.h \
-	$$PWD/../../av_time.h \
 	$$PWD/../../avassert.h \
 	$$PWD/../../avconfig.h \
 	$$PWD/../../avstring.h \
 	$$PWD/../../avutil.h \
+	$$PWD/../../avutil_attributes.h \
+	$$PWD/../../avutil_common.h \
 	$$PWD/../../avutil_internal.h \
+	$$PWD/../../avutil_intmath.h \
 	$$PWD/../../avutil_time.h \
 	$$PWD/../../base64.h \
 	$$PWD/../../blowfish.h \
@@ -65,11 +70,17 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../hmac.h \
 	$$PWD/../../hwcontext.h \
 	$$PWD/../../hwcontext_cuda.h \
+	$$PWD/../../hwcontext_cuda_internal.h \
+	$$PWD/../../hwcontext_d3d11va.h \
+	$$PWD/../../hwcontext_drm.h \
 	$$PWD/../../hwcontext_dxva2.h \
 	$$PWD/../../hwcontext_internal.h \
+	$$PWD/../../hwcontext_qsv.h \
 	$$PWD/../../hwcontext_vaapi.h \
 	$$PWD/../../hwcontext_vdpau.h \
+	$$PWD/../../hwcontext_videotoolbox.h \
 	$$PWD/../../imgutils.h \
+	$$PWD/../../imgutils_internal.h \
 	$$PWD/../../integer.h \
 	$$PWD/../../intfloat.h \
 	$$PWD/../../intreadwrite.h \
@@ -99,12 +110,16 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../rational.h \
 	$$PWD/../../rc4.h \
 	$$PWD/../../replaygain.h \
+	$$PWD/../../reverse.h \
 	$$PWD/../../ripemd.h \
 	$$PWD/../../samplefmt.h \
 	$$PWD/../../sha.h \
 	$$PWD/../../sha512.h \
+	$$PWD/../../slicethread.h \
 	$$PWD/../../softfloat.h \
+	$$PWD/../../softfloat_ieee754.h \
 	$$PWD/../../softfloat_tables.h \
+	$$PWD/../../spherical.h \
 	$$PWD/../../stereo3d.h \
 	$$PWD/../../tablegen.h \
 	$$PWD/../../tea.h \
@@ -118,17 +133,27 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../twofish.h \
 	$$PWD/../../version.h \
 	$$PWD/../../wchar_filename.h \
+	$$PWD/../../x86/asm.h \
+	$$PWD/../../x86/bswap.h \
+	$$PWD/../../x86/cpu_x86.h \
+	$$PWD/../../x86/emms.h \
+	$$PWD/../../x86/intmath.h \
+	$$PWD/../../x86/intreadwrite.h \
+	$$PWD/../../x86/pixelutils.h \
+	$$PWD/../../x86/timer.h \
+	$$PWD/../../x86/w64xmmtest.h \
 	$$PWD/../../xga_font_data.h \
 	$$PWD/../../xtea.h
 
-SOURCES += 	$$PWD/../../adler32.c \
+SOURCES += 	$$PWD/../../../atomics/pthread/stdatomic.c \
+	$$PWD/../../adler32.c \
 	$$PWD/../../aes.c \
 	$$PWD/../../aes_ctr.c \
 	$$PWD/../../atomic.c \
 	$$PWD/../../audio_fifo.c \
-	$$PWD/../../av_intmath.c \
-	$$PWD/../../av_time.c \
 	$$PWD/../../avstring.c \
+	$$PWD/../../avutil_intmath.c \
+	$$PWD/../../avutil_time.c \
 	$$PWD/../../base64.c \
 	$$PWD/../../blowfish.c \
 	$$PWD/../../bprint.c \
@@ -155,9 +180,13 @@ SOURCES += 	$$PWD/../../adler32.c \
 	$$PWD/../../hmac.c \
 	$$PWD/../../hwcontext.c \
 	$$PWD/../../hwcontext_cuda.c \
+	$$PWD/../../hwcontext_d3d11va.c \
+	$$PWD/../../hwcontext_drm.c \
 	$$PWD/../../hwcontext_dxva2.c \
+	$$PWD/../../hwcontext_qsv.c \
 	$$PWD/../../hwcontext_vaapi.c \
 	$$PWD/../../hwcontext_vdpau.c \
+	$$PWD/../../hwcontext_videotoolbox.c \
 	$$PWD/../../imgutils.c \
 	$$PWD/../../integer.c \
 	$$PWD/../../lfg.c \
@@ -185,6 +214,8 @@ SOURCES += 	$$PWD/../../adler32.c \
 	$$PWD/../../samplefmt.c \
 	$$PWD/../../sha.c \
 	$$PWD/../../sha512.c \
+	$$PWD/../../slicethread.c \
+	$$PWD/../../spherical.c \
 	$$PWD/../../stereo3d.c \
 	$$PWD/../../tea.c \
 	$$PWD/../../threadmessage.c \
@@ -192,6 +223,12 @@ SOURCES += 	$$PWD/../../adler32.c \
 	$$PWD/../../tree.c \
 	$$PWD/../../twofish.c \
 	$$PWD/../../utils.c \
+	$$PWD/../../x86/cpu_x86.c \
+	$$PWD/../../x86/fixed_dsp_init.c \
+	$$PWD/../../x86/float_dsp_init.c \
+	$$PWD/../../x86/imgutils_init.c \
+	$$PWD/../../x86/lls_init.c \
+	$$PWD/../../x86/pixelutils_init.c \
 	$$PWD/../../xga_font_data.c \
 	$$PWD/../../xtea.c
 

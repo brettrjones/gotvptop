@@ -17,6 +17,7 @@
  * with FFmpeg; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+#include "config_ffmpeg.h"
 
 #include "libavutil/avutil_attributes.h"
 #include "libavutil/cpu.h"

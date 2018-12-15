@@ -2,7 +2,7 @@
 #ifndef HEADER_COMP_H
 # define HEADER_COMP_H
 
-#include "opensslconf.h"
+#include "../opensslconf.h"
 # include <openssl/crypto.h>
 
 # ifdef OPENSSL_NO_COMP

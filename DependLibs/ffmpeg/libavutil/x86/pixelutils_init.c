@@ -19,7 +19,7 @@
 #include "ffmpeg/config_ffmpeg.h"
 
 #include "pixelutils.h"
-#include "cpu.h"
+#include "libavutil/cpu.h"
 
 int ff_pixelutils_sad_8x8_mmx(const uint8_t *src1, ptrdiff_t stride1,
                               const uint8_t *src2, ptrdiff_t stride2);

@@ -21,7 +21,7 @@
  * KIND, either express or implied.
  *
  ***************************************************************************/
-#include "curl_setup.h"
+#include "libcurl/lib/curl_setup.h"
 
 struct connectdata;
 struct ssl_connect_data;

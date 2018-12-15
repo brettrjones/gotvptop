@@ -19,7 +19,6 @@
 #pragma once
 
 #include <ffmpeg/config_ffmpeg.h>
-#ifdef TARGET_OS_WINDOWS
 
 #include <stddef.h>
 
@@ -169,5 +168,4 @@ extern const HWContextType ff_hwcontext_type_vaapi;
 extern const HWContextType ff_hwcontext_type_vdpau;
 extern const HWContextType ff_hwcontext_type_videotoolbox;
 extern const HWContextType ff_hwcontext_type_mediacodec;
-#endif // TARGET_OS_WINDOWS
 

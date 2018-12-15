@@ -39,9 +39,11 @@
 #include <ffmpeg/config_ffmpeg.h>
 
 #ifndef TARGET_OS_WINDOWS // not available in windows
+#undef BOOL
+#undef LONG64
 
 
-#include <avutil_time.h>
+#include <libavutil/avutil_time.h>
 #include <sys/shm.h>
 
 #include <X11/cursorfont.h>

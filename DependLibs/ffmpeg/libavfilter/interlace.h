@@ -63,6 +63,6 @@ typedef struct InterlaceContext {
 } InterlaceContext;
 
 void ff_interlace_init(InterlaceContext *interlace, int depth);
-void ff_interlace_init_x86(InterlaceContext *interlace, int depth);
+av_cold void ff_interlace_init_x86(InterlaceContext *interlace);
 
 #endif /* AVFILTER_INTERLACE_H */

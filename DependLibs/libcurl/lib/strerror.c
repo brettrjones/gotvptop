@@ -435,7 +435,7 @@ curl_share_strerror(CURLSHcode error)
 #endif
 }
 
-#ifdef USE_WINSOCK
+#if USE_WINSOCK
 
 /* This function handles most / all (?) Winsock errors curl is able to produce.
  */
@@ -665,7 +665,7 @@ const char *Curl_strerror(struct connectdata *conn, int err)
   max = sizeof(conn->syserr_buf)-1;
   *buf = '\0';
 
-#ifdef USE_WINSOCK
+#if USE_WINSOCK
 
 #ifdef _WIN32_WCE
   {

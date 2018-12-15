@@ -12,9 +12,9 @@ HEADERS += 	$$PWD/../../config_libcpluff.h \
 SOURCES += 	$$PWD/../../context.c \
 	$$PWD/../../cpluff.c \
 	$$PWD/../../kazlib/hash.c \
-	$$PWD/../../kazlib/list.c \
+    $$PWD/../../kazlib/list_cp.c \
 	$$PWD/../../loader/loader.c \
-	$$PWD/../../logging.c \
+    $$PWD/../../logging_cpluff.c \
 	$$PWD/../../pcontrol.c \
 	$$PWD/../../pinfo.c \
 	$$PWD/../../ploader.c \

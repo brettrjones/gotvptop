@@ -1,3 +1,14 @@
+INCLUDEPATH += $$PWD/../../include
+INCLUDEPATH += $$PWD/../../libSYS/include
+INCLUDEPATH += $$PWD/../../libPCMutils/include
+INCLUDEPATH += $$PWD/../../libAACdec/include
+INCLUDEPATH += $$PWD/../../libAACenc/include
+INCLUDEPATH += $$PWD/../../libMpegTPDec/include
+INCLUDEPATH += $$PWD/../../libMpegTPEnc/include
+INCLUDEPATH += $$PWD/../../libSBRenc/include
+INCLUDEPATH += $$PWD/../../libSBRdec/include
+INCLUDEPATH += $$PWD/../../libFDK/include
+
 HEADERS += 	$$PWD/../../include/aacdecoder_lib.h \
 	$$PWD/../../include/config_fdk-aac.h \
 	$$PWD/../../libAACdec/include/aacdecoder_lib.h \
@@ -92,8 +103,8 @@ HEADERS += 	$$PWD/../../include/aacdecoder_lib.h \
 	$$PWD/../../libSBRdec/src/sbr_crc.h \
 	$$PWD/../../libSBRdec/src/sbr_deb.h \
 	$$PWD/../../libSBRdec/src/sbr_dec.h \
-	$$PWD/../../libSBRdec/src/sbr_ram.h \
-	$$PWD/../../libSBRdec/src/sbr_rom.h \
+    $$PWD/../../libSBRdec/src/sbr_ram_fdk_dec.h \
+    $$PWD/../../libSBRdec/src/sbr_rom_fdk_dec.h \
 	$$PWD/../../libSBRdec/src/sbr_scale.h \
 	$$PWD/../../libSBRdec/src/sbrdec_drc.h \
 	$$PWD/../../libSBRdec/src/sbrdec_freq_sca.h \
@@ -170,8 +181,8 @@ SOURCES += 	$$PWD/../../libAACdec/src/aac_ram.cpp \
 	$$PWD/../../libSBRdec/src/sbr_crc.cpp \
 	$$PWD/../../libSBRdec/src/sbr_deb.cpp \
 	$$PWD/../../libSBRdec/src/sbr_dec.cpp \
-	$$PWD/../../libSBRdec/src/sbr_ram.cpp \
-	$$PWD/../../libSBRdec/src/sbr_rom.cpp \
+    $$PWD/../../libSBRdec/src/sbr_ram_fdk_dec.cpp \
+    $$PWD/../../libSBRdec/src/sbr_rom_fdk_dec.cpp \
 	$$PWD/../../libSBRdec/src/sbrdec_drc.cpp \
 	$$PWD/../../libSBRdec/src/sbrdec_freq_sca.cpp \
 	$$PWD/../../libSBRdec/src/sbrdecoder.cpp \

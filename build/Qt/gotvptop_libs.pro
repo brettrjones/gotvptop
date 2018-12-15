@@ -10,7 +10,11 @@ DEFINES += QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS
 
 INCLUDEPATH += ./../../
 INCLUDEPATH += ./../../DependLibs
+INCLUDEPATH += ./../../DependLibs/libcurl/include
+INCLUDEPATH += ./../../DependLibs/libcurl/lib
 INCLUDEPATH += ./../../DependLibs/ffmpeg
+INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o
+INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o/inc32
 INCLUDEPATH += ./../../GoTvCore
 INCLUDEPATH += ./../../GoTvCore/xbmc
 
@@ -63,46 +67,44 @@ QMAKE_CXXFLAGS += -Wno-unused -Wno-parentheses -Wno-attributes  -Wno-ignored-qua
 
 
 #include(../../DependLibs/bzlib/build/Qt/libbz2.pri)
+#include(../../DependLibs/libbzip2/build/Qt/libbzip2.pri)
 #include(../../GoTvCore/build/Qt/libGoTvCore.pri)
 
 
-include(../../DependLibs/CoreLib/build/Qt/CoreLib.pri)
+#include(../../DependLibs/CoreLib/build/Qt/CoreLib.pri)
 
 win32{
 #include(../../DependLibs/EasyHookLib/build/Qt/EasyHook.pri)
 #include(../../DependLibs/Effects11/build/Qt/Effects11.pri)
 }
 
-include(../../DependLibs/ffmpeg/libavcodec/build/Qt/FfmpegAvCodec.pri)
-#include(../../DependLibs/ffmpeg/libavdevice/build/Qt/FfmpegAvDevice.pri)
-#include(../../DependLibs/ffmpeg/libavfilter/build/Qt/FfmpegAvFilterLib.pri)
-#include(../../DependLibs/ffmpeg/libavformat/build/Qt/FfmpegAvFormatLib.pri)
-#include(../../DependLibs/ffmpeg/libavresample/build/Qt/FfmpegAvResampleLib.pri)
-#include(../../DependLibs/ffmpeg/libavutil/build/Qt/FfmpegAvUtilLib.pri)
-#include(../../DependLibs/ffmpeg/libpostproc/build/Qt/FfmpegPostProcLib.pri)
-#include(../../DependLibs/ffmpeg/libswresample/build/Qt/FfmpegSwResampleLib.pri)
-#include(../../DependLibs/ffmpeg/libswscale/build/Qt/FfmpegSwScaleLib.pri)
-#include(../../DependLibs/ffmpeg/build/Qt/libffmpeg.pri)
+#include(../../DependLibs/ffmpeg/libavcodec/build/Qt/libavcodec.pri)
+#include(../../DependLibs/ffmpeg/libavdevice/build/Qt/libavdevice.pri)
+#include(../../DependLibs/ffmpeg/libavfilter/build/Qt/libavfilter.pri)
+#include(../../DependLibs/ffmpeg/libavformat/build/Qt/libavformat.pri)
+#include(../../DependLibs/ffmpeg/libavresample/build/Qt/libavresample.pri)
+#include(../../DependLibs/ffmpeg/libavutil/build/Qt/libavutil.pri)
+#include(../../DependLibs/ffmpeg/libpostproc/build/Qt/libpostproc.pri)
+#include(../../DependLibs/ffmpeg/libswresample/build/Qt/libswresample.pri)
+#include(../../DependLibs/ffmpeg/libswscale/build/Qt/libswscale.pri)
 
-#include(../../DependLibs/libasprintf/buildQt/libasprintf.pri)
-
+#include(../../DependLibs/libarmrwbenc/build/Qt/libarmrwbenc.pri)
+#include(../../DependLibs/libasprintf/build/Qt/libasprintf.pri)
 #include(../../DependLibs/libass/build/Qt/libass.pri)
-
-#include(../../DependLibs/libbzip2/build/Qt/libbzip2.pri)
 
 #include(../../DependLibs/libcpluff/build/Qt/libcpluff.pri)
 #include(../../DependLibs/libcroco/build/Qt/libcroco.pri)
 #include(../../DependLibs/libcrossguid/build/Qt/libcrossguid.pri)
-#include(../../DependLibs/libcrystalhd/build/Qt/libcrystalhd.pri)
+###include(../../DependLibs/libcrystalhd/build/Qt/libcrystalhd.pri)
 #include(../../DependLibs/libcurl/build/Qt/libcurl.pri)
 
 #include(../../DependLibs/libexif/build/Qt/libexif.pri)
 #include(../../DependLibs/libexpat/build/Qt/libexpat.pri)
 
-#include(../../DependLibs/libfaac/build/Qt/libfaac.pri)
+###include(../../DependLibs/libfaac/build/Qt/libfaac.pri)
 #include(../../DependLibs/libfdk-aac/build/Qt/libfdk-aac.pri)
 #include(../../DependLibs/libflac/build/Qt/libflac.pri)
-#include(../../DependLibs/libfreetype/build/Qt/libfreetype.pri)
+include(../../DependLibs/libfreetype/build/Qt/libfreetype.pri)
 #include(../../DependLibs/libfribid/build/Qt/libfribid.pri)
 
 #include(../../DependLibs/libglew/build/Qt/libglew.pri)

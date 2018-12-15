@@ -678,7 +678,7 @@ CURLcode Curl_read_plain(curl_socket_t sockfd,
   if(-1 == nread) {
     int err = SOCKERRNO;
     int return_error;
-#ifdef USE_WINSOCK
+#if USE_WINSOCK
     return_error = WSAEWOULDBLOCK == err;
 #else
     return_error = EWOULDBLOCK == err || EAGAIN == err || EINTR == err;
