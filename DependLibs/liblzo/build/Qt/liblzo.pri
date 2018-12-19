@@ -1,3 +1,5 @@
+DEFINES += HAVE_CONFIG_H
+
 HEADERS += 	$$PWD/../../compr1b.h \
 	$$PWD/../../compr1c.h \
 	$$PWD/../../config1.h \

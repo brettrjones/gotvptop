@@ -30,6 +30,10 @@
 #define __LZO_SUPP_H_INCLUDED 1
 #include <liblzo/config_liblzo.h>
 
+#ifndef TARGET_OS_WINDOWS
+# define LZO_OS_POSIX 1
+#endif // TARGET_OS_WINDOWS
+
 #if (LZO_CFG_NO_CONFIG_HEADER)
 #elif defined(LZO_CFG_CONFIG_HEADER)
 #else

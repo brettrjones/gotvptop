@@ -32,8 +32,8 @@ GOTV_BEGIN_CDECLARES
 int _gnutls_digest_exists(gnutls_digest_algorithm_t algo);
 
 int _gnutls_mac_exists(gnutls_mac_algorithm_t algorithm);
-int _gnutls_mac_init(mac_hd_st *, mac_entry_st * e,
-		     const void *key, int keylen);
+//int _gnutls_mac_init(mac_hd_st *, mac_entry_st * e,
+//		     const void *key, int keylen);
 
 int _gnutls_mac_fast(gnutls_mac_algorithm_t algorithm, const void *key,
 		     int keylen, const void *text, size_t textlen,

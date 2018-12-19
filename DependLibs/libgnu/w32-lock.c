@@ -18,7 +18,7 @@
  */
 
 #include <config_libgnu.h>
-
+#ifdef TARGET_OS_WINDOWS
 #ifndef TARGET_OS_WINDOWS
 # error This module may only be build for Windows.
 #endif
@@ -154,3 +154,4 @@ _gpgrt_lock_destroy (gpgrt_lock_t *lockhd)
   lock->started = -1;
   return 0;
 }
+#endif // TARGET_OS_WINDOWS

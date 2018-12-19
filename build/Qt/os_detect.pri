@@ -1,20 +1,20 @@
 
 
-android {
+android{
     DEFINES += TARGET_OS_ANDROID
 }
 
-win32 {
+win32{
     DEFINES += TARGET_OS_WINDOWS
     DEFINES += WIN32
     DEFINES += _WIN32
 }
 
-unix:!android {
+unix{
     DEFINES += TARGET_OS_LINUX
 }
 
-macx {
+macx{
     DEFINES += TARGET_OS_APPLE
 }
 

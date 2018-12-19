@@ -18,9 +18,14 @@
 pid_t
 _gcry_getpid (void)
 {
-  return GetCurrentProcessId ();
+  return GetCurrentProcessId();
 }
 
 #else
-# error No replacement function for getpid known
+#include <sys/types.h>
+#include <unistd.h>
+pid_t _gcry_getpid (void)
+{
+  return getpid();
+}
 #endif

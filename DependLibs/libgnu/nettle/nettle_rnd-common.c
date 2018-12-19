@@ -140,7 +140,7 @@ void _rnd_system_entropy_deinit(void)
 #include <sys/time.h>
 #include <fcntl.h>
 #include <locks.h>
-#include "egd.h"
+//#include "egd.h"
 
 static int _gnutls_urandom_fd = -1;
 static mode_t _gnutls_urandom_fd_mode = 0;

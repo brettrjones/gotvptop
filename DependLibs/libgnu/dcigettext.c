@@ -26,7 +26,8 @@
 #include  <sys/types.h>
 
 #ifdef __GNUC__
-# define alloca __builtin_alloca
+//# define alloca __builtin_alloca
+//# define alloca __builtin_alloca
 # define HAVE_ALLOCA 1
 #else
 # ifdef _MSC_VER
@@ -135,6 +136,7 @@ extern int errno;
 # endif
 # define tfind __tfind
 #else
+
 # if !defined HAVE_GETCWD
 char *getwd ();
 #  define getcwd(buf, max) getwd (buf)
@@ -148,9 +150,10 @@ char *getcwd ();
 # ifndef HAVE_STPCPY
 static char *stpcpy (char *dest, const char *src);
 # endif
-# ifndef HAVE_MEMPCPY
+# ifdef TARGET_OS_WINDOWS
 static void *mempcpy (void *dest, const void *src, size_t n);
 # endif
+
 #endif
 
 /* Use a replacement if the system does not provide the `tsearch' function

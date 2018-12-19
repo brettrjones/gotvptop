@@ -17,6 +17,9 @@
 
 #include <config_libgnu.h>
 
+#define GNULIB_defined_SIGPIPE 0
+#if GNULIB_defined_SIGPIPE
+
 /* Specification.  */
 #include <signal_gnu.h>
 
@@ -339,3 +342,5 @@ _gl_raise_SIGPIPE (void)
   return 0;
 }
 #endif
+
+#endif // GNULIB_defined_SIGPIPE

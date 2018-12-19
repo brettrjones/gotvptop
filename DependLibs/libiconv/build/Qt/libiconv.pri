@@ -1,3 +1,11 @@
+win32{
+DEFINES += _WINDOWS
+}
+
+DEFINES += USING_STATIC_LIBICONV
+
+INCLUDEPATH += $$PWD/../../
+
 HEADERS += 	$$PWD/../../aliases.h \
 	$$PWD/../../aliases2.h \
 	$$PWD/../../aliases_aix.h \

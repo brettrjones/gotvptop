@@ -5,5 +5,9 @@
 #include <CoreLib/VxDebug.h>
 
 #else
-# include <io.h>
+# ifdef TARGET_OS_LINUX
+#  include <stdio.h>
+# else
+#  include <io.h>
+# endif // TARGET_OS_LINUX
 #endif // _MSC_VER

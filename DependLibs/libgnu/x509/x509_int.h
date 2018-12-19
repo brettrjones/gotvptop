@@ -24,10 +24,26 @@
 #define _X509_INT_H_GNU
 
 #include <libgnu/config_libgnu.h>
+#include <libgnu/gnutls.h>
 #include <libgnu/abstract_gnu.h>
-#include <libgnu/x509-ext.h>
 
 #include <libgnu/libtasn1.h>
+
+
+/* *INDENT-OFF* */
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* *INDENT-ON* */
+
+typedef struct gnutls_subject_alt_names_st *gnutls_subject_alt_names_t;
+typedef struct gnutls_name_constraints_st *gnutls_x509_name_constraints_t;
+typedef struct gnutls_x509_policies_st *gnutls_x509_policies_t;
+#ifdef __cplusplus
+}
+#endif
+
+
 
 #define MAX_CRQ_EXTENSIONS_SIZE 8*1024
 #define MAX_OID_SIZE 128

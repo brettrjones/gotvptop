@@ -25,9 +25,8 @@
 #ifndef GNUTLS_X509_EXT_H
 #define GNUTLS_X509_EXT_H
 
-#include <libgnu/gnutls.h>
 #include <libgnu/x509.h>
-#include <libgnu/x509/x509_int.h>
+
 
 
 /* *INDENT-OFF* */
@@ -173,7 +172,6 @@ int gnutls_x509_ext_export_proxy(int pathLenConstraint, const char *policyLangua
 			      const char *policy, size_t sizeof_policy,
 			      gnutls_datum_t * ext);
 
-typedef struct gnutls_x509_policies_st *gnutls_x509_policies_t;
 
 int gnutls_x509_policies_init(gnutls_x509_policies_t *);
 void gnutls_x509_policies_deinit(gnutls_x509_policies_t);

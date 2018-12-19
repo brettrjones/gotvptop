@@ -1,6 +1,8 @@
 
 CONFIG += staticlib
 
+DEFINES += LIB_STATIC HAVE_CONFIG_H
+
 TARGET_LIB_APPEND = .lib
 
 CONFIG(debug, debug|release) {

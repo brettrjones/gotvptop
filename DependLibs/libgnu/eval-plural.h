@@ -18,11 +18,13 @@
 #define STATIC static
 #endif
 
+#ifndef internal_function
+# define internal_function
+#endif
+
 /* Evaluate the plural expression and return an index value.  */
-STATIC
-unsigned long int
-internal_function
-plural_eval (const struct expression *pexp, unsigned long int n)
+
+inline unsigned long plural_eval (const struct expression *pexp, unsigned long int n)
 {
   switch (pexp->nargs)
     {
@@ -36,11 +38,11 @@ plural_eval (const struct expression *pexp, unsigned long int n)
 	default:
 	  break;
 	}
-      /* NOTREACHED */
+      // NOTREACHED
       break;
     case 1:
       {
-	/* pexp->operation must be lnot.  */
+    // pexp->operation must be lnot.
 	unsigned long int arg = plural_eval (pexp->val.args[0], n);
 	return ! arg;
       }
@@ -91,16 +93,16 @@ plural_eval (const struct expression *pexp, unsigned long int n)
 		break;
 	      }
 	  }
-	/* NOTREACHED */
+    // NOTREACHED
 	break;
       }
     case 3:
       {
-	/* pexp->operation must be qmop.  */
+    // pexp->operation must be qmop.
 	unsigned long int boolarg = plural_eval (pexp->val.args[0], n);
 	return plural_eval (pexp->val.args[boolarg ? 1 : 2], n);
       }
     }
-  /* NOTREACHED */
+  // NOTREACHED
   return 0;
 }

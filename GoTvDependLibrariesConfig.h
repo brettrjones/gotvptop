@@ -30,7 +30,6 @@ echo GoTv Compiler Config error apple not supported
 echo GoTv Compiler Config error no os defined
 #endif
 
-
 //============================================================================
 //=== All ===//
 //============================================================================
@@ -71,54 +70,50 @@ echo GoTv Compiler Config error no os defined
 // #define HAS_LIBSTAGEFRIGHT 1     // android only
 // #define HAS_MMAL 1               // hardware
 
-
 #ifdef HAVE_LIBMICROHTTPD
 # define HAS_WEB_SERVER     1
 # define HAS_WEB_INTERFACE  1
-#endif
+#endif // HAVE_LIBMICROHTTPD
+
 #if defined(HAVE_LIBMDNSEMBEDDED)
 # define HAS_ZEROCONF
 # define HAS_MDNS
 # define HAS_MDNS_EMBEDDED
-#endif
+#endif // defined(HAVE_LIBMDNSEMBEDDED)
 
 #if defined(HAVE_LIBGIF)
 # define HAS_GIFLIB
-#endif
-
-
+#endif // defined(HAVE_LIBGIF)
 
 #ifdef HAVE_LIBRTMP
 # define HAS_LIBRTMP 1
 #endif // HAVE_LIBRTMP
 
-
 #ifdef HAVE_LIBPULSE
-#define HAS_PULSEAUDIO
-#endif
+# define HAS_PULSEAUDIO
+#endif // HAVE_LIBPULSE
 
 // EGL detected. Dont use GLX!
 #ifdef HAVE_LIBEGL
 # undef HAS_GLX
 # define HAS_EGL
-#endif
+#endif // HAVE_LIBEGL
 
 // GLES2.0 detected. Dont use GL!
 #ifdef HAVE_LIBGLESV2
 # undef HAS_GL
 # define HAS_GLES 2
-#endif
+#endif // HAVE_LIBGLESV2
 
 // GLES1.0 detected. Dont use GL!
 #ifdef HAVE_LIBGLES
 # undef HAS_GL
 # define HAS_GLES 1
-#endif
-
+#endif // HAVE_LIBGLES
 
 #ifdef HAVE_LIBNFS
 # define HAS_FILESYSTEM_NFS
-#endif
+#endif // HAVE_LIBNFS
 
 #ifndef HAS_MDNS_EMBEDDED
 # define HAS_MDNS           1 
@@ -138,12 +133,11 @@ echo GoTv Compiler Config error no os defined
 
 #ifdef HAVE_LIBSMBCLIENT
 # define HAS_FILESYSTEM_SMB
-#endif
-
+#endif // HAVE_LIBSMBCLIENT
 
 #ifdef HAVE_MYSQL
 # define HAS_MYSQL // we use sqlite3 instead for database
-#endif
+#endif // HAVE_MYSQL
 
 
 /*! @note Define "USE_DEMUX" at compile time if demuxing in the PVR add-on is used.
@@ -151,7 +145,6 @@ echo GoTv Compiler Config error no os defined
  *        and the add-on should set bHandlesDemuxing to true.
  */
 //#define USE_DEMUX 1
-
 #define HAS_DVDPLAYER 0         // define to 1 if have dvd player support
 // #define HAS_DVD_DRIVE        // uncomment to support dvd/bluray drives
 // #define HAS_CDDA_RIPPER      // uncomment to play cd disks
@@ -181,20 +174,14 @@ echo GoTv Compiler Config error no os defined
 #else
 # if defined(HAVE_XBMC_NONFREE)
 #  define HAS_FILESYSTEM_RAR
-# endif
+# endif // defined(HAVE_XBMC_NONFREE)
 #endif
 
-//============================================================================
-//=== Win32 Specific ===//
-//============================================================================
-#if defined(TARGET_OS_WINDOWS)
 //#define HAS_WIN32_NETWORK     // defined in GoTvCompilerConfig.h
 //#define HAS_AUDIO 1           // defined in GoTvCompilerConfig.h
 //#define HAS_FILESYSTEM_SMB 1  // defined in GoTvCompilerConfig.h
 
 //#define HAS_SDL_JOYSTICK  // define for joystick control
-
-
 
 //============================================================================
 //=== More General defines ===//
@@ -203,21 +190,20 @@ echo GoTv Compiler Config error no os defined
 # define HAS_EGL
 # if !defined(HAVE_LIBGLESV2)
 #  define HAS_GLX
-# endif
+# endif // HAVE_LIBGLESV2
 #endif // HAVE_X11
-
-
 
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif // __cplusplus
+
 // these are implemented in CoreLib/VxTime.cpp but did not want to include the header everywhere
 int64_t	GetTimeStampMs( void );			      // milli seconds since January 1, 1970 GMT time
 inline int64_t	GetTimeStampSec( void ) { return GetTimeStampMs() / 1000; }
+
 #ifdef __cplusplus
 }
-#endif
-
+#endif // __cplusplus
 
 #define BUILDSUF ""
 
@@ -240,7 +226,6 @@ extern int libintl_version;
 //#define  VAR_ARRAYS				1 // some libs use if instead of #if 
 #define  USE_VAR_ARRAYS				0 // some libs use if instead of #if 
 
-
 //============================================================================
 //=== Windows Specific ===//
 //============================================================================
@@ -252,6 +237,10 @@ extern int libintl_version;
 //#define HAS_SDL_JOYSTICK  // define for joystick control
 # ifndef HAVE_QT_GUI
 #  ifndef HAS_DX
+#   define HAS_DX 0
+#  endif // HAS_DX
+# else
+#  ifndef HAS_DX
 #   define HAS_DX 1
 #  endif // HAS_DX
 # endif // HAVE_QT_GUI
@@ -259,62 +248,65 @@ extern int libintl_version;
 //============================================================================
 //=== Android Specific ===//
 //============================================================================
-
 #elif defined(TARGET_OS_ANDROID)
+
 # ifndef HAS_GL
 #  define HAS_GL 1
 #  define HAVE_LIBGL 1
 # endif // HAS_GL
-
 
 //============================================================================
 //=== Linux Specific ===//
 //============================================================================
-#elif defined(TARGET_OS_LINIX)
+#elif defined(TARGET_OS_LINUX)
+
 # ifndef HAS_GL
 #  define HAS_GL 1
 #  define HAVE_LIBGL 1
 # endif // HAS_GL
 
-
 # if defined(HAVE_LIBAVAHI_COMMON) && defined(HAVE_LIBAVAHI_CLIENT)
-# define HAS_ZEROCONF
-# define HAS_AVAHI
-# endif
+#  define HAS_ZEROCONF
+#  define HAS_AVAHI
+# endif // defined(HAVE_LIBAVAHI_COMMON) && defined(HAVE_LIBAVAHI_CLIENT)
+
 # ifdef HAVE_DBUS
 #  define HAS_DBUS
-# endif
-# define HAS_GL
+# endif // HAVE_DBUS
+
 # ifdef HAVE_X11
 #  define HAS_X11_WIN_EVENTS
-# endif
+# endif // HAVE_X11
+
 # ifdef HAVE_SDL
-# define HAS_SDL
-# ifndef HAVE_X11
-#  define HAS_SDL_WIN_EVENTS
-# endif
+#  define HAS_SDL
+#  ifndef HAVE_X11
+#   define HAS_SDL_WIN_EVENTS
+#  endif // HAVE_X11
 # else
 #  ifndef HAVE_X11
-#   define HAS_LINUX_EVENTS
-#  endif
-# endif
+#    define HAS_LINUX_EVENTS
+#  endif // HAVE_X11
+# endif // HAVE_SDL
+
 # define HAS_LINUX_NETWORK
 # ifdef HAVE_LIRC
 #  define HAS_LIRC
-# endif
+# endif // HAVE_LIRC
+
 # ifdef HAVE_LIBPULSE
 #  define HAS_PULSEAUDIO
-# endif
-#  ifdef HAVE_ALSA
+# endif // HAVE_LIBPULSE
+
+# ifdef HAVE_ALSA
 #  define HAS_ALSA
-# endif
-#elif defined(TARGET_OS_APPLE)
+# endif // HAVE_ALSA
+
 //============================================================================
 //=== Apple Specific ===//
 //============================================================================
-
+#elif defined(TARGET_OS_APPLE)
 echo GoTv Compiler Config error apple not supported
 #else 
 echo GoTv Compiler Config error no os defined
-#endif
-#endif
+#endif // TARGET_OS_WINDOWS

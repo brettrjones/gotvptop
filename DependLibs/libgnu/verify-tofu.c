@@ -38,7 +38,8 @@
 # include <direct.h> // for _mkdir
 # undef strtok_r
 # define strtok_r strtok
-
+#else
+# include <string.h>
 #endif // _MSC_VER
 
 
@@ -176,7 +177,7 @@ static int parse_commitment_line(char *line,
 	uint8_t hphash[MAX_HASH_SIZE * 2 + 1];
 
 	/* read host */
-	p = strtok_r(line, "|" );
+    p = strtok_r(line, "|", 0 );
 	if (p == NULL)
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
@@ -184,7 +185,7 @@ static int parse_commitment_line(char *line,
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
 	/* read service */
-	p = strtok_r(NULL, "|" );
+    p = strtok_r(NULL, "|", 0 );
 	if (p == NULL)
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
@@ -192,7 +193,7 @@ static int parse_commitment_line(char *line,
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
 	/* read expiration */
-	p = strtok_r(NULL, "|" );
+    p = strtok_r(NULL, "|", 0 );
 	if (p == NULL)
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
@@ -201,7 +202,7 @@ static int parse_commitment_line(char *line,
 		return gnutls_assert_val(GNUTLS_E_EXPIRED);
 
 	/* read hash algorithm */
-	p = strtok_r(NULL, "|" );
+    p = strtok_r(NULL, "|", 0 );
 	if (p == NULL)
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
@@ -210,7 +211,7 @@ static int parse_commitment_line(char *line,
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
 	/* read hash */
-	kp = strtok_r(NULL, "|" );
+    kp = strtok_r(NULL, "|", 0 );
 	if (kp == NULL)
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
@@ -259,7 +260,7 @@ static int parse_line(char *line,
 	time_t expiration;
 
 	/* read version */
-	p = strtok_r(line, "|");
+    p = strtok_r(line, "|", 0);
 	if (p == NULL)
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
@@ -272,7 +273,7 @@ static int parse_line(char *line,
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
 	/* read host */
-	p = strtok_r(NULL, "|");
+    p = strtok_r(NULL, "|", 0);
 	if (p == NULL)
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
@@ -280,7 +281,7 @@ static int parse_line(char *line,
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
 	/* read service */
-	p = strtok_r(NULL, "|");
+    p = strtok_r(NULL, "|", 0);
 	if (p == NULL)
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
@@ -288,7 +289,7 @@ static int parse_line(char *line,
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
 	/* read expiration */
-	p = strtok_r(NULL, "|");
+    p = strtok_r(NULL, "|", 0);
 	if (p == NULL)
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 
@@ -297,7 +298,7 @@ static int parse_line(char *line,
 		return gnutls_assert_val(GNUTLS_E_EXPIRED);
 
 	/* read key */
-	kp = strtok_r(NULL, "|");
+    kp = strtok_r(NULL, "|", 0);
 	if (kp == NULL)
 		return gnutls_assert_val(GNUTLS_E_PARSING_ERROR);
 

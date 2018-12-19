@@ -15,7 +15,7 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-#ifndef _MSC_VER // FIXME: will have to be reworked for VISUAL STUDIO
+#if 0 // FIXME: BRJ will have to be reworked for VISUAL STUDIO
 #include  "ostream.oo.h"
 
 #include  "ostream.h"

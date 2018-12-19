@@ -46,12 +46,14 @@
 /* Tell glibc's <stdio.h> to provide a prototype for snprintf().
    This must come before <config_libgnu.h> because <config_libgnu.h> may include
    <features.h>, and once <features.h> has been included, it's too late.  */
+# include <config_libgnu.h>
+#undef HAVE_WCRTOMB
+
 #ifndef _GNU_SOURCE
 # define _GNU_SOURCE    1
 #endif
 
 #ifndef VASNPRINTF
-# include <config_libgnu.h>
 #endif
 #ifndef IN_LIBINTL
 # include <libgnu/alloca_gnu.h>

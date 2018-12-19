@@ -25,7 +25,7 @@
 
 /* Get the original definition of open.  It might be defined as a macro.  */
 #include  <fcntl.h>
-#include  <io.h>
+//#include  <io.h>
 #include  <sys/types.h>
 #undef __need_system_fcntl_h
 

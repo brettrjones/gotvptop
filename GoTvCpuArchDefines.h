@@ -91,6 +91,7 @@
 #define HAVE_ARM_ARCH_V6				1 // we don't support the really old processors
 
 #elif defined(TARGET_OS_LINUX)
+
 # define GOTV_ARCH_LITTLE_ENDIAN		1
 # define GOTV_ARCH_BIG_ENDIAN			0
 // only 32bit x86 linux is supported

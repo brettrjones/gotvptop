@@ -313,6 +313,7 @@ GOTV_EXTERN_C int _gl_raise_SIGPIPE (void);
 
 
 //# if !GNULIB_defined_siginfo_types
+#ifdef TARGET_OS_WINDOWS
 
 /* Present to allow compilation, but unsupported by gnulib.  */
 union sigval
@@ -374,8 +375,10 @@ struct sigaction
 #  define SA_RESTART 4
 
 #  define GNULIB_defined_struct_sigaction 1
-
 extern int gnu_sigaction( int, const struct sigaction*, struct sigaction* );
+
+#endif // TARGET_OS_WINDOWS
+
 //extern int gnu_sigaction( int, const struct sigaction *sigAction );
 GOTV_END_CDECLARES
 

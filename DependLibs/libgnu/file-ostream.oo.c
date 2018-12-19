@@ -16,8 +16,8 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 #include  <config_libgnu.h>
-// BRJ i think there is a conflick of keywords in windows
-#ifndef _MSC_VER
+// BRJ i think there is a conflict of keywords in windows
+#if 0
 
 /* Specification.  */
 #include  "file-ostream.h"

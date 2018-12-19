@@ -89,7 +89,7 @@
    Some builds of uClibc lack it.  */
 /* The include_next requires a split double-inclusion guard.  */
 #ifndef _MSC_VER
-# include_next <wchar_gnu.h>
+# include <libgnu/wchar_gnu.h>
 #endif
 
 #undef _GL_ALREADY_INCLUDING_WCHAR_H
@@ -409,11 +409,13 @@ _GL_WARN_EXTERN_C int _gl_warn_on_use
 
 
 /* Define wint_t and WEOF.  (Also done in wctype.in.h.)  */
-#if !1 && !defined wint_t
-# define wint_t int
+#if !defined(TARGET_OS_WINDOWS) && !defined(wint_t)
 # ifndef WEOF
 #  define WEOF -1
 # endif
+# if !defined(__WINT_TYPE__)
+#  define wint_t int
+# endif //!defined(__WINT_TYPE__)
 #else
 /* MSVC defines wint_t as 'unsigned short' in <crtdefs.h>.
    This is too small: ISO C 99 section 7.24.1.(2) says that wint_t must be
@@ -436,7 +438,7 @@ typedef unsigned int rpl_wint_t;
 /* Override mbstate_t if it is too small.
    On IRIX 6.5, sizeof (mbstate_t) == 1, which is not sufficient for
    implementing mbrtowc for encodings like UTF-8.  */
-#if !(1 && 1) || 0
+#ifndef TARGET_OS_WINDOWS
 # if !GNULIB_defined_mbstate_t
 typedef int rpl_mbstate_t;
 #  undef mbstate_t

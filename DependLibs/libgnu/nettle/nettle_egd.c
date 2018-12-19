@@ -32,7 +32,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/un.h>
-#include "egd.h"
+//BRJ #include "egd.h"
 #include <gnutls_int.h>
 #include <gnutls_str.h>
 #include <gnutls_errors.h>

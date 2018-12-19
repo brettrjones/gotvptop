@@ -1,3 +1,8 @@
+INCLUDEPATH += $$PWD/../../inc
+INCLUDEPATH += $$PWD/../../src
+INCLUDEPATH += $$PWD/../../
+
+
 HEADERS += 	$$PWD/../../inc/config_gsm.h \
 	$$PWD/../../inc/gsm.h \
 	$$PWD/../../inc/private.h \

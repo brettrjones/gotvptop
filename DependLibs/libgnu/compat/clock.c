@@ -29,5 +29,10 @@ _gcry_clock (void)
 }
 
 #else
-# error No replacement function for clock known
+#include <CoreLib/VxTime.h>
+clock_t _gcry_clock (void)
+{
+    return GetApplicationAliveMs();
+}
+
 #endif

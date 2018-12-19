@@ -1,5 +1,6 @@
 
 #pragma once
+#include <stddef.h>
 #include <GoTvDependLibrariesConfig.h>
 #include <libgnu/g-gnulib.h>
 
@@ -134,42 +135,6 @@
 
 /* Define to 1 if you have the `asprintf' function. */
 #define HAVE_ASPRINTF 1
-
-/* Define to 1 if you have the `atexit' function. */
-
-
-/* Define to 1 if you have the declaration of `clearerr_unlocked', and to 0 if
-   you don't. */
-#define HAVE_DECL_CLEARERR_UNLOCKED 0
-
-/* Define to 1 if you have the declaration of `feof_unlocked', and to 0 if you
-   don't. */
-#define HAVE_DECL_FEOF_UNLOCKED 0
-
-/* Define to 1 if you have the declaration of `ferror_unlocked', and to 0 if
-   you don't. */
-#define HAVE_DECL_FERROR_UNLOCKED 0
-
-/* Define to 1 if you have the declaration of `fflush_unlocked', and to 0 if
-   you don't. */
-#define HAVE_DECL_FFLUSH_UNLOCKED 0
-
-/* Define to 1 if you have the declaration of `fgets_unlocked', and to 0 if
-   you don't. */
-#define HAVE_DECL_FGETS_UNLOCKED 0
-
-/* Define to 1 if you have the declaration of `fputc_unlocked', and to 0 if
-   you don't. */
-#define HAVE_DECL_FPUTC_UNLOCKED 0
-
-/* Define to 1 if you have the declaration of `fputs_unlocked', and to 0 if
-   you don't. */
-#define HAVE_DECL_FPUTS_UNLOCKED 0
-
-/* Define to 1 if you have the declaration of `fread_unlocked', and to 0 if
-   you don't. */
-#define HAVE_DECL_FREAD_UNLOCKED 0
-
 
 #ifdef _MSC_VER
    /* Define to 1 if you have the declaration of `getchar_unlocked', and to 0 if you don't. */
@@ -347,8 +312,9 @@
 
 
 /* Define to 1 if environ is declared even after undefining macros. */
-#define HAVE_RAW_DECL_ENVIRON 1
-
+#ifdef _MSC_VER
+# define HAVE_RAW_DECL_ENVIRON 1
+#endif // _MSC_VER
 
 /* Define to 1 if faccessat is declared even after undefining macros. */
 #define HAVE_RAW_DECL_FACCESSAT 1
@@ -645,7 +611,7 @@
 #define HAVE_WCWIDTH 1
 
 /* Define if you have the 'wint_t' type. */
-#define HAVE_WINT_T 1
+//#define HAVE_WINT_T 1 defined in GoTvCompileConfig.h
 
 /* Define to 1 if O_NOATIME works. */
 #define HAVE_WORKING_O_NOATIME 0
@@ -1087,9 +1053,6 @@ macros. */
 /* Define to 1 if endusershell is declared even after undefining macros. */
 /* #undef HAVE_RAW_DECL_ENDUSERSHELL */
 
-/* Define to 1 if environ is declared even after undefining macros. */
-#define HAVE_RAW_DECL_ENVIRON 1
-
 /* Define to 1 if euidaccess is declared even after undefining macros. */
 /* #undef HAVE_RAW_DECL_EUIDACCESS */
 
@@ -1451,10 +1414,6 @@ uintmax_t. */
 /* Define to 1 if you have the <sys/inttypes.h> header file. */
 /* #undef HAVE_SYS_INTTYPES_H */
 
-
-/* Define to 1 if you have the <sys/param.h> header file. */
-//#define HAVE_SYS_PARAM_H 1 // defined in GoTvCompilerConfig.h
-
 /* Define to 1 if you have the <sys/socket.h> header file. */
 //#define HAVE_SYS_SOCKET_H 1 // defined in GoTvCompilerConfig.h
 
@@ -1512,7 +1471,7 @@ uintmax_t. */
 /* #undef HAVE_WINSOCK2_H */
 
 /* Define if you have the 'wint_t' type. */
-#define HAVE_WINT_T 1
+//#define HAVE_WINT_T 1
 
 /* Define to 1 if O_NOATIME works. */
 #define HAVE_WORKING_O_NOATIME 0
@@ -1807,10 +1766,11 @@ __STDC_VERSION__ tests for the C99 mode.  */
 doesn't define it. */
 /* #undef ptrdiff_t */
 
-/* Define to the equivalent of the C99 'GOTV_RESTRICT' keyword, or to
+/* Define to the equivalent of the C99 'restrict' keyword, or to
 nothing if this is not supported.  Do not define if GOTV_RESTRICT is
 supported directly.  */
-#define GOTV_RESTRICT __restrict
+//#define GOTV_RESTRICT __restrict // defined in GoTvDependLibrariesConfig.h
+
 /* Work around a bug in Sun C++: it does not support _Restrict or
 __restrict__, even though the corresponding Sun C compiler ends up with
 "#define GOTV_RESTRICT _Restrict" or "#define GOTV_RESTRICT __restrict__" in the
@@ -2221,7 +2181,7 @@ libc. */
 
 /* Define to 1 if you have the declaration of `clearerr_unlocked', and to 0 if
 you don't. */
-#define HAVE_DECL_CLEARERR_UNLOCKED 0
+//#define HAVE_DECL_CLEARERR_UNLOCKED 0
 
 /* Define to 1 if you have the declaration of `copysign', and to 0 if you
 don't. */
@@ -2241,31 +2201,31 @@ don't. */
 
 /* Define to 1 if you have the declaration of `feof_unlocked', and to 0 if you
 don't. */
-#define HAVE_DECL_FEOF_UNLOCKED 0
+//#define HAVE_DECL_FEOF_UNLOCKED 0 // defined in GoTvDependLibrariesConfig.h
 
 /* Define to 1 if you have the declaration of `ferror_unlocked', and to 0 if
 you don't. */
-#define HAVE_DECL_FERROR_UNLOCKED 0
+//#define HAVE_DECL_FERROR_UNLOCKED 0 // defined in GoTvDependLibrariesConfig.h
 
 /* Define to 1 if you have the declaration of `fflush_unlocked', and to 0 if
 you don't. */
-#define HAVE_DECL_FFLUSH_UNLOCKED 0
+//#define HAVE_DECL_FFLUSH_UNLOCKED 0 // defined in GoTvDependLibrariesConfig.h
 
 /* Define to 1 if you have the declaration of `fgets_unlocked', and to 0 if
 you don't. */
-#define HAVE_DECL_FGETS_UNLOCKED 0
+//#define HAVE_DECL_FGETS_UNLOCKED 0 // defined in GoTvDependLibrariesConfig.h
 
 /* Define to 1 if you have the declaration of `fputc_unlocked', and to 0 if
 you don't. */
-#define HAVE_DECL_FPUTC_UNLOCKED 0
+//#define HAVE_DECL_FPUTC_UNLOCKED 0 // defined in GoTvDependLibrariesConfig.h
 
 /* Define to 1 if you have the declaration of `fputs_unlocked', and to 0 if
 you don't. */
-#define HAVE_DECL_FPUTS_UNLOCKED 0
+//#define HAVE_DECL_FPUTS_UNLOCKED 0 // defined in GoTvDependLibrariesConfig.h
 
 /* Define to 1 if you have the declaration of `fread_unlocked', and to 0 if
 you don't. */
-#define HAVE_DECL_FREAD_UNLOCKED 0
+//#define HAVE_DECL_FREAD_UNLOCKED 0 // defined in GoTvDependLibrariesConfig.h
 
 /* Define to 1 if you have the declaration of `ftello', and to 0 if you don't.
 */
@@ -2788,9 +2748,6 @@ macros. */
 
 /* Define to 1 if endusershell is declared even after undefining macros. */
 /* #undef HAVE_RAW_DECL_ENDUSERSHELL */
-
-/* Define to 1 if environ is declared even after undefining macros. */
-#define HAVE_RAW_DECL_ENVIRON 1
 
 /* Define to 1 if euidaccess is declared even after undefining macros. */
 /* #undef HAVE_RAW_DECL_EUIDACCESS */
@@ -3733,14 +3690,12 @@ termcap library functions. */
 #define HAVE_WCTOB 1
 
 /* Define to 1 if you have the <wctype.h> header file. */
+#ifdef _MSC_VER
 #define HAVE_WCTYPE_H 1
+#endif // _MSC_VER
 
 /* Define to 1 if you have the `wcwidth' function. */
 #define HAVE_WCWIDTH 1
-
-
-/* Define if you have the 'wint_t' type. */
-#define HAVE_WINT_T 1
 
 /* Define to 1 if you have the `wmemchr' function. */
 #define HAVE_WMEMCHR 1
@@ -4228,7 +4183,8 @@ doesn't define it. */
 /* Define to the equivalent of the C99 'GOTV_RESTRICT' keyword, or to
 nothing if this is not supported.  Do not define if GOTV_RESTRICT is
 supported directly.  */
-#define GOTV_RESTRICT __restrict
+//#define GOTV_RESTRICT __restrict
+
 /* Work around a bug in Sun C++: it does not support _Restrict or
 __restrict__, even though the corresponding Sun C compiler ends up with
 "#define GOTV_RESTRICT _Restrict" or "#define GOTV_RESTRICT __restrict__" in the
@@ -4655,8 +4611,6 @@ declares uintmax_t. */
 /* #undef HAVE_SYS_NDIR_H */
 
 #ifndef _MSC_VER
-/* Define to 1 if you have the <sys/param.h> header file. */
-#define HAVE_SYS_PARAM_H 1
 /* Define to 1 if you have the <sys/resource.h> header file. */
 #define HAVE_SYS_RESOURCE_H 1
 #endif // _MSC_VER
@@ -4726,9 +4680,6 @@ specified by Unix98. */
 /* Define to 1 if you have the `wcslen' function. */
 #define HAVE_WCSLEN 1
 
-/* Define if you have the 'wint_t' type. */
-#define HAVE_WINT_T 1
-
 /* Have a working bcopy */
 /* #undef HAVE_WORKING_BCOPY */
 
@@ -4780,15 +4731,20 @@ STACK_DIRECTION = 0 => direction of growth unknown */
 /* Define to use statfs() */
 #define USE_STATFS 1
 
+#define GLIB_STATIC_COMPILATION 1
+#define G_GNUC_INTERNAL
+#define G_STMT_START
+#define G_STMT_END
+
+#if GOTV_ARCH_BIG_ENDIAN
+# define G_BYTE_ORDER 4321 // for little endian us 1234 and for big endian use 4321
+#else
+# define G_BYTE_ORDER 1234 // for little endian us 1234 and for big endian use 4321
+#endif // GOTV_ARCH_BIG_ENDIAN
 
 #ifdef TARGET_OS_WINDOWS
 #define G_OS_WIN32 1
 #define G_PLATFORM_WIN32 1
-#define GLIB_STATIC_COMPILATION 1
-#define G_BYTE_ORDER 1234 // for little endian us 1234 and for big endian use 4321
-#define G_GNUC_INTERNAL 
-#define G_STMT_START
-#define G_STMT_END
 
 #endif // TARGET_OS_WINDOWS
 
@@ -4862,6 +4818,7 @@ extern void g_log( const char *domain, int level, const char *format, ... );
 /* ==================== Substitute for <libgnu/gprintf.h> ==================== */
 
 #include <stdio.h>
+#include <stdarg.h>
 
 #define g_printf printf
 #define g_fprintf fprintf
@@ -4978,18 +4935,9 @@ removed. */
 /* Define to 1 if you have the <byteswap.h> header file. */
 #define HAVE_BYTESWAP_H				1
 
-
-/* Define to 1 if you have the declaration of `fflush_unlocked', and to 0 if
-you don't. */
-#define HAVE_DECL_FFLUSH_UNLOCKED	0
-
 /* Define to 1 if you have the declaration of `flockfile', and to 0 if you
 don't. */
 #define HAVE_DECL_FLOCKFILE			1
-
-/* Define to 1 if you have the declaration of `fputs_unlocked', and to 0 if
-you don't. */
-#define HAVE_DECL_FPUTS_UNLOCKED	0
 
 /* Define to 1 if you have the declaration of `freeaddrinfo', and to 0 if you
 don't. */
@@ -5322,9 +5270,6 @@ macros. */
 
 /* Define to 1 if endusershell is declared even after undefining macros. */
 /* #undef HAVE_RAW_DECL_ENDUSERSHELL */
-
-/* Define to 1 if environ is declared even after undefining macros. */
-#define HAVE_RAW_DECL_ENVIRON 1
 
 /* Define to 1 if euidaccess is declared even after undefining macros. */
 /* #undef HAVE_RAW_DECL_EUIDACCESS */
@@ -6064,9 +6009,6 @@ uintmax_t. */
 
 /* Define to 1 if you have the <winsock2.h> header file. */
 /* #undef HAVE_WINSOCK2_H */
-
-/* Define to 1 if the system has the type `wint_t'. */
-#define HAVE_WINT_T 1
 
 /* Define to 1 if `fork' works. */
 #define HAVE_WORKING_FORK 1

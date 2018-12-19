@@ -1,12 +1,11 @@
+INCLUDEPATH += $$PWD/../../
+INCLUDEPATH += $$PWD/../../include
+
+
+
 HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
-	$$PWD/../../../../GoTvCompilerIntTypes.h \
-	$$PWD/../../../../GoTvConfig.h \
-	$$PWD/../../../../GoTvConfigAndroid.h \
-	$$PWD/../../../../GoTvConfigLinux.h \
-	$$PWD/../../../../GoTvConfigWindows.h \
 	$$PWD/../../../../GoTvCpuArchDefines.h \
 	$$PWD/../../../../GoTvDependLibrariesConfig.h \
-	$$PWD/../../../../GoTvFeaturesConfig.h \
 	$$PWD/../../ilbc/abs_quant.h \
 	$$PWD/../../ilbc/abs_quant_loop.h \
 	$$PWD/../../ilbc/augmented_cb_corr.h \

@@ -1,3 +1,6 @@
+
+DEFINES += FT_DEBUG_LEVEL_ERROR FT_DEBUG_LEVEL_TRACE FT2_BUILD_LIBRARY
+
 INCLUDEPATH += $$PWD/../../include
 
 HEADERS += 	$$PWD/../../include/freetype/config/ftconfig.h \

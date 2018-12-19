@@ -64,6 +64,34 @@
 # else
 #  define LZO_OS_WIN32 1
 # endif // ARCH_X86_64
+#else
+/*
+# undef _PTRDIFF_T_DEFINED
+#  define _PTRDIFF_T_DEFINED 1
+
+   typedef uint64_t size_t;
+
+
+   typedef uint64_t         lzo_uint;
+   typedef uint64_t *       lzo_uintptr_t;
+   typedef void *           lzo_voidp;
+   typedef unsigned char *  lzo_bytep;
+
+   typedef int32_t          lzo_int32_t;
+   typedef uint32_t         lzo_uint32_t;
+   typedef int64_t          lzo_int64_t;
+   typedef uint64_t         lzo_uint64_t;
+
+   #define LZO_SIZEOF_VOID_P sizeof(int)
+   #define SIZEOF_VOID_P sizeof(int)
+
+   #define LZO_SIZEOF_SHORT 2
+   #define LZO_SIZEOF_LONG 4
+   #define LZO_SIZEOF_INT 4
+   #define LZO_SIZEOF_LZO_INT64L_T sizeof(int64_t)
+   #define LZO_SIZEOF_LZO_INT64E_T sizeof(uint64_t)
+*/
+
 #endif // TARGET_OS_WINDOWS
 
 #if defined(__CYGWIN32__) && !defined(__CYGWIN__)

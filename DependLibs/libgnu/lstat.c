@@ -23,7 +23,7 @@
 #define __need_system_sys_stat_h
 #include <libgnu/config_libgnu.h>
 #ifndef TARGET_OS_WINDOWS // windows does not have symlinks so just redefines lstat to stat
-#include "sys/stat_gnu.h"
+//BRJ #include "sys/stat_gnu.h"
 
 #if !HAVE_LSTAT
    /* On systems that lack symlinks, our replacement <sys/stat.h> already

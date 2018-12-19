@@ -49,7 +49,7 @@ _GL_INLINE_HEADER_BEGIN
   /* On reasonable systems, binary I/O is the only choice.  */
   /* Use a function rather than a macro, to avoid gcc warnings
      "warning: statement with no effect".  */
-BINARY_IO_INLINE int
+GOTV_INLINE int
 set_binary_mode (int fd, int mode)
 {
   (void) fd;

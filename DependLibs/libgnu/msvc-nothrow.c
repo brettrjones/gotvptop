@@ -16,7 +16,7 @@
    with this program; if not, see <http://www.gnu.org/licenses/>.  */
 
 #include <config_libgnu.h>
-
+#ifdef TARGET_OS_WINDOWS
 /* Specification.  */
 #include "msvc-nothrow.h"
 
@@ -47,3 +47,4 @@ _gl_nothrow_get_osfhandle (int fd)
   return result;
 }
 #endif
+#endif // TARGET_OS_WINDOWS

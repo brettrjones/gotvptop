@@ -47,7 +47,7 @@
 #undef strdup
 
 #ifdef NO_SSIZE_T
-#define HAVE_SSIZE_T
+# define HAVE_SSIZE_T
 typedef int ssize_t;
 #endif
 
@@ -55,9 +55,9 @@ typedef int ssize_t;
 #include <unistd.h>
 #include <sys/stat.h>
 #if HAVE_SYS_SOCKET_H
-#include <sys/socket.h>
+# include <sys/socket.h>
 #elif HAVE_WS2TCPIP_H
-#include <ws2tcpip.h>
+# include <ws2tcpip.h>
 #endif
 #include <time.h>
 
@@ -66,18 +66,18 @@ typedef int ssize_t;
 #define ENABLE_ALIGN16
 
 #ifdef __GNUC__
-#ifndef _GNUTLS_GCC_VERSION
-#define _GNUTLS_GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
-#endif
-#if _GNUTLS_GCC_VERSION >= 30100
-#define likely(x)      __builtin_expect((x), 1)
-#define unlikely(x)    __builtin_expect((x), 0)
-#endif
+# ifndef _GNUTLS_GCC_VERSION
+# define _GNUTLS_GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
+# endif
+# if _GNUTLS_GCC_VERSION >= 30100
+#  define likely(x)      __builtin_expect((x), 1)
+#  define unlikely(x)    __builtin_expect((x), 0)
+# endif
 #endif
 
 #ifndef likely
-#define likely
-#define unlikely
+# define likely
+# define unlikely
 #endif
 /* some systems had problems with long long int, thus,
  * it is not used.
@@ -1045,4 +1045,4 @@ GOTV_INLINE static size_t max_user_send_size(gnutls_session_t session,
 }
 
 
-#endif __GNUTLS_INT_H
+#endif //__GNUTLS_INT_H

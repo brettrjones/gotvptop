@@ -5,7 +5,13 @@
 
 #include "GoTvCpuArchDefines.h"
 
-#include <sys/types.h> // for size_t in linux
+#include <inttypes.h> // all compilers must support this header to avoid massive typedef clashes
+//#include <sys/types.h> // for size_t in linux
+
+#ifdef TARGET_OS_LINUX
+# define int8_t char
+#endif // TARGET_OS_LINUX
+
 
 #ifdef _UNICODE
 //echo configuration error..use Multibyte Character Set instead of _UNICODE
@@ -22,7 +28,9 @@
 // not windows
 # define PRIdS      "d"
 # define PRIuS      "u"
-# define PRId64    "lld"
+# ifndef PRId64
+#  define PRId64    "lld"
+# endif // PRId64
 #endif // TARGET_OS_WINDOWS
 
 #define GOTV_UINT64_FORMAT	"%llu"	// specifier for printing unsigned long long type ( works in Windows and Linux and Android )
@@ -232,7 +240,26 @@ n = 1 stands for the first argument, n = 2 for the second argument etc.  */
 # ifndef __STDC_CONSTANT_MACROS
 #  define __STDC_CONSTANT_MACROS
 # endif // __STDC_CONSTANT_MACROS
+//============================================================================
+// === common to all OSs and compilers ====
+//============================================================================
 
+#define SYSTEM_URL_SIZE (sizeof(SYSTEM_URL)-1)
+
+#ifdef TARGET_OS_WINDOWS
+# define SYSTEM_URL     "win:"
+#define MAX_PATH        PATH_MAX
+# define MAXPATHLEN		MAX_PATH
+# define LINE_ENDING	"\r\n"
+# define EXEEXT			".exe"
+#else
+# define SYSTEM_URL     "system:"
+# define MAXPATHLEN		MAX_PATH
+# define LINE_ENDING	"\n"
+# define EXEEXT			""
+#endif // TARGET_OS_WINDOWS
+
+#define U64_C(c) (c ## ULL)
 
 # ifdef _MSC_VER
 //============================================================================
@@ -499,7 +526,6 @@ typedef _dev_t				dev_t;
 typedef unsigned int sigset_t;
 #  define GNULIB_defined_sigset_t 1
 # endif
-#define U64_C(c) (c ## ULL)
 
 #if !defined(_SSIZE_T_DEFINED) && !defined(HAVE_SSIZE_T)
 #define HAVE_SSIZE_T 1
@@ -522,21 +548,10 @@ typedef unsigned int sigset_t;
 # endif // !SSIZE_MAX
 #endif // !defined(_SSIZE_T_DEFINED) && !defined(HAVE_SSIZE_T)
 
-#define MAXPATHLEN		MAX_PATH
-#define LINE_ENDING		"\r\n"
-#define EXEEXT			".exe"
 
 # if _MSC_VER >= 1400 && !defined(_WIN32_WCE)
 #  define mkstemp(a)			_mktemp_s(a,strlen(a))
 # endif // _MSC_VER >= 1400 && !defined(_WIN32_WCE)
-
-#ifdef TARGET_OS_WINDOWS
-# define SYSTEM_URL "win:"
-#else
-# define SYSTEM_URL "system:"
-#endif // TARGET_OS_WINDOWS
-#define SYSTEM_URL_SIZE (sizeof(SYSTEM_URL)-1)
-
 
 # if !defined(_IOWR) && defined(_MSC_VER)
 #  define _IOWR(exp1,exp2,exp3)     (IOC_INOUT | (( (long)sizeof(exp3)&IOCPARM_MASK) <<16 ) | ((exp1)<<8) | (exp2))
@@ -655,7 +670,9 @@ typedef unsigned short		WORD;
 typedef unsigned char		BYTE;
 typedef char				CHAR;
 typedef wchar_t				WCHAR;
-typedef int					BOOL;
+#ifndef DO_NOT_DEFINE_BOOL // some projects such as glew typedef BOOL
+ typedef int					BOOL;
+#endif// DO_NOT_DEFINE_BOOL
 #ifndef BOOL
 //# define BOOL int // have to use define so that linux can typedef it
 #endif // BOOL
@@ -705,6 +722,9 @@ typedef WORD*               LPWORD;
 typedef CHAR*               LPCHAR;
 typedef CHAR*               PCHAR;
 typedef const void*         LPCVOID;
+#ifndef TARGET_OS_WINDOWS
+typedef unsigned short      LANGID;
+#endif // TARGET_OS_WINDOWS
 
 typedef union _LARGE_INTEGER
 {
@@ -901,7 +921,7 @@ typedef struct _WIN32_FIND_DATA
 typedef struct _SECURITY_ATTRIBUTES {
 	DWORD nLength;
 	LPVOID lpSecurityDescriptor;
-	BOOL bInheritHandle;
+    int bInheritHandle; //BOOL bInheritHandle;
 } SECURITY_ATTRIBUTES, *PSECURITY_ATTRIBUTES, *LPSECURITY_ATTRIBUTES;
 
 #define FILE_BEGIN			0
@@ -910,7 +930,6 @@ typedef struct _SECURITY_ATTRIBUTES {
 
 #define _S_IFREG			S_IFREG
 #define _S_IFDIR			S_IFDIR
-#define MAX_PATH			PATH_MAX
 
 #define _stat				stat
 
@@ -1157,7 +1176,9 @@ typedef int64_t              time64_t;
 /* Define to 1 if you have the `geteuid' function. */
 #define HAVE_GETEUID			1
 /* Define to 1 if you have the `getgid' function. */
-#define HAVE_GETGID				1
+#define HAVE_GETGID             1
+/* Define to 1 if you have the `mempcpy' function. */
+#define HAVE_MEMPCPY            1
 #endif // TARGET_OS_WINDOWS
 
 #ifdef _MSC_VER
@@ -1555,7 +1576,11 @@ typedef int64_t              time64_t;
 /* Define to 1 if you have the `wcsnlen' function. */
 #define HAVE_WCSNLEN			1
 /* Define if you have the 'wint_t' type. */
-#define HAVE_WINT_T				1
+#ifdef _MSC_VER
+# define HAVE_WINT_T				1
+#else
+# define HAVE_WINT_T				0
+#endif // _MSC_VER
 
 #ifndef HAVE_STD__U16_STRING
 # define HAVE_STD__U16_STRING	1

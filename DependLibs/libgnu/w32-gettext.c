@@ -19,6 +19,7 @@
  */
 
 #include <config_libgnu.h>
+#ifdef TARGET_OS_WINDOWS
 #ifndef TARGET_OS_WINDOWS
 #  error This module may only be build for Windows or Cygwin32
 #endif
@@ -1951,3 +1952,4 @@ main (int argc, char **argv)
  * End:
  */
 #endif /*TEST*/
+#endif // TARGET_OS_WINDOWS

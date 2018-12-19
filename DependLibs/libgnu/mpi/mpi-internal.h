@@ -273,7 +273,7 @@ mpi_limb_t _gcry_mpih_rshift( mpi_ptr_t wp, mpi_ptr_t up, mpi_size_t usize,
 #endif
 
 #ifdef __GNUC__
-#include "mpi-GOTV_INLINE.h"
+#include "mpi-inline.h"
 #endif
 
 #endif /*G10_MPI_INTERNAL_H*/

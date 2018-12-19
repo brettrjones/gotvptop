@@ -22,8 +22,7 @@
  * File: src/gcrypt.h.  Generated from gcrypt.h.in by configure.
  */
 
-#ifndef _GCRYPT_H
-#define _GCRYPT_H
+#pragma once
 #include <libgnu/config_libgnu.h>
 
 #include <stdlib.h>
@@ -34,7 +33,7 @@
 
 #include <sys/types.h>
 
-#if defined TARGET_OS_WINDOWS
+//#if defined TARGET_OS_WINDOWS
 
 # ifndef __GNUC__
  // defined in GoTvDependLi
@@ -1671,10 +1670,9 @@ int gcry_is_secure (const void *a) _GCRY_GCC_ATTR_PURE;
 #define gcry_fips_mode_active()  !!gcry_control (GCRYCTL_FIPS_MODE_P, 0)
 
 
-#endif
+// #endif // TARGET_OS_WINDOWS
 
 GOTV_END_CDECLARES
 
 
-#endif /* _GCRYPT_H */
 

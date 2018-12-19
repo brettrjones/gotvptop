@@ -15,19 +15,24 @@
    You should have received a copy of the GNU General Public License
    along with this program; if not, see <http://www.gnu.org/licenses/>.  */
 
-#include <libgnu/config_libgnu.h>
 
-#include "read-file.h"
-   /* Get fstat.  */
-#include <sys/stat.h>
-/* Get ftello.  */
 #include <stdio.h>
-/* Get SIZE_MAX.  */
-#include <stdint.h>
-/* Get malloc, realloc, free. */
 #include <stdlib.h>
-/* Get errno. */
-#include <errno.h>
+
+#include <sys/stat.h>
+
+#ifdef TARGET_OS_WINDOWS
+    #include "shlobj.h" // for VxGetMyDocumentsDir
+    #include <direct.h>
+#else
+    #include <dirent.h> // for searching directories
+    #include <ctype.h>
+    #include <unistd.h>
+    #include <sys/vfs.h>
+    #include <sys/statfs.h>
+    #include <sys/types.h>
+
+#endif
 
 //============================================================================
 //! returns file size or 0 if does not exist
@@ -39,9 +44,9 @@ uint64_t GnuFileExists( const char * pFileName )
 	// Get data associated with the file
 	result = _stat64( pFileName , &gStat );
 #else
-	struct stat64 gStat;
+    struct stat gStat;
 	// Get data associated with the file
-	result = stat64( pFileName, &gStat );
+    result = stat( pFileName, &gStat );
 #endif //TARGET_OS_WINDOWS
 
 	// Check if statistics are valid:

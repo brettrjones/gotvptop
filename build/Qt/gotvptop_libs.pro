@@ -104,8 +104,8 @@ win32{
 ###include(../../DependLibs/libfaac/build/Qt/libfaac.pri)
 #include(../../DependLibs/libfdk-aac/build/Qt/libfdk-aac.pri)
 #include(../../DependLibs/libflac/build/Qt/libflac.pri)
-include(../../DependLibs/libfreetype/build/Qt/libfreetype.pri)
-#include(../../DependLibs/libfribid/build/Qt/libfribid.pri)
+#include(../../DependLibs/libfreetype/build/Qt/libfreetype.pri)
+#include(../../DependLibs/libfribid/build/Qt/libfribidi.pri)
 
 #include(../../DependLibs/libglew/build/Qt/libglew.pri)
 #include(../../DependLibs/libgnu/build/Qt/libgnu.pri)
@@ -113,12 +113,14 @@ include(../../DependLibs/libfreetype/build/Qt/libfreetype.pri)
 
 #include(../../DependLibs/libiconv/build/Qt/libiconv.pri)
 #include(../../DependLibs/libilbc/build/Qt/libilbc.pri)
-##include(../../DependLibs/libirrlicht/build/Qt/libirrlicht.pri)
-#include(../../DependLibs/libkvazaar/build/Qt/libkvazaar.pri)
+#include(../../DependLibs/libjpg/build/Qt/libjpg.pri)
+
+###include(../../DependLibs/libirrlicht/build/Qt/libirrlicht.pri)
+####include(../../DependLibs/libkvazaar/build/Qt/libkvazaar.pri)
 
 #include(../../DependLibs/liblame/build/Qt/liblame.pri)
-##include(../../DependLibs/liblinuxsim/build/Qt/liblinuxsim.pri)
-#include(../../DependLibs/liblzo/build/Qt/liblzo.pri)
+#include(../../DependLibs/liblzma/build/Qt/liblzma.pri)
+include(../../DependLibs/liblzo/build/Qt/liblzo.pri)
 #include(../../DependLibs/libmdnsresponder/build/Qt/libmdnsresponder.pri)
 #include(../../DependLibs/libmicrohttpd/build/Qt/libmicrohttpd.pri)
 

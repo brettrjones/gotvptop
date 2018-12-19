@@ -1,8 +1,10 @@
+DEFINES += GLIB_COMPILATION _MBCS __need_nettle_getopt
+
+INCLUDEPATH += $$PWD/../../
+
 HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
-	$$PWD/../../../../GoTvConfig.h \
 	$$PWD/../../../../GoTvCpuArchDefines.h \
 	$$PWD/../../../../GoTvDependLibrariesConfig.h \
-	$$PWD/../../../../GoTvFeaturesConfig.h \
 	$$PWD/../../../../GoTvTargetOsConfig.h \
 	$$PWD/../../../../base64.h \
 	$$PWD/../../../../byteswap.h \
@@ -14,8 +16,7 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../../../strings.h \
 	$$PWD/../../../../syslog.h \
 	$$PWD/../../../../unistd.h \
-	$$PWD/../../abstract.h \
-	$$PWD/../../abstract_int.h \
+	$$PWD/../../abstract_gnu.h \
 	$$PWD/../../accelerated/accelerated.h \
 	$$PWD/../../accelerated/cryptodev.h \
 	$$PWD/../../accelerated/x86/aes-gcm-aead.h \
@@ -263,7 +264,6 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../mbtowc-impl.h \
 	$$PWD/../../mbuiter.h \
 	$$PWD/../../message.h \
-	$$PWD/../../mini-gmp.h \
 	$$PWD/../../minmax.h \
 	$$PWD/../../mkerrcodes.h \
 	$$PWD/../../mman_w32.h \
@@ -290,72 +290,105 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../msgunfmt.h \
 	$$PWD/../../msvc-inval.h \
 	$$PWD/../../msvc-nothrow.h \
-	$$PWD/../../nettle/aes.h \
-	$$PWD/../../nettle/arcfour.h \
-	$$PWD/../../nettle/arctwo.h \
-	$$PWD/../../nettle/asn1.h \
-	$$PWD/../../nettle/base16.h \
-	$$PWD/../../nettle/base64.h \
-	$$PWD/../../nettle/bignum.h \
-	$$PWD/../../nettle/blowfish.h \
-	$$PWD/../../nettle/buffer.h \
-	$$PWD/../../nettle/camellia.h \
-	$$PWD/../../nettle/cast128.h \
-	$$PWD/../../nettle/cbc.h \
-	$$PWD/../../nettle/ccm.h \
-	$$PWD/../../nettle/chacha-poly1305.h \
-	$$PWD/../../nettle/chacha.h \
-	$$PWD/../../nettle/ctr.h \
-	$$PWD/../../nettle/curve25519.h \
-	$$PWD/../../nettle/des-compat.h \
-	$$PWD/../../nettle/des.h \
-	$$PWD/../../nettle/drbg-aes.h \
-	$$PWD/../../nettle/dsa-compat.h \
-	$$PWD/../../nettle/dsa-fips.h \
-	$$PWD/../../nettle/dsa.h \
-	$$PWD/../../nettle/eax.h \
-	$$PWD/../../nettle/ecc-curve.h \
-	$$PWD/../../nettle/ecc.h \
-	$$PWD/../../nettle/ecdsa.h \
-	$$PWD/../../nettle/eddsa.h \
-	$$PWD/../../nettle/egd.h \
-	$$PWD/../../nettle/gcm.h \
-	$$PWD/../../nettle/gnettle.h \
-	$$PWD/../../nettle/gosthash94.h \
-	$$PWD/../../nettle/hmac.h \
-	$$PWD/../../nettle/knuth-lfib.h \
-	$$PWD/../../nettle/macros.h \
-	$$PWD/../../nettle/md2.h \
-	$$PWD/../../nettle/md4.h \
-	$$PWD/../../nettle/md5-compat.h \
-	$$PWD/../../nettle/md5.h \
-	$$PWD/../../nettle/memxor.h \
+	$$PWD/../../nettle/config_nettle.h \
+	$$PWD/../../nettle/nettle-internal.h \
 	$$PWD/../../nettle/nettle-meta.h \
 	$$PWD/../../nettle/nettle-stdint.h \
 	$$PWD/../../nettle/nettle-types.h \
-	$$PWD/../../nettle/pbkdf2.h \
-	$$PWD/../../nettle/pgp.h \
-	$$PWD/../../nettle/pkcs1.h \
-	$$PWD/../../nettle/poly1305.h \
-	$$PWD/../../nettle/realloc.h \
-	$$PWD/../../nettle/ripemd160.h \
-	$$PWD/../../nettle/rnd-common.h \
-	$$PWD/../../nettle/rsa-fips.h \
-	$$PWD/../../nettle/rsa.h \
-	$$PWD/../../nettle/salsa20.h \
-	$$PWD/../../nettle/serpent.h \
-	$$PWD/../../nettle/sexp.h \
-	$$PWD/../../nettle/sha.h \
-	$$PWD/../../nettle/sha1.h \
-	$$PWD/../../nettle/sha2.h \
-	$$PWD/../../nettle/sha3.h \
-	$$PWD/../../nettle/twofish.h \
-	$$PWD/../../nettle/umac.h \
-	$$PWD/../../nettle/version.h \
-	$$PWD/../../nettle/yarrow.h \
+	$$PWD/../../nettle/nettle-write.h \
+	$$PWD/../../nettle/nettle_aes-internal.h \
+	$$PWD/../../nettle/nettle_aes.h \
+	$$PWD/../../nettle/nettle_arcfour.h \
+	$$PWD/../../nettle/nettle_arctwo.h \
+	$$PWD/../../nettle/nettle_asn1.h \
+	$$PWD/../../nettle/nettle_base16.h \
+	$$PWD/../../nettle/nettle_base64.h \
+	$$PWD/../../nettle/nettle_bignum.h \
+	$$PWD/../../nettle/nettle_blowfish.h \
+	$$PWD/../../nettle/nettle_buffer.h \
+	$$PWD/../../nettle/nettle_camellia-internal.h \
+	$$PWD/../../nettle/nettle_camellia.h \
+	$$PWD/../../nettle/nettle_cast128.h \
+	$$PWD/../../nettle/nettle_cast128_sboxes.h \
+	$$PWD/../../nettle/nettle_cbc.h \
+	$$PWD/../../nettle/nettle_ccm.h \
+	$$PWD/../../nettle/nettle_chacha-poly1305.h \
+	$$PWD/../../nettle/nettle_chacha.h \
+	$$PWD/../../nettle/nettle_config.h \
+	$$PWD/../../nettle/nettle_ctr.h \
+	$$PWD/../../nettle/nettle_curve25519.h \
+	$$PWD/../../nettle/nettle_des-compat.h \
+	$$PWD/../../nettle/nettle_des.h \
+	$$PWD/../../nettle/nettle_desCode.h \
+	$$PWD/../../nettle/nettle_desinfo.h \
+	$$PWD/../../nettle/nettle_drbg-aes.h \
+	$$PWD/../../nettle/nettle_dsa-compat.h \
+	$$PWD/../../nettle/nettle_dsa-fips.h \
+	$$PWD/../../nettle/nettle_dsa.h \
+	$$PWD/../../nettle/nettle_eax.h \
+	$$PWD/../../nettle/nettle_ecc-192.h \
+	$$PWD/../../nettle/nettle_ecc-224.h \
+	$$PWD/../../nettle/nettle_ecc-25519.h \
+	$$PWD/../../nettle/nettle_ecc-256.h \
+	$$PWD/../../nettle/nettle_ecc-384.h \
+	$$PWD/../../nettle/nettle_ecc-521.h \
+	$$PWD/../../nettle/nettle_ecc-curve.h \
+	$$PWD/../../nettle/nettle_ecc-internal.h \
+	$$PWD/../../nettle/nettle_ecc.h \
+	$$PWD/../../nettle/nettle_ecdsa.h \
+	$$PWD/../../nettle/nettle_eddsa.h \
+	$$PWD/../../nettle/nettle_egd.h \
+	$$PWD/../../nettle/nettle_fat-setup.h \
+	$$PWD/../../nettle/nettle_gcm.h \
+	$$PWD/../../nettle/nettle_getopt.h \
+	$$PWD/../../nettle/nettle_getopt_int.h \
+	$$PWD/../../nettle/nettle_gmp-glue.h \
+	$$PWD/../../nettle/nettle_gnettle.h \
+	$$PWD/../../nettle/nettle_gosthash94.h \
+	$$PWD/../../nettle/nettle_hmac.h \
+	$$PWD/../../nettle/nettle_keymap.h \
+	$$PWD/../../nettle/nettle_knuth-lfib.h \
+	$$PWD/../../nettle/nettle_macros.h \
+	$$PWD/../../nettle/nettle_md2.h \
+	$$PWD/../../nettle/nettle_md4.h \
+	$$PWD/../../nettle/nettle_md5-compat.h \
+	$$PWD/../../nettle/nettle_md5.h \
+	$$PWD/../../nettle/nettle_memxor-internal.h \
+	$$PWD/../../nettle/nettle_memxor.h \
+	$$PWD/../../nettle/nettle_mini-gmp.h \
+	$$PWD/../../nettle/nettle_pbkdf2.h \
+	$$PWD/../../nettle/nettle_pgp.h \
+	$$PWD/../../nettle/nettle_pkcs1.h \
+	$$PWD/../../nettle/nettle_poly1305.h \
+	$$PWD/../../nettle/nettle_realloc.h \
+	$$PWD/../../nettle/nettle_ripemd160.h \
+	$$PWD/../../nettle/nettle_rnd-common.h \
+	$$PWD/../../nettle/nettle_rotors.h \
+	$$PWD/../../nettle/nettle_rsa-fips.h \
+	$$PWD/../../nettle/nettle_rsa.h \
+	$$PWD/../../nettle/nettle_salsa20.h \
+	$$PWD/../../nettle/nettle_serpent-internal.h \
+	$$PWD/../../nettle/nettle_serpent.h \
+	$$PWD/../../nettle/nettle_sexp.h \
+	$$PWD/../../nettle/nettle_sha.h \
+	$$PWD/../../nettle/nettle_sha1.h \
+	$$PWD/../../nettle/nettle_sha2.h \
+	$$PWD/../../nettle/nettle_sha3.h \
+	$$PWD/../../nettle/nettle_twofish.h \
+	$$PWD/../../nettle/nettle_umac.h \
+	$$PWD/../../nettle/nettle_version.h \
+	$$PWD/../../nettle/nettle_yarrow.h \
 	$$PWD/../../obstack.h \
 	$$PWD/../../ocsp.h \
 	$$PWD/../../open-catalog.h \
+	$$PWD/../../opencdk/context.h \
+	$$PWD/../../opencdk/filters.h \
+	$$PWD/../../opencdk/keydb.h \
+	$$PWD/../../opencdk/main.h \
+	$$PWD/../../opencdk/opencdk.h \
+	$$PWD/../../opencdk/packet.h \
+	$$PWD/../../opencdk/stream.h \
+	$$PWD/../../opencdk/types.h \
 	$$PWD/../../openpgp.h \
 	$$PWD/../../openpgp/gnutls_openpgp.h \
 	$$PWD/../../openpgp/openpgp_int.h \
@@ -509,7 +542,6 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../unilbrk.h \
 	$$PWD/../../unilbrk.in.h \
 	$$PWD/../../uniname.h \
-	$$PWD/../../unistd.h \
 	$$PWD/../../unistd.in.h \
 	$$PWD/../../unistd_gnu.h \
 	$$PWD/../../unistd_gnu.in.h \
@@ -819,9 +851,9 @@ SOURCES += 	$$PWD/../../accelerated/accelerated.c \
 	$$PWD/../../fstrcmp.c \
 	$$PWD/../../fwriteerror.c \
 	$$PWD/../../gcd.c \
-	$$PWD/../../gcryptrnd.c \
-	$$PWD/../../gen-posix-lock-obj.c \
-	$$PWD/../../gen-w32-lock-obj.c \
+### util with main	$$PWD/../../gcryptrnd.c \
+### util with main	$$PWD/../../gen-posix-lock-obj.c \
+### util with main	$$PWD/../../gen-w32-lock-obj.c \
 	$$PWD/../../getdelim.c \
 	$$PWD/../../getline.c \
 	$$PWD/../../getopt.c \
@@ -951,7 +983,6 @@ SOURCES += 	$$PWD/../../accelerated/accelerated.c \
 	$$PWD/../../memchr.c \
 	$$PWD/../../memmove.c \
 	$$PWD/../../message.c \
-	$$PWD/../../mini-gmp.c \
 	$$PWD/../../misc/cvsuser.c \
 	$$PWD/../../misc_gnu.c \
 	$$PWD/../../missing-string.c \
@@ -1012,26 +1043,332 @@ SOURCES += 	$$PWD/../../accelerated/accelerated.c \
 	$$PWD/../../msguniq.c \
 	$$PWD/../../msvc-inval.c \
 	$$PWD/../../msvc-nothrow.c \
-	$$PWD/../../nettle/cipher_nettle.c \
-	$$PWD/../../nettle/drbg-aes-self-test.c \
-	$$PWD/../../nettle/drbg-aes.c \
-	$$PWD/../../nettle/dsa-keygen-fips186.c \
-	$$PWD/../../nettle/dsa-validate.c \
-	$$PWD/../../nettle/egd.c \
-	$$PWD/../../nettle/init_nettle.c \
-	$$PWD/../../nettle/mac_nettle.c \
-	$$PWD/../../nettle/mpi_nettle.c \
-	$$PWD/../../nettle/pk.c \
-	$$PWD/../../nettle/provable-prime.c \
-	$$PWD/../../nettle/rnd-common.c \
-	$$PWD/../../nettle/rnd-fips.c \
-	$$PWD/../../nettle/rnd.c \
-	$$PWD/../../nettle/rsa-keygen-fips186.c \
+	$$PWD/../../nettle/nettle-internal.c \
+	$$PWD/../../nettle/nettle-meta-aeads.c \
+	$$PWD/../../nettle/nettle-meta-armors.c \
+	$$PWD/../../nettle/nettle-meta-ciphers.c \
+	$$PWD/../../nettle/nettle-meta-hashes.c \
+	$$PWD/../../nettle/nettle_aes-decrypt-internal.c \
+	$$PWD/../../nettle/nettle_aes-decrypt.c \
+	$$PWD/../../nettle/nettle_aes-encrypt-internal.c \
+	$$PWD/../../nettle/nettle_aes-encrypt-table.c \
+	$$PWD/../../nettle/nettle_aes-encrypt.c \
+	$$PWD/../../nettle/nettle_aes-invert-internal.c \
+	$$PWD/../../nettle/nettle_aes-set-decrypt-key.c \
+	$$PWD/../../nettle/nettle_aes-set-encrypt-key.c \
+	$$PWD/../../nettle/nettle_aes-set-key-internal.c \
+	$$PWD/../../nettle/nettle_aes128-meta.c \
+	$$PWD/../../nettle/nettle_aes128-set-decrypt-key.c \
+	$$PWD/../../nettle/nettle_aes128-set-encrypt-key.c \
+	$$PWD/../../nettle/nettle_aes192-meta.c \
+	$$PWD/../../nettle/nettle_aes192-set-decrypt-key.c \
+	$$PWD/../../nettle/nettle_aes192-set-encrypt-key.c \
+	$$PWD/../../nettle/nettle_aes256-meta.c \
+	$$PWD/../../nettle/nettle_aes256-set-decrypt-key.c \
+	$$PWD/../../nettle/nettle_aes256-set-encrypt-key.c \
+	$$PWD/../../nettle/nettle_aesdata.c \
+	$$PWD/../../nettle/nettle_arcfour-crypt.c \
+	$$PWD/../../nettle/nettle_arcfour.c \
+	$$PWD/../../nettle/nettle_arctwo-meta.c \
+	$$PWD/../../nettle/nettle_arctwo.c \
+	$$PWD/../../nettle/nettle_base16-decode.c \
+	$$PWD/../../nettle/nettle_base16-encode.c \
+	$$PWD/../../nettle/nettle_base16-meta.c \
+	$$PWD/../../nettle/nettle_base64-decode.c \
+	$$PWD/../../nettle/nettle_base64-encode.c \
+	$$PWD/../../nettle/nettle_base64-meta.c \
+	$$PWD/../../nettle/nettle_base64url-decode.c \
+	$$PWD/../../nettle/nettle_base64url-encode.c \
+	$$PWD/../../nettle/nettle_base64url-meta.c \
+	$$PWD/../../nettle/nettle_bignum-random-prime.c \
+	$$PWD/../../nettle/nettle_bignum-random.c \
+	$$PWD/../../nettle/nettle_bignum.c \
+	$$PWD/../../nettle/nettle_blowfish.c \
+	$$PWD/../../nettle/nettle_buffer-init.c \
+	$$PWD/../../nettle/nettle_buffer.c \
+	$$PWD/../../nettle/nettle_camellia-absorb.c \
+	$$PWD/../../nettle/nettle_camellia-crypt-internal.c \
+	$$PWD/../../nettle/nettle_camellia-invert-key.c \
+	$$PWD/../../nettle/nettle_camellia-table.c \
+	$$PWD/../../nettle/nettle_camellia128-crypt.c \
+	$$PWD/../../nettle/nettle_camellia128-meta.c \
+	$$PWD/../../nettle/nettle_camellia128-set-decrypt-key.c \
+	$$PWD/../../nettle/nettle_camellia128-set-encrypt-key.c \
+	$$PWD/../../nettle/nettle_camellia192-meta.c \
+	$$PWD/../../nettle/nettle_camellia256-crypt.c \
+	$$PWD/../../nettle/nettle_camellia256-meta.c \
+	$$PWD/../../nettle/nettle_camellia256-set-decrypt-key.c \
+	$$PWD/../../nettle/nettle_camellia256-set-encrypt-key.c \
+	$$PWD/../../nettle/nettle_cast128-meta.c \
+	$$PWD/../../nettle/nettle_cast128.c \
+	$$PWD/../../nettle/nettle_cbc.c \
+	$$PWD/../../nettle/nettle_ccm-aes128.c \
+	$$PWD/../../nettle/nettle_ccm-aes192.c \
+	$$PWD/../../nettle/nettle_ccm-aes256.c \
+	$$PWD/../../nettle/nettle_ccm.c \
+	$$PWD/../../nettle/nettle_chacha-core-internal.c \
+	$$PWD/../../nettle/nettle_chacha-crypt.c \
+	$$PWD/../../nettle/nettle_chacha-poly1305-meta.c \
+	$$PWD/../../nettle/nettle_chacha-poly1305.c \
+	$$PWD/../../nettle/nettle_chacha-set-key.c \
+	$$PWD/../../nettle/nettle_chacha-set-nonce.c \
+	$$PWD/../../nettle/nettle_cipher_nettle.c \
+	$$PWD/../../nettle/nettle_cnd-copy.c \
+	$$PWD/../../nettle/nettle_ctr.c \
+	$$PWD/../../nettle/nettle_curve25519-eh-to-x.c \
+	$$PWD/../../nettle/nettle_curve25519-mul-g.c \
+	$$PWD/../../nettle/nettle_curve25519-mul.c \
+	$$PWD/../../nettle/nettle_der-iterator.c \
+	$$PWD/../../nettle/nettle_der2dsa.c \
+	$$PWD/../../nettle/nettle_der2rsa.c \
+	$$PWD/../../nettle/nettle_des-compat.c \
+	$$PWD/../../nettle/nettle_des.c \
+	$$PWD/../../nettle/nettle_des3.c \
+	$$PWD/../../nettle/nettle_desdata.c \
+	$$PWD/../../nettle/nettle_drbg-aes-self-test.c \
+	$$PWD/../../nettle/nettle_drbg-aes.c \
+	$$PWD/../../nettle/nettle_dsa-compat-keygen.c \
+	$$PWD/../../nettle/nettle_dsa-compat.c \
+	$$PWD/../../nettle/nettle_dsa-gen-params.c \
+	$$PWD/../../nettle/nettle_dsa-hash.c \
+	$$PWD/../../nettle/nettle_dsa-keygen-fips186.c \
+	$$PWD/../../nettle/nettle_dsa-keygen.c \
+	$$PWD/../../nettle/nettle_dsa-sha1-sign.c \
+	$$PWD/../../nettle/nettle_dsa-sha1-verify.c \
+	$$PWD/../../nettle/nettle_dsa-sha256-sign.c \
+	$$PWD/../../nettle/nettle_dsa-sha256-verify.c \
+	$$PWD/../../nettle/nettle_dsa-sign.c \
+	$$PWD/../../nettle/nettle_dsa-validate.c \
+	$$PWD/../../nettle/nettle_dsa-verify.c \
+	$$PWD/../../nettle/nettle_dsa.c \
+	$$PWD/../../nettle/nettle_dsa2sexp.c \
+	$$PWD/../../nettle/nettle_eax-aes128-meta.c \
+	$$PWD/../../nettle/nettle_eax-aes128.c \
+	$$PWD/../../nettle/nettle_eax.c \
+	$$PWD/../../nettle/nettle_ecc-192.c \
+	$$PWD/../../nettle/nettle_ecc-224.c \
+	$$PWD/../../nettle/nettle_ecc-25519.c \
+	$$PWD/../../nettle/nettle_ecc-256.c \
+	$$PWD/../../nettle/nettle_ecc-384.c \
+	$$PWD/../../nettle/nettle_ecc-521.c \
+	$$PWD/../../nettle/nettle_ecc-a-to-j.c \
+	$$PWD/../../nettle/nettle_ecc-add-eh.c \
+	$$PWD/../../nettle/nettle_ecc-add-ehh.c \
+	$$PWD/../../nettle/nettle_ecc-add-jja.c \
+	$$PWD/../../nettle/nettle_ecc-add-jjj.c \
+	$$PWD/../../nettle/nettle_ecc-dup-eh.c \
+	$$PWD/../../nettle/nettle_ecc-dup-jj.c \
+	$$PWD/../../nettle/nettle_ecc-ecdsa-sign.c \
+	$$PWD/../../nettle/nettle_ecc-ecdsa-verify.c \
+	$$PWD/../../nettle/nettle_ecc-eh-to-a.c \
+	$$PWD/../../nettle/nettle_ecc-hash.c \
+	$$PWD/../../nettle/nettle_ecc-j-to-a.c \
+	$$PWD/../../nettle/nettle_ecc-mod-arith.c \
+	$$PWD/../../nettle/nettle_ecc-mod-inv.c \
+	$$PWD/../../nettle/nettle_ecc-mod.c \
+	$$PWD/../../nettle/nettle_ecc-mul-a-eh.c \
+	$$PWD/../../nettle/nettle_ecc-mul-a.c \
+	$$PWD/../../nettle/nettle_ecc-mul-g-eh.c \
+	$$PWD/../../nettle/nettle_ecc-mul-g.c \
+	$$PWD/../../nettle/nettle_ecc-pm1-redc.c \
+	$$PWD/../../nettle/nettle_ecc-point-mul-g.c \
+	$$PWD/../../nettle/nettle_ecc-point-mul.c \
+	$$PWD/../../nettle/nettle_ecc-point.c \
+	$$PWD/../../nettle/nettle_ecc-pp1-redc.c \
+	$$PWD/../../nettle/nettle_ecc-random.c \
+	$$PWD/../../nettle/nettle_ecc-scalar.c \
+	$$PWD/../../nettle/nettle_ecc-size.c \
+	$$PWD/../../nettle/nettle_eccdata.c \
+	$$PWD/../../nettle/nettle_ecdsa-keygen.c \
+	$$PWD/../../nettle/nettle_ecdsa-sign.c \
+	$$PWD/../../nettle/nettle_ecdsa-verify.c \
+	$$PWD/../../nettle/nettle_ed25519-sha512-pubkey.c \
+	$$PWD/../../nettle/nettle_ed25519-sha512-sign.c \
+	$$PWD/../../nettle/nettle_ed25519-sha512-verify.c \
+	$$PWD/../../nettle/nettle_eddsa-compress.c \
+	$$PWD/../../nettle/nettle_eddsa-decompress.c \
+	$$PWD/../../nettle/nettle_eddsa-expand.c \
+	$$PWD/../../nettle/nettle_eddsa-hash.c \
+	$$PWD/../../nettle/nettle_eddsa-pubkey.c \
+	$$PWD/../../nettle/nettle_eddsa-sign.c \
+	$$PWD/../../nettle/nettle_eddsa-verify.c \
+	$$PWD/../../nettle/nettle_egd.c \
+	$$PWD/../../nettle/nettle_fat-arm.c \
+	$$PWD/../../nettle/nettle_fat-x86_64.c \
+	$$PWD/../../nettle/nettle_gcm-aes.c \
+	$$PWD/../../nettle/nettle_gcm-aes128-meta.c \
+	$$PWD/../../nettle/nettle_gcm-aes128.c \
+	$$PWD/../../nettle/nettle_gcm-aes192-meta.c \
+	$$PWD/../../nettle/nettle_gcm-aes192.c \
+	$$PWD/../../nettle/nettle_gcm-aes256-meta.c \
+	$$PWD/../../nettle/nettle_gcm-aes256.c \
+	$$PWD/../../nettle/nettle_gcm-camellia128-meta.c \
+	$$PWD/../../nettle/nettle_gcm-camellia128.c \
+	$$PWD/../../nettle/nettle_gcm-camellia256-meta.c \
+	$$PWD/../../nettle/nettle_gcm-camellia256.c \
+	$$PWD/../../nettle/nettle_gcm.c \
+	$$PWD/../../nettle/nettle_gcmdata.c \
+	$$PWD/../../nettle/nettle_getopt.c \
+	$$PWD/../../nettle/nettle_getopt1.c \
+	$$PWD/../../nettle/nettle_gmp-glue.c \
+	$$PWD/../../nettle/nettle_gosthash94-meta.c \
+	$$PWD/../../nettle/nettle_gosthash94.c \
+	$$PWD/../../nettle/nettle_hmac-md5.c \
+	$$PWD/../../nettle/nettle_hmac-ripemd160.c \
+	$$PWD/../../nettle/nettle_hmac-sha1.c \
+	$$PWD/../../nettle/nettle_hmac-sha224.c \
+	$$PWD/../../nettle/nettle_hmac-sha256.c \
+	$$PWD/../../nettle/nettle_hmac-sha384.c \
+	$$PWD/../../nettle/nettle_hmac-sha512.c \
+	$$PWD/../../nettle/nettle_hmac.c \
+	$$PWD/../../nettle/nettle_init_nettle.c \
+	$$PWD/../../nettle/nettle_knuth-lfib.c \
+	$$PWD/../../nettle/nettle_mac_nettle.c \
+	$$PWD/../../nettle/nettle_md2-meta.c \
+	$$PWD/../../nettle/nettle_md2.c \
+	$$PWD/../../nettle/nettle_md4-meta.c \
+	$$PWD/../../nettle/nettle_md4.c \
+	$$PWD/../../nettle/nettle_md5-compat.c \
+	$$PWD/../../nettle/nettle_md5-compress.c \
+	$$PWD/../../nettle/nettle_md5-meta.c \
+	$$PWD/../../nettle/nettle_md5.c \
+	$$PWD/../../nettle/nettle_memxor.c \
+	$$PWD/../../nettle/nettle_memxor3.c \
+	$$PWD/../../nettle/nettle_mini-gmp.c \
+	$$PWD/../../nettle/nettle_mpi_nettle.c \
+	$$PWD/../../nettle/nettle_pbkdf2-hmac-sha1.c \
+	$$PWD/../../nettle/nettle_pbkdf2-hmac-sha256.c \
+	$$PWD/../../nettle/nettle_pbkdf2.c \
+	$$PWD/../../nettle/nettle_pgp-encode.c \
+	$$PWD/../../nettle/nettle_pk.c \
+	$$PWD/../../nettle/nettle_pkcs1-decrypt.c \
+	$$PWD/../../nettle/nettle_pkcs1-encrypt.c \
+	$$PWD/../../nettle/nettle_pkcs1-rsa-digest.c \
+	$$PWD/../../nettle/nettle_pkcs1-rsa-md5.c \
+	$$PWD/../../nettle/nettle_pkcs1-rsa-sha1.c \
+	$$PWD/../../nettle/nettle_pkcs1-rsa-sha256.c \
+	$$PWD/../../nettle/nettle_pkcs1-rsa-sha512.c \
+	$$PWD/../../nettle/nettle_pkcs1.c \
+	$$PWD/../../nettle/nettle_poly1305-aes.c \
+	$$PWD/../../nettle/nettle_poly1305-internal.c \
+	$$PWD/../../nettle/nettle_provable-prime.c \
+	$$PWD/../../nettle/nettle_realloc.c \
+	$$PWD/../../nettle/nettle_ripemd160-compress.c \
+	$$PWD/../../nettle/nettle_ripemd160-meta.c \
+	$$PWD/../../nettle/nettle_ripemd160.c \
+	$$PWD/../../nettle/nettle_rnd-common.c \
+	$$PWD/../../nettle/nettle_rnd-fips.c \
+	$$PWD/../../nettle/nettle_rnd.c \
+	$$PWD/../../nettle/nettle_rsa-blind.c \
+	$$PWD/../../nettle/nettle_rsa-decrypt-tr.c \
+	$$PWD/../../nettle/nettle_rsa-decrypt.c \
+	$$PWD/../../nettle/nettle_rsa-encrypt.c \
+	$$PWD/../../nettle/nettle_rsa-keygen-fips186.c \
+	$$PWD/../../nettle/nettle_rsa-keygen.c \
+	$$PWD/../../nettle/nettle_rsa-md5-sign-tr.c \
+	$$PWD/../../nettle/nettle_rsa-md5-sign.c \
+	$$PWD/../../nettle/nettle_rsa-md5-verify.c \
+	$$PWD/../../nettle/nettle_rsa-pkcs1-sign-tr.c \
+	$$PWD/../../nettle/nettle_rsa-pkcs1-sign.c \
+	$$PWD/../../nettle/nettle_rsa-pkcs1-verify.c \
+	$$PWD/../../nettle/nettle_rsa-sha1-sign-tr.c \
+	$$PWD/../../nettle/nettle_rsa-sha1-sign.c \
+	$$PWD/../../nettle/nettle_rsa-sha1-verify.c \
+	$$PWD/../../nettle/nettle_rsa-sha256-sign-tr.c \
+	$$PWD/../../nettle/nettle_rsa-sha256-sign.c \
+	$$PWD/../../nettle/nettle_rsa-sha256-verify.c \
+	$$PWD/../../nettle/nettle_rsa-sha512-sign-tr.c \
+	$$PWD/../../nettle/nettle_rsa-sha512-sign.c \
+	$$PWD/../../nettle/nettle_rsa-sha512-verify.c \
+	$$PWD/../../nettle/nettle_rsa-sign-tr.c \
+	$$PWD/../../nettle/nettle_rsa-sign.c \
+	$$PWD/../../nettle/nettle_rsa-verify.c \
+	$$PWD/../../nettle/nettle_rsa.c \
+	$$PWD/../../nettle/nettle_rsa2openpgp.c \
+	$$PWD/../../nettle/nettle_rsa2sexp.c \
+	$$PWD/../../nettle/nettle_salsa20-128-set-key.c \
+	$$PWD/../../nettle/nettle_salsa20-256-set-key.c \
+	$$PWD/../../nettle/nettle_salsa20-core-internal.c \
+	$$PWD/../../nettle/nettle_salsa20-crypt.c \
+	$$PWD/../../nettle/nettle_salsa20-set-key.c \
+	$$PWD/../../nettle/nettle_salsa20-set-nonce.c \
+	$$PWD/../../nettle/nettle_salsa20r12-crypt.c \
+	$$PWD/../../nettle/nettle_sec-add-1.c \
+	$$PWD/../../nettle/nettle_sec-sub-1.c \
+	$$PWD/../../nettle/nettle_sec-tabselect.c \
+	$$PWD/../../nettle/nettle_serpent-decrypt.c \
+	$$PWD/../../nettle/nettle_serpent-encrypt.c \
+	$$PWD/../../nettle/nettle_serpent-meta.c \
+	$$PWD/../../nettle/nettle_serpent-set-key.c \
+	$$PWD/../../nettle/nettle_sexp-format.c \
+	$$PWD/../../nettle/nettle_sexp-transport-format.c \
+	$$PWD/../../nettle/nettle_sexp-transport.c \
+	$$PWD/../../nettle/nettle_sexp.c \
+	$$PWD/../../nettle/nettle_sexp2bignum.c \
+	$$PWD/../../nettle/nettle_sexp2dsa.c \
+	$$PWD/../../nettle/nettle_sexp2rsa.c \
+	$$PWD/../../nettle/nettle_sha-example.c \
+	$$PWD/../../nettle/nettle_sha1-compress.c \
+	$$PWD/../../nettle/nettle_sha1-meta.c \
+	$$PWD/../../nettle/nettle_sha1.c \
+	$$PWD/../../nettle/nettle_sha224-meta.c \
+	$$PWD/../../nettle/nettle_sha256-compress.c \
+	$$PWD/../../nettle/nettle_sha256-meta.c \
+	$$PWD/../../nettle/nettle_sha256.c \
+	$$PWD/../../nettle/nettle_sha3-224-meta.c \
+	$$PWD/../../nettle/nettle_sha3-224.c \
+	$$PWD/../../nettle/nettle_sha3-256-meta.c \
+	$$PWD/../../nettle/nettle_sha3-256.c \
+	$$PWD/../../nettle/nettle_sha3-384-meta.c \
+	$$PWD/../../nettle/nettle_sha3-384.c \
+	$$PWD/../../nettle/nettle_sha3-512-meta.c \
+	$$PWD/../../nettle/nettle_sha3-512.c \
+	$$PWD/../../nettle/nettle_sha3-permute.c \
+	$$PWD/../../nettle/nettle_sha3.c \
+	$$PWD/../../nettle/nettle_sha384-meta.c \
+	$$PWD/../../nettle/nettle_sha512-224-meta.c \
+	$$PWD/../../nettle/nettle_sha512-256-meta.c \
+	$$PWD/../../nettle/nettle_sha512-compress.c \
+	$$PWD/../../nettle/nettle_sha512-meta.c \
+	$$PWD/../../nettle/nettle_sha512.c \
+	$$PWD/../../nettle/nettle_shadata.c \
+	$$PWD/../../nettle/nettle_twofish-meta.c \
+	$$PWD/../../nettle/nettle_twofish.c \
+	$$PWD/../../nettle/nettle_twofishdata.c \
+	$$PWD/../../nettle/nettle_umac-l2.c \
+	$$PWD/../../nettle/nettle_umac-l3.c \
+	$$PWD/../../nettle/nettle_umac-nh-n.c \
+	$$PWD/../../nettle/nettle_umac-nh.c \
+	$$PWD/../../nettle/nettle_umac-poly128.c \
+	$$PWD/../../nettle/nettle_umac-poly64.c \
+	$$PWD/../../nettle/nettle_umac-set-key.c \
+	$$PWD/../../nettle/nettle_umac128.c \
+	$$PWD/../../nettle/nettle_umac32.c \
+	$$PWD/../../nettle/nettle_umac64.c \
+	$$PWD/../../nettle/nettle_umac96.c \
+	$$PWD/../../nettle/nettle_version.c \
+	$$PWD/../../nettle/nettle_write-be32.c \
+	$$PWD/../../nettle/nettle_write-le32.c \
+	$$PWD/../../nettle/nettle_write-le64.c \
+	$$PWD/../../nettle/nettle_yarrow256.c \
+	$$PWD/../../nettle/nettle_yarrow_key_event.c \
 	$$PWD/../../ngettext.c \
 	$$PWD/../../nl_langinfo.c \
 	$$PWD/../../obstack.c \
 	$$PWD/../../open-catalog.c \
 	$$PWD/../../open.c \
+	$$PWD/../../opencdk/armor.c \
+	$$PWD/../../opencdk/kbnode.c \
+	$$PWD/../../opencdk/keydb.c \
+	$$PWD/../../opencdk/literal.c \
+	$$PWD/../../opencdk/misc_opencdk.c \
+	$$PWD/../../opencdk/new-packet.c \
+	$$PWD/../../opencdk/pubkey_pgp.c \
+	$$PWD/../../opencdk/read-packet.c \
+	$$PWD/../../opencdk/seskey.c \
+	$$PWD/../../opencdk/sig-check.c \
+	$$PWD/../../opencdk/stream.c \
+	$$PWD/../../opencdk/write-packet.c \
 	$$PWD/../../openpgp/compat_pgp.c \
 	$$PWD/../../openpgp/extras.c \
 	$$PWD/../../openpgp/gnutls_openpgp.c \
@@ -1082,6 +1419,7 @@ SOURCES += 	$$PWD/../../accelerated/accelerated.c \
 	$$PWD/../../read-catalog.c \
 	$$PWD/../../read-csharp.c \
 	$$PWD/../../read-desktop.c \
+	$$PWD/../../read-file-gnu.c \
 	$$PWD/../../read-file.c \
 	$$PWD/../../read-java.c \
 	$$PWD/../../read-mo.c \
@@ -1150,7 +1488,6 @@ SOURCES += 	$$PWD/../../accelerated/accelerated.c \
 	$$PWD/../../u64.c \
 	$$PWD/../../unictype/ctype_alpha.c \
 	$$PWD/../../unictype/ctype_space.c \
-	$$PWD/../../unistd.c \
 	$$PWD/../../unistd_gnu.c \
 	$$PWD/../../unistr/u8-mbtoucr.c \
 	$$PWD/../../unistr/u8-uctomb-aux.c \
@@ -1218,7 +1555,11 @@ SOURCES += 	$$PWD/../../accelerated/accelerated.c \
 	$$PWD/../../x509/ocsp.c \
 	$$PWD/../../x509/ocsp_output.c \
 	$$PWD/../../x509/output_x509.c \
+	$$PWD/../../x509/pkcs12.c \
+	$$PWD/../../x509/pkcs12_bag.c \
+	$$PWD/../../x509/pkcs12_encr.c \
 	$$PWD/../../x509/privkey_openssl.c \
+	$$PWD/../../x509/privkey_pkcs8.c \
 	$$PWD/../../x509/privkey_x509.c \
 	$$PWD/../../x509/sign_x509.c \
 	$$PWD/../../x509/verify-high.c \

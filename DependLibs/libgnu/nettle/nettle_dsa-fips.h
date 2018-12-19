@@ -24,9 +24,9 @@
 #ifndef DSA_FIPS_H_INCLUDED
 #define DSA_FIPS_H_INCLUDED
 
-#ifndef _MSC_VER
-# include <gmp.h>
-#endif // _MSC_VER
+//#ifndef _MSC_VER
+//# include <gmp.h>
+//#endif // _MSC_VER
 
 #include "nettle_dsa.h"
 #include "nettle_sha2.h"

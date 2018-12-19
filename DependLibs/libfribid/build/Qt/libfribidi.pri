@@ -1,5 +1,8 @@
+
+INCLUDEPATH += $$PWD/../../lib
+
 HEADERS += 	$$PWD/../../lib/bidi-types.h \
-	$$PWD/../../lib/common.h \
+    $$PWD/../../lib/fribidi_common.h \
 	$$PWD/../../lib/debug.h \
 	$$PWD/../../lib/fribidi-arabic.h \
 	$$PWD/../../lib/fribidi-begindecls.h \
@@ -8,9 +11,6 @@ HEADERS += 	$$PWD/../../lib/bidi-types.h \
 	$$PWD/../../lib/fribidi-bidi.h \
 	$$PWD/../../lib/fribidi-common.h \
 	$$PWD/../../lib/fribidi-config.h \
-	$$PWD/../../lib/fribidi-config_android.h \
-	$$PWD/../../lib/fribidi-config_linux.h \
-	$$PWD/../../lib/fribidi-config_windows.h \
 	$$PWD/../../lib/fribidi-deprecated.h \
 	$$PWD/../../lib/fribidi-enddecls.h \
 	$$PWD/../../lib/fribidi-flags.h \

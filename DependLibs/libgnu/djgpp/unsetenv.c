@@ -16,7 +16,7 @@
 #include  <stdlib.h>
 #include  <string.h>
 
-//extern char **environ;
+extern char **environ;
 
 int
 unsetenv(const char *name)

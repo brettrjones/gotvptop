@@ -18,7 +18,7 @@
  */
 
 #include <config_libgnu.h>
-
+#ifdef TARGET_OS_WINDOWS
 #ifndef TARGET_OS_WINDOWS
 # error This module may only be build for Windows.
 #endif
@@ -40,3 +40,5 @@ _gpgrt_yield (void)
   Sleep (0);
   return 0;
 }
+
+#endif // TARGET_OS_WINDOWS
