@@ -31,7 +31,7 @@
 #include <emmintrin.h>
 #include <smmintrin.h>
 #include "main.h"
-#include "celt/x86/x86cpu.h"
+#include "libopus/celt/x86/x86cpu.h"
 
 /* Entropy constrained matrix-weighted VQ, hard-coded to 5-element vectors, for a single input data vector */
 void silk_VQ_WMat_EC_sse4_1(

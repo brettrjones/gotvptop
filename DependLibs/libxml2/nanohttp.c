@@ -53,23 +53,26 @@
 #include <errno.h>
 #endif
 #ifdef HAVE_SYS_TIME_H
-#include <sys/time.h>
+# include <sys/time.h>
 #endif
+
 #ifndef HAVE_POLL_H
-#ifdef HAVE_SYS_SELECT_H
-#include <sys/select.h>
-#endif
-#else
-//#include <poll.h>
-#endif
+# ifdef HAVE_SYS_SELECT_H
+#  include <sys/select.h>
+# endif
+# elif !defined( TARGET_OS_WINDOWS )
+#  include <poll.h>
+# endif
+
+
 #ifdef HAVE_STRINGS_H
-#include <strings.h>
+# include <strings.h>
 #endif
 #ifdef SUPPORT_IP6
-#include <resolv.h>
+# include <resolv.h>
 #endif
 #ifdef HAVE_ZLIB_H
-#include <libzlib/zlib.h>
+# include <libzlib/zlib.h>
 #endif
 
 
@@ -107,15 +110,15 @@
  */
 #ifndef _WINSOCKAPI_
 #if !defined(__BEOS__) || defined(__HAIKU__)
-#define closesocket(s) close(s)
+# define closesocket(s) close(s)
 #endif
-#define SOCKET int
+# define SOCKET int
 #endif
 
 #ifdef __BEOS__
-#ifndef PF_INET
-#define PF_INET AF_INET
-#endif
+# ifndef PF_INET
+#  define PF_INET AF_INET
+# endif
 #endif
 
 #ifndef XML_SOCKLEN_T
@@ -1915,6 +1918,7 @@ int main(int argc, char **argv) {
     return(0);
 }
 #endif /* STANDALONE */
+
 #else /* !LIBXML_HTTP_ENABLED */
 #ifdef STANDALONE
 #include <stdio.h>
@@ -1924,7 +1928,7 @@ int main(int argc, char **argv) {
     return(0);
 }
 #endif /* STANDALONE */
-#endif /* LIBXML_HTTP_ENABLED */
-#endif //
+#endif
+#endif // LIBXML_HTTP_ENABLED
 #define bottom_nanohttp
 #include "elfgcchack.h"

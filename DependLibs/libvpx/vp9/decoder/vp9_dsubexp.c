@@ -8,11 +8,11 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <assert.h>
 
 #include "vp9/common/vp9_entropy.h"
 
 #include "vp9/decoder/vp9_dsubexp.h"
-#include <assert.h>
 
 static int inv_recenter_nonneg(int v, int m) {
   if (v > 2 * m) return v;

@@ -8,11 +8,11 @@
 *  be found in the AUTHORS file in the root of the source tree.
 */
 
+#include <math.h>
+#include <assert.h>
 #include "./vpx_dsp_rtcd.h"
 #include "vpx_dsp/psnr.h"
 #include "vpx_scale/yv12config.h"
-#include <math.h>
-#include <assert.h>
 
 double vpx_sse_to_psnr(double samples, double peak, double sse) {
   if (sse > 0.0) {

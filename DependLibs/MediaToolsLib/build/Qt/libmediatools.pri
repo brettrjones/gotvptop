@@ -1,8 +1,24 @@
+
+
+DEFINES += OUTSIDE_SPEEX __LITTLE_ENDIAN
+
+INCLUDEPATH += $$PWD/../../OpusTools\include
+INCLUDEPATH += $$PWD/../../include
+INCLUDEPATH += $$PWD/../../opus/celt
+INCLUDEPATH += $$PWD/../../opus/silk
+INCLUDEPATH += $$PWD/../../opus/silk/float
+INCLUDEPATH += $$PWD/../../../../GuiInterface
+INCLUDEPATH += $$PWD/../../../../GoTvCore/GoTvP2P
+INCLUDEPATH += $$PWD/../../
+
+
+win32{
+INCLUDEPATH += $$PWD/../../opus/win32
+}
+
 HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
-	$$PWD/../../../../GoTvConfig.h \
 	$$PWD/../../../../GoTvCpuArchDefines.h \
 	$$PWD/../../../../GoTvDependLibrariesConfig.h \
-	$$PWD/../../../../GoTvFeaturesConfig.h \
 	$$PWD/../../../../GoTvTargetOsConfig.h \
 	$$PWD/../../../../base64.h \
 	$$PWD/../../../../byteswap.h \

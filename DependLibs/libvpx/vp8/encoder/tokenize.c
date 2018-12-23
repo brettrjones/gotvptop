@@ -8,13 +8,13 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "vpx_mem/vpx_mem.h"
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
 #include "onyx_int.h"
 #include "tokenize.h"
+#include "vpx_mem/vpx_mem.h"
 
 /* Global event counters used for accumulating statistics across several
    compressions, then generating context.c = initial stats. */

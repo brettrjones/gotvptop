@@ -1,14 +1,22 @@
+
+DEFINES += OPUS_BUILD
+
+
+QMAKE_CFLAGS += -msse3
+QMAKE_CFLAGS += -msse4.1
+QMAKE_CXXFLAGS += -msse3
+QMAKE_CXXFLAGS += -msse4.1
+
+
+INCLUDEPATH += $$PWD/../../
+INCLUDEPATH += $$PWD/../../silk
+INCLUDEPATH += $$PWD/../../celt
+INCLUDEPATH += $$PWD/../../opus
+INCLUDEPATH += $$PWD/../../include
+
 HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
-	$$PWD/../../../../GoTvCompilerEnviromentDefines.h \
-	$$PWD/../../../../GoTvCompilerIntTypes.h \
-	$$PWD/../../../../GoTvConfig.h \
-	$$PWD/../../../../GoTvConfigAndroid.h \
-	$$PWD/../../../../GoTvConfigLinux.h \
-	$$PWD/../../../../GoTvConfigWindows.h \
 	$$PWD/../../../../GoTvCpuArchDefines.h \
-	$$PWD/../../../../GoTvCpuFeatureDefines.h \
 	$$PWD/../../../../GoTvDependLibrariesConfig.h \
-	$$PWD/../../../../GoTvFeaturesConfig.h \
 	$$PWD/../../celt/_kiss_fft_guts.h \
 	$$PWD/../../celt/arch.h \
 	$$PWD/../../celt/arm/armcpu.h \

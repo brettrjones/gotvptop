@@ -315,11 +315,16 @@ _MHD_bool. */
 /* required cURL version to run tests */
 /* #undef MHD_REQ_CURL_VERSION */
 
-/* define to use pthreads */
-//#define MHD_USE_POSIX_THREADS 1
 
+
+#ifdef TARGET_OS_WINDOWS
 /* define to use W32 threads */
-#define  MHD_USE_W32_THREADS 1
+# define  MHD_USE_W32_THREADS 1
+#else
+/* define to use pthreads */
+# define MHD_USE_POSIX_THREADS 1
+# define HAVE_PTHREAD_H 1
+#endif // TARGET_OS_WINDOWS
 
 /* This is a MinGW system */
 /* #undef MINGW */

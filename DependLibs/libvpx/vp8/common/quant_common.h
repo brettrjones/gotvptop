@@ -11,9 +11,8 @@
 #ifndef VP8_COMMON_QUANT_COMMON_H_
 #define VP8_COMMON_QUANT_COMMON_H_
 
-
-#include "blockd.h"
 #include "string.h"
+#include "blockd.h"
 #include "onyxc_int.h"
 
 #ifdef __cplusplus

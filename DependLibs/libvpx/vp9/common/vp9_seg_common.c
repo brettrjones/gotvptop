@@ -8,9 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <assert.h>
 
 #include "vp9/common/vp9_blockd.h"
-#include <assert.h>
 #include "vp9/common/vp9_loopfilter.h"
 #include "vp9/common/vp9_seg_common.h"
 #include "vp9/common/vp9_quant_common.h"

@@ -199,7 +199,7 @@ extern int optopt;
    returns the contents of the 'val' field.  */
 
 //# if !GNULIB_defined_struct_option
-struct option
+struct option_gnu
 {
   const char *name;
   /* has_arg can't be an enum because some compilers complain about
@@ -248,10 +248,10 @@ extern int getopt( int ___argc, char *const *___argv, const char *__shortopts );
 //#ifndef __need_getopt
 extern int getopt_long( int ___argc, char *__getopt_argv_const *___argv,
 						const char *__shortopts,
-						const struct option *__longopts, int *__longind );
+                        const struct option_gnu *__longopts, int *__longind );
 extern int getopt_long_only( int ___argc, char *__getopt_argv_const *___argv,
 							 const char *__shortopts,
-							 const struct option *__longopts, int *__longind );
+                             const struct option_gnu *__longopts, int *__longind );
 
 //#endif
 

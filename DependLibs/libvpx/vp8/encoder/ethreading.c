@@ -8,9 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "vp8/common/common.h"
 #include "onyx_int.h"
 #include "vp8/common/threading.h"
+#include "vp8/common/common.h"
 #include "vp8/common/extend.h"
 #include "bitstream.h"
 #include "encodeframe.h"

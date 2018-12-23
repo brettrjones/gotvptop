@@ -8,12 +8,12 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "./vp9_rtcd.h"
-#include "./vpx_config.h"
-#include "vpx/vpx_integer.h"
 #include <assert.h>
 #include <smmintrin.h>
 
+#include "./vp9_rtcd.h"
+#include "./vpx_config.h"
+#include "vpx/vpx_integer.h"
 
 // Division using multiplication and shifting. The C implementation does:
 // modifier *= 3;

@@ -21,6 +21,15 @@
 
 #include <memory.h>
 
+#ifdef TARGET_OS_LINUX
+# include <sys/types.h>
+# include <netinet/in.h>
+# include <inttypes.h>
+
+# define ntohll be64toh
+# define htonll htobe64
+#endif // TARGET_OS_LINUX
+
 namespace
 {
     const unsigned int MIN_INTERVAL_CONNECT_REQUEST_MS				= (5 * 60000);
@@ -260,11 +269,11 @@ int64_t	VxConnectInfo::getTimeLastTcpContactMs( void )
 //! get seconds since any last contact
 int64_t VxConnectInfo::getElapsedMsAnyContact( void )	
 { 
-	return ( GetGmtTimeMs() -  m_s64TimeTcpLastContactMs ); 
+    return ( GetGmtTimeMs() -  getTimeLastTcpContactMs() );
 }
 
 //============================================================================
-//! get seconds since last tcp contact
+//! get milli seconds since last tcp contact
 int64_t VxConnectInfo::getElapsedMsTcpLastContact( void )	
 { 
 	return ( GetGmtTimeMs() - getTimeLastTcpContactMs() ); 

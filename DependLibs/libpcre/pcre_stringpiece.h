@@ -47,9 +47,9 @@
 //#elif TARGET_OS_ANDROID
 //#define HAVE_TYPE_TRAITS
 //#include <bits/type_traits.h>
-#elif TARGET_OS_LINUX
-#define HAVE_TYPE_TRAITS
-#include <type_traits.h>
+#elif defined(TARGET_OS_LINUX)
+//#define HAVE_TYPE_TRAITS
+//#include <type_traits.h>
 //#else
 //#define HAVE_TYPE_TRAITS
 //#include <type_traits.h>

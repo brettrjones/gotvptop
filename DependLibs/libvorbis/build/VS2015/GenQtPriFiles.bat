@@ -1,1 +1,1 @@
-python prigen.py libvorbis_static.vcxproj libvorbis.pri
+python prigen.py libvorbis.vcxproj libvorbis.pri

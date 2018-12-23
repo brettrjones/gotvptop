@@ -11,11 +11,11 @@
 #ifndef VP8_COMMON_COMMON_H_
 #define VP8_COMMON_COMMON_H_
 
+#include <assert.h>
 
 /* Interface header for common constant data structures and lookup tables */
 
 #include "vpx_mem/vpx_mem.h"
-#include <assert.h>
 
 #ifdef __cplusplus
 extern "C" {

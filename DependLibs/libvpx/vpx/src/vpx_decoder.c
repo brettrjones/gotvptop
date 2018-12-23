@@ -12,8 +12,8 @@
  * \brief Provides the high level interface to wrap decoder algorithms.
  *
  */
-#include "vpx/internal/vpx_codec_internal.h"
 #include <string.h>
+#include "vpx/internal/vpx_codec_internal.h"
 
 #define SAVE_STATUS(ctx, var) (ctx ? (ctx->err = var) : var)
 

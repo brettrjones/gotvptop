@@ -1,3 +1,12 @@
+
+DEFINES += __XAVS__
+
+
+INCLUDEPATH += $$PWD/../../common
+INCLUDEPATH += $$PWD/../../encoder
+INCLUDEPATH += $$PWD/../../extras
+INCLUDEPATH += $$PWD/../../
+
 HEADERS += 	$$PWD/../../common/bs.h \
 	$$PWD/../../common/common.h \
 	$$PWD/../../common/cpu.h \
@@ -18,8 +27,7 @@ HEADERS += 	$$PWD/../../common/bs.h \
 	$$PWD/../../encoder/me.h \
 	$$PWD/../../encoder/ratecontrol.h \
 	$$PWD/../../encoder/set.h \
-	$$PWD/../../extras/getopt.h \
-	$$PWD/../../extras/stdint.h
+	$$PWD/../../extras/getopt.h
 
 SOURCES += 	$$PWD/../../common/common.c \
 	$$PWD/../../common/cpu.c \

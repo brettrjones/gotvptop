@@ -11,8 +11,6 @@
 #ifndef VPX_VPX_INTEGER_H_
 #define VPX_VPX_INTEGER_H_
 
-#include "libvpx/config_libvpx.h"
-
 /* get ptrdiff_t, size_t, wchar_t, NULL */
 #include <stddef.h>
 

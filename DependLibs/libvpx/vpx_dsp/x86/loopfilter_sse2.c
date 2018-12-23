@@ -8,9 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <emmintrin.h>  // SSE2
 
 #include "./vpx_dsp_rtcd.h"
-#include <emmintrin.h>  // SSE2
 #include "vpx_ports/mem.h"
 #include "vpx_ports/emmintrin_compat.h"
 

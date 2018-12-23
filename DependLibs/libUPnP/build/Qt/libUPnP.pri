@@ -1,8 +1,19 @@
+
+INCLUDEPATH += $$PWD/../../
+INCLUDEPATH += $$PWD/../../Platinum/Source/Platinum
+INCLUDEPATH += $$PWD/../../Platinum/Source/Core
+INCLUDEPATH += $$PWD/../../Platinum/Source/Extras
+INCLUDEPATH += $$PWD/../../Platinum/Source/Devices/MediaServer
+INCLUDEPATH += $$PWD/../../Platinum/Source/Devices/MediaRenderer
+INCLUDEPATH += $$PWD/../../Platinum/Source/Devices/MediaConnect
+INCLUDEPATH += $$PWD/../../Neptune/Source/Core
+win32{
+INCLUDEPATH += $$PWD/../../Neptune/Source/System/Win32
+}
+
 HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
-	$$PWD/../../../../GoTvConfig.h \
 	$$PWD/../../../../GoTvCpuArchDefines.h \
 	$$PWD/../../../../GoTvDependLibrariesConfig.h \
-	$$PWD/../../../../GoTvFeaturesConfig.h \
 	$$PWD/../../../../GoTvTargetOsConfig.h \
 	$$PWD/../../../../base64.h \
 	$$PWD/../../../../byteswap.h \

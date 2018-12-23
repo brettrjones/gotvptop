@@ -8,14 +8,13 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <assert.h>
 #include "./vpx_config.h"
 #include "./vpx_scale_rtcd.h"
 #include "vpx/vpx_integer.h"
 #include "vpx_mem/vpx_mem.h"
 #include "vpx_ports/mem.h"
 #include "vpx_scale/yv12config.h"
-#include <assert.h>
-
 #if CONFIG_VP9_HIGHBITDEPTH
 #include "vp9/common/vp9_common.h"
 #endif

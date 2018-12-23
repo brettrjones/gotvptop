@@ -8,11 +8,11 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "./vp8_rtcd.h"
-#include "./vpx_dsp_rtcd.h"
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>
+#include "./vp8_rtcd.h"
+#include "./vpx_dsp_rtcd.h"
 #include "./vpx_scale_rtcd.h"
 #include "vpx/vpx_decoder.h"
 #include "vpx/vp8dx.h"
@@ -144,8 +144,7 @@ static vpx_codec_err_t vp8_peek_si_internal(const uint8_t *data,
     }
     si->is_kf = 0;
 
-    if (data_sz >= 10 && !(clear[0] & 0x01)) /* I-Frame */
-    {
+    if (data_sz >= 10 && !(clear[0] & 0x01)) { /* I-Frame */
       si->is_kf = 1;
 
       /* vet via sync code */

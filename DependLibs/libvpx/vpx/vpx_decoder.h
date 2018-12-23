@@ -25,7 +25,6 @@
  * video decoder algorithm.
  *
  */
-#include "libvpx/config_libvpx.h"
 #ifdef __cplusplus
 extern "C" {
 #endif

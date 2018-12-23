@@ -59,6 +59,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <math.h>
 #include <stdlib.h>
+#include <memory.h>
 
 #ifdef HAVE_LRINTF
 # define float2int(x) lrintf(x)

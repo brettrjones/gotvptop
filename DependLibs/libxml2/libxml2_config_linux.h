@@ -14,7 +14,7 @@
 #define SUPPORT_IP6 /**/
 
 /* Define if getaddrinfo is there */
-#define HAVE_GETADDRINFO /**/
+//#define HAVE_GETADDRINFO /**/ // defined in GoTvCompilerConfig.h
 
 /* Define to 1 if you have the <ansidecl.h> header file. */
 /* #undef HAVE_ANSIDECL_H */

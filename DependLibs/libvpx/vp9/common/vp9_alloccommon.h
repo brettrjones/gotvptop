@@ -10,7 +10,6 @@
 
 #ifndef VP9_COMMON_VP9_ALLOCCOMMON_H_
 #define VP9_COMMON_VP9_ALLOCCOMMON_H_
-#include "config_libvpx.h"
 
 #define INVALID_IDX -1  // Invalid buffer index.
 

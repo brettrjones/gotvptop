@@ -7,10 +7,10 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
-#include "./vpx_dsp_rtcd.h"
-#include "vpx/vpx_integer.h"
 #include <assert.h>
 #include <stdlib.h>
+#include "./vpx_dsp_rtcd.h"
+#include "vpx/vpx_integer.h"
 
 const int16_t vpx_rv[] = {
   8,  5,  2,  2,  8,  12, 4,  9,  8,  3,  0,  3,  9,  0,  0,  0,  8,  3,  14,

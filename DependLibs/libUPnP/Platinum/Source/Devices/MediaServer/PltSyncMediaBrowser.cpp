@@ -442,7 +442,7 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
             NPT_LOG_WARNING_2("Server returned unexpected number of items (%d vs %d)",
                               browse_data->info.nr, browse_data->info.items->GetItemCount());
         }
-        count += MAX(browse_data->info.nr, browse_data->info.items->GetItemCount());
+        count += std::max(browse_data->info.nr, browse_data->info.items->GetItemCount());
 
         if (list.IsNull()) {
             list = browse_data->info.items;
@@ -529,7 +529,7 @@ PLT_SyncMediaBrowser::SearchSync(PLT_DeviceDataReference&      device,
                               browse_data->info.nr, browse_data->info.items->GetItemCount());
         }
 
-        count += MAX( browse_data->info.nr, browse_data->info.items->GetItemCount());
+        count += std::max( browse_data->info.nr, browse_data->info.items->GetItemCount());
 
         if (list.IsNull()) {
             list = browse_data->info.items;

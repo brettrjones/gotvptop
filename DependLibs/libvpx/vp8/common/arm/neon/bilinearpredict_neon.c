@@ -22,35 +22,6 @@ static INLINE uint8x8_t load_and_shift(const unsigned char *a) {
   return vreinterpret_u8_u64(vshl_n_u64(vreinterpret_u64_u8(vld1_u8(a)), 32));
 }
 
-static INLINE void store4x4(unsigned char *dst, int dst_stride,
-                            const uint8x8_t a0, const uint8x8_t a1) {
-  if (!((uintptr_t)dst & 0x3) && !(dst_stride & 0x3)) {
-    vst1_lane_u32((uint32_t *)dst, vreinterpret_u32_u8(a0), 0);
-    dst += dst_stride;
-    vst1_lane_u32((uint32_t *)dst, vreinterpret_u32_u8(a0), 1);
-    dst += dst_stride;
-    vst1_lane_u32((uint32_t *)dst, vreinterpret_u32_u8(a1), 0);
-    dst += dst_stride;
-    vst1_lane_u32((uint32_t *)dst, vreinterpret_u32_u8(a1), 1);
-  } else {
-    // Store to the aligned local buffer and memcpy instead of vget_lane_u8
-    // which is really really slow.
-    uint32_t output_buffer[4];
-    vst1_lane_u32(output_buffer, vreinterpret_u32_u8(a0), 0);
-    vst1_lane_u32(output_buffer + 1, vreinterpret_u32_u8(a0), 1);
-    vst1_lane_u32(output_buffer + 2, vreinterpret_u32_u8(a1), 0);
-    vst1_lane_u32(output_buffer + 3, vreinterpret_u32_u8(a1), 1);
-
-    memcpy(dst, output_buffer, 4);
-    dst += dst_stride;
-    memcpy(dst, output_buffer + 1, 4);
-    dst += dst_stride;
-    memcpy(dst, output_buffer + 2, 4);
-    dst += dst_stride;
-    memcpy(dst, output_buffer + 3, 4);
-  }
-}
-
 void vp8_bilinear_predict4x4_neon(unsigned char *src_ptr,
                                   int src_pixels_per_line, int xoffset,
                                   int yoffset, unsigned char *dst_ptr,

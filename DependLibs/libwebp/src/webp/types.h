@@ -20,7 +20,7 @@
 #include <inttypes.h>
 #if defined(__cplusplus) || !defined(__STRICT_ANSI__) || \
     (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L)
-#define WEBP_INLINE GOTV_INLINE
+#define WEBP_INLINE inline
 #else
 #define WEBP_INLINE
 #endif

@@ -8,11 +8,11 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <limits.h>
+#include <stdlib.h>
 
 #include "./vpx_config.h"
 #include "./bitwriter_buffer.h"
-#include <limits.h>
-#include <stdlib.h>
 
 size_t vpx_wb_bytes_written(const struct vpx_write_bit_buffer *wb) {
   return wb->bit_offset / CHAR_BIT + (wb->bit_offset % CHAR_BIT > 0);

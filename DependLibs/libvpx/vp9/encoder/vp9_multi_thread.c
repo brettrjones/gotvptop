@@ -8,11 +8,11 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <assert.h>
 
 #include "vp9/encoder/vp9_encoder.h"
 #include "vp9/encoder/vp9_ethread.h"
 #include "vp9/encoder/vp9_multi_thread.h"
-#include <assert.h>
 
 void *vp9_enc_grp_get_next_job(MultiThreadHandle *multi_thread_ctxt,
                                int tile_id) {

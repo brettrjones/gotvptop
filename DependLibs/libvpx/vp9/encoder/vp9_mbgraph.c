@@ -8,9 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <limits.h>
 
 #include "./vp9_rtcd.h"
-#include <limits.h>
 #include "./vpx_dsp_rtcd.h"
 
 #include "vpx_dsp/vpx_dsp_common.h"

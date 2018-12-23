@@ -8,11 +8,11 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "./vp9_rtcd.h"
-#include "./vpx_config.h"
 #include <assert.h>
 #include <tmmintrin.h>  // SSSE3
 
+#include "./vp9_rtcd.h"
+#include "./vpx_config.h"
 #include "vpx_dsp/vpx_dsp_common.h"
 #include "vpx_dsp/x86/bitdepth_conversion_sse2.h"
 #include "vpx_dsp/x86/inv_txfm_sse2.h"
@@ -31,7 +31,7 @@ void vp9_fdct8x8_quant_ssse3(
   //    it's a pair of them that we need to repeat four times. This is done
   //    by constructing the 32 bit constant corresponding to that pair.
   const __m128i k__dual_p16_p16 = dual_set_epi16(23170, 23170);
-  const __m128i k__cospi_p16_p16 = _mm_set1_epi16((int16_t)cospi_16_64);
+  const __m128i k__cospi_p16_p16 = _mm_set1_epi16(cospi_16_64);
   const __m128i k__cospi_p16_m16 = pair_set_epi16(cospi_16_64, -cospi_16_64);
   const __m128i k__cospi_p24_p08 = pair_set_epi16(cospi_24_64, cospi_8_64);
   const __m128i k__cospi_m08_p24 = pair_set_epi16(-cospi_8_64, cospi_24_64);

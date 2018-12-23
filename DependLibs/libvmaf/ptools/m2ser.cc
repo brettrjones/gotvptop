@@ -62,7 +62,7 @@ class OMemStream {
   {
     if (bytes_of_space+len_>capac_) {
       // Alocate new space
-      int new_capac = MAX(bytes_of_space+len_, 2*capac_);
+      int new_capac = std::max(bytes_of_space+len_, 2*capac_);
       char* new_mem = new char[new_capac];
       memcpy(new_mem, data_, len_);
       // Install

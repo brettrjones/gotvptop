@@ -116,16 +116,16 @@ win32{
 #include(../../DependLibs/libjpg/build/Qt/libjpg.pri)
 
 ###include(../../DependLibs/libirrlicht/build/Qt/libirrlicht.pri)
-####include(../../DependLibs/libkvazaar/build/Qt/libkvazaar.pri)
+###include(../../DependLibs/libkvazaar/build/Qt/libkvazaar.pri)
 
 #include(../../DependLibs/liblame/build/Qt/liblame.pri)
 #include(../../DependLibs/liblzma/build/Qt/liblzma.pri)
-include(../../DependLibs/liblzo/build/Qt/liblzo.pri)
-#include(../../DependLibs/libmdnsresponder/build/Qt/libmdnsresponder.pri)
+#include(../../DependLibs/liblzo/build/Qt/liblzo.pri)
+#include(../../DependLibs/libmdnsresponder/build/Qt/libdnssd.pri)
 #include(../../DependLibs/libmicrohttpd/build/Qt/libmicrohttpd.pri)
 
 #include(../../DependLibs/libogg/build/Qt/libogg.pri)
-#include(../../DependLibs/libopencore-amrwb/build/Qt/libopencore-amrwb.pri)
+#include(../../DependLibs/libopencore-amr/build/Qt/libopencore-amr.pri)
 #include(../../DependLibs/libopenh264/build/Qt/libopenh264.pri)
 #include(../../DependLibs/libopenjpeg/build/Qt/libopenjpeg.pri)
 #include(../../DependLibs/libopus/build/Qt/libopus.pri)
@@ -134,41 +134,45 @@ include(../../DependLibs/liblzo/build/Qt/liblzo.pri)
 #include(../../DependLibs/libpng/build/Qt/libpng.pri)
 #include(../../DependLibs/libpthread/build/Qt/libpthread.pri)
 
-#include(../../DependLibs/librsvg/build/Qt/librsvg.pri)
-#include(../../DependLibs/libsdl/build/Qt/libsdl.pri)
+###include(../../DependLibs/librsvg/build/Qt/librsvg.pri)
+###include(../../DependLibs/libsdl/build/Qt/libsdl.pri)
 #include(../../DependLibs/libshine/build/Qt/libshine.pri)
 #include(../../DependLibs/libsnappy/build/Qt/libsnappy.pri)
 #include(../../DependLibs/libspeex/build/Qt/libspeex.pri)
 #include(../../DependLibs/libssh/build/Qt/libssh.pri)
+#include(../../DependLibs/openssl-1.0.2o/build/Qt/libssl.pri)
 
+#include(../../DependLibs/libtag/build/Qt/libtag.pri)
 #include(../../DependLibs/libtheora/build/Qt/libtheora.pri)
 #include(../../DependLibs/libtwolame/build/Qt/libtwolame.pri)
 #include(../../DependLibs/libUPnP/build/Qt/libUPnP.pri)
 
-#include(../../DependLibs/libvo-amrwbenc/build/Qt/libvo-amrwbenc.pri)
+#include(../../DependLibs/libvmaf/build/Qt/libvmaf.pri)
 #include(../../DependLibs/libvorbis/build/Qt/libvorbis.pri)
 #include(../../DependLibs/libvpx/build/Qt/libvpx.pri)
 
 #include(../../DependLibs/libwavepack/build/Qt/libwavepack.pri)
 #include(../../DependLibs/libwebp/build/Qt/libwebp.pri)
-#include(../../DependLibs/libvpx/build/Qt/libvpx.pri)
 
 #include(../../DependLibs/libx264/build/Qt/libx264.pri)
 #include(../../DependLibs/libx265/build/Qt/libx265.pri)
 #include(../../DependLibs/libxavs/build/Qt/libxavs.pri)
-#include(../../DependLibs/libxml/build/Qt/libxml.pri)
+###include(../../DependLibs/libxml/build/Qt/libxml.pri)
 #include(../../DependLibs/libxml2/build/Qt/libxml2.pri)
+###include(../../DependLibs/libxpm/build/Qt/libxpm.pri)
 #include(../../DependLibs/libxslt/build/Qt/libxslt.pri)
-#include(../../DependLibs/libxvid/build/Qt/libxvid.pri)
+###include(../../DependLibs/libxvid/build/Qt/libxvid.pri)
 
+#include(../../DependLibs/libyajl/build/Qt/libyajl.pri)
+#include(../../DependLibs/libzip/build/Qt/libzip.pri)
+#include(../../DependLibs/libzlib/build/Qt/libzlib.pri)
 #include(../../DependLibs/libzvbi/build/Qt/libzvbi.pri)
+
 #include(../../DependLibs/MediaToolsLib/build/Qt/libmediatools.pri)
 
-#include(../../DependLibs/libzvbi/build/Qt/libzvbi.pri)
-#include(../../DependLibs/libzvbi/build/Qt/libzvbi.pri)
-#include(../../DependLibs/libzvbi/build/Qt/libzvbi.pri)
-#include(../../DependLibs/libzvbi/build/Qt/libzvbi.pri)
-#include(../../DependLibs/libzvbi/build/Qt/libzvbi.pri)
+#include(../../DependLibs/NetLib/build/Qt/libnetlib.pri)
+#include(../../DependLibs/PktLib/build/Qt/libpktlib.pri)
+include(../../DependLibs/Upnp2Lib/build/Qt/libupnp2lib.pri)
 
 #SOURCES +=
 

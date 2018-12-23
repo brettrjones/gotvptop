@@ -1,1 +1,1 @@
-python prigen.py SshLib.vcxproj libssh.pri
+python prigen.py libwebp.vcxproj libwebp.pri

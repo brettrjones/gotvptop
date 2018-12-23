@@ -14,7 +14,6 @@
  */
 #ifndef VPX_VPX_IMAGE_H_
 #define VPX_VPX_IMAGE_H_
-#include "libvpx/config_libvpx.h"
 
 #ifdef __cplusplus
 extern "C" {

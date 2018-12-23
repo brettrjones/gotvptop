@@ -1,3 +1,8 @@
+
+DEFINES += LIBXML_STATIC
+
+INCLUDEPATH += $$PWD/../../
+
 HEADERS += 	$$PWD/../../DOCBparser.h \
 	$$PWD/../../HTMLparser.h \
 	$$PWD/../../HTMLtree.h \

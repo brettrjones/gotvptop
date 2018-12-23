@@ -1,2 +1,2 @@
-python prigen.py NetLib.vcxproj libNetLib.pri
+python prigen.py NetLib.vcxproj libnetlib.pri
 

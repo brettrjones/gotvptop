@@ -8,9 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <smmintrin.h> /* SSE4.1 */
 
 #include "./vp8_rtcd.h"
-#include <smmintrin.h> /* SSE4.1 */
 #include "vp8/encoder/block.h"
 #include "vp8/common/entropy.h" /* vp8_default_inv_zig_zag */
 

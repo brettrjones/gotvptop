@@ -1,3 +1,13 @@
+win32{
+DEFINES += WINDOWS
+}
+
+unix{
+    DEFINES += NOT_HAVE_SA_LEN
+}
+
+INCLUDEPATH += $$PWD/../../
+
 HEADERS += 	$$PWD/../../config_libmdnsresponder.h \
 	$$PWD/../../mDNSShared/CommonServices.h \
 	$$PWD/../../mDNSShared/DebugServices.h \
@@ -11,5 +21,5 @@ SOURCES += 	$$PWD/../../mDNSShared/DebugServices.c \
 	$$PWD/../../mDNSShared/dnssd_clientlib.c \
 	$$PWD/../../mDNSShared/dnssd_clientstub.c \
 	$$PWD/../../mDNSShared/dnssd_ipc.c \
-	$$PWD/dllmain.c
+#	$$PWD/dllmain.c
 

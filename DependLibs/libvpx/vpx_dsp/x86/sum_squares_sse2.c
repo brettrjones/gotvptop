@@ -8,11 +8,11 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "./vpx_dsp_rtcd.h"
 #include <assert.h>
 #include <emmintrin.h>
 #include <stdio.h>
 
+#include "./vpx_dsp_rtcd.h"
 
 static uint64_t vpx_sum_squares_2d_i16_4x4_sse2(const int16_t *src,
                                                 int stride) {

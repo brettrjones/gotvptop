@@ -11,8 +11,8 @@
 #ifndef VP8_ENCODER_SEGMENTATION_H_
 #define VP8_ENCODER_SEGMENTATION_H_
 
-#include "vp8/common/blockd.h"
 #include "string.h"
+#include "vp8/common/blockd.h"
 #include "onyx_int.h"
 
 #ifdef __cplusplus

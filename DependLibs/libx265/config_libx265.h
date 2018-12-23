@@ -34,5 +34,6 @@
 //#define LINKED_8BIT					1
 //#define LINKED_10BIT				1
 //#define LINKED_12BIT				1
-#define EXPORT_C_API_LIBX256		1		
+#define EXPORT_C_API_LIBX256		1
+#define HAVE_STRTOK_R               1
 #endif

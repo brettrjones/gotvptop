@@ -11,8 +11,6 @@
 #ifndef VPX_DSP_SKIN_DETECTION_H_
 #define VPX_DSP_SKIN_DETECTION_H_
 
-#include "config_libvpx.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif

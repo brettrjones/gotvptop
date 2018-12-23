@@ -1,3 +1,8 @@
+
+DEFINES += ENABLE_DSD
+
+INCLUDEPATH += $$PWD/../../
+
 HEADERS += 	$$PWD/../../config_libwavepack.h \
 	$$PWD/../../src/decorr_tables.h \
 	$$PWD/../../src/unpack3.h \

@@ -8,14 +8,14 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "./vp9_rtcd.h"
-#include "vpx/vpx_integer.h"
-#include "vpx_dsp/vpx_dsp_common.h"
-#include "vpx_dsp/x86/bitdepth_conversion_sse2.h"
 #include <assert.h>
 #include <emmintrin.h>
 #include <xmmintrin.h>
 
+#include "./vp9_rtcd.h"
+#include "vpx/vpx_integer.h"
+#include "vpx_dsp/vpx_dsp_common.h"
+#include "vpx_dsp/x86/bitdepth_conversion_sse2.h"
 
 void vp9_quantize_fp_sse2(const tran_low_t *coeff_ptr, intptr_t n_coeffs,
                           int skip_block, const int16_t *round_ptr,

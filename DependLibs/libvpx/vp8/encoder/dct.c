@@ -8,9 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <math.h>
 
 #include "./vp8_rtcd.h"
-#include <math.h>
 
 void vp8_short_fdct4x4_c(short *input, short *output, int pitch) {
   int i;

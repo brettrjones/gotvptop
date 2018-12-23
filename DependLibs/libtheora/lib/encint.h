@@ -16,9 +16,9 @@
  ********************************************************************/
 #if !defined(_encint_H)
 # define _encint_H (1)
-# if defined(HAVE_CONFIG_H)
-#  include "config.h"
-# endif
+//# if defined(HAVE_CONFIG_H)
+//#  include "config.h"
+//# endif
 # include "theora/theoraenc.h"
 # include "internal.h"
 # include "ocintrin.h"

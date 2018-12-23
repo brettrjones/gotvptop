@@ -10,7 +10,7 @@
 
 #ifndef VP8_COMMON_TREECODER_H_
 #define VP8_COMMON_TREECODER_H_
-#include "config_libvpx.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -1,3 +1,6 @@
+
+INCLUDEPATH += $$PWD/../../
+
 HEADERS += 	$$PWD/../../ape/apefile.h \
 	$$PWD/../../ape/apefooter.h \
 	$$PWD/../../ape/apeitem.h \

@@ -8,7 +8,6 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "./vpx_config.h"
 #include <assert.h>
 #include <limits.h>
 #include <math.h>
@@ -16,6 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "./vpx_config.h"
 #if CONFIG_VP9_HIGHBITDEPTH
 #include "vpx_dsp/vpx_dsp_common.h"
 #endif  // CONFIG_VP9_HIGHBITDEPTH

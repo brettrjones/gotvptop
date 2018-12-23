@@ -7,8 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
-#include "./vpx_dsp_rtcd.h"
 #include <immintrin.h>  // AVX2
+#include "./vpx_dsp_rtcd.h"
 #include "vpx/vpx_integer.h"
 
 void vpx_sad32x32x4d_avx2(const uint8_t *src, int src_stride,

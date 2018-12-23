@@ -35,7 +35,7 @@
 
 /* internal Autoconf configuration file - only used when building LZO */
 
-#include <GoTvDependLibrariesConfig.h>
+#include "config_liblzo.h"
 
 #include <limits.h>
 #include <stddef.h>

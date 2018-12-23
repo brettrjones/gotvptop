@@ -8,9 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <assert.h>
 
 #include "vp9/common/vp9_scan.h"
-#include <assert.h>
 
 DECLARE_ALIGNED(16, static const int16_t, default_scan_4x4[16]) = {
   0, 4, 1, 5, 8, 2, 12, 9, 3, 6, 13, 10, 7, 14, 11, 15,

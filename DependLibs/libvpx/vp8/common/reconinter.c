@@ -8,11 +8,11 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <limits.h>
+#include <string.h>
 
 #include "vpx_config.h"
 #include "vp8_rtcd.h"
-#include <limits.h>
-#include <string.h>
 #include "vpx/vpx_integer.h"
 #include "blockd.h"
 #include "reconinter.h"

@@ -1,3 +1,11 @@
+DEFINES += _BIND_TO_CURRENT_CRT_VERSION LIBTHEORA_EXPORTS
+# OC_X86_ASM
+
+INCLUDEPATH += $$PWD/../../
+INCLUDEPATH += $$PWD/../../include
+INCLUDEPATH += $$PWD/../../lib
+INCLUDEPATH += $$PWD/../../../libogg\include
+
 HEADERS += 	$$PWD/../../include/theora/codec.h \
 	$$PWD/../../include/theora/theora.h \
 	$$PWD/../../include/theora/theoradec.h \

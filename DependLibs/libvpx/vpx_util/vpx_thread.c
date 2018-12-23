@@ -12,9 +12,9 @@
 // Original source:
 //  https://chromium.googlesource.com/webm/libwebp
 
-#include "./vpx_thread.h"
 #include <assert.h>
 #include <string.h>  // for memset()
+#include "./vpx_thread.h"
 #include "vpx_mem/vpx_mem.h"
 
 #if CONFIG_MULTITHREAD
@@ -81,7 +81,7 @@ static void init(VPxWorker *const worker) {
   worker->status_ = NOT_OK;
 }
 
-static int sync(VPxWorker *const worker) {
+static int syncWorker(VPxWorker *const worker) {
 #if CONFIG_MULTITHREAD
   change_state(worker, OK);
 #endif
@@ -121,7 +121,7 @@ static int reset(VPxWorker *const worker) {
     worker->status_ = OK;
 #endif
   } else if (worker->status_ > OK) {
-    ok = sync(worker);
+    ok = syncWorker(worker);
   }
   assert(!ok || (worker->status_ == OK));
   return ok;

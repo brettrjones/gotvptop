@@ -8,13 +8,12 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <stdlib.h>
+#include <string.h>
 
 #include "vpx/vpx_image.h"
 #include "vpx/vpx_integer.h"
 #include "vpx_mem/vpx_mem.h"
-
-#include <stdlib.h>
-#include <string.h>
 
 static vpx_image_t *img_alloc_helper(vpx_image_t *img, vpx_img_fmt_t fmt,
                                      unsigned int d_w, unsigned int d_h,
@@ -89,11 +88,10 @@ static vpx_image_t *img_alloc_helper(vpx_image_t *img, vpx_img_fmt_t fmt,
     default: ycs = 0; break;
   }
 
-  /* Calculate storage sizes given the chroma subsampling */
-  align = (1 << xcs) - 1;
-  w = (d_w + align) & ~align;
-  align = (1 << ycs) - 1;
-  h = (d_h + align) & ~align;
+  /* Calculate storage sizes. If the buffer was allocated externally, the width
+   * and height shouldn't be adjusted. */
+  w = d_w;
+  h = d_h;
   s = (fmt & VPX_IMG_FMT_PLANAR) ? w : bps * w / 8;
   s = (s + stride_align - 1) & ~(stride_align - 1);
   stride_in_bytes = (fmt & VPX_IMG_FMT_HIGHBITDEPTH) ? s * 2 : s;
@@ -112,9 +110,18 @@ static vpx_image_t *img_alloc_helper(vpx_image_t *img, vpx_img_fmt_t fmt,
   img->img_data = img_data;
 
   if (!img_data) {
-    const uint64_t alloc_size = (fmt & VPX_IMG_FMT_PLANAR)
-                                    ? (uint64_t)h * s * bps / 8
-                                    : (uint64_t)h * s;
+    uint64_t alloc_size;
+    /* Calculate storage sizes given the chroma subsampling */
+    align = (1 << xcs) - 1;
+    w = (d_w + align) & ~align;
+    align = (1 << ycs) - 1;
+    h = (d_h + align) & ~align;
+
+    s = (fmt & VPX_IMG_FMT_PLANAR) ? w : bps * w / 8;
+    s = (s + stride_align - 1) & ~(stride_align - 1);
+    stride_in_bytes = (fmt & VPX_IMG_FMT_HIGHBITDEPTH) ? s * 2 : s;
+    alloc_size = (fmt & VPX_IMG_FMT_PLANAR) ? (uint64_t)h * s * bps / 8
+                                            : (uint64_t)h * s;
 
     if (alloc_size != (size_t)alloc_size) goto fail;
 

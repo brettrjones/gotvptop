@@ -134,7 +134,9 @@
 #define HAVE_MATH_H 1
 #define HAVE_FCNTL_H 1
 
-#include <io.h>
+#ifndef TARGET_OS_LINUX
+# include <io.h>
+#endif // TARGET_OS_LINUX
 
 #define HAVE_ISINF
 #define HAVE_ISNAN
@@ -196,7 +198,11 @@ static int isnan( double d ) {
 }
 #endif /* _MSC_VER */
 
-#include <direct.h>
+#ifdef TARGET_OS_WINDOWS
+# include <direct.h>
+#else
+# include <dirent.h>
+#endif // TARGET_OS_WINDOWS
 
 /* snprintf emulation taken from http://stackoverflow.com/a/8712996/1956010 */
 #if defined(_MSC_VER) && _MSC_VER < 1900

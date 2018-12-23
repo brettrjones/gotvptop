@@ -8,6 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#ifdef TARGET_OS_ANDROID
+
 #include <arm_neon.h>
 
 #include "./vpx_config.h"
@@ -1076,3 +1078,5 @@ void vpx_highbd_tm_predictor_32x32_neon(uint16_t *dst, ptrdiff_t stride,
     }
   }
 }
+
+#endif // TARGET_OS_ANDROID

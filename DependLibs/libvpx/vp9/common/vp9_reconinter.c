@@ -8,9 +8,10 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <assert.h>
 
 #include "./vpx_scale_rtcd.h"
-#include <assert.h>
+#include "./vpx_config.h"
 
 #include "vpx/vpx_integer.h"
 

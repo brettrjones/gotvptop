@@ -8,9 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <string.h>
 
 #include "./vp8_rtcd.h"
-#include <string.h>
 #include "vpx/vpx_integer.h"
 
 /* Copy 2 macroblocks to a buffer */

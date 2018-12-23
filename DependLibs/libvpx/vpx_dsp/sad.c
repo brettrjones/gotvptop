@@ -8,10 +8,10 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <stdlib.h>
+
 #include "./vpx_config.h"
 #include "./vpx_dsp_rtcd.h"
-
-#include <stdlib.h>
 
 #include "vpx/vpx_integer.h"
 #include "vpx_ports/mem.h"

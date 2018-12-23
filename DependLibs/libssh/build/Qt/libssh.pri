@@ -1,3 +1,5 @@
+DEFINES += LIBSSH_STATIC
+
 HEADERS += 	$$PWD/../../agent.h \
 	$$PWD/../../auth.h \
 	$$PWD/../../bignum.h \

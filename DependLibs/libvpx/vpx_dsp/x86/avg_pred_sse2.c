@@ -8,10 +8,10 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "./vpx_dsp_rtcd.h"
 #include <assert.h>
 #include <emmintrin.h>
 
+#include "./vpx_dsp_rtcd.h"
 #include "vpx/vpx_integer.h"
 
 void vpx_comp_avg_pred_sse2(uint8_t *comp, const uint8_t *pred, int width,

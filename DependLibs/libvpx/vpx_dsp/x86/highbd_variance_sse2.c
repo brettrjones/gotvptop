@@ -11,10 +11,6 @@
 
 #include "vpx_ports/mem.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 typedef uint32_t (*high_variance_fn_t)(const uint16_t *src, int src_stride,
                                        const uint16_t *ref, int ref_stride,
                                        uint32_t *sse, int *sum);
@@ -562,7 +558,3 @@ FNS(sse2);
 
 #undef FNS
 #undef FN
-
-#ifdef __cplusplus
-}  // extern "C"
-#endif

@@ -35,7 +35,7 @@ namespace X265_NS {
 #endif
 
 static const char short_options[] = "o:D:P:p:f:F:r:I:i:b:s:t:q:m:hwV?";
-static const struct option long_options[] =
+static const struct option_gnu long_options[] =
 {
     { "help",                 no_argument, NULL, 'h' },
     { "version",              no_argument, NULL, 'V' },

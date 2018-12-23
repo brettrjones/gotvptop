@@ -8,8 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "./bitwriter.h"
 #include <assert.h>
+
+#include "./bitwriter.h"
 
 void vpx_start_encode(vpx_writer *br, uint8_t *source) {
   br->lowvalue = 0;

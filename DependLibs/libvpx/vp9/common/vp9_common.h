@@ -13,9 +13,9 @@
 
 /* Interface header for common constant data structures and lookup tables */
 
-#include "./vpx_config.h"
-
 #include <assert.h>
+
+#include "./vpx_config.h"
 #include "vpx_dsp/vpx_dsp_common.h"
 #include "vpx_mem/vpx_mem.h"
 #include "vpx/vpx_integer.h"

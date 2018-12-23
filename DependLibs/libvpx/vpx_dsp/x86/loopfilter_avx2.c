@@ -8,9 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <immintrin.h> /* AVX2 */
 
 #include "./vpx_dsp_rtcd.h"
-#include <immintrin.h> /* AVX2 */
 #include "vpx_ports/mem.h"
 
 void vpx_lpf_horizontal_16_avx2(unsigned char *s, int p,

@@ -39,6 +39,10 @@
 #include "tsearch.h"
 #endif
 
+#if HAVE_POLL
+    #include <poll.h>
+#endif
+
 #if HTTPS_SUPPORT
 #include "connection_https.h"
 #include <libgnu/gcrypt.h>

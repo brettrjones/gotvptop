@@ -177,7 +177,8 @@ void VxIPv4_ntop( void * pvBinary, char * pBuf, int iBufLen, bool isHostOrder )
 	if( isHostOrder )
 	{
 		// change to net order
-		u32NetOrder = htonl( (uint32_t)pvBinary );
+        uint32_t * binaryIPv4 = static_cast<uint32_t*>(pvBinary);
+        u32NetOrder = (uint32_t)htonl( *binaryIPv4 );
 		pTemp = (uint8_t *)&u32NetOrder;
 	}
 	else
@@ -1793,7 +1794,7 @@ RCODE VxSetSktBlocking( SOCKET sktHandle, bool bBlock )
 	if ( bBlock )
 	{
 		// set to non blocking
-#ifdef TARGET_OS_WINDOWS
+#if defined(TARGET_OS_WINDOWS)
 		int iResult;
 		u_long s32NonBlock = false;
 		iResult = ioctlsocket( sktHandle, FIONBIO, &s32NonBlock );
@@ -1802,16 +1803,17 @@ RCODE VxSetSktBlocking( SOCKET sktHandle, bool bBlock )
 			LogMsg( LOG_ERROR, "VxSktBase::setSktBlocking skt %d ioctlsocket error %s\n", sktHandle, VxDescribeSktError( iResult ) );
 			return iResult;
 		}
-#else
+#elif defined(TARGET_OS_LINUX)
 		// this works in linux but not android
-		//			int iFlags = fcntl(m_Socket, F_GETFL, NULL);
-		//			if( 0 >= iFlags )
-		//			{
-		//				LogMsg( LOG_ERROR, "VxSktBase::setSktBlocking fcntl error\n" );
-		//				return -1;
-		//			}
-		//           fcntl( m_Socket, F_SETFL, iFlags | O_NONBLOCK);
+        int iFlags = fcntl(sktHandle, F_GETFL, NULL);
+        if( 0 >= iFlags )
+        {
+            LogMsg( LOG_ERROR, "VxSktBase::setSktBlocking fcntl error\n" );
+            return -1;
+        }
 
+        fcntl( sktHandle, F_SETFL, iFlags | O_NONBLOCK);
+#elif defined(TARGET_OS_ANDROID)
 		// this works in android
 		int mode = 0;
 		ioctl( sktHandle, FIONBIO, &mode );
@@ -1829,17 +1831,19 @@ RCODE VxSetSktBlocking( SOCKET sktHandle, bool bBlock )
 			LogMsg( LOG_INFO, "VxSktBase::setSktBlocking ioctlsocket error %s\n", VxDescribeSktError( iResult ) );
 			return iResult;
 		}
-#else
+#elif defined(TARGET_OS_LINUX)
 		// this works in linux but not android
-		//			int iFlags = fcntl(m_Socket, F_GETFL, NULL);
-		//			if( 0 >= iFlags )
-		//			{
-		//				LogMsg( LOG_ERROR, "VxSktBase::setSktBlocking fcntl error\n" );
-		//				return -1;
-		//			}
-		//            iFlags &= ~O_NONBLOCK;
-		//            fcntl( m_Socket, F_SETFL, iFlags);
+        int iFlags = fcntl(sktHandle, F_GETFL, NULL);
+        if( 0 >= iFlags )
+        {
+            LogMsg( LOG_ERROR, "VxSktBase::setSktBlocking fcntl error\n" );
+            return -1;
+        }
 
+        iFlags &= ~O_NONBLOCK;
+        fcntl( sktHandle, F_SETFL, iFlags);
+
+#elif defined(TARGET_OS_ANDROID)
 		// this works in android
 		int mode = 1;
 		ioctl( sktHandle, FIONBIO, &mode );

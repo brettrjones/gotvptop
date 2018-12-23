@@ -45,7 +45,7 @@ void PktPluginOfferReq::setMessages( const char * pMsg1, const char * fileName )
 {
 	if( pMsg1 && strlen( pMsg1 ) )
 	{
-		int msgLen = MIN( strlen( pMsg1 ), PKT_PLUGIN_OFFER_MAX_MSG_LEN );
+        int msgLen = std::min( (int)strlen( pMsg1 ), PKT_PLUGIN_OFFER_MAX_MSG_LEN );
 		m_u16Msg1Len = htons( (uint16_t)( msgLen + 1 ) );
 		strncpy( m_as8Args, pMsg1, msgLen );
 		m_as8Args[ msgLen ] = 0;

@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 #include "./vpx_config.h"
-#define RTCD_C 1
+#define RTCD_C
 #include "./vpx_scale_rtcd.h"
 #include "vpx_ports/vpx_once.h"
 

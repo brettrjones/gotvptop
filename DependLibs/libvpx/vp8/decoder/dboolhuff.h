@@ -11,10 +11,10 @@
 #ifndef VP8_DECODER_DBOOLHUFF_H_
 #define VP8_DECODER_DBOOLHUFF_H_
 
-#include "./vpx_config.h"
 #include <stddef.h>
 #include <limits.h>
 
+#include "./vpx_config.h"
 #include "vpx_ports/mem.h"
 #include "vpx/vp8dx.h"
 #include "vpx/vpx_integer.h"

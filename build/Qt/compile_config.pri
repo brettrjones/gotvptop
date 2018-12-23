@@ -9,7 +9,6 @@ unix:QMAKE_CXXFLAGS += -Wno-unused-parameter
 unix:QMAKE_CXXFLAGS += -Wno-attributes
 unix:QMAKE_CXXFLAGS += -Wno-sign-compare
 unix:QMAKE_CXXFLAGS += -Wno-parentheses
-unix:QMAKE_CXXFLAGS += -Wno-pointer-sign
 unix:QMAKE_CXXFLAGS += -Wno-missing-field-initializers
 unix:QMAKE_CXXFLAGS += -Wno-switch
 

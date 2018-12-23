@@ -11,9 +11,8 @@
 #ifndef VP8_COMMON_LOOPFILTER_H_
 #define VP8_COMMON_LOOPFILTER_H_
 
-
-#include "vpx_config.h"
 #include "vpx_ports/mem.h"
+#include "vpx_config.h"
 #include "vp8_rtcd.h"
 
 #ifdef __cplusplus

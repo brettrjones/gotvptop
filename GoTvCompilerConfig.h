@@ -6,11 +6,11 @@
 #include "GoTvCpuArchDefines.h"
 
 #include <inttypes.h> // all compilers must support this header to avoid massive typedef clashes
-//#include <sys/types.h> // for size_t in linux
+#include <sys/types.h> // for size_t in linux
 
-#ifdef TARGET_OS_LINUX
-# define int8_t char
-#endif // TARGET_OS_LINUX
+//#ifdef TARGET_OS_LINUX
+//# define int8_t char
+//#endif // TARGET_OS_LINUX
 
 
 #ifdef _UNICODE
@@ -128,7 +128,7 @@ n = 1 stands for the first argument, n = 2 for the second argument etc.  */
 # define GOTV_FORCE_INLINE		__forceinline
 #elif defined(__GNUC__)
 # define GOTV_INLINE			inline
-# define GOTV_FORCE_INLINE		__attribute((always_inline))
+# define GOTV_FORCE_INLINE		inline // __attribute((always_inline))
 #elif defined(__MWERKS__)
 # define GOTV_FORCE_INLINE		inline
 # define GOTV_FORCE_INLINE		inline
@@ -627,10 +627,15 @@ typedef struct _stat64 structStatOsDef;
 #define HAVE_WINDOWS_H			0  // only windows has <windows.h>
 #define HAVE_WS2TCPIP_H			0  // only windows has <ws2tcpip.h>
 
-#include <inttypes.h>
+#ifdef TARGET_OS_LINUX
+# define HAVE_FSEEKO            1
+# define HAVE_FTELLO            1
+#endif // TARGET_OS_LINUX
+
 #include <stdbool.h> 
 #include <sys/stat.h>
 #include <stddef.h> // required for wchar_t in linux
+#include <time.h> // for time_t
 
 uint64_t GetTickCount64(); // implemented in VxFunctionsMissingInPosix.cpp
 
@@ -712,7 +717,8 @@ typedef LPCSTR				LPCTSTR;
 typedef uint64_t            ULONGLONG;
 typedef unsigned long		ULONG_PTR;
 typedef ULONG_PTR			DWORD_PTR;
-typedef intptr_t( *FARPROC )( void );
+
+//typedef intptr_t( *FARPROC )( void );
 
 #define MAXWORD   0xffff
 
@@ -1222,8 +1228,13 @@ typedef int64_t              time64_t;
 # define HAVE_IO_H					1
 #endif // TARGET_OS_WINDOWS
 
+#ifdef TARGET_OS_WINDOWS
 /* Define to 1 if you have the `lstat' function. */
-#define HAVE_LSTAT					0
+# define HAVE_LSTAT                 0
+#else
+# define HAVE_LSTAT                 1
+#endif // TARGET_OS_WINDOWS
+
 /* Define to 1 if you have the `mprotect' function. */
 /* Define to 1 if you have the `lrint' function. */
 #define HAVE_LRINT					1	// simulated in vs with _lrint definition
@@ -1598,7 +1609,7 @@ typedef int64_t              time64_t;
 #ifdef _MSC_VER
 //# define HAVE_TERMIOS_H		0
 #else
-//# define HAVE_TERMIOS_H			1
+# define HAVE_TERMIOS_H			1
 #endif // _MSC_VER
 
 /* Define to 1 if you have the `uname' function. */

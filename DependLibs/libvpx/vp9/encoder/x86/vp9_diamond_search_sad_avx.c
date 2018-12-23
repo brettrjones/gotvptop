@@ -8,13 +8,13 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-
-#include "vpx_dsp/vpx_dsp_common.h"
 #if defined(_MSC_VER)
 #include <intrin.h>
 #endif
 #include <emmintrin.h>
 #include <smmintrin.h>
+
+#include "vpx_dsp/vpx_dsp_common.h"
 #include "vp9/encoder/vp9_encoder.h"
 #include "vpx_ports/mem.h"
 

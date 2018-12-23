@@ -31,7 +31,7 @@
 #include <emmintrin.h>
 #include <smmintrin.h>
 #include "main.h"
-#include "celt/x86/x86cpu.h"
+#include "libopus/celt/x86/x86cpu.h"
 #include "stack_alloc.h"
 
 static OPUS_INLINE void silk_nsq_scale_states_sse4_1(

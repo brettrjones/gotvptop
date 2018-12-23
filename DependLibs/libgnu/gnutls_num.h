@@ -25,7 +25,7 @@
 
 #include <libgnu/gnutls_int.h>
 
-#include <minmax.h>
+#include <libgnu/minmax.h>
 #include <byteswap.h>
 
 int _gnutls_uint64pp(uint64 *);

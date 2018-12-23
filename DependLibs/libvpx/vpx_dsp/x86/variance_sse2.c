@@ -8,16 +8,12 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <emmintrin.h>  // SSE2
 
 #include "./vpx_config.h"
-#include <emmintrin.h>  // SSE2
 #include "./vpx_dsp_rtcd.h"
 
 #include "vpx_ports/mem.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 typedef void (*getNxMvar_fn_t)(const unsigned char *src, int src_stride,
                                const unsigned char *ref, int ref_stride,
@@ -451,7 +447,3 @@ FNS(ssse3, ssse3);
 
 #undef FNS
 #undef FN
-
-#ifdef __cplusplus
-}  // extern "C"
-#endif

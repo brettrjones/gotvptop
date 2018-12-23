@@ -7,9 +7,9 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
-#include "vpx_config.h"
 #include <assert.h>
 #include <stdlib.h>
+#include "vpx_config.h"
 #include "lookahead.h"
 #include "vp8/common/extend.h"
 

@@ -1,12 +1,8 @@
+INCLUDEPATH += $$PWD/../../
+
 HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
-	$$PWD/../../../../GoTvCompilerIntTypes.h \
-	$$PWD/../../../../GoTvConfig.h \
-	$$PWD/../../../../GoTvConfigAndroid.h \
-	$$PWD/../../../../GoTvConfigLinux.h \
-	$$PWD/../../../../GoTvConfigWindows.h \
 	$$PWD/../../../../GoTvCpuArchDefines.h \
 	$$PWD/../../../../GoTvDependLibrariesConfig.h \
-	$$PWD/../../../../GoTvFeaturesConfig.h \
 	$$PWD/../../VxSpeexConfig_w32.h \
 	$$PWD/../../_kiss_fft_guts.h \
 	$$PWD/../../arch.h \

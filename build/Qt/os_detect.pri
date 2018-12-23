@@ -19,6 +19,6 @@ macx{
 }
 
 win32:TARGET_OS_NAME = Windows
-linux:!android: TARGET_OS_NAME = Linux
+unix:!android: TARGET_OS_NAME = Linux
 android: TARGET_OS_NAME = Android
 macx: TARGET_OS_NAME = Apple

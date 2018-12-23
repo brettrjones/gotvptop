@@ -87,12 +87,12 @@ static INLINE uint32_t BSwap32(uint32_t x) {
   return ret;
 #elif defined(HAVE_BUILTIN_BSWAP32)
   return __builtin_bswap32(x);
-#elif defined(_MSC_VER)
-	return (uint32_t)_byteswap_ulong(x);
 #elif defined(__i386__) || defined(__x86_64__)
   uint32_t swapped_bytes;
   __asm__ volatile("bswap %0" : "=r"(swapped_bytes) : "0"(x));
   return swapped_bytes;
+#elif defined(_MSC_VER)
+  return (uint32_t)_byteswap_ulong(x);
 #else
   return (x >> 24) | ((x >> 8) & 0xff00) | ((x << 8) & 0xff0000) | (x << 24);
 #endif  // HAVE_BUILTIN_BSWAP32
@@ -101,12 +101,12 @@ static INLINE uint32_t BSwap32(uint32_t x) {
 static INLINE uint64_t BSwap64(uint64_t x) {
 #if defined(HAVE_BUILTIN_BSWAP64)
   return __builtin_bswap64(x);
-#elif defined(_MSC_VER)
-    return ( uint64_t )_byteswap_uint64( x );
 #elif defined(__x86_64__)
   uint64_t swapped_bytes;
   __asm__ volatile("bswapq %0" : "=r"(swapped_bytes) : "0"(x));
   return swapped_bytes;
+#elif defined(_MSC_VER)
+  return (uint64_t)_byteswap_uint64(x);
 #else   // generic code for swapping 64-bit values (suggested by bdb@)
   x = ((x & 0xffffffff00000000ull) >> 32) | ((x & 0x00000000ffffffffull) << 32);
   x = ((x & 0xffff0000ffff0000ull) >> 16) | ((x & 0x0000ffff0000ffffull) << 16);

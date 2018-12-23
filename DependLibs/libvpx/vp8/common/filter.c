@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "./vp8_rtcd.h"
 #include <assert.h>
+#include "./vp8_rtcd.h"
 #include "vp8/common/filter.h"
 
 DECLARE_ALIGNED(16, const short, vp8_bilinear_filters[8][2]) = {

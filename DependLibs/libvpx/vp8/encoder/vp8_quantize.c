@@ -8,8 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "vpx_mem/vpx_mem.h"
 #include <math.h>
+#include "vpx_mem/vpx_mem.h"
 
 #include "onyx_int.h"
 #include "vp8/encoder/quantize.h"

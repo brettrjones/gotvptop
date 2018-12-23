@@ -27,9 +27,9 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include "opus_config.h"
 #ifdef OPUS_FIXED_POINT
-#include "main_FIX.h"
+# include "main_FIX.h"
 #else
-#include "main_FLP.h"
+# include "main_FLP.h"
 #endif
 #include "tuning_parameters.h"
 

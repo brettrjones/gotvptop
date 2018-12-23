@@ -8,9 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <assert.h>
 
 #include "vp9/common/vp9_filter.h"
-#include <assert.h>
 
 DECLARE_ALIGNED(256, static const InterpKernel,
                 bilinear_filters[SUBPEL_SHIFTS]) = {

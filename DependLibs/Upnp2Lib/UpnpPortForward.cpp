@@ -53,7 +53,7 @@ namespace
 	//============================================================================
 	int32_t UpnpPortForwardThreadFunc(  void * pvContext )
 	{
-        static std::atomic_uint32_t threadCnt = 0;
+        static int threadCnt = 0;
         threadCnt++;
         LogMsg( LOG_INFO, "UpnpPortForwardThreadFunc thread starting %d\n", threadCnt );
 

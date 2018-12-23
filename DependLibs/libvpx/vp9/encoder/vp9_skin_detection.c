@@ -8,10 +8,10 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include "vp9/common/vp9_blockd.h"
-
 #include <limits.h>
 #include <math.h>
+
+#include "vp9/common/vp9_blockd.h"
 #include "vp9/encoder/vp9_encoder.h"
 #include "vp9/encoder/vp9_skin_detection.h"
 

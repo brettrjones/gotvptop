@@ -25,13 +25,13 @@
    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <libopus/config_libopus.h>
+//#include <libopus/config_libopus.h>
 
 #include <xmmintrin.h>
 #include <emmintrin.h>
 #include <smmintrin.h>
 #include "main.h"
-#include "celt/x86/x86cpu.h"
+#include "libopus/celt/x86/x86cpu.h"
 
 #include "stack_alloc.h"
 

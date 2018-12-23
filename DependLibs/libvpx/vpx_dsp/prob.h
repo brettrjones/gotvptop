@@ -11,9 +11,10 @@
 #ifndef VPX_DSP_PROB_H_
 #define VPX_DSP_PROB_H_
 
+#include <assert.h>
+
 #include "./vpx_config.h"
 #include "./vpx_dsp_common.h"
-#include <assert.h>
 
 #include "vpx_ports/mem.h"
 
