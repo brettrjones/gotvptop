@@ -95,9 +95,7 @@ bool CZeroconfMDNS::doPublishService(const std::string& fcr_identifier,
       CLog::Log(LOGERROR, "ZeroconfMDNS: DNSServiceCreateConnection failed with error = %ld", (int) err);
       return false;
     }
-#ifdef TARGET_WINDOWS_STORE
-    CLog::Log(LOGERROR, "ZeroconfMDNS: WSAAsyncSelect not yet supported for TARGET_WINDOWS_STORE");
-#else
+#if defined(TARGET_WINDOWS)
     err = WSAAsyncSelect( (SOCKET) DNSServiceRefSockFD( m_service ), g_hWnd, BONJOUR_EVENT, FD_READ | FD_CLOSE );
     if (err != kDNSServiceErr_NoError)
       CLog::Log(LOGERROR, "ZeroconfMDNS: WSAAsyncSelect failed with error = %ld", (int) err);
@@ -198,9 +196,7 @@ void CZeroconfMDNS::doStop()
   }
   {
     CSingleLock lock(m_data_guard);
-#if defined(TARGET_WINDOWS_STORE)
-    CLog::Log(LOGERROR, "ZeroconfMDNS: WSAAsyncSelect not yet supported for TARGET_WINDOWS_STORE");
-#else
+#if defined(TARGET_WINDOWS)
     WSAAsyncSelect( (SOCKET) DNSServiceRefSockFD( m_service ), g_hWnd, BONJOUR_EVENT, 0 );
 #endif //TARGET_WINDOWS
 

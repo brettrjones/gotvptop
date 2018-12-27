@@ -9,7 +9,7 @@
 #pragma once
 
 #ifdef TARGET_POSIX
-#define _onexit_t void*
+# define _onexit_t void*
 #endif
 
 #if defined(TARGET_DARWIN) || defined(TARGET_FREEBSD) || defined(TARGET_ANDROID)
@@ -19,10 +19,10 @@ typedef off64_t __off64_t;
 typedef fpos_t fpos64_t;
 #endif
 
-#ifdef TARGET_WINDOWS
-#include "platform/win32/dirent.h"
+#ifdef TARGET_OS_WINDOWS
+# include "platform/win32/dirent.h"
 #else
-#include <dirent.h>
+# include <dirent.h>
 #endif
 
 typedef void ( *PFV)(void);

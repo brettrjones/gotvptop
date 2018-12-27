@@ -159,7 +159,14 @@ namespace
 #endif
 #endif //!defined(TARGET_DARWIN_IOS)
 
+#if defined(TARGET_OS_LINUX)  || defined(TARGET_OS_ANDROID)
+    bool IsDirectoryValidRoot( std::string path )
+    {
+        path += "/system/settings/settings.xml";
+        return CFile::Exists( path );
+    }
 
+#endif //defined(TARGET_OS_LINUX)  || defined(TARGET_OS_ANDROID)
 } // namespace
 
 #define PATH_SEP_CHAR   '/'
@@ -319,6 +326,7 @@ std::string  CUtil::GetHomePath( std::string strPath )
             }
         }
 #endif
+  /*BRJ
 #ifndef TARGET_WINDOWS
         size_t last_sep = strHomePath.find_last_of( PATH_SEPARATOR_CHAR );
         if( last_sep != std::string::npos )
@@ -326,6 +334,7 @@ std::string  CUtil::GetHomePath( std::string strPath )
         else
             strPath = strHomePath;
 #endif // TARGET_WINDOWS
+*/
 
 #if defined(TARGET_POSIX) && !defined(TARGET_OS_APPLE)
         /* Change strPath accordingly when target is KODI_HOME and when INSTALL_PATH
@@ -358,6 +367,7 @@ std::string  CUtil::GetHomePath( std::string strPath )
         return strPath;
     }
 
+#ifdef TARGET_OS_WINDOWS
     // Still nothing, let's check the current working
     // directory and see if it points to a directory
     // with our stuff in it. This bit should never be
@@ -384,7 +394,7 @@ std::string  CUtil::GetHomePath( std::string strPath )
     // If we ended up here we're most likely screwed
     // we will crash in a few seconds
     return strPath;
-
+#endif // TARGET_OS_WINDOWS
 
     return strPath;
 }
@@ -916,7 +926,7 @@ void CUtil::StatToStatI64( struct _stati64 *result, struct stat *stat )
 }
 
 //========================================================================
-void CUtil::Stat64ToStatI64( struct _stati64 *result, structStatOsDef *stat )
+void CUtil::Stat64ToStatI64( struct _stati64 *result, struct __stat64 *stat )
 {
     result->st_dev = stat->st_dev;
     result->st_ino = stat->st_ino;
@@ -977,7 +987,7 @@ void CUtil::StatToStat64( structStatOsDef *result, const struct stat *stat )
 }
 
 //========================================================================
-void CUtil::Stat64ToStat( struct stat *result, structStatOsDef *stat )
+void CUtil::Stat64ToStat( struct stat *result, struct __stat64 *stat )
 {
     result->st_dev = stat->st_dev;
     result->st_ino = stat->st_ino;

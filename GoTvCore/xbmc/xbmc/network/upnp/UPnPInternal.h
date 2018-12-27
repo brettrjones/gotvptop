@@ -8,9 +8,9 @@
 
 #pragma once
 
-#include <Neptune/Source/Core/NptTypes.h>
-#include <Neptune/Source/Core/NptReferences.h>
-#include <Neptune/Source/Core/NptStrings.h>
+#include <libUPnP/Neptune/Source/Core/NptTypes.h>
+#include <libUPnP/Neptune/Source/Core/NptReferences.h>
+#include <libUPnP/Neptune/Source/Core/NptStrings.h>
 
 #include "FileItem.h"
 #include <string>

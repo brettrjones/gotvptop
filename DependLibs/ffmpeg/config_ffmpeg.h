@@ -414,7 +414,7 @@
 #define HAVE_KBHIT 1
 //#define HAVE_LOCALTIME_R 0 // defined in GoTvCompilerConfig.h
 #define HAVE_LOADLIBRARY 1
-#define HAVE_LSTAT 0
+//#define HAVE_LSTAT 0 // defined in GoTvCompilerConfig.h
 #define HAVE_LZO1X_999_COMPRESS 0
 #define HAVE_MACH_ABSOLUTE_TIME 0
 //#define HAVE_MAPVIEWOFFILE 0 // defined in GoTvCompilerConfig.h
@@ -2905,7 +2905,7 @@
 #define EXTERN_PREFIX "_"
 #define EXTERN_ASM _
 #define BUILDSUF ""
-#define SLIBSUF ".dll"
+//#define SLIBSUF ".dll" // defined in GoTvDependLibrariesConfig.h
 #define SWS_MAX_FILTER_SIZE 256
 
 #define HAVE_MMX2 HAVE_MMXEXT

@@ -10,11 +10,11 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <math.h>
-#ifndef TARGET_POSIX
+#include <errno.h>
+#ifdef TARGET_OS_WINDOWS
 #include <io.h>
 #include <direct.h>
 #include <process.h>
-#include <errno.h>
 #else
 #if !defined(TARGET_DARWIN) && !defined(TARGET_FREEBSD)
 #include <mntent.h>
@@ -327,7 +327,7 @@ extern "C"
 {
     void dll_sleep( unsigned long imSec )
     {
-        Sleep( imSec );
+        VxSleep( imSec );
     }
 
     // FIXME, XXX, !!!!!!

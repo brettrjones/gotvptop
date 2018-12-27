@@ -1229,7 +1229,7 @@ void CVideoPlayer::Prepare()
 #ifdef DEBUG
   m_GoTv.getILog().setFfmpegLogLevel( LOG_LEVEL_DEBUG );
 #else
-  m_GoTv.getILog()setFfmpegLogLevel( LOG_LEVEL_RELEASE );
+  m_GoTv.getILog()setFfmpegLogLevel( LOG_LEVEL_NORMAL );
 #endif
   SetPlaySpeed(DVD_PLAYSPEED_NORMAL);
   m_processInfo->SetSpeed(1.0);

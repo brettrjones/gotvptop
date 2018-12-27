@@ -8,7 +8,9 @@
 
 #pragma once
 
-#ifdef TARGET_POSIX
+#include "config_kodi.h"
+
+#ifdef TARGET_OS_LINUX
 
 #ifndef _LARGEFILE64_SOURCE
 #define _LARGEFILE64_SOURCE
@@ -86,9 +88,9 @@
 #endif
 #endif
 
-#ifndef PRIdS
-#define PRIdS "zd"
-#endif
+//#ifndef PRIdS
+//#define PRIdS "zd" // Defined in GoTvCompilerConfig.
+//#endif
 
 #ifdef TARGET_POSIX
 
@@ -105,7 +107,7 @@
 #define WINAPI      __stdcall
 #undef APIENTRY
 struct CXHandle; // forward declaration
-typedef CXHandle* HANDLE;
+//typedef CXHandle* HANDLE;
 
 typedef void* HINSTANCE;
 typedef void* HMODULE;
@@ -115,6 +117,7 @@ typedef unsigned int  DWORD;
 
 #define MAXWORD   0xffff
 
+/*
 typedef union _LARGE_INTEGER
 {
   struct {
@@ -155,6 +158,7 @@ typedef struct _TIME_ZONE_INFORMATION {
   SYSTEMTIME DaylightDate;
   long DaylightBias;
 } TIME_ZONE_INFORMATION, *PTIME_ZONE_INFORMATION, *LPTIME_ZONE_INFORMATION;
+*/
 
 #define TIME_ZONE_ID_INVALID    ((DWORD)0xFFFFFFFF)
 #define TIME_ZONE_ID_UNKNOWN    0
@@ -173,8 +177,8 @@ typedef struct _TIME_ZONE_INFORMATION {
 #define THREAD_PRIORITY_ABOVE_NORMAL    (THREAD_PRIORITY_HIGHEST-1)
 
 // Network
-#define SOCKET_ERROR (-1)
-#define INVALID_SOCKET (~0)
+//#define SOCKET_ERROR (-1) // defined in GoTvCompilerConfig.h
+//#define INVALID_SOCKET (~0) // defined in GoTvCompilerConfig.h
 #define closesocket(s)  close(s)
 #define ioctlsocket(s, f, v) ioctl(s, f, v)
 #define WSAGetLastError() (errno)
@@ -201,8 +205,10 @@ typedef int (*LPTHREAD_START_ROUTINE)(void *);
   #endif
 #else
   #define __stat64 stat64
+  #define _fstat64 fstat64
 #endif
 
+/*
 struct _stati64 {
   dev_t st_dev;
   ino_t st_ino;
@@ -245,7 +251,6 @@ typedef struct _WIN32_FIND_DATA
 
 #define _S_IFREG  S_IFREG
 #define _S_IFDIR  S_IFDIR
-#define MAX_PATH PATH_MAX
 
 // Memory
 typedef struct _MEMORYSTATUSEX
@@ -260,6 +265,9 @@ typedef struct _MEMORYSTATUSEX
   uint64_t ullTotalVirtual;
   uint64_t ullAvailVirtual;
 } MEMORYSTATUSEX, *LPMEMORYSTATUSEX;
+*/
+
+#define MAX_PATH PATH_MAX
 
 // CreateFile defines
 #define FILE_FLAG_NO_BUFFERING          0x20000000

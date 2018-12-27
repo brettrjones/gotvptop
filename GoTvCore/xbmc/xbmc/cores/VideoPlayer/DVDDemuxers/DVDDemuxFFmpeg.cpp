@@ -15,8 +15,8 @@
 #include "cores/FFmpeg.h"
 #include "cores/VideoPlayer/Interface/Addon/TimingConstants.h" // for DVD_TIME_BASE
 #include "DVDDemuxUtils.h"
-#include "DVDInputStreams/DVDInputStream.h"
-#include "DVDInputStreams/DVDInputStreamFFmpeg.h"
+#include "cores/VideoPlayer/DVDInputStreams/DVDInputStream.h"
+#include "cores/VideoPlayer/DVDInputStreams/DVDInputStreamFFmpeg.h"
 #include "ServiceBroker.h"
 #include "filesystem/CurlFile.h"
 #include "filesystem/Directory.h"

@@ -137,9 +137,9 @@ public:
 	static std::string			GetNextPathname( const std::string &path_template, int max );
 	static void					StatToStatI64( struct _stati64 *result, struct stat *stat );
 	static void					StatToStat64( structStatOsDef *result, const struct stat *stat );
-	static void					Stat64ToStatI64( struct _stati64 *result, structStatOsDef *stat );
+    static void					Stat64ToStatI64( struct _stati64 *result, struct __stat64 *stat );
 	static void					StatI64ToStat64( structStatOsDef *result, struct _stati64 *stat );
-	static void					Stat64ToStat( struct stat *result, structStatOsDef *stat );
+    static void					Stat64ToStat( struct stat *result, struct __stat64 * stat );
 #ifdef TARGET_OS_WINDOWS
 	static void					Stat64ToStat64i32( struct _stat64i32 *result, structStatOsDef *stat );
 #endif

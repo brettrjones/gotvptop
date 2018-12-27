@@ -9,8 +9,8 @@
 
 #include "DVDOverlayCodecTX3G.h"
 #include "DVDOverlayText.h"
-#include "DVDStreamInfo.h"
-#include "DVDCodecs/DVDCodecs.h"
+#include "cores/VideoPlayer/DVDStreamInfo.h"
+#include "cores/VideoPlayer/DVDCodecs/DVDCodecs.h"
 #include "cores/VideoPlayer/Interface/Addon/DemuxPacket.h"
 #include "ServiceBroker.h"
 #include "settings/Settings.h"

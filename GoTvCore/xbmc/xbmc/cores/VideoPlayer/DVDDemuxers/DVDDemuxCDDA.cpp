@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "DVDInputStreams/DVDInputStream.h"
+#include "cores/VideoPlayer/DVDInputStreams/DVDInputStream.h"
 #include "DVDDemuxCDDA.h"
 #include "DVDDemuxUtils.h"
 #include "cores/VideoPlayer/Interface/Addon/TimingConstants.h"

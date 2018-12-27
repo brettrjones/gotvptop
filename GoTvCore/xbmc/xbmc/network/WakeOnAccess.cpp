@@ -32,8 +32,9 @@
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
+
 #ifdef TARGET_POSIX
-#include "platform/linux/XTimeUtils.h"
+# include "platform/linux/XTimeUtils.h"
 #endif
 
 #ifdef HAS_UPNP

@@ -32,8 +32,8 @@
 #include "RenderCapture.h"
 
  /* to use the same as player */
-#include "../VideoPlayer/DVDClock.h"
-#include "../VideoPlayer/DVDCodecs/Video/DVDVideoCodec.h"
+#include "cores/VideoPlayer/DVDClock.h"
+#include "cores/VideoPlayer/DVDCodecs/Video/DVDVideoCodec.h"
 
 using namespace KODI::MESSAGING;
 

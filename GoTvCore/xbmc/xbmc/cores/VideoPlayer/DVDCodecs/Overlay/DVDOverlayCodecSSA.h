@@ -9,8 +9,8 @@
 #pragma once
 
 #include "DVDOverlayCodec.h"
-#include "DVDSubtitles/DVDSubtitlesLibass.h"
-#include "DVDStreamInfo.h"
+#include "cores/VideoPlayer/DVDSubtitles/DVDSubtitlesLibass.h"
+#include "cores/VideoPlayer/DVDStreamInfo.h"
 
 class CDVDOverlaySSA;
 

@@ -15,10 +15,10 @@
 #include "config_gotvcore.h"
 
 #include <limits>
-#include <Neptune/Source/Core/NptDebug.h>
-#include <Neptune/Source/Core/NptFile.h>
-#include <Neptune/Source/Core/NptStrings.h>
-#include <Neptune/Source/Core/NptUtils.h>
+#include <libUPnP/Neptune/Source/Core/NptDebug.h>
+#include <libUPnP/Neptune/Source/Core/NptFile.h>
+#include <libUPnP/Neptune/Source/Core/NptStrings.h>
+#include <libUPnP/Neptune/Source/Core/NptUtils.h>
 
 #include "File.h"
 #include "FileFactory.h"

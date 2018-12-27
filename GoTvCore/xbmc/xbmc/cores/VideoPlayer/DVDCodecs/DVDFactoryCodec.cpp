@@ -27,7 +27,7 @@
 #include "Overlay/DVDOverlayCodecFFmpeg.h"
 
 
-#include "DVDStreamInfo.h"
+#include "cores/VideoPlayer/DVDStreamInfo.h"
 #include "threads/SingleLock.h"
 #include "utils/StringUtils.h"
 

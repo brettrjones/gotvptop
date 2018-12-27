@@ -8,10 +8,10 @@
 
 #include "config_gotvcore.h"
 #include "DVDVideoCodecFFmpeg.h"
-#include "DVDStreamInfo.h"
+#include "cores/VideoPlayer/DVDStreamInfo.h"
 #include "cores/VideoPlayer/Interface/Addon/TimingConstants.h"
-#include "DVDCodecs/DVDCodecs.h"
-#include "DVDCodecs/DVDFactoryCodec.h"
+#include "cores/VideoPlayer/DVDCodecs/DVDCodecs.h"
+#include "cores/VideoPlayer/DVDCodecs/DVDFactoryCodec.h"
 #include "ServiceBroker.h"
 #include "utils/CPUInfo.h"
 #include "settings/AdvancedSettings.h"

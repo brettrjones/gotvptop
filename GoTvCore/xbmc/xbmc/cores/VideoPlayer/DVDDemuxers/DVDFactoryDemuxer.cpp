@@ -8,7 +8,7 @@
 
 #include "DVDFactoryDemuxer.h"
 
-#include "DVDInputStreams/DVDInputStream.h"
+#include "cores/VideoPlayer/DVDInputStreams/DVDInputStream.h"
 
 #include "DVDDemuxFFmpeg.h"
 #include "DVDDemuxBXA.h"

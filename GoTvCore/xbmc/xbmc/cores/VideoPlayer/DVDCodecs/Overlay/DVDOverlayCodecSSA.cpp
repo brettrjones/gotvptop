@@ -10,8 +10,8 @@
 #include <memory>
 
 #include "DVDOverlaySSA.h"
-#include "DVDStreamInfo.h"
-#include "DVDCodecs/DVDCodecs.h"
+#include "cores/VideoPlayer/DVDStreamInfo.h"
+#include "cores/VideoPlayer/DVDCodecs/DVDCodecs.h"
 #include "cores/VideoPlayer/Interface/Addon/TimingConstants.h"
 #include "cores/VideoPlayer/Interface/Addon/DemuxPacket.h"
 #include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"

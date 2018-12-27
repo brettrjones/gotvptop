@@ -875,15 +875,15 @@ typedef int( *LPTHREAD_START_ROUTINE )( void * );
 #define _O_WRONLY		O_WRONLY
 
 #if defined(TARGET_OS_APPLE) || defined(TARGET_FREEBSD)
-#define stat64 stat
-#define __stat64 stat
-#define fstat64 fstat
+# define stat64 stat
+# define __stat64 stat
+# define fstat64 fstat
 typedef int64_t off64_t;
-#if defined(TARGET_FREEBSD)
-#define statfs64 statfs
-#endif
+# if defined(TARGET_FREEBSD)
+#  define statfs64 statfs
+# endif
 #else
-#define __stat64 stat64
+# define __stat64 stat64
 #endif
 
 struct _stati64 {
@@ -952,6 +952,7 @@ typedef struct _SECURITY_ATTRIBUTES {
 #define msleep_os			msleep
 #define usleep_os			usleep
 #define tell_os			    tell
+#define lseek_os			lseek
 
 // Memory
 typedef struct _MEMORYSTATUSEX
@@ -1078,8 +1079,6 @@ typedef uint64_t          __u64;
 #endif // defined( _MSC_VER )
 
 #else
-# include <sys/types.h> /* For pid_t */
-# include <inttypes.h>
 
 typedef int64_t              time64_t;
 
@@ -1154,18 +1153,29 @@ typedef int64_t              time64_t;
 #define HAVE_FCHOWN				1
 #endif // _MSC_VER
 
+#ifdef TARGET_OS_WINDOWS
 /* Define to 1 if you have the `fcntl' function. */
-#define HAVE_FCNTL				0
+# define HAVE_FCNTL				0
 /* Define to 1 if you have the <fcntl.h> header file. */
-#define HAVE_FCNTL_H			1
+# define HAVE_FCNTL_H			1
 /* Define to 1 if you have the `ftruncate' function. */
 /* Define to 1 if you have the `fstat' function. */
-#define HAVE_FSTAT				1
-#define HAVE_FTRUNCATE			1
+# define HAVE_FSTAT				1
+# define HAVE_FTRUNCATE			1
 /* Define to 1 if you have the <features.h> header file. */
-#define HAVE_FEATURES_H			0
+# define HAVE_FEATURES_H			0
+#else
+/* Define to 1 if you have the `fcntl' function. */
+# define HAVE_FCNTL
+/* Define to 1 if you have the <fcntl.h> header file. */
+# define HAVE_FCNTL_H			1
+/* Define to 1 if you have the `ftruncate' function. */
+/* Define to 1 if you have the `fstat' function. */
+# define HAVE_FSTAT
+# define HAVE_FTRUNCATE			1
+/* Define to 1 if you have the <features.h> header file. */
+# define HAVE_FEATURES_H			1
 /* Define to 1 if you have the `fork' function. */
-#ifndef TARGET_OS_WINDOWS
 # define HAVE_FORK				1
 #endif // TARGET_OS_WINDOWS
 

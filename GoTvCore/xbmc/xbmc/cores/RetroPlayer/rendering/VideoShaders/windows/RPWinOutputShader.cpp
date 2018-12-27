@@ -5,6 +5,10 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+
+#include "config_kodi.h"
+#ifdef TARGET_OS_WINDOWS
+
 #include "RPWinOutputShader.h"
 #include "utils/log.h"
 
@@ -111,3 +115,5 @@ void CRPWinOutputShader::SetShaderParameters(CD3DTexture& sourceTexture, unsigne
   float params[3] = { static_cast<float>(range) };
   m_effect.SetFloatArray("m_params", params, 1);
 }
+
+#endif // TARGET_OS_WINDOWS

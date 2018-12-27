@@ -31,13 +31,7 @@
 #include "gui3d.h"
 #include "utils/log.h"
 #include "utils/GLUtils.h"
-#ifdef HAVE_QT_GUI
 #include "rendering/qt/RenderSystemQt.h"
-#ifdef HAS_GL
-#include "rendering/gl/RenderSystemGL.h"
-#elif HAS_GLES
-#include "rendering/gles/RenderSystemGLES.h"
-#endif
  //#include "rendering/MatrixGL.h"
 
 #include "GoTvInterface/IGoTv.h"
@@ -476,5 +470,4 @@ void CGUIFontTTFQt::DestroyStaticVertexBuffers( void )
 unsigned int CGUIFontTTFQt::m_elementArrayHandle;
 bool CGUIFontTTFQt::m_staticVertexBufferCreated;
 
-#endif // defined(HAS_GL) || defined(HAS_GLES)
 #endif //defined(HAVE_QT_GUI)

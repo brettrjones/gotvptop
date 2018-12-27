@@ -26,7 +26,7 @@
 #include <queue>
 
  // stuff for freetype
-#include <ft2build.h>
+#include <libfreetype/include/ft2build.h>
 
 #ifdef TARGET_WINDOWS_STORE
 #define generic GenericFromFreeTypeLibrary

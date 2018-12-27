@@ -260,7 +260,7 @@ extern int libintl_version;
 //============================================================================
 #elif defined(TARGET_OS_LINUX)
 
-# ifndef HAS_GL
+# if !defined(HAS_GL) && !defined(HAVE_QT_GUI)
 #  define HAS_GL 1
 #  define HAVE_LIBGL 1
 # endif // HAS_GL

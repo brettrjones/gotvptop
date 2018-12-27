@@ -8,3 +8,5 @@ DependLibs/CoreLib/build/Qt/CoreLib\.pro\.user
 lib/
 
 *.user
+
+build/build-libkodi-Desktop-Debug/

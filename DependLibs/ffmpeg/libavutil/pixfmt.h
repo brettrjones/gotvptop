@@ -18,15 +18,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#ifndef AVUTIL_PIXFMT_H
-#define AVUTIL_PIXFMT_H
+#pragma once
 
 /**
  * @file
  * pixel format definitions
  */
 
-#include "libavutil/avutil_common.h"
+//#include "libavutil/avutil_common.h"
 #include "version.h"
 
 #define AVPALETTE_SIZE 1024
@@ -526,4 +525,4 @@ enum AVChromaLocation {
     AVCHROMA_LOC_NB               ///< Not part of ABI
 };
 
-#endif /* AVUTIL_PIXFMT_H */
+

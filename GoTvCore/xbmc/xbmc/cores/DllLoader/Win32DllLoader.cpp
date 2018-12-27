@@ -6,6 +6,9 @@
  *  See LICENSES/README.md for more information.
  */
 
+#include "config_kodi.h"
+#ifdef TARGET_OS_WINDOWS
+
 #include "Win32DllLoader.h"
 #include "DllLoader.h"
 #include "DllLoaderContainer.h"
@@ -407,3 +410,4 @@ extern "C" FARPROC __stdcall dllWin32GetProcAddress(HMODULE hModule, LPCSTR func
   return GetProcAddress(hModule, function);
 }
 
+#endif // TARGET_OS_WINDOWS

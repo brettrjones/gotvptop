@@ -7,8 +7,8 @@
  */
 
 #include "DVDAudioCodecPassthrough.h"
-#include "DVDCodecs/DVDCodecs.h"
-#include "DVDStreamInfo.h"
+#include "cores/VideoPlayer/DVDCodecs/DVDCodecs.h"
+#include "cores/VideoPlayer/DVDStreamInfo.h"
 #include "utils/log.h"
 
 #include <algorithm>

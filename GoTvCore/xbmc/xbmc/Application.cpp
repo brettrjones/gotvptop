@@ -359,7 +359,7 @@ bool CApplication::Create( const CAppParamParser &params )
 #ifdef DEBUG
     GetILog().setAllLogLevel( LOG_LEVEL_DEBUG );
 #else
-    GetILog().setAllLogLevel( LOG_LEVEL_RELEASE );
+    GetILog().setAllLogLevel( LOG_LEVEL_NORMAL );
 #endif
     // Grab a handle to our thread to be used later in identifying the render thread.
     m_threadID = CThread::GetCurrentThreadId();

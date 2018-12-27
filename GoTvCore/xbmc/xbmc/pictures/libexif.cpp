@@ -1,7 +1,8 @@
 // libexif.cpp : Defines the entry point for the console application.
 //
 
-#ifndef _LINUX
+#ifdef TARGET_OS_WINDOWS
+#include <WinSock2.h>
 #include <windows.h>
 #else
 #include <memory.h>

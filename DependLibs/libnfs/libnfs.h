@@ -61,12 +61,6 @@ struct statvfs {
 	uint32_t	f_namemax;
 };
 
-#if defined(TARGET_WINDOWS)
-#  define NFSSTAT	structStatOsDef
-#else
-# define NFSSTAT struct stat
-#endif
-
 
 struct utimbuf {
 	time_t actime;
@@ -78,6 +72,13 @@ struct utimbuf {
 
 
 #endif// TARGET_OS_WINDOWS
+
+
+#if defined(TARGET_WINDOWS)
+#  define NFSSTAT	structStatOsDef
+#else
+# define NFSSTAT struct stat
+#endif
 
 /*
  * Used for interfacing the async version of the api into an GOTV_EXTERNal eventsystem

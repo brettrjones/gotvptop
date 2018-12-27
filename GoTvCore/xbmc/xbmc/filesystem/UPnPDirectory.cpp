@@ -10,8 +10,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
-#include <Platinum/Source/Platinum/Platinum.h>
-#include <Platinum/Source/Devices/MediaServer/PltSyncMediaBrowser.h>
+#include <libUPnP/Platinum/Source/Platinum/Platinum.h>
+#include <libUPnP/Platinum/Source/Devices/MediaServer/PltSyncMediaBrowser.h>
 
 #include "UPnPDirectory.h"
 #include <GoTvCore/xbmc/xbmc/GoTvUrl.h>

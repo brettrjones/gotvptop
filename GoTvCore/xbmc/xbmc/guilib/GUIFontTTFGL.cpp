@@ -8,7 +8,7 @@
 
 #include "config_kodi.h"
 #if defined(HAS_GL) || defined(HAS_GLES)
-
+#if !defined(HAVE_QT_GUI)
 #include "GUIFont.h"
 #include "GUIFontTTFGL.h"
 #include "GUIFontManager.h"
@@ -24,7 +24,7 @@
 #elif HAS_GLES
 #include "rendering/gles/RenderSystemGLES.h"
 #endif
-#include "rendering/gl/RenderSystemQt.h"
+#include "rendering/qt/RenderSystemQt.h"
 #include "rendering/MatrixGL.h"
 #include "ServiceBroker.h"
 #include "rendering/RenderSystem.h"
@@ -447,4 +447,5 @@ void CGUIFontTTFGL::DestroyStaticVertexBuffers(void)
 GLuint CGUIFontTTFGL::m_elementArrayHandle;
 bool CGUIFontTTFGL::m_staticVertexBufferCreated;
 
+#endif // !defined(HAVE_QT_GUI)
 #endif // defined(HAS_GL) || defined(HAS_GLES)

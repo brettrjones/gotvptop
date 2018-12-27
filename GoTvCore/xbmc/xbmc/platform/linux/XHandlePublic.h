@@ -9,10 +9,10 @@
 #pragma once
 
 struct  CXHandle;
-typedef CXHandle* HANDLE;
-typedef HANDLE*   LPHANDLE;
+typedef CXHandle* XHANDLE;
+typedef XHANDLE*   LPXHANDLE;
 
-bool CloseHandle(HANDLE hObject);
+bool CloseHandle(XHANDLE hObject);
 
 #define DUPLICATE_CLOSE_SOURCE 0x00000001
 #define DUPLICATE_SAME_ACCESS  0x00000002

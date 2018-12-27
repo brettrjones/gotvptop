@@ -25,28 +25,6 @@ include(compile_config.pri)
 
 include(library_config.pri)
 
-CONFIG(debug, debug|release){
- message(Project is built in DEBUG mode.)
-}
-
-CONFIG(release, debug|release){
- message(Project is built in RELEASE mode.)
-}
-
-CONFIG(release, debug|release){
-    DEFINES += _DEBUG
-    linux:!android: message(Disabling UNIX debug output.)
-    win32: message(Disabling WIN32 debug output.)
-    android: message(Disabling ANDROID debug output.)
-    DEFINES += QT_NO_DEBUG_OUTPUT
-}
-
-CONFIG(debug, debug|release){
-    DEFINES += NDEBUG
-    linux:!android: message(Enabling UNIX debug output.)
-    win32: message(Enabling WIN32 debug output.)
-    android: message(Enabling ANDROID debug output.)
-}
 
 TARGET_NAME = gotvptoplib
 
@@ -65,6 +43,8 @@ QMAKE_CXXFLAGS_RTTI_OFF = -fno-rtti
 QMAKE_CXXFLAGS_EXCEPTIONS_OFF = -fno-exceptions
 QMAKE_CXXFLAGS += -Wno-unused -Wno-parentheses -Wno-attributes  -Wno-ignored-qualifiers
 
+#include(../../GoTvCore/build/Qt/libptopengine.pri)
+include(../../GoTvCore/build/Qt/libxbmc.pri)
 
 #include(../../DependLibs/bzlib/build/Qt/libbz2.pri)
 #include(../../DependLibs/libbzip2/build/Qt/libbzip2.pri)
@@ -172,7 +152,7 @@ win32{
 
 #include(../../DependLibs/NetLib/build/Qt/libnetlib.pri)
 #include(../../DependLibs/PktLib/build/Qt/libpktlib.pri)
-include(../../DependLibs/Upnp2Lib/build/Qt/libupnp2lib.pri)
+#include(../../DependLibs/Upnp2Lib/build/Qt/libupnp2lib.pri)
 
 #SOURCES +=
 

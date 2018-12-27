@@ -9,7 +9,7 @@
 #pragma once
 
 #include "DllLibass.h"
-#include "DVDResource.h"
+#include "cores/VideoPlayer/DVDResource.h"
 #include "threads/CriticalSection.h"
 
 /** Wrapper for Libass **/

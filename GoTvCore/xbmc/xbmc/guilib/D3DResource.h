@@ -8,6 +8,8 @@
 
 #pragma once
 #include "config_kodi.h"
+#if HAS_DX
+
 #include "utils/Color.h"
 #include "utils/Geometry.h"
 #include "GUIColorManager.h"
@@ -276,3 +278,5 @@ private:
   Microsoft::WRL::ComPtr<ID3DBlob> m_PSBuffer;
   Microsoft::WRL::ComPtr<ID3D11PixelShader> m_PS;
 };
+
+#endif // HAS_DX

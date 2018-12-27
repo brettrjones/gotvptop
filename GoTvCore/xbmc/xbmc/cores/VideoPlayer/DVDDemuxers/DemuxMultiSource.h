@@ -9,7 +9,7 @@
 #pragma once
 
 #include "DVDDemux.h"
-#include "DVDInputStreams/InputStreamMultiSource.h"
+#include "cores/VideoPlayer/DVDInputStreams/InputStreamMultiSource.h"
 
 #include <map>
 #include <queue>

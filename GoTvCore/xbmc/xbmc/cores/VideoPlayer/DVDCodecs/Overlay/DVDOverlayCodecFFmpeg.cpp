@@ -8,7 +8,7 @@
 
 #include "DVDOverlayCodecFFmpeg.h"
 #include "DVDOverlayImage.h"
-#include "DVDStreamInfo.h"
+#include "cores/VideoPlayer/DVDStreamInfo.h"
 #include "cores/VideoPlayer/Interface/Addon/TimingConstants.h"
 #include "cores/VideoPlayer/Interface/Addon/DemuxPacket.h"
 #include "utils/log.h"

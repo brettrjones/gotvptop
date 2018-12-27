@@ -7,7 +7,7 @@
  */
 
 #include "DVDSubtitleParserSubrip.h"
-#include "DVDCodecs/Overlay/DVDOverlayText.h"
+#include "cores/VideoPlayer/DVDCodecs/Overlay/DVDOverlayText.h"
 #include "cores/VideoPlayer/Interface/Addon/TimingConstants.h"
 #include "utils/StringUtils.h"
 #include "DVDSubtitleTagSami.h"

@@ -13,7 +13,7 @@
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
-#include "DVDCodecs/DVDCodecs.h"
+#include "cores/VideoPlayer/DVDCodecs/DVDCodecs.h"
 #include "cores/AudioEngine/Utils/AEUtil.h"
 
 extern "C" {

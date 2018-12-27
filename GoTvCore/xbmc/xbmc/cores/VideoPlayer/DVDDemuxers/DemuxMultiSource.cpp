@@ -10,7 +10,7 @@
 #include "DemuxMultiSource.h"
 #include "DVDDemuxUtils.h"
 #include "DVDFactoryDemuxer.h"
-#include "DVDInputStreams/DVDInputStream.h"
+#include "cores/VideoPlayer/DVDInputStreams/DVDInputStream.h"
 #include "utils/log.h"
 #include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
 

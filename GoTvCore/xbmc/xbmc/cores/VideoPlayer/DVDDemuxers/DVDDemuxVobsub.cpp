@@ -7,14 +7,14 @@
  */
 
 #include "DVDDemuxVobsub.h"
-#include "DVDInputStreams/DVDFactoryInputStream.h"
-#include "DVDInputStreams/DVDInputStream.h"
-#include "DVDStreamInfo.h"
-#include "DVDCodecs/DVDCodecs.h"
+#include "cores/VideoPlayer/DVDInputStreams/DVDFactoryInputStream.h"
+#include "cores/VideoPlayer/DVDInputStreams/DVDInputStream.h"
+#include "cores/VideoPlayer/DVDStreamInfo.h"
+#include "cores/VideoPlayer/DVDCodecs/DVDCodecs.h"
 #include "DVDDemuxFFmpeg.h"
 #include "cores/VideoPlayer/Interface/Addon/DemuxPacket.h"
 #include "cores/VideoPlayer/Interface/Addon/TimingConstants.h"
-#include "DVDSubtitles/DVDSubtitleStream.h"
+#include "cores/VideoPlayer/DVDSubtitles/DVDSubtitleStream.h"
 
 #include <string.h>
 

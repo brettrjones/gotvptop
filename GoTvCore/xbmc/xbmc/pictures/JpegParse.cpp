@@ -18,7 +18,8 @@
 //--------------------------------------------------------------------------
 
 #include "filesystem/File.h"
-#ifndef _LINUX
+#ifdef TARGET_OS_WINDOWS
+#include <WinSock2.h>
 #include <windows.h>
 #else
 #include <memory.h>

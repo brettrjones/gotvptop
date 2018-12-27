@@ -10,8 +10,13 @@
 #include "config_kodi.h"
 #include <mutex>
 
-#if (defined TARGET_POSIX)
-#include <pthread.h>
+#if defined(TARGET_OS_WINDOWS)
+namespace XbmcThreads
+{
+  typedef std::recursive_mutex CRecursiveMutex;
+}
+#else
+#include <libpthread/pthread.h>
 namespace XbmcThreads
 {
   // forward declare in preparation for the friend declaration
@@ -42,11 +47,6 @@ namespace XbmcThreads
       return &m_mutex;
     }
   };
-}
-#elif (defined TARGET_WINDOWS)
-namespace XbmcThreads
-{
-  typedef std::recursive_mutex CRecursiveMutex;
 }
 #endif
 

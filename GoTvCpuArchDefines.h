@@ -107,8 +107,8 @@
 # define ARCH_M68K                      0
 # define ARCH_PPC                       0
 
-# define ARCH_32_BITS					1
-# define ARCH_64_BITS                   0
+# define ARCH_32_BITS					0
+# define ARCH_64_BITS                   1
 
 
 #if ARCH_32_BITS
@@ -186,9 +186,10 @@ echo unknown processor types are not supported
 #define HAVE_BIGENDIAN					GOTV_ARCH_BIG_ENDIAN
 #define GOTV_ARCH_BIGENDIAN				GOTV_ARCH_BIG_ENDIAN
 
-#if !defined(ARCH_64_BITS) && !defined(ARCH_32_BITS)
-// default to 32 bits if none defined
-# define ARCH_32_BITS 1
+#if !ARCH_64_BITS && !ARCH_32_BITS
+// default to 64 bits if none defined
+# define ARCH_32_BITS 0
+# define ARCH_64_BITS 0
 #endif // !defined(ARCH_64_BITS) && !defined(ARCH_32_BITS)
 
 
@@ -326,10 +327,17 @@ echo GoTv CPU Config error no cpu arc defined.. unknown processors not supported
 #else
 # define SIZEOF_VOID_P 8
 # define SIZEOF_UNSIGNED_LONG_INT 8
-# define SIZEOF_UNSIGNED_INT 4
-# define SIZEOF_INT 4
+# define SIZEOF_UNSIGNED_INT 8
 # define SIZEOF_CHAR_P 8
-# define SIZEOF_LONG 4
+
+# ifdef TARGET_OS_WINDOWS
+#  define SIZEOF_INT 8
+#  define SIZEOF_LONG 4
+# else
+#  define SIZEOF_INT 4
+#  define SIZEOF_LONG 8
+# endif // TARGET_OS_LINUX
+
 #endif // ARCH_32_BITS
 
 /* The size of `short', as computed by sizeof. */

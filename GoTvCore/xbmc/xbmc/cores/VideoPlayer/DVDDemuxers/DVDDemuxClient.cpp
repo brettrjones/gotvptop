@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "DVDInputStreams/DVDInputStream.h"
+#include "cores/VideoPlayer/DVDInputStreams/DVDInputStream.h"
 #include "DVDDemuxClient.h"
 #include "DVDDemuxUtils.h"
 #include "utils/log.h"

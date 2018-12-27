@@ -11,9 +11,9 @@
 
 #include "filesystem/BlurayCallback.h"
 #include "DVDInputStreamBluray.h"
-#include "IVideoPlayer.h"
-#include "DVDCodecs/Overlay/DVDOverlay.h"
-#include "DVDCodecs/Overlay/DVDOverlayImage.h"
+#include "cores/VideoPlayer/IVideoPlayer.h"
+#include "cores/VideoPlayer/DVDCodecs/Overlay/DVDOverlay.h"
+#include "cores/VideoPlayer/DVDCodecs/Overlay/DVDOverlayImage.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "LangInfo.h"

@@ -10,8 +10,8 @@
 #include <memory>
 
 #include "DVDSubtitleStream.h"
-#include "DVDInputStreams/DVDFactoryInputStream.h"
-#include "DVDInputStreams/DVDInputStream.h"
+#include "cores/VideoPlayer/DVDInputStreams/DVDFactoryInputStream.h"
+#include "cores/VideoPlayer/DVDInputStreams/DVDInputStream.h"
 #include "utils/CharsetConverter.h"
 #include "utils/Utf8Utils.h"
 #include "utils/CharsetDetection.h"

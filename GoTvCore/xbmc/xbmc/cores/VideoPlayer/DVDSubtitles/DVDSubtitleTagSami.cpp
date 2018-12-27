@@ -8,7 +8,7 @@
 
 #include "DVDSubtitleTagSami.h"
 #include "DVDSubtitleStream.h"
-#include "DVDCodecs/Overlay/DVDOverlayText.h"
+#include "cores/VideoPlayer/DVDCodecs/Overlay/DVDOverlayText.h"
 #include "utils/RegExp.h"
 #include "utils/StringUtils.h"
 

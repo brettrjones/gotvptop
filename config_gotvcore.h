@@ -37,11 +37,13 @@
 # ifdef HAVE_DBUS
 #  define HAS_DBUS
 # endif
-# define HAS_GL
-# ifdef HAVE_X11
-#  define HAS_GLX
-#  define HAS_X11_WIN_EVENTS
-# endif
+# ifndef HAVE_QT_GUI
+#  define HAS_GL 1
+#  ifdef HAVE_X11
+#   define HAS_GLX
+#   define HAS_X11_WIN_EVENTS
+#  endif
+# endif // HAVE_QT_GUI
 # ifdef HAVE_SDL
 # define HAS_SDL
 #  ifndef HAVE_X11

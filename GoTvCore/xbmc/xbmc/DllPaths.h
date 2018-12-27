@@ -9,10 +9,38 @@
 #pragma once
 
 #ifdef TARGET_WINDOWS
-#include "DllPaths_win32.h"
-#elif defined (TARGET_ANDROID)
-#include "DllPaths_generated_android.h"
+/* libraries */
+# define DLL_PATH_CPLUFF        "special://xbmcbin/cpluff.dll"
+# define DLL_PATH_LIBCURL       "special://xbmcbin/libcurl.dll"
+# define DLL_PATH_LIBNFS        "special://xbmcbin/libnfs.dll"
+# define DLL_PATH_LIBPLIST      "special://xbmcbin/libplist.dll"
+# define DLL_PATH_LIBSHAIRPLAY  "special://xbmcbin/shairplay.dll"
+# define DLL_PATH_LIBCEC        "special://xbmcbin/cec.dll"
+
+/* VideoPlayer */
+# define DLL_PATH_LIBASS        "special://xbmcbin/libass.dll"
+# define DLL_PATH_LIBDVDNAV     "special://xbmcbin/libdvdnav.dll"
+
+/* libbluray */
+# define DLL_PATH_LIBBLURAY     "special://xbmcbin/libbluray.dll"
+
 #else
-#include "DllPaths_generated.h"
+# define PREFIX_USR_PATH        "/usr/"
+# define DLL_PATH_LIBUI         "libui.so"
+
+/* libraries */
+# define DLL_PATH_CPLUFF        "special://xbmcbin/cpluff.so"
+# define DLL_PATH_LIBCURL       "special://xbmcbin/libcurl.so"
+# define DLL_PATH_LIBNFS        "special://xbmcbin/libnfs.so"
+# define DLL_PATH_LIBPLIST      "special://xbmcbin/libplist.so"
+# define DLL_PATH_LIBSHAIRPLAY  "special://xbmcbin/shairplay.so"
+# define DLL_PATH_LIBCEC        "special://xbmcbin/cec.so"
+
+/* VideoPlayer */
+# define DLL_PATH_LIBASS        "special://xbmcbin/libass.so"
+# define DLL_PATH_LIBDVDNAV     "special://xbmcbin/libdvdnav.so"
+
+/* libbluray */
+# define DLL_PATH_LIBBLURAY     "special://xbmcbin/libbluray.so"
 #endif
 
