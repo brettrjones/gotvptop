@@ -548,9 +548,9 @@ static void yuvToRgb( uint8_t * yuvData, int outOffset, /*out*/uint8_t * rgbOut)
 	float b = y + 1.772f * (cb - 128.0f); 
 
 	// clamp to [0,255] 
-	rgbOut[outOffset]		= (uint8_t) MAX(0.0f, MIN(COLOR_MAX, r)); 
-	rgbOut[outOffset + 1]	= (uint8_t) MAX(0.0f, MIN(COLOR_MAX, g)); 
-	rgbOut[outOffset + 2]	= (uint8_t) MAX(0.0f, MIN(COLOR_MAX, b)); 
+    rgbOut[outOffset]		= (uint8_t) std::max(0.0f, std::min(COLOR_MAX, r));
+    rgbOut[outOffset + 1]	= (uint8_t) std::max(0.0f, std::min(COLOR_MAX, g));
+    rgbOut[outOffset + 2]	= (uint8_t) std::max(0.0f, std::min(COLOR_MAX, b));
 } 
 
 //============================================================================

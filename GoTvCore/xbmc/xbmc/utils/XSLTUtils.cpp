@@ -7,7 +7,6 @@
  */
 
 #include "XSLTUtils.h"
-#include "log.h"
 #include <libxslt/xslt.h>
 #include <libxslt/transform.h>
 
@@ -15,14 +14,18 @@
 #include <iostream>
 #endif
 
+
+#include <CoreLib/VxDebug.h>
+
 #define TMP_BUF_SIZE 512
+
 void err(void *ctx, const char *msg, ...) {
   char string[TMP_BUF_SIZE];
   va_list arg_ptr;
   va_start(arg_ptr, msg);
   vsnprintf(string, TMP_BUF_SIZE, msg, arg_ptr);
   va_end(arg_ptr);
-  CLog::Log(LOGDEBUG, "XSLT: %s", string);
+  LogMsg( LOG_DEBUG, "XSLT: %s", string);
   return;
 }
 
@@ -51,7 +54,7 @@ bool XSLTUtils::XSLTTransform(std::string& output)
   m_xmlOutput = xsltApplyStylesheet(m_xsltStylesheet, m_xmlInput, params);
   if (!m_xmlOutput)
   {
-    CLog::Log(LOGDEBUG, "XSLT: xslt transformation failed");
+   LogMsg( LOG_DEBUG, "XSLT: xslt transformation failed");
     return false;
   }
 
@@ -88,13 +91,13 @@ bool XSLTUtils::SetStylesheet(const std::string& stylesheet)
   m_xmlStylesheet = xmlParseMemory(stylesheet.c_str(), stylesheet.size());
   if (!m_xmlStylesheet)
   {
-    CLog::Log(LOGDEBUG, "could not xmlParseMemory stylesheetdoc");
+    LogMsg( LOG_DEBUG, "could not xmlParseMemory stylesheetdoc");
     return false;
   }
 
   m_xsltStylesheet = xsltParseStylesheetDoc(m_xmlStylesheet);
   if (!m_xsltStylesheet) {
-    CLog::Log(LOGDEBUG, "could not parse stylesheetdoc");
+    LogMsg( LOG_DEBUG, "could not parse stylesheetdoc");
     xmlFree(m_xmlStylesheet);
     m_xmlStylesheet = NULL;
     return false;

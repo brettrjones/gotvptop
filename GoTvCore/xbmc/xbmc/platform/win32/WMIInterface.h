@@ -20,7 +20,9 @@
  *
  */
 
-#include "config_gotvcore.h"
+#include "config_kodi.h"
+#ifdef TARGET_OS_WINDOWS
+
 #include <vector>
 
 
@@ -56,3 +58,5 @@ private:
 
 
 };
+
+#endif // TARGET_OS_WINDOWS

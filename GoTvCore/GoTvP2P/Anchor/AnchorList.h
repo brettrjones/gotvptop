@@ -32,13 +32,13 @@ public:
 	AnchorList();
 
 	bool						addEntry( PktAnnounce * pktAnn );
-	uint16_t							calculateLength( void );
+    uint16_t					calculateLength( void );
 
-	uint16_t							m_TotalLen;		// length including this rounded to 16 bytes
-	uint16_t							m_EntryCount;
-	uint16_t							m_Version;
+    uint16_t					m_TotalLen;		// length including this rounded to 16 bytes
+    uint16_t					m_EntryCount;
+    uint16_t					m_Version;
 	EAnchorAction				m_AnchorAction;
-	uint32_t							m_u32Flags;
+    uint32_t					m_u32Flags;
 	double						m_Latitude;
 	double						m_Longitude;
 	char						m_SearchParam[ MAX_ONLINE_DESC_LEN ];

@@ -142,7 +142,7 @@ void FileShareItemWidget::setIsInLibrary( bool isInLibrary )
 //============================================================================
 void FileShareItemWidget::setFileItemInfo( FileItemInfo * fileItemInfo )
 {
-	QListWidgetItem::setData( Qt::UserRole + 1, QVariant((uint64_t)fileItemInfo) );
+    QListWidgetItem::setData( Qt::UserRole + 1, QVariant((qint64)fileItemInfo) );
 }
 
 //============================================================================

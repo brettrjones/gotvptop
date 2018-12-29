@@ -163,7 +163,7 @@ void FileXferWidget::setIsInLibrary( bool isInLibrary )
 //============================================================================
 void FileXferWidget::setFileItemInfo( GuiFileXferSession * fileItemInfo )
 {
-	QListWidgetItem::setData( Qt::UserRole + 1, QVariant((uint64_t)fileItemInfo) );
+    QListWidgetItem::setData( Qt::UserRole + 1, QVariant((qint64)fileItemInfo) );
 }
 
 //============================================================================

@@ -381,7 +381,8 @@ void OffersMgr::acceptOfferButtonClicked( EPluginType ePluginType, VxGUID offerS
 																	eOfferResponseAccept,
 																	lclSessionId ) )
 		{
-			QString strErrMsg = offerSession->getHisIdent()->getOnlineName() + QObject::tr( " Is Offline " );
+            QString strErrMsg = offerSession->getHisIdent()->getOnlineName();
+            strErrMsg += QObject::tr( " Is Offline " );
 			m_MyApp.toGuiStatusMessage( strErrMsg.toUtf8().constData() );
 		}
 	}

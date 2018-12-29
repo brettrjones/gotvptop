@@ -24,9 +24,10 @@
 #include <errno.h>
 #include <link.h>
 #endif
+
+#if ARCH_ARM
 #include "webrtc/system_wrappers/include/cpu_features_wrapper.h"
 
-#if defined(WEBRTC_ARCH_ARM_FAMILY)
 #include <asm/hwcap.h>
 
 uint64_t WebRtc_GetCPUFeaturesARM(void) {

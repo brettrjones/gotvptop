@@ -19,6 +19,8 @@
  */
 #include "config_kodi.h"
 
+#ifdef TARGET_OS_WINDOWS
+
 #include "platform/Filesystem.h"
 #include "platform/win32/CharsetConverter.h"
 
@@ -125,3 +127,5 @@ std::string temp_file_path(std::string, std::error_code &ec)
 }
 }
 }
+
+#endif // TARGET_OS_WINDOWS

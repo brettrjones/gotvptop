@@ -48,7 +48,7 @@
 **
 ****************************************************************************/
 
-#include "rasterwindow.h"
+#include "RasterWindow.h"
 
 //! [1]
 RasterWindow::RasterWindow(QWindow *parent)

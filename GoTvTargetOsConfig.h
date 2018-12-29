@@ -31,7 +31,9 @@ echo GoTv Target OS Config error - apple not supported
 #else
 // default to assume linux
 # define TARGET_LINUX
-# define TARGET_POSIX
+# ifndef TARGET_POSIX
+#  define TARGET_POSIX
+# endif // TARGET_LINUX
 #endif 
 
 #ifdef _DEBUG

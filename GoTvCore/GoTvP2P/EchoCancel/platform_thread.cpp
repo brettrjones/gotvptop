@@ -24,16 +24,16 @@ PlatformThreadId CurrentThreadId() {
 #if defined(TARGET_OS_WINDOWS)
   ret = GetCurrentThreadId();
 #elif defined(TARGET_POSIX)
-#if defined(WEBRTC_MAC) || defined(WEBRTC_IOS)
-  ret = pthread_mach_thread_np(pthread_self());
-#elif defined(WEBRTC_LINUX)
-  ret =  syscall(__NR_gettid);
-#elif defined(TARGET_OS_ANDROID)
-  ret = gettid();
-#else
-  // Default implementation for nacl and solaris.
-  ret = reinterpret_cast<pid_t>(pthread_self());
-#endif
+# if defined(WEBRTC_MAC) || defined(WEBRTC_IOS)
+   ret = pthread_mach_thread_np(pthread_self());
+# elif defined(TARGET_OS_LINUX)
+   ret =  syscall(__NR_gettid);
+# elif defined(TARGET_OS_ANDROID)
+   ret = gettid();
+# else
+   // Default implementation for nacl and solaris.
+   ret = reinterpret_cast<pid_t>(pthread_self());
+# endif
 #endif  // defined(TARGET_POSIX)
   RTC_DCHECK(ret);
   return ret;
@@ -69,7 +69,7 @@ void SetCurrentThreadName(const char* name) {
                      reinterpret_cast<ULONG_PTR*>(&threadname_info));
   } __except (EXCEPTION_EXECUTE_HANDLER) {
   }
-#elif defined(WEBRTC_LINUX) || defined(TARGET_OS_ANDROID)
+#elif defined(TARGET_OS_LINUX) || defined(TARGET_OS_ANDROID)
   prctl(PR_SET_NAME, reinterpret_cast<unsigned long>(name));
 #elif defined(WEBRTC_MAC) || defined(WEBRTC_IOS)
   pthread_setname_np(name);
@@ -214,7 +214,7 @@ bool PlatformThread::SetPriority(ThreadPriority priority) {
 #elif defined(__native_client__)
   // Setting thread priorities is not supported in NaCl.
   return true;
-#elif defined(WEBRTC_CHROMIUM_BUILD) && defined(WEBRTC_LINUX)
+#elif defined(WEBRTC_CHROMIUM_BUILD) && defined(TARGET_OS_LINUX)
   // TODO(tommi): Switch to the same mechanism as Chromium uses for changing
   // thread priorities.
   return true;

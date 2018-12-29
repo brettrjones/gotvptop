@@ -18,6 +18,9 @@
 
 #include <sys/ioctl.h>
 
+
+#include <ffmpeg/config_ffmpeg.h> // use _IOW definition from ffmpeg
+
 // taken from linux/amlogic/amports/amvideocap.h - needs to be synced - no changes expected though
 #define AMVIDEOCAP_IOC_MAGIC  'V'
 #define AMVIDEOCAP_IOW_SET_WANTFRAME_WIDTH      _IOW(AMVIDEOCAP_IOC_MAGIC, 0x02, int)

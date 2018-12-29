@@ -22,10 +22,11 @@ namespace rtc {
 
 #if defined(TARGET_OS_WINDOWS)
 typedef HANDLE PlatformFile;
-#elif defined(TARGET_POSIX)
-typedef int PlatformFile;
+//#elif defined(TARGET_POSIX)
 #else
-#error Unsupported platform
+typedef int PlatformFile;
+//#else
+//#error Unsupported platform
 #endif
 
 extern const PlatformFile kInvalidPlatformFileValue;

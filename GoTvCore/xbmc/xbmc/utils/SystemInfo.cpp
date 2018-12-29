@@ -10,11 +10,11 @@
 
 #include "threads/SystemClock.h"
 #include "SystemInfo.h"
-#ifndef TARGET_POSIX
-#include <conio.h>
-#else
+//#ifndef TARGET_POSIX
+//#include <conio.h>
+//#else
 #include <sys/utsname.h>
-#endif
+//#endif
 #include "guilib/guiinfo/GUIInfoLabels.h"
 #include "filesystem/CurlFile.h"
 #include "filesystem/File.h"

@@ -21,9 +21,9 @@
 #include <WinSock2.h>
 #include <windows.h>
 #include <mmsystem.h>
-#elif WEBRTC_LINUX
+#elif TARGET_OS_LINUX
 #include <time.h>
-#elif WEBRTC_MAC
+#elif TARGET_OS_APPLE
 #include <mach/mach_time.h>
 #include <string.h>
 #else

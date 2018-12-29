@@ -6,6 +6,8 @@
  *  See LICENSES/README.md for more information.
  */
 
+#ifdef TARGET_OS_APPLE
+
 #include "ServiceBroker.h"
 #include "cores/VideoPlayer/VideoReferenceClock.h"
 #include "settings/Settings.h"
@@ -570,3 +572,5 @@ int64_t OMXClock::CurrentHostFrequency(void)
 {
   return( (int64_t)1000000000L );
 }
+
+#endif // TARGET_OS_APPLE

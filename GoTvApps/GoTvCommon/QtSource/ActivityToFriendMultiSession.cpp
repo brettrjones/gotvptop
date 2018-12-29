@@ -70,7 +70,9 @@ void ActivityToFriendMultiSession::setupMultiSessionActivity( VxNetIdent * hisId
 {
 	m_HisIdent = hisIdent;
 	ui.setupUi( this );
-	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Text Chat - ") + hisIdent->getOnlineName() );
+    QString titleText = QObject::tr("Text Chat - ");
+    titleText += hisIdent->getOnlineName();
+    ui.m_TitleBarWidget->setTitleBarText( titleText );
 
 	m_OffersFrame			= ui.m_OffersFrame;
 	m_ResponseFrame			= ui.m_ResponseFrame;

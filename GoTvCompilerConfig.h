@@ -667,8 +667,8 @@ typedef int SOCKET;
 
 typedef void*				HINSTANCE;
 typedef void*				HMODULE;
-typedef void*				HANDLE;
-typedef HANDLE*             LPHANDLE;
+//typedef void*				HANDLE;
+//typedef HANDLE*             LPHANDLE;
 
 typedef unsigned int		DWORD;
 typedef unsigned short		WORD;
@@ -697,9 +697,9 @@ typedef unsigned long		ULONG;
 typedef size_t				SIZE_T;
 typedef void*				PVOID;
 typedef void*				LPVOID;
-typedef PVOID				HANDLE;
-#define INVALID_HANDLE_VALUE     ((HANDLE)~0U)
-typedef HANDLE				HDC;
+//typedef PVOID				HANDLE;
+//#define INVALID_HANDLE_VALUE     ((HANDLE)~0U)
+//typedef HANDLE				HDC;
 typedef void*				HWND;
 typedef BYTE*				LPBYTE;
 typedef DWORD*				LPDWORD;

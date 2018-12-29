@@ -19,6 +19,8 @@
  */
 
 #pragma once
+#include <GoTvDependLibrariesConfig.h>
+
 #ifndef NPT_CONFIG_ENABLE_LOGGING
 # define NPT_CONFIG_ENABLE_LOGGING
 #endif // NPT_CONFIG_ENABLE_LOGGING

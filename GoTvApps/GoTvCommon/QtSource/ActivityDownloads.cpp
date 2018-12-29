@@ -106,7 +106,7 @@ FileXferWidget * ActivityDownloads::sessionToWidget( GuiFileXferSession * poSess
     item->setSizeHint( QSize( ( int )( m_MyApp.getAppDisplay().getDisplayScale() * 200 ),
         ( int )( 62 * m_MyApp.getAppDisplay().getDisplayScale() ) ) );
 
-	item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((uint64_t)poSession) );
+    item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((qint64)poSession) );
 
 	connect( item, SIGNAL(signalFileXferItemClicked(QListWidgetItem *)),	this, SLOT(slotFileXferItemClicked(QListWidgetItem *)) );
 	connect( item, SIGNAL(signalFileIconButtonClicked(QListWidgetItem *)),	this, SLOT(slotFileIconButtonClicked(QListWidgetItem *)) );
@@ -179,13 +179,13 @@ FileXferWidget * ActivityDownloads::addDownload( GuiFileXferSession * poSession 
 	{
 		GuiFileXferSession * poCurInfo = (GuiFileXferSession *)item->QListWidgetItem::data( Qt::UserRole + 1).toULongLong();
 		delete poCurInfo;
-		item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant( (uint64_t)poSession ) );
+        item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant( (qint64)poSession ) );
 		updateListEntryWidget( item, poSession );
 	}
 	else
 	{
 		item = sessionToWidget( poSession );
-		item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant( (uint64_t)poSession ) );
+        item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant( (qint64)poSession ) );
 
 		ui.m_FileItemList->addItem( item );
 		ui.m_FileItemList->setItemWidget( item, item );

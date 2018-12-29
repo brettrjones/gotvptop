@@ -15,7 +15,7 @@
 #include "utils/SystemInfo.h"
 
 #include "ServiceBroker.h"
-#include "Util.h"
+#include "GoTvCoreUtil.h"
 #include "utils/StringUtils.h"
 #include "XBDateTime.h"
 #include "settings/lib/Setting.h"

@@ -9,7 +9,7 @@
 #pragma once
 
 #include "config_kodi.h"
-#if defined(TARGET_OS_WINDOWS) && !defined(HAS_DX)
+#if (defined(TARGET_OS_WINDOWS) && !defined(HAS_DX)) || defined(HAVE_QT_GUI)
 //# include <libglew/include/GL/glew.h>
 # include <GL/gl.h>
 # include <GL/glu.h>
@@ -30,7 +30,7 @@
 #endif
 
 
-#ifdef HAS_GL
+#if defined(HAS_GL)  || defined(HAVE_QT_GUI)
   // always define GL_GLEXT_PROTOTYPES before include gl headers
   #if !defined(GL_GLEXT_PROTOTYPES)
     #define GL_GLEXT_PROTOTYPES

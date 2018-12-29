@@ -19,10 +19,11 @@
  */
 
 #include "config_kodi.h"
+#ifdef TARGET_OS_WINDOWS
+
 #if !HAVE_LIBPTHREAD
 #include <CoreLib/VxDebug.h>
 
-#ifdef TARGET_OS_WINDOWS
 
 #include <process.h>
 #include <platform/win32/WIN32Util.h>
@@ -202,5 +203,5 @@ void CThread::SetSignalHandlers()
 {
 }
 
-#endif // //TARGET_OS_WINDOWS
 #endif // !HAVE_LIBPTHREAD
+#endif // //TARGET_OS_WINDOWS

@@ -2,6 +2,7 @@
 
 android{
     DEFINES += TARGET_OS_ANDROID
+    DEFINES += TARGET_POSIX
 }
 
 win32{
@@ -12,10 +13,12 @@ win32{
 
 unix{
     DEFINES += TARGET_OS_LINUX
+    DEFINES += TARGET_POSIX
 }
 
 macx{
     DEFINES += TARGET_OS_APPLE
+    DEFINES += TARGET_POSIX
 }
 
 win32:TARGET_OS_NAME = Windows

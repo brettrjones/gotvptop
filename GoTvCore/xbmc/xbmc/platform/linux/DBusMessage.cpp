@@ -5,6 +5,9 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#ifdef HAS_DBUS
+
 #include "DBusMessage.h"
 #include "DBusUtil.h"
 #include "utils/log.h"
@@ -195,3 +198,5 @@ bool CDBusMessage::CheckTypeAndGetValue(DBusMessageIter* iter, int expectType, v
   dbus_message_iter_get_basic(iter, dest);
   return true;
 }
+
+#endif // HAS_DBUS

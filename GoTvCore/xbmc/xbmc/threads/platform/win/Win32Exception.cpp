@@ -6,6 +6,9 @@
  *  See LICENSES/README.md for more information.
  */
 
+#include "config_kodi.h"
+#ifdef TARGET_OS_WINDOWS
+
 #include "Win32Exception.h"
 #include <dbghelp.h>
 #include <VersionHelpers.h>
@@ -282,3 +285,5 @@ bool win32_exception::ShouldHook()
   
   return result;
 }
+
+#endif // TARGET_OS_WINDOWS

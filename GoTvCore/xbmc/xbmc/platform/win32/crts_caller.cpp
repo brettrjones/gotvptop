@@ -24,6 +24,9 @@
  * \author Karlson2k
  */
 
+#include "config_kodi.h"
+#ifdef TARGET_OS_WINDOWS
+
 #include "crts_caller.h"
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN 1
@@ -95,3 +98,5 @@ crts_caller::~crts_caller()
 }
 
 }
+
+#endif // TARGET_OS_WINDOWS

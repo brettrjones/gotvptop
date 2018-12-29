@@ -81,7 +81,7 @@ namespace webrtc {
 #error "Need to convert samples to big-endian when reading from WAV file"
 #endif
 		// There could be metadata after the audio; ensure we don't read it.
-		num_samples = MIN( num_samples, num_samples_remaining_ );
+        num_samples = std::min( num_samples, num_samples_remaining_ );
 		const size_t read =
 			fread( samples, sizeof( *samples ), num_samples, file_handle_ );
 		// If we didn't read what was requested, ensure we've reached the EOF.
@@ -96,7 +96,7 @@ namespace webrtc {
 		size_t read = 0;
 		for( size_t i = 0; i < num_samples; i += kChunksize ) {
 			int16_t isamples[kChunksize];
-			size_t chunk = MIN( kChunksize, num_samples - i );
+            size_t chunk = std::min( kChunksize, num_samples - i );
 			chunk = ReadSamples( chunk, isamples );
 			for( size_t j = 0; j < chunk; ++j )
 				samples[i + j] = isamples[j];
@@ -157,7 +157,7 @@ namespace webrtc {
 		static const size_t kChunksize = 4096 / sizeof( uint16_t );
 		for( size_t i = 0; i < num_samples; i += kChunksize ) {
 			int16_t isamples[kChunksize];
-			const size_t chunk = MIN( kChunksize, num_samples - i );
+            const size_t chunk = std::min( kChunksize, num_samples - i );
 			webrtc::FloatS16ToS16SndArrayCopy( samples + i, chunk, isamples );
 			WriteSamples( isamples, chunk );
 		}

@@ -24,6 +24,8 @@
  */
 #include "config_kodi.h"
 
+#ifdef TARGET_OS_WINDOWS
+
 #include "platform/Environment.h"
 #include "platform/win32/CharsetConverter.h"
 #include <stdlib.h>
@@ -212,3 +214,5 @@ std::string CEnvironment::win_getenv(const std::string &name)
 #endif // UNICODE
 */
 }
+
+#endif // TARGET_OS_WINDOWS

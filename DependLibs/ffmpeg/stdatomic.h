@@ -1,8 +1,8 @@
 #pragma once
-#include "config_ffmpeg.h"
 
 #ifdef TARGET_OS_WINDOWS
+#include "config_ffmpeg.h"
 # include <atomics/win32/stdatomic.h>
 #else
-# include <atomics/gcc/stdatomic.h>
+# include_next <atomic>
 #endif // TARGET_OS_WINDOWS

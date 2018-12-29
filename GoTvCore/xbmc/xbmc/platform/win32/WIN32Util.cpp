@@ -6,6 +6,9 @@
  *  See LICENSES/README.md for more information.
  */
 
+#include "config_kodi.h"
+#ifdef TARGET_OS_WINDOWS
+
 #include "WIN32Util.h"
 #include "GoTvCoreUtil.h"
 #include "utils/URIUtils.h"
@@ -1266,3 +1269,4 @@ bool CWIN32Util::SetThreadLocalLocale(bool enable /* = true */)
   return _configthreadlocale(param) != -1;
 }
 
+#endif // TARGET_OS_WINDOWS

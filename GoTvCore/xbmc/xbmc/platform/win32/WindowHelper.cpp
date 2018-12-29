@@ -6,6 +6,9 @@
  *  See LICENSES/README.md for more information.
  */
 
+#include "config_kodi.h"
+#ifdef TARGET_OS_WINDOWS
+
 #include "WindowHelper.h"
 
 extern HWND g_hWnd;
@@ -78,3 +81,4 @@ void CWHelper::SetHANDLE(HANDLE hProcess)
   m_hProcess = hProcess;
 }
 
+#endif // TARGET_OS_WINDOWS

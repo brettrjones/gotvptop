@@ -11,7 +11,7 @@
  */
 
 #include "XMemUtils.h"
-#include "Util.h"
+#include "GoTvCoreUtil.h"
 
 #if defined(TARGET_DARWIN)
 #include <mach/mach.h>

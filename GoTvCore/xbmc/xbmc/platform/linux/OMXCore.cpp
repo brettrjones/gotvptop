@@ -6,6 +6,8 @@
  *  See LICENSES/README.md for more information.
  */
 
+#ifdef TARGET_OS_APPLE
+
 #include <math.h>
 #include <sys/time.h>
 
@@ -1703,3 +1705,5 @@ void COMXCore::Deinitialize()
     m_DllOMX->Unload();
   }
 }
+
+#endif // TARGET_OS_APPLE

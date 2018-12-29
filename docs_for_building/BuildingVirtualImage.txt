@@ -1,5 +1,7 @@
 
 === setup linux mint ===
+Warning connot run Android x86 emulator inside a Virtual image. Visit https://developer.android.com/studio/run/emulator-acceleration
+
 1.) Download linux mint 19 - 64 Bit (cannot use 32 Bit because of android build requirements )
 2.) Create New Image In Virtual Box using the linux mint iso and OS Linux/Ubuntu 64Bit
 4.) The virtual drive should be at least 80GB and dynamic
@@ -8,22 +10,245 @@
 5.) Change the optical drive iso to Devices->Insert Guest Additions CD Image and reboot
 6.) Open termninal and sudo passwd ( first time use only.. this will set the root password )
 7.) type gotvpass 3 times.. once for sudo and the next 2 times for root password
-8.) Open VBox_GAs_5.2.22 and doubleclick autorun.sh and choose run in terminal
-9.) Enter the root password and let it install
+8.) remove preinstalled guest utils
+	sudo apt remove virtualbox-guest*
+9.) Install guest utils
+	a.) cd /media/gotv/VBox_Gas_5.2.22
+	b.) sudo ./VBoxLinuxAdditions.run
+	c.) Enter the root password if required and let it install
 10.) From Mint menu shutdown linux
 11.) Virtual Box->Settings->Advanced Tab enable Shared Clipboard and Drag'n'Drop
 12.) Setting->Display make
- Video Memory 128MB and scaling as desired
+	Video Memory 128MB and scaling as desired
+	Enable 3d acceleration
 13.) Power up mint image and Optionally in First steps create system snapshot
-14.) First Step->Update Manager install updates till no more available
+14.) Mint->Update Manager install updates till no more available
 
+15.) If get "Running in software rendering mode" then try	
+	a.) Update your host video drivers
+	b.) make sure 3d acceleration is turned on in VirtualBox Display settings
+	c.) sudo apt remove virtualbox-guest*
+	d.) VirtualImage->Devices->Insert Guest Additions CD Image
+	e.) cd /media/gotv/VBox_Gas_5.2.22
+	f.) sudo ./VBoxLinuxAdditions.run
+	g.) May not work anyway and you may have to just live with slow rendering
+		
+	
+16.) You may need to install virtual box extensions in Virtual Box
+	https://www.sysnettechsolutions.com/en/virtualbox/install-virtualbox-extension-pack-linux-mint-18-3/
+	
+17.) If on shutdown you get error about gnome ring demon then go to 
+	Administration->Login Window->Users and turn on 'Allow manual login' 
+	This may not be a complete solution.. It sometimes errored anyway
+
+	
+==== install Oracle Java before anything else ======
+		sudo add-apt-repository ppa:webupd8team/java
+		sudo apt-get install oracle-java8-installer
+		sudo apt install oracle-java8-set-default
+		sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-8-oracle/jre/bin/java 1
+		
+	=== check java version ===
+	javac -version
+	outputs	javac 1.8.0_181
+		
+	A useful command to find out where the path of your jdk is on Linux is readlink -f $(which java)
+	Then you can copy that path end at the jdk or java-x-oracle as the path to your jdk. in android studio->File->Project Structure->SDK location
+	
+	
 ==== some usefull tools for developers ======
 1.) Meld - File Difference comparison tool
-sudo apt-get install meld
+	sudo apt-get install meld
 
 
+==== install android studio ====
+After many tries the only way I could get android studio installed correctly was by using Mint 18.3 64Bit 
+1.) from Mint Software Manager 
+	Install yasm, nasm, Android Studio
+2.) Download NDK r18b from https://developer.android.com/ndk/downloads/
+3.) extract ndk to ~/Android/android-ndk-r18b
+4.) Start Android Studio and install sdks
+	Sdks install Lollipop 5.1, cmake
+5.) Set ndk path in Project Structure to point to home/gotv/Android/android-ndk-r18b
 
-=== setup to build ffmpeg for linux mint ===
+	
+// DO NOT USE.. NEED Qt 5 or later
+//======= install Qt 4.8.7 ======
+// DO NOT USE.. NEED Qt 5 or later
+//1.) Install Qt Sdk from Software Manager
+//	no need to install qt creator.. was installed with the qt sdk
+//2.) Install a C++ Compiler
+//	sudo apt-get install g++
+//3.) Restart then make sure qt creator runs without crashing
+//4.) If crashes then will have to turn off 3D acceleration in VirtualBox
+//4.) Now would be a good time to make a clone or Time Snapshot
+
+//======= install Qt 5.1.1 ======//
+1.) sudo apt-get install qtcreator
+2.) sudo apt-get install qtdeclarative5-dev
+3.) sudo apt-get install qtmultimedia5-dev
+4.) sudo apt-get install libqt5svg5-dev
+5.) sudo apt-get install g++
+
+
+==== install python 2.7 ======
+	sudo apt install python-dev
+
+===== compile gotvptop =====
+1.) uuid required but missing in mint
+	sudo apt-get install uuid-dev
+2.) check out source code
+	mkdir ~/project_sources
+	cd ~/project_sources
+	checkout gotvptop
+	Windows
+		git clone https://github.com/brettrjones/gotvptop.git
+	Linux
+		git clone git://github.com/brettrjones/gotvptop.git
+	
+	
+
+====================================================================
+======= Optional Additional Media Applications for comparison ======
+====================================================================	
+	
+
+======= Build VLC for android ======
+
+instructions for building vlc for android
+https://wiki.videolan.org/AndroidCompile
+
+0.1) make sure you installed java 
+
+1.) from software manager install yasm nasm cmake
+
+2.) install required tools
+sudo apt-get install automake ant autopoint cmake build-essential libtool patch pkg-config protobuf-compiler ragel unzip git flex python wget
+
+3.) If you are running a 64-bit version of Ubuntu, you need to install some 32-bit libraries with the following command:
+sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
+
+// Does not seem to be required
+//3.) If you are running a 64-bit linux
+//sudo dpkg --add-architecture i386
+//sudo apt-get update
+//sudo apt-get install zlib1g:i386 libstdc++6:i386 libc6:i386
+	
+
+4.) create directory /home/gotv/gotvarchives/ ( to save off downloaded archives and programs for developement )
+					/home/gotv/gotvtools/
+					/home/gotv/Android/ 					
+				    /home/gotv/Android/Ndk/android-ndk-r18b ( where to put the unziped ndk )
+					/home/gotv/project_sources/gotvptop
+					/home/gotv/project_sources/vlc_sources/vlc_android
+		
+	
+//7.) If android says hardware accel is available follow the hardware accel
+//	a.) sudo apt-get install cpu-checker
+//	b.) egrep -c '(vmx|svm)' /proc/cpuinfo
+//	c.) if 0 then sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils ia32-libs-multiarch
+
+
+9.) Setup android env variables 
+edit ~/.profile
+and add at bottom
+
+export ANDROID_SDK=~/Android/Sdk
+export ANDROID_NDK=~/Android/Ndk/android-ndk-r18b
+export PATH=$PATH:$ANDROID_SDK/platform-tools:$ANDROID_SDK/tools
+
+check if enviroment is correct by opening new terminal and issue command printenv
+
+
+10.) Setup vlc sources
+	a.) mkdir ~/project_sources
+	b.) mkdir ~/project_sources/vlc_sources
+	c.) cd ~/project_sources/vlc_sources
+	d.) git clone https://code.videolan.org/videolan/vlc-android.git
+	
+11.) setup vlc compile
+	a.) cd ~/project_sources/vlc_sources/vlc-android
+	b.) sh compile.sh -a arm
+	
+
+12.) If get error Unrecognized syntax identifier proto3 
+	a.) cd ~/project_sources/
+	b.) mkdir protobuf_source
+	c.) cd protobuf_source
+	d.) git clone https://github.com/protocolbuffers/protobuf.git
+	e.) cd protobuf
+	f.) git submodule update --init --recursive
+	g.) ./autogen.sh
+	h.) ./configure
+	i.) make
+	j.) make check
+	k.) If "make check" fails, you can still install, but it is likely that some features of this library will not work correctly on your system. Proceed at your own risk.
+	l.) sudo make install
+	m.) sudo ldconfig # refresh shared library cache.
+	n.) rerun step 11.
+	o.) if success then clean up protobuf with 
+		cd ~/project_sources/protobuf_source/protobuf	
+		make clean
+
+==== setup Android Studio to debug VLC ===
+1.) this would be a very good time to make a backup image clone	
+2.) Open android studio
+3.) In Tools->AVD Manager create a arm android device with
+	a.) Maximum of sdk version 18 ( 
+	a.) 1024 MB of memory and internal space and sdcard space and start it
+4.) File->Open browse to /home/gotv/project_sources/vlc_sources/vlc-android
+5.) Click Ok and let vlc-android sync
+6.) Build->Make Project
+7.) Attach external device.. the emulator seems broken
+
+==== build kodi on linux mint ===
+
+1.) mkdir ~/project_sources/kodi_source
+2.) cd ~/project_sources/kodi_source
+3.) sudo apt-get install git-core -y
+4.) sudo apt-get install automake autopoint bison build-essential ccache cmake curl cvs default-jre fp-compiler gawk gdc gettext git-core gperf libasound2-dev libass-dev libavcodec-dev libavfilter-dev libavformat-dev libavutil-dev libbluetooth-dev libbluray-dev libbluray1 libboost-dev libboost-thread-dev libbz2-dev libcap-dev libcdio-dev libcec-dev libcurl3 libcurl4-gnutls-dev libcwiid-dev libcwiid1 libdbus-1-dev libenca-dev libflac-dev libfontconfig-dev libfreetype6-dev libfribidi-dev libglew-dev libiso9660-dev libjasper-dev libjpeg-dev libltdl-dev liblzo2-dev libmad0-dev libmicrohttpd-dev libmodplug-dev libmp3lame-dev libmpeg2-4-dev libmpeg3-dev libmysqlclient-dev libnfs-dev libogg-dev libpcre3-dev libplist-dev libpng-dev libpostproc-dev libpulse-dev libsamplerate-dev libsdl-dev libsdl-gfx1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libshairport-dev libsmbclient-dev libsqlite3-dev libssh-dev libssl-dev libswscale-dev libtiff-dev libtinyxml-dev libtool libudev-dev libusb-dev libva-dev libva-egl1 libva-tpi1 libvdpau-dev libvorbisenc2 libxml2-dev libxmu-dev libxrandr-dev libxrender-dev libxslt1-dev libxt-dev libyajl-dev mesa-utils nasm pmount python-dev python-imaging python-sqlite swig unzip yasm zip zlib1g-dev
+
+sudo apt-get install uuid-dev
+
+3.) git clone -b Jarvis git://github.com/xbmc/xbmc.git or git clone --single-branch -b Jarvis https://github.com/xbmc/xbmc.git
+4.) sudo apt-get build-dep kodi
+5.) cd xbmc
+6.) ./bootstrap
+7.) ./configure
+8.) make
+9.) If get error configure: error: libdcadec not found then
+	a.) sudo add-apt-repository ppa:team-xbmc/xbmc-nightly
+	b.) sudo apt-get update
+	c.) sudo apt-get install dcadec-dev
+10.) If get error configure: error: crossguid not found	
+	sudo make -C tools/depends/target/crossguid PREFIX=/usr
+	
+11.) make -j4
+
+12.) sudo make install
+
+When this completes you are done!
+You may either go into a terminal session or press Alt+F2. Then type 'kodi'
+
+13.) NOTE: On certain versions of Ubuntu, you may get a segmentation fault due to libcurl. This is resolved by creating a symbolic link in /usr/lib
+cd /usr/lib
+sudo ln -s libcurl-gnutls.so.4 libcurl.so.4
+
+14.) On running kod I got "Your version 1.2.2 of Python cryptography module is to old". See https://kodi.wiki/view/Linux
+	a.) remove python-cryptography from mint using Software Manager
+	b.) mkdir ~/project_sources/python-cryptography
+	c.) cd ~/project_sources/python-cryptography
+	d.) wget http://launchpadlibrarian.net/299484105/python-cryptography_1.7.1-2_amd64.deb
+	e.) wget http://launchpadlibrarian.net/292839640/python-openssl_16.2.0-1_all.deb
+	f.) sudo apt-get install python-setuptools
+	g.) sudo dpkg -i python-cryptography_1.7.1-2_amd64.deb
+	h.) sudo dpkg -i python-openssl_16.2.0-1_all.deb
+
+15.) Kodi should now work..
+	kodi
+	
+
+====== build ffmpeg for linux mint =====
 instructions for building ffmpeg for linux mint are at:
 https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu
 
@@ -121,59 +346,5 @@ cd ~/TestMedia/video && ffmpeg -i MJPEGWithAAC.avi -vn -ar 44100 -ac 2 -ab 19200
 
 15.) now would be a good time to make a Virtual Image Clone or Time Snapshot
 
-======= setup Qt 5 ======
-1.) Install Qt Creator using the following command in a terminal window
-sudo apt-get install qtcreator
-
-2.) Install Qt 5 Libraries, Header Files and Tools
-sudo apt-get install qtdeclarative5-dev
-
-3.) Install a C++ Compiler
-sudo apt-get install g++
-
-
-
-
-======= setup to build vlc for android ======
-VLC cannot be build on windows without extreme setup so only build on linux
-instructions for building vlc for android
-https://wiki.videolan.org/AndroidCompile
-get android ndk r18b from
-https://developer.android.com/ndk/downloads/
-get android studio from
-https://developer.android.com/studio/
-
-1.) install required tools
-sudo apt-get install automake ant autopoint cmake build-essential libtool patch pkg-config protobuf-compiler ragel subversion unzip git openjdk-8-jre openjdk-8-jdk flex python wget
-2.) If you are running a 64-bit version of Ubuntu, you need to install some 32-bit libraries with the following command:
-sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
-
-
-3.) create directory /home/gotv/gotvarchives/ ( to save off downloaded archives and programs for developement )
-					/home/gotv/gotvtools/
-					/home/gotv/Android/ 					
-				    /home/gotv/Android/Ndk/android-ndk-r18b ( where to put the unziped ndk )
-					/home/gotv/gotvproject/
-					/home/gotv/vlcproject/
-					/home/gotv/vlcproject/vlc-source
-					
-
-4.) Optional Locations: Unpack the .zip file you downloaded to an appropriate location for your applications, such as within /usr/local/ for your user profile, or /opt/ for shared users.
-4a.) Rename if required and unzip android studio to /home/gotv/Android/android-studio
-4b.) Rename if required and unzip android ndk to /home/gotv/Android/Ndk/android-ndk-r18b
-
-5.) This is a good time to make either a Virtual Image clone or a Time Snapshot in Linux Mint
-
-    To launch Android Studio, open a terminal, navigate to the android-studio/bin/ directory, and execute studio.sh.
-    Select whether you want to import previous Android Studio settings or not, then click OK.
-    The Android Studio Setup Wizard guides you through the rest of the setup, which includes downloading Android SDK components that are required for development.
-6.) Tip: To make Android Studio available in your list of applications, select Tools > Create Desktop Entry from the Android Studio menu bar.
-
-
-8.) Setup android env variables
-
-export ANDROID_SDK=/home/gotv/Android/Sdk
-export ANDROID_NDK=/home/gotv/Android/Ndk/android-ndk-r18b
-export PATH=$PATH:$ANDROID_SDK/platform-tools:$ANDROID_SDK/tools
-
+END
 

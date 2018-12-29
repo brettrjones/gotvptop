@@ -542,7 +542,11 @@ void OfferSessionLogic::postStatusMsg( const char * statusMsg, ... )
 	szBuffer[0] = 0;
 	va_list arg_ptr;
 	va_start(arg_ptr, statusMsg);
-	vsnprintf(szBuffer, 2048, statusMsg,(char *) arg_ptr);
+#ifdef TARGET_OS_WINDOWS
+    vsnprintf(szBuffer, 2048, statusMsg,(char *) arg_ptr);
+#else
+    vsnprintf(szBuffer, 2048, statusMsg, arg_ptr);
+#endif // TARGET_OS_WINDOWS
 	szBuffer[2047] = 0;
 	va_end(arg_ptr);
 
@@ -564,7 +568,11 @@ void OfferSessionLogic::postUserMsg( const char * userMsg, ... )
 	szBuffer[0] = 0;
 	va_list arg_ptr;
 	va_start(arg_ptr, userMsg);
-	vsnprintf(szBuffer, 2048, userMsg,(char *) arg_ptr);
+#ifdef TARGET_OS_WINDOWS
+    vsnprintf(szBuffer, 2048, userMsg,(char *) arg_ptr);
+#else
+    vsnprintf(szBuffer, 2048, userMsg, arg_ptr);
+#endif // TARGET_OS_WINDOWS
 	szBuffer[2047] = 0;
 	va_end(arg_ptr);
 

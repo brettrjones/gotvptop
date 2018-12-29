@@ -41,6 +41,7 @@
 #include <time.h>
 #include <atomic>
 
+
 #ifdef _MSC_VER
 # pragma warning(disable: 4355) //'this' : used in base member initializer list
 #endif
@@ -50,9 +51,8 @@ namespace
 	//============================================================================
 	uint32_t NetworkStateMachineThreadFunc( void * pvContext )
 	{
-        static std::atomic_uint32_t threadCnt = 0;
-        threadCnt++;
-        LogMsg( LOG_INFO, "NetworkStateMachineThreadFunc thread starting %d\n", threadCnt );
+        static std::atomic_int threadCnt(0);
+        LogMsg( LOG_INFO, "NetworkStateMachineThreadFunc thread starting %d\n", threadCnt.load() );
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		NetworkStateMachine * stateMachine = (NetworkStateMachine *)poThread->getThreadUserParam();
@@ -63,7 +63,7 @@ namespace
 
 		poThread->threadAboutToExit();
         threadCnt--;
-        LogMsg( LOG_INFO, "NetworkStateMachineThreadFunc Thread exiting %d\n", threadCnt );
+        LogMsg( LOG_INFO, "NetworkStateMachineThreadFunc Thread exiting %d\n", threadCnt.load() );
         return 0;
 	}
 }

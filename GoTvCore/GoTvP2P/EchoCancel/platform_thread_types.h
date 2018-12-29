@@ -14,7 +14,7 @@
 #if defined(TARGET_OS_WINDOWS)
 #include <winsock2.h>
 #include <windows.h>
-#elif defined(TARGET_POSIX)
+#else
 #include <libpthread/pthread.h>
 #include <unistd.h>
 #endif
@@ -23,7 +23,7 @@ namespace rtc {
 #if defined(TARGET_OS_WINDOWS)
 typedef DWORD PlatformThreadId;
 typedef DWORD PlatformThreadRef;
-#elif defined(TARGET_POSIX)
+#else
 typedef pid_t PlatformThreadId;
 typedef pthread_t PlatformThreadRef;
 #endif

@@ -16,7 +16,14 @@
 
 #include "config_gotvapps.h"
 #include <QIODevice>
-#include <QAudioFormat>
+#include <QtGlobal>
+#if QT_VERSION >= 0x050000
+    #include <QAudioOutput>
+    #include <QAudioFormat>
+#else
+    #include <QtMultimedia>
+#endif
+
 
 class AudioTestGenerator : public QIODevice
 {

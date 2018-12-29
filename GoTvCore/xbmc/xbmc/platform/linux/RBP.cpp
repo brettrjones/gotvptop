@@ -6,6 +6,9 @@
  *  See LICENSES/README.md for more information.
  */
 
+#include "config_kodi.h"
+#ifdef TARGET_OS_APPLE
+
 #include "RBP.h"
 
 #include <assert.h>
@@ -491,3 +494,5 @@ AVRpiZcFrameGeometry CRBP::GetFrameGeometry(uint32_t encoding, unsigned short vi
   }
   return geo;
 }
+
+#endif // TARGET_OS_APPLE

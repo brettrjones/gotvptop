@@ -56,7 +56,11 @@ ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent, int in
 	char szBuffer[4096];
 	va_list arg_ptr;
 	va_start(arg_ptr, msgFormat);
+#ifdef TARGET_OS_WINDOWS
 	vsnprintf(szBuffer, 4096, msgFormat,(char *) arg_ptr);
+#else
+    vsnprintf(szBuffer, 4096, msgFormat, arg_ptr);
+#endif
 	szBuffer[4095] = 0;
 	va_end(arg_ptr);
 

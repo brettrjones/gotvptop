@@ -10,3 +10,7 @@ lib/
 *.user
 
 build/build-libkodi-Desktop-Debug/
+
+build/build-libptopengine-Desktop-Debug/
+
+build/build-gotvptop_app-Desktop-Debug/

@@ -192,7 +192,7 @@ void DivergentFilterFraction::AddObservation(const PowerLevel& nearlevel,
   // numerical error (1.0). We count divergence only when the AEC output
   // signal is active.
   if (output_signal_active &&
-      level_increase > MAX(0.01 * near_level, 1.0))
+      level_increase > std::max(0.01 * near_level, 1.0))
     occurrence_++;
   ++count_;
   if (count_ == kDivergentFilterFractionAggregationWindowSize) {

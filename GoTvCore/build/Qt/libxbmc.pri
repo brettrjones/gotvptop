@@ -2687,35 +2687,8 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/platform/linux/TimeUtils.cpp \
     $$PWD/../../xbmc/xbmc/platform/linux/XFileUtils.cpp \
     $$PWD/../../xbmc/xbmc/platform/linux/XHandle.cpp \
-    $$PWD/../../xbmc/xbmc/platform/linux/XHandlePublic.cpp \
     $$PWD/../../xbmc/xbmc/platform/linux/XMemUtils.cpp \
     $$PWD/../../xbmc/xbmc/platform/linux/XTimeUtils.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/CharsetConverterWin32.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/EnvironmentWin32.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/FilesystemWin32.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/MessagePrinterWin32.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/WIN32Util.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/WMIInterface.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/WinMain.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/WindowHelper.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/crts_caller.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/dxerr.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/filesystem/Win32Directory.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/filesystem/Win32File.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/filesystem/Win32SMBDirectory.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/filesystem/Win32SMBFile.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/input/IRServerSuite.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/input/IrssMessage.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/network/NetworkWin32.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/pch.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/peripherals/PeripheralBusUSB.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/powermanagement/Win32PowerSyscall.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/powermanagement/WinIdleTimer.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/stat_utf8.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/stdio_utf8.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/storage/Win32StorageProvider.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/strverscmp.cpp \
-	$$PWD/../../xbmc/xbmc/platform/win32/utils/Win32InterfaceForCLog.cpp \
 	$$PWD/../../xbmc/xbmc/platform/xbmc.cpp \
 	$$PWD/../../xbmc/xbmc/playlists/PlayListXSPF.cpp \
 	$$PWD/../../xbmc/xbmc/powermanagement/DPMSSupport.cpp \
@@ -2852,3 +2825,31 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
 	$$PWD/../../xbmc/xbmc/windowing/qt/WinSystemQt.cpp \
 	$$PWD/../../xbmc/xbmc/windowing/qt/WinSystemQtContext.cpp
 
+win32{
+    SOURCES += 	$$PWD/../../xbmc/xbmc/platform/win32/CharsetConverterWin32.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/EnvironmentWin32.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/FilesystemWin32.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/MessagePrinterWin32.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/WIN32Util.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/WMIInterface.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/WinMain.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/WindowHelper.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/crts_caller.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/dxerr.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/filesystem/Win32Directory.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/filesystem/Win32File.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/filesystem/Win32SMBDirectory.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/filesystem/Win32SMBFile.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/input/IRServerSuite.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/input/IrssMessage.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/network/NetworkWin32.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/pch.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/peripherals/PeripheralBusUSB.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/powermanagement/Win32PowerSyscall.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/powermanagement/WinIdleTimer.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/stat_utf8.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/stdio_utf8.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/storage/Win32StorageProvider.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/strverscmp.cpp \
+    $$PWD/../../xbmc/xbmc/platform/win32/utils/Win32InterfaceForCLog.cpp \
+}

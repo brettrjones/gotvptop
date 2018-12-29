@@ -169,7 +169,7 @@ RCODE AnchorDb::handleAnnounce(		AnchorList&			anchorListIn,
 	}
 
 	bool foundCallerContact = false;
-#define MAX_ANN_MATCH_ENTRIES 500
+    const int MAX_ANN_MATCH_ENTRIES = 500;
 	AnchorListEntry tmpEntries[MAX_ANN_MATCH_ENTRIES];
 	int foundEntryIdx = 0;
 	uint64_t minTimeFound = 0x7fffffffffffffff;
@@ -253,7 +253,7 @@ RCODE AnchorDb::handleAnnounce(		AnchorList&			anchorListIn,
 	}
 
 	// copy found entries to list in time descending order
-	int toCopyCnt = MIN( foundEntryIdx, MAX_ANCHOR_ENTRIES );
+    int toCopyCnt = std::min( foundEntryIdx, (int)MAX_ANCHOR_ENTRIES );
     //uint64_t timeLastEntry = 0;
 	for( int i = 0; i < toCopyCnt; i++ )
 	{

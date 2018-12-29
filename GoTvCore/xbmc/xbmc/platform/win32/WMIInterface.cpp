@@ -19,6 +19,7 @@
  */
 
 #include "config_kodi.h"
+#ifdef TARGET_OS_WINDOWS
 
 #include "WMIInterface.h"
 #include "../GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
@@ -248,3 +249,5 @@ std::string CWIN32Wmi::GetWMIString( std::string& strQuery, std::wstring& strPro
 {
     return GetWMIStrVector( strQuery, strProperty )[ 0 ];
 }
+
+#endif // TARGET_OS_WINDOWS

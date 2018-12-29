@@ -107,7 +107,8 @@
 #define WINAPI      __stdcall
 #undef APIENTRY
 struct CXHandle; // forward declaration
-//typedef CXHandle* HANDLE;
+
+typedef CXHandle* HANDLE;
 
 typedef void* HINSTANCE;
 typedef void* HMODULE;
@@ -205,7 +206,7 @@ typedef int (*LPTHREAD_START_ROUTINE)(void *);
   #endif
 #else
   #define __stat64 stat64
-  #define _fstat64 fstat64
+  #define _fstat64 fstat
 #endif
 
 /*

@@ -5,6 +5,10 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+
+#include "config_kodi.h"
+#ifdef HAS_DBUS
+
 #include "DBusUtil.h"
 #include "utils/log.h"
 
@@ -291,3 +295,5 @@ void CDBusError::Log(int level, const std::string& message) const
   }
   CLog::Log(level, "%s: %s - %s", message.c_str(), m_error.name, m_error.message);
 }
+
+#endif // HAS_DBUS

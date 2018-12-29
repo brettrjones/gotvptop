@@ -219,7 +219,7 @@ bool GuiHelpers::playFile( AppCommon& myApp, QString fullFileName, int pos0to100
 #ifdef TARGET_OS_WINDOWS
             ShellExecuteA( 0, 0, fullFileName.toUtf8().constData(), 0, 0, SW_SHOW );
 #else
-            QDesktopServices::openUrl( QUrl::fromLocalFile( getFullFileName() ) );
+            QDesktopServices::openUrl( QUrl::fromLocalFile( fullFileName ) );
 #endif // TARGET_OS_WINDOWS
         }
         else

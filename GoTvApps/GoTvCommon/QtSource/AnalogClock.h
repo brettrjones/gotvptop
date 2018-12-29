@@ -1,7 +1,7 @@
 #pragma once
 #include <QtGui>
 
-#include "rasterwindow.h"
+#include "RasterWindow.h"
 
 //! [5]
 class AnalogClockWindow : public RasterWindow

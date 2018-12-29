@@ -3,14 +3,15 @@ TEMPLATE = app
 TARGET = gotvptop
 TARGET_NAME = gotvptop
 
-QT += xml concurrent widgets network xml
+QT += gui core concurrent widgets network xml multimedia
+
 
 CONFIG += qt thread silent
 # C++11 support
 CONFIG += c++11
 
 DEFINES += BOOST_NO_CXX11_RVALUE_REFERENCES
-DEFINES += QT_NO_CAST_TO_ASCII
+#DEFINES += QT_NO_CAST_TO_ASCII
 # Fast concatenation (Qt >= 4.6)
 DEFINES += QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS
 
@@ -26,12 +27,11 @@ strace_win {
 # Resource files
 QMAKE_RESOURCE_FLAGS += -compress 9 -threshold 5
 RESOURCES += \
-    icons.qrc \
-    lang.qrc \
-    searchengine.qrc
+    ./../../GoTvApps/GoTvCommon/gotvcommon.qrc
+
 
 # Translations
-TRANSLATIONS += $$files(lang/qbittorrent_*.ts)
+TRANSLATIONS += $$files(lang/gotvptop_*.ts)
 
 DESTDIR = ./../../bin/
 
@@ -48,14 +48,15 @@ QMAKE_CXXFLAGS += -Wno-unused -Wno-parentheses -Wno-attributes  -Wno-ignored-qua
 
 
 INCLUDEPATH += ./../../
+INCLUDEPATH += ./../../GoTvApps/GoTvCommon
+INCLUDEPATH += ./../../GoTvApps/GoTvCommon/QtSource
 INCLUDEPATH += ./../../DependLibs
 INCLUDEPATH += ./../../DependLibs/libcurl/include
 INCLUDEPATH += ./../../DependLibs/libcurl/lib
 INCLUDEPATH += ./../../DependLibs/ffmpeg
 INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o
 INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o/inc32
-INCLUDEPATH += ./../../GoTvCore
-INCLUDEPATH += ./../../GoTvCore/xbmc
+INCLUDEPATH += ./../../GoTvCore/xbmc/xbmc
 
 
 include(version.pri)

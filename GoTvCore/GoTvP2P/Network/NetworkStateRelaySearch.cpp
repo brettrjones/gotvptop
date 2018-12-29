@@ -38,7 +38,7 @@ namespace
 	//============================================================================
 	uint32_t NetworkStateRelaySearchThreadFunction( void * pvParam )
 	{
-        static std::atomic_uint32_t threadCnt = 0;
+        static std::atomic<int> threadCnt(0);
         threadCnt++;
         //LogMsg( LOG_INFO, "NetworkStateRelaySearchThreadFunction thread starting %d\n", threadCnt );
 

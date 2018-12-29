@@ -17,7 +17,6 @@
 #include "config_gotvapps.h"
 
 #include "AppDefs.h"
-
 #include <QtSvg/QSvgRenderer>
 #include <QPixmap>
 #include <QIcon>

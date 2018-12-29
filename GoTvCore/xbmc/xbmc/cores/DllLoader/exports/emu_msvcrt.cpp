@@ -674,7 +674,13 @@ extern "C"
         if( pFile != NULL )
             return pFile->Stat( buf );
         else if( IS_STD_DESCRIPTOR( fd ) )
+        {
+#ifdef TARGET_OS_WINDOWS
             return _fstat64( fd, buf );
+#else
+            return fstat64( fd, buf );
+ #endif // TARGET_OS_WINDOWS
+        }
         CLog::Log( LOGERROR, "%s emulated function failed", __FUNCTION__ );
         return -1;
     }
