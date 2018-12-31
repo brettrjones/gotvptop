@@ -34,6 +34,7 @@ RESOURCES += \
 TRANSLATIONS += $$files(lang/gotvptop_*.ts)
 
 DESTDIR = ./../../bin/
+LIBS += -L./../../lib
 
 OBJECTS_DIR = ./.obj
 MOC_DIR = ./.moc
@@ -58,32 +59,41 @@ INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o
 INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o/inc32
 INCLUDEPATH += ./../../GoTvCore/xbmc/xbmc
 
-
 include(version.pri)
 include(os_detect.pri)
 include(compile_config.pri)
 
 include(../../GoTvApps/GoTvPtoP/build/Qt/GoTvPtoP.pri)
 
+#### for static linked qt libs only
+#### QMAKE_LFLAGS += -static
+
+#link dependent library
+#LIBS += -lcorelibLinuxD
+
 unix{
+
     CONFIG(debug, debug|release){
-        LIBS += -L./../lib/libarmrwbencLinuxD.a
-        LIBS += -L./../lib/libdependsLinuxD.a
-        LIBS += -L./../lib/libfdk-aacLinuxD.a
-        LIBS += -L./../lib/libffmpegLinuxD.a
-        LIBS += -L./../lib/libgnuLinuxD.a
-        LIBS += -L./../lib/libkodiLinuxD.a
-        LIBS += -L./../lib/libopencore-amrLinuxD.a
-        LIBS += -L./../lib/libptopengineLinuxD.a
-        LIBS += -L./../lib/libsshLinuxD.a
-        LIBS += -L./../lib/libvorbisLinuxD.a
-        LIBS += -L./../lib/libvpxLinuxD.a
-        LIBS += -L./../lib/libx264LinuxD.a
-        LIBS += -L./../lib/libx265LinuxD.a
+        LIBS += -larmrwbencLinuxD
+        LIBS += -ldependsLinuxD
+        LIBS += -lfdk-aacLinuxD
+        LIBS += -lffmpegLinuxD
+        LIBS += -lgnuLinuxD
+        LIBS += -lkodiLinuxD
+        LIBS += -lopencore-amrLinuxD
+        LIBS += -lpcreLinuxD
+        LIBS += -lptopengineLinuxD
+        LIBS += -lsshLinuxD
+        LIBS += -lvorbisLinuxD
+        LIBS += -lvpxLinuxD
+        LIBS += -lx264LinuxD
+#        LIBS += -lx265LinuxD
     }
 
     CONFIG(release, debug|release){
         LIBS += -L./../lib/gnuLinux.a
     }
+
+     LIBS += -ldl
 }
 

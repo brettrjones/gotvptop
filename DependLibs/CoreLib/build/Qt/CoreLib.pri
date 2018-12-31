@@ -1,3 +1,7 @@
+
+DEFINES += "STATICLIB"
+DEFINES += "SQLITE_OMIT_LOAD_EXTENSION"
+
 HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
     $$PWD/../../../../GoTvAppConfig.h \
 	$$PWD/../../../../GoTvCpuArchDefines.h \
@@ -138,6 +142,6 @@ SOURCES += 	$$PWD/../../AppErr.cpp \
 	$$PWD/../../md5.c \
 	$$PWD/../../rsa_eay.c \
 	$$PWD/../../rsa_gen.c \
-        $$PWD/../../sqlite3.c \
+    $$PWD/../../sqlite3.c \
     $$PWD/../../sqlitedataset.cpp
 
