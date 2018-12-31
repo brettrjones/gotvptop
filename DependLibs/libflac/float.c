@@ -32,7 +32,6 @@
 
 #include <libflac/config_libflac.h>
 
-#include "FLAC/assert.h"
 #include "share/compat.h"
 #include "private/float.h"
 

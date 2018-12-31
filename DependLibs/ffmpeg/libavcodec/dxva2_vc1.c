@@ -20,6 +20,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
+#include <ffmpeg/config_ffmpeg.h>
+#if CONFIG_D3D11VA || CONFIG_DXVA2
+
 #include "mpegutils.h"
 #include "vc1.h"
 #include "vc1data.h"
@@ -478,3 +481,5 @@ const AVHWAccel ff_vc1_d3d11va2_hwaccel = {
     .priv_data_size = sizeof(FFDXVASharedContext),
 };
 #endif
+
+#endif // CONFIG_D3D11VA || CONFIG_DXVA2

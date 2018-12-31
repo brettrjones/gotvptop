@@ -47,11 +47,11 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include    "bgnscd.h"
-#include    "typedef.h"
-#include    "basic_op.h"
-#include    "cnst.h"
-#include    "gmed_n.h"
-#include    "sqrt_l.h"
+#include    "amrnb/common/typedef.h"
+#include    "amrnb/common/basic_op.h"
+#include    "amrnb/common/cnst.h"
+#include    "amrnb/common/gmed_n.h"
+#include    "amrnb/common/sqrt_l.h"
 #include    "oscl_mem.h"
 
 /*----------------------------------------------------------------------------

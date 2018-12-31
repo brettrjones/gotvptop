@@ -346,7 +346,7 @@ _getopt_initialize (int argc,
 
 int
 _getopt_internal_r (int argc, char **argv, const char *optstring,
-                    const struct option *longopts, int *longind,
+                    const struct option_gnu *longopts, int *longind,
                     int long_only, struct _getopt_data *d, int posixly_correct)
 {
   int print_errors = d->opterr;
@@ -482,11 +482,11 @@ _getopt_internal_r (int argc, char **argv, const char *optstring,
     {
       char *nameend;
       unsigned int namelen;
-      const struct option *p;
-      const struct option *pfound = NULL;
+      const struct option_gnu *p;
+      const struct option_gnu *pfound = NULL;
       struct option_list
       {
-        const struct option *p;
+        const struct option_gnu *p;
         struct option_list *next;
       } *ambig_list = NULL;
 #ifdef _LIBC
@@ -864,8 +864,8 @@ _getopt_internal_r (int argc, char **argv, const char *optstring,
     if (temp[0] == 'W' && temp[1] == ';')
       {
         char *nameend;
-        const struct option *p;
-        const struct option *pfound = NULL;
+        const struct option_gnu *p;
+        const struct option_gnu *pfound = NULL;
         int exact = 0;
         int ambig = 0;
         int indfound = 0;
@@ -1158,7 +1158,7 @@ _getopt_internal_r (int argc, char **argv, const char *optstring,
 
 int
 _getopt_internal (int argc, char **argv, const char *optstring,
-                  const struct option *longopts, int *longind, int long_only,
+                  const struct option_gnu *longopts, int *longind, int long_only,
                   int posixly_correct)
 {
   int result;
@@ -1189,7 +1189,7 @@ int
 getopt (int argc, char *const *argv, const char *optstring)
 {
   return _getopt_internal (argc, (char **) argv, optstring,
-                           (const struct option *) 0,
+                           (const struct option_gnu *) 0,
                            (int *) 0,
                            0, POSIXLY_CORRECT);
 }

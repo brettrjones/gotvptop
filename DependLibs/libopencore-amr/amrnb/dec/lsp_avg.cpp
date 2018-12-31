@@ -44,7 +44,7 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "lsp_avg.h"
-#include "basic_op.h"
+#include "amrnb/common/basic_op.h"
 #include "oper_32b.h"
 #include "oscl_mem.h"
 #include "q_plsf_5_tbl.h"

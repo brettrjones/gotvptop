@@ -21,10 +21,10 @@
  * For more information, contact us at license @ x265.com.
  *****************************************************************************/
 
-#include "common/common.h"
-#include "common/slice.h"
-#include "common/threading.h"
-#include "x265.h"
+#include "libx265/common/common.h"
+#include "libx265/common/slice.h"
+#include "libx265/common/threading.h"
+#include "libx265/x265.h"
 
 #if _WIN32
 #include <sys/types.h>

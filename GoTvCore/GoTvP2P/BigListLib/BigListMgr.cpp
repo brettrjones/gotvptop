@@ -161,7 +161,7 @@ EPktAnnUpdateType BigListMgr::updatePktAnn(	PktAnnounce *		poPktAnnIn,				// ann
 		}
 
 
-		poPktAnnIn->getOnlineName()[ MAX_ONLINE_NAME_LEN - 1 ] = 0;
+        poPktAnnIn->getOnlineName()[ MAX_ONLINE_NAME_LEN - 1 ] = 0;
 		if( 0 != strcmp( poPktAnnIn->getOnlineName(), poInfo->getOnlineName() ) )
 		{
 			memcpy( poInfo->getOnlineName(), poPktAnnIn->getOnlineName(), MAX_ONLINE_NAME_LEN );

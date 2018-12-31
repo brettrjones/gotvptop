@@ -10,7 +10,6 @@ HEADERS += 	$$PWD/../../../GoTvCompilerConfig.h \
 	$$PWD/../../../GoTvInterface/IFromGui.h \
 	$$PWD/../../../GoTvInterface/IGoTv.h \
 	$$PWD/../../../GoTvInterface/IGoTvDefs.h \
-	$$PWD/../../../GoTvInterface/IGoTvLib.h \
 	$$PWD/../../../GoTvInterface/ILog.h \
 	$$PWD/../../../GoTvInterface/IScan.h \
 	$$PWD/../../../GoTvInterface/IToGui.h \

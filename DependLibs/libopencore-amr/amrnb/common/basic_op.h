@@ -47,13 +47,13 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include    "basicop_malloc.h"
+#include    "amrnb/common/basicop_malloc.h"
 
 #if   ((PV_CPU_ARCH_VERSION >=5) && (PV_COMPILER == EPV_ARM_GNUC))
-#include "basic_op_arm_gcc_v5.h"
+#include "amrnb/common/basic_op_arm_gcc_v5.h"
 
 #else
-#include "basic_op_c_equivalent.h"
+#include "amrnb/common/basic_op_c_equivalent.h"
 
 #endif
 

@@ -47,8 +47,8 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include    "basicop_malloc.h"
-#include    "cnst.h"
+#include    "amrnb/common/basicop_malloc.h"
+#include    "amrnb/common/cnst.h"
 
 /*--------------------------------------------------------------------------*/
 #ifdef __cplusplus

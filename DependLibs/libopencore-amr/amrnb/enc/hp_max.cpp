@@ -40,8 +40,8 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include    "hp_max.h"
-#include    "basic_op.h"
-#include    "cnst.h"
+#include    "amrnb/common/basic_op.h"
+#include    "amrnb/common/cnst.h"
 #include    "l_abs.h"
 
 /*----------------------------------------------------------------------------

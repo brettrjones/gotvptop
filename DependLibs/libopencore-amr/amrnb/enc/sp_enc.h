@@ -48,10 +48,10 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "typedef.h"
-#include "cnst.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/cnst.h"
 #include "pre_proc.h"
-#include "mode.h"
+#include "amrnb/common/mode.h"
 #include "cod_amr.h"
 
 /*--------------------------------------------------------------------------*/

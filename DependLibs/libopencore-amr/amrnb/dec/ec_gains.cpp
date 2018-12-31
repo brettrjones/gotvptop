@@ -48,11 +48,11 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "ec_gains.h"
-#include "typedef.h"
-#include "cnst.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/cnst.h"
 #include "gmed_n.h"
 #include "gc_pred.h"
-#include "basic_op.h"
+#include "amrnb/common/basic_op.h"
 
 
 /*--------------------------------------------------------------------------*/

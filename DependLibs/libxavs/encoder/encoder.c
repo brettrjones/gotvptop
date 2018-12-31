@@ -30,21 +30,21 @@
  * This code is modified on x264 project and will follow the license of x264
  *****************************************************************************/
 
-#include "common/common.h"
+#include "libxavs/common/common.h"
 
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
 
-#include "common/cpu.h"
+#include "libxavs/common/cpu.h"
 
-#include "set.h"
-#include "analyse.h"
-#include "ratecontrol.h"
-#include "macroblock.h"
+#include "libxavs/encoder/set.h"
+#include "libxavs/encoder/analyse.h"
+#include "libxavs/encoder/ratecontrol.h"
+#include "libxavs/encoder/macroblock.h"
 
 #if VISUALIZE
-#include "common/visualize.h"
+#include "libxavs/common/visualize.h"
 #endif
 
 //#define DEBUG_MB_TYPE

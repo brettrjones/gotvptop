@@ -52,12 +52,12 @@ terms listed above has been obtained from the copyright holder.
 ----------------------------------------------------------------------------*/
 
 #include "calc_en.h"
-#include "typedef.h"
-#include "basicop_malloc.h"
-#include "l_comp.h"
-#include "cnst.h"
-#include "log2.h"
-#include "basic_op.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/basicop_malloc.h"
+#include "amrnb/common/l_comp.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/log2.h"
+#include "amrnb/common/basic_op.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

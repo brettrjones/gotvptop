@@ -54,13 +54,13 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "dtx_enc.h"
-#include "q_plsf.h"
-#include "typedef.h"
-#include "mode.h"
-#include "basic_op.h"
-#include "log2.h"
-#include "lsp_lsf.h"
-#include "reorder.h"
+#include "amrnb/common/q_plsf.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/mode.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/log2.h"
+#include "amrnb/common/lsp_lsf.h"
+#include "amrnb/common/reorder.h"
 #include "oscl_mem.h"
 
 /*----------------------------------------------------------------------------

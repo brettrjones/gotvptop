@@ -39,11 +39,11 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "cnst.h"
+#include "amrnb/common/cnst.h"
 #include "cor_h.h"
-#include "basicop_malloc.h"
-#include "inv_sqrt.h"
-#include "basic_op.h"
+#include "amrnb/common/basicop_malloc.h"
+#include "amrnb/common/inv_sqrt.h"
+#include "amrnb/common/basic_op.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

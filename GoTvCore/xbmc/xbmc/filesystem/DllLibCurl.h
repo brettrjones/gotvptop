@@ -38,7 +38,8 @@ namespace XCURL
 {
 #define CURL CURL_HANDLE
 #include <libcurl/include/curl/curl.h>
-#undef CURL
+//#undef CURL
+
 
 class DllLibCurl
 {

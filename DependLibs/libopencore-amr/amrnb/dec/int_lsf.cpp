@@ -40,9 +40,9 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include    "int_lsf.h"
-#include    "typedef.h"
-#include    "basic_op.h"
-#include    "cnst.h"
+#include    "amrnb/common/typedef.h"
+#include    "amrnb/common/basic_op.h"
+#include    "amrnb/common/cnst.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

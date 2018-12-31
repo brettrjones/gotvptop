@@ -31,6 +31,7 @@
  */
 
 #include <libfaac/config_libfaac.h>
+#include "config_libflac.h"
 
 #include <math.h>
 #include <string.h>
@@ -38,7 +39,7 @@
 #include "private/bitmath.h"
 #include "private/fixed.h"
 #include "private/macros.h"
-#include "FLAC/assert.h"
+
 
 #ifdef local_abs
 #undef local_abs

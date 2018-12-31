@@ -30,8 +30,8 @@
 #ifndef X265_PRIMITIVES_H
 #define X265_PRIMITIVES_H
 
-#include "common/common.h"
-#include "common/cpu.h"
+#include "libx265/common/common.h"
+#include "libx265/common/cpu.h"
 
 namespace X265_NS {
 // x265 private namespace

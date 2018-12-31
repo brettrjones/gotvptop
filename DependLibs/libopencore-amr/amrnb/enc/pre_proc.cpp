@@ -50,7 +50,7 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "pre_proc.h"
-#include "typedef.h"
+#include "amrnb/common/typedef.h"
 #include "oscl_mem.h"
 
 /*----------------------------------------------------------------------------

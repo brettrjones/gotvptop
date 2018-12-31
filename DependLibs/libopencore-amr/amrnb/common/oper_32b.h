@@ -47,10 +47,10 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include        "typedef.h"
+#include        "amrnb/common/typedef.h"
 
-#include        "l_comp.h"
-#include        "l_extract.h"
+#include        "amrnb/common/l_comp.h"
+#include        "amrnb/common/l_extract.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

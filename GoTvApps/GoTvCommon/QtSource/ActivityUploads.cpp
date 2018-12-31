@@ -87,7 +87,7 @@ FileXferWidget * ActivityUploads::sessionToWidget( GuiFileXferSession * poSessio
     item->setSizeHint( QSize( ( int )( m_MyApp.getAppDisplay().getDisplayScale() * 200 ),
         ( int )( 62 * m_MyApp.getAppDisplay().getDisplayScale() ) ) );
 
-	item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((uint64_t)poSession) );
+    item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)poSession) );
 
 	if( false == connect( item, SIGNAL(signalFileXferItemClicked(QListWidgetItem*)), this, SLOT(slotFileXferItemClicked(QListWidgetItem*))) )
 	{

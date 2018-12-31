@@ -39,7 +39,7 @@ terms listed above has been obtained from the copyright holder.
 ----------------------------------------------------------------------------*/
 #include "frame_type_3gpp.h"
 #include "if2_to_ets.h"
-#include "typedef.h"
+#include "amrnb/common/typedef.h"
 /*----------------------------------------------------------------------------
 ; MACROS
 ; Define module specific macros here

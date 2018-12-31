@@ -22,8 +22,8 @@
  * For more information, contact us at chenm003@163.com.
  *****************************************************************************/
 
-#include "common/common.h"
-#include "common/md5.h"
+#include "libx265/common/common.h"
+#include "libx265/common/md5.h"
 
 namespace X265_NS {
 // private x265 namespace

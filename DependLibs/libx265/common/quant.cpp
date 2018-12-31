@@ -22,14 +22,14 @@
  * For more information, contact us at license @ x265.com.
  *****************************************************************************/
 
-#include "common/common.h"
-#include "common/primitives.h"
-#include "common/quant.h"
-#include "common/framedata.h"
-#include "encoder/entropy.h"
-#include "common/yuv.h"
-#include "common/cudata.h"
-#include "common/contexts.h"
+#include "libx265/common/common.h"
+#include "libx265/common/primitives.h"
+#include "libx265/common/quant.h"
+#include "libx265/common/framedata.h"
+#include "libx265/encoder/entropy.h"
+#include "libx265/common/yuv.h"
+#include "libx265/common/cudata.h"
+#include "libx265/common/contexts.h"
 
 using namespace X265_NS;
 

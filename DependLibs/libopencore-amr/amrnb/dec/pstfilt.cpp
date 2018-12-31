@@ -50,15 +50,15 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "pstfilt.h"
-#include "typedef.h"
-#include "mode.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/mode.h"
 #include "basicop_malloc.h"
-#include "basic_op.h"
+#include "amrnb/common/basic_op.h"
 #include "weight_a.h"
 #include "residu.h"
 #include "syn_filt.h"
 #include "preemph.h"
-#include "cnst.h"
+#include "amrnb/common/cnst.h"
 #include "oscl_mem.h"
 
 /*----------------------------------------------------------------------------

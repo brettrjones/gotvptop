@@ -68,10 +68,10 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "c2_11pf.h"
-#include "typedef.h"
-#include "basic_op.h"
-#include "inv_sqrt.h"
-#include "cnst.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/inv_sqrt.h"
+#include "amrnb/common/cnst.h"
 #include "cor_h.h"
 #include "set_sign.h"
 

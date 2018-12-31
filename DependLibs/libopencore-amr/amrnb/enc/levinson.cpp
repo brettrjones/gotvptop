@@ -51,11 +51,11 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "levinson.h"
-#include "basicop_malloc.h"
-#include "basic_op.h"
+#include "amrnb/common/basicop_malloc.h"
+#include "amrnb/common/basic_op.h"
 #include "l_abs.h"
 #include "div_32.h"
-#include "cnst.h"
+#include "amrnb/common/cnst.h"
 #include "oscl_mem.h"
 
 /*----------------------------------------------------------------------------

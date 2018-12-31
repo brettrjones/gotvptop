@@ -16,9 +16,9 @@
 
 ******************************************************************/
 
-#include "defines.h"
-#include "constants.h"
-#include "abs_quant_loop.h"
+#include "libilbc/ilbc/defines.h"
+#include "libilbc/ilbc/constants.h"
+#include "libilbc/ilbc/abs_quant_loop.h"
 
 
 /*----------------------------------------------------------------*

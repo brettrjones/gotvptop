@@ -158,7 +158,7 @@ FileShareItemWidget * ActivityViewLibraryFiles::fileToWidget( VxMyFileInfo& file
         ( int )( 62 * m_MyApp.getAppDisplay().getDisplayScale() ) ) );
 
 	FileItemInfo * poItemInfo = new FileItemInfo( fileInfo, 0, isShared, isInLibrary );
-	item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((uint64_t)poItemInfo) );
+    item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)poItemInfo) );
 	if( false == connect( item, SIGNAL(signalFileShareItemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*))) )
 	{
 		LogMsg( LOG_ERROR, "AppCommon::fileToWidget: connect failed\n");

@@ -21,6 +21,7 @@
  */
 
 #include "libavutil/avassert.h"
+#if CONFIG_D3D11VA || CONFIG_DXVA2
 
 #include "h264dec.h"
 #include "h264data.h"
@@ -575,3 +576,4 @@ const AVHWAccel ff_h264_d3d11va2_hwaccel = {
     .priv_data_size = sizeof(FFDXVASharedContext),
 };
 #endif
+#endif // CONFIG_D3D11VA || CONFIG_DXVA2

@@ -1,5 +1,7 @@
 message("Building GoTvPtoP")
 
+INCLUDEPATH += $$PWD/../../../
+INCLUDEPATH += $$PWD/../../../../GoTvCore
 
 HEADERS += $$PWD/../../../GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/../../../GoTvCommon/QtSource/VxDataHelper.h \

@@ -41,7 +41,7 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "ets_to_wmf.h"
-#include "typedef.h"
+#include "amrnb/common/typedef.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

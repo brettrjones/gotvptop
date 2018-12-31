@@ -37,7 +37,7 @@
 #include "libssh/session.h"
 #include "libssh/misc.h"
 #include "libssh/buffer.h"
-#include "libssh/poll.h"
+#include "libssh/poll_ssh.h"
 
 #define FIRST_CHANNEL 42 // why not ? it helps to find bugs.
 

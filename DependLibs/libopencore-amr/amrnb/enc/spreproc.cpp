@@ -45,10 +45,10 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "spreproc.h"
-#include "typedef.h"
-#include "weight_a.h"
-#include "syn_filt.h"
-#include "residu.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/weight_a.h"
+#include "amrnb/common/syn_filt.h"
+#include "amrnb/common/residu.h"
 #include "oscl_mem.h"
 
 /*----------------------------------------------------------------------------

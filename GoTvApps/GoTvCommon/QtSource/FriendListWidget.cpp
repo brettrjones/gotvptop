@@ -370,8 +370,8 @@ void FriendListWidget::updateListEntryBackgroundColor( VxNetIdent * netIdent, Li
 ListEntryWidget * FriendListWidget::friendToWidget( VxNetIdent * poFriend )
 {
 	ListEntryWidget * item = new ListEntryWidget( this );
-    item->setData( Qt::UserRole + 1, QVariant((qint64)(item->getSubWidget())) );
-    item->setData( Qt::UserRole + 2, QVariant((qint64)(poFriend)) );
+    item->setData( Qt::UserRole + 1, QVariant((quint64)(item->getSubWidget())) );
+    item->setData( Qt::UserRole + 2, QVariant((quint64)(poFriend)) );
 	if( false == connect( item, SIGNAL(listButtonClicked(ListEntryWidget*)), this, SLOT(slotFriendListItemClicked(ListEntryWidget*))) )
 	{
 		LogMsg( LOG_ERROR, "AppCommon::friendToWidget: connect failed\n");

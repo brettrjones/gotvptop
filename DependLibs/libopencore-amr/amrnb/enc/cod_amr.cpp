@@ -51,9 +51,9 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "cod_amr.h"
-#include "typedef.h"
-#include "cnst.h"
-#include "qua_gain.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/qua_gain.h"
 #include "lpc.h"
 #include "lsp.h"
 #include "pre_big.h"

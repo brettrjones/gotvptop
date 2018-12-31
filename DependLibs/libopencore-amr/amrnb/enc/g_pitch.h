@@ -48,8 +48,8 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "mode.h"
-#include "typedef.h"
+#include "amrnb/common/mode.h"
+#include "amrnb/common/typedef.h"
 
 /*--------------------------------------------------------------------------*/
 #ifdef __cplusplus

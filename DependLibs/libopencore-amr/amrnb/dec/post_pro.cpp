@@ -54,8 +54,8 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "post_pro.h"
-#include "typedef.h"
-#include "basic_op.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/basic_op.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

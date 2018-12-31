@@ -49,8 +49,8 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "typedef.h"
-#include "cnst.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/cnst.h"
 
 /*--------------------------------------------------------------------------*/
 #ifdef __cplusplus

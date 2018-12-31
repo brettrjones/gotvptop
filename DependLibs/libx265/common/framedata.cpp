@@ -21,8 +21,8 @@
 * For more information, contact us at license @ x265.com.
 *****************************************************************************/
 
-#include "common/framedata.h"
-#include "common/picyuv.h"
+#include "libx265/common/framedata.h"
+#include "libx265/common/picyuv.h"
 
 using namespace X265_NS;
 

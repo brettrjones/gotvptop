@@ -45,11 +45,11 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "g_adapt.h"
-#include "typedef.h"
-#include "basic_op.h"
-#include "oper_32b.h"
-#include "cnst.h"
-#include "gmed_n.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/oper_32b.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/gmed_n.h"
 #include "oscl_mem.h"
 
 /*----------------------------------------------------------------------------

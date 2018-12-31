@@ -68,16 +68,20 @@ MainWindow::MainWindow()
     addToolBar(Qt::TopToolBarArea, toolBar);
 
     QMenu *fileMenu = menuBar()->addMenu(tr("&File"));
+
     const QIcon openIcon = QIcon::fromTheme("document-open", QIcon(":/qt-project.org/styles/commonstyle/images/standardbutton-open-32.png"));
-    QAction *openAction = fileMenu->addAction(openIcon, tr("&Open..."), this, &MainWindow::openFile);
+    QAction *openAction = fileMenu->addAction(openIcon, QObject::tr("&Open..."),
+                                              this,
+                                              SLOT(openFile) );
     openAction->setShortcut(QKeySequence::Open);
     toolBar->addAction(openAction);
+
     const QIcon exportIcon = QIcon::fromTheme("document-save", QIcon(":/qt-project.org/styles/commonstyle/images/standardbutton-save-32.png"));
-    QAction *exportAction = fileMenu->addAction(exportIcon, tr("&Export..."), this, &MainWindow::exportImage);
+    QAction *exportAction = fileMenu->addAction(exportIcon, QObject::tr("&Export..."), this, SLOT(exportImage));
     exportAction->setToolTip(tr("Export Image"));
     exportAction->setShortcut(Qt::CTRL + Qt::Key_E);
     toolBar->addAction(exportAction);
-    QAction *quitAction = fileMenu->addAction(tr("E&xit"), qApp, QCoreApplication::quit);
+    QAction *quitAction = fileMenu->addAction( QObject::tr("E&xit"), qApp, SLOT(QCoreApplication::quit));
     quitAction->setShortcuts(QKeySequence::Quit);
 
     QMenu *viewMenu = menuBar()->addMenu(tr("&View"));
@@ -130,7 +134,7 @@ MainWindow::MainWindow()
             [this] (QAction *a) { setRenderer(a->data().toInt()); });
 
     QMenu *help = menuBar()->addMenu(tr("&Help"));
-    help->addAction(tr("About Qt"), qApp, &QApplication::aboutQt);
+    help->addAction(tr("About Qt"), qApp, SLOT(QApplication::aboutQt));
 
     setCentralWidget(m_view);
 }
@@ -144,7 +148,7 @@ void MainWindow::openFile()
     if (m_currentPath.isEmpty())
         fileDialog.setDirectory(picturesLocation());
 
-    while (fileDialog.exec() == QDialog::Accepted && !loadFile(fileDialog.selectedFiles().constFirst()))
+    while (fileDialog.exec() == QDialog::Accepted && !loadFile(*(fileDialog.selectedFiles().begin())))
         ;
 }
 

@@ -42,9 +42,9 @@ terms listed above has been obtained from the copyright holder.
 ----------------------------------------------------------------------------*/
 #include "ton_stab.h"
 #include "oper_32b.h"
-#include "cnst.h"
-#include "set_zero.h"
-#include "basic_op.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/set_zero.h"
+#include "amrnb/common/basic_op.h"
 #include "oscl_mem.h"
 
 /*----------------------------------------------------------------------------

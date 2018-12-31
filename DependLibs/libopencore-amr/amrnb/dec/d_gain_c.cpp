@@ -87,16 +87,16 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "d_gain_c.h"
-#include "typedef.h"
-#include "mode.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/mode.h"
 
 #include "oper_32b.h"
-#include "cnst.h"
+#include "amrnb/common/cnst.h"
 #include "log2.h"
 #include "pow2.h"
 #include "gc_pred.h"
 
-#include "basic_op.h"
+#include "amrnb/common/basic_op.h"
 
 /*--------------------------------------------------------------------------*/
 #ifdef __cplusplus

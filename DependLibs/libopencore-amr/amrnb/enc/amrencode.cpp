@@ -50,10 +50,10 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "cnst.h"
-#include "mode.h"
-#include "frame_type_3gpp.h"
-#include "typedef.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/mode.h"
+#include "amrnb/common/frame_type_3gpp.h"
+#include "amrnb/common/typedef.h"
 
 #include "amrencode.h"
 #include "ets_to_if2.h"

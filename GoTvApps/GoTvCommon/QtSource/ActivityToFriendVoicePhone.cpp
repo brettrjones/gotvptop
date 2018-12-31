@@ -50,7 +50,9 @@ void ActivityToFriendVoicePhone::setupActivityVoicePhone( void )
 {
 	ui.setupUi( this );
 	setupBaseWidgets( ui.m_TitleBarWidget, ui.m_FriendIdentWidget, ui.m_PermissionButton, ui.m_PermissionLabel );
-	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Voice Phone (VOIP) - ") + m_HisIdent->getOnlineName() );
+    QString titleText = QObject::tr("Voice Phone (VOIP) - ");
+    titleText += m_HisIdent->getOnlineName();
+    ui.m_TitleBarWidget->setTitleBarText( titleText );
 	ui.m_TitleBarWidget->enableAudioControls( true );
 	slotRepositionToParent();
 	ui.m_InstMsgWidget->setInstMsgWidgets( m_ePluginType, m_HisIdent );

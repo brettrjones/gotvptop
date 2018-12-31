@@ -23,11 +23,11 @@
  *****************************************************************************/
 
 
-#include "common/common.h"
-#include "common/yuv.h"
-#include "common/shortyuv.h"
-#include "common/picyuv.h"
-#include "common/primitives.h"
+#include "libx265/common/common.h"
+#include "libx265/common/yuv.h"
+#include "libx265/common/shortyuv.h"
+#include "libx265/common/picyuv.h"
+#include "libx265/common/primitives.h"
 
 using namespace X265_NS;
 

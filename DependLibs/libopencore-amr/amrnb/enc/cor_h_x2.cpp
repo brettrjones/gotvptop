@@ -39,11 +39,11 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "typedef.h"
-#include "cnst.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/cnst.h"
 #include "cor_h_x.h"
 #include "cor_h_x2.h" // BX
-#include "basic_op.h"
+#include "amrnb/common/basic_op.h"
 #include "l_abs.h"
 
 /*----------------------------------------------------------------------------

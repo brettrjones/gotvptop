@@ -46,11 +46,11 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "q_gain_c.h"
-#include "mode.h"
+#include "amrnb/common/mode.h"
 #include "oper_32b.h"
-#include "basic_op.h"
-#include "log2.h"
-#include "pow2.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/log2.h"
+#include "amrnb/common/pow2.h"
 
 /*--------------------------------------------------------------------------*/
 #ifdef __cplusplus

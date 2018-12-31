@@ -51,9 +51,9 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "typedef.h"
-#include "basic_op.h"
-#include "mode.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/mode.h"
 #include "sid_sync.h"
 #include "oscl_mem.h"
 

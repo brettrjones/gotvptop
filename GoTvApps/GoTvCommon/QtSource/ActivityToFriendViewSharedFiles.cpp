@@ -243,7 +243,7 @@ FileXferWidget * ActivityToFriendViewSharedFiles::fileToWidget(  VxNetIdent *   
                                                                 fileInfo );
 	xferSession->setXferDirection( eXferDirectionRx );
 	xferSession->setWidget( item );
-	item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((uint64_t)xferSession) );
+    item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)xferSession) );
 
 	if( false == connect( item, SIGNAL(signalFileXferItemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*))) )
 	{

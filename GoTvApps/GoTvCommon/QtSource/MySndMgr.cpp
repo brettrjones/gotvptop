@@ -22,6 +22,7 @@
 #endif
 #endif
 
+
 #include "MySndMgr.h"
 #include "MyQtSoundInput.h"
 #include "MyQtSoundOutput.h"
@@ -34,6 +35,8 @@
 #include <QDebug>
 //#include <QSound>
 #include <QMessageBox>
+
+#undef USE_ECHO_CANCEL
 
 namespace
 {

@@ -46,14 +46,14 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "c8_31pf.h"
-#include "typedef.h"
-#include "cnst.h"
-#include "inv_sqrt.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/inv_sqrt.h"
 #include "cor_h.h"
 #include "cor_h_x2.h"
 #include "set_sign.h"
 #include "s10_8pf.h"
-#include "basic_op.h"
+#include "amrnb/common/basic_op.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

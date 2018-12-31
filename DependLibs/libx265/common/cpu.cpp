@@ -24,8 +24,8 @@
  * For more information, contact us at license @ x265.com.
  *****************************************************************************/
 
-#include "common/cpu.h"
-#include "common/common.h"
+#include "libx265/common/cpu.h"
+#include "libx265/common/common.h"
 
 #if MACOS || SYS_FREEBSD
 #include <sys/types.h>

@@ -114,7 +114,7 @@
   <customwidget>
    <class>VxWidgetBase</class>
    <extends>QWidget</extends>
-   <header>vxwidgetbase.h</header>
+   <header location="global">VxWidgetBase.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

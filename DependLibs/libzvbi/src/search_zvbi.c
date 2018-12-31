@@ -32,7 +32,7 @@
 
 #include "lang.h"
 #include "cache.h"
-#include "search.h"
+#include "search_zvbi.h"
 #include "ure.h"
 #include "vbi.h"
 #include "teletext_decoder.h"

@@ -197,17 +197,17 @@ echo GoTv Compiler Config error no os defined
 extern "C" {
 #endif // __cplusplus
 
-// these are implemented in CoreLib/VxTime.cpp but did not want to include the header everywhere
-int64_t	GetTimeStampMs( void );			      // milli seconds since January 1, 1970 GMT time
-inline int64_t	GetTimeStampSec( void ) { return GetTimeStampMs() / 1000; }
+    extern int libintl_version;
+
+    // these are implemented in CoreLib/VxTime.cpp but did not want to include the header everywhere
+    int64_t	GetTimeStampMs( void );			      // milli seconds since January 1, 1970 GMT time
+    inline int64_t	GetTimeStampSec( void ) { return GetTimeStampMs() / 1000; }
 
 #ifdef __cplusplus
 }
 #endif // __cplusplus
 
 #define BUILDSUF ""
-
-extern int libintl_version;
 
 #ifdef TARGET_OS_WINDOWS
 # define SLIBSUF				".dll"
@@ -220,6 +220,7 @@ extern int libintl_version;
 #define LIBDIR					".libs/"
 #define LOCALEDIR				".libs/"
 #define BISON_LOCALEDIR			".bison/"
+#define GOTV_DEFAULT_DATA_DIR   ".ptopdata/"
 
 /* Use C99 variable - size arrays */
 // to many issues with the define.. instead define USE_VAR_ARRAYS then let each library define VAR_ARRAYS based on USE_VAR_ARRAYS

@@ -36,6 +36,8 @@
  * @author Edouard Gomez <ed.gomez@free.fr>
  */
 
+#define DO_NOT_DEFINE_BOOL 1
+
 #include <ffmpeg/config_ffmpeg.h>
 
 #ifndef TARGET_OS_WINDOWS // not available in windows

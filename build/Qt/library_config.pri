@@ -1,5 +1,5 @@
 
-CONFIG += staticlib
+CONFIG += staticlib qt thread silent
 
 DEFINES += LIB_STATIC HAVE_CONFIG_H
 
@@ -28,3 +28,6 @@ unix: {
 }
 
 }
+
+INCLUDEPATH += ./../../
+INCLUDEPATH += ./../../DependLibs

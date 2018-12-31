@@ -48,14 +48,14 @@ terms listed above has been obtained from the copyright holder.
 ----------------------------------------------------------------------------*/
 #include "pitch_fr.h"
 #include "oper_32b.h"
-#include "cnst.h"
+#include "amrnb/common/cnst.h"
 #include "enc_lag3.h"
 #include "enc_lag6.h"
 #include "inter_36.h"
-#include "inv_sqrt.h"
+#include "amrnb/common/inv_sqrt.h"
 #include "convolve.h"
 
-#include "basic_op.h"
+#include "amrnb/common/basic_op.h"
 #include "oscl_mem.h"
 
 

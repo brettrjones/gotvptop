@@ -47,12 +47,12 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "qgain795.h"
-#include "typedef.h"
-#include "basic_op.h"
-#include "cnst.h"
-#include "log2.h"
-#include "pow2.h"
-#include "sqrt_l.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/log2.h"
+#include "amrnb/common/pow2.h"
+#include "amrnb/common/sqrt_l.h"
 #include "g_adapt.h"
 #include "calc_en.h"
 #include "q_gain_p.h"

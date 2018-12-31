@@ -81,10 +81,10 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "typedef.h"
-#include "cnst.h"   /* parameter sizes: MAX_PRM_SIZE */
-#include "mode.h"   /* N_MODES */
-#include "bitno_tab.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/cnst.h"   /* parameter sizes: MAX_PRM_SIZE */
+#include "amrnb/common/mode.h"   /* N_MODES */
+#include "amrnb/common/bitno_tab.h"
 
 
 /*--------------------------------------------------------------------------*/

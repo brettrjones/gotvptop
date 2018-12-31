@@ -1906,7 +1906,7 @@ _GL_UNUSED_LABEL should be used with a trailing ;  */
 
 /* Define to 1 if translation of program messages to the user's native
 language is requested. */
-#define ENABLE_NLS 1
+//#define ENABLE_NLS 1
 
 /* Define to 1 if the package shall run at any location in the file system. */
 /* #undef ENABLE_RELOCATABLE */

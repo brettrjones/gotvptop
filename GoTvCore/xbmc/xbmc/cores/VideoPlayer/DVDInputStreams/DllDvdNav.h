@@ -113,7 +113,7 @@ public:
 class DllDvdNav : public StaticDll, public DllDvdNavInterface
 {
 public:
-    DllDvdNav::DllDvdNav()
+    DllDvdNav()
         : StaticDll( DLL_PATH_LIBDVDNAV )
     {
     }

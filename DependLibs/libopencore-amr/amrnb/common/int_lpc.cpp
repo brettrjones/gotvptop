@@ -41,8 +41,8 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "int_lpc.h"
-#include "typedef.h"
-#include "cnst.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/cnst.h"
 #include "lsp_az.h"
 #include "basic_op.h"
 

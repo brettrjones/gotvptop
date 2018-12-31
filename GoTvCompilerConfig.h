@@ -1163,10 +1163,10 @@ typedef int64_t              time64_t;
 # define HAVE_FSTAT				1
 # define HAVE_FTRUNCATE			1
 /* Define to 1 if you have the <features.h> header file. */
-# define HAVE_FEATURES_H			0
+# define HAVE_FEATURES_H		0
 #else
 /* Define to 1 if you have the `fcntl' function. */
-# define HAVE_FCNTL
+# define HAVE_FCNTL             1
 /* Define to 1 if you have the <fcntl.h> header file. */
 # define HAVE_FCNTL_H			1
 /* Define to 1 if you have the `ftruncate' function. */
@@ -1174,7 +1174,7 @@ typedef int64_t              time64_t;
 # define HAVE_FSTAT
 # define HAVE_FTRUNCATE			1
 /* Define to 1 if you have the <features.h> header file. */
-# define HAVE_FEATURES_H			1
+# define HAVE_FEATURES_H		1
 /* Define to 1 if you have the `fork' function. */
 # define HAVE_FORK				1
 #endif // TARGET_OS_WINDOWS

@@ -30,10 +30,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <libfaac/config_libfaac.h>
+#include <libflac/config_libflac.h>
 
 #include <string.h> /* for memset() */
-#include "FLAC/assert.h"
+
 #include "private/ogg_encoder_aspect.h"
 #include "private/ogg_mapping.h"
 

@@ -51,7 +51,7 @@
 #include "libssh/callbacks.h"
 #include "libssh/socket.h"
 #include "libssh/buffer.h"
-#include "libssh/poll.h"
+#include "libssh/poll_ssh.h"
 #include "libssh/session.h"
 
 /**

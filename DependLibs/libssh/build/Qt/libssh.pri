@@ -1,5 +1,7 @@
 DEFINES += LIBSSH_STATIC
 
+INCLUDEPATH += $$PWD/../../
+
 HEADERS += 	$$PWD/../../agent.h \
 	$$PWD/../../auth.h \
 	$$PWD/../../bignum.h \
@@ -38,7 +40,7 @@ HEADERS += 	$$PWD/../../agent.h \
 	$$PWD/../../pcap.h \
 	$$PWD/../../pki.h \
 	$$PWD/../../pki_priv.h \
-	$$PWD/../../poll.h \
+    $$PWD/../../poll_ssh.h \
 	$$PWD/../../sc25519.h \
 	$$PWD/../../scp.h \
 	$$PWD/../../server.h \
@@ -48,7 +50,8 @@ HEADERS += 	$$PWD/../../agent.h \
 	$$PWD/../../ssh1.h \
 	$$PWD/../../ssh2.h \
 	$$PWD/../../threads.h \
-	$$PWD/../../wrapper.h
+	$$PWD/../../wrapper.h \
+    $$PWD/../../poll_ssh.h
 
 SOURCES += 	$$PWD/../../agent.c \
 	$$PWD/../../auth.c \
@@ -102,7 +105,6 @@ SOURCES += 	$$PWD/../../agent.c \
 	$$PWD/../../pki_crypto.c \
 	$$PWD/../../pki_ed25519.c \
 	$$PWD/../../pki_gcrypt.c \
-	$$PWD/../../poll.c \
 	$$PWD/../../scp.c \
 	$$PWD/../../server.c \
 	$$PWD/../../session.c \
@@ -111,5 +113,6 @@ SOURCES += 	$$PWD/../../agent.c \
 	$$PWD/../../socket.c \
 	$$PWD/../../threads.c \
 	$$PWD/../../threads/pthread.c \
-	$$PWD/../../wrapper.c
+	$$PWD/../../wrapper.c \
+    $$PWD/../../poll_ssh.c
 

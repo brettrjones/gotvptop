@@ -25,13 +25,13 @@
 #pragma warning(disable: 4127) // conditional expression is constant, yes I know
 #endif
 
-#include "x265.h"
-#include "x265-extras.h"
-#include "x265cli.h"
+#include "libx265/x265.h"
+#include "libx265/x265-extras.h"
+#include "libx265/x265cli.h"
 
-#include "input/input.h"
-#include "output/output.h"
-#include "output/reconplay.h"
+#include "libx265/input/input.h"
+#include "libx265/output/output.h"
+#include "libx265/output/reconplay.h"
 
 #if HAVE_VLD
 /* Visual Leak Detector */

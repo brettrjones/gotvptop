@@ -40,9 +40,9 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "inter_36.h"
-#include "cnst.h"
+#include "amrnb/common/cnst.h"
 #include "inter_36_tab.h"
-#include "basic_op.h"
+#include "amrnb/common/basic_op.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

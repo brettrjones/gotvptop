@@ -49,9 +49,9 @@ terms listed above has been obtained from the copyright holder.
 *                         INCLUDE FILES
 ********************************************************************************
 */
-#include "typedef.h"
-#include "mode.h"
-#include "get_const_tbls.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/mode.h"
+#include "amrnb/common/get_const_tbls.h"
 
 #ifdef __cplusplus
 extern "C"

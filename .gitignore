@@ -14,3 +14,11 @@ build/build-libkodi-Desktop-Debug/
 build/build-libptopengine-Desktop-Debug/
 
 build/build-gotvptop_app-Desktop-Debug/
+
+build/build-libdepends-Desktop-Debug/
+
+build/build-libffmpeg-Desktop-Debug/
+
+build/build-libopencore-amr-Desktop-Debug/
+
+build/objs/

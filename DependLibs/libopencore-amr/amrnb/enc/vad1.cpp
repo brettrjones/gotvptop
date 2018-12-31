@@ -40,11 +40,11 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "vad.h"
-#include "typedef.h"
-#include "shr.h"
-#include "basic_op.h"
-#include "cnst_vad.h"
+#include "amrnb/common/vad.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/shr.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/cnst_vad.h"
 #include "oscl_mem.h"
 
 /*----------------------------------------------------------------------------

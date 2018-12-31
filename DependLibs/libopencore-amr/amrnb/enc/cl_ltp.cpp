@@ -51,11 +51,11 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "cl_ltp.h"
-#include "basicop_malloc.h"
-#include "cnst.h"
+#include "amrnb/common/basicop_malloc.h"
+#include "amrnb/common/cnst.h"
 #include "convolve.h"
 #include "g_pitch.h"
-#include "pred_lt.h"
+#include "amrnb/common/pred_lt.h"
 #include "pitch_fr.h"
 #include "enc_lag3.h"
 #include "enc_lag6.h"

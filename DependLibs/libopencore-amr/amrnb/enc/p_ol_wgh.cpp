@@ -50,11 +50,11 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "p_ol_wgh.h"
-#include "typedef.h"
-#include "cnst.h"
-#include "basic_op.h"
-#include "gmed_n.h"
-#include "inv_sqrt.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/gmed_n.h"
+#include "amrnb/common/inv_sqrt.h"
 #include "vad1.h"
 #include "calc_cor.h"
 #include "hp_max.h"

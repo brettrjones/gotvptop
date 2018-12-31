@@ -23,12 +23,12 @@
 * For more information, contact us at license @ x265.com.
 *****************************************************************************/
 
-#include "common/common.h"
-#include "common/frame.h"
-#include "common/framedata.h"
-#include "common/picyuv.h"
-#include "common/primitives.h"
-#include "common/threading.h"
+#include "libx265/common/common.h"
+#include "libx265/common/frame.h"
+#include "libx265/common/framedata.h"
+#include "libx265/common/picyuv.h"
+#include "libx265/common/primitives.h"
+#include "libx265/common/threading.h"
 
 #include "analysis.h"
 #include "rdcost.h"

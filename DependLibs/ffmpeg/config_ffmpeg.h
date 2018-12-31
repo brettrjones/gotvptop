@@ -317,7 +317,7 @@
 #define HAVE_STDATOMIC_H 0
 //#define HAVE_SYS_MMAN_H 0  // defined in GoTvCompilerConfig.h
 //#define HAVE_SYS_PARAM_H 0 // defined in GoTvCompilerConfig.h
-#define HAVE_SYS_RESOURCE_H 0
+//#define HAVE_SYS_RESOURCE_H 0 // defined in GoTvCompilerConfig.h
 //#define HAVE_SYS_SELECT_H 0 // defined in GoTvCompilerConfig.h
 #define HAVE_SYS_SOUNDCARD_H 0
 
@@ -400,7 +400,7 @@
 #endif // TARGET_OS_WINDOWS
 #define HAVE_GETPROCESSMEMORYINFO 1
 #define HAVE_GETPROCESSTIMES 1
-#define HAVE_GETRUSAGE 0
+//#define HAVE_GETRUSAGE 0 // defined in GoTvCompilerConfig.h
 #define HAVE_GETSYSTEMTIMEASFILETIME 1
 //#define HAVE_GETTIMEOFDAY 0  // defined in GoTvCompilerConfig.h
 
@@ -441,7 +441,11 @@
 #define HAVE_SYSCTL 0
 //#define HAVE_USLEEP 0// defined in GoTvCompilerConfig.h
 #define HAVE_UTGETOSTYPEFROMSTRING 0
-#define HAVE_VIRTUALALLOC 1
+#ifdef TARGET_OS_WINDOWS
+# define HAVE_VIRTUALALLOC 1
+#else
+# define HAVE_VIRTUALALLOC 0
+#endif // TARGET_OS_WINDOWS
 #define HAVE_WGLGETPROCADDRESS 0
 #define HAVE_BCRYPT 1
 #define HAVE_VAAPI_DRM 0
@@ -723,7 +727,11 @@
 #define CONFIG_CRYSTALHD 0
 #define CONFIG_CUDA 0
 #define CONFIG_CUVID 0
-#define CONFIG_D3D11VA 0
+#ifdef TARGET_OS_WINDOWS
+# define CONFIG_D3D11VA 1
+#else
+# define CONFIG_D3D11VA 0
+#endif // TARGET_OS_WINDOWS
 #define CONFIG_DXVA2 0
 #define CONFIG_FFNVCODEC 0
 #define CONFIG_NVDEC 0

@@ -22,9 +22,9 @@
 * For more information, contact us at license @ x265.com.
 *****************************************************************************/
 
-#include "common/common.h"
-#include "constants.h"
-#include "common/threading.h"
+#include "libx265/common/common.h"
+#include "libx265/common/constants.h"
+#include "libx265/common/threading.h"
 
 namespace X265_NS {
 

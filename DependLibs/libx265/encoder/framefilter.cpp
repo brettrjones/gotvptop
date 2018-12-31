@@ -22,13 +22,13 @@
  * For more information, contact us at license @ x265.com.
  *****************************************************************************/
 
-#include "common/common.h"
-#include "common/frame.h"
-#include "common/framedata.h"
+#include "libx265/common/common.h"
+#include "libx265/common/frame.h"
+#include "libx265/common/framedata.h"
 #include "encoder.h"
 #include "framefilter.h"
 #include "frameencoder.h"
-#include "common/wavefront.h"
+#include "libx265/common/wavefront.h"
 
 using namespace X265_NS;
 

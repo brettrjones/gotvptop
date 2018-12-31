@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "AppletBase.h"
-#include <GoTvP2P/AssetMgr/AssetInfo.h>
+#include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
 
 
 class AppletPlayerBase : public AppletBase

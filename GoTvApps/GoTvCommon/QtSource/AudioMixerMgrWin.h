@@ -14,6 +14,7 @@
 #include <GoTvCore/GoTvP2P/EchoCancel/WebRtcTypeDefs.h>
 #include <GoTvCore/GoTvP2P/EchoCancel/audio_device.h>
 #include <GoTvCore/GoTvP2P/EchoCancel/critical_section_wrapper.h>
+#ifdef TARGET_OS_WINDOWS
 #include <Windows.h>
 #include <mmsystem.h>
 
@@ -139,4 +140,5 @@ private:
 
 }  // namespace webrtc
 
+#endif  // TARGET_OS_WINDOWS
 #endif  // WEBRTC_AUDIO_DEVICE_AUDIO_MIXER_MANAGER_H

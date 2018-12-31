@@ -48,18 +48,18 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "typedef.h"
-#include "cnst.h"
-#include "mode.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/mode.h"
 #include "lpc.h"
-#include "lsp.h"
+#include "amrnb/common/lsp.h"
 #include "cl_ltp.h"
 #include "gain_q.h"
-#include "p_ol_wgh.h"
+#include "amrnb/common/p_ol_wgh.h"
 #include "ton_stab.h"
-#include "vad.h"
+#include "amrnb/common/vad.h"
 #include "dtx_enc.h"
-#include "get_const_tbls.h"
+#include "amrnb/common/get_const_tbls.h"
 
 /*--------------------------------------------------------------------------*/
 #ifdef __cplusplus

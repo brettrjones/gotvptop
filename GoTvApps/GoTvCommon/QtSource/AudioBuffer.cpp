@@ -2,6 +2,7 @@
 #include "AudioBuffer.h"
 #include <CoreLib/VxDebug.h>
 #include <algorithm>
+#include <memory.h>
 
  AudioBuffer::AudioBuffer()
  {

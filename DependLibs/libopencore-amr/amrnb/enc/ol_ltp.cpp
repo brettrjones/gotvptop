@@ -40,9 +40,9 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "ol_ltp.h"
-#include "cnst.h"
+#include "amrnb/common/cnst.h"
 #include "pitch_ol.h"
-#include "p_ol_wgh.h"
+#include "amrnb/common/p_ol_wgh.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

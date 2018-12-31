@@ -51,18 +51,18 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "dtx_dec.h"
-#include "typedef.h"
-#include "basic_op.h"
-#include "set_zero.h"
-#include "mode.h"
-#include "log2.h"
-#include "lsp_az.h"
-#include "pow2.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/set_zero.h"
+#include "amrnb/common/mode.h"
+#include "amrnb/common/log2.h"
+#include "amrnb/common/lsp_az.h"
+#include "amrnb/common/pow2.h"
 #include "a_refl.h"
 #include "b_cn_cod.h"
-#include "syn_filt.h"
-#include "lsp_lsf.h"
-#include "reorder.h"
+#include "amrnb/common/syn_filt.h"
+#include "amrnb/common/lsp_lsf.h"
+#include "amrnb/common/reorder.h"
 #include "oscl_mem.h"
 
 /*----------------------------------------------------------------------------

@@ -56,7 +56,8 @@ void VxContextMenu::addMenuItem( EMenuItemType eMenuItem, QString menuText )
     }
     else
     {
-        addMenuAction( eMenuItem, describeMenuItem( eMenuItem ) );
+        QString itemText = describeMenuItem( eMenuItem );
+        addMenuAction( eMenuItem, itemText );
     }
 }
 

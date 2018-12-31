@@ -1,6 +1,6 @@
-#include "common/common.h"
-#include "common/bitstream.h"
-#include "common/threading.h"
+#include "libx265/common/common.h"
+#include "libx265/common/bitstream.h"
+#include "libx265/common/threading.h"
 
 using namespace X265_NS;
 

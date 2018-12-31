@@ -40,7 +40,7 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "prm2bits.h"
-#include "mode.h"
+#include "amrnb/common/mode.h"
 
 
 /*----------------------------------------------------------------------------

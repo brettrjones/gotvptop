@@ -26,7 +26,7 @@
 #include <gnutls_int.h>
 #include <common_gnu.h>
 #include <gnutls_x509.h>
-#include <x509/x509_int.h>
+#include <libgnu/x509-ext.h>
 #include <gnutls_num.h>
 #include <gnutls_errors.h>
 #include <extras/randomart.h>

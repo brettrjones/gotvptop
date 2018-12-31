@@ -216,7 +216,7 @@ int VxLabel::playVideoFrame( uint8_t * picBuf, uint32_t picBufLen, int picWidth,
         QImage	picBitmap( picBuf,  picWidth, picHeight, imageFormat );
         if( ! picBitmap.isNull() )
         {
-            LogMsg( LOG_INFO, " VxLabel::playVideoFrame len %d behind %d", picBufLen, m_behindFrameCnt );
+            LogMsg( LOG_INFO, " VxLabel::playVideoFrame len %d behind %d", picBufLen, m_behindFrameCnt.load() );
             m_behindFrameCnt++;
             emit signalPlayVideoFrame( picBitmap, m_VidImageRotation );
         }
@@ -280,7 +280,7 @@ void VxLabel::slotPlayVideoFrame( QImage picBitmap, int iRotate )
         {
             if( m_behindFrameCnt )
             {
-                LogMsg( LOG_DEBUG, " VxLabel::slotPlayVideoFrame behind by %d frames", m_behindFrameCnt );
+                LogMsg( LOG_DEBUG, " VxLabel::slotPlayVideoFrame behind by %d frames", m_behindFrameCnt.load() );
             }
         }
 

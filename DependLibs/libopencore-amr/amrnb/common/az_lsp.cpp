@@ -46,8 +46,8 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "az_lsp.h"
-#include "cnst.h"
-#include "basic_op.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/basic_op.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

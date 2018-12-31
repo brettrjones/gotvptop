@@ -48,8 +48,8 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "typedef.h"
-#include "cnst_vad.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/cnst_vad.h"
 
 /*--------------------------------------------------------------------------*/
 #ifdef __cplusplus

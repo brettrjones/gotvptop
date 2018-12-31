@@ -48,9 +48,9 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "typedef.h"
-#include "gc_pred.h"
-#include "mode.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/gc_pred.h"
+#include "amrnb/common/mode.h"
 
 /*--------------------------------------------------------------------------*/
 #ifdef __cplusplus

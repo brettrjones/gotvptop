@@ -37,9 +37,9 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "frame_type_3gpp.h"
+#include "amrnb/common/frame_type_3gpp.h"
 #include "ets_to_if2.h"
-#include "typedef.h"
+#include "amrnb/common/typedef.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

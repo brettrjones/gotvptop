@@ -32,8 +32,8 @@
    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef ARCH_H
-#define ARCH_H
+#pragma once
+#include "config_speex.h"
 
 #ifndef SPEEX_VERSION
 #define SPEEX_MAJOR_VERSION 1         /**< Major Speex version. */
@@ -74,9 +74,9 @@
 
 #endif
 
-#ifndef OUTSIDE_SPEEX
-#include <libspeex/speex/speex_types.h>
-#endif
+//#ifndef OUTSIDE_SPEEX
+# include <libspeex/speex/speex_types.h>
+//#endif
 
 #define ABS(x) ((x) < 0 ? (-(x)) : (x))      /**< Absolute integer value. */
 #define ABS16(x) ((x) < 0 ? (-(x)) : (x))    /**< Absolute 16-bit value.  */
@@ -132,7 +132,7 @@ typedef spx_word32_t spx_sig_t;
 #endif
 
 
-#else
+#else // not FIXED_POINT
 
 typedef float spx_mem_t;
 typedef float spx_coef_t;
@@ -235,5 +235,3 @@ typedef float spx_word32_t;
 extern long long spx_mips;
 #endif
 
-
-#endif

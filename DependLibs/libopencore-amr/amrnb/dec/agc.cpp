@@ -55,9 +55,9 @@ terms listed above has been obtained from the copyright holder.
 ----------------------------------------------------------------------------*/
 
 #include    "agc.h"
-#include    "cnst.h"
-#include    "inv_sqrt.h"
-#include    "basic_op.h"
+#include    "amrnb/common/cnst.h"
+#include    "amrnb/common/inv_sqrt.h"
+#include    "amrnb/common/basic_op.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

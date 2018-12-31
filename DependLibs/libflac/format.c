@@ -29,12 +29,12 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include <libfaac/config_libfaac.h>
+#include <libflac/config_libflac.h>
 
 #include <stdio.h>
 #include <stdlib.h> /* for qsort() */
 #include <string.h> /* for memset() */
-#include "FLAC/assert.h"
+
 #include "FLAC/format.h"
 #include "share/alloc.h"
 #include "share/compat.h"

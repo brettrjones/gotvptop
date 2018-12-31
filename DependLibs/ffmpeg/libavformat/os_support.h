@@ -33,11 +33,11 @@
 
 //#ifdef TARGET_OS_WINDOWS
 #if HAVE_DIRECT_H
-#include <dirent.h>
+# include <dirent.h>
 #endif
 
 #if HAVE_IO_H
-#include <io.h>
+# include <io.h>
 #endif
 
 

@@ -22,7 +22,7 @@ echo traget os is not defined
 #include "filesystem/SpecialProtocol.h"
 #include "utils/log.h"
 #include "Application.h"
-#include "GoTvP2P/P2PEngine/P2PEngine.h"
+#include "GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h"
 #include "GoTvApps/GoTvCommon/QtSource/AppCommon.h"
 
 #include <CoreLib/VxGlobals.h>

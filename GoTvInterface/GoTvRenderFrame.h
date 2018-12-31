@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <stdint.h>
 
 #define MAX_YUV_PLANES 3
 #define MAX_FRAME_PLANES 4

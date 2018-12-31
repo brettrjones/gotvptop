@@ -18,7 +18,7 @@
 #ifndef GET_CONST_TBLS_H
 #define GET_CONST_TBLS_H
 
-#include "typedef.h"
+#include "amrnb/common/typedef.h"
 
 #ifdef __cplusplus
 extern "C"

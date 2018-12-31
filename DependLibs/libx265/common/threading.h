@@ -25,8 +25,8 @@
 #ifndef X265_THREADING_H
 #define X265_THREADING_H
 
-#include "common/common.h"
-#include "x265.h"
+#include "libx265/common/common.h"
+#include "libx265/x265.h"
 
 #ifdef _WIN32
 #include <windows.h>

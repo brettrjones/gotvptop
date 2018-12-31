@@ -18,14 +18,22 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#ifndef POLL_H_
-#define POLL_H_
+#ifndef SSH_POLL_H_
+#define SSH_POLL_H_
 
 #include "config_libssh.h"
 
-#ifdef HAVE_POLL
+#if defined(HAVE_POLL)
+# ifdef _MSC_VER
+#  include <poll.h>
+# else
+# ifdef TARGET_OS_LINUX
+#  include <sys/poll.h>
+# else
+#  include_next <poll.h>
+# endif
+# endif // _MSC_VER
 
-#include <poll.h>
 typedef struct pollfd ssh_pollfd_t;
 
 #else /* HAVE_POLL */

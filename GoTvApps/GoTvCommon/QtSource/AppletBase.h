@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "ActivityBase.h"
-#include <GoTvP2P/AssetMgr/AssetInfo.h>
+#include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
 
 
 class AppletBase : public ActivityBase

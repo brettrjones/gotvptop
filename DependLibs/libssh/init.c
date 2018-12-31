@@ -25,7 +25,7 @@
 #include "libssh/libssh_priv.h"
 #include "libssh/socket.h"
 #include "libssh/dh.h"
-#include "libssh/poll.h"
+#include "libssh/poll_ssh.h"
 #include "libssh/threads.h"
 
 #ifdef _WIN32

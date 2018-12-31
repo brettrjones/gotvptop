@@ -48,12 +48,12 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "typedef.h"
-#include "cnst.h"
-#include "q_plsf.h"
-#include "gc_pred.h"
-#include "mode.h"
-#include "dtx_common_def.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/q_plsf.h"
+#include "amrnb/common/gc_pred.h"
+#include "amrnb/common/mode.h"
+#include "amrnb/common/dtx_common_def.h"
 
 /*--------------------------------------------------------------------------*/
 #ifdef __cplusplus

@@ -30,14 +30,13 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <libfaac/config_libfaac.h>
+#include <libflac/config_libflac.h>
 
 #ifdef HAVE_STDINT_H
 #include <stdint.h>
 #endif
 
 #include "private/memory.h"
-#include "FLAC/assert.h"
 #include "share/alloc.h"
 
 void *FLAC__memory_alloc_aligned(size_t bytes, void **aligned_address)

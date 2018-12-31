@@ -26,7 +26,7 @@
 #include "libssh/pcap.h"
 #include "libssh/auth.h"
 #include "libssh/channels.h"
-#include "libssh/poll.h"
+#include "libssh/poll_ssh.h"
 
 /* These are the different states a SSH session can be into its life */
 enum ssh_session_state_e {

@@ -21,9 +21,9 @@
 * For more information, contact us at license @ x265.com.
 *****************************************************************************/
 
-#include "common/common.h"
-#include "common/bitstream.h"
-#include "common/slice.h"
+#include "libx265/common/common.h"
+#include "libx265/common/bitstream.h"
+#include "libx265/common/slice.h"
 #include "sei.h"
 
 using namespace X265_NS;

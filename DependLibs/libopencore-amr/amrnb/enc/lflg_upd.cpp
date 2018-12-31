@@ -41,13 +41,13 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "typedef.h"
-#include "cnst.h"
-#include "l_extract.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/l_extract.h"
 #include "mpy_32_16.h"
 
 #include "vad2.h"
-#include "mode.h"
+#include "amrnb/common/mode.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

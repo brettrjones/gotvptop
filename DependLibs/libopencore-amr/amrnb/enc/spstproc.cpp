@@ -46,7 +46,7 @@ terms listed above has been obtained from the copyright holder.
 ----------------------------------------------------------------------------*/
 #include "spstproc.h"
 #include "syn_filt.h"
-#include "cnst.h"
+#include "amrnb/common/cnst.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

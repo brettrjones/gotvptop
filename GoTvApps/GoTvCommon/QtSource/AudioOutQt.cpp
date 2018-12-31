@@ -241,7 +241,8 @@ int AudioOutQt::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int
         upResampleMultiplier *= 2; // 2 channels
         int iDestIdx = 0;
 
-        unsigned char * outAudioData = new unsigned char[ pcmDataLenInBytes * upResampleMultiplier ];
+        int outBufSize = (int)(pcmDataLenInBytes * upResampleMultiplier);
+        unsigned char * outAudioData = new unsigned char[ outBufSize ];
 
         int mySampleCnt = pcmDataLenInBytes >> 1;
         int16_t * srcSamples = pu16PcmData;

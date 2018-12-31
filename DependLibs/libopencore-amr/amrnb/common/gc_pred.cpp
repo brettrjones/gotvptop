@@ -48,9 +48,9 @@ terms listed above has been obtained from the copyright holder.
 ----------------------------------------------------------------------------*/
 #include "gc_pred.h"
 #include "basicop_malloc.h"
-#include "basic_op.h"
-#include "cnst.h"
-#include "log2.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/log2.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

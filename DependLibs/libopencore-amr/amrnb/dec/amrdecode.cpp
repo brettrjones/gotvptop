@@ -39,7 +39,7 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "amrdecode.h"
-#include "cnst.h"
+#include "amrnb/common/cnst.h"
 #include "typedef.h"
 #include "frame.h"
 #include "sp_dec.h"

@@ -36,7 +36,7 @@
 #include <string.h> /* for strlen() */
 #include "private/stream_encoder_framing.h"
 #include "private/crc.h"
-#include "FLAC/assert.h"
+
 #include "share/compat.h"
 
 static FLAC__bool add_entropy_coding_method_(FLAC__BitWriter *bw, const FLAC__EntropyCodingMethod *method);

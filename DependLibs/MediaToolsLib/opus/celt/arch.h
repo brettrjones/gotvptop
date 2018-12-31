@@ -128,8 +128,8 @@ typedef opus_val32 celt_ener;
 
 #endif
 
-#else /* OPUS_FIXED_POINT */
-
+#else
+/* NOT OPUS_FIXED_POINT */
 typedef float opus_val16;
 typedef float opus_val32;
 

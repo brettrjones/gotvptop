@@ -21,9 +21,9 @@
  * For more information, contact us at license @ x265.com.
  *****************************************************************************/
 
-#include "common/picyuv.h"
-#include "common/lowres.h"
-#include "common/mv.h"
+#include "libx265/common/picyuv.h"
+#include "libx265/common/lowres.h"
+#include "libx265/common/mv.h"
 
 using namespace X265_NS;
 

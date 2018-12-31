@@ -105,7 +105,7 @@ public:
 	VxConnectIdent& 			getConnectIdent( void )		{ return * ((VxConnectIdent *)this); }
 
 	void 						setOnlineName( const char * pUserName );
-	char *						getOnlineName( void );
+    char *                      getOnlineName( void );
 
 	void 						setOnlineDescription( const char * pUserDesc );
 	char *						getOnlineDescription( void );

@@ -8,6 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#ifdef TARGET_OS_WINDOWS
+
 #include "AudioMixerMgrWin.h"
 #include <CoreLib/VxDebug.h>
 
@@ -2725,3 +2727,4 @@ char* AudioMixerManager::WideToUTF8(const TCHAR* src) const {
 }
 
 }  // namespace webrtc
+#endif // TARGET_OS_WINDOWS

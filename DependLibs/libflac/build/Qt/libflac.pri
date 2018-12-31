@@ -5,7 +5,6 @@ INCLUDEPATH += $$PWD/../../FLAC
 
 HEADERS += 	$$PWD/../../config_libflac.h \
 	$$PWD/../../include/all.h \
-	$$PWD/../../include/assert.h \
 	$$PWD/../../include/callback.h \
 	$$PWD/../../include/export.h \
 	$$PWD/../../include/format.h \

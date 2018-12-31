@@ -47,15 +47,15 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "pitch_ol.h"
-#include "typedef.h"
-#include "basicop_malloc.h"
-#include "cnst.h"
-#include "inv_sqrt.h"
-#include "vad.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/basicop_malloc.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/inv_sqrt.h"
+#include "amrnb/common/vad.h"
 #include "calc_cor.h"
 #include "hp_max.h"
 #include "oscl_mem.h"
-#include "basic_op.h"
+#include "amrnb/common/basic_op.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

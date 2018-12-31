@@ -44,13 +44,13 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "qua_gain.h"
-#include "typedef.h"
-#include "basic_op.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/basic_op.h"
 
-#include "mode.h"
-#include "cnst.h"
-#include "pow2.h"
-#include "gc_pred.h"
+#include "amrnb/common/mode.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/pow2.h"
+#include "amrnb/common/gc_pred.h"
 
 /*--------------------------------------------------------------------------*/
 #ifdef __cplusplus

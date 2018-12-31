@@ -34,7 +34,7 @@
 #define FLAC__PRIVATE__BITMATH_H
 
 #include "FLAC/ordinals.h"
-#include "FLAC/assert.h"
+#include "config_libflac.h"
 
 #include "share/compat.h"
 

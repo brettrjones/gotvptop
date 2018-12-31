@@ -36,9 +36,9 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "residu.h"
-#include "typedef.h"
-#include "cnst.h"
+#include "amrnb/common/residu.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/cnst.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

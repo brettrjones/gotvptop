@@ -36,12 +36,12 @@
 #undef NDEBUG                   // always check asserts, the speed effect is far too small to disable them
 
 
-#include "common/common.h"
+#include "libxavs/common/common.h"
 #include <math.h>
 #include <limits.h>
 #include <assert.h>
 
-#include "common/cpu.h"
+#include "libxavs/common/cpu.h"
 #include "ratecontrol.h"
 
 typedef struct

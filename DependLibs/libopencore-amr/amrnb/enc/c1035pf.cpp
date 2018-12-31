@@ -49,9 +49,9 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "c1035pf.h"
-#include "cnst.h"
-#include "basic_op.h"
-#include "inv_sqrt.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/inv_sqrt.h"
 #include "set_sign.h"
 #include "cor_h.h"
 #include "cor_h_x.h"

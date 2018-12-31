@@ -65,7 +65,6 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../src/proxy-msg.h \
 	$$PWD/../../src/raw_decoder.h \
 	$$PWD/../../src/sampling_par.h \
-	$$PWD/../../src/search.h \
 	$$PWD/../../src/sliced.h \
 	$$PWD/../../src/sliced_filter.h \
 	$$PWD/../../src/tables.h \
@@ -80,7 +79,8 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../src/vps.h \
 	$$PWD/../../src/vt.h \
 	$$PWD/../../src/wss.h \
-	$$PWD/../../src/xds_demux.h
+	$$PWD/../../src/xds_demux.h \
+    $$PWD/../../src/search_zvbi.h
 
 SOURCES += 	$$PWD/../../contrib/atsc-cc.c \
 	$$PWD/../../contrib/dvbsubs.c \
@@ -123,7 +123,6 @@ SOURCES += 	$$PWD/../../contrib/atsc-cc.c \
 	$$PWD/../../src/proxy-msg.c \
 	$$PWD/../../src/raw_decoder.c \
 	$$PWD/../../src/sampling_par.c \
-	$$PWD/../../src/search.c \
 	$$PWD/../../src/sliced_filter.c \
 	$$PWD/../../src/tables.c \
 	$$PWD/../../src/teletext.c \
@@ -132,5 +131,6 @@ SOURCES += 	$$PWD/../../contrib/atsc-cc.c \
 	$$PWD/../../src/vbi.c \
 	$$PWD/../../src/vps.c \
 	$$PWD/../../src/wss.c \
-	$$PWD/../../src/xds_demux.c
+	$$PWD/../../src/xds_demux.c \
+    $$PWD/../../src/search_zvbi.c
 

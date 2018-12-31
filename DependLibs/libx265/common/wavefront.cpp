@@ -22,10 +22,10 @@
  * For more information, contact us at license @ x265.com
  *****************************************************************************/
 
-#include "common/threadpool.h"
-#include "common/threading.h"
-#include "common/wavefront.h"
-#include "common/common.h"
+#include "libx265/common/threadpool.h"
+#include "libx265/common/threading.h"
+#include "libx265/common/wavefront.h"
+#include "libx265/common/common.h"
 
 namespace X265_NS {
 // x265 private namespace

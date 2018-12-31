@@ -25,7 +25,7 @@
 #ifndef X265_CONSTANTS_H
 #define X265_CONSTANTS_H
 
-#include "common/common.h"
+#include "libx265/common/common.h"
 
 namespace X265_NS {
 // private namespace

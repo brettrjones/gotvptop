@@ -79,9 +79,9 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "typedef.h"
-#include "l_comp.h"
-#include "basic_op.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/l_comp.h"
+#include "amrnb/common/basic_op.h"
 /*----------------------------------------------------------------------------
 ; MACROS
 ; Define module specific macros here

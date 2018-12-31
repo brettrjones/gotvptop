@@ -81,7 +81,7 @@
 #include "libssh/socket.h"
 #include "libssh/channels.h"
 #include "libssh/session.h"
-#include "libssh/poll.h"
+#include "libssh/poll_ssh.h"
 
 #ifndef HAVE_GETADDRINFO
 #error "Your system must have getaddrinfo()"

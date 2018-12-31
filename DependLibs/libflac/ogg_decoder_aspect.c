@@ -29,10 +29,10 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include <libfaac/config_libfaac.h>
+#include <libflac/config_libflac.h>
 
 #include <string.h> /* for memcpy() */
-#include "FLAC/assert.h"
+
 #include "private/ogg_decoder_aspect.h"
 #include "private/ogg_mapping.h"
 #include "private/macros.h"

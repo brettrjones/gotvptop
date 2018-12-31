@@ -44,7 +44,7 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 
-#include    "oscl_base.h"
+#include    "oscl/oscl_base.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

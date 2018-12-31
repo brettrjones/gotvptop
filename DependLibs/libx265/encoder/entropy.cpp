@@ -22,12 +22,12 @@
 * For more information, contact us at license @ x265.com.
 *****************************************************************************/
 
-#include "common/common.h"
-#include "common/framedata.h"
-#include "common/scalinglist.h"
-#include "common/quant.h"
-#include "common/contexts.h"
-#include "common/picyuv.h"
+#include "libx265/common/common.h"
+#include "libx265/common/framedata.h"
+#include "libx265/common/scalinglist.h"
+#include "libx265/common/quant.h"
+#include "libx265/common/contexts.h"
+#include "libx265/common/picyuv.h"
 
 #include "sao.h"
 #include "entropy.h"

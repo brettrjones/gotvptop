@@ -190,7 +190,14 @@ char *	VxConnectIdent::getOnlineName( void )
 //============================================================================
 void 	VxConnectIdent::setOnlineName( const char * pUserName )			
 { 
-	SafeStrCopy( m_OnlineName, pUserName, sizeof( m_OnlineName )); 
+    if( !pUserName )
+    {
+        m_OnlineName[0] = 0;
+    }
+    else
+    {
+        SafeStrCopy( m_OnlineName, pUserName, sizeof( m_OnlineName ));
+    }
 }
 
 //============================================================================

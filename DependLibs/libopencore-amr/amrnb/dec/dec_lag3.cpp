@@ -99,8 +99,8 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "dec_lag3.h"
-#include "typedef.h"
-#include "basic_op.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/basic_op.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

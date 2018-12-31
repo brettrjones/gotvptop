@@ -44,12 +44,12 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "pre_big.h"
-#include "typedef.h"
-#include "basic_op.h"
-#include "syn_filt.h"
-#include "weight_a.h"
-#include "residu.h"
-#include "cnst.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/syn_filt.h"
+#include "amrnb/common/weight_a.h"
+#include "amrnb/common/residu.h"
+#include "amrnb/common/cnst.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

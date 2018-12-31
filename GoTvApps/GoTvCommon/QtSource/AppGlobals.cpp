@@ -562,7 +562,7 @@ void ErrMsgBox( QWidget * parent, int infoLevel, const char * pMsg, ... )
 	char szBuffer[4096];
 	va_list arg_ptr;
 	va_start(arg_ptr, pMsg);
-	vsnprintf(szBuffer, 4096, pMsg,(char *) arg_ptr);
+    vsnprintf(szBuffer, 4096, pMsg, arg_ptr);
 	szBuffer[4095] = 0;
 	va_end(arg_ptr);
 

@@ -9,7 +9,7 @@
 
 /* Define to 1 if you have the <aprpa/inet.h> header file. */
 #ifndef TARGET_OS_WINDOWS
-#define HAVE_ARPA_INET_H 1 //BRJ make 1 for linux
+# define HAVE_ARPA_INET_H 1 //BRJ make 1 for linux
 #endif // TARGET_OS_WINDOWS
 
 /* Define to 1 if you have the <pty.h> header file. */

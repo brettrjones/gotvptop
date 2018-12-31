@@ -19,7 +19,7 @@ public:
     QSize                       m_size;
 
 
-    KodiThread::KodiThread()
+    KodiThread()
     {
         m_Context = new QOpenGLContext();
         //m_Surface = new QOffscreenSurface();

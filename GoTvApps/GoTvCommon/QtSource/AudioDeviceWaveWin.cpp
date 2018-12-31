@@ -9,6 +9,7 @@
  */
 
 #include <config_gotvapps.h>
+#ifdef TARGET_OS_WINDOWS
 
 #include <GoTvCore/GoTvP2P/EchoCancel/audio_device_config.h>
 #include "AudioDeviceWaveWin.h"
@@ -3717,3 +3718,5 @@ bool AudioDeviceWindowsWave::KeyPressed() const{
   return (key_down > 0);
 }
 }  // namespace webrtc
+
+#endif // TARGET_OS_WINDOWS

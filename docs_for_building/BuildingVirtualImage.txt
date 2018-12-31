@@ -88,7 +88,8 @@ After many tries the only way I could get android studio installed correctly was
 2.) sudo apt-get install qtdeclarative5-dev
 3.) sudo apt-get install qtmultimedia5-dev
 4.) sudo apt-get install libqt5svg5-dev
-5.) sudo apt-get install g++
+5.) sudo apt-get install libqt5opengl5-dev
+6.) sudo apt-get install g++
 
 
 ==== install python 2.7 ======

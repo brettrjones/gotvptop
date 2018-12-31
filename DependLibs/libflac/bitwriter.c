@@ -30,14 +30,14 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <libfaac/config_libfaac.h>
+#include <libflac/config_libflac.h>
 
 #include <stdlib.h>
 #include <string.h>
 #include "private/bitwriter.h"
 #include "private/crc.h"
 #include "private/macros.h"
-#include "FLAC/assert.h"
+
 #include "share/alloc.h"
 #include "share/compat.h"
 #include "share/endswap.h"

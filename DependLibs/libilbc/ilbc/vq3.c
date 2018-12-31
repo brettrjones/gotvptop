@@ -17,7 +17,7 @@
 ******************************************************************/
 
 #include "vq3.h"
-#include "constants.h"
+#include "libilbc/ilbc/constants.h"
 
 /*----------------------------------------------------------------*
  *  vector quantization

@@ -44,17 +44,17 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "gain_q.h"
-#include "typedef.h"
-#include "basic_op.h"
-#include "qua_gain.h"
-#include "cnst.h"
-#include "mode.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/qua_gain.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/mode.h"
 #include "g_code.h"
 #include "q_gain_c.h"
 #include "calc_en.h"
 #include "qgain795.h"
 #include "qgain475.h"
-#include "set_zero.h"
+#include "amrnb/common/set_zero.h"
 #include "oscl_mem.h"
 
 

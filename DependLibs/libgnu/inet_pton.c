@@ -29,7 +29,7 @@
 #include <sys/socket.h>		/* needed to define AF_ values on UNIX */
 #endif
 
-#ifdef HAVE_WINSOCK2_H
+#if HAVE_WINSOCK2_H
 #include <winsock2.h>	/* needed to define AF_ values on Windows */
 #if _MSC_VER < 1600	/* errno.h defines EAFNOSUPPORT in Windows VC10 (and presumably eventually in VC11 ...) */
 #define EAFNOSUPPORT    WSAEAFNOSUPPORT

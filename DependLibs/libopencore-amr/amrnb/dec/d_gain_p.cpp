@@ -82,8 +82,8 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "d_gain_p.h"
-#include "typedef.h"
-#include "mode.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/mode.h"
 
 /*--------------------------------------------------------------------------*/
 #ifdef __cplusplus

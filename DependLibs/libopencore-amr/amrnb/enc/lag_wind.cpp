@@ -41,7 +41,7 @@ terms listed above has been obtained from the copyright holder.
 ----------------------------------------------------------------------------*/
 #include "lag_wind.h"
 #include "lag_wind_tab.h"
-#include "basic_op.h"
+#include "amrnb/common/basic_op.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

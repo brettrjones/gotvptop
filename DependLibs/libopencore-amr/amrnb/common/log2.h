@@ -46,9 +46,9 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include    "typedef.h"
+#include    "amrnb/common/typedef.h"
 
-#include    "log2_norm.h"           /* Used by legacy files */
+#include    "amrnb/common/log2_norm.h"           /* Used by legacy files */
 
 /*--------------------------------------------------------------------------*/
 #ifdef __cplusplus

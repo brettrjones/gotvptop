@@ -45,10 +45,10 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "q_gain_p.h"
-#include "typedef.h"
+#include "amrnb/common/typedef.h"
 #include "oper_32b.h"
-#include "cnst.h"
-#include "basic_op.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/basic_op.h"
 
 
 /*--------------------------------------------------------------------------*/

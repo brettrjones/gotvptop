@@ -22,9 +22,9 @@
  * For more information, contact us at license @ x265.com
  *****************************************************************************/
 
-#include "common/common.h"
-#include "common/threadpool.h"
-#include "common/threading.h"
+#include "libx265/common/common.h"
+#include "libx265/common/threadpool.h"
+#include "libx265/common/threading.h"
 
 #include <new>
 

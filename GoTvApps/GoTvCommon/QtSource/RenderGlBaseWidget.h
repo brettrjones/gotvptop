@@ -15,7 +15,7 @@
 
 #include "config_gotvapps.h"
 #include <CoreLib/VxGUID.h>
-#include "RenderGlOffscreenSurface.h"
+#include "RenderGlOffScreenSurface.h"
 
 #include <QOpenGLWidget>
 #include <QtGui/QMatrix4x4>

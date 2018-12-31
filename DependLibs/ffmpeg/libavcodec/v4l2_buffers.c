@@ -29,7 +29,8 @@
 #include <sys/mman.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <poll.h>
+//#include <poll.h>
+#include "libavformat/os_support.h"
 #include "libavcodec/avcodec.h"
 #include "libavcodec/avcodec_internal.h"
 #include "v4l2_context.h"

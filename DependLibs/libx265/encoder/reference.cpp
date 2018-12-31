@@ -23,10 +23,10 @@
  * For more information, contact us at license @ x265.com.
  *****************************************************************************/
 
-#include "common/common.h"
-#include "common/primitives.h"
-#include "common/slice.h"
-#include "common/picyuv.h"
+#include "libx265/common/common.h"
+#include "libx265/common/primitives.h"
+#include "libx265/common/slice.h"
+#include "libx265/common/picyuv.h"
 
 #include "reference.h"
 

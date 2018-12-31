@@ -22,11 +22,11 @@
  * For more information, contact us at license @ x265.com.
  *****************************************************************************/
 
-#include "common/common.h"
-#include "common/frame.h"
-#include "common/framedata.h"
-#include "common/picyuv.h"
-#include "common/slice.h"
+#include "libx265/common/common.h"
+#include "libx265/common/frame.h"
+#include "libx265/common/framedata.h"
+#include "libx265/common/picyuv.h"
+#include "libx265/common/slice.h"
 
 #include "dpb.h"
 

@@ -53,7 +53,7 @@ terms listed above has been obtained from the copyright holder.
  * this is the original code from the ETSI file typedef.h
  */
 
-#if   defined(__unix__) || defined(__unix)
+#if   defined(__unix__) || defined(__unix) || defined(TARGET_OS_LINUX)
 typedef signed char Word8;
 typedef short Word16;
 typedef int Word32;
@@ -67,7 +67,7 @@ typedef int Flag;
 /*
  * use (improved) type definition file typdefs.h
  */
-#include "gsm_amr_typedefs.h"
+#include "amrnb/common/gsm_amr_typedefs.h"
 
 #endif
 

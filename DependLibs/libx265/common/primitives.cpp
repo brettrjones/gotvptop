@@ -21,8 +21,8 @@
  * For more information, contact us at license @ x265.com.
  *****************************************************************************/
 
-#include "common/common.h"
-#include "common/primitives.h"
+#include "libx265/common/common.h"
+#include "libx265/common/primitives.h"
 
 namespace X265_NS {
 // x265 private namespace

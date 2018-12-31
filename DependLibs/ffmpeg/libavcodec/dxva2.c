@@ -21,6 +21,8 @@
  */
 
 #include <ffmpeg/config_ffmpeg.h>
+#if CONFIG_D3D11VA || CONFIG_DXVA2
+
 #include <assert.h>
 #include <string.h>
 #include <initguid.h>
@@ -1086,3 +1088,5 @@ int ff_dxva2_is_d3d11(const AVCodecContext *avctx)
     else
         return 0;
 }
+
+#endif // CONFIG_D3D11VA || CONFIG_DXVA2

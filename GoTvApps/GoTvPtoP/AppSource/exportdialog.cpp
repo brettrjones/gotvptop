@@ -200,10 +200,18 @@ void ExportDialog::browse()
         mimeTypes.append(QLatin1String(mimeType));
     fileDialog.setMimeTypeFilters(mimeTypes);
     const int pngIndex = mimeTypes.indexOf("image/png");
-    if (pngIndex >= 0) {
+    if (pngIndex >= 0)
+    {
         fileDialog.selectMimeTypeFilter(mimeTypes.at(pngIndex));
         fileDialog.setDefaultSuffix("png");
     }
+
     if (fileDialog.exec() == QDialog::Accepted)
-        setExportFileName(fileDialog.selectedFiles().constFirst());
+    {
+        auto strIter = fileDialog.selectedFiles().begin();
+        if( strIter != fileDialog.selectedFiles().end() )
+        {
+            setExportFileName( *strIter );
+        }
+    }
 }

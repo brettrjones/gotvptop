@@ -35,7 +35,7 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "typedef.h"
+#include "amrnb/common/typedef.h"
 
 #include "cor_h_x.h"                /* Used by legacy files */
 #include "cor_h_x2.h"               /* Used by legacy files */

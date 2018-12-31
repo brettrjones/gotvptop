@@ -50,11 +50,11 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include    "c_g_aver.h"
-#include    "typedef.h"
-#include    "mode.h"
-#include    "cnst.h"
+#include    "amrnb/common/typedef.h"
+#include    "amrnb/common/mode.h"
+#include    "amrnb/common/cnst.h"
 
-#include    "basic_op.h"
+#include    "amrnb/common/basic_op.h"
 #include    "oscl_mem.h"
 
 /*----------------------------------------------------------------------------

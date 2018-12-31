@@ -35,12 +35,12 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include    "syn_filt.h"
-#include    "cnst.h"
-#include    "basic_op.h"
+#include    "amrnb/common/syn_filt.h"
+#include    "amrnb/common/cnst.h"
+#include    "amrnb/common/basic_op.h"
 #include    "oscl_mem.h"
 
-#include    "basic_op.h"
+#include    "amrnb/common/basic_op.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

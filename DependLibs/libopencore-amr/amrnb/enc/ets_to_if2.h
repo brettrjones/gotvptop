@@ -51,9 +51,9 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "mode.h"
-#include "typedef.h"
-#include "get_const_tbls.h"
+#include "amrnb/common/mode.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/get_const_tbls.h"
 
 /*--------------------------------------------------------------------------*/
 #ifdef __cplusplus

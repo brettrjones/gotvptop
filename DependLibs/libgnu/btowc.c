@@ -21,11 +21,17 @@
 /* Specification.  */
 #include <wchar_gnu.h>
 
+#if !HAVE_WINT_T && !defined(wint_t)
+# define wint_t int
+# ifndef WEOF
+#  define WEOF -1
+# endif
+#endif // !HAVE_WINT_T && !defined(wint_t)
+
 #include <stdio.h>
 #include <stdlib.h>
 
-wint_t
-btowc (int c)
+wint_t btowc (int c)
 {
   if (c != EOF)
     {

@@ -36,7 +36,7 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include    "gmed_n.h"
-#include    "typedef.h"
+#include    "amrnb/common/typedef.h"
 #include    "oscl_mem.h"
 
 /*----------------------------------------------------------------------------

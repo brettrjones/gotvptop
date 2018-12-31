@@ -52,9 +52,9 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "set_sign.h"
-#include "basic_op.h"
-#include "inv_sqrt.h"
-#include "cnst.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/inv_sqrt.h"
+#include "amrnb/common/cnst.h"
 
 
 /*----------------------------------------------------------------------------

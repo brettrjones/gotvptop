@@ -54,7 +54,7 @@
 #include "libssh/socket.h"
 #include "libssh/buffer.h"
 #include "libssh/session.h"
-#include "libssh/poll.h"
+#include "libssh/poll_ssh.h"
 #include "libssh/pki.h"
 
 /* macro to check for "agent failure" message */

@@ -20,7 +20,7 @@
 #if HAVE_TSEARCH
 
 /* Get tseach(), tfind(), tdelete(), twalk() declarations.  */
-#include  <search.h>
+#include  <search_zvbi.h>
 
 #else
 

@@ -41,7 +41,7 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "s10_8pf.h"
-#include "cnst.h"
+#include "amrnb/common/cnst.h"
 #include "oscl_mem.h"
 
 /*----------------------------------------------------------------------------

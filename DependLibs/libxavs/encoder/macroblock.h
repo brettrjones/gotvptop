@@ -32,7 +32,7 @@
 #ifndef _XAVS_ENC_MACROBLOCK_H_
 #define _XAVS_ENC_MACROBLOCK_H_
 
-#include "common/macroblock.h"
+#include "libxavs/common/macroblock.h"
 
 int xavs_macroblock_probe_skip (xavs_t * h, int b_bidir);
 

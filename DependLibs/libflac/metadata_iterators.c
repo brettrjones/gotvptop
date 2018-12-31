@@ -30,7 +30,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <libfaac/config_libfaac.h>
+#include <libflac/config_libflac.h>
 
 #include <errno.h>
 #include <stdio.h>
@@ -42,7 +42,6 @@
 
 #include "private/metadata.h"
 
-#include "FLAC/assert.h"
 #include "FLAC/stream_decoder.h"
 #include "share/alloc.h"
 #include "share/compat.h"

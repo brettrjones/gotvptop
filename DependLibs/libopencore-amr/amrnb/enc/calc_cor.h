@@ -48,7 +48,7 @@ terms listed above has been obtained from the copyright holder.
 *                         INCLUDE FILES
 ********************************************************************************
 */
-#include "typedef.h"
+#include "amrnb/common/typedef.h"
 
 #ifdef __cplusplus
 extern "C"

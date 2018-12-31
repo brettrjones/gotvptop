@@ -21,7 +21,7 @@
  * For more information, contact us at license @ x265.com
  *****************************************************************************/
 
-#include "common/threading.h"
+#include "libx265/common/threading.h"
 
 #if defined(_WIN32) && (_WIN32_WINNT < 0x0600) // _WIN32_WINNT_VISTA
 

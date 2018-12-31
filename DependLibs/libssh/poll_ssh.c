@@ -32,7 +32,7 @@
 
 #include "libssh/libssh_priv.h"
 #include "libssh/libssh.h"
-#include "libssh/poll.h"
+#include "libssh/poll_ssh.h"
 #include "libssh/socket.h"
 #include "libssh/session.h"
 #include "libssh/misc.h"
@@ -84,7 +84,7 @@ struct ssh_poll_ctx_struct {
 };
 
 #ifdef HAVE_POLL
-#include <poll.h>
+#include <poll_ssh.h>
 
 void ssh_poll_init(void) {
     return;

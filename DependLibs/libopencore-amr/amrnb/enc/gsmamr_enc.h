@@ -48,7 +48,7 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 
-#include "gsm_amr_typedefs.h"
+#include "amrnb/common/gsm_amr_typedefs.h"
 
 /*--------------------------------------------------------------------------*/
 #ifdef __cplusplus

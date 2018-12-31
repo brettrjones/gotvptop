@@ -50,11 +50,11 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "sp_dec.h"
-#include "typedef.h"
-#include "cnst.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/cnst.h"
 #include "dec_amr.h"
 #include "pstfilt.h"
-#include "mode.h"
+#include "amrnb/common/mode.h"
 #include "post_pro.h"
 #include "oscl_mem.h"
 #include "bitno_tab.h"

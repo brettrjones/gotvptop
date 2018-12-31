@@ -49,12 +49,12 @@ terms listed above has been obtained from the copyright holder.
 ; INCLUDES
 ----------------------------------------------------------------------------*/
 #include "qgain475.h"
-#include "typedef.h"
-#include "basic_op.h"
-#include "mode.h"
-#include "cnst.h"
-#include "pow2.h"
-#include "log2.h"
+#include "amrnb/common/typedef.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/mode.h"
+#include "amrnb/common/cnst.h"
+#include "amrnb/common/pow2.h"
+#include "amrnb/common/log2.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

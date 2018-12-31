@@ -97,16 +97,16 @@ terms listed above has been obtained from the copyright holder.
 ----------------------------------------------------------------------------*/
 #include "cbsearch.h"
 
-#include "typedef.h"
+#include "amrnb/common/typedef.h"
 #include "c2_9pf.h"
 #include "c2_11pf.h"
 #include "c3_14pf.h"
 #include "c4_17pf.h"
 #include "c8_31pf.h"
 #include "c1035pf.h"
-#include "mode.h"
-#include "basic_op.h"
-#include "cnst.h"
+#include "amrnb/common/mode.h"
+#include "amrnb/common/basic_op.h"
+#include "amrnb/common/cnst.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS

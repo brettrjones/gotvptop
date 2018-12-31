@@ -22,12 +22,12 @@
  * For more information, contact us at license @ x265.com.
  *****************************************************************************/
 
-#include "common/common.h"
-#include "common/slice.h"
-#include "common/threading.h"
-#include "common/param.h"
-#include "common/cpu.h"
-#include "x265.h"
+#include "libx265/common/common.h"
+#include "libx265/common/slice.h"
+#include "libx265/common/threading.h"
+#include "libx265/common/param.h"
+#include "libx265/common/cpu.h"
+#include "libx265/x265.h"
 
 #if _MSC_VER
 #pragma warning(disable: 4996) // POSIX functions are just fine, thanks

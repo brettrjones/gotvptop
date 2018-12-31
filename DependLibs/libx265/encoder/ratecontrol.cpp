@@ -27,11 +27,11 @@
 #pragma warning(disable: 4127) // conditional expression is constant, yes I know
 #endif
 
-#include "common/common.h"
-#include "common/param.h"
-#include "common/frame.h"
-#include "common/framedata.h"
-#include "common/picyuv.h"
+#include "libx265/common/common.h"
+#include "libx265/common/param.h"
+#include "libx265/common/frame.h"
+#include "libx265/common/framedata.h"
+#include "libx265/common/picyuv.h"
 
 #include "encoder.h"
 #include "slicetype.h"

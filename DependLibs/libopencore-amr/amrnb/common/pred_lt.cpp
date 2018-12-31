@@ -35,8 +35,8 @@ terms listed above has been obtained from the copyright holder.
 /*----------------------------------------------------------------------------
 ; INCLUDES
 ----------------------------------------------------------------------------*/
-#include "pred_lt.h"
-#include "cnst.h"
+#include "amrnb/common/pred_lt.h"
+#include "amrnb/common/cnst.h"
 
 /*----------------------------------------------------------------------------
 ; MACROS
