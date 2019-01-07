@@ -10,6 +10,8 @@
 /*----------------------------------------------------------------------
 |   includes
 +---------------------------------------------------------------------*/
+#include <libUPnP/config_libupnp.h>
+#ifdef TARGET_OS_WINDOWS
 #include "NptLogging.h"
 #include "NptFile.h"
 #include "NptUtils.h"
@@ -413,3 +415,5 @@ NPT_File::ListDir(const char*           path,
 
     return NPT_SUCCESS;
 }
+
+#endif // TARGET_OS_WINDOWS

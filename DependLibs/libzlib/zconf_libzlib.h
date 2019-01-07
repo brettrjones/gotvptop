@@ -320,9 +320,11 @@
 #ifndef ZEXTERN
 #  define ZEXTERN extern
 #endif
+
 #ifndef ZEXPORT
 #  define ZEXPORT
 #endif
+
 #ifndef ZEXPORTVA
 #  define ZEXPORTVA
 #endif

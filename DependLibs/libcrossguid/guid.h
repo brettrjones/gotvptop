@@ -35,6 +35,11 @@ THE SOFTWARE.
 #include <jni.h>
 #endif
 
+#ifdef TARGET_OS_LINUX
+# define GUID_LIBUUID 1
+#endif
+
+
 // Class to represent a GUID/UUID. Each instance acts as a wrapper around a
 // 16 byte value that can be passed around by value. It also supports
 // conversion to string (via the stream operator <<) and conversion from a

@@ -34,7 +34,7 @@
 #include <string.h>
 #include "kazlib/list.h"
 #include "cpluff.h"
-#include "util.h"
+#include "util_cpluff.h"
 #ifdef CP_THREADS
 #include "thread.h"
 #endif

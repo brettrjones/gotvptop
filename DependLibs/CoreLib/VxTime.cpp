@@ -5,6 +5,8 @@
 #include "VxTime.h"
 #include "VxTimeUtil.h"
 
+#include <sys/time.h>
+
 namespace
 {
     // initial variables set at startup to avoid constant recalculation

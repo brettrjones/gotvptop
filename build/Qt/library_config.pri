@@ -1,7 +1,7 @@
 
-CONFIG += staticlib qt thread silent
+DEFINES += LIB_STATIC _LIB
 
-DEFINES += LIB_STATIC HAVE_CONFIG_H
+CONFIG += staticlib qt thread silent
 
 TARGET_LIB_APPEND = .lib
 

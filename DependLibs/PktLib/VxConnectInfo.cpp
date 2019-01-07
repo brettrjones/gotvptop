@@ -21,15 +21,6 @@
 
 #include <memory.h>
 
-#ifdef TARGET_OS_LINUX
-# include <sys/types.h>
-# include <netinet/in.h>
-# include <inttypes.h>
-
-# define ntohll be64toh
-# define htonll htobe64
-#endif // TARGET_OS_LINUX
-
 namespace
 {
     const unsigned int MIN_INTERVAL_CONNECT_REQUEST_MS				= (5 * 60000);

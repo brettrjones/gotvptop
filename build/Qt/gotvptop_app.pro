@@ -3,7 +3,7 @@ TEMPLATE = app
 TARGET = gotvptop
 TARGET_NAME = gotvptop
 
-QT += gui core concurrent widgets network multimedia opengl xml svg
+QT += gui core concurrent widgets network multimedia opengl xml svg quickwidgets
 
 
 CONFIG += qt thread silent
@@ -37,6 +37,7 @@ DESTDIR = ./../../bin/
 LIBS += -L./../../lib
 
 OBJECTS_DIR = ./.obj
+
 MOC_DIR = ./.moc
 RCC_DIR = ./.qrc
 UI_DIR = ./.ui
@@ -47,6 +48,12 @@ QMAKE_CXXFLAGS_RTTI_OFF = -fno-rtti
 QMAKE_CXXFLAGS_EXCEPTIONS_OFF = -fno-exceptions
 QMAKE_CXXFLAGS += -Wno-unused -Wno-parentheses -Wno-attributes  -Wno-ignored-qualifiers
 
+include(version.pri)
+include(os_detect.pri)
+include(compile_config.pri)
+
+#so use our static linked version of freetype
+INCLUDEPATH += ./../../DependLibs/libfreetype/include
 
 INCLUDEPATH += ./../../
 INCLUDEPATH += ./../../GoTvApps/GoTvCommon
@@ -55,13 +62,8 @@ INCLUDEPATH += ./../../DependLibs
 INCLUDEPATH += ./../../DependLibs/libcurl/include
 INCLUDEPATH += ./../../DependLibs/libcurl/lib
 INCLUDEPATH += ./../../DependLibs/ffmpeg
-INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o
-INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o/inc32
 INCLUDEPATH += ./../../GoTvCore/xbmc/xbmc
 
-include(version.pri)
-include(os_detect.pri)
-include(compile_config.pri)
 
 include(../../GoTvApps/GoTvPtoP/build/Qt/GoTvPtoP.pri)
 
@@ -71,29 +73,59 @@ include(../../GoTvApps/GoTvPtoP/build/Qt/GoTvPtoP.pri)
 #link dependent library
 #LIBS += -lcorelibLinuxD
 
+#QMAKE_LFLAGS += -static
 unix{
+#NOTE: link order is important.. otherwise you will get link errors like libvorbisenc.so.2: error adding symbols: DSO missing from command line
 
     CONFIG(debug, debug|release){
-        LIBS += -larmrwbencLinuxD
-        LIBS += -ldependsLinuxD
-        LIBS += -lfdk-aacLinuxD
-        LIBS += -lffmpegLinuxD
-        LIBS += -lgnuLinuxD
         LIBS += -lkodiLinuxD
-        LIBS += -lopencore-amrLinuxD
+        LIBS += -lffmpegavcodecLinuxD
+        LIBS += -lffmpegavdeviceLinuxD
+        LIBS += -lffmpegavfilterLinuxD
+        LIBS += -lffmpegavformatLinuxD
+        LIBS += -lffmpegavresampleLinuxD
+        LIBS += -lffmpegavutilLinuxD
+        LIBS += -lffmpegpostprocLinuxD
+        LIBS += -lffmpegswresampleLinuxD
+        LIBS += -lffmpegswscaleLinuxD
         LIBS += -lpcreLinuxD
-        LIBS += -lptopengineLinuxD
-        LIBS += -lsshLinuxD
-        LIBS += -lvorbisLinuxD
+        LIBS += -larmrwbencLinuxD
+        LIBS += -lfdk-aacLinuxD
+        LIBS += -lopencore-amrLinuxD
         LIBS += -lvpxLinuxD
         LIBS += -lx264LinuxD
 #        LIBS += -lx265LinuxD
+        LIBS += -lvorbisLinuxD
+        LIBS += -loggLinuxD
+        LIBS += -lopusLinuxD
+        LIBS += -lspeexLinuxD
+        LIBS += -lptopengineLinuxD
+        LIBS += -lmediatoolsLinuxD
+        LIBS += -llameLinuxD
+        LIBS += -lmicrohttpdLinuxD
+        LIBS += -lgnuLinuxD
+        LIBS += -ldependsLinuxD
+        LIBS += -lcurlLinuxD
+        LIBS += -lsshLinuxD
+        LIBS += -lsslLinuxD
+        LIBS += -liconvLinuxD
+        LIBS += -lfreetypeLinuxD
+        LIBS += -lpngLinuxD
+        LIBS += -ltinyxmlLinuxD
+        LIBS += -lxml2LinuxD
+        LIBS += -lcompressLinuxD
+        LIBS += -lcorelibLinuxD
+        LIBS += -lcrossguidLinuxD
+        LIBS += -lbz2LinuxD
+        LIBS += -lzlibLinuxD
     }
 
     CONFIG(release, debug|release){
-        LIBS += -L./../lib/gnuLinux.a
+#        LIBS += -L./../lib/gnuLinux.a
     }
 
-     LIBS += -ldl
+    LIBS += -ldl -lGLU -lGL -lm -luuid -lrt -lpthread -lpython2.7
+
+
 }
 

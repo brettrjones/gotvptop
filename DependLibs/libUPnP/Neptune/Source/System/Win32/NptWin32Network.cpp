@@ -12,7 +12,7 @@
 +---------------------------------------------------------------------*/
 
 #include <libUPnP/config_libupnp.h>
-
+#ifdef TARGET_OS_WINDOWS
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
@@ -327,3 +327,5 @@ NPT_NetworkInterface::GetNetworkInterfaces(NPT_List<NPT_NetworkInterface*>&)
     return NPT_SUCCESS;
 }
 #endif
+
+#endif // TARGET_OS_WINDOWS

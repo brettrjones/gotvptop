@@ -34,7 +34,7 @@
 #ifndef MATHOPS_H
 #define MATHOPS_H
 
-#include "arch.h"
+#include "arch_celt.h"
 #include "entcode.h"
 #include "os_support.h"
 

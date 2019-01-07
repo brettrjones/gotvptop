@@ -10,7 +10,7 @@
 #  define OPENSSL_SYS_UNIX
 #endif // TARGET_OS_WINDOWS
 
-#ifdef ARCH_32_BITS
+#if ARCH_32_BITS
 # define THIRTY_TWO_BIT
 # define THIRTY_TWO_BIT_LONG
 #else

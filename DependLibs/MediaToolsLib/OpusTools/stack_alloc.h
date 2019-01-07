@@ -85,7 +85,7 @@
  * @param type Type of element
  */
 
-#include <libopus/config_libopus.h>
+#include <MediaToolsLib/include/opus_config.h>
 
 #ifdef ENABLE_VALGRIND
 

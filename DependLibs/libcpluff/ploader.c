@@ -35,7 +35,7 @@
 #include <libexpat/lib/expat.h>
 #include "cpluff.h"
 #include "defines.h"
-#include "util.h"
+#include "util_cpluff.h"
 #include "internal.h"
 
 // Use XMLCALL if available

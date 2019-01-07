@@ -42,8 +42,8 @@
 #include <fnmatch.h>
 #include "gettext.h"
 #include "hash.h"
-#include <libxml/parser.h>
-#include <libxml/uri.h>
+#include <libxml2/parser.h>
+#include <libxml2/uri.h>
 #include "xalloc.h"
 
 #define _(str) gettext (str)

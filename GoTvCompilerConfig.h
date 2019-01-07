@@ -26,7 +26,7 @@
 # endif // _MSC_VER
 #else
 // not windows
-# define PRIdS      "d"
+# define PRIdS      "zd"
 # define PRIuS      "u"
 # ifndef PRId64
 #  define PRId64    "lld"
@@ -47,7 +47,7 @@
 #elif defined(__GNUC__) && (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 3))
 # define  GOTV_EXPORT
 # define  GOTV_IMPORT extern
-# define  GOTV_HIDDEN __attribute__ ((visibility ("hidden")))
+# define  GOTV_HIDDEN //__attribute__ ((visibility ("hidden")))
 #else
 # define  GOTV_EXPORT
 # define  GOTV_IMPORT extern
@@ -254,7 +254,7 @@ n = 1 stands for the first argument, n = 2 for the second argument etc.  */
 # define EXEEXT			".exe"
 #else
 # define SYSTEM_URL     "system:"
-# define MAXPATHLEN		MAX_PATH
+# define MAXPATHLEN		PATH_MAX // path max is defined in limits.h
 # define LINE_ENDING	"\n"
 # define EXEEXT			""
 #endif // TARGET_OS_WINDOWS
@@ -647,6 +647,15 @@ typedef unsigned int		UINT;
 #ifndef NULL
 # define NULL 0
 #endif // NULL
+
+#ifdef TARGET_OS_LINUX
+# include <sys/types.h>
+# include <netinet/in.h>
+# include <inttypes.h>
+
+# define ntohll be64toh
+# define htonll htobe64
+#endif // TARGET_OS_LINUX
 
 #ifndef SOCKET
 typedef int SOCKET;
@@ -1641,7 +1650,7 @@ typedef int64_t              time64_t;
 #ifdef _MSC_VER
 # define HAVE_USELOCALE				0
 #else
-# define HAVE_USELOCALE				1
+# define HAVE_USELOCALE				0
 #endif // _MSC_VER
 
 /* Define to 1 or 0, depending whether the compiler supports simple visibility declarations. */

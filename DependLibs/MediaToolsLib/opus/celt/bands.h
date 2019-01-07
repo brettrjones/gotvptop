@@ -30,7 +30,7 @@
 #ifndef BANDS_H
 #define BANDS_H
 
-#include "arch.h"
+#include "arch_celt.h"
 #include "modes.h"
 #include "entenc.h"
 #include "entdec.h"

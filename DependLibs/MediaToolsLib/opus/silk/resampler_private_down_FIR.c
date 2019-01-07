@@ -30,7 +30,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include "SigProc_FIX.h"
 #include "resampler_private.h"
-#include "stack_alloc.h"
+#include "opus/celt/stack_alloc.h"
 
 static OPUS_INLINE opus_int16 *silk_resampler_private_down_FIR_INTERPOL(
     opus_int16          *out,

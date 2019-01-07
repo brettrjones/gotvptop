@@ -26,7 +26,6 @@ ActivityViewVideoFile::ActivityViewVideoFile(	AppCommon&			app,
 												QWidget *			parent )
 : ActivityBase( OBJNAME_ACTIVITY_VIEW_VIDEO_FILE, app, parent, eAppletMessenger, Qt::SubWindow )
 , m_HisIdent( &app.getEngine().getMyPktAnnounce() )
-, m_bIsMyself( true )
 {
 	ui.setupUi( this );
 	slotRepositionToParent();

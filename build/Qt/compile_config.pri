@@ -1,7 +1,42 @@
 
+#even if not building lib these need defined so included headers are defined correctly
+DEFINES += LIB_STATIC HAVE_CONFIG_H
 
-#QT       += core gui
-#greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+DEFINES += FT_DEBUG_LEVEL_ERROR FT_DEBUG_LEVEL_TRACE FT2_BUILD_LIBRARY FT_MAKE_OPTION_SINGLE_OBJECT
+
+DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MULTIMEDIA_LIB
+
+
+win32{
+    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o
+    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o/inc32
+}
+
+android{
+    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p
+    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p/include
+}
+
+unix{
+    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p
+    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p/include
+}
+
+macx{
+    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p
+    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p/include
+}
+
+QMAKE_EXTRA_COMPILERS += yasm
+NASMEXTRAFLAGS = -f elf64 -g -F dwarf
+OTHER_FILES += $$NASM_SOURCES
+nasm.output = ${QMAKE_FILE_BASE}.o
+nasm.commands = yasm $$NASMEXTRAFLAGS -o ${QMAKE_FILE_BASE}.o ${QMAKE_FILE_NAME}
+nasm.input = NASM_SOURCES
+
+
+
+
 
 unix:QMAKE_CXXFLAGS += -std=c++11
 unix:QMAKE_CXXFLAGS += -fpermissive
@@ -51,3 +86,5 @@ CONFIG(debug, debug|release){
     win32: message(Enabling WIN32 debug output.)
     android: message(Enabling ANDROID debug output.)
 }
+
+

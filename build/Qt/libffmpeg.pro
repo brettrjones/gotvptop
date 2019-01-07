@@ -19,7 +19,7 @@ INCLUDEPATH += ./../../DependLibs/ffmpeg
 INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o
 INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o/inc32
 INCLUDEPATH += ./../../GoTvCore
-INCLUDEPATH += ./../../GoTvCore/xbmc
+
 
 
 include(version.pri)

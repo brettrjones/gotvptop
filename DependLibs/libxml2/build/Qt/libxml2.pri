@@ -12,7 +12,6 @@ HEADERS += 	$$PWD/../../DOCBparser.h \
 	$$PWD/../../c14n.h \
 	$$PWD/../../catalog.h \
 	$$PWD/../../chvalid.h \
-	$$PWD/../../config.h \
 	$$PWD/../../debugXML.h \
 	$$PWD/../../dict.h \
 	$$PWD/../../elfgcchack.h \

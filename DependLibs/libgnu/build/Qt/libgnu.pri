@@ -232,7 +232,6 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../iconv_open-solaris.h \
 	$$PWD/../../iconveh.h \
 	$$PWD/../../init_gnu.h \
-	$$PWD/../../int.h \
 	$$PWD/../../intprops.h \
 	$$PWD/../../its.h \
 	$$PWD/../../javacomp.h \
@@ -621,9 +620,10 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../xgettext.h \
 	$$PWD/../../xmalloca.h \
 	$$PWD/../../xreadlink.h \
-	$$PWD/../../xsize.h \
+    $$PWD/../../xsize_gnu.h \
 	$$PWD/../../xstriconv.h \
-	$$PWD/../../xvasprintf.h
+	$$PWD/../../xvasprintf.h \
+    $$PWD/../../int_gnu.h
 
 SOURCES += 	$$PWD/../../accelerated/accelerated.c \
 	$$PWD/../../accelerated/cryptodev-gcm.c \
@@ -943,6 +943,7 @@ SOURCES += 	$$PWD/../../accelerated/accelerated.c \
 	$$PWD/../../inet_ntop.c \
 	$$PWD/../../inet_pton.c \
 	$$PWD/../../init_gnu.c \
+    $$PWD/../../int_gnu.c \
 	$$PWD/../../intl-compat.c \
 	$$PWD/../../intl-exports.c \
 	$$PWD/../../iswblank.c \
@@ -1376,7 +1377,6 @@ SOURCES += 	$$PWD/../../accelerated/accelerated.c \
 	$$PWD/../../openpgp/pgp.c \
 	$$PWD/../../openpgp/pgpverify.c \
 	$$PWD/../../openpgp/privkey_pgp.c \
-	$$PWD/../../os2compat.c \
 	$$PWD/../../osdep.c \
 	$$PWD/../../ostream.c \
 	$$PWD/../../ostream.oo.c \
@@ -1577,8 +1577,9 @@ SOURCES += 	$$PWD/../../accelerated/accelerated.c \
 	$$PWD/../../xmalloc.c \
 	$$PWD/../../xmalloca.c \
 	$$PWD/../../xreadlink.c \
-	$$PWD/../../xsize.c \
+    $$PWD/../../xsize_gnu.c \
 	$$PWD/../../xstrdup.c \
 	$$PWD/../../xstriconv.c \
-	$$PWD/../../xvasprintf.c
+	$$PWD/../../xvasprintf.c \
+    $$PWD/../../os2compat2.c
 

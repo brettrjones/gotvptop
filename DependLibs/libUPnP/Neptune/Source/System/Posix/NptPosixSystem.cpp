@@ -10,6 +10,8 @@
 /*----------------------------------------------------------------------
 |       includes
 +---------------------------------------------------------------------*/
+#include <libUPnP/config_libupnp.h>
+#ifndef TARGET_OS_WINDOWS
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -199,3 +201,6 @@ NPT_System::GetRandomInteger()
 
     return rand();
 }
+
+#endif // TARGET_OS_WINDOWS
+

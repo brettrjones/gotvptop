@@ -89,13 +89,13 @@ MainWindow::MainWindow()
     m_backgroundAction->setEnabled(false);
     m_backgroundAction->setCheckable(true);
     m_backgroundAction->setChecked(false);
-    connect(m_backgroundAction, &QAction::toggled, m_view, &SvgView::setViewBackground);
+//    connect(m_backgroundAction, &QAction::toggled, m_view, &SvgView::setViewBackground);
 
     m_outlineAction = viewMenu->addAction(tr("&Outline"));
     m_outlineAction->setEnabled(false);
     m_outlineAction->setCheckable(true);
     m_outlineAction->setChecked(true);
-    connect(m_outlineAction, &QAction::toggled, m_view, &SvgView::setViewOutline);
+//    connect(m_outlineAction, &QAction::toggled, m_view, &SvgView::setViewOutline);
 
     QMenu *rendererMenu = menuBar()->addMenu(tr("&Renderer"));
     m_nativeAction = rendererMenu->addAction(tr("&Native"));
@@ -105,18 +105,18 @@ MainWindow::MainWindow()
 #ifndef QT_NO_OPENGL
     m_glAction = rendererMenu->addAction(tr("&OpenGL"));
     m_glAction->setCheckable(true);
-    m_glAction->setData(int(SvgView::OpenGL));
+//    m_glAction->setData(int(SvgView::OpenGL));
 #endif
     m_imageAction = rendererMenu->addAction(tr("&Image"));
     m_imageAction->setCheckable(true);
-    m_imageAction->setData(int(SvgView::Image));
+//    m_imageAction->setData(int(SvgView::Image));
 
     rendererMenu->addSeparator();
     m_highQualityAntialiasingAction = rendererMenu->addAction(tr("&High Quality Antialiasing"));
     m_highQualityAntialiasingAction->setEnabled(false);
     m_highQualityAntialiasingAction->setCheckable(true);
     m_highQualityAntialiasingAction->setChecked(false);
-    connect(m_highQualityAntialiasingAction, &QAction::toggled, m_view, &SvgView::setHighQualityAntialiasing);
+//    connect(m_highQualityAntialiasingAction, &QAction::toggled, m_view, &SvgView::setHighQualityAntialiasing);
 #ifdef QT_NO_OPENGL
     m_highQualityAntialiasingAction->setVisible(false);
 #endif
@@ -154,6 +154,7 @@ void MainWindow::openFile()
 
 bool MainWindow::loadFile(const QString &fileName)
 {
+#if 0
     if (!QFileInfo::exists(fileName) || !m_view->openFile(fileName)) {
         QMessageBox::critical(this, tr("Open SVG File"),
                               tr("Could not open file '%1'.").arg(QDir::toNativeSeparators(fileName)));
@@ -174,7 +175,7 @@ bool MainWindow::loadFile(const QString &fileName)
 
     const QSize availableSize = QApplication::desktop()->availableGeometry(this).size();
     resize(m_view->sizeHint().expandedTo(availableSize / 4) + QSize(80, 80 + menuBar()->height()));
-
+#endif // 0
     return true;
 }
 

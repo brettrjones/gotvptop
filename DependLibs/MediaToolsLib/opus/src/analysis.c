@@ -30,12 +30,12 @@
 #include "kiss_fft.h"
 #include "celt.h"
 #include "modes.h"
-#include "arch.h"
+#include "opus/celt/arch_celt.h"
 #include "quant_bands.h"
 #include <stdio.h>
 #include "analysis.h"
 #include "mlp.h"
-#include "stack_alloc.h"
+#include "opus/celt/stack_alloc.h"
 
 extern const MLP net;
 

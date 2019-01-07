@@ -39,7 +39,6 @@
 	typedef unsigned char*	gpointer;
 	typedef  int			gint;
 #else
-	typedef unsigned int 	size_t;
 	typedef long			gint32;
 	typedef unsigned long	guint32;
 	typedef long long		guint64;

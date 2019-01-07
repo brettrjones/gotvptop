@@ -27,11 +27,11 @@
 #include "gettext.h"
 #include "hash.h"
 #include <stdint.h>
-#include <libxml/tree.h>
-#include <libxml/parser.h>
-#include <libxml/xmlwriter.h>
-#include <libxml/xpath.h>
-#include <libxml/xpathInternals.h>
+#include <libxml2/tree.h>
+#include <libxml2/parser.h>
+#include <libxml2/xmlwriter.h>
+#include <libxml2/xpath.h>
+#include <libxml2/xpathInternals.h>
 #include <stdlib.h>
 #include "trim.h"
 #include "xalloc.h"

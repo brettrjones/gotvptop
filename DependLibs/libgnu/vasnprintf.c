@@ -46,7 +46,7 @@
 /* Tell glibc's <stdio.h> to provide a prototype for snprintf().
    This must come before <config_libgnu.h> because <config_libgnu.h> may include
    <features.h>, and once <features.h> has been included, it's too late.  */
-# include <config_libgnu.h>
+# include <libgnu/config_libgnu.h>
 #undef HAVE_WCRTOMB
 
 #ifndef _GNU_SOURCE
@@ -68,6 +68,10 @@
 # endif
 #endif
 
+# include <libgnu/iconveh.h>
+# include <libgnu/xsize_gnu.h>
+# include <libgnu/localcharset.h>
+
 #include  <locale.h>     /* localeconv() */
 #include  <stdio.h>      /* snprintf(), sprintf() */
 #include  <stdlib.h>     /* abort(), malloc(), realloc(), free() */
@@ -87,7 +91,7 @@
 #endif
 
 /* Checked size_t computations.  */
-#include  "xsize.h"
+#include  "xsize_gnu.h"
 
 #include  "verify.h"
 

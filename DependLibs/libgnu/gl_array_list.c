@@ -25,7 +25,7 @@
 #include <string.h>
 
 /* Checked size_t computations.  */
-#include "xsize.h"
+#include "xsize_gnu.h"
 
 #ifndef uintptr_t
 # define uintptr_t unsigned long

@@ -244,7 +244,7 @@ static int transient_analysis( const opus_val32 * OPUS_RESTRICT in, int len, int
 			4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  3,  3,
 			3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  2,
 	};
-	SAVE_STACK;
+    SAVE_STACK;
 	ALLOC( tmp, len, opus_val16 );
 
 	len2 = len / 2;
@@ -563,7 +563,7 @@ static int tf_analysis( const CELTMode *m, int len, int isTransient,
 	int tf_select = 0;
 	opus_val16 bias;
 
-	SAVE_STACK;
+    SAVE_STACK;
 	bias = MULT16_16_Q14( QCONST16( .04f, 15 ), MAX16( -QCONST16( .25f, 14 ), QCONST16( .5f, 14 ) - tf_estimate ) );
 	/*printf("%f ", bias);*/
 
@@ -899,7 +899,7 @@ static opus_val16 dynalloc_analysis( const opus_val16 *bandLogE, const opus_val1
 	opus_val16 maxDepth;
 	VARDECL( opus_val16, follower );
 	VARDECL( opus_val16, noise_floor );
-	SAVE_STACK;
+    SAVE_STACK;
 	ALLOC( follower, C*nbEBands, opus_val16 );
 	ALLOC( noise_floor, C*nbEBands, opus_val16 );
 	for( i = 0; i < nbEBands; i++ )
@@ -1023,7 +1023,7 @@ static int run_prefilter( CELTEncoder *st, celt_sig *in, celt_sig *prefilter_mem
 	opus_val16 pf_threshold;
 	int pf_on;
 	int qg;
-	SAVE_STACK;
+    SAVE_STACK;
 
 	mode = st->mode;
 	ALLOC( _pre, CC*( N + COMBFILTER_MAXPERIOD ), celt_sig );

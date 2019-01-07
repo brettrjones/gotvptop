@@ -38,35 +38,20 @@ FriendListWidget::FriendListWidget( QWidget * parent )
 	connect( this, SIGNAL(signalRefreshFriendList(EFriendViewType)), 
              this, SLOT(slotRefreshFriendList(EFriendViewType)), Qt::QueuedConnection );
 
-	if( false == connect( this, SIGNAL(itemClicked(QListWidgetItem *)), 
-                          this, SLOT(slotItemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "FriendListWidget could not connect to slotItemClicked\n");
-	}
+    connect( this, SIGNAL(itemClicked(QListWidgetItem *)),
+                          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
 
-	if( false == connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)), 
-                          this, SLOT(slotItemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "FriendListWidget could not connect to slotItemClicked\n");
-	}
+    connect( this, SIGNAL(itemDoubleClicked(QListWidgetItem *)),
+                          this, SLOT(slotItemClicked(QListWidgetItem *))) ;
 
-	if( false == connect( this, SIGNAL(signalUpdateFriend( VxNetIdent *,bool)), 
-                          this, SLOT(slotUpdateFriend( VxNetIdent *,bool))), Qt::QueuedConnection )
-	{
-		LogMsg( LOG_INFO, "FriendListWidget could not connect to slotUpdateFriend\n");
-	}
+    connect( this, SIGNAL(signalUpdateFriend( VxNetIdent *,bool)),
+                          this, SLOT(slotUpdateFriend( VxNetIdent *,bool)), Qt::QueuedConnection );
 
-	if( false == connect( &m_MyApp, SIGNAL(signalRefreshFriend(VxGuidQt)), 
-                          this, SLOT(slotRefreshFriend(VxGuidQt))), Qt::QueuedConnection )
-	{
-		LogMsg( LOG_INFO, "FriendListWidget could not connect to slotRefreshFriend\n");
-	}
-
-	if( false == connect( &m_MyApp, SIGNAL(signalAssetViewMsgAction(EAssetAction,VxGuidQt,int)), 
-                          this, SLOT(slotAssetViewMsgAction(EAssetAction,VxGuidQt,int))), Qt::QueuedConnection )
-	{
-		LogMsg( LOG_INFO, "FriendListWidget could not connect to slotAssetViewMsgAction\n");
-	}
+    connect( &m_MyApp, SIGNAL(signalRefreshFriend(VxGuidQt)),
+                          this, SLOT(slotRefreshFriend(VxGuidQt)), Qt::QueuedConnection )
+            ;
+    connect( &m_MyApp, SIGNAL(signalAssetViewMsgAction(EAssetAction,VxGuidQt,int)),
+                          this, SLOT(slotAssetViewMsgAction(EAssetAction,VxGuidQt,int)), Qt::QueuedConnection );
 }
 
 //============================================================================
@@ -224,10 +209,7 @@ void FriendListWidget::slotFriendMenuButtonClicked( ListEntryWidget* item )
 		emit signalFriendClicked( m_SelectedFriend );
 
 		PopupMenu oPopupMenu( m_MyApp, (QWidget *)this->parent() );
-		if( false == connect( &oPopupMenu, SIGNAL(menuItemClicked(int, QWidget *)), &oPopupMenu, SLOT(onFriendActionSelected(int, QWidget *)) ) )
-		{
-			LogMsg( LOG_ERROR, "FriendListWidget::findListEntryWidget failed connect\n" );
-		}
+        connect( &oPopupMenu, SIGNAL(menuItemClicked(int, QWidget *)), &oPopupMenu, SLOT(onFriendActionSelected(int, QWidget *)) );
 
 		oPopupMenu.showFriendMenu( m_SelectedFriend );
 	}
@@ -372,15 +354,9 @@ ListEntryWidget * FriendListWidget::friendToWidget( VxNetIdent * poFriend )
 	ListEntryWidget * item = new ListEntryWidget( this );
     item->setData( Qt::UserRole + 1, QVariant((quint64)(item->getSubWidget())) );
     item->setData( Qt::UserRole + 2, QVariant((quint64)(poFriend)) );
-	if( false == connect( item, SIGNAL(listButtonClicked(ListEntryWidget*)), this, SLOT(slotFriendListItemClicked(ListEntryWidget*))) )
-	{
-		LogMsg( LOG_ERROR, "AppCommon::friendToWidget: connect failed\n");
-	}
+    connect( item, SIGNAL(listButtonClicked(ListEntryWidget*)), this, SLOT(slotFriendListItemClicked(ListEntryWidget*)));
 
-	if( false == connect( item, SIGNAL(signalMenuButtonClicked(ListEntryWidget*)), this, SLOT(slotFriendMenuButtonClicked(ListEntryWidget*))) )
-	{
-		LogMsg( LOG_ERROR, "AppCommon::friendToWidget: connect failed\n");
-	}
+    connect( item, SIGNAL(signalMenuButtonClicked(ListEntryWidget*)), this, SLOT(slotFriendMenuButtonClicked(ListEntryWidget*)));
 
 	return item;
 }

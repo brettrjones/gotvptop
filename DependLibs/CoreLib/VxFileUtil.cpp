@@ -20,7 +20,7 @@
 #include "VxFileIsTypeFunctions.h"
 #include "VxParse.h"
 #include "VxDebug.h"
-#include <NetLib/VxUrl.h>
+#include "VxUrl.h"
 
 #include "SHA1.h"
 

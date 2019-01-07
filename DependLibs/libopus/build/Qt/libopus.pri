@@ -83,7 +83,11 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../silk/mips/macros_mipsr1.h \
 	$$PWD/../../silk/mips/sigproc_fix_mipsr1.h \
 	$$PWD/../../silk/x86/SigProc_FIX_sse.h \
-	$$PWD/../../silk/x86/main_sse.h
+	$$PWD/../../silk/x86/main_sse.h \
+    $$PWD/../../celt/x86/celt_lpc_sse.h \
+    $$PWD/../../celt/x86/pitch_sse.h \
+    $$PWD/../../celt/x86/x86cpu.c.autosave \
+    $$PWD/../../celt/x86/x86cpu.h
 
 SOURCES += 	$$PWD/../../celt/arm/arm_celt_map.c \
 	$$PWD/../../celt/arm/armcpu.c \
@@ -158,5 +162,17 @@ SOURCES += 	$$PWD/../../celt/arm/arm_celt_map.c \
 	$$PWD/../../silk/x86/NSQ_sse.c \
 	$$PWD/../../silk/x86/VAD_sse.c \
 	$$PWD/../../silk/x86/VQ_WMat_EC_sse.c \
-	$$PWD/../../silk/x86/x86_silk_map.c
+	$$PWD/../../silk/x86/x86_silk_map.c \
+    $$PWD/../../celt/x86/celt_lpc_sse.c \
+    $$PWD/../../celt/x86/pitch_sse.c \
+    $$PWD/../../celt/x86/pitch_sse2.c \
+    $$PWD/../../celt/x86/pitch_sse4_1.c \
+    $$PWD/../../celt/x86/x86_celt_map.c \
+    $$PWD/../../celt/x86/x86cpu.c
+
+DISTFILES += \
+    $$PWD/../../celt/arm/arm2gnu.pl \
+    $$PWD/../../celt/arm/armopts.s.in \
+    $$PWD/../../celt/arm/celt_pitch_xcorr_arm.s \
+    $$PWD/../../celt/arm/celt_pitch_xcorr_arm-gnu.S
 

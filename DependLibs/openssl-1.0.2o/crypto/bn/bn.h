@@ -178,7 +178,7 @@ extern "C" {
  * assuming long is 64bit - this is the DEC Alpha unsigned long long is only
  * 64 bits :-(, don't define BN_LLONG for the DEC Alpha
  */
-# ifdef SIXTY_FOUR_BIT_LONG
+# if defined(SIXTY_FOUR_BIT_LONG ) && !defined(BN_ULONG)
 #  define BN_ULLONG       unsigned long long
 #  define BN_ULONG        unsigned long
 #  define BN_LONG         long
@@ -206,7 +206,7 @@ extern "C" {
  * on R4000 and above should use this mode, along with the relevant assembler
  * code :-).  Do NOT define BN_LLONG.
  */
-# ifdef SIXTY_FOUR_BIT
+# if defined( SIXTY_FOUR_BIT ) && !defined( BN_ULONG )
 #  undef BN_LLONG
 #  undef BN_ULLONG
 #  define BN_ULONG        unsigned long long

@@ -19,7 +19,7 @@
  * 02110-1301, USA
  */
 
-#include <int.h>
+#include <int_gnu.h>
 #include "gstr.h"
 
 /* These function are like strcat, strcpy. They only

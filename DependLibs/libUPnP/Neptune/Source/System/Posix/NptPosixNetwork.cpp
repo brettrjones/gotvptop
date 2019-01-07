@@ -10,6 +10,8 @@
 /*----------------------------------------------------------------------
 |       includes
 +---------------------------------------------------------------------*/
+#include <libUPnP/config_libupnp.h>
+#ifndef TARGET_OS_WINDOWS
 #include "NptConfig.h"
 
 #if defined(NPT_CONFIG_HAVE_NETCONFIG_H)
@@ -33,3 +35,6 @@ NPT_NetworkInterface::GetNetworkInterfaces(NPT_List<NPT_NetworkInterface*>& inte
 }
 
 #endif
+
+#endif // TARGET_OS_WINDOWS
+

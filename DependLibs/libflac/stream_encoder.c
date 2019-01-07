@@ -42,7 +42,7 @@
 #include <io.h> /* for _get_osfhandle() */
 #endif
 #include "share/compat.h"
-#include "FLAC/assert.h"
+
 #include "FLAC/stream_decoder.h"
 #include "protected/stream_encoder.h"
 #include "private/bitwriter.h"

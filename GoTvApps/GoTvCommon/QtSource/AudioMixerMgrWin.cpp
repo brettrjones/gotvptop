@@ -8,6 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <config_gotvapps.h>
 #ifdef TARGET_OS_WINDOWS
 
 #include "AudioMixerMgrWin.h"

@@ -461,7 +461,7 @@ FT_BEGIN_HEADER
 
 #if defined( _WIN32 ) && ( defined( _DLL ) || defined( DLL_EXPORT ) )
 #define FT_EXPORT( x )  __declspec( dllexport )  x
-#elif defined( __GNUC__ ) && __GNUC__ >= 4
+#elif defined( __GNUC__ ) && (__GNUC__ >= 4) && !defined(LIB_STATIC)
 #define FT_EXPORT( x )  __attribute__(( visibility( "default" ) ))  x
 #elif defined( __cplusplus )
 #define FT_EXPORT( x )  extern "C"  x
@@ -482,6 +482,18 @@ FT_BEGIN_HEADER
 #endif
 
 #endif /* !FT_EXPORT */
+
+
+#ifndef FT_EXPORT
+
+#ifdef __cplusplus
+#define FT_EXPORT_DEF( x )  extern "C"  x
+#else
+#define FT_EXPORT_DEF( x )  extern  x
+#endif
+
+#endif /* !FT_EXPORT_DEF */
+
 
 
 #ifndef FT_EXPORT_DEF

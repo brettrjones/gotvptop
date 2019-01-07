@@ -40,7 +40,7 @@
 #include "opus_custom.h"
 #include "entenc.h"
 #include "entdec.h"
-#include "arch.h"
+#include "arch_celt.h"
 
 #ifdef __cplusplus
 extern "C" {

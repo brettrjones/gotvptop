@@ -25,7 +25,7 @@
 /* Description: Functions to manage DER decoding     */
 /*****************************************************/
 
-#include <int.h>
+#include <int_gnu.h>
 #include <parser_aux.h>
 #include <gstr.h>
 #include <structure.h>
@@ -648,7 +648,7 @@ _asn1_extract_tag_der (asn1_node node, const unsigned char *der, int der_len,
 	case ASN1_ETYPE_SET_OF:
 	case ASN1_ETYPE_GENERALIZED_TIME:
 	case ASN1_ETYPE_UTC_TIME:
-	  if ((class != _asn1_tags[type].class)
+      if ((class != _asn1_tags[type].classId)
 	      || (tag != _asn1_tags[type].tag))
 	    return ASN1_DER_ERROR;
 	  break;

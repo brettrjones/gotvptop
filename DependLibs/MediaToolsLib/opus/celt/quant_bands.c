@@ -33,7 +33,7 @@
 #include "laplace.h"
 #include <math.h>
 #include "os_support.h"
-#include "arch.h"
+#include "arch_celt.h"
 #include "mathops.h"
 #include "stack_alloc.h"
 #include "rate.h"

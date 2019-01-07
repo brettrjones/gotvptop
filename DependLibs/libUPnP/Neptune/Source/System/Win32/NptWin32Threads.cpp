@@ -12,6 +12,7 @@
 +---------------------------------------------------------------------*/
 
 #include <libUPnP/config_libupnp.h>
+#ifdef TARGET_OS_WINDOWS
 
 #if defined(_XBOX)
 #include <xtl.h>
@@ -706,3 +707,5 @@ NPT_Thread::NPT_Thread(NPT_Runnable& target, bool detached)
 {
     m_Delegate = new NPT_Win32Thread(this, target, detached);
 }
+
+#endif // TARGET_OS_WINDOWS

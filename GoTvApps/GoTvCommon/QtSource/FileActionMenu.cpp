@@ -43,15 +43,8 @@ FileActionMenu::FileActionMenu( AppCommon&	app,
 	ui.setupUi(this);
 	slotRepositionToParent();
 
-	if( false == connect(ui.m_ExitButton, SIGNAL(clicked()), this, SLOT(slotHomeButtonClicked())) )
-	{
-		LogMsg( LOG_INFO, "FileActionMenu could not connect to exitFileActionButton\n");
-	}
-
-	if( false == connect(ui.m_MenuItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(itemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "FileActionMenu could not connect to itemSelectionChanged\n");
-	}
+    connect(ui.m_ExitButton, SIGNAL(clicked()), this, SLOT(slotHomeButtonClicked()));
+    connect(ui.m_MenuItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(itemClicked(QListWidgetItem *)));
 
 	setupFileInfo();
 	setupMenuItems();

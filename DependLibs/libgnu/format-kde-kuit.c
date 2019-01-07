@@ -38,7 +38,7 @@
 #endif
 
 #if FORMAT_KDE_KUIT_USE_LIBXML2
-# include <libxml/parser.h>
+# include <libxml2/parser.h>
 #elif FORMAT_KDE_KUIT_USE_FALLBACK_MARKUP
 # include "markup.h"
 #endif

@@ -8,6 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <config_gotvapps.h>
+#ifdef TARGET_OS_WINDOWS
+
 #pragma comment(lib, "ole32.lib")
 
 #pragma warning(disable: 4995)  // name was marked as #pragma deprecated
@@ -5115,3 +5118,4 @@ bool AudioDeviceWindowsCore::KeyPressed() const{
 
 #endif  // WEBRTC_WINDOWS_CORE_AUDIO_BUILD
 
+#endif // TARGET_OS_WINDOWS

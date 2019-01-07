@@ -17,7 +17,7 @@
 #include "UpnpPortForward.h"
 #include "UpnpTcpSkt.h"
 
-#include <NetLib/VxUrl.h>
+#include <CoreLib/VxUrl.h>
 #include <NetLib/VxParseUrlComponents.h>
 #include <CoreLib/VxFileUtil.h>
 

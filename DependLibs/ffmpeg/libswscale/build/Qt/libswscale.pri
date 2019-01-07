@@ -21,3 +21,12 @@ SOURCES += 	$$PWD/../../alphablend.c \
 	$$PWD/../../vscale.c \
 	$$PWD/../../yuv2rgb.c
 
+DISTFILES += \
+    $$PWD/../../x86/input.asm \
+    $$PWD/../../x86/input_x86.asm \
+    $$PWD/../../x86/output.asm \
+    $$PWD/../../x86/output_x86.asm \
+    $$PWD/../../x86/scale.asm \
+    $$PWD/../../x86/scale_x86.asm \
+    $$PWD/../../x86/Makefile
+

@@ -1,6 +1,6 @@
 
 #pragma once
-#include <stddef.h>
+
 #include <GoTvDependLibrariesConfig.h>
 #include <libgnu/g-gnulib.h>
 

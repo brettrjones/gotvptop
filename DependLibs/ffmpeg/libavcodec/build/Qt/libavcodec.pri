@@ -467,7 +467,7 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../xvmc_internal.h \
 	$$PWD/../../xwd.h
 
-SOURCES += 	$$PWD/../../../libavfilter/lavfutils.c \
+SOURCES += 	\
 	$$PWD/../../012v.c \
 	$$PWD/../../4xm.c \
 	$$PWD/../../8bps.c \

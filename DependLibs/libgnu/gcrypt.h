@@ -94,7 +94,7 @@ GOTV_BEGIN_CDECLARES
 #endif
 
 #if _GCRY_GCC_VERSION >= 29600
-#define _GCRY_GCC_ATTR_PURE  __attribute__ ((__pure__))
+#define _GCRY_GCC_ATTR_PURE  //__attribute__ ((__pure__))
 #endif
 
 #if _GCRY_GCC_VERSION >= 30200

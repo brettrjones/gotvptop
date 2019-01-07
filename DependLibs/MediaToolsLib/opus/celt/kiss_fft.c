@@ -32,7 +32,7 @@
 # include "opus_config.h"
 
 #include "_kiss_fft_guts.h"
-#include "arch.h"
+#include "arch_celt.h"
 #include "os_support.h"
 #include "mathops.h"
 #include "stack_alloc.h"

@@ -21,7 +21,7 @@
  */
 
 #include "config_ffmpeg.h"
-#include <libxml/parser.h>
+#include <libxml2/parser.h>
 #include "libavutil/intreadwrite.h"
 #include "libavutil/opt.h"
 #include "libavutil/avutil_time.h"

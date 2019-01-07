@@ -85,7 +85,7 @@
 #endif
 
 /* Checked size_t computations.  */
-#include "xsize.h"
+#include "xsize_asprintf.h"
 
 #include "verify.h"
 
@@ -136,7 +136,7 @@
 #  define FCHAR_T char
 #  define DCHAR_T char
 #  define TCHAR_T char
-#  define DCHAR_IS_TCHAR 1
+#  define DCHAR_IS_TCHAR 0
 #  define DIRECTIVE char_directive
 #  define DIRECTIVES char_directives
 #  define PRINTF_PARSE printf_parse

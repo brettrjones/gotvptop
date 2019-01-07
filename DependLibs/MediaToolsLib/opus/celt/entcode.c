@@ -28,7 +28,7 @@
 # include "opus_config.h"
 
 #include "entcode.h"
-#include "arch.h"
+#include "arch_celt.h"
 
 #if !defined(EC_CLZ)
 /*This is a fallback for systems where we don't know how to access

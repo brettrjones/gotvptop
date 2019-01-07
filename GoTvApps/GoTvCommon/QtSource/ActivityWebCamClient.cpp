@@ -64,7 +64,7 @@ ActivityWebCamClient::ActivityWebCamClient( AppCommon&			    app,
 	connect( this, SIGNAL(signalToGuiPluginSessionEnded(GuiOfferSession *)),	this, SLOT(slotToGuiPluginSessionEnded(GuiOfferSession *)) );
 	connect( this, SIGNAL(signalToGuiContactOffline(VxNetIdent *)),				this, SLOT(slotToGuiContactOffline(VxNetIdent *)) );
 
-	m_FromGui.fromGuiStartPluginSession( m_ePluginType, m_HisIdent->getMyOnlineId(), NULL );
+    m_FromGui.fromGuiStartPluginSession( m_ePluginType, m_HisIdent->getMyOnlineId() );
 	m_Engine.fromGuiWantMediaInput( m_HisIdent->getMyOnlineId(), eMediaInputVideoJpgSmall, true );
 	this->resize( 400, 580 );
 }

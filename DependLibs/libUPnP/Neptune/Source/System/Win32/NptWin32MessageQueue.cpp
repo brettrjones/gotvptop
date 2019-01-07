@@ -10,6 +10,8 @@
 /*----------------------------------------------------------------------
 |       includes
 +---------------------------------------------------------------------*/
+#include <libUPnP/config_libupnp.h>
+#ifdef TARGET_OS_WINDOWS
 #include "NptWin32MessageQueue.h"
 #ifndef TARGET_WINDOWS_STORE
 /*----------------------------------------------------------------------
@@ -181,3 +183,5 @@ NPT_Win32WindowMessageQueue::HandleMessage(NPT_Message*        message,
     return result;
 }
 #endif // TARGET_WINDOWS_STORE
+
+#endif // TARGET_OS_WINDOWS

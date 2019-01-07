@@ -44,7 +44,7 @@
 #include "basename.h"
 #include "xerror.h"
 #include "xvasprintf.h"
-#include "xsize.h"
+#include "xsize_gnu.h"
 #include "xalloc.h"
 #include "xmalloca.h"
 #include "c-strstr.h"

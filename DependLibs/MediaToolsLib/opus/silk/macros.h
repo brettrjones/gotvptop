@@ -76,9 +76,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define silk_SUB_SAT32(a, b)             ((((opus_uint32)(a)-(opus_uint32)(b)) & 0x80000000) == 0 ?                                        \
                                         (( (a) & ((b)^0x80000000) & 0x80000000) ? silk_int32_MIN : (a)-(b)) :    \
                                         ((((a)^0x80000000) & (b)  & 0x80000000) ? silk_int32_MAX : (a)-(b)) )
-#ifdef TARGET_OS_WINDOWS
+//#ifdef TARGET_OS_WINDOWS
 # include "ecintrin.h"
-#endif // TARGET_OS_WINDOWS
+//#endif // TARGET_OS_WINDOWS
 
 static OPUS_INLINE opus_int32 silk_CLZ16(opus_int16 in16)
 {

@@ -11,7 +11,7 @@
 |   includes
 +---------------------------------------------------------------------*/
 #include <libUPnP/config_libupnp.h>
-
+#ifdef TARGET_OS_WINDOWS
 #include <stdio.h>
 #if defined(_XBOX)
 #include <xtl.h>
@@ -45,3 +45,4 @@ NPT_DebugOutput(const char* message)
   OutputDebugStringW(newStr.get());
 }
 
+#endif // TARGET_OS_WINDOWS

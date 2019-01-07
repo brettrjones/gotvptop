@@ -40,6 +40,7 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../DbQueryData.h \
 	$$PWD/../../IsBigEndianCpu.h \
 	$$PWD/../../MediaCallbackInterface.h \
+    $$PWD/../../ObjectCommon.h \
 	$$PWD/../../OsDetect.h \
 	$$PWD/../../SHA1.h \
 	$$PWD/../../StdOutRedirect.h \
@@ -84,6 +85,7 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../VxThread.h \
 	$$PWD/../../VxTimeDefs.h \
 	$$PWD/../../VxTimeUtil.h \
+    $$PWD/../../VxTime.h \
 	$$PWD/../../VxTimer.h \
 	$$PWD/../../VxValuePair.h \
 	$$PWD/../../VxXml.h \
@@ -93,12 +95,14 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 #	$$PWD/../../sqlite3.h \
 #	$$PWD/../../sqlite3ext.h \
 #	$$PWD/../../sqlitedataset.h
+    $$PWD/../../VxUrl.h
 
 SOURCES += 	$$PWD/../../AppErr.cpp \
 	$$PWD/../../Blowfish.cpp \
 	$$PWD/../../DbBase.cpp \
 	$$PWD/../../DbDataset.cpp \
 	$$PWD/../../DbQueryData.cpp \
+    $$PWD/../../ObjectCommon.cpp \
 	$$PWD/../../OsDetect.cpp \
 	$$PWD/../../SHA1.cpp \
 	$$PWD/../../StdOutRedirect.cpp \
@@ -136,6 +140,7 @@ SOURCES += 	$$PWD/../../AppErr.cpp \
 	$$PWD/../../VxTextStreamReader.cpp \
 	$$PWD/../../VxThread.cpp \
 	$$PWD/../../VxTimeUtil.cpp \
+    $$PWD/../../VxTime.cpp \
 	$$PWD/../../VxTimer.cpp \
 	$$PWD/../../VxValuePair.cpp \
 	$$PWD/../../VxXml.cpp \
@@ -143,5 +148,6 @@ SOURCES += 	$$PWD/../../AppErr.cpp \
 	$$PWD/../../rsa_eay.c \
 	$$PWD/../../rsa_gen.c \
     $$PWD/../../sqlite3.c \
-    $$PWD/../../sqlitedataset.cpp
+    $$PWD/../../sqlitedataset.cpp \
+    $$PWD/../../VxUrl.cpp
 

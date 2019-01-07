@@ -187,7 +187,7 @@
 #pragma once
 
 #if __GNUC__ > 2 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 96)
-#define CP_GCC_PURE __attribute__((pure))
+#define CP_GCC_PURE //__attribute__((pure))
 #else
 #define CP_GCC_PURE
 #endif

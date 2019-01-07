@@ -11,7 +11,7 @@
 |   includes
 +---------------------------------------------------------------------*/
 #include <libUPnP/config_libupnp.h>
-
+#ifdef TARGET_OS_WINDOWS
 #include <WinSock2.h>
 #include <windows.h>
 #include <stdio.h>
@@ -30,3 +30,4 @@ NPT_Console::Output(const char* message)
     printf("%s", message);
 }
 
+#endif // TARGET_OS_WINDOWS

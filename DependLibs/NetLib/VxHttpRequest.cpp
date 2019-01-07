@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "VxHttpRequest.h"
-#include "VxUrl.h"
+#include <CoreLib/VxUrl.h>
 #include <stdio.h>
 #include <string.h>
 

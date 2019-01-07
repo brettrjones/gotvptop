@@ -12,6 +12,7 @@
 +---------------------------------------------------------------------*/
 
 #include <libUPnP/config_libupnp.h>
+#ifdef TARGET_OS_WINDOWS
 
 #if defined(_XBOX)
 #include <xtl.h>
@@ -241,4 +242,6 @@ NPT_GenericQueue::CreateInstance(NPT_Cardinal max_items)
 {
     return new NPT_Win32Queue(max_items);
 }
+
+#endif // TARGET_OS_WINDOWS
 

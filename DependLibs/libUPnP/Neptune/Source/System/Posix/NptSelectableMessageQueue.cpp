@@ -10,6 +10,8 @@
 /*----------------------------------------------------------------------
 |       includes
 +---------------------------------------------------------------------*/
+#include <libUPnP/config_libupnp.h>
+#ifndef TARGET_OS_WINDOWS
 #include <unistd.h>
 
 #include "NptSelectableMessageQueue.h"
@@ -80,5 +82,6 @@ NPT_SelectableMessageQueue::FlushEvent()
 
     return NPT_SUCCESS;
 }
- 
+
+#endif // TARGET_OS_WINDOWS
 

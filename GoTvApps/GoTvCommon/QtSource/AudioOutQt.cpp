@@ -1,4 +1,3 @@
-#pragma once
 //============================================================================
 // Copyright (C) 2018 Brett R. Jones
 // Issued to MIT style license by Brett R. Jones in 2017

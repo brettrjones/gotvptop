@@ -30,7 +30,6 @@ HEADERS += 	$$PWD/../../AnchorSetting.h \
 	$$PWD/../../VxSktUdpBroadcast.h \
 	$$PWD/../../VxSktUtil.h \
 	$$PWD/../../VxSktWaitingList.h \
-	$$PWD/../../VxUrl.h \
 	$$PWD/../../VxXferDefs.h
 
 SOURCES += 	$$PWD/../../AnchorSetting.cpp \
@@ -60,6 +59,5 @@ SOURCES += 	$$PWD/../../AnchorSetting.cpp \
 	$$PWD/../../VxSktUdp.cpp \
 	$$PWD/../../VxSktUdpBroadcast.cpp \
 	$$PWD/../../VxSktUtil.cpp \
-	$$PWD/../../VxSktWaitingList.cpp \
-	$$PWD/../../VxUrl.cpp
+	$$PWD/../../VxSktWaitingList.cpp
 

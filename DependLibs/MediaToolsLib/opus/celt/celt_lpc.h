@@ -28,7 +28,7 @@
 #ifndef PLC_H
 #define PLC_H
 
-#include "arch.h"
+#include "arch_celt.h"
 
 #define LPC_ORDER 24
 

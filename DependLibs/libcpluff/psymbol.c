@@ -32,7 +32,7 @@
 #include "cpluff.h"
 #include "defines.h"
 #include "internal.h"
-#include "util.h"
+#include "util_cpluff.h"
 #ifdef _WIN32
 #include <WinSock2.h>
 #include <windows.h>

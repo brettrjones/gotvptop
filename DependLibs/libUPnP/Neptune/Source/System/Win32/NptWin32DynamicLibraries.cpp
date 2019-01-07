@@ -10,6 +10,8 @@
  /*----------------------------------------------------------------------
  |   includes
  +---------------------------------------------------------------------*/
+#include <libUPnP/config_libupnp.h>
+#ifdef TARGET_OS_WINDOWS
 #include "NptLogging.h"
 #include "NptDynamicLibraries.h"
 
@@ -149,3 +151,5 @@ NPT_Win32DynamicLibrary::Unload()
         return NPT_FAILURE;
     }
 }
+
+#endif // TARGET_OS_WINDOWS

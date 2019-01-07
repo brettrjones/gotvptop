@@ -26,8 +26,8 @@
 #include <error.h>
 #include <getopt.h>
 #include "gettext.h"
-#include <libxml/tree.h>
-#include <libxml/parser.h>
+#include <libxml2/tree.h>
+#include <libxml2/parser.h>
 #include <locale.h>
 #include "progname.h"
 #include "propername.h"

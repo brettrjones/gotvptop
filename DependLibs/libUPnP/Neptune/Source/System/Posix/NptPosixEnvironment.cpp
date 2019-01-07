@@ -10,6 +10,8 @@
 /*----------------------------------------------------------------------
 |       includes
 +---------------------------------------------------------------------*/
+#include <libUPnP/config_libupnp.h>
+#ifndef TARGET_OS_WINDOWS
 #include "NptConfig.h"
 #include "NptSystem.h"
 #include "NptUtils.h"
@@ -21,3 +23,6 @@ NPT_GetSystemMachineName(NPT_String& name)
     return NPT_GetEnvironment("USER", name);
 }
 #endif
+
+#endif // TARGET_OS_WINDOWS
+

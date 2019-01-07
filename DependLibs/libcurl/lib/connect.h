@@ -56,7 +56,7 @@ curl_socket_t Curl_getconnectinfo(struct Curl_easy *data,
  */
 bool Curl_connalive(struct connectdata *conn);
 
-#ifdef USE_WINSOCK
+#if USE_WINSOCK
 /* When you run a program that uses the Windows Sockets API, you may
    experience slow performance when you copy data to a TCP server.
 

@@ -39,3 +39,5 @@ RCC_DIR = ./.qrc
 UI_DIR = ./.ui
 
 include(../../DependLibs/libgnu/build/Qt/libgnu.pri)
+
+HEADERS +=

@@ -72,6 +72,11 @@ int Curl_ack_eintr = 0;
  *   -1 = system call error, invalid timeout value, or interrupted
  *    0 = specified timeout has elapsed
  */
+
+#if defined(MSDOS)
+echo msdos not supported
+#endif // defined(MSDOS)
+
 int Curl_wait_ms(int timeout_ms)
 {
 #if !defined(MSDOS) && !defined(USE_WINSOCK)
@@ -92,7 +97,7 @@ int Curl_wait_ms(int timeout_ms)
   }
 #if defined(MSDOS)
   delay(timeout_ms);
-#elif defined(USE_WINSOCK)
+#elif USE_WINSOCK
   Sleep(timeout_ms);
 #else
   pending_ms = timeout_ms;

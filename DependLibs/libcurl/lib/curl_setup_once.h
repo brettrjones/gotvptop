@@ -412,7 +412,8 @@ typedef int sig_atomic_t;
 # ifdef TARGET_OS_WINDOWS
 #  define USE_WINSOCK 1
 # else
-#  define USE_WINSOCK 0
+#  //define USE_WINSOCK 0
+   #undef USE_WINSOCK
 # endif // TARGET_OS_WINDOWS
 #endif // USE_WINSOCK
 

@@ -32,15 +32,8 @@ PopupMenu::PopupMenu( AppCommon& app, QWidget * parent )
 	// no need to call this.. base class will call it in showEvent()
 	//repositionToParent();
 
-	if( false == connect(ui.exitPopupButton, SIGNAL(clicked()), this, SLOT(slotHomeButtonClicked())) )
-	{
-		LogMsg( LOG_INFO, "PopupMenu could not connect to exitPopupButton\n");
-	}
-
-	if( false == connect(ui.menuItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(itemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "PopupMenu could not connect to itemSelectionChanged\n");
-	}
+    connect(ui.exitPopupButton, SIGNAL(clicked()), this, SLOT(slotHomeButtonClicked()));
+    connect(ui.menuItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(itemClicked(QListWidgetItem *)));
 }
 
 //============================================================================

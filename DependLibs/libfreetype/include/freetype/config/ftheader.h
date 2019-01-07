@@ -19,7 +19,10 @@
 #define FTHEADER_H_
 
 #include <GoTvDependLibrariesConfig.h>
-
+#define FT_DEBUG_LEVEL_ERROR 1
+#define FT_DEBUG_LEVEL_TRACE 1
+#define FT2_BUILD_LIBRARY 1
+#define FT_MAKE_OPTION_SINGLE_OBJECT 1
 
   /*@***********************************************************************/
   /*                                                                       */
@@ -659,7 +662,7 @@
    *   FreeType~2 API which accesses PFR-specific data.
    *
    */
-#define FT_PFR_H  <freetype/ftpfr.h>
+#define FT_PFR_H  <libfreetype/include/freetype/ftpfr.h>
 
 
   /*************************************************************************

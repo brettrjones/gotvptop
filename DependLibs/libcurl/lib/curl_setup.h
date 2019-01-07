@@ -269,13 +269,15 @@
 
 #undef USE_WINSOCK
 
-#ifdef _MSC_VER
+#ifdef TARGET_OS_WINDOWS
+# ifdef _MSC_VER
 #  define USE_WINSOCK 2
-#else
+# else
 #  ifdef HAVE_WINSOCK_H
 #    define USE_WINSOCK 1
 #  endif
-#endif
+# endif
+#endif // TARGET_OS_WINDOWS
 
 #ifdef USE_LWIPSOCK
 #  include <lwip/init.h>

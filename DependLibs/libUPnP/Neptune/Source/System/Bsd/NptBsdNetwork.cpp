@@ -137,14 +137,14 @@ NPT_IpAddress::Parse(const char* name)
     // clear the address
     NPT_SetMemory(&m_Address[0], 0, sizeof(m_Address));
 
-#if defined(NPT_CONFIG_ENABLE_IPV6)
+# if defined(NPT_CONFIG_ENABLE_IPV6)
     // try IPv6 first
     result = inet_pton(AF_INET6, name, &m_Address[0]);
     if (result > 0) {
         m_Type = IPV6;
         return NPT_SUCCESS;
     }
-#endif
+# endif
 
     // try IPv4 next
     result = inet_pton(AF_INET, name, &m_Address[0]);
@@ -206,7 +206,7 @@ NPT_IpAddress::Parse(const char* name)
         return NPT_ERROR_INVALID_SYNTAX;
     }
 }
-#endif
+#endif // defined(NPT_CONFIG_HAVE_INET_PTON)
 
 #if defined(NPT_CONFIG_HAVE_GETIFADDRS)
 /*----------------------------------------------------------------------
@@ -613,3 +613,5 @@ NPT_NetworkInterface::GetNetworkInterfaces(NPT_List<NPT_NetworkInterface*>& inte
     
     return NPT_SUCCESS;
 }
+
+#endif //defined(NPT_CONFIG_HAVE_GETIFADDRS)

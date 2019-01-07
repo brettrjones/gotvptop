@@ -23,7 +23,7 @@
 #include <gnutls_int.h>
 #include <gnutls_errors.h>
 #include <gnutls_num.h>
-#include <xsize.h>
+#include <xsize_gnu.h>
 
 gnutls_alloc_function gnutls_secure_malloc = malloc;
 gnutls_alloc_function gnutls_malloc = malloc;

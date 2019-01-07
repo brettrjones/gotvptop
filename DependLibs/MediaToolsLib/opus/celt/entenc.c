@@ -27,7 +27,7 @@
 
 # include "opus_config.h"
 #include "os_support.h"
-#include "arch.h"
+#include "arch_celt.h"
 #include "entenc.h"
 #include "mfrngcod.h"
 

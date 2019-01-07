@@ -44,7 +44,7 @@
 
 #include "opus_defines.h"
 #include "kiss_fft.h"
-#include "arch.h"
+#include "arch_celt.h"
 
 typedef struct {
    int n;

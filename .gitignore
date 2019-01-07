@@ -22,3 +22,5 @@ build/build-libffmpeg-Desktop-Debug/
 build/build-libopencore-amr-Desktop-Debug/
 
 build/objs/
+
+*.autosave

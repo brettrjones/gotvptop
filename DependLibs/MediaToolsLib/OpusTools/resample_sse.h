@@ -37,7 +37,7 @@
 #ifdef _MSC_VER
 # pragma warning( disable: 4018 ) // '<' : signed/unsigned mismatch
 #endif // _MSC_VER
-#include <libopus/config_libopus.h>
+#include <opus_config.h>
 
 #include <xmmintrin.h>
 

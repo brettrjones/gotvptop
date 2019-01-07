@@ -26,7 +26,7 @@
 #include "config_nettle.h"
 
 
-#include <openssl-1.0.2o/inc32/openssl/rsa.h>
+#include <openssl/rsa.h>
 #include <libgnu/nettle/nettle_dsa-fips.h>
 #include <libgnu/nettle/nettle_rsa-fips.h>
 

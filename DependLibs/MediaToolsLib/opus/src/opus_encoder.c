@@ -35,7 +35,7 @@
 #include "stack_alloc.h"
 #include "float_cast.h"
 #include "opus.h"
-#include "arch.h"
+#include "opus/celt/arch_celt.h"
 #include "opus_private.h"
 #include "os_support.h"
 #include "cpu_support.h"

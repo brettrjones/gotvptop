@@ -45,7 +45,7 @@
    C_ADDTO( res , a)    : res += a
  * */
 #ifdef OPUS_FIXED_POINT
-#include "arch.h"
+#include "arch_celt.h"
 
 
 #define SAMP_MAX 2147483647

@@ -23,7 +23,7 @@
 #include <stdint.h> /* for SIZE_MAX */
 #include <stdlib.h>
 
-#include "xsize.h"
+#include "xsize_gnu.h"
 
 #ifndef uintptr_t
 # define uintptr_t unsigned long

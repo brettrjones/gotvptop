@@ -1,5 +1,9 @@
 # Global
 TEMPLATE = lib
+
+TARGET_NAME = depends
+
+
 CONFIG += qt thread silent
 
 QT += network
@@ -13,8 +17,6 @@ INCLUDEPATH += ./../../DependLibs
 INCLUDEPATH += ./../../DependLibs/libcurl/include
 INCLUDEPATH += ./../../DependLibs/libcurl/lib
 INCLUDEPATH += ./../../DependLibs/ffmpeg
-INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o
-INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o/inc32
 INCLUDEPATH += ./../../GoTvCore
 INCLUDEPATH += ./../../GoTvCore/xbmc
 
@@ -26,7 +28,6 @@ include(compile_config.pri)
 include(library_config.pri)
 
 
-TARGET_NAME = depends
 
 
 TARGET=$${TARGET_NAME}$${TARGET_OS_NAME}$${TARGET_LIB_APPEND}
@@ -43,11 +44,7 @@ QMAKE_CXXFLAGS += -Wno-unused -Wno-parentheses -Wno-attributes  -Wno-ignored-qua
 ### build seperately #include(../../GoTvCore/build/Qt/libptopengine.pri)
 ### build seperately #include(../../GoTvCore/build/Qt/libxbmc.pri)
 
-include(../../DependLibs/bzlib/build/Qt/libbz2.pri)
-include(../../DependLibs/libbzip2/Qt/libbzip2.pri)
-
-
-include(../../DependLibs/CoreLib/build/Qt/CoreLib.pri)
+### build seperately include(../../DependLibs/CoreLib/build/Qt/CoreLib.pri)
 
 win32{
 #include(../../DependLibs/EasyHookLib/build/Qt/EasyHook.pri)
@@ -66,14 +63,13 @@ win32{
 #include(../../DependLibs/ffmpeg/libswscale/build/Qt/libswscale.pri)
 
 ### build seperately include(../../DependLibs/libarmrwbenc/build/Qt/libarmrwbenc.pri)
-include(../../DependLibs/libasprintf/build/Qt/libasprintf.pri)
 include(../../DependLibs/libass/build/Qt/libass.pri)
 
 include(../../DependLibs/libcpluff/build/Qt/libcpluff.pri)
 include(../../DependLibs/libcroco/build/Qt/libcroco.pri)
-include(../../DependLibs/libcrossguid/build/Qt/libcrossguid.pri)
+### build seperately include(../../DependLibs/libcrossguid/build/Qt/libcrossguid.pri)
 ###include(../../DependLibs/libcrystalhd/build/Qt/libcrystalhd.pri)
-include(../../DependLibs/libcurl/build/Qt/libcurl.pri)
+### build seperately include(../../DependLibs/libcurl/build/Qt/libcurl.pri)
 
 include(../../DependLibs/libexif/build/Qt/libexif.pri)
 include(../../DependLibs/libexpat/build/Qt/libexpat.pri)
@@ -81,7 +77,7 @@ include(../../DependLibs/libexpat/build/Qt/libexpat.pri)
 ###include(../../DependLibs/libfaac/build/Qt/libfaac.pri)
 ### build seperately include(../../DependLibs/libfdk-aac/build/Qt/libfdk-aac.pri)
 include(../../DependLibs/libflac/build/Qt/libflac.pri)
-include(../../DependLibs/libfreetype/build/Qt/libfreetype.pri)
+### build seperately include(../../DependLibs/libfreetype/build/Qt/libfreetype.pri)
 include(../../DependLibs/libfribid/build/Qt/libfribidi.pri)
 
 include(../../DependLibs/libglew/build/Qt/libglew.pri)
@@ -95,20 +91,22 @@ include(../../DependLibs/libjpg/build/Qt/libjpg.pri)
 ###include(../../DependLibs/libirrlicht/build/Qt/libirrlicht.pri)
 ###include(../../DependLibs/libkvazaar/build/Qt/libkvazaar.pri)
 
-include(../../DependLibs/liblame/build/Qt/liblame.pri)
-include(../../DependLibs/liblzma/build/Qt/liblzma.pri)
-include(../../DependLibs/liblzo/build/Qt/liblzo.pri)
-include(../../DependLibs/libmdnsresponder/build/Qt/libdnssd.pri)
-include(../../DependLibs/libmicrohttpd/build/Qt/libmicrohttpd.pri)
+### build seperately include(../../DependLibs/liblame/build/Qt/liblame.pri)
 
-include(../../DependLibs/libogg/build/Qt/libogg.pri)
+include(../../DependLibs/libmdnsresponder/build/Qt/libdnssd.pri)
+### build seperately include(../../DependLibs/libmicrohttpd/build/Qt/libmicrohttpd.pri)
+
+### build seperately include(../../DependLibs/libogg/build/Qt/libogg.pri)
 ### build seperately include(../../DependLibs/libopencore-amr/build/Qt/libopencore-amr.pri)
 ###include(../../DependLibs/libopenh264/build/Qt/libopenh264.pri)
+
+include(../../DependLibs/VxVideoLib/build/Qt/vxvideolib.pri)
+
 include(../../DependLibs/libopenjpeg/build/Qt/libopenjpeg.pri)
-include(../../DependLibs/libopus/build/Qt/libopus.pri)
+### build seperately include(../../DependLibs/libopus/build/Qt/libopus.pri)
 
 ### build seperately include(../../DependLibs/libpcre/build/Qt/libpcre.pri)
-include(../../DependLibs/libpng/build/Qt/libpng.pri)
+### build seperately include(../../DependLibs/libpng/build/Qt/libpng.pri)
 ### build seperately include(../../DependLibs/libpthread/build/Qt/libpthread.pri)
 
 ###include(../../DependLibs/librsvg/build/Qt/librsvg.pri)
@@ -117,7 +115,7 @@ include(../../DependLibs/libshine/build/Qt/libshine.pri)
 include(../../DependLibs/libsnappy/build/Qt/libsnappy.pri)
 include(../../DependLibs/libspeex/build/Qt/libspeex.pri)
 ### build seperately include(../../DependLibs/libssh/build/Qt/libssh.pri)
-include(../../DependLibs/openssl-1.0.2o/build/Qt/libssl.pri)
+### build seperately include(../../DependLibs/openssl-1.0.2o/build/Qt/libssl.pri)
 
 include(../../DependLibs/libtag/build/Qt/libtag.pri)
 include(../../DependLibs/libtheora/build/Qt/libtheora.pri)
@@ -134,22 +132,23 @@ include(../../DependLibs/libwebp/build/Qt/libwebp.pri)
 ### build seperately include(../../DependLibs/libx264/build/Qt/libx264.pri)
 ### build seperately include(../../DependLibs/libx265/build/Qt/libx265.pri)
 ### build seperately include(../../DependLibs/libxavs/build/Qt/libxavs.pri)
-###include(../../DependLibs/libxml/build/Qt/libxml.pri)
-include(../../DependLibs/libxml2/build/Qt/libxml2.pri)
+
 ###include(../../DependLibs/libxpm/build/Qt/libxpm.pri)
 include(../../DependLibs/libxslt/build/Qt/libxslt.pri)
 ###include(../../DependLibs/libxvid/build/Qt/libxvid.pri)
 
 include(../../DependLibs/libyajl/build/Qt/libyajl.pri)
-include(../../DependLibs/libzip/build/Qt/libzip.pri)
-include(../../DependLibs/libzlib/build/Qt/libzlib.pri)
 include(../../DependLibs/libzvbi/build/Qt/libzvbi.pri)
 
 ### build seperately include(../../DependLibs/MediaToolsLib/build/Qt/libmediatools.pri)
 
+
 include(../../DependLibs/NetLib/build/Qt/libnetlib.pri)
 include(../../DependLibs/PktLib/build/Qt/libpktlib.pri)
 include(../../DependLibs/Upnp2Lib/build/Qt/libupnp2lib.pri)
+
+### include(../../DependLibs/libasprintf/build/Qt/libasprintf.pri)
+
 
 #SOURCES +=
 

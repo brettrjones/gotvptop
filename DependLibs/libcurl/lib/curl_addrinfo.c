@@ -219,7 +219,7 @@ Curl_getaddrinfo_ex(const char *nodename,
     /* rfc3493 obsoleted */
     error = EAI_NODATA;
 #endif
-#ifdef USE_WINSOCK
+#if USE_WINSOCK
     SET_SOCKERRNO(error);
 #endif
   }

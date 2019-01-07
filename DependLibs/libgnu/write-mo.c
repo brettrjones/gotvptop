@@ -44,7 +44,7 @@
 #include "hash.h"
 #include "message.h"
 #include "format.h"
-#include "xsize.h"
+#include "xsize_gnu.h"
 #include "xalloc.h"
 #include "xmalloca.h"
 #include "binary-io.h"

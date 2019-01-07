@@ -11,6 +11,7 @@
 |   includes
 +---------------------------------------------------------------------*/
 #include <libUPnP/config_libupnp.h>
+#ifdef TARGET_OS_WINDOWS
 
 #include <WinSock2.h>
 #include <windows.h>
@@ -34,3 +35,5 @@ NPT_DateTime::GetLocalTimeZone()
     if (result == TIME_ZONE_ID_INVALID) return 0;
     return -tz_info.Bias;
 }
+
+#endif // TARGET_OS_WINDOWS

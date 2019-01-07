@@ -31,7 +31,7 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.  */
 #endif
 _GL_INLINE_HEADER_BEGIN
 #ifndef C_CTYPE_INLINE
-# define C_CTYPE_INLINE			GOTV_INLINE
+# define C_CTYPE_INLINE			inline
 #endif
 
 #ifdef __cplusplus
@@ -166,197 +166,38 @@ extern "C" {
          if (c_isalpha (*s)) ...
  */
 
-GOTV_INLINE bool
-c_isalnum (int c)
-{
-  switch (c)
-    {
-    _C_CTYPE_DIGIT:
-    _C_CTYPE_LOWER:
-    _C_CTYPE_UPPER:
-      return true;
-    default:
-      return false;
-    }
-}
+bool c_isalnum (int c);
 
-C_CTYPE_INLINE bool
-c_isalpha (int c)
-{
-  switch (c)
-    {
-    _C_CTYPE_LOWER:
-    _C_CTYPE_UPPER:
-      return true;
-    default:
-      return false;
-    }
-}
+bool c_isalpha (int c);
 
 /* The function isascii is not locale dependent.
    Its use in EBCDIC is questionable. */
-C_CTYPE_INLINE bool
-c_isascii (int c)
-{
-  switch (c)
-    {
-    case ' ':
-    _C_CTYPE_CNTRL:
-    _C_CTYPE_DIGIT:
-    _C_CTYPE_LOWER:
-    _C_CTYPE_PUNCT:
-    _C_CTYPE_UPPER:
-      return true;
-    default:
-      return false;
-    }
-}
+bool
+c_isascii (int c);
 
-C_CTYPE_INLINE bool
-c_isblank (int c)
-{
-  return c == ' ' || c == '\t';
-}
+bool c_isblank (int c);
 
-C_CTYPE_INLINE bool
-c_iscntrl (int c)
-{
-  switch (c)
-    {
-    _C_CTYPE_CNTRL:
-      return true;
-    default:
-      return false;
-    }
-}
+bool c_iscntrl (int c);
 
-C_CTYPE_INLINE bool
-c_isdigit (int c)
-{
-  switch (c)
-    {
-    _C_CTYPE_DIGIT:
-      return true;
-    default:
-      return false;
-    }
-}
+bool c_isdigit (int c);
 
-C_CTYPE_INLINE bool
-c_isgraph (int c)
-{
-  switch (c)
-    {
-    _C_CTYPE_DIGIT:
-    _C_CTYPE_LOWER:
-    _C_CTYPE_PUNCT:
-    _C_CTYPE_UPPER:
-      return true;
-    default:
-      return false;
-    }
-}
+bool c_isgraph (int c);
 
-C_CTYPE_INLINE bool
-c_islower (int c)
-{
-  switch (c)
-    {
-    _C_CTYPE_LOWER:
-      return true;
-    default:
-      return false;
-    }
-}
+bool c_islower (int c);
 
-C_CTYPE_INLINE bool
-c_isprint (int c)
-{
-  switch (c)
-    {
-    case ' ':
-    _C_CTYPE_DIGIT:
-    _C_CTYPE_LOWER:
-    _C_CTYPE_PUNCT:
-    _C_CTYPE_UPPER:
-      return true;
-    default:
-      return false;
-    }
-}
+bool c_isprint (int c);
 
-C_CTYPE_INLINE bool
-c_ispunct (int c)
-{
-  switch (c)
-    {
-    _C_CTYPE_PUNCT:
-      return true;
-    default:
-      return false;
-    }
-}
+bool c_ispunct (int c);
 
-C_CTYPE_INLINE bool
-c_isspace (int c)
-{
-  switch (c)
-    {
-    case ' ': case '\t': case '\n': case '\v': case '\f': case '\r':
-      return true;
-    default:
-      return false;
-    }
-}
+bool c_isspace (int c);
 
-C_CTYPE_INLINE bool
-c_isupper (int c)
-{
-  switch (c)
-    {
-    _C_CTYPE_UPPER:
-      return true;
-    default:
-      return false;
-    }
-}
+bool c_isupper (int c);
 
-C_CTYPE_INLINE bool
-c_isxdigit (int c)
-{
-  switch (c)
-    {
-    _C_CTYPE_DIGIT:
-    _C_CTYPE_A_THRU_F:
-      return true;
-    default:
-      return false;
-    }
-}
+bool c_isxdigit (int c);
 
-C_CTYPE_INLINE int
-c_tolower (int c)
-{
-  switch (c)
-    {
-    _C_CTYPE_UPPER:
-      return c - 'A' + 'a';
-    default:
-      return c;
-    }
-}
+int c_tolower (int c);
 
-C_CTYPE_INLINE int
-c_toupper (int c)
-{
-  switch (c)
-    {
-    _C_CTYPE_LOWER:
-      return c - 'a' + 'A';
-    default:
-      return c;
-    }
-}
+int c_toupper (int c);
 
 #ifdef __cplusplus
 }

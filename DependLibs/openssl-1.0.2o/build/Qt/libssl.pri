@@ -1,14 +1,17 @@
-INCLUDEPATH += $$PWD/../../inc32
-INCLUDEPATH += $$PWD/../../crypto
-INCLUDEPATH += $$PWD/../../crypto/modes
-INCLUDEPATH += $$PWD/../../crypto/asn1
-INCLUDEPATH += $$PWD/../../crypto/evp
 
 win32{
 DEFINES += DSO_WIN32
 }
 
 DEFINES += NO_SYSLOG MONOLITH OPENSSL_THREADS L_ENDIAN OPENSSL_BN_ASM_PART_WORDS OPENSSL_IA32_SSE2 OPENSSL_BN_ASM_MONT OPENSSL_NO_RC5 OPENSSL_NO_MD2 OPENSSL_NO_KB5 OPENSSL_NO_JPAKE OPENSSL_NO_DYNAMIC_ENGINE DEBUG_VTPOOLUPLOAD NO_WINDOWS_BRAINDEATH
+
+
+
+INCLUDEPATH += $$PWD/../../inc32
+INCLUDEPATH += $$PWD/../../crypto
+INCLUDEPATH += $$PWD/../../crypto/modes
+INCLUDEPATH += $$PWD/../../crypto/asn1
+INCLUDEPATH += $$PWD/../../crypto/evp
 
 HEADERS += 	$$PWD/../../../../GoTvAppConfig.h \
     $$PWD/../../../../GoTvCompilerConfig.h \
@@ -142,6 +145,9 @@ HEADERS += 	$$PWD/../../../../GoTvAppConfig.h \
     $$PWD/../../crypto/ts/ts.h \
     $$PWD/../../crypto/txt_db/txt_db.h \
     $$PWD/../../crypto/ui/ui.h \
+    $$PWD/../../crypto/ui/ui_compat.h \
+    $$PWD/../../crypto/ui/ui_locl.h \
+    $$PWD/../../crypto/ui/ui_lib.c \
     $$PWD/../../crypto/whrlpool/whrlpool.h \
     $$PWD/../../crypto/whrlpool/wp_locl.h \
     $$PWD/../../crypto/x509/x509.h \
@@ -250,7 +256,8 @@ HEADERS += 	$$PWD/../../../../GoTvAppConfig.h \
     $$PWD/../../ssl/ssl23.h \
     $$PWD/../../ssl/ssl3.h \
     $$PWD/../../ssl/ssl_locl.h \
-    $$PWD/../../ssl/tls1.h
+    $$PWD/../../ssl/tls1.h \
+    $$PWD/../../crypto/bn/rsaz_exp.h
 
 SOURCES += 	$$PWD/../../SslMgr/SslMgrCmdBase.cpp \
     $$PWD/../../SslMgr/SslMgrCmdDeleteFile.cpp \
@@ -425,7 +432,6 @@ SOURCES += 	$$PWD/../../SslMgr/SslMgrCmdBase.cpp \
     $$PWD/../../crypto/bio/bss_conn.c \
     $$PWD/../../crypto/bio/bss_dgram.c \
     $$PWD/../../crypto/bio/bss_fd.c \
-    $$PWD/../../crypto/bio/bss_file.c \
     $$PWD/../../crypto/bio/bss_log.c \
     $$PWD/../../crypto/bio/bss_mem.c \
     $$PWD/../../crypto/bio/bss_null.c \
@@ -845,6 +851,11 @@ SOURCES += 	$$PWD/../../SslMgr/SslMgrCmdBase.cpp \
     $$PWD/../../crypto/ts/ts_rsp_verify.c \
     $$PWD/../../crypto/ts/ts_verify_ctx.c \
     $$PWD/../../crypto/txt_db/txt_db.c \
+    $$PWD/../../crypto/ui/ui_compat.c \
+    $$PWD/../../crypto/ui/ui_err.c \
+    $$PWD/../../crypto/ui/ui_lib.c \
+    $$PWD/../../crypto/ui/ui_openssl.c \
+    $$PWD/../../crypto/ui/ui_util.c \
     $$PWD/../../crypto/uid.c \
     $$PWD/../../crypto/whrlpool/wp_block.c \
     $$PWD/../../crypto/whrlpool/wp_dgst.c \
@@ -993,5 +1004,6 @@ SOURCES += 	$$PWD/../../SslMgr/SslMgrCmdBase.cpp \
     $$PWD/../../ssl/t1_meth.c \
     $$PWD/../../ssl/t1_reneg.c \
     $$PWD/../../ssl/t1_srvr.c \
-    $$PWD/../../ssl/tls_srp.c
+    $$PWD/../../ssl/tls_srp.c \
+    $$PWD/../../crypto/bio/bss_file2.c
 

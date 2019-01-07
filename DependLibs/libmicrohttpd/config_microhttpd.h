@@ -229,7 +229,7 @@ _MHD_bool. */
 #define HTTPS_SUPPORT 1
 
 /* Define to 1 if your C compiler supports GOTV_INLINE functions. */
-#define INLINE_FUNC 1
+// #define INLINE_FUNC 1 // seems when compiled by qt then inline does not work as expected
 
 /* Defined if libcurl supports AsynchDNS */
 /* #undef LIBCURL_FEATURE_ASYNCHDNS */

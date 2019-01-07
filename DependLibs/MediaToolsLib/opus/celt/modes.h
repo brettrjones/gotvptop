@@ -32,7 +32,7 @@
 
 #include "opus_types.h"
 #include "celt.h"
-#include "arch.h"
+#include "arch_celt.h"
 #include "mdct.h"
 #include "entenc.h"
 #include "entdec.h"

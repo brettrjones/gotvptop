@@ -19,7 +19,7 @@
  * 02110-1301, USA
  */
 
-#include <int.h>
+#include <int_gnu.h>
 #include <hash-pjw-bare.h>
 #include "parser_aux.h"
 #include "gstr.h"

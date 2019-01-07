@@ -13,7 +13,7 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../vasnprintf.h \
 	$$PWD/../../vasprintf.h \
 	$$PWD/../../verify.h \
-	$$PWD/../../xsize.h
+    $$PWD/../../xsize_asprintf.h
 
 SOURCES += 	$$PWD/../../alloca.c \
 	$$PWD/../../asnprintf.c \
@@ -24,5 +24,5 @@ SOURCES += 	$$PWD/../../alloca.c \
 	$$PWD/../../printf-parse.c \
 	$$PWD/../../vasnprintf.c \
 	$$PWD/../../vasprintf.c \
-	$$PWD/../../xsize.c
+    $$PWD/../../xsize_asprintf.c
 

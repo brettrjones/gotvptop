@@ -26,7 +26,7 @@
 /*   an ASN1 type.                                   */
 /*****************************************************/
 
-#include <int.h>
+#include <int_gnu.h>
 #include "parser_aux.h"
 #include <gstr.h>
 #include "element.h"
@@ -668,7 +668,7 @@ _asn1_insert_tag_der (asn1_node node, unsigned char *der, int *counter,
       switch (type)
 	{
 	CASE_HANDLED_ETYPES:
-	  _asn1_tag_der (_asn1_tags[type].class, _asn1_tags[type].tag,
+      _asn1_tag_der (_asn1_tags[type].classId, _asn1_tags[type].tag,
 			 tag_der, &tag_len);
 	  break;
 	case ASN1_ETYPE_TAG:

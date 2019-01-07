@@ -569,7 +569,7 @@ static void deinterleave_hadamard(celt_norm *X, int N0, int stride, int hadamard
 	int i, j;
 	VARDECL(celt_norm, tmp);
 	int N;
-	SAVE_STACK;
+    SAVE_STACK;
 	N = N0*stride;
 	ALLOC(tmp, N, celt_norm);
 	celt_assert(stride > 0);
@@ -598,7 +598,7 @@ static void interleave_hadamard(celt_norm *X, int N0, int stride, int hadamard)
 	int i, j;
 	VARDECL(celt_norm, tmp);
 	int N;
-	SAVE_STACK;
+    SAVE_STACK;
 	N = N0*stride;
 	ALLOC(tmp, N, celt_norm);
 	if (hadamard)
@@ -1420,7 +1420,7 @@ void quant_all_bands_mediatools(int encode, const CELTMode *m, int start, int en
 	int resynth = !encode;
 #endif
 	struct band_ctx ctx;
-	SAVE_STACK;
+    SAVE_STACK;
 
 	M = 1 << LM;
 	B = shortBlocks ? M : 1;

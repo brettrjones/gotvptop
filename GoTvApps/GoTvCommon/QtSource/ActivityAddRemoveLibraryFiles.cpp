@@ -40,42 +40,19 @@ ActivityAddRemoveLibraryFiles::ActivityAddRemoveLibraryFiles(	AppCommon& app, QW
 	ui.m_UpDirectoryButton->setIcon( eMyIconUpOneDirectory );
 	connect( m_WidgetClickEventFixTimer, SIGNAL(timeout()), this, SLOT(slotRequestFileList()) );
 
-	if( false == connect(ui.ExitDialogButton, SIGNAL(clicked()), this, SLOT(slotHomeButtonClicked())) )
-	{
-        LogMsg( 0, "ActivityAddRemoveLibraryFiles could not connect to exitPopupButton\n");
-	}
+    connect(ui.ExitDialogButton, SIGNAL(clicked()), this, SLOT(slotHomeButtonClicked()) );
 
-	if( false == connect(ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotListItemClicked(QListWidgetItem *))) )
-	{
-        LogMsg( 0, "ActivityAddRemoveLibraryFiles could not connect to slotItemClicked\n");
-	}
+    connect(ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotListItemClicked(QListWidgetItem *)) );
 
-    if( false == connect( &m_MyApp, SIGNAL(signalFileList(const char *,uint8_t,int64_t,int,bool)), this, SLOT(slotFileList(const char *,uint8_t,int64_t,int,bool))) )
-	{
-        LogMsg( 0, "ActivityAddRemoveLibraryFiles could not connect to slotFileList\n");
-	}
+    connect( &m_MyApp, SIGNAL(signalFileList(const char *,uint8_t,int64_t,int,bool)), this, SLOT(slotFileList(const char *,uint8_t,int64_t,int,bool)) );
+    connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotListItemClicked(QListWidgetItem *)) );
+    connect(ui.m_UpDirectoryLabel, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked()) );
 
-	if( false == connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotListItemClicked(QListWidgetItem *))) )
-	{
-        LogMsg( 0, "ActivityAddRemoveLibraryFiles could not connect to slotItemClicked\n");
-	}
+    connect(ui.m_UpDirectoryButton, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked()) );
 
-	if( false == connect(ui.m_UpDirectoryLabel, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked())) )
-	{
-        LogMsg( 0, "ActivityAddRemoveLibraryFiles could not connect to up directory\n");
-	}
+    connect(ui.m_UpDirWidget, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked()) );
 
-	if( false == connect(ui.m_UpDirectoryButton, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked())) )
-	{
-        LogMsg( 0, "ActivityAddRemoveLibraryFiles could not connect to up directory\n");
-	}
-
-	if( false == connect(ui.m_UpDirWidget, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked())) )
-	{
-        LogMsg( 0, "ActivityAddRemoveLibraryFiles could not connect to up directory\n");
-	}
-
-	connect(ui.m_BrowseButton, SIGNAL(clicked()), this, SLOT(slotBrowseButtonClicked()));
+    connect(ui.m_BrowseButton, SIGNAL(clicked()), this, SLOT(slotBrowseButtonClicked()) );
 
 	std::string strLastDir;
     m_MyApp.getAppSettings().getLastBrowseShareDir( strLastDir );

@@ -203,8 +203,6 @@ HEADERS += $$PWD/../../../GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/../../../../GoTvDependLibrariesConfig.h \
     $$PWD/../../../../GoTvTargetOsConfig.h \
     $$PWD/../../AppSource/GoTvPlayerSettings.h \
-    $$PWD/../../AppSource/exportdialog.h \
-    $$PWD/../../AppSource/mainwindow.h \
     $$PWD/../../../../GoTvInterface/config_libgotvptop.h \
     $$PWD/../../../../GoTvInterface/GoTvRenderFrame.h \
     $$PWD/../../../../GoTvInterface/IDefs.h \
@@ -418,10 +416,8 @@ SOURCES += $$PWD/../../../GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/../../../GoTvCommon/QtSource/VxAppTheme.cpp \
     $$PWD/../../../GoTvCommon/QtSource/HomeWindow.cpp \
     $$PWD/../../../GoTvCommon/QtSource/VxAppDisplay.cpp \
-    $$PWD/../../AppSource/exportdialog.cpp \
     $$PWD/../../AppSource/GoTvPlayerSettings.cpp \
     $$PWD/../../AppSource/main.cpp \
-    $$PWD/../../AppSource/mainwindow.cpp \
     $$PWD/../../../../GoTvInterface/GoTvRenderFrame.cpp \
     $$PWD/../../../../GoTvInterface/IGoTv.cpp \
     $$PWD/../../../../GoTvInterface/IGoTvFromGui.cpp \

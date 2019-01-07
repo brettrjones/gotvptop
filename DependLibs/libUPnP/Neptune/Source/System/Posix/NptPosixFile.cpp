@@ -10,6 +10,8 @@
 /*----------------------------------------------------------------------
 |   includes
 +---------------------------------------------------------------------*/
+#include <libUPnP/config_libupnp.h>
+#ifndef TARGET_OS_WINDOWS
 #define _LARGEFILE_SOURCE
 #define _LARGEFILE_SOURCE64
 #define _LARGEFILE64_SOURCE
@@ -266,3 +268,6 @@ NPT_File::GetInfo(const char* path, NPT_FileInfo* info)
     
     return NPT_SUCCESS;
 }
+
+#endif // TARGET_OS_WINDOWS
+

@@ -29,7 +29,7 @@
 #include "opus_types.h"
 #include <math.h>
 #include <limits.h>
-#include "arch.h"
+#include "arch_celt.h"
 #if !defined(_ecintrin_H)
 # define _ecintrin_H (1)
 

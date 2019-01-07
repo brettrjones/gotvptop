@@ -11,6 +11,7 @@
 |   includes
 +---------------------------------------------------------------------*/
 #include <libUPnP/config_libupnp.h>
+#ifdef TARGET_OS_WINDOWS
 
 #include <WinSock2.h>
 #include <windows.h>
@@ -344,3 +345,5 @@ NPT_SerialPort::NPT_SerialPort(const char* name)
 }
 
 #endif // TARGET_WINDOWS_STORE
+
+#endif // TARGET_OS_WINDOWS

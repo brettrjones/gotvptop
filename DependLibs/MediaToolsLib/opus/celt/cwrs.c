@@ -32,7 +32,7 @@
 #include "os_support.h"
 #include "cwrs.h"
 #include "mathops.h"
-#include "arch.h"
+#include "arch_celt.h"
 
 #ifdef CUSTOM_MODES
 
@@ -661,7 +661,7 @@ void get_required_bits(opus_int16 *_bits,int _n,int _maxk,int _frac){
   }
   else {
     VARDECL(opus_uint32,u);
-    SAVE_STACK;
+    SAVE_STACK_MEDIA_TOOLS;
     ALLOC(u,_maxk+2U,opus_uint32);
     ncwrs_urow(_n,_maxk,u);
     for(k=1;k<=_maxk;k++)
@@ -675,7 +675,7 @@ void encode_pulses(const int *_y,int _n,int _k,ec_enc *_enc){
   opus_uint32 i;
   VARDECL(opus_uint32,u);
   opus_uint32 nc;
-  SAVE_STACK;
+  SAVE_STACK_MEDIA_TOOLS;
   celt_assert(_k>0);
   ALLOC(u,_k+2U,opus_uint32);
   i=icwrs(_n,_k,&nc,_y,u);
@@ -685,7 +685,7 @@ void encode_pulses(const int *_y,int _n,int _k,ec_enc *_enc){
 
 void decode_pulses(int *_y,int _n,int _k,ec_dec *_dec){
   VARDECL(opus_uint32,u);
-  SAVE_STACK;
+  SAVE_STACK_MEDIA_TOOLS;
   celt_assert(_k>0);
   ALLOC(u,_k+2U,opus_uint32);
   cwrsi(_n,_k,ec_dec_uint(_dec,ncwrs_urow(_n,_k,u)),_y,u);

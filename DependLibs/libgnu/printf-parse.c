@@ -69,7 +69,7 @@
 #include  <errno.h>
 
 /* Checked size_t computations.  */
-#include  "xsize.h"
+#include  "xsize_gnu.h"
 
 #if CHAR_T_ONLY_ASCII
 /* c_isascii().  */

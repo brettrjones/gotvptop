@@ -10,6 +10,8 @@
 /*----------------------------------------------------------------------
 |       includes
 +---------------------------------------------------------------------*/
+#include <libUPnP/config_libupnp.h>
+#ifndef TARGET_OS_WINDOWS
 #include <stdio.h>
 
 #include "NptConfig.h"
@@ -23,3 +25,5 @@ NPT_Console::Output(const char* message)
 {
     printf("%s", message);
 }
+
+#endif // TARGET_OS_WINDOWS

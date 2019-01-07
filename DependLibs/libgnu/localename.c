@@ -2686,7 +2686,7 @@ gl_locale_name_thread_unsafe( int category, const char *categoryname )
 		locale_t thread_locale = uselocale( NULL );
 		if( thread_locale != LC_GLOBAL_LOCALE )
 		{
-#  if __GLIBC__ >= 2 && !defined __UCLIBC__
+#  if 0 //BRJ __GLIBC__ >= 2 && !defined __UCLIBC__
 			/* Work around an incorrect definition of the _NL_LOCALE_NAME macro in
 			   glibc < 2.12.
 			   See <http://sourceware.org/bugzilla/show_bug.cgi?id=10968>.  */
@@ -2739,14 +2739,13 @@ gl_locale_name_thread_unsafe( int category, const char *categoryname )
 
 #endif
 
-const char *
-gl_locale_name_thread( int category, const char *categoryname )
+const char * gl_locale_name_thread( int category, const char *categoryname )
 {
 #if HAVE_USELOCALE
 	const char *name = gl_locale_name_thread_unsafe( category, categoryname );
 	if( name != NULL )
 		return struniq( name );
-#elif defined TARGET_OS_WINDOWS
+#elif defined( TARGET_OS_WINDOWS )
 	if( LC_MIN <= category && category <= LC_MAX )
 	{
 		char *locname = setlocale( category, NULL );

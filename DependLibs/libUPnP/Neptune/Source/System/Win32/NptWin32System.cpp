@@ -12,6 +12,7 @@
 +---------------------------------------------------------------------*/
 
 #include <libUPnP/config_libupnp.h>
+#ifdef TARGET_OS_WINDOWS
 
 #if defined(_XBOX)
 #include <xtl.h>
@@ -148,4 +149,6 @@ NPT_System::GetRandomInteger()
 
     return rand();
 }
+
+#endif // TARGET_OS_WINDOWS
 

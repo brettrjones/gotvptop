@@ -206,7 +206,7 @@ extern "C" {
  * on R4000 and above should use this mode, along with the relevant assembler
  * code :-).  Do NOT define BN_LLONG.
  */
-# ifdef SIXTY_FOUR_BIT
+# if defined( SIXTY_FOUR_BIT ) && !defined( BN_ULONG )
 #  undef BN_LLONG
 #  undef BN_ULLONG
 #  define BN_ULONG        unsigned long long

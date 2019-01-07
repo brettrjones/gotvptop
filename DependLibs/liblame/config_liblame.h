@@ -11,7 +11,7 @@
 #define SIZEOF_INT 4
 
 /* The number of bytes in a long.  */
-#define SIZEOF_LONG 4
+//#define SIZEOF_LONG 4 // defined in GoTvCompilerConfig.h
 
 /* The number of bytes in a long double.  */
 #define SIZEOF_LONG_DOUBLE 12
@@ -20,7 +20,7 @@
 #define SIZEOF_SHORT 2
 
 /* The number of bytes in a unsigned int.  */
-#define SIZEOF_UNSIGNED_INT 4
+// #define SIZEOF_UNSIGNED_INT 4 // defined in GoTvCompilerConfig.h
 
 /* The number of bytes in a unsigned long.  */
 #define SIZEOF_UNSIGNED_LONG 4

@@ -30,7 +30,7 @@
 #ifndef CWRS_H
 #define CWRS_H
 
-#include "arch.h"
+#include "arch_celt.h"
 #include "stack_alloc.h"
 #include "entenc.h"
 #include "entdec.h"

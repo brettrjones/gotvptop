@@ -32,7 +32,7 @@
 #include <assert.h>
 #include "cpluff.h"
 #include "defines.h"
-#include "util.h"
+#include "util_cpluff.h"
 #include "internal.h"
 #include <CoreLib/VxDebug.h>
 

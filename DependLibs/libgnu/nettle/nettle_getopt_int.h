@@ -21,7 +21,7 @@
 
 extern int _nettle_getopt_internal (int ___argc, char *const *___argv,
 			     const char *__shortopts,
-		             const struct option *__longopts, int *__longind,
+                     const struct option_gnu *__longopts, int *__longind,
 			     int __long_only, int posixly_correct);
 
 
@@ -111,18 +111,18 @@ struct _nettle_getopt_data
 
 extern int _nettle_getopt_internal_r (int ___argc, char *const *___argv,
 			       const char *__shortopts,
-			       const struct option *__longopts, int *__longind,
+                   const struct option_gnu *__longopts, int *__longind,
 			       int __long_only, struct _nettle_getopt_data *__data,
 			       int posixly_correct);
 
 extern int _nettle_getopt_long_r (int ___argc, char *const *___argv,
 			   const char *__shortopts,
-			   const struct option *__longopts, int *__longind,
+               const struct option_gnu *__longopts, int *__longind,
 			   struct _nettle_getopt_data *__data);
 
 extern int _nettle_getopt_long_only_r (int ___argc, char *const *___argv,
 				const char *__shortopts,
-				const struct option *__longopts,
+                const struct option_gnu *__longopts,
 				int *__longind,
 				struct _nettle_getopt_data *__data);
 

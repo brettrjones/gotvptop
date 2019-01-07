@@ -27,7 +27,7 @@
 
 #include <libopus/config_libopus.h>
 
-#ifdef TARGET_CPU_X86
+#if TARGET_CPU_X86
 
 #include "cpu_support.h"
 #include "macros.h"

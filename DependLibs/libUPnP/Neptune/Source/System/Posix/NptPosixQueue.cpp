@@ -10,6 +10,8 @@
 /*----------------------------------------------------------------------
 |       includes
 +---------------------------------------------------------------------*/
+#include <libUPnP/config_libupnp.h>
+#ifndef TARGET_OS_WINDOWS
 #if defined(__SYMBIAN32__)
 #include <stdio.h>
 #endif
@@ -324,6 +326,9 @@ NPT_GenericQueue::CreateInstance(NPT_Cardinal max_items)
     NPT_LOG_FINER_1("queue max_items = %d", (int)max_items);
     return new NPT_PosixQueue(max_items);
 }
+
+
+#endif // TARGET_OS_WINDOWS
 
 
 

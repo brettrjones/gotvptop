@@ -36,7 +36,7 @@
 #endif
 #include "cpluff.h"
 #include "defines.h"
-#include "util.h"
+#include "util_cpluff.h"
 #ifdef CP_THREADS
 #include "thread.h"
 #endif

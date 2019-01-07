@@ -29,7 +29,7 @@
 #ifndef OPUS_PRIVATE_H
 #define OPUS_PRIVATE_H
 
-#include "arch.h"
+#include "opus/celt/arch_celt.h"
 #include "opus.h"
 #include "celt.h"
 

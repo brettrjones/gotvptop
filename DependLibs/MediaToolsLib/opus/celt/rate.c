@@ -32,7 +32,7 @@
 #include <math.h>
 #include "modes.h"
 #include "cwrs.h"
-#include "arch.h"
+#include "arch_celt.h"
 #include "os_support.h"
 
 #include "entcode.h"

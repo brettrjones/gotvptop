@@ -29,7 +29,7 @@
 
 #include <stddef.h>
 #include "os_support.h"
-#include "arch.h"
+#include "arch_celt.h"
 #include "entdec.h"
 #include "mfrngcod.h"
 

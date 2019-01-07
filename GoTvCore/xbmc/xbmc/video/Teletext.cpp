@@ -616,7 +616,7 @@ bool CTeletextDecoder::InitDecoder()
 
   if ((error = FTC_SBitCache_New(m_Manager, &m_Cache)))
   {
-    FTC_Manager_Done(m_Manager);
+    //FTC_Manager_Done(m_Manager);
     FT_Done_FreeType(m_Library);
     m_Manager = NULL;
     m_Library = NULL;
@@ -643,7 +643,7 @@ bool CTeletextDecoder::InitDecoder()
     if ((error = FTC_Manager_LookupFace(m_Manager, m_TypeTTF.face_id, &m_Face)))
     {
       CLog::Log(LOGERROR, "%s: <FTC_Manager_Lookup_Face failed with Errorcode 0x%.2X>\n", __FUNCTION__, error);
-      FTC_Manager_Done(m_Manager);
+      //FTC_Manager_Done(m_Manager);
       FT_Done_FreeType(m_Library);
       m_Manager = NULL;
       m_Library = NULL;
@@ -699,7 +699,7 @@ void CTeletextDecoder::EndDecoder()
   /* close freetype */
   if (m_Manager)
   {
-    FTC_Manager_Done(m_Manager);
+    //FTC_Manager_Done(m_Manager);
   }
   if (m_Library)
   {

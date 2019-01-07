@@ -1440,22 +1440,6 @@ int VxGetIPv6ScopeID( const char *addr )
 	return atoi( scopeStr.c_str() );
 }
 
-//============================================================================
-const char * VxStripIPv6ScopeID( const char *addr, std::string &buf )
-{
-	std::string addrStr = addr;
-	if ( true == VxIsIPv6Address( addr ) )
-	{
-		unsigned int pos = (int)addrStr.find( "%" );
-		if ( pos != std::string::npos )
-		{
-			addrStr = addrStr.substr( 0, pos );
-		}
-	}
-
-	buf = addrStr;
-	return buf.c_str();
-}
 //============================================================================	
 RCODE VxGetRmtAddress( SOCKET sktHandle, InetAddrAndPort& oRetAddr )
 {

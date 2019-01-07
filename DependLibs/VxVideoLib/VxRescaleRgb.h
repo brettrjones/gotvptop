@@ -1,17 +1,17 @@
 #pragma once
 //============================================================================
 // Copyright (C) 2003 Brett R. Jones 
-// All Rights Reserved ( After My Death I Brett R. Jones Issue this source code to Public Domain )
+// Issued to MIT style license by Brett R. Jones in 2017
 //
-// You may not modify or redistribute this code for any reason 
-// without written consent of Brett R. Jones
+// You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
+// provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
 //
 // This code is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
-// brettjones1900@gmail.com
-// http://www.p2panarchy.com
+// brett.jones@engineer.com
+// http://www.gotvptop.net
 //============================================================================
 
 //! resize rgb 24 bit image

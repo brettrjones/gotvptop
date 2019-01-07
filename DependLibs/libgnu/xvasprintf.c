@@ -27,7 +27,7 @@
 #include  "xalloc.h"
 
 /* Checked size_t computations.  */
-#include  "xsize.h"
+#include  "xsize_gnu.h"
 
 static char *
 xstrcat (size_t argcount, va_list args)

@@ -212,10 +212,18 @@ extern "C" {
 # else
 #  define get_last_socket_error() errno
 #  define clear_socket_error()    errno=0
-#  define ioctlsocket(a,b,c)      ioctl(a,b,c)
-#  define closesocket(s)          close(s)
+#  ifndef ioctlsocket
+#   define ioctlsocket(a,b,c)      ioctl(a,b,c)
+#  endif // ioctlsocket
+#  ifndef closesocket
+#   define closesocket(s)          close(s)
+#  endif // closesocket
+#  ifndef readsocket
 #  define readsocket(s,b,n)       read((s),(b),(n))
-#  define writesocket(s,b,n)      write((s),(b),(n))
+#  endif // readsocket
+#  ifndef writesocket
+#   define writesocket(s,b,n)      write((s),(b),(n))
+#  endif // writesocket
 # endif
 
 # ifdef WIN16                   /* never the case */

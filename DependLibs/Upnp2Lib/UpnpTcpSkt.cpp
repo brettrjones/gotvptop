@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "UpnpTcpSkt.h"
-#include <NetLib/VxUrl.h>
+#include <CoreLib/VxUrl.h>
 #include <NetLib/VxHttpRequest.h>
 #include <NetLib/VxHttpParse.h>
 #include <CoreLib/VxBuffer.h>

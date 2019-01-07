@@ -9,7 +9,7 @@
  */
 
 #define IN_LIBXML
-#include "libxml.h"
+#include "libxml2/libxml.h"
 
 #include <string.h>
 #ifdef HAVE_ERRNO_H

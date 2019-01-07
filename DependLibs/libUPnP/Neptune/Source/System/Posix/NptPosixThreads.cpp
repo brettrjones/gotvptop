@@ -10,6 +10,10 @@
 /*----------------------------------------------------------------------
 |       includes
 +---------------------------------------------------------------------*/
+#include <libUPnP/config_libupnp.h>
+#ifndef TARGET_OS_WINDOWS
+
+
 #if defined(__SYMBIAN32__)
 #include <stdio.h>
 #endif
@@ -718,3 +722,4 @@ NPT_Thread::NPT_Thread(NPT_Runnable& target, bool detached)
     m_Delegate = new NPT_PosixThread(this, target, detached);
 }
 
+#endif // TARGET_OS_WINDOWS

@@ -131,7 +131,9 @@ int gettimeofday(struct timeval *__p, void *__t);
 
 #else /* NOT _WIN32 */
 #include <unistd.h>
-#define PRIdS "zd"
+#ifndef PRIdS
+# define PRIdS "zd"
+#endif // PRIdS
 
 #define _XCLOSESOCKET close
 

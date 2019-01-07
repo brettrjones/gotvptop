@@ -40,8 +40,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #define __SSE__               1
 #endif
 
-#include "version.h"
+#include "opus_version.h"
 
-#include "../../OpusTools/win32/config.h"
+//#include "../../OpusTools/win32/config.h"
 
 #endif /* CONFIG_H */

@@ -39,9 +39,9 @@
 #endif
 
 #ifdef HAVE_LIBXML2
-#include <libxml/parser.h>
-#include <libxml/xmlmemory.h>
-#include <libxml/tree.h>
+#include <libxml2/parser.h>
+#include <libxml2/xmlmemory.h>
+#include <libxml2/tree.h>
 #endif
 
 #define DEFAULT_LANGUAGE  "eng"

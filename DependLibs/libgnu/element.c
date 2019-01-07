@@ -26,7 +26,7 @@
 /*****************************************************/
 
 
-#include <int.h>
+#include <int_gnu.h>
 #include "parser_aux.h"
 #include <gstr.h>
 #include "structure.h"

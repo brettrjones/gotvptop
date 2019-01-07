@@ -10,6 +10,8 @@
 /*----------------------------------------------------------------------
 |   includes
 +---------------------------------------------------------------------*/
+#include <libUPnP/config_libupnp.h>
+#ifndef TARGET_OS_WINDOWS
 #include <time.h>
 #include <errno.h>
 
@@ -96,3 +98,6 @@ NPT_DateTime::GetLocalTimeZone()
     return (NPT_Int32)((time_local-time_gmt)/60);
 }
 #endif
+
+#endif // TARGET_OS_WINDOWS
+

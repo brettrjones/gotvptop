@@ -19,7 +19,7 @@
  * 02110-1301, USA
  */
 
-#include <int.h>
+#include <int_gnu.h>
 #ifdef STDC_HEADERS
 #include <stdarg.h>
 #endif

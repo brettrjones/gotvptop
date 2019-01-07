@@ -8,7 +8,7 @@
 #if defined(_LARGEFILE64_SOURCE) && _LFS64_LARGEFILE-0
 #  define LSEEK lseek64
 #else
-#  define LSEEK lseek
+#  define LSEEK lseek_os
 #endif
 
 /* Local functions */
@@ -193,7 +193,7 @@ local gzFile gz_open(path, fd, mode)
 }
 
 /* -- see zlib.h -- */
-gzFile ZEXPORT gzopen(path, mode)
+gzFile ZEXPORT z_gzopen(path, mode)
     const char *path;
     const char *mode;
 {
@@ -201,7 +201,7 @@ gzFile ZEXPORT gzopen(path, mode)
 }
 
 /* -- see zlib.h -- */
-gzFile ZEXPORT gzopen64(path, mode)
+gzFile ZEXPORT z_gzopen64(path, mode)
     const char *path;
     const char *mode;
 {
@@ -209,7 +209,7 @@ gzFile ZEXPORT gzopen64(path, mode)
 }
 
 /* -- see zlib.h -- */
-gzFile ZEXPORT gzdopen(fd, mode)
+gzFile ZEXPORT z_gzdopen(fd, mode)
     int fd;
     const char *mode;
 {
@@ -250,7 +250,7 @@ int ZEXPORT gzbuffer(file, size)
 }
 
 /* -- see zlib.h -- */
-int ZEXPORT gzrewind(file)
+int ZEXPORT z_gzrewind(file)
     gzFile file;
 {
     gz_statep state;

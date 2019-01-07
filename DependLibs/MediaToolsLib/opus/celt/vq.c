@@ -32,7 +32,7 @@
 #include "mathops.h"
 #include "cwrs.h"
 #include "vq.h"
-#include "arch.h"
+#include "arch_celt.h"
 #include "os_support.h"
 #include "bands.h"
 #include "rate.h"

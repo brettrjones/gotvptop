@@ -7,7 +7,7 @@ HEADERS += 	$$PWD/../../config_libcpluff.h \
 	$$PWD/../../kazlib/hash.h \
 	$$PWD/../../kazlib/list.h \
 	$$PWD/../../thread.h \
-	$$PWD/../../util.h
+    $$PWD/../../util_cpluff.h
 
 SOURCES += 	$$PWD/../../context.c \
 	$$PWD/../../cpluff.c \
@@ -23,5 +23,5 @@ SOURCES += 	$$PWD/../../context.c \
 	$$PWD/../../serial.c \
 	$$PWD/../../thread_posix.c \
 	$$PWD/../../thread_windows.c \
-	$$PWD/../../util.c
+    $$PWD/../../util_cpluff.c
 

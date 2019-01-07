@@ -55,7 +55,7 @@ protected:
 
 	//=== vars ===//
 	Ui::ViewVideoFileDialogClass	ui;
-	bool						m_bIsMyself;
-	VxNetIdent *				m_HisIdent;
+    bool						m_bIsMyself = false;
+    VxNetIdent *				m_HisIdent = nullptr;
 };
 

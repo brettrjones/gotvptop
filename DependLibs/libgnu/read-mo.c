@@ -39,7 +39,7 @@
 #include "message.h"
 #include "format.h"
 #include "gettext.h"
-#include "xsize.h"
+#include "xsize_gnu.h"
 
 #define _(str) gettext (str)
 

@@ -32,7 +32,7 @@
 
 #include <math.h>
 #include "mlp.h"
-#include "arch.h"
+#include "opus/celt/arch_celt.h"
 #include "tansig_table.h"
 #define MAX_NEURONS 100
 

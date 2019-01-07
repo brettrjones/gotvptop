@@ -32,7 +32,7 @@
 #include "full-write.h"
 #include "terminfo.h"
 #include "xalloc.h"
-#include "xsize.h"
+#include "xsize_gnu.h"
 #include "gettext.h"
 
 #define _(str) gettext (str)

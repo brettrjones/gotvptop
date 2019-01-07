@@ -36,7 +36,7 @@
 #include <errno.h>
 #include "cpluff.h"
 #include "defines.h"
-#include "util.h"
+#include "util_cpluff.h"
 #include "internal.h"
 
 

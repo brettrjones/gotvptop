@@ -38,7 +38,7 @@
 #include <sys/stat.h> /* for stat() */
 #include <sys/types.h> /* for off_t */
 #include "share/compat.h"
-#include "FLAC/assert.h"
+
 #include "share/alloc.h"
 #include "protected/stream_decoder.h"
 #include "private/bitreader.h"
