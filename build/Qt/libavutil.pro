@@ -50,11 +50,6 @@ include(../../DependLibs/ffmpeg/libavutil/build/Qt/libavutil.pri)
 #include(../../DependLibs/ffmpeg/libswresample/build/Qt/libswresample.pri)
 #include(../../DependLibs/ffmpeg/libswscale/build/Qt/libswscale.pri)
 
-<<<<<<< Updated upstream
-=======
-HEADERS +=
-
->>>>>>> Stashed changes
 
 
 

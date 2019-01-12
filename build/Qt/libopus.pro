@@ -43,3 +43,5 @@ QMAKE_CXXFLAGS += -Wno-unused -Wno-parentheses -Wno-attributes  -Wno-ignored-qua
 
 include(../../DependLibs/libopus/build/Qt/libopus.pri)
 
+HEADERS +=
+

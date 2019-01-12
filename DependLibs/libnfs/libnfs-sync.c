@@ -28,6 +28,10 @@
 #include "win32_compat.h"
 #endif
 
+#ifdef TARGET_OS_LINUX
+# include <poll.h>
+#endif
+
 #ifdef HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
 #endif
@@ -888,7 +892,7 @@ static void lseek_cb(int status, struct nfs_context *nfs, void *data, void *priv
 	}
 }
 
-int nfs_lseek(struct nfs_context *nfs, struct nfsfh *nfsfh, int64_t offset, int whence, uint64_t *current_offset)
+int nfs_lseek(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t offset, int whence, uint64_t *current_offset)
 {
 	struct sync_cb_data cb_data;
 

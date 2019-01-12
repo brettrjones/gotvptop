@@ -1,0 +1,6 @@
+#pragma once
+# include <GoTvDependLibrariesConfig.h>
+
+#define OPUS_PACKAGE_VERSION "v0.1.9"
+#define OPUS_PACKAGE_NAME "opus media tools"
+

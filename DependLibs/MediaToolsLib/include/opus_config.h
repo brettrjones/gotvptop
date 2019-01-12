@@ -12,6 +12,6 @@
 
 # define USE_ALLOCA            1
 
-#include "include/opus_version.h"
+#include "libopus/include/opus_version.h"
 
 

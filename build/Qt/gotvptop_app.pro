@@ -93,6 +93,7 @@ unix{
         LIBS += -larmrwbencLinuxD
         LIBS += -lfdk-aacLinuxD
         LIBS += -lopencore-amrLinuxD
+        LIBS += -lopenmpt-fullLinuxD
         LIBS += -lvpxLinuxD
         LIBS += -lx264LinuxD
         LIBS += -lx265LinuxD

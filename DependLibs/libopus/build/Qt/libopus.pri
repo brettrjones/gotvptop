@@ -87,7 +87,12 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
     $$PWD/../../celt/x86/celt_lpc_sse.h \
     $$PWD/../../celt/x86/pitch_sse.h \
     $$PWD/../../celt/x86/x86cpu.c.autosave \
-    $$PWD/../../celt/x86/x86cpu.h
+    $$PWD/../../celt/x86/x86cpu.h \
+    $$PWD/../../include/opus.h \
+    $$PWD/../../include/opus_custom.h \
+    $$PWD/../../include/opus_defines.h \
+    $$PWD/../../include/opus_multistream.h \
+    $$PWD/../../include/opus_types.h
 
 SOURCES += 	$$PWD/../../celt/arm/arm_celt_map.c \
 	$$PWD/../../celt/arm/armcpu.c \

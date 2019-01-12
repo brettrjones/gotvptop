@@ -30,7 +30,7 @@
 GOTV_EXTERN "C" {
 #endif
 
-#if !defined(HAVE_SOCKADDR_STORAGE) && !defined(TARGET_OS_WINDOWS)
+#if !defined(HAVE_SOCKADDR_STORAGE) && !defined(TARGET_OS_WINDOWS) && !defined(TARGET_OS_LINUX)
 /*
  * RFC 2553: protocol-independent placeholder for socket addresses
  */
