@@ -8,7 +8,7 @@
  */
 #include "config_kodi.h"
 
-#include "ostream.h"
+#include "fmt/ostream.h"
 
 namespace fmt {
 

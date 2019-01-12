@@ -248,6 +248,14 @@ int ffurl_handshake(URLContext *c)
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ"                \
     "0123456789+-."
 
+static GOTV_INLINE int is_dos_path(const char *path)
+{
+    if (path[0] && path[1] == ':')
+        return 1;
+    return 0;
+}
+
+
 static const struct URLProtocol *url_find_protocol(const char *filename)
 {
     const URLProtocol **protocols;

@@ -14,6 +14,7 @@ class OsInterface
 {
 public:
     OsInterface( IGoTv& gotv );
+    virtual ~OsInterface() = default;
 
     IGoTv&                      getIGoTv() { return m_IGoTv; }
 

@@ -27,14 +27,12 @@ macx{
     INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p/include
 }
 
-QMAKE_EXTRA_COMPILERS += yasm
-NASMEXTRAFLAGS = -f elf64 -g -F dwarf
-OTHER_FILES += $$NASM_SOURCES
-nasm.output = ${QMAKE_FILE_BASE}.o
-nasm.commands = yasm $$NASMEXTRAFLAGS -o ${QMAKE_FILE_BASE}.o ${QMAKE_FILE_NAME}
-nasm.input = NASM_SOURCES
-
-
+#QMAKE_EXTRA_COMPILERS += yasm
+#NASMEXTRAFLAGS = -f elf64 -g -F dwarf
+#OTHER_FILES += $$NASM_SOURCES
+#nasm.output = ${QMAKE_FILE_BASE}.o
+#nasm.commands = yasm $$NASMEXTRAFLAGS -o ${QMAKE_FILE_BASE}.o ${QMAKE_FILE_NAME}
+#nasm.input = NASM_SOURCES
 
 
 

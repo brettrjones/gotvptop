@@ -844,11 +844,6 @@ static AVCodec *find_codec(enum AVCodecID id, int (*x)(const AVCodec *))
     while ((p = av_codec_iterate(&i))) {
         if (!x(p))
             continue;
-        unsigned int * iterIdxPtr = ( unsigned int *)i;
-        if( ( id == AV_CODEC_ID_AAC ) && ( iterIdxPtr == 380 ) )
-        {
-            LogMsg( LOG_DEBUG, "Find codec %d at index %d", id, iterIdxPtr );
-        }
         if (p->id == id) {
             if (p->capabilities & AV_CODEC_CAP_EXPERIMENTAL && !experimental) {
                 experimental = p;

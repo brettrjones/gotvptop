@@ -21,8 +21,8 @@
  * For more information, contact us at license @ x265.com.
  *****************************************************************************/
 
-#ifndef X265_CONFIG_H
-#define X265_CONFIG_H
+#ifndef X265_CONFIG_H_
+#define X265_CONFIG_H_
 
 #include <GoTvDependLibrariesConfig.h>
 
@@ -30,10 +30,11 @@
  * the shared library SONAME on platforms which support it. It also
  * prevents linking against a different version of the static lib */
 #define X265_BUILD					117
-#define X265_DEPTH					12
+#define X265_DEPTH					10
 //#define LINKED_8BIT					1
 //#define LINKED_10BIT				1
 //#define LINKED_12BIT				1
 #define EXPORT_C_API_LIBX256		1
 #define HAVE_STRTOK_R               1
-#endif
+
+#endif // X265_CONFIG_H_

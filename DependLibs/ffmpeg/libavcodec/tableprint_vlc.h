@@ -40,9 +40,9 @@
 #define AV_INPUT_BUFFER_PADDING_SIZE 64 // the value does not matter for this
 #include "tableprint.h"
 #include "get_bits.h"
-#include "mathtables.c"
+#include "mathtables_avcodec.cpp"
 #include "libavutil/reverse.c"
-#include "bitstream.c"
+#include "bitstream_avcodec.c"
 
 #define REPLACE_DEFINE2(type) write_##type##_array
 #define REPLACE_DEFINE(type) REPLACE_DEFINE2(type)

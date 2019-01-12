@@ -61,7 +61,7 @@
 #define HAVE_FLOAT_H 1
 
 /* Define to 1 if you have the `fstat' function. */
-#define HAVE_FSTAT 1
+//#define HAVE_FSTAT 1 // defined in GoTvCompilerConfig.h
 
 /* Define to 1 if you have the `getenv' function. */
 #define HAVE_GETENV 1
@@ -256,22 +256,22 @@
 #define PACKAGE "lzo"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "markus@oberhumer.com"
+//#define PACKAGE_BUGREPORT "markus@oberhumer.com"
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "LZO"
+//#define PACKAGE_NAME "LZO"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "LZO 2.10"
+//#define PACKAGE_STRING "LZO 2.10"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "lzo"
+//#define PACKAGE_TARNAME "lzo"
 
 /* Define to the home page for this package. */
-#define PACKAGE_URL "http://www.oberhumer.com/opensource/lzo/"
+//#define PACKAGE_URL "http://www.oberhumer.com/opensource/lzo/"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "2.10"
+//#define PACKAGE_VERSION "2.10"
 
 /* Define as the return type of signal handlers (`int' or `void'). */
 #define RETSIGTYPE void
@@ -391,6 +391,7 @@
 #define SIZEOF___INT32 0
 
 /* The size of `__int64', as computed by sizeof. */
+#undef SIZEOF___INT64 // defined in GoTvCompilerConfig.h
 #define SIZEOF___INT64 0
 
 /* Define to 1 if you have the ANSI C header files. */

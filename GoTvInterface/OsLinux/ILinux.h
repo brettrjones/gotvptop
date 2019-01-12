@@ -40,7 +40,6 @@ public:
 
 private:
 
-    HANDLE                       m_AppRunningMutex;
 };
 
 #endif // TARGET_OS_LINUX

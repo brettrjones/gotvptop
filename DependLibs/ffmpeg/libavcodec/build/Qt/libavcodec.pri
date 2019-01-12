@@ -1,7 +1,10 @@
 HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../../../../GoTvCpuArchDefines.h \
 	$$PWD/../../../../../GoTvDependLibrariesConfig.h \
+<<<<<<< Updated upstream
 	$$PWD/../../../../CoreLib/CompileConfig.h \
+=======
+>>>>>>> Stashed changes
 	$$PWD/../../../config_ffmpeg.h \
 	$$PWD/../../a64colors.h \
 	$$PWD/../../a64tables.h \
@@ -578,7 +581,11 @@ SOURCES += 	\
 	$$PWD/../../bintext.c \
 	$$PWD/../../bit_depth_template.c \
 	$$PWD/../../bitpacked.c \
+<<<<<<< Updated upstream
 	$$PWD/../../bitstream.c \
+=======
+    $$PWD/../../bitstream.c \
+>>>>>>> Stashed changes
 	$$PWD/../../bitstream_filter.c \
 	$$PWD/../../bitstream_filters.c \
 	$$PWD/../../blockdsp.c \
@@ -962,7 +969,10 @@ SOURCES += 	\
 	$$PWD/../../mace.c \
 	$$PWD/../../magicyuv.c \
 	$$PWD/../../magicyuvenc.c \
+<<<<<<< Updated upstream
 	$$PWD/../../mathtables.c \
+=======
+>>>>>>> Stashed changes
 	$$PWD/../../mdct15.c \
 	$$PWD/../../mdct_fixed.c \
 	$$PWD/../../mdct_fixed_32.c \
@@ -1423,5 +1433,10 @@ SOURCES += 	\
 	$$PWD/../../yuv4enc.c \
 	$$PWD/../../zerocodec.c \
 	$$PWD/../../zmbv.c \
+<<<<<<< Updated upstream
 	$$PWD/../../zmbvenc.c
 
+=======
+    $$PWD/../../zmbvenc.c \
+    $$PWD/../../mathtables.c
+>>>>>>> Stashed changes

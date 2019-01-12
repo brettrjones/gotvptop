@@ -50,7 +50,7 @@
 #endif
 #include "PlatformDefs.h"
 #include "NetworkLinux.h"
-#include "Util.h"
+#include "GoTvCoreUtil.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 

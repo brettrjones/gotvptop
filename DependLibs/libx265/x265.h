@@ -25,10 +25,7 @@
 #ifndef X265_H
 #define X265_H
 
-#include <GoTvDependLibrariesConfig.h>
-
 #include <libx265/config_libx265.h>
-#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -1637,9 +1634,11 @@ typedef struct x265_api
 /* Force a link error in the case of linking against an incompatible API version.
  * Glue #defines exist to force correct macro expansion; the final output of the macro
  * is x265_api_get_##X265_BUILD (for purposes of dlopen). */
+#ifndef LIB_STATIC //BRJ
 #define x265_api_glue1(x, y) x ## y
 #define x265_api_glue2(x, y) x265_api_glue1(x, y)
 #define x265_api_get x265_api_glue2(x265_api_get_, X265_BUILD)
+#endif
 
 /* x265_api_get:
  *   Retrieve the programming interface for a linked x265 library.

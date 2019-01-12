@@ -2,7 +2,6 @@
 INCLUDEPATH += $$PWD/../../xbmc/xbmc/
 INCLUDEPATH += $$PWD/../../../DependLibs/
 INCLUDEPATH += $$PWD/../../../DependLibs/libUPnP
-INCLUDEPATH += $$PWD/../../../DependLibs/openssl-1.0.2o/inc32
 #INCLUDEPATH += $$PWD/../../xbmc/xbmc/cores/AudioEngine
 INCLUDEPATH += $$PWD/../../../DependLibs/ffmpeg
 INCLUDEPATH += $$PWD/../../../DependLibs/libUPnP/Platinum/Source/Devices/MediaRenderer
@@ -22,6 +21,84 @@ INCLUDEPATH += $$PWD/../../../DependLibs/libfreetype/include
 
 android{
     INCLUDEPATH += $$PWD/../../xbmc/xbmc/platform/android
+    INCLUDEPATH += $$PWD/../../../DependLibs/openssl-1.0.2p/include
+
+HEADERS += 	$$PWD/../../xbmc/xbmc/platform/android/activity/AndroidExtra.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/AndroidFeatures.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/AndroidJoyStick.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/AndroidKey.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/AndroidMouse.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/AndroidTouch.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/DllGraphicBuffer.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/EventLoop.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/GraphicBuffer.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/IActivityHandler.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/IInputDeviceCallbacks.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/IInputDeviceEventHandler.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/IInputHandler.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIMainActivity.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCAudioManagerOnAudioFocusChangeListener.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCFile.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCJsonHandler.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCMainView.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCMediaSession.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerDiscoveryListener.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerRegistrationListener.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerResolveListener.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCSurfaceTextureOnFrameAvailableListener.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCVideoView.h \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/XBMCApp.h \
+    $$PWD/../../xbmc/xbmc/platform/android/bionic_supplement/bionic_supplement.h \
+    $$PWD/../../xbmc/xbmc/platform/android/drm/MediaDrmCryptoSession.h \
+    $$PWD/../../xbmc/xbmc/platform/android/filesystem/APKDirectory.h \
+    $$PWD/../../xbmc/xbmc/platform/android/filesystem/APKFile.h \
+    $$PWD/../../xbmc/xbmc/platform/android/filesystem/AndroidAppDirectory.h \
+    $$PWD/../../xbmc/xbmc/platform/android/filesystem/AndroidAppFile.h \
+    $$PWD/../../xbmc/xbmc/platform/android/network/NetworkAndroid.h \
+    $$PWD/../../xbmc/xbmc/platform/android/network/ZeroconfAndroid.h \
+    $$PWD/../../xbmc/xbmc/platform/android/network/ZeroconfBrowserAndroid.h \
+    $$PWD/../../xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.h \
+    $$PWD/../../xbmc/xbmc/platform/android/peripherals/PeripheralBusAndroid.h \
+    $$PWD/../../xbmc/xbmc/platform/android/powermanagement/AndroidPowerSyscall.h \
+    $$PWD/../../xbmc/xbmc/platform/android/storage/AndroidStorageProvider.h
+
+
+
+SOURCES += $$PWD/../../xbmc/xbmc/platform/android/activity/AndroidFeatures.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/AndroidJoyStick.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/AndroidKey.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/AndroidMouse.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/AndroidTouch.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/EventLoop.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/GraphicBuffer.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIMainActivity.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCAudioManagerOnAudioFocusChangeListener.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCFile.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCJsonHandler.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCMainView.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCMediaSession.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerDiscoveryListener.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerRegistrationListener.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerResolveListener.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCSurfaceTextureOnFrameAvailableListener.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/JNIXBMCVideoView.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/XBMCApp.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/activity/android_main.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/bionic_supplement/getdelim.c \
+    $$PWD/../../xbmc/xbmc/platform/android/bionic_supplement/rand_r.c \
+    $$PWD/../../xbmc/xbmc/platform/android/drm/MediaDrmCryptoSession.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/filesystem/APKDirectory.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/filesystem/APKFile.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/filesystem/AndroidAppDirectory.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/filesystem/AndroidAppFile.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/network/NetworkAndroid.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/network/ZeroconfAndroid.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/network/ZeroconfBrowserAndroid.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/peripherals/PeripheralBusAndroid.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/powermanagement/AndroidPowerSyscall.cpp \
+    $$PWD/../../xbmc/xbmc/platform/android/storage/AndroidStorageProvider.cpp
+
 }
 
 win32{
@@ -30,11 +107,117 @@ win32{
     #INCLUDEPATH += $$PWD/../../../DependLibs/externlibs/win32/python
     INCLUDEPATH += $$PWD/../../../DependLibs/libUPnP/Neptune/Source/System/Win32
     INCLUDEPATH += $$PWD/../../../DependLibs/Effects11/inc
+    INCLUDEPATH += $$PWD/../../../DependLibs/openssl-1.0.2o/inc32
 }
 
 unix{
     INCLUDEPATH += $$PWD/../../xbmc/xbmc/platform/linux
+    INCLUDEPATH += $$PWD/../../xbmc/xbmc/platform/posix
+    INCLUDEPATH += $$PWD/../../../DependLibs/openssl-1.0.2p/include
     INCLUDEPATH += /usr/include/python2.7
+
+HEADERS += 		$$PWD/../../xbmc/xbmc/platform/linux/ConvUtils.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/DBusMessage.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/DBusReserve.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/DBusUtil.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/DllBCM.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/DllOMX.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/FDEventMonitor.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/LinuxResourceCounter.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/LinuxTimezone.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/OMXClock.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/OMXCore.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/OptionalsReg.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/PlatformConstants.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/PlatformDefs.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/PosixMountProvider.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/RBP.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/TimeUtils.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/XFileUtils.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/XHandle.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/XHandlePublic.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/XMemUtils.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/XTimeUtils.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/input/LIRC.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/input/LibInputHandler.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/input/LibInputKeyboard.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/input/LibInputPointer.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/input/LibInputTouch.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/network/NetworkLinux.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/network/ZeroconfAvahi.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/network/ZeroconfBrowserAvahi.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/peripherals/PeripheralBusUSBLibUSB.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/peripherals/PeripheralBusUSBLibUdev.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/powermanagement/ConsoleUPowerSyscall.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/powermanagement/FallbackPowerSyscall.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/powermanagement/LinuxPowerSyscall.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/powermanagement/LogindUPowerSyscall.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/powermanagement/UPowerSyscall.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/rpi/rpi_user_vcsm.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/sse4/DllLibSSE4.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/stat_utf8.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/stdio_utf8.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/storage/LinuxStorageProvider.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/storage/UDevProvider.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/storage/UDisks2Provider.h \
+    $$PWD/../../xbmc/xbmc/platform/linux/storage/UDisksProvider.h \
+    $$PWD/../../xbmc/xbmc/platform/posix/filesystem/PosixDirectory.h \
+    $$PWD/../../xbmc/xbmc/platform/posix/filesystem/PosixFile.h \
+    $$PWD/../../xbmc/xbmc/platform/posix/filesystem/SMBDirectory.h \
+    $$PWD/../../xbmc/xbmc/platform/posix/filesystem/SMBFile.h \
+    $$PWD/../../xbmc/xbmc/platform/posix/utils/FileHandle.h \
+    $$PWD/../../xbmc/xbmc/platform/posix/utils/Mmap.h \
+    $$PWD/../../xbmc/xbmc/platform/posix/utils/PosixInterfaceForCLog.h \
+    $$PWD/../../xbmc/xbmc/platform/posix/utils/SharedMemory.h
+
+
+SOURCES += $$PWD/../../xbmc/xbmc/platform/linux/ConvUtils.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/DBusMessage.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/DBusReserve.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/DBusUtil.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/FDEventMonitor.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/LinuxResourceCounter.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/LinuxTimezone.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/OMXClock.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/OMXCore.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/OptionalsReg.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/PosixMountProvider.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/RBP.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/TimeUtils.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/XFileUtils.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/XHandle.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/XMemUtils.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/XTimeUtils.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/input/LIRC.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/input/LibInputHandler.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/input/LibInputKeyboard.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/input/LibInputPointer.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/input/LibInputTouch.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/network/NetworkLinux.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/network/ZeroconfAvahi.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/network/ZeroconfBrowserAvahi.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/peripherals/PeripheralBusUSBLibUSB.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/peripherals/PeripheralBusUSBLibUdev.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/powermanagement/ConsoleUPowerSyscall.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/powermanagement/LinuxPowerSyscall.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/powermanagement/LogindUPowerSyscall.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/powermanagement/UPowerSyscall.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/sse4/CopyFrame.cpp \
+    $$PWD/../../xbmc/xbmc/platform/linux/storage/LinuxStorageProvider.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/storage/UDevProvider.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/storage/UDisks2Provider.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/linux/storage/UDisksProvider.cpp \
+    $$PWD/../../xbmc/xbmc/platform/posix/Filesystem.cpp \
+    $$PWD/../../xbmc/xbmc/platform/posix/MessagePrinter.cpp \
+    $$PWD/../../xbmc/xbmc/platform/posix/filesystem/PosixDirectory.cpp \
+    $$PWD/../../xbmc/xbmc/platform/posix/filesystem/PosixFile.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/posix/filesystem/SMBDirectory.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/posix/filesystem/SMBFile.cpp \
+#    $$PWD/../../xbmc/xbmc/platform/posix/main.cpp \
+    $$PWD/../../xbmc/xbmc/platform/posix/utils/Mmap.cpp \
+    $$PWD/../../xbmc/xbmc/platform/posix/utils/PosixInterfaceForCLog.cpp \
+    $$PWD/../../xbmc/xbmc/platform/posix/utils/SharedMemory.cpp \
+
 }
 
 macx{
@@ -1623,7 +1806,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/ThumbLoader.cpp \
     $$PWD/../../xbmc/xbmc/XBApplicationEx.cpp \
     $$PWD/../../xbmc/xbmc/XBDateTime.cpp \
-    $$PWD/../../xbmc/xbmc/addons/Addon.cpp \
     $$PWD/../../xbmc/xbmc/addons/AddonBuilder.cpp \
     $$PWD/../../xbmc/xbmc/addons/AddonDatabase.cpp \
     $$PWD/../../xbmc/xbmc/addons/AddonInfo.cpp \
@@ -1632,7 +1814,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/addons/AddonStatusHandler.cpp \
     $$PWD/../../xbmc/xbmc/addons/AddonSystemSettings.cpp \
     $$PWD/../../xbmc/xbmc/addons/AddonVersion.cpp \
-    $$PWD/../../xbmc/xbmc/addons/AudioDecoder.cpp \
     $$PWD/../../xbmc/xbmc/addons/AudioEncoder.cpp \
     $$PWD/../../xbmc/xbmc/addons/BinaryAddonCache.cpp \
     $$PWD/../../xbmc/xbmc/addons/ContextMenuAddon.cpp \
@@ -1927,7 +2108,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/FTPDirectory.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/FTPParse.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/FavouritesDirectory.cpp \
-    $$PWD/../../xbmc/xbmc/filesystem/File.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/FileCache.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/FileDirectoryFactory.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/FileFactory.cpp \
@@ -1941,7 +2121,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MultiPathDirectory.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MultiPathFile.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory.cpp \
-    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNode.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeAlbum.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeAlbumCompilations.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeAlbumCompilationsSongs.cpp \
@@ -1954,14 +2133,12 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeArtist.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeGrouped.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeOverview.cpp \
-    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeRoot.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeSingles.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeSong.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeSongTop100.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeTop100.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeYearAlbum.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeYearSong.cpp \
-    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/QueryParams.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseFile.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicFileDirectory.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicSearchDirectory.cpp \
@@ -2022,7 +2199,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/iso9660.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/udf25.cpp \
     $$PWD/../../xbmc/xbmc/games/GameServices.cpp \
-    $$PWD/../../xbmc/xbmc/games/GameSettings.cpp \
     $$PWD/../../xbmc/xbmc/games/GameUtils.cpp \
     $$PWD/../../xbmc/xbmc/games/addons/GameClient.cpp \
     $$PWD/../../xbmc/xbmc/games/addons/GameClientProperties.cpp \
@@ -2245,7 +2421,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/AddonClass.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/AddonUtils.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/CallbackFunction.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/CallbackHandler.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/Control.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/Dialog.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/File.cpp \
@@ -2253,7 +2428,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/InfoTagRadioRDS.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/InfoTagVideo.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/Keyboard.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/LanguageHook.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/ListItem.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/ModuleXbmc.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/ModuleXbmcgui.cpp \
@@ -2620,7 +2794,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
 	$$PWD/../../xbmc/xbmc/dialogs/GUIDialogBusyNoCancel.cpp \
 	$$PWD/../../xbmc/xbmc/drm/CryptoSession.cpp \
 	$$PWD/../../xbmc/xbmc/filesystem/DllLibNfs.cpp \
-	$$PWD/../../xbmc/xbmc/fmt/format.cpp \
 	$$PWD/../../xbmc/xbmc/fmt/ostream.cpp \
 	$$PWD/../../xbmc/xbmc/fmt/posix.cpp \
 	$$PWD/../../xbmc/xbmc/games/addons/GameClientInGameSaves.cpp \
@@ -2823,7 +2996,17 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
 	$$PWD/../../xbmc/xbmc/windowing/qt/VideoSyncQt.cpp \
 	$$PWD/../../xbmc/xbmc/windowing/qt/WinEventsQt.cpp \
 	$$PWD/../../xbmc/xbmc/windowing/qt/WinSystemQt.cpp \
-	$$PWD/../../xbmc/xbmc/windowing/qt/WinSystemQtContext.cpp
+	$$PWD/../../xbmc/xbmc/windowing/qt/WinSystemQtContext.cpp \
+    $$PWD/../../xbmc/xbmc/fmt/format_fmt.cpp \
+    $$PWD/../../xbmc/xbmc/filesystem/File2.cpp \
+    $$PWD/../../xbmc/xbmc/games/GameSettings2.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/LanguageHook2.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/CallbackHandler2.cpp \
+    $$PWD/../../xbmc/xbmc/addons/Addon2.cpp \
+    $$PWD/../../xbmc/xbmc/addons/AudioDecoder2.cpp \
+    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeMusic.cpp \
+    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNode2.cpp \
+    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/QueryParams2.cpp
 
 win32{
     SOURCES += 	$$PWD/../../xbmc/xbmc/platform/win32/CharsetConverterWin32.cpp \

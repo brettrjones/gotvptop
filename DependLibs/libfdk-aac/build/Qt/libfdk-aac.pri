@@ -1,7 +1,6 @@
 INCLUDEPATH += $$PWD/../../include
 INCLUDEPATH += $$PWD/../../libSYS/include
 INCLUDEPATH += $$PWD/../../libPCMutils/include
-INCLUDEPATH += $$PWD/../../libAACdec/include
 INCLUDEPATH += $$PWD/../../libAACenc/include
 INCLUDEPATH += $$PWD/../../libMpegTPDec/include
 INCLUDEPATH += $$PWD/../../libMpegTPEnc/include
@@ -11,7 +10,6 @@ INCLUDEPATH += $$PWD/../../libFDK/include
 
 HEADERS += 	$$PWD/../../include/aacdecoder_lib.h \
 	$$PWD/../../include/config_fdk-aac.h \
-	$$PWD/../../libAACdec/include/aacdecoder_lib.h \
 	$$PWD/../../libAACdec/src/aac_ram.h \
 	$$PWD/../../libAACdec/src/aac_rom.h \
 	$$PWD/../../libAACdec/src/aacdec_drc.h \
@@ -115,7 +113,73 @@ HEADERS += 	$$PWD/../../include/aacdecoder_lib.h \
 	$$PWD/../../libSYS/include/conv_string.h \
 	$$PWD/../../libSYS/include/genericStds.h \
 	$$PWD/../../libSYS/include/machine_type.h \
-	$$PWD/../../libSYS/include/wav_file.h
+	$$PWD/../../libSYS/include/wav_file.h \
+    $$PWD/../../libAACenc/src/aacenc.h \
+    $$PWD/../../libAACenc/src/aacenc_pns.h \
+    $$PWD/../../libAACenc/src/aacEnc_ram.h \
+    $$PWD/../../libAACenc/src/aacEnc_rom.h \
+    $$PWD/../../libAACenc/src/aacenc_tns.h \
+    $$PWD/../../libAACenc/src/adj_thr.h \
+    $$PWD/../../libAACenc/src/adj_thr_data.h \
+    $$PWD/../../libAACenc/src/band_nrg.h \
+    $$PWD/../../libAACenc/src/bandwidth.h \
+    $$PWD/../../libAACenc/src/bit_cnt.h \
+    $$PWD/../../libAACenc/src/bitenc.h \
+    $$PWD/../../libAACenc/src/block_switch.h \
+    $$PWD/../../libAACenc/src/channel_map.h \
+    $$PWD/../../libAACenc/src/chaosmeasure.h \
+    $$PWD/../../libAACenc/src/dyn_bits.h \
+    $$PWD/../../libAACenc/src/grp_data.h \
+    $$PWD/../../libAACenc/src/intensity.h \
+    $$PWD/../../libAACenc/src/interface.h \
+    $$PWD/../../libAACenc/src/line_pe.h \
+    $$PWD/../../libAACenc/src/metadata_compressor.h \
+    $$PWD/../../libAACenc/src/metadata_main.h \
+    $$PWD/../../libAACenc/src/ms_stereo.h \
+    $$PWD/../../libAACenc/src/noisedet.h \
+    $$PWD/../../libAACenc/src/pns_func.h \
+    $$PWD/../../libAACenc/src/pnsparam.h \
+    $$PWD/../../libAACenc/src/pre_echo_control.h \
+    $$PWD/../../libAACenc/src/psy_configuration.h \
+    $$PWD/../../libAACenc/src/psy_const.h \
+    $$PWD/../../libAACenc/src/psy_data.h \
+    $$PWD/../../libAACenc/src/psy_main.h \
+    $$PWD/../../libAACenc/src/qc_data.h \
+    $$PWD/../../libAACenc/src/qc_main.h \
+    $$PWD/../../libAACenc/src/quantize.h \
+    $$PWD/../../libAACenc/src/sf_estim.h \
+    $$PWD/../../libAACenc/src/spreading.h \
+    $$PWD/../../libAACenc/src/tns_func.h \
+    $$PWD/../../libAACenc/src/tonality.h \
+    $$PWD/../../libAACenc/src/transform.h \
+    $$PWD/../../libAACenc/include/aacenc_lib.h \
+    $$PWD/../../libMpegTPEnc/src/tpenc_adif.h \
+    $$PWD/../../libMpegTPEnc/src/tpenc_adts.h \
+    $$PWD/../../libMpegTPEnc/src/tpenc_asc.h \
+    $$PWD/../../libMpegTPEnc/src/tpenc_latm.h \
+    $$PWD/../../libSBRenc/include/sbr_encoder.h \
+    $$PWD/../../libSBRenc/src/bit_sbr.h \
+    $$PWD/../../libSBRenc/src/cmondata.h \
+    $$PWD/../../libSBRenc/src/code_env.h \
+    $$PWD/../../libSBRenc/src/env_bit.h \
+    $$PWD/../../libSBRenc/src/env_est.h \
+    $$PWD/../../libSBRenc/src/fram_gen.h \
+    $$PWD/../../libSBRenc/src/invf_est.h \
+    $$PWD/../../libSBRenc/src/mh_det.h \
+    $$PWD/../../libSBRenc/src/nf_est.h \
+    $$PWD/../../libSBRenc/src/ps_bitenc.h \
+    $$PWD/../../libSBRenc/src/ps_const.h \
+    $$PWD/../../libSBRenc/src/ps_encode.h \
+    $$PWD/../../libSBRenc/src/ps_main.h \
+    $$PWD/../../libSBRenc/src/resampler.h \
+    $$PWD/../../libSBRenc/src/sbr.h \
+    $$PWD/../../libSBRenc/src/sbr_def.h \
+    $$PWD/../../libSBRenc/src/sbrenc_freq_sca.h \
+    $$PWD/../../libSBRenc/src/sbr_misc.h \
+    $$PWD/../../libSBRenc/src/sbr_ram_fdk_enc.h \
+    $$PWD/../../libSBRenc/src/sbr_rom_fdk_enc.h \
+    $$PWD/../../libSBRenc/src/ton_corr.h \
+    $$PWD/../../libSBRenc/src/tran_det.h
 
 SOURCES += 	$$PWD/../../libAACdec/src/aac_ram.cpp \
 	$$PWD/../../libAACdec/src/aac_rom.cpp \
@@ -195,5 +259,61 @@ SOURCES += 	$$PWD/../../libAACdec/src/aac_ram.cpp \
 	$$PWD/../../libSYS/src/linux/genericStds_linux.cpp \
 	$$PWD/../../libSYS/src/linux/uart_linux.cpp \
 	$$PWD/../../libSYS/src/mips/genericStds_mips.cpp \
-	$$PWD/../../libSYS/src/wav_file.cpp
+	$$PWD/../../libSYS/src/wav_file.cpp \
+    $$PWD/../../libAACenc/src/aacenc_lib.cpp \
+    $$PWD/../../libAACenc/src/aacenc.cpp \
+    $$PWD/../../libAACenc/src/aacenc_pns.cpp \
+    $$PWD/../../libAACenc/src/aacEnc_ram.cpp \
+    $$PWD/../../libAACenc/src/aacEnc_rom.cpp \
+    $$PWD/../../libAACenc/src/aacenc_tns.cpp \
+    $$PWD/../../libAACenc/src/adj_thr.cpp \
+    $$PWD/../../libAACenc/src/band_nrg.cpp \
+    $$PWD/../../libAACenc/src/bandwidth.cpp \
+    $$PWD/../../libAACenc/src/bit_cnt.cpp \
+    $$PWD/../../libAACenc/src/bitenc.cpp \
+    $$PWD/../../libAACenc/src/block_switch.cpp \
+    $$PWD/../../libAACenc/src/channel_map.cpp \
+    $$PWD/../../libAACenc/src/chaosmeasure.cpp \
+    $$PWD/../../libAACenc/src/dyn_bits.cpp \
+    $$PWD/../../libAACenc/src/grp_data.cpp \
+    $$PWD/../../libAACenc/src/intensity.cpp \
+    $$PWD/../../libAACenc/src/line_pe.cpp \
+    $$PWD/../../libAACenc/src/metadata_compressor.cpp \
+    $$PWD/../../libAACenc/src/metadata_main.cpp \
+    $$PWD/../../libAACenc/src/ms_stereo.cpp \
+    $$PWD/../../libAACenc/src/noisedet.cpp \
+    $$PWD/../../libAACenc/src/pnsparam.cpp \
+    $$PWD/../../libAACenc/src/pre_echo_control.cpp \
+    $$PWD/../../libAACenc/src/psy_configuration.cpp \
+    $$PWD/../../libAACenc/src/psy_main.cpp \
+    $$PWD/../../libAACenc/src/qc_main.cpp \
+    $$PWD/../../libAACenc/src/quantize.cpp \
+    $$PWD/../../libAACenc/src/sf_estim.cpp \
+    $$PWD/../../libAACenc/src/spreading.cpp \
+    $$PWD/../../libAACenc/src/tonality.cpp \
+    $$PWD/../../libAACenc/src/transform.cpp \
+    $$PWD/../../libMpegTPEnc/src/tpenc_adif.cpp \
+    $$PWD/../../libMpegTPEnc/src/tpenc_adts.cpp \
+    $$PWD/../../libMpegTPEnc/src/tpenc_asc.cpp \
+    $$PWD/../../libMpegTPEnc/src/tpenc_latm.cpp \
+    $$PWD/../../libMpegTPEnc/src/tpenc_lib.cpp \
+    $$PWD/../../libSBRenc/src/bit_sbr.cpp \
+    $$PWD/../../libSBRenc/src/code_env.cpp \
+    $$PWD/../../libSBRenc/src/env_bit.cpp \
+    $$PWD/../../libSBRenc/src/env_est.cpp \
+    $$PWD/../../libSBRenc/src/fram_gen.cpp \
+    $$PWD/../../libSBRenc/src/invf_est.cpp \
+    $$PWD/../../libSBRenc/src/mh_det.cpp \
+    $$PWD/../../libSBRenc/src/nf_est.cpp \
+    $$PWD/../../libSBRenc/src/ps_bitenc.cpp \
+    $$PWD/../../libSBRenc/src/ps_encode.cpp \
+    $$PWD/../../libSBRenc/src/ps_main.cpp \
+    $$PWD/../../libSBRenc/src/resampler.cpp \
+    $$PWD/../../libSBRenc/src/sbrenc_freq_sca.cpp \
+    $$PWD/../../libSBRenc/src/sbr_encoder.cpp \
+    $$PWD/../../libSBRenc/src/sbr_misc.cpp \
+    $$PWD/../../libSBRenc/src/sbr_ram_fdk_enc.cpp \
+    $$PWD/../../libSBRenc/src/sbr_rom_fdk_enc.cpp \
+    $$PWD/../../libSBRenc/src/ton_corr.cpp \
+    $$PWD/../../libSBRenc/src/tran_det.cpp
 

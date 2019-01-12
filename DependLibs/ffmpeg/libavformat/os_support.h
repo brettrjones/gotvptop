@@ -67,18 +67,6 @@
 #  endif
 #  define lseek(f,p,w) lseek64((f), (p), (w))
 #endif
-
-#ifndef TARGET_OS_LINUX
-static GOTV_INLINE int is_dos_path(const char *path)
-{
-# if HAVE_DOS_PATHS
-    if (path[0] && path[1] == ':')
-        return 1;
-# endif
-    return 0;
-}
-#endif // TARGET_OS_LINUX
-
 #if defined(__OS2__) || defined(__Plan9__)
 # define SHUT_RD 0
 # define SHUT_WR 1

@@ -1,7 +1,8 @@
 # Global
 TEMPLATE = lib
 
-TARGET_NAME = crossguid
+TARGET_NAME = openmpt-full
+
 
 CONFIG += qt thread silent
 
@@ -13,16 +14,11 @@ DEFINES += QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS
 
 INCLUDEPATH += ./../../
 INCLUDEPATH += ./../../DependLibs
-<<<<<<< Updated upstream
 INCLUDEPATH += ./../../DependLibs/libcurl/include
 INCLUDEPATH += ./../../DependLibs/libcurl/lib
 INCLUDEPATH += ./../../DependLibs/ffmpeg
-INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o
-INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o/inc32
 INCLUDEPATH += ./../../GoTvCore
 INCLUDEPATH += ./../../GoTvCore/xbmc
-=======
->>>>>>> Stashed changes
 
 
 include(version.pri)
@@ -30,6 +26,8 @@ include(os_detect.pri)
 include(compile_config.pri)
 
 include(library_config.pri)
+
+
 
 
 TARGET=$${TARGET_NAME}$${TARGET_OS_NAME}$${TARGET_LIB_APPEND}
@@ -43,6 +41,4 @@ UI_DIR = ./.ui
 
 QMAKE_CXXFLAGS += -Wno-unused -Wno-parentheses -Wno-attributes  -Wno-ignored-qualifiers
 
-
-include(../../DependLibs/libcrossguid/build/Qt/libcrossguid.pri)
-
+include(../../DependLibs/libopenmpt/build/Qt/libopenmpt-full.pri)

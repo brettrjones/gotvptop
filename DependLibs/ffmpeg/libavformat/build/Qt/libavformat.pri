@@ -1,3 +1,6 @@
+
+
+
 HEADERS += 	$$PWD/../../aiff.h \
 	$$PWD/../../apetag.h \
 	$$PWD/../../asf.h \
@@ -82,7 +85,13 @@ HEADERS += 	$$PWD/../../aiff.h \
 	$$PWD/../../w64.h \
 	$$PWD/../../wtv.h \
 	$$PWD/../../wv.h \
-	$$PWD/../../yuv4mpeg.h
+	$$PWD/../../yuv4mpeg.h \
+    $$PWD/../../tee_common.h \
+    $$PWD/../../hlsplaylist.h \
+    $$PWD/../../avformatres.rc \
+    $$PWD/../../dash.h \
+    $$PWD/../../rtmp_avformat.h \
+    $$PWD/../../rtmp_log_avformat.h
 
 SOURCES += 	$$PWD/../../3dostr.c \
 	$$PWD/../../4xm.c \
@@ -528,5 +537,41 @@ SOURCES += 	$$PWD/../../3dostr.c \
 	$$PWD/../../xwma.c \
 	$$PWD/../../yop.c \
 	$$PWD/../../yuv4mpegdec.c \
-	$$PWD/../../yuv4mpegenc.c
+	$$PWD/../../yuv4mpegenc.c \
+    $$PWD/../../rtpdec_rfc4175.c \
+    $$PWD/../../tee_common.c \
+    $$PWD/../../mov_esds.c \
+    $$PWD/../../muxer_list.c \
+    $$PWD/../../hlsplaylist.c \
+    $$PWD/../../aptxdec.c \
+    $$PWD/../../codec2.c \
+    $$PWD/../../dash.c \
+    $$PWD/../../dashdec.c \
+    $$PWD/../../demuxer_list.c \
+    $$PWD/../../fifo.c \
+    $$PWD/../../fifo_test.c \
+    $$PWD/../../fitsdec.c \
+    $$PWD/../../fitsenc.c \
+    $$PWD/../../g726.c \
+    $$PWD/../../gdv.c \
+    $$PWD/../../libopenmpt.c \
+    $$PWD/../../mj2kdec.c \
+    $$PWD/../../nspdec.c \
+    $$PWD/../../prompeg.c \
+    $$PWD/../../rtmpdigest.c \
+    $$PWD/../../s337m.c \
+    $$PWD/../../sbcdec.c \
+    $$PWD/../../sccdec.c \
+    $$PWD/../../sccenc.c \
+    $$PWD/../../sdsdec.c \
+    $$PWD/../../sdxdec.c \
+    $$PWD/../../segafilmenc.c \
+    $$PWD/../../supenc.c \
+    $$PWD/../../teeproto.c \
+    $$PWD/../../ttaenc.c \
+    $$PWD/../../ty.c
+
+DISTFILES += \
+    $$PWD/../../Makefile \
+    $$PWD/../../libavformat.v
 
