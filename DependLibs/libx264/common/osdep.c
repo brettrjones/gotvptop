@@ -27,12 +27,12 @@
 
 #include "common.h"
 
-#ifdef _WIN32
+#ifdef TARGET_OS_WINDOWS
 #include <windows.h>
 #include <io.h>
 #endif
 
-#if SYS_WINDOWS
+#if TARGET_OS_WINDOWS
 #include <sys/types.h>
 #include <sys/timeb.h>
 #else

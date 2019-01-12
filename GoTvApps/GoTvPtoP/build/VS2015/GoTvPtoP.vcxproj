@@ -360,11 +360,8 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxWaveIn.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxWaveOut.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxWidgetBase.cpp" />
-    <ClCompile Include="..\..\AppSource\exportdialog.cpp" />
     <ClCompile Include="..\..\AppSource\GoTvPlayerSettings.cpp" />
     <ClCompile Include="..\..\AppSource\main.cpp" />
-    <ClCompile Include="..\..\AppSource\mainwindow.cpp" />
-    <ClCompile Include="..\..\AppSource\svgview.cpp" />
     <ClCompile Include="Debug\moc_AcceptCancelWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -605,9 +602,6 @@
     <ClCompile Include="Debug\moc_DialogConfirmRemoveMessage.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Debug\moc_exportdialog.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Debug\moc_FileActionBarWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -678,9 +672,6 @@
     <ClCompile Include="Debug\moc_ListEntryWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Debug\moc_mainwindow.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Debug\moc_MessengerPage.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -730,9 +721,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Debug\moc_StoryWidget.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_svgview.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Debug\moc_TextChatLogic.cpp">
@@ -1065,9 +1053,6 @@
     <ClCompile Include="Release\moc_DialogConfirmRemoveMessage.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Release\moc_exportdialog.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Release\moc_FileActionBarWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -1137,9 +1122,6 @@
     <ClCompile Include="Release\moc_ListEntryWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Release\moc_mainwindow.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Release\moc_MessengerPage.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -1189,9 +1171,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Release\moc_StoryWidget.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Release\moc_svgview.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Release\moc_TextChatLogic.cpp">
@@ -4089,37 +4068,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -DWIN32 -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_MBCS  "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-IC:\Program Files (x86)\Visual Leak Detector\include"</Command>
     </CustomBuild>
-    <CustomBuild Include="..\..\AppSource\exportdialog.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_DEBUG -DTARGET_OS_WINDOWS -DLIB_STATIC -DNOMINMAX -D_USE_32BIT_TIME_T -D__STDC_CONSTANT_MACROS -DWIN32 -DQT_SVG_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_MULTIMEDIA_LIB -D_MBCS "-I$(ProjectDir)\." "-I$(ProjectDir)..\.." "-I$(ProjectDir)..\..\..\PlayerCommon" "-I$(ProjectDir)..\..\..\..\libgotvptop" "-I$(ProjectDir)..\..\..\GoTvCommon\QtSource" "-I$(ProjectDir)..\..\..\..\DependLibs" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine" "-I$(ProjectDir)..\..\..\..\DependLibs\ffmpeg" "-I$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2o\inc32" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32" "-I$(ProjectDir)..\..\..\..\DependLibs\libpcre" "-I$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc" "-I$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\addons\library.kodi.guilib" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.addon" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.pvr" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.kodi.adsp" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.codec" "-I$(ProjectDir)..\..\.." "-I$(ProjectDir)..\..\..\DependLibs\openssl-1.0.2o\inc32" "-I$(ProjectDir)..\..\..\.." "-I$(ProjectDir)..\..\..\..\GoTvCore" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtQuickWidgets" "-IC:\Program Files (x86)\Visual Leak Detector\include"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Identity)...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -DWIN32 -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_MBCS "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-IC:\Program Files (x86)\Visual Leak Detector\include"</Command>
-    </CustomBuild>
     <ClInclude Include="..\..\AppSource\GoTvPlayerSettings.h" />
-    <CustomBuild Include="..\..\AppSource\mainwindow.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_DEBUG -DTARGET_OS_WINDOWS -DLIB_STATIC -DNOMINMAX -D_USE_32BIT_TIME_T -D__STDC_CONSTANT_MACROS -DWIN32 -DQT_SVG_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_MULTIMEDIA_LIB -D_MBCS "-I$(ProjectDir)\." "-I$(ProjectDir)..\.." "-I$(ProjectDir)..\..\..\PlayerCommon" "-I$(ProjectDir)..\..\..\..\libgotvptop" "-I$(ProjectDir)..\..\..\GoTvCommon\QtSource" "-I$(ProjectDir)..\..\..\..\DependLibs" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine" "-I$(ProjectDir)..\..\..\..\DependLibs\ffmpeg" "-I$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2o\inc32" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32" "-I$(ProjectDir)..\..\..\..\DependLibs\libpcre" "-I$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc" "-I$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\addons\library.kodi.guilib" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.addon" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.pvr" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.kodi.adsp" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.codec" "-I$(ProjectDir)..\..\.." "-I$(ProjectDir)..\..\..\DependLibs\openssl-1.0.2o\inc32" "-I$(ProjectDir)..\..\..\.." "-I$(ProjectDir)..\..\..\..\GoTvCore" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtQuickWidgets" "-IC:\Program Files (x86)\Visual Leak Detector\include"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Identity)...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -DWIN32 -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_MBCS "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-IC:\Program Files (x86)\Visual Leak Detector\include"</Command>
-    </CustomBuild>
-    <CustomBuild Include="..\..\AppSource\svgview.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_DEBUG -DTARGET_OS_WINDOWS -DLIB_STATIC -DNOMINMAX -D_USE_32BIT_TIME_T -D__STDC_CONSTANT_MACROS -DWIN32 -DQT_SVG_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_MULTIMEDIA_LIB -D_MBCS "-I$(ProjectDir)\." "-I$(ProjectDir)..\.." "-I$(ProjectDir)..\..\..\PlayerCommon" "-I$(ProjectDir)..\..\..\..\libgotvptop" "-I$(ProjectDir)..\..\..\GoTvCommon\QtSource" "-I$(ProjectDir)..\..\..\..\DependLibs" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine" "-I$(ProjectDir)..\..\..\..\DependLibs\ffmpeg" "-I$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2o\inc32" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core" "-I$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32" "-I$(ProjectDir)..\..\..\..\DependLibs\libpcre" "-I$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc" "-I$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include" "-I$(ProjectDir)..\..\..\..\GoTvCore\xbmc\addons\library.kodi.guilib" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.addon" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.pvr" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.kodi.adsp" "-I$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.codec" "-I$(ProjectDir)..\..\.." "-I$(ProjectDir)..\..\..\DependLibs\openssl-1.0.2o\inc32" "-I$(ProjectDir)..\..\..\.." "-I$(ProjectDir)..\..\..\..\GoTvCore" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtQuickWidgets" "-IC:\Program Files (x86)\Visual Leak Detector\include"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Identity)...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -DWIN32 -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG -D_MBCS "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-IC:\Program Files (x86)\Visual Leak Detector\include"</Command>
-    </CustomBuild>
     <ClInclude Include="GeneratedFiles\ui_AcceptCancelWidget.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityAbout.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityAddRemoveLibraryFiles.h" />

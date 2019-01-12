@@ -6,11 +6,9 @@
     <ClCompile Include="..\..\vpx\src\vpx_codec.c" />
     <ClCompile Include="..\..\vpx\src\vpx_image.c" />
     <ClCompile Include="..\..\vpx_mem\vpx_mem.c" />
-    <ClCompile Include="..\..\vpx_scale\generic\vpx_scale.c" />
     <ClCompile Include="..\..\vpx_scale\generic\yv12config.c" />
     <ClCompile Include="..\..\vpx_scale\generic\yv12extend.c" />
     <ClCompile Include="..\..\vpx_scale\generic\gen_scalers.c" />
-    <ClCompile Include="..\..\vpx_scale\vpx_scale_rtcd.c" />
     <ClCompile Include="..\..\vpx_dsp\prob.c" />
     <ClCompile Include="..\..\vpx_dsp\bitwriter.c" />
     <ClCompile Include="..\..\vpx_dsp\bitwriter_buffer.c" />
@@ -196,6 +194,12 @@
     <ClCompile Include="..\..\vp9\decoder\vp9_decoder.c" />
     <ClCompile Include="..\..\vp9\decoder\vp9_dsubexp.c" />
     <ClCompile Include="..\..\vpx_config.c" />
+    <ClCompile Include="..\..\vpx_scale\generic\vpx_scale.c">
+      <Filter>vpx_scale</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\vpx_scale\vpx_scale_rtcd.c">
+      <Filter>vpx_scale</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_libvpx.h" />
@@ -215,7 +219,6 @@
     <ClInclude Include="..\..\vpx_mem\vpx_mem.h" />
     <ClInclude Include="..\..\vpx_mem\include\vpx_mem_intrnl.h" />
     <ClInclude Include="..\..\vpx_scale\yv12config.h" />
-    <ClInclude Include="..\..\vpx_scale\vpx_scale.h" />
     <ClInclude Include="..\..\vpx_ports\bitops.h" />
     <ClInclude Include="..\..\vpx_ports\mem.h" />
     <ClInclude Include="..\..\vpx_ports\msvc.h" />
@@ -391,7 +394,6 @@
     <ClInclude Include="..\..\vpx_ports\mem_ops.h" />
     <ClInclude Include="..\..\vpx_ports\mem_ops_aligned.h" />
     <ClInclude Include="..\..\vpx_ports\vpx_once.h" />
-    <ClInclude Include="..\..\vpx_scale_rtcd.h" />
     <ClInclude Include="..\..\vpx_dsp_rtcd.h" />
     <ClInclude Include="..\..\vp8_rtcd.h" />
     <ClInclude Include="..\..\vp9_rtcd.h" />
@@ -409,6 +411,13 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h">
       <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vpx_scale\vpx_scale.h">
+      <Filter>vpx_scale</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vpx_scale_rtcd.h" />
+    <ClInclude Include="..\..\vpx_scale\vpx_scale_rtcd_redirect.h">
+      <Filter>vpx_scale</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -456,7 +465,6 @@
     <None Include="libs.mk" />
     <None Include="..\..\vpx\vpx_codec.mk" />
     <None Include="..\..\vpx_mem\vpx_mem.mk" />
-    <None Include="..\..\vpx_scale\vpx_scale.mk" />
     <None Include="..\..\vpx_ports\vpx_ports.mk" />
     <None Include="..\..\vpx_dsp\vpx_dsp.mk" />
     <None Include="..\..\vpx_util\vpx_util.mk" />
@@ -481,6 +489,9 @@
     <None Include="..\..\vpx_dsp\x86\ssim_opt_x86_64.asm">
       <Filter>Asmx64</Filter>
     </None>
+    <None Include="..\..\vpx_scale\vpx_scale.mk">
+      <Filter>vpx_scale</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Asmx64">
@@ -488,6 +499,12 @@
     </Filter>
     <Filter Include="Config">
       <UniqueIdentifier>{899779d7-5962-49bd-9471-dbc0abb01e88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vpx_scale">
+      <UniqueIdentifier>{af5960c6-5641-4d80-82a4-8d6929f96b9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vpx_scale\generic">
+      <UniqueIdentifier>{8705e223-f071-456b-8dfd-2d5922fa2ddc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

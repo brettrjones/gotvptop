@@ -46,9 +46,6 @@
     <ClCompile Include="..\..\thread_windows.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\util.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\loader\loader.c">
       <Filter>Source Files\loader</Filter>
     </ClCompile>
@@ -60,6 +57,9 @@
     </ClCompile>
     <ClCompile Include="..\..\kazlib\list_cp.c">
       <Filter>Source Files\kazlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\util_cpluff.c">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -81,14 +81,14 @@
 /* .................... definition part ............................ */
 
 /* some system headers have good uint64_t */
-#ifndef _HAVE_UINT64_T
-#if     defined _STDINT_HAVE_UINT64_T  || defined HAVE_UINT64_T
-#define _HAVE_UINT64_T
-#elif   defined _STDINT_HAVE_U_INT64_T || defined HAVE_U_INT64_T
-#define _HAVE_UINT64_T
-typedef u_int64_t uint64_t;
-#endif
-#endif
+//#ifndef _HAVE_UINT64_T
+//#if     defined _STDINT_HAVE_UINT64_T  || defined HAVE_UINT64_T
+//#define _HAVE_UINT64_T
+//#elif   defined _STDINT_HAVE_U_INT64_T || defined HAVE_U_INT64_T
+#define _HAVE_UINT64_T 1
+//typedef u_int64_t uint64_t;
+//#endif
+//#endif
 
 #ifndef _HAVE_UINT64_T
 /* .. here are some common heuristics using compiler runtime specifics */

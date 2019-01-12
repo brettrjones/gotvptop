@@ -355,8 +355,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\PlatformLib\win32\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\openssl-1.0.2o\include\;$(ProjectDir)..\..\..\..\..\..\;$(ProjectDir)..\..\..\..\..\;$(ProjectDir)..\..\..\..\..\xbmc\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_USE_32BIT_TIME_T;LIB_STATIC;_DEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\openssl-1.0.2o\include\;$(ProjectDir)..\..\..\..\..\sysheaders;$(ProjectDir)..\..\..\..\..\;$(ProjectDir)..\..\..\..\..\xbmc\;$(ProjectDir)..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;_USE_32BIT_TIME_T;LIB_STATIC;_DEBUG;WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>

@@ -43,10 +43,10 @@
     <ClCompile Include="..\..\vasprintf.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xsize.c">
+    <ClCompile Include="..\..\autosprintf.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\autosprintf.cc">
+    <ClCompile Include="..\..\xsize_asprintf.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -81,9 +81,6 @@
     <ClInclude Include="..\..\verify.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xsize.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
@@ -105,5 +102,6 @@
     <ClInclude Include="..\..\autosprintf.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\xsize_asprintf.h" />
   </ItemGroup>
 </Project>

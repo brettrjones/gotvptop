@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+
+#include<libglew/include/gl/glew.h>
 #include "config_kodi.h"
 #ifdef HAVE_QT_GUI
 

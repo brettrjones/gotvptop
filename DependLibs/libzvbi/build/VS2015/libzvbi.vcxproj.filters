@@ -125,9 +125,6 @@
     <ClCompile Include="..\..\src\sampling_par.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\search.c">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\sliced_filter.c">
       <Filter>src</Filter>
     </ClCompile>
@@ -171,6 +168,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\export_zvbi.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\search_zvbi.c">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

@@ -329,7 +329,6 @@ echo GoTv CPU Config error no cpu arc defined.. unknown processors not supported
 # define SIZEOF_UNSIGNED_LONG_INT 8
 # define SIZEOF_UNSIGNED_INT 8
 # define SIZEOF_CHAR_P 8
-
 # ifdef TARGET_OS_WINDOWS
 #  define SIZEOF_INT 8
 #  define SIZEOF_LONG 4

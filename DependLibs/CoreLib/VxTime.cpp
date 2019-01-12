@@ -5,7 +5,7 @@
 #include "VxTime.h"
 #include "VxTimeUtil.h"
 
-#include <sys/time.h>
+#include <sysheaders/sys/time.h>
 
 namespace
 {

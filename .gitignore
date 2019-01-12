@@ -24,3 +24,10 @@ build/build-libopencore-amr-Desktop-Debug/
 build/objs/
 
 *.autosave
+*.obj
+*.tlog
+*.pdb
+*.log
+*.db
+*.suo
+*.idb

@@ -91,9 +91,6 @@
     <ClCompile Include="..\..\VxSktWaitingList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\VxUrl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AnchorSetting.h">
@@ -190,9 +187,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\VxSktWaitingList.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\VxUrl.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\VxXferDefs.h">

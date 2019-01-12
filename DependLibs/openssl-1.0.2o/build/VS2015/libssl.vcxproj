@@ -341,7 +341,7 @@
     <ClCompile Include="..\..\crypto\bio\bss_conn.c" />
     <ClCompile Include="..\..\crypto\bio\bss_dgram.c" />
     <ClCompile Include="..\..\crypto\bio\bss_fd.c" />
-    <ClCompile Include="..\..\crypto\bio\bss_file.c" />
+    <ClCompile Include="..\..\crypto\bio\bss_file2.c" />
     <ClCompile Include="..\..\crypto\bio\bss_log.c" />
     <ClCompile Include="..\..\crypto\bio\bss_mem.c" />
     <ClCompile Include="..\..\crypto\bio\bss_null.c" />

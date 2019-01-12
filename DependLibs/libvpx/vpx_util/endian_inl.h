@@ -77,7 +77,9 @@ static INLINE uint16_t BSwap16(uint16_t x) {
 }
 
 static INLINE uint32_t BSwap32(uint32_t x) {
-#if defined(VPX_USE_MIPS32_R2)
+#if defined(_MSC_VER)
+ return ( uint32_t )_byteswap_ulong( x );
+#elif defined(VPX_USE_MIPS32_R2)
   uint32_t ret;
   __asm__ volatile(
       "wsbh   %[ret], %[x]          \n\t"
@@ -91,8 +93,6 @@ static INLINE uint32_t BSwap32(uint32_t x) {
   uint32_t swapped_bytes;
   __asm__ volatile("bswap %0" : "=r"(swapped_bytes) : "0"(x));
   return swapped_bytes;
-#elif defined(_MSC_VER)
-  return (uint32_t)_byteswap_ulong(x);
 #else
   return (x >> 24) | ((x >> 8) & 0xff00) | ((x << 8) & 0xff0000) | (x << 24);
 #endif  // HAVE_BUILTIN_BSWAP32

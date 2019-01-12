@@ -277,7 +277,11 @@
 #define RETSIGTYPE void
 
 /* The size of `dev_t', as computed by sizeof. */
-#define SIZEOF_DEV_T 8
+#if ARCH_32_BITS
+# define SIZEOF_DEV_T 4
+#else
+# define SIZEOF_DEV_T 8
+#endif // ARCH_32_BITS
 
 /* The size of `double', as computed by sizeof. */
 #define SIZEOF_DOUBLE 8
@@ -286,19 +290,31 @@
 #define SIZEOF_FLOAT 4
 
 /* The size of `fpos_t', as computed by sizeof. */
-#define SIZEOF_FPOS_T 16
+#if ARCH_32_BITS
+# define SIZEOF_FPOS_T 4
+#else
+# define SIZEOF_FPOS_T 8
+#endif // ARCH_32_BITS
 
 /* The size of `int', as computed by sizeof. */
-#define SIZEOF_INT 4
+//#define SIZEOF_INT 4 // defined in GoTvCpuArchDefines.h
 
 /* The size of `intmax_t', as computed by sizeof. */
-#define SIZEOF_INTMAX_T 8
+#if ARCH_32_BITS
+# define SIZEOF_INTMAX_T 4
+#else
+# define SIZEOF_INTMAX_T 8
+#endif // ARCH_32_BITS
 
 /* The size of `intptr_t', as computed by sizeof. */
-#define SIZEOF_INTPTR_T 8
+#if ARCH_32_BITS
+# define SIZEOF_INTPTR_T 4
+#else
+# define SIZEOF_INTPTR_T 8
+#endif // ARCH_32_BITS
 
 /* The size of `long', as computed by sizeof. */
-#define SIZEOF_LONG 8
+//#define SIZEOF_LONG 8 // defined in GoTvCpuArchDefines.h
 
 /* The size of `long double', as computed by sizeof. */
 #define SIZEOF_LONG_DOUBLE 16
@@ -310,31 +326,63 @@
 #define SIZEOF_MODE_T 4
 
 /* The size of `off_t', as computed by sizeof. */
-#define SIZEOF_OFF_T 8
+#if ARCH_32_BITS
+# define SIZEOF_OFF_T 4
+#else
+# define SIZEOF_OFF_T 8
+#endif // ARCH_32_BITS
 
 /* The size of `ptrdiff_t', as computed by sizeof. */
-#define SIZEOF_PTRDIFF_T 8
+#if ARCH_32_BITS
+# define SIZEOF_PTRDIFF_T 4
+#else
+# define SIZEOF_PTRDIFF_T 8
+#endif // ARCH_32_BITS
 
 /* The size of `short', as computed by sizeof. */
 #define SIZEOF_SHORT 2
 
 /* The size of `size_t', as computed by sizeof. */
-#define SIZEOF_SIZE_T 8
+#if ARCH_32_BITS
+# define SIZEOF_SIZE_T 4
+#else
+# define SIZEOF_SIZE_T 8
+#endif // ARCH_32_BITS
 
 /* The size of `ssize_t', as computed by sizeof. */
-#define SIZEOF_SSIZE_T 8
+#if ARCH_32_BITS
+# define SIZEOF_SSIZE_T 4
+#else
+# define SIZEOF_SSIZE_T 8
+#endif // ARCH_32_BITS
 
 /* The size of `time_t', as computed by sizeof. */
-#define SIZEOF_TIME_T 8
+#if ARCH_32_BITS
+# define SIZEOF_TIME_T 4
+#else
+# define SIZEOF_TIME_T 8
+#endif // ARCH_32_BITS
 
 /* The size of `uintmax_t', as computed by sizeof. */
-#define SIZEOF_UINTMAX_T 8
+#if ARCH_32_BITS
+# define SIZEOF_UINTMAX_T 4
+#else
+# define SIZEOF_UINTMAX_T 8
+#endif // ARCH_32_BITS
 
 /* The size of `uintptr_t', as computed by sizeof. */
-#define SIZEOF_UINTPTR_T 8
+#if ARCH_32_BITS
+# define SIZEOF_UINTPTR_T 4
+#else
+# define SIZEOF_UINTPTR_T 8
+#endif // ARCH_32_BITS
 
 /* The size of `void *', as computed by sizeof. */
-#define SIZEOF_VOID_P 8
+#if ARCH_32_BITS
+# define SIZEOF_VOID_P 4
+#else
+# define SIZEOF_VOID_P 8
+#endif // ARCH_32_BITS
 
 /* The size of `__int16', as computed by sizeof. */
 #define SIZEOF___INT16 0

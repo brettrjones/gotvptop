@@ -109,7 +109,7 @@ typedef enum {
 #endif /* end others */
 
 // NaCl has no support for xgetbv or the raw opcode.
-#if !defined(__native_client__) && (defined(__i386__) || defined(__x86_64__))
+#if !defined(__native_client__) && !defined(TARGET_OS_WINDOWS) && (defined(__i386__) || defined(__x86_64__))
 static INLINE uint64_t xgetbv(void) {
   const uint32_t ecx = 0;
   uint32_t eax, edx;

@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\aacdecoder_lib.h" />
     <ClInclude Include="..\..\include\config_fdk-aac.h" />
-    <ClInclude Include="..\..\libAACdec\include\aacdecoder_lib.h" />
     <ClInclude Include="..\..\libAACdec\src\aacdecoder.h" />
     <ClInclude Include="..\..\libAACdec\src\aacdec_drc.h" />
     <ClInclude Include="..\..\libAACdec\src\aacdec_drc_types.h" />

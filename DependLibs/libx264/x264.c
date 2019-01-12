@@ -981,7 +981,7 @@ typedef enum
 } OptionsOPT;
 
 static char short_options[] = "8A:B:b:f:hI:i:m:o:p:q:r:t:Vvw";
-static struct option long_options[] =
+static struct option_gnu long_options[] =
 {
     { "help",              no_argument, NULL, 'h' },
     { "longhelp",          no_argument, NULL, OPT_LONGHELP },

@@ -240,6 +240,33 @@ n = 1 stands for the first argument, n = 2 for the second argument etc.  */
 # ifndef __STDC_CONSTANT_MACROS
 #  define __STDC_CONSTANT_MACROS
 # endif // __STDC_CONSTANT_MACROS
+
+#if defined(TARGET_OS_WINDOWS) && defined(_MSC_VER)
+// crazy microsoft does not have std::min
+#if defined __cplusplus
+namespace std
+{
+    template<typename _Tp, typename _Tp2>
+    inline const _Tp&
+        min( const _Tp& __a, const _Tp2& __b )
+    {
+        if( __b < __a )
+            return __b;
+        return __a;
+    }
+
+    template<typename _Tp, typename _Tp2>
+    inline const _Tp&
+        max( const _Tp& __a, const _Tp2& __b )
+    {
+        if( __b > __a )
+            return __b;
+        return __a;
+    }
+};
+#endif // #if defined __cplusplus
+#endif // defined(TARGET_OS_WINDOWS) && defined(_MSC_VER)
+
 //============================================================================
 // === common to all OSs and compilers ====
 //============================================================================
@@ -248,7 +275,9 @@ n = 1 stands for the first argument, n = 2 for the second argument etc.  */
 
 #ifdef TARGET_OS_WINDOWS
 # define SYSTEM_URL     "win:"
-#define MAX_PATH        PATH_MAX
+#ifdef _MSC_VER
+# define MAX_PATH        260 // not needed if compiled with migwin
+#endif // _MSC_VER
 # define MAXPATHLEN		MAX_PATH
 # define LINE_ENDING	"\r\n"
 # define EXEEXT			".exe"
@@ -557,6 +586,8 @@ typedef unsigned int sigset_t;
 #  define _IOWR(exp1,exp2,exp3)     (IOC_INOUT | (( (long)sizeof(exp3)&IOCPARM_MASK) <<16 ) | ((exp1)<<8) | (exp2))
 # endif // if !defined(_IORW) && defined(_MSC_VER)
 
+
+
 GOTV_BEGIN_CDECLARES
 
 // functions missing from windows .. implemented in CoreLib/VxFuntionsMissingInWindows.cpp
@@ -621,7 +652,9 @@ GOTV_INLINE int VxSleep( int milliSec ) { Sleep( milliSec ); return 0; } // micr
 #ifndef MAX
 # define MAX(x,y) (((x) > (y)) ? (x) : (y))
 #endif // MAX
+
 typedef struct _stat64 structStatOsDef;
+
 #else 
 //================= EVERY OS THAT IS NOT WINDOWS ===================//
 #define HAVE_WINDOWS_H			0  // only windows has <windows.h>

@@ -640,7 +640,7 @@
     <ClInclude Include="..\..\xgettext.h" />
     <ClInclude Include="..\..\xmalloca.h" />
     <ClInclude Include="..\..\xreadlink.h" />
-    <ClInclude Include="..\..\xsize.h" />
+    <ClInclude Include="..\..\xsize_gnu.h" />
     <ClInclude Include="..\..\xstriconv.h" />
     <ClInclude Include="..\..\xvasprintf.h" />
   </ItemGroup>
@@ -1396,7 +1396,7 @@
     <ClCompile Include="..\..\openpgp\pgp.c" />
     <ClCompile Include="..\..\openpgp\pgpverify.c" />
     <ClCompile Include="..\..\openpgp\privkey_pgp.c" />
-    <ClCompile Include="..\..\os2compat.c" />
+    <ClCompile Include="..\..\os2compat2.c" />
     <ClCompile Include="..\..\osdep.c" />
     <ClCompile Include="..\..\ostream.c" />
     <ClCompile Include="..\..\ostream.oo.c" />
@@ -1597,7 +1597,7 @@
     <ClCompile Include="..\..\xmalloc.c" />
     <ClCompile Include="..\..\xmalloca.c" />
     <ClCompile Include="..\..\xreadlink.c" />
-    <ClCompile Include="..\..\xsize.c" />
+    <ClCompile Include="..\..\xsize_gnu.c" />
     <ClCompile Include="..\..\xstrdup.c" />
     <ClCompile Include="..\..\xstriconv.c" />
     <ClCompile Include="..\..\xvasprintf.c" />
@@ -1882,7 +1882,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>GLIB_COMPILATION;_MBCS;TARGET_OS_WINDOWS;_HAS_ITERATOR_DEBUGGING=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\openssl-1.0.2o\inc32;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\sysheaders;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\openssl-1.0.2o\inc32;</AdditionalIncludeDirectories>
       <PrecompiledHeaderOutputFile>$(IntDir)\vc$(PlatformToolsetVersion).pch</PrecompiledHeaderOutputFile>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <BrowseInformationFile>$(IntDir)$(ProjectName).bsc</BrowseInformationFile>

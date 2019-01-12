@@ -1289,6 +1289,7 @@
     <ClInclude Include="..\..\vpx_config.h" />
     <ClInclude Include="..\..\vpx_mem\vpx_mem.h" />
     <ClInclude Include="..\..\vpx_mem\include\vpx_mem_intrnl.h" />
+    <ClInclude Include="..\..\vpx_scale\vpx_scale_rtcd_redirect.h" />
     <ClInclude Include="..\..\vpx_scale\yv12config.h" />
     <ClInclude Include="..\..\vpx_scale\vpx_scale.h" />
     <ClInclude Include="..\..\vpx_ports\bitops.h" />

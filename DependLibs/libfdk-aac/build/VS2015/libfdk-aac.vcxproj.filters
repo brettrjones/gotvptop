@@ -10,9 +10,6 @@
     <Filter Include="libFDK">
       <UniqueIdentifier>{d3d717da-5524-4b78-a5f2-698997c1d3a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="libAACdec\include">
-      <UniqueIdentifier>{cc680fa1-a13a-4049-a8c0-7851fd76a6b3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="libAACdec\src">
       <UniqueIdentifier>{190a9df0-9a79-4b64-827a-d9a06b93fc52}</UniqueIdentifier>
     </Filter>
@@ -104,9 +101,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\aacdecoder_lib.h">
       <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libAACdec\include\aacdecoder_lib.h">
-      <Filter>libAACdec\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libAACdec\src\aac_ram.h">
       <Filter>libAACdec\src</Filter>

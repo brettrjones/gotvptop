@@ -973,9 +973,6 @@
     <ClCompile Include="..\..\crypto\bio\bss_fd.c">
       <Filter>crypto\bio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\crypto\bio\bss_file.c">
-      <Filter>crypto\bio</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\crypto\bio\bss_log.c">
       <Filter>crypto\bio</Filter>
     </ClCompile>
@@ -2442,6 +2439,9 @@
     </ClCompile>
     <ClCompile Include="..\..\crypto\rc4\rc4_enc.c">
       <Filter>crypto\rc4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\bio\bss_file2.c">
+      <Filter>crypto\bio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

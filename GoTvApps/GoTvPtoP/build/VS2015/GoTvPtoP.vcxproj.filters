@@ -94,9 +94,6 @@
     <ClCompile Include="..\..\AppSource\main.cpp">
       <Filter>AppSource</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\mainwindow.cpp">
-      <Filter>AppSource</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RasterWindow.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
@@ -1471,30 +1468,6 @@
     <ClCompile Include="Release\moc_VxMenu.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\AppSource\exportdialog.cpp">
-      <Filter>AppSource</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_exportdialog.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_exportdialog.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_mainwindow.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_mainwindow.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\svgview.cpp">
-      <Filter>AppSource</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_svgview.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_svgview.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletKodi.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
@@ -2372,15 +2345,6 @@
     </CustomBuild>
     <CustomBuild Include="..\..\..\GoTvCommon\QtSource\VxMenu.h">
       <Filter>GoTvCommon\Source Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\..\AppSource\exportdialog.h">
-      <Filter>AppSource</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\..\AppSource\mainwindow.h">
-      <Filter>AppSource</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\..\AppSource\svgview.h">
-      <Filter>AppSource</Filter>
     </CustomBuild>
     <CustomBuild Include="..\..\..\GoTvCommon\QtSource\AppletKodi.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>

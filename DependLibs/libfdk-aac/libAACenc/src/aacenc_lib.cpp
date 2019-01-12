@@ -88,9 +88,6 @@ amm-info@iis.fraunhofer.de
 
 ****************************************************************************/
 
-#include "aacenc_lib.h"
-#include "FDK_audio.h"
-#include "aacenc.h"
 
 #include "aacEnc_ram.h"
 #include "FDK_core.h" /* FDK_tools versioning info */

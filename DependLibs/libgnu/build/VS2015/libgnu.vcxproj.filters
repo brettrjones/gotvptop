@@ -1193,9 +1193,6 @@
     <ClInclude Include="..\..\xmalloca.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xsize.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xvasprintf.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -1969,6 +1966,9 @@
     </ClInclude>
     <ClInclude Include="..\..\opencdk\types.h">
       <Filter>Source Files\opencdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xsize_gnu.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3055,9 +3055,6 @@
     <ClCompile Include="..\..\open.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\os2compat.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\osdep.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -3218,9 +3215,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xmalloca.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xsize.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xvasprintf.c">
@@ -4838,6 +4832,12 @@
       <Filter>Source Files\x509</Filter>
     </ClCompile>
     <ClCompile Include="..\..\read-file-gnu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xsize_gnu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\os2compat2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

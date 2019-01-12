@@ -273,7 +273,6 @@
     </ClCompile>
     <ClCompile Include="..\..\VxSktUtil.cpp" />
     <ClCompile Include="..\..\VxSktWaitingList.cpp" />
-    <ClCompile Include="..\..\VxUrl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AnchorSetting.h" />
@@ -308,7 +307,6 @@
     <ClInclude Include="..\..\VxSktUdpBroadcast.h" />
     <ClInclude Include="..\..\VxSktUtil.h" />
     <ClInclude Include="..\..\VxSktWaitingList.h" />
-    <ClInclude Include="..\..\VxUrl.h" />
     <ClInclude Include="..\..\VxXferDefs.h" />
   </ItemGroup>
   <ItemGroup>

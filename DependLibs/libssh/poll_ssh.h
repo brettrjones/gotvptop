@@ -25,7 +25,7 @@
 
 #if defined(HAVE_POLL)
 # ifdef _MSC_VER
-#  include <poll.h>
+#  include <poll_ssh.h>
 # else
 # ifdef TARGET_OS_LINUX
 #  include <sys/poll.h>

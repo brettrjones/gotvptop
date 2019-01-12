@@ -22,7 +22,6 @@
     <ClCompile Include="..\..\OpusTools\opusenc.c" />
     <ClCompile Include="..\..\OpusTools\opus_header.c" />
     <ClCompile Include="..\..\OpusTools\picture.c" />
-    <ClCompile Include="..\..\OpusTools\resample.c" />
     <ClCompile Include="..\..\OpusTools\wave_out.c" />
     <ClCompile Include="..\..\OpusTools\wav_io.c" />
     <ClCompile Include="..\..\OpusTools\win32\unicode_support.c" />
@@ -191,6 +190,9 @@
     <ClCompile Include="..\..\SndDefs.cpp" />
     <ClCompile Include="..\..\SndReader.cpp" />
     <ClCompile Include="..\..\SndWriter.cpp" />
+    <ClCompile Include="..\..\OpusTools\resample_mediatools.c">
+      <Filter>OpusTools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AviDefs.h" />
@@ -362,6 +364,9 @@
   <ItemGroup>
     <Filter Include="GoTvConfig">
       <UniqueIdentifier>{18a31a93-354f-41f9-9a88-b9cda646c962}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpusTools">
+      <UniqueIdentifier>{477bda37-c27c-4143-916e-e0ed483775df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -13,11 +13,14 @@
 // http://www.gotvptop.net
 //============================================================================
 
+#include <GoTvDependLibrariesConfig.h>
+
 #include "PktsPluginOffer.h"
 
 #include <CoreLib/VxDebug.h>
 
 #include <string.h>
+#include <string>
 
 //============================================================================
 PktPluginOfferReq::PktPluginOfferReq()

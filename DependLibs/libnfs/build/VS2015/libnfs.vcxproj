@@ -101,7 +101,7 @@
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;WIN32;NDEBUG;_WINDOWS;_LIB;_U_=;_USE_32BIT_TIME_T;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\;..\..\nfsutil;..\..\..\;..\..\..\..\;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\nfsutil;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;</AdditionalIncludeDirectories>
       <CompileAs>Default</CompileAs>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>

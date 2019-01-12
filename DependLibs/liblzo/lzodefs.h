@@ -2257,6 +2257,7 @@ LZO_COMPILE_TIME_ASSERT_HEADER(LZO_SIZEOF_SHORT == sizeof(short))
 #    error "LZO_SIZEOF_INT"
 #  endif
 #endif
+
 LZO_COMPILE_TIME_ASSERT_HEADER(LZO_SIZEOF_INT == sizeof(int))
 #if !defined(LZO_SIZEOF_LONG)
 #  if (ULONG_MAX == LZO_0xffffffffL)

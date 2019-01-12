@@ -71,7 +71,7 @@
     <ClCompile Include="..\..\pki_crypto.c" />
     <ClCompile Include="..\..\pki_ed25519.c" />
     <ClCompile Include="..\..\pki_gcrypt.c" />
-    <ClCompile Include="..\..\poll.c" />
+    <ClCompile Include="..\..\poll_ssh.c" />
     <ClCompile Include="..\..\scp.c" />
     <ClCompile Include="..\..\server.c" />
     <ClCompile Include="..\..\session.c" />
@@ -117,7 +117,7 @@
     <ClInclude Include="..\..\pcap.h" />
     <ClInclude Include="..\..\pki.h" />
     <ClInclude Include="..\..\pki_priv.h" />
-    <ClInclude Include="..\..\poll.h" />
+    <ClInclude Include="..\..\poll_ssh.h" />
     <ClInclude Include="..\..\sc25519.h" />
     <ClInclude Include="..\..\scp.h" />
     <ClInclude Include="..\..\server.h" />
@@ -201,7 +201,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\openssl-1.0.2o;..\..\..\openssl-1.0.2o\inc32;..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\openssl-1.0.2o;..\..\..\openssl-1.0.2o\inc32;..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;$(ProjectDir)%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;LIBSSH_STATIC;_X86_;_DEBUG;WIN32;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>

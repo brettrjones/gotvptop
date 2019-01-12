@@ -78,7 +78,6 @@
     <ClCompile Include="..\..\pki_crypto.c" />
     <ClCompile Include="..\..\pki_ed25519.c" />
     <ClCompile Include="..\..\pki_gcrypt.c" />
-    <ClCompile Include="..\..\poll.c" />
     <ClCompile Include="..\..\scp.c" />
     <ClCompile Include="..\..\server.c" />
     <ClCompile Include="..\..\session.c" />
@@ -87,6 +86,7 @@
     <ClCompile Include="..\..\socket.c" />
     <ClCompile Include="..\..\threads.c" />
     <ClCompile Include="..\..\wrapper.c" />
+    <ClCompile Include="..\..\poll_ssh.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\external\ge25519_base.data">
@@ -128,7 +128,6 @@
     <ClInclude Include="..\..\pcap.h" />
     <ClInclude Include="..\..\pki.h" />
     <ClInclude Include="..\..\pki_priv.h" />
-    <ClInclude Include="..\..\poll.h" />
     <ClInclude Include="..\..\sc25519.h" />
     <ClInclude Include="..\..\scp.h" />
     <ClInclude Include="..\..\server.h" />
@@ -139,6 +138,7 @@
     <ClInclude Include="..\..\ssh2.h" />
     <ClInclude Include="..\..\threads.h" />
     <ClInclude Include="..\..\wrapper.h" />
+    <ClInclude Include="..\..\poll_ssh.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\CMakeLists.txt" />

@@ -84,6 +84,8 @@
 # endif
 #endif
 
+#include <libgnu/iconveh.h>
+
 /* Checked size_t computations.  */
 #include "xsize_asprintf.h"
 

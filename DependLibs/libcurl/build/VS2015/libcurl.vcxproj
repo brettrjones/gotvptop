@@ -185,7 +185,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;..\..\lib;..\..\..\openssl-1.0.2o\inc32;..\..\..\;..\..\..\..\;..\..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\sysheaders;..\..\include;..\..\lib;..\..\..\openssl-1.0.2o\inc32;..\..\..\;..\..\..\..\;..\..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;WIN32;_DEBUG;_WINDOWS;_LIB;BUILDING_LIBCURL;CURL_DISABLE_LDAP;CURL_DISABLE_TELNET;CURL_DISABLE_DICT;CURL_DISABLE_TFTP;USE_SSLEAY;USE_OPENSSL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>

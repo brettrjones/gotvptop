@@ -25,7 +25,7 @@
 
 #ifdef TARGET_OS_WINDOWS
     #include <QAudioDeviceInfo>
-    #define USE_VX_WAVE	1
+//  #define USE_VX_WAVE	1
 #endif // TARGET_OS_WINDOWS
 #ifdef USE_VX_WAVE
 	#ifdef USE_ECHO_CANCEL

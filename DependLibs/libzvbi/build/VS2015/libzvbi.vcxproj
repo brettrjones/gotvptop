@@ -60,7 +60,7 @@
     <ClCompile Include="..\..\src\proxy-msg.c" />
     <ClCompile Include="..\..\src\raw_decoder.c" />
     <ClCompile Include="..\..\src\sampling_par.c" />
-    <ClCompile Include="..\..\src\search.c" />
+    <ClCompile Include="..\..\src\search_zvbi.c" />
     <ClCompile Include="..\..\src\sliced_filter.c" />
     <ClCompile Include="..\..\src\tables.c" />
     <ClCompile Include="..\..\src\teletext.c" />
@@ -277,7 +277,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\src;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\sysheaders;$(ProjectDir)..\..\src;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;_DEBUG;_LIB;X86_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>

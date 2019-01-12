@@ -201,7 +201,7 @@
     <ClCompile Include="..\..\OpusTools\opusenc.c" />
     <ClCompile Include="..\..\OpusTools\opus_header.c" />
     <ClCompile Include="..\..\OpusTools\picture.c" />
-    <ClCompile Include="..\..\OpusTools\resample.c" />
+    <ClCompile Include="..\..\OpusTools\resample_mediatools.c" />
     <ClCompile Include="..\..\OpusTools\wave_out.c" />
     <ClCompile Include="..\..\OpusTools\wav_io.c" />
     <ClCompile Include="..\..\OpusTools\win32\unicode_support.c" />

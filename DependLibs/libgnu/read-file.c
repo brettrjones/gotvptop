@@ -16,6 +16,8 @@
    along with this program; if not, see <http://www.gnu.org/licenses/>.  */
 
 
+#include "read-file.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -31,8 +33,9 @@
     #include <sys/vfs.h>
     #include <sys/statfs.h>
     #include <sys/types.h>
-
 #endif
+
+#include <stdint.h>
 
 //============================================================================
 //! returns file size or 0 if does not exist
