@@ -8,10 +8,10 @@
 
 #include "FileItem.h"
 #include "ServiceBroker.h"
-#include "GUIDialogFavourites.h"
+#include "favourites/GUIDialogFavourites.h"
 #include "utils/URIUtils.h"
 
-#include "ContextMenus.h"
+#include "favourites/ContextMenus.h"
 
 
 namespace CONTEXTMENU

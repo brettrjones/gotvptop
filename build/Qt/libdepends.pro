@@ -148,7 +148,7 @@ include(../../DependLibs/PktLib/build/Qt/libpktlib.pri)
 include(../../DependLibs/Upnp2Lib/build/Qt/libupnp2lib.pri)
 
 ### include(../../DependLibs/libasprintf/build/Qt/libasprintf.pri)
-
+### build seperately include(../../DependLibs/libcdio/build/Qt/libcdio.pri)
 
 #SOURCES +=
 

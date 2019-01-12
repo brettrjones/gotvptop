@@ -132,7 +132,9 @@
 #undef HAVE_VSNPRINTF
 
 /* Define 1 if you have MinGW CD-ROM support */
-#define HAVE_WIN32_CDROM 1
+#ifdef TARGET_OS_WINDOWS
+# define HAVE_WIN32_CDROM 1
+#endif // TARGET_OS_WINDOWS
 
 /* Define as const if the declaration of iconv() needs const. */
 #undef ICONV_CONST 
@@ -175,3 +177,7 @@
    calls it, or to nothing if 'inline' is not supported under any name.  */
 //#define inline
 
+#define HAVE_UNSETENV
+#define HAVE_TIMEGM
+#define HAVE_LIMITS_H
+#define HAVE_STDARG_H

@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "ContextMenus.h"
+#include "addons/ContextMenus.h"
 #include "AddonManager.h"
 #include "Repository.h"
 #include "RepositoryUpdater.h"

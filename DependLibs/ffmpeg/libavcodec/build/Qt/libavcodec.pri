@@ -961,13 +961,7 @@ SOURCES += 	\
 	$$PWD/../../mace.c \
 	$$PWD/../../magicyuv.c \
 	$$PWD/../../magicyuvenc.c \
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 	$$PWD/../../mathtables.c \
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 	$$PWD/../../mdct15.c \
 	$$PWD/../../mdct_fixed.c \
 	$$PWD/../../mdct_fixed_32.c \
@@ -1428,15 +1422,4 @@ SOURCES += 	\
 	$$PWD/../../yuv4enc.c \
 	$$PWD/../../zerocodec.c \
 	$$PWD/../../zmbv.c \
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-	$$PWD/../../zmbvenc.c
-
-=======
-    $$PWD/../../zmbvenc.c \
-    $$PWD/../../mathtables.c
->>>>>>> Stashed changes
-=======
-    $$PWD/../../zmbvenc.c \
-    $$PWD/../../mathtables.c
->>>>>>> Stashed changes
+    $$PWD/../../zmbvenc.c

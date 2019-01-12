@@ -51,4 +51,6 @@
 # define drand48()   (rand() / (double)RAND_MAX)
 #endif
 
+#define HAVE_LIMITS_H 1
+
 #endif /* CDIO_DRIVER_PORTABLE_H_ */

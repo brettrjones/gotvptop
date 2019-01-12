@@ -267,11 +267,14 @@ uint32_t libnfs_zdr_getpos(ZDR *zdrs);
 #define zdr_free libnfs_zdr_free
 void libnfs_zdr_free(zdrproc_t proc, char *objp);
 
+#ifdef TARGET_OS_WINDOWS
+
 #define zdr_callmsg libnfs_zdr_callmsg
 bool_t libnfs_zdr_callmsg(ZDR *zdrs, struct rpc_msg *msg);
 
 #define zdr_replymsg libnfs_zdr_replymsg
 bool_t libnfs_zdr_replymsg(ZDR *zdrs, struct rpc_msg *msg);
+
 
 #define authnone_create libnfs_authnone_create
 struct AUTH *libnfs_authnone_create(void);
@@ -284,6 +287,33 @@ struct AUTH *libnfs_authunix_create_default(void);
 
 #define auth_destroy libnfs_auth_destroy
 void libnfs_auth_destroy(struct AUTH *auth);
+
+#else
+
+struct rpc_context;
+
+#define zdr_callmsg libnfs_zdr_callmsg
+bool_t libnfs_zdr_callmsg(struct rpc_context *rpc, ZDR *zdrs, struct rpc_msg *msg);
+
+#define zdr_replymsg libnfs_zdr_replymsg
+bool_t libnfs_zdr_replymsg(struct rpc_context *rpc, ZDR *zdrs, struct rpc_msg *msg);
+
+
+#define authnone_create libnfs_authnone_create
+struct AUTH *libnfs_authnone_create(void);
+
+#define authunix_create libnfs_authunix_create
+struct AUTH *libnfs_authunix_create(const char *host, uint32_t uid, uint32_t gid, uint32_t len, uint32_t *groups);
+
+#define authunix_create_default libnfs_authunix_create_default
+struct AUTH *libnfs_authunix_create_default(void);
+
+#define auth_destroy libnfs_auth_destroy
+void libnfs_auth_destroy(struct AUTH *auth);
+
+
+#endif // TARGET_OS_WINDOWS
+
 GOTV_END_CDECLARES
 
 #endif //_LIBNFS_ZDR_H_
