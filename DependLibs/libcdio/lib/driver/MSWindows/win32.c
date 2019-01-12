@@ -33,8 +33,8 @@
 #include <libcdio/include/cdio/util.h>
 #include <libcdio/include/cdio/mmc.h>
 #include <libcdio/include/cdio/logging.h>
-#include "cdio_assert.h"
-#include "cdio_private.h" /* protoype for cdio_is_device_win32 */
+#include <libcdio/lib/driver/cdio_assert.h>
+#include <libcdio/lib/driver/cdio_private.h> /* protoype for cdio_is_device_win32 */
 
 #include <string.h>
 

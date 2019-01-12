@@ -15,7 +15,7 @@
 #include "favourites/ContextMenus.h"
 #include "music/ContextMenus.h"
 #include "pvr/PVRContextMenus.h"
-#include "video/ContextMenus.h"
+#include "video/ContextMenusVideo.h"
 #include "utils/log.h"
 #include "ServiceBroker.h"
 

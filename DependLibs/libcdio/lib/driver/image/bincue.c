@@ -57,7 +57,7 @@
 #else
 #define PRId64 "lld"
 #endif
-#ifdef HAVE_WINDOWS_H
+#if HAVE_WINDOWS_H
 #include <windows.h>
 #endif
 

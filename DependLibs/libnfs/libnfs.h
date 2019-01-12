@@ -508,14 +508,14 @@ GOTV_EXTERN int nfs_write(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t
  * -errno : An error occured.
  *          data is the error string.
  */
-GOTV_EXTERN int nfs_lseek_async(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t offset, int whence, nfs_cb cb, void *private_data);
+GOTV_EXTERN int nfs_lseek_async(struct nfs_context *nfs, struct nfsfh *nfsfh, int64_t offset, int whence, nfs_cb cb, void *private_data);
 /*
  * Sync lseek()
  * Function returns
  *    >=0 : numer of bytes read.
  * -errno : An error occured.
  */
-GOTV_EXTERN int nfs_lseek(struct nfs_context *nfs, struct nfsfh *nfsfh, uint64_t offset, int whence, uint64_t *current_offset);
+GOTV_EXTERN int nfs_lseek(struct nfs_context *nfs, struct nfsfh *nfsfh, int64_t offset, int whence, uint64_t *current_offset);
 
 
 /*

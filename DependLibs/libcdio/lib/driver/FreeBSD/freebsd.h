@@ -30,8 +30,8 @@
 #endif 
 
 #include <libcdio/include/cdio/sector.h>
-#include "cdio_assert.h"
-#include "cdio_private.h"
+#include <libcdio/lib/driver/cdio_assert.h>
+#include <libcdio/lib/driver/cdio_private.h>
 
 /*!
   For ioctl access /dev/acd0c is preferred over /dev/cd0c.

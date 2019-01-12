@@ -1,3 +1,8 @@
+
+INCLUDEPATH += 	$$PWD/../../
+INCLUDEPATH += 	$$PWD/../../lib/iso9660
+INCLUDEPATH += 	$$PWD/../../lib/driver
+
 HEADERS += 	$$PWD/../../include/cdio/audio.h \
 	$$PWD/../../include/cdio/bytesex.h \
 	$$PWD/../../include/cdio/bytesex_asm.h \
@@ -67,7 +72,6 @@ SOURCES += 	$$PWD/../../lib/cdio++/cdio.cpp \
 	$$PWD/../../lib/driver/audio.c \
 	$$PWD/../../lib/driver/bsdi.c \
 	$$PWD/../../lib/driver/cd_types.c \
-	$$PWD/../../lib/driver/cdio.c \
 	$$PWD/../../lib/driver/cdtext.c \
 	$$PWD/../../lib/driver/device.c \
 	$$PWD/../../lib/driver/disc.c \

@@ -14,11 +14,7 @@ DEFINES += QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS
 
 INCLUDEPATH += ./../../
 INCLUDEPATH += ./../../DependLibs
-INCLUDEPATH += ./../../DependLibs/libcurl/include
-INCLUDEPATH += ./../../DependLibs/libcurl/lib
-INCLUDEPATH += ./../../DependLibs/ffmpeg
-INCLUDEPATH += ./../../GoTvCore
-INCLUDEPATH += ./../../GoTvCore/xbmc
+
 
 
 include(version.pri)

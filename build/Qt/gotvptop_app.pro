@@ -78,17 +78,16 @@ unix{
 
     CONFIG(debug, debug|release){
         LIBS += -lkodiLinuxD
-        LIBS += -lffmpegavcodecLinuxD
         LIBS += -lffmpegavdeviceLinuxD
         LIBS += -lffmpegavfilterLinuxD
         LIBS += -lffmpegavformatLinuxD
-        LIBS += -lffmpegavresampleLinuxD
-        LIBS += -lffmpegavutilLinuxD
+        LIBS += -lffmpegavcodecLinuxD
         LIBS += -lffmpegpostprocLinuxD
         LIBS += -lffmpegswresampleLinuxD
         LIBS += -lffmpegswscaleLinuxD
         LIBS += -lffmpegavutilLinuxD
         LIBS += -lnfsLinuxD
+        LIBS += -lcdioLinuxD
         LIBS += -lpcreLinuxD
         LIBS += -larmrwbencLinuxD
         LIBS += -lfdk-aacLinuxD

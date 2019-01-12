@@ -1356,7 +1356,6 @@ HEADERS += 	$$PWD/../../../GoTvCpuArchDefines.h \
     $$PWD/../../xbmc/xbmc/settings/windows/GUIWindowTestPattern.h \
     $$PWD/../../xbmc/xbmc/system_gl.h \
     $$PWD/../../xbmc/xbmc/video/Bookmark.h \
-    $$PWD/../../xbmc/xbmc/video/ContextMenus.h \
     $$PWD/../../xbmc/xbmc/video/Episode.h \
     $$PWD/../../xbmc/xbmc/video/GUIViewStateVideo.h \
     $$PWD/../../xbmc/xbmc/video/PlayerController.h \
@@ -1767,7 +1766,8 @@ HEADERS += 	$$PWD/../../../GoTvCpuArchDefines.h \
 	$$PWD/../../xbmc/xbmc/windowing/qt/WinKeyMapQt.h \
 	$$PWD/../../xbmc/xbmc/windowing/qt/WinSystemQt.h \
 	$$PWD/../../xbmc/xbmc/windowing/qt/WinSystemQtContext.h \
-    $$PWD/../../xbmc/xbmc/utils/EndianSwap.h
+    $$PWD/../../xbmc/xbmc/utils/EndianSwap.h \
+    $$PWD/../../xbmc/xbmc/video/ContextMenusVideo.h
 
 SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/Application.cpp \
@@ -1778,7 +1778,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/BackgroundInfoLoader.cpp \
     $$PWD/../../xbmc/xbmc/ContextMenuItem.cpp \
     $$PWD/../../xbmc/xbmc/ContextMenuManager.cpp \
-    $$PWD/../../xbmc/xbmc/ContextMenus.cpp \
     $$PWD/../../xbmc/xbmc/CueDocument.cpp \
     $$PWD/../../xbmc/xbmc/DatabaseManager.cpp \
     $$PWD/../../xbmc/xbmc/DbUrl.cpp \
@@ -1817,7 +1816,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/addons/AudioEncoder.cpp \
     $$PWD/../../xbmc/xbmc/addons/BinaryAddonCache.cpp \
     $$PWD/../../xbmc/xbmc/addons/ContextMenuAddon.cpp \
-    $$PWD/../../xbmc/xbmc/addons/ContextMenus.cpp \
     $$PWD/../../xbmc/xbmc/addons/FilesystemInstaller.cpp \
     $$PWD/../../xbmc/xbmc/addons/FontResource.cpp \
     $$PWD/../../xbmc/xbmc/addons/GUIDialogAddonInfo.cpp \
@@ -1851,15 +1849,11 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/AddonCallbacksGUI.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/AddonGUIRenderingControl.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/AddonGUIWindow.cpp \
-    $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/General.cpp \
-    $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/ListItem.cpp \
-    $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/Window.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/controls/Button.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/controls/Edit.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/controls/FadeLabel.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/controls/Image.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/controls/Label.cpp \
-    $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/controls/Progress.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/controls/RadioButton.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/controls/Rendering.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/controls/SettingsSlider.cpp \
@@ -1869,15 +1863,12 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/dialogs/ContextMenu.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/dialogs/ExtendedProgressBar.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/dialogs/FileBrowser.cpp \
-    $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/dialogs/Keyboard.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/dialogs/Numeric.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/dialogs/OK.cpp \
-    $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/dialogs/Progress.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/dialogs/Select.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/dialogs/TextViewer.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/dialogs/YesNo.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/General.cpp \
-    $$PWD/../../xbmc/xbmc/addons/interfaces/Network.cpp \
     $$PWD/../../xbmc/xbmc/addons/settings/AddonSettings.cpp \
     $$PWD/../../xbmc/xbmc/addons/settings/GUIDialogAddonSettings.cpp \
     $$PWD/../../xbmc/xbmc/addons/settings/SettingUrlEncodedString.cpp \
@@ -2084,7 +2075,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/events/MediaLibraryEvent.cpp \
     $$PWD/../../xbmc/xbmc/events/windows/GUIViewStateEventLog.cpp \
     $$PWD/../../xbmc/xbmc/events/windows/GUIWindowEventLog.cpp \
-    $$PWD/../../xbmc/xbmc/favourites/ContextMenus.cpp \
     $$PWD/../../xbmc/xbmc/favourites/FavouritesService.cpp \
     $$PWD/../../xbmc/xbmc/favourites/GUIDialogFavourites.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/AddonsDirectory.cpp \
@@ -2374,7 +2364,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/input/touch/generic/GenericTouchPinchDetector.cpp \
     $$PWD/../../xbmc/xbmc/input/touch/generic/GenericTouchRotateDetector.cpp \
     $$PWD/../../xbmc/xbmc/input/touch/generic/GenericTouchSwipeDetector.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/AnnouncementManager.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/builtins/AddonBuiltins.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/builtins/ApplicationBuiltins.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/builtins/Builtins.cpp \
@@ -2416,31 +2405,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/json-rpc/TextureOperations.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/json-rpc/VideoLibrary.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/json-rpc/XBMCOperations.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/Addon.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/AddonCallback.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/AddonClass.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/AddonUtils.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/CallbackFunction.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/Control.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/Dialog.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/File.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/InfoTagMusic.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/InfoTagRadioRDS.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/InfoTagVideo.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/Keyboard.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/ListItem.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/ModuleXbmc.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/ModuleXbmcgui.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/ModuleXbmcplugin.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/ModuleXbmcvfs.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/Monitor.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/PlayList.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/Player.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/String.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/Window.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/WindowDialog.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/WindowDialogMixin.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/WindowXML.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/wsgi/WsgiErrorStream.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/wsgi/WsgiInputStream.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/wsgi/WsgiResponse.cpp \
@@ -2463,7 +2427,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/messaging/helpers/DialogOKHelper.cpp \
     $$PWD/../../xbmc/xbmc/music/Album.cpp \
     $$PWD/../../xbmc/xbmc/music/Artist.cpp \
-    $$PWD/../../xbmc/xbmc/music/ContextMenus.cpp \
     $$PWD/../../xbmc/xbmc/music/GUIViewStateMusic.cpp \
     $$PWD/../../xbmc/xbmc/music/MusicDatabase.cpp \
     $$PWD/../../xbmc/xbmc/music/MusicDbUrl.cpp \
@@ -2683,7 +2646,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/settings/windows/GUIWindowSettingsScreenCalibration.cpp \
     $$PWD/../../xbmc/xbmc/settings/windows/GUIWindowTestPattern.cpp \
     $$PWD/../../xbmc/xbmc/video/Bookmark.cpp \
-    $$PWD/../../xbmc/xbmc/video/ContextMenus.cpp \
     $$PWD/../../xbmc/xbmc/video/GUIViewStateVideo.cpp \
     $$PWD/../../xbmc/xbmc/video/PlayerController.cpp \
     $$PWD/../../xbmc/xbmc/video/Teletext.cpp \
@@ -2837,7 +2799,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
 	$$PWD/../../xbmc/xbmc/guilib/guiinfo/WeatherGUIInfo.cpp \
 	$$PWD/../../xbmc/xbmc/input/actions/Action.cpp \
 	$$PWD/../../xbmc/xbmc/input/actions/ActionTranslator.cpp \
-	$$PWD/../../xbmc/xbmc/interfaces/legacy/DrmCryptoSession.cpp \
 	$$PWD/../../xbmc/xbmc/interfaces/python/generated/AddonModuleXbmcwsgi.cpp \
 	$$PWD/../../xbmc/xbmc/music/MusicUtils.cpp \
 	$$PWD/../../xbmc/xbmc/network/DllLibPlist.cpp \
@@ -2880,7 +2841,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
 	$$PWD/../../xbmc/xbmc/settings/lib/ISettingControl.cpp \
 	$$PWD/../../xbmc/xbmc/settings/lib/Setting.cpp \
 	$$PWD/../../xbmc/xbmc/settings/lib/SettingCategoryAccess.cpp \
-	$$PWD/../../xbmc/xbmc/settings/lib/SettingConditions.cpp \
 	$$PWD/../../xbmc/xbmc/settings/lib/SettingDependency.cpp \
 	$$PWD/../../xbmc/xbmc/settings/lib/SettingRequirement.cpp \
 	$$PWD/../../xbmc/xbmc/settings/lib/SettingSection.cpp \
@@ -3000,13 +2960,53 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/fmt/format_fmt.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/File2.cpp \
     $$PWD/../../xbmc/xbmc/games/GameSettings2.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/LanguageHook2.cpp \
-    $$PWD/../../xbmc/xbmc/interfaces/legacy/CallbackHandler2.cpp \
     $$PWD/../../xbmc/xbmc/addons/Addon2.cpp \
     $$PWD/../../xbmc/xbmc/addons/AudioDecoder2.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeMusic.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNode2.cpp \
-    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/QueryParams2.cpp
+    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/QueryParams2.cpp \
+    $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/Window2.cpp \
+    $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/General2.cpp \
+    $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/ListItem2.cpp \
+    $$PWD/../../xbmc/xbmc/addons/interfaces/Network2.cpp \
+    $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/dialogs/Keyboard2.cpp \
+    $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/dialogs/Progress2.cpp \
+    $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/controls/Progress3.cpp \
+    $$PWD/../../xbmc/xbmc/addons/ContextMenus2.cpp \
+    $$PWD/../../xbmc/xbmc/favourites/ContextMenus3.cpp \
+    $$PWD/../../xbmc/xbmc/ContextMenus.cpp \
+    $$PWD/../../xbmc/xbmc/music/ContextMenus4.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/Keyboard3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/LanguageHook3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/CallbackHandler3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/Addon3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/PlayList3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/WindowXML3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/Window3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/WindowDialog3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/String3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/Player3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/ListItem3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/AddonCallback3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/AddonClass3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/AddonUtil3s.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/CallbackFunction3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/Control3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/Dialog3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/DrmCryptoSession3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/File3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/InfoTagMusic3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/InfoTagRadioRDS3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/InfoTagVideo3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/ModuleXbmc3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/ModuleXbmcgui3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/ModuleXbmcplugin3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/ModuleXbmcvfs3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/Monitor3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/legacy/WindowDialogMixin3.cpp \
+    $$PWD/../../xbmc/xbmc/interfaces/AnnouncementManager3.cpp \
+    $$PWD/../../xbmc/xbmc/settings/lib/SettingConditions2.cpp \
+    $$PWD/../../xbmc/xbmc/video/ContextMenusVideo.cpp
 
 win32{
     SOURCES += 	$$PWD/../../xbmc/xbmc/platform/win32/CharsetConverterWin32.cpp \
@@ -3036,3 +3036,5 @@ win32{
     $$PWD/../../xbmc/xbmc/platform/win32/strverscmp.cpp \
     $$PWD/../../xbmc/xbmc/platform/win32/utils/Win32InterfaceForCLog.cpp \
 }
+
+

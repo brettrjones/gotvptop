@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "ContextMenus.h"
+#include "ContextMenusVideo.h"
 #include "Application.h"
 #include "Autorun.h"
 #include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
