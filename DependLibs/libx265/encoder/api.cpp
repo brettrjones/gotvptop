@@ -21,6 +21,7 @@
  * For more information, contact us at license @ x265.com.
  *****************************************************************************/
 
+#include "libx265/x265.h"
 #include "libx265/common/common.h"
 #include "libx265/common/bitstream.h"
 #include "libx265/common/param.h"
@@ -39,12 +40,12 @@ const x265_api* x265_api_query(int bitDepth, int apiVersion, int* err);
 }
 #endif
 
-#if LINKED_10BIT
+//#if LINKED_10BIT
 namespace x265_10bit {
 const x265_api* x265_api_get(int bitDepth);
 const x265_api* x265_api_query(int bitDepth, int apiVersion, int* err);
 }
-#endif
+//#endif
 
 #if LINKED_12BIT
 namespace x265_12bit {
@@ -401,6 +402,7 @@ const x265_api* x265_api_get(int bitDepth)
         if (bitDepth == 8) return x265_8bit::x265_api_get(0);
 #endif
 #if LINKED_10BIT
+        sgsd
         if (bitDepth == 10) return x265_10bit::x265_api_get(0);
 #endif
 #if LINKED_12BIT

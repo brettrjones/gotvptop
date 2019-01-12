@@ -20,9 +20,9 @@
  */
 
 #include "config_ffmpeg.h"
-#include <libopenmpt/libopenmpt.h>
-#include <libopenmpt/libopenmpt_stream_callbacks_file.h>
-#include <libopenmpt/libopenmpt_version.h>
+#include <libopenmpt/libopenmpt/libopenmpt.h>
+#include <libopenmpt/libopenmpt/libopenmpt_stream_callbacks_file.h>
+#include <libopenmpt/libopenmpt/libopenmpt_version.h>
 /* Shims to support libopenmpt < 0.3.0 (as documented by libopenmpt) */
 #if !defined(OPENMPT_API_VERSION_MAKE)
 #define OPENMPT_API_VERSION_MAKE(major, minor, patch) (((major)<<24)|((minor)<<16)|((patch)<<0))

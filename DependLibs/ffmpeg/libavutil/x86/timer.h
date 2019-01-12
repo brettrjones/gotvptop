@@ -25,16 +25,16 @@
 
 #if HAVE_INLINE_ASM
 
-#define FF_TIMER_UNITS "decicycles"
-#define AV_READ_TIME read_time
+# define FF_TIMER_UNITS "decicycles"
+# define AV_READ_TIME read_time
 
 static GOTV_INLINE uint64_t read_time(void)
 {
     uint32_t a, d;
     __asm__ volatile(
-#if ARCH_X86_64 || defined(__SSE2__)
+#  if ARCH_X86_64 || defined(__SSE2__)
                      "lfence \n\t"
-#endif
+#  endif
                      "rdtsc  \n\t"
                      : "=a" (a), "=d" (d));
     return ((uint64_t)d << 32) + a;

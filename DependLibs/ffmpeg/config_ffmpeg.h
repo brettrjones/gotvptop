@@ -176,7 +176,7 @@
 #define HAVE_AMD3DNOW_INLINE 0
 #define HAVE_AMD3DNOWEXT_INLINE 0
 
-#ifdef _MSC_VER
+//#ifdef _MSC_VER
 #define HAVE_AVX_INLINE 0
 #define HAVE_AVX2_INLINE 0
 #define HAVE_AVX512_INLINE 0
@@ -191,21 +191,21 @@
 #define HAVE_SSE42_INLINE 0
 #define HAVE_SSSE3_INLINE 0
 #define HAVE_XOP_INLINE 0
-#else
-#define HAVE_AVX_INLINE 1
-#define HAVE_AVX2_INLINE 1
-#define HAVE_FMA3_INLINE 1
-#define HAVE_FMA4_INLINE 1
-#define HAVE_MMX_INLINE 1
-#define HAVE_MMXEXT_INLINE 1
-#define HAVE_SSE_INLINE 1
-#define HAVE_SSE2_INLINE 1
-#define HAVE_SSE3_INLINE 1
-#define HAVE_SSE4_INLINE 1
-#define HAVE_SSE42_INLINE 1
-#define HAVE_SSSE3_INLINE 1
-#define HAVE_XOP_INLINE 1
-#endif // _MSC_VER
+//#else
+//#define HAVE_AVX_INLINE 1
+//#define HAVE_AVX2_INLINE 1
+//#define HAVE_FMA3_INLINE 1
+//#define HAVE_FMA4_INLINE 1
+//#define HAVE_MMX_INLINE 1
+//#define HAVE_MMXEXT_INLINE 0
+//#define HAVE_SSE_INLINE 1
+//#define HAVE_SSE2_INLINE 1
+//#define HAVE_SSE3_INLINE 1
+//#define HAVE_SSE4_INLINE 1
+//#define HAVE_SSE42_INLINE 1
+//#define HAVE_SSSE3_INLINE 1
+//#define HAVE_XOP_INLINE 1
+//#endif // _MSC_VER
 
 #define HAVE_FAST_64BIT 0
 #define HAVE_FAST_CLZ 1
@@ -249,7 +249,12 @@
 #define HAVE_MEMORYBARRIER 1
 //#define HAVE_MM_EMPTY 0
 #define HAVE_MM_EMPTY 1
-#define HAVE_RDTSC 1
+#if defined(_MSC_VER) && defined(TARGET_OS_WINDOWS)
+# define HAVE_RDTSC 1
+#else
+# define HAVE_RDTSC 0
+#endif // defined(_MSC_VER) && defined(TARGET_OS_WINDOWS)
+
 #define HAVE_SARESTART 0
 //#define HAVE_SEM_TIMEDWAIT 1
 //#define HAVE_SYNC_VAL_COMPARE_AND_SWAP 1
@@ -380,7 +385,7 @@
 #define HAVE_UWP 0
 #define HAVE_WINRT 0
 #define HAVE_ACCESS 1
-#define HAVE_ALIGNED_MALLOC 1
+#define HAVE_ALIGNED_MALLOC 0
 #define HAVE_ARC4RANDOM 0
 //#define HAVE_CLOCK_GETTIME 0  // defined in GoTvCompilerConfig.h
 #define HAVE_CLOSESOCKET 1
@@ -431,7 +436,11 @@
 #define HAVE_SETCONSOLETEXTATTRIBUTE 1
 #define HAVE_SETCONSOLECTRLHANDLER 1
 //#define HAVE_SETDLLDIRECTORY 1
-#define HAVE_SETMODE 1
+#ifdef TARGET_OS_WINDOWS
+# define HAVE_SETMODE 1
+#else
+# define HAVE_SETMODE 0
+#endif // TARGET_OS_WINDOWS
 //#define HAVE_SETRLIMIT 0 // defined in GoTvCompilerConfig.h
 #define HAVE_SLEEP 1
 //#define HAVE_STRERROR_R 0 // defined in GoTvCompilerConfig.h

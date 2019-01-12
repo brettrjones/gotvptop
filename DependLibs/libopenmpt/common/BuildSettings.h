@@ -73,14 +73,14 @@
 // wrapper for autoconf macros
 
 #if defined(HAVE_CONFIG_H)
-
+#ifdef TARGET_OS_WINDOWS
 #include "config.h"
 
 // Fixup dependencies which are currently not used in libopenmpt itself
 #ifdef MPT_WITH_FLAC
 #undef MPT_WITH_FLAC
 #endif
-
+#endif // TARGET_OS_WINDOWS
 #endif // HAVE_CONFIG_H
 
 

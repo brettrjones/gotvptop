@@ -16,8 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#ifndef AVCODEC_ADTS_PARSER_H
-#define AVCODEC_ADTS_PARSER_H
+#pragma once
 
 #include <stddef.h>
 #include <stdint.h>
@@ -34,4 +33,3 @@
 int av_adts_header_parse(const uint8_t *buf, uint32_t *samples,
                          uint8_t *frames);
 
-#endif /* AVCODEC_ADTS_PARSER_H */

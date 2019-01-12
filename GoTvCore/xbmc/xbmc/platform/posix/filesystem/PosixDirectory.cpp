@@ -167,7 +167,7 @@ bool CPosixDirectory::RemoveRecursive(const GoTvUrl& url)
 
     if (entry->d_type == DT_DIR || (bStat && S_ISDIR(buffer.st_mode)))
     {
-      if (!RemoveRecursive(CURL{ itemPath }))
+      if (!RemoveRecursive(GoTvUrl{ itemPath }))
       {
         success = false;
         break;

@@ -143,7 +143,8 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../x86/timer.h \
 	$$PWD/../../x86/w64xmmtest.h \
 	$$PWD/../../xga_font_data.h \
-	$$PWD/../../xtea.h
+	$$PWD/../../xtea.h \
+    $$PWD/../../../config_ffmpeg.h
 
 SOURCES += 	$$PWD/../../../atomics/pthread/stdatomic.c \
 	$$PWD/../../adler32.c \

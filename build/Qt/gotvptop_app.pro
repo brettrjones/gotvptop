@@ -71,7 +71,6 @@ include(../../GoTvApps/GoTvPtoP/build/Qt/GoTvPtoP.pri)
 #### QMAKE_LFLAGS += -static
 
 #link dependent library
-#LIBS += -lcorelibLinuxD
 
 #QMAKE_LFLAGS += -static
 unix{
@@ -88,13 +87,15 @@ unix{
         LIBS += -lffmpegpostprocLinuxD
         LIBS += -lffmpegswresampleLinuxD
         LIBS += -lffmpegswscaleLinuxD
+        LIBS += -lffmpegavutilLinuxD
+        LIBS += -lnfsLinuxD
         LIBS += -lpcreLinuxD
         LIBS += -larmrwbencLinuxD
         LIBS += -lfdk-aacLinuxD
         LIBS += -lopencore-amrLinuxD
         LIBS += -lvpxLinuxD
         LIBS += -lx264LinuxD
-#        LIBS += -lx265LinuxD
+        LIBS += -lx265LinuxD
         LIBS += -lvorbisLinuxD
         LIBS += -loggLinuxD
         LIBS += -lopusLinuxD
@@ -108,6 +109,11 @@ unix{
         LIBS += -lcurlLinuxD
         LIBS += -lsshLinuxD
         LIBS += -lsslLinuxD
+        LIBS += -lpktlibLinuxD
+        LIBS += -lcurlLinuxD
+        LIBS += -lsshLinuxD
+        LIBS += -lsslLinuxD
+        LIBS += -lfribidiLinuxD
         LIBS += -liconvLinuxD
         LIBS += -lfreetypeLinuxD
         LIBS += -lpngLinuxD

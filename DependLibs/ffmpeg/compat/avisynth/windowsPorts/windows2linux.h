@@ -21,7 +21,9 @@ namespace avxsynth {
 #define __stdcall
 #define __cdecl
 #define noreturn
-#define __declspec(x)
+#ifndef __declspec
+# define __declspec(x)
+#endif // __declspec
 #define STDAPI       extern "C" HRESULT
 #define STDMETHODIMP HRESULT __stdcall
 #define STDMETHODIMP_(x) x __stdcall

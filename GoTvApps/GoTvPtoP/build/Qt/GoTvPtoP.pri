@@ -213,8 +213,11 @@ HEADERS += $$PWD/../../../GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/../../../../GoTvInterface/ILog.h \
     $$PWD/../../../../GoTvInterface/IScan.h \
     $$PWD/../../../../GoTvInterface/IToGui.h \
+    $$PWD/../../../../GoTvInterface/OsInterface/OsInterface.h \
     $$PWD/../../../../GoTvInterface/OsWin32/IWin32.h \
-    $$PWD/../../../../GoTvInterface/OsInterface/OsInterface.h
+    $$PWD/../../../../GoTvInterface/OsLinux/ILinux.h \
+    $$PWD/../../../../GoTvInterface/OsAndroid/IAndroid.h \
+    $$PWD/../../AppSource/exportdialog.h
 
 SOURCES += $$PWD/../../../GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/../../../GoTvCommon/QtSource/VxDataHelper.cpp \
@@ -425,8 +428,13 @@ SOURCES += $$PWD/../../../GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/../../../../GoTvInterface/IGoTvToGui.cpp \
     $$PWD/../../../../GoTvInterface/ILog.cpp \
     $$PWD/../../../../GoTvInterface/IToGui.cpp \
+    $$PWD/../../../../GoTvInterface/OsInterface/OsInterface.cpp \
     $$PWD/../../../../GoTvInterface/OsWin32/IWin32.cpp \
-    $$PWD/../../../../GoTvInterface/OsInterface/OsInterface.cpp
+    $$PWD/../../../../GoTvInterface/OsLinux/ILinux.cpp \
+    $$PWD/../../../../GoTvInterface/OsAndroid/IAndroid.cpp \
+    $$PWD/../../AppSource/exportdialog.cpp
+
+
 FORMS += $$PWD/../../../GoTvCommon/Forms/ActivityAbout.ui \
     $$PWD/../../../GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/../../../GoTvCommon/Forms/ActivityAnchorSettings.ui \
@@ -535,4 +543,5 @@ FORMS += $$PWD/../../../GoTvCommon/Forms/ActivityAbout.ui \
     $$PWD/../../../GoTvCommon/Forms/AppletSharedContent.ui \
     $$PWD/../../../GoTvCommon/Forms/AppletUserIdentity.ui \
     $$PWD/../../../GoTvCommon/Forms/PlayerGlWidget.ui
+
 RESOURCES += $$PWD/../../../GoTvCommon/gotvcommon.qrc

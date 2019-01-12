@@ -121,12 +121,13 @@ static av_cold void avisynth_atexit_handler(void);
 /* POSIX says these are implementation-defined.
  * To simplify use with Windows API, we treat them the same way.
  */
+#ifndef RTLD_LAZY
+# define RTLD_LAZY   0
+# define RTLD_NOW    0
 
-#define RTLD_LAZY   0
-#define RTLD_NOW    0
-
-#define RTLD_GLOBAL (1 << 1)
-#define RTLD_LOCAL  (1 << 2)
+# define RTLD_GLOBAL (1 << 1)
+# define RTLD_LOCAL  (1 << 2)
+#endif // RTLD_LAZY
 
 static av_cold int avisynth_load_library(void)
 {

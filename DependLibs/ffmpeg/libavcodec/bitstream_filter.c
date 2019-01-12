@@ -21,7 +21,7 @@
 #include <ffmpeg/config_ffmpeg.h>
 #include <string.h>
 
-#include "avcodec.h"
+#include "libavcodec/avcodec.h"
 #include "libavutil/atomic.h"
 #include "libavutil/avutil_internal.h"
 #include "libavutil/mem.h"

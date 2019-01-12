@@ -8,31 +8,6 @@ HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
 	$$PWD/../../../../GoTvCpuArchDefines.h \
 	$$PWD/../../../../GoTvDependLibrariesConfig.h \
 	$$PWD/../../../../GoTvTargetOsConfig.h \
-	$$PWD/../../../../arpa/inet.h \
-	$$PWD/../../../../asm/types.h \
-	$$PWD/../../../../byteswap.h \
-	$$PWD/../../../../dirent.h \
-	$$PWD/../../../../dlfcn.h \
-	$$PWD/../../../../langinfo.h \
-	$$PWD/../../../../linux/ioctl.h \
-	$$PWD/../../../../linux/param.h \
-	$$PWD/../../../../netdb.h \
-	$$PWD/../../../../netinet/in.h \
-	$$PWD/../../../../netinet/tcp.h \
-	$$PWD/../../../../strings.h \
-	$$PWD/../../../../sys/ioctl.h \
-	$$PWD/../../../../sys/mman.h \
-	$$PWD/../../../../sys/param.h \
-	$$PWD/../../../../sys/select.h \
-	$$PWD/../../../../sys/signal.h \
-	$$PWD/../../../../sys/socket.h \
-	$$PWD/../../../../sys/syslog.h \
-	$$PWD/../../../../sys/time.h \
-	$$PWD/../../../../sys/times.h \
-	$$PWD/../../../../sys/un.h \
-	$$PWD/../../../../sys/utsname.h \
-	$$PWD/../../../../syslog.h \
-	$$PWD/../../../../unistd.h \
 	$$PWD/../../common/bitstream.h \
 	$$PWD/../../common/common.h \
 	$$PWD/../../common/constants.h \

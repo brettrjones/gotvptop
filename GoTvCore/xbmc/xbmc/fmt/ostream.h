@@ -109,7 +109,7 @@ FMT_VARIADIC(int, fprintf, std::ostream &, CStringRef)
 }  // namespace fmt
 
 #ifdef FMT_HEADER_ONLY
-# include "ostream.cc"
+# include "ostream.cpp"
 #endif
 
 #endif  // FMT_OSTREAM_H_

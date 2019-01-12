@@ -42,9 +42,15 @@
 #include <vector>
 #include <utility>
 
+<<<<<<< Updated upstream
 #ifndef TARGET_OS_WINDOWS
 # define FMT_HEADER_ONLY 1
 #endif // TARGET_OS_WINDOWS
+=======
+//#ifndef TARGET_OS_WINDOWS
+//# define FMT_HEADER_ONLY 1
+//#endif // TARGET_OS_WINDOWS
+>>>>>>> Stashed changes
 
 #ifdef _SECURE_SCL
 # define FMT_SECURE_SCL _SECURE_SCL
