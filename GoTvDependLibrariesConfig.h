@@ -238,10 +238,6 @@ extern "C" {
 //#define HAS_SDL_JOYSTICK  // define for joystick control
 # ifndef HAVE_QT_GUI
 #  ifndef HAS_DX
-#   define HAS_DX 0
-#  endif // HAS_DX
-# else
-#  ifndef HAS_DX
 #   define HAS_DX 1
 #  endif // HAS_DX
 # endif // HAVE_QT_GUI

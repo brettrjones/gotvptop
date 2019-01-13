@@ -736,7 +736,7 @@
 #define CONFIG_CRYSTALHD 0
 #define CONFIG_CUDA 0
 #define CONFIG_CUVID 0
-#ifdef TARGET_OS_WINDOWS
+#if defined(TARGET_OS_WINDOWS) && !defined(HAVE_QT_GUI)
 # define CONFIG_D3D11VA 1
 #else
 # define CONFIG_D3D11VA 0
