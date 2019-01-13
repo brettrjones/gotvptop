@@ -6,11 +6,11 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "DirectoryNode.h"
+#include "DirectoryNodeVideo.h"
 #include "utils/URIUtils.h"
-#include "QueryParams.h"
+#include "QueryParamsVideo.h"
 #include "DirectoryNodeRoot.h"
-#include "DirectoryNodeOverview.h"
+#include "DirectoryNodeOverviewVideo.h"
 #include "DirectoryNodeGrouped.h"
 #include "DirectoryNodeTitleMovies.h"
 #include "DirectoryNodeTitleTvShows.h"

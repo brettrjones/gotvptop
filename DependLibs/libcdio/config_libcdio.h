@@ -179,5 +179,5 @@
 
 #define HAVE_UNSETENV
 #define HAVE_TIMEGM
-#define HAVE_LIMITS_H
+#define HAVE_LIMITS_H 1
 #define HAVE_STDARG_H

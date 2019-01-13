@@ -31,3 +31,5 @@ build/objs/
 *.db
 *.suo
 *.idb
+
+build/bin/

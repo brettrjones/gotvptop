@@ -45,7 +45,7 @@
 #include "video/VideoThumbLoader.h"
 #include "filesystem/Directory.h"
 #include "filesystem/VideoDatabaseDirectory.h"
-#include "filesystem/VideoDatabaseDirectory/QueryParams.h"
+#include "filesystem/VideoDatabaseDirectory/QueryParamsVideo.h"
 #include "utils/FileUtils.h"
 #include "utils/Variant.h"
 #include "messaging/helpers/DialogOKHelper.h"

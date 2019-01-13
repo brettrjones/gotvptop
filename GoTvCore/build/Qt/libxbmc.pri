@@ -207,8 +207,6 @@ SOURCES += $$PWD/../../xbmc/xbmc/platform/linux/ConvUtils.cpp \
 #    $$PWD/../../xbmc/xbmc/platform/linux/storage/UDevProvider.cpp \
 #    $$PWD/../../xbmc/xbmc/platform/linux/storage/UDisks2Provider.cpp \
 #    $$PWD/../../xbmc/xbmc/platform/linux/storage/UDisksProvider.cpp \
-    $$PWD/../../xbmc/xbmc/platform/posix/Filesystem.cpp \
-    $$PWD/../../xbmc/xbmc/platform/posix/MessagePrinter.cpp \
     $$PWD/../../xbmc/xbmc/platform/posix/filesystem/PosixDirectory.cpp \
     $$PWD/../../xbmc/xbmc/platform/posix/filesystem/PosixFile.cpp \
 #    $$PWD/../../xbmc/xbmc/platform/posix/filesystem/SMBDirectory.cpp \
@@ -700,7 +698,6 @@ HEADERS += 	$$PWD/../../../GoTvCpuArchDefines.h \
     $$PWD/../../xbmc/xbmc/filesystem/MultiPathDirectory.h \
     $$PWD/../../xbmc/xbmc/filesystem/MultiPathFile.h \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory.h \
-    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNode.h \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeAlbum.h \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeAlbumCompilations.h \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeAlbumCompilationsSongs.h \
@@ -720,7 +717,6 @@ HEADERS += 	$$PWD/../../../GoTvCpuArchDefines.h \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeTop100.h \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeYearAlbum.h \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeYearSong.h \
-    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/QueryParams.h \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseFile.h \
     $$PWD/../../xbmc/xbmc/filesystem/MusicFileDirectory.h \
     $$PWD/../../xbmc/xbmc/filesystem/MusicSearchDirectory.h \
@@ -751,13 +747,11 @@ HEADERS += 	$$PWD/../../../GoTvCpuArchDefines.h \
     $$PWD/../../xbmc/xbmc/filesystem/UPnPDirectory.h \
     $$PWD/../../xbmc/xbmc/filesystem/UPnPFile.h \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory.h \
-    $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNode.h \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeEpisodes.h \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeGrouped.h \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeInProgressTvShows.h \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeMoviesOverview.h \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeMusicVideosOverview.h \
-    $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeOverview.h \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeRecentlyAddedEpisodes.h \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeRecentlyAddedMovies.h \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeRecentlyAddedMusicVideos.h \
@@ -767,7 +761,6 @@ HEADERS += 	$$PWD/../../../GoTvCpuArchDefines.h \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeTitleMusicVideos.h \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeTitleTvShows.h \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeTvShowsOverview.h \
-    $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/QueryParams.h \
     $$PWD/../../xbmc/xbmc/filesystem/VirtualDirectory.h \
     $$PWD/../../xbmc/xbmc/filesystem/XbtDirectory.h \
     $$PWD/../../xbmc/xbmc/filesystem/XbtFile.h \
@@ -1767,7 +1760,13 @@ HEADERS += 	$$PWD/../../../GoTvCpuArchDefines.h \
 	$$PWD/../../xbmc/xbmc/windowing/qt/WinSystemQt.h \
 	$$PWD/../../xbmc/xbmc/windowing/qt/WinSystemQtContext.h \
     $$PWD/../../xbmc/xbmc/utils/EndianSwap.h \
-    $$PWD/../../xbmc/xbmc/video/ContextMenusVideo.h
+    $$PWD/../../xbmc/xbmc/video/ContextMenusVideo.h \
+    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeMusic.h \
+    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/QueryParamsMusic.h \
+    $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeVideo.h \
+    $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/QueryParamsVideo.h \
+    $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeOverviewVideo.h \
+    $$PWD/../../xbmc/xbmc/cores/DllLoader/SoLoader.h
 
 SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/Application.cpp \
@@ -2121,8 +2120,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeAlbumTop100.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeAlbumTop100Song.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeArtist.cpp \
-    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeGrouped.cpp \
-    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeOverview.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeSingles.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeSong.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeSongTop100.cpp \
@@ -2160,13 +2157,10 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/UPnPDirectory.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/UPnPFile.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory.cpp \
-    $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNode.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeEpisodes.cpp \
-    $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeGrouped.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeInProgressTvShows.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeMoviesOverview.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeMusicVideosOverview.cpp \
-    $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeOverview.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeRecentlyAddedEpisodes.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeRecentlyAddedMovies.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeRecentlyAddedMusicVideos.cpp \
@@ -2176,7 +2170,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeTitleMusicVideos.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeTitleTvShows.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeTvShowsOverview.cpp \
-    $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/QueryParams.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseFile.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/VirtualDirectory.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/XbtDirectory.cpp \
@@ -2964,7 +2957,6 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/addons/AudioDecoder2.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeMusic.cpp \
     $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNode2.cpp \
-    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/QueryParams2.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/Window2.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/General2.cpp \
     $$PWD/../../xbmc/xbmc/addons/interfaces/GUI/ListItem2.cpp \
@@ -3006,7 +2998,17 @@ SOURCES += 	$$PWD/../../xbmc/xbmc/AppParamParser.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/legacy/WindowDialogMixin3.cpp \
     $$PWD/../../xbmc/xbmc/interfaces/AnnouncementManager3.cpp \
     $$PWD/../../xbmc/xbmc/settings/lib/SettingConditions2.cpp \
-    $$PWD/../../xbmc/xbmc/video/ContextMenusVideo.cpp
+    $$PWD/../../xbmc/xbmc/video/ContextMenusVideo.cpp \
+    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/QueryParamsMusic.cpp \
+    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeOverviewMusic.cpp \
+    $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeVideo.cpp \
+    $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/QueryParamsVideo.cpp \
+    $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeOverviewVideo.cpp \
+    $$PWD/../../xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeGroupedVideo.cpp \
+    $$PWD/../../xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeGroupedMusic.cpp \
+    $$PWD/../../xbmc/xbmc/platform/posix/FilesystemPosix.cpp \
+    $$PWD/../../xbmc/xbmc/platform/posix/MessagePrinterPosix.cpp \
+    $$PWD/../../xbmc/xbmc/cores/DllLoader/SoLoader.cpp
 
 win32{
     SOURCES += 	$$PWD/../../xbmc/xbmc/platform/win32/CharsetConverterWin32.cpp \

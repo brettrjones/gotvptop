@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "QueryParams.h"
+#include "QueryParamsMusic.h"
 #include <stdlib.h>
 
 using namespace XFILE::MUSICDATABASEDIRECTORY;

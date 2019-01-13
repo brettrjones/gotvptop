@@ -9,7 +9,7 @@
 #include "VideoDatabaseDirectory.h"
 #include "ServiceBroker.h"
 #include "utils/URIUtils.h"
-#include "VideoDatabaseDirectory/QueryParams.h"
+#include "VideoDatabaseDirectory/QueryParamsVideo.h"
 #include "video/VideoDatabase.h"
 #include "guilib/TextureManager.h"
 #include "File.h"

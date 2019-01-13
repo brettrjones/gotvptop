@@ -7,7 +7,7 @@
  */
 
 #include "DirectoryNodeYearSong.h"
-#include "QueryParams.h"
+#include "QueryParamsMusic.h"
 #include "music/MusicDatabase.h"
 
 using namespace XFILE::MUSICDATABASEDIRECTORY;

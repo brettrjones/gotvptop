@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "QueryParams.h"
+#include "QueryParamsVideo.h"
 #include "video/VideoDatabase.h"
 
 using namespace XFILE::VIDEODATABASEDIRECTORY;

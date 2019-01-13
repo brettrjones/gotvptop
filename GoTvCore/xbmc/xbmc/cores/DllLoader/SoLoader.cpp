@@ -6,6 +6,9 @@
  *  See LICENSES/README.md for more information.
  */
 
+#include "config_kodi.h"
+#if defined(TARGET_OS_LINUX) ||  defined(TARGET_OS_ANDROID)
+
 #include <dlfcn.h>
 #include "SoLoader.h"
 #include "filesystem/SpecialProtocol.h"
@@ -97,3 +100,5 @@ bool SoLoader::HasSymbols()
 {
   return false;
 }
+
+#endif // defined(TARGET_OS_LINUX) ||  defined(TARGET_OS_ANDROID)

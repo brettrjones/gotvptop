@@ -24,7 +24,7 @@
 #include "filesystem/MultiPathDirectory.h"
 #include "filesystem/MusicDatabaseDirectory.h"
 #include "filesystem/VideoDatabaseDirectory.h"
-#include "filesystem/VideoDatabaseDirectory/QueryParams.h"
+#include "filesystem/VideoDatabaseDirectory/QueryParamsVideo.h"
 #include "games/addons/GameClient.h"
 #include "games/GameUtils.h"
 #include "games/tags/GameInfoTag.h"

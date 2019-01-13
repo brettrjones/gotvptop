@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "DirectoryNode.h"
+#include "DirectoryNodeVideo.h"
 
 namespace XFILE
 {

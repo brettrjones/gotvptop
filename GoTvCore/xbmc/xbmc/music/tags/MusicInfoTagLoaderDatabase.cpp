@@ -9,7 +9,7 @@
 #include "MusicInfoTagLoaderDatabase.h"
 #include "music/MusicDatabase.h"
 #include "filesystem/MusicDatabaseDirectory.h"
-#include "filesystem/MusicDatabaseDirectory/DirectoryNode.h"
+#include "filesystem/MusicDatabaseDirectory/DirectoryNodeMusic.h"
 #include "MusicInfoTag.h"
 
 using namespace MUSIC_INFO;

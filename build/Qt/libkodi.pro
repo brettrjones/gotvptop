@@ -67,3 +67,6 @@ QMAKE_CXXFLAGS_EXCEPTIONS_OFF = -fno-exceptions
 QMAKE_CXXFLAGS += -Wno-unused -Wno-parentheses -Wno-attributes  -Wno-ignored-qualifiers
 
 include(../../GoTvCore/build/Qt/libxbmc.pri)
+
+SOURCES += \
+    ../../GoTvCore/xbmc/xbmc/platform/posix/main.cpp

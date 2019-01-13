@@ -9,8 +9,8 @@
 #pragma once
 
 #include "IDirectory.h"
-#include "MusicDatabaseDirectory/DirectoryNode.h"
-#include "MusicDatabaseDirectory/QueryParams.h"
+#include "MusicDatabaseDirectory/DirectoryNodeMusic.h"
+#include "MusicDatabaseDirectory/QueryParamsMusic.h"
 
 namespace XFILE
 {

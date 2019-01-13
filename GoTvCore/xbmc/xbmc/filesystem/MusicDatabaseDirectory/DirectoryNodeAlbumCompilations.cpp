@@ -7,7 +7,7 @@
  */
 
 #include "DirectoryNodeAlbumCompilations.h"
-#include "QueryParams.h"
+#include "QueryParamsMusic.h"
 #include "guilib/LocalizeStrings.h"
 #include "music/MusicDatabase.h"
 

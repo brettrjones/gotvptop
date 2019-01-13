@@ -26,8 +26,8 @@ strace_win {
 
 # Resource files
 QMAKE_RESOURCE_FLAGS += -compress 9 -threshold 5
-RESOURCES += \
-    ./../../GoTvApps/GoTvCommon/gotvcommon.qrc
+#RESOURCES += \
+#    ./../../GoTvApps/GoTvCommon/gotvcommon.qrc
 
 
 # Translations
