@@ -12,7 +12,7 @@
 #ifndef WEBRTC_BASE_BASE64_H__
 #define WEBRTC_BASE_BASE64_H__
 
-#include <config_gotvcore.h>
+#include <config_kodi.h>
 
 #include <string>
 #include <vector>

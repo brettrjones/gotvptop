@@ -9,8 +9,14 @@
 #ifndef VPX_CONFIG_H
 #define VPX_CONFIG_H
 #include <GoTvDependLibrariesConfig.h>
-#define RESTRICT    
+#define RESTRICT
+
+#ifdef _MSC_VER
 #define INLINE      __forceinline
+#else
+#define INLINE      inline
+#endif // _MSC_VER
+
 #define ARCH_ARM 0
 #define ARCH_MIPS 0
 #if ARCH_64_BITS

@@ -110,9 +110,6 @@ unix{
         LIBS += -lsshLinuxD
         LIBS += -lsslLinuxD
         LIBS += -lpktlibLinuxD
-        LIBS += -lcurlLinuxD
-        LIBS += -lsshLinuxD
-        LIBS += -lsslLinuxD
         LIBS += -lfribidiLinuxD
         LIBS += -liconvLinuxD
         LIBS += -lfreetypeLinuxD

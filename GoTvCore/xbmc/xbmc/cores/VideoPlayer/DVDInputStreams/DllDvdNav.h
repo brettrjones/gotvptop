@@ -9,10 +9,10 @@
 #pragma once
 
 #include "config_gotvcore.h"
+#include <stdint.h>
 
 extern "C" {
 #define DVDNAV_COMPILE
- #include <stdint.h>
 
  #include "dvdnav/dvdnav.h"
 

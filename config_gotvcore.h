@@ -1,4 +1,5 @@
 #pragma once
+#include "config_kodi.h"
 #if 0
 #include "GoTvDependLibrariesConfig.h"
 

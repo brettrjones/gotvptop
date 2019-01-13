@@ -103,8 +103,10 @@
 
 #include <memory> // for std::shared_ptr
 
+#if defined __cplusplus
 class CFileItem;
 typedef std::shared_ptr<CFileItem> CFileItemPtr;
+#endif // defined __cplusplus
 
 #define HAVE_DLL_LIB_CURL			0
 #define HAVE_DLL_LIB_ASS			0

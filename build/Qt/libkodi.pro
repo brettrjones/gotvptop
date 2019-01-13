@@ -68,5 +68,4 @@ QMAKE_CXXFLAGS += -Wno-unused -Wno-parentheses -Wno-attributes  -Wno-ignored-qua
 
 include(../../GoTvCore/build/Qt/libxbmc.pri)
 
-SOURCES += \
-    ../../GoTvCore/xbmc/xbmc/platform/posix/main.cpp
+SOURCES +=

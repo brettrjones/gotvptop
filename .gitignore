@@ -51,3 +51,5 @@ GoTvApps/GoTvPtoP/build/VS2015/GeneratedFiles/
 build/VS2015/objs/libkvazaar/Debug/
 /build/VS2015/objs
 /build/VS2015/.vs
+
+build/bin/

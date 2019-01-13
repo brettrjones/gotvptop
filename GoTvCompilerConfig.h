@@ -1377,8 +1377,14 @@ typedef int64_t              time64_t;
 /* Define to 1 if you have the <sys/param.h> header file. */
 #define HAVE_SYS_PARAM_H			0
 
+#ifdef TARGET_OS_WINDOWS
 /* Define to 1 if you have the <sys/socket.h> header file. */
-#define HAVE_SYS_SOCKET_H			0
+# define HAVE_SYS_SOCKET_H			0
+#else
+/* Define to 1 if you have the <sys/socket.h> header file. */
+# define HAVE_SYS_SOCKET_H			0
+#endif // TARGET_OS_WINDOWS
+
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #define HAVE_SYS_STAT_H				1
 /* Define to 1 if you have the <sys/timeb.h> header file. */
