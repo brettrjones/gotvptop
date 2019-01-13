@@ -321,6 +321,7 @@
     <ClInclude Include="..\..\sqlite3.h" />
     <ClInclude Include="..\..\sqlite3ext.h" />
     <ClInclude Include="..\..\sqlitedataset.h" />
+    <ClInclude Include="..\..\StdMinMaxForWindows.h" />
     <ClInclude Include="..\..\StdOutRedirect.h" />
     <ClInclude Include="..\..\VarToString.h" />
     <ClInclude Include="..\..\VxAppInfo.h" />

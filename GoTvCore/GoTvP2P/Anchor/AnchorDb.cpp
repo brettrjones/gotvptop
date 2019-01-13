@@ -19,6 +19,7 @@
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxParse.h>
 #include <CoreLib/sqlite3.h>
+#include <CoreLib/StdMinMaxForWindows.h>
 
 #include <memory.h>
 

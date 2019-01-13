@@ -468,5 +468,8 @@
     <ClInclude Include="..\..\VxTime.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\StdMinMaxForWindows.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

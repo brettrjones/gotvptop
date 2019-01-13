@@ -38,6 +38,7 @@
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxTimer.h>
+#include <CoreLib/StdMinMaxForWindows.h>
 
 #include <stdlib.h>
 

@@ -47,7 +47,7 @@
     #include <OpenGL/glu.h>
     #include <OpenGL/gl3ext.h>
   #elif defined(TARGET_OS_WINDOWS)
-    #include <libglew/include/GL/glew.h>
+    //#include <libglew/include/GL/glew.h>
     #include <GL/gl.h>
     #include <GL/glu.h>
   #endif

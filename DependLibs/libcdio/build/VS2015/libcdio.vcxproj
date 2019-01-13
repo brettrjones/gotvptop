@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\config_libcdio.h" />
     <ClInclude Include="..\..\include\cdio\audio.h" />
     <ClInclude Include="..\..\include\cdio\bytesex.h" />
     <ClInclude Include="..\..\include\cdio\bytesex_asm.h" />

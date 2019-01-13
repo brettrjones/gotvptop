@@ -1,4 +1,5 @@
 #pragma once
+#if 0
 #include "GoTvDependLibrariesConfig.h"
 
 #ifndef NPT_CONFIG_ENABLE_LOGGING
@@ -29,7 +30,7 @@
 //============================================================================
 //=== Linux Specific ===//
 //============================================================================
-#if defined(TARGET_OS_LINUX) || defined(TARGET_OS_FREEBSD)
+#if defined(TARGET_OS_LINUX) || defined(TARGET_OS_FREEBSD) && !defined(TARGET_OS_WINDOWS)
 # if defined(HAVE_LIBAVAHI_COMMON) && defined(HAVE_LIBAVAHI_CLIENT)
 #  define HAS_ZEROCONF
 #  define HAS_AVAHI
@@ -98,3 +99,4 @@ typedef std::shared_ptr<CFileItem> CFileItemPtr;
 #define HAVE_DLL_LIB_CPLUFF			0
 
 //#include <vld.h> // Visual Studio memory leak detection from https://marketplace.visualstudio.com/items?itemName=ArkadyShapkin.VisualLeakDetectorforVisualC
+#endif // 0

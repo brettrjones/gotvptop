@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include<libglew/include/gl/glew.h>
+//#include<libglew/include/gl/glew.h>
 #include "config_kodi.h"
 #ifdef HAVE_QT_GUI
 

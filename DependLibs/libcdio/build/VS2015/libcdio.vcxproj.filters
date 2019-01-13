@@ -190,6 +190,9 @@
     <ClInclude Include="..\..\lib\driver\FreeBSD\freebsd.h">
       <Filter>lib\driver\FreeBSD</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\config_libcdio.h">
+      <Filter>lib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\include\cdio\Makefile.am">

@@ -14,6 +14,7 @@
 //============================================================================
 
 #include <GoTvDependLibrariesConfig.h>
+#include <CoreLib/StdMinMaxForWindows.h>
 
 #include "PktsPluginOffer.h"
 

@@ -18,7 +18,7 @@
 #endif
 #include "ServiceBroker.h"
 
-#if defined(HAS_DX)
+#if HAS_DX
 namespace DX
 {
 #if defined(TARGET_WINDOWS_DESKTOP)

@@ -11,7 +11,7 @@
 
 #pragma once
 
-#include "config_gotvcore.h"
+#include "config_kodi.h"
 
 #ifdef _MSC_VER
 #include "config.h"
@@ -26,7 +26,7 @@
 /*****************************************************************************
 * iovec structure: vectored data entry
 *****************************************************************************/
-#ifdef TARGET_WINDOWS
+#ifdef TARGET_OS_WINDOWS
 struct iovec
 {
   void *iov_base;     /* Pointer to data. */
