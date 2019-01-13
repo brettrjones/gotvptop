@@ -8,7 +8,7 @@
 
 #include "MusicFileItemListModifier.h"
 #include "ServiceBroker.h"
-#include "filesystem/MusicDatabaseDirectory/DirectoryNode.h"
+#include "filesystem/MusicDatabaseDirectory/DirectoryNodeMusic.h"
 #include "FileItem.h"
 #include "guilib/LocalizeStrings.h"
 #include "music/MusicDbUrl.h"

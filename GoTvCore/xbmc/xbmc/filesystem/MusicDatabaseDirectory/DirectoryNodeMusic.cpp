@@ -6,9 +6,9 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "DirectoryNode.h"
+#include "DirectoryNodeMusic.h"
 #include "utils/URIUtils.h"
-#include "QueryParams.h"
+#include "QueryParamsMusic.h"
 #include "DirectoryNodeRoot.h"
 #include "DirectoryNodeOverview.h"
 #include "DirectoryNodeGrouped.h"

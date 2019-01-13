@@ -24,7 +24,7 @@
 #include "filesystem/Directory.h"
 #include "filesystem/File.h"
 #include "filesystem/MusicDatabaseDirectory.h"
-#include "filesystem/MusicDatabaseDirectory/DirectoryNode.h"
+#include "filesystem/MusicDatabaseDirectory/DirectoryNodeMusic.h"
 #include "filesystem/SmartPlaylistDirectory.h" 
 #include "GUIInfoManager.h"
 #include "guilib/GUIComponent.h"

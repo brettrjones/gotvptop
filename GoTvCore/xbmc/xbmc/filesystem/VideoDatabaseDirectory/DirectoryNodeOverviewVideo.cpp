@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "DirectoryNodeOverview.h"
+#include "DirectoryNodeOverviewVideo.h"
 
 #include <utility>
 

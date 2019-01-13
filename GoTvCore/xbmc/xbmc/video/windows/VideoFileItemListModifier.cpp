@@ -13,7 +13,7 @@
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "video/VideoDatabase.h"
-#include "filesystem/VideoDatabaseDirectory/DirectoryNode.h"
+#include "filesystem/VideoDatabaseDirectory/DirectoryNodeVideo.h"
 #include "guilib/LocalizeStrings.h"
 #include "video/VideoDbUrl.h"
 

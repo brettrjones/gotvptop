@@ -9,8 +9,8 @@
 #pragma once
 
 #include "IDirectory.h"
-#include "VideoDatabaseDirectory/DirectoryNode.h"
-#include "VideoDatabaseDirectory/QueryParams.h"
+#include "VideoDatabaseDirectory/DirectoryNodeVideo.h"
+#include "VideoDatabaseDirectory/QueryParamsVideo.h"
 
 namespace XFILE
 {

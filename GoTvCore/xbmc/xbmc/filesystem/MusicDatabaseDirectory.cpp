@@ -8,7 +8,7 @@
 
 #include "MusicDatabaseDirectory.h"
 #include "utils/URIUtils.h"
-#include "MusicDatabaseDirectory/QueryParams.h"
+#include "MusicDatabaseDirectory/QueryParamsMusic.h"
 #include "music/MusicDatabase.h"
 #include "filesystem/File.h"
 #include "FileItem.h"

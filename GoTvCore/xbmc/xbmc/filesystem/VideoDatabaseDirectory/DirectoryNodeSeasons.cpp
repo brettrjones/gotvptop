@@ -7,7 +7,7 @@
  */
 
 #include "DirectoryNodeSeasons.h"
-#include "QueryParams.h"
+#include "QueryParamsVideo.h"
 #include "video/VideoDatabase.h"
 #include "FileItem.h"
 #include "guilib/LocalizeStrings.h"
