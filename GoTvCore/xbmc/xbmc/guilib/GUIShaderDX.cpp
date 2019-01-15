@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
 */
 #include "config_kodi.h"
-#ifdef HAS_DX
+#if HAS_DX
 
 #include "GUIShaderDX.h"
 #include "windowing/GraphicContext.h"

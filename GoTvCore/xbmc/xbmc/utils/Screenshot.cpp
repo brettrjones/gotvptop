@@ -40,7 +40,9 @@
 #endif
 
 #if defined(TARGET_WINDOWS)
-#include "rendering/dx/DeviceResources.h"
+#if HAS_DX
+# include "rendering/dx/DeviceResources.h"
+#endif // HAS_DX
 #include <wrl/client.h>
 using namespace Microsoft::WRL;
 #endif

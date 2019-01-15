@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 #include "config_kodi.h"
-#ifdef HAS_DX
+#if HAS_DX
 
 #include "filesystem/File.h"
 #include "D3DResource.h"

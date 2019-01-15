@@ -9,7 +9,7 @@
  */
 
 #include "config_kodi.h"
-#ifdef HAS_DX
+#if HAS_DX
 
 #include "GUIWindowTestPatternDX.h"
 #include "rendering/dx/DeviceResources.h"

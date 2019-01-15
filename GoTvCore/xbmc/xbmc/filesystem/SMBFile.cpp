@@ -26,7 +26,7 @@
 #include "PasswordManager.h"
 #include "ServiceBroker.h"
 #include "SMBDirectory.h"
-#include <libsmbclient.h>
+#include <libsmb/include/libsmbclient.h>
 #include "filesystem/SpecialProtocol.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"

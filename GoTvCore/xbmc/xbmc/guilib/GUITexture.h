@@ -166,7 +166,7 @@ public:
 #elif defined(HAS_GLES)
 #include "GUITextureGLES.h"
 #define CGUITexture CGUITextureGLES
-#elif defined(HAS_DX)
+#elif  HAS_DX
 # include "GUITextureD3D.h"
 # define CGUITexture CGUITextureD3D
 #elif defined(HAVE_QT_GUI)

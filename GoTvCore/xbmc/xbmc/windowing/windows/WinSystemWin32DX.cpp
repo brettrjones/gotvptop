@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 #include "config_kodi.h"
-#ifdef HAS_DX
+#if HAS_DX
 
 #include "WinSystemWin32DX.h"
 #include "commons/ilog.h"

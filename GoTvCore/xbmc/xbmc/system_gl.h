@@ -9,7 +9,7 @@
 #pragma once
 
 #include "config_kodi.h"
-#if (defined(TARGET_OS_WINDOWS) && !defined(HAS_DX)) || defined(HAVE_QT_GUI)
+#if (defined(TARGET_OS_WINDOWS) && ! HAS_DX) || defined(HAVE_QT_GUI)
 //# include <libglew/include/GL/glew.h>
 # include <GL/gl.h>
 # include <GL/glu.h>

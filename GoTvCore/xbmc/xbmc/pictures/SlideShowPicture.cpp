@@ -24,7 +24,7 @@
 #include "rendering/gl/RenderSystemGL.h"
 #elif defined(HAS_GLES)
 #include "rendering/gles/RenderSystemGLES.h"
-#elif defined(TARGET_WINDOWS)
+#elif HAS_DX
 #include "rendering/dx/DeviceResources.h"
 #include "rendering/dx/RenderContext.h"
 #include <DirectXMath.h>
@@ -76,7 +76,7 @@ void CSlideShowPic::Close()
   m_bTransitionImmediately = false;
   m_bIsDirty = true;
   m_alpha = 0;
-#ifdef HAS_DX
+#if HAS_DX
   m_vb = nullptr;
 #endif
 }
@@ -753,7 +753,7 @@ void CSlideShowPic::Render()
   Render(m_ox, m_oy, NULL, PICTURE_VIEW_BOX_COLOR);
 }
 
-#ifdef HAS_DX
+#if HAS_DX
 bool CSlideShowPic::UpdateVertexBuffer(Vertex* vertices)
 {
   if (!m_vb) // create new
@@ -783,7 +783,7 @@ bool CSlideShowPic::UpdateVertexBuffer(Vertex* vertices)
 
 void CSlideShowPic::Render(float *x, float *y, CBaseTexture* pTexture, UTILS::Color color)
 {
-#ifdef HAS_DX
+#if HAS_DX
   Vertex vertex[5];
   for (int i = 0; i < 4; i++)
   {

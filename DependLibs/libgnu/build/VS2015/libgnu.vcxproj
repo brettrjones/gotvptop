@@ -251,8 +251,8 @@
     <ClInclude Include="..\..\iconv_open-osf.h" />
     <ClInclude Include="..\..\iconv_open-solaris.h" />
     <ClInclude Include="..\..\init_gnu.h" />
-    <ClInclude Include="..\..\int.h" />
     <ClInclude Include="..\..\intprops.h" />
+    <ClInclude Include="..\..\int_gnu.h" />
     <ClInclude Include="..\..\its.h" />
     <ClInclude Include="..\..\javacomp.h" />
     <ClInclude Include="..\..\javaexec.h" />
@@ -965,6 +965,7 @@
     <ClCompile Include="..\..\init_gnu.c" />
     <ClCompile Include="..\..\intl-compat.c" />
     <ClCompile Include="..\..\intl-exports.c" />
+    <ClCompile Include="..\..\int_gnu.c" />
     <ClCompile Include="..\..\iswblank.c" />
     <ClCompile Include="..\..\itold.c" />
     <ClCompile Include="..\..\its.c" />

@@ -12,7 +12,7 @@
 #include "guilib/DirtyRegion.h"
 #include "utils/Color.h"
 #include <string>
-#ifdef HAS_DX
+#if HAS_DX
 #include "guilib/GUIShaderDX.h"
 #include <wrl/client.h>
 #endif
@@ -123,7 +123,7 @@ private:
   bool m_bTransitionImmediately;
 
   CCriticalSection m_textureAccess;
-#ifdef HAS_DX
+#if HAS_DX
   Microsoft::WRL::ComPtr<ID3D11Buffer> m_vb;
   bool UpdateVertexBuffer(Vertex *vertices);
 #endif

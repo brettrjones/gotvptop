@@ -14,7 +14,7 @@
 #include "settings/SettingsComponent.h"
 #include "cores/IPlayer.h"
 #include "rendering/RenderSystem.h"
-#ifdef TARGET_WINDOWS
+#if HAS_DX
 #include "rendering/dx/DeviceResources.h"
 #include "rendering/dx/RenderContext.h"
 #endif

@@ -7,7 +7,7 @@
  */
 
 #include "config_kodi.h"
-#if defined(HAS_DX)
+#if  HAS_DX
 
 #include "GUIFontTTFDX.h"
 #include "GUIFontManager.h"
@@ -366,4 +366,4 @@ void CGUIFontTTFDX::OnCreateDevice( void )
 {
 }
 
-#endif // defined(HAS_DX)
+#endif //  HAS_DX

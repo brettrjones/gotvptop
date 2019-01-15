@@ -419,9 +419,6 @@
     </ClInclude>
     <ClInclude Include="..\..\config_libpython.h" />
     <ClInclude Include="..\..\pyconfig_notwindows.h" />
-    <ClInclude Include="..\..\..\..\sys\wait.h">
-      <Filter>GoTvConfig\sys</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\base64.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>

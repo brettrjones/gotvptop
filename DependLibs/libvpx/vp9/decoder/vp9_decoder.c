@@ -317,9 +317,9 @@ int vp9_receive_compressed_data(VP9Decoder *pbi, size_t size,
 
     // Synchronize all threads immediately as a subsequent decode call may
     // cause a resize invalidating some allocations.
-    winterface->sync(&pbi->lf_worker);
+    winterface->syncVpx(&pbi->lf_worker);
     for (i = 0; i < pbi->num_tile_workers; ++i) {
-      winterface->sync(&pbi->tile_workers[i]);
+      winterface->syncVpx(&pbi->tile_workers[i]);
     }
 
     // Release all the reference buffers if worker thread is holding them.

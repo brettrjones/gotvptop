@@ -12,6 +12,7 @@
 
 #include "./vpx_config.h"
 #include "vpx/vpx_integer.h"
+#include "vpx_dsp/vpx_filter.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -874,7 +874,7 @@ void CGUIFontTTFBase::RenderCharacter(float posX, float posY, const Character *c
     SVertex* v = &vertices[ vertices.size() - 4 ];
     m_color = color;
 
-#if !defined(HAS_DX)
+#if ! HAS_DX
     unsigned char r = GET_R( color )
         , g = GET_G( color )
         , b = GET_B( color )
@@ -883,7 +883,7 @@ void CGUIFontTTFBase::RenderCharacter(float posX, float posY, const Character *c
 
     for( int i = 0; i < 4; i++ )
     {
-#ifdef HAS_DX
+#if HAS_DX
         CD3DHelper::XMStoreColor( &v[ i ].col, color );
 #else
         v[ i ].r = r;
@@ -893,7 +893,7 @@ void CGUIFontTTFBase::RenderCharacter(float posX, float posY, const Character *c
 #endif
     }
 
-#if defined(HAS_DX)
+#if  HAS_DX
     for( int i = 0; i < 4; i++ )
     {
         v[ i ].x = x[ i ];

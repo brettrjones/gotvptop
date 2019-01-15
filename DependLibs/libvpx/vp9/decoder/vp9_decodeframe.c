@@ -1374,7 +1374,7 @@ static const uint8_t *decode_tiles(VP9Decoder *pbi, const uint8_t *data,
   if (cm->lf.filter_level && !cm->skip_loop_filter) {
     LFWorkerData *const lf_data = (LFWorkerData *)pbi->lf_worker.data1;
     // Be sure to sync as we might be resuming after a failed frame decode.
-    winterface->sync(&pbi->lf_worker);
+    winterface->syncVpx(&pbi->lf_worker);
     vp9_loop_filter_data_reset(lf_data, get_frame_new_buffer(cm), cm,
                                pbi->mb.plane);
   }
@@ -1444,7 +1444,7 @@ static const uint8_t *decode_tiles(VP9Decoder *pbi, const uint8_t *data,
         // decoding has completed: finish up the loop filter in this thread.
         if (mi_row + MI_BLOCK_SIZE >= cm->mi_rows) continue;
 
-        winterface->sync(&pbi->lf_worker);
+        winterface->syncVpx(&pbi->lf_worker);
         lf_data->start = lf_start;
         lf_data->stop = mi_row;
         if (pbi->max_threads > 1) {
@@ -1459,7 +1459,7 @@ static const uint8_t *decode_tiles(VP9Decoder *pbi, const uint8_t *data,
   // Loopfilter remaining rows in the frame.
   if (cm->lf.filter_level && !cm->skip_loop_filter) {
     LFWorkerData *const lf_data = (LFWorkerData *)pbi->lf_worker.data1;
-    winterface->sync(&pbi->lf_worker);
+    winterface->syncVpx(&pbi->lf_worker);
     lf_data->start = lf_data->stop;
     lf_data->stop = cm->mi_rows;
     winterface->execute(&pbi->lf_worker);
@@ -1567,7 +1567,7 @@ static const uint8_t *decode_tiles_mt(VP9Decoder *pbi, const uint8_t *data,
     VPxWorker *const worker = &pbi->tile_workers[n];
     TileWorkerData *const tile_data =
         &pbi->tile_worker_data[n + pbi->total_tiles];
-    winterface->sync(worker);
+    winterface->syncVpx(worker);
     tile_data->xd = pbi->mb;
     tile_data->xd.counts =
         cm->frame_parallel_decoding_mode ? NULL : &tile_data->counts;
@@ -1657,7 +1657,7 @@ static const uint8_t *decode_tiles_mt(VP9Decoder *pbi, const uint8_t *data,
       // its vpx_internal_error_info which could be propagated to the main info
       // in cm. Additionally once the threads have been synced and an error is
       // detected, there's no point in continuing to decode tiles.
-      pbi->mb.corrupted |= !winterface->sync(worker);
+      pbi->mb.corrupted |= !winterface->syncVpx(worker);
       if (!bit_reader_end) bit_reader_end = tile_data->data_end;
     }
   }

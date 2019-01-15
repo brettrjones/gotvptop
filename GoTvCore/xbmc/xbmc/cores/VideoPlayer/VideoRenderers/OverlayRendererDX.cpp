@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 #include "config_kodi.h"
-#ifndef HAVE_QT_GUI
+#ifndef HAVE_QT_GUI &&  HAS_DX
 
 #include "Application.h"
 #include "cores/VideoPlayer/DVDCodecs/Overlay/DVDOverlayImage.h"

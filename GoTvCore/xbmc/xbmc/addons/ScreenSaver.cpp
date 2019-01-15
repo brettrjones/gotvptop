@@ -11,8 +11,8 @@
 #include "windowing/GraphicContext.h"
 #include "windowing/WinSystem.h"
 #include "utils/log.h"
-#ifdef TARGET_WINDOWS
-#include "rendering/dx/DeviceResources.h"
+#if HAS_DX
+# include "rendering/dx/DeviceResources.h"
 #endif
 
 namespace ADDON
@@ -26,7 +26,7 @@ CScreenSaver::CScreenSaver(BinaryAddonBasePtr addonBase)
   m_profile = CSpecialProtocol::TranslatePath(Profile());
 
   m_struct = {{0}};
-#if defined(TARGET_WINDOWS) && !defined(HAVE_QT_GUI)
+#if defined(TARGET_WINDOWS) && !defined(HAVE_QT_GUI) && HAS_DX
   m_struct.props.device = DX::DeviceResources::Get()->GetD3DContext();
 #else
   m_struct.props.device = nullptr;

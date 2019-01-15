@@ -9,7 +9,7 @@
 #include "GUIRenderingControl.h"
 #include "threads/SingleLock.h"
 #include "guilib/IRenderingCallback.h"
-#ifdef TARGET_WINDOWS
+#if HAS_DX
 #include "rendering/dx/DeviceResources.h"
 #endif
 

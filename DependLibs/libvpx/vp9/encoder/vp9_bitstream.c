@@ -1014,7 +1014,7 @@ static size_t encode_tiles_mt(VP9_COMP *cpi, uint8_t *data_ptr) {
       uint32_t tile_size;
       int k;
 
-      if (!winterface->sync(worker)) return 0;
+      if (!winterface->syncVpx(worker)) return 0;
       tile_size = data->bit_writer.pos;
 
       // Aggregate per-thread bitstream stats.

@@ -381,7 +381,7 @@ typedef struct {
   int (*reset)(VPxWorker *const worker);
   // Makes sure the previous work is finished. Returns true if worker->had_error
   // was not set and no error condition was triggered by the working thread.
-  int (*sync)(VPxWorker *const worker);
+  int (*syncVpx)(VPxWorker *const worker);
   // Triggers the thread to call hook() with data1 and data2 arguments. These
   // hook/data1/data2 values can be changed at any time before calling this
   // function, but not be changed afterward until the next call to Sync().

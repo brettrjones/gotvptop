@@ -529,7 +529,7 @@ bool CSystemGUIInfo::GetBool(bool& value, const CGUIListItem *gitem, int context
       return true;
     }
     case SYSTEM_HAS_CMS:
-#if defined(HAS_GL) || defined(HAS_DX)
+#if defined(HAS_GL) ||  HAS_DX
       value = true;
 #else
       value = false;

@@ -43,7 +43,7 @@
 #include "platform/linux/XTimeUtils.h"
 #endif
 
-#include <libsmbclient.h>
+#include <libsmb/include/libsmbclient.h>
 
 struct CachedDirEntry
 {

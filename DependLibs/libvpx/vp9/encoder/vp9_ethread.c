@@ -131,7 +131,7 @@ static void create_enc_workers(VP9_COMP *cpi, int num_workers) {
         thread_data->cpi = cpi;
         thread_data->td = &cpi->td;
       }
-      winterface->sync(worker);
+      winterface->syncVpx(worker);
     }
   }
 }
@@ -165,7 +165,7 @@ static void launch_enc_workers(VP9_COMP *cpi, VPxWorkerHook hook, void *data2,
   // Encoding ends.
   for (i = 0; i < num_workers; i++) {
     VPxWorker *const worker = &cpi->workers[i];
-    winterface->sync(worker);
+    winterface->syncVpx(worker);
   }
 }
 

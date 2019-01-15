@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 #include "config_kodi.h"
-#if defined(HAS_DX) 
+#if  HAS_DX 
 
 #include "GUITextureD3D.h"
 
@@ -141,5 +141,5 @@ void CGUITextureD3D::DrawQuad(const CRect &rect, UTILS::Color color, CBaseTextur
   CD3DTexture::DrawQuad(rect, color, numViews, &views, texCoords, texture ? SHADER_METHOD_RENDER_TEXTURE_BLEND : SHADER_METHOD_RENDER_DEFAULT);
 }
 
-#endif // defined(HAS_DX) 
+#endif //  HAS_DX 
 

@@ -342,6 +342,9 @@
     <ClInclude Include="..\..\VxTimeUtil.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+	<ClInclude Include="..\..\VxUrl.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\VxValuePair.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -466,6 +469,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\VxTime.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+	    <ClInclude Include="..\..\VxUrl.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\StdMinMaxForWindows.h">

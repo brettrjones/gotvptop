@@ -33,16 +33,9 @@ build/objs/
 *.idb
 
 *.opendb
+*.vs
 
-build/VS2015/objs/libass/Debug/
-
-build/VS2015/objs/libassD/Debug/
-
-build/VS2015/objs/libcurl/Debug/
-
-build/VS2015/objs/libglew/Debug/
-
-build/VS2015/objs/libiconv/Debug/
+build/VS2015/objs
 
 GoTvApps/GoTvPtoP/build/VS2015/debug/
 
@@ -50,6 +43,56 @@ GoTvApps/GoTvPtoP/build/VS2015/GeneratedFiles/
 
 build/VS2015/objs/libkvazaar/Debug/
 /build/VS2015/objs
-/build/VS2015/.vs
 
 build/bin/
+
+*.ilk
+
+*.cache
+
+build/VS2015/Build/Debug/x86/Temp/EasyHookDll/EasyHookDll_32\.res
+
+bin/
+
+*.o
+
+DependLibs/libpython/build/VS2015/amd64/
+
+DependLibs/libpython/build/VS2015/_bsddb\.exp
+
+DependLibs/libpython/build/VS2015/_ctypes\.exp
+
+DependLibs/libpython/build/VS2015/_ctypes_test\.exp
+
+DependLibs/libpython/build/VS2015/_elementtree\.exp
+
+DependLibs/libpython/build/VS2015/_hashlib\.exp
+
+DependLibs/libpython/build/VS2015/_msi\.exp
+
+DependLibs/libpython/build/VS2015/_multiprocessing\.exp
+
+DependLibs/libpython/build/VS2015/_socket\.exp
+
+DependLibs/libpython/build/VS2015/_sqlite3\.exp
+
+DependLibs/libpython/build/VS2015/_ssl\.exp
+
+DependLibs/libpython/build/VS2015/_testcapi\.exp
+
+DependLibs/libpython/build/VS2015/_tkinter\.exp
+
+DependLibs/libpython/build/VS2015/bz2\.exp
+
+DependLibs/libpython/build/VS2015/pyexpat\.exp
+
+DependLibs/libpython/build/VS2015/python27_d\.exp
+
+DependLibs/libpython/build/VS2015/select\.exp
+
+DependLibs/libpython/build/VS2015/sqlite3\.exp
+
+DependLibs/libpython/build/VS2015/unicodedata\.exp
+
+DependLibs/libpython/build/VS2015/winsound\.exp
+

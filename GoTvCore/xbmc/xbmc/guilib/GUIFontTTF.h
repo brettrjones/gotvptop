@@ -16,7 +16,7 @@
 #include "utils/Color.h"
 #include "utils/Geometry.h"
 
-#ifdef HAS_DX
+#if HAS_DX
 #include "DirectXMath.h"
 #include "DirectXPackedVector.h"
 
@@ -52,7 +52,7 @@ typedef std::vector<character_t> vecText;
 struct SVertex
 {
     float x, y, z;
-#ifdef HAS_DX
+#if HAS_DX
     XMFLOAT4 col;
 #else
     unsigned char r, g, b, a;
@@ -197,7 +197,7 @@ private:
 #elif defined(HAS_GL) || defined(HAS_GLES)
 # include "GUIFontTTFGL.h"
 # define CGUIFontTTF CGUIFontTTFGL
-#elif defined(HAS_DX)
+#elif  HAS_DX
 # include "GUIFontTTFDX.h"
 # define CGUIFontTTF CGUIFontTTFDX
 #endif

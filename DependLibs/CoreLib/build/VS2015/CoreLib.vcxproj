@@ -269,6 +269,7 @@
     <ClCompile Include="..\..\VxTime.cpp" />
     <ClCompile Include="..\..\VxTimer.cpp" />
     <ClCompile Include="..\..\VxTimeUtil.cpp" />
+    <ClCompile Include="..\..\VxUrl.cpp" />
     <ClCompile Include="..\..\VxValuePair.cpp" />
     <ClCompile Include="..\..\VxXml.cpp" />
   </ItemGroup>
@@ -366,6 +367,7 @@
     <ClInclude Include="..\..\VxTimeDefs.h" />
     <ClInclude Include="..\..\VxTimer.h" />
     <ClInclude Include="..\..\VxTimeUtil.h" />
+    <ClInclude Include="..\..\VxUrl.h" />
     <ClInclude Include="..\..\VxValuePair.h" />
     <ClInclude Include="..\..\VxXml.h" />
   </ItemGroup>

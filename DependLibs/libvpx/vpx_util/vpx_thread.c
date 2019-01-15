@@ -160,12 +160,13 @@ static void end(VPxWorker *const worker) {
 
 //------------------------------------------------------------------------------
 
-static VPxWorkerInterface g_worker_interface = { init,   reset,   sync,
+static VPxWorkerInterface g_worker_interface = { init,   reset,   
+                                                 syncWorker,
                                                  launch, execute, end };
 
 int vpx_set_worker_interface(const VPxWorkerInterface *const winterface) {
   if (winterface == NULL || winterface->init == NULL ||
-      winterface->reset == NULL || winterface->sync == NULL ||
+      winterface->reset == NULL || winterface->syncVpx == NULL ||
       winterface->launch == NULL || winterface->execute == NULL ||
       winterface->end == NULL) {
     return 0;

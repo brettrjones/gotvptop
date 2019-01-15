@@ -7,7 +7,7 @@
  */
 
 #include "config_kodi.h"
-#ifdef HAS_DX
+#if HAS_DX
 
 // setting that here because otherwise SampleFormat is defined to AVSampleFormat
 // which we don't use here

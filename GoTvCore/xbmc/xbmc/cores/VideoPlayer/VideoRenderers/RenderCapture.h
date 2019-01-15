@@ -10,7 +10,7 @@
 
 #include "config_kodi.h"
 
-#ifdef HAS_DX
+#if HAS_DX
   #include "guilib/D3DResource.h"
   #include <wrl/client.h>
 #endif

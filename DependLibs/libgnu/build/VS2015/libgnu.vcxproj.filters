@@ -1232,9 +1232,6 @@
     <ClInclude Include="..\..\gstr.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\int.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\libcharset.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -1968,6 +1965,9 @@
       <Filter>Source Files\opencdk</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xsize_gnu.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\int_gnu.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -4838,6 +4838,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\os2compat2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\int_gnu.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

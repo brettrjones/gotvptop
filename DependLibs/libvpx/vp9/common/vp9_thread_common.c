@@ -204,7 +204,7 @@ static void loop_filter_rows_mt(YV12_BUFFER_CONFIG *frame, VP9_COMMON *cm,
 
   // Wait till all rows are finished
   for (i = 0; i < num_workers; ++i) {
-    winterface->sync(&workers[i]);
+    winterface->syncVpx(&workers[i]);
   }
 }
 

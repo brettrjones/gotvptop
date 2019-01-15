@@ -7,7 +7,7 @@
  */
 
 #include "config_kodi.h"
-#ifdef TARGET_OS_WINDOWS
+#if HAS_DX
 
 #include "RPWinOutputShader.h"
 #include "utils/log.h"

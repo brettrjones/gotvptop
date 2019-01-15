@@ -27,8 +27,10 @@
 #include "threads/SingleLock.h"
 #include "utils/log.h"
 #include "VideoShaders/WinVideoFilter.h"
+#if HAS_DX
 #include "rendering/dx/DeviceResources.h"
 #include "rendering/dx/RenderContext.h"
+#endif // HAS_DX
 #ifdef HAVE_QT_GUI
 #include "GoTvInterface/IGoTv.h"
 #endif // HAVE_QT_GUI

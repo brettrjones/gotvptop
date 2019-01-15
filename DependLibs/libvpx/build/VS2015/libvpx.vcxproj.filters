@@ -394,7 +394,6 @@
     <ClInclude Include="..\..\vpx_ports\mem_ops.h" />
     <ClInclude Include="..\..\vpx_ports\mem_ops_aligned.h" />
     <ClInclude Include="..\..\vpx_ports\vpx_once.h" />
-    <ClInclude Include="..\..\vpx_dsp_rtcd.h" />
     <ClInclude Include="..\..\vp8_rtcd.h" />
     <ClInclude Include="..\..\vp9_rtcd.h" />
     <ClInclude Include="..\..\..\..\GoTvAppConfig.h">
@@ -415,10 +414,26 @@
     <ClInclude Include="..\..\vpx_scale\vpx_scale.h">
       <Filter>vpx_scale</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\vpx_scale_rtcd.h" />
     <ClInclude Include="..\..\vpx_scale\vpx_scale_rtcd_redirect.h">
       <Filter>vpx_scale</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\vpx_config_linux.h" />
+    <ClInclude Include="..\..\vpx_config_win.h" />
+    <ClInclude Include="..\..\vpx_dsp_rtcd_win.h" />
+    <ClInclude Include="..\..\vpx_scale_rtcd_linux.h" />
+    <ClInclude Include="..\..\vpx_version.h" />
+    <ClInclude Include="..\..\vpx_scale_rtcd_win.h" />
+    <ClInclude Include="..\..\ivfdec.h" />
+    <ClInclude Include="..\..\ivfenc.h" />
+    <ClInclude Include="..\..\md5_utils.h" />
+    <ClInclude Include="..\..\rate_hist.h" />
+    <ClInclude Include="..\..\tools_common.h" />
+    <ClInclude Include="..\..\video_common.h" />
+    <ClInclude Include="..\..\video_reader.h" />
+    <ClInclude Include="..\..\video_writer.h" />
+    <ClInclude Include="..\..\vpx_scale_rtcd.h" />
+    <ClInclude Include="..\..\vpx_dsp_rtcd_linux.h" />
+    <ClInclude Include="..\..\vpx_dsp_rtcd.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\..\vpx_ports\emms.asm" />

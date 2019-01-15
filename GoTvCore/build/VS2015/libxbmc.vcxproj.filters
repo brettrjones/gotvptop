@@ -211,9 +211,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\FileCache.cpp">
       <Filter>filesystem</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\File.cpp">
-      <Filter>filesystem</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\FileDirectoryFactory.cpp">
       <Filter>filesystem</Filter>
     </ClCompile>
@@ -463,9 +460,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNodeArtist.cpp">
       <Filter>filesystem\MusicDatabaseDirectory</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNodeRoot.cpp">
-      <Filter>filesystem\MusicDatabaseDirectory</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNodeSingles.cpp">
       <Filter>filesystem\MusicDatabaseDirectory</Filter>
     </ClCompile>
@@ -485,9 +479,6 @@
       <Filter>filesystem\MusicDatabaseDirectory</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\GameServices.cpp">
-      <Filter>games</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\GameSettings.cpp">
       <Filter>games</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\GameUtils.cpp">
@@ -637,9 +628,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\windows\GUIWindowGames.cpp">
       <Filter>games\windows</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\AnnouncementManager.cpp">
-      <Filter>interfaces</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\builtins\AddonBuiltins.cpp">
       <Filter>interfaces\builtins</Filter>
     </ClCompile>
@@ -767,9 +755,6 @@
       <Filter>music</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\music\Artist.cpp">
-      <Filter>music</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\music\ContextMenus.cpp">
       <Filter>music</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\music\GUIViewStateMusic.cpp">
@@ -1556,9 +1541,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\OK.cpp">
       <Filter>addons\interfaces\GUI\dialogs</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Progress.cpp">
-      <Filter>addons\interfaces\GUI\dialogs</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Select.cpp">
       <Filter>addons\interfaces\GUI\dialogs</Filter>
     </ClCompile>
@@ -1681,9 +1663,6 @@
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\dialogs\GUIDialogYesNo.cpp">
       <Filter>dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\favourites\ContextMenus.cpp">
-      <Filter>favourites</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\favourites\GUIDialogFavourites.cpp">
       <Filter>favourites</Filter>
@@ -2217,9 +2196,6 @@
       <Filter>windows</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\video\Bookmark.cpp">
-      <Filter>video</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\video\ContextMenus.cpp">
       <Filter>video</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\video\GUIViewStateVideo.cpp">
@@ -3249,36 +3225,6 @@
     <ClCompile Include="..\..\xbmc\xbmc\platform\win32\MessagePrinterWin32.cpp">
       <Filter>platform\win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\ISetting.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\ISettingControl.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\Setting.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingCategoryAccess.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingConditions.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingDependency.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingRequirement.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingSection.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingsManager.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingUpdate.cpp">
-      <Filter>lib</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\xbmc\guilib\GUIComponent.cpp">
       <Filter>guilib</Filter>
     </ClCompile>
@@ -3357,9 +3303,6 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\xbmc\swig\AddonModuleXbmcdrm.i.cpp">
       <Filter>swig</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\DrmCryptoSession.cpp">
-      <Filter>interfaces\legacy</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\xbmc\drm\CryptoSession.cpp">
       <Filter>drm</Filter>
@@ -3623,12 +3566,6 @@
     <ClCompile Include="..\..\xbmc\xbmc\filesystem\File2.cpp">
       <Filter>filesystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\xbmc\filesystem\SMBDirectory.cpp">
-      <Filter>filesystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\xbmc\filesystem\SMBFile.cpp">
-      <Filter>filesystem</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNode2.cpp">
       <Filter>filesystem\MusicDatabaseDirectory</Filter>
     </ClCompile>
@@ -3682,6 +3619,57 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\controls\Progress3.cpp">
       <Filter>addons\interfaces\GUI\controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingConditions2.cpp">
+      <Filter>settings\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\ISetting.cpp">
+      <Filter>settings\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\ISettingControl.cpp">
+      <Filter>settings\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\Setting.cpp">
+      <Filter>settings\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingCategoryAccess.cpp">
+      <Filter>settings\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingDependency.cpp">
+      <Filter>settings\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingRequirement.cpp">
+      <Filter>settings\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingSection.cpp">
+      <Filter>settings\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingsManager.cpp">
+      <Filter>settings\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingUpdate.cpp">
+      <Filter>settings\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\AnnouncementManager3.cpp">
+      <Filter>interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\games\GameSettings2.cpp">
+      <Filter>games</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\music\ContextMenus4.cpp">
+      <Filter>music</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Progress2.cpp">
+      <Filter>addons\interfaces\GUI\dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\favourites\ContextMenus3.cpp">
+      <Filter>favourites</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\video\ContextMenusVideo.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\SettingConditions.cpp">
+      <Filter>settings</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -7834,60 +7822,6 @@
     <ClInclude Include="..\..\xbmc\xbmc\platform\win32\peripherals\PeripheralBusUSB.h">
       <Filter>platform\win32\peripherals</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISetting.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingCallback.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingControl.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingControlCreator.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingCreator.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingsHandler.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISubSettings.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\Setting.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingCategoryAccess.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingConditions.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingDefinitions.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingDependency.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingLevel.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingRequirement.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingSection.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingsManager.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingType.h">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingUpdate.h">
-      <Filter>lib</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\xbmc\guilib\GUIComponent.h">
       <Filter>guilib</Filter>
     </ClInclude>
@@ -8182,6 +8116,63 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\QueryParamsVideo.h">
       <Filter>filesystem\VideoDatabaseDirectory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISetting.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingCallback.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingControl.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingControlCreator.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingCreator.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingsHandler.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISubSettings.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\Setting.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingCategoryAccess.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingConditions.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingDefinitions.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingDependency.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingLevel.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingRequirement.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingSection.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingsManager.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingType.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingUpdate.h">
+      <Filter>settings\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\video\ContextMenusVideo.h">
+      <Filter>video</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -8665,9 +8656,6 @@
     <Filter Include="Object Libraries">
       <UniqueIdentifier>{2611B0E0-C7E2-3CC5-A966-AE05C1D79DDA}</UniqueIdentifier>
     </Filter>
-    <Filter Include="lib">
-      <UniqueIdentifier>{68077df3-8462-45ce-b942-779239e1d642}</UniqueIdentifier>
-    </Filter>
     <Filter Include="storage">
       <UniqueIdentifier>{837298d6-a87c-4a50-925b-f53dbdae4c30}</UniqueIdentifier>
     </Filter>
@@ -8784,6 +8772,9 @@
     </Filter>
     <Filter Include="games\addons\streams\memory">
       <UniqueIdentifier>{8879486a-9cfc-4eb3-ae48-cd50691d1d09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="settings\lib">
+      <UniqueIdentifier>{fc1e1b13-d743-4164-9cbc-f5d70a6e97fb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

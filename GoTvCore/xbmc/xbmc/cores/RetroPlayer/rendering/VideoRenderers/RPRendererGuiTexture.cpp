@@ -11,7 +11,7 @@
 #include "cores/RetroPlayer/rendering/RenderContext.h"
 #include "cores/RetroPlayer/rendering/RenderVideoSettings.h"
 
-#if defined(HAS_DX)
+#if  HAS_DX
 #include "guilib/GUIShaderDX.h"
 #include <DirectXMath.h>
 using namespace DirectX;
@@ -37,7 +37,7 @@ CRPBaseRenderer *CRendererFactoryGuiTexture::CreateRenderer( const CRenderSettin
 RenderBufferPoolVector CRendererFactoryGuiTexture::CreateBufferPools( CRenderContext &context )
 {
     return{
-  #if !defined(HAS_DX)
+  #if ! HAS_DX
     std::make_shared<CRenderBufferPoolGuiTexture>(SCALINGMETHOD::NEAREST),
   #endif
     std::make_shared<CRenderBufferPoolGuiTexture>(SCALINGMETHOD::LINEAR),
@@ -102,7 +102,7 @@ void CRPRendererGuiTexture::RenderInternal( bool clear, uint8_t alpha )
 
     const uint32_t color = ( alpha << 24 ) | 0xFFFFFF;
 
-#if defined(HAS_DX)
+#if  HAS_DX
 
     Vertex vertex[ 5 ];
     for( int i = 0; i < 4; i++ )

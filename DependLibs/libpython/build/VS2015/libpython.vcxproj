@@ -218,7 +218,7 @@
       <Optimization>Disabled</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <IntrinsicFunctions>false</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\Python;$(ProjectDir)..\..\Modules\zlib;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\sysheaders;$(ProjectDir)..\..\Python;$(ProjectDir)..\..\Modules\zlib;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;_LIB;_DEBUG;Py_BUILD_CORE;Py_NO_ENABLE_SHARED;WIN32;__STDC_CONSTANT_MACROS;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -430,7 +430,6 @@
     <ClInclude Include="..\..\..\..\pwd.h" />
     <ClInclude Include="..\..\..\..\strings.h" />
     <ClInclude Include="..\..\..\..\syslog.h" />
-    <ClInclude Include="..\..\..\..\sys\wait.h" />
     <ClInclude Include="..\..\..\..\termios.h" />
     <ClInclude Include="..\..\..\..\unistd.h" />
     <ClInclude Include="..\..\..\..\utime.h" />

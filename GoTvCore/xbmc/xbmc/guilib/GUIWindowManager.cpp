@@ -43,8 +43,8 @@
 #ifdef HAS_GL
 #include "rendering/gl/GUIWindowTestPatternGL.h"
 #endif
-#ifdef HAS_DX
-#include "rendering/dx/GUIWindowTestPatternDX.h"
+#if HAS_DX
+# include "rendering/dx/GUIWindowTestPatternDX.h"
 #endif
 #include "settings/windows/GUIWindowSettingsScreenCalibration.h"
 #include "programs/GUIWindowPrograms.h"
@@ -70,7 +70,7 @@
 #include "dialogs/GUIDialogTextViewer.h"
 #include "network/GUIDialogNetworkSetup.h"
 #include "dialogs/GUIDialogMediaSource.h"
-#if defined(HAS_GL) || defined(HAS_DX)
+#if defined(HAS_GL) || HAS_DX
 #include "video/dialogs/GUIDialogCMSSettings.h"
 #endif
 #include "video/dialogs/GUIDialogVideoSettings.h"
@@ -187,7 +187,7 @@ void CGUIWindowManager::CreateWindows()
 #ifdef HAS_GL
     Add( new CGUIWindowTestPatternGL );
 #endif
-#ifdef HAS_DX
+#if HAS_DX
     Add( new CGUIWindowTestPatternDX );
 #endif
     Add( new CGUIWindowSettingsScreenCalibration );
@@ -219,7 +219,7 @@ void CGUIWindowManager::CreateWindows()
     Add( new CGUIDialogSlider );
     Add( new CGUIDialogMusicOSD );
     Add( new CGUIDialogVisualisationPresetList );
-#if defined(HAS_GL) || defined(HAS_DX)
+#if defined(HAS_GL) ||  HAS_DX
     Add( new CGUIDialogCMSSettings );
 #endif
     Add( new CGUIDialogVideoSettings );

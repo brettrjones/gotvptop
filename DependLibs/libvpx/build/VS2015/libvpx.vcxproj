@@ -1276,6 +1276,14 @@
     <ClInclude Include="..\..\config_libvpx.h" />
     <ClInclude Include="..\..\config_libvpx_linux.h" />
     <ClInclude Include="..\..\config_libvpx_win32.h" />
+    <ClInclude Include="..\..\ivfdec.h" />
+    <ClInclude Include="..\..\ivfenc.h" />
+    <ClInclude Include="..\..\md5_utils.h" />
+    <ClInclude Include="..\..\rate_hist.h" />
+    <ClInclude Include="..\..\tools_common.h" />
+    <ClInclude Include="..\..\video_common.h" />
+    <ClInclude Include="..\..\video_reader.h" />
+    <ClInclude Include="..\..\video_writer.h" />
     <ClInclude Include="..\..\vpx\vp8.h" />
     <ClInclude Include="..\..\vpx\vp8cx.h" />
     <ClInclude Include="..\..\vpx\vp8dx.h" />
@@ -1287,6 +1295,10 @@
     <ClInclude Include="..\..\vpx\vpx_image.h" />
     <ClInclude Include="..\..\vpx\vpx_integer.h" />
     <ClInclude Include="..\..\vpx_config.h" />
+    <ClInclude Include="..\..\vpx_config_linux.h" />
+    <ClInclude Include="..\..\vpx_config_win.h" />
+    <ClInclude Include="..\..\vpx_dsp_rtcd.h" />
+    <ClInclude Include="..\..\vpx_dsp_rtcd_win.h" />
     <ClInclude Include="..\..\vpx_mem\vpx_mem.h" />
     <ClInclude Include="..\..\vpx_mem\include\vpx_mem_intrnl.h" />
     <ClInclude Include="..\..\vpx_scale\vpx_scale_rtcd_redirect.h" />
@@ -1325,6 +1337,8 @@
     <ClInclude Include="..\..\vpx_dsp\skin_detection.h" />
     <ClInclude Include="..\..\vpx_dsp\variance.h" />
     <ClInclude Include="..\..\vpx_dsp\x86\transpose_sse2.h" />
+    <ClInclude Include="..\..\vpx_scale_rtcd.h" />
+    <ClInclude Include="..\..\vpx_scale_rtcd_linux.h" />
     <ClInclude Include="..\..\vpx_util\vpx_atomics.h" />
     <ClInclude Include="..\..\vpx_util\vpx_thread.h" />
     <ClInclude Include="..\..\vpx_util\endian_inl.h" />
@@ -1467,10 +1481,11 @@
     <ClInclude Include="..\..\vpx_ports\mem_ops.h" />
     <ClInclude Include="..\..\vpx_ports\mem_ops_aligned.h" />
     <ClInclude Include="..\..\vpx_ports\vpx_once.h" />
-    <ClInclude Include="..\..\vpx_scale_rtcd.h" />
-    <ClInclude Include="..\..\vpx_dsp_rtcd.h" />
+    <ClInclude Include="..\..\vpx_scale_rtcd_win.h" />
+    <ClInclude Include="..\..\vpx_dsp_rtcd_linux.h" />
     <ClInclude Include="..\..\vp8_rtcd.h" />
     <ClInclude Include="..\..\vp9_rtcd.h" />
+    <ClInclude Include="..\..\vpx_version.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\vpx_dsp\x86\avg_ssse3_x86_64.asm">

@@ -33,4 +33,4 @@ namespace DX
   }
 #endif
 }
-#endif //defined(HAS_DX)
+#endif // HAS_DX

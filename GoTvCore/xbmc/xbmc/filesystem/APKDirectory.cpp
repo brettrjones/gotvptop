@@ -26,7 +26,7 @@
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 
-#include <zip.h>
+#include <libzip/zip.h>
 
 using namespace XFILE;
 
