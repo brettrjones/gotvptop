@@ -33,8 +33,8 @@ RESOURCES += \
 # Translations
 TRANSLATIONS += $$files(lang/gotvptop_*.ts)
 
-DESTDIR = ./../../bin/
-LIBS += -L./../../lib
+DESTDIR = bin/
+LIBS += -L./libs
 
 OBJECTS_DIR = ./.obj
 
@@ -55,17 +55,17 @@ include(compile_config.pri)
 #so use our static linked version of freetype
 INCLUDEPATH += ./../../DependLibs/libfreetype/include
 
-INCLUDEPATH += ./../../
-INCLUDEPATH += ./../../GoTvApps/GoTvCommon
-INCLUDEPATH += ./../../GoTvApps/GoTvCommon/QtSource
-INCLUDEPATH += ./../../DependLibs
-INCLUDEPATH += ./../../DependLibs/libcurl/include
-INCLUDEPATH += ./../../DependLibs/libcurl/lib
-INCLUDEPATH += ./../../DependLibs/ffmpeg
-INCLUDEPATH += ./../../GoTvCore/xbmc/xbmc
+INCLUDEPATH += ./
+INCLUDEPATH += GoTvApps/GoTvCommon
+INCLUDEPATH += GoTvApps/GoTvCommon/QtSource
+INCLUDEPATH += DependLibs
+INCLUDEPATH += DependLibs/libcurl/include
+INCLUDEPATH += DependLibs/libcurl/lib
+INCLUDEPATH += DependLibs/ffmpeg
+INCLUDEPATH += GoTvCore/xbmc/xbmc
 
 
-include(../../GoTvApps/GoTvPtoP/build/Qt/GoTvPtoP.pri)
+include(GoTvApps/GoTvPtoP/build/Qt/GoTvPtoP.pri)
 
 #### for static linked qt libs only
 #### QMAKE_LFLAGS += -static

@@ -27,4 +27,4 @@ unix: {
 
 }
 
-
+DESTDIR = $$PWD/build-libs

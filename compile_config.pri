@@ -8,9 +8,9 @@ DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MUL
 
 #INCLUDEPATH += ./
 win32{
-    INCLUDEPATH += ./DependLibs/openssl-1.0.2o
-    INCLUDEPATH += ./DependLibs/openssl-1.0.2o/inc32
-    INCLUDEPATH += ./sysheaders
+    INCLUDEPATH += DependLibs/openssl-1.0.2o
+    INCLUDEPATH += DependLibs/openssl-1.0.2o/inc32
+    INCLUDEPATH += sysheaders
 }
 
 android{

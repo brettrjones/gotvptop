@@ -97,3 +97,4 @@ DependLibs/libpython/build/VS2015/unicodedata\.exp
 DependLibs/libpython/build/VS2015/winsound\.exp
 
 *.stash
+/build-libs
