@@ -97,6 +97,8 @@ void strlwr( char * pStr )
          pStr++;
     }
 }
+
+#ifndef TARGET_OS_ANDROID
 //============================================================================
 //! case insensitive string compare
 int stricmp( const char * pStr1, const char * pStr2 )
@@ -110,6 +112,7 @@ int strnicmp( const char * pStr1, const char * pStr2, int n )
 {
     return strncasecmp( pStr1, pStr2, n );
 }
+#endif // TARGET_OS_ANDROID
 
 #endif // TARGET_OS_WINDOWS
 

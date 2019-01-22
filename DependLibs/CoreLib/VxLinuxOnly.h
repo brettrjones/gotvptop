@@ -29,10 +29,13 @@ char * ultoa(unsigned long value, char* str, int base);
 void strupr( char * pStr );
 //! convert string to lower case
 void strlwr( char * pStr );
+
+#ifndef TARGET_OS_ANDROID
 //! case insensitive string compare
 int stricmp( const char * pStr1, const char * pStr2 );
 //! case insensitive string compare
 int strnicmp( const char * pStr1, const char * pStr2, int n );
+#endif // TARGET_OS_ANDROID
 
 #endif // TARGET_OS_WINDOWS
 #endif // VXLINUXONLY_H_INCLUDED

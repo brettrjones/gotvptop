@@ -1,7 +1,11 @@
 
+QT       -= gui
+CONFIG += staticlib
+DESTDIR = $$PWD/build-libs
+
+
 DEFINES += LIB_STATIC _LIB
 
-CONFIG += staticlib qt thread silent
 
 TARGET_LIB_APPEND = .lib
 
@@ -27,4 +31,3 @@ unix: {
 
 }
 
-DESTDIR = $$PWD/build-libs

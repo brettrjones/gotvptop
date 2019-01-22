@@ -19,16 +19,22 @@
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxDebug.h>
 
-#ifdef TARGET_OS_WINDOWS
-	#include <Rpc.h>
-#else
-	#ifdef TARGET_OS_ANDROID
-		// android has no uuid.h.. get from java
-        #include <GoTvInterface/AndroidInterface/NativeToJava.h>
-	#else
-		#include <uuid/uuid.h>
-	#endif
-#endif
+#include <libcrossguid/guid.h>
+
+#ifdef TARGET_OS_ANDROID
+# include "VxJava.h"
+#endif //TARGET_OS_ANDROID
+
+//#ifdef TARGET_OS_WINDOWS
+//	#include <Rpc.h>
+//#else
+//	//#ifdef TARGET_OS_ANDROID
+//		// android has no uuid.h.. get from java
+//        //#include <GoTvInterface/AndroidInterface/NativeToJava.h>
+//	//#else
+//		#include <uuid/uuid.h>
+//	//#endif
+//#endif
 
 #include <string.h>
 #include <stdio.h>
@@ -162,9 +168,14 @@ void VxGUID::generateNewVxGUID( VxGUID& retNewGUID )
 {
 #if 1
     // use library cross guid
+#ifdef TARGET_OS_ANDROID
+    GuidGenerator guidGen( VxJava::getJavaEnv() );
+#else
     GuidGenerator guidGen;
+#endif //TARGET_OS_ANDROID
+
     Guid crossGuid = guidGen.newGuid();
-    if( sizeof( uint64_t ) * 2 <= crossGuid.guidByteCount() )
+    if( (int)(sizeof( uint64_t ) * 2) <= crossGuid.guidByteCount() )
     {
         std::vector<unsigned char>& guidBytes = crossGuid.getGuidBytes();
         unsigned char * guidData = &guidBytes[0];

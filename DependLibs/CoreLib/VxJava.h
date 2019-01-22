@@ -1,6 +1,7 @@
+#ifndef VXJAVA_H
+#define VXJAVA_H
 //============================================================================
-// Copyright (C) 2016 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2018 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -12,20 +13,27 @@
 // brett.jones@engineer.com
 // http://www.gotvptop.net
 //============================================================================
-
-#include <GoTvDependLibrariesConfig.h>
-
 #ifdef TARGET_OS_ANDROID
-#include "VxDefs.h"
 
-#include <time.h>
-// android doesn't have millisecond sleep like most linux distributions but does have nano sleep
-void VxSleep( int iMilliSec )
+# include <CoreLib/VxMutex.h>
+# include <jni.h>
+
+class VxJava
 {
-	struct timespec ts;
-	ts.tv_sec = iMilliSec/1000;
-	ts.tv_nsec = (iMilliSec%1000)*1000000;
-	nanosleep(&ts, NULL);
-};	
+public:
+    VxJava();
+
+    static JavaVM *             getJavaVM( void )                       { return m_JavaVM; }
+    static JNIEnv *             getJavaEnv( void )                      { return m_JavaEnv; }
+
+
+    static JavaVM *             m_JavaVM;
+    static JNIEnv *             m_JavaEnv;
+};
+
+
+VxJava& GetJavaEnvCache();
 
 #endif // TARGET_OS_ANDROID
+
+#endif // VXJAVA_H
