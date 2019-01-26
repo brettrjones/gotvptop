@@ -12,14 +12,14 @@
 #include <sys/stat.h>
 
 #include <android/bitmap.h>
-#include <androidjni/Bitmap.h>
-#include <androidjni/Drawable.h>
-#include <androidjni/BitmapDrawable.h>
-#include <androidjni/Build.h>
-#include <androidjni/Context.h>
-#include <androidjni/DisplayMetrics.h>
-#include <androidjni/PackageManager.h>
-#include <androidjni/Resources.h>
+#include <android/jni/Bitmap.h>
+#include <android/jni/Drawable.h>
+#include <android/jni/BitmapDrawable.h>
+#include <android/jni/Build.h>
+#include <android/jni/Context.h>
+#include <android/jni/DisplayMetrics.h>
+#include <android/jni/PackageManager.h>
+#include <android/jni/Resources.h>
 
 #include "AndroidAppFile.h"
 #include "platform/android/activity/XBMCApp.h"

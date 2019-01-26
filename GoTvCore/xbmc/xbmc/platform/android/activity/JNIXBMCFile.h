@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <androidjni/JNIBase.h>
+#include <android/jni/JNIBase.h>
 
 #include "filesystem/File.h"
 

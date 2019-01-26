@@ -9,7 +9,7 @@
 #include "AndroidFeatures.h"
 
 #include <cpu-features.h>
-#include <androidjni/JNIThreading.h>
+#include <platform/android/jni/JNIThreading.h>
 
 #include "utils/log.h"
 

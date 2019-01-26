@@ -9,6 +9,10 @@
 #define LIBZIP_VERSION_MINOR 1
 #define LIBZIP_VERSION_MICRO 2
 
+#ifdef TARGET_OS_ANDROID
+# define HAVE_FSEEKO 1
+# define HAVE_FTELLO 1
+#endif // TARGET_OS_ANDROID
 
 #define  zip_int8_t			int8_t
 #define ZIP_INT8_MIN INT8_MIN
@@ -87,11 +91,11 @@
 #endif
 
 #ifndef HAVE_FSEEKO
-#define fseeko(s, o, w)	(fseek((s), (long int)(o), (w)))
+# define fseeko(s, o, w)	(fseek((s), (long int)(o), (w)))
 #endif
 
 #ifndef HAVE_FTELLO
-#define ftello(s)	((long)ftell((s)))
+# define ftello(s)	((long)ftell((s)))
 #endif
 
 #ifndef HAVE_MKSTEMP

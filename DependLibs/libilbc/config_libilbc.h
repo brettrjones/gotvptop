@@ -40,10 +40,11 @@
 // TODO(ajm): We'd prefer to control platform defines here, but this is
 // currently provided by the Android makefiles. Commented to avoid duplicate
 // definition warnings.
-//#define WEBRTC_ARCH_ARM
+#define WEBRTC_ARCH_ARM
 // TODO(ajm): Chromium uses the following two defines. Should we switch?
-//#define WEBRTC_ARCH_ARM_FAMILY
-//#define WEBRTC_ARCH_ARMEL
+#define WEBRTC_ARCH_ARM_FAMILY
+#define WEBRTC_ARCH_ARMEL
+#define WEBRTC_ARCH_LITTLE_ENDIAN
 #define WEBRTC_ARCH_32_BITS
 #elif defined(__MIPSEL__)
 #define WEBRTC_ARCH_32_BITS

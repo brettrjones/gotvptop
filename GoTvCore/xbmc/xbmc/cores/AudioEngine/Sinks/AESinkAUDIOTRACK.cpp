@@ -8,10 +8,10 @@
 
 #include "AESinkAUDIOTRACK.h"
 
-#include <androidjni/AudioFormat.h>
-#include <androidjni/AudioManager.h>
-#include <androidjni/AudioTrack.h>
-#include <androidjni/Build.h>
+#include <android/jni/AudioFormat.h>
+#include <android/jni/AudioManager.h>
+#include <android/jni/AudioTrack.h>
+#include <android/jni/Build.h>
 
 #include "cores/AudioEngine/Utils/AEUtil.h"
 #include "cores/AudioEngine/AESinkFactory.h"

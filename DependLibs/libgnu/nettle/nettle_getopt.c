@@ -388,7 +388,7 @@ _nettle_getopt_initialize (int argc, char *const *argv, const char *optstring,
 
 int
 _nettle_getopt_internal_r (int argc, char *const *argv, const char *optstring,
-		    const struct option *longopts, int *longind,
+            const struct option_gnu *longopts, int *longind,
 		    int long_only, struct _nettle_getopt_data *d, int posixly_correct)
 {
   int print_errors = d->opterr;
@@ -524,11 +524,11 @@ _nettle_getopt_internal_r (int argc, char *const *argv, const char *optstring,
     {
       char *nameend;
       unsigned int namelen;
-      const struct option *p;
-      const struct option *pfound = NULL;
+      const struct option_gnu *p;
+      const struct option_gnu *pfound = NULL;
       struct option_list
       {
-	const struct option *p;
+    const struct option_gnu *p;
 	struct option_list *next;
       } *ambig_list = NULL;
       int exact = 0;
@@ -872,8 +872,8 @@ _nettle_getopt_internal_r (int argc, char *const *argv, const char *optstring,
 	  goto no_longs;
 
 	char *nameend;
-	const struct option *p;
-	const struct option *pfound = NULL;
+    const struct option_gnu *p;
+    const struct option_gnu *pfound = NULL;
 	int exact = 0;
 	int ambig = 0;
 	int indfound = 0;
@@ -1163,7 +1163,7 @@ _nettle_getopt_internal_r (int argc, char *const *argv, const char *optstring,
 
 int
 _nettle_getopt_internal (int argc, char *const *argv, const char *optstring,
-		  const struct option *longopts, int *longind, int long_only,
+          const struct option_gnu *longopts, int *longind, int long_only,
 		  int posixly_correct)
 {
   int result;

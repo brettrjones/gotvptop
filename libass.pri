@@ -1,44 +1,44 @@
-HEADERS += 	$$PWD/../../ass.h \
-	$$PWD/../../ass_bitmap.h \
-	$$PWD/../../ass_cache.h \
-	$$PWD/../../ass_cache_template.h \
-	$$PWD/../../ass_compat.h \
-	$$PWD/../../ass_coretext.h \
-	$$PWD/../../ass_directwrite.h \
-	$$PWD/../../ass_drawing.h \
-	$$PWD/../../ass_font.h \
-	$$PWD/../../ass_fontconfig.h \
-	$$PWD/../../ass_fontselect.h \
-	$$PWD/../../ass_func_template.h \
-	$$PWD/../../ass_library.h \
-	$$PWD/../../ass_parse.h \
-	$$PWD/../../ass_rasterizer.h \
-	$$PWD/../../ass_render.h \
-	$$PWD/../../ass_shaper.h \
-	$$PWD/../../ass_string.h \
-	$$PWD/../../ass_types.h \
-	$$PWD/../../ass_utils.h \
-	$$PWD/../../config_libass.h \
-	$$PWD/../../dwrite_c.h
+HEADERS += 	$$PWD/DependLibs/libass/ass.h \
+    $$PWD/DependLibs/libass/ass_bitmap.h \
+    $$PWD/DependLibs/libass/ass_cache.h \
+    $$PWD/DependLibs/libass/ass_cache_template.h \
+    $$PWD/DependLibs/libass/ass_compat.h \
+    $$PWD/DependLibs/libass/ass_coretext.h \
+    $$PWD/DependLibs/libass/ass_directwrite.h \
+    $$PWD/DependLibs/libass/ass_drawing.h \
+    $$PWD/DependLibs/libass/ass_font.h \
+    $$PWD/DependLibs/libass/ass_fontconfig.h \
+    $$PWD/DependLibs/libass/ass_fontselect.h \
+    $$PWD/DependLibs/libass/ass_func_template.h \
+    $$PWD/DependLibs/libass/ass_library.h \
+    $$PWD/DependLibs/libass/ass_parse.h \
+    $$PWD/DependLibs/libass/ass_rasterizer.h \
+    $$PWD/DependLibs/libass/ass_render.h \
+    $$PWD/DependLibs/libass/ass_shaper.h \
+    $$PWD/DependLibs/libass/ass_string.h \
+    $$PWD/DependLibs/libass/ass_types.h \
+    $$PWD/DependLibs/libass/ass_utils.h \
+    $$PWD/DependLibs/libass/config_libass.h \
+    $$PWD/DependLibs/libass/dwrite_c.h
 
-SOURCES += 	$$PWD/../../ass.c \
-	$$PWD/../../ass_bitmap.c \
-	$$PWD/../../ass_blur.c \
-	$$PWD/../../ass_cache.c \
-	$$PWD/../../ass_coretext.c \
-	$$PWD/../../ass_directwrite.c \
-	$$PWD/../../ass_drawing.c \
-	$$PWD/../../ass_font.c \
-	$$PWD/../../ass_fontconfig.c \
-	$$PWD/../../ass_fontselect.c \
-	$$PWD/../../ass_library.c \
-	$$PWD/../../ass_parse.c \
-	$$PWD/../../ass_rasterizer.c \
-	$$PWD/../../ass_rasterizer_c.c \
-	$$PWD/../../ass_render.c \
-	$$PWD/../../ass_render_api.c \
-	$$PWD/../../ass_shaper.c \
-	$$PWD/../../ass_string.c \
-	$$PWD/../../ass_strtod.c \
-	$$PWD/../../ass_utils.c
+SOURCES += 	$$PWD/DependLibs/libass/ass.c \
+    $$PWD/DependLibs/libass/ass_bitmap.c \
+    $$PWD/DependLibs/libass/ass_blur.c \
+    $$PWD/DependLibs/libass/ass_cache.c \
+    $$PWD/DependLibs/libass/ass_coretext.c \
+    $$PWD/DependLibs/libass/ass_directwrite.c \
+    $$PWD/DependLibs/libass/ass_drawing.c \
+    $$PWD/DependLibs/libass/ass_font.c \
+    $$PWD/DependLibs/libass/ass_fontconfig.c \
+    $$PWD/DependLibs/libass/ass_fontselect.c \
+    $$PWD/DependLibs/libass/ass_library.c \
+    $$PWD/DependLibs/libass/ass_parse.c \
+    $$PWD/DependLibs/libass/ass_rasterizer.c \
+    $$PWD/DependLibs/libass/ass_rasterizer_c.c \
+    $$PWD/DependLibs/libass/ass_render.c \
+    $$PWD/DependLibs/libass/ass_render_api.c \
+    $$PWD/DependLibs/libass/ass_shaper.c \
+    $$PWD/DependLibs/libass/ass_string.c \
+    $$PWD/DependLibs/libass/ass_strtod.c \
+    $$PWD/DependLibs/libass/ass_utils.c
 

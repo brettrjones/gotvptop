@@ -13,7 +13,7 @@
 
 #include "./dsp.h"
 
-#if defined(WEBP_USE_NEON)
+#if 0 // defined(WEBP_USE_NEON) && (defined(__ARM_NEON) || defined(__ARM_NEON__))
 
 #include "./neon.h"
 

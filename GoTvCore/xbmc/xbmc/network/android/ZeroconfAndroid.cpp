@@ -20,7 +20,7 @@
 
 #include "ZeroconfAndroid.h"
 
-#include <androidjni/Context.h>
+#include <android/jni/Context.h>
 #include "utils/log.h"
 
 #include "threads/SingleLock.h"

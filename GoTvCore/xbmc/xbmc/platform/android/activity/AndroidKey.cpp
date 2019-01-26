@@ -8,7 +8,7 @@
 
 #include "AndroidKey.h"
 
-#include <androidjni/KeyCharacterMap.h>
+#include <android/jni/KeyCharacterMap.h>
 
 #include "AndroidExtra.h"
 #include "XBMCApp.h"

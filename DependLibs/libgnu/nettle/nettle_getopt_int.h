@@ -19,6 +19,8 @@
 #ifndef _GETOPT_INT_H
 #define _GETOPT_INT_H	1
 
+#include <libgnu/getopt.h>
+
 extern int _nettle_getopt_internal (int ___argc, char *const *___argv,
 			     const char *__shortopts,
                      const struct option_gnu *__longopts, int *__longind,

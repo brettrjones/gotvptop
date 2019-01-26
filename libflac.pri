@@ -1,47 +1,47 @@
 
-INCLUDEPATH += $$PWD/../../
-INCLUDEPATH += $$PWD/../../include
-INCLUDEPATH += $$PWD/../../FLAC
+INCLUDEPATH += $$PWD/DependLibs/libflac/
+INCLUDEPATH += $$PWD/DependLibs/libflac/include
+INCLUDEPATH += $$PWD/DependLibs/libflac/FLAC
 
-HEADERS += 	$$PWD/../../config_libflac.h \
-	$$PWD/../../include/all.h \
-	$$PWD/../../include/callback.h \
-	$$PWD/../../include/export.h \
-	$$PWD/../../include/format.h \
-	$$PWD/../../include/metadata.h \
-	$$PWD/../../include/ordinals.h \
-	$$PWD/../../include/stream_decoder.h \
-	$$PWD/../../include/stream_encoder.h
+HEADERS += 	$$PWD/DependLibs/libflac/config_libflac.h \
+    $$PWD/DependLibs/libflac/include/all.h \
+    $$PWD/DependLibs/libflac/include/callback.h \
+    $$PWD/DependLibs/libflac/include/export.h \
+    $$PWD/DependLibs/libflac/include/format.h \
+    $$PWD/DependLibs/libflac/include/metadata.h \
+    $$PWD/DependLibs/libflac/include/ordinals.h \
+    $$PWD/DependLibs/libflac/include/stream_decoder.h \
+    $$PWD/DependLibs/libflac/include/stream_encoder.h
 
-SOURCES += 	$$PWD/../../bitmath.c \
-	$$PWD/../../bitreader.c \
-	$$PWD/../../bitwriter.c \
-	$$PWD/../../cpu.c \
-	$$PWD/../../crc.c \
-	$$PWD/../../fixed.c \
-	$$PWD/../../fixed_intrin_sse2.c \
-	$$PWD/../../fixed_intrin_ssse3.c \
-	$$PWD/../../float.c \
-	$$PWD/../../format.c \
-	$$PWD/../../lpc.c \
-	$$PWD/../../lpc_intrin_avx2.c \
-	$$PWD/../../lpc_intrin_sse.c \
-	$$PWD/../../lpc_intrin_sse2.c \
-	$$PWD/../../lpc_intrin_sse41.c \
-	$$PWD/../../md5.c \
-	$$PWD/../../memory.c \
-	$$PWD/../../metadata_iterators.c \
-	$$PWD/../../metadata_object.c \
-	$$PWD/../../ogg_decoder_aspect.c \
-	$$PWD/../../ogg_encoder_aspect.c \
-	$$PWD/../../ogg_helper.c \
-	$$PWD/../../ogg_mapping.c \
-	$$PWD/../../stream_decoder.c \
-	$$PWD/../../stream_encoder.c \
-	$$PWD/../../stream_encoder_framing.c \
-	$$PWD/../../stream_encoder_intrin_avx2.c \
-	$$PWD/../../stream_encoder_intrin_sse2.c \
-	$$PWD/../../stream_encoder_intrin_ssse3.c \
-	$$PWD/../../window.c \
-	$$PWD/../../windows_unicode_filenames.c
+SOURCES += 	$$PWD/DependLibs/libflac/bitmath.c \
+    $$PWD/DependLibs/libflac/bitreader.c \
+    $$PWD/DependLibs/libflac/bitwriter.c \
+    $$PWD/DependLibs/libflac/cpu.c \
+    $$PWD/DependLibs/libflac/crc.c \
+    $$PWD/DependLibs/libflac/fixed.c \
+    $$PWD/DependLibs/libflac/fixed_intrin_sse2.c \
+    $$PWD/DependLibs/libflac/fixed_intrin_ssse3.c \
+    $$PWD/DependLibs/libflac/float.c \
+    $$PWD/DependLibs/libflac/format.c \
+    $$PWD/DependLibs/libflac/lpc.c \
+    $$PWD/DependLibs/libflac/lpc_intrin_avx2.c \
+    $$PWD/DependLibs/libflac/lpc_intrin_sse.c \
+    $$PWD/DependLibs/libflac/lpc_intrin_sse2.c \
+    $$PWD/DependLibs/libflac/lpc_intrin_sse41.c \
+    $$PWD/DependLibs/libflac/md5.c \
+    $$PWD/DependLibs/libflac/memory.c \
+    $$PWD/DependLibs/libflac/metadata_iterators.c \
+    $$PWD/DependLibs/libflac/metadata_object.c \
+    $$PWD/DependLibs/libflac/ogg_decoder_aspect.c \
+    $$PWD/DependLibs/libflac/ogg_encoder_aspect.c \
+    $$PWD/DependLibs/libflac/ogg_helper.c \
+    $$PWD/DependLibs/libflac/ogg_mapping.c \
+    $$PWD/DependLibs/libflac/stream_decoder.c \
+    $$PWD/DependLibs/libflac/stream_encoder.c \
+    $$PWD/DependLibs/libflac/stream_encoder_framing.c \
+    $$PWD/DependLibs/libflac/stream_encoder_intrin_avx2.c \
+    $$PWD/DependLibs/libflac/stream_encoder_intrin_sse2.c \
+    $$PWD/DependLibs/libflac/stream_encoder_intrin_ssse3.c \
+    $$PWD/DependLibs/libflac/window.c \
+    $$PWD/DependLibs/libflac/windows_unicode_filenames.c
 

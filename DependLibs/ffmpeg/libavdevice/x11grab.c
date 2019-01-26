@@ -40,7 +40,7 @@
 
 #include <ffmpeg/config_ffmpeg.h>
 
-#ifndef TARGET_OS_WINDOWS // not available in windows
+#if !defined(TARGET_OS_WINDOWS) &&  !defined(TARGET_OS_ANDROID) // not available in windows or android
 #undef BOOL
 #undef LONG64
 

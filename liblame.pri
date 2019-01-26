@@ -4,76 +4,76 @@ DEFINES += _WINDOWS
 
 DEFINES += HAVE_MPGLIB HAVE_CONFIG_H
 
-INCLUDEPATH += $$PWD/../../
-INCLUDEPATH += $$PWD/../../mpglib
-INCLUDEPATH += $$PWD/../../include
-INCLUDEPATH += $$PWD/../../libmp3lame
+INCLUDEPATH += $$PWD/DependLibs/liblame/
+INCLUDEPATH += $$PWD/DependLibs/liblame/mpglib
+INCLUDEPATH += $$PWD/DependLibs/liblame/include
+INCLUDEPATH += $$PWD/DependLibs/liblame/libmp3lame
 
-HEADERS += 	$$PWD/../../include/lame.h \
-    $$PWD/../../libmp3lame/VbrTag.h \
-    $$PWD/../../libmp3lame/bitstream.h \
-    $$PWD/../../libmp3lame/encoder.h \
-    $$PWD/../../libmp3lame/fft.h \
-    $$PWD/../../libmp3lame/gain_analysis.h \
-    $$PWD/../../libmp3lame/i386/nasm.h \
-    $$PWD/../../libmp3lame/id3tag.h \
-    $$PWD/../../libmp3lame/l3side.h \
-    $$PWD/../../libmp3lame/lame-analysis.h \
-    $$PWD/../../libmp3lame/lame_global_flags.h \
-    $$PWD/../../libmp3lame/lameerror.h \
-    $$PWD/../../libmp3lame/machine.h \
-    $$PWD/../../libmp3lame/newmdct.h \
-    $$PWD/../../libmp3lame/psymodel.h \
-    $$PWD/../../libmp3lame/quantize.h \
-    $$PWD/../../libmp3lame/quantize_pvt.h \
-    $$PWD/../../libmp3lame/reservoir.h \
-    $$PWD/../../libmp3lame/set_get.h \
-    $$PWD/../../libmp3lame/tables.h \
-    $$PWD/../../libmp3lame/util.h \
-    $$PWD/../../libmp3lame/vbrquantize.h \
-    $$PWD/../../libmp3lame/vector/lame_intrin.h \
-    $$PWD/../../libmp3lame/version.h \
-    $$PWD/../../mpglib/common.h \
-    $$PWD/../../mpglib/dct64_i386.h \
-    $$PWD/../../mpglib/decode_i386.h \
-    $$PWD/../../mpglib/huffman.h \
-    $$PWD/../../mpglib/interface.h \
-    $$PWD/../../mpglib/l2tables.h \
-    $$PWD/../../mpglib/layer1.h \
-    $$PWD/../../mpglib/layer2.h \
-    $$PWD/../../mpglib/layer3.h \
-    $$PWD/../../mpglib/mpg123.h \
-    $$PWD/../../mpglib/mpglib.h \
-    $$PWD/../../mpglib/tabinit.h \
-    $$PWD/../../configMS.h
+HEADERS += 	$$PWD/DependLibs/liblame/include/lame.h \
+    $$PWD/DependLibs/liblame/libmp3lame/VbrTag.h \
+    $$PWD/DependLibs/liblame/libmp3lame/bitstream.h \
+    $$PWD/DependLibs/liblame/libmp3lame/encoder.h \
+    $$PWD/DependLibs/liblame/libmp3lame/fft.h \
+    $$PWD/DependLibs/liblame/libmp3lame/gain_analysis.h \
+    $$PWD/DependLibs/liblame/libmp3lame/i386/nasm.h \
+    $$PWD/DependLibs/liblame/libmp3lame/id3tag.h \
+    $$PWD/DependLibs/liblame/libmp3lame/l3side.h \
+    $$PWD/DependLibs/liblame/libmp3lame/lame-analysis.h \
+    $$PWD/DependLibs/liblame/libmp3lame/lame_global_flags.h \
+    $$PWD/DependLibs/liblame/libmp3lame/lameerror.h \
+    $$PWD/DependLibs/liblame/libmp3lame/machine.h \
+    $$PWD/DependLibs/liblame/libmp3lame/newmdct.h \
+    $$PWD/DependLibs/liblame/libmp3lame/psymodel.h \
+    $$PWD/DependLibs/liblame/libmp3lame/quantize.h \
+    $$PWD/DependLibs/liblame/libmp3lame/quantize_pvt.h \
+    $$PWD/DependLibs/liblame/libmp3lame/reservoir.h \
+    $$PWD/DependLibs/liblame/libmp3lame/set_get.h \
+    $$PWD/DependLibs/liblame/libmp3lame/tables.h \
+    $$PWD/DependLibs/liblame/libmp3lame/util.h \
+    $$PWD/DependLibs/liblame/libmp3lame/vbrquantize.h \
+    $$PWD/DependLibs/liblame/libmp3lame/vector/lame_intrin.h \
+    $$PWD/DependLibs/liblame/libmp3lame/version.h \
+    $$PWD/DependLibs/liblame/mpglib/common.h \
+    $$PWD/DependLibs/liblame/mpglib/dct64_i386.h \
+    $$PWD/DependLibs/liblame/mpglib/decode_i386.h \
+    $$PWD/DependLibs/liblame/mpglib/huffman.h \
+    $$PWD/DependLibs/liblame/mpglib/interface.h \
+    $$PWD/DependLibs/liblame/mpglib/l2tables.h \
+    $$PWD/DependLibs/liblame/mpglib/layer1.h \
+    $$PWD/DependLibs/liblame/mpglib/layer2.h \
+    $$PWD/DependLibs/liblame/mpglib/layer3.h \
+    $$PWD/DependLibs/liblame/mpglib/mpg123.h \
+    $$PWD/DependLibs/liblame/mpglib/mpglib.h \
+    $$PWD/DependLibs/liblame/mpglib/tabinit.h \
+    $$PWD/DependLibs/liblame/configMS.h
 
-SOURCES += 	$$PWD/../../libmp3lame/VbrTag.c \
-    $$PWD/../../libmp3lame/bitstream.c \
-    $$PWD/../../libmp3lame/encoder.c \
-    $$PWD/../../libmp3lame/fft.c \
-    $$PWD/../../libmp3lame/gain_analysis.c \
-    $$PWD/../../libmp3lame/id3tag.c \
-    $$PWD/../../libmp3lame/lame.c \
-    $$PWD/../../libmp3lame/mpglib_interface.c \
-    $$PWD/../../libmp3lame/newmdct.c \
-    $$PWD/../../libmp3lame/presets.c \
-    $$PWD/../../libmp3lame/psymodel.c \
-    $$PWD/../../libmp3lame/quantize.c \
-    $$PWD/../../libmp3lame/quantize_pvt.c \
-    $$PWD/../../libmp3lame/reservoir.c \
-    $$PWD/../../libmp3lame/set_get.c \
-    $$PWD/../../libmp3lame/tables.c \
-    $$PWD/../../libmp3lame/takehiro.c \
-    $$PWD/../../libmp3lame/util.c \
-    $$PWD/../../libmp3lame/vbrquantize.c \
-    $$PWD/../../libmp3lame/vector/xmm_quantize_sub.c \
-    $$PWD/../../libmp3lame/version.c \
-    $$PWD/../../mpglib/common.c \
-    $$PWD/../../mpglib/dct64_i386.c \
-    $$PWD/../../mpglib/decode_i386.c \
-    $$PWD/../../mpglib/interface.c \
-    $$PWD/../../mpglib/layer1.c \
-    $$PWD/../../mpglib/layer2.c \
-    $$PWD/../../mpglib/layer3.c \
-    $$PWD/../../mpglib/tabinit.c
+SOURCES += 	$$PWD/DependLibs/liblame/libmp3lame/VbrTag.c \
+    $$PWD/DependLibs/liblame/libmp3lame/bitstream.c \
+    $$PWD/DependLibs/liblame/libmp3lame/encoder.c \
+    $$PWD/DependLibs/liblame/libmp3lame/fft.c \
+    $$PWD/DependLibs/liblame/libmp3lame/gain_analysis.c \
+    $$PWD/DependLibs/liblame/libmp3lame/id3tag.c \
+    $$PWD/DependLibs/liblame/libmp3lame/lame.c \
+    $$PWD/DependLibs/liblame/libmp3lame/mpglib_interface.c \
+    $$PWD/DependLibs/liblame/libmp3lame/newmdct.c \
+    $$PWD/DependLibs/liblame/libmp3lame/presets.c \
+    $$PWD/DependLibs/liblame/libmp3lame/psymodel.c \
+    $$PWD/DependLibs/liblame/libmp3lame/quantize.c \
+    $$PWD/DependLibs/liblame/libmp3lame/quantize_pvt.c \
+    $$PWD/DependLibs/liblame/libmp3lame/reservoir.c \
+    $$PWD/DependLibs/liblame/libmp3lame/set_get.c \
+    $$PWD/DependLibs/liblame/libmp3lame/tables.c \
+    $$PWD/DependLibs/liblame/libmp3lame/takehiro.c \
+    $$PWD/DependLibs/liblame/libmp3lame/util.c \
+    $$PWD/DependLibs/liblame/libmp3lame/vbrquantize.c \
+    $$PWD/DependLibs/liblame/libmp3lame/vector/xmm_quantize_sub.c \
+    $$PWD/DependLibs/liblame/libmp3lame/version.c \
+    $$PWD/DependLibs/liblame/mpglib/common.c \
+    $$PWD/DependLibs/liblame/mpglib/dct64_i386.c \
+    $$PWD/DependLibs/liblame/mpglib/decode_i386.c \
+    $$PWD/DependLibs/liblame/mpglib/interface.c \
+    $$PWD/DependLibs/liblame/mpglib/layer1.c \
+    $$PWD/DependLibs/liblame/mpglib/layer2.c \
+    $$PWD/DependLibs/liblame/mpglib/layer3.c \
+    $$PWD/DependLibs/liblame/mpglib/tabinit.c
 

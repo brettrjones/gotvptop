@@ -1,27 +1,27 @@
-HEADERS += 	$$PWD/../../config_libcpluff.h \
-	$$PWD/../../cpluff.h \
-	$$PWD/../../cpluffdef_linux.h \
-	$$PWD/../../cpluffdef_win32.h \
-	$$PWD/../../defines.h \
-	$$PWD/../../internal.h \
-	$$PWD/../../kazlib/hash.h \
-	$$PWD/../../kazlib/list.h \
-	$$PWD/../../thread.h \
-    $$PWD/../../util_cpluff.h
+HEADERS += 	$$PWD/DependLibs/libcpluff/config_libcpluff.h \
+    $$PWD/DependLibs/libcpluff/cpluff.h \
+    $$PWD/DependLibs/libcpluff/cpluffdef_linux.h \
+    $$PWD/DependLibs/libcpluff/cpluffdef_win32.h \
+    $$PWD/DependLibs/libcpluff/defines.h \
+    $$PWD/DependLibs/libcpluff/internal.h \
+    $$PWD/DependLibs/libcpluff/kazlib/hash.h \
+    $$PWD/DependLibs/libcpluff/kazlib/list.h \
+    $$PWD/DependLibs/libcpluff/thread.h \
+    $$PWD/DependLibs/libcpluff/util_cpluff.h
 
-SOURCES += 	$$PWD/../../context.c \
-	$$PWD/../../cpluff.c \
-	$$PWD/../../kazlib/hash.c \
-    $$PWD/../../kazlib/list_cp.c \
-	$$PWD/../../loader/loader.c \
-    $$PWD/../../logging_cpluff.c \
-	$$PWD/../../pcontrol.c \
-	$$PWD/../../pinfo.c \
-	$$PWD/../../ploader.c \
-	$$PWD/../../pscan.c \
-	$$PWD/../../psymbol.c \
-	$$PWD/../../serial.c \
-	$$PWD/../../thread_posix.c \
-	$$PWD/../../thread_windows.c \
-    $$PWD/../../util_cpluff.c
+SOURCES += 	$$PWD/DependLibs/libcpluff/context.c \
+    $$PWD/DependLibs/libcpluff/cpluff.c \
+    $$PWD/DependLibs/libcpluff/kazlib/hash.c \
+    $$PWD/DependLibs/libcpluff/kazlib/list_cp.c \
+    $$PWD/DependLibs/libcpluff/loader/loader.c \
+    $$PWD/DependLibs/libcpluff/logging_cpluff.c \
+    $$PWD/DependLibs/libcpluff/pcontrol.c \
+    $$PWD/DependLibs/libcpluff/pinfo.c \
+    $$PWD/DependLibs/libcpluff/ploader.c \
+    $$PWD/DependLibs/libcpluff/pscan.c \
+    $$PWD/DependLibs/libcpluff/psymbol.c \
+    $$PWD/DependLibs/libcpluff/serial.c \
+    $$PWD/DependLibs/libcpluff/thread_posix.c \
+    $$PWD/DependLibs/libcpluff/thread_windows.c \
+    $$PWD/DependLibs/libcpluff/util_cpluff.c
 

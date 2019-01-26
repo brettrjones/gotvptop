@@ -20,7 +20,7 @@
  */
 
 #include <ffmpeg/config_ffmpeg.h>
-#if !defined(TARGET_OS_WINDOWS) // not available in window
+#ifdef TARGET_OS_LINUX // not available in windows or android
 
 #include <stdlib.h>
 #include <xcb/xcb.h>

@@ -8,9 +8,9 @@
 
 #include "JNIMainActivity.h"
 
-#include <androidjni/Activity.h>
-#include <androidjni/Intent.h>
-#include <androidjni/jutils-details.hpp>
+#include <android/jni/Activity.h>
+#include <android/jni/Intent.h>
+#include <android/jni/jutils-details.hpp>
 
 using namespace jni;
 

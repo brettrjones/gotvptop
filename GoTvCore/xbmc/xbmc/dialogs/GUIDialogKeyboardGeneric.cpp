@@ -31,9 +31,9 @@
 #include "utils/log.h"
 
 #ifdef TARGET_ANDROID
-#include <androidjni/Intent.h>
-#include <androidjni/RecognizerIntent.h>
-#include <androidjni/ArrayList.h>
+#include <android/jni/Intent.h>
+#include <android/jni/RecognizerIntent.h>
+#include <android/jni/ArrayList.h>
 #include "platform/android/activity/XBMCApp.h"
 
 #define ACTION_RECOGNIZE_SPEECH_REQID 543

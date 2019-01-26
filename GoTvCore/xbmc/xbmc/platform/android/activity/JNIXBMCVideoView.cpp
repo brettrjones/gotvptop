@@ -8,8 +8,8 @@
 
 #include "JNIXBMCVideoView.h"
 
-#include <androidjni/jutils-details.hpp>
-#include <androidjni/Context.h>
+#include <android/jni/jutils-details.hpp>
+#include <android/jni/Context.h>
 
 #include "utils/StringUtils.h"
 #include "utils/log.h"

@@ -44,6 +44,9 @@
 	#include <ctype.h>
 	#include <fcntl.h>
     #include <sys/types.h>
+# ifdef TARGET_OS_ANDROID
+# include <sys/ioctl.h>
+# endif
 #endif // _MSC_VER
 #ifdef _MSC_VER
 # pragma warning( disable: 4996 ) //'strnicmp': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strnicmp.

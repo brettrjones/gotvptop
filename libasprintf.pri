@@ -1,28 +1,30 @@
-HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
-	$$PWD/../../../../GoTvCpuArchDefines.h \
-	$$PWD/../../../../GoTvDependLibrariesConfig.h \
-	$$PWD/../../../../GoTvTargetOsConfig.h \
-	$$PWD/../../alloca.in.h \
-	$$PWD/../../autosprintf.h \
-	$$PWD/../../config_libasprintf.h \
-	$$PWD/../../errno.in.h \
-	$$PWD/../../lib-asprintf.h \
-	$$PWD/../../printf-args.h \
-	$$PWD/../../printf-parse.h \
-	$$PWD/../../size_max.h \
-	$$PWD/../../vasnprintf.h \
-	$$PWD/../../vasprintf.h \
-	$$PWD/../../verify.h \
-    $$PWD/../../xsize_asprintf.h
+$$PWD/DependLibs/libasprintf/
 
-SOURCES += 	$$PWD/../../alloca.c \
-	$$PWD/../../asnprintf.c \
-	$$PWD/../../asprintf.c \
-	$$PWD/../../autosprintf.cc \
-	$$PWD/../../lib-asprintf.c \
-	$$PWD/../../printf-args.c \
-	$$PWD/../../printf-parse.c \
-	$$PWD/../../vasnprintf.c \
-	$$PWD/../../vasprintf.c \
-    $$PWD/../../xsize_asprintf.c
+HEADERS += 	$$PWD/GoTvCompilerConfig.h \
+    $$PWD/GoTvCpuArchDefines.h \
+    $$PWD/GoTvDependLibrariesConfig.h \
+    $$PWD/GoTvTargetOsConfig.h \
+    $$PWD/DependLibs/libasprintf/alloca.in.h \
+    $$PWD/DependLibs/libasprintf/autosprintf.h \
+    $$PWD/DependLibs/libasprintf/config_libasprintf.h \
+    $$PWD/DependLibs/libasprintf/errno.in.h \
+    $$PWD/DependLibs/libasprintf/lib-asprintf.h \
+    $$PWD/DependLibs/libasprintf/printf-args.h \
+    $$PWD/DependLibs/libasprintf/printf-parse.h \
+    $$PWD/DependLibs/libasprintf/size_max.h \
+    $$PWD/DependLibs/libasprintf/vasnprintf.h \
+    $$PWD/DependLibs/libasprintf/vasprintf.h \
+    $$PWD/DependLibs/libasprintf/verify.h \
+    $$PWD/DependLibs/libasprintf/xsize_asprintf.h
+
+SOURCES += 	$$PWD/DependLibs/libasprintf/alloca.c \
+    $$PWD/DependLibs/libasprintf/asnprintf.c \
+    $$PWD/DependLibs/libasprintf/asprintf.c \
+    $$PWD/DependLibs/libasprintf/autosprintf.cc \
+    $$PWD/DependLibs/libasprintf/lib-asprintf.c \
+    $$PWD/DependLibs/libasprintf/printf-args.c \
+    $$PWD/DependLibs/libasprintf/printf-parse.c \
+    $$PWD/DependLibs/libasprintf/vasnprintf.c \
+    $$PWD/DependLibs/libasprintf/vasprintf.c \
+    $$PWD/DependLibs/libasprintf/xsize_asprintf.c
 

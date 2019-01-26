@@ -11,7 +11,7 @@
 
 #include <android_native_app_glue.h>
 
-#include <androidjni/SurfaceTexture.h>
+#include <android/jni/SurfaceTexture.h>
 
 #include "CompileInfo.h"
 #include "EventLoop.h"

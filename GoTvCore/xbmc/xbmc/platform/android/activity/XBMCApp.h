@@ -17,11 +17,11 @@
 
 #include <android/native_activity.h>
 
-#include <androidjni/Activity.h>
-#include <androidjni/AudioManager.h>
-#include <androidjni/BroadcastReceiver.h>
-#include <androidjni/SurfaceHolder.h>
-#include <androidjni/View.h>
+#include <android/jni/Activity.h>
+#include <android/jni/AudioManager.h>
+#include <android/jni/BroadcastReceiver.h>
+#include <android/jni/SurfaceHolder.h>
+#include <android/jni/View.h>
 
 #include "threads/Event.h"
 #include "interfaces/IAnnouncer.h"

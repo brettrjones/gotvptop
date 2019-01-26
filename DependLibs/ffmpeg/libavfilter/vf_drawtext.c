@@ -62,7 +62,7 @@
 #include "video.h"
 
 #if CONFIG_LIBFRIBIDI
-#include <libfribid/lib/fribidi.h>
+#include <libfribidi/lib/fribidi.h>
 #endif
 
 #include <libfreetype/include/ft2build.h>

@@ -1,36 +1,36 @@
-HEADERS += 	$$PWD/../../config_libnfs.h \
-	$$PWD/../../libnfs-private.h \
-	$$PWD/../../libnfs-raw-mount.h \
-	$$PWD/../../libnfs-raw-nfs.h \
-	$$PWD/../../libnfs-raw-nlm.h \
-	$$PWD/../../libnfs-raw-nsm.h \
-	$$PWD/../../libnfs-raw-portmap.h \
-	$$PWD/../../libnfs-raw-rquota.h \
-	$$PWD/../../libnfs-raw.h \
-	$$PWD/../../libnfs-zdr.h \
-	$$PWD/../../libnfs.h \
-	$$PWD/../../slist.h \
-	$$PWD/../../win32_compat.h \
-	$$PWD/../../win32_errnowrapper.h
+HEADERS += 	$$PWD/DependLibs/libnfs/config_libnfs.h \
+    $$PWD/DependLibs/libnfs/libnfs-private.h \
+    $$PWD/DependLibs/libnfs/libnfs-raw-mount.h \
+    $$PWD/DependLibs/libnfs/libnfs-raw-nfs.h \
+    $$PWD/DependLibs/libnfs/libnfs-raw-nlm.h \
+    $$PWD/DependLibs/libnfs/libnfs-raw-nsm.h \
+    $$PWD/DependLibs/libnfs/libnfs-raw-portmap.h \
+    $$PWD/DependLibs/libnfs/libnfs-raw-rquota.h \
+    $$PWD/DependLibs/libnfs/libnfs-raw.h \
+    $$PWD/DependLibs/libnfs/libnfs-zdr.h \
+    $$PWD/DependLibs/libnfs/libnfs.h \
+    $$PWD/DependLibs/libnfs/slist.h \
+    $$PWD/DependLibs/libnfs/win32_compat.h \
+    $$PWD/DependLibs/libnfs/win32_errnowrapper.h
 
-SOURCES += 	$$PWD/../../init.c \
-	$$PWD/../../libnfs-raw-mount.c \
-	$$PWD/../../libnfs-raw-nfs.c \
-	$$PWD/../../libnfs-raw-nlm.c \
-	$$PWD/../../libnfs-raw-nsm.c \
-	$$PWD/../../libnfs-raw-portmap.c \
-	$$PWD/../../libnfs-raw-rquota.c \
-	$$PWD/../../libnfs-sync.c \
-	$$PWD/../../libnfs-zdr.c \
-	$$PWD/../../libnfs.c \
-	$$PWD/../../mount.c \
-	$$PWD/../../nfs.c \
-	$$PWD/../../nfsacl.c \
-	$$PWD/../../nlm.c \
-	$$PWD/../../nsm.c \
-	$$PWD/../../pdu.c \
-	$$PWD/../../portmap.c \
-	$$PWD/../../rquota.c \
-	$$PWD/../../socket.c \
-	$$PWD/../../win32_compat.c
+SOURCES += 	$$PWD/DependLibs/libnfs/init.c \
+    $$PWD/DependLibs/libnfs/libnfs-raw-mount.c \
+    $$PWD/DependLibs/libnfs/libnfs-raw-nfs.c \
+    $$PWD/DependLibs/libnfs/libnfs-raw-nlm.c \
+    $$PWD/DependLibs/libnfs/libnfs-raw-nsm.c \
+    $$PWD/DependLibs/libnfs/libnfs-raw-portmap.c \
+    $$PWD/DependLibs/libnfs/libnfs-raw-rquota.c \
+    $$PWD/DependLibs/libnfs/libnfs-sync.c \
+    $$PWD/DependLibs/libnfs/libnfs-zdr.c \
+    $$PWD/DependLibs/libnfs/libnfs.c \
+    $$PWD/DependLibs/libnfs/mount.c \
+    $$PWD/DependLibs/libnfs/nfs.c \
+    $$PWD/DependLibs/libnfs/nfsacl.c \
+    $$PWD/DependLibs/libnfs/nlm.c \
+    $$PWD/DependLibs/libnfs/nsm.c \
+    $$PWD/DependLibs/libnfs/pdu.c \
+    $$PWD/DependLibs/libnfs/portmap.c \
+    $$PWD/DependLibs/libnfs/rquota.c \
+    $$PWD/DependLibs/libnfs/socket.c \
+    $$PWD/DependLibs/libnfs/win32_compat.c
 

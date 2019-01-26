@@ -190,7 +190,7 @@ extern GOTV_DLL_VARIABLE int optopt;
    returns the contents of the 'val' field.  */
 
 # if !GNULIB_defined_struct_option
-struct option
+struct option_gnu
 {
   const char *name;
   /* has_arg can't be an enum because some compilers complain about
@@ -202,7 +202,7 @@ struct option
 #  define GNULIB_defined_struct_option 1
 # endif
 
-/* Names for the values of the 'has_arg' field of 'struct option'.  */
+/* Names for the values of the 'has_arg' field of 'struct option_gnu'.  */
 
 # define no_argument            0
 # define required_argument      1
@@ -241,11 +241,11 @@ extern int getopt (int ___argc, char *const *___argv, const char *__shortopts)
 #ifndef __need_getopt
 extern int getopt_long (int ___argc, char *__getopt_argv_const *___argv,
                         const char *__shortopts,
-                        const struct option *__longopts, int *__longind)
+                        const struct option_gnu *__longopts, int *__longind)
        __THROW _GL_ARG_NONNULL ((2, 3));
 extern int getopt_long_only (int ___argc, char *__getopt_argv_const *___argv,
                              const char *__shortopts,
-                             const struct option *__longopts, int *__longind)
+                             const struct option_gnu *__longopts, int *__longind)
        __THROW _GL_ARG_NONNULL ((2, 3));
 
 #endif

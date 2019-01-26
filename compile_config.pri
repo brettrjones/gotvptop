@@ -15,6 +15,7 @@ win32{
 }
 
 android{
+    DEFINES += BIONIC_IOCTL_NO_SIGNEDNESS_OVERLOAD
 #    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p
 #    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
 }
@@ -48,7 +49,7 @@ unix:QMAKE_CXXFLAGS += -Wno-sign-compare
 unix:QMAKE_CXXFLAGS += -Wno-parentheses
 unix:QMAKE_CXXFLAGS += -Wno-missing-field-initializers
 unix:QMAKE_CXXFLAGS += -Wno-switch
-
+unix:QMAKE_CXXFLAGS += -Wno-#pragma-messages
 
 unix:!android:QMAKE_CFLAGS += -Wno-unused-variable
 unix:QMAKE_CFLAGS += -Wno-unused-function
@@ -59,6 +60,7 @@ unix:QMAKE_CFLAGS += -Wno-parentheses
 unix:QMAKE_CFLAGS += -Wno-pointer-sign
 unix:QMAKE_CFLAGS += -Wno-missing-field-initializers
 unix:QMAKE_CFLAGS += -Wno-switch
+unix:QMAKE_CFLAGS += -Wno-#pragma-messages
 
 
 CONFIG(debug, debug|release){

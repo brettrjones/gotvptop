@@ -7,7 +7,7 @@
  */
 
 #include "JNIXBMCFile.h"
-#include <androidjni/jutils-details.hpp>
+#include <android/jni/jutils-details.hpp>
 
 #include "CompileInfo.h"
 

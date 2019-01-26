@@ -1,64 +1,64 @@
 DEFINES += _BIND_TO_CURRENT_CRT_VERSION LIBTHEORA_EXPORTS
 # OC_X86_ASM
 
-INCLUDEPATH += $$PWD/../../
-INCLUDEPATH += $$PWD/../../include
-INCLUDEPATH += $$PWD/../../lib
-INCLUDEPATH += $$PWD/../../../libogg\include
+INCLUDEPATH += $$PWD/DependLibs/libtheora/
+INCLUDEPATH += $$PWD/DependLibs/libtheora/include
+INCLUDEPATH += $$PWD/DependLibs/libtheora/lib
+INCLUDEPATH += $$PWD/DependLibs/libogg/include
 
-HEADERS += 	$$PWD/../../include/theora/codec.h \
-	$$PWD/../../include/theora/theora.h \
-	$$PWD/../../include/theora/theoradec.h \
-	$$PWD/../../lib/apiwrapper.h \
-	$$PWD/../../lib/bitpack.h \
-	$$PWD/../../lib/cpu.h \
-	$$PWD/../../lib/dct.h \
-	$$PWD/../../lib/decint.h \
-	$$PWD/../../lib/dequant.h \
-	$$PWD/../../lib/encint.h \
-	$$PWD/../../lib/enquant.h \
-	$$PWD/../../lib/huffdec.h \
-	$$PWD/../../lib/huffenc.h \
-	$$PWD/../../lib/huffman.h \
-	$$PWD/../../lib/idct.h \
-	$$PWD/../../lib/internal.h \
-	$$PWD/../../lib/mathops.h \
-	$$PWD/../../lib/modedec.h \
-	$$PWD/../../lib/ocintrin.h \
-	$$PWD/../../lib/quant.h
+HEADERS += 	$$PWD/DependLibs/libtheora/include/theora/codec.h \
+    $$PWD/DependLibs/libtheora/include/theora/theora.h \
+    $$PWD/DependLibs/libtheora/include/theora/theoradec.h \
+    $$PWD/DependLibs/libtheora/lib/apiwrapper.h \
+    $$PWD/DependLibs/libtheora/lib/bitpack.h \
+    $$PWD/DependLibs/libtheora/lib/cpu.h \
+    $$PWD/DependLibs/libtheora/lib/dct.h \
+    $$PWD/DependLibs/libtheora/lib/decint.h \
+    $$PWD/DependLibs/libtheora/lib/dequant.h \
+    $$PWD/DependLibs/libtheora/lib/encint.h \
+    $$PWD/DependLibs/libtheora/lib/enquant.h \
+    $$PWD/DependLibs/libtheora/lib/huffdec.h \
+    $$PWD/DependLibs/libtheora/lib/huffenc.h \
+    $$PWD/DependLibs/libtheora/lib/huffman.h \
+    $$PWD/DependLibs/libtheora/lib/idct.h \
+    $$PWD/DependLibs/libtheora/lib/internal.h \
+    $$PWD/DependLibs/libtheora/lib/mathops.h \
+    $$PWD/DependLibs/libtheora/lib/modedec.h \
+    $$PWD/DependLibs/libtheora/lib/ocintrin.h \
+    $$PWD/DependLibs/libtheora/lib/quant.h
 
-SOURCES += 	$$PWD/../../lib/analyze.c \
-	$$PWD/../../lib/apiwrapper.c \
-	$$PWD/../../lib/bitpack.c \
-	$$PWD/../../lib/cpu.c \
-	$$PWD/../../lib/decapiwrapper.c \
-	$$PWD/../../lib/decinfo.c \
-	$$PWD/../../lib/decode.c \
-	$$PWD/../../lib/dequant.c \
-	$$PWD/../../lib/encapiwrapper.c \
-	$$PWD/../../lib/encfrag.c \
-	$$PWD/../../lib/encinfo.c \
-	$$PWD/../../lib/encode.c \
-	$$PWD/../../lib/encoder_disabled.c \
-	$$PWD/../../lib/enquant.c \
-	$$PWD/../../lib/fdct.c \
-	$$PWD/../../lib/fragment.c \
-	$$PWD/../../lib/huffdec.c \
-	$$PWD/../../lib/huffenc.c \
-	$$PWD/../../lib/idct.c \
-	$$PWD/../../lib/info.c \
-	$$PWD/../../lib/internal.c \
-	$$PWD/../../lib/mathops.c \
-	$$PWD/../../lib/mcenc.c \
-	$$PWD/../../lib/quant.c \
-	$$PWD/../../lib/rate.c \
-	$$PWD/../../lib/state.c \
-	$$PWD/../../lib/tokenize.c \
-	$$PWD/../../lib/x86_vc/mmxencfrag.c \
-	$$PWD/../../lib/x86_vc/mmxfdct.c \
-	$$PWD/../../lib/x86_vc/mmxfrag.c \
-	$$PWD/../../lib/x86_vc/mmxidct.c \
-	$$PWD/../../lib/x86_vc/mmxstate.c \
-	$$PWD/../../lib/x86_vc/x86enc.c \
-	$$PWD/../../lib/x86_vc/x86state.c
+SOURCES += 	$$PWD/DependLibs/libtheora/lib/analyze.c \
+    $$PWD/DependLibs/libtheora/lib/apiwrapper.c \
+    $$PWD/DependLibs/libtheora/lib/bitpack.c \
+    $$PWD/DependLibs/libtheora/lib/cpu.c \
+    $$PWD/DependLibs/libtheora/lib/decapiwrapper.c \
+    $$PWD/DependLibs/libtheora/lib/decinfo.c \
+    $$PWD/DependLibs/libtheora/lib/decode.c \
+    $$PWD/DependLibs/libtheora/lib/dequant.c \
+    $$PWD/DependLibs/libtheora/lib/encapiwrapper.c \
+    $$PWD/DependLibs/libtheora/lib/encfrag.c \
+    $$PWD/DependLibs/libtheora/lib/encinfo.c \
+    $$PWD/DependLibs/libtheora/lib/encode.c \
+    $$PWD/DependLibs/libtheora/lib/encoder_disabled.c \
+    $$PWD/DependLibs/libtheora/lib/enquant.c \
+    $$PWD/DependLibs/libtheora/lib/fdct.c \
+    $$PWD/DependLibs/libtheora/lib/fragment.c \
+    $$PWD/DependLibs/libtheora/lib/huffdec.c \
+    $$PWD/DependLibs/libtheora/lib/huffenc.c \
+    $$PWD/DependLibs/libtheora/lib/idct.c \
+    $$PWD/DependLibs/libtheora/lib/info.c \
+    $$PWD/DependLibs/libtheora/lib/internal.c \
+    $$PWD/DependLibs/libtheora/lib/mathops.c \
+    $$PWD/DependLibs/libtheora/lib/mcenc.c \
+    $$PWD/DependLibs/libtheora/lib/quant.c \
+    $$PWD/DependLibs/libtheora/lib/rate.c \
+    $$PWD/DependLibs/libtheora/lib/state.c \
+    $$PWD/DependLibs/libtheora/lib/tokenize.c \
+    $$PWD/DependLibs/libtheora/lib/x86_vc/mmxencfrag.c \
+    $$PWD/DependLibs/libtheora/lib/x86_vc/mmxfdct.c \
+    $$PWD/DependLibs/libtheora/lib/x86_vc/mmxfrag.c \
+    $$PWD/DependLibs/libtheora/lib/x86_vc/mmxidct.c \
+    $$PWD/DependLibs/libtheora/lib/x86_vc/mmxstate.c \
+    $$PWD/DependLibs/libtheora/lib/x86_vc/x86enc.c \
+    $$PWD/DependLibs/libtheora/lib/x86_vc/x86state.c
 

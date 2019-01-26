@@ -19,6 +19,7 @@
  */
 
 #include <libgnu/config_libgnu.h>
+#if defined (__i386__) || defined (__x86_64__)
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -308,3 +309,4 @@ _gcry_hwf_detect_x86 (void)
   return 0;
 #endif
 }
+#endif // defined (__i386__) || defined (__x86_64__)

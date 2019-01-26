@@ -99,7 +99,7 @@ amm-info@iis.fraunhofer.de
 
 
 #if defined(__CC_ARM) || defined(__arm__)
-#include "arm/autocorr2nd.cpp"
+#include "arm/autocorr2nd_arm.cpp"
 #endif
 
 

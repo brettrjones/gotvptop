@@ -1,47 +1,47 @@
-HEADERS += 	$$PWD/../../ath.h \
-	$$PWD/../../availbits.h \
-	$$PWD/../../bitbuffer.h \
-	$$PWD/../../bitbuffer_inline.h \
-	$$PWD/../../common.h \
-	$$PWD/../../config_libtwolame.h \
-	$$PWD/../../config_libtwolamewin.h \
-	$$PWD/../../crc.h \
-	$$PWD/../../dab.h \
-	$$PWD/../../encode.h \
-	$$PWD/../../energy.h \
-	$$PWD/../../enwindow.h \
-	$$PWD/../../fft.h \
-	$$PWD/../../mem.h \
-	$$PWD/../../psycho_0.h \
-	$$PWD/../../psycho_1.h \
-	$$PWD/../../psycho_1_critband.h \
-	$$PWD/../../psycho_1_freqtable.h \
-	$$PWD/../../psycho_2.h \
-	$$PWD/../../psycho_2_absthr.h \
-	$$PWD/../../psycho_3.h \
-	$$PWD/../../psycho_4.h \
-	$$PWD/../../psycho_n1.h \
-	$$PWD/../../subband.h \
-	$$PWD/../../twolame.h \
-	$$PWD/../../util.h
+HEADERS += 	$$PWD/DependLibs/libtwolame/ath.h \
+    $$PWD/DependLibs/libtwolame/availbits.h \
+    $$PWD/DependLibs/libtwolame/bitbuffer.h \
+    $$PWD/DependLibs/libtwolame/bitbuffer_inline.h \
+    $$PWD/DependLibs/libtwolame/common.h \
+    $$PWD/DependLibs/libtwolame/config_libtwolame.h \
+    $$PWD/DependLibs/libtwolame/config_libtwolamewin.h \
+    $$PWD/DependLibs/libtwolame/crc.h \
+    $$PWD/DependLibs/libtwolame/dab.h \
+    $$PWD/DependLibs/libtwolame/encode.h \
+    $$PWD/DependLibs/libtwolame/energy.h \
+    $$PWD/DependLibs/libtwolame/enwindow.h \
+    $$PWD/DependLibs/libtwolame/fft.h \
+    $$PWD/DependLibs/libtwolame/mem.h \
+    $$PWD/DependLibs/libtwolame/psycho_0.h \
+    $$PWD/DependLibs/libtwolame/psycho_1.h \
+    $$PWD/DependLibs/libtwolame/psycho_1_critband.h \
+    $$PWD/DependLibs/libtwolame/psycho_1_freqtable.h \
+    $$PWD/DependLibs/libtwolame/psycho_2.h \
+    $$PWD/DependLibs/libtwolame/psycho_2_absthr.h \
+    $$PWD/DependLibs/libtwolame/psycho_3.h \
+    $$PWD/DependLibs/libtwolame/psycho_4.h \
+    $$PWD/DependLibs/libtwolame/psycho_n1.h \
+    $$PWD/DependLibs/libtwolame/subband.h \
+    $$PWD/DependLibs/libtwolame/twolame.h \
+    $$PWD/DependLibs/libtwolame/util.h
 
-SOURCES += 	$$PWD/../../ath.c \
-	$$PWD/../../availbits.c \
-	$$PWD/../../bitbuffer.c \
-	$$PWD/../../crc.c \
-	$$PWD/../../dab.c \
-	$$PWD/../../encode.c \
-	$$PWD/../../energy.c \
-	$$PWD/../../fft.c \
-	$$PWD/../../get_set.c \
-	$$PWD/../../mem.c \
-	$$PWD/../../psycho_0.c \
-	$$PWD/../../psycho_1.c \
-	$$PWD/../../psycho_2.c \
-	$$PWD/../../psycho_3.c \
-	$$PWD/../../psycho_4.c \
-	$$PWD/../../psycho_n1.c \
-	$$PWD/../../subband.c \
-	$$PWD/../../twolame.c \
-	$$PWD/../../util.c
+SOURCES += 	$$PWD/DependLibs/libtwolame/ath.c \
+    $$PWD/DependLibs/libtwolame/availbits.c \
+    $$PWD/DependLibs/libtwolame/bitbuffer.c \
+    $$PWD/DependLibs/libtwolame/crc.c \
+    $$PWD/DependLibs/libtwolame/dab.c \
+    $$PWD/DependLibs/libtwolame/encode.c \
+    $$PWD/DependLibs/libtwolame/energy.c \
+    $$PWD/DependLibs/libtwolame/fft.c \
+    $$PWD/DependLibs/libtwolame/get_set.c \
+    $$PWD/DependLibs/libtwolame/mem.c \
+    $$PWD/DependLibs/libtwolame/psycho_0.c \
+    $$PWD/DependLibs/libtwolame/psycho_1.c \
+    $$PWD/DependLibs/libtwolame/psycho_2.c \
+    $$PWD/DependLibs/libtwolame/psycho_3.c \
+    $$PWD/DependLibs/libtwolame/psycho_4.c \
+    $$PWD/DependLibs/libtwolame/psycho_n1.c \
+    $$PWD/DependLibs/libtwolame/subband.c \
+    $$PWD/DependLibs/libtwolame/twolame.c \
+    $$PWD/DependLibs/libtwolame/util.c
 

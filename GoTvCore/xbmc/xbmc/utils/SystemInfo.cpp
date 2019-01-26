@@ -54,7 +54,7 @@ using namespace winrt::Windows::System::Profile;
 #include "utils/StringUtils.h"
 #include "utils/XMLUtils.h"
 #if defined(TARGET_ANDROID)
-#include <androidjni/Build.h>
+#include <android/jni/Build.h>
 #if defined(HAS_LIBAMCODEC)
 #include "utils/AMLUtils.h"
 #endif

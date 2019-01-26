@@ -163,7 +163,7 @@ CdIo_driver_t CdIo_all_drivers[] = {
   },
   */
 
-#ifndef TARGET_OS_WINDOWS
+#if 0 //BRJ ndef TARGET_OS_WINDOWS
   {DRIVER_LINUX,
    CDIO_SRC_IS_DEVICE_MASK|CDIO_SRC_IS_NATIVE_MASK,
    "GNU/Linux",

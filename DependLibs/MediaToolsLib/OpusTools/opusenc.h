@@ -3,9 +3,10 @@
 
 #include <opus_types.h>
 #include <libogg/include/ogg/ogg.h>
+#include <stdio.h>
 
 #ifdef ENABLE_NLS
-#include <libintl.h>
+#include <libgnu/libintl.h>
 #define _(X) gettext(X)
 #else
 #define _(X) (X)

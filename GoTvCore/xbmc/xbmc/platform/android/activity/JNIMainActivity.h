@@ -8,9 +8,9 @@
 
 #pragma once
 
-#include <androidjni/Activity.h>
-#include <androidjni/InputManager.h>
-#include <androidjni/Rect.h>
+#include <android/jni/Activity.h>
+#include <android/jni/InputManager.h>
+#include <android/jni/Rect.h>
 
 class CJNIMainActivity : public CJNIActivity, public CJNIInputManagerInputDeviceListener
 {

@@ -27,12 +27,12 @@ echo GoTv Target OS Config error - apple not supported
 # define TARGET_POSIX
 #elif defined( TARGET_OS_ANDROID)
 # define TARGET_ANDROID
-# define TARGET_POSIX
+# define TARGET_POSIX 1
 #else
 // default to assume linux
 # define TARGET_LINUX
 # ifndef TARGET_POSIX
-#  define TARGET_POSIX
+#  define TARGET_POSIX 1
 # endif // TARGET_LINUX
 #endif 
 

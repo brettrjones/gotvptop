@@ -8,8 +8,8 @@
 
 #include "MediaDrmCryptoSession.h"
 
-#include <androidjni/MediaDrm.h>
-#include <androidjni/UUID.h>
+#include <android/jni/MediaDrm.h>
+#include <android/jni/UUID.h>
 #include <stdexcept>
 
 #include "utils/StringUtils.h"

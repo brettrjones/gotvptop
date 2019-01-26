@@ -58,14 +58,14 @@
 
 int
 nettle_getopt_long (int argc, char *const *argv, const char *options,
-	     const struct option *long_options, int *opt_index)
+         const struct option_gnu *long_options, int *opt_index)
 {
   return _nettle_getopt_internal (argc, argv, options, long_options, opt_index, 0, 0);
 }
 
 int
 _nettle_getopt_long_r (int argc, char *const *argv, const char *options,
-		const struct option *long_options, int *opt_index,
+        const struct option_gnu *long_options, int *opt_index,
 		struct _nettle_getopt_data *d)
 {
   return _nettle_getopt_internal_r (argc, argv, options, long_options, opt_index,
@@ -79,14 +79,14 @@ _nettle_getopt_long_r (int argc, char *const *argv, const char *options,
 
 int
 nettle_getopt_long_only (int argc, char *const *argv, const char *options,
-		  const struct option *long_options, int *opt_index)
+          const struct option_gnu *long_options, int *opt_index)
 {
   return _nettle_getopt_internal (argc, argv, options, long_options, opt_index, 1, 0);
 }
 
 int
 _nettle_getopt_long_only_r (int argc, char *const *argv, const char *options,
-		     const struct option *long_options, int *opt_index,
+             const struct option_gnu *long_options, int *opt_index,
 		     struct _nettle_getopt_data *d)
 {
   return _nettle_getopt_internal_r (argc, argv, options, long_options, opt_index,

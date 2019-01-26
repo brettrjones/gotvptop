@@ -1,69 +1,75 @@
-HEADERS += 	$$PWD/../../alsa.h \
-	$$PWD/../../avdevice.h \
-	$$PWD/../../avdevice_internal.h \
-	$$PWD/../../decklink_common.h \
-	$$PWD/../../decklink_common_c.h \
-	$$PWD/../../decklink_dec.h \
-	$$PWD/../../decklink_enc.h \
-	$$PWD/../../dshow_capture.h \
-	$$PWD/../../dv1394.h \
-	$$PWD/../../fbdev_common.h \
-	$$PWD/../../opengl_enc_shaders.h \
-	$$PWD/../../oss.h \
-	$$PWD/../../pulse_audio_common.h \
-	$$PWD/../../sndio.h \
-	$$PWD/../../timefilter.h \
-	$$PWD/../../v4l2-common.h \
-	$$PWD/../../version.h
 
-SOURCES += 	$$PWD/../../alldevices.c \
-	$$PWD/../../alsa.c \
-	$$PWD/../../alsa_dec.c \
-	$$PWD/../../alsa_enc.c \
-	$$PWD/../../avdevice.c \
-	$$PWD/../../bktr.c \
-	$$PWD/../../caca.c \
-	$$PWD/../../decklink_common.cpp \
-	$$PWD/../../decklink_dec.cpp \
-	$$PWD/../../decklink_dec_c.c \
-	$$PWD/../../decklink_enc.cpp \
-	$$PWD/../../decklink_enc_c.c \
-	$$PWD/../../dshow.c \
-	$$PWD/../../dshow_common.c \
-	$$PWD/../../dshow_crossbar.c \
-	$$PWD/../../dshow_enummediatypes.c \
-	$$PWD/../../dshow_enumpins.c \
-	$$PWD/../../dshow_filter.c \
-	$$PWD/../../dshow_pin.c \
-	$$PWD/../../dv1394.c \
-	$$PWD/../../fbdev_common.c \
-	$$PWD/../../fbdev_dec.c \
-	$$PWD/../../fbdev_enc.c \
-	$$PWD/../../file_open.c \
-	$$PWD/../../gdigrab.c \
-	$$PWD/../../iec61883.c \
-	$$PWD/../../jack.c \
-	$$PWD/../../lavfi.c \
-	$$PWD/../../libcdio.c \
-	$$PWD/../../libdc1394.c \
-	$$PWD/../../openal-dec.c \
-	$$PWD/../../opengl_enc.c \
-	$$PWD/../../oss.c \
-	$$PWD/../../oss_dec.c \
-	$$PWD/../../oss_enc.c \
-	$$PWD/../../pulse_audio_common.c \
-	$$PWD/../../pulse_audio_dec.c \
-	$$PWD/../../pulse_audio_enc.c \
-	$$PWD/../../sndio.c \
-	$$PWD/../../sndio_dec.c \
-	$$PWD/../../sndio_enc.c \
-	$$PWD/../../timefilter.c \
-	$$PWD/../../utils.c \
-	$$PWD/../../v4l2-common.c \
-	$$PWD/../../v4l2.c \
-	$$PWD/../../v4l2enc.c \
-	$$PWD/../../vfwcap.c \
-	$$PWD/../../x11grab.c \
-	$$PWD/../../xcbgrab.c \
-#	$$PWD/../../xv.c
+
+INCLUDEPATH += $$PWD/DependLibs/libcurl/include
+INCLUDEPATH += $$PWD/DependLibs/libcurl/lib
+INCLUDEPATH += $$PWD/DependLibs/ffmpeg
+
+HEADERS += 	$$PWD/DependLibs/ffmpeg/libavdevice/alsa.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/avdevice.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/avdevice_internal.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/decklink_common.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/decklink_common_c.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/decklink_dec.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/decklink_enc.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/dshow_capture.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/dv1394.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/fbdev_common.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/opengl_enc_shaders.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/oss.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/pulse_audio_common.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/sndio.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/timefilter.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/v4l2-common.h \
+    $$PWD/DependLibs/ffmpeg/libavdevice/version.h
+
+SOURCES += 	$$PWD/DependLibs/ffmpeg/libavdevice/alldevices.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/alsa.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/alsa_dec.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/alsa_enc.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/avdevice.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/bktr.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/caca.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/decklink_common.cpp \
+    $$PWD/DependLibs/ffmpeg/libavdevice/decklink_dec.cpp \
+    $$PWD/DependLibs/ffmpeg/libavdevice/decklink_dec_c.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/decklink_enc.cpp \
+    $$PWD/DependLibs/ffmpeg/libavdevice/decklink_enc_c.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/dshow.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/dshow_common.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/dshow_crossbar.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/dshow_enummediatypes.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/dshow_enumpins.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/dshow_filter.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/dshow_pin.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/dv1394.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/fbdev_common.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/fbdev_dec.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/fbdev_enc.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/file_open.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/gdigrab.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/iec61883.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/jack.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/lavfi.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/libcdio.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/libdc1394.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/openal-dec.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/opengl_enc.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/oss.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/oss_dec.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/oss_enc.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/pulse_audio_common.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/pulse_audio_dec.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/pulse_audio_enc.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/sndio.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/sndio_dec.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/sndio_enc.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/timefilter.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/utils.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/v4l2-common.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/v4l2.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/v4l2enc.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/vfwcap.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/x11grab.c \
+    $$PWD/DependLibs/ffmpeg/libavdevice/xcbgrab.c \
+#	$$PWD/DependLibs/ffmpeg/libavdevice/xv.c
 

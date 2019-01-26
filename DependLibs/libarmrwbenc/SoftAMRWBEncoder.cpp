@@ -17,8 +17,8 @@
 //#define LOG_NDEBUG 0
 
 #include <libarmrwbenc/config_libarmrwbenc.h>
-#ifdef TARGET_OS_ANDROID
-
+//#ifdef TARGET_OS_ANDROID
+#if 0
 #define LOG_TAG "SoftAMRWBEncoder"
 #include <utils/Log.h>
 

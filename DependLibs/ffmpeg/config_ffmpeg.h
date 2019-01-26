@@ -22,7 +22,21 @@
 #define SWS_MAX_FILTER_SIZE 256
 #define ARCH_AARCH64 0
 #define ARCH_ALPHA 0
-#define ARCH_ARM 0
+#ifdef TARGET_OS_ANDROID
+# define ARCH_ARM 1
+# define ARCH_X86_32 0
+# define ARCH_X86_64 0
+#else
+# define ARCH_ARM 0
+# if ARCH_32_BITS
+#  define ARCH_X86_32 1
+#  define ARCH_X86_64 0
+# else
+#  define ARCH_X86_32 0 // defined in GoTvCpuArchDefines.h
+#  define ARCH_X86_64 1
+# endif // ARCH_32_BITS
+#endif //TARGET_OS_ANDROID
+
 #define ARCH_AVR32 0
 #define ARCH_AVR32_AP 0
 #define ARCH_AVR32_UC 0
@@ -41,19 +55,12 @@
 #define ARCH_TILEGX 0
 #define ARCH_TILEPRO 0
 #define ARCH_TOMI 0
-#define ARCH_X86 1
-//#if ARCH_32_BITS
-//# define ARCH_X86_32 1
-//# define ARCH_X86_64 0
-//#else
-//# define ARCH_X86_32 0 // defined in GoTvCpuArchDefines.h
-//# define ARCH_X86_64 1
-//#endif // ARCH_32_BITS
+//#define ARCH_X86 1 // defined in GoTvCpuArchDefines.h
 
 #define HAVE_ARMV5TE 0
-#define HAVE_ARMV6 0
+//#define HAVE_ARMV6 0 // defined in GoTvCpuArchDefines.h
 #define HAVE_ARMV6T2 0
-#define HAVE_ARMV8 0
+//#define HAVE_ARMV8 0 // defined in GoTvCpuArchDefines.h
 
 #define HAVE_NEON 0
 #define HAVE_VFP 0
@@ -427,7 +434,7 @@
 //#define HAVE_MKSTEMP 0 // defined in GoTvCompilerConfig.h
 //#define HAVE_MMAP 0 // defined in GoTvCompilerConfig.h
 //#define HAVE_MPROTECT 0 // defined in GoTvCompilerConfig.h
-#define HAVE_NANOSLEEP 0
+//#define HAVE_NANOSLEEP 0 // defined in GoTvCompilerConfig.h
 #define HAVE_PEEKNAMEDPIPE 1
 //#define HAVE_POSIX_MEMALIGN 0 // defined in GoTvCompilerConfig.h
 #define HAVE_PTHREAD_CANCEL 0

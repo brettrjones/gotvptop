@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-#include <androidjni/Display.h>
+#include <android/jni/Display.h>
 
 #include "windowing/Resolution.h"
 

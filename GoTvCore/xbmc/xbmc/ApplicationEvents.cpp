@@ -193,7 +193,7 @@
 #endif
 
 #if defined(TARGET_ANDROID)
-#include <androidjni/Build.h>
+#include <android/jni/Build.h>
 #include "platform/android/activity/XBMCApp.h"
 #include "platform/android/activity/AndroidFeatures.h"
 #endif

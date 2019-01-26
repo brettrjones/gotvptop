@@ -1,17 +1,14 @@
 
-INCLUDEPATH += ../../
-INCLUDEPATH += ../../../
-INCLUDEPATH += ../../../../
-INCLUDEPATH += ../../../../../
+INCLUDEPATH += $$PWD/DependLibs/bzlib
 
-HEADERS += 	$$PWD/../../bzlib.h \
-        $$PWD/../../bzlib_private.h
+HEADERS += 	$$PWD/DependLibs/bzlib/bzlib.h \
+        $$PWD/DependLibs/bzlib/bzlib_private.h
 
-SOURCES += 	$$PWD/../../blocksort.c \
-        $$PWD/../../bzlib.c \
-        $$PWD/../../compress.c \
-        $$PWD/../../crctable.c \
-        $$PWD/../../decompress.c \
-        $$PWD/../../huffman.c \
-        $$PWD/../../randtable.c
+SOURCES += 	$$PWD/DependLibs/bzlib/blocksort.c \
+        $$PWD/DependLibs/bzlib/bzlib.c \
+        $$PWD/DependLibs/bzlib/compress.c \
+        $$PWD/DependLibs/bzlib/crctable.c \
+        $$PWD/DependLibs/bzlib/decompress.c \
+        $$PWD/DependLibs/bzlib/huffman.c \
+        $$PWD/DependLibs/bzlib/randtable.c
 

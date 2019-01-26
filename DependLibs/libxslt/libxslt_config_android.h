@@ -7,8 +7,8 @@
 * Author: Daniel Veillard
 */
 
-#ifndef __LIBXSLT_CONFIG_ANDROID_H__
-#define __LIBXSLT_CONFIG_ANDROID_H__
+#ifndef LIBXSLT_CONFIG_ANDROID_H_
+# define LIBXSLT_CONFIG_ANDROID_H_
 
 /**
 * Locale support
@@ -119,10 +119,6 @@
 #endif
 #endif
 
-#ifdef __cplusplus
-}
-#endif
-
 #define HAVE_CTYPE_H 1
 #define HAVE_STDLIB_H 1
 #define HAVE_STDARG_H 1
@@ -134,7 +130,7 @@
 #define HAVE_MATH_H 1
 #define HAVE_FCNTL_H 1
 
-#include <io.h>
+//#include <io.h>
 
 #define HAVE_ISINF
 #define HAVE_ISNAN
@@ -158,6 +154,7 @@ _fpclass() function. */
 #define isnan(d) (_isnan(d))
 #endif
 #else /* _MSC_VER */
+#ifndef TARGET_OS_ANDROID
 static int isinf( double d ) {
 	int expon = 0;
 	double val = frexp( d, &expon );
@@ -194,9 +191,10 @@ static int isnan( double d ) {
 		return 0;
 	}
 }
+#endif // TARGET_OS_ANDROID
 #endif /* _MSC_VER */
 
-#include <direct.h>
+//#include <direct.h>
 
 /* snprintf emulation taken from http://stackoverflow.com/a/8712996/1956010 */
 #if defined(_MSC_VER) && _MSC_VER < 1900

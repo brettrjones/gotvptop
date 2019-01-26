@@ -8,11 +8,11 @@
 
 #pragma once
 
-#include <androidjni/JNIBase.h>
+#include <android/jni/JNIBase.h>
 
-#include <androidjni/Intent.h>
-#include <androidjni/MediaMetadata.h>
-#include <androidjni/PlaybackState.h>
+#include <android/jni/Intent.h>
+#include <android/jni/MediaMetadata.h>
+#include <android/jni/PlaybackState.h>
 
 namespace jni
 {

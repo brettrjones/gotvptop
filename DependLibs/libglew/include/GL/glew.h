@@ -1187,6 +1187,9 @@ GLAPI void GLAPIENTRY glViewport (GLint x, GLint y, GLsizei width, GLsizei heigh
 #endif /* GL_VERSION_1_1 */
 
 /* ---------------------------------- GLU ---------------------------------- */
+#ifdef TARGET_OS_ANDROID
+#define GLEW_NO_GLU 1 // BRJ android does not support glu although there is a glu partial port called glues
+#endif // TARGET_OS_ANDROID
 
 #ifndef GLEW_NO_GLU
 #  ifdef __APPLE__

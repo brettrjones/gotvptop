@@ -296,6 +296,7 @@ map_w32_to_errno (DWORD w32_err)
 /* Replacement fucntions.  */
 
 #ifndef HAVE_MEMRCHR
+# if !defined(TARGET_OS_ANDROID)
 static void *
 memrchr (const void *buffer, int c, size_t n)
 {
@@ -306,6 +307,7 @@ memrchr (const void *buffer, int c, size_t n)
       return (void *)p;
   return NULL;
 }
+# endif // !defined(TARGET_OS_ANDROID)
 #endif /*HAVE_MEMRCHR*/
 
 

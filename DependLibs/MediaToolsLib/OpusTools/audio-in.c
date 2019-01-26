@@ -59,7 +59,7 @@
 #endif
 
 #ifdef ENABLE_NLS
-#include <libintl.h>
+#include <libgnu/libintl.h>
 #define _(X) gettext(X)
 #else
 #define _(X) (X)

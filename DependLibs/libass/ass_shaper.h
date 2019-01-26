@@ -21,7 +21,7 @@
 
 typedef struct ass_shaper ASS_Shaper;
 
-#include <libfribid/lib/fribidi.h>
+#include <libfribidi/lib/fribidi.h>
 #include "ass_render.h"
 
 void ass_shaper_info(ASS_Library *lib);

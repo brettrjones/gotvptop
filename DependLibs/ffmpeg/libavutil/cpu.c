@@ -50,20 +50,10 @@
 #include <unistd.h>
 #endif
 
-#if ARCH_AARCH64
-return ff_get_cpu_flags_aarch64();
-#endif // ARCH_AARCH64
-#if ARCH_ARM
-return ff_get_cpu_flags_arm();
-#endif // ARCH_ARM
-#if ARCH_PPC
-return ff_get_cpu_flags_ppc();
-#endif // ARCH_PPC
 #if ARCH_X86
 # include "libavutil/x86/cpu_x86.h"
 #endif // ARCH_X86
 
-#define ATOMIC_FLAG_INIT 0
 
 #define ATOMIC_VAR_INIT(value) (value)
 
@@ -73,17 +63,15 @@ static int get_cpu_flags(void)
 {
 #if ARCH_AARCH64
         return ff_get_cpu_flags_aarch64();
-#endif // ARCH_AARCH64
-#if ARCH_ARM
+#elif ARCH_ARM
         return ff_get_cpu_flags_arm();
-#endif // ARCH_ARM
-#if ARCH_PPC
+#elif ARCH_PPC
         return ff_get_cpu_flags_ppc();
-#endif // ARCH_PPC
-#if ARCH_X86
+#elif ARCH_X86
         return ff_get_cpu_flags_x86();
-#endif // ARCH_X86
+#else
     return 0;
+#endif // ARCH_AARCH64
 }
 
 void av_force_cpu_flags(int arg){

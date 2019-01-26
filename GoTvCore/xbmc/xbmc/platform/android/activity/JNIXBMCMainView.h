@@ -8,11 +8,11 @@
 
 #pragma once
 
-#include <androidjni/JNIBase.h>
+#include <android/jni/JNIBase.h>
 
-#include <androidjni/Context.h>
-#include <androidjni/Surface.h>
-#include <androidjni/SurfaceHolder.h>
+#include <android/jni/Context.h>
+#include <android/jni/Surface.h>
+#include <android/jni/SurfaceHolder.h>
 
 #include "threads/Event.h"
 #include "utils/Geometry.h"

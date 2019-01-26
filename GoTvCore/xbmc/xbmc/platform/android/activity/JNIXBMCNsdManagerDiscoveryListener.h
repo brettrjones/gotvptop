@@ -8,9 +8,9 @@
 
 #pragma once
 
-#include <androidjni/JNIBase.h>
+#include <android/jni/JNIBase.h>
 
-#include <androidjni/NsdManager.h>
+#include <android/jni/NsdManager.h>
 
 namespace jni
 {

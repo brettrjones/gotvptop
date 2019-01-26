@@ -28,9 +28,9 @@
 #include <cstring>
 #include <map>
 
-#include <androidjni/Context.h>
-#include <androidjni/StorageManager.h>
-#include <androidjni/Environment.h>
+#include <android/jni/Context.h>
+#include <android/jni/StorageManager.h>
+#include <android/jni/Environment.h>
 
 #include "filesystem/Directory.h"
 #include "filesystem/File.h"

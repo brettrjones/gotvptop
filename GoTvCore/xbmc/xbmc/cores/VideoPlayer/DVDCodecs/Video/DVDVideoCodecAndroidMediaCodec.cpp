@@ -15,11 +15,11 @@
 
 #include "DVDVideoCodecAndroidMediaCodec.h"
 
-#include <androidjni/ByteBuffer.h>
-#include <androidjni/MediaCodecList.h>
-#include <androidjni/MediaCodecInfo.h>
-#include <androidjni/Surface.h>
-#include <androidjni/SurfaceTexture.h>
+#include <android/jni/ByteBuffer.h>
+#include <android/jni/MediaCodecList.h>
+#include <android/jni/MediaCodecInfo.h>
+#include <android/jni/Surface.h>
+#include <android/jni/SurfaceTexture.h>
 #include <media/NdkMediaCrypto.h>
 
 #include "Application.h"

@@ -16,7 +16,7 @@
 // do not need to include the entire library image if they only use a subset
 // of it. This module will be loaded for ANY WavPack application.
 
-#include "config_libwavepack.h"
+#include <libwavepack/config_libwavepack.h>
 
 #include <stdlib.h>
 #include <string.h>

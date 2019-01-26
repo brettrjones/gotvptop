@@ -10,8 +10,8 @@
 
 #include "network/ZeroconfBrowser.h"
 
-#include <androidjni/NsdManager.h>
-#include <androidjni/NsdServiceInfo.h>
+#include <android/jni/NsdManager.h>
+#include <android/jni/NsdServiceInfo.h>
 
 #include "platform/android/activity/JNIXBMCNsdManagerDiscoveryListener.h"
 #include "platform/android/activity/JNIXBMCNsdManagerResolveListener.h"

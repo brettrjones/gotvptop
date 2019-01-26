@@ -41,7 +41,7 @@ void g_printerr (const gchar *format, ...)
   va_list args;
   va_start (args, format);
   //vfprintf (stderr, format, args);
-  LogMsgVarg( LOG_ERROR, args, format );
+  LogMsgVarg( LOG_ERROR, format, args );
   va_end (args);
 }
 
@@ -51,7 +51,7 @@ g_warning (const gchar *format, ...)
   va_list args;
 
   va_start (args, format);
-  LogMsgVarg( LOG_WARN, args, format );
+  LogMsgVarg( LOG_WARN, format, args );
   va_end (args);
 }
 
@@ -61,6 +61,6 @@ g_log (const char *domain, int level, const char *format, ...)
   va_list args;
 
   va_start (args, format);
-  LogMsgVarg( LOG_ERROR, args, format );
+  LogMsgVarg( LOG_ERROR, format, args );
   va_end (args);
 }

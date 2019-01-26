@@ -19,7 +19,7 @@
 #include <libcrossguid/guid.h>
 
 #if defined(TARGET_ANDROID)
-#include <androidjni/JNIThreading.h>
+#include <android/jni/JNIThreading.h>
 #endif
 
 #include "StringUtils.h"

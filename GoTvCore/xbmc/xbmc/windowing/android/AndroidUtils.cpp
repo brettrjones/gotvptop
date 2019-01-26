@@ -7,13 +7,13 @@
  */
 #include <stdlib.h>
 
-#include <androidjni/SystemProperties.h>
-#include <androidjni/Display.h>
-#include <androidjni/View.h>
-#include <androidjni/Window.h>
-#include <androidjni/WindowManager.h>
-#include <androidjni/Build.h>
-#include <androidjni/System.h>
+#include <android/jni/SystemProperties.h>
+#include <android/jni/Display.h>
+#include <android/jni/View.h>
+#include <android/jni/Window.h>
+#include <android/jni/WindowManager.h>
+#include <android/jni/Build.h>
+#include <android/jni/System.h>
 
 #include <EGL/egl.h>
 

@@ -271,7 +271,15 @@ extern "C" {
     #if ( defined( _MSC_VER ) )
         #pragma warning( default:4706 )
     #endif
-
+#elif ( TARGET_OS_ANDROID )
+# include    <sys/types.h>
+# include    <netinet/in.h>
+# include    <arpa/inet.h>
+# include    <fcntl.h>
+# include    <libpthread/pthread.h>
+# include    <sys/ioctl.h>
+# include    <sys/socket.h>
+# include    <unistd.h>
 #else
     #error unknown OS - update this file to support your OS
 #endif

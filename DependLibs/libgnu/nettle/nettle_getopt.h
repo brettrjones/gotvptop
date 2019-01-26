@@ -102,7 +102,7 @@ extern int optopt;
    one).  For long options that have a zero `flag' field, `nettle_getopt'
    returns the contents of the `val' field.  */
 
-struct option
+struct option_gnu
 {
   const char *name;
   /* has_arg can't be an enum because some compilers complain about
@@ -173,11 +173,11 @@ extern int nettle_getopt ();
 #ifndef __need_nettle_getopt
 extern int nettle_getopt_long (int ___argc, char *const *___argv,
 			const char *__shortopts,
-		        const struct option *__longopts, int *__longind)
+                const struct option_gnu *__longopts, int *__longind)
        __THROW;
 extern int nettle_getopt_long_only (int ___argc, char *const *___argv,
 			     const char *__shortopts,
-		             const struct option *__longopts, int *__longind)
+                     const struct option_gnu *__longopts, int *__longind)
        __THROW;
 
 #endif

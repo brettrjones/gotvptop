@@ -110,6 +110,7 @@ n = 1 stands for the first argument, n = 2 for the second argument etc.  */
 //# endif
 #endif
 
+/* deprecated attribute */
 #if (__GNUC__ > 4 || (__GNUC__ == 4 && (__GNUC_MINOR__ >= 5)))
 # ifndef GOTV_WARN_DEPRECATED
 #  define GOTV_WARN_DEPRECATED(x) __attribute__((deprecated(x)))
@@ -117,6 +118,10 @@ n = 1 stands for the first argument, n = 2 for the second argument etc.  */
 #elif defined(_MSC_VER)
 # ifndef GOTV_WARN_DEPRECATED
 #  define GOTV_WARN_DEPRECATED(x) __declspec(deprecated(x))
+# endif
+#elif defined(__clang__)
+# ifndef GOTV_WARN_DEPRECATED
+#  define GOTV_WARN_DEPRECATED(x) __attribute__((deprecated(x)))
 # endif
 #else
 # define GOTV_WARN_DEPRECATED(x)
@@ -149,17 +154,6 @@ n = 1 stands for the first argument, n = 2 for the second argument etc.  */
 # define GOTV_ATTRIBUTE_PACKED
 # define GOTV_PRAGMA_PACK 1
 #endif // !defined(GOTV_ATTRIBUTE_PACKED)
-
-/* deprecated attribute */
-#ifdef __GNUC__
-# define GOTV_DEPRECATED(func) func __attribute__ ((deprecated))
-#elif defined(_MSC_VER)
-//# define GOTV_DEPRECATED(func) __declspec(deprecated) func
-# define GOTV_DEPRECATED
-#else
-# pragma message("WARNING: You need to implement DEPRECATED for this compiler")
-# define GOTV_DEPRECATED(func) func
-#endif
 
 #if (!defined(__STDC_VERSION__) || (__STDC_VERSION__ < 199901L) )
 # if GOTV_GNUC_PREREQ(3,0)
@@ -657,13 +651,15 @@ typedef unsigned int		UINT;
 # define NULL 0
 #endif // NULL
 
-#ifdef TARGET_OS_LINUX
+#if defined(TARGET_OS_LINUX) || defined(TARGET_OS_ANDROID)
 # include <sys/types.h>
 # include <netinet/in.h>
 # include <inttypes.h>
 
 # define ntohll be64toh
 # define htonll htobe64
+//#elif defined(TARGET_OS_ANDROID)
+
 #endif // TARGET_OS_LINUX
 
 #ifndef SOCKET
@@ -1558,10 +1554,12 @@ typedef int64_t              time64_t;
 // common VxSleep( int milliseconds ) for all platforms is in CoreLib/VxDefs
 #ifdef TARGET_OS_WINDOWS
 # define HAVE_SLEEP				1
+# define HAVE_NANOSLEEP			0
 #elif defined(TARGET_OS_ANDROID)
 # define HAVE_NANOSLEEP			1
 #else
 # define HAVE_USLEEP			1
+# define HAVE_NANOSLEEP			0
 #endif // TARGET_OS_WINDOWS
 
 #ifdef _MSC_VER

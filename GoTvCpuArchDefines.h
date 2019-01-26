@@ -73,29 +73,46 @@
 #elif defined(TARGET_OS_ANDROID)
 # define GOTV_ARCH_LITTLE_ENDIAN		1
 # define GOTV_ARCH_BIG_ENDIAN			0
-# define TARGET_CPU_ARM					1  // general cpu type  
+
+# if defined(__ARMEL__)
+#  define TARGET_CPU_ARM				1  // general cpu type
+#  define ARCH_X86                      0
+#  define ARCH_ARM                      1
+
+#  if (defined(__ARM_NEON__) || defined(__ARM_NEON))
+#   define ARM_FEATURE_NEON 1
+#  endif // (defined(__ARM_NEON__) || defined(__ARM_NEON))
+
+// only vanilla 32bit arm is supported right now
+#  define ARCH_32_BITS					1
+#  define ARCH_64_BITS					0
+/* Defined if ARM architecture is v6 or newer */
+#  define HAVE_ARM_ARCH_V6				1 // we don't support the really old processors
+# else
+#  define TARGET_CPU_X86				1 // general cpu type
+#  define ARCH_X86                      1
+#  define ARCH_ARM                      0
+#  define ARCH_32_BITS					0
+#  define ARCH_64_BITS					1
+/* Defined if ARM architecture is v6 or newer */
+#  define HAVE_ARM_ARCH_V6				0 // we don't support the really old processors
+# endif // defined(__ARMEL__)
 
 # define ARCH_ALPHA		                0
-# define ARCH_ARM                       1
 # define AARCH64                        0 // the other arm type android cpu
-# define ARCH_X86						0
 # define ARCH_ALPHA                     0
 # define ARCH_SPARC                     0
 # define ARCH_MIPS                      0
 # define ARCH_M68K                      0
 # define ARCH_PPC                       0
 
-// only vanilla 32bit arm is supported right now
-# define ARCH_32_BITS					1
-/* Defined if ARM architecture is v6 or newer */
-#define HAVE_ARM_ARCH_V6				1 // we don't support the really old processors
 
 #elif defined(TARGET_OS_LINUX)
 
 # define GOTV_ARCH_LITTLE_ENDIAN		1
 # define GOTV_ARCH_BIG_ENDIAN			0
-// only 32bit x86 linux is supported
-# define TARGET_CPU_X86					1  // general cpu type     
+// only 64bit x86 linux is supported
+# define TARGET_CPU_X86_64			    1  // general cpu type
 
 # define ARCH_ALPHA		                0
 # define ARCH_ARM                       0
@@ -189,7 +206,7 @@ echo unknown processor types are not supported
 #if !ARCH_64_BITS && !ARCH_32_BITS
 // default to 64 bits if none defined
 # define ARCH_32_BITS 0
-# define ARCH_64_BITS 0
+# define ARCH_64_BITS 1
 #endif // !defined(ARCH_64_BITS) && !defined(ARCH_32_BITS)
 
 
@@ -331,10 +348,10 @@ echo GoTv CPU Config error no cpu arc defined.. unknown processors not supported
 # define SIZEOF_CHAR_P 8
 # ifdef TARGET_OS_WINDOWS
 #  define SIZEOF_INT 8
-#  define SIZEOF_LONG 4
+#  define SIZEOF_LONG 4 // microsoft compiler uses 4 byte long in all arch
 # else
 #  define SIZEOF_INT 4
-#  define SIZEOF_LONG 8
+#  define SIZEOF_LONG 8 // everybody else uses long size the same as int size
 # endif // TARGET_OS_LINUX
 
 #endif // ARCH_32_BITS

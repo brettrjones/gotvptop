@@ -21,7 +21,8 @@
  */
 
 #include <ffmpeg/config_ffmpeg.h>
-#ifdef TARGET_OS_ANDROID
+//#ifdef TARGET_OS_ANDROID
+#if 0 //BRJ
 
 #include <stdint.h>
 #include <string.h>

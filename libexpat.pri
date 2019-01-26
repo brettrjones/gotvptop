@@ -1,19 +1,19 @@
-HEADERS += 	$$PWD/../../lib/ascii.h \
-	$$PWD/../../lib/asciitab.h \
-	$$PWD/../../lib/expat.h \
-	$$PWD/../../lib/expat_external.h \
-	$$PWD/../../lib/iasciitab.h \
-	$$PWD/../../lib/internal.h \
-	$$PWD/../../lib/latin1tab.h \
-	$$PWD/../../lib/nametab.h \
-	$$PWD/../../lib/utf8tab.h \
-	$$PWD/../../lib/xmlrole.h \
-	$$PWD/../../lib/xmltok.h \
-	$$PWD/../../lib/xmltok_impl.h
+HEADERS += 	$$PWD/DependLibs/libexpat/lib/ascii.h \
+    $$PWD/DependLibs/libexpat/lib/asciitab.h \
+    $$PWD/DependLibs/libexpat/lib/expat.h \
+    $$PWD/DependLibs/libexpat/lib/expat_external.h \
+    $$PWD/DependLibs/libexpat/lib/iasciitab.h \
+    $$PWD/DependLibs/libexpat/lib/internal.h \
+    $$PWD/DependLibs/libexpat/lib/latin1tab.h \
+    $$PWD/DependLibs/libexpat/lib/nametab.h \
+    $$PWD/DependLibs/libexpat/lib/utf8tab.h \
+    $$PWD/DependLibs/libexpat/lib/xmlrole.h \
+    $$PWD/DependLibs/libexpat/lib/xmltok.h \
+    $$PWD/DependLibs/libexpat/lib/xmltok_impl.h
 
-SOURCES += 	$$PWD/../../lib/xmlparse.c \
-	$$PWD/../../lib/xmlrole.c \
-	$$PWD/../../lib/xmltok.c \
-	$$PWD/../../lib/xmltok_impl.c \
-	$$PWD/../../lib/xmltok_ns.c
+SOURCES += 	$$PWD/DependLibs/libexpat/lib/xmlparse.c \
+    $$PWD/DependLibs/libexpat/lib/xmlrole.c \
+    $$PWD/DependLibs/libexpat/lib/xmltok.c \
+    $$PWD/DependLibs/libexpat/lib/xmltok_impl.c \
+    $$PWD/DependLibs/libexpat/lib/xmltok_ns.c
 

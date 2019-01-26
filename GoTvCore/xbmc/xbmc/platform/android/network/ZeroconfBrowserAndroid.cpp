@@ -8,8 +8,8 @@
 
 #include "ZeroconfBrowserAndroid.h"
 
-#include <androidjni/jutils-details.hpp>
-#include <androidjni/Context.h>
+#include <android/jni/jutils-details.hpp>
+#include <android/jni/Context.h>
 
 #include "guilib/GUIComponent.h"
 #include "guilib/GUIMessage.h"

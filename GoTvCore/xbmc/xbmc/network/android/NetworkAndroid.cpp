@@ -21,12 +21,12 @@
 
 #include "NetworkAndroid.h"
 
-#include <androidjni/ConnectivityManager.h>
-#include <androidjni/InetAddress.h>
-#include <androidjni/LinkAddress.h>
-#include <androidjni/RouteInfo.h>
-#include <androidjni/WifiManager.h>
-#include <androidjni/WifiInfo.h>
+#include <android/jni/ConnectivityManager.h>
+#include <android/jni/InetAddress.h>
+#include <android/jni/LinkAddress.h>
+#include <android/jni/RouteInfo.h>
+#include <android/jni/WifiManager.h>
+#include <android/jni/WifiInfo.h>
 
 #include "platform/android/activity/XBMCApp.h"
 

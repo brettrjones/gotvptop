@@ -15,7 +15,7 @@
    with this program; if not, see <http://www.gnu.org/licenses/>.  */
 
 #include <config_libgnu.h>
-#ifndef _MSC_VER // already exists so dont compile
+#if !defined(_MSC_VER) && !defined(TARGET_OS_ANDROID) // already exists so dont compile
 /* Specification.  */
 #include <stdio.h>
 #include <wctype.h>

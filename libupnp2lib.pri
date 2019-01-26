@@ -1,18 +1,18 @@
-HEADERS += 	$$PWD/../../AltXmlParser.h \
-	$$PWD/../../UpnpAction.h \
-	$$PWD/../../UpnpAllowedValue.h \
-	$$PWD/../../UpnpClientInterface.h \
-	$$PWD/../../UpnpParser.h \
-	$$PWD/../../UpnpPortForward.h \
-	$$PWD/../../UpnpRootDevice.h \
-	$$PWD/../../UpnpService.h \
-	$$PWD/../../UpnpStateVariable.h \
-	$$PWD/../../UpnpTcpSkt.h
+HEADERS += 	$$PWD/DependLibs/Upnp2lib/AltXmlParser.h \
+    $$PWD/DependLibs/Upnp2lib/UpnpAction.h \
+    $$PWD/DependLibs/Upnp2lib/UpnpAllowedValue.h \
+    $$PWD/DependLibs/Upnp2lib/UpnpClientInterface.h \
+    $$PWD/DependLibs/Upnp2lib/UpnpParser.h \
+    $$PWD/DependLibs/Upnp2lib/UpnpPortForward.h \
+    $$PWD/DependLibs/Upnp2lib/UpnpRootDevice.h \
+    $$PWD/DependLibs/Upnp2lib/UpnpService.h \
+    $$PWD/DependLibs/Upnp2lib/UpnpStateVariable.h \
+    $$PWD/DependLibs/Upnp2lib/UpnpTcpSkt.h
 
-SOURCES += 	$$PWD/../../AltXmlParser.cpp \
-	$$PWD/../../UpnpParser.cpp \
-	$$PWD/../../UpnpPortForward.cpp \
-	$$PWD/../../UpnpRootDevice.cpp \
-	$$PWD/../../UpnpService.cpp \
-	$$PWD/../../UpnpTcpSkt.cpp
+SOURCES += 	$$PWD/DependLibs/Upnp2lib/AltXmlParser.cpp \
+    $$PWD/DependLibs/Upnp2lib/UpnpParser.cpp \
+    $$PWD/DependLibs/Upnp2lib/UpnpPortForward.cpp \
+    $$PWD/DependLibs/Upnp2lib/UpnpRootDevice.cpp \
+    $$PWD/DependLibs/Upnp2lib/UpnpService.cpp \
+    $$PWD/DependLibs/Upnp2lib/UpnpTcpSkt.cpp
 

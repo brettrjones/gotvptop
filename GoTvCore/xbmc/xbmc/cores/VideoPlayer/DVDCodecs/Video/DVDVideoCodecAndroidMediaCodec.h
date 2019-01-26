@@ -13,7 +13,7 @@
 #include <memory>
 #include <atomic>
 
-#include <androidjni/Surface.h>
+#include <android/jni/Surface.h>
 
 #include "DVDVideoCodec.h"
 #include "DVDStreamInfo.h"

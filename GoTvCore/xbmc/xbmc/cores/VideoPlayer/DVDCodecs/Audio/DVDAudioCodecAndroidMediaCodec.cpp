@@ -28,16 +28,16 @@
 #include "cores/VideoPlayer/Interface/Addon/DemuxCrypto.h"
 #include "ServiceBroker.h"
 
-#include <androidjni/ByteBuffer.h>
-#include <androidjni/MediaCodec.h>
-#include <androidjni/MediaCrypto.h>
-#include <androidjni/MediaFormat.h>
-#include <androidjni/MediaCodecList.h>
-#include <androidjni/MediaCodecInfo.h>
-#include <androidjni/MediaCodecCryptoInfo.h>
+#include <android/jni/ByteBuffer.h>
+#include <android/jni/MediaCodec.h>
+#include <android/jni/MediaCrypto.h>
+#include <android/jni/MediaFormat.h>
+#include <android/jni/MediaCodecList.h>
+#include <android/jni/MediaCodecInfo.h>
+#include <android/jni/MediaCodecCryptoInfo.h>
 #include "platform/android/activity/AndroidFeatures.h"
-#include <androidjni/UUID.h>
-#include <androidjni/Surface.h>
+#include <android/jni/UUID.h>
+#include <android/jni/Surface.h>
 
 #include "utils/StringUtils.h"
 
