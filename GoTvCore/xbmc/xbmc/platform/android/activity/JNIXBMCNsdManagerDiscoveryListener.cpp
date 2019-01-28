@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include "JNIXBMCNsdManagerDiscoveryListener.h"
 
@@ -108,3 +110,4 @@ void CJNIXBMCNsdManagerDiscoveryListener::_onStopDiscoveryFailed(JNIEnv* env, jo
   if (inst)
     inst->onStopDiscoveryFailed(jcast<std::string>(jhstring(serviceType)), errorCode);
 }
+#endif // !defined(HAVE_QT_GUI)

@@ -1,0 +1,101 @@
+The following instructions were modifiec from instructions at
+https://forum.kodi.tv/showthread.php?tid=306050
+
+1.) Follow the instuctions for creating the VirtualBox Image and setting up to build GoTvPtoP
+in the text file docs_for_building/BuildingVirtualImage.txt
+
+----------------------
+2) Prepare the Mint installation:
+----------------------
+// for Android command line build
+$ sudo apt-get update
+$ sudo apt-get install build-essential default-jdk git curl autoconf unzip zip zlib1g-dev gawk gperf cmake
+
+$ sudo apt-get install lib32stdc++6 lib32z1 lib32z1-dev
+$ sudo apt-get install libcurl4-openssl-dev
+// for Qt/Android
+$ sudo apt-get install libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses5:i386
+// for android emulator
+$ sudo apt-get install libsdl1.2debian:i386
+
+
+----------------------
+3) Update Android SDK
+----------------------
+a) SDK tools
+$ cd ~/Android/Sdk/tools/bin
+
+$ ./sdkmanager "platforms;android-25"
+	a.) If get error Warning: File /root/.android/repositories.cfg could not be loaded.
+		then 
+		$ touch ~/.android/repositories.cfg
+		rerun command
+$ ./sdkmanager "platforms;android-21"
+$ ./sdkmanager "platform-tools"
+$ ./sdkmanager "build-tools;25.0.3"
+
+----------------------
+4) Set up the Android tool chain
+----------------------
+the ndk version android-ndk-r18b does not support ndk_dir and had issues causing error unsupported dynamic reloc R_ARM_REL32
+so use release r12b instead from
+https://dl.google.com/android/repository/android-ndk-r12b-linux-x86_64.zip
+and extract to /$HOME/Android/android-ndk-r12b
+r12
+https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
+and extract to /$HOME/Android/android-ndk-r10e
+
+https://dl.google.com/android/repository/android-ndk-r18b-linux-x86_64.zip
+and extract to /$HOME/Android/android-ndk-r18b
+
+$ cd /$HOME/Android/android-ndk-r12b/build/tools
+$ cd /$HOME/Android/android-ndk-r10e/build/tools
+$ cd /$HOME/Android/android-ndk-r18b/build/tools
+
+###$ ./make-standalone-toolchain.sh --install-dir=/$HOME/arm-linux-androideabi-4.9-vanilla/android-21 --platform=android-21 --toolchain=arm-linux-androideabi-4.9
+###$ ./make-standalone-toolchain.sh --ndk-dir=../../ --install-dir=/$HOME/arm-linux-androideabi-4.9-vanilla/android-21 --platform=android-21 --toolchain=arm-linux-androideabi-4.9
+for 18b
+./make-standalone-toolchain.sh --install-dir=/$HOME/arm-linux-androideabi-4.9-vanilla/android-21 --platform=android-21 --toolchain=arm-linux-androideabi-4.9 --force
+
+
+----------------------
+5) Create debug key to sign for the APK
+----------------------
+$ keytool -genkey -keystore ~/.android/debug.keystore -v -alias androiddebugkey -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android -keyalg RSA -keysize 2048 -validity 10000
+NOTE: will probably get error about already exist.. you can ignore the error and move to next step
+
+
+----------------------
+6) Get the source code — this gets me Kodi version 17.6 Release
+VERSION_MAJOR 17 / VERSION_MINOR 6
+----------------------
+$ cd $HOME/project_sources
+$ git clone -b Krypton git://github.com/xbmc/xbmc.git Branch_17.6-Kr
+
+----------------------
+8) Building dependencies
+----------------------
+$ cd $HOME/project_sources/Branch_17.6-Kr/tools/depends
+$ ./bootstrap
+
+###$ ./configure --with-tarballs=/$HOME/xbmc-tarballs --host=arm-linux-androideabi --with-sdk-path=/$HOME/Android/Sdk --with-ndk=/$HOME/Android/android-ndk-r12b  --with-toolchain=/$HOME/arm-linux-androideabi-4.9-vanilla/android-21 --prefix=/$HOME/project_sources/xbmc-depends
+
+###$ ./configure --with-tarballs=/$HOME/xbmc-tarballs --host=arm-linux-androideabi --with-sdk-path=/$HOME/Android/Sdk --with-ndk=/$HOME/Android/android-ndk-r10e  --with-toolchain=/$HOME/arm-linux-androideabi-4.9-vanilla/android-21 --prefix=/$HOME/project_sources/xbmc-depends
+
+$ ./configure --with-tarballs=/$HOME/xbmc-tarballs --host=arm-linux-androideabi --with-sdk-path=/$HOME/Android/Sdk --with-ndk=/$HOME/Android/android-ndk-r18b --with-toolchain=/$HOME/arm-linux-androideabi-4.9-vanilla/android-21 --prefix=/$HOME/project_sources/xbmc-depends
+
+-- this next two steps would take a while. I did not follow the advice to use make -j
+$ make
+$ make -C target/binary-addons
+
+----------------------
+9) Building Kodi.Finally!!!! The instructions in the readme.Android are not updated.
+The two lines with * are completely different than the README file.
+----------------------
+$ cd $HOME/kodi-krypton
+* $ make -C tools/depends/target/cmakebuildsys
+* $ cd /kodi-krypton/build
+$ make
+$ make apk
+
+you’ll get your apk in $HOME/kodi-krypton 

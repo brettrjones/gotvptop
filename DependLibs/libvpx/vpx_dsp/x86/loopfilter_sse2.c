@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <emmintrin.h>  // SSE2
 
@@ -1772,3 +1774,4 @@ void vpx_lpf_vertical_16_dual_sse2(unsigned char *s, int p,
   transpose8x16(t_dst, t_dst + 8 * 16, 16, s - 8, p);
   transpose8x16(t_dst + 8, t_dst + 8 + 8 * 16, 16, s - 8 + 8 * p, p);
 }
+#endif // defined(TARGET_CPU_X86)

@@ -1,8 +1,12 @@
+unix:QMAKE_CXXFLAGS += -Wno-unused-parameter
+android:QMAKE_CXXFLAGS += -Wno-unused
+
+unix:QMAKE_CFLAGS += -Wno-unused-parameter
+android:QMAKE_CFLAGS += -Wno-unused
 
 INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/
 INCLUDEPATH += $$PWD/DependLibs/
 INCLUDEPATH += $$PWD/DependLibs/libUPnP
-#INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/cores/AudioEngine
 INCLUDEPATH += $$PWD/DependLibs/ffmpeg
 INCLUDEPATH += $$PWD/DependLibs/libUPnP/Platinum/Source/Devices/MediaRenderer
 INCLUDEPATH += $$PWD/DependLibs/libUPnP/Platinum/Source/Devices/MediaConnect
@@ -13,102 +17,7 @@ INCLUDEPATH += $$PWD/DependLibs/libUPnP/Platinum/Source/Extras
 INCLUDEPATH += $$PWD/DependLibs/libUPnP/Neptune/Source/Core
 INCLUDEPATH += $$PWD/DependLibs/libpcre
 INCLUDEPATH += $$PWD/DependLibs/libfreetype/include
-#INCLUDEPATH += $$PWD/GoTvCore/xbmc/lib
-#INCLUDEPATH += $$PWD/GoTvCore/xbmc/lib/gtest/include
-#INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/cores/VideoPlayer
-#INCLUDEPATH += $$PWD/../../
-#INCLUDEPATH += $$PWD/../../../
-INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform
 
-android{
-    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/android
-    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
-    INCLUDEPATH += $$PWD/DependLibs/androidNdk/android/cpufeatures
-
-HEADERS += 	$$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidExtra.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidFeatures.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidJoyStick.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidKey.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidMouse.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidTouch.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/DllGraphicBuffer.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/EventLoop.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/GraphicBuffer.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IActivityHandler.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IInputDeviceCallbacks.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IInputDeviceEventHandler.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IInputHandler.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIMainActivity.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCAudioManagerOnAudioFocusChangeListener.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCFile.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCJsonHandler.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMainView.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMediaSession.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerDiscoveryListener.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerRegistrationListener.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerResolveListener.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCSurfaceTextureOnFrameAvailableListener.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCVideoView.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/XBMCApp.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/bionic_supplement/bionic_supplement.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/drm/MediaDrmCryptoSession.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKDirectory.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKFile.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppDirectory.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppFile.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/jni/Activity.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/jni/JNIThreading.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/jni/KeyCharacterMap.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/NetworkAndroid.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfAndroid.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfBrowserAndroid.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/PeripheralBusAndroid.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/powermanagement/AndroidPowerSyscall.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/storage/AndroidStorageProvider.h
-
-
-
-
-SOURCES += $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidFeatures.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidJoyStick.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidKey.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidMouse.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidTouch.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/EventLoop.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/GraphicBuffer.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIMainActivity.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCAudioManagerOnAudioFocusChangeListener.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCFile.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCJsonHandler.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMainView.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMediaSession.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerDiscoveryListener.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerRegistrationListener.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerResolveListener.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCSurfaceTextureOnFrameAvailableListener.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCVideoView.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/XBMCApp.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/android_main.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/bionic_supplement/getdelim.c \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/bionic_supplement/rand_r.c \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/drm/MediaDrmCryptoSession.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKDirectory.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKFile.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppDirectory.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppFile.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/jni/Activity.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/jni/JNIThreading.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/jni/KeyCharacterMap.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/NetworkAndroid.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfAndroid.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfBrowserAndroid.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/PeripheralBusAndroid.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/powermanagement/AndroidPowerSyscall.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/storage/AndroidStorageProvider.cpp
-
-}
 
 win32{
     INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/win32
@@ -119,121 +28,29 @@ win32{
     INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2o/inc32
 }
 
-unix{
+unix:!android{
     INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/linux
     INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/posix
     INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
     INCLUDEPATH += /usr/include/python2.7
+    INCLUDEPATH += $$PWD/DependLibs/libpython/include #for case where compiling for android but host is windows
+}
 
-HEADERS += 		$$PWD/GoTvCore/xbmc/xbmc/platform/linux/ConvUtils.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DBusMessage.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DBusReserve.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DBusUtil.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DllBCM.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DllOMX.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/FDEventMonitor.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/LinuxResourceCounter.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/LinuxTimezone.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OMXClock.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OMXCore.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OptionalsReg.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/PlatformConstants.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/PlatformDefs.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/PosixMountProvider.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/RBP.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/TimeUtils.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XFileUtils.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XHandle.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XHandlePublic.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XMemUtils.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XTimeUtils.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LIRC.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputHandler.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputKeyboard.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputPointer.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputTouch.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/network/NetworkLinux.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/network/ZeroconfAvahi.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/network/ZeroconfBrowserAvahi.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/peripherals/PeripheralBusUSBLibUSB.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/peripherals/PeripheralBusUSBLibUdev.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/ConsoleUPowerSyscall.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/FallbackPowerSyscall.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/LinuxPowerSyscall.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/LogindUPowerSyscall.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/UPowerSyscall.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/rpi/rpi_user_vcsm.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/sse4/DllLibSSE4.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/stat_utf8.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/stdio_utf8.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/LinuxStorageProvider.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/UDevProvider.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/UDisks2Provider.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/UDisksProvider.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/PosixDirectory.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/PosixFile.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/SMBDirectory.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/SMBFile.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/FileHandle.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/Mmap.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/PosixInterfaceForCLog.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/SharedMemory.h
-
-
-SOURCES += $$PWD/GoTvCore/xbmc/xbmc/platform/linux/ConvUtils.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DBusMessage.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DBusReserve.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DBusUtil.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/FDEventMonitor.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/LinuxResourceCounter.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/LinuxTimezone.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OMXClock.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OMXCore.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OptionalsReg.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/PosixMountProvider.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/RBP.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/TimeUtils.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XFileUtils.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XHandle.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XMemUtils.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XTimeUtils.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LIRC.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputHandler.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputKeyboard.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputPointer.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputTouch.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/network/NetworkLinux.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/network/ZeroconfAvahi.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/network/ZeroconfBrowserAvahi.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/peripherals/PeripheralBusUSBLibUSB.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/peripherals/PeripheralBusUSBLibUdev.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/ConsoleUPowerSyscall.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/LinuxPowerSyscall.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/LogindUPowerSyscall.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/UPowerSyscall.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/sse4/CopyFrame.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/LinuxStorageProvider.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/UDevProvider.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/UDisks2Provider.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/UDisksProvider.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/PosixDirectory.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/PosixFile.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/SMBDirectory.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/SMBFile.cpp \
-#    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/main.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/Mmap.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/PosixInterfaceForCLog.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/SharedMemory.cpp \
-
+android{
+    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/linux
+    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/posix
+    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
+    INCLUDEPATH += /usr/include/python2.7
+    INCLUDEPATH += $$PWD/DependLibs/libpython/include #for case where compiling for android but host is windows
 }
 
 macx{
     INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/darwin
 }
 
-HEADERS += 	$$PWD/../../../GoTvCpuArchDefines.h \
-    $$PWD/../../../GoTvCompilerConfig.h \
-    $$PWD/../../../GoTvDependLibrariesConfig.h \
+HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
+    $$PWD/GoTvCompilerConfig.h \
+    $$PWD/GoTvDependLibrariesConfig.h \
     $$PWD/GoTvCore/xbmc/xbmc/config_kodi.h \
     $$PWD/GoTvCore/xbmc/xbmc/AppParamParser.h \
     $$PWD/GoTvCore/xbmc/xbmc/Application.h \
@@ -3049,3 +2866,187 @@ win32{
 }
 
 
+android{
+    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/android
+    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
+
+HEADERS += 	$$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidExtra.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidFeatures.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidJoyStick.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidKey.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidMouse.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidTouch.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/DllGraphicBuffer.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/EventLoop.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/GraphicBuffer.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IActivityHandler.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IInputDeviceCallbacks.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IInputDeviceEventHandler.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IInputHandler.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIMainActivity.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCAudioManagerOnAudioFocusChangeListener.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCFile.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCJsonHandler.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMainView.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMediaSession.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerDiscoveryListener.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerRegistrationListener.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerResolveListener.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCSurfaceTextureOnFrameAvailableListener.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCVideoView.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/XBMCApp.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/bionic_supplement/bionic_supplement.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/drm/MediaDrmCryptoSession.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKDirectory.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKFile.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppDirectory.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppFile.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/NetworkAndroid.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfAndroid.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfBrowserAndroid.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/PeripheralBusAndroid.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/powermanagement/AndroidPowerSyscall.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/storage/AndroidStorageProvider.h
+
+
+
+SOURCES += $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidFeatures.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidJoyStick.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidKey.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidMouse.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidTouch.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/EventLoop.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/GraphicBuffer.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIMainActivity.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCAudioManagerOnAudioFocusChangeListener.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCFile.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCJsonHandler.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMainView.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMediaSession.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerDiscoveryListener.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerRegistrationListener.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerResolveListener.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCSurfaceTextureOnFrameAvailableListener.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCVideoView.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/XBMCApp.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/android_main.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/bionic_supplement/getdelim.c \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/bionic_supplement/rand_r.c \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/drm/MediaDrmCryptoSession.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKDirectory.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKFile.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppDirectory.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppFile.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/NetworkAndroid.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfAndroid.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfBrowserAndroid.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/PeripheralBusAndroid.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/powermanagement/AndroidPowerSyscall.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/storage/AndroidStorageProvider.cpp
+
+}
+
+unix{
+HEADERS += 		$$PWD/GoTvCore/xbmc/xbmc/platform/linux/ConvUtils.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DBusMessage.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DBusReserve.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DBusUtil.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DllBCM.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DllOMX.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/FDEventMonitor.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/LinuxResourceCounter.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/LinuxTimezone.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OMXClock.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OMXCore.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OptionalsReg.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/PlatformConstants.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/PlatformDefs.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/PosixMountProvider.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/RBP.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/TimeUtils.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XFileUtils.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XHandle.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XHandlePublic.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XMemUtils.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XTimeUtils.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LIRC.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputHandler.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputKeyboard.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputPointer.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputTouch.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/network/NetworkLinux.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/network/ZeroconfAvahi.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/network/ZeroconfBrowserAvahi.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/peripherals/PeripheralBusUSBLibUSB.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/peripherals/PeripheralBusUSBLibUdev.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/ConsoleUPowerSyscall.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/FallbackPowerSyscall.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/LinuxPowerSyscall.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/LogindUPowerSyscall.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/UPowerSyscall.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/rpi/rpi_user_vcsm.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/sse4/DllLibSSE4.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/stat_utf8.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/stdio_utf8.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/LinuxStorageProvider.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/UDevProvider.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/UDisks2Provider.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/UDisksProvider.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/PosixDirectory.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/PosixFile.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/SMBDirectory.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/SMBFile.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/FileHandle.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/Mmap.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/PosixInterfaceForCLog.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/SharedMemory.h
+
+
+SOURCES += $$PWD/GoTvCore/xbmc/xbmc/platform/linux/ConvUtils.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DBusMessage.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DBusReserve.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DBusUtil.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/FDEventMonitor.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/LinuxResourceCounter.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/LinuxTimezone.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OMXClock.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OMXCore.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OptionalsReg.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/PosixMountProvider.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/RBP.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/TimeUtils.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XFileUtils.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XHandle.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XMemUtils.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XTimeUtils.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LIRC.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputHandler.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputKeyboard.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputPointer.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/input/LibInputTouch.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/network/NetworkLinux.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/network/ZeroconfAvahi.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/network/ZeroconfBrowserAvahi.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/peripherals/PeripheralBusUSBLibUSB.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/peripherals/PeripheralBusUSBLibUdev.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/ConsoleUPowerSyscall.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/LinuxPowerSyscall.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/LogindUPowerSyscall.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/powermanagement/UPowerSyscall.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/sse4/CopyFrame.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/LinuxStorageProvider.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/UDevProvider.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/UDisks2Provider.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/storage/UDisksProvider.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/PosixDirectory.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/PosixFile.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/SMBDirectory.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/filesystem/SMBFile.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/main.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/Mmap.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/PosixInterfaceForCLog.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/SharedMemory.cpp \
+
+}

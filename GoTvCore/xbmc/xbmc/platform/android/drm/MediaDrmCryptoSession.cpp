@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include "MediaDrmCryptoSession.h"
 
@@ -232,3 +234,4 @@ void CMediaDrmCryptoSession::CloseSession()
     m_keySetId.clear();
   }
 }
+#endif // !defined(HAVE_QT_GUI)

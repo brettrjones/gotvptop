@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #if defined(_MSC_VER)
 #include <intrin.h>
@@ -308,3 +310,4 @@ int vp9_diamond_search_sad_avx(const MACROBLOCK *x,
   *best_mv = bmv.as_mv;
   return best_sad;
 }
+#endif // defined(TARGET_CPU_X86)

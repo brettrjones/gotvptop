@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <smmintrin.h> /* SSE4.1 */
 
@@ -124,3 +126,4 @@ void vp8_regular_quantize_b_sse4_1(BLOCK *b, BLOCKD *d) {
 
   *d->eob = eob;
 }
+#endif // defined(TARGET_CPU_X86)

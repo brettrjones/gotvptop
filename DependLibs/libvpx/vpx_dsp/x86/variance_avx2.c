@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <immintrin.h>  // AVX2
 
@@ -719,3 +721,4 @@ unsigned int vpx_sub_pixel_avg_variance32x32_avx2(
       src, src_stride, x_offset, y_offset, dst, dst_stride, sec, 32, 32, sse);
   return *sse - (uint32_t)(((int64_t)se * se) >> 10);
 }
+#endif // defined(TARGET_CPU_X86)

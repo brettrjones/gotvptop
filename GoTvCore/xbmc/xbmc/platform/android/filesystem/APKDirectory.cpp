@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include "APKDirectory.h"
 #include "APKFile.h"
@@ -99,3 +101,4 @@ bool CAPKDirectory::Exists(const GoTvUrl& url)
   CAPKFile apk;
   return apk.Exists(url);
 }
+#endif // !defined(HAVE_QT_GUI)

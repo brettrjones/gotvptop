@@ -1,20 +1,20 @@
-HEADERS += 	$$PWD/../../png.h \
-	$$PWD/../../pngconf.h \
-	$$PWD/../../pngpriv.h
+HEADERS += 	$$PWD/DependLibs/libpng/png.h \
+    $$PWD/DependLibs/libpng/pngconf.h \
+    $$PWD/DependLibs/libpng/pngpriv.h
 
-SOURCES += 	$$PWD/../../png.c \
-	$$PWD/../../pngerror.c \
-	$$PWD/../../pngget.c \
-	$$PWD/../../pngmem.c \
-	$$PWD/../../pngpread.c \
-	$$PWD/../../pngread.c \
-	$$PWD/../../pngrio.c \
-	$$PWD/../../pngrtran.c \
-	$$PWD/../../pngrutil.c \
-	$$PWD/../../pngset.c \
-	$$PWD/../../pngtrans.c \
-	$$PWD/../../pngwio.c \
-	$$PWD/../../pngwrite.c \
-	$$PWD/../../pngwtran.c \
-	$$PWD/../../pngwutil.c
+SOURCES += 	$$PWD/DependLibs/libpng/png.c \
+    $$PWD/DependLibs/libpng/pngerror.c \
+    $$PWD/DependLibs/libpng/pngget.c \
+    $$PWD/DependLibs/libpng/pngmem.c \
+    $$PWD/DependLibs/libpng/pngpread.c \
+    $$PWD/DependLibs/libpng/pngread.c \
+    $$PWD/DependLibs/libpng/pngrio.c \
+    $$PWD/DependLibs/libpng/pngrtran.c \
+    $$PWD/DependLibs/libpng/pngrutil.c \
+    $$PWD/DependLibs/libpng/pngset.c \
+    $$PWD/DependLibs/libpng/pngtrans.c \
+    $$PWD/DependLibs/libpng/pngwio.c \
+    $$PWD/DependLibs/libpng/pngwrite.c \
+    $$PWD/DependLibs/libpng/pngwtran.c \
+    $$PWD/DependLibs/libpng/pngwutil.c
 

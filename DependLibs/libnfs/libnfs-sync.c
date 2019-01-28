@@ -28,7 +28,7 @@
 #include "win32_compat.h"
 #endif
 
-#ifdef TARGET_OS_LINUX
+#if defined(TARGET_OS_LINUX) || defined(TARGET_OS_ANDROID)
 # include <poll.h>
 #endif
 
@@ -1499,7 +1499,7 @@ struct nfs_list_data {
        struct nfs_server_list *srvrs;
 };
 
-void callit_cb(struct rpc_context *rpc, int status, void *data _U_, void *private_data)
+void callit_cb(struct rpc_context *rpc, int status, void *data , void *private_data)
 {
 	struct nfs_list_data *srv_data = private_data;
 	struct sockaddr *sin;

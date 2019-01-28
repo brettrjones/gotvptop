@@ -25,7 +25,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************/
 #include <libopus/config_libopus.h>
-#ifdef TARGET_CPU_ARM
+#if defined(TARGET_CPU_ARM) && OPUS_ARM_MAY_HAVE_NEON
 
 #include <arm_neon.h>
 #include "main.h"

@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include "EventLoop.h"
 #include "XBMCApp.h"
@@ -171,4 +173,4 @@ int32_t CEventLoop::inputCallback(android_app* application, AInputEvent* event)
 
   return eventLoop.processInput(event);
 }
-
+#endif // !defined(HAVE_QT_GUI)

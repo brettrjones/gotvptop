@@ -1,39 +1,39 @@
-HEADERS += 	$$PWD/../../config_pcre.h \
-	$$PWD/../../pcre.h \
-	$$PWD/../../pcre_internal.h \
-	$$PWD/../../pcre_scanner.h \
-	$$PWD/../../pcre_stringpiece.h \
-	$$PWD/../../pcrecpp.h \
-	$$PWD/../../pcrecpparg.h \
-	$$PWD/../../pcreposix.h \
-	$$PWD/../../ucp.h \
-	$$PWD/../../ucpinternal.h
+HEADERS += 	$$PWD/DependLibs/libpcre/config_pcre.h \
+    $$PWD/DependLibs/libpcre/pcre.h \
+    $$PWD/DependLibs/libpcre/pcre_internal.h \
+    $$PWD/DependLibs/libpcre/pcre_scanner.h \
+    $$PWD/DependLibs/libpcre/pcre_stringpiece.h \
+    $$PWD/DependLibs/libpcre/pcrecpp.h \
+    $$PWD/DependLibs/libpcre/pcrecpparg.h \
+    $$PWD/DependLibs/libpcre/pcreposix.h \
+    $$PWD/DependLibs/libpcre/ucp.h \
+    $$PWD/DependLibs/libpcre/ucpinternal.h
 
-SOURCES += 	$$PWD/../../config_pcre.c \
-	$$PWD/../../dftables.c \
-	$$PWD/../../pcre_chartables.c \
-	$$PWD/../../pcre_compile.c \
-	$$PWD/../../pcre_dfa_exec.c \
-	$$PWD/../../pcre_exec.c \
-	$$PWD/../../pcre_fullinfo.c \
-	$$PWD/../../pcre_get.c \
-	$$PWD/../../pcre_globals.c \
-	$$PWD/../../pcre_info.c \
-	$$PWD/../../pcre_maketables.c \
-	$$PWD/../../pcre_newline.c \
-	$$PWD/../../pcre_ord2utf8.c \
-	$$PWD/../../pcre_refcount.c \
-	$$PWD/../../pcre_scanner.cc \
-	$$PWD/../../pcre_stringpiece.cc \
-	$$PWD/../../pcre_study.c \
-	$$PWD/../../pcre_tables.c \
-	$$PWD/../../pcre_try_flipped.c \
-	$$PWD/../../pcre_ucp_searchfuncs.c \
-	$$PWD/../../pcre_valid_utf8.c \
-	$$PWD/../../pcre_version.c \
-	$$PWD/../../pcre_xclass.c \
-	$$PWD/../../pcrecpp.cc \
-	$$PWD/../../pcregrep.c \
-	$$PWD/../../pcreposix.c \
-	$$PWD/../../ucptable.c
+SOURCES += 	$$PWD/DependLibs/libpcre/config_pcre.c \
+    $$PWD/DependLibs/libpcre/dftables.c \
+    $$PWD/DependLibs/libpcre/pcre_chartables.c \
+    $$PWD/DependLibs/libpcre/pcre_compile.c \
+    $$PWD/DependLibs/libpcre/pcre_dfa_exec.c \
+    $$PWD/DependLibs/libpcre/pcre_exec.c \
+    $$PWD/DependLibs/libpcre/pcre_fullinfo.c \
+    $$PWD/DependLibs/libpcre/pcre_get.c \
+    $$PWD/DependLibs/libpcre/pcre_globals.c \
+    $$PWD/DependLibs/libpcre/pcre_info.c \
+    $$PWD/DependLibs/libpcre/pcre_maketables.c \
+    $$PWD/DependLibs/libpcre/pcre_newline.c \
+    $$PWD/DependLibs/libpcre/pcre_ord2utf8.c \
+    $$PWD/DependLibs/libpcre/pcre_refcount.c \
+    $$PWD/DependLibs/libpcre/pcre_scanner.cc \
+    $$PWD/DependLibs/libpcre/pcre_stringpiece.cc \
+    $$PWD/DependLibs/libpcre/pcre_study.c \
+    $$PWD/DependLibs/libpcre/pcre_tables.c \
+    $$PWD/DependLibs/libpcre/pcre_try_flipped.c \
+    $$PWD/DependLibs/libpcre/pcre_ucp_searchfuncs.c \
+    $$PWD/DependLibs/libpcre/pcre_valid_utf8.c \
+    $$PWD/DependLibs/libpcre/pcre_version.c \
+    $$PWD/DependLibs/libpcre/pcre_xclass.c \
+    $$PWD/DependLibs/libpcre/pcrecpp.cc \
+    $$PWD/DependLibs/libpcre/pcregrep.c \
+    $$PWD/DependLibs/libpcre/pcreposix.c \
+    $$PWD/DependLibs/libpcre/ucptable.c
 

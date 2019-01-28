@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include "JNIXBMCSurfaceTextureOnFrameAvailableListener.h"
 #include <android/jni/jutils-details.hpp>
@@ -58,3 +60,4 @@ void CJNIXBMCSurfaceTextureOnFrameAvailableListener::_onFrameAvailable(JNIEnv* e
   if (inst)
     inst->onFrameAvailable(CJNISurfaceTexture(jhobject::fromJNI(surface)));
 }
+#endif // !defined(HAVE_QT_GUI)

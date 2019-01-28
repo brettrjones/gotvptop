@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include "./vpx_config.h"
 
@@ -21,3 +23,4 @@
 #include "vpx_dsp/x86/fwd_dct32x32_impl_avx2.h"  // NOLINT
 #undef FDCT32x32_2D_AVX2
 #undef FDCT32x32_HIGH_PRECISION
+#endif // defined(TARGET_CPU_X86)

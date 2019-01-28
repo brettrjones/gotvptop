@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <assert.h>
 #include <smmintrin.h>
@@ -374,3 +376,4 @@ void vp9_temporal_filter_apply_sse4_1(const uint8_t *a, unsigned int stride,
     accumulate_and_store_16(sum_row_c_0, sum_row_c_1, b, count, accumulator);
   }
 }
+#endif // defined(TARGET_CPU_X86)

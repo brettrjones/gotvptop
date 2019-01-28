@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include "ZeroconfBrowserAndroid.h"
 
@@ -284,3 +286,4 @@ void CZeroconfBrowserAndroidResolve::onServiceResolved(const jni::CJNINsdService
   m_retServiceInfo = serviceInfo;
   m_resolutionDone.Set();
 }
+#endif // !defined(HAVE_QT_GUI)

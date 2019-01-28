@@ -1,0 +1,28 @@
+
+=== Build GoTvPtoP for android in windows ====
+=== Build Prerequisites ====
+Follow instructions in docs_for_building/BuildForWindowsPrerequisitesInstructions.txt
+
+Android Target is Api 21 and Sdk Android 5.0
+
+
+==== Android usb debugging ====
+install the usb driver so can attach/debug android devices
+from command prompt
+1.) cd F:/android/android-sdk/tools/bin
+2.) sdkmanager.bat "extras;google;usb_driver"
+3.) from windows explorer browse to F:\android\android-sdk\extras\google\usb_driver
+4.) right click android_winusb.inf and choose install
+5.) reboot computer
+
+1.) In Qt Creator Tools > Options > Devices > Android 
+  a.) JDK location - F:\android\jdk1.8.0_131
+  b.) Android SDK Location - F:\android\android-sdk
+  c.) Android NDK Location - F:\android\android-ndk-r10e-windows-x86_64\android-ndk-r10e
+  d.) In SDK Manager install all packages for Android 5.1
+  if get error about .android\repositories.cfg could not be loaded then create a empty file for it using text editor
+  
+ ==== Android Manifest Permissions required ====
+ 
+ <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> 
+ 

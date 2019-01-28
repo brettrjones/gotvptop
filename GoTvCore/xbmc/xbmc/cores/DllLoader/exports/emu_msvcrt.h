@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "config_kodi.h"
+
 #ifdef TARGET_POSIX
 # define _onexit_t void*
 #endif

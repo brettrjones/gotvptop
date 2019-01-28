@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <assert.h>
 #include <emmintrin.h>  // SSE2
@@ -1973,3 +1975,4 @@ void vp9_fht16x16_sse2(const int16_t *input, tran_low_t *output, int stride,
     default: assert(0); break;
   }
 }
+#endif // defined(TARGET_CPU_X86)

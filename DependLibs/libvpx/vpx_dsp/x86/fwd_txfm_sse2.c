@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <emmintrin.h>  // SSE2
 
@@ -270,3 +272,4 @@ void vpx_fdct32x32_1_sse2(const int16_t *input, tran_low_t *output,
 #undef FDCT32x32_HIGH_PRECISION
 #undef DCT_HIGH_BIT_DEPTH
 #endif  // CONFIG_VP9_HIGHBITDEPTH
+#endif // defined(TARGET_CPU_X86)

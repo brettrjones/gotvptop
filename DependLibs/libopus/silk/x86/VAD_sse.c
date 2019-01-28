@@ -26,6 +26,7 @@
 */
 
 #include <libopus/config_libopus.h>
+#if defined(TARGET_CPU_X86)
 
 #include <xmmintrin.h>
 #include <emmintrin.h>
@@ -273,3 +274,4 @@ opus_int silk_VAD_GetSA_Q8_sse4_1(                  /* O    Return value, 0 if s
     RESTORE_STACK;
     return( ret );
 }
+#endif // defined(TARGET_CPU_X86)

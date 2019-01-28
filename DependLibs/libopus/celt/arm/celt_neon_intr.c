@@ -31,7 +31,7 @@
 */
 
 #include <libopus/config_libopus.h>
-#ifdef TARGET_CPU_ARM
+#if defined(__ARM_NEON) || defined(__ARM_NEON__)
 #include <arm_neon.h>
 #include "../pitch.h"
 

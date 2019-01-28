@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <assert.h>
 #include <tmmintrin.h>
@@ -290,3 +292,4 @@ void vpx_quantize_b_32x32_ssse3(
 
   *eob_ptr = accumulate_eob(eob);
 }
+#endif // defined(TARGET_CPU_X86)

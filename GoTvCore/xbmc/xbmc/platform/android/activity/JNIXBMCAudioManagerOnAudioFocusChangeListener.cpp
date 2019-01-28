@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include "JNIXBMCAudioManagerOnAudioFocusChangeListener.h"
 #include <android/jni/jutils-details.hpp>
@@ -65,3 +67,4 @@ void CJNIXBMCAudioManagerOnAudioFocusChangeListener::onAudioFocusChange(int focu
   if(CXBMCApp::get())
     CXBMCApp::get()->onAudioFocusChange(focusChange);
 }
+#endif // !defined(HAVE_QT_GUI)

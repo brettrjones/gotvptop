@@ -14,6 +14,8 @@
  * Contributor(s):
  *   James Willcox <jwillcox@mozilla.com>
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include "DllGraphicBuffer.h"
 #include "GraphicBuffer.h"
@@ -121,3 +123,4 @@ uint32_t CGraphicBuffer::GetAndroidFormat(uint32_t format)
   }
   return 0;
 }
+#endif // !defined(HAVE_QT_GUI)

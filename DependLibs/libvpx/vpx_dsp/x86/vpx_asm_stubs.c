@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include "./vpx_config.h"
 #include "./vpx_dsp_rtcd.h"
@@ -160,3 +162,4 @@ HIGH_FUN_CONV_2D(, sse2);
 HIGH_FUN_CONV_2D(avg_, sse2);
 #endif  // CONFIG_VP9_HIGHBITDEPTH && ARCH_X86_64
 #endif  // HAVE_SSE2
+#endif // defined(TARGET_CPU_X86)

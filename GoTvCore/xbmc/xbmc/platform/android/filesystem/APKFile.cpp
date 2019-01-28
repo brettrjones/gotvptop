@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 // Android apk file i/o. Depends on libzip
 // Basically the same format as zip.
@@ -274,3 +276,4 @@ int  CAPKFile::GetChunkSize()
 {
   return 1;
 }
+#endif // !defined(HAVE_QT_GUI)

@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include "JNIXBMCNsdManagerResolveListener.h"
 
@@ -67,3 +69,4 @@ void CJNIXBMCNsdManagerResolveListener::_onServiceResolved(JNIEnv* env, jobject 
   if (inst)
     inst->onServiceResolved(CJNINsdServiceInfo(jhobject::fromJNI(serviceInfo)));
 }
+#endif // !defined(HAVE_QT_GUI)

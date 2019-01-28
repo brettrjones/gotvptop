@@ -1,0 +1,29 @@
+=== GoTvPtoP Build Prerequisites ====
+External Prerequisites to install GoTvP2P or KodiP2P
+
+=== For reference here is my install paths. ====
+Python - C:/Python27
+YASM - default install
+Visual Studio 2015 Community Edition - default install location
+Qt 5.9.6 - F:/Qt/Qt5.9.6
+Java jre - F:/android/jre1.8.0_131
+Java jdk - F:/android/jdk1.8.0_131
+Android NDK - F:\android\android-ndk-r19-windows-x86_64\android-ndk-r19
+Android SDK - F:\android\android-sdk
+Android Studio F:/android/AndroidStudio
+
+
+=== GoTvPtoP Prerequisites ====
+1.) Python 2.7.13 or Python 2.7.14
+	 NOTE: Unless you want to change Paths in visual studio then python must be installed to default location C:\Python27
+2.) YASM 
+3.) visual studio 2015 ( Community edition is fine )
+4.) Qt 5.9 ( Tested with Qt 5.9.6 but other versions may work )
+5.) Java Oracle JDK/JRE 1.8.0_131 
+6.) MingWin is NOT required.. even for ffmpeg build ( have removed all dependecy on migwin and made substitute functions )
+
+
+
+
+
+

@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include <algorithm>
 #include <utility>
@@ -367,3 +369,4 @@ bool CAndroidJoystickState::GetAxesIndex(const std::vector<int>& axisIds, const 
   axesIndex = std::distance(axes.begin(), axesIt);
   return true;
 }
+#endif // !defined(HAVE_QT_GUI)

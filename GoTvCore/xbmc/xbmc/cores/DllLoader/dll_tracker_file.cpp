@@ -6,12 +6,16 @@
  *  See LICENSES/README.md for more information.
  */
 
+#include "config_kodi.h"
+#if !defined(TARGET_OS_ANDROID)
+
 #include "dll_tracker_file.h"
 #include "dll_tracker.h"
 #include "DllLoader.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 #ifdef TARGET_POSIX
 #define dll_open open
@@ -73,7 +77,7 @@ extern "C" void tracker_file_free_all(DllTrackInfo* pInfo)
 
       if (file->type == FILE_XBMC_OPEN) dll_close(file->handle);
       else if (file->type == FILE_XBMC_FOPEN) dll_fclose((FILE*)file->handle);
-      else if (file->type == FILE_OPEN) close_os(file->handle);
+      else if (file->type == FILE_OPEN) close(file->handle);
       else if (file->type == FILE_FOPEN) fclose((FILE*)file->handle);
 
       delete file;
@@ -130,3 +134,4 @@ extern "C"
   }
 
 }
+#endif // !defined(TARGET_OS_ANDROID)

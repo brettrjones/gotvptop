@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include "vpx_config.h"
 #include "vp8_rtcd.h"
@@ -21,3 +23,4 @@ void vp8_dequantize_b_mmx(BLOCKD *d, short *DQC) {
 
   vp8_dequantize_b_impl_mmx(sq, dq, DQC);
 }
+#endif // defined(TARGET_CPU_X86)

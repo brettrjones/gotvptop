@@ -179,7 +179,11 @@ public:
 };
 
 #if defined(TARGET_ANDROID)
-#include "platform/android/network/NetworkAndroid.h"
+# if !defined(HAVE_QT_GUI)
+#  include "platform/android/network/NetworkAndroid.h"
+# else
+#  include "platform/linux/network/NetworkLinux.h"
+# endif// !defined(HAVE_QT_GUI)
 #elif defined(HAS_LINUX_NETWORK)
 #include "platform/linux/network/NetworkLinux.h"
 #elif defined(HAS_WIN32_NETWORK)

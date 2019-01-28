@@ -30,7 +30,7 @@
   #include "utils/CharsetConverter.h"
   #include "Windows.h"
 #endif
-#if defined(TARGET_ANDROID)
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
   #include "platform/android/activity/XBMCApp.h"
 #endif
 
@@ -455,7 +455,7 @@ bool CExternalPlayer::ExecuteAppLinux(const char* strSwitches)
 }
 #endif
 
-#if defined(TARGET_ANDROID)
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
 bool CExternalPlayer::ExecuteAppAndroid(const char* strSwitches,const char* strPath)
 {
   CLog::Log(LOGNOTICE, "%s: %s", __FUNCTION__, strSwitches);

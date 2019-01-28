@@ -173,7 +173,7 @@
 #include "platform/posix/filesystem/PosixDirectory.h"
 #endif
 
-#if defined(TARGET_ANDROID)
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
 #include <android/jni/Build.h>
 #include "platform/android/activity/XBMCApp.h"
 #include "platform/android/activity/AndroidFeatures.h"
@@ -493,7 +493,7 @@ bool CApplication::Create( const CAppParamParser &params )
     CLog::Log( LOGNOTICE, "Running with %s rights", ( CWIN32Util::IsCurrentUserLocalAdministrator() == TRUE ) ? "administrator" : "restricted" );
     CLog::Log( LOGNOTICE, "Aero is %s", ( g_sysinfo.IsAeroDisabled() == true ) ? "disabled" : "enabled" );
 #endif
-#if defined(TARGET_ANDROID)
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
     CLog::Log( LOGNOTICE,
                "Product: %s, Device: %s, Board: %s - Manufacturer: %s, Brand: %s, Model: %s, Hardware: %s",
                CJNIBuild::PRODUCT.c_str(), CJNIBuild::DEVICE.c_str(), CJNIBuild::BOARD.c_str(),
@@ -1983,7 +1983,7 @@ bool CApplication::OnAction( const CAction &action )
                 volumesteps = 90;
 
             // Android has steps based on the max available volume level
-#if defined(TARGET_ANDROID)
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
             float step = ( VOLUME_MAXIMUM - VOLUME_MINIMUM ) / CXBMCApp::GetMaxSystemVolume();
 #else
             float step = ( VOLUME_MAXIMUM - VOLUME_MINIMUM ) / volumesteps;
@@ -2107,7 +2107,7 @@ void CApplication::OnApplicationMessage( ThreadMessage* pMsg )
 
     case TMSG_START_ANDROID_ACTIVITY:
     {
-#if defined(TARGET_ANDROID)
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
         if( pMsg->params.size() )
         {
             CXBMCApp::StartActivity( pMsg->params[ 0 ],
@@ -4132,7 +4132,7 @@ void CApplication::ProcessSlow()
     if( !m_appPlayer.IsPlayingVideo() )
         CSectionLoader::UnloadDelayed();
 
-#ifdef TARGET_ANDROID
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
     // Pass the slow loop to droid
     CXBMCApp::get()->ProcessSlow();
 #endif

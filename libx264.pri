@@ -1,74 +1,49 @@
-INCLUDEPATH += $$PWD/../../
+INCLUDEPATH += $$PWD/DependLibs/libx264/
 
-HEADERS += 	$$PWD/../../../../GoTvCompilerConfig.h \
-	$$PWD/../../../../GoTvCpuArchDefines.h \
-	$$PWD/../../../../GoTvDependLibrariesConfig.h \
-	$$PWD/../../../../GoTvTargetOsConfig.h \
-	$$PWD/../../../../arpa/inet.h \
-	$$PWD/../../../../asm/types.h \
-	$$PWD/../../../../byteswap.h \
-	$$PWD/../../../../dirent.h \
-	$$PWD/../../../../dlfcn.h \
-	$$PWD/../../../../langinfo.h \
-	$$PWD/../../../../linux/ioctl.h \
-	$$PWD/../../../../linux/param.h \
-	$$PWD/../../../../netdb.h \
-	$$PWD/../../../../netinet/in.h \
-	$$PWD/../../../../netinet/tcp.h \
-	$$PWD/../../../../strings.h \
-	$$PWD/../../../../sys/ioctl.h \
-	$$PWD/../../../../sys/mman.h \
-	$$PWD/../../../../sys/param.h \
-	$$PWD/../../../../sys/select.h \
-	$$PWD/../../../../sys/signal.h \
-	$$PWD/../../../../sys/socket.h \
-	$$PWD/../../../../sys/syslog.h \
-	$$PWD/../../../../sys/time.h \
-	$$PWD/../../../../sys/times.h \
-	$$PWD/../../../../sys/un.h \
-	$$PWD/../../../../sys/utsname.h \
-	$$PWD/../../../../syslog.h \
-	$$PWD/../../../../unistd.h \
-	$$PWD/../../common/bitstream.h \
-	$$PWD/../../common/cabac.h \
-	$$PWD/../../common/common.h \
-	$$PWD/../../common/cpu.h \
-	$$PWD/../../common/dct.h \
-	$$PWD/../../common/frame.h \
-	$$PWD/../../common/macroblock.h \
-	$$PWD/../../common/mc.h \
-	$$PWD/../../common/opencl.h \
-	$$PWD/../../common/osdep.h \
-	$$PWD/../../common/pixel.h \
-	$$PWD/../../common/predict.h \
-	$$PWD/../../common/quant.h \
-	$$PWD/../../common/rectangle.h \
-	$$PWD/../../common/set.h \
-	$$PWD/../../common/threadpool.h \
-	$$PWD/../../common/win32thread.h \
-	$$PWD/../../config_libx264.h \
-	$$PWD/../../x264.h \
-	$$PWD/../../x264cli.h
+HEADERS += 	$$PWD/GoTvCompilerConfig.h \
+    $$PWD/GoTvCpuArchDefines.h \
+    $$PWD/GoTvDependLibrariesConfig.h \
+    $$PWD/GoTvTargetOsConfig.h \
+    $$PWD/DependLibs/libx264/common/bitstream.h \
+    $$PWD/DependLibs/libx264/common/cabac.h \
+    $$PWD/DependLibs/libx264/common/common.h \
+    $$PWD/DependLibs/libx264/common/cpu.h \
+    $$PWD/DependLibs/libx264/common/dct.h \
+    $$PWD/DependLibs/libx264/common/frame.h \
+    $$PWD/DependLibs/libx264/common/macroblock.h \
+    $$PWD/DependLibs/libx264/common/mc.h \
+    $$PWD/DependLibs/libx264/common/opencl.h \
+    $$PWD/DependLibs/libx264/common/osdep.h \
+    $$PWD/DependLibs/libx264/common/pixel.h \
+    $$PWD/DependLibs/libx264/common/predict.h \
+    $$PWD/DependLibs/libx264/common/quant.h \
+    $$PWD/DependLibs/libx264/common/rectangle.h \
+    $$PWD/DependLibs/libx264/common/set.h \
+    $$PWD/DependLibs/libx264/common/threadpool.h \
+    $$PWD/DependLibs/libx264/common/win32thread.h \
+    $$PWD/DependLibs/libx264/config_libx264.h \
+    $$PWD/DependLibs/libx264/x264.h \
+    $$PWD/DependLibs/libx264/x264cli.h
 
-SOURCES += 	$$PWD/../../common/bitstream.c \
-	$$PWD/../../common/cabac.c \
-	$$PWD/../../common/common.c \
-	$$PWD/../../common/cpu.c \
-	$$PWD/../../common/dct.c \
-	$$PWD/../../common/deblock.c \
-	$$PWD/../../common/frame.c \
-	$$PWD/../../common/macroblock.c \
-	$$PWD/../../common/mc.c \
-	$$PWD/../../common/mvpred.c \
-	$$PWD/../../common/opencl.c \
-	$$PWD/../../common/osdep.c \
-	$$PWD/../../common/pixel.c \
-	$$PWD/../../common/predict.c \
-	$$PWD/../../common/quant.c \
-	$$PWD/../../common/rectangle.c \
-	$$PWD/../../common/set.c \
-	$$PWD/../../common/threadpool.c \
-	$$PWD/../../common/vlc.c \
-	$$PWD/../../common/win32thread.c \
-	$$PWD/../../x264.c
+SOURCES += 	$$PWD/DependLibs/libx264/common/bitstream.c \
+    $$PWD/DependLibs/libx264/common/cabac.c \
+    $$PWD/DependLibs/libx264/common/common.c \
+    $$PWD/DependLibs/libx264/common/cpu.c \
+    $$PWD/DependLibs/libx264/common/dct.c \
+    $$PWD/DependLibs/libx264/common/deblock.c \
+    $$PWD/DependLibs/libx264/common/frame.c \
+    $$PWD/DependLibs/libx264/common/macroblock.c \
+    $$PWD/DependLibs/libx264/common/mc.c \
+    $$PWD/DependLibs/libx264/common/mvpred.c \
+    $$PWD/DependLibs/libx264/common/opencl.c \
+    $$PWD/DependLibs/libx264/common/osdep.c \
+    $$PWD/DependLibs/libx264/common/pixel.c \
+    $$PWD/DependLibs/libx264/common/predict.c \
+    $$PWD/DependLibs/libx264/common/quant.c \
+    $$PWD/DependLibs/libx264/common/rectangle.c \
+    $$PWD/DependLibs/libx264/common/set.c \
+    $$PWD/DependLibs/libx264/common/threadpool.c \
+    $$PWD/DependLibs/libx264/common/vlc.c \
+    $$PWD/DependLibs/libx264/common/win32thread.c \
+    $$PWD/DependLibs/libx264/x264.c
 

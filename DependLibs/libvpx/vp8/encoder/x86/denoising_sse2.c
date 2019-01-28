@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include "vp8/encoder/denoising.h"
 #include "vp8/common/reconinter.h"
@@ -370,3 +372,4 @@ int vp8_denoiser_filter_uv_sse2(unsigned char *mc_running_avg,
   vp8_copy_mem8x8(running_avg_start, avg_stride, sig_start, sig_stride);
   return FILTER_BLOCK;
 }
+#endif // defined(TARGET_CPU_X86)

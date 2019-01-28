@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include "XBMCApp.h"
 
@@ -1400,3 +1402,4 @@ void CXBMCApp::surfaceDestroyed(CJNISurfaceHolder holder)
     m_window = NULL;
   }
 }
+#endif // !defined(HAVE_QT_GUI)

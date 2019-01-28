@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <emmintrin.h>
 
@@ -422,3 +424,4 @@ int vpx_vector_var_sse2(int16_t const *ref, int16_t const *src, const int bwl) {
 
   return _mm_cvtsi128_si32(sse) - ((mean * mean) >> (bwl + 2));
 }
+#endif // defined(TARGET_CPU_X86)

@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include "./vp9_rtcd.h"
 #include "vpx_dsp/x86/inv_txfm_sse2.h"
@@ -224,3 +226,4 @@ void vp9_iht16x16_256_add_sse2(const tran_low_t *input, uint8_t *dest,
   dest += 8;
   write_buffer_8x16(dest, in1, stride);
 }
+#endif // defined(TARGET_CPU_X86)

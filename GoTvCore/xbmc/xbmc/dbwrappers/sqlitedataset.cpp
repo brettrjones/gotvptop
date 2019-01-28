@@ -21,6 +21,10 @@
 #include "platform/linux/XTimeUtils.h"
 #endif
 
+#if defined(TARGET_OS_ANDROID)
+# include <unistd.h> // for unlink
+#endif // defined(TARGET_OS_ANDROID)
+
 namespace dbiplus {
 //************* Callback function ***************************
 

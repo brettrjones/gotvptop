@@ -5,7 +5,9 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
- 
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
+
 #if defined (TARGET_ANDROID)
 
 #include "AndroidPowerSyscall.h"
@@ -38,3 +40,4 @@ bool CAndroidPowerSyscall::PumpPowerEvents(IPowerEventsCallback *callback)
 }
 
 #endif
+#endif // !defined(HAVE_QT_GUI)

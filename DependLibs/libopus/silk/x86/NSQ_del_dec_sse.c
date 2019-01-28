@@ -25,7 +25,8 @@
    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-//#include <libopus/config_libopus.h>
+#include <libopus/config_libopus.h>
+#if defined(TARGET_CPU_X86)
 
 #include <xmmintrin.h>
 #include <emmintrin.h>
@@ -853,3 +854,4 @@ static OPUS_INLINE void silk_nsq_del_dec_scale_states_sse4_1(
         }
     }
 }
+#endif // defined(TARGET_CPU_X86)

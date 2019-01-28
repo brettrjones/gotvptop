@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <assert.h>
 #include <emmintrin.h>
@@ -127,3 +129,4 @@ uint64_t vpx_sum_squares_2d_i16_sse2(const int16_t *src, int stride, int size) {
     return vpx_sum_squares_2d_i16_nxn_sse2(src, stride, size);
   }
 }
+#endif // defined(TARGET_CPU_X86)

@@ -30,7 +30,7 @@
 #include "IInputHandler.h"
 #include "JNIMainActivity.h"
 #include "JNIXBMCAudioManagerOnAudioFocusChangeListener.h"
-#include "JNIXBMCDisplayManagerDisplayListener.h"
+//#include "JNIXBMCDisplayManagerDisplayListener.h"
 #include "JNIXBMCMainView.h"
 #include "JNIXBMCMediaSession.h"
 #include "platform/xbmc.h"

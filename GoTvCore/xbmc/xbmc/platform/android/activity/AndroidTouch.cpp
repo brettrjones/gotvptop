@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include "AndroidTouch.h"
 #include "platform/android/activity/XBMCApp.h"
@@ -85,3 +87,4 @@ void CAndroidTouch::setDPI(uint32_t dpi)
     CGenericTouchInputHandler::GetInstance().SetScreenDPI(m_dpi);
   }
 }
+#endif // !defined(HAVE_QT_GUI)

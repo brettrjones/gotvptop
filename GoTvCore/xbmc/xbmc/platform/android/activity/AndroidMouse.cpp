@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include "AndroidMouse.h"
 #include "AndroidExtra.h"
@@ -138,3 +140,4 @@ void CAndroidMouse::MouseWheel(float x, float y, float value)
 
   dynamic_cast<CWinSystemAndroid*>(CServiceBroker::GetWinSystem())->MessagePush(&newEvent);
 }
+#endif // !defined(HAVE_QT_GUI)

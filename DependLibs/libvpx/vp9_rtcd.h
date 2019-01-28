@@ -98,6 +98,7 @@ RTCD_EXTERN void (*vp9_temporal_filter_apply)(const uint8_t *frame1, unsigned in
 void vp9_rtcd(void);
 
 #ifdef RTCD_C
+# if defined(TARGET_CPU_X86)
 #include "vpx_ports/x86.h"
 static void setup_rtcd_internal(void)
 {
@@ -122,6 +123,11 @@ static void setup_rtcd_internal(void)
     vp9_temporal_filter_apply = vp9_temporal_filter_apply_c;
     if (flags & HAS_SSE4_1) vp9_temporal_filter_apply = vp9_temporal_filter_apply_sse4_1;
 }
+# elif defined(TARGET_CPU_ARM)
+static void setup_rtcd_internal(void)
+{
+}
+# endif // define(TARGET_CPU_X86)
 #endif
 
 #ifdef __cplusplus

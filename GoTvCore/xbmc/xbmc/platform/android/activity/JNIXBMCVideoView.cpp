@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include "JNIXBMCVideoView.h"
 
@@ -164,4 +166,4 @@ bool CJNIXBMCVideoView::isCreated() const
 {
   return get_field<jboolean>(m_object, "mIsCreated");
 }
-
+#endif // !defined(HAVE_QT_GUI)

@@ -57,14 +57,19 @@ void vpx_yv12_copy_y_c(const struct yv12_buffer_config *src_ybc, struct yv12_buf
 void vpx_scale_rtcd(void);
 
 #ifdef RTCD_C
+# if defined(TARGET_CPU_X86)
 #include "vpx_ports/x86.h"
 static void setup_rtcd_internal(void)
 {
     int flags = x86_simd_caps();
 
     (void)flags;
-
 }
+# else
+static void setup_rtcd_internal(void)
+{
+}
+# endif // defined(TARGET_CPU_X86)
 #endif
 
 #ifdef __cplusplus

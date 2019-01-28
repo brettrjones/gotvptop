@@ -26,6 +26,7 @@
 */
 
 #include <libopus/config_libopus.h>
+#if defined(TARGET_CPU_X86)
 
 #include <xmmintrin.h>
 #include <emmintrin.h>
@@ -138,3 +139,4 @@ void silk_VQ_WMat_EC_sse4_1(
         cb_row_Q7 += LTP_ORDER;
     }
 }
+#endif // defined(TARGET_CPU_X86)

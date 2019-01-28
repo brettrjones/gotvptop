@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <tmmintrin.h>  // SSSE3
 
@@ -583,3 +585,4 @@ void vpx_scaled_2d_ssse3(const uint8_t *src, ptrdiff_t src_stride, uint8_t *dst,
 //                              int w, int h);
 FUN_CONV_2D(, ssse3);
 FUN_CONV_2D(avg_, ssse3);
+#endif // defined(TARGET_CPU_X86)

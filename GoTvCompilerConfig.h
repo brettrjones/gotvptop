@@ -956,17 +956,26 @@ typedef struct _SECURITY_ATTRIBUTES {
 #define chmod_os			chmod
 #define close_os			close
 
-#define open_os				open
-#define read_os				read
-#define write_os			write
+#if defined(TARGET_OS_ANDROID)
+# define open_os			fopen
+# define read_os			fread
+# define write_os			fwrite
+# define tell_os			ftell
+# define lseek_os			fseek
+#else
+# define open_os			open
+# define read_os			read
+# define write_os			write
+# define tell_os			tell
+# define lseek_os			lseek
+#endif
+
 #define mkdir_os			mkdir
 #define rmdir_os			rmdir
 
 #define sleep_os			sleep
 #define msleep_os			msleep
 #define usleep_os			usleep
-#define tell_os			    tell
-#define lseek_os			lseek
 
 // Memory
 typedef struct _MEMORYSTATUSEX
@@ -1191,6 +1200,10 @@ typedef int64_t              time64_t;
 # define HAVE_FEATURES_H		1
 /* Define to 1 if you have the `fork' function. */
 # define HAVE_FORK				1
+
+# define HAVE_SYS_IOCTL_H       1
+# define HAVE_POLL_H			1
+# define HAVE_NET_IF_H          1
 #endif // TARGET_OS_WINDOWS
 
 /* Define to 1 if you have the `getcwd' function. */

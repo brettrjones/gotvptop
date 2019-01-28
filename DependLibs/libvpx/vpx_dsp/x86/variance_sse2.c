@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <emmintrin.h>  // SSE2
 
@@ -447,3 +449,4 @@ FNS(ssse3, ssse3);
 
 #undef FNS
 #undef FN
+#endif // defined(TARGET_CPU_X86)

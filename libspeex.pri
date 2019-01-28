@@ -1,4 +1,4 @@
-INCLUDEPATH += $$PWD/DependLibs/libspeex/
+INCLUDEPATH += $$PWD/DependLibs/libspeex
 
 HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCpuArchDefines.h \

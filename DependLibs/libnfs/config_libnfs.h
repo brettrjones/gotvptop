@@ -1,21 +1,13 @@
 #pragma once
 #include <GoTvDependLibrariesConfig.h>
 
-#ifdef TARGET_OS_LINUX
-/* Define to 1 if you have the <arpa/inet.h> header file. */
-#define HAVE_ARPA_INET_H
+#if defined(TARGET_OS_LINUX) || defined(TARGET_OS_ANDROID)
 
 /* Whether we have clock_gettime */
 #define HAVE_CLOCK_GETTIME
 
-/* Define to 1 if you have the <dlfcn.h> header file. */
-#define HAVE_DLFCN_H
-
 /* Define to 1 if you have the <fuse.h> header file. */
 /* #undef HAVE_FUSE_H */
-
-/* Define to 1 if you have the <inttypes.h> header file. */
-#define HAVE_INTTYPES_H
 
 /* Define to 1 if you have the `nsl' library (-lnsl). */
 /* #undef HAVE_LIBNSL */
@@ -23,23 +15,11 @@
 /* Define to 1 if you have the `socket' library (-lsocket). */
 /* #undef HAVE_LIBSOCKET */
 
-/* Define to 1 if you have the <memory.h> header file. */
-#define HAVE_MEMORY_H
-
-/* Define to 1 if you have the <netdb.h> header file. */
-#define HAVE_NETDB_H
-
 /* Define to 1 if you have the <netinet/in.h> header file. */
 #define HAVE_NETINET_IN_H
 
 /* Define to 1 if you have the <netinet/tcp.h> header file. */
 #define HAVE_NETINET_TCP_H
-
-/* Define to 1 if you have the <net/if.h> header file. */
-#define HAVE_NET_IF_H
-
-/* Define to 1 if you have the <poll.h> header file. */
-#define HAVE_POLL_H
 
 /* Whether sockaddr struct has sa_len */
 /* #undef HAVE_SOCKADDR_LEN */

@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 
 #include "NetworkAndroid.h"
@@ -397,3 +399,4 @@ void CNetworkAndroid::RetrieveInterfaces()
       CLog::Log(LOGERROR, "CNetworkAndroid::RetrieveInterfaces Cannot get link properties for network: %s", n.toString().c_str());
   }
 }
+#endif // !defined(HAVE_QT_GUI)

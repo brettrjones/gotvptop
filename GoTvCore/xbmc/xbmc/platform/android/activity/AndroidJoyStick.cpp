@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include <android/input.h>
 
@@ -23,3 +25,4 @@ bool CAndroidJoyStick::onJoyStickEvent(AInputEvent* event)
                            AInputEvent_getType(event), AKeyEvent_getKeyCode(event), source);
   return false;
 }
+#endif // !defined(HAVE_QT_GUI)

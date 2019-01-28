@@ -1,32 +1,35 @@
-HEADERS += 	$$PWD/../../rgb2rgb.h \
-	$$PWD/../../swscale.h \
-	$$PWD/../../swscale_internal.h \
-	$$PWD/../../version.h
 
-SOURCES += 	$$PWD/../../alphablend.c \
-	$$PWD/../../bayer_template.c \
-	$$PWD/../../gamma.c \
-	$$PWD/../../hscale.c \
-	$$PWD/../../hscale_fast_bilinear.c \
-	$$PWD/../../input.c \
-	$$PWD/../../log2_tab.c \
-	$$PWD/../../options.c \
-	$$PWD/../../output.c \
-	$$PWD/../../rgb2rgb.c \
-	$$PWD/../../rgb2rgb_template.c \
-	$$PWD/../../slice.c \
-	$$PWD/../../swscale.c \
-	$$PWD/../../swscale_unscaled.c \
-	$$PWD/../../utils.c \
-	$$PWD/../../vscale.c \
-	$$PWD/../../yuv2rgb.c
+INCLUDEPATH += $$PWD/DependLibs/ffmpeg
+
+HEADERS += 	$$PWD/DependLibs/ffmpeg/libswscale/rgb2rgb.h \
+    $$PWD/DependLibs/ffmpeg/libswscale/swscale.h \
+    $$PWD/DependLibs/ffmpeg/libswscale/swscale_internal.h \
+    $$PWD/DependLibs/ffmpeg/libswscale/version.h
+
+SOURCES += 	$$PWD/DependLibs/ffmpeg/libswscale/alphablend.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/bayer_template.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/gamma.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/hscale.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/hscale_fast_bilinear.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/input.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/log2_tab.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/options.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/output.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/rgb2rgb.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/rgb2rgb_template.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/slice.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/swscale.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/swscale_unscaled.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/utils.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/vscale.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/yuv2rgb.c
 
 DISTFILES += \
-    $$PWD/../../x86/input.asm \
-    $$PWD/../../x86/input_x86.asm \
-    $$PWD/../../x86/output.asm \
-    $$PWD/../../x86/output_x86.asm \
-    $$PWD/../../x86/scale.asm \
-    $$PWD/../../x86/scale_x86.asm \
-    $$PWD/../../x86/Makefile
+    $$PWD/DependLibs/ffmpeg/libswscale/x86/input.asm \
+    $$PWD/DependLibs/ffmpeg/libswscale/x86/input_x86.asm \
+    $$PWD/DependLibs/ffmpeg/libswscale/x86/output.asm \
+    $$PWD/DependLibs/ffmpeg/libswscale/x86/output_x86.asm \
+    $$PWD/DependLibs/ffmpeg/libswscale/x86/scale.asm \
+    $$PWD/DependLibs/ffmpeg/libswscale/x86/scale_x86.asm \
+    $$PWD/DependLibs/ffmpeg/libswscale/x86/Makefile
 

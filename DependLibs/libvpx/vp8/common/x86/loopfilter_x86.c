@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include "vpx_config.h"
 #include "vp8/common/loopfilter.h"
@@ -127,3 +129,4 @@ void vp8_loop_filter_bvs_sse2(unsigned char *y_ptr, int y_stride,
 }
 
 #endif
+#endif // defined(TARGET_CPU_X86)

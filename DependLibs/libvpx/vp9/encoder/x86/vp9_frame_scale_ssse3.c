@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <tmmintrin.h>  // SSSE3
 
@@ -905,3 +907,4 @@ void vp9_scale_and_extend_frame_ssse3(const YV12_BUFFER_CONFIG *src,
     vp9_scale_and_extend_frame_c(src, dst, filter_type, phase_scaler);
   }
 }
+#endif // defined(TARGET_CPU_X86)

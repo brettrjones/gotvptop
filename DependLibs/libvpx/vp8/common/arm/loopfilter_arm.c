@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_ARM)
 
 #include "vpx_config.h"
 #include "vp8_rtcd.h"
@@ -99,3 +101,5 @@ void vp8_loop_filter_bv_neon(unsigned char *y_ptr, unsigned char *u_ptr,
     vp8_loop_filter_vertical_edge_uv_neon(u_ptr + 4, uv_stride, blim, lim,
                                           hev_thr, v_ptr + 4);
 }
+
+#endif // defined(TARGET_CPU_ARM)

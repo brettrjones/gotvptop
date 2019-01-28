@@ -10,9 +10,15 @@
 
 #include "config_kodi.h"
 #if (defined(TARGET_OS_WINDOWS) && ! HAS_DX) || defined(HAVE_QT_GUI)
-//# include <libglew/include/GL/glew.h>
-# include <GL/gl.h>
-# include <GL/glu.h>
+# if defined(TARGET_OS_APPLE)
+#  include <OpenGLES/ES2/gl.h>
+# elif defined(TARGET_OS_ANDROID)
+#  include <GLES2/gl2.h>
+# else
+//#  include <libglew/include/GL/glew.h>
+#  include <GL/gl.h>
+#  include <GL/glu.h>
+# endif // defined(TARGET_OS_ANDROID)
 # ifdef HAVE_QT_GUI
 
 // assume gles only 

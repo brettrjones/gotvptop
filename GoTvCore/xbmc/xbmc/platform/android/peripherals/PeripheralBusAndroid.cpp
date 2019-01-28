@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include <android/input.h>
 #include <android/keycodes.h>
@@ -452,3 +454,4 @@ std::vector<std::pair<int, const char*>> CPeripheralBusAndroid::GetInputSources(
 
   return sources;
 }
+#endif // !defined(HAVE_QT_GUI)

@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <immintrin.h> /* AVX2 */
 
@@ -911,3 +913,4 @@ void vpx_lpf_horizontal_16_dual_avx2(unsigned char *s, int p,
     _mm_storeu_si128((__m128i *)(s + 6 * p), q6);
   }
 }
+#endif // defined(TARGET_CPU_X86)

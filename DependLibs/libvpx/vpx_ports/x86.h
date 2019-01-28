@@ -42,21 +42,37 @@ typedef enum {
   VPX_CPU_LAST
 } vpx_cpu_t;
 
-#if defined(__GNUC__) && __GNUC__ || defined(__ANDROID__)
-#if ARCH_X86_64
-#define cpuid(func, func2, ax, bx, cx, dx)                      \
-  __asm__ __volatile__("cpuid           \n\t"                   \
+#if defined(__clang__) && defined(__ANDROID__)
+# if ARCH_X86_64
+#  define cpuid(func, func2, ax, bx, cx, dx)                      \
+    __asm__ __volatile__("cpuid           \n\t"                   \
                        : "=a"(ax), "=b"(bx), "=c"(cx), "=d"(dx) \
                        : "a"(func), "c"(func2));
-#else
-#define cpuid(func, func2, ax, bx, cx, dx)     \
-  __asm__ __volatile__(                        \
+# else
+# define cpuid(func, func2, ax, bx, cx, dx)     \
+   __asm__ __volatile__(                        \
       "mov %%ebx, %%edi   \n\t"                \
       "cpuid              \n\t"                \
       "xchg %%edi, %%ebx  \n\t"                \
       : "=a"(ax), "=D"(bx), "=c"(cx), "=d"(dx) \
       : "a"(func), "c"(func2));
-#endif
+# endif
+
+#elif defined(__GNUC__) && __GNUC__ || defined(__ANDROID__)
+# if ARCH_X86_64
+#  define cpuid(func, func2, ax, bx, cx, dx)                      \
+    __asm__ __volatile__("cpuid           \n\t"                   \
+                       : "=a"(ax), "=b"(bx), "=c"(cx), "=d"(dx) \
+                       : "a"(func), "c"(func2));
+# else
+# define cpuid(func, func2, ax, bx, cx, dx)     \
+   __asm__ __volatile__(                        \
+      "mov %%ebx, %%edi   \n\t"                \
+      "cpuid              \n\t"                \
+      "xchg %%edi, %%ebx  \n\t"                \
+      : "=a"(ax), "=D"(bx), "=c"(cx), "=d"(dx) \
+      : "a"(func), "c"(func2));
+# endif
 #elif defined(__SUNPRO_C) || \
     defined(__SUNPRO_CC) /* end __GNUC__ or __ANDROID__*/
 #if ARCH_X86_64

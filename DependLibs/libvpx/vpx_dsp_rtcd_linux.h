@@ -963,6 +963,7 @@ int vpx_vector_var_sse2(const int16_t *ref, const int16_t *src, const int bwl);
 void vpx_dsp_rtcd(void);
 
 #ifdef RTCD_C
+# if defined(TARGET_CPU_X86)
 #include "vpx_ports/x86.h"
 static void setup_rtcd_internal(void)
 {
@@ -1162,6 +1163,11 @@ static void setup_rtcd_internal(void)
     vpx_variance64x64 = vpx_variance64x64_sse2;
     if (flags & HAS_AVX2) vpx_variance64x64 = vpx_variance64x64_avx2;
 }
+# else
+static void setup_rtcd_internal(void)
+{
+}
+# endif // defined(TARGET_CPU_X86)
 #endif
 
 #ifdef __cplusplus

@@ -8,6 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
+
 #include "vp8/common/x86/filter_x86.h"
 
 DECLARE_ALIGNED(16, const short, vp8_bilinear_filters_x86_4[8][8]) = {
@@ -27,3 +30,4 @@ DECLARE_ALIGNED(16, const short, vp8_bilinear_filters_x86_8[8][16]) = {
   { 32, 32, 32, 32, 32, 32, 32, 32, 96, 96, 96, 96, 96, 96, 96, 96 },
   { 16, 16, 16, 16, 16, 16, 16, 16, 112, 112, 112, 112, 112, 112, 112, 112 }
 };
+#endif // defined(TARGET_CPU_X86)

@@ -6,6 +6,9 @@
  *  See LICENSES/README.md for more information.
  */
 
+#include "config_kodi.h"
+#if !defined(TARGET_OS_ANDROID)
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
@@ -84,7 +87,7 @@ struct SDirData
     SDirData()
     {
         curr_index = -1;
-        last_entry = NULL;
+        last_entry = nullptr;
     }
 };
 
@@ -1008,7 +1011,7 @@ extern "C"
             return ( DIR * )&vecDirsOpen[ iDirSlot ];
         }
         else
-            return NULL;
+            return nullptr;
     }
 
     struct dirent *dll_readdir( DIR *dirp )
@@ -2187,3 +2190,4 @@ extern "C"
     }
 
 }
+#endif // !defined(TARGET_OS_ANDROID)

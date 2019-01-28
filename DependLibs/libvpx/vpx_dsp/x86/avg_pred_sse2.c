@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <assert.h>
 #include <emmintrin.h>
@@ -67,3 +69,4 @@ void vpx_comp_avg_pred_sse2(uint8_t *comp, const uint8_t *pred, int width,
     }
   }
 }
+#endif // defined(TARGET_CPU_X86)

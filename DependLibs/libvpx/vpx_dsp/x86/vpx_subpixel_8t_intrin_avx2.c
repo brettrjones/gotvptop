@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <vpx_config.h>
 
@@ -416,3 +418,4 @@ FUN_CONV_1D(avg_vert, y0_q4, y_step_q4, v, src - src_stride * 3, avg_, avx2);
 FUN_CONV_2D(, avx2);
 FUN_CONV_2D(avg_, avx2);
 #endif  // HAVE_AX2 && HAVE_SSSE3
+#endif // defined(TARGET_CPU_X86)

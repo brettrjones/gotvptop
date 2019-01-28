@@ -3,10 +3,10 @@
 #define VP8_RTCD_H_
 
 #ifdef RTCD_C
-#define RTCD_EXTERN
+# define RTCD_EXTERN
 #else
-#define RTCD_EXTERN extern
-#endif
+# define RTCD_EXTERN extern
+#endif // RTCD_C
 
 /*
  * VP8
@@ -227,6 +227,7 @@ void vp8_temporal_filter_apply_sse2(unsigned char *frame1, unsigned int stride, 
 void vp8_rtcd(void);
 
 #ifdef RTCD_C
+# if defined(TARGET_CPU_X86)
 #include "vpx_ports/x86.h"
 static void setup_rtcd_internal(void)
 {
@@ -256,6 +257,11 @@ static void setup_rtcd_internal(void)
     vp8_sixtap_predict8x8 = vp8_sixtap_predict8x8_sse2;
     if (flags & HAS_SSSE3) vp8_sixtap_predict8x8 = vp8_sixtap_predict8x8_ssse3;
 }
+# elif defined(TARGET_CPU_ARM)
+static void setup_rtcd_internal(void)
+{
+}
+# endif // defined(TARGET_CPU_X86)
 #endif
 
 #ifdef __cplusplus

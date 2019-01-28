@@ -7,6 +7,8 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
+#include "config_libvpx.h"
+#if defined(TARGET_CPU_X86)
 
 #include <assert.h>
 #include <immintrin.h>
@@ -159,3 +161,4 @@ int64_t vp9_block_error_fp_avx2(const tran_low_t *coeff,
   _mm_storel_epi64((__m128i *)&sse, sse_128);
   return sse;
 }
+#endif // defined(TARGET_CPU_X86)

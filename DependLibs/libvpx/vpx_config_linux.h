@@ -17,17 +17,6 @@
 #define INLINE      inline
 #endif // _MSC_VER
 
-#define ARCH_ARM 0
-#define ARCH_MIPS 0
-#if ARCH_64_BITS
-# undef ARCH_X86
-# define ARCH_X86 0 // some require this to be one for both 32 an 64 bit so redefine it for vpx
-# define ARCH_X86_64 1
-#else
-# define ARCH_X86 1
-# define ARCH_X86_64 0
-#endif // ARCH_64_BITS
-
 #define HAVE_NEON 0
 #define HAVE_NEON_ASM 0
 #define HAVE_MIPS32 0

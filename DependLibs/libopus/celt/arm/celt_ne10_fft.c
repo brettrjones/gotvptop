@@ -34,7 +34,7 @@
 #include <libopus/config_libopus.h>
 #endif
 
-#ifdef TARGET_CPU_ARM
+#if 0 //BRJ def TARGET_CPU_ARM
 
 
 #include <NE10_init.h>

@@ -30,7 +30,7 @@
 #include "windowing/WinSystem.h"
 #include "utils/log.h"
 
-#ifdef TARGET_ANDROID
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
 #include <android/jni/Intent.h>
 #include <android/jni/RecognizerIntent.h>
 #include <android/jni/ArrayList.h>
@@ -574,7 +574,7 @@ void CGUIDialogKeyboardGeneric::OnIPAddress()
 
 void CGUIDialogKeyboardGeneric::OnVoiceRecognition()
 {
-#ifdef TARGET_ANDROID
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
   CJNIIntent intent = CJNIIntent(CJNIRecognizerIntent::ACTION_RECOGNIZE_SPEECH);
   intent.putExtra(CJNIRecognizerIntent::EXTRA_LANGUAGE_MODEL, CJNIRecognizerIntent::LANGUAGE_MODEL_FREE_FORM);
   CJNIIntent result;

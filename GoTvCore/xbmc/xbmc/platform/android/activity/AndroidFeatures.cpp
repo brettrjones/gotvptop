@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if !defined(HAVE_QT_GUI)
 
 #include "AndroidFeatures.h"
 
@@ -62,4 +64,4 @@ int CAndroidFeatures::GetCPUCount()
   }
   return count;
 }
-
+#endif // !defined(HAVE_QT_GUI)

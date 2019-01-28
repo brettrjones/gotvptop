@@ -26,6 +26,7 @@
 */
 
 #include "config_libopus.h"
+#if defined(TARGET_CPU_X86)
 
 #include "celt/x86/x86cpu.h"
 #include "structs.h"
@@ -170,3 +171,4 @@ void (*const SILK_BURG_MODIFIED_IMPL[ OPUS_ARCHMASK + 1 ] )(
 
 #endif
 #endif
+#endif // defined(TARGET_CPU_X86)

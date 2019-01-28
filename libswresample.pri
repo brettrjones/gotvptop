@@ -1,25 +1,28 @@
-HEADERS += 	$$PWD/../../audioconvert.h \
-	$$PWD/../../resample.h \
-	$$PWD/../../swresample.h \
-	$$PWD/../../swresample_internal.h \
-	$$PWD/../../version.h
 
-SOURCES += 	$$PWD/../../audioconvert.c \
-	$$PWD/../../dither.c \
-	$$PWD/../../dither_template.c \
-	$$PWD/../../log2_tab.c \
-	$$PWD/../../noise_shaping_data.c \
-	$$PWD/../../options.c \
-	$$PWD/../../rematrix.c \
-	$$PWD/../../rematrix_template.c \
-	$$PWD/../../resample.c \
-	$$PWD/../../resample_dsp.c \
-	$$PWD/../../resample_template.c \
-	$$PWD/../../soxr_resample.c \
-	$$PWD/../../swresample.c \
-	$$PWD/../../swresample_frame.c \
-	$$PWD/../../x86/audio_convert_init.c \
-	$$PWD/../../x86/rematrix_init.c \
-	$$PWD/../../x86/resample_init.c \
-	$$PWD/../../x86/w64xmmtest.c
+INCLUDEPATH += $$PWD/DependLibs/ffmpeg
+
+HEADERS += 	$$PWD/DependLibs/ffmpeg/libswresample/audioconvert.h \
+    $$PWD/DependLibs/ffmpeg/libswresample/resample.h \
+    $$PWD/DependLibs/ffmpeg/libswresample/swresample.h \
+    $$PWD/DependLibs/ffmpeg/libswresample/swresample_internal.h \
+    $$PWD/DependLibs/ffmpeg/libswresample/version.h
+
+SOURCES += 	$$PWD/DependLibs/ffmpeg/libswresample/audioconvert.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/dither.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/dither_template.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/log2_tab.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/noise_shaping_data.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/options.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/rematrix.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/rematrix_template.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/resample.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/resample_dsp.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/resample_template.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/soxr_resample.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/swresample.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/swresample_frame.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/x86/audio_convert_init.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/x86/rematrix_init.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/x86/resample_init.c \
+    $$PWD/DependLibs/ffmpeg/libswresample/x86/w64xmmtest.c
 
