@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "config_gotvcore.h"
+#include "config_kodi.h"
 
 #include <stdarg.h>     /* va_list, va_start, va_arg, va_end */
 #include <cstdlib>

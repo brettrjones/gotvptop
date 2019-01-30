@@ -18,8 +18,8 @@ from command prompt
 1.) In Qt Creator Tools > Options > Devices > Android 
   a.) JDK location - F:\android\jdk1.8.0_131
   b.) Android SDK Location - F:\android\android-sdk
-  c.) Android NDK Location - F:\android\android-ndk-r10e-windows-x86_64\android-ndk-r10e
-  d.) In SDK Manager install all packages for Android 5.1
+  c.) Android NDK Location - F:\android\ndk-windows-x86_64\android-ndk-r19
+  d.) In SDK Manager install all packages for Android 5.0
   if get error about .android\repositories.cfg could not be loaded then create a empty file for it using text editor
   
  ==== Android Manifest Permissions required ====

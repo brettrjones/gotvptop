@@ -28,7 +28,7 @@
 #ifndef FMT_FORMAT_H_
 #define FMT_FORMAT_H_
 
-#include <config_gotvcore.h>
+#include <config_kodi.h>
 
 #include <cassert>
 #include <clocale>

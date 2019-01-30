@@ -14,7 +14,7 @@
 //============================================================================
 #elif defined(TARGET_OS_ANDROID)
 # define HAVE_LIBGLESV2     1
-# define HAS_MDNS_EMBEDDED  1 // not windows and not compiled with mingw
+//# define HAS_MDNS_EMBEDDED  1 // not windows and not compiled with mingw
 
 //============================================================================
 //=== Linux Specific ===//
@@ -122,7 +122,9 @@ echo GoTv Compiler Config error no os defined
 //#define HAS_MYSQL 1 // uses sqlite3 instead
 
 #define HAS_UPNP            1 
-#define HAS_ZEROCONF        1 
+#ifndef TARGET_OS_ANDROID // BRJ FIXME .. implement existing zero config for android
+# define HAS_ZEROCONF        1
+#endif // TARGET_OS_ANDROID
 
 //#define HAS_JSONRPC
 

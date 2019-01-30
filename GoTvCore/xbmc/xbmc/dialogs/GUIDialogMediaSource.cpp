@@ -5,6 +5,7 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
 
 #include "GUIDialogMediaSource.h"
 #include "ServiceBroker.h"
@@ -31,9 +32,12 @@
 #include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
 #include "pvr/recordings/PVRRecordingsPath.h"
 
-#if defined(TARGET_ANDROID)
-#include "platform/android/activity/XBMCApp.h"
-#include "filesystem/File.h"
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
+# include "platform/android/activity/XBMCApp.h"
+# include "filesystem/File.h"
+#elif defined(TARGET_ANDROID) && defined(HAVE_QT_GUI)
+# include "filesystem/File.h"
+# include "platform/qt/KodiQtApp.h"
 #endif
 
 #ifdef TARGET_WINDOWS_STORE
@@ -298,7 +302,7 @@ void CGUIDialogMediaSource::OnPathBrowse(int item)
   else if (m_type == "video")
   {
     CMediaSource share1;
-#if defined(TARGET_ANDROID)
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
     // add the default android video directory
     std::string path;
     if (CXBMCApp::GetExternalStorage(path, "videos") && !path.empty() && CFile::Exists(path))

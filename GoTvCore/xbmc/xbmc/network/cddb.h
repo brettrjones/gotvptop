@@ -15,6 +15,9 @@
 #ifndef TARGET_POSIX
 #include <strstream>
 #endif
+#ifdef TARGET_OS_ANDROID
+# include <unistd.h> // for close definition
+#endif
 #include "storage/cdioSupport.h"
 
 #include "utils/ScopeGuard.h"

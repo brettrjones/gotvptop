@@ -89,7 +89,10 @@
 #if defined(TARGET_OS_ANDROID)
 #undef HAS_LINUX_EVENTS
 #undef HAS_LIRC
-#define HAS_ZEROCONF
+//#define HAS_ZEROCONF // Defined in GoTvCompilerConfig.h
+//# if defined(HAVE_QT_GUI)
+//#  define HAS_AVAHI
+//# endif // defined(HAVE_QT_GUI)
 #endif
 
 /****************
@@ -148,9 +151,9 @@ typedef std::shared_ptr<CFileItem> CFileItemPtr;
 
 #ifdef TARGET_OS_WINDOWS
 //# include <platform/win32/PlatformDefs.h> already included 
-#elif defined(TARGET_OS_ANDROID)
+#elif defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
 //# include <platform/overrides/android/PlatformAndroid.h>
-#elif defined(TARGET_OS_LINUX)
+#elif defined(TARGET_OS_LINUX) || (defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI))
 # include <platform/linux/PlatformDefs.h>
 #elif defined(TARGET_OS_APPLE)
 echo error APPLE os is not supported

@@ -33,11 +33,11 @@ namespace XFILE
     virtual int64_t GetPosition();
     virtual int GetChunkSize();
   protected:
-    CURL              m_url;
-    int               m_zip_index;
-    int64_t           m_file_pos;
-    int64_t           m_file_size;
-    struct zip_file   *m_zip_file;
-    struct zip        *m_zip_archive;
+    GoTvUrl             m_url;
+    int                 m_zip_index;
+    int64_t             m_file_pos;
+    int64_t             m_file_size;
+    struct zip_file   * m_zip_file;
+    struct zip        * m_zip_archive;
   };
 }

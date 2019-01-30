@@ -5,7 +5,7 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
-#include "config_gotvcore.h"
+#include "config_kodi.h"
 
 #include "DVDOverlayCodecText.h"
 #include "DVDOverlayText.h"

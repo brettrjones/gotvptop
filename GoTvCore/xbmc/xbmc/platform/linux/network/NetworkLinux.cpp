@@ -77,7 +77,7 @@ const std::string& CNetworkInterfaceLinux::GetName(void) const
 
 bool CNetworkInterfaceLinux::IsWireless() const
 {
-#if defined(TARGET_DARWIN) || defined(TARGET_FREEBSD)
+#if defined(TARGET_DARWIN) || defined(TARGET_FREEBSD) || defined(TARGET_OS_ANDROID)
   return false;
 #else
   struct iwreq wrq;

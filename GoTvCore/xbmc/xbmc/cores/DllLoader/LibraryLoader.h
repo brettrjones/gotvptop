@@ -11,7 +11,7 @@
 #ifndef LIBRARY_LOADER
 #define LIBRARY_LOADER
 
-#include "config_gotvcore.h"
+#include "config_kodi.h"
 
 #include <string>
 

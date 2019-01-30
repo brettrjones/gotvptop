@@ -11,14 +11,14 @@
 #include <cassert>
 
 #if defined (HAS_AVAHI)
-#include "platform/linux/network/ZeroconfBrowserAvahi.h"
+# include "platform/linux/network/ZeroconfBrowserAvahi.h"
 #elif defined(TARGET_DARWIN)
 //on osx use the native implementation
-#include "platform/darwin/osx/network/ZeroconfBrowserOSX.h"
-#elif defined(TARGET_ANDROID)
-#include "platform/android/network/ZeroconfBrowserAndroid.h"
+# include "platform/darwin/osx/network/ZeroconfBrowserOSX.h"
+#elif defined(TARGET_ANDROID) && defined(HAS_ZEROCONF)
+# include "platform/android/network/ZeroconfBrowserAndroid.h"
 #elif defined(HAS_MDNS)
-#include "mdns/ZeroconfBrowserMDNS.h"
+# include "mdns/ZeroconfBrowserMDNS.h"
 #endif
 
 #include "threads/CriticalSection.h"

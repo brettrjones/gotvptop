@@ -8,7 +8,7 @@
 
 #pragma once
 
-#if defined(TARGET_ANDROID)
+#if defined(TARGET_OS_ANDROID)
 #include "filesystem/IFile.h"
 #include "GoTvUrl.h"
 #include "string.h"
@@ -40,7 +40,7 @@ protected:
   bool IsValidFile(const GoTvUrl& url);
 
 private:
-  CURL              m_url;
+  GoTvUrl           m_url;
   std::string       m_packageName;
   std::string       m_packageLabel;
   int               m_icon;

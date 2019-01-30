@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <config_gotvcore.h>
+#include <config_kodi.h>
 
 #include <map>
 #include <memory>

@@ -8,8 +8,8 @@
 4.) uncheck API 28.. check Android 5.0.1 (API 21) and finish install
 
 === install android ndk ===
-1.) download ndk for windows 64 bit from https://developer.android.com/ndk/downloads/older_releases
-2.) extract to F:\android\android-ndk-r18b-windows-x86_64
+1.) download ndk 19 for windows 64 bit from https://developer.android.com/ndk/downloads/older_releases
+2.) extract to F:\android\ndk-windows-x86-64\android-ndk-r19
 
 
 === install Qt 5.12 ===

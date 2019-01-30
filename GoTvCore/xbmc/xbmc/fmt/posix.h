@@ -10,7 +10,7 @@
 #ifndef FMT_POSIX_H_
 #define FMT_POSIX_H_
 
-#include "config_gotvcore.h"
+#include "config_kodi.h"
 
 #if defined(__MINGW32__) || defined(__CYGWIN__)
 // Workaround MinGW bug https://sourceforge.net/p/mingw/bugs/2024/.

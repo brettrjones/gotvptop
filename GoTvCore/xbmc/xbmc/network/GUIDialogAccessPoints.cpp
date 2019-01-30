@@ -9,7 +9,7 @@
 #include "GUIDialogAccessPoints.h"
 #include "guilib/GUIMessage.h"
 #include "guilib/GUIKeyboardFactory.h"
-#if defined(TARGET_ANDROID)
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
 #include "platform/android/network/NetworkAndroid.h"
 #elif defined(TARGET_POSIX)
 #include "platform/linux/network/NetworkLinux.h"

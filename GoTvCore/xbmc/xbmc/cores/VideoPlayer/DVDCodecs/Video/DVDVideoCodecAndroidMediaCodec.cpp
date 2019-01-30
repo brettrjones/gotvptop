@@ -11,7 +11,7 @@
 // Android MediaCodec class can be used to access low-level media codec,
 // i.e. encoder/decoder components. (android.media.MediaCodec). Requires SDK21+
 //
-#include "config_gotvcore.h"
+#include "config_kodi.h"
 
 #include "DVDVideoCodecAndroidMediaCodec.h"
 

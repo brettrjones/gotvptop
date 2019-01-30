@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "config_gotvcore.h"
+#include "config_kodi.h"
 
 #if defined(HAVE_LIBCEC)
 #include "PeripheralCecAdapter.h"

@@ -38,7 +38,7 @@ public:
     const char * MONITOR_QT_NAME = "AppletKodi"; 
 
     CWinSystemQt();
-    virtual ~CWinSystemQt();
+    virtual ~CWinSystemQt() override;
 
     bool                        InitWindowSystem() override;
     bool                        DestroyWindowSystem() override;

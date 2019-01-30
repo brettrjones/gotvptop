@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "config_gotvcore.h"
+#include "config_kodi.h"
 #include "DVDVideoCodecFFmpeg.h"
 #include "cores/VideoPlayer/DVDStreamInfo.h"
 #include "cores/VideoPlayer/Interface/Addon/TimingConstants.h"

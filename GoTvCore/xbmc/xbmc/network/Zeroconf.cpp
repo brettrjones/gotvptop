@@ -22,7 +22,7 @@
 #elif defined(TARGET_DARWIN)
 //on osx use the native implementation
 #include "platform/darwin/osx/network/ZeroconfOSX.h"
-#elif defined(TARGET_ANDROID)
+#elif defined(TARGET_ANDROID) && defined(HAS_ZEROCONF)
 #include "platform/android/network/ZeroconfAndroid.h"
 #elif defined(HAS_MDNS)
 #include "mdns/ZeroconfMDNS.h"

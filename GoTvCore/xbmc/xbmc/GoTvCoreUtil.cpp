@@ -27,11 +27,16 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #endif
-#if defined(TARGET_OS_ANDROID)
-#include <android/bionic_supplement/bionic_supplement.h>
-#include <android/activity/XBMCApp.h>
-#include <android/jni/ApplicationInfo.h>
-#include "CompileInfo.h"
+#if defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+# include <android/bionic_supplement/bionic_supplement.h>
+# include <android/activity/XBMCApp.h>
+# include <android/jni/ApplicationInfo.h>
+# include "CompileInfo.h"
+#elif defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
+# include <platform/qt/qtandroid/bionic_supplement/bionic_supplement.h>
+# include <platform/qt/qtandroid/activity/XBMCApp.h>
+# include <platform/qt/qtandroid/jni/ApplicationInfo.h>
+# include "CompileInfo.h"
 #endif
 #include <stdlib.h>
 #include <algorithm>
@@ -60,12 +65,12 @@
 #include <utils/fstrcmp.h>
 #include <storage/MediaManager.h>
 #ifdef TARGET_OS_WINDOWS
-#include <utils/CharsetConverter.h>
-#include <platform/win32/WIN32Util.h>
+# include <utils/CharsetConverter.h>
+# include <platform/win32/WIN32Util.h>
 #endif
 #if defined(TARGET_OS_APPLE)
-#include "CompileInfo.h"
-#include <darwin/DarwinUtils.h>
+# include "CompileInfo.h"
+# include <darwin/DarwinUtils.h>
 #endif
 #include "filesystem/File.h"
 #include "settings/MediaSettings.h"
@@ -89,7 +94,7 @@
 #include <utils/LangCodeExpander.h>
 #include "video/VideoInfoTag.h"
 #ifdef HAVE_LIBCAP
-#include <sys/capability.h>
+# include <sys/capability.h>
 #endif
 
 #include "cores/VideoPlayer/DVDDemuxers/DVDDemux.h"
@@ -1982,13 +1987,14 @@ std::string CUtil::ResolveExecutablePath()
         strExecutablePath = "";
     else
         strExecutablePath = buf;
-#elif defined(TARGET_OS_ANDROID)
+#elif defined(TARGET_OS_ANDROID) 
     strExecutablePath = CXBMCApp::getApplicationInfo().nativeLibraryDir;
 
     std::string appName = CCompileInfo::GetAppName();
     std::string libName = "lib" + appName + ".so";
     StringUtils::ToLower( libName );
     strExecutablePath += "/" + libName;
+
 #else
     /* Get our PID and build the name of the link in /proc */
     pid_t pid = getpid();

@@ -192,10 +192,14 @@
 #include "platform/posix/filesystem/PosixDirectory.h"
 #endif
 
-#if defined(TARGET_ANDROID)
-#include <android/jni/Build.h>
-#include "platform/android/activity/XBMCApp.h"
-#include "platform/android/activity/AndroidFeatures.h"
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
+# include <android/jni/Build.h>
+# include "platform/android/activity/XBMCApp.h"
+# include "platform/android/activity/AndroidFeatures.h"
+#elif defined(TARGET_ANDROID) && defined(HAVE_QT_GUI)
+# include <android/jni/Build.h>
+# include "platform/qt/qtandroid/activity/XBMCApp.h"
+# include "platform/at/qtandroid/activity/AndroidFeatures.h"
 #endif
 
 #ifdef TARGET_WINDOWS

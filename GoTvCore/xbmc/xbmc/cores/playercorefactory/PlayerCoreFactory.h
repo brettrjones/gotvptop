@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <config_gotvcore.h>
+#include <config_kodi.h>
 
 #include "settings/lib/ISettingsHandler.h"
 #include "threads/CriticalSection.h"

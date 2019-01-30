@@ -18,8 +18,10 @@
 #include <wrl/client.h>
 #endif
 
-#if defined(TARGET_ANDROID)
-#include "platform/android/activity/XBMCApp.h"
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
+# include "platform/android/activity/XBMCApp.h"
+#elif defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
+# include "platform/qt/KodiQtApp.h"
 #endif
 
 #include "platform/MessagePrinter.h"

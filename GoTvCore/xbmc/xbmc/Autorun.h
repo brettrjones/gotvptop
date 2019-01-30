@@ -16,7 +16,7 @@
 //
 //
 
-#include "config_gotvcore.h"
+#include "config_kodi.h"
 #ifdef HAS_DVD_DRIVE
 
 #include <memory>

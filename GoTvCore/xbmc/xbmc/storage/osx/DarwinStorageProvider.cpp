@@ -18,7 +18,7 @@
  *
  */
 
-#include <config_gotvcore.h>
+#include <config_kodi.h>
 #ifdef TARGET_OS_APPLE_IOS
 
 #include <stdlib.h>

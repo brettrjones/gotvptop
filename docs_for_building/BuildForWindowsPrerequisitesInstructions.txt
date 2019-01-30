@@ -8,9 +8,18 @@ Visual Studio 2015 Community Edition - default install location
 Qt 5.9.6 - F:/Qt/Qt5.9.6
 Java jre - F:/android/jre1.8.0_131
 Java jdk - F:/android/jdk1.8.0_131
-Android NDK - F:\android\android-ndk-r19-windows-x86_64\android-ndk-r19
+Android NDK - F:\android\android-ndk-r18b-windows-x86_64\android-ndk-r18b
 Android SDK - F:\android\android-sdk
 Android Studio F:/android/AndroidStudio
+
+=== my enviroment variables ===
+ANDROID_NDK_ROOT F:\android\android-ndk-r18b-windows-x86_64\android-ndk-r18b
+JAVA_HOME  F:\android\jdk1.8.0_131
+JRE_HOME F:\android\jre1.8.0_131
+PythonPath C:\Python27\Lib;C:\Python27\DLLs;C:\Python27\Lib\lib-tk
+QTDIR F:\Qt\Qt5.12\5.12.0\msvc2015_64
+
+
 
 
 === GoTvPtoP Prerequisites ====

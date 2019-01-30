@@ -12,7 +12,7 @@
 |   includes
 +---------------------------------------------------------------------*/
 
-#include "config_gotvcore.h"
+#include "config_kodi.h"
 
 #include <limits>
 #include <libUPnP/Neptune/Source/Core/NptDebug.h>

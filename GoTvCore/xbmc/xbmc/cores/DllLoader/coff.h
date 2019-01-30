@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "config_gotvcore.h"
+#include "config_kodi.h"
 
 //#pragma message("including coff.h")
 //

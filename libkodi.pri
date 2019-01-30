@@ -1,8 +1,5 @@
-unix:QMAKE_CXXFLAGS += -Wno-unused-parameter
-android:QMAKE_CXXFLAGS += -Wno-unused
 
-unix:QMAKE_CFLAGS += -Wno-unused-parameter
-android:QMAKE_CFLAGS += -Wno-unused
+
 
 INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/
 INCLUDEPATH += $$PWD/DependLibs/
@@ -47,6 +44,7 @@ android{
 macx{
     INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/darwin
 }
+
 
 HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvCompilerConfig.h \
@@ -2865,88 +2863,93 @@ win32{
     $$PWD/GoTvCore/xbmc/xbmc/platform/win32/utils/Win32InterfaceForCLog.cpp \
 }
 
-
 android{
-    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/android
-    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
+    HEADERS += 	$$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.h
 
-HEADERS += 	$$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidExtra.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidFeatures.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidJoyStick.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidKey.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidMouse.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidTouch.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/DllGraphicBuffer.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/EventLoop.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/GraphicBuffer.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IActivityHandler.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IInputDeviceCallbacks.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IInputDeviceEventHandler.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IInputHandler.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIMainActivity.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCAudioManagerOnAudioFocusChangeListener.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCFile.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCJsonHandler.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMainView.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMediaSession.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerDiscoveryListener.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerRegistrationListener.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerResolveListener.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCSurfaceTextureOnFrameAvailableListener.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCVideoView.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/XBMCApp.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/bionic_supplement/bionic_supplement.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/drm/MediaDrmCryptoSession.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKDirectory.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKFile.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppDirectory.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppFile.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/NetworkAndroid.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfAndroid.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfBrowserAndroid.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/PeripheralBusAndroid.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/powermanagement/AndroidPowerSyscall.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/storage/AndroidStorageProvider.h
-
-
-
-SOURCES += $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidFeatures.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidJoyStick.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidKey.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidMouse.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidTouch.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/EventLoop.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/GraphicBuffer.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIMainActivity.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCAudioManagerOnAudioFocusChangeListener.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCFile.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCJsonHandler.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMainView.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMediaSession.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerDiscoveryListener.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerRegistrationListener.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerResolveListener.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCSurfaceTextureOnFrameAvailableListener.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCVideoView.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/XBMCApp.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/android_main.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/bionic_supplement/getdelim.c \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/bionic_supplement/rand_r.c \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/drm/MediaDrmCryptoSession.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKDirectory.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKFile.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppDirectory.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppFile.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/NetworkAndroid.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfAndroid.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfBrowserAndroid.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/PeripheralBusAndroid.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/powermanagement/AndroidPowerSyscall.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/storage/AndroidStorageProvider.cpp
-
+    SOURCES += $$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.cpp
 }
+
+#android{
+#    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/android
+#    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
+
+#HEADERS += 	$$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidExtra.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidFeatures.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidJoyStick.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidKey.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidMouse.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidTouch.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/DllGraphicBuffer.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/EventLoop.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/GraphicBuffer.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IActivityHandler.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IInputDeviceCallbacks.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IInputDeviceEventHandler.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/IInputHandler.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIMainActivity.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCAudioManagerOnAudioFocusChangeListener.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCFile.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCJsonHandler.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMainView.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMediaSession.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerDiscoveryListener.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerRegistrationListener.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerResolveListener.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCSurfaceTextureOnFrameAvailableListener.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCVideoView.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/XBMCApp.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/bionic_supplement/bionic_supplement.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/drm/MediaDrmCryptoSession.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKDirectory.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKFile.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppDirectory.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppFile.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/NetworkAndroid.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfAndroid.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfBrowserAndroid.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/PeripheralBusAndroid.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/powermanagement/AndroidPowerSyscall.h \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/storage/AndroidStorageProvider.h
+
+
+
+#SOURCES += $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidFeatures.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidJoyStick.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidKey.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidMouse.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/AndroidTouch.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/EventLoop.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/GraphicBuffer.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIMainActivity.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCAudioManagerOnAudioFocusChangeListener.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCFile.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCJsonHandler.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMainView.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCMediaSession.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerDiscoveryListener.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerRegistrationListener.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCNsdManagerResolveListener.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCSurfaceTextureOnFrameAvailableListener.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/JNIXBMCVideoView.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/XBMCApp.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/activity/android_main.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/bionic_supplement/getdelim.c \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/bionic_supplement/rand_r.c \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/drm/MediaDrmCryptoSession.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKDirectory.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/APKFile.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppDirectory.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/filesystem/AndroidAppFile.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/NetworkAndroid.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfAndroid.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/network/ZeroconfBrowserAndroid.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/PeripheralBusAndroid.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/powermanagement/AndroidPowerSyscall.cpp \
+#    $$PWD/GoTvCore/xbmc/xbmc/platform/android/storage/AndroidStorageProvider.cpp
+
+#}
 
 unix{
 HEADERS += 		$$PWD/GoTvCore/xbmc/xbmc/platform/linux/ConvUtils.h \

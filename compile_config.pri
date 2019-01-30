@@ -62,11 +62,6 @@ unix:QMAKE_CFLAGS += -Wno-missing-field-initializers
 unix:QMAKE_CFLAGS += -Wno-switch
 unix:QMAKE_CFLAGS += -Wno-#pragma-messages
 
-QMAKE_CFLAGS += -Wno-unused-parameter
-QMAKE_CFLAGS += -Wno-unused
-QMAKE_CXXFLAGS += -Wno-unused-parameter
-QMAKE_CXXFLAGS += -Wno-unused
-
 CONFIG(debug, debug|release){
  message(Project is built in DEBUG mode.)
     DEFINES += DEBUG
