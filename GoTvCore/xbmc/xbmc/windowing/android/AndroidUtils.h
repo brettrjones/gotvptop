@@ -11,7 +11,11 @@
 #include <string>
 #include <vector>
 
-#include <android/jni/Display.h>
+#if defined(HAVE_QT_GUI)
+# include <qtandroid/jni/Display.h>
+#else
+# include <android/jni/Display.h>
+#endif // defined(HAVE_QT_GUI)
 
 #include "windowing/Resolution.h"
 

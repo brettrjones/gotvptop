@@ -142,13 +142,13 @@ public:
 #if defined(TARGET_RASPBERRY_PI)
 #include "TexturePi.h"
 #define CTexture CPiTexture
+#elif defined(HAVE_QT_GUI)
+#include "TextureQt.h"
+#define CTexture CQtTexture
 #elif defined(HAS_GL) || defined(HAS_GLES)
 #include "TextureGL.h"
 #define CTexture CGLTexture
 #elif  HAS_DX
 #include "TextureDX.h"
 #define CTexture CDXTexture
-#elif defined(HAVE_QT_GUI)
-#include "TextureQt.h"
-#define CTexture CQtTexture
 #endif

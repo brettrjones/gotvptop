@@ -33,7 +33,12 @@
 #include "utils/log.h"
 
 #include "DVDCodecs/DVDFactoryCodec.h"
-#include "platform/android/activity/XBMCApp.h"
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
+# include "platform/android/activity/XBMCApp.h"
+#elif defined(TARGET_ANDROID) && defined(HAVE_QT_GUI)
+# include "platform/qt/KodiQtApp.h"
+#endif // defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
+
 #include "cores/VideoPlayer/VideoRenderers/RenderManager.h"
 #include "cores/VideoPlayer/VideoRenderers/RenderFlags.h"
 #include "cores/VideoPlayer/Interface/Addon/DemuxCrypto.h"

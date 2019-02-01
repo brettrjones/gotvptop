@@ -25,11 +25,11 @@
 #include <android_native_app_glue.h>
 #include "EventLoop.h"
 #include "XBMCApp.h"
-#include "platform/android/jni/SurfaceTexture.h"
+#include "platform/qt/qtandroid/jni/SurfaceTexture.h"
 #include "utils/StringUtils.h"
 #include "CompileInfo.h"
 
-#include "platform/android/activity/JNIMainActivity.h"
+#include "platform/qt/qtandroid/activity/JNIMainActivity.h"
 
 
 // redirect stdout / stderr to logcat

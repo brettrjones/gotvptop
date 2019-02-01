@@ -25,7 +25,12 @@
 #include "VideoSyncQt.h"
 #include "cores/VideoPlayer/VideoReferenceClock.h"
 #include "utils/TimeUtils.h"
-//#include "platform/qt/activity/XBMCApp.h"
+#if defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+# include "platform/android/activity/XBMCApp.h"
+#elif defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
+# include "platform/qt/KodiQtApp.h"
+#endif // defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+
 #include "windowing/WinSystem.h"
 #include "windowing/GraphicContext.h"
 #include "utils/MathUtils.h"

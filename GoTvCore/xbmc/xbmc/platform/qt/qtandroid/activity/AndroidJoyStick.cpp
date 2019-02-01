@@ -18,10 +18,15 @@
  *
  */
 
-#include <android/input.h>
+#include <qtandroid/input.h>
 
 #include "AndroidJoyStick.h"
-#include "platform/android/activity/XBMCApp.h"
+#if defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+# include "platform/android/activity/XBMCApp.h"
+#elif defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
+# include "platform/qt/KodiQtApp.h"
+#endif // defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+
 
 bool CAndroidJoyStick::onJoyStickEvent(AInputEvent* event)
 {

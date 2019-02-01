@@ -22,7 +22,12 @@
 #if defined (TARGET_OS_ANDROID)
 
 #include "AndroidPowerSyscall.h"
-#include <android/activity/XBMCApp.h>
+#if defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+# include "platform/android/activity/XBMCApp.h"
+#elif defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
+# include "platform/qt/KodiQtApp.h"
+#endif // defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+
 
 IPowerSyscall* CAndroidPowerSyscall::CreateInstance()
 {

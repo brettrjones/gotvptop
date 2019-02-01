@@ -8,14 +8,22 @@
 
 #include "AESinkAUDIOTRACK.h"
 
-#include <android/jni/AudioFormat.h>
-#include <android/jni/AudioManager.h>
-#include <android/jni/AudioTrack.h>
-#include <android/jni/Build.h>
+#if defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+# include <android/jni/AudioFormat.h>
+# include <android/jni/AudioManager.h>
+# include <android/jni/AudioTrack.h>
+# include <android/jni/Build.h>
+# include "platform/android/activity/XBMCApp.h"
+#elif defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
+# include <qtandroid/jni/AudioFormat.h>
+# include <qtandroid/jni/AudioManager.h>
+# include <qtandroid/jni/AudioTrack.h>
+# include <qtandroid/jni/Build.h>
+# include "platform/qt/KodiQtApp.h"
+#endif // defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
 
 #include "cores/AudioEngine/Utils/AEUtil.h"
 #include "cores/AudioEngine/AESinkFactory.h"
-#include "platform/android/activity/XBMCApp.h"
 #include "settings/Settings.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"

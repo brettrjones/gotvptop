@@ -35,7 +35,12 @@
 #include "filesystem/Directory.h"
 #include "filesystem/File.h"
 #include "guilib/LocalizeStrings.h"
-#include "platform/android/activity/XBMCApp.h"
+#if defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+# include "platform/android/activity/XBMCApp.h"
+#elif defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
+# include "platform/qt/KodiQtApp.h"
+#endif // defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+
 
 #include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
 #include <utils/log.h>

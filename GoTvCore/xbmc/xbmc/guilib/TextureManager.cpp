@@ -29,6 +29,11 @@
 #include "ServiceBroker.h"
 #include "windowing/osx/WinSystemIOS.h" // for g_Windowing in CGUITextureManager::FreeUnusedTextures
 #endif
+
+#if HAS_GLES || HAS_GL
+# include <system_gl.h>
+#endif // HAS_GLES
+
 #include "FFmpegImage.h"
 
  /************************************************************************/

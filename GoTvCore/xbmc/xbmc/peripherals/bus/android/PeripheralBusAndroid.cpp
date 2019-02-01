@@ -24,8 +24,13 @@
 #include "input/joysticks/JoystickTypes.h"
 #include "peripherals/addons/PeripheralAddonTranslator.h"
 #include "peripherals/devices/PeripheralJoystick.h"
-#include "platform/android/activity/XBMCApp.h"
-#include "androidjni/View.h"
+#if defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+# include "platform/android/activity/XBMCApp.h"
+# include "androidjni/View.h"
+#elif defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
+# include "platform/qt/KodiQtApp.h"
+#endif // defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+
 #include "threads/SingleLock.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"

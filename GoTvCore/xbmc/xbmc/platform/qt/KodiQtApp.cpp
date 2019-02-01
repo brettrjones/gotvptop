@@ -17,11 +17,13 @@
 #include <string.h>
 
 #include <jni.h>
-#include <android/configuration.h>
-#include <android/bitmap.h>
-#include <android/log.h>
-#include <android/native_window.h>
-#include <android/native_window_jni.h>
+
+//#include <qtandroid/configuration.h>
+//#include <qtandroid/bitmap.h>
+//#include <qtandroid/log.h>
+//#include <qtandroid/native_window.h>
+//#include <qtandroid/native_window_jni.h>
+
 #include "settings/AdvancedSettings.h"
 #include "interfaces/AnnouncementManager.h"
 #include "Application.h"
@@ -40,13 +42,13 @@
 #include "GUIInfoManager.h"
 #include "guilib/guiinfo/GUIInfoLabels.h"
 #include "guilib/GUIComponent.h"
-#include "platform/android/activity/IInputDeviceCallbacks.h"
-#include "platform/android/activity/IInputDeviceEventHandler.h"
+#include "platform/qt/qtandroid/activity/IInputDeviceCallbacks.h"
+#include "platform/qt/qtandroid/activity/IInputDeviceEventHandler.h"
 #include "input/mouse/MouseStat.h"
 #include "input/Key.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
-#include "platform/android/network/NetworkAndroid.h"
+//#include "platform/qt/qtandroid/network/NetworkAndroid.h"
 #include "cores/VideoPlayer/VideoRenderers/RenderManager.h"
 #include "filesystem/SpecialProtocol.h"
 #include "TextureCache.h"

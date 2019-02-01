@@ -322,7 +322,7 @@
 #define HAVE_OPENJPEG_2_0_OPENJPEG_H	0
 #define HAVE_OPENJPEG_1_5_OPENJPEG_H	0
 #define HAVE_OPENGL_GL3_H				0
-#define HAVE_POLL_H						0
+//#define HAVE_POLL_H						0  // defined in GoTvCompilerConfig.h
 #define HAVE_SYS_PARAM_H 0
 //#define HAVE_SNDIO_H					0
 #define HAVE_SOUNDCARD_H 0

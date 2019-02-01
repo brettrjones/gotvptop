@@ -15,10 +15,14 @@
 #include "utils/EventStream.h"
 
 class DllLibCPluff;
+#ifdef __cplusplus
 extern "C"
 {
+#endif // __cplusplus
 #include "libcpluff/cpluff.h"
+#ifdef __cplusplus
 }
+#endif // __cplusplus
 
 namespace ADDON
 {

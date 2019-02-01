@@ -17,9 +17,11 @@
 #include "utils/StringUtils.h"
 #include "log.h"
 #include "CharsetConverter.h"
+
 #ifdef HAVE_LIBXSLT
-#include "utils/XSLTUtils.h"
+# include "utils/XSLTUtils.h"
 #endif
+
 #include "utils/XMLUtils.h"
 #include <sstream>
 #include <cstring>
@@ -171,7 +173,10 @@ void CScraperParser::ReplaceBuffers(std::string& strDest)
     std::string strInfo = strDest.substr(iIndex+10, iEnd - iIndex - 10);
     std::string strReplace;
     if (m_scraper)
+    {
       strReplace = g_localizeStrings.GetAddonString(m_scraper->ID(), strtol(strInfo.c_str(),NULL,10));
+    }
+
     strDest.replace(strDest.begin()+iIndex,strDest.begin()+iEnd+1,strReplace);
     iIndex += strReplace.length();
   }

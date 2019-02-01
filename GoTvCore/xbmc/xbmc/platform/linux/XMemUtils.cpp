@@ -17,6 +17,16 @@
 #include <mach/mach.h>
 #endif
 
+#ifdef TARGET_OS_ANDROID
+# include <sys/sysinfo.h>
+# ifdef HAVE_QT_GUI
+#  include "platform/qt/KodiQtApp.h"
+# else
+#  include "platform/android/activity/XBMCApp.h"
+# endif // HAVE_QT_GUI
+#endif // TARGET_OS_ANDROID
+
+
 #undef ALIGN
 #define ALIGN(value, alignment) (((value)+(alignment-1))&~(alignment-1))
 

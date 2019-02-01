@@ -957,18 +957,13 @@ typedef struct _SECURITY_ATTRIBUTES {
 #define close_os			close
 
 #if defined(TARGET_OS_ANDROID)
-# define open_os			fopen
-# define read_os			fread
-# define write_os			fwrite
-# define tell_os			ftell
-# define lseek_os			fseek
-#else
+# include <unistd.h> // for open etc on android
+#endif
 # define open_os			open
 # define read_os			read
 # define write_os			write
 # define tell_os			tell
 # define lseek_os			lseek
-#endif
 
 #define mkdir_os			mkdir
 #define rmdir_os			rmdir
@@ -1202,6 +1197,7 @@ typedef int64_t              time64_t;
 # define HAVE_FORK				1
 
 # define HAVE_SYS_IOCTL_H       1
+/* Define to 1 if you have the `poll' function. */
 # define HAVE_POLL_H			1
 # define HAVE_NET_IF_H          1
 #endif // TARGET_OS_WINDOWS
@@ -1335,10 +1331,6 @@ typedef int64_t              time64_t;
 #define HAVE_NETDB_H				1
 /* We have AF_NETLINK sockets */
 #define HAVE_NETLINK	
-/* Define to 1 if you have the `poll' function. */
-#ifndef TARGET_OS_WINDOWS
-# define HAVE_POLL 1
-#endif // TARGET_OS_WINDOWS
 
 /* Define if you have POSIX threads libraries and header files. */
 #define HAVE_PTHREAD				1

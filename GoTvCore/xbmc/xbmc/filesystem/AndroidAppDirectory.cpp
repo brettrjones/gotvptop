@@ -18,9 +18,14 @@
  *
  */
 
-#if defined(TARGET_ANDROID)
+#if defined(TARGET_OS_ANDROID)
 #include "AndroidAppDirectory.h"
-#include "platform/android/activity/XBMCApp.h"
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
+# include "platform/android/activity/XBMCApp.h"
+#elif defined(TARGET_ANDROID) && defined(HAVE_QT_GUI)
+# include "platform/qt/KodiQtApp.h"
+#endif // defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
+
 #include "FileItem.h"
 #include "File.h"
 #include "utils/URIUtils.h"

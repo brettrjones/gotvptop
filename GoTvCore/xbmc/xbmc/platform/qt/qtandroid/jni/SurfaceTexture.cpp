@@ -26,7 +26,7 @@
 
 #include "jutils/jutils-details.hpp"
 
-#include "platform/android/activity/JNIMainActivity.h"
+#include "platform/qt/qtandroid/activity/JNIMainActivity.h"
 #include <algorithm>
 
 using namespace jni;

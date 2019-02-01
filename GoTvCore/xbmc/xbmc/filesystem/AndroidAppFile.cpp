@@ -18,7 +18,7 @@
  *
  */
 
-#if defined(TARGET_ANDROID)
+#if defined(TARGET_OS_ANDROID)
 
 #include <jni.h>
 #include <sys/stat.h>
@@ -34,7 +34,12 @@
 #include <android/jni/Resources.h>
 
 #include "AndroidAppFile.h"
-#include "platform/android/activity/XBMCApp.h"
+#if defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+# include "platform/android/activity/XBMCApp.h"
+#elif defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
+# include "platform/qt/KodiQtApp.h"
+#endif // defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+
 #include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
 #include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
 #include "utils/log.h"

@@ -249,10 +249,10 @@ extern "C" {
 //============================================================================
 #elif defined(TARGET_OS_ANDROID)
 
-# ifndef HAS_GL
-#  define HAS_GL 1
-#  define HAVE_LIBGL 1
-# endif // HAS_GL
+# ifndef HAS_GLES
+#  define HAS_GLES 1
+//#  define HAVE_LIBGLESV2 1 // defined to 1 in first Android Specific secion
+# endif // HAS_GLES
 
 //============================================================================
 //=== Linux Specific ===//
@@ -305,6 +305,11 @@ extern "C" {
 //=== Apple Specific ===//
 //============================================================================
 #elif defined(TARGET_OS_APPLE)
+# ifndef HAS_GLES
+#  define HAS_GLES 1
+#  define HAVE_LIBGLESV2 1 // apple phones support gles.. not sure if this is right define though
+# endif // HAS_GLES
+
 echo GoTv Compiler Config error apple not supported
 #else 
 echo GoTv Compiler Config error no os defined

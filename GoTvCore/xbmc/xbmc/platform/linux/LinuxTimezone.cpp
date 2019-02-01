@@ -5,11 +5,17 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
-
+#include <config_kodi.h>
 #include <time.h>
 #ifdef TARGET_ANDROID
-#include "platform/android/bionic_supplement/bionic_supplement.h"
-#endif
+# include <unistd.h> // for readlink
+# if defined(HAVE_QT_GUI)
+#  include "platform/qt/qtandroid/bionic_supplement/bionic_supplement.h"
+# else
+#  include "platform/android/bionic_supplement/bionic_supplement.h"
+# endif // defined(HAVE_QT_GUI)
+#endif // TARGET_ANDROID
+
 #include "PlatformDefs.h"
 #include "LinuxTimezone.h"
 #include "utils/SystemInfo.h"

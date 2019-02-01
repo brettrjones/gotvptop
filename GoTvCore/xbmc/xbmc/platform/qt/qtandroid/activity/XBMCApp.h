@@ -19,28 +19,28 @@
  *
  */
 
-#include "system.h"
+#include "config_kodi.h"
 
 #include <math.h>
 #include <pthread.h>
 #include <string>
 #include <vector>
 
-#include <android/native_activity.h>
+//#include <qtandroid/native_activity.h>
 
 #include "IActivityHandler.h"
 #include "IInputHandler.h"
 
 #include "platform/xbmc.h"
-#include "platform/android/jni/Activity.h"
-#include "platform/android/jni/BroadcastReceiver.h"
-#include "platform/android/jni/AudioManager.h"
-#include "platform/android/jni/View.h"
+#include "platform/qt/qtandroid/jni/Activity.h"
+#include "platform/qt/qtandroid/jni/BroadcastReceiver.h"
+#include "platform/qt/qtandroid/jni/AudioManager.h"
+#include "platform/qt/qtandroid/jni/View.h"
 #include "threads/Event.h"
 
 #include "JNIMainActivity.h"
 
-#include "guilib/Geometry.h"
+#include "utils/Geometry.h"
 
 // forward delares
 class CJNIWakeLock;

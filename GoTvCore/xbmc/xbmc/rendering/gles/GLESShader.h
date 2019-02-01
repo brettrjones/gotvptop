@@ -9,7 +9,7 @@
 #pragma once
 
 #include "config_kodi.h"
-#ifndef HAVE_QT_GUI
+#if !defined(HAVE_QT_GUI) || defined(TARGET_OS_ANDROID) || defined(TARGET_OS_APPLE)
 #include "guilib/Shader.h"
 #include <string>
 

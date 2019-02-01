@@ -26,8 +26,9 @@
 #include <errno.h>
 
 #if defined(TARGET_ANDROID)
-#include <sys/file.h>
-#include <sys/statfs.h>
+# include <sys/file.h>
+# include <sys/statfs.h>
+# include <unistd.h> // for close
 
 /* from android header: note: this corresponds to the kernel's statfs64 type */
 //typedef struct statfs statfs64;

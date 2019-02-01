@@ -15,6 +15,7 @@ INCLUDEPATH += $$PWD/DependLibs/libUPnP/Neptune/Source/Core
 INCLUDEPATH += $$PWD/DependLibs/libpcre
 INCLUDEPATH += $$PWD/DependLibs/libfreetype/include
 
+INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/qt
 
 win32{
     INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/win32
@@ -2864,7 +2865,26 @@ win32{
 }
 
 android{
-    HEADERS += 	$$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.h
+    HEADERS += 	$$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/api-level.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/asset_manager.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/asset_manager_jni.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/bitmap.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/configuration.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/dlext.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/input.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/keycodes.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/log.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/looper.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/native_activity.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/native_window.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/native_window_jni.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/obb.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/rect.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/sensor.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/storage_manager.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/tts.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/window.h
 
     SOURCES += $$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.cpp
 }

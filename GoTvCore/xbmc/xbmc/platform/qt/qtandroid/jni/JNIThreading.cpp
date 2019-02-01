@@ -40,7 +40,7 @@
 #include <jni.h>
 #include <pthread.h>
 #include <stdlib.h>
-#include <android/log.h>
+#include <qtandroid/log.h>
 namespace xbmcjni
 {
 

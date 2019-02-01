@@ -21,8 +21,9 @@
 #include "config_kodi.h"
 #ifdef HAVE_QT_GUI
 
-#include "ServiceBroker.h"
 #include "Texture.h"
+
+#include "ServiceBroker.h"
 #include "rendering/RenderSystem.h"
 #include "utils/log.h"
 #include "utils/GLUtils.h"

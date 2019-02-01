@@ -19,7 +19,12 @@
 #include <libcrossguid/guid.h>
 
 #if defined(TARGET_ANDROID)
-#include <android/jni/JNIThreading.h>
+# ifdef HAVE_QT_GUI
+#  include <platform/qt/qtandroid/jni/JNIThreading.h>
+# else
+#  include <android/jni/JNIThreading.h>
+# endif // HAVE_QT_GUI
+# include <CoreLib/VxJava.h>
 #endif
 
 #include "StringUtils.h"
@@ -1126,7 +1131,11 @@ void StringUtils::WordToDigits(std::string &word)
 
 std::string StringUtils::CreateUUID()
 {
-  static GuidGenerator guidGenerator;
+#ifdef TARGET_OS_ANDROID
+  static GuidGenerator guidGenerator( VxJava::getJavaEnv() );
+#else
+    static GuidGenerator guidGenerator;
+#endif // TARGET_OS_ANDROID
   auto guid = guidGenerator.newGuid();
 
   std::stringstream strGuid; strGuid << guid;

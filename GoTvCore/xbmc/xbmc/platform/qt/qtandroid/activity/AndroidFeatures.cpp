@@ -21,8 +21,8 @@
 #include "AndroidFeatures.h"
 #include "utils/log.h"
 
-#include <cpu-features.h>
-#include "platform/android/jni/JNIThreading.h"
+#include <androidNdk/android/cpufeatures/cpu-features.h>
+#include "platform/qt/qtandroid/jni/JNIThreading.h"
 
 bool CAndroidFeatures::HasNeon()
 {

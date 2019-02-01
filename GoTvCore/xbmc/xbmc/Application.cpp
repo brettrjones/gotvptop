@@ -174,9 +174,13 @@
 #endif
 
 #if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
-#include <android/jni/Build.h>
-#include "platform/android/activity/XBMCApp.h"
-#include "platform/android/activity/AndroidFeatures.h"
+# include <android/jni/Build.h>
+# include "platform/android/activity/XBMCApp.h"
+# include "platform/android/activity/AndroidFeatures.h"
+#elif defined(TARGET_ANDROID) && defined(HAVE_QT_GUI)
+# include <qtandroid/jni/Build.h>
+# include "platform/qt/KodiQtApp.h"
+# include "platform/qt/qtandroid/activity/AndroidFeatures.h"
 #endif
 
 #ifdef TARGET_WINDOWS

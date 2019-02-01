@@ -20,9 +20,9 @@
 
 #include "JNIMainActivity.h"
 
-#include "platform/android/jni/Activity.h"
-#include "platform/android/jni/Intent.h"
-#include "platform/android/jni/jutils/jutils-details.hpp"
+#include "platform/qt/qtandroid/jni/Activity.h"
+#include "platform/qt/qtandroid/jni/Intent.h"
+#include "platform/qt/qtandroid/jni/jutils/jutils-details.hpp"
 
 using namespace jni;
 

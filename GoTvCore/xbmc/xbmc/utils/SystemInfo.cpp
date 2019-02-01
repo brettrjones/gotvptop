@@ -54,10 +54,15 @@ using namespace winrt::Windows::System::Profile;
 #include "utils/StringUtils.h"
 #include "utils/XMLUtils.h"
 #if defined(TARGET_ANDROID)
-#include <android/jni/Build.h>
+# if defined(HAVE_QT_GUI)
+#  include <platform/qt/qtandroid/jni/Build.h>
+# else
+#  include <android/jni/Build.h>
+# endif // defined(HAVE_QT_GUI)
+#endif // defined(TARGET_ANDROID)
+
 #if defined(HAS_LIBAMCODEC)
-#include "utils/AMLUtils.h"
-#endif
+# include "utils/AMLUtils.h"
 #endif
 
 /* Platform identification */

@@ -12,9 +12,6 @@
 
 #include <GoTvDependLibrariesConfig.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 	/**
 	* LIBXSLT_DOTTED_VERSION:

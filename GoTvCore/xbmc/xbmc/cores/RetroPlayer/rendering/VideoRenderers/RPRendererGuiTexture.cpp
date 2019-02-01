@@ -17,6 +17,11 @@
 using namespace DirectX;
 #endif
 
+#if HAS_GLES || HAS_GL
+# include <system_gl.h>
+#endif // HAS_GLES
+
+
 using namespace KODI;
 using namespace RETRO;
 

@@ -25,12 +25,15 @@
 #include <vector>
 #include "utils/Color.h"
 
+#if !defined(HAS_GLES) // gles defines PackedVertex
 struct PackedVertex
 {
     float x, y, z;
     float u1, v1;
     float u2, v2;
 };
+#endif // !defined(HAS_GLES)
+
 typedef std::vector<PackedVertex> PackedVertices;
 
 class CRenderSystemQt;

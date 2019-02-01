@@ -28,7 +28,11 @@
 #include <android/jni/WifiManager.h>
 #include <android/jni/WifiInfo.h>
 
-#include "platform/android/activity/XBMCApp.h"
+#if defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+# include "platform/android/activity/XBMCApp.h"
+#elif defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
+# include "platform/qt/KodiQtApp.h"
+#endif // defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
 
 #include "utils/StringUtils.h"
 #include "utils/log.h"

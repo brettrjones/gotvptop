@@ -12,6 +12,10 @@
 
 #include <cassert>
 
+#ifdef TARGET_OS_ANDROID
+# include <unistd.h> // for close
+#endif // TARGET_OS_ANDROID
+
 int CXHandle::m_objectTracker[10] = {0};
 
 HANDLE WINAPI GetCurrentProcess(void) {

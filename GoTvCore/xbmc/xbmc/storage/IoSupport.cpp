@@ -52,6 +52,10 @@
 #include "XFileUtils.h"
 #endif
 
+#ifdef TARGET_ANDROID
+#include <unistd.h>
+#endif
+
 #ifdef HAS_DVD_DRIVE
 using namespace MEDIA_DETECT;
 #endif

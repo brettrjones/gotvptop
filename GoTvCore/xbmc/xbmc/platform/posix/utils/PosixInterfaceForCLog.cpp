@@ -14,7 +14,11 @@
 #if defined(TARGET_DARWIN)
 #include "platform/darwin/DarwinUtils.h"
 #elif defined(TARGET_ANDROID)
-#include "platform/android/activity/XBMCApp.h"
+#if defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+# include "platform/android/activity/XBMCApp.h"
+#elif defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
+# include "platform/qt/KodiQtApp.h"
+#endif // defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
 #endif // TARGET_ANDROID
 
 struct FILEWRAP : public FILE

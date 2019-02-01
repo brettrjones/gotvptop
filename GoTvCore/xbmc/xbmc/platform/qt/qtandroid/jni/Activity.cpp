@@ -23,7 +23,7 @@
 
 #include "jutils/jutils-details.hpp"
 
-#include <android/native_activity.h>
+#include <qtandroid/native_activity.h>
 
 using namespace jni;
 

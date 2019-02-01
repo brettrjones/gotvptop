@@ -20,7 +20,7 @@
 
 #include "Context.h"
 #include "PackageManager.h"
-#include <android/log.h>
+#include <qtandroid/log.h>
 #include "Intent.h"
 #include "IntentFilter.h"
 #include "ClassLoader.h"
@@ -56,7 +56,7 @@
 #include "AudioDeviceInfo.h"
 #include "MediaSync.h"
 
-#include <android/native_activity.h>
+#include <qtandroid/native_activity.h>
 
 using namespace jni;
 

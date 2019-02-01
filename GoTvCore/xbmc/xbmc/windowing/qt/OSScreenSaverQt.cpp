@@ -22,16 +22,21 @@
 
 #include "OSScreenSaverQt.h"
 
-//#include "platform/qt/activity/XBMCApp.h"
+#if defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+# include "platform/android/activity/XBMCApp.h"
+#elif defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
+# include "platform/qt/KodiQtApp.h"
+#endif // defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+
 
 void COSScreenSaverQt::Inhibit()
 {
-//  CXBMCApp::get()->EnableWakeLock(true);
+  CXBMCApp::get()->EnableWakeLock(true);
 }
 
 void COSScreenSaverQt::Uninhibit()
 {
-//  CXBMCApp::get()->EnableWakeLock(false);
+  CXBMCApp::get()->EnableWakeLock(false);
 }
 
 #endif // HAVE_QT_GUI

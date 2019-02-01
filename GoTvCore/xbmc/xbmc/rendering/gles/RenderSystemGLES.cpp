@@ -404,8 +404,8 @@ void CRenderSystemGLES::InitialiseShaders()
   m_pShader[SM_FONTS].reset(new CGLESShader("gles_shader_fonts.frag", defines));
   if (!m_pShader[SM_FONTS]->CompileAndLink())
   {
-    m_pShader[SM_FONTS]->Free();
-    delete m_pShader[SM_FONTS];
+    m_pShader[SM_FONTS]->Free();  
+    m_pShader[SM_FONTS].reset();;
     m_pShader[SM_FONTS] = nullptr;
     CLog::Log(LOGERROR, "GUI Shader gles_shader_fonts.frag - compile and link failed");
   }

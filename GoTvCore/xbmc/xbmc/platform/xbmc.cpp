@@ -18,9 +18,9 @@
 #include <wrl/client.h>
 #endif
 
-#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
+#if defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
 # include "platform/android/activity/XBMCApp.h"
-#elif defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
+#elif defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
 # include "platform/qt/KodiQtApp.h"
 #endif
 

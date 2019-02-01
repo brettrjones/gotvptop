@@ -19,10 +19,10 @@
  *
  */
 
-#include "platform/android/jni/Activity.h"
-#include "platform/android/jni/InputManager.h"
-#include "platform/android/jni/Surface.h"
-#include "platform/android/jni/Rect.h"
+#include "platform/qt/qtandroid/jni/Activity.h"
+#include "platform/qt/qtandroid/jni/InputManager.h"
+#include "platform/qt/qtandroid/jni/Surface.h"
+#include "platform/qt/qtandroid/jni/Rect.h"
 
 class CJNIMainActivity : public CJNIActivity, public CJNIInputManagerInputDeviceListener
 {

@@ -19,7 +19,7 @@
  *
  */
 
-#include <android/input.h>
+#include <qtandroid/input.h>
 
 #include <stdint.h>
 #include <string>
