@@ -99,10 +99,8 @@ void AppCommon::onMenuOptionsSelected( int iMenuId, QWidget * senderPopupMenu )
 			addPermissionMenuEntry( &popupMenu, ePluginTypeWebServer, eMyIconProfile, "(%s) Who can view my profile" );
 			// Storyboard
 			addPermissionMenuEntry( &popupMenu, ePluginTypeStoryBoard, eMyIconStoryBoardNormal, "(%s) Who can view my storyboard" );
-			if( false == connect( &popupMenu, SIGNAL(menuItemClicked(int, QWidget *)), this, SLOT(onEditPermissionsSelected(int, QWidget *))) )
-			{
-				LogMsg( LOG_ERROR, "could not connect to onEditPermissionsSelected\n" );
-			}
+            connect( &popupMenu, SIGNAL(menuItemClicked(int, QWidget *)), this, SLOT(onEditPermissionsSelected(int, QWidget *)));
+
 			popupMenu.exec();
 			break;
 		}

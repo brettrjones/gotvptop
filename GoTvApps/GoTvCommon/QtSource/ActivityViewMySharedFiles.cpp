@@ -43,22 +43,11 @@ ActivityViewMySharedFiles::ActivityViewMySharedFiles(	AppCommon& app, QWidget * 
 	m_WidgetClickEventFixTimer->setInterval( 10 );
 	connect( m_WidgetClickEventFixTimer, SIGNAL(timeout()), this, SLOT(slotRequestFileList()) );
 
-	if( false == connect(ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotHomeButtonClicked())) )
-	{
-		LogMsg( 0, "ActivityViewMySharedFiles could not connect to exitPopupButton\n");
-	}
-
-	if( false == connect(ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotListItemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( 0, "ActivityViewMySharedFiles could not connect to slotItemClicked\n");
-	}
+    connect(ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotHomeButtonClicked()));
+    connect(ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotListItemClicked(QListWidgetItem *)));
 
 	connect( this, SIGNAL(signalToGuiFileList(VxMyFileInfo&)), this, SLOT(slotToGuiFileList(VxMyFileInfo&)) );
-
-	if( false == connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotListItemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( 0, "ActivityViewMySharedFiles could not connect to slotItemClicked\n");
-	}
+    connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotListItemClicked(QListWidgetItem *)));
 
 	connect( ui.m_AddFilesButton,		SIGNAL(clicked()),								this, SLOT(slotAddFilesButtonClicked()) );
 	connect( ui.m_FileFilterComboBox,	SIGNAL(signalApplyFileFilter(unsigned char)),	this, SLOT(slotApplyFileFilter(unsigned char)));

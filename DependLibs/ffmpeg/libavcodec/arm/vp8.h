@@ -21,7 +21,7 @@
 
 #include <stdint.h>
 
-#include "config.h"
+#include "config_ffmpeg.h"
 #include "libavcodec/vp56.h"
 #include "libavcodec/vp8.h"
 

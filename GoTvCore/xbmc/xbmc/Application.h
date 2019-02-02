@@ -152,16 +152,16 @@ public:
     //============================================================================
     //=== to gotv events ===//
     //============================================================================
-    void                        keyPressEvent( int moduleNum, int key, int mod ) override;
-    void                        keyReleaseEvent( int moduleNum, int key, int mod ) override;
+    void                        fromGuiKeyPressEvent( int moduleNum, int key, int mod ) override;
+    void                        fromGuiKeyReleaseEvent( int moduleNum, int key, int mod ) override;
 
-    void                        mousePressEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton ) override;
-    void                        mouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton ) override;
-    void                        mouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos ) override;
+    void                        fromGuiMousePressEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton ) override;
+    void                        fromGuiMouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton ) override;
+    void                        fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos ) override;
 
-    void                        resizeEvent( int moduleNum, int winWidth, int winHeight ) override;
-    void                        closeEvent( int moduleNum ) override;
-    void                        visibleEvent( int moduleNum, bool isVisible ) override;
+    void                        fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight ) override;
+    void                        fromGuiCloseEvent( int moduleNum ) override;
+    void                        fromGuiVisibleEvent( int moduleNum, bool isVisible ) override;
 
     //============================================================================
     //=== run ===//

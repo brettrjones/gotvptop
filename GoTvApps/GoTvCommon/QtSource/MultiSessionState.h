@@ -37,10 +37,10 @@ enum EImageType
 	eImageTypeNormal 			= 0,
 	eImageTypeDisabled 			= 1,
 	eImageTypeCancel 			= 2,
-	eImageTypeRed 				= 3,
-	eImageTypeYellow 			= 4,
+    eImageTypeRed 				= 3,
+    eImageTypeYellow 			= 4,
 
-	eMaxImageType
+//	eMaxImageType
 };
 
 #include <QWidget>

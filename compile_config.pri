@@ -6,6 +6,34 @@ DEFINES += FT_DEBUG_LEVEL_ERROR FT_DEBUG_LEVEL_TRACE FT2_BUILD_LIBRARY FT_MAKE_O
 
 DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MULTIMEDIA_LIB
 
+
+CONFIG(debug, debug|release){
+ message(Project is built in DEBUG mode.)
+    DEFINES += DEBUG
+}
+
+CONFIG(release, debug|release){
+ message(Project is built in RELEASE mode.)
+}
+
+CONFIG(release, debug|release){
+    DEFINES += NDEBUG
+    DEFINES += RELEASE
+    linux:!android: message(Disabling UNIX debug output.)
+    win32: message(Disabling WIN32 debug output.)
+    android: message(Disabling ANDROID debug output.)
+    DEFINES += QT_NO_DEBUG_OUTPUT
+}
+
+CONFIG(debug, debug|release){
+    DEFINES += _DEBUG
+    DEFINES += DEBUG
+    linux:!android: message(Enabling UNIX debug output.)
+    win32: message(Enabling WIN32 debug output.)
+    android: message(Enabling ANDROID debug output.)
+}
+
+
 INCLUDEPATH += $$PWD/DependLibs
 
 win32{
@@ -61,36 +89,12 @@ unix:QMAKE_CFLAGS += -Wno-pointer-sign
 unix:QMAKE_CFLAGS += -Wno-missing-field-initializers
 unix:QMAKE_CFLAGS += -Wno-switch
 
-QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-parameter
-QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
-
+#QMAKE_CXXFLAGS_WARN_ON += -Wno-overload-virtual
 
 #unix:!android:QMAKE_CFLAGS += -Wno-#pragma-messages
 
-CONFIG(debug, debug|release){
- message(Project is built in DEBUG mode.)
-    DEFINES += DEBUG
-}
-
-CONFIG(release, debug|release){
- message(Project is built in RELEASE mode.)
-}
-
-CONFIG(release, debug|release){
-    DEFINES += NDEBUG
-    DEFINES += RELEASE
-    linux:!android: message(Disabling UNIX debug output.)
-    win32: message(Disabling WIN32 debug output.)
-    android: message(Disabling ANDROID debug output.)
-    DEFINES += QT_NO_DEBUG_OUTPUT
-}
-
-CONFIG(debug, debug|release){
-    DEFINES += _DEBUG
-    DEFINES += DEBUG
-    linux:!android: message(Enabling UNIX debug output.)
-    win32: message(Enabling WIN32 debug output.)
-    android: message(Enabling ANDROID debug output.)
-}
+QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-parameter
+QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
+#QMAKE_CXXFLAGS_WARN_ON += -Wno-inconsistent-missing-override
 
 

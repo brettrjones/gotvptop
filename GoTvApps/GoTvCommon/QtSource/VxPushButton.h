@@ -34,7 +34,7 @@ public:
 
 	virtual int					heightForWidth( int width ) const;
 	virtual QSize				sizeHint() const;
-    virtual QSize				minimumSizeHint( void ) { return sizeHint(); }
+    virtual QSize				getMinimumSizeHint( void ) { return sizeHint(); }
     virtual void				setFixedSize( const QSize & fixedSize );
     virtual void				setFixedSize( int width, int height );
     virtual void				setFixedWidth( int width );

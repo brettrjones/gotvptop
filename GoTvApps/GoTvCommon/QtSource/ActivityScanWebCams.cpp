@@ -398,10 +398,8 @@ void ActivityScanWebCams::slotFriendClicked( void )
 	if( 0 != m_HisIdent )
 	{
 		PopupMenu oPopupMenu( m_MyApp, (QWidget *)this->parent() );
-		if( false == connect( &oPopupMenu, SIGNAL(menuItemClicked(int,QWidget *)), &oPopupMenu, SLOT(onFriendActionSelected(int,QWidget *)) ) )
-		{
-			LogMsg( LOG_ERROR, "FriendListWidget::findListEntryWidget failed connect\n" );
-		}
+        connect( &oPopupMenu, SIGNAL(menuItemClicked(int,QWidget *)), &oPopupMenu, SLOT(onFriendActionSelected(int,QWidget *)) );
+
 
 		oPopupMenu.showFriendMenu( m_HisIdent );
 	}

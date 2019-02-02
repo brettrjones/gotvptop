@@ -57,33 +57,14 @@ ActivityBrowseFiles::ActivityBrowseFiles( AppCommon& app,  EFileFilterType fileF
 	connect( m_WidgetClickEventFixTimer, SIGNAL(timeout()), this, SLOT(slotRequestFileList()) );
 
 
-	if( false == connect( ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotListItemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( 0, "ActivityBrowseFiles could not connect to slotItemClicked\n");
-	}
-
-	if( false == connect( ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotListItemDoubleClicked(QListWidgetItem *))) )
-	{
-		LogMsg( 0, "ActivityBrowseFiles could not connect to slotListItemDoubleClicked\n");
-	}
-
+    connect( ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotListItemClicked(QListWidgetItem *)));
+    connect( ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotListItemDoubleClicked(QListWidgetItem *)));
 	connect( this, SIGNAL(signalToGuiFileList(VxMyFileInfo&)), this, SLOT(slotToGuiFileList(VxMyFileInfo&)) );
 
-	if( false == connect( ui.m_UpDirectoryLabel, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked())) )
-	{
-		LogMsg( 0, "ActivityBrowseFiles could not connect to up directory\n");
-	}
+    connect( ui.m_UpDirectoryLabel, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked()));
 
-	if( false == connect( ui.m_UpDirectoryButton, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked())) )
-	{
-		LogMsg( 0, "ActivityBrowseFiles could not connect to up directory\n");
-	}
-
-	if( false == connect( ui.m_UpDirWidget, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked())) )
-	{
-		LogMsg( 0, "ActivityBrowseFiles could not connect to up directory\n");
-	}
-
+    connect( ui.m_UpDirectoryButton, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked()));
+    connect( ui.m_UpDirWidget, SIGNAL(clicked()), this, SLOT(slotUpDirectoryClicked()));
 	connect( ui.m_BrowseButton, SIGNAL(clicked()), this, SLOT(slotBrowseButtonClicked()));
 
 	setDefaultCurrentDir( m_eFileFilterType );

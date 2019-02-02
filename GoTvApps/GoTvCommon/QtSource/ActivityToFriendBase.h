@@ -77,7 +77,7 @@ signals:
 public slots:
 	void						slotMuteMicButtonClicked( bool muteMic );
 	void						slotMuteSpeakerButtonClicked( bool muteSpeaker );
-	void						slotCameraSnapshotButtonClicked( bool enableEchoCancel );
+    void						slotCameraSnapshotButtonClicked( void );
 	void						slotCamPreviewClicked( void );
 
 protected slots:

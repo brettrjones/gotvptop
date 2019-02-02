@@ -39,16 +39,16 @@ namespace
 
 	uint16_t			g_u16AppVersion					= 0x104;
 #ifdef DEBUG
-	std::string			g_strApplicationName			= "GoTv P2P Test App";
-	std::string			g_strApplicationNameNoSpaces	= "GoTvP2PTestApp";
-	std::string			g_strNetworkName				= "GoTvP2PTestNet";
+    std::string			g_strApplicationName			= "GoTv PtoP Test App";
+    std::string			g_strApplicationNameNoSpaces	= "GoTvPtoPTestApp";
+    std::string			g_strNetworkName				= "GoTvPtoPTestNet";
 	std::string			g_strCompanyWebsite				= "http://www.gotvptop.net";
 	std::string			g_strCompanyDomain				= "www.gotvptop.net";
 	bool				g_IsAppCommercial				= false;
 #else
-	std::string			g_strApplicationName			= "GoTv P2P";
-	std::string			g_strApplicationNameNoSpaces	= "GoTvP2P";
-	std::string			g_strNetworkName				= "GoTvP2PNet";
+    std::string			g_strApplicationName			= "GoTv PtoP";
+    std::string			g_strApplicationNameNoSpaces	= "GoTvPtoP";
+    std::string			g_strNetworkName				= "GoTvPtoPNet";
 	std::string			g_strCompanyWebsite				= "http://www.gotvptop.net";
 	std::string			g_strCompanyDomain				= "www.gotvptop.net";
 	bool				g_IsAppCommercial				= false;
@@ -56,9 +56,10 @@ namespace
 
 	std::string			g_strRootXferDir				= "";
 	std::string			g_strRootDataDir				= "";
-	std::string			g_strProfileDir					= "";
+    std::string			g_strUserProfileDir             = "";
 	std::string			g_strAppDataDir					= "";
-	std::string			g_strSettingsDir				= "";
+    std::string			g_strKodiDataDir				= "";
+    std::string			g_strSettingsDir				= "";
 	std::string			g_strAssetsDir					= "";
 
 	std::string			g_strUploadsDir					= "";
@@ -78,19 +79,20 @@ namespace
 }
 
 // directory structure on disk
-// /storage/MyP2PWeb/appdata/ShredFilesDb.db3 and app generated files
+// /storage/GoTvPtoP/appdata/ShredFilesDb.db3 and app generated files
+//                  /kodidata/ kodi plugins and writable data directory
 //                  /appassets/gui/ gui assets
-//                         /shaders/ opengl shaders
-//                         /profile/ profile default files
+//                            /shaders/ opengl shaders
+//                            /profile/ profile default files
 // user specific directories
 //                  /accounts/userId/settings/ databases
 //                  /accounts/userId/profile/ profile and story board user web pages
 // user xfer directories         
 //                  /userdata/userId/downloads
-//                                 /uploads
-//                                 /incomplete
-//                                 /me/			personal recordings
-//                                 /contacts/	contact assets
+//                                  /uploads
+//                                  /incomplete
+//                                  /me/			personal recordings
+//                                  /contacts/	contact assets
 
 //============================================================================
 void VxSetAppIsShuttingDown( bool bIsShuttingDown )
@@ -290,8 +292,11 @@ void VxSetRootDataDirectory( const char * rootDataDir  )
 	g_strAppTempDir		= g_strRootDataDir + "temp/";
 	VxFileUtil::makeDirectory(g_strAppTempDir.c_str());
 
-	g_strAppDataDir		= g_strRootDataDir + "data/";
+    g_strAppDataDir		= g_strRootDataDir + "appdata/";
 	VxFileUtil::makeDirectory( g_strAppDataDir.c_str() );
+
+    g_strKodiDataDir		= g_strRootDataDir + "kodidata/";
+    VxFileUtil::makeDirectory( g_strKodiDataDir.c_str() );
 
 	GetVxFileShredder().initShredder( g_strAppDataDir );
 }
@@ -317,8 +322,8 @@ void VxSetUserSpecificDataDirectory( const char * userDataDir  )
 	g_strSettingsDir = g_strUserSpecificDataDir + "settings/";
 	VxFileUtil::makeDirectory( g_strSettingsDir.c_str() );
 
-	g_strProfileDir = g_strUserSpecificDataDir + "profile/";
-	VxFileUtil::makeDirectory( g_strProfileDir.c_str() );
+    g_strUserProfileDir = g_strUserSpecificDataDir + "profile/";
+    VxFileUtil::makeDirectory( g_strUserProfileDir.c_str() );
 }
 
 //============================================================================
@@ -334,9 +339,9 @@ std::string& VxGetSettingsDirectory( void )
 }
 
 //============================================================================
-std::string& VxGetProfileDirectory( void ) 
+std::string& VxGetUserProfileDirectory( void )
 { 
-	return g_strProfileDir; 
+    return g_strUserProfileDir;
 }
 
 //============================================================================

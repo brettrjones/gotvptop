@@ -169,42 +169,5 @@ void IWin32::doShutdown( )
     ReleaseMutex( m_AppRunningMutex );
 }
 
-//=== utilities ===//
-//============================================================================
-
-bool IWin32::initDirectories()
-{
-#ifdef TARGET_WINDOWS
-    std::string xbmcPath = CUtil::GetHomePath(); //F:/GoTvCode/bin/Resources /xbmc or /gotvptop
-    //std::string xbmcPath = CUtil::GetExecutablePath();
-
-    CEnvironment::setenv( CCompileInfo::GetHomeEnvName(), xbmcPath );
-    CSpecialProtocol::SetXBMCBinPath( xbmcPath );
-    CSpecialProtocol::SetXBMCPath( xbmcPath );
-    CSpecialProtocol::SetXBMCBinAddonPath( xbmcPath + "/addons" );
-
-    std::string strWin32UserFolder = CWIN32Util::GetProfilePath();
-    CSpecialProtocol::SetLogPath( strWin32UserFolder );
-    CSpecialProtocol::SetHomePath( strWin32UserFolder );
-    CSpecialProtocol::SetMasterProfilePath( URIUtils::AddFileToFolder( strWin32UserFolder, "userdata" ) );
-    CSpecialProtocol::SetTempPath( URIUtils::AddFileToFolder( strWin32UserFolder, "cache" ) );
-
-    // For P2P
-    CSpecialProtocol::SetAppDataPath( URIUtils::AddFileToFolder( strWin32UserFolder, "appdata" ) );
-    CSpecialProtocol::SetAppAssetsPath( URIUtils::AddFileToFolder( strWin32UserFolder, "appassets" ) );
-    CSpecialProtocol::SetAccountsPath( URIUtils::AddFileToFolder( strWin32UserFolder, "accounts" ) );
-    CSpecialProtocol::SetUserXferPath( URIUtils::AddFileToFolder( strWin32UserFolder, "userxfer" ) );
-    CSpecialProtocol::SetUserGroupPath( URIUtils::AddFileToFolder( strWin32UserFolder, "usergroup" ) );
-
-    CEnvironment::setenv( CCompileInfo::GetUserProfileEnvName(), CSpecialProtocol::TranslatePath( "special://masterprofile/" ) );
-
-    m_IGoTv.createUserDirs();
-
-    return true;
-#else
-    return false;
-#endif
-}
-
 
 #endif // TARGET_OS_WINDOWS

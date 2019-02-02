@@ -1,6 +1,7 @@
 #pragma once
 #include "ui_AcceptCancelWidget.h"
 
+#include <QFrame>
 
 class AcceptCancelWidget : public QFrame
 {

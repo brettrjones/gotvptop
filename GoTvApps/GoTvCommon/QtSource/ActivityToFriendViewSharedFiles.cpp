@@ -51,21 +51,9 @@ ActivityToFriendViewSharedFiles::ActivityToFriendViewSharedFiles(	AppCommon&	app
 	ui.setupUi(this);
 	slotRepositionToParent();
 
-	if( false == connect(ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotHomeButtonClicked())) )
-	{
-		LogMsg( LOG_INFO, "ActivityToFriendViewSharedFiles could not connect to exitPopupButton\n");
-	}
-
-	if( false == connect(ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "ActivityToFriendViewSharedFiles could not connect to slotItemClicked\n");
-	}
-
-	if( false == connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "ActivityToFriendViewSharedFiles could not connect to slotItemClicked\n");
-	}
-
+    connect(ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotHomeButtonClicked()));
+    connect(ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *)));
+    connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *)));
 	connect( ui.m_FileFilterComboBox, SIGNAL(signalApplyFileFilter(unsigned char)),			this,  SLOT(slotApplyFileFilter(unsigned char)) );
 
 	connect( this, SIGNAL(signalToGuiFileListReply(FileListReplySession*)),					this, SLOT(slotToGuiFileListReply(FileListReplySession*)) );
@@ -245,15 +233,8 @@ FileXferWidget * ActivityToFriendViewSharedFiles::fileToWidget(  VxNetIdent *   
 	xferSession->setWidget( item );
     item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)xferSession) );
 
-	if( false == connect( item, SIGNAL(signalFileXferItemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*))) )
-	{
-		LogMsg( LOG_ERROR, "AppCommon::fileToWidget: connect failed\n");
-	}
-
-	if( false == connect( item, SIGNAL(signalFileIconButtonClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*))) )
-	{
-		LogMsg( LOG_ERROR, "AppCommon::fileToWidget: connect failed\n");
-	}
+    connect( item, SIGNAL(signalFileXferItemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*)));
+    connect( item, SIGNAL(signalFileIconButtonClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*)));
 
 	connect( item, SIGNAL(signalCancelButtonClicked(QListWidgetItem*)),		this, SLOT(slotCancelButtonClicked(QListWidgetItem*)) );
 	connect( item, SIGNAL(signalPlayButtonClicked(QListWidgetItem*)),		this, SLOT(slotPlayButtonClicked(QListWidgetItem*)) );
@@ -563,10 +544,7 @@ void ActivityToFriendViewSharedFiles::promptForDownload( GuiFileXferSession * po
 	oPopupMenu.setTitle( QObject::tr( "Download A File" ) );
 	oPopupMenu.addMenuItem( 1, getMyIcons().getIcon(eMyIconFileDownload), QObject::tr( "Download A File" ) );
 	oPopupMenu.addMenuItem( 2, getMyIcons().getIcon(getMyIcons().getFileIcon(poInfo->getFileType())), poInfo->getJustFileName() );
-	if( false == connect( &oPopupMenu, SIGNAL(menuItemClicked(int,QWidget *)), this, SLOT(slotDownloadFileSelected(int,QWidget *))) )
-	{
-		LogMsg( LOG_ERROR, "could not connect to slotDownloadFileSelected\n" );
-	}
+    connect( &oPopupMenu, SIGNAL(menuItemClicked(int,QWidget *)), this, SLOT(slotDownloadFileSelected(int,QWidget *)));
 
 	oPopupMenu.exec();
 }

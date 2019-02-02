@@ -249,7 +249,7 @@ void OffersMgr::forceToNotInSession( OfferSessionState * sessionState )
 	if( ( eOfferStateWaitingReply == oldOfferState )
 		||	( eOfferStateInSession == oldOfferState ) )	
 	{
-		LogMsg( LOG_INFO, "forceToNotInSession %s %s\n", sessionState->getOnlineName(), sessionState->describePlugin().c_str() );
+        LogMsg( LOG_INFO, "forceToNotInSession %s %s\n", sessionState->getOnlineName().c_str(), sessionState->describePlugin().c_str() );
 		sessionState->setOfferState( eOfferStateUnknown );
 	}
 }

@@ -29,19 +29,11 @@ ActivityFileSearch::ActivityFileSearch(	AppCommon& app,  QWidget * parent )
 
 	slotRepositionToParent();
 
-	if( false == connect(ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotHomeButtonClicked())) )
-	{
-		LogMsg( LOG_INFO, "ActivityFileSearch could not connect to exitPopupButton\n");
-	}
-	if( false == connect(ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "ActivityFileSearch could not connect to slotItemClicked\n");
-	}
-	if( false == connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "ActivityFileSearch could not connect to slotItemClicked\n");
-	}
-	g_poFileSearchActivity = this;
+    connect(ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotHomeButtonClicked()));
+    connect(ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *)));
+    connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *)));
+
+            g_poFileSearchActivity = this;
 	setTitle("FileSearch" );
 }
 

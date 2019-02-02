@@ -101,7 +101,7 @@ extern int optopt;
    value (the equivalent single-letter option character, if there is
    one).  For long options that have a zero `flag' field, `nettle_getopt'
    returns the contents of the `val' field.  */
-
+#ifndef TARGET_OS_WINDOWS
 struct option_gnu
 {
   const char *name;
@@ -111,7 +111,7 @@ struct option_gnu
   int *flag;
   int val;
 };
-
+#endif // TARGET_OS_WINDOWS
 /* Names for the values of the `has_arg' field of `struct option'.  */
 
 # define no_argument		0

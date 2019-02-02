@@ -1,5 +1,5 @@
-$$PWD/DependLibs/libarmrwbenc/
 
+INCLUDEPATH += $$PWD/DependLibs/libarmrwbenc
 INCLUDEPATH += $$PWD/DependLibs/libarmrwbenc/inc
 INCLUDEPATH += $$PWD/DependLibs/libarmrwbenc/common/include
 

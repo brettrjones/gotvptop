@@ -15,7 +15,7 @@ include(library_config.pri)
 
 TARGET=$${TARGET_NAME}$${TARGET_OS_NAME}$${TARGET_LIB_APPEND}
 
-#INCLUDEPATH += ./
+
 INCLUDEPATH += $$PWD/build/QtSandbox/QtSimpleTestLib
 
 SOURCES += \

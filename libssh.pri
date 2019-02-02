@@ -10,6 +10,7 @@ HEADERS += 	$$PWD/DependLibs/libssh/agent.h \
     $$PWD/DependLibs/libssh/buffer.h \
     $$PWD/DependLibs/libssh/callbacks.h \
     $$PWD/DependLibs/libssh/channels.h \
+    $$PWD/DependLibs/libssh/config_libssh.h \
     $$PWD/DependLibs/libssh/crc32.h \
     $$PWD/DependLibs/libssh/crypto.h \
     $$PWD/DependLibs/libssh/curve25519.h \
@@ -26,10 +27,6 @@ HEADERS += 	$$PWD/DependLibs/libssh/agent.h \
     $$PWD/DependLibs/libssh/libcrypto.h \
     $$PWD/DependLibs/libssh/libgcrypt.h \
     $$PWD/DependLibs/libssh/libssh.h \
-    $$PWD/DependLibs/libssh/libssh_config.h \
-    $$PWD/DependLibs/libssh/libssh_config_android.h \
-    $$PWD/DependLibs/libssh/libssh_config_linux.h \
-    $$PWD/DependLibs/libssh/libssh_config_windows.h \
     $$PWD/DependLibs/libssh/libssh_priv.h \
     $$PWD/DependLibs/libssh/libssh_string.h \
     $$PWD/DependLibs/libssh/libsshpp.hpp \

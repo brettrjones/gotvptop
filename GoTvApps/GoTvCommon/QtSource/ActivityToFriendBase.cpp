@@ -127,7 +127,7 @@ void ActivityToFriendBase::setupTitleBarWidget( TitleBarWidget * titleBarWidget 
 		connect( m_TitleBarWidget,		SIGNAL(signalBackButtonClicked()),					this,				SLOT(accept()) );
 		connect( m_TitleBarWidget,		SIGNAL(signalMuteMicButtonClicked(bool)),			this,				SLOT(slotMuteMicButtonClicked(bool)) );
 		connect( m_TitleBarWidget,		SIGNAL(signalMuteSpeakerButtonClicked(bool)),		this,				SLOT(slotMuteSpeakerButtonClicked(bool)) );
-		connect( m_TitleBarWidget,		SIGNAL(signalCameraSnapshotButtonClicked(bool)),	this,				SLOT(slotCameraSnapshotButtonClicked(bool)) );
+        connect( m_TitleBarWidget,		SIGNAL(signalCameraSnapshotButtonClicked( void )),	this,				SLOT(slotCameraSnapshotButtonClicked( void )) );
 		connect( m_TitleBarWidget,		SIGNAL(signalCamPreviewClicked()),					this,				SLOT(accept()) );
 		connect( &m_MyApp,				SIGNAL(signalStatusMsg(QString)),					m_TitleBarWidget,	SLOT(slotTitleStatusBarMsg(QString)) );
 	}
@@ -183,9 +183,9 @@ void ActivityToFriendBase::slotMuteSpeakerButtonClicked( bool muteSpeaker )
 }
 
 //============================================================================
-void ActivityToFriendBase::slotCameraSnapshotButtonClicked( bool enableEchoCancel )
+void ActivityToFriendBase::slotCameraSnapshotButtonClicked( void )
 {
-	m_Engine.fromGuiEchoCancelEnable( enableEchoCancel );
+    //m_Engine.fromGuiEchoCancelEnable( enableEchoCancel );
 }
 
 //============================================================================

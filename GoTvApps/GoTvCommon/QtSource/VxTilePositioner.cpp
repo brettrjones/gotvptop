@@ -19,6 +19,9 @@
 #include <CoreLib/VxDebug.h>
 
 #include <QWidget>
+#if defined(TARGET_OS_ANDROID)
+# include <math.h>
+#endif // defined(TARGET_OS_ANDROID)
 
 //============================================================================
 VxTilePositioner::VxTilePositioner( AppCommon& myApp )

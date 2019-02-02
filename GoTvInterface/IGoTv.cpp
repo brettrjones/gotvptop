@@ -337,49 +337,49 @@ void IGoTv::doShutdown()
 //=== to gotv events ===//
 //============================================================================
 //============================================================================
-void IGoTv::keyPressEvent( int moduleNum, int key, int mod )
+void IGoTv::fromGuiKeyPressEvent( int moduleNum, int key, int mod )
 {
-    getKodi().keyPressEvent( moduleNum, key, mod );
+    getKodi().fromGuiKeyPressEvent( moduleNum, key, mod );
 }
 
 //============================================================================
-void IGoTv::keyReleaseEvent( int moduleNum, int key, int mod )
+void IGoTv::fromGuiKeyReleaseEvent( int moduleNum, int key, int mod )
 {
-    getKodi().keyReleaseEvent( moduleNum, key, mod );
+    getKodi().fromGuiKeyReleaseEvent( moduleNum, key, mod );
 }
 
 //============================================================================
-void IGoTv::mousePressEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton )
+void IGoTv::fromGuiMousePressEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton )
 {
-    getKodi().mousePressEvent( moduleNum, mouseXPos, mouseYPos, mouseButton );
+    getKodi().fromGuiMousePressEvent( moduleNum, mouseXPos, mouseYPos, mouseButton );
 }
 
 //============================================================================
-void IGoTv::mouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton )
+void IGoTv::fromGuiMouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton )
 {
-    getKodi().mouseReleaseEvent( moduleNum, mouseXPos, mouseYPos, mouseButton );
+    getKodi().fromGuiMouseReleaseEvent( moduleNum, mouseXPos, mouseYPos, mouseButton );
 }
 
 //============================================================================
-void IGoTv::mouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos )
+void IGoTv::fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos )
 {
-    getKodi().mouseMoveEvent( moduleNum, mouseXPos, mouseYPos );
+    getKodi().fromGuiMouseMoveEvent( moduleNum, mouseXPos, mouseYPos );
 }
 
 //============================================================================
-void IGoTv::resizeEvent( int moduleNum, int winWidth, int winHeight )
+void IGoTv::fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight )
 {
-    getKodi().resizeEvent( moduleNum, winWidth, winHeight );
+    getKodi().fromGuiResizeEvent( moduleNum, winWidth, winHeight );
 }
 
 //============================================================================
-void IGoTv::closeEvent( int moduleNum )
+void IGoTv::fromGuiCloseEvent( int moduleNum )
 {
-    getKodi().closeEvent( moduleNum );
+    getKodi().fromGuiCloseEvent( moduleNum );
 }
 
 //============================================================================
-void IGoTv::visibleEvent( int moduleNum, bool isVisible )
+void IGoTv::fromGuiVisibleEvent( int moduleNum, bool isVisible )
 {
-    getKodi().visibleEvent( moduleNum, isVisible );
+    getKodi().fromGuiVisibleEvent( moduleNum, isVisible );
 }

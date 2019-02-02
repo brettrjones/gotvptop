@@ -3,7 +3,6 @@
 
 #include <CoreLib/VxDebug.h>
 
-
 #include <QtCore/QCoreApplication>
 #include <QtGui/QPainter>
 
@@ -18,7 +17,9 @@ RenderGlOffScreenSurface::RenderGlOffScreenSurface( RenderGlBaseWidget * glWidge
 , m_updatePending( false )
 , m_RenderContext( renderContext )
 , m_functions( nullptr )
+#if !defined(QT_OPENGL_ES_2)
 , m_functions_3_0( nullptr )
+#endif // !defined(QT_OPENGL_ES_2)
 , m_SurfaceSize( size )
 , m_NextSurfaceSize( size )
 , m_TestTexure1( -1 )
@@ -74,7 +75,6 @@ void RenderGlOffScreenSurface::testTexureRender( bool startRender )
         //glShadeModel( GL_FLAT );
         //glEnable( GL_DEPTH_TEST );
         glEnable( GL_TEXTURE_2D );
-        glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL );
 
         if( m_TestTexure1 == -1 )
         {
@@ -123,12 +123,22 @@ void RenderGlOffScreenSurface::testTexureRender( bool startRender )
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
         glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, checkImageWidth, checkImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage );
+
+#if !defined(QT_OPENGL_ES_2)
+        glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL );
         glBegin( GL_QUADS );
             glTexCoord2f( 0.0, 0.0 ); glVertex3f( -0.5, -0.5, 0.0 );
             glTexCoord2f( 0.0, 1.0 ); glVertex3f( -0.5, 1.0, 0.0 );
             glTexCoord2f( 1.0, 1.0 ); glVertex3f( 1.0, 1.0, 0.0 );
             glTexCoord2f( 1.0, 0.0 ); glVertex3f( 1.0, -0.5, 0.0 );
         glEnd();
+#else
+ // figure out equivilent for gles
+
+
+#endif
+
+
     }
 }
 
@@ -207,6 +217,7 @@ void RenderGlOffScreenSurface::setRenderFunctions( QOpenGLFunctions * glFunction
 {
     m_functions = glFunctions;
 
+#if !defined(QT_OPENGL_ES_2)
     // try initializing the OpenGL 3.0 functions for this object
     m_functions_3_0 = m_RenderContext->versionFunctions <QOpenGLFunctions_3_0>();
     if( m_functions_3_0 )
@@ -214,6 +225,7 @@ void RenderGlOffScreenSurface::setRenderFunctions( QOpenGLFunctions * glFunction
         m_functions_3_0->initializeOpenGLFunctions();
     }
     else
+#endif // !defined(QT_OPENGL_ES_2)
     {
         // if we do not have OpenGL 3.0 functions, glBlitFrameBuffer is not available, so we
         // must do the blit
@@ -347,20 +359,22 @@ QImage RenderGlOffScreenSurface::grabFramebuffer()
     {
         // check if we have glFrameBufferBlit support. this is true for desktop OpenGL 3.0+, but not
         // OpenGL ES 2.0
-        if( m_functions_3_0 ) 
+#if !defined(QT_OPENGL_ES_2)
+        if( m_functions_3_0 )
         {
             // only blit the color buffer attachment
             m_functions_3_0->glBindFramebuffer( GL_READ_FRAMEBUFFER, m_fbo->handle() );
             m_functions_3_0->glBindFramebuffer( GL_DRAW_FRAMEBUFFER, m_resolvedFbo->handle() );
-            m_functions_3_0->glBlitFramebuffer( 0, 0, 
-                                                bufferSize().width(), bufferSize().height(), 
-                                                0, 0, 
-                                                bufferSize().width(), bufferSize().height(), 
+            m_functions_3_0->glBlitFramebuffer( 0, 0,
+                                                bufferSize().width(), bufferSize().height(),
+                                                0, 0,
+                                                bufferSize().width(), bufferSize().height(),
                                                 GL_COLOR_BUFFER_BIT, GL_NEAREST );
 
             m_functions_3_0->glBindFramebuffer( GL_FRAMEBUFFER, 0 );
         }
-        else 
+        else
+#endif // !defined(QT_OPENGL_ES_2)
         {
             // we must unbind the FBO here, so we can use its texture and bind the default
             // back-buffer
@@ -392,9 +406,10 @@ QImage RenderGlOffScreenSurface::grabFramebuffer()
 QImage RenderGlOffScreenSurface::grabFramebufferInternal( QOpenGLFramebufferObject* fbo )
 {
     QImage image;
+#if !defined(QT_OPENGL_ES_2)
     // bind framebuffer first
     m_functions->glBindFramebuffer( GL_READ_FRAMEBUFFER, fbo->handle() );
-    if( m_functions_3_0 ) 
+    if( m_functions_3_0 )
     {
         m_functions_3_0->glReadBuffer( GL_COLOR_ATTACHMENT0 );
     }
@@ -402,24 +417,26 @@ QImage RenderGlOffScreenSurface::grabFramebufferInternal( QOpenGLFramebufferObje
     GLenum internalFormat = fbo->format().internalTextureFormat();
     bool hasAlpha = internalFormat == GL_RGBA || internalFormat == GL_BGRA
         || internalFormat == GL_RGBA8;
-    if( internalFormat == GL_BGRA ) 
+    if( internalFormat == GL_BGRA )
     {
         image = QImage( fbo->size(), hasAlpha ? QImage::Format_ARGB32 : QImage::Format_RGB32 );
         m_functions->glReadPixels( 0, 0, fbo->size().width(),
                                    fbo->size().height(), GL_BGRA, GL_UNSIGNED_BYTE, image.bits() );
     }
-    else if( ( internalFormat == GL_RGBA ) || ( internalFormat == GL_RGBA8 ) ) 
+    else if( ( internalFormat == GL_RGBA ) || ( internalFormat == GL_RGBA8 ) )
     {
         image = QImage( fbo->size(), hasAlpha ? QImage::Format_RGBA8888 : QImage::Format_RGBX8888 );
         m_functions->glReadPixels( 0, 0, fbo->size().width(),
                                    fbo->size().height(), GL_RGBA, GL_UNSIGNED_BYTE, image.bits() );
     }
-    else 
+    else
     {
         qDebug() << "RenderGlOffScreenSurface::grabFramebuffer() - Unsupported framebuffer format"
             << internalFormat << "!";
     }
-
+#else
+    image = m_fbo->toImage();
+#endif // !defined(QT_OPENGL_ES_2)
     m_functions->glBindFramebuffer( GL_FRAMEBUFFER, m_fbo->handle() );
 
     m_GlWidget->VerifyGLState();
@@ -443,7 +460,8 @@ void RenderGlOffScreenSurface::swapBuffersInternal()
     m_functions->glFlush();
     // check if we have glFrameBufferBlit support. this is true for desktop OpenGL 3.0+, but not
     // OpenGL ES 2.0
-    if( m_functions_3_0 ) 
+#if !defined(QT_OPENGL_ES_2)
+    if( m_functions_3_0 )
     {
         // if our framebuffer has multi-sampling, the resolve should be done automagically
         m_functions_3_0->glBindFramebuffer( GL_READ_FRAMEBUFFER, m_fbo->handle() );
@@ -455,7 +473,8 @@ void RenderGlOffScreenSurface::swapBuffersInternal()
                                             GL_NEAREST );
         m_functions_3_0->glBindFramebuffer( GL_FRAMEBUFFER, m_fbo->handle() );
     }
-    else 
+    else
+#endif // !defined(QT_OPENGL_ES_2)
     {
         // we must unbind the FBO here, so we can use its texture and bind the default back-buffer
         m_functions->glBindFramebuffer( GL_FRAMEBUFFER, 0 );

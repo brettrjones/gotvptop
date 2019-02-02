@@ -3,24 +3,13 @@ TEMPLATE = lib
 
 TARGET_NAME = zlib
 
+include(version.pri)
+include(os_detect.pri)
+include(compile_config.pri)
 
-CONFIG += qt thread silent
-
-
-
-#include(version.pri)
-#include(os_detect.pri)
-#include(compile_config.pri)
-
-#include(library_config.pri)
-
-
-
+include(library_config.pri)
 
 TARGET=$${TARGET_NAME}$${TARGET_OS_NAME}$${TARGET_LIB_APPEND}
-
-DESTDIR = lib/
-
 
 include(libzlib.pri)
 

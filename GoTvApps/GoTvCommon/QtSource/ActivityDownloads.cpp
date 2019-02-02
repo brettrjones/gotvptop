@@ -42,15 +42,8 @@ ActivityDownloads::ActivityDownloads(	AppCommon&	app,
 	slotRepositionToParent();
 
 	connect( ui.m_TitleBarWidget,					SIGNAL(signalBackButtonClicked()),				this, SLOT(slotHomeButtonClicked()) );
-	if( false == connect( ui.m_FileItemList, SIGNAL(itemClicked(QListWidgetItem *)),		this, SLOT(slotFileXferItemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "ActivityDownloads could not connect to slotItemClicked\n");
-	}
-
-	if( false == connect( ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)),	this, SLOT(slotFileXferItemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "ActivityDownloads could not connect to slotItemClicked\n");
-	}
+    connect( ui.m_FileItemList, SIGNAL(itemClicked(QListWidgetItem *)),		this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
+    connect( ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)),	this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
 
 	connect( this, SIGNAL(signalToGuiStartDownload(GuiFileXferSession *)),					this, SLOT(slotToGuiStartDownload(GuiFileXferSession *)) );
 	connect( this, SIGNAL(signalToGuiFileXferState(VxGuidQt,EXferState,int,int)),			this, SLOT(slotToGuiFileXferState(VxGuidQt,EXferState,int,int)) );

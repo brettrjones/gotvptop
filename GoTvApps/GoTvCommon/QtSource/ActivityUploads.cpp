@@ -40,14 +40,8 @@ ActivityUploads::ActivityUploads(	AppCommon&	app,
 
 	slotRepositionToParent();
 
-	if( false == connect(ui.m_FileItemList,	SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotFileXferItemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "ActivityUploads could not connect to slotItemClicked\n");
-	}
-	if( false == connect(ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotFileXferItemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "ActivityUploads could not connect to slotItemClicked\n");
-	}
+    connect(ui.m_FileItemList,	SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
+    connect(ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
 
 	connect( this, SIGNAL(signalToGuiStartUpload(GuiFileXferSession *)),			this, SLOT(slotToGuiStartUpload(GuiFileXferSession *)) );
 	connect( this, SIGNAL(signalToGuiFileXferState(VxGuidQt,EXferState,int,int)),	this, SLOT(slotToGuiFileXferState(VxGuidQt,EXferState,int,int)) );
@@ -89,15 +83,8 @@ FileXferWidget * ActivityUploads::sessionToWidget( GuiFileXferSession * poSessio
 
     item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)poSession) );
 
-	if( false == connect( item, SIGNAL(signalFileXferItemClicked(QListWidgetItem*)), this, SLOT(slotFileXferItemClicked(QListWidgetItem*))) )
-	{
-		LogMsg( LOG_ERROR, "AppCommon::fileToWidget: connect failed\n");
-	}
-
-	if( false == connect( item, SIGNAL(signalCancelButtonClicked(QListWidgetItem*)), this, SLOT(slotCancelButtonClicked(QListWidgetItem*))) )
-	{
-		LogMsg( LOG_ERROR, "AppCommon::fileToWidget: connect failed\n");
-	}
+    connect( item, SIGNAL(signalFileXferItemClicked(QListWidgetItem*)), this, SLOT(slotFileXferItemClicked(QListWidgetItem*)));
+    connect( item, SIGNAL(signalCancelButtonClicked(QListWidgetItem*)), this, SLOT(slotCancelButtonClicked(QListWidgetItem*)));
 
 	updateListEntryWidget( item, poSession );
 	return item;

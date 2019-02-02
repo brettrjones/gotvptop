@@ -9,6 +9,7 @@
 #pragma once
 
 #include "config_kodi.h"
+#if defined(TARGET_OS_WINDOWS)
 #include <vector>
 
 #include "GoTvUrl.h"
@@ -65,3 +66,4 @@ public:
   static std::string WUSysMsg(DWORD dwError);
   static bool SetThreadLocalLocale(bool enable = true);
 };
+#endif // defined(TARGET_OS_WINDOWS)

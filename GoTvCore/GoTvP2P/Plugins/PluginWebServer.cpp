@@ -115,7 +115,7 @@ RCODE PluginWebServer::handleHttpConnection( VxSktBase * sktBase, VxNetIdent * n
 //============================================================================
 void PluginWebServer::fromGuiUserLoggedOn( void )
 {
-	std::string strProfileDir = VxGetProfileDirectory();
+    std::string strProfileDir = VxGetUserProfileDirectory();
 	setWebSiteDir( strProfileDir.c_str() );
 }
 

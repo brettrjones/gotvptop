@@ -31,15 +31,9 @@ LauncherPage::LauncherPage( AppCommon& app, QWidget * parent )
 	ui.setupUi(this);
 	//slotRepositionToParent();
 
-	if( false == connect(ui.exitPopupButton, SIGNAL(clicked()), this, SLOT(slotHomeButtonClicked())) )
-	{
-		LogMsg( LOG_INFO, "LauncherPage could not connect to exitPopupButton\n");
-	}
+    connect(ui.exitPopupButton, SIGNAL(clicked()), this, SLOT(slotHomeButtonClicked()));
+    connect(ui.menuItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(itemClicked(QListWidgetItem *)));
 
-	if( false == connect(ui.menuItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(itemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "LauncherPage could not connect to itemSelectionChanged\n");
-	}
 }
 
 //============================================================================

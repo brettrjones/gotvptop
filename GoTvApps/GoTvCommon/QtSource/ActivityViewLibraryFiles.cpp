@@ -53,20 +53,9 @@ ActivityViewLibraryFiles::ActivityViewLibraryFiles(	AppCommon& app, QWidget *	pa
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr( "My Library Of Files" ) );
 	ui.m_DoubleTapInstructionLabel->setVisible( m_IsSelectAFileMode );
 
-	if( false == connect(ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotHomeButtonClicked())) )
-	{
-		LogMsg( LOG_INFO, "ActivityViewLibraryFiles could not connect to exitPopupButton\n");
-	}
-
-	if( false == connect( ui.m_FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotListItemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "ActivityViewLibraryFiles could not connect to slotItemClicked\n");
-	}
-
-	if( false == connect( ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotListItemDoubleClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "ActivityViewLibraryFiles could not connect to slotItemDoubleClicked\n");
-	}
+    connect(ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotHomeButtonClicked()));
+    connect( ui.m_FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotListItemClicked(QListWidgetItem *)));
+    connect( ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotListItemDoubleClicked(QListWidgetItem *)));
 
 	connect( this, SIGNAL(signalToGuiFileList(VxMyFileInfo&)), this, SLOT(slotToGuiFileList(VxMyFileInfo&)) );
 	connect( ui.m_AddFilesButton, SIGNAL(clicked()), this, SLOT(slotAddFilesButtonClicked()) );
@@ -159,10 +148,8 @@ FileShareItemWidget * ActivityViewLibraryFiles::fileToWidget( VxMyFileInfo& file
 
 	FileItemInfo * poItemInfo = new FileItemInfo( fileInfo, 0, isShared, isInLibrary );
     item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)poItemInfo) );
-	if( false == connect( item, SIGNAL(signalFileShareItemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*))) )
-	{
-		LogMsg( LOG_ERROR, "AppCommon::fileToWidget: connect failed\n");
-	}
+    connect( item, SIGNAL(signalFileShareItemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*)));
+
 	connect(	item, 
 		SIGNAL(signalFileShareItemClicked(QListWidgetItem*)), 
 		this, 

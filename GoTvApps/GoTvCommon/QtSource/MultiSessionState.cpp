@@ -83,6 +83,9 @@ void MultiSessionState::setGuiWidgets(	VxNetIdent *		hisIdent,
 	case eMSessionTypeTruthOrDare:
 		m_SessionOfferButton->setIcons( eMyIconTruthOrDareNormal );
 		break;
+    case eMaxMSessionType:
+    default:
+        break;
 	}
 
 	connect( m_SessionOfferButton,		SIGNAL(clicked()), this, SLOT(onSessionOfferButtonClicked()) );
@@ -198,6 +201,10 @@ std::string MultiSessionState::describeCantSendReason( void )
 		reasonStr = GuiHelpers::describePlugin( ePluginTypeTruthOrDare, false );
 		accessState = m_HisIdent->getMyAccessPermissionFromHim( ePluginTypeTruthOrDare );
 		break;
+
+    case eMaxMSessionType:
+    default:
+        break;
 	}
 
 	reasonStr += " is disabled because ";
@@ -327,7 +334,10 @@ void MultiSessionState::setSessionState( EMSessionState sessionState )
 		case eMSessionTypeTruthOrDare:
 			setStatusText( tr("Waiting Truth Or Dare Offer Response" ) );
 			break;
-		}
+
+        case eMaxMSessionType:
+        default:
+            break;		}
 
 		break;
 
@@ -368,6 +378,10 @@ void MultiSessionState::setSessionState( EMSessionState sessionState )
 			m_AcceptSessionText->setText( tr("Play Truth Or Dare" ) );
 			m_RejectSessionText->setText( tr("Reject Truth Or Dare" ) );
 			break;
+
+        case eMaxMSessionType:
+        default:
+            break;
 		}
 
 		setButtonImage( m_AcceptSessionButton, eImageTypeNormal );
@@ -406,6 +420,10 @@ void MultiSessionState::setSessionState( EMSessionState sessionState )
 			m_TodGameLogic->setVisible( true );
 			m_TodGameLogic->beginGame( eMSessionStateWaitingOfferResponse == m_SessionState  );
 			break;
+
+        case eMaxMSessionType:
+        default:
+            break;
 		}
 
 		m_SessionState = sessionState;
@@ -428,6 +446,10 @@ void MultiSessionState::setSessionState( EMSessionState sessionState )
 		case eMSessionTypeTruthOrDare:
 			setStatusText( tr("Truth Or Dare Offer Rejected" ) );
 			break;
+
+        case eMaxMSessionType:
+        default:
+            break;
 		}
 
 		break;
@@ -475,6 +497,10 @@ void MultiSessionState::handleMultiSessionAction( EMSessionAction mSessionAction
 		case eMSessionTypeTruthOrDare:
 			setStatusText( QObject::tr("User Ended Truth Or Dare") );
 			break;
+
+        case eMaxMSessionType:
+        default:
+            break;
 		}
 
 		break;
@@ -523,12 +549,12 @@ void MultiSessionState::setButtonImage( VxPushButton * button, EImageType imageT
 		case eImageTypeCancel: 			
 			button->setIcons( eMyIconVideoPhoneCancel );
 			break;
-		//case eImageTypeRed: 			
-		//	button->setIcons( eMyIconVideoPhoneRed );
-		//	break;
-		//case eImageTypeYellow: 			
-		//	button->setIcons( eMyIconVideoPhoneYellow );
-		//	break;
+//		case eImageTypeRed:
+//			button->setIcons( eMyIconVideoPhoneRed );
+//			break;
+//		case eImageTypeYellow:
+//			button->setIcons( eMyIconVideoPhoneYellow );
+//			break;
 		}
 
 		break;

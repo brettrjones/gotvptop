@@ -248,7 +248,7 @@ using KODI::MESSAGING::HELPERS::DialogResponse;
 #define MAX_FFWD_SPEED 5
 
 //============================================================================
-void CApplication::keyPressEvent( int moduleNum, int key, int mod )
+void CApplication::fromGuiKeyPressEvent( int moduleNum, int key, int mod )
 {
     if( CServiceBroker::GetWinSystem() )
     {
@@ -263,7 +263,7 @@ void CApplication::keyPressEvent( int moduleNum, int key, int mod )
 }
 
 //============================================================================
-void CApplication::keyReleaseEvent( int moduleNum, int key, int mod )
+void CApplication::fromGuiKeyReleaseEvent( int moduleNum, int key, int mod )
 {
     if( CServiceBroker::GetWinSystem() )
     {
@@ -277,7 +277,7 @@ void CApplication::keyReleaseEvent( int moduleNum, int key, int mod )
 }
 
 //============================================================================
-void CApplication::mousePressEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton )
+void CApplication::fromGuiMousePressEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton )
 {
     if( CServiceBroker::GetWinSystem() )
     {
@@ -288,7 +288,7 @@ void CApplication::mousePressEvent( int moduleNum, int mouseXPos, int mouseYPos,
 }
 
 //============================================================================
-void CApplication::mouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton )
+void CApplication::fromGuiMouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton )
 {
     if( CServiceBroker::GetWinSystem() )
     {
@@ -299,7 +299,7 @@ void CApplication::mouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPo
 }
 
 //============================================================================
-void CApplication::mouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos )
+void CApplication::fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos )
 {
     XBMC_Event msg{ XBMC_MOUSEMOTION };
     msg.motion.x = (uint16_t)mouseXPos;
@@ -308,7 +308,7 @@ void CApplication::mouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos )
 }
 
 //============================================================================
-void CApplication::resizeEvent( int moduleNum, int winWidth, int winHeight )
+void CApplication::fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight )
 {
     if( CServiceBroker::GetWinSystem() )
     {
@@ -319,7 +319,7 @@ void CApplication::resizeEvent( int moduleNum, int winWidth, int winHeight )
 }
 
 //============================================================================
-void CApplication::closeEvent( int moduleNum )
+void CApplication::fromGuiCloseEvent( int moduleNum )
 {
     if( CServiceBroker::GetWinSystem() )
     {
@@ -329,7 +329,7 @@ void CApplication::closeEvent( int moduleNum )
 }
 
 //============================================================================
-void CApplication::visibleEvent( int moduleNum, bool isVisible )
+void CApplication::fromGuiVisibleEvent( int moduleNum, bool isVisible )
 {
 
 }

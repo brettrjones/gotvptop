@@ -36,10 +36,7 @@ ActivityYesNoMsgBox::ActivityYesNoMsgBox(	AppCommon&	app,
 	setTitle( title );
 	ui.m_BodyTextLabel->setText( bodyText );
 
-	if( false == connect(ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotHomeButtonClicked())) )
-	{
-		LogMsg( LOG_INFO, "ActivityYesNoMsgBox could not connect to exitFileActionButton\n");
-	}
+    connect(ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotHomeButtonClicked()));
 
 	connect( ui.m_AcceptButton, SIGNAL(clicked()), this, SLOT(accept()) );
 	connect( ui.m_CancelButton, SIGNAL(clicked()), this, SLOT(reject()) );

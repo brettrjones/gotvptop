@@ -595,7 +595,7 @@ QString VxAppTheme::describeTheme( EThemeType eThemeType )
 //============================================================================
 void VxAppTheme::selectTheme( EThemeType eThemeType )
 {
-	LogMsg( LOG_DEBUG, "setupTheme %s ", describeTheme( eThemeType ) );
+    LogMsg( LOG_DEBUG, "setupTheme %s ", describeTheme( eThemeType ).toUtf8().constData() );
 	m_ThemeColors.clear();
 
 	switch( eThemeType )

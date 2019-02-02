@@ -18,16 +18,15 @@
 class IGoTvEvents
 {
 public:
+    virtual void                fromGuiKeyPressEvent( int moduleNum, int key, int mod ) = 0;
+    virtual void                fromGuiKeyReleaseEvent( int moduleNum, int key, int mod ) = 0;
 
-    virtual void                keyPressEvent( int moduleNum, int key, int mod ) = 0;
-    virtual void                keyReleaseEvent( int moduleNum, int key, int mod ) = 0;
+    virtual void                fromGuiMousePressEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton ) = 0;
+    virtual void                fromGuiMouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton ) = 0;
+    virtual void                fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos ) = 0;
 
-    virtual void                mousePressEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton ) = 0;
-    virtual void                mouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton ) = 0;
-    virtual void                mouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos ) = 0;
-
-    virtual void                resizeEvent( int moduleNum, int winWidth, int winHeight ) = 0;
-    virtual void                closeEvent( int moduleNum ) = 0;
-    virtual void                visibleEvent( int moduleNum, bool isVisible ) = 0;
+    virtual void                fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight ) = 0;
+    virtual void                fromGuiCloseEvent( int moduleNum ) = 0;
+    virtual void                fromGuiVisibleEvent( int moduleNum, bool isVisible ) = 0;
 
 };

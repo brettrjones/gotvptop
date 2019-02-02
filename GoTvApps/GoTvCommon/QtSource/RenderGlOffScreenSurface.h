@@ -14,6 +14,8 @@
 #include <QtWidgets/QWidget>
 #include <QOpenGLShaderProgram>
 
+#include <QOpenGLFunctions_3_0>
+
 #include <atomic>
 #include <mutex>
 
@@ -201,8 +203,10 @@ private:
     /// @brief The OpenGL 2.1 / ES 2.0 function object that can be used the issue OpenGL commands.
     QOpenGLFunctions*           m_functions = nullptr;
 
+#if !defined(QT_OPENGL_ES_2)
     /// @brief The OpenGL 3.0 function object that can be used the issue OpenGL commands.
     QOpenGLFunctions_3_0*       m_functions_3_0 = nullptr;
+#endif // !defined(QT_OPENGL_ES_2)
 
     /// @brief OpenGL paint device for painting with a QPainter.
     QOpenGLPaintDevice*         m_paintDevice = nullptr;

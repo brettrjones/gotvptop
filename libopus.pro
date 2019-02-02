@@ -9,6 +9,8 @@ include(compile_config.pri)
 
 include(library_config.pri)
 
+TARGET=$${TARGET_NAME}$${TARGET_OS_NAME}$${TARGET_LIB_APPEND}
+
 include(libopus.pri)
 
 

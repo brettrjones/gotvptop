@@ -69,21 +69,21 @@ public:
     bool                        getIsAppModuleRunning( EAppModule appModule )                   { return m_IsRunning[appModule]; }
 
     //=== interface ===//
-    void 				        playGoTvMedia( AssetInfo * assetInfo );
+    void 				        playGoTvMedia( AssetInfo * assetInfo ) override;
 
     //============================================================================
     //=== to gotv events ===//
     //============================================================================
-    void                        keyPressEvent( int moduleNum, int key, int mod ) override;
-    void                        keyReleaseEvent( int moduleNum, int key, int mod ) override;
+    void                        fromGuiKeyPressEvent( int moduleNum, int key, int mod ) override;
+    void                        fromGuiKeyReleaseEvent( int moduleNum, int key, int mod ) override;
 
-    void                        mousePressEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton ) override;
-    void                        mouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton ) override;
-    void                        mouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos ) override;
+    void                        fromGuiMousePressEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton ) override;
+    void                        fromGuiMouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton ) override;
+    void                        fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos ) override;
 
-    void                        resizeEvent( int moduleNum, int winWidth, int winHeight ) override;
-    void                        closeEvent( int moduleNum ) override;
-    void                        visibleEvent( int moduleNum, bool isVisible ) override;
+    void                        fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight ) override;
+    void                        fromGuiCloseEvent( int moduleNum ) override;
+    void                        fromGuiVisibleEvent( int moduleNum, bool isVisible ) override;
 
     //============================================================================
     //=== to gui media/render ===//
@@ -218,44 +218,44 @@ public:
     void				        toGuiAppErr( EAppErr eAppErr, const char* errMsg = "" ) override;
     void				        toGuiStatusMessage( const char* statusMsg ) override;
 
-    virtual void				toGuiWantMicrophoneRecording( bool wantMicInput );
-    virtual void				toGuiWantSpeakerOutput( bool wantSpeakerOutput );
-    virtual void				toGuiPlayAudio( int16_t * pu16PcmData, int pcmDataLenInBytes );
+    virtual void				toGuiWantMicrophoneRecording( bool wantMicInput ) override;
+    virtual void				toGuiWantSpeakerOutput( bool wantSpeakerOutput ) override;
+    virtual void				toGuiPlayAudio( int16_t * pu16PcmData, int pcmDataLenInBytes ) override;
 
-    virtual int  				toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes );
-    virtual double  			toGuiGetAudioDelaySeconds( );
-    virtual double				toGuiGetAudioCacheTotalSeconds();
-    virtual int				    toGuiGetAudioCacheFreeSpace();
+    virtual int  				toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes ) override;
+    virtual double  			toGuiGetAudioDelaySeconds() override;
+    virtual double				toGuiGetAudioCacheTotalSeconds() override;
+    virtual int				    toGuiGetAudioCacheFreeSpace() override;
 
-    virtual void				toGuiWantVideoCapture( bool wantVidCapture );
-    virtual void				toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 );
-    virtual int				    toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight );
+    virtual void				toGuiWantVideoCapture( bool wantVidCapture ) override;
+    virtual void				toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
+    virtual int				    toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
 
-    virtual void				toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" );
-    virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" );
-    virtual void				toGuiAnchorStatus( EAnchorTestStatus eAnchorStatus, const char * msg = "" );
-    virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" );
-    virtual void				toGuiPhoneShakeStatus( EPhoneShakeStatus ePhoneShakeStatus, const char * msg = "" );
+    virtual void				toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" ) override;
+    virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) override;
+    virtual void				toGuiAnchorStatus( EAnchorTestStatus eAnchorStatus, const char * msg = "" ) override;
+    virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
+    virtual void				toGuiPhoneShakeStatus( EPhoneShakeStatus ePhoneShakeStatus, const char * msg = "" ) override;
 
-    virtual void				toGuiContactOnline( VxNetIdent * netIdent, bool newContact = false );
-    virtual void				toGuiContactOffline( VxNetIdent * netIdent );
-    virtual void				toGuiContactNearby( VxNetIdent * netIdent );
-    virtual void				toGuiContactNotNearby( VxNetIdent * netIdent );
+    virtual void				toGuiContactOnline( VxNetIdent * netIdent, bool newContact = false ) override;
+    virtual void				toGuiContactOffline( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactNearby( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactNotNearby( VxNetIdent * netIdent ) override;
 
     //! called when contact changes
-    virtual void				toGuiContactNameChange( VxNetIdent * netIdent );
-    virtual void				toGuiContactDescChange( VxNetIdent * netIdent );
-    virtual void				toGuiContactMyFriendshipChange( VxNetIdent * netIdent );
-    virtual void				toGuiContactHisFriendshipChange( VxNetIdent * netIdent );
-    virtual void				toGuiContactSearchFlagsChange( VxNetIdent * netIdent );
-    virtual void				toGuiContactConnectionChange( VxNetIdent * netIdent );
-    virtual void				toGuiContactAnythingChange( VxNetIdent * netIdent );
-    virtual void				toGuiContactLastSessionTimeChange( VxNetIdent * netIdent );
+    virtual void				toGuiContactNameChange( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactDescChange( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactMyFriendshipChange( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactHisFriendshipChange( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactSearchFlagsChange( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactConnectionChange( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactAnythingChange( VxNetIdent * netIdent ) override;
+    virtual void				toGuiContactLastSessionTimeChange( VxNetIdent * netIdent ) override;
 
-    virtual void				toGuiPluginPermissionChange( VxNetIdent * netIdent );
+    virtual void				toGuiPluginPermissionChange( VxNetIdent * netIdent ) override;
 
     //! called from engine when need to update identity
-    virtual void				toGuiUpdateMyIdent( VxNetIdent * netIdent );
+    virtual void				toGuiUpdateMyIdent( VxNetIdent * netIdent ) override;
     virtual void				fromGuiSetIdentHasTextOffers( VxGUID& onlineId, bool hasTextOffers );
 
     //! add offer to notify list
@@ -266,7 +266,7 @@ public:
                                                       const char *	pFileName = NULL,
                                                       uint8_t *			fileHashData = 0,
                                                       VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
-                                                      VxGUID&			rmtSessionId = VxGUID::nullVxGUID() );
+                                                      VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) override;
     //! response to offer
     virtual void				toGuiRxedOfferReply( VxNetIdent *	netIdent,
                                                      EPluginType		ePluginType,
@@ -275,28 +275,28 @@ public:
                                                      const char *	pFileName = NULL,
                                                      uint8_t *			fileHashData = 0,
                                                      VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
-                                                     VxGUID&			rmtSessionId = VxGUID::nullVxGUID() );
+                                                     VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) override;
 
     virtual void				toGuiPluginSessionEnded( VxNetIdent *	netIdent,
                                                          EPluginType		ePluginType,
                                                          int				pvUserData,
                                                          EOfferResponse	eOfferResponse,
-                                                         VxGUID&			lclSessionId = VxGUID::nullVxGUID() );
+                                                         VxGUID&			lclSessionId = VxGUID::nullVxGUID() ) override;
 
     virtual void				toGuiPluginStatus( EPluginType		ePluginType,
                                                    int				statusType,
-                                                   int				statusValue );
+                                                   int				statusValue ) override;
 
     virtual void				toGuiInstMsg( VxNetIdent *	netIdent,
                                               EPluginType		ePluginType,
-                                              const char *	pMsg );
+                                              const char *	pMsg ) override;
 
     virtual void				toGuiFileListReply( VxNetIdent *	netIdent,
                                                     EPluginType		ePluginType,
                                                     uint8_t				u8FileType,
                                                     uint64_t				u64FileLen,
                                                     const char *	pFileName,
-                                                    uint8_t *			fileHashData );
+                                                    uint8_t *			fileHashData ) override;
 
     virtual void				toGuiStartUpload( VxNetIdent *	netIdent,
                                                   EPluginType		ePluginType,
@@ -304,7 +304,7 @@ public:
                                                   uint8_t				u8FileType,
                                                   uint64_t				u64FileLen,
                                                   const char *	pFileName,
-                                                  uint8_t *			fileHashData );
+                                                  uint8_t *			fileHashData ) override;
 
     virtual void				toGuiStartDownload( VxNetIdent *	netIdent,
                                                     EPluginType		ePluginType,
@@ -312,49 +312,49 @@ public:
                                                     uint8_t				u8FileType,
                                                     uint64_t				u64FileLen,
                                                     const char *	pFileName,
-                                                    uint8_t *			fileHashData );
+                                                    uint8_t *			fileHashData ) override;
 
-    virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char * newFileName, EXferError xferError );
-    virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError );
+    virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char * newFileName, EXferError xferError ) override;
+    virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError ) override;
 
-    virtual void				toGuiFileXferState( VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 );
+    virtual void				toGuiFileXferState( VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 ) override;
 
     //=== scan ===//
-    virtual void				toGuiScanSearchComplete( EScanType eScanType );
-    virtual void				toGuiSearchResultSuccess( EScanType eScanType, VxNetIdent *	netIdent );
-    virtual void				toGuiSearchResultError( EScanType eScanType, VxNetIdent *	netIdent, int errCode );
+    virtual void				toGuiScanSearchComplete( EScanType eScanType ) override;
+    virtual void				toGuiSearchResultSuccess( EScanType eScanType, VxNetIdent *	netIdent ) override;
+    virtual void				toGuiSearchResultError( EScanType eScanType, VxNetIdent * netIdent, int errCode ) override;
 
     virtual void				toGuiSearchResultProfilePic( VxNetIdent *	netIdent,
-                                                             uint8_t *			pu8JpgData,
-                                                             uint32_t				u32JpgDataLen );
+                                                             uint8_t *      pu8JpgData,
+                                                             uint32_t       u32JpgDataLen ) override;
 
     virtual void				toGuiSearchResultFileSearch( VxNetIdent *	netIdent,
-                                                             VxGUID&			fileInstanceId,
-                                                             uint8_t				u8FileType,
-                                                             uint64_t				u64FileLen,
-                                                             const char *	pFileName );
+                                                             VxGUID&        fileInstanceId,
+                                                             uint8_t		u8FileType,
+                                                             uint64_t       u64FileLen,
+                                                             const char *	pFileName ) override;
 
     virtual bool				toGuiSetGameValueVar( EPluginType	ePluginType,
                                                       VxGUID&	oOnlineId,
                                                       int32_t			s32VarId,
-                                                      int32_t			s32VarValue );
+                                                      int32_t			s32VarValue ) override;
 
     virtual bool				toGuiSetGameActionVar( EPluginType	ePluginType,
                                                        VxGUID&	oOnlineId,
                                                        int32_t			s32VarId,
-                                                       int32_t			s32VarValue );
+                                                       int32_t			s32VarValue ) override;
 
     virtual void				toGuiFileList( const char *	fileName,
                                                uint64_t				fileLen,
                                                uint8_t				fileType,
                                                bool			isShared,
                                                bool			isInLibrary,
-                                               uint8_t *			fileHashId = 0 );
+                                               uint8_t *			fileHashId = 0 ) override;
 
-    virtual void				toGuiAssetAdded( AssetInfo * assetInfo );
-    virtual void				toGuiSessionHistory( AssetInfo * assetInfo );
-    virtual void				toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 );
-    virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 );
+    virtual void				toGuiAssetAdded( AssetInfo * assetInfo ) override;
+    virtual void				toGuiSessionHistory( AssetInfo * assetInfo ) override;
+    virtual void				toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
+    virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
 
     //============================================================================
     //=== from gui ===//

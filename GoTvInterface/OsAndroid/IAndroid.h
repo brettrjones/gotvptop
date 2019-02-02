@@ -35,10 +35,7 @@ public:
     void                        doShutdown() override;
 
     //=== utilities ===//
-    bool                        initDirectories( ) override;
-
-private:
-
+    //bool                        initDirectories( ) override;
 };
 
 #endif // TARGET_OS_ANDROID

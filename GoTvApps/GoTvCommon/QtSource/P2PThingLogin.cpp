@@ -79,14 +79,14 @@ void AppCommon::createAccountForUser( std::string& strUserName, VxNetIdent& user
 
 	LogMsg( LOG_VERBOSE, "Account %s IPv4 %s IPv6 %s\n", strUserName.c_str(), myIPv4.c_str(), myIPv6.c_str() );
 
-	std::string storyBoardFileName = VxGetProfileDirectory();
+    std::string storyBoardFileName = VxGetUserProfileDirectory();
 	storyBoardFileName += "story_board.htm";
 	if( false == VxFileUtil::fileExists( storyBoardFileName.c_str() ) )
 	{
 		GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/story_board.htm", storyBoardFileName.c_str() );
 	}
 
-	std::string storyBoardBackground = VxGetProfileDirectory();
+    std::string storyBoardBackground = VxGetUserProfileDirectory();
 	storyBoardBackground += "storyboard_background.png";
 	if( false == VxFileUtil::fileExists( storyBoardBackground.c_str() ) )
 	{
@@ -123,28 +123,28 @@ void AppCommon::loadAccountSpecificSettings( const char * userName )
 	m_Engine.fromGuiSetUserXferDir( getUserXferDirectoryFromAccountUserName( userName ).c_str() );
 	std::string strUserSpecificDir = getUserSpecificDataDirectoryFromAccountUserName( userName );
 	m_Engine.fromGuiSetUserSpecificDir( strUserSpecificDir.c_str() );
-	std::string userPicture = VxGetProfileDirectory();
+    std::string userPicture = VxGetUserProfileDirectory();
     userPicture += "me.jpg";
     if( false == VxFileUtil::fileExists( userPicture.c_str() ) )
     {
         GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/me.jpg", userPicture.c_str() );
     }
 
-    std::string storyBoardFileName = VxGetProfileDirectory();
+    std::string storyBoardFileName = VxGetUserProfileDirectory();
 	storyBoardFileName += "story_board.htm";
 	if( false == VxFileUtil::fileExists( storyBoardFileName.c_str() ) )
 	{
 		GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/story_board.htm", storyBoardFileName.c_str() );
 	}
 
-	std::string storyBoardBackground = VxGetProfileDirectory();
+    std::string storyBoardBackground = VxGetUserProfileDirectory();
 	storyBoardBackground += "storyboard_background.png";
 	if( false == VxFileUtil::fileExists( storyBoardBackground.c_str() ) )
 	{
 		GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/storyboard_background.png", storyBoardBackground.c_str() );
 	}
 
-	std::string favIcon = VxGetProfileDirectory();
+    std::string favIcon = VxGetUserProfileDirectory();
 	favIcon += "favicon.ico";
 	if( false == VxFileUtil::fileExists( favIcon.c_str() ) )
 	{

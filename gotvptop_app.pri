@@ -1,118 +1,18 @@
-message("Building GoTvPtoP")
+#message("Building GoTvPtoP")
 
-INCLUDEPATH += $$PWD/
+INCLUDEPATH += $$PWD/GoTvApps/GoTvCommon/QtSource
+INCLUDEPATH += $$PWD/GoTvApps
+#so use our static linked version of freetype
+#INCLUDEPATH += $$PWD/DependLibs/libfreetype/include
+#INCLUDEPATH += $$PWD/GoTvApps/GoTvCommon
+#INCLUDEPATH += $$PWD/GoTvApps/GoTvCommon/QtSource
+INCLUDEPATH += $$PWD/DependLibs
+#INCLUDEPATH += $$PWD/DependLibs/libcurl/include
+#INCLUDEPATH += $$PWD/DependLibs/libcurl/lib
+INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
+INCLUDEPATH += $$PWD/DependLibs/ffmpeg
 INCLUDEPATH += $$PWD/GoTvCore
-
-
-FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAbout.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAnchorSettings.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityBrowseFiles.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityChooseIpAddress.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityChooseIpPort.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityChooseTestWebsiteUrl.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityConnectionOptions.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityCreateProfile.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDebugSettings.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDownloadItemMenu.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDownloads.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityEditAccount.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityEditProfile.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityFileSearch.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityIsPortOpenTest.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityManageAnchorSettings.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityMessageBox.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetServiceTest.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkSettings.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkStartupTest.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkStatus.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkTest.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPermissions.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPermissionsRelay.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPersonalRecorder.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPhoneShake.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityReplyFileOffer.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanPeopleSearch.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanProfiles.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanStoryBoards.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanWebCams.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySelectFileToSend.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySessionFileOffer.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySessionOptions.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityShowHelp.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySnapShot.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySoundOptions.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityStoryBoard.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityTimedMessage.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendBase.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendChangeFriendship.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendMultiSession.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendOfferFile.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendRequestRelay.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendTodGame.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendVideoPhone.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendViewSharedFiles.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendVoicePhone.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityTruthOrDare.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityUploads.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityVideoOptions.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewAudioFile.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewLibraryFiles.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewLog.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewMySharedFiles.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewVideoFile.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityWebCamClient.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityYesNo.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AssetFaceWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AssetPhotoWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AssetTextWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AssetVideoWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AssetVoiceWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AvatarBarWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/CentralFrame.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/CentralWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ChatEntryWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/DialogConfirmRemoveMessage.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/FileActionBarWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/FileActionMenu.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/FileDisplayWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/FileItemWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/FileShareItemWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/FileXferWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/FriendListDlg.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/HistoryEntryWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/IdentWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/InputAllWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/InputFaceWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/InputPhotoWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/InputTextWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/InputVideoWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/InputVoiceWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/InstMsgWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ListEntryWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/OfferBarWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/OfferWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/PopupMenuWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/SessionWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/SoundCtrlWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/StoryWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/TitleBarWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/TodGameWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/VidWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/HomeWindow.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletLaunchWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/BottomBarWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityBase.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletTheme.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AcceptCancelWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletSettings.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPlayerVideo.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ImagePickBar.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletKodi.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletSharedContent.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletUserIdentity.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/PlayerGlWidget.ui
-
+INCLUDEPATH += $$PWD
 
 HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxDataHelper.h \
@@ -330,7 +230,8 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvInterface/OsAndroid/IAndroid.h \
     $$PWD/GoTvApps/GoTvPtoP/AppSource/exportdialog.h
 
-SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
+
+SOURCES += F:/gotvptop/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxDataHelper.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/DialogConfirmRemoveMessage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileActionBarWidget.cpp \
@@ -532,6 +433,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppDisplay.cpp \
     $$PWD/GoTvApps/GoTvPtoP/AppSource/GoTvPlayerSettings.cpp \
     $$PWD/GoTvApps/GoTvPtoP/AppSource/main.cpp \
+    $$PWD/GoTvApps/GoTvPtoP/AppSource/exportdialog.cpp \
     $$PWD/GoTvInterface/GoTvRenderFrame.cpp \
     $$PWD/GoTvInterface/IGoTv.cpp \
     $$PWD/GoTvInterface/IGoTvFromGui.cpp \
@@ -542,6 +444,115 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvInterface/OsInterface/OsInterface.cpp \
     $$PWD/GoTvInterface/OsWin32/IWin32.cpp \
     $$PWD/GoTvInterface/OsLinux/ILinux.cpp \
-    $$PWD/GoTvInterface/OsAndroid/IAndroid.cpp \
-    $$PWD/GoTvApps/GoTvPtoP/AppSource/exportdialog.cpp
+    $$PWD/GoTvInterface/OsAndroid/IAndroid.cpp
+
+
+FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAbout.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAnchorSettings.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityBrowseFiles.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityChooseIpAddress.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityChooseIpPort.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityChooseTestWebsiteUrl.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityConnectionOptions.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityCreateProfile.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDebugSettings.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDownloadItemMenu.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDownloads.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityEditAccount.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityEditProfile.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityFileSearch.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityIsPortOpenTest.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityManageAnchorSettings.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityMessageBox.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetServiceTest.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkSettings.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkStartupTest.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkStatus.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkTest.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPermissions.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPermissionsRelay.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPersonalRecorder.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPhoneShake.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityReplyFileOffer.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanPeopleSearch.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanProfiles.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanStoryBoards.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanWebCams.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySelectFileToSend.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySessionFileOffer.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySessionOptions.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityShowHelp.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySnapShot.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivitySoundOptions.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityStoryBoard.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityTimedMessage.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendBase.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendChangeFriendship.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendMultiSession.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendOfferFile.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendRequestRelay.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendTodGame.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendVideoPhone.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendViewSharedFiles.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityToFriendVoicePhone.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityTruthOrDare.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityUploads.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityVideoOptions.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewAudioFile.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewLibraryFiles.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewLog.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewMySharedFiles.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewVideoFile.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityWebCamClient.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityYesNo.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AssetFaceWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AssetPhotoWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AssetTextWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AssetVideoWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AssetVoiceWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AvatarBarWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/CentralFrame.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/CentralWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ChatEntryWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/DialogConfirmRemoveMessage.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/FileActionBarWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/FileActionMenu.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/FileDisplayWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/FileItemWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/FileShareItemWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/FileXferWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/FriendListDlg.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/HistoryEntryWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/IdentWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/InputAllWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/InputFaceWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/InputPhotoWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/InputTextWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/InputVideoWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/InputVoiceWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/InstMsgWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ListEntryWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/OfferBarWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/OfferWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/PopupMenuWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/SessionWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/SoundCtrlWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/StoryWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/TitleBarWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/TodGameWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/VidWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/HomeWindow.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletLaunchWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/BottomBarWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityBase.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletTheme.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AcceptCancelWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletSettings.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPlayerVideo.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ImagePickBar.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletKodi.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletSharedContent.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletUserIdentity.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/PlayerGlWidget.ui
 

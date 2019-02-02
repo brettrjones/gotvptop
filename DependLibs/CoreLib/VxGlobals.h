@@ -47,11 +47,13 @@ std::string&	            VxGetAssetsDirectory( void );
 void			            VxSetRootDataDirectory( const char * rootDataDir );
 std::string&	            VxGetRootDataDirectory( void );
 std::string&	            VxGetAppDataDirectory( void );
+std::string&	            VxGetKodiDataDirectory( void );
 
 void			            VxSetUserSpecificDataDirectory( const char * userDataDir  );
 std::string&	            VxGetUserSpecificDataDirectory( void  );
 std::string&	            VxGetSettingsDirectory( void );
-std::string&	            VxGetProfileDirectory( void );
+std::string&	            VxGetUserProfileDirectory( void );
+
 // storyboard is same as profile directory
 //std::string&	VxGetStoryboardDirectory( void );
 

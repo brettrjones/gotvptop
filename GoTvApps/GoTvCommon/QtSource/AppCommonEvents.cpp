@@ -18,49 +18,49 @@
 #include <GoTvInterface/IGoTv.h>
 
 //============================================================================
-void AppCommon::keyPressEvent( int moduleNum, int key, int mod )
+void AppCommon::fromGuiKeyPressEvent( int moduleNum, int key, int mod )
 {
-	m_GoTv.keyPressEvent( moduleNum, key, mod );
+    m_GoTv.fromGuiKeyPressEvent( moduleNum, key, mod );
 }
 
 //============================================================================
-void AppCommon::keyReleaseEvent( int moduleNum, int key, int mod )
+void AppCommon::fromGuiKeyReleaseEvent( int moduleNum, int key, int mod )
 {
-    m_GoTv.keyReleaseEvent( moduleNum, key, mod );
+    m_GoTv.fromGuiKeyReleaseEvent( moduleNum, key, mod );
 }
 
 //============================================================================
-void AppCommon::mousePressEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton )
+void AppCommon::fromGuiMousePressEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton )
 {
-    m_GoTv.mousePressEvent( moduleNum, mouseXPos, mouseYPos, mouseButton );
+    m_GoTv.fromGuiMousePressEvent( moduleNum, mouseXPos, mouseYPos, mouseButton );
 }
 
 //============================================================================
-void AppCommon::mouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton )
+void AppCommon::fromGuiMouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton )
 {
-    m_GoTv.mouseReleaseEvent( moduleNum, mouseXPos, mouseYPos, mouseButton );
+    m_GoTv.fromGuiMouseReleaseEvent( moduleNum, mouseXPos, mouseYPos, mouseButton );
 }
 
 //============================================================================
-void AppCommon::mouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos )
+void AppCommon::fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos )
 {
-    m_GoTv.mouseMoveEvent( moduleNum, mouseXPos, mouseYPos );
+    m_GoTv.fromGuiMouseMoveEvent( moduleNum, mouseXPos, mouseYPos );
 }
 
 //============================================================================
-void AppCommon::resizeEvent( int moduleNum, int winWidth, int winHeight )
+void AppCommon::fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight )
 {
-    m_GoTv.resizeEvent( moduleNum, winWidth, winHeight );
+    m_GoTv.fromGuiResizeEvent( moduleNum, winWidth, winHeight );
 }
 
 //============================================================================
-void AppCommon::closeEvent( int moduleNum )
+void AppCommon::fromGuiCloseEvent( int moduleNum )
 {
-    m_GoTv.closeEvent( moduleNum );
+    m_GoTv.fromGuiCloseEvent( moduleNum );
 }
 
 //============================================================================
-void AppCommon::visibleEvent( int moduleNum, bool isVisible )
+void AppCommon::fromGuiVisibleEvent( int moduleNum, bool isVisible )
 {
-    m_GoTv.visibleEvent( moduleNum, isVisible );
+    m_GoTv.fromGuiVisibleEvent( moduleNum, isVisible );
 }

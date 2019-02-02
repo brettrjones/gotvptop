@@ -87,7 +87,7 @@ void RenderGlWidget::onPaintGL( void )
 void RenderGlWidget::onResizeGL( int w, int h )
 {
     m_GlF->glViewport( 0, 0, w, h );
-    m_QtToKodi.resizeEvent(  w, h );
+    m_QtToKodi.fromGuiResizeEvent(  w, h );
 }
 
 //============================================================================
@@ -96,7 +96,7 @@ void RenderGlWidget::keyPressEvent( QKeyEvent * ev )
     if( ev->isAutoRepeat() )
         return;
 
-    if( ! m_QtToKodi.keyPressEvent( ev->key() ) )
+    if( ! m_QtToKodi.fromGuiKeyPressEvent( ev->key() ) )
     {
         RenderGlBaseWidget::keyPressEvent( ev );
     }
@@ -108,7 +108,7 @@ void RenderGlWidget::keyReleaseEvent( QKeyEvent * ev )
     if( ev->isAutoRepeat() )
         return;
 
-    if( !m_QtToKodi.keyReleaseEvent( ev->key() ) )
+    if( !m_QtToKodi.fromGuiKeyReleaseEvent( ev->key() ) )
     {
         RenderGlBaseWidget::keyReleaseEvent( ev );
     }
@@ -117,7 +117,7 @@ void RenderGlWidget::keyReleaseEvent( QKeyEvent * ev )
 //============================================================================
 void RenderGlWidget::mousePressEvent( QMouseEvent * ev )
 {
-    if( !m_QtToKodi.mousePressEvent( ev->x(), ev->y(), ev->button() ) )
+    if( !m_QtToKodi.fromGuiMousePressEvent( ev->x(), ev->y(), ev->button() ) )
     {
         RenderGlBaseWidget::mousePressEvent( ev );
     }
@@ -126,7 +126,7 @@ void RenderGlWidget::mousePressEvent( QMouseEvent * ev )
 //============================================================================
 void RenderGlWidget::mouseReleaseEvent( QMouseEvent * ev )
 {
-    if( !m_QtToKodi.mouseReleaseEvent( ev->x(), ev->y(), ev->button() ) )
+    if( !m_QtToKodi.fromGuiMouseReleaseEvent( ev->x(), ev->y(), ev->button() ) )
     {
         RenderGlBaseWidget::mouseReleaseEvent( ev );
     }
@@ -135,7 +135,7 @@ void RenderGlWidget::mouseReleaseEvent( QMouseEvent * ev )
 //============================================================================
 void RenderGlWidget::mouseMoveEvent( QMouseEvent * ev )
 {
-    if( !m_QtToKodi.mouseMoveEvent( ev->x(), ev->y() ) )
+    if( !m_QtToKodi.fromGuiMouseMoveEvent( ev->x(), ev->y() ) )
     {
         RenderGlBaseWidget::mouseMoveEvent( ev );
     }

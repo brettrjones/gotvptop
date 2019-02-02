@@ -31,15 +31,8 @@ PopupMenu::PopupMenu( AppCommon& app, QWidget * parent )
 	ui.setupUi(this);
 	repositionToParent();
 
-	if( false == connect(ui.exitPopupButton, SIGNAL(clicked()), this, SLOT(slotExitButtonClicked())) )
-	{
-		LogMsg( LOG_INFO, "PopupMenu could not connect to exitPopupButton\n");
-	}
-
-	if( false == connect(ui.menuItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(itemClicked(QListWidgetItem *))) )
-	{
-		LogMsg( LOG_INFO, "PopupMenu could not connect to itemSelectionChanged\n");
-	}
+    connect(ui.exitPopupButton, SIGNAL(clicked()), this, SLOT(slotExitButtonClicked()));
+    connect(ui.menuItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(itemClicked(QListWidgetItem *)));
 }
 
 //============================================================================

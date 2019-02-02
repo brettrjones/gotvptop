@@ -1,3 +1,6 @@
+INCLUDEPATH += $$PWD/DependLibs
+INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
+
 HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktAnnList.h \
     $$PWD/DependLibs/PktLib/PktAnnounce.h \

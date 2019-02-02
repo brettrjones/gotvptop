@@ -5,10 +5,8 @@
 
 #include "AppParamParser.h"
 
-
 class IGoTv;
 class CAppParamParser;
-
 
 class OsInterface
 {
@@ -35,7 +33,7 @@ public:
     virtual void                doShutdown() = 0;
 
     //=== utilities ===//
-    virtual bool               initDirectories() = 0;
+    virtual bool               initDirectories();
 
 
 protected:
