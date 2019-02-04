@@ -15,8 +15,8 @@ namespace XFILE
   class CAPKDirectory : public IFileDirectory
   {
     public:
-    CAPKDirectory() {};
-    virtual ~CAPKDirectory() {};
+    CAPKDirectory() {}
+    virtual ~CAPKDirectory() {}
     virtual bool GetDirectory(const GoTvUrl& url, CFileItemList &items);
     virtual bool ContainsFiles(const GoTvUrl& url);
     virtual DIR_CACHE_TYPE GetCacheType(const GoTvUrl& url) const;

@@ -18,20 +18,33 @@
  *
  */
 
+#include "config_kodi.h"
+
 #if defined(TARGET_OS_ANDROID)
 
 #include <jni.h>
 #include <sys/stat.h>
 
 #include <android/bitmap.h>
-#include <android/jni/Bitmap.h>
-#include <android/jni/Drawable.h>
-#include <android/jni/BitmapDrawable.h>
-#include <android/jni/Build.h>
-#include <android/jni/Context.h>
-#include <android/jni/DisplayMetrics.h>
-#include <android/jni/PackageManager.h>
-#include <android/jni/Resources.h>
+#if defined(HAVE_QT_GUI)
+# include <platform/qt/qtandroid/jni/Bitmap.h>
+# include <platform/qt/qtandroid/jni/Drawable.h>
+# include <platform/qt/qtandroid/jni/BitmapDrawable.h>
+# include <platform/qt/qtandroid/jni/Build.h>
+# include <platform/qt/qtandroid/jni/Context.h>
+# include <platform/qt/qtandroid/jni/DisplayMetrics.h>
+# include <platform/qt/qtandroid/jni/PackageManager.h>
+# include <platform/qt/qtandroid/jni/Resources.h>
+#else
+# include <android/jni/Bitmap.h>
+# include <android/jni/Drawable.h>
+# include <android/jni/BitmapDrawable.h>
+# include <android/jni/Build.h>
+# include <android/jni/Context.h>
+# include <android/jni/DisplayMetrics.h>
+# include <android/jni/PackageManager.h>
+# include <android/jni/Resources.h>
+#endif // defined(HAVE_QT_GUI)
 
 #include "AndroidAppFile.h"
 #if defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)

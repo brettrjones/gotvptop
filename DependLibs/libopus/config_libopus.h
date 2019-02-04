@@ -210,9 +210,11 @@ implies SSE4.1) */
 /* Define if assembler supports ARMv6 media instructions */
 # define  OPUS_ARM_MAY_HAVE_MEDIA	0
 /* Define if compiler supports NEON instructions */
-# define  OPUS_ARM_MAY_HAVE_NEON		0
+#if defined(HAVE_ARM_NEON)
+# define  OPUS_ARM_MAY_HAVE_NEON		1
+#endif // defined(HAVE_ARM_NEON)
 /* Compiler supports ARMv7/Aarch64 Neon Intrinsics */
-# define  OPUS_ARM_MAY_HAVE_NEON_INTR	0
+//# define  OPUS_ARM_MAY_HAVE_NEON_INTR	0
 /* Define if binary requires Aarch64 Neon Intrinsics */
 //# define  OPUS_ARM_PRESUME_AARCH64_NEON_INTR	0
 /* Define if binary requires EDSP instruction support */

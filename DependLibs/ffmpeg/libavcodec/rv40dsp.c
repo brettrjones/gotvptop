@@ -709,7 +709,7 @@ av_cold void ff_rv40dsp_init(RV34DSPContext *c)
 #if ARCH_AARCH64
 	ff_rv40dsp_init_aarch64( c );
 #endif //ARCH_AARCH64
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 	ff_rv40dsp_init_arm( c );
 #endif //ARCH_ARM
 #if ARCH_X86

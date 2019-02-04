@@ -12,7 +12,7 @@
 #include "addons/settings/AddonSettings.h"
 #include "AddonCallbacksAddon.h"
 #include "utils/log.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "dialogs/GUIDialogKaiToast.h"
 #include "filesystem/File.h"
 #include "filesystem/Directory.h"

@@ -19,7 +19,7 @@
 #include "filesystem/File.h"
 #include "filesystem/SpecialProtocol.h"
 #include "guilib/LocalizeStrings.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "network/DNSNameCache.h"
 #include "profiles/ProfileManager.h"
 #include "settings/lib/Setting.h"

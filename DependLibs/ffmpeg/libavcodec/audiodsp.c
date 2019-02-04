@@ -111,7 +111,7 @@ av_cold void ff_audiodsp_init(AudioDSPContext *c)
     c->vector_clip_int32   = vector_clip_int32_c;
     c->vector_clipf        = vector_clipf_c;
 
-# if ARCH_ARM
+# if ARCH_ARM && HAVE_ARM_ASM
 	ff_audiodsp_init_arm( c );
 # endif // ARCH_ARM
 # if ARCH_PPC

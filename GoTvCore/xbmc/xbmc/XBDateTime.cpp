@@ -10,7 +10,7 @@
 #include <cstdlib>
 
 #include "XBDateTime.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"

@@ -20,7 +20,7 @@
  */
 
 #include "config_ffmpeg.h"
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
 
 #include "libswresample/swresample.h"
 #include "libavutil/x86/w64xmmtest.h" // causes error  '__asm__': undeclared identifier in VS
@@ -31,4 +31,4 @@ wrap(swr_convert(struct SwrContext *s, uint8_t **out, int out_count,
     testxmmclobbers(swr_convert, s, out, out_count, in, in_count);
 }
 
-#endif // ARCH_X86 && HAVE_X86ASM
+#endif // ARCH_X86 && HAVE_X86_ASM

@@ -239,8 +239,12 @@ int gnutls_global_init(void)
 	}
 
 	_gnutls_switch_lib_state(LIB_STATE_INIT);
-
+#ifdef HAVE_SECURE_GETENV
 	e = secure_getenv("GNUTLS_DEBUG_LEVEL");
+#else
+    e = getenv("GNUTLS_DEBUG_LEVEL");
+#endif // HAVE_SECURE_GETENV
+
 	if (e != NULL) {
 		level = atoi(e);
 		gnutls_global_set_log_level(level);
@@ -473,7 +477,11 @@ const char *e;
 	if (_gnutls_global_init_skip() != 0)
 		return;
 
-	e = secure_getenv("GNUTLS_NO_EXPLICIT_INIT");
+#ifdef HAVE_SECURE_GETENV
+    e = secure_getenv("GNUTLS_NO_EXPLICIT_INIT");
+#else
+    e = getenv("GNUTLS_NO_EXPLICIT_INIT");
+#endif // HAVE_SECURE_GETENV
 	if (e != NULL) {
 		ret = atoi(e);
 		if (ret == 1)
@@ -494,7 +502,12 @@ static void _DESTRUCTOR lib_deinit(void)
 	if (_gnutls_global_init_skip() != 0)
 		return;
 
-	e = secure_getenv("GNUTLS_NO_EXPLICIT_INIT");
+#ifdef HAVE_SECURE_GETENV
+    e = secure_getenv("GNUTLS_NO_EXPLICIT_INIT");
+#else
+    e = getenv("GNUTLS_NO_EXPLICIT_INIT");
+#endif // HAVE_SECURE_GETENV
+
 	if (e != NULL) {
 		int ret = atoi(e);
 		if (ret == 1)

@@ -94,7 +94,7 @@ av_cold void ff_llvidencdsp_init(LLVidEncDSPContext *c)
     c->sub_median_pred = sub_median_pred_c;
     c->sub_left_predict = sub_left_predict_c;
 
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
         ff_llvidencdsp_init_x86(c);
-#endif // ARCH_X86 && HAVE_X86ASM
+#endif // ARCH_X86 && HAVE_X86_ASM
 }

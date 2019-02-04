@@ -76,7 +76,7 @@ HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvCore/xbmc/xbmc/IFileItemListModifier.h \
     $$PWD/GoTvCore/xbmc/xbmc/IProgressCallback.h \
     $$PWD/GoTvCore/xbmc/xbmc/InfoScanner.h \
-    $$PWD/GoTvCore/xbmc/xbmc/LangInfo.h \
+    $$PWD/GoTvCore/xbmc/xbmc/LangInfoKodi.h \
     $$PWD/GoTvCore/xbmc/xbmc/MediaSource.h \
     $$PWD/GoTvCore/xbmc/xbmc/NfoFile.h \
     $$PWD/GoTvCore/xbmc/xbmc/PartyModeManager.h \
@@ -1612,7 +1612,7 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/GUILargeTextureManager.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/GUIPassword.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/InfoScanner.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/LangInfo.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/LangInfoKodi.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/MediaSource.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/NfoFile.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/PartyModeManager.cpp \
@@ -2636,7 +2636,6 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OptionalsReg.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/linux/PosixMountProvider.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/linux/RBP.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/TimeUtils.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XFileUtils.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XHandle.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XMemUtils.cpp \
@@ -2748,7 +2747,7 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/SystemInfo.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/Temperature.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/TextSearch.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/utils/TimeUtils.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/utils/TimeUtils2.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/URIUtils.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/UrlOptions.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/Utf8Utils.cpp \
@@ -2865,7 +2864,7 @@ win32{
 }
 
 android{
-    HEADERS += 	$$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.h \
+HEADERS += $$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/api-level.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/asset_manager.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/asset_manager_jni.h \
@@ -2884,9 +2883,37 @@ android{
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/sensor.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/storage_manager.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/tts.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/window.h
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/window.h \
+    $$PWD/GoTvCore/xbmc/xbmc/filesystem/AndroidAppDirectory.h \
+    $$PWD/GoTvCore/xbmc/xbmc/filesystem/AndroidAppFile.h \
+    $$PWD/GoTvCore/xbmc/xbmc/filesystem/APKFile.h \
+    $$PWD/GoTvCore/xbmc/xbmc/filesystem/APKDirectory.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Bitmap.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Drawable.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/BitmapDrawable.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Build.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Context.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/DisplayMetrics.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/PackageManager.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Resources.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniBase.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniThreading.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/jutils.h \
 
-    SOURCES += $$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.cpp
+SOURCES += $$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/filesystem/AndroidAppDirectory.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/filesystem/AndroidAppFile.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/filesystem/APKFile.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/filesystem/APKDirectory.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/BitmapDrawable.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Build.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Context.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/DisplayMetrics.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/PackageManager.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Resources.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniBase.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniThreading.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/jutils.cpp \
 }
 
 #android{
@@ -3071,5 +3098,5 @@ SOURCES += $$PWD/GoTvCore/xbmc/xbmc/platform/linux/ConvUtils.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/Mmap.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/PosixInterfaceForCLog.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/SharedMemory.cpp \
-
 }
+

@@ -13,7 +13,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "guilib/LocalizeStrings.h"
 #include "GUIUserMessages.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "interfaces/generic/ScriptInvocationManager.h"
 #include "network/Network.h"
 #ifdef TARGET_POSIX

@@ -18,7 +18,7 @@
 #include <libfribidi/lib/fribidi.h>
 
 #include "guilib/LocalizeStrings.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "log.h"
 #include "settings/lib/Setting.h"
 #include "settings/Settings.h"

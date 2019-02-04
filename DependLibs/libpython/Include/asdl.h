@@ -6,8 +6,8 @@ typedef PyObject * string;
 typedef PyObject * object;
 
 #ifndef __cplusplus
-# ifndef _MSC_VER
-typedef enum {false, true} bool;
+# if !defined(_MSC_VER) && !defined(TARGET_OS_ANDROID)
+   typedef enum {false, true} bool;
 # endif // _MSC_VER
 #endif
 

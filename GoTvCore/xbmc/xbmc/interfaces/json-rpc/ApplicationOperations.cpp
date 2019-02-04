@@ -11,7 +11,7 @@
 #include "CompileInfo.h"
 #include "GUIInfoManager.h"
 #include "InputOperations.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "GoTvCoreUtil.h"
 #include "input/Key.h"
 #include "messaging/ApplicationMessenger.h"

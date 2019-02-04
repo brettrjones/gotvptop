@@ -26,7 +26,9 @@
 /* #undef FREEBSD */
 
 /* Define to 1 if you have the `accept4' function. */
-#define HAVE_ACCEPT4 1
+#if !defined(TARGET_OS_ANDROID)
+# define HAVE_ACCEPT4 1
+#endif // !defined(TARGET_OS_ANDROID)
 //#define HAVE_ARPA_INET_H 1
 
 /* Define to 1 if you have the `gmtime_s' function in C11 form. */

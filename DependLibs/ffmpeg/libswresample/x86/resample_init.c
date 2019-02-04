@@ -26,7 +26,7 @@
  */
 
 #include "config_ffmpeg.h"
-#if HAVE_X86ASM
+#if HAVE_X86_ASM
 
 #include "libavutil/x86/cpu_x86.h"
 #include "libswresample/resample.h"
@@ -102,4 +102,4 @@ av_cold void swri_resample_dsp_x86_init(ResampleContext *c)
     }
 }
 
-#endif // HAVE_X86ASM
+#endif // HAVE_X86_ASM

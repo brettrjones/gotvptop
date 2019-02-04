@@ -10,7 +10,7 @@
 #include "StreamDetails.h"
 #include "StreamUtils.h"
 #include "utils/Variant.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "utils/LangCodeExpander.h"
 #include "utils/Archive.h"
 #include "cores/VideoPlayer/Interface/StreamInfo.h"

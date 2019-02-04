@@ -63,7 +63,7 @@ static int get_cpu_flags(void)
 {
 #if ARCH_AARCH64
         return ff_get_cpu_flags_aarch64();
-#elif ARCH_ARM
+#elif ARCH_ARM && HAVE_ARM_ASM
         return ff_get_cpu_flags_arm();
 #elif ARCH_PPC
         return ff_get_cpu_flags_ppc();
@@ -322,11 +322,11 @@ size_t av_cpu_max_align(void)
 {
 #if ARCH_AARCH64
         return ff_get_cpu_max_align_aarch64();
-#elif ARCH_ARM
+#elif ARCH_ARM && HAVE_ARM_ASM
         return ff_get_cpu_max_align_arm();
 #elif ARCH_PPC
         return ff_get_cpu_max_align_ppc();
-#elif ARCH_X86 && HAVE_X86ASM
+#elif ARCH_X86 && HAVE_X86_ASM
         return ff_get_cpu_max_align_x86();
 #endif
 

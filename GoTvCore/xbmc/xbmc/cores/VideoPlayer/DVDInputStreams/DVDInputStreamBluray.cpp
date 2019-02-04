@@ -16,7 +16,7 @@
 #include "cores/VideoPlayer/DVDCodecs/Overlay/DVDOverlayImage.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "ServiceBroker.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"

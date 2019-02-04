@@ -19,7 +19,7 @@
  *
  */
 
-#if defined(TARGET_ANDROID)
+#if defined(TARGET_OS_ANDROID)
 #include "IFile.h"
 #include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
 #include "string.h"

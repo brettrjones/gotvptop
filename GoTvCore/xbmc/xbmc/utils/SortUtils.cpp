@@ -7,7 +7,7 @@
  */
 
 #include "SortUtils.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "GoTvUrl.h"
 #include "GoTvCoreUtil.h"
 #include "XBDateTime.h"

@@ -1085,7 +1085,7 @@ av_cold void ff_me_cmp_init(MECmpContext *c, AVCodecContext *avctx)
 #if ARCH_ALPHA
 	ff_me_cmp_init_alpha( c, avctx );
 #endif //ARCH_ALPHA
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 	ff_me_cmp_init_arm( c, avctx );
 #endif //ARCH_ARM
 #if ARCH_PPC

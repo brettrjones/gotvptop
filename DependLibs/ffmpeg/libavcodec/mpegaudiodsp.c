@@ -49,13 +49,13 @@ av_cold void ff_mpadsp_init(MPADSPContext *s)
 #if ARCH_AARCH64
 	ff_mpadsp_init_aarch64( s );
 #endif //ARCH_AARCH64
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 	ff_mpadsp_init_arm( s );
 #endif //ARCH_ARM
 #if ARCH_PPC
 	ff_mpadsp_init_ppc( s );
 #endif //ARCH_PPC
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
 	ff_mpadsp_init_x86( s );
 #endif //ARCH_X86
 #if HAVE_MIPSFPU

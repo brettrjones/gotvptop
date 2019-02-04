@@ -8,7 +8,7 @@
 
 #include "AddonManager.h"
 
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "ServiceBroker.h"
 #include "addons/DllLibCPluff.h"
 #include "events/AddonManagementEvent.h"

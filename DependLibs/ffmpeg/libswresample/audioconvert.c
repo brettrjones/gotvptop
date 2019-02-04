@@ -180,7 +180,7 @@ AudioConvert *swri_audio_convert_alloc(enum AVSampleFormat out_fmt,
 	if( HAVE_YASM && HAVE_MMX )
 		swri_audio_convert_init_x86(ctx, out_fmt, in_fmt, channels);
 #endif // USE_CPU_X86_EXTENSIONS
-#if ARCH_ARM              
+#if ARCH_ARM && HAVE_ARM_ASM
 	swri_audio_convert_init_arm(ctx, out_fmt, in_fmt, channels);
 #endif // ARCH_ARM              
 #if ARCH_AARCH64              

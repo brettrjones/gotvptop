@@ -58,7 +58,7 @@ av_cold void ff_fmt_convert_init(FmtConvertContext *c, AVCodecContext *avctx)
 #if ARCH_AARCH64
 		ff_fmt_convert_init_aarch64( c, avctx );
 #endif //ARCH_AARCH64
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 		ff_fmt_convert_init_arm( c, avctx );
 #endif //ARCH_ARM
 #if ARCH_PPC

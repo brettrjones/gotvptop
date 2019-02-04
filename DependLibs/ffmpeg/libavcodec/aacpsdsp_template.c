@@ -224,13 +224,13 @@ av_cold void AAC_RENAME(ff_psdsp_init)(PSDSPContext *s)
     s->stereo_interpolate[1]  = ps_stereo_interpolate_ipdopd_c;
 
 #if !USE_FIXED
-# if ARCH_ARM
+# if ARCH_ARM && HAVE_ARM_ASM
         ff_psdsp_init_arm(s);
 # endif // ARCH_ARM
 # if ARCH_MIPS
         ff_psdsp_init_mips(s);
 # endif // ARCH_MIPS
-# if ARCH_X86 && HAVE_X86ASM
+# if ARCH_X86 && HAVE_X86_ASM
 		ff_psdsp_init_x86( s );
 # endif // ARCH_X86
 #endif /* !USE_FIXED */

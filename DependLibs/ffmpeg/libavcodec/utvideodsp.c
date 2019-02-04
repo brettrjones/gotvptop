@@ -78,8 +78,8 @@ av_cold void ff_utvideodsp_init(UTVideoDSPContext *c)
     c->restore_rgb_planes   = restore_rgb_planes_c;
     c->restore_rgb_planes10 = restore_rgb_planes10_c;
 
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
         ff_utvideodsp_init_x86(c);
-#endif // ARCH_X86 && HAVE_X86ASM
+#endif // ARCH_X86 && HAVE_X86_ASM
 
 }

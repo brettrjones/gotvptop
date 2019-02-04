@@ -1105,9 +1105,9 @@ static av_cold int aac_encode_init(AVCodecContext *avctx)
     s->abs_pow34   = abs_pow34_v;
     s->quant_bands = quantize_bands;
 
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
         ff_aac_dsp_init_x86(s);
-#endif // ARCH_X86 && HAVE_X86ASM
+#endif // ARCH_X86 && HAVE_X86_ASM
 
 
 #if HAVE_MIPSDSP

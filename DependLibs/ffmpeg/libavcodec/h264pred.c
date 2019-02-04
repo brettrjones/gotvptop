@@ -597,7 +597,7 @@ av_cold void ff_h264_pred_init(H264PredContext *h, int codec_id,
 #if ARCH_AARCH64
 	ff_h264_pred_init_aarch64( h, codec_id, bit_depth, chroma_format_idc );
 #endif //ARCH_AARCH64
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 	ff_h264_pred_init_arm( h, codec_id, bit_depth, chroma_format_idc );
 #endif //ARCH_ARM
 #if ARCH_X86

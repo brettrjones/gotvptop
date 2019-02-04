@@ -122,7 +122,7 @@ void ff_llviddsp_init(LLVidDSPContext *c)
         ff_llviddsp_init_ppc(c);
 #endif // ARCH_PPC
 
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
         ff_llviddsp_init_x86(c, avctx);
-#endif //ARCH_X86 && HAVE_X86ASM
+#endif //ARCH_X86 && HAVE_X86_ASM
 }

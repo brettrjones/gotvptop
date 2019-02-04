@@ -102,7 +102,7 @@ av_cold void ff_h264qpel_init(H264QpelContext *c, int bit_depth)
 #if ARCH_AARCH64
 	ff_h264qpel_init_aarch64( c, bit_depth );
 #endif //ARCH_AARCH64
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 	ff_h264qpel_init_arm( c, bit_depth );
 #endif //ARCH_ARM
 #if ARCH_PPC

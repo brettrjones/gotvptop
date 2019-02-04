@@ -32,7 +32,7 @@
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
 #include "storage/MediaManager.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "input/Key.h"
 #include "ContextMenuManager.h"
 

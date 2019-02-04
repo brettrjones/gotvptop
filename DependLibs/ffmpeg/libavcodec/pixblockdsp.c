@@ -102,7 +102,7 @@ av_cold void ff_pixblockdsp_init(PixblockDSPContext *c, AVCodecContext *avctx)
 #if ARCH_AARCH64
 	ff_pixblockdsp_init_alpha( c, avctx, high_bit_depth );
 #endif //ARCH_AARCH64
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 	ff_pixblockdsp_init_arm( c, avctx, high_bit_depth );
 #endif //ARCH_ARM
 #if ARCH_PPC

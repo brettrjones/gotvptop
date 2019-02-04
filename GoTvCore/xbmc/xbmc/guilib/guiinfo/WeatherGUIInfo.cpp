@@ -9,7 +9,7 @@
 #include "guilib/guiinfo/WeatherGUIInfo.h"
 
 #include "FileItem.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "ServiceBroker.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"

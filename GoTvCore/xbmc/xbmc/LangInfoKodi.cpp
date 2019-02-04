@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 
 #include <stdexcept>
 #include <algorithm>

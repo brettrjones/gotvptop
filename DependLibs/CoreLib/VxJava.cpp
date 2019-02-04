@@ -14,6 +14,12 @@ namespace
 {
     int							g_JniLoadCalledCnt	= 0;
     VxMutex						g_oJavaMutex;
+    VxJava                      g_VxJava;
+}
+
+VxJava& GetJavaEnvCache()
+{
+    return g_VxJava;
 }
 
 //============================================================================

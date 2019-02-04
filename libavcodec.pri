@@ -29,7 +29,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/aacps.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/aacps_fixed_tablegen.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/aacps_tablegen.h \
-    $$PWD/DependLibs/ffmpeg/libavcodec/aacps_tables.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/aacpsdsp.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/aacsbr.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/aacsbr_fixed_tablegen.h \
@@ -88,7 +87,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/cavsdsp.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/cbrt_data.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/cbrt_tablegen.h \
-    $$PWD/DependLibs/ffmpeg/libavcodec/cbrt_tables.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/celp_filters.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/celp_math.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/cfhd.h \
@@ -130,7 +128,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/dv_profile.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/dv_profile_internal.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/dv_tablegen.h \
-    $$PWD/DependLibs/ffmpeg/libavcodec/dv_tables.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/dvaudio.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/dvbtxt.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/dvdata.h \
@@ -268,7 +265,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/mlz.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/motion_est.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/motionpixels_tablegen.h \
-    $$PWD/DependLibs/ffmpeg/libavcodec/motionpixels_tables.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/mpc.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/mpc7data.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/mpc8data.h \
@@ -284,7 +280,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/mpeg_er.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/mpegaudio.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/mpegaudio_tablegen.h \
-    $$PWD/DependLibs/ffmpeg/libavcodec/mpegaudio_tables.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/mpegaudiodata.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/mpegaudiodecheader.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/mpegaudiodectab.h \
@@ -319,7 +314,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/paf.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/parser.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/pcm_tablegen.h \
-    $$PWD/DependLibs/ffmpeg/libavcodec/pcm_tables.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/pixblockdsp.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/pixels.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/png.h \
@@ -472,6 +466,14 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/xvmc.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/xvmc_internal.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/xwd.h
+
+# only used if generate tables which makes program larger but faster
+#    $$PWD/DependLibs/ffmpeg/libavcodec/aacps_tables.h \
+#    $$PWD/DependLibs/ffmpeg/libavcodec/cbrt_tables.h \
+#    $$PWD/DependLibs/ffmpeg/libavcodec/dv_tables.h \
+#    $$PWD/DependLibs/ffmpeg/libavcodec/motionpixels_tables.h \
+#    $$PWD/DependLibs/ffmpeg/libavcodec/mpegaudio_tables.h \
+#    $$PWD/DependLibs/ffmpeg/libavcodec/pcm_tables.h \
 
 SOURCES += 	\
     $$PWD/DependLibs/ffmpeg/libavcodec/012v.c \

@@ -12,7 +12,7 @@
 #include "utils/CharsetConverter.h"
 #include "utils/CharsetDetection.h"
 #include "utils/Utf8Utils.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "RegExp.h"
 #include "utils/log.h"
 

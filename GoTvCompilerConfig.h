@@ -1351,8 +1351,8 @@ typedef int64_t              time64_t;
 #endif // TARGET_OS_WINDOWS
 
 /* Define if you have the <sys/utime.h> header file. */
-#ifndef TARGET_OS_WINDOWS
-#define HAVE_SYS_UTIME_H			1
+#if !defined(TARGET_OS_WINDOWS) && !defined(TARGET_OS_ANDROID)
+# define HAVE_SYS_UTIME_H			1
 #endif // TARGET_OS_WINDOWS
 
 #define HAVE_SSIZE_T				1
@@ -1376,14 +1376,15 @@ typedef int64_t              time64_t;
 #endif // _MSC_VER
 
 /* Define to 1 if you have the <sys/param.h> header file. */
-#define HAVE_SYS_PARAM_H			0
 
 #ifdef TARGET_OS_WINDOWS
 /* Define to 1 if you have the <sys/socket.h> header file. */
 # define HAVE_SYS_SOCKET_H			0
+# define HAVE_SYS_PARAM_H			0
 #else
 /* Define to 1 if you have the <sys/socket.h> header file. */
-# define HAVE_SYS_SOCKET_H			0
+# define HAVE_SYS_SOCKET_H			1
+# define HAVE_SYS_PARAM_H			1
 #endif // TARGET_OS_WINDOWS
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
@@ -1437,7 +1438,8 @@ typedef int64_t              time64_t;
 #define HAVE_SETENV					1
 /* Define to 1 if you have the `seteuid' function. */
 #ifndef TARGET_OS_WINDOWS
-# define HAVE_SETEUID	
+# define HAVE_SETEUID               1
+# define HAVE_SETEGID               1
 #endif // TARGET_OS_WINDOWS
 
 /* Define to 1 if you have the `setenv' function. */

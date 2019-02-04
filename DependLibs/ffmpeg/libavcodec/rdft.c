@@ -133,7 +133,7 @@ av_cold int ff_rdft_init(RDFTContext *s, int nbits, enum RDFTransformType trans)
     s->tsin = ff_cos_tabs[nbits] + (n >> 2);
     s->rdft_calc   = rdft_calc_c;
 
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 	ff_rdft_init_arm( s );
 #endif //ARCH_ARM
 

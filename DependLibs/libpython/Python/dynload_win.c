@@ -2,14 +2,18 @@
 /* Support for dynamic loading of extension modules */
 
 #include "Python.h"
+#if defined(TARGET_OS_WINDOWS)
 
 #ifdef HAVE_DIRECT_H
-#include <direct.h>
+# include <direct.h>
 #endif
+
 #include <ctype.h>
 
 #include "importdl.h"
-#include <windows.h>
+
+
+# include <windows.h>
 
 #include <CoreLib/VxDebug.h>
 
@@ -285,3 +289,4 @@ dl_funcptr _PyImport_GetDynLoadFunc(const char *fqname, const char *shortname,
 
     return p;
 }
+#endif // defined(TARGET_OS_WINDOWS)

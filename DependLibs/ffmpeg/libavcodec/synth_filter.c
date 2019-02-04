@@ -179,7 +179,7 @@ av_cold void ff_synth_filter_init(SynthFilterContext *c)
 		ff_synth_filter_init_aarch64( c );
 #endif //ARCH_AARCH64
 
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 		ff_synth_filter_init_arm( c );
 #endif //ARCH_ARM
 

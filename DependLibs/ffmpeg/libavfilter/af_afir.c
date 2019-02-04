@@ -500,9 +500,9 @@ static av_cold int init(AVFilterContext *ctx)
     if (!s->fdsp)
         return AVERROR(ENOMEM);
 
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
         ff_afir_init_x86(s);
-#endif // ARCH_X86 && HAVE_X86ASM
+#endif // ARCH_X86 && HAVE_X86_ASM
 
     return 0;
 }

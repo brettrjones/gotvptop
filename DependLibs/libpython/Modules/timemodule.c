@@ -22,14 +22,23 @@
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif /* HAVE_SYS_TYPES_H */
-#include <sys/timeb.h>
+
+#if defined(TARGET_OS_ANDROID)
+# include <unistd.h>
+#else
+# include <sys/timeb.h>
+#endif // defined(TARGET_OS_ANDROID)
 
 #ifdef QUICKWIN
 #include <io.h>
 #endif
 
 #ifdef HAVE_FTIME
-#include <sys/timeb.h>
+#if defined(TARGET_OS_ANDROID)
+# include <unistd.h>
+#else
+# include <sys/timeb.h>
+#endif // defined(TARGET_OS_ANDROID)
 #if !defined(MS_WINDOWS) && !defined(PYOS_OS2)
 extern int ftime(struct timeb *);
 #endif /* MS_WINDOWS */

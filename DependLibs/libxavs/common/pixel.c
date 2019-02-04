@@ -33,7 +33,7 @@
 #include "common.h"
 #include <string.h>
 
-#if ARCH_X86 & HAVE_X86ASM
+#if ARCH_X86 & HAVE_X86_ASM
 #   include "i386/pixel.h"
 #endif
 #if ARCH_PPC

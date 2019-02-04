@@ -9,7 +9,7 @@
 #include "Settings.h"
 #include "Application.h"
 #include "Autorun.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
 #include "addons/AddonSystemSettings.h"
 #include "addons/Skin.h"

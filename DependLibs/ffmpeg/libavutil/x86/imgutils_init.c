@@ -17,7 +17,7 @@
  */
 
 #include "config_ffmpeg.h"
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
 
 #include "libavutil/cpu.h"
 #include "libavutil/error.h"
@@ -52,5 +52,5 @@ int ff_image_copy_plane_uc_from_x86(uint8_t       *dst, ptrdiff_t dst_linesize,
     return 0;
 }
 
-#endif // ARCH_X86 && HAVE_X86ASM
+#endif // ARCH_X86 && HAVE_X86_ASM
 

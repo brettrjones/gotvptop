@@ -287,7 +287,7 @@ av_cold void ff_vp3dsp_init(VP3DSPContext *c, int flags)
     c->v_loop_filter = vp3_v_loop_filter_c;
     c->h_loop_filter = vp3_h_loop_filter_c;
 
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 	ff_vp3dsp_init_arm( c, flags );
 #endif //ARCH_ARM
 #if ARCH_PPC

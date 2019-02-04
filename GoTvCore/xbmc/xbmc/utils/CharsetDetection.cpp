@@ -11,7 +11,7 @@
 #include "utils/CharsetConverter.h"
 #include "utils/StringUtils.h"
 #include "utils/Utf8Utils.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "utils/log.h"
 
 /* XML declaration can be virtually any size (with many-many whitespaces)

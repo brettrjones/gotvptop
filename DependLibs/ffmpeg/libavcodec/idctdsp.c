@@ -310,13 +310,13 @@ av_cold void ff_idctdsp_init(IDCTDSPContext *c, AVCodecContext *avctx)
 #if ARCH_ALPHA
 	ff_idctdsp_init_alpha( c, avctx, high_bit_depth );
 #endif //defined(ARCH_ALPHA
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 	ff_idctdsp_init_arm( c, avctx, high_bit_depth );
 #endif //ARCH_ARM
 #if ARCH_PPC
 	ff_idctdsp_init_ppc( c, avctx, high_bit_depth );
 #endif //ARCH_PPC
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
 	ff_idctdsp_init_x86( c, avctx, high_bit_depth );
 #endif //ARCH_X86
 #if ARCH_MIPS

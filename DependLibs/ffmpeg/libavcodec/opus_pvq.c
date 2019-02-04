@@ -903,9 +903,9 @@ int av_cold ff_celt_pvq_init(CeltPVQ **pvq, int encode)
     s->pvq_search         = ppp_pvq_search_c;
     s->quant_band = encode ? pvq_encode_band : pvq_decode_band;
 
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
         ff_opus_dsp_init_x86(s);
-#endif // ARCH_X86 && HAVE_X86ASM
+#endif // ARCH_X86 && HAVE_X86_ASM
 
     *pvq = s;
 

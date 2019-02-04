@@ -8,7 +8,9 @@
 
 #pragma once
 
-#if defined(TARGET_ANDROID)
+#include "config_kodi.h"
+
+#if defined(TARGET_OS_ANDROID)
 #include "filesystem/IDirectory.h"
 #include "FileItem.h"
 namespace XFILE

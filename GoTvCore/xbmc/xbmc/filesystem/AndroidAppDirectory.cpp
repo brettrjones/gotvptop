@@ -18,11 +18,15 @@
  *
  */
 
+#include "config_kodi.h"
+
 #if defined(TARGET_OS_ANDROID)
-#include "AndroidAppDirectory.h"
-#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
+
+#if defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
+# include "filesystem/AndroidAppDirectory.h"
 # include "platform/android/activity/XBMCApp.h"
 #elif defined(TARGET_ANDROID) && defined(HAVE_QT_GUI)
+# include "filesystem/AndroidAppDirectory.h"
 # include "platform/qt/KodiQtApp.h"
 #endif // defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
 
@@ -82,4 +86,4 @@ bool CAndroidAppDirectory::GetDirectory(const GoTvUrl& url, CFileItemList &items
   return false;
 }
 
-#endif
+#endif // defined(TARGET_OS_ANDROID)

@@ -4,7 +4,7 @@ TEMPLATE = app
 
 #TARGET_NAME = gotvptop
 
-QT += gui core concurrent widgets network multimedia opengl xml svg python
+QT += gui core concurrent widgets network multimedia opengl xml svg
 
 #CONFIG += qt thread silent
 # C++11 support
@@ -172,8 +172,9 @@ unix:!android:{
     LIBS +=  -ldl -lGLU -lGL -lm -luuid -lrt -lpthread -lpython2.7
 }
 
-android{
-    LIBS +=  -ldl -lm
+android:{
+    LIBS +=  $${LIBPREFIX}pythonstatic$${LIBSUFFIX}
+    LIBS +=  -ldl -lm -landroid -lEGL -lGLESv3
 }
 
 
@@ -185,4 +186,16 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_EXTRA_LIBS = \
         $$PWD/../android/ndk-windows-x86-64/android-ndk-r19/platforms/android-21/arch-arm/usr/lib/libGLESv2.so
+
+    ANDROID_PACKAGE_SOURCE_DIR = \
+        $$PWD/android
 }
+
+DISTFILES += \
+    android/AndroidManifest.xml \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/gradlew \
+    android/res/values/libs.xml \
+    android/build.gradle \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew.bat

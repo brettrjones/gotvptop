@@ -138,9 +138,9 @@ void (*yuyvtoyuv422)(uint8_t *ydst, uint8_t *udst, uint8_t *vdst,
 av_cold void ff_sws_rgb2rgb_init(void)
 {
     rgb2rgb_init_c();
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
         rgb2rgb_init_x86();
-#endif // ARCH_X86 && HAVE_X86ASM
+#endif // ARCH_X86 && HAVE_X86_ASM
 }
 
 void rgb32to24(const uint8_t *src, uint8_t *dst, int src_size)

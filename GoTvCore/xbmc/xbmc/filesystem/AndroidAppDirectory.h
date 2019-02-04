@@ -19,7 +19,7 @@
  */
 
 #pragma once
-#if defined(TARGET_ANDROID)
+#if defined(TARGET_OS_ANDROID)
 #include "IDirectory.h"
 #include "FileItem.h"
 namespace XFILE

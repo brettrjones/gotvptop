@@ -12,7 +12,7 @@
 #include "AddonSettings.h"
 #include "FileItem.h"
 #include "GUIInfoManager.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "ServiceBroker.h"
 #include "addons/settings/GUIDialogAddonSettings.h"
 #include "addons/settings/SettingUrlEncodedString.h"

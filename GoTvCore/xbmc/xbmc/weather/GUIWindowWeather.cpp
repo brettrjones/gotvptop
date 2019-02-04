@@ -12,7 +12,7 @@
 
 #include "guilib/WindowIDs.h"
 #include "GUIUserMessages.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "ServiceBroker.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"

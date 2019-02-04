@@ -1944,7 +1944,7 @@ void ff_get_unscaled_swscale( SwsContext *c )
 		ff_get_unscaled_swscale_ppc( c );
 #endif // defined( ARCH_PPC )
 
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 		ff_get_unscaled_swscale_arm( c );
 #endif //defined( ARCH_ARM )
 

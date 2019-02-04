@@ -326,7 +326,7 @@ static void image_copy_plane_uc_from(uint8_t       *dst, ptrdiff_t dst_linesize,
 {
     int ret = -1;
 
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
     ret = ff_image_copy_plane_uc_from_x86(dst, dst_linesize, src, src_linesize,
                                           bytewidth, height);
 #endif

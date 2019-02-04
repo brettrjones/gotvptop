@@ -54,7 +54,7 @@ av_cold void ff_ttaencdsp_init(TTAEncDSPContext *c)
 {
     c->filter_process = ttaenc_filter_process_c;
 
-    #if ARCH_X86 && HAVE_X86ASM
+    #if ARCH_X86 && HAVE_X86_ASM
         ff_ttaencdsp_init_x86(c);
-    #endif // ARCH_X86 && HAVE_X86ASM
+    #endif // ARCH_X86 && HAVE_X86_ASM
 }

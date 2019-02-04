@@ -1655,4 +1655,4 @@ AVColorPrimaries CRendererQt::GetSrcPrimaries( AVColorPrimaries srcPrimaries, un
     return ret;
 }
 
-#endif HAVE_QT_GUI
+#endif // HAVE_QT_GUI

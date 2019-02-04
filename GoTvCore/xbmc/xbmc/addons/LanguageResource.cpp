@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
 */
 #include "LanguageResource.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "ServiceBroker.h"
 #include "addons/AddonManager.h"
 #include "guilib/GUIWindowManager.h"

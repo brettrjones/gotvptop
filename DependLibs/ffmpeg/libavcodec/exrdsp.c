@@ -52,7 +52,7 @@ av_cold void ff_exrdsp_init(ExrDSPContext *c)
     c->reorder_pixels   = reorder_pixels_scalar;
     c->predictor        = predictor_scalar;
 
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
         ff_exrdsp_init_x86(c);
-#endif // ARCH_X86 && HAVE_X86ASM
+#endif // ARCH_X86 && HAVE_X86_ASM
 }

@@ -27,7 +27,7 @@
 #include "filesystem/SpecialProtocol.h"
 #include "utils/Crc32.h"
 #include "FileItem.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "PlayListPlayer.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"

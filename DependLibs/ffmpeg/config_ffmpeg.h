@@ -276,8 +276,9 @@
 #define HAVE_CABS 0
 #define HAVE_CEXP 0
 #define HAVE_SYMVER 0
-//#define HAVE_X86ASM 1
-#define HAVE_X86ASM 0 // link errors when 1.. maybe FIXME later
+//#define HAVE_X86_ASM 1
+#define HAVE_X86_ASM 0 // link errors when 1.. maybe FIXME later
+//#define HAVE_ARM_ASM 0 // link errors when 1.. maybe FIXME later
 #ifndef HAVE_BIGENDIAN
 # define HAVE_BIGENDIAN		GOTV_ARCH_BIG_ENDIAN
 #endif // HAVE_BIGENDIAN
@@ -323,7 +324,7 @@
 #define HAVE_OPENJPEG_1_5_OPENJPEG_H	0
 #define HAVE_OPENGL_GL3_H				0
 //#define HAVE_POLL_H						0  // defined in GoTvCompilerConfig.h
-#define HAVE_SYS_PARAM_H 0
+// #define HAVE_SYS_PARAM_H 0  // defined in GoTvCompilerConfig.h
 //#define HAVE_SNDIO_H					0
 #define HAVE_SOUNDCARD_H 0
 #define HAVE_STDATOMIC_H 0

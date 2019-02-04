@@ -95,7 +95,7 @@ av_cold void AAC_RENAME(ff_sbrdsp_init)(SBRDSPContext *s)
     s->hf_apply_noise[3] = sbr_hf_apply_noise_3;
 
 #if !USE_FIXED
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 	ff_sbrdsp_init_arm( s );
 #endif //ARCH_ARM
 #if ARCH_X86

@@ -69,13 +69,13 @@ av_cold void ff_blockdsp_init(BlockDSPContext *c, AVCodecContext *avctx)
 #if ARCH_ALPHA
 		ff_blockdsp_init_alpha( c );
 #endif // ARCH_ALPHA
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 		ff_blockdsp_init_arm( c );
 #endif // ARCH_ARM
 #if ARCH_PPC
 		ff_blockdsp_init_ppc( c );
 #endif //ARCH_PPC
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
 		ff_blockdsp_init_x86( c, avctx );
 #endif // ARCH_X86
 #if ARCH_MIPS

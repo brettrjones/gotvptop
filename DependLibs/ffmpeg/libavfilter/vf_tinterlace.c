@@ -273,9 +273,9 @@ static int config_out_props(AVFilterLink *outlink)
             tinterlace->lowpass_line = lowpass_line_c_16;
         else
             tinterlace->lowpass_line = lowpass_line_c;
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
             ff_tinterlace_init_x86(tinterlace);
-#endif // ARCH_X86 && HAVE_X86ASM
+#endif // ARCH_X86 && HAVE_X86_ASM
 
     }
 

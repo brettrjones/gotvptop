@@ -29,7 +29,7 @@
 #include "interfaces/builtins/Builtins.h"
 #include "utils/JobManager.h"
 #include "utils/Variant.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "utils/Screenshot.h"
 #include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
 #include <GoTvCore/xbmc/xbmc/GoTvUrl.h>

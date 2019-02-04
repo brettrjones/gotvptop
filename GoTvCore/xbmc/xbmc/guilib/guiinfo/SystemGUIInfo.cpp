@@ -9,7 +9,7 @@
 #include "guilib/guiinfo/SystemGUIInfo.h"
 
 #include "Application.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "ServiceBroker.h"
 #include "addons/BinaryAddonCache.h"
 #include "GUIPassword.h"

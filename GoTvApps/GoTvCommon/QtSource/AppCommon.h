@@ -181,16 +181,16 @@ public:
     //============================================================================
     //=== to gotv lib events ===//
     //============================================================================
-    virtual void                fromGuiKeyPressEvent( int moduleNum, int key, int mod );
-    virtual void                fromGuiKeyReleaseEvent( int moduleNum, int key, int mod );
+    virtual void                fromGuiKeyPressEvent( int moduleNum, int key, int mod ) override;
+    virtual void                fromGuiKeyReleaseEvent( int moduleNum, int key, int mod ) override;
 
-    virtual void                fromGuiMousePressEvent( int moduleNum, int mouseXPos, int mouseyPos, int mouseButton );
-    virtual void                fromGuiMouseReleaseEvent( int moduleNum, int mouseXPos, int mouseyPos, int mouseButton );
-    virtual void                fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mouseyPos );
+    virtual void                fromGuiMousePressEvent( int moduleNum, int mouseXPos, int mouseyPos, int mouseButton ) override;
+    virtual void                fromGuiMouseReleaseEvent( int moduleNum, int mouseXPos, int mouseyPos, int mouseButton ) override;
+    virtual void                fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mouseyPos ) override;
 
-    virtual void                fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight );
-    virtual void                fromGuiCloseEvent( int moduleNum );
-    virtual void                fromGuiVisibleEvent( int moduleNum, bool isVisible );
+    virtual void                fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight ) override;
+    virtual void                fromGuiCloseEvent( int moduleNum ) override;
+    virtual void                fromGuiVisibleEvent( int moduleNum, bool isVisible ) override;
 
     //============================================================================
     //=== to gui media/render ===//

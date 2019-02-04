@@ -248,7 +248,7 @@ av_cold int ff_fft_init(FFTContext *s, int nbits, int inverse)
 	ff_fft_init_aarch64( s );
 #  endif // ARCH_AARCH64
 
-#  if ARCH_ARM
+#  if ARCH_ARM && HAVE_ARM_ASM
 	ff_fft_init_arm( s );
 #  endif // ARCH_ARM
 
@@ -273,7 +273,7 @@ av_cold int ff_fft_init(FFTContext *s, int nbits, int inverse)
 #  if CONFIG_MDCT  
 		s->mdct_calcw = ff_mdct_calcw_c;
 #  endif // CONFIG_MDCT  
-#  if ARCH_ARM  
+#  if ARCH_ARM && HAVE_ARM_ASM
 		ff_fft_fixed_init_arm( s );
 #  endif //ARCH_ARM 
     for(j=4; j<=nbits; j++) {

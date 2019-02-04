@@ -371,7 +371,7 @@ public:
 private:
   /*!
    * Wrapper for CLangInfo::GetOriginalLocale() which allows us to
-   * avoid including LangInfo.h from this header.
+   * avoid including LangInfoKodi.h from this header.
    */
   static const std::locale& GetOriginalLocale() noexcept;
 };

@@ -9,7 +9,7 @@
 #include "Application.h"
 #include "ServiceBroker.h"
 #include "GUIDialogSubtitles.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "addons/AddonManager.h"
 #include "cores/IPlayer.h"
 #include "dialogs/GUIDialogKaiToast.h"

@@ -14,7 +14,7 @@
 #include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
 #include "libbluray/DllLibbluray.h"
 #include "FileItem.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include "video/VideoInfoTag.h"
 #include "guilib/LocalizeStrings.h"
 

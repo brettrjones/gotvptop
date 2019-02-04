@@ -318,7 +318,7 @@ static av_cold int dct_init(MpegEncContext *s)
 #if ARCH_AARCH64
 	ff_mpv_common_init_axp( s );
 #endif //ARCH_AARCH64
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 	ff_mpv_common_init_arm( s );
 #endif //ARCH_ARM
 #if ARCH_PPC

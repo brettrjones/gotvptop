@@ -61,7 +61,7 @@
 #include "video/Bookmark.h"
 #include "video/VideoInfoTag.h"
 #include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
 
 #ifdef TARGET_RASPBERRY_PI

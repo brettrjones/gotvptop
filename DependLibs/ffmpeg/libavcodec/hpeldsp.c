@@ -362,13 +362,13 @@ av_cold void ff_hpeldsp_init(HpelDSPContext *c, int flags)
 #if ARCH_ALPHA
     ff_hpeldsp_init_alpha(c, flags);
 #endif // ARCH_ALPHA
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 	ff_hpeldsp_init_arm( c, flags );
 #endif //ARCH_ARM
 #if ARCH_PPC
 	ff_hpeldsp_init_ppc( c, flags );
 #endif //ARCH_PPC
-#if ARCH_X86 && HAVE_X86ASM
+#if ARCH_X86 && HAVE_X86_ASM
 	ff_hpeldsp_init_x86( c, flags );
 #endif //ARCH_X86
 #if ARCH_MIPS

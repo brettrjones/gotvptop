@@ -275,10 +275,13 @@ echo GoTv CPU Arch Defines error no cpu target defined
 //#define HAVE_ARMV5TE				1
 #define HAVE_ARMV6					1
 //#define HAVE_ARMV6T2				1
+#define HAVE_ARMV7					1
 #define HAVE_ARMV8					1
 /* NE10 library is installed on host. Make sure it is on target! */
 //# define HAVE_ARM_NE10			1
-//#define HAVE_NEON					1
+#if defined(__ARM_NEON) || defined(__ARM_NEON__) || defined(__ARM_FEATURE_NEON)
+# define HAVE_ARM_NEON					1
+#endif // defined(__ARM_NEON) || defined(__ARM_NEON__)
 
 //==== PPC architectures ===//
 #elif ARCH_PPC

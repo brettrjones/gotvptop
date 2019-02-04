@@ -93,8 +93,12 @@ unix:QMAKE_CFLAGS += -Wno-switch
 
 #unix:!android:QMAKE_CFLAGS += -Wno-#pragma-messages
 
+QMAKE_CFLAGS_WARN_OFF -= -Wunused-parameter
+QMAKE_CFLAGS_WARN_ON += -Wno-unused-parameter
+
 QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-parameter
 QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
-#QMAKE_CXXFLAGS_WARN_ON += -Wno-inconsistent-missing-override
+QMAKE_CXXFLAGS_WARN_OFF -= -Winconsistent-missing-override
+QMAKE_CXXFLAGS_WARN_ON += -Wno-inconsistent-missing-override
 
 

@@ -29,8 +29,13 @@
 #include "structseq.h"
 #include <sys/stat.h>  
 #include <sys/types.h>  
-#include <sys/timeb.h>
-#include <io.h>  
+#if defined(TARGET_OS_WINDOWS)
+# include <io.h>
+#elif defined(TARGET_OS_ANDROID)
+# include <unistd.h>
+#else
+# include <sys/timeb.h>
+#endif // defined(TARGET_OS_ANDROID)
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -3940,7 +3945,7 @@ posix_fork(PyObject *self, PyObject *noargs)
 #endif /* HAVE_LIBUTIL_H */
 #endif /* HAVE_PTY_H */
 #ifdef HAVE_STROPTS_H
-#include <stropts.h>
+# include <stropts.h>
 #endif
 #endif /* defined(HAVE_OPENPTY) || defined(HAVE_FORKPTY) || defined(HAVE_DEV_PTMX */
 

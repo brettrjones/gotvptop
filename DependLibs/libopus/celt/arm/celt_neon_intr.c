@@ -31,7 +31,7 @@
 */
 
 #include <libopus/config_libopus.h>
-#if defined(__ARM_NEON) || defined(__ARM_NEON__)
+#if defined(__ARM_NEON) || defined(__ARM_NEON__) || defined(HAVE_ARM_NEON)
 #include <arm_neon.h>
 #include "../pitch.h"
 

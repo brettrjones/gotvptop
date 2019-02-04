@@ -259,7 +259,7 @@ int i = 0;
         break;
     }
 
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 	ff_hevcdsp_init_arm( hevcdsp, bit_depth );
 #endif //ARCH_ARM
 #if ARCH_X86

@@ -29,7 +29,7 @@
 
 #include "StringUtils.h"
 #include "CharsetConverter.h"
-#include "LangInfo.h"
+#include "LangInfoKodi.h"
 #include <utils/fstrcmp.h>
 #include "GoTvCoreUtil.h"
 #include <functional>

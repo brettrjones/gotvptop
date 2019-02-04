@@ -52,7 +52,7 @@ void ff_lowpass_line_complex_12_sse2(uint8_t *dstp, ptrdiff_t linesize,
 av_cold void ff_tinterlace_init_x86(TInterlaceContext *s)
 {
     int cpu_flags = av_get_cpu_flags();
-#if HAVE_X86ASM
+#if HAVE_X86_ASM
     if (s->csp->comp[0].depth > 8) {
         if (EXTERNAL_SSE2(cpu_flags)) {
             if (!(s->flags & TINTERLACE_FLAG_CVLPF))
@@ -74,6 +74,6 @@ av_cold void ff_tinterlace_init_x86(TInterlaceContext *s)
             if (!(s->flags & TINTERLACE_FLAG_CVLPF))
                 s->lowpass_line = ff_lowpass_line_avx;
     }
-#endif // HAVE_X86ASM
+#endif // HAVE_X86_ASM
 
 }

@@ -604,7 +604,7 @@ SwsFunc ff_getSwsFunc(SwsContext *c)
 #if ARCH_AARCH64
 		ff_sws_init_swscale_aarch64( c );
 #endif // defined( ARCH_AARCH64 )
-#if ARCH_ARM
+#if ARCH_ARM && HAVE_ARM_ASM
 		ff_sws_init_swscale_arm( c );
 #endif // defined( ARCH_ARM )
 
