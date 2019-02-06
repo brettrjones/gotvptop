@@ -128,5 +128,6 @@ SOURCES += 	$$PWD/DependLibs/CoreLib/AppErr.cpp \
     $$PWD/DependLibs/CoreLib/sqlitedataset.cpp \
     $$PWD/DependLibs/CoreLib/VxUrl.cpp \
     $$PWD/DependLibs/CoreLib/VxLinuxOnly.cpp \
-    $$PWD/DependLibs/CoreLib/VxJava.cpp
+    $$PWD/DependLibs/CoreLib/VxJava.cpp \
+    $$PWD/DependLibs/CoreLib/VxFunctionsMissingInAndroid.cpp
 

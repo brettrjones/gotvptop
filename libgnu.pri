@@ -1,6 +1,6 @@
 DEFINES += GLIB_COMPILATION _MBCS __need_nettle_getopt
 
-INCLUDEPATH += $$PWD/DependLibs/libgnu/
+INCLUDEPATH += $$PWD/DependLibs/libgnu
 
 HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCpuArchDefines.h \

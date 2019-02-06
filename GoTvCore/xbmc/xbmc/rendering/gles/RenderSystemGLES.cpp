@@ -7,7 +7,7 @@
  */
 
 #include "config_kodi.h"
-#ifdef HAS_GLES
+#if defined(HAS_GLES) && !defined(HAVE_QT_GUI)
 
 #include "guilib/DirtyRegion.h"
 #include "windowing/GraphicContext.h"

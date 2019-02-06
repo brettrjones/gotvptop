@@ -22,6 +22,7 @@
 #pragma once
 #include "config_kodi.h"
 #include "OverlayRenderer.h"
+#include "system_gl.h"
 
 class CDVDOverlay;
 class CDVDOverlayImage;

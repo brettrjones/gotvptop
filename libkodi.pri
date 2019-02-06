@@ -1591,7 +1591,8 @@ HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeVideo.h \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/VideoDatabaseDirectory/QueryParamsVideo.h \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeOverviewVideo.h \
-    $$PWD/GoTvCore/xbmc/xbmc/cores/DllLoader/SoLoader.h
+    $$PWD/GoTvCore/xbmc/xbmc/cores/DllLoader/SoLoader.h \
+    $$PWD/GoTvCore/xbmc/xbmc/interfaces/builtins/AndroidBuiltins.h
 
 SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/Application.cpp \
@@ -2832,7 +2833,10 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/MusicDatabaseDirectory/DirectoryNodeGroupedMusic.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/posix/FilesystemPosix.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/posix/MessagePrinterPosix.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/cores/DllLoader/SoLoader.cpp
+    $$PWD/GoTvCore/xbmc/xbmc/cores/DllLoader/SoLoader.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/ApplicationInfo.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/interfaces/builtins/AndroidBuiltins.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/PackageItemInfo.cpp
 
 win32{
     SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/platform/win32/CharsetConverterWin32.cpp \

@@ -5,6 +5,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
+#include "config_kodi.h"
+#if defined(TARGET_OS_ANDROID)
 
 #include "AndroidBuiltins.h"
 
@@ -55,3 +57,4 @@ CBuiltins::CommandMap CAndroidBuiltins::GetOperations() const
            {"startandroidactivity",    {"Launch an Android native app with the given package name.  Optional parms (in order): intent, dataType, dataURI.", 1, LaunchAndroidActivity}}
          };
 }
+#endif // defined(TARGET_OS_ANDROID)

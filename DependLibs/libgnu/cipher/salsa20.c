@@ -53,6 +53,7 @@
 # if defined(HAVE_ARM_ARCH_V6) && defined(__ARMEL__) \
      && defined(HAVE_COMPATIBLE_GCC_ARM_PLATFORM_AS) \
      && defined(HAVE_GCC_INLINE_ASM_NEON)
+     && HAVE_ARM_ASM
 #  define USE_ARM_NEON_ASM 1
 # endif
 #endif /*ENABLE_NEON_SUPPORT*/

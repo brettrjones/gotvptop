@@ -107,9 +107,9 @@ static void write_nss_key_log(gnutls_session_t session, const gnutls_datum_t *pr
 	{
 		checked_env = 1;
 #ifdef HAVE_SECURE_GETENV
-    e = secure_getenv("SSLKEYLOGFILE");
+    keylogfile = secure_getenv("SSLKEYLOGFILE");
 #else
-    e = getenv("SSLKEYLOGFILE");
+    keylogfile = getenv("SSLKEYLOGFILE");
 #endif // HAVE_SECURE_GETENV
 	}
 

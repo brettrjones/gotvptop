@@ -160,17 +160,31 @@
    /* Define to 1 if you have the declaration of `fwrite_unlocked', and to 0 if you don't. */
 # define HAVE_DECL_FWRITE_UNLOCKED		0
 #else
-# define HAVE_DECL_GETC_UNLOCKED		1
-# define HAVE_DECL_GETCHAR_UNLOCKED		1
-# define HAVE_DECL_CLEARERR_UNLOCKED	1
-# define HAVE_DECL_FEOF_UNLOCKED		1
-# define HAVE_DECL_FERROR_UNLOCKED		1
-# define HAVE_DECL_FFLUSH_UNLOCKED		1
-# define HAVE_DECL_FGETS_UNLOCKED		1
-# define HAVE_DECL_FPUTC_UNLOCKED		1
-# define HAVE_DECL_FPUTS_UNLOCKED		1
-# define HAVE_DECL_FREAD_UNLOCKED		1
-# define HAVE_DECL_FWRITE_UNLOCKED		1
+# if defined(TARGET_OS_ANDROID)
+#  define HAVE_DECL_GETC_UNLOCKED		0
+#  define HAVE_DECL_GETCHAR_UNLOCKED    0
+#  define HAVE_DECL_CLEARERR_UNLOCKED	0
+#  define HAVE_DECL_FEOF_UNLOCKED		0
+#  define HAVE_DECL_FGETS_UNLOCKED		0
+#  define HAVE_DECL_FERROR_UNLOCKED		0
+#  define HAVE_DECL_FFLUSH_UNLOCKED		0
+#  define HAVE_DECL_FPUTC_UNLOCKED		0
+#  define HAVE_DECL_FPUTS_UNLOCKED		0
+#  define HAVE_DECL_FREAD_UNLOCKED		0
+#  define HAVE_DECL_FWRITE_UNLOCKED		0
+# else
+#  define HAVE_DECL_GETC_UNLOCKED		1
+#  define HAVE_DECL_GETCHAR_UNLOCKED		1
+#  define HAVE_DECL_CLEARERR_UNLOCKED	1
+#  define HAVE_DECL_FEOF_UNLOCKED		1
+#  define HAVE_DECL_FGETS_UNLOCKED		1
+#  define HAVE_DECL_FERROR_UNLOCKED		1
+#  define HAVE_DECL_FFLUSH_UNLOCKED		1
+#  define HAVE_DECL_FPUTC_UNLOCKED		1
+#  define HAVE_DECL_FPUTS_UNLOCKED		1
+#  define HAVE_DECL_FREAD_UNLOCKED		1
+#  define HAVE_DECL_FWRITE_UNLOCKED		1
+# endif // defined(TARGET_OS_ANDROID)
 #endif // _MSC_VER
 
 /* Define to 1 if you have the declaration of `getenv', and to 0 if you don't.
@@ -3598,12 +3612,13 @@ uintmax_t. */
 /* Define to 1 if you have the `strdup' function. */
 #define HAVE_STRDUP 1
 
-
-
+/* Define to 1 if you have the `stricmp' function. */
+#if defined(TARGET_OS_ANDROID)
+# define HAVE_STRICMP 1
+#endif // defined(TARGET_OS_ANDROID)
 
 /* Define to 1 if you have the `strpbrk' function. */
 #define HAVE_STRPBRK 1
-
 
 /* Define to 1 if `decimal_point' is a member of `struct lconv'. */
 /* #undef HAVE_STRUCT_LCONV_DECIMAL_POINT */
@@ -6266,8 +6281,8 @@ cipher/rndegd.c */
 /* #undef ENABLE_HMAC_BINARY_CHECK */
 
 /* Enable support for ARM NEON instructions. */
-#ifdef TARGET_OS_ANDROID
-# define ENABLE_NEON_SUPPORT 1
+#if defined(TARGET_OS_ANDROID) && HAVE_ARM_NEON
+//# define ENABLE_NEON_SUPPORT 1
 #endif // TARGET_OS_ANDROID
 
 /* Enable support for the PadLock engine. */
@@ -6310,8 +6325,9 @@ implementations */
 
 /* Defined if underlying assembler is compatible with ARM assembly
 implementations */
-#define HAVE_COMPATIBLE_GCC_ARM_PLATFORM_AS 1
-
+#if HAVE_ARM_ASM
+# define HAVE_COMPATIBLE_GCC_ARM_PLATFORM_AS 1
+#endif // HAVE_ARM_ASM
 
 /* Define to 1 if you have the declaration of `sys_siglist', and to 0 if you
 don't. */

@@ -53,7 +53,7 @@
 /* USE_ARM_ASM indicates whether to use ARM assembly code. */
 #undef USE_ARM_ASM
 #if defined(__ARMEL__)
-# if (BLOWFISH_ROUNDS == 16) && defined(HAVE_COMPATIBLE_GCC_ARM_PLATFORM_AS)
+# if (BLOWFISH_ROUNDS == 16) && defined(HAVE_COMPATIBLE_GCC_ARM_PLATFORM_AS) && HAVE_ARM_ASM
 #  define USE_ARM_ASM 1
 # endif
 #endif

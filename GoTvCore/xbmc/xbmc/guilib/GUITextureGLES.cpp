@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 #include "config_kodi.h"
-#if defined(HAS_GLES)
+#if defined(HAS_GLES) && !defined(HAVE_QT_GUI)
 
 #include "GUITextureGLES.h"
 #include "Texture.h"

@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 #include "config_kodi.h"
-#if !defined(HAVE_QT_GUI)
+#if defined(TARGET_OS_ANDROID)
 
 #include "AndroidFeatures.h"
 
@@ -47,6 +47,7 @@ int CAndroidFeatures::GetVersion()
     // <= 15 IceCreamSandwich
     //       JellyBean
     // <= 19 KitKat
+    // <= 21 Lollipop
     version = iSdkVersion;
 
     jenv->DeleteLocalRef(jcOsBuild);
@@ -64,4 +65,4 @@ int CAndroidFeatures::GetCPUCount()
   }
   return count;
 }
-#endif // !defined(HAVE_QT_GUI)
+#endif // defined(TARGET_OS_ANDROID)

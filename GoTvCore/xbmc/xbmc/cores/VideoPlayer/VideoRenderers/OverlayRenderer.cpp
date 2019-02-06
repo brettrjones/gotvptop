@@ -25,10 +25,12 @@
 #include "utils/ColorUtils.h"
 #include "OverlayRendererUtil.h"
 #include "OverlayRendererGUI.h"
-#if defined(HAS_GL) || defined(HAS_GLES)
-#include "OverlayRendererGL.h"
+#if defined(HAVE_QT_GUI)
+# include "OverlayRendererQt.h"
+#elif defined(HAS_GL) || defined(HAS_GLES)
+# include "OverlayRendererGL.h"
 #elif  HAS_DX
-#include "OverlayRendererDX.h"
+# include "OverlayRendererDX.h"
 #endif
 
 using namespace OVERLAY;
@@ -380,7 +382,9 @@ COverlay* CRenderer::Convert(CDVDOverlaySSA* o, double pts)
   }
 
   COverlay *overlay = NULL;
-#if defined(HAS_GL) || defined(HAS_GLES)
+#if defined(HAVE_QT_GUI)
+  overlay = new COverlayGlyphQt(images, targetWidth, targetHeight);
+#elif defined(HAS_GL) || defined(HAS_GLES)
   overlay = new COverlayGlyphGL(images, targetWidth, targetHeight);
 #elif  HAS_DX
   overlay = new COverlayQuadsDX(images, targetWidth, targetHeight);
@@ -418,7 +422,12 @@ COverlay* CRenderer::Convert(CDVDOverlay* o, double pts)
     return r;
   }
 
-#if defined(HAS_GL) || defined(HAS_GLES)
+#if defined(HAVE_QT_GUI)
+  if (o->IsOverlayType(DVDOVERLAY_TYPE_IMAGE))
+    r = new COverlayTextureQt(static_cast<CDVDOverlayImage*>(o));
+  else if(o->IsOverlayType(DVDOVERLAY_TYPE_SPU))
+    r = new COverlayTextureQt(static_cast<CDVDOverlaySpu*>(o));
+#elif defined(HAS_GL) || defined(HAS_GLES)
   if (o->IsOverlayType(DVDOVERLAY_TYPE_IMAGE))
     r = new COverlayTextureGL(static_cast<CDVDOverlayImage*>(o));
   else if(o->IsOverlayType(DVDOVERLAY_TYPE_SPU))
