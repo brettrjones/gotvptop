@@ -5,7 +5,7 @@ TARGET_NAME = qtsimpletestsharedlib
 
 include(version.pri)
 include(os_detect.pri)
-include(compile_config.pri)
+#include(compile_config.pri)
 
 include(config_sharedlib.pri)
 

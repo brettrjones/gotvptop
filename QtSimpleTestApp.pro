@@ -41,9 +41,11 @@ CONFIG += mobility
 MOBILITY = 
 
 LIBS += -l$$PWD/build-staticlibs/libqtsimpleteststaticlibAndroidD.a
-LIBS += -lqtsimpletestsharedlibAndroid_d
+#LIBS += -l$$PWD/build-sharedlibs/libqtsimpletestsharedlibAndroid_d.so
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+message($$[QT_INSTALL_BINS])
