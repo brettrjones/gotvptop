@@ -27,9 +27,11 @@ reboot windows.. just in case
 	a.) JDK Location F:\android\jdk1.8.0_131
 	b.) SDK Location F:\android\android-sdk
 	c.) NDK Location F:\android\android-ndk-r19-windows-x86_64\android-ndk-r19
-7.) In SDK manager install Android 8.1 API 27, Android 5.0 API 21
+7.) In SDK manager install Android 5.0 API 21
 8.) From examples choose edit application
 9.) In Configure Project uncheck all but Android for armeabi-v7a ( Clang Qt 5.12.1 for android ARMv7 ) 
 10.) Click configure project
 11.) In build settings Build Android APK click details
 12.) Choose Android build SDK android-21
+
+13.) NOTE: for every android kit you must change System Enviroment from ANDROID_NDK_PLATFOM android-16 to ANDROID_NDK_PLATFOM android-21 or will get link errors about signal etc.

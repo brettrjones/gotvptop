@@ -1346,7 +1346,7 @@ typedef int64_t              time64_t;
 #define HAVE_SYS_STATFS_H			1
 
 /* Define to 1 if you have the <sys/statvfs.h> header file. */
-#ifndef TARGET_OS_WINDOWS
+#if !defined(TARGET_OS_WINDOWS)
 # define HAVE_SYS_STATVFS_H			1
 #endif // TARGET_OS_WINDOWS
 

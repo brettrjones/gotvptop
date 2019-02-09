@@ -19,6 +19,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  */
+#include "config_libgnu.h"
+#if defined(HAVE_X86_ASM)
 
 #include <gnutls_errors.h>
 #include <gnutls_int.h>
@@ -363,3 +365,5 @@ const gnutls_crypto_digest_st _gnutls_sha_x86_ssse3 = {
 	.deinit = wrap_x86_hash_deinit,
 	.fast = wrap_x86_hash_fast,
 };
+
+#endif // defined(HAVE_X86_ASM)

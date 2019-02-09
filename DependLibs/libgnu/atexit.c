@@ -2,7 +2,7 @@
 /* This function is in the public domain.  --Mike Stump. */
 
 #include <config_libgnu.h>
-#ifndef _MSC_VER
+#if !defined(TARGET_OS_ANDROID) && !defined(TARGET_OS_WINDOWS)
 int atexit (void (*f) (void))
 {
   /* If the system doesn't provide a definition for atexit, use on_exit

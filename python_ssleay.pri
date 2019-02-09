@@ -1,0 +1,40 @@
+SOURCES += 	$$PWD/$(opensslDir)ssl/d1_both.c \
+	$$PWD/$(opensslDir)ssl/d1_lib.c \
+	$$PWD/$(opensslDir)ssl/d1_pkt.c \
+	$$PWD/$(opensslDir)ssl/d1_srtp.c \
+	$$PWD/$(opensslDir)ssl/s23_clnt.c \
+	$$PWD/$(opensslDir)ssl/s23_lib.c \
+	$$PWD/$(opensslDir)ssl/s23_meth.c \
+	$$PWD/$(opensslDir)ssl/s23_pkt.c \
+	$$PWD/$(opensslDir)ssl/s23_srvr.c \
+	$$PWD/$(opensslDir)ssl/s2_clnt.c \
+	$$PWD/$(opensslDir)ssl/s2_enc.c \
+	$$PWD/$(opensslDir)ssl/s2_lib.c \
+	$$PWD/$(opensslDir)ssl/s2_meth.c \
+	$$PWD/$(opensslDir)ssl/s2_pkt.c \
+	$$PWD/$(opensslDir)ssl/s2_srvr.c \
+	$$PWD/$(opensslDir)ssl/s3_both.c \
+	$$PWD/$(opensslDir)ssl/s3_cbc.c \
+	$$PWD/$(opensslDir)ssl/s3_clnt.c \
+	$$PWD/$(opensslDir)ssl/s3_enc.c \
+	$$PWD/$(opensslDir)ssl/s3_lib.c \
+	$$PWD/$(opensslDir)ssl/s3_meth.c \
+	$$PWD/$(opensslDir)ssl/s3_pkt.c \
+	$$PWD/$(opensslDir)ssl/s3_srvr.c \
+	$$PWD/$(opensslDir)ssl/ssl_algs.c \
+	$$PWD/$(opensslDir)ssl/ssl_asn1.c \
+	$$PWD/$(opensslDir)ssl/ssl_cert.c \
+	$$PWD/$(opensslDir)ssl/ssl_ciph.c \
+	$$PWD/$(opensslDir)ssl/ssl_err.c \
+	$$PWD/$(opensslDir)ssl/ssl_err2.c \
+	$$PWD/$(opensslDir)ssl/ssl_lib.c \
+	$$PWD/$(opensslDir)ssl/ssl_rsa.c \
+	$$PWD/$(opensslDir)ssl/ssl_sess.c \
+	$$PWD/$(opensslDir)ssl/t1_clnt.c \
+	$$PWD/$(opensslDir)ssl/t1_enc.c \
+	$$PWD/$(opensslDir)ssl/t1_lib.c \
+	$$PWD/$(opensslDir)ssl/t1_meth.c \
+	$$PWD/$(opensslDir)ssl/t1_reneg.c \
+	$$PWD/$(opensslDir)ssl/t1_srvr.c \
+	$$PWD/$(opensslDir)ssl/tls_srp.c
+

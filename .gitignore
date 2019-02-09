@@ -5,8 +5,6 @@ DependLibs/CoreLib/build/build-CoreLib-Desktop-Debug/
 
 DependLibs/CoreLib/build/Qt/CoreLib\.pro\.user
 
-lib/
-
 *.user
 
 build/build-libkodi-Desktop-Debug/
@@ -98,3 +96,4 @@ DependLibs/libpython/build/VS2015/winsound\.exp
 
 *.stash
 /build-libs
+/DependLibs/Python-2.7.14/python.bat

@@ -19,6 +19,7 @@
    License along with the GNU C Library; if not, see
    <http://www.gnu.org/licenses/>.  */
 
+#if 0 //BRJ
 /* This tells Alpha OSF/1 not to define a nettle_getopt prototype in <stdio.h>.
    Ditto for AIX 3.2 and <stdlib.h>.  */
 #ifndef _NO_PROTO
@@ -1273,3 +1274,5 @@ main (int argc, char **argv)
 }
 
 #endif /* TEST */
+
+#endif // 0 //BRJ

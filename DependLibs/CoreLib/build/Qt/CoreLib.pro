@@ -24,7 +24,7 @@ include(../../../../build/Qt/version.pri)
 include(../../../../build/Qt/os_detect.pri)
 include(../../../../build/Qt/compile_config.pri)
 
-include(../../../../build/Qt/library_config.pri)
+include(../../../../build/Qt/config_libstatic.pri)
 
 CONFIG(debug, debug|release){
  message(Project is built in DEBUG mode.)
@@ -71,7 +71,7 @@ include(CoreLib.pri)
 #SOURCES +=
 
 DISTFILES += \
-    ../../../../build/Qt/library_config.pri
+    ../../../../build/Qt/config_libstatic.pri
 
 
 

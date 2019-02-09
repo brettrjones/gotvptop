@@ -24,6 +24,8 @@
  * The following code is an implementation of the AES-128-CBC cipher
  * using intel's AES instruction set. 
  */
+#include "config_libgnu.h"
+#if defined(HAVE_X86_ASM)
 
 #include <gnutls_errors.h>
 #include <gnutls_int.h>
@@ -665,3 +667,4 @@ void register_x86_crypto(void)
 #endif
 }
 
+#endif // defined(HAVE_X86_ASM)

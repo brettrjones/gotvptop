@@ -25,6 +25,9 @@
  * using intel's AES instruction set.
  */
 
+#include "config_libgnu.h"
+#if defined(HAVE_X86_ASM)
+
 #include <gnutls_errors.h>
 #include <gnutls_int.h>
 #include <libgnu/crypto.h>
@@ -273,3 +276,4 @@ const gnutls_crypto_cipher_st _gnutls_aes_gcm_pclmul = {
 	.tag = aes_gcm_tag,
 	.auth = aes_gcm_auth,
 };
+#endif // defined(HAVE_X86_ASM)

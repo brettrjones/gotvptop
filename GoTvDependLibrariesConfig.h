@@ -47,7 +47,10 @@ echo GoTv Compiler Config error no os defined
 #define HAVE_LIBINTL_H      1 
 #define HAVE_LIBMP3LAME     1
 #define HAVE_LIBMICROHTTPD  1
-#define HAVE_LIBNETTLE      1 /* nettle is enabled */
+#if defined(HAVE_X86_ASM)
+# define HAVE_LIBNETTLE      1 /* nettle is enabled */
+#endif // defined(HAVE_X86_ASM)
+
 #define HAVE_LIBNFS 
 // #define HAVE_LIBNSL
 #define HAVE_LIBPLIST       1

@@ -1,3 +1,6 @@
+
+INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
+
 HEADERS += 	$$PWD/DependLibs/NetLib/AnchorSetting.h \
     $$PWD/DependLibs/NetLib/InetAddress.h \
     $$PWD/DependLibs/NetLib/NetSettings.h \

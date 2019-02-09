@@ -15,6 +15,7 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
+#if 0 //BRJ
 #include  "woe32dll/export.h"
 
 VARIABLE(argmatch_die)
@@ -34,3 +35,4 @@ VARIABLE(rpl_optind)
 #endif
 VARIABLE(simple_backup_suffix)
 VARIABLE(styled_ostream_typeinfo)
+#endif // 0

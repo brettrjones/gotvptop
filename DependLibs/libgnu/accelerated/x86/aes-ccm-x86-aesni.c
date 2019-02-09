@@ -24,6 +24,8 @@
  * The following code is an implementation of the AES-128-CCM cipher
  * using AESNI (without PCLMUL)
  */
+#include "config_libgnu.h"
+#if defined(HAVE_X86_ASM)
 
 #include <gnutls_errors.h>
 #include <gnutls_int.h>
@@ -148,3 +150,4 @@ const gnutls_crypto_cipher_st _gnutls_aes_ccm_x86_aesni = {
 };
 
 #endif
+#endif // defined(HAVE_X86_ASM)

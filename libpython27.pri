@@ -339,7 +339,7 @@ SOURCES += $$PWD/DependLibs/libpython/platform/win/_subprocess.c \
     $$PWD/DependLibs/libpython/platform/win/msvcrtmodule.c
 }
 
-unix:!android:{
+unix:{
 #    $$PWD/DependLibs/libpython/platform/linux/pyconfig.h
 }
 

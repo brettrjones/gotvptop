@@ -88,84 +88,84 @@ include(gotvptop_app.pri)
 #### for static linked qt libs only
 #### QMAKE_LFLAGS += -static
 
-include(gotvptop_app_link.pri)
+#include(gotvptop_link.pri)
 #link dependent library
 
 CONFIG(debug, debug|release){
  message(Link in DEBUG mode.)
  android:{
-  LIBPREFIX=$$PWD/build-libs/lib
-  LIBSUFFIX=AndroidD.a
+  STATIC_LIB_PREFIX=$$PWD/build-staticlibs/lib
+  STATIC_LIB_SUFFIX=AndroidD.a
  }
 
  unix:!android:{
-  LIBS +=  -L$$PWD/build-libs
-  LIBPREFIX=LIBS += -l
-  LIBSUFFIX=$${LIBSUFFIX}
+  LIBS +=  -L$$PWD/build-staticlibs
+  STATIC_LIB_PREFIX=LIBS += -l
+  STATIC_LIB_SUFFIX=$${STATIC_LIB_SUFFIX}
  }
 }
 
 CONFIG(release, debug|release){
  message(Link in RELEASE mode.)
  android:{
-  LIBPREFIX=$$PWD/build-libs/lib
-  LIBSUFFIX=Android.a
+  STATIC_LIB_PREFIX=$$PWD/build-staticlibs/lib
+  STATIC_LIB_SUFFIX=Android.a
  }
 
  !android:{
-  LIBS +=-L$$PWD/build-libs
-  LIBPREFIX=LIBS += -l
-  LIBSUFFIX=
+  LIBS +=-L$$PWD/build-staticlibs
+  STATIC_LIB_PREFIX=LIBS += -l
+  STATIC_LIB_SUFFIX=
  }
 }
 
 
 #NOTE: link order is important.. otherwise you will get link errors like libvorbisenc.so.2: error adding symbols: DSO missing from command line
     CONFIG(debug, debug|release){
-        LIBS +=  $${LIBPREFIX}kodi$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}ffmpegavdevice$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}ffmpegavfilter$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}ffmpegavformat$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}ffmpegavcodec$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}ffmpegpostproc$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}ffmpegswresample$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}ffmpegswscale$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}ffmpegavutil$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}nfs$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}cdio$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}pcre$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}armrwbenc$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}fdk-aac$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}opencore-amr$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}openmpt-full$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}vpx$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}x264$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}x265$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}vorbis$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}ogg$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}opus$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}speex$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}ptopengine$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}mediatools$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}lame$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}microhttpd$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}gnu$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}depends$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}curl$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}ssh$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}ssl$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}pktlib$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}fribidi$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}iconv$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}freetype$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}png$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}tinyxml$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}xml2$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}compress$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}corelib$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}crossguid$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}bz2$${LIBSUFFIX}
-        LIBS +=  $${LIBPREFIX}zlib$${LIBSUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}kodi$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}ffmpegavdevice$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}ffmpegavfilter$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}ffmpegavformat$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}ffmpegavcodec$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}ffmpegpostproc$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}ffmpegswresample$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}ffmpegswscale$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}ffmpegavutil$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}nfs$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}cdio$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}pcre$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}armrwbenc$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}fdk-aac$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}opencore-amr$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}openmpt-full$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}vpx$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}x264$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}x265$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}vorbis$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}ogg$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}opus$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}speex$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}ptopengine$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}mediatools$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}lame$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}microhttpd$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}gnu$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}depends$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}curl$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}ssh$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}ssl$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}pktlib$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}fribidi$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}iconv$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}freetype$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}png$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}tinyxml$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}xml2$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}compress$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}corelib$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
+        LIBS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
     }
 
 unix:!android:{
@@ -173,8 +173,8 @@ unix:!android:{
 }
 
 android:{
-    LIBS +=  $${LIBPREFIX}pythonstatic$${LIBSUFFIX}
-    LIBS +=  -ldl -lm -landroid -lEGL -lGLESv3
+    LIBS +=  $${STATIC_LIB_PREFIX}pythoncore$${STATIC_LIB_SUFFIX}
+    LIBS +=  -ldl -lm -landroid -lEGL -lGLESv2  -lc -lstdc++ -llog
 }
 
 

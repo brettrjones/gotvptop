@@ -38,41 +38,6 @@
 
 
 //============================================================================
-//! generate connection key from network identity
-RCODE GenerateConnectionKey( VxKey *					poRetKey,		// set this key
-								VxConnectId *			poConnectId,	// network identity
-								uint16_t						cryptoPort,
-								const char *			networkName )
-{
-	//std::string csNetName	= VxGetP2PNetworkName(); //network name
-	std::string strNetName = networkName;
-
-	uint64_t u64IdLowPart = poConnectId->getVxGUIDLoPart();
-	//vx_assert( u64IdLowPart );
-	uint64_t u64IdHiPart = poConnectId->getVxGUIDHiPart();
-	//vx_assert( u64IdHiPart );
-	std::string strIPv4;
-	poConnectId->getIPv4( strIPv4 );
-	uint16_t u16Port = poConnectId->getPort();
-	vx_assert( u16Port );
-
-	//LogMsg( LOG_INFO, "GenerateConnectionKey: creating pwd\n");
-	std::string strPwd;
-	StdStringFormat( strPwd, "%d%llx%llx%s%s%d",
-		u16Port,
-		u64IdLowPart,
-		u64IdHiPart,
-		strNetName.c_str(),
-		strIPv4.c_str(),
-		cryptoPort
-	);
-
-	//LogMsg( LOG_INFO, "GenerateConnectionKey: setting pwd Key size %d addr 0x%x\n", sizeof( VxKey ), poRetKey);
-	poRetKey->setKeyFromPassword( strPwd.c_str(), (int)strPwd.size() );
-	return 0;
-}
-
-//============================================================================
 //============================================================================
 VxKey::VxKey()
 	: m_bIsSet( 0 )

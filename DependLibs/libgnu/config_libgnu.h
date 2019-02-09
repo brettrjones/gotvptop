@@ -2139,9 +2139,6 @@ whether the gnulib module unistr/u8-uctomb shall be considered present. */
 /* Define to 1 if you have the `asprintf' function. */
 #define HAVE_ASPRINTF 1
 
-/* Define to 1 if you have the `atexit' function. */
-#define HAVE_ATEXIT 1
-
 /* Define to 1 if you have the <bp-sym.h> header file. */
 /* #undef HAVE_BP_SYM_H */
 
@@ -4343,9 +4340,6 @@ wrap the file position (#:) comments.  */
 /* Define to 1 if you have the <arpa/nameser_compat.h> header file. */
 #define HAVE_ARPA_NAMESER_COMPAT_H 1
 
-/* Define to 1 if you have the `atexit' function. */
-#define HAVE_ATEXIT 1
-
 /* Define to 1 if you have the <attr/xattr.h> header file. */
 /* #undef HAVE_ATTR_XATTR_H */
 
@@ -4942,10 +4936,6 @@ removed. */
 
 /* Define to 1 if you have the `alarm' function. */
 //#define HAVE_ALARM					1
-
-
-/* Define to 1 if you have the `atexit' function. */
-#define HAVE_ATEXIT					1
 
 /* Define to 1 if you have the <byteswap.h> header file. */
 #define HAVE_BYTESWAP_H				1
@@ -6296,10 +6286,6 @@ cipher/rndegd.c */
 
 /* The default error source for libgcrypt. */
 #define GPG_ERR_SOURCE_DEFAULT GPG_ERR_SOURCE_GCRYPT
-
-
-/* Define to 1 if you have the `atexit' function. */
-#define HAVE_ATEXIT 1
 
 /* Defined if the mlock() call does not work */
 /* #undef HAVE_BROKEN_MLOCK */

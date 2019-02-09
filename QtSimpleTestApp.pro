@@ -24,7 +24,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 
-INCLUDEPATH += $$PWD/build/QtSandbox/QtSimpleTestLib
+INCLUDEPATH += $$PWD/build/QtSandbox/QtSimpleTestStaticLib
+INCLUDEPATH += $$PWD/build/QtSandbox/QtSimpleTestSharedLib
 
 SOURCES += \
         $$PWD/build/QtSandbox/QtSimpleTestApp/main.cpp \
@@ -39,7 +40,8 @@ FORMS += \
 CONFIG += mobility
 MOBILITY = 
 
- LIBS += -l$$PWD/build-libs/libqtsimpletestlibAndroidD.a
+LIBS += -l$$PWD/build-staticlibs/libqtsimpleteststaticlibAndroidD.a
+LIBS += -lqtsimpletestsharedlibAndroid_d
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

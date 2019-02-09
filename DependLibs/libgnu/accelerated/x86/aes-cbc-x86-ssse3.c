@@ -24,6 +24,8 @@
  * The following code is an implementation of the AES-128-CBC cipher
  * using intel's AES instruction set. 
  */
+#include "config_libgnu.h"
+#if defined(HAVE_X86_ASM)
 
 #include <gnutls_errors.h>
 #include <gnutls_int.h>
@@ -128,4 +130,6 @@ const gnutls_crypto_cipher_st _gnutls_aes_ssse3 = {
 	.decrypt = aes_ssse3_decrypt,
 	.deinit = aes_deinit,
 };
+
+#endif // defined(HAVE_X86_ASM)
 

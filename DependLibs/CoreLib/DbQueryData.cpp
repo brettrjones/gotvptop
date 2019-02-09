@@ -41,7 +41,7 @@
 # define PRIuS       "Iu"
 # define PRId64       "lld"
 #else
-# define PRIdS       "d"
+//# define PRIdS       "d" // defined in GoTvCompilerConfig.h
 # define PRIuS       "u"
 # ifndef PRId64
 #  define PRId64       "lld"
