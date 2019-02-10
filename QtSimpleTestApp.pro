@@ -4,11 +4,9 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui svg widgets
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-TARGET = QtPrintTest
+TARGET = QtSimpleTestApp
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -40,8 +38,38 @@ FORMS += \
 CONFIG += mobility
 MOBILITY = 
 
+SHARED_LIB_RES_DIR = $$PWD/androidsimpletest/res/lib/armeabi-v7a/
+
+#contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+    #copy shared libs from local directory to packaging directory
+    copydata.commands = $(COPY_DIR) $$PWD/build-sharedlibs/*.so $$SHARED_LIB_RES_DIR
+    first.depends = $(first) copydata
+    export(first.depends)
+    export(copydata.commands)
+    QMAKE_EXTRA_TARGETS += first copydata
+#}
+
+#contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+#make libs it part of the android install package
+
+#contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+    ANDROID_EXTRA_LIBS = \
+        $$PWD/androidsimpletest/res/lib/armeabi-v7a/libqtsimpletestsharedlibAndroid_d.so
+
+    ANDROID_PACKAGE_SOURCE_DIR = \
+        $$PWD/build/QtSandbox/QtSimpleTestApp
+#}
+
+
+#static libs
 LIBS += -l$$PWD/build-staticlibs/libqtsimpleteststaticlibAndroidD.a
-#LIBS += -l$$PWD/build-sharedlibs/libqtsimpletestsharedlibAndroid_d.so
+
+#shared libs
+LIBS += -l$$SHARED_LIB_RES_DIR/libqtsimpletestsharedlibAndroid_d.so
+
+#os libs
+LIBS +=  -ldl -lm -landroid -lc -lstdc++ -llog
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -49,3 +77,21 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 message($$[QT_INSTALL_BINS])
+
+DISTFILES += \
+    androidsimpletest/AndroidManifest.xml \
+    androidsimpletest/gradle/wrapper/gradle-wrapper.jar \
+    androidsimpletest/gradlew \
+    androidsimpletest/res/values/libs.xml \
+    androidsimpletest/build.gradle \
+    androidsimpletest/gradle/wrapper/gradle-wrapper.properties \
+    androidsimpletest/gradlew.bat \
+    androidsimpletest/res/values/strings.xml
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/androidsimpletest/res/lib/armeabi-v7a/ -lqtsimpletestsharedlibAndroid_d
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/androidsimpletest/res/lib/armeabi-v7a/ -lqtsimpletestsharedlibAndroid_dd
+else:unix: LIBS += -L$$PWD/androidsimpletest/res/lib/armeabi-v7a/ -lqtsimpletestsharedlibAndroid_d
+
+INCLUDEPATH += $$PWD/androidsimpletest/res/lib/armeabi-v7a
+DEPENDPATH += $$PWD/androidsimpletest/res/lib/armeabi-v7a

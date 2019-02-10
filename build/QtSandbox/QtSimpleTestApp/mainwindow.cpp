@@ -3,6 +3,8 @@
 #include "qttestsharedlib2.h"
 #include "qtteststaticlib2.h"
 
+#define TEST_SHARED_LIB 1
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)

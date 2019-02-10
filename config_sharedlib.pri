@@ -50,18 +50,12 @@ TARGET=$${TARGET_NAME}$${TARGET_OS_NAME}$${SHARED_LIB_APPEND}
 #message($$PWD/build-sharedlibs/)
 
 #copy to local directory so can easily be linked to
-copydata.commands = $(COPY_DIR) $$OUT_PWD/*.so $$PWD/build-sharedlibs
+copydata.commands = $(COPY_DIR) $$OUT_PWD/*.so $$PWD/build-sharedlibs/
 first.depends = $(first) copydata
 export(first.depends)
 export(copydata.commands)
 QMAKE_EXTRA_TARGETS += first copydata
 
-#make it part of the install package
-copydata.commands = $(COPY_DIR) $$OUT_PWD/*.so $$(QT_INSTALL_LIBS)
-first.depends = $(first) copydata
-export(first.depends)
-export(copydata.commands)
-QMAKE_EXTRA_TARGETS += first copydata
 
 
 
