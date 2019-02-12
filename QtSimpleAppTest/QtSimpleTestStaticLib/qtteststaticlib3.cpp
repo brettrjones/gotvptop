@@ -1,4 +1,4 @@
-#include "qtteststaticlib2.h"
+#include "qtteststaticlib3.h"
 #include "qdebug.h"
 
 QtTestStaticLib::QtTestStaticLib()
