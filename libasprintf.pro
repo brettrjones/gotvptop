@@ -3,11 +3,7 @@ TEMPLATE = lib
 
 TARGET_NAME = asprintf
 
-include(version.pri)
-include(os_detect.pri)
-include(compile_config.pri)
-
-include(config_libstatic.pri)
+include(config_static_dependlib.pri)
 
 include(libasprintf.pri)
 

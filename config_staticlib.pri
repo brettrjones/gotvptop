@@ -1,7 +1,7 @@
 
 QT       -= gui
 CONFIG += staticlib
-DESTDIR = $$PWD/build-staticlibs
+DESTDIR = $$PWD/build-staticlibs/$${TARGET_ARCH_NAME}
 
 
 DEFINES += LIB_STATIC _LIB
@@ -32,4 +32,4 @@ unix: {
 }
 
 TARGET=$${TARGET_NAME}$${TARGET_OS_NAME}$${TARGET_LIB_APPEND}
-OBJECTS_DIR = $$PWD/objs/$${TARGET_NAME}$${TARGET_OS_NAME}
+

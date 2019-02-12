@@ -14,34 +14,6 @@ CONFIG += mobility
 MOBILITY =
 
 
-
-
-# The following define makes your compiler emit warnings if you use
-# any feature of Qt which has been marked as deprecated (the exact warnings
-# depend on your compiler). Please consult the documentation of the
-# deprecated API in order to know how to port your code away from it.
-#DEFINES += QT_DEPRECATED_WARNINGS
-
-# You can also make your code fail to compile if you use deprecated APIs.
-# In order to do so, uncomment the following line.
-# You can also select to disable deprecated APIs only up to a certain version of Qt.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-
-CONFIG += c++11
-
-#INCLUDEPATH += $$PWD/build/QtSandbox/QtSimpleTestLib
-
-#SOURCES += \
-#        $$PWD/build/QtSandbox/QtSimpleTestApp/main.cpp \
-#        $$PWD/build/QtSandbox/QtSimpleTestApp/mainwindow.cpp
-
-#HEADERS += \
-#        $$PWD/build/QtSandbox/QtSimpleTestApp/mainwindow.h
-
-#FORMS += \
-#        $$PWD/build/QtSandbox/QtSimpleTestApp/mainwindow.ui
-
-
 #DEFINES += BOOST_NO_CXX11_RVALUE_REFERENCES
 #DEFINES += QT_NO_CAST_TO_ASCII
 # Fast concatenation (Qt >= 4.6)
@@ -64,12 +36,14 @@ CONFIG += c++11
 # TRANSLATIONS += $$files(lang/gotvptop_*.ts)
 
 
-include(version.pri)
-include(os_detect.pri)
-include(compile_config.pri)
+include(config_version.pri)
+include(config_os_detect.pri)
+include(config_compiler.pri)
 
 
-include(gotvptop_app.pri)
+
+
+include(GoTvPtoP_App.pri)
 
 
 #DESTDIR = $$PWD/bin/
@@ -89,31 +63,68 @@ include(gotvptop_app.pri)
 #### QMAKE_LFLAGS += -static
 
 #include(gotvptop_link.pri)
+TARGET_ARCH_NAME="armeabi-v7a"
+android:{
+    DEFINES += TARGET_OS_ANDROID
+    DEFINES += TARGET_POSIX
+
+    ANDROID_ARM64 = 0
+    ANDROID_ARMv7 = 0
+    ANDROID_x86 = 0
+    ANDROID_x86_64 = 0
+
+    contains(ANDROID_TARGET_ARCH,armeabi-v8a) {
+        ANDROID_ARM64 = 1
+        TARGET_ARCH_NAME=armeabi-v8a
+    }
+    contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+        ANDROID_ARMv7 = 1
+        TARGET_ARCH_NAME="armeabi-v7a"
+    }
+    contains(ANDROID_TARGET_ARCH,x86) {
+        ANDROID_x86 = 1
+        TARGET_ARCH_NAME=x86
+    }
+    contains(ANDROID_TARGET_ARCH,x86_64) {
+        ANDROID_x86_64 = 1
+        TARGET_ARCH_NAME=x86_64
+    }
+}
+
+win32:TARGET_OS_NAME=Windows
+unix:!android: TARGET_OS_NAME=Linux
+android: TARGET_OS_NAME="Android"
+macx: TARGET_OS_NAME=Apple
+
 #link dependent library
+message("TARGET_OS_NAME ")
+message($$(TARGET_OS_NAME))
+message("TARGET_ARCH_NAME ")
+message($$(TARGET_ARCH_NAME))
 
 CONFIG(debug, debug|release){
  message(Link in DEBUG mode.)
  android:{
-  STATIC_LIB_PREFIX=$$PWD/build-staticlibs/lib
+  STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$$(TARGET_ARCH_NAME)/lib
   STATIC_LIB_SUFFIX=AndroidD.a
  }
 
  unix:!android:{
-  LIBS +=  -L$$PWD/build-staticlibs
+  LIBS +=  -L$$PWD/build-staticlibs/$$(TARGET_ARCH_NAME)/lib
   STATIC_LIB_PREFIX=LIBS += -l
-  STATIC_LIB_SUFFIX=$${STATIC_LIB_SUFFIX}
+  STATIC_LIB_SUFFIX=LinuxD.a
  }
 }
 
 CONFIG(release, debug|release){
  message(Link in RELEASE mode.)
  android:{
-  STATIC_LIB_PREFIX=$$PWD/build-staticlibs/lib
+  STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$$(TARGET_ARCH_NAME)
   STATIC_LIB_SUFFIX=Android.a
  }
 
  !android:{
-  LIBS +=-L$$PWD/build-staticlibs
+  LIBS +=-L$$PWD/build-staticlibs/$$(TARGET_ARCH_NAME)
   STATIC_LIB_PREFIX=LIBS += -l
   STATIC_LIB_SUFFIX=
  }

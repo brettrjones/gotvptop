@@ -3,10 +3,6 @@ TEMPLATE = lib
 
 TARGET_NAME = lame
 
-include(version.pri)
-include(os_detect.pri)
-include(compile_config.pri)
-
-include(config_libstatic.pri)
+include(config_static_dependlib.pri)
 
 include(liblame.pri)

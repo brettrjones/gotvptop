@@ -9,13 +9,7 @@ INCLUDEPATH += $$PWD/DependLibs/libcurl/lib
 INCLUDEPATH += $$PWD/DependLibs/ffmpeg
 INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
 
-include(version.pri)
-include(os_detect.pri)
-include(compile_config.pri)
-
-include(config_libstatic.pri)
-
-TARGET=$${TARGET_NAME}$${TARGET_OS_NAME}$${TARGET_LIB_APPEND}
+include(config_static_dependlib.pri)
 
 android{
 INCLUDEPATH += $$PWD/DependLibs/androidNdk/android/cpufeatures

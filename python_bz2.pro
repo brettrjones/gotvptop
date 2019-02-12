@@ -2,11 +2,7 @@
 TEMPLATE = app
 TARGET_NAME = python
 
-include(version.pri)
-include(os_detect.pri)
-include(compile_config.pri)
-
-include(config_sharedlib.pri)
+include(config_pythonlib.pri)
 
 TARGET=$${TARGET_NAME}$${TARGET_LIB_APPEND}
 
