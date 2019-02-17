@@ -46,7 +46,7 @@ OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include "ucnhash.h"
 
 #ifdef MS_WINDOWS
-#include <windows.h>
+# include <windows.h>
 #endif
 
 /* Limit for the Unicode object free list */

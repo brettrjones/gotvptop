@@ -1,0 +1,18 @@
+Target python version is Python 2.7.14
+
+linux mint 18.3 64bit
+
+$ sudo apt-get install libssl-dev
+$ cd ~/project_sources
+$ mkdir libpython27
+$ cd ~/project_sources/libpython27
+$ wget https://www.python.org/ftp/python/2.7.12/Python-2.7.14.tgz 
+$ tar xvf Python-2.7.14.tgz
+$ cd ~/project_sources/libpython27/Python-2.7.14
+$ ./configure --enable-optimizations --prefix=/usr --enable-shared --with-system-expat --with-system-ffi --with-ensurepip=yes --enable-unicode=ucs4 
+edit Python-2.7.14/Modules/Setup
+	and uncomment line 467: zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/lib -lz
+$ make
+confirm has ssl support
+$ ./python
+>>> import ssl

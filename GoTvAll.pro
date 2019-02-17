@@ -3,7 +3,7 @@
 TEMPLATE     = subdirs
 CONFIG += no_docs_target
 
-
-SUBDIRS += $$PWD/libkodi.pro
-SUBDIRS += $$PWD/libptopengine.pro
-
+SUBDIRS += $$PWD/GoTvDependLibs.pro
+SUBDIRS += $$PWD/GoTvPythonLib.pro
+SUBDIRS += $$PWD/GoTvCoreLibs.pro
+SUBDIRS += $$PWD/GoTvPtoP_App.pro

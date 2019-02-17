@@ -20,9 +20,9 @@ SOURCES += 	$$PWD/DependLibs/ffmpeg/libswscale/alphablend.c \
     $$PWD/DependLibs/ffmpeg/libswscale/slice.c \
     $$PWD/DependLibs/ffmpeg/libswscale/swscale.c \
     $$PWD/DependLibs/ffmpeg/libswscale/swscale_unscaled.c \
-    $$PWD/DependLibs/ffmpeg/libswscale/utils.c \
     $$PWD/DependLibs/ffmpeg/libswscale/vscale.c \
-    $$PWD/DependLibs/ffmpeg/libswscale/yuv2rgb.c
+    $$PWD/DependLibs/ffmpeg/libswscale/yuv2rgb.c \
+    $$PWD/DependLibs/ffmpeg/libswscale/utils_swscale.c
 
 DISTFILES += \
     $$PWD/DependLibs/ffmpeg/libswscale/x86/input.asm \

@@ -31,7 +31,8 @@ unix:!android{
     INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/posix
     INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
     INCLUDEPATH += /usr/include/python2.7
-    INCLUDEPATH += $$PWD/DependLibs/libpython/include #for case where compiling for android but host is windows
+    INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/include #for case where compiling for android but host is windows
+    INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14
 }
 
 android{
@@ -39,7 +40,8 @@ android{
     INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/posix
     INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
     INCLUDEPATH += /usr/include/python2.7
-    INCLUDEPATH += $$PWD/DependLibs/libpython/include #for case where compiling for android but host is windows
+    INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/include #for case where compiling for android but host is windows
+    INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14
 }
 
 macx{
@@ -2625,22 +2627,6 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/peripherals/EventLockHandle.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/Environment.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/Platform.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/ConvUtils.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DBusMessage.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DBusReserve.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/DBusUtil.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/FDEventMonitor.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/LinuxResourceCounter.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/LinuxTimezone.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OMXClock.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OMXCore.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/OptionalsReg.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/PosixMountProvider.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/RBP.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XFileUtils.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XHandle.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XMemUtils.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/linux/XTimeUtils.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/xbmc.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/playlists/PlayListXSPF.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/powermanagement/DPMSSupport.cpp \
@@ -2742,7 +2728,6 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/Stopwatch.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/StreamDetails.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/StreamUtils.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/utils/StringUtils.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/StringValidation.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/SysfsUtils.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/SystemInfo.cpp \
@@ -2760,7 +2745,6 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/XSLTUtils.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/auto_buffer.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/fstrcmp.c \
-    $$PWD/GoTvCore/xbmc/xbmc/utils/fstrcmp.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/log.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/md5.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/rfft.cpp \
@@ -2836,7 +2820,8 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/cores/DllLoader/SoLoader.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/ApplicationInfo.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/interfaces/builtins/AndroidBuiltins.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/PackageItemInfo.cpp
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/PackageItemInfo.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/utils/StringUtils2.cpp
 
 win32{
     SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/platform/win32/CharsetConverterWin32.cpp \
@@ -2902,7 +2887,8 @@ HEADERS += $$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Resources.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniBase.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniThreading.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/jutils.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/jutils/jutils.hpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/jutils/jutils-details.hpp \
 
 SOURCES += $$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/AndroidAppDirectory.cpp \

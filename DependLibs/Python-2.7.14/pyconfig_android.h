@@ -66,7 +66,7 @@
 #define HAVE_ASINH 1
 
 /* Define to 1 if you have the <asm/types.h> header file. */
-#define HAVE_ASM_TYPES_H 1
+//#define HAVE_ASM_TYPES_H 1 // defined in GoTvCompilerConfig.h
 
 /* Define to 1 if you have the `atanh' function. */
 #define HAVE_ATANH 1
@@ -166,9 +166,7 @@
 /* #undef HAVE_DECL_TZNAME */
 
 /* Define to 1 if you have the device macros. */
-#if !defined(TARGET_OS_ANDROID) && !defined(TARGET_OS_WINDOWS)
-# define HAVE_DEVICE_MACROS 1
-#endif // !defined(TARGET_OS_ANDROID) && !defined(TARGET_OS_WINDOWS)
+#define HAVE_DEVICE_MACROS 1
 
 /* Define to 1 if you have the /dev/ptc device file. */
 /* #undef HAVE_DEV_PTC */
@@ -249,10 +247,8 @@
 /* Define to 1 if you have the `fseeko' function. */
 #define HAVE_FSEEKO 1
 
-#if !defined(TARGET_OS_ANDROID)
 /* Define to 1 if you have the `fstatvfs' function. */
 #define HAVE_FSTATVFS 1
-#endif // !defined(TARGET_OS_ANDROID)
 
 /* Define if you have the 'fsync' function. */
 #define HAVE_FSYNC 1
@@ -348,10 +344,8 @@
 /* Define to 1 if you have the `getresuid' function. */
 #define HAVE_GETRESUID 1
 
-#if !defined(TARGET_OS_ANDROID)
 /* Define to 1 if you have the `getsid' function. */
 #define HAVE_GETSID 1
-#endif  // !defined(TARGET_OS_ANDROID)
 
 /* Define to 1 if you have the `getspent' function. */
 /* #undef HAVE_GETSPENT */
@@ -470,6 +464,9 @@
 /* Define to 1 if you have the `lstat' function. */
 #define HAVE_LSTAT 1
 
+/* Define this if you have the makedev macro. */
+#define HAVE_MAKEDEV 1
+
 /* Define to 1 if you have the `memmove' function. */
 #define HAVE_MEMMOVE 1
 
@@ -479,13 +476,8 @@
 /* Define to 1 if you have the `mkfifo' function. */
 #define HAVE_MKFIFO 1
 
-#if !defined(TARGET_OS_ANDROID) && !defined(TARGET_OS_WINDOWS)
 /* Define to 1 if you have the `mknod' function. */
 #define HAVE_MKNOD 1
-
-/* Define this if you have the makedev macro. */
-#define HAVE_MAKEDEV 1
-#endif // !defined(TARGET_OS_ANDROID) && !defined(TARGET_OS_WINDOWS)
 
 /* Define to 1 if you have the `mktime' function. */
 #define HAVE_MKTIME 1
@@ -688,10 +680,8 @@
 /* Define if your compiler provides ssize_t */
 #define HAVE_SSIZE_T 1
 
-#if !defined(TARGET_OS_ANDROID)
 /* Define to 1 if you have the `statvfs' function. */
-# define HAVE_STATVFS 1
-#endif //!defined(TARGET_OS_ANDROID)
+#define HAVE_STATVFS 1
 
 /* Define if you have struct stat.st_mtim.tv_nsec */
 /* #undef HAVE_STAT_TV_NSEC */
@@ -1292,6 +1282,5 @@
 #if defined(__USLC__) && defined(__SCO_VERSION__)
 #define STRICT_SYSV_CURSES /* Don't use ncurses extensions */
 #endif
-
 #endif /*Py_PYCONFIG_H*/
 

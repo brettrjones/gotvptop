@@ -307,7 +307,8 @@ SOURCES += 	$$PWD/DependLibs/Python-2.7.14/Modules/_bisectmodule.c \
     $$PWD/DependLibs/Python-2.7.14/Python/sysmodule.c \
     $$PWD/DependLibs/Python-2.7.14/Python/thread.c \
     $$PWD/DependLibs/Python-2.7.14/Python/traceback.c \
-    $$PWD/DependLibs/Python-2.7.14/Modules/getpath.c
+    $$PWD/DependLibs/Python-2.7.14/Modules/getpath.c \
+    $$PWD/DependLibs/Python-2.7.14/Modules/unicodedata.c
 
 android:{
 SOURCES += $$PWD/DependLibs/Python-2.7.14/Python/dynload_shlib.c \

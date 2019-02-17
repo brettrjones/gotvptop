@@ -219,7 +219,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServerLib.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebSkt.h \
-    $$PWD/GoTvCore/config_gotvcore.h
+
 
 SOURCES += 	$$PWD/GoTvCore/GoTvP2P/Anchor/AnchorDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/Anchor/AnchorList.cpp \

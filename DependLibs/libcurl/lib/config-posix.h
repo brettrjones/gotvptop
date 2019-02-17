@@ -235,7 +235,9 @@
 #define HAVE_SETLOCALE 1
 
 /* Define if you have the setmode function. */
-#define HAVE_SETMODE 1
+#if defined(TARGET_OS_WINDOWS)
+# define HAVE_SETMODE 1
+#endif // defined(TARGET_OS_WINDOWS)
 
 /* Define if you have the setvbuf function. */
 #define HAVE_SETVBUF 1

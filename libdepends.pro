@@ -11,6 +11,15 @@ INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
 
 include(config_static_dependlib.pri)
 
+#short obj path so does not overflow windows 32K command line limit "make (e=87): The parameter is incorrect"
+CONFIG(debug, debug|release){
+    OBJECTS_DIR=.dependd
+}
+
+CONFIG(release, debug|release){
+    OBJECTS_DIR=.dependr
+}
+
 android{
 INCLUDEPATH += $$PWD/DependLibs/androidNdk/android/cpufeatures
 HEADERS += 	$$PWD/DependLibs/androidNdk/android/cpufeatures/cpu-features.h
@@ -99,7 +108,7 @@ include(libtheora.pri)
 include(libtwolame.pri)
 include(libUPnP.pri)
 
-include(libvmaf.pri)
+### not built include(libvmaf.pri)
 ### build seperately include(../../DependLibs/libvorbis/build/Qt/libvorbis.pri)
 ### build seperately include(../../DependLibs/libvpx/build/Qt/libvpx.pri)
 
@@ -128,10 +137,6 @@ include(libupnp2lib.pri)
 ### build seperately include(../../DependLibs/libcdio/build/Qt/libcdio.pri)
 
 HEADERS += \
-    GoTvAppConfig.h \
-    GoTvCompilerConfig.h \
-    GoTvCpuArchDefines.h \
-    GoTvDependLibrariesConfig.h \
     GoTvAppConfig.h \
     GoTvCompilerConfig.h \
     GoTvCpuArchDefines.h \

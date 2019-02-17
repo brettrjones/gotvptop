@@ -298,7 +298,6 @@ SOURCES += 	$$PWD/DependLibs/libcurl/lib/amigaos.c \
     $$PWD/DependLibs/libcurl/lib/tftp.c \
     $$PWD/DependLibs/libcurl/lib/timeval.c \
     $$PWD/DependLibs/libcurl/lib/transfer.c \
-    $$PWD/DependLibs/libcurl/lib/url.c \
     $$PWD/DependLibs/libcurl/lib/vauth/cleartext.c \
     $$PWD/DependLibs/libcurl/lib/vauth/cram.c \
     $$PWD/DependLibs/libcurl/lib/vauth/digest.c \
@@ -366,5 +365,6 @@ SOURCES += 	$$PWD/DependLibs/libcurl/lib/amigaos.c \
     $$PWD/DependLibs/libcurl/src/tool_vms.c \
     $$PWD/DependLibs/libcurl/src/tool_writeenv.c \
     $$PWD/DependLibs/libcurl/src/tool_writeout.c \
-    $$PWD/DependLibs/libcurl/src/tool_xattr.c
+    $$PWD/DependLibs/libcurl/src/tool_xattr.c \
+    $$PWD/DependLibs/libcurl/lib/url_curl.c
 

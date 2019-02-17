@@ -28,7 +28,7 @@ int TtkXPTheme_Init(Tcl_Interp *interp, HWND hwnd) { return TCL_OK; }
 #ifdef HAVE_VSSYM32_H
 #   include <vssym32.h>
 #else
-#   include <tmschema.h>
+//BRJ #   include <tmschema.h>
 #endif
 
 #include <tkWinInt.h>

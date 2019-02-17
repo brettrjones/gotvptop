@@ -15,7 +15,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libgnu/accelerated/x86/sha-padlock.h \
     $$PWD/DependLibs/libgnu/accelerated/x86/sha-x86.h \
     $$PWD/DependLibs/libgnu/accelerated/x86/x86-common.h \
-    $$PWD/DependLibs/libgnu/algorithms.h \
+    $$PWD/DependLibs/libgnu/algorithms_gnu.h \
     $$PWD/DependLibs/libgnu/alignof.h \
     $$PWD/DependLibs/libgnu/alloca.in.h \
     $$PWD/DependLibs/libgnu/alloca_gnu.h \
@@ -117,7 +117,8 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libgnu/extras/hex.h \
     $$PWD/DependLibs/libgnu/extras/randomart.h \
     $$PWD/DependLibs/libgnu/fatal-signal.h \
-    $$PWD/DependLibs/libgnu/fcntl.in.h \
+    $$PWD/DependLibs/libgnu/fcntl_gnu.in.h \
+    $$PWD/DependLibs/libgnu/fcntl_gnu.h \
     $$PWD/DependLibs/libgnu/fd-hook.h \
     $$PWD/DependLibs/libgnu/file-list.h \
     $$PWD/DependLibs/libgnu/file-ostream.h \
@@ -127,7 +128,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libgnu/filename.h \
     $$PWD/DependLibs/libgnu/filters.h \
     $$PWD/DependLibs/libgnu/fips.h \
-    $$PWD/DependLibs/libgnu/float+.h \
     $$PWD/DependLibs/libgnu/float_gnu.h \
     $$PWD/DependLibs/libgnu/fnmatch.h \
     $$PWD/DependLibs/libgnu/format-c-parse.h \
@@ -303,7 +303,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libgnu/nettle/nettle_ccm.h \
     $$PWD/DependLibs/libgnu/nettle/nettle_chacha-poly1305.h \
     $$PWD/DependLibs/libgnu/nettle/nettle_chacha.h \
-    $$PWD/DependLibs/libgnu/nettle/nettle_config.h \
     $$PWD/DependLibs/libgnu/nettle/nettle_ctr.h \
     $$PWD/DependLibs/libgnu/nettle/nettle_curve25519.h \
     $$PWD/DependLibs/libgnu/nettle/nettle_des-compat.h \
@@ -332,7 +331,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libgnu/nettle/nettle_getopt.h \
     $$PWD/DependLibs/libgnu/nettle/nettle_getopt_int.h \
     $$PWD/DependLibs/libgnu/nettle/nettle_gmp-glue.h \
-    $$PWD/DependLibs/libgnu/nettle/nettle_gnettle.h \
     $$PWD/DependLibs/libgnu/nettle/nettle_gosthash94.h \
     $$PWD/DependLibs/libgnu/nettle/nettle_hmac.h \
     $$PWD/DependLibs/libgnu/nettle/nettle_keymap.h \
@@ -371,13 +369,13 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libgnu/ocsp.h \
     $$PWD/DependLibs/libgnu/open-catalog.h \
     $$PWD/DependLibs/libgnu/opencdk/context.h \
-    $$PWD/DependLibs/libgnu/opencdk/filters.h \
+    $$PWD/DependLibs/libgnu/opencdk/filters_opencdk.h \
     $$PWD/DependLibs/libgnu/opencdk/keydb.h \
     $$PWD/DependLibs/libgnu/opencdk/main.h \
     $$PWD/DependLibs/libgnu/opencdk/opencdk.h \
     $$PWD/DependLibs/libgnu/opencdk/packet.h \
     $$PWD/DependLibs/libgnu/opencdk/stream.h \
-    $$PWD/DependLibs/libgnu/opencdk/types.h \
+    $$PWD/DependLibs/libgnu/opencdk/types_opencdk.h \
     $$PWD/DependLibs/libgnu/openpgp.h \
     $$PWD/DependLibs/libgnu/openpgp/gnutls_openpgp.h \
     $$PWD/DependLibs/libgnu/openpgp/openpgp_int.h \
@@ -474,9 +472,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libgnu/styled-ostream.oo.h \
     $$PWD/DependLibs/libgnu/styled_ostream.priv.h \
     $$PWD/DependLibs/libgnu/styled_ostream.vt.h \
-    $$PWD/DependLibs/libgnu/sys/stat_gnu.h \
-    $$PWD/DependLibs/libgnu/sys/time_gnu.h \
-    $$PWD/DependLibs/libgnu/sys/types_gnu.h \
     $$PWD/DependLibs/libgnu/sys_select.in.h \
     $$PWD/DependLibs/libgnu/sys_stat.in.h \
     $$PWD/DependLibs/libgnu/sys_time.in.h \
@@ -954,7 +949,6 @@ SOURCES += 	$$PWD/DependLibs/libgnu/accelerated/accelerated.c \
     $$PWD/DependLibs/libgnu/locating-rule.c \
     $$PWD/DependLibs/libgnu/lock_gnu.c \
     $$PWD/DependLibs/libgnu/locks.c \
-    $$PWD/DependLibs/libgnu/log.c \
     $$PWD/DependLibs/libgnu/lstat.c \
     $$PWD/DependLibs/libgnu/m-fgrep.c \
     $$PWD/DependLibs/libgnu/m-regex.c \
@@ -1571,5 +1565,6 @@ SOURCES += 	$$PWD/DependLibs/libgnu/accelerated/accelerated.c \
     $$PWD/DependLibs/libgnu/xstrdup.c \
     $$PWD/DependLibs/libgnu/xstriconv.c \
     $$PWD/DependLibs/libgnu/xvasprintf.c \
-    $$PWD/DependLibs/libgnu/os2compat2.c
+    $$PWD/DependLibs/libgnu/os2compat2.c \
+    $$PWD/DependLibs/libgnu/log.c \
 

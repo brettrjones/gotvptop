@@ -2,15 +2,9 @@
 TEMPLATE = lib
 TARGET_NAME = pythoncore
 
-include(version.pri)
-include(os_detect.pri)
-include(compile_config.pri)
-
-include(config_sharedlib.pri)
+include(config_python_lib.pri)
 
 include(python_pythoncore.pri)
-
-include(config_link.pri)
 
 LIBS +=  $${STATIC_LIB_PREFIX}gnu$${STATIC_LIB_SUFFIX}
 LIBS +=  $${STATIC_LIB_PREFIX}iconv$${STATIC_LIB_SUFFIX}
@@ -29,13 +23,3 @@ LIBS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
 #LIBS +=  $${SHARED_LIB_PREFIX}util$${SHARED_LIB_SUFFIX}
 #LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_LIB_SUFFIX}
 #LIBS +=  $${SHARED_LIB_PREFIX}crypto$${SHARED_LIB_SUFFIX}
-
-#-lintl
-
-unix:!android:{
-    LIBS +=  -ldl -lGLU -lGL -lm -luuid -lrt -lpthread -lpython2.7
-}
-
-android:{
-    LIBS +=  -ldl -lm -landroid -lc -lstdc++ -llog
-}

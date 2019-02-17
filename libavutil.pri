@@ -9,16 +9,13 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvDependLibrariesConfig.h \
     $$PWD/GoTvTargetOsConfig.h \
-    $$PWD/DependLibs/ffmpeg/libavutil/../atomics/dummy/stdatomic.h \
-    $$PWD/DependLibs/ffmpeg/libavutil/../atomics/gcc/stdatomic.h \
-    $$PWD/DependLibs/ffmpeg/libavutil/../atomics/pthread/stdatomic.h \
-    $$PWD/DependLibs/ffmpeg/libavutil/../atomics/suncc/stdatomic.h \
-    $$PWD/DependLibs/ffmpeg/libavutil/../atomics/win32/stdatomic.h \
-    $$PWD/DependLibs/ffmpeg/libavutil/../ffmpeg_config.h \
-    $$PWD/DependLibs/ffmpeg/libavutil/../ffmpeg_config_android.h \
-    $$PWD/DependLibs/ffmpeg/libavutil/../ffmpeg_config_linux.h \
-    $$PWD/DependLibs/ffmpeg/libavutil/../ffmpeg_config_windows.h \
-    $$PWD/DependLibs/ffmpeg/libavutil/../stdatomic.h \
+    $$PWD/DependLibs/ffmpeg/atomics/dummy/stdatomic.h \
+    $$PWD/DependLibs/ffmpeg/atomics/gcc/stdatomic.h \
+    $$PWD/DependLibs/ffmpeg/atomics/pthread/stdatomic.h \
+    $$PWD/DependLibs/ffmpeg/atomics/suncc/stdatomic.h \
+    $$PWD/DependLibs/ffmpeg/atomics/win32/stdatomic.h \
+    $$PWD/DependLibs/ffmpeg/config_ffmpeg.h \
+    $$PWD/DependLibs/ffmpeg/stdatomic.h \
     $$PWD/DependLibs/ffmpeg/libavutil/adler32.h \
     $$PWD/DependLibs/ffmpeg/libavutil/aes.h \
     $$PWD/DependLibs/ffmpeg/libavutil/aes_ctr.h \
@@ -27,7 +24,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/ffmpeg/libavutil/atomic_gcc.h \
     $$PWD/DependLibs/ffmpeg/libavutil/atomic_suncc.h \
     $$PWD/DependLibs/ffmpeg/libavutil/atomic_win32.h \
-    $$PWD/DependLibs/ffmpeg/libavutil/attributes.h \
+    $$PWD/DependLibs/ffmpeg/libavutil/avutil_attributes.h \
     $$PWD/DependLibs/ffmpeg/libavutil/audio_fifo.h \
     $$PWD/DependLibs/ffmpeg/libavutil/avassert.h \
     $$PWD/DependLibs/ffmpeg/libavutil/avconfig.h \
@@ -49,7 +46,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/ffmpeg/libavutil/channel_layout.h \
     $$PWD/DependLibs/ffmpeg/libavutil/color_utils.h \
     $$PWD/DependLibs/ffmpeg/libavutil/colorspace.h \
-    $$PWD/DependLibs/ffmpeg/libavutil/common.h \
+    $$PWD/DependLibs/ffmpeg/libavutil/avutil_common.h \
     $$PWD/DependLibs/ffmpeg/libavutil/cpu.h \
     $$PWD/DependLibs/ffmpeg/libavutil/cpu_internal.h \
     $$PWD/DependLibs/ffmpeg/libavutil/crc.h \
@@ -164,7 +161,6 @@ SOURCES += 	$$PWD/DependLibs/ffmpeg/libavutil/../atomics/pthread/stdatomic.c \
     $$PWD/DependLibs/ffmpeg/libavutil/cast5.c \
     $$PWD/DependLibs/ffmpeg/libavutil/channel_layout.c \
     $$PWD/DependLibs/ffmpeg/libavutil/color_utils.c \
-    $$PWD/DependLibs/ffmpeg/libavutil/cpu.c \
     $$PWD/DependLibs/ffmpeg/libavutil/crc.c \
     $$PWD/DependLibs/ffmpeg/libavutil/des.c \
     $$PWD/DependLibs/ffmpeg/libavutil/dict.c \
@@ -232,5 +228,6 @@ SOURCES += 	$$PWD/DependLibs/ffmpeg/libavutil/../atomics/pthread/stdatomic.c \
     $$PWD/DependLibs/ffmpeg/libavutil/x86/lls_init.c \
     $$PWD/DependLibs/ffmpeg/libavutil/x86/pixelutils_init.c \
     $$PWD/DependLibs/ffmpeg/libavutil/xga_font_data.c \
-    $$PWD/DependLibs/ffmpeg/libavutil/xtea.c
+    $$PWD/DependLibs/ffmpeg/libavutil/xtea.c \
+    $$PWD/DependLibs/ffmpeg/libavutil/cpu_avutil.c
 

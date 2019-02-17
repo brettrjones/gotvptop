@@ -9,29 +9,21 @@ DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MUL
 DEFINES +=__ANDROID_API__=21
 
 CONFIG(debug, debug|release){
- message(Project is built in DEBUG mode.)
-    DEFINES += DEBUG
-}
-
-CONFIG(release, debug|release){
- message(Project is built in RELEASE mode.)
-}
-
-CONFIG(release, debug|release){
-    DEFINES += NDEBUG
-    DEFINES += RELEASE
-    linux:!android: message(Disabling UNIX debug output.)
-    win32: message(Disabling WIN32 debug output.)
-    android: message(Disabling ANDROID debug output.)
-    DEFINES += QT_NO_DEBUG_OUTPUT
-}
-
-CONFIG(debug, debug|release){
     DEFINES += _DEBUG
     DEFINES += DEBUG
     linux:!android: message(Enabling UNIX debug output.)
     win32: message(Enabling WIN32 debug output.)
     android: message(Enabling ANDROID debug output.)
+}
+
+CONFIG(release, debug|release){
+    DEFINES += NDEBUG
+    DEFINES += RELEASE
+    DEFINES += QT_NO_DEBUG_OUTPUT
+
+    linux:!android: message(Disabling UNIX debug output.)
+    win32: message(Disabling WIN32 debug output.)
+    android: message(Disabling ANDROID debug output.)
 }
 
 

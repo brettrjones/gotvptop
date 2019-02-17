@@ -118,6 +118,7 @@ PyAPI_FUNC(PyObject *) Py_InitModule4(const char *name, PyMethodDef *methods,
                                       const char *doc, PyObject *self,
                                       int apiver);
 
+
 #define Py_InitModule(name, methods) \
 	Py_InitModule4(name, methods, (char *)NULL, (PyObject *)NULL, \
 		       PYTHON_API_VERSION)

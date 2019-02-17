@@ -11,6 +11,10 @@
    compiler is assumed to be IBM's VisualAge C++ (VACPP).  PYCC_GCC is used
    as the compiler specific macro for the EMX port of gcc to OS/2. */
 
+#if defined(TARGET_OS_ANDROID)
+# include <sys/sysmacros.h>
+#endif // defined(TARGET_OS_ANDROID)
+
 #ifdef __APPLE__
    /*
     * Step 1 of support for weak-linking a number of symbols existing on
@@ -3990,7 +3994,7 @@ posix_openpty(PyObject *self, PyObject *noargs)
     slave_fd = open(slave_name, O_RDWR | O_NOCTTY); /* open slave */
     if (slave_fd < 0)
         return posix_error();
-#if !defined(__CYGWIN__) && !defined(HAVE_DEV_PTC)
+#if !defined(__CYGWIN__) && !defined(HAVE_DEV_PTC) && !defined(TARGET_OS_ANDROID)
     ioctl(slave_fd, I_PUSH, "ptem"); /* push ptem */
     ioctl(slave_fd, I_PUSH, "ldterm"); /* push ldterm */
 #ifndef __hpux

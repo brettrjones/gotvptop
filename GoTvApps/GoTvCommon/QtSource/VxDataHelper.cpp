@@ -394,7 +394,7 @@ bool VxDataHelper::updateUserProfile( VxNetIdent& oUserAccount, UserProfile& oPr
 //! get list of friend with give friendship
 void VxDataHelper::getFriendList(uint8_t u8MyFrienship,  std::vector<VxNetIdent>& aoIdent ) 
 {
-	DbCursor * cursor = startQueryInsecure("SELECT ident FROM friends WHERE my_frienship = %d;" + u8MyFrienship );
+    DbCursor * cursor = startQueryInsecure("SELECT ident FROM friends WHERE my_frienship = %d;", u8MyFrienship );
 	VxNetIdent oIdent;
 	if( NULL != cursor )
 	{

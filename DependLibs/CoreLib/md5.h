@@ -1,10 +1,10 @@
-#ifndef MD5_H
-#define MD5_H
+#ifndef CORELIB_MD5_H
+#define CORELIB_MD5_H
 #include <CoreLib/config_corelib.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+//#ifdef __cplusplus
+//extern "C" {
+//#endif
 
 #ifdef __alpha
 typedef unsigned int uint32;
@@ -28,8 +28,8 @@ void MD5Transform(uint32 buf[4], uint32 in[16]);
  */
 typedef struct MD5Context MD5_CTX;
 
-#ifdef __cplusplus
-}  /* extern "C" */
-#endif
+//#ifdef __cplusplus
+//}  /* extern "C" */
+//#endif
 
-#endif /* !MD5_H */
+#endif /* !CORELIB_MD5_H */

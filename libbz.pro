@@ -1,11 +1,11 @@
 # Global
 TEMPLATE = lib
 
-TARGET_NAME = libbz2
+TARGET_NAME = bz
 
 include(config_static_dependlib.pri)
 
-include(libbz2.pri)
+include(libbz.pri)
 
 
 

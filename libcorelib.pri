@@ -121,7 +121,7 @@ SOURCES += 	$$PWD/DependLibs/CoreLib/AppErr.cpp \
     $$PWD/DependLibs/CoreLib/VxTimer.cpp \
     $$PWD/DependLibs/CoreLib/VxValuePair.cpp \
     $$PWD/DependLibs/CoreLib/VxXml.cpp \
-    $$PWD/DependLibs/CoreLib/md5.c \
+    $$PWD/DependLibs/CoreLib/md5.cpp \
     $$PWD/DependLibs/CoreLib/rsa_eay.c \
     $$PWD/DependLibs/CoreLib/rsa_gen.c \
     $$PWD/DependLibs/CoreLib/sqlite3.c \
