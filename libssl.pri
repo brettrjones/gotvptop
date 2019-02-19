@@ -644,7 +644,7 @@ SOURCES += 	$$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/evp/c_all.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/evp/c_allc.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/evp/c_alld.c \
-    $$PWD/DependLibs/openssl-1.0.2p/crypto/evp/digest.c \
+    $$PWD/DependLibs/openssl-1.0.2p/crypto/evp/digest_evp.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/evp/e_aes.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/evp/e_aes_cbc_hmac_sha1.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/evp/e_aes_cbc_hmac_sha256.c \

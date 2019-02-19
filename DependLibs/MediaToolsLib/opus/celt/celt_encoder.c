@@ -438,7 +438,7 @@ static void compute_mdcts( const CELTMode *mode, int shortBlocks, celt_sig * OPU
 		for( b = 0; b < B; b++ )
 		{
 			/* Interleaving the sub-frames while doing the MDCTs */
-			opus_clt_mdct_forward( &mode->mdct, in + c*( B*N + overlap ) + b*N, &out[b + c*N*B], mode->window, overlap, shift, B );
+            opus_clt_mdct_forward_mediatools( &mode->mdct, in + c*( B*N + overlap ) + b*N, &out[b + c*N*B], mode->window, overlap, shift, B );
 		}
 	} while( ++c < CC );
 	if( CC == 2 && C == 1 )

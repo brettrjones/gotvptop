@@ -4,7 +4,7 @@ TEMPLATE = app
 
 #TARGET_NAME = gotvptop
 
-QT += gui core concurrent widgets network multimedia opengl xml svg
+QT += gui core concurrent widgets network multimedia opengl xml svg quickwidgets
 
 #CONFIG += qt thread silent
 # C++11 support
@@ -33,6 +33,7 @@ MOBILITY =
 include(config_version.pri)
 include(config_os_detect.pri)
 include(config_compiler.pri)
+include(config_opensslp_include.pri)
 
 include(GoTvPtoP_App.pri)
 
@@ -41,17 +42,17 @@ include(GoTvPtoP_App.pri)
 
 
 CONFIG(debug, debug|release){
-    OBJECTS_DIR=.objs/$${TARGET_NAME}/debug
-    MOC_DIR =.moc/$${TARGET_NAME}/debug
-    RCC_DIR =.qrc/$${TARGET_NAME}/debug
-    UI_DIR =.ui/$${TARGET_NAME}/debug
+    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
+    MOC_DIR =.moc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
+    RCC_DIR =.qrc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
+    UI_DIR =.ui/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
 }
 
 CONFIG(release, debug|release){
-    OBJECTS_DIR=.objs/$${TARGET_NAME}/release
-    MOC_DIR =.moc/$${TARGET_NAME}/release
-    RCC_DIR =.qrc/$${TARGET_NAME}/release
-    UI_DIR =.ui/$${TARGET_NAME}/release
+    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
+    MOC_DIR =.moc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
+    RCC_DIR =.qrc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
+    UI_DIR =.ui/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
 }
 
 #QMAKE_CFLAGS_YACC   = -Wno-unused -Wno-parentheses
@@ -72,8 +73,8 @@ CONFIG(debug, debug|release){
     LIBS +=  $${STATIC_LIB_PREFIX}kodi$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}ffmpegavdevice$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}ffmpegavformat$${STATIC_LIB_SUFFIX}
-    LIBS +=  $${STATIC_LIB_PREFIX}ffmpegavcodec$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}ffmpegavfilter$${STATIC_LIB_SUFFIX}
+    LIBS +=  $${STATIC_LIB_PREFIX}ffmpegavcodec$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}ffmpegpostproc$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}ffmpegswresample$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}ffmpegswscale$${STATIC_LIB_SUFFIX}
@@ -89,11 +90,11 @@ CONFIG(debug, debug|release){
     LIBS +=  $${STATIC_LIB_PREFIX}x264$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}x265$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}vorbis$${STATIC_LIB_SUFFIX}
+    LIBS +=  $${STATIC_LIB_PREFIX}ptopengine$${STATIC_LIB_SUFFIX}
+    LIBS +=  $${STATIC_LIB_PREFIX}mediatools$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}ogg$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}opus$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}speex$${STATIC_LIB_SUFFIX}
-    LIBS +=  $${STATIC_LIB_PREFIX}ptopengine$${STATIC_LIB_SUFFIX}
-    LIBS +=  $${STATIC_LIB_PREFIX}mediatools$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}lame$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}microhttpd$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}gnu$${STATIC_LIB_SUFFIX}

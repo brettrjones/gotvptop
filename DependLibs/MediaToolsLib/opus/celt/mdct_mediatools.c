@@ -98,7 +98,7 @@ void opus_clt_mdct_clear(mdct_lookup *l)
 #endif /* CUSTOM_MODES */
 
 /* Forward MDCT trashes the input array */
-void opus_clt_mdct_forward(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scalar * OPUS_RESTRICT out,
+void opus_clt_mdct_forward_mediatools(const mdct_lookup *l, kiss_fft_scalar *in, kiss_fft_scalar * OPUS_RESTRICT out,
       const opus_val16 *window, int overlap, int shift, int stride)
 {
    int i;

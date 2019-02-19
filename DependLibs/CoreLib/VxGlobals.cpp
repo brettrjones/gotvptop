@@ -314,6 +314,12 @@ std::string& VxGetAppDataDirectory( void )
 }
 
 //============================================================================
+std::string& VxGetKodiDataDirectory( void )
+{
+    return g_strKodiDataDir;
+}
+
+//============================================================================
 void VxSetUserSpecificDataDirectory( const char * userDataDir  )
 { 
 	g_strUserSpecificDataDir = userDataDir;

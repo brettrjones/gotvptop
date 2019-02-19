@@ -171,7 +171,7 @@ SOURCES += 	$$PWD/DependLibs/MediaToolsLib/AviDefs.cpp \
     $$PWD/DependLibs/MediaToolsLib/opus/celt/kiss_fft.c \
     $$PWD/DependLibs/MediaToolsLib/opus/celt/laplace.c \
     $$PWD/DependLibs/MediaToolsLib/opus/celt/mathops.c \
-    $$PWD/DependLibs/MediaToolsLib/opus/celt/mdct.c \
+    $$PWD/DependLibs/MediaToolsLib/opus/celt/mdct_mediatools.c \
     $$PWD/DependLibs/MediaToolsLib/opus/celt/modes.c \
     $$PWD/DependLibs/MediaToolsLib/opus/celt/pitch.c \
     $$PWD/DependLibs/MediaToolsLib/opus/celt/quant_bands.c \

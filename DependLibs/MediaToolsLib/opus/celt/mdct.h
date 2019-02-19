@@ -57,7 +57,7 @@ int opus_clt_mdct_init(mdct_lookup *l,int N, int maxshift);
 void opus_clt_mdct_clear(mdct_lookup *l);
 
 /** Compute a forward MDCT and scale by 4/N, trashes the input array */
-void opus_clt_mdct_forward(const mdct_lookup *l, kiss_fft_scalar *in,
+void opus_clt_mdct_forward_mediatools(const mdct_lookup *l, kiss_fft_scalar *in,
       kiss_fft_scalar * OPUS_RESTRICT out,
       const opus_val16 *window, int overlap, int shift, int stride);
 
