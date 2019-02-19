@@ -7,25 +7,25 @@ DEFINES += FT_DEBUG_LEVEL_ERROR FT_DEBUG_LEVEL_TRACE FT2_BUILD_LIBRARY FT_MAKE_O
 DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MULTIMEDIA_LIB
 
 
-win32{
-    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o
-    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o/inc32
-}
+#win32{
+#    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o
+#    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2o/inc32
+#}
 
-android{
-    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p
-    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p/include
-}
+#android{
+#    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p
+#    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p/include
+#}
 
-unix{
-    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p
-    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p/include
-}
+#unix{
+#    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p
+#    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p/include
+#}
 
-macx{
-    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p
-    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p/include
-}
+#macx{
+#    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p
+#    INCLUDEPATH += ./../../DependLibs/openssl-1.0.2p/include
+#}
 
 #QMAKE_EXTRA_COMPILERS += yasm
 #NASMEXTRAFLAGS = -f elf64 -g -F dwarf

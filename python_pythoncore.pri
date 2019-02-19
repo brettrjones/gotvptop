@@ -1,7 +1,5 @@
+DEFINES += Py_BUILD_CORE
 
-INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14
-INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Include
-INCLUDEPATH += $$PWD/DependLibs/libgnu
 
 HEADERS += 	$$PWD/DependLibs/Python-2.7.14/Include/Python-ast.h \
     $$PWD/DependLibs/Python-2.7.14/Include/Python.h \

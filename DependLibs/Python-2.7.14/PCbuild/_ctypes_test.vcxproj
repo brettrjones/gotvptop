@@ -84,6 +84,12 @@
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(PySourcePath)Include;$(PySourcePath)PC;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;WIN32;$(_PlatformPreprocessorDefinition)$(_DebugPreprocessorDefinition)$(_PydPreprocessorDefinition)%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Modules\_ctypes\_ctypes_test.h" />
   </ItemGroup>

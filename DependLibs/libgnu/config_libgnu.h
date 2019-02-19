@@ -4395,7 +4395,9 @@ specified by the ISO C99 standard. */
 #define HAVE_FSTAB_H 1
 
 /* Define to 1 if you have the `fsync' function. */
-#define HAVE_FSYNC 1
+#if !defined(TARGET_OS_WINDOWS)
+# define HAVE_FSYNC 1
+#endif //!defined(TARGET_OS_WINDOWS)
 
 /* we have the futex(2) system call */
 #define HAVE_FUTEX 1

@@ -39,6 +39,7 @@ WIN32 is still required for the locale module.
 # else
 #  define MS_WIN32
 # endif // ARCH_64_BITS
+# include <io.h>
 #endif // _WIN32_WCE
 
 /* Deprecated USE_DL_EXPORT macro - please use Py_BUILD_CORE */
@@ -329,9 +330,9 @@ Py_NO_ENABLE_SHARED to find out.  Also support MS_NO_COREDLL for b/w compat */
 			their Makefile (other compilers are generally
 			taken care of by distutils.) */
 #			ifdef _DEBUG
-#				pragma comment(lib,"libpythonD.lib")
+#				pragma comment(lib,"python27_d.lib")
 #			else
-#				pragma comment(lib,"libpython.lib")
+#				pragma comment(lib,"python27.lib")
 #			endif /* _DEBUG */
 #		endif /* _MSC_VER */
 #	endif /* Py_BUILD_CORE */

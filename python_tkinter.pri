@@ -1,3 +1,3 @@
-SOURCES += 	$$PWD/../Modules/_tkinter.c \
-	$$PWD/../Modules/tkappinit.c
+SOURCES += 	$$PWD/DependLibs/Python-2.7.14/Modules/_tkinter.c \
+    $$PWD/DependLibs/Python-2.7.14/Modules/tkappinit.c
 

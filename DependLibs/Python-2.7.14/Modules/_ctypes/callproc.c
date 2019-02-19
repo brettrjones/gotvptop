@@ -74,7 +74,7 @@
 #include <malloc.h>
 #endif
 
-#include <ffi.h>
+#include "Modules/_ctypes/libffi/include/ffi.h"
 #include "ctypes.h"
 #ifdef HAVE_ALLOCA_H
 /* AIX needs alloca.h for alloca() */

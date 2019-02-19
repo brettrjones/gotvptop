@@ -110,7 +110,7 @@ bytes(cdata)
 #include "Python.h"
 #include "structmember.h"
 
-#include <ffi.h>
+#include "ffi.h"
 #ifdef MS_WIN32
 #include <windows.h>
 #include <malloc.h>

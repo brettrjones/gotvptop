@@ -91,6 +91,10 @@
       <StackReserveSize>2000000</StackReserveSize>
       <BaseAddress>0x1d000000</BaseAddress>
     </Link>
+    <ClCompile>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TARGET_OS_WINDOWS;WIN32;$(_PlatformPreprocessorDefinition)$(_DebugPreprocessorDefinition)$(_PydPreprocessorDefinition)%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(PySourcePath);$(PySourcePath)Include;$(PySourcePath)PC;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ResourceCompile Include="..\PC\python_exe.rc" />

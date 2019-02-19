@@ -10,6 +10,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python", "python.vcxproj", "{B11D750F-CD1F-4A96-85CE-E69A5C5259F9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pythoncore", "pythoncore.vcxproj", "{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CD6D0111-ED27-4E68-8162-FE9787468457} = {CD6D0111-ED27-4E68-8162-FE9787468457}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pythonw", "pythonw.vcxproj", "{F4229CC3-873C-49AE-9729-DD308ED4CD4A}"
 EndProject
@@ -60,6 +63,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libeay", "libeay.vcxproj", "{E5B04CC0-EB4C-42AB-B4DC-18EF95F864B0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ssleay", "ssleay.vcxproj", "{10615B24-73BF-4EFA-93AA-236916321317}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libgnu", "..\..\libgnu\build\VS2015\libgnu.vcxproj", "{CD6D0111-ED27-4E68-8162-FE9787468457}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -505,6 +510,22 @@ Global
 		{10615B24-73BF-4EFA-93AA-236916321317}.Release|Win32.Build.0 = Release|Win32
 		{10615B24-73BF-4EFA-93AA-236916321317}.Release|x64.ActiveCfg = Release|x64
 		{10615B24-73BF-4EFA-93AA-236916321317}.Release|x64.Build.0 = Release|x64
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.Debug|Win32.Build.0 = Debug|Win32
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.Debug|x64.ActiveCfg = Debug|x64
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.Debug|x64.Build.0 = Debug|x64
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.PGInstrument|Win32.ActiveCfg = Release|Win32
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.PGInstrument|Win32.Build.0 = Release|Win32
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.PGInstrument|x64.ActiveCfg = Release|x64
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.PGInstrument|x64.Build.0 = Release|x64
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.PGUpdate|Win32.ActiveCfg = Release|Win32
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.PGUpdate|Win32.Build.0 = Release|Win32
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.PGUpdate|x64.ActiveCfg = Release|x64
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.PGUpdate|x64.Build.0 = Release|x64
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.Release|Win32.ActiveCfg = Release|Win32
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.Release|Win32.Build.0 = Release|Win32
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.Release|x64.ActiveCfg = Release|x64
+		{CD6D0111-ED27-4E68-8162-FE9787468457}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

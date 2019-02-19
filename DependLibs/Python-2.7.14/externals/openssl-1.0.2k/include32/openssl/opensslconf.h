@@ -5,8 +5,10 @@
 extern "C" {
 #endif
 /* OpenSSL was configured with the following options: */
-#ifndef OPENSSL_SYSNAME_WIN32
+#if defined(TARGET_OS_WINDOWS)
 # define OPENSSL_SYSNAME_WIN32
+#else
+# define OPENSSL_SYSNAME_UNIX
 #endif
 #ifndef OPENSSL_DOING_MAKEDEPEND
 
@@ -121,7 +123,8 @@ extern "C" {
 # endif
 #endif
 
-#define OPENSSL_CPUID_OBJ
+//BRJ OPENSSL_CPUID_OBJ involves a lot of arm assembly ect
+//#define OPENSSL_CPUID_OBJ
 
 /* crypto/opensslconf.h.in */
 

@@ -73,8 +73,10 @@ mkpwent(struct passwd *p)
 #else
     SETS(setIndex++, p->pw_passwd);
 #endif
+#ifndef MS_WINDOWS
     PyStructSequence_SET_ITEM(v, setIndex++, _PyInt_FromUid(p->pw_uid));
     PyStructSequence_SET_ITEM(v, setIndex++, _PyInt_FromGid(p->pw_gid));
+#endif // MS_WINDOWS
 #if defined __VMS || defined(TARGET_OS_ANDROID)
     SETS(setIndex++, "");
 #else
@@ -103,7 +105,11 @@ See help(pwd) for more on password database entries.");
 static PyObject *
 pwd_getpwuid(PyObject *self, PyObject *args)
 {
-    uid_t uid;
+#ifdef MS_WINDOWS //BRJ
+    return NULL;
+#else
+    uid_t uid = -1;
+
     struct passwd *p;
     if (!PyArg_ParseTuple(args, "O&:getpwuid", _Py_Uid_Converter, &uid)) {
         if (PyErr_ExceptionMatches(PyExc_OverflowError))
@@ -121,6 +127,7 @@ pwd_getpwuid(PyObject *self, PyObject *args)
         return NULL;
     }
     return mkpwent(p);
+#endif // MS_WINDOWS
 }
 
 PyDoc_STRVAR(pwd_getpwnam__doc__,

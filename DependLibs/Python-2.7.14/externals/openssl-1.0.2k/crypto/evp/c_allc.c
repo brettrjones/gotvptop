@@ -56,6 +56,7 @@
  * [including the GNU Public Licence.]
  */
 
+#include <openssl/opensslconf.h>
 #include <stdio.h>
 #include "cryptlib.h"
 #include <openssl/evp.h>

@@ -1,2 +1,2 @@
-SOURCES += 	$$PWD/../PC/w9xpopen.c
+SOURCES += 	$$PWD/DependLibs/Python-2.7.14/PC/w9xpopen.c
 

@@ -16,4 +16,8 @@
 #define XML_DTD 1
 #define XML_CONTEXT_BYTES 1024
 
+#ifndef TARGET_OS_WINDOWS
+#define HAVE_GETRANDOM
+#endif // TARGET_OS_WINDOWS
+
 #endif /* EXPAT_CONFIG_H */

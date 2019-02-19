@@ -94,12 +94,13 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>/Zm200  %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(PySourcePath)Python;$(PySourcePath)Modules\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_USRDLL;Py_BUILD_CORE;Py_ENABLE_SHARED;MS_DLL_ID="$(SysWinVer)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(PySourcePath)Python;$(PySourcePath);$(PySourcePath)Modules\zlib;$(ProjectDir)..\..\..\sysheaders;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN32;TARGET_OS_WINDOWS;_USRDLL;Py_BUILD_CORE;Py_ENABLE_SHARED;MS_DLL_ID="$(SysWinVer)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libgnuD.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <BaseAddress>0x1e000000</BaseAddress>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir);$(ProjectDir)..\..\..\lib\Win32;%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

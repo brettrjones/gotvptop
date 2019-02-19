@@ -58,7 +58,7 @@
 
 #include "cryptlib.h"
 
-#ifndef NO_WINDOWS_BRAINDEATH
+#ifdef TARGET_OS_WINDOWS
 # include "buildinf.h"
 #endif
 

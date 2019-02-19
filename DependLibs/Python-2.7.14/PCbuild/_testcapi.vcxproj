@@ -88,6 +88,10 @@
     <Link>
       <BaseAddress>0x1e1F0000</BaseAddress>
     </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(PySourcePath);$(PySourcePath)Include;$(PySourcePath)PC;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TARGET_OS_WINDOWS;WIN32;$(_PlatformPreprocessorDefinition)$(_DebugPreprocessorDefinition)$(_PydPreprocessorDefinition)%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Modules\_testcapimodule.c" />

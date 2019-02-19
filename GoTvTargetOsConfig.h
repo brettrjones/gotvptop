@@ -17,6 +17,7 @@ echo GoTv Target OS Config error - apple not supported
 
 // os target specific defines for convenience
 #if defined(TARGET_OS_WINDOWS)
+# define MS_WINDOWS
 # define TARGET_WINDOWS
 # define TARGET_WINDOWS_DESKTOP // need to define this or libxbmc will fail with 'Size': is not a member of 'Windows::Foundation'
 //# define TARGET_WINDOWS_STORE // seems to be windows 10 only for microsoft store.. not sure

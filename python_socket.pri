@@ -1,4 +1,4 @@
-HEADERS += 	$$PWD/../Modules/socketmodule.h
+HEADERS += 	$$PWD/DependLibs/Python-2.7.14/Modules/socketmodule.h
 
-SOURCES += 	$$PWD/../Modules/socketmodule.c
+SOURCES += 	$$PWD/DependLibs/Python-2.7.14/Modules/socketmodule.c
 

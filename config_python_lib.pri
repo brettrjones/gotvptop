@@ -7,4 +7,8 @@ include(config_sharedlib_python.pri)
 
 include(config_link.pri)
 
-SOURCES +=
+
+INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14
+INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Include
+INCLUDEPATH += $$PWD/DependLibs/libgnu
+

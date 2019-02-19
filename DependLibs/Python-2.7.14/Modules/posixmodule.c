@@ -15,6 +15,11 @@
 # include <sys/sysmacros.h>
 #endif // defined(TARGET_OS_ANDROID)
 
+#if defined(TARGET_OS_WINDOWS)
+# define MS_WINDOWS
+#endif // defined(TARGET_OS_WINDOWS)
+
+
 #ifdef __APPLE__
    /*
     * Step 1 of support for weak-linking a number of symbols existing on
@@ -139,6 +144,8 @@ corresponding Unix manual entries for more information on calls.");
 #define HAVE_CWAIT      1
 #define HAVE_FSYNC      1
 #define fsync _commit
+#define write _write
+#include <io.h>
 #else
 #if defined(PYOS_OS2) && defined(PYCC_GCC) || defined(__VMS)
 /* Everything needed is defined in PC/os2emx/pyconfig.h or vms/pyconfig.h */

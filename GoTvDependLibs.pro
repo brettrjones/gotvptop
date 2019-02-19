@@ -49,4 +49,6 @@ SUBDIRS += $$PWD/libx264.pro
 SUBDIRS += $$PWD/libx265.pro
 SUBDIRS += $$PWD/libxml2.pro
 SUBDIRS += $$PWD/libzlib.pro
+SUBDIRS += $$PWD/python_libeay.pro
+SUBDIRS += $$PWD/python_ssleay.pro
 

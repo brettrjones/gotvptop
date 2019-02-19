@@ -11,6 +11,7 @@ AC_REVISION($Revision$)
 AC_INIT(python, PYTHON_VERSION, https://bugs.python.org/)
 AC_CONFIG_SRCDIR([Include/object.h])
 AC_CONFIG_HEADER(pyconfig.h)
+AC_SUBST(cross_compiling)
 
 AC_CANONICAL_HOST
 AC_SUBST(build)
@@ -19,8 +20,6 @@ AC_SUBST(host)
 # pybuilddir.txt will be created by --generate-posix-vars in the Makefile
 rm -f pybuilddir.txt
 
-AC_CHECK_PROGS(PYTHON_FOR_REGEN, python$PACKAGE_VERSION python3 python, python3)
-AC_SUBST(PYTHON_FOR_REGEN)
 
 if test "$cross_compiling" = yes; then
     AC_MSG_CHECKING([for python interpreter for cross build])

@@ -81,6 +81,10 @@ Local naming conventions:
 
 */
 
+#if defined(TARGET_OS_WINDOWS)
+# define ssize_t int
+#endif // defined(TARGET_OS_WINDOWS)
+
 #ifdef __APPLE__
 #include <AvailabilityMacros.h>
 /* for getaddrinfo thread safety test on old versions of OS X */

@@ -88,6 +88,10 @@
       <AdditionalDependencies>cabinet.lib;msi.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <BaseAddress>0x1D160000</BaseAddress>
     </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)..\;$(PySourcePath)Include;$(PySourcePath)PC;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TARGET_OS_WINDOWS;WIN32;$(_PlatformPreprocessorDefinition)$(_DebugPreprocessorDefinition)$(_PydPreprocessorDefinition)%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\PC\_msi.c" />

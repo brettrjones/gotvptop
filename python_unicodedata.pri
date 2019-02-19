@@ -1,5 +1,5 @@
-HEADERS += 	$$PWD/../Modules/unicodedata_db.h \
-	$$PWD/../Modules/unicodename_db.h
+HEADERS += 	$$PWD/DependLibs/Python-2.7.14/Modules/unicodedata_db.h \
+    $$PWD/DependLibs/Python-2.7.14/Modules/unicodename_db.h
 
-SOURCES += 	$$PWD/../Modules/unicodedata.c
+SOURCES += 	$$PWD/DependLibs/Python-2.7.14/Modules/unicodedata.c
 

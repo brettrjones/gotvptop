@@ -29,27 +29,31 @@ CONFIG(release, debug|release){
 
 INCLUDEPATH += $$PWD/DependLibs
 
-win32{
-    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2o
-    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2o/inc32
-    INCLUDEPATH += $$PWD/sysheaders
-}
-
 android{
     DEFINES += BIONIC_IOCTL_NO_SIGNEDNESS_OVERLOAD
+}
+
+#win32{
+#    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2o
+#    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2o/inc32
+#    INCLUDEPATH += $$PWD/sysheaders
+#}
+
+#android{
+#    DEFINES += BIONIC_IOCTL_NO_SIGNEDNESS_OVERLOAD
+##    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p
+##    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
+#}
+
+#unix{
 #    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p
 #    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
-}
+#}
 
-unix{
-    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p
-    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
-}
-
-macx{
-    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p
-    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
-}
+#macx{
+#    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p
+#    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
+#}
 
 #QMAKE_EXTRA_COMPILERS += yasm
 #NASMEXTRAFLAGS = -f elf64 -g -F dwarf

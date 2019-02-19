@@ -9,6 +9,7 @@ DEFINES += SHARED_LIB
 
 DEFINES -= _LIB
 DEFINES += Py_ENABLE_SHARED
+DEFINES += _USRDLL
 
 CONFIG(debug, debug|release){
     DEPENDPATH += $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug

@@ -7,30 +7,30 @@
 #include "intrcheck.h"
 
 #ifdef MS_WINDOWS
-#include <Windows.h>
-#ifdef HAVE_PROCESS_H
-#include <process.h>
-#endif
-#endif
+# include <Windows.h>
+# ifdef HAVE_PROCESS_H
+#  include <process.h>
+# endif // HAVE_PROCESS_H
+#endif // MS_WINDOWS
 
 #ifdef HAVE_SIGNAL_H
-#include <signal.h>
-#endif
+# include <signal.h>
+#endif // HAVE_SIGNAL_H
 #ifdef HAVE_SYS_STAT_H
-#include <sys/stat.h>
-#endif
+# include <sys/stat.h>
+#endif // HAVE_SYS_STAT_H
 #ifdef HAVE_SYS_TIME_H
-#include <sys/time.h>
-#endif
+# include <sys/time.h>
+#endif // HAVE_SYS_TIME_H
 
 #ifndef SIG_ERR
-#define SIG_ERR ((PyOS_sighandler_t)(-1))
-#endif
+# define SIG_ERR ((PyOS_sighandler_t)(-1))
+#endif // SIG_ERR
 
 #if defined(PYOS_OS2) && !defined(PYCC_GCC)
-#define NSIG 12
-#include <process.h>
-#endif
+# define NSIG 12
+# include <process.h>
+#endif // defined(PYOS_OS2) && !defined(PYCC_GCC)
 
 #ifndef NSIG
 # if defined(_NSIG)
@@ -42,7 +42,7 @@
 # else
 #  define NSIG 64               /* Use a reasonable default value */
 # endif
-#endif
+#endif // NSIG
 
 
 /*
@@ -75,11 +75,18 @@
 */
 
 #ifdef WITH_THREAD
+#include <pyconfig.h> /* For pid_t */
 #include <sys/types.h> /* For pid_t */
 #include "pythread.h"
 static long main_thread;
-static pid_t main_pid;
-#endif
+#if defined(TARGET_OS_WINDOWS)
+ static int main_pid = 0;
+# define write _write
+# include <io.h>
+# else
+   static pid_t main_pid;
+# endif
+#endif .. WITH_THREAD
 
 static struct {
     int tripped;
