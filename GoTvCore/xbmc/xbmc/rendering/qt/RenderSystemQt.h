@@ -10,6 +10,7 @@
 #include "config_kodi.h"
 #ifdef HAVE_QT_GUI
 
+#include "system_gl.h"
 #include "rendering/RenderSystem.h"
 #include "utils/Color.h"
 #include "GoTvInterface/IGoTvRender.h"

@@ -457,7 +457,7 @@ bool CExternalPlayer::ExecuteAppLinux(const char* strSwitches)
 }
 #endif
 
-#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
+#if defined(TARGET_ANDROID)
 bool CExternalPlayer::ExecuteAppAndroid(const char* strSwitches,const char* strPath)
 {
   CLog::Log(LOGNOTICE, "%s: %s", __FUNCTION__, strSwitches);

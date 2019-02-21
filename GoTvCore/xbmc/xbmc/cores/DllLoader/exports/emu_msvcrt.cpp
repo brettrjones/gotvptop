@@ -7,7 +7,6 @@
  */
 
 #include "config_kodi.h"
-#if !defined(TARGET_OS_ANDROID)
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -2190,4 +2189,3 @@ extern "C"
     }
 
 }
-#endif // !defined(TARGET_OS_ANDROID)

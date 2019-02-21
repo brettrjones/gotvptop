@@ -1,10 +1,7 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\DataCacheCore.cpp">
-      <Filter>cores</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\FFmpeg.cpp">
       <Filter>cores</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\VideoSettings.cpp">
@@ -15,24 +12,6 @@
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\AESinkFactory.cpp">
       <Filter>cores\AudioEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons\ActiveAEDSP.cpp">
-      <Filter>cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons\ActiveAEDSPAddon.cpp">
-      <Filter>cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons\ActiveAEDSPDatabase.cpp">
-      <Filter>cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons\ActiveAEDSPMode.cpp">
-      <Filter>cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons\ActiveAEDSPProcess.cpp">
-      <Filter>cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons\AudioDSPSettings.cpp">
-      <Filter>cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\Encoders\AEEncoderFFmpeg.cpp">
       <Filter>cores\AudioEngine\Encoders</Filter>
@@ -232,9 +211,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\FileCache.cpp">
       <Filter>filesystem</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\File.cpp">
-      <Filter>filesystem</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\FileDirectoryFactory.cpp">
       <Filter>filesystem</Filter>
     </ClCompile>
@@ -415,13 +391,7 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\UPnPFile.cpp">
       <Filter>filesystem</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNode.cpp">
-      <Filter>filesystem\VideoDatabaseDirectory</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeEpisodes.cpp">
-      <Filter>filesystem\VideoDatabaseDirectory</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeGrouped.cpp">
       <Filter>filesystem\VideoDatabaseDirectory</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeInProgressTvShows.cpp">
@@ -431,9 +401,6 @@
       <Filter>filesystem\VideoDatabaseDirectory</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeMusicVideosOverview.cpp">
-      <Filter>filesystem\VideoDatabaseDirectory</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeOverview.cpp">
       <Filter>filesystem\VideoDatabaseDirectory</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeRecentlyAddedEpisodes.cpp">
@@ -461,9 +428,6 @@
       <Filter>filesystem\VideoDatabaseDirectory</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeTvShowsOverview.cpp">
-      <Filter>filesystem\VideoDatabaseDirectory</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\QueryParams.cpp">
       <Filter>filesystem\VideoDatabaseDirectory</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNodeAlbumCompilations.cpp">
@@ -496,18 +460,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNodeArtist.cpp">
       <Filter>filesystem\MusicDatabaseDirectory</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNode.cpp">
-      <Filter>filesystem\MusicDatabaseDirectory</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNodeGrouped.cpp">
-      <Filter>filesystem\MusicDatabaseDirectory</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNodeOverview.cpp">
-      <Filter>filesystem\MusicDatabaseDirectory</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNodeRoot.cpp">
-      <Filter>filesystem\MusicDatabaseDirectory</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNodeSingles.cpp">
       <Filter>filesystem\MusicDatabaseDirectory</Filter>
     </ClCompile>
@@ -526,13 +478,7 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNodeYearSong.cpp">
       <Filter>filesystem\MusicDatabaseDirectory</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\QueryParams.cpp">
-      <Filter>filesystem\MusicDatabaseDirectory</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\GameServices.cpp">
-      <Filter>games</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\GameSettings.cpp">
       <Filter>games</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\GameUtils.cpp">
@@ -541,16 +487,10 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\GameClient.cpp">
       <Filter>games\addons</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\GameClientInGameSaves.cpp">
-      <Filter>games\addons</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\GameClientProperties.cpp">
       <Filter>games\addons</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\GameClientSubsystem.cpp">
-      <Filter>games\addons</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\GameClientTiming.cpp">
       <Filter>games\addons</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\GameClientTranslator.cpp">
@@ -579,39 +519,6 @@
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\input\GameClientTopology.cpp">
       <Filter>games\addons\input</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\playback\GameClientReversiblePlayback.cpp">
-      <Filter>games\addons\playback</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\playback\GameLoop.cpp">
-      <Filter>games\addons\playback</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\BasicMemoryStream.cpp">
-      <Filter>games\addons\savestates</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\DeltaPairMemoryStream.cpp">
-      <Filter>games\addons\savestates</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\LinearMemoryStream.cpp">
-      <Filter>games\addons\savestates</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\Savestate.cpp">
-      <Filter>games\addons\savestates</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\SavestateDatabase.cpp">
-      <Filter>games\addons\savestates</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\SavestateReader.cpp">
-      <Filter>games\addons\savestates</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\SavestateTranslator.cpp">
-      <Filter>games\addons\savestates</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\SavestateUtils.cpp">
-      <Filter>games\addons\savestates</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\SavestateWriter.cpp">
-      <Filter>games\addons\savestates</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\controllers\Controller.cpp">
       <Filter>games\controllers</Filter>
@@ -703,9 +610,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\dialogs\osd\DialogGameVideoSelect.cpp">
       <Filter>games\dialogs\osd</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\dialogs\osd\DialogGameViewMode.cpp">
-      <Filter>games\dialogs\osd</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\dialogs\osd\DialogGameVolume.cpp">
       <Filter>games\dialogs\osd</Filter>
     </ClCompile>
@@ -723,9 +627,6 @@
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\games\windows\GUIWindowGames.cpp">
       <Filter>games\windows</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\AnnouncementManager.cpp">
-      <Filter>interfaces</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\builtins\AddonBuiltins.cpp">
       <Filter>interfaces\builtins</Filter>
@@ -854,9 +755,6 @@
       <Filter>music</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\music\Artist.cpp">
-      <Filter>music</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\music\ContextMenus.cpp">
       <Filter>music</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\music\GUIViewStateMusic.cpp">
@@ -1114,9 +1012,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\profiles\Profile.cpp">
       <Filter>profiles</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\profiles\ProfilesManager.cpp">
-      <Filter>profiles</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\profiles\dialogs\GUIDialogLockSettings.cpp">
       <Filter>profiles\dialogs</Filter>
     </ClCompile>
@@ -1161,9 +1056,6 @@
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\pvr\PVRGUIProgressHandler.cpp">
       <Filter>pvr</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\pvr\addons\PVRClients.cpp">
-      <Filter>pvr\addons</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\pvr\channels\PVRChannel.cpp">
       <Filter>pvr\channels</Filter>
@@ -1288,9 +1180,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\RetroPlayer.cpp">
       <Filter>cores\RetroPlayer</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\RetroPlayerAudio.cpp">
-      <Filter>cores\RetroPlayer</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\RetroPlayerAutoSave.cpp">
       <Filter>cores\RetroPlayer</Filter>
     </ClCompile>
@@ -1298,9 +1187,6 @@
       <Filter>cores\RetroPlayer</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\RetroPlayerUtils.cpp">
-      <Filter>cores\RetroPlayer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\RetroPlayerVideo.cpp">
       <Filter>cores\RetroPlayer</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\guibridge\GUIGameRenderManager.cpp">
@@ -1333,28 +1219,7 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\guiwindows\GameWindowFullScreenText.cpp">
       <Filter>cores\RetroPlayer\guiwindows</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\process\BaseRenderBuffer.cpp">
-      <Filter>cores\RetroPlayer\process</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\process\BaseRenderBufferPool.cpp">
-      <Filter>cores\RetroPlayer\process</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\process\RenderBufferGuiTexture.cpp">
-      <Filter>cores\RetroPlayer\process</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\process\RenderBufferManager.cpp">
-      <Filter>cores\RetroPlayer\process</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\process\RenderBufferSysMem.cpp">
-      <Filter>cores\RetroPlayer\process</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\process\RPProcessInfo.cpp">
-      <Filter>cores\RetroPlayer\process</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\rendering\RenderContext.cpp">
-      <Filter>cores\RetroPlayer\rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\rendering\RenderGeometry.cpp">
       <Filter>cores\RetroPlayer\rendering</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\rendering\RenderSettings.cpp">
@@ -1399,9 +1264,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\SettingAddon.cpp">
       <Filter>settings</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\SettingConditions.cpp">
-      <Filter>settings</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\SettingControl.cpp">
       <Filter>settings</Filter>
     </ClCompile>
@@ -1429,9 +1291,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\DiscSettings.cpp">
       <Filter>settings</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\dialogs\GUIDialogAudioDSPManager.cpp">
-      <Filter>settings\dialogs</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\dialogs\GUIDialogContentSettings.cpp">
       <Filter>settings\dialogs</Filter>
     </ClCompile>
@@ -1446,36 +1305,6 @@
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\dialogs\GUIDialogSettingsManualBase.cpp">
       <Filter>settings\dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\ISetting.cpp">
-      <Filter>settings\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\ISettingControl.cpp">
-      <Filter>settings\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\Setting.cpp">
-      <Filter>settings\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingCategoryAccess.cpp">
-      <Filter>settings\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingConditions.cpp">
-      <Filter>settings\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingDependency.cpp">
-      <Filter>settings\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingRequirement.cpp">
-      <Filter>settings\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingSection.cpp">
-      <Filter>settings\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingsManager.cpp">
-      <Filter>settings\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingUpdate.cpp">
-      <Filter>settings\lib</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\windows\GUIControlSettings.cpp">
       <Filter>settings\windows</Filter>
@@ -1526,14 +1355,9 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\TextureCacheJob.cpp" />
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\TextureDatabase.cpp" />
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\ThumbLoader.cpp" />
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\URL.cpp" />
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\Util.cpp" />
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\XBApplicationEx.cpp" />
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\XBDateTime.cpp" />
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\Autorun.cpp" />
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\Addon.cpp">
-      <Filter>addons</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\AddonBuilder.cpp">
       <Filter>addons</Filter>
     </ClCompile>
@@ -1561,16 +1385,10 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\AddonVersion.cpp">
       <Filter>addons</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\AudioDecoder.cpp">
-      <Filter>addons</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\AudioEncoder.cpp">
       <Filter>addons</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\ContextMenuAddon.cpp">
-      <Filter>addons</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\ContextMenus.cpp">
       <Filter>addons</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\FontResource.cpp">
@@ -1657,29 +1475,14 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\AddonInterfaces.cpp">
       <Filter>addons\interfaces</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\AudioEngine.cpp">
-      <Filter>addons\interfaces</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\General.cpp">
       <Filter>addons\interfaces</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\Filesystem.cpp">
       <Filter>addons\interfaces</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\Network.cpp">
-      <Filter>addons\interfaces</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\Addon\AddonCallbacksAddon.cpp">
       <Filter>addons\interfaces\Addon</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\General.cpp">
-      <Filter>addons\interfaces\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\ListItem.cpp">
-      <Filter>addons\interfaces\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\Window.cpp">
-      <Filter>addons\interfaces\GUI</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\AddonCallbacksGUI.cpp">
       <Filter>addons\interfaces\GUI</Filter>
@@ -1703,9 +1506,6 @@
       <Filter>addons\interfaces\GUI\controls</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\controls\Label.cpp">
-      <Filter>addons\interfaces\GUI\controls</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\controls\Progress.cpp">
       <Filter>addons\interfaces\GUI\controls</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\controls\RadioButton.cpp">
@@ -1735,16 +1535,10 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\FileBrowser.cpp">
       <Filter>addons\interfaces\GUI\dialogs</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Keyboard.cpp">
-      <Filter>addons\interfaces\GUI\dialogs</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Numeric.cpp">
       <Filter>addons\interfaces\GUI\dialogs</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\OK.cpp">
-      <Filter>addons\interfaces\GUI\dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Progress.cpp">
       <Filter>addons\interfaces\GUI\dialogs</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Select.cpp">
@@ -1764,12 +1558,6 @@
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\settings\SettingUrlEncodedString.cpp">
       <Filter>addons\settings</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\commons\Exception.cpp">
-      <Filter>commons</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\commons\ilog.cpp">
-      <Filter>commons</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\dbwrappers\Database.cpp">
       <Filter>dbwrappers</Filter>
@@ -1876,9 +1664,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\dialogs\GUIDialogYesNo.cpp">
       <Filter>dialogs</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\favourites\ContextMenus.cpp">
-      <Filter>favourites</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\favourites\GUIDialogFavourites.cpp">
       <Filter>favourites</Filter>
     </ClCompile>
@@ -1895,9 +1680,6 @@
       <Filter>guilib</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\FFmpegImage.cpp">
-      <Filter>guilib</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\GraphicContext.cpp">
       <Filter>guilib</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\GUIAction.cpp">
@@ -1964,9 +1746,6 @@
       <Filter>guilib</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\GUIIncludes.cpp">
-      <Filter>guilib</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\GUIInfoTypes.cpp">
       <Filter>guilib</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\GUIKeyboardFactory.cpp">
@@ -2074,9 +1853,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\LocalizeStrings.cpp">
       <Filter>guilib</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\Resolution.cpp">
-      <Filter>guilib</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\StereoscopicsManager.cpp">
       <Filter>guilib</Filter>
     </ClCompile>
@@ -2118,12 +1894,6 @@
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\TextureDX.cpp">
       <Filter>guilib</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\input\Action.cpp">
-      <Filter>input</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\input\ActionTranslator.cpp">
-      <Filter>input</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\input\AppTranslator.cpp">
       <Filter>input</Filter>
@@ -2326,15 +2096,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\pictures\SlideShowPicture.cpp">
       <Filter>pictures</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\platform\Environment.cpp">
-      <Filter>platform</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\platform\Platform.cpp">
-      <Filter>platform</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\platform\xbmc.cpp">
-      <Filter>platform</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\playlists\PlayListB4S.cpp">
       <Filter>playlists</Filter>
     </ClCompile>
@@ -2365,15 +2126,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\playlists\SmartPlaylistFileItemListModifier.cpp">
       <Filter>playlists</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\powermanagement\DPMSSupport.cpp">
-      <Filter>powermanagement</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\powermanagement\IPowerSyscall.cpp">
-      <Filter>powermanagement</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\powermanagement\PowerManager.cpp">
-      <Filter>powermanagement</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\programs\GUIViewStatePrograms.cpp">
       <Filter>programs</Filter>
     </ClCompile>
@@ -2382,258 +2134,6 @@
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\rendering\RenderSystem.cpp">
       <Filter>rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\storage\AutorunMediaJob.cpp">
-      <Filter>storage</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\storage\IoSupport.cpp">
-      <Filter>storage</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\storage\MediaManager.cpp">
-      <Filter>storage</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\storage\cdioSupport.cpp">
-      <Filter>storage</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\storage\DetectDVDType.cpp">
-      <Filter>storage</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\threads\Atomics.cpp">
-      <Filter>threads</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\threads\Event.cpp">
-      <Filter>threads</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\threads\Thread.cpp">
-      <Filter>threads</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\threads\Timer.cpp">
-      <Filter>threads</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\threads\SystemClock.cpp">
-      <Filter>threads</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\ActorProtocol.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\AlarmClock.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\AliasShortcutUtils.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Archive.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\auto_buffer.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Base64.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\BitstreamConverter.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\BitstreamReader.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\BitstreamStats.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\BitstreamWriter.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\BooleanLogic.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\CharsetConverter.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\CharsetDetection.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\CPUInfo.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Crc32.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\DatabaseUtils.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\EndianSwap.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\EmbeddedArt.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\FileExtensionProvider.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Fanart.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\FileOperationJob.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\FileUtils.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\fstrcmp.c">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\GroupUtils.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\HTMLUtil.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\HttpHeader.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\HttpParser.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\HttpRangeUtils.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\HttpResponse.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\InfoLoader.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\JobManager.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\JSONVariantParser.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\JSONVariantWriter.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\LabelFormatter.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\LangCodeExpander.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\LegacyPathTranslation.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Locale.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\log.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\md5.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Mime.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Observer.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\POUtils.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\RecentlyAddedJob.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\RegExp.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\rfft.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\RingBuffer.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\RssManager.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\RssReader.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\ProgressJob.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\SaveFileStateJob.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\ScraperParser.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\ScraperUrl.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Screenshot.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\SortUtils.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Speed.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Stopwatch.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\StreamDetails.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\StreamUtils.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\StringUtils.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\StringValidation.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\SysfsUtils.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\SystemInfo.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Temperature.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\TextSearch.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\TimeUtils.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\URIUtils.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\UrlOptions.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Utf8Utils.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Variant.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\VC1BitstreamParser.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Vector.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\XBMCTinyXML.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\XMLUtils.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\XSLTUtils.cpp">
-      <Filter>utils</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\view\GUIViewControl.cpp">
       <Filter>view</Filter>
@@ -2698,9 +2198,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\video\Bookmark.cpp">
       <Filter>video</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\video\ContextMenus.cpp">
-      <Filter>video</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\video\GUIViewStateVideo.cpp">
       <Filter>video</Filter>
     </ClCompile>
@@ -2733,9 +2230,6 @@
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\video\ViewModeSettings.cpp">
       <Filter>video</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\video\dialogs\GUIDialogAudioSubtitleSettings.cpp">
-      <Filter>video\dialogs</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\video\dialogs\GUIDialogFullScreenInfo.cpp">
       <Filter>video\dialogs</Filter>
@@ -2953,9 +2447,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\DVDInputStreamNavigator.cpp">
       <Filter>cores\VideoPlayer\DVDInputStreams</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\DVDInputStreamPVRManager.cpp">
-      <Filter>cores\VideoPlayer\DVDInputStreams</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\DVDInputStreamStack.cpp">
       <Filter>cores\VideoPlayer\DVDInputStreams</Filter>
     </ClCompile>
@@ -3064,39 +2555,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\HwDecRender\DXVAHD.cpp">
       <Filter>cores\VideoPlayer\VideoRenderers\HwDecRender</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\CharsetConverter.cpp">
-      <Filter>platform\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\Environment.cpp">
-      <Filter>platform\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\MessagePrinter.cpp">
-      <Filter>platform\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\dxerr.cpp">
-      <Filter>platform\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\Filesystem.cpp">
-      <Filter>platform\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\pch.cpp">
-      <Filter>platform\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\strverscmp.cpp">
-      <Filter>platform\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\WIN32Util.cpp">
-      <Filter>platform\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\WindowHelper.cpp">
-      <Filter>platform\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\input\IRServerSuite.cpp">
-      <Filter>platform\win32\input</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\input\IrssMessage.cpp">
-      <Filter>platform\win32\input</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\input\touch\ITouchInputHandling.cpp">
       <Filter>input\touch</Filter>
     </ClCompile>
@@ -3115,41 +2573,11 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\input\touch\generic\GenericTouchSwipeDetector.cpp">
       <Filter>input\touch\generic</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\network\windows\NetworkWin32.cpp">
-      <Filter>network\windows</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\network\mdns\ZeroconfBrowserMDNS.cpp">
       <Filter>network\mdns</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\network\mdns\ZeroconfMDNS.cpp">
       <Filter>network\mdns</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\peripherals\bus\win32\PeripheralBusUSB.cpp">
-      <Filter>peripherals\bus\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\powermanagement\windows\Win32PowerSyscall.cpp">
-      <Filter>powermanagement\windows</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\powermanagement\windows\WinIdleTimer.cpp">
-      <Filter>powermanagement\windows</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\storage\windows\Win32StorageProvider.cpp">
-      <Filter>storage\windows</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\win32\Win32Directory.cpp">
-      <Filter>filesystem\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\win32\Win32File.cpp">
-      <Filter>filesystem\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\win32\Win32SMBFile.cpp">
-      <Filter>filesystem\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\win32\Win32SMBDirectory.cpp">
-      <Filter>filesystem\win32</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\utils\win32\Win32InterfaceForCLog.cpp">
-      <Filter>utils\win32</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\rendering\dx\DeviceResources.cpp">
       <Filter>rendering\dx</Filter>
@@ -3159,9 +2587,6 @@
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\rendering\dx\RenderSystemDX.cpp">
       <Filter>rendering\dx</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\threads\platform\win\Win32Exception.cpp">
-      <Filter>threads\platform\win</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\windowing\windows\VideoSyncD3D.cpp">
       <Filter>windowing\windows</Filter>
@@ -3198,87 +2623,6 @@
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\network\dacp\dacp.cpp">
       <Filter>network\dacp</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\AddonCallback.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\AddonClass.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\Addon.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\AddonUtils.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\CallbackFunction.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\CallbackHandler.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\Control.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\Dialog.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\File.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\InfoTagMusic.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\InfoTagRadioRDS.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\InfoTagVideo.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\Keyboard.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\LanguageHook.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\ListItem.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\ModuleXbmc.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\ModuleXbmcgui.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\ModuleXbmcplugin.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\ModuleXbmcvfs.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\Monitor.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\Player.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\PlayList.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\String.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\Window.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\WindowDialog.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\WindowDialogMixin.cpp">
-      <Filter>interfaces\legacy</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\WindowXML.cpp">
-      <Filter>interfaces\legacy</Filter>
     </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\wsgi\WsgiErrorStream.cpp">
       <Filter>interfaces\legacy\wsgi</Filter>
@@ -3370,6 +2714,329 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\network\httprequesthandler\python\HTTPPythonWsgiInvoker.cpp">
       <Filter>network\httprequesthandler\python</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\addons\Addon2.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\addons\AudioDecoder2.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\addons\ContextMenus2.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\addons\DllLibCPluff.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\controls\Progress3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Keyboard2.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Progress2.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\General2.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\ListItem2.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\Window2.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\Network2.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\addons\PVRClientMenuHooks.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\AppInboundProtocol.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\ApplicationEvents.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\commons\Exception.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\commons\ilog.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\CompileInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\AudioEngine\Sinks\AESinkQt.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\audio\AudioTranslator.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\BaseRenderBuffer.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\BaseRenderBufferPool.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\RenderBufferManager.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\video\RenderBufferGuiTexture.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\video\RenderBufferSysMem.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\guibridge\GUIGameSettingsHandle.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\guiplayback\GUIPlaybackControl.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\playback\GameLoop.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\playback\ReversiblePlayback.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\process\qt\RPProcessInfoQt.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\process\RPProcessInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\rendering\RenderUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\Savestate.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateDatabase.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateFlatBuffer.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateReader.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateTranslator.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateWriter.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\memory\BasicMemoryStream.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\memory\DeltaPairMemoryStream.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\memory\LinearMemoryStream.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\RetroPlayerAudio.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\RetroPlayerStreamTypes.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\RetroPlayerVideo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\RPStreamManager.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\DllDvdNav.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\InputStreamPVRBase.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\InputStreamPVRChannel.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\InputStreamPVRRecording.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDSubtitles\DllLibass.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\FrameBufferObject.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\OverlayRendererQt.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\RendererQt.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\VideoFilterShaderQt.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\YUV2RGBShaderQt.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\YUVMatrix.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\dialogs\GUIDialogBusyNoCancel.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\drm\CryptoSession.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\favourites\ContextMenus3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\AndroidAppDirectory.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\AndroidAppFile.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\APKDirectory.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\APKFile.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\BlurayCallback.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\DllLibNfs.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\File2.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNode2.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNodeGroupedMusic.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNodeMusic.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNodeOverviewMusic.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\QueryParamsMusic.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeGroupedVideo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeOverviewVideo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeVideo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\QueryParamsVideo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\fmt\format.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\fmt\ostream.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\fmt\posix.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\games\addons\GameClientInGameSaves.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\games\addons\input\GameClientController.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamAudio.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreams.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamSwFramebuffer.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamVideo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\games\controllers\windows\ControllerInstaller.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\games\dialogs\osd\DialogGameAdvancedSettings.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\games\dialogs\osd\DialogGameOSDHelp.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\games\dialogs\osd\DialogGameStretchMode.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\games\dialogs\osd\DialogGameVideoRotation.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\games\GameSettings2.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\GoTvCoreUtil.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\GoTvUrl.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\GUIComponent.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\GUIFontTTFGL.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\GUIFontTTFQt.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\AddonsGUIInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\GamesGUIInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIControlsGUIInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIInfoBool.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIInfoColor.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIInfoHelper.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIInfoLabel.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIInfoProviders.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\LibraryGUIInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\MusicGUIInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\PicturesGUIInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\PlayerGUIInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\SkinGUIInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\SystemGUIInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\VideoGUIInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\VisualisationGUIInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\guiinfo\WeatherGUIInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\GUITextureGL.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\GUITextureGLES.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\GUITextureQt.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\Shader.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\TextureGL.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\TexturePi.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\TextureQt.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\input\actions\Action.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\input\actions\ActionTranslator.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\AnnouncementManager3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\Addon3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\AddonCallback3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\AddonClass3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\AddonUtil3s.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\CallbackFunction3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\CallbackHandler3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\Control3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\Dialog3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\DrmCryptoSession3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\File3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\InfoTagMusic3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\InfoTagRadioRDS3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\InfoTagVideo3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\Keyboard3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\LanguageHook3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\ListItem3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\ModuleXbmc3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\ModuleXbmcgui3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\ModuleXbmcplugin3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\ModuleXbmcvfs3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\Monitor3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\Player3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\PlayList3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\String3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\Window3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\WindowDialog3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\WindowDialogMixin3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\WindowXML3.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\python\generated\AddonModuleXbmcwsgi.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\music\ContextMenus4.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\music\MusicUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\network\DllLibPlist.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\network\DllLibShairplay.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\peripherals\EventLockHandle.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\Environment.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\Platform.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\CharsetConverterWin32.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\crts_caller.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\dxerr.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\EnvironmentWin32.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\FilesystemWin32.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\filesystem\Win32Directory.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\filesystem\Win32File.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\filesystem\Win32SMBDirectory.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\filesystem\Win32SMBFile.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\input\IRServerSuite.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\input\IrssMessage.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\MessagePrinterWin32.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\network\NetworkWin32.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\pch.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\peripherals\PeripheralBusUSB.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\powermanagement\Win32PowerSyscall.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\powermanagement\WinIdleTimer.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\stat_utf8.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\stdio_utf8.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\storage\Win32StorageProvider.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\strverscmp.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\utils\Win32InterfaceForCLog.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\WIN32Util.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\WindowHelper.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\WinMain.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\win32\WMIInterface.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\platform\xbmc.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\playlists\PlayListXSPF.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\powermanagement\DPMSSupport.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\powermanagement\IPowerSyscall.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\powermanagement\PowerManager.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\profiles\ProfileManager.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\pvr\addons\PVRClients.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\pvr\dialogs\GUIDialogPVRItemsViewBase.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\pvr\PVRGUITimerInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\pvr\PVRGUITimesInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\rendering\gles\GLESShader.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\rendering\gles\RenderSystemGLES.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\rendering\qt\RenderSystemQt.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\ISetting.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\ISettingControl.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\Setting.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingCategoryAccess.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingConditions2.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingDependency.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingRequirement.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingSection.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingsManager.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingUpdate.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\settings\SettingConditions.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\settings\SettingsComponent.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\StaticDll.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\storage\AutorunMediaJob.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\storage\cdioSupport.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\storage\DetectDVDType.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\storage\IoSupport.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\storage\MediaManager.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\swig\AddonModuleXbmc.i.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\swig\AddonModuleXbmcaddon.i.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\swig\AddonModuleXbmcdrm.i.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\swig\AddonModuleXbmcgui.i.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\swig\AddonModuleXbmcplugin.i.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\swig\AddonModuleXbmcvfs.i.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\swig\AddonModuleXbmcwsgi.i.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\threads\Atomics.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\threads\Event.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\threads\platform\win\ThreadImplWin32.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\threads\platform\win\Win32Exception.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\threads\SystemClock.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\threads\Thread.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\threads\Timer.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\ActorProtocol.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\AlarmClock.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\AliasShortcutUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\AMLUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Archive.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\auto_buffer.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Base64.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\BitstreamConverter.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\BitstreamReader.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\BitstreamStats.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\BitstreamWriter.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\BooleanLogic.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\CharsetConverter.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\CharsetDetection.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\ColorUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\CPUInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Crc32.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\CryptThreading.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\DatabaseUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Digest.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\EmbeddedArt.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\EndianSwap.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Fanart.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\FileExtensionProvider.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\FileOperationJob.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\FileUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\fstrcmp.c" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\fstrcmp.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\GLUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\GroupUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\HTMLUtil.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\HttpHeader.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\HttpParser.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\HttpRangeUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\HttpResponse.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\InfoLoader.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\JobManager.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\JSONVariantParser.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\JSONVariantWriter.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\LabelFormatter.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\LangCodeExpander.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\LegacyPathTranslation.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Locale.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\log.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\md5.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Mime.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Observer.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\POUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\ProgressJob.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\RecentlyAddedJob.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\RegExp.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\rfft.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\RingBuffer.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\RssManager.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\RssReader.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\SaveFileStateJob.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\ScraperParser.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\ScraperUrl.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Screenshot.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\ScreenshotAML.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\SortUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Speed.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Stopwatch.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\StreamDetails.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\StreamUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\StringUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\StringValidation.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\SysfsUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\SystemInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Temperature.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\TextSearch.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\TimeUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\URIUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\UrlOptions.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Utf8Utils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Variant.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\VC1BitstreamParser.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Vector.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\XBMCTinyXML.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\XMLUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\utils\XSLTUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\video\ContextMenusVideo.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\video\dialogs\GUIDialogAudioSettings.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\video\dialogs\GUIDialogSubtitleSettings.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\video\tags\VideoTagLoaderPlugin.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\windowing\GraphicContext.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\windowing\qt\OSScreenSaverQt.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\windowing\qt\QtUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\windowing\qt\VideoSyncQt.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\windowing\qt\WinEventsQt.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\windowing\qt\WinSystemQt.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\windowing\qt\WinSystemQtContext.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\windowing\Resolution.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\DataCacheCore.h">
@@ -3395,24 +3062,6 @@
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\AESinkFactory.h">
       <Filter>cores\AudioEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons\ActiveAEDSP.h">
-      <Filter>cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons\ActiveAEDSPAddon.h">
-      <Filter>cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons\ActiveAEDSPDatabase.h">
-      <Filter>cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons\ActiveAEDSPMode.h">
-      <Filter>cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons\ActiveAEDSPProcess.h">
-      <Filter>cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons\AudioDSPSettings.h">
-      <Filter>cores\AudioEngine\Engines\ActiveAE\AudioDSPAddons</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\AudioEngine\Encoders\AEEncoderFFmpeg.h">
       <Filter>cores\AudioEngine\Encoders</Filter>
@@ -3852,9 +3501,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\UPnPFile.h">
       <Filter>filesystem</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNode.h">
-      <Filter>filesystem\VideoDatabaseDirectory</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeEpisodes.h">
       <Filter>filesystem\VideoDatabaseDirectory</Filter>
     </ClInclude>
@@ -3868,9 +3514,6 @@
       <Filter>filesystem\VideoDatabaseDirectory</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeMusicVideosOverview.h">
-      <Filter>filesystem\VideoDatabaseDirectory</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeOverview.h">
       <Filter>filesystem\VideoDatabaseDirectory</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeRecentlyAddedEpisodes.h">
@@ -3898,9 +3541,6 @@
       <Filter>filesystem\VideoDatabaseDirectory</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeTvShowsOverview.h">
-      <Filter>filesystem\VideoDatabaseDirectory</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\QueryParams.h">
       <Filter>filesystem\VideoDatabaseDirectory</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNode.h">
@@ -3963,9 +3603,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNodeYearSong.h">
       <Filter>filesystem\MusicDatabaseDirectory</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\QueryParams.h">
-      <Filter>filesystem\MusicDatabaseDirectory</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\GameServices.h">
       <Filter>games</Filter>
     </ClInclude>
@@ -3984,16 +3621,10 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\GameClientCallbacks.h">
       <Filter>games\addons</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\GameClientInGameSaves.h">
-      <Filter>games\addons</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\GameClientProperties.h">
       <Filter>games\addons</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\GameClientSubsystem.h">
-      <Filter>games\addons</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\GameClientTiming.h">
       <Filter>games\addons</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\GameClientTranslator.h">
@@ -4022,51 +3653,6 @@
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\input\GameClientTopology.h">
       <Filter>games\addons\input</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\playback\GameClientRealtimePlayback.h">
-      <Filter>games\addons\playback</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\playback\GameClientReversiblePlayback.h">
-      <Filter>games\addons\playback</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\playback\GameLoop.h">
-      <Filter>games\addons\playback</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\playback\IGameClientPlayback.h">
-      <Filter>games\addons\playback</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\BasicMemoryStream.h">
-      <Filter>games\addons\savestates</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\DeltaPairMemoryStream.h">
-      <Filter>games\addons\savestates</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\IMemoryStream.h">
-      <Filter>games\addons\savestates</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\LinearMemoryStream.h">
-      <Filter>games\addons\savestates</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\Savestate.h">
-      <Filter>games\addons\savestates</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\SavestateDatabase.h">
-      <Filter>games\addons\savestates</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\SavestateDefines.h">
-      <Filter>games\addons\savestates</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\SavestateReader.h">
-      <Filter>games\addons\savestates</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\SavestateTranslator.h">
-      <Filter>games\addons\savestates</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\SavestateUtils.h">
-      <Filter>games\addons\savestates</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\addons\savestates\SavestateWriter.h">
-      <Filter>games\addons\savestates</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\controllers\Controller.h">
       <Filter>games\controllers</Filter>
@@ -4174,9 +3760,6 @@
       <Filter>games\dialogs\osd</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\dialogs\osd\DialogGameVideoSelect.h">
-      <Filter>games\dialogs\osd</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\dialogs\osd\DialogGameViewMode.h">
       <Filter>games\dialogs\osd</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\games\dialogs\osd\DialogGameVolume.h">
@@ -4632,9 +4215,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\profiles\Profile.h">
       <Filter>profiles</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\profiles\ProfilesManager.h">
-      <Filter>profiles</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\profiles\dialogs\GUIDialogLockSettings.h">
       <Filter>profiles\dialogs</Filter>
     </ClInclude>
@@ -4685,9 +4265,6 @@
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\pvr\PVRGUIProgressHandler.h">
       <Filter>pvr</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\pvr\addons\PVRClients.h">
-      <Filter>pvr\addons</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\pvr\channels\PVRChannel.h">
       <Filter>pvr\channels</Filter>
@@ -4812,9 +4389,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\RetroPlayer.h">
       <Filter>cores\RetroPlayer</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\RetroPlayerAudio.h">
-      <Filter>cores\RetroPlayer</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\RetroPlayerAutoSave.h">
       <Filter>cores\RetroPlayer</Filter>
     </ClInclude>
@@ -4825,9 +4399,6 @@
       <Filter>cores\RetroPlayer</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\RetroPlayerUtils.h">
-      <Filter>cores\RetroPlayer</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\RetroPlayerVideo.h">
       <Filter>cores\RetroPlayer</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\guibridge\GUIGameRenderManager.h">
@@ -4866,37 +4437,10 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\guiwindows\GameWindowFullScreenText.h">
       <Filter>cores\RetroPlayer\guiwindows</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\process\BaseRenderBuffer.h">
-      <Filter>cores\RetroPlayer\process</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\process\BaseRenderBufferPool.h">
-      <Filter>cores\RetroPlayer\process</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\process\IRenderBuffer.h">
-      <Filter>cores\RetroPlayer\process</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\process\IRenderBufferPool.h">
-      <Filter>cores\RetroPlayer\process</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\process\RenderBufferGuiTexture.h">
-      <Filter>cores\RetroPlayer\process</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\process\RenderBufferManager.h">
-      <Filter>cores\RetroPlayer\process</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\process\RenderBufferSysMem.h">
-      <Filter>cores\RetroPlayer\process</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\process\RPProcessInfo.h">
-      <Filter>cores\RetroPlayer\process</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\rendering\IRenderManager.h">
       <Filter>cores\RetroPlayer\rendering</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\rendering\RenderContext.h">
-      <Filter>cores\RetroPlayer\rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\rendering\RenderGeometry.h">
       <Filter>cores\RetroPlayer\rendering</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\RetroPlayer\rendering\RenderSettings.h">
@@ -4971,9 +4515,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\SkinSettings.h">
       <Filter>settings</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\dialogs\GUIDialogAudioDSPManager.h">
-      <Filter>settings\dialogs</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\dialogs\GUIDialogContentSettings.h">
       <Filter>settings\dialogs</Filter>
     </ClInclude>
@@ -4988,60 +4529,6 @@
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\dialogs\GUIDialogSettingsManualBase.h">
       <Filter>settings\dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\ISetting.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\ISettingCallback.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\ISettingControl.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\ISettingControlCreator.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\ISettingCreator.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\ISettingsHandler.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\ISubSettings.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\Setting.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingCategoryAccess.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingConditions.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingDefinitions.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingDependency.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingLevel.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingRequirement.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingSection.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingsManager.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingType.h">
-      <Filter>settings\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\lib\SettingUpdate.h">
-      <Filter>settings\lib</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\windows\GUIControlSettings.h">
       <Filter>settings\windows</Filter>
@@ -5064,7 +4551,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\ApplicationStackHelper.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\AutoSwitch.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\BackgroundInfoLoader.h" />
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\CompileInfo.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\ContextMenuItem.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\ContextMenuManager.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\ContextMenus.h" />
@@ -5098,11 +4584,8 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\TextureCacheJob.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\TextureDatabase.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\ThumbLoader.h" />
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\URL.h" />
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\Util.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\XBApplicationEx.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\XBDateTime.h" />
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\system.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\system_gl.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\Autorun.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\addons\Addon.h">
@@ -5247,9 +4730,6 @@
       <Filter>addons\binary-addons</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\AddonInterfaces.h">
-      <Filter>addons\interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\AudioEngine.h">
       <Filter>addons\interfaces</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\General.h">
@@ -5531,15 +5011,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\addons\settings\SettingUrlEncodedString.h">
       <Filter>addons\settings</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\commons\Buffer.h">
-      <Filter>commons</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\commons\Exception.h">
-      <Filter>commons</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\commons\ilog.h">
-      <Filter>commons</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\dbwrappers\Database.h">
       <Filter>dbwrappers</Filter>
     </ClInclude>
@@ -5675,9 +5146,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\FFmpegImage.h">
       <Filter>guilib</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\GraphicContext.h">
-      <Filter>guilib</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\gui3d.h">
       <Filter>guilib</Filter>
     </ClInclude>
@@ -5748,9 +5216,6 @@
       <Filter>guilib</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\GUIIncludes.h">
-      <Filter>guilib</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\GUIInfoTypes.h">
       <Filter>guilib</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\GUIKeyboard.h">
@@ -5882,9 +5347,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\LocalizeStrings.h">
       <Filter>guilib</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\Resolution.h">
-      <Filter>guilib</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\guilib\StereoscopicsManager.h">
       <Filter>guilib</Filter>
     </ClInclude>
@@ -5944,15 +5406,6 @@
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\input\remote\IRRemote.h">
       <Filter>input\remote</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\input\Action.h">
-      <Filter>input</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\input\ActionIDs.h">
-      <Filter>input</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\input\ActionTranslator.h">
-      <Filter>input</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\input\AppTranslator.h">
       <Filter>input</Filter>
@@ -6239,21 +5692,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\pictures\SlideShowPicture.h">
       <Filter>pictures</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\Environment.h">
-      <Filter>platform</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\Filesystem.h">
-      <Filter>platform</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\MessagePrinter.h">
-      <Filter>platform</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\Platform.h">
-      <Filter>platform</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\xbmc.h">
-      <Filter>platform</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\playlists\PlayList.h">
       <Filter>playlists</Filter>
     </ClInclude>
@@ -6284,18 +5722,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\playlists\SmartPlaylistFileItemListModifier.h">
       <Filter>playlists</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\powermanagement\DPMSSupport.h">
-      <Filter>powermanagement</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\powermanagement\IPowerSyscall.h">
-      <Filter>powermanagement</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\powermanagement\PowerManager.h">
-      <Filter>powermanagement</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\powermanagement\WinIdleTimer.h">
-      <Filter>powermanagement</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\programs\GUIViewStatePrograms.h">
       <Filter>programs</Filter>
     </ClInclude>
@@ -6307,324 +5733,6 @@
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\rendering\RenderSystemTypes.h">
       <Filter>rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\storage\AutorunMediaJob.h">
-      <Filter>storage</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\storage\IoSupport.h">
-      <Filter>storage</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\storage\IStorageProvider.h">
-      <Filter>storage</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\storage\MediaManager.h">
-      <Filter>storage</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\storage\cdioSupport.h">
-      <Filter>storage</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\storage\DetectDVDType.h">
-      <Filter>storage</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\threads\Atomics.h">
-      <Filter>threads</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\threads\Condition.h">
-      <Filter>threads</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\threads\CriticalSection.h">
-      <Filter>threads</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\threads\Event.h">
-      <Filter>threads</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\threads\Helpers.h">
-      <Filter>threads</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\threads\Lockables.h">
-      <Filter>threads</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\threads\SharedSection.h">
-      <Filter>threads</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\threads\SingleLock.h">
-      <Filter>threads</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\threads\SystemClock.h">
-      <Filter>threads</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\threads\Thread.h">
-      <Filter>threads</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\threads\ThreadImpl.h">
-      <Filter>threads</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\threads\Timer.h">
-      <Filter>threads</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\threads\platform\ThreadImpl.h">
-      <Filter>threads\platform</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\ActorProtocol.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\AlarmClock.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\AliasShortcutUtils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Archive.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\auto_buffer.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Base64.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\BitstreamConverter.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\BitstreamReader.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\BitstreamStats.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\BitstreamWriter.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\BooleanLogic.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\CharsetConverter.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\CharsetDetection.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\CPUInfo.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Crc32.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\DatabaseUtils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\EndianSwap.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\EventStream.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\EventStreamDetail.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\FileExtensionProvider.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Fanart.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\FileOperationJob.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\FileUtils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\fstrcmp.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Geometry.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\GlobalsHandling.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\GroupUtils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\HTMLUtil.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\HttpHeader.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\HttpParser.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\HttpRangeUtils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\HttpResponse.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\IArchivable.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\ILocalizer.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\InfoLoader.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\IRssObserver.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\ISerializable.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\ISortable.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\IXmlDeserializable.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Job.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\JobManager.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\JSONVariantParser.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\JSONVariantWriter.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\LabelFormatter.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\LangCodeExpander.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\LegacyPathTranslation.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Locale.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\log.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\MathUtils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\md5.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Mime.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Observer.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\params_check_macros.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\POUtils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\ProgressJob.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\RecentlyAddedJob.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\RegExp.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\rfft.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\RingBuffer.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\RssManager.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\RssReader.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\SaveFileStateJob.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\ScopeGuard.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\ScraperParser.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\ScraperUrl.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Screenshot.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\SortUtils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Speed.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Stopwatch.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\StreamDetails.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\StreamUtils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\StringUtils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\StringValidation.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\SysfsUtils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\SystemInfo.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Temperature.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\TextSearch.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\TimeUtils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\URIUtils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\UrlOptions.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Utf8Utils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Variant.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\VC1BitstreamParser.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\Vector.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\XBMCTinyXML.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\XMLUtils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\XSLTUtils.h">
-      <Filter>utils</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\view\GUIViewControl.h">
       <Filter>view</Filter>
@@ -6742,9 +5850,6 @@
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\video\ViewModeSettings.h">
       <Filter>video</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\video\dialogs\GUIDialogAudioSubtitleSettings.h">
-      <Filter>video\dialogs</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\video\dialogs\GUIDialogFullScreenInfo.h">
       <Filter>video\dialogs</Filter>
@@ -7007,9 +6112,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\DVDInputStreamNavigator.h">
       <Filter>cores\VideoPlayer\DVDInputStreams</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\DVDInputStreamPVRManager.h">
-      <Filter>cores\VideoPlayer\DVDInputStreams</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\DVDInputStreamStack.h">
       <Filter>cores\VideoPlayer\DVDInputStreams</Filter>
     </ClInclude>
@@ -7139,51 +6241,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\HwDecRender\DXVAHD.h">
       <Filter>cores\VideoPlayer\VideoRenderers\HwDecRender</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\CharsetConverter.h">
-      <Filter>platform\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\dirent.h">
-      <Filter>platform\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\dxerr.h">
-      <Filter>platform\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\IMMNotificationClient.h">
-      <Filter>platform\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\my_ntddcdrm.h">
-      <Filter>platform\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\my_ntddscsi.h">
-      <Filter>platform\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\netdb.h">
-      <Filter>platform\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\pch.h">
-      <Filter>platform\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\PlatformDefs.h">
-      <Filter>platform\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\resource.h">
-      <Filter>platform\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\unistd.h">
-      <Filter>platform\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\WIN32Util.h">
-      <Filter>platform\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\WindowHelper.h">
-      <Filter>platform\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\input\IRServerSuite.h">
-      <Filter>platform\win32\input</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\platform\win32\input\IrssMessage.h">
-      <Filter>platform\win32\input</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\input\touch\ITouchActionHandler.h">
       <Filter>input\touch</Filter>
     </ClInclude>
@@ -7214,44 +6271,11 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\input\touch\generic\IGenericTouchGestureDetector.h">
       <Filter>input\touch\generic</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\network\windows\NetworkWin32.h">
-      <Filter>network\windows</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\network\mdns\ZeroconfBrowserMDNS.h">
       <Filter>network\mdns</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\network\mdns\ZeroconfMDNS.h">
       <Filter>network\mdns</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\peripherals\bus\win32\PeripheralBusUSB.h">
-      <Filter>peripherals\bus\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\powermanagement\windows\Win32PowerSyscall.h">
-      <Filter>powermanagement\windows</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\storage\windows\Win32StorageProvider.h">
-      <Filter>storage\windows</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\win32\Win32Directory.h">
-      <Filter>filesystem\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\win32\Win32File.h">
-      <Filter>filesystem\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\win32\Win32SMBFile.h">
-      <Filter>filesystem\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\win32\Win32SMBDirectory.h">
-      <Filter>filesystem\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\win32\gpu_memcpy_sse4.h">
-      <Filter>utils\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\win32\memcpy_sse2.h">
-      <Filter>utils\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\utils\win32\Win32InterfaceForCLog.h">
-      <Filter>utils\win32</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\rendering\dx\DeviceResources.h">
       <Filter>rendering\dx</Filter>
@@ -7267,12 +6291,6 @@
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\rendering\dx\RenderSystemDX.h">
       <Filter>rendering\dx</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\threads\platform\win\ThreadImpl.h">
-      <Filter>threads\platform\win</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\threads\platform\win\Win32Exception.h">
-      <Filter>threads\platform\win</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\windowing\windows\VideoSyncD3D.h">
       <Filter>windowing\windows</Filter>
@@ -7353,9 +6371,6 @@
       <Filter>interfaces\legacy</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\Exception.h">
-      <Filter>interfaces\legacy</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\File.h">
       <Filter>interfaces\legacy</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\interfaces\legacy\InfoTagMusic.h">
@@ -7529,14 +6544,342 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\network\httprequesthandler\python\HTTPPythonWsgiInvoker.h">
       <Filter>network\httprequesthandler\python</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="$(ProjectDir)..\..\xbmc\CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="$(ProjectDir)..\..\compileinfo.dir\$(Configuration)\CompileInfo.obj">
-      <Filter>Object Libraries</Filter>
-    </Object>
+    <ClInclude Include="..\..\xbmc\xbmc\addons\PVRClientMenuHooks.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\AppInboundProtocol.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\commons\Buffer.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\commons\Exception.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\commons\ilog.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\CompileInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\AudioEngine\Sinks\AESinkQt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\audio\AudioTranslator.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\BaseRenderBuffer.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\BaseRenderBufferPool.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\IRenderBuffer.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\IRenderBufferPool.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\RenderBufferManager.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\video\RenderBufferGuiTexture.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\video\RenderBufferSysMem.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\guibridge\GUIGameSettingsHandle.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\guibridge\IGameCallback.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\guiplayback\GUIPlaybackControl.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\playback\GameLoop.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\playback\IPlayback.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\playback\IPlaybackControl.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\playback\RealtimePlayback.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\playback\ReversiblePlayback.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\process\qt\RPProcessInfoQt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\process\RPProcessInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\rendering\RenderUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\ISavestate.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\Savestate.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateDatabase.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateDefines.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateFlatBuffer.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateReader.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateTranslator.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateTypes.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateWriter.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\IRetroPlayerStream.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\IStreamManager.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\memory\BasicMemoryStream.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\memory\DeltaPairMemoryStream.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\memory\IMemoryStream.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\memory\LinearMemoryStream.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\RetroPlayerAudio.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\RetroPlayerStreamTypes.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\RetroPlayerVideo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\RPStreamManager.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\InputStreamPVRBase.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\InputStreamPVRChannel.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\InputStreamPVRRecording.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\FrameBufferObject.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\OverlayRendererQt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\RendererQt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\VideoFilterShaderQt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\YUV2RGBShaderQt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\YUVMatrix.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\dialogs\GUIDialogBusyNoCancel.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\drm\CryptoSession.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\filesystem\AndroidAppDirectory.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\filesystem\AndroidAppFile.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\filesystem\APKDirectory.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\filesystem\APKFile.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\filesystem\AudioBookFileDirectory.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\filesystem\BlurayCallback.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\DirectoryNodeMusic.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\filesystem\MusicDatabaseDirectory\QueryParamsMusic.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\filesystem\SMBDirectory.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\filesystem\SMBFile.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeOverviewVideo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\DirectoryNodeVideo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\filesystem\VideoDatabaseDirectory\QueryParamsVideo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\filesystem\VideoDatabaseFile.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\fmt\format.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\fmt\locale.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\fmt\ostream.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\fmt\posix.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\fmt\time.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\games\addons\GameClientInGameSaves.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\games\addons\input\GameClientController.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamAudio.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreams.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamSwFramebuffer.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamVideo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\games\addons\streams\IGameClientStream.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\games\controllers\windows\ControllerInstaller.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\games\dialogs\osd\DialogGameAdvancedSettings.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\games\dialogs\osd\DialogGameOSDHelp.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\games\dialogs\osd\DialogGameStretchMode.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\games\dialogs\osd\DialogGameVideoRotation.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\GoTvCoreUtil.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\GoTvUrl.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\GUIComponent.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\GUIFontTTFGL.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\GUIFontTTFQt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\AddonsGUIInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\GamesGUIInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIControlsGUIInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIInfoBool.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIInfoColor.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIInfoHelper.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIInfoLabel.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIInfoLabels.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIInfoProvider.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\GUIInfoProviders.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\IGUIInfoProvider.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\LibraryGUIInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\MusicGUIInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\PicturesGUIInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\PlayerGUIInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\SkinGUIInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\SystemGUIInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\VideoGUIInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\VisualisationGUIInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\guiinfo\WeatherGUIInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\GUITextureGL.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\GUITextureGLES.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\GUITextureQt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\Shader.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\TextureFormats.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\TextureGL.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\TexturePi.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\TextureQt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\input\actions\Action.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\input\actions\ActionIDs.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\input\actions\ActionTranslator.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\interfaces\legacy\DrmCryptoSession.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\interfaces\legacy\File.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\music\MusicUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\peripherals\EventLockHandle.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\peripherals\IEventScannerCallback.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\Environment.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\Filesystem.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\MessagePrinter.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\Platform.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\CharsetConverter.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\crts_caller.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\dirent.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\dxerr.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\filesystem\Win32Directory.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\filesystem\Win32File.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\filesystem\Win32SMBDirectory.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\filesystem\Win32SMBFile.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\IMMNotificationClient.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\input\IRServerSuite.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\input\IrssMessage.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\my_ntddcdrm.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\my_ntddscsi.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\netdb.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\network\NetworkWin32.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\pch.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\peripherals\PeripheralBusUSB.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\PlatformDefs.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\PlatformInclude.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\powermanagement\Win32PowerSyscall.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\resource.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\stat_utf8.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\stdio_utf8.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\storage\Win32StorageProvider.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\unistd.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\utils\gpu_memcpy_sse4.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\utils\memcpy_sse2.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\utils\Win32InterfaceForCLog.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\WIN32Util.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\WindowHelper.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\win32\WMIInterface.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\platform\xbmc.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\playlists\PlayListXSPF.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\powermanagement\DPMSSupport.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\powermanagement\IPowerSyscall.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\powermanagement\PowerManager.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\powermanagement\WinIdleTimer.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\profiles\ProfileManager.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\pvr\addons\PVRClients.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\pvr\dialogs\GUIDialogPVRItemsViewBase.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\pvr\PVRGUITimerInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\pvr\PVRGUITimesInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\rendering\gles\GLESShader.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\rendering\gles\RenderSystemGLES.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\rendering\qt\RenderSystemQt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\ServiceDescription.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISetting.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingCallback.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingControl.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingControlCreator.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingCreator.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingsHandler.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISubSettings.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\Setting.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingCategoryAccess.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingConditions.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingDefinitions.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingDependency.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingLevel.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingRequirement.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingSection.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingsManager.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingType.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingUpdate.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\settings\SettingsComponent.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\StaticDll.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\storage\AutorunMediaJob.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\storage\cdioSupport.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\storage\DetectDVDType.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\storage\IoSupport.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\storage\IStorageProvider.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\storage\MediaManager.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\Atomics.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\Condition.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\CriticalSection.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\Event.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\Helpers.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\IRunnable.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\Lockables.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\MipsAtomics.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\platform\win\ThreadImpl.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\platform\win\ThreadImplWin32.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\platform\win\Win32Exception.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\SharedSection.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\SingleLock.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\SystemClock.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\Thread.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\ThreadImpl.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\threads\Timer.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\ActorProtocol.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\AlarmClock.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\AliasShortcutUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\AMLUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Archive.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\auto_buffer.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Base64.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\BitstreamConverter.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\BitstreamReader.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\BitstreamStats.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\BitstreamWriter.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\BooleanLogic.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\CharsetConverter.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\CharsetDetection.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Color.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\ColorUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\CPUInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Crc32.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\CryptThreading.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\DatabaseUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Digest.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\EmbeddedArt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\endianswap.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\EventStream.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\EventStreamDetail.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Fanart.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\FileExtensionProvider.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\FileOperationJob.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\FileUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\fstrcmp.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Geometry.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\GlobalsHandling.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\GLUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\GroupUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\HTMLUtil.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\HttpHeader.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\HttpParser.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\HttpRangeUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\HttpResponse.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\IArchivable.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\ILocalizer.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\InfoLoader.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\IRssObserver.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\ISerializable.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\ISortable.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\IXmlDeserializable.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Job.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\JobManager.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\JSONVariantParser.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\JSONVariantWriter.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\LabelFormatter.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\LangCodeExpander.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\LegacyPathTranslation.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Literals.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Locale.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\log.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\MathUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\md5.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Mime.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Observer.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\params_check_macros.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\POUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\ProgressJob.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Random.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\RecentlyAddedJob.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\RegExp.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\rfft.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\RingBuffer.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\RssManager.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\RssReader.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\SaveFileStateJob.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\ScopeGuard.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\ScraperParser.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\ScraperUrl.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Screenshot.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\ScreenshotAML.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\sha1.hpp" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\SortUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Speed.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Stopwatch.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\StreamDetails.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\StreamUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\StringUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\StringValidation.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\SysfsUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\SystemInfo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Temperature.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\TextSearch.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\TimeUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\TransformMatrix.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\URIUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\UrlOptions.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Utf8Utils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\uXstrings.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Variant.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\VC1BitstreamParser.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Vector.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\XBMCTinyXML.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\XMLUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\utils\XSLTUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\video\ContextMenusVideo.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\video\dialogs\GUIDialogAudioSettings.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\video\dialogs\GUIDialogSubtitleSettings.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\video\tags\VideoTagLoaderPlugin.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\windowing\GraphicContext.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\windowing\qt\OSScreenSaverQt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\windowing\qt\QtUtils.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\windowing\qt\VideoSyncQt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\windowing\qt\WinEventsQt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\windowing\qt\WinKeyMapQt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\windowing\qt\WinSystemQt.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\windowing\qt\WinSystemQtContext.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\windowing\Resolution.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="cores\AudioEngine\Encoders">
@@ -8082,5 +7425,32 @@
     <Filter Include="Object Libraries">
       <UniqueIdentifier>{2611B0E0-C7E2-3CC5-A966-AE05C1D79DDA}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\xbmc\xbmc\swig\AddonModuleXbmc.i.xml" />
+    <Xml Include="..\..\xbmc\xbmc\swig\AddonModuleXbmcaddon.i.xml" />
+    <Xml Include="..\..\xbmc\xbmc\swig\AddonModuleXbmcdrm.i.xml" />
+    <Xml Include="..\..\xbmc\xbmc\swig\AddonModuleXbmcgui.i.xml" />
+    <Xml Include="..\..\xbmc\xbmc\swig\AddonModuleXbmcplugin.i.xml" />
+    <Xml Include="..\..\xbmc\xbmc\swig\AddonModuleXbmcvfs.i.xml" />
+    <Xml Include="..\..\xbmc\xbmc\swig\AddonModuleXbmcwsgi.i.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\xbmc\xbmc\addons\AddonBindings.cmake" />
+    <None Include="..\..\xbmc\xbmc\guilib\GUIButtonControl.dox" />
+    <None Include="..\..\xbmc\xbmc\guilib\GUIControlGroup.dox" />
+    <None Include="..\..\xbmc\xbmc\guilib\GUIFadeLabelControl.dox" />
+    <None Include="..\..\xbmc\xbmc\guilib\GUIMultiImage.dox" />
+    <None Include="..\..\xbmc\xbmc\guilib\GUISpinControlEx.dox" />
+    <None Include="..\..\xbmc\xbmc\guilib\GUIVideoControl.dox" />
+    <None Include="..\..\xbmc\xbmc\interfaces\python\MethodType.groovy" />
+    <None Include="..\..\xbmc\xbmc\interfaces\python\PythonSwig.cpp.template" />
+    <None Include="..\..\xbmc\xbmc\interfaces\python\PythonTools.groovy" />
+    <None Include="..\..\xbmc\xbmc\powermanagement\Makefile" />
+    <None Include="..\..\xbmc\xbmc\storage\Makefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\xbmc\xbmc\addons\interfaces\GUI\CMakeLists.txt" />
+    <Text Include="..\..\xbmc\xbmc\interfaces\legacy\CMakeLists.txt" />
   </ItemGroup>
 </Project>

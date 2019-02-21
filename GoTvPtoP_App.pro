@@ -125,7 +125,7 @@ unix:!android:{
 
 android:{
 #    LIBS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_LIB_SUFFIX}
-    LIBS +=  -ldl -lm -landroid -lEGL -lGLESv2  -lc -lstdc++ -llog
+    LIBS +=  -ldl -lm -landroid -lEGL -lGLESv2  -lc -lstdc++ -llog -ljnigraphics
 }
 
 
@@ -137,7 +137,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_EXTRA_LIBS = \
         $$PWD/../android/ndk-windows-x86-64/android-ndk-r19/platforms/android-21/arch-arm/usr/lib/libGLESv2.so \
-        $${SHARED_LIB_PREFIX}pythoncore$${SHARED_LIB_SUFFIX}
+        $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
 
 
     ANDROID_PACKAGE_SOURCE_DIR = \

@@ -11,7 +11,11 @@
 #include "AndroidFeatures.h"
 
 #include <cpu-features.h>
-#include <platform/android/jni/JNIThreading.h>
+#if defined(HAVE_QT_GUI)
+# include <platform/qt/qtandroid/jni/JNIThreading.h>
+#else
+# include <platform/android/jni/JNIThreading.h>
+#endif // defined(HAVE_QT_GUI)
 
 #include "utils/log.h"
 

@@ -643,10 +643,10 @@ void CXBMCApp::UpdateSessionState()
 //      .setActions(0xffffffffffffffff)
 //      ;
 //  m_mediaSession->updatePlaybackState(builder.build());
-//}
+}
 
-//void CXBMCApp::OnPlayBackStarted()
-//{
+void CXBMCApp::OnPlayBackStarted()
+{
 //  CLog::Log(LOGDEBUG, "%s", __PRETTY_FUNCTION__);
 
 //  m_playback_state = PLAYBACK_STATE_PLAYING;

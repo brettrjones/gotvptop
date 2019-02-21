@@ -643,13 +643,13 @@ void RenderGlWidget::initTextures()
     {
         m_GlF->glBindTexture( m_TexDescriptor.m_Target, m_TextureIds[ i ] );
 
-#ifndef GL_UNPACK_ROW_LENGTH
+#if !defined(GL_UNPACK_ROW_LENGTH) && !defined(GL_UNPACK_ROW_LENGTH_EXT)
 #define ALIGN(x, y) (((x) + ((y) - 1)) & ~((y) - 1))
         int dst_pitch = ALIGN( m_Frame->m_VisiblePitch[ i ], 4 );
         char *new_plane = ( char * )malloc( dst_pitch * m_Frame->m_VisibleLines[ i ] );
-        const char *source = &m_Frame->m_PlanesData[ i ][ 0 ];
+        const char *source = &m_Frame->m_PlaneData[ i ][ 0 ];
         char *destination = new_plane;
-        for( int y = 0; y < m_Frame->visibleLines[ i ]; y++ ) {
+        for( int y = 0; y < m_Frame->m_VisibleLines[ i ]; y++ ) {
             memcpy( destination, source, m_Frame->m_VisiblePitch[ i ] );
             source += m_Frame->pitch[ i ];
             destination += dst_pitch;
@@ -664,7 +664,12 @@ void RenderGlWidget::initTextures()
                                 new_plane );
         free( new_plane );
 #else
+# if defined(GL_UNPACK_ROW_LENGTH)
         m_GlF->glPixelStorei( GL_UNPACK_ROW_LENGTH, m_Frame->m_Pitch[ i ] );
+# else
+        m_GlF->glPixelStorei( GL_UNPACK_ROW_LENGTH_EXT, m_Frame->m_Pitch[ i ] );
+# endif // defined(GL_UNPACK_ROW_LENGTH)
+
         m_GlF->glTexSubImage2D( m_TexDescriptor.m_Target, 0,
                                 0, 0,
                                 m_Frame->m_VisiblePitch[ i ],
@@ -672,7 +677,11 @@ void RenderGlWidget::initTextures()
                                 m_TexDescriptor.m_Format,
                                 m_TexDescriptor.m_Type,
                                 &m_Frame->m_PlaneData[ i ][ 0 ] );
+# if defined(GL_UNPACK_ROW_LENGTH)
         m_GlF->glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 ); // reset to default
+# else
+        m_GlF->glPixelStorei( GL_UNPACK_ROW_LENGTH_EXT, 0 ); // reset to default
+# endif // defined(GL_UNPACK_ROW_LENGTH)
 #endif
     }
 }

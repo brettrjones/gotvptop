@@ -10,7 +10,7 @@
 
 #include "config_kodi.h"
 
-#ifdef TARGET_OS_LINUX
+#if defined(TARGET_OS_LINUX) || defined(TARGET_OS_ANDROID)
 
 #ifndef _LARGEFILE64_SOURCE
 #define _LARGEFILE64_SOURCE
@@ -49,6 +49,11 @@
 #include <sys/time.h>
 #include <time.h>
 #endif
+
+typedef __int64       off64_t;
+typedef __int64       fpos64_t;
+typedef __int64       __off64_t;
+typedef long          __off_t;
 
 #if defined(__ppc__) || defined(__powerpc__)
 #define PIXEL_ASHIFT 0

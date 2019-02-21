@@ -36,6 +36,7 @@ unix:!android{
 }
 
 android{
+    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/android
     INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/linux
     INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/posix
     INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
@@ -1594,7 +1595,10 @@ HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/VideoDatabaseDirectory/QueryParamsVideo.h \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/VideoDatabaseDirectory/DirectoryNodeOverviewVideo.h \
     $$PWD/GoTvCore/xbmc/xbmc/cores/DllLoader/SoLoader.h \
-    $$PWD/GoTvCore/xbmc/xbmc/interfaces/builtins/AndroidBuiltins.h
+    $$PWD/GoTvCore/xbmc/xbmc/interfaces/builtins/AndroidBuiltins.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/PeripheralBusAndroid.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/activity/AndroidFeatures.h
 
 SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/Application.cpp \
@@ -2821,7 +2825,10 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/ApplicationInfo.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/interfaces/builtins/AndroidBuiltins.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/PackageItemInfo.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/utils/StringUtils2.cpp
+    $$PWD/GoTvCore/xbmc/xbmc/utils/StringUtils2.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/PeripheralBusAndroid.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/activity/AndroidFeatures.cpp
 
 win32{
     SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/platform/win32/CharsetConverterWin32.cpp \

@@ -112,7 +112,7 @@ void CPeripherals::Initialise()
   busses.push_back(std::make_shared<CPeripheralBusCEC>(*this));
 #endif
   busses.push_back(std::make_shared<CPeripheralBusAddon>(*this));
-#if defined(TARGET_ANDROID)
+#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
   busses.push_back(std::make_shared<CPeripheralBusAndroid>(*this));
 #endif
   busses.push_back(std::make_shared<CPeripheralBusApplication>(*this));

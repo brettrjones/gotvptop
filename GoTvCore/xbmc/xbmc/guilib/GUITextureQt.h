@@ -25,7 +25,7 @@
 #include <vector>
 #include "utils/Color.h"
 
-#if !defined(HAS_GLES) // gles defines PackedVertex
+#if !defined(HAS_GLES) || defined(HAVE_QT_GUI) // gles defines PackedVertex
 struct PackedVertex
 {
     float x, y, z;

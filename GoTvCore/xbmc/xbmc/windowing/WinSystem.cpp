@@ -35,7 +35,7 @@ bool CWinSystemBase::InitWindowSystem()
 
 bool CWinSystemBase::DestroyWindowSystem()
 {
-#if HAS_GLES
+#if HAS_GLES && !defined(HAVE_QT_GUI)
   CGUIFontTTFGL::DestroyStaticVertexBuffers();
 #endif
   m_screenSaverManager.reset();
