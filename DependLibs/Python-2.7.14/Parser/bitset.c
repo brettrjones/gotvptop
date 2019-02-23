@@ -8,7 +8,7 @@ bitset
 newbitset(int nbits)
 {
     int nbytes = NBYTES(nbits);
-    bitset ss = (char *)PyObject_MALLOC(sizeof(BYTE) *  nbytes);
+    bitset ss = (char *)PyObject_MALLOC(sizeof(BYTE_PYTHON) *  nbytes);
 
     if (ss == NULL)
         Py_FatalError("no mem for bitset");
@@ -29,7 +29,7 @@ int
 addbit(bitset ss, int ibit)
 {
     int ibyte = BIT2BYTE(ibit);
-    BYTE mask = BIT2MASK(ibit);
+    BYTE_PYTHON mask = BIT2MASK(ibit);
 
     if (ss[ibyte] & mask)
         return 0; /* Bit already set */

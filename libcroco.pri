@@ -24,7 +24,6 @@ HEADERS += 	$$PWD/DependLibs/libcroco/cr-additional-sel.h \
     $$PWD/DependLibs/libcroco/cr-tknzr.h \
     $$PWD/DependLibs/libcroco/cr-token.h \
     $$PWD/DependLibs/libcroco/cr-utils.h \
-    $$PWD/DependLibs/libcroco/guid.h \
     $$PWD/DependLibs/libcroco/libcroco-config.h \
     $$PWD/DependLibs/libcroco/libcroco.h
 

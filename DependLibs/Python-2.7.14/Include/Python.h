@@ -40,7 +40,7 @@
 #include <errno.h>
 #endif
 #include <stdlib.h>
-#ifdef HAVE_UNISTD_H
+#if defined(HAVE_UNISTD_H) && !defined(TARGET_OS_LINUX)
 #include <unistd.h>
 #endif
 

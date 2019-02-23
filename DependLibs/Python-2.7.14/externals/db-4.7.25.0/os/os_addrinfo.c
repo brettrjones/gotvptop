@@ -9,6 +9,7 @@
 #include "db_config.h"
 
 #define	__INCLUDE_NETWORKING	1
+
 #include "db_int.h"
 
 /*

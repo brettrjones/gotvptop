@@ -203,14 +203,6 @@ echo unknown processor types are not supported
 #define HAVE_BIGENDIAN					GOTV_ARCH_BIG_ENDIAN
 #define GOTV_ARCH_BIGENDIAN				GOTV_ARCH_BIG_ENDIAN
 
-#if !ARCH_64_BITS && !ARCH_32_BITS
-// default to 64 bits if none defined
-# define ARCH_32_BITS 0
-# define ARCH_64_BITS 1
-#endif // !defined(ARCH_64_BITS) && !defined(ARCH_32_BITS)
-
-
-
 #if !ARCH_X86 && !ARCH_ARM
 # define HAVE_BIGENDIAN		1
 echo GoTv CPU Arch Defines error no cpu target defined
@@ -245,7 +237,17 @@ echo GoTv CPU Arch Defines error no cpu target defined
 //============================================================================
 //============================================================================
 //=== cpu features ===//
-#ifdef TARGET_CPU_X86
+#if defined(TARGET_CPU_X86) || defined(TARGET_CPU_X86_64)
+
+# if defined(TARGET_CPU_X86)
+#  define ARCH_32_BITS 1
+#  define ARCH_64_BITS 0
+# else
+// less work to define TARGET_CPU_X86 also and then check for TARGET_CPU_X86_64 if needed
+#  define TARGET_CPU_X86 1
+#  define ARCH_32_BITS 0
+#  define ARCH_64_BITS 1
+# endif // defined(TARGET_CPU_X86)
 
 // ONLY INTEL HAS AVX ?
 # define HAVE_AVX 1
@@ -255,20 +257,20 @@ echo GoTv CPU Arch Defines error no cpu target defined
 ///* Define if binary requires SSE2 intrinsics support */
 //# define  OPUS_X86_PRESUME_SSE2	1
 
-#define HAVE_I686					1
-//#define HAVE_AMD3DNOW				1
-//#define HAVE_AMD3DNOWEXT			1
-//#define HAVE_MMX					1
-#define HAVE_MMX					1
-#define HAVE_MMXEXT				    1
-#define HAVE_SSE					1
-#define HAVE_SSE2					1
-//#define HAVE_SSE3					1
-//#define HAVE_SSE4					1
-//#define HAVE_SSE42				1
-//#define HAVE_SSSE3				1
-//#define HAVE_XOP					1
-//#define HAVE_CPUNOP				1
+# define HAVE_I686					1
+//# define HAVE_AMD3DNOW				1
+//# define HAVE_AMD3DNOWEXT			1
+//# define HAVE_MMX					1
+# define HAVE_MMX					1
+# define HAVE_MMXEXT				    1
+# define HAVE_SSE					1
+# define HAVE_SSE2					1
+//# define HAVE_SSE3					1
+//# define HAVE_SSE4					1
+//# define HAVE_SSE42				1
+//# define HAVE_SSSE3				1
+//# define HAVE_XOP					1
+//# define HAVE_CPUNOP				1
 
 //==== arm architectures ===//
 #elif ARCH_ARM
@@ -325,6 +327,11 @@ echo GoTv CPU Config error no cpu arc defined.. unknown processors not supported
 
 #endif // CPU FEATURES
 
+#if !ARCH_64_BITS && !ARCH_32_BITS
+// default to 64 bits if none defined
+# define ARCH_32_BITS 0
+# define ARCH_64_BITS 1
+#endif // !defined(ARCH_64_BITS) && !defined(ARCH_32_BITS)
 
 #if HAVE_SSE && !defined(__SSE__)
 /* Enable SSE functions, if compiled with SSE/SSE2 (All intel/AMD x86 cpus since 2003) */

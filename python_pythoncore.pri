@@ -121,7 +121,6 @@ HEADERS += 	$$PWD/DependLibs/Python-2.7.14/Include/Python-ast.h \
     $$PWD/DependLibs/Python-2.7.14/Objects/stringlib/split.h \
     $$PWD/DependLibs/Python-2.7.14/Objects/unicodetype_db.h \
     $$PWD/DependLibs/Python-2.7.14/PC/errmap.h \
-    $$PWD/DependLibs/Python-2.7.14/PC/pyconfig.h \
     $$PWD/DependLibs/Python-2.7.14/Parser/parser.h \
     $$PWD/DependLibs/Python-2.7.14/Parser/tokenizer.h \
     $$PWD/DependLibs/Python-2.7.14/Python/importdl.h \

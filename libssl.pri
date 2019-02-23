@@ -39,8 +39,6 @@ HEADERS += 	$$PWD/DependLibs/openssl-1.0.2p/../../GoTvAppConfig.h \
     $$PWD/DependLibs/openssl-1.0.2p/apps/testdsa.h \
     $$PWD/DependLibs/openssl-1.0.2p/apps/testrsa.h \
     $$PWD/DependLibs/openssl-1.0.2p/apps/timeouts.h \
-    $$PWD/DependLibs/openssl-1.0.2p/config_openssl.h \
-    $$PWD/DependLibs/openssl-1.0.2p/config_ssl_internal.h \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/buildinf.h \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/aes/aes.h \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/aes/aes_locl.h \
@@ -189,7 +187,6 @@ HEADERS += 	$$PWD/DependLibs/openssl-1.0.2p/../../GoTvAppConfig.h \
     $$PWD/DependLibs/openssl-1.0.2p/include/openssl/comp.h \
     $$PWD/DependLibs/openssl-1.0.2p/include/openssl/conf.h \
     $$PWD/DependLibs/openssl-1.0.2p/include/openssl/conf_api.h \
-    $$PWD/DependLibs/openssl-1.0.2p/include/openssl/config_openssl.h \
     $$PWD/DependLibs/openssl-1.0.2p/include/openssl/crypto.h \
     $$PWD/DependLibs/openssl-1.0.2p/include/openssl/des.h \
     $$PWD/DependLibs/openssl-1.0.2p/include/openssl/des_old.h \

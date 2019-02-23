@@ -40,7 +40,9 @@ _nl_getenv (const char *name)
 }
 
 /* A fixed size buffer.  */
-char libintl_nl_default_dirname[MAXPATHLEN+1];
+#define GNU_ROUND_TO_8BYTE_BOUNDRY( a ) (( a + 7 ) & ~7 ) //round upto even 8 byte boundry
+
+char libintl_nl_default_dirname[GNU_ROUND_TO_8BYTE_BOUNDRY(MAXPATHLEN)];
 
 char *_nlos2_libdir = NULL;
 char *_nlos2_localealiaspath = NULL;

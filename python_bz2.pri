@@ -5,6 +5,8 @@ INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14
 INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Include
 INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/externals/bzip2-1.0.6
 
+INCLUDEPATH += $$PWD/DependLibs
+
 HEADERS += 	$$PWD/$${bz2Dir}/bzlib.h \
     $$PWD/$${bz2Dir}/bzlib_private.h \
     $$PWD/DependLibs/Python-2.7.14/pyconfig.h \

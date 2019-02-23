@@ -2,7 +2,7 @@
 TEMPLATE = lib
 TARGET_NAME = ctypes_test
 
-include(config_python_dll.pri)
+include(config_python_lib.pri)
 
 include(python_ctypes_test.pri)
 

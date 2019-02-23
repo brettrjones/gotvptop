@@ -2,7 +2,7 @@
 TEMPLATE = lib
 TARGET_NAME = bsddb
 
-include(config_python_dll.pri)
+include(config_python_lib.pri)
 
 include(python_bsddb.pri)
 

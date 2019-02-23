@@ -20,7 +20,6 @@ HEADERS += 	$$PWD/DependLibs/libtheora/include/theora/codec.h \
     $$PWD/DependLibs/libtheora/lib/huffdec.h \
     $$PWD/DependLibs/libtheora/lib/huffenc.h \
     $$PWD/DependLibs/libtheora/lib/huffman.h \
-    $$PWD/DependLibs/libtheora/lib/idct.h \
     $$PWD/DependLibs/libtheora/lib/internal.h \
     $$PWD/DependLibs/libtheora/lib/mathops.h \
     $$PWD/DependLibs/libtheora/lib/modedec.h \

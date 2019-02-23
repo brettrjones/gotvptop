@@ -227,7 +227,7 @@ void vp8_temporal_filter_apply_sse2(unsigned char *frame1, unsigned int stride, 
 void vp8_rtcd(void);
 
 #ifdef RTCD_C
-# if defined(TARGET_CPU_X86)
+# if defined(TARGET_CPU_X86) || defined(TARGET_CPU_X86_64 )
 #include "vpx_ports/x86.h"
 static void setup_rtcd_internal(void)
 {

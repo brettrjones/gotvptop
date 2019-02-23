@@ -80,27 +80,22 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltHttp.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltHttpClientTask.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltHttpServer.h \
-    $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltHttpServerListener.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltHttpServerTask.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltMimeType.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltProtocolInfo.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltService.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltSsdp.h \
-    $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltSsdpListener.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltStateVariable.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltTaskManager.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltThreadTask.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltUPnP.h \
-    $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltXmlHelper.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Devices/MediaConnect/PltMediaConnect.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Devices/MediaConnect/PltXbox360.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Devices/MediaRenderer/PltMediaController.h \
-    $$PWD/DependLibs/libUPnP/Platinum/Source/Devices/MediaRenderer/PltMediaControllerListener.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Devices/MediaRenderer/PltMediaRenderer.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Devices/MediaServer/PltDidl.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Devices/MediaServer/PltFileMediaServer.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Devices/MediaServer/PltMediaBrowser.h \
-    $$PWD/DependLibs/libUPnP/Platinum/Source/Devices/MediaServer/PltMediaBrowserListener.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Devices/MediaServer/PltMediaCache.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Devices/MediaServer/PltMediaItem.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Devices/MediaServer/PltMediaServer.h \
@@ -114,7 +109,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Extras/PltRingBufferStream.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Extras/PltStreamPump.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Platinum/Platinum.h \
-    $$PWD/DependLibs/libUPnP/Platinum/Source/Platinum/PltSvnVersion.h \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Platinum/PltVersion.h \
     $$PWD/DependLibs/libUPnP/config_libupnp.h \
     $$PWD/DependLibs/libUPnP/Neptune/Source/System/Bsd/NptBsdBlockerSocket.h

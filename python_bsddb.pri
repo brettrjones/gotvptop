@@ -1,4 +1,7 @@
-HEADERS += 	$$PWD/../Modules/bsddb.h \
+
+DEFINES += HAVE_SYSTEM_INCLUDE_FILES
+
+HEADERS += 	$$PWD/DependLibs/Python-2.7.14/Modules/bsddb.h \
     $$PWD/DependLibs/Python-2.7.14/externals/db-4.7.25.0/build_unix/db_config.h
 
 SOURCES += 	$$PWD/DependLibs/Python-2.7.14/externals/db-4.7.25.0/btree/bt_compact.c \
@@ -149,7 +152,6 @@ SOURCES += 	$$PWD/DependLibs/Python-2.7.14/externals/db-4.7.25.0/btree/bt_compac
     $$PWD/DependLibs/Python-2.7.14/externals/db-4.7.25.0/mutex/mut_method.c \
     $$PWD/DependLibs/Python-2.7.14/externals/db-4.7.25.0/mutex/mut_region.c \
     $$PWD/DependLibs/Python-2.7.14/externals/db-4.7.25.0/mutex/mut_stat.c \
-    $$PWD/DependLibs/Python-2.7.14/externals/db-4.7.25.0/mutex/mut_win32.c \
     $$PWD/DependLibs/Python-2.7.14/externals/db-4.7.25.0/os/os_abort.c \
     $$PWD/DependLibs/Python-2.7.14/externals/db-4.7.25.0/os/os_addrinfo.c \
     $$PWD/DependLibs/Python-2.7.14/externals/db-4.7.25.0/os/os_alloc.c \
@@ -230,4 +232,5 @@ SOURCES += 	$$PWD/DependLibs/Python-2.7.14/externals/db-4.7.25.0/os_windows/os_a
     $$PWD/DependLibs/Python-2.7.14/externals/db-4.7.25.0/os_windows/os_truncate.c \
     $$PWD/DependLibs/Python-2.7.14/externals/db-4.7.25.0/os_windows/os_unlink.c \
     $$PWD/DependLibs/Python-2.7.14/externals/db-4.7.25.0/os_windows/os_yield.c \
+    $$PWD/DependLibs/Python-2.7.14/externals/db-4.7.25.0/mutex/mut_win32.c \
 }

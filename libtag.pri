@@ -91,7 +91,6 @@ HEADERS += 	$$PWD/DependLibs/libtag/ape/apefile.h \
     $$PWD/DependLibs/libtag/taglib_export.h \
     $$PWD/DependLibs/libtag/tagunion.h \
     $$PWD/DependLibs/libtag/tagutils.h \
-    $$PWD/DependLibs/libtag/toolkit/taglib.h \
     $$PWD/DependLibs/libtag/toolkit/tbytevector.h \
     $$PWD/DependLibs/libtag/toolkit/tbytevectorlist.h \
     $$PWD/DependLibs/libtag/toolkit/tbytevectorstream.h \

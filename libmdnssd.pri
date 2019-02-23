@@ -13,8 +13,7 @@ HEADERS += 	$$PWD/DependLibs/libmdnsresponder/config_libmdnsresponder.h \
     $$PWD/DependLibs/libmdnsresponder/mDNSShared/DebugServices.h \
     $$PWD/DependLibs/libmdnsresponder/mDNSShared/GenLinkedList.h \
     $$PWD/DependLibs/libmdnsresponder/mDNSShared/dns_sd.h \
-    $$PWD/DependLibs/libmdnsresponder/mDNSShared/dnssd_ipc.h \
-	$$PWD/resource.h
+    $$PWD/DependLibs/libmdnsresponder/mDNSShared/dnssd_ipc.h
 
 SOURCES += 	$$PWD/DependLibs/libmdnsresponder/mDNSShared/DebugServices.c \
     $$PWD/DependLibs/libmdnsresponder/mDNSShared/GenLinkedList.c \

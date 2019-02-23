@@ -30,6 +30,7 @@ LIBS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
 
 
 #copy to local directory so can easily be linked to
+win:{
 CONFIG(debug, debug|release){
     copydata.commands = $(COPY_DIR) $$shell_path($$OUT_PWD/*.so) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug)
 }
@@ -37,11 +38,25 @@ CONFIG(debug, debug|release){
 CONFIG(release, debug|release){
     copydata.commands = $(COPY_DIR) $$shell_path($$OUT_PWD/*.so) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release)
  }
+ first.depends = $(first) copydata
+ export(first.depends)
+ export(copydata.commands)
+ QMAKE_EXTRA_TARGETS += first copydata
+}
 
-first.depends = $(first) copydata
-export(first.depends)
-export(copydata.commands)
-QMAKE_EXTRA_TARGETS += first copydata
+android:{
+ CONFIG(debug, debug|release){
+    copydata.commands = $(COPY_DIR) $$OUT_PWD/*.so $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
+ }
+
+ CONFIG(release, debug|release){
+    copydata.commands = $(COPY_DIR) $$OUT_PWD/*.so) $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
+ }
+ first.depends = $(first) copydata
+ export(first.depends)
+ export(copydata.commands)
+ QMAKE_EXTRA_TARGETS += first copydata
+}
 
 CONFIG(debug, debug|release){
     OBJECTS_DIR=.objs/$${TARGET_NAME}/debug

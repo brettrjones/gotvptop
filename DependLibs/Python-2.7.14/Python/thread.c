@@ -73,7 +73,36 @@ static int thread_debug = 0;
 
 static int initialized;
 
-static void PyThread__init_thread(void); /* Forward */
+#ifdef TARGET_OS_LINUX
+#ifdef _HAVE_BSDI
+static
+void _noop(void)
+{
+}
+
+static void
+PyThread__init_thread(void)
+{
+    /* DO AN INIT BY STARTING THE THREAD */
+    static int dummy = 0;
+    pthread_t thread1;
+    pthread_create(&thread1, NULL, (void *) _noop, &dummy);
+    pthread_join(thread1, NULL);
+}
+
+#else /* !_HAVE_BSDI */
+
+static void
+PyThread__init_thread(void)
+{
+#if defined(_AIX) && defined(__GNUC__)
+    extern void pthread_init(void);
+    pthread_init();
+#endif
+}
+
+#endif /* !_HAVE_BSDI */
+#endif // TARGET_OS_LINUX
 
 void
 PyThread_init_thread(void)

@@ -220,7 +220,7 @@ std::string VxGUID::toGUIDStandardFormatedString( void )
 	RpcStringFreeA ( &str );
 	return strFormatedUuid;
 #else
-	#ifdef TARGET_OS_ANDROID
+    #if defined(TARGET_OS_ANDROID) || defined(TARGET_OS_LINUX)
 		// format string into something like 79ECEFE6-D91C-457B-B17D-3FEDD63F3F73),
 		char formatedStrBuf[37];
 		sprintf( formatedStrBuf, "%2.2X%2.2X%2.2X%2.2X-%2.2X%2.2X-%2.2X%2.2X-%2.2X%2.2X%2.2X%2.2X%2.2X%2.2X",

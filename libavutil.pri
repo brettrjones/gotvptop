@@ -27,7 +27,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/ffmpeg/libavutil/avutil_attributes.h \
     $$PWD/DependLibs/ffmpeg/libavutil/audio_fifo.h \
     $$PWD/DependLibs/ffmpeg/libavutil/avassert.h \
-    $$PWD/DependLibs/ffmpeg/libavutil/avconfig.h \
     $$PWD/DependLibs/ffmpeg/libavutil/avstring.h \
     $$PWD/DependLibs/ffmpeg/libavutil/avutil.h \
     $$PWD/DependLibs/ffmpeg/libavutil/avutil_attributes.h \

@@ -7,7 +7,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvDependLibrariesConfig.h \
     $$PWD/GoTvTargetOsConfig.h \
-    $$PWD/DependLibs/libzvbi/config_zvbi.h \
+    $$PWD/DependLibs/libzvbi/config_libzvbi.h \
     $$PWD/DependLibs/libzvbi/contrib/dvbsubs.h \
     $$PWD/DependLibs/libzvbi/site_def.h \
     $$PWD/DependLibs/libzvbi/src/_videodev.h \

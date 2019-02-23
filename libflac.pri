@@ -1,17 +1,16 @@
 
 INCLUDEPATH += $$PWD/DependLibs/libflac/
-INCLUDEPATH += $$PWD/DependLibs/libflac/include
 INCLUDEPATH += $$PWD/DependLibs/libflac/FLAC
 
 HEADERS += 	$$PWD/DependLibs/libflac/config_libflac.h \
-    $$PWD/DependLibs/libflac/include/all.h \
-    $$PWD/DependLibs/libflac/include/callback.h \
-    $$PWD/DependLibs/libflac/include/export.h \
-    $$PWD/DependLibs/libflac/include/format.h \
-    $$PWD/DependLibs/libflac/include/metadata.h \
-    $$PWD/DependLibs/libflac/include/ordinals.h \
-    $$PWD/DependLibs/libflac/include/stream_decoder.h \
-    $$PWD/DependLibs/libflac/include/stream_encoder.h
+    $$PWD/DependLibs/libflac/FLAC/all.h \
+    $$PWD/DependLibs/libflac/FLAC/callback.h \
+    $$PWD/DependLibs/libflac/FLAC/export.h \
+    $$PWD/DependLibs/libflac/FLAC/format.h \
+    $$PWD/DependLibs/libflac/FLAC/metadata.h \
+    $$PWD/DependLibs/libflac/FLAC/ordinals.h \
+    $$PWD/DependLibs/libflac/FLAC/stream_decoder.h \
+    $$PWD/DependLibs/libflac/FLAC/stream_encoder.h
 
 SOURCES += 	$$PWD/DependLibs/libflac/bitmath.c \
     $$PWD/DependLibs/libflac/bitreader.c \

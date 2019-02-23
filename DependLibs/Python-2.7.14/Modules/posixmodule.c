@@ -7653,12 +7653,15 @@ posix_tmpnam(PyObject *self, PyObject *noargs)
     if (PyErr_WarnPy3k("tmpnam has been removed in 3.x; "
                        "use the tempfile module", 1) < 0)
         return NULL;
-
-#ifdef USE_TMPNAM_R
-    name = tmpnam_r(buffer);
+#ifdef TARGET_OS_LINUX
+ name = mkstemp(buffer);
 #else
+# ifdef USE_TMPNAM_R
+    name = tmpnam_r(buffer);
+# else
     name = tmpnam(buffer);
-#endif
+# endif
+#endif // TARGET_OS_LINUX
     if (name == NULL) {
         PyObject *err = Py_BuildValue("is", 0,
 #ifdef USE_TMPNAM_R

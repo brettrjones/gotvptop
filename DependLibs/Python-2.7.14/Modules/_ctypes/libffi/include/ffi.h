@@ -58,8 +58,8 @@ extern "C" {
 #endif
 
 /* Specify which architecture libffi is configured for. */
-#ifndef ARM
-#define ARM
+#if defined( TARGET_CPU_ARM )
+# define ARM
 #endif
 
 /* ---- System configuration information --------------------------------- */

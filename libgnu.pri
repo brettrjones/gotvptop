@@ -1565,6 +1565,6 @@ SOURCES += 	$$PWD/DependLibs/libgnu/accelerated/accelerated.c \
     $$PWD/DependLibs/libgnu/xstrdup.c \
     $$PWD/DependLibs/libgnu/xstriconv.c \
     $$PWD/DependLibs/libgnu/xvasprintf.c \
-    $$PWD/DependLibs/libgnu/os2compat2.c \
+#    $$PWD/DependLibs/libgnu/os2compat2.c \ #alignment errors in linux
     $$PWD/DependLibs/libgnu/log.c \
 

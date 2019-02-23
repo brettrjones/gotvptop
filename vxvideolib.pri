@@ -1,22 +1,22 @@
 
 
-HEADERS += $$PWD/DependLibs/vxvideolib/VxRescaleRgb.h \
-    $$PWD/DependLibs/vxvideolib/VxVideoLib.h \
-    $$PWD/DependLibs/vxvideolib/VxVideoConvert.h \
-    $$PWD/DependLibs/vxvideolib/VxVidCapImp.h \
-    $$PWD/DependLibs/vxvideolib/VxVidCap.h \
-    $$PWD/DependLibs/vxvideolib/IVxVidCap.h \
-    $$PWD/DependLibs/vxvideolib/GdvBufferUtil.h
+HEADERS += $$PWD/DependLibs/VxVideoLib/VxRescaleRgb.h \
+    $$PWD/DependLibs/VxVideoLib/VxVideoLib.h \
+    $$PWD/DependLibs/VxVideoLib/VxVideoConvert.h \
+    $$PWD/DependLibs/VxVideoLib/VxVidCapImp.h \
+    $$PWD/DependLibs/VxVideoLib/VxVidCap.h \
+    $$PWD/DependLibs/VxVideoLib/IVxVidCap.h \
+    $$PWD/DependLibs/VxVideoLib/GdvBufferUtil.h
 
 
 
-SOURCES += 	$$PWD/DependLibs/vxvideolib/VxRescaleRgb.cpp \
-    $$PWD/DependLibs/vxvideolib/VxVideoConvert.cpp \
-    $$PWD/DependLibs/vxvideolib/GdvBufferUtil.cpp
+SOURCES += 	$$PWD/DependLibs/VxVideoLib/VxRescaleRgb.cpp \
+    $$PWD/DependLibs/VxVideoLib/VxVideoConvert.cpp \
+    $$PWD/DependLibs/VxVideoLib/GdvBufferUtil.cpp
 
 win32:{
-    SOURCES += 	$$PWD/DependLibs/vxvideolib/VxVidCapImp.cpp \
-        $$PWD/DependLibs/vxvideolib/VxVidCap.cpp
+    SOURCES += 	$$PWD/DependLibs/VxVideoLib/VxVidCapImp.cpp \
+        $$PWD/DependLibs/VxVideoLib/VxVidCap.cpp
 }
 
  

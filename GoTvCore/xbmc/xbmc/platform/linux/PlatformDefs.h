@@ -50,9 +50,9 @@
 #include <time.h>
 #endif
 
-typedef __int64       off64_t;
-typedef __int64       fpos64_t;
-typedef __int64       __off64_t;
+typedef int64_t       off64_t;
+//typedef int64_t       fpos64_t;
+typedef int64_t       __off64_t;
 typedef long          __off_t;
 
 #if defined(__ppc__) || defined(__powerpc__)

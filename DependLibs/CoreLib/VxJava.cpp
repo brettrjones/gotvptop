@@ -1,4 +1,6 @@
+
 #include "VxJava.h"
+#ifdef TARGET_OS_ANDROID
 
 #include <CoreLib/VxThread.h>
 #include <CoreLib/VxGlobals.h>
@@ -91,3 +93,5 @@ void JNI_OnUnload(JavaVM *vm, void *reserved)
     //GetEngineImp().getEngine().getPeerMgr().stopListening();
     //__android_log_write( ANDROID_LOG_INFO, FROM_NATIVE_LOG_TAG, "JNI_OnUnload" );
 }
+
+#endif // TARGET_OS_ANDROID

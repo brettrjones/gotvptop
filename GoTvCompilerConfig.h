@@ -1351,9 +1351,10 @@ typedef int64_t              time64_t;
 #endif // TARGET_OS_WINDOWS
 
 /* Define if you have the <sys/utime.h> header file. */
-#if !defined(TARGET_OS_WINDOWS) && !defined(TARGET_OS_ANDROID)
-# define HAVE_SYS_UTIME_H			1
-#endif // TARGET_OS_WINDOWS
+// does not seem to exist on any target
+//#if !defined(TARGET_OS_WINDOWS) && !defined(TARGET_OS_ANDROID)
+//# define HAVE_SYS_UTIME_H			1
+//#endif // TARGET_OS_WINDOWS
 
 #define HAVE_SSIZE_T				1
 
