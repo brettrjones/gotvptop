@@ -2,7 +2,7 @@
 TEMPLATE = lib
 TARGET_NAME = multiprocessing
 
-include(config_python_dll.pri)
+include(config_python_lib.pri)
 
 include(python_multiprocessing.pri)
 
@@ -17,18 +17,5 @@ CONFIG(release, debug|release){
     LIBS +=  $${SHARED_LIB_PREFIX}pythoncore.so
 }
 
-
-#copy to local directory so can easily be linked to
-CONFIG(debug, debug|release){
-    copydata.commands = $(COPY_DIR) $$shell_path($$OUT_PWD/*.so) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug)
-}
-
-CONFIG(release, debug|release){
-    copydata.commands = $(COPY_DIR) $$shell_path($$OUT_PWD/*.so) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release)
- }
-
-first.depends = $(first) copydata
-export(first.depends)
-export(copydata.commands)
-QMAKE_EXTRA_TARGETS += first copydata
+include(config_copy_shared_lib.pri)
 

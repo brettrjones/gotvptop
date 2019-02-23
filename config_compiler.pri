@@ -12,19 +12,12 @@ DEFINES +=_FILE_OFFSET_BITS=64
 CONFIG(debug, debug|release){
     DEFINES += _DEBUG
     DEFINES += DEBUG
-    linux:!android: message(Enabling UNIX debug output.)
-    win32: message(Enabling WIN32 debug output.)
-    android: message(Enabling ANDROID debug output.)
 }
 
 CONFIG(release, debug|release){
     DEFINES += NDEBUG
     DEFINES += RELEASE
     DEFINES += QT_NO_DEBUG_OUTPUT
-
-    linux:!android: message(Disabling UNIX debug output.)
-    win32: message(Disabling WIN32 debug output.)
-    android: message(Disabling ANDROID debug output.)
 }
 
 

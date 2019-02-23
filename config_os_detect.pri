@@ -1,7 +1,5 @@
 
 android:{
-    message(Building Android)
-
     DEFINES += TARGET_OS_ANDROID
     DEFINES += TARGET_POSIX
 
@@ -53,7 +51,6 @@ android:{
 }
 
 win32{
-    message(Building Windows 32 bit)
     DEFINES += TARGET_OS_WINDOWS
     DEFINES += WIN32
     DEFINES += _WIN32
@@ -66,7 +63,6 @@ win32{
 }
 
 unix:!android:{
-    message(Building Linux)
     DEFINES += TARGET_OS_LINUX
     DEFINES += TARGET_POSIX
     DEFINES += TARGET_CPU_64BIT
@@ -78,7 +74,6 @@ unix:!android:{
 }
 
 macx{
-    message(Building Apple)
     DEFINES += TARGET_OS_APPLE
     DEFINES += TARGET_POSIX
     DEFINES += TARGET_CPU_64BIT
@@ -92,10 +87,18 @@ unix:!android: TARGET_OS_NAME = Linux
 android: TARGET_OS_NAME = Android
 macx: TARGET_OS_NAME = Apple
 
+CONFIG(debug, debug|release){
+    BUILD_TYPE=Debug
+}
+
+CONFIG(release, debug|release){
+    BUILD_TYPE=Release
+}
+
 contains( TARGET_CPU_BITS, 64 ) {
-    message(Building 64 bit )
+    message(Building $${TARGET_OS_NAME} $${BUILD_TYPE} 64 bit $${TARGET_ARCH_NAME} )
 }
 
 contains( TARGET_CPU_BITS, 32 ) {
-    message(Building 32 bit )
+    message(Building $${TARGET_OS_NAME} $${BUILD_TYPE} 32 bit $${TARGET_ARCH_NAME}  )
 }

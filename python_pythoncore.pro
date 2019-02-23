@@ -66,6 +66,9 @@ CONFIG(release, debug|release){
     OBJECTS_DIR=.objs/$${TARGET_NAME}/release
 }
 
+DISTFILES += \
+    config_copy_shared_lib.pri
+
 
 
 

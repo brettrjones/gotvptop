@@ -54,11 +54,11 @@
 #define XML_BUILDING_EXPAT 1
 
 #ifdef TARGET_OS_WINDOWS
-#include "winconfig.h"
+# include "winconfig.h"
 //BRJ #elif defined(HAVE_EXPAT_CONFIG_H)
 #else
-#include <expat_config.h>
-#endif /* ndef _WIN32 */
+# include "Modules/expat/expat_config.h"
+#endif // TARGET_OS_WINDOWS
 
 #include "ascii.h"
 #include "expat.h"

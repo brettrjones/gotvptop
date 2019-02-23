@@ -16,8 +16,10 @@
 #define XML_DTD 1
 #define XML_CONTEXT_BYTES 1024
 
-#ifndef TARGET_OS_WINDOWS
-#define HAVE_GETRANDOM
-#endif // TARGET_OS_WINDOWS
+#if defined(TARGET_OS_ANDROID)
+# define HAVE_GETRANDOM
+#elif defined(TARGET_OS_LINUX)
+# define HAVE_SYSCALL_GETRANDOM
+#endif // TARGET_OS_ANDROID
 
 #endif /* EXPAT_CONFIG_H */

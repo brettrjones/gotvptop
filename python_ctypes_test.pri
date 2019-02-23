@@ -1,4 +1,4 @@
-HEADERS += 	$$PWD/../Modules/_ctypes/_ctypes_test.h
+HEADERS += 	$$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/_ctypes_test.h
 
-SOURCES += 	$$PWD/../Modules/_ctypes/_ctypes_test.c
+SOURCES += 	$$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/_ctypes_test.c
 

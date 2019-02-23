@@ -5,7 +5,7 @@
 
 #link dependent libraries
 CONFIG(debug, debug|release){
- message(Link in DEBUG mode.)
+# message(Link in DEBUG mode.)
  android:{
   STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug/lib
   STATIC_LIB_SUFFIX=AndroidD.a
@@ -26,7 +26,7 @@ CONFIG(debug, debug|release){
 }
 
 CONFIG(release, debug|release){
- message(Link in RELEASE mode.)
+# message(Link in RELEASE mode.)
  android:{
   STATIC_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/lib
   STATIC_LIB_SUFFIX=Android.a
@@ -47,12 +47,12 @@ unix:!android:{
  }
 }
 
-message("**TARGET_OS_NAME-> "$${TARGET_OS_NAME})
-message("**TARGET_ARCH_NAME-> "$${TARGET_ARCH_NAME})
-message("**STATIC_LIB_PREFIX-> "$${STATIC_LIB_PREFIX})
-message("**STATIC_LIB_SUFFIX-> "$${STATIC_LIB_SUFFIX})
-message("**SHARED_LIB_PREFIX-> "$${SHARED_LIB_PREFIX})
-message("**SHARED_PYTHON_LIB_SUFFIX-> "$${SHARED_PYTHON_LIB_SUFFIX})
+#message("**TARGET_OS_NAME-> "$${TARGET_OS_NAME})
+#message("**TARGET_ARCH_NAME-> "$${TARGET_ARCH_NAME})
+#message("**STATIC_LIB_PREFIX-> "$${STATIC_LIB_PREFIX})
+#message("**STATIC_LIB_SUFFIX-> "$${STATIC_LIB_SUFFIX})
+#message("**SHARED_LIB_PREFIX-> "$${SHARED_LIB_PREFIX})
+#message("**SHARED_PYTHON_LIB_SUFFIX-> "$${SHARED_PYTHON_LIB_SUFFIX})
 
 SHARED_LIB_APPEND = .dll
 

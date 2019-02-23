@@ -17,7 +17,6 @@ unix:!android:{
 #do not append os name to name so can have standard python name
 TARGET=$${TARGET_NAME}$${SHARED_LIB_APPEND}
 
+INCLUDEPATH += $PWD/DependLibs/Python-2.7.14
+INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Include
 
-#message($$[QT_INSTALL_BINS])
-#message($$[QT_INSTALL_LIBS])
-#message($$OUT_PWD)

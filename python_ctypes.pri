@@ -1,14 +1,20 @@
 
- message(**Python arch $${TARGET_ARCH_NAME})
 
 INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/include
 INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi
-INCLUDEPATH += $PWD/DependLibs/Python-2.7.14
 
 
 HEADERS += 	$$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/include/ffi.h \
     $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/include/ffi_common.h \
     $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/fficonfig.h
+
+contains(TARGET_ARCH_NAME,arm) {
+ message(Python ctypes arm)
+
+INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/src/arm
+
+HEADERS += 	$$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/src/arm/ffitarget.h
+}
 
 
 contains(TARGET_ARCH_NAME,x86) {
