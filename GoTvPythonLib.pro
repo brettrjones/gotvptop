@@ -11,6 +11,17 @@ include(config_os_detect.pri)
 #SUBDIRS += $$PWD/python_libeay.pro #static lib build in GoTvDependLibs.pro
 #SUBDIRS += $$PWD/python_ssleay.pro #static lib build in GoTvDependLibs.pro
 
+SUBDIRS += $$PWD/libgnu.pro
+SUBDIRS += $$PWD/libiconv.pro
+SUBDIRS += $$PWD/libbz2.pro
+SUBDIRS += $$PWD/libcurl.pro
+SUBDIRS += $$PWD/libnetlib.pro
+SUBDIRS += $$PWD/libpktlib.pro
+SUBDIRS += $$PWD/libcorelib.pro
+SUBDIRS += $$PWD/libcrossguid.pro
+
+SUBDIRS += $$PWD/GoTvOpenSslLib.pro
+
 SUBDIRS += $$PWD/python_pythoncore.pro
 
 SUBDIRS += $$PWD/python_bz2.pro
@@ -19,8 +30,8 @@ SUBDIRS += $$PWD/python_ctypes.pro
 SUBDIRS += $$PWD/python_ctypes_test.pro
 SUBDIRS += $$PWD/python_elementtree.pro
 SUBDIRS += $$PWD/python_hashlib.pro
-SUBDIRS += $$PWD/python_socket.pro
 SUBDIRS += $$PWD/python_sqlite3.pro
+SUBDIRS += $$PWD/python_socket.pro
 SUBDIRS += $$PWD/python_ssl.pro
 SUBDIRS += $$PWD/python_testcapi.pro
 

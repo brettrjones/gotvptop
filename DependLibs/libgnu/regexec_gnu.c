@@ -19,8 +19,8 @@
 
 #include "regex.h"
 #define COMPILING_REGEXEC 1
-#include "regex_internal.c"
-#include "regcomp.c"
+#include "regex_internal_gnu.c"
+#include "regcomp_gnu.c"
 
 static reg_errcode_t match_ctx_init (re_match_context_t *cache, int eflags,
 				     Idx n) internal_function;

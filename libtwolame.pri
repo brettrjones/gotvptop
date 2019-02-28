@@ -25,23 +25,24 @@ HEADERS += 	$$PWD/DependLibs/libtwolame/ath.h \
     $$PWD/DependLibs/libtwolame/twolame.h \
     $$PWD/DependLibs/libtwolame/util.h
 
-SOURCES += 	$$PWD/DependLibs/libtwolame/ath.c \
-    $$PWD/DependLibs/libtwolame/availbits.c \
-    $$PWD/DependLibs/libtwolame/bitbuffer.c \
-    $$PWD/DependLibs/libtwolame/crc.c \
-    $$PWD/DependLibs/libtwolame/dab.c \
-    $$PWD/DependLibs/libtwolame/encode.c \
-    $$PWD/DependLibs/libtwolame/energy.c \
-    $$PWD/DependLibs/libtwolame/fft.c \
-    $$PWD/DependLibs/libtwolame/get_set.c \
-    $$PWD/DependLibs/libtwolame/mem.c \
-    $$PWD/DependLibs/libtwolame/psycho_0.c \
-    $$PWD/DependLibs/libtwolame/psycho_1.c \
-    $$PWD/DependLibs/libtwolame/psycho_2.c \
-    $$PWD/DependLibs/libtwolame/psycho_3.c \
-    $$PWD/DependLibs/libtwolame/psycho_4.c \
-    $$PWD/DependLibs/libtwolame/psycho_n1.c \
-    $$PWD/DependLibs/libtwolame/subband.c \
-    $$PWD/DependLibs/libtwolame/twolame.c \
-    $$PWD/DependLibs/libtwolame/util.c
+SOURCES += 	\
+    $$PWD/DependLibs/libtwolame/ath_twolame.c \
+    $$PWD/DependLibs/libtwolame/availbits_twolame.c \
+    $$PWD/DependLibs/libtwolame/bitbuffer_twolame.c \
+    $$PWD/DependLibs/libtwolame/crc_twolame.c \
+    $$PWD/DependLibs/libtwolame/dab_twolame.c \
+    $$PWD/DependLibs/libtwolame/encode_twolame.c \
+    $$PWD/DependLibs/libtwolame/energy_twolame.c \
+    $$PWD/DependLibs/libtwolame/fft_twolame.c \
+    $$PWD/DependLibs/libtwolame/get_set_twolame.c \
+    $$PWD/DependLibs/libtwolame/mem_twolame.c \
+    $$PWD/DependLibs/libtwolame/psycho_0_twolame.c \
+    $$PWD/DependLibs/libtwolame/psycho_1_twolame.c \
+    $$PWD/DependLibs/libtwolame/psycho_2_twolame.c \
+    $$PWD/DependLibs/libtwolame/psycho_3_twolame.c \
+    $$PWD/DependLibs/libtwolame/psycho_4_twolame.c \
+    $$PWD/DependLibs/libtwolame/psycho_n1_twolame.c \
+    $$PWD/DependLibs/libtwolame/subband_twolame.c \
+    $$PWD/DependLibs/libtwolame/twolame_twolame.c \
+    $$PWD/DependLibs/libtwolame/util_twolame.c
 

@@ -119,10 +119,6 @@
 #endif
 #endif
 
-#ifdef __cplusplus
-}
-#endif
-
 #define HAVE_CTYPE_H 1
 #define HAVE_STDLIB_H 1
 #define HAVE_STDARG_H 1

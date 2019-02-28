@@ -27,7 +27,7 @@
 #include "bytestream.h"
 #include "avcodec_internal.h"
 #include "libopus.h"
-#include "vorbis.h"
+#include "vorbis_avcodec.h"
 #include "audio_frame_queue.h"
 
 typedef struct LibopusEncOpts {

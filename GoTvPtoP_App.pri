@@ -231,7 +231,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvPtoP/AppSource/exportdialog.h
 
 
-SOURCES += F:/gotvptop/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
+SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxDataHelper.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/DialogConfirmRemoveMessage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileActionBarWidget.cpp \

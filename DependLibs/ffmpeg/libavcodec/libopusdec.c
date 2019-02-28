@@ -29,7 +29,7 @@
 
 #include "avcodec.h"
 #include "avcodec_internal.h"
-#include "vorbis.h"
+#include "vorbis_avcodec.h"
 #include "mathops.h"
 #include "libopus.h"
 

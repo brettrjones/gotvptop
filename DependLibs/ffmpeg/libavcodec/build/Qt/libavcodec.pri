@@ -428,7 +428,7 @@ HEADERS += 	$$PWD/../../../../../GoTvCompilerConfig.h \
 	$$PWD/../../videodsp.h \
 	$$PWD/../../videotoolbox.h \
 	$$PWD/../../vlc.h \
-	$$PWD/../../vorbis.h \
+    $$PWD/../../vorbis_avcodec.h \
 	$$PWD/../../vorbis_enc_data.h \
 	$$PWD/../../vorbis_parser.h \
 	$$PWD/../../vorbis_parser_internal.h \

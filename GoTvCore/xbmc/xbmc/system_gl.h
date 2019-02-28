@@ -9,6 +9,12 @@
 #pragma once
 
 #include "config_kodi.h"
+
+// always define GL_GLEXT_PROTOTYPES before include gl headers
+#if !defined(GL_GLEXT_PROTOTYPES)
+  #define GL_GLEXT_PROTOTYPES
+#endif
+
 #if (defined(TARGET_OS_WINDOWS) && ! HAS_DX) || defined(HAVE_QT_GUI)
 # if defined(TARGET_OS_APPLE)
 #  include <OpenGLES/ES2/gl.h>
@@ -16,11 +22,12 @@
 #  include <GLES2/gl2.h>
 #  include <GLES2/gl2ext.h>
 #  include <GLES3/gl3.h>
-# else
-//#  include <libglew/include/GL/glew.h>
+# elif defined(TARGET_OS_LINUX)
 #  include <GL/gl.h>
 #  include <GL/glu.h>
+#  include <GL/glext.h>
 # endif // defined(TARGET_OS_ANDROID)
+
 # ifdef HAVE_QT_GUI
 
 // assume gles only 
@@ -39,15 +46,7 @@
 
 
 #if defined(HAS_GL)  || defined(HAVE_QT_GUI)
-  // always define GL_GLEXT_PROTOTYPES before include gl headers
-  #if !defined(GL_GLEXT_PROTOTYPES)
-    #define GL_GLEXT_PROTOTYPES
-  #endif
-  #if defined(TARGET_LINUX)
-    #include <GL/gl.h>
-    #include <GL/glu.h>
-    #include <GL/glext.h>
-  #elif defined(TARGET_FREEBSD)
+  #if defined(TARGET_FREEBSD)
     #include <GL/gl.h>
     #include <GL/glu.h>
   #elif defined(TARGET_DARWIN)

@@ -26,23 +26,24 @@ HEADERS += 	$$PWD/DependLibs/libxslt/attributes.h \
     $$PWD/DependLibs/libxslt/xsltlocale.h \
     $$PWD/DependLibs/libxslt/xsltutils.h
 
-SOURCES += 	$$PWD/DependLibs/libxslt/attributes.c \
-    $$PWD/DependLibs/libxslt/attrvt.c \
-    $$PWD/DependLibs/libxslt/documents.c \
-    $$PWD/DependLibs/libxslt/extensions.c \
-    $$PWD/DependLibs/libxslt/extra.c \
-    $$PWD/DependLibs/libxslt/functions.c \
-    $$PWD/DependLibs/libxslt/imports.c \
-    $$PWD/DependLibs/libxslt/keys.c \
-    $$PWD/DependLibs/libxslt/namespaces.c \
-    $$PWD/DependLibs/libxslt/numbers.c \
-    $$PWD/DependLibs/libxslt/pattern.c \
-    $$PWD/DependLibs/libxslt/preproc.c \
-    $$PWD/DependLibs/libxslt/security.c \
-    $$PWD/DependLibs/libxslt/templates.c \
-    $$PWD/DependLibs/libxslt/transform.c \
-    $$PWD/DependLibs/libxslt/variables.c \
-    $$PWD/DependLibs/libxslt/xslt.c \
-    $$PWD/DependLibs/libxslt/xsltlocale.c \
-    $$PWD/DependLibs/libxslt/xsltutils.c
+SOURCES += 	\
+    $$PWD/DependLibs/libxslt/attributes_xslt.c \
+    $$PWD/DependLibs/libxslt/attrvt_xslt.c \
+    $$PWD/DependLibs/libxslt/documents_xslt.c \
+    $$PWD/DependLibs/libxslt/extensions_xslt.c \
+    $$PWD/DependLibs/libxslt/extra_xslt.c \
+    $$PWD/DependLibs/libxslt/functions_xslt.c \
+    $$PWD/DependLibs/libxslt/imports_xslt.c \
+    $$PWD/DependLibs/libxslt/keys_xslt.c \
+    $$PWD/DependLibs/libxslt/namespaces_xslt.c \
+    $$PWD/DependLibs/libxslt/numbers_xslt.c \
+    $$PWD/DependLibs/libxslt/pattern_xslt.c \
+    $$PWD/DependLibs/libxslt/preproc_xslt.c \
+    $$PWD/DependLibs/libxslt/security_xslt.c \
+    $$PWD/DependLibs/libxslt/templates_xslt.c \
+    $$PWD/DependLibs/libxslt/transform_xslt.c \
+    $$PWD/DependLibs/libxslt/variables_xslt.c \
+    $$PWD/DependLibs/libxslt/xslt_xslt.c \
+    $$PWD/DependLibs/libxslt/xsltlocale_xslt.c \
+    $$PWD/DependLibs/libxslt/xsltutils_xslt.c
 

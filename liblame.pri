@@ -48,9 +48,6 @@ HEADERS += 	$$PWD/DependLibs/liblame/include/lame.h \
     $$PWD/DependLibs/liblame/configMS.h
 
 SOURCES += 	$$PWD/DependLibs/liblame/libmp3lame/VbrTag.c \
-    $$PWD/DependLibs/liblame/libmp3lame/bitstream.c \
-    $$PWD/DependLibs/liblame/libmp3lame/encoder.c \
-    $$PWD/DependLibs/liblame/libmp3lame/fft.c \
     $$PWD/DependLibs/liblame/libmp3lame/gain_analysis.c \
     $$PWD/DependLibs/liblame/libmp3lame/id3tag.c \
     $$PWD/DependLibs/liblame/libmp3lame/lame.c \
@@ -58,22 +55,25 @@ SOURCES += 	$$PWD/DependLibs/liblame/libmp3lame/VbrTag.c \
     $$PWD/DependLibs/liblame/libmp3lame/newmdct.c \
     $$PWD/DependLibs/liblame/libmp3lame/presets.c \
     $$PWD/DependLibs/liblame/libmp3lame/psymodel.c \
-    $$PWD/DependLibs/liblame/libmp3lame/quantize.c \
     $$PWD/DependLibs/liblame/libmp3lame/quantize_pvt.c \
     $$PWD/DependLibs/liblame/libmp3lame/reservoir.c \
     $$PWD/DependLibs/liblame/libmp3lame/set_get.c \
-    $$PWD/DependLibs/liblame/libmp3lame/tables.c \
     $$PWD/DependLibs/liblame/libmp3lame/takehiro.c \
-    $$PWD/DependLibs/liblame/libmp3lame/util.c \
     $$PWD/DependLibs/liblame/libmp3lame/vbrquantize.c \
     $$PWD/DependLibs/liblame/libmp3lame/vector/xmm_quantize_sub.c \
-    $$PWD/DependLibs/liblame/libmp3lame/version.c \
-    $$PWD/DependLibs/liblame/mpglib/common.c \
     $$PWD/DependLibs/liblame/mpglib/dct64_i386.c \
     $$PWD/DependLibs/liblame/mpglib/decode_i386.c \
     $$PWD/DependLibs/liblame/mpglib/interface.c \
     $$PWD/DependLibs/liblame/mpglib/layer1.c \
     $$PWD/DependLibs/liblame/mpglib/layer2.c \
     $$PWD/DependLibs/liblame/mpglib/layer3.c \
-    $$PWD/DependLibs/liblame/mpglib/tabinit.c
+    $$PWD/DependLibs/liblame/mpglib/tabinit.c \
+    $$PWD/DependLibs/liblame/libmp3lame/bitstream_lame.c \
+    $$PWD/DependLibs/liblame/libmp3lame/encoder_lame.c \
+    $$PWD/DependLibs/liblame/libmp3lame/fft_lame.c \
+    $$PWD/DependLibs/liblame/libmp3lame/util_lame.c \
+    $$PWD/DependLibs/liblame/libmp3lame/version_lame.c \
+    $$PWD/DependLibs/liblame/libmp3lame/quantize_lame.c \
+    $$PWD/DependLibs/liblame/libmp3lame/tables_lame.c \
+    $$PWD/DependLibs/liblame/mpglib/common_lame.c
 

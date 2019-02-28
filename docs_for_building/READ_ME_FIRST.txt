@@ -1,5 +1,7 @@
 
-After the tools and enviroment to build has been setup
+If you are unfamilar with GoTvPtoP you might want to read GoTvPtoP_Terminology.txt
+
+After the tools and enviroment to build in your enviroment has been setup.
 
 paths can get to long if building in a subfolder with a long paths
 Check the source code out into short path folder like F:/gotvptop

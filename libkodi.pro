@@ -48,13 +48,13 @@ unix: {
 }
 
 TARGET=$${TARGET_NAME}$${TARGET_OS_NAME}$${TARGET_LIB_APPEND}
-##short obj path so does not overflow windows command line limit "make (e=87): The parameter is incorrect"
-#CONFIG(debug, debug|release){
-#    OBJECTS_DIR=.kodid
-#}
+#short obj path so does not overflow windows command line limit "make (e=87): The parameter is incorrect"
+CONFIG(debug, debug|release){
+    OBJECTS_DIR=.kd
+}
 
-#CONFIG(release, debug|release){
-#    OBJECTS_DIR=.kodir
-#}
+CONFIG(release, debug|release){
+    OBJECTS_DIR=.kr
+}
 
 include(libkodi.pri)

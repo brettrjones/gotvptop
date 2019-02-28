@@ -429,7 +429,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/videodsp.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/videotoolbox.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/vlc.h \
-    $$PWD/DependLibs/ffmpeg/libavcodec/vorbis.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/vorbis_enc_data.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/vorbis_parser.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/vorbis_parser_internal.h \
@@ -465,7 +464,8 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/xvididct.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/xvmc.h \
     $$PWD/DependLibs/ffmpeg/libavcodec/xvmc_internal.h \
-    $$PWD/DependLibs/ffmpeg/libavcodec/xwd.h
+    $$PWD/DependLibs/ffmpeg/libavcodec/xwd.h \
+    $$PWD/DependLibs/ffmpeg/libavcodec/vorbis_avcodec.h
 
 # only used if generate tables which makes program larger but faster
 #    $$PWD/DependLibs/ffmpeg/libavcodec/aacps_tables.h \

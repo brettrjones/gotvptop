@@ -17,6 +17,7 @@
 //#if 0 // NOTE: OS2 not supported
 #define OS2_AWARE
 # include <libgnu/config_libgnu.h>
+# include <libgnu/gettextP.h>
 
 #include  <stdlib.h>
 #include  <string.h>
@@ -40,9 +41,8 @@ _nl_getenv (const char *name)
 }
 
 /* A fixed size buffer.  */
-#define GNU_ROUND_TO_8BYTE_BOUNDRY( a ) (( a + 7 ) & ~7 ) //round upto even 8 byte boundry
 
-char libintl_nl_default_dirname[GNU_ROUND_TO_8BYTE_BOUNDRY(MAXPATHLEN)];
+char const libintl_nl_default_dirname[GNU_ROUND_TO_8BYTE_BOUNDRY(MAXPATHLEN)];
 
 char *_nlos2_libdir = NULL;
 char *_nlos2_localealiaspath = NULL;

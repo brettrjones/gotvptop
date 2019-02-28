@@ -11,6 +11,7 @@
 #include <array>
 
 #if defined(HAS_GL)
+
 #include <GL/gl.h>
 #elif defined(HAS_GLES)
 #include <GLES2/gl2.h>

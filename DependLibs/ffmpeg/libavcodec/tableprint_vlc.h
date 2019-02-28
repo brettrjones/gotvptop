@@ -41,7 +41,7 @@
 #include "tableprint.h"
 #include "get_bits.h"
 #include "mathtables_avcodec.cpp"
-#include "libavutil/reverse.c"
+#include "libavutil/reverse_avutil.c"
 #include "bitstream_avcodec.c"
 
 #define REPLACE_DEFINE2(type) write_##type##_array

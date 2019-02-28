@@ -40,7 +40,7 @@
 #include "get_bits.h"
 #include "avcodec_internal.h"
 
-#include "vorbis.h"
+#include "vorbis_avcodec.h"
 #include "vorbisdsp.h"
 #include "xiph.h"
 

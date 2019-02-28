@@ -1,8 +1,13 @@
+Instructions to create a virtual box Linux Mint 18.3 Image for GoTvPtoP developement
+
+=== KNOWN ISSUES ===
+1.) Turning on 3D acceleration in VBox causes Qt Creator to crash but works fine for just running GoTvPtoP
+2.) Cannot run Android x86 emulator inside a Virtual image. Visit https://developer.android.com/studio/run/emulator-acceleration
+    however, connecting to a physical android device works fine
 
 === setup linux mint ===
-Warning connot run Android x86 emulator inside a Virtual image. Visit https://developer.android.com/studio/run/emulator-acceleration
 
-1.) Download linux mint 19 - 64 Bit (cannot use 32 Bit because of android build requirements )
+1.) Download linux mint 18.3 - 64 Bit (cannot use 32 Bit because of android build requirements )
 2.) Create New Image In Virtual Box using the linux mint iso and OS Linux/Ubuntu 64Bit
 4.) The virtual drive should be at least 80GB and dynamic
 3.) Choose NOT to have to enter password on boot
@@ -24,7 +29,7 @@ Warning connot run Android x86 emulator inside a Virtual image. Visit https://de
 13.) Power up mint image and Optionally in First steps create system snapshot
 14.) Mint->Update Manager install updates till no more available
 
-15.) If get "Running in software rendering mode" then try	
+15.) Solutions to "Running in software rendering mode" I have tried with success but causes Qt Creator to crash	if 3D accelleration is on
 	a.) Update your host video drivers
 	b.) make sure 3d acceleration is turned on in VirtualBox Display settings
 	c.) sudo apt remove virtualbox-guest*
@@ -83,7 +88,7 @@ After many tries the only way I could get android studio installed correctly was
 //4.) If crashes then will have to turn off 3D acceleration in VirtualBox
 //4.) Now would be a good time to make a clone or Time Snapshot
 
-//======= install Qt 5.1.1 ======//
+//======= install Qt 5.11 ======//
 1.) sudo apt-get install qtcreator
 2.) sudo apt-get install qtdeclarative5-dev
 3.) sudo apt-get install qtmultimedia5-dev
@@ -211,7 +216,8 @@ check if enviroment is correct by opening new terminal and issue command printen
 
 sudo apt-get install uuid-dev
 
-3.) git clone -b Jarvis git://github.com/xbmc/xbmc.git or git clone --single-branch -b Jarvis https://github.com/xbmc/xbmc.git
+3.) git clone --single-branch -b Krypton git://github.com/xbmc/xbmc.git Branch_17.6-Kr 
+    or for windows git clone --single-branch -b Krypton https://github.com/xbmc/xbmc.git Branch_17.6-Kr 
 4.) sudo apt-get build-dep kodi
 5.) cd xbmc
 6.) ./bootstrap
@@ -222,7 +228,7 @@ sudo apt-get install uuid-dev
 	b.) sudo apt-get update
 	c.) sudo apt-get install dcadec-dev
 10.) If get error configure: error: crossguid not found	
-	sudo make -C tools/depends/target/crossguid PREFIX=/usr
+	sudo make -C tools/depends/target/crossguid PREFIX=/usr/local
 	
 11.) make -j4
 

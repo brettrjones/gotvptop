@@ -4,8 +4,6 @@ contains( TARGET_CPU_BITS, 64 ) {
 
 HEADERS += \
     $$PWD/DependLibs/Python-2.7.14/externals/openssl-1.0.2k/include64/openssl/opensslconf.h \
-    $$PWD/DependLibs/Python-2.7.14/externals/openssl-1.0.2k/include64/openssl/opensslconf_linux.h \
-    $$PWD/DependLibs/Python-2.7.14/externals/openssl-1.0.2k/include64/openssl/opensslconf_windows.h
 }
 
 contains( TARGET_CPU_BITS, 32 ) {

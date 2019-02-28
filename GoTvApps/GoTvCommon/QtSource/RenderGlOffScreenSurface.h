@@ -1,6 +1,7 @@
 #pragma once
 #include "config_gotvapps.h"
 
+
 #include <QtCore/QObject>
 #include <QtGui/QScreen>
 #include <QtGui/QOffscreenSurface>

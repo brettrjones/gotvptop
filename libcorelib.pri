@@ -74,15 +74,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/CoreLib/VxLinuxOnly.h \
     $$PWD/DependLibs/CoreLib/VxJava.h
 
-SOURCES += 	$$PWD/DependLibs/CoreLib/AppErr.cpp \
-    $$PWD/DependLibs/CoreLib/Blowfish.cpp \
-    $$PWD/DependLibs/CoreLib/DbBase.cpp \
-    $$PWD/DependLibs/CoreLib/DbDataset.cpp \
-    $$PWD/DependLibs/CoreLib/DbQueryData.cpp \
-    $$PWD/DependLibs/CoreLib/ObjectCommon.cpp \
-    $$PWD/DependLibs/CoreLib/OsDetect.cpp \
-    $$PWD/DependLibs/CoreLib/SHA1.cpp \
-    $$PWD/DependLibs/CoreLib/StdOutRedirect.cpp \
+SOURCES += 	\
     $$PWD/DependLibs/CoreLib/VxAppInfo.cpp \
     $$PWD/DependLibs/CoreLib/VxBuffer.cpp \
     $$PWD/DependLibs/CoreLib/VxChop.cpp \
@@ -121,12 +113,21 @@ SOURCES += 	$$PWD/DependLibs/CoreLib/AppErr.cpp \
     $$PWD/DependLibs/CoreLib/VxTimer.cpp \
     $$PWD/DependLibs/CoreLib/VxValuePair.cpp \
     $$PWD/DependLibs/CoreLib/VxXml.cpp \
-    $$PWD/DependLibs/CoreLib/md5.cpp \
-    $$PWD/DependLibs/CoreLib/rsa_eay.c \
-    $$PWD/DependLibs/CoreLib/rsa_gen.c \
-    $$PWD/DependLibs/CoreLib/sqlite3.c \
-    $$PWD/DependLibs/CoreLib/sqlitedataset.cpp \
     $$PWD/DependLibs/CoreLib/VxUrl.cpp \
     $$PWD/DependLibs/CoreLib/VxJava.cpp \
-    $$PWD/DependLibs/CoreLib/VxFunctionsMissingInAndroid.cpp
+    $$PWD/DependLibs/CoreLib/VxFunctionsMissingInAndroid.cpp \
+    $$PWD/DependLibs/CoreLib/md5_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/Blowfish_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/AppErr_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/DbBase_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/DbDataset_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/DbQueryData_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/ObjectCommon_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/OsDetect_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/rsa_eay_corelib.c \
+    $$PWD/DependLibs/CoreLib/rsa_gen_corelib.c \
+    $$PWD/DependLibs/CoreLib/SHA1_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/sqlite3_corelib.c \
+    $$PWD/DependLibs/CoreLib/sqlitedataset_corelib.cpp \
+    $$PWD/DependLibs/CoreLib/StdOutRedirect_corelib.cpp
 

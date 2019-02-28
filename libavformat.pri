@@ -507,7 +507,6 @@ SOURCES += 	$$PWD/DependLibs/ffmpeg/libavformat/3dostr.c \
     $$PWD/DependLibs/ffmpeg/libavformat/unix.c \
     $$PWD/DependLibs/ffmpeg/libavformat/url.c \
     $$PWD/DependLibs/ffmpeg/libavformat/urldecode.c \
-    $$PWD/DependLibs/ffmpeg/libavformat/utils.c \
     $$PWD/DependLibs/ffmpeg/libavformat/v210.c \
     $$PWD/DependLibs/ffmpeg/libavformat/vag.c \
     $$PWD/DependLibs/ffmpeg/libavformat/vc1dec.c \
@@ -580,7 +579,8 @@ SOURCES += 	$$PWD/DependLibs/ffmpeg/libavformat/3dostr.c \
     $$PWD/DependLibs/ffmpeg/libavformat/supenc.c \
     $$PWD/DependLibs/ffmpeg/libavformat/teeproto.c \
     $$PWD/DependLibs/ffmpeg/libavformat/ttaenc.c \
-    $$PWD/DependLibs/ffmpeg/libavformat/ty.c
+    $$PWD/DependLibs/ffmpeg/libavformat/ty.c \
+    $$PWD/DependLibs/ffmpeg/libavformat/utils_avformat.c
 
 DISTFILES += \
     $$PWD/DependLibs/ffmpeg/libavformat/Makefile \

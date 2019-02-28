@@ -15,8 +15,8 @@
    You should have received a copy of the GNU Lesser General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-#ifndef _GETTEXTP_H
-#define _GETTEXTP_H
+#ifndef _GETTEXTP_GNU_H
+#define _GETTEXTP_GNU_H
 
 #include  <stddef.h>		/* Get size_t.  */
 
@@ -280,13 +280,15 @@ char *_nl_find_msg (struct loaded_l10nfile *domain_file,
 /* The internal variables in the standalone libintl.a must have different
    names than the internal variables in GNU libc, otherwise programs
    using libintl.a cannot be linked statically.  */
+#define GNU_ROUND_TO_8BYTE_BOUNDRY( a ) (( a + 7 ) & ~7 ) //round upto even 8 byte boundry
+
 #if !defined _LIBC
 # define _nl_default_dirname libintl_nl_default_dirname
 # define _nl_domain_bindings libintl_nl_domain_bindings
 #endif
 
 /* Contains the default location of the message catalogs.  */
-extern const char _nl_default_dirname[];
+extern const char _nl_default_dirname[GNU_ROUND_TO_8BYTE_BOUNDRY(MAXPATHLEN)];
 #ifdef _LIBC
 libc_hidden_proto (_nl_default_dirname)
 #endif

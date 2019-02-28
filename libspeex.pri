@@ -61,45 +61,46 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libspeex/vq_bfin.h \
     $$PWD/DependLibs/libspeex/vq_sse.h
 
-SOURCES += 	$$PWD/DependLibs/libspeex/bits.c \
-    $$PWD/DependLibs/libspeex/buffer.c \
-    $$PWD/DependLibs/libspeex/cb_search.c \
-    $$PWD/DependLibs/libspeex/exc_10_16_table.c \
-    $$PWD/DependLibs/libspeex/exc_10_32_table.c \
-    $$PWD/DependLibs/libspeex/exc_20_32_table.c \
-    $$PWD/DependLibs/libspeex/exc_5_256_table.c \
-    $$PWD/DependLibs/libspeex/exc_5_64_table.c \
-    $$PWD/DependLibs/libspeex/exc_8_128_table.c \
-    $$PWD/DependLibs/libspeex/fftwrap.c \
-    $$PWD/DependLibs/libspeex/filterbank.c \
-    $$PWD/DependLibs/libspeex/filters.c \
-    $$PWD/DependLibs/libspeex/gain_table.c \
-    $$PWD/DependLibs/libspeex/gain_table_lbr.c \
-    $$PWD/DependLibs/libspeex/hexc_10_32_table.c \
-    $$PWD/DependLibs/libspeex/hexc_table.c \
-    $$PWD/DependLibs/libspeex/high_lsp_tables.c \
-    $$PWD/DependLibs/libspeex/jitter.c \
-    $$PWD/DependLibs/libspeex/kiss_fft.c \
-    $$PWD/DependLibs/libspeex/kiss_fftr.c \
-    $$PWD/DependLibs/libspeex/lpc.c \
-    $$PWD/DependLibs/libspeex/lsp.c \
-    $$PWD/DependLibs/libspeex/lsp_tables_nb.c \
-    $$PWD/DependLibs/libspeex/ltp.c \
-    $$PWD/DependLibs/libspeex/mdf.c \
-    $$PWD/DependLibs/libspeex/modes.c \
-    $$PWD/DependLibs/libspeex/modes_wb.c \
-    $$PWD/DependLibs/libspeex/nb_celp.c \
-    $$PWD/DependLibs/libspeex/preprocess.c \
-    $$PWD/DependLibs/libspeex/quant_lsp.c \
-    $$PWD/DependLibs/libspeex/resample.c \
-    $$PWD/DependLibs/libspeex/sb_celp.c \
-    $$PWD/DependLibs/libspeex/scal.c \
-    $$PWD/DependLibs/libspeex/smallft.c \
-    $$PWD/DependLibs/libspeex/speex.c \
-    $$PWD/DependLibs/libspeex/speex_callbacks.c \
-    $$PWD/DependLibs/libspeex/speex_header.c \
-    $$PWD/DependLibs/libspeex/speex_window.c \
-    $$PWD/DependLibs/libspeex/stereo.c \
-    $$PWD/DependLibs/libspeex/vbr.c \
-    $$PWD/DependLibs/libspeex/vq.c
+SOURCES += 	\
+    $$PWD/DependLibs/libspeex/bits_speex.c \
+    $$PWD/DependLibs/libspeex/buffer_speex.c \
+    $$PWD/DependLibs/libspeex/cb_search_speex.c \
+    $$PWD/DependLibs/libspeex/exc_10_16_table_speex.c \
+    $$PWD/DependLibs/libspeex/exc_10_32_table_speex.c \
+    $$PWD/DependLibs/libspeex/exc_20_32_table_speex.c \
+    $$PWD/DependLibs/libspeex/exc_5_256_table_speex.c \
+    $$PWD/DependLibs/libspeex/exc_5_64_table_speex.c \
+    $$PWD/DependLibs/libspeex/exc_8_128_table_speex.c \
+    $$PWD/DependLibs/libspeex/fftwrap_speex.c \
+    $$PWD/DependLibs/libspeex/filterbank_speex.c \
+    $$PWD/DependLibs/libspeex/filters_speex.c \
+    $$PWD/DependLibs/libspeex/gain_table_speex.c \
+    $$PWD/DependLibs/libspeex/gain_table_lbr_speex.c \
+    $$PWD/DependLibs/libspeex/hexc_10_32_table_speex.c \
+    $$PWD/DependLibs/libspeex/hexc_table_speex.c \
+    $$PWD/DependLibs/libspeex/high_lsp_tables_speex.c \
+    $$PWD/DependLibs/libspeex/jitter_speex.c \
+    $$PWD/DependLibs/libspeex/kiss_fft_speex.c \
+    $$PWD/DependLibs/libspeex/kiss_fftr_speex.c \
+    $$PWD/DependLibs/libspeex/lpc_speex.c \
+    $$PWD/DependLibs/libspeex/lsp_speex.c \
+    $$PWD/DependLibs/libspeex/lsp_tables_nb_speex.c \
+    $$PWD/DependLibs/libspeex/ltp_speex.c \
+    $$PWD/DependLibs/libspeex/mdf_speex.c \
+    $$PWD/DependLibs/libspeex/modes_speex.c \
+    $$PWD/DependLibs/libspeex/modes_wb_speex.c \
+    $$PWD/DependLibs/libspeex/nb_celp_speex.c \
+    $$PWD/DependLibs/libspeex/preprocess_speex.c \
+    $$PWD/DependLibs/libspeex/quant_lsp_speex.c \
+    $$PWD/DependLibs/libspeex/resample_speex.c \
+    $$PWD/DependLibs/libspeex/sb_celp_speex.c \
+    $$PWD/DependLibs/libspeex/scal_speex.c \
+    $$PWD/DependLibs/libspeex/smallft_speex.c \
+    $$PWD/DependLibs/libspeex/speex_speex.c \
+    $$PWD/DependLibs/libspeex/speex_callbacks_speex.c \
+    $$PWD/DependLibs/libspeex/speex_header_speex.c \
+    $$PWD/DependLibs/libspeex/speex_window_speex.c \
+    $$PWD/DependLibs/libspeex/stereo_speex.c \
+    $$PWD/DependLibs/libspeex/vbr_speex.c \
+    $$PWD/DependLibs/libspeex/vq_speex.c
 

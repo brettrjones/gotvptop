@@ -28,7 +28,7 @@
 #include "fthash.c"
 #include "ftlcdfil.c"
 #include "ftmac.c"
-#include "ftobjs.c"
+#include "ftobjs_freetype.c"
 #include "ftoutln.c"
 #include "ftpic.c"
 #include "ftpsprop.c"

@@ -16,4 +16,4 @@
 
 #define UNSIGNED        1
 
-#include "strtol.c"
+#include "strtol_gnu.c"

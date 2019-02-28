@@ -25,25 +25,26 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libx264/x264.h \
     $$PWD/DependLibs/libx264/x264cli.h
 
-SOURCES += 	$$PWD/DependLibs/libx264/common/bitstream.c \
-    $$PWD/DependLibs/libx264/common/cabac.c \
-    $$PWD/DependLibs/libx264/common/common.c \
-    $$PWD/DependLibs/libx264/common/cpu.c \
-    $$PWD/DependLibs/libx264/common/dct.c \
-    $$PWD/DependLibs/libx264/common/deblock.c \
-    $$PWD/DependLibs/libx264/common/frame.c \
-    $$PWD/DependLibs/libx264/common/macroblock.c \
-    $$PWD/DependLibs/libx264/common/mc.c \
-    $$PWD/DependLibs/libx264/common/mvpred.c \
-    $$PWD/DependLibs/libx264/common/opencl.c \
-    $$PWD/DependLibs/libx264/common/osdep.c \
-    $$PWD/DependLibs/libx264/common/pixel.c \
-    $$PWD/DependLibs/libx264/common/predict.c \
-    $$PWD/DependLibs/libx264/common/quant.c \
-    $$PWD/DependLibs/libx264/common/rectangle.c \
-    $$PWD/DependLibs/libx264/common/set.c \
-    $$PWD/DependLibs/libx264/common/threadpool.c \
-    $$PWD/DependLibs/libx264/common/vlc.c \
-    $$PWD/DependLibs/libx264/common/win32thread.c \
-    $$PWD/DependLibs/libx264/x264.c
+SOURCES += 	\
+    $$PWD/DependLibs/libx264/x264.c \
+    $$PWD/DependLibs/libx264/common/cpu_x264.c \
+    $$PWD/DependLibs/libx264/common/common_x264.c \
+    $$PWD/DependLibs/libx264/common/bitstream_x264.c \
+    $$PWD/DependLibs/libx264/common/cabac_x264.c \
+    $$PWD/DependLibs/libx264/common/dct_x264.c \
+    $$PWD/DependLibs/libx264/common/deblock_x264.c \
+    $$PWD/DependLibs/libx264/common/frame_x264.c \
+    $$PWD/DependLibs/libx264/common/macroblock_x264.c \
+    $$PWD/DependLibs/libx264/common/mc_x264.c \
+    $$PWD/DependLibs/libx264/common/mvpred_x264.c \
+    $$PWD/DependLibs/libx264/common/opencl_x264.c \
+    $$PWD/DependLibs/libx264/common/osdep_x264.c \
+    $$PWD/DependLibs/libx264/common/pixel_x264.c \
+    $$PWD/DependLibs/libx264/common/predict_x264.c \
+    $$PWD/DependLibs/libx264/common/quant_x264.c \
+    $$PWD/DependLibs/libx264/common/rectangle_x264.c \
+    $$PWD/DependLibs/libx264/common/set_x264.c \
+    $$PWD/DependLibs/libx264/common/threadpool_x264.c \
+    $$PWD/DependLibs/libx264/common/vlc_x264.c \
+    $$PWD/DependLibs/libx264/common/win32thread_x264.c
 

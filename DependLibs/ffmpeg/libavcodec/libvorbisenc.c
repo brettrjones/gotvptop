@@ -17,8 +17,8 @@
  * License along with FFmpeg; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
+# include "libvorbis/include/vorbis/vorbisenc_vorbis.h"
 
-#include <libvorbis/include/vorbis/vorbisenc.h>
 
 #include "libavutil/avassert.h"
 #include "libavutil/fifo.h"
@@ -26,7 +26,7 @@
 #include "avcodec.h"
 #include "audio_frame_queue.h"
 #include "avcodec_internal.h"
-#include "vorbis.h"
+#include "vorbis_avcodec.h"
 #include "vorbis_parser.h"
 
 

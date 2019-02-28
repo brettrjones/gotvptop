@@ -1,6 +1,6 @@
 INCLUDEPATH += $$PWD/../../xbmc/xbmc/
 INCLUDEPATH += $$PWD/../../../DependLibs/
-INCLUDEPATH += $$PWD/../../../DependLibs/openssl-1.0.2o/inc32
+INCLUDEPATH += $$PWD/../../../DependLibs/openssl-1.0.2/inc32
 
 
 HEADERS += 	$$PWD/../../../GoTvCompilerConfig.h \

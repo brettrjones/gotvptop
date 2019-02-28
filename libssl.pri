@@ -273,58 +273,6 @@ SOURCES += 	$$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrWrapperCallback.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslWrapper.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/SslMgr/android_ssl_mgr_1.cpp \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/app_rand.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/apps.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/asn1pars.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/ca.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/ciphers.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/cms.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/crl.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/crl2p7.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/dgst.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/dh.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/dhparam.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/dsa.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/dsaparam.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/ec.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/ecparam.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/enc.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/engine.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/errstr.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/gendh.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/gendsa.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/genpkey.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/genrsa.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/nseq.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/ocsp.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/openssl.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/passwd.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/pkcs12.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/pkcs7.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/pkcs8.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/pkey.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/pkeyparam.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/pkeyutl.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/prime.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/rand.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/req.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/rsa.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/rsautl.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/s_cb.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/s_client.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/s_server.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/s_socket.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/s_time.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/sess_id.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/smime.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/speed.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/spkac.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/srp.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/ts.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/verify.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/version.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/vms_decc_init.c \
-    $$PWD/DependLibs/openssl-1.0.2p/apps/x509.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/aes/aes_cbc.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/aes/aes_cfb.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/aes/aes_core.c \
@@ -466,8 +414,6 @@ SOURCES += 	$$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/bn/rsaz_exp.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/buffer/buf_err.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/buffer/buf_str.c \
-    $$PWD/DependLibs/openssl-1.0.2p/crypto/buffer/buffer.c \
-    $$PWD/DependLibs/openssl-1.0.2p/crypto/camellia/camellia.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/camellia/cmll_cbc.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/camellia/cmll_cfb.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/camellia/cmll_ctr.c \
@@ -699,7 +645,6 @@ SOURCES += 	$$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/fips_ers.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/hmac/hm_ameth.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/hmac/hm_pmeth.c \
-    $$PWD/DependLibs/openssl-1.0.2p/crypto/hmac/hmac.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/idea/i_cbc.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/idea/i_cfb64.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/idea/i_ecb.c \
@@ -714,7 +659,6 @@ SOURCES += 	$$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/md5/md5_one.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/mdc2/mdc2_one.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/mdc2/mdc2dgst.c \
-    $$PWD/DependLibs/openssl-1.0.2p/crypto/mem.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/mem_clr.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/mem_dbg.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/modes/cbc128.c \
@@ -830,7 +774,6 @@ SOURCES += 	$$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/sha/sha1_one.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/sha/sha1dgst.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/sha/sha256.c \
-    $$PWD/DependLibs/openssl-1.0.2p/crypto/sha/sha512.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/sha/sha_dgst.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/sha/sha_one.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/srp/srp_lib.c \
@@ -853,7 +796,6 @@ SOURCES += 	$$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/ui/ui_lib.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/ui/ui_openssl.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/ui/ui_util.c \
-    $$PWD/DependLibs/openssl-1.0.2p/crypto/uid.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/whrlpool/wp_block.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/whrlpool/wp_dgst.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/x509/by_dir.c \
@@ -1001,5 +943,11 @@ SOURCES += 	$$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/ssl/t1_reneg.c \
     $$PWD/DependLibs/openssl-1.0.2p/ssl/t1_srvr.c \
     $$PWD/DependLibs/openssl-1.0.2p/ssl/tls_srp.c \
-    $$PWD/DependLibs/openssl-1.0.2p/crypto/bio/bss_file2.c
+    $$PWD/DependLibs/openssl-1.0.2p/crypto/bio/bss_file2.c \
+    $$PWD/DependLibs/openssl-1.0.2p/crypto/mem_ssl.c \
+    $$PWD/DependLibs/openssl-1.0.2p/crypto/uid_ssl.c \
+    $$PWD/DependLibs/openssl-1.0.2p/crypto/hmac/hmac_ssl.c \
+    $$PWD/DependLibs/openssl-1.0.2p/crypto/buffer/buffer_ssl.c \
+    $$PWD/DependLibs/openssl-1.0.2p/crypto/camellia/camellia_ssl.c \
+    $$PWD/DependLibs/openssl-1.0.2p/crypto/sha/sha512_ssl.c
 

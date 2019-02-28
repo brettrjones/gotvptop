@@ -71,7 +71,8 @@ HEADERS += 	$$PWD/DependLibs/ffmpeg/libavfilter/af_afir.h \
     $$PWD/GoTvDependLibrariesConfig.h \
     $$PWD/GoTvTargetOsConfig.h
 
-SOURCES += 	$$PWD/DependLibs/ffmpeg/libavfilter/aeval.c \
+SOURCES += 	    $$PWD/DependLibs/ffmpeg/libavfilter/allfilters.c \
+    $$PWD/DependLibs/ffmpeg/libavfilter/aeval.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/af_acontrast.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/af_acopy.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/af_acrusher.c \
@@ -134,7 +135,6 @@ SOURCES += 	$$PWD/DependLibs/ffmpeg/libavfilter/aeval.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/af_vibrato.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/af_volume.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/af_volumedetect.c \
-    $$PWD/DependLibs/ffmpeg/libavfilter/allfilters.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/asink_anullsink.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/asrc_anoisesrc.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/asrc_anullsrc.c \
@@ -176,9 +176,6 @@ SOURCES += 	$$PWD/DependLibs/ffmpeg/libavfilter/aeval.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/f_sidedata.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/f_streamselect.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/f_zmq.c \
-    $$PWD/DependLibs/ffmpeg/libavfilter/fifo.c \
-    $$PWD/DependLibs/ffmpeg/libavfilter/formats.c \
-    $$PWD/DependLibs/ffmpeg/libavfilter/framepool.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/framequeue.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/framesync.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/generate_wave_table.c \
@@ -189,15 +186,10 @@ SOURCES += 	$$PWD/DependLibs/ffmpeg/libavfilter/aeval.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/lswsutils.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/motion_estimation.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/opencl_allkernels.c \
-    $$PWD/DependLibs/ffmpeg/libavfilter/pthread.c \
-    $$PWD/DependLibs/ffmpeg/libavfilter/scale.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/setpts.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/settb.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/signature_lookup.c \
-    $$PWD/DependLibs/ffmpeg/libavfilter/split.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/src_movie.c \
-    $$PWD/DependLibs/ffmpeg/libavfilter/transform.c \
-    $$PWD/DependLibs/ffmpeg/libavfilter/trim.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/unsharp_opencl.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/vaf_spectrumsynth.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/vf_alphamerge.c \
@@ -403,5 +395,13 @@ SOURCES += 	$$PWD/DependLibs/ffmpeg/libavfilter/aeval.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/x86/vf_stereo3d_init.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/x86/vf_tinterlace_init.c \
     $$PWD/DependLibs/ffmpeg/libavfilter/x86/vf_w3fdif_init.c \
-    $$PWD/DependLibs/ffmpeg/libavfilter/x86/vf_yadif_init.c
+    $$PWD/DependLibs/ffmpeg/libavfilter/x86/vf_yadif_init.c \
+    $$PWD/DependLibs/ffmpeg/libavfilter/fifo_avfilter.c \
+    $$PWD/DependLibs/ffmpeg/libavfilter/pthread_avfilter.c \
+    $$PWD/DependLibs/ffmpeg/libavfilter/scale_avfilter.c \
+    $$PWD/DependLibs/ffmpeg/libavfilter/split_avfilter.c \
+    $$PWD/DependLibs/ffmpeg/libavfilter/transform_avfilter.c \
+    $$PWD/DependLibs/ffmpeg/libavfilter/trim_avfilter.c \
+    $$PWD/DependLibs/ffmpeg/libavfilter/formats_avfilter.c \
+    $$PWD/DependLibs/ffmpeg/libavfilter/framepool_avfilter.c
 

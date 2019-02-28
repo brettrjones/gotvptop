@@ -1,0 +1,56 @@
+A general explanation of terms and design
+
+Kodi Applet - Kodi built into application as a "Applet". For more info visit https://kodi.wiki/view/Main_Page
+Offer - a offer to video chat or be a friend etc.
+VideoChat - built in plugin for Video Chat between users
+Messenger - built in plugin for Text messages, Pictures, Video etc. between users ( similar to phones text messaging )
+File Share - built in plugin to serve files to self or users with sufficient permission level
+CamServer - built in plugin to serve streaming video from camera. Has built in motion detection and recording security cam features
+Truth Or Dare - built in game plugin to play video chat truth or dare game
+Library - manager of local media that a user may play/share/delete etc
+Relay Service - Forword or "Relay" packets from one user to another for users that cannot connect directly to each other
+
+User - end user. may or may not have joined goup(s)
+        1.) User level permissions to allow/disallow offers and or users media access via "Friendship Level"
+
+GroupUser - User that has joined a hosted goup(s)
+
+Friendship Level - although named differently for "Users" and "Group Host" etc. the permission level 
+   uses the same mechanisim of permission ( per plugin or per group user )
+    1.) None - resource is completely disabled and no access is allowed at all
+    2.) Anonymous - allow resource access to anyone
+    3.) Guest - allow access to user granted "Guest" permission to group or user resources with 
+        Permission Level Guest or Annonymous
+    4.) Friend - allow access to user granted "Friend" permission to group or user resources with
+         Permission Level Friend or Guest or Annonymous 
+    5.) Admin - allow access to user granted "Admin" permission to group or user resources with
+         Permission Level Admin or Friend or Guest or Annonymous  
+
+GoTvPtoP - This application including Kodi as a "Applet" and "Person to Person" sharing of video chat, media, etc
+
+GroupHost - services for a group of users.
+    1.) Admin of permissions to join hosted group or remove user from group
+    2.) Store and forward of user messages
+    3.) Relay of data services for when users cannot connect directly
+    4.) Search Service to search for people or resources within hosted group 
+    5.) Help setup direct connections between users
+    6.) Open Port Connection Test
+           
+GroupAnchor - services to GroupHosts and some services for Users
+    1.) Allow search for GoupHosts for end users to find "Groups" with similar interests
+    2.) Connection information for GroupHosts that do not have a open port
+    3.) GroupHosts may subscribe to multiple GroupAnchors (Provided the GroupAnchor gives them sufficient permission)
+    4.) Open Port Connection Test  
+    5.) Does NOT provide relay services
+
+NetworkAnchor - this one might not ever get coded but in concept it would
+    1.) Allow search for GoupHosts and GroupAnchors for end users to find "Groups" with similar interests    
+    2.) Connection information for GroupAnchors
+    3.) GroupAnchor may subscribe to multiple NetowrkAnchors (Provided the NetworkAnchor gives them sufficient permission)
+    4.) Open Port Connection Test  
+    5.) Does NOT provide relay services
+
+
+
+
+          

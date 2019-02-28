@@ -31,7 +31,7 @@
 #include <math.h>
 #include "theora/theora.h"
 #include "vorbis/codec.h"
-#include "vorbis/vorbisenc.h"
+#include "vorbis/vorbisenc_vorbis.h"
 
 #ifdef _WIN32
 /*supply missing headers and functions to Win32. going to hell, I know*/

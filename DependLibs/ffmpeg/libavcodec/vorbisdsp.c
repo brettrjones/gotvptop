@@ -19,7 +19,7 @@
 #include <ffmpeg/config_ffmpeg.h>
 #include "libavutil/avutil_attributes.h"
 #include "vorbisdsp.h"
-#include "vorbis.h"
+#include "vorbis_avcodec.h"
 
 av_cold void ff_vorbisdsp_init(VorbisDSPContext *dsp)
 {

@@ -29,7 +29,7 @@
 #include "libavutil/avutil_common.h"
 
 #include "avcodec.h"
-#include "vorbis.h"
+#include "vorbis_avcodec.h"
 
 
 /* Helper functions */

@@ -590,7 +590,7 @@
 #define HAVE_TOWLOWER 1
 
 /* Define to 1 if you have the `tsearch' function. */
-#ifndef _MSC_VER
+#if defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_ANDROID)
 # define HAVE_TSEARCH 1
 #endif // _MSC_VER
 

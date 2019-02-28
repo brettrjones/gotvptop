@@ -1,8 +1,8 @@
 
 
 
-INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/
-INCLUDEPATH += $$PWD/DependLibs/
+INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
+INCLUDEPATH += $$PWD/DependLibs
 INCLUDEPATH += $$PWD/DependLibs/libUPnP
 INCLUDEPATH += $$PWD/DependLibs/ffmpeg
 INCLUDEPATH += $$PWD/DependLibs/libUPnP/Platinum/Source/Devices/MediaRenderer
@@ -17,44 +17,12 @@ INCLUDEPATH += $$PWD/DependLibs/libfreetype/include
 
 INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/qt
 
-win32{
-    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/win32
-    INCLUDEPATH += "C:/Python27/include"
-    #INCLUDEPATH += $$PWD/DependLibs/externlibs/win32/python
-    INCLUDEPATH += $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32
-    INCLUDEPATH += $$PWD/DependLibs/Effects11/inc
-    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2o/inc32
-}
-
-unix:!android{
-    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/linux
-    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/posix
-    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
-    INCLUDEPATH += /usr/include/python2.7
-    INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/include #for case where compiling for android but host is windows
-    INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14
-}
-
-android{
-    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/android
-    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/linux
-    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/posix
-    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
-    INCLUDEPATH += /usr/include/python2.7
-    INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/include #for case where compiling for android but host is windows
-    INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14
-}
-
-macx{
-    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/darwin
-}
-
-
 HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvDependLibrariesConfig.h \
     $$PWD/GoTvCore/xbmc/xbmc/config_kodi.h \
     $$PWD/GoTvCore/xbmc/xbmc/AppParamParser.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.h \
     $$PWD/GoTvCore/xbmc/xbmc/Application.h \
     $$PWD/GoTvCore/xbmc/xbmc/ApplicationPlayer.h \
     $$PWD/GoTvCore/xbmc/xbmc/ApplicationStackHelper.h \
@@ -2822,16 +2790,11 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/posix/FilesystemPosix.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/posix/MessagePrinterPosix.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/cores/DllLoader/SoLoader.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/ApplicationInfo.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/interfaces/builtins/AndroidBuiltins.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/PackageItemInfo.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/utils/StringUtils2.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/PeripheralBusAndroid.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/activity/AndroidFeatures.cpp
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/utils/StringUtils2.cpp
 
-win32{
-    SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/platform/win32/CharsetConverterWin32.cpp \
+win32:{
+SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/platform/win32/CharsetConverterWin32.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/win32/EnvironmentWin32.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/win32/FilesystemWin32.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/win32/MessagePrinterWin32.cpp \
@@ -2856,11 +2819,15 @@ win32{
     $$PWD/GoTvCore/xbmc/xbmc/platform/win32/stdio_utf8.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/win32/storage/Win32StorageProvider.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/win32/strverscmp.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/win32/utils/Win32InterfaceForCLog.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/win32/utils/Win32InterfaceForCLog.cpp
+
 }
 
-android{
-HEADERS += $$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.h \
+#NOTE: these android pieces are broken up because qt/linux seems to
+#have some kind of limit that causes "extra characters after test" error
+android {
+
+ HEADERS += \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/api-level.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/asset_manager.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/asset_manager_jni.h \
@@ -2879,9 +2846,13 @@ HEADERS += $$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/sensor.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/storage_manager.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/tts.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/window.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/window.h
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/AndroidAppDirectory.h \
-    $$PWD/GoTvCore/xbmc/xbmc/filesystem/AndroidAppFile.h \
+}
+
+android {
+
+ HEADERS += $$PWD/GoTvCore/xbmc/xbmc/filesystem/AndroidAppFile.h \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/APKFile.h \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/APKDirectory.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Bitmap.h \
@@ -2892,12 +2863,10 @@ HEADERS += $$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/DisplayMetrics.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/PackageManager.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Resources.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniBase.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniThreading.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/jutils/jutils.hpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/jutils/jutils-details.hpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniBase.h
 
-SOURCES += $$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.cpp \
+SOURCES += \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/AndroidAppDirectory.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/AndroidAppFile.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/APKFile.cpp \
@@ -2911,6 +2880,13 @@ SOURCES += $$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniBase.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniThreading.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/jutils.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/PeripheralBusAndroid.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/activity/AndroidFeatures.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/interfaces/builtins/AndroidBuiltins.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/ApplicationInfo.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/PackageItemInfo.cpp \
+
 }
 
 #android{
@@ -3094,6 +3070,39 @@ SOURCES += $$PWD/GoTvCore/xbmc/xbmc/platform/linux/ConvUtils.cpp \
 #    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/main.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/Mmap.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/PosixInterfaceForCLog.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/SharedMemory.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/posix/utils/SharedMemory.cpp
+}
+
+
+win32{
+    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/win32
+    INCLUDEPATH += C:/Python27/include
+    #INCLUDEPATH += $$PWD/DependLibs/externlibs/win32/python
+    INCLUDEPATH += $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32
+    INCLUDEPATH += $$PWD/DependLibs/Effects11/inc
+    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2o/inc32
+}
+
+unix:!android{
+    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/linux
+    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/posix
+    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
+    INCLUDEPATH += /usr/include/python2.7
+    INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/include #for case where compiling for android but host is windows
+    INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14
+}
+
+android{
+    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/android
+    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/linux
+    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/posix
+    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
+    INCLUDEPATH += /usr/include/python2.7
+    INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/include #for case where compiling for android but host is windows
+    INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14
+}
+
+macx{
+    INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/darwin
 }
 

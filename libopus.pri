@@ -85,7 +85,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libopus/silk/x86/main_sse.h \
     $$PWD/DependLibs/libopus/celt/x86/celt_lpc_sse.h \
     $$PWD/DependLibs/libopus/celt/x86/pitch_sse.h \
-    $$PWD/DependLibs/libopus/celt/x86/x86cpu.c \
     $$PWD/DependLibs/libopus/celt/x86/x86cpu.h \
     $$PWD/DependLibs/libopus/include/opus.h \
     $$PWD/DependLibs/libopus/include/opus_custom.h \
@@ -93,86 +92,87 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libopus/include/opus_multistream.h \
     $$PWD/DependLibs/libopus/include/opus_types.h
 
-SOURCES += 	$$PWD/DependLibs/libopus/celt/arm/arm_celt_map.c \
-    $$PWD/DependLibs/libopus/celt/arm/armcpu.c \
-    $$PWD/DependLibs/libopus/celt/arm/celt_ne10_fft.c \
-    $$PWD/DependLibs/libopus/celt/arm/celt_ne10_mdct.c \
-    $$PWD/DependLibs/libopus/celt/arm/celt_neon_intr.c \
-    $$PWD/DependLibs/libopus/celt/bands.c \
-    $$PWD/DependLibs/libopus/celt/celt.c \
-    $$PWD/DependLibs/libopus/celt/celt_decoder.c \
-    $$PWD/DependLibs/libopus/celt/celt_encoder.c \
-    $$PWD/DependLibs/libopus/celt/celt_lpc.c \
-    $$PWD/DependLibs/libopus/celt/cwrs.c \
-    $$PWD/DependLibs/libopus/celt/entcode.c \
-    $$PWD/DependLibs/libopus/celt/entdec.c \
-    $$PWD/DependLibs/libopus/celt/entenc.c \
-    $$PWD/DependLibs/libopus/celt/kiss_fft.c \
-    $$PWD/DependLibs/libopus/celt/laplace.c \
-    $$PWD/DependLibs/libopus/celt/mathops.c \
-    $$PWD/DependLibs/libopus/celt/mdct.c \
-    $$PWD/DependLibs/libopus/celt/modes.c \
-    $$PWD/DependLibs/libopus/celt/opus_custom_demo.c \
-    $$PWD/DependLibs/libopus/celt/pitch.c \
-    $$PWD/DependLibs/libopus/celt/quant_bands.c \
-    $$PWD/DependLibs/libopus/celt/rate.c \
-    $$PWD/DependLibs/libopus/celt/vq.c \
-    $$PWD/DependLibs/libopus/opus/analysis.c \
-    $$PWD/DependLibs/libopus/opus/mlp.c \
-    $$PWD/DependLibs/libopus/opus/mlp_data.c \
-    $$PWD/DependLibs/libopus/opus/opus.c \
-    $$PWD/DependLibs/libopus/opus/opus_compare.c \
-    $$PWD/DependLibs/libopus/opus/opus_decoder.c \
-    $$PWD/DependLibs/libopus/opus/opus_encoder.c \
-    $$PWD/DependLibs/libopus/opus/opus_multistream.c \
-    $$PWD/DependLibs/libopus/opus/opus_multistream_decoder.c \
-    $$PWD/DependLibs/libopus/opus/opus_multistream_encoder.c \
-    $$PWD/DependLibs/libopus/opus/repacketizer.c \
-    $$PWD/DependLibs/libopus/opus/unicode_support.c \
-    $$PWD/DependLibs/libopus/silk/arm/NSQ_neon.c \
-    $$PWD/DependLibs/libopus/silk/arm/arm_silk_map.c \
-    $$PWD/DependLibs/libopus/silk/float/LPC_analysis_filter_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/LPC_inv_pred_gain_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/LTP_analysis_filter_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/LTP_scale_ctrl_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/apply_sine_window_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/autocorrelation_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/burg_modified_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/bwexpander_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/corrMatrix_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/encode_frame_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/energy_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/find_LPC_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/find_LTP_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/find_pitch_lags_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/find_pred_coefs_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/inner_product_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/k2a_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/levinsondurbin_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/noise_shape_analysis_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/pitch_analysis_core_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/prefilter_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/process_gains_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/regularize_correlations_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/residual_energy_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/scale_copy_vector_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/scale_vector_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/schur_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/solve_LS_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/sort_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/warped_autocorrelation_FLP.c \
-    $$PWD/DependLibs/libopus/silk/float/wrappers_FLP.c \
-    $$PWD/DependLibs/libopus/silk/x86/NSQ_del_dec_sse.c \
-    $$PWD/DependLibs/libopus/silk/x86/NSQ_sse.c \
-    $$PWD/DependLibs/libopus/silk/x86/VAD_sse.c \
-    $$PWD/DependLibs/libopus/silk/x86/VQ_WMat_EC_sse.c \
-    $$PWD/DependLibs/libopus/silk/x86/x86_silk_map.c \
-    $$PWD/DependLibs/libopus/celt/x86/celt_lpc_sse.c \
-    $$PWD/DependLibs/libopus/celt/x86/pitch_sse.c \
+SOURCES += 	\
     $$PWD/DependLibs/libopus/celt/x86/pitch_sse2.c \
-    $$PWD/DependLibs/libopus/celt/x86/pitch_sse4_1.c \
-    $$PWD/DependLibs/libopus/celt/x86/x86_celt_map.c \
-    $$PWD/DependLibs/libopus/celt/x86/x86cpu.c
+    $$PWD/DependLibs/libopus/celt/arm/arm_celt_map_opus.c \
+    $$PWD/DependLibs/libopus/celt/arm/armcpu_opus.c \
+    $$PWD/DependLibs/libopus/celt/arm/celt_ne10_fft_opus.c \
+    $$PWD/DependLibs/libopus/celt/arm/celt_ne10_mdct_opus.c \
+    $$PWD/DependLibs/libopus/celt/arm/celt_neon_intr_opus.c \
+    $$PWD/DependLibs/libopus/celt/x86/celt_lpc_sse_opus.c \
+    $$PWD/DependLibs/libopus/celt/x86/pitch_sse_opus.c \
+    $$PWD/DependLibs/libopus/celt/x86/pitch_sse4_1_opus.c \
+    $$PWD/DependLibs/libopus/celt/x86/x86_celt_map_opus.c \
+    $$PWD/DependLibs/libopus/celt/x86/x86cpu_opus.c \
+    $$PWD/DependLibs/libopus/celt/bands_opus.c \
+    $$PWD/DependLibs/libopus/celt/celt_opus.c \
+    $$PWD/DependLibs/libopus/celt/celt_encoder_opus.c \
+    $$PWD/DependLibs/libopus/celt/celt_decoder_opus.c \
+    $$PWD/DependLibs/libopus/celt/celt_lpc_opus.c \
+    $$PWD/DependLibs/libopus/celt/cwrs_opus.c \
+    $$PWD/DependLibs/libopus/celt/entcode_opus.c \
+    $$PWD/DependLibs/libopus/celt/entdec_opus.c \
+    $$PWD/DependLibs/libopus/celt/entenc_opus.c \
+    $$PWD/DependLibs/libopus/celt/kiss_fft_opus.c \
+    $$PWD/DependLibs/libopus/celt/laplace_opus.c \
+    $$PWD/DependLibs/libopus/celt/mathops_opus.c \
+    $$PWD/DependLibs/libopus/celt/mdct_opus.c \
+    $$PWD/DependLibs/libopus/celt/modes_opus.c \
+    $$PWD/DependLibs/libopus/celt/opus_custom_demo_opus.c \
+    $$PWD/DependLibs/libopus/celt/pitch_opus.c \
+    $$PWD/DependLibs/libopus/celt/quant_bands_opus.c \
+    $$PWD/DependLibs/libopus/celt/rate_opus.c \
+    $$PWD/DependLibs/libopus/celt/vq_opus.c \
+    $$PWD/DependLibs/libopus/opus/analysis_opus.c \
+    $$PWD/DependLibs/libopus/opus/mlp_opus.c \
+    $$PWD/DependLibs/libopus/opus/mlp_data_opus.c \
+    $$PWD/DependLibs/libopus/opus/opus_opus.c \
+    $$PWD/DependLibs/libopus/opus/opus_decoder_opus.c \
+    $$PWD/DependLibs/libopus/opus/opus_compare_opus.c \
+    $$PWD/DependLibs/libopus/opus/opus_encoder_opus.c \
+    $$PWD/DependLibs/libopus/opus/opus_multistream_opus.c \
+    $$PWD/DependLibs/libopus/opus/opus_multistream_encoder_opus.c \
+    $$PWD/DependLibs/libopus/opus/opus_multistream_decoder_opus.c \
+    $$PWD/DependLibs/libopus/opus/repacketizer_opus.c \
+    $$PWD/DependLibs/libopus/opus/unicode_support_opus.c \
+    $$PWD/DependLibs/libopus/silk/arm/arm_silk_map_opus.c \
+    $$PWD/DependLibs/libopus/silk/arm/NSQ_neon_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/apply_sine_window_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/autocorrelation_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/burg_modified_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/bwexpander_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/corrMatrix_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/encode_frame_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/energy_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/find_LPC_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/find_LTP_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/find_pitch_lags_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/find_pred_coefs_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/inner_product_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/k2a_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/levinsondurbin_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/LPC_analysis_filter_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/LPC_inv_pred_gain_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/LTP_analysis_filter_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/LTP_scale_ctrl_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/noise_shape_analysis_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/pitch_analysis_core_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/prefilter_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/process_gains_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/regularize_correlations_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/residual_energy_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/scale_copy_vector_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/scale_vector_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/schur_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/solve_LS_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/sort_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/warped_autocorrelation_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/float/wrappers_FLP_opus.c \
+    $$PWD/DependLibs/libopus/silk/x86/NSQ_del_dec_sse_opus.c \
+    $$PWD/DependLibs/libopus/silk/x86/NSQ_sse_opus.c \
+    $$PWD/DependLibs/libopus/silk/x86/VAD_sse_opus.c \
+    $$PWD/DependLibs/libopus/silk/x86/VQ_WMat_EC_sse_opus.c \
+    $$PWD/DependLibs/libopus/silk/x86/x86_silk_map_opus.c
 
 DISTFILES += \
     $$PWD/DependLibs/libopus/celt/arm/arm2gnu.pl \

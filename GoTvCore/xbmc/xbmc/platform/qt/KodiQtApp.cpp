@@ -16,7 +16,9 @@
 #include <dlfcn.h>
 #include <string.h>
 
-#include <jni.h>
+#if defined(TARGET_OS_ANDROID)
+# include <jni.h>
+#endif // defined(TARGET_OS_ANDROID)
 
 //#include <qtandroid/configuration.h>
 //#include <qtandroid/bitmap.h>
@@ -56,8 +58,11 @@
 #include "filesystem/VideoDatabaseFile.h"
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
-#include "windowing/android/VideoSyncAndroid.h"
-#include "windowing/android/WinSystemAndroid.h"
+#if defined(TARGET_OS_ANDROID)
+# include "windowing/android/VideoSyncAndroid.h"
+# include "windowing/android/WinSystemAndroid.h"
+#endif // defined(TARGET_OS_ANDROID)
+
 #include "windowing/WinEvents.h"
 #include "platform/xbmc.h"
 
@@ -531,12 +536,16 @@ void CXBMCApp::SetDisplayMode(int mode, float rate)
 
 int CXBMCApp::android_printf(const char *format, ...)
 {
+#if defined(TARGET_OS_ANDROID)
   // For use before CLog is setup by XBMC_Run()
   va_list args;
   va_start(args, format);
   int result = __android_log_vprint(ANDROID_LOG_VERBOSE, "Kodi", format, args);
   va_end(args);
   return result;
+#else
+    return 0;
+#endif //defined(TARGET_OS_ANDROID)
 }
 
 int CXBMCApp::GetDPI()

@@ -1,0 +1,9 @@
+NOTE: building kodi is NOT required. instructions are here as a option to build kodi for comparison
+
+follow the instructions at https://kodi.wiki/view/HOW-TO:Compile_Kodi_for_Debian_or_Ubuntu
+
+except use git clone -b Krypton git://github.com/xbmc/xbmc.git Branch_17.6-Kr
+and
+if get a confure error about crosslib then do
+$ sudo make -C tools/depends/target/crossguid/ PREFIX=/usr/local 
+

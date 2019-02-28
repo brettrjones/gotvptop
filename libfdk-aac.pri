@@ -251,16 +251,6 @@ SOURCES += 	$$PWD/DependLibs/libfdk-aac/libAACdec/src/aac_ram.cpp \
     $$PWD/DependLibs/libfdk-aac/libSBRdec/src/sbrdec_drc.cpp \
     $$PWD/DependLibs/libfdk-aac/libSBRdec/src/sbrdec_freq_sca.cpp \
     $$PWD/DependLibs/libfdk-aac/libSBRdec/src/sbrdecoder.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSYS/src/cmdl_parser.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSYS/src/conv_string.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSYS/src/genericStds.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSYS/src/linux/FDK_stackload_linux.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSYS/src/linux/audio_linux.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSYS/src/linux/coresup_linux.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSYS/src/linux/genericStds_linux.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSYS/src/linux/uart_linux.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSYS/src/mips/genericStds_mips.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSYS/src/wav_file.cpp \
     $$PWD/DependLibs/libfdk-aac/libAACenc/src/aacenc_lib.cpp \
     $$PWD/DependLibs/libfdk-aac/libAACenc/src/aacenc.cpp \
     $$PWD/DependLibs/libfdk-aac/libAACenc/src/aacenc_pns.cpp \
@@ -292,7 +282,6 @@ SOURCES += 	$$PWD/DependLibs/libfdk-aac/libAACdec/src/aac_ram.cpp \
     $$PWD/DependLibs/libfdk-aac/libAACenc/src/sf_estim.cpp \
     $$PWD/DependLibs/libfdk-aac/libAACenc/src/spreading.cpp \
     $$PWD/DependLibs/libfdk-aac/libAACenc/src/tonality.cpp \
-    $$PWD/DependLibs/libfdk-aac/libAACenc/src/transform.cpp \
     $$PWD/DependLibs/libfdk-aac/libMpegTPEnc/src/tpenc_adif.cpp \
     $$PWD/DependLibs/libfdk-aac/libMpegTPEnc/src/tpenc_adts.cpp \
     $$PWD/DependLibs/libfdk-aac/libMpegTPEnc/src/tpenc_asc.cpp \
@@ -301,20 +290,31 @@ SOURCES += 	$$PWD/DependLibs/libfdk-aac/libAACdec/src/aac_ram.cpp \
     $$PWD/DependLibs/libfdk-aac/libSBRenc/src/bit_sbr.cpp \
     $$PWD/DependLibs/libfdk-aac/libSBRenc/src/code_env.cpp \
     $$PWD/DependLibs/libfdk-aac/libSBRenc/src/env_bit.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/env_est.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/fram_gen.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/invf_est.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/mh_det.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/nf_est.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/ps_bitenc.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/ps_encode.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/ps_main.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/resampler.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/sbrenc_freq_sca.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/sbr_encoder.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/sbr_misc.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/sbr_ram_fdk_enc.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/sbr_rom_fdk_enc.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/ton_corr.cpp \
-    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/tran_det.cpp
+    $$PWD/DependLibs/libfdk-aac/libAACenc/src/transform_libffk_enc.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSYS/src/wav_file_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSYS/src/genericStds_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSYS/src/conv_string_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSYS/src/cmdl_parser_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSYS/src/mips/genericStds_mips_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSYS/src/linux/uart_linux_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSYS/src/linux/genericStds_linux_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSYS/src/linux/FDK_stackload_linux_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSYS/src/linux/coresup_linux_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSYS/src/linux/audio_linux_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/tran_det_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/ton_corr_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/sbrenc_freq_sca_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/sbr_rom_fdk_enc_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/sbr_ram_fdk_enc_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/sbr_misc_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/sbr_encoder_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/resampler_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/ps_main_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/ps_encode_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/ps_bitenc_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/nf_est_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/mh_det_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/invf_est_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/fram_gen_fdkaac.cpp \
+    $$PWD/DependLibs/libfdk-aac/libSBRenc/src/env_est_fdkaac.cpp
 

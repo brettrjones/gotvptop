@@ -26,6 +26,8 @@
 # include "platform/android/activity/XBMCApp.h"
 #elif defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
 # include "platform/qt/KodiQtApp.h"
+#elif defined(TARGET_OS_LINUX) && defined(HAVE_QT_GUI)
+# include "platform/qt/KodiQtApp.h"
 #endif // defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
 
 

@@ -5,7 +5,7 @@ INCLUDEPATH += $$PWD/../../../libogg/include
 
 HEADERS += 	$$PWD/../../config_libvorbis.h \
 	$$PWD/../../include/vorbis/codec.h \
-	$$PWD/../../include/vorbis/vorbisenc.h \
+    $$PWD/../../include/vorbis/vorbisenc_vorbis.h \
 	$$PWD/../../include/vorbis/vorbisfile.h \
 	$$PWD/../../lib/backends.h \
 	$$PWD/../../lib/bitrate.h \

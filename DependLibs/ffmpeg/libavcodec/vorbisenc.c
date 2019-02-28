@@ -33,7 +33,7 @@
 #include "avcodec_internal.h"
 #include "fft.h"
 #include "mathops.h"
-#include "vorbis.h"
+#include "vorbis_avcodec.h"
 #include "vorbis_enc_data.h"
 
 #include "audio_frame_queue.h"

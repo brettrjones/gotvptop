@@ -1,3 +1,5 @@
+NOTE: building kodi is NOT required. instructions are here as a option to build kodi for comparison
+
 The following instructions were modifiec from instructions at
 https://forum.kodi.tv/showthread.php?tid=306050
 

@@ -1,3 +1,4 @@
+NOTE: building kodi is NOT required. instructions are here as a option to build kodi for comparison
 NOTE: could not get this to work in Mint 18.3.. get link errors
 
 The following instructions were modifiec from instructions at

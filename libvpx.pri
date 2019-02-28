@@ -228,73 +228,11 @@ HEADERS += 	$$PWD/GoTvAppConfig.h \
     $$PWD/DependLibs/libvpx/vpx_scale_rtcd_linux.h \
     $$PWD/DependLibs/libvpx/vpx_scale_rtcd_win.h
 
-SOURCES += 	$$PWD/DependLibs/libvpx/vp8/common/alloccommon.c \
-    $$PWD/DependLibs/libvpx/vp8/common/blockd.c \
-    $$PWD/DependLibs/libvpx/vp8/common/copy_c.c \
-    $$PWD/DependLibs/libvpx/vp8/common/dequantize.c \
-    $$PWD/DependLibs/libvpx/vp8/common/entropy.c \
-    $$PWD/DependLibs/libvpx/vp8/common/entropymode.c \
-    $$PWD/DependLibs/libvpx/vp8/common/entropymv.c \
-    $$PWD/DependLibs/libvpx/vp8/common/extend.c \
-    $$PWD/DependLibs/libvpx/vp8/common/filter.c \
-    $$PWD/DependLibs/libvpx/vp8/common/findnearmv.c \
-    $$PWD/DependLibs/libvpx/vp8/common/generic/systemdependent.c \
-    $$PWD/DependLibs/libvpx/vp8/common/idct_blk.c \
-    $$PWD/DependLibs/libvpx/vp8/common/idctllm.c \
-    $$PWD/DependLibs/libvpx/vp8/common/loopfilter_filters.c \
-    $$PWD/DependLibs/libvpx/vp8/common/mbpitch.c \
-    $$PWD/DependLibs/libvpx/vp8/common/mfqe.c \
-    $$PWD/DependLibs/libvpx/vp8/common/modecont.c \
-    $$PWD/DependLibs/libvpx/vp8/common/postproc.c \
-    $$PWD/DependLibs/libvpx/vp8/common/quant_common.c \
-    $$PWD/DependLibs/libvpx/vp8/common/reconinter.c \
-    $$PWD/DependLibs/libvpx/vp8/common/reconintra.c \
-    $$PWD/DependLibs/libvpx/vp8/common/reconintra4x4.c \
-    $$PWD/DependLibs/libvpx/vp8/common/rtcd.c \
-    $$PWD/DependLibs/libvpx/vp8/common/setupintrarecon.c \
-    $$PWD/DependLibs/libvpx/vp8/common/swapyv12buffer.c \
-    $$PWD/DependLibs/libvpx/vp8/common/treecoder.c \
+SOURCES += 	\
     $$PWD/DependLibs/libvpx/vp8/common/vp8_loopfilter.c \
     $$PWD/DependLibs/libvpx/vp8/common/vp8_skin_detection.c \
-    $$PWD/DependLibs/libvpx/vp8/common/x86/filter_x86.c \
-    $$PWD/DependLibs/libvpx/vp8/common/x86/idct_blk_mmx.c \
-    $$PWD/DependLibs/libvpx/vp8/common/x86/idct_blk_sse2.c \
-    $$PWD/DependLibs/libvpx/vp8/common/x86/loopfilter_x86.c \
     $$PWD/DependLibs/libvpx/vp8/common/x86/vp8_asm_stubs.c \
-    $$PWD/DependLibs/libvpx/vp8/decoder/dboolhuff.c \
-    $$PWD/DependLibs/libvpx/vp8/decoder/decodeframe.c \
-    $$PWD/DependLibs/libvpx/vp8/decoder/decodemv.c \
-    $$PWD/DependLibs/libvpx/vp8/decoder/detokenize.c \
-    $$PWD/DependLibs/libvpx/vp8/decoder/onyxd_if.c \
-    $$PWD/DependLibs/libvpx/vp8/decoder/threading.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/bitstream.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/boolhuff.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/dct.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/denoising.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/encodeframe.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/encodeintra.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/encodemb.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/encodemv.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/ethreading.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/firstpass.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/lookahead.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/mcomp.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/modecosts.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/onyx_if.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/pickinter.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/picklpf.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/ratectrl.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/rdopt.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/segmentation.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/temporal_filter.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/tokenize.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/treewriter.c \
     $$PWD/DependLibs/libvpx/vp8/encoder/vp8_quantize.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/x86/denoising_sse2.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/x86/quantize_sse4.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/x86/vp8_enc_stubs_sse2.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/x86/vp8_quantize_sse2.c \
-    $$PWD/DependLibs/libvpx/vp8/encoder/x86/vp8_quantize_ssse3.c \
     $$PWD/DependLibs/libvpx/vp8/vp8_cx_iface.c \
     $$PWD/DependLibs/libvpx/vp8/vp8_dx_iface.c \
     $$PWD/DependLibs/libvpx/vp9/common/vp9_alloccommon.c \
@@ -361,7 +299,6 @@ SOURCES += 	$$PWD/DependLibs/libvpx/vp8/common/alloccommon.c \
     $$PWD/DependLibs/libvpx/vp9/encoder/vp9_temporal_filter.c \
     $$PWD/DependLibs/libvpx/vp9/encoder/vp9_tokenize.c \
     $$PWD/DependLibs/libvpx/vp9/encoder/vp9_treewriter.c \
-    $$PWD/DependLibs/libvpx/vp9/encoder/x86/temporal_filter_sse4.c \
     $$PWD/DependLibs/libvpx/vp9/encoder/x86/vp9_dct_intrin_sse2.c \
     $$PWD/DependLibs/libvpx/vp9/encoder/x86/vp9_dct_ssse3.c \
     $$PWD/DependLibs/libvpx/vp9/encoder/x86/vp9_diamond_search_sad_avx.c \
@@ -375,53 +312,117 @@ SOURCES += 	$$PWD/DependLibs/libvpx/vp8/common/alloccommon.c \
     $$PWD/DependLibs/libvpx/vpx/src/vpx_encoder.c \
     $$PWD/DependLibs/libvpx/vpx/src/vpx_image.c \
     $$PWD/DependLibs/libvpx/vpx_config.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/add_noise.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/avg.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/bitreader.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/bitreader_buffer.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/bitwriter.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/bitwriter_buffer.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/deblock.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/fwd_txfm.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/intrapred.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/inv_txfm.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/loopfilter.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/prob.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/psnr.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/quantize.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/sad.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/skin_detection.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/subtract.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/sum_squares.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/variance.c \
     $$PWD/DependLibs/libvpx/vpx_dsp/vpx_convolve.c \
     $$PWD/DependLibs/libvpx/vpx_dsp/vpx_dsp_rtcd.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/avg_intrin_sse2.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/avg_pred_sse2.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/fwd_txfm_avx2.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/fwd_txfm_sse2.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/inv_txfm_sse2.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/inv_txfm_ssse3.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/loopfilter_avx2.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/loopfilter_sse2.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/quantize_avx.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/quantize_sse2.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/quantize_ssse3.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/sad4d_avx2.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/sad_avx2.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/sum_squares_sse2.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/variance_avx2.c \
-    $$PWD/DependLibs/libvpx/vpx_dsp/x86/variance_sse2.c \
     $$PWD/DependLibs/libvpx/vpx_dsp/x86/vpx_asm_stubs.c \
     $$PWD/DependLibs/libvpx/vpx_dsp/x86/vpx_subpixel_8t_intrin_avx2.c \
     $$PWD/DependLibs/libvpx/vpx_dsp/x86/vpx_subpixel_8t_intrin_ssse3.c \
     $$PWD/DependLibs/libvpx/vpx_mem/vpx_mem.c \
-    $$PWD/DependLibs/libvpx/vpx_scale/generic/gen_scalers.c \
     $$PWD/DependLibs/libvpx/vpx_scale/generic/vpx_scale.c \
-    $$PWD/DependLibs/libvpx/vpx_scale/generic/yv12config.c \
-    $$PWD/DependLibs/libvpx/vpx_scale/generic/yv12extend.c \
     $$PWD/DependLibs/libvpx/vpx_scale/vpx_scale_rtcd.c \
     $$PWD/DependLibs/libvpx/vpx_util/vpx_thread.c \
     $$PWD/DependLibs/libvpx/vpx_util/vpx_write_yuv_frame.c \
-    $$PWD/DependLibs/libvpx/vp8/common/arm/loopfilter_arm.c
+    $$PWD/DependLibs/libvpx/vp8/common/arm/loopfilter_arm_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/generic/systemdependent_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/x86/filter_x86_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/x86/idct_blk_mmx_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/x86/idct_blk_sse2_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/x86/loopfilter_x86_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/alloccommon_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/blockd_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/copy_c_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/dequantize_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/entropy_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/entropymode_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/entropymv_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/extend_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/filter_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/findnearmv_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/idct_blk_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/idctllm_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/loopfilter_filters_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/mbpitch_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/mfqe_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/modecont_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/postproc_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/quant_common_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/reconinter_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/reconintra_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/rtcd_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/reconintra4x4_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/setupintrarecon_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/swapyv12buffer_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/common/treecoder_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/decoder/dboolhuff_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/decoder/decodeframe_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/decoder/decodemv_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/decoder/detokenize_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/decoder/onyxd_if_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/decoder/threading_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/x86/denoising_sse2_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/x86/quantize_sse4_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/x86/vp8_enc_stubs_sse2_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/x86/vp8_quantize_sse2_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/x86/vp8_quantize_ssse3_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/bitstream_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/boolhuff_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/dct_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/denoising_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/encodeframe_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/encodeintra_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/encodemb_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/encodemv_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/ethreading_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/firstpass_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/lookahead_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/mcomp_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/modecosts_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/onyx_if_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/pickinter_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/picklpf_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/ratectrl_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/rdopt_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/segmentation_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/temporal_filter_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/tokenize_vp8.c \
+    $$PWD/DependLibs/libvpx/vp8/encoder/treewriter_vp8.c \
+    $$PWD/DependLibs/libvpx/vp9/encoder/x86/temporal_filter_sse4_vp9.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/avg_intrin_sse2_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/avg_pred_sse2_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/fwd_txfm_avx2_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/fwd_txfm_sse2_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/inv_txfm_sse2_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/inv_txfm_ssse3_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/loopfilter_avx2_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/loopfilter_sse2_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/quantize_avx_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/quantize_sse2_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/quantize_ssse3_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/sad4d_avx2_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/sad_avx2_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/sum_squares_sse2_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/variance_avx2_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/x86/variance_sse2_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/add_noise_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/avg_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/bitreader_vpx_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/bitwriter_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/bitwriter_buffer_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/bitreader_buffer_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/deblock_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/fwd_txfm_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/intrapred_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/inv_txfm_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/loopfilter_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/prob_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/psnr_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/quantize_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/sad_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/skin_detection_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/subtract_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/sum_squares_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_dsp/variance_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_scale/generic/gen_scalers_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_scale/generic/yv12config_vpx.c \
+    $$PWD/DependLibs/libvpx/vpx_scale/generic/yv12extend_vpx.c
 

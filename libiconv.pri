@@ -226,7 +226,8 @@ HEADERS += 	$$PWD/DependLibs/libiconv/aliases.h \
     $$PWD/DependLibs/libiconv/vietcomb.h \
     $$PWD/DependLibs/libiconv/viscii.h
 
-SOURCES += 	$$PWD/DependLibs/libiconv/iconv.c \
-    $$PWD/DependLibs/libiconv/localcharset.c \
-    $$PWD/DependLibs/libiconv/relocatable.c
+SOURCES += 	\
+    $$PWD/DependLibs/libiconv/iconv_iconv.c \
+    $$PWD/DependLibs/libiconv/localcharset_iconv.c \
+    $$PWD/DependLibs/libiconv/relocatable_iconv.c
 

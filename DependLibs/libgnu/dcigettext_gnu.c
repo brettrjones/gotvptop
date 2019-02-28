@@ -1680,7 +1680,7 @@ mempcpy (void *dest, const void *src, size_t n)
 #endif
 
 #if !_LIBC && !HAVE_TSEARCH
-# include "tsearch.c"
+# include "tsearch_gnu.c"
 #endif
 
 

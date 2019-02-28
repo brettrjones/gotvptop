@@ -17,6 +17,8 @@
 #include <wrl/client.h>
 #endif
 
+#include "system_gl.h"
+
 class CBaseTexture;
 
 class CSlideShowPic

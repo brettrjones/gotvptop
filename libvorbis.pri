@@ -6,7 +6,6 @@ INCLUDEPATH += $$PWD/DependLibs/libogg/include
 
 HEADERS += 	$$PWD/DependLibs/libvorbis/config_libvorbis.h \
     $$PWD/DependLibs/libvorbis/include/vorbis/codec.h \
-    $$PWD/DependLibs/libvorbis/include/vorbis/vorbisenc.h \
     $$PWD/DependLibs/libvorbis/include/vorbis/vorbisfile.h \
     $$PWD/DependLibs/libvorbis/lib/backends.h \
     $$PWD/DependLibs/libvorbis/lib/bitrate.h \
@@ -46,27 +45,29 @@ HEADERS += 	$$PWD/DependLibs/libvorbis/config_libvorbis.h \
     $$PWD/DependLibs/libvorbis/lib/registry.h \
     $$PWD/DependLibs/libvorbis/lib/scales.h \
     $$PWD/DependLibs/libvorbis/lib/smallft.h \
-    $$PWD/DependLibs/libvorbis/lib/window.h
+    $$PWD/DependLibs/libvorbis/lib/window.h \
+    $$PWD/DependLibs/libvorbis/include/vorbis/vorbisenc_vorbis.h
 
-SOURCES += 	$$PWD/DependLibs/libvorbis/lib/analysis.c \
-    $$PWD/DependLibs/libvorbis/lib/bitrate.c \
-    $$PWD/DependLibs/libvorbis/lib/block.c \
-    $$PWD/DependLibs/libvorbis/lib/codebook.c \
-    $$PWD/DependLibs/libvorbis/lib/envelope.c \
-    $$PWD/DependLibs/libvorbis/lib/floor0.c \
-    $$PWD/DependLibs/libvorbis/lib/floor1.c \
-    $$PWD/DependLibs/libvorbis/lib/info.c \
-    $$PWD/DependLibs/libvorbis/lib/lookup.c \
-    $$PWD/DependLibs/libvorbis/lib/lpc.c \
-    $$PWD/DependLibs/libvorbis/lib/lsp.c \
-    $$PWD/DependLibs/libvorbis/lib/mapping0.c \
-    $$PWD/DependLibs/libvorbis/lib/mdct.c \
-    $$PWD/DependLibs/libvorbis/lib/psy.c \
-    $$PWD/DependLibs/libvorbis/lib/registry.c \
-    $$PWD/DependLibs/libvorbis/lib/res0.c \
-    $$PWD/DependLibs/libvorbis/lib/sharedbook.c \
-    $$PWD/DependLibs/libvorbis/lib/smallft.c \
-    $$PWD/DependLibs/libvorbis/lib/synthesis.c \
-    $$PWD/DependLibs/libvorbis/lib/vorbisenc.c \
-    $$PWD/DependLibs/libvorbis/lib/window.c
+SOURCES += 	\
+    $$PWD/DependLibs/libvorbis/lib/analysis_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/bitrate_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/block_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/codebook_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/envelope_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/floor0_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/floor1_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/info_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/lookup_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/lpc_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/lsp_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/mapping0_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/mdct_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/psy_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/registry_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/res0_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/sharedbook_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/smallft_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/synthesis_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/vorbisenc_vorbis.c \
+    $$PWD/DependLibs/libvorbis/lib/window_vorbis.c
 

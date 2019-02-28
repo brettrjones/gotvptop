@@ -27,6 +27,10 @@ android{
     DEFINES += BIONIC_IOCTL_NO_SIGNEDNESS_OVERLOAD
 }
 
+win{
+    INCLUDEPATH += $$PWD/sysheaders
+}
+
 #win32{
 #    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2o
 #    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2o/inc32

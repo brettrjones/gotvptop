@@ -41,6 +41,7 @@
 #elif HAVE_ES2_GL_H
 #include <ES2/gl.h>
 #else
+
 #include <GL/gl.h>
 #include <GL/glext.h>
 #endif

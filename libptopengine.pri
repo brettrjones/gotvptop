@@ -1,6 +1,19 @@
+
+    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p
+    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
+
+win32{
+    INCLUDEPATH += $$PWD/sysheaders
+}
+
+unix{
+    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p
+    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
+}
+
 INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/
-INCLUDEPATH += $$PWD/GoTvCore/../DependLibs/
-INCLUDEPATH += $$PWD/GoTvCore/../DependLibs/openssl-1.0.2o/inc32
+INCLUDEPATH += $$PWD/DependLibs/
+
 
 
 HEADERS += 	$$PWD/GoTvCompilerConfig.h \
@@ -219,6 +232,8 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServerLib.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebSkt.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginGroupAnchor.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginGroupHost.h
 
 
 SOURCES += 	$$PWD/GoTvCore/GoTvP2P/Anchor/AnchorDb.cpp \
@@ -403,5 +418,7 @@ SOURCES += 	$$PWD/GoTvCore/GoTvP2P/Anchor/AnchorDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageSettings.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServerHttp.cpp \
-    $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebSkt.cpp
+    $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebSkt.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginGroupAnchor.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginGroupHost.cpp
 

@@ -107,7 +107,7 @@
 #ifndef TRIO_REPLACE_STDIO
 #define TRIO_PUBLIC static
 #endif
-#include "trionan.c"
+#include "trionan_xml2.c"
 
 /*
  * The lack of portability of this section of the libc is annoying !

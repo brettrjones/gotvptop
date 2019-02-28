@@ -20,6 +20,7 @@
 #endif
 #include <math.h>
 
+
 #if defined(HAVE_QT_GUI)
 # include "rendering/qt/RenderSystemQt.h"
 #elif defined(HAS_GL)

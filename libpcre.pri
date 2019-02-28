@@ -10,7 +10,6 @@ HEADERS += 	$$PWD/DependLibs/libpcre/config_pcre.h \
     $$PWD/DependLibs/libpcre/ucpinternal.h
 
 SOURCES += 	$$PWD/DependLibs/libpcre/config_pcre.c \
-    $$PWD/DependLibs/libpcre/dftables.c \
     $$PWD/DependLibs/libpcre/pcre_chartables.c \
     $$PWD/DependLibs/libpcre/pcre_compile.c \
     $$PWD/DependLibs/libpcre/pcre_dfa_exec.c \
@@ -35,5 +34,6 @@ SOURCES += 	$$PWD/DependLibs/libpcre/config_pcre.c \
     $$PWD/DependLibs/libpcre/pcrecpp.cc \
     $$PWD/DependLibs/libpcre/pcregrep.c \
     $$PWD/DependLibs/libpcre/pcreposix.c \
-    $$PWD/DependLibs/libpcre/ucptable.c
+    $$PWD/DependLibs/libpcre/dftables_pcre.c \
+    $$PWD/DependLibs/libpcre/ucptable_pcre.c
 
