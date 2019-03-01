@@ -66,6 +66,7 @@
 #define HAVE_ASINH 1
 
 /* Define to 1 if you have the <asm/types.h> header file. */
+#undef HAVE_ASM_TYPES_H
 #define HAVE_ASM_TYPES_H 1
 
 /* Define to 1 if you have the `atanh' function. */
@@ -236,7 +237,7 @@
 #define HAVE_FORK 1
 
 /* Define to 1 if you have the `forkpty' function. */
-#define HAVE_FORKPTY 1
+//#define HAVE_FORKPTY 1
 
 /* Define to 1 if you have the `fpathconf' function. */
 #define HAVE_FPATHCONF 1
@@ -501,7 +502,7 @@
 #define HAVE_NICE 1
 
 /* Define to 1 if you have the `openpty' function. */
-#define HAVE_OPENPTY 1
+//#define HAVE_OPENPTY 1
 
 /* Define if compiling using MacOS X 10.5 SDK or later. */
 /* #undef HAVE_OSX105_SDK */
@@ -1197,6 +1198,9 @@
 
 /* Define if you have POSIX threads, and your system does not define that. */
 /* #undef _POSIX_THREADS */
+#ifndef _POSIX_THREADS
+# define _POSIX_THREADS 1
+#endif // _POSIX_THREADS
 
 /* Define to force use of thread-safe errno, h_errno, and other functions */
 /* #undef _REENTRANT */
@@ -1212,7 +1216,9 @@
 /* #undef _UINT64_T */
 
 /* Define to the level of X/Open that your system supports */
-#define _XOPEN_SOURCE 600
+#ifndef _XOPEN_SOURCE
+# define _XOPEN_SOURCE 600
+#endif // _XOPEN_SOURCE
 
 /* Define to activate Unix95-and-earlier features */
 #define _XOPEN_SOURCE_EXTENDED 1

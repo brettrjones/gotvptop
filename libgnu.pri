@@ -608,8 +608,8 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libgnu/xsize_gnu.h \
     $$PWD/DependLibs/libgnu/xstriconv.h \
     $$PWD/DependLibs/libgnu/xvasprintf.h \
-    $$PWD/DependLibs/libgnu/int_gnu.h \
-    $$PWD/DependLibs/libgnu/cipher/serpent._gnuc
+    $$PWD/DependLibs/libgnu/int_gnu.h
+
 
 SOURCES += 	\
     $$PWD/DependLibs/libgnu/base64_gnu.c \
@@ -740,6 +740,7 @@ SOURCES += 	\
     $$PWD/DependLibs/libgnu/cipher/sha512_gnu.c \
     $$PWD/DependLibs/libgnu/cipher/stribog_gnu.c \
     $$PWD/DependLibs/libgnu/cipher/tiger_gnu.c \
+    $$PWD/DependLibs/libgnu/cipher/serpent_gnu.c \
     $$PWD/DependLibs/libgnu/cipher/twofish_gnu.c \
     $$PWD/DependLibs/libgnu/cipher/whirlpool_gnu.c \
     $$PWD/DependLibs/libgnu/compat/clock_gnu.c \

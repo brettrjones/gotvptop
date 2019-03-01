@@ -1508,7 +1508,11 @@ initmmap(void)
 
     setint(dict, "PAGESIZE", (long)my_getpagesize());
 
+#if defined(HAVE_SYSCONF) && defined(_SC_PAGESIZE)
     setint(dict, "ALLOCATIONGRANULARITY", (long)my_getallocationgranularity());
+#else
+    setint(dict, "ALLOCATIONGRANULARITY", (long)my_getpagesize());
+#endif
 
     setint(dict, "ACCESS_READ", ACCESS_READ);
     setint(dict, "ACCESS_WRITE", ACCESS_WRITE);

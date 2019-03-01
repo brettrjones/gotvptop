@@ -1,13 +1,4 @@
 
-win32{
-DEFINES += DSO_WIN32
-}
-
-#DEFINES += NO_SYSLOG MONOLITH OPENSSL_THREADS L_ENDIAN OPENSSL_BN_ASM_PART_WORDS OPENSSL_IA32_SSE2 OPENSSL_BN_ASM_MONT OPENSSL_NO_RC5 OPENSSL_NO_MD2 OPENSSL_NO_KB5 OPENSSL_NO_JPAKE OPENSSL_NO_DYNAMIC_ENGINE DEBUG_VTPOOLUPLOAD NO_WINDOWS_BRAINDEATH
-DEFINES += OPENSSL_NO_EC_NISTP_64_GCC_128 OPENSSL_NO_GMP OPENSSL_NO_JPAKE OPENSSL_NO_LIBUNBOUND OPENSSL_NO_MD2 OPENSSL_NO_RC5
-DEFINES += OPENSSL_NO_RFC3779 OPENSSL_NO_SCTP OPENSSL_NO_SSL_TRACE OPENSSL_NO_SSL2 OPENSSL_NO_STORE OPENSSL_NO_UNIT_TEST OPENSSL_NO_WEAK_SSL_CIPHERS
-DEFINES += NO_SYSLOG OPENSSL_THREADS _REENTRANT DSO_DLFCN HAVE_DLFCN_H m64 L_ENDIAN
-
 INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
 INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/crypto
 INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/crypto/modes
@@ -537,8 +528,6 @@ SOURCES += 	$$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/ec/ecp_nistp256.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/ec/ecp_nistp521.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/ec/ecp_nistputil.c \
-    $$PWD/DependLibs/openssl-1.0.2p/crypto/ec/ecp_nistz256.c \
-    $$PWD/DependLibs/openssl-1.0.2p/crypto/ec/ecp_nistz256_table.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/ec/ecp_oct.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/ec/ecp_smpl.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/ecdh/ech_err.c \
@@ -949,5 +938,6 @@ SOURCES += 	$$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/hmac/hmac_ssl.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/buffer/buffer_ssl.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/camellia/camellia_ssl.c \
-    $$PWD/DependLibs/openssl-1.0.2p/crypto/sha/sha512_ssl.c
+    $$PWD/DependLibs/openssl-1.0.2p/crypto/sha/sha512_ssl.c \
+    $$PWD/DependLibs/openssl-1.0.2p/crypto/des/fcrypt_b.c
 
