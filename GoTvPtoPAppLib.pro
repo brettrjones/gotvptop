@@ -105,7 +105,7 @@ CONFIG(release, debug|release){
 }
 
 
-include(GoTvPtoP_App.pri)
+include(GoTvPtoPAppLib.pri)
 
 #DESTDIR = $$PWD/bin/
 

@@ -125,6 +125,16 @@ void							DumpInt8( unsigned long u32MsgType, int8_t* data, int dataLen, int in
 void							DumpInt16( unsigned long u32MsgType, int16_t* data, int dataLen, int instance, char * msg );
 void							DumpFloat( unsigned long u32MsgType, float* data, int dataLen, int instance, char * msg );
 
+// Convenience macros for logging
+#define LogVerboseMsg(msg, ...) LogMsg(LOG_VERBOSE, (msg), __VA_ARGS__)
+#define LogInfoMsg(msg, ...) LogMsg(LOG_VERBOSE, (msg), __VA_ARGS__)
+#define LogDebugMsg(msg, ...) LogMsg(LOG_DEBUG, (msg), __VA_ARGS__)
+#define LogWarnMsg(msg, ...) LogMsg(LOG_WARN, (msg), __VA_ARGS__)
+#define LogErrorMsg(msg, ...) LogMsg(LOG_ERROR, (msg), __VA_ARGS__)
+#define LogFatalMsg(msg, ...) LogMsg(LOG_FATAL, (msg), __VA_ARGS__)
+#define LogStatusMsg(msg, ...) LogMsg(LOG_STATUS, (msg), __VA_ARGS__)
+
+
 #if defined( _DEBUG ) || defined( DEBUG )
 	/// This function is called by vx_assert() when the assertion fails.
 	void  vx_error_output( unsigned long u32LogLevel, char* exp, char * file, int line);

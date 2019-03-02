@@ -56,6 +56,11 @@ CONFIG(release, debug|release){
     UI_DIR =.ui/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
 }
 
+# look in same directory as executable for shared libraries
+unix:{
+QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\'"
+}
+
 #QMAKE_CFLAGS_YACC   = -Wno-unused -Wno-parentheses
 #QMAKE_CXXFLAGS_RTTI_OFF = -fno-rtti
 #QMAKE_CXXFLAGS_EXCEPTIONS_OFF = -fno-exceptions
@@ -154,6 +159,7 @@ contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
         $$PWD/android
 }
 
+android:{
 DISTFILES += \
     android/AndroidManifest.xml \
     android/gradle/wrapper/gradle-wrapper.jar \
@@ -163,3 +169,28 @@ DISTFILES += \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew.bat \
     android/res/values/strings.xml
+}
+
+#copy shared libraries to out directory
+#message(Static Lib prefix($${STATIC_LIB_PREFIX})  suffix($${STATIC_LIB_SUFFIX})  )
+
+
+
+#copy shared libs to local output directory so can easily be linked to
+ CONFIG(debug, debug|release){
+    copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug/* $$shell_path($$OUT_PWD/))
+ }
+
+ CONFIG(release, debug|release){
+    copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/* $$shell_path($$OUT_PWD/) )
+ }
+
+ first.depends = $(first) copydata
+ export(first.depends)
+ export(copydata.commands)
+ QMAKE_EXTRA_TARGETS += first copydata
+
+unix:{
+    #give linux the path of where to load our shared libraries from for debugger
+    LIBS += -L$$OUT_PWD/
+}

@@ -113,3 +113,5 @@ build-sharedlibs/Linux/x86_64/debug/libpythoncore_d\.so\.1\.0\.0
 *.1
 
 *.0
+
+build-sharedlibs/Linux/x86_64/debug/

@@ -16,6 +16,10 @@
 
 /* Written by Bruno Haible <bruno@clisp.org>, 2007.  */
 
+// BRJ causes recursion of calls open and origin_open on linux
+
+#if 0
+
 /* If the user's config.h happens to include <fcntl.h>, let it include only
    the system's <fcntl.h> here, so that orig_open doesn't recurse to
    rpl_open.  */
@@ -182,3 +186,5 @@ open (const char *filename, int flags, ...)
   return fd;
 }
 #endif // _MSC_VER // msc does not need it
+
+#endif // 0

@@ -143,8 +143,11 @@
 #  define CP_HIDDEN __attribute__ ((visibility ("hidden")))
 #else
 */
+#undef CP_EXPORT
 #  define CP_EXPORT
+#undef CP_IMPORT
 #  define CP_IMPORT extern
+#undef CP_HIDDEN
 #  define CP_HIDDEN
 //#endif
 
