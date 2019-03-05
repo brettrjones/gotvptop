@@ -17,8 +17,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audition", "audition\auditi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wavpackdll", "wavpackdll\wavpackdll.vcxproj", "{1A87F412-BA74-4DBB-9F77-FD55C042FB63}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winamp_lng", "winamp\winamp_lng\winamp_lng.vcxproj", "{310B5608-E3D1-481D-BD8F-2F18FD9A3E07}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wvtag", "wvtagexe\wvtag.vcxproj", "{E902ADAD-C567-4AB7-A480-1AE7396C7AF7}"
 EndProject
 Global
@@ -81,12 +79,6 @@ Global
 		{1A87F412-BA74-4DBB-9F77-FD55C042FB63}.Release|Win32.Build.0 = Release|Win32
 		{1A87F412-BA74-4DBB-9F77-FD55C042FB63}.Release|x64.ActiveCfg = Release|x64
 		{1A87F412-BA74-4DBB-9F77-FD55C042FB63}.Release|x64.Build.0 = Release|x64
-		{310B5608-E3D1-481D-BD8F-2F18FD9A3E07}.Debug|Win32.ActiveCfg = Debug|Win32
-		{310B5608-E3D1-481D-BD8F-2F18FD9A3E07}.Debug|Win32.Build.0 = Debug|Win32
-		{310B5608-E3D1-481D-BD8F-2F18FD9A3E07}.Debug|x64.ActiveCfg = Debug|x64
-		{310B5608-E3D1-481D-BD8F-2F18FD9A3E07}.Release|Win32.ActiveCfg = Release|Win32
-		{310B5608-E3D1-481D-BD8F-2F18FD9A3E07}.Release|Win32.Build.0 = Release|Win32
-		{310B5608-E3D1-481D-BD8F-2F18FD9A3E07}.Release|x64.ActiveCfg = Release|x64
 		{E902ADAD-C567-4AB7-A480-1AE7396C7AF7}.Debug|Win32.ActiveCfg = Debug|Win32
 		{E902ADAD-C567-4AB7-A480-1AE7396C7AF7}.Debug|Win32.Build.0 = Debug|Win32
 		{E902ADAD-C567-4AB7-A480-1AE7396C7AF7}.Debug|x64.ActiveCfg = Debug|x64
@@ -98,5 +90,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {47CB047F-D00E-4A04-980B-A6A5946214BF}
 	EndGlobalSection
 EndGlobal

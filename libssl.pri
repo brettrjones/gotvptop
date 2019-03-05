@@ -498,7 +498,6 @@ SOURCES += 	$$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/dsa/dsa_vrf.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/dso/dso_beos.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/dso/dso_dl.c \
-    $$PWD/DependLibs/openssl-1.0.2p/crypto/dso/dso_dlfcn.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/dso/dso_err.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/dso/dso_lib.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/dso/dso_null.c \
@@ -941,3 +940,7 @@ SOURCES += 	$$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/sha/sha512_ssl.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/des/fcrypt_b.c
 
+unix:{
+SOURCES += 	 $$PWD/DependLibs/openssl-1.0.2p/crypto/dso/dso_dlfcn.c
+
+}

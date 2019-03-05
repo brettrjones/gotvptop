@@ -26,7 +26,7 @@
 void
 NPT_Console::Output(const char* message)
 {
-    OutputDebugString(message);
+    OutputDebugStringA(message);
     printf("%s", message);
 }
 

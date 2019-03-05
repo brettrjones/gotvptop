@@ -210,8 +210,8 @@ SOURCES += 	\
     $$PWD/DependLibs/libcurl/lib/curl_sasl.c \
     $$PWD/DependLibs/libcurl/lib/curl_sspi.c \
     $$PWD/DependLibs/libcurl/lib/curl_threads.c \
-    $$PWD/DependLibs/libcurl/lib/ftplistparser.c \
-    $$PWD/DependLibs/libcurl/src/slist_wc.c \
+    $$PWD/DependLibs/libcurl/lib/ftplistparser_curl.c \
+    $$PWD/DependLibs/libcurl/src/slist_wc_curl.c \
     $$PWD/DependLibs/libcurl/src/tool_binmode.c \
     $$PWD/DependLibs/libcurl/src/tool_bname.c \
     $$PWD/DependLibs/libcurl/src/tool_cb_dbg.c \

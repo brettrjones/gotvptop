@@ -250,18 +250,18 @@ public:
 
 #ifdef SHA1_UTILITY_FUNCTIONS
 	// Hash in file contents
-	bool HashFile( const TCHAR* tszFileName, VxThread * workThread );
+    bool HashFile( const char * tszFileName, VxThread * workThread );
 #endif
 
 	// Finalize hash; call it before using ReportHash(Stl)
 	void Final();
 
 #ifdef SHA1_UTILITY_FUNCTIONS
-	bool ReportHash(TCHAR* tszReport, REPORT_TYPE rtReportType = REPORT_HEX) const;
+    bool ReportHash(char * tszReport, REPORT_TYPE rtReportType = REPORT_HEX) const;
 #endif
 
 #ifdef SHA1_STL_FUNCTIONS
-	bool ReportHashStl(std::basic_string<TCHAR>& strOut, REPORT_TYPE rtReportType =
+    bool ReportHashStl(std::basic_string<char>& strOut, REPORT_TYPE rtReportType =
 		REPORT_HEX) const;
 #endif
 

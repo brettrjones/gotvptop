@@ -6,7 +6,8 @@ unix{
     DEFINES += NOT_HAVE_SA_LEN
 }
 
-INCLUDEPATH += $$PWD/DependLibs/libmdnsresponder/
+INCLUDEPATH += $$PWD/DependLibs/libmdnsresponder
+INCLUDEPATH += $$PWD/DependLibs/libmdnsresponder/mDNSShared
 
 HEADERS += 	$$PWD/DependLibs/libmdnsresponder/config_libmdnsresponder.h \
     $$PWD/DependLibs/libmdnsresponder/mDNSShared/CommonServices.h \

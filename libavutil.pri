@@ -204,7 +204,7 @@ SOURCES += 	$$PWD/DependLibs/ffmpeg/atomics/pthread/stdatomic_avutil.c \
     $$PWD/DependLibs/ffmpeg/libavutil/md5_avutil.c \
     $$PWD/DependLibs/ffmpeg/libavutil/mem_avutil.c \
     $$PWD/DependLibs/ffmpeg/libavutil/murmur3_avutil.c \
-    $$PWD/DependLibs/ffmpeg/libavutil/opencl_avutil_avutil.c \
+    $$PWD/DependLibs/ffmpeg/libavutil/opencl_avutil.c \
     $$PWD/DependLibs/ffmpeg/libavutil/opencl_internal_avutil.c \
     $$PWD/DependLibs/ffmpeg/libavutil/opt_avutil.c \
     $$PWD/DependLibs/ffmpeg/libavutil/parseutils_avutil.c \

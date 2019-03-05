@@ -226,127 +226,127 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\bits.c">
+    <ClCompile Include="..\..\bits_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\buffer.c">
+    <ClCompile Include="..\..\buffer_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\cb_search.c">
+    <ClCompile Include="..\..\cb_search_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\exc_5_64_table.c">
+    <ClCompile Include="..\..\exc_5_64_table_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\exc_5_256_table.c">
+    <ClCompile Include="..\..\exc_5_256_table_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\exc_8_128_table.c">
+    <ClCompile Include="..\..\exc_8_128_table_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\exc_10_16_table.c">
+    <ClCompile Include="..\..\exc_10_16_table_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\exc_10_32_table.c">
+    <ClCompile Include="..\..\exc_10_32_table_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\exc_20_32_table.c">
+    <ClCompile Include="..\..\exc_20_32_table_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\fftwrap.c">
+    <ClCompile Include="..\..\fftwrap_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\filterbank.c">
+    <ClCompile Include="..\..\filterbank_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\filters.c">
+    <ClCompile Include="..\..\filters_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gain_table.c">
+    <ClCompile Include="..\..\gain_table_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gain_table_lbr.c">
+    <ClCompile Include="..\..\gain_table_lbr_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\hexc_10_32_table.c">
+    <ClCompile Include="..\..\hexc_10_32_table_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\hexc_table.c">
+    <ClCompile Include="..\..\hexc_table_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\high_lsp_tables.c">
+    <ClCompile Include="..\..\high_lsp_tables_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\jitter.c">
+    <ClCompile Include="..\..\jitter_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\kiss_fft.c">
+    <ClCompile Include="..\..\kiss_fft_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\kiss_fftr.c">
+    <ClCompile Include="..\..\kiss_fftr_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\lpc.c">
+    <ClCompile Include="..\..\lpc_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\lsp.c">
+    <ClCompile Include="..\..\lsp_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\lsp_tables_nb.c">
+    <ClCompile Include="..\..\lsp_tables_nb_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ltp.c">
+    <ClCompile Include="..\..\ltp_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\mdf.c">
+    <ClCompile Include="..\..\mdf_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\modes.c">
+    <ClCompile Include="..\..\modes_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\modes_wb.c">
+    <ClCompile Include="..\..\modes_wb_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\nb_celp.c">
+    <ClCompile Include="..\..\nb_celp_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\preprocess.c">
+    <ClCompile Include="..\..\preprocess_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\quant_lsp.c">
+    <ClCompile Include="..\..\quant_lsp_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\resample.c">
+    <ClCompile Include="..\..\resample_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\sb_celp.c">
+    <ClCompile Include="..\..\sb_celp_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\scal.c">
+    <ClCompile Include="..\..\scal_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\smallft.c">
+    <ClCompile Include="..\..\smallft_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\speex.c">
+    <ClCompile Include="..\..\speex_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\speex_callbacks.c">
+    <ClCompile Include="..\..\speex_callbacks_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\speex_header.c">
+    <ClCompile Include="..\..\speex_header_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\stereo.c">
+    <ClCompile Include="..\..\stereo_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\vbr.c">
+    <ClCompile Include="..\..\vbr_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\vq.c">
+    <ClCompile Include="..\..\vq_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\speex_window.c">
+    <ClCompile Include="..\..\speex_window_speex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

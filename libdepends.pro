@@ -23,7 +23,7 @@ CONFIG(release, debug|release){
 android{
 INCLUDEPATH += $$PWD/DependLibs/androidNdk/android/cpufeatures
 HEADERS += 	$$PWD/DependLibs/androidNdk/android/cpufeatures/cpu-features.h
-SOURCES += 	$$PWD/DependLibs/androidNdk/android/cpufeatures/cpu-features.c
+SOURCES += 	$$PWD/DependLibs/androidNdk/android/cpufeatures/cpu-features_ndk.c
 }
 
 

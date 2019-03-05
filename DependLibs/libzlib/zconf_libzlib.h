@@ -379,6 +379,7 @@ typedef uLong FAR uLongf;
 #endif
 
 #if defined(Z_HAVE_UNISTD_H) || defined(_LARGEFILE64_SOURCE)
+# ifndef TARGET_OS_WINDOWS
 #  include <unistd.h>       /* for SEEK_* and off_t */
 #  ifdef VMS
 #    include <unixio.h>     /* for off_t */
@@ -386,6 +387,7 @@ typedef uLong FAR uLongf;
 #  ifndef z_off_t
 #    define z_off_t off_t
 #  endif
+# endif // TARGET_OS_WINDOWS
 #endif
 
 #ifndef SEEK_SET

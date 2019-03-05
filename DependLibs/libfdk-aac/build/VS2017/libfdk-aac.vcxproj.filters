@@ -390,12 +390,6 @@
     <ClInclude Include="..\..\libSBRdec\src\sbr_dec.h">
       <Filter>libSBRdec\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libSBRdec\src\sbr_ram.h">
-      <Filter>libSBRdec\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libSBRdec\src\sbr_rom.h">
-      <Filter>libSBRdec\src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\libSBRdec\src\sbr_scale.h">
       <Filter>libSBRdec\src</Filter>
     </ClInclude>
@@ -413,6 +407,12 @@
     </ClInclude>
     <ClInclude Include="..\..\libPCMutils\include\pcmutils_lib.h">
       <Filter>libPCMutils\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libSBRdec\src\sbr_ram_fdk_dec.h">
+      <Filter>libSBRdec\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libSBRdec\src\sbr_rom_fdk_dec.h">
+      <Filter>libSBRdec\src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -533,36 +533,6 @@
     <ClCompile Include="..\..\libFDK\src\arm\scale_arm.cpp">
       <Filter>libFDK\src\arm</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libSYS\src\cmdl_parser.cpp">
-      <Filter>libSYS\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libSYS\src\conv_string.cpp">
-      <Filter>libSYS\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libSYS\src\genericStds.cpp">
-      <Filter>libSYS\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libSYS\src\wav_file.cpp">
-      <Filter>libSYS\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libSYS\src\linux\audio_linux.cpp">
-      <Filter>libSYS\src\linux</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libSYS\src\linux\coresup_linux.cpp">
-      <Filter>libSYS\src\linux</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libSYS\src\linux\FDK_stackload_linux.cpp">
-      <Filter>libSYS\src\linux</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libSYS\src\linux\genericStds_linux.cpp">
-      <Filter>libSYS\src\linux</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libSYS\src\linux\uart_linux.cpp">
-      <Filter>libSYS\src\linux</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libSYS\src\mips\genericStds_mips.cpp">
-      <Filter>libSYS\src\mips</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\libMpegTPDec\src\tpdec_adif.cpp">
       <Filter>libMpegTPDec\src</Filter>
     </ClCompile>
@@ -614,12 +584,6 @@
     <ClCompile Include="..\..\libSBRdec\src\sbr_dec.cpp">
       <Filter>libSBRdec\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libSBRdec\src\sbr_ram.cpp">
-      <Filter>libSBRdec\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libSBRdec\src\sbr_rom.cpp">
-      <Filter>libSBRdec\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\libSBRdec\src\sbrdec_drc.cpp">
       <Filter>libSBRdec\src</Filter>
     </ClCompile>
@@ -652,6 +616,42 @@
     </ClCompile>
     <ClCompile Include="..\..\libFDK\src\scale_generic.cpp">
       <Filter>libFDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libSBRdec\src\sbr_ram_fdk_dec.cpp">
+      <Filter>libSBRdec\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libSBRdec\src\sbr_rom_fdk_dec.cpp">
+      <Filter>libSBRdec\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libSYS\src\cmdl_parser_fdkaac.cpp">
+      <Filter>libSYS\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libSYS\src\conv_string_fdkaac.cpp">
+      <Filter>libSYS\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libSYS\src\genericStds_fdkaac.cpp">
+      <Filter>libSYS\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libSYS\src\wav_file_fdkaac.cpp">
+      <Filter>libSYS\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libSYS\src\linux\audio_linux_fdkaac.cpp">
+      <Filter>libSYS\src\linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libSYS\src\linux\coresup_linux_fdkaac.cpp">
+      <Filter>libSYS\src\linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libSYS\src\linux\FDK_stackload_linux_fdkaac.cpp">
+      <Filter>libSYS\src\linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libSYS\src\linux\genericStds_linux_fdkaac.cpp">
+      <Filter>libSYS\src\linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libSYS\src\linux\uart_linux_fdkaac.cpp">
+      <Filter>libSYS\src\linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libSYS\src\mips\genericStds_mips_fdkaac.cpp">
+      <Filter>libSYS\src\mips</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

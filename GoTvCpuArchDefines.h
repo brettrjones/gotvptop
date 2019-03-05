@@ -18,7 +18,6 @@
 #ifdef TARGET_OS_WINDOWS
 # define GOTV_ARCH_LITTLE_ENDIAN	    1
 # define GOTV_ARCH_BIG_ENDIAN			0
-# define TARGET_CPU_X86					1  // general cpu type     
 
 # define ARCH_ALPHA		                0
 # define ARCH_ARM                       0
@@ -36,6 +35,8 @@
 # define ARCH_64_BITS                   1
 # define ARCH_32_BITS                   0
 # define ARCH_X86_64_IS_AVAILABLE		1
+# define TARGET_CPU_X86_64					1  // general cpu type
+
 // some libraries require different defines
 # if !defined (__x86_64__)
 #  define __x86_64__                    1
@@ -47,6 +48,8 @@
 #  define _WIN64    
 # endif // !defined (_WIN64)
 #else
+# define TARGET_CPU_X86					1  // general cpu type
+
 # define ARCH_64_BITS                   0
 # define ARCH_32_BITS                   1
 # define ARCH_AARCH64                   0
@@ -239,15 +242,16 @@ echo GoTv CPU Arch Defines error no cpu target defined
 //=== cpu features ===//
 #if defined(TARGET_CPU_X86) || defined(TARGET_CPU_X86_64)
 
-# if defined(TARGET_CPU_X86)
-#  define ARCH_32_BITS 1
-#  define ARCH_64_BITS 0
-# else
+# if defined(TARGET_CPU_X86_64)
 // less work to define TARGET_CPU_X86 also and then check for TARGET_CPU_X86_64 if needed
 #  define TARGET_CPU_X86 1
 #  define ARCH_32_BITS 0
 #  define ARCH_64_BITS 1
+# else
+#  define ARCH_32_BITS 1
+#  define ARCH_64_BITS 0
 # endif // defined(TARGET_CPU_X86)
+
 
 // ONLY INTEL HAS AVX ?
 # define HAVE_AVX 1
@@ -353,15 +357,18 @@ echo GoTv CPU Config error no cpu arc defined.. unknown processors not supported
 # define SIZEOF_LONG 4
 #else
 # define SIZEOF_VOID_P 8
-# define SIZEOF_UNSIGNED_LONG_INT 8
-# define SIZEOF_UNSIGNED_INT 8
 # define SIZEOF_CHAR_P 8
+
 # ifdef TARGET_OS_WINDOWS
-#  define SIZEOF_INT 8
+#  define SIZEOF_UNSIGNED_INT 4
+#  define SIZEOF_UNSIGNED_LONG_INT 4
+#  define SIZEOF_INT 4 // microsoft compiler uses 4 byte int in all arch.. only long long is 64 bit
 #  define SIZEOF_LONG 4 // microsoft compiler uses 4 byte long in all arch
 # else
+#  define SIZEOF_UNSIGNED_INT 4
+#  define SIZEOF_UNSIGNED_LONG_INT 8
 #  define SIZEOF_INT 4
-#  define SIZEOF_LONG 8 // everybody else uses long size the same as int size
+#  define SIZEOF_LONG 8 // everybody else uses long size the same as arch size
 # endif // TARGET_OS_LINUX
 
 #endif // ARCH_32_BITS

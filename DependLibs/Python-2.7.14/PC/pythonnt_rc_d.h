@@ -1,4 +1,8 @@
-/* This file created by python.props /t:GeneratePythonNtRcH */
+/* This file created by make_versioninfo.exe */
 #define FIELD3 14150
 #define MS_DLL_ID "2.7"
+#ifndef _DEBUG
+#define PYTHON_DLL_NAME "python27.dll"
+#else
 #define PYTHON_DLL_NAME "python27_d.dll"
+#endif

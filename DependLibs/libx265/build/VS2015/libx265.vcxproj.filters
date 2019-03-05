@@ -267,151 +267,151 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\common\bitstream.cpp">
+    <ClCompile Include="..\..\common\bitstream_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\common.cpp">
+    <ClCompile Include="..\..\common\common_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\constants.cpp">
+    <ClCompile Include="..\..\common\constants_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\cpu.cpp">
+    <ClCompile Include="..\..\common\cpu_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\cudata.cpp">
+    <ClCompile Include="..\..\common\cudata_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\dct.cpp">
+    <ClCompile Include="..\..\common\dct_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\deblock.cpp">
+    <ClCompile Include="..\..\common\deblock_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\frame.cpp">
+    <ClCompile Include="..\..\common\frame_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\framedata.cpp">
+    <ClCompile Include="..\..\common\framedata_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\intrapred.cpp">
+    <ClCompile Include="..\..\common\intrapred_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\ipfilter.cpp">
+    <ClCompile Include="..\..\common\ipfilter_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\loopfilter.cpp">
+    <ClCompile Include="..\..\common\loopfilter_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\lowres.cpp">
+    <ClCompile Include="..\..\common\lowres_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\md5.cpp">
+    <ClCompile Include="..\..\common\md5_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\param.cpp">
+    <ClCompile Include="..\..\common\param_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\piclist.cpp">
+    <ClCompile Include="..\..\common\piclist_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\picyuv.cpp">
+    <ClCompile Include="..\..\common\picyuv_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\pixel.cpp">
+    <ClCompile Include="..\..\common\pixel_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\predict.cpp">
+    <ClCompile Include="..\..\common\predict_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\primitives.cpp">
+    <ClCompile Include="..\..\common\primitives_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\quant.cpp">
+    <ClCompile Include="..\..\common\quant_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\scalinglist.cpp">
+    <ClCompile Include="..\..\common\scalinglist_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\shortyuv.cpp">
+    <ClCompile Include="..\..\common\shortyuv_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\slice.cpp">
+    <ClCompile Include="..\..\common\slice_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\threading.cpp">
+    <ClCompile Include="..\..\common\threading_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\threadpool.cpp">
+    <ClCompile Include="..\..\common\threadpool_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\version.cpp">
+    <ClCompile Include="..\..\common\version_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\wavefront.cpp">
+    <ClCompile Include="..\..\common\wavefront_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\winxp.cpp">
+    <ClCompile Include="..\..\common\winxp_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\yuv.cpp">
+    <ClCompile Include="..\..\common\yuv_x265.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\x265.cpp">
+    <ClCompile Include="..\..\x265_x265.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\analysis.cpp">
+    <ClCompile Include="..\..\encoder\analysis_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\api.cpp">
+    <ClCompile Include="..\..\encoder\api_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\bitcost.cpp">
+    <ClCompile Include="..\..\encoder\bitcost_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\dpb.cpp">
+    <ClCompile Include="..\..\encoder\dpb_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\encoder.cpp">
+    <ClCompile Include="..\..\encoder\encoder_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\entropy.cpp">
+    <ClCompile Include="..\..\encoder\entropy_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\frameencoder.cpp">
+    <ClCompile Include="..\..\encoder\frameencoder_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\framefilter.cpp">
+    <ClCompile Include="..\..\encoder\framefilter_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\level.cpp">
+    <ClCompile Include="..\..\encoder\level_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\motion.cpp">
+    <ClCompile Include="..\..\encoder\motion_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\nal.cpp">
+    <ClCompile Include="..\..\encoder\nal_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\ratecontrol.cpp">
+    <ClCompile Include="..\..\encoder\ratecontrol_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\reference.cpp">
+    <ClCompile Include="..\..\encoder\reference_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\sao.cpp">
+    <ClCompile Include="..\..\encoder\sao_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\search.cpp">
+    <ClCompile Include="..\..\encoder\search_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\sei.cpp">
+    <ClCompile Include="..\..\encoder\sei_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\slicetype.cpp">
+    <ClCompile Include="..\..\encoder\slicetype_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\encoder\weightPrediction.cpp">
+    <ClCompile Include="..\..\encoder\weightPrediction_x265.cpp">
       <Filter>Source Files\encoder</Filter>
     </ClCompile>
   </ItemGroup>

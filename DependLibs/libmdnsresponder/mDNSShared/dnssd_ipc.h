@@ -31,9 +31,9 @@
 
 #include <libmdnsresponder/config_libmdnsresponder.h>
 
-#ifdef ANDROID
-#include <sys/socket.h>
-#include <sys/un.h>
+#ifdef TARGET_OS_ANDROID
+# include <sys/socket.h>
+# include <sys/un.h>
 #endif
 
 #include "dns_sd.h"

@@ -27,7 +27,7 @@ android{
     DEFINES += BIONIC_IOCTL_NO_SIGNEDNESS_OVERLOAD
 }
 
-win{
+win32{
     INCLUDEPATH += $$PWD/sysheaders
 }
 
@@ -62,7 +62,6 @@ win{
 
 
 
-QMAKE_CXXFLAGS += -Wno-unused-parameter
 unix:QMAKE_CXXFLAGS += -std=c++11
 unix:QMAKE_CXXFLAGS += -fpermissive
 unix:QMAKE_CXXFLAGS += -Wno-unused-variable
@@ -74,7 +73,6 @@ unix:QMAKE_CXXFLAGS += -Wno-missing-field-initializers
 unix:QMAKE_CXXFLAGS += -Wno-switch
 #unix:!android:QMAKE_CXXFLAGS += -Wno-#pragma-messages
 
-QMAKE_CFLAGS += -Wno-unused-parameter
 unix:QMAKE_CFLAGS += -Wno-unused-variable
 unix:QMAKE_CFLAGS += -Wno-unused-function
 unix:QMAKE_CFLAGS += -Wno-attributes
@@ -88,6 +86,7 @@ unix:QMAKE_CFLAGS += -Wno-switch
 
 #unix:!android:QMAKE_CFLAGS += -Wno-#pragma-messages
 
+unix:{
 QMAKE_CFLAGS_WARN_OFF -= -Wunused-parameter
 QMAKE_CFLAGS_WARN_ON += -Wno-unused-parameter
 
@@ -95,5 +94,6 @@ QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-parameter
 QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
 QMAKE_CXXFLAGS_WARN_OFF -= -Winconsistent-missing-override
 QMAKE_CXXFLAGS_WARN_ON += -Wno-inconsistent-missing-override
+}
 
 

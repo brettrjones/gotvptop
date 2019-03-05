@@ -113,7 +113,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libUPnP/config_libupnp.h \
     $$PWD/DependLibs/libUPnP/Neptune/Source/System/Bsd/NptBsdBlockerSocket.h
 
-SOURCES += 	$$PWD/DependLibs/libUPnP/Neptune/Source/Core/Neptune.cpp \
+SOURCES += $$PWD/DependLibs/libUPnP/Neptune/Source/Core/Neptune.cpp \
     $$PWD/DependLibs/libUPnP/Neptune/Source/Core/NptAutomaticCleaner.cpp \
     $$PWD/DependLibs/libUPnP/Neptune/Source/Core/NptBase64.cpp \
     $$PWD/DependLibs/libUPnP/Neptune/Source/Core/NptBufferedStreams.cpp \
@@ -147,22 +147,9 @@ SOURCES += 	$$PWD/DependLibs/libUPnP/Neptune/Source/Core/Neptune.cpp \
     $$PWD/DependLibs/libUPnP/Neptune/Source/Core/NptUtils.cpp \
     $$PWD/DependLibs/libUPnP/Neptune/Source/Core/NptXml.cpp \
     $$PWD/DependLibs/libUPnP/Neptune/Source/Core/NptZip.cpp \
-    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Bsd/NptBsdResolver.cpp \
-    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Bsd/NptBsdSockets.cpp \
     $$PWD/DependLibs/libUPnP/Neptune/Source/System/Posix/NptPosixEnvironment.cpp \
     $$PWD/DependLibs/libUPnP/Neptune/Source/System/StdC/NptStdcEnvironment.cpp \
     $$PWD/DependLibs/libUPnP/Neptune/Source/System/StdC/NptStdcFile.cpp \
-    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32Console.cpp \
-    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32Debug.cpp \
-    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32DynamicLibraries.cpp \
-    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32File.cpp \
-    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32MessageQueue.cpp \
-    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32Network.cpp \
-    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32Queue.cpp \
-    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32SerialPort.cpp \
-    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32System.cpp \
-    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32Threads.cpp \
-    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32Time.cpp \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltAction.cpp \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltArgument.cpp \
     $$PWD/DependLibs/libUPnP/Platinum/Source/Core/PltConstants.cpp \
@@ -221,8 +208,26 @@ SOURCES += 	$$PWD/DependLibs/libUPnP/Neptune/Source/Core/Neptune.cpp \
     $$PWD/DependLibs/libUPnP/Neptune/Source/System/Posix/NptPosixThreads.cpp \
     $$PWD/DependLibs/libUPnP/Neptune/Source/System/Posix/NptPosixTime.cpp \
     $$PWD/DependLibs/libUPnP/Neptune/Source/System/Posix/NptSelectableMessageQueue.cpp \
-    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Bsd/NptBsdNetwork.cpp \
     $$PWD/DependLibs/libUPnP/Neptune/Source/System/Null/NptNullAutoreleasePool.cpp
 
+unix:{
+SOURCES += $$PWD/DependLibs/libUPnP/Neptune/Source/System/Bsd/NptBsdNetwork.cpp \
+    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Bsd/NptBsdResolver.cpp \
+    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Bsd/NptBsdSockets.cpp
 
+}
+
+win32:{
+SOURCES += $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32Console.cpp \
+    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32Debug.cpp \
+    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32DynamicLibraries.cpp \
+    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32File.cpp \
+    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32MessageQueue.cpp \
+    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32Network.cpp \
+    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32Queue.cpp \
+    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32SerialPort.cpp \
+    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32System.cpp \
+    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32Threads.cpp \
+    $$PWD/DependLibs/libUPnP/Neptune/Source/System/Win32/NptWin32Time.cpp \
+}
 

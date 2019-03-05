@@ -107,8 +107,8 @@
     <ClInclude Include="..\..\libSBRdec\src\sbr_crc.h" />
     <ClInclude Include="..\..\libSBRdec\src\sbr_deb.h" />
     <ClInclude Include="..\..\libSBRdec\src\sbr_dec.h" />
-    <ClInclude Include="..\..\libSBRdec\src\sbr_ram.h" />
-    <ClInclude Include="..\..\libSBRdec\src\sbr_rom.h" />
+    <ClInclude Include="..\..\libSBRdec\src\sbr_ram_fdk_dec.h" />
+    <ClInclude Include="..\..\libSBRdec\src\sbr_rom_fdk_dec.h" />
     <ClInclude Include="..\..\libSBRdec\src\sbr_scale.h" />
     <ClInclude Include="..\..\libSBRdec\src\transcendent.h" />
     <ClInclude Include="..\..\libSYS\include\audio.h" />
@@ -187,22 +187,22 @@
     <ClCompile Include="..\..\libSBRdec\src\sbr_crc.cpp" />
     <ClCompile Include="..\..\libSBRdec\src\sbr_deb.cpp" />
     <ClCompile Include="..\..\libSBRdec\src\sbr_dec.cpp" />
-    <ClCompile Include="..\..\libSBRdec\src\sbr_ram.cpp" />
-    <ClCompile Include="..\..\libSBRdec\src\sbr_rom.cpp" />
-    <ClCompile Include="..\..\libSYS\src\cmdl_parser.cpp" />
-    <ClCompile Include="..\..\libSYS\src\conv_string.cpp" />
-    <ClCompile Include="..\..\libSYS\src\genericStds.cpp" />
-    <ClCompile Include="..\..\libSYS\src\linux\audio_linux.cpp" />
-    <ClCompile Include="..\..\libSYS\src\linux\coresup_linux.cpp" />
-    <ClCompile Include="..\..\libSYS\src\linux\FDK_stackload_linux.cpp" />
-    <ClCompile Include="..\..\libSYS\src\linux\genericStds_linux.cpp" />
-    <ClCompile Include="..\..\libSYS\src\linux\uart_linux.cpp" />
-    <ClCompile Include="..\..\libSYS\src\mips\genericStds_mips.cpp" />
-    <ClCompile Include="..\..\libSYS\src\wav_file.cpp" />
+    <ClCompile Include="..\..\libSBRdec\src\sbr_ram_fdk_dec.cpp" />
+    <ClCompile Include="..\..\libSBRdec\src\sbr_rom_fdk_dec.cpp" />
+    <ClCompile Include="..\..\libSYS\src\cmdl_parser_fdkaac.cpp" />
+    <ClCompile Include="..\..\libSYS\src\conv_string_fdkaac.cpp" />
+    <ClCompile Include="..\..\libSYS\src\genericStds_fdkaac.cpp" />
+    <ClCompile Include="..\..\libSYS\src\linux\audio_linux_fdkaac.cpp" />
+    <ClCompile Include="..\..\libSYS\src\linux\coresup_linux_fdkaac.cpp" />
+    <ClCompile Include="..\..\libSYS\src\linux\FDK_stackload_linux_fdkaac.cpp" />
+    <ClCompile Include="..\..\libSYS\src\linux\genericStds_linux_fdkaac.cpp" />
+    <ClCompile Include="..\..\libSYS\src\linux\uart_linux_fdkaac.cpp" />
+    <ClCompile Include="..\..\libSYS\src\mips\genericStds_mips_fdkaac.cpp" />
+    <ClCompile Include="..\..\libSYS\src\wav_file_fdkaac.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{298F4023-3EE5-48BD-B624-F0BEEBC944B7}</ProjectGuid>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -233,7 +233,7 @@
     <_ProjectFileVersion>15.0.26419.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)D</TargetName>
   </PropertyGroup>
@@ -244,7 +244,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\include;$(ProjectDir)..\..\libSYS\include;$(ProjectDir)..\..\libPCMutils\include;$(ProjectDir)..\..\libAACdec\include;$(ProjectDir)..\..\libMpegTPDec\include;$(ProjectDir)..\..\libSBRdec\include;$(ProjectDir)..\..\libFDK\include;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\include;$(ProjectDir)..\..\libSYS\include;$(ProjectDir)..\..\libPCMutils\include;$(ProjectDir)..\..\libAACdec\include;$(ProjectDir)..\..\libMpegTPDec\include;$(ProjectDir)..\..\libSBRdec\include;$(ProjectDir)..\..\libFDK\include;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>

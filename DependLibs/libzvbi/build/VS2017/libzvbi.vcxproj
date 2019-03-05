@@ -19,57 +19,57 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\contrib\atsc-cc.c" />
-    <ClCompile Include="..\..\contrib\dvbsubs.c" />
-    <ClCompile Include="..\..\contrib\ntsc-cc.c" />
-    <ClCompile Include="..\..\contrib\x11font.c" />
-    <ClCompile Include="..\..\src\bit_slicer.c" />
-    <ClCompile Include="..\..\src\cache.c" />
-    <ClCompile Include="..\..\src\caption.c" />
-    <ClCompile Include="..\..\src\cc608_decoder.c" />
-    <ClCompile Include="..\..\src\chains.c" />
-    <ClCompile Include="..\..\src\conv.c" />
-    <ClCompile Include="..\..\src\decoder.c" />
-    <ClCompile Include="..\..\src\dvb_demux.c" />
-    <ClCompile Include="..\..\src\dvb_mux.c" />
-    <ClCompile Include="..\..\src\event.c" />
-    <ClCompile Include="..\..\src\exp-gfx.c" />
-    <ClCompile Include="..\..\src\exp-html.c" />
-    <ClCompile Include="..\..\src\exp-templ.c" />
-    <ClCompile Include="..\..\src\exp-txt.c" />
-    <ClCompile Include="..\..\src\exp-vtx.c" />
+    <ClCompile Include="..\..\contrib\atsc-cc_zvbi.c" />
+    <ClCompile Include="..\..\contrib\dvbsubs_zvbi.c" />
+    <ClCompile Include="..\..\contrib\ntsc-cc_zvbi.c" />
+    <ClCompile Include="..\..\contrib\x11font_zvbi.c" />
+    <ClCompile Include="..\..\src\bit_slicer_zvbi.c" />
+    <ClCompile Include="..\..\src\cache_zvbi.c" />
+    <ClCompile Include="..\..\src\caption_zvbi.c" />
+    <ClCompile Include="..\..\src\cc608_decoder_zvbi.c" />
+    <ClCompile Include="..\..\src\chains_zvbi.c" />
+    <ClCompile Include="..\..\src\conv_zvbi.c" />
+    <ClCompile Include="..\..\src\decoder_zvbi.c" />
+    <ClCompile Include="..\..\src\dvb_demux_zvbi.c" />
+    <ClCompile Include="..\..\src\dvb_mux_zvbi.c" />
+    <ClCompile Include="..\..\src\event_zvbi.c" />
+    <ClCompile Include="..\..\src\exp-gfx_zvbi.c" />
+    <ClCompile Include="..\..\src\exp-html_zvbi.c" />
+    <ClCompile Include="..\..\src\exp-templ_zvbi.c" />
+    <ClCompile Include="..\..\src\exp-txt_zvbi.c" />
+    <ClCompile Include="..\..\src\exp-vtx_zvbi.c" />
     <ClCompile Include="..\..\src\export_zvbi.c" />
-    <ClCompile Include="..\..\src\hamm.c" />
-    <ClCompile Include="..\..\src\hammgen.c" />
-    <ClCompile Include="..\..\src\idl_demux.c" />
-    <ClCompile Include="..\..\src\io-bktr.c" />
-    <ClCompile Include="..\..\src\io-dvb.c" />
-    <ClCompile Include="..\..\src\io-sim.c" />
-    <ClCompile Include="..\..\src\io-v4l.c" />
-    <ClCompile Include="..\..\src\io-v4l2.c" />
-    <ClCompile Include="..\..\src\io-v4l2k.c" />
-    <ClCompile Include="..\..\src\io_zvbi_capture.c" />
-    <ClCompile Include="..\..\src\lang.c" />
-    <ClCompile Include="..\..\src\misc.c" />
-    <ClCompile Include="..\..\src\packet-830.c" />
-    <ClCompile Include="..\..\src\packet.c" />
-    <ClCompile Include="..\..\src\page_table.c" />
-    <ClCompile Include="..\..\src\pdc.c" />
-    <ClCompile Include="..\..\src\pfc_demux.c" />
-    <ClCompile Include="..\..\src\proxy-client.c" />
-    <ClCompile Include="..\..\src\proxy-msg.c" />
-    <ClCompile Include="..\..\src\raw_decoder.c" />
-    <ClCompile Include="..\..\src\sampling_par.c" />
-    <ClCompile Include="..\..\src\search.c" />
-    <ClCompile Include="..\..\src\sliced_filter.c" />
-    <ClCompile Include="..\..\src\tables.c" />
-    <ClCompile Include="..\..\src\teletext.c" />
-    <ClCompile Include="..\..\src\trigger.c" />
-    <ClCompile Include="..\..\src\ure.c" />
-    <ClCompile Include="..\..\src\vbi.c" />
-    <ClCompile Include="..\..\src\vps.c" />
-    <ClCompile Include="..\..\src\wss.c" />
-    <ClCompile Include="..\..\src\xds_demux.c" />
+    <ClCompile Include="..\..\src\hamm_zvbi.c" />
+    <ClCompile Include="..\..\src\hammgen_zvbi.c" />
+    <ClCompile Include="..\..\src\idl_demux_zvbi.c" />
+    <ClCompile Include="..\..\src\io-bktr_zvbi.c" />
+    <ClCompile Include="..\..\src\io-dvb_zvbi.c" />
+    <ClCompile Include="..\..\src\io-sim_zvbi.c" />
+    <ClCompile Include="..\..\src\io-v4l_zvbi.c" />
+    <ClCompile Include="..\..\src\io-v4l2_zvbi.c" />
+    <ClCompile Include="..\..\src\io-v4l2k_zvbi.c" />
+    <ClCompile Include="..\..\src\io_zvbi_capture_zvbi.c" />
+    <ClCompile Include="..\..\src\lang_zvbi.c" />
+    <ClCompile Include="..\..\src\misc_zvbi.c" />
+    <ClCompile Include="..\..\src\packet-830_zvbi.c" />
+    <ClCompile Include="..\..\src\packet_zvbi.c" />
+    <ClCompile Include="..\..\src\page_table_zvbi.c" />
+    <ClCompile Include="..\..\src\pdc_zvbi.c" />
+    <ClCompile Include="..\..\src\pfc_demux_zvbi.c" />
+    <ClCompile Include="..\..\src\proxy-client_zvbi.c" />
+    <ClCompile Include="..\..\src\proxy-msg_zvbi.c" />
+    <ClCompile Include="..\..\src\raw_decoder_zvbi.c" />
+    <ClCompile Include="..\..\src\sampling_par_zvbi.c" />
+    <ClCompile Include="..\..\src\search_zvbi.c" />
+    <ClCompile Include="..\..\src\sliced_filter_zvbi.c" />
+    <ClCompile Include="..\..\src\tables_zvbi.c" />
+    <ClCompile Include="..\..\src\teletext_zvbi.c" />
+    <ClCompile Include="..\..\src\trigger_zvbi.c" />
+    <ClCompile Include="..\..\src\ure_zvbi.c" />
+    <ClCompile Include="..\..\src\vbi_zvbi.c" />
+    <ClCompile Include="..\..\src\vps_zvbi.c" />
+    <ClCompile Include="..\..\src\wss_zvbi.c" />
+    <ClCompile Include="..\..\src\xds_demux_zvbi.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\dlfcn.h" />
@@ -160,7 +160,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9EAF6F13-4D30-44A4-9353-83EFC4C3CE58}</ProjectGuid>
     <RootNamespace>WelsDecCore</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -214,20 +214,20 @@
     <_ProjectFileVersion>15.0.26419.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)D</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -276,7 +276,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\src;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\src;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;_DEBUG;_LIB;X86_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -308,8 +308,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\codec\decoder\core\inc;$(ProjectDir)..\..\codec\common\inc;$(ProjectDir)..\..\codec\api\svc;$(ProjectDir)..\..\;$(ProjectDir)..\..\codec\;$(ProjectDir)..\..\codec\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_DEBUG;_LIB;X86_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\src;$(ProjectDir)..\..\codec\decoder\core\inc;$(ProjectDir)..\..\codec\common\inc;$(ProjectDir)..\..\codec\api\svc;$(ProjectDir)..\..\;$(ProjectDir)..\..\codec\;$(ProjectDir)..\..\codec\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;STATIC_LIB;_DEBUG;_LIB;X86_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>

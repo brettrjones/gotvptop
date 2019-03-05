@@ -16,22 +16,25 @@
     <Filter Include="GoTvConfig\linux">
       <UniqueIdentifier>{86bc6f97-c725-49ba-bf95-74842c835bec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GoTvConfig\sys">
+    <Filter Include="sysheaders">
       <UniqueIdentifier>{68003eef-93f8-468c-aafd-c9eec5c9ec55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sysheaders\sys">
+      <UniqueIdentifier>{6a576bb5-2ce3-4c80-ba34-56825b9969a6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\libcrystalhd.sym">
       <Filter>src</Filter>
     </None>
-    <None Include="..\..\..\..\sys\fse_open.txh">
-      <Filter>GoTvConfig\sys</Filter>
+    <None Include="..\..\..\..\sysheaders\sys\fse_open.txh">
+      <Filter>sysheaders\sys</Filter>
     </None>
-    <None Include="..\..\..\..\sys\fse_zero.txh">
-      <Filter>GoTvConfig\sys</Filter>
+    <None Include="..\..\..\..\sysheaders\sys\fse_zero.txh">
+      <Filter>sysheaders\sys</Filter>
     </None>
-    <None Include="..\..\..\..\sys\fsext.txh">
-      <Filter>GoTvConfig\sys</Filter>
+    <None Include="..\..\..\..\sysheaders\sys\fsext.txh">
+      <Filter>sysheaders\sys</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -56,14 +59,14 @@
     <ClCompile Include="..\..\src\libcrystalhd_priv.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\sys\fse_open.c">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClCompile Include="..\..\..\..\sysheaders\sys\fse_open.c">
+      <Filter>sysheaders\sys</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\sys\fse_zero.c">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClCompile Include="..\..\..\..\sysheaders\sys\fse_zero.c">
+      <Filter>sysheaders\sys</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\sys\fsext.c">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClCompile Include="..\..\..\..\sysheaders\sys\fsext.c">
+      <Filter>sysheaders\sys</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -169,47 +172,77 @@
     <ClInclude Include="..\..\..\..\linux\param.h">
       <Filter>GoTvConfig\linux</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\sys\file.h">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClInclude Include="..\..\..\..\sysheaders\dirent.h">
+      <Filter>sysheaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\sys\ioctl.h">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClInclude Include="..\..\..\..\sysheaders\netdb.h">
+      <Filter>sysheaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\sys\mman.h">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClInclude Include="..\..\..\..\sysheaders\pwd.h">
+      <Filter>sysheaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\sys\param.h">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClInclude Include="..\..\..\..\sysheaders\strings.h">
+      <Filter>sysheaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\sys\select.h">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClInclude Include="..\..\..\..\sysheaders\syslog.h">
+      <Filter>sysheaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\sys\signal.h">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClInclude Include="..\..\..\..\sysheaders\termios.h">
+      <Filter>sysheaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\sys\socket.h">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClInclude Include="..\..\..\..\sysheaders\unistd.h">
+      <Filter>sysheaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\sys\syslog.h">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClInclude Include="..\..\..\..\sysheaders\utime.h">
+      <Filter>sysheaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\sys\time.h">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\cdefs.h">
+      <Filter>sysheaders\sys</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\sys\times.h">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\file.h">
+      <Filter>sysheaders\sys</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\sys\un.h">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\ioctl.h">
+      <Filter>sysheaders\sys</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\sys\utsname.h">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\ipc.h">
+      <Filter>sysheaders\sys</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\sys\ipc.h">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\mman.h">
+      <Filter>sysheaders\sys</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\sys\shm.h">
-      <Filter>GoTvConfig\sys</Filter>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\param.h">
+      <Filter>sysheaders\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\select.h">
+      <Filter>sysheaders\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\shm.h">
+      <Filter>sysheaders\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\signal.h">
+      <Filter>sysheaders\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\socket.h">
+      <Filter>sysheaders\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\syslog.h">
+      <Filter>sysheaders\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\time.h">
+      <Filter>sysheaders\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\times.h">
+      <Filter>sysheaders\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\un.h">
+      <Filter>sysheaders\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\utsname.h">
+      <Filter>sysheaders\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\sysheaders\sys\wait.h">
+      <Filter>sysheaders\sys</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -13,7 +13,7 @@
 #define VPX_UTIL_ENDIAN_INL_H_
 
 #include <stdlib.h>
-#include "./vpx_config.h"
+#include "vpx_config.h"
 #include "vpx/vpx_integer.h"
 
 #if defined(__GNUC__)
@@ -89,6 +89,8 @@ static INLINE uint32_t BSwap32(uint32_t x) {
   return ret;
 #elif defined(HAVE_BUILTIN_BSWAP32)
   return __builtin_bswap32(x);
+#elif defined(TARGET_OS_WINDOWS)
+  return __builtin_bswap32(x);
 #elif defined(__i386__) || defined(__x86_64__)
   uint32_t swapped_bytes;
   __asm__ volatile("bswap %0" : "=r"(swapped_bytes) : "0"(x));
@@ -101,6 +103,8 @@ static INLINE uint32_t BSwap32(uint32_t x) {
 static INLINE uint64_t BSwap64(uint64_t x) {
 #if defined(HAVE_BUILTIN_BSWAP64)
   return __builtin_bswap64(x);
+#elif defined(TARGET_OS_WINDOWS)
+  return (uint64_t)_byteswap_uint64(x);
 #elif defined(__x86_64__)
   uint64_t swapped_bytes;
   __asm__ volatile("bswapq %0" : "=r"(swapped_bytes) : "0"(x));

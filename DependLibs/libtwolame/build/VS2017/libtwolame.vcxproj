@@ -11,27 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\ath.c" />
-    <ClCompile Include="..\..\availbits.c" />
-    <ClCompile Include="..\..\bitbuffer.c" />
-    <ClCompile Include="..\..\crc.c" />
-    <ClCompile Include="..\..\dab.c" />
-    <ClCompile Include="..\..\encode.c" />
-    <ClCompile Include="..\..\energy.c" />
-    <ClCompile Include="..\..\fft.c" />
-    <ClCompile Include="..\..\get_set.c" />
-    <ClCompile Include="..\..\mem.c" />
-    <ClCompile Include="..\..\psycho_0.c" />
-    <ClCompile Include="..\..\psycho_1.c" />
-    <ClCompile Include="..\..\psycho_2.c" />
-    <ClCompile Include="..\..\psycho_3.c" />
-    <ClCompile Include="..\..\psycho_4.c" />
-    <ClCompile Include="..\..\psycho_n1.c" />
-    <ClCompile Include="..\..\subband.c" />
-    <ClCompile Include="..\..\twolame.c" />
-    <ClCompile Include="..\..\util.c" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\ath.h" />
     <ClInclude Include="..\..\availbits.h" />
     <ClInclude Include="..\..\bitbuffer.h" />
@@ -58,16 +37,41 @@
     <ClInclude Include="..\..\subband.h" />
     <ClInclude Include="..\..\twolame.h" />
     <ClInclude Include="..\..\util.h" />
+    <ClInclude Include="..\..\winutil.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\ath_twolame.c" />
+    <ClCompile Include="..\..\availbits_twolame.c" />
+    <ClCompile Include="..\..\bitbuffer_twolame.c" />
+    <ClCompile Include="..\..\crc_twolame.c" />
+    <ClCompile Include="..\..\dab_twolame.c" />
+    <ClCompile Include="..\..\encode_twolame.c" />
+    <ClCompile Include="..\..\energy_twolame.c" />
+    <ClCompile Include="..\..\fft_twolame.c" />
+    <ClCompile Include="..\..\get_set_twolame.c" />
+    <ClCompile Include="..\..\mem_twolame.c" />
+    <ClCompile Include="..\..\psycho_0_twolame.c" />
+    <ClCompile Include="..\..\psycho_1_twolame.c" />
+    <ClCompile Include="..\..\psycho_2_twolame.c" />
+    <ClCompile Include="..\..\psycho_3_twolame.c" />
+    <ClCompile Include="..\..\psycho_4_twolame.c" />
+    <ClCompile Include="..\..\psycho_n1_twolame.c" />
+    <ClCompile Include="..\..\subband_twolame.c" />
+    <ClCompile Include="..\..\twolame_twolame.c" />
+    <ClCompile Include="..\..\util_twolame.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\config.h.in" />
     <None Include="..\..\Makefile.am" />
     <None Include="..\..\Makefile.in" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\VersionIs_twolame-0.3.13.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8C69F7B6-684F-48D9-9057-8912CA3DAA8B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -92,7 +96,7 @@
     <_ProjectFileVersion>15.0.26419.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)D</TargetName>
   </PropertyGroup>

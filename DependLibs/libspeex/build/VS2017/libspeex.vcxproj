@@ -22,7 +22,7 @@
     <ProjectName>libspeex</ProjectName>
     <ProjectGuid>{03207781-0D1C-4DB3-A71D-45C608F28DBD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static_SSE|Win32'" Label="Configuration">
@@ -72,12 +72,12 @@
     <_ProjectFileVersion>15.0.26419.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)D</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Dynamic_SSE|Win32'">
@@ -91,7 +91,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;WIN32;_DEBUG;_LIB;HAVE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -260,47 +260,47 @@
     <ClInclude Include="..\..\_kiss_fft_guts.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\bits.c" />
-    <ClCompile Include="..\..\buffer.c" />
-    <ClCompile Include="..\..\cb_search.c" />
-    <ClCompile Include="..\..\exc_10_16_table.c" />
-    <ClCompile Include="..\..\exc_10_32_table.c" />
-    <ClCompile Include="..\..\exc_20_32_table.c" />
-    <ClCompile Include="..\..\exc_5_256_table.c" />
-    <ClCompile Include="..\..\exc_5_64_table.c" />
-    <ClCompile Include="..\..\exc_8_128_table.c" />
-    <ClCompile Include="..\..\fftwrap.c" />
-    <ClCompile Include="..\..\filterbank.c" />
-    <ClCompile Include="..\..\filters.c" />
-    <ClCompile Include="..\..\gain_table.c" />
-    <ClCompile Include="..\..\gain_table_lbr.c" />
-    <ClCompile Include="..\..\hexc_10_32_table.c" />
-    <ClCompile Include="..\..\hexc_table.c" />
-    <ClCompile Include="..\..\high_lsp_tables.c" />
-    <ClCompile Include="..\..\jitter.c" />
-    <ClCompile Include="..\..\kiss_fft.c" />
-    <ClCompile Include="..\..\kiss_fftr.c" />
-    <ClCompile Include="..\..\lpc.c" />
-    <ClCompile Include="..\..\lsp.c" />
-    <ClCompile Include="..\..\lsp_tables_nb.c" />
-    <ClCompile Include="..\..\ltp.c" />
-    <ClCompile Include="..\..\mdf.c" />
-    <ClCompile Include="..\..\modes.c" />
-    <ClCompile Include="..\..\modes_wb.c" />
-    <ClCompile Include="..\..\nb_celp.c" />
-    <ClCompile Include="..\..\preprocess.c" />
-    <ClCompile Include="..\..\quant_lsp.c" />
-    <ClCompile Include="..\..\resample.c" />
-    <ClCompile Include="..\..\sb_celp.c" />
-    <ClCompile Include="..\..\scal.c" />
-    <ClCompile Include="..\..\smallft.c" />
-    <ClCompile Include="..\..\speex.c" />
-    <ClCompile Include="..\..\speex_callbacks.c" />
-    <ClCompile Include="..\..\speex_header.c" />
-    <ClCompile Include="..\..\stereo.c" />
-    <ClCompile Include="..\..\vbr.c" />
-    <ClCompile Include="..\..\vq.c" />
-    <ClCompile Include="..\..\speex_window.c" />
+    <ClCompile Include="..\..\bits_speex.c" />
+    <ClCompile Include="..\..\buffer_speex.c" />
+    <ClCompile Include="..\..\cb_search_speex.c" />
+    <ClCompile Include="..\..\exc_10_16_table_speex.c" />
+    <ClCompile Include="..\..\exc_10_32_table_speex.c" />
+    <ClCompile Include="..\..\exc_20_32_table_speex.c" />
+    <ClCompile Include="..\..\exc_5_256_table_speex.c" />
+    <ClCompile Include="..\..\exc_5_64_table_speex.c" />
+    <ClCompile Include="..\..\exc_8_128_table_speex.c" />
+    <ClCompile Include="..\..\fftwrap_speex.c" />
+    <ClCompile Include="..\..\filterbank_speex.c" />
+    <ClCompile Include="..\..\filters_speex.c" />
+    <ClCompile Include="..\..\gain_table_speex.c" />
+    <ClCompile Include="..\..\gain_table_lbr_speex.c" />
+    <ClCompile Include="..\..\hexc_10_32_table_speex.c" />
+    <ClCompile Include="..\..\hexc_table_speex.c" />
+    <ClCompile Include="..\..\high_lsp_tables_speex.c" />
+    <ClCompile Include="..\..\jitter_speex.c" />
+    <ClCompile Include="..\..\kiss_fft_speex.c" />
+    <ClCompile Include="..\..\kiss_fftr_speex.c" />
+    <ClCompile Include="..\..\lpc_speex.c" />
+    <ClCompile Include="..\..\lsp_speex.c" />
+    <ClCompile Include="..\..\lsp_tables_nb_speex.c" />
+    <ClCompile Include="..\..\ltp_speex.c" />
+    <ClCompile Include="..\..\mdf_speex.c" />
+    <ClCompile Include="..\..\modes_speex.c" />
+    <ClCompile Include="..\..\modes_wb_speex.c" />
+    <ClCompile Include="..\..\nb_celp_speex.c" />
+    <ClCompile Include="..\..\preprocess_speex.c" />
+    <ClCompile Include="..\..\quant_lsp_speex.c" />
+    <ClCompile Include="..\..\resample_speex.c" />
+    <ClCompile Include="..\..\sb_celp_speex.c" />
+    <ClCompile Include="..\..\scal_speex.c" />
+    <ClCompile Include="..\..\smallft_speex.c" />
+    <ClCompile Include="..\..\speex_speex.c" />
+    <ClCompile Include="..\..\speex_callbacks_speex.c" />
+    <ClCompile Include="..\..\speex_header_speex.c" />
+    <ClCompile Include="..\..\stereo_speex.c" />
+    <ClCompile Include="..\..\vbr_speex.c" />
+    <ClCompile Include="..\..\vq_speex.c" />
+    <ClCompile Include="..\..\speex_window_speex.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\echo_diagnostic.m" />

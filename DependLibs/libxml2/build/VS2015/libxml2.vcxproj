@@ -19,53 +19,53 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\c14n.c" />
-    <ClCompile Include="..\..\catalog.c" />
-    <ClCompile Include="..\..\chvalid.c" />
-    <ClCompile Include="..\..\debugXML.c" />
-    <ClCompile Include="..\..\dict.c" />
-    <ClCompile Include="..\..\DOCBparser.c" />
-    <ClCompile Include="..\..\encoding.c" />
-    <ClCompile Include="..\..\entities.c" />
-    <ClCompile Include="..\..\error.c" />
-    <ClCompile Include="..\..\globals.c" />
-    <ClCompile Include="..\..\hash.c" />
-    <ClCompile Include="..\..\HTMLparser.c" />
-    <ClCompile Include="..\..\HTMLtree.c" />
-    <ClCompile Include="..\..\legacy.c" />
-    <ClCompile Include="..\..\list.c" />
-    <ClCompile Include="..\..\nanoftp.c" />
-    <ClCompile Include="..\..\nanohttp.c" />
-    <ClCompile Include="..\..\parser.c" />
-    <ClCompile Include="..\..\parserInternals.c" />
-    <ClCompile Include="..\..\pattern.c" />
-    <ClCompile Include="..\..\relaxng.c" />
-    <ClCompile Include="..\..\SAX.c" />
-    <ClCompile Include="..\..\SAX2.c" />
-    <ClCompile Include="..\..\schematron.c" />
-    <ClCompile Include="..\..\threads.c" />
-    <ClCompile Include="..\..\tree.c" />
-    <ClCompile Include="..\..\trio.c" />
-    <ClCompile Include="..\..\trionan.c" />
-    <ClCompile Include="..\..\triostr.c" />
-    <ClCompile Include="..\..\uri.c" />
-    <ClCompile Include="..\..\valid.c" />
-    <ClCompile Include="..\..\xinclude.c" />
-    <ClCompile Include="..\..\xlink.c" />
-    <ClCompile Include="..\..\xmlIO.c" />
-    <ClCompile Include="..\..\xmllint.c" />
-    <ClCompile Include="..\..\xmlmemory.c" />
-    <ClCompile Include="..\..\xmlmodule.c" />
-    <ClCompile Include="..\..\xmlreader.c" />
-    <ClCompile Include="..\..\xmlregexp.c" />
-    <ClCompile Include="..\..\xmlsave.c" />
-    <ClCompile Include="..\..\xmlschemas.c" />
-    <ClCompile Include="..\..\xmlschemastypes.c" />
-    <ClCompile Include="..\..\xmlstring.c" />
-    <ClCompile Include="..\..\xmlunicode.c" />
-    <ClCompile Include="..\..\xmlwriter.c" />
-    <ClCompile Include="..\..\xpath.c" />
-    <ClCompile Include="..\..\xpointer.c" />
+    <ClCompile Include="..\..\c14n_xml2.c" />
+    <ClCompile Include="..\..\catalog_xml2.c" />
+    <ClCompile Include="..\..\chvalid_xml2.c" />
+    <ClCompile Include="..\..\debugXML_xml2.c" />
+    <ClCompile Include="..\..\dict_xml2.c" />
+    <ClCompile Include="..\..\DOCBparser_xml2.c" />
+    <ClCompile Include="..\..\encoding_xml2.c" />
+    <ClCompile Include="..\..\entities_xml2.c" />
+    <ClCompile Include="..\..\error_xml2.c" />
+    <ClCompile Include="..\..\globals_xml2.c" />
+    <ClCompile Include="..\..\hash_xml2.c" />
+    <ClCompile Include="..\..\HTMLparser_xml2.c" />
+    <ClCompile Include="..\..\HTMLtree_xml2.c" />
+    <ClCompile Include="..\..\legacy_xml2.c" />
+    <ClCompile Include="..\..\list_xml2.c" />
+    <ClCompile Include="..\..\nanoftp_xml2.c" />
+    <ClCompile Include="..\..\nanohttp_xml2.c" />
+    <ClCompile Include="..\..\parser_xml2.c" />
+    <ClCompile Include="..\..\parserInternals_xml2.c" />
+    <ClCompile Include="..\..\pattern_xml2.c" />
+    <ClCompile Include="..\..\relaxng_xml2.c" />
+    <ClCompile Include="..\..\SAX_xml2.c" />
+    <ClCompile Include="..\..\SAX2_xml2.c" />
+    <ClCompile Include="..\..\schematron_xml2.c" />
+    <ClCompile Include="..\..\threads_xml2.c" />
+    <ClCompile Include="..\..\tree_xml2.c" />
+    <ClCompile Include="..\..\trio_xml2.c" />
+    <ClCompile Include="..\..\trionan_xml2.c" />
+    <ClCompile Include="..\..\triostr_xml2.c" />
+    <ClCompile Include="..\..\uri_xml2.c" />
+    <ClCompile Include="..\..\valid_xml2.c" />
+    <ClCompile Include="..\..\xinclude_xml2.c" />
+    <ClCompile Include="..\..\xlink_xml2.c" />
+    <ClCompile Include="..\..\xmlIO_xml2.c" />
+    <ClCompile Include="..\..\xmllint_xml2.c" />
+    <ClCompile Include="..\..\xmlmemory_xml2.c" />
+    <ClCompile Include="..\..\xmlmodule_xml2.c" />
+    <ClCompile Include="..\..\xmlreader_xml2.c" />
+    <ClCompile Include="..\..\xmlregexp_xml2.c" />
+    <ClCompile Include="..\..\xmlsave_xml2.c" />
+    <ClCompile Include="..\..\xmlschemas_xml2.c" />
+    <ClCompile Include="..\..\xmlschemastypes_xml2.c" />
+    <ClCompile Include="..\..\xmlstring_xml2.c" />
+    <ClCompile Include="..\..\xmlunicode_xml2.c" />
+    <ClCompile Include="..\..\xmlwriter_xml2.c" />
+    <ClCompile Include="..\..\xpath_xml2.c" />
+    <ClCompile Include="..\..\xpointer_xml2.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\acconfig.h" />
@@ -180,14 +180,14 @@
     <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)D</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>$(ProjectName)D</TargetName>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(ProjectDir)..\..\..\..\..\lib\Win32\</OutDir>
@@ -230,7 +230,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBXML_STATIC;TARGET_OS_WINDOWS;LIB_STATIC;_DEBUG;WIN32;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>

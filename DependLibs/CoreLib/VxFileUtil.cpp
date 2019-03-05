@@ -1819,7 +1819,7 @@ bool VxFileUtil::getDiskSpace( const char * filePath, uint64_t& totalDiskSpace, 
 		ULARGE_INTEGER TotalNumberOfBytes;
 		ULARGE_INTEGER TotalNumberOfFreeBytes;
 
-		BOOL result = GetDiskFreeSpaceEx(	dir.c_str(),
+        BOOL result = GetDiskFreeSpaceExA(	dir.c_str(),
 											&FreeBytesAvailable,
 											&TotalNumberOfBytes,
 											&TotalNumberOfFreeBytes

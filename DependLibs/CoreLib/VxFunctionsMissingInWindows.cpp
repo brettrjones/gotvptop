@@ -674,10 +674,11 @@ extern "C" {
 	const char *vx_am_pm[] = {
 		"AM", "PM"
 	};
-	char *vx_d_t_fmt = "%a %Ef %T %Y";
-	char *vx_t_fmt_ampm = "%I:%M:%S %p";
-	char *vx_t_fmt = "%H:%M:%S";
-	char *vx_d_fmt = "%m/%d/%y";
+
+    const char *vx_d_t_fmt = "%a %Ef %T %Y";
+    const char *vx_t_fmt_ampm = "%I:%M:%S %p";
+    const char *vx_t_fmt = "%H:%M:%S";
+    const char *vx_d_fmt = "%m/%d/%y";
 #define TM_YEAR_BASE 1900
 #define __UNCONST(x) ((char *)(((const char *)(x) - (const char *)0) + (char *)0))
 

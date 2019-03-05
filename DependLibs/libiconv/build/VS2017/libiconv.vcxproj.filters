@@ -670,13 +670,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\iconv.c">
+    <ClCompile Include="..\..\iconv_iconv.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\localcharset.c">
+    <ClCompile Include="..\..\localcharset_iconv.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\relocatable.c">
+    <ClCompile Include="..\..\relocatable_iconv.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

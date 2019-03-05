@@ -14,7 +14,7 @@
     <ProjectGuid>{AD92A05E-49CE-452A-83DE-451A5CBD2DC2}</ProjectGuid>
     <RootNamespace>VxUtilLib</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -42,7 +42,7 @@
     <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules />
@@ -50,7 +50,7 @@
     <TargetName>$(ProjectName)D</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules />
@@ -59,7 +59,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;_DEBUG;WIN32;HAVE_CONFIG_H;_LIB;_USE_32BIT_TIME_T;__STDC_CONSTANT_MACROS;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -157,26 +157,26 @@
     <ClInclude Include="..\..\x264cli.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\common\bitstream.c" />
-    <ClCompile Include="..\..\common\cabac.c" />
-    <ClCompile Include="..\..\common\common.c" />
-    <ClCompile Include="..\..\common\cpu.c" />
-    <ClCompile Include="..\..\common\dct.c" />
-    <ClCompile Include="..\..\common\deblock.c" />
-    <ClCompile Include="..\..\common\frame.c" />
-    <ClCompile Include="..\..\common\macroblock.c" />
-    <ClCompile Include="..\..\common\mc.c" />
-    <ClCompile Include="..\..\common\mvpred.c" />
-    <ClCompile Include="..\..\common\opencl.c" />
-    <ClCompile Include="..\..\common\osdep.c" />
-    <ClCompile Include="..\..\common\pixel.c" />
-    <ClCompile Include="..\..\common\predict.c" />
-    <ClCompile Include="..\..\common\quant.c" />
-    <ClCompile Include="..\..\common\rectangle.c" />
-    <ClCompile Include="..\..\common\set.c" />
-    <ClCompile Include="..\..\common\threadpool.c" />
-    <ClCompile Include="..\..\common\vlc.c" />
-    <ClCompile Include="..\..\common\win32thread.c" />
+    <ClCompile Include="..\..\common\bitstream_x264.c" />
+    <ClCompile Include="..\..\common\cabac_x264.c" />
+    <ClCompile Include="..\..\common\common_x264.c" />
+    <ClCompile Include="..\..\common\cpu_x264.c" />
+    <ClCompile Include="..\..\common\dct_x264.c" />
+    <ClCompile Include="..\..\common\deblock_x264.c" />
+    <ClCompile Include="..\..\common\frame_x264.c" />
+    <ClCompile Include="..\..\common\macroblock_x264.c" />
+    <ClCompile Include="..\..\common\mc_x264.c" />
+    <ClCompile Include="..\..\common\mvpred_x264.c" />
+    <ClCompile Include="..\..\common\opencl_x264.c" />
+    <ClCompile Include="..\..\common\osdep_x264.c" />
+    <ClCompile Include="..\..\common\pixel_x264.c" />
+    <ClCompile Include="..\..\common\predict_x264.c" />
+    <ClCompile Include="..\..\common\quant_x264.c" />
+    <ClCompile Include="..\..\common\rectangle_x264.c" />
+    <ClCompile Include="..\..\common\set_x264.c" />
+    <ClCompile Include="..\..\common\threadpool_x264.c" />
+    <ClCompile Include="..\..\common\vlc_x264.c" />
+    <ClCompile Include="..\..\common\win32thread_x264.c" />
     <ClCompile Include="..\..\x264.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

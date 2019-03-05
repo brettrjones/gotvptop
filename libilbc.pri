@@ -78,16 +78,16 @@ HEADERS += 	$$PWD/DependLibs/libilbc/../../GoTvCompilerConfig.h \
     $$PWD/DependLibs/libilbc/ilbc/xcorr_coef.h
 
 SOURCES += 	\
-    $$PWD/DependLibs/libilbc/ilbc/cb_mem_energy_augmentation.c \
-    $$PWD/DependLibs/libilbc/ilbc/cb_search_core.c \
+    $$PWD/DependLibs/libilbc/ilbc/cb_mem_energy_augmentation_ilbc.c \
+    $$PWD/DependLibs/libilbc/ilbc/cb_search_core_ilbc.c \
     $$PWD/DependLibs/libilbc/ilbc/abs_quant_ilbc.c \
-    $$PWD/DependLibs/libilbc/ilbc/abs_quant_loop_ilbc_ilbc.c \
+    $$PWD/DependLibs/libilbc/ilbc/abs_quant_loop_ilbc.c \
     $$PWD/DependLibs/libilbc/ilbc/augmented_cb_corr_ilbc.c \
     $$PWD/DependLibs/libilbc/ilbc/bw_expand_ilbc.c \
     $$PWD/DependLibs/libilbc/ilbc/cb_construct_ilbc.c \
     $$PWD/DependLibs/libilbc/ilbc/cb_mem_energy_calc_ilbc.c \
-    $$PWD/DependLibs/libilbc/ilbc/cb_mem_energy_ilbc_ilbc.c \
-    $$PWD/DependLibs/libilbc/ilbc/cb_search_ilbc_ilbc.c \
+    $$PWD/DependLibs/libilbc/ilbc/cb_mem_energy_ilbc.c \
+    $$PWD/DependLibs/libilbc/ilbc/cb_search_ilbc.c \
     $$PWD/DependLibs/libilbc/ilbc/cb_update_best_index_ilbc.c \
     $$PWD/DependLibs/libilbc/ilbc/chebyshev_ilbc.c \
     $$PWD/DependLibs/libilbc/ilbc/comp_corr_ilbc.c \

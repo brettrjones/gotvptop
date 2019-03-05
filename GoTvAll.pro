@@ -13,6 +13,14 @@ SUBDIRS += $$PWD/GoTvDependLibs.pro
 
 SUBDIRS += $$PWD/GoTvCoreLibs.pro
 
+android:{
+SUBDIRS += $$PWD/GoTvPtoP_AppAndroid.pro
+}
 
-SUBDIRS += $$PWD/GoTvPtoP_App.pro
+win:{
+SUBDIRS += $$PWD/GoTvPtoP_AppWindows.pro
+}
 
+unix:!android:{
+SUBDIRS += $$PWD/GoTvPtoP_AppLinux.pro
+}

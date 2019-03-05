@@ -590,9 +590,9 @@
 #define HAVE_TOWLOWER 1
 
 /* Define to 1 if you have the `tsearch' function. */
-#if defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_ANDROID)
+#if defined(TARGET_OS_ANDROID)
 # define HAVE_TSEARCH 1
-#endif // _MSC_VER
+#endif //
 
 /* Define if you have the 'uintmax_t' type in <stdint.h> or <inttypes.h>. */
 #define HAVE_UINTMAX_T 1

@@ -71,7 +71,7 @@
     <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
@@ -88,7 +88,7 @@
     <TargetName>$(ProjectName)D</TargetName>
     <TargetExt>.lib</TargetExt>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(ProjectDir)..\..\..\..\lib\Win32\</OutDir>
@@ -176,7 +176,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;WIN64;_DEBUG;_WINDOWS;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -351,25 +351,25 @@
     <ClInclude Include="..\..\xsltutils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\attributes.c" />
-    <ClCompile Include="..\..\attrvt.c" />
-    <ClCompile Include="..\..\documents.c" />
-    <ClCompile Include="..\..\extensions.c" />
-    <ClCompile Include="..\..\extra.c" />
-    <ClCompile Include="..\..\functions.c" />
-    <ClCompile Include="..\..\imports.c" />
-    <ClCompile Include="..\..\keys.c" />
-    <ClCompile Include="..\..\namespaces.c" />
-    <ClCompile Include="..\..\numbers.c" />
-    <ClCompile Include="..\..\pattern.c" />
-    <ClCompile Include="..\..\preproc.c" />
-    <ClCompile Include="..\..\security.c" />
-    <ClCompile Include="..\..\templates.c" />
-    <ClCompile Include="..\..\transform.c" />
-    <ClCompile Include="..\..\variables.c" />
-    <ClCompile Include="..\..\xslt.c" />
-    <ClCompile Include="..\..\xsltlocale.c" />
-    <ClCompile Include="..\..\xsltutils.c" />
+    <ClCompile Include="..\..\attributes_xslt.c" />
+    <ClCompile Include="..\..\attrvt_xslt.c" />
+    <ClCompile Include="..\..\documents_xslt.c" />
+    <ClCompile Include="..\..\extensions_xslt.c" />
+    <ClCompile Include="..\..\extra_xslt.c" />
+    <ClCompile Include="..\..\functions_xslt.c" />
+    <ClCompile Include="..\..\imports_xslt.c" />
+    <ClCompile Include="..\..\keys_xslt.c" />
+    <ClCompile Include="..\..\namespaces_xslt.c" />
+    <ClCompile Include="..\..\numbers_xslt.c" />
+    <ClCompile Include="..\..\pattern_xslt.c" />
+    <ClCompile Include="..\..\preproc_xslt.c" />
+    <ClCompile Include="..\..\security_xslt.c" />
+    <ClCompile Include="..\..\templates_xslt.c" />
+    <ClCompile Include="..\..\transform_xslt.c" />
+    <ClCompile Include="..\..\variables_xslt.c" />
+    <ClCompile Include="..\..\xslt_xslt.c" />
+    <ClCompile Include="..\..\xsltlocale_xslt.c" />
+    <ClCompile Include="..\..\xsltutils_xslt.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

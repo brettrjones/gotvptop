@@ -884,7 +884,11 @@ void bn_sqr_comba4(BN_ULONG *r, const BN_ULONG *a)
 
 # ifdef OPENSSL_NO_ASM
 #  ifdef OPENSSL_BN_ASM_MONT
-#   include <alloca.h>
+#   if defined(TARGET_OS_WINDOWS)
+#    include <malloc.h>
+#   else
+#    include <alloca.h>
+#   endif //defined(TARGET_OS_WINDOWS)
 /*
  * This is essentially reference implementation, which may or may not
  * result in performance improvement. E.g. on IA-32 this routine was

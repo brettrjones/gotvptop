@@ -10,8 +10,8 @@ DEFINES += NO_SYSLOG OPENSSL_THREADS _REENTRANT DSO_DLFCN HAVE_DLFCN_H m64 L_END
 DEFINES += OPENSSL_NO_EC_NISTP_64_GCC_128
 
 win32{
-    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2o
-    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2o/inc32
+    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p
+    INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
     INCLUDEPATH += $$PWD/sysheaders
 }
 

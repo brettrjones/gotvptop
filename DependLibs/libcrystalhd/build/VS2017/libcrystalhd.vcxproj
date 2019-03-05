@@ -11,15 +11,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\sys\fsext.txh" />
-    <None Include="..\..\..\..\sys\fse_open.txh" />
-    <None Include="..\..\..\..\sys\fse_zero.txh" />
+    <None Include="..\..\..\..\sysheaders\sys\fsext.txh" />
+    <None Include="..\..\..\..\sysheaders\sys\fse_open.txh" />
+    <None Include="..\..\..\..\sysheaders\sys\fse_zero.txh" />
     <None Include="..\..\src\libcrystalhd.sym" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\sys\fsext.c" />
-    <ClCompile Include="..\..\..\..\sys\fse_open.c" />
-    <ClCompile Include="..\..\..\..\sys\fse_zero.c" />
+    <ClCompile Include="..\..\..\..\sysheaders\sys\fsext.c" />
+    <ClCompile Include="..\..\..\..\sysheaders\sys\fse_open.c" />
+    <ClCompile Include="..\..\..\..\sysheaders\sys\fse_zero.c" />
     <ClCompile Include="..\..\src\libcrystalhd_fwcmds.c" />
     <ClCompile Include="..\..\src\libcrystalhd_fwdiag_if.c" />
     <ClCompile Include="..\..\src\libcrystalhd_fwload_if.c" />
@@ -45,21 +45,31 @@
     <ClInclude Include="..\..\..\..\netdb.h" />
     <ClInclude Include="..\..\..\..\pwd.h" />
     <ClInclude Include="..\..\..\..\strings.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\dirent.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\netdb.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\pwd.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\strings.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\syslog.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\cdefs.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\file.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\ioctl.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\ipc.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\mman.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\param.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\select.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\shm.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\signal.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\socket.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\syslog.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\time.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\times.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\un.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\utsname.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\sys\wait.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\termios.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\unistd.h" />
+    <ClInclude Include="..\..\..\..\sysheaders\utime.h" />
     <ClInclude Include="..\..\..\..\syslog.h" />
-    <ClInclude Include="..\..\..\..\sys\file.h" />
-    <ClInclude Include="..\..\..\..\sys\ioctl.h" />
-    <ClInclude Include="..\..\..\..\sys\ipc.h" />
-    <ClInclude Include="..\..\..\..\sys\mman.h" />
-    <ClInclude Include="..\..\..\..\sys\param.h" />
-    <ClInclude Include="..\..\..\..\sys\select.h" />
-    <ClInclude Include="..\..\..\..\sys\shm.h" />
-    <ClInclude Include="..\..\..\..\sys\signal.h" />
-    <ClInclude Include="..\..\..\..\sys\socket.h" />
-    <ClInclude Include="..\..\..\..\sys\syslog.h" />
-    <ClInclude Include="..\..\..\..\sys\time.h" />
-    <ClInclude Include="..\..\..\..\sys\times.h" />
-    <ClInclude Include="..\..\..\..\sys\un.h" />
-    <ClInclude Include="..\..\..\..\sys\utsname.h" />
     <ClInclude Include="..\..\..\..\unistd.h" />
     <ClInclude Include="..\..\include\7411d.h" />
     <ClInclude Include="..\..\include\bc_decoder_regs.h" />
@@ -83,7 +93,7 @@
     <ProjectGuid>{529114FF-61D4-40CB-BEDC-5E9D9133E8B2}</ProjectGuid>
     <RootNamespace>GoTv</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -111,7 +121,7 @@
     <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)D</TargetName>
   </PropertyGroup>
@@ -122,7 +132,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\src;$(ProjectDir)..\..\include;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\src;$(ProjectDir)..\..\include;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;_DEBUG;WIN32;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -146,7 +156,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\src;$(ProjectDir)..\..\include;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\src;$(ProjectDir)..\..\include;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;NDEBUG;WIN32;NHAVE_CONFIG_H;WIN32;_LIB;_CRT_SECURE_NO_WARNINGSHAVE_CONFIG_H;WIN32;_LIB;TARGET_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS;_LIB;TARGET_OS_WINDOWS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

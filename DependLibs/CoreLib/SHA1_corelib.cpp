@@ -142,11 +142,11 @@ void CSHA1::Update(const UINT_8* pbData, UINT_32 uLen)
 }
 
 #ifdef SHA1_UTILITY_FUNCTIONS
-bool CSHA1::HashFile(const TCHAR* tszFileName, VxThread * workThread )
+bool CSHA1::HashFile(const char* tszFileName, VxThread * workThread )
 {
 	if(tszFileName == NULL) return false;
 
-	FILE* fpIn = _tfopen(tszFileName, _T("rb"));
+    FILE* fpIn = fopen(tszFileName, "rb");
 	if(fpIn == NULL) return false;
 
 	UINT_8* pbData = new UINT_8[SHA1_MAX_FILE_BUFFER];
@@ -211,33 +211,33 @@ void CSHA1::Final()
 }
 
 #ifdef SHA1_UTILITY_FUNCTIONS
-bool CSHA1::ReportHash(TCHAR* tszReport, REPORT_TYPE rtReportType) const
+bool CSHA1::ReportHash(char* tszReport, REPORT_TYPE rtReportType) const
 {
 	if(tszReport == NULL) return false;
 
-	TCHAR tszTemp[16];
+    char tszTemp[16];
 
 	if((rtReportType == REPORT_HEX) || (rtReportType == REPORT_HEX_SHORT))
 	{
-		_sntprintf(tszTemp, 15, _T("%02X"), m_digest[0]);
-		_tcscpy(tszReport, tszTemp);
+        _snprintf(tszTemp, 15, "%02X", m_digest[0]);
+        strcpy(tszReport, tszTemp);
 
-		const TCHAR* lpFmt = ((rtReportType == REPORT_HEX) ? _T(" %02X") : _T("%02X"));
+        const char* lpFmt = ((rtReportType == REPORT_HEX) ? " %02X" : "%02X" );
 		for(size_t i = 1; i < 20; ++i)
 		{
-			_sntprintf(tszTemp, 15, lpFmt, m_digest[i]);
-			_tcscat(tszReport, tszTemp);
+            _snprintf(tszTemp, 15, lpFmt, m_digest[i]);
+            strcat(tszReport, tszTemp);
 		}
 	}
 	else if(rtReportType == REPORT_DIGIT)
 	{
-		_sntprintf(tszTemp, 15, _T("%u"), m_digest[0]);
-		_tcscpy(tszReport, tszTemp);
+        _snprintf(tszTemp, 15, "%u", m_digest[0]);
+        strcpy(tszReport, tszTemp);
 
 		for(size_t i = 1; i < 20; ++i)
 		{
-			_sntprintf(tszTemp, 15, _T(" %u"), m_digest[i]);
-			_tcscat(tszReport, tszTemp);
+            _snprintf(tszTemp, 15, " %u", m_digest[i]);
+            strcat(tszReport, tszTemp);
 		}
 	}
 	else return false;
@@ -247,9 +247,9 @@ bool CSHA1::ReportHash(TCHAR* tszReport, REPORT_TYPE rtReportType) const
 #endif
 
 #ifdef SHA1_STL_FUNCTIONS
-bool CSHA1::ReportHashStl(std::basic_string<TCHAR>& strOut, REPORT_TYPE rtReportType) const
+bool CSHA1::ReportHashStl(std::basic_string<char>& strOut, REPORT_TYPE rtReportType) const
 {
-	TCHAR tszOut[84];
+    char tszOut[84];
 	const bool bResult = ReportHash(tszOut, rtReportType);
 	if(bResult) strOut = tszOut;
 	return bResult;

@@ -38,7 +38,7 @@
     <ProjectGuid>{653F3841-3F26-49B9-AFCF-091DB4B67031}</ProjectGuid>
     <RootNamespace>libtheora</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_SSE2|Win32'" Label="Configuration">
@@ -135,7 +135,7 @@
     <_ProjectFileVersion>15.0.26419.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)D</TargetName>
   </PropertyGroup>
@@ -170,7 +170,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;..\..\lib;..\..\..\libogg\include;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\include;$(ProjectDir)..\..\lib;$(ProjectDir)..\..\..\libogg\include;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_BIND_TO_CURRENT_CRT_VERSION;WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBTHEORA_EXPORTS;DEBUG;OC_X86_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -191,7 +191,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;..\..\lib;..\..\..\libogg\include;..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\include;$(ProjectDir)..\..\lib;$(ProjectDir)..\..\..\libogg\include;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_BIND_TO_CURRENT_CRT_VERSION;WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBTHEORA_EXPORTS;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -349,13 +349,13 @@
     <ClInclude Include="..\..\lib\quant.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\lib\analyze.c" />
-    <ClCompile Include="..\..\lib\apiwrapper.c" />
-    <ClCompile Include="..\..\lib\bitpack.c" />
-    <ClCompile Include="..\..\lib\cpu.c" />
-    <ClCompile Include="..\..\lib\decapiwrapper.c" />
-    <ClCompile Include="..\..\lib\decinfo.c" />
-    <ClCompile Include="..\..\lib\decode.c">
+    <ClCompile Include="..\..\lib\analyze_theora.c" />
+    <ClCompile Include="..\..\lib\apiwrapper_theora.c" />
+    <ClCompile Include="..\..\lib\bitpack_theora.c" />
+    <ClCompile Include="..\..\lib\cpu_theora.c" />
+    <ClCompile Include="..\..\lib\decapiwrapper_theora.c" />
+    <ClCompile Include="..\..\lib\decinfo_theora.c" />
+    <ClCompile Include="..\..\lib\decode_theora.c">
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
       <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
@@ -373,12 +373,12 @@
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
       <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
     </ClCompile>
-    <ClCompile Include="..\..\lib\dequant.c" />
-    <ClCompile Include="..\..\lib\encapiwrapper.c" />
-    <ClCompile Include="..\..\lib\encfrag.c" />
-    <ClCompile Include="..\..\lib\encinfo.c" />
-    <ClCompile Include="..\..\lib\encode.c" />
-    <ClCompile Include="..\..\lib\encoder_disabled.c">
+    <ClCompile Include="..\..\lib\dequant_theora.c" />
+    <ClCompile Include="..\..\lib\encapiwrapper_theora.c" />
+    <ClCompile Include="..\..\lib\encfrag_theora.c" />
+    <ClCompile Include="..\..\lib\encinfo_theora.c" />
+    <ClCompile Include="..\..\lib\encode_theora.c" />
+    <ClCompile Include="..\..\lib\encoder_disabled_theora.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_SSE2|Win32'">true</ExcludedFromBuild>
@@ -388,12 +388,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\lib\enquant.c" />
-    <ClCompile Include="..\..\lib\fdct.c" />
-    <ClCompile Include="..\..\lib\fragment.c" />
-    <ClCompile Include="..\..\lib\huffdec.c" />
-    <ClCompile Include="..\..\lib\huffenc.c" />
-    <ClCompile Include="..\..\lib\idct.c">
+    <ClCompile Include="..\..\lib\enquant_theora.c" />
+    <ClCompile Include="..\..\lib\fdct_theora.c" />
+    <ClCompile Include="..\..\lib\fragment_theora.c" />
+    <ClCompile Include="..\..\lib\huffdec_theora.c" />
+    <ClCompile Include="..\..\lib\huffenc_theora.c" />
+    <ClCompile Include="..\..\lib\idct_theora.c">
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
       <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
@@ -411,11 +411,11 @@
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
       <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
     </ClCompile>
-    <ClCompile Include="..\..\lib\info.c" />
-    <ClCompile Include="..\..\lib\internal.c" />
-    <ClCompile Include="..\..\lib\mathops.c" />
-    <ClCompile Include="..\..\lib\mcenc.c" />
-    <ClCompile Include="..\..\lib\quant.c">
+    <ClCompile Include="..\..\lib\info_theora.c" />
+    <ClCompile Include="..\..\lib\internal_theora.c" />
+    <ClCompile Include="..\..\lib\mathops_theora.c" />
+    <ClCompile Include="..\..\lib\mcenc_theora.c" />
+    <ClCompile Include="..\..\lib\quant_theora.c">
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
       <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
@@ -433,16 +433,16 @@
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
       <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
     </ClCompile>
-    <ClCompile Include="..\..\lib\rate.c" />
-    <ClCompile Include="..\..\lib\state.c" />
-    <ClCompile Include="..\..\lib\tokenize.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxencfrag.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxfdct.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxfrag.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxidct.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxstate.c" />
-    <ClCompile Include="..\..\lib\x86_vc\x86enc.c" />
-    <ClCompile Include="..\..\lib\x86_vc\x86state.c" />
+    <ClCompile Include="..\..\lib\rate_theora.c" />
+    <ClCompile Include="..\..\lib\state_theora.c" />
+    <ClCompile Include="..\..\lib\tokenize_theora.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxencfrag_theora.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxfdct_theora.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxfrag_theora.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxidct_theora.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxstate_theora.c" />
+    <ClCompile Include="..\..\lib\x86_vc\x86enc_theora.c" />
+    <ClCompile Include="..\..\lib\x86_vc\x86state_theora.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

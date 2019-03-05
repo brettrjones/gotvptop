@@ -30,6 +30,6 @@ void DumpPkt( VxPktHdr * pktHdr )
 		unsigned char * data = (unsigned char *)pktHdr;
 		data += sizeof( VxPktHdr );
 
-		HexDump( LOG_INFO, data, pktHdr->getPktLength() - sizeof( VxPktHdr ), 0, "VxPkt" );
+        HexDump( LOG_INFO, data, pktHdr->getPktLength() - sizeof( VxPktHdr ), 0, (char *)"VxPkt" );
 	}
 }

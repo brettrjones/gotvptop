@@ -25,31 +25,31 @@
 #endif // TARGET_OS_WINDOWS
 
 //============================================================================
- char * OsDetect::getOsName( void )
+char * OsDetect::getOsName( void )
 {
      if( isAndroid() )
      {
-         return "Android";
+         return (char *)"Android";
      }
      else if( isWindowsPlatform() )
      {
-         return "Windows";
+         return (char *)"Windows";
      }
      else if( isLinux() )
      {
-         return "Linux";
+         return (char *)"Linux";
      }
      else if( isApple() )
      {
-         return "Apple";
+         return (char *)"Apple";
      }
      else if( isRasberryPi() )
      {
-         return "RasberryPi";
+         return (char *)"RasberryPi";
      }
      else
      {
-         return "UnknownOS";
+         return (char *)"UnknownOS";
      }
 }
 

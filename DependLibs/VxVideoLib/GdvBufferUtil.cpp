@@ -243,7 +243,7 @@
 #define LINEAR_INTERPOLATE(f1, f2, dx) f1 = f1 + ((dx * (f2 - f1)) >> 8)
 
 #define CONVERT(name, get_fn, conv_fn, set_fn) \
-static inline void name ## _unscaled (gpointer in , int w, int h, int stride, gpointer out) \
+static inline void name ## _unscaled (gdvpointer in , int w, int h, int stride, gdvpointer out) \
 { \
         IMPLICIT_VARIABLES; \
         int x_c, y_c; \
@@ -258,7 +258,7 @@ static inline void name ## _unscaled (gpointer in , int w, int h, int stride, gp
         } \
         TOUCH_IMPLICIT; \
 } \
-void name (gpointer in , int w, int h, int stride, gpointer out, int ow, int oh, int ostride) \
+void name (gdvpointer in , int w, int h, int stride, gdvpointer out, int ow, int oh, int ostride) \
 { \
         IMPLICIT_VARIABLES; \
         int x_c, y_c; \
@@ -436,7 +436,7 @@ gdv_videobuffer_converter_t gdv_videobuffer_get_converter(guint32 fourcc_from, g
 
 
 // Composer stuff - this should be lay out a bit better, but it's ok for now
-void gdv_videobuffer_blitter_yuy2(gpointer front, int fx, int fy, int fw, int fh, gpointer back, int w, int h, double ratio)
+void gdv_videobuffer_blitter_yuy2(gdvpointer front, int fx, int fy, int fw, int fh, gdvpointer back, int w, int h, double ratio)
 {
         IMPLICIT_VARIABLES;
         int x_f, y_f, x_b, y_b;
@@ -481,7 +481,7 @@ void gdv_videobuffer_blitter_yuy2(gpointer front, int fx, int fy, int fw, int fh
         TOUCH_IMPLICIT;
 }
 
-void gdv_videobuffer_blitter_bitwise(gpointer front, gpointer back, size_t size, double ratio)
+void gdv_videobuffer_blitter_bitwise(gdvpointer front, gdvpointer back, size_t size, double ratio)
 {
         unsigned char *array_front = front;
         unsigned char *array_back = back;
@@ -495,7 +495,7 @@ void gdv_videobuffer_blitter_bitwise(gpointer front, gpointer back, size_t size,
         }
 }
 
-void gdv_videobuffer_scale_compose_yuy2(gpointer front , int w, int h, gpointer back, int ow, int oh, double ratio) 
+void gdv_videobuffer_scale_compose_yuy2(gdvpointer front , int w, int h, gdvpointer back, int ow, int oh, double ratio)
 { 
         IMPLICIT_VARIABLES; 
         int x_c, y_c; 
@@ -558,7 +558,7 @@ void gdv_videobuffer_scale_compose_yuy2(gpointer front , int w, int h, gpointer 
         TOUCH_IMPLICIT; 
 } 
 
-void gdv_videobuffer_scale_compose_i420(gpointer front , int w, int h, gpointer back, int ow, int oh, double ratio) 
+void gdv_videobuffer_scale_compose_i420(gdvpointer front , int w, int h, gdvpointer back, int ow, int oh, double ratio)
 { 
         IMPLICIT_VARIABLES; 
         int x_c, y_c; 

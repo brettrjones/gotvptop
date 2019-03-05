@@ -73,7 +73,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ReferencePath>$(SolutionDir)..;$(ReferencePath)</ReferencePath>
-    <OutDir>$(ProjectDir)..\..\..\..\lib\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
     <IncludePath>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\libp8platform\src\windows;$(OutDir)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>

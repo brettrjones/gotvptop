@@ -626,9 +626,9 @@ SOURCES += 	\
     $$PWD/DependLibs/libgnu/int_gnu.c \
     $$PWD/DependLibs/libgnu/lock_gnu.c \
     $$PWD/DependLibs/libgnu/misc_gnu.c \
-    $$PWD/DependLibs/libgnu/nettle/nettle_cast128-meta.c \
-    $$PWD/DependLibs/libgnu/nettle/nettle_gcm-aes128-meta.c \
-    $$PWD/DependLibs/libgnu/nettle/nettle_rsa2openpgp.c \
+    $$PWD/DependLibs/libgnu/nettle/nettle_cast128-meta_gnu.c \
+    $$PWD/DependLibs/libgnu/nettle/nettle_gcm-aes128-meta_gnu.c \
+    $$PWD/DependLibs/libgnu/nettle/nettle_rsa2openpgp_gnu.c \
     $$PWD/DependLibs/libgnu/random_gnu.c \
     $$PWD/DependLibs/libgnu/read-file-gnu.c \
     $$PWD/DependLibs/libgnu/secmem_gnu.c \
@@ -1031,7 +1031,7 @@ SOURCES += 	\
     $$PWD/DependLibs/libgnu/nettle/nettle_rsa-sign_gnu.c \
     $$PWD/DependLibs/libgnu/nettle/nettle_rsa-verify_gnu.c \
     $$PWD/DependLibs/libgnu/nettle/nettle_rsa2sexp_gnu.c \
-    $$PWD/DependLibs/libgnu/nettle/nettle_rsa_gnu_gnu.c \
+    $$PWD/DependLibs/libgnu/nettle/nettle_rsa_gnu.c \
     $$PWD/DependLibs/libgnu/nettle/nettle_salsa20-128-set-key_gnu.c \
     $$PWD/DependLibs/libgnu/nettle/nettle_salsa20-256-set-key_gnu.c \
     $$PWD/DependLibs/libgnu/nettle/nettle_salsa20-core-internal_gnu.c \
@@ -1260,7 +1260,7 @@ SOURCES += 	\
     $$PWD/DependLibs/libgnu/gettext_gnu.c \
     $$PWD/DependLibs/libgnu/gettimeofday_gnu.c \
     $$PWD/DependLibs/libgnu/ghash_gnu.c \
-    $$PWD/DependLibs/libgnu/gl_linked_lis_gnut.c \
+    $$PWD/DependLibs/libgnu/gl_linked_list_gnut.c \
     $$PWD/DependLibs/libgnu/gl_list_gnu.c \
     $$PWD/DependLibs/libgnu/gl_xlist_gnu.c \
     $$PWD/DependLibs/libgnu/glist_gnu.c \

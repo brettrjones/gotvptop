@@ -4,6 +4,40 @@
 #ifdef  __cplusplus
 extern "C" {
 #endif
+
+#define OPENSSL_NO_JPAKE 
+#define OPENSSL_NO_DYNAMIC_ENGINE 
+#define DEBUG_VTPOOLUPLOAD NO_WINDOWS_BRAINDEATH
+#define OPENSSL_NO_EC_NISTP_64_GCC_128 
+#define OPENSSL_NO_GMP 
+#define OPENSSL_NO_JPAKE 
+#define OPENSSL_NO_LIBUNBOUND 
+#define OPENSSL_NO_MD2 OPENSSL_NO_RC5
+#define OPENSSL_NO_RFC3779 
+#define OPENSSL_NO_SCTP 
+#define OPENSSL_NO_SSL_TRACE 
+#define OPENSSL_NO_SSL2 
+#define OPENSSL_NO_STORE 
+#define OPENSSL_NO_UNIT_TEST 
+#define OPENSSL_NO_WEAK_SSL_CIPHERS
+#define NO_SYSLOG 
+#define OPENSSL_THREADS 
+#define _REENTRANT 
+#define DSO_DLFCN 
+#define HAVE_DLFCN_H 
+#define L_ENDIAN
+#define OPENSSL_NO_EC_NISTP_64_GCC_128
+//#define RSA_FLAG_NO_CONSTTIME 
+//#define DSA_FLAG_NO_EXP_CONSTTIME
+
+//#if defined(TARGET_OS_WINDOWS) 
+//# define DSO_WIN32
+//#endif // defined(TARGET_OS_WINDOWS) 
+
+#if defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_LINUX)
+# define m64 
+#endif // efined(TARGET_OS_WINDOWS) || defined(TARGET_OS_LINUX)
+
 /* OpenSSL was configured with the following options: */
 #ifndef OPENSSL_DOING_MAKEDEPEND
 
