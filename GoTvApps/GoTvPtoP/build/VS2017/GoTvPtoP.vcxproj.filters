@@ -86,6 +86,12 @@
     <Filter Include="GoTvInterface\OsInterface">
       <UniqueIdentifier>{b4d92a74-8c46-483f-bdb6-f2488c99608b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Generated Files\moc">
+      <UniqueIdentifier>{013fbb56-3206-4bda-b462-b31732294505}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files\moc\debug">
+      <UniqueIdentifier>{9539425d-e57e-4a7f-8a71-2f5958d56ad7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_gotvcommon.cpp">
@@ -97,20 +103,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RasterWindow.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_RasterWindow.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_RasterWindow.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityBase.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityBase.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityYesNoMsgBox.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityYesNoMsgBox.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -121,20 +118,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\TitleBarWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_TitleBarWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_TitleBarWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\AppSource\GoTvPlayerSettings.cpp">
       <Filter>AppSource</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_AppCommon.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_HomeWindow.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_HomeWindow.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -142,350 +130,176 @@
     <ClCompile Include="Release\moc_AppCommon.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityAbout.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityAbout.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityAddRemoveLibraryFiles.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityAddRemoveLibraryFiles.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityAnchorSettings.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityAnchorSettings.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityBrowseFiles.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityBrowseFiles.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityChooseIpPort.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityChooseIpPort.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityChooseTestWebsiteUrl.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityChooseTestWebsiteUrl.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityCreateProfile.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityCreateProfile.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityDebugSettings.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityDebugSettings.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityDownloadItemMenu.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityDownloadItemMenu.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityDownloads.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityDownloads.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityEditAccount.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityEditAccount.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityEditProfile.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityEditProfile.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityFileSearch.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityFileSearch.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityIsPortOpenTest.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityIsPortOpenTest.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityManageAnchorSettings.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityManageAnchorSettings.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityMessageBox.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityMessageBox.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityNetServiceTest.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityNetServiceTest.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityNetworkSettings.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityNetworkSettings.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityNetworkState.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityNetworkState.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityPermissions.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityPermissions.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityPermissionsRelay.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityPermissionsRelay.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityPersonalRecorder.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityPersonalRecorder.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityPhoneShake.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityPhoneShake.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityReplyFileOffer.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityReplyFileOffer.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityScanPeopleSearch.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityScanPeopleSearch.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityScanProfiles.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityScanProfiles.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityScanStoryBoards.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityScanStoryBoards.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityScanWebCams.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityScanWebCams.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivitySelectFileToSend.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivitySelectFileToSend.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivitySessionFileOffer.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivitySessionFileOffer.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivitySessionOptions.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivitySessionOptions.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityShowHelp.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityShowHelp.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivitySnapShot.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivitySnapShot.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivitySoundOptions.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivitySoundOptions.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityStoryBoard.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityStoryBoard.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityTimedMessage.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityTimedMessage.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityToFriendBase.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityToFriendBase.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityToFriendChangeFriendship.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityToFriendChangeFriendship.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityToFriendMultiSession.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityToFriendMultiSession.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityToFriendRequestRelay.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityToFriendRequestRelay.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityToFriendTodGame.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityToFriendTodGame.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityToFriendVideoPhone.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityToFriendVideoPhone.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityToFriendViewSharedFiles.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityToFriendViewSharedFiles.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityToFriendVoicePhone.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityToFriendVoicePhone.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityUploads.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityUploads.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityVideoOptions.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityVideoOptions.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityViewAudioFile.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityViewAudioFile.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityViewLibraryFiles.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityViewLibraryFiles.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityViewMySharedFiles.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityViewMySharedFiles.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityViewVideoFile.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ActivityViewVideoFile.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ActivityWebCamClient.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ActivityWebCamClient.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_AssetFaceWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_AssetFaceWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_AssetPhotoWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_AssetPhotoWidget.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_AssetTextWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_AssetTextWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_AssetVideoWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_AssetVideoWidget.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_AssetVoiceWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_AssetVoiceWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_AvatarBar.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_AvatarBar.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ChatEntryWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ChatEntryWidget.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -493,26 +307,17 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\DialogConfirmRemoveMessage.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_DialogConfirmRemoveMessage.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_DialogConfirmRemoveMessage.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileActionBarWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_FileActionBarWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_FileActionBarWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileActionMenu.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_FileActionMenu.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_FileActionMenu.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -523,17 +328,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileItemWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_FileItemWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_FileItemWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileListReplySession.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_FileListReplySession.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_FileListReplySession.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -541,17 +340,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileShareItemWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_FileShareItemWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_FileShareItemWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileXferWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_FileXferWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_FileXferWidget.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -571,9 +364,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileActionSession.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_GuiFileActionSession.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_GuiFileActionSession.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
@@ -586,17 +376,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferSession.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_GuiOfferSession.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_GuiOfferSession.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HistoryEntryWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_HistoryEntryWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_HistoryEntryWidget.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -604,59 +388,32 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\HistoryListWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_HistoryListWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_HistoryListWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\IdentWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_IdentWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_IdentWidget.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_InputAllWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_InputAllWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_InputBaseWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_InputBaseWidget.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_InputFaceWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_InputFaceWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_InputPhotoWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_InputPhotoWidget.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_InputTextWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_InputTextWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_InputVideoWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_InputVideoWidget.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_InputVoiceWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_InputVoiceWidget.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -664,14 +421,8 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\InstMsgWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_InstMsgWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_InstMsgWidget.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ListEntryWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ListEntryWidget.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -679,35 +430,20 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\MultiSessionState.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_MultiSessionState.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_MultiSessionState.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_MyQtSoundInput.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_MyQtSoundInput.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_MyQtSoundOutput.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_MyQtSoundOutput.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_MySndMgr.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_MySndMgr.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferBarWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_OfferBarWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_OfferBarWidget.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -721,17 +457,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\OffersMgr.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_OffersMgr.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_OffersMgr.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_OfferWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_OfferWidget.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -769,9 +499,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PopupMenu.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_PopupMenu.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_PopupMenu.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
@@ -781,17 +508,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\SessionWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_SessionWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_SessionWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\SoundCtrlWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_SoundCtrlWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_SoundCtrlWidget.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -799,29 +520,17 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\StoryWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_StoryWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_StoryWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\TextChatLogic.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_TextChatLogic.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_TextChatLogic.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_TodGameLogic.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_TodGameLogic.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_TodGameWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_TodGameWidget.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -834,9 +543,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_VidWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_VidWidget.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1078,17 +784,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAvatarImage.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_VxAvatarImage.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_VxAvatarImage.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxComboBoxFileFilter.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_VxComboBoxFileFilter.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_VxComboBoxFileFilter.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1096,17 +796,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxGuidQt.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_VxGuidQt.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_VxGuidQt.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxLabel.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_VxLabel.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_VxLabel.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1114,17 +808,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMyFileInfo.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_VxMyFileInfo.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_VxMyFileInfo.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxSndInstance.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_VxSndInstance.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_VxSndInstance.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1135,17 +823,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxScrollArea.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_VxScrollArea.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_VxScrollArea.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxShredderButton.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_VxShredderButton.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_VxShredderButton.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1153,17 +835,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxSpinProgress.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_VxSpinProgress.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_VxSpinProgress.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxTagLabel.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_VxTagLabel.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_VxTagLabel.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1171,29 +847,17 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxFlatButton.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_VxFlatButton.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_VxFlatButton.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_VxAppTheme.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_VxAppTheme.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_VxPushButton.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_VxPushButton.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxPushButton.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_BottomBarWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_BottomBarWidget.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1204,29 +868,17 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxWidgetBase.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_VxWidgetBase.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_VxWidgetBase.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxFrame.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_VxFrame.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_VxFrame.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_AppletLaunchPage.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_AppletLaunchPage.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_AppletLaunchWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_AppletLaunchWidget.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1240,26 +892,14 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ListEntryWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_AppletMgr.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_AppletMgr.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_AppletTheme.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_AppletTheme.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_AppletRemoteControl.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_AppletRemoteControl.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_AppletSettings.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_AppletSettings.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1267,14 +907,8 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_AcceptCancelWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_AcceptCancelWidget.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_AppletPlayerBase.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_AppletPlayerBase.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1303,26 +937,17 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerVideo.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_AppletPlayerVideo.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_AppletPlayerVideo.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletBase.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_AppletBase.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_AppletBase.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetBaseWidget.cpp">
       <Filter>GoTvCommon\Source Files\AssetWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_AssetBaseWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_AssetBaseWidget.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1348,9 +973,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\MessengerPage.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_MessengerPage.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_MessengerPage.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
@@ -1363,32 +985,20 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAspectFrame.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_VxAspectFrame.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_VxAspectFrame.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImagePickBar.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_ImagePickBar.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_ImagePickBar.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_VxContextMenu.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_VxContextMenu.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxContextMenu.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_VxAppDisplay.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_VxAppDisplay.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1405,17 +1015,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenuButton.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_VxMenuButton.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_VxMenuButton.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenuButtonBottom.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_VxMenuButtonBottom.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_VxMenuButtonBottom.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1423,26 +1027,17 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenuButtonTop.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_VxMenuButtonTop.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_VxMenuButtonTop.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxComboBox.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_VxComboBox.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_VxComboBox.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingMedia.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_FriendListWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonLogin.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
@@ -1462,17 +1057,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenu.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_VxMenu.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_VxMenu.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletKodi.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_AppletKodi.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_AppletKodi.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1480,17 +1069,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSharedContent.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_AppletSharedContent.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_AppletSharedContent.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletUserIdentity.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_AppletUserIdentity.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_AppletUserIdentity.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1507,23 +1090,14 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PlayerGlWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_PlayerGlWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_PlayerGlWidget.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_KodiRun.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_KodiRun.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvRender.cpp">
       <Filter>GoTvInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_RenderGlWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_RenderGlWidget.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1536,9 +1110,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlBaseWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_RenderGlBaseWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_RenderGlBaseWidget.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -1570,9 +1141,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlOffScreenSurface.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_RenderGlOffScreenSurface.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_RenderGlOffScreenSurface.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
@@ -1582,26 +1150,17 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AudioOutQt.cpp">
       <Filter>GoTvCommon\Source Files\SoundInputOutput</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_AudioOutQt.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_AudioOutQt.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AudioTestGenerator.cpp">
       <Filter>GoTvCommon\Source Files\SoundInputOutput</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_AudioTestGenerator.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Release\moc_AudioTestGenerator.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AudioOutIo.cpp">
       <Filter>GoTvCommon\Source Files\SoundInputOutput</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_AudioOutIo.cpp">
-      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_AudioOutIo.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -2390,14 +1949,6 @@
     </CustomBuild>
     <CustomBuild Include="..\..\..\GoTvCommon\QtSource\AudioOutIo.h">
       <Filter>GoTvCommon\Source Files\SoundInputOutput</Filter>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="debug\moc_predefs.h.cbt">
-      <Filter>Generated Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="release\moc_predefs.h.cbt">
-      <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -3404,6 +2955,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AudioDefs.h">
       <Filter>GoTvCommon\Source Files\SoundInputOutput</Filter>
+    </ClInclude>
+    <ClInclude Include="debug\moc_predefs.h">
+      <Filter>Generated Files\moc\debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

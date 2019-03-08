@@ -2,8 +2,8 @@
 /* pyconfig.h.in.  Generated from configure.ac by autoheader.  */
 
 
-#ifndef Py_PYCONFIG_H
-#define Py_PYCONFIG_H
+#ifndef Py_PYCONFIG_ANDROID_H
+#define Py_PYCONFIG_ANDROID_H
 
 
 /* Define if building universal (internal helper macro) */
@@ -1282,5 +1282,8 @@
 #if defined(__USLC__) && defined(__SCO_VERSION__)
 #define STRICT_SYSV_CURSES /* Don't use ncurses extensions */
 #endif
-#endif /*Py_PYCONFIG_H*/
+# ifndef PYTHONPATH
+#	define PYTHONPATH ".\\DLLs;.\\lib;.\\lib\\plat-win;.\\lib\\lib-tk"
+# endif
+#endif /*Py_PYCONFIG_ANDROID_H*/
 

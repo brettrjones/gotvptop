@@ -5,74 +5,82 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\agent.c" />
-    <ClCompile Include="..\..\auth.c" />
-    <ClCompile Include="..\..\auth1.c" />
-    <ClCompile Include="..\..\base64.c" />
-    <ClCompile Include="..\..\bignum.c" />
-    <ClCompile Include="..\..\bind.c" />
-    <ClCompile Include="..\..\buffer.c" />
-    <ClCompile Include="..\..\callbacks.c" />
-    <ClCompile Include="..\..\channels.c" />
-    <ClCompile Include="..\..\channels1.c" />
-    <ClCompile Include="..\..\client.c" />
-    <ClCompile Include="..\..\config.c" />
-    <ClCompile Include="..\..\connect.c" />
-    <ClCompile Include="..\..\crc32.c" />
-    <ClCompile Include="..\..\curve25519.c" />
-    <ClCompile Include="..\..\dh.c" />
-    <ClCompile Include="..\..\ecdh.c" />
-    <ClCompile Include="..\..\error.c" />
-    <ClCompile Include="..\..\external\bcrypt_pbkdf.c" />
-    <ClCompile Include="..\..\external\blowfish.c" />
-    <ClCompile Include="..\..\external\curve25519_ref.c" />
-    <ClCompile Include="..\..\external\ed25519.c" />
-    <ClCompile Include="..\..\external\fe25519.c" />
-    <ClCompile Include="..\..\external\ge25519.c" />
-    <ClCompile Include="..\..\external\sc25519.c" />
-    <ClCompile Include="..\..\gcrypt_missing.c" />
-    <ClCompile Include="..\..\getpass.c" />
-    <ClCompile Include="..\..\gssapi.c" />
-    <ClCompile Include="..\..\gzip.c" />
-    <ClCompile Include="..\..\init.c" />
-    <ClCompile Include="..\..\kex.c" />
-    <ClCompile Include="..\..\kex1.c" />
-    <ClCompile Include="..\..\known_hosts.c" />
-    <ClCompile Include="..\..\legacy.c" />
-    <ClCompile Include="..\..\libcrypto.c" />
-    <ClCompile Include="..\..\libgcrypt.c" />
-    <ClCompile Include="..\..\libssh_string.c" />
-    <ClCompile Include="..\..\log.c" />
-    <ClCompile Include="..\..\match.c" />
-    <ClCompile Include="..\..\messages.c" />
-    <ClCompile Include="..\..\misc.c" />
-    <ClCompile Include="..\..\options.c" />
-    <ClCompile Include="..\..\packet.c" />
-    <ClCompile Include="..\..\packet1.c" />
-    <ClCompile Include="..\..\packet_cb.c" />
-    <ClCompile Include="..\..\packet_crypt.c" />
-    <ClCompile Include="..\..\pcap.c" />
-    <ClCompile Include="..\..\pki.c" />
-    <ClCompile Include="..\..\pki_container_openssh.c" />
-    <ClCompile Include="..\..\pki_crypto.c" />
-    <ClCompile Include="..\..\pki_ed25519.c" />
-    <ClCompile Include="..\..\pki_gcrypt.c" />
-    <ClCompile Include="..\..\poll.c" />
-    <ClCompile Include="..\..\scp.c" />
-    <ClCompile Include="..\..\server.c" />
-    <ClCompile Include="..\..\session.c" />
-    <ClCompile Include="..\..\sftp.c" />
-    <ClCompile Include="..\..\sftpserver.c" />
-    <ClCompile Include="..\..\socket.c" />
-    <ClCompile Include="..\..\threads.c" />
-    <ClCompile Include="..\..\threads\pthread.c" />
-    <ClCompile Include="..\..\wrapper.c" />
+    <ClCompile Include="..\..\agent_ssh.c" />
+    <ClCompile Include="..\..\auth_ssh.c" />
+    <ClCompile Include="..\..\auth1_ssh.c" />
+    <ClCompile Include="..\..\base64_ssh.c" />
+    <ClCompile Include="..\..\bignum_ssh.c" />
+    <ClCompile Include="..\..\bind_ssh.c" />
+    <ClCompile Include="..\..\buffer_ssh.c" />
+    <ClCompile Include="..\..\callbacks_ssh.c" />
+    <ClCompile Include="..\..\channels_ssh.c" />
+    <ClCompile Include="..\..\channels1_ssh.c" />
+    <ClCompile Include="..\..\client_ssh.c" />
+    <ClCompile Include="..\..\config_ssh.c" />
+    <ClCompile Include="..\..\connect_ssh.c" />
+    <ClCompile Include="..\..\crc32_ssh.c" />
+    <ClCompile Include="..\..\curve25519_ssh.c" />
+    <ClCompile Include="..\..\dh_ssh.c" />
+    <ClCompile Include="..\..\ecdh_ssh.c" />
+    <ClCompile Include="..\..\error_ssh.c" />
+    <ClCompile Include="..\..\external\bcrypt_pbkdf_ssh.c" />
+    <ClCompile Include="..\..\external\blowfish_ssh.c" />
+    <ClCompile Include="..\..\external\curve25519_ref_ssh.c" />
+    <ClCompile Include="..\..\external\ed25519_ssh.c" />
+    <ClCompile Include="..\..\external\fe25519_ssh.c" />
+    <ClCompile Include="..\..\external\ge25519_ssh.c" />
+    <ClCompile Include="..\..\external\sc25519_ssh.c" />
+    <ClCompile Include="..\..\gcrypt_missing_ssh.c" />
+    <ClCompile Include="..\..\getpass_ssh.c" />
+    <ClCompile Include="..\..\gssapi_ssh.c" />
+    <ClCompile Include="..\..\gzip_ssh.c" />
+    <ClCompile Include="..\..\init_ssh.c" />
+    <ClCompile Include="..\..\kex_ssh.c" />
+    <ClCompile Include="..\..\kex1_ssh.c" />
+    <ClCompile Include="..\..\known_hosts_ssh.c" />
+    <ClCompile Include="..\..\legacy_ssh.c" />
+    <ClCompile Include="..\..\libcrypto_ssh.c" />
+    <ClCompile Include="..\..\libgcrypt_ssh.c" />
+    <ClCompile Include="..\..\libssh_string_ssh.c" />
+    <ClCompile Include="..\..\log_ssh.c" />
+    <ClCompile Include="..\..\match_ssh.c" />
+    <ClCompile Include="..\..\messages_ssh.c" />
+    <ClCompile Include="..\..\misc_ssh.c" />
+    <ClCompile Include="..\..\options_ssh.c" />
+    <ClCompile Include="..\..\packet_ssh.c" />
+    <ClCompile Include="..\..\packet1_ssh.c" />
+    <ClCompile Include="..\..\packet_cb_ssh.c" />
+    <ClCompile Include="..\..\packet_crypt_ssh.c" />
+    <ClCompile Include="..\..\pcap_ssh.c" />
+    <ClCompile Include="..\..\pki_ssh.c" />
+    <ClCompile Include="..\..\pki_container_openssh_ssh.c" />
+    <ClCompile Include="..\..\pki_crypto_ssh.c" />
+    <ClCompile Include="..\..\pki_ed25519_ssh.c" />
+    <ClCompile Include="..\..\pki_gcrypt_ssh.c" />
+    <ClCompile Include="..\..\poll_ssh.c" />
+    <ClCompile Include="..\..\scp_ssh.c" />
+    <ClCompile Include="..\..\server_ssh.c" />
+    <ClCompile Include="..\..\session_ssh.c" />
+    <ClCompile Include="..\..\sftp_ssh.c" />
+    <ClCompile Include="..\..\sftpserver_ssh.c" />
+    <ClCompile Include="..\..\socket_ssh.c" />
+    <ClCompile Include="..\..\threads_ssh.c" />
+    <ClCompile Include="..\..\threads\pthread_ssh.c" />
+    <ClCompile Include="..\..\wrapper_ssh.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\agent.h" />
@@ -141,7 +149,18 @@
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -152,7 +171,13 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -163,6 +188,11 @@
     <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)D</TargetName>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
@@ -191,6 +221,30 @@
       <OutputFile>$(OutDir)\$(ProjectName)D.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;LIBSSH_STATIC;_X86_;_DEBUG;WIN32;HAVE_CONFIG_H;_LIB;__STDC_CONSTANT_MACROS;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)\$(ProjectName)D.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -203,6 +257,28 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat />
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)\$(ProjectName).lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\;..\..\..\;..\..\..\openssl-1.0.2o\inc32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;LIBSSH_STATIC;_X86_;NDEBUG;WIN32;HAVE_CONFIG_H;WIN32;_LIB;_CRT_SECURE_NO_WARNINGSHAVE_CONFIG_H;WIN32;_LIB;TARGET_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS;_LIB;TARGET_OS_WINDOWS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>

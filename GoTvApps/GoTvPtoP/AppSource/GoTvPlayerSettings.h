@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GoTvCommon/QtSource/AppSettings.h>
+#include <AppSettings.h>
 
 class GoTvPlayerSettings : public AppSettings
 {

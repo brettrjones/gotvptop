@@ -23,16 +23,18 @@ extern "C" {
 #define NO_SYSLOG 
 #define OPENSSL_THREADS 
 #define _REENTRANT 
-#define DSO_DLFCN 
-#define HAVE_DLFCN_H 
+
+#ifdef TARGET_OS_WINDOWS
+# define DSO_WIN32
+#else
+# define DSO_DLFCN 
+# define HAVE_DLFCN_H 1
+#endif // TARGET_OS_WINDOWS
+
 #define L_ENDIAN
 #define OPENSSL_NO_EC_NISTP_64_GCC_128
 //#define RSA_FLAG_NO_CONSTTIME 
 //#define DSA_FLAG_NO_EXP_CONSTTIME
-
-//#if defined(TARGET_OS_WINDOWS) 
-//# define DSO_WIN32
-//#endif // defined(TARGET_OS_WINDOWS) 
 
 #if defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_LINUX)
 # define m64 

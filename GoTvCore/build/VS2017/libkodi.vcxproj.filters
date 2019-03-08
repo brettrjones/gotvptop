@@ -2765,7 +2765,6 @@
     <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\InputStreamPVRRecording.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDSubtitles\DllLibass.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\FrameBufferObject.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\OverlayRendererQt.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\RendererQt.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\VideoFilterShaderQt.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\YUV2RGBShaderQt.cpp" />
@@ -2836,7 +2835,6 @@
     <ClCompile Include="..\..\xbmc\xbmc\guilib\TextureQt.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\input\actions\Action.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\input\actions\ActionTranslator.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\interfaces\AnnouncementManager3.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\Addon3.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\AddonCallback3.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\AddonClass3.cpp" />
@@ -2945,9 +2943,6 @@
     <ClCompile Include="..\..\xbmc\xbmc\threads\Thread.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\threads\Timer.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\ActorProtocol.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\utils\AlarmClock.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\utils\AliasShortcutUtils.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\utils\AMLUtils.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\Archive.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\auto_buffer.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\Base64.cpp" />
@@ -2971,7 +2966,6 @@
     <ClCompile Include="..\..\xbmc\xbmc\utils\FileOperationJob.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\FileUtils.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\fstrcmp.c" />
-    <ClCompile Include="..\..\xbmc\xbmc\utils\fstrcmp.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\GLUtils.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\GroupUtils.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\HTMLUtil.cpp" />
@@ -3009,19 +3003,11 @@
     <ClCompile Include="..\..\xbmc\xbmc\utils\Stopwatch.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\StreamDetails.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\StreamUtils.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\utils\StringUtils.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\StringValidation.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\SysfsUtils.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\SystemInfo.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\Temperature.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\TextSearch.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\utils\TimeUtils.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\utils\URIUtils.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\utils\UrlOptions.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\utils\Utf8Utils.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\utils\Variant.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\utils\VC1BitstreamParser.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\utils\Vector.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\XBMCTinyXML.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\XMLUtils.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\XSLTUtils.cpp" />
@@ -3037,6 +3023,48 @@
     <ClCompile Include="..\..\xbmc\xbmc\windowing\qt\WinSystemQt.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\windowing\qt\WinSystemQtContext.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\windowing\Resolution.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\OverlayRendererQt.cpp">
+      <Filter>cores\VideoPlayer\VideoRenderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\utils\StringUtils2.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\utils\TimeUtils2.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\utils\AlarmClock.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\utils\AliasShortcutUtils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\utils\AMLUtils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Utf8Utils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\utils\UrlOptions.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\utils\URIUtils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Variant.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\utils\VC1BitstreamParser.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\utils\Vector.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\interfaces\AnnouncementManager3.cpp">
+      <Filter>interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\platform\qt\KodiQtApp.cpp">
+      <Filter>platform\qt</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\cores\DataCacheCore.h">
@@ -6594,7 +6622,6 @@
     <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\InputStreamPVRChannel.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\InputStreamPVRRecording.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\FrameBufferObject.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\OverlayRendererQt.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\RendererQt.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\VideoFilterShaderQt.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\YUV2RGBShaderQt.h" />
@@ -6768,9 +6795,6 @@
     <ClInclude Include="..\..\xbmc\xbmc\threads\ThreadImpl.h" />
     <ClInclude Include="..\..\xbmc\xbmc\threads\Timer.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\ActorProtocol.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\utils\AlarmClock.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\utils\AliasShortcutUtils.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\utils\AMLUtils.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\Archive.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\auto_buffer.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\Base64.h" />
@@ -6849,21 +6873,12 @@
     <ClInclude Include="..\..\xbmc\xbmc\utils\Stopwatch.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\StreamDetails.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\StreamUtils.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\utils\StringUtils.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\StringValidation.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\SysfsUtils.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\SystemInfo.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\Temperature.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\TextSearch.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\utils\TimeUtils.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\utils\TransformMatrix.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\utils\URIUtils.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\utils\UrlOptions.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\utils\Utf8Utils.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\uXstrings.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\utils\Variant.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\utils\VC1BitstreamParser.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\utils\Vector.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\XBMCTinyXML.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\XMLUtils.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\XSLTUtils.h" />
@@ -6880,6 +6895,51 @@
     <ClInclude Include="..\..\xbmc\xbmc\windowing\qt\WinSystemQt.h" />
     <ClInclude Include="..\..\xbmc\xbmc\windowing\qt\WinSystemQtContext.h" />
     <ClInclude Include="..\..\xbmc\xbmc\windowing\Resolution.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\OverlayRendererQt.h">
+      <Filter>cores\VideoPlayer\VideoRenderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\utils\IBufferObject.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\utils\AlarmClock.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\utils\AliasShortcutUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\utils\AMLUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\utils\StringUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\utils\TimeUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\utils\TransformMatrix.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Utf8Utils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\utils\UrlOptions.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\utils\URIUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Variant.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\utils\VC1BitstreamParser.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\utils\Vector.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\platform\qt\KodiQtApp.h">
+      <Filter>platform\qt</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="cores\AudioEngine\Encoders">
@@ -7425,6 +7485,15 @@
     <Filter Include="Object Libraries">
       <UniqueIdentifier>{2611B0E0-C7E2-3CC5-A966-AE05C1D79DDA}</UniqueIdentifier>
     </Filter>
+    <Filter Include="QtPri">
+      <UniqueIdentifier>{e8ddd170-5c53-44cf-a6fa-ec277edc3dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform\qt">
+      <UniqueIdentifier>{37d42ff0-9886-4343-8fc6-01f4ad6fa334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform\qt\qtandroid">
+      <UniqueIdentifier>{42820c73-92de-42af-8aa4-4f4a6e3a9881}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\..\xbmc\xbmc\swig\AddonModuleXbmc.i.xml" />
@@ -7448,6 +7517,12 @@
     <None Include="..\..\xbmc\xbmc\interfaces\python\PythonTools.groovy" />
     <None Include="..\..\xbmc\xbmc\powermanagement\Makefile" />
     <None Include="..\..\xbmc\xbmc\storage\Makefile" />
+    <None Include="..\..\..\libkodi.pri">
+      <Filter>QtPri</Filter>
+    </None>
+    <None Include="..\..\..\libkodi.pro">
+      <Filter>QtPri</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\xbmc\xbmc\addons\interfaces\GUI\CMakeLists.txt" />

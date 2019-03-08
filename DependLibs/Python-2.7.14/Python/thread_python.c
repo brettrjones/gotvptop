@@ -104,6 +104,10 @@ PyThread__init_thread(void)
 #endif /* !_HAVE_BSDI */
 #endif // TARGET_OS_LINUX
 
+#if defined(TARGET_OS_WINDOWS)
+void PyThread__init_thread_nt(void);
+#endif // defined(TARGET_OS_WINDOWS)
+
 void
 PyThread_init_thread(void)
 {
@@ -121,7 +125,11 @@ PyThread_init_thread(void)
         return;
     initialized = 1;
     dprintf(("PyThread_init_thread called\n"));
+#if defined(TARGET_OS_WINDOWS)
+	PyThread__init_thread_nt;
+#else
     PyThread__init_thread();
+#endif // defined(TARGET_OS_WINDOWS)
 }
 
 /* Support for runtime thread stack size tuning.
@@ -156,6 +164,15 @@ static size_t _pythread_stacksize = 0;
 
 #ifdef NT_THREADS
 #include "thread_nt.h"
+#if defined(TARGET_OS_WINDOWS)
+/*
+ * Initialization of the C package, should not be needed.
+ */
+void
+PyThread__init_thread_nt(void)
+{
+}
+#endif // defined(TARGET_OS_WINDOWS)
 #endif
 
 #ifdef OS2_THREADS

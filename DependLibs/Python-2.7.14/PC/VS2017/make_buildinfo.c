@@ -55,7 +55,7 @@ int make_buildinfo2()
 
 int main(int argc, char*argv[])
 {
-    char command[500] = "cl.exe -c -D_WIN32 -DUSE_DL_EXPORT -D_WINDOWS -DWIN32 -D_WINDLL ";
+    char command[500] = "cl.exe -c -D_WIN32 -DUSE_DL_EXPORT -D_WINDOWS -DWIN64 -D_WINDLL -DTARGET_OS_WINDOWS ";
     int do_unlink, result;
     if (argc != 2) {
         fprintf(stderr, "make_buildinfo $(ConfigurationName)\n");
@@ -83,7 +83,7 @@ int main(int argc, char*argv[])
         strcat_s(command, CMD_SIZE, "getbuildinfo2.c -DSUBWCREV ");
     else
         strcat_s(command, CMD_SIZE, "..\\..\\Modules\\getbuildinfo.c");
-    strcat_s(command, CMD_SIZE, " -Fogetbuildinfo.o -I..\\..\\Include -I..\\..\\PC");
+    strcat_s(command, CMD_SIZE, " -Fogetbuildinfo.o -I..\\..\\Include -I..\\..\\PC -I..\\..\\");
     puts(command); fflush(stdout);
     result = system(command);
     if (do_unlink)

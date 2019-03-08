@@ -17,14 +17,16 @@ ANDROID_NDK_ROOT F:\android\android-ndk-r18b-windows-x86_64\android-ndk-r19
 JAVA_HOME  F:\android\jdk1.8.0_131
 JRE_HOME F:\android\jre1.8.0_131
 PythonPath C:\Python27\Lib;C:\Python27\DLLs;C:\Python27\Lib\lib-tk
-QTDIR F:\Qt\Qt5.12\5.12.0\msvc2015_64
+QTDIR F:\Qt\Qt5.12\5.12.1\msvc2017_64
 
 
-=== GoTvPtoP Prerequisites ====
+=== GoTvPtoP For Windows Prerequisites ====
 1.) Python 2.7.13 or Python 2.7.14
 	 NOTE: Unless you want to change Paths in visual studio then python must be installed to default location C:\Python27
 2.) YASM 
-3.) visual studio 2015 ( Community edition is fine )
+3.) visual studio 2017 ( Community edition is fine )
+	a.) Follow the instructions of visual studio install for kodi at https://github.com/xbmc/xbmc/blob/master/docs/README.md
+	b.) 
 4.) Qt 5.12.0 ( Tested with Qt 5.12.0 but other versions may work )
 5.) Java Oracle JDK/JRE 1.8.0_131 
 6.) MingWin is NOT required.. even for ffmpeg build ( have removed all dependecy on migwin and made substitute functions )
@@ -36,6 +38,7 @@ After many frustrating days attempting to work within qt android frame work I di
 1.) Install AndroidStudio to F:/android/AndroidStudio
 2.) add gradle to enviroment variables 
 	edit path enviroment variable and add F:\Qt\Qt5.12\Tools\QtCreator\bin 
+	and F:\Qt\Qt5.12\Tools\QtCreator\bin 
 	and F:\android\AndroidStudio\gradle\gradle-4.10.1\bin
 	and F:\android\android-sdk\platform-tools
 	

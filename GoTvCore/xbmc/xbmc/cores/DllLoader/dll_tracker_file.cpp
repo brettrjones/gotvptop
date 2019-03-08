@@ -77,7 +77,7 @@ extern "C" void tracker_file_free_all(DllTrackInfo* pInfo)
 
       if (file->type == FILE_XBMC_OPEN) dll_close(file->handle);
       else if (file->type == FILE_XBMC_FOPEN) dll_fclose((FILE*)file->handle);
-      else if (file->type == FILE_OPEN) close(file->handle);
+      else if (file->type == FILE_OPEN) close_os(file->handle);
       else if (file->type == FILE_FOPEN) fclose((FILE*)file->handle);
 
       delete file;

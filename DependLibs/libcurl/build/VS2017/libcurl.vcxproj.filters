@@ -548,12 +548,10 @@
     <ClCompile Include="..\..\lib\vtls\schannel_curl.c">
       <Filter>Source Files\CurlTool\vts</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\tool_filetime_curl.c">
-      <Filter>Source Files\CurlTool</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\slist_wc_curl.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\tool_filetime.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\tool_binmode.h">

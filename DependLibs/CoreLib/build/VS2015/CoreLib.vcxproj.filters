@@ -184,6 +184,9 @@
     <ClCompile Include="..\..\VxTime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\VxUrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppErr.h">
@@ -342,7 +345,7 @@
     <ClInclude Include="..\..\VxTimeUtil.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-	<ClInclude Include="..\..\VxUrl.h">
+    <ClInclude Include="..\..\VxUrl.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\VxValuePair.h">
@@ -471,7 +474,7 @@
     <ClInclude Include="..\..\VxTime.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-	    <ClInclude Include="..\..\VxUrl.h">
+    <ClInclude Include="..\..\VxUrl.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\StdMinMaxForWindows.h">

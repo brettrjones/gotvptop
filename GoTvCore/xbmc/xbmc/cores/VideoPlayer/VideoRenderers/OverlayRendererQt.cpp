@@ -18,7 +18,11 @@
  *  <http://www.gnu.org/licenses/>.
  *
  */
+
 #include "config_kodi.h"
+#if defined(TARGET_OS_WINDOWS)
+# include <libglew/include/GL/glew.h>
+#endif
 #if defined(HAVE_QT_GUI)
 
 #include "OverlayRenderer.h"

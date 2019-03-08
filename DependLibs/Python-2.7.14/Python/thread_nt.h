@@ -89,6 +89,7 @@ FreeNonRecursiveMutex(PNRMUTEX mutex)
 
 long PyThread_get_thread_ident(void);
 
+#if !defined(TARGET_OS_WINDOWS)
 /*
  * Initialization of the C package, should not be needed.
  */
@@ -96,6 +97,9 @@ static void
 PyThread__init_thread(void)
 {
 }
+#else
+void PyThread__init_thread(void);
+#endif // !defined(TARGET_OS_WINDOWS)
 
 /*
  * Thread support.
