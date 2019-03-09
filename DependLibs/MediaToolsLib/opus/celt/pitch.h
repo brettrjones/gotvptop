@@ -146,7 +146,7 @@ opus_val32
 #else
 void
 #endif
-celt_pitch_xcorr_c(const opus_val16 *_x, const opus_val16 *_y,
+celt_pitch_xcorr_c_mtools(const opus_val16 *_x, const opus_val16 *_y,
       opus_val32 *xcorr, int len, int max_pitch);
 
 #if !defined(OVERRIDE_PITCH_XCORR)
@@ -166,7 +166,7 @@ void
         xcorr, len, max_pitch))
 # else
 #  define celt_pitch_xcorr(_x, _y, xcorr, len, max_pitch, arch) \
-  ((void)(arch),celt_pitch_xcorr_c(_x, _y, xcorr, len, max_pitch))
+  ((void)(arch),celt_pitch_xcorr_c_mtools(_x, _y, xcorr, len, max_pitch))
 # endif
 #endif
 

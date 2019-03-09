@@ -44,6 +44,7 @@
     <ClCompile Include="..\..\apetag.c" />
     <ClCompile Include="..\..\apngdec.c" />
     <ClCompile Include="..\..\apngenc.c" />
+    <ClCompile Include="..\..\aptxdec.c" />
     <ClCompile Include="..\..\aqtitledec.c" />
     <ClCompile Include="..\..\asf.c" />
     <ClCompile Include="..\..\asfcrypt.c" />
@@ -86,16 +87,20 @@
     <ClCompile Include="..\..\cdxl.c" />
     <ClCompile Include="..\..\chromaprint.c" />
     <ClCompile Include="..\..\cinedec.c" />
+    <ClCompile Include="..\..\codec2.c" />
     <ClCompile Include="..\..\concat.c" />
     <ClCompile Include="..\..\concatdec.c" />
     <ClCompile Include="..\..\crcenc.c" />
     <ClCompile Include="..\..\crypto.c" />
     <ClCompile Include="..\..\cutils.c" />
+    <ClCompile Include="..\..\dash.c" />
+    <ClCompile Include="..\..\dashdec.c" />
     <ClCompile Include="..\..\dashenc.c" />
     <ClCompile Include="..\..\data_uri.c" />
     <ClCompile Include="..\..\dauddec.c" />
     <ClCompile Include="..\..\daudenc.c" />
     <ClCompile Include="..\..\dcstr.c" />
+    <ClCompile Include="..\..\demuxer_list.c" />
     <ClCompile Include="..\..\dfa.c" />
     <ClCompile Include="..\..\diracdec.c" />
     <ClCompile Include="..\..\dnxhddec.c" />
@@ -117,10 +122,14 @@
     <ClCompile Include="..\..\ffmenc.c" />
     <ClCompile Include="..\..\ffmetadec.c" />
     <ClCompile Include="..\..\ffmetaenc.c" />
+    <ClCompile Include="..\..\fifo.c" />
+    <ClCompile Include="..\..\fifo_test.c" />
     <ClCompile Include="..\..\file.c" />
     <ClCompile Include="..\..\file_open.c" />
     <ClCompile Include="..\..\filmstripdec.c" />
     <ClCompile Include="..\..\filmstripenc.c" />
+    <ClCompile Include="..\..\fitsdec.c" />
+    <ClCompile Include="..\..\fitsenc.c" />
     <ClCompile Include="..\..\flacdec.c" />
     <ClCompile Include="..\..\flacenc.c" />
     <ClCompile Include="..\..\flacenc_header.c" />
@@ -136,7 +145,9 @@
     <ClCompile Include="..\..\ftp.c" />
     <ClCompile Include="..\..\g722.c" />
     <ClCompile Include="..\..\g723_1.c" />
+    <ClCompile Include="..\..\g726.c" />
     <ClCompile Include="..\..\g729dec.c" />
+    <ClCompile Include="..\..\gdv.c" />
     <ClCompile Include="..\..\genh.c" />
     <ClCompile Include="..\..\gif.c" />
     <ClCompile Include="..\..\gifdec.c" />
@@ -154,6 +165,7 @@
     <ClCompile Include="..\..\hevcdec.c" />
     <ClCompile Include="..\..\hls.c" />
     <ClCompile Include="..\..\hlsenc.c" />
+    <ClCompile Include="..\..\hlsplaylist.c" />
     <ClCompile Include="..\..\hlsproto.c" />
     <ClCompile Include="..\..\hnm.c" />
     <ClCompile Include="..\..\http.c" />
@@ -191,9 +203,8 @@
     <ClCompile Include="..\..\libgme.c" />
     <ClCompile Include="..\..\libmodplug.c" />
     <ClCompile Include="..\..\libnut.c" />
+    <ClCompile Include="..\..\libopenmpt.c" />
     <ClCompile Include="..\..\librtmp.c" />
-    <ClCompile Include="..\..\libsmbclient.c" />
-    <ClCompile Include="..\..\libssh.c" />
     <ClCompile Include="..\..\lmlm4.c" />
     <ClCompile Include="..\..\loasdec.c" />
     <ClCompile Include="..\..\log2_tab.c" />
@@ -211,6 +222,7 @@
     <ClCompile Include="..\..\mgsts.c" />
     <ClCompile Include="..\..\microdvddec.c" />
     <ClCompile Include="..\..\microdvdenc.c" />
+    <ClCompile Include="..\..\mj2kdec.c" />
     <ClCompile Include="..\..\mkvtimestamp_v2.c" />
     <ClCompile Include="..\..\mlpdec.c" />
     <ClCompile Include="..\..\mlvdec.c" />
@@ -224,6 +236,7 @@
     <ClCompile Include="..\..\movenccenc.c" />
     <ClCompile Include="..\..\movenchint.c" />
     <ClCompile Include="..\..\mov_chan.c" />
+    <ClCompile Include="..\..\mov_esds.c" />
     <ClCompile Include="..\..\mp3dec.c" />
     <ClCompile Include="..\..\mp3enc.c" />
     <ClCompile Include="..\..\mpc.c" />
@@ -243,6 +256,7 @@
     <ClCompile Include="..\..\mtv.c" />
     <ClCompile Include="..\..\musx.c" />
     <ClCompile Include="..\..\mux.c" />
+    <ClCompile Include="..\..\muxer_list.c" />
     <ClCompile Include="..\..\mvdec.c" />
     <ClCompile Include="..\..\mvi.c" />
     <ClCompile Include="..\..\mxf.c" />
@@ -252,6 +266,7 @@
     <ClCompile Include="..\..\ncdec.c" />
     <ClCompile Include="..\..\network.c" />
     <ClCompile Include="..\..\nistspheredec.c" />
+    <ClCompile Include="..\..\nspdec.c" />
     <ClCompile Include="..\..\nsvdec.c" />
     <ClCompile Include="..\..\nullenc.c" />
     <ClCompile Include="..\..\nut.c" />
@@ -282,6 +297,7 @@
     <ClCompile Include="..\..\pcmenc.c" />
     <ClCompile Include="..\..\pjsdec.c" />
     <ClCompile Include="..\..\pmpdec.c" />
+    <ClCompile Include="..\..\prompeg.c" />
     <ClCompile Include="..\..\protocols.c" />
     <ClCompile Include="..\..\protocol_list.c" />
     <ClCompile Include="..\..\psxstr.c" />
@@ -313,6 +329,7 @@
     <ClCompile Include="..\..\rsoenc.c" />
     <ClCompile Include="..\..\rtmpcrypt.c" />
     <ClCompile Include="..\..\rtmpdh.c" />
+    <ClCompile Include="..\..\rtmpdigest.c" />
     <ClCompile Include="..\..\rtmphttp.c" />
     <ClCompile Include="..\..\rtmppkt.c" />
     <ClCompile Include="..\..\rtmpproto.c" />
@@ -338,6 +355,7 @@
     <ClCompile Include="..\..\rtpdec_qcelp.c" />
     <ClCompile Include="..\..\rtpdec_qdm2.c" />
     <ClCompile Include="..\..\rtpdec_qt.c" />
+    <ClCompile Include="..\..\rtpdec_rfc4175.c" />
     <ClCompile Include="..\..\rtpdec_svq3.c" />
     <ClCompile Include="..\..\rtpdec_vc2hq.c" />
     <ClCompile Include="..\..\rtpdec_vp8.c" />
@@ -363,15 +381,22 @@
     <ClCompile Include="..\..\rtsp.c" />
     <ClCompile Include="..\..\rtspdec.c" />
     <ClCompile Include="..\..\rtspenc.c" />
+    <ClCompile Include="..\..\s337m.c" />
     <ClCompile Include="..\..\samidec.c" />
     <ClCompile Include="..\..\sapdec.c" />
     <ClCompile Include="..\..\sapenc.c" />
     <ClCompile Include="..\..\sauce.c" />
+    <ClCompile Include="..\..\sbcdec.c" />
     <ClCompile Include="..\..\sbgdec.c" />
+    <ClCompile Include="..\..\sccdec.c" />
+    <ClCompile Include="..\..\sccenc.c" />
     <ClCompile Include="..\..\sctp.c" />
     <ClCompile Include="..\..\sdp.c" />
     <ClCompile Include="..\..\sdr2.c" />
+    <ClCompile Include="..\..\sdsdec.c" />
+    <ClCompile Include="..\..\sdxdec.c" />
     <ClCompile Include="..\..\segafilm.c" />
+    <ClCompile Include="..\..\segafilmenc.c" />
     <ClCompile Include="..\..\segment.c" />
     <ClCompile Include="..\..\shortendec.c" />
     <ClCompile Include="..\..\sierravmd.c" />
@@ -398,6 +423,7 @@
     <ClCompile Include="..\..\subviewer1dec.c" />
     <ClCompile Include="..\..\subviewerdec.c" />
     <ClCompile Include="..\..\supdec.c" />
+    <ClCompile Include="..\..\supenc.c" />
     <ClCompile Include="..\..\svag.c" />
     <ClCompile Include="..\..\swf.c" />
     <ClCompile Include="..\..\swfdec.c" />
@@ -406,6 +432,8 @@
     <ClCompile Include="..\..\tcp.c" />
     <ClCompile Include="..\..\tedcaptionsdec.c" />
     <ClCompile Include="..\..\tee.c" />
+    <ClCompile Include="..\..\teeproto.c" />
+    <ClCompile Include="..\..\tee_common.c" />
     <ClCompile Include="..\..\thp.c" />
     <ClCompile Include="..\..\tiertexseq.c" />
     <ClCompile Include="..\..\tls.c" />
@@ -415,8 +443,10 @@
     <ClCompile Include="..\..\tls_securetransport.c" />
     <ClCompile Include="..\..\tmv.c" />
     <ClCompile Include="..\..\tta.c" />
+    <ClCompile Include="..\..\ttaenc.c" />
     <ClCompile Include="..\..\tty.c" />
     <ClCompile Include="..\..\txd.c" />
+    <ClCompile Include="..\..\ty.c" />
     <ClCompile Include="..\..\udp.c" />
     <ClCompile Include="..\..\uncodedframecrcenc.c" />
     <ClCompile Include="..\..\unix.c" />
@@ -480,6 +510,7 @@
     <ClInclude Include="..\..\avio_internal.h" />
     <ClInclude Include="..\..\avlanguage.h" />
     <ClInclude Include="..\..\caf.h" />
+    <ClInclude Include="..\..\dash.h" />
     <ClInclude Include="..\..\dv.h" />
     <ClInclude Include="..\..\ffm.h" />
     <ClInclude Include="..\..\ffmeta.h" />
@@ -488,6 +519,7 @@
     <ClInclude Include="..\..\flv.h" />
     <ClInclude Include="..\..\gxf.h" />
     <ClInclude Include="..\..\hevc.h" />
+    <ClInclude Include="..\..\hlsplaylist.h" />
     <ClInclude Include="..\..\http.h" />
     <ClInclude Include="..\..\httpauth.h" />
     <ClInclude Include="..\..\id3v1.h" />
@@ -521,6 +553,7 @@
     <ClInclude Include="..\..\rm.h" />
     <ClInclude Include="..\..\rmsipr.h" />
     <ClInclude Include="..\..\rso.h" />
+    <ClInclude Include="..\..\rtmp.h" />
     <ClInclude Include="..\..\rtmpcrypt.h" />
     <ClInclude Include="..\..\rtmpdh.h" />
     <ClInclude Include="..\..\rtmppkt.h" />
@@ -541,6 +574,7 @@
     <ClInclude Include="..\..\srtp.h" />
     <ClInclude Include="..\..\subtitles.h" />
     <ClInclude Include="..\..\swf.h" />
+    <ClInclude Include="..\..\tee_common.h" />
     <ClInclude Include="..\..\tls.h" />
     <ClInclude Include="..\..\url.h" />
     <ClInclude Include="..\..\urldecode.h" />
@@ -552,6 +586,10 @@
     <ClInclude Include="..\..\wtv.h" />
     <ClInclude Include="..\..\wv.h" />
     <ClInclude Include="..\..\yuv4mpeg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\libavformat.v" />
+    <None Include="..\..\Makefile" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>FfmpegAvFormatLib</ProjectName>

@@ -35,6 +35,7 @@
     <ClCompile Include="..\..\response.c" />
     <ClCompile Include="..\..\sysfdsetsize.c" />
     <ClCompile Include="..\..\tsearch.c" />
+    <ClCompile Include="..\..\w32functions.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h" />

@@ -21,11 +21,11 @@
  */
 
 #include "avformat.h"
-#include "internal.h"
+#include "avformat_internal.h"
 #include "network.h"
 #include "url.h"
 #include "tls.h"
-#include "libavcodec/internal.h"
+#include "libavcodec/avcodec_internal.h"
 #include "libavutil/avutil.h"
 #include "libavutil/opt.h"
 

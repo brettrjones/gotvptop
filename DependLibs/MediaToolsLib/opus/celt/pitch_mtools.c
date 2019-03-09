@@ -248,7 +248,7 @@ opus_val32
 #else
 void
 #endif
-celt_pitch_xcorr_c(const opus_val16 *_x, const opus_val16 *_y, opus_val32 *xcorr, int len, int max_pitch)
+celt_pitch_xcorr_c_mtools(const opus_val16 *_x, const opus_val16 *_y, opus_val32 *xcorr, int len, int max_pitch)
 {
    int i,j;
    /*The EDSP version requires that max_pitch is at least 1, and that _x is

@@ -205,9 +205,6 @@
     <ClInclude Include="..\..\opus\win32\opus_version.h">
       <Filter>Source\opus\win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\opus\win32\unicode_support.h">
-      <Filter>Source\opus\win32</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\opus\src\analysis.h">
       <Filter>Source\opus\src</Filter>
     </ClInclude>
@@ -289,6 +286,90 @@
     <ClInclude Include="..\..\opus\silk\float\structs_FLP.h">
       <Filter>Source\opus\silk\float</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\opus\celt\_kiss_fft_guts.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\arch_celt.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\bands.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\celt.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\celt_lpc.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\cpu_support.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\cwrs.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\ecintrin.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\entcode.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\entdec.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\entenc.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\fixed_debug.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\fixed_generic.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\float_cast.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\kiss_fft.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\laplace.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\mathops.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\mdct.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\mfrngcod.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\modes.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\os_support.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\pitch.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\quant_bands.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\rate.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\stack_alloc.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\static_modes_fixed.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\static_modes_float.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opus\celt\vq.h">
+      <Filter>Source\opus\celt</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GoTvConfig">
@@ -341,6 +422,9 @@
     </Filter>
     <Filter Include="Source\opus\silk\float">
       <UniqueIdentifier>{696e40c1-09a4-4f1a-9b88-28c41c0971cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QtPri">
+      <UniqueIdentifier>{b1beb1bb-846c-4a0f-a905-c9cd7d3fac13}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -433,9 +517,6 @@
     </ClCompile>
     <ClCompile Include="..\..\opus\celt\arm\armcpu_mtools.c">
       <Filter>Source\opus\celt\arm</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\opus\win32\unicode_support.c">
-      <Filter>Source\opus\win32</Filter>
     </ClCompile>
     <ClCompile Include="..\..\opus\src\analysis_mtools.c">
       <Filter>Source\opus\src</Filter>
@@ -788,6 +869,60 @@
     <ClCompile Include="..\..\opus\silk\float\wrappers_FLP_mtools.c">
       <Filter>Source\opus\silk\float</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\opus\celt\bands_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\celt_decoder_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\celt_encoder_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\celt_lpc_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\celt_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\cwrs_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\entcode_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\entdec_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\entenc_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\kiss_fft_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\laplace_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\mathops_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\mdct_mediatools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\modes_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\pitch_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\quant_bands_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\rate_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opus\celt\vq_mtools.c">
+      <Filter>Source\opus\celt</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\MediaToolsLib.pro">
@@ -804,6 +939,12 @@
     </None>
     <None Include="..\..\opus\win32\genversion.bat">
       <Filter>Source\opus\win32</Filter>
+    </None>
+    <None Include="..\..\..\..\libmediatools.pri">
+      <Filter>QtPri</Filter>
+    </None>
+    <None Include="..\..\..\..\libmediatools.pro">
+      <Filter>QtPri</Filter>
     </None>
   </ItemGroup>
 </Project>

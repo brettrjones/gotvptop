@@ -414,7 +414,6 @@
     <ClCompile Include="..\..\libcelt_dec.c" />
     <ClCompile Include="..\..\libfaac.c" />
     <ClCompile Include="..\..\libfdk-aacdec.c" />
-    <ClCompile Include="..\..\libfdk-aacenc.c" />
     <ClCompile Include="..\..\libgsmdec.c" />
     <ClCompile Include="..\..\libgsmenc.c" />
     <ClCompile Include="..\..\libilbc.c" />
@@ -958,6 +957,7 @@
     <ClCompile Include="..\..\adts_parser.c" />
     <ClCompile Include="..\..\..\libavfilter\lavfutils.c" />
     <ClCompile Include="..\..\magicyuvenc.c" />
+    <ClCompile Include="..\..\libfdk-aacenc.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\a64colors.h" />
@@ -1455,9 +1455,18 @@
     <Filter Include="GoTvConfig">
       <UniqueIdentifier>{9d3d4fed-cae8-4f01-a56b-b3b9169ce825}</UniqueIdentifier>
     </Filter>
+    <Filter Include="QtPri">
+      <UniqueIdentifier>{e46d7a06-a969-4c34-912c-6e1dc494dc72}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\libavcodec.v" />
     <None Include="..\..\Makefile" />
+    <None Include="..\..\..\..\..\libavcodec.pri">
+      <Filter>QtPri</Filter>
+    </None>
+    <None Include="..\..\..\..\..\libavcodec.pro">
+      <Filter>QtPri</Filter>
+    </None>
   </ItemGroup>
 </Project>

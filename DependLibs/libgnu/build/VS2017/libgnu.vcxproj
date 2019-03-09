@@ -1434,6 +1434,7 @@
     <ClCompile Include="..\..\read-catalog_gnu.c" />
     <ClCompile Include="..\..\read-csharp_gnu.c" />
     <ClCompile Include="..\..\read-desktop_gnu.c" />
+    <ClCompile Include="..\..\read-file-gnu.c" />
     <ClCompile Include="..\..\read-file_gnu.c" />
     <ClCompile Include="..\..\read-java_gnu.c" />
     <ClCompile Include="..\..\read-mo_gnu.c" />

@@ -1448,6 +1448,8 @@
     <ClInclude Include="..\..\xwd.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\..\libavcodec.pri" />
+    <None Include="..\..\..\..\..\libavcodec.pro" />
     <None Include="..\..\libavcodec.v" />
     <None Include="..\..\Makefile" />
   </ItemGroup>

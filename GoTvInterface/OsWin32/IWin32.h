@@ -35,9 +35,6 @@ public:
     void                        doPreShutdown() override;
     void                        doShutdown() override;
 
-    //=== utilities ===//
-    bool                        initDirectories( ) override;
-
 private:
 
     HANDLE                       m_AppRunningMutex;

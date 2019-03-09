@@ -34,7 +34,7 @@
 # if defined(OPUS_FIXED_POINT)
 opus_val32 (*const CELT_PITCH_XCORR_IMPL[OPUS_ARCHMASK+1])(const opus_val16 *,
     const opus_val16 *, opus_val32 *, int , int) = {
-  celt_pitch_xcorr_c,               /* ARMv4 */
+  celt_pitch_xcorr_c_mtools,               /* ARMv4 */
   MAY_HAVE_EDSP(celt_pitch_xcorr),  /* EDSP */
   MAY_HAVE_MEDIA(celt_pitch_xcorr), /* Media */
   MAY_HAVE_NEON(celt_pitch_xcorr)   /* NEON */
