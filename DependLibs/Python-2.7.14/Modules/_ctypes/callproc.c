@@ -836,7 +836,11 @@ static int _call_function_pointer(int flags,
 #ifndef DONT_USE_SEH
     __try {
 #endif
+# if ARCH_32_BITS //BRJ only works if using win32.c ( delta value != 0 means incorrect number of arguments )
         delta =
+# else
+		delta = 0;
+# endif // defined(WIN32)
 #endif
                 ffi_call(&cif, (void *)pProc, resmem, avalues);
 #ifdef MS_WIN32

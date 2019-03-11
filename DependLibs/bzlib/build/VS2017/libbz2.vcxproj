@@ -90,7 +90,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(ProjectDir)\..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -169,9 +170,9 @@
       <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeaderOutputFile>.\Debug/libbz2.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
-      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -274,16 +275,17 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;LIB_STATIC;WIN64;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeaderOutputFile>.\Release/libbz2.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
-      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
-      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders\;$(ProjectDir)..\..\..\..\..\</AdditionalIncludeDirectories>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -304,6 +306,9 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <OutputFile>.\Release/libbz2.bsc</OutputFile>
     </Bscmake>
+    <BuildLog>
+      <Path>$(SolutionDir)objs\$(TargetName)\$(Configuration)\$(MSBuildProjectName).log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\Qt\libbz2.pri" />

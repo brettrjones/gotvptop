@@ -12,9 +12,10 @@ As a test of your build enviroment
 
 
 
-NOTE: Visual Studio is no longer supported but the compiler install is required if building a windows version of GoTvPtoP
+NOTE: Only Visual Studio 2017 is supported and the compiler install is required if building a windows version of GoTvPtoP
 If building with Visual Studio then
 	1.) Open $(SRC_ROOT)/build/VS2015/GoTvAll.sln
+	1.) Open $(SRC_ROOT)/build/VS2017/GoTvAll.sln
 	2.) Rebuild All
 	
 If building with Qt

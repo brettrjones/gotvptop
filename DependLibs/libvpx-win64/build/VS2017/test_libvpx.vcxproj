@@ -44,7 +44,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>".";"F:/libvpx-master";".";"F:/libvpx-master/third_party/googletest/src/include";"F:/libvpx-master/third_party/libwebm";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>".";"$(ProjectDir)../../";".";"$(ProjectDir)../../third_party/googletest/src/include";"$(ProjectDir)../../third_party/libwebm";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_VARIADIC_MAX=10;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
@@ -61,7 +61,7 @@
     <ClCompile>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>".";"F:/libvpx-master";".";"F:/libvpx-master/third_party/googletest/src/include";"F:/libvpx-master/third_party/libwebm";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>".";"$(ProjectDir)../../";".";"$(ProjectDir)../../third_party/googletest/src/include";"$(ProjectDir)../../third_party/libwebm";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_VARIADIC_MAX=10;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
@@ -75,304 +75,304 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="F:\libvpx-master\test\bench.cc">
+    <ClCompile Include="..\..\test\bench.cc">
       <ObjectFileName>$(IntDir)test_bench.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\test_libvpx.cc">
+    <ClCompile Include="..\..\test\test_libvpx.cc">
       <ObjectFileName>$(IntDir)test_test_libvpx.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\test_vectors.cc">
+    <ClCompile Include="..\..\test\test_vectors.cc">
       <ObjectFileName>$(IntDir)test_test_vectors.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\md5_utils.c">
+    <ClCompile Include="..\..\md5_utils.c">
       <ObjectFileName>$(IntDir)md5_utils.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\y4minput.c">
+    <ClCompile Include="..\..\y4minput.c">
       <ObjectFileName>$(IntDir)y4minput.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\altref_test.cc">
+    <ClCompile Include="..\..\test\altref_test.cc">
       <ObjectFileName>$(IntDir)test_altref_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\aq_segment_test.cc">
+    <ClCompile Include="..\..\test\aq_segment_test.cc">
       <ObjectFileName>$(IntDir)test_aq_segment_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\alt_ref_aq_segment_test.cc">
+    <ClCompile Include="..\..\test\alt_ref_aq_segment_test.cc">
       <ObjectFileName>$(IntDir)test_alt_ref_aq_segment_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp8_datarate_test.cc">
+    <ClCompile Include="..\..\test\vp8_datarate_test.cc">
       <ObjectFileName>$(IntDir)test_vp8_datarate_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_datarate_test.cc">
+    <ClCompile Include="..\..\test\vp9_datarate_test.cc">
       <ObjectFileName>$(IntDir)test_vp9_datarate_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\encode_api_test.cc">
+    <ClCompile Include="..\..\test\encode_api_test.cc">
       <ObjectFileName>$(IntDir)test_encode_api_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\error_resilience_test.cc">
+    <ClCompile Include="..\..\test\error_resilience_test.cc">
       <ObjectFileName>$(IntDir)test_error_resilience_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\realtime_test.cc">
+    <ClCompile Include="..\..\test\realtime_test.cc">
       <ObjectFileName>$(IntDir)test_realtime_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\resize_test.cc">
+    <ClCompile Include="..\..\test\resize_test.cc">
       <ObjectFileName>$(IntDir)test_resize_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\config_test.cc">
+    <ClCompile Include="..\..\test\config_test.cc">
       <ObjectFileName>$(IntDir)test_config_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\cq_test.cc">
+    <ClCompile Include="..\..\test\cq_test.cc">
       <ObjectFileName>$(IntDir)test_cq_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\keyframe_test.cc">
+    <ClCompile Include="..\..\test\keyframe_test.cc">
       <ObjectFileName>$(IntDir)test_keyframe_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\byte_alignment_test.cc">
+    <ClCompile Include="..\..\test\byte_alignment_test.cc">
       <ObjectFileName>$(IntDir)test_byte_alignment_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\decode_svc_test.cc">
+    <ClCompile Include="..\..\test\decode_svc_test.cc">
       <ObjectFileName>$(IntDir)test_decode_svc_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\external_frame_buffer_test.cc">
+    <ClCompile Include="..\..\test\external_frame_buffer_test.cc">
       <ObjectFileName>$(IntDir)test_external_frame_buffer_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\user_priv_test.cc">
+    <ClCompile Include="..\..\test\user_priv_test.cc">
       <ObjectFileName>$(IntDir)test_user_priv_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\active_map_refresh_test.cc">
+    <ClCompile Include="..\..\test\active_map_refresh_test.cc">
       <ObjectFileName>$(IntDir)test_active_map_refresh_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\active_map_test.cc">
+    <ClCompile Include="..\..\test\active_map_test.cc">
       <ObjectFileName>$(IntDir)test_active_map_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\borders_test.cc">
+    <ClCompile Include="..\..\test\borders_test.cc">
       <ObjectFileName>$(IntDir)test_borders_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\cpu_speed_test.cc">
+    <ClCompile Include="..\..\test\cpu_speed_test.cc">
       <ObjectFileName>$(IntDir)test_cpu_speed_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\frame_size_tests.cc">
+    <ClCompile Include="..\..\test\frame_size_tests.cc">
       <ObjectFileName>$(IntDir)test_frame_size_tests.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_lossless_test.cc">
+    <ClCompile Include="..\..\test\vp9_lossless_test.cc">
       <ObjectFileName>$(IntDir)test_vp9_lossless_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_end_to_end_test.cc">
+    <ClCompile Include="..\..\test\vp9_end_to_end_test.cc">
       <ObjectFileName>$(IntDir)test_vp9_end_to_end_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\decode_corrupted.cc">
+    <ClCompile Include="..\..\test\decode_corrupted.cc">
       <ObjectFileName>$(IntDir)test_decode_corrupted.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_ethread_test.cc">
+    <ClCompile Include="..\..\test\vp9_ethread_test.cc">
       <ObjectFileName>$(IntDir)test_vp9_ethread_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_motion_vector_test.cc">
+    <ClCompile Include="..\..\test\vp9_motion_vector_test.cc">
       <ObjectFileName>$(IntDir)test_vp9_motion_vector_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\level_test.cc">
+    <ClCompile Include="..\..\test\level_test.cc">
       <ObjectFileName>$(IntDir)test_level_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\svc_datarate_test.cc">
+    <ClCompile Include="..\..\test\svc_datarate_test.cc">
       <ObjectFileName>$(IntDir)test_svc_datarate_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\svc_test.cc">
+    <ClCompile Include="..\..\test\svc_test.cc">
       <ObjectFileName>$(IntDir)test_svc_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\svc_end_to_end_test.cc">
+    <ClCompile Include="..\..\test\svc_end_to_end_test.cc">
       <ObjectFileName>$(IntDir)test_svc_end_to_end_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\decode_test_driver.cc">
+    <ClCompile Include="..\..\test\decode_test_driver.cc">
       <ObjectFileName>$(IntDir)test_decode_test_driver.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\encode_test_driver.cc">
+    <ClCompile Include="..\..\test\encode_test_driver.cc">
       <ObjectFileName>$(IntDir)test_encode_test_driver.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\ivfenc.c">
+    <ClCompile Include="..\..\ivfenc.c">
       <ObjectFileName>$(IntDir)ivfenc.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\y4m_test.cc">
+    <ClCompile Include="..\..\test\y4m_test.cc">
       <ObjectFileName>$(IntDir)test_y4m_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\y4menc.c">
+    <ClCompile Include="..\..\y4menc.c">
       <ObjectFileName>$(IntDir)y4menc.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\third_party\libwebm\mkvparser\mkvparser.cc">
+    <ClCompile Include="..\..\third_party\libwebm\mkvparser\mkvparser.cc">
       <ObjectFileName>$(IntDir)third_party_libwebm_mkvparser_mkvparser.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\third_party\libwebm\mkvparser\mkvreader.cc">
+    <ClCompile Include="..\..\third_party\libwebm\mkvparser\mkvreader.cc">
       <ObjectFileName>$(IntDir)third_party_libwebm_mkvparser_mkvreader.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\webmdec.cc">
+    <ClCompile Include="..\..\webmdec.cc">
       <ObjectFileName>$(IntDir)webmdec.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_skip_loopfilter_test.cc">
+    <ClCompile Include="..\..\test\vp9_skip_loopfilter_test.cc">
       <ObjectFileName>$(IntDir)test_vp9_skip_loopfilter_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\decode_api_test.cc">
+    <ClCompile Include="..\..\test\decode_api_test.cc">
       <ObjectFileName>$(IntDir)test_decode_api_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\test_vector_test.cc">
+    <ClCompile Include="..\..\test\test_vector_test.cc">
       <ObjectFileName>$(IntDir)test_test_vector_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\invalid_file_test.cc">
+    <ClCompile Include="..\..\test\invalid_file_test.cc">
       <ObjectFileName>$(IntDir)test_invalid_file_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp8_boolcoder_test.cc">
+    <ClCompile Include="..\..\test\vp8_boolcoder_test.cc">
       <ObjectFileName>$(IntDir)test_vp8_boolcoder_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp8_fragments_test.cc">
+    <ClCompile Include="..\..\test\vp8_fragments_test.cc">
       <ObjectFileName>$(IntDir)test_vp8_fragments_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\add_noise_test.cc">
+    <ClCompile Include="..\..\test\add_noise_test.cc">
       <ObjectFileName>$(IntDir)test_add_noise_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\pp_filter_test.cc">
+    <ClCompile Include="..\..\test\pp_filter_test.cc">
       <ObjectFileName>$(IntDir)test_pp_filter_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp8_decrypt_test.cc">
+    <ClCompile Include="..\..\test\vp8_decrypt_test.cc">
       <ObjectFileName>$(IntDir)test_vp8_decrypt_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\quantize_test.cc">
+    <ClCompile Include="..\..\test\quantize_test.cc">
       <ObjectFileName>$(IntDir)test_quantize_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\set_roi.cc">
+    <ClCompile Include="..\..\test\set_roi.cc">
       <ObjectFileName>$(IntDir)test_set_roi.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\variance_test.cc">
+    <ClCompile Include="..\..\test\variance_test.cc">
       <ObjectFileName>$(IntDir)test_variance_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp8_fdct4x4_test.cc">
+    <ClCompile Include="..\..\test\vp8_fdct4x4_test.cc">
       <ObjectFileName>$(IntDir)test_vp8_fdct4x4_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\idct_test.cc">
+    <ClCompile Include="..\..\test\idct_test.cc">
       <ObjectFileName>$(IntDir)test_idct_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\predict_test.cc">
+    <ClCompile Include="..\..\test\predict_test.cc">
       <ObjectFileName>$(IntDir)test_predict_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vpx_scale_test.cc">
+    <ClCompile Include="..\..\test\vpx_scale_test.cc">
       <ObjectFileName>$(IntDir)test_vpx_scale_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp8_denoiser_sse2_test.cc">
+    <ClCompile Include="..\..\test\vp8_denoiser_sse2_test.cc">
       <ObjectFileName>$(IntDir)test_vp8_denoiser_sse2_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\idct8x8_test.cc">
+    <ClCompile Include="..\..\test\idct8x8_test.cc">
       <ObjectFileName>$(IntDir)test_idct8x8_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\partial_idct_test.cc">
+    <ClCompile Include="..\..\test\partial_idct_test.cc">
       <ObjectFileName>$(IntDir)test_partial_idct_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\superframe_test.cc">
+    <ClCompile Include="..\..\test\superframe_test.cc">
       <ObjectFileName>$(IntDir)test_superframe_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\tile_independence_test.cc">
+    <ClCompile Include="..\..\test\tile_independence_test.cc">
       <ObjectFileName>$(IntDir)test_tile_independence_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_boolcoder_test.cc">
+    <ClCompile Include="..\..\test\vp9_boolcoder_test.cc">
       <ObjectFileName>$(IntDir)test_vp9_boolcoder_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_encoder_parms_get_to_decoder.cc">
+    <ClCompile Include="..\..\test\vp9_encoder_parms_get_to_decoder.cc">
       <ObjectFileName>$(IntDir)test_vp9_encoder_parms_get_to_decoder.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\convolve_test.cc">
+    <ClCompile Include="..\..\test\convolve_test.cc">
       <ObjectFileName>$(IntDir)test_convolve_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\lpf_test.cc">
+    <ClCompile Include="..\..\test\lpf_test.cc">
       <ObjectFileName>$(IntDir)test_lpf_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_intrapred_test.cc">
+    <ClCompile Include="..\..\test\vp9_intrapred_test.cc">
       <ObjectFileName>$(IntDir)test_vp9_intrapred_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_decrypt_test.cc">
+    <ClCompile Include="..\..\test\vp9_decrypt_test.cc">
       <ObjectFileName>$(IntDir)test_vp9_decrypt_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_thread_test.cc">
+    <ClCompile Include="..\..\test\vp9_thread_test.cc">
       <ObjectFileName>$(IntDir)test_vp9_thread_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\avg_test.cc">
+    <ClCompile Include="..\..\test\avg_test.cc">
       <ObjectFileName>$(IntDir)test_avg_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\comp_avg_pred_test.cc">
+    <ClCompile Include="..\..\test\comp_avg_pred_test.cc">
       <ObjectFileName>$(IntDir)test_comp_avg_pred_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\dct16x16_test.cc">
+    <ClCompile Include="..\..\test\dct16x16_test.cc">
       <ObjectFileName>$(IntDir)test_dct16x16_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\dct32x32_test.cc">
+    <ClCompile Include="..\..\test\dct32x32_test.cc">
       <ObjectFileName>$(IntDir)test_dct32x32_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\dct_partial_test.cc">
+    <ClCompile Include="..\..\test\dct_partial_test.cc">
       <ObjectFileName>$(IntDir)test_dct_partial_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\dct_test.cc">
+    <ClCompile Include="..\..\test\dct_test.cc">
       <ObjectFileName>$(IntDir)test_dct_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\fdct8x8_test.cc">
+    <ClCompile Include="..\..\test\fdct8x8_test.cc">
       <ObjectFileName>$(IntDir)test_fdct8x8_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\hadamard_test.cc">
+    <ClCompile Include="..\..\test\hadamard_test.cc">
       <ObjectFileName>$(IntDir)test_hadamard_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\minmax_test.cc">
+    <ClCompile Include="..\..\test\minmax_test.cc">
       <ObjectFileName>$(IntDir)test_minmax_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_scale_test.cc">
+    <ClCompile Include="..\..\test\vp9_scale_test.cc">
       <ObjectFileName>$(IntDir)test_vp9_scale_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\yuv_temporal_filter_test.cc">
+    <ClCompile Include="..\..\test\yuv_temporal_filter_test.cc">
       <ObjectFileName>$(IntDir)test_yuv_temporal_filter_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_block_error_test.cc">
+    <ClCompile Include="..\..\test\vp9_block_error_test.cc">
       <ObjectFileName>$(IntDir)test_vp9_block_error_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_quantize_test.cc">
+    <ClCompile Include="..\..\test\vp9_quantize_test.cc">
       <ObjectFileName>$(IntDir)test_vp9_quantize_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_subtract_test.cc">
+    <ClCompile Include="..\..\test\vp9_subtract_test.cc">
       <ObjectFileName>$(IntDir)test_vp9_subtract_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\vp9_arf_freq_test.cc">
+    <ClCompile Include="..\..\test\vp9_arf_freq_test.cc">
       <ObjectFileName>$(IntDir)test_vp9_arf_freq_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\sad_test.cc">
+    <ClCompile Include="..\..\test\sad_test.cc">
       <ObjectFileName>$(IntDir)test_sad_test.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\test\sum_squares_test.cc">
+    <ClCompile Include="..\..\test\sum_squares_test.cc">
       <ObjectFileName>$(IntDir)test_sum_squares_test.obj</ObjectFileName>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="F:\libvpx-master\test\acm_random.h" />
-    <ClInclude Include="F:\libvpx-master\test\bench.h" />
-    <ClInclude Include="F:\libvpx-master\test\buffer.h" />
-    <ClInclude Include="F:\libvpx-master\test\clear_system_state.h" />
-    <ClInclude Include="F:\libvpx-master\test\codec_factory.h" />
-    <ClInclude Include="F:\libvpx-master\test\md5_helper.h" />
-    <ClInclude Include="F:\libvpx-master\test\register_state_check.h" />
-    <ClInclude Include="F:\libvpx-master\test\test_vectors.h" />
-    <ClInclude Include="F:\libvpx-master\test\util.h" />
-    <ClInclude Include="F:\libvpx-master\test\video_source.h" />
-    <ClInclude Include="F:\libvpx-master\md5_utils.h" />
-    <ClInclude Include="F:\libvpx-master\test\ivf_video_source.h" />
-    <ClInclude Include="F:\libvpx-master\y4minput.h" />
-    <ClInclude Include="F:\libvpx-master\test\i420_video_source.h" />
-    <ClInclude Include="F:\libvpx-master\test\y4m_video_source.h" />
-    <ClInclude Include="F:\libvpx-master\test\yuv_video_source.h" />
-    <ClInclude Include="F:\libvpx-master\test\svc_test.h" />
-    <ClInclude Include="F:\libvpx-master\test\decode_test_driver.h" />
-    <ClInclude Include="F:\libvpx-master\test\encode_test_driver.h" />
-    <ClInclude Include="F:\libvpx-master\ivfenc.h" />
-    <ClInclude Include="F:\libvpx-master\y4menc.h" />
-    <ClInclude Include="F:\libvpx-master\third_party\libwebm\mkvparser\mkvparser.h" />
-    <ClInclude Include="F:\libvpx-master\third_party\libwebm\mkvparser\mkvreader.h" />
-    <ClInclude Include="F:\libvpx-master\third_party\libwebm\common\webmids.h" />
-    <ClInclude Include="F:\libvpx-master\tools_common.h" />
-    <ClInclude Include="F:\libvpx-master\webmdec.h" />
-    <ClInclude Include="F:\libvpx-master\test\webm_video_source.h" />
-    <ClInclude Include="F:\libvpx-master\test\vpx_scale_test.h" />
+    <ClInclude Include="..\..\test\acm_random.h" />
+    <ClInclude Include="..\..\test\bench.h" />
+    <ClInclude Include="..\..\test\buffer.h" />
+    <ClInclude Include="..\..\test\clear_system_state.h" />
+    <ClInclude Include="..\..\test\codec_factory.h" />
+    <ClInclude Include="..\..\test\md5_helper.h" />
+    <ClInclude Include="..\..\test\register_state_check.h" />
+    <ClInclude Include="..\..\test\test_vectors.h" />
+    <ClInclude Include="..\..\test\util.h" />
+    <ClInclude Include="..\..\test\video_source.h" />
+    <ClInclude Include="..\..\md5_utils.h" />
+    <ClInclude Include="..\..\test\ivf_video_source.h" />
+    <ClInclude Include="..\..\y4minput.h" />
+    <ClInclude Include="..\..\test\i420_video_source.h" />
+    <ClInclude Include="..\..\test\y4m_video_source.h" />
+    <ClInclude Include="..\..\test\yuv_video_source.h" />
+    <ClInclude Include="..\..\test\svc_test.h" />
+    <ClInclude Include="..\..\test\decode_test_driver.h" />
+    <ClInclude Include="..\..\test\encode_test_driver.h" />
+    <ClInclude Include="..\..\ivfenc.h" />
+    <ClInclude Include="..\..\y4menc.h" />
+    <ClInclude Include="..\..\third_party\libwebm\mkvparser\mkvparser.h" />
+    <ClInclude Include="..\..\third_party\libwebm\mkvparser\mkvreader.h" />
+    <ClInclude Include="..\..\third_party\libwebm\common\webmids.h" />
+    <ClInclude Include="..\..\tools_common.h" />
+    <ClInclude Include="..\..\webmdec.h" />
+    <ClInclude Include="..\..\test\webm_video_source.h" />
+    <ClInclude Include="..\..\test\vpx_scale_test.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="F:\libvpx-master\test\test.mk" />
-    <None Include="F:\libvpx-master\test\test-data.mk" />
+    <None Include="..\..\test\test.mk" />
+    <None Include="..\..\test\test-data.mk" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vpx.vcxproj">

@@ -21,13 +21,13 @@ QTDIR F:\Qt\Qt5.12\5.12.1\msvc2017_64
 
 
 === GoTvPtoP For Windows Prerequisites ====
-1.) Python 2.7.13 or Python 2.7.14
+1.) Python 2.7.14
 	 NOTE: Unless you want to change Paths in visual studio then python must be installed to default location C:\Python27
 2.) YASM 
 3.) visual studio 2017 ( Community edition is fine )
 	a.) Follow the instructions of visual studio install for kodi at https://github.com/xbmc/xbmc/blob/master/docs/README.md
 	b.) 
-4.) Qt 5.12.0 ( Tested with Qt 5.12.0 but other versions may work )
+4.) Qt 5.12.1 ( Tested with Qt 5.12.1 but other versions may work )
 5.) Java Oracle JDK/JRE 1.8.0_131 
 6.) MingWin is NOT required.. even for ffmpeg build ( have removed all dependecy on migwin and made substitute functions )
 

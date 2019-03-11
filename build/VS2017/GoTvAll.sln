@@ -357,8 +357,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libglew", "..\..\DependLibs
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libssh", "..\..\DependLibs\libssh\build\VS2017\libssh.vcxproj", "{606C8E52-A407-433C-8596-47BBC7AACFAB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libvpx", "..\..\DependLibs\libvpx-win64\build\VS2017\vpx.vcxproj", "{DCE19DAF-69AC-46DB-B14A-39F0FAA5DB74}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QtPri", "QtPri", "{1BBBE95F-B370-40FE-9B2A-901555E8E928}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\config_compiler.pri = ..\..\config_compiler.pri
@@ -405,6 +403,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QtPri", "QtPri", "{1BBBE95F
 		..\..\GoTvPythonLib.pro = ..\..\GoTvPythonLib.pro
 		..\..\GoTvTargetOsConfig.h = ..\..\GoTvTargetOsConfig.h
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libvpx", "..\..\DependLibs\libvpx-win64\build\VS2017\vpx.vcxproj", "{DCE19DAF-69AC-46DB-B14A-39F0FAA5DB74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20631,7 +20631,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
 		Qt5Version = qt5.12
+		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
 	EndGlobalSection
 EndGlobal

@@ -3,7 +3,7 @@
 
 #if defined(TARGET_OS_ANDROID)
 # include "../pyconfig_android.h"
-#elif defined(TARGET_OS_WINDOWS)
+#elif defined(TARGET_OS_WINDOWS) || defined(_WIN64) || defined(WIN64) || defined(WIN32)
 # include "../pyconfig_windows.h"
 #elif defined(TARGET_OS_LINUX)
 # include "../pyconfig_linux.h"

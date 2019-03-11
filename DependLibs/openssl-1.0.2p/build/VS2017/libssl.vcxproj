@@ -33,7 +33,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -79,6 +79,10 @@
     <OutDir>$(ProjectDir)..\..\..\..\lib\Win32\</OutDir>
     <IntDir>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)..\..\..\..\build-staticlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
@@ -122,9 +126,9 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
-      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
-      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</ObjectFileName>
       <CallingConvention>Cdecl</CallingConvention>
       <FloatingPointModel>Fast</FloatingPointModel>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -169,21 +173,24 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(OutDir);..\..\;..\..\..\;..\..\inc32;..\..\crypto;..\..\crypto\modes;..\..\crypto\asn1;..\..\crypto\evp;..\..\..\..\..\P2PCoreLibs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>TARGET_OS_WINDOWS;WINDOWS;_LIB;WIN32;MONOLITH;OPENSSL_THREADS;DSO_WIN32;OPENSSL_SYSNAME_WIN32;WIN32_LEAN_AND_MEAN;L_ENDIAN;CRT_SECURE_NO_DEPRECATE;OPENSSL_BN_ASM_PART_WORDS;OPENSSL_IA32_SSE2;OPENSSL_BN_ASM_MONT;OPENSSL_BN_ASM_GF2m;SHA1_ASM;SHA256_ASM;SHA512_ASM;MD5_ASM;RMD_160_ASM;VPAES_ASM;WHIRLPOOL_ASM;GHASH_ASM;OPENSSL_NO_RC5;OPENSSL_NO_MD2;OPENSSL_NO_KB5;OPENSSL_NO_JPAKE;OPENSSL_NO_DYNAMIC_ENGINE;DEBUG_VTPOOLUPLOAD;NOMINMAX;_CRT_SECURE_NO_WARNINGS;NO_WINDOWS_BRAINDEATH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\;$(ProjectDir)..\..\include;$(ProjectDir)..\..\crypto;$(ProjectDir)..\..\crypto\modes;$(ProjectDir)..\..\crypto\asn1;$(ProjectDir)..\..\crypto\evp;$(ProjectDir)..\..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\..\sysheaders;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_OS_WINDOWS;WINDOWS;_LIB;WIN64;_DEBUG;MONOLITH;OPENSSL_THREADS;DSO_WIN_64;WIN32_LEAN_AND_MEAN;L_ENDIAN;CRT_SECURE_NO_DEPRECATE;OPENSSL_BN_ASM_PART_WORDS;OPENSSL_IA32_SSE2;OPENSSL_NO_RC5;OPENSSL_NO_MD2;OPENSSL_NO_KB5;OPENSSL_NO_JPAKE;OPENSSL_NO_DYNAMIC_ENGINE;DEBUG_VTPOOLUPLOAD;NOMINMAX;_CRT_SECURE_NO_WARNINGS;NO_WINDOWS_BRAINDEATH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>None</DebugInformationFormat>
-      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
-      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</AssemblerListingLocation>
-      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</ObjectFileName>
     </ClCompile>
     <Lib>
-      <OutputFile>$(OutDir)\$(ProjectName).lib</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Lib>
+    <BuildLog>
+      <Path>$(SolutionDir)objs\$(TargetName)\$(Configuration)\$(MSBuildProjectName).log</Path>
+    </BuildLog>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\crypto\aes\aes_cbc.c" />

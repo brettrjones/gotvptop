@@ -44,7 +44,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>"F:/libvpx-master/third_party/libwebm";"F:/libvpx-master/vp8";"F:/libvpx-master/vp8";"F:/libvpx-master/vp9";"F:/libvpx-master/vp9";"F:/libvpx-master/third_party/libyuv/include";".";"F:/libvpx-master";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>"$(ProjectDir)../../third_party/libwebm";"$(ProjectDir)../../vp8";"$(ProjectDir)../../vp8";"$(ProjectDir)../../vp9";"$(ProjectDir)../../vp9";"$(ProjectDir)../../third_party/libyuv/include";".";"$(ProjectDir)../../";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
@@ -61,7 +61,7 @@
     <ClCompile>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>"F:/libvpx-master/third_party/libwebm";"F:/libvpx-master/vp8";"F:/libvpx-master/vp8";"F:/libvpx-master/vp9";"F:/libvpx-master/vp9";"F:/libvpx-master/third_party/libyuv/include";".";"F:/libvpx-master";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>"$(ProjectDir)../../third_party/libwebm";"$(ProjectDir)../../vp8";"$(ProjectDir)../../vp8";"$(ProjectDir)../../vp9";"$(ProjectDir)../../vp9";"$(ProjectDir)../../third_party/libyuv/include";".";"$(ProjectDir)../../";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
@@ -75,32 +75,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="F:\libvpx-master\ivfenc.c">
+    <ClCompile Include="..\..\ivfenc.c">
       <ObjectFileName>$(IntDir)ivfenc.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\y4minput.c">
+    <ClCompile Include="..\..\y4minput.c">
       <ObjectFileName>$(IntDir)y4minput.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\tools_common.c">
+    <ClCompile Include="..\..\tools_common.c">
       <ObjectFileName>$(IntDir)tools_common.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\video_writer.c">
+    <ClCompile Include="..\..\video_writer.c">
       <ObjectFileName>$(IntDir)video_writer.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\examples\vp8cx_set_ref.c">
+    <ClCompile Include="..\..\examples\vp8cx_set_ref.c">
       <ObjectFileName>$(IntDir)examples_vp8cx_set_ref.obj</ObjectFileName>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="F:\libvpx-master\ivfenc.h" />
-    <ClInclude Include="F:\libvpx-master\y4minput.h" />
-    <ClInclude Include="F:\libvpx-master\tools_common.h" />
-    <ClInclude Include="F:\libvpx-master\video_common.h" />
-    <ClInclude Include="F:\libvpx-master\video_writer.h" />
-    <ClInclude Include="F:\libvpx-master\vpx_ports\msvc.h" />
+    <ClInclude Include="..\..\ivfenc.h" />
+    <ClInclude Include="..\..\y4minput.h" />
+    <ClInclude Include="..\..\tools_common.h" />
+    <ClInclude Include="..\..\video_common.h" />
+    <ClInclude Include="..\..\video_writer.h" />
+    <ClInclude Include="..\..\vpx_ports\msvc.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="F:\libvpx-master\examples.mk" />
+    <None Include="..\..\examples.mk" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vpx.vcxproj">

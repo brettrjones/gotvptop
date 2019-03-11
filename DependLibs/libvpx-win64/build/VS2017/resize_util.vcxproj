@@ -44,7 +44,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>"F:/libvpx-master/third_party/libwebm";"F:/libvpx-master/vp8";"F:/libvpx-master/vp8";"F:/libvpx-master/vp9";"F:/libvpx-master/vp9";"F:/libvpx-master/third_party/libyuv/include";".";"F:/libvpx-master";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>"$(ProjectDir)../../third_party/libwebm";"$(ProjectDir)../../vp8";"$(ProjectDir)../../vp8";"$(ProjectDir)../../vp9";"$(ProjectDir)../../vp9";"$(ProjectDir)../../third_party/libyuv/include";".";"$(ProjectDir)../../";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
@@ -61,7 +61,7 @@
     <ClCompile>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>"F:/libvpx-master/third_party/libwebm";"F:/libvpx-master/vp8";"F:/libvpx-master/vp8";"F:/libvpx-master/vp9";"F:/libvpx-master/vp9";"F:/libvpx-master/third_party/libyuv/include";".";"F:/libvpx-master";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>"$(ProjectDir)../../third_party/libwebm";"$(ProjectDir)../../vp8";"$(ProjectDir)../../vp8";"$(ProjectDir)../../vp9";"$(ProjectDir)../../vp9";"$(ProjectDir)../../third_party/libyuv/include";".";"$(ProjectDir)../../";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
@@ -75,14 +75,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="F:\libvpx-master\examples\resize_util.c">
+    <ClCompile Include="..\..\examples\resize_util.c">
       <ObjectFileName>$(IntDir)examples_resize_util.obj</ObjectFileName>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <None Include="F:\libvpx-master\examples.mk" />
+    <None Include="..\..\examples.mk" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vpx.vcxproj">

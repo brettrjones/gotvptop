@@ -44,7 +44,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>".";"F:/libvpx-master";".";"F:/libvpx-master/third_party/googletest/src/include";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>".";"$(ProjectDir)../../";".";"$(ProjectDir)../../third_party/googletest/src/include";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_VARIADIC_MAX=10;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
@@ -61,7 +61,7 @@
     <ClCompile>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>".";"F:/libvpx-master";".";"F:/libvpx-master/third_party/googletest/src/include";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>".";"$(ProjectDir)../../";".";"$(ProjectDir)../../third_party/googletest/src/include";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_VARIADIC_MAX=10;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
@@ -75,15 +75,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="F:\libvpx-master\test\test_intra_pred_speed.cc">
+    <ClCompile Include="..\..\test\test_intra_pred_speed.cc">
       <ObjectFileName>$(IntDir)test_test_intra_pred_speed.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="F:\libvpx-master\md5_utils.c">
+    <ClCompile Include="..\..\md5_utils.c">
       <ObjectFileName>$(IntDir)md5_utils.obj</ObjectFileName>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="F:\libvpx-master\md5_utils.h" />
+    <ClInclude Include="..\..\md5_utils.h" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
