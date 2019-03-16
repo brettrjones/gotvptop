@@ -276,11 +276,17 @@ void CApplication::HandlePortEvents()
         case XBMC_QUIT:
             if( !m_bStop )
                 CApplicationMessenger::GetInstance().PostMsg( TMSG_QUIT );
+#ifdef HAVE_QT_GUI
+			IGoTv::getIGoTv().toGuiModuleState( (int)eModuleKodi, (int)eModuleStateDeinitialized );
+#endif // HAVE_QT_GUI
             break;
+
         case XBMC_VIDEORESIZE:
             if( CServiceBroker::GetGUI()->GetWindowManager().Initialized() )
             {
+#ifndef HAVE_QT_GUI
                 if( !CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_fullScreen )
+#endif // HAVE_QT_GUI
                 {
                     CServiceBroker::GetWinSystem()->GetGfxContext().ApplyWindowResize( newEvent.resize.w, newEvent.resize.h );
 
@@ -309,6 +315,9 @@ void CApplication::HandlePortEvents()
             // Send a mouse motion event with no dx,dy for getting the current guiitem selected
             OnAction( CAction( ACTION_MOUSE_MOVE, 0, static_cast< float >( newEvent.focus.x ), static_cast< float >( newEvent.focus.y ), 0, 0 ) );
             break;
+		case XBMC_MODULE_STATE:
+			break;
+
         default:
             CServiceBroker::GetInputManager().OnEvent( newEvent );
         }

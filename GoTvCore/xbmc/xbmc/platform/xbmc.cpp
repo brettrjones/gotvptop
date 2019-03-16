@@ -28,13 +28,21 @@
 #include "utils/log.h"
 #include "commons/Exception.h"
 
+static int g_KodiIsRunning = false;
+
 extern "C" int XBMC_Run( bool renderGUI, const CAppParamParser &params )
 {
     int status = -1;
 
+	if ( g_KodiIsRunning )
+	{
+		CMessagePrinter::DisplayError("Kodi is already running");
+		return status;
+	}
+
     if( !g_application.Create( params ) )
     {
-        CMessagePrinter::DisplayError( "ERROR: Unable to create application. Exiting" );
+        CMessagePrinter::DisplayError( "ERROR: Unable to create Kodi applet" );
         return status;
     }
 
@@ -89,6 +97,8 @@ extern "C" int XBMC_Run( bool renderGUI, const CAppParamParser &params )
 #elif defined(TARGET_ANDROID)
     CXBMCApp::get()->Deinitialize();
 #endif
+
+	g_KodiIsRunning = false;
 
     return status;
 }

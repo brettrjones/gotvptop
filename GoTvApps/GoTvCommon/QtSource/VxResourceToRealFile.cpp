@@ -26,7 +26,7 @@ VxResourceToRealFile::VxResourceToRealFile( const QString & resPath, QObject * p
 : QFile( parent )
 {
 	QFileInfo resPathInfo( resPath );
-	std::string appResDirStr = VxGetAppDataDirectory() + "appres/";
+	std::string appResDirStr = VxGetAppGoTvDataDirectory() + "appres/";
 	QString appResDirQString( appResDirStr.c_str() );
 	QDir appResDir;
 	if( !appResDir.cd( appResDirQString ) )

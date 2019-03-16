@@ -33,7 +33,8 @@ typedef enum {
     XBMC_TOUCH,
     XBMC_BUTTON,             /* Button (remote) pressed */
     XBMC_SETFOCUS,
-    XBMC_USEREVENT,
+	XBMC_MODULE_STATE,		 /* Kodi module state */
+	XBMC_USEREVENT,
 
     XBMC_MAXEVENT = 256      /* XBMC_EventType is represented as uchar */
 } XBMC_EventType;
@@ -110,6 +111,12 @@ typedef struct XBMC_ButtonEvent
     uint32_t holdtime;
 } XBMC_ButtonEvent;
 
+/* The gui is ready to recieve events */
+typedef struct XBMC_KodiModuleStateEvent {
+	int32_t moduleNum;
+	int32_t moduleState;
+} XBMC_KodiModuleStateEvent;
+
 /* General event structure */
 typedef struct XBMC_Event {
     uint8_t type;
@@ -127,6 +134,7 @@ typedef struct XBMC_Event {
         XBMC_TouchEvent touch;
         XBMC_ButtonEvent keybutton;
         XBMC_SetFocusEvent focus;
+		XBMC_KodiModuleStateEvent moduleState;
     };
 } XBMC_Event;
 

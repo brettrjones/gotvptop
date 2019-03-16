@@ -18,6 +18,7 @@
 #include "VxCrypto.h"
 #include "VxFileUtil.h"
 #include "VxFileIsTypeFunctions.h"
+#include "VxGlobals.h"
 #include "VxParse.h"
 #include "VxDebug.h"
 #include "VxUrl.h"
@@ -53,7 +54,6 @@ namespace
 #endif // TARGET_OS_WINDOWS
     }
 }
-
 //============================================================================
 size_t FindLastPathSeperator( std::string& path )
 {
@@ -200,6 +200,22 @@ extern "C" bool WindowsRelativeToAbsolutePath( char * pathBuf, int bufLen )
     return true;
 }
 #endif // TARGET_OS_WINDOWS
+
+//========================================================================
+std::string VxFileUtil::makeKodiPath( const char * path )
+{
+	std::string kodiPath = path;
+#if defined(TARGET_OS_WINDOWS)
+	makeBackwardSlashPath( kodiPath );
+#else
+	makeForwardSlashPath( kodiPath );
+#endif // defined(TARGET_OS_WINDOWS)
+
+	//std::string strPath = CEnvironment::getenv( CCompileInfo::GetHomeEnvName() );
+	removeTrailingDirectorySlash( kodiPath );
+
+	return kodiPath;
+}
 
 //============================================================================
 bool VxFileUtil::isDotDotDirectory( const char * fileName )
@@ -438,6 +454,19 @@ void VxFileUtil::assureTrailingDirectorySlash( std::string& strDirectoryPath )
 		if( '/' != name[ strDirectoryPath.length() - 1 ] )
 		{
 			strDirectoryPath += "/";
+		}
+	}
+}
+
+//============================================================================
+void VxFileUtil::removeTrailingDirectorySlash( std::string& strDirectoryPath )
+{
+	if( strDirectoryPath.length() )
+	{
+		const char * name = strDirectoryPath.c_str();
+		if( ( '/' == name[strDirectoryPath.length() - 1] ) || ( '\\' == name[strDirectoryPath.length() - 1] ) )
+		{
+			strDirectoryPath = strDirectoryPath.substr( 0, strDirectoryPath.length() - 1 );
 		}
 	}
 }
@@ -964,6 +993,26 @@ void VxFileUtil::makeForwardSlashPath( char * pFilePath )
 }
 
 //============================================================================
+//! flip back slashes into forward slashes
+void VxFileUtil::makeBackwardSlashPath( std::string & csFilePath )
+{
+	makeBackwardSlashPath( (char *)csFilePath.c_str() );
+}
+
+//============================================================================
+//! flip back slashes into forward slashes
+void VxFileUtil::makeBackwardSlashPath( char * pFilePath )
+{
+	size_t iLen = strlen( pFilePath );
+	for( size_t i = 0; i < iLen; i++ )
+	{
+		if( '/' == pFilePath[i] )
+			pFilePath[i] = '\\';
+	}
+}
+
+
+//============================================================================
 //! return true if last char is '/' else '\\'
 bool VxFileUtil::doesPathEndWithSlash( const char * pFileName )
 {
@@ -1107,6 +1156,13 @@ RCODE	VxFileUtil::getExecuteFullPathAndName( std::string& strRetExePathAndFileNa
 //! Get directory we execute from
 RCODE	VxFileUtil::getExecuteDirectory( std::string& strRetExeDir )
 {
+	// try cached version first
+	strRetExeDir = VxGetExeDirectory();
+	if (!strRetExeDir.empty())
+	{
+		return 0;
+	}
+
 	std::string strRetExeFileName;
 	return getExecutePathAndName( strRetExeDir, strRetExeFileName );
 }

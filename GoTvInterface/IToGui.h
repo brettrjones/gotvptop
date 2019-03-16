@@ -291,4 +291,6 @@ public:
 																uint8_t			u8FileType, 
 																uint64_t		u64FileLen, 
 																const char *	pFileName ) = 0;
+	/// a module has changed state
+	virtual void				toGuiModuleState( int moduleNum, int moduleState ) = 0;
 };

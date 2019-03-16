@@ -51,9 +51,13 @@ protected:
 	void						initAppletKodi( void );
 	void						onAppletStop( void );
 
-    void                        startKodiModule( void );
+	void                        startKodiModule( void );
     void                        stopKodiModule( void );
 
+	// resizing window
+	virtual void				onResizeBegin( QSize& newSize ) override;
+	virtual void				onResizeEvent( QSize& newSize ) override;
+	virtual void				onResizeEnd( QSize& newSize ) override;
 
     void                        setupBottomMenu( VxMenuButton * menuButton );
 

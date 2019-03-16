@@ -94,8 +94,6 @@ const char * P2PEngine::fromGuiGetAppNameNoSpaces( void )
 void P2PEngine::fromGuiAppStartup( const char * assetsDir, const char * rootDataDir  )
 {
 	VxSetAppIsShuttingDown( false );
-	VxSetRootDataDirectory( rootDataDir );
-	VxSetAssetsDirectory( assetsDir );
 
 	LogMsg( LOG_INFO, "P2PEngine::fromGuiAppStartup %s %s\n", assetsDir, rootDataDir  );
 }

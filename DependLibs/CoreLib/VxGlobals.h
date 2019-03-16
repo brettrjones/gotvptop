@@ -22,6 +22,36 @@
 
 class VxGUID;
 
+enum EAppDir
+{
+	eAppDirUnknown = 0,
+	eAppDirExe,
+	eAppDirExePython,
+	eAppDirExeKodiAssets,
+	eAppDirExeGoTvAssets,
+
+	eAppDirRootDataStorage,
+	eAppDirAppTempData,
+	eAppDirAppLogs,
+	eAppDirAppKodiData,
+	eAppDirAppGoTvData,
+
+	eAppDirRootUserData,
+
+	eAppDirUserSpecific,
+	eAppDirSettings,
+	eAppDirProfile,
+	eAppDirRootXfer,
+	eAppDirUserXfer,
+	eAppDirDownloads,
+	eAppDirUploads,
+	eAppDirIncomplete,
+	eAppDirPersonalRecords,
+
+	eMaxAppDir
+
+};
+
 //============================================================================
 void			            VxSetAppIsShuttingDown( bool bIsShuttingDown );
 bool			            VxIsAppShuttingDown( void );
@@ -41,13 +71,28 @@ uint16_t				    VxGetAppVersion( void );
 const char *	            VxGetAppVersionString( void );
 
 //============================================================================
-void			            VxSetAssetsDirectory( const char * assetsDir  );
-std::string&	            VxGetAssetsDirectory( void );
 
-void			            VxSetRootDataDirectory( const char * rootDataDir );
-std::string&	            VxGetRootDataDirectory( void );
-std::string&	            VxGetAppDataDirectory( void );
-std::string&	            VxGetKodiDataDirectory( void );
+std::string&	            VxGetAppDirectory( EAppDir appDir );
+
+// exe and app resource paths
+void			            VxSetExeDirectory(const char * exeDir);
+std::string&	            VxGetExeDirectory(void);
+
+std::string&	            VxGetExeKodiAssetsDirectory( void );
+std::string&	            VxGetExeGoTvAssetsDirectory(void);
+std::string&	            VxGetExePythonDirectory(void);
+
+// user writable directories
+void			            VxSetRootDataStorageDirectory( const char * rootDataDir );
+std::string&	            VxGetRootDataStorageDirectory( void );
+
+std::string&	            VxGetAppTempDirectory(void);
+std::string&	            VxGetAppLogsDirectory(void);
+std::string&	            VxGetAppKodiDataDirectory(void);
+std::string&	            VxGetAppGoTvDataDirectory(void);
+
+void			            VxSetRootUserDataDirectory( const char * rootUserDataDir );
+std::string&	            VxGetRootUserDataDirectory(void);
 
 void			            VxSetUserSpecificDataDirectory( const char * userDataDir  );
 std::string&	            VxGetUserSpecificDataDirectory( void  );
@@ -56,6 +101,7 @@ std::string&	            VxGetUserProfileDirectory( void );
 
 // storyboard is same as profile directory
 //std::string&	VxGetStoryboardDirectory( void );
+
 
 void			            VxSetRootXferDirectory( const char * rootXferDir  );
 std::string&	            VxGetRootXferDirectory( void ) ;
@@ -67,8 +113,7 @@ std::string&	            VxGetUploadsDirectory( void );
 std::string&	            VxGetIncompleteDirectory( void );
 std::string&	            VxGetPersonalRecordDirectory( void );
 
-void			            VxSetAppTempDirectory(const char * assetsDir);
-std::string&	            VxGetAppTempDirectory( void );
+
 //============================================================================
 //=== miscellaneous ===//
 //============================================================================

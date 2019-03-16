@@ -188,7 +188,10 @@ public:
     virtual void                fromGuiMouseReleaseEvent( int moduleNum, int mouseXPos, int mouseyPos, int mouseButton ) override;
     virtual void                fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mouseyPos ) override;
 
-    virtual void                fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight ) override;
+	virtual void                fromGuiResizeBegin( int moduleNum, int winWidth, int winHeight ) override;
+	virtual void                fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight ) override;
+	virtual void                fromGuiResizeEnd( int moduleNum, int winWidth, int winHeight ) override;
+
     virtual void                fromGuiCloseEvent( int moduleNum ) override;
     virtual void                fromGuiVisibleEvent( int moduleNum, bool isVisible ) override;
 
@@ -459,6 +462,9 @@ public:
     virtual void				toGuiSessionHistory( AssetInfo * assetInfo ) override;
     virtual void				toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
     virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
+
+	/// a module has changed state
+	virtual void				toGuiModuleState( int moduleNum, int moduleState )  override;
 
     //============================================================================
     //=== implementation ===//

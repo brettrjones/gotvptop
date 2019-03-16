@@ -14,13 +14,14 @@
 // http://www.gotvptop.net
 //============================================================================
 
+
 enum ECallState
 {
-	eCallStateInvalid	= 0,
-	eCallStateWaiting	= 1,
-	eCallStateCalling	= 2,
-	eCallStateInCall	= 3,
-	eCallStateHangedUp	= 4,
+	eCallStateInvalid = 0,
+	eCallStateWaiting = 1,
+	eCallStateCalling = 2,
+	eCallStateInCall = 3,
+	eCallStateHangedUp = 4,
 
 	eMaxCallState
 };

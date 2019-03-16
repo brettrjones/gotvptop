@@ -109,6 +109,7 @@ public:
 	//! Make all directories that don't exist in a given path
 	static RCODE				makeDirectory( std::string& strDirectoryPath );
 	static void					assureTrailingDirectorySlash( std::string& strDirectoryPath );
+	static void					removeTrailingDirectorySlash( std::string& strDirectoryPath );
 	static std::string			makeUniqueFileName( const char * fileName );
 
 	//! read a line from file into buffer and null terminate it
@@ -154,6 +155,10 @@ public:
 	static void					makeForwardSlashPath( std::string & csFilePath );
 	//! flip back slashes into forward slashes
 	static void					makeForwardSlashPath( char * pFilePath );
+	//! flip forward slashes into backward slashes
+	static void					makeBackwardSlashPath( std::string & csFilePath );
+	//! flip forward slashes into backward slashes
+	static void					makeBackwardSlashPath( char * pFilePath );
 
 	//! return true if last char is '/' else '\\'
 	static bool					doesPathEndWithSlash( const char * pFileName );
@@ -226,6 +231,8 @@ public:
 
 	static uint8_t				charToHexBinary( char cVal );
 	static char					binaryToHexChar( uint8_t u8Val );
+
+	static std::string			makeKodiPath( const char * path );
 };
 
 size_t FindLastPathSeperator( std::string& path );

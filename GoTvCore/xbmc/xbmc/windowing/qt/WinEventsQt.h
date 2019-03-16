@@ -38,7 +38,7 @@ class CWinEventsQt : public IWinEvents, public CThread
 public:
     CWinEventsQt();
     ~CWinEventsQt();
-
+ 
     void                        MessagePush( XBMC_Event *newEvent );
     void                        MessagePushRepeat( XBMC_Event *repeatEvent );
     bool                        MessagePump();

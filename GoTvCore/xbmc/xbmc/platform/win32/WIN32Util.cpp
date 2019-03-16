@@ -25,6 +25,8 @@
 #include "utils/StringUtils.h"
 #include "CompileInfo.h"
 #include "platform/win32/CharsetConverter.h"
+#include <CoreLib/VxGlobals.h>
+#include <CoreLib/VxFileUtil.h>
 
 #ifdef TARGET_WINDOWS_DESKTOP
 #include <cassert>
@@ -346,8 +348,8 @@ std::string CWIN32Util::GetProfilePath()
 #else
   std::string strHomePath = CUtil::GetHomePath();
 
-  if(g_application.PlatformDirectoriesEnabled())
-    strProfilePath = URIUtils::AddFileToFolder(GetSpecialFolder(CSIDL_APPDATA|CSIDL_FLAG_CREATE), CCompileInfo::GetAppName());
+  if( g_application.PlatformDirectoriesEnabled() )
+	  strProfilePath = VxFileUtil::makeKodiPath( VxGetAppKodiDataDirectory().c_str() ); //URIUtils::AddFileToFolder(GetSpecialFolder(CSIDL_APPDATA|CSIDL_FLAG_CREATE), CCompileInfo::GetAppName());
   else
     strProfilePath = URIUtils::AddFileToFolder(strHomePath , "portable_data");
 

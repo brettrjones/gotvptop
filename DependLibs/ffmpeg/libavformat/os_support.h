@@ -113,18 +113,39 @@ struct pollfd {
 # endif // !HAVE_STRUCT_POLLFD
 
 /* events & revents */
-# define POLLIN     0x0001  /* any readable data available */
-# define POLLOUT    0x0002  /* file descriptor is writeable */
-# define POLLRDNORM POLLIN
-# define POLLWRNORM POLLOUT
-# define POLLRDBAND 0x0008  /* priority readable data */
-# define POLLWRBAND 0x0010  /* priority data can be written */
-# define POLLPRI    0x0020  /* high priority readable data */
+# ifndef POLLIN
+#  define POLLIN     0x0001  /* any readable data available */
+# endif // POLLIN
+# ifndef POLLOUT
+#  define POLLOUT    0x0002  /* file descriptor is writeable */
+# endif
+# ifndef POLLRDNORM
+#  define POLLRDNORM POLLIN
+# endif
+# ifndef POLLWRNORM
+#  define POLLWRNORM POLLOUT
+# endif
+# ifndef POLLRDBAND
+#  define POLLRDBAND 0x0008  /* priority readable data */
+# endif
+# ifndef POLLWRBAND
+# d efine POLLWRBAND 0x0010  /* priority data can be written */
+# endif
+# ifndef POLLPRI
+#  define POLLPRI    0x0020  /* high priority readable data */
+# endif
 
 /* revents only */
-# define POLLERR    0x0004  /* errors pending */
-# define POLLHUP    0x0080  /* disconnected */
-# define POLLNVAL   0x1000  /* invalid file descriptor */
+# ifndef POLLERR
+#  define POLLERR    0x0004  /* errors pending */
+# endif
+# ifndef POLLHUP
+#  define POLLHUP    0x0080  /* disconnected */
+# endif
+# ifndef POLLNVAL
+#  define POLLNVAL   0x1000  /* invalid file descriptor */
+# endif
+
 
 
 int ff_poll(struct pollfd *fds, nfds_t numfds, int timeout);

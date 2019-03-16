@@ -78,6 +78,8 @@
 #include <QDebug>
 #include <QSettings>
 
+#include "RenderGlBaseWidget.h"
+
 namespace
 {
 	AppCommon * g_AppCommon = 0;
@@ -229,20 +231,18 @@ void AppCommon::slotStartLoadingFromThread( void )
 	// the AppSettings database is not initialized until loadAccountSpecificSettings
 	m_AppSettings.loadProfile();
 	// sets root of application data and transfer directories
-	// /appshortName			root data directory
-	// /appshortName/temp/		temporary directory
-	// /appshortName/data/		the app data directory
-	VxSetRootDataDirectory( m_AppSettings.m_strRootUserDataDir.c_str() );
+	VxSetRootUserDataDirectory(m_AppSettings.m_strRootUserDataDir.c_str());
+
 	// /appshortName/xfer/		app data transfer directory
 	VxSetRootXferDirectory( m_AppSettings.m_strRootXferDir.c_str() );
 
 	// create settings database appshortname_settings.db3 in /appshortName/data/
-	QString strSettingsDbFileName = VxGetAppDataDirectory().c_str() + m_AppShortName + "_settings.db3";
+	QString strSettingsDbFileName = VxGetAppGoTvDataDirectory().c_str() + m_AppShortName + "_settings.db3";
 	m_AppSettings.appSettingStartup( strSettingsDbFileName.toUtf8().constData(), m_AppDefaultMode );
 
 	// database of multiple accounts
 	// create accounts database appshortname_accounts.db3 in /appshortName/data/
-	QString strAccountDbFileName = VxGetAppDataDirectory().c_str() + m_AppShortName + "_accounts.db3";
+	QString strAccountDbFileName = VxGetAppGoTvDataDirectory().c_str() + m_AppShortName + "_accounts.db3";
 	m_DataHelper.dbStartup( DATA_HELPER_DB_VERSION, strAccountDbFileName.toUtf8().constData() );
 
 	// asset database and user specific setting database will be created in sub directory of account login
@@ -1659,7 +1659,6 @@ void AppCommon::refreshFriend( VxGUID& onlineId )
 	VxGuidQt friendId( onlineId.getVxGUIDHiPart(), onlineId.getVxGUIDLoPart() );
 	emit signalRefreshFriend( friendId );
 }
-
 
 //============================================================================
 void  AppCommon::registerMetaData( void )

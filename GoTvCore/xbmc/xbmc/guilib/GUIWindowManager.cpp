@@ -151,6 +151,8 @@
 #include "games/dialogs/osd/DialogGameVideoRotation.h"
 #include "games/dialogs/osd/DialogGameVolume.h"
 
+#include "GoTvInterface/IGoTv.h"
+
 using namespace KODI;
 using namespace PVR;
 using namespace PERIPHERALS;
@@ -174,6 +176,12 @@ void CGUIWindowManager::Initialize()
     LoadNotOnDemandWindows();
 
     CApplicationMessenger::GetInstance().RegisterReceiver( this );
+
+	//XBMC_Event msg{ XBMC_MODULE_STATE };
+	//msg.moduleState.moduleNum = (int)eModuleKodi;
+	//msg.moduleState.moduleState = (int)eModuleStateInitialized;
+
+	IGoTv::getIGoTv().toGuiModuleState( (int)eModuleKodi, (int)eModuleStateInitialized );
 }
 
 void CGUIWindowManager::CreateWindows()

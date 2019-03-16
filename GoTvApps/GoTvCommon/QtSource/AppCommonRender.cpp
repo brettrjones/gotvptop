@@ -65,6 +65,19 @@ RenderGlWidget * AppCommon::getRenderConsumer( void )
     return m_AppletMgr.getRenderConsumer();
 }
 
+//============================================================================
+void AppCommon::toGuiModuleState( int moduleNum, int moduleState )
+{
+	if( moduleNum == eModuleKodi )
+	{
+		RenderGlWidget * glWidget = getRenderConsumer();
+		if( glWidget )
+		{
+			glWidget->onModuleState( moduleNum, moduleState );
+		}
+	}
+}
+
 
 //============================================================================
 //=== to gui media/render ===//

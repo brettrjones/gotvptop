@@ -42,18 +42,18 @@ public:
 	std::string					m_strNetworkIp;
 
 
-	uint32_t							m_u32EnableDebug;
-	uint32_t							m_u32DisableUdp;
-	uint32_t							m_u32LogFlags;
-	uint32_t							m_u32LogToFile;
-	uint32_t							m_u32PaidOnly;
+	uint32_t					m_u32EnableDebug;
+	uint32_t					m_u32DisableUdp;
+	uint32_t					m_u32LogFlags;
+	uint32_t					m_u32LogToFile;
+	uint32_t					m_u32PaidOnly;
 	std::string					m_strDebugFileName;
 
 	std::string					m_strExeDir;
 
 	std::string					m_strRootUserDataDir;
 	std::string					m_strRootXferDir;
-	uint32_t							m_u32NetServiceOnly;			// this app is not user but set for net services only
+	uint32_t					m_u32NetServiceOnly;			// this app is not user but set for net services only
 
 protected:
 	std::string&				getOsSpecificAppDataDir( void );

@@ -32,6 +32,8 @@
 
 #include <time.h>
 
+const int RESIZE_WINDOW_COMPLETED_TIMEOUT = 500;
+
 //============================================================================
 RenderGlWidget::RenderGlWidget(QWidget *parent)
 : RenderGlBaseWidget(parent)
@@ -45,7 +47,9 @@ RenderGlWidget::RenderGlWidget(QWidget *parent)
 // render
 , m_SrcWidth( 640 )
 , m_SrcHeight( 480 )
+, m_ResizingTimer( new QTimer( this ) )
 {
+	connect( m_ResizingTimer, SIGNAL( timeout() ), this, SLOT( slotResizeWindowTimeout() ) );
 }
 
 //============================================================================
@@ -87,7 +91,48 @@ void RenderGlWidget::onPaintGL( void )
 void RenderGlWidget::onResizeGL( int w, int h )
 {
     m_GlF->glViewport( 0, 0, w, h );
-    m_QtToKodi.fromGuiResizeEvent(  w, h );
+
+	m_ResizingWindowSize = QSize( w, h );
+	if( !m_IsResizing )
+	{
+		m_IsResizing = true;
+		onResizeBegin( m_ResizingWindowSize );
+	}
+
+	onResizeEvent( m_ResizingWindowSize );
+	m_ResizingTimer->setSingleShot( true );
+	m_ResizingTimer->start( RESIZE_WINDOW_COMPLETED_TIMEOUT );
+
+	onResizeEvent( m_ResizingWindowSize );
+}
+
+
+//============================================================================
+void RenderGlWidget::onResizeBegin( QSize& newSize )
+{
+	m_QtToKodi.fromGuiResizeBegin( newSize.width(), newSize.height() );
+}
+
+//============================================================================
+void RenderGlWidget::onResizeEvent( QSize& newSize )
+{
+	m_QtToKodi.fromGuiResizeEvent( newSize.width(), newSize.height() );
+}
+
+//============================================================================
+void RenderGlWidget::onResizeEnd( QSize& newSize )
+{
+	m_QtToKodi.fromGuiResizeEnd( newSize.width(), newSize.height() );
+}
+
+//============================================================================
+void RenderGlWidget::onModuleState( int moduleNum, int moduleState )
+{
+	if( ( moduleNum == eModuleKodi ) && ( moduleState == eModuleStateInitialized ) )
+	{
+		// send a resize message so kodi will resize to fit window
+		m_QtToKodi.fromGuiResizeEnd( geometry().width(), geometry().height() );
+	}
 }
 
 //============================================================================
@@ -139,4 +184,14 @@ void RenderGlWidget::mouseMoveEvent( QMouseEvent * ev )
     {
         RenderGlBaseWidget::mouseMoveEvent( ev );
     }
+}
+
+//============================================================================
+void RenderGlWidget::slotResizeWindowTimeout()
+{
+	if( m_IsResizing )
+	{
+		m_IsResizing = false;
+		onResizeEnd( m_ResizingWindowSize );
+	}
 }

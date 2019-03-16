@@ -155,22 +155,30 @@ void AppProfile::loadProfile( void )
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
 		QString dataPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 #else
-        QString dataPath =  QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+        QString dataPath =  QStandardPaths::writableLocation(QStandardPaths::AppDataLocation );
 #endif //TARGET_OS_WINDOWS
 		m_strRootUserDataDir = dataPath.toUtf8().constData();
+
+#ifdef DEBUG
+		// remove the D from the end so release and debug builds use the same storage directory
+		if( !m_strRootUserDataDir.empty() && ( m_strRootUserDataDir.c_str()[m_strRootUserDataDir.length() - 1] == 'D' ) )
+		{
+			m_strRootUserDataDir = m_strRootUserDataDir.substr( 0, m_strRootUserDataDir.length() - 1 );
+		}
+#endif // DEBUG
 
 		VxFileUtil::makeForwardSlashPath( m_strRootUserDataDir );
 		m_strRootUserDataDir += "/";
 		// No need to put application in path because when call QCoreApplication::setApplicationName("MyP2PWeb")
 		// it made it a sub directory of DataLocation
-		//m_strRootUserDataDir += VxGetApplicationNameNoSpaces();
-		//m_strRootUserDataDir += "/";
+		VxSetRootDataStorageDirectory(m_strRootUserDataDir.c_str());
+
 		makeDirectory( m_strRootUserDataDir.c_str() );
 		int exePathHash = 0;
 		if( m_strExeDir.length() )
 		{
 			const char * exePath = m_strExeDir.c_str();
-            for( unsigned int i = 0; i < strlen( exePath ); i++ )
+            for( unsigned int i = 0; i < m_strExeDir.length(); i++ )
 			{
 				exePathHash += exePath[ i ];
 			}
@@ -180,6 +188,8 @@ void AppProfile::loadProfile( void )
 		sprintf( as8ExePathHash, "%x/", exePathHash );
 		m_strRootUserDataDir += as8ExePathHash;
 		makeDirectory( m_strRootUserDataDir.c_str() );
+
+		VxSetRootUserDataDirectory( m_strRootUserDataDir.c_str() );
 
 		//=== determine root path for data xfer like incomplete/downloads/uploads etc ===//
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
@@ -215,6 +225,7 @@ void AppProfile::loadProfile( void )
 		makeDirectory( m_strRootXferDir.c_str() );
 		m_strRootXferDir += as8ExePathHash;
 		makeDirectory( m_strRootXferDir.c_str() );
+
 	}
 
 

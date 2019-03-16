@@ -662,9 +662,21 @@ bool EventsQtToGoTv::fromGuiMouseMoveEvent( int mouseXPos, int mouseyPos )
 }
 
 //============================================================================
+void EventsQtToGoTv::fromGuiResizeBegin( int winWidth, int winHeight )
+{
+	m_MyApp.fromGuiResizeBegin( (int)eModuleKodi, winWidth, winHeight );
+}
+
+//============================================================================
 void EventsQtToGoTv::fromGuiResizeEvent( int winWidth, int winHeight )
 {
     m_MyApp.fromGuiResizeEvent( ( int )eModuleKodi, winWidth, winHeight );
+}
+
+//============================================================================
+void EventsQtToGoTv::fromGuiResizeEnd( int winWidth, int winHeight )
+{
+	m_MyApp.fromGuiResizeEnd( (int)eModuleKodi, winWidth, winHeight );
 }
 
 //============================================================================

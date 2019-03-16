@@ -65,7 +65,7 @@ KodiRun::KodiRun( AppCommon& app, QWidget * parent )
 //============================================================================
 void KodiRun::slotStartKodiRunFromThread( void )
 {
-    if( g_KodiThread )
+    if( g_KodiThread && !g_IsKodiThreadRunning )
     {
         g_IsKodiThreadRunning = true;
         g_KodiThread->initializeGL();
@@ -149,6 +149,24 @@ void AppletKodi::startKodiModule( void )
 void AppletKodi::stopKodiModule( void )
 {
 
+}
+
+//============================================================================
+void AppletKodi::onResizeBegin( QSize& newSize )
+{
+	//getMyApp().getGoTv().fromGuiResizeBegin( newSize.width(), newSize.height() );
+}
+
+//============================================================================
+void AppletKodi::onResizeEvent( QSize& newSize )
+{
+	//getMyApp().getGoTv().fromGuiResizeEvent( newSize.width(), newSize.height() );
+}
+
+//============================================================================
+void AppletKodi::onResizeEnd( QSize& newSize )
+{
+	//getMyApp().getGoTv().fromGuiResizeEnd( newSize.width(), newSize.height() );
 }
 
 //============================================================================

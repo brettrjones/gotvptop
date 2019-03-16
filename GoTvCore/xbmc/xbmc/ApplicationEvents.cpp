@@ -308,14 +308,38 @@ void CApplication::fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mous
 }
 
 //============================================================================
+void CApplication::fromGuiResizeBegin( int moduleNum, int winWidth, int winHeight )
+{
+	/*
+	if( CServiceBroker::GetWinSystem() )
+	{
+		XBMC_Event msg{ XBMC_VIDEORESIZE };
+		msg.resize = { winWidth, winHeight };
+		dynamic_cast<CWinSystemQt*>( CServiceBroker::GetWinSystem() )->MessagePush( &msg );
+	}*/
+}
+
+//============================================================================
 void CApplication::fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight )
 {
+	/*
     if( CServiceBroker::GetWinSystem() )
     {
         XBMC_Event msg{ XBMC_VIDEORESIZE };
         msg.resize = { winWidth, winHeight };
         dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() )->MessagePush( &msg );
-    }
+    }*/
+}
+
+//============================================================================
+void CApplication::fromGuiResizeEnd( int moduleNum, int winWidth, int winHeight )
+{
+	if( CServiceBroker::GetWinSystem() )
+	{
+		XBMC_Event msg{ XBMC_VIDEORESIZE };
+		msg.resize = { winWidth, winHeight };
+		dynamic_cast<CWinSystemQt*>( CServiceBroker::GetWinSystem() )->MessagePush( &msg );
+	}
 }
 
 //============================================================================

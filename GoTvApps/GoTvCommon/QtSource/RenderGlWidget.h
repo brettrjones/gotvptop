@@ -40,6 +40,14 @@ public:
     void                        onPaintGL( void ) override;
     void                        onResizeGL(  int w, int h  ) override;
 
+	// resizing window
+	virtual void				onResizeBegin( QSize& newSize );
+	virtual void				onResizeEvent( QSize& newSize );
+	virtual void				onResizeEnd( QSize& newSize );
+
+	void						onModuleState( int moduleNum, int moduleState );
+
+
     //============================================================================
     //=== to gui media/render ===//
     //============================================================================
@@ -163,6 +171,9 @@ public:
     virtual void                frameBufferBind( unsigned int fboId ) override;
     virtual bool                frameBufferStatus() override;
 
+protected slots:
+	void						slotResizeWindowTimeout();
+
 protected:
 
     virtual void				mousePressEvent( QMouseEvent * ev );
@@ -194,4 +205,9 @@ protected:
     int                         m_SrcWidth;
     int                         m_SrcHeight;
     GLint                       m_viewPort[ 4 ];
+
+	// sizing window
+	QTimer *					m_ResizingTimer;
+	bool						m_IsResizing = false;
+	QSize						m_ResizingWindowSize;
 };

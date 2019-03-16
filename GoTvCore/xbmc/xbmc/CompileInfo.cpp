@@ -137,7 +137,7 @@ const char* CCompileInfo::GetTempEnvName()
 const char* CCompileInfo::GetUserProfileEnvName()
 {
 #if BUILD_GOTV_APP
-    return "GOTVPTOP_PROFILE_USERDATA";
+    return "KODI_PROFILE_USERDATA";
 #elif BUILD_KODIQT_APP
     return "KODIQT_PROFILE_USERDATA";
 #elif BUILD_KODIP2P_APP

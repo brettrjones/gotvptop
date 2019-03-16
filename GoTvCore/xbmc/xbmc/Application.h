@@ -159,7 +159,10 @@ public:
     void                        fromGuiMouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton ) override;
     void                        fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos ) override;
 
+	void                        fromGuiResizeBegin( int moduleNum, int winWidth, int winHeight ) override;
     void                        fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight ) override;
+	void                        fromGuiResizeEnd( int moduleNum, int winWidth, int winHeight ) override;
+
     void                        fromGuiCloseEvent( int moduleNum ) override;
     void                        fromGuiVisibleEvent( int moduleNum, bool isVisible ) override;
 

@@ -33,8 +33,12 @@
 #include <QRect>
 #include <QWidget>
 #include <QLabel>
+#include <QTimer>
+#include <QResizeEvent>
 
 #include <stdio.h>
+
+const int RESIZE_WINDOW_COMPLETED_TIMEOUT = 500;
 
 //============================================================================
 ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType, Qt::WindowFlags flags )
@@ -49,8 +53,9 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
 , m_StatusMsgLabel( 0 )
 , m_ePluginType( ePluginTypeInvalid )
 , m_HisIdent( 0 )
+, m_ResizingTimer( new QTimer(this) )
 {
-	if( 0xcdcdcdcd == (uint32_t)parent )
+	if( 0xcdcdcdcdcdcdcdcd == (uint64_t)parent )
 	{
 		vx_assert( false );
 		LogMsg( LOG_FATAL, "ActivityBase::ActivityBase: Bad Param\n");
@@ -63,6 +68,8 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
 	connect( &m_MyApp,			SIGNAL(signalStatusMsg(QString)),				this, SLOT(slotStatusMsg(QString)) );
 	connect( this,				SIGNAL(signalShowShouldExitMsgBox(QString)),	this, SLOT(slotShowShouldExitMsgBox(QString)), Qt::QueuedConnection );
 	connect( this,				SIGNAL(finished(int)),							this, SLOT(slotActivityFinished(int)) );
+
+	connect( m_ResizingTimer,	SIGNAL( timeout() ), this, SLOT( slotResizeWindowTimeout() ) );
 
 	connect(	this, 
 				SIGNAL(signalPlayNotifySound()), 
@@ -99,11 +106,6 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
 	connect( ui.m_BottomBarWidget, SIGNAL( signalMenuBottomButtonClicked() ), this, SLOT( slotMenuBottomButtonClicked() ) );
 	connect( ui.m_BottomBarWidget, SIGNAL( signalExpandWindowButtonClicked() ), this, SLOT( slotExpandWindowButtonClicked() ) );
     updateExpandWindowIcon();
-}
-
-//============================================================================
-ActivityBase::~ActivityBase()
-{
 }
 
 //============================================================================
@@ -372,6 +374,16 @@ void ActivityBase::resizeEvent( QResizeEvent * ev )
 	QDialog::resizeEvent( ev );
     updateExpandWindowIcon();
 	emit signalActivityBaseWasResized();
+	m_ResizingWindowSize = ev->size();
+	if( !m_IsResizing )
+	{
+		m_IsResizing = true;
+		onResizeBegin( m_ResizingWindowSize );
+	}
+
+	onResizeEvent( m_ResizingWindowSize );
+	m_ResizingTimer->setSingleShot( true );
+	m_ResizingTimer->start( RESIZE_WINDOW_COMPLETED_TIMEOUT );
 }
 
 //============================================================================
@@ -420,7 +432,7 @@ void ActivityBase::repositionToParent( void )
 	if( m_ParentWidget
 		&& ( 0 == ( m_WindowFlags & Qt::Popup ) ) )
 	{
-		if( 0xcdcdcdcd == (uint32_t)m_ParentWidget )
+		if( 0xcdcdcdcdcdcdcdcd == (uint64_t)m_ParentWidget )
 		{
 			vx_assert( false );
 		}
@@ -983,3 +995,12 @@ void ActivityBase::slotMenuBottomButtonClicked( void )
 	emit signalMenuBottomButtonClicked();
 }
 
+//============================================================================
+void ActivityBase::slotResizeWindowTimeout()
+{
+	if( m_IsResizing )
+	{
+		m_IsResizing = false;
+		onResizeEnd( m_ResizingWindowSize );
+	}
+}

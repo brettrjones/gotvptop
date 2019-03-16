@@ -7,6 +7,7 @@
  */
 
 #include <CoreLib/VxFileUtil.h>
+#include <CoreLib/VxGlobals.h>
 
 #include "network/Network.h"
 #include "threads/SystemClock.h"
@@ -189,8 +190,9 @@ char CUtil::GetPathSeperator( void )
 //========================================================================
 std::string  CUtil::GetHomePath( )
 {
-    std::string strPath = CEnvironment::getenv( CCompileInfo::GetHomeEnvName() );
-    return GetHomePath( strPath );
+    //std::string strPath = CEnvironment::getenv( CCompileInfo::GetHomeEnvName() );
+	return VxFileUtil::makeKodiPath( VxGetExeKodiAssetsDirectory().c_str() );
+    //return GetHomePath( strPath );
 }
 
 //========================================================================

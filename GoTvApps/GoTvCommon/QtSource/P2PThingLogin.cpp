@@ -107,7 +107,7 @@ std::string AppCommon::getUserXferDirectoryFromAccountUserName( const char * use
 //============================================================================
 std::string AppCommon::getUserSpecificDataDirectoryFromAccountUserName( const char * userName )
 {
-	std::string strUserSpecificDir = VxGetRootDataDirectory();
+	std::string strUserSpecificDir = VxGetRootUserDataDirectory();
 	strUserSpecificDir += "accounts/";
 	VxFileUtil::makeDirectory( strUserSpecificDir );
 

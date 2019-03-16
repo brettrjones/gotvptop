@@ -31,7 +31,12 @@
 //============================================================================
 // globals
 //============================================================================
-//int32_t						g_s32GmtTimeOffs	= 0;		// offset in seconds to turn local time to gmt time
+
+#if defined(TARGET_OS_ANDROID)
+# define PYTHON_RELATIVE_PATH "python2.7/"
+#else
+# define PYTHON_RELATIVE_PATH "python27/"
+#endif // TARGET_OS_WINDOWS
 
 namespace
 {
@@ -53,23 +58,34 @@ namespace
 	std::string			g_strCompanyDomain				= "www.gotvptop.net";
 	bool				g_IsAppCommercial				= false;
 #endif // APP_MYP2PWEB
+	// exe and app resouces paths
+	std::string			g_strExeDir						= "";
+	std::string			g_strExeKodiAssetsDir = "";
+	std::string			g_strExeGoTvAssetsDir = "";
+	std::string			g_strExePythonDir = "";
+
+	// user writeable paths
+	std::string			g_strRootDataStorageDir = "";
+	std::string			g_strAppTempDir = "";
+	std::string			g_strAppLogsDir = "";
+	std::string			g_strAppGoTvDataDir = "";
+	std::string			g_strAppKodiDataDir = "";
+
+	// user specific writable paths
+	std::string			g_strRootUserDataDir = "";
+
+	std::string			g_strUserSpecificDataDir = "";
+	std::string			g_strUserXferDir = "";
 
 	std::string			g_strRootXferDir				= "";
-	std::string			g_strRootDataDir				= "";
     std::string			g_strUserProfileDir             = "";
-	std::string			g_strAppDataDir					= "";
-    std::string			g_strKodiDataDir				= "";
     std::string			g_strSettingsDir				= "";
-	std::string			g_strAssetsDir					= "";
 
 	std::string			g_strUploadsDir					= "";
 	std::string			g_strDownloadsDir				= "";
 	std::string			g_strIncompleteDir				= "";
 	std::string			g_strPersonalRecordDir			= "";
 
-	std::string			g_strUserSpecificDataDir		= "";
-	std::string			g_strUserXferDir				= "";
-	std::string			g_strAppTempDir					= "";
 
 	bool				g_bIsAppShuttingDown			= false;
 	bool				g_bIsNetLoopbackAllowed			= false;
@@ -79,20 +95,78 @@ namespace
 }
 
 // directory structure on disk
-// /storage/GoTvPtoP/appdata/ShredFilesDb.db3 and app generated files
-//                  /kodidata/ kodi plugins and writable data directory
-//                  /appassets/gui/ gui assets
-//                            /shaders/ opengl shaders
-//                            /profile/ profile default files
-// user specific directories
-//                  /accounts/userId/settings/ databases
-//                  /accounts/userId/profile/ profile and story board user web pages
+// exe paths
+// /exe/python17/		python path
+// /exe/assets/kodi		kodi exe assets path
+//            /gotv		ptop assets path
+
+// data storage paths
+// /storage/GoTvPtoP/temp/    temporary files path
+//                  /logs/    log files path
+//                  /appdata/ShredFilesDb.db3 and app generated files
+//                  /kodi/ kodi plugins and writable data directory
+//                  /gotv/gui/ gui assets
+//                           /shaders/ opengl shaders
+//                           /profile/ profile default files
+// user specific directories.. NOTE: hasnum is 4 digit hash of exe path
+//                  /hashnum/accounts/userId/settings/ databases
+//                  /hashnum/accounts/userId/profile/ profile and story board user web pages
 // user xfer directories         
-//                  /userdata/userId/downloads
-//                                  /uploads
-//                                  /incomplete
-//                                  /me/			personal recordings
-//                                  /contacts/	contact assets
+//                  /hashnum/userptop/userId/downloads
+//                                      /uploads
+//                                      /incomplete
+//                                      /me/			personal recordings
+//                                      /contacts/	contact assets
+
+std::string& VxGetAppDirectory(EAppDir appDir)
+{
+	switch (appDir)
+	{
+	case eAppDirExe:
+		return g_strExeDir;
+	case eAppDirExeKodiAssets:
+		return g_strExeKodiAssetsDir;
+	case eAppDirExeGoTvAssets:
+		return g_strExeGoTvAssetsDir;
+
+	case eAppDirRootDataStorage:
+		return g_strRootDataStorageDir;
+	case eAppDirAppTempData:
+		return g_strAppTempDir;
+	case eAppDirAppLogs:
+		return g_strAppLogsDir;
+	case eAppDirAppKodiData:
+		return g_strAppKodiDataDir;
+	case eAppDirAppGoTvData:
+		return g_strAppGoTvDataDir;
+
+	case eAppDirRootUserData:
+		return g_strRootUserDataDir;
+
+	case eAppDirUserSpecific:
+		return g_strUserSpecificDataDir;
+	case eAppDirSettings:
+		return g_strSettingsDir;
+	case eAppDirProfile:
+		return g_strUserProfileDir;
+	case eAppDirRootXfer:
+		return g_strRootXferDir;
+	case eAppDirUserXfer:
+		return g_strUserXferDir;
+	case eAppDirDownloads:
+		return g_strDownloadsDir;
+	case eAppDirUploads:
+		return g_strUploadsDir;
+	case eAppDirIncomplete:
+		return g_strIncompleteDir;
+	case eAppDirPersonalRecords:
+		return g_strPersonalRecordDir;
+	}
+
+	std::string emptyStr = "";
+	return emptyStr;
+}
+
 
 //============================================================================
 void VxSetAppIsShuttingDown( bool bIsShuttingDown )
@@ -269,55 +343,66 @@ bool VxIsNetworkLoopbackAllowed( void )
 //============================================================================
 //=== directories ===//
 //============================================================================
+void			            VxSetExeDirectory(const char * exeDir);
+std::string&	            VxGetExeDirectory(void);
+
 
 //============================================================================
-void VxSetAssetsDirectory( const char * assetsDir  )
-{ 
-	g_strAssetsDir = assetsDir;
-	VxFileUtil::makeDirectory( assetsDir );
+void VxSetExeDirectory(const char * exeDir)
+{
+	g_strExeDir = exeDir;
+
+	g_strExeKodiAssetsDir = g_strExeDir + "assets/kodi/";
+	g_strExeGoTvAssetsDir = g_strExeDir + "assets/gotv/";
+	g_strExePythonDir = g_strExeDir + PYTHON_RELATIVE_PATH;
 }
 
 //============================================================================
-std::string& VxGetAssetsDirectory( void ) 
-{ 
-	return g_strAssetsDir; 
-}
+std::string& VxGetExeDirectory(void) { return g_strExeDir; }
+std::string& VxGetExeKodiAssetsDirectory( void ) { return g_strExeKodiAssetsDir; }
+std::string& VxGetExeGoTvAssetsDirectory(void) { return g_strExeGoTvAssetsDir; }
+std::string& VxGetExePythonDirectory(void) { return g_strExePythonDir; }
 
 //============================================================================
-void VxSetRootDataDirectory( const char * rootDataDir  )
-{ 
-	g_strRootDataDir	= rootDataDir; 
+void VxSetRootDataStorageDirectory(const char * rootDataDir)
+{
+	g_strRootDataStorageDir = rootDataDir;
 	VxFileUtil::makeDirectory( rootDataDir );
 
-	g_strAppTempDir		= g_strRootDataDir + "temp/";
+	g_strAppTempDir = g_strRootDataStorageDir + "temp/";
 	VxFileUtil::makeDirectory(g_strAppTempDir.c_str());
 
-    g_strAppDataDir		= g_strRootDataDir + "appdata/";
-	VxFileUtil::makeDirectory( g_strAppDataDir.c_str() );
+	g_strAppLogsDir = g_strRootDataStorageDir + "logs/";
+	VxFileUtil::makeDirectory(g_strAppTempDir.c_str());
 
-    g_strKodiDataDir		= g_strRootDataDir + "kodidata/";
-    VxFileUtil::makeDirectory( g_strKodiDataDir.c_str() );
+	g_strAppGoTvDataDir = g_strRootDataStorageDir + "gotv/";
+	VxFileUtil::makeDirectory(g_strAppGoTvDataDir.c_str());
 
-	GetVxFileShredder().initShredder( g_strAppDataDir );
+	g_strAppKodiDataDir = g_strRootDataStorageDir + "kodi/";
+	VxFileUtil::makeDirectory( g_strAppKodiDataDir.c_str());
+
+	GetVxFileShredder().initShredder( g_strAppGoTvDataDir );
 }
 
 //============================================================================
-std::string& VxGetRootDataDirectory( void )
+std::string& VxGetRootDataStorageDirectory(void) { return g_strRootDataStorageDir; }
+std::string& VxGetAppTempDirectory(void) { return g_strAppTempDir; }
+std::string& VxGetAppLogsDirectory(void) { return g_strAppLogsDir; }
+std::string& VxGetAppGoTvDataDirectory(void) { return g_strAppGoTvDataDir; }
+std::string& VxGetAppKodiDataDirectory(void) { return g_strAppKodiDataDir; }
+
+//============================================================================
+void VxSetRootUserDataDirectory( const char * rootUserDataDir )
 {
-	return g_strRootDataDir; 
+	// basically /storage/ GoTvPtoP/hasnum/ where hashnum is hash of exe path
+	g_strRootUserDataDir = rootUserDataDir;
+	VxFileUtil::makeDirectory( g_strRootUserDataDir.c_str() );
 }
 
 //============================================================================
-std::string& VxGetAppDataDirectory( void )
-{
-	return g_strAppDataDir; 
-}
+std::string& VxGetRootUserDataDirectory( void ) { return g_strRootUserDataDir; }
 
-//============================================================================
-std::string& VxGetKodiDataDirectory( void )
-{
-    return g_strKodiDataDir;
-}
+
 
 //============================================================================
 void VxSetUserSpecificDataDirectory( const char * userDataDir  )
@@ -331,36 +416,20 @@ void VxSetUserSpecificDataDirectory( const char * userDataDir  )
     g_strUserProfileDir = g_strUserSpecificDataDir + "profile/";
     VxFileUtil::makeDirectory( g_strUserProfileDir.c_str() );
 }
-
 //============================================================================
-std::string& VxGetUserSpecificDataDirectory( void )
-{
-	return g_strUserSpecificDataDir; 
-}
-
-//============================================================================
-std::string& VxGetSettingsDirectory( void ) 
-{ 
-	return g_strSettingsDir; 
-}
-
-//============================================================================
-std::string& VxGetUserProfileDirectory( void )
-{ 
-    return g_strUserProfileDir;
-}
+std::string& VxGetUserSpecificDataDirectory( void ) { return g_strUserSpecificDataDir; }
+std::string& VxGetSettingsDirectory( void ) { return g_strSettingsDir; }
+std::string& VxGetUserProfileDirectory( void ) { return g_strUserProfileDir; }
 
 //============================================================================
 void VxSetRootXferDirectory( const char * rootXferDir  )
 { 
 	g_strRootXferDir = rootXferDir; 
+	VxFileUtil::makeDirectory(g_strRootXferDir.c_str());
 }
 
 //============================================================================
-std::string& VxGetRootXferDirectory( void ) 
-{ 
-	return g_strRootXferDir; 
-}
+std::string& VxGetRootXferDirectory( void ) { return g_strRootXferDir; }
 
 //============================================================================
 void VxSetUserXferDirectory( const char * userXferDir  )
@@ -382,47 +451,11 @@ void VxSetUserXferDirectory( const char * userXferDir  )
 }
 
 //============================================================================
-std::string& VxGetUserXferDirectory( void  )
-{
-	return g_strUserXferDir;
-}
-
-//============================================================================
-std::string& VxGetDownloadsDirectory( void ) 
-{ 
-	return g_strDownloadsDir; 
-}
-
-//============================================================================
-std::string& VxGetUploadsDirectory( void ) 
-{ 
-	return g_strUploadsDir; 
-}
-
-//============================================================================
-std::string& VxGetIncompleteDirectory( void ) 
-{ 
-	return g_strIncompleteDir; 
-}
-
-//============================================================================
-std::string& VxGetPersonalRecordDirectory( void )
-{
-	return g_strPersonalRecordDir; 
-}
-
-//============================================================================
-void VxSetAppTempDir(std::string strDir)
-{
-	g_strAppTempDir = strDir;
-	VxFileUtil::makeDirectory( g_strAppTempDir.c_str() );
-}
-
-//============================================================================
-std::string VxGetAppTempDir(void)
-{
-	return g_strAppTempDir;
-}
+std::string& VxGetUserXferDirectory( void  ) { return g_strUserXferDir; }
+std::string& VxGetDownloadsDirectory( void ) { return g_strDownloadsDir; }
+std::string& VxGetUploadsDirectory( void ) { return g_strUploadsDir; }
+std::string& VxGetIncompleteDirectory( void ) { return g_strIncompleteDir; }
+std::string& VxGetPersonalRecordDirectory( void ) { return g_strPersonalRecordDir; }
 
 //============================================================================
 int VxGlobalAccessLock( void )

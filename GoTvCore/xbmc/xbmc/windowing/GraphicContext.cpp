@@ -670,7 +670,18 @@ void CGraphicContext::GetGUIScaling( const RESOLUTION_INFO &res, float &scaleX, 
         float fToWidth = ( float )info.Overscan.right - fToPosX;
         float fToHeight = ( float )info.Overscan.bottom - fToPosY;
 
-    float fZoom = (100 + CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_LOOKANDFEEL_SKINZOOM)) * 0.01f;
+		// avoid divide by zero if overscan was not set
+		if( 0.0f == fToWidth )
+		{
+			fToWidth = fFromWidth;
+		}
+
+		if( 0.0f == fToHeight )
+		{
+			fToHeight = fFromHeight;
+		}
+
+	    float fZoom = (100 + CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_LOOKANDFEEL_SKINZOOM)) * 0.01f;
 
         fZoom -= 1.0f;
         fToPosX -= fToWidth * fZoom * 0.5f;

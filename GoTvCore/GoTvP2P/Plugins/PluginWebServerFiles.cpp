@@ -77,7 +77,7 @@ namespace
 	#define FILEEXT_SWF DEFDWORD('S','W','F',0)
 
 //#ifdef APP_MYP2PWEB
-	#define HTTP200_HEADER "HTTP/1.1 %s\r\nServer: GoTvP2PWeb\r\nCache-control: no-cache\r\nPragma: no-cache\r\nAccept-Ranges: bytes\r\nKeep-Alive: timeout=%d, max=%d\r\nConnection: %s\r\nLast-Modified: "
+	#define HTTP200_HEADER "HTTP/1.1 %s\r\nServer: GoTvPtoPWeb\r\nCache-control: no-cache\r\nPragma: no-cache\r\nAccept-Ranges: bytes\r\nKeep-Alive: timeout=%d, max=%d\r\nConnection: %s\r\nLast-Modified: "
 //#else
 //	#define HTTP200_HEADER "HTTP/1.1 %s\r\nServer: TestApp\r\nCache-control: no-cache\r\nPragma: no-cache\r\nAccept-Ranges: bytes\r\nKeep-Alive: timeout=%d, max=%d\r\nConnection: %s\r\nLast-Modified: "
 //#endif // APP_MYP2PWEB

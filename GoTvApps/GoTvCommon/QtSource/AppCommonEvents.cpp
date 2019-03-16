@@ -48,9 +48,21 @@ void AppCommon::fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mouseYP
 }
 
 //============================================================================
+void AppCommon::fromGuiResizeBegin( int moduleNum, int winWidth, int winHeight )
+{
+	m_GoTv.fromGuiResizeBegin( moduleNum, winWidth, winHeight );
+}
+
+//============================================================================
 void AppCommon::fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight )
 {
     m_GoTv.fromGuiResizeEvent( moduleNum, winWidth, winHeight );
+}
+
+//============================================================================
+void AppCommon::fromGuiResizeEnd( int moduleNum, int winWidth, int winHeight )
+{
+	m_GoTv.fromGuiResizeEnd( moduleNum, winWidth, winHeight );
 }
 
 //============================================================================

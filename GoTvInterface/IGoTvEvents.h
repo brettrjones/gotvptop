@@ -25,7 +25,10 @@ public:
     virtual void                fromGuiMouseReleaseEvent( int moduleNum, int mouseXPos, int mouseYPos, int mouseButton ) = 0;
     virtual void                fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos ) = 0;
 
-    virtual void                fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight ) = 0;
+	virtual void                fromGuiResizeBegin( int moduleNum, int winWidth, int winHeight ) = 0;
+	virtual void                fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight ) = 0;
+	virtual void                fromGuiResizeEnd( int moduleNum, int winWidth, int winHeight ) = 0;
+
     virtual void                fromGuiCloseEvent( int moduleNum ) = 0;
     virtual void                fromGuiVisibleEvent( int moduleNum, bool isVisible ) = 0;
 

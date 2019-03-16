@@ -33,6 +33,7 @@ public:
     virtual void                doShutdown() = 0;
 
     //=== utilities ===//
+	virtual bool               initUserPaths(); // basically exe and user data paths
     virtual bool               initDirectories();
 
 

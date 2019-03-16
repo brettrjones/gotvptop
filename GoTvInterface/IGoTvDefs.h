@@ -12,6 +12,16 @@ enum EModules
     eMaxModule // must be last
 };
 
+enum EModuleState
+{
+	eModuleStateUnknown = 0,
+	eModuleStateInitialized,
+	eModuleStateDeinitialized,
+
+	eMaxModuleState // must be last
+};
+
+
 
 enum EAppModule
 {

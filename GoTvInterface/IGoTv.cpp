@@ -206,6 +206,8 @@ void IGoTv::createUserDirs() const
     CDirectory::Create( "special://temp/" );
     CDirectory::Create( "special://logpath" );
     CDirectory::Create( "special://temp/temp" ); // temp directory for python and dllGetTempPathA
+
+	//BRJ FIXME for PtoP
     CDirectory::Create( "special://appdata" );
     CDirectory::Create( "special://appassets" );
     CDirectory::Create( "special://appassets/gui" );
@@ -297,7 +299,9 @@ void IGoTv::setSslCertFile( std::string certFile )
 bool IGoTv::doPreStartup()
 {
     VxSetAppIsShuttingDown( false );
-    return m_OsInterface.doPreStartup();
+    bool result = m_OsInterface.doPreStartup();
+	result &= m_OsInterface.initUserPaths();
+	return result;
 }
 
 //============================================================================
@@ -367,9 +371,21 @@ void IGoTv::fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mouseYPos )
 }
 
 //============================================================================
+void IGoTv::fromGuiResizeBegin( int moduleNum, int winWidth, int winHeight )
+{
+	getKodi().fromGuiResizeBegin( moduleNum, winWidth, winHeight );
+}
+
+//============================================================================
 void IGoTv::fromGuiResizeEvent( int moduleNum, int winWidth, int winHeight )
 {
     getKodi().fromGuiResizeEvent( moduleNum, winWidth, winHeight );
+}
+
+//============================================================================
+void IGoTv::fromGuiResizeEnd( int moduleNum, int winWidth, int winHeight )
+{
+	getKodi().fromGuiResizeEnd( moduleNum, winWidth, winHeight );
 }
 
 //============================================================================

@@ -44,7 +44,7 @@ class ActivityBase : public QDialog, public ObjectCommon, public ToGuiActivityIn
 	Q_OBJECT
 public:
 	ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType = eAppletMessenger, Qt::WindowFlags flags = 0 );
-	virtual ~ActivityBase();
+	virtual ~ActivityBase() override = default;
 
 	AppCommon&					getMyApp( void )					{ return m_MyApp; }
 	MyIcons&					getMyIcons( void );
@@ -92,14 +92,17 @@ public:
     virtual void 				onInSession( bool isInSession )							{}
 	virtual void 				onSessionActivityShouldExit( QString exitReason )							{ emit signalShowShouldExitMsgBox( exitReason ); }
 
-	void						setCallState( ECallState eCallState );
-
 	// called when activity finish.. override for exit cleanup
 	virtual void				onActivityFinish( void )	{};
     // override default behavior of closing dialog when back button is clicked
     virtual void				onBackButtonClicked( void );
 	// override to handle dialog closing
 	virtual void				onCloseEvent( void )	{};
+	// resizing window
+	virtual void				onResizeBegin( QSize& newSize ){};
+	virtual void				onResizeEvent( QSize& newSize ){};
+	virtual void				onResizeEnd( QSize& newSize ){};
+
 
 	//=== title bar functions ====//
 	void						setTitleBarText( QString titleText );
@@ -227,6 +230,7 @@ protected slots:
 	void						slotStatusMsg( QString strMsg );
 	void						slotShowShouldExitMsgBox( QString exitReason );
 
+	void						slotResizeWindowTimeout();
 
 	//=== title bar slots ====//
 	virtual void				slotPowerButtonClicked( void );
@@ -254,8 +258,8 @@ protected slots:
 
 protected:
 	virtual void				showEvent( QShowEvent * );
-	virtual void				resizeEvent( QResizeEvent * ev );
 	virtual void				closeEvent( QCloseEvent * ev );
+	virtual void				resizeEvent( QResizeEvent * ev );
 
     virtual void                updateExpandWindowIcon( void );
 	virtual void				repositionToParent( void );
@@ -277,4 +281,7 @@ protected:
 
 	EPluginType					m_ePluginType;
 	VxNetIdent *				m_HisIdent;
+	QTimer *					m_ResizingTimer;
+	bool						m_IsResizing = false;
+	QSize						m_ResizingWindowSize;
 };
