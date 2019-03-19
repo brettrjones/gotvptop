@@ -9,7 +9,7 @@
  */
 
 #include "IFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include <cstring>
 #include <errno.h>
 

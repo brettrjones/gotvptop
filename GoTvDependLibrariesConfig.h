@@ -134,7 +134,7 @@ echo GoTv Compiler Config error no os defined
 //#define HAS_FILESYSTEM    1
 //#define HAS_FILESYSTEM_CDDA   1
 //#define HAS_FILESYSTEM_SAP
-#define HAS_FILESYSTEM_SFTP 1 
+//#define HAS_FILESYSTEM_SFTP 1 
 
 #ifdef HAVE_LIBSMBCLIENT
 # define HAS_FILESYSTEM_SMB

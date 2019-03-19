@@ -11,7 +11,7 @@
 #include "Filesystem.h"
 #include "addons/kodi-addon-dev-kit/include/kodi/Filesystem.h"
 
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "addons/binary-addons/AddonDll.h"
 #include "filesystem/File.h"
 #include "filesystem/Directory.h"

@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <config_kodi.h>
+#include "config_kodi.h"
 #include <string>
 #include <vector>
 

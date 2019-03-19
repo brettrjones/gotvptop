@@ -7,8 +7,8 @@
  */
 
 #include "ResourceFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvUrl.h"
+#include "GoTvCoreUtil.h"
 #include "ServiceBroker.h"
 #include "addons/AddonManager.h"
 #include "addons/Resource.h"

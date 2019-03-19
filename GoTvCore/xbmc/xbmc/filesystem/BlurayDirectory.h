@@ -10,7 +10,7 @@
 
 #include "Directory.h"
 #include "FileItem.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 class  DllLibbluray;
 typedef struct bluray BLURAY;

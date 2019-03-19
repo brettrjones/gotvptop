@@ -2783,6 +2783,8 @@ void CActiveAE::Deamplify( CSoundPacket &dstSample )
 
 void CActiveAE::LoadSettings()
 {
+  const std::shared_ptr<CSettings> settings = CServiceBroker::GetSettingsComponent()->GetSettings();
+
 #ifdef HAVE_QT_GUI
     m_settings.device = "AESinkQt:AESinkQt";
     m_settings.passthroughdevice = "AESinkQt";
@@ -2806,31 +2808,31 @@ void CActiveAE::LoadSettings()
     m_settings.silenceTimeout = 60000; //CServiceBroker::GetSettings().GetInt( CSettings::SETTING_AUDIOOUTPUT_STREAMSILENCE ) * 60000;
 
 #else
-    m_settings.device = CServiceBroker::GetSettings().GetString( CSettings::SETTING_AUDIOOUTPUT_AUDIODEVICE );
-    m_settings.passthroughdevice = CServiceBroker::GetSettings().GetString( CSettings::SETTING_AUDIOOUTPUT_PASSTHROUGHDEVICE );
+   m_settings.device = settings->GetString(CSettings::SETTING_AUDIOOUTPUT_AUDIODEVICE);
+  m_settings.passthroughdevice = settings->GetString(CSettings::SETTING_AUDIOOUTPUT_PASSTHROUGHDEVICE);
 
-    m_settings.config = CServiceBroker::GetSettings().GetInt( CSettings::SETTING_AUDIOOUTPUT_CONFIG );
-    m_settings.channels = ( m_sink.GetDeviceType( m_settings.device ) == AE_DEVTYPE_IEC958 ) ? AE_CH_LAYOUT_2_0 : CServiceBroker::GetSettings().GetInt( CSettings::SETTING_AUDIOOUTPUT_CHANNELS );
-    m_settings.samplerate = CServiceBroker::GetSettings().GetInt( CSettings::SETTING_AUDIOOUTPUT_SAMPLERATE );
+  m_settings.config = settings->GetInt(CSettings::SETTING_AUDIOOUTPUT_CONFIG);
+  m_settings.channels = (m_sink.GetDeviceType(m_settings.device) == AE_DEVTYPE_IEC958) ? AE_CH_LAYOUT_2_0 : settings->GetInt(CSettings::SETTING_AUDIOOUTPUT_CHANNELS);
+  m_settings.samplerate = settings->GetInt(CSettings::SETTING_AUDIOOUTPUT_SAMPLERATE);
 
-    m_settings.stereoupmix = IsSettingVisible( CSettings::SETTING_AUDIOOUTPUT_STEREOUPMIX ) ? CServiceBroker::GetSettings().GetBool( CSettings::SETTING_AUDIOOUTPUT_STEREOUPMIX ) : false;
-    m_settings.normalizelevels = !CServiceBroker::GetSettings().GetBool( CSettings::SETTING_AUDIOOUTPUT_MAINTAINORIGINALVOLUME );
-    m_settings.guisoundmode = CServiceBroker::GetSettings().GetInt( CSettings::SETTING_AUDIOOUTPUT_GUISOUNDMODE );
+  m_settings.stereoupmix = IsSettingVisible(CSettings::SETTING_AUDIOOUTPUT_STEREOUPMIX) ? settings->GetBool(CSettings::SETTING_AUDIOOUTPUT_STEREOUPMIX) : false;
+  m_settings.normalizelevels = !settings->GetBool(CSettings::SETTING_AUDIOOUTPUT_MAINTAINORIGINALVOLUME);
+  m_settings.guisoundmode = settings->GetInt(CSettings::SETTING_AUDIOOUTPUT_GUISOUNDMODE);
 
-    m_settings.passthrough = m_settings.config == AE_CONFIG_FIXED ? false : CServiceBroker::GetSettings().GetBool( CSettings::SETTING_AUDIOOUTPUT_PASSTHROUGH );
-    if( !m_sink.HasPassthroughDevice() )
-        m_settings.passthrough = false;
-    m_settings.ac3passthrough = CServiceBroker::GetSettings().GetBool( CSettings::SETTING_AUDIOOUTPUT_AC3PASSTHROUGH );
-    m_settings.ac3transcode = CServiceBroker::GetSettings().GetBool( CSettings::SETTING_AUDIOOUTPUT_AC3TRANSCODE );
-    m_settings.eac3passthrough = CServiceBroker::GetSettings().GetBool( CSettings::SETTING_AUDIOOUTPUT_EAC3PASSTHROUGH );
-    m_settings.truehdpassthrough = CServiceBroker::GetSettings().GetBool( CSettings::SETTING_AUDIOOUTPUT_TRUEHDPASSTHROUGH );
-    m_settings.dtspassthrough = CServiceBroker::GetSettings().GetBool( CSettings::SETTING_AUDIOOUTPUT_DTSPASSTHROUGH );
-    m_settings.dtshdpassthrough = CServiceBroker::GetSettings().GetBool( CSettings::SETTING_AUDIOOUTPUT_DTSHDPASSTHROUGH );
+  m_settings.passthrough = m_settings.config == AE_CONFIG_FIXED ? false : settings->GetBool(CSettings::SETTING_AUDIOOUTPUT_PASSTHROUGH);
+  if (!m_sink.HasPassthroughDevice())
+    m_settings.passthrough = false;
+  m_settings.ac3passthrough = settings->GetBool(CSettings::SETTING_AUDIOOUTPUT_AC3PASSTHROUGH);
+  m_settings.ac3transcode = settings->GetBool(CSettings::SETTING_AUDIOOUTPUT_AC3TRANSCODE);
+  m_settings.eac3passthrough = settings->GetBool(CSettings::SETTING_AUDIOOUTPUT_EAC3PASSTHROUGH);
+  m_settings.truehdpassthrough = settings->GetBool(CSettings::SETTING_AUDIOOUTPUT_TRUEHDPASSTHROUGH);
+  m_settings.dtspassthrough = settings->GetBool(CSettings::SETTING_AUDIOOUTPUT_DTSPASSTHROUGH);
+  m_settings.dtshdpassthrough = settings->GetBool(CSettings::SETTING_AUDIOOUTPUT_DTSHDPASSTHROUGH);
 
-    m_settings.resampleQuality = static_cast< AEQuality >( CServiceBroker::GetSettings().GetInt( CSettings::SETTING_AUDIOOUTPUT_PROCESSQUALITY ) );
-    m_settings.atempoThreshold = CServiceBroker::GetSettings().GetInt( CSettings::SETTING_AUDIOOUTPUT_ATEMPOTHRESHOLD ) / 100.0;
-    m_settings.streamNoise = CServiceBroker::GetSettings().GetBool( CSettings::SETTING_AUDIOOUTPUT_STREAMNOISE );
-    m_settings.silenceTimeout = CServiceBroker::GetSettings().GetInt( CSettings::SETTING_AUDIOOUTPUT_STREAMSILENCE ) * 60000;
+  m_settings.resampleQuality = static_cast<AEQuality>(settings->GetInt(CSettings::SETTING_AUDIOOUTPUT_PROCESSQUALITY));
+  m_settings.atempoThreshold = settings->GetInt(CSettings::SETTING_AUDIOOUTPUT_ATEMPOTHRESHOLD) / 100.0;
+  m_settings.streamNoise = settings->GetBool(CSettings::SETTING_AUDIOOUTPUT_STREAMNOISE);
+  m_settings.silenceTimeout = settings->GetInt(CSettings::SETTING_AUDIOOUTPUT_STREAMSILENCE) * 60000;
 #endif // HAVE_QT_GUI
 
     LogMsg( LOG_DEBUG, "BRJ CActiveAE::LoadSettings noise %d timeout %d\n", m_settings.streamNoise, m_settings.silenceTimeout );

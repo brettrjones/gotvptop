@@ -9,7 +9,7 @@
 #include "ContextMenusVideo.h"
 #include "Application.h"
 #include "Autorun.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "video/dialogs/GUIDialogVideoInfo.h"
 #include "video/windows/GUIWindowVideoBase.h"
 

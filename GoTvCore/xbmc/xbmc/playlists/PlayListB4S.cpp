@@ -10,7 +10,7 @@
 #include <string>
 
 #include "PlayListB4S.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "utils/XBMCTinyXML.h"
 #include "music/tags/MusicInfoTag.h"
 #include "filesystem/File.h"

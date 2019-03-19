@@ -9,7 +9,7 @@
 #include "PlaylistFileDirectory.h"
 #include "playlists/PlayListFactory.h"
 #include "File.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "playlists/PlayList.h"
 
 using namespace PLAYLIST;

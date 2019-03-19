@@ -22,6 +22,12 @@
 #include "music/MusicInfoLoader.h"
 #include "music/MusicThumbLoader.h"
 
+enum MusicSelectAction
+{
+    MUSIC_SELECT_ACTION_PLAY,
+    MUSIC_SELECT_ACTION_RESUME,
+};
+
 /*!
  \ingroup windows
  \brief The base class for music windows
@@ -76,6 +82,8 @@ protected:
   bool CheckFilterAdvanced(CFileItemList &items) const override;
   bool CanContainFilter(const std::string &strDirectory) const override;
 
+  bool OnSelect(int iItem) override;
+
   // new methods
   virtual void PlayItem(int iItem);
   bool OnPlayMedia(int iItem, const std::string &player = "") override;
@@ -83,7 +91,7 @@ protected:
   void RetrieveMusicInfo();
   void OnItemInfo(int iItem);
   void OnItemInfoAll(const std::string strPath, bool refresh = false);
-  virtual void OnQueueItem(int iItem);
+  virtual void OnQueueItem(int iItem, bool first = false);
   enum ALLOW_SELECTION { SELECTION_ALLOWED = 0, SELECTION_AUTO, SELECTION_FORCED };
  
   void OnRipTrack(int iItem);

@@ -28,7 +28,7 @@
 #include "settings/SettingsComponent.h"
 #include "settings/windows/GUIControlSettings.h"
 #include "storage/MediaManager.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
 #include "filesystem/Directory.h"

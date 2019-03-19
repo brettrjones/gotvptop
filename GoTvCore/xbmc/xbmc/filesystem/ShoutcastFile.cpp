@@ -13,7 +13,7 @@
 
 #include "ShoutcastFile.h"
 #include "guilib/GUIWindowManager.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/RegExp.h"
 #include "utils/HTMLUtil.h"
 #include "utils/CharsetConverter.h"

@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 	loaderThread->start();
 
     // send command line parameters to Kodi
-    CAppParamParser appParamParser;
+	static CAppParamParser appParamParser;
     appParamParser.Parse( argv, argc );
     GetIGoTv().initRun( appParamParser );
 

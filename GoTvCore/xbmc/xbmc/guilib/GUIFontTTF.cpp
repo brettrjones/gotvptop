@@ -17,7 +17,7 @@
 #include "utils/log.h"
 #include "rendering/RenderSystem.h"
 #include "windowing/WinSystem.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "filesystem/File.h"
 #include "threads/SystemClock.h"
 
@@ -353,6 +353,11 @@ void CGUIFontTTFBase::End()
 
 void CGUIFontTTFBase::DrawTextInternal(float x, float y, const std::vector<UTILS::Color> &colors, const vecText &text, uint32_t alignment, float maxPixelWidth, bool scrolling)
 {
+  if (text.empty())
+  {
+    return;
+  }
+
     Begin();
 
     uint32_t rawAlignment = alignment;
@@ -874,7 +879,7 @@ void CGUIFontTTFBase::RenderCharacter(float posX, float posY, const Character *c
     SVertex* v = &vertices[ vertices.size() - 4 ];
     m_color = color;
 
-#if ! HAS_DX
+#if !defined(HAS_DX)
     unsigned char r = GET_R( color )
         , g = GET_G( color )
         , b = GET_B( color )
@@ -883,7 +888,7 @@ void CGUIFontTTFBase::RenderCharacter(float posX, float posY, const Character *c
 
     for( int i = 0; i < 4; i++ )
     {
-#if HAS_DX
+#ifdef HAS_DX
         CD3DHelper::XMStoreColor( &v[ i ].col, color );
 #else
         v[ i ].r = r;
@@ -893,7 +898,7 @@ void CGUIFontTTFBase::RenderCharacter(float posX, float posY, const Character *c
 #endif
     }
 
-#if  HAS_DX
+#if defined(HAS_DX)
     for( int i = 0; i < 4; i++ )
     {
         v[ i ].x = x[ i ];

@@ -37,7 +37,7 @@ public:
   void UpdateResolutions() override;
   bool CanDoWindowed() override { return false; }
 
-  void ShowOSMouse(bool show) override;
+  void ShowOSMouse(bool show) override {}
   bool HasCursor() override;
 
   void NotifyAppActiveChange(bool bActivated) override;

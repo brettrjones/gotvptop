@@ -9,7 +9,7 @@
  */
 
 #include "ISOFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "iso9660.h"
 
 #include <algorithm>

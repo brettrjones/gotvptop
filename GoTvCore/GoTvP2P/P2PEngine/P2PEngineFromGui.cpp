@@ -81,7 +81,7 @@ const char * P2PEngine::fromGuiGetAppVersionString( void )
 //============================================================================
 const char * P2PEngine::fromGuiGetAppName( void )
 {
-	return VxGetApplicationName();
+	return VxGetApplicationTitle();
 }
 
 //============================================================================
@@ -579,7 +579,7 @@ void P2PEngine::fromGuiUpdateWebPageProfile(	const char *	pProfileDir,	// direct
 	StdStringFormat( strWebPageHdr, "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"><html>\
 <head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=iso-8859-1\" name=\"description\" content=\"%s :: About Me Web Page - Share introduction information about yourself in a personal web page served on your own device with access allowed or denied by friendship permission level\">\
 <FONT COLOR=\"#0000FF\"><title>%s :: About Me</title></FONT></head><body bgcolor=\"#E3EFFF\"><h2><p align=\"center\"><font color=\"#007F00\">%s - %s - About Me</font></p></h2>",
-		VxGetApplicationName(), VxGetApplicationName(), VxGetApplicationNameNoSpaces(), m_PktAnn.getOnlineName() );
+		VxGetApplicationTitle(), VxGetApplicationTitle(), VxGetApplicationNameNoSpaces(), m_PktAnn.getOnlineName() );
 
 	std::string strGreeting = "";
 	if( strlen( pGreeting ))

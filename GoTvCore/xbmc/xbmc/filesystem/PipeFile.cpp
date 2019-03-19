@@ -9,7 +9,7 @@
 #include "PipeFile.h"
 #include "threads/SingleLock.h"
 #include "PipesManager.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 using namespace XFILE;
 

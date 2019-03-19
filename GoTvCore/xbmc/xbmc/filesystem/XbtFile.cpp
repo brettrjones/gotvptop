@@ -33,7 +33,7 @@
 #include <liblzo/lzo1x.h>
 
 #include "XbtFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "filesystem/File.h"
 #include "filesystem/XbtManager.h"
 #include "guilib/TextureBundleXBT.h"

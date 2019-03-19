@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include <string>
+
 class CCompileInfo
 {
 public:
@@ -24,4 +26,5 @@ public:
   static const char* GetBinAddonEnvName();
   static const char* GetTempEnvName();
   static const char* GetUserProfileEnvName();
+  static std::string GetBuildDate();
 };

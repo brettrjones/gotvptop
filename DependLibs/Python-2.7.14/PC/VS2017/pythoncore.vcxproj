@@ -137,7 +137,8 @@
     <_ProjectFileVersion>15.0.28127.55</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(ProjectDir)\..\..\..\..\build-sharedlibs\Windows\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-sharedlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)\..\..\..\..\build-sharedlibs\Windows\$(Platform)\</OutDir>
@@ -198,7 +199,7 @@
       <ImportLibrary>$(OutDir)$(PyDllName).lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(TargetDir)python27.dll" "$(ProjectDir)\..\..\..\..\bin-Windows\python27\python27.dll"</Command>
+      <Command>copy /Y "$(TargetDir)python27.dll" "$(ProjectDir)\..\..\..\..\bin-Windows\python27.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -263,7 +264,7 @@
       <ImportLibrary>$(OutDir)$(PyDllName)_d.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(TargetDir)python27_d.dll" "$(ProjectDir)\..\..\..\..\bin-Windows\python27\python27_d.dll"</Command>
+      <Command>copy /Y "$(TargetDir)python27_d.dll" "$(ProjectDir)\..\..\..\..\bin-Windows\python27_d.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='PGInstrument|Win32'">

@@ -7,7 +7,7 @@
  */
 
 #include "SpecialProtocolFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "filesystem/SpecialProtocol.h"
 
 using namespace XFILE;

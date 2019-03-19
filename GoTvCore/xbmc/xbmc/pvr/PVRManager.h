@@ -23,7 +23,6 @@
 #include "utils/Observer.h"
 
 #include "pvr/PVRActionListener.h"
-#include "pvr/PVREvent.h"
 #include "pvr/PVRSettings.h"
 #include "pvr/PVRTypes.h"
 #include "pvr/epg/EpgContainer.h"
@@ -37,6 +36,20 @@ namespace PVR
   class CPVRClient;
   class CPVRGUIInfo;
   class CPVRGUIProgressHandler;
+
+  enum class PVREvent
+  {
+    // PVR Manager states
+    ManagerError = 0,
+    ManagerStopped,
+    ManagerStarting,
+    ManagerStopping,
+    ManagerInterrupted,
+    ManagerStarted,
+
+    // Recording events
+    RecordingsInvalidated
+  };
 
   class CPVRManagerJobQueue
   {
@@ -432,8 +445,9 @@ namespace PVR
     /*!
      * @brief Updates the last watched timestamps of the channel and group which are currently playing.
      * @param channel The channel which is updated
+     * @param time The last watched time to set
      */
-    void UpdateLastWatched(const CPVRChannelPtr &channel);
+    void UpdateLastWatched(const CPVRChannelPtr &channel, const CDateTime& time);
 
     /*!
      * @brief Set the playing group to the first group the channel is in if the given channel is not part of the current playing group
@@ -529,5 +543,8 @@ namespace PVR
     CPVREpgInfoTagPtr m_playingEpgTag;
     std::string m_strPlayingClientName;
     int m_playingClientId = -1;
+
+    class CLastWatchedUpdateTimer;
+    std::unique_ptr<CLastWatchedUpdateTimer> m_lastWatchedUpdateTimer;
   };
 }

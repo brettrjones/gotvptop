@@ -22,7 +22,7 @@
 #include "utils/URIUtils.h"
 #include "filesystem/File.h"
 #include "filesystem/Directory.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/Geometry.h"
 #include "guilib/LocalizeStrings.h"
 #include "settings/DiscSettings.h"

@@ -10,8 +10,8 @@
 #include "MultiPathDirectory.h"
 #include "Directory.h"
 #include "ServiceBroker.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvCoreUtil.h"
+#include "GoTvUrl.h"
 #include "guilib/GUIComponent.h"
 #include "guilib/GUIWindowManager.h"
 #include "dialogs/GUIDialogProgress.h"

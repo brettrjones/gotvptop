@@ -2,7 +2,9 @@
 
 #include <sys/stat.h>
 
+extern "C"{
 #include "cc_decoder.h"
+}
 
 #define MAX_708_PACKET_LENGTH   128
 #define CCX_DECODERS_708_MAX_SERVICES 8

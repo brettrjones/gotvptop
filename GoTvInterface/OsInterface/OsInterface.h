@@ -39,6 +39,6 @@ public:
 
 protected:
     IGoTv&                      m_IGoTv;
-    CAppParamParser             m_CmdLineParams;
-    int                         m_RunResultCode;
+    const CAppParamParser*      m_CmdLineParams = nullptr;
+    int                         m_RunResultCode = 0;
 };

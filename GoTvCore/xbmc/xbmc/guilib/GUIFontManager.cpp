@@ -24,7 +24,7 @@
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "FileItem.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "ServiceBroker.h"
 
 #ifdef TARGET_POSIX

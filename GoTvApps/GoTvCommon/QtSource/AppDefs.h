@@ -20,6 +20,7 @@
 enum EDefaultAppMode
 {
 	eAppModeUnknown,
+	eAppModeDefault,
 	eAppModeGoTvViewer,
 	eAppModeGoTvProvider,
 	eAppModeGoTvStation,

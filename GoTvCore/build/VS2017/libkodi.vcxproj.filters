@@ -376,12 +376,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\NFSFile.cpp">
       <Filter>filesystem</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\SFTPDirectory.cpp">
-      <Filter>filesystem</Filter>
-    </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\SFTPFile.cpp">
-      <Filter>filesystem</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\NptXbmcFile.cpp">
       <Filter>filesystem</Filter>
     </ClCompile>
@@ -1318,9 +1312,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\windows\GUIWindowSettingsScreenCalibration.cpp">
       <Filter>settings\windows</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\settings\windows\GUIWindowTestPattern.cpp">
-      <Filter>settings\windows</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\Application.cpp" />
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\ApplicationPlayer.cpp" />
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\ApplicationStackHelper.cpp" />
@@ -1340,7 +1331,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\GUILargeTextureManager.cpp" />
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\GUIPassword.cpp" />
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\InfoScanner.cpp" />
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\LangInfo.cpp" />
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\MediaSource.cpp" />
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\NfoFile.cpp" />
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\PasswordManager.cpp" />
@@ -2582,9 +2572,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\rendering\dx\DeviceResources.cpp">
       <Filter>rendering\dx</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\rendering\dx\GUIWindowTestPatternDX.cpp">
-      <Filter>rendering\dx</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\rendering\dx\RenderSystemDX.cpp">
       <Filter>rendering\dx</Filter>
     </ClCompile>
@@ -2716,7 +2703,6 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\xbmc\addons\Addon2.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\addons\AudioDecoder2.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\addons\ContextMenus2.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\addons\DllLibCPluff.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\controls\Progress3.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Keyboard2.cpp" />
@@ -2740,18 +2726,10 @@
     <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\video\RenderBufferSysMem.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\guibridge\GUIGameSettingsHandle.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\guiplayback\GUIPlaybackControl.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\playback\GameLoop.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\playback\ReversiblePlayback.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\process\qt\RPProcessInfoQt.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\process\RPProcessInfo.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\rendering\RenderUtils.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\Savestate.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateDatabase.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateFlatBuffer.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateReader.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateTranslator.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateUtils.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateWriter.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\memory\BasicMemoryStream.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\memory\DeltaPairMemoryStream.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\memory\LinearMemoryStream.cpp" />
@@ -2764,10 +2742,6 @@
     <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\InputStreamPVRChannel.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\InputStreamPVRRecording.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDSubtitles\DllLibass.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\FrameBufferObject.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\RendererQt.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\VideoFilterShaderQt.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\YUV2RGBShaderQt.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\YUVMatrix.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\dialogs\GUIDialogBusyNoCancel.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\drm\CryptoSession.cpp" />
@@ -2791,12 +2765,6 @@
     <ClCompile Include="..\..\xbmc\xbmc\fmt\format.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\fmt\ostream.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\fmt\posix.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\games\addons\GameClientInGameSaves.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\games\addons\input\GameClientController.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamAudio.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreams.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamSwFramebuffer.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamVideo.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\games\controllers\windows\ControllerInstaller.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\games\dialogs\osd\DialogGameAdvancedSettings.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\games\dialogs\osd\DialogGameOSDHelp.cpp" />
@@ -2830,9 +2798,6 @@
     <ClCompile Include="..\..\xbmc\xbmc\guilib\GUITextureGLES.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\guilib\GUITextureQt.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\guilib\Shader.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\guilib\TextureGL.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\guilib\TexturePi.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\guilib\TextureQt.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\input\actions\Action.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\input\actions\ActionTranslator.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\interfaces\legacy\Addon3.cpp" />
@@ -2912,16 +2877,6 @@
     <ClCompile Include="..\..\xbmc\xbmc\rendering\qt\RenderSystemQt.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\settings\lib\ISetting.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\settings\lib\ISettingControl.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\Setting.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingCategoryAccess.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingConditions2.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingDependency.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingRequirement.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingSection.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingsManager.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingUpdate.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\settings\SettingConditions.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\settings\SettingsComponent.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\StaticDll.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\storage\AutorunMediaJob.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\storage\cdioSupport.cpp" />
@@ -2966,7 +2921,6 @@
     <ClCompile Include="..\..\xbmc\xbmc\utils\FileOperationJob.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\FileUtils.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\fstrcmp.c" />
-    <ClCompile Include="..\..\xbmc\xbmc\utils\GLUtils.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\GroupUtils.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\HTMLUtil.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\HttpHeader.cpp" />
@@ -2982,7 +2936,6 @@
     <ClCompile Include="..\..\xbmc\xbmc\utils\LegacyPathTranslation.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\Locale.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\log.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\utils\md5.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\Mime.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\Observer.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\utils\POUtils.cpp" />
@@ -3064,6 +3017,94 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\xbmc\platform\qt\KodiQtApp.cpp">
       <Filter>platform\qt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\addons\ContextMenus2.cpp">
+      <Filter>addons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\games\addons\input\GameClientController.cpp">
+      <Filter>games\addons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\games\addons\GameClientInGameSaves.cpp">
+      <Filter>games\addons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamAudio.cpp">
+      <Filter>games\addons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreams.cpp">
+      <Filter>games\addons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamSwFramebuffer.cpp">
+      <Filter>games\addons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamVideo.cpp">
+      <Filter>games\addons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\playback\GameLoop.cpp">
+      <Filter>games\addons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateDatabase.cpp">
+      <Filter>cores\RetroPlayer\savestates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateFlatBuffer.cpp">
+      <Filter>cores\RetroPlayer\savestates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateUtils.cpp">
+      <Filter>cores\RetroPlayer\savestates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\RendererQt.cpp">
+      <Filter>cores\VideoPlayer\VideoRenderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\FrameBufferObject.cpp">
+      <Filter>cores\VideoPlayer\VideoRenderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\YUV2RGBShaderQt.cpp">
+      <Filter>cores\VideoPlayer\VideoRenderers\VideoShaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\VideoFilterShaderQt.cpp">
+      <Filter>cores\VideoPlayer\VideoRenderers\VideoShaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\Setting.cpp">
+      <Filter>settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingCategoryAccess.cpp">
+      <Filter>settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\SettingConditions.cpp">
+      <Filter>settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingConditions2.cpp">
+      <Filter>settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingDependency.cpp">
+      <Filter>settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingRequirement.cpp">
+      <Filter>settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\SettingsComponent.cpp">
+      <Filter>settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingSection.cpp">
+      <Filter>settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingsManager.cpp">
+      <Filter>settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\settings\lib\SettingUpdate.cpp">
+      <Filter>settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\utils\GLUtils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\LangInfoKodi.cpp" />
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\TextureGL.cpp">
+      <Filter>guilib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\TexturePi.cpp">
+      <Filter>guilib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\guilib\TextureQt.cpp">
+      <Filter>guilib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3294,12 +3335,6 @@
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\contrib\kissfft\kiss_fftr.h">
       <Filter>contrib\kissfft</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\SFTPDirectory.h">
-      <Filter>filesystem</Filter>
-    </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\SFTPFile.h">
-      <Filter>filesystem</Filter>
     </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\filesystem\AddonsDirectory.h">
       <Filter>filesystem</Filter>
@@ -4570,9 +4605,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\windows\GUIWindowSettingsScreenCalibration.h">
       <Filter>settings\windows</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\settings\windows\GUIWindowTestPattern.h">
-      <Filter>settings\windows</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\AppParamParser.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\Application.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\ApplicationPlayer.h" />
@@ -4597,7 +4629,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\IFileItemListModifier.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\IProgressCallback.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\InfoScanner.h" />
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\LangInfo.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\MediaSource.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\NfoFile.h" />
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\PartyModeManager.h" />
@@ -6311,9 +6342,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\rendering\dx\DirectXHelper.h">
       <Filter>rendering\dx</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\rendering\dx\GUIWindowTestPatternDX.h">
-      <Filter>rendering\dx</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\rendering\dx\RenderContext.h">
       <Filter>rendering\dx</Filter>
     </ClInclude>
@@ -6590,7 +6618,6 @@
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\guibridge\GUIGameSettingsHandle.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\guibridge\IGameCallback.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\guiplayback\GUIPlaybackControl.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\playback\GameLoop.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\playback\IPlayback.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\playback\IPlaybackControl.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\playback\RealtimePlayback.h" />
@@ -6598,16 +6625,7 @@
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\process\qt\RPProcessInfoQt.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\process\RPProcessInfo.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\rendering\RenderUtils.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\ISavestate.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\Savestate.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateDatabase.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateDefines.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateFlatBuffer.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateReader.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateTranslator.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateTypes.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateUtils.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateWriter.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\IRetroPlayerStream.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\IStreamManager.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\streams\memory\BasicMemoryStream.h" />
@@ -6621,10 +6639,6 @@
     <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\InputStreamPVRBase.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\InputStreamPVRChannel.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\DVDInputStreams\InputStreamPVRRecording.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\FrameBufferObject.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\RendererQt.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\VideoFilterShaderQt.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\YUV2RGBShaderQt.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\YUVMatrix.h" />
     <ClInclude Include="..\..\xbmc\xbmc\dialogs\GUIDialogBusyNoCancel.h" />
     <ClInclude Include="..\..\xbmc\xbmc\drm\CryptoSession.h" />
@@ -6647,12 +6661,6 @@
     <ClInclude Include="..\..\xbmc\xbmc\fmt\ostream.h" />
     <ClInclude Include="..\..\xbmc\xbmc\fmt\posix.h" />
     <ClInclude Include="..\..\xbmc\xbmc\fmt\time.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\games\addons\GameClientInGameSaves.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\games\addons\input\GameClientController.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamAudio.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreams.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamSwFramebuffer.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamVideo.h" />
     <ClInclude Include="..\..\xbmc\xbmc\games\addons\streams\IGameClientStream.h" />
     <ClInclude Include="..\..\xbmc\xbmc\games\controllers\windows\ControllerInstaller.h" />
     <ClInclude Include="..\..\xbmc\xbmc\games\dialogs\osd\DialogGameAdvancedSettings.h" />
@@ -6689,10 +6697,6 @@
     <ClInclude Include="..\..\xbmc\xbmc\guilib\GUITextureGLES.h" />
     <ClInclude Include="..\..\xbmc\xbmc\guilib\GUITextureQt.h" />
     <ClInclude Include="..\..\xbmc\xbmc\guilib\Shader.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\guilib\TextureFormats.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\guilib\TextureGL.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\guilib\TexturePi.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\guilib\TextureQt.h" />
     <ClInclude Include="..\..\xbmc\xbmc\input\actions\Action.h" />
     <ClInclude Include="..\..\xbmc\xbmc\input\actions\ActionIDs.h" />
     <ClInclude Include="..\..\xbmc\xbmc\input\actions\ActionTranslator.h" />
@@ -6758,18 +6762,6 @@
     <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingCreator.h" />
     <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISettingsHandler.h" />
     <ClInclude Include="..\..\xbmc\xbmc\settings\lib\ISubSettings.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\Setting.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingCategoryAccess.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingConditions.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingDefinitions.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingDependency.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingLevel.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingRequirement.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingSection.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingsManager.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingType.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingUpdate.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\settings\SettingsComponent.h" />
     <ClInclude Include="..\..\xbmc\xbmc\StaticDll.h" />
     <ClInclude Include="..\..\xbmc\xbmc\storage\AutorunMediaJob.h" />
     <ClInclude Include="..\..\xbmc\xbmc\storage\cdioSupport.h" />
@@ -6823,7 +6815,6 @@
     <ClInclude Include="..\..\xbmc\xbmc\utils\fstrcmp.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\Geometry.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\GlobalsHandling.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\utils\GLUtils.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\GroupUtils.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\HTMLUtil.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\HttpHeader.h" />
@@ -6848,7 +6839,6 @@
     <ClInclude Include="..\..\xbmc\xbmc\utils\Locale.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\log.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\MathUtils.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\utils\md5.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\Mime.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\Observer.h" />
     <ClInclude Include="..\..\xbmc\xbmc\utils\params_check_macros.h" />
@@ -6939,6 +6929,109 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\xbmc\platform\qt\KodiQtApp.h">
       <Filter>platform\qt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\games\addons\input\GameClientController.h">
+      <Filter>games\addons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\games\addons\GameClientInGameSaves.h">
+      <Filter>games\addons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamAudio.h">
+      <Filter>games\addons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreams.h">
+      <Filter>games\addons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamSwFramebuffer.h">
+      <Filter>games\addons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\games\addons\streams\GameClientStreamVideo.h">
+      <Filter>games\addons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\playback\GameLoop.h">
+      <Filter>games\addons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateDatabase.h">
+      <Filter>cores\RetroPlayer\savestates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateDefines.h">
+      <Filter>cores\RetroPlayer\savestates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateFlatBuffer.h">
+      <Filter>cores\RetroPlayer\savestates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateTypes.h">
+      <Filter>cores\RetroPlayer\savestates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\SavestateUtils.h">
+      <Filter>cores\RetroPlayer\savestates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\savestates\ISavestate.h">
+      <Filter>cores\RetroPlayer\savestates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\RendererQt.h">
+      <Filter>cores\VideoPlayer\VideoRenderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\FrameBufferObject.h">
+      <Filter>cores\VideoPlayer\VideoRenderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\YUV2RGBShaderQt.h">
+      <Filter>cores\VideoPlayer\VideoRenderers\VideoShaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\cores\VideoPlayer\VideoRenderers\VideoShaders\VideoFilterShaderQt.h">
+      <Filter>cores\VideoPlayer\VideoRenderers\VideoShaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\Setting.h">
+      <Filter>settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingCategoryAccess.h">
+      <Filter>settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingConditions.h">
+      <Filter>settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingDefinitions.h">
+      <Filter>settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingDependency.h">
+      <Filter>settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingLevel.h">
+      <Filter>settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingRequirement.h">
+      <Filter>settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\SettingsComponent.h">
+      <Filter>settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingSection.h">
+      <Filter>settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingsManager.h">
+      <Filter>settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingType.h">
+      <Filter>settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\settings\lib\SettingUpdate.h">
+      <Filter>settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\utils\GLUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\LangInfoKodi.h" />
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\TextureFormats.h">
+      <Filter>guilib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\TextureGL.h">
+      <Filter>guilib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\TexturePi.h">
+      <Filter>guilib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\guilib\TextureQt.h">
+      <Filter>guilib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -7493,6 +7586,9 @@
     </Filter>
     <Filter Include="platform\qt\qtandroid">
       <UniqueIdentifier>{42820c73-92de-42af-8aa4-4f4a6e3a9881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\RetroPlayer\savestates">
+      <UniqueIdentifier>{24939b46-e6ad-43fe-b328-46cc94b6db9e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

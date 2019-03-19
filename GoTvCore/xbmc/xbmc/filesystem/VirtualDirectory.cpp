@@ -8,8 +8,8 @@
 
 #include "VirtualDirectory.h"
 #include "DirectoryFactory.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvUrl.h"
+#include "GoTvCoreUtil.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "Directory.h"

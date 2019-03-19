@@ -9,8 +9,8 @@
 #include "ServiceBroker.h"
 #include "SourcesDirectory.h"
 #include "utils/URIUtils.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvUrl.h"
+#include "GoTvCoreUtil.h"
 #include "FileItem.h"
 #include "File.h"
 #include "profiles/ProfileManager.h"

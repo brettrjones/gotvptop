@@ -9,7 +9,6 @@
 #pragma once
 
 #include "XBDateTime.h"
-#include "ISavestate.h"
 
 #include <stdint.h>
 #include <string>
@@ -20,6 +19,13 @@ namespace KODI
 {
 namespace RETRO
 {
+  enum class SAVETYPE
+  {
+    UNKNOWN = 0,
+    AUTO = 1,
+    SLOT = 2,
+    MANUAL = 3,
+  };
 
   class CSavestate
   {
@@ -31,7 +37,7 @@ namespace RETRO
     void Reset();
 
     const std::string& Path() const              { return m_path; }
-    SAVE_TYPE           Type() const              { return m_type; }
+    SAVETYPE           Type() const              { return m_type; }
     int                Slot() const              { return m_slot; }
     const std::string& Label() const             { return m_label; }
     size_t             Size() const              { return m_size; }
@@ -46,7 +52,7 @@ namespace RETRO
     const std::string& Thumbnail() const         { return m_thumbnail; }
 
     void SetPath(const std::string& path)             { m_path = path; }
-    void SetType(SAVE_TYPE type)                       { m_type = type; }
+    void SetType(SAVETYPE type)                       { m_type = type; }
     void SetSlot(int slot)                            { m_slot = slot; }
     void SetLabel(const std::string& label)           { m_label = label; }
     void SetSize(size_t size)                         { m_size = size; }
@@ -68,7 +74,7 @@ namespace RETRO
   private:
     // Savestate properties
     std::string  m_path;
-    SAVE_TYPE     m_type;
+    SAVETYPE     m_type;
     int          m_slot; // -1 for no slot
     std::string  m_label;
     size_t       m_size;

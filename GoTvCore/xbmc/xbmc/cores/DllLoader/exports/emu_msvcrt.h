@@ -16,20 +16,22 @@
 # define _onexit_t void*
 #endif
 
-#if defined(TARGET_DARWIN) || defined(TARGET_FREEBSD)
+#if defined(TARGET_DARWIN) || defined(TARGET_FREEBSD) || defined(TARGET_ANDROID)
+typedef off_t __off_t;
 typedef int64_t off64_t;
 typedef off64_t __off64_t;
 typedef fpos_t fpos64_t;
 #endif
 
-#if defined(TARGET_ANDROID)
-typedef long __off_t;
-typedef int64_t off64_t;
-typedef off64_t __off64_t;
-typedef fpos_t fpos64_t;
-#endif
+//BRJ needed?
+//#if defined(TARGET_ANDROID)
+//typedef long __off_t;
+//typedef int64_t off64_t;
+//typedef off64_t __off64_t;
+//typedef fpos_t fpos64_t;
+//#endif
 
-#ifdef TARGET_OS_WINDOWS
+#ifdef TARGET_WINDOWS
 # include "platform/win32/dirent.h"
 #else
 # include <dirent.h>
@@ -161,10 +163,11 @@ extern "C"
 #endif
   int dll_setvbuf(FILE *stream, char *buf, int type, size_t size);
 
-#if _MSC_VER < 1900
-  int dll_filbuf(FILE *fp);
-  int dll_flsbuf(int data, FILE*fp);
-#endif
+// BRJ needed?
+//#if _MSC_VER < 1900
+//  int dll_filbuf(FILE *fp);
+//  int dll_flsbuf(int data, FILE*fp);
+//#endif
 
 #if defined(TARGET_ANDROID)
   volatile int * __cdecl dll_errno(void);

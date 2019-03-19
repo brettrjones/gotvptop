@@ -10,7 +10,7 @@
 #include "favourites/FavouritesService.h"
 #include "File.h"
 #include "Directory.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "profiles/ProfileManager.h"
 #include "ServiceBroker.h"
 #include "utils/URIUtils.h"

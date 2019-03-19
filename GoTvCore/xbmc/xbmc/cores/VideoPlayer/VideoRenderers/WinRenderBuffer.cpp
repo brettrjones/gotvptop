@@ -87,6 +87,8 @@ void CRenderBuffer::Release()
   m_activePlanes = 0;
   texBits = 8;
   bits = 8;
+  pictureFlags = 0;
+  m_locked = false;
 
   m_planes[0] = nullptr;
   m_planes[1] = nullptr;
@@ -341,6 +343,7 @@ void CRenderBuffer::AppendPicture(const VideoPicture & picture)
   videoBuffer = picture.videoBuffer;
   videoBuffer->Acquire();
 
+  pictureFlags = picture.iFlags;
   primaries = static_cast<AVColorPrimaries>(picture.color_primaries);
   color_space = static_cast<AVColorSpace>(picture.color_space);
   color_transfer = static_cast<AVColorTransferCharacteristic>(picture.color_transfer);

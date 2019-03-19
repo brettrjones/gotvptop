@@ -195,7 +195,10 @@ CGDirectDisplayID GetDisplayID(int screen_index)
 
   // Get the list of displays.
   CGGetActiveDisplayList(MAX_DISPLAYS, displayArray, &numDisplays);
+  if (screen_index >= 0 && screen_index < numDisplays)
   return(displayArray[screen_index]);
+  else
+    return(displayArray[0]);
 }
 
 size_t DisplayBitsPerPixelForMode(CGDisplayModeRef mode)
@@ -221,6 +224,39 @@ size_t DisplayBitsPerPixelForMode(CGDisplayModeRef mode)
   return bitsPerPixel;
 }
 
+CFArrayRef GetAllDisplayModes(CGDirectDisplayID display)
+{
+  int value = 1;
+
+  CFNumberRef number = CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType, &value);
+  if (!number)
+  {
+    CLog::Log(LOGERROR, "GetAllDisplayModes - could not create Number!");
+    return NULL;
+  }
+
+  CFStringRef key = kCGDisplayShowDuplicateLowResolutionModes;
+  CFDictionaryRef options = CFDictionaryCreate(kCFAllocatorDefault, (const void **)&key, (const void **)&number, 1, NULL, NULL);
+  CFRelease(number);
+
+  if (!options)
+  {
+    CLog::Log(LOGERROR, "GetAllDisplayModes - could not create Dictionary!");
+    return NULL;
+  }
+
+  CFArrayRef displayModes = CGDisplayCopyAllDisplayModes(display, options);
+  CFRelease(options);
+
+  if (!displayModes)
+  {
+    CLog::Log(LOGERROR, "GetAllDisplayModes - no displaymodes found!");
+    return NULL;
+  }
+
+  return displayModes;
+}
+
 // mimic former behavior of deprecated CGDisplayBestModeForParameters
 CGDisplayModeRef BestMatchForMode(CGDirectDisplayID display, size_t bitsPerPixel, size_t width, size_t height, boolean_t &match)
 {
@@ -233,7 +269,8 @@ CGDisplayModeRef BestMatchForMode(CGDirectDisplayID display, size_t bitsPerPixel
   // Try to find a mode with the requested depth and equal or greater dimensions first.
   // If no match is found, try to find a mode with greater depth and same or greater dimensions.
   // If still no match is found, just use the current mode.
-  CFArrayRef allModes = CGDisplayCopyAllDisplayModes(display, NULL);
+  CFArrayRef allModes = GetAllDisplayModes(display);
+
   for(int i = 0; i < CFArrayGetCount(allModes); i++)	{
     CGDisplayModeRef mode = (CGDisplayModeRef)CFArrayGetValueAtIndex(allModes, i);
 
@@ -389,6 +426,12 @@ NSString* screenNameForDisplay(CGDirectDisplayID displayID)
   {
     screenName = [[NSString alloc] initWithFormat:@"%i", displayID];
   }
+  else
+  {
+    // ensure screen name is unique by appending displayid
+    screenName = [[screenName stringByAppendingFormat:@" (%@)", [@(displayID) stringValue]] retain];
+  }
+
   return [screenName autorelease];
 }
 
@@ -494,13 +537,10 @@ CGDisplayModeRef GetMode(int width, int height, double refreshrate, int screenId
 
   CLog::Log(LOGDEBUG, "GetMode looking for suitable mode with %d x %d @ %f Hz on display %d\n", width, height, refreshrate, screenIdx);
 
-  CFArrayRef displayModes = CGDisplayCopyAllDisplayModes(GetDisplayID(screenIdx), nullptr);
+  CFArrayRef displayModes = GetAllDisplayModes(GetDisplayID(screenIdx));
 
-  if (NULL == displayModes)
-  {
-    CLog::Log(LOGERROR, "GetMode - no displaymodes found!");
+  if (!displayModes)
     return NULL;
-  }
 
   for (int i=0; i < CFArrayGetCount(displayModes); ++i)
   {
@@ -977,7 +1017,7 @@ bool CWinSystemOSX::SetFullScreen(bool fullScreen, RESOLUTION_INFO& res, bool bl
 
     // Blank other displays if requested.
     if (blankOtherDisplays)
-      BlankOtherDisplays(0);
+      BlankOtherDisplays(m_lastDisplayNr);
 
     // Hide the mouse.
     [NSCursor hide];
@@ -1309,9 +1349,6 @@ void CWinSystemOSX::FillInVideoModes()
 
   for (int disp = 0; disp < numDisplays; disp++)
   {
-    if (disp != dispIdx)
-      continue;
-
     Boolean stretched;
     Boolean interlaced;
     Boolean safeForHardware;
@@ -1320,7 +1357,7 @@ void CWinSystemOSX::FillInVideoModes()
     double refreshrate;
     RESOLUTION_INFO res;
 
-    CFArrayRef displayModes = CGDisplayCopyAllDisplayModes(GetDisplayID(disp), nullptr);
+    CFArrayRef displayModes = GetAllDisplayModes(GetDisplayID(disp));
     NSString *dispName = screenNameForDisplay(GetDisplayID(disp));
 
     CLog::Log(LOGNOTICE, "Display %i has name %s", disp, [dispName UTF8String]);
@@ -1354,6 +1391,10 @@ void CWinSystemOSX::FillInVideoModes()
         }
         CLog::Log(LOGNOTICE, "Found possible resolution for display %d with %d x %d @ %f Hz\n", disp, w, h, refreshrate);
 
+        // only add the resolution if it belongs to "our" screen
+        // all others are only logged above...
+        if (disp == dispIdx)
+        {
         if (dispName != nil)
         {
           res.strOutput = [dispName UTF8String];
@@ -1375,6 +1416,7 @@ void CWinSystemOSX::FillInVideoModes()
 
         CServiceBroker::GetWinSystem()->GetGfxContext().ResetOverscan(res);
         CDisplaySettings::GetInstance().AddResolutionInfo(res);
+        }
       }
     }
     CFRelease(displayModes);

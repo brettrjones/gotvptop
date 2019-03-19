@@ -11,8 +11,8 @@
 #include "UPnP.h"
 #include "UPnPServer.h"
 #include "ServiceBroker.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvUrl.h"
+#include "GoTvCoreUtil.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"

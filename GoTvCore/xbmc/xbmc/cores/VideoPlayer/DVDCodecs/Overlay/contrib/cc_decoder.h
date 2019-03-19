@@ -19,9 +19,6 @@
 #pragma once
 
 #include <stdint.h>
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #define CC_ROWS 15
 #define CC_COLUMNS 32
@@ -106,7 +103,4 @@ cc_decoder_t *cc_decoder_open();
 void cc_decoder_close(cc_decoder_t *this_obj);
 void cc_decoder_init(void);
 
-void decode_cc(cc_decoder_t *dec, uint8_t *buffer, uint32_t buf_len);
-#ifdef __cplusplus
-}
-#endif
+void decode_cc(cc_decoder_t *dec, const uint8_t *buffer, uint32_t buf_len);

@@ -46,8 +46,8 @@ void CSettingsComponent::Init( const CAppParamParser &params )
 {
     if( m_state == State::DEINITED )
     {
-        URIUtils::RegisterAdvancedSettings( *m_advancedSettings );
-        m_advancedSettings->Initialize( params, *m_settings->GetSettingsManager() );
+//        URIUtils::RegisterAdvancedSettings( *m_advancedSettings );
+//        m_advancedSettings->Initialize( params, *m_settings->GetSettingsManager() );
 
         // only the InitDirectories* for the current platform should return true
         bool inited = InitDirectoriesLinux( params.m_platformDirectories );
@@ -57,7 +57,10 @@ void CSettingsComponent::Init( const CAppParamParser &params )
             inited = InitDirectoriesWin32( params.m_platformDirectories );
 
         m_settings->Initialize();
-        CreateUserDirs();
+
+    m_advancedSettings->Initialize(params, *m_settings->GetSettingsManager());
+    URIUtils::RegisterAdvancedSettings(*m_advancedSettings);
+//        CreateUserDirs();
 
         m_profileManager->Initialize( m_settings );
 
@@ -372,6 +375,8 @@ bool CSettingsComponent::InitDirectoriesWin32( bool bPlatformDirectories )
     CSpecialProtocol::SetTempPath( URIUtils::AddFileToFolder( strWin32UserFolder, "cache" ) );
 
     CEnvironment::setenv( "KODI_PROFILE_USERDATA", CSpecialProtocol::TranslatePath( "special://masterprofile/" ) );
+
+  CreateUserDirs();
 
     return true;
 #else

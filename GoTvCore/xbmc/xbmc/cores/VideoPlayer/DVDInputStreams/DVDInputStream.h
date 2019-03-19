@@ -14,7 +14,7 @@
 #include "filesystem/IFileTypes.h"
 
 #include "FileItem.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/Geometry.h"
 
 enum DVDStreamType

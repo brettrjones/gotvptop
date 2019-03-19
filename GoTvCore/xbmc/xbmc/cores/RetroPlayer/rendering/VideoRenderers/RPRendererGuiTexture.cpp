@@ -42,7 +42,7 @@ CRPBaseRenderer *CRendererFactoryGuiTexture::CreateRenderer( const CRenderSettin
 RenderBufferPoolVector CRendererFactoryGuiTexture::CreateBufferPools( CRenderContext &context )
 {
     return{
-  #if ! HAS_DX
+#if !defined(HAS_DX)
     std::make_shared<CRenderBufferPoolGuiTexture>(SCALINGMETHOD::NEAREST),
   #endif
     std::make_shared<CRenderBufferPoolGuiTexture>(SCALINGMETHOD::LINEAR),
@@ -107,7 +107,7 @@ void CRPRendererGuiTexture::RenderInternal( bool clear, uint8_t alpha )
 
     const uint32_t color = ( alpha << 24 ) | 0xFFFFFF;
 
-#if  HAS_DX
+#if defined(HAS_DX)
 
     Vertex vertex[ 5 ];
     for( int i = 0; i < 4; i++ )

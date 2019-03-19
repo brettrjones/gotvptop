@@ -44,7 +44,7 @@
 #include "utils/StringUtils.h"
 #include "FileItem.h"
 #include "ServiceBroker.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "windowing/WinSystem.h"
 
 using namespace KODI;

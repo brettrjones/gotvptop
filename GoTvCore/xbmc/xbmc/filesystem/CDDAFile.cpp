@@ -8,7 +8,7 @@
 
 #include "CDDAFile.h"
 #include <sys/stat.h>
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "storage/MediaManager.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"

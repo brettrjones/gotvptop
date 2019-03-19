@@ -20,6 +20,9 @@
 
 #include "config_kodi.h"
 #ifdef HAVE_QT_GUI
+#if defined(TARGET_OS_WINDOWS)
+# include <libglew/include/GL/glew.h>
+#endif
 
 #include "Texture.h"
 

@@ -14,7 +14,7 @@
 #include "utils/URIUtils.h"
 #include "video/VideoDatabase.h"
 #include "threads/SingleLock.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 
 using namespace XFILE;
 

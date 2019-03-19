@@ -8,8 +8,8 @@
 
 #include "PlayListM3U.h"
 #include "filesystem/File.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvUrl.h"
+#include "GoTvCoreUtil.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"

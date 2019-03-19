@@ -22,8 +22,8 @@
 
 #include "File.h"
 #include "FileFactory.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvCoreUtil.h"
+#include "GoTvUrl.h"
 
 #ifdef TARGET_WINDOWS
 # ifndef S_IWUSR

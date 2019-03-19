@@ -6,7 +6,7 @@
  */
 
 #include "VFSEntry.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "addons/binary-addons/BinaryAddonBase.h"
 #include "addons/binary-addons/BinaryAddonManager.h"
 #include "ServiceBroker.h"

@@ -385,7 +385,7 @@ void CActiveAESink::StateMachine( int signal, Protocol *port, Message *msg )
                     return;
 
                 case CSinkControlProtocol::FLUSH:
-                    LogMsg( LOG_DEBUG, "CSinkControlProtocol::FLUSH\n" );
+                    LogMsg( LOG_DEBUG, "BRJ CSinkControlProtocol::FLUSH\n" );
                     ReturnBuffers();
                     msg->Reply( CSinkControlProtocol::ACC );
                     return;
@@ -393,7 +393,7 @@ void CActiveAESink::StateMachine( int signal, Protocol *port, Message *msg )
                 case CSinkControlProtocol::APPFOCUSED:
                     m_extAppFocused = *( bool* )msg->data;
                     SetSilenceTimer();
-                    LogMsg( LOG_DEBUG, "CSinkControlProtocol::APPFOCUSED" );
+                    LogMsg( LOG_DEBUG, "BRJ CSinkControlProtocol::APPFOCUSED" );
                     m_extTimeout = 0;
                     return;
 
@@ -656,7 +656,7 @@ void CActiveAESink::StateMachine( int signal, Protocol *port, Message *msg )
                 switch( signal )
                 {
                 case CSinkControlProtocol::TIMEOUT:
-                    //OutputSamples( &m_sampleOfSilence );
+                    OutputSamples( &m_sampleOfSilence ); //BRJ comment out?
                     if( m_extError )
                     {
                         m_sink->Deinitialize();
@@ -747,7 +747,7 @@ void CActiveAESink::Process()
                 && ( m_state != S_TOP_CONFIGURED_PLAY )
                 && ( m_state != S_TOP_CONFIGURED_SILENCE ) )
             {
-                CLog::Log( LOGERROR, "CActiveAESink:: %s timeout %d waiting for out event state %s", __FUNCTION__, m_extTimeout, describeAESinkState( m_state ) );
+                CLog::Log( LOGERROR, "BRJ CActiveAESink:: %s timeout %d waiting for out event state %s", __FUNCTION__, m_extTimeout, describeAESinkState( m_state ) );
             }
 
             msg = m_controlPort.GetMessage();

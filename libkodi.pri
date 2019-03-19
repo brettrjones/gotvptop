@@ -1247,11 +1247,8 @@ HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/savestates/SavestateDatabase.h \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/savestates/SavestateDefines.h \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/savestates/SavestateFlatBuffer.h \
-    $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/savestates/SavestateReader.h \
-    $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/savestates/SavestateTranslator.h \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/savestates/SavestateTypes.h \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/savestates/SavestateUtils.h \
-    $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/savestates/SavestateWriter.h \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/streams/IRetroPlayerStream.h \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/streams/IStreamManager.h \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/streams/RPStreamManager.h \
@@ -2521,13 +2518,9 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/process/RPProcessInfo.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/process/qt/RPProcessInfoQt.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/rendering/RenderUtils.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/savestates/Savestate.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/savestates/SavestateDatabase.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/savestates/SavestateFlatBuffer.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/savestates/SavestateReader.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/savestates/SavestateTranslator.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/savestates/SavestateUtils.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/savestates/SavestateWriter.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/streams/RPStreamManager.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/streams/RetroPlayerAudio.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/cores/RetroPlayer/streams/RetroPlayerStreamTypes.cpp \

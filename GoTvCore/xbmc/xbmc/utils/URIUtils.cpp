@@ -498,16 +498,23 @@ GoTvUrl URIUtils::SubstitutePath(const GoTvUrl& url, bool reverse /* = false */)
 
 std::string URIUtils::SubstitutePath(const std::string& strPath, bool reverse /* = false */)
 {
+  if (!m_advancedSettings)
+  {
+    // path substitution not needed / not working during Kodi bootstrap.
+    return strPath;
+  }
+
     // NOTE: special hack to substitute python path
     static std::string pythonSpecial =  "special://xbmc/system/python";
     if( ( strPath.find( pythonSpecial.c_str() ) != std::string::npos ) )
     {
-        std::string pythonRealPath = CSpecialProtocol::GetPath( pythonSpecial );
+/* BRJ FIX PYTHON STUFF        std::string pythonRealPath = CSpecialProtocol::GetPath( pythonSpecial );
         if( pythonRealPath.size() )
         {
             std::string pythonFullFile = pythonRealPath + strPath.substr( pythonSpecial.size() );
             return pythonFullFile;
         }
+*/
     }
 
   for (const auto& pathPair : m_advancedSettings->m_pathSubstitutions)
@@ -603,6 +610,18 @@ bool URIUtils::IsRemote(const std::string& strFile)
     return false;
 
   if (IsSourcesPath(strFile))
+    return false;
+
+  if (IsVideoDb(strFile) || IsMusicDb(strFile))
+    return false;
+  
+  if (IsLibraryFolder(strFile))
+    return false;
+  
+  if (IsPlugin(strFile))
+    return false;
+  
+  if (IsAndroidApp(strFile))
     return false;
 
   if (!url.IsLocal())

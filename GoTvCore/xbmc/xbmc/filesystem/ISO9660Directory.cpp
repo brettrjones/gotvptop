@@ -8,10 +8,10 @@
 
 #include "ISO9660Directory.h"
 #include "iso9660.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "FileItem.h"
 #ifdef TARGET_POSIX
 #include "platform/linux/XTimeUtils.h"

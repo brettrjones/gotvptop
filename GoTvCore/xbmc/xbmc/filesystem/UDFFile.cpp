@@ -9,7 +9,7 @@
  *  See LICENSES/README.md for more information.
  */
 #include "UDFFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 #include <sys/stat.h>
 #include <errno.h>

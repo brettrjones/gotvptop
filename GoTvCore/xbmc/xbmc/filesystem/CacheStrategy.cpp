@@ -13,10 +13,10 @@
 #include "PlatformDefs.h"
 #include "ConvUtils.h"
 #endif
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "utils/log.h"
 #include "SpecialProtocol.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #if defined(TARGET_POSIX)
 #include "platform/posix/filesystem/PosixFile.h"
 #define CacheLocalFile CPosixFile

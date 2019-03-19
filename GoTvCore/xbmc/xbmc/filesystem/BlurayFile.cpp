@@ -7,7 +7,7 @@
  */
 
 #include "BlurayFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include <assert.h>
 
 namespace XFILE

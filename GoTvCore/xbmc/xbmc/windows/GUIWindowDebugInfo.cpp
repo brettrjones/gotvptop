@@ -55,6 +55,9 @@ bool CGUIWindowDebugInfo::OnMessage(CGUIMessage &message)
     delete m_layout;
     m_layout = nullptr;
   }
+  else if (message.GetMessage() == GUI_MSG_REFRESH_TIMER)
+    MarkDirtyRegion();
+
   return CGUIDialog::OnMessage(message);
 }
 
@@ -129,7 +132,7 @@ void CGUIWindowDebugInfo::Process(unsigned int currentTime, CDirtyRegionList &di
     {
       std::string windowName = CWindowTranslator::TranslateWindow(window->GetID());
       if (!windowName.empty())
-        windowName += " (" + std::string(window->GetProperty("xmlfile").asString()) + ")";
+        windowName += " (" + window->GetProperty("xmlfile").asString() + ")";
       else
         windowName = window->GetProperty("xmlfile").asString();
       info += "Window: " + windowName + "\n";

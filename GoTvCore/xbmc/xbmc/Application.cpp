@@ -20,8 +20,8 @@
 #include "utils/Variant.h"
 #include "LangInfoKodi.h"
 #include "utils/Screenshot.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvCoreUtil.h"
+#include "GoTvUrl.h"
 #include "guilib/GUIComponent.h"
 #include "guilib/TextureManager.h"
 #include "cores/IPlayer.h"
@@ -251,9 +251,10 @@ CApplication::CApplication( void )
 
 CApplication::~CApplication( void )
 {
-    //delete m_pInertialScrollingHandler;
+//BRJ FIXME
+    delete m_pInertialScrollingHandler;
 
-    //m_actionListeners.clear();
+    m_actionListeners.clear();
 }
 
 bool CApplication::OnEvent( XBMC_Event& newEvent )
@@ -282,19 +283,31 @@ void CApplication::HandlePortEvents()
             break;
 
         case XBMC_VIDEORESIZE:
-            if( CServiceBroker::GetGUI()->GetWindowManager().Initialized() )
-            {
+			if( CServiceBroker::GetGUI()->GetWindowManager().Initialized() )
+			{
 #ifndef HAVE_QT_GUI
-                if( !CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_fullScreen )
+				if( !CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_fullScreen )
 #endif // HAVE_QT_GUI
-                {
-                    CServiceBroker::GetWinSystem()->GetGfxContext().ApplyWindowResize( newEvent.resize.w, newEvent.resize.h );
+				{
+					CServiceBroker::GetWinSystem()->GetGfxContext().ApplyWindowResize( newEvent.resize.w, newEvent.resize.h );
 
-                    const std::shared_ptr<CSettings> settings = CServiceBroker::GetSettingsComponent()->GetSettings();
-                    settings->SetInt( CSettings::SETTING_WINDOW_WIDTH, newEvent.resize.w );
-                    settings->SetInt( CSettings::SETTING_WINDOW_HEIGHT, newEvent.resize.h );
-                    settings->Save();
-                }
+					const std::shared_ptr<CSettings> settings = CServiceBroker::GetSettingsComponent()->GetSettings();
+					settings->SetInt( CSettings::SETTING_WINDOW_WIDTH, newEvent.resize.w );
+					settings->SetInt( CSettings::SETTING_WINDOW_HEIGHT, newEvent.resize.h );
+					settings->Save();
+				}
+			}
+            else
+			{
+#if defined(TARGET_WINDOWS ) && !defined(HAVE_QT_GUI)
+				// this may occurs when OS tries to resize application window 
+				//CDisplaySettings::GetInstance().SetCurrentResolution(RES_DESKTOP, true);
+				//auto& gfxContext = CServiceBroker::GetWinSystem()->GetGfxContext();
+				//gfxContext.SetVideoResolution(gfxContext.GetVideoResolution(), true);
+				// try to resize window back to it's full screen size
+				auto& res_info = CDisplaySettings::GetInstance().GetResolutionInfo(RES_DESKTOP);
+				CServiceBroker::GetWinSystem()->ResizeWindow(res_info.iScreenWidth, res_info.iScreenHeight, 0, 0);
+#endif
             }
             break;
         case XBMC_VIDEOMOVE:
@@ -680,7 +693,6 @@ bool CApplication::CreateGUI()
         // If OS has no screen saver, use Kodi one by default
         screensaverModeSetting->SetDefault( "screensaver.xbmc.builtin.dim" );
     }
-    CheckOSScreenSaverInhibitionSetting();
 
     if( sav_res )
         CDisplaySettings::GetInstance().SetCurrentResolution( RES_DESKTOP, true );
@@ -726,14 +738,6 @@ bool CApplication::InitWindow( RESOLUTION res )
     // set GUI res and force the clear of the screen
     CServiceBroker::GetWinSystem()->GetGfxContext().SetVideoResolution( res, false );
     return true;
-}
-
-bool CApplication::DestroyWindow()
-{
-    bool ret = CServiceBroker::GetWinSystem()->DestroyWindow();
-    CServiceBroker::UnregisterWinSystem();
-    m_pWinSystem.reset();
-    return ret;
 }
 
 bool CApplication::Initialize()
@@ -898,6 +902,7 @@ bool CApplication::Initialize()
 
     CLog::Log( LOGNOTICE, "initialize done" );
 
+  CheckOSScreenSaverInhibitionSetting();
     // reset our screensaver (starts timers etc.)
     ResetScreenSaver();
 
@@ -1102,8 +1107,6 @@ void CApplication::OnSettingAction( std::shared_ptr<const CSetting> setting )
     }
     else if( settingId == CSettings::SETTING_VIDEOSCREEN_GUICALIBRATION )
         CServiceBroker::GetGUI()->GetWindowManager().ActivateWindow( WINDOW_SCREEN_CALIBRATION );
-    else if( settingId == CSettings::SETTING_VIDEOSCREEN_TESTPATTERN )
-        CServiceBroker::GetGUI()->GetWindowManager().ActivateWindow( WINDOW_TEST_PATTERN );
     else if( settingId == CSettings::SETTING_SOURCE_VIDEOS )
     {
         std::vector<std::string> params{ "library://video/files.xml", "return" };
@@ -1556,7 +1559,7 @@ void CApplication::Render()
         return;
 
     // render gui layer
-    if( !m_skipGuiRender )
+  if (m_renderGUI && !m_skipGuiRender)
     {
         if( CServiceBroker::GetWinSystem()->GetGfxContext().GetStereoMode() )
         {
@@ -2475,7 +2478,7 @@ bool CApplication::Cleanup()
         if( winSystem )
         {
             winSystem->DestroyWindow();
-            winSystem->DestroyWindowSystem();
+ //           winSystem->DestroyWindowSystem();
         }
 
         if( m_pGUI )
@@ -2519,6 +2522,14 @@ bool CApplication::Cleanup()
             m_pGUI->Deinit();
             m_pGUI.reset();
         }
+
+    if (winSystem)
+    {
+      winSystem->DestroyWindowSystem();
+      CServiceBroker::UnregisterWinSystem();
+      winSystem = nullptr;
+      m_pWinSystem.reset();
+    }
 
         // Cleanup was called more than once on exit during my tests
         if( m_ServiceManager )
@@ -2841,6 +2852,7 @@ bool CApplication::PlayFile( CFileItem item, const std::string& player, bool bRe
         if( item.GetProperty( "StartPercent" ).isString() )
             fallback = ( double )atof( item.GetProperty( "StartPercent" ).asString().c_str() );
         options.startpercent = item.GetProperty( "StartPercent" ).asDouble( fallback );
+        item.m_lStartOffset = 0;
     }
 
     options.starttime = CUtil::ConvertMilliSecsToSecs( item.m_lStartOffset );
@@ -3417,6 +3429,7 @@ bool CApplication::ToggleDPMS( bool manual )
             m_dpmsIsActive = false;
             m_dpmsIsManual = false;
             SetRenderGUI( true );
+      CheckOSScreenSaverInhibitionSetting();
             CServiceBroker::GetAnnouncementManager()->Announce( ANNOUNCEMENT::GUI, "xbmc", "OnDPMSDeactivated" );
             return m_dpms->DisablePowerSaving();
         }
@@ -3427,6 +3440,7 @@ bool CApplication::ToggleDPMS( bool manual )
                 m_dpmsIsActive = true;
                 m_dpmsIsManual = manual;
                 SetRenderGUI( false );
+        CheckOSScreenSaverInhibitionSetting();
                 CServiceBroker::GetAnnouncementManager()->Announce( ANNOUNCEMENT::GUI, "xbmc", "OnDPMSActivated" );
                 return true;
             }
@@ -3539,7 +3553,10 @@ bool CApplication::WakeUpScreenSaver( bool bPowerOffKeyPressed /* = false */ )
 void CApplication::CheckOSScreenSaverInhibitionSetting()
 {
     // Kodi screen saver overrides OS one: always inhibit OS screen saver then
-    if( !CServiceBroker::GetSettingsComponent()->GetSettings()->GetString( CSettings::SETTING_SCREENSAVER_MODE ).empty() &&
+  // except when DPMS is active (inhibiting the screen saver then might also
+  // disable DPMS again)
+  if (!m_dpmsIsActive && 
+      !CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_SCREENSAVER_MODE).empty() &&
         CServiceBroker::GetWinSystem()->GetOSScreenSaver() )
     {
         if( !m_globalScreensaverInhibitor )
@@ -3591,8 +3608,11 @@ void CApplication::CheckScreenSaverAndDPMS()
     if( haveIdleActivity && CServiceBroker::GetWinSystem()->GetOSScreenSaver() )
     {
         // Always inhibit OS screen saver during these kinds of activities
+    if (!m_screensaverInhibitor)
+    {
         m_screensaverInhibitor = CServiceBroker::GetWinSystem()->GetOSScreenSaver()->CreateInhibitor();
     }
+  }
     else if( m_screensaverInhibitor )
     {
         m_screensaverInhibitor.Release();
@@ -3605,7 +3625,7 @@ void CApplication::CheckScreenSaverAndDPMS()
         maybeScreensaver = false;
     }
 
-    if( m_screensaverActive && m_appPlayer.IsPlayingVideo() && !m_appPlayer.IsPaused() )
+  if (m_screensaverActive && haveIdleActivity)
     {
         WakeUpScreenSaverAndDPMS();
         return;

@@ -83,7 +83,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "utils/Digest.h"
 #include "utils/FileExtensionProvider.h"
-#include <utils/md5.h>
+//#include <utils/md5.h>
 #include <utils/TimeUtils.h>
 #include <utils/URIUtils.h>
 #include <utils/log.h>

@@ -9,7 +9,7 @@
 #include <sys/stat.h>
 
 #include "OverrideFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 using namespace XFILE;
 

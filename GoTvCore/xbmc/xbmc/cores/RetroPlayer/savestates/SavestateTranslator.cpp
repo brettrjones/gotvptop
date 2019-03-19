@@ -12,22 +12,22 @@
 using namespace KODI;
 using namespace RETRO;
 
-SAVE_TYPE CSavestateTranslator::TranslateType(const std::string& type)
+SAVETYPE CSavestateTranslator::TranslateType(const std::string& type)
 {
-  if      (type == SAVESTATE_TYPE_AUTO)   return SAVE_TYPE::AUTO;
-  else if (type == SAVESTATE_TYPE_SLOT)   return SAVE_TYPE::SLOT;
-  else if (type == SAVESTATE_TYPE_MANUAL) return SAVE_TYPE::MANUAL;
+  if      (type == SAVESTATE_TYPE_AUTO)   return SAVETYPE::AUTO;
+  else if (type == SAVESTATE_TYPE_SLOT)   return SAVETYPE::SLOT;
+  else if (type == SAVESTATE_TYPE_MANUAL) return SAVETYPE::MANUAL;
 
-  return SAVE_TYPE::UNKNOWN;
+  return SAVETYPE::UNKNOWN;
 }
 
-std::string CSavestateTranslator::TranslateType(const SAVE_TYPE& type)
+std::string CSavestateTranslator::TranslateType(const SAVETYPE& type)
 {
   switch (type)
   {
-    case SAVE_TYPE::AUTO:   return SAVESTATE_TYPE_AUTO;
-    case SAVE_TYPE::SLOT:   return SAVESTATE_TYPE_SLOT;
-    case SAVE_TYPE::MANUAL: return SAVESTATE_TYPE_MANUAL;
+    case SAVETYPE::AUTO:   return SAVESTATE_TYPE_AUTO;
+    case SAVETYPE::SLOT:   return SAVESTATE_TYPE_SLOT;
+    case SAVETYPE::MANUAL: return SAVESTATE_TYPE_MANUAL;
     default:
       break;
   }

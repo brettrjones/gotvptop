@@ -14,7 +14,6 @@
 
 #define FF_MAX_EXTRADATA_SIZE ((1 << 28) - AV_INPUT_BUFFER_PADDING_SIZE)
 
-
 class CDemuxStreamClientInternal
 {
 public:
@@ -122,7 +121,7 @@ bool CDVDDemuxClient::ParsePacket(DemuxPacket* pkt)
   if (st == nullptr)
     return change;
 
-  if (st->ExtraSize)
+  if (st->ExtraSize || !CodecHasExtraData(st->codec))
     return change;
 
   CDemuxStreamClientInternal* stream = dynamic_cast<CDemuxStreamClientInternal*>(st);
@@ -570,6 +569,7 @@ bool CDVDDemuxClient::IsVideoReady()
   {
     if (stream.first == m_videoStreamPlaying &&
         stream.second->type == STREAM_VIDEO &&
+        CodecHasExtraData(stream.second->codec) &&
         stream.second->ExtraData == nullptr)
       return false;
   }
@@ -604,6 +604,10 @@ std::string CDVDDemuxClient::GetStreamCodecName(int iStreamId)
       strName = "h264";
     else if (stream->codec == AV_CODEC_ID_EAC3)
       strName = "eac3";
+    else if (stream->codec == AV_CODEC_ID_VP8)
+      strName = "vp8";
+    else if (stream->codec == AV_CODEC_ID_VP9)
+      strName = "vp9";
   }
   return strName;
 }
@@ -639,12 +643,15 @@ void CDVDDemuxClient::OpenStream(int id)
 {
   // OpenStream may change some parameters
   // in this case we need to reset our stream properties
-  if (m_IDemux && m_IDemux->OpenStream(id))
+  if (m_IDemux)
   {
+    bool bOpenStream = m_IDemux->OpenStream(id);
+
     CDemuxStream *stream(m_IDemux->GetStream(id));
     if (stream && stream->type == STREAM_VIDEO)
       m_videoStreamPlaying = id;
 
+    if (bOpenStream)
     SetStreamProps(stream, m_streams, true);
   }
 }
@@ -654,5 +661,16 @@ void CDVDDemuxClient::SetVideoResolution(int width, int height)
   if (m_IDemux)
   {
     m_IDemux->SetVideoResolution(width, height);
+  }
+}
+
+bool CDVDDemuxClient::CodecHasExtraData(AVCodecID id)
+{
+  switch (id)
+  {
+  case AV_CODEC_ID_VP9:
+      return false;
+    default:
+      return true;
   }
 }

@@ -23,7 +23,7 @@ CConvolutionKernel::CConvolutionKernel( ESCALINGMETHOD method, int size )
 {
     m_size = size;
     m_floatpixels = new float[ m_size * 4 ];
-    memset( m_floatpixels, 0, m_size * 4 * 4 );
+	memset( m_floatpixels, 0, m_size * 4 * sizeof(float) );
 
     if( method == VS_SCALINGMETHOD_LANCZOS2 )
         Lanczos2();

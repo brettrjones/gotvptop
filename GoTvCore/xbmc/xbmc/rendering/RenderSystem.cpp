@@ -12,7 +12,7 @@
 #include "guilib/GUIFontManager.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/SettingsComponent.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 
 CRenderSystemBase::CRenderSystemBase()
 {

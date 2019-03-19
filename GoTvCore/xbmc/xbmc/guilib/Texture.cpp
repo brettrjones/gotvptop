@@ -20,7 +20,7 @@
 #include "platform/darwin/DarwinUtils.h"
 #endif
 #if defined(TARGET_ANDROID)
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "filesystem/AndroidAppFile.h"
 #endif
 #ifdef TARGET_POSIX

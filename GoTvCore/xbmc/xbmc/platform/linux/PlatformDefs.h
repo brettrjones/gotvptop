@@ -112,7 +112,6 @@ typedef long          __off_t;
 #define WINAPI      __stdcall
 #undef APIENTRY
 struct CXHandle; // forward declaration
-
 typedef CXHandle* HANDLE;
 
 typedef void* HINSTANCE;
@@ -272,8 +271,9 @@ typedef struct _MEMORYSTATUSEX
   uint64_t ullAvailVirtual;
 } MEMORYSTATUSEX, *LPMEMORYSTATUSEX;
 */
-
-#define MAX_PATH PATH_MAX
+#ifndef MAX_PATH
+# define MAX_PATH PATH_MAX
+#endif // MAX_PATH
 
 // CreateFile defines
 #define FILE_FLAG_NO_BUFFERING          0x20000000

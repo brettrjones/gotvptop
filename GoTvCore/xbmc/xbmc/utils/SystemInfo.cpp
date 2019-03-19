@@ -1248,7 +1248,7 @@ std::string CSysInfo::GetVersion()
 
 std::string CSysInfo::GetBuildDate()
 {
-  return StringUtils::Format("%s", __DATE__);
+  return CCompileInfo::GetBuildDate();
 }
 
 bool CSysInfo::HasVideoToolBoxDecoder()

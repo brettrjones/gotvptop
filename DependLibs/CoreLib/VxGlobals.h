@@ -59,8 +59,7 @@ bool			            VxIsAppShuttingDown( void );
 const char *	            VxGetCompanyDomain( void );
 const char *	            VxGetCompanyWebsite( void );
 
-void			            VxSetApplicationName( const char * pAppName );
-const char *	            VxGetApplicationName( void );
+const char *	            VxGetApplicationTitle( void );
 void			            VxSetApplicationNameNoSpaces( const char * pAppName );
 const char *	            VxGetApplicationNameNoSpaces( void );
 void			            VxSetIsApplicationCommercial( bool isCommercial );
@@ -72,7 +71,7 @@ const char *	            VxGetAppVersionString( void );
 
 //============================================================================
 
-std::string&	            VxGetAppDirectory( EAppDir appDir );
+std::string& 	            VxGetAppDirectory( EAppDir appDir );
 
 // exe and app resource paths
 void			            VxSetExeDirectory(const char * exeDir);

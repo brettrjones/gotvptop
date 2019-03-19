@@ -173,7 +173,6 @@ void CAdvancedSettings::Initialize()
   m_DXVACheckCompatibility = false;
   m_DXVACheckCompatibilityPresent = false;
   m_DXVAForceProcessorRenderer = true;
-  m_DXVAAllowHqScaling = true;
   m_videoFpsDetect = 1;
   m_maxTempo = 1.55f;
   m_videoPreferStereoStream = false;
@@ -321,15 +320,33 @@ void CAdvancedSettings::Initialize()
   m_videoTvShowExtraArt = {};
   m_videoTvSeasonExtraArt = {};
   m_videoMovieExtraArt = {};
+  m_videoMovieSetExtraArt = {};
   m_videoMusicVideoExtraArt = {};
 
-  m_iEpgUpdateCheckInterval = 300; /* check if tables need to be updated every 5 minutes */
-  m_iEpgCleanupInterval = 900;     /* remove old entries from the EPG every 15 minutes */
-  m_iEpgActiveTagCheckInterval = 60; /* check for updated active tags every minute */
-  m_iEpgRetryInterruptedUpdateInterval = 30; /* retry an interrupted epg update after 30 seconds */
-  m_iEpgUpdateEmptyTagsInterval = 60; /* override user selectable EPG update interval for empty EPG tags */
-  m_bEpgDisplayUpdatePopup = true; /* display a progress popup while updating EPG data from clients */
-  m_bEpgDisplayIncrementalUpdatePopup = false; /* also display a progress popup while doing incremental EPG updates */
+  m_iEpgUpdateCheckInterval = 300; /* Check every X seconds, if EPG data need to be updated. This does not mean that
+                                      every X seconds an EPG update is actually triggered, it's just the interval how
+                                      often to check whether an update should be triggered. If this value is greater
+                                      than GUI setting 'epg.epgupdate' value, then EPG updates will done with the value
+                                      specified for 'updatecheckinterval', effectively overriding the GUI setting's value. */
+  m_iEpgCleanupInterval = 900; /* Remove old entries from the EPG every X seconds */
+  m_iEpgActiveTagCheckInterval = 60; /* Check for updated active tags every X seconds */
+  m_iEpgRetryInterruptedUpdateInterval = 30; /* Retry an interrupted EPG update after X seconds */
+  m_iEpgUpdateEmptyTagsInterval = 7200; /* If a TV channel has no EPG data, try to obtain data for that channel every
+                                           X seconds. This overrides the GUI setting 'epg.epgupdate' value, but only
+                                           for channels without EPG data. If this value is less than 'updatecheckinterval'
+                                           value, then data update will be done with the interval specified by
+                                           'updatecheckinterval'.
+                                           Example 1: epg.epgupdate = 120 (minutes!), updatecheckinterval = 300,
+                                                      updateemptytagsinterval = 60 => trigger an EPG update for every
+                                                      channel without EPG data every 5 minutes and trigger an EPG update
+                                                      for every channel with EPG data every 2 hours.
+                                           Example 2: epg.epgupdate = 120 (minutes!), updatecheckinterval = 300,
+                                                      updateemptytagsinterval = 3600 => trigger an EPG update for every
+                                                      channel without EPG data every 2 hours and trigger an EPG update
+                                                      for every channel with EPG data every 1 hour. */
+  m_bEpgDisplayUpdatePopup = true; /* Display a progress popup while updating EPG data from clients */
+  m_bEpgDisplayIncrementalUpdatePopup = false; /* Display a progress popup while doing incremental EPG updates, but
+                                                  only if 'displayupdatepopup' is also enabled. */
 
   m_bEdlMergeShortCommBreaks = false;      // Off by default
   m_iEdlMaxCommBreakLength = 8 * 30 + 10;  // Just over 8 * 30 second commercial break.
@@ -385,6 +402,7 @@ void CAdvancedSettings::Initialize()
   m_bPVRAutoScanIconsUserSet       = false;
   m_iPVRNumericChannelSwitchTimeout = 2000;
   m_iPVRTimeshiftThreshold = 10;
+  m_bPVRTimeshiftSimpleOSD = true;
 
   m_cacheMemSize = 1024 * 1024 * 20;
   m_cacheBufferMode = CACHE_BUFFER_MODE_INTERNET; // Default (buffer all internet streams/filesystems)
@@ -431,6 +449,8 @@ void CAdvancedSettings::Initialize()
   m_logLevelHint = m_logLevel = LOG_LEVEL_NORMAL;
   m_extraLogEnabled = false;
   m_extraLogLevels = 0;
+
+  m_openGlDebugging = false;
 
   m_userAgent = g_sysinfo.GetUserAgent();
 
@@ -562,6 +582,12 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
   if (pElement)
   {
     XMLUtils::GetBoolean(pElement, "omxdecodestartwithvalidframe", m_omxDecodeStartWithValidFrame);
+  }
+
+  pElement = pRootElement->FirstChildElement("x11");
+  if (pElement)
+  {
+    XMLUtils::GetBoolean(pElement, "omlsync", m_omlSync);
   }
 
   pElement = pRootElement->FirstChildElement("video");
@@ -708,7 +734,6 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
     m_DXVACheckCompatibilityPresent = XMLUtils::GetBoolean(pElement,"checkdxvacompatibility", m_DXVACheckCompatibility);
 
     XMLUtils::GetBoolean(pElement,"forcedxvarenderer", m_DXVAForceProcessorRenderer);
-    XMLUtils::GetBoolean(pElement, "dxvaallowhqscaling", m_DXVAAllowHqScaling);
     XMLUtils::GetBoolean(pElement, "usedisplaycontrolhwstereo", m_useDisplayControlHWStereo);
     XMLUtils::GetBoolean(pElement, "allowdiscretedecoder", m_allowUseSeparateDeviceForDecoding);
     //0 = disable fps detect, 1 = only detect on timestamps with uniform spacing, 2 detect on all timestamps
@@ -800,6 +825,7 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
     SetExtraArtwork(pElement->FirstChildElement("tvshowextraart"), m_videoTvShowExtraArt);
     SetExtraArtwork(pElement->FirstChildElement("tvseasonextraart"), m_videoTvSeasonExtraArt);
     SetExtraArtwork(pElement->FirstChildElement("movieextraart"), m_videoMovieExtraArt);
+    SetExtraArtwork(pElement->FirstChildElement("moviesetextraart"), m_videoMovieSetExtraArt);
     SetExtraArtwork(pElement->FirstChildElement("musicvideoextraart"), m_videoMusicVideoExtraArt);
   }
 
@@ -1115,6 +1141,7 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
     XMLUtils::GetBoolean(pPVR, "autoscaniconsuserset", m_bPVRAutoScanIconsUserSet);
     XMLUtils::GetInt(pPVR, "numericchannelswitchtimeout", m_iPVRNumericChannelSwitchTimeout, 50, 60000);
     XMLUtils::GetInt(pPVR, "timeshiftthreshold", m_iPVRTimeshiftThreshold, 0, 60);
+    XMLUtils::GetBoolean(pPVR, "timeshiftsimpleosd", m_bPVRTimeshiftSimpleOSD);
   }
 
   TiXmlElement* pDatabase = pRootElement->FirstChildElement("videodatabase");
@@ -1226,6 +1253,8 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
     for(std::vector<std::string>::iterator it = steps.begin(); it != steps.end(); ++it)
       m_seekSteps.push_back(atoi((*it).c_str()));
   }
+
+  XMLUtils::GetBoolean(pRootElement, "opengldebugging", m_openGlDebugging);
 
   // load in the settings overrides
   CServiceBroker::GetSettingsComponent()->GetSettings()->LoadHidden(pRootElement);

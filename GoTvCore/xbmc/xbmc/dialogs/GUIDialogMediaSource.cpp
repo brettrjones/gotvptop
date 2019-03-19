@@ -16,7 +16,7 @@
 #include "guilib/GUIComponent.h"
 #include "guilib/GUIWindowManager.h"
 #include "input/Key.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
@@ -29,7 +29,7 @@
 #include "settings/SettingsComponent.h"
 #include "guilib/LocalizeStrings.h"
 #include "PasswordManager.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "pvr/recordings/PVRRecordingsPath.h"
 
 #if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)

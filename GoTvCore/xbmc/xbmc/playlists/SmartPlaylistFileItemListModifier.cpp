@@ -10,7 +10,7 @@
 
 #include "SmartPlaylistFileItemListModifier.h"
 #include "FileItem.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "playlists/SmartPlayList.h"
 #include "utils/StringUtils.h"
 

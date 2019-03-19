@@ -7,6 +7,7 @@
  */
 
 #pragma once
+#include <atomic>
 
 #include <string>
 #include <vector>
@@ -85,5 +86,22 @@ protected:
   std::string m_strParentPath[2];
   CDirectoryHistory m_history[2];
 
-  int m_errorHeading, m_errorLine;
+	int m_errorHeading = 0;
+	int m_errorLine = 0;
+private:
+  std::atomic_bool m_updating = {false};
+  class CUpdateGuard
+  {
+  public:
+    CUpdateGuard(std::atomic_bool &update) : m_update(update)
+    {
+      m_update = true;
+    }
+    ~CUpdateGuard()
+    {
+      m_update = false;
+    }
+  private:
+    std::atomic_bool &m_update;
+  };
 };

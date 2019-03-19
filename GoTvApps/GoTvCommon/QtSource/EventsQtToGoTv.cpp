@@ -10,7 +10,7 @@
 #include "settings/AdvancedSettings.h"
 #include "ServiceBroker.h"
 #include "settings/SettingsComponent.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 
 #ifndef TARGET_OS_WINDOWS
 // defines that are normally in "WinUser.h"

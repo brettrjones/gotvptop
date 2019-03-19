@@ -22,7 +22,7 @@
 #include "threads/IRunnable.h"
 #include "utils/log.h"
 #include "video/VideoInfoTag.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/Variant.h"
 
 namespace

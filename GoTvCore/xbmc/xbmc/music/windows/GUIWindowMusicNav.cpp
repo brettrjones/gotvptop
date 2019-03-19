@@ -43,8 +43,8 @@
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvCoreUtil.h"
+#include "GoTvUrl.h"
 #include "storage/MediaManager.h"
 
 using namespace XFILE;

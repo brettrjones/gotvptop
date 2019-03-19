@@ -7,7 +7,7 @@
  */
 
 #include "OverrideDirectory.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "filesystem/Directory.h"
 
 using namespace XFILE;

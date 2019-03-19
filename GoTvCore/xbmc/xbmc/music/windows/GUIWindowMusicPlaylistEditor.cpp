@@ -8,7 +8,7 @@
 
 #include "GUIWindowMusicPlaylistEditor.h"
 #include "ServiceBroker.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
@@ -199,7 +199,7 @@ void CGUIWindowMusicPlaylistEditor::PlayItem(int iItem)
     CGUIWindowMusicBase::PlayItem(iItem);
 }
 
-void CGUIWindowMusicPlaylistEditor::OnQueueItem(int iItem)
+void CGUIWindowMusicPlaylistEditor::OnQueueItem(int iItem, bool)
 {
   if (iItem < 0 || iItem >= m_vecItems->Size())
     return;

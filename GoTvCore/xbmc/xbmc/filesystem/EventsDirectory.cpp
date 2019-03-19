@@ -8,7 +8,7 @@
 
 
 #include "EventsDirectory.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "events/EventLog.h"
 #include "utils/StringUtils.h"
 #include "ServiceBroker.h"

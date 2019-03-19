@@ -21,7 +21,7 @@ using namespace RETRO;
 void CSavestate::Reset()
 {
   m_path.clear();
-  m_type = SAVE_TYPE::UNKNOWN;
+  m_type = SAVETYPE::UNKNOWN;
   m_slot = -1;
   m_label.clear();
   m_size = 0;
@@ -55,7 +55,7 @@ void CSavestate::Serialize(CVariant& value) const
 void CSavestate::Deserialize(const CVariant& value)
 {
   m_path = value[SAVESTATE_FIELD_PATH].asString();
-  m_type = static_cast<SAVE_TYPE>(value[SAVESTATE_FIELD_TYPE].asInteger());
+  m_type = static_cast<SAVETYPE>(value[SAVESTATE_FIELD_TYPE].asInteger());
   m_slot = static_cast<int>(value[SAVESTATE_FIELD_SLOT].asInteger());
   m_label = value[SAVESTATE_FIELD_LABEL].asString();
   m_size = static_cast<size_t>(value[SAVESTATE_FIELD_SIZE].asUnsignedInteger());
@@ -71,7 +71,7 @@ void CSavestate::Deserialize(const CVariant& value)
 
 bool CSavestate::Serialize(const std::string& path) const
 {
-  if (m_type == SAVE_TYPE::UNKNOWN)
+  if (m_type == SAVETYPE::UNKNOWN)
   {
     CLog::Log(LOGERROR, "Failed to serialize savestate (unknown type)");
     return false;
@@ -93,7 +93,7 @@ bool CSavestate::Serialize(const std::string& path) const
 
   XMLUtils::SetString(pElement, SAVESTATE_FIELD_PATH, m_path);
   XMLUtils::SetString(pElement, SAVESTATE_FIELD_TYPE, CSavestateTranslator::TranslateType(m_type));
-  if (m_type == SAVE_TYPE::SLOT)
+  if (m_type == SAVETYPE::SLOT)
     XMLUtils::SetInt(pElement, SAVESTATE_FIELD_SLOT, m_slot);
   XMLUtils::SetString(pElement, SAVESTATE_FIELD_LABEL, m_label);
   XMLUtils::SetLong(pElement, SAVESTATE_FIELD_SIZE, static_cast<long>(m_size));
@@ -147,14 +147,14 @@ bool CSavestate::Deserialize(const std::string& path)
     return false;
   }
   m_type = CSavestateTranslator::TranslateType(type);
-  if (m_type == SAVE_TYPE::UNKNOWN)
+  if (m_type == SAVETYPE::UNKNOWN)
   {
     CLog::Log(LOGERROR, "Invalid savestate type: %s", type.c_str());
     return false;
   }
 
   // Slot
-  if (m_type == SAVE_TYPE::SLOT)
+  if (m_type == SAVETYPE::SLOT)
   {
     if (!XMLUtils::GetInt(pElement, SAVESTATE_FIELD_SLOT, m_slot))
     {

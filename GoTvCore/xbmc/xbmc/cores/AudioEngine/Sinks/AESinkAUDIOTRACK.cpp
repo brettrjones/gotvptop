@@ -14,12 +14,14 @@
 # include <android/jni/AudioTrack.h>
 # include <android/jni/Build.h>
 # include "platform/android/activity/XBMCApp.h"
+
 #elif defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
 # include <qtandroid/jni/AudioFormat.h>
 # include <qtandroid/jni/AudioManager.h>
 # include <qtandroid/jni/AudioTrack.h>
 # include <qtandroid/jni/Build.h>
 # include "platform/qt/KodiQtApp.h"
+
 #endif // defined(TARGET_OS_ANDROID) && defined(HAVE_QT_GUI)
 
 #include "cores/AudioEngine/Utils/AEUtil.h"
@@ -181,8 +183,8 @@ jni::CJNIAudioTrack *CAESinkAUDIOTRACK::CreateAudioTrack(int stream, int sampleR
 
   try
   {
-    if (CJNIBase::GetSDKVersion() >= 21)
-    {
+//    if (CJNIBase::GetSDKVersion() >= 21)
+//    {
       CJNIAudioAttributesBuilder attrBuilder;
       attrBuilder.setUsage(CJNIAudioAttributes::USAGE_MEDIA);
       attrBuilder.setContentType(CJNIAudioAttributes::CONTENT_TYPE_MUSIC);
@@ -198,16 +200,16 @@ jni::CJNIAudioTrack *CAESinkAUDIOTRACK::CreateAudioTrack(int stream, int sampleR
                                  bufferSize,
                                  CJNIAudioTrack::MODE_STREAM,
                                  CJNIAudioManager::AUDIO_SESSION_ID_GENERATE);
-    }
-    else
-  {
-    jniAt = new CJNIAudioTrack(stream,
-                               sampleRate,
-                               channelMask,
-                               encoding,
-                               bufferSize,
-                               CJNIAudioTrack::MODE_STREAM);
-  }
+//    }
+//    else
+//  {
+//    jniAt = new CJNIAudioTrack(stream,
+//                               sampleRate,
+//                               channelMask,
+//                               encoding,
+//                               bufferSize,
+//                               CJNIAudioTrack::MODE_STREAM);
+//  }
   }
   catch (const std::invalid_argument& e)
   {

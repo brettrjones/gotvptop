@@ -1,5 +1,5 @@
 #include "rar.hpp"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 ComprDataIO::ComprDataIO()
 {

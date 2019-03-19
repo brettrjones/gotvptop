@@ -20,10 +20,10 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
-#include <utils/auto_buffer.h>
+#include "utils/auto_buffer.h"
 #include "IFileTypes.h"
-#include <PlatformDefs.h>
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "PlatformDefs.h"
+#include "GoTvUrl.h"
 
 class BitstreamStats;
 

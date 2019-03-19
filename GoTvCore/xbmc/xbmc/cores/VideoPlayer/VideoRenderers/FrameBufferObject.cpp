@@ -6,6 +6,11 @@
  *  See LICENSES/README.md for more information.
  */
 
+#include "config_kodi.h"
+#if defined(TARGET_OS_WINDOWS)
+# include <libglew/include/GL/glew.h>
+#endif // defined(TARGET_OS_WINDOWS)
+
 #include "FrameBufferObject.h"
 #include "ServiceBroker.h"
 #include "rendering/RenderSystem.h"

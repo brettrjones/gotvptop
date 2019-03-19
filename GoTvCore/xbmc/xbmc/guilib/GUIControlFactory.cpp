@@ -51,7 +51,7 @@
 #include "GUIAction.h"
 #include "cores/RetroPlayer/guicontrols/GUIGameControl.h"
 #include "games/controllers/guicontrols/GUIGameController.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 
 using namespace KODI;
 using namespace KODI::GUILIB;

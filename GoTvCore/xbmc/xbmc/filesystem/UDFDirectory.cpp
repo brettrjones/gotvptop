@@ -10,8 +10,8 @@
  */
 #include "UDFDirectory.h"
 #include "udf25.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvCoreUtil.h"
+#include "GoTvUrl.h"
 #include "FileItem.h"
 #include "utils/URIUtils.h"
 

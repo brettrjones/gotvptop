@@ -28,7 +28,7 @@
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 #include "messaging/ApplicationMessenger.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 using namespace XFILE;
 using namespace ADDON;
@@ -59,7 +59,8 @@ void CPluginDirectory::CScriptObserver::Process()
 
 void CPluginDirectory::CScriptObserver::Abort()
 {
-  m_bStop = true;
+  // will wait until thread exits
+  StopThread();
 }
 
 CPluginDirectory::CPluginDirectory()

@@ -12,7 +12,7 @@
 #include <utility>
 
 #include "File.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "platform/linux/PlatformDefs.h"
 #include "utils/CharsetConverter.h"
 #include "utils/EndianSwap.h"

@@ -19,7 +19,7 @@
 #include "games/windows/GUIViewStateWindowGames.h"
 #include "PlayListPlayer.h"
 #include "utils/URIUtils.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "GUIPassword.h"
 #include "ViewDatabase.h"
 #include "AutoSwitch.h"

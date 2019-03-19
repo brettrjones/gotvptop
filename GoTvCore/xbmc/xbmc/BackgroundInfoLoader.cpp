@@ -11,7 +11,7 @@
 #include "threads/Thread.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 CBackgroundInfoLoader::CBackgroundInfoLoader() : m_thread (NULL)
 {

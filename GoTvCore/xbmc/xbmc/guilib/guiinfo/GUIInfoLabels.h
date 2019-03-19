@@ -35,7 +35,7 @@
 #define PLAYER_TIME                  27
 #define PLAYER_TIME_REMAINING        28
 #define PLAYER_DURATION              29
-#define PLAYER_SHOWCODEC             30
+// unused 30
 #define PLAYER_SHOWINFO              31
 #define PLAYER_VOLUME                32
 #define PLAYER_MUTED                 33
@@ -422,6 +422,7 @@
 #define SYSTEM_CAN_SUSPEND          751
 #define SYSTEM_CAN_HIBERNATE        752
 #define SYSTEM_CAN_REBOOT           753
+#define SYSTEM_MEDIA_AUDIO_CD       754
 
 #define SLIDESHOW_ISPAUSED          800
 #define SLIDESHOW_ISRANDOM          801

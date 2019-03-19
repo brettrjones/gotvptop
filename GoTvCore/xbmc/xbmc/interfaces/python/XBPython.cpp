@@ -616,13 +616,14 @@ bool XBPython::OnScriptInitialized(ILanguageInvoker *invoker)
     if( !dll_getenv( "PYTHONPATH" ) )
     {
         buf = "PYTHONPATH=" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python/DLLs" ) + ";" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python/Lib" );
-        buf = "PYTHONHOME=" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python" );
-        CLog::Log( LOGDEBUG, "OnScriptInitialized python home (%s)\n ", buf );
+        CEnvironment::putenv( buf ); 
+        CLog::Log( LOGDEBUG, "BRJ OnScriptInitialized python path (%s)\n ", buf );
+
+       buf = "PYTHONOPTIMIZE=1";
         CEnvironment::putenv( buf );
 
-        CLog::Log( LOGDEBUG, "OnScriptInitialized python path (%s)\n ", buf );
-        CEnvironment::putenv( buf );
-        buf = "PYTHONOPTIMIZE=1";
+        buf = "PYTHONHOME=" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python" );
+        CLog::Log( LOGDEBUG, "BRJ OnScriptInitialized python home (%s)\n ", buf );
         CEnvironment::putenv( buf );
     }
     else
@@ -659,7 +660,7 @@ bool XBPython::OnScriptInitialized(ILanguageInvoker *invoker)
     if (!(m_mainThreadState = PyThreadState_Get()))
       CLog::Log(LOGERROR, "Python threadstate is NULL.");
     PyEval_ReleaseLock();
-    CLog::Log( LOGDEBUG, "Python Initialized\n " );
+    CLog::Log( LOGDEBUG, "BRJ Python Initialized\n " );
     m_bInitialized = true;
   }
 

@@ -11,7 +11,7 @@
 #include "cores/paplayer/PAPlayer.h"
 #include "cores/IPlayerCallback.h"
 #include "dialogs/GUIDialogContextMenu.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "FileItem.h"
 #include "profiles/ProfileManager.h"
 #include "settings/lib/SettingsManager.h"

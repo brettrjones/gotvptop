@@ -74,6 +74,8 @@ RESOLUTION CResolutionUtils::ChooseBestResolution(float fps, int width, int heig
 void CResolutionUtils::FindResolutionFromWhitelist(float fps, int width, int height, bool is3D, RESOLUTION &resolution)
 {
   RESOLUTION_INFO curr = CServiceBroker::GetWinSystem()->GetGfxContext().GetResInfo(resolution);
+  CLog::Log(LOGNOTICE, "Whitelist search for: width: %d, height: %d, fps: %0.3f, 3D: %s",
+    width, height, fps, is3D ? "true" : "false");
 
   std::vector<CVariant> indexList = CServiceBroker::GetSettingsComponent()->GetSettings()->GetList(CSettings::SETTING_VIDEOSCREEN_WHITELIST);
   if (indexList.empty())
@@ -89,8 +91,15 @@ void CResolutionUtils::FindResolutionFromWhitelist(float fps, int width, int hei
       if (info.iScreenHeight >= curr.iScreenHeight && info.iScreenWidth >= curr.iScreenWidth &&
           (info.dwFlags & D3DPRESENTFLAG_MODEMASK) == (curr.dwFlags & D3DPRESENTFLAG_MODEMASK))
       {
+        // do not add half refreshrates (25, 29.97 by default) as kodi cannot cope with
+        // them on playback start. Especially interlaced content is not properly detected
+        // and this causes ugly double switching.
+        // This won't allow 25p / 30p playback on native refreshrate by default
+        if ((info.fRefreshRate > 30) || (MathUtils::FloatEquals(info.fRefreshRate, 24.0f, 0.1f)))
+      {
         resString = CDisplaySettings::GetInstance().GetStringFromRes(c);
         indexList.push_back(resString);
+        }
       }
     }
   }

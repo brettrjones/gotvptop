@@ -9,7 +9,7 @@
 #include "DVDCodecUtils.h"
 #include "cores/VideoPlayer/Interface/Addon/TimingConstants.h"
 #include "cores/FFmpeg.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 
 extern "C" {
 #include "libswscale/swscale.h"

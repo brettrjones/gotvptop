@@ -286,7 +286,7 @@ namespace ADDON
   private:
     CAddonMgr& operator=(CAddonMgr const&) = delete;
     /* libcpluff */
-    cp_context_t *m_cp_context;
+    cp_context_t *m_cp_context = nullptr;
     std::unique_ptr<DllLibCPluff> m_cpluff;
     VECADDONS    m_updateableAddons;
 

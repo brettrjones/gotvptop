@@ -12,7 +12,7 @@
 #include "DVDFactoryDemuxer.h"
 #include "cores/VideoPlayer/DVDInputStreams/DVDInputStream.h"
 #include "utils/log.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 
 
 CDemuxMultiSource::CDemuxMultiSource() = default;

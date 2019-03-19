@@ -267,7 +267,7 @@ public:
   /////////////////////////////////////////////////
   bool AddAudioBook(const CFileItem& item);
   bool SetResumeBookmarkForAudioBook(const CFileItem& item, int bookmark);
-  bool GetResumeBookmarkForAudioBook(const std::string& path, int& bookmark);
+  bool GetResumeBookmarkForAudioBook(const CFileItem& item, int& bookmark);
 
   /*! \brief Checks if the given path is inside a folder that has already been scanned into the library
    \param path the path we want to check
@@ -290,7 +290,7 @@ public:
 
   int  AddArtist(const std::string& strArtist, const std::string& strMusicBrainzArtistID, const std::string& strSortName, bool bScrapedMBID = false);
   int  AddArtist(const std::string& strArtist, const std::string& strMusicBrainzArtistID, bool bScrapedMBID = false);
-  bool GetArtist(int idArtist, CArtist& artist, bool fetchAll = true);
+  bool GetArtist(int idArtist, CArtist& artist, bool fetchAll = false);
   bool GetArtistExists(int idArtist);
   int GetLastArtist();
   int  UpdateArtist(int idArtist,
@@ -354,6 +354,7 @@ public:
   int GetSourceFromPath(const std::string& strPath);
   bool AddAlbumSource(int idAlbum, int idSource);
   bool AddAlbumSources(int idAlbum,  const std::string& strPath);
+  bool DeleteAlbumSources(int idAlbum);
   bool GetSources(CFileItemList& items);
 
   bool GetSourcesByArtist(int idArtist, CFileItem* item);

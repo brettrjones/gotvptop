@@ -10,7 +10,7 @@
 
 #include "HTTPImageTransformationHandler.h"
 #include "TextureCacheJob.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "filesystem/ImageFile.h"
 #include "network/WebServer.h"
 #include "network/httprequesthandler/HTTPRequestHandlerUtils.h"

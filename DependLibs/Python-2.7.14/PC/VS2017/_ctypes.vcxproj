@@ -135,7 +135,8 @@
     <_ProjectFileVersion>15.0.28127.55</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(ProjectDir)\..\..\..\..\build-sharedlibs\Windows\$(Platform)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\..\build-sharedlibs\Windows\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)\..\..\..\..\build-sharedlibs\Windows\$(Platform)\</OutDir>
@@ -162,9 +163,10 @@
     </ClCompile>
     <Link>
       <BaseAddress>0x1D1A0000</BaseAddress>
+      <OutputFile>$(OutDir)$(ProjectName)_d.pyd</OutputFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(TargetDir)$(TargetName)_d.pyd" "$(ProjectDir)\..\..\..\..\bin-Windows\python27\$(TargetName)_d.pyd"</Command>
+      <Command>copy /Y "$(TargetDir)$(TargetName)_d.pyd" "$(ProjectDir)\..\..\..\..\bin-Windows\assets\kodi\system\Python\DLLs\$(TargetName)_d.pyd"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -195,7 +197,7 @@
       <OutputFile>$(OutDir)$(ProjectName).pyo</OutputFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(TargetDir)$(TargetName).pyo" "$(ProjectDir)\..\..\..\..\bin-Windows\python27\$(TargetName).pyo"</Command>
+      <Command>copy /Y "$(TargetDir)$(TargetName).pyo" "$(ProjectDir)\..\..\..\..\bin-Windows\assets\kodi\system\Python\DLLs\$(TargetName).pyd"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='PGInstrument|Win32'">

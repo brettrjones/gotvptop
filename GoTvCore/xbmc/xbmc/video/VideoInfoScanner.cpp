@@ -36,8 +36,8 @@
 #include "settings/SettingsComponent.h"
 #include "TextureCache.h"
 #include "threads/SystemClock.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvUrl.h"
+#include "GoTvCoreUtil.h"
 #include "utils/Digest.h"
 #include "utils/FileExtensionProvider.h"
 #include "utils/log.h"
@@ -1443,6 +1443,11 @@ namespace VIDEO
     std::vector<std::string> artTypes = CVideoThumbLoader::GetArtTypes(ContentToMediaType(content, pItem->m_bIsFolder));
     bool lookForThumb = find(artTypes.begin(), artTypes.end(), "thumb") == artTypes.end() &&
                         art.find("thumb") == art.end();
+    if (content == CONTENT_MOVIES)
+    {
+      for (std::string artType : CVideoThumbLoader::GetArtTypes(MediaTypeVideoCollection))
+        artTypes.push_back("set." + artType);
+    }
     // find local art
     if (useLocal)
     {
@@ -1535,7 +1540,7 @@ namespace VIDEO
     }
     return thumb;
   }
-/*BRJ
+/*BRJ does not seem to be used anymore
   std::string CVideoInfoScanner::GetFanart(CFileItem *pItem, bool useLocal)
   {
     if (!pItem)

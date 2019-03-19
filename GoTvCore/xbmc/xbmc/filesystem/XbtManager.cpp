@@ -12,7 +12,7 @@
 
 #include "guilib/XBTF.h"
 #include "guilib/XBTFReader.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 namespace XFILE
 {

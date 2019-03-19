@@ -88,26 +88,30 @@ namespace
 	{
 		switch( appMode )
 		{
+		case eAppModeDefault:
+			return QObject::tr( "GoTv PtoP" );
 		case eAppModeGoTvViewer:
-			return QObject::tr( "GoTvP2P Player" );
+			return QObject::tr( "GoTvPtoP Player" );
 		case eAppModeGoTvProvider:
-			return QObject::tr( "GoTvP2P Provider" );
+			return QObject::tr( "GoTvPtoP Provider" );
 		case eAppModeGoTvStation:
-			return QObject::tr( "GoTvP2P Station" );
+			return QObject::tr( "GoTvPtoP Station" );
 		case eAppModeGoTvNetworkHost:
-			return QObject::tr( "GoTvP2P Network Host" );
+			return QObject::tr( "GoTvPtoP Network Host" );
 		case eAppModeUnknown:
 		default:
-			return QObject::tr( "GoTvP2P Unknown App" );	
+			return QObject::tr( "GoTvPtoP Unknown App" );	
 		}
 	}
 
 	QString GetAppShortName( EDefaultAppMode appMode )
 	{
 		//NOTE: do not translate or will cause new settings each time user changes languages
-		QString appShortName = "GoTvPlayer"; 
+		QString appShortName = VxGetApplicationNameNoSpaces(); 
 		switch( appMode )
 		{
+		case eAppModeDefault:
+			return appShortName;
 		case eAppModeGoTvViewer:
 			return "GoTvPlayer";
 		case eAppModeGoTvProvider:
@@ -130,7 +134,7 @@ static AppSettings playerSettings;
 static VxDataHelper myDataHelper;
     if( !g_AppCommon )
     {
-        g_AppCommon = new AppCommon( *myApp, eAppModeGoTvViewer, playerSettings, myDataHelper, gotv );
+        g_AppCommon = new AppCommon( *myApp, eAppModeDefault, playerSettings, myDataHelper, gotv );
     }
 
     return *g_AppCommon;
@@ -206,11 +210,6 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 }
 
 //============================================================================
-AppCommon::~AppCommon() 
-{
-}
-
-//============================================================================
 IFromGui& AppCommon::getFromGuiInterface( void )
 {
     return m_Engine.getFromGuiInterface();
@@ -233,7 +232,7 @@ void AppCommon::slotStartLoadingFromThread( void )
 	// sets root of application data and transfer directories
 	VxSetRootUserDataDirectory(m_AppSettings.m_strRootUserDataDir.c_str());
 
-	// /appshortName/xfer/		app data transfer directory
+	// Documents Directory/appshortName/xfer/		app data transfer directory
 	VxSetRootXferDirectory( m_AppSettings.m_strRootXferDir.c_str() );
 
 	// create settings database appshortname_settings.db3 in /appshortName/data/

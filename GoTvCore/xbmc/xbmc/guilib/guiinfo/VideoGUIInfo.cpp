@@ -23,6 +23,7 @@
 #include "guilib/StereoscopicsManager.h"
 #include "guilib/WindowIDs.h"
 #include "settings/AdvancedSettings.h"
+#include "settings/lib/Setting.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "utils/StringUtils.h"
@@ -331,10 +332,18 @@ bool CVideoGUIInfo::GetLabel(std::string& value, const CFileItem *item, int cont
         }
         break;
       case LISTITEM_PLOT:
+        {
+          std::shared_ptr<CSettingList> setting(std::dynamic_pointer_cast<CSettingList>( 
+            CServiceBroker::GetSettingsComponent()->GetSettings()->GetSetting(CSettings::SETTING_VIDEOLIBRARY_SHOWUNWATCHEDPLOTS)));
         if (tag->m_type != MediaTypeTvShow &&
             tag->m_type != MediaTypeVideoCollection &&
             tag->GetPlayCount() == 0 &&
-            !CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_VIDEOLIBRARY_SHOWUNWATCHEDPLOTS))
+              setting &&
+              (
+               (tag->m_type == MediaTypeMovie && (!setting->FindIntInList(CSettings::VIDEOLIBRARY_PLOTS_SHOW_UNWATCHED_MOVIES))) ||  
+               (tag->m_type == MediaTypeEpisode && (!setting->FindIntInList(CSettings::VIDEOLIBRARY_PLOTS_SHOW_UNWATCHED_TVSHOWEPISODES)))
+              )
+             ) 
         {
           value = g_localizeStrings.Get(20370);
         }
@@ -343,6 +352,7 @@ bool CVideoGUIInfo::GetLabel(std::string& value, const CFileItem *item, int cont
           value = tag->m_strPlot;
         }
         return true;
+        }
       case LISTITEM_STATUS:
         value = tag->m_strStatus;
         return true;

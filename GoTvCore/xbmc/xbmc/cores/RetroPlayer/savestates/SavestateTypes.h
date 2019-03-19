@@ -20,10 +20,9 @@ namespace RETRO
    */
     enum class SAVE_TYPE
     {
-        UNKNOWN = 0,
-        AUTO = 1,
-        SLOT = 2,
-        MANUAL = 3,
+    UNKNOWN,
+    AUTO,
+    MANUAL,
     };
 }
 }

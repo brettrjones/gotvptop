@@ -40,7 +40,7 @@
 #include "filesystem/File.h"
 #include "cores/FFmpeg.h"
 #include "TextureCache.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "utils/LangCodeExpander.h"
 
 #include <cstdlib>

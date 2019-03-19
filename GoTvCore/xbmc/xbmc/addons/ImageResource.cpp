@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
 */
 #include "ImageResource.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "ServiceBroker.h"
 #include "addons/AddonManager.h"
 #include "filesystem/File.h"

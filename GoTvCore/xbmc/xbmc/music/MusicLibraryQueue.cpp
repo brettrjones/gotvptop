@@ -20,7 +20,7 @@
 #include "music/jobs/MusicLibraryScanningJob.h"
 #include "music/jobs/MusicLibraryJob.h"
 #include "threads/SingleLock.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "utils/Variant.h"
 
 CMusicLibraryQueue::CMusicLibraryQueue()

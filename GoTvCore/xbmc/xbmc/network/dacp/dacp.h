@@ -9,7 +9,7 @@
 #pragma once
 
 #include <string>
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 class CDACP
 {

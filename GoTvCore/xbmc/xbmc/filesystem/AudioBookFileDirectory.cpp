@@ -12,8 +12,8 @@
 #include "music/tags/MusicInfoTag.h"
 #include "TextureDatabase.h"
 #include "guilib/LocalizeStrings.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvUrl.h"
+#include "GoTvCoreUtil.h"
 
 using namespace XFILE;
 

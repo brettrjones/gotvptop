@@ -9,7 +9,7 @@
 #include "IDirectory.h"
 #include "guilib/GUIKeyboardFactory.h"
 #include "messaging/helpers/DialogOKHelper.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "PasswordManager.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"

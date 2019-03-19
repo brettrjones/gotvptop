@@ -7,8 +7,8 @@
  */
 
 #include "MediaSource.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvCoreUtil.h"
+#include "GoTvUrl.h"
 #include "filesystem/MultiPathDirectory.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"

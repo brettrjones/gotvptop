@@ -29,7 +29,7 @@ ActivityAbout::ActivityAbout( AppCommon& app, QWidget * parent )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("About ") );
-	ui.m_AppNameLabel->setText( VxGetApplicationName() );
+	ui.m_AppNameLabel->setText( VxGetApplicationTitle() );
 	ui.m_AppVersionLabel->setText( VxGetAppVersionString() );
 
 	slotRepositionToParent();

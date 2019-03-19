@@ -43,6 +43,7 @@ void CPVRGUITimesInfo::Reset()
   m_iTimeshiftProgressDuration = 0;
 
   m_playingEpgTag.reset();
+  m_playingChannel.reset();
 }
 
 void CPVRGUITimesInfo::UpdatePlayingTag()
@@ -52,7 +53,7 @@ void CPVRGUITimesInfo::UpdatePlayingTag()
 
   if (currentChannel || currentTag)
   {
-    if (!currentTag)
+    if (currentChannel && !currentTag)
       currentTag = currentChannel->GetEPGNow();
 
     CSingleLock lock(m_critSection);
@@ -104,8 +105,17 @@ void CPVRGUITimesInfo::UpdateTimeshiftData()
   int64_t iPlayTime, iMinTime, iMaxTime;
   CServiceBroker::GetDataCacheCore().GetPlayTimes(iStartTime, iPlayTime, iMinTime, iMaxTime);
   bool bPlaying = CServiceBroker::GetDataCacheCore().GetSpeed() == 1.0;
+  const CPVRChannelPtr playingChannel = CServiceBroker::GetPVRManager().GetPlayingChannel();
 
   CSingleLock lock(m_critSection);
+
+  if (playingChannel != m_playingChannel)
+  {
+    // playing channel changed. we need to reset offset and playtime.
+    m_iTimeshiftOffset = 0;
+    m_iTimeshiftPlayTime = 0;
+    m_playingChannel = playingChannel;
+  }
 
   if (!iStartTime)
   {
@@ -166,7 +176,7 @@ void CPVRGUITimesInfo::UpdateTimeshiftProgressData()
     time_t start = 0;
     m_playingEpgTag->StartAsUTC().GetAsTime(start);
     if (start < m_iTimeshiftStartTime ||
-        CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_PVRMENU_USESIMPLETIMESHIFTOSD))
+        CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_bPVRTimeshiftSimpleOSD)
     {
       // playing event started before start of ts buffer or simple ts osd to be used
       m_iTimeshiftProgressStartTime = start;
@@ -189,7 +199,7 @@ void CPVRGUITimesInfo::UpdateTimeshiftProgressData()
     time_t end = 0;
     m_playingEpgTag->EndAsUTC().GetAsTime(end);
     if (end > m_iTimeshiftEndTime ||
-        CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_PVRMENU_USESIMPLETIMESHIFTOSD))
+        CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_bPVRTimeshiftSimpleOSD)
     {
       // playing event will end after end of ts buffer or simple ts osd to be used
       m_iTimeshiftProgressEndTime = end;

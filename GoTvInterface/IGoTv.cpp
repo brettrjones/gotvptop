@@ -208,31 +208,20 @@ void IGoTv::createUserDirs() const
     CDirectory::Create( "special://temp/temp" ); // temp directory for python and dllGetTempPathA
 
 	//BRJ FIXME for PtoP
-    CDirectory::Create( "special://appdata" );
-    CDirectory::Create( "special://appassets" );
-    CDirectory::Create( "special://appassets/gui" );
-    CDirectory::Create( "special://appassets/shaders" );
-    CDirectory::Create( "special://appassets/profile" );
-    CDirectory::Create( "special://accounts" );
-    CDirectory::Create( "special://userxfer" );
-    CDirectory::Create( "special://usergroup" );
+    CDirectory::Create( "special://gotvassets" );
+    CDirectory::Create( "special://gotvassets/gui" );
+    CDirectory::Create( "special://gotvassets/shaders" );
+    CDirectory::Create( "special://gotvassets/profile" );
 
-    // P2P directories
-    //                  /appdata/ShredFilesDb.db3 and app generated files
-    //                  /appassets/gui/ gui assets
-    //                            /shaders/ opengl shaders
-    //                            /profile/ profile default files
-    // user specific directories
-    //                  /accounts/userId/settings/ databases
-    //                  /accounts/userId/blog/ profile and story board user web pages
-    // user xfer directories         
-    //                  /userxfer/userId/downloads
-    //                                 /uploads
-    //                                 /incomplete
-    //                                 /me/			personal recordings
-    //                                 /contacts/	contact assets
-    // user group directories
-    //                 /usergroup/
+	CDirectory::Create( "special://gotvdata" );
+	CDirectory::Create( "special://gotvaccounts" );
+    CDirectory::Create( "special://gotvsettings" );
+
+    CDirectory::Create( "special://gotvxfer" );
+	CDirectory::Create( "special://gotvxfer/downloads" );
+	CDirectory::Create( "special://gotvxfer/uploads" );
+	CDirectory::Create( "special://gotvxfer/incomplete" );
+	CDirectory::Create( "special://gotvxfer/me" );
 
 
       //Let's clear our archive cache before starting up anything more

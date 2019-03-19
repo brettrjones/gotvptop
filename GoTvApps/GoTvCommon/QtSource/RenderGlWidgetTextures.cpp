@@ -137,7 +137,7 @@ void RenderGlWidget::setActiveGlTexture( unsigned int activeTextureNum )
         break;
     }
 
-    VerifyGLState();
+    VerifyGLStateQt();
 }
  
  //============================================================================
@@ -269,7 +269,7 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
 #ifndef GL_BGRA_EXT
 #define GL_BGRA_EXT 0x80E1
 #endif
-    VerifyGLState();
+    VerifyGLStateQt();
 
     GLint internalformat;
     GLenum pixelformat;
@@ -313,7 +313,7 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
     }
 
 //#endif
-    VerifyGLState();
+    VerifyGLStateQt();
 
     if( !texture->m_bCacheMemory )
     {
@@ -336,7 +336,7 @@ void RenderGlWidget::bindToUnit( CQtTexture * texture, unsigned int unit )
 //============================================================================
 void RenderGlWidget::beginGuiTexture( CGUITextureQt * guiTexture, GoTvColor color )
 {
-    VerifyGLState();
+    VerifyGLStateQt();
 
     CBaseTexture* texture = guiTexture->m_texture.m_textures[ guiTexture->m_currentFrame ];
     texture->LoadToGPU();
@@ -359,7 +359,7 @@ void RenderGlWidget::beginGuiTexture( CGUITextureQt * guiTexture, GoTvColor colo
     }
 
     bool hasAlpha = guiTexture->m_texture.m_textures[ guiTexture->m_currentFrame ]->HasAlpha() || guiTexture->m_col[ 3 ] < 255;
-    VerifyGLState();
+    VerifyGLStateQt();
 
     if( guiTexture->m_diffuse.size() )
     {
@@ -400,14 +400,14 @@ void RenderGlWidget::beginGuiTexture( CGUITextureQt * guiTexture, GoTvColor colo
         m_GlF->glDisable( GL_BLEND );
     }
 
-    VerifyGLState();
+    VerifyGLStateQt();
 
 }
 
 //============================================================================
 void RenderGlWidget::drawGuiTexture( CGUITextureQt * guiTexture, float * x, float * y, float * z, const GoTvRect& textureRect, const GoTvRect& diffuse, int orientation )
 {
-    VerifyGLState();
+    VerifyGLStateQt();
 
     PackedVertex vertices[ 4 ];
 
@@ -492,14 +492,14 @@ void RenderGlWidget::drawGuiTexture( CGUITextureQt * guiTexture, float * x, floa
         guiTexture->m_idx.push_back( i + 0 );
     }
 
-    VerifyGLState();
+    VerifyGLStateQt();
 }
 
 
 //============================================================================
 void RenderGlWidget::endGuiTexture( CGUITextureQt * guiTexture )
 {
-    VerifyGLState();
+    VerifyGLStateQt();
 
     if( guiTexture->m_packedVertices.size() )
     {
@@ -536,14 +536,14 @@ void RenderGlWidget::endGuiTexture( CGUITextureQt * guiTexture )
     if( guiTexture->m_diffuse.size() )
         m_GlF->glActiveTexture( GL_TEXTURE0 );
    m_GlF-> glEnable( GL_BLEND );
-   VerifyGLState();
+   VerifyGLStateQt();
 
 }
 
 //============================================================================
 void RenderGlWidget::drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTexture * texture, const GoTvRect * texCoords )
 {
-    VerifyGLState();
+    VerifyGLStateQt();
 
     if( texture )
     {
@@ -554,7 +554,7 @@ void RenderGlWidget::drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTextu
     m_GlF->glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
     m_GlF->glEnable( GL_BLEND );          // Turn Blending On
 
-    VerifyGLState();
+    VerifyGLStateQt();
 
     uint8_t col[ 4 ];
     GLfloat ver[ 4 ][ 3 ];
@@ -610,7 +610,7 @@ void RenderGlWidget::drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTextu
         m_GlF->glDisableVertexAttribArray( tex0Loc );
     }
 
-    VerifyGLState();
+    VerifyGLStateQt();
 }
 
 //============================================================================

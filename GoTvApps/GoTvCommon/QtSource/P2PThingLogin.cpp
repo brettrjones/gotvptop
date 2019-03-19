@@ -226,7 +226,7 @@ void AppCommon::slotListViewTypeChanged( int viewSelectedIdx )
 //============================================================================
 void AppCommon::showUserNameInTitle()
 {
-	QString strTitle = VxGetApplicationName();
+	QString strTitle = VxGetApplicationTitle();
 	strTitle += "-";
 	strTitle += getAccountUserName().c_str();
 	setWindowTitle( strTitle );

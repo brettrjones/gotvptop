@@ -12,7 +12,7 @@
 #include "ServiceBroker.h"
 #include "messaging/ApplicationMessenger.h"
 #include "utils/URIUtils.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "guilib/GUIComponent.h"
 #include "guilib/TextureManager.h"
 #include "guilib/GUILabelControl.h"

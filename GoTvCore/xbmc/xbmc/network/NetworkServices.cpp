@@ -31,7 +31,7 @@
 #include "utils/Variant.h"
 
 #ifdef TARGET_LINUX
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #endif
 #ifdef HAS_AIRPLAY
 #include "network/AirPlayServer.h"

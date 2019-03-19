@@ -10,7 +10,7 @@
 #include "FileItem.h"
 #include "GUIUserMessages.h"
 #include "ServiceBroker.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "events/EventLog.h"
 #include "filesystem/EventsDirectory.h"
 #include "guilib/GUIWindowManager.h"

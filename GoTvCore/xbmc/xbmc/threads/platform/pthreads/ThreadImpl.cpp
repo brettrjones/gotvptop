@@ -119,6 +119,15 @@ ThreadIdentifier CThread::GetCurrentThreadId()
   return pthread_self();
 }
 
+ThreadIdentifier CThread::GetDisplayThreadId(const ThreadIdentifier tid)
+{
+#if defined(TARGET_ANDROID)
+  return pthread_gettid_np(tid);
+#else
+  return tid;
+#endif
+}
+
 bool CThread::IsCurrentThread(const ThreadIdentifier tid)
 {
   return pthread_equal(pthread_self(), tid);

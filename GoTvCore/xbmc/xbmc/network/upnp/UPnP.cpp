@@ -23,7 +23,7 @@
 #include "messaging/ApplicationMessenger.h"
 #include "network/Network.h"
 #include "utils/log.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "cores/playercorefactory/PlayerCoreFactory.h"
 #include "profiles/ProfileManager.h"
 #include "settings/Settings.h"
@@ -34,7 +34,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "utils/TimeUtils.h"
 #include "video/VideoInfoTag.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "utils/SystemInfo.h"
 
 using namespace UPNP;

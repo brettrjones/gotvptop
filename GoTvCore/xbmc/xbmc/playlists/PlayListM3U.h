@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "PlayList.h"
 
 namespace PLAYLIST

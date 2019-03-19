@@ -50,6 +50,9 @@ bool CWinEventsSDL::MessagePump()
         else if (event.active.state & SDL_APPINPUTFOCUS)
         {
           g_application.m_AppFocused = event.active.gain != 0;
+          std::shared_ptr<CAppInboundProtocol> appPort = CServiceBroker::GetAppPort();
+          if (appPort && g_application.m_AppFocused)
+            appPort->SetRenderGUI(g_application.m_AppFocused);
           CServiceBroker::GetWinSystem()->NotifyAppFocusChange(g_application.m_AppFocused);
         }
         break;

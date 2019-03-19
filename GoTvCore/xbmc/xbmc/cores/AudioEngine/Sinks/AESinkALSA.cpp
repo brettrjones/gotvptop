@@ -1087,7 +1087,7 @@ bool CAESinkALSA::OpenPCMDevice(const std::string &name, const std::string &para
 
 void CAESinkALSA::EnumerateDevicesEx(AEDeviceInfoList &list, bool force)
 {
-#if HAVE_LIBUDEV
+#if defined(HAVE_LIBUDEV)
   m_deviceMonitor.Start();
 #endif
 

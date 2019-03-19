@@ -17,7 +17,7 @@
 #include "Texture.h"
 #include "threads/SingleLock.h"
 #include "threads/SystemClock.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
@@ -538,7 +538,8 @@ void CGUITextureManager::Cleanup()
         delete pMap;
         i = m_vecTextures.erase( i );
     }
-
+  m_TexBundle[0].Close();
+  m_TexBundle[1].Close();
     m_TexBundle[ 0 ] = CTextureBundle( true );
     m_TexBundle[ 1 ] = CTextureBundle();
     FreeUnusedTextures();

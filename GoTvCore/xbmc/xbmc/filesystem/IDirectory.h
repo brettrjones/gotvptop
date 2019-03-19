@@ -11,7 +11,7 @@
 #include "config_kodi.h"
 
 #include <string>
-#include <utils/Variant.h>
+#include "utils/Variant.h"
 
 class CFileItemList;
 class CProfileManager;

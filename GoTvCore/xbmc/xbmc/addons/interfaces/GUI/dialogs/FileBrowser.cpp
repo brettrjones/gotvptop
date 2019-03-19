@@ -9,7 +9,7 @@
 #include "FileBrowser.h"
 #include "addons/kodi-addon-dev-kit/include/kodi/gui/dialogs/FileBrowser.h"
 
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "addons/binary-addons/AddonDll.h"
 #include "dialogs/GUIDialogFileBrowser.h"
 #include "settings/MediaSourceSettings.h"

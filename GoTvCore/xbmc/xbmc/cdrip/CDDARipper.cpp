@@ -10,7 +10,7 @@
 #include "CDDARipJob.h"
 #include "ServiceBroker.h"
 #include "utils/StringUtils.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "filesystem/CDDADirectory.h"
 #include "music/tags/MusicInfoTagLoaderFactory.h"
 #include "utils/LabelFormatter.h"

@@ -34,6 +34,7 @@
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxFileUtil.h>
+#include <CoreLib/VxDebug.h>
 
 using namespace XFILE;
 
@@ -49,7 +50,7 @@ OsInterface::OsInterface( IGoTv& gotv )
 
 bool OsInterface::initRun( const CAppParamParser& cmdLineParams )
 {
-    m_CmdLineParams = cmdLineParams;
+    m_CmdLineParams = &cmdLineParams;
     return true;
 }
 
@@ -60,8 +61,15 @@ bool OsInterface::doRun( EAppModule appModule )
         m_IGoTv.setIsAppModuleRunning( appModule, true );
         if( eAppModuleKodi == appModule )
         {
-            int runExitCode = XBMC_Run( true, m_CmdLineParams );
-            setRunResultCode( runExitCode );
+			if( m_CmdLineParams )
+			{ 
+				int runExitCode = XBMC_Run( true, *m_CmdLineParams );
+				setRunResultCode( runExitCode );
+			}
+			else
+			{
+				LogMsg( LOG_SEVERE, "Command Line Params are not set" );
+			}
         }
     }
 
@@ -117,6 +125,7 @@ bool OsInterface::initUserPaths()
 
 bool OsInterface::initDirectories()
 {
+	//=== relative to executable paths ===//
 	//std::string xbmcBinPath = VxFileUtil::makeKodiPath( VxGetExeDirectory().c_str() ); //F:/GoTvCode/bin-OS
     std::string xbmcAssetsPath = CUtil::GetHomePath(); //F:/GoTvCode/bin-OS/assets/kodi 
 
@@ -126,7 +135,8 @@ bool OsInterface::initDirectories()
 	CSpecialProtocol::SetXBMCPath( xbmcAssetsPath );
     CSpecialProtocol::SetXBMCBinAddonPath( xbmcAssetsPath + "/addons" );
 
-    std::string strKodiDataFolder = VxFileUtil::makeKodiPath( VxGetAppKodiDataDirectory().c_str() );
+	//=== relative to writable user data paths ===//
+    std::string strKodiDataFolder = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirAppKodiData ).c_str() );
 
     CSpecialProtocol::SetLogPath( VxFileUtil::makeKodiPath( VxGetAppLogsDirectory().c_str() ) );
     CSpecialProtocol::SetHomePath( strKodiDataFolder );
@@ -134,14 +144,23 @@ bool OsInterface::initDirectories()
     CSpecialProtocol::SetTempPath( URIUtils::AddFileToFolder( strKodiDataFolder, "cache" ) );
 
     // For PtoP
-	// BRJ FIXME
-    //CSpecialProtocol::SetAppDataPath( URIUtils::AddFileToFolder( strKodiDataFolder, "appdata" ) );
-    //CSpecialProtocol::SetAppAssetsPath( URIUtils::AddFileToFolder( strKodiDataFolder, "appassets" ) );
-    //CSpecialProtocol::SetAccountsPath( URIUtils::AddFileToFolder( strKodiDataFolder, "accounts" ) );
-    //CSpecialProtocol::SetUserXferPath( URIUtils::AddFileToFolder( strKodiDataFolder, "userxfer" ) );
-    //CSpecialProtocol::SetUserGroupPath( URIUtils::AddFileToFolder( strKodiDataFolder, "usergroup" ) );
+	std::string gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExeGoTvAssets ).c_str() );
+	CSpecialProtocol::SetAppAssetsPath( URIUtils::AddFileToFolder( gotvDir, "gotvassets" ) );	// /exe/assets/gotv/	
 
-    CEnvironment::setenv( CCompileInfo::GetUserProfileEnvName(), CSpecialProtocol::TranslatePath( "special://masterprofile/" ) );
+	gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirAppGoTvData ).c_str() );
+	CSpecialProtocol::SetAppDataPath( URIUtils::AddFileToFolder( gotvDir, "gotvdata" ) );		// /storage/GoTvPtoP/gotv/	
+
+	gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirUserSpecific ).c_str() );
+	CSpecialProtocol::SetAccountsPath( URIUtils::AddFileToFolder( gotvDir, "gotvaccount" ) );	// /storage/GoTvPtoP/hashnum/accounts/userId/
+
+	gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirSettings ).c_str() );
+	CSpecialProtocol::SetUserGroupPath( URIUtils::AddFileToFolder( gotvDir, "gotvsettings" ) ); // /storage/GoTvPtoP/hashnum/accounts/userId/settings
+   
+	gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirUserXfer ).c_str() ); // Documents Directory/GoTvPtoP/hashnum/userId/   where transfer directories are
+	CSpecialProtocol::SetUserXferPath( URIUtils::AddFileToFolder( gotvDir, "gotvxfer" ) );
+    
+	// Kodi master profile path
+	CEnvironment::setenv( CCompileInfo::GetUserProfileEnvName(), CSpecialProtocol::TranslatePath( "special://masterprofile/" ) );
 
     m_IGoTv.createUserDirs();
 

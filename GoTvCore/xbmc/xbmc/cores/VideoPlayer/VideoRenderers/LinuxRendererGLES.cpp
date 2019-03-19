@@ -54,6 +54,9 @@ CLinuxRendererGLES::~CLinuxRendererGLES()
   UnInit();
 
   ReleaseShaders();
+
+  free(m_planeBuffer);
+  m_planeBuffer = nullptr;
 }
 
 CBaseRenderer* CLinuxRendererGLES::Create(CVideoBuffer *buffer)
@@ -199,7 +202,7 @@ void CLinuxRendererGLES::CalculateTextureSourceRects(int source, int num_planes)
 
       if(field != FIELD_FULL)
       {
-        /* correct for field offsets and chroma offsets */
+        // correct for field offsets and chroma offsets
         float offset_y = 0.5;
         if(plane != 0)
         {
@@ -214,7 +217,7 @@ void CLinuxRendererGLES::CalculateTextureSourceRects(int source, int num_planes)
         p.rect.y1 += offset_y;
         p.rect.y2 += offset_y;
 
-        /* half the height if this is a field */
+        // half the height if this is a field
         p.height  *= 0.5f;
         p.rect.y1 *= 0.5f;
         p.rect.y2 *= 0.5f;
@@ -447,8 +450,9 @@ void CLinuxRendererGLES::UpdateVideoFilter()
   if (m_pVideoFilterShader)
   {
     delete m_pVideoFilterShader;
-    m_pVideoFilterShader = NULL;
+    m_pVideoFilterShader = nullptr;
   }
+
   m_fbo.fbo.Cleanup();
 
   VerifyGLState();
@@ -1026,7 +1030,6 @@ void CLinuxRendererGLES::RenderToFBO(int index, int field)
   vert[2][1] = vert[3][1] = m_fbo.height;
   vert[0][2] = vert[1][2] = vert[2][2] = vert[3][2] = 0.0f;
 
-
   // Setup texture coordinates
   for (int i=0; i<3; i++)
   {
@@ -1150,7 +1153,7 @@ bool CLinuxRendererGLES::RenderCapture(CRenderCapture* capture)
   saveRotatedCoords();//backup current m_rotatedDestCoords
 
   // new video rect is thumbnail size
-  m_destRect.SetRect(0, 0, (float)capture->GetWidth(), (float)capture->GetHeight());
+  m_destRect.SetRect(0, 0, static_cast<float>(capture->GetWidth()), static_cast<float>(capture->GetHeight()));
   MarkDirty();
   syncDestRectToRotatedPoints();//syncs the changed destRect to m_rotatedDestCoords
 
@@ -1171,7 +1174,7 @@ bool CLinuxRendererGLES::RenderCapture(CRenderCapture* capture)
 
   // OpenGLES returns in RGBA order but CRenderCapture needs BGRA order
   // XOR Swap RGBA -> BGRA
-  unsigned char* pixels = (unsigned char*)capture->GetRenderBuffer();
+  unsigned char* pixels = static_cast<unsigned char*>(capture->GetRenderBuffer());
   for (unsigned int i = 0; i < capture->GetWidth() * capture->GetHeight(); i++, pixels+=4)
   {
     std::swap(pixels[0], pixels[2]);
@@ -1189,9 +1192,9 @@ bool CLinuxRendererGLES::RenderCapture(CRenderCapture* capture)
   return true;
 }
 
-//********************************************************************************************************
+//********************************************************************************************************/
 // YV12 Texture creation, deletion, copying + clearing
-//********************************************************************************************************
+//********************************************************************************************************/
 bool CLinuxRendererGLES::UploadYV12Texture(int source)
 {
   CPictureBuffer& buf = m_buffers[source];
@@ -1201,7 +1204,7 @@ bool CLinuxRendererGLES::UploadYV12Texture(int source)
 
   glPixelStorei(GL_UNPACK_ALIGNMENT,1);
 
-  //Load Y plane
+  // load Y plane
   LoadPlane(buf.fields[FIELD_FULL][0], GL_LUMINANCE,
             im->width, im->height,
             im->stride[0], im->bpp, im->plane[0]);
@@ -1232,7 +1235,7 @@ void CLinuxRendererGLES::DeleteYV12Texture(int index)
     return;
   }
 
-  /* finish up all textures, and delete them */
+  // finish up all textures, and delete them
   for(int f = 0;f<MAX_FIELDS;f++)
   {
     for(int p = 0;p<YuvImage::MAX_PLANES;p++)
@@ -1251,7 +1254,7 @@ void CLinuxRendererGLES::DeleteYV12Texture(int index)
 
   for(int p = 0;p<YuvImage::MAX_PLANES;p++)
   {
-    im.plane[p] = NULL;
+    im.plane[p] = nullptr;
 }
 }
 
@@ -1279,7 +1282,7 @@ GLint CLinuxRendererGLES::GetInternalFormat(GLint format, int bpp)
 
 bool CLinuxRendererGLES::CreateYV12Texture(int index)
 {
-  /* since we also want the field textures, pitch must be texture aligned */
+  // since we also want the field textures, pitch must be texture aligned
   unsigned p;
   CPictureBuffer &buf = m_buffers[index];
   YuvImage &im = m_buffers[index].image;
@@ -1557,6 +1560,7 @@ bool CLinuxRendererGLES::CreateNV12Texture(int index)
 
   return true;
 }
+
 void CLinuxRendererGLES::DeleteNV12Texture(int index)
 {
   CPictureBuffer& buf = m_buffers[index];
@@ -1582,11 +1586,14 @@ void CLinuxRendererGLES::DeleteNV12Texture(int index)
         buf.fields[f][p].id = 0;
       }
     }
+
     buf.fields[f][2].id = 0;
   }
 
   for(int p = 0;p<2;p++)
-    im.plane[p] = NULL;
+  {
+    im.plane[p] = nullptr;
+  }
 }
 
 //********************************************************************************************************
@@ -1661,8 +1668,8 @@ bool CLinuxRendererGLES::Supports(ESCALINGMETHOD method)
      method == VS_SCALINGMETHOD_LANCZOS3)
   {
     // if scaling is below level, avoid hq scaling
-    float scaleX = fabs(((float)m_sourceWidth - m_destRect.Width())/m_sourceWidth)*100;
-    float scaleY = fabs(((float)m_sourceHeight - m_destRect.Height())/m_sourceHeight)*100;
+    float scaleX = fabs((static_cast<float>(m_sourceWidth) - m_destRect.Width()) / m_sourceWidth) * 100;
+    float scaleY = fabs((static_cast<float>(m_sourceHeight) - m_destRect.Height()) / m_sourceHeight) * 100;
     int minScale = CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_VIDEOPLAYER_HQSCALERS);
     if (scaleX < minScale && scaleY < minScale)
     {

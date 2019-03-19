@@ -198,7 +198,7 @@ struct CVertexBuffer
 #if defined(HAS_GL) || defined(HAS_GLES) || defined(HAVE_QT_GUI)
   typedef unsigned int BufferHandleType;
 #define  BUFFER_HANDLE_INIT 0
-#elif  HAS_DX
+#elif defined(HAS_DX)
   typedef void* BufferHandleType;
 #define BUFFER_HANDLE_INIT nullptr
 #endif

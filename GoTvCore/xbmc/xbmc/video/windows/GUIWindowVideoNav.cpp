@@ -9,7 +9,7 @@
 #include "GUIWindowVideoNav.h"
 #include "ServiceBroker.h"
 #include "utils/FileUtils.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "GUIPassword.h"
 #include "filesystem/MultiPathDirectory.h"
 #include "filesystem/VideoDatabaseDirectory.h"

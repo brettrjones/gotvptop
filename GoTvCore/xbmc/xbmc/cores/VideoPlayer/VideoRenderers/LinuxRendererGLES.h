@@ -12,14 +12,14 @@
 
 #include "system_gl.h"
 
-#include "FrameBufferObject.h"
-#include "xbmc/guilib/Shader.h"
+#include "BaseRenderer.h"
+#include "cores/VideoPlayer/DVDCodecs/Video/DVDVideoCodec.h"
 #include "cores/VideoSettings.h"
+#include "FrameBufferObject.h"
+#include "guilib/Shader.h"
 #include "RenderFlags.h"
 #include "RenderInfo.h"
 #include "windowing/GraphicContext.h"
-#include "BaseRenderer.h"
-#include "xbmc/cores/VideoPlayer/DVDCodecs/Video/DVDVideoCodec.h"
 
 extern "C" {
 #include "libavutil/mastering_display_metadata.h"
@@ -95,6 +95,10 @@ public:
   virtual bool Supports(ESCALINGMETHOD method) override;
 
 protected:
+  static const int FIELD_FULL{0};
+  static const int FIELD_TOP{1};
+  static const int FIELD_BOT{2};
+
   virtual void Render(unsigned int flags, int index);
   virtual void RenderUpdateVideo(bool clear, unsigned int flags = 0, unsigned int alpha = 255);
 
@@ -157,18 +161,18 @@ protected:
 
   struct CYuvPlane
   {
-    GLuint id;
-    CRect  rect;
+    GLuint id{0};
+    CRect rect{0, 0, 0, 0};
 
-    float  width;
-    float  height;
+    float width{0.0};
+    float height{0.0};
 
-    unsigned texwidth;
-    unsigned texheight;
+    unsigned texwidth{0};
+    unsigned texheight{0};
 
     //pixels per texel
-    unsigned pixpertex_x;
-    unsigned pixpertex_y;
+    unsigned pixpertex_x{0};
+    unsigned pixpertex_y{0};
   };
 
   struct CPictureBuffer
@@ -188,9 +192,9 @@ protected:
     int m_srcTextureBits{8};
     bool m_srcFullRange;
 
-    bool hasDisplayMetadata = false;
+    bool hasDisplayMetadata{false};
     AVMasteringDisplayMetadata displayMetadata;
-    bool hasLightMetadata = false;
+    bool hasLightMetadata{false};
     AVContentLightMetadata lightMetadata;
   };
 
@@ -210,6 +214,7 @@ protected:
   bool m_fullRange;
   AVColorPrimaries m_srcPrimaries;
   bool m_toneMap = false;
+  unsigned char* m_planeBuffer = nullptr;
 
   // clear colour for "black" bars
   float m_clearColour{0.0f};

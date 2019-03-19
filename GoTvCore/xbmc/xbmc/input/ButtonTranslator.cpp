@@ -27,7 +27,7 @@
 #include "utils/log.h"
 #include "utils/XBMCTinyXML.h"
 #include "FileItem.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 
 using namespace KODI;
 

@@ -9,7 +9,7 @@
 #include "PasswordManager.h"
 #include "profiles/ProfileManager.h"
 #include "profiles/dialogs/GUIDialogLockSettings.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/XMLUtils.h"
 #include "settings/SettingsComponent.h"
 #include "threads/SingleLock.h"

@@ -92,7 +92,6 @@ int CWinSystemIOS::GetDisplayIndexFromSettings()
 
 CWinSystemIOS::CWinSystemIOS() : CWinSystemBase()
 {
-  m_iVSyncErrors = 0;
   m_bIsBackgrounded = false;
   m_pDisplayLink = new CADisplayLinkWrapper;
   m_pDisplayLink->callbackClass = [[IOSDisplayLinkCallback alloc] init];
@@ -420,24 +419,6 @@ void CWinSystemIOS::PresentRenderImpl(bool rendered)
   //glFlush;
   if (rendered)
     [g_xbmcController presentFramebuffer];
-}
-
-void CWinSystemIOS::SetVSyncImpl(bool enable)
-{
-  #if 0
-    // set swapinterval if possible
-    void *eglSwapInterval;
-    eglSwapInterval = dlsym( RTLD_DEFAULT, "eglSwapInterval" );
-    if ( eglSwapInterval )
-    {
-      ((void(*)(int))eglSwapInterval)( 1 ) ;
-    }
-  #endif
-  m_iVSyncMode = 10;
-}
-
-void CWinSystemIOS::ShowOSMouse(bool show)
-{
 }
 
 bool CWinSystemIOS::HasCursor()

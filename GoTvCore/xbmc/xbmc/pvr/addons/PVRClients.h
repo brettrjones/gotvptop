@@ -197,14 +197,6 @@ namespace PVR
      */
     PVR_ERROR GetTimerTypes(CPVRTimerTypes& results) const;
 
-    /*!
-     * @brief Get all timer types supported by a certain client.
-     * @param results The container to store the result in.
-     * @param iClientId The id of the client.
-     * @return PVR_ERROR_NO_ERROR if the operation succeeded, the respective PVR_ERROR value otherwise.
-     */
-    PVR_ERROR GetTimerTypes(CPVRTimerTypes& results, int iClientId) const;
-
     //@}
 
     /*! @name Recording methods */

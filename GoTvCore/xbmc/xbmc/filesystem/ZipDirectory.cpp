@@ -9,8 +9,8 @@
 #include "ZipDirectory.h"
 #include "utils/CharsetConverter.h"
 #include "utils/URIUtils.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvCoreUtil.h"
+#include "GoTvUrl.h"
 #include "ZipManager.h"
 #include "FileItem.h"
 #include "filesystem/Directorization.h"

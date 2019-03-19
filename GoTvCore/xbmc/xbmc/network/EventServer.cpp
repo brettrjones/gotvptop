@@ -20,7 +20,7 @@
 #include "utils/SystemInfo.h"
 #include "Application.h"
 #include "ServiceBroker.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 
 #include <cassert>
 #include <map>

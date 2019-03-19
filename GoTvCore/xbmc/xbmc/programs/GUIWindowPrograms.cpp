@@ -7,7 +7,7 @@
  */
 
 #include "GUIWindowPrograms.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "GUIPassword.h"
 #include "addons/GUIDialogAddonInfo.h"
 #include "Autorun.h"

@@ -22,7 +22,7 @@
 #include "Directory.h"
 #include "FileItem.h"
 #include "utils/StringUtils.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "ServiceBroker.h"
 #include "addons/AudioDecoder.h"
 #include "addons/VFSEntry.h"

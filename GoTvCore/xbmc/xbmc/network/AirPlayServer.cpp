@@ -30,7 +30,7 @@
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "input/Key.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "cores/IPlayer.h"
 #include "interfaces/AnnouncementManager.h"
 #ifdef HAS_ZEROCONF

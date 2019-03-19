@@ -36,7 +36,7 @@
 #include <vector>
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "CompileInfo.h"
 
 using namespace XFILE;

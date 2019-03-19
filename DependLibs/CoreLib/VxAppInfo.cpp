@@ -9,7 +9,7 @@
 //=============================================================================
 const char* VxAppInfo::getAppName( void )
 {
-	return VxGetApplicationName();
+	return VxGetApplicationTitle();
 }
 
 //=============================================================================

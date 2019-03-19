@@ -12,7 +12,7 @@
 
 #include "FileItem.h"
 #include "ServiceBroker.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "filesystem/IDirectory.h"
 #ifdef HAS_UPNP
 #include "network/upnp/UPnP.h"

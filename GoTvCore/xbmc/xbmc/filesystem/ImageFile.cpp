@@ -7,7 +7,7 @@
  */
 
 #include "ImageFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "TextureCache.h"
 
 using namespace XFILE;

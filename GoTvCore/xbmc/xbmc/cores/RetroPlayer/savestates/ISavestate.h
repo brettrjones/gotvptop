@@ -8,7 +8,6 @@
 
 #pragma once
 
-
 #include "SavestateTypes.h"
 #include "XBDateTime.h"
 
@@ -20,7 +19,6 @@ namespace KODI
 {
     namespace RETRO
     {
- 
         class ISavestate
         {
         public:

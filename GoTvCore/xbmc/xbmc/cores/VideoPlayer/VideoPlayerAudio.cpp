@@ -77,13 +77,13 @@ CVideoPlayerAudio::~CVideoPlayerAudio()
 bool CVideoPlayerAudio::OpenStream( CDVDStreamInfo hints )
 {
     CLog::Log( LOGNOTICE, "Finding audio codec for: %i", hints.codec );
-#ifdef BRJ_FIX_CRAP
+//#ifdef BRJ_FIX_CRAP //BRJ
     bool allowpassthrough = !CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_VIDEOPLAYER_USEDISPLAYASCLOCK);
     if( m_processInfo.IsRealtimeStream() )
         allowpassthrough = false;
-#else
-    bool allowpassthrough = true;
-#endif // BRJ_FIX_CRAP
+//#else
+//    bool allowpassthrough = true;
+//#endif // BRJ_FIX_CRAP
 
     CAEStreamInfo::DataType streamType = m_audioSink.GetPassthroughStreamType( hints.codec, hints.samplerate );
     CDVDAudioCodec* codec = CDVDFactoryCodec::CreateAudioCodec( hints, m_processInfo,

@@ -33,7 +33,7 @@
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "music/MusicDatabase.h"
 #include "video/VideoDatabase.h"
 #include "guilib/GUIWindowManager.h"

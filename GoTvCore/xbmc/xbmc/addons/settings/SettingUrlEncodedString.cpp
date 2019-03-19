@@ -7,7 +7,7 @@
  */
 
 #include "SettingUrlEncodedString.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "settings/lib/SettingsManager.h"
 
 namespace ADDON

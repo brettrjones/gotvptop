@@ -10,8 +10,8 @@
 #include "AddonManager.h"
 #include "FileItem.h"
 #include "ServiceBroker.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvUrl.h"
+#include "GoTvCoreUtil.h"
 #include "filesystem/CurlFile.h"
 #include "filesystem/Directory.h"
 #include "filesystem/File.h"
@@ -757,6 +757,7 @@ void DetailsFromFileItem<CAlbum>(const CFileItem &item, CAlbum &album)
   album.fRating = item.GetProperty("album.rating").asFloat();
   album.iUserrating = item.GetProperty("album.user_rating").asInteger32();
   album.iVotes = item.GetProperty("album.votes").asInteger32();
+  album.art = item.GetArt();
 
   int nThumbs = item.GetProperty("album.thumbs").asInteger32();
   ParseThumbs(album.thumbURL, item, nThumbs, "album.thumb");
@@ -777,6 +778,7 @@ void DetailsFromFileItem<CArtist>(const CFileItem &item, CArtist &artist)
   artist.strBiography = FromString(item, "artist.biography");
   artist.strDied = FromString(item, "artist.died");
   artist.strDisbanded = FromString(item, "artist.disbanded");
+  artist.art = item.GetArt();
 
   int nAlbums = item.GetProperty("artist.albums").asInteger32();
   artist.discography.reserve(nAlbums);
@@ -946,7 +948,7 @@ std::vector<CScraperUrl> CScraper::FindMovie(XFILE::CCurlFile &fcurl,
           yearScore =
               std::max(0.0, 1 - 0.5 * abs(atoi(sYear.c_str()) - atoi(sCompareYear.c_str())));
 
-        scurlMovie.relevance = fstrcmp(sMatchTitle.c_str(), sCompareTitle.c_str(), 0.0f) + yearScore;
+        scurlMovie.relevance = fstrcmp(sMatchTitle.c_str(), sCompareTitle.c_str(), 0 ) + yearScore;
 
         // reconstruct a title for the user
         if (!sCompareYear.empty())

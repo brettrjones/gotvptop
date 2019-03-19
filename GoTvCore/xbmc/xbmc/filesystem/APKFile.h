@@ -20,7 +20,7 @@
  */
 
 #include "IFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 struct zip;
 struct zip_file;

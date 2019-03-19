@@ -135,6 +135,8 @@ class CAdvancedSettings : public ISettingCallback, public ISettingsHandler
 
     bool  m_omxDecodeStartWithValidFrame;
 
+    bool  m_omlSync = false;
+
     float m_videoSubsDelayRange;
     float m_videoAudioDelayRange;
     bool m_videoUseTimeSeeking;
@@ -177,7 +179,6 @@ class CAdvancedSettings : public ISettingCallback, public ISettingsHandler
     bool m_DXVACheckCompatibility;
     bool m_DXVACheckCompatibilityPresent;
     bool m_DXVAForceProcessorRenderer;
-    bool m_DXVAAllowHqScaling;
     int  m_videoFpsDetect;
     bool m_mediacodecForceSoftwareRendering;
     float m_maxTempo;
@@ -269,6 +270,7 @@ class CAdvancedSettings : public ISettingCallback, public ISettingsHandler
     std::vector<std::string> m_videoTvShowExtraArt;
     std::vector<std::string> m_videoTvSeasonExtraArt;
     std::vector<std::string> m_videoMovieExtraArt;
+    std::vector<std::string> m_videoMovieSetExtraArt;
     std::vector<std::string> m_videoMusicVideoExtraArt;
 
     bool m_bVideoScannerIgnoreErrors;
@@ -331,6 +333,7 @@ class CAdvancedSettings : public ISettingCallback, public ISettingsHandler
     bool m_bPVRAutoScanIconsUserSet; /*!< @brief mark channel icons populated by auto scan as "user set" */
     int m_iPVRNumericChannelSwitchTimeout; /*!< @brief time in msecs after that a channel switch occurs after entering a channel number, if confirmchannelswitch is disabled */
     int m_iPVRTimeshiftThreshold; /*!< @brief time diff between current playing time and timeshift buffer end, in seconds, before a playing stream is displayed as timeshifting. */
+    bool m_bPVRTimeshiftSimpleOSD; /*!< @brief use simple timeshift OSD (with progress only for the playing event instead of progress for the whole ts buffer). */
     DatabaseSettings m_databaseMusic; // advanced music database setup
     DatabaseSettings m_databaseVideo; // advanced video database setup
     DatabaseSettings m_databaseTV;    // advanced tv database setup
@@ -379,6 +382,8 @@ class CAdvancedSettings : public ISettingCallback, public ISettingsHandler
     True to show at the fixed position set in video calibration
     False to show at the bottom of video (default) */
     bool m_videoAssFixedWorks;
+
+    bool m_openGlDebugging;
 
     std::string m_userAgent;
 

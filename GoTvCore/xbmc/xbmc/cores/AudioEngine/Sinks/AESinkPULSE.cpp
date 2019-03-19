@@ -7,7 +7,7 @@
  */
 #include "AESinkPULSE.h"
 #include "utils/log.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "guilib/LocalizeStrings.h"
 #include "Application.h"
 #include "cores/AudioEngine/AESinkFactory.h"

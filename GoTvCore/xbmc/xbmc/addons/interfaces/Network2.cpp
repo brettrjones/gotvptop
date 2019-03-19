@@ -11,7 +11,7 @@
 #include "addons/kodi-addon-dev-kit/include/kodi/Network.h"
 
 #include "PasswordManager.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "addons/binary-addons/AddonDll.h"
 #include "network/DNSNameCache.h"
 #include "network/Network.h"

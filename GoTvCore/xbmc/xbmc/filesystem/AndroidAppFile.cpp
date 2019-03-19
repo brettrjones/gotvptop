@@ -53,8 +53,8 @@
 # include "platform/qt/KodiQtApp.h"
 #endif // defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
 
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvCoreUtil.h"
+#include "GoTvUrl.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
 using namespace XFILE;

@@ -189,7 +189,7 @@ void CDVDAudioCodecFFmpeg::GetData( DVDAudioFrame &frame )
         return;
     }
     
-    LogMsg( LOG_DEBUG, "BRJ CDVDAudioCodecFFmpeg::GetData %d\n", bytes );
+//    LogMsg( LOG_DEBUG, "BRJ CDVDAudioCodecFFmpeg::GetData %d\n", bytes );
     frame.passthrough = false;
     frame.format.m_dataFormat = m_format.m_dataFormat;
     frame.format.m_channelLayout = m_format.m_channelLayout;
@@ -273,7 +273,7 @@ void CDVDAudioCodecFFmpeg::GetData( DVDAudioFrame &frame )
 
 int CDVDAudioCodecFFmpeg::GetData( uint8_t** dst )
 {
-    static int frameCnt = 0;
+//    static int frameCnt = 0;
     int ret = avcodec_receive_frame( m_pCodecContext, m_pFrame );
     if( !ret )
     {
@@ -307,7 +307,7 @@ int CDVDAudioCodecFFmpeg::GetData( uint8_t** dst )
         for( int i = 0; i < planes; i++ )
             dst[ i ] = m_pFrame->extended_data[ i ];
 
-
+/*BRJ
         if( m_pFrame->nb_samples > 16 )
         {
             frameCnt++;
@@ -328,16 +328,17 @@ int CDVDAudioCodecFFmpeg::GetData( uint8_t** dst )
                 }
             }
         }
-
+*/
 
         return m_pFrame->nb_samples * m_pFrame->channels *
             av_get_bytes_per_sample( m_pCodecContext->sample_fmt );
     }
+/*
     else if( ret != -11 )
     {
         frameCnt = 0;
     }
-
+*/
     return 0;
 }
 

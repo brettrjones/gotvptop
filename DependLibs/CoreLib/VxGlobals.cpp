@@ -44,14 +44,14 @@ namespace
 
 	uint16_t			g_u16AppVersion					= 0x104;
 #ifdef DEBUG
-    std::string			g_strApplicationName			= "GoTv PtoP Test App";
-    std::string			g_strApplicationNameNoSpaces	= "GoTvPtoPTestApp";
+    std::string			g_strApplicationTitle			= "GoTv PtoP";
+    std::string			g_strApplicationNameNoSpaces	= "GoTvPtoP";
     std::string			g_strNetworkName				= "GoTvPtoPTestNet";
 	std::string			g_strCompanyWebsite				= "http://www.gotvptop.net";
 	std::string			g_strCompanyDomain				= "www.gotvptop.net";
 	bool				g_IsAppCommercial				= false;
 #else
-    std::string			g_strApplicationName			= "GoTv PtoP";
+    std::string			g_strApplicationTitle			= "GoTv PtoP";
     std::string			g_strApplicationNameNoSpaces	= "GoTvPtoP";
     std::string			g_strNetworkName				= "GoTvPtoPNet";
 	std::string			g_strCompanyWebsite				= "http://www.gotvptop.net";
@@ -96,27 +96,30 @@ namespace
 
 // directory structure on disk
 // exe paths
-// /exe/python17/		python path
+// /exe/								all executables including python
+// /exe/assets/kodi/system/Python/Lib	python libs path
+// /exe/assets/kodi/system/Python/DLLs	python dlls path
 // /exe/assets/kodi		kodi exe assets path
-//            /gotv		ptop assets path
+//            /gotv		gotv assets path
 
 // data storage paths
-// /storage/GoTvPtoP/temp/    temporary files path
-//                  /logs/    log files path
-//                  /appdata/ShredFilesDb.db3 and app generated files
-//                  /kodi/ kodi plugins and writable data directory
-//                  /gotv/gui/ gui assets
-//                           /shaders/ opengl shaders
+// /storage/GoTvPtoP/temp/		temporary files path
+//                  /logs/		log files path
+//                  /gotv/		ShredFilesDb.db3 and app generated files
+//                  /kodi/		kodi plugins and writable data directory
+//                  /gotv/gui/	gui assets
+//						 /shaders/ opengl shaders
 //                           /profile/ profile default files
-// user specific directories.. NOTE: hasnum is 4 digit hash of exe path
-//                  /hashnum/accounts/userId/settings/ databases
-//                  /hashnum/accounts/userId/profile/ profile and story board user web pages
-// user xfer directories         
-//                  /hashnum/userptop/userId/downloads
-//                                      /uploads
-//                                      /incomplete
-//                                      /me/			personal recordings
-//                                      /contacts/	contact assets
+//
+// user specific directories.. NOTE: hasnum is 4 digit hash of exe path and userId is user login name
+//                  /storage/GoTvPtoP/hashnum/accounts/userId/settings/		databases for user settings etc
+//									 /hashnum/accounts/userId/profile/		profile and story board user web pages
+// user xfer directories      
+//                  Documents Directory/GoTvPtoP/hashnum/userId/downloads
+//																/uploads		uploading directory
+//																/incomplete		not yet completed downloads
+//																/me/			personal recordings
+//																/contacts/		contact assets
 
 std::string& VxGetAppDirectory(EAppDir appDir)
 {
@@ -225,16 +228,9 @@ const char * VxGetCompanyWebsite( void )
 }
 
 //============================================================================
-//! set application name
-void VxSetApplicationName( const char * pAppName )
+const char * VxGetApplicationTitle( void )
 {
-	g_strApplicationName = pAppName;
-}
-
-//============================================================================
-const char * VxGetApplicationName( void )
-{
-	return g_strApplicationName.c_str();
+	return g_strApplicationTitle.c_str();
 }
 
 //============================================================================

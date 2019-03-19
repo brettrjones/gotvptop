@@ -18,7 +18,7 @@
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "video/VideoThumbLoader.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "FileItem.h"
 #include "music/MusicThumbLoader.h"
 #include "music/tags/MusicInfoTag.h"

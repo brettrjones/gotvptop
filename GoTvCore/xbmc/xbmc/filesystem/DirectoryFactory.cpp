@@ -57,7 +57,7 @@
 #include "XbtDirectory.h"
 #include "ZipDirectory.h"
 #include "FileItem.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "RSSDirectory.h"
 #ifdef HAS_ZEROCONF
 #include "ZeroconfDirectory.h"

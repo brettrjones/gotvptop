@@ -9,7 +9,7 @@
 #include "DAVFile.h"
 
 #include "DAVCommon.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/log.h"
 #include "DllLibCurl.h"
 #include "utils/XBMCTinyXML.h"

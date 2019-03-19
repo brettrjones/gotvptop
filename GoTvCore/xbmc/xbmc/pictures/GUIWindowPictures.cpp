@@ -9,8 +9,8 @@
 #include "threads/SystemClock.h"
 #include "GUIWindowPictures.h"
 #include "ServiceBroker.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvUrl.h"
+#include "GoTvCoreUtil.h"
 #include "Application.h"
 #include "GUIPassword.h"
 #include "GUIDialogPictureInfo.h"

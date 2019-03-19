@@ -23,6 +23,7 @@
 #include "GoTvUrl.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
+#include "storage/MediaManager.h"
 #include "utils/Variant.h"
 
 #if defined(TARGET_WINDOWS)
@@ -138,6 +139,7 @@ bool CFileUtils::RemoteAccessAllowed(const std::string &strPath)
       return true;
   }
   bool isSource;
+  // Check manually added sources (held in sources.xml)
   for (const std::string& sourceName : SourceNames)
   {
     VECSOURCES* sources = CMediaSourceSettings::GetInstance().GetSources(sourceName);
@@ -145,6 +147,15 @@ bool CFileUtils::RemoteAccessAllowed(const std::string &strPath)
     if (sourceIndex >= 0 && sourceIndex < (int)sources->size() && sources->at(sourceIndex).m_iHasLock != 2 && sources->at(sourceIndex).m_allowSharing)
       return true;
   }
+  // Check auto-mounted sources
+  VECSOURCES sources;
+  g_mediaManager.GetRemovableDrives(sources);   // Sources returned allways have m_allowsharing = true
+  //! @todo Make sharing of auto-mounted sources user configurable
+  int sourceIndex = CUtil::GetMatchingSource(realPath, sources, isSource);
+  if (sourceIndex >= 0 && sourceIndex < static_cast<int>(sources.size()) && 
+      sources.at(sourceIndex).m_iHasLock != 2 && sources.at(sourceIndex).m_allowSharing)
+    return true;
+
   return false;
 }
 
@@ -225,10 +236,12 @@ bool CFileUtils::CheckFileAccessAllowed(const std::string &filePath)
   // ALLOW kodi paths
   const std::vector<std::string> whitelist = {
     CSpecialProtocol::TranslatePath("special://home"),
-    CSpecialProtocol::TranslatePath("special://xbmc")
+    CSpecialProtocol::TranslatePath("special://xbmc"),
+    CSpecialProtocol::TranslatePath("special://musicartistsinfo")
   };
 
   // image urls come in the form of image://... sometimes with a / appended at the end
+  // and can be embedded in a music or video file image://music@...
   // strip this off to get the real file path
   bool isImage = false;
   std::string decodePath = GoTvUrl::Decode(filePath);
@@ -238,6 +251,8 @@ bool CFileUtils::CheckFileAccessAllowed(const std::string &filePath)
     isImage = true;
     decodePath.erase(pos, 8);
     URIUtils::RemoveSlashAtEnd(decodePath);
+    if (StringUtils::StartsWith(decodePath, "music@") || StringUtils::StartsWith(decodePath, "video@"))
+      decodePath.erase(pos, 6);
   }
 
   // check blacklist

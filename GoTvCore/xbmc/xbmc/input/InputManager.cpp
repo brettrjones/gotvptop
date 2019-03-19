@@ -35,7 +35,7 @@
 #include "utils/Geometry.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "settings/lib/Setting.h"

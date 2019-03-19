@@ -12,7 +12,7 @@
 
 #include "filesystem/File.h"
 #include "ServiceBroker.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "utils/Color.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"

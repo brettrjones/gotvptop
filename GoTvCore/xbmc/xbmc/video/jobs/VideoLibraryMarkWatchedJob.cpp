@@ -10,7 +10,7 @@
 
 #include "VideoLibraryMarkWatchedJob.h"
 #include "FileItem.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "filesystem/Directory.h"
 #ifdef HAS_UPNP
 #include "network/upnp/UPnP.h"

@@ -9,7 +9,7 @@
 #include "threads/SystemClock.h"
 #include "MusicSearchDirectory.h"
 #include "music/MusicDatabase.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "FileItem.h"
 #include "utils/log.h"
 #include "guilib/LocalizeStrings.h"

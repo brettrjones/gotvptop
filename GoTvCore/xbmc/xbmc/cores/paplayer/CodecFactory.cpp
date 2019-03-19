@@ -7,7 +7,7 @@
  */
 
 #include "CodecFactory.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "VideoPlayerCodec.h"
 #include "utils/StringUtils.h"
 #include "addons/AudioDecoder.h"

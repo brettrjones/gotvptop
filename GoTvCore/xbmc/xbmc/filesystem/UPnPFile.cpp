@@ -10,7 +10,7 @@
 #include "UPnPDirectory.h"
 #include "FileFactory.h"
 #include "FileItem.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 using namespace XFILE;
 

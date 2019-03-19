@@ -26,7 +26,7 @@
 #include "settings/SettingsComponent.h"
 #include "threads/SystemClock.h"
 #include "threads/SingleLock.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
@@ -188,8 +188,9 @@ CDVDDemuxFFmpeg::~CDVDDemuxFFmpeg()
 
 bool CDVDDemuxFFmpeg::Aborted()
 {
- //   if( m_timeout.IsTimePast() )
- //       return true;
+//BRJ comment out for debugging
+    if( m_timeout.IsTimePast() )
+        return true;
 
     std::shared_ptr<CDVDInputStreamFFmpeg> input = std::dynamic_pointer_cast< CDVDInputStreamFFmpeg >( m_pInput );
     if( input && input->Aborted() )
@@ -298,11 +299,12 @@ bool CDVDDemuxFFmpeg::Open( std::shared_ptr<CDVDInputStream> pInput, bool stream
         if( iformat == nullptr )
         {
             // let ffmpeg decide which demuxer we have to open
+
             bool trySPDIFonly = ( m_pInput->GetContent() == "audio/x-spdif-compressed" );
 
             if( !trySPDIFonly )
             {
-                m_timeout.Set( 30000 );
+//BRJ                m_timeout.Set( 30000 );
                 av_probe_input_buffer( m_ioContext, &iformat, strFile.c_str(), NULL, 0, 0 );
             }
 
@@ -460,11 +462,10 @@ bool CDVDDemuxFFmpeg::Open( std::shared_ptr<CDVDInputStream> pInput, bool stream
     m_bMatroska = strncmp( m_pFormatContext->iformat->name, "matroska", 8 ) == 0;	// for "matroska.webm"
     m_bAVI = strcmp( m_pFormatContext->iformat->name, "avi" ) == 0;
     m_bSup = strcmp( m_pFormatContext->iformat->name, "sup" ) == 0;
-    m_timeout.Set( 30000 );
+//BRJ    m_timeout.Set( 30000 );
 
     if( m_streaminfo )
     {
-
         /* to speed up dvd switches, only analyse very short */
         if( m_pInput->IsStreamType( DVDSTREAM_TYPE_DVD ) )
             av_opt_set_int( m_pFormatContext, "analyzeduration", 500000, 0 );

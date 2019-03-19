@@ -11,7 +11,7 @@
 #include <vector>
 
 #include "IFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "guilib/XBTF.h"
 #include "guilib/XBTFReader.h"
 

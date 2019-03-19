@@ -10,7 +10,7 @@
 
 #include "iimage.h"
 #include "threads/CriticalSection.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 class ImageFactory
 {

@@ -8,7 +8,7 @@
 
 #include "ResourceDirectory.h"
 #include "FileItem.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "filesystem/Directory.h"
 #include "filesystem/ResourceFile.h"
 #include "utils/URIUtils.h"

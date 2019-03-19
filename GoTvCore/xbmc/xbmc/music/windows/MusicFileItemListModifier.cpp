@@ -55,10 +55,16 @@ void CMusicFileItemListModifier::AddQueuingFolder(CFileItemList& items)
   if (items.GetObjectCount() <= 1)
     return;
 
-  switch (directoryNode->GetChildType())
+  auto nodeChildType = directoryNode->GetChildType();
+
+  // No need for "all" when overview node and child node albums or artists
+  if (directoryNode->GetType() == NODE_TYPE_OVERVIEW &&
+     (nodeChildType == NODE_TYPE_ARTIST || nodeChildType == NODE_TYPE_ALBUM))
+    return;
+
+  switch (nodeChildType)
   {
   case NODE_TYPE_ARTIST:
-    if (directoryNode->GetType() == NODE_TYPE_OVERVIEW) return;
     pItem.reset(new CFileItem(g_localizeStrings.Get(15103)));  // "All Artists"
     musicUrl.AppendPath("-1/");
     pItem->SetPath(musicUrl.ToString());
@@ -66,8 +72,6 @@ void CMusicFileItemListModifier::AddQueuingFolder(CFileItemList& items)
 
     //  All album related nodes
   case NODE_TYPE_ALBUM:
-    if (directoryNode->GetType() == NODE_TYPE_OVERVIEW) return;
-    break;
   case NODE_TYPE_ALBUM_RECENTLY_PLAYED:
   case NODE_TYPE_ALBUM_RECENTLY_ADDED:
   case NODE_TYPE_ALBUM_COMPILATIONS:

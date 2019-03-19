@@ -25,8 +25,8 @@
 #include "settings/SettingsComponent.h"
 #include "ServiceBroker.h"
 #include "threads/SingleLock.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvUrl.h"
+#include "GoTvCoreUtil.h"
 #include "utils/Base64.h"
 #include "utils/FileUtils.h"
 #include "utils/log.h"

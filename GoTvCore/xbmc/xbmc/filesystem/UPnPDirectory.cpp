@@ -14,7 +14,7 @@
 #include <libUPnP/Platinum/Source/Devices/MediaServer/PltSyncMediaBrowser.h>
 
 #include "UPnPDirectory.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "network/upnp/UPnP.h"
 #include "network/upnp/UPnPInternal.h"
 #include "FileItem.h"

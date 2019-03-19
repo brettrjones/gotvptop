@@ -56,7 +56,7 @@
 #include "UDFFile.h"
 #include "ImageFile.h"
 #include "ResourceFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/log.h"
 #include "network/WakeOnAccess.h"
 #include "utils/StringUtils.h"
@@ -100,6 +100,7 @@ IFile* CFileFactory::CreateLoader(const GoTvUrl& url)
   else if (url.IsProtocol("musicdb")) return new CMusicDatabaseFile();
   else if (url.IsProtocol("videodb")) return new CVideoDatabaseFile();
   else if (url.IsProtocol("library")) return nullptr;
+  else if (url.IsProtocol("pvr")) return nullptr;
   else if (url.IsProtocol("special")) return new CSpecialProtocolFile();
   else if (url.IsProtocol("multipath")) return new CMultiPathFile();
   else if (url.IsProtocol("image")) return new CImageFile();

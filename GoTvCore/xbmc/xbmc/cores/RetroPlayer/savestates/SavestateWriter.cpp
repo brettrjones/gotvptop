@@ -39,16 +39,16 @@ bool CSavestateWriter::Initialize(const GAME::CGameClient* gameClient, uint64_t 
   CDateTime now = CDateTime::GetCurrentDateTime();
   std::string label = now.GetAsLocalizedDateTime();
 
-  m_savestate.SetType(SAVE_TYPE::AUTO);
+  m_savestate.SetType(SAVETYPE::AUTO);
   m_savestate.SetLabel(label);
   m_savestate.SetGameClient(gameClient->ID());
   m_savestate.SetGamePath(gameClient->GetGamePath());
   m_savestate.SetTimestamp(now);
   m_savestate.SetPlaytimeFrames(frameHistoryCount);
   m_savestate.SetPlaytimeWallClock(frameHistoryCount / m_fps); //! @todo Accumulate playtime instead of deriving it
-#ifdef BRJ_FIX_CRAP
+//#ifdef BRJ_FIX_CRAP
   m_savestate.SetPath(CSavestateUtils::MakePath(m_savestate));
-#endif // BRJ_FIX_CRAP
+//#endif // BRJ_FIX_CRAP
 
   if (m_fps == 0.0)
     return false; // Sanity check
@@ -89,16 +89,16 @@ void CSavestateWriter::WriteThumb()
 
 bool CSavestateWriter::CommitToDatabase()
 {
-#ifdef BRJ_FIX_CRAP
+//#ifdef BRJ_FIX_CRAP
   bool bSuccess = m_db.AddSavestate(m_savestate);
 
   if (!bSuccess)
     CLog::Log(LOGERROR, "Failed to write savestate to database: %s", m_savestate.Path().c_str());
 
   return bSuccess;
-#else
-    return false;
-#endif // BRJ_FIX_CRAP
+//#else
+//    return false;
+//#endif // BRJ_FIX_CRAP
 
 }
 

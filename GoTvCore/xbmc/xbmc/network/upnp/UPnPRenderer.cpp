@@ -26,7 +26,7 @@
 #include "PlayListPlayer.h"
 #include "TextureDatabase.h"
 #include "ThumbLoader.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
 #include "utils/StringUtils.h"

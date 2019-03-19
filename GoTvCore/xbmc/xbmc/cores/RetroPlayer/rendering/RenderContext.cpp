@@ -183,7 +183,7 @@ int CRenderContext::GUIShaderGetUniCol()
 
 CGUIShaderDX* CRenderContext::GetGUIShader()
 {
-#if  HAS_DX
+#if defined(HAS_DX)
   CRenderSystemDX *renderingDX = dynamic_cast<CRenderSystemDX*>(m_rendering);
   if (renderingDX != nullptr)
     return renderingDX->GetGUIShader();

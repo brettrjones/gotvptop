@@ -705,15 +705,9 @@ bool CSettingsManager::SetList(const std::string &id, const std::vector< std::sh
 bool CSettingsManager::FindIntInList(const std::string &id, int value) const
 {
   CSharedLock lock(m_settingsCritical);
-  SettingPtr setting = GetSetting(id);
-  if (setting == nullptr || setting->GetType() != SettingType::List)
-    return false;
+  std::shared_ptr<CSettingList> setting(std::dynamic_pointer_cast<CSettingList>(GetSetting(id)));
 
-  for (const auto item : std::static_pointer_cast<CSettingList>(setting)->GetValue())
-    if (item->GetType() == SettingType::Integer && std::static_pointer_cast<CSettingInt>(item)->GetValue() == value)
-      return true;
-
-  return false;
+  return setting && setting->FindIntInList(value);
 }
 
 bool CSettingsManager::SetDefault(const std::string &id)
@@ -743,13 +737,22 @@ void CSettingsManager::AddCondition(const std::string &condition)
   m_conditions.AddCondition(condition);
 }
 
-void CSettingsManager::AddCondition(const std::string &identifier, SettingConditionCheck condition, void *data /*= nullptr*/)
+void CSettingsManager::AddDynamicCondition(const std::string &identifier, SettingConditionCheck condition, void *data /*= nullptr*/)
 {
   CExclusiveLock lock(m_critical);
   if (identifier.empty() || condition == nullptr)
     return;
 
-  m_conditions.AddCondition(identifier, condition, data);
+  m_conditions.AddDynamicCondition(identifier, condition, data);
+}
+
+void CSettingsManager::RemoveDynamicCondition(const std::string &identifier)
+{
+  CExclusiveLock lock(m_critical);
+  if (identifier.empty())
+    return;
+
+  m_conditions.RemoveDynamicCondition(identifier);
 }
   
 bool CSettingsManager::Serialize(TiXmlNode *parent) const

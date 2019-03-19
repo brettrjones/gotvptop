@@ -9,7 +9,7 @@
 #include "RetroPlayerAutoSave.h"
 #include "games/GameSettings.h"
 #include "utils/log.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 using namespace KODI;
 using namespace RETRO;

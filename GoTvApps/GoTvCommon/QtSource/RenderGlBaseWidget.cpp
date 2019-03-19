@@ -99,7 +99,7 @@ void RenderGlBaseWidget::initializeGL( void )
 
 //============================================================================
 #ifdef DEBUG
-void  RenderGlBaseWidget::VerifyGLStateDbg( const char* szfile, const char* szfunction, int lineno )
+void  RenderGlBaseWidget::VerifyGLStateQtDbg( const char* szfile, const char* szfunction, int lineno )
 {
     GLenum err = glGetError();
     if( err == GL_NO_ERROR )
@@ -112,7 +112,7 @@ void  RenderGlBaseWidget::VerifyGLStateDbg( const char* szfile, const char* szfu
 
 }
 #else
-void RenderGlBaseWidget::VerifyGLState()
+void RenderGlBaseWidget::VerifyGLStateQt()
 {
     GLenum err = glGetError();
     if( err == GL_NO_ERROR )

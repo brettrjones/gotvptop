@@ -8,7 +8,7 @@
 
 #include "GUIDialogFileBrowser.h"
 #include "ServiceBroker.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "network/GUIDialogNetworkSetup.h"
@@ -33,7 +33,7 @@
 #include "input/Key.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/Variant.h"
 #include "utils/FileExtensionProvider.h"
 #include "messaging/helpers/DialogOKHelper.h"

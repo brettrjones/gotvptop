@@ -125,7 +125,7 @@ private:
   bool m_bTransitionImmediately;
 
   CCriticalSection m_textureAccess;
-#if HAS_DX
+#ifdef HAS_DX
   Microsoft::WRL::ComPtr<ID3D11Buffer> m_vb;
   bool UpdateVertexBuffer(Vertex *vertices);
 #endif

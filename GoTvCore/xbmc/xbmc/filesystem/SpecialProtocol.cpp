@@ -8,8 +8,8 @@
 
 #include "SpecialProtocol.h"
 #include "ServiceBroker.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvUrl.h"
+#include "GoTvCoreUtil.h"
 #include "windowing/GraphicContext.h"
 #include "profiles/ProfileManager.h"
 #include "settings/AdvancedSettings.h"
@@ -97,6 +97,7 @@ void CSpecialProtocol::SetLogPath( const std::string &dir )
     SetPath( "logpath", dir );
 }
 
+// BRJ FIXME
 void CSpecialProtocol::SetAppDataPath( const std::string &dir )
 {
     SetPath( "appdata", dir );
@@ -155,14 +156,15 @@ std::string CSpecialProtocol::TranslatePath( const GoTvUrl &url )
         return url.Get();
     }
 
+/* BRJ
     std::string fullPath( url.Get() );
     if( GetPath( fullPath ).size() )
     {
         return GetPath( fullPath );
     }
+*/
 
     std::string FullFileName = url.GetFileName();
-
 
     std::string translatedPath;
     std::string FileName;
@@ -192,6 +194,8 @@ std::string CSpecialProtocol::TranslatePath( const GoTvUrl &url )
         translatedPath = URIUtils::AddFileToFolder(CServiceBroker::GetSettingsComponent()->GetSettings()->GetString( CSettings::SETTING_AUDIOCDS_RECORDINGPATH ), FileName);
     else if( RootDir == "screenshots" )
         translatedPath = URIUtils::AddFileToFolder( CServiceBroker::GetSettingsComponent()->GetSettings()->GetString( CSettings::SETTING_DEBUG_SCREENSHOTPATH ), FileName );
+  else if (RootDir == "musicartistsinfo")
+    translatedPath = URIUtils::AddFileToFolder(CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_MUSICLIBRARY_ARTISTSFOLDER), FileName);
     else if( RootDir == "musicplaylists" )
         translatedPath = URIUtils::AddFileToFolder( CUtil::MusicPlaylistsLocation(), FileName );
     else if( RootDir == "videoplaylists" )
@@ -333,6 +337,6 @@ std::string CSpecialProtocol::GetPath( const std::string &key )
     std::map<std::string, std::string>::iterator it = m_pathMap.find( key );
     if( it != m_pathMap.end() )
         return it->second;
-
+  assert(false);
     return "";
 }

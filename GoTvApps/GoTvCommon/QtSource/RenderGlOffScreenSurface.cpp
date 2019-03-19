@@ -439,7 +439,7 @@ QImage RenderGlOffScreenSurface::grabFramebufferInternal( QOpenGLFramebufferObje
 #endif // !defined(QT_OPENGL_ES_2)
     m_functions->glBindFramebuffer( GL_FRAMEBUFFER, m_fbo->handle() );
 
-    m_GlWidget->VerifyGLState();
+    m_GlWidget->VerifyGLStateQt();
 
     return ( image.mirrored() );
 }  // RenderGlOffScreenSurface::grabFramebufferInternal

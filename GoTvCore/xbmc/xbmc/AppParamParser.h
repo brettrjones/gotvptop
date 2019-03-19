@@ -37,5 +37,5 @@ private:
     void DisplayVersion();
 
     std::string m_settingsFile;
-    CFileItemList * m_playlist = nullptr;
+	std::unique_ptr<CFileItemList> m_playlist;
 };

@@ -35,6 +35,7 @@
 #include <android/jni/RecognizerIntent.h>
 #include <android/jni/ArrayList.h>
 #include "platform/android/activity/XBMCApp.h"
+
 #define ACTION_RECOGNIZE_SPEECH_REQID 543
 #elif defined(TARGET_ANDROID) && defined(HAVE_QT_GUI)
 # include "platform/qt/KodiQtApp.h"

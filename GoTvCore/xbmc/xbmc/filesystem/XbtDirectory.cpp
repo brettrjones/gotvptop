@@ -10,7 +10,7 @@
 
 #include "XbtDirectory.h"
 #include "FileItem.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "filesystem/Directorization.h"
 #include "filesystem/XbtManager.h"
 #include "guilib/XBTF.h"

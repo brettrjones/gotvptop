@@ -345,7 +345,7 @@ bool CWinSystemWin32::BlankNonActiveMonitors(bool bBlank)
   }
 
   // Move a blank window in front of every display, except the current display.
-  for (size_t i = 0; i < m_displays.size(); ++i)
+  for (size_t i = 0, j = 0; i < m_displays.size(); ++i)
   {
     MONITOR_DETAILS& details = m_displays[i];
     if (details.hMonitor == m_hMonitor)
@@ -353,11 +353,12 @@ bool CWinSystemWin32::BlankNonActiveMonitors(bool bBlank)
 
     RECT rBounds = ScreenRect(details.hMonitor);
     // move and resize the window
-    SetWindowPos(m_hBlankWindows[i], nullptr, rBounds.left, rBounds.top,
+    SetWindowPos(m_hBlankWindows[j], nullptr, rBounds.left, rBounds.top,
       rBounds.right - rBounds.left, rBounds.bottom - rBounds.top,
       SWP_NOACTIVATE);
 
-    ShowWindow(m_hBlankWindows[i], SW_SHOW | SW_SHOWNOACTIVATE);
+    ShowWindow(m_hBlankWindows[j], SW_SHOW | SW_SHOWNOACTIVATE);
+    j++;
   }
 
   if(m_hWnd)
@@ -520,11 +521,8 @@ bool CWinSystemWin32::SetFullScreen(bool fullScreen, RESOLUTION_INFO& res, bool 
   bool changeScreen = false;   // display is changed
   bool stereoChange = IsStereoEnabled() != (CServiceBroker::GetWinSystem()->GetGfxContext().GetStereoMode() == RENDER_STEREO_MODE_HARDWAREBASED);
 
-  if ( m_nWidth != res.iWidth
-    || m_nHeight != res.iHeight
-    || m_fRefreshRate != res.fRefreshRate
-    || oldMonitor->hMonitor != newMonitor->hMonitor
-    || stereoChange)
+  if ( m_nWidth != res.iWidth || m_nHeight != res.iHeight  || m_fRefreshRate != res.fRefreshRate ||
+      oldMonitor->hMonitor != newMonitor->hMonitor || stereoChange || m_bFirstResChange)
   {
     if (oldMonitor->hMonitor != newMonitor->hMonitor)
       changeScreen = true;
@@ -532,12 +530,17 @@ bool CWinSystemWin32::SetFullScreen(bool fullScreen, RESOLUTION_INFO& res, bool 
   }
 
   if (state == m_state && !forceChange)
+  {
+    m_bBlankOtherDisplay = blankOtherDisplays;
+    BlankNonActiveMonitors(m_bBlankOtherDisplay);
     return true;
+  }
 
   // entering to stereo mode, limit resolution to 1080p@23.976
   if (stereoChange && !IsStereoEnabled() && res.iWidth > 1280)
   {
-    res = CDisplaySettings::GetInstance().GetResolutionInfo(CResolutionUtils::ChooseBestResolution(24.f / 1.001f, 1920, 1080, true));
+    res = CDisplaySettings::GetInstance().GetResolutionInfo(
+        CResolutionUtils::ChooseBestResolution(24.f / 1.001f, 1920, 1080, true));
   }
 
   if (m_state == WINDOW_STATE_WINDOWED)
@@ -569,6 +572,7 @@ bool CWinSystemWin32::SetFullScreen(bool fullScreen, RESOLUTION_INFO& res, bool 
     OnScreenChange(newMonitor->hMonitor);
   }
 
+  m_bFirstResChange = false;
   m_bFullScreen = fullScreen;
   m_hMonitor = newMonitor->hMonitor;
   m_nWidth = res.iWidth;
@@ -620,7 +624,10 @@ bool CWinSystemWin32::SetFullScreen(bool fullScreen, RESOLUTION_INFO& res, bool 
     CenterCursor();
 
   CreateBackBuffer();
+
+  BlankNonActiveMonitors(m_bBlankOtherDisplay);
   m_IsAlteringWindow = false;
+
   return true;
 }
 
@@ -638,8 +645,16 @@ bool CWinSystemWin32::DPIChanged(WORD dpi, RECT windowRect) const
   {
     MONITORINFOEX monitorInfo;
     monitorInfo.cbSize = sizeof(MONITORINFOEX);
-    GetMonitorInfo(hMon, &monitorInfo);
-    RECT wr = monitorInfo.rcWork;
+    GetMonitorInfoW(hMon, &monitorInfo);
+
+    if (m_state == WINDOW_STATE_FULLSCREEN_WINDOW ||
+        m_state == WINDOW_STATE_FULLSCREEN)
+    {
+      resizeRect = monitorInfo.rcMonitor; // the whole screen
+    }
+    else
+    {
+      RECT wr = monitorInfo.rcWork; // it excludes task bar
     long wrWidth = wr.right - wr.left;
     long wrHeight = wr.bottom - wr.top;
     long resizeWidth = resizeRect.right - resizeRect.left;
@@ -654,6 +669,7 @@ bool CWinSystemWin32::DPIChanged(WORD dpi, RECT windowRect) const
     if (resizeHeight > wrHeight)
     {
       resizeRect.bottom = resizeRect.top + wrHeight;
+      }
     }
   }
 

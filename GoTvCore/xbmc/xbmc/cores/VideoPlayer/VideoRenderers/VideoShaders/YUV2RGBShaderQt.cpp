@@ -19,6 +19,10 @@
  *
  */
 
+#if defined(TARGET_OS_WINDOWS)
+# include <libglew/include/GL/glew.h>
+#endif // defined(TARGET_OS_WINDOWS)
+
 #include "../RenderFlags.h"
 #include "YUV2RGBShaderQt.h"
 #include "YUVMatrix.h"

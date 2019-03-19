@@ -98,7 +98,7 @@ bool CActiveAEResampleFFMPEG::Init(SampleConfig dstConfig, SampleConfig srcConfi
         av_opt_set_double( m_pContext, "rematrix_maxval", 1.0, 0 );
     }
 
-  //BRJ av_opt_set_double(m_pContext, "center_mix_level", centerMix, 0);
+  av_opt_set_double(m_pContext, "center_mix_level", centerMix, 0);
 
     if( remapLayout )
     {
@@ -217,7 +217,6 @@ int CActiveAEResampleFFMPEG::Resample( uint8_t **dst_buffer, int dst_samples, ui
             return -1;
         }
     }
-
 
     //! @bug libavresample isn't const correct
     int ret = swr_convert(m_pContext, dst_buffer, dst_samples, const_cast<const uint8_t**>(src_buffer), src_samples);

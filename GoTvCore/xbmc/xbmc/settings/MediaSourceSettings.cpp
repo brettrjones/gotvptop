@@ -10,8 +10,8 @@
 #include <string>
 
 #include "MediaSourceSettings.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvUrl.h"
+#include "GoTvCoreUtil.h"
 #include "filesystem/File.h"
 #include "profiles/ProfileManager.h"
 #include "settings/SettingsComponent.h"

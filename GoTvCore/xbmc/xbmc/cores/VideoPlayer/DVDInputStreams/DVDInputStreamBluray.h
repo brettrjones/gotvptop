@@ -130,7 +130,7 @@ protected:
   static void OverlayClear(SPlane& plane, int x, int y, int w, int h);
   static void OverlayInit (SPlane& plane, int w, int h);
 
-  DllLibbluray* m_dll;
+  DllLibbluray* m_dll = nullptr;
 
   IVideoPlayer* m_player = nullptr;
   BLURAY* m_bd = nullptr;

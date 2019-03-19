@@ -19,7 +19,7 @@ CSavestateReader::~CSavestateReader() = default;
 bool CSavestateReader::Initialize(const std::string& path, const GAME::CGameClient* gameClient)
 {
   bool bSuccess = false;
-#ifdef BRJ_FIX_CRAP
+//#ifdef BRJ_FIX_CRAP
 
   CLog::Log(LOGDEBUG, "Loading savestate from %s", path.c_str());
 
@@ -33,7 +33,7 @@ bool CSavestateReader::Initialize(const std::string& path, const GAME::CGameClie
   }
   else
     CLog::Log(LOGERROR, "Failed to query savestate %s", path.c_str());
-#endif // BRJ_FIX_CRAP
+//#endif // BRJ_FIX_CRAP
 
   return bSuccess;
 }

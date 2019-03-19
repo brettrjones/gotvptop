@@ -12,7 +12,7 @@
 
 #include "FileItem.h"
 #include "filesystem/Directory.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "settings/lib/Setting.h"
 #include "utils/log.h"
 #include "utils/XBMCTinyXML.h"

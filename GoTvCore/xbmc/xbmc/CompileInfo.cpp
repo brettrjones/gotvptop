@@ -26,6 +26,32 @@
 #include <string>
 #include <algorithm>
 
+#ifndef DATE
+#ifdef __DATE__
+#define DATE __DATE__
+#else
+#define DATE "xx/xx/xx"
+#endif
+#endif
+
+#ifndef TIME
+#ifdef __TIME__
+#define TIME __TIME__
+#else
+#define TIME "xx:xx:xx"
+#endif
+#endif
+
+ /* XXX Only unix build process has been tested */
+#ifndef GITVERSION
+#define GITVERSION ""
+#endif
+#ifndef GITTAG
+#define GITTAG ""
+#endif
+#ifndef GITBRANCH
+#define GITBRANCH ""
+#endif
 
 int CCompileInfo::GetMajor()
 {
@@ -150,5 +176,16 @@ const char* CCompileInfo::GetUserProfileEnvName()
 
 const char* CCompileInfo::GetCopyrightYears()
 {
-    return "2005-2018";
+    return "2005-2019";
+}
+
+std::string  CCompileInfo::GetBuildDate()
+{
+	const std::string bdate = "20190318";
+	if( !bdate.empty() )
+	{
+		std::string datestamp = bdate.substr( 0, 4 ) + "-" + bdate.substr( 4, 2 ) + "-" + bdate.substr( 6, 2 );
+		return datestamp;
+	}
+	return "1970-01-01";
 }

@@ -47,8 +47,8 @@
 #include "storage/MediaManager.h"
 #include "TextureCache.h"
 #include "threads/SystemClock.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvUrl.h"
+#include "GoTvCoreUtil.h"
 #include "utils/FileUtils.h"
 #include "utils/LegacyPathTranslation.h"
 #include "utils/log.h"
@@ -867,7 +867,7 @@ int CMusicDatabase::AddAlbum(const std::string& strAlbum, const std::string& str
          stored for it.  Most values here should be the same across all songs anyway, but it does mean
          that if there's any inconsistencies then only the last folders information will be taken.
 
-         We make sure we clear out the link tables (album artists, album genres) and we reset
+         We make sure we clear out the link tables (album artists, album sources) and we reset
          the last scraped time to make sure that online metadata is re-fetched. */
       int idAlbum = m_pDS->fv("idAlbum").get_asInt();
       m_pDS->close();
@@ -896,6 +896,7 @@ int CMusicDatabase::AddAlbum(const std::string& strAlbum, const std::string& str
         idAlbum);
       m_pDS->exec(strSQL);
       DeleteAlbumArtistsByAlbum(idAlbum);
+      DeleteAlbumSources(idAlbum);
       return idAlbum;
     }
   }
@@ -1364,6 +1365,7 @@ bool CMusicDatabase::GetArtist(int idArtist, CArtist &artist, bool fetchAll /* =
 {
   try
   {
+    unsigned int time = XbmcThreads::SystemClockMillis();
     if (NULL == m_pDB.get()) return false;
     if (NULL == m_pDS.get()) return false;
 
@@ -1374,7 +1376,20 @@ bool CMusicDatabase::GetArtist(int idArtist, CArtist &artist, bool fetchAll /* =
     if (fetchAll)
       strSQL = PrepareSQL("SELECT * FROM artistview LEFT JOIN discography ON artistview.idArtist = discography.idArtist WHERE artistview.idArtist = %i", idArtist);
     else
-      strSQL = PrepareSQL("SELECT * FROM artistview WHERE artistview.idArtist = %i", idArtist);
+      // Same fields as artistview, but don't fetch dateadded when value not 
+      // needed. MySQL very slow for view with subquery column with aggregate
+      //! @todo replace with artistview once dateadded is column of artist table
+      strSQL = PrepareSQL("SELECT "
+        "idArtist, strArtist, strSortName, "
+        "strMusicBrainzArtistID, "
+        "strType, strGender, strDisambiguation, "
+        "strBorn, strFormed, strGenres,"
+        "strMoods, strStyles, strInstruments, "
+        "strBiography, strDied, strDisbanded, "
+        "strYearsActive, strImage, strFanart, "
+        "bScrapedMBID, lastScraped, "
+        "'' AS dateAdded "
+        "FROM artist WHERE idArtist = %i", idArtist);
 
     if (!m_pDS->query(strSQL)) return false;
     if (m_pDS->num_rows() == 0)
@@ -1398,6 +1413,7 @@ bool CMusicDatabase::GetArtist(int idArtist, CArtist &artist, bool fetchAll /* =
       }
     }
     m_pDS->close(); // cleanup recordset data
+    CLog::Log(LOGDEBUG, LOGDATABASE, "{0}({1}) - took {2} ms", __FUNCTION__, strSQL, XbmcThreads::SystemClockMillis() - time);
     return true;
   }
   catch (...)
@@ -1480,9 +1496,10 @@ bool CMusicDatabase::GetArtistDiscography(int idArtist, CFileItemList& items)
 
     // Combine entries from discography and album tables
     // When title in both, album entry will be before disco entry
+    // Use PrepareSQL to adjust CAST syntax to AS UNSIGNED INTEGER for MySQL
     std::string strSQL;
     strSQL = PrepareSQL("SELECT strAlbum, "
-      "CAST(discography.strYear as INT) AS iYear, -1 AS idAlbum "
+      "CAST(discography.strYear AS INTEGER) AS iYear, -1 AS idAlbum "
       "FROM discography "
       "WHERE discography.idArtist = %i "
       "UNION "
@@ -4149,7 +4166,7 @@ bool CMusicDatabase::GetArtistsNav(const std::string& strBaseDir, CFileItemList&
   if (NULL == m_pDS.get()) return false;
   try
   {
-    unsigned int time = XbmcThreads::SystemClockMillis();
+//    unsigned int time = XbmcThreads::SystemClockMillis();
 
     CMusicDbUrl musicUrl;
     if (!musicUrl.FromString(strBaseDir))
@@ -4168,7 +4185,7 @@ bool CMusicDatabase::GetArtistsNav(const std::string& strBaseDir, CFileItemList&
       musicUrl.AddOption("albumartistsonly", albumArtistsOnly);
 
     bool result = GetArtistsByWhere(musicUrl.ToString(), filter, items, sortDescription, countOnly);
-    CLog::Log(LOGDEBUG,"Time to retrieve artists from dataset = %i", XbmcThreads::SystemClockMillis() - time);
+//    CLog::Log(LOGDEBUG,"Time to retrieve artists from dataset = %i", XbmcThreads::SystemClockMillis() - time);
 
     return result;
   }
@@ -4187,6 +4204,8 @@ bool CMusicDatabase::GetArtistsByWhere(const std::string& strBaseDir, const Filt
 
   try
   {
+    unsigned int querytime = 0;
+    unsigned int time = XbmcThreads::SystemClockMillis();
     int total = -1;
 
     std::string strSQL = "SELECT %s FROM artistview ";
@@ -4228,12 +4247,15 @@ bool CMusicDatabase::GetArtistsByWhere(const std::string& strBaseDir, const Filt
     if (!BuildSQL(strSQLExtra, extFilter, strSQLExtra))
       return false;
 
-    // Apply the limiting directly here if there's no special sorting but limiting
-    if (extFilter.limit.empty() &&
-        sortDescription.sortBy == SortByNone &&
-       (sortDescription.limitStart > 0 || sortDescription.limitEnd > 0))
+    // Apply limits and sort order directly in SQL when random sort or none
+    bool limitedInSQL = extFilter.limit.empty() &&
+      (sortDescription.sortBy == SortByNone || sortDescription.sortBy == SortByRandom) &&
+      (sortDescription.limitStart > 0 || sortDescription.limitEnd > 0);
+    if (limitedInSQL)
     {
       total = (int)strtol(GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10);
+      if (sortDescription.sortBy == SortByRandom)
+        strSQLExtra += PrepareSQL(" ORDER BY RANDOM()");
       strSQLExtra += DatabaseUtils::BuildLimitClause(sortDescription.limitEnd, sortDescription.limitStart);
     }
 
@@ -4241,13 +4263,16 @@ bool CMusicDatabase::GetArtistsByWhere(const std::string& strBaseDir, const Filt
 
     // run query
     CLog::Log(LOGDEBUG, "%s query: %s", __FUNCTION__, strSQL.c_str());
-    if (!m_pDS->query(strSQL)) return false;
+    querytime = XbmcThreads::SystemClockMillis();
+    if (!m_pDS->query(strSQL)) 
+      return false;
     int iRowsFound = m_pDS->num_rows();
     if (iRowsFound == 0)
     {
       m_pDS->close();
       return true;
     }
+    querytime = XbmcThreads::SystemClockMillis() - querytime;
 
     if (countOnly)
     {
@@ -4266,7 +4291,12 @@ bool CMusicDatabase::GetArtistsByWhere(const std::string& strBaseDir, const Filt
     
     DatabaseResults results;
     results.reserve(iRowsFound);
-    if (!SortUtils::SortFromDataset(sortDescription, MediaTypeArtist, m_pDS, results))
+
+    // Random order with limits already applied in SQL, just fetch results from dataset
+    sorting = sortDescription;
+    if (limitedInSQL && sortDescription.sortBy == SortByRandom)
+      sorting.sortBy = SortByNone;
+    if (!SortUtils::SortFromDataset(sorting, MediaTypeArtist, m_pDS, results))
       return false;
 
     // get data from returned rows
@@ -4303,6 +4333,8 @@ bool CMusicDatabase::GetArtistsByWhere(const std::string& strBaseDir, const Filt
     // cleanup
     m_pDS->close();
 
+    CLog::Log(LOGDEBUG, "{0}: Time to fill list with artists {1}ms query took {2}ms",
+      __FUNCTION__, XbmcThreads::SystemClockMillis() - time, querytime);
     return true;
   }
   catch (...)
@@ -4365,6 +4397,8 @@ bool CMusicDatabase::GetAlbumsByWhere(const std::string &baseDir, const Filter &
 
   try
   {
+    unsigned int querytime = 0;
+    unsigned int time = XbmcThreads::SystemClockMillis();
     int total = -1;
 
     std::string strSQL = "SELECT %s FROM albumview ";
@@ -4387,31 +4421,35 @@ bool CMusicDatabase::GetAlbumsByWhere(const std::string &baseDir, const Filter &
     if (!BuildSQL(strSQLExtra, extFilter, strSQLExtra))
       return false;
 
-    // Apply the limiting directly here if there's no special sorting but limiting
-    if (extFilter.limit.empty() &&
-        sortDescription.sortBy == SortByNone &&
-       (sortDescription.limitStart > 0 || sortDescription.limitEnd > 0))
+    // Apply limits and sort order directly in SQL when random sort or none
+    bool limitedInSQL = extFilter.limit.empty() &&
+      (sortDescription.sortBy == SortByNone || sortDescription.sortBy == SortByRandom) &&
+      (sortDescription.limitStart > 0 || sortDescription.limitEnd > 0);
+    if (limitedInSQL)
     {
       total = (int)strtol(GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10);
+      if (sortDescription.sortBy == SortByRandom)
+        strSQLExtra += PrepareSQL(" ORDER BY RANDOM()");
       strSQLExtra += DatabaseUtils::BuildLimitClause(sortDescription.limitEnd, sortDescription.limitStart);
     }
 
     strSQL = PrepareSQL(strSQL, !filter.fields.empty() && filter.fields.compare("*") != 0 ? filter.fields.c_str() : "albumview.*") + strSQLExtra;
 
-    CLog::Log(LOGDEBUG, "%s query: %s", __FUNCTION__, strSQL.c_str());
     // run query
-    unsigned int time = XbmcThreads::SystemClockMillis();
+    CLog::Log(LOGDEBUG, "%s query: %s", __FUNCTION__, strSQL.c_str());
+    querytime = XbmcThreads::SystemClockMillis();
     if (!m_pDS->query(strSQL))
       return false;
-    CLog::Log(LOGDEBUG, "%s - query took %i ms",
-              __FUNCTION__, XbmcThreads::SystemClockMillis() - time); time = XbmcThreads::SystemClockMillis();
+//    CLog::Log(LOGDEBUG, "%s - query took %i ms",
+//              __FUNCTION__, XbmcThreads::SystemClockMillis() - time); time = XbmcThreads::SystemClockMillis();
 
     int iRowsFound = m_pDS->num_rows();
-    if (iRowsFound <= 0)
+    if (iRowsFound == 0)
     {
       m_pDS->close();
       return true;
     }
+    querytime = XbmcThreads::SystemClockMillis() - querytime;
 
     // store the total value of items as a property
     if (total < iRowsFound)
@@ -4430,7 +4468,12 @@ bool CMusicDatabase::GetAlbumsByWhere(const std::string &baseDir, const Filter &
     
     DatabaseResults results;
     results.reserve(iRowsFound);
-    if (!SortUtils::SortFromDataset(sortDescription, MediaTypeAlbum, m_pDS, results))
+
+    // Random order with limits already applied in SQL, just fetch results from dataset
+    sorting = sortDescription;
+    if (limitedInSQL && sortDescription.sortBy == SortByRandom)
+      sorting.sortBy = SortByNone;
+    if (!SortUtils::SortFromDataset(sorting, MediaTypeAlbum, m_pDS, results))
       return false;
 
     // get data from returned rows
@@ -4460,6 +4503,8 @@ bool CMusicDatabase::GetAlbumsByWhere(const std::string &baseDir, const Filter &
 
     // cleanup
     m_pDS->close();
+    CLog::Log(LOGDEBUG, "{0}: Time to fill list with albums {1}ms query took {2}ms",
+      __FUNCTION__, XbmcThreads::SystemClockMillis() - time, querytime);
     return true;
   }
   catch (...)
@@ -8049,6 +8094,11 @@ bool CMusicDatabase::AddAlbumSources(int idAlbum, const std::string& strPath)
   return false;
 }
 
+bool CMusicDatabase::DeleteAlbumSources(int idAlbum)
+{
+  return ExecuteQuery(PrepareSQL("DELETE FROM album_source WHERE idAlbum = %i", idAlbum));
+}
+
 bool CMusicDatabase::CheckSources(VECSOURCES& sources)
 {
   if (sources.empty())
@@ -8761,7 +8811,7 @@ bool CMusicDatabase::GetGenresJSON(CFileItemList& items, bool bSources)
       extFilter.AppendJoin("JOIN song_genre ON song_genre.idGenre = genre.idGenre");
       extFilter.AppendJoin("JOIN song ON song.idSong = song_genre.idSong");
       extFilter.AppendJoin("JOIN album ON album.idAlbum = song.idAlbum");
-      extFilter.AppendJoin("JOIN album_source on album_source.idAlbum = album.idAlbum");
+      extFilter.AppendJoin("LEFT JOIN album_source on album_source.idAlbum = album.idAlbum");
       extFilter.AppendOrder("genre.strGenre");
       extFilter.AppendOrder("album_source.idSource");
     }   
@@ -8772,7 +8822,6 @@ bool CMusicDatabase::GetGenresJSON(CFileItemList& items, bool bSources)
       return false;
    
     strSQL = PrepareSQL(strSQL.c_str(), extFilter.fields.c_str()) + strSQLExtra;
-
 
     // run query
     CLog::Log(LOGDEBUG, "%s query: %s", __FUNCTION__, strSQL.c_str());
@@ -8797,7 +8846,7 @@ bool CMusicDatabase::GetGenresJSON(CFileItemList& items, bool bSources)
     {
       if (idGenre != m_pDS->fv("genre.idGenre").get_asInt())
       { // New genre
-        if (idGenre > 0 && !genreSources.empty())
+        if (idGenre > 0 && bSources)
         {
           //Store sources for previous genre in item list
           items[items.Size() - 1].get()->SetProperty("sourceid", genreSources);
@@ -8815,14 +8864,17 @@ bool CMusicDatabase::GetGenresJSON(CFileItemList& items, bool bSources)
       }
       // Get source data
       if (bSources)
-        genreSources.push_back(m_pDS->fv("album_source.idSource").get_asInt());
+      {
+        int sourceid = m_pDS->fv("album_source.idSource").get_asInt();
+        if (sourceid > 0)
+          genreSources.push_back(sourceid);
+      }
       m_pDS->next();
     }
-    if (!genreSources.empty())
+    if (bSources)
     {
       //Store sources for final genre
       items[items.Size() - 1].get()->SetProperty("sourceid", genreSources);
-      genreSources.clear();
     }
 
     // cleanup
@@ -9978,7 +10030,17 @@ void CMusicDatabase::SetPropertiesForFileItem(CFileItem& item)
 {
   if (!item.HasMusicInfoTag())
     return;
-  int idArtist = GetArtistByName(item.GetMusicInfoTag()->GetArtistString());
+  // May already have song artist ids as item property set when data read from
+  // db, but check property is valid array (scripts could set item properties
+  // incorrectly), otherwise try to fetch artist by name.
+  int idArtist = -1;
+  if (item.HasProperty("artistid") && item.GetProperty("artistid").isArray())
+  {
+    CVariant::const_iterator_array varid = item.GetProperty("artistid").begin_array();
+    idArtist = varid->asInteger();
+  }
+  else
+    idArtist = GetArtistByName(item.GetMusicInfoTag()->GetArtistString());
   if (idArtist > -1)
   {
     CArtist artist;
@@ -10702,18 +10764,23 @@ void CMusicDatabase::UpdateFileDateAdded(int songId, const std::string& strFileN
 
 bool CMusicDatabase::AddAudioBook(const CFileItem& item)
 {
-  std::string strSQL = PrepareSQL("INSERT INTO audiobook (idBook,strBook,strAuthor,bookmark,file,dateAdded) VALUES (NULL,'%s','%s',%i,'%s','%s')",
+  auto const& artists = item.GetMusicInfoTag()->GetArtist();
+  std::string strSQL = PrepareSQL(
+    "INSERT INTO audiobook (idBook,strBook,strAuthor,bookmark,file,dateAdded) "
+    "VALUES (NULL,'%s','%s',%i,'%s','%s')",
                                  item.GetMusicInfoTag()->GetAlbum().c_str(),
-                                 item.GetMusicInfoTag()->GetArtist()[0].c_str(), 0,
-                                 item.GetPath().c_str(),
-                                 CDateTime::GetCurrentDateTime().GetAsDBDateTime().c_str());
+    artists.empty() ? "" : artists[0].c_str(),
+    0,
+    item.GetDynPath().c_str(),
+    CDateTime::GetCurrentDateTime().GetAsDBDateTime().c_str()
+  );
   return ExecuteQuery(strSQL);
 }
 
 bool CMusicDatabase::SetResumeBookmarkForAudioBook(const CFileItem& item, int bookmark)
 {
   std::string strSQL = PrepareSQL("select bookmark from audiobook where file='%s'",
-                                 item.GetPath().c_str());
+                                 item.GetDynPath().c_str());
   if (!m_pDS->query(strSQL.c_str()) || m_pDS->num_rows() == 0)
   {
     if (!AddAudioBook(item))
@@ -10721,15 +10788,15 @@ bool CMusicDatabase::SetResumeBookmarkForAudioBook(const CFileItem& item, int bo
   }
 
   strSQL = PrepareSQL("UPDATE audiobook SET bookmark=%i WHERE file='%s'",
-                      bookmark, item.GetPath().c_str());
+                      bookmark, item.GetDynPath().c_str());
 
   return ExecuteQuery(strSQL);
 }
 
-bool CMusicDatabase::GetResumeBookmarkForAudioBook(const std::string& path, int& bookmark)
+bool CMusicDatabase::GetResumeBookmarkForAudioBook(const CFileItem& item, int& bookmark)
 {
   std::string strSQL = PrepareSQL("SELECT bookmark FROM audiobook WHERE file='%s'",
-                                 path.c_str());
+                                 item.GetDynPath().c_str());
   if (!m_pDS->query(strSQL.c_str()) || m_pDS->num_rows() == 0)
     return false;
 

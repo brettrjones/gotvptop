@@ -7,7 +7,7 @@
  */
 
 #include "VideoDatabaseFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 

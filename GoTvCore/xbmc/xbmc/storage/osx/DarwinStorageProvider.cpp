@@ -24,7 +24,7 @@
 #include <stdlib.h>
 #include "DarwinStorageProvider.h"
 #include <utils/RegExp.h>
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "guilib/LocalizeStrings.h"
 
 #include <sys/mount.h>

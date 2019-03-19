@@ -10,7 +10,7 @@
 #include <stdexcept>
 #include <cassert>
 
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/URIUtils.h"
 #include "FileItem.h"
 #include "network/ZeroconfBrowser.h"

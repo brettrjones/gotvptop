@@ -15,13 +15,14 @@
 #include "settings/DisplaySettings.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
-#include "utils/SystemInfo.h"
 #include "utils/log.h"
+#include "utils/SystemInfo.h"
 #include "windowing/GraphicContext.h"
 
 #ifdef _DEBUG
 # ifndef _M_X64
 #  pragma comment(lib, "EasyHook32.lib")
+#include "utils/SystemInfo.h"
 # else
 #  pragma comment(lib, "EasyHook64.lib")
 # endif
@@ -29,7 +30,7 @@
 
 #pragma comment(lib, "dxgi.lib")
 #pragma warning(disable: 4091)
-#include <platform/win32/dx/d3d10umddi.h>
+#include <d3d10umddi.h>
 #pragma warning(default: 4091)
 
 using KODI::PLATFORM::WINDOWS::FromW;
@@ -103,7 +104,10 @@ bool CWinSystemWin32DX::DestroyRenderSystem()
 
 void CWinSystemWin32DX::SetDeviceFullScreen(bool fullScreen, RESOLUTION_INFO& res)
 {
-  m_deviceResources->SetFullScreen(fullScreen, res);
+  if (m_deviceResources->SetFullScreen(fullScreen, res))
+  {
+    ResolutionChanged();
+  }
 }
 
 bool CWinSystemWin32DX::ResizeWindow(int newWidth, int newHeight, int newLeft, int newTop)
@@ -137,9 +141,13 @@ void CWinSystemWin32DX::OnMove(int x, int y)
 
 bool CWinSystemWin32DX::DPIChanged(WORD dpi, RECT windowRect) const
 {
+  // on Win10 FCU the OS keeps window size exactly the same size as it was
+  if (CSysInfo::IsWindowsVersionAtLeast(CSysInfo::WindowsVersionWin10_FCU))
+    return true;
+
   m_deviceResources->SetDpi(dpi);
   if (!IsAlteringWindow())
-    return CWinSystemWin32::DPIChanged(dpi, windowRect);
+    return __super::DPIChanged(dpi, windowRect);
 
   return true;
 }

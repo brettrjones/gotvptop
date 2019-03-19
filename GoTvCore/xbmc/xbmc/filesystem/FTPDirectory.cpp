@@ -8,7 +8,7 @@
 
 #include "FTPDirectory.h"
 #include "FTPParse.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/URIUtils.h"
 #include "CurlFile.h"
 #include "FileItem.h"

@@ -21,7 +21,10 @@
 #include "utils/URIUtils.h"
 #include "utils/XMLUtils.h"
 
+#include <algorithm>
 #include <array>
+#include <set>
+#include <utility>
 
 using namespace XFILE;
 
@@ -701,17 +704,28 @@ void CAddonMgr::FillCpluffMetadata(const cp_plugin_info_t* plugin, CAddonBuilder
 
             //Sync with db
             {
-                std::set<std::string> installed;
+      std::set<std::pair<std::string, std::string>> installed;
                 cp_status_t status;
                 int n;
                 cp_plugin_info_t** cp_addons = m_cpluff->get_plugins_info( m_cp_context, &status, &n );
                 for( int i = 0; i < n; ++i )
                 {
-                    CLog::Log( LOGNOTICE, "ADDON: %s v%s installed", cp_addons[ i ]->identifier, cp_addons[ i ]->version );
-                    installed.insert( cp_addons[ i ]->identifier );
+                    installed.emplace(cp_addons[i]->identifier, cp_addons[i]->version ? cp_addons[i]->version : "");
                 }
                 m_cpluff->release_info( m_cp_context, cp_addons );
-                m_database.SyncInstalled( installed, m_systemAddons, m_optionalAddons );
+               // Log separately so list is sorted
+              for (const auto& installedAddon : installed)
+              {
+                CLog::Log(LOGNOTICE, "ADDON: {} v{} installed", installedAddon.first, installedAddon.second);
+              }
+
+              std::set<std::string> installedIdentifiers;
+              std::transform(
+                  installed.cbegin(), installed.cend(),
+                  std::inserter(installedIdentifiers, installedIdentifiers.begin()),
+                  [](const decltype(installed)::value_type& p) { return p.first; }
+              );
+              m_database.SyncInstalled(installedIdentifiers, m_systemAddons, m_optionalAddons);
             }
 
             // Reload caches
@@ -764,13 +778,13 @@ void CAddonMgr::FillCpluffMetadata(const cp_plugin_info_t* plugin, CAddonBuilder
 
         if( !FindAddons() )
         {
-            CLog::Log( LOGERROR, "CAddonMgr: could not reload add-on %s. FindAddons failed.", addon->ID().c_str() );
+    CLog::Log(LOGERROR, "CAddonMgr: could not reload add-on %s. FindAddons failed.", addonId.c_str());
             return false;
         }
 
         if( !GetAddon( addonId, addon, ADDON_UNKNOWN, false ) )
         {
-            CLog::Log( LOGERROR, "CAddonMgr: could not load add-on %s. No add-on with that ID is installed.", addon->ID().c_str() );
+    CLog::Log(LOGERROR, "CAddonMgr: could not load add-on %s. No add-on with that ID is installed.", addonId.c_str());
             return false;
         }
 

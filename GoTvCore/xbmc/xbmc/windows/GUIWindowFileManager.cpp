@@ -10,7 +10,7 @@
 #include "Application.h"
 #include "ServiceBroker.h"
 #include "messaging/ApplicationMessenger.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "filesystem/Directory.h"
 #include "filesystem/ZipManager.h"
 #include "filesystem/FileDirectoryFactory.h"
@@ -49,7 +49,7 @@
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
 #include "Autorun.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "platform/Filesystem.h"
 #ifdef TARGET_POSIX
 #include "platform/linux/XFileUtils.h"
@@ -88,7 +88,7 @@ class CGetDirectoryItems : public IRunnable
 {
 public:
   CGetDirectoryItems(XFILE::CVirtualDirectory &dir, GoTvUrl& url, CFileItemList &items)
-  : m_dir(dir), m_url(url), m_items(items)
+  : m_result(false), m_dir(dir), m_url(url), m_items(items)
   {
   }
   void Run() override
@@ -444,6 +444,13 @@ void CGUIWindowFileManager::UpdateItemCounts()
 
 bool CGUIWindowFileManager::Update(int iList, const std::string &strDirectory)
 {
+  if (m_updating)
+  {
+    CLog::Log(LOGWARNING, "CGUIWindowFileManager::Update - updating in progress");
+    return true;
+  }
+  CUpdateGuard ug(m_updating);
+
   // get selected item
   int iItem = GetSelectedItem(iList);
   std::string strSelectedItem = "";

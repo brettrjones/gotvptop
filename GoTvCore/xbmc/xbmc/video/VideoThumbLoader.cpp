@@ -8,6 +8,7 @@
 
 #include "VideoThumbLoader.h"
 
+#include <algorithm>
 #include <cstdlib>
 #include <utility>
 
@@ -23,11 +24,12 @@
 #include "GUIUserMessages.h"
 #include "music/MusicDatabase.h"
 #include "settings/AdvancedSettings.h"
+#include "settings/lib/Setting.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "cores/VideoSettings.h"
 #include "TextureCache.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/log.h"
 #include "utils/EmbeddedArt.h"
 #include "utils/StringUtils.h"
@@ -79,7 +81,7 @@ bool CThumbExtractor::DoWork()
   if (m_item.IsLiveTV()
   // Due to a pvr addon api design flaw (no support for multiple concurrent streams
   // per addon instance), pvr recording thumbnail extraction does not work (reliably).
-  ||  m_item.IsPVRRecording()
+  ||  URIUtils::IsPVRRecording(m_item.GetDynPath())
   ||  URIUtils::IsUPnP(m_item.GetPath())
   ||  URIUtils::IsBluray(m_item.GetPath())
   ||  m_item.IsBDFile()
@@ -227,32 +229,60 @@ std::vector<std::string> CVideoThumbLoader::GetArtTypes(const std::string &type)
   if (type == MediaTypeEpisode)
   {
     ret = { "thumb" };
-    extraart = advancedSettings->m_videoEpisodeExtraArt;
+    for (auto& artType : advancedSettings->m_videoEpisodeExtraArt)
+    {
+      if (find(ret.begin(), ret.end(), artType) == ret.end())
+        ret.push_back(artType);
+    }
   }
   else if (type == MediaTypeTvShow)
   {
     ret = { "poster", "fanart", "banner" };
-    extraart = advancedSettings->m_videoTvShowExtraArt;
+    for (auto& artType : advancedSettings->m_videoTvShowExtraArt)
+    {
+      if (find(ret.begin(), ret.end(), artType) == ret.end())
+        ret.push_back(artType);
+    }
   }
   else if (type == MediaTypeSeason)
   {
     ret = { "poster", "fanart", "banner" };
-    extraart = advancedSettings->m_videoTvSeasonExtraArt;
+    for (auto& artType : advancedSettings->m_videoTvSeasonExtraArt)
+    {
+      if (find(ret.begin(), ret.end(), artType) == ret.end())
+        ret.push_back(artType);
   }
-  else if (type == MediaTypeMovie || type == MediaTypeVideoCollection)
+  }
+  else if (type == MediaTypeMovie)
   {
     ret = { "poster", "fanart" };
-    extraart = advancedSettings->m_videoMovieExtraArt;
+    for (auto& artType : advancedSettings->m_videoMovieExtraArt)
+    {
+      if (find(ret.begin(), ret.end(), artType) == ret.end())
+        ret.push_back(artType);
+    }
+  }
+  else if (type == MediaTypeVideoCollection)
+  {
+    ret = {"poster", "fanart"};
+    for (auto& artType : advancedSettings->m_videoMovieSetExtraArt)
+    {
+      if (find(ret.begin(), ret.end(), artType) == ret.end())
+        ret.push_back(artType);
+    }
   }
   else if (type == MediaTypeMusicVideo)
   {
     ret = { "poster", "fanart" };
-    extraart = advancedSettings->m_videoMusicVideoExtraArt;
+    for (auto& artType : advancedSettings->m_videoMusicVideoExtraArt)
+    {
+      if (find(ret.begin(), ret.end(), artType) == ret.end())
+        ret.push_back(artType);
+    }
   }
   else if (type.empty()) // unknown, just the basics
     ret = { "poster", "fanart", "banner", "thumb" };
 
-  ret.insert(ret.end(), extraart.begin(), extraart.end());
   return ret;
 }
 
@@ -319,6 +349,19 @@ bool CVideoThumbLoader::LoadItemCached(CFileItem* pItem)
         artwork.insert(std::make_pair(type, art));
     }
     SetArt(*pItem, artwork);
+  }
+
+  // hide thumb if episode is unwatched 
+  std::shared_ptr<CSettingList> setting(std::dynamic_pointer_cast<CSettingList>(
+    CServiceBroker::GetSettingsComponent()->GetSettings()->GetSetting(CSettings::SETTING_VIDEOLIBRARY_SHOWUNWATCHEDPLOTS)));
+  if (pItem->HasArt("thumb") && pItem->HasVideoInfoTag() &&
+      pItem->GetVideoInfoTag()->m_type == MediaTypeEpisode &&
+      pItem->GetVideoInfoTag()->GetPlayCount() == 0 &&
+      setting && 
+      !setting->FindIntInList(CSettings::VIDEOLIBRARY_THUMB_SHOW_UNWATCHED_EPISODE)
+     )
+  {
+    pItem->SetArt("thumb", "OverlaySpoiler.png");
   }
 
   m_videoDatabase->Close();

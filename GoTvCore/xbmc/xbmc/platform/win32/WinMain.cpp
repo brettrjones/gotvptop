@@ -128,7 +128,7 @@ INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR commandLine, INT )
 
   int status;
     {
-        CAppParamParser appParamParser;
+        static CAppParamParser appParamParser;
         appParamParser.Parse( argv, argc );
         GetIGoTv().initRun( appParamParser );
         // Create and run the app

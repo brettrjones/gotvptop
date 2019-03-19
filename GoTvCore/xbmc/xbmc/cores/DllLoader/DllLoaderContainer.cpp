@@ -19,7 +19,7 @@
 #include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "utils/log.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 #if defined(TARGET_WINDOWS)
 #define ENV_PARTIAL_PATH \

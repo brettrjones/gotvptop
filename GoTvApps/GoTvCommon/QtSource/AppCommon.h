@@ -81,7 +81,7 @@ public:
 				AppSettings&    appSettings,
 				VxDataHelper&   myDataHelper,
 				IGoTv&		    gotv );
-	virtual ~AppCommon();
+	virtual ~AppCommon() override = default;
 
     IFromGui&					getFromGuiInterface( void );
 	QApplication&				getQApplication( void )						{ return m_QApp; }

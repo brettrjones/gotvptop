@@ -46,9 +46,9 @@
 #include "XTimeUtils.h"
 #endif
 #include "ServiceBroker.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "filesystem/SpecialProtocol.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "filesystem/File.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
@@ -1873,7 +1873,7 @@ extern "C"
         {
             if( strstr( envstring, "Python" ) )
             {
-                CLog::Log( LOGWARNING, "dll_putenv (%s) ", envstring );
+                CLog::Log( LOGWARNING, "BRJ dll_putenv (%s) ", envstring );
             }
 
             const char *value_start = strchr( envstring, '=' );
@@ -1904,7 +1904,7 @@ extern "C"
                 {
                     if( strstr( value, "Python" ) )
                     {
-                        CLog::Log( LOGWARNING, "dll_putenv (%s) ", value );
+                        CLog::Log( LOGWARNING, "BRJ dll_putenv (%s) ", value );
                     }
 
                     CSingleLock lock( dll_cs_environ );
@@ -1943,7 +1943,7 @@ extern "C"
 
                             if( strstr( *free_position, "Python" ) )
                             {
-                                CLog::Log( LOGWARNING, "dll_putenv (%s) ", *free_position );
+                                CLog::Log( LOGWARNING, "BRJ dll_putenv (%s) ", *free_position );
                             }
 
 
@@ -2116,7 +2116,7 @@ extern "C"
         return NULL;
 #endif
     }
-
+#if 0 // BRJ is this needed
 #if _MSC_VER < 1900
     int dll_filbuf( FILE *fp )
     {
@@ -2177,6 +2177,7 @@ extern "C"
     }
 
 #endif
+#endif // 0 // BRJ is this needed
     // this needs to be wrapped, since dll's have their own file
     // descriptor list, but we always use app's list with our wrappers
     int __cdecl dll_open_osfhandle( intptr_t _OSFileHandle, int _Flags )

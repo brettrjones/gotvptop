@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "PlayerSelectionRule.h"
 #include "ServiceBroker.h"
 #include "video/VideoInfoTag.h"

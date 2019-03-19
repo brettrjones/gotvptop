@@ -10,7 +10,7 @@
 #include "Application.h"
 #include "Autorun.h"
 #include "LangInfoKodi.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "addons/AddonSystemSettings.h"
 #include "addons/Skin.h"
 #include "cores/VideoPlayer/VideoRenderers/BaseRenderer.h"
@@ -41,8 +41,6 @@
 #endif // defined(HAS_LIBAMCODEC)
 #include "powermanagement/PowerTypes.h"
 #include "profiles/ProfileManager.h"
-#include "pvr/PVRSettings.h"
-#include "pvr/windows/GUIWindowPVRGuide.h"
 #include "ServiceBroker.h"
 #include "settings/DisplaySettings.h"
 #include "settings/MediaSettings.h"
@@ -203,7 +201,7 @@ const std::string CSettings::SETTING_PVRMANAGER_GROUPMANAGER = "pvrmanager.group
 const std::string CSettings::SETTING_PVRMANAGER_CHANNELSCAN = "pvrmanager.channelscan";
 const std::string CSettings::SETTING_PVRMANAGER_RESETDB = "pvrmanager.resetdb";
 const std::string CSettings::SETTING_PVRMENU_DISPLAYCHANNELINFO = "pvrmenu.displaychannelinfo";
-const std::string CSettings::SETTING_PVRMENU_USESIMPLETIMESHIFTOSD = "pvrmenu.usesimpletimeshiftosd";
+const std::string CSettings::SETTING_PVRMENU_CLOSECHANNELOSDONSWITCH = "pvrmenu.closechannelosdonswitch";
 const std::string CSettings::SETTING_PVRMENU_ICONPATH = "pvrmenu.iconpath";
 const std::string CSettings::SETTING_PVRMENU_SEARCHICONS = "pvrmenu.searchicons";
 const std::string CSettings::SETTING_EPG_PAST_DAYSTODISPLAY = "epg.pastdaystodisplay";
@@ -218,6 +216,7 @@ const std::string CSettings::SETTING_PVRPLAYBACK_SWITCHTOFULLSCREEN = "pvrplayba
 const std::string CSettings::SETTING_PVRPLAYBACK_SIGNALQUALITY = "pvrplayback.signalquality";
 const std::string CSettings::SETTING_PVRPLAYBACK_CONFIRMCHANNELSWITCH = "pvrplayback.confirmchannelswitch";
 const std::string CSettings::SETTING_PVRPLAYBACK_CHANNELENTRYTIMEOUT = "pvrplayback.channelentrytimeout";
+const std::string CSettings::SETTING_PVRPLAYBACK_DELAYMARKLASTWATCHED = "pvrplayback.delaymarklastwatched";
 const std::string CSettings::SETTING_PVRPLAYBACK_FPS = "pvrplayback.fps";
 const std::string CSettings::SETTING_PVRRECORD_INSTANTRECORDACTION = "pvrrecord.instantrecordaction";
 const std::string CSettings::SETTING_PVRRECORD_INSTANTRECORDTIME = "pvrrecord.instantrecordtime";
@@ -648,15 +647,11 @@ void CSettings::InitializeDefaults()
 
     // Initialize deviceUUID if not already set, used in zeroconf advertisements.
     std::shared_ptr<CSettingString> deviceUUID = std::static_pointer_cast< CSettingString >( GetSettingsManager()->GetSetting( CSettings::SETTING_SERVICES_DEVICEUUID ) );
-    //if( deviceUUID->data() ) // BRJ FIXME
-    //{
-        if( deviceUUID && deviceUUID->GetValue().empty() )
+  if (deviceUUID->GetValue().empty())
         {
             const std::string& uuid = StringUtils::CreateUUID();
             std::static_pointer_cast< CSettingString >( GetSettingsManager()->GetSetting( CSettings::SETTING_SERVICES_DEVICEUUID ) )->SetValue( uuid );
         }
-    //}
-
 }
 
 void CSettings::InitializeOptionFillers()
@@ -702,7 +697,6 @@ void CSettings::InitializeOptionFillers()
     GetSettingsManager()->RegisterSettingOptionsFiller( "timezones", CLinuxTimezone::SettingOptionsTimezonesFiller );
 #endif
     GetSettingsManager()->RegisterSettingOptionsFiller( "keyboardlayouts", CKeyboardLayoutManager::SettingOptionsKeyboardLayoutsFiller );
-    GetSettingsManager()->RegisterSettingOptionsFiller( "pvrrecordmargins", PVR::CPVRSettings::MarginTimeFiller );
 }
 
 void CSettings::UninitializeOptionFillers()
@@ -748,7 +742,6 @@ void CSettings::UninitializeOptionFillers()
 #endif // defined(TARGET_LINUX)
     GetSettingsManager()->UnregisterSettingOptionsFiller( "verticalsyncs" );
     GetSettingsManager()->UnregisterSettingOptionsFiller( "keyboardlayouts" );
-    GetSettingsManager()->UnregisterSettingOptionsFiller( "pvrrecordmargins" );
 }
 
 void CSettings::InitializeConditions()
@@ -763,7 +756,7 @@ void CSettings::InitializeConditions()
     // add more complex conditions
     const std::map<std::string, SettingConditionCheck> &complexConditions = CSettingConditions::GetComplexConditions();
     for( std::map<std::string, SettingConditionCheck>::const_iterator itCondition = complexConditions.begin(); itCondition != complexConditions.end(); ++itCondition )
-        GetSettingsManager()->AddCondition( itCondition->first, itCondition->second );
+    GetSettingsManager()->AddDynamicCondition(itCondition->first, itCondition->second);
 }
 
 void CSettings::UninitializeConditions()
@@ -841,6 +834,7 @@ void CSettings::InitializeISettingCallbacks()
     settingSet.insert( CSettings::SETTING_VIDEOLIBRARY_CLEANUP );
     settingSet.insert( CSettings::SETTING_VIDEOLIBRARY_IMPORT );
     settingSet.insert( CSettings::SETTING_VIDEOLIBRARY_EXPORT );
+  settingSet.insert(CSettings::SETTING_VIDEOLIBRARY_SHOWUNWATCHEDPLOTS);
     GetSettingsManager()->RegisterCallback( &CMediaSettings::GetInstance(), settingSet );
 
     settingSet.clear();
@@ -851,6 +845,7 @@ void CSettings::InitializeISettingCallbacks()
     settingSet.insert( CSettings::SETTING_VIDEOSCREEN_PREFEREDSTEREOSCOPICMODE );
     settingSet.insert( CSettings::SETTING_VIDEOSCREEN_3DLUT );
     settingSet.insert( CSettings::SETTING_VIDEOSCREEN_DISPLAYPROFILE );
+  settingSet.insert(CSettings::SETTING_VIDEOSCREEN_BLANKDISPLAYS);
     GetSettingsManager()->RegisterCallback( &CDisplaySettings::GetInstance(), settingSet );
 
     settingSet.clear();

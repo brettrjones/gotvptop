@@ -16,7 +16,7 @@
 #include "utils/Color.h"
 #include "utils/Geometry.h"
 
-#if HAS_DX
+#ifdef HAS_DX
 #include "DirectXMath.h"
 #include "DirectXPackedVector.h"
 
@@ -52,7 +52,7 @@ typedef std::vector<character_t> vecText;
 struct SVertex
 {
     float x, y, z;
-#if HAS_DX
+#ifdef HAS_DX
     XMFLOAT4 col;
 #else
     unsigned char r, g, b, a;

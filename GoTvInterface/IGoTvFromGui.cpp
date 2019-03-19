@@ -47,7 +47,7 @@ const char * IGoTv::fromGuiGetAppVersionString( void )
 //============================================================================
 const char * IGoTv::fromGuiGetAppName( void )
 {
-    return VxGetApplicationName();
+    return VxGetApplicationTitle();
 }
 
 //============================================================================

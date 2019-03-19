@@ -8,7 +8,7 @@
 
 #include "HTTPVfsHandler.h"
 #include "MediaSource.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "filesystem/File.h"
 #include "network/WebServer.h"
 #include "settings/MediaSourceSettings.h"

@@ -89,7 +89,7 @@ bool ShaderQt::compileAndLink( const char * vertexShaderCode, const char *fragme
     m_proj = nullptr;
     m_model = nullptr;
     m_clipPossible = false;
-    m_RenderWidget->VerifyGLState();
+    m_RenderWidget->VerifyGLStateQt();
 
     if( vertexShaderCode )
     {
@@ -111,7 +111,7 @@ bool ShaderQt::compileAndLink( const char * vertexShaderCode, const char *fragme
         LogMsg( LOG_ERROR, "could not link shader" );
     }
 
-    m_RenderWidget->VerifyGLState();
+    m_RenderWidget->VerifyGLStateQt();
     
     if( result )
     {
@@ -120,7 +120,7 @@ bool ShaderQt::compileAndLink( const char * vertexShaderCode, const char *fragme
         onCompiledAndLinked();
     }
 
-    m_RenderWidget->VerifyGLState();
+    m_RenderWidget->VerifyGLStateQt();
 
     return result;
 }
@@ -249,7 +249,7 @@ void ShaderQt::onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf )
     m_hVTex     = glf->glGetUniformLocation( programId(), "m_sampV" );
     m_hMatrix   = glf->glGetUniformLocation( programId(), "m_yuvmat" );
     m_hStep     = glf->glGetUniformLocation( programId(), "m_step" );
-    //VerifyGLState();
+    //VerifyGLStateQt();
 
     switch( m_ShaderMethod )
     {
@@ -261,7 +261,7 @@ void ShaderQt::onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf )
         m_hStepX = glf->glGetUniformLocation( programId(), "m_stepX" );
         m_hStepY = glf->glGetUniformLocation( programId(), "m_stepY" );
         m_hField = glf->glGetUniformLocation( programId(), "m_field" );
-       // VerifyGLState();
+       // VerifyGLStateQt();
         break;
     default:
         break;
@@ -285,16 +285,16 @@ void ShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf )
     case SM_VID_FILTER_CONVOLUTION_6X6_RGBA:
     case SM_VID_FILTER_CONVOLUTION_6X6_FLOAT:
     {
-        m_RenderWidget->VerifyGLState();
+        m_RenderWidget->VerifyGLStateQt();
 
         // obtain shader attribute handles on successful compilation
         m_hSourceTex    = glf->glGetUniformLocation( programId(), "img" );
         m_hStepXY       = glf->glGetUniformLocation( programId(), "stepxy" );
         m_hKernTex      = glf->glGetUniformLocation( programId(), "kernelTex" );
 
-        m_RenderWidget->VerifyGLState();
+        m_RenderWidget->VerifyGLStateQt();
         CConvolutionKernel kernel( m_ScalingMethod, 256 );
-        m_RenderWidget->VerifyGLState();
+        m_RenderWidget->VerifyGLStateQt();
 
         if( m_kernelTex1 )
         {
@@ -302,10 +302,10 @@ void ShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf )
             m_kernelTex1 = 0;
         }
 
-        m_RenderWidget->VerifyGLState();
+        m_RenderWidget->VerifyGLStateQt();
 
         glf->glGenTextures( 1, &m_kernelTex1 );
-        m_RenderWidget->VerifyGLState();
+        m_RenderWidget->VerifyGLStateQt();
 
         if( ( m_kernelTex1 <= 0 ) )
         {
@@ -313,7 +313,7 @@ void ShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf )
             return;
         }
 
-        m_RenderWidget->VerifyGLState();
+        m_RenderWidget->VerifyGLStateQt();
 
         //make a kernel texture on GL_TEXTURE2 and set clamping and interpolation
         glf-> glActiveTexture( GL_TEXTURE2 );
@@ -337,14 +337,14 @@ void ShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf )
             format = GL_UNSIGNED_BYTE;
             data = ( GLvoid* )kernel.GetUint8Pixels();
         }
-        m_RenderWidget->VerifyGLState();
+        m_RenderWidget->VerifyGLStateQt();
 
         //upload as 2D texture with height of 1
         glf->glTexImage2D( GL_TEXTURE_2D, 0, m_internalformat, kernel.GetSize(), 1, 0, GL_RGBA, format, data );
 
         glf->glActiveTexture( GL_TEXTURE0 );
 
-        m_RenderWidget->VerifyGLState();
+        m_RenderWidget->VerifyGLStateQt();
         break;
     }
 
@@ -482,7 +482,7 @@ bool ShaderQt::onShaderVideoFormatEnabled( QOpenGLFunctions * glf )
     //LogMsg( LOG_ERROR, "onShaderVideoFormatEnabled %s", describeShader( m_ShaderMethod ) );
 
     // set shader attributes once enabled
-    m_RenderWidget->VerifyGLState();
+    m_RenderWidget->VerifyGLStateQt();
     glf->glUniform1i( m_hYTex, 0 );
     glf->glUniform1i( m_hUTex, 1 );
     glf->glUniform1i( m_hVTex, 2 );
@@ -496,7 +496,7 @@ bool ShaderQt::onShaderVideoFormatEnabled( QOpenGLFunctions * glf )
     glf->glUniformMatrix4fv( m_hProj, 1, GL_FALSE, m_proj );
     glf->glUniformMatrix4fv( m_hModel, 1, GL_FALSE, m_model );
     glf->glUniform1f( m_hAlpha, m_alpha );
-    m_RenderWidget->VerifyGLState();
+    m_RenderWidget->VerifyGLStateQt();
 
     switch( m_ShaderMethod )
     {
@@ -508,7 +508,7 @@ bool ShaderQt::onShaderVideoFormatEnabled( QOpenGLFunctions * glf )
         glf->glUniform1i( m_hField, m_field );
         glf->glUniform1f( m_hStepX, 1.0f / ( float )m_width );
         glf->glUniform1f( m_hStepY, 1.0f / ( float )m_height );
-        m_RenderWidget->VerifyGLState();
+        m_RenderWidget->VerifyGLStateQt();
         break;
 
     default:
@@ -523,7 +523,7 @@ bool ShaderQt::onShaderVideoFilterEnabled( QOpenGLFunctions * glf )
 {
     LogMsg( LOG_ERROR, "onShaderVideoFormatEnabled %s", describeShader( m_ShaderMethod ) );
 
-    m_RenderWidget->VerifyGLState();
+    m_RenderWidget->VerifyGLStateQt();
     glf->glUniformMatrix4fv( m_hProj, 1, GL_FALSE, m_proj );
     glf->glUniformMatrix4fv( m_hModel, 1, GL_FALSE, m_model );
     glf->glUniform1f( m_hAlpha, m_alpha );
@@ -543,7 +543,7 @@ bool ShaderQt::onShaderVideoFilterEnabled( QOpenGLFunctions * glf )
         glf->glUniform1i( m_hSourceTex, m_sourceTexUnit );
         glf->glUniform1i( m_hKernTex, 2 );
         glf->glUniform2f( m_hStepXY, m_stepX, m_stepY );
-        m_RenderWidget->VerifyGLState();
+        m_RenderWidget->VerifyGLStateQt();
         break;
     }
 
@@ -663,7 +663,7 @@ bool ShaderQt::enableShader()
             m_validated = true;
         }
 
-        //VerifyGLState();
+        //VerifyGLStateQt();
         return true;
     }
     else
@@ -698,14 +698,14 @@ bool ShaderQt::disableShader()
 void ShaderQt::shaderSetField( int field )
 {
     m_field = field;
-    //VerifyGLState();
+    //VerifyGLStateQt();
 }
 
 //============================================================================
 void ShaderQt::shaderSetWidth( int w )
 {
     m_width = w;
-    //VerifyGLState();
+    //VerifyGLStateQt();
 }
 
 //============================================================================
@@ -713,7 +713,7 @@ void ShaderQt::shaderSetHeight( int h )
 {
     m_height = h;
 
-   // VerifyGLState();
+   // VerifyGLStateQt();
 }
 
 //============================================================================
@@ -721,48 +721,48 @@ void ShaderQt::shaderSetBlack( float black )
 {
     m_black = black;
 
-    //VerifyGLState();
+    //VerifyGLStateQt();
 }
 
 //============================================================================
 void ShaderQt::shaderSetContrast( float contrast )
 {
     m_contrast = contrast;
-    //VerifyGLState();
+    //VerifyGLStateQt();
 }
 
 //============================================================================
 void ShaderQt::shaderSetConvertFullColorRange( bool convertFullRange )
 {
     m_convertFullRange = convertFullRange;
-    //VerifyGLState();
+    //VerifyGLStateQt();
 }
 
 //============================================================================
 int ShaderQt::shaderGetVertexLoc(  )
 {
-    //VerifyGLState();
+    //VerifyGLStateQt();
     return m_hVertex;
 }
 
 //============================================================================
 int ShaderQt::shaderGetYcoordLoc(  )
 {
-    //VerifyGLState();
+    //VerifyGLStateQt();
     return m_hYcoord;
 }
 
 //============================================================================
 int ShaderQt::shaderGetUcoordLoc(  )
 {
-    //VerifyGLState();
+    //VerifyGLStateQt();
     return m_hUcoord;
 }
 
 //============================================================================
 int ShaderQt::shaderGetVcoordLoc(  )
 {
-    //VerifyGLState();
+    //VerifyGLStateQt();
     return m_hVcoord;
 }
 
@@ -819,7 +819,7 @@ bool ShaderQt::shaderGetTextureFilter(  int& filter )
 //============================================================================
 int ShaderQt::shaderGetcoordLoc(  )
 {
-    //VerifyGLState();
+    //VerifyGLStateQt();
     return m_hcoord;
 }
 
@@ -828,7 +828,7 @@ int ShaderQt::shaderVertexAttribPointer( unsigned int index, int size, int type,
 {
     QOpenGLFunctions * glf = m_RenderWidget->getGlFunctions();
     glf->glVertexAttribPointer( index, size, type, normalized, stride, pointer );
-    //VerifyGLState();
+    //VerifyGLStateQt();
     return 0; // return value not needed .. should be void
 }
 
@@ -837,7 +837,7 @@ void ShaderQt::shaderEnableVertexAttribArray( int arrayId )
 {
     QOpenGLFunctions * glf = m_RenderWidget->getGlFunctions();
     glf->glEnableVertexAttribArray( arrayId );
-    //VerifyGLState();
+    //VerifyGLStateQt();
 }
 
 //============================================================================
@@ -845,7 +845,7 @@ void ShaderQt::shaderDisableVertexAttribArray( int arrayId )
 {
     QOpenGLFunctions * glf = m_RenderWidget->getGlFunctions();
     glf->glDisableVertexAttribArray( arrayId );
-    //VerifyGLState();
+    //VerifyGLStateQt();
 }
 
 

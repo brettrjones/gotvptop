@@ -55,7 +55,7 @@ public:
   {
       if( url.empty() )
       {
-          LogMsg( LOG_ERROR, "CDirectoryJob empty directory name" );
+          LogMsg( LOG_ERROR, "BRJ CDirectoryJob empty directory name" );
       }
   }
   ~CDirectoryJob() override = default;
@@ -268,7 +268,8 @@ void CDirectoryProvider::Announce(ANNOUNCEMENT::AnnouncementFlag flag, const cha
       if (strcmp(message, "OnScanFinished") == 0 ||
           strcmp(message, "OnCleanFinished") == 0 ||
           strcmp(message, "OnUpdate") == 0 ||
-          strcmp(message, "OnRemove") == 0)
+          strcmp(message, "OnRemove") == 0 ||
+          strcmp(message, "OnRefresh") == 0)
         m_updateState = INVALIDATED;
     }
   }
@@ -304,11 +305,11 @@ void CDirectoryProvider::OnPVRManagerEvent(const PVR::PVREvent& event)
   CSingleLock lock(m_section);
   if (URIUtils::IsProtocol(m_currentUrl, "pvr"))
   {
-    if (event == ManagerStarted ||
-        event == ManagerStopped ||
-        event == ManagerError ||
-        event == ManagerInterrupted ||
-        event == RecordingsInvalidated)
+    if (event == PVR::PVREvent::ManagerStarted ||
+        event == PVR::PVREvent::ManagerStopped ||
+        event == PVR::PVREvent::ManagerError ||
+        event == PVR::PVREvent::ManagerInterrupted ||
+        event == PVR::PVREvent::RecordingsInvalidated)
       m_updateState = INVALIDATED;
   }
 }

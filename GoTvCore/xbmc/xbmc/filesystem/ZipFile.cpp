@@ -7,7 +7,7 @@
  */
 
 #include "ZipFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/URIUtils.h"
 #include "utils/auto_buffer.h"
 #include "utils/log.h"

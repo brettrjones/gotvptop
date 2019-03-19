@@ -95,10 +95,10 @@ public:
     virtual void                onResizeGL( int w, int h ) {};
 
 #ifdef DEBUG
-    void VerifyGLStateDbg( const char* szfile, const char* szfunction, int lineno );
-#define VerifyGLState() VerifyGLStateDbg(__FILE__, __FUNCTION__, __LINE__)
+	void VerifyGLStateQtDbg( const char* szfile, const char* szfunction, int lineno );
+#  define VerifyGLStateQt() VerifyGLStateQtDbg(__FILE__, __FUNCTION__, __LINE__)
 #else
-    void VerifyGLState( );
+    void VerifyGLStateQt();
 #endif 
 
 signals:

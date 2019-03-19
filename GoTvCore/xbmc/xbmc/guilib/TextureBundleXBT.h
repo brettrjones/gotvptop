@@ -38,6 +38,8 @@ public:
 
   static uint8_t* UnpackFrame(const CXBTFReader& reader, const CXBTFFrame& frame);
 
+  void CloseBundle();
+
 private:
   bool OpenBundle();
   bool ConvertFrameToTexture(const std::string& name, CXBTFFrame& frame, CBaseTexture** ppTexture);

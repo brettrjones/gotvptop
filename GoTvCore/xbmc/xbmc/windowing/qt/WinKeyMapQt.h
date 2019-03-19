@@ -25,7 +25,7 @@
 #include "input/XBMC_keysym.h"
 #include "input/XBMC_vkeys.h"
 #include "settings/AdvancedSettings.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 
 namespace KODI
 {

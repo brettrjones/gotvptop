@@ -21,7 +21,7 @@
 
 #if defined(TARGET_OS_ANDROID)
 #include "IFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "string.h"
 
 namespace XFILE

@@ -17,11 +17,9 @@
 #include "utils/StringUtils.h"
 #include "log.h"
 #include "CharsetConverter.h"
-
 #ifdef HAVE_LIBXSLT
 # include "utils/XSLTUtils.h"
 #endif
-
 #include "utils/XMLUtils.h"
 #include <sstream>
 #include <cstring>

@@ -9,7 +9,7 @@
 #include "MultiPathFile.h"
 #include "MultiPathDirectory.h"
 #include "utils/URIUtils.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 using namespace XFILE;
 

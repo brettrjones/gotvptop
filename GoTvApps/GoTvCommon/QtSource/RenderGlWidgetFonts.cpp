@@ -44,7 +44,7 @@
 //============================================================================
 bool RenderGlWidget::firstBegin( CGUIFontTTFQt * font )
 {
-    VerifyGLState();
+    VerifyGLStateQt();
 
     GLenum pixformat = GL_ALPHA; // deprecated
 
@@ -71,7 +71,7 @@ bool RenderGlWidget::firstBegin( CGUIFontTTFQt * font )
         m_GlF->glTexImage2D( GL_TEXTURE_2D, 0, pixformat, font->m_texture->GetWidth(), font->m_texture->GetHeight(), 0,
                       pixformat, GL_UNSIGNED_BYTE, 0 );
 
-        VerifyGLState();
+        VerifyGLStateQt();
         font->m_textureStatus = CGUIFontTTFQt::TEXTURE_UPDATED;
     }
 
@@ -85,7 +85,7 @@ bool RenderGlWidget::firstBegin( CGUIFontTTFQt * font )
         font->m_textureStatus = CGUIFontTTFQt::TEXTURE_READY;
     }
 
-    VerifyGLState();
+    VerifyGLStateQt();
 
     // Turn Blending On
     m_GlF->glBlendFuncSeparate( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA, GL_ONE );
@@ -93,7 +93,7 @@ bool RenderGlWidget::firstBegin( CGUIFontTTFQt * font )
     m_GlF->glActiveTexture( GL_TEXTURE0 );
     m_GlF->glBindTexture( GL_TEXTURE_2D, font->m_nTexture );
 
-    VerifyGLState();
+    VerifyGLStateQt();
 
     return true;
 }
@@ -101,7 +101,7 @@ bool RenderGlWidget::firstBegin( CGUIFontTTFQt * font )
 //============================================================================
 void RenderGlWidget::lastEnd( CGUIFontTTFQt * font )
 {
-    VerifyGLState();
+    VerifyGLStateQt();
 
     // GLES 2.0 version.
     CRenderSystemQt * renderSystem = dynamic_cast< CRenderSystemQt* >( CServiceBroker::GetRenderSystem() );
@@ -143,7 +143,7 @@ void RenderGlWidget::lastEnd( CGUIFontTTFQt * font )
         m_GlF->glVertexAttribPointer( colLoc, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof( SVertex ), ( char* )vertices + offsetof( SVertex, r ) );
         m_GlF->glVertexAttribPointer( tex0Loc, 2, GL_FLOAT, GL_FALSE, sizeof( SVertex ), ( char* )vertices + offsetof( SVertex, u ) );
 
-        m_GlF->glDrawArrays( GL_TRIANGLES, 0, vecVertices.size() );
+        m_GlF->glDrawArrays( GL_TRIANGLES, 0, ( GLsizei)vecVertices.size() );
     }
 
     if( !font->m_vertexTrans.empty() )
@@ -211,14 +211,14 @@ void RenderGlWidget::lastEnd( CGUIFontTTFQt * font )
 
     renderSystem->DisableGUIShader();
 
-    VerifyGLState();
+    VerifyGLStateQt();
 
 }
 
 //============================================================================
 CVertexBuffer RenderGlWidget::createVertexBuffer( CGUIFontTTFQt * font, const std::vector<SVertex>& vertices )
 {
-    VerifyGLState();
+    VerifyGLStateQt();
 
     // Generate a unique buffer object name and put it in bufferHandle
     GLuint bufferHandle;
@@ -232,7 +232,7 @@ CVertexBuffer RenderGlWidget::createVertexBuffer( CGUIFontTTFQt * font, const st
     // Unbind GL_ARRAY_BUFFER
     m_GlF->glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
-    VerifyGLState();
+    VerifyGLStateQt();
 
     return CVertexBuffer( (unsigned int)bufferHandle, vertices.size() / 4, font );
 }
@@ -264,7 +264,7 @@ void RenderGlWidget::deleteHardwareTexture( CGUIFontTTFQt * font )
 //============================================================================
 void RenderGlWidget::createStaticVertexBuffers( CGUIFontTTFQt * font )
 {
-    VerifyGLState();
+    VerifyGLStateQt();
 
     // Bind a new buffer to the OpenGL context's GL_ELEMENT_ARRAY_BUFFER binding point
     m_GlF->glGenBuffers( 1, &font->m_elementArrayHandle );
@@ -284,7 +284,7 @@ void RenderGlWidget::createStaticVertexBuffers( CGUIFontTTFQt * font )
     m_GlF->glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof index, index, GL_STATIC_DRAW );
     m_GlF->glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
     font->m_staticVertexBufferCreated = true;
-    VerifyGLState();
+    VerifyGLStateQt();
 
 }
 

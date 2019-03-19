@@ -9,7 +9,7 @@
 #include "FavouritesService.h"
 #include "ServiceBroker.h"
 #include "filesystem/File.h"
-#include "GoTvCore/xbmc/xbmc/GoTvCoreUtil.h"
+#include "GoTvCoreUtil.h"
 #include "FileItem.h"
 #include "utils/XBMCTinyXML.h"
 #include "utils/log.h"
@@ -19,7 +19,7 @@
 #include "settings/SettingsComponent.h"
 #include "video/VideoInfoTag.h"
 #include "music/tags/MusicInfoTag.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 
 
 static bool LoadFromFile(const std::string& strPath, CFileItemList& items)

@@ -11,7 +11,7 @@
 // FileNFS.h: interface for the CNFSFile class.
 
 #include "IFile.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "threads/CriticalSection.h"
 #include <list>
 #include <map>

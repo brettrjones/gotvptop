@@ -18,7 +18,7 @@
 #include "guilib/TextureManager.h"
 #include "FileItem.h"
 #include "File.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "GUIInfoManager.h"
 #include "utils/log.h"
 

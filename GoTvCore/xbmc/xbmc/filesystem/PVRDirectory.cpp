@@ -10,7 +10,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "PVRDirectory.h"
 #include "ServiceBroker.h"
-#include <GoTvCore/xbmc/xbmc/GoTvUrl.h>
+#include "GoTvUrl.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
