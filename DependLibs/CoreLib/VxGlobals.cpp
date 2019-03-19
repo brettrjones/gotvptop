@@ -35,7 +35,7 @@
 #if defined(TARGET_OS_ANDROID)
 # define PYTHON_RELATIVE_PATH "python2.7/"
 #else
-# define PYTHON_RELATIVE_PATH "python27/"
+# define PYTHON_RELATIVE_PATH "assets/kodi/system/Python/"
 #endif // TARGET_OS_WINDOWS
 
 namespace
@@ -62,7 +62,6 @@ namespace
 	std::string			g_strExeDir						= "";
 	std::string			g_strExeKodiAssetsDir = "";
 	std::string			g_strExeGoTvAssetsDir = "";
-	std::string			g_strExePythonDir = "";
 
 	// user writeable paths
 	std::string			g_strRootDataStorageDir = "";
@@ -131,6 +130,13 @@ std::string& VxGetAppDirectory(EAppDir appDir)
 		return g_strExeKodiAssetsDir;
 	case eAppDirExeGoTvAssets:
 		return g_strExeGoTvAssetsDir;
+
+	case eAppDirExePython:
+		return g_strExeDir + PYTHON_RELATIVE_PATH;
+	case eAppDirExePythonDlls:
+		return g_strExeDir + PYTHON_RELATIVE_PATH + "DLLs/";
+	case eAppDirExePythonLibs:
+		return g_strExeDir + PYTHON_RELATIVE_PATH + "Lib/";
 
 	case eAppDirRootDataStorage:
 		return g_strRootDataStorageDir;
@@ -350,14 +356,12 @@ void VxSetExeDirectory(const char * exeDir)
 
 	g_strExeKodiAssetsDir = g_strExeDir + "assets/kodi/";
 	g_strExeGoTvAssetsDir = g_strExeDir + "assets/gotv/";
-	g_strExePythonDir = g_strExeDir + PYTHON_RELATIVE_PATH;
 }
 
 //============================================================================
 std::string& VxGetExeDirectory(void) { return g_strExeDir; }
 std::string& VxGetExeKodiAssetsDirectory( void ) { return g_strExeKodiAssetsDir; }
 std::string& VxGetExeGoTvAssetsDirectory(void) { return g_strExeGoTvAssetsDir; }
-std::string& VxGetExePythonDirectory(void) { return g_strExePythonDir; }
 
 //============================================================================
 void VxSetRootDataStorageDirectory(const char * rootDataDir)

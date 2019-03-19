@@ -139,20 +139,21 @@ extern "C" void __stdcall init_emu_environ()
 #endif
 
     // check if we are running as real xbmc.app or just binary
-    if( !CUtil::GetFrameworksPath( true ).empty() )
-    {
-        // using external python, it's build looking for xxx/lib/python2.7
-        // so point it to frameworks which is where python2.7 is located
-        dll_putenv( std::string( "PYTHONPATH=" +
-                                 CSpecialProtocol::TranslatePath( "special://frameworks" ) ).c_str() );
-        dll_putenv( std::string( "PYTHONHOME=" +
-                                 CSpecialProtocol::TranslatePath( "special://frameworks" ) ).c_str() );
-        dll_putenv( std::string( "PATH=.;" +
-                                 CSpecialProtocol::TranslatePath( "special://xbmc" ) + ";" +
-                                 CSpecialProtocol::TranslatePath( "special://frameworks" ) ).c_str() );
-    }
-    else
-    {
+	
+    //if( !CUtil::GetFrameworksPath( true ).empty() )
+    //{
+    //    // using external python, it's build looking for xxx/lib/python2.7
+    //    // so point it to frameworks which is where python2.7 is located
+    //    dll_putenv( std::string( "PYTHONPATH=" +
+    //                             CSpecialProtocol::TranslatePath( "special://frameworks" ) ).c_str() );
+    //    dll_putenv( std::string( "PYTHONHOME=" +
+    //                             CSpecialProtocol::TranslatePath( "special://frameworks" ) ).c_str() );
+    //    dll_putenv( std::string( "PATH=.;" +
+    //                             CSpecialProtocol::TranslatePath( "special://xbmc" ) + ";" +
+    //                             CSpecialProtocol::TranslatePath( "special://frameworks" ) ).c_str() );
+    //}
+    //else
+    //{
         if( !dll_getenv( "PYTHONPATH" ) )
         {
             std::string pythonPath( "PYTHONPATH=" +
@@ -165,13 +166,13 @@ extern "C" void __stdcall init_emu_environ()
             dll_putenv( pythonHome.c_str() );
             dll_putenv( sysPath.c_str() );
         }
-        else
-        {
-            CSpecialProtocol::SetPath( "special://xbmc/system/python/DLLs", "C:\\Python27\\DLLs" );
-            CSpecialProtocol::SetPath( "special://xbmc/system/python/Lib", "C:\\Python27\\Lib" );
-            CSpecialProtocol::SetPath( "special://xbmc/system/python", "C:\\Python27" );
+        //else
+        //{
+        //    CSpecialProtocol::SetPath( "special://xbmc/system/python/DLLs", "C:\\Python27\\DLLs" );
+        //    CSpecialProtocol::SetPath( "special://xbmc/system/python/Lib", "C:\\Python27\\Lib" );
+        //    CSpecialProtocol::SetPath( "special://xbmc/system/python", "C:\\Python27" );
 
-        }
+        //}
         /*
         std::string dllsPath = CSpecialProtocol::TranslatePath( "special://xbmc/system/python/DLLs" );
         std::string libPath = CSpecialProtocol::TranslatePath( "special://xbmc/system/python/Lib" );
@@ -199,8 +200,6 @@ extern "C" void __stdcall init_emu_environ()
         dll_putenv( std::string( CSpecialProtocol::TranslatePath( "special://xbmc" ) + ";" +
                                  CSpecialProtocol::TranslatePath( "special://xbmc/system/python" ) ).c_str() );
                                  */
-         CLog::Log( LOGDEBUG, "init_emu_environ done" );
-    }
 
 #if defined(TARGET_ANDROID)
   std::string apkPath = getenv("KODI_ANDROID_APK");
@@ -234,6 +233,8 @@ extern "C" void __stdcall init_emu_environ()
     dll_putenv( "DVDCSS_METHOD=key" );
     dll_putenv( "DVDCSS_VERBOSE=3" );
     dll_putenv( "DVDCSS_CACHE=special://masterprofile/cache" );
+
+	CLog::Log( LOGDEBUG, "init_emu_environ done" );
 }
 
 extern "C" void __stdcall update_emu_environ()

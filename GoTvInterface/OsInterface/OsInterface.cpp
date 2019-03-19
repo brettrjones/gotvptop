@@ -159,6 +159,17 @@ bool OsInterface::initDirectories()
 	gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirUserXfer ).c_str() ); // Documents Directory/GoTvPtoP/hashnum/userId/   where transfer directories are
 	CSpecialProtocol::SetUserXferPath( URIUtils::AddFileToFolder( gotvDir, "gotvxfer" ) );
     
+
+	// Python
+	gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExePython ).c_str() );
+	CSpecialProtocol::SetPath( "special://xbmc/system/python", gotvDir.c_str() );
+
+	gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExePythonDlls ).c_str() );
+	CSpecialProtocol::SetPath( "special://xbmc/system/python/DLLs", gotvDir.c_str() );
+
+	gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExePythonLibs ).c_str() );
+	CSpecialProtocol::SetPath( "special://xbmc/system/python/Lib", gotvDir.c_str() );
+
 	// Kodi master profile path
 	CEnvironment::setenv( CCompileInfo::GetUserProfileEnvName(), CSpecialProtocol::TranslatePath( "special://masterprofile/" ) );
 

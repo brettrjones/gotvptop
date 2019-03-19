@@ -207,7 +207,7 @@ void IGoTv::createUserDirs() const
     CDirectory::Create( "special://logpath" );
     CDirectory::Create( "special://temp/temp" ); // temp directory for python and dllGetTempPathA
 
-	//BRJ FIXME for PtoP
+	// for PtoP
     CDirectory::Create( "special://gotvassets" );
     CDirectory::Create( "special://gotvassets/gui" );
     CDirectory::Create( "special://gotvassets/shaders" );

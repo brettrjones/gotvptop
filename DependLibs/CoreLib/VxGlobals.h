@@ -26,9 +26,11 @@ enum EAppDir
 {
 	eAppDirUnknown = 0,
 	eAppDirExe,
-	eAppDirExePython,
 	eAppDirExeKodiAssets,
 	eAppDirExeGoTvAssets,
+	eAppDirExePython,
+	eAppDirExePythonDlls,
+	eAppDirExePythonLibs,
 
 	eAppDirRootDataStorage,
 	eAppDirAppTempData,
@@ -79,7 +81,6 @@ std::string&	            VxGetExeDirectory(void);
 
 std::string&	            VxGetExeKodiAssetsDirectory( void );
 std::string&	            VxGetExeGoTvAssetsDirectory(void);
-std::string&	            VxGetExePythonDirectory(void);
 
 // user writable directories
 void			            VxSetRootDataStorageDirectory( const char * rootDataDir );
