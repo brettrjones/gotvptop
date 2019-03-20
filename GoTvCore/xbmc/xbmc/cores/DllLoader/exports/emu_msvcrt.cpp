@@ -154,7 +154,7 @@ extern "C" void __stdcall init_emu_environ()
     //}
     //else
     //{
-        if( !dll_getenv( "PYTHONPATH" ) )
+        //if( !dll_getenv( "PYTHONPATH" ) )
         {
             std::string pythonPath( "PYTHONPATH=" +
                                     CSpecialProtocol::TranslatePath( "special://xbmc/system/python/DLLs" ) + ";" +
