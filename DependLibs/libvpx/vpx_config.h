@@ -11,6 +11,6 @@
 #ifdef TARGET_OS_WINDOWS
 # include "vpx_config_win.h"
 #else
-# include "config_vpx_linux.h"
+# include "vpx_config_linux.h"
 #endif // TARGET_OS_WINDOWS
 

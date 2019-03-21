@@ -637,7 +637,7 @@ void testJpgSpeed( void )
 		return;
 	}
 #else
-	std::string rawFile = VxGetAppDataDirectory();
+    std::string rawFile = VxGetAppGoTvDataDirectory();
 	rawFile += "rawBmp1.raw";
 	if( 0 != VxFileUtil::readWholeFile( rawFile.c_str(), &retBuf, &lenOfData ) )
 	{

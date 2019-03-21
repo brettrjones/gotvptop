@@ -15,6 +15,7 @@
 
 #include "SslMgrCmdSendText.h"
 #include <CoreLib/VxDebug.h>
+#include <string.h>
 
 namespace
 {

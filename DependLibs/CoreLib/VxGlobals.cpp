@@ -33,7 +33,7 @@
 //============================================================================
 
 #if defined(TARGET_OS_ANDROID)
-# define PYTHON_RELATIVE_PATH "python2.7/"
+# define PYTHON_RELATIVE_PATH "assets/python2.7/lib/python2.7/"
 #else
 # define PYTHON_RELATIVE_PATH "assets/kodi/system/Python/"
 #endif // TARGET_OS_WINDOWS
@@ -60,7 +60,10 @@ namespace
 #endif // APP_MYP2PWEB
 	// exe and app resouces paths
 	std::string			g_strExeDir						= "";
-	std::string			g_strExeKodiAssetsDir = "";
+    std::string			g_strExeDirPython				= "";
+    std::string			g_strExeDirPythonDlls			= "";
+    std::string			g_strExeDirPythonLib			= "";
+    std::string			g_strExeKodiAssetsDir = "";
 	std::string			g_strExeGoTvAssetsDir = "";
 
 	// user writeable paths
@@ -132,11 +135,11 @@ std::string& VxGetAppDirectory(EAppDir appDir)
 		return g_strExeGoTvAssetsDir;
 
 	case eAppDirExePython:
-		return g_strExeDir + PYTHON_RELATIVE_PATH;
+        return g_strExeDirPython;
 	case eAppDirExePythonDlls:
-		return g_strExeDir + PYTHON_RELATIVE_PATH + "DLLs/";
+        return g_strExeDirPythonDlls;
 	case eAppDirExePythonLibs:
-		return g_strExeDir + PYTHON_RELATIVE_PATH + "Lib/";
+        return g_strExeDirPythonLib;
 
 	case eAppDirRootDataStorage:
 		return g_strRootDataStorageDir;
@@ -353,6 +356,12 @@ std::string&	            VxGetExeDirectory(void);
 void VxSetExeDirectory(const char * exeDir)
 {
 	g_strExeDir = exeDir;
+    g_strExeDirPython = exeDir;
+    g_strExeDirPythonDlls = exeDir;
+    g_strExeDirPythonDlls = g_strExeDirPythonDlls + PYTHON_RELATIVE_PATH;
+    g_strExeDirPythonLib = g_strExeDirPythonDlls;
+    g_strExeDirPythonDlls = g_strExeDirPythonDlls + "DLLs/";
+    g_strExeDirPythonLib = g_strExeDirPythonLib + "Lib/";
 
 	g_strExeKodiAssetsDir = g_strExeDir + "assets/kodi/";
 	g_strExeGoTvAssetsDir = g_strExeDir + "assets/gotv/";

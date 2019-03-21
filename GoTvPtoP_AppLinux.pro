@@ -38,7 +38,7 @@ include(config_os_detect.pri)
 include(config_compiler.pri)
 include(config_opensslp_include.pri)
 
-#DESTDIR = $$PWD/bin/
+DESTDIR = DEST_EXE_DIR
 
 
 

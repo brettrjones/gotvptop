@@ -263,7 +263,6 @@ SOURCES += 	$$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrWrapper.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrWrapperCallback.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslWrapper.cpp \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/android_ssl_mgr_1.cpp \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/aes/aes_cbc.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/aes/aes_cfb.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/aes/aes_core.c \

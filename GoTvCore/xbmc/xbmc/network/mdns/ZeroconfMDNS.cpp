@@ -7,6 +7,7 @@
  */
 
 #include "ZeroconfMDNS.h"
+#if defined(TARGET_OS_WINDOWS)
 #include <arpa/inet.h>
 
 #include <string>
@@ -237,3 +238,4 @@ void CZeroconfMDNS::ProcessResults()
     CLog::Log(LOGERROR, "ZeroconfMDNS: DNSServiceProcessResult returned (error = %ld)", (int) err);
 }
 
+#endif // defined(TARGET_OS_WINDOWS)

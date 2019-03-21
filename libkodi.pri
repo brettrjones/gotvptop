@@ -529,8 +529,6 @@ HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/RSSDirectory.h \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/ResourceDirectory.h \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/ResourceFile.h \
-    $$PWD/GoTvCore/xbmc/xbmc/filesystem/SFTPDirectory.h \
-    $$PWD/GoTvCore/xbmc/xbmc/filesystem/SFTPFile.h \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/ShoutcastFile.h \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/SmartPlaylistDirectory.h \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/SourcesDirectory.h \
@@ -1059,7 +1057,6 @@ HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvCore/xbmc/xbmc/pvr/PVRChannelNumberInputHandler.h \
     $$PWD/GoTvCore/xbmc/xbmc/pvr/PVRContextMenus.h \
     $$PWD/GoTvCore/xbmc/xbmc/pvr/PVRDatabase.h \
-    $$PWD/GoTvCore/xbmc/xbmc/pvr/PVREvent.h \
     $$PWD/GoTvCore/xbmc/xbmc/pvr/PVRGUIActions.h \
     $$PWD/GoTvCore/xbmc/xbmc/pvr/PVRGUIChannelNavigator.h \
     $$PWD/GoTvCore/xbmc/xbmc/pvr/PVRGUIInfo.h \
@@ -1113,7 +1110,6 @@ HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvCore/xbmc/xbmc/rendering/RenderSystemTypes.h \
     $$PWD/GoTvCore/xbmc/xbmc/rendering/dx/DeviceResources.h \
     $$PWD/GoTvCore/xbmc/xbmc/rendering/dx/DirectXHelper.h \
-    $$PWD/GoTvCore/xbmc/xbmc/rendering/dx/GUIWindowTestPatternDX.h \
     $$PWD/GoTvCore/xbmc/xbmc/rendering/dx/RenderContext.h \
     $$PWD/GoTvCore/xbmc/xbmc/rendering/dx/RenderSystemDX.h \
     $$PWD/GoTvCore/xbmc/xbmc/settings/AdvancedSettings.h \
@@ -1142,7 +1138,6 @@ HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvCore/xbmc/xbmc/settings/windows/GUIWindowSettings.h \
     $$PWD/GoTvCore/xbmc/xbmc/settings/windows/GUIWindowSettingsCategory.h \
     $$PWD/GoTvCore/xbmc/xbmc/settings/windows/GUIWindowSettingsScreenCalibration.h \
-    $$PWD/GoTvCore/xbmc/xbmc/settings/windows/GUIWindowTestPattern.h \
     $$PWD/GoTvCore/xbmc/xbmc/system_gl.h \
     $$PWD/GoTvCore/xbmc/xbmc/video/Bookmark.h \
     $$PWD/GoTvCore/xbmc/xbmc/video/Episode.h \
@@ -1535,7 +1530,6 @@ HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvCore/xbmc/xbmc/utils/auto_buffer.h \
     $$PWD/GoTvCore/xbmc/xbmc/utils/fstrcmp.h \
     $$PWD/GoTvCore/xbmc/xbmc/utils/log.h \
-    $$PWD/GoTvCore/xbmc/xbmc/utils/md5.h \
     $$PWD/GoTvCore/xbmc/xbmc/utils/params_check_macros.h \
     $$PWD/GoTvCore/xbmc/xbmc/utils/rfft.h \
     $$PWD/GoTvCore/xbmc/xbmc/utils/sha1.hpp \
@@ -1939,9 +1933,6 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/PluginDirectory.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/RSSDirectory.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/ResourceDirectory.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/filesystem/ResourceFile.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/filesystem/SFTPDirectory.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/filesystem/SFTPFile.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/ShoutcastFile.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/SmartPlaylistDirectory.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/SourcesDirectory.cpp \
@@ -2406,7 +2397,6 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/pvr/windows/GUIWindowPVRTimersBase.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/rendering/RenderSystem.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/rendering/dx/DeviceResources.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/rendering/dx/GUIWindowTestPatternDX.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/rendering/dx/RenderSystemDX.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/settings/AdvancedSettings.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/settings/DiscSettings.cpp \
@@ -2434,7 +2424,6 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/settings/windows/GUIWindowSettings.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/settings/windows/GUIWindowSettingsCategory.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/settings/windows/GUIWindowSettingsScreenCalibration.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/settings/windows/GUIWindowTestPattern.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/video/Bookmark.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/video/GUIViewStateVideo.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/video/PlayerController.cpp \
@@ -2711,7 +2700,6 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/auto_buffer.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/fstrcmp.c \
     $$PWD/GoTvCore/xbmc/xbmc/utils/log.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/utils/md5.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/utils/rfft.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/video/dialogs/GUIDialogAudioSettings.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/video/dialogs/GUIDialogSubtitleSettings.cpp \

@@ -2,11 +2,16 @@
 android:{
     DEFINES += TARGET_OS_ANDROID
     DEFINES += TARGET_POSIX
-
     ANDROID_ARM64 = 0
     ANDROID_ARMv7 = 0
     ANDROID_x86 = 0
     ANDROID_x86_64 = 0
+
+    DEST_EXE_DIR = $$PWD/android/
+    DEST_SHARED_LIBS_DIR = $$PWD/bin-Linux
+    DEST_PYTHON_EXE_DIR = $$PWD/bin-Linux
+    DEST_PYTHON_DLL_DIR = $$PWD/bin-Linux/assets/kodi/system/Python/DLLs
+    DEST_PYTHON_LIB_DIR = $$PWD/bin-Linux/assets/kodi/system/Python/Lib
 
     contains(ANDROID_TARGET_ARCH,armeabi-v8a) {
         DEFINES += TARGET_CPU_64BIT
@@ -16,6 +21,12 @@ android:{
         TARGET_CPU_BITS=64
         TARGET_ENDIAN_LITTLE=1
         TARGET_ENDIAN_BIG=0
+
+        DEST_SHARED_LIBS_DIR = $$PWD/android/lib/armeabi-v8a
+        DEST_EXE_DIR = $$PWD/android/lib/armeabi-v8a
+        DEST_PYTHON_EXE_DIR = $$PWD/android/lib/armeabi-v8a
+        DEST_PYTHON_DLL_DIR = $$PWD/android/assets/python2.7/lib/python2.7
+        DEST_PYTHON_LIB_DIR = $$PWD/android/assets/python2.7/lib/python2.7
     }
 
     contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
@@ -26,6 +37,12 @@ android:{
         TARGET_CPU_BITS=32
         TARGET_ENDIAN_LITTLE=1
         TARGET_ENDIAN_BIG=0
+
+        DEST_SHARED_LIBS_DIR = $$PWD/android/lib/armeabi-v7a
+        DEST_EXE_DIR = $$PWD/android/lib/armeabi-v7a
+        DEST_PYTHON_EXE_DIR = $$PWD/android/lib/armeabi-v7a
+        DEST_PYTHON_DLL_DIR = $$PWD/android/assets/python2.7/lib/python2.7
+        DEST_PYTHON_LIB_DIR = $$PWD/android/assets/python2.7/lib/python2.7
     }
 
     contains(ANDROID_TARGET_ARCH,x86) {
@@ -36,6 +53,13 @@ android:{
         TARGET_CPU_BITS=32
         TARGET_ENDIAN_LITTLE=1
         TARGET_ENDIAN_BIG=0
+
+        DEST_SHARED_LIBS_DIR = $$PWD/android/lib/x86
+        DEST_EXE_DIR = $$PWD/android/lib/x86
+        DEST_PYTHON_EXE_DIR = $$PWD/android/lib/x86
+        DEST_PYTHON_DLL_DIR = $$PWD/android/assets/python2.7/lib/python2.7
+        DEST_PYTHON_LIB_DIR = $$PWD/android/assets/python2.7/lib/python2.7
+
     }
 
     contains(ANDROID_TARGET_ARCH,x86_64) {
@@ -46,8 +70,13 @@ android:{
         TARGET_CPU_BITS=64
         TARGET_ENDIAN_LITTLE=1
         TARGET_ENDIAN_BIG=0
-    }
 
+        DEST_SHARED_LIBS_DIR = $$PWD/android/lib/x86_64
+        DEST_EXE_DIR = $$PWD/android/lib/x86_64
+        DEST_PYTHON_EXE_DIR = $$PWD/android/lib/x86_64
+        DEST_PYTHON_DLL_DIR = $$PWD/android/assets/python2.7/lib/python2.7
+        DEST_PYTHON_LIB_DIR = $$PWD/android/assets/python2.7/lib/python2.7
+    }
 }
 
 win32:{
@@ -60,6 +89,12 @@ win32:{
     TARGET_CPU_BITS=64
     TARGET_ENDIAN_LITTLE=1
     TARGET_ENDIAN_BIG=0
+
+    DEST_SHARED_LIBS_DIR = $$PWD/bin-Windows/
+    DEST_EXE_DIR = $$PWD/bin-Windows/
+    DEST_PYTHON_EXE_DIR = $$PWD/bin-Windows/
+    DEST_PYTHON_DLL_DIR = $$PWD/bin-Windows/assets/kodi/system/Python/DLLs/
+    DEST_PYTHON_LIB_DIR = $$PWD/bin-Windows/assets/kodi/system/Python/Lib/
 }
 
 unix:!android:{
@@ -71,6 +106,12 @@ unix:!android:{
     TARGET_CPU_BITS=64
     TARGET_ENDIAN_LITTLE=1
     TARGET_ENDIAN_BIG=0
+
+    DEST_SHARED_LIBS_DIR = $$PWD/bin-Linux/
+    DEST_EXE_DIR = $$PWD/bin-Linux/
+    DEST_PYTHON_EXE_DIR = $$PWD/bin-Linux/
+    DEST_PYTHON_DLL_DIR = $$PWD/bin-Linux/assets/kodi/system/Python/DLLs/
+    DEST_PYTHON_LIB_DIR = $$PWD/bin-Linux/assets/kodi/system/Python/Lib/
 }
 
 macx{

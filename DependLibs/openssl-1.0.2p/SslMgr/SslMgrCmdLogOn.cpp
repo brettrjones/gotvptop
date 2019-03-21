@@ -17,6 +17,7 @@
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/AppErr.h>
+#include <string.h>
 
 namespace
 {

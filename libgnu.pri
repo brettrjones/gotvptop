@@ -150,7 +150,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libgnu/ghash.h \
     $$PWD/DependLibs/libgnu/gl_anylinked_list1.h \
     $$PWD/DependLibs/libgnu/gl_anylinked_list2.h \
-    $$PWD/DependLibs/libgnu/gl_linked_list.h \
     $$PWD/DependLibs/libgnu/gl_list.h \
     $$PWD/DependLibs/libgnu/gl_xlist.h \
     $$PWD/DependLibs/libgnu/glib.h \
@@ -1260,7 +1259,6 @@ SOURCES += 	\
     $$PWD/DependLibs/libgnu/gettext_gnu.c \
     $$PWD/DependLibs/libgnu/gettimeofday_gnu.c \
     $$PWD/DependLibs/libgnu/ghash_gnu.c \
-    $$PWD/DependLibs/libgnu/gl_linked_list_gnut.c \
     $$PWD/DependLibs/libgnu/gl_list_gnu.c \
     $$PWD/DependLibs/libgnu/gl_xlist_gnu.c \
     $$PWD/DependLibs/libgnu/glist_gnu.c \
@@ -1408,7 +1406,7 @@ SOURCES += 	\
     $$PWD/DependLibs/libgnu/nl_langinfo_gnu.c \
     $$PWD/DependLibs/libgnu/obstack_gnu.c \
     $$PWD/DependLibs/libgnu/open-catalog_gnu.c \
-    $$PWD/DependLibs/libgnu/open_gnu.c \
+#    $$PWD/DependLibs/libgnu/open_gnu.c \
     $$PWD/DependLibs/libgnu/osdep_gnu.c \
     $$PWD/DependLibs/libgnu/ostream_gnu.c \
     $$PWD/DependLibs/libgnu/ostream.oo_gnu.c \

@@ -44,11 +44,11 @@ CONFIG(release, debug|release) {
 }
 
 CONFIG(debug, debug|release){
-    OBJECTS_DIR=.objs/$${TARGET_NAME}/debug
+    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/debug
 }
 
 CONFIG(release, debug|release){
-    OBJECTS_DIR=.objs/$${TARGET_NAME}/release
+    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/release
 }
 
 

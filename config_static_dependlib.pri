@@ -46,11 +46,11 @@ unix: {
 TARGET=$${TARGET_NAME}$${TARGET_OS_NAME}$${TARGET_LIB_APPEND}
 
 CONFIG(debug, debug|release){
-    OBJECTS_DIR=.objs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
+    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
 }
 
 CONFIG(release, debug|release){
-    OBJECTS_DIR=.objs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
+    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
 }
 
 
