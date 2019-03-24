@@ -24,6 +24,8 @@
 #include <QAudioOutput>
 #include <QIODevice>
 
+#include <CoreLib/VxMutex.h>
+
 class AudioOutQt;
 
 class AudioOutIo : public QIODevice
@@ -33,27 +35,54 @@ public:
     explicit AudioOutIo( AudioOutQt& outQt, QObject *parent = 0 );
 
     bool                        initAudioOut( QAudioFormat& audioFormat );
-    void                        suspend()           { if( m_output ) m_output->suspend(); }
-    void                        resume()            { if( m_output ) m_output->resume(); }
-    void                        stopAudioOut( );
 
+    void                        suspend()           { if( m_AudioOutputDevice ) m_AudioOutputDevice->suspend(); }
+    void                        resume()            { if( m_AudioOutputDevice ) m_AudioOutputDevice->resume(); }
+ 
     bool                        setDevice( QAudioDeviceInfo deviceInfo );
 
     void                        start();
     void                        setVolume( float volume );
-    void                        output( const QByteArray & data );
     void                        flush();
     void                        stop();
 
-    qint64                      readData( char *data, qint64 maxlen );
-    qint64                      writeData( const char *data, qint64 len );
+    QAudio::State               getState()      { return ( m_AudioOutputDevice ? m_AudioOutputDevice->state() : QAudio::StoppedState); }
+    QAudio::Error               getError()      { return ( m_AudioOutputDevice ? m_AudioOutputDevice->error() : QAudio::NoError); }
 
-    qint64                      bytesAvailable() const;
+    QAudioOutput *              getAudioOut( )  { return m_AudioOutputDevice; }
 
-    QAudio::State               getState()      { return (m_output ? m_output->state() : QAudio::StoppedState); }
-    QAudio::Error               getError()      { return (m_output ? m_output->error() : QAudio::NoError); }
+	/// space available to que audio data into buffer
+	int							audioQueFreeSpace();
 
-    QAudioOutput *              getAudioOut( )  { return m_output; }
+	/// space used in audio que buffer
+	int							audioQueUsedSpace();
+
+	///  write to audio buffer.. return total written to  buffer
+	int 						enqueueAudioData( char* pcmData, int countBytes );
+
+signals:
+	void						signalStart();
+	void						signalStop();
+	void						signalSuspend();
+	void						signalResume();
+	void						signalCheckForBufferUnderun();
+
+protected slots:
+	void						slotStart();
+	void						slotStop();
+	void						slotSuspend();
+	void						slotResume();
+	void						slotCheckForBufferUnderun();
+
+protected:
+	// resume qt audio if needed
+	void						checkForBufferUnderun();
+
+	qint64                      bytesAvailable() const override;
+
+	qint64                      readData( char *data, qint64 maxlen ) override;
+	qint64                      writeData( const char *data, qint64 len )  override;;
+	bool						isSequential() const { return true; }
 
 private:
     void                        reinit();
@@ -63,12 +92,13 @@ private:
     bool                        m_initialized;
     QAudioFormat                m_AudioFormat;
     QAudioDeviceInfo            m_deviceInfo;
-    QAudioOutput*               m_output;
+    QAudioOutput*               m_AudioOutputDevice = nullptr;
     float                       m_volume;
 
-signals:
+	mutable VxMutex				m_AudioBufMutex;
+	QByteArray					m_AudioBuffer;
 
 public slots :
-    void                        notified();
-    void                        stateChanged( QAudio::State state );
+    void                        slotAudioNotified();
+    void                        onAudioDeviceStateChanged( QAudio::State state );
 };

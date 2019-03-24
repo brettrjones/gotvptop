@@ -74,7 +74,7 @@ public:
     double                      toGuiGetAudioCacheTotalSeconds();
 
     // amount of free queue space in bytes
-    virtual int				    toGuiGetAudioCacheFreeSpace();
+    virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule );
 
     void                        pauseAudioOut( );
     void                        resumeAudioOut( );
@@ -89,12 +89,12 @@ public slots:
 protected:
     void						initAudioOut( );
     void						stopAudioOut( );
-    void                        addToQue( const char * data, int len );
+    //void                        addToQue( const char * data, int len );
 
     void                        run( ) override; // thread override
 
     int                         getCachedDataLength( bool requireLock = true );
-    int                         getCachedMaxLength( ) { return ( AUDIO_BUF_SIZE_48000_2 * (AUDIO_BUF_COUNT - 1) ); }
+    int                         getCachedMaxLength( ) { return AUDIO_OUT_CACHE_SIZE; }
 
     void                        checkAudioState( int lastLenWrote );
 
@@ -112,7 +112,7 @@ protected:
     int                         m_OutWriteCount;
     int16_t                     m_MyLastAudioOutSample;
 
-    AudioBuffer                 m_AudioBuf;
+//    AudioBuffer                 m_AudioBuf;
 //    std::vector<unsigned char *>  m_AudioDataQue;
 //    VxBuffer                    m_PartialInBuf;
 //    VxBuffer                    m_PartialOutBuf;

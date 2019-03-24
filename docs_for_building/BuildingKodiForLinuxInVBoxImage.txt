@@ -1,9 +1,34 @@
 NOTE: building kodi is NOT required. instructions are here as a option to build kodi for comparison
 
-follow the instructions at https://kodi.wiki/view/HOW-TO:Compile_Kodi_for_Debian_or_Ubuntu
+follow the instructions at https://github.com/xbmc/xbmc/blob/master/docs/README.md
 
-except use git clone -b Krypton git://github.com/xbmc/xbmc.git Branch_17.6-Kr
+except use git clone -b Leia git://github.com/xbmc/xbmc.git 
 and
 if get a confure error about crosslib then do
 $ sudo make -C tools/depends/target/crossguid/ PREFIX=/usr/local 
 
+//=== new instructions for Kodi Leia ===//
+mkdir $HOME/project_sources/LinuxKodiLeia18.1
+cd $HOME/project_sources/LinuxKodiLeia18.1
+
+git clone https://github.com/xbmc/xbmc kodi
+sudo add-apt-repository ppa:team-xbmc/xbmc-ppa-build-depends
+sudo apt update
+sudo apt build-dep kodi
+cd kodi
+sudo make -C tools/depends/target/crossguid PREFIX=/usr/local
+sudo make -C tools/depends/target/flatbuffers PREFIX=/usr/local
+sudo make -C tools/depends/target/libfmt PREFIX=/usr/local
+sudo make -C tools/depends/target/wayland-protocols PREFIX=/usr/local
+sudo make -C tools/depends/target/waylandpp PREFIX=/usr/local
+
+cd $HOME/project_sources/LinuxKodiLeia18.1
+mkdir kodi-build
+cd kodi-build
+cmake ../kodi -DCMAKE_INSTALL_PREFIX=/usr/local
+when fails
+sudo apt install rapidjson-dev
+sudo apt install libshairplay-dev
+
+cmake ../kodi -DCMAKE_INSTALL_PREFIX=/usr/local
+cmake --build . -- VERBOSE=1 -j$(getconf _NPROCESSORS_ONLN)

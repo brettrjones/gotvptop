@@ -131,7 +131,7 @@ public:
     virtual int  				toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes ) = 0;
     virtual double  			toGuiGetAudioDelaySeconds() = 0;
     virtual double				toGuiGetAudioCacheTotalSeconds() = 0;
-    virtual int				    toGuiGetAudioCacheFreeSpace() = 0;
+    virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) = 0;
 
 	/// Start/Stop camera capture
 	virtual void				toGuiWantVideoCapture( bool wantVidCapture ) = 0;

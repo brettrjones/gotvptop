@@ -171,15 +171,25 @@ unsigned int CAESinkQt::AddPackets( uint8_t **data, unsigned int frames, unsigne
     //    }
     //}
 
-
-    while( m_IGoTv.toGuiGetAudioCacheFreeSpace() < size )
+	int retryCnt = 0;
+    while( ( m_IGoTv.toGuiGetAudioCacheFreeSpace( eAppModuleKodi ) < size ) && ( retryCnt < 5 ) )
     {
-        int requiredSpace = size - m_IGoTv.toGuiGetAudioCacheFreeSpace();
+        int requiredSpace = size - m_IGoTv.toGuiGetAudioCacheFreeSpace( eAppModuleKodi );
         if( requiredSpace > 0 )
         {
-            VxSleep( 10 );
+            VxSleep( 100 );
+			retryCnt++;
         }
+		else
+		{
+			break;
+		}
     }
+
+	if( retryCnt >= 5 )
+	{
+		LogMsg( LOG_DEBUG, "CAESinkQt::AddPackets timeout snd buf needs %d free space but has %d \n", size, m_IGoTv.toGuiGetAudioCacheFreeSpace( eAppModuleKodi )  );
+	}
 
     //float* pBuffer = ( float* )data[ 0 ] + offset*m_AvailableFormat.m_frameSize;
     //static int frameCnt = 0;

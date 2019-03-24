@@ -115,7 +115,7 @@ void AudioOutQt::resumeAudioOut()
 //============================================================================
 void AudioOutQt::initAudioOut()
 {
-    m_AudioOutIo.start();
+//    m_AudioOutIo.start();
 }
     
 //============================================================================
@@ -149,6 +149,7 @@ void AudioOutQt::setVolume( float volume )
 //============================================================================
 qint64 AudioOutQt::speakerOutReadData( char * data, qint64 maxlen )
 {
+	/*
     if( 0 >= maxlen )
     {
         return 0;
@@ -156,7 +157,7 @@ qint64 AudioOutQt::speakerOutReadData( char * data, qint64 maxlen )
 
     // if there is not enough data then fill the beginning of data with silence
     int dataLenRead = 0;
-    int dataAvail = m_AudioBuf.bytesAvailable();
+    //int dataAvail = m_AudioBuf.bytesAvailable();
     if( dataAvail < maxlen )
     {
         memset( data, 0, maxlen - dataAvail );
@@ -183,32 +184,56 @@ qint64 AudioOutQt::speakerOutReadData( char * data, qint64 maxlen )
     checkAudioState( dataLenRead );
 
     return dataLenRead;
+	*/
+	return 0;
 }
 
 //============================================================================
 double AudioOutQt::getAudioDelaySeconds() 
 {
     int totalCachedData = getCachedDataLength( );
-    return ((double)totalCachedData / (double)AUDIO_SIZE_DIV_TO_MS_48000_2) / 1000.0;
+	double sndDelaySec = ((double)totalCachedData / (double)( 48000 * 2 * 2 ) );
+	LogMsg( LOG_DEBUG, "soundBuffer delay seconds %3.3f", sndDelaySec );
+	return sndDelaySec;
 }
 
 //============================================================================
 double AudioOutQt::toGuiGetAudioCacheTotalSeconds()
 {
     int totalCachedData = getCachedMaxLength();
-    return ( ( double )totalCachedData / ( double )AUDIO_SIZE_DIV_TO_MS_48000_2 ) / 1000.0;
+	double sndSeconds = ( (double)totalCachedData / (double)( 48000 * 2 * 2 )); //48000 * 2 bytes per sample * 2 channels 
+	LogMsg( LOG_DEBUG, "Max soundBuffer seconds %3.3f", sndSeconds );
+	return sndSeconds;
 }
 
 //============================================================================
 int AudioOutQt::getCachedDataLength( bool requireLock )
 {
-    return m_AudioBuf.bytesAvailable();
+    //return m_AudioBuf.bytesAvailable();
+	int bytesInCache = m_AudioOutIo.audioQueUsedSpace();
+	LogMsg( LOG_DEBUG, "Bytes in snd buffer %d", bytesInCache );
+
+	return bytesInCache;
 }
 
 //============================================================================
-int AudioOutQt::toGuiGetAudioCacheFreeSpace( )
+int AudioOutQt::toGuiGetAudioCacheFreeSpace( EAppModule appModule )
 {
-    return  getCachedMaxLength() - getCachedDataLength( );
+    int freeSpace =  getCachedMaxLength() - getCachedDataLength( );
+	if( freeSpace < 0 ) // can happen because getCachedDataLength is all awaiting read including what is in the device
+	{
+		freeSpace = 0;
+	}
+
+	LogMsg( LOG_DEBUG, "snd buffer free space %d", freeSpace );
+
+	if( eAppModuleKodi == appModule )
+	{
+		// for kodi the sound goes through a float to 16 bit pcm conversion so report what kodi wants
+		freeSpace *= sizeof( float ) / sizeof( uint16_t );
+	}
+
+	return freeSpace;
 }
 
 //============================================================================
@@ -226,7 +251,8 @@ static uint32_t SwapEndian32( uint32_t x ) {
 int AudioOutQt::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes )
 {
     // it seems Qt does not handle anything but pcm 16 bit signed samples correctly so convert to what Qt can handle
-    int wrote = 0;
+    int wroteByteCnt = 0;
+	int desiredWriteByteCnt = 0;
     if( m_IsTestMode && ( eAppModuleTest == appModule ) )
     {
         return pcmDataLenInBytes;
@@ -288,7 +314,9 @@ int AudioOutQt::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int
         // save the last sample to be used as first sample reference in next frame
         m_MyLastAudioOutSample = srcSamples[ mySampleCnt - 1 ];
 
-        wrote = m_AudioBuf.writeData( ( char * )outAudioData, pcmDataLenInBytes * upResampleMultiplier );
+		desiredWriteByteCnt = pcmDataLenInBytes * upResampleMultiplier;
+		wroteByteCnt = m_AudioOutIo.enqueueAudioData( (char *)outAudioData, desiredWriteByteCnt );
+        //wrote = m_AudioBuf.writeData( ( char * )outAudioData, pcmDataLenInBytes * upResampleMultiplier );
         delete outAudioData;
     }
     else
@@ -303,13 +331,15 @@ int AudioOutQt::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int
              outAudioData[ i ] = ( int16_t )(inSampleData[ i ] * 32767.0f);
         }
         
-        wrote += m_AudioBuf.writeData( ( char * )outAudioData, sampleCnt * sizeof( int16_t ) );
-        wrote *= sizeof( float ) / sizeof( int16_t ); // amount written needs int16 to float size as far as kodi is concerned
+		desiredWriteByteCnt = sampleCnt * sizeof( int16_t );
+		wroteByteCnt = m_AudioOutIo.enqueueAudioData( (char *)outAudioData, desiredWriteByteCnt );
+        //wrote += m_AudioBuf.writeData( ( char * )outAudioData, sampleCnt * sizeof( int16_t ) );
+		wroteByteCnt *= sizeof( float ) / sizeof( int16_t ); // amount written needs int16 to float size as far as kodi is concerned
 
         delete outAudioData;
     }
 
-    return wrote;
+    return wroteByteCnt;
 }
 
 //============================================================================
@@ -355,9 +385,9 @@ void AudioOutQt::checkAudioState( int lastLenWrote )
         break;
     }
 
-    if( 0 != m_AudioOutIo.bytesAvailable() )
+    if( 0 != m_AudioOutIo.audioQueUsedSpace() )
     {
-        LogMsg( LOG_DEBUG, "AudioOutQt device bytes available %lld", m_AudioOutIo.bytesAvailable() );
+        LogMsg( LOG_DEBUG, "AudioOutQt device bytes available for audio device read %d", m_AudioOutIo.audioQueUsedSpace() );
     }
 
     //if(  m_AudioOutIo.getAudioOut() )

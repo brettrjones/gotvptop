@@ -58,9 +58,9 @@ double IGoTv::toGuiGetAudioCacheTotalSeconds()
 }
 
 //============================================================================
-int IGoTv::toGuiGetAudioCacheFreeSpace()
+int IGoTv::toGuiGetAudioCacheFreeSpace( EAppModule appModule )
 {
-    return getAppCommon().toGuiGetAudioCacheFreeSpace();
+    return getAppCommon().toGuiGetAudioCacheFreeSpace( appModule );
 }
 
 //============================================================================

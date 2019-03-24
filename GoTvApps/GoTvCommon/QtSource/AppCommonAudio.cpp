@@ -138,13 +138,13 @@ double AppCommon::toGuiGetAudioCacheTotalSeconds()
 }
 
 //============================================================================
-int AppCommon::toGuiGetAudioCacheFreeSpace()
+int AppCommon::toGuiGetAudioCacheFreeSpace( EAppModule appModule )
 {
     if( VxIsAppShuttingDown() )
     {
         return 0;
     }
 
-    return m_AudioOut.toGuiGetAudioCacheFreeSpace( );
+    return m_AudioOut.toGuiGetAudioCacheFreeSpace( appModule );
 }
 

@@ -345,7 +345,7 @@ public:
     virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes ) override;
     virtual double				toGuiGetAudioDelaySeconds( ) override;
     virtual double				toGuiGetAudioCacheTotalSeconds() override;
-    virtual int				    toGuiGetAudioCacheFreeSpace( ) override;
+    virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) override;
 
     virtual void				toGuiWantVideoCapture( bool wantVidCapture ) override;
     virtual void				toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
