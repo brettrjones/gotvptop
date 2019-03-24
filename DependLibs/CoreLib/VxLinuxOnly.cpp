@@ -98,19 +98,40 @@ void strlwr( char * pStr )
     }
 }
 
-#ifndef TARGET_OS_ANDROID
+#if !defined(TARGET_OS_ANDROID)
 //============================================================================
 //! case insensitive string compare
-int stricmp( const char * pStr1, const char * pStr2 )
+int stricmp( const char * s1, const char * s2 )
 {
-    return strcasecmp( pStr1, pStr2 );
+    unsigned char c1,c2;
+    do
+    {
+        c1 = *s1++;
+        c2 = *s2++;
+        c1 = (unsigned char) tolower( (unsigned char)c1 );
+        c2 = (unsigned char) tolower( (unsigned char)c2 );
+    }
+    while( ( c1 == c2 ) && ( c1 != '\0' ) );
+
+    return (int) c1-c2;
 }
 
 //============================================================================
 //! case insensitive string compare
-int strnicmp( const char * pStr1, const char * pStr2, int n )
+int strnicmp( const char * s1, const char * s2, int n )
 {
-    return strncasecmp( pStr1, pStr2, n );
+    if( n == 0 )
+        return 0;
+
+    while( n-- != 0 && tolower( *s1 ) == tolower( *s2 ) )
+    {
+        if( n == 0 || *s1 == '\0' || *s2 == '\0' )
+            break;
+        s1++;
+        s2++;
+    }
+
+    return tolower( *(unsigned char *) s1 ) - tolower( *(unsigned char *) s2 );
 }
 #endif // TARGET_OS_ANDROID
 

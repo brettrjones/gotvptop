@@ -1406,7 +1406,6 @@ SOURCES += 	\
     $$PWD/DependLibs/libgnu/nl_langinfo_gnu.c \
     $$PWD/DependLibs/libgnu/obstack_gnu.c \
     $$PWD/DependLibs/libgnu/open-catalog_gnu.c \
-#    $$PWD/DependLibs/libgnu/open_gnu.c \
     $$PWD/DependLibs/libgnu/osdep_gnu.c \
     $$PWD/DependLibs/libgnu/ostream_gnu.c \
     $$PWD/DependLibs/libgnu/ostream.oo_gnu.c \

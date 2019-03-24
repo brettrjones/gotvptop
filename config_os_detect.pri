@@ -136,10 +136,10 @@ CONFIG(release, debug|release){
     BUILD_TYPE=Release
 }
 
-contains( TARGET_CPU_BITS, 64 ) {
-    message(Building $${TARGET_OS_NAME} $${BUILD_TYPE} 64 bit $${TARGET_ARCH_NAME} )
-}
+#contains( TARGET_CPU_BITS, 64 ) {
+#    message(Building $${TARGET_OS_NAME} $${BUILD_TYPE} 64 bit $${TARGET_ARCH_NAME} )
+#}
 
-contains( TARGET_CPU_BITS, 32 ) {
-    message(Building $${TARGET_OS_NAME} $${BUILD_TYPE} 32 bit $${TARGET_ARCH_NAME}  )
-}
+#contains( TARGET_CPU_BITS, 32 ) {
+#    message(Building $${TARGET_OS_NAME} $${BUILD_TYPE} 32 bit $${TARGET_ARCH_NAME}  )
+#}

@@ -9,6 +9,29 @@ include(config_opensslp_include.pri)
 
 include(python_pythoncore.pri)
 
+
+$${TARGET_NAME}$${SHARED_LIB_APPEND}.depends += $$PWD/GoTvOpenSslLib.pro
+$${TARGET_NAME}$${SHARED_LIB_APPEND}.depends += $$PWD/libgnu.pro
+$${TARGET_NAME}$${SHARED_LIB_APPEND}.depends += $$PWD/libbz2.pro
+$${TARGET_NAME}$${SHARED_LIB_APPEND}.depends += $$PWD/libcorelib.pro
+$${TARGET_NAME}$${SHARED_LIB_APPEND}.depends += $$PWD/libcrossguid.pro
+
+
+$${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}.depends += $$PWD/libgnu.pro
+$${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}.depends += $$PWD/libbz2.pro
+$${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}.depends += $$PWD/libcorelib.pro
+$${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}.depends += $$PWD/GoTvOpenSslLib.pro
+
+
+
+PRE_TARGETDEPS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
+PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
+PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}curl$${STATIC_LIB_SUFFIX}
+PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}depends$${STATIC_LIB_SUFFIX}
+PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}gnu$${STATIC_LIB_SUFFIX}
+PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}corelib$${STATIC_LIB_SUFFIX}
+PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
+
 LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
 
 #LIBS +=  $${STATIC_LIB_PREFIX}libeay$${STATIC_LIB_SUFFIX}

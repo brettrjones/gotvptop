@@ -1544,7 +1544,7 @@ slash. */
 
 
 /* Define to 1 if strerror(0) does not return a message implying success. */
-#define REPLACE_STRERROR_0 0
+//#define REPLACE_STRERROR_0 0
 
 /* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
 'sig_atomic_t'. */

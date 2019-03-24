@@ -53,13 +53,13 @@
 
 #define bzero( A, B ) memset( A, 0, B )
 
-#ifndef strcasecmp
-#define strcasecmp _stricmp
-#endif
+//#ifndef strcasecmp
+//#define strcasecmp _stricmp
+//#endif
 
-#ifndef strncasecmp
-#define strncasecmp _strnicmp
-#endif
+//#ifndef strncasecmp
+//#define strncasecmp _strnicmp
+//#endif
 
 #define snprintf _snprintf
 #define vsnprintf _vsnprintf

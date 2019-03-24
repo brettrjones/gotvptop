@@ -2010,6 +2010,12 @@ std::string CUtil::ResolveExecutablePath()
     int ret = readlink( linkname, buf, sizeof( buf ) - 1 );
     if( ret != -1 )
         buf[ ret ] = 0;
+    // remove process name
+    char * lastSlash = strrchr( buf, '/' );
+    if( lastSlash )
+    {
+        *lastSlash = 0;
+    }
 
     strExecutablePath = buf;
 #endif

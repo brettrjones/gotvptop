@@ -34,8 +34,8 @@
 #define PATH_MAX MAX_PATH
 #endif
 
-#define strcasecmp stricmp
-#define strncasecmp strnicmp
+//#define strcasecmp stricmp
+//#define strncasecmp strnicmp
 
 #define S_ISDIR(m) ((m) & _S_IFDIR)
 #define S_ISREG(m) ((m) & _S_IFREG)

@@ -118,14 +118,14 @@ echo GoTv Compiler Config error no os defined
 # define HAS_FILESYSTEM_NFS
 #endif // HAVE_LIBNFS
 
-#ifndef HAS_MDNS_EMBEDDED
+#if defined(HAS_MDNS_EMBEDDED) && defined( TARGET_OS_WINDOWS)
 # define HAS_MDNS           1 
 #endif // HAS_MDNS_EMBEDDED
 
 //#define HAS_MYSQL 1 // uses sqlite3 instead
 
 #define HAS_UPNP            1 
-#ifndef TARGET_OS_ANDROID // BRJ FIXME .. implement existing zero config for android
+#if !defined(TARGET_OS_ANDROID) && !defined(TARGET_OS_LINUX) // BRJ FIXME .. implement existing zero config for android
 # define HAS_ZEROCONF        1
 #endif // TARGET_OS_ANDROID
 

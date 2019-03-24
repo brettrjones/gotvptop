@@ -104,7 +104,9 @@ namespace
 // /exe/assets/kodi		kodi exe assets path
 //            /gotv		gotv assets path
 
-// data storage paths
+// data storage paths linux      /home/user/.local/share/gotvptop
+//                    windows    C:\Users\user\AppData\Roaming\GoTvPtoP
+//                    android ?
 // /storage/GoTvPtoP/temp/		temporary files path
 //                  /logs/		log files path
 //                  /gotv/		ShredFilesDb.db3 and app generated files
@@ -175,7 +177,7 @@ std::string& VxGetAppDirectory(EAppDir appDir)
 		return g_strPersonalRecordDir;
 	}
 
-	std::string emptyStr = "";
+static std::string emptyStr = "";
 	return emptyStr;
 }
 

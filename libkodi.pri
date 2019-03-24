@@ -1933,6 +1933,7 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/PluginDirectory.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/RSSDirectory.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/ResourceDirectory.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/filesystem/ResourceFile.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/ShoutcastFile.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/SmartPlaylistDirectory.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/SourcesDirectory.cpp \

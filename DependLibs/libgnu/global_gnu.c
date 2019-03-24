@@ -223,7 +223,8 @@ parse_version_string( const char *s, int *major, int *minor, int *micro )
 const char *
 _gcry_check_version (const char *req_version)
 {
-    const char *ver = PACKAGE_VERSION;
+   #define GCRY_PACKAGE_VERSION "1.6.0" // give gnu what it wants.. its all built in anyway
+    const char *ver = GCRY_PACKAGE_VERSION;
     int my_major, my_minor, my_micro;
     int rq_major, rq_minor, rq_micro;
     const char *my_plvl;
