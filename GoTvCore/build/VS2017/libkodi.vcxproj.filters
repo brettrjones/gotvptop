@@ -1528,9 +1528,6 @@
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Numeric.cpp">
       <Filter>addons\interfaces\GUI\dialogs</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\OK.cpp">
-      <Filter>addons\interfaces\GUI\dialogs</Filter>
-    </ClCompile>
     <ClCompile Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Select.cpp">
       <Filter>addons\interfaces\GUI\dialogs</Filter>
     </ClCompile>
@@ -2707,17 +2704,13 @@
     <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\controls\Progress3.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Keyboard2.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Progress2.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\General2.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\ListItem2.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\Window2.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\Network2.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\addons\PVRClientMenuHooks.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\AppInboundProtocol.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\ApplicationEvents.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\commons\Exception.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\commons\ilog.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\CompileInfo.cpp" />
-    <ClCompile Include="..\..\xbmc\xbmc\cores\AudioEngine\Sinks\AESinkQt.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\audio\AudioTranslator.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\BaseRenderBuffer.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\BaseRenderBufferPool.cpp" />
@@ -3105,6 +3098,21 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\xbmc\guilib\TextureQt.cpp">
       <Filter>guilib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\cores\AudioEngine\Sinks\AESinkQt.cpp">
+      <Filter>cores\AudioEngine\Sinks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\OK.cpp">
+      <Filter>addons\interfaces\GUI\dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\General2.cpp">
+      <Filter>addons\interfaces\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\GUI\ListItem2.cpp">
+      <Filter>addons\interfaces\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\xbmc\addons\interfaces\Network2.cpp">
+      <Filter>addons\interfaces</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -4872,9 +4880,6 @@
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Numeric.h">
       <Filter>addons\interfaces\GUI\dialogs</Filter>
     </ClInclude>
-    <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\OK.h">
-      <Filter>addons\interfaces\GUI\dialogs</Filter>
-    </ClInclude>
     <ClInclude Include="$(ProjectDir)..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\Progress.h">
       <Filter>addons\interfaces\GUI\dialogs</Filter>
     </ClInclude>
@@ -6606,7 +6611,6 @@
     <ClInclude Include="..\..\xbmc\xbmc\commons\Exception.h" />
     <ClInclude Include="..\..\xbmc\xbmc\commons\ilog.h" />
     <ClInclude Include="..\..\xbmc\xbmc\CompileInfo.h" />
-    <ClInclude Include="..\..\xbmc\xbmc\cores\AudioEngine\Sinks\AESinkQt.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\audio\AudioTranslator.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\BaseRenderBuffer.h" />
     <ClInclude Include="..\..\xbmc\xbmc\cores\RetroPlayer\buffers\BaseRenderBufferPool.h" />
@@ -7032,6 +7036,12 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\xbmc\guilib\TextureQt.h">
       <Filter>guilib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\cores\AudioEngine\Sinks\AESinkQt.h">
+      <Filter>cores\AudioEngine\Sinks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\xbmc\addons\interfaces\GUI\dialogs\OK.h">
+      <Filter>addons\interfaces\GUI\dialogs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

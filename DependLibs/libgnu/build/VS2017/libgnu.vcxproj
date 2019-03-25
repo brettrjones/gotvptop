@@ -1371,7 +1371,6 @@
     <ClCompile Include="..\..\nl_langinfo_gnu.c" />
     <ClCompile Include="..\..\obstack_gnu.c" />
     <ClCompile Include="..\..\open-catalog_gnu.c" />
-    <ClCompile Include="..\..\open_gnu.c" />
     <ClCompile Include="..\..\opencdk\armor_gnu.c" />
     <ClCompile Include="..\..\opencdk\kbnode_gnu.c" />
     <ClCompile Include="..\..\opencdk\keydb_gnu.c" />

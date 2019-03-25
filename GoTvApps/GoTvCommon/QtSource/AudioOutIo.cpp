@@ -87,7 +87,7 @@ void AudioOutIo::start()
 	//m_AudioOutputDevice->setBufferSize( AUDIO_BUF_SIZE_48000_2 );
 	//m_AudioOutputDevice->setNotifyInterval( AUDIO_BUF_MS );
 	m_AudioOutputDevice->start( this );
-	LogMsg( LOG_DEBUG, "AudioOutIo default buffer size %d periodic size %d", m_AudioOutputDevice->bufferSize(), m_AudioOutputDevice->periodSize() );
+	//LogMsg( LOG_DEBUG, "AudioOutIo default buffer size %d periodic size %d", m_AudioOutputDevice->bufferSize(), m_AudioOutputDevice->periodSize() );
 }
 
 
@@ -179,10 +179,10 @@ qint64 AudioOutIo::readData( char *data, qint64 maxlen )
 		m_AudioBuffer.remove( 0, toWriteByteCnt ); //pop front what is written
 	}
 
-	if( toWriteByteCnt )
-	{
-		LogMsg( LOG_DEBUG, "enqueueAudioData total bytes avail %lld", bytesAvailable() );
-	}
+	//if( toWriteByteCnt )
+	//{
+	//	LogMsg( LOG_DEBUG, "enqueueAudioData total bytes avail %lld", bytesAvailable() );
+	//}
 
 	m_AudioBufMutex.unlock();
 	//if( ( 0 == towritedevice ) && m_AudioOutputDevice )
@@ -349,13 +349,5 @@ void AudioOutIo::slotCheckForBufferUnderun()
 			LogMsg( LOG_DEBUG, "Iterrupted state.. how to handle?" );
 			break;
 		};
-
-		//QIODevice* start();
-
-		//void stop();
-		//void reset();
-		//void suspend();
-		//void resume();
-
 	}
 }

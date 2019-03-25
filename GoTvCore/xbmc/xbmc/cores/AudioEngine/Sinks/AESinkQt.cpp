@@ -43,9 +43,9 @@
 #define OSS_FRAMES 256
 
 //static enum AEChannel QtChannelMap[ 9 ] = { AE_CH_FL, AE_CH_FR, AE_CH_BL, AE_CH_BR, AE_CH_FC, AE_CH_LFE, AE_CH_SL, AE_CH_SR, AE_CH_NULL };
-static enum AEChannel QtChannelMap[ 9 ] = { AE_CH_FL, AE_CH_FR, AE_CH_NULL, AE_CH_NULL, AE_CH_NULL, AE_CH_NULL, AE_CH_NULL, AE_CH_NULL, AE_CH_NULL };
+//static enum AEChannel QtChannelMap[ 9 ] = { AE_CH_FL, AE_CH_FR, AE_CH_NULL, AE_CH_NULL, AE_CH_NULL, AE_CH_NULL, AE_CH_NULL, AE_CH_NULL, AE_CH_NULL };
 
-static const unsigned int PassthroughSampleRates[] = { 8000, 11025, 16000, 22050, 24000, 32000, 44100, 48000, 88200, 96000, 176400, 192000 };
+//static const unsigned int PassthroughSampleRates[] = { 8000, 11025, 16000, 22050, 24000, 32000, 44100, 48000, 88200, 96000, 176400, 192000 };
 
 
 //============================================================================
@@ -90,26 +90,44 @@ std::string CAESinkQt::GetDeviceUse( const AEAudioFormat& format, const std::str
 //============================================================================
 bool CAESinkQt::Initialize( AEAudioFormat& desiredFormat, std::string &device )
 {
-    m_DesiredFormat = desiredFormat;
-    m_AvailableFormat.m_channelLayout = AE_CH_LAYOUT_2_0;
-    m_AvailableFormat.m_sampleRate = 48000;
+	desiredFormat.m_channelLayout.setTo2ChannelLayout();
+	desiredFormat.m_sampleRate = 48000;
+	desiredFormat.m_dataFormat = AE_FMT_FLOAT;
+	// m_frameSize is misnamed.. is really number of bytes per sample of all channels ie 2 channels * 16 bit samples = 4 or if float format then 2 channels * 4 bytes per sample = 8
+	desiredFormat.m_frameSize = 2 * sizeof( float );
+	// frames is misnamed.. is really number of samples per frame 
+	desiredFormat.m_frames = 48000 * 0.020;  // 20 ms samples
 
-#if OUTPUT_PCM_SAMPLES
-    m_AvailableFormat.m_dataFormat = AE_FMT_S16LE;
+
+	m_DesiredFormat = desiredFormat;
+	m_AvailableFormat = desiredFormat;
+	//m_AvailableFormat.m_channelLayout = AE_CH_LAYOUT_2_0;
+	//m_AvailableFormat.m_sampleRate = 48000;
+
+//#if OUTPUT_PCM_SAMPLES
+//    m_AvailableFormat.m_dataFormat = AE_FMT_S16LE;
+//    // m_frameSize is misnamed.. is really number of bytes per sample of all channels ie 2 channels * 16 bit samples = 4 or if float format then 2 channels * 4 bytes per sample = 8
+//    m_AvailableFormat.m_frameSize = 4;
+//    m_AvailableFormat.m_frames = 15360 / m_AvailableFormat.m_frameSize;  // 80 ms samples of 2 channel 4 bytes per sample * 48000 Hz
+//#else
+//    m_AvailableFormat.m_dataFormat = AE_FMT_FLOAT;
     // m_frameSize is misnamed.. is really number of bytes per sample of all channels ie 2 channels * 16 bit samples = 4 or if float format then 2 channels * 4 bytes per sample = 8
-    m_AvailableFormat.m_frameSize = 4;
-    m_AvailableFormat.m_frames = 15360 / m_AvailableFormat.m_frameSize;  // 80 ms samples of 2 channel 4 bytes per sample * 48000 Hz
-#else
-    m_AvailableFormat.m_dataFormat = AE_FMT_FLOAT;
-    // m_frameSize is misnamed.. is really number of bytes per sample of all channels ie 2 channels * 16 bit samples = 4 or if float format then 2 channels * 4 bytes per sample = 8
-    m_AvailableFormat.m_frameSize = 2 * sizeof( float );
+//    m_AvailableFormat.m_frameSize = 2 * sizeof( float );
     // frames is misnamed.. is really number of samples per frame 
-    m_AvailableFormat.m_frames = 48000 * 0.015;  // 15 ms samples
-#endif // OUTPUT_PCM_SAMPLES
+ //   m_AvailableFormat.m_frames = 48000 * 0.020;  // 20 ms samples
+//#endif // OUTPUT_PCM_SAMPLES
 
-    desiredFormat = m_AvailableFormat;
+    //desiredFormat = m_AvailableFormat;
     device = GetName();
     m_device = device;
+
+	CLog::Log( LOGDEBUG, " Qt Audio Device    : %s", device.c_str() );
+	CLog::Log( LOGDEBUG, " Qt Sample Rate     : %d", desiredFormat.m_sampleRate );
+	CLog::Log( LOGDEBUG, " Qt Sample Format   : %s", CAEUtil::DataFormatToStr( desiredFormat.m_dataFormat ) );
+	CLog::Log( LOGDEBUG, " Qt Channel Count   : %d", desiredFormat.m_channelLayout.Count() );
+	CLog::Log( LOGDEBUG, " Qt Frames          : %d", desiredFormat.m_frames );
+	CLog::Log( LOGDEBUG, " Qt Frame Size      : %d", desiredFormat.m_frameSize );
+
     return true;
 }
 
@@ -124,10 +142,11 @@ inline CAEChannelInfo CAESinkQt::GetChannelLayout( const AEAudioFormat& format )
 {
     int count = 2;
     CAEChannelInfo info;
-    for( unsigned int i = 0; i < count; ++i )
-    {
-        info += QtChannelMap[ i ];
-    }
+	info.setTo2ChannelLayout();
+ //   for( unsigned int i = 0; i < count; ++i )
+ //   {
+ //       info += QtChannelMap[ i ];
+ //   }
 
     return info;
 }
@@ -248,21 +267,24 @@ void CAESinkQt::Drain()
 void CAESinkQt::EnumerateDevicesEx( AEDeviceInfoList &list, bool force )
 {
     // BRJ
-    CAEDeviceInfo info;
-    info.m_deviceName           = "AESinkQt";
-    info.m_displayName          = "AESinkQt";
+    CAEDeviceInfo deviceInfo;
+	deviceInfo.m_deviceName           = std::string( "AESinkQt" );
+	deviceInfo.m_displayName          = std::string( "AESinkQt" );
+	deviceInfo.m_displayNameExtra = std::string( "" );
 
-#if OUTPUT_PCM_SAMPLES
-    info.m_dataFormats.push_back( AE_FMT_S16LE );
-#else
-    info.m_dataFormats.push_back( AE_FMT_FLOAT );
-#endif // OUTPUT_PCM_SAMPLES
+//#if OUTPUT_PCM_SAMPLES
+//    info.m_dataFormats.push_back( AE_FMT_S16LE );
+//#else
+	deviceInfo.m_dataFormats.push_back( AE_FMT_FLOAT );
+//#endif // OUTPUT_PCM_SAMPLES
 
-    info.m_deviceType           = AE_DEVTYPE_PCM;
-    info.m_wantsIECPassthrough  = false;
-    info.m_channels             = AE_CH_LAYOUT_2_0;
-    info.m_sampleRates.push_back( 48000 );
-    list.push_back( info );
+	deviceInfo.m_deviceType           = AE_DEVTYPE_PCM;
+	deviceInfo.m_wantsIECPassthrough  = false;
+	deviceInfo.m_channels.setTo2ChannelLayout(); // = AE_CH_LAYOUT_2_0;
+
+	deviceInfo.m_sampleRates.push_back( 48000 );
+	//deviceInfo.m_dataFormats.push_back( AEDataFormat( AE_FMT_FLOAT ) );
+    list.push_back( deviceInfo );
 }
 
 #endif // HAVE_QT_GUI

@@ -32,6 +32,7 @@
 
 #define AC3_HEADER_SIZE 7
 
+#if CONFIG_AC3_PARSER
 
 static const uint8_t eac3_blocks[4] = {
     1, 2, 3, 6
@@ -161,7 +162,9 @@ int avpriv_ac3_parse_header(AC3HeaderInfo **phdr, const uint8_t *buf,
         return AVERROR(ENOMEM);
     hdr = *phdr;
 
-    init_get_bits8(&gb, buf, size);
+    err = init_get_bits8(&gb, buf, size);
+    if (err < 0)
+        return AVERROR_INVALIDDATA;
     err = ff_ac3_parse_header(&gb, hdr);
     if (err < 0)
         return AVERROR_INVALIDDATA;
@@ -238,3 +241,18 @@ AVCodecParser ff_ac3_parser = {
     .parser_parse   = ff_aac_ac3_parse,
     .parser_close   = ff_parse_close,
 };
+
+#else
+
+int avpriv_ac3_parse_header(AC3HeaderInfo **phdr, const uint8_t *buf,
+                            size_t size)
+{
+    return AVERROR(ENOSYS);
+}
+
+int av_ac3_parse_header(const uint8_t *buf, size_t size,
+                        uint8_t *bitstream_id, uint16_t *frame_size)
+{
+    return AVERROR(ENOSYS);
+}
+#endif

@@ -186,6 +186,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GoTvConfig", "GoTvConfig", 
 		..\..\GoTvAppConfig.h = ..\..\GoTvAppConfig.h
 		..\..\GoTvCompilerConfig.h = ..\..\GoTvCompilerConfig.h
 		..\..\GoTvCpuArchDefines.h = ..\..\GoTvCpuArchDefines.h
+		..\..\GoTvDebugConfig.h = ..\..\GoTvDebugConfig.h
 		..\..\GoTvDependLibrariesConfig.h = ..\..\GoTvDependLibrariesConfig.h
 		..\..\GoTvTargetOsConfig.h = ..\..\GoTvTargetOsConfig.h
 		..\..\GoTvVersion.txt = ..\..\GoTvVersion.txt
@@ -20631,7 +20632,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		Qt5Version = qt5.12
 		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
+		Qt5Version = qt5.12
 	EndGlobalSection
 EndGlobal

@@ -3097,9 +3097,6 @@
     <ClCompile Include="..\..\open-catalog_gnu.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\open_gnu.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\opencdk\armor_gnu.c">
       <Filter>Source Files</Filter>
     </ClCompile>

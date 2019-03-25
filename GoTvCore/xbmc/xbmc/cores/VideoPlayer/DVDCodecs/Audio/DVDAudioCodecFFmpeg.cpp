@@ -15,6 +15,7 @@
 #include "settings/SettingsComponent.h"
 #include "cores/VideoPlayer/DVDCodecs/DVDCodecs.h"
 #include "cores/AudioEngine/Utils/AEUtil.h"
+#include "GoTvDebugConfig.h"
 
 extern "C" {
 #include "libavutil/opt.h"
@@ -154,18 +155,21 @@ bool CDVDAudioCodecFFmpeg::AddData( const DemuxPacket &packet )
     avpkt.side_data = static_cast< AVPacketSideData* >( packet.pSideData );
     avpkt.side_data_elems = packet.iSideDataElems;
 
-    //static int pktCnt = 0;
-    //if( pktCnt < 100 ) 
-    //{
-    //    pktCnt++;
-    //    LogMsg( LOG_DEBUG, "BRJ CDVDAudioCodecFFmpeg::AddData %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X size %d cnt %d \n",
-    //            avpkt.data[ 0 ], avpkt.data[ 1 ], avpkt.data[ 2 ], avpkt.data[ 3 ], avpkt.data[ 4 ], avpkt.data[ 5 ], avpkt.data[ 6 ], avpkt.data[ 7 ], 
-    //            avpkt.data[ 8 ], avpkt.data[ 9 ], avpkt.data[ 10 ], avpkt.data[ 11 ], avpkt.data[ 12 ], avpkt.data[ 13 ], avpkt.data[ 14 ], avpkt.data[ 15 ], avpkt.size, pktCnt );
-    //}
-    //else
-    //{
-    //    LogMsg( LOG_DEBUG, "BRJ CDVDAudioCodecFFmpeg::AddData end " );
-    //}
+#if defined( DEBUG_AUDIO_DECODE_KODI )
+    static int pktCnt = 0; //BRJ z
+    pktCnt++;
+	if( ( pktCnt == 1 ) || ( pktCnt >= 48 && pktCnt < 50 ) )
+    {
+		avpkt.data = avpkt.data;
+        LogMsg( LOG_DEBUG, "BRJ CDVDAudioCodecFFmpeg::AddData %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X size %d cnt %d \n",
+                avpkt.data[ 0 ], avpkt.data[ 1 ], avpkt.data[ 2 ], avpkt.data[ 3 ], avpkt.data[ 4 ], avpkt.data[ 5 ], avpkt.data[ 6 ], avpkt.data[ 7 ], 
+                avpkt.data[ 8 ], avpkt.data[ 9 ], avpkt.data[ 10 ], avpkt.data[ 11 ], avpkt.data[ 12 ], avpkt.data[ 13 ], avpkt.data[ 14 ], avpkt.data[ 15 ], avpkt.size, pktCnt );
+    }
+    else
+    {
+        LogMsg( LOG_DEBUG, "BRJ CDVDAudioCodecFFmpeg::AddData end " );
+    }
+#endif // defined( DEBUG_KODI_DECODE_AUDIO )
 
     int ret = avcodec_send_packet( m_pCodecContext, &avpkt );
 
@@ -307,28 +311,46 @@ int CDVDAudioCodecFFmpeg::GetData( uint8_t** dst )
         for( int i = 0; i < planes; i++ )
             dst[ i ] = m_pFrame->extended_data[ i ];
 
-/*BRJ
-        if( m_pFrame->nb_samples > 16 )
-        {
-            frameCnt++;
-            for( int i = 0; i < planes; i++ )
-            {
-                LogMsg( LOG_DEBUG, "Plane %d\n", i );
-                if( m_format.m_dataFormat == AE_FMT_U8 )
-                {
-                    DumpInt8( LOG_DEBUG, ( int8_t * )dst[ i ], 16, frameCnt, "audio get u8" );
-                }
-                else if( m_format.m_dataFormat == AE_FMT_S16LE || m_format.m_dataFormat == AE_FMT_S16NE )
-                {
-                    DumpInt16( LOG_DEBUG, ( int16_t * )dst[ i ], 16 * 2, frameCnt, "audio get s16" );
-                }
-                else if( m_format.m_dataFormat == AE_FMT_FLOATP || m_format.m_dataFormat == AE_FMT_FLOAT )
-                {
-                    DumpFloat( LOG_DEBUG, ( float * )dst[ i ], 16 * 4, frameCnt, "audio get float" );
-                }
-            }
-        }
-*/
+
+#if defined(DEBUG_AUDIO_DECODE_KODI)
+		static int pktCnt = 0; //BRJ
+		if( planes && m_pFrame->nb_samples )
+		{
+			pktCnt++;
+			if( dst[0] && ( pktCnt < 50 ) )
+			{
+				uint8_t* rawData = dst[0];
+				uint8_t* startData = rawData;
+				int offset = 0;
+				for( int i = 0; i < m_pFrame->nb_samples * 4; i++ )
+				{
+					if( rawData[i] )
+					{
+						offset = i;
+						startData = rawData + i;
+						break;
+					}
+
+				}
+
+				uint8_t* audioData = startData;
+				LogMsg( LOG_DEBUG,
+					"BRJ CDVDAudioCodecFFmpeg::GetData %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X "
+					"%2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X size %d cnt %d \n",
+					audioData[0], audioData[1], audioData[2], audioData[3], audioData[4], audioData[5],
+					audioData[6], audioData[7], audioData[8], audioData[9], audioData[10],
+					audioData[11], audioData[12], audioData[13], audioData[14], audioData[15],
+					m_pFrame->nb_samples, pktCnt );
+
+				offset = 0;
+			}
+			else
+			{
+				LogMsg( LOG_DEBUG, "BRJ CDVDAudioCodecFFmpeg::AddData end " );
+			}
+		}
+
+#endif // defined( DEBUG_KODI_DECODE_AUDIO )
 
         return m_pFrame->nb_samples * m_pFrame->channels *
             av_get_bytes_per_sample( m_pCodecContext->sample_fmt );

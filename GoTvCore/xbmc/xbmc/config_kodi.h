@@ -122,6 +122,14 @@ typedef std::shared_ptr<CFileItem> CFileItemPtr;
 #define HAVE_DLL_LIB_EXIF			0
 #define HAVE_DLL_LIB_CPLUFF			0
 
+#if defined(TARGET_OS_WINDOWS)
+# define HAS_MDNS 1 // ZeroConfig for microsoft
+#endif // defined(TARGET_OS_WINDOWS)
+
+#if defined(TARGET_OS_LINUX)
+# define HAS_AVAHI 1 // ZeroConfig for linux
+#endif // defined(TARGET_OS_WINDOWS)
+
 //#include <vld.h> // Visual Studio memory leak detection from https://marketplace.visualstudio.com/items?itemName=ArkadyShapkin.VisualLeakDetectorforVisualC
 
 #if defined(TARGET_POSIX)
@@ -135,6 +143,7 @@ typedef std::shared_ptr<CFileItem> CFileItemPtr;
 //# undef HAS_LINUX_EVENTS
 //# undef HAS_LIRC
 //#endif
+
 
 
 #ifdef HAS_DVD_DRIVE

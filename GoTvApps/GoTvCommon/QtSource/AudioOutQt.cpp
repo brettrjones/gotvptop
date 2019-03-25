@@ -193,7 +193,7 @@ double AudioOutQt::getAudioDelaySeconds()
 {
     int totalCachedData = getCachedDataLength( );
 	double sndDelaySec = ((double)totalCachedData / (double)( 48000 * 2 * 2 ) );
-	LogMsg( LOG_DEBUG, "soundBuffer delay seconds %3.3f", sndDelaySec );
+	//LogMsg( LOG_DEBUG, "soundBuffer delay seconds %3.3f", sndDelaySec );
 	return sndDelaySec;
 }
 
@@ -202,7 +202,7 @@ double AudioOutQt::toGuiGetAudioCacheTotalSeconds()
 {
     int totalCachedData = getCachedMaxLength();
 	double sndSeconds = ( (double)totalCachedData / (double)( 48000 * 2 * 2 )); //48000 * 2 bytes per sample * 2 channels 
-	LogMsg( LOG_DEBUG, "Max soundBuffer seconds %3.3f", sndSeconds );
+	//LogMsg( LOG_DEBUG, "Max soundBuffer seconds %3.3f", sndSeconds );
 	return sndSeconds;
 }
 
@@ -211,7 +211,7 @@ int AudioOutQt::getCachedDataLength( bool requireLock )
 {
     //return m_AudioBuf.bytesAvailable();
 	int bytesInCache = m_AudioOutIo.audioQueUsedSpace();
-	LogMsg( LOG_DEBUG, "Bytes in snd buffer %d", bytesInCache );
+	//LogMsg( LOG_DEBUG, "Bytes in snd buffer %d", bytesInCache );
 
 	return bytesInCache;
 }
@@ -225,7 +225,7 @@ int AudioOutQt::toGuiGetAudioCacheFreeSpace( EAppModule appModule )
 		freeSpace = 0;
 	}
 
-	LogMsg( LOG_DEBUG, "snd buffer free space %d", freeSpace );
+	//LogMsg( LOG_DEBUG, "snd buffer free space %d", freeSpace );
 
 	if( eAppModuleKodi == appModule )
 	{

@@ -287,7 +287,7 @@ CActiveAE::CActiveAE() :
     m_vizInitialized = false;
     m_sinkHasVolume = false;
     m_aeGUISoundForce = false;
-    m_stats.Reset( 44100, true );
+    m_stats.Reset( 44800, true );
     m_streamIdGen = 0;
 
     m_settingsHandler.reset( new CActiveAESettings( *this ) );
@@ -1264,52 +1264,61 @@ AEAudioFormat CActiveAE::GetInputFormat( AEAudioFormat *desiredFmt )
 {
     AEAudioFormat inputFormat;
 
-    if( m_streams.empty() )
-    {
-#ifdef HAVE_QT_GUI
-        // BRJ
-        inputFormat.m_sampleRate = 48000;
-        inputFormat.m_channelLayout = AE_CH_LAYOUT_2_0;
- //BRJ       inputFormat.m_channelLayout.setChannelCount( 1 ); // has to be 1 or layout will get changed to AE_CH_LAYOUT_2_1
-# ifdef OUTPUT_PCM_SAMPLE
-        inputFormat.m_dataFormat = AE_FMT_S16LE;
-        // frames is misnamed.. is really number of samples per frame 
-        inputFormat.m_frames = 15360;  // 80 ms of samples of 2 channel 4 bytes per sample * 48000 Hz
-        // m_frameSize is misnamed.. is really number of bytes per sample of all channels ie 2 channels * 16 bit samples = 4 or if float format then 2 channels * 4 bytes per sample = 8
-        inputFormat.m_frameSize = 4;
-# else
-        inputFormat.m_dataFormat = AE_FMT_FLOAT;
-        // frames is misnamed.. is really number of samples per frame 
-        inputFormat.m_frames = 48000 * 0.08;  // 80 ms of samples of 2 channel 4 bytes per sample * 48000 Hz
-        // m_frameSize is misnamed.. is really number of bytes per sample of all channels ie 2 channels * 16 bit samples = 4 or if float format then 2 channels * 4 bytes per sample = 8
-        inputFormat.m_frameSize = 8;
-# endif
-
-#else
-        inputFormat.m_dataFormat = AE_FMT_FLOAT;
-        inputFormat.m_sampleRate = 44100;
-        inputFormat.m_channelLayout = AE_CH_LAYOUT_2_0;
-        inputFormat.m_frames = 0;
-        inputFormat.m_frameSize = 0;
-#endif
-    }
-    // force input format after unpausing slave
-    else if( desiredFmt != NULL )
-    {
-        inputFormat = *desiredFmt;
-    }
-    // keep format when having multiple streams
-    else if( m_streams.size() > 1 && m_silenceBuffers == NULL )
-    {
-        inputFormat = m_inputFormat;
-    }
-    else
-    {
-        inputFormat = m_streams.front()->m_format;
-        m_inputFormat = inputFormat;
-    }
+//    if( m_streams.empty() )
+//    {
+//#ifdef HAVE_QT_GUI
+//        // BRJ
+//        inputFormat.m_sampleRate = 48000;
+//		inputFormat.m_dataFormat = AE_FMT_FLOAT;
+//        inputFormat.m_channelLayout.setTo2ChannelLayout();
+//
+// //BRJ       inputFormat.m_channelLayout.setChannelCount( 1 ); // has to be 1 or layout will get changed to AE_CH_LAYOUT_2_1
+//# ifdef OUTPUT_PCM_SAMPLE
+//        inputFormat.m_dataFormat = AE_FMT_S16LE;
+//        // frames is misnamed.. is really number of samples per frame 
+//        inputFormat.m_frames = 15360;  // 80 ms of samples of 2 channel 4 bytes per sample * 48000 Hz
+//        // m_frameSize is misnamed.. is really number of bytes per sample of all channels ie 2 channels * 16 bit samples = 4 or if float format then 2 channels * 4 bytes per sample = 8
+//        inputFormat.m_frameSize = 4;
+//# else
+//        inputFormat.m_dataFormat = AE_FMT_FLOAT;
+//        // frames is misnamed.. is really number of samples per frame 
+//        inputFormat.m_frames = 48000 * 0.040;  // 80 ms of samples of 2 channel 4 bytes per sample * 48000 Hz
+//        // m_frameSize is misnamed.. is really number of bytes per sample of all channels ie 2 channels * 16 bit samples = 4 or if float format then 2 channels * 4 bytes per sample = 8
+//        inputFormat.m_frameSize = 8;
+//# endif
+//
+//#else
+//        inputFormat.m_dataFormat = AE_FMT_FLOAT;
+//        inputFormat.m_sampleRate = 44100;
+//        inputFormat.m_channelLayout = AE_CH_LAYOUT_2_0;
+//        inputFormat.m_frames = 0;
+//        inputFormat.m_frameSize = 0;
+//#endif
+//    }
+//    // force input format after unpausing slave
+//    else if( desiredFmt != NULL )
+//    {
+//        inputFormat = *desiredFmt;
+//    }
+//    // keep format when having multiple streams
+//    else if( m_streams.size() > 1 && m_silenceBuffers == NULL )
+//    {
+//        inputFormat = m_inputFormat;
+//    }
+//    else
+//    {
+//        inputFormat = m_streams.front()->m_format;
+//        m_inputFormat = inputFormat;
+//    }
 
     LogMsg( LOG_DEBUG, "BRJ CActiveAE::GetInputFormat %d rate %d", inputFormat.m_dataFormat, inputFormat.m_sampleRate );
+
+	inputFormat.m_sampleRate = 48000;
+	inputFormat.m_dataFormat = AE_FMT_FLOAT;
+	inputFormat.m_channelLayout.setTo2ChannelLayout();
+	inputFormat.m_frameSize = 2 * sizeof( float );
+	// frames is misnamed.. is really number of samples per frame 
+	inputFormat.m_frames = 48000 * 0.020;  // 20 ms samples
 
     return inputFormat;
 }
@@ -1803,6 +1812,7 @@ void CActiveAE::ChangeResamplers()
 
 void CActiveAE::ApplySettingsToFormat( AEAudioFormat &format, AudioSettings &settings, int *mode )
 {
+	/*
     int oldMode = m_mode;
     if( mode )
         *mode = MODE_PCM;
@@ -1909,7 +1919,7 @@ void CActiveAE::ApplySettingsToFormat( AEAudioFormat &format, AudioSettings &set
     }
 
     LogMsg( LOG_DEBUG, "BRJ CActiveAE::ApplySettingsToFormat %d rate %d", format.m_dataFormat, format.m_sampleRate );
-
+	*/
 }
 
 bool CActiveAE::NeedReconfigureBuffers()
@@ -2804,6 +2814,7 @@ void CActiveAE::LoadSettings()
 
     m_settings.resampleQuality = AE_QUALITY_MID; // static_cast< AEQuality >( CServiceBroker::GetSettings().GetInt( CSettings::SETTING_AUDIOOUTPUT_PROCESSQUALITY ) );
     m_settings.atempoThreshold = 0.02; //CServiceBroker::GetSettings().GetInt( CSettings::SETTING_AUDIOOUTPUT_ATEMPOTHRESHOLD ) / 100.0;
+	// if stream noise is true then constantly writing to audio device when do not need to
     m_settings.streamNoise = false; //CServiceBroker::GetSettings().GetBool( CSettings::SETTING_AUDIOOUTPUT_STREAMNOISE );
     m_settings.silenceTimeout = 60000; //CServiceBroker::GetSettings().GetInt( CSettings::SETTING_AUDIOOUTPUT_STREAMSILENCE ) * 60000;
 

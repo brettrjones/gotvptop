@@ -46,6 +46,17 @@ public:
     void ReplaceChannel( const enum AEChannel from, const enum AEChannel to );
     int BestMatch( const std::vector<CAEChannelInfo>& dsts, int* score = NULL ) const;
     void AddMissingChannels( const CAEChannelInfo& rhs );
+	void setTo2ChannelLayout()
+	{
+		m_channelCount = 2;
+		for( int i = 0; i < AE_CH_MAX; i++ )
+		{
+			m_channels[i] = AE_CH_NULL;
+		}
+
+		m_channels[0] = AE_CH_FL;
+		m_channels[1] = AE_CH_FR;
+	}
 
 private:
     unsigned int   m_channelCount;

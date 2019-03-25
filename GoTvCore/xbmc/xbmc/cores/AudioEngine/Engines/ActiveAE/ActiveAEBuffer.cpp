@@ -11,6 +11,7 @@
 #include "ActiveAEFilter.h"
 #include "cores/AudioEngine/Utils/AEUtil.h"
 #include "cores/AudioEngine/AEResampleFactory.h"
+#include "utils/log.h"
 
 using namespace ActiveAE;
 
@@ -280,6 +281,17 @@ bool CActiveAEBufferPoolResample::ResampleBuffers( int64_t timestamp )
             {
                 m_planes[ i ] = m_procSample->pkt->data[ i ] + start;
             }
+
+			static int resampleCallCnt = 0;
+			resampleCallCnt++;
+			uint8_t * sampData = m_planes[0];
+			if( ( resampleCallCnt == 1 ) || sampData[40] )
+			{
+				CLog::Log( LOGERROR, "BRJ AEBuffer %d - %2X %2X %2X %2X %2X %2X %2X %2X", resampleCallCnt,
+					sampData[0], sampData[1], sampData[2], sampData[3], sampData[4], sampData[5],
+					sampData[6], sampData[7] );
+			}
+
 
             int out_samples = m_resampler->Resample( m_planes,
                                                      m_procSample->pkt->max_nb_samples - m_procSample->pkt->nb_samples,
