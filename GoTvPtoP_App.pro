@@ -39,10 +39,12 @@ include(config_compiler.pri)
 include(config_opensslp_include.pri)
 
 #DESTDIR = $$PWD/bin/
+gotvptop.depends += $$PWD/GoTvPtoPAppLib.pro
+gotvptop.depends += $$PWD/GoTvCoreLibs.pro
 gotvptop.depends += $$PWD/GoTvPythonLib.pro
 gotvptop.depends += $$PWD/GoTvDependLibs.pro
-gotvptop.depends += $$PWD/GoTvCoreLibs.pro
-gotvptop.depends += $$PWD/GoTvPtoPAppLib.pro
+
+
 
 
 gotvptop.depends += $$PWD/libcurl.pro

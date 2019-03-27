@@ -24,7 +24,7 @@ class HomeWindow : public QDialog
 	Q_OBJECT
 public:
 	HomeWindow( AppCommon&	appCommon, QString title );
-	virtual ~HomeWindow();
+    virtual ~HomeWindow() override = default;
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );

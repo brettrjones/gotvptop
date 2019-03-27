@@ -61,6 +61,7 @@ public:
 	int 						enqueueAudioData( char* pcmData, int countBytes );
 
 signals:
+    void                        signalInitialize();
 	void						signalStart();
 	void						signalStop();
 	void						signalSuspend();
@@ -68,7 +69,8 @@ signals:
 	void						signalCheckForBufferUnderun();
 
 protected slots:
-	void						slotStart();
+    void                        slotInitialize();
+    void						slotStart();
 	void						slotStop();
 	void						slotSuspend();
 	void						slotResume();

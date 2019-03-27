@@ -50,8 +50,8 @@ namespace
 
             g_KodiThread = new KodiThread();
             g_RunKodi->moveToThread( g_KodiThread );
-            QObject::connect( g_KodiThread, SIGNAL( started() ), g_RunKodi, SLOT( slotStartKodiRunFromThread() ) );
             GetAppInstance().setKodiThread( g_KodiThread );
+            QObject::connect( g_KodiThread, SIGNAL( started() ), g_RunKodi, SLOT( slotStartKodiRunFromThread() ) );
         }
     }
 }
@@ -68,11 +68,12 @@ void KodiRun::slotStartKodiRunFromThread( void )
     if( g_KodiThread && !g_IsKodiThreadRunning )
     {
         g_IsKodiThreadRunning = true;
-        g_KodiThread->initializeGL();
 
         IGoTv& iGoTv = IGoTv::getIGoTv();
+        // will not return from doRun until kodi is shutdown
         iGoTv.doRun( eAppModuleKodi );
         GetAppInstance().setKodiThread( nullptr );
+        // BRJ FIXME
         // BRJ for no reason I can see g_RunKodi->deleteLater() will let memory allocated by Qt to be overwritten by normal malloc calls in kodi
         //    g_RunKodi->deleteLater();
         g_RunKodi = nullptr;

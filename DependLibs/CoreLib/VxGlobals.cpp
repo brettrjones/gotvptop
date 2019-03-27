@@ -48,14 +48,14 @@ namespace
     std::string			g_strApplicationNameNoSpaces	= "GoTvPtoP";
     std::string			g_strNetworkName				= "GoTvPtoPTestNet";
 	std::string			g_strCompanyWebsite				= "http://www.gotvptop.net";
-	std::string			g_strCompanyDomain				= "www.gotvptop.net";
+    std::string			g_strCompanyDomain				= "gotvptop.net";
 	bool				g_IsAppCommercial				= false;
 #else
     std::string			g_strApplicationTitle			= "GoTv PtoP";
     std::string			g_strApplicationNameNoSpaces	= "GoTvPtoP";
     std::string			g_strNetworkName				= "GoTvPtoPNet";
 	std::string			g_strCompanyWebsite				= "http://www.gotvptop.net";
-	std::string			g_strCompanyDomain				= "www.gotvptop.net";
+    std::string			g_strCompanyDomain				= "gotvptop.net";
 	bool				g_IsAppCommercial				= false;
 #endif // APP_MYP2PWEB
 	// exe and app resouces paths

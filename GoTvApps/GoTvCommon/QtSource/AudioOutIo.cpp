@@ -31,6 +31,7 @@ AudioOutIo::AudioOutIo( AudioOutQt& outQt, QObject *parent )
 , m_AudioOutputDevice( 0 )
 , m_volume( 0.0f )
 {
+    connect( this, SIGNAL( signalInitialize() ), this, SLOT( slotInitialize() ) );
 	connect( this, SIGNAL( signalStart() ), this, SLOT( slotStart() ) );
 	connect( this, SIGNAL( signalStop() ), this, SLOT( slotStop() ) );
 	connect( this, SIGNAL( signalSuspend() ), this, SLOT( slotSuspend() ) );
@@ -42,13 +43,19 @@ AudioOutIo::AudioOutIo( AudioOutQt& outQt, QObject *parent )
 bool AudioOutIo::initAudioOut( QAudioFormat& audioFormat )
 {
     m_AudioFormat = audioFormat;
+    emit signalInitialize();
+    return true;
+}
+
+//============================================================================
+void AudioOutIo::slotInitialize()
+{
     if( m_initialized ) 
     {
-        return false;
+        return;
     }
 
     m_initialized = setDevice( QAudioDeviceInfo::defaultOutputDevice() );
-    return m_initialized;
 }
 
 //============================================================================
@@ -332,7 +339,7 @@ void AudioOutIo::slotCheckForBufferUnderun()
 		case QAudio::SuspendedState:
 			if( bufferedAudioData )
 			{ 
-				LogMsg( LOG_DEBUG, "resuming due to suspended and have data" );
+                LogMsg( LOG_DEBUG, "restarting due to suspended and have data" );
 				m_AudioOutputDevice->start( this );
 			}
 			break;
@@ -340,14 +347,15 @@ void AudioOutIo::slotCheckForBufferUnderun()
 		case QAudio::StoppedState: 
 			if( bufferedAudioData )
 			{
-				LogMsg( LOG_DEBUG, "resuming due to stopped and have data" );
-				m_AudioOutputDevice->start();
+                LogMsg( LOG_DEBUG, "restarting due to stopped and have data" );
+                m_AudioOutputDevice->start( this );
 			}
 			break;
-
+#ifdef TARGET_OS_WINDOWS // seems to be a windows only thing
 		case QAudio::InterruptedState:
-			LogMsg( LOG_DEBUG, "Iterrupted state.. how to handle?" );
+            LogMsg( LOG_DEBUG, "Interrupted state.. how to handle?" );
 			break;
+#endif // // TARGET_OS_WINDOWS
 		};
 	}
 }

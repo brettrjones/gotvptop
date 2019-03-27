@@ -23,7 +23,7 @@
 #define LOCK_ABI_VERSION 1
 
 /* The real definition of our lock object.  The public definition is
-   named gpgrt_lock_t and hides this internal structure.  */
+   named gpgrt_lock_gnu_t and hides this internal structure.  */
 #pragma pack(push, 8)
 typedef struct
 {
@@ -31,7 +31,7 @@ typedef struct
   volatile long initdone;
   volatile long started;
   CRITICAL_SECTION csec;
-} _gpgrt_lock_t;
+} _gpgrt_lock_gnu_t;
 #pragma pack(pop)
 
 

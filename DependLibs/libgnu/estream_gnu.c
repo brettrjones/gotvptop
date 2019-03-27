@@ -157,7 +157,7 @@ struct _gpgrt_stream_internal
   unsigned char buffer[BUFFER_BLOCK_SIZE];
   unsigned char unread_buffer[BUFFER_UNREAD_SIZE];
 
-  gpgrt_lock_t lock;		 /* Lock. */
+  gpgrt_lock_gnu_t lock;		 /* Lock. */
 
   void *cookie;			 /* Cookie.                */
   void *opaque;			 /* Opaque data.           */
@@ -333,7 +333,7 @@ init_stream_lock (estream_t _GPGRT__RESTRICT stream)
     {
       dbg_lock_1 ("enter init_stream_lock for %p\n", stream);
       memset (&stream->intern->lock, 0 , sizeof stream->intern->lock);
-      rc = _gpgrt_lock_init (&stream->intern->lock);
+      rc = _gpgrt_lock_gnu_init (&stream->intern->lock);
       dbg_lock_2 ("leave init_stream_lock for %p: rc=%d\n", stream, rc);
     }
   else
@@ -348,7 +348,7 @@ destroy_stream_lock (estream_t _GPGRT__RESTRICT stream)
   if (!stream->intern->samethread)
     {
       dbg_lock_1 ("enter destroy_stream_lock for %p\n", stream);
-      _gpgrt_lock_destroy (&stream->intern->lock);
+      _gpgrt_lock_gnu_destroy (&stream->intern->lock);
       dbg_lock_1 ("leave destroy_stream_lock for %p\n", stream);
     }
 }
@@ -360,7 +360,7 @@ lock_stream (estream_t _GPGRT__RESTRICT stream)
   if (!stream->intern->samethread)
     {
       dbg_lock_1 ("enter lock_stream for %p\n", stream);
-      _gpgrt_lock_lock (&stream->intern->lock);
+      _gpgrt_lock_gnu_lock (&stream->intern->lock);
       dbg_lock_1 ("leave lock_stream for %p\n", stream);
     }
 }
@@ -374,7 +374,7 @@ trylock_stream (estream_t _GPGRT__RESTRICT stream)
   if (!stream->intern->samethread)
     {
       dbg_lock_1 ("enter trylock_stream for %p\n", stream);
-      rc = _gpgrt_lock_trylock (&stream->intern->lock)? 0 : -1;
+      rc = _gpgrt_lock_gnu_trylock (&stream->intern->lock)? 0 : -1;
       dbg_lock_2 ("leave trylock_stream for %p: rc=%d\n", stream, rc);
     }
   else
@@ -389,7 +389,7 @@ unlock_stream (estream_t _GPGRT__RESTRICT stream)
   if (!stream->intern->samethread)
     {
       dbg_lock_1 ("enter unlock_stream for %p\n", stream);
-      _gpgrt_lock_unlock (&stream->intern->lock);
+      _gpgrt_lock_gnu_unlock (&stream->intern->lock);
       dbg_lock_1 ("leave unlock_stream for %p\n", stream);
     }
 }
@@ -399,7 +399,7 @@ static void
 lock_list (void)
 {
   dbg_lock_0 ("enter lock_list\n");
-  _gpgrt_lock_lock (&estream_list_lock);
+  _gpgrt_lock_gnu_lock (&estream_list_lock);
   dbg_lock_0 ("leave lock_list\n");
 }
 
@@ -408,7 +408,7 @@ static void
 unlock_list (void)
 {
   dbg_lock_0 ("enter unlock_list\n");
-  _gpgrt_lock_unlock (&estream_list_lock);
+  _gpgrt_lock_gnu_unlock (&estream_list_lock);
   dbg_lock_0 ("leave unlock_list\n");
 }
 

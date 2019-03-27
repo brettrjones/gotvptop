@@ -44,7 +44,7 @@ VxComboBox::~VxComboBox()
 void VxComboBox::paintEvent( QPaintEvent *ev )
 {
     VxAppTheme& appTheme = GetAppInstance().getAppTheme();
-    QColor textColor = GetAppInstance().getAppTheme().getColor( eButtonTextNormal );
+    //QColor textColor = GetAppInstance().getAppTheme().getColor( eButtonTextNormal );
     QPalette pal = appTheme.getBasePalette();
     pal.setColor( QPalette::Text, appTheme.getColor( eButtonTextNormal ) );
     setPalette( pal );

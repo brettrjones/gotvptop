@@ -10,7 +10,7 @@ typedef struct
     long _x_align;
     long *_xp_align;
   } u;
-} gpgrt_lock_t;
+} gpgrt_lock_gnu_t;
 
 #define GPGRT_LOCK_INITIALIZER {1,{{0,0,0,0}}}
 ##

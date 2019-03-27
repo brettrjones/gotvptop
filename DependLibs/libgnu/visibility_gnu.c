@@ -114,33 +114,33 @@ gpgrt_set_alloc_func( void *( *f )( void *a, size_t n ) )
 
 
 gpg_err_code_t
-gpgrt_lock_init( gpgrt_lock_t *lockhd )
+gpgrt_lock_gnu_init( gpgrt_lock_gnu_t *lockhd )
 {
-	return _gpgrt_lock_init( lockhd );
+	return _gpgrt_lock_gnu_init( lockhd );
 }
 
 gpg_err_code_t
-gpgrt_lock_lock( gpgrt_lock_t *lockhd )
+gpgrt_lock_gnu_lock( gpgrt_lock_gnu_t *lockhd )
 {
-	return _gpgrt_lock_lock( lockhd );
+	return _gpgrt_lock_gnu_lock( lockhd );
 }
 
 gpg_err_code_t
-gpgrt_lock_trylock( gpgrt_lock_t *lockhd )
+gpgrt_lock_gnu_trylock( gpgrt_lock_gnu_t *lockhd )
 {
-	return _gpgrt_lock_trylock( lockhd );
+	return _gpgrt_lock_gnu_trylock( lockhd );
 }
 
 gpg_err_code_t
-gpgrt_lock_unlock( gpgrt_lock_t *lockhd )
+gpgrt_lock_gnu_unlock( gpgrt_lock_gnu_t *lockhd )
 {
-	return _gpgrt_lock_unlock( lockhd );
+	return _gpgrt_lock_gnu_unlock( lockhd );
 }
 
 gpg_err_code_t
-gpgrt_lock_destroy( gpgrt_lock_t *lockhd )
+gpgrt_lock_gnu_destroy( gpgrt_lock_gnu_t *lockhd )
 {
-	return _gpgrt_lock_destroy( lockhd );
+	return _gpgrt_lock_gnu_destroy( lockhd );
 }
 
 gpg_err_code_t

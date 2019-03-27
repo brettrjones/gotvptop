@@ -110,33 +110,33 @@ protected:
 
     //=== vars ===//
     AppCommon&				    m_MyApp;
-    bool                        m_bRenderCreated;
+    bool                        m_bRenderCreated = false;
 
     RenderGlOffScreenSurface *  m_KodiSurface = nullptr;
 
     QOpenGLFramebufferObject *  m_KodiFbo = nullptr;
     QOpenGLFramebufferObject *  m_WidgetFbo = nullptr;
 
-    QOpenGLContext *            m_WidgetContext;
-    QOpenGLContext *            m_KodiContext;
-    QOpenGLContext *            m_Context; // current context.. either widget or kodi
+    QOpenGLContext *            m_WidgetContext = nullptr;
+    QOpenGLContext *            m_KodiContext = nullptr;
+    QOpenGLContext *            m_Context = nullptr; // current context.. either widget or kodi
 
-    QOpenGLFunctions *          m_Gl;
+    QOpenGLFunctions *          m_Gl = nullptr;
 #if QT_VERSION < 0x050300
 # if defined(QT_OPENGL_ES_2)
-    QOpenGLFunctions_ES2 *      m_GlF;
+    QOpenGLFunctions_ES2 *      m_GlF = nullptr;
 # else
-    QOpenGLFunctions_1_1 *      m_GlF;
+    QOpenGLFunctions_1_1 *      m_GlF = nullptr;
 # endif
 #else
-    QOpenGLFunctions *          m_GlF;
+    QOpenGLFunctions *          m_GlF = nullptr;
 #endif
 
     QMatrix4x4                  m_ColorMatrix;
 
     GlTextureDescriptor         m_TexDescriptor;
-    bool                        m_TexturesInited;
+    bool                        m_TexturesInited = false;
 
     QSize                       m_ScreenSize;
-    int                         m_MaxTextureSize;
+    int                         m_MaxTextureSize = 2048;
 };

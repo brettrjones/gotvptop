@@ -9,12 +9,13 @@
 
 #include "VxFrame.h"
 
+#include <CoreLib/VxAppInfo.h>
+
 #include <QScreen>
 #include <QtWidgets>
 
 //============================================================================
 HomeWindow::HomeWindow( AppCommon&	appCommon, QString title )
-//	: QMainWindow()
 : QDialog( )
 , m_MyApp( appCommon )
 , m_AppDisplay( m_MyApp.getAppDisplay() )
@@ -33,13 +34,8 @@ HomeWindow::HomeWindow( AppCommon&	appCommon, QString title )
 , m_HomeFrameFullSize( false )
 , m_EngineInitialized( false )
 {
-    m_WindowSettings = new QSettings( "Contingency Bloggers Corporation",
-                                 "Save State", this );
-}
-
-//============================================================================
-HomeWindow::~HomeWindow()
-{
+    VxAppInfo appInfo;
+    m_WindowSettings = new QSettings( appInfo.getCompanyDomain(), appInfo.getAppNameNoSpaces(), this );
 }
 
 //============================================================================
@@ -59,9 +55,16 @@ void HomeWindow::showEvent( QShowEvent * ev )
 void HomeWindow::initializeHomePage()
 {
     QByteArray restoreGeom = m_WindowSettings->value( "mainWindowGeometry" ).toByteArray();
-    if( restoreGeom.size() )
+    if( restoreGeom.isEmpty() )
     {
-        restoreGeometry( restoreGeom );
+        const QRect availableGeometry = QApplication::desktop()->availableGeometry(this);
+        resize(availableGeometry.width() / 3, availableGeometry.height() / 2);
+        move((availableGeometry.width() - width()) / 2,
+             (availableGeometry.height() - height()) / 2);
+    }
+    else
+    {
+        restoreGeometry(restoreGeom);
     }
 
 	initializeGoTvDynamicLayout();
@@ -307,9 +310,6 @@ MyIcons& HomeWindow::getMyIcons( void )
 //============================================================================
 void HomeWindow::closeEvent(QCloseEvent *event)
 {
-	//QSettings settings( m_MyApp.getAppShortName(), "MyApp" );
-	//settings.setValue( "geometry", saveGeometry() );
-	//settings.setValue( "windowState", saveState() );
     if( !QWidget::isMaximized() && !QWidget::isMinimized() )
     {
         QByteArray saveGeom = saveGeometry();

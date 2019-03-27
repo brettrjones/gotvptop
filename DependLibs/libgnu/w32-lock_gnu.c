@@ -35,10 +35,10 @@
 #include "w32-lock-obj.h"
 
 
-static _gpgrt_lock_t *
-get_lock_object (gpgrt_lock_t *lockhd)
+static _gpgrt_lock_gnu_t *
+get_lock_object (gpgrt_lock_gnu_t *lockhd)
 {
-  _gpgrt_lock_t *lock = (_gpgrt_lock_t*)lockhd;
+  _gpgrt_lock_gnu_t *lock = (_gpgrt_lock_gnu_t*)lockhd;
 
   if (lock->vers != LOCK_ABI_VERSION)
     abort ();
@@ -48,23 +48,23 @@ get_lock_object (gpgrt_lock_t *lockhd)
 
 
 gpg_err_code_t
-_gpgrt_lock_init (gpgrt_lock_t *lockhd)
+_gpgrt_lock_gnu_init (gpgrt_lock_gnu_t *lockhd)
 {
-  _gpgrt_lock_t *lock = (_gpgrt_lock_t*)lockhd;
+  _gpgrt_lock_gnu_t *lock = (_gpgrt_lock_gnu_t*)lockhd;
 
   /* If VERS is zero we assume that no static initialization has been
      done, so we setup our ABI version right here.  The caller might
      have called us to test whether lock support is at all available. */
   if (!lock->vers)
     {
-      if (sizeof (gpgrt_lock_t) < sizeof (_gpgrt_lock_t))
+      if (sizeof (gpgrt_lock_gnu_t) < sizeof (_gpgrt_lock_gnu_t))
         abort ();
       lock->vers = LOCK_ABI_VERSION;
     }
   else /* Run the usual check.  */
     {
       lock = get_lock_object (lockhd);
-      if (sizeof (gpgrt_lock_t) < sizeof (_gpgrt_lock_t))
+      if (sizeof (gpgrt_lock_gnu_t) < sizeof (_gpgrt_lock_gnu_t))
         abort ();
     }
 
@@ -75,9 +75,9 @@ _gpgrt_lock_init (gpgrt_lock_t *lockhd)
 
 
 gpg_err_code_t
-_gpgrt_lock_lock (gpgrt_lock_t *lockhd)
+_gpgrt_lock_gnu_lock (gpgrt_lock_gnu_t *lockhd)
 {
-  _gpgrt_lock_t *lock = get_lock_object (lockhd);
+  _gpgrt_lock_gnu_t *lock = get_lock_object (lockhd);
 
   if (!lock->initdone)
     {
@@ -90,7 +90,7 @@ _gpgrt_lock_lock (gpgrt_lock_t *lockhd)
              and thus fall into the wait loop below.  We ignore that
              STARTED may in theory overflow if this thread starves for
              too long.  */
-          gpgrt_lock_init (lockhd);
+          gpgrt_lock_gnu_init (lockhd);
         }
       else
         {
@@ -105,15 +105,15 @@ _gpgrt_lock_lock (gpgrt_lock_t *lockhd)
 
 
 gpg_err_code_t
-_gpgrt_lock_trylock (gpgrt_lock_t *lockhd)
+_gpgrt_lock_gnu_trylock (gpgrt_lock_gnu_t *lockhd)
 {
-  _gpgrt_lock_t *lock = get_lock_object (lockhd);
+  _gpgrt_lock_gnu_t *lock = get_lock_object (lockhd);
 
   if (!lock->initdone)
     {
       if (!InterlockedIncrement (&lock->started))
         {
-          gpgrt_lock_init (lockhd);
+          gpgrt_lock_gnu_init (lockhd);
         }
       else
         {
@@ -129,9 +129,9 @@ _gpgrt_lock_trylock (gpgrt_lock_t *lockhd)
 
 
 gpg_err_code_t
-_gpgrt_lock_unlock (gpgrt_lock_t *lockhd)
+_gpgrt_lock_gnu_unlock (gpgrt_lock_gnu_t *lockhd)
 {
-  _gpgrt_lock_t *lock = get_lock_object (lockhd);
+  _gpgrt_lock_gnu_t *lock = get_lock_object (lockhd);
 
   if (!lock->initdone)
     return GPG_ERR_INV_LOCK_OBJ;
@@ -143,9 +143,9 @@ _gpgrt_lock_unlock (gpgrt_lock_t *lockhd)
 /* Note: Use this function only if no other thread holds or waits for
    this lock.  */
 gpg_err_code_t
-_gpgrt_lock_destroy (gpgrt_lock_t *lockhd)
+_gpgrt_lock_gnu_destroy (gpgrt_lock_gnu_t *lockhd)
 {
-  _gpgrt_lock_t *lock = get_lock_object (lockhd);
+  _gpgrt_lock_gnu_t *lock = get_lock_object (lockhd);
 
   if (!lock->initdone)
     return GPG_ERR_INV_LOCK_OBJ;

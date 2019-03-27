@@ -130,7 +130,7 @@ void AudioOutQt::run() // thread override
 
     initAudioOut();
 
-    exec();
+//    exec();
 }
 
 //============================================================================

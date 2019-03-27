@@ -167,7 +167,7 @@ void RenderGlBaseWidget::doInitializeGL( void )
 //============================================================================
 void RenderGlBaseWidget::paintGL( void )
 {
-    if( !m_KodiSurface )
+    if( !isReadyForRender() )
     {
         // not ready yet
         return;

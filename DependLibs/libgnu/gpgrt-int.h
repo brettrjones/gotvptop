@@ -42,11 +42,11 @@ void _gpgrt_free (void *a);
 
 const char *_gpg_error_check_version (const char *req_version);
 
-gpg_err_code_t _gpgrt_lock_init (gpgrt_lock_t *lockhd);
-gpg_err_code_t _gpgrt_lock_lock (gpgrt_lock_t *lockhd);
-gpg_err_code_t _gpgrt_lock_trylock (gpgrt_lock_t *lockhd);
-gpg_err_code_t _gpgrt_lock_unlock (gpgrt_lock_t *lockhd);
-gpg_err_code_t _gpgrt_lock_destroy (gpgrt_lock_t *lockhd);
+gpg_err_code_t _gpgrt_lock_gnu_init (gpgrt_lock_gnu_t *lockhd);
+gpg_err_code_t _gpgrt_lock_gnu_lock (gpgrt_lock_gnu_t *lockhd);
+gpg_err_code_t _gpgrt_lock_gnu_trylock (gpgrt_lock_gnu_t *lockhd);
+gpg_err_code_t _gpgrt_lock_gnu_unlock (gpgrt_lock_gnu_t *lockhd);
+gpg_err_code_t _gpgrt_lock_gnu_destroy (gpgrt_lock_gnu_t *lockhd);
 gpg_err_code_t _gpgrt_yield (void);
 
 

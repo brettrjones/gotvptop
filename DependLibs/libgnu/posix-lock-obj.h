@@ -36,7 +36,7 @@ typedef struct
     long *dummy;
   } u;
 #endif
-} _gpgrt_lock_t;
+} _gpgrt_lock_gnu_t; // renamed from _gpgrt_lock_t to avoid accidental link with linux lib versions
 
 
 #endif /*POSIX_LOCK_OBJ_H*/

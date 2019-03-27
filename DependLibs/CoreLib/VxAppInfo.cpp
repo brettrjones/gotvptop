@@ -21,13 +21,13 @@ const char* VxAppInfo::getAppNameNoSpaces( void )
 //=============================================================================
 const char* VxAppInfo::getCompanyWebsite( void )
 {
-    return VxGetCompanyDomain();
+    return VxGetCompanyWebsite();
 }
 
 //=============================================================================
 const char * VxAppInfo::getCompanyDomain( void )
 {
-    return VxGetCompanyWebsite();
+    return VxGetCompanyDomain();
 }
 
 //=============================================================================

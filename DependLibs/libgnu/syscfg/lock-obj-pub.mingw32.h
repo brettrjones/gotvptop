@@ -21,7 +21,7 @@
 typedef struct
 {
   volatile char priv[56];
-} gpgrt_lock_t;
+} gpgrt_lock_gnu_t;
 #pragma pack(pop)
 
 #define GPGRT_LOCK_INITIALIZER {{1,0,0,0,0,0,0,0,255,255,255,255, \
@@ -35,7 +35,7 @@ typedef struct
 typedef struct
 {
   volatile char priv[36];
-} gpgrt_lock_t;
+} gpgrt_lock_gnu_t;
 #pragma pack(pop)
 
 #define GPGRT_LOCK_INITIALIZER {{1,0,0,0,0,0,0,0,255,255,255,255, \

@@ -81,7 +81,7 @@ main (void)
     }
 #endif /*USE_POSIX_THREADS*/
 
-  if (sizeof (dummyobj) != sizeof (_gpgrt_lock_t))
+  if (sizeof (dummyobj) != sizeof (_gpgrt_lock_gnu_t))
     {
       fprintf (stderr, PGM ": internal and external lock object mismatch\n");
       exit (1);
@@ -112,7 +112,7 @@ main (void)
           "    long _x_align;\n"
           "    long *_xp_align;\n"
           "  } u;\n"
-          "} gpgrt_lock_t;\n"
+          "} gpgrt_lock_gnu_t;\n"
           "\n"
           "#define GPGRT_LOCK_INITIALIZER {%d,{{",
           SIZEOF_PTHREAD_MUTEX_T,
@@ -139,7 +139,7 @@ main (void)
           "typedef struct\n"
           "{\n"
           "  long _vers;\n"
-          "} gpgrt_lock_t;\n"
+          "} gpgrt_lock_gnu_t;\n"
           "\n"
           "#define GPGRT_LOCK_INITIALIZER {%d}\n",
           LOCK_ABI_VERSION);

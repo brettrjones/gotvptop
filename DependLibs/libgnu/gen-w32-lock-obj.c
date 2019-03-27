@@ -33,12 +33,12 @@
 int
 main (void)
 {
-  _gpgrt_lock_t lk;
+  _gpgrt_lock_gnu_t lk;
   unsigned char *p;
   int i;
 
   printf ("sizeof CRITICAL_SECTION = %u\n", (int)sizeof (CRITICAL_SECTION));
-  printf ("sizeof    _gpgrt_lock_t = %u\n", (int)sizeof lk);
+  printf ("sizeof    _gpgrt_lock_gnu_t = %u\n", (int)sizeof lk);
 
   memset (&lk, 0, sizeof lk);
   lk.vers = LOCK_ABI_VERSION;

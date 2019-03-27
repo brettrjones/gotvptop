@@ -947,21 +947,21 @@ typedef struct
     long _x_align;
     long *_xp_align;
   } u;
-} gpgrt_lock_t;
+} gpgrt_lock_gnu_t;
 
 #define GPGRT_LOCK_INITIALIZER {1,{{0,0,0,0}}}
 
 
 #define GPGRT_LOCK_DEFINE(name) \
-  static gpgrt_lock_t name  = GPGRT_LOCK_INITIALIZER
+  static gpgrt_lock_gnu_t name  = GPGRT_LOCK_INITIALIZER
 
 /* NB: If GPGRT_LOCK_DEFINE is not used, zero out the lock variable
-   before passing it to gpgrt_lock_init.  */
-gpg_err_code_t gpgrt_lock_init (gpgrt_lock_t *lockhd);
-gpg_err_code_t gpgrt_lock_lock (gpgrt_lock_t *lockhd);
-gpg_err_code_t gpgrt_lock_trylock (gpgrt_lock_t *lockhd);
-gpg_err_code_t gpgrt_lock_unlock (gpgrt_lock_t *lockhd);
-gpg_err_code_t gpgrt_lock_destroy (gpgrt_lock_t *lockhd);
+   before passing it to gpgrt_lock_gnu_init.  */
+gpg_err_code_t gpgrt_lock_gnu_init (gpgrt_lock_gnu_t *lockhd);
+gpg_err_code_t gpgrt_lock_gnu_lock (gpgrt_lock_gnu_t *lockhd);
+gpg_err_code_t gpgrt_lock_gnu_trylock (gpgrt_lock_gnu_t *lockhd);
+gpg_err_code_t gpgrt_lock_gnu_unlock (gpgrt_lock_gnu_t *lockhd);
+gpg_err_code_t gpgrt_lock_gnu_destroy (gpgrt_lock_gnu_t *lockhd);
 
 
 
