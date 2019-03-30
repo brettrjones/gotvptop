@@ -63,6 +63,9 @@ public:
 	EApplet						getAppletType( void )				{ return m_EAppletType; }
 	bool						isApplet( void )					{ return ( eAppletUnknown != m_EAppletType ); }	
     bool                        isMessagerFrame( void );
+
+    // called just before first show of applet.. override for special initialization needs
+    virtual void                 aboutToLaunchApplet( void ) {}
  
 	void						setNewParent( QWidget * parent );
 

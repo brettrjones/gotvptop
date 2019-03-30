@@ -34,8 +34,6 @@ public:
 	RenderGlWidget( QWidget *parent=0 );
     virtual ~RenderGlWidget( );
 
-    bool                        renderWidgetInited() const                          { return m_RenderWidgetInited; }
-
     void                        onInitializeGL( void ) override;
     void                        onPaintGL( void ) override;
     void                        onResizeGL(  int w, int h  ) override;

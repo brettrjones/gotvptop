@@ -158,10 +158,10 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
         appSettings.setLastAppletLaunched( applet );
 
         m_AppletList.push_back( appletDialog );
+        appletDialog->aboutToLaunchApplet();
 		appletDialog->show();
 	}
 }
-
 
 //============================================================================
 void AppletMgr::activityStateChange( ActivityBase * activity, bool isCreated )

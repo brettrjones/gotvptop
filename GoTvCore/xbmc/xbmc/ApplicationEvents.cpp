@@ -258,7 +258,11 @@ void CApplication::fromGuiKeyPressEvent( int moduleNum, int key, int mod )
         msg.key.keysym.unicode = 0;
         msg.key.keysym.mod = ( XBMCMod )mod;
 
-        dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() )->MessagePush( &msg );
+        CWinSystemQt* winSys = dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() );
+        if( winSys )
+        {
+            winSys->MessagePush( &msg );
+        }
     }
 }
 
@@ -272,7 +276,11 @@ void CApplication::fromGuiKeyReleaseEvent( int moduleNum, int key, int mod )
         msg.key.keysym.sym = ( XBMCKey )key;
         msg.key.keysym.unicode = 0;
         msg.key.keysym.mod = ( XBMCMod )mod;
-        dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() )->MessagePush( &msg );
+        CWinSystemQt* winSys = dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() );
+        if( winSys )
+        {
+            winSys->MessagePush( &msg );
+        }
     }
 }
 
@@ -283,7 +291,11 @@ void CApplication::fromGuiMousePressEvent( int moduleNum, int mouseXPos, int mou
     {
         XBMC_Event msg{ XBMC_MOUSEBUTTONDOWN };
         msg.button = { ( unsigned char )mouseButton, ( uint16_t )mouseXPos, ( uint16_t )mouseYPos };
-        dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() )->MessagePush( &msg );
+        CWinSystemQt* winSys = dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() );
+        if( winSys )
+        {
+            winSys->MessagePush( &msg );
+        }
     }
 }
 
@@ -294,7 +306,11 @@ void CApplication::fromGuiMouseReleaseEvent( int moduleNum, int mouseXPos, int m
     {
         XBMC_Event msg{ XBMC_MOUSEBUTTONUP };
         msg.button = { (unsigned char)mouseButton, (uint16_t)mouseXPos, (uint16_t)mouseYPos };
-        dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() )->MessagePush( &msg );
+        CWinSystemQt* winSys = dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() );
+        if( winSys )
+        {
+            winSys->MessagePush( &msg );
+        }
     }
 }
 
@@ -304,7 +320,11 @@ void CApplication::fromGuiMouseMoveEvent( int moduleNum, int mouseXPos, int mous
     XBMC_Event msg{ XBMC_MOUSEMOTION };
     msg.motion.x = (uint16_t)mouseXPos;
     msg.motion.y = (uint16_t)mouseYPos;
-    dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() )->MessagePush( &msg );
+    CWinSystemQt* winSys = dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() );
+    if( winSys )
+    {
+        winSys->MessagePush( &msg );
+    }
 }
 
 //============================================================================
@@ -315,7 +335,11 @@ void CApplication::fromGuiResizeBegin( int moduleNum, int winWidth, int winHeigh
 	{
 		XBMC_Event msg{ XBMC_VIDEORESIZE };
 		msg.resize = { winWidth, winHeight };
-		dynamic_cast<CWinSystemQt*>( CServiceBroker::GetWinSystem() )->MessagePush( &msg );
+        CWinSystemQt* winSys = dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() );
+        if( winSys )
+        {
+            winSys->MessagePush( &msg );
+        }
 	}*/
 }
 
@@ -327,7 +351,11 @@ void CApplication::fromGuiResizeEvent( int moduleNum, int winWidth, int winHeigh
     {
         XBMC_Event msg{ XBMC_VIDEORESIZE };
         msg.resize = { winWidth, winHeight };
-        dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() )->MessagePush( &msg );
+        CWinSystemQt* winSys = dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() );
+        if( winSys )
+        {
+            winSys->MessagePush( &msg );
+        }
     }*/
 }
 
@@ -338,7 +366,11 @@ void CApplication::fromGuiResizeEnd( int moduleNum, int winWidth, int winHeight 
 	{
 		XBMC_Event msg{ XBMC_VIDEORESIZE };
 		msg.resize = { winWidth, winHeight };
-		dynamic_cast<CWinSystemQt*>( CServiceBroker::GetWinSystem() )->MessagePush( &msg );
+        CWinSystemQt* winSys = dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() );
+        if( winSys )
+        {
+            winSys->MessagePush( &msg );
+        }
 	}
 }
 
@@ -348,7 +380,11 @@ void CApplication::fromGuiCloseEvent( int moduleNum )
     if( CServiceBroker::GetWinSystem() )
     {
         XBMC_Event msg{ XBMC_QUIT };
-        dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() )->MessagePush( &msg );
+        CWinSystemQt* winSys = dynamic_cast< CWinSystemQt* >( CServiceBroker::GetWinSystem() );
+        if( winSys )
+        {
+            winSys->MessagePush( &msg );
+        }
     }
 }
 

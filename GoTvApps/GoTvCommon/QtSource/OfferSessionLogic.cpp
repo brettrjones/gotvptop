@@ -236,7 +236,7 @@ void OfferSessionLogic::doToGuiRxedOfferReply( GuiOfferSession * offerSession )
 		if( isOurSessionInstance( offerSession ) )
 		{
 			EOfferResponse offerResponse		= offerSession->getOfferResponse();			
-			VxGUID lclSessionId					= offerSession->getLclSessionId();			
+            //VxGUID lclSessionId					= offerSession->getLclSessionId();
 			VxGUID offerSessionId				= offerSession->getOfferSessionId();			
 			if( eOfferResponseAccept == offerResponse )
 			{

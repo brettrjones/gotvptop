@@ -21,6 +21,7 @@
 #include "config_kodi.h"
 
 #include "CompileInfo.h"
+#include <CoreLib/VxAppInfo.h>
 
 #include <cstddef>
 #include <string>
@@ -53,6 +54,7 @@
 #define GITBRANCH ""
 #endif
 
+
 int CCompileInfo::GetMajor()
 {
   return 18;
@@ -65,7 +67,7 @@ int CCompileInfo::GetMinor()
 
 const char* CCompileInfo::GetPackage()
 {
-  return "org.xbmc.kodi";
+  return "net.gotvptop";
 }
 
 const char* CCompileInfo::GetClass()
@@ -88,6 +90,19 @@ const char* CCompileInfo::GetAppName()
     return "KodiQt";
 #elif BUILD_KODIP2P_APP
     return "KodiP2P";
+#else
+    echo you must define your application information in GoTvAppConfig.h
+#endif
+}
+
+const char* CCompileInfo::GetAppNameLowerCase()
+{
+#if BUILD_GOTV_APP
+    return "gotvptop";
+#elif BUILD_KODIQT_APP
+    return "kodiqt";
+#elif BUILD_KODIP2P_APP
+    return "kodiptop";
 #else
     echo you must define your application information in GoTvAppConfig.h
 #endif

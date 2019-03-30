@@ -177,37 +177,37 @@ void AppCommon::slotListViewTypeChanged( int viewSelectedIdx )
 {
 	m_eLastSelectedWhichContactsToView = (EFriendViewType)viewSelectedIdx;
 
-	EMyIcons whichIcon = eMyIconUnknown;
+    //EMyIcons whichIcon = eMyIconUnknown;
 	QString statMsg = "Unknown List View";
 
 	switch( m_eLastSelectedWhichContactsToView )
 	{
 	case eFriendViewEverybody: //Everybody
-		whichIcon = eMyIconGuest;
+        //whichIcon = eMyIconGuest;
 		statMsg = QObject::tr( "List View Everybody Except Ignored" );
 		break;
 	case eFriendViewAdministrators: 
-		whichIcon = eMyIconAdministrator;
+        //whichIcon = eMyIconAdministrator;
 		statMsg = QObject::tr( "List View Administrators" );
 		break;
 	case eFriendViewFriendsAndGuests: //Friends And Guests
-		whichIcon = eMyIconFriend;
+        //whichIcon = eMyIconFriend;
 		statMsg = QObject::tr( "List View Friends And Guests" );
 		break;
 	case eFriendViewAnonymous: //Anonymous
-		whichIcon = eMyIconAnonymous;
+        //whichIcon = eMyIconAnonymous;
 		statMsg = QObject::tr( "List View Anonymous" );
 		break;
 	case eFriendViewIgnored: //Ignored
-		whichIcon = eMyIconIgnored;
+        //whichIcon = eMyIconIgnored;
 		statMsg = QObject::tr( "List View People I Ignore" );
 		break;
 	case eFriendViewMyProxies: // my proxies
-		whichIcon = eMyIconRelay;
+        //whichIcon = eMyIconRelay;
 		statMsg = QObject::tr( "List View My Preferred Relays" );
 		break;
 	case eFriendViewAllProxies: // all proxies
-		whichIcon = eMyIconRelay;
+        //whichIcon = eMyIconRelay;
 		statMsg = QObject::tr( "List View All Possible Relays" );
 		break;
 	//case eFriendViewRefresh: // Refresh all

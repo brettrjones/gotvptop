@@ -10,6 +10,7 @@
 
 #include <string>
 
+// to emulate KODI so plugins work
 class CCompileInfo
 {
 public:
@@ -18,7 +19,8 @@ public:
   static const char* GetPackage();
   static const char* GetClass();
   static const char* GetAppName();
-  static const char *GetSuffix();  // Git "Tag", e.g. alpha1
+  static const char* GetAppNameLowerCase();
+  static const char* GetSuffix();  // Git "Tag", e.g. alpha1
   static const char* GetSCMID();   // Git Revision
   static const char* GetCopyrightYears();
   static const char* GetHomeEnvName();

@@ -482,31 +482,31 @@ do_list_remove (estream_t stream, int with_locked_list)
 }
 
 
-
+/*BRJ FIXME.. called from libc and crashes
 static void
 do_deinit (void)
 {
-  /* Flush all streams. */
+  // Flush all streams.
   _gpgrt_fflush (NULL);
 
-  /* We should release the estream_list.  However there is one
-     problem: That list is also used to search for the standard
-     estream file descriptors.  If we would remove the entire list,
-     any use of es_foo in another atexit function may re-create the
-     list and the streams with possible undesirable effects.  Given
-     that we don't close the stream either, it should not matter that
-     we keep the list and let the OS clean it up at process end.  */
+  // We should release the estream_list.  However there is one
+  //   problem: That list is also used to search for the standard
+  //   estream file descriptors.  If we would remove the entire list,
+  //   any use of es_foo in another atexit function may re-create the
+  //   list and the streams with possible undesirable effects.  Given
+  //   that we don't close the stream either, it should not matter that
+  //   we keep the list and let the OS clean it up at process end.
 
-  /* Reset the syscall clamp.  */
+  // Reset the syscall clamp.
   pre_syscall_func = NULL;
   post_syscall_func = NULL;
 }
-
+*/
 
 /*
  * Initialization.
  */
-
+/*BRJ FIXME.. called from libc and crashes
 int
 _gpgrt_es_init (void)
 {
@@ -519,6 +519,7 @@ _gpgrt_es_init (void)
     }
   return 0;
 }
+*/
 
 /* Register the syscall clamp.  These two functions are called
    immediately before and after a possible blocking system call.  This
@@ -529,13 +530,14 @@ _gpgrt_es_init (void)
 
    These functions may not modify ERRNO.
 */
+/*BRJ FIXME.. called from libc and crashes
 void
 _gpgrt_set_syscall_clamp (void (*pre)(void), void (*post)(void))
 {
   pre_syscall_func = pre;
   post_syscall_func = post;
 }
-
+*/
 
 
 

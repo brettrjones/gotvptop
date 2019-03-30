@@ -19,6 +19,8 @@
 #include "MyIcons.h"
 #include "GuiHelpers.h"
 #include "MyIcons.h"
+#include "GoTvDebugConfig.h"
+#include "RenderGlOffScreenSurface.h"
 
 #include "GoTvInterface/GoTvRenderFrame.h"
 
@@ -31,6 +33,7 @@
 #include <QKeyEvent>
 
 #include <time.h>
+#include <GL/glu.h>
 
 const int RESIZE_WINDOW_COMPLETED_TIMEOUT = 500;
 
@@ -38,7 +41,7 @@ const int RESIZE_WINDOW_COMPLETED_TIMEOUT = 500;
 RenderGlWidget::RenderGlWidget(QWidget *parent)
 : RenderGlBaseWidget(parent)
 , m_QtToKodi( m_MyApp )
-, m_RenderWidgetInited( false )
+//, m_RenderWidgetInited( false )
 , m_TexturesInited( false )
 , m_Frame( 0 )
 // shaders
@@ -71,29 +74,49 @@ RenderGlWidget::~RenderGlWidget()
 //============================================================================
 void RenderGlWidget::onInitializeGL( void )
 {
+    /*
     m_RenderWidgetInited = true;
 
     m_GlF->glDisable( GL_DEPTH_TEST );
     m_GlF->glClearColor( 0.2, 0.2, 0.2, 1 );
-
-    if( RENDER_FROM_THREAD && m_KodiSurface )
-    {
-        m_KodiSurface->setRenderFunctions( m_GlF );
-    }
+#ifndef DEBUG_OPENGL
+    m_KodiSurface->setRenderFunctions( m_GlF );
+#else
+    glDisable(GL_TEXTURE_2D);
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_COLOR_MATERIAL);
+    glEnable(GL_BLEND);
+    glEnable(GL_POLYGON_SMOOTH);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+#endif // DEBUG_OPENGL
+*/
 }
 
 //============================================================================
 void RenderGlWidget::onPaintGL( void )
 {
+    #ifdef DEBUG_OPENGL
+    // paint something as visual test
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(1,0,0);
+    glBegin(GL_POLYGON);
+    glVertex2f(0,0);
+    glVertex2f(100,500);
+    glVertex2f(500,100);
+    glEnd();
+
+    update();
+    #endif// DEBUG_OPENGL
 }
 
 //============================================================================
 void RenderGlWidget::onResizeGL( int w, int h )
 {
-    m_GlF->glViewport( 0, 0, w, h );
 
 	m_ResizingWindowSize = QSize( w, h );
-	if( !m_IsResizing )
+    m_GlF->glViewport( 0, 0, w, h );
+    if( !m_IsResizing )
 	{
 		m_IsResizing = true;
 		onResizeBegin( m_ResizingWindowSize );
@@ -104,35 +127,51 @@ void RenderGlWidget::onResizeGL( int w, int h )
 	m_ResizingTimer->start( RESIZE_WINDOW_COMPLETED_TIMEOUT );
 
 	onResizeEvent( m_ResizingWindowSize );
+
+    #ifdef DEBUG_OPENGL
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        gluOrtho2D(0, w, 0, h); // set origin to bottom left corner
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+    #endif// DEBUG_OPENGL
 }
 
 
 //============================================================================
 void RenderGlWidget::onResizeBegin( QSize& newSize )
 {
+ #ifndef DEBUG_OPENGL
 	m_QtToKodi.fromGuiResizeBegin( newSize.width(), newSize.height() );
+ #endif // DEBUG_OPENGL
 }
 
 //============================================================================
 void RenderGlWidget::onResizeEvent( QSize& newSize )
 {
+    #ifndef DEBUG_OPENGL
 	m_QtToKodi.fromGuiResizeEvent( newSize.width(), newSize.height() );
+     #endif // DEBUG_OPENGL
 }
 
 //============================================================================
 void RenderGlWidget::onResizeEnd( QSize& newSize )
 {
+    #ifndef DEBUG_OPENGL
 	m_QtToKodi.fromGuiResizeEnd( newSize.width(), newSize.height() );
+   #endif // DEBUG_OPENGL
 }
 
 //============================================================================
 void RenderGlWidget::onModuleState( int moduleNum, int moduleState )
 {
+    #ifndef DEBUG_OPENGL
 	if( ( moduleNum == eModuleKodi ) && ( moduleState == eModuleStateInitialized ) )
 	{
 		// send a resize message so kodi will resize to fit window
 		m_QtToKodi.fromGuiResizeEnd( geometry().width(), geometry().height() );
 	}
+    #endif // DEBUG_OPENGL
 }
 
 //============================================================================

@@ -106,8 +106,8 @@ public:
 
 	QWidget *					getCentralWidget( void )					{ return 0; } // ui.centralWidget; }
 
-    void                        setKodiThread( KodiThread * kodiThread )    { m_KodiThread = kodiThread; }
-    KodiThread *                getKodiThread()                             { return m_KodiThread; }
+//    void                        setKodiThread( KodiThread * kodiThread )    { m_KodiThread = kodiThread; }
+//    KodiThread *                getKodiThread()                             { return m_KodiThread; }
 
 	ActivityDownloads *			getActivityDownloads( void )				{ return m_Downloads; } 
 	ENetworkStateType			getNetworkState( void )						{ return m_LastNetworkState; }
@@ -702,7 +702,7 @@ private:
     bool                        m_LoginBegin;
     bool                        m_LoginComplete;
 
-    KodiThread *                m_KodiThread;
+//    KodiThread *                m_KodiThread;
     AudioOutQt                  m_AudioOut;
 };
 

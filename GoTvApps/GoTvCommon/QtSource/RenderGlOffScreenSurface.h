@@ -229,8 +229,8 @@ private:
     QSize                       m_NextSurfaceSize;
 
     /// @brief storage of image for GL window render
-   QImage                      m_FrameImage;
+    QImage                      m_FrameImage;
 
    
-   GLuint                      m_TestTexure1;
+    GLuint                      m_TestTexure1;
 };

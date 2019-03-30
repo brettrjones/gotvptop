@@ -23,6 +23,7 @@ class VxAppInfo
 public:
 	const char *			getAppName( void );
 	const char *			getAppNameNoSpaces( void );
+    const char *			getAppNameNoSpacesLowerCase( void );
     const char *            getCompanyWebsite( void );
     const char *            getCompanyDomain( void );
 

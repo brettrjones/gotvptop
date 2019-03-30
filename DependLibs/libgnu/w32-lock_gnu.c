@@ -36,7 +36,7 @@
 
 
 static _gpgrt_lock_gnu_t *
-get_lock_object (gpgrt_lock_gnu_t *lockhd)
+get_lock_object_gnu (gpgrt_lock_gnu_t *lockhd)
 {
   _gpgrt_lock_gnu_t *lock = (_gpgrt_lock_gnu_t*)lockhd;
 
@@ -63,7 +63,7 @@ _gpgrt_lock_gnu_init (gpgrt_lock_gnu_t *lockhd)
     }
   else /* Run the usual check.  */
     {
-      lock = get_lock_object (lockhd);
+      lock = get_lock_object_gnu (lockhd);
       if (sizeof (gpgrt_lock_gnu_t) < sizeof (_gpgrt_lock_gnu_t))
         abort ();
     }
@@ -77,7 +77,7 @@ _gpgrt_lock_gnu_init (gpgrt_lock_gnu_t *lockhd)
 gpg_err_code_t
 _gpgrt_lock_gnu_lock (gpgrt_lock_gnu_t *lockhd)
 {
-  _gpgrt_lock_gnu_t *lock = get_lock_object (lockhd);
+  _gpgrt_lock_gnu_t *lock = get_lock_object_gnu (lockhd);
 
   if (!lock->initdone)
     {
@@ -107,7 +107,7 @@ _gpgrt_lock_gnu_lock (gpgrt_lock_gnu_t *lockhd)
 gpg_err_code_t
 _gpgrt_lock_gnu_trylock (gpgrt_lock_gnu_t *lockhd)
 {
-  _gpgrt_lock_gnu_t *lock = get_lock_object (lockhd);
+  _gpgrt_lock_gnu_t *lock = get_lock_object_gnu (lockhd);
 
   if (!lock->initdone)
     {
@@ -131,7 +131,7 @@ _gpgrt_lock_gnu_trylock (gpgrt_lock_gnu_t *lockhd)
 gpg_err_code_t
 _gpgrt_lock_gnu_unlock (gpgrt_lock_gnu_t *lockhd)
 {
-  _gpgrt_lock_gnu_t *lock = get_lock_object (lockhd);
+  _gpgrt_lock_gnu_t *lock = get_lock_object_gnu (lockhd);
 
   if (!lock->initdone)
     return GPG_ERR_INV_LOCK_OBJ;
@@ -145,7 +145,7 @@ _gpgrt_lock_gnu_unlock (gpgrt_lock_gnu_t *lockhd)
 gpg_err_code_t
 _gpgrt_lock_gnu_destroy (gpgrt_lock_gnu_t *lockhd)
 {
-  _gpgrt_lock_gnu_t *lock = get_lock_object (lockhd);
+  _gpgrt_lock_gnu_t *lock = get_lock_object_gnu (lockhd);
 
   if (!lock->initdone)
     return GPG_ERR_INV_LOCK_OBJ;

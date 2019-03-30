@@ -118,20 +118,26 @@ void NetworkStateAvail::runNetworkState( void )
 		waitForListenCnt++;
 		if( waitForListenCnt > 5 )
 		{
-			LogMsg( LOG_ERROR, "NetworkStateAvail::runNetworkState timed out waiting for isReadyToAcceptConnections\n" );
-			char timeoutMsg[128];
-			sprintf( timeoutMsg, "ERROR Timeout waiting for listen port %d", m_PktAnn.getOnlinePort() );
-			m_Engine.getToGuiInterface().toGuiStatusMessage( timeoutMsg );
+            #ifdef DEBUG_NETWORK_STATE
+                LogMsg( LOG_ERROR, "NetworkStateAvail::runNetworkState timed out waiting for isReadyToAcceptConnections\n" );
+                char timeoutMsg[128];
+                sprintf( timeoutMsg, "ERROR Timeout waiting for listen port %d", m_PktAnn.getOnlinePort() );
+                m_Engine.getToGuiInterface().toGuiStatusMessage( timeoutMsg );
+            #endif // DEBUG_NETWORK_STATE
 			break;
 		}
 	}
 
-    if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
-	    LogMsg( LOG_INFO, "Notify GUI Starting Direct connect Test %3.3f\n", availTimer.elapsedSec() );
-	m_Engine.getToGuiInterface().toGuiStatusMessage( "#Network Testing if port is open" );
+    #ifdef DEBUG_NETWORK_STATE
+	    LogMsg( LOG_INFO, "Notify GUI Starting Direct connect Test %3.3f\n", availTimer.elapsedSec() );            
+        m_Engine.getToGuiInterface().toGuiStatusMessage( "#Network Testing if port is open" );
+    #endif // DEBUG_NETWORK_STATE
+
 	VxSleep( 3500 ); // give listen port time to open first
-    if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
+    #ifdef DEBUG_NETWORK_STATE
 	    LogMsg( LOG_INFO, "Network State Avail Starting Direct connect Test %3.3f\n", availTimer.elapsedSec() );
+    #endif // DEBUG_NETWORK_STATE
+
 	DirectConnectTestResults& directConnectTestResults = m_DirectConnectTester.getDirectConnectTestResults();
 	m_DirectConnectTester.testCanDirectConnect();
 	while( ( false == m_NetworkStateMachine.checkAndHandleNetworkEvents() )
@@ -149,6 +155,7 @@ void NetworkStateAvail::runNetworkState( void )
 	if( ( eAppErrNone != directConnectTestResults.m_eAppErr )
 		&& ( eAppErrPortIsClosed != directConnectTestResults.m_eAppErr ) )
 	{
+        #ifdef DEBUG_NETWORK_STATE
 		LogMsg( LOG_STATUS, "eNetworkStateTypeAvail Failed To Connect To Connection Test Server %s  %3.3f\n", netServiceUrl.c_str(), availTimer.elapsedSec() ); 
 
 		if( EngineSettings::eFirewallTestUrlConnectionTest == firewallTestType )
@@ -166,8 +173,8 @@ void NetworkStateAvail::runNetworkState( void )
 		else
 		{
 			// TODO handle failed to connect and other errors
-
 		}
+        #endif // DEBUG_NETWORK_STATE
 	}
 
 	if( m_NetworkStateMachine.checkAndHandleNetworkEvents() )
@@ -186,7 +193,9 @@ void NetworkStateAvail::runNetworkState( void )
 	if( ( false == directConnectTestResults.getCanDirectConnect() )
 		&& m_Engine.getEngineSettings().getUseUpnpPortForward() )
 	{
-		LogMsg( LOG_INFO, "NetworkStateAvail::runNetworkState Starting UPNP %3.3f\n", availTimer.elapsedSec() );
+        #ifdef DEBUG_NETWORK_STATE
+            LogMsg( LOG_INFO, "NetworkStateAvail::runNetworkState Starting UPNP %3.3f\n", availTimer.elapsedSec() );
+        #endif // DEBUG_NETWORK_STATE
 		m_NetworkStateMachine.startUpnpOpenPort();
 	}
 	else

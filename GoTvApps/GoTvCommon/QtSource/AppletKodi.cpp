@@ -31,55 +31,36 @@
 
 #include <QThread>
 
-namespace
-{
+//namespace
+//{
 
-    KodiThread *    g_KodiThread = nullptr;
-    KodiRun *       g_RunKodi = nullptr;
-    bool            g_IsKodiThreadRunning = false;
+//    KodiThread *    g_KodiThread = nullptr;
+//    KodiRun *       g_RunKodi = nullptr;
+//    bool            g_IsKodiThreadRunning = false;
 
-    bool IsKodiThreadRunning()
-    {
-        return g_IsKodiThreadRunning;
-    }
+//    bool IsKodiThreadRunning()
+//    {
+//        return g_IsKodiThreadRunning;
+//    }
 
-    void RunKodiFromThread( )
-    {
-        if( g_RunKodi )
-        {
+//    void RunKodiFromThread( )
+//    {
+//        if( g_RunKodi )
+//        {
 
-            g_KodiThread = new KodiThread();
-            g_RunKodi->moveToThread( g_KodiThread );
-            GetAppInstance().setKodiThread( g_KodiThread );
-            QObject::connect( g_KodiThread, SIGNAL( started() ), g_RunKodi, SLOT( slotStartKodiRunFromThread() ) );
-        }
-    }
-}
+//            g_KodiThread = new KodiThread();
+//            g_RunKodi->moveToThread( g_KodiThread );
+//            GetAppInstance().setKodiThread( g_KodiThread );
+//            QObject::connect( g_KodiThread, SIGNAL( started() ), g_RunKodi, SLOT( slotStartKodiRunFromThread() ) );
+//        }
+//    }
 
-//============================================================================
-KodiRun::KodiRun( AppCommon& app, QWidget * parent )
-    : QObject( parent )
-{
-}
+//    void CleanupOldKodiThread()
+//    {
 
-//============================================================================
-void KodiRun::slotStartKodiRunFromThread( void )
-{
-    if( g_KodiThread && !g_IsKodiThreadRunning )
-    {
-        g_IsKodiThreadRunning = true;
+//    }
 
-        IGoTv& iGoTv = IGoTv::getIGoTv();
-        // will not return from doRun until kodi is shutdown
-        iGoTv.doRun( eAppModuleKodi );
-        GetAppInstance().setKodiThread( nullptr );
-        // BRJ FIXME
-        // BRJ for no reason I can see g_RunKodi->deleteLater() will let memory allocated by Qt to be overwritten by normal malloc calls in kodi
-        //    g_RunKodi->deleteLater();
-        g_RunKodi = nullptr;
-        g_IsKodiThreadRunning = false;
-    }
-}
+//}
 
 
 //============================================================================
@@ -104,7 +85,8 @@ void AppletKodi::initAppletKodi( void )
 
     setTitleBarAppletIcon( eMyIconKodi );
  
-    startKodiModule();
+//    startKodiModule();
+
     //ui.m_RenderGlWidget->setSource( new )
 
 	//ui.m_VidWidget->showAllControls( false );
@@ -124,6 +106,14 @@ void AppletKodi::initAppletKodi( void )
 }
 
 //============================================================================
+// called just before first show of applet.. override for special initialization needs
+void AppletKodi::aboutToLaunchApplet( void )
+{
+    //startKodiModule();
+}
+
+
+//============================================================================
 void AppletKodi::onAppletStop( void )
 {
     // should kodi be stopped or let it run simultaneously
@@ -134,23 +124,24 @@ void AppletKodi::onAppletStop( void )
 }
 
 
-//============================================================================
-void AppletKodi::startKodiModule( void )
-{
-    // call of doRun of kodi never returns from function until kodi is shutdown so use thread 
-    IGoTv& iGoTv =  getMyApp().getGoTv();
-    if( !iGoTv.getIsAppModuleRunning( eAppModuleKodi ) && !VxIsAppShuttingDown() && !IsKodiThreadRunning() )
-    {
-        g_RunKodi = new KodiRun( getMyApp(), nullptr );
-        RunKodiFromThread();
-    }
-}
+////============================================================================
+//void AppletKodi::startKodiModule( void )
+//{
+//    // call of doRun of kodi never returns from function until kodi is shutdown so use thread
+//    IGoTv& iGoTv =  getMyApp().getGoTv();
+//    if( !iGoTv.getIsAppModuleRunning( eAppModuleKodi ) && !VxIsAppShuttingDown() && !IsKodiThreadRunning() )
+//    {
+//        CleanupOldKodiThread();
+//        g_RunKodi = new KodiRun( getMyApp(), nullptr );
+//        RunKodiFromThread();
+//    }
+//}
 
-//============================================================================
-void AppletKodi::stopKodiModule( void )
-{
+////============================================================================
+//void AppletKodi::stopKodiModule( void )
+//{
 
-}
+//}
 
 //============================================================================
 void AppletKodi::onResizeBegin( QSize& newSize )
@@ -207,7 +198,7 @@ void AppletKodi::slotMenuItemSelected( int menuId, EMenuItemType menuItemType )
         {
             QString fileName = dlgBrowse->getSelectedFileName();
             playFile( fileName );
-         }
+        }
 
         break;
 
@@ -232,16 +223,16 @@ void AppletKodi::showEvent( QShowEvent * showEvent )
         }
     }
 
-    static bool g_firstShow = false;
-    if( !g_firstShow )
-    {
-        g_firstShow = true;
-        //QString videoFile = "F:/TestMedia/video_test/test_Tarzan2016_01_18_01-22-44.avi";
-        QString videoFile = "F:/TestMedia/video_test/Agents.of.S.H.I.E.L.D.S05E09/Marvels.Agents.of.S.H.I.E.L.D.S05E09.WEBRip.x264-ION10.mp4";
-        //QString videoFile = "F:/TestMedia/video_test/Test.avi";
-        //QString videoFile = "F:/TestMedia/video_test/PleaseStandByAC3-EVO.avi";
-        playFile( videoFile );
-    }
+//    static bool g_firstShow = false;
+//    if( !g_firstShow )
+//    {
+//        g_firstShow = true;
+//        //QString videoFile = "F:/TestMedia/video_test/test_Tarzan2016_01_18_01-22-44.avi";
+//        QString videoFile = "F:/TestMedia/video_test/Agents.of.S.H.I.E.L.D.S05E09/Marvels.Agents.of.S.H.I.E.L.D.S05E09.WEBRip.x264-ION10.mp4";
+//        //QString videoFile = "F:/TestMedia/video_test/Test.avi";
+//        //QString videoFile = "F:/TestMedia/video_test/PleaseStandByAC3-EVO.avi";
+//        playFile( videoFile );
+//    }
 }
 
 //============================================================================
@@ -262,7 +253,7 @@ void AppletKodi::resizeEvent( QResizeEvent * ev )
         && isVisible() )
     {
         setReadyForCallbacks( true );
-        m_Engine.fromGuiAssetAction( eAssetActionPlayOneFrame, m_AssetInfo, 0 );
+        //m_Engine.fromGuiAssetAction( eAssetActionPlayOneFrame, m_AssetInfo, 0 );
     }
 }
 

@@ -36,7 +36,6 @@ public:
     void                        doShutdown() override;
 
     //=== utilities ===//
-    bool                        initDirectories( ) override;
 
 private:
 

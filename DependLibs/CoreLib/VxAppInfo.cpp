@@ -19,6 +19,12 @@ const char* VxAppInfo::getAppNameNoSpaces( void )
 }
 
 //=============================================================================
+const char* VxAppInfo::getAppNameNoSpacesLowerCase( void )
+{
+    return VxGetApplicationNameNoSpacesLowerCase();
+}
+
+//=============================================================================
 const char* VxAppInfo::getCompanyWebsite( void )
 {
     return VxGetCompanyWebsite();

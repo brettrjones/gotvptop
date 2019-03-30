@@ -20,13 +20,13 @@
 #include "GuiHelpers.h"
 #include "MyIcons.h"
 #include "KodiThread.h"
-
+#include "GoTvDebugConfig.h"
+#include "RenderGlOffScreenSurface.h"
 
 #include "GoTvInterface/GoTvRenderFrame.h"
 
 #include <QOpenGLFramebufferObjectFormat>
 #include <QOpenGLPaintDevice>
-
 
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
@@ -43,58 +43,97 @@
 RenderGlBaseWidget::RenderGlBaseWidget(QWidget *parent)
 : QOpenGLWidget(parent)
 , m_MyApp( GetAppInstance() )
-, m_bRenderCreated( false )
-, m_WidgetContext( 0 )
-, m_KodiContext( 0 )
-, m_Context( 0 )
-, m_TexturesInited( false )
-, m_MaxTextureSize( 2048 )
 {
 }
 
 //============================================================================
 void RenderGlBaseWidget::initializeGL( void )
 {
-            // create 2 fbos
+    // create 2 fbos
     const QRect drawRect( geometry() );
     const QSize drawRectSize = drawRect.size();
 
-    // done with current (QOpenglWidget's) context
     m_WidgetContext = this->context();
+//#ifndef DEBUG_OPENGL
+//    m_Context = m_KodiContext;
+//    m_Context->makeCurrent( m_KodiSurface );
+// #else
+//    m_Context = m_WidgetContext;
+//#endif // DEBUG_OPENGL
 
-    KodiThread * kodiThread = m_MyApp.getKodiThread();
-    if( kodiThread )
+    m_Gl = m_WidgetContext->functions();
+#if QT_VERSION < 0x050300
+# if defined(QT_OPENGL_ES_2)
+    m_GlF = m_WidgetContext->versionFunctions<QOpenGLFunctions_ES2>();
+# else
+    m_GlF = m_WidgetContext->versionFunctions<QOpenGLFunctions_1_1>();
+# endif
+#else
+    m_GlF = m_Gl;
+#endif
+    Q_ASSERT( m_GlF );
+    m_GlF->initializeOpenGLFunctions();
+
+    GLint maxTextureSize = 0;
+    m_GlF->glGetIntegerv( GL_MAX_TEXTURE_SIZE, &maxTextureSize );
+    if( maxTextureSize )
     {
- 
-        doneCurrent();
-
-        m_KodiContext = kodiThread->m_Context;
-        m_KodiContext->setFormat( m_WidgetContext->format() );
-        m_KodiContext->setShareContext( m_WidgetContext );
-        m_KodiContext->create();
-
-        // setup the background thread's surface
-        // the surface must be created here in the main thread
-        m_KodiSurface = new RenderGlOffScreenSurface( this, m_KodiContext, nullptr,  drawRectSize );
-
-        m_KodiSurface->setFormat( m_WidgetContext->format() );
-        m_KodiSurface->create();
- 
-        kodiThread->m_Surface = m_KodiSurface;
-        connect( this, SIGNAL(signalGlResized( int, int )), m_KodiSurface, SLOT(slotGlResized( int, int )) );
-
-
-        m_KodiContext->moveToThread( kodiThread );
-        // sigh.. must move the thread to itself
-        kodiThread->moveToThread( kodiThread );
-
-        kodiThread->start();
+        m_MaxTextureSize = maxTextureSize;
     }
 
-    if( !RENDER_FROM_THREAD )
-    {
-        doInitializeGL( );
-    }
+    m_GlF->glDisable( GL_DEPTH_TEST );
+    m_GlF->glClearColor( 0.2, 0.2, 0.2, 1 );
+
+
+#ifndef DEBUG_OPENGL
+
+    // done with current (QOpenglWidget's) context
+    doneCurrent(); // not sure if needed
+
+    m_KodiThread = new KodiThread( m_MyApp, this );
+
+    m_KodiContext = new QOpenGLContext();
+
+    m_KodiContext->setFormat( m_WidgetContext->format() );
+    m_KodiContext->setShareContext( m_WidgetContext );
+    m_KodiContext->create();
+
+    m_KodiContext->moveToThread( m_KodiThread );
+    // sigh.. must move the thread to itself
+//#ifdef TARGET_OS_WINDOWS
+//    m_KodiThread->moveToThread( m_KodiThread );
+//#endif // TARGET_OS_WINDOWS
+
+    // setup the background thread's surface
+    // the surface must be created here in the qt qui thread
+    m_KodiSurface = new RenderGlOffScreenSurface( this, m_KodiContext, nullptr,  drawRectSize );
+
+    m_KodiSurface->setFormat( m_KodiContext->format() );
+    m_KodiSurface->create();
+    m_KodiSurface->setRenderFunctions( m_GlF );
+    m_KodiSurface->moveToThread( m_KodiThread );
+
+    //m_KodiThread->moveToThread( m_KodiThread );
+
+    m_KodiThread->setRenderWidget( this );
+    m_KodiThread->setGlContext( m_KodiContext );
+    m_KodiThread->setGlSurface( m_KodiSurface );
+
+    // sigh.. must move the thread to itself
+//#ifdef TARGET_OS_WINDOWS
+//    m_KodiThread->moveToThread( m_KodiThread );
+//#endif // TARGET_OS_WINDOWS
+
+    connect( this, SIGNAL(signalGlResized( int, int )), m_KodiSurface, SLOT(slotGlResized( int, int )) );
+
+    m_RenderWidgetInited = true;
+
+    m_KodiThread->start();
+
+
+#else
+    doInitializeGL();
+#endif // DEBUG_OPENGL
 }
 
 //============================================================================
@@ -124,19 +163,13 @@ void RenderGlBaseWidget::VerifyGLStateQt()
 //============================================================================
 void RenderGlBaseWidget::doInitializeGL( void )
 {
-    if( RENDER_FROM_THREAD )
-    {
-        KodiThread * kodiThread = m_MyApp.getKodiThread();
-        if( kodiThread )
-        {
-            m_Context = m_KodiContext;
-            m_Context->makeCurrent( m_KodiSurface );
-        }
-    }
-    else
-    {
-        m_Context = m_WidgetContext;
-    }
+    /*
+#ifndef DEBUG_OPENGL
+    m_Context = m_KodiContext;
+    m_Context->makeCurrent( m_KodiSurface );
+ #else
+    m_Context = m_WidgetContext;
+#endif // DEBUG_OPENGL
 
     m_Gl = m_Context->functions();
 #if QT_VERSION < 0x050300
@@ -162,11 +195,13 @@ void RenderGlBaseWidget::doInitializeGL( void )
     onInitializeGL();
 
     m_bRenderCreated = true;
+    */
 }
 
 //============================================================================
 void RenderGlBaseWidget::paintGL( void )
 {
+#ifndef DEBUG_OPENGL
     if( !isReadyForRender() )
     {
         // not ready yet
@@ -185,11 +220,14 @@ void RenderGlBaseWidget::paintGL( void )
     }
 
     painter.end();
+#endif // DEBUG_OPENGL
+    doPaintGL();
 }
 
 //============================================================================
 void RenderGlBaseWidget::doPaintGL( void )
 {
+    onPaintGL();
 }
 
 //============================================================================
@@ -199,11 +237,7 @@ void RenderGlBaseWidget::resizeGL( int w, int h )
     QOpenGLWidget::resizeGL( w, h );
     m_ScreenSize = QSize( w, h );
 
-    //glViewport(0, 0, width, height);
-    //if( !RENDER_FROM_THREAD )
-    //{
-        doResizeGL( w, h );
-   // }
+    doResizeGL( w, h );
 
     emit signalGlResized( w, h );
 }

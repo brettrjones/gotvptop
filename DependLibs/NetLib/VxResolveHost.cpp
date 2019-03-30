@@ -20,6 +20,8 @@
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxTimer.h>
 
+#include <GoTvDebugConfig.h>
+
 #include <stdio.h>
 #include <memory.h>
 
@@ -98,15 +100,18 @@ bool VxResolveHostToIp(	const char *	pHostOnly,			//web host name to resolve
 	char as8Port[ 10 ];
 	sprintf( as8Port, "%d", u16Port );
 	VxTimer resolveTimer;
-
+#ifdef DEBUG_NETLIB
 	LogMsg( LOG_INFO, "Resolving %s\n", pHostOnly ); 
+#endif// DEBUG_NETLIB
 
 	error = getaddrinfo(pHostOnly, as8Port, &hints, &res);
 	if (error != 0) 
 	{
-		LogMsg( LOG_ERROR,
-			"VxResolveHostToIp: getaddrinfo: %s for host %s service %s\n",
-			gai_strerror(error), pHostOnly, as8Port );
+        #ifdef DEBUG_NETLIB
+            LogMsg( LOG_ERROR,
+                    "VxResolveHostToIp: getaddrinfo: %s for host %s service %s\n",
+                    gai_strerror(error), pHostOnly, as8Port );
+        #endif// DEBUG_NETLIB
 		return false;
 	}
 
@@ -127,11 +132,13 @@ bool VxResolveHostToIp(	const char *	pHostOnly,			//web host name to resolve
 		rmtIp.setIp( *((struct sockaddr_storage *)aip->ai_addr) );
 		std::string strRmtIp = rmtIp.toStdString();
 		double elapsed = resolveTimer.elapsedSec();
-		LogMsg( LOG_INFO, "Resolve %s to %s:%d in %3.3f sec on try %d\n", 
-			pHostOnly, 
-			strRmtIp.c_str(), u16Port,
-			elapsed,
-			tryCnt );
+        #ifdef DEBUG_NETLIB
+            LogMsg( LOG_INFO, "Resolve %s to %s:%d in %3.3f sec on try %d\n",
+                pHostOnly,
+                strRmtIp.c_str(), u16Port,
+                elapsed,
+                tryCnt );
+        #endif// DEBUG_NETLIB
 		// NOTE:should do connect to verify but if internet connection is too overloaded it may fail
 		// and the resolved address seems to be always correct so this is commented out for now
 		/*
@@ -165,23 +172,26 @@ bool VxResolveHostToIp(	const char *	pHostOnly,			//web host name to resolve
 			bFoundAddr = true;
 			oRetIp.setIp( strRmtIp.c_str() );
 			double connectSuccessTime = resolveTimer.elapsedSec();
-            if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
+            #ifdef DEBUG_NETLIB
 			    LogMsg( LOG_INFO, "Resolve Connect Success to %s:%d in %3.3f sec on try %d\n", 
                         oRetIp.toStdString().c_str(), u16Port,
                         connectSuccessTime - elapsed,
                         tryCnt );
+            #endif// DEBUG_NETLIB
 			break;
 
 		}
 		else
 		{
 			double connectFailTime = resolveTimer.elapsedSec();
-            if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
+        #ifdef DEBUG_NETLIB
 			    LogMsg( LOG_INFO, "Resolve Connect Failed to %s:%d in %3.3f sec on try %d\n", 
 														pHostOnly, 
 														u16Port,
 														connectFailTime - elapsed,
-														tryCnt );
+                                                        tryCnt );
+        #endif // DEBUG_NETLIB
+
 			continue;
 		}
 	}
@@ -220,9 +230,11 @@ bool VxResolveHostToIps(	const char * pHostOnly,			//web host name to resolve
 	error = getaddrinfo(pHostOnly, as8Port, &hints, &res);
 	if (error != 0) 
 	{
+        #ifdef DEBUG_NETLIB
 		LogMsg( LOG_ERROR,
 			"getaddrinfo: %s for host %s service %s\n",
 			gai_strerror(error), pHostOnly, as8Port);
+        #endif // DEBUG_NETLIB
 		return false;
 	}
 	/* Try all returned addresses until one works */
@@ -235,7 +247,9 @@ bool VxResolveHostToIps(	const char * pHostOnly,			//web host name to resolve
 		sock = socket(aip->ai_family, aip->ai_socktype, aip->ai_protocol);
 		if (sock == -1) 
 		{
-			LogMsg( LOG_ERROR, "VxResolveHostToIps: could not create socket\n" ); 
+            #ifdef DEBUG_NETLIB
+                LogMsg( LOG_ERROR, "VxResolveHostToIps: could not create socket\n" );
+            #endif // DEBUG_NETLIB
 			freeaddrinfo(res);
 			continue;
 		}

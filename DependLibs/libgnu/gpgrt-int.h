@@ -51,8 +51,8 @@ gpg_err_code_t _gpgrt_yield (void);
 
 
 /* Local prototypes for estream.  */
-int _gpgrt_es_init (void);
-void _gpgrt_set_syscall_clamp (void (*pre)(void), void (*post)(void));
+//int _gpgrt_es_init (void);
+//void _gpgrt_set_syscall_clamp (void (*pre)(void), void (*post)(void));
 
 gpgrt_stream_t _gpgrt_fopen (const char *_GPGRT__RESTRICT path,
                              const char *_GPGRT__RESTRICT mode);

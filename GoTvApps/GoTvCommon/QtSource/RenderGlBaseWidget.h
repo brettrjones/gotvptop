@@ -15,7 +15,7 @@
 
 #include "config_gotvapps.h"
 #include <CoreLib/VxGUID.h>
-#include "RenderGlOffScreenSurface.h"
+#include "KodiThread.h"
 
 #include <QOpenGLWidget>
 #include <QtGui/QMatrix4x4>
@@ -68,8 +68,11 @@ public:
     virtual ~RenderGlBaseWidget( ) = default;
 
 
+    bool                        renderWidgetInited() const      { return m_RenderWidgetInited; }
+
+
 	AppCommon&					getMyApp( void )                { return m_MyApp; }
-    QOpenGLContext *			getContext( void )              { return m_Context; }
+    QOpenGLContext *			getContext( void )              { return m_WidgetContext; }
     QOpenGLFunctions *			getGlFunctions( void )          { return m_GlF; }
 
     bool                        isReadyForRender() const        { return m_bRenderCreated && m_KodiSurface; }
@@ -111,7 +114,9 @@ protected:
     //=== vars ===//
     AppCommon&				    m_MyApp;
     bool                        m_bRenderCreated = false;
+    bool                        m_RenderWidgetInited = false;
 
+    KodiThread *                m_KodiThread = nullptr;
     RenderGlOffScreenSurface *  m_KodiSurface = nullptr;
 
     QOpenGLFramebufferObject *  m_KodiFbo = nullptr;
@@ -119,7 +124,7 @@ protected:
 
     QOpenGLContext *            m_WidgetContext = nullptr;
     QOpenGLContext *            m_KodiContext = nullptr;
-    QOpenGLContext *            m_Context = nullptr; // current context.. either widget or kodi
+    //QOpenGLContext *            m_Context = nullptr; // current context.. either widget or kodi
 
     QOpenGLFunctions *          m_Gl = nullptr;
 #if QT_VERSION < 0x050300

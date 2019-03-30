@@ -48,11 +48,14 @@ protected slots:
 //	void						slotPlayEnd( void );
 
 protected:
+    // called just before first show of applet.. override for special initialization needs
+    virtual void                aboutToLaunchApplet( void ) override;
+
 	void						initAppletKodi( void );
 	void						onAppletStop( void );
 
-	void                        startKodiModule( void );
-    void                        stopKodiModule( void );
+//	void                        startKodiModule( void );
+//    void                        stopKodiModule( void );
 
 	// resizing window
 	virtual void				onResizeBegin( QSize& newSize ) override;

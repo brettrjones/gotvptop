@@ -201,7 +201,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_AppCommonInitialized( false )
 , m_LoginBegin( false )
 , m_LoginComplete( false )
-, m_KodiThread( nullptr )
+//, m_KodiThread( nullptr )
 , m_AudioOut( *this )
 {
 	connect( m_OncePerSecondTimer, SIGNAL( timeout() ), &m_OffersMgr, SLOT( slotOncePerSecond() ) );

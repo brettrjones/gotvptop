@@ -64,6 +64,7 @@ const char *	            VxGetCompanyWebsite( void );
 const char *	            VxGetApplicationTitle( void );
 void			            VxSetApplicationNameNoSpaces( const char * pAppName );
 const char *	            VxGetApplicationNameNoSpaces( void );
+const char *	            VxGetApplicationNameNoSpacesLowerCase( void );
 void			            VxSetIsApplicationCommercial( bool isCommercial );
 bool			            VxGetIsApplicationCommercial( void );
 

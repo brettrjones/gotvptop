@@ -23,6 +23,7 @@
 #include <time.h>
 #include <string>
 #include <stdio.h>
+#include <algorithm>
 
 #ifndef TARGET_OS_WINDOWS
     #include <sys/time.h>
@@ -46,6 +47,7 @@ namespace
 #ifdef DEBUG
     std::string			g_strApplicationTitle			= "GoTv PtoP";
     std::string			g_strApplicationNameNoSpaces	= "GoTvPtoP";
+    std::string			g_strApplicationNameNoSpacesLowerCase	= "gotvptop";
     std::string			g_strNetworkName				= "GoTvPtoPTestNet";
 	std::string			g_strCompanyWebsite				= "http://www.gotvptop.net";
     std::string			g_strCompanyDomain				= "gotvptop.net";
@@ -107,7 +109,7 @@ namespace
 // data storage paths linux      /home/user/.local/share/gotvptop
 //                    windows    C:\Users\user\AppData\Roaming\GoTvPtoP
 //                    android ?
-// /storage/GoTvPtoP/temp/		temporary files path
+// /storage/gotvptop/temp/		temporary files path
 //                  /logs/		log files path
 //                  /gotv/		ShredFilesDb.db3 and app generated files
 //                  /kodi/		kodi plugins and writable data directory
@@ -249,12 +251,22 @@ const char * VxGetApplicationTitle( void )
 void VxSetApplicationNameNoSpaces( const char * pAppName )
 {
 	g_strApplicationNameNoSpaces = pAppName;
+    g_strApplicationNameNoSpacesLowerCase = pAppName;
+    transform(g_strApplicationNameNoSpacesLowerCase.begin(),
+              g_strApplicationNameNoSpacesLowerCase.end(),
+              g_strApplicationNameNoSpacesLowerCase.begin(), ::tolower);
 }
 
 //============================================================================
 const char * VxGetApplicationNameNoSpaces( void )
 {
 	return g_strApplicationNameNoSpaces.c_str();
+}
+
+//============================================================================
+const char * VxGetApplicationNameNoSpacesLowerCase( void )
+{
+    return g_strApplicationNameNoSpacesLowerCase.c_str();
 }
 
 //============================================================================
