@@ -68,6 +68,9 @@ enum EApplet
 	eAppletPlugins,
 	eAppletTheme,
 	eAppletSettings,
+	eAppletGroupUser,	// user who can join group
+	eAppletGroupHost,	// user who hosts a group
+	eAppletGroupAnchor, // network service for group hosts.. search, provide ip address etc
 	eMaxBasicApplets, // marker.. past here is optional applets based on feature
 
 	ePluginAppletCamProvider,

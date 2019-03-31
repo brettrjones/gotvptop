@@ -4,6 +4,11 @@ Instructions to create a virtual box Linux Mint 18.3 Image for GoTvPtoP develope
 1.) Turning on 3D acceleration in VBox causes Qt Creator to crash but works fine for just running GoTvPtoP
 2.) Cannot run Android x86 emulator inside a Virtual image. Visit https://developer.android.com/studio/run/emulator-acceleration
     however, connecting to a physical android device works fine
+3.) Found a workaround for the Qt Creator crash bug. 
+	a.) With 3d acceleration turned off launch Qt Creator
+	b.) In Help->About Plugins uncheck welcome screen
+	c.) exit qt, restart virtual box with 3d acceleration turned on.
+	
 
 === setup linux mint ===
 
@@ -30,6 +35,7 @@ Instructions to create a virtual box Linux Mint 18.3 Image for GoTvPtoP develope
 14.) Mint->Update Manager install updates till no more available
 
 15.) Solutions to "Running in software rendering mode" I have tried with success but causes Qt Creator to crash	if 3D accelleration is on
+	NOTE: this solution longer needed .. follow the workaround for Qt Creator crash in section KNOWN ISSUES
 	a.) Update your host video drivers
 	b.) make sure 3d acceleration is turned on in VirtualBox Display settings
 	c.) sudo apt remove virtualbox-guest*

@@ -33,20 +33,26 @@
 //============================================================================
 
 //============================================================================
+// called from kodi thread when initializing kodi
 bool RenderGlWidget::initRenderSystem()
 {
-    if( RENDER_FROM_THREAD )
+    if( m_KodiSurface )
     {
-        doInitializeGL();
+		m_KodiSurface->startupKodiRenderSystem();
     }
 
-    return m_bRenderCreated;
+    return m_RenderWidgetInited;
 }
 
 //============================================================================
 bool RenderGlWidget::destroyRenderSystem()
 {
-    m_bRenderCreated = false;
+	m_RenderWidgetInited = false;
+	if( m_KodiSurface )
+	{
+		m_KodiSurface->shutdownKodiRenderSystem();
+	}
+
     if( RENDER_FROM_THREAD )
     {
         // TODO: switch context back to gui thread so will be correctly destroyed
@@ -103,7 +109,7 @@ bool RenderGlWidget::resetRenderSystem( int width, int height )
 //============================================================================
 bool RenderGlWidget::beginRender()
 {
-    if( m_bRenderCreated && m_KodiSurface )
+    if( m_RenderWidgetInited && m_KodiSurface )
     {
         m_KodiSurface->beginRender();
     }
@@ -114,7 +120,7 @@ bool RenderGlWidget::beginRender()
 //============================================================================
 bool RenderGlWidget::endRender()
 {
-    if( m_bRenderCreated && m_KodiSurface )
+    if( m_RenderWidgetInited && m_KodiSurface )
     {
         m_KodiSurface->endRender();
     }
@@ -130,7 +136,7 @@ void RenderGlWidget::presentRender( bool rendered, bool videoLayer )
     // endRender
     // presentRender
 
-    if( m_bRenderCreated && m_KodiSurface )
+    if( m_RenderWidgetInited && m_KodiSurface )
     {
         m_KodiSurface->presentRender( rendered, videoLayer );
         update();
@@ -140,8 +146,10 @@ void RenderGlWidget::presentRender( bool rendered, bool videoLayer )
 //============================================================================
 bool RenderGlWidget::clearBuffers( GoTvColor color )
 {
-    if( !m_bRenderCreated )
-        return false;
+	if( !m_RenderWidgetInited )
+	{
+		return false;
+	}
 
     float r = GET_R( color ) / 255.0f;
     float g = GET_G( color ) / 255.0f;
@@ -251,8 +259,10 @@ void RenderGlWidget::applyStateBlock()
 //============================================================================
 void RenderGlWidget::setCameraPosition( const GoTvPoint& camera, int screenWidth, int screenHeight, float stereoFactor )
 {
-    if( !m_bRenderCreated )
-        return;
+	if( !m_RenderWidgetInited )
+	{
+		return;
+	}
 
     GoTvPoint offset = camera - GoTvPoint( screenWidth*0.5f, screenHeight*0.5f );
 
@@ -272,7 +282,7 @@ void RenderGlWidget::setCameraPosition( const GoTvPoint& camera, int screenWidth
 //============================================================================
 void RenderGlWidget::applyHardwareTransform( const TransformMatrix& finalMatrix )
 {
-    if( !m_bRenderCreated )
+    if( !m_RenderWidgetInited )
         return;
 
     glMatrixModview.Push();
@@ -283,7 +293,7 @@ void RenderGlWidget::applyHardwareTransform( const TransformMatrix& finalMatrix 
 //============================================================================
 void RenderGlWidget::restoreHardwareTransform()
 {
-    if( !m_bRenderCreated )
+    if( !m_RenderWidgetInited )
         return;
 
     glMatrixModview.PopLoad();

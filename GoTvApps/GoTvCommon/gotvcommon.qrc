@@ -202,5 +202,8 @@
         <file>Resources/snd_yes.wav</file>
         <file>Resources/kodi.svg</file>
         <file>Resources/user-ident.svg</file>
+        <file>Resources/group.svg</file>
+        <file>Resources/group-anchor.svg</file>
+        <file>Resources/group-host.svg</file>
     </qresource>
 </RCC>

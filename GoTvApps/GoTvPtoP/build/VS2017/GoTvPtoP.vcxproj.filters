@@ -549,9 +549,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLaunchWidget.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletMgr.cpp">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerBase.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
@@ -705,9 +702,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlMatrix.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\KodiThread.cpp">
-      <Filter>GoTvCommon\Source Files\AppCommon</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlOffScreenSurface.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
@@ -731,6 +725,21 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AudioBuffer.cpp">
       <Filter>GoTvCommon\Source Files\SoundInputOutput</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletMgr.cpp">
+      <Filter>GoTvCommon\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupAnchor.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupHost.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupUser.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\KodiThread.cpp">
+      <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1391,9 +1400,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletLaunchWidget.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletMgr.h">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPlayerBase.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
@@ -1487,9 +1493,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\PlayerGlWidget.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\KodiRun.h">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
@@ -1507,6 +1510,21 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AudioOutIo.h">
       <Filter>GoTvCommon\Source Files\SoundInputOutput</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletMgr.h">
+      <Filter>GoTvCommon\Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupAnchor.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupHost.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupUser.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\KodiThread.h">
+      <Filter>GoTvCommon\Source Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -2504,9 +2522,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\ShaderQt.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\KodiThread.h">
-      <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.h">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>

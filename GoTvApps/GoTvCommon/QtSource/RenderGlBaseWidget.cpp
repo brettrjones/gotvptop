@@ -47,6 +47,12 @@ RenderGlBaseWidget::RenderGlBaseWidget(QWidget *parent)
 }
 
 //============================================================================
+bool RenderGlBaseWidget::isReadyForRender() const
+{ 
+	return m_RenderWidgetInited && m_KodiSurface && m_KodiSurface->isReadyForRender(); 
+}
+
+//============================================================================
 void RenderGlBaseWidget::initializeGL( void )
 {
     // create 2 fbos
@@ -106,11 +112,11 @@ void RenderGlBaseWidget::initializeGL( void )
 
     // setup the background thread's surface
     // the surface must be created here in the qt qui thread
-    m_KodiSurface = new RenderGlOffScreenSurface( this, m_KodiContext, nullptr,  drawRectSize );
+    m_KodiSurface = new RenderGlOffScreenSurface( m_KodiThread, this, m_KodiContext, nullptr,  drawRectSize );
 
     m_KodiSurface->setFormat( m_KodiContext->format() );
     m_KodiSurface->create();
-    m_KodiSurface->setRenderFunctions( m_GlF );
+    //m_KodiSurface->setRenderFunctions( m_GlF );
     m_KodiSurface->moveToThread( m_KodiThread );
 
     //m_KodiThread->moveToThread( m_KodiThread );
@@ -118,6 +124,8 @@ void RenderGlBaseWidget::initializeGL( void )
     m_KodiThread->setRenderWidget( this );
     m_KodiThread->setGlContext( m_KodiContext );
     m_KodiThread->setGlSurface( m_KodiSurface );
+
+	//initShaders();
 
     // sigh.. must move the thread to itself
 //#ifdef TARGET_OS_WINDOWS
@@ -245,7 +253,7 @@ void RenderGlBaseWidget::resizeGL( int w, int h )
 //============================================================================
 void RenderGlBaseWidget::doResizeGL( int w, int h )
 {
-    if( m_bRenderCreated )
+    if( m_RenderWidgetInited )
     {
         m_GlF->glViewport( 0, 0, w, h );
         onResizeGL( w, h );

@@ -571,6 +571,14 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconGoTvNetworkHost:
 		return ":/AppRes/Resources/network-host.svg";
 
+	// groups
+	case eMyIconGroupUser:
+		return ":/AppRes/Resources/group.svg";
+	case eMyIconGroupHost:
+		return ":/AppRes/Resources/group-host.svg";
+	case eMyIconGroupAnchor:
+		return ":/AppRes/Resources/group-anchor.svg";
+
 	default:
 		return ":/AppRes/Resources/question_mark.svg";// Icon with question mark
 	}

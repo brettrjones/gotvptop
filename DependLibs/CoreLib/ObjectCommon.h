@@ -76,9 +76,9 @@
 #define OBJNAME_APPLET_SHARED_CONTENT					"AppletSharedContent"
 #define OBJNAME_APPLET_THEME							"AppletTheme"
 #define OBJNAME_APPLET_USER_IDENTITY				    "AppletUserIdentity"
-//#define OBJNAME_APPLET_							"AppletRemoteControl"
-//#define OBJNAME_APPLET_							"AppletRemoteControl"
-//#define OBJNAME_APPLET_							"AppletRemoteControl"
+#define OBJNAME_APPLET_GROUP_USER						"AppletGroupUser"
+#define OBJNAME_APPLET_GROUP_HOST						"AppletGroupHost"
+#define OBJNAME_APPLET_GROUP_ANCHOR						"AppletGroupAnchor"
 
 #define OBJNAME_FILE_ACTION_MENU						"FileActionMenu"
 #define OBJNAME_MESSAGER_PAGE							"MessengerPage"

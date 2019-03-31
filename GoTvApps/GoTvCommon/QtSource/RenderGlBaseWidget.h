@@ -75,7 +75,7 @@ public:
     QOpenGLContext *			getContext( void )              { return m_WidgetContext; }
     QOpenGLFunctions *			getGlFunctions( void )          { return m_GlF; }
 
-    bool                        isReadyForRender() const        { return m_bRenderCreated && m_KodiSurface; }
+	bool                        isReadyForRender() const;
 
     int                         getMaxTextureSize( void )       { return m_MaxTextureSize; }
 
@@ -113,7 +113,6 @@ protected:
 
     //=== vars ===//
     AppCommon&				    m_MyApp;
-    bool                        m_bRenderCreated = false;
     bool                        m_RenderWidgetInited = false;
 
     KodiThread *                m_KodiThread = nullptr;

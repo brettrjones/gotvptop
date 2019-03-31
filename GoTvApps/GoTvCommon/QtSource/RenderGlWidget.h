@@ -114,7 +114,7 @@ public:
 
     std::string                 getShaderPath( const std::string &filename ) override { return ""; }
 
-    void                        initShaders();
+    void                        initShaders() override;
 
     void                        initialiseShaders() override;
     void                        releaseShaders() override;

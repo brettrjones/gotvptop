@@ -7,11 +7,13 @@
 #include <QtGui/QPainter>
 
 //============================================================================
-RenderGlOffScreenSurface::RenderGlOffScreenSurface( RenderGlBaseWidget * glWidget,
+RenderGlOffScreenSurface::RenderGlOffScreenSurface( KodiThread* kodiThread,
+													RenderGlBaseWidget * glWidget,
                                                     QOpenGLContext* renderContext,
                                                     QScreen* targetScreen, 
                                                     const QSize& size )
 : QOffscreenSurface( targetScreen )
+, m_KodiThread( kodiThread )
 , m_GlWidget( glWidget )
 , m_initialized( false )
 , m_updatePending( false )
@@ -59,6 +61,30 @@ RenderGlOffScreenSurface::~RenderGlOffScreenSurface()
     m_initialized = false;
     m_updatePending = false;
     destroy();
+}
+
+//============================================================================
+// called from kodi thread
+void RenderGlOffScreenSurface::startupKodiRenderSystem()
+{
+	m_RenderContext->makeCurrent( this );
+	setRenderFunctions( m_RenderContext->functions() );
+	m_KodiInitialized = true;
+}
+
+//============================================================================
+// called from kodi thread
+void RenderGlOffScreenSurface::shutdownKodiRenderSystem()
+{
+	m_KodiInitialized = true;
+}
+
+
+//============================================================================
+/// @brief return true if has been initialized from kodi thread
+bool RenderGlOffScreenSurface::isReadyForRender()
+{
+	return( m_initialized && m_KodiInitialized );
 }
 
 //============================================================================
@@ -157,11 +183,14 @@ bool RenderGlOffScreenSurface::beginRender()
         {
             m_GlWidget->initShaders();
         }
+
+		doneCurrent();
     }
 
-    //LogMsg( LOG_DEBUG, " RenderGlOffScreenSurface::beginRender size x(%d) y(%d)", m_SurfaceSize.width(), m_SurfaceSize.height() );
-    // make context current and bind framebuffer
-    makeCurrent();
+	//LogMsg( LOG_DEBUG, " RenderGlOffScreenSurface::beginRender size x(%d) y(%d)", m_SurfaceSize.width(), m_SurfaceSize.height() );
+	// make context current and bind framebuffer
+	makeCurrent();
+
     bindFramebufferObject();
     glClearColor(   0, 0, 1, 1 );
     glClear( GL_COLOR_BUFFER_BIT );
@@ -191,10 +220,10 @@ void RenderGlOffScreenSurface::presentRender( bool rendered, bool videoLayer )
             m_FrameImage = grabFramebuffer();
             swapBuffers();
 
-           // doneCurrent();
-
             checkForSizeChange();
-        }
+
+			doneCurrent();
+		}
 
         //LogMsg( LOG_DEBUG, " RenderGlOffScreenSurface::presentRender done size x(%d) y(%d)", m_SurfaceSize.width(), m_SurfaceSize.height() );
     }
@@ -254,13 +283,23 @@ void RenderGlOffScreenSurface::resizeGL( int width, int height )
 //============================================================================
 void RenderGlOffScreenSurface::slotGlResized( int w, int h )
 {
-    m_NextSurfaceSize = QSize( w, h );
+	glWidgetWasResized( QSize( w, h ) );
+}
+
+//============================================================================
+void RenderGlOffScreenSurface::glWidgetWasResized( QSize newWindowSize )
+{
+	m_mutex.lock();
+	m_NextSurfaceSize = newWindowSize;
+	m_mutex.unlock();
 }
 
 //============================================================================
 /// @brief  change surface size in thread if required
 void RenderGlOffScreenSurface::checkForSizeChange()
 {
+	QSize nextSurfaceSize = m_NextSurfaceSize;
+
     if( m_NextSurfaceSize != m_SurfaceSize )
     {
         m_SurfaceSize = m_NextSurfaceSize;
@@ -587,6 +626,7 @@ void RenderGlOffScreenSurface::update()
 //============================================================================
 void RenderGlOffScreenSurface::render(  )
 {
+	// never gets called
     std::lock_guard <std::mutex> locker( m_mutex );
     // check if we need to initialize stuff
     initializeInternal();
@@ -654,14 +694,15 @@ bool RenderGlOffScreenSurface::event( QEvent* event )
     switch( event->type() ) 
     {
     case QEvent::UpdateLater:
-        update();
+        update(); // never gets called
         return ( true );
 
     case QEvent::UpdateRequest:
-        render();
+        render(); // never gets called
         return ( true );
 
-    default:
+	case QEvent::PlatformSurface:
+	default:
         return ( false );
     }  // switch
 

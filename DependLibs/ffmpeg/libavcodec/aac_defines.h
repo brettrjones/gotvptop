@@ -36,47 +36,47 @@
 
 #define AAC_RENAME(x)       x ## _fixed
 #define AAC_RENAME_32(x)    x ## _fixed_32
-typedef int                 INTFLOAT;
-typedef unsigned            UINTFLOAT;  ///< Equivalent to INTFLOAT, Used as temporal cast to avoid undefined sign overflow operations.
+typedef int32_t              INTFLOAT;
+typedef uint32_t            UINTFLOAT;  ///< Equivalent to INTFLOAT, Used as temporal cast to avoid undefined sign overflow operations.
 typedef int64_t             INT64FLOAT;
 typedef int16_t             SHORTFLOAT;
 typedef SoftFloat           AAC_FLOAT;
-typedef int                 AAC_SIGNE;
-#define FIXR(a)             ((int)((a) * 1 + 0.5))
-#define FIXR10(a)           ((int)((a) * 1024.0 + 0.5))
-#define Q23(a)              (int)((a) * 8388608.0 + 0.5)
-#define Q30(x)              (int)((x)*1073741824.0 + 0.5)
-#define Q31(x)              (int)((x)*2147483648.0 + 0.5)
+typedef uint32_t            AAC_SIGNE;
+#define FIXR(a)             ((int32_t)((a) * 1 + 0.5))
+#define FIXR10(a)           ((int32_t)((a) * 1024.0 + 0.5))
+#define Q23(a)              (int32_t)((a) * 8388608.0 + 0.5)
+#define Q30(x)              (int32_t)((x)*1073741824.0 + 0.5)
+#define Q31(x)              (int32_t)((x)*2147483648.0 + 0.5)
 #define RANGE15(x)          x
 #define GET_GAIN(x, y)      (-(y) * (1 << (x))) + 1024
-#define AAC_MUL16(x, y)     (int)(((int64_t)(x) * (y) + 0x8000) >> 16)
-#define AAC_MUL26(x, y)     (int)(((int64_t)(x) * (y) + 0x2000000) >> 26)
-#define AAC_MUL30(x, y)     (int)(((int64_t)(x) * (y) + 0x20000000) >> 30)
-#define AAC_MUL31(x, y)     (int)(((int64_t)(x) * (y) + 0x40000000) >> 31)
-#define AAC_MADD28(x, y, a, b) (int)((((int64_t)(x) * (y)) + \
+#define AAC_MUL16(x, y)     (int32_t)(((int64_t)(x) * (y) + 0x8000) >> 16)
+#define AAC_MUL26(x, y)     (int32_t)(((int64_t)(x) * (y) + 0x2000000) >> 26)
+#define AAC_MUL30(x, y)     (int32_t)(((int64_t)(x) * (y) + 0x20000000) >> 30)
+#define AAC_MUL31(x, y)     (int32_t)(((int64_t)(x) * (y) + 0x40000000) >> 31)
+#define AAC_MADD28(x, y, a, b) (int32_t)((((int64_t)(x) * (y)) + \
                                       ((int64_t)(a) * (b)) + \
                                         0x8000000) >> 28)
-#define AAC_MADD30(x, y, a, b) (int)((((int64_t)(x) * (y)) + \
+#define AAC_MADD30(x, y, a, b) (int32_t)((((int64_t)(x) * (y)) + \
                                       ((int64_t)(a) * (b)) + \
                                         0x20000000) >> 30)
-#define AAC_MADD30_V8(x, y, a, b, c, d, e, f) (int)((((int64_t)(x) * (y)) + \
+#define AAC_MADD30_V8(x, y, a, b, c, d, e, f) (int32_t)((((int64_t)(x) * (y)) + \
                                                      ((int64_t)(a) * (b)) + \
                                                      ((int64_t)(c) * (d)) + \
                                                      ((int64_t)(e) * (f)) + \
                                                        0x20000000) >> 30)
-#define AAC_MSUB30(x, y, a, b) (int)((((int64_t)(x) * (y)) - \
+#define AAC_MSUB30(x, y, a, b) (int32_t)((((int64_t)(x) * (y)) - \
                                       ((int64_t)(a) * (b)) + \
                                         0x20000000) >> 30)
-#define AAC_MSUB30_V8(x, y, a, b, c, d, e, f) (int)((((int64_t)(x) * (y)) + \
+#define AAC_MSUB30_V8(x, y, a, b, c, d, e, f) (int32_t)((((int64_t)(x) * (y)) + \
                                                      ((int64_t)(a) * (b)) - \
                                                      ((int64_t)(c) * (d)) - \
                                                      ((int64_t)(e) * (f)) + \
                                                        0x20000000) >> 30)
-#define AAC_MSUB31_V3(x, y, z)    (int)((((int64_t)(x) * (z)) - \
+#define AAC_MSUB31_V3(x, y, z)    (int32_t)((((int64_t)(x) * (z)) - \
                                       ((int64_t)(y) * (z)) + \
                                         0x40000000) >> 31)
 #define AAC_HALF_SUM(x, y)  (((x) >> 1) + ((y) >> 1))
-#define AAC_SRA_R(x, y)     (int)(((x) + (1 << ((y) - 1))) >> (y))
+#define AAC_SRA_R(x, y)     (int32_t)(((x) + (1 << ((y) - 1))) >> (y))
 
 #else
 
@@ -90,7 +90,7 @@ typedef float               UINTFLOAT;
 typedef float               INT64FLOAT;
 typedef float               SHORTFLOAT;
 typedef float               AAC_FLOAT;
-typedef unsigned            AAC_SIGNE;
+typedef uint32_t            AAC_SIGNE;
 #define FIXR(x)             ((float)(x))
 #define FIXR10(x)           ((float)(x))
 #define Q23(x)              ((float)(x))

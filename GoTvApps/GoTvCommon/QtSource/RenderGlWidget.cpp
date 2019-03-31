@@ -152,6 +152,11 @@ void RenderGlWidget::onResizeEvent( QSize& newSize )
     #ifndef DEBUG_OPENGL
 	m_QtToKodi.fromGuiResizeEvent( newSize.width(), newSize.height() );
      #endif // DEBUG_OPENGL
+	// evedently the kodi surface does not respond to signals and slots.. must set it directly
+	if( m_KodiSurface )
+	{
+		m_KodiSurface->glWidgetWasResized( m_ResizingWindowSize );
+	}
 }
 
 //============================================================================

@@ -21,6 +21,7 @@
 #include <mutex>
 
 class RenderGlBaseWidget;
+class KodiThread;
 
 class RenderGlOffScreenSurface : public QOffscreenSurface
 {
@@ -33,10 +34,11 @@ public:
     /// this is because before the FBO and off-screen surface haven't been created.
     /// By default this uses the QWindow::requestedFormat() for OpenGL context and off-screen
     /// surface.
-    explicit RenderGlOffScreenSurface( RenderGlBaseWidget * glWidget,
-                                       QOpenGLContext* renderContext, 
-                                       QScreen* targetScreen = nullptr, 
-                                       const QSize& size = QSize( 1, 1 ) );
+    explicit RenderGlOffScreenSurface(	KodiThread* kodiThread,
+										RenderGlBaseWidget * glWidget,
+										QOpenGLContext* renderContext, 
+										QScreen* targetScreen = nullptr, 
+										const QSize& size = QSize( 1, 1 ) );
 
     /// @brief Destructor.
     virtual ~RenderGlOffScreenSurface();
@@ -48,8 +50,11 @@ public:
     /// @brief get context that was setup by main gui thread
     QOpenGLContext*             getRenderContext( )                                     { return m_RenderContext; }
 
-    /// @brief must be called from render thread
-    void                        setRenderFunctions( QOpenGLFunctions * glFunctions );
+	/// @brief kodi initialize from thread
+	void						startupKodiRenderSystem();
+
+	/// @brief kodi is shutting down
+	void						shutdownKodiRenderSystem();
 
     /// @brief begin render from thread
     bool                        beginRender( );
@@ -120,6 +125,11 @@ public:
     /// @brief get last frame capture
     QImage&                     getLastRenderedImage()      { return m_FrameImage; }
 
+	/// @brief return true if has been initialized from kodi thread
+	bool						isReadyForRender();
+
+	void                        glWidgetWasResized( QSize newWindowSize );
+
 public slots:
     /// @brief Lazy update routine like QWidget::update().
     void                        update();
@@ -137,7 +147,11 @@ signals:
     void                        resized();
 
 protected:
-    virtual void                exposeEvent( QExposeEvent* e );
+
+	/// @brief must be called from render thread
+	void                        setRenderFunctions( QOpenGLFunctions * glFunctions );
+
+	virtual void                exposeEvent( QExposeEvent* e );
     virtual void                resizeEvent( QResizeEvent* e );
     virtual bool                event( QEvent* e ) override;
 
@@ -165,6 +179,7 @@ protected:
 
 private:
     Q_DISABLE_COPY( RenderGlOffScreenSurface )
+
         
     /// @brief Initialize the window.
     void                        initializeInternal();
@@ -184,7 +199,11 @@ private:
     /// @brief BRJ test texture render
     void                        testTexureRender( bool startRender );
 
-     RenderGlBaseWidget *       m_GlWidget;
+	//=== vars ===//
+	/// @brief kodi thread
+	KodiThread*					m_KodiThread;
+
+    RenderGlBaseWidget *        m_GlWidget;
 
     /// @brief Mutex making sure not grabbing while drawing etc.
     std::mutex                  m_mutex;
@@ -194,6 +213,9 @@ private:
 
     /// @brief False before the overridden initializeGL() was first called.
     bool                        m_initializedGL = false;
+
+	/// @brief false before kodi called initKodiRenderSystem
+	bool                        m_KodiInitialized = false;
 
     /// @brief True when currently a window update is pending.
     std::atomic_bool            m_updatePending;

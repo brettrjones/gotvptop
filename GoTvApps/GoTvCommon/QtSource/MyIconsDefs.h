@@ -272,5 +272,9 @@ enum EMyIcons
 	eMyIconGoTvStation,
 	eMyIconGoTvNetworkHost,
 
+	eMyIconGroupUser,
+	eMyIconGroupHost,
+	eMyIconGroupAnchor,
+
 	eMaxMyIcon	// must be last
 };

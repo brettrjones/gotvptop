@@ -187,14 +187,17 @@ bool CNetworkBase::IsLocalHost(const std::string& hostname)
     return true;
 
   std::vector<CNetworkInterface*>& ifaces = GetInterfaceList();
-  std::vector<CNetworkInterface*>::const_iterator iter = ifaces.begin();
-  while (iter != ifaces.end())
+  if( !ifaces.empty() )
   {
-    CNetworkInterface* iface = *iter;
-    if (iface && iface->GetCurrentIPAddress() == hostname)
-      return true;
+	  std::vector<CNetworkInterface*>::const_iterator iter = ifaces.begin();
+	  while( iter != ifaces.end() )
+	  {
+		  CNetworkInterface* iface = *iter;
+		  if( iface && iface->GetCurrentIPAddress() == hostname )
+			  return true;
 
-     ++iter;
+		  ++iter;
+	  }
   }
 
   return false;

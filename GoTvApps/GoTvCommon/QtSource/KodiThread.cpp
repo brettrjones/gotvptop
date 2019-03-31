@@ -6,6 +6,7 @@
 #include <CoreLib/VxDebug.h>
 #include "KodiThread.h"
 #include "RenderGlOffScreenSurface.h"
+#include "RenderGlWidget.h"
 
 
 bool KodiThread::m_IsKodiRunning = false;
@@ -26,7 +27,11 @@ void KodiThread::run()
     {
         m_IsKodiRunning = true;
 
-        makeCurrentGlContext();
+        //makeCurrentGlContext();
+
+		//m_RenderWidget->initShaders();
+
+
         IGoTv& iGoTv = IGoTv::getIGoTv();
         // will not return from doRun until kodi is shutdown
         iGoTv.doRun( eAppModuleKodi );
