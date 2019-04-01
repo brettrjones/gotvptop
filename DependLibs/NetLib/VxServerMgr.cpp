@@ -16,6 +16,7 @@
 #include "VxSktUtil.h"
 #include "VxSktAccept.h"
 #include "VxServerMgr.h"
+#include "GoTvDebugConfig.h"
 
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGlobals.h>
@@ -39,13 +40,13 @@ namespace
 		poVxThread->setIsThreadRunning( true );
 		VxServerMgr * poMgr = (VxServerMgr *)poVxThread->getThreadUserParam();
 
-#ifdef DEBUG_VXSERVER_MGR
+#if defined(DEBUG_SKT_CONNECTIONS)
 		LogMsg( LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread started\n", poMgr->m_iMgrId, poMgr->m_u16ListenPort );
 #endif // DEBUG_VXSERVER_MGR
 		poMgr->listenForConnectionsToAccept( poVxThread );
 
 		// quitting
-//#ifdef DEBUG_VXSERVER_MGR
+//#ifdef DEBUG_SKT_CONNECTIONS
 		LogMsg( LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread tid %d quiting\n", poMgr->m_iMgrId, poMgr->getListenPort(), poVxThread->getThreadTid() );
 //#endif // DEBUG_VXSERVER_MGR
 		//! VxThread calls this just before exit
@@ -140,7 +141,7 @@ RCODE VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 	m_LastWatchdogKick = time( 0 );
 	std::string ipv4String = ip;
 	m_u16ListenPort = u16ListenPort;
-#ifdef DEBUG_VXSERVER_MGR
+#if defined(DEBUG_SKT_CONNECTIONS)
 	LogMsg( LOG_INFO, "VxServerMgr::startListening ip %s port %d\n", ip, u16ListenPort );
 #endif // DEBUG_VXSERVER_MGR
 
@@ -391,7 +392,7 @@ RCODE VxServerMgr::startListening(  uint16_t u16ListenPort )
 			return -1;
 	}
 
-#ifdef DEBUG_VXSERVER_MGR
+#if defined(DEBUG_SKT_CONNECTIONS)
 	LogMsg( LOG_INFO, "VxServerMgr::startListening port %d\n", u16ListenPort );
 #endif // DEBUG_VXSERVER_MGR
 	RCODE rc = 0;
@@ -518,19 +519,26 @@ RCODE VxServerMgr::stopListening( void )
 {
 	m_IsReadyToAcceptConnections = false;
 	m_u16ListenPort = 0;
+#if defined(DEBUG_SKT_CONNECTIONS)
 	LogMsg( LOG_SKT, "### VxServerMgr: Mgr %d stop listening skt cnt %d\n", m_iMgrId, m_iActiveListenSktCnt );
+#endif // defined(DEBUG_SKT_CONNECTIONS)
+
 	// kill previous thread if running
     m_ListenVxThread.abortThreadRun( true );
+#if defined(DEBUG_SKT_CONNECTIONS)
 	if( 0 == m_iActiveListenSktCnt )
 	{
 		LogMsg( LOG_ERROR, "VxServerMgr:stopListening called with no listen sockets\n" );
 	}
+#endif // defined(DEBUG_SKT_CONNECTIONS)
 
 	for( int i = 0; i < m_iActiveListenSktCnt; i++ )
 	{
 		if( INVALID_SOCKET != m_aoListenSkts[ i ] )
 		{
+#if defined(DEBUG_SKT_CONNECTIONS)
 			LogMsg( LOG_INFO, "VxServerMgr: Mgr %d closing listen skt %d\n", m_iMgrId, i );
+#endif // defined(DEBUG_SKT_CONNECTIONS)
 			// closing the thread should release it so it can exit
 			SOCKET sktToClose = m_aoListenSkts[ i ];
 			m_aoListenSkts[ i ] = INVALID_SOCKET;
@@ -543,7 +551,9 @@ RCODE VxServerMgr::stopListening( void )
     }
 
 	m_iActiveListenSktCnt = 0;
+#if defined(DEBUG_SKT_CONNECTIONS)
 	LogMsg( LOG_SKT, "VxServerMgr: Mgr %d stop listening done\n", m_iMgrId );
+#endif // defined(DEBUG_SKT_CONNECTIONS)
 	return 0;
 }
 

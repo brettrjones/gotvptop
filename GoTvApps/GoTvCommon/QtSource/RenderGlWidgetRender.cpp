@@ -34,6 +34,7 @@
 
 //============================================================================
 // called from kodi thread when initializing kodi
+// if never gets called then kodi failed to initialize and is a fatal error
 bool RenderGlWidget::initRenderSystem()
 {
     if( m_KodiSurface )

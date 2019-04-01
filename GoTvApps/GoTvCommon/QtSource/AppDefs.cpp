@@ -58,6 +58,11 @@ EMyIcons GetAppletIcon( EApplet applet )
 
 	case eAppletTheme:					return eMyIconTheme;
 	case eAppletSettings:				return eMyIconSettings;
+
+    case eAppletGroupUser:              return eMyIconGroupUser;
+    case eAppletGroupHost:              return eMyIconGroupHost;
+    case eAppletGroupAnchor:            return eMyIconGroupAnchor;
+
 	case eMaxBasicApplets:				return eMyIconUnknown; // this should never happen
 
 	case ePluginAppletCamProvider:		return eMyIconCamStreamProvider;
@@ -90,6 +95,10 @@ QString DescribeApplet( EApplet applet )
 
 	case eAppletTheme:					return QObject::tr( "Theme" );
 	case eAppletSettings:				return QObject::tr( "Settings" );
+
+    case eAppletGroupUser:              return QObject::tr( "Join Group" );
+    case eAppletGroupHost:              return QObject::tr( "Host A Group" );
+    case eAppletGroupAnchor:            return QObject::tr( "Anchor Network Of Groups" );
 
 	case ePluginAppletCamProvider:		return QObject::tr( "Provide Cam Stream" );
 	case ePluginAppletGoTvStation:		return QObject::tr( "Manage Station" );

@@ -15,6 +15,7 @@
 
 #include "PktAnnounce.h"
 #include "PktTypes.h"
+#include "GoTvDebugConfig.h"
 
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGlobals.h>
@@ -54,8 +55,14 @@ MyOSVersion::MyOSVersion()
 	m_u8OSVersion = 1;
 #elif defined( TARGET_OS_ANDROID )
 	m_u8OSVersion = 2;
+#elif defined( TARGET_OS_LINUX )
+    m_u8OSVersion = 3;
+#elif defined( TARGET_OS_APPLE )
+    m_u8OSVersion = 4;
+#elif defined( TARGET_OS_RASBERRY_PI )
+    m_u8OSVersion = 5;
 #else
-	m_u8OSVersion = 3;
+    m_u8OSVersion = 0;
 #endif
 }
 
@@ -79,6 +86,12 @@ void MyOSVersion::getOSVersion( std::string& strRetOSVersion )
 	case 3:
 		strRetOSVersion = "Linux";
 		break;
+    case 4:
+        strRetOSVersion = "Apple";
+        break;
+    case 5:
+        strRetOSVersion = "RasberryPi";
+        break;
 	default:
 		strRetOSVersion = "Unknown OS";
 	}
@@ -134,14 +147,32 @@ bool PktAnnBase::hasFriendDataChanged( PktAnnBase * poOther )
 //============================================================================
 PktAnnounce::PktAnnounce()	
 { 
-	//size_t hdr = sizeof( VxPktHdr );
-	//size_t connectBaseInfo = sizeof( VxConnectBaseInfo );
-	//size_t connectInfo = sizeof( VxConnectInfo );
-	//size_t identBase = sizeof( VxNetIdentBase );
-	//size_t ident = sizeof( VxNetIdent );
-	//size_t action = sizeof( PktAnnActionData );
-	//size_t base = sizeof( PktAnnBase );
-	//size_t total = sizeof( PktAnnounce );
+#if defined(DEBUG_PKT_LIB)
+static bool firstTime = true;
+    if( firstTime )
+    {
+        firstTime = false;
+        size_t hdr = sizeof( VxPktHdr );
+        size_t connectBaseInfo = sizeof( VxConnectBaseInfo );
+        size_t connectInfo = sizeof( VxConnectInfo );
+        size_t identBase = sizeof( VxNetIdentBase );
+        size_t netIdent = sizeof( VxNetIdent );
+        size_t action = sizeof( PktAnnActionData );
+        size_t base = sizeof( PktAnnBase );
+        size_t total = sizeof( PktAnnounce );
+        uint16_t remainder = getPktLength() & 0x0f;
+        if( remainder )
+        {
+            LogMsg( LOG_ERROR, "ERROR Invalid PktAnn size %d, hdr %d baseinfo %d connectinfo %d ident base %d ident %d action %d annbase %d remainder %d\n",
+                    total, hdr, connectBaseInfo, connectInfo, identBase, netIdent, action, base, remainder );
+        }
+        else
+        {
+            LogMsg( LOG_DEBUG, "OK PktAnn size %d, hdr %d baseinfo %d connectinfo %d ident base %d ident %d action %d annbase %d remainder %d\n",
+                    total, hdr, connectBaseInfo, connectInfo, identBase, netIdent, action, base, remainder );
+        }
+    }
+#endif // defined(DEBUG)
 
 	setPktLength( sizeof( PktAnnounce ) );
 	setPktType(  PKT_TYPE_ANNOUNCE );

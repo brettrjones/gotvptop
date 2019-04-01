@@ -126,9 +126,9 @@ typedef std::shared_ptr<CFileItem> CFileItemPtr;
 # define HAS_MDNS 1 // ZeroConfig for microsoft
 #endif // defined(TARGET_OS_WINDOWS)
 
-#if defined(TARGET_OS_LINUX)
-# define HAS_AVAHI 1 // ZeroConfig for linux
-#endif // defined(TARGET_OS_WINDOWS)
+//#if defined(TARGET_OS_LINUX)
+//# define HAS_AVAHI 1 // ZeroConfig for linux
+//#endif // defined(TARGET_OS_WINDOWS)
 
 //#include <vld.h> // Visual Studio memory leak detection from https://marketplace.visualstudio.com/items?itemName=ArkadyShapkin.VisualLeakDetectorforVisualC
 

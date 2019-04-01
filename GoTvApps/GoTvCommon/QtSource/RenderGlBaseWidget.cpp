@@ -94,18 +94,18 @@ void RenderGlBaseWidget::initializeGL( void )
 #ifndef DEBUG_OPENGL
 
     // done with current (QOpenglWidget's) context
-    doneCurrent(); // not sure if needed
+    //doneCurrent(); // not sure if needed
 
     m_KodiThread = new KodiThread( m_MyApp, this );
 
     m_KodiContext = new QOpenGLContext();
+    m_KodiContext->setShareContext( m_WidgetContext );
 
     m_KodiContext->setFormat( m_WidgetContext->format() );
-    m_KodiContext->setShareContext( m_WidgetContext );
+//    m_KodiContext->setFormat( this->requestedFormat() );
     m_KodiContext->create();
 
-    m_KodiContext->moveToThread( m_KodiThread );
-    // sigh.. must move the thread to itself
+     // sigh.. must move the thread to itself
 //#ifdef TARGET_OS_WINDOWS
 //    m_KodiThread->moveToThread( m_KodiThread );
 //#endif // TARGET_OS_WINDOWS
@@ -117,13 +117,15 @@ void RenderGlBaseWidget::initializeGL( void )
     m_KodiSurface->setFormat( m_KodiContext->format() );
     m_KodiSurface->create();
     //m_KodiSurface->setRenderFunctions( m_GlF );
-    m_KodiSurface->moveToThread( m_KodiThread );
 
     //m_KodiThread->moveToThread( m_KodiThread );
 
     m_KodiThread->setRenderWidget( this );
     m_KodiThread->setGlContext( m_KodiContext );
     m_KodiThread->setGlSurface( m_KodiSurface );
+
+    m_KodiContext->moveToThread( m_KodiThread );
+    m_KodiSurface->moveToThread( m_KodiThread );
 
 	//initShaders();
 
@@ -136,12 +138,20 @@ void RenderGlBaseWidget::initializeGL( void )
 
     m_RenderWidgetInited = true;
 
-    m_KodiThread->start();
+    connect( this, SIGNAL(signalStartKodiThread()), this, SLOT(slotStartKodiThread()) );
+    emit signalStartKodiThread();
+
 
 
 #else
     doInitializeGL();
 #endif // DEBUG_OPENGL
+}
+
+//============================================================================
+void  RenderGlBaseWidget::slotStartKodiThread()
+{
+    m_KodiThread->start();
 }
 
 //============================================================================

@@ -106,6 +106,10 @@ public:
 
 signals:
     void                        signalGlResized( int w, int h );
+    void                        signalStartKodiThread();
+
+protected slots:
+    void                        slotStartKodiThread();
 
 protected:
     void                        initColorMatrix();

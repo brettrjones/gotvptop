@@ -21,6 +21,7 @@
 #include "VxDebug.h"
 #include "VxParse.h"
 #include "AppErr.h"
+#include "GoTvDebugConfig.h"
 
 #include "memory.h"
 
@@ -236,7 +237,7 @@ void VxThread::abortThreadRun( bool bAbort )
 		m_u8ThreadFlags |= VX_FLAG_THREAD_ABORT;
 	else
 		m_u8ThreadFlags &= ~VX_FLAG_THREAD_ABORT;
-#ifdef DEBUG_THREADS
+#if defined(DEBUG_THREADS)
     LogMsg( LOG_INFO, "$$$VxThread::abortThreadRun %s\n", getThreadName() );
     dumpRunningThreads();
 #endif // DEBUG_THREADS
@@ -246,8 +247,10 @@ void VxThread::abortThreadRun( bool bAbort )
 //! set function that will be called when any thread is started
 void VxThread::setThreadStartCallback( VX_THREAD_START_CALLBACK_T func )
 {
-    if( LOG_FLAG_THREADS & VxGetModuleLogFlags() )
+#if defined(DEBUG_THREADS)
 	    LogMsg( LOG_INFO, "$$$VxThread::setThreadStartCallback\n" );
+#endif // DEBUG_THREADS
+
 	m_funcStartCallback = func;
 }
 
@@ -255,8 +258,10 @@ void VxThread::setThreadStartCallback( VX_THREAD_START_CALLBACK_T func )
 //! set function that will be called when any thread is about to exit
 void VxThread::setThreadExitCallback( VX_THREAD_EXIT_CALLBACK_T func )
 {
-    if( LOG_FLAG_THREADS & VxGetModuleLogFlags() )
+#if defined(DEBUG_THREADS)
 	    LogMsg( LOG_INFO, "$$$VxThread::setThreadExitCallback\n" );
+#endif // DEBUG_THREADS
+
 	m_funcExitCallback = func;
 }
 
@@ -306,8 +311,9 @@ RCODE VxThread::startThread(	VX_THREAD_FUNCTION_T	pfuncThreadFunc,	// function t
 		}
 
         setIsThreadCreated( true );
-        if( LOG_FLAG_THREADS & VxGetModuleLogFlags() )
+#if defined(DEBUG_THREADS)
 		    LogMsg( LOG_INFO, "VxThread:Created Thread %s thread id %d\n", m_strThreadName.c_str(), m_uiThreadId );
+#endif // DEBUG_THREADS
 
 	#else // LINUX
 
@@ -328,7 +334,9 @@ RCODE VxThread::startThread(	VX_THREAD_FUNCTION_T	pfuncThreadFunc,	// function t
 				}
 				else
 				{
-					LogMsg( LOG_INFO, "VxThread:Created Thread %s min stack size %d\n", m_strThreadName.c_str(), sizetStackSize );
+                    #if defined(DEBUG_THREADS)
+                        LogMsg( LOG_INFO, "VxThread:Created Thread %s min stack size %d\n", m_strThreadName.c_str(), sizetStackSize );
+                    #endif // DEBUG_THREADS
 					sizetStackSize += iExtraStackSpace;
 					iErr = pthread_attr_setstacksize( &m_ThreadAttr, sizetStackSize );
 					if( iErr )
@@ -363,8 +371,9 @@ RCODE VxThread::startThread(	VX_THREAD_FUNCTION_T	pfuncThreadFunc,	// function t
 		}
 #endif
 
-    if( LOG_FLAG_THREADS & VxGetModuleLogFlags() )
+#if defined(DEBUG_THREADS)
 	    LogMsg( LOG_VERBOSE, "VxThread: created thread %s with id %d\n", getThreadName(), getThreadTid() );
+#endif // DEBUG_THREADS
 
 	g_ThreadCreateCnt++;
 	return 0;
@@ -436,7 +445,7 @@ void VxThread::setIsThreadRunning( bool bIsRunning, bool calledFromStartedThread
 		m_uiThreadId		    = VxGetCurrentThreadId();
 		m_ThreadTid			    = VxGetCurrentThreadTid();
 		m_ThreadStartTimeGmtMs	= GetGmtTimeMs();
-		#ifdef DEBUG_THREADS
+        #if defined(DEBUG_THREADS)
 		LogMsg( LOG_ERROR,
 			"setIsThreadRunning started ? %d Thread %s id %d tid %d total running %d created %d\n",
 			(uint32_t)calledFromStartedThread,
@@ -502,8 +511,9 @@ void VxThread::setIsThreadEndCallbackLocked( bool bIsLocked )
 void VxThread::threadAboutToExit( bool bExitThreadNow )  
 {
 	unsigned int thisThreadId = getThreadTid();
-    if( LOG_FLAG_THREADS & VxGetModuleLogFlags() )
+    #if defined(DEBUG_THREADS)
 	    LogMsg( LOG_DEBUG, "threadAboutToExit %s tid %d start\n", m_strThreadName.c_str(), thisThreadId );
+    #endif // defined(DEBUG_THREADS)
 #ifdef ENABLE_THREAD_INFO
 	//if ( false == VxIsAppShuttingDown() )
 	{
@@ -533,20 +543,21 @@ void VxThread::threadAboutToExit( bool bExitThreadNow )
 	
 	if ( m_funcExitCallback )
 	{
-#ifdef DEBUG_THREADS
-		LogMsg( LOG_ERROR, "Thread %s %d tid %d exiting with callback total running %d\n", m_strThreadName.c_str(), m_uiThreadId, getThreadTid(), g_RuningThreadList.size() );
-#endif // DEBUG_THREADS
+        #if defined(DEBUG_THREADS)
+            LogMsg( LOG_ERROR, "Thread %s %d tid %d exiting with callback total running %d\n", m_strThreadName.c_str(), m_uiThreadId, getThreadTid(), g_RuningThreadList.size() );
+        #endif // DEBUG_THREADS
 		// if android cannot log after thread is detached in exit callback 
 		m_funcExitCallback( m_ThreadTid, m_bIsExitCallbackLocked, m_strThreadName.c_str() );
 	}
 	else
 	{
-#ifdef DEBUG_THREADS
-		LogMsg( LOG_THREAD, "threadAboutToExit %s %d tid %d\n", m_strThreadName.c_str(), m_uiThreadId, getThreadTid() );
-#ifdef TARGET_OS_ANDROID
-		LogMsg( LOG_ERROR, "threadAboutToExit %s tid %d MUST HAVE CALLBACK\n", m_strThreadName.c_str(), getThreadTid() );
-#endif // TARGET_OS_ANDROID
-#endif // DEBUG_THREADS
+        #if defined(DEBUG_THREADS)
+            LogMsg( LOG_THREAD, "threadAboutToExit %s %d tid %d\n", m_strThreadName.c_str(), m_uiThreadId, getThreadTid() );
+
+            #ifdef TARGET_OS_ANDROID
+                LogMsg( LOG_ERROR, "threadAboutToExit %s tid %d MUST HAVE CALLBACK\n", m_strThreadName.c_str(), getThreadTid() );
+            #endif // TARGET_OS_ANDROID
+        #endif // defined(DEBUG_THREADS)
 	}
 
 	setIsThreadCreated( false );
@@ -554,8 +565,9 @@ void VxThread::threadAboutToExit( bool bExitThreadNow )
 	m_u8ThreadFlags |= VX_FLAG_THREAD_DONE; 
 	m_u8ThreadFlags &= ~VX_FLAG_THREAD_RUNNING; 
 
-    if( LOG_FLAG_THREADS & VxGetModuleLogFlags() )
-	    LogMsg( LOG_DEBUG, "threadAboutToExit %s tid %d done\n", m_strThreadName.c_str(), thisThreadId );
+    #if defined(DEBUG_THREADS)
+        LogMsg( LOG_DEBUG, "threadAboutToExit %s tid %d done\n", m_strThreadName.c_str(), thisThreadId );
+    #endif // defined(DEBUG_THREADS)
 	#ifndef TARGET_OS_WINDOWS
 		if( bExitThreadNow )
 		{
@@ -575,8 +587,9 @@ RCODE VxThread::killThread( void )
 		return 0;
 	}
 
-    if( LOG_FLAG_THREADS & VxGetModuleLogFlags() )
+    #if defined(DEBUG_THREADS)
 	    LogMsg( LOG_ERROR, "VxThread: killThread %s %d\n", getThreadName(), getThreadTid() );
+    #endif // defined(DEBUG_THREADS)
     abortThreadRun( true ); // tell thread to abort
 	if( ( m_u8ThreadFlags & VX_FLAG_THREAD_RUNNING ) 
 		&& ( 0 == ( m_u8ThreadFlags & VX_FLAG_THREAD_DONE ) ) )
