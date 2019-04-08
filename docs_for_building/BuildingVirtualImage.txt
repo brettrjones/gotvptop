@@ -12,45 +12,45 @@ Instructions to create a virtual box Linux Mint 18.3 Image for GoTvPtoP develope
 
 === setup linux mint ===
 
-1.) Download linux mint 18.3 - 64 Bit (cannot use 32 Bit because of android build requirements )
+1.) Download linux mint 19.1 - 64 Bit (cannot use 32 Bit because of android build requirements )
 2.) Create New Image In Virtual Box using the linux mint iso and OS Linux/Ubuntu 64Bit
-4.) The virtual drive should be at least 80GB and dynamic
-3.) Choose NOT to have to enter password on boot
-4.) Install with name gotv and password gotvpass and automatic login
-5.) Change the optical drive iso to Devices->Insert Guest Additions CD Image and reboot
-6.) Open termninal and sudo passwd ( first time use only.. this will set the root password )
-7.) type gotvpass 3 times.. once for sudo and the next 2 times for root password
-8.) remove preinstalled guest utils
+3.) The virtual drive should be at least 80GB and dynamic
+4.) Open Install Linux Mint 
+5.) user name gotv password gotvpass 
+6.) Choose NOT to have to enter password on boot (login automatically)
+7.) Install with name gotv and password gotvpass and automatic login
+8.) Change the optical drive iso to Devices->Insert Guest Additions CD Image and reboot
+9.) Open termninal and sudo passwd ( first time use only.. this will set the root password )
+10.) type gotvpass 3 times.. once for sudo and the next 2 times for root password
+11.) remove preinstalled guest utils
 	sudo apt remove virtualbox-guest*
-9.) Install guest utils
+12.) Install guest utils
+	Devices->Insert Guest Additions CD Image and if does not autorun then open terminal and 
 	a.) cd /media/gotv/VBox_Gas_5.2.22
 	b.) sudo ./VBoxLinuxAdditions.run
 	c.) Enter the root password if required and let it install
-10.) From Mint menu shutdown linux
-11.) Virtual Box->Settings->Advanced Tab enable Shared Clipboard and Drag'n'Drop
-12.) Setting->Display make
+13.) From Mint menu shutdown linux
+14.) Virtual Box->Settings->Advanced Tab enable Shared Clipboard and Drag'n'Drop
+15.) Setting->Display make
 	Video Memory 128MB and scaling as desired
 	Enable 3d acceleration
-13.) Power up mint image and Optionally in First steps create system snapshot
-14.) Mint->Update Manager install updates till no more available
-
-15.) Solutions to "Running in software rendering mode" I have tried with success but causes Qt Creator to crash	if 3D accelleration is on
-	NOTE: this solution longer needed .. follow the workaround for Qt Creator crash in section KNOWN ISSUES
-	a.) Update your host video drivers
-	b.) make sure 3d acceleration is turned on in VirtualBox Display settings
-	c.) sudo apt remove virtualbox-guest*
-	d.) VirtualImage->Devices->Insert Guest Additions CD Image
-	e.) cd /media/gotv/VBox_Gas_5.2.22
-	f.) sudo ./VBoxLinuxAdditions.run
-	g.) May not work anyway and you may have to just live with slow rendering
-		
+16.) Power up mint image and Optionally in First steps create system snapshot
+17.) Mint->Update Manager install updates till no more available
 	
-16.) You may need to install virtual box extensions in Virtual Box
-	https://www.sysnettechsolutions.com/en/virtualbox/install-virtualbox-extension-pack-linux-mint-18-3/
+18.) Turn off screen lockout.. seems to cause issues
+	Preferences->Screensaver
+	a.) Delay before starting the screensaver ->Never
+	b.) Turn off locks
 	
-17.) If on shutdown you get error about gnome ring demon then go to 
-	Administration->Login Window->Users and turn on 'Allow manual login' 
-	This may not be a complete solution.. It sometimes errored anyway
+==== install Open Java before anything else ======
+1.)	sudo apt install openjdk-8-jdk-headless
+2.) check the version with javac -version
+	should output something like javac 1.8.0_191
+3.) find jdk path you will need for qt/android compiler setup
+	A useful command to find out where the path of your jdk is on Linux is readlink -f $(which java)
+	if you have multiple jdk's installed then try /usr/lib/jvm/java-8-openjdk-amd64 as the path
+	
+	
 
 	
 ==== install Oracle Java before anything else ======
@@ -70,17 +70,54 @@ Instructions to create a virtual box Linux Mint 18.3 Image for GoTvPtoP develope
 ==== some usefull tools for developers ======
 1.) Meld - File Difference comparison tool
 	sudo apt-get install meld
+2.) GitKraken - git version manager works with github
 
+==== Prerequisite tools required to build gotvptop ======
+1.) sudo apt-get install g++
+2.) sudo apt-get install nasm
+3.) sudo apt-get install masm
+4.) uuid required but missing in mint
+	sudo apt-get install uuid-dev
+5.) uuid required but missing in mint
+	sudo apt-get install uuid-dev	
 
 ==== install android studio ====
-After many tries the only way I could get android studio installed correctly was by using Mint 18.3 64Bit 
-1.) from Mint Software Manager 
+After many tries the only way I could get android studio installed correctly was by using Mint 18.3 64Bit
+1.) Download NDK r19c from https://developer.android.com/ndk/downloads/
+2.) extract ndk to ~/android/android-ndk-r19c 
+3.) from Mint Software Manager 
 	Install yasm, nasm, Android Studio
-2.) Download NDK r18b from https://developer.android.com/ndk/downloads/
-3.) extract ndk to ~/Android/android-ndk-r18b
-4.) Start Android Studio and install sdks
+4.) Start Android Studio and install sdks (install kvm when says can support accelerated emulator)
 	Sdks install Lollipop 5.1, cmake
-5.) Set ndk path in Project Structure to point to home/gotv/Android/android-ndk-r18b
+5.) Set ndk path in Project Structure to point to home/gotv/android/android-ndk-r19c
+
+//======= install Qt 5.12.2 ======//
+1.) Download the qt installer from https://doc.qt.io/qt-5/gettingstarted.html
+2.) Install to home/gotv/Qt
+3.) After install setup the correct paths by editing qtchooser default
+	cd /usr/lib/x86_64-linux-gnu/qt-default/qtchooser
+	sudo gedit default.conf
+	change the lines 
+	/usr/lib/x86_64-linux-gnu/qt4/bin
+	/usr/lib/x86_64-linux-gnu
+	to
+	/home/gotv/Qt/5.12.2/gcc_64/bin
+	/home/gotv/Qt/5.12.2/gcc_64/lib
+	
+4.) change qt include directory
+	In Qt Creator->Projects->Build Enviroment change QTDIR from /usr/lib/x86_64-linux-gnu/qt5 to /home/gotv/Qt/5.12.2/gcc_64
+	
+5.)	after reboot $qmake --version
+	should show
+	QMake version 3.1
+	Using Qt version 5.12.2 in /home/gotv/Qt/5.12.2/gcc_64/lib
+	
+	
+	
+	
+	
+
+
 
 	
 // DO NOT USE.. NEED Qt 5 or later
@@ -88,27 +125,29 @@ After many tries the only way I could get android studio installed correctly was
 // DO NOT USE.. NEED Qt 5 or later
 //1.) Install Qt Sdk from Software Manager
 //	no need to install qt creator.. was installed with the qt sdk
-//2.) Install a C++ Compiler
-//	sudo apt-get install g++
+
 //3.) Restart then make sure qt creator runs without crashing
 //4.) If crashes then will have to turn off 3D acceleration in VirtualBox
 //4.) Now would be a good time to make a clone or Time Snapshot
 
-//======= install Qt 5.11 ======//
-1.) sudo apt-get install qtcreator
-2.) sudo apt-get install qtdeclarative5-dev
-3.) sudo apt-get install qtmultimedia5-dev
-4.) sudo apt-get install libqt5svg5-dev
-5.) sudo apt-get install libqt5opengl5-dev
-6.) sudo apt-get install g++
+//======= install Qt 5.9.5 ======//
+// NOTE: had render issues with 5.1.1 .. recommend 5.12.1
+
+2.) sudo apt-get install qtcreator
+3.) sudo apt-get install qtdeclarative5-dev
+4.) sudo apt-get install qtmultimedia5-dev
+5.) sudo apt-get install libqt5svg5-dev
+6.) sudo apt-get install libqt5opengl5-dev
+7.) libraries are in /usr/lib/x86_64-linux-gnu/qt5/
+8.) you can check the version with command qmake --version
 
 
 ==== install python 2.7 ======
 	sudo apt install python-dev
 
 ===== compile gotvptop =====
-1.) uuid required but missing in mint
-	sudo apt-get install uuid-dev
+
+2.) If did not install kracken then will need to install git with sudo apt install git
 2.) check out source code
 	mkdir ~/project_sources
 	cd ~/project_sources

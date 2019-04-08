@@ -35,3 +35,15 @@ It will take a long time so be patient
 on windows if you get error "make (e=87): The parameter is incorrect"
 then the command line limit of 32k is exceeded
 you may need to shorten your obj path
+
+Some Words Of Advice
+If you live in USA you should be paranoid about privacy.
+In USA from the "WAR ON CRIME", "WAR ON DRUGS", "WAR OF TERROR" and now the "WAR ON MEXICANS"
+we have the highest percentage of our citizens in jail of any country in the world.
+
+In the USA you are your IP Address even if someone else used it. You can be sued for thousands of dollars using just your IP Address as your identity. GoTvPtoP and Kodi use 3rd Party plugins, be paranoid that they might cause copywrite infringement.
+In the USA copywrite infringement penalties can be over a $30,000.00 fine per work infringed and up to 5 years in jail
+
+Use a VPN if possible. NordVPN seems a good choice but it is the only one I have used.
+Research how to improve your privacy.
+ 

@@ -24,6 +24,7 @@ HEADERS += \
 FORMS += \
         $$PWD/QtSimpleTestApp/mainwindow.ui
 
+android:{
 CONFIG += mobility
 MOBILITY = 
 
@@ -46,5 +47,11 @@ LIBS +=  -ldl -lm -landroid -lc -lstdc++ -llog
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+}
+
+win32:{
+    LIBS += -l$$PWD/../build-staticlibs/Windows/x64/qtsimpleteststaticlib
+    LIBS += -l$$PWD/../build-sharedlibs/Windows/x64/qtsimpletestsharedlib
+}
 
 message($$[QT_INSTALL_BINS])
