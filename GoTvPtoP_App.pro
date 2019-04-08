@@ -216,7 +216,7 @@ message(Static Lib prefix($${STATIC_LIB_PREFIX})  suffix($${STATIC_LIB_SUFFIX}) 
 
 
 unix:!android:{
-    LIBS +=  -lpthread -ldl -lGLU -lGL -lm -luuid -lrt -lvorbis
+    LIBS +=  -lpthread -ldl -lGLU -lGL -lm -luuid -lrt
 }
 
 android:{

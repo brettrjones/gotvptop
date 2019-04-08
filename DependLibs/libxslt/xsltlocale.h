@@ -17,7 +17,9 @@
 #ifdef XSLT_LOCALE_XLOCALE
 
 #include <locale.h>
-#include <xlocale.h>
+#if !defined(TARGET_OS_ANDROID) && !defined(TARGET_OS_LINUX)
+# include <xlocale.h>
+#endif // !defined(TARGET_OS_ANDROID) && !defined(TARGET_OS_LINUX)
 
 #ifdef __GLIBC__
 /*locale_t is defined only if _GNU_SOURCE is defined*/

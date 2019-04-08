@@ -38,13 +38,13 @@ void GlErrorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLs
 
 void _VerifyGLState(const char* szfile, const char* szfunction, int lineno);
 #if defined(DEBUG) || defined(GL_DEBUGGING) && (defined(HAS_GL) || defined(HAS_GLES))
-# ifndef  VerifyGLState()
+//# ifndef  VerifyGLState()
 #  define VerifyGLState() _VerifyGLState(__FILE__, __FUNCTION__, __LINE__)
-# endif //  VerifyGLState()
+//# endif //  VerifyGLState()
 #else
-# ifndef  VerifyGLState()
+//# ifndef  VerifyGLState()
 #  define VerifyGLState()
-# endif //  VerifyGLState()
+//# endif //  VerifyGLState()
 #endif // VerifyGLState
 
 

@@ -189,6 +189,9 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerVideo.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupUser.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupHost.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupAnchor.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletKodi.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSharedContent.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.h \
@@ -404,6 +407,9 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameLogic.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupUser.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupHost.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupAnchor.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletKodi.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.cpp \

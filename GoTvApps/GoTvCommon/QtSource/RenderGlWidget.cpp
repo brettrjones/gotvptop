@@ -123,6 +123,7 @@ void RenderGlWidget::onResizeGL( int w, int h )
 	}
 
 	onResizeEvent( m_ResizingWindowSize );
+    m_ResizingTimer->stop();
 	m_ResizingTimer->setSingleShot( true );
 	m_ResizingTimer->start( RESIZE_WINDOW_COMPLETED_TIMEOUT );
 
