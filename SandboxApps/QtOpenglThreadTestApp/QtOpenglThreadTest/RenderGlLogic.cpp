@@ -1,6 +1,6 @@
 #include "RenderGlLogic.h"
 #include "RenderGlWidget.h"
-#include "RenderGlOffscreenSurface.h"
+#include "RenderGlOffScreenSurface.h"
 
 #include <QOpenGLContext>
 #include <QOpenGLFunctions>
@@ -12,12 +12,26 @@
 //============================================================================
 RenderGlLogic::RenderGlLogic( RenderGlWidget& renderWidget )
 : m_RenderWidget( renderWidget )
+, m_RenderShaders()
+, m_LogoRenderer( m_RenderShaders )
 {
     m_backgroundColor = QColor::fromRgbF(0.1f, 0.1f, 0.2f, 1.0f);
     m_backgroundColor.setRed(QRandomGenerator::global()->bounded(64));
     m_backgroundColor.setGreen(QRandomGenerator::global()->bounded(128));
     m_backgroundColor.setBlue(QRandomGenerator::global()->bounded(256)); 
 }
+
+//============================================================================
+void RenderGlLogic::aboutToDestroy()
+{
+    setRenderThreadShouldRun( false );
+    if( m_RenderThread )
+    {
+        m_RenderThread->quit(); // some platforms may not have windows to close so ensure quit()
+        m_RenderThread->wait();
+        delete m_RenderThread;
+    }
+ }
 
 //============================================================================
 void RenderGlLogic::setRenderThreadShouldRun( bool shouldRun )
@@ -38,7 +52,7 @@ void RenderGlLogic::glWidgetInitialized( QOpenGLContext * widgetGlContext, QOpen
 
     // shader initialize must be done in gui thread
     //m_RenderShaders.setGlContext( widgetGlContext );
-    //m_RenderShaders.initShaders();
+    m_RenderShaders.initShaders();
 
     if( m_RenderThread )
     {

@@ -59,10 +59,13 @@
 #include <QTime>
 #include <QVector>
 
+#include "RenderGlShaders.h"
+
+
 class LogoRenderer : protected QOpenGLFunctions
 {
 public:
-    LogoRenderer() = default;
+    LogoRenderer(RenderGlShaders& renderShaders);
     virtual ~LogoRenderer() = default;
 
     void render();
@@ -71,6 +74,7 @@ public:
     void setScale( float scale ) { m_fScale = scale;  }
 
 private:
+    RenderGlShaders& m_Shaders;
 
     qreal   m_fAngle;
     qreal   m_fScale;
@@ -82,9 +86,5 @@ private:
 
     QVector<QVector3D> vertices;
     QVector<QVector3D> normals;
-    QOpenGLShaderProgram program1;
-    int vertexAttr1;
-    int normalAttr1;
-    int matrixUniform1;
 };
 #endif

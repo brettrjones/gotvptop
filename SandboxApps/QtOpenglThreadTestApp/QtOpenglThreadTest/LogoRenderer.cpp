@@ -48,7 +48,7 @@
 **
 ****************************************************************************/
 
-#include "logorenderer.h"
+#include "LogoRenderer.h"
 #include <QPainter>
 #include <QPaintEngine>
 #include <qmath.h>
@@ -56,15 +56,22 @@
 #define Rand0To1() (( rand() & 32767 ) * ( 1.0f / 32767.0f ))
 
 //============================================================================
+LogoRenderer::LogoRenderer(RenderGlShaders& renderShaders)
+: m_Shaders( renderShaders )
+{
+}
+
+//============================================================================
 void LogoRenderer::paintQtLogo()
 {
-    program1.enableAttributeArray(normalAttr1);
-    program1.enableAttributeArray(vertexAttr1);
-    program1.setAttributeArray(vertexAttr1, vertices.constData());
-    program1.setAttributeArray(normalAttr1, normals.constData());
+    QOpenGLShaderProgram& program1 = m_Shaders.getShader();
+    program1.enableAttributeArray(m_Shaders.getNormalAttr());
+    program1.enableAttributeArray(m_Shaders.getVertexAttr());
+    program1.setAttributeArray(m_Shaders.getVertexAttr(), vertices.constData());
+    program1.setAttributeArray(m_Shaders.getNormalAttr(), normals.constData());
     glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-    program1.disableAttributeArray(normalAttr1);
-    program1.disableAttributeArray(vertexAttr1);
+    program1.disableAttributeArray(m_Shaders.getNormalAttr());
+    program1.disableAttributeArray(m_Shaders.getVertexAttr());
 }
 
 //============================================================================
@@ -73,37 +80,6 @@ void LogoRenderer::initialize()
     initializeOpenGLFunctions();
 
     glClearColor(0.1f, 0.1f, 0.2f, 1.0f);
-
-    const char *vsrc1 =
-        "attribute highp vec4 vertex;\n"
-        "attribute mediump vec3 normal;\n"
-        "uniform mediump mat4 matrix;\n"
-        "varying mediump vec4 color;\n"
-        "void main(void)\n"
-        "{\n"
-        "    vec3 toLight = normalize(vec3(0.0, 0.3, 1.0));\n"
-        "    float angle = max(dot(normal, toLight), 0.0);\n"
-        "    vec3 col = vec3(0.40, 1.0, 0.0);\n"
-        "    color = vec4(col * 0.2 + col * 0.8 * angle, 1.0);\n"
-        "    color = clamp(color, 0.0, 1.0);\n"
-        "    gl_Position = matrix * vertex;\n"
-        "}\n";
-
-    const char *fsrc1 =
-        "varying mediump vec4 color;\n"
-        "void main(void)\n"
-        "{\n"
-        "    gl_FragColor = color;\n"
-        "}\n";
-
-    program1.addCacheableShaderFromSourceCode(QOpenGLShader::Vertex, vsrc1);
-    program1.addCacheableShaderFromSourceCode(QOpenGLShader::Fragment, fsrc1);
-    program1.link();
-
-    vertexAttr1 = program1.attributeLocation("vertex");
-    normalAttr1 = program1.attributeLocation("normal");
-    matrixUniform1 = program1.uniformLocation("matrix");
-
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 
@@ -117,8 +93,9 @@ void LogoRenderer::render()
 {
     glDepthMask(true);
 
+    // use Rand0To1() for random color background
     //glClearColor( Rand0To1(), Rand0To1(), Rand0To1(), 1.0f);
-    glClearColor( 0.2, 0.2, 0.4, 1.0f );
+    glClearColor( 0.2f, 0.2f, 0.4f, 1.0f );
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
@@ -136,8 +113,9 @@ void LogoRenderer::render()
     modelview.scale(m_fScale);
     modelview.translate(0.0f, -0.2f, 0.0f);
 
+    QOpenGLShaderProgram& program1 = m_Shaders.getShader();
     program1.bind();
-    program1.setUniformValue(matrixUniform1, modelview);
+    program1.setUniformValue(m_Shaders.getMatrixAttr(), modelview);
     paintQtLogo();
     program1.release();
 

@@ -18,7 +18,8 @@ SOURCES += \
     $$PWD/QtOpenglThreadTest/RenderGlWidget.cpp \
     $$PWD/QtOpenglThreadTest/RenderGlOffScreenSurface.cpp \
     $$PWD/QtOpenglThreadTest/LogoRenderer.cpp \
-    $$PWD/QtOpenglThreadTest/RenderGlLogic.cpp
+    $$PWD/QtOpenglThreadTest/RenderGlLogic.cpp \
+    QtOpenglThreadTest/RenderGlShaders.cpp
 
 HEADERS += \
         $$PWD/QtOpenglThreadTest/mainwindow.h \
@@ -27,7 +28,8 @@ HEADERS += \
     $$PWD/QtOpenglThreadTest/RenderGlOffScreenSurface.h \
     $$PWD/QtOpenglThreadTest/GlTestCommon.h \
     $$PWD/QtOpenglThreadTest/LogoRenderer.h \
-    $$PWD/QtOpenglThreadTest/RenderGlLogic.h
+    $$PWD/QtOpenglThreadTest/RenderGlLogic.h \
+    QtOpenglThreadTest/RenderGlShaders.h
 
 FORMS += \
         $$PWD/QtOpenglThreadTest/mainwindow.ui
@@ -39,7 +41,7 @@ FORMS += \
 #include "RenderGlOffScreenSurface.moc"
 
 unix:!android:{
-    LIBS +=  -lpthread -ldl -lGLU -lGL -lm -luuid -lrt -lvorbis
+    LIBS +=  -lpthread -ldl -lGLU -lGL -lm -luuid -lrt
 }
 
 android:{

@@ -13,6 +13,7 @@
 #include <QWaitCondition>
 #include <QElapsedTimer>
 
+#include "RenderGlShaders.h"
 #include "LogoRenderer.h"
 
 class RenderGlWidget;
@@ -50,6 +51,7 @@ public:
 
     virtual int                 getMaxTextureSize() { return 2048; }
 
+    void                        aboutToDestroy();
 signals:
     void                        signalFrameRendered();
 
@@ -58,11 +60,13 @@ public slots:
 
 private:
     RenderGlWidget&             m_RenderWidget;
+    RenderGlShaders             m_RenderShaders;
+    LogoRenderer                m_LogoRenderer;
+
     QOpenGLContext *            m_WidgetGlContext = nullptr;
     QOpenGLContext *            m_ThreadGlContext = nullptr;
     RenderGlOffScreenSurface *  m_OffScreenSurface = nullptr;
 
-    LogoRenderer                m_LogoRenderer;
 
     bool                        m_initialized   = false;
   

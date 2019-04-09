@@ -15,7 +15,7 @@ RenderGlWidget::RenderGlWidget(QWidget *parent)
 
     setMinimumSize(20, 20);
 
-    connect( m_RendererLogic, SIGNAL( signalFrameRendered() ), this, SLOT( update() ) );
+    connect( m_RendererLogic, SIGNAL( signalFrameRendered() ), this, SLOT( slotOnFrameRendered() ) );
  
     connect(this, &QOpenGLWidget::aboutToCompose, this, &RenderGlWidget::onAboutToCompose);
     connect(this, &QOpenGLWidget::frameSwapped, this, &RenderGlWidget::onFrameSwapped);
@@ -23,6 +23,18 @@ RenderGlWidget::RenderGlWidget(QWidget *parent)
     connect(this, &QOpenGLWidget::resized, this, &RenderGlWidget::onResized);
 
     updateColor();
+}
+
+//============================================================================
+RenderGlWidget::~RenderGlWidget()
+{
+    m_RendererLogic->aboutToDestroy();
+}
+
+//============================================================================
+void RenderGlWidget::slotOnFrameRendered()
+{
+    update();
 }
 
 //============================================================================
@@ -59,7 +71,6 @@ void RenderGlWidget::grabContext()
 {
     m_RendererLogic->lockRenderer();
     QMutexLocker lock(m_RendererLogic->grabMutex());
-    //context()->moveToThread(m_thread);
     m_RendererLogic->grabCond()->wakeAll();
     m_RendererLogic->unlockRenderer();
 }

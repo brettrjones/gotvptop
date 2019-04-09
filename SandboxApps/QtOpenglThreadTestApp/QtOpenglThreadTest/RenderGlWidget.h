@@ -15,6 +15,7 @@ class RenderGlWidget : public QOpenGLWidget, protected QOpenGLFunctions
     Q_OBJECT
 public:
     explicit RenderGlWidget(QWidget *parent = nullptr);
+    virtual ~RenderGlWidget() override;
 
     QColor                      color() const;
     void                        updateColor();
@@ -26,6 +27,7 @@ signals:
 
 public slots:
     void                        grabContext();
+    void                        slotOnFrameRendered();
 
 private slots:
     void                        onAboutToCompose();
@@ -38,7 +40,7 @@ protected:
     void                        paintGL() override;
     void                        resizeGL(int, int) override;
 
-    void                        paintEvent(QPaintEvent *) override { }
+    //void                        paintEvent(QPaintEvent *) override { }
 
     virtual void				showEvent( QShowEvent * ev );
     virtual void				hideEvent( QHideEvent * ev );
