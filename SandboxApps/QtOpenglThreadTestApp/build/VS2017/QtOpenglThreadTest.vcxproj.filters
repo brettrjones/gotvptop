@@ -43,6 +43,18 @@
     <ClInclude Include="..\..\QtOpenglThreadTest\LogoRenderer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\QtOpenglThreadTest\RenderGlShaders.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\QtOpenglThreadTest\RenderLogoShaders.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\QtOpenglThreadTest\RenderShaderQt.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\QtOpenglThreadTest\VxDebug.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\QtOpenglThreadTest\main.cpp">
@@ -94,6 +106,21 @@
       <Filter>GeneratedFiles</Filter>
     </ClCompile>
     <ClCompile Include="..\..\QtOpenglThreadTest\LogoRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtOpenglThreadTest\RenderGlShaders.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtOpenglThreadTest\RenderLogoShaders.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtOpenglThreadTest\RenderShaderDefsGl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtOpenglThreadTest\RenderShaderQt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtOpenglThreadTest\VxDebug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

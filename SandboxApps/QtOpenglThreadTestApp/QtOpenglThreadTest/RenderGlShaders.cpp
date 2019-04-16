@@ -9,7 +9,7 @@
 
 #include <GL/glu.h>
 
-#define SHADERS_INCLUDE
+#define SHADERS_INCLUDE 
 #include "RenderShaderDefsGl.cpp"
 //#include "RenderShaderDefsGlES.cpp"
 

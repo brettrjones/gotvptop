@@ -115,7 +115,7 @@ namespace MathUtils
     const float round_dn_to_nearest = 0.4999999f;
     i = (x > 0) ? _mm_cvttsd_si32(_mm_set_sd(x + round_to_nearest)) : _mm_cvttsd_si32(_mm_set_sd(x - round_dn_to_nearest));
 
-#elif defined(TARGET_WINDOWS)
+#elif defined(TARGET_OS_WINDOWS)
     __asm
     {
       fld x
