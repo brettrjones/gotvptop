@@ -18,18 +18,634 @@
  *
  */
 
-#include "ShaderQt.h"
+#include "RenderShaderQt.h"
 #include "RenderGlWidget.h"
 
-#include "ServiceBroker.h"
-#include "utils/log.h"
-#include "rendering/RenderSystem.h"
-#include "rendering/MatrixGL.h"
-#include "windowing/GraphicContext.h"
-#include "cores/VideoPlayer/VideoRenderers/VideoShaders/YUVMatrix.h"
-#include "cores/VideoPlayer/VideoRenderers/VideoShaders/ConvolutionKernels.h"
+//#include "ServiceBroker.h"
+//#include "utils/log.h"
+//#include "rendering/RenderSystem.h"
+//#include "rendering/MatrixGL.h"
+//#include "windowing/GraphicContext.h"
+//#include "cores/VideoPlayer/VideoRenderers/VideoShaders/YUVMatrix.h"
+//#include "cores/VideoPlayer/VideoRenderers/VideoShaders/ConvolutionKernels.h"
 
-#include <CoreLib/VxDebug.h>
+#include <VxDebug.h>
+
+#ifndef M_PI
+#define M_PI       3.14159265358979323846
+#endif
+
+#define SINC(x) (sin(M_PI * (x)) / (M_PI * (x)))
+namespace MathUtils
+{
+  // GCC does something stupid with optimization on release builds if we try
+  // to assert in these functions
+
+  /*! \brief Round to nearest integer.
+   This routine does fast rounding to the nearest integer.
+   In the case (k + 0.5 for any integer k) we round up to k+1, and in all other
+   instances we should return the nearest integer.
+   Thus, { -1.5, -0.5, 0.5, 1.5 } is rounded to { -1, 0, 1, 2 }.
+   It preserves the property that round(k) - round(k-1) = 1 for all doubles k.
+
+   Make sure MathUtils::test() returns true for each implementation.
+   \sa truncate_int, test
+  */
+  inline int round_int(double x)
+  {
+    assert(x > static_cast<double>((int) (INT_MIN / 2)) - 1.0);
+    assert(x < static_cast<double>((int) (INT_MAX / 2)) + 1.0);
+
+#if defined(DISABLE_MATHUTILS_ASM_ROUND_INT)
+    /* This implementation warrants some further explanation.
+     *
+     * First, a couple of notes on rounding:
+     * 1) C casts from float/double to integer round towards zero.
+     * 2) Float/double additions are rounded according to the normal rules,
+     *    in other words: on some architectures, it's fixed at compile-time,
+     *    and on others it can be set using fesetround()). The following
+     *    analysis assumes round-to-nearest with ties rounding to even. This
+     *    is a fairly sensible choice, and is the default with ARM VFP.
+     *
+     * What this function wants is round-to-nearest with ties rounding to
+     * +infinity. This isn't an IEEE rounding mode, even if we could guarantee
+     * that all architectures supported fesetround(), which they don't. Instead,
+     * this adds an offset of 2147483648.5 (= 0x80000000.8p0), then casts to
+     * an unsigned int (crucially, all possible inputs are now in a range where
+     * round to zero acts the same as round to -infinity) and then subtracts
+     * 0x80000000 in the integer domain. The 0.5 component of the offset
+     * converts what is effectively a round down into a round to nearest, with
+     * ties rounding up, as desired.
+     *
+     * There is a catch, that because there is a double rounding, there is a
+     * small region where the input falls just *below* a tie, where the addition
+     * of the offset causes a round *up* to an exact integer, due to the finite
+     * level of precision available in floating point. You need to be aware of
+     * this when calling this function, although at present it is not believed
+     * that XBMC ever attempts to round numbers in this window.
+     *
+     * It is worth proving the size of the affected window. Recall that double
+     * precision employs a mantissa of 52 bits.
+     * 1) For all inputs -0.5 <= x <= INT_MAX
+     *    Once the offset is applied, the most significant binary digit in the
+     *    floating-point representation is +2^31.
+     *    At this magnitude, the smallest step representable in double precision
+     *    is 2^31 / 2^52 = 0.000000476837158203125
+     *    So the size of the range which is rounded up due to the addition is
+     *    half the size of this step, or 0.0000002384185791015625
+     *
+     * 2) For all inputs INT_MIN/2 < x < -0.5
+     *    Once the offset is applied, the most significant binary digit in the
+     *    floating-point representation is +2^30.
+     *    At this magnitude, the smallest step representable in double precision
+     *    is 2^30 / 2^52 = 0.0000002384185791015625
+     *    So the size of the range which is rounded up due to the addition is
+     *    half the size of this step, or 0.00000011920928955078125
+     *
+     * 3) For all inputs INT_MIN <= x <= INT_MIN/2
+     *    The representation once the offset is applied has equal or greater
+     *    precision than the input, so the addition does not cause rounding.
+     */
+    return ((unsigned int) (x + 2147483648.5)) - 0x80000000;
+
+#else
+    const float round_to_nearest = 0.5f;
+    int i;
+#if defined(HAVE_SSE2) && defined(__SSE2__)
+    const float round_dn_to_nearest = 0.4999999f;
+    i = (x > 0) ? _mm_cvttsd_si32(_mm_set_sd(x + round_to_nearest)) : _mm_cvttsd_si32(_mm_set_sd(x - round_dn_to_nearest));
+
+#elif defined(TARGET_WINDOWS)
+    __asm
+    {
+      fld x
+      fadd st, st (0)
+      fadd round_to_nearest
+      fistp i
+      sar i, 1
+    }
+
+#else
+    __asm__ __volatile__ (
+      "fadd %%st\n\t"
+      "fadd %%st(1)\n\t"
+      "fistpl %0\n\t"
+      "sarl $1, %0\n"
+      : "=m"(i) : "u"(round_to_nearest), "t"(x) : "st"
+    );
+
+#endif
+    return i;
+#endif
+  }
+
+  /*! \brief Truncate to nearest integer.
+   This routine does fast truncation to an integer.
+   It should simply drop the fractional portion of the floating point number.
+
+   Make sure MathUtils::test() returns true for each implementation.
+   \sa round_int, test
+  */
+  inline int truncate_int(double x)
+  {
+    assert(x > static_cast<double>(INT_MIN / 2) - 1.0);
+    assert(x < static_cast<double>(INT_MAX / 2) + 1.0);
+    return static_cast<int>(x);
+  }
+
+  inline int64_t abs(int64_t a)
+  {
+    return (a < 0) ? -a : a;
+  }
+
+  inline unsigned bitcount(unsigned v)
+  {
+    unsigned c = 0;
+    for (c = 0; v; c++)
+      v &= v - 1; // clear the least significant bit set
+    return c;
+  }
+
+  inline void hack()
+  {
+    // stupid hack to keep compiler from dropping these
+    // functions as unused
+    MathUtils::round_int(0.0);
+    MathUtils::truncate_int(0.0);
+    MathUtils::abs(0);
+  }
+
+  /**
+   * Compare two floating-point numbers for equality and regard them
+   * as equal if their difference is below a given threshold.
+   *
+   * It is usually not useful to compare float numbers for equality with
+   * the standard operator== since very close numbers might have different
+   * representations.
+   */
+  template<typename FloatT>
+  inline bool FloatEquals(FloatT f1, FloatT f2, FloatT maxDelta)
+  {
+    return (std::abs(f2 - f1) < maxDelta);
+  }
+
+#if 0
+  /*! \brief test routine for round_int and truncate_int
+   Must return true on all platforms.
+   */
+  inline bool test()
+  {
+    for (int i = -8; i < 8; ++i)
+    {
+      double d = 0.25*i;
+      int r = (i < 0) ? (i - 1) / 4 : (i + 2) / 4;
+      int t = i / 4;
+      if (round_int(d) != r || truncate_int(d) != t)
+        return false;
+    }
+    return true;
+  }
+#endif
+} // namespace MathUtils
+
+
+
+class CConvolutionKernel
+{
+  public:
+    CConvolutionKernel( ESCALINGMETHOD method, int size );
+    ~CConvolutionKernel();
+
+    int      GetSize()           { return m_size; }
+    float*   GetFloatPixels()    { return m_floatpixels; }
+    uint8_t* GetIntFractPixels() { return m_intfractpixels; }
+    uint8_t* GetUint8Pixels()    { return m_uint8pixels; }
+
+  private:
+    CConvolutionKernel(const CConvolutionKernel&) = delete;
+    CConvolutionKernel& operator=(const CConvolutionKernel&) = delete;
+    void Lanczos2();
+    void Lanczos3Fast();
+    void Lanczos3();
+    void Spline36Fast();
+    void Spline36();
+    void Bicubic(double B, double C);
+
+    static double LanczosWeight(double x, double radius);
+    static double Spline36Weight(double x);
+    static double BicubicWeight(double x, double B, double C);
+
+    void ToIntFract();
+    void ToUint8();
+
+    int      m_size;
+    float*   m_floatpixels;
+    uint8_t* m_intfractpixels;
+    uint8_t* m_uint8pixels;
+};
+
+CConvolutionKernel::CConvolutionKernel( ESCALINGMETHOD method, int size )
+{
+    m_size = size;
+    m_floatpixels = new float[ m_size * 4 ];
+    memset( m_floatpixels, 0, m_size * 4 * sizeof(float) );
+
+    if( method == VS_SCALINGMETHOD_LANCZOS2 )
+        Lanczos2();
+    else if( method == VS_SCALINGMETHOD_SPLINE36_FAST )
+        Spline36Fast();
+    else if( method == VS_SCALINGMETHOD_LANCZOS3_FAST )
+        Lanczos3Fast();
+    else if( method == VS_SCALINGMETHOD_SPLINE36 )
+        Spline36();
+    else if( method == VS_SCALINGMETHOD_LANCZOS3 )
+        Lanczos3();
+    else if( method == VS_SCALINGMETHOD_CUBIC )
+        Bicubic( 1.0 / 3.0, 1.0 / 3.0 );
+
+    ToIntFract();
+    ToUint8();
+}
+
+CConvolutionKernel::~CConvolutionKernel()
+{
+    delete[] m_floatpixels;
+    delete[] m_intfractpixels;
+    delete[] m_uint8pixels;
+}
+
+//generate a lanczos2 kernel which can be loaded with RGBA format
+//each value of RGBA has one tap, so a shader can load 4 taps with a single pixel lookup
+void CConvolutionKernel::Lanczos2()
+{
+    for( int i = 0; i < m_size; i++ )
+    {
+        double x = ( double )i / ( double )m_size;
+
+        //generate taps
+        for( int j = 0; j < 4; j++ )
+            m_floatpixels[ i * 4 + j ] = ( float )LanczosWeight( x + ( double )( j - 2 ), 2.0 );
+
+        //any collection of 4 taps added together needs to be exactly 1.0
+        //for lanczos this is not always the case, so we take each collection of 4 taps
+        //and divide those taps by the sum of the taps
+        float weight = 0.0;
+        for( int j = 0; j < 4; j++ )
+            weight += m_floatpixels[ i * 4 + j ];
+
+        for( int j = 0; j < 4; j++ )
+            m_floatpixels[ i * 4 + j ] /= weight;
+    }
+}
+
+//generate a lanczos3 kernel which can be loaded with RGBA format
+//each value of RGBA has one tap, so a shader can load 4 taps with a single pixel lookup
+//the two outer lobes of the lanczos3 kernel are added to the two lobes one step to the middle
+//this basically looks the same as lanczos3, but the kernel only has 4 taps,
+//so it can use the 4x4 convolution shader which is twice as fast as the 6x6 one
+void CConvolutionKernel::Lanczos3Fast()
+{
+    for( int i = 0; i < m_size; i++ )
+    {
+        double a = 3.0;
+        double x = ( double )i / ( double )m_size;
+
+        //generate taps
+        m_floatpixels[ i * 4 + 0 ] = ( float )( LanczosWeight( x - 2.0, a ) + LanczosWeight( x - 3.0, a ) );
+        m_floatpixels[ i * 4 + 1 ] = ( float )LanczosWeight( x - 1.0, a );
+        m_floatpixels[ i * 4 + 2 ] = ( float )LanczosWeight( x, a );
+        m_floatpixels[ i * 4 + 3 ] = ( float )( LanczosWeight( x + 1.0, a ) + LanczosWeight( x + 2.0, a ) );
+
+        //any collection of 4 taps added together needs to be exactly 1.0
+        //for lanczos this is not always the case, so we take each collection of 4 taps
+        //and divide those taps by the sum of the taps
+        float weight = 0.0;
+        for( int j = 0; j < 4; j++ )
+            weight += m_floatpixels[ i * 4 + j ];
+
+        for( int j = 0; j < 4; j++ )
+            m_floatpixels[ i * 4 + j ] /= weight;
+    }
+}
+
+//generate a lanczos3 kernel which can be loaded with RGBA format
+//each value of RGB has one tap, so a shader can load 3 taps with a single pixel lookup
+void CConvolutionKernel::Lanczos3()
+{
+    for( int i = 0; i < m_size; i++ )
+    {
+        double x = ( double )i / ( double )m_size;
+
+        //generate taps
+        for( int j = 0; j < 3; j++ )
+            m_floatpixels[ i * 4 + j ] = ( float )LanczosWeight( x * 2.0 + ( double )( j * 2 - 3 ), 3.0 );
+
+        m_floatpixels[ i * 4 + 3 ] = 0.0;
+    }
+
+    //any collection of 6 taps added together needs to be exactly 1.0
+    //for lanczos this is not always the case, so we take each collection of 6 taps
+    //and divide those taps by the sum of the taps
+    for( int i = 0; i < m_size / 2; i++ )
+    {
+        float weight = 0.0;
+        for( int j = 0; j < 3; j++ )
+        {
+            weight += m_floatpixels[ i * 4 + j ];
+            weight += m_floatpixels[ ( i + m_size / 2 ) * 4 + j ];
+        }
+        for( int j = 0; j < 3; j++ )
+        {
+            m_floatpixels[ i * 4 + j ] /= weight;
+            m_floatpixels[ ( i + m_size / 2 ) * 4 + j ] /= weight;
+        }
+    }
+}
+
+void CConvolutionKernel::Spline36Fast()
+{
+    for( int i = 0; i < m_size; i++ )
+    {
+        double x = ( double )i / ( double )m_size;
+
+        //generate taps
+        m_floatpixels[ i * 4 + 0 ] = ( float )( Spline36Weight( x - 2.0 ) + Spline36Weight( x - 3.0 ) );
+        m_floatpixels[ i * 4 + 1 ] = ( float )Spline36Weight( x - 1.0 );
+        m_floatpixels[ i * 4 + 2 ] = ( float )Spline36Weight( x );
+        m_floatpixels[ i * 4 + 3 ] = ( float )( Spline36Weight( x + 1.0 ) + Spline36Weight( x + 2.0 ) );
+
+        float weight = 0.0;
+        for( int j = 0; j < 4; j++ )
+            weight += m_floatpixels[ i * 4 + j ];
+
+        for( int j = 0; j < 4; j++ )
+            m_floatpixels[ i * 4 + j ] /= weight;
+    }
+}
+
+void CConvolutionKernel::Spline36()
+{
+    for( int i = 0; i < m_size; i++ )
+    {
+        double x = ( double )i / ( double )m_size;
+
+        //generate taps
+        for( int j = 0; j < 3; j++ )
+            m_floatpixels[ i * 4 + j ] = ( float )Spline36Weight( x * 2.0 + ( double )( j * 2 - 3 ) );
+
+        m_floatpixels[ i * 4 + 3 ] = 0.0;
+    }
+
+    for( int i = 0; i < m_size / 2; i++ )
+    {
+        float weight = 0.0;
+        for( int j = 0; j < 3; j++ )
+        {
+            weight += m_floatpixels[ i * 4 + j ];
+            weight += m_floatpixels[ ( i + m_size / 2 ) * 4 + j ];
+        }
+        for( int j = 0; j < 3; j++ )
+        {
+            m_floatpixels[ i * 4 + j ] /= weight;
+            m_floatpixels[ ( i + m_size / 2 ) * 4 + j ] /= weight;
+        }
+    }
+}
+
+//generate a bicubic kernel which can be loaded with RGBA format
+//each value of RGBA has one tap, so a shader can load 4 taps with a single pixel lookup
+void CConvolutionKernel::Bicubic( double B, double C )
+{
+    for( int i = 0; i < m_size; i++ )
+    {
+        double x = ( double )i / ( double )m_size;
+
+        //generate taps
+        for( int j = 0; j < 4; j++ )
+            m_floatpixels[ i * 4 + j ] = ( float )BicubicWeight( x + ( double )( j - 2 ), B, C );
+    }
+}
+
+double CConvolutionKernel::LanczosWeight( double x, double radius )
+{
+    double ax = fabs( x );
+
+    if( ax == 0.0 )
+        return 1.0;
+    else if( ax < radius )
+        return SINC( ax ) * SINC( ax / radius );
+    else
+        return 0.0;
+}
+
+double CConvolutionKernel::BicubicWeight( double x, double B, double C )
+{
+    double ax = fabs( x );
+
+    if( ax < 1.0 )
+    {
+        return ( ( 12 - 9 * B - 6 * C ) * ax * ax * ax +
+            ( -18 + 12 * B + 6 * C ) * ax * ax +
+                 ( 6 - 2 * B ) ) / 6;
+    }
+    else if( ax < 2.0 )
+    {
+        return ( ( -B - 6 * C ) * ax * ax * ax +
+            ( 6 * B + 30 * C ) * ax * ax + ( -12 * B - 48 * C ) *
+                 ax + ( 8 * B + 24 * C ) ) / 6;
+    }
+    else
+    {
+        return 0.0;
+    }
+}
+
+double CConvolutionKernel::Spline36Weight( double x )
+{
+    double ax = fabs( x );
+
+    if( ax < 1.0 )
+        return ( ( 13.0 / 11.0 * ( ax )-453.0 / 209.0 ) * ( ax )-3.0 / 209.0 ) * ( ax )+1.0;
+    else if( ax < 2.0 )
+        return ( ( -6.0 / 11.0 * ( ax - 1.0 ) + 270.0 / 209.0 ) * ( ax - 1.0 ) - 156.0 / 209.0 ) * ( ax - 1.0 );
+    else if( ax < 3.0 )
+        return ( ( 1.0 / 11.0 * ( ax - 2.0 ) - 45.0 / 209.0 ) * ( ax - 2.0 ) + 26.0 / 209.0 ) * ( ax - 2.0 );
+    return 0.0;
+}
+
+//convert float to high byte/low byte, so the kernel can be loaded into an 8 bit texture
+//with height 2 and converted back to real float in the shader
+//it only works when the kernel texture uses nearest neighbour, but there's almost no difference
+//between that and linear interpolation
+void CConvolutionKernel::ToIntFract()
+{
+    m_intfractpixels = new uint8_t[ m_size * 8 ];
+
+    for( int i = 0; i < m_size * 4; i++ )
+    {
+        int value = MathUtils::round_int( ( m_floatpixels[ i ] + 1.0 ) / 2.0 * 65535.0 );
+        if( value < 0 )
+            value = 0;
+        else if( value > 65535 )
+            value = 65535;
+
+        int integer = value / 256;
+        int fract = value % 256;
+
+        m_intfractpixels[ i ] = ( uint8_t )integer;
+        m_intfractpixels[ i + m_size * 4 ] = ( uint8_t )fract;
+    }
+}
+
+//convert to 8 bits unsigned
+void CConvolutionKernel::ToUint8()
+{
+    m_uint8pixels = new uint8_t[ m_size * 4 ];
+
+    for( int i = 0; i < m_size * 4; i++ )
+    {
+        int value = MathUtils::round_int( ( m_floatpixels[ i ] * 0.5 + 0.5 ) * 255.0 );
+        if( value < 0 )
+            value = 0;
+        else if( value > 255 )
+            value = 255;
+
+        m_uint8pixels[ i ] = ( uint8_t )value;
+    }
+}
+
+
+//
+// Transformation matrixes for different colorspaces.
+//
+static float yuv_coef_bt601[ 4 ][ 4 ] =
+{
+   { 1.0f,      1.0f,     1.0f,     0.0f },
+   { 0.0f,     -0.344f,   1.773f,   0.0f },
+   { 1.403f,   -0.714f,   0.0f,     0.0f },
+   { 0.0f,      0.0f,     0.0f,     0.0f }
+};
+
+static float yuv_coef_bt709[ 4 ][ 4 ] =
+{
+   { 1.0f,      1.0f,     1.0f,     0.0f },
+   { 0.0f,     -0.1870f,  1.8556f,  0.0f },
+   { 1.5701f,  -0.4664f,  0.0f,     0.0f },
+   { 0.0f,      0.0f,     0.0f,     0.0f }
+};
+
+static float yuv_coef_bt2020[ 4 ][ 4 ] =
+{
+   { 1.0f,     1.0f,     1.0f,    0.0f },
+   { 0.0f,    -0.1645f,  1.8814f, 0.0f },
+   { 1.4745f, -0.5713f,  0.0f,    0.0f },
+   { 0.0f,     0.0f,     0.0f,    0.0f }
+};
+
+static float yuv_coef_ebu[ 4 ][ 4 ] =
+{
+   { 1.0f,      1.0f,     1.0f,     0.0f },
+   { 0.0f,     -0.3960f,  2.029f,   0.0f },
+   { 1.140f,   -0.581f,   0.0f,     0.0f },
+   { 0.0f,      0.0f,     0.0f,     0.0f }
+};
+
+static float yuv_coef_smtp240m[ 4 ][ 4 ] =
+{
+   { 1.0f,      1.0f,     1.0f,     0.0f },
+   { 0.0f,     -0.2253f,  1.8270f,  0.0f },
+   { 1.5756f,  -0.5000f,  0.0f,     0.0f },
+   { 0.0f,      0.0f,     0.0f,     0.0f }
+};
+
+static float** PickYUVConversionMatrix( unsigned flags )
+{
+   // Pick the matrix.
+
+   switch( CONF_FLAGS_YUVCOEF_MASK( flags ) )
+   {
+   case CONF_FLAGS_YUVCOEF_240M:
+       return reinterpret_cast< float** >( yuv_coef_smtp240m );
+   case CONF_FLAGS_YUVCOEF_BT2020:
+       return reinterpret_cast< float** >( yuv_coef_bt2020 );
+   case CONF_FLAGS_YUVCOEF_BT709:
+       return reinterpret_cast< float** >( yuv_coef_bt709 );
+   case CONF_FLAGS_YUVCOEF_BT601:
+       return reinterpret_cast< float** >( yuv_coef_bt601 );
+   case CONF_FLAGS_YUVCOEF_EBU:
+       return reinterpret_cast< float** >( yuv_coef_ebu );
+   }
+
+   return reinterpret_cast< float** >( yuv_coef_bt601 );
+}
+void CalculateYUVMatrix( TransformMatrix &matrix
+                         , unsigned int  flags
+                         , EShaderFormat format
+                         , float         black
+                         , float         contrast
+                         , bool          limited )
+{
+    TransformMatrix coef;
+
+    matrix *= TransformMatrix::CreateScaler( contrast, contrast, contrast );
+    matrix *= TransformMatrix::CreateTranslation( black, black, black );
+
+    float( *conv )[ 4 ] = ( float( *)[ 4 ] )PickYUVConversionMatrix( flags );
+    for( int row = 0; row < 3; row++ )
+        for( int col = 0; col < 4; col++ )
+            coef.m[ row ][ col ] = conv[ col ][ row ];
+    coef.identity = false;
+
+    if( limited )
+    {
+        matrix *= TransformMatrix::CreateTranslation( +16.0f / 255
+                                                      , +16.0f / 255
+                                                      , +16.0f / 255 );
+        matrix *= TransformMatrix::CreateScaler( ( 235 - 16 ) / 255.0f
+                                                 , ( 235 - 16 ) / 255.0f
+                                                 , ( 235 - 16 ) / 255.0f );
+    }
+
+    matrix *= coef;
+    matrix *= TransformMatrix::CreateTranslation( 0.0, -0.5, -0.5 );
+
+    if( !( flags & CONF_FLAGS_YUV_FULLRANGE ) )
+    {
+        matrix *= TransformMatrix::CreateScaler( 255.0f / ( 235 - 16 )
+                                                 , 255.0f / ( 240 - 16 )
+                                                 , 255.0f / ( 240 - 16 ) );
+        matrix *= TransformMatrix::CreateTranslation( -16.0f / 255
+                                                      , -16.0f / 255
+                                                      , -16.0f / 255 );
+    }
+
+    int effectiveBpp;
+    switch( format )
+    {
+    case SHADER_YV12_9:
+        effectiveBpp = 9;
+        break;
+    case SHADER_YV12_10:
+        effectiveBpp = 10;
+        break;
+    case SHADER_YV12_12:
+        effectiveBpp = 12;
+        break;
+    case SHADER_YV12_14:
+        effectiveBpp = 14;
+        break;
+    default:
+        effectiveBpp = 0;
+    }
+
+    if( effectiveBpp > 8 && effectiveBpp < 16 )
+    {
+        // Convert range to 2 bytes
+        float scale = 65535.0f / ( ( 1 << effectiveBpp ) - 1 );
+        matrix *= TransformMatrix::CreateScaler( scale, scale, scale );
+    }
+}
+
 
  //============================================================================
 static void CalculateYUVMatrixGLES( GLfloat      res[ 4 ][ 4 ]
@@ -53,7 +669,7 @@ static void CalculateYUVMatrixGLES( GLfloat      res[ 4 ][ 4 ]
 }
 
 //============================================================================
-ShaderQt::ShaderQt(  ESHADERMETHOD shaderMethod, EShaderType shaderType, QString& shaderName, RenderGlWidget * renderWidget )
+RenderShaderQt::RenderShaderQt(  ESHADERMETHOD shaderMethod, EShaderType shaderType, QString shaderName, RenderGlWidget * renderWidget )
     : QOpenGLShaderProgram()
     , m_ShaderMethod( shaderMethod )
     , m_ScalingMethod( VS_SCALINGMETHOD_LINEAR )
@@ -83,7 +699,7 @@ ShaderQt::ShaderQt(  ESHADERMETHOD shaderMethod, EShaderType shaderType, QString
 }
 
 //============================================================================
-bool ShaderQt::compileAndLink( const char * vertexShaderCode, const char *fragmentShaderCode )
+bool RenderShaderQt::compileAndLink( const char * vertexShaderCode, const char *fragmentShaderCode )
 {
     bool result = true;
     m_proj = nullptr;
@@ -126,7 +742,7 @@ bool ShaderQt::compileAndLink( const char * vertexShaderCode, const char *fragme
 }
 
 //============================================================================
-void ShaderQt::onCompiledAndLinked()
+void RenderShaderQt::onCompiledAndLinked()
 {
     // This is called after CompileAndLink()
 
@@ -161,7 +777,7 @@ void ShaderQt::onCompiledAndLinked()
 }
 
 //============================================================================
-void ShaderQt::onCompiledAndLinkedGui( QOpenGLFunctions * glf )
+void RenderShaderQt::onCompiledAndLinkedGui( QOpenGLFunctions * glf )
 {
     // Variables passed directly to the Fragment shader
     m_hTex0         = glf->glGetUniformLocation( programId(), "m_samp0" );
@@ -202,7 +818,7 @@ void ShaderQt::onCompiledAndLinkedGui( QOpenGLFunctions * glf )
 }
 
 //============================================================================
-void ShaderQt::onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf )
+void RenderShaderQt::onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf )
 {
     if( SM_VIDEO_YV12_BASIC == m_ShaderMethod )
     {
@@ -270,7 +886,7 @@ void ShaderQt::onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf )
 }
 
 //============================================================================
-void ShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf )
+void RenderShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf )
 {
     m_hVertex = glf->glGetAttribLocation( programId(), "m_attrpos" );
     m_hcoord = glf->glGetAttribLocation( programId(), "m_attrcord" );
@@ -309,7 +925,7 @@ void ShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf )
 
         if( ( m_kernelTex1 <= 0 ) )
         {
-            CLog::Log( LOGERROR, "GL: ConvolutionFilterShader: Error creating kernel texture" );
+            LogMsg( LOG_ERROR, "GL: ConvolutionFilterShader: Error creating kernel texture" );
             return;
         }
 
@@ -354,7 +970,7 @@ void ShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf )
 }
 
 //============================================================================
-bool ShaderQt::onEnabled()
+bool RenderShaderQt::onEnabled()
 {
     // This is called after glUseProgram()
 
@@ -384,9 +1000,10 @@ bool ShaderQt::onEnabled()
 }
     
 //============================================================================
-bool ShaderQt::onShaderGuiEnabled( QOpenGLFunctions * glf )
+bool RenderShaderQt::onShaderGuiEnabled( QOpenGLFunctions * glf )
 {
 
+ /*
     const GLfloat *projMatrix = glMatrixProject.Get();
     const GLfloat *modelMatrix = glMatrixModview.Get();
     glf->glUniformMatrix4fv( m_hProj, 1, GL_FALSE, projMatrix );
@@ -395,7 +1012,7 @@ bool ShaderQt::onShaderGuiEnabled( QOpenGLFunctions * glf )
     const TransformMatrix &guiMatrix = CServiceBroker::GetWinSystem()->GetGfxContext().GetGUIMatrix();
     CRect viewPort; // absolute positions of corners
     CServiceBroker::GetRenderSystem()->GetViewPort( viewPort );
-
+*/
     /* glScissor operates in window coordinates. In order that we can use it to
      * perform clipping, we must ensure that there is an independent linear
      * transformation from the coordinate system used by CGraphicContext::ClipRect
@@ -430,6 +1047,7 @@ bool ShaderQt::onShaderGuiEnabled( QOpenGLFunctions * glf )
      * that's needed to handle that is an effective negation at the stage where
      * Y is in normalized device coordinates.)
      */
+    /*
     m_clipPossible = guiMatrix.m[ 0 ][ 1 ] == 0 &&
         guiMatrix.m[ 1 ][ 0 ] == 0 &&
         guiMatrix.m[ 2 ][ 0 ] == 0 &&
@@ -472,12 +1090,13 @@ bool ShaderQt::onShaderGuiEnabled( QOpenGLFunctions * glf )
 
     glf->glUniform1f( m_hBrightness, 0.0f );
     glf->glUniform1f( m_hContrast, 1.0f );
+    */
 
     return true;
 }
 
 //============================================================================
-bool ShaderQt::onShaderVideoFormatEnabled( QOpenGLFunctions * glf )
+bool RenderShaderQt::onShaderVideoFormatEnabled( QOpenGLFunctions * glf )
 {
     //LogMsg( LOG_ERROR, "onShaderVideoFormatEnabled %s", describeShader( m_ShaderMethod ) );
 
@@ -519,7 +1138,7 @@ bool ShaderQt::onShaderVideoFormatEnabled( QOpenGLFunctions * glf )
 }
 
 //============================================================================
-bool ShaderQt::onShaderVideoFilterEnabled( QOpenGLFunctions * glf )
+bool RenderShaderQt::onShaderVideoFilterEnabled( QOpenGLFunctions * glf )
 {
     LogMsg( LOG_ERROR, "onShaderVideoFormatEnabled %s", describeShader( m_ShaderMethod ) );
 
@@ -555,7 +1174,7 @@ bool ShaderQt::onShaderVideoFilterEnabled( QOpenGLFunctions * glf )
 }
 
 //============================================================================
-const char * ShaderQt::describeShader( ESHADERMETHOD shaderType )
+const char * RenderShaderQt::describeShader( ESHADERMETHOD shaderType )
 {
     switch( shaderType )
     {
@@ -619,12 +1238,12 @@ const char * ShaderQt::describeShader( ESHADERMETHOD shaderType )
 }
 
 //============================================================================
-void ShaderQt::onDisabled()
+void RenderShaderQt::onDisabled()
 {
 }
 
 //============================================================================
-void ShaderQt::onFree()
+void RenderShaderQt::onFree()
 {
     if( m_kernelTex1 )
     {
@@ -638,7 +1257,7 @@ void ShaderQt::onFree()
 }
 
 //============================================================================
-bool ShaderQt::enableShader()
+bool RenderShaderQt::enableShader()
 {
     QOpenGLFunctions * glf = m_RenderWidget->getGlFunctions();
     glf->glUseProgram( programId() );
@@ -676,7 +1295,7 @@ bool ShaderQt::enableShader()
 }
 
 //============================================================================
-bool ShaderQt::disableShader()
+bool RenderShaderQt::disableShader()
 {
     switch( m_ShaderMethod )
     {
@@ -695,21 +1314,21 @@ bool ShaderQt::disableShader()
 
 // yuv shader
 //============================================================================
-void ShaderQt::shaderSetField( int field )
+void RenderShaderQt::shaderSetField( int field )
 {
     m_field = field;
     //VerifyGLStateQt();
 }
 
 //============================================================================
-void ShaderQt::shaderSetWidth( int w )
+void RenderShaderQt::shaderSetWidth( int w )
 {
     m_width = w;
     //VerifyGLStateQt();
 }
 
 //============================================================================
-void ShaderQt::shaderSetHeight( int h )
+void RenderShaderQt::shaderSetHeight( int h )
 {
     m_height = h;
 
@@ -717,7 +1336,7 @@ void ShaderQt::shaderSetHeight( int h )
 }
 
 //============================================================================
-void ShaderQt::shaderSetBlack( float black )
+void RenderShaderQt::shaderSetBlack( float black )
 {
     m_black = black;
 
@@ -725,106 +1344,106 @@ void ShaderQt::shaderSetBlack( float black )
 }
 
 //============================================================================
-void ShaderQt::shaderSetContrast( float contrast )
+void RenderShaderQt::shaderSetContrast( float contrast )
 {
     m_contrast = contrast;
     //VerifyGLStateQt();
 }
 
 //============================================================================
-void ShaderQt::shaderSetConvertFullColorRange( bool convertFullRange )
+void RenderShaderQt::shaderSetConvertFullColorRange( bool convertFullRange )
 {
     m_convertFullRange = convertFullRange;
     //VerifyGLStateQt();
 }
 
 //============================================================================
-int ShaderQt::shaderGetVertexLoc(  )
+int RenderShaderQt::shaderGetVertexLoc(  )
 {
     //VerifyGLStateQt();
     return m_hVertex;
 }
 
 //============================================================================
-int ShaderQt::shaderGetYcoordLoc(  )
+int RenderShaderQt::shaderGetYcoordLoc(  )
 {
     //VerifyGLStateQt();
     return m_hYcoord;
 }
 
 //============================================================================
-int ShaderQt::shaderGetUcoordLoc(  )
+int RenderShaderQt::shaderGetUcoordLoc(  )
 {
     //VerifyGLStateQt();
     return m_hUcoord;
 }
 
 //============================================================================
-int ShaderQt::shaderGetVcoordLoc(  )
+int RenderShaderQt::shaderGetVcoordLoc(  )
 {
     //VerifyGLStateQt();
     return m_hVcoord;
 }
 
 //============================================================================
-void ShaderQt::shaderSetMatrices( const float *p, const float *m )
+void RenderShaderQt::shaderSetMatrices( const float *p, const float *m )
 {
     m_proj = p; 
     m_model = m;
 }
 
 //============================================================================
-void ShaderQt::shaderSetAlpha( float alpha )
+void RenderShaderQt::shaderSetAlpha( float alpha )
 {
     m_alpha = alpha;
 }
 
 //============================================================================
-void ShaderQt::shaderSetFlags( unsigned int flags )
+void RenderShaderQt::shaderSetFlags( unsigned int flags )
 {
     m_flags = flags;
 }
 
 //============================================================================
-void ShaderQt::shaderSetFormat(  EShaderFormat format )
+void RenderShaderQt::shaderSetFormat(  EShaderFormat format )
 {
     m_format = format;
 }
 
 //============================================================================
-void ShaderQt::shaderSourceTexture( int ytex )
+void RenderShaderQt::shaderSourceTexture( int ytex )
 {
     m_sourceTexUnit = ytex;
 }
 
 //============================================================================
-void ShaderQt::shaderSetStepX( float stepX )
+void RenderShaderQt::shaderSetStepX( float stepX )
 {
     m_stepX = stepX;
 }
 
 //============================================================================
-void ShaderQt::shaderSetStepY( float stepY )
+void RenderShaderQt::shaderSetStepY( float stepY )
 {
     m_stepY = stepY;
 }
 
 //============================================================================
 // filter shader
-bool ShaderQt::shaderGetTextureFilter(  int& filter )
+bool RenderShaderQt::shaderGetTextureFilter(  int& filter )
 {
     return false;
 }
 
 //============================================================================
-int ShaderQt::shaderGetcoordLoc(  )
+int RenderShaderQt::shaderGetcoordLoc(  )
 {
     //VerifyGLStateQt();
     return m_hcoord;
 }
 
 //============================================================================
-int ShaderQt::shaderVertexAttribPointer( unsigned int index, int size, int type, bool normalized, int stride, const void * pointer )
+int RenderShaderQt::shaderVertexAttribPointer( unsigned int index, int size, int type, bool normalized, int stride, const void * pointer )
 {
     QOpenGLFunctions * glf = m_RenderWidget->getGlFunctions();
     glf->glVertexAttribPointer( index, size, type, normalized, stride, pointer );
@@ -833,7 +1452,7 @@ int ShaderQt::shaderVertexAttribPointer( unsigned int index, int size, int type,
 }
 
 //============================================================================
-void ShaderQt::shaderEnableVertexAttribArray( int arrayId )
+void RenderShaderQt::shaderEnableVertexAttribArray( int arrayId )
 {
     QOpenGLFunctions * glf = m_RenderWidget->getGlFunctions();
     glf->glEnableVertexAttribArray( arrayId );
@@ -841,7 +1460,7 @@ void ShaderQt::shaderEnableVertexAttribArray( int arrayId )
 }
 
 //============================================================================
-void ShaderQt::shaderDisableVertexAttribArray( int arrayId )
+void RenderShaderQt::shaderDisableVertexAttribArray( int arrayId )
 {
     QOpenGLFunctions * glf = m_RenderWidget->getGlFunctions();
     glf->glDisableVertexAttribArray( arrayId );

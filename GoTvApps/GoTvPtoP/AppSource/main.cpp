@@ -23,7 +23,7 @@
 
 int main(int argc, char **argv)
 {
-    QApplication::setAttribute( Qt::AA_ShareOpenGLContexts );
+    //QApplication::setAttribute( Qt::AA_ShareOpenGLContexts );
 
 	// for some reason QApplication must be newed or does not initialize 
     //QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling );

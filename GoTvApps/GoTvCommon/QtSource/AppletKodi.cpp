@@ -20,7 +20,7 @@
 #include "AppSettings.h"
 #include "MyIcons.h"
 #include "AppCommon.h"
-#include "KodiThread.h"
+#include "RenderKodiThread.h"
 
 
 #include <GoTvInterface/IGoTv.h>
@@ -112,7 +112,6 @@ void AppletKodi::aboutToLaunchApplet( void )
     //startKodiModule();
 }
 
-
 //============================================================================
 void AppletKodi::onAppletStop( void )
 {
@@ -123,8 +122,7 @@ void AppletKodi::onAppletStop( void )
     //stopMediaIfPlaying();
 }
 
-
-////============================================================================
+//============================================================================
 //void AppletKodi::startKodiModule( void )
 //{
 //    // call of doRun of kodi never returns from function until kodi is shutdown so use thread

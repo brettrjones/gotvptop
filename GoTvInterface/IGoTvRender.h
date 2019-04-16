@@ -115,7 +115,7 @@ public:
     virtual bool                clearBuffers( GoTvColor color ) = 0;
     virtual bool                isExtSupported( const char* extension ) = 0;
 
-    virtual void                setVSync( bool vsync ) {};
+    virtual void                setVSync( bool vsync ) {}
     virtual void                resetVSync() {}
 
     virtual void                setViewPort( const GoTvRect& viewPort ) = 0;

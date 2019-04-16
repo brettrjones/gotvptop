@@ -13,26 +13,24 @@
 #include <QWaitCondition>
 #include <QElapsedTimer>
 
-#include "RenderLogoShaders.h"
-#include "LogoRenderer.h"
+#include "RenderGlShaders.h"
 
 class RenderGlWidget;
-class RenderGlThread;
+class RenderKodiThread;
 class RenderGlOffScreenSurface;
 
 
-class RenderGlLogic : public QObject
+class RenderGlLogic : public RenderGlShaders
 {
-    Q_OBJECT
 public:
     explicit RenderGlLogic( RenderGlWidget& renderWidget );
+    virtual ~RenderGlLogic() = default;
 
-    void						setRenderThread( RenderGlThread * renderThread ) { m_RenderThread = renderThread; }
     void						setRenderThreadShouldRun( bool shouldRun );
-    void						setRenderWindowVisible( bool isVisible ) { m_RenderWindowVisible = isVisible; }
+    void						setRenderWindowVisible( bool isVisible ) {  }
 
     //! called from gui thread when ready for opengl rendering
-    void						glWidgetInitialized( QOpenGLContext * widgetGlContext, QOpenGLContext * threadGlContext, RenderGlOffScreenSurface * offScreenSurface );
+    void						glWidgetInitialized();
 
     void                        setSurfaceSize( QSize surfaceSize );
 
@@ -46,33 +44,40 @@ public:
     void                        lockRenderer() { m_renderMutex.lock(); }
     void                        unlockRenderer() { m_renderMutex.unlock(); }
 
-
-    virtual int                 getMaxTextureSize() { return 2048; }
-
     void                        aboutToDestroy();
-signals:
-    void                        signalFrameRendered();
 
-public slots:
-    void                        render();
-
-private:
-    RenderGlWidget&             m_RenderWidget;
-    RenderLogoShaders           m_RenderShaders;
-    LogoRenderer                m_LogoRenderer;
-
+    // initialized by RenderGlWidget
     QOpenGLContext *            m_WidgetGlContext = nullptr;
+    // initialized by RenderGlWidget
     QOpenGLContext *            m_ThreadGlContext = nullptr;
+    // initialized by RenderGlWidget
+    QOpenGLFunctions *          m_GlThreadFunctions = nullptr;
+#if QT_VERSION < 0x050300
+# if defined(QT_OPENGL_ES_2)
+    QOpenGLFunctions_ES2 *      m_ThreadGlF = nullptr;
+# else
+    QOpenGLFunctions_1_1 *      m_ThreadGlF = nullptr;
+# endif
+#else
+    QOpenGLFunctions *          m_ThreadGlF = nullptr;
+#endif
+
     RenderGlOffScreenSurface *  m_OffScreenSurface = nullptr;
 
+protected:
+    void                        render();
+
+    RenderGlWidget&             m_RenderWidget;
+
+    RenderKodiThread*           m_RenderKodiThread = nullptr;
 
     bool                        m_initialized   = false;
-  
+
     QMutex                      m_renderMutex;
+    QMutex                      m_grabMutex;
+    QWaitCondition              m_grabCond;
     bool                        m_exiting = false;
 
-    QColor                      m_backgroundColor;
-	RenderGlThread *			m_RenderThread = nullptr;
     bool                        m_RenderWindowVisible = false;
 };
 

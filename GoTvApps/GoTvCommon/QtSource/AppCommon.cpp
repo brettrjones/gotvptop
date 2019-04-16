@@ -78,7 +78,7 @@
 #include <QDebug>
 #include <QSettings>
 
-#include "RenderGlBaseWidget.h"
+#include "RenderGlWidget.h"
 
 namespace
 {

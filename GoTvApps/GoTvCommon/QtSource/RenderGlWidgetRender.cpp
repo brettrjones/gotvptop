@@ -18,7 +18,7 @@
 #include "AppSettings.h"
 #include "MyIcons.h"
 #include "GuiHelpers.h"
-#include "KodiThread.h"
+#include "RenderKodiThread.h"
 #include "RenderGlOffScreenSurface.h"
 
 #include "GoTvInterface/GoTvRenderFrame.h"
@@ -37,10 +37,7 @@
 // if never gets called then kodi failed to initialize and is a fatal error
 bool RenderGlWidget::initRenderSystem()
 {
-    if( m_KodiSurface )
-    {
-		m_KodiSurface->startupKodiRenderSystem();
-    }
+    m_RenderLogic.initRenderGlSystem();
 
     return m_RenderWidgetInited;
 }
@@ -49,15 +46,7 @@ bool RenderGlWidget::initRenderSystem()
 bool RenderGlWidget::destroyRenderSystem()
 {
 	m_RenderWidgetInited = false;
-	if( m_KodiSurface )
-	{
-		m_KodiSurface->shutdownKodiRenderSystem();
-	}
-
-    if( RENDER_FROM_THREAD )
-    {
-        // TODO: switch context back to gui thread so will be correctly destroyed
-    }
+    m_RenderLogic.destroyRenderGlSystem();
 
     return true;
 }
@@ -83,9 +72,9 @@ bool RenderGlWidget::resetRenderSystem( int width, int height )
     GoTvRect rect( 0, 0, width, height );
     setViewPort( rect );
 
-    m_GlF->glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
+    m_GlWidgetFunctions->glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
 
-    m_GlF->glEnable( GL_SCISSOR_TEST );
+    m_GlWidgetFunctions->glEnable( GL_SCISSOR_TEST );
 
     glMatrixProject.Clear();
     glMatrixProject->LoadIdentity();
@@ -100,48 +89,11 @@ bool RenderGlWidget::resetRenderSystem( int width, int height )
     glMatrixTexture->LoadIdentity();
     glMatrixTexture.Load();
 
-    m_GlF->glBlendFunc( GL_SRC_ALPHA, GL_ONE );
-    m_GlF->glEnable( GL_BLEND );          // Turn Blending On
-    m_GlF->glDisable( GL_DEPTH_TEST );
+    m_GlWidgetFunctions->glBlendFunc( GL_SRC_ALPHA, GL_ONE );
+    m_GlWidgetFunctions->glEnable( GL_BLEND );          // Turn Blending On
+    m_GlWidgetFunctions->glDisable( GL_DEPTH_TEST );
 
     return true;
-}
-
-//============================================================================
-bool RenderGlWidget::beginRender()
-{
-    if( m_RenderWidgetInited && m_KodiSurface )
-    {
-        m_KodiSurface->beginRender();
-    }
-
-    return true;
-}
-
-//============================================================================
-bool RenderGlWidget::endRender()
-{
-    if( m_RenderWidgetInited && m_KodiSurface )
-    {
-        m_KodiSurface->endRender();
-    }
-
-    return true;
-}
-
-//============================================================================
-void RenderGlWidget::presentRender( bool rendered, bool videoLayer )
-{
-    // this seams a odd order of execution but the sequence is
-    // beginRender
-    // endRender
-    // presentRender
-
-    if( m_RenderWidgetInited && m_KodiSurface )
-    {
-        m_KodiSurface->presentRender( rendered, videoLayer );
-        update();
-   }
 }
 
 //============================================================================
@@ -157,10 +109,10 @@ bool RenderGlWidget::clearBuffers( GoTvColor color )
     float b = GET_B( color ) / 255.0f;
     float a = GET_A( color ) / 255.0f;
 
-     m_GlF->glClearColor( r, g, b, a );
+     m_GlWidgetFunctions->glClearColor( r, g, b, a );
 
     GLbitfield flags = GL_COLOR_BUFFER_BIT;
-     m_GlF->glClear( flags );
+     m_GlWidgetFunctions->glClear( flags );
 
    return true;
 }
@@ -195,8 +147,8 @@ void RenderGlWidget::setVSync( bool vsync )
 //============================================================================
 void RenderGlWidget::setViewPort( const GoTvRect& viewPort )
 {
-    m_GlF->glScissor( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
-    m_GlF->glViewport( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
+    m_GlWidgetFunctions->glScissor( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
+    m_GlWidgetFunctions->glViewport( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
     m_viewPort[ 0 ] = viewPort.x1;
     m_viewPort[ 1 ] = m_SrcHeight - viewPort.y1 - viewPort.Height();
     m_viewPort[ 2 ] = viewPort.Width();
@@ -241,8 +193,8 @@ void RenderGlWidget::captureStateBlock()
     glMatrixModview.Push();
     glMatrixTexture.Push();
 
-    m_GlF->glDisable( GL_SCISSOR_TEST ); // fixes FBO corruption on Macs
-    m_GlF->glActiveTexture( GL_TEXTURE0 );
+    m_GlWidgetFunctions->glDisable( GL_SCISSOR_TEST ); // fixes FBO corruption on Macs
+    m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE0 );
 }
 
 //============================================================================
@@ -251,10 +203,10 @@ void RenderGlWidget::applyStateBlock()
     glMatrixProject.PopLoad();
     glMatrixModview.PopLoad();
     glMatrixTexture.PopLoad();
-    m_GlF->glActiveTexture( GL_TEXTURE0 );
-    m_GlF->glEnable( GL_BLEND );
-    m_GlF->glEnable( GL_SCISSOR_TEST );
-    m_GlF->glClear( GL_DEPTH_BUFFER_BIT );
+    m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE0 );
+    m_GlWidgetFunctions->glEnable( GL_BLEND );
+    m_GlWidgetFunctions->glEnable( GL_SCISSOR_TEST );
+    m_GlWidgetFunctions->glClear( GL_DEPTH_BUFFER_BIT );
 }
 
 //============================================================================
@@ -318,11 +270,11 @@ bool RenderGlWidget::testRender()
     GLint   posLoc = shaderGetPos();
     GLint   colLoc = shaderGetCol();
 
-    m_GlF->glVertexAttribPointer( posLoc, 2, GL_FLOAT, 0, 0, ver );
-    m_GlF->glVertexAttribPointer( colLoc, 4, GL_FLOAT, 0, 0, col );
+    m_GlWidgetFunctions->glVertexAttribPointer( posLoc, 2, GL_FLOAT, 0, 0, ver );
+    m_GlWidgetFunctions->glVertexAttribPointer( colLoc, 4, GL_FLOAT, 0, 0, col );
 
-    m_GlF->glEnableVertexAttribArray( posLoc );
-    m_GlF->glEnableVertexAttribArray( colLoc );
+    m_GlWidgetFunctions->glEnableVertexAttribArray( posLoc );
+    m_GlWidgetFunctions->glEnableVertexAttribArray( colLoc );
 
     // Setup vertex position values
     ver[ 0 ][ 0 ] = 0.0f;
@@ -332,10 +284,10 @@ bool RenderGlWidget::testRender()
     ver[ 2 ][ 0 ] = -0.87f;
     ver[ 2 ][ 1 ] = -0.5f;
 
-    m_GlF->glDrawArrays( GL_TRIANGLES, 0, 3 );
+    m_GlWidgetFunctions->glDrawArrays( GL_TRIANGLES, 0, 3 );
 
-    m_GlF->glDisableVertexAttribArray( posLoc );
-    m_GlF->glDisableVertexAttribArray( colLoc );
+    m_GlWidgetFunctions->glDisableVertexAttribArray( posLoc );
+    m_GlWidgetFunctions->glDisableVertexAttribArray( colLoc );
 
     disableGUIShader();
 
@@ -362,30 +314,54 @@ void RenderGlWidget::project( float &x, float &y, float &z )
 //============================================================================
 void RenderGlWidget::frameBufferGen( int bufCount, unsigned int* fboId )
 {
-    m_GlF->glGenFramebuffers( bufCount, fboId );
+    m_GlWidgetFunctions->glGenFramebuffers( bufCount, fboId );
 }
 
 //============================================================================
 void RenderGlWidget::frameBufferDelete( int bufCount, unsigned int* fboId )
 {
-    m_GlF->glDeleteFramebuffers( bufCount, fboId );
+    m_GlWidgetFunctions->glDeleteFramebuffers( bufCount, fboId );
 }
 
 //============================================================================
 void RenderGlWidget::frameBufferTexture2D( int target, unsigned int texureId )
 {
-    m_GlF->glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, target, texureId, 0 );
+    m_GlWidgetFunctions->glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, target, texureId, 0 );
 }
 
 //============================================================================
 void RenderGlWidget::frameBufferBind( unsigned int fboId )
 {
-    m_GlF->glBindFramebuffer( GL_FRAMEBUFFER, fboId );
+    m_GlWidgetFunctions->glBindFramebuffer( GL_FRAMEBUFFER, fboId );
 }
 
 //============================================================================
 bool RenderGlWidget::frameBufferStatus()
 {
-    GLenum status = m_GlF->glCheckFramebufferStatus( GL_FRAMEBUFFER );
+    GLenum status = m_GlWidgetFunctions->glCheckFramebufferStatus( GL_FRAMEBUFFER );
     return ( status == GL_FRAMEBUFFER_COMPLETE );
 }
+
+//============================================================================
+#ifdef DEBUG
+void  RenderGlWidget::VerifyGLStateQtDbg( const char* szfile, const char* szfunction, int lineno )
+{
+    GLenum err = glGetError();
+    if( err == GL_NO_ERROR )
+        return;
+    LogMsg( LOG_ERROR, "GL ERROR: %d\n", err );
+    if( szfile && szfunction )
+    {
+       LogMsg( LOG_ERROR, "In file:%s function:%s line:%d", szfile, szfunction, lineno );
+    }
+
+}
+#else
+void RenderGlBaseWidget::VerifyGLStateQt()
+{
+    GLenum err = glGetError();
+    if( err == GL_NO_ERROR )
+        return;
+    LogMsg( LOG_ERROR, "GL ERROR: %s\n", gluErrorString( err ) );
+}
+#endif

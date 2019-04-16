@@ -59,13 +59,13 @@
 #include <QTime>
 #include <QVector>
 
-#include "RenderGlShaders.h"
+#include "RenderLogoShaders.h"
 
 
 class LogoRenderer : protected QOpenGLFunctions
 {
 public:
-    LogoRenderer(RenderGlShaders& renderShaders);
+    LogoRenderer(RenderLogoShaders& renderShaders);
     virtual ~LogoRenderer() = default;
 
     void render();
@@ -74,7 +74,7 @@ public:
     void setScale( float scale ) { m_fScale = scale;  }
 
 private:
-    RenderGlShaders& m_Shaders;
+    RenderLogoShaders& m_Shaders;
 
     qreal   m_fAngle;
     qreal   m_fScale;

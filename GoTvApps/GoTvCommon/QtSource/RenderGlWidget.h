@@ -13,8 +13,8 @@
 // http://www.gotvptop.net
 //============================================================================
 
-#include "RenderGlBaseWidget.h"
-#include "ShaderQt.h"
+#include "RenderGlLogic.h"
+#include "RenderShaderQt.h"
 #include "EventsQtToGoTv.h"
 #include "GoTvInterface/IGoTvRender.h"
 #include "GoTvInterface/IGoTvEvents.h"
@@ -24,19 +24,92 @@ class CRenderBuffer;
 class QKeyEvent;
 class QMouseEvent;
 
-class RenderGlWidget : public RenderGlBaseWidget, public IGoTvRender
+class RenderGlWidget : public QOpenGLWidget, public IGoTvRender, public QOpenGLFunctions
 {
 	Q_OBJECT
 public:
     static const int MAX_RENDER_PLANES = 3;
     static const int MAX_VISIBLE_OVERLAYS = 4;
 
-	RenderGlWidget( QWidget *parent=0 );
-    virtual ~RenderGlWidget( );
+    typedef struct
+    {
+        GLenum                  m_Target;
+        GLint                   m_InternalFormat;
+        GLenum                  m_Format;
+        GLenum                  m_Type;
+    } GlTextureDescriptor;
 
-    void                        onInitializeGL( void ) override;
-    void                        onPaintGL( void ) override;
-    void                        onResizeGL(  int w, int h  ) override;
+    typedef struct
+    {
+        GLsizei                 m_Width;
+        GLsizei                 m_Height;
+    } GlTextureSize;
+
+    RenderGlWidget( QWidget *parent=0 );
+    virtual ~RenderGlWidget( ) override;
+
+#ifdef DEBUG
+    void VerifyGLStateQtDbg( const char* szfile, const char* szfunction, int lineno );
+#  define VerifyGLStateQt() VerifyGLStateQtDbg(__FILE__, __FUNCTION__, __LINE__)
+#else
+    void VerifyGLStateQt();
+#endif
+
+    AppCommon&				    getMyApp() { return  m_MyApp; }
+    QOpenGLFunctions *          getGlFunctions() { return m_GlWidgetFunctions; }
+
+    virtual void                initializeGL( void ) override;
+    virtual void                paintGL( void ) override;
+    virtual void                resizeGL(  int w, int h  ) override;
+
+    //! ignore from kodi
+    void                        initialiseShaders() override;
+    //! ignore from kodi
+    void                        releaseShaders() override;
+
+    bool                        enableShader( ESHADERMETHOD method ) override;
+    bool                        isShaderValid( ESHADERMETHOD method ) override;
+    void                        disableShader( ESHADERMETHOD method ) override;
+    void                        disableGUIShader() override;
+
+    int                         shaderGetPos()  override;
+    int                         shaderGetCol()  override;
+    int                         shaderGetModel()  override;
+    int                         shaderGetCoord0()  override;
+    int                         shaderGetCoord1()  override;
+    int                         shaderGetUniCol()  override;
+
+    // yuv shader
+    virtual void                shaderSetField( ESHADERMETHOD shader, int field )   override;
+    virtual void                shaderSetWidth( ESHADERMETHOD shader, int w )   override;
+    virtual void                shaderSetHeight( ESHADERMETHOD shader, int h )  override;
+
+    virtual void                shaderSetBlack( ESHADERMETHOD shader, float black ) override;
+    virtual void                shaderSetContrast( ESHADERMETHOD shader, float contrast ) override;
+    virtual void                shaderSetConvertFullColorRange( ESHADERMETHOD shader, bool convertFullRange ) override;
+
+    virtual int                 shaderGetVertexLoc( ESHADERMETHOD shader ) override;
+    virtual int                 shaderGetYcoordLoc( ESHADERMETHOD shader ) override;
+    virtual int                 shaderGetUcoordLoc( ESHADERMETHOD shader ) override;
+    virtual int                 shaderGetVcoordLoc( ESHADERMETHOD shader ) override;
+
+    virtual void                shaderSetMatrices( ESHADERMETHOD shader, const float *p, const float *m ) override;
+    virtual void                shaderSetAlpha( ESHADERMETHOD shader, float alpha ) override;
+
+    virtual void                shaderSetFlags( ESHADERMETHOD shader, unsigned int flags ) override;
+    virtual void                shaderSetFormat( ESHADERMETHOD shader, EShaderFormat format ) override;
+    virtual void                shaderSourceTexture( ESHADERMETHOD shader, int ytex ) override;
+    virtual void                shaderSetStepX( ESHADERMETHOD shader, float stepX ) override;
+    virtual void                shaderSetStepY( ESHADERMETHOD shader, float stepY )  override;
+
+    // filter shader
+    virtual bool                shaderGetTextureFilter( ESHADERMETHOD shader, int& filter ) override;
+    virtual int                 shaderGetcoordLoc( ESHADERMETHOD shader ) override;
+
+    // renderqt
+    virtual int                 shaderVertexAttribPointer( ESHADERMETHOD shader, unsigned int index, int size, int type, bool normalized, int stride, const void * pointer ) override;
+    virtual void                shaderEnableVertexAttribArray( ESHADERMETHOD shader, int arrayId ) override;
+    virtual void                shaderDisableVertexAttribArray( ESHADERMETHOD shader, int arrayId ) override;
 
 	// resizing window
 	virtual void				onResizeBegin( QSize& newSize );
@@ -85,11 +158,12 @@ public:
     bool                        beginRender() override;
     bool                        endRender() override;
     void                        presentRender( bool rendered, bool videoLayer ) override;
+
     bool                        clearBuffers( GoTvColor color ) override;
     bool                        isExtSupported( const char* extension ) override;
 
-    void                        setVSync( bool vsync );
-    void                        resetVSync() {  }
+    void                        setVSync( bool vsync ) override;
+    void                        resetVSync() override {  }
 
     void                        setViewPort( const GoTvRect& viewPort ) override;
     void                        getViewPort( GoTvRect& viewPort ) override;
@@ -106,61 +180,13 @@ public:
 
     void                        applyHardwareTransform( const TransformMatrix &matrix ) override;
     void                        restoreHardwareTransform() override;
-    bool                        supportsStereo( RENDER_STEREO_MODE mode ) const { return false; }
+    bool                        supportsStereo( RENDER_STEREO_MODE /*mode*/ ) const override { return false; }
 
     bool                        testRender() override;
 
     void                        project( float &x, float &y, float &z ) override;
 
-    std::string                 getShaderPath( const std::string &filename ) override { return ""; }
 
-    void                        initShaders() override;
-
-    void                        initialiseShaders() override;
-    void                        releaseShaders() override;
-    bool                        enableShader( ESHADERMETHOD method ) override;
-    bool                        isShaderValid( ESHADERMETHOD method ) override;
-    void                        disableShader( ESHADERMETHOD method ) override;
-    void                        disableGUIShader() override;
-
-    int                         shaderGetPos()  override;
-    int                         shaderGetCol()  override;
-    int                         shaderGetModel()  override;
-    int                         shaderGetCoord0()  override;
-    int                         shaderGetCoord1()  override;
-    int                         shaderGetUniCol()  override;
-
-    // yuv shader
-    virtual void                shaderSetField( ESHADERMETHOD shader, int field )   override;
-    virtual void                shaderSetWidth( ESHADERMETHOD shader, int w )   override;
-    virtual void                shaderSetHeight( ESHADERMETHOD shader, int h )  override;
-
-    virtual void                shaderSetBlack( ESHADERMETHOD shader, float black ) override;
-    virtual void                shaderSetContrast( ESHADERMETHOD shader, float contrast ) override;
-    virtual void                shaderSetConvertFullColorRange( ESHADERMETHOD shader, bool convertFullRange ) override;
-
-    virtual int                 shaderGetVertexLoc( ESHADERMETHOD shader ) override;
-    virtual int                 shaderGetYcoordLoc( ESHADERMETHOD shader ) override;
-    virtual int                 shaderGetUcoordLoc( ESHADERMETHOD shader ) override;
-    virtual int                 shaderGetVcoordLoc( ESHADERMETHOD shader ) override;
-
-    virtual void                shaderSetMatrices( ESHADERMETHOD shader, const float *p, const float *m ) override;
-    virtual void                shaderSetAlpha( ESHADERMETHOD shader, float alpha ) override;
-
-    virtual void                shaderSetFlags( ESHADERMETHOD shader, unsigned int flags ) override;
-    virtual void                shaderSetFormat( ESHADERMETHOD shader, EShaderFormat format ) override;
-    virtual void                shaderSourceTexture( ESHADERMETHOD shader, int ytex ) override;
-    virtual void                shaderSetStepX( ESHADERMETHOD shader, float stepX ) override;
-    virtual void                shaderSetStepY( ESHADERMETHOD shader, float stepY )  override;
-
-    // filter shader
-    virtual bool                shaderGetTextureFilter( ESHADERMETHOD shader, int& filter ) override;
-    virtual int                 shaderGetcoordLoc( ESHADERMETHOD shader ) override;
-
-    // renderqt
-    virtual int                 shaderVertexAttribPointer( ESHADERMETHOD shader, unsigned int index, int size, int type, bool normalized, int stride, const void * pointer ) override;
-    virtual void                shaderEnableVertexAttribArray( ESHADERMETHOD shader, int arrayId ) override;
-    virtual void                shaderDisableVertexAttribArray( ESHADERMETHOD shader, int arrayId ) override;
 
     // frame buffers
     virtual void                frameBufferGen( int bufCount, unsigned int* fboId ) override;
@@ -169,43 +195,63 @@ public:
     virtual void                frameBufferBind( unsigned int fboId ) override;
     virtual bool                frameBufferStatus() override;
 
-protected slots:
+    void                        onThreadFrameRendered() { emit signalFrameRendered(); }
+
+signals:
+    void                        signalFrameRendered();
+
+public slots:
 	void						slotResizeWindowTimeout();
+    void                        slotOnFrameRendered();
 
 protected:
+    void                        paintEvent(QPaintEvent *) override { }
 
-    virtual void				mousePressEvent( QMouseEvent * ev );
-    virtual void				mouseReleaseEvent( QMouseEvent * ev );
-    virtual void                mouseMoveEvent( QMouseEvent * ev );
+    virtual void				showEvent( QShowEvent * ev ) override;
+    virtual void				hideEvent( QHideEvent * ev ) override;
+    virtual void				closeEvent( QCloseEvent * ev ) override;
+    virtual void                resizeEvent( QResizeEvent * ev ) override;
 
-    virtual void                keyPressEvent( QKeyEvent * ev );
-    virtual void                keyReleaseEvent( QKeyEvent * ev );
+    virtual void				mousePressEvent( QMouseEvent * ev ) override;
+    virtual void				mouseReleaseEvent( QMouseEvent * ev ) override;
+    virtual void                mouseMoveEvent( QMouseEvent * ev ) override;
 
-    void                        compileShader( int shaderIdx );
+    virtual void                keyPressEvent( QKeyEvent * ev ) override;
+    virtual void                keyReleaseEvent( QKeyEvent * ev ) override;
+
     void                        initTextures();
+    void                        initColorMatrix();
+    void                        initYv12();
 
     //=== vars ===//
+    AppCommon&				    m_MyApp;
     EventsQtToGoTv              m_QtToKodi;
+    RenderGlLogic               m_RenderLogic;
 
     bool                        m_RenderWidgetInited;
     GLuint                      m_TextureIds[ MAX_RENDER_PLANES ];
     GlTextureSize               m_TexSize[ MAX_RENDER_PLANES ];
-    bool                        m_TexturesInited;
+    bool                        m_TexturesInited = false;
+    GlTextureDescriptor         m_TexDescriptor;
+    int                         m_MaxTextureSize = 2048;
 
-    GoTvRenderFrame *            m_Frame;
-
-    // shaders
-    ShaderQt *                  m_Shaders[ SM_MAX ];
-    bool                        m_ShadersInited;
-    ESHADERMETHOD               m_CurShaderMethodType;
+    GoTvRenderFrame *            m_Frame = nullptr;
 
     // render
-    int                         m_SrcWidth;
-    int                         m_SrcHeight;
+    int                         m_SrcWidth = 320;
+    int                         m_SrcHeight = 240;
     GLint                       m_viewPort[ 4 ];
 
 	// sizing window
-	QTimer *					m_ResizingTimer;
+    QSize                       m_ScreenSize;
+    QSize						m_ResizingWindowSize;
+
+    QTimer *					m_ResizingTimer = nullptr;
 	bool						m_IsResizing = false;
-	QSize						m_ResizingWindowSize;
+
+
+    QOpenGLFunctions *          m_GlWidgetFunctions = nullptr;
+
+
+    QMatrix4x4                  m_ColorMatrix;
 };

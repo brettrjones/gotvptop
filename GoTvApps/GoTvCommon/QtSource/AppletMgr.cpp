@@ -168,7 +168,7 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 
         m_AppletList.push_back( appletDialog );
         appletDialog->aboutToLaunchApplet();
-		appletDialog->show();
+        appletDialog->show();
 	}
 }
 

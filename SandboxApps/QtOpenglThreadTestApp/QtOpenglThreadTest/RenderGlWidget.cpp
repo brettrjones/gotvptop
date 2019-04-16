@@ -3,12 +3,37 @@
 #include "RenderGlOffScreenSurface.h"
 
 #include <QPainter>
+#include <GL/glu.h>
+#include <VxDebug.h>
+
+//============================================================================
+#ifdef DEBUG
+void  RenderGlWidget::VerifyGLStateQtDbg( const char* szfile, const char* szfunction, int lineno )
+{
+    GLenum err = glGetError();
+    if( err == GL_NO_ERROR )
+        return;
+    LogMsg( LOG_ERROR, "GL ERROR: %d\n", err );
+    if( szfile && szfunction )
+    {
+       LogMsg( LOG_ERROR, "In file:%s function:%s line:%d", szfile, szfunction, lineno );
+    }
+
+}
+#else
+void RenderGlWidget::VerifyGLStateQt()
+{
+    GLenum err = glGetError();
+    if( err == GL_NO_ERROR )
+        return;
+    LogMsg( LOG_ERROR, "GL ERROR: %s\n", gluErrorString( err ) );
+}
+#endif
 
 //============================================================================
 RenderGlWidget::RenderGlWidget(QWidget *parent)
 : QOpenGLWidget(parent)
 {
-
     m_RendererLogic = new RenderGlLogic( *this );
     m_RendererGlThread = new RenderGlThread( *m_RendererLogic );
     m_RendererLogic->setRenderThread( m_RendererGlThread );
@@ -17,10 +42,10 @@ RenderGlWidget::RenderGlWidget(QWidget *parent)
 
     connect( m_RendererLogic, SIGNAL( signalFrameRendered() ), this, SLOT( slotOnFrameRendered() ) );
  
-    connect(this, &QOpenGLWidget::aboutToCompose, this, &RenderGlWidget::onAboutToCompose);
-    connect(this, &QOpenGLWidget::frameSwapped, this, &RenderGlWidget::onFrameSwapped);
-    connect(this, &QOpenGLWidget::aboutToResize, this, &RenderGlWidget::onAboutToResize);
-    connect(this, &QOpenGLWidget::resized, this, &RenderGlWidget::onResized);
+//    connect(this, &QOpenGLWidget::aboutToCompose, this, &RenderGlWidget::onAboutToCompose);
+//    connect(this, &QOpenGLWidget::frameSwapped, this, &RenderGlWidget::onFrameSwapped);
+//    connect(this, &QOpenGLWidget::aboutToResize, this, &RenderGlWidget::onAboutToResize);
+//    connect(this, &QOpenGLWidget::resized, this, &RenderGlWidget::onResized);
 
     updateColor();
 }
@@ -67,26 +92,17 @@ void RenderGlWidget::onResized()
 }
 
 //============================================================================
-void RenderGlWidget::grabContext()
-{
-    m_RendererLogic->lockRenderer();
-    QMutexLocker lock(m_RendererLogic->grabMutex());
-    m_RendererLogic->grabCond()->wakeAll();
-    m_RendererLogic->unlockRenderer();
-}
-
-//============================================================================
 void RenderGlWidget::initializeGL()
 {
-    m_WidgetContext = this->context();
     initializeOpenGLFunctions();
+    m_WidgetContext = this->context();
 
     m_GlWidgetFunctions = m_WidgetContext->functions();
     Q_ASSERT( m_GlWidgetFunctions );
     m_GlWidgetFunctions->initializeOpenGLFunctions();
 
     m_RenderThreadGlContext = new QOpenGLContext;
-    m_RenderThreadGlContext->setShareContext( m_WidgetContext );
+    m_RenderThreadGlContext->setShareContext( m_WidgetContext ); // required or just get white logo with no animation
     m_RenderThreadGlContext->setFormat( m_WidgetContext->format() );
     m_RenderThreadGlContext->create();
 
@@ -101,6 +117,7 @@ void RenderGlWidget::initializeGL()
 
     m_RendererLogic->glWidgetInitialized( m_WidgetContext, m_RenderThreadGlContext, m_RenderThreadSurface );
     m_WidgetGlInitialized = true;
+    doneCurrent();
 }
 
 //============================================================================

@@ -2,6 +2,15 @@
 QT       += core gui opengl widgets svg
 
 DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MULTIMEDIA_LIB
+win32:{
+DEFINES += TARGET_OS_WINDOWS
+}
+unix:!android:{
+DEFINES += TARGET_OS_LINUX
+}
+android:{
+DEFINES += TARGET_OS_ANDROID
+}
 
 TARGET = QtOpenglThreadTestApp
 TEMPLATE = app
@@ -18,8 +27,12 @@ SOURCES += \
     $$PWD/QtOpenglThreadTest/RenderGlWidget.cpp \
     $$PWD/QtOpenglThreadTest/RenderGlOffScreenSurface.cpp \
     $$PWD/QtOpenglThreadTest/LogoRenderer.cpp \
+    $$PWD/QtOpenglThreadTest/RenderLogoShaders.cpp \
+    $$PWD/QtOpenglThreadTest/RenderGlShaders.cpp \
+    $$PWD/QtOpenglThreadTest/RenderShaderQt.cpp \
     $$PWD/QtOpenglThreadTest/RenderGlLogic.cpp \
-    QtOpenglThreadTest/RenderGlShaders.cpp
+    $$PWD/QtOpenglThreadTest/VxDebug.cpp \
+    $$PWD/QtOpenglThreadTest/RenderShaderDefsGl.cpp
 
 HEADERS += \
         $$PWD/QtOpenglThreadTest/mainwindow.h \
@@ -28,8 +41,11 @@ HEADERS += \
     $$PWD/QtOpenglThreadTest/RenderGlOffScreenSurface.h \
     $$PWD/QtOpenglThreadTest/GlTestCommon.h \
     $$PWD/QtOpenglThreadTest/LogoRenderer.h \
+    $$PWD/QtOpenglThreadTest/RenderLogoShaders.h \
+    $$PWD/QtOpenglThreadTest/RenderGlShaders.h \
+    $$PWD/QtOpenglThreadTest/RenderShaderQt.h \
     $$PWD/QtOpenglThreadTest/RenderGlLogic.h \
-    QtOpenglThreadTest/RenderGlShaders.h
+    $$PWD/QtOpenglThreadTest/VxDebug.h
 
 FORMS += \
         $$PWD/QtOpenglThreadTest/mainwindow.ui

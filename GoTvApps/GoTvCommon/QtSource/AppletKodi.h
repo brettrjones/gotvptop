@@ -64,9 +64,9 @@ protected:
 
     void                        setupBottomMenu( VxMenuButton * menuButton );
 
-	void						showEvent( QShowEvent * ev );
-    void						hideEvent( QHideEvent * ev );
-	void						resizeEvent( QResizeEvent * ev );
+    void						showEvent( QShowEvent * ev ) override;
+    void						hideEvent( QHideEvent * ev ) override;
+    void						resizeEvent( QResizeEvent * ev ) override;
 
 	void						setReadyForCallbacks( bool isReady );
 	//void						updateGuiPlayControls( bool isPlaying );

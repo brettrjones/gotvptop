@@ -1,48 +1,20 @@
 #include "RenderGlShaders.h"
 #include "RenderShaderQt.h"
 
-#include <VxDebug.h>
+#include <CoreLib/VxDebug.h>
 
 #include <QDebug>
 #include <QTimer>
 #include <QFile>
 
-#include <GL/glu.h>
-
 #define SHADERS_INCLUDE
 #include "RenderShaderDefsGl.cpp"
-//#include "RenderShaderDefsGlES.cpp"
 
 //============================================================================
 RenderGlShaders::RenderGlShaders( RenderGlWidget& renderGlWidget )
 : m_RenderGlWidget( renderGlWidget )
 {
-
 }
-
-//============================================================================
-#ifdef DEBUG
-void  RenderGlShaders::VerifyGLStateQtDbg( const char* szfile, const char* szfunction, int lineno )
-{
-    GLenum err = glGetError();
-    if( err == GL_NO_ERROR )
-        return;
-    LogMsg( LOG_ERROR, "GL ERROR: %d\n", err );
-    if( szfile && szfunction )
-    {
-       LogMsg( LOG_ERROR, "In file:%s function:%s line:%d", szfile, szfunction, lineno );
-    }
-
-}
-#else
-void RenderGlShaders::VerifyGLStateQt()
-{
-    GLenum err = glGetError();
-    if( err == GL_NO_ERROR )
-        return;
-    LogMsg( LOG_ERROR, "GL ERROR: %s\n", gluErrorString( err ) );
-}
-#endif
 
 //============================================================================
 void RenderGlShaders::compileShader( int shaderIdx )
@@ -126,18 +98,6 @@ void RenderGlShaders::destroyShaders()
 
         m_ShadersInited = false;
     }
-}
-
-//============================================================================
-void RenderGlShaders::initialiseShaders()
-{
-    // ignore from kodi
-}
-
-//============================================================================
-void RenderGlShaders::releaseShaders()
-{
-    // ignore from kodi
 }
 
 //============================================================================
@@ -515,5 +475,29 @@ void RenderGlShaders::shaderDisableVertexAttribArray( ESHADERMETHOD shader, int 
 
     VerifyGLStateQt();
 }
+
+//============================================================================
+#ifdef DEBUG
+void  RenderGlShaders::VerifyGLStateQtDbg( const char* szfile, const char* szfunction, int lineno )
+{
+    GLenum err = glGetError();
+    if( err == GL_NO_ERROR )
+        return;
+    LogMsg( LOG_ERROR, "GL ERROR: %d\n", err );
+    if( szfile && szfunction )
+    {
+       LogMsg( LOG_ERROR, "In file:%s function:%s line:%d", szfile, szfunction, lineno );
+    }
+
+}
+#else
+void RenderGlShaders::VerifyGLStateQt()
+{
+    GLenum err = glGetError();
+    if( err == GL_NO_ERROR )
+        return;
+    LogMsg( LOG_ERROR, "GL ERROR: %s\n", gluErrorString( err ) );
+}
+#endif
 
 

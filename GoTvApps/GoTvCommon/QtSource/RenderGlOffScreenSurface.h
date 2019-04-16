@@ -20,8 +20,8 @@
 #include <atomic>
 #include <mutex>
 
-class RenderGlBaseWidget;
-class KodiThread;
+class RenderGlWidget;
+class RenderKodiThread;
 
 class RenderGlOffScreenSurface : public QOffscreenSurface
 {
@@ -34,8 +34,8 @@ public:
     /// this is because before the FBO and off-screen surface haven't been created.
     /// By default this uses the QWindow::requestedFormat() for OpenGL context and off-screen
     /// surface.
-    explicit RenderGlOffScreenSurface(	KodiThread* kodiThread,
-										RenderGlBaseWidget * glWidget,
+    explicit RenderGlOffScreenSurface(	RenderKodiThread* kodiThread,
+                                        RenderGlWidget * glWidget,
 										QOpenGLContext* renderContext, 
 										QScreen* targetScreen = nullptr, 
 										const QSize& size = QSize( 1, 1 ) );
@@ -47,24 +47,50 @@ public:
     /// @return Returns true if context, surface and FBO have been set up to start rendering.
     bool                        isValid() const;
 
+    /// @brief set target surface size.. will recreate FrameBufferObject and paint object in next render pass
+    void                        setSurfaceSize( QSize surfaceSize );
+
+    /// @brief Use getSurfaceSize() instead size() for get a size of a surface buffer. We can't override size() as it is not virtual.
+    QSize                       getSurfaceSize();
+
+    /// @brief same as getSurfaceSize but no mutex lock
+    QSize                       bufferSize() const;
+
     /// @brief get context that was setup by main gui thread
-    QOpenGLContext*             getRenderContext( )                                     { return m_RenderContext; }
+    QOpenGLContext*             getGuiRenderContext( )         { return m_RenderGuiContext; }
 
-	/// @brief kodi initialize from thread
-	void						startupKodiRenderSystem();
+    /// @brief get context for render thread
+    QOpenGLContext*             getThreadRenderContext()        { return m_RenderThreadContext; }
 
-	/// @brief kodi is shutting down
-	void						shutdownKodiRenderSystem();
+    /// @brief render initialize from thread
+    virtual void				initRenderGlSystem();
+
+	/// @brief render is shutting down
+    virtual void				destroyRenderGlSystem();
 
     /// @brief begin render from thread
-    bool                        beginRender( );
+    bool                        beginRenderGl( );
 
     /// @brief end render from thread
-    void                        presentRender( bool rendered, bool videoLayer );
+    bool                        endRenderGl();
 
     /// @brief end render from thread
-    bool                        endRender( );
+    void                        presentRenderGl( bool rendered, bool videoLayer );
 
+    /// @brief Makes the OpenGL context current for rendering.
+    /// @note Make sure to bindFramebufferObject() if you want to render to this widgets FBO.
+    void                        makeCurrent();
+
+    /// @brief Release the OpenGL context.
+    void                        doneCurrent();
+
+    /// @brief get last frame capture
+    QImage&                     getLastRenderedImage()      { return m_FrameImage; }
+
+    /// @brief must be called from render thread
+    void                        setRenderFunctions( QOpenGLFunctions * glFunctions );
+
+protected:
 
     /// @brief Return the OpenGL function object that can be used the issue OpenGL commands.
     /// @return The functions for the context or nullptr if it the context hasn't been created yet.
@@ -93,13 +119,6 @@ public:
     /// @return FBO content as 32bit QImage. You might need to swap RGBA to BGRA or vice-versa.
     QImage                      grabFramebuffer();
 
-    /// @brief Makes the OpenGL context current for rendering.
-    /// @note Make sure to bindFramebufferObject() if you want to render to this widgets FBO.
-    void                        makeCurrent();
-
-    /// @brief Release the OpenGL context.
-    void                        doneCurrent();
-
     /// @brief Copy content of framebuffer to back buffer and swap buffers if the surface is
     /// double-buffered.
     /// If the surface is not double-buffered, the frame buffer content is blitted to the front
@@ -108,27 +127,11 @@ public:
     /// be read back.
     void                        swapBuffers();
 
-    /// @brief Use bufferSize() instead size() for get a size of a surface buffer. We can't override size() as it is not virtual.
-    QSize                       bufferSize() const;
-
-    /// @brief Resize surface buffer to newSize.
-    void                        resize( const QSize& newSize );
-
-    /// @brief Resize surface buffer to size with width w and height h.
-    /// @param w Width.
-    /// @param h Height.
-    void                        resize( int w, int h );
-
     /// @brief  change surface size in thread if required
     void                        checkForSizeChange();
 
-    /// @brief get last frame capture
-    QImage&                     getLastRenderedImage()      { return m_FrameImage; }
-
 	/// @brief return true if has been initialized from kodi thread
 	bool						isReadyForRender();
-
-	void                        glWidgetWasResized( QSize newWindowSize );
 
 public slots:
     /// @brief Lazy update routine like QWidget::update().
@@ -137,40 +140,15 @@ public slots:
     /// @brief Immediately render the widget contents to framebuffer.
     void                        render( );
 
-    void                        slotGlResized( int w, int h );
-
 signals:
     /// @brief Emitted when swapBuffers() was called and bufferswapping is done.
     void                        frameSwapped();
 
-    /// @brief Emitted after a resizeEvent().
-    void                        resized();
-
 protected:
-
-	/// @brief must be called from render thread
-	void                        setRenderFunctions( QOpenGLFunctions * glFunctions );
-
 	virtual void                exposeEvent( QExposeEvent* e );
-    virtual void                resizeEvent( QResizeEvent* e );
     virtual bool                event( QEvent* e ) override;
 
     //    virtual int metric(QPaintDevice::PaintDeviceMetric metric) const override;
-
-        /// @brief Called exactly once when the window is first exposed OR render() is called when the
-        /// widget is invisible.
-        /// @note After this the off-screen surface and FBO are available.
-    virtual void                initializeGL();
-
-    /// @brief Called whenever the window size changes.
-    /// @param width New window width.
-    /// @param height New window height.
-    virtual void                resizeGL( int width, int height );
-
-    /// @brief Called whenever the window needs to repaint itself. Override to draw OpenGL content.
-    /// When this function is called, the context is already current and the correct framebuffer is
-    /// bound.
-    virtual void                paintGL( );
 
     //      /// @brief Called whenever the window needs to repaint itself. Override to draw QPainter
     // content.
@@ -187,9 +165,6 @@ private:
     /// @brief Internal method that does the actual swap work, NOT using a mutex.
     void                        swapBuffersInternal();
 
-    /// @brief Internal method that checks state and makes the context current, NOT using a mutex.
-    void                        makeCurrentInternal();
-
     /// @brief Internal method to grab content of a specific framebuffer.
     QImage                      grabFramebufferInternal( QOpenGLFramebufferObject* fbo );
 
@@ -201,9 +176,15 @@ private:
 
 	//=== vars ===//
 	/// @brief kodi thread
-	KodiThread*					m_KodiThread;
+    RenderKodiThread*			m_KodiThread;
 
-    RenderGlBaseWidget *        m_GlWidget;
+    RenderGlWidget *            m_GlWidget = nullptr;
+
+    /// @brief OpenGL render context.
+    QOpenGLContext*             m_RenderGuiContext = nullptr;
+
+    /// @brief OpenGL render context.
+    QOpenGLContext*             m_RenderThreadContext = nullptr;
 
     /// @brief Mutex making sure not grabbing while drawing etc.
     std::mutex                  m_mutex;
@@ -214,14 +195,11 @@ private:
     /// @brief False before the overridden initializeGL() was first called.
     bool                        m_initializedGL = false;
 
-	/// @brief false before kodi called initKodiRenderSystem
-	bool                        m_KodiInitialized = false;
+	/// @brief false before thread called initRenderSystem
+	bool                        m_RenderSystemInitialized = false;
 
     /// @brief True when currently a window update is pending.
     std::atomic_bool            m_updatePending;
-
-    /// @brief OpenGL render context.
-    QOpenGLContext*             m_RenderContext = nullptr;
 
     /// @brief The OpenGL 2.1 / ES 2.0 function object that can be used the issue OpenGL commands.
     QOpenGLFunctions*           m_functions = nullptr;

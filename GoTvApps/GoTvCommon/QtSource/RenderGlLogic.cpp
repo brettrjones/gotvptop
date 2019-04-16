@@ -1,66 +1,58 @@
 #include "RenderGlLogic.h"
-#include "RenderGlWidget.h"
+#include "RenderKodiThread.h"
 #include "RenderGlOffScreenSurface.h"
-
-#include <QOpenGLContext>
-#include <QOpenGLFunctions>
-#include <QRandomGenerator>
-#include <QSurface>
-#include <qmath.h>
-#include <QTimer>
+#include "RenderGlWidget.h"
 
 //============================================================================
 RenderGlLogic::RenderGlLogic( RenderGlWidget& renderWidget )
-: m_RenderWidget( renderWidget )
-, m_RenderShaders( renderWidget )
-, m_LogoRenderer( m_RenderShaders )
+: RenderGlShaders( renderWidget )
+, m_RenderWidget( renderWidget )
+, m_RenderKodiThread( new RenderKodiThread( nullptr ) )
 {
-    m_backgroundColor = QColor::fromRgbF(0.1f, 0.1f, 0.2f, 1.0f);
-    m_backgroundColor.setRed(QRandomGenerator::global()->bounded(64));
-    m_backgroundColor.setGreen(QRandomGenerator::global()->bounded(128));
-    m_backgroundColor.setBlue(QRandomGenerator::global()->bounded(256)); 
+
 }
 
 //============================================================================
 void RenderGlLogic::aboutToDestroy()
 {
     setRenderThreadShouldRun( false );
-    if( m_RenderThread )
+    if( m_RenderKodiThread )
     {
-        m_RenderThread->quit(); // some platforms may not have windows to close so ensure quit()
-        m_RenderThread->wait();
-        delete m_RenderThread;
+        m_RenderKodiThread->quit(); // some platforms may not have windows to close so ensure quit()
+        m_RenderKodiThread->wait();
+        delete m_RenderKodiThread;
     }
- }
+}
 
 //============================================================================
 void RenderGlLogic::setRenderThreadShouldRun( bool shouldRun )
 {
-    if( m_RenderThread )
+    if( m_RenderKodiThread )
     {
-        m_RenderThread->setRenderThreadShouldRun( shouldRun );
+        m_RenderKodiThread->setRenderThreadShouldRun( shouldRun );
     }
 }
 
 //============================================================================
 //! called from gui thread when ready for opengl rendering
-void RenderGlLogic::glWidgetInitialized( QOpenGLContext * widgetGlContext, QOpenGLContext * threadGlContext, RenderGlOffScreenSurface * renderSurface )
+void RenderGlLogic::glWidgetInitialized( )
 {
-    m_WidgetGlContext = widgetGlContext;
-    m_ThreadGlContext = threadGlContext;
-    m_OffScreenSurface = renderSurface;
 
-    // shader initialize must be done in gui thread
-    //m_RenderShaders.setGlContext( widgetGlContext );
-    m_RenderShaders.initLogoShaders();
-
-    if( m_RenderThread )
+    if( m_RenderKodiThread )
     {
-        moveToThread( m_RenderThread );
-        m_ThreadGlContext->moveToThread( m_RenderThread );
-        m_OffScreenSurface->moveToThread( m_RenderThread );
+        m_OffScreenSurface = new RenderGlOffScreenSurface( m_RenderKodiThread, &m_RenderWidget, m_WidgetGlContext ); // BRJ geometry not set at this point nullptr, geometry().size() );
+        m_OffScreenSurface->setFormat( m_ThreadGlContext->format() );
+        m_OffScreenSurface->create();
+        m_OffScreenSurface->setRenderFunctions( m_GlThreadFunctions );
 
-        m_RenderThread->start();
+        // shader initialize must be done in gui thread
+        initShaders();
+
+        m_RenderWidget.moveToThread( m_RenderKodiThread );
+        m_ThreadGlContext->moveToThread( m_RenderKodiThread );
+        m_OffScreenSurface->moveToThread( m_RenderKodiThread );
+
+        m_RenderKodiThread->start();
     }
 }
 
@@ -80,7 +72,7 @@ void RenderGlLogic::render()
     QMutexLocker locker(&m_renderMutex);
 
     m_OffScreenSurface->makeCurrent();
-  
+
     // do not call m_OffScreenSurface->size.. we want the frame buffer surface size
     QSize viewSize = m_OffScreenSurface->getSurfaceSize();
 
@@ -93,8 +85,10 @@ void RenderGlLogic::render()
 
     glViewport( 0, 0, viewSize.width(), viewSize.height() );
 
-    m_LogoRenderer.render();
+    //m_LogoRenderer.render();
 }
+
+Q_GLOBAL_STATIC(QMutex, initMutex)
 
 //============================================================================
 bool RenderGlLogic::initRenderGlSystem()
@@ -102,7 +96,7 @@ bool RenderGlLogic::initRenderGlSystem()
     if( m_OffScreenSurface )
     {
         m_OffScreenSurface->initRenderGlSystem();
-        m_LogoRenderer.initialize();
+        //m_LogoRenderer.initialize();
     }
 
     return true;
@@ -124,6 +118,22 @@ bool RenderGlLogic::beginRenderGl()
 {
     if( m_OffScreenSurface )
     {
+        QMutexLocker locker(&m_renderMutex);
+
+        m_OffScreenSurface->makeCurrent();
+
+        // do not call m_OffScreenSurface->size.. we want the frame buffer surface size
+        QSize viewSize = m_OffScreenSurface->getSurfaceSize();
+
+        locker.unlock();
+
+        if (!m_initialized) {
+            //initialize();
+            m_initialized = true;
+        }
+
+        glViewport( 0, 0, viewSize.width(), viewSize.height() );
+
         m_OffScreenSurface->beginRenderGl();
     }
 
@@ -149,7 +159,7 @@ void RenderGlLogic::presentRenderGl( bool rendered, bool videoLayer )
     if( m_OffScreenSurface )
     {
         m_OffScreenSurface->presentRenderGl( rendered, videoLayer );
-        emit signalFrameRendered();
+        m_RenderWidget.onThreadFrameRendered();
     }
 }
- 
+

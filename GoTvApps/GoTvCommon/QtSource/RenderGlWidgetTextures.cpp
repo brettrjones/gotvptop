@@ -37,100 +37,100 @@ void RenderGlWidget::setActiveGlTexture( unsigned int activeTextureNum )
     switch( activeTextureNum )
     {
     case 0:
-        m_GlF->glActiveTexture( GL_TEXTURE0 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE0 );
         break;
     case 1:
-        m_GlF->glActiveTexture( GL_TEXTURE1 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE1 );
         break;
     case 2:
-        m_GlF->glActiveTexture( GL_TEXTURE2 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE2 );
         break;
     case 3:
-        m_GlF->glActiveTexture( GL_TEXTURE3 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE3 );
         break;
     case 4:
-        m_GlF->glActiveTexture( GL_TEXTURE4 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE4 );
         break;
     case 5:
-        m_GlF->glActiveTexture( GL_TEXTURE5 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE5 );
         break;
     case 6:
-        m_GlF->glActiveTexture( GL_TEXTURE6 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE6 );
         break;
     case 7:
-        m_GlF->glActiveTexture( GL_TEXTURE7 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE7 );
         break;
     case 8:
-        m_GlF->glActiveTexture( GL_TEXTURE8 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE8 );
         break;
     case 9:
-        m_GlF->glActiveTexture( GL_TEXTURE9 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE9 );
         break;
     case 10:
-        m_GlF->glActiveTexture( GL_TEXTURE10 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE10 );
         break;
     case 11:
-        m_GlF->glActiveTexture( GL_TEXTURE11 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE11 );
         break;
     case 12:
-        m_GlF->glActiveTexture( GL_TEXTURE12 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE12 );
         break;
     case 13:
-        m_GlF->glActiveTexture( GL_TEXTURE13 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE13 );
         break;
     case 14:
-        m_GlF->glActiveTexture( GL_TEXTURE14 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE14 );
         break;
     case 15:
-        m_GlF->glActiveTexture( GL_TEXTURE15 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE15 );
         break;
     case 16:
-        m_GlF->glActiveTexture( GL_TEXTURE16 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE16 );
         break;
     case 17:
-        m_GlF->glActiveTexture( GL_TEXTURE17 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE17 );
         break;
     case 18:
-        m_GlF->glActiveTexture( GL_TEXTURE18 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE18 );
         break;
     case 19:
-        m_GlF->glActiveTexture( GL_TEXTURE19 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE19 );
         break;
     case 20:
-        m_GlF->glActiveTexture( GL_TEXTURE20 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE20 );
         break;
     case 21:
-        m_GlF->glActiveTexture( GL_TEXTURE21 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE21 );
         break;
     case 22:
-        m_GlF->glActiveTexture( GL_TEXTURE22 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE22 );
         break;
     case 23:
-        m_GlF->glActiveTexture( GL_TEXTURE23 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE23 );
         break;
     case 24:
-        m_GlF->glActiveTexture( GL_TEXTURE24 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE24 );
         break;
     case 25:
-        m_GlF->glActiveTexture( GL_TEXTURE25 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE25 );
         break;
     case 26:
-        m_GlF->glActiveTexture( GL_TEXTURE26 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE26 );
         break;
     case 27:
-        m_GlF->glActiveTexture( GL_TEXTURE27 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE27 );
         break;
     case 28:
-        m_GlF->glActiveTexture( GL_TEXTURE28 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE28 );
         break;
     case 29:
-        m_GlF->glActiveTexture( GL_TEXTURE29 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE29 );
         break;
     case 30:
-        m_GlF->glActiveTexture( GL_TEXTURE30 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE30 );
         break;
     case 31:
-        m_GlF->glActiveTexture( GL_TEXTURE31 );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE31 );
         break;
     default:
         LogMsg( LOG_ERROR, "RenderGlWidget::setActiveGlTextur invalid param %d", activeTextureNum );
@@ -143,10 +143,10 @@ void RenderGlWidget::setActiveGlTexture( unsigned int activeTextureNum )
  //============================================================================
 void RenderGlWidget::createTextureObject( CQtTexture * texture )
 {
-    m_GlF->glGenTextures( 1, ( GLuint* )&texture->m_texture );
+    m_GlWidgetFunctions->glGenTextures( 1, ( GLuint* )&texture->m_texture );
 
-    m_GlF->glActiveTexture( GL_TEXTURE0 );
-    //m_GlF->glBindTexture( GL_TEXTURE_2D, texture->m_texture );
+    m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE0 );
+    //m_GlWidgetFunctions->glBindTexture( GL_TEXTURE_2D, texture->m_texture );
 }
 
 //============================================================================
@@ -171,7 +171,7 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
     }
 
     // Bind the texture object
-    m_GlF->glBindTexture( GL_TEXTURE_2D, texture->m_texture );
+    m_GlWidgetFunctions->glBindTexture( GL_TEXTURE_2D, texture->m_texture );
 
     GLenum filter = ( texture->m_scalingMethod == TEXTURE_SCALING::NEAREST ? GL_NEAREST : GL_LINEAR );
 
@@ -179,7 +179,7 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
     if( texture->IsMipmapped() )
     {
         GLenum mipmapFilter = ( texture->m_scalingMethod == TEXTURE_SCALING::NEAREST ? GL_LINEAR_MIPMAP_NEAREST : GL_LINEAR_MIPMAP_LINEAR );
-        m_GlF->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, mipmapFilter );
+        m_GlWidgetFunctions->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, mipmapFilter );
 
 //#ifndef HAS_GLES
 //        // Lower LOD bias equals more sharpness, but less smooth animation
@@ -192,12 +192,12 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
     }
     else
     {
-         m_GlF->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter );
+         m_GlWidgetFunctions->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter );
     }
 
-     m_GlF->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter );
-     m_GlF->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-     m_GlF->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+     m_GlWidgetFunctions->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter );
+     m_GlWidgetFunctions->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+     m_GlWidgetFunctions->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
 
     unsigned int maxSize = getMaxTextureSize();
     if( texture->m_textureHeight > maxSize )
@@ -209,7 +209,7 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
     {
         LogMsg( LOG_ERROR, "GL: Image width %d too big to fit into single texture unit, truncating to %u", texture->m_textureWidth, maxSize );
 //#ifndef HAS_GLES
-//         m_GlF->glPixelStorei( GL_UNPACK_ROW_LENGTH, texture->m_textureWidth );
+//         m_GlWidgetFunctions->glPixelStorei( GL_UNPACK_ROW_LENGTH, texture->m_textureWidth );
 //#endif
         texture->m_textureWidth = maxSize;
     }
@@ -241,23 +241,23 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
 //
 //    if( ( texture->m_format & XB_FMT_DXT_MASK ) == 0 )
 //    {
-//         m_GlF->glTexImage2D( GL_TEXTURE_2D, 0, numcomponents,
+//         m_GlWidgetFunctions->glTexImage2D( GL_TEXTURE_2D, 0, numcomponents,
 //                                texture->m_textureWidth, texture->m_textureHeight, 0,
 //                                format, GL_UNSIGNED_BYTE, texture->m_pixels );
 //    }
 //    else
 //    {
-//         m_GlF->glCompressedTexImage2D( GL_TEXTURE_2D, 0, format,
+//         m_GlWidgetFunctions->glCompressedTexImage2D( GL_TEXTURE_2D, 0, format,
 //                                texture->m_textureWidth, texture->m_textureHeight, 0,
 //                                texture->GetPitch() * texture->GetRows(), texture->m_pixels );
 //    }
 //
 //    if( texture->IsMipmapped() && texture->m_isOglVersion3orNewer )
 //    {
-//         m_GlF->glGenerateMipmap( GL_TEXTURE_2D );
+//         m_GlWidgetFunctions->glGenerateMipmap( GL_TEXTURE_2D );
 //    }
 //
-//     m_GlF->glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 );
+//     m_GlWidgetFunctions->glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 );
 //
 //#else	// GLES version
 //
@@ -304,12 +304,12 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
         break;
     }
 
-     m_GlF->glTexImage2D( GL_TEXTURE_2D, 0, internalformat, texture->m_textureWidth, texture->m_textureHeight, 0,
+     m_GlWidgetFunctions->glTexImage2D( GL_TEXTURE_2D, 0, internalformat, texture->m_textureWidth, texture->m_textureHeight, 0,
                   pixelformat, GL_UNSIGNED_BYTE,  texture->m_pixels );
 
     if( texture->IsMipmapped() )
     {
-         m_GlF->glGenerateMipmap( GL_TEXTURE_2D );
+         m_GlWidgetFunctions->glGenerateMipmap( GL_TEXTURE_2D );
     }
 
 //#endif
@@ -329,8 +329,8 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
 //============================================================================
 void RenderGlWidget::bindToUnit( CQtTexture * texture, unsigned int unit )
 {
-      m_GlF->glActiveTexture( GL_TEXTURE0 + unit );
-      m_GlF->glBindTexture( GL_TEXTURE_2D, texture->m_texture );
+      m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE0 + unit );
+      m_GlWidgetFunctions->glBindTexture( GL_TEXTURE_2D, texture->m_texture );
 }
 
 //============================================================================
@@ -392,12 +392,12 @@ void RenderGlWidget::beginGuiTexture( CGUITextureQt * guiTexture, GoTvColor colo
 
     if( hasAlpha )
     {
-        m_GlF->glBlendFuncSeparate( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA, GL_ONE );
-        m_GlF->glEnable( GL_BLEND );
+        m_GlWidgetFunctions->glBlendFuncSeparate( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA, GL_ONE );
+        m_GlWidgetFunctions->glEnable( GL_BLEND );
     }
     else
     {
-        m_GlF->glDisable( GL_BLEND );
+        m_GlWidgetFunctions->glDisable( GL_BLEND );
     }
 
     VerifyGLStateQt();
@@ -511,31 +511,31 @@ void RenderGlWidget::endGuiTexture( CGUITextureQt * guiTexture )
 
         if( uniColLoc >= 0 )
         {
-            m_GlF->glUniform4f( uniColLoc, ( guiTexture->m_col[ 0 ] / 255.0f ), ( guiTexture->m_col[ 1 ] / 255.0f ), ( guiTexture->m_col[ 2 ] / 255.0f ), ( guiTexture->m_col[ 3 ] / 255.0f ) );
+            m_GlWidgetFunctions->glUniform4f( uniColLoc, ( guiTexture->m_col[ 0 ] / 255.0f ), ( guiTexture->m_col[ 1 ] / 255.0f ), ( guiTexture->m_col[ 2 ] / 255.0f ), ( guiTexture->m_col[ 3 ] / 255.0f ) );
         }
 
         if( guiTexture->m_diffuse.size() )
         {
-            m_GlF->glVertexAttribPointer( tex1Loc, 2, GL_FLOAT, 0, sizeof( PackedVertex ), ( char* )&guiTexture->m_packedVertices[ 0 ] + offsetof( PackedVertex, u2 ) );
-            m_GlF->glEnableVertexAttribArray( tex1Loc );
+            m_GlWidgetFunctions->glVertexAttribPointer( tex1Loc, 2, GL_FLOAT, 0, sizeof( PackedVertex ), ( char* )&guiTexture->m_packedVertices[ 0 ] + offsetof( PackedVertex, u2 ) );
+            m_GlWidgetFunctions->glEnableVertexAttribArray( tex1Loc );
         }
-        m_GlF->glVertexAttribPointer( posLoc, 3, GL_FLOAT, 0, sizeof( PackedVertex ), ( char* )&guiTexture->m_packedVertices[ 0 ] + offsetof( PackedVertex, x ) );
-        m_GlF->glEnableVertexAttribArray( posLoc );
-        m_GlF->glVertexAttribPointer( tex0Loc, 2, GL_FLOAT, 0, sizeof( PackedVertex ), ( char* )&guiTexture->m_packedVertices[ 0 ] + offsetof( PackedVertex, u1 ) );
-        m_GlF->glEnableVertexAttribArray( tex0Loc );
+        m_GlWidgetFunctions->glVertexAttribPointer( posLoc, 3, GL_FLOAT, 0, sizeof( PackedVertex ), ( char* )&guiTexture->m_packedVertices[ 0 ] + offsetof( PackedVertex, x ) );
+        m_GlWidgetFunctions->glEnableVertexAttribArray( posLoc );
+        m_GlWidgetFunctions->glVertexAttribPointer( tex0Loc, 2, GL_FLOAT, 0, sizeof( PackedVertex ), ( char* )&guiTexture->m_packedVertices[ 0 ] + offsetof( PackedVertex, u1 ) );
+        m_GlWidgetFunctions->glEnableVertexAttribArray( tex0Loc );
 
-        m_GlF->glDrawElements( GL_TRIANGLES, guiTexture->m_packedVertices.size() * 6 / 4, GL_UNSIGNED_SHORT, guiTexture->m_idx.data() );
+        m_GlWidgetFunctions->glDrawElements( GL_TRIANGLES, guiTexture->m_packedVertices.size() * 6 / 4, GL_UNSIGNED_SHORT, guiTexture->m_idx.data() );
 
         if( guiTexture->m_diffuse.size() )
-            m_GlF->glDisableVertexAttribArray( tex1Loc );
+            m_GlWidgetFunctions->glDisableVertexAttribArray( tex1Loc );
 
-        m_GlF->glDisableVertexAttribArray( posLoc );
-        m_GlF->glDisableVertexAttribArray( tex0Loc );
+        m_GlWidgetFunctions->glDisableVertexAttribArray( posLoc );
+        m_GlWidgetFunctions->glDisableVertexAttribArray( tex0Loc );
     }
 
     if( guiTexture->m_diffuse.size() )
-        m_GlF->glActiveTexture( GL_TEXTURE0 );
-   m_GlF-> glEnable( GL_BLEND );
+        m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE0 );
+   m_GlWidgetFunctions-> glEnable( GL_BLEND );
    VerifyGLStateQt();
 
 }
@@ -551,8 +551,8 @@ void RenderGlWidget::drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTextu
         texture->BindToUnit( 0 );
     }
 
-    m_GlF->glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-    m_GlF->glEnable( GL_BLEND );          // Turn Blending On
+    m_GlWidgetFunctions->glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+    m_GlWidgetFunctions->glEnable( GL_BLEND );          // Turn Blending On
 
     VerifyGLStateQt();
 
@@ -570,13 +570,13 @@ void RenderGlWidget::drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTextu
     GLint tex0Loc = shaderGetCoord0();
     GLint uniColLoc = shaderGetUniCol();
 
-    m_GlF->glVertexAttribPointer( posLoc, 3, GL_FLOAT, 0, 0, ver );
+    m_GlWidgetFunctions->glVertexAttribPointer( posLoc, 3, GL_FLOAT, 0, 0, ver );
     if( texture )
-        m_GlF->glVertexAttribPointer( tex0Loc, 2, GL_FLOAT, 0, 0, tex );
+        m_GlWidgetFunctions->glVertexAttribPointer( tex0Loc, 2, GL_FLOAT, 0, 0, tex );
 
-   m_GlF-> glEnableVertexAttribArray( posLoc );
+   m_GlWidgetFunctions-> glEnableVertexAttribArray( posLoc );
     if( texture )
-        m_GlF->glEnableVertexAttribArray( tex0Loc );
+        m_GlWidgetFunctions->glEnableVertexAttribArray( tex0Loc );
 
     // Setup Colors
     col[ 0 ] = ( uint8_t )GET_R( color );
@@ -584,7 +584,7 @@ void RenderGlWidget::drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTextu
     col[ 2 ] = ( uint8_t )GET_B( color );
     col[ 3 ] = ( uint8_t )GET_A( color );
 
-    m_GlF->glUniform4f( uniColLoc, col[ 0 ] / 255.0f, col[ 1 ] / 255.0f, col[ 2 ] / 255.0f, col[ 3 ] / 255.0f );
+    m_GlWidgetFunctions->glUniform4f( uniColLoc, col[ 0 ] / 255.0f, col[ 1 ] / 255.0f, col[ 2 ] / 255.0f, col[ 3 ] / 255.0f );
 
     ver[ 0 ][ 0 ] = ver[ 3 ][ 0 ] = rect.x1;
     ver[ 0 ][ 1 ] = ver[ 1 ][ 1 ] = rect.y1;
@@ -602,12 +602,12 @@ void RenderGlWidget::drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTextu
         tex[ 2 ][ 1 ] = tex[ 3 ][ 1 ] = coords.y2;
     }
 
-    m_GlF->glDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx );
+    m_GlWidgetFunctions->glDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx );
 
-    m_GlF->glDisableVertexAttribArray( posLoc );
+    m_GlWidgetFunctions->glDisableVertexAttribArray( posLoc );
     if( texture )
     {
-        m_GlF->glDisableVertexAttribArray( tex0Loc );
+        m_GlWidgetFunctions->glDisableVertexAttribArray( tex0Loc );
     }
 
     VerifyGLStateQt();
@@ -619,8 +619,8 @@ void RenderGlWidget::initTextures()
     if( !m_TexturesInited )
     {
         for( unsigned i = 0; i < MAX_RENDER_PLANES; ++i ) {
-            m_GlF->glBindTexture( m_TexDescriptor.m_Target, m_TextureIds[ i ] );
-            m_GlF->glTexImage2D( m_TexDescriptor.m_Target,
+            m_GlWidgetFunctions->glBindTexture( m_TexDescriptor.m_Target, m_TextureIds[ i ] );
+            m_GlWidgetFunctions->glTexImage2D( m_TexDescriptor.m_Target,
                                  0,
                                  m_TexDescriptor.m_InternalFormat,
                                  m_Frame->m_VisiblePitch[ i ],
@@ -631,17 +631,17 @@ void RenderGlWidget::initTextures()
                                  0 );
             // Scale appropriately so we can change to target geometry without
             // much hassle.
-            m_GlF->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-            m_GlF->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-            m_GlF->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-            m_GlF->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+            m_GlWidgetFunctions->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+            m_GlWidgetFunctions->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+            m_GlWidgetFunctions->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+            m_GlWidgetFunctions->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
             m_TexturesInited = true;
         }
     }
 
     for( unsigned i = 0; i < MAX_RENDER_PLANES; ++i )
     {
-        m_GlF->glBindTexture( m_TexDescriptor.m_Target, m_TextureIds[ i ] );
+        m_GlWidgetFunctions->glBindTexture( m_TexDescriptor.m_Target, m_TextureIds[ i ] );
 
 #if !defined(GL_UNPACK_ROW_LENGTH) && !defined(GL_UNPACK_ROW_LENGTH_EXT)
 #define ALIGN(x, y) (((x) + ((y) - 1)) & ~((y) - 1))
@@ -655,7 +655,7 @@ void RenderGlWidget::initTextures()
             destination += dst_pitch;
         }
 
-        m_GlF->glTexSubImage2D( m_TexDescriptor.m_Target, 0,
+        m_GlWidgetFunctions->glTexSubImage2D( m_TexDescriptor.m_Target, 0,
                                 0, 0,
                                 m_Frame->m_VisiblePitch[ i ],
                                 m_Frame->m_VisibleLines[ i ],
@@ -665,12 +665,12 @@ void RenderGlWidget::initTextures()
         free( new_plane );
 #else
 # if defined(GL_UNPACK_ROW_LENGTH)
-        m_GlF->glPixelStorei( GL_UNPACK_ROW_LENGTH, m_Frame->m_Pitch[ i ] );
+        m_GlWidgetFunctions->glPixelStorei( GL_UNPACK_ROW_LENGTH, m_Frame->m_Pitch[ i ] );
 # else
-        m_GlF->glPixelStorei( GL_UNPACK_ROW_LENGTH_EXT, m_Frame->m_Pitch[ i ] );
+        m_GlWidgetFunctions->glPixelStorei( GL_UNPACK_ROW_LENGTH_EXT, m_Frame->m_Pitch[ i ] );
 # endif // defined(GL_UNPACK_ROW_LENGTH)
 
-        m_GlF->glTexSubImage2D( m_TexDescriptor.m_Target, 0,
+        m_GlWidgetFunctions->glTexSubImage2D( m_TexDescriptor.m_Target, 0,
                                 0, 0,
                                 m_Frame->m_VisiblePitch[ i ],
                                 m_Frame->m_VisibleLines[ i ],
@@ -678,9 +678,9 @@ void RenderGlWidget::initTextures()
                                 m_TexDescriptor.m_Type,
                                 &m_Frame->m_PlaneData[ i ][ 0 ] );
 # if defined(GL_UNPACK_ROW_LENGTH)
-        m_GlF->glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 ); // reset to default
+        m_GlWidgetFunctions->glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 ); // reset to default
 # else
-        m_GlF->glPixelStorei( GL_UNPACK_ROW_LENGTH_EXT, 0 ); // reset to default
+        m_GlWidgetFunctions->glPixelStorei( GL_UNPACK_ROW_LENGTH_EXT, 0 ); // reset to default
 # endif // defined(GL_UNPACK_ROW_LENGTH)
 #endif
     }

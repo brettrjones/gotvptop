@@ -146,7 +146,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MyQtSoundInput.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MyQtSoundOutput.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MySndMgr.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ShaderQt.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxResourceToRealFile.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxTilePositioner.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AcceptCancelWidget.h \
@@ -155,7 +154,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ImagePickBar.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PlayerGlWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlBaseWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlOffScreenSurface.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAspectFrame.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxContextMenu.h \
@@ -197,14 +195,12 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/KodiRun.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppGlobals.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppProfile.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/Constants.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/EventsQtToGoTv.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/KodiThread.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MenuDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppStyle.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommon.h \
@@ -231,7 +227,11 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvInterface/OsWin32/IWin32.h \
     $$PWD/GoTvInterface/OsLinux/ILinux.h \
     $$PWD/GoTvInterface/OsAndroid/IAndroid.h \
-    $$PWD/GoTvApps/GoTvPtoP/AppSource/exportdialog.h
+    $$PWD/GoTvApps/GoTvPtoP/AppSource/exportdialog.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderKodiThread.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlLogic.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlShaders.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderShaderQt.h
 
 
 SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
@@ -370,15 +370,12 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/BottomBarWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ImagePickBar.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PlayerGlWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlBaseWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlMatrix.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlOffScreenSurface.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidgetFonts.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidgetRender.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidgetShaders.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidgetTextures.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ShaderQt.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAspectFrame.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxComboBox.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxContextMenu.cpp \
@@ -432,7 +429,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/Constants.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/EventsQtToGoTv.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/KodiThread.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppStyle.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppTheme.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.cpp \
@@ -450,7 +446,13 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvInterface/OsInterface/OsInterface.cpp \
     $$PWD/GoTvInterface/OsWin32/IWin32.cpp \
     $$PWD/GoTvInterface/OsLinux/ILinux.cpp \
-    $$PWD/GoTvInterface/OsAndroid/IAndroid.cpp
+    $$PWD/GoTvInterface/OsAndroid/IAndroid.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderKodiThread.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlLogic.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderShaderDefsGl.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlShaders.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderShaderQt.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidgetShaderInterface.cpp
 
 
 FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAbout.ui \

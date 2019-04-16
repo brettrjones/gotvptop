@@ -22,11 +22,19 @@ public:
 
     QOpenGLContext *			getContext( void )              { return m_WidgetContext; }
 
+    QOpenGLFunctions *          getGlFunctions() { return m_GlWidgetFunctions; }
+
+#ifdef DEBUG
+    void VerifyGLStateQtDbg( const char* szfile, const char* szfunction, int lineno );
+#  define VerifyGLStateQt() VerifyGLStateQtDbg(__FILE__, __FUNCTION__, __LINE__)
+#else
+    void VerifyGLStateQt();
+#endif
+
 signals:
     void                        renderRequested();
 
 public slots:
-    void                        grabContext();
     void                        slotOnFrameRendered();
 
 private slots:

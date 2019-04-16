@@ -1,5 +1,5 @@
 #include "RenderGlOffScreenSurface.h"
-#include "RenderGlBaseWidget.h"
+#include "RenderGlWidget.h"
 
 #include <CoreLib/VxDebug.h>
 
@@ -7,8 +7,8 @@
 #include <QtGui/QPainter>
 
 //============================================================================
-RenderGlOffScreenSurface::RenderGlOffScreenSurface( KodiThread* kodiThread,
-													RenderGlBaseWidget * glWidget,
+RenderGlOffScreenSurface::RenderGlOffScreenSurface( RenderKodiThread* kodiThread,
+                                                    RenderGlWidget * glWidget,
                                                     QOpenGLContext* renderContext,
                                                     QScreen* targetScreen, 
                                                     const QSize& size )
@@ -17,7 +17,8 @@ RenderGlOffScreenSurface::RenderGlOffScreenSurface( KodiThread* kodiThread,
 , m_GlWidget( glWidget )
 , m_initialized( false )
 , m_updatePending( false )
-, m_RenderContext( renderContext )
+, m_RenderGuiContext( glWidget->context() )
+, m_RenderThreadContext( renderContext )
 , m_functions( nullptr )
 #if !defined(QT_OPENGL_ES_2)
 , m_functions_3_0( nullptr )
@@ -32,7 +33,7 @@ RenderGlOffScreenSurface::RenderGlOffScreenSurface( KodiThread* kodiThread,
 RenderGlOffScreenSurface::~RenderGlOffScreenSurface()
 {
     // to delete the FBOs we first need to make the context current
-    m_RenderContext->makeCurrent( this );
+    m_RenderThreadContext->makeCurrent( this );
     // destroy framebuffer objects
     if( m_fbo ) 
     {
@@ -52,9 +53,10 @@ RenderGlOffScreenSurface::~RenderGlOffScreenSurface()
     delete m_blitShader;
     m_blitShader = nullptr;
     // free context
-    m_RenderContext->doneCurrent();
-    delete m_RenderContext;
-    m_RenderContext = nullptr;
+    m_RenderThreadContext->doneCurrent();
+    delete m_RenderThreadContext;
+    m_RenderThreadContext = nullptr;
+    // gui will clean up its own context
     // free paint device
     delete m_paintDevice;
     m_paintDevice = nullptr;
@@ -64,27 +66,129 @@ RenderGlOffScreenSurface::~RenderGlOffScreenSurface()
 }
 
 //============================================================================
-// called from kodi thread
-void RenderGlOffScreenSurface::startupKodiRenderSystem()
+void RenderGlOffScreenSurface::setSurfaceSize( QSize surfaceSize )
 {
-	m_RenderContext->makeCurrent( this );
-	setRenderFunctions( m_RenderContext->functions() );
-	m_KodiInitialized = true;
+    m_mutex.lock();
+    m_NextSurfaceSize = surfaceSize;
+    m_mutex.unlock();
+}
+
+//============================================================================
+QSize RenderGlOffScreenSurface::getSurfaceSize()
+{
+    m_mutex.lock();
+    QSize surfaceSize = m_SurfaceSize;
+    m_mutex.unlock();
+
+    return surfaceSize;
 }
 
 //============================================================================
 // called from kodi thread
-void RenderGlOffScreenSurface::shutdownKodiRenderSystem()
+void RenderGlOffScreenSurface::initRenderGlSystem()
 {
-	m_KodiInitialized = true;
+    m_RenderThreadContext->makeCurrent( this );
+    setRenderFunctions( m_RenderThreadContext->functions() );
+    initializeInternal();
+    m_RenderSystemInitialized = true;
 }
 
+//============================================================================
+// called from kodi thread
+void RenderGlOffScreenSurface::destroyRenderGlSystem()
+{
+    m_RenderSystemInitialized = false;
+}
+
+//============================================================================
+// called from thread
+bool RenderGlOffScreenSurface::beginRenderGl()
+{
+    m_updatePending = true;
+
+    if( m_functions && !m_initialized )
+    {
+        // initialize for render
+        initializeInternal();
+//        makeCurrent();
+//        if( m_GlWidget )
+//        {
+//            m_GlWidget->initShaders();
+//        }
+
+//		doneCurrent();
+    }
+
+	//LogMsg( LOG_DEBUG, " RenderGlOffScreenSurface::beginRender size x(%d) y(%d)", m_SurfaceSize.width(), m_SurfaceSize.height() );
+	// make context current and bind framebuffer
+	makeCurrent();
+    checkForSizeChange();
+
+    bindFramebufferObject();
+    if( m_RenderThreadContext )
+    {
+        m_RenderThreadContext->functions()->glViewport( 0, 0, getSurfaceSize().width(), getSurfaceSize().height() );
+    }
+
+    glClearColor(   0, 0, 1, 1 );
+    glClear( GL_COLOR_BUFFER_BIT );
+
+    // testTexureRender( true );
+    return true;
+}
+
+//============================================================================
+// called from thread
+bool RenderGlOffScreenSurface::endRenderGl()
+{
+    if( m_RenderThreadContext )
+    {
+        m_RenderThreadContext->functions()->glFlush();
+    }
+
+    doneCurrent();
+    return true;
+}
+
+//============================================================================
+// called from thread
+void RenderGlOffScreenSurface::presentRenderGl( bool rendered, bool videoLayer )
+{
+    // order of execution
+    // beginRender
+    // endRender
+    // presentRender
+
+    // LogMsg( LOG_DEBUG, " RenderGlOffScreenSurface::endRender swapBuffers" );
+    if( m_functions && m_initialized )
+    {
+        // make sure all paint operation have been processed
+        m_functions->glFlush();
+
+        if( rendered )
+        {
+  
+            m_FrameImage = grabFramebuffer();
+            swapBuffers();
+
+            checkForSizeChange();
+
+			doneCurrent();
+		}
+
+        //LogMsg( LOG_DEBUG, " RenderGlOffScreenSurface::presentRender done size x(%d) y(%d)", m_SurfaceSize.width(), m_SurfaceSize.height() );
+    }
+
+    // mark that we're done with updating
+    m_updatePending = false;
+    // LogMsg( LOG_DEBUG, " RenderGlOffScreenSurface::endRender size x(%d) y(%d)", m_SurfaceSize.width(), m_SurfaceSize.height() );
+}
 
 //============================================================================
 /// @brief return true if has been initialized from kodi thread
 bool RenderGlOffScreenSurface::isReadyForRender()
 {
-	return( m_initialized && m_KodiInitialized );
+    return( m_initialized && m_RenderSystemInitialized );
 }
 
 //============================================================================
@@ -169,151 +273,21 @@ void RenderGlOffScreenSurface::testTexureRender( bool startRender )
 }
 
 //============================================================================
-// called from thread
-bool RenderGlOffScreenSurface::beginRender()
-{
-    m_updatePending = true;
-
-    if( m_functions && !m_initialized )
-    {
-        // initialize for render
-        initializeInternal();
-        makeCurrent();
-        if( m_GlWidget )
-        {
-            m_GlWidget->initShaders();
-        }
-
-		doneCurrent();
-    }
-
-	//LogMsg( LOG_DEBUG, " RenderGlOffScreenSurface::beginRender size x(%d) y(%d)", m_SurfaceSize.width(), m_SurfaceSize.height() );
-	// make context current and bind framebuffer
-	makeCurrent();
-
-    bindFramebufferObject();
-    glClearColor(   0, 0, 1, 1 );
-    glClear( GL_COLOR_BUFFER_BIT );
-
-    // testTexureRender( true );
-    return true;
-}
-
-//============================================================================
-// called from thread
-void RenderGlOffScreenSurface::presentRender( bool rendered, bool videoLayer )
-{
-    // order of execution
-    // beginRender
-    // endRender
-    // presentRender
-
-    // LogMsg( LOG_DEBUG, " RenderGlOffScreenSurface::endRender swapBuffers" );
-    if( m_functions && m_initialized )
-    {
-        // make sure all paint operation have been processed
-        m_functions->glFlush();
-
-        if( rendered )
-        {
-  
-            m_FrameImage = grabFramebuffer();
-            swapBuffers();
-
-            checkForSizeChange();
-
-			doneCurrent();
-		}
-
-        //LogMsg( LOG_DEBUG, " RenderGlOffScreenSurface::presentRender done size x(%d) y(%d)", m_SurfaceSize.width(), m_SurfaceSize.height() );
-    }
-
-    // mark that we're done with updating
-    m_updatePending = false;
-    // LogMsg( LOG_DEBUG, " RenderGlOffScreenSurface::endRender size x(%d) y(%d)", m_SurfaceSize.width(), m_SurfaceSize.height() );
-}
-
-//============================================================================
-// called from thread
-bool RenderGlOffScreenSurface::endRender()
-{
-    return true;
-}
-
-//============================================================================
 /// @doc must be called from render thread
 void RenderGlOffScreenSurface::setRenderFunctions( QOpenGLFunctions * glFunctions )
 {
     m_functions = glFunctions;
-
-#if !defined(QT_OPENGL_ES_2)
-    // try initializing the OpenGL 3.0 functions for this object
-    m_functions_3_0 = m_RenderContext->versionFunctions <QOpenGLFunctions_3_0>();
-    if( m_functions_3_0 )
-    {
-        m_functions_3_0->initializeOpenGLFunctions();
-    }
-    else
-#endif // !defined(QT_OPENGL_ES_2)
-    {
-        // if we do not have OpenGL 3.0 functions, glBlitFrameBuffer is not available, so we
-        // must do the blit
-        // using a shader and the framebuffer texture, so we need to create the shader
-        // here...
-        // --> allocate m_blitShader, a simple shader for drawing a textured quad
-        // --> build quad geometry, VBO, whatever
-    }
-}
-
-//============================================================================
-void RenderGlOffScreenSurface::initializeGL()
-{
-
-}
-
-//============================================================================
-/// @brief Called whenever the window size changes.
-/// @param width New window width.
-/// @param height New window height.
-void RenderGlOffScreenSurface::resizeGL( int width, int height )
-{
-
-}
-
-//============================================================================
-void RenderGlOffScreenSurface::slotGlResized( int w, int h )
-{
-	glWidgetWasResized( QSize( w, h ) );
-}
-
-//============================================================================
-void RenderGlOffScreenSurface::glWidgetWasResized( QSize newWindowSize )
-{
-	m_mutex.lock();
-	m_NextSurfaceSize = newWindowSize;
-	m_mutex.unlock();
 }
 
 //============================================================================
 /// @brief  change surface size in thread if required
 void RenderGlOffScreenSurface::checkForSizeChange()
 {
-	QSize nextSurfaceSize = m_NextSurfaceSize;
-
     if( m_NextSurfaceSize != m_SurfaceSize )
     {
         m_SurfaceSize = m_NextSurfaceSize;
         recreateFBOAndPaintDevice();
     }
-}
-
-//============================================================================
-/// @brief Called whenever the window needs to repaint itself. Override to draw OpenGL content.
-/// When this function is called, the context is already current and the correct framebuffer is
-/// bound.
-void RenderGlOffScreenSurface::paintGL()
-{
-
 }
 
 //============================================================================
@@ -356,23 +330,17 @@ void RenderGlOffScreenSurface::bindFramebufferObject()
 //============================================================================
 bool RenderGlOffScreenSurface::isValid() const
 {
-    return ( m_initialized && m_RenderContext && m_fbo );
+    return ( m_initialized && m_RenderThreadContext && m_fbo );
 }
 
 //============================================================================
 void RenderGlOffScreenSurface::makeCurrent()
 {
-    makeCurrentInternal();
-}
-
-//============================================================================
-void RenderGlOffScreenSurface::makeCurrentInternal()
-{
-    if( isValid() ) 
+    if( isValid() )
     {
-        m_RenderContext->makeCurrent( this );
+        m_RenderThreadContext->makeCurrent( this );
     }
-    else 
+    else
     {
         throw ( "RenderGlOffScreenSurface::makeCurrent() - Window not yet properly initialized!" );
     }
@@ -381,9 +349,9 @@ void RenderGlOffScreenSurface::makeCurrentInternal()
 //============================================================================
 void RenderGlOffScreenSurface::doneCurrent()
 {
-    if( m_RenderContext ) 
+    if( m_RenderThreadContext )
     {
-        m_RenderContext->doneCurrent();
+        m_RenderThreadContext->doneCurrent();
     }
 }
 
@@ -392,7 +360,7 @@ QImage RenderGlOffScreenSurface::grabFramebuffer()
 {
     std::lock_guard <std::mutex> locker( m_mutex );
 
-    makeCurrentInternal();
+    makeCurrent();
     // blit framebuffer to resolve framebuffer first if needed
     if( m_fbo->format().samples() > 0 ) 
     {
@@ -494,7 +462,7 @@ void RenderGlOffScreenSurface::swapBuffers()
 void RenderGlOffScreenSurface::swapBuffersInternal()
 {
     // blit framebuffer to back buffer
-    m_RenderContext->makeCurrent( this );
+    makeCurrent();
     // make sure all paint operation have been processed
     m_functions->glFlush();
     // check if we have glFrameBufferBlit support. this is true for desktop OpenGL 3.0+, but not
@@ -530,15 +498,15 @@ void RenderGlOffScreenSurface::swapBuffersInternal()
     }
 
     // now swap back buffer to front buffer
-    m_RenderContext->swapBuffers( this );
+    m_RenderThreadContext->swapBuffers( this );
 }  // RenderGlOffScreenSurface::swapBuffersInternal
 
 //============================================================================
 void RenderGlOffScreenSurface::recreateFBOAndPaintDevice()
 {
-    if( m_RenderContext && ( ( m_fbo == nullptr ) || ( m_fbo->size() != bufferSize() ) ) ) 
+    if( m_RenderThreadContext && ( ( m_fbo == nullptr ) || ( m_fbo->size() != bufferSize() ) ) )
     {
-        m_RenderContext->makeCurrent( this );
+        m_RenderThreadContext->makeCurrent( this );
         // free old FBOs
         if( m_fbo ) 
         {
@@ -605,12 +573,14 @@ void RenderGlOffScreenSurface::recreateFBOAndPaintDevice()
 //============================================================================
 void RenderGlOffScreenSurface::initializeInternal()
 {
-    if( m_RenderContext && !m_initialized.exchange( true ) ) 
+    if( m_RenderThreadContext && !m_initialized.exchange( true ) )
     {
         // now we have a context, create the FBO
+        QOpenGLFunctions * glF = m_RenderThreadContext->functions();
+        glF->initializeOpenGLFunctions();
+
         recreateFBOAndPaintDevice();
     }
-
 }  
 
 //============================================================================
@@ -631,20 +601,11 @@ void RenderGlOffScreenSurface::render(  )
     // check if we need to initialize stuff
     initializeInternal();
 
-    // check if we need to call the user initialization
-//    makeCurrent(); // TODO: may be makeCurrent() must be here, as noted for QOpenGLWidget.initializeGL()
-    if( !m_initializedGL ) 
-    {
-        m_initializedGL = true;
-        initializeGL();
-    }
-
     // make context current and bind framebuffer
     makeCurrent();
     bindFramebufferObject();
 
     // call user paint function
-    paintGL();
     doneCurrent();
 
     // mark that we're done with updating
@@ -657,36 +618,6 @@ void RenderGlOffScreenSurface::exposeEvent( QExposeEvent*  )
     // render window content if window is exposed
     //render();
 }  // RenderGlOffScreenSurface::exposeEvent
-
-//============================================================================
-void RenderGlOffScreenSurface::resizeEvent( QResizeEvent* e )
-{
-    // call base implementation
-    resize( e->size() );
-    emit resized();
-}
-
-//============================================================================
-void RenderGlOffScreenSurface::resize( const QSize& newSize )
-{
-    m_mutex.lock();
-    // make context current first
-    makeCurrent();
-
-    m_SurfaceSize = QSize( newSize );
-
-    // update FBO and paint device
-    recreateFBOAndPaintDevice();
-    m_mutex.unlock();
-    // call user-defined resize method
-    resizeGL( bufferSize().width(), bufferSize().height() );
-}  // RenderGlOffScreenSurface::resize
-
-//============================================================================
-void RenderGlOffScreenSurface::resize( int w, int h )
-{
-    resize( QSize( w, h ) );
-}
 
 //============================================================================
 bool RenderGlOffScreenSurface::event( QEvent* event )

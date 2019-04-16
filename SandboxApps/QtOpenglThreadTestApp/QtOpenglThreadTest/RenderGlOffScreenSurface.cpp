@@ -113,7 +113,7 @@ bool RenderGlOffScreenSurface::beginRenderGl()
     // make context current and bind framebuffer
     makeCurrent();
     checkForSizeChange();
- 
+
     bindFramebufferObject();
     if( m_RenderThreadContext )
     {
@@ -133,7 +133,7 @@ bool RenderGlOffScreenSurface::endRenderGl()
     {
         m_RenderThreadContext->functions()->glFlush();
     }
-    
+
     doneCurrent();
     return true;
 }
@@ -151,18 +151,18 @@ void RenderGlOffScreenSurface::presentRenderGl( bool rendered, bool videoLayer )
     if( m_functions && m_initialized )
     {
         // make sure all paint operation have been processed
-        //m_functions->glFlush();
+        m_functions->glFlush();
 
         if( rendered )
         {
-
+  
             m_FrameImage = grabFramebuffer();
             swapBuffers();
 
             checkForSizeChange();
 
-            doneCurrent();
-        }
+			doneCurrent();
+		}
 
         //LogMsg( LOG_DEBUG, " RenderGlOffScreenSurface::presentRender done size x(%d) y(%d)", m_SurfaceSize.width(), m_SurfaceSize.height() );
     }
@@ -176,7 +176,7 @@ void RenderGlOffScreenSurface::presentRenderGl( bool rendered, bool videoLayer )
 /// @brief return true if has been initialized from kodi thread
 bool RenderGlOffScreenSurface::isReadyForRender()
 {
-	return( m_initialized && m_RenderSystemInitialized );
+    return( m_initialized && m_RenderSystemInitialized );
 }
 
 //============================================================================

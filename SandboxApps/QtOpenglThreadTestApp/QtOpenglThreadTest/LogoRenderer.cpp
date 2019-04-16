@@ -56,7 +56,7 @@
 #define Rand0To1() (( rand() & 32767 ) * ( 1.0f / 32767.0f ))
 
 //============================================================================
-LogoRenderer::LogoRenderer(RenderGlShaders& renderShaders)
+LogoRenderer::LogoRenderer(RenderLogoShaders& renderShaders)
 : m_Shaders( renderShaders )
 {
 }

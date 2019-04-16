@@ -40,11 +40,11 @@ enum EShaderType
 
 class RenderGlWidget;
 
-class ShaderQt : public QOpenGLShaderProgram
+class RenderShaderQt : public QOpenGLShaderProgram
 {
 public:
-    ShaderQt() = delete;
-    ShaderQt( ESHADERMETHOD shaderMethod, EShaderType shaderType, QString& shaderName, RenderGlWidget * renderWidget );
+    RenderShaderQt() = delete;
+    RenderShaderQt( ESHADERMETHOD shaderMethod, EShaderType shaderType, QString shaderName, RenderGlWidget * renderWidget );
 
     bool                        compileAndLink( const char * vertexShaderCode, const char * fragmentShaderCode );
 
