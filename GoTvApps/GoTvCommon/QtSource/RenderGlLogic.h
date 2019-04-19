@@ -14,20 +14,29 @@
 #include <QElapsedTimer>
 
 #include "RenderGlShaders.h"
+#include "RenderLogoShaders.h"
+#include "LogoRenderer.h"
+
+// uncomment to render qt logo as test instead of running kodi
+//#define RENDER_LOGO_INSTEAD_OF_KODI
 
 class RenderGlWidget;
 class RenderKodiThread;
 class RenderGlOffScreenSurface;
 
-
-class RenderGlLogic : public RenderGlShaders
+class RenderGlLogic : public QObject
 {
+    Q_OBJECT
 public:
     explicit RenderGlLogic( RenderGlWidget& renderWidget );
     virtual ~RenderGlLogic() = default;
 
+    void						setRenderWindowVisible( bool isVisible ) { m_RenderWindowVisible = isVisible; }
+
     void						setRenderThreadShouldRun( bool shouldRun );
-    void						setRenderWindowVisible( bool isVisible ) {  }
+    bool						isRenderThreadStarted();
+    void						startRenderThread();
+    void						stopRenderThread();
 
     //! called from gui thread when ready for opengl rendering
     void						glWidgetInitialized();
@@ -51,25 +60,24 @@ public:
     // initialized by RenderGlWidget
     QOpenGLContext *            m_ThreadGlContext = nullptr;
     // initialized by RenderGlWidget
-    QOpenGLFunctions *          m_GlThreadFunctions = nullptr;
-#if QT_VERSION < 0x050300
-# if defined(QT_OPENGL_ES_2)
-    QOpenGLFunctions_ES2 *      m_ThreadGlF = nullptr;
-# else
-    QOpenGLFunctions_1_1 *      m_ThreadGlF = nullptr;
-# endif
-#else
-    QOpenGLFunctions *          m_ThreadGlF = nullptr;
-#endif
-
     RenderGlOffScreenSurface *  m_OffScreenSurface = nullptr;
+
+    RenderKodiThread*           m_RenderKodiThread = nullptr;
+
+    RenderGlWidget&             m_RenderWidget;
+    RenderGlShaders             m_RenderGlShaders;
+
+signals:
+    void                        signalFrameRendered();
 
 protected:
     void                        render();
 
-    RenderGlWidget&             m_RenderWidget;
 
-    RenderKodiThread*           m_RenderKodiThread = nullptr;
+#ifdef RENDER_LOGO_INSTEAD_OF_KODI
+    RenderLogoShaders           m_LogoShaders;
+    LogoRenderer                m_LogoRenderer;
+#endif // RENDER_LOGO_INSTEAD_OF_KODI
 
     bool                        m_initialized   = false;
 

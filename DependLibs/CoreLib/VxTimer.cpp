@@ -28,11 +28,6 @@ VxTimer::VxTimer()
 }
 
 //============================================================================
-VxTimer::~VxTimer()
-{
-}
-
-//============================================================================
 void VxTimer::startTimerMs( double milliSec )
 {
     m_StartTickMs = GetGmtTimeMs();

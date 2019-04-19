@@ -5,11 +5,15 @@
 
 //============================================================================
 RenderGlLogic::RenderGlLogic( RenderGlWidget& renderWidget )
-: RenderGlShaders( renderWidget )
+: QObject()
+, m_RenderKodiThread( new RenderKodiThread( *this ) )
 , m_RenderWidget( renderWidget )
-, m_RenderKodiThread( new RenderKodiThread( nullptr ) )
+, m_RenderGlShaders( renderWidget )
+#ifdef RENDER_LOGO_INSTEAD_OF_KODI
+, m_LogoShaders( renderWidget )
+, m_LogoRenderer( m_LogoShaders )
+#endif // RENDER_LOGO_INSTEAD_OF_KODI
 {
-
 }
 
 //============================================================================
@@ -34,25 +38,46 @@ void RenderGlLogic::setRenderThreadShouldRun( bool shouldRun )
 }
 
 //============================================================================
+bool RenderGlLogic::isRenderThreadStarted()
+{
+    return m_RenderKodiThread && m_RenderKodiThread->isRenderThreadStarted();
+}
+
+//============================================================================
+void RenderGlLogic::startRenderThread()
+{
+    if( m_RenderKodiThread && !m_RenderKodiThread->isRenderThreadStarted() )
+    {
+        m_RenderKodiThread->startRenderThread();
+    }
+}
+
+//============================================================================
+void RenderGlLogic::stopRenderThread()
+{
+    if( m_RenderKodiThread && m_RenderKodiThread->isRenderThreadStarted() )
+    {
+        m_RenderKodiThread->stopRenderThread();
+    }
+}
+
+//============================================================================
 //! called from gui thread when ready for opengl rendering
 void RenderGlLogic::glWidgetInitialized( )
 {
 
     if( m_RenderKodiThread )
     {
-        m_OffScreenSurface = new RenderGlOffScreenSurface( m_RenderKodiThread, &m_RenderWidget, m_WidgetGlContext ); // BRJ geometry not set at this point nullptr, geometry().size() );
-        m_OffScreenSurface->setFormat( m_ThreadGlContext->format() );
-        m_OffScreenSurface->create();
-        m_OffScreenSurface->setRenderFunctions( m_GlThreadFunctions );
+         // shader initialize must be done in gui thread
+#ifdef RENDER_LOGO_INSTEAD_OF_KODI
+        m_LogoShaders.initLogoShaders();
+#else
+        m_RenderGlShaders.initShaders();
+#endif // RENDER_LOGO_INSTEAD_OF_KODI
 
-        // shader initialize must be done in gui thread
-        initShaders();
-
-        m_RenderWidget.moveToThread( m_RenderKodiThread );
+        moveToThread( m_RenderKodiThread );
         m_ThreadGlContext->moveToThread( m_RenderKodiThread );
         m_OffScreenSurface->moveToThread( m_RenderKodiThread );
-
-        m_RenderKodiThread->start();
     }
 }
 
@@ -85,10 +110,10 @@ void RenderGlLogic::render()
 
     glViewport( 0, 0, viewSize.width(), viewSize.height() );
 
-    //m_LogoRenderer.render();
+#ifdef RENDER_LOGO_INSTEAD_OF_KODI
+    m_LogoRenderer.render();
+#endif // RENDER_LOGO_INSTEAD_OF_KODI
 }
-
-Q_GLOBAL_STATIC(QMutex, initMutex)
 
 //============================================================================
 bool RenderGlLogic::initRenderGlSystem()
@@ -96,7 +121,9 @@ bool RenderGlLogic::initRenderGlSystem()
     if( m_OffScreenSurface )
     {
         m_OffScreenSurface->initRenderGlSystem();
-        //m_LogoRenderer.initialize();
+#ifdef RENDER_LOGO_INSTEAD_OF_KODI
+        m_LogoRenderer.initialize();
+#endif // RENDER_LOGO_INSTEAD_OF_KODI
     }
 
     return true;
@@ -118,6 +145,7 @@ bool RenderGlLogic::beginRenderGl()
 {
     if( m_OffScreenSurface )
     {
+        /*
         QMutexLocker locker(&m_renderMutex);
 
         m_OffScreenSurface->makeCurrent();
@@ -133,6 +161,7 @@ bool RenderGlLogic::beginRenderGl()
         }
 
         glViewport( 0, 0, viewSize.width(), viewSize.height() );
+        */
 
         m_OffScreenSurface->beginRenderGl();
     }
@@ -159,7 +188,7 @@ void RenderGlLogic::presentRenderGl( bool rendered, bool videoLayer )
     if( m_OffScreenSurface )
     {
         m_OffScreenSurface->presentRenderGl( rendered, videoLayer );
-        m_RenderWidget.onThreadFrameRendered();
+        emit signalFrameRendered();
     }
 }
 

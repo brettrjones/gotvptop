@@ -116,3 +116,11 @@ include(GoTvPtoPAppLib.pri)
 #### for static linked qt libs only
 #### QMAKE_LFLAGS += -static
 
+HEADERS += \
+    GoTvApps/GoTvCommon/QtSource/LogoRenderer.h \
+    GoTvApps/GoTvCommon/QtSource/RenderLogoShaders.h
+
+SOURCES += \
+    GoTvApps/GoTvCommon/QtSource/LogoRenderer.cpp \
+    GoTvApps/GoTvCommon/QtSource/RenderLogoShaders.cpp
+

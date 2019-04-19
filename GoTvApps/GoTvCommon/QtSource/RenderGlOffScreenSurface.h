@@ -36,7 +36,8 @@ public:
     /// surface.
     explicit RenderGlOffScreenSurface(	RenderKodiThread* kodiThread,
                                         RenderGlWidget * glWidget,
-										QOpenGLContext* renderContext, 
+                                        QOpenGLContext * guiRenderContext,
+                                        QOpenGLContext * threadRenderContext,
 										QScreen* targetScreen = nullptr, 
 										const QSize& size = QSize( 1, 1 ) );
 
@@ -137,9 +138,6 @@ public slots:
     /// @brief Lazy update routine like QWidget::update().
     void                        update();
 
-    /// @brief Immediately render the widget contents to framebuffer.
-    void                        render( );
-
 signals:
     /// @brief Emitted when swapBuffers() was called and bufferswapping is done.
     void                        frameSwapped();
@@ -176,7 +174,7 @@ private:
 
 	//=== vars ===//
 	/// @brief kodi thread
-    RenderKodiThread*			m_KodiThread;
+    RenderKodiThread*			m_KodiThread = nullptr;
 
     RenderGlWidget *            m_GlWidget = nullptr;
 

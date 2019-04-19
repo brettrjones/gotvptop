@@ -671,13 +671,15 @@ typedef int SOCKET;
 
 #define atoi64                  atoll // ascii to long long
 
-#ifndef __cdecl
-# define __cdecl
-#endif
+#if defined(TARGET_OS_WINDOWS)
+# ifndef __cdecl
+#  define __cdecl
+# endif
 
-#ifndef __declspec
-# define __declspec(X)
-#endif
+# ifndef __declspec
+#  define __declspec(X)
+# endif
+#endif // defined(TARGET_OS_WINDOWS)
 
 typedef void*				HINSTANCE;
 typedef void*				HMODULE;
@@ -836,6 +838,7 @@ typedef struct _TIME_ZONE_INFORMATION {
 #define ZeroMemory(dst,size)		memset(dst, 0, size)
 
 #define VOID    void
+#if defined(TARGET_OS_WINDOWS)
 #define __int8    char
 #define __int16   int16_t
 #define __int32   int32_t
@@ -844,22 +847,25 @@ typedef struct _TIME_ZONE_INFORMATION {
 
 #define __stdcall
 #define __cdecl
+#endif // defined(TARGET_OS_WINDOWS)
 #define WINBASEAPI
 #define NTAPI       __stdcall
 #define CALLBACK    __stdcall
 #define WINAPI      __stdcall
 #define WINAPIV     __cdecl
-#if !defined(TARGET_OS_APPLE) && !defined(TARGET_FREEBSD)
-#define APIENTRY    WINAPI
-#else
-#define APIENTRY
-#endif
+#if !defined( APIENTRY )
+# if defined(TARGET_OS_WINDOWS)
+#  define APIENTRY    WINAPI
+//# else
+//#  define APIENTRY
+# endif // defined(TARGET_OS_WINDOWS)
+#endif // !defined(APIENTRY)
 #define APIPRIVATE  __stdcall
 #define IN
 #define OUT
 #define OPTIONAL
 #define _declspec(X)
-#define __declspec(X)
+//#define __declspec(X)
 
 // Network
 #define SOCKADDR_IN         struct sockaddr_in
@@ -884,9 +890,9 @@ typedef int( *LPTHREAD_START_ROUTINE )( void * );
 // File
 #define O_BINARY		0
 #define O_TEXT			0
-#define _O_TRUNC		O_TRUNC
-#define _O_RDONLY		O_RDONLY
-#define _O_WRONLY		O_WRONLY
+# define _O_TRUNC		O_TRUNC
+# define _O_RDONLY		O_RDONLY
+# define _O_WRONLY		O_WRONLY
 
 #if defined(TARGET_OS_APPLE) || defined(TARGET_FREEBSD)
 # define stat64 stat
@@ -897,7 +903,9 @@ typedef int64_t off64_t;
 #  define statfs64 statfs
 # endif
 #else
-# define __stat64 stat64
+# ifdef TARGET_OS_WINDOWS
+#  define __stat64 stat64
+# endif // TARGET_OS_WINDOWS
 #endif
 
 struct _stati64 {
@@ -908,7 +916,7 @@ struct _stati64 {
 	short          st_uid;
 	short          st_gid;
 	dev_t st_rdev;
-	__int64  st_size;
+    int64_t  st_size;
 	time_t _st_atime;
 	time_t _st_mtime;
 	time_t _st_ctime;
@@ -947,9 +955,8 @@ typedef struct _SECURITY_ATTRIBUTES {
 #define FILE_BEGIN			0
 #define FILE_CURRENT        1
 #define FILE_END            2
-
-#define _S_IFREG			S_IFREG
-#define _S_IFDIR			S_IFDIR
+# define _S_IFREG			S_IFREG
+# define _S_IFDIR			S_IFDIR
 
 #define _stat				stat
 
@@ -1315,7 +1322,7 @@ typedef int64_t              time64_t;
 /* Define to 1 if you have the <memory.h> header file. */
 #define HAVE_MEMORY_H				1
 /* Define to 1 if you have the `mmap' function. */
-#if _MSC_VER
+#ifdef _MSC_VER
 # define HAVE_MAPVIEWOFFILE			1
 # define HAVE_MMAP					0
 #else 

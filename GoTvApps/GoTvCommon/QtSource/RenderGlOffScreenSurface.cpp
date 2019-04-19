@@ -9,7 +9,8 @@
 //============================================================================
 RenderGlOffScreenSurface::RenderGlOffScreenSurface( RenderKodiThread* kodiThread,
                                                     RenderGlWidget * glWidget,
-                                                    QOpenGLContext* renderContext,
+                                                    QOpenGLContext * guiRenderContext,
+                                                    QOpenGLContext * threadRenderContext,
                                                     QScreen* targetScreen, 
                                                     const QSize& size )
 : QOffscreenSurface( targetScreen )
@@ -17,12 +18,8 @@ RenderGlOffScreenSurface::RenderGlOffScreenSurface( RenderKodiThread* kodiThread
 , m_GlWidget( glWidget )
 , m_initialized( false )
 , m_updatePending( false )
-, m_RenderGuiContext( glWidget->context() )
-, m_RenderThreadContext( renderContext )
-, m_functions( nullptr )
-#if !defined(QT_OPENGL_ES_2)
-, m_functions_3_0( nullptr )
-#endif // !defined(QT_OPENGL_ES_2)
+, m_RenderGuiContext( guiRenderContext )
+, m_RenderThreadContext( threadRenderContext )
 , m_SurfaceSize( size )
 , m_NextSurfaceSize( size )
 , m_TestTexure1( -1 )
@@ -110,13 +107,6 @@ bool RenderGlOffScreenSurface::beginRenderGl()
     {
         // initialize for render
         initializeInternal();
-//        makeCurrent();
-//        if( m_GlWidget )
-//        {
-//            m_GlWidget->initShaders();
-//        }
-
-//		doneCurrent();
     }
 
 	//LogMsg( LOG_DEBUG, " RenderGlOffScreenSurface::beginRender size x(%d) y(%d)", m_SurfaceSize.width(), m_SurfaceSize.height() );
@@ -594,25 +584,6 @@ void RenderGlOffScreenSurface::update()
 }
 
 //============================================================================
-void RenderGlOffScreenSurface::render(  )
-{
-	// never gets called
-    std::lock_guard <std::mutex> locker( m_mutex );
-    // check if we need to initialize stuff
-    initializeInternal();
-
-    // make context current and bind framebuffer
-    makeCurrent();
-    bindFramebufferObject();
-
-    // call user paint function
-    doneCurrent();
-
-    // mark that we're done with updating
-    m_updatePending = false;
-}  // RenderGlOffScreenSurface::render
-
-//============================================================================
 void RenderGlOffScreenSurface::exposeEvent( QExposeEvent*  )
 {
     // render window content if window is exposed
@@ -629,8 +600,7 @@ bool RenderGlOffScreenSurface::event( QEvent* event )
         return ( true );
 
     case QEvent::UpdateRequest:
-        render(); // never gets called
-        return ( true );
+         return ( true );
 
 	case QEvent::PlatformSurface:
 	default:

@@ -205,8 +205,8 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_AudioOut( *this )
 {
 	connect( m_OncePerSecondTimer, SIGNAL( timeout() ), &m_OffersMgr, SLOT( slotOncePerSecond() ) );
-	g_AppCommon = this; // crap.. need a global instance that can accessed with GetAppInstance() for objects created in ui files
-	getQApplication().setStyle( &m_AppStyle );
+    g_AppCommon = this; // crap.. need a global instance that can accessed with GetAppInstance() for objects created in ui files
+    getQApplication().setStyle( &m_AppStyle );
 }
 
 //============================================================================

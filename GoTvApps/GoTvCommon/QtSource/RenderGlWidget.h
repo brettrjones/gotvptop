@@ -205,7 +205,7 @@ public slots:
     void                        slotOnFrameRendered();
 
 protected:
-    void                        paintEvent(QPaintEvent *) override { }
+    //void                        paintEvent(QPaintEvent *) override { }
 
     virtual void				showEvent( QShowEvent * ev ) override;
     virtual void				hideEvent( QHideEvent * ev ) override;
@@ -249,9 +249,8 @@ protected:
     QTimer *					m_ResizingTimer = nullptr;
 	bool						m_IsResizing = false;
 
-
     QOpenGLFunctions *          m_GlWidgetFunctions = nullptr;
-
+    QOpenGLFunctions *          m_GlThreadFunctions = nullptr;
 
     QMatrix4x4                  m_ColorMatrix;
 };

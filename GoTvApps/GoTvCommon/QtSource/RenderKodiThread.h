@@ -14,17 +14,26 @@ class RenderKodiThread : public QThread
 {
     Q_OBJECT
 public:
-    explicit RenderKodiThread( QWidget * parent );
+    explicit RenderKodiThread( RenderGlLogic& renderLogic );
     virtual ~RenderKodiThread() override = default;
 
-
-    void                        startRenderThread();
-
     void						setRenderThreadShouldRun(bool shouldRun) { m_ShouldRun = shouldRun; }
+
+    bool                        isRenderThreadStarted() { return m_IsThreadStarted; }
+    void                        startRenderThread();
+    void                        stopRenderThread();
+
+signals:
+    void                        signalStartRenderThread();
+
+protected slots:
+    void                        slotStartRenderThread();
 
 protected:
     virtual void                run() override;
 
+    RenderGlLogic&				m_RenderLogic;
     bool						m_ShouldRun = true;
+    bool                        m_IsThreadStarted = false;
     bool                        m_IsKodiRunning = false;
 };

@@ -162,6 +162,7 @@ bool CSettingsComponent::InitDirectoriesLinux( bool bPlatformDirectories )
      might be mixed case.
      */
 
+#ifdef TARGET_OS_LINUX
 #if defined(TARGET_POSIX) && !defined(TARGET_DARWIN)
     std::string appPath;
     std::string appName = CCompileInfo::GetAppName();
@@ -210,11 +211,10 @@ bool CSettingsComponent::InitDirectoriesLinux( bool bPlatformDirectories )
     {
         // use build time default
         appPath = INSTALL_PATH;
-        /* Check if binaries and arch independent data files are being kept in
-         * separate locations. */
+        // Check if binaries and arch independent data files are being kept in separate locations.
         if( !XFILE::CDirectory::Exists( URIUtils::AddFileToFolder( appPath, "userdata" ) ) )
         {
-            /* Attempt to locate arch independent data files. */
+            // Attempt to locate arch independent data files.
             appPath = CUtil::GetHomePath( appBinPath );
             if( !XFILE::CDirectory::Exists( URIUtils::AddFileToFolder( appPath, "userdata" ) ) )
             {
@@ -224,7 +224,7 @@ bool CSettingsComponent::InitDirectoriesLinux( bool bPlatformDirectories )
         }
     }
 
-    /* Set some environment variables */
+    // Set some environment variables
     setenv( envAppBinHome, appBinPath.c_str(), 0 );
     setenv( envAppHome, appPath.c_str(), 0 );
 
@@ -266,6 +266,30 @@ bool CSettingsComponent::InitDirectoriesLinux( bool bPlatformDirectories )
 #else
     return false;
 #endif
+#endif // TARGET_OS_LINUX
+
+#if 0
+    std::string xbmcPath = CUtil::GetHomePath();
+    setenv( "KODI_HOME", xbmcPath.c_str() );
+    CSpecialProtocol::SetXBMCBinPath( xbmcPath );
+    CSpecialProtocol::SetXBMCPath( xbmcPath );
+    CSpecialProtocol::SetXBMCBinAddonPath( xbmcPath + "/addons" );
+
+    std::string strWin32UserFolder = CWIN32Util::GetProfilePath();
+    CSpecialProtocol::SetLogPath( strWin32UserFolder );
+    CSpecialProtocol::SetHomePath( strWin32UserFolder );
+    CSpecialProtocol::SetMasterProfilePath( URIUtils::AddFileToFolder( strWin32UserFolder, "userdata" ) );
+    CSpecialProtocol::SetTempPath( URIUtils::AddFileToFolder( strWin32UserFolder, "cache" ) );
+
+    setenv( "KODI_PROFILE_USERDATA", CSpecialProtocol::TranslatePath( "special://masterprofile/" ).c_str() );
+
+    CreateUserDirs();
+
+    return true;
+#else
+    return false;
+#endif
+
 }
 
 bool CSettingsComponent::InitDirectoriesOSX( bool bPlatformDirectories )
@@ -376,7 +400,7 @@ bool CSettingsComponent::InitDirectoriesWin32( bool bPlatformDirectories )
 
     CEnvironment::setenv( "KODI_PROFILE_USERDATA", CSpecialProtocol::TranslatePath( "special://masterprofile/" ) );
 
-  CreateUserDirs();
+    CreateUserDirs();
 
     return true;
 #else

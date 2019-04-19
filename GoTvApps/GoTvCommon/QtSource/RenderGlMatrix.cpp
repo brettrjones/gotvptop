@@ -18,7 +18,7 @@
  *
  */
 
-#include "RenderGlBaseWidget.h"
+#include "RenderGlWidget.h"
 
 #include "rendering/MatrixGL.h"
 #include "utils/TransformMatrix.h"

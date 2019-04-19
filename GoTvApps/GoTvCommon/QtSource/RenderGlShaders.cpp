@@ -1,5 +1,6 @@
 #include "RenderGlShaders.h"
 #include "RenderShaderQt.h"
+#include "GoTvDebugConfig.h"
 
 #include <CoreLib/VxDebug.h>
 
@@ -20,7 +21,7 @@ RenderGlShaders::RenderGlShaders( RenderGlWidget& renderGlWidget )
 void RenderGlShaders::compileShader( int shaderIdx )
 {
     EShaderType shaderType = eShaderGui;
-    ESHADERMETHOD shaderMethod = (ESHADERMETHOD)shaderIdx;
+    ESHADERMETHOD shaderMethod = static_cast<ESHADERMETHOD>(shaderIdx);
 
     std::string shaderName = "SM_UNKNOWN";
     std::string vertexShaderCode;
@@ -103,6 +104,9 @@ void RenderGlShaders::destroyShaders()
 //============================================================================
 bool RenderGlShaders::enableShader( ESHADERMETHOD method )
 {
+#ifdef DEBUG_QT_RENDER
+    LogMsg( LOG_ERROR, "enableShader - %s", describeShaderMethod( method ) );
+#endif // DEBUG
     bool eanbled = false;
     VerifyGLStateQt();
     if( ( method < SM_MAX) && m_Shaders[ method ] )
@@ -144,6 +148,10 @@ bool RenderGlShaders::isShaderValid( ESHADERMETHOD method )
 //============================================================================
 void RenderGlShaders::disableShader( ESHADERMETHOD method )
 {
+#ifdef DEBUG_QT_RENDER
+    LogMsg( LOG_ERROR, "disableShader - %s", describeShaderMethod( method ) );
+#endif // DEBUG
+
     if( m_Shaders[ method ] )
     {
         m_Shaders[ method ]->disableShader();
@@ -477,6 +485,71 @@ void RenderGlShaders::shaderDisableVertexAttribArray( ESHADERMETHOD shader, int 
 }
 
 //============================================================================
+// shader method to string for debugging
+const char * RenderGlShaders::describeShaderMethod( ESHADERMETHOD method )
+{
+    switch( method )
+    {
+    case SM_DEFAULT:
+        return "SM_DEFAULT";
+    case SM_TEXTURE:
+        return "SM_TEXTURE";
+    case SM_MULTI:
+        return "SM_MULTI";
+    case SM_FONTS:
+        return "SM_FONTS";
+    case SM_TEXTURE_NOBLEND:
+        return "SM_TEXTURE_NOBLEND";
+    case SM_MULTI_BLENDCOLOR:
+        return "SM_MULTI_BLENDCOLOR";
+    case SM_TEXTURE_RGBA:
+        return "SM_TEXTURE_RGBA";
+    case SM_TEXTURE_RGBA_OES:
+        return "SM_TEXTURE_RGBA_OES";
+    case SM_TEXTURE_RGBA_BLENDCOLOR:
+        return "SM_TEXTURE_RGBA_BLENDCOLOR";
+    case SM_TEXTURE_RGBA_BOB:
+        return "SM_TEXTURE_RGBA_BOB";
+    case SM_TEXTURE_RGBA_BOB_OES:
+        return "SM_TEXTURE_RGBA_BOB_OES";
+    case SM_VIDEO_YV12_BASIC:
+        return "SM_VIDEO_YV12_BASIC";
+    case SM_VIDEO_NV12_BASIC:
+        return "SM_VIDEO_NV12_BASIC";
+    case SM_VIDEO_YUY2_BASIC:
+        return "SM_VIDEO_YUY2_BASIC";
+    case SM_VIDEO_UYVY_BASIC:
+        return "SM_VIDEO_UYVY_BASIC";
+    case SM_VIDEO_NV12_RGB_BASIC:
+        return "SM_VIDEO_NV12_RGB_BASIC";
+    case SM_VIDEO_YV12_BOB:
+        return "SM_VIDEO_YV12_BOB";
+    case SM_VIDEO_NV12_BOB:
+        return "SM_VIDEO_NV12_BOB";
+    case SM_VIDEO_YUY2_BOB:
+        return "SM_VIDEO_YUY2_BOB";
+    case SM_VIDEO_UYVY_BOB:
+        return "SM_VIDEO_UYVY_BOB";
+    case SM_VIDEO_NV12_RGB_BOB:
+        return "SM_VIDEO_NV12_RGB_BOB";
+    case SM_VID_FILTER_DEFAULT:
+        return "SM_VID_FILTER_DEFAULT";
+    case SM_VID_FILTER_CONVOLUTION_4X4_RGBA:
+        return "SM_VID_FILTER_CONVOLUTION_4X4_RGBA";
+    case SM_VID_FILTER_CONVOLUTION_4X4_FLOAT:
+        return "SM_VID_FILTER_CONVOLUTION_4X4_FLOAT";
+    case SM_VID_FILTER_CONVOLUTION_6X6_RGBA:
+        return "SM_VID_FILTER_CONVOLUTION_6X6_RGBA";
+    case SM_VID_FILTER_CONVOLUTION_6X6_FLOAT:
+        return "SM_VID_FILTER_CONVOLUTION_6X6_FLOAT";
+
+    default:
+        return "UNKNOWN SHADER";
+    }
+
+}
+
+//============================================================================
 #ifdef DEBUG
 void  RenderGlShaders::VerifyGLStateQtDbg( const char* szfile, const char* szfunction, int lineno )
 {
@@ -499,5 +572,4 @@ void RenderGlShaders::VerifyGLStateQt()
     LogMsg( LOG_ERROR, "GL ERROR: %s\n", gluErrorString( err ) );
 }
 #endif
-
 

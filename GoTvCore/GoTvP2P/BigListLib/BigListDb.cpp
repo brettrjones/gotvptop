@@ -26,6 +26,8 @@
 #include <memory.h>
 #include <stdio.h>
 
+#include "GoTvDebugConfig.h"
+
 //============================================================================
 BigListDb::BigListDb( BigListMgr& bigListMgr, P2PEngine& engine )
 : DbBase( "BigListDb" )
@@ -69,13 +71,15 @@ RCODE BigListDb::bigListDbStartup(  const char * pDbFileName )
 	}
 
 	RCODE rc = dbStartup(BIG_LIST_INFO_VERSION, pDbFileName );
-	if( 0 == rc )
+#ifdef DEBUG_BIGLIST_DB
+    if( 0 == rc )
 	{
 		LogMsg( LOG_INFO, "bigListDbStartup  before Restore All\n");
 	}
 
 	//m_BigListLoadThread.startThread( (VX_THREAD_FUNCTION_T)BigListLoadThreadFunction, &m_BigListMgr ); 
 	LogMsg( LOG_INFO, "bigListDbStartup  result %d\n", rc );
+#endif // DEBUG_BIGLIST_DB
 	m_BigListDbInitialized = true;
 	return rc;
 }
@@ -105,7 +109,9 @@ RCODE BigListDb::dbRestoreAll( const char * networkName )
 	std::string strNetworkName = networkName;
 	if( getNetworkName() != networkName )
 	{
-		LogMsg( LOG_INFO, "BigListDb::dbRestoreAll changing networks %s to %s\n", getNetworkName().c_str(), networkName );
+#ifdef DEBUG_BIGLIST_DB
+        LogMsg( LOG_INFO, "BigListDb::dbRestoreAll changing networks %s to %s\n", getNetworkName().c_str(), networkName );
+#endif // DEBUG_BIGLIST_DB
 		m_NetworkName = strNetworkName;
 	}
 

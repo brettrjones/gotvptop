@@ -155,22 +155,6 @@
 # define MAX(x,y)     ((x)>(y) ? (x) : (y))
 #endif // MIN
 
-
-//============================================================================
-//! return true if value is a power of 2 value
-VXMATH_INLINE int IsAPowerOf2( int iVal )
-{
-    int iBitCount = 0;
-	int iBitsPerInt = sizeof(int) * 8;
-    for( int i = 0; i < iBitsPerInt; i++ )
-	if( iVal & ( 1 << i ) )
-	{
-	    iBitCount++;
-	}
-	return ( 1 == iBitCount )?1:0;
-}
-
-
 #define	PITCH	0 //sumersault facing view origin
 #define	YAW		1 //rotate clockwise/counterclockwise
 #define	ROLL	2 //sumersault facing left
@@ -200,22 +184,15 @@ enum AXIS
 #define RandPlusMinus(range)    (range*(((float)rand())/RAND_MAX - 0.05f))//Returns -amount/2 to +amount/2
 
 //============================================================================
-//=== standard math replacement functions ( for speed reasons ) ===//
-static VXMATH_INLINE long FastLog( long x )
-{
-	long a=0;
-	while( x>>=1 )
-		a++;
-	return a;
-}
+//! return true if value is a power of 2 value
+int IsAPowerOf2( int iVal );
 
 //============================================================================
-static VXMATH_INLINE float FastFabs( float f )
-{
-	long a = * ( long * ) &f;
-	a &= 0x7FFFFFFF;
-	return * ( float * ) &a;
-}
+//=== standard math replacement functions ( for speed reasons ) ===//
+long FastLog( long x );
+
+//============================================================================
+float FastFabs( float f );
 
 //============================================================================
 //Eero Pajarre Posted this function to mesa bbs that greatly speeds up ftol
@@ -224,45 +201,12 @@ static VXMATH_INLINE float FastFabs( float f )
 //of VC++ is dramatic (I have seen Opengl using 20-30% of its time in ftol), but
 //it should be noted that the function rounds its argument (ftol truncates),so it
 //must be used with some care.
-static VXMATH_INLINE long FastFtol(float f)
-{
-#ifdef _MSC_VER
-    return (long)f;
-#else
-    // gcc compile
-   long r = 0;
-   asm (
-        ".intel_syntax noprefix\n"
-        "fld f\n"
-        "fistp r\n"
-        ".att_syntax \n"
-    );
-
-    return r;
-#endif // _MSC_VER
-}
+long FastFtol(float f);
 
 //============================================================================
 //fast way to make number the next power of 2
-static VXMATH_INLINE int FastNextPow2(int Number)
-{
-#ifdef _MSC_VER
-    return (int)pow(2, ceil(log(Number)/log(2)));
-#else
-    // gcc compile
-   long r = 0;
-   asm (
-        ".intel_syntax noprefix\n"
-        "xor ecx, ecx\n"
-        "bsr ecx, Number\n"
-        "inc ecx\n"
-        "shl RetVal, cl\n"
-        ".att_syntax \n"
-    );
+int FastNextPow2(int Number);
 
-    return r;
-#endif // _MSC_VER
-}
 //nVidia FastSqrt
 //table for fast sqrt
 extern unsigned long g_au32FastSqrtTable[ 0x10000 ];
@@ -270,67 +214,19 @@ extern unsigned long g_au32FastSqrtTable[ 0x10000 ];
 #define F32Bits(fp) (*(unsigned *)&(fp))
 
 //============================================================================
-static VXMATH_INLINE float FastSqrtf( float x )
-{
-	if( 0 == F32Bits( x ) )
-	{
-		return 0.0f;
-	}
-	F32Bits(x) = g_au32FastSqrtTable[( F32Bits(x) >> 8) & 0xFFFF] |
-		((((F32Bits(x) - 0x3F800000) >> 1) + 0x3F800000) & 0x7F800000);
-
-	return x;
-}
+float FastSqrtf( float x );
 
 //============================================================================
-static VXMATH_INLINE float AngleModulus( float fAngle )
-{
-	return (float)(( 360.0/65536 ) * ((long)( fAngle * ( 65536/360.0 )) & 65535));
-}
+float AngleModulus( float fAngle );
 
 //============================================================================
-static VXMATH_INLINE float LerpAngle( float fAngleA, float fAngleB, float fFraction )
-{
-	if (fAngleA - fAngleB > 180)
-	{
-		fAngleA -= 360;
-	}
-
-	if (fAngleA - fAngleB < -180)
-	{
-		fAngleA += 360;
-	}
-
-	return fAngleB + fFraction * (fAngleA - fAngleB );
-}
+float LerpAngle( float fAngleA, float fAngleB, float fFraction );
 
 //============================================================================
-static VXMATH_INLINE float ClampedAcosf(float x)
-{
-    if(x >  1.0f)
-	{
-		x =  1.0f;
-	}
-    if(x < -1.0f)
-	{
-		x = -1.0f;
-	}
-    return (float)acos(x);
-}
+float ClampedAcosf(float x);
 
 //============================================================================
-static VXMATH_INLINE float ClampedAsinf(float x)
-{
-    if(x >  1.0f)
-	{
-		x =  1.0f;
-	}
-    if(x < -1.0f)
-	{
-		x = -1.0f;
-	}
-    return (float)asin(x);
-}
+float ClampedAsinf(float x);
 
 //=== Included for nebula device compatability ===//
 #ifdef _MSC_VER
@@ -358,154 +254,49 @@ static VXMATH_INLINE float ClampedAsinf(float x)
 #define vx_cos(x) (cosf(x))
 
 //============================================================================
-static VXMATH_INLINE float vx_acos(float x)
-{
-    if(x >  1.0f)
-	{
-		x =  1.0f;
-	}
-
-    if(x < -1.0f)
-	{
-		x = -1.0f;
-	}
-
-    return acosf(x);
-}
+float vx_acos(float x);
 
 //============================================================================
-static VXMATH_INLINE float vx_asin(float x)
-{
-    if(x >  1.0f)
-	{
-		x =  1.0f;
-	}
-
-    if(x < -1.0f)
-	{
-		x = -1.0f;
-	}
-
-    return asinf(x);
-}
+float vx_asin(float x);
 
 //============================================================================
-static VXMATH_INLINE float vx_sqrt(float x)
-{
-    if (x<0.0f)
-	{
-		x = 0.0f;
-	}
-
-    return sqrtf(x);
-}
+float vx_sqrt(float x);
 
 //============================================================================
-static VXMATH_INLINE bool vx_fequal(float f0, float f1, float tol)
-{
-    float f = f0-f1;
-    if ((f>(-tol)) && (f<tol))
-	{
-        return true;
-	}
-    else
-	{
-        return false;
-	}
-}
+bool vx_fequal(float f0, float f1, float tol);
 
 //============================================================================
 //-------------------------------------------------------------------
 //  Return true if (f0<f1).
 //-------------------------------------------------------------------
-static VXMATH_INLINE bool vx_fless(float f0, float f1, float tol)
-{
-    if ((f0-f1)<tol)
-	{
-        return true;
-	}
-    else
-	{
-        return false;
-	}
-}
+bool vx_fless(float f0, float f1, float tol);
 
 //============================================================================
 //-------------------------------------------------------------------
 //  Return true if (f0>f1)
 //-------------------------------------------------------------------
-static VXMATH_INLINE bool vx_fgreater(float f0, float f1, float tol)
-{
-    if ((f0-f1)>tol)
-	{
-        return true;
-	}
-    else
-	{
-        return false;
-	}
-}
+bool vx_fgreater(float f0, float f1, float tol);
 
 //-------------------------------------------------------------------
 //! calculate number of bits set.. speed optimized
 //! contributed by Johnny Corvin
-VXMATH_INLINE int CountBitsSetInVar( unsigned long u32Var )
-{
-	int iCnt = 0;
-	while( u32Var )
-	{
-		iCnt++;
-		u32Var &= ( u32Var - 1 );
-	}
-	return iCnt;
-}
+int CountBitsSetInVar( unsigned long u32Var );
 
 //============================================================================
 //! turns a value into a power of 2 Value
-static VXMATH_INLINE unsigned long VxMakePowerOf2( unsigned long u32Val )
-{
-	// find highest bit set
-	unsigned long u32Pow2 = 1;
-	unsigned long u32Mask = 1;
-	for( int i = 0; i < 32; i++ )
-	{
-		if( u32Mask & u32Val )
-		{
-			u32Pow2 = u32Mask;
-		}
-		u32Mask <<= 1;
-	}
-	return u32Pow2;
-}
+unsigned long VxMakePowerOf2( unsigned long u32Val );
+
 //============================================================================
 //! increments Value to the next highest power of 2
-static VXMATH_INLINE unsigned long VxIncrementPowerOf2( unsigned long u32Val )
-{
-	// first to make sure starting value is a power of 2
-	u32Val = VxMakePowerOf2( u32Val );
-	u32Val <<= 1;
-	return u32Val;
-}
+unsigned long VxIncrementPowerOf2( unsigned long u32Val );
 
 //============================================================================
 //! increments Value to the next lowest power of 2
-static VXMATH_INLINE unsigned long VxDecrementPowerOf2( unsigned long u32Val )
-{
-	u32Val = VxMakePowerOf2( u32Val );
-	u32Val >>= 1;
-	if( 0 == u32Val )
-	{
-		return 1;
-	}
-
-	return u32Val;
-}
+unsigned long VxDecrementPowerOf2( unsigned long u32Val );
 
 //============================================================================
 //! plagiarism of code by Nikolaus Gebhardt.. see irrlicht copywrite for details
 extern const float vx_fast_atof_table[16];
-
-
 
 #ifdef __cplusplus
 #ifndef sincos
@@ -516,40 +307,17 @@ extern const float vx_fast_atof_table[16];
 //-------------------------------------------------------------------
 //  random floating point with precision
 //-------------------------------------------------------------------
-VXMATH_INLINE float frand( int precis = 4 )
-{
-	int val=(int)pow(10.0f,precis);
-	return (rand()%val)/(float)val;
-}
-//-------------------------------------------------------------------
-//  limit value to + or - 360 degrees
-//-------------------------------------------------------------------
-static VXMATH_INLINE void LimitTo360Degrees( float & f32Degrees )
-{
-	while( f32Degrees > 360.0f )
-	{
-		f32Degrees -= 360.0f;
-	}
-	while( f32Degrees < -360.0f )
-	{
-		f32Degrees += 360.0f;
-	}
-}
+float frand( int precis = 4 );
 
 //-------------------------------------------------------------------
 //  limit value to + or - 360 degrees
 //-------------------------------------------------------------------
-static VXMATH_INLINE void LimitTo360Degrees( double & f64Degrees )
-{
-	while( f64Degrees > 360.0 )
-	{
-		f64Degrees -= 360.0;
-	}
-	while( f64Degrees < -360.0 )
-	{
-		f64Degrees += 360.0;
-	}
-}
+void LimitTo360Degrees( float & f32Degrees );
+
+//-------------------------------------------------------------------
+//  limit value to + or - 360 degrees
+//-------------------------------------------------------------------
+void LimitTo360Degrees( double & f64Degrees );
 
 //-------------------------------------------------------------------
 //! lerp function template
@@ -564,55 +332,11 @@ VXMATH_INLINE T vx_lerp( const T& a, const T&b, const T& t )
 //! Provides a fast function for converting a string into a float,
 //! about 6 times faster than atof in win32.
 // If you find any bugs, please send them to me, niko (at) irrlicht3d.org.
-VXMATH_INLINE const char* vx_fast_atof_func( const char* c, float& out )
-{
-	bool inv = false;
-	char *t;
-	float f;
-	if( *c == '-' )
-	{
-		c++;
-		inv = true;
-	}
-	f = ( float )strtol( c, &t, 10 );
-
-	c = t;
-
-	if( *c == '.' )
-	{
-		c++;
-
-		float pl = ( float )strtol( c, &t, 10 );
-		pl *= vx_fast_atof_table[ t - c ];
-
-		f += pl;
-
-		c = t;
-
-		if( *c == 'e' )
-		{
-			++c;
-			float exp = ( float )strtol( c, &t, 10 );
-			f *= ( float )powf( 10.0f, exp );
-			c = t;
-		}
-	}
-
-	if( inv )
-		f *= -1.0f;
-
-	out = f;
-	return c;
-}
+const char* vx_fast_atof_func( const char* c, float& out );
 
 //============================================================================
 //! plagiarism of code by Nikolaus Gebhardt.. see irrlicht copywrite for details
-VXMATH_INLINE float vx_fast_atof( const char * c )
-{
-	float ret;
-	vx_fast_atof_func( c, ret );
-	return ret;
-}
+float vx_fast_atof( const char * c );
 
 
 #else 
@@ -622,95 +346,28 @@ VXMATH_INLINE float vx_fast_atof( const char * c )
 # define sincosf( a, b, c ) (*b=sinf(a),*c=cosf(a))
 #endif // sincos
 
-VXMATH_INLINE float frand( int precis )
-{
-	int val = ( int )pow( 10.0f, precis );
-	return ( rand() % val ) / ( float )val;
-}
-//-------------------------------------------------------------------
-//  limit value to + or - 360 degrees
-//-------------------------------------------------------------------
-static VXMATH_INLINE void LimitTo360DegreesF32( float * f32Degrees )
-{
-	while( *f32Degrees > 360.0f )
-	{
-		*f32Degrees -= 360.0f;
-	}
-	while( *f32Degrees < -360.0f )
-	{
-		*f32Degrees += 360.0f;
-	}
-}
+float frand( int precis );
 
 //-------------------------------------------------------------------
 //  limit value to + or - 360 degrees
 //-------------------------------------------------------------------
-static VXMATH_INLINE void LimitTo360DegreesF64( double * f64Degrees )
-{
-	while( *f64Degrees > 360.0 )
-	{
-		*f64Degrees -= 360.0;
-	}
-	while( *f64Degrees < -360.0 )
-	{
-		*f64Degrees += 360.0;
-	}
-}
+void LimitTo360DegreesF32( float * f32Degrees );
+
+//-------------------------------------------------------------------
+//  limit value to + or - 360 degrees
+//-------------------------------------------------------------------
+void LimitTo360DegreesF64( double * f64Degrees );
+
 //============================================================================
 //! plagiarism of code by Nikolaus Gebhardt.. see irrlicht copywrite for details
 //! Provides a fast function for converting a string into a float,
 //! about 6 times faster than atof in win32.
 // If you find any bugs, please send them to me, niko (at) irrlicht3d.org.
-VXMATH_INLINE const char * vx_fast_atof_func( const char * c, float * out )
-{
-	bool inv = false;
-	char *t;
-	float f;
-	if( *c == '-' )
-	{
-		c++;
-		inv = true;
-	}
-	f = ( float )strtol( c, &t, 10 );
-
-	c = t;
-
-	if( *c == '.' )
-	{
-		c++;
-
-		float pl = ( float )strtol( c, &t, 10 );
-		pl *= vx_fast_atof_table[ t - c ];
-
-		f += pl;
-
-		c = t;
-
-		if( *c == 'e' )
-		{
-			++c;
-			float exp = ( float )strtol( c, &t, 10 );
-			f *= ( float )powf( 10.0f, exp );
-			c = t;
-		}
-	}
-
-	if( inv )
-		f *= -1.0f;
-
-	*out = f;
-	return c;
-}
+const char * vx_fast_atof_func( const char * c, float * out );
 
 //============================================================================
 //! plagiarism of code by Nikolaus Gebhardt.. see irrlicht copywrite for details
-VXMATH_INLINE float vx_fast_atof( const char * c )
-{
-	float ret;
-	vx_fast_atof_func( c, &ret );
-	return ret;
-}
-
+float vx_fast_atof( const char * c );
 
 #endif // __cplusplus
 

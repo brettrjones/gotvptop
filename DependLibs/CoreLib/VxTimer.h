@@ -31,7 +31,7 @@ class VxTimer
 {
 public:
 	VxTimer();
-	virtual ~VxTimer(); 
+    virtual ~VxTimer() = default;
 
     double						elapsedMs( void );       // return the elapsed time in milliseconds since timer was started or created 
     double						elapsedSec( void )  { return ( elapsedMs() / 1000 ); }      // return the elapsed time in seconds since
