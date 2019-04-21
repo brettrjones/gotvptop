@@ -51,7 +51,7 @@ void NetworkEventAvail::runNetworkEvent( void )
 	//uint16_t u16TcpPort;
 	//m_Engine.getEngineSettings().getTcpIpPort( u16TcpPort );
 	//m_PktAnn.setOnlinePort( u16TcpPort );
-	//m_Engine.getToGuiInterface().toGuiUpdateMyIdent( &m_PktAnn );
+	//m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
 	LogMsg( LOG_INFO, "NetworkEventAvail::runNetworkEvent done\n" );
 }
 

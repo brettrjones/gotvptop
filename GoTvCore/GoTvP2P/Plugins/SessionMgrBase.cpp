@@ -16,16 +16,19 @@
 #include "SessionMgrBase.h"
 #include "PluginBase.h"
 #include "PluginMgr.h"
+#include <GoTvInterface/IToGui.h>
 
-SessionMgrBase::SessionMgrBase( PluginBase& plugin, PluginMgr& pluginMgr, IToGui& toGui )
+
+SessionMgrBase::SessionMgrBase( PluginBase& plugin, PluginMgr& pluginMgr )
 : m_Plugin( plugin )
 , m_PluginMgr( pluginMgr )
-, m_ToGui( toGui )
 {
 }
 
-SessionMgrBase::~SessionMgrBase()
-{
+//============================================================================
+IToGui&	SessionMgrBase::getToGui( void )
+{ 
+    return IToGui::getToGui(); 
 }
 
 //============================================================================

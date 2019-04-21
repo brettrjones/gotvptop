@@ -26,8 +26,8 @@ class P2PEngine;
 class BigListDb : public DbBase, public BigList
 {
 public:
-	BigListDb( BigListMgr& bigListMgr, P2PEngine& engine );
-	virtual ~BigListDb();
+	BigListDb( BigListMgr& bigListMgr );
+	virtual ~BigListDb() override = default;
 
 	bool						isBigListInitialized( void )			{ return m_BigListDbInitialized; }
 	std::string&				getNetworkName( void )					{ return m_NetworkName; }
@@ -68,5 +68,5 @@ protected:
 	VxThread					m_BigListLoadThread;			// thread to load nodes from database
 	BigListMgr&					m_BigListMgr;
 	std::string					m_NetworkName;
-	bool						m_BigListDbInitialized;
+	bool						m_BigListDbInitialized = false;
 };

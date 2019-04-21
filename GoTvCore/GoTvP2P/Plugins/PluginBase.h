@@ -53,8 +53,8 @@ public:
 		VxMutex&						m_Mutex;
 	};
 
-	PluginBase(	P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent );
-	virtual ~PluginBase();
+	PluginBase(	P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	virtual ~PluginBase() override = default;
 
 	virtual void				pluginShutdown( void ){}
 	virtual bool				isPluginEnabled( void );
@@ -70,6 +70,7 @@ public:
 
 	//=== getter/setters ===//
 	virtual P2PEngine&			getEngine( void )										{ return m_Engine; }
+    virtual IToGui&			    getToGui( void );
 	virtual void				setPluginType( EPluginType ePluginType )				{ m_ePluginType = ePluginType; }					
 	virtual EPluginType			getPluginType( void )									{ return m_ePluginType; }					
 	virtual PluginMgr&			getPluginMgr( void )									{ return m_PluginMgr;	}
@@ -178,7 +179,7 @@ protected:
 	//=== vars ===//
 	P2PEngine&					m_Engine;
 	PluginMgr&					m_PluginMgr;
-	IToGui&						m_ToGui;
+	
 	VxNetIdent *				m_MyIdent;
 
 	EPluginType					m_ePluginType;

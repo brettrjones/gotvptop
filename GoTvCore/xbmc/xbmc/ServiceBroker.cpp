@@ -11,6 +11,7 @@
 #include "profiles/ProfileManager.h"
 #include "settings/SettingsComponent.h"
 #include "windowing/WinSystem.h"
+#include <CoreLib/VxDebug.h>
 
 using namespace KODI;
 
@@ -174,10 +175,12 @@ void CServiceBroker::UnregisterWinSystem()
 
 CRenderSystemBase* CServiceBroker::GetRenderSystem()
 {
-  if (m_pWinSystem)
-    return m_pWinSystem->GetRenderSystem();
+   if( m_pWinSystem )
+   {
+        return m_pWinSystem->GetRenderSystem();
+   }
 
-  return nullptr;
+   return nullptr;
 }
 
 CPowerManager& CServiceBroker::GetPowerManager()
@@ -209,7 +212,7 @@ CGUIComponent* CServiceBroker::m_pGUI = nullptr;
 
 CGUIComponent* CServiceBroker::GetGUI()
 {
-  return m_pGUI;
+    return m_pGUI;
 }
 
 void CServiceBroker::RegisterGUI(CGUIComponent *gui)

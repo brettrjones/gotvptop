@@ -43,9 +43,9 @@ class P2PEngine;
 class BigList
 {
 public:
-	BigList( P2PEngine& engine );
+	BigList();
 
-	P2PEngine&					getEngine( void )					{ return m_Engine; }
+	//P2PEngine&					getEngine( void )					{ return m_Engine; }
 
 	void						bigListLock( int iInst = 0 );
 	void						bigListUnlock( int iInst = 0 );
@@ -77,7 +77,7 @@ public:
 	typedef std::map< VxGUID, BigListInfo *, cmp_vxguid >::iterator BigListIter;
 	std::map<VxGUID, BigListInfo *, cmp_vxguid> m_BigList;
 #endif
-	P2PEngine&					m_Engine;
+	//P2PEngine&					m_Engine;
 
 	std::vector< BigListInfo * >	m_AdministratorList;			// list of administrators
 	std::vector< BigListInfo * >	m_FriendList;					// list of friends

@@ -57,7 +57,7 @@ namespace
 	{
 		if( userData )
 		{
-			((P2PEngine *)userData)->getToGuiInterface().toGuiLog( u32LogFlags, logMsg );
+			((P2PEngine *)userData)->getToGui().toGuiLog( u32LogFlags, logMsg );
 		}
 	}
 
@@ -65,33 +65,31 @@ namespace
 	{
 		if( userData )
 		{
-			((P2PEngine *)userData)->getToGuiInterface().toGuiAppErr( eAppErr, errMsg );
+			((P2PEngine *)userData)->getToGui().toGuiAppErr( eAppErr, errMsg );
 		}
 	}
 }
 
 //============================================================================
-P2PEngine::P2PEngine(	IToGui&	toGui,
-						VxPeerMgr& peerMgr )
-: m_ToGui( toGui )
-, m_PeerMgr( peerMgr )
+P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
+: m_PeerMgr( peerMgr )
+, m_BigListMgr( bigListMgr )
 , m_EngineSettings()
 , m_EngineParams()
 , m_AssetMgr( * new AssetMgr( *this ) )
-, m_BigListMgr( *this )
 , m_ConnectionList( *this )
 , m_NetworkMgr( * new NetworkMgr( *this, peerMgr, m_BigListMgr, m_ConnectionList ) )
 , m_NetworkMonitor( * new NetworkMonitor( *this ) )
 , m_NetServicesMgr( * new NetServicesMgr( *this ) )
 , m_NetConnector( * new NetConnector( *this ) )
 , m_NetworkStateMachine( * new NetworkStateMachine( *this, m_NetworkMgr ) )
-, m_AnchorTest( * ( new AnchorTest( toGui, m_EngineSettings, m_NetServicesMgr ) ) )
-, m_PluginMgr( * new PluginMgr( *this, toGui ) )
-, m_MediaProcessor( * ( new MediaProcessor( *this, toGui ) ) )
-, m_PluginRelay( new PluginRelay( *this, m_PluginMgr, m_ToGui, &m_PktAnn ) )
-, m_PluginFileShare( new PluginFileShare( *this, m_PluginMgr, m_ToGui, &m_PktAnn ) )
-, m_PluginNetServices( new PluginNetServices( *this, m_PluginMgr, m_ToGui, &m_PktAnn ) )
-, m_IsPortOpenTest( * new IsPortOpenTest( *this, m_ToGui, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
+, m_AnchorTest( * ( new AnchorTest( m_EngineSettings, m_NetServicesMgr ) ) )
+, m_PluginMgr( * new PluginMgr( *this ) )
+, m_MediaProcessor( * ( new MediaProcessor( *this ) ) )
+, m_PluginRelay( new PluginRelay( *this, m_PluginMgr, &m_PktAnn ) )
+, m_PluginFileShare( new PluginFileShare( *this, m_PluginMgr, &m_PktAnn ) )
+, m_PluginNetServices( new PluginNetServices( *this, m_PluginMgr, &m_PktAnn ) )
+, m_IsPortOpenTest( * new IsPortOpenTest( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
 , m_RcScan( *this, m_ConnectionList )
 , m_eAppState( eAppStateInvalid )
 , m_eFriendView( eFriendViewEverybody )
@@ -108,6 +106,12 @@ P2PEngine::~P2PEngine()
 {
 	m_PeerMgr.stopListening();
 	m_PluginMgr.pluginMgrShutdown();
+}
+
+//============================================================================
+IToGui& P2PEngine::getToGui()
+{
+    return IToGui::getToGui();
 }
 
 //============================================================================
@@ -226,7 +230,7 @@ void P2PEngine::onSessionStart( EPluginType ePluginType, VxNetIdent * netIdent )
 		
 		netIdent->setLastSessionTimeMs( sysTimeMs );
 		m_BigListMgr.dbUpdateSessionTime( netIdent->getMyOnlineId(), sysTimeMs, getNetworkMgr().getNetworkName() );
-		m_ToGui.toGuiContactLastSessionTimeChange( netIdent );
+		IToGui::getToGui().toGuiContactLastSessionTimeChange( netIdent );
 	}
 }
 

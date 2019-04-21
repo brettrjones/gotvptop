@@ -22,7 +22,7 @@
 class PluginCamServer : public PluginBase
 {
 public:
-	PluginCamServer( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent );
+	PluginCamServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
 	virtual ~PluginCamServer();
 
 

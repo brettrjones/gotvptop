@@ -31,9 +31,9 @@
 #endif
 
 //============================================================================
-PluginVoicePhone::PluginVoicePhone( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, toGui, myIdent )
-, m_PluginSessionMgr( *this, pluginMgr, toGui )
+PluginVoicePhone::PluginVoicePhone( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+: PluginBase( engine, pluginMgr, myIdent )
+, m_PluginSessionMgr( *this, pluginMgr )
 , m_VoiceFeedMgr(*this, m_PluginSessionMgr )
 {
 	m_ePluginType = ePluginTypeVoicePhone;
@@ -183,7 +183,7 @@ void PluginVoicePhone::onPktChatReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxN
 	P2PSession * poSession = (P2PSession *)m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )
 	{
-		m_ToGui.toGuiInstMsg( netIdent, m_ePluginType, (const char *)poPkt->getDataPayload() );
+		IToGui::getToGui().toGuiInstMsg( netIdent, m_ePluginType, (const char *)poPkt->getDataPayload() );
 	}
 }
 

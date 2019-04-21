@@ -37,7 +37,7 @@ class OpusFileEncoder;
 class SndWriter : public MediaCallbackInterface
 {
 public:
-	SndWriter( P2PEngine& engine, MediaProcessor& mediaProcessor, IToGui& toGui );
+	SndWriter( P2PEngine& engine, MediaProcessor& mediaProcessor );
 	virtual ~SndWriter();
 
 	void						setIsRecording( bool isRecording )				{ m_IsRecording = isRecording; }
@@ -60,7 +60,7 @@ protected:
 													uint32_t microSecBetweenFrames, 
 													uint32_t	frameCnt, 
 													uint32_t totalJpgDataLen );
-	uint64_t							calculateRiffSize( uint32_t frameCnt, uint32_t totalJpgDataLen );
+	uint64_t					calculateRiffSize( uint32_t frameCnt, uint32_t totalJpgDataLen );
 	bool						writeRiffHeader( void );
 	bool						writeVideoHeader( void );
 	void						closeSndFile( void );
@@ -69,7 +69,6 @@ protected:
 	//=== vars ===//
 	P2PEngine&					m_Engine; 
 	MediaProcessor&				m_MediaProcessor;
-	IToGui&						m_ToGui;
 
 	EPluginType					m_EPluginType;
 	bool						m_IsRecording;
@@ -81,7 +80,7 @@ protected:
 	double						m_TotalElapsedMs;
 	bool						m_IsFirstFrameAfterResumeRecording;
 
-	std::vector<uint32_t>			m_FrameOffsetList;
+	std::vector<uint32_t>		m_FrameOffsetList;
 	VxMutex						m_RecMutex;
 	OpusAudioEncoder&			m_OpusEncoder;
 	OpusFileEncoder&			m_OpusFileEncoder;

@@ -58,10 +58,9 @@ namespace
 }
 
 //============================================================================
-FileLibraryMgr::FileLibraryMgr( PluginBase& plugin, IToGui& toGui, SharedFilesMgr& sharedFilesMgr )
+FileLibraryMgr::FileLibraryMgr( PluginBase& plugin, SharedFilesMgr& sharedFilesMgr )
 : m_Plugin( plugin )
 , m_Engine( plugin.getEngine() )
-, m_ToGui( toGui )
 , m_SharedFilesMgr( sharedFilesMgr )
 , m_s64TotalByteCnt(0)
 , m_u16FileTypes(0)
@@ -425,7 +424,7 @@ void FileLibraryMgr::fromGuiGetFileLibraryList( uint8_t fileTypeFilter )
 		LibraryFileInfo * fileInfo = (*iter);
 		if( 0 != ( fileTypeFilter & fileInfo->getFileType() ) )
 		{
-			m_ToGui.toGuiFileList(	fileInfo->getFileName().c_str(), 
+			IToGui::getToGui().toGuiFileList(	fileInfo->getFileName().c_str(), 
 									fileInfo->getFileLength(), 
 									fileInfo->getFileType(), 
 									m_SharedFilesMgr.isFileShared( fileInfo->getLocalFileName() ),
@@ -435,7 +434,7 @@ void FileLibraryMgr::fromGuiGetFileLibraryList( uint8_t fileTypeFilter )
 	}
 
 	unlockFileLibrary();
-	m_ToGui.toGuiFileList( "", 0, 0, false, false );
+	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false );
 }
 
 /*

@@ -31,9 +31,9 @@
 #endif //_MSC_VER
 
 //============================================================================
-PluginMultiSession::PluginMultiSession( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, toGui, myIdent )
-, m_PluginSessionMgr( *this, pluginMgr, toGui )
+PluginMultiSession::PluginMultiSession( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+: PluginBase( engine, pluginMgr, myIdent )
+, m_PluginSessionMgr( *this, pluginMgr )
 , m_VoiceFeedMgr( *this, m_PluginSessionMgr )
 , m_VideoFeedMgr( *this, m_PluginSessionMgr )
 , m_AssetXferMgr( *this, m_PluginSessionMgr )
@@ -483,7 +483,7 @@ void PluginMultiSession::onPktMultiSessionReq( VxSktBase * sktBase, VxPktHdr * p
 		}
 	}
 
-	m_ToGui.toGuiMultiSessionAction( eMSessionAction, netIdent->getMyOnlineId(), pktReq->getMSessionParam() );
+	IToGui::getToGui().toGuiMultiSessionAction( eMSessionAction, netIdent->getMyOnlineId(), pktReq->getMSessionParam() );
 #ifdef DEBUG_AUTOPLUGIN_LOCK
 	LogMsg( LOG_INFO, "PluginMultiSession::onPktMultiSessionReq autoLock start\n" );
 #endif // DEBUG_AUTOPLUGIN_LOCK
@@ -505,7 +505,7 @@ void PluginMultiSession::onPktMultiSessionReply( VxSktBase * sktBase, VxPktHdr *
 	LogMsg( LOG_INFO, "PluginMultiSession::onPktMultiSessionReply start\n" );
 	PktMultiSessionReply * pktReply = (PktMultiSessionReply *)pktHdr;
 
-	m_ToGui.toGuiMultiSessionAction( ( EMSessionAction )pktReply->getMSessionAction(), netIdent->getMyOnlineId(), pktReply->getMSessionParam() );
+	IToGui::getToGui().toGuiMultiSessionAction( ( EMSessionAction )pktReply->getMSessionAction(), netIdent->getMyOnlineId(), pktReply->getMSessionParam() );
 	LogMsg( LOG_INFO, "PluginMultiSession::onPktMultiSessionReply done\n" );
 }
 
@@ -515,24 +515,24 @@ void PluginMultiSession::onPktTodGameStats( VxSktBase * sktBase, VxPktHdr * pktH
 	PktTodGameStats * poPkt = (PktTodGameStats *)pktHdr;
 	for( int i = 0; i < eMaxTodGameStatId; ++i )
 	{
-		m_ToGui.toGuiSetGameValueVar( m_ePluginType, netIdent->getMyOnlineId(), i, poPkt->getVar((ETodGameVarId)i) );
+		IToGui::getToGui().toGuiSetGameValueVar( m_ePluginType, netIdent->getMyOnlineId(), i, poPkt->getVar((ETodGameVarId)i) );
 	}
 
-	m_ToGui.toGuiSetGameActionVar( m_ePluginType, netIdent->getMyOnlineId(), eTodGameActionSendStats, 1 );
+	IToGui::getToGui().toGuiSetGameActionVar( m_ePluginType, netIdent->getMyOnlineId(), eTodGameActionSendStats, 1 );
 }
 
 //============================================================================
 void PluginMultiSession::onPktTodGameAction( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	PktTodGameAction * poPkt = (PktTodGameAction *)pktHdr;
-	m_ToGui.toGuiSetGameActionVar( m_ePluginType, netIdent->getMyOnlineId(), poPkt->getActionVarId(), poPkt->getActionVarValue() );
+	IToGui::getToGui().toGuiSetGameActionVar( m_ePluginType, netIdent->getMyOnlineId(), poPkt->getActionVarId(), poPkt->getActionVarValue() );
 }
 
 //============================================================================
 void PluginMultiSession::onPktTodGameValue( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	PktTodGameValue * poPkt = (PktTodGameValue *)pktHdr;
-	m_ToGui.toGuiSetGameValueVar( m_ePluginType, netIdent->getMyOnlineId(), poPkt->getValueVarId(), poPkt->getValueVar() );
+	IToGui::getToGui().toGuiSetGameValueVar( m_ePluginType, netIdent->getMyOnlineId(), poPkt->getValueVarId(), poPkt->getValueVar() );
 }
 
 //============================================================================

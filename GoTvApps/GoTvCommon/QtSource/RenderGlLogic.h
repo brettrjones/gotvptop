@@ -1,6 +1,7 @@
 #ifndef RENDERGLLOGIC_H
 #define RENDERGLLOGIC_H
 
+#include "config_gotvapps.h"
 
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>

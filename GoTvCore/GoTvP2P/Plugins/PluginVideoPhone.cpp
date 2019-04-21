@@ -32,9 +32,9 @@
 //#define DEBUG_AUTOPLUGIN_LOCK 1
 
 //============================================================================
-PluginVideoPhone::PluginVideoPhone( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, toGui, myIdent )
-, m_PluginSessionMgr( *this, pluginMgr, toGui )
+PluginVideoPhone::PluginVideoPhone( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+: PluginBase( engine, pluginMgr, myIdent )
+, m_PluginSessionMgr( *this, pluginMgr )
 , m_VoiceFeedMgr( *this, m_PluginSessionMgr )
 , m_VideoFeedMgr( *this, m_PluginSessionMgr )
 {
@@ -161,7 +161,7 @@ bool PluginVideoPhone::fromGuiInstMsg(	VxNetIdent *	netIdent,
 void PluginVideoPhone::onPktChatReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	PktChatReq * pkt = (PktChatReq *)pktHdr;
-	m_ToGui.toGuiInstMsg( netIdent, m_ePluginType, (const char *)pkt->getDataPayload() );
+	IToGui::getToGui().toGuiInstMsg( netIdent, m_ePluginType, (const char *)pkt->getDataPayload() );
 }
 
 //============================================================================

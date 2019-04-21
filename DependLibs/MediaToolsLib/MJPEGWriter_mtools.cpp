@@ -28,10 +28,9 @@
 #include <CoreLib/VxFileShredder.h>
 
 //============================================================================
-MJPEGWriter::MJPEGWriter( P2PEngine& engine, MediaProcessor& mediaProcessor, IToGui& toGui )
+MJPEGWriter::MJPEGWriter( P2PEngine& engine, MediaProcessor& mediaProcessor )
 : m_Engine( engine )
 , m_MediaProcessor( mediaProcessor )
-, m_ToGui( toGui )
 , m_FeedId()
 , m_EPluginType( ePluginTypeMJPEGWriter )
 , m_IsRecording( false )

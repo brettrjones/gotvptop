@@ -27,13 +27,13 @@ void P2PEngine::callbackFileWasShredded( std::string& fileName )
 //============================================================================
 void P2PEngine::callbackAssetAdded( AssetInfo * assetInfo )
 {
-	m_ToGui.toGuiAssetAdded( assetInfo );
+	IToGui::getToGui().toGuiAssetAdded( assetInfo );
 }
 
 //============================================================================
 void P2PEngine::callbackAssetRemoved( AssetInfo * assetInfo )
 {
-	m_ToGui.toGuiAssetAction( eAssetActionRemoveFromAssetMgr, assetInfo->getAssetUniqueId(), 0 );
+	IToGui::getToGui().toGuiAssetAction( eAssetActionRemoveFromAssetMgr, assetInfo->getAssetUniqueId(), 0 );
 }
 
 //============================================================================
@@ -49,6 +49,6 @@ void P2PEngine::callbackSharedPktFileListUpdated( void )
 //============================================================================
 void P2PEngine::callbackAssetHistory( void * /*userData*/, AssetInfo * assetInfo )
 {
-	m_ToGui.toGuiSessionHistory( assetInfo );
+	IToGui::getToGui().toGuiSessionHistory( assetInfo );
 }
 

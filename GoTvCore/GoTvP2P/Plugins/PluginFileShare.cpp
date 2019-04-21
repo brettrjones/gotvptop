@@ -35,11 +35,11 @@
 #endif
 
 //============================================================================
-PluginFileShare::PluginFileShare( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, toGui, myIdent ) 
-, m_PluginSessionMgr( *this, pluginMgr, toGui )
-, m_SharedFilesMgr( *this, toGui )
-, m_FileLibraryMgr( *this, toGui, m_SharedFilesMgr )
+PluginFileShare::PluginFileShare( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+: PluginBase( engine, pluginMgr, myIdent ) 
+, m_PluginSessionMgr( *this, pluginMgr)
+, m_SharedFilesMgr( *this)
+, m_FileLibraryMgr( *this, m_SharedFilesMgr )
 , m_FileShareXferMgr( *this, m_SharedFilesMgr, m_FileLibraryMgr )
 , m_FileShredder( GetVxFileShredder() )
 {
@@ -127,7 +127,7 @@ bool PluginFileShare::fromGuiBrowseFiles( const char * dir, bool lookupShareStat
 			if ( 0 != ( fileFilterMask & fileInfo.getFileType() ) )
 			{
 				LogMsg( LOG_INFO, "PluginFileShare::fromGuiBrowseFiles sending file %s\n", fileInfo.getFileName().c_str() );
-				m_ToGui.toGuiFileList(	fileInfo.getFileName().c_str(), 
+				IToGui::getToGui().toGuiFileList(	fileInfo.getFileName().c_str(), 
 					fileInfo.getFileLength(), 
 					fileInfo.getFileType(), 
 					isFileShared( fileInfo.getFileName() ),
@@ -152,7 +152,7 @@ bool PluginFileShare::fromGuiBrowseFiles( const char * dir, bool lookupShareStat
 		}
 	}
 
-	m_ToGui.toGuiFileList( "", 0, 0, false, false );
+	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false );
 	return isPluginEnabled();
 }
 

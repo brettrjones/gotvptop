@@ -23,7 +23,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
-      <TargetMachine>MachineX86</TargetMachine>
+      <TargetMachine>MachineX64</TargetMachine>
       <LinkErrorReporting>QueueForNextLogin</LinkErrorReporting>
     </Link>
   </ItemDefinitionGroup>

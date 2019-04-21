@@ -58,7 +58,7 @@ void AppCommon::toGuiSearchResultSuccess( EScanType eScanType, VxNetIdent * netI
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
 	LogMsg( LOG_INFO, "toGuiSearchResultSuccess: toGuiActivityClientsLock\n" );
 #endif // DEBUG_TOGUI_CLIENT_MUTEX
-	toGuiActivityClientsLock();
+    toGuiActivityClientsLock();
 	std::vector<ToGuiActivityClient>::iterator iter;
 	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
 	{

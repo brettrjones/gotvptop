@@ -19,19 +19,19 @@
 #include "SndReader.h"
 #include "MJPEGWriter.h"
 #include "MJPEGReader.h"
+#include <GoTvInterface/IToGui.h>
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
 
 //============================================================================
-MediaTools::MediaTools( P2PEngine& engine, MediaProcessor& mediaProcessor, IToGui& toGui )
+MediaTools::MediaTools( P2PEngine& engine, MediaProcessor& mediaProcessor )
 : m_Engine( engine )
 , m_MediaProcessor( mediaProcessor )
-, m_ToGui( toGui )
 , m_AudioEncoder(  * ( new OpusAudioEncoder( 8000, 1 ) ) )
-, m_AudioWriter(  * ( new SndWriter( engine, mediaProcessor, toGui ) ) )
-, m_AudioReader(  * ( new SndReader( engine, mediaProcessor, toGui ) ) )
-, m_VideoWriter(  * ( new MJPEGWriter( engine, mediaProcessor, toGui ) ) )
-, m_VideoReader(  * ( new MJPEGReader( engine, mediaProcessor, toGui ) ) )
+, m_AudioWriter(  * ( new SndWriter( engine, mediaProcessor ) ) )
+, m_AudioReader(  * ( new SndReader( engine, mediaProcessor ) ) )
+, m_VideoWriter(  * ( new MJPEGWriter( engine, mediaProcessor ) ) )
+, m_VideoReader(  * ( new MJPEGReader( engine, mediaProcessor ) ) )
 {
 }
 
@@ -41,6 +41,12 @@ MediaTools::~MediaTools()
 	delete &m_AudioEncoder;
 	delete &m_AudioWriter;
 	delete &m_VideoWriter;
+}
+
+//============================================================================
+IToGui&	MediaTools::getToGui()
+{
+    return IToGui::getToGui();
 }
 
 //============================================================================

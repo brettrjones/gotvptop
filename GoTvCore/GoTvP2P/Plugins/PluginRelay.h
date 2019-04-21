@@ -32,7 +32,7 @@ class PktRelayServiceReply;
 class PluginRelay : public PluginBase
 {
 public:
-	PluginRelay( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent );
+	PluginRelay( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
 	virtual ~PluginRelay();
 
 	bool						verboseLog( void )					{ return m_bVerbose; }
@@ -110,8 +110,8 @@ protected:
 	VxTimer						m_TestTimer;
 	bool						m_bVerbose;
 	bool						m_bTest;
-	uint32_t							m_MaxUserRelayAllowCnt;
-	uint32_t							m_MaxAnonRelayAllowCnt;
+	uint32_t					m_MaxUserRelayAllowCnt;
+	uint32_t					m_MaxAnonRelayAllowCnt;
 	VxGUIDList					m_FriendGuidList;
 	VxGUIDList					m_AnonGuidList;
 };

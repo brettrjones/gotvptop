@@ -48,7 +48,7 @@ namespace
 
 //============================================================================
 AssetMgr::AssetMgr( P2PEngine& engine )
-: AssetMgrBase( engine, engine.getToGuiInterface() )
+: AssetMgrBase( engine )
 , m_Initialized( false )
 , m_AssetListInitialized( false )
 , m_AssetInfoDb( * new AssetInfoDb( *this ) )
@@ -796,7 +796,7 @@ bool AssetMgr::fromGuiGetAssetInfo( uint8_t fileTypeFilter )
 		{
 			if( assetInfo->getIsSharedFileAsset() || assetInfo->getIsInLibary() )
 			{
-				m_ToGui.toGuiFileList(	assetInfo->getAssetName().c_str(), 
+				IToGui::getToGui().toGuiFileList(	assetInfo->getAssetName().c_str(), 
 										assetInfo->getAssetLength(), 
 										assetInfo->getAssetType(), 
 										assetInfo->getIsSharedFileAsset(),
@@ -807,7 +807,7 @@ bool AssetMgr::fromGuiGetAssetInfo( uint8_t fileTypeFilter )
 	}
 
 	unlockResources();
-	m_ToGui.toGuiFileList( "", 0, 0, false, false );
+	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false );
 	return true;
 }
 
@@ -834,7 +834,7 @@ void AssetMgr::queryHistoryAssets( VxGUID& historyId )
 		assetInfo = (*iter);
 		if( assetInfo->getHistoryId() == historyId )
 		{
-			m_ToGui.toGuiSessionHistory( assetInfo );
+			IToGui::getToGui().toGuiSessionHistory( assetInfo );
 		}
 	}
 
@@ -866,53 +866,53 @@ void AssetMgr::updateAssetXferState( VxGUID& assetUniqueId, EAssetSendState asse
 				case eAssetSendStateTxProgress:
 					if( eAssetSendStateNone == oldSendState )
 					{
-						m_ToGui.toGuiAssetAction( eAssetActionTxBegin, assetUniqueId, param );
+						IToGui::getToGui().toGuiAssetAction( eAssetActionTxBegin, assetUniqueId, param );
 					}
 
-					m_ToGui.toGuiAssetAction( eAssetActionTxProgress, assetUniqueId, param );
+					IToGui::getToGui().toGuiAssetAction( eAssetActionTxProgress, assetUniqueId, param );
 					break;
 
 				case eAssetSendStateRxProgress:
 					if( eAssetSendStateNone == oldSendState )
 					{
-						m_ToGui.toGuiAssetAction( eAssetActionRxBegin, assetUniqueId, param );
+						IToGui::getToGui().toGuiAssetAction( eAssetActionRxBegin, assetUniqueId, param );
 					}
 
-					m_ToGui.toGuiAssetAction( eAssetActionRxProgress, assetUniqueId, param );
+					IToGui::getToGui().toGuiAssetAction( eAssetActionRxProgress, assetUniqueId, param );
 					break;
 
 				case eAssetSendStateRxSuccess:
 					if( ( eAssetSendStateNone == oldSendState )
 						|| ( eAssetSendStateRxProgress == oldSendState ) )
 					{
-						m_ToGui.toGuiAssetAction( eAssetActionRxSuccess, assetUniqueId, param );
-						m_ToGui.toGuiAssetAction( eAssetActionRxNotifyNewMsg, assetInfo->getCreatorId(), 100 );
+						IToGui::getToGui().toGuiAssetAction( eAssetActionRxSuccess, assetUniqueId, param );
+						IToGui::getToGui().toGuiAssetAction( eAssetActionRxNotifyNewMsg, assetInfo->getCreatorId(), 100 );
 					}
 					else 
 					{
-						m_ToGui.toGuiAssetAction( eAssetActionRxSuccess, assetUniqueId, param );
+						IToGui::getToGui().toGuiAssetAction( eAssetActionRxSuccess, assetUniqueId, param );
 					}
 
 					break;
 
 				case eAssetSendStateTxSuccess:
-					m_ToGui.toGuiAssetAction( eAssetActionTxSuccess, assetUniqueId, param );
+					IToGui::getToGui().toGuiAssetAction( eAssetActionTxSuccess, assetUniqueId, param );
 					break;
 
 				case eAssetSendStateRxFail:
-					m_ToGui.toGuiAssetAction( eAssetActionRxError, assetUniqueId, param );
+					IToGui::getToGui().toGuiAssetAction( eAssetActionRxError, assetUniqueId, param );
 					break;
 
 				case eAssetSendStateTxFail:
-					m_ToGui.toGuiAssetAction( eAssetActionTxError, assetUniqueId, param );
+					IToGui::getToGui().toGuiAssetAction( eAssetActionTxError, assetUniqueId, param );
 					break;
 
 				case eAssetSendStateTxPermissionErr:
-					m_ToGui.toGuiAssetAction( eAssetActionTxError, assetUniqueId, param );
+					IToGui::getToGui().toGuiAssetAction( eAssetActionTxError, assetUniqueId, param );
 					break;
 
 				case eAssetSendStateRxPermissionErr:
-					m_ToGui.toGuiAssetAction( eAssetActionRxError, assetUniqueId, param );
+					IToGui::getToGui().toGuiAssetAction( eAssetActionRxError, assetUniqueId, param );
 					break;
 
 

@@ -42,5 +42,5 @@ protected:
 	PluginBase&					m_Plugin;				
 	PluginMgr&					m_PluginMgr;
 	P2PEngine&					m_Engine;					
-	IToGui&						m_ToGui;
+	
 };

@@ -15,19 +15,21 @@
 
 #include <config_gotvcore.h>
 #include "AssetMgrBase.h"
+#include <GoTvInterface/IToGui.h>
 
 #include <CoreLib/VxFileIsTypeFunctions.h>
 
 //============================================================================
-AssetMgrBase::AssetMgrBase( P2PEngine& engine, IToGui& toGui )
+AssetMgrBase::AssetMgrBase( P2PEngine& engine )
 : m_Engine( engine )
-, m_ToGui( toGui )
 {
 }
 
+
 //============================================================================
-AssetMgrBase::~AssetMgrBase()
+IToGui&	AssetMgrBase::getToGui()
 {
+    return IToGui::getToGui();
 }
 
 //============================================================================

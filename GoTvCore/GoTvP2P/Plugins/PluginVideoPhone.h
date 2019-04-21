@@ -22,7 +22,7 @@
 class PluginVideoPhone : public PluginBase
 {
 public:
-	PluginVideoPhone( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent );
+	PluginVideoPhone( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
 	virtual ~PluginVideoPhone();
 
 	virtual bool				fromGuiMakePluginOffer( VxNetIdent *	netIdent,				

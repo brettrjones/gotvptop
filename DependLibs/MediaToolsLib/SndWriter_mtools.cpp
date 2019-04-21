@@ -31,10 +31,9 @@
 
 
 //============================================================================
-SndWriter::SndWriter( P2PEngine& engine, MediaProcessor& mediaProcessor, IToGui& toGui )
+SndWriter::SndWriter( P2PEngine& engine, MediaProcessor& mediaProcessor )
 : m_Engine( engine )
 , m_MediaProcessor( mediaProcessor )
-, m_ToGui( toGui )
 , m_EPluginType( ePluginTypeSndWriter )
 , m_IsRecording( false )
 , m_IsRecordingPaused( false )

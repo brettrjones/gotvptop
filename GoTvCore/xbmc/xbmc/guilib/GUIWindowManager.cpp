@@ -147,6 +147,7 @@
 
 #ifdef HAVE_QT_GUI
 # include "GoTvInterface/IGoTv.h"
+# include <CoreLib/VxDebug.h>
 #endif // HAVE_QT_GUI
 
 using namespace KODI;
@@ -168,14 +169,11 @@ void CGUIWindowManager::Initialize()
     m_tracker.SelectAlgorithm();
 
     m_initialized = true;
+    LogMsg( LOG_ERROR, "size of bool %d\n", m_initialized );
 
     LoadNotOnDemandWindows();
 
     CApplicationMessenger::GetInstance().RegisterReceiver( this );
-
-#ifdef HAVE_QT_GUI
-	IGoTv::getIGoTv().toGuiModuleState( (int)eModuleKodi, (int)eModuleStateInitialized );
-#endif // HAVE_QT_GUI
 }
 
 void CGUIWindowManager::CreateWindows()

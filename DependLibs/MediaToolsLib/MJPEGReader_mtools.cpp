@@ -43,10 +43,9 @@ namespace
 }
 
 //============================================================================
-MJPEGReader::MJPEGReader( P2PEngine& engine, MediaProcessor& mediaProcessor, IToGui& toGui )
+MJPEGReader::MJPEGReader( P2PEngine& engine, MediaProcessor& mediaProcessor )
 : m_Engine( engine )
 , m_MediaProcessor( mediaProcessor )
-, m_ToGui( toGui )
 , m_EPluginType( ePluginTypeMJPEGReader )
 , m_IsPlaying( false )
 , m_IsPlayingPaused( false )
@@ -60,11 +59,6 @@ MJPEGReader::MJPEGReader( P2PEngine& engine, MediaProcessor& mediaProcessor, ITo
 , m_Initialized( false )
 , m_IsStartThreadCommanded( false )
 , m_IsVidThreadRunning( false )
-{
-}
-
-//============================================================================
-MJPEGReader::~MJPEGReader()
 {
 }
 
@@ -325,7 +319,7 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 					}
 				}
 
-				m_ToGui.toGuiPlayVideoFrame( m_AssetId, &listChunk.m_DataPtr[8], listChunk.m_ChunkLen, 0 );
+				IToGui::getToGui().toGuiPlayVideoFrame( m_AssetId, &listChunk.m_DataPtr[8], listChunk.m_ChunkLen, 0 );
 				if( isEmpty )
 				{
 					listChunk.deleteDataPtr();
@@ -519,7 +513,7 @@ bool MJPEGReader::readFirstVidFrameFromFile( FILE * fileHandle, const char * fil
 				{
 					VxGUID onlineId;
 					onlineId.setVxGUID( assetId );
-					m_ToGui.toGuiPlayVideoFrame( onlineId, payloadData, aviChunk.m_PayloadDataSize, 0 );
+					IToGui::getToGui().toGuiPlayVideoFrame( onlineId, payloadData, aviChunk.m_PayloadDataSize, 0 );
 					delete[] payloadData;
 					return true;
 				}
@@ -1042,7 +1036,7 @@ void MJPEGReader::readerThread( void )
 			&& aviChunk->hasData() )
 		{
 			LogMsg( LOG_INFO, "MJPEGReader vid chunk %d start\n", m_VidWriteIdx );
-			m_ToGui.toGuiPlayVideoFrame( m_AssetId, &aviChunk->m_DataPtr[8], aviChunk->m_ChunkLen, 0 );
+			IToGui::getToGui().toGuiPlayVideoFrame( m_AssetId, &aviChunk->m_DataPtr[8], aviChunk->m_ChunkLen, 0 );
 			LogMsg( LOG_INFO, "MJPEGReader vid chunk %d end\n", m_VidWriteIdx );
 			m_VidChunksInMemory--;
 			aviChunk->deleteDataPtr();
@@ -1052,7 +1046,7 @@ void MJPEGReader::readerThread( void )
 		//LogMsg( LOG_INFO, "readerThread::unlockResources\n" );
 		unlockResources();
 		LogMsg( LOG_INFO, "MJPEGReader progress %d start\n", progress );
-		m_ToGui.toGuiAssetAction(  eAssetActionPlayProgress, m_AssetId, progress );
+		IToGui::getToGui().toGuiAssetAction(  eAssetActionPlayProgress, m_AssetId, progress );
 		LogMsg( LOG_INFO, "MJPEGReader progress %d done\n", progress );
 		if( ( 0 == m_VidChunksInMemory )
 			&& ( m_VidWriteIdx >= m_AviChunkList.size() ) )
@@ -1077,7 +1071,7 @@ void MJPEGReader::readerThread( void )
 		return;
 
 	//LogMsg( LOG_INFO, "MJPEGReader eAssetActionPlayEnd start\n" );
-	m_ToGui.toGuiAssetAction( eAssetActionPlayEnd, m_AssetId, 0 );
+	IToGui::getToGui().toGuiAssetAction( eAssetActionPlayEnd, m_AssetId, 0 );
 	//LogMsg( LOG_INFO, "MJPEGReader eAssetActionPlayEnd end\n" );
 }
 

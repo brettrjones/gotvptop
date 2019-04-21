@@ -39,8 +39,10 @@ public:
 		VxMutex&				m_Mutex;
 	};
 
-	AssetMgrBase( P2PEngine& engine, IToGui& toGui );
-	virtual ~AssetMgrBase();
+	AssetMgrBase( P2PEngine& engine );
+	virtual ~AssetMgrBase() = default;
+
+    IToGui&						getToGui();
 
 	VxMutex&					getResourceMutex( void )					{ return m_ResourceMutex; }
 	void						lockResources( void )						{ m_ResourceMutex.lock(); }
@@ -54,7 +56,6 @@ protected:
 	void						unlockClientList( void )					{ m_ClientListMutex.unlock(); }
 	//=== vars ===//
 	P2PEngine&					m_Engine;
-	IToGui&						m_ToGui;
 	VxMutex						m_ResourceMutex;
 	VxMutex						m_ClientListMutex;
 

@@ -18,6 +18,7 @@
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/Network/NetworkMgr.h>
+#include <GoTvInterface/IGoTv.h>
 
 #include <PktLib/PktAnnList.h>
 #include <CoreLib/VxGlobals.h>
@@ -35,9 +36,8 @@
 #endif //_MSC_VER
 
 //============================================================================
-BigListMgr::BigListMgr( P2PEngine& engine )
-: BigListDb( *this, engine )
-, m_ToGui( engine.getToGuiInterface() )
+BigListMgr::BigListMgr( )
+: BigListDb( *this )
 {	
 }
 
@@ -51,11 +51,12 @@ BigListMgr::~BigListMgr()
 //! startup
 RCODE BigListMgr::bigListMgrStartup( const char * pDbFileName )
 {
-	if( m_BigListDbInitialized )
+	if( m_BigListMgrInitialized )
 	{
 		bigListMgrShutdown();
 	}
 
+    m_BigListMgrInitialized = true;
 	return bigListDbStartup( pDbFileName );
 }
 
@@ -63,6 +64,7 @@ RCODE BigListMgr::bigListMgrStartup( const char * pDbFileName )
 //! shutdown
 RCODE BigListMgr::bigListMgrShutdown( void )
 {
+    m_BigListMgrInitialized = false;
 	return bigListDbShutdown();
 }
 
@@ -75,7 +77,7 @@ RCODE BigListMgr::updateBigListDatabase( BigListInfo * poInfo, const char * netw
 		return rc;
 	}
 
-	if( m_Engine.shouldInfoBeInDatabase( poInfo ))
+	if( GetPtoPEngine().shouldInfoBeInDatabase( poInfo ))
 	{
 		// insert into database
 		rc = dbUpdateBigListInfo( poInfo, networkName );
@@ -157,7 +159,7 @@ EPktAnnUpdateType BigListMgr::updatePktAnn(	PktAnnounce *		poPktAnnIn,				// ann
 
 		if( friendshipChanged )
 		{
-			m_Engine.toGuiContactHisFriendshipChange( poInfo );
+			GetPtoPEngine().toGuiContactHisFriendshipChange( poInfo );
 		}
 
 
@@ -165,7 +167,7 @@ EPktAnnUpdateType BigListMgr::updatePktAnn(	PktAnnounce *		poPktAnnIn,				// ann
 		if( 0 != strcmp( poPktAnnIn->getOnlineName(), poInfo->getOnlineName() ) )
 		{
 			memcpy( poInfo->getOnlineName(), poPktAnnIn->getOnlineName(), MAX_ONLINE_NAME_LEN );
-			m_Engine.toGuiContactNameChange( poInfo );
+			GetPtoPEngine().toGuiContactNameChange( poInfo );
 			eUpdateType = ePktAnnUpdateTypeContactChanged;
 		}
 
@@ -173,21 +175,21 @@ EPktAnnUpdateType BigListMgr::updatePktAnn(	PktAnnounce *		poPktAnnIn,				// ann
 		if( 0 != strcmp( poPktAnnIn->getOnlineDescription(), poInfo->getOnlineDescription() ) )
 		{
 			memcpy( poInfo->getOnlineDescription(), poPktAnnIn->getOnlineDescription(), MAX_ONLINE_DESC_LEN );
-			m_Engine.toGuiContactDescChange( poInfo );
+			GetPtoPEngine().toGuiContactDescChange( poInfo );
 			eUpdateType = ePktAnnUpdateTypeContactChanged;
 		}
 
 		if( poPktAnnIn->getSearchFlags() != poInfo->getSearchFlags() )
 		{
 			poInfo->setSearchFlags( poPktAnnIn->getSearchFlags() );
-			m_Engine.toGuiContactSearchFlagsChange( poInfo );
+			GetPtoPEngine().toGuiContactSearchFlagsChange( poInfo );
 			eUpdateType = ePktAnnUpdateTypeContactChanged;
 		}
 
 		if( 0 != memcmp( poPktAnnIn->getPluginPermissions(), poInfo->getPluginPermissions(), PERMISSION_ARRAY_SIZE ) )
 		{
 			memcpy( poInfo->getPluginPermissions(), poPktAnnIn->getPluginPermissions(), PERMISSION_ARRAY_SIZE );
-			m_Engine.toGuiPluginPermissionChange( poInfo );
+			GetPtoPEngine().toGuiPluginPermissionChange( poInfo );
 			eUpdateType = ePktAnnUpdateTypeContactChanged;
 		}
 
@@ -203,12 +205,12 @@ EPktAnnUpdateType BigListMgr::updatePktAnn(	PktAnnounce *		poPktAnnIn,				// ann
 		memcpy( poInfo, poPktAnnIn, sizeof( PktAnnBase ) );
 		if( contactInfoChanged )
 		{
-			m_Engine.toGuiContactConnectionChange( poInfo );
+			GetPtoPEngine().toGuiContactConnectionChange( poInfo );
 		}
 
 		if( ePktAnnUpdateTypeContactIsSame != eUpdateType )
 		{
-			m_Engine.toGuiContactAnythingChange( poInfo );
+			GetPtoPEngine().toGuiContactAnythingChange( poInfo );
 		}
 	}
 	else
@@ -223,7 +225,7 @@ EPktAnnUpdateType BigListMgr::updatePktAnn(	PktAnnounce *		poPktAnnIn,				// ann
 			poInfo->setIsOnline( true );
 			poInfo->setIsConnected( true );
 			bigInsertInfo( poInfo->getMyOnlineId(), poInfo, true );
-			updateBigListDatabase( poInfo, m_Engine.getNetworkMgr().getNetworkName() );
+			updateBigListDatabase( poInfo, GetPtoPEngine().getNetworkMgr().getNetworkName() );
 			//! notify new contact found
 			eUpdateType = ePktAnnUpdateTypeNewContact;
 		}
@@ -294,7 +296,7 @@ RCODE BigListMgr::FillAnnList(	PktAnnList * poPktAnnList,
 			{
 			
 				if( ( false == bIncludeThisNode ) 
-					&& ( m_Engine.getMyPktAnnounce().getMyOnlineId() == poInfo->getMyOnlineId() ) )
+					&& ( GetPtoPEngine().getMyPktAnnounce().getMyOnlineId() == poInfo->getMyOnlineId() ) )
 				{
 					// don't include ourself
 					continue;

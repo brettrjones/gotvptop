@@ -82,7 +82,7 @@ NetworkStateRelaySearch::~NetworkStateRelaySearch()
 //============================================================================
 void NetworkStateRelaySearch::enterNetworkState( void )
 {
-	//m_Engine.getToGuiInterface().toGuiNetworkState( eNetworkStateTypeRelaySearch );
+	//m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeRelaySearch );
 }
 
 //============================================================================
@@ -219,13 +219,13 @@ void NetworkStateRelaySearch::doRelaySearchState( void )
 
     if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
 	    LogMsg( LOG_STATUS, "eMyRelayStatusSearching\n" );
-	//m_Engine.getToGuiInterface().toGuiMyRelayStatus( eMyRelayStatusSearching );
+	//m_Engine.getToGui().toGuiMyRelayStatus( eMyRelayStatusSearching );
 
 	if( 0 == m_PreferredRelayList.m_ContactList.size() )
 	{
         if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
 		    LogMsg( LOG_STATUS, "eMyRelayStatusNoRelaysListed 0 == m_PreferredRelayList.m_ContactList.size()\n" );
-		//m_Engine.getToGuiInterface().toGuiMyRelayStatus( eMyRelayStatusNoRelaysListed );
+		//m_Engine.getToGui().toGuiMyRelayStatus( eMyRelayStatusNoRelaysListed );
 	}
 
 	while( false == m_NetworkStateMachine.checkAndHandleNetworkEvents() )
@@ -288,7 +288,7 @@ void NetworkStateRelaySearch::doRelaySearchState( void )
 		}
 
 		VxSleep( 1000 );
-		//m_Engine.getToGuiInterface().toGuiStatusMessage( "No Relays Available - will try again " );
+		//m_Engine.getToGui().toGuiStatusMessage( "No Relays Available - will try again " );
 		VxSleep( 1000 );
 		if( m_NetworkStateMachine.checkAndHandleNetworkEvents() )
 		{
@@ -830,7 +830,7 @@ ERelayStatus NetworkStateRelaySearch::requestRelayService( VxGUID& onlineId, VxS
 	}
 
 	LogMsg( LOG_STATUS, " Requesting Relay Service ( %s )\n", strRelayOnlineName.c_str()  );
-	//m_Engine.getToGuiInterface().toGuiMyRelayStatus( eMyRelayStatusRequestService, strRelayOnlineName.c_str() );
+	//m_Engine.getToGui().toGuiMyRelayStatus( eMyRelayStatusRequestService, strRelayOnlineName.c_str() );
 	m_WaitForPktRelayServiceSemaphore.wait( RELAY_SERVICE_REQUEST_TIMEOUT_MS );
 	return m_eRelayRequestStatus;
 }

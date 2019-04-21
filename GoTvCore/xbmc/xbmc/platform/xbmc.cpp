@@ -37,8 +37,11 @@ extern "C" int XBMC_Run( bool renderGUI, const CAppParamParser &params )
 	if ( g_KodiIsRunning )
 	{
 		CMessagePrinter::DisplayError("Kodi is already running");
+        
 		return status;
 	}
+
+    g_KodiIsRunning = true;
 
     if( !g_application.Create( params ) )
     {

@@ -205,7 +205,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_AudioOut( *this )
 {
 	connect( m_OncePerSecondTimer, SIGNAL( timeout() ), &m_OffersMgr, SLOT( slotOncePerSecond() ) );
-    g_AppCommon = this; // crap.. need a global instance that can accessed with GetAppInstance() for objects created in ui files
+    g_AppCommon = this; // crap.. need a global instance that can accessed immediately with GetAppInstance() for objects created in ui files
     getQApplication().setStyle( &m_AppStyle );
 }
 
@@ -213,6 +213,48 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 IFromGui& AppCommon::getFromGuiInterface( void )
 {
     return m_Engine.getFromGuiInterface();
+}
+
+//============================================================================
+void AppCommon::loadWithoutThread( void )
+{
+    registerMetaData();
+
+    // set application short name used for directory paths
+    VxSetApplicationNameNoSpaces( m_AppShortName.toUtf8().constData() );
+    m_AppSettings.setAppShortName( m_AppShortName );
+
+    // this just loads the ini file.
+    // the AppSettings database is not initialized until loadAccountSpecificSettings
+    m_AppSettings.loadProfile();
+    // sets root of application data and transfer directories
+    VxSetRootUserDataDirectory( m_AppSettings.m_strRootUserDataDir.c_str() );
+
+    // Documents Directory/appshortName/xfer/		app data transfer directory
+    VxSetRootXferDirectory( m_AppSettings.m_strRootXferDir.c_str() );
+
+    // create settings database appshortname_settings.db3 in /appshortName/data/
+    QString strSettingsDbFileName = VxGetAppGoTvDataDirectory().c_str() + m_AppShortName + "_settings.db3";
+    m_AppSettings.appSettingStartup( strSettingsDbFileName.toUtf8().constData(), m_AppDefaultMode );
+
+    // database of multiple accounts
+    // create accounts database appshortname_accounts.db3 in /appshortName/data/
+    QString strAccountDbFileName = VxGetAppGoTvDataDirectory().c_str() + m_AppShortName + "_accounts.db3";
+    m_DataHelper.dbStartup( DATA_HELPER_DB_VERSION, strAccountDbFileName.toUtf8().constData() );
+
+    // asset database and user specific setting database will be created in sub directory of account login
+    // after user has logged into account
+
+    // load icons from resources
+    m_MyIcons.myIconsStartup();
+    // load sounds to play and sound hardware
+    m_MySndMgr.sndMgrStartup();
+
+    m_AppTheme.selectTheme( getAppSettings().getLastSelectedTheme() );
+
+    m_HomePage.initializeHomePage();
+    connect( &m_HomePage, SIGNAL( signalMainWindowResized( int ) ), this, SLOT( slotMainWindowResized( int ) ) );
+    m_HomePage.show();
 }
 
 //============================================================================
@@ -1478,7 +1520,7 @@ void AppCommon::clearFileXferClientList( void )
 {
 	if( m_ToGuiFileXferClientList.size() )
 	{
-		m_ToGuiFileXferClientMutex.lock();
+        m_ToGuiFileXferClientMutex.lock();
 		m_ToGuiFileXferClientList.clear();
 		m_ToGuiFileXferClientMutex.unlock();
 	}
@@ -1533,7 +1575,7 @@ void AppCommon::wantToGuiFileXferCallbacks(	ToGuiFileXferInterface *	callback,
 			if( ( client.m_Callback == callback )
 				&& ( client.m_UserData == userData ) )
 			{
-				LogMsg( LOG_INFO, "WARNING. Ignoring New ToGuiActivityClient because already in list\n" );
+				LogMsg( LOG_INFO, "WARNING. Ignoring New m_ToGuiActivityClient because already in list\n" );
 				toGuiFileXferClientsUnlock();
 				return;
 			}
@@ -1582,7 +1624,7 @@ void AppCommon::toGuiHardwareCtrlUnlock( void )
 
 //============================================================================
 void AppCommon::wantToGuiHardwareCtrlCallbacks(	ToGuiHardwareControlInterface *	callback, 
-													bool							wantCallback )
+												bool							wantCallback )
 {
 static bool actCallbackShutdownComplete = false;
 	if( VxIsAppShuttingDown() )

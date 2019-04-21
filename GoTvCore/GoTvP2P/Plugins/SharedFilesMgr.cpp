@@ -60,10 +60,9 @@ namespace
 }
 
 //============================================================================
-SharedFilesMgr::SharedFilesMgr( PluginFileShare& plugin, IToGui& toGui )
+SharedFilesMgr::SharedFilesMgr( PluginFileShare& plugin )
 : m_Plugin( plugin )
 , m_Engine( plugin.getEngine() )
-, m_ToGui( toGui )
 , m_s64TotalByteCnt(0)
 , m_u16FileTypes(0)
 {
@@ -495,7 +494,7 @@ bool SharedFilesMgr::fromGuiGetSharedFiles( uint8_t fileTypeFilter )
 		SharedFileInfo* fileInfo = (*iter);
 		if( 0 != ( fileTypeFilter & fileInfo->getFileType() ) )
 		{
-			m_ToGui.toGuiFileList(	fileInfo->getFileName().c_str(), 
+			IToGui::getToGui().toGuiFileList(	fileInfo->getFileName().c_str(), 
 									fileInfo->getFileLength(), 
 									fileInfo->getFileType(), 
 									 true,
@@ -505,7 +504,7 @@ bool SharedFilesMgr::fromGuiGetSharedFiles( uint8_t fileTypeFilter )
 	}
 
 	unlockSharedFiles();
-	m_ToGui.toGuiFileList( "", 0, 0, false, false );
+	IToGui::getToGui().toGuiFileList( "", 0, 0, false, false );
 	return true;
 }
 

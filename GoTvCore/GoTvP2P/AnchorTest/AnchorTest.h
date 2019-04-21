@@ -28,10 +28,10 @@ class NetServicesMgr;
 class AnchorTest
 {
 public:
-	AnchorTest( IToGui& toGui, EngineSettings& engineSettings, NetServicesMgr& netServicesMgr );
-	virtual ~AnchorTest();
+	AnchorTest( EngineSettings& engineSettings, NetServicesMgr& netServicesMgr );
+	virtual ~AnchorTest() = default;
 
-
+    IToGui&                     getToGui();
 	virtual void				fromGuiVerifyAnchorSettings( void );
 
 	void						doAnchorUrlTest( void );
@@ -50,7 +50,7 @@ private:
 
 	//=== vars ===//
 	//P2PEngine&					m_Engine;
-	IToGui&						m_ToGui;
+	//
 	EngineSettings&				m_EngineSettings;
 	NetServicesMgr&				m_NetServicesMgr;
 

@@ -32,9 +32,9 @@
 #endif // _MSC_VER
 
 //============================================================================
-PluginTruthOrDare::PluginTruthOrDare( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, toGui, myIdent )
-, m_PluginSessionMgr( *this, pluginMgr, toGui )
+PluginTruthOrDare::PluginTruthOrDare( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+: PluginBase( engine, pluginMgr, myIdent )
+, m_PluginSessionMgr( *this, pluginMgr )
 , m_VoiceFeedMgr( *this, m_PluginSessionMgr )
 , m_VideoFeedMgr( *this, m_PluginSessionMgr )
 {
@@ -176,7 +176,7 @@ bool PluginTruthOrDare::fromGuiSetGameActionVar( VxNetIdent * netIdent, int32_t 
 void PluginTruthOrDare::onPktChatReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	PktChatReq * pkt = (PktChatReq *)pktHdr;
-	m_ToGui.toGuiInstMsg( netIdent, m_ePluginType, (const char *)pkt->getDataPayload() );
+	IToGui::getToGui().toGuiInstMsg( netIdent, m_ePluginType, (const char *)pkt->getDataPayload() );
 }
 
 //============================================================================
@@ -185,24 +185,24 @@ void PluginTruthOrDare::onPktTodGameStats( VxSktBase * sktBase, VxPktHdr * pktHd
 	PktTodGameStats * poPkt = (PktTodGameStats *)pktHdr;
 	for( int i = 0; i < eMaxTodGameStatId; ++i )
 	{
-		m_ToGui.toGuiSetGameValueVar( m_ePluginType, netIdent->getMyOnlineId(), i, poPkt->getVar((ETodGameVarId)i) );
+		IToGui::getToGui().toGuiSetGameValueVar( m_ePluginType, netIdent->getMyOnlineId(), i, poPkt->getVar((ETodGameVarId)i) );
 	}
 
-	m_ToGui.toGuiSetGameActionVar( m_ePluginType, netIdent->getMyOnlineId(), eTodGameActionSendStats, 1 );
+	IToGui::getToGui().toGuiSetGameActionVar( m_ePluginType, netIdent->getMyOnlineId(), eTodGameActionSendStats, 1 );
 }
 
 //============================================================================
 void PluginTruthOrDare::onPktTodGameAction( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	PktTodGameAction * poPkt = (PktTodGameAction *)pktHdr;
-	m_ToGui.toGuiSetGameActionVar( m_ePluginType, netIdent->getMyOnlineId(), poPkt->getActionVarId(), poPkt->getActionVarValue() );
+	IToGui::getToGui().toGuiSetGameActionVar( m_ePluginType, netIdent->getMyOnlineId(), poPkt->getActionVarId(), poPkt->getActionVarValue() );
 }
 
 //============================================================================
 void PluginTruthOrDare::onPktTodGameValue( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	PktTodGameValue * poPkt = (PktTodGameValue *)pktHdr;
-	m_ToGui.toGuiSetGameValueVar( m_ePluginType, netIdent->getMyOnlineId(), poPkt->getValueVarId(), poPkt->getValueVar() );
+	IToGui::getToGui().toGuiSetGameValueVar( m_ePluginType, netIdent->getMyOnlineId(), poPkt->getValueVarId(), poPkt->getValueVar() );
 }
 
 //============================================================================

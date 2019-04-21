@@ -34,9 +34,9 @@
 #endif
  
 //============================================================================
-PluginRelay::PluginRelay( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, toGui, myIdent )
-, m_PluginSessionMgr( *this, pluginMgr, toGui )
+PluginRelay::PluginRelay( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+: PluginBase( engine, pluginMgr, myIdent )
+, m_PluginSessionMgr( *this, pluginMgr )
 , m_TestTimer()
 , m_bVerbose( false )
 , m_bTest( false )

@@ -32,7 +32,7 @@ class AssetMgr;
 class SharedFilesMgr
 {
 public:
-	SharedFilesMgr( PluginFileShare& plugin, IToGui& toGui );
+	SharedFilesMgr( PluginFileShare& plugin );
 	virtual ~SharedFilesMgr();
 
 	void						lockSharedFiles( void )				{ m_FilesListMutex.lock(); }
@@ -72,7 +72,7 @@ private:
 	//=== vars ===//
 	PluginFileShare&			m_Plugin;
 	P2PEngine&					m_Engine;
-	IToGui&						m_ToGui;
+	
 
 	int64_t							m_s64TotalByteCnt;
 	uint16_t							m_u16FileTypes;

@@ -69,7 +69,6 @@ AssetXferMgr::AssetXferMgr( PluginMultiSession&		plugin,
 , m_PluginSessionMgr( pluginSessionMgr )
 , m_PluginMgr( plugin.getPluginMgr() )
 , m_Engine( plugin.getEngine() )
-, m_ToGui( m_PluginMgr.getToGui() )
 , m_AssetMgr( m_Engine.getAssetMgr() )
 {
 }
@@ -392,8 +391,8 @@ void AssetXferMgr::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
 		assetInfo.setAssetSendState( eAssetSendStateRxSuccess );
 		m_AssetMgr.addAsset( assetInfo );
 		m_Plugin.txPacket( netIdent, sktBase, &pktReply );
-		m_ToGui.toGuiAssetAction( eAssetActionRxSuccess, assetInfo.getAssetUniqueId(), 100 );
-		m_ToGui.toGuiAssetAction( eAssetActionRxNotifyNewMsg, assetInfo.getCreatorId(), 100 );
+		IToGui::getToGui().toGuiAssetAction( eAssetActionRxSuccess, assetInfo.getAssetUniqueId(), 100 );
+		IToGui::getToGui().toGuiAssetAction( eAssetActionRxNotifyNewMsg, assetInfo.getCreatorId(), 100 );
 	}
 	else
 	{
@@ -411,7 +410,7 @@ void AssetXferMgr::onPktAssetSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, Vx
 			EXferError xferErr = beginAssetReceive( xferSession, poPkt, pktReply );
 			if( eXferErrorNone != xferErr )
 			{
-				//m_ToGui.toGuiUpdateAssetDownload( xferSession->getLclSessionId(), 0, rc );
+				//IToGui::getToGui().toGuiUpdateAssetDownload( xferSession->getLclSessionId(), 0, rc );
 				endAssetXferSession( xferSession, true );
 			}
 		}
@@ -474,7 +473,7 @@ void AssetXferMgr::onPktAssetSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, 
 				//RCODE rc = txNextAssetChunk( xferSession );
 				//if( rc )
 				//{
-				//	//m_ToGui.toGuiUpdateAssetUpload( xferSession->getLclSessionId(), 0, rc );
+				//	//IToGui::getToGui().toGuiUpdateAssetUpload( xferSession->getLclSessionId(), 0, rc );
 				//	LogMsg( LOG_ERROR, "AssetXferMgr::onPktAssetSendReply beginAssetSend returned error %d\n", rc );
 				//	endAssetXferSession( xferSession, true );
 				//}
@@ -542,7 +541,7 @@ void AssetXferMgr::onPktAssetChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr, V
 				pktReply.setError( xferErr );
 				m_Plugin.txPacket( netIdent, sktBase, &pktReply );
 
-				m_ToGui.toGuiAssetAction( eAssetActionRxError, xferSession->getAssetInfo().getAssetUniqueId(), xferErr );
+				IToGui::getToGui().toGuiAssetAction( eAssetActionRxError, xferSession->getAssetInfo().getAssetUniqueId(), xferErr );
 				endAssetXferSession( xferSession, true );
 			}
 		}
@@ -589,7 +588,7 @@ static int cnt = 0;
 			EXferError xferErr = txNextAssetChunk( xferSession, poPkt->getError(), true );
 			if( eXferErrorNone != xferErr )
 			{
-				//m_ToGui.toGuiUpdateAssetUpload( xferSession->getLclSessionId(), 0, rc );
+				//IToGui::getToGui().toGuiUpdateAssetUpload( xferSession->getLclSessionId(), 0, rc );
 				endAssetXferSession( xferSession, true, false );
 			}
 		}
@@ -1399,7 +1398,7 @@ EXferError AssetXferMgr::beginAssetReceive( AssetRxSession * xferSession, PktAss
 	VxFileXferInfo& xferInfo = xferSession->getXferInfo();
 	if( poPkt->getError() )
 	{
-		//m_ToGui.toGuiUpdateAssetDownload( poPkt->getRmtSessionId(), 0, poPkt->getError() );
+		//IToGui::getToGui().toGuiUpdateAssetDownload( poPkt->getRmtSessionId(), 0, poPkt->getError() );
 		xferErr = (EXferError)poPkt->getError();
 		return xferErr;
 	}
@@ -1631,13 +1630,13 @@ EXferError AssetXferMgr::txNextAssetChunk( AssetTxSession * xferSession, uint32_
 
 	if( eXferErrorNone != xferErr )
 	{
-		m_ToGui.toGuiAssetAction( eAssetActionTxError, xferSession->getAssetInfo().getAssetUniqueId(), xferErr );
+		IToGui::getToGui().toGuiAssetAction( eAssetActionTxError, xferSession->getAssetInfo().getAssetUniqueId(), xferErr );
 	}
 	else
 	{
 		if( xferInfo.calcProgress() )
 		{
-			m_ToGui.toGuiAssetAction( eAssetActionTxProgress, xferSession->getAssetInfo().getAssetUniqueId(), xferInfo.getProgress() );
+			IToGui::getToGui().toGuiAssetAction( eAssetActionTxProgress, xferSession->getAssetInfo().getAssetUniqueId(), xferInfo.getProgress() );
 		}
 	}
 
@@ -1699,12 +1698,12 @@ EXferError AssetXferMgr::rxAssetChunk( bool pluginIsLocked, AssetRxSession * xfe
 	{
 		if( xferInfo.calcProgress() )
 		{
-			m_ToGui.toGuiAssetAction( eAssetActionRxProgress, xferSession->getAssetInfo().getAssetUniqueId(), xferInfo.getProgress() );
+			IToGui::getToGui().toGuiAssetAction( eAssetActionRxProgress, xferSession->getAssetInfo().getAssetUniqueId(), xferInfo.getProgress() );
 		}
 	}
 	else
 	{
-		m_ToGui.toGuiAssetAction( eAssetActionRxError, xferSession->getAssetInfo().getAssetUniqueId(), xferErr );
+		IToGui::getToGui().toGuiAssetAction( eAssetActionRxError, xferSession->getAssetInfo().getAssetUniqueId(), xferErr );
 	}
 
 	return xferErr;
@@ -1767,11 +1766,11 @@ void AssetXferMgr::onAssetReceived( AssetRxSession * xferSession, AssetInfo& ass
 			m_Engine.fromGuiAddFileToLibrary( completedAsset.c_str(), true, xferInfo.getFileHashId().getHashData() );
 			if( eXferErrorNone == error )
 			{
-				m_ToGui.toGuiAssetAction( eAssetActionRxSuccess, xferSession->getAssetInfo().getAssetUniqueId(), 0 );
+				IToGui::getToGui().toGuiAssetAction( eAssetActionRxSuccess, xferSession->getAssetInfo().getAssetUniqueId(), 0 );
 			}
 			else
 			{
-				m_ToGui.toGuiAssetAction( eAssetActionRxError, xferSession->getAssetInfo().getAssetUniqueId(), error );
+				IToGui::getToGui().toGuiAssetAction( eAssetActionRxError, xferSession->getAssetInfo().getAssetUniqueId(), error );
 			}
 		}
 		else
@@ -1792,12 +1791,12 @@ void AssetXferMgr::onAssetSent( AssetTxSession * xferSession, AssetInfo& assetIn
 	if( eXferErrorNone != error )
 	{
 		updateAssetMgrSendState( assetInfo.getAssetUniqueId(), eAssetSendStateTxFail, (int)error );
-		m_ToGui.toGuiAssetAction( eAssetActionTxError, xferSession->getAssetInfo().getAssetUniqueId(), error );
+		IToGui::getToGui().toGuiAssetAction( eAssetActionTxError, xferSession->getAssetInfo().getAssetUniqueId(), error );
 	}
 	else
 	{
 		updateAssetMgrSendState( assetInfo.getAssetUniqueId(), eAssetSendStateTxSuccess, (int)error );
-		m_ToGui.toGuiAssetAction( eAssetActionTxSuccess, xferSession->getAssetInfo().getAssetUniqueId(), 0 );
+		IToGui::getToGui().toGuiAssetAction( eAssetActionTxSuccess, xferSession->getAssetInfo().getAssetUniqueId(), 0 );
 	}
 
 	endAssetXferSession( xferSession, pluginIsLocked, false );

@@ -20,9 +20,11 @@ RenderKodiThread::RenderKodiThread( RenderGlLogic& renderLogic )
 //============================================================================
 void RenderKodiThread::run()
 {
-    if( !m_IsKodiRunning )
+    static bool isKodiRunning = false;
+    if( !isKodiRunning )
     {
-        m_IsKodiRunning = true;
+        LogMsg( LOG_ERROR, "size of bool %d\n", sizeof( bool ) );
+        isKodiRunning = true;
 #ifdef RENDER_LOGO_INSTEAD_OF_KODI
         qDebug() << "hello from worker thread " << currentThreadId();
         m_RenderLogic.initRenderGlSystem();
@@ -55,7 +57,11 @@ void RenderKodiThread::run()
         //    g_RunKodi->deleteLater();
         //g_RunKodi = nullptr;
 #endif // RENDER_LOGO_INSTEAD_OF_KODI
-        m_IsKodiRunning = false;
+        isKodiRunning = false;
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "Tried to run kodi twice\n" );
     }
 }
 

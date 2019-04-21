@@ -35,7 +35,6 @@ FileXferBaseMgr::FileXferBaseMgr( PluginBase& plugin )
 : m_Plugin( plugin )
 , m_PluginMgr( plugin.getPluginMgr() )
 , m_Engine( plugin.getEngine() )
-, m_ToGui( m_PluginMgr.getToGui() )
 {
 }
 
@@ -225,13 +224,13 @@ EXferError FileXferBaseMgr::sendNextFileChunk( VxFileXferInfo& xferInfo, VxNetId
 
 	if( eXferErrorNone != xferErr )
 	{
-		m_ToGui.toGuiFileXferState( xferInfo.getLclSessionId(), eXferStateUploadError, xferErr, xferErr );
+		IToGui::getToGui().toGuiFileXferState( xferInfo.getLclSessionId(), eXferStateUploadError, xferErr, xferErr );
 	}
 	else
 	{
 		if( xferInfo.calcProgress() )
 		{
-			m_ToGui.toGuiFileXferState( xferInfo.getLclSessionId(), eXferStateInUploadXfer, xferInfo.getProgress(), 0 );
+			IToGui::getToGui().toGuiFileXferState( xferInfo.getLclSessionId(), eXferStateInUploadXfer, xferInfo.getProgress(), 0 );
 		}
 	}
 

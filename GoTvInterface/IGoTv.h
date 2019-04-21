@@ -65,6 +65,7 @@ public:
     void                        doShutdown();
 
     //=== running states ===//
+ 
     void                        setIsAppModuleRunning( EAppModule appModule, bool isRunning )   { m_IsRunning[appModule] = isRunning; }
     bool                        getIsAppModuleRunning( EAppModule appModule )                   { return m_IsRunning[appModule]; }
 
@@ -114,7 +115,7 @@ public:
     virtual void                createStaticVertexBuffers( CGUIFontTTFQt * font )   override;
     virtual void                destroyStaticVertexBuffers( CGUIFontTTFQt * font )   override;
 
-    //=== remder ===//
+    //=== render ===//
     void                        captureScreen( CScreenshotSurface * screenCaptrue, GoTvRect& captureArea ) override;
 
     void                        toGuiRenderVideoFrame( int textureIdx, CRenderBuffer* videoBuffer );
@@ -220,6 +221,8 @@ public:
     void				        toGuiLog( int logFlags, const char * pMsg ) override;
     void				        toGuiAppErr( EAppErr eAppErr, const char* errMsg = "" ) override;
     void				        toGuiStatusMessage( const char* statusMsg ) override;
+    /// a module has changed state
+    virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState )  override;
 
     virtual void				toGuiWantMicrophoneRecording( bool wantMicInput ) override;
     virtual void				toGuiWantSpeakerOutput( bool wantSpeakerOutput ) override;
@@ -358,9 +361,6 @@ public:
     virtual void				toGuiSessionHistory( AssetInfo * assetInfo ) override;
     virtual void				toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
     virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
-
-	/// a module has changed state
-	virtual void				toGuiModuleState( int moduleNum, int moduleState )  override;
 
     //============================================================================
     //=== from gui ===//
@@ -563,7 +563,10 @@ private:
     std::string                 m_SslCertFile;
 };
 
+P2PEngine& GetPtoPEngine();
+
 // convenience defines
+#define GetToGui()              IGoTv::getIGoTv()
 #define GetIGoTv()              IGoTv::getIGoTv()
 #define GetILog()               IGoTv::getIGoTv().getILog()
 #define GetOsInterface()        IGoTv::getIGoTv().getOsInterface()

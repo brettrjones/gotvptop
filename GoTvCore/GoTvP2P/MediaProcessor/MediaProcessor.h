@@ -127,7 +127,7 @@ public:
 		VxMutex&				m_Mutex;
 	};
 
-	MediaProcessor( P2PEngine& engine, IToGui& toGui );
+	MediaProcessor( P2PEngine& engine );
 	virtual ~MediaProcessor();
 	
 	void						shutdownMediaProcessor( void );
@@ -220,7 +220,7 @@ protected:
 	//=== vars ===//
 	P2PEngine&					m_Engine;
 	PluginMgr&					m_PluginMgr;
-	IToGui&						m_ToGui;
+	
 	MediaTools&					m_MediaTools;
 	VxMutex						m_AudioMutex;
 	VxMutex						m_VideoMutex;

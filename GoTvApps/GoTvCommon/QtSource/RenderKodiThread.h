@@ -1,4 +1,5 @@
 #pragma once
+#include "config_gotvapps.h"
 
 #include <QThread>
 #include <QOpenGLContext>

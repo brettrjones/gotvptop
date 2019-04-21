@@ -5,29 +5,29 @@ External Prerequisites to install GoTvP2P or KodiP2P
 Python - C:/Python27
 YASM - default install
 Visual Studio 2015 Community Edition - default install location
-Qt 5.9.6 - F:/Qt/Qt5.12
+Qt 5.12.2 - F:/Qt/5.12.2
 Java jre - F:/android/jre1.8.0_131
 Java jdk - F:/android/jdk1.8.0_131
-Android NDK - F:\android\android-ndk-r18b-windows-x86_64\android-ndk-r19
+Android NDK - F:\android\android-ndk-r19-windows-x86_64\android-ndk-r19
 Android SDK - F:\android\android-sdk
 Android Studio F:/android/AndroidStudio
 
 === my enviroment variables ===
-ANDROID_NDK_ROOT F:\android\android-ndk-r18b-windows-x86_64\android-ndk-r19
+ANDROID_NDK_ROOT F:\android\android-ndk-r19-windows-x86_64\android-ndk-r19
 JAVA_HOME  F:\android\jdk1.8.0_131
 JRE_HOME F:\android\jre1.8.0_131
 PythonPath C:\Python27\Lib;C:\Python27\DLLs;C:\Python27\Lib\lib-tk
-QTDIR F:\Qt\Qt5.12\5.12.1\msvc2017_64
+QTDIR F:\Qt\Qt5.12\5.12.2\msvc2017_64
 
 
 === GoTvPtoP For Windows Prerequisites ====
 1.) Python 2.7.14
-	 NOTE: Unless you want to change Paths in visual studio then python must be installed to default location C:\Python27
 2.) YASM 
 3.) visual studio 2017 ( Community edition is fine )
 	a.) Follow the instructions of visual studio install for kodi at https://github.com/xbmc/xbmc/blob/master/docs/README.md
-	b.) 
-4.) Qt 5.12.1 ( Tested with Qt 5.12.1 but other versions may work )
+	b.) if you see "failed to locate a 64-bit linker on %PATH%" then must manually add it to front of PATH enviroment variable ( bug in VS2017 )
+		my path to linker was "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
+4.) Qt 5.12.2 ( Tested with Qt 5.12.2 but other versions may work )
 5.) Java Oracle JDK/JRE 1.8.0_131 
 6.) MingWin is NOT required.. even for ffmpeg build ( have removed all dependecy on migwin and made substitute functions )
 
@@ -37,8 +37,7 @@ After many frustrating days attempting to work within qt android frame work I di
 
 1.) Install AndroidStudio to F:/android/AndroidStudio
 2.) add gradle to enviroment variables 
-	edit path enviroment variable and add F:\Qt\Qt5.12\Tools\QtCreator\bin 
-	and F:\Qt\Qt5.12\Tools\QtCreator\bin 
+	edit path enviroment variable and add F:\Qt\Qt5.12.2\Tools\QtCreator\bin 
 	and F:\android\AndroidStudio\gradle\gradle-4.10.1\bin
 	and F:\android\android-sdk\platform-tools
 	

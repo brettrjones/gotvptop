@@ -626,7 +626,7 @@ bool EventsQtToGoTv::fromGuiKeyPressEvent( int key )
     int mod = 0;
     int kodiKey = TranslateKeyQt( key, mod );
 
-    m_MyApp.fromGuiKeyPressEvent( (int)eModuleKodi, kodiKey, mod );
+    m_MyApp.fromGuiKeyPressEvent( (int)eAppModuleKodi, kodiKey, mod );
     return false;
 }
 
@@ -636,57 +636,57 @@ bool EventsQtToGoTv::fromGuiKeyReleaseEvent( int key )
     int mod = 0;
     int kodiKey = TranslateKeyQt( key, mod );
 
-    m_MyApp.fromGuiKeyPressEvent( (int)eModuleKodi, kodiKey, mod );
+    m_MyApp.fromGuiKeyPressEvent( (int)eAppModuleKodi, kodiKey, mod );
     return false;
 }
 
 //============================================================================
 bool EventsQtToGoTv::fromGuiMousePressEvent( int mouseXPos, int mouseyPos, int mouseButton )
 {
-    m_MyApp.fromGuiMousePressEvent( ( int )eModuleKodi, mouseXPos, mouseyPos, TranslateMouseButtonQt( mouseButton ) );
+    m_MyApp.fromGuiMousePressEvent( ( int )eAppModuleKodi, mouseXPos, mouseyPos, TranslateMouseButtonQt( mouseButton ) );
     return false;
 }
 
 //============================================================================
 bool EventsQtToGoTv::fromGuiMouseReleaseEvent( int mouseXPos, int mouseyPos, int mouseButton )
 {
-    m_MyApp.fromGuiMouseReleaseEvent( ( int )eModuleKodi, mouseXPos, mouseyPos, TranslateMouseButtonQt( mouseButton ) );
+    m_MyApp.fromGuiMouseReleaseEvent( ( int )eAppModuleKodi, mouseXPos, mouseyPos, TranslateMouseButtonQt( mouseButton ) );
     return false;
 }
 
 //============================================================================
 bool EventsQtToGoTv::fromGuiMouseMoveEvent( int mouseXPos, int mouseyPos )
 {
-    m_MyApp.fromGuiMouseMoveEvent( ( int )eModuleKodi, mouseXPos, mouseyPos );
+    m_MyApp.fromGuiMouseMoveEvent( ( int )eAppModuleKodi, mouseXPos, mouseyPos );
     return false;
 }
 
 //============================================================================
 void EventsQtToGoTv::fromGuiResizeBegin( int winWidth, int winHeight )
 {
-	m_MyApp.fromGuiResizeBegin( (int)eModuleKodi, winWidth, winHeight );
+	m_MyApp.fromGuiResizeBegin( (int)eAppModuleKodi, winWidth, winHeight );
 }
 
 //============================================================================
 void EventsQtToGoTv::fromGuiResizeEvent( int winWidth, int winHeight )
 {
-    m_MyApp.fromGuiResizeEvent( ( int )eModuleKodi, winWidth, winHeight );
+    m_MyApp.fromGuiResizeEvent( ( int )eAppModuleKodi, winWidth, winHeight );
 }
 
 //============================================================================
 void EventsQtToGoTv::fromGuiResizeEnd( int winWidth, int winHeight )
 {
-	m_MyApp.fromGuiResizeEnd( (int)eModuleKodi, winWidth, winHeight );
+	m_MyApp.fromGuiResizeEnd( (int)eAppModuleKodi, winWidth, winHeight );
 }
 
 //============================================================================
 void EventsQtToGoTv::fromGuiCloseEvent( )
 {
-    m_MyApp.fromGuiCloseEvent( ( int )eModuleKodi );
+    m_MyApp.fromGuiCloseEvent( ( int )eAppModuleKodi );
 }
 
 //============================================================================
 void EventsQtToGoTv::fromGuiVisibleEvent( bool isVisible )
 {
-    m_MyApp.fromGuiVisibleEvent( ( int )eModuleKodi, isVisible );
+    m_MyApp.fromGuiVisibleEvent( ( int )eAppModuleKodi, isVisible );
 }

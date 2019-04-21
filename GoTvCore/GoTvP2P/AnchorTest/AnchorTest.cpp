@@ -18,6 +18,8 @@
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/NetServices/NetServicesMgr.h>
 #include <GoTvInterface/IToGui.h>
+#include <GoTvInterface/IGoTv.h>
+
 
 #include <CoreLib/VxGlobals.h>
 #include <NetLib/VxSktUtil.h>
@@ -60,16 +62,16 @@ namespace
 }
 
 //============================================================================
-AnchorTest::AnchorTest( IToGui& toGui, EngineSettings& engineSettings, NetServicesMgr& netServicesMgr )
-: m_ToGui( toGui )
-, m_EngineSettings( engineSettings )
+AnchorTest::AnchorTest( EngineSettings& engineSettings, NetServicesMgr& netServicesMgr )
+: m_EngineSettings( engineSettings )
 , m_NetServicesMgr( netServicesMgr )
 {
 }
 
 //============================================================================
-AnchorTest::~AnchorTest()
+IToGui& AnchorTest::getToGui()
 {
+    return IToGui::getToGui();
 }
 
 //============================================================================
@@ -124,7 +126,7 @@ void AnchorTest::sendTestStatus( EAnchorTestStatus eStatus, const char * msg, ..
 	as8Buf[sizeof( as8Buf ) - 1] = 0;
 	va_end( argList );
 	LogMsg( LOG_STATUS, "Test Status %s: %s\n", DescribeAnchorStatus( eStatus), as8Buf ); 
-	m_ToGui.toGuiAnchorStatus( eStatus, as8Buf );
+	IToGui::getToGui().toGuiAnchorStatus( eStatus, as8Buf );
 }
 
 //============================================================================
@@ -137,7 +139,7 @@ void AnchorTest::sendTestLog( const char * msg, ... )
 	as8Buf[sizeof( as8Buf ) - 1] = 0;
 	va_end( argList );
 	LogMsg( LOG_STATUS, "Anchor Test Log %s\n", as8Buf ); 
-	m_ToGui.toGuiAnchorStatus( eAnchorTestStatusLogMsg, as8Buf );
+	IToGui::getToGui().toGuiAnchorStatus( eAnchorTestStatusLogMsg, as8Buf );
 }
 
 //============================================================================

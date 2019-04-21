@@ -18,6 +18,7 @@
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListMgr.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <GoTvInterface/IGoTv.h>
 
 #include <CoreLib/sqlite3.h>
 #include <CoreLib/VxMacros.h>
@@ -29,17 +30,12 @@
 #include "GoTvDebugConfig.h"
 
 //============================================================================
-BigListDb::BigListDb( BigListMgr& bigListMgr, P2PEngine& engine )
+BigListDb::BigListDb( BigListMgr& bigListMgr )
 : DbBase( "BigListDb" )
-, BigList( engine )
+, BigList()
 , m_BigListMgr( bigListMgr )
 , m_NetworkName( "" )
 , m_BigListDbInitialized( false )
-{
-}
-
-//============================================================================
-BigListDb::~BigListDb()
 {
 }
 
@@ -138,7 +134,7 @@ RCODE BigListDb::dbRestoreAll( const char * networkName )
 
 					bigInsertInfo( poInfo->m_DirectConnectId, poInfo );
 					iRestoredCount++;
-					getEngine().onBigListInfoRestored( poInfo );
+					GetPtoPEngine().onBigListInfoRestored( poInfo );
 				}
 			}
 		}
@@ -427,7 +423,7 @@ UINT BigListLoadThreadFunction( void * pvParam )
 		LogMsg( LOG_INFO, "BigListLoadThreadFunction: Restore Error %d\n" );
 	}
 
-	poMgr->getEngine().onBigListLoadComplete( rc );
+	GetPtoPEngine().onBigListLoadComplete( rc );
 	poThread->threadAboutToExit();
 	return rc;
 }

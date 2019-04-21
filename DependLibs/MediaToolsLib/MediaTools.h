@@ -31,7 +31,7 @@ class MJPEGReader;
 class MediaTools : public MediaCallbackInterface
 {
 public:
-	MediaTools( P2PEngine& engine, MediaProcessor& mediaProcessor, IToGui& toGui );
+	MediaTools( P2PEngine& engine, MediaProcessor& mediaProcessor );
 	virtual ~MediaTools();
 
 	OpusAudioEncoder&			getAudioEncoder( void )					{ return m_AudioEncoder; }
@@ -51,7 +51,7 @@ protected:
 	//=== vars ===//
 	P2PEngine&					m_Engine;
 	MediaProcessor&				m_MediaProcessor;
-	IToGui&						m_ToGui;
+	IToGui&						getToGui();
 	OpusAudioEncoder&			m_AudioEncoder;
 	SndWriter&					m_AudioWriter;
 	SndReader&					m_AudioReader;

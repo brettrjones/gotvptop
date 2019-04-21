@@ -83,6 +83,9 @@ public:
 				IGoTv&		    gotv );
 	virtual ~AppCommon() override = default;
 
+    // load profile and icons etc without using thread to avoid linux crash
+    void                        loadWithoutThread( void );
+
     IFromGui&					getFromGuiInterface( void );
 	QApplication&				getQApplication( void )						{ return m_QApp; }
 	AppGlobals&					getAppGlobals( void )						{ return m_AppGlobals; }
@@ -464,7 +467,7 @@ public:
     virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
 
 	/// a module has changed state
-	virtual void				toGuiModuleState( int moduleNum, int moduleState )  override;
+	virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState )  override;
 
     //============================================================================
     //=== implementation ===//

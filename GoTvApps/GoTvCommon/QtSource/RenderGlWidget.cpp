@@ -50,8 +50,8 @@ RenderGlWidget::RenderGlWidget(QWidget *parent)
 , m_ResizingTimer( new QTimer( this ) )
 {
     memset( m_viewPort, 0, sizeof( m_viewPort ) );
-    memset( m_TextureIds, 0, sizeof( m_viewPort ) );
-    memset( m_TexSize, 0, sizeof( m_viewPort ) );
+    memset( m_TextureIds, 0, sizeof( m_TextureIds ) );
+    memset( m_TexSize, 0, sizeof( m_TexSize ) );
 
     //setMinimumSize(32, 32);
 	connect( m_ResizingTimer, SIGNAL( timeout() ), this, SLOT( slotResizeWindowTimeout() ) );
@@ -66,6 +66,7 @@ RenderGlWidget::RenderGlWidget(QWidget *parent)
 //============================================================================
 RenderGlWidget::~RenderGlWidget()
 {
+    m_QtToKodi.fromGuiCloseEvent();
     m_RenderLogic.aboutToDestroy();
 }
 
@@ -179,7 +180,7 @@ void RenderGlWidget::hideEvent( QHideEvent * ev )
 void RenderGlWidget::closeEvent( QCloseEvent * ev )
 {
     m_RenderLogic.setRenderThreadShouldRun(false);
-
+    m_QtToKodi.fromGuiCloseEvent();
     QWidget::closeEvent( ev );
 }
 
@@ -188,17 +189,17 @@ void RenderGlWidget::resizeEvent( QResizeEvent * ev )
 {
     QWidget::resizeEvent( ev );
     m_RenderLogic.setSurfaceSize( ev->size() );
-//    m_ResizingWindowSize = ev->size();
-//    if( !m_IsResizing )
-//	{
-//		m_IsResizing = true;
-//		onResizeBegin( m_ResizingWindowSize );
-//	}
+    m_ResizingWindowSize = ev->size();
+    if( !m_IsResizing )
+	{
+		m_IsResizing = true;
+		onResizeBegin( m_ResizingWindowSize );
+	}
 
-//	onResizeEvent( m_ResizingWindowSize );
-//    m_ResizingTimer->stop();
-//	m_ResizingTimer->setSingleShot( true );
-//	m_ResizingTimer->start( RESIZE_WINDOW_COMPLETED_TIMEOUT );
+	onResizeEvent( m_ResizingWindowSize );
+    m_ResizingTimer->stop();
+	m_ResizingTimer->setSingleShot( true );
+	m_ResizingTimer->start( RESIZE_WINDOW_COMPLETED_TIMEOUT );
 }
 
 //============================================================================
@@ -226,10 +227,10 @@ void RenderGlWidget::onResizeEnd( QSize& newSize )
 }
 
 //============================================================================
-void RenderGlWidget::onModuleState( int moduleNum, int moduleState )
+void RenderGlWidget::onModuleState( EAppModule moduleNum, EModuleState moduleState )
 {
     #ifndef DEBUG_OPENGL
-	if( ( moduleNum == eModuleKodi ) && ( moduleState == eModuleStateInitialized ) )
+	if( ( moduleNum == eAppModuleKodi ) && ( moduleState == eModuleStateInitialized ) )
 	{
 		// send a resize message so kodi will resize to fit window
 		m_QtToKodi.fromGuiResizeEnd( geometry().width(), geometry().height() );

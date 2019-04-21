@@ -23,7 +23,7 @@
 class PluginVoicePhone : public PluginBase
 {
 public:
-	PluginVoicePhone( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent );
+	PluginVoicePhone( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
 	virtual ~PluginVoicePhone();
 
 	virtual bool				fromGuiMakePluginOffer( VxNetIdent *	netIdent,				

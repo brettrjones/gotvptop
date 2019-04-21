@@ -33,12 +33,12 @@ public:
 		VxMutex&				m_SessionMgrMutex;
 	};
 
-	SessionMgrBase( PluginBase& plugin, PluginMgr& pluginMgr, IToGui& toGui );
-	virtual ~SessionMgrBase();
+	SessionMgrBase( PluginBase& plugin, PluginMgr& pluginMgr );
+	virtual ~SessionMgrBase() = default;
 
 	PluginBase&					getPlugin( void )							{ return m_Plugin; }
 	PluginMgr&					getPluginMgr( void )						{ return m_PluginMgr; }
-	IToGui&						getToGui( void )							{ return m_ToGui; }
+    IToGui&						getToGui( void );
 	VxMutex&					getSessionMgrMutex( void )					{ return m_SessionMgrMutex; }
 
 	bool						isPluginSingleSession( void );
@@ -52,7 +52,7 @@ protected:
 	//=== vars ===//
 	PluginBase&					m_Plugin;
 	PluginMgr&					m_PluginMgr;
-	IToGui&						m_ToGui;
+	
 	VxMutex						m_SessionMgrMutex;
 
 private:

@@ -126,7 +126,7 @@ protected:
 	PluginSessionMgr&			m_PluginSessionMgr;
 	PluginMgr&					m_PluginMgr;
 	P2PEngine&					m_Engine;					
-	IToGui&						m_ToGui;
+	
 	AssetMgr&					m_AssetMgr;
 	AssetXferDb					m_AssetXferDb;
 

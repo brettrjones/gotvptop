@@ -374,7 +374,7 @@ void NetworkStateMachine::fromGuiNetworkAvailable( const char * lclIp, bool isCe
 	m_Engine.getEngineSettings().getTcpIpPort( u16TcpPort );
 	m_PktAnn.setOnlinePort( u16TcpPort );
 	m_PktAnn.getLanIPv4().setIp( lclIp );
-	m_Engine.getToGuiInterface().toGuiUpdateMyIdent( &m_PktAnn );
+	m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
 
 	m_bIsCellNetwork = isCellularNetwork;
 	m_NetworkStateMutex.lock();

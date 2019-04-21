@@ -22,8 +22,8 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-PluginWebServer::PluginWebServer( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, toGui, myIdent )
+PluginWebServer::PluginWebServer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+: PluginBase( engine, pluginMgr, myIdent )
 , m_File(NULL)
 {
 	m_ePluginType = ePluginTypeWebServer;

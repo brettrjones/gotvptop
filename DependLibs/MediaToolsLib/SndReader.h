@@ -51,7 +51,7 @@ class OpusFileDecoder;
 class SndReader : public MediaCallbackInterface
 {
 public:
-	SndReader( P2PEngine& engine, MediaProcessor& mediaProcessor, IToGui& toGui );
+	SndReader( P2PEngine& engine, MediaProcessor& mediaProcessor );
 	virtual ~SndReader();
 
 	void						setIsPlaying( bool isPlaying )				{ m_IsPlaying = isPlaying; }
@@ -82,7 +82,7 @@ protected:
 	//=== vars ===//
 	P2PEngine&					m_Engine; 
 	MediaProcessor&				m_MediaProcessor;
-	IToGui&						m_ToGui;
+	
 
 	EPluginType					m_EPluginType;
 	bool						m_IsPlaying;

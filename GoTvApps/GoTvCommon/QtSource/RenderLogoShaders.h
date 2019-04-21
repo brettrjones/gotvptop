@@ -1,6 +1,8 @@
 #ifndef RENDER_LOGO_SHADERS_H
 #define RENDER_LOGO_SHADERS_H
 
+#include "config_gotvapps.h"
+
 #include <QtGui/qopenglshaderprogram.h>
 #include <QtGui/qopenglfunctions.h>
 

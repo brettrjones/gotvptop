@@ -24,11 +24,10 @@
 #include <CoreLib/VxFileUtil.h>
 
 //============================================================================
-PluginBase::PluginBase( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent )
+PluginBase::PluginBase( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PktPluginHandlerBase()
 , m_Engine(engine)
 , m_PluginMgr( pluginMgr )
-, m_ToGui( toGui )
 , m_MyIdent(myIdent)
 , m_ePluginType(ePluginTypeInvalid)
 , m_ePluginState(eAppStateInvalid)
@@ -39,8 +38,9 @@ PluginBase::PluginBase( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, 
 }
 
 //============================================================================
-PluginBase::~PluginBase()
-{
+IToGui& PluginBase::getToGui()
+{ 
+    return m_Engine.getToGui(); 
 }
 
 //============================================================================

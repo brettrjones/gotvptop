@@ -278,7 +278,7 @@ void CApplication::HandlePortEvents()
             if( !m_bStop )
                 CApplicationMessenger::GetInstance().PostMsg( TMSG_QUIT );
 #ifdef HAVE_QT_GUI
-			IGoTv::getIGoTv().toGuiModuleState( (int)eModuleKodi, (int)eModuleStateDeinitialized );
+			IGoTv::getIGoTv().toGuiModuleState( eAppModuleKodi, eModuleStateDeinitialized );
 #endif // HAVE_QT_GUI
             break;
 
@@ -595,6 +595,10 @@ bool CApplication::Create( const CAppParamParser &params )
 
     if( !m_ServiceManager->InitStageTwo( params, m_pSettingsComponent->GetProfileManager()->GetProfileUserDataFolder() ) )
     {
+#ifdef HAVE_QT_GUI
+        IGoTv::getIGoTv().toGuiModuleState( eAppModuleKodi, eModuleStateInitError );
+#endif // HAVE_QT_GUI
+
         return false;
     }
 
@@ -1392,6 +1396,10 @@ bool CApplication::LoadSkin( const std::string& skinID )
             break;
         }
     }
+
+#ifdef HAVE_QT_GUI
+    IGoTv::getIGoTv().toGuiModuleState( eAppModuleKodi, eModuleStateInitialized );
+#endif // HAVE_QT_GUI
 
     return true;
 }

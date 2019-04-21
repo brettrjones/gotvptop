@@ -66,9 +66,14 @@ RenderGlWidget * AppCommon::getRenderConsumer( void )
 }
 
 //============================================================================
-void AppCommon::toGuiModuleState( int moduleNum, int moduleState )
+void AppCommon::toGuiModuleState( EAppModule moduleNum, EModuleState moduleState )
 {
-	if( moduleNum == eModuleKodi )
+    if( eModuleStateInitError == moduleState )
+    {
+        LogMsg( LOG_ERROR, "ERROR App Module %s failed to initialize", describeAppModule( moduleNum ) );
+    }
+
+	if( moduleNum == eAppModuleKodi )
 	{
 		RenderGlWidget * glWidget = getRenderConsumer();
 		if( glWidget )

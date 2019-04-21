@@ -145,23 +145,23 @@ bool RenderGlLogic::beginRenderGl()
 {
     if( m_OffScreenSurface )
     {
-        /*
-        QMutexLocker locker(&m_renderMutex);
 
-        m_OffScreenSurface->makeCurrent();
+        //QMutexLocker locker(&m_renderMutex);
+
+        //m_OffScreenSurface->makeCurrent();
 
         // do not call m_OffScreenSurface->size.. we want the frame buffer surface size
-        QSize viewSize = m_OffScreenSurface->getSurfaceSize();
+        //QSize viewSize = m_OffScreenSurface->getSurfaceSize();
 
-        locker.unlock();
+        //locker.unlock();
 
         if (!m_initialized) {
             //initialize();
             m_initialized = true;
         }
 
-        glViewport( 0, 0, viewSize.width(), viewSize.height() );
-        */
+       // glViewport( 0, 0, viewSize.width(), viewSize.height() );
+
 
         m_OffScreenSurface->beginRenderGl();
     }
@@ -172,7 +172,7 @@ bool RenderGlLogic::beginRenderGl()
 //============================================================================
 bool RenderGlLogic::endRenderGl()
 {
-    render();
+   render();
 
     if( m_OffScreenSurface )
     {

@@ -66,8 +66,8 @@ void RenderGlWidget::toGuiRenderVideoFrame( int textureIdx, CRenderBuffer* video
 //============================================================================
 bool RenderGlWidget::resetRenderSystem( int width, int height )
 {
-    m_SrcWidth = width;
-    m_SrcHeight = height;
+//    m_SrcWidth = width;
+//    m_SrcHeight = height;
 
     GoTvRect rect( 0, 0, width, height );
     setViewPort( rect );
@@ -109,12 +109,12 @@ bool RenderGlWidget::clearBuffers( GoTvColor color )
     float b = GET_B( color ) / 255.0f;
     float a = GET_A( color ) / 255.0f;
 
-     m_GlWidgetFunctions->glClearColor( r, g, b, a );
+    m_GlWidgetFunctions->glClearColor( r, g, b, a );
 
     GLbitfield flags = GL_COLOR_BUFFER_BIT;
-     m_GlWidgetFunctions->glClear( flags );
+    m_GlWidgetFunctions->glClear( flags );
 
-   return true;
+    return true;
 }
 
 //============================================================================
@@ -158,6 +158,7 @@ void RenderGlWidget::setViewPort( const GoTvRect& viewPort )
 //============================================================================
 void RenderGlWidget::getViewPort( GoTvRect& viewPort )
 {
+
     viewPort.x1 = 0;
     viewPort.y1 = 0;
     viewPort.x2 = width();

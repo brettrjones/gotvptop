@@ -314,7 +314,7 @@ void OpusFileDecoder::callbackAudioOutSpaceAvail( int freeSpaceLen )
 			}
 			else if( m_TotalSndFramesInFile )
 			{
-				m_Engine.getToGuiInterface().toGuiAssetAction( eAssetActionPlayProgress, m_AssetId, (int)((m_ConsumedSndFrames * 100000UL) / m_TotalSndFramesInFile) );
+				m_Engine.getToGui().toGuiAssetAction( eAssetActionPlayProgress, m_AssetId, (int)((m_ConsumedSndFrames * 100000UL) / m_TotalSndFramesInFile) );
 			}
 
 			m_MediaProcessor.playAudio( (int16_t *)buf, MY_OPUS_PKT_UNCOMPRESSED_DATA_LEN );
@@ -325,7 +325,7 @@ void OpusFileDecoder::callbackAudioOutSpaceAvail( int freeSpaceLen )
 			// all done
 			m_InputInitialized = false;
 			enableSpaceAvailCallback( false, false );
-			m_Engine.getToGuiInterface().toGuiAssetAction( eAssetActionPlayEnd, m_AssetId, 0 );
+			m_Engine.getToGui().toGuiAssetAction( eAssetActionPlayEnd, m_AssetId, 0 );
 		}
 
 		m_ResourceMutex.unlock();
@@ -389,7 +389,7 @@ int OpusFileDecoder::decodedNextFrame( uint8_t * frameBuffer, int frameBufferLen
 			if( 0 == m_TotalSndFramesInFile )
 			{
 				// if not total frames then use file offset to set progress bar
-				m_Engine.getToGuiInterface().toGuiAssetAction( eAssetActionPlayProgress, m_AssetId, calculateFileProgress() );
+				m_Engine.getToGui().toGuiAssetAction( eAssetActionPlayProgress, m_AssetId, calculateFileProgress() );
 			}
 
 			ogg_sync_wrote(&m_OggSyncState, nb_read);

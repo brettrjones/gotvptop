@@ -22,16 +22,16 @@
 
 //! implements minimum to uniquely identify user as individual on the network
 //! size
-//!   160 bytes VxConnectInfo
+//!   176 bytes VxConnectInfo
 // +    1 byte  VxOnlineStatusFlags
-//	= 161 bytes inherited
+//	= 177 bytes inherited
 // +    1 byte  m_u8Res
 // +    1 byte  m_u8OfferCnt
 // +    1 byte  m_u8ReplyCnt
 // +    4 bytes m_u32TruthCnt;		
 // +    4 bytes m_u32DareCnt;					
 // +    4 bytes m_u32RejectedCnt;
-// =  176 bytes
+// =  192 bytes
 class VxNetIdentBase : public VxConnectInfo, public VxOnlineStatusFlags
 {
 public:
@@ -45,13 +45,13 @@ public:
 	VxConnectInfo&				getConnectInfo( void )					{ return *this; }
 
 	void						setTruthCount( uint32_t truthCnt );
-	uint32_t							getTruthCount( void );
+	uint32_t					getTruthCount( void );
 	void						setDareCount( uint32_t dareCnt );
-	uint32_t							getDareCount( void );
+	uint32_t					getDareCount( void );
 	void						setRejectedTruthCount( uint16_t rejectCnt );
-	uint16_t							getRejectedTruthCount( void );
+	uint16_t					getRejectedTruthCount( void );
 	void						setRejectedDareCount( uint16_t rejectCnt );
-	uint16_t							getRejectedDareCount( void );
+	uint16_t					getRejectedDareCount( void );
 
 	bool						isVxNetIdentMatch( const VxNetIdentBase& oOtherIdent ) const;
 	void						useAsRelay( VxNetIdentBase * poRelayIdent );
@@ -59,13 +59,13 @@ public:
 
 protected:
 	//=== vars ===//
-	uint8_t							m_u8Res;	
-	uint8_t							m_u8OfferCnt;							// offer count ( used as part of rating )
-	uint8_t							m_u8ReplyCnt;							// reply count ( used as part of rating )
-	uint32_t							m_u32TruthCnt;					
-	uint32_t							m_u32DareCnt;					
-	uint16_t							m_u16RejectedTruthsCnt;				
-	uint16_t							m_u16RejectedDaresCnt;				
+	uint8_t						m_u8Res;	
+	uint8_t						m_u8OfferCnt;							// offer count ( used as part of rating )
+	uint8_t						m_u8ReplyCnt;							// reply count ( used as part of rating )
+	uint32_t					m_u32TruthCnt;					
+	uint32_t					m_u32DareCnt;					
+	uint16_t					m_u16RejectedTruthsCnt;				
+	uint16_t					m_u16RejectedDaresCnt;		
 };
 
 #pragma pack(pop)

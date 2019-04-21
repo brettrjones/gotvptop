@@ -68,7 +68,7 @@ void P2PEngine::onContactConnected( RcConnectInfo * poInfo, bool connectionListI
 			//LogMsg( LOG_INFO, "toGuiContactOnline id %s name %s\n", 
 			//	poInfo->m_BigListInfo->getMyOnlineId().describeVxGUID().c_str(),
 			//	strName.c_str() );
-			m_ToGui.toGuiContactOnline( poInfo->m_BigListInfo, newContact );
+			IToGui::getToGui().toGuiContactOnline( poInfo->m_BigListInfo, newContact );
 		}
 		//else
 		//{
@@ -103,7 +103,7 @@ void P2PEngine::onContactDisconnected( RcConnectInfo * poInfo, bool connectionLi
 
 		LogMsg( LOG_INFO, "onContactDisconnected %s telling plugin mgr\n", poInfo->m_BigListInfo->getOnlineName() );
 		m_RcScan.onContactWentOffline( (VxNetIdent *)poInfo->m_BigListInfo, poInfo->getSkt() );
-		m_ToGui.toGuiContactOffline( (VxNetIdent *)poInfo->m_BigListInfo );
+		IToGui::getToGui().toGuiContactOffline( (VxNetIdent *)poInfo->m_BigListInfo );
 		m_PluginMgr.onContactWentOffline( (VxNetIdent *)poInfo->m_BigListInfo, poInfo->getSkt() );
 	}
 }
@@ -115,7 +115,7 @@ void P2PEngine::onContactNearby( BigListInfo * poBigListInfo )
 	{
 		if( shouldNotifyGui( poBigListInfo ) )
 		{
-			m_ToGui.toGuiContactNearby( (VxNetIdent *)poBigListInfo );
+			IToGui::getToGui().toGuiContactNearby( (VxNetIdent *)poBigListInfo );
 		}
 	}
 }
@@ -127,7 +127,7 @@ void P2PEngine::onContactNotNearby( BigListInfo * poBigListInfo )
 	{
 		if( shouldNotifyGui( poBigListInfo ) )
 		{
-			m_ToGui.toGuiContactNotNearby( (VxNetIdent *)poBigListInfo );
+			IToGui::getToGui().toGuiContactNotNearby( (VxNetIdent *)poBigListInfo );
 		}
 	}
 }

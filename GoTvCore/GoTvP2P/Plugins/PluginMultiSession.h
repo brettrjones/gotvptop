@@ -24,7 +24,7 @@
 class PluginMultiSession : public PluginBase
 {
 public:
-	PluginMultiSession( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent );
+	PluginMultiSession( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
 	virtual ~PluginMultiSession();
 
 	virtual void				fromGuiUserLoggedOn( void );

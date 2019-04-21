@@ -31,8 +31,8 @@
 //#define DEBUG_AUTOPLUGIN_LOCK 1
 
 //============================================================================ 
-PluginSessionMgr::PluginSessionMgr( PluginBase& plugin, PluginMgr& pluginMgr, IToGui& toGui )
-: SessionMgrBase( plugin, pluginMgr, toGui )
+PluginSessionMgr::PluginSessionMgr( PluginBase& plugin, PluginMgr& pluginMgr )
+: SessionMgrBase( plugin, pluginMgr )
 {
 }
 
@@ -498,7 +498,7 @@ void PluginSessionMgr::onPktPluginOfferReq( VxSktBase * sktBase, VxPktHdr * pktH
 			poOffer->setOfferMsg( poPkt->getOfferMsg() );
 		}
 
-		m_ToGui.toGuiRxedPluginOffer(	netIdent,				
+		IToGui::getToGui().toGuiRxedPluginOffer(	netIdent,				
 										m_Plugin.getPluginType(),	
 										poOffer->m_strOfferMsg.c_str(),	
 										0,				// plugin defined data
@@ -540,7 +540,7 @@ void PluginSessionMgr::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pk
 		// notify gui of response
 		poOffer->setRmtSessionId( poPkt->getLclSessionId());
 		poOffer->setOfferResponse( poPkt->getOfferResponse() );
-		m_ToGui.toGuiRxedOfferReply(	poOffer->getIdent(),		
+		IToGui::getToGui().toGuiRxedOfferReply(	poOffer->getIdent(),		
 										m_Plugin.getPluginType(),			
 										0,				// plugin defined data
 										poOffer->getOfferResponse(),
@@ -561,7 +561,7 @@ void PluginSessionMgr::onPktPluginOfferReply( VxSktBase * sktBase, VxPktHdr * pk
 	{
 		// session not started but still need to notify offer list so accept can be disabled
 		VxGUID nullGuid;
-		m_ToGui.toGuiRxedOfferReply(	netIdent,		
+		IToGui::getToGui().toGuiRxedOfferReply(	netIdent,		
 										m_Plugin.getPluginType(),			
 										0,				// plugin defined data
 										poPkt->getOfferResponse(),

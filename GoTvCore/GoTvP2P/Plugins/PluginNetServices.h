@@ -21,7 +21,7 @@
 class PluginNetServices : public PluginBase
 {
 public:
-	PluginNetServices( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent );
+	PluginNetServices( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
 	virtual ~PluginNetServices();
 
 	virtual RCODE				handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
@@ -41,7 +41,7 @@ protected:
 	//NetServiceUtils&			m_NetServiceUtil;
 
 private:
-	PluginNetServices(); // don't allow default constructor
-	PluginNetServices(const PluginNetServices&); // don't allow copy constructor
+	PluginNetServices() = delete; // don't allow default constructor
+	PluginNetServices(const PluginNetServices&) = delete; // don't allow copy constructor
 };
 

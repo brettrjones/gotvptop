@@ -34,7 +34,7 @@ class IToGui;
 class MJPEGWriter : public MediaCallbackInterface
 {
 public:
-	MJPEGWriter( P2PEngine& engine, MediaProcessor& mediaProcessor, IToGui& toGui );
+	MJPEGWriter( P2PEngine& engine, MediaProcessor& mediaProcessor );
 	virtual ~MJPEGWriter();
 
 	void						setIsRecording( bool isRecording )				{ m_IsRecording = isRecording; }
@@ -64,7 +64,7 @@ protected:
 	//=== vars ===//
 	P2PEngine&					m_Engine; 
 	MediaProcessor&				m_MediaProcessor;
-	IToGui&						m_ToGui;
+	
 	VxGUID						m_FeedId;
 
 	EPluginType					m_EPluginType;

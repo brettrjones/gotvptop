@@ -20,8 +20,8 @@
 #include <NetLib/VxSktBase.h>
 
 //============================================================================
-PluginNetServices::PluginNetServices( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, toGui, myIdent )
+PluginNetServices::PluginNetServices( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+: PluginBase( engine, pluginMgr, myIdent )
 , m_NetServicesMgr( engine.getNetServicesMgr() )
 //, m_NetServiceUtil( m_NetServicesMgr.getNetUtils() )
 {

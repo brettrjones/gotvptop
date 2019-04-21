@@ -290,7 +290,7 @@ void RcScan::onPktSearchReply( VxNetIdent * netIdent, VxSktBase * sktBase, PktSe
 				|| ( eScanTypeMoodMsgSearch == m_eScanType )
 				|| ( eScanTypeCamServer == m_eScanType ) )
 			{
-				m_Engine.getToGuiInterface().toGuiSearchResultSuccess( m_eScanType, netIdent );
+				m_Engine.getToGui().toGuiSearchResultSuccess( m_eScanType, netIdent );
 			}
 			else
 			{
@@ -342,7 +342,7 @@ void RcScan::onSearchResultProfilePic( VxNetIdent * netIdent, VxSktBase * sktBas
 void RcScan::scanComplete( void )
 {
 	fromGuiStopScan( m_eScanType );
-	m_Engine.getToGuiInterface().toGuiScanSearchComplete( m_eScanType );
+	m_Engine.getToGui().toGuiScanSearchComplete( m_eScanType );
 }
 
 //============================================================================

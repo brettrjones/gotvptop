@@ -117,7 +117,7 @@ int P2PEngine::toGuiSendAdministratorList( int iSentCnt, int iMaxSendCnt )
 		if( shouldNotifyGui( poInfo ) )
 		{
 			LogMsg( LOG_INFO, "toGuiSendAdministratorList: %s\n", poInfo->getOnlineName());
-			m_ToGui.toGuiContactOnline( poInfo );
+			IToGui::getToGui().toGuiContactOnline( poInfo );
 		}
 
 		iSentCnt++;
@@ -145,7 +145,7 @@ int P2PEngine::toGuiSendFriendList( int iSentCnt, int iMaxSendCnt )
 		if( shouldNotifyGui( poInfo ) )
 		{
 			LogMsg( LOG_INFO, "toGuiSendFriendList: %s\n", poInfo->getOnlineName());
-			m_ToGui.toGuiContactOnline( poInfo );
+			IToGui::getToGui().toGuiContactOnline( poInfo );
 		}
 
 		iSentCnt++;
@@ -174,7 +174,7 @@ int P2PEngine::toGuiSendGuestList( int iSentCnt, int iMaxSendCnt )
 			if( shouldNotifyGui( poInfo ) )
 			{
 				LogMsg( LOG_INFO, "toGuiSendGuestList: %s\n", poInfo->getOnlineName());
-				m_ToGui.toGuiContactOnline( poInfo );
+				IToGui::getToGui().toGuiContactOnline( poInfo );
 			}
 
 			iSentCnt++;
@@ -203,7 +203,7 @@ int P2PEngine::toGuiSendAnonymousList( int iSentCnt, int iMaxSendCnt )
 		if( shouldNotifyGui( poInfo ) )
 		{
 			LogMsg( LOG_INFO, "toGuiSendAnonymousList: %s\n", poInfo->getOnlineName());
-			m_ToGui.toGuiContactOnline( poInfo );
+			IToGui::getToGui().toGuiContactOnline( poInfo );
 		}
 
 		iSentCnt++;
@@ -231,7 +231,7 @@ int P2PEngine::toGuiSendIgnoreList( int iSentCnt, int iMaxSendCnt )
 		if( shouldNotifyGui( poInfo ) )
 		{
 			LogMsg( LOG_INFO, "toGuiSendIgnoreList: %s\n", poInfo->getOnlineName());
-			m_ToGui.toGuiContactOnline( poInfo );
+			IToGui::getToGui().toGuiContactOnline( poInfo );
 		}
 
 		iSentCnt++;
@@ -258,7 +258,7 @@ int P2PEngine::toGuiSendMyProxiesList( int iSentCnt, int iMaxSendCnt )
 		if( poInfo->isMyRelay() || poInfo->isMyPreferedRelay() )
 		{
 			LogMsg( LOG_INFO, "toGuiSendMyProxiesList: %s\n", poInfo->getOnlineName());
-			m_ToGui.toGuiContactOnline( poInfo );
+			IToGui::getToGui().toGuiContactOnline( poInfo );
 		}
 
 		iSentCnt++;
@@ -286,7 +286,7 @@ int P2PEngine::toGuiSendAllProxiesList( int iSentCnt, int iMaxSendCnt )
 			( ePluginAccessOk == poInfo->getMyAccessPermissionFromHim( ePluginTypeRelay ) ) )
 		{
 			LogMsg( LOG_INFO, "toGuiSendMyProxiesList: %s\n", poInfo->getOnlineName());
-			m_ToGui.toGuiContactOnline( poInfo );
+			IToGui::getToGui().toGuiContactOnline( poInfo );
 		}
 
 		iSentCnt++;
@@ -425,7 +425,7 @@ void P2PEngine::sendToGuiStatusMessage( const char * statusMsg, ... )
 	vsnprintf( as8Buf, sizeof( as8Buf ), statusMsg, argList );
 	as8Buf[sizeof( as8Buf ) - 1] = 0;
 	va_end( argList );
-	getToGuiInterface().toGuiStatusMessage( as8Buf );
+	getToGui().toGuiStatusMessage( as8Buf );
 }
 
 //============================================================================
@@ -434,7 +434,7 @@ void P2PEngine::toGuiContactNameChange( PktAnnounce * poPktAnn )
 	if( shouldNotifyGui( poPktAnn ) )
 	{
 		LogMsg( LOG_INFO, "toGuiContactNameChange:\n");
-		m_ToGui.toGuiContactNameChange( (VxNetIdent *)poPktAnn );
+		IToGui::getToGui().toGuiContactNameChange( (VxNetIdent *)poPktAnn );
 	}
 }
 
@@ -445,7 +445,7 @@ void P2PEngine::toGuiContactDescChange( PktAnnounce * poPktAnn )
 	if( shouldNotifyGui( poPktAnn ) )
 	{
 		LogMsg( LOG_INFO, "toGuiContactDescChange:\n");
-		m_ToGui.toGuiContactDescChange( (VxNetIdent *)poPktAnn );
+		IToGui::getToGui().toGuiContactDescChange( (VxNetIdent *)poPktAnn );
 	}
 }
 
@@ -456,7 +456,7 @@ void P2PEngine::toGuiContactMyFriendshipChange( PktAnnounce * poPktAnn )
 	if( shouldNotifyGui( poPktAnn ) )
 	{
 		LogMsg( LOG_INFO, "toGuiContactMyFriendshipChange:\n");
-		m_ToGui.toGuiContactMyFriendshipChange( (VxNetIdent *)poPktAnn );
+		IToGui::getToGui().toGuiContactMyFriendshipChange( (VxNetIdent *)poPktAnn );
 	}
 }
 
@@ -467,7 +467,7 @@ void P2PEngine::toGuiContactHisFriendshipChange( PktAnnounce * poPktAnn )
 	if( shouldNotifyGui( poPktAnn ) )
 	{
 		LogMsg( LOG_INFO, "toGuiContactHisFriendshipChange:\n");
-		m_ToGui.toGuiContactHisFriendshipChange( (VxNetIdent *)poPktAnn );
+		IToGui::getToGui().toGuiContactHisFriendshipChange( (VxNetIdent *)poPktAnn );
 	}
 }
 
@@ -478,7 +478,7 @@ void P2PEngine::toGuiPluginPermissionChange( PktAnnounce * poPktAnn )
 	if( shouldNotifyGui( poPktAnn ) )
 	{
 		LogMsg( LOG_INFO, "toGuiPluginPermissionChange:\n");
-		m_ToGui.toGuiPluginPermissionChange( (VxNetIdent *)poPktAnn );
+		IToGui::getToGui().toGuiPluginPermissionChange( (VxNetIdent *)poPktAnn );
 	}
 }
 
@@ -489,7 +489,7 @@ void P2PEngine::toGuiContactSearchFlagsChange( PktAnnounce * poPktAnn )
 	if( shouldNotifyGui( poPktAnn ) )
 	{
 		LogMsg( LOG_INFO, "toGuiContactSearchFlagsChange:\n");
-		m_ToGui.toGuiContactSearchFlagsChange( (VxNetIdent *)poPktAnn );
+		IToGui::getToGui().toGuiContactSearchFlagsChange( (VxNetIdent *)poPktAnn );
 	}
 }
 
@@ -500,7 +500,7 @@ void P2PEngine::toGuiContactConnectionChange( PktAnnounce * poPktAnn )
 	if( shouldNotifyGui( poPktAnn ) )
 	{
 		LogMsg( LOG_INFO, "toGuiContactConnectionChange\n");
-		m_ToGui.toGuiContactConnectionChange( (VxNetIdent *)poPktAnn );
+		IToGui::getToGui().toGuiContactConnectionChange( (VxNetIdent *)poPktAnn );
 	}
 }
 
@@ -511,7 +511,7 @@ void P2PEngine::toGuiContactAnythingChange( PktAnnounce * poPktAnn )
 	if( shouldNotifyGui( poPktAnn ) )
 	{
 		LogMsg( LOG_INFO, "toGuiContactAnythingChange\n");
-		m_ToGui.toGuiContactAnythingChange( (VxNetIdent *)poPktAnn );
+		IToGui::getToGui().toGuiContactAnythingChange( (VxNetIdent *)poPktAnn );
 	}
 }
 

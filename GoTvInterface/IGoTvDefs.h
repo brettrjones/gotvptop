@@ -1,28 +1,5 @@
 #pragma once
 
-
-enum EModules
-{
-    eModuleUnknown = 0,
-    eModuleAll,
-    eModuleKodi,
-    eModulePtoP,
-    eModuleFfmpeg,
-
-    eMaxModule // must be last
-};
-
-enum EModuleState
-{
-	eModuleStateUnknown = 0,
-	eModuleStateInitialized,
-	eModuleStateDeinitialized,
-
-	eMaxModuleState // must be last
-};
-
-
-
 enum EAppModule
 {
     eAppModuleInvalid = 0,
@@ -33,3 +10,16 @@ enum EAppModule
 
     eMaxAppModule // must be last
 };
+
+enum EModuleState
+{
+	eModuleStateUnknown = 0,
+	eModuleStateInitialized,
+	eModuleStateDeinitialized,
+    eModuleStateInitError,
+
+	eMaxModuleState // must be last
+};
+
+const char * describeAppModule( EAppModule appModule );
+const char * describeModuleState( EModuleState moduleState );

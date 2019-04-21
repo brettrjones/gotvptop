@@ -42,13 +42,13 @@ public:
 		VxMutex&				m_Mutex;
 	};
 
-	PluginMgr( P2PEngine& engine, IToGui& toGui );
+	PluginMgr( P2PEngine& engine );
 	virtual ~PluginMgr();
 
 	void						pluginMgrStartup( void );
 	void						pluginMgrShutdown( void );
 
-	IToGui&						getToGui( void )									{ return m_ToGui; }
+    IToGui&						getToGui( void );
 	P2PEngine&					getEngine( void )									{ return m_Engine; }
 
 	PluginBase *				getPlugin( EPluginType ePluginType );
@@ -145,7 +145,7 @@ protected:
 	P2PEngine&					m_Engine;
 	BigListMgr&					m_BigListMgr;
 	PktAnnounce&				m_PktAnn;
-	IToGui&						m_ToGui;
+	
 	VxMutex						m_PluginMgrMutex;
 
 	bool						m_PluginMgrInitialized;

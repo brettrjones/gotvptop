@@ -116,7 +116,7 @@ public:
 	virtual void				onResizeEvent( QSize& newSize );
 	virtual void				onResizeEnd( QSize& newSize );
 
-	void						onModuleState( int moduleNum, int moduleState );
+	void						onModuleState( EAppModule moduleNum, EModuleState moduleState );
 
 
     //============================================================================

@@ -18,7 +18,7 @@
 class PluginStoryBoard : public PluginBase
 {
 public:
-	PluginStoryBoard( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent );
+	PluginStoryBoard( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
 	virtual ~PluginStoryBoard();
 
 	bool						fromGuiIsPluginInSession( VxNetIdent * netIdent, void * pvUserData );

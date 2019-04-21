@@ -32,7 +32,7 @@ class VxSha1Hash;
 class FileLibraryMgr : public VxThread
 {
 public:
-	FileLibraryMgr( PluginBase& plugin, IToGui& toGui, SharedFilesMgr& sharedFilesMgr );
+	FileLibraryMgr( PluginBase& plugin, SharedFilesMgr& sharedFilesMgr );
 	virtual ~FileLibraryMgr();
 
 	void						fileLibraryShutdown( void );
@@ -73,7 +73,7 @@ private:
 	//=== vars ===//
 	PluginBase&					m_Plugin;
 	P2PEngine&					m_Engine;
-	IToGui&						m_ToGui;
+	
 	SharedFilesMgr&				m_SharedFilesMgr;
 
 	int64_t							m_s64TotalByteCnt;

@@ -84,17 +84,34 @@ private:
 	uint8_t						m_au8Permissions[ PERMISSION_ARRAY_SIZE ];
 };
 
+class VxGroupService
+{
+public:
+    VxGroupService() = default;
+    VxGroupService( const VxGroupService &rhs ) = default;
+    //! copy operator
+    VxGroupService& operator =( const VxGroupService &rhs ) = default;
+
+    uint16_t					m_GroupFlags = 0;           // group service flags
+    uint16_t					m_GroupCatagories = 0;      // catagory of service
+    uint16_t					m_GroupSubCatagories = 0;   // sub catagory of service
+    uint16_t					m_GroupReserved = 0;        // catagory of service
+
+};
 
 //  size
-//    176 bytes VxNetIdentBase
+//    192 bytes VxNetIdentBase
 // +   24 bytes PluginPermission
+// +    8 bytes VxGroupService
 // +    2 bytes m_u16AppVersion;	
-// +    2 bytes m_u16PingTimeMs;		
+// +    2 bytes m_u16PingTimeMs;	
+// +    2 bytes m_PrimaryLanguage;	
+// +    2 bytes m_SecondLanguage;
 // +    8 bytes m_LastSessionTime;						
 // =  240 bytes total
 
 /// network indentiy of contact
-class VxNetIdent : public VxNetIdentBase, public PluginPermission
+class VxNetIdent : public VxNetIdentBase, public PluginPermission, public VxGroupService
 {
 public:
 	VxNetIdent();
@@ -122,7 +139,9 @@ private:
 	//=== vars ===//
 	uint16_t					m_u16AppVersion;			
 	uint16_t					m_u16PingTimeMs;		
-	int64_t					    m_LastSessionTimeGmtMs;						
+    uint16_t					m_PrimaryLanguage = 0;  // primary language user speaks
+    uint16_t					m_SecondLanguage = 0;   // secondary language user speaks
+	int64_t					    m_LastSessionTimeGmtMs;		
 };
 
 #pragma pack()

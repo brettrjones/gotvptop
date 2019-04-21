@@ -43,14 +43,19 @@
 #include <stdio.h>
 
 //============================================================================
-PluginMgr::PluginMgr( P2PEngine& engine, IToGui& toGui )
+PluginMgr::PluginMgr( P2PEngine& engine )
 : m_Engine( engine )
 , m_BigListMgr( engine.getBigListMgr() )
 , m_PktAnn( engine.getMyPktAnnounce() )
-, m_ToGui( toGui )
 , m_PluginMgrInitialized( false )
 , m_NetServiceUtils( engine )
 {
+}
+
+//============================================================================
+IToGui&	PluginMgr::getToGui( void )
+{ 
+    return m_Engine.getToGui(); 
 }
 
 //============================================================================
@@ -73,16 +78,16 @@ void PluginMgr::pluginMgrStartup( void )
 
 	PluginBase * poPlugin;
 	// invalid
-	poPlugin = new PluginInvalid( m_Engine, *this, m_ToGui, &this->m_PktAnn );
+	poPlugin = new PluginInvalid( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
 	//LogMsg( LOG_INFO, "pluginMgrStartup create admin plugin\n" );
-	poPlugin = new PluginInvalid( m_Engine, *this, m_ToGui, &this->m_PktAnn );
+	poPlugin = new PluginInvalid( m_Engine, *this, &this->m_PktAnn );
 	poPlugin->setPluginType( ePluginTypeAdmin );
 	m_aoPlugins.push_back( poPlugin );
 
 	//LogMsg( LOG_INFO, "pluginMgrStartup create web server plugin\n" );
-	poPlugin = new PluginWebServer( m_Engine, *this, m_ToGui, &this->m_PktAnn );
+	poPlugin = new PluginWebServer( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
 	// relay pre created by engine
@@ -92,31 +97,31 @@ void PluginMgr::pluginMgrStartup( void )
 	m_aoPlugins.push_back( &m_Engine.getPluginFileShare() );
 
 	//LogMsg( LOG_INFO, "pluginMgrStartup create file offer plugin\n" );
-	poPlugin = new PluginFileOffer( m_Engine, *this, m_ToGui, &this->m_PktAnn );
+	poPlugin = new PluginFileOffer( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
 	//LogMsg( LOG_INFO, "pluginMgrStartup create cam server plugin\n" );
-	poPlugin = new PluginCamServer( m_Engine, *this, m_ToGui, &this->m_PktAnn);
+	poPlugin = new PluginCamServer( m_Engine, *this, &this->m_PktAnn);
 	m_aoPlugins.push_back( poPlugin );
 
 	//LogMsg( LOG_INFO, "pluginMgrStartup create multisession plugin\n" );
-	poPlugin = new PluginMultiSession( m_Engine, *this, m_ToGui, &this->m_PktAnn );
+	poPlugin = new PluginMultiSession( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
 	//LogMsg( LOG_INFO, "pluginMgrStartup create voice phone plugin\n" );
-	poPlugin = new PluginVoicePhone( m_Engine, *this, m_ToGui, &this->m_PktAnn );
+	poPlugin = new PluginVoicePhone( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
 	//LogMsg( LOG_INFO, "pluginMgrStartup create video phone plugin\n" );
-	poPlugin = new PluginVideoPhone( m_Engine, *this, m_ToGui, &this->m_PktAnn );
+	poPlugin = new PluginVideoPhone( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
 	//LogMsg( LOG_INFO, "pluginMgrStartup create truth or dare plugin\n" );
-	poPlugin = new PluginTruthOrDare( m_Engine, *this, m_ToGui, &this->m_PktAnn );
+	poPlugin = new PluginTruthOrDare( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
 	//LogMsg( LOG_INFO, "pluginMgrStartup create storyboard plugin\n" );
-	poPlugin = new PluginStoryBoard( m_Engine, *this, m_ToGui, &this->m_PktAnn );
+	poPlugin = new PluginStoryBoard( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
 	//LogMsg( LOG_INFO, "pluginMgrStartup adding net services\n" );
@@ -692,7 +697,7 @@ bool PluginMgr::pluginApiTxPacket(	EPluginType			ePluginType,
 void PluginMgr::pluginApiPlayVideoFrame( EPluginType ePluginType, uint8_t * pu8VidData, uint32_t u32VidDataLen, VxNetIdent * netIdent, int motion0to100000 )
 {
 	//LogMsg( LOG_INFO, "PluginMgr::pluginApiPlayVideoFrame\n" );
-	m_ToGui.toGuiPlayVideoFrame( netIdent->getMyOnlineId(), pu8VidData, u32VidDataLen, motion0to100000 );
+	IToGui::getToGui().toGuiPlayVideoFrame( netIdent->getMyOnlineId(), pu8VidData, u32VidDataLen, motion0to100000 );
 }
 
 //============================================================================

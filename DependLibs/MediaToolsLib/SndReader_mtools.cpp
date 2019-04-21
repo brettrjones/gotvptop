@@ -31,10 +31,9 @@ namespace
 }
 
 //============================================================================
-SndReader::SndReader( P2PEngine& engine, MediaProcessor& mediaProcessor, IToGui& toGui )
+SndReader::SndReader( P2PEngine& engine, MediaProcessor& mediaProcessor )
 : m_Engine( engine )
 , m_MediaProcessor( mediaProcessor )
-, m_ToGui( toGui )
 , m_EPluginType( ePluginTypeSndReader )
 , m_IsPlaying( false )
 , m_IsPlayingPaused( false )

@@ -29,7 +29,7 @@ NetworkStateTestConnection::NetworkStateTestConnection( NetworkStateMachine& sta
 //============================================================================
 void NetworkStateTestConnection::enterNetworkState( void )
 {
-	m_Engine.getToGuiInterface().toGuiNetworkState( eNetworkStateTypeTestConnection );
+	m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeTestConnection );
 }
 
 //============================================================================

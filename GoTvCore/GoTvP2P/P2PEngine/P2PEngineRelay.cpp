@@ -57,7 +57,7 @@ void P2PEngine::onRelayServiceAvailable( RcConnectInfo * poConnection, bool conn
 		}
 
 		LogMsg( LOG_STATUS, "eMyRelayStatusConnected %s\n", poConnection->m_BigListInfo->getOnlineName() );
-		getToGuiInterface().toGuiMyRelayStatus( eMyRelayStatusConnected, poConnection->m_BigListInfo->getOnlineName() );
+		getToGui().toGuiMyRelayStatus( eMyRelayStatusConnected, poConnection->m_BigListInfo->getOnlineName() );
 		m_NetworkStateMachine.setIsRelayServiceConnected( true );
 	}
 #ifdef DEBUG_RELAY
@@ -110,7 +110,7 @@ void P2PEngine::onRelayServiceUnavailable( RcConnectInfo * poConnection, bool co
 		LogMsg( LOG_INFO, "Our Relay Service from %s Disconnected\n", poConnection->m_BigListInfo->getOnlineName() );
 #endif // DEBUG_RELAY
 		m_ConnectionList.m_RelayServiceConnection = NULL;
-		m_ToGui.toGuiMyRelayStatus( eMyRelayStatusDisconnected );
+		IToGui::getToGui().toGuiMyRelayStatus( eMyRelayStatusDisconnected );
 		m_NetworkStateMachine.setIsRelayServiceConnected( false );
 	}
 #ifdef DEBUG_RELAY

@@ -58,14 +58,13 @@ class P2PEngine :	public IFromGui,
 					public MediaCallbackInterface
 {
 public:
-	P2PEngine(	IToGui&			toGui,
-				VxPeerMgr&		peerMgr );
-	virtual ~P2PEngine();
+	P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr );
+	virtual ~P2PEngine() override;
 
 	void						startupEngine( void );
 	void						shutdownEngine( void );
 
-	IToGui&						getToGuiInterface( void )						{ return m_ToGui; }
+    IToGui&						getToGui( void );
 	IFromGui&					getFromGuiInterface( void )						{ return *this; }
 	AssetMgr&					getAssetMgr( void )								{ return m_AssetMgr; }	
 	EngineSettings&				getEngineSettings( void )						{ return m_EngineSettings; }
@@ -507,15 +506,14 @@ protected:
 	void						sendToGuiTheContactList( int maxContactsToSend );
 
 	//=== vars ===//
-	IToGui&						m_ToGui;
 	VxPeerMgr&					m_PeerMgr;
+    BigListMgr&					m_BigListMgr;
 
 	PktAnnounce					m_PktAnn;
 	VxMutex						m_AnnouncePktMutex;
 	EngineSettings				m_EngineSettings;
 	EngineParams				m_EngineParams;
 	AssetMgr&					m_AssetMgr;
-	BigListMgr					m_BigListMgr;
 	P2PConnectList				m_ConnectionList;
 	NetworkMgr&					m_NetworkMgr;
 	NetworkMonitor&				m_NetworkMonitor;
@@ -547,8 +545,7 @@ protected:
 	PktImAliveReq				m_PktImAliveReq;
 
 private:
-	P2PEngine(); // don't allow default constructor
-	P2PEngine( const P2PEngine& ); // don't allow copy constructor
-
+	P2PEngine() = delete; // don't allow default constructor
+	P2PEngine( const P2PEngine& ) = delete; // don't allow copy constructor
 };
 

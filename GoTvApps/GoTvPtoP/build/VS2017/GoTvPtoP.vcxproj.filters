@@ -678,9 +678,6 @@
     <ClCompile Include="..\..\..\..\GoTvInterface\GoTvRenderFrame.cpp">
       <Filter>GoTvInterface</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlBaseWidget.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonRender.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClCompile>
@@ -690,13 +687,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetRender.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetShaders.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetTextures.cpp">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ShaderQt.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlMatrix.cpp">
@@ -738,8 +729,29 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupUser.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\KodiThread.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlLogic.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlShaders.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetShaderInterface.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderKodiThread.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderLogoShaders.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderDefsGl.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvDefs.cpp">
+      <Filter>GoTvInterface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1496,9 +1508,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlBaseWidget.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlOffScreenSurface.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
@@ -1523,8 +1532,11 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupUser.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\KodiThread.h">
-      <Filter>GoTvCommon\Source Files</Filter>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlLogic.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderKodiThread.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -2520,9 +2532,6 @@
     <ClInclude Include="..\..\..\..\GoTvInterface\IGoTvRender.h">
       <Filter>GoTvInterface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\ShaderQt.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.h">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClInclude>
@@ -2534,6 +2543,15 @@
     </ClInclude>
     <ClInclude Include="debug\moc_predefs.h">
       <Filter>Generated Files\moc\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderGlShaders.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderLogoShaders.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -174,12 +174,12 @@ void P2PEngine::fromGuiSendLog(	uint32_t u32LogFlags )
 	for( iter = logMsgs.begin(); iter != logMsgs.end(); ++iter )
 	{
 		LogEntry logEntry = (*iter);
-		m_ToGui.toGuiLog( logEntry.m_LogFlags, logEntry.m_LogText.c_str() );
+		IToGui::getToGui().toGuiLog( logEntry.m_LogFlags, logEntry.m_LogText.c_str() );
 	}
 
 	char buf[ 256 ];
 	sprintf( buf, "End of log messages count %ld\n", logMsgs.size() );
-	m_ToGui.toGuiLog( 0, buf );
+	IToGui::getToGui().toGuiLog( 0, buf );
 }
 
 //============================================================================
@@ -453,7 +453,7 @@ bool P2PEngine::fromGuiAssetAction( EAssetAction assetAction, AssetInfo& assetIn
 	else if( eAssetActionAssetResend == assetAction )
 	{
 		assetInfo.setAssetSendState( eAssetSendStateTxProgress );
-		m_ToGui.toGuiAssetAction( eAssetActionTxBegin, assetInfo.getAssetUniqueId(), 0 );
+		IToGui::getToGui().toGuiAssetAction( eAssetActionTxBegin, assetInfo.getAssetUniqueId(), 0 );
 		fromGuiSendAsset( assetInfo );
 	}
 	else if( eAssetActionShreadFile == assetAction )
@@ -540,7 +540,7 @@ bool P2PEngine::fromGuiPlayLocalMedia( const char *  fileName, uint64_t fileLen,
                 }
                 else
                 {
-                    m_ToGui.playGoTvMedia( assetInfo );
+                    IToGui::getToGui().playGoTvMedia( assetInfo );
                 }
             }
             else if( eAssetTypeAudio == assetInfo->getAssetType() )
@@ -551,7 +551,7 @@ bool P2PEngine::fromGuiPlayLocalMedia( const char *  fileName, uint64_t fileLen,
                 }
                 else
                 {
-                    m_ToGui.playGoTvMedia( assetInfo );
+                    IToGui::getToGui().playGoTvMedia( assetInfo );
                 }
             }
         }

@@ -68,8 +68,8 @@ public:
 class MJPEGReader : public MediaCallbackInterface
 {
 public:
-	MJPEGReader( P2PEngine& engine, MediaProcessor& mediaProcessor, IToGui& toGui );
-	virtual ~MJPEGReader();
+	MJPEGReader( P2PEngine& engine, MediaProcessor& mediaProcessor );
+	virtual ~MJPEGReader() = default;
 
 	void						setIsPlaying( bool isPlaying )				{ m_IsPlaying = isPlaying; }
 	bool						getIsPlaying( void )						{ return m_IsPlaying; }
@@ -112,7 +112,6 @@ protected:
 	//=== vars ===//
 	P2PEngine&					m_Engine; 
 	MediaProcessor&				m_MediaProcessor;
-	IToGui&						m_ToGui;
 
 	EPluginType					m_EPluginType;
 	bool						m_IsPlaying;

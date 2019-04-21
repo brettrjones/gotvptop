@@ -1,4 +1,4 @@
-#if defined(TARGET_OS_LINUX) && defined(SHADERS_INCLUDE)
+#if defined(SHADERS_INCLUDE)
 static const char * gles_shader_vert =
 "#version 120\n"
 "attribute vec4 m_attrpos;\n"
@@ -67,7 +67,7 @@ static const char * gles_shader_texture_frag =
 "}\n";
 
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_texture_frag =
+static const char * gles_shader_multi_frag =
 "precision mediump   float;\n"
 #else
 static const char * gles_shader_multi_frag =
@@ -87,7 +87,7 @@ static const char * gles_shader_multi_frag =
 "}\n";
 
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_texture_frag =
+static const char * gles_shader_fonts_frag =
 "precision mediump   float;\n"
 #else
 static const char * gles_shader_fonts_frag =
@@ -996,5 +996,4 @@ void RenderGlShaders::getShaderSourceCode( int shaderIdx, EShaderType& shaderTyp
 }
 
 
-
-#endif // TARGET_OS_WINDOWS
+#endif // defined(SHADERS_INCLUDE)

@@ -94,7 +94,7 @@
 #define HAVE_LONGJMP 1
 
 /* Define to 1 if you have the `lstat' function. */
-#define HAVE_LSTAT 1
+//#define HAVE_LSTAT 1 // defined in GoTvCompilerConfig.h
 
 /* Define to 1 if you have the <malloc.h> header file. */
 #define HAVE_MALLOC_H 1
@@ -121,10 +121,10 @@
 #define HAVE_MKTIME 1
 
 /* Define to 1 if you have the `mmap' function. */
-#define HAVE_MMAP 1
+//#define HAVE_MMAP 1 // defined in GoTvCompilerConfig.h
 
 /* Define to 1 if you have the `mprotect' function. */
-#define HAVE_MPROTECT 1
+//#define HAVE_MPROTECT 1 // defined in GoTvCompilerConfig.h
 
 /* Define to 1 if you have the `munmap' function. */
 #define HAVE_MUNMAP 1
@@ -205,7 +205,7 @@
 #define HAVE_STRSTR 1
 
 /* Define to 1 if you have the <sys/mman.h> header file. */
-#define HAVE_SYS_MMAN_H 1
+//#define HAVE_SYS_MMAN_H 1 // defined in GoTvCompilerConfig.h
 
 /* Define to 1 if you have the <sys/resource.h> header file. */
 #define HAVE_SYS_RESOURCE_H 1

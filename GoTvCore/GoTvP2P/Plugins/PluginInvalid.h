@@ -19,7 +19,7 @@
 class PluginInvalid : public PluginBase
 {
 public:
-	PluginInvalid( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent );
+	PluginInvalid( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
 	virtual ~PluginInvalid();
 
 	//! handle app state change

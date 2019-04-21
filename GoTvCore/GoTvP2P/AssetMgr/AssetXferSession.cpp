@@ -93,12 +93,12 @@ void AssetXferSession::setAssetStateSendBegin( void )
 	if( eXferDirectionRx == getXferDirection() )
 	{
 		m_AssetInfo.setAssetSendState( eAssetSendStateRxProgress );
-		m_Engine.getToGuiInterface().toGuiAssetAction( eAssetActionRxBegin, m_AssetInfo.getAssetUniqueId(), 0 );
+		m_Engine.getToGui().toGuiAssetAction( eAssetActionRxBegin, m_AssetInfo.getAssetUniqueId(), 0 );
 	}
 	else
 	{
 		m_AssetInfo.setAssetSendState( eAssetSendStateTxProgress );
-		m_Engine.getToGuiInterface().toGuiAssetAction( eAssetActionTxBegin, m_AssetInfo.getAssetUniqueId(), 0 );
+		m_Engine.getToGui().toGuiAssetAction( eAssetActionTxBegin, m_AssetInfo.getAssetUniqueId(), 0 );
 	}
 }
 
@@ -108,12 +108,12 @@ void AssetXferSession::setAssetStateSendCanceled( void )
 	if( eXferDirectionRx == getXferDirection() )
 	{
 		m_AssetInfo.setAssetSendState( eAssetSendStateRxFail );
-		m_Engine.getToGuiInterface().toGuiAssetAction( eAssetActionRxCancel, m_AssetInfo.getAssetUniqueId(), 0 );
+		m_Engine.getToGui().toGuiAssetAction( eAssetActionRxCancel, m_AssetInfo.getAssetUniqueId(), 0 );
 	}
 	else
 	{
 		m_AssetInfo.setAssetSendState( eAssetSendStateTxFail );
-		m_Engine.getToGuiInterface().toGuiAssetAction( eAssetActionTxCancel, m_AssetInfo.getAssetUniqueId(), 0 );
+		m_Engine.getToGui().toGuiAssetAction( eAssetActionTxCancel, m_AssetInfo.getAssetUniqueId(), 0 );
 	}
 }
 
@@ -123,12 +123,12 @@ void AssetXferSession::setAssetStateSendFail( void )
 	if( eXferDirectionRx == getXferDirection() )
 	{
 		m_AssetInfo.setAssetSendState( eAssetSendStateRxFail );
-		m_Engine.getToGuiInterface().toGuiAssetAction( eAssetActionRxError, m_AssetInfo.getAssetUniqueId(), 0 );
+		m_Engine.getToGui().toGuiAssetAction( eAssetActionRxError, m_AssetInfo.getAssetUniqueId(), 0 );
 	}
 	else
 	{
 		m_AssetInfo.setAssetSendState( eAssetSendStateTxFail );
-		m_Engine.getToGuiInterface().toGuiAssetAction( eAssetActionTxError, m_AssetInfo.getAssetUniqueId(), 0 );
+		m_Engine.getToGui().toGuiAssetAction( eAssetActionTxError, m_AssetInfo.getAssetUniqueId(), 0 );
 	}
 }
 
@@ -138,12 +138,12 @@ void AssetXferSession::setAssetStateSendProgress( int progress )
 	if( eXferDirectionRx == getXferDirection() )
 	{
 		m_AssetInfo.setAssetSendState( eAssetSendStateRxProgress );
-		m_Engine.getToGuiInterface().toGuiAssetAction( eAssetActionRxProgress, m_AssetInfo.getAssetUniqueId(), progress );
+		m_Engine.getToGui().toGuiAssetAction( eAssetActionRxProgress, m_AssetInfo.getAssetUniqueId(), progress );
 	}
 	else
 	{
 		m_AssetInfo.setAssetSendState( eAssetSendStateTxProgress );
-		m_Engine.getToGuiInterface().toGuiAssetAction( eAssetActionTxProgress, m_AssetInfo.getAssetUniqueId(), progress );
+		m_Engine.getToGui().toGuiAssetAction( eAssetActionTxProgress, m_AssetInfo.getAssetUniqueId(), progress );
 	}
 }
 
@@ -153,12 +153,12 @@ void AssetXferSession::setAssetStateSendSuccess( void )
 	if( eXferDirectionRx == getXferDirection() )
 	{
 		m_AssetInfo.setAssetSendState( eAssetSendStateRxSuccess );
-		m_Engine.getToGuiInterface().toGuiAssetAction( eAssetActionRxSuccess, m_AssetInfo.getAssetUniqueId(), 100 );
-		m_Engine.getToGuiInterface().toGuiAssetAction( eAssetActionRxNotifyNewMsg, m_AssetInfo.getCreatorId(), 100 );
+		m_Engine.getToGui().toGuiAssetAction( eAssetActionRxSuccess, m_AssetInfo.getAssetUniqueId(), 100 );
+		m_Engine.getToGui().toGuiAssetAction( eAssetActionRxNotifyNewMsg, m_AssetInfo.getCreatorId(), 100 );
 	}
 	else
 	{
 		m_AssetInfo.setAssetSendState( eAssetSendStateRxSuccess );
-		m_Engine.getToGuiInterface().toGuiAssetAction( eAssetActionTxSuccess, m_AssetInfo.getAssetUniqueId(), 100 );
+		m_Engine.getToGui().toGuiAssetAction( eAssetActionTxSuccess, m_AssetInfo.getAssetUniqueId(), 100 );
 	}
 }

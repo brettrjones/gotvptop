@@ -28,7 +28,7 @@ NetworkStateLost::NetworkStateLost( NetworkStateMachine& stateMachine )
 //============================================================================
 void NetworkStateLost::enterNetworkState( void )
 {
-	m_Engine.getToGuiInterface().toGuiNetworkState( eNetworkStateTypeLost );
+	m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeLost );
 }
 
 //============================================================================

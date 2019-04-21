@@ -113,6 +113,8 @@ const char * DescribePhoneShakeStatus( EPhoneShakeStatus ePortOpenStatus );
 class IToGui
 {
 public:
+    static IToGui&              getToGui();
+
     virtual void				playGoTvMedia( AssetInfo * assetInfo ) {};
 
 	/// Send log message to GUI
@@ -121,6 +123,8 @@ public:
 	virtual void				toGuiAppErr( EAppErr eAppErr, const char* errMsg = "" ) = 0;
 	/// Send status bar message to GUI
 	virtual void				toGuiStatusMessage( const char* errMsg ) = 0;
+    /// a module has changed state
+    virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState ) = 0;
 
 	/// Start/Stop microphone sound capture
 	virtual void				toGuiWantMicrophoneRecording( bool wantMicInput ) = 0;
@@ -291,6 +295,4 @@ public:
 																uint8_t			u8FileType, 
 																uint64_t		u64FileLen, 
 																const char *	pFileName ) = 0;
-	/// a module has changed state
-	virtual void				toGuiModuleState( int moduleNum, int moduleState ) = 0;
 };

@@ -407,11 +407,10 @@ void IGoTv::toGuiSearchResultFileSearch(    VxNetIdent *	netIdent,
 }
 
 //============================================================================
-void IGoTv::toGuiModuleState( int moduleNum, int moduleState )
+void IGoTv::toGuiModuleState( EAppModule moduleNum, EModuleState moduleState )
 {
 	getAppCommon().toGuiModuleState( moduleNum, moduleState );
 }
-
 
 //============================================================================
 bool IGoTv::toGuiSetGameValueVar( EPluginType	ePluginType,

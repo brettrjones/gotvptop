@@ -83,11 +83,10 @@ namespace
 };
 
 //============================================================================
-MediaProcessor::MediaProcessor( P2PEngine& engine, IToGui& toGui )
+MediaProcessor::MediaProcessor( P2PEngine& engine )
 : m_Engine( engine )
 , m_PluginMgr( engine.getPluginMgr() )
-, m_ToGui( toGui )
-, m_MediaTools( * ( new MediaTools( engine, *this, toGui ) ) )
+, m_MediaTools( * ( new MediaTools( engine, *this ) ) )
 , m_MixerBufUsed( false )
 , m_MuteSpeaker( false )
 , m_VidCaptureEnabled( false )
@@ -176,14 +175,14 @@ void MediaProcessor::fromGuiAudioOutSpaceAvail( int freeSpaceLen )
 #ifdef USE_ECHO_CANCEL
         m_EchoCancel.processFromMixer( (int16_t *)m_QuietAudioBuf, MIXER_CHUNK_LEN_BYTES );
 #endif // USE_ECHO_CANCEL
-        m_ToGui.toGuiPlayAudio( (int16_t *)m_QuietAudioBuf, MIXER_CHUNK_LEN_BYTES );
+        IToGui::getToGui().toGuiPlayAudio( (int16_t *)m_QuietAudioBuf, MIXER_CHUNK_LEN_BYTES );
 	}
 	else
 	{
 #ifdef USE_ECHO_CANCEL
         m_EchoCancel.processFromMixer( (int16_t *)m_MixerBuf, MIXER_CHUNK_LEN_BYTES );
 #endif // USE_ECHO_CANCEL
-        m_ToGui.toGuiPlayAudio( (int16_t *)m_MixerBuf, MIXER_CHUNK_LEN_BYTES );
+        IToGui::getToGui().toGuiPlayAudio( (int16_t *)m_MixerBuf, MIXER_CHUNK_LEN_BYTES );
 	}
 
 	m_MixerBufUsed = false;
@@ -1023,7 +1022,7 @@ void MediaProcessor::wantAppIdle( EPluginType ePluginType, bool bWantAppIdle )
 		{
 			LogMsg( LOG_INFO, "PluginMgr::pluginApiWantAppIdle calling java to start idle\n" );
 			// BRJ idle runs all the time
-			//m_ToGui.toGuiStartAppIdle();
+			//IToGui::getToGui().toGuiStartAppIdle();
 		}
 	}
 	else
@@ -1040,7 +1039,7 @@ void MediaProcessor::wantAppIdle( EPluginType ePluginType, bool bWantAppIdle )
 		if( 0 == m_aoWantAppIdle.size() )
 		{
 			LogMsg( LOG_INFO, "PluginMgr::pluginApiWantAppIdle calling java to stop idle\n" );
-			//m_ToGui.toGuiStopAppIdle();
+			//IToGui::getToGui().toGuiStopAppIdle();
 		}
 	}
 }
@@ -1212,7 +1211,7 @@ void MediaProcessor::wantMixerMediaInput(	EMediaInputType				mediaType,
 	if( startSpeakerOutput )
 	{
 		LogMsg( LOG_INFO, "starting speaker output\n" );
-		m_ToGui.toGuiWantSpeakerOutput( true );	
+		IToGui::getToGui().toGuiWantSpeakerOutput( true );	
 	}
 }
 
@@ -1276,7 +1275,7 @@ void MediaProcessor::doMixerClientRemovals( std::vector<ClientToRemove>& clientR
 		{
 			m_SpeakerOutputEnabled = false;
 			LogMsg( LOG_INFO, "stopping speaker output\n" );
-			m_ToGui.toGuiWantSpeakerOutput( false );	
+			IToGui::getToGui().toGuiWantSpeakerOutput( false );	
 		}
 	}
 
@@ -1372,7 +1371,7 @@ void MediaProcessor::wantAudioMediaInput(	EMediaInputType				mediaType,
 	if( startMicInput )
 	{
 		LogMsg( LOG_INFO, "starting microphone input\n" );
-		m_ToGui.toGuiWantMicrophoneRecording( true );
+		IToGui::getToGui().toGuiWantMicrophoneRecording( true );
 	}
 }
 
@@ -1436,7 +1435,7 @@ void MediaProcessor::doAudioClientRemovals( std::vector<ClientToRemove>& clientR
 		{
 			m_MicCaptureEnabled = false;
 			LogMsg( LOG_INFO, "stopping microphone input\n" );
-			m_ToGui.toGuiWantMicrophoneRecording( false );
+			IToGui::getToGui().toGuiWantMicrophoneRecording( false );
 		}
 	}
 
@@ -1529,7 +1528,7 @@ void MediaProcessor::wantVideoMediaInput(	EMediaInputType				mediaType,
 		#endif // TEST_JPG_SPEED
 		m_VidCaptureEnabled = true;
 		LogMsg( LOG_INFO, "starting video capture\n" );
-		m_ToGui.toGuiWantVideoCapture( true );
+		IToGui::getToGui().toGuiWantVideoCapture( true );
 	}
 }
 
@@ -1593,7 +1592,7 @@ void MediaProcessor::doVideoClientRemovals( std::vector<ClientToRemove>& clientR
 		{
 			m_VidCaptureEnabled = false;
 			LogMsg( LOG_INFO, "stopping video capture\n" );
-			m_ToGui.toGuiWantVideoCapture( false );
+			IToGui::getToGui().toGuiWantVideoCapture( false );
 		}
 	}
 

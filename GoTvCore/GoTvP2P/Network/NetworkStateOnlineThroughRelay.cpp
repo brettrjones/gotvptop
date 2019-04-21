@@ -38,7 +38,7 @@ void NetworkStateOnlineThroughRelay::enterNetworkState( void )
 
 	m_Engine.getNetServicesMgr().getNetServiceAnchor().getAnchorDb().handleAnnounce( anchorListIn, anchorListOut );
 
-	m_Engine.getToGuiInterface().toGuiNetworkState( eNetworkStateTypeOnlineThroughRelay );
+	m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeOnlineThroughRelay );
 }
 
 //============================================================================

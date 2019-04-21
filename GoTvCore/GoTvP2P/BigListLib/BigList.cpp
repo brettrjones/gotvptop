@@ -16,14 +16,13 @@
 #include <config_gotvcore.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigList.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
-
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <GoTvInterface/IGoTv.h>
 
 #include <string.h>
 
 //============================================================================
-BigList::BigList( P2PEngine& engine )
-: m_Engine( engine )
+BigList::BigList()
 {
 }
 
@@ -160,7 +159,7 @@ void BigList::bigRemoveInfo( VxGUID& oOnlineId, bool isAlreadyLocked )			// id o
 	if( oMapIter != m_BigList.end() )
 	{
 		BigListInfo * poInfo = oMapIter->second;
-		m_Engine.onBigListInfoDelete( poInfo );
+        GetPtoPEngine().onBigListInfoDelete( poInfo );
 		m_BigList.erase( oMapIter );
 		if( false == isAlreadyLocked )
 		{
@@ -192,7 +191,7 @@ void BigList::removeAllInfos( void )
 	bigListLock();
 	for( oMapIter = m_BigList.begin(); oMapIter != m_BigList.end(); ++oMapIter )
 	{
-		m_Engine.onBigListInfoDelete( oMapIter->second );
+		GetPtoPEngine().onBigListInfoDelete( oMapIter->second );
 		delete oMapIter->second;
 	}
 

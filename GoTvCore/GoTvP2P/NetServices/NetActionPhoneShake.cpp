@@ -249,5 +249,5 @@ void NetActionPhoneShake::sendPhoneShakeStatus( EPhoneShakeStatus eStatus, const
 	vsnprintf( as8Buf, sizeof( as8Buf ), msg, argList );
 	as8Buf[sizeof( as8Buf ) - 1] = 0;
 	va_end( argList );
-	m_Engine.getToGuiInterface().toGuiPhoneShakeStatus( eStatus, as8Buf );
+	m_Engine.getToGui().toGuiPhoneShakeStatus( eStatus, as8Buf );
 }

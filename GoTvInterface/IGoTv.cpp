@@ -30,11 +30,6 @@ echo traget os is not defined
 
 using namespace XFILE;
 
-namespace
-{
-    P2PEngine * g_EnginePtr = nullptr;
-}
-
 //============================================================================
 VxPeerMgr& GetVxPeerMgr( void )
 {
@@ -43,25 +38,36 @@ VxPeerMgr& GetVxPeerMgr( void )
 }
 
 //============================================================================
-IGoTv& IGoTv::getIGoTv()
+BigListMgr& GetBigListMgr( void )
 {
-    static IGoTv g_IGoTv;
-    // fix circular dependency.. P2PEngine requires IGoTv.. IGoTv requires P2PEngine..
-    static P2PEngine g_P2PEngine( g_IGoTv, GetVxPeerMgr() );
-    static bool firstCall = true;
-    if( firstCall )
-    {
-        firstCall = false;
-        g_EnginePtr = &g_P2PEngine;
-    }
+    static BigListMgr g_BigListMgr;
+    return  g_BigListMgr;
+}
 
-    return g_IGoTv;
+//============================================================================
+P2PEngine& GetPtoPEngine()
+{
+    static P2PEngine g_P2PEngine( GetVxPeerMgr(), GetBigListMgr() );
+    return g_P2PEngine;
 }
 
 //============================================================================
 P2PEngine& IGoTv::getPtoP()
 {
-    return *g_EnginePtr;
+    return GetPtoPEngine();
+}
+
+//============================================================================
+IGoTv& IGoTv::getIGoTv()
+{
+    static IGoTv g_IGoTv;
+    return g_IGoTv;
+}
+
+//============================================================================
+IToGui& IToGui::getToGui()
+{
+    return IGoTv::getIGoTv();
 }
 
 //============================================================================

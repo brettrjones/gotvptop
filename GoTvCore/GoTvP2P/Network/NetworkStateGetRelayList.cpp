@@ -29,7 +29,7 @@ NetworkStateGetRelayList::NetworkStateGetRelayList( NetworkStateMachine& stateMa
 //============================================================================
 void NetworkStateGetRelayList::enterNetworkState( void )
 {
-	m_Engine.getToGuiInterface().toGuiNetworkState( eNetworkStateTypeGetRelayList );
+	m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeGetRelayList );
 }
 
 //============================================================================

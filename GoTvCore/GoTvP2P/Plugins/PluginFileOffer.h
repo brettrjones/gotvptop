@@ -23,7 +23,7 @@
 class PluginFileOffer : public PluginBase
 {
 public:
-	PluginFileOffer( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent );
+	PluginFileOffer( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
 	virtual ~PluginFileOffer();
 
 
