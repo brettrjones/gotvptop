@@ -58,6 +58,9 @@ public:
     AppCommon&				    getMyApp() { return  m_MyApp; }
     QOpenGLFunctions *          getGlFunctions() { return m_GlWidgetFunctions; }
 
+    //! take a snapshot of current render
+    void                        takeSnapshot();
+
     virtual void                initializeGL( void ) override;
     virtual void                paintGL( void ) override;
     virtual void                resizeGL(  int w, int h  ) override;

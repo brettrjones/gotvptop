@@ -36,15 +36,16 @@ public:
 
     bool                        initAudioOut( QAudioFormat& audioFormat );
 
+    void                        stopAudio();
+    void                        startAudio();
+
     void                        suspend()           { if( m_AudioOutputDevice ) m_AudioOutputDevice->suspend(); }
     void                        resume()            { if( m_AudioOutputDevice ) m_AudioOutputDevice->resume(); }
  
-    bool                        setDevice( QAudioDeviceInfo deviceInfo );
+    bool                        setAudioDevice( QAudioDeviceInfo deviceInfo );
 
-    void                        start();
     void                        setVolume( float volume );
     void                        flush();
-    void                        stop();
 
     QAudio::State               getState()      { return ( m_AudioOutputDevice ? m_AudioOutputDevice->state() : QAudio::StoppedState); }
     QAudio::Error               getError()      { return ( m_AudioOutputDevice ? m_AudioOutputDevice->error() : QAudio::NoError); }
@@ -62,24 +63,23 @@ public:
 
 signals:
     void                        signalInitialize();
-	void						signalStart();
+    void						signalCheckForBufferUnderun();
+    void						signalStart();
 	void						signalStop();
 	void						signalSuspend();
 	void						signalResume();
-	void						signalCheckForBufferUnderun();
 
 protected slots:
+    void                        slotAudioNotified();
+    void						slotCheckForBufferUnderun();
+    void                        onAudioDeviceStateChanged( QAudio::State state );
     void                        slotInitialize();
     void						slotStart();
 	void						slotStop();
 	void						slotSuspend();
 	void						slotResume();
-	void						slotCheckForBufferUnderun();
 
 protected:
-	// resume qt audio if needed
-	void						checkForBufferUnderun();
-
 	qint64                      bytesAvailable() const override;
 
 	qint64                      readData( char *data, qint64 maxlen ) override;
@@ -91,16 +91,12 @@ private:
 
 private:
     AudioOutQt&                 m_AudioOutQt;
-    bool                        m_initialized;
+    bool                        m_initialized = 0;
     QAudioFormat                m_AudioFormat;
     QAudioDeviceInfo            m_deviceInfo;
     QAudioOutput*               m_AudioOutputDevice = nullptr;
-    float                       m_volume;
+    float                       m_volume = 1.0f;
 
 	mutable VxMutex				m_AudioBufMutex;
 	QByteArray					m_AudioBuffer;
-
-public slots :
-    void                        slotAudioNotified();
-    void                        onAudioDeviceStateChanged( QAudio::State state );
 };

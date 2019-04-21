@@ -71,6 +71,22 @@ RenderGlWidget::~RenderGlWidget()
 }
 
 //============================================================================
+void RenderGlWidget::takeSnapshot()
+{
+    if( m_RenderWidgetInited && m_RenderLogic.m_WidgetGlContext && m_RenderLogic.m_OffScreenSurface )
+    {
+        m_RenderLogic.lockRenderer();
+        QImage frameImage = m_RenderLogic.m_OffScreenSurface->getLastRenderedImage();
+        if( !frameImage.isNull() )
+        {
+            frameImage.save( QString( "F:\\GoTvPtoP_Image.png" ) );
+        }
+
+        m_RenderLogic.unlockRenderer();
+    }
+}
+
+//============================================================================
 void RenderGlWidget::initializeGL()
 {
     initializeOpenGLFunctions();
@@ -99,6 +115,7 @@ void RenderGlWidget::initializeGL()
     m_RenderLogic.glWidgetInitialized();
     doneCurrent();
     m_RenderWidgetInited = true;
+    m_RenderLogic.startRenderThread();
 }
 
 //============================================================================
@@ -106,6 +123,21 @@ void RenderGlWidget::paintGL()
 {
     if( m_RenderWidgetInited && m_RenderLogic.m_WidgetGlContext && m_RenderLogic.m_OffScreenSurface )
     {
+
+        m_RenderLogic.lockRenderer();
+        QImage frameImage = m_RenderLogic.m_OffScreenSurface->getLastRenderedImage();
+        m_RenderLogic.unlockRenderer();
+
+        QPainter painter;
+        painter.begin( this );
+
+        painter.setRenderHints( QPainter::Antialiasing );
+        painter.drawImage( 0, 0, frameImage );
+
+        painter.end();
+
+
+        /*
         m_RenderLogic.setSurfaceSize( geometry().size() );
         if( !m_RenderLogic.isRenderThreadStarted() )
         {
@@ -129,6 +161,7 @@ void RenderGlWidget::paintGL()
 
            m_RenderLogic.unlockRenderer();
         }
+    */
     }
 }
 
@@ -165,7 +198,7 @@ void RenderGlWidget::slotOnFrameRendered()
 //============================================================================
 void RenderGlWidget::showEvent( QShowEvent * ev )
 {
-    QWidget::showEvent( ev );
+    QOpenGLWidget::showEvent( ev );
     m_RenderLogic.setRenderWindowVisible( true );
 }
 
@@ -173,7 +206,7 @@ void RenderGlWidget::showEvent( QShowEvent * ev )
 void RenderGlWidget::hideEvent( QHideEvent * ev )
 {
     m_RenderLogic.setRenderWindowVisible( false );
-    QWidget::hideEvent( ev );
+    QOpenGLWidget::hideEvent( ev );
 }
 
 //============================================================================
@@ -181,13 +214,13 @@ void RenderGlWidget::closeEvent( QCloseEvent * ev )
 {
     m_RenderLogic.setRenderThreadShouldRun(false);
     m_QtToKodi.fromGuiCloseEvent();
-    QWidget::closeEvent( ev );
+    QOpenGLWidget::closeEvent( ev );
 }
 
 //============================================================================
 void RenderGlWidget::resizeEvent( QResizeEvent * ev )
 {
-    QWidget::resizeEvent( ev );
+    QOpenGLWidget::resizeEvent( ev );
     m_RenderLogic.setSurfaceSize( ev->size() );
     m_ResizingWindowSize = ev->size();
     if( !m_IsResizing )
@@ -265,6 +298,7 @@ void RenderGlWidget::keyReleaseEvent( QKeyEvent * ev )
 //============================================================================
 void RenderGlWidget::mousePressEvent( QMouseEvent * ev )
 {
+    takeSnapshot();
     if( !m_QtToKodi.fromGuiMousePressEvent( ev->x(), ev->y(), ev->button() ) )
     {
         QOpenGLWidget::mousePressEvent( ev );

@@ -316,7 +316,6 @@ void CGraphicContext::SetViewWindow( float left, float top, float right, float b
 void CGraphicContext::SetFullScreenVideo( bool bOnOff )
 {
     CSingleLock lock( *this );
-
     m_bFullScreenVideo = bOnOff;
 
     if( m_bFullScreenRoot )

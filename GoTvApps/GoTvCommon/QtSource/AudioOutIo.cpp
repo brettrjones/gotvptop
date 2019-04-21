@@ -27,16 +27,13 @@
 AudioOutIo::AudioOutIo( AudioOutQt& outQt, QObject *parent ) 
 : QIODevice( parent )
 , m_AudioOutQt( outQt )
-, m_initialized( false )
-, m_AudioOutputDevice( 0 )
-, m_volume( 0.0f )
 {
     connect( this, SIGNAL( signalInitialize() ), this, SLOT( slotInitialize() ) );
-	connect( this, SIGNAL( signalStart() ), this, SLOT( slotStart() ) );
-	connect( this, SIGNAL( signalStop() ), this, SLOT( slotStop() ) );
-	connect( this, SIGNAL( signalSuspend() ), this, SLOT( slotSuspend() ) );
-	connect( this, SIGNAL( signalResume() ), this, SLOT( slotResume() ) );
-	connect( this, SIGNAL( signalCheckForBufferUnderun() ), this, SLOT( slotCheckForBufferUnderun() ) );
+    connect( this, SIGNAL( signalCheckForBufferUnderun() ), this, SLOT( slotCheckForBufferUnderun() ) );
+    connect( this, SIGNAL( signalStart() ), this, SLOT( slotStart() ) );
+    connect( this, SIGNAL( signalStop() ), this, SLOT( slotStop() ) );
+    connect( this, SIGNAL( signalSuspend() ), this, SLOT( slotSuspend() ) );
+    connect( this, SIGNAL( signalResume() ), this, SLOT( slotResume() ) );
 }
 
 //============================================================================
@@ -55,11 +52,11 @@ void AudioOutIo::slotInitialize()
         return;
     }
 
-    m_initialized = setDevice( QAudioDeviceInfo::defaultOutputDevice() );
+    m_initialized = setAudioDevice( QAudioDeviceInfo::defaultOutputDevice() );
 }
 
 //============================================================================
-bool AudioOutIo::setDevice( QAudioDeviceInfo deviceInfo )
+bool AudioOutIo::setAudioDevice( QAudioDeviceInfo deviceInfo )
 {
     if( !deviceInfo.isFormatSupported( m_AudioFormat ) ) 
 	{
@@ -75,12 +72,12 @@ bool AudioOutIo::setDevice( QAudioDeviceInfo deviceInfo )
 //============================================================================
 void AudioOutIo::reinit()
 {
-    this->stop();
-    this->start();
+    this->stopAudio();
+    this->startAudio();
 }
 
 //============================================================================
-void AudioOutIo::start()
+void AudioOutIo::startAudio()
 {
 	// Reinitialize audio output
 	delete m_AudioOutputDevice;
@@ -89,6 +86,7 @@ void AudioOutIo::start()
 	// Set constant values to new audio output
 	connect( m_AudioOutputDevice, SIGNAL( notify() ), SLOT( slotAudioNotified() ) );
 	connect( m_AudioOutputDevice, SIGNAL( stateChanged( QAudio::State ) ), SLOT( onAudioDeviceStateChanged( QAudio::State ) ) );
+
 
     this->open( QIODevice::ReadOnly );
 	//m_AudioOutputDevice->setBufferSize( AUDIO_BUF_SIZE_48000_2 );
@@ -101,25 +99,25 @@ void AudioOutIo::start()
 //============================================================================
 void AudioOutIo::slotStart()
 {
-	start();
+	startAudio();
 }
 
 //============================================================================
 void AudioOutIo::slotStop()
 {
-	stop();
+	stopAudio();
 }
 
 //============================================================================
 void AudioOutIo::slotSuspend()
 {
-	start();
+    stopAudio();
 }
 
 //============================================================================
 void AudioOutIo::slotResume()
 {
-	stop();
+	startAudio();
 }
 
 //============================================================================
@@ -133,17 +131,17 @@ void AudioOutIo::flush()
 {
     // Flushing buffers is a bit tricky...
     // Don't modify this unless you're sure
-    this->stop();
+    this->stopAudio();
 	if( m_AudioOutputDevice )
 	{
 		m_AudioOutputDevice->reset();
 	}
 
-    this->start();
+    this->startAudio();
 }
 
 //============================================================================
-void AudioOutIo::stop()
+void AudioOutIo::stopAudio()
 {
     if( m_AudioOutputDevice && m_AudioOutputDevice->state() != QAudio::StoppedState )
     {
@@ -326,7 +324,7 @@ void AudioOutIo::slotCheckForBufferUnderun()
 			else if( bufferedAudioData )
 			{
 				LogMsg( LOG_DEBUG, "starting due to idle and have data" );
-				this->start();
+				this->startAudio();
 				//m_AudioOutputDevice->start( this );
 			}
 			else

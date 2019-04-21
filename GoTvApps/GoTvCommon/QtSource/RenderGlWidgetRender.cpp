@@ -66,15 +66,17 @@ void RenderGlWidget::toGuiRenderVideoFrame( int textureIdx, CRenderBuffer* video
 //============================================================================
 bool RenderGlWidget::resetRenderSystem( int width, int height )
 {
-//    m_SrcWidth = width;
-//    m_SrcHeight = height;
+    m_SrcWidth = width;
+    m_SrcHeight = height;
 
     GoTvRect rect( 0, 0, width, height );
     setViewPort( rect );
 
-    m_GlWidgetFunctions->glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
+    //m_GlWidgetFunctions->glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
+    //m_GlWidgetFunctions->glClearColor( 0.5f, 0.1f, 0.2f, 1.0f );
+    m_GlWidgetFunctions->glClearColor( 0.1f, 0.0f, 0.2f, 1.0f );
 
-    m_GlWidgetFunctions->glEnable( GL_SCISSOR_TEST );
+    //m_GlWidgetFunctions->glEnable( GL_SCISSOR_TEST );
 
     glMatrixProject.Clear();
     glMatrixProject->LoadIdentity();
@@ -109,7 +111,8 @@ bool RenderGlWidget::clearBuffers( GoTvColor color )
     float b = GET_B( color ) / 255.0f;
     float a = GET_A( color ) / 255.0f;
 
-    m_GlWidgetFunctions->glClearColor( r, g, b, a );
+    //m_GlWidgetFunctions->glClearColor( r, g, b, a );
+    //glClearColor( 0.1f, 0.1f, 0.2f, 1.0f );
 
     GLbitfield flags = GL_COLOR_BUFFER_BIT;
     m_GlWidgetFunctions->glClear( flags );
@@ -147,10 +150,21 @@ void RenderGlWidget::setVSync( bool vsync )
 //============================================================================
 void RenderGlWidget::setViewPort( const GoTvRect& viewPort )
 {
+    /*
     m_GlWidgetFunctions->glScissor( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
     m_GlWidgetFunctions->glViewport( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
     m_viewPort[ 0 ] = viewPort.x1;
     m_viewPort[ 1 ] = m_SrcHeight - viewPort.y1 - viewPort.Height();
+    m_viewPort[ 2 ] = viewPort.Width();
+    m_viewPort[ 3 ] = viewPort.Height();
+    */
+    m_GlWidgetFunctions->glScissor( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
+    m_GlWidgetFunctions->glViewport( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
+    glScissor( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
+    glViewport( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
+
+    m_viewPort[ 0 ] = viewPort.x1;
+    m_viewPort[ 1 ] = viewPort.y1;
     m_viewPort[ 2 ] = viewPort.Width();
     m_viewPort[ 3 ] = viewPort.Height();
 }
@@ -158,7 +172,6 @@ void RenderGlWidget::setViewPort( const GoTvRect& viewPort )
 //============================================================================
 void RenderGlWidget::getViewPort( GoTvRect& viewPort )
 {
-
     viewPort.x1 = 0;
     viewPort.y1 = 0;
     viewPort.x2 = width();

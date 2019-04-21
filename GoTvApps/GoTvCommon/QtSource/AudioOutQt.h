@@ -47,7 +47,7 @@
 
 class AppCommon;
 
-class AudioOutQt : public QThread
+class AudioOutQt : public QObject
 {
 	Q_OBJECT
 
@@ -91,7 +91,7 @@ protected:
     void						stopAudioOut( );
     //void                        addToQue( const char * data, int len );
 
-    void                        run( ) override; // thread override
+    //void                        run( ) override; // thread override
 
     int                         getCachedDataLength( bool requireLock = true );
     int                         getCachedMaxLength( ) { return AUDIO_OUT_CACHE_SIZE; }
@@ -103,14 +103,14 @@ protected:
 	AppCommon&				    m_MyApp;
     QAudioFormat                m_AudioFormat;
     AudioOutIo                  m_AudioOutIo;
-    AudioTestGenerator *        m_AudioGen;
+    AudioTestGenerator *        m_AudioGen = nullptr;
     QAudioDeviceInfo            m_AudioDeviceInfo;
-    bool                        m_IsPaused;
-    bool                        m_IsTestMode;
-    int                         m_CacheAuidioLen;
+    bool                        m_IsPaused = false;
+    bool                        m_IsTestMode = true;
+    int                         m_CacheAuidioLen = 0;
     VxMutex                     m_AudioQueueMutex;
-    int                         m_OutWriteCount;
-    int16_t                     m_MyLastAudioOutSample;
+    int                         m_OutWriteCount = 0;
+    int16_t                     m_MyLastAudioOutSample = 0;
 
 //    AudioBuffer                 m_AudioBuf;
 //    std::vector<unsigned char *>  m_AudioDataQue;

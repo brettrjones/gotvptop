@@ -65,7 +65,7 @@ public:
 	MySndMgr( AppCommon& app );
 	virtual ~MySndMgr();
 
-	AppCommon&				getApp( void )						{ return m_MyApp; }
+	AppCommon&				    getApp( void )						{ return m_MyApp; }
 
 	bool						sndMgrStartup( void );
 	bool						sndMgrShutdown( void );

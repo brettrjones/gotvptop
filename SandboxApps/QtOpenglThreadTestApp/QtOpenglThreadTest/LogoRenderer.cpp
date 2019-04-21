@@ -79,7 +79,7 @@ void LogoRenderer::initialize()
 {
     initializeOpenGLFunctions();
 
-    glClearColor(0.1f, 0.1f, 0.2f, 1.0f);
+    glClearColor(0.5f, 0.1f, 0.2f, 1.0f);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 
@@ -95,7 +95,7 @@ void LogoRenderer::render()
 
     // use Rand0To1() for random color background
     //glClearColor( Rand0To1(), Rand0To1(), Rand0To1(), 1.0f);
-    glClearColor( 0.2f, 0.2f, 0.4f, 1.0f );
+    glClearColor( 0.7f, 0.2f, 0.4f, 1.0f );
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );

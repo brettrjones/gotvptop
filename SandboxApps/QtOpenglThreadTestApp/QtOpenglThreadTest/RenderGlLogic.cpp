@@ -91,7 +91,7 @@ void RenderGlLogic::render()
         m_initialized = true;
     }
 
-    glViewport( 0, 0, viewSize.width(), viewSize.height() );
+    //glViewport( 0, 0, viewSize.width(), viewSize.height() );
 
     m_LogoRenderer.render();
 }

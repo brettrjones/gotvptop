@@ -18,7 +18,7 @@
     <item>
      <widget class="QPushButton" name="pushButton">
       <property name="text">
-       <string>Push My Button</string>
+       <string>Take Snapshot</string>
       </property>
      </widget>
     </item>

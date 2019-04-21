@@ -120,7 +120,9 @@ bool RenderGlOffScreenSurface::beginRenderGl()
         m_RenderThreadContext->functions()->glViewport( 0, 0, getSurfaceSize().width(), getSurfaceSize().height() );
     }
 
-    glClearColor(   0, 0, 1, 1 );
+    //glClearColor(   0, 0, 1, 1 );
+    m_RenderThreadContext->functions()->glClearColor( 0.2f, 0.1f, 0.2f, 1.0f );
+
     glClear( GL_COLOR_BUFFER_BIT );
 
     // testTexureRender( true );

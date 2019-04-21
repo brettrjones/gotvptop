@@ -7,10 +7,10 @@
 //# define DEBUG_NETLIB
 //# define DEBUG_NETWORK_STATE
 //# define DEBUG_OPENGL
-# define DEBUG_PKT_LIB
+//# define DEBUG_PKT_LIB
 //# define DEBUG_THREADS
 //# define DEBUG_SKT_CONNECTIONS
-# define DEBUG_QT_RENDER
+//# define DEBUG_QT_RENDER
 
 
 #endif // defined(DEBUG) || defined(_DEBUG)

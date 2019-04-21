@@ -1,6 +1,7 @@
 #include "RenderGlOffScreenSurface.h"
 #include "RenderGlThread.h"
 #include "RenderGlWidget.h"
+#include "VxDebug.h"
 
 #include <QtCore/QCoreApplication>
 #include <QtGui/QPainter>
@@ -117,6 +118,7 @@ bool RenderGlOffScreenSurface::beginRenderGl()
     bindFramebufferObject();
     if( m_RenderThreadContext )
     {
+        glViewport( 0, 0, getSurfaceSize().width(), getSurfaceSize().height() );
         m_RenderThreadContext->functions()->glViewport( 0, 0, getSurfaceSize().width(), getSurfaceSize().height() );
     }
 
@@ -420,9 +422,16 @@ QImage RenderGlOffScreenSurface::grabFramebufferInternal( QOpenGLFramebufferObje
     }
     else if( ( internalFormat == GL_RGBA ) || ( internalFormat == GL_RGBA8 ) )
     {
+        int width = fbo->size().width();
+        int height = fbo->size().height();
+
         image = QImage( fbo->size(), hasAlpha ? QImage::Format_RGBA8888 : QImage::Format_RGBX8888 );
         m_functions->glReadPixels( 0, 0, fbo->size().width(),
                                    fbo->size().height(), GL_RGBA, GL_UNSIGNED_BYTE, image.bits() );
+        LogMsg( LOG_DEBUG, "fbo w %d h %d surface w %d h %d image w %d h %d\n", 
+            width, height,
+            m_SurfaceSize.width(), m_SurfaceSize.height(), 
+            image.width(), image.height() );
     }
     else
     {
@@ -433,6 +442,7 @@ QImage RenderGlOffScreenSurface::grabFramebufferInternal( QOpenGLFramebufferObje
     image = m_fbo->toImage();
 #endif // !defined(QT_OPENGL_ES_2)
     m_functions->glBindFramebuffer( GL_FRAMEBUFFER, m_fbo->handle() );
+    m_functions->glViewport( 0, 0, m_SurfaceSize.width(), m_SurfaceSize.height() );
 
 //    m_GlWidget->VerifyGLStateQt();
 

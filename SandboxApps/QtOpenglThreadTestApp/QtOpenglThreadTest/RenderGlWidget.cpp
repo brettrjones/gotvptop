@@ -47,13 +47,28 @@ RenderGlWidget::RenderGlWidget(QWidget *parent)
 //    connect(this, &QOpenGLWidget::aboutToResize, this, &RenderGlWidget::onAboutToResize);
 //    connect(this, &QOpenGLWidget::resized, this, &RenderGlWidget::onResized);
 
-    updateColor();
 }
 
 //============================================================================
 RenderGlWidget::~RenderGlWidget()
 {
     m_RendererLogic->aboutToDestroy();
+}
+
+//============================================================================
+void RenderGlWidget::takeSnapshot()
+{
+    if( m_WidgetGlInitialized && m_WidgetContext && m_RenderThreadSurface )
+    {
+        m_RendererLogic->lockRenderer();
+        QImage frameImage = m_RenderThreadSurface->getLastRenderedImage();
+        if( !frameImage.isNull() )
+        {
+            frameImage.save( QString( "F:\\ThreadTestOpenglImage.png" ) );
+        }
+
+        m_RendererLogic->unlockRenderer();
+    }
 }
 
 //============================================================================
@@ -125,13 +140,23 @@ void RenderGlWidget::paintGL()
 {
     if( m_WidgetGlInitialized && m_WidgetContext && m_RenderThreadSurface )
     {
-        m_RendererLogic->setSurfaceSize( geometry().size() );
         m_RendererLogic->lockRenderer();
+        QImage frameImage = m_RenderThreadSurface->getLastRenderedImage();
+        m_RendererLogic->unlockRenderer();
 
+        QPainter painter;
+        painter.begin( this );
+
+        painter.setRenderHints( QPainter::Antialiasing );
+        painter.drawImage( 0, 0, frameImage );
+
+        painter.end();
+  /*
+        m_RendererLogic->lockRenderer();
         m_WidgetContext->makeCurrent( m_RenderThreadSurface );
-        QOpenGLPaintDevice fboPaintDev( width(), height() );
+        QOpenGLPaintDevice fboPaintDev( surfaceSize );
         QPainter painter( &fboPaintDev );
-        painter.setRenderHints( QPainter::Antialiasing | QPainter::TextAntialiasing );
+        //painter.setRenderHints( QPainter::Antialiasing | QPainter::TextAntialiasing );
         QImage frameImage = m_RenderThreadSurface->getLastRenderedImage();
         if( !frameImage.isNull() )
         {
@@ -141,7 +166,28 @@ void RenderGlWidget::paintGL()
         painter.end();
 
         m_RendererLogic->unlockRenderer();
+        */
+
     }
+}
+
+//============================================================================
+void RenderGlWidget::paintEvent( QPaintEvent * ev )
+{
+    QOpenGLWidget::paintEvent( ev );
+    /*
+    if( m_WidgetGlInitialized && m_WidgetContext && m_RenderThreadSurface )
+    {
+        QImage frameImage = m_RenderThreadSurface->getLastRenderedImage();
+        if( !frameImage.isNull() )
+        {
+            QPainter painter;
+            painter.begin( this );
+            painter.setRenderHint( QPainter::Antialiasing );
+            painter.drawImage( 0, 0, frameImage );
+            painter.end();
+        }
+    }*/
 }
 
 //============================================================================
@@ -153,7 +199,7 @@ void RenderGlWidget::resizeGL( int width, int height )
 //============================================================================
 void RenderGlWidget::showEvent( QShowEvent * ev )
 {
-    QWidget::showEvent( ev );
+    QOpenGLWidget::showEvent( ev );
     m_RendererLogic->setRenderWindowVisible( true );
 }
 
@@ -161,7 +207,7 @@ void RenderGlWidget::showEvent( QShowEvent * ev )
 void RenderGlWidget::hideEvent( QHideEvent * ev )
 {
     m_RendererLogic->setRenderWindowVisible( false );
-    QWidget::hideEvent( ev );
+    QOpenGLWidget::hideEvent( ev );
 }
 
 //============================================================================
@@ -169,41 +215,18 @@ void RenderGlWidget::closeEvent( QCloseEvent * ev )
 {
 	m_RendererLogic->setRenderThreadShouldRun(false);
  
-    QWidget::closeEvent( ev );
+    QOpenGLWidget::closeEvent( ev );
 }
 
 //============================================================================
 void RenderGlWidget::resizeEvent( QResizeEvent * ev )
 {
-    QWidget::resizeEvent( ev );
+    QOpenGLWidget::resizeEvent( ev );
     m_RendererLogic->setSurfaceSize( ev->size() );
 }
 
 //============================================================================
-void RenderGlWidget::mousePressEvent(QMouseEvent *)
+void RenderGlWidget::mousePressEvent( QMouseEvent * ev )
 {
-    updateColor();
+    QOpenGLWidget::mousePressEvent( ev );
 }
-
-//============================================================================
-QColor RenderGlWidget::color() const
-{
-    QMutexLocker locker(&m_colorLock);
-    return m_color;
-}
-
-//============================================================================
-void RenderGlWidget::updateColor()
-{
-    QMutexLocker locker(&m_colorLock);
-
-    QColor colors[] =
-    {
-        QColor(100, 255, 0),
-        QColor(0, 100, 255)
-    };
-
-    m_color = colors[m_colorIndex];
-    m_colorIndex = 1 - m_colorIndex;
-}
-

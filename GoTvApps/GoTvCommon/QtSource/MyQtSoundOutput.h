@@ -42,7 +42,7 @@ protected:
 
 	//=== vars ===//
 	MySndMgr&					m_SndMgr;
-	AppCommon&				m_MyApp;
+	AppCommon&				    m_MyApp;
 	P2PEngine&					m_Engine;
 	int							m_SampleRate;
 };

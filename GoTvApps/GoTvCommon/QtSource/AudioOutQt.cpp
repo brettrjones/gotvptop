@@ -22,14 +22,7 @@
 AudioOutQt::AudioOutQt( AppCommon& myApp )
     : m_MyApp( myApp )
     , m_AudioOutIo( *this, this )
-    , m_AudioGen( nullptr )
     , m_AudioDeviceInfo( QAudioDeviceInfo::defaultOutputDevice() )
-    , m_IsPaused( false )
-    //, m_IsTestMode( false )
-    //, m_PartialInBuf( AUDIO_BUF_SIZE_48000_2 )
-    //, m_PartialOutBuf( AUDIO_BUF_SIZE_48000_2 )
-    , m_OutWriteCount( 0 )
-    , m_MyLastAudioOutSample( 0 )
 {
     m_AudioFormat.setSampleRate( 48000 );
     m_AudioFormat.setChannelCount( 2 );
@@ -48,17 +41,17 @@ AudioOutQt::AudioOutQt( AppCommon& myApp )
     //...do pre-caching etc of the sounds here
     m_AudioGen = new AudioTestGenerator( m_AudioFormat, AUDIO_BUF_MS * 1000, 800, this );
 
-    start();
+    m_AudioOutIo.initAudioOut( m_AudioFormat  ) ;
 
     // Move event processing of sound to this thread
-    QObject::moveToThread( this );
+    //QObject::moveToThread( this );
 }
 
 //============================================================================
 AudioOutQt::~AudioOutQt( )
 {
-    quit();
-    wait();
+    //quit();
+    //wait();
 }
 
 //============================================================================
@@ -115,28 +108,18 @@ void AudioOutQt::resumeAudioOut()
 //============================================================================
 void AudioOutQt::initAudioOut()
 {
-//    m_AudioOutIo.start();
-}
-    
-//============================================================================
-void AudioOutQt::run() // thread override
-{
-    //m_AudioOutDev = new QAudioOutput( m_AudioFormat );
     m_AudioOutIo.initAudioOut( m_AudioFormat );
 
     connect( m_AudioOutIo.getAudioOut(), SIGNAL( stateChanged( QAudio::State ) ), this, SLOT( playerStateChanged( QAudio::State ) ) );
     //connect( m_AudioOutIo.getAudioOut(), SIGNAL( notify() ), SLOT( notifyNeedData() ) );
     connect( this, SIGNAL( signalNeedMoreAudioData( int ) ), SLOT( slotNeedMoreAudioData( int ) ) );
-
-    initAudioOut();
-
-//    exec();
+    m_AudioOutIo.startAudio();
 }
 
 //============================================================================
 void AudioOutQt::stopAudioOut()
 {
-    m_AudioOutIo.stop();
+    m_AudioOutIo.stopAudio();
 }
 
 //============================================================================
