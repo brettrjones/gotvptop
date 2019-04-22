@@ -79,7 +79,11 @@ void RenderGlWidget::takeSnapshot()
         QImage frameImage = m_RenderLogic.m_OffScreenSurface->getLastRenderedImage();
         if( !frameImage.isNull() )
         {
+#ifdef TARGET_OS_WINDOWS
             frameImage.save( QString( "F:\\GoTvPtoP_Image.png" ) );
+#else
+            frameImage.save( QString( "~/GoTvPtoP_Image.png" ) );
+#endif
         }
 
         m_RenderLogic.unlockRenderer();
@@ -123,19 +127,20 @@ void RenderGlWidget::paintGL()
 {
     if( m_RenderWidgetInited && m_RenderLogic.m_WidgetGlContext && m_RenderLogic.m_OffScreenSurface )
     {
+        if( ( m_ResizingWindowSize.width() > 1 ) && ( m_ResizingWindowSize.height() > 1 ))
+        {
+            m_RenderLogic.lockRenderer();
+            QImage frameImage = m_RenderLogic.m_OffScreenSurface->getLastRenderedImage();
+            m_RenderLogic.unlockRenderer();
 
-        m_RenderLogic.lockRenderer();
-        QImage frameImage = m_RenderLogic.m_OffScreenSurface->getLastRenderedImage();
-        m_RenderLogic.unlockRenderer();
+            QPainter painter;
+            painter.begin( this );
 
-        QPainter painter;
-        painter.begin( this );
+            painter.setRenderHints( QPainter::Antialiasing );
+            painter.drawImage( 0, 0, frameImage );
 
-        painter.setRenderHints( QPainter::Antialiasing );
-        painter.drawImage( 0, 0, frameImage );
-
-        painter.end();
-
+            painter.end();
+        }
 
         /*
         m_RenderLogic.setSurfaceSize( geometry().size() );

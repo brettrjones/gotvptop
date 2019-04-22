@@ -31,7 +31,7 @@ class PktRelayServiceReply;
 class PluginGroupHost : public PluginBase
 {
 public:
-    PluginGroupHost( P2PEngine& engine, PluginMgr& pluginMgr, IToGui& toGui, VxNetIdent * myIdent );
+    PluginGroupHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
     virtual ~PluginGroupHost();
 
 	bool						verboseLog( void )					{ return m_bVerbose; }
