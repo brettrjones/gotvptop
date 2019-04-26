@@ -38,6 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GoTvConfig", "GoTvConfig", 
 		..\..\GoTvAppConfig.h = ..\..\GoTvAppConfig.h
 		..\..\GoTvCompilerConfig.h = ..\..\GoTvCompilerConfig.h
 		..\..\GoTvCpuArchDefines.h = ..\..\GoTvCpuArchDefines.h
+		..\..\GoTvDebugConfig.h = ..\..\GoTvDebugConfig.h
 		..\..\GoTvDependLibrariesConfig.h = ..\..\GoTvDependLibrariesConfig.h
 		..\..\GoTvTargetOsConfig.h = ..\..\GoTvTargetOsConfig.h
 		..\..\GoTvVersion.txt = ..\..\GoTvVersion.txt
@@ -75,7 +76,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs_for_building", "docs_f
 		..\..\docs_for_building\BuildingKodiForAndroidInVBoxImage.txt = ..\..\docs_for_building\BuildingKodiForAndroidInVBoxImage.txt
 		..\..\docs_for_building\BuildingKodiForLinuxInVBoxImage.txt = ..\..\docs_for_building\BuildingKodiForLinuxInVBoxImage.txt
 		..\..\docs_for_building\BuildingKodiKryptonForAndroidInVBoxImage.txt = ..\..\docs_for_building\BuildingKodiKryptonForAndroidInVBoxImage.txt
-		..\..\docs_for_building\BuildingVirtualImage.txt = ..\..\docs_for_building\BuildingVirtualImage.txt
+		..\..\docs_for_building\BuildingLinuxVirtualImage.txt = ..\..\docs_for_building\BuildingLinuxVirtualImage.txt
 		..\..\docs_for_building\CreatingTranslations.txt = ..\..\docs_for_building\CreatingTranslations.txt
 		..\..\docs_for_building\DeployLinuxGoTvPtoP.txt = ..\..\docs_for_building\DeployLinuxGoTvPtoP.txt
 		..\..\docs_for_building\GoTvPtoP_Terminology.txt = ..\..\docs_for_building\GoTvPtoP_Terminology.txt
@@ -130,6 +131,127 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QtPri", "QtPri", "{1BBBE95F
 		..\..\GoTvPtoPVersion.txt = ..\..\GoTvPtoPVersion.txt
 		..\..\GoTvPythonLib.pro = ..\..\GoTvPythonLib.pro
 		..\..\GoTvTargetOsConfig.h = ..\..\GoTvTargetOsConfig.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy-windows", "deploy-windows", "{916FC10A-5C71-4CE4-AD77-932D8953D117}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy-common", "deploy-common", "{C5C83B5D-E198-49C3-9B93-77863F768FFA}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\deploy-common\privacy-policy.txt = ..\..\deploy-common\privacy-policy.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{32812963-413B-4E47-AC67-E5E11B89A6C5}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\deploy-common\assets\LICENSE.md = ..\..\deploy-common\assets\LICENSE.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "kodi", "kodi", "{546AE2FC-AEA5-4C82-BE63-0A046C228F05}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\deploy-common\assets\kodi\privacy-policy.txt = ..\..\deploy-common\assets\kodi\privacy-policy.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gotv", "gotv", "{DEF92E6D-D132-4F20-A6A2-F854EA2DDEDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "addons", "addons", "{C0242398-0A62-476D-BC8C-ADA7BF2B2275}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "media", "media", "{13682F7E-84E0-4DF8-A429-DB218D2BF308}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "system", "system", "{0A5EEC13-0522-4D88-806D-9B36A4243BD8}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\deploy-common\assets\kodi\system\addon-manifest.xml = ..\..\deploy-common\assets\kodi\system\addon-manifest.xml
+		..\..\deploy-common\assets\kodi\system\colors.xml = ..\..\deploy-common\assets\kodi\system\colors.xml
+		..\..\deploy-common\assets\kodi\system\Lircmap.xml = ..\..\deploy-common\assets\kodi\system\Lircmap.xml
+		..\..\deploy-common\assets\kodi\system\peripherals.xml = ..\..\deploy-common\assets\kodi\system\peripherals.xml
+		..\..\deploy-common\assets\kodi\system\playercorefactory.xml = ..\..\deploy-common\assets\kodi\system\playercorefactory.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "userdata", "userdata", "{2436D315-1FBF-4B6A-892C-06B9C960001E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "certs", "certs", "{E2840F15-205A-48BF-9165-6EAB79771D67}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\deploy-common\assets\kodi\system\certs\cacert.pem = ..\..\deploy-common\assets\kodi\system\certs\cacert.pem
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "settings", "settings", "{139BCE71-8890-43D0-821A-4537EEC9193C}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\deploy-common\assets\kodi\system\settings\aml-linux.xml = ..\..\deploy-common\assets\kodi\system\settings\aml-linux.xml
+		..\..\deploy-common\assets\kodi\system\settings\android.xml = ..\..\deploy-common\assets\kodi\system\settings\android.xml
+		..\..\deploy-common\assets\kodi\system\settings\darwin.xml = ..\..\deploy-common\assets\kodi\system\settings\darwin.xml
+		..\..\deploy-common\assets\kodi\system\settings\darwin_ios.xml = ..\..\deploy-common\assets\kodi\system\settings\darwin_ios.xml
+		..\..\deploy-common\assets\kodi\system\settings\darwin_osx.xml = ..\..\deploy-common\assets\kodi\system\settings\darwin_osx.xml
+		..\..\deploy-common\assets\kodi\system\settings\freebsd.xml = ..\..\deploy-common\assets\kodi\system\settings\freebsd.xml
+		..\..\deploy-common\assets\kodi\system\settings\gbm.xml = ..\..\deploy-common\assets\kodi\system\settings\gbm.xml
+		..\..\deploy-common\assets\kodi\system\settings\linux.xml = ..\..\deploy-common\assets\kodi\system\settings\linux.xml
+		..\..\deploy-common\assets\kodi\system\settings\rbp.xml = ..\..\deploy-common\assets\kodi\system\settings\rbp.xml
+		..\..\deploy-common\assets\kodi\system\settings\rbp2.xml = ..\..\deploy-common\assets\kodi\system\settings\rbp2.xml
+		..\..\deploy-common\assets\kodi\system\settings\settings.xml = ..\..\deploy-common\assets\kodi\system\settings\settings.xml
+		..\..\deploy-common\assets\kodi\system\settings\wayland.xml = ..\..\deploy-common\assets\kodi\system\settings\wayland.xml
+		..\..\deploy-common\assets\kodi\system\settings\win10.xml = ..\..\deploy-common\assets\kodi\system\settings\win10.xml
+		..\..\deploy-common\assets\kodi\system\settings\win32.xml = ..\..\deploy-common\assets\kodi\system\settings\win32.xml
+		..\..\deploy-common\assets\kodi\system\settings\windows.xml = ..\..\deploy-common\assets\kodi\system\settings\windows.xml
+		..\..\deploy-common\assets\kodi\system\settings\x11.xml = ..\..\deploy-common\assets\kodi\system\settings\x11.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service.xbmc.versioncheck", "service.xbmc.versioncheck", "{4BD30AE6-517C-4033-B3C7-420DB34FA4AC}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\addon.xml = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\addon.xml
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\changelog.txt = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\changelog.txt
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\icon.png = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\icon.png
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\LICENSE.txt = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\LICENSE.txt
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\README.md = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\README.md
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\service.py = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\service.py
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{71758E12-B421-443D-951F-16697442327F}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\lib\__init__.py = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\lib\__init__.py
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\lib\aptdaemonhandler.py = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\lib\aptdaemonhandler.py
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\lib\common.py = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\lib\common.py
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\lib\jsoninterface.py = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\lib\jsoninterface.py
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\lib\shellhandlerapt.py = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\lib\shellhandlerapt.py
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\lib\versions.py = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\lib\versions.py
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\lib\viewer.py = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\lib\viewer.py
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resources", "resources", "{92684C80-35CC-4CFC-8703-D6381808339C}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\gotham-alpha_notice.txt = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\gotham-alpha_notice.txt
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\settings.xml = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\settings.xml
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\versions.txt = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\versions.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "language", "language", "{EEB49AF1-193C-4B62-AFEE-DBD2A8E71CE4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "polkit", "polkit", "{A269483E-5D0E-48AE-A00E-7A158ECB6C07}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\polkit\10-allow-update.pkla = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\polkit\10-allow-update.pkla
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\polkit\README = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\polkit\README
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "English", "English", "{D5F64E12-2F86-413A-9422-B39FF60F6A0B}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\language\English\strings.po = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\language\English\strings.po
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "English (Australia)", "English (Australia)", "{800AAA11-377C-4632-AD1D-448302642EEE}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\language\English (Australia)\strings.po = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\language\English (Australia)\strings.po
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "English (New Zealand)", "English (New Zealand)", "{362D069A-10C7-4A3E-B606-14F10CE1BB82}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\language\English (New Zealand)\strings.po = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\language\English (New Zealand)\strings.po
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "English (US)", "English (US)", "{67B28040-3FA1-40B5-AB80-691EC6238440}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\language\English (US)\strings.po = ..\..\deploy-common\assets\kodi\addons\service.xbmc.versioncheck\resources\language\English (US)\strings.po
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "README", "README", "{1FFF9902-2DAF-4834-81B6-FB896A70FA9D}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\docs_for_building\READ_ME_FIRST.txt = ..\..\docs_for_building\READ_ME_FIRST.txt
+		README.txt = README.txt
 	EndProjectSection
 EndProject
 Global
@@ -3788,8 +3910,28 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{32812963-413B-4E47-AC67-E5E11B89A6C5} = {C5C83B5D-E198-49C3-9B93-77863F768FFA}
+		{546AE2FC-AEA5-4C82-BE63-0A046C228F05} = {32812963-413B-4E47-AC67-E5E11B89A6C5}
+		{DEF92E6D-D132-4F20-A6A2-F854EA2DDEDA} = {32812963-413B-4E47-AC67-E5E11B89A6C5}
+		{C0242398-0A62-476D-BC8C-ADA7BF2B2275} = {546AE2FC-AEA5-4C82-BE63-0A046C228F05}
+		{13682F7E-84E0-4DF8-A429-DB218D2BF308} = {546AE2FC-AEA5-4C82-BE63-0A046C228F05}
+		{0A5EEC13-0522-4D88-806D-9B36A4243BD8} = {546AE2FC-AEA5-4C82-BE63-0A046C228F05}
+		{2436D315-1FBF-4B6A-892C-06B9C960001E} = {546AE2FC-AEA5-4C82-BE63-0A046C228F05}
+		{E2840F15-205A-48BF-9165-6EAB79771D67} = {0A5EEC13-0522-4D88-806D-9B36A4243BD8}
+		{139BCE71-8890-43D0-821A-4537EEC9193C} = {0A5EEC13-0522-4D88-806D-9B36A4243BD8}
+		{4BD30AE6-517C-4033-B3C7-420DB34FA4AC} = {C0242398-0A62-476D-BC8C-ADA7BF2B2275}
+		{71758E12-B421-443D-951F-16697442327F} = {4BD30AE6-517C-4033-B3C7-420DB34FA4AC}
+		{92684C80-35CC-4CFC-8703-D6381808339C} = {4BD30AE6-517C-4033-B3C7-420DB34FA4AC}
+		{EEB49AF1-193C-4B62-AFEE-DBD2A8E71CE4} = {92684C80-35CC-4CFC-8703-D6381808339C}
+		{A269483E-5D0E-48AE-A00E-7A158ECB6C07} = {92684C80-35CC-4CFC-8703-D6381808339C}
+		{D5F64E12-2F86-413A-9422-B39FF60F6A0B} = {EEB49AF1-193C-4B62-AFEE-DBD2A8E71CE4}
+		{800AAA11-377C-4632-AD1D-448302642EEE} = {EEB49AF1-193C-4B62-AFEE-DBD2A8E71CE4}
+		{362D069A-10C7-4A3E-B606-14F10CE1BB82} = {EEB49AF1-193C-4B62-AFEE-DBD2A8E71CE4}
+		{67B28040-3FA1-40B5-AB80-691EC6238440} = {EEB49AF1-193C-4B62-AFEE-DBD2A8E71CE4}
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
 		Qt5Version = qt5.12
+		SolutionGuid = {87B675DC-A218-4B2C-B2F9-4690ED594DAA}
 	EndGlobalSection
 EndGlobal

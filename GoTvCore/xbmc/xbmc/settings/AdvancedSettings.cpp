@@ -35,6 +35,8 @@
 #include "utils/Variant.h"
 #include "utils/XMLUtils.h"
 
+#include "GoTvDebugConfig.h"
+
 #if defined(TARGET_DARWIN_IOS)
 #include "platform/darwin/DarwinUtils.h"
 #endif
@@ -71,6 +73,11 @@ void CAdvancedSettings::OnSettingsLoaded()
     m_logLevel = std::min(m_logLevelHint, LOG_LEVEL_DEBUG/*LOG_LEVEL_NORMAL*/);
     CLog::Log(LOGNOTICE, "Disabled debug logging due to GUI setting. Level %d.", m_logLevel);
   }
+
+#ifdef DEBUG_KODI_ENABLE_DEBUG_LOGGING
+  m_logLevel = LOG_LEVEL_DEBUG;
+#endif // DEBUG_KODI_ENABLE_DEBUG_LOGGING
+
   CLog::SetLogLevel(m_logLevel);
 
   m_extraLogEnabled = settings->GetBool(CSettings::SETTING_DEBUG_EXTRALOGGING);

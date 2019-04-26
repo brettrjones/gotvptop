@@ -18,12 +18,16 @@
 echo traget os is not defined
 #endif 
 
+#include "Application.h"
 #include "filesystem/Directory.h"
 #include "filesystem/SpecialProtocol.h"
+#include "filesystem/File.h"
+#include "platform/Environment.h"
 #include "utils/log.h"
-#include "Application.h"
+
 #include "GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h"
 #include "GoTvApps/GoTvCommon/QtSource/AppCommon.h"
+#include "GoTvDebugConfig.h"
 
 #include <CoreLib/VxGlobals.h>
 #include <NetLib/VxPeerMgr.h>
@@ -87,45 +91,45 @@ void ff_avutil_log(void* ptr, int level, const char* format, va_list va)
     unsigned int threadId =	VxGetCurrentThreadId();
     AVClass* avc= ptr ? *(AVClass**)ptr : NULL;
 
-    int logLevel = 0;
+    int logLevel = level;
     int logType = 0;
     switch( level )
     {
     case AV_LOG_FATAL:
     case AV_LOG_PANIC:
-        logLevel = ILOG_LEVEL_FATAL;
+        //logLevel = ILOG_LEVEL_FATAL;
         logType = LOG_FATAL;
         break;
 
     case AV_LOG_ERROR:
-        logLevel = ILOG_LEVEL_ERROR;
+        //logLevel = ILOG_LEVEL_ERROR;
         logType = LOG_ERROR;
         break;
 
     case AV_LOG_WARNING:
-        logLevel = ILOG_LEVEL_WARN;
+        //logLevel = ILOG_LEVEL_WARN;
         logType = LOG_WARN;
         break;
 
     case AV_LOG_INFO:
-        logLevel = ILOG_LEVEL_INFO;
+        //logLevel = ILOG_LEVEL_INFO;
         logType = LOG_INFO;
         break;
 
     case AV_LOG_DEBUG:
-        logLevel = LOG_LEVEL_DEBUG;
+        //logLevel = LOG_LEVEL_DEBUG;
         logType = LOG_DEBUG;
         break;
 
     case AV_LOG_TRACE:
     case AV_LOG_VERBOSE:
-        logLevel = ILOG_LEVEL_VERBOSE;
+        //logLevel = ILOG_LEVEL_VERBOSE;
         logType = LOG_VERBOSE;
         break;
 
     case AV_LOG_QUIET:
     default:
-        logLevel = LOG_LEVEL_NONE;
+        //logLevel = LOG_LEVEL_NONE;
         return;
     }
 
@@ -285,7 +289,12 @@ void IGoTv::setSslCertFile( std::string certFile )
     m_SslCertFile = certFile;
     if( !m_SslCertFile.empty() )
     {
+        if( XFILE::CFile::Exists( certFile ) )
+        {
+            CEnvironment::setenv( "SSL_CERT_FILE", certFile.c_str(), 1 );
+        }
 
+        // TODO: anything special for linux?
     }
 }
 
@@ -293,7 +302,16 @@ void IGoTv::setSslCertFile( std::string certFile )
 //============================================================================
 bool IGoTv::doPreStartup()
 {
-    VxSetAppIsShuttingDown( false );
+#ifdef DEBUG_KODI_ENABLE_DEBUG_LOGGING
+    CLog::SetLogLevel( LOG_LEVEL_DEBUG );
+#endif //   DEBUG_KODI_ENABLE_DEBUG_LOGGING
+
+#ifdef DEBUG_FFMPEG_ENABLE_LOGGING
+    getILog().setFfmpegLogLevel( LOG_LEVEL_DEBUG );
+#else
+    getILog().setFfmpegLogLevel( LOG_LEVEL_NORMAL );
+#endif
+
     bool result = m_OsInterface.doPreStartup();
 	result &= m_OsInterface.initUserPaths();
 	return result;

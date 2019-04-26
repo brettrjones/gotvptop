@@ -340,7 +340,7 @@
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <WarningLevel>Level3</WarningLevel>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
       <FloatingPointModel>Fast</FloatingPointModel>
@@ -353,6 +353,7 @@
       </OpenMPSupport>
       <XMLDocumentationFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</XMLDocumentationFileName>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libfdk-aacD.lib;opengl32.lib;libpthreadD.lib;ole32.lib;winmm.lib;Rpcrt4.lib;libGoTvPtoPD.lib;libkodiD.lib;libopenmpt-fullD.lib;libnfsD.lib;Vfw32.lib;Upnp2LibD.lib;VxVideoLibD.lib;libcurlD.lib;libexpatD.lib;libcdioD.lib;libzipD.lib;libopencore-amrD.lib;libceltD.lib;libfaacD.lib;libxavsD.lib;Secur32.lib;librtmpD.lib;libbento4D.lib;CoreLibD.lib;FfmpegAvCodecLibD.lib;FfmpegAvDeviceLibD.lib;FfmpegAvFilterLibD.lib;FfmpegAvFormatLibD.lib;FfmpegAvResampleLibD.lib;FfmpegAvUtilLibD.lib;FfmpegPostProcLibD.lib;FfmpegSwResampleLibD.lib;FfmpegSwScaleLibD.lib;glew64sd.lib;libarmrwbencD.lib;libasprintfD.lib;libassD.lib;libbzip2D.lib;libcpluffD.lib;libcrocoD.lib;libcrossguidD.lib;libcrystalhdD.lib;libdnssdD.lib;libexifD.lib;libfdk-aacD.lib;libflacD.lib;libfreetypeD.lib;libfribidiD.lib;libgnuD.lib;libgsmD.lib;libiconvD.lib;libilbcD.lib;libjpgD.lib;libkvazaarD.lib;liblameD.lib;liblzmaD.lib;liblzoD.lib;libmicrohttpdD.lib;liboggD.lib;libopenjpegD.lib;libopusD.lib;libp8-platformD.lib;libpcreD.lib;libpngD.lib;python27_d.lib;libshairplayD.lib;libshineD.lib;libsnappyD.lib;libspeexD.lib;libsshD.lib;libsslD.lib;libtagD.lib;libtheoraD.lib;libtinyxmlD.lib;libtwolameD.lib;libUPnPD.lib;libvorbisD.lib;libvpxD.lib;libwavepackD.lib;libwebpD.lib;libwelsdecD.lib;libx264D.lib;libx265D.lib;libxml2D.lib;libxsltD.lib;libxvidD.lib;libyajlD.lib;libzlibD.lib;libzvbiD.lib;MediaToolsLibD.lib;NetLibD.lib;PktLibD.lib;d3d11.lib;DInput8.lib;DSound.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;dxguid.lib;WS2_32.lib;WSock32.lib;Crypt32.lib;$(QTDIR)\lib\Qt5Multimediad.lib;$(QTDIR)\lib\qtmaind.lib;shell32.lib;$(QTDIR)\lib\Qt5Svgd.lib;$(QTDIR)\lib\Qt5OpenGLd.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Cored.lib;$(QTDIR)\lib\Qt5QuickWidgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -523,6 +524,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderLogoShaders.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderDefsGl.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RunKodiThread.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppTheme.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAspectFrame.cpp" />
@@ -841,6 +843,9 @@
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\PlayerGlWidget.ui">
     </QtUic>
+    <None Include="..\..\..\..\GoTvPtoPAppLib.pri" />
+    <None Include="..\..\..\..\GoTvPtoPAppLib.pro" />
+    <None Include="..\..\..\..\GoTvPtoP_App.pro" />
     <None Include="..\..\..\GoTvCommon\QtSource\Resources\story_board.htm">
       <DeploymentContent>true</DeploymentContent>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -1029,6 +1034,7 @@
     <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h" />
+    <ClInclude Include="..\..\..\..\GoTvDebugConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvFeaturesConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvInterface\config_libgotvptop.h" />
@@ -1327,6 +1333,19 @@
     </QtMoc>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderLogoShaders.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RunKodiThread.h">
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;$(ProjectDir);$(ProjectDir)..\..;$(ProjectDir)..\..\..\PlayerCommon;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCommon\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\addons\library.kodi.guilib;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.addon;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.pvr;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.kodi.adsp;$(ProjectDir)..\..\..\GoTvCore\xbmc\addons\library.xbmc.codec;$(ProjectDir)..\..\..;$(ProjectDir)..\..\..\..;$(ProjectDir)..\..\..\..\GoTvCore;$(QTDIR)\include;.\debug;$(QTDIR)\mkspecs\win64-msvc</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_DEBUG;TARGET_OS_WINDOWS;LIB_STATIC;NOMINMAX;_USE_32BIT_TIME_T;__STDC_CONSTANT_MACROS;WIN32;%(PreprocessorDefinitions)</Define>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;$(QTDIR)\mkspecs\win64-msvc;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtOpenGL;$(ProjectDir)..\..;$(ProjectDir)..\..\..\PlayerCommon;$(ProjectDir)..\..\..\..\libgotvptop;$(ProjectDir)..\..\..\GoTvCommon\QtSource;$(ProjectDir)..\..\..\..\DependLibs;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc;$(ProjectDir)..\..\..\..\GoTvCore\xbmc\xbmc\cores\AudioEngine;$(ProjectDir)..\..\..\..\DependLibs\ffmpeg;$(ProjectDir)..\..\..\..\DependLibs\openssl-1.0.2p\include;$(ProjectDir)..\..\..\..\DependLibs\libUPnP;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaRenderer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaConnect;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Devices\MediaServer;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Platinum;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Platinum\Source\Extras;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\Core;$(ProjectDir)..\..\..\..\DependLibs\libUPnP\Neptune\Source\System\Win32;$(ProjectDir)..\..\..\..\DependLibs\libpcre;$(ProjectDir)..\..\..\..\DependLibs\Effects11\inc;$(ProjectDir)..\..\..\..\DependLibs\libfreetype\include;$(ProjectDir)..\..\..\..;$(ProjectDir)..\..\..;$(ProjectDir)..\..\..\..\GoTvCore;$(NOINHERIT)</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CONSOLE;WIN64;_DEBUG;TARGET_OS_WINDOWS;LIB_STATIC;%(PreprocessorDefinitions)</Define>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\release;$(QTDIR)\mkspecs\win32-msvc</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">WIN32;QT_NO_DEBUG;NDEBUG;%(PreprocessorDefinitions)</Define>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\release;$(QTDIR)\mkspecs\win64-msvc</IncludePath>
+    </QtMoc>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxAspectFrame.h">
     </QtMoc>

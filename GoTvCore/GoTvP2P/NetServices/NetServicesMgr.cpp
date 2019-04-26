@@ -34,6 +34,7 @@
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxParse.h>
 #include <CoreLib/OsDetect.h>
+#include "GoTvDebugConfig.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -653,8 +654,9 @@ static int lastPort = 0;
 	else if( false == portOpenConn1.isConnected() )
 	{
 		
-        if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
+#ifdef DEBUG_PTOP_NETWORK_STATE
             LogMsg( LOG_INFO, "NetServicesMgr::doIsMyPortOpen FAILED Connect to net services\n" );
+#endif // DEBUG_PTOP_NETWORK_STATE
 		m_Engine.sendToGuiStatusMessage( "FAILED Connect to Connect Test Server\n" );
 	}
 
@@ -665,23 +667,26 @@ static int lastPort = 0;
 
 		if( eAppErrNone == portOpenTestError )
 		{
-            if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
-			    LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS OPEN :) IP is %s->%s in %3.3f sec\n", tcpListenPort, retMyExternalIp.c_str(), rmtIP.c_str(), retMyExternalIp.c_str(), portTestTimer.elapsedSec() );
-			m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS OPEN :)", tcpListenPort  );
+#ifdef DEBUG_PTOP_NETWORK_STATE
+			LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS OPEN :) IP is %s->%s in %3.3f sec\n", tcpListenPort, retMyExternalIp.c_str(), rmtIP.c_str(), retMyExternalIp.c_str(), portTestTimer.elapsedSec() );
+            m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS OPEN :)", tcpListenPort  );
+#endif // DEBUG_PTOP_NETWORK_STATE
 		}
 		else
 		{
-            if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
-			    LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS CLOSED :) IP %s->%s in %3.3f sec\n", tcpListenPort, retMyExternalIp.c_str(), rmtIP.c_str(), portTestTimer.elapsedSec() );
-			m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS CLOSED :( IP is %s->%s  (%3.3f sec)", tcpListenPort, retMyExternalIp.c_str(), rmtIP.c_str(), portTestTimer.elapsedSec() );
+#ifdef DEBUG_PTOP_NETWORK_STATE
+			LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS CLOSED :) IP %s->%s in %3.3f sec\n", tcpListenPort, retMyExternalIp.c_str(), rmtIP.c_str(), portTestTimer.elapsedSec() );
+            m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS CLOSED :( IP is %s->%s  (%3.3f sec)", tcpListenPort, retMyExternalIp.c_str(), rmtIP.c_str(), portTestTimer.elapsedSec() );
+#endif // DEBUG_PTOP_NETWORK_STATE
 		}
 
 		return portOpenTestError; // messages sent and result set and no sense in retying because all ports blocked on cell network
 	}
 
 	// try again with new connection
-    if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
+#ifdef DEBUG_PTOP_NETWORK_STATE
 	    LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction: retry port open test\n" );
+#endif // DEBUG_PTOP_NETWORK_STATE
 	VxSktConnectSimple portOpenConn2;
 	if( actionReqConnectToNetService( portOpenConn2 ) )
 	{

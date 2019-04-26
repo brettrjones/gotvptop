@@ -27,6 +27,7 @@ using namespace ActiveAE;
 #include "utils/log.h"
 
 #include <CoreLib/VxDebug.h>
+#include "GoTvDebugConfig.h"
 
 #define MAX_CACHE_LEVEL 0.4   // total cache time of stream in seconds
 #define MAX_WATER_LEVEL 0.2   // buffered time after stream stages in seconds
@@ -472,6 +473,7 @@ void CActiveAE::StateMachine( int signal, Protocol *port, Message *msg )
 {
     for( int state = m_state; ; state = AE_parentStates[ state ] )
     {
+#ifdef DEBUG_KODI_AUDIO
         if( g_StreamActive && ( signal != CSinkDataProtocol::SAMPLE ) && ( signal != CActiveAEDataProtocol::STREAMSAMPLE ) )
         {
             char buf[ 4096 ];
@@ -494,7 +496,7 @@ void CActiveAE::StateMachine( int signal, Protocol *port, Message *msg )
 
             CLog::Log( LOGWARNING, buf );
         }
-
+#endif // DEBUG_KODI_AUDIO
 
         switch( state )
         {
@@ -1310,8 +1312,9 @@ AEAudioFormat CActiveAE::GetInputFormat( AEAudioFormat *desiredFmt )
 //        inputFormat = m_streams.front()->m_format;
 //        m_inputFormat = inputFormat;
 //    }
-
+#ifdef DEBUG_KODI_AUDIO
     LogMsg( LOG_DEBUG, "BRJ CActiveAE::GetInputFormat %d rate %d", inputFormat.m_dataFormat, inputFormat.m_sampleRate );
+#endif // DEBUG_KODI_AUDIO
 
 	inputFormat.m_sampleRate = 48000;
 	inputFormat.m_dataFormat = AE_FMT_FLOAT;
@@ -1607,9 +1610,9 @@ void CActiveAE::Configure( AEAudioFormat *desiredFmt )
 
     ClearDiscardedBuffers();
     m_extDrain = false;
-
+#ifdef DEBUG_KODI_AUDIO
     LogMsg( LOG_DEBUG, "BRJ CActiveAE::Configure noise %d", m_settings.streamNoise );
-
+#endif // DEBUG_KODI_AUDIO
 }
 
 CActiveAEStream* CActiveAE::CreateStream( MsgStreamNew *streamMsg )
@@ -2845,9 +2848,9 @@ void CActiveAE::LoadSettings()
   m_settings.streamNoise = settings->GetBool(CSettings::SETTING_AUDIOOUTPUT_STREAMNOISE);
   m_settings.silenceTimeout = settings->GetInt(CSettings::SETTING_AUDIOOUTPUT_STREAMSILENCE) * 60000;
 #endif // HAVE_QT_GUI
-
+#ifdef DEBUG_KODI_AUDIO
     LogMsg( LOG_DEBUG, "BRJ CActiveAE::LoadSettings noise %d timeout %d\n", m_settings.streamNoise, m_settings.silenceTimeout );
-
+#endif // DEBUG_KODI_AUDIO
 }
 
 void CActiveAE::Start()

@@ -15,6 +15,7 @@
 
 #include "NetworkEventAvail.h"
 #include "NetworkStateMachine.h"
+#include "GoTvDebugConfig.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
@@ -42,8 +43,9 @@ NetworkEventAvail::NetworkEventAvail( NetworkStateMachine& stateMachine, const c
 //============================================================================
 void NetworkEventAvail::runNetworkEvent( void )
 {
-
+#ifdef DEBUG_NETWORK_STATE
 	LogMsg( LOG_INFO, "NetworkEventAvail::runNetworkEvent start\n" );
+#endif // DEBUG_NETWORK_STATE
 	m_NetworkStateMachine.resolveWebsiteUrls();
 	//m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeAvail );
 
@@ -52,7 +54,9 @@ void NetworkEventAvail::runNetworkEvent( void )
 	//m_Engine.getEngineSettings().getTcpIpPort( u16TcpPort );
 	//m_PktAnn.setOnlinePort( u16TcpPort );
 	//m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
+#ifdef DEBUG_NETWORK_STATE
 	LogMsg( LOG_INFO, "NetworkEventAvail::runNetworkEvent done\n" );
+#endif // DEBUG_NETWORK_STATE
 }
 
 

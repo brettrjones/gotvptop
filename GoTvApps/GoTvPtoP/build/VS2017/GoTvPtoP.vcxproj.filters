@@ -97,6 +97,9 @@
       <Extensions>ts</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
+    <Filter Include="QtBuild">
+      <UniqueIdentifier>{c163289c-2ac2-42c4-b381-25a9688a4d36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\main.cpp">
@@ -752,6 +755,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AudioOutQt.cpp">
       <Filter>GoTvCommon\Source Files\SoundInputOutput</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RunKodiThread.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1529,14 +1535,17 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlLogic.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderKodiThread.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AudioOutIo.h">
       <Filter>GoTvCommon\Source Files\SoundInputOutput</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AudioOutQt.h">
       <Filter>GoTvCommon\Source Files\SoundInputOutput</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RunKodiThread.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderKodiThread.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -2022,6 +2031,15 @@
     </None>
     <None Include="gotvptop_en.ts">
       <Filter>Translation Files</Filter>
+    </None>
+    <None Include="..\..\..\..\GoTvPtoP_App.pro">
+      <Filter>QtBuild</Filter>
+    </None>
+    <None Include="..\..\..\..\GoTvPtoPAppLib.pri">
+      <Filter>QtBuild</Filter>
+    </None>
+    <None Include="..\..\..\..\GoTvPtoPAppLib.pro">
+      <Filter>QtBuild</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -2549,6 +2567,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvDebugConfig.h">
+      <Filter>GoTvConfig</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

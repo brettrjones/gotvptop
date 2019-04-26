@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <iterator>
 #include <vector>
+#include "GoTvDebugConfig.h"
 
 namespace ADDON
 {
@@ -214,6 +215,15 @@ void CRepositoryUpdater::ScheduleUpdate()
   auto prev = LastUpdated();
   auto next = std::max(CDateTime::GetCurrentDateTime(), prev + interval);
   int delta = std::max(1, (next - CDateTime::GetCurrentDateTime()).GetSecondsTotal() * 1000);
+#ifdef DEBUG_KODI_UPDATER
+  static bool firstRun = true;
+  // force kodi update every run
+  if( firstRun )
+  {
+      firstRun = false;
+      delta = 1;
+  }
+#endif // DEBUG_KODI_UPDATER
 
   CLog::Log(LOGDEBUG,"CRepositoryUpdater: previous update at %s, next at %s",
       prev.GetAsLocalizedDateTime().c_str(), next.GetAsLocalizedDateTime().c_str());

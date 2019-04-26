@@ -76,6 +76,7 @@
 #include <iterator>
 
 #include "GoTvInterface/IGoTv.h"
+#include "GoTvDebugConfig.h"
 
 using namespace KODI::MESSAGING;
 
@@ -1227,11 +1228,11 @@ void CVideoPlayer::CheckBetterStream(CCurrentStream& current, CDemuxStream* stre
 
 void CVideoPlayer::Prepare()
 {
-//BRJ #ifdef DEBUG
-//  m_GoTv.getILog().setFfmpegLogLevel( LOG_LEVEL_DEBUG );
-//#else
+#ifdef DEBUG_FFMPEG_ENABLE_LOGGING
+  m_GoTv.getILog().setFfmpegLogLevel( LOG_LEVEL_DEBUG );
+#else
   m_GoTv.getILog().setFfmpegLogLevel( LOG_LEVEL_NORMAL );
-//#endif
+#endif
   SetPlaySpeed(DVD_PLAYSPEED_NORMAL);
   m_processInfo->SetSpeed(1.0);
   m_processInfo->SetTempo(1.0);

@@ -23,6 +23,7 @@
 #endif //defined(TARGET_OS_WINDOWS)
 
 #include "filesystem/Directory.h"
+#include "filesystem/File.h"
 #include "filesystem/SpecialProtocol.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
@@ -170,10 +171,17 @@ bool OsInterface::initDirectories()
 	gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExePythonLibs ).c_str() );
 	CSpecialProtocol::SetPath( "special://xbmc/system/python/Lib", gotvDir.c_str() );
 
-	// Kodi master profile path
+	// Kodi master profile path ( In Roaming pm windows )
 	CEnvironment::setenv( CCompileInfo::GetUserProfileEnvName(), CSpecialProtocol::TranslatePath( "special://masterprofile/" ) );
 
     m_IGoTv.createUserDirs();
+
+    std::string cacert = CEnvironment::getenv( "SSL_CERT_FILE" );
+    if( cacert.empty() || !XFILE::CFile::Exists( cacert ) )
+    {
+        cacert = CSpecialProtocol::TranslatePath( "special://xbmc/system/certs/cacert.pem" );
+        IGoTv::getIGoTv().setSslCertFile( cacert );
+    }
 
     return true;
 }

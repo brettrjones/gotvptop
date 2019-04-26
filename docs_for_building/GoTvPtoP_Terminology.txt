@@ -8,7 +8,7 @@ File Share - built in plugin to serve files to self or users with sufficient per
 CamServer - built in plugin to serve streaming video from camera. Has built in motion detection and recording security cam features
 Truth Or Dare - built in game plugin to play video chat truth or dare game
 Library - manager of local media that a user may play/share/delete etc
-Relay Service - Forword or "Relay" packets from one user to another for users that cannot connect directly to each other
+Relay Service - Foreword or "Relay" packets from one user to another for users that cannot connect directly to each other
 
 User - end user. may or may not have joined goup(s)
         1.) User level permissions to allow/disallow offers and or users media access via "Friendship Level"
@@ -34,20 +34,20 @@ GroupHost - services for a group of users.
     3.) Relay of data services for when users cannot connect directly
     4.) Search Service to search for people or resources within hosted group 
     5.) Help setup direct connections between users
-    6.) Open Port Connection Test
+    6.) Provide Open Port Connection Test
            
 GroupAnchor - services to GroupHosts and some services for Users
     1.) Allow search for GoupHosts for end users to find "Groups" with similar interests
     2.) Connection information for GroupHosts that do not have a open port
     3.) GroupHosts may subscribe to multiple GroupAnchors (Provided the GroupAnchor gives them sufficient permission)
-    4.) Open Port Connection Test  
+    4.) Provide Open Port Connection Test  
     5.) Does NOT provide relay services
 
 NetworkAnchor - this one might not ever get coded but in concept it would
     1.) Allow search for GoupHosts and GroupAnchors for end users to find "Groups" with similar interests    
     2.) Connection information for GroupAnchors
     3.) GroupAnchor may subscribe to multiple NetowrkAnchors (Provided the NetworkAnchor gives them sufficient permission)
-    4.) Open Port Connection Test  
+    4.) Provide Open Port Connection Test  
     5.) Does NOT provide relay services
 
 

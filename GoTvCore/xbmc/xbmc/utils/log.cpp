@@ -142,6 +142,9 @@ void CLog::MemDump(char *pData, int length)
 
 void CLog::SetLogLevel(int level)
 {
+#ifdef   DEBUG_KODI_ENABLE_DEBUG_LOGGING
+    CLog::SetLogLevel( LOG_LEVEL_DEBUG );
+#endif //   DEBUG_KODI_ENABLE_DEBUG_LOGGING
   CSingleLock waitLock(g_logState.critSec);
   if (level >= LOG_LEVEL_NONE && level <= LOG_LEVEL_MAX)
   {

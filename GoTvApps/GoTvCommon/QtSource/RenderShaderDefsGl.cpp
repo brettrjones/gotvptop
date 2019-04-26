@@ -979,7 +979,9 @@ void RenderGlShaders::getShaderSourceCode( int shaderIdx, EShaderType& shaderTyp
 
     if( vertexShaderCode.empty() || fragmentShaderCode.empty() )
     {
-        //LogMsg( LOG_INFO, "Compiling shader %s", shaderName.toUtf8().constData() );
+#ifdef DEBUG_KODI_SHADERS
+        LogMsg( LOG_INFO, "Compiling shader %s", shaderName.c_str() );
+#endif // DEBUG_KODI_SHADERS
         //VerifyGLStateQt();
         vertexShaderCode = gles_shader_vert;
         fragmentShaderCode = gles_shader_default_frag;

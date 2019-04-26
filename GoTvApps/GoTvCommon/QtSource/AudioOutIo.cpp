@@ -285,12 +285,14 @@ void AudioOutIo::onAudioDeviceStateChanged( QAudio::State state )
 		{
 			// This check is required, because Mac OS X underruns often
 			m_AudioOutputDevice->suspend();
-
-			qWarning() << "suspending due to underrun ";
+#ifdef DEBUG_QT_AUDIO
+			qWarning() << "audio suspending due to underrun ";
+#endif // DEBUG_QT_AUDIO
 			return;
 		}      
-
-		qWarning() << "stateChanged state = " << state;
+#ifdef DEBUG_QT_AUDIO
+		qWarning() << "audio stateChanged state = " << state;
+#endif // DEBUG_QT_AUDIO
 	}
 }
 

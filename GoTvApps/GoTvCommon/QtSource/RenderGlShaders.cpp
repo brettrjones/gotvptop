@@ -104,7 +104,7 @@ void RenderGlShaders::destroyShaders()
 //============================================================================
 bool RenderGlShaders::enableShader( ESHADERMETHOD method )
 {
-#ifdef DEBUG_QT_RENDER
+#ifdef DEBUG_KODI_SHADERS
     LogMsg( LOG_ERROR, "enableShader - %s", describeShaderMethod( method ) );
 #endif // DEBUG
     bool eanbled = false;

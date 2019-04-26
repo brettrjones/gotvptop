@@ -1,11 +1,17 @@
 #include "RenderGlLogic.h"
 #include "RenderKodiThread.h"
+#include "RunKodiThread.h"
 #include "RenderGlOffScreenSurface.h"
 #include "RenderGlWidget.h"
+
+#include "GoTvDebugConfig.h"
+#include <CoreLib/VxDebug.h>
+#include <CoreLib/VxThread.h>
 
 //============================================================================
 RenderGlLogic::RenderGlLogic( RenderGlWidget& renderWidget )
 : QObject()
+, m_RunKodiThread( new RunKodiThread( *this ) )
 , m_RenderKodiThread( new RenderKodiThread( *this ) )
 , m_RenderWidget( renderWidget )
 , m_RenderGlShaders( renderWidget )
@@ -20,11 +26,26 @@ RenderGlLogic::RenderGlLogic( RenderGlWidget& renderWidget )
 void RenderGlLogic::aboutToDestroy()
 {
     setRenderThreadShouldRun( false );
-    if( m_RenderKodiThread )
+    setRunKodiThreadShouldRun( false );
+    if( m_RenderKodiThread && m_RunKodiThread  )
     {
         m_RenderKodiThread->quit(); // some platforms may not have windows to close so ensure quit()
+        m_RunKodiThread->quit(); // some platforms may not have windows to close so ensure quit()
         m_RenderKodiThread->wait();
+        m_RunKodiThread->wait();
         delete m_RenderKodiThread;
+        m_RenderKodiThread = nullptr;
+        delete m_RunKodiThread;
+        m_RunKodiThread = nullptr;
+    }
+}
+
+//============================================================================
+void RenderGlLogic::setRunKodiThreadShouldRun( bool shouldRun )
+{
+    if( m_RunKodiThread )
+    {
+        m_RunKodiThread->setRunKodiThreadShouldRun( shouldRun );
     }
 }
 
@@ -44,6 +65,12 @@ bool RenderGlLogic::isRenderThreadStarted()
 }
 
 //============================================================================
+bool RenderGlLogic::isRunKodiThreadStarted()
+{
+    return m_RunKodiThread && m_RunKodiThread->isRunKodiThreadStarted();
+}
+
+//============================================================================
 void RenderGlLogic::startRenderThread()
 {
     if( m_RenderKodiThread && !m_RenderKodiThread->isRenderThreadStarted() )
@@ -53,11 +80,29 @@ void RenderGlLogic::startRenderThread()
 }
 
 //============================================================================
+void RenderGlLogic::startRunKodiThread()
+{
+    if( m_RunKodiThread && !m_RunKodiThread->isRunKodiThreadStarted() )
+    {
+        m_RunKodiThread->startRunKodiThread();
+    }
+}
+
+//============================================================================
 void RenderGlLogic::stopRenderThread()
 {
     if( m_RenderKodiThread && m_RenderKodiThread->isRenderThreadStarted() )
     {
         m_RenderKodiThread->stopRenderThread();
+    }
+}
+
+//============================================================================
+void RenderGlLogic::stopRunKodiThread()
+{
+    if( m_RunKodiThread && m_RunKodiThread->isRunKodiThreadStarted() )
+    {
+        m_RunKodiThread->stopRunKodiThread();
     }
 }
 
@@ -78,6 +123,11 @@ void RenderGlLogic::glWidgetInitialized( )
         moveToThread( m_RenderKodiThread );
         m_ThreadGlContext->moveToThread( m_RenderKodiThread );
         m_OffScreenSurface->moveToThread( m_RenderKodiThread );
+
+        if( m_RunKodiThread )
+        {
+            m_RunKodiThread->startRunKodiThread();
+        }
     }
 }
 
@@ -118,6 +168,7 @@ void RenderGlLogic::render()
 //============================================================================
 bool RenderGlLogic::initRenderGlSystem()
 {
+    LogMsg( LOG_DEBUG, "initRenderGlSystem thread %d", VxGetCurrentThreadId() );
     if( m_OffScreenSurface )
     {
         m_OffScreenSurface->initRenderGlSystem();

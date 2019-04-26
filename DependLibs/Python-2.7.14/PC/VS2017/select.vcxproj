@@ -188,7 +188,7 @@
       <OutputFile>$(OutDir)$(ProjectName).pyo</OutputFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(TargetDir)$(TargetName).pyo" "$(ProjectDir)\..\..\..\..\bin-Windows\python27\$(TargetName).pyo"</Command>
+      <Command>copy /Y "$(TargetDir)$(TargetName).pyo" "$(ProjectDir)\..\..\..\..\bin-Windows\assets\kodi\system\Python\DLLs\$(TargetName).pyd"</Command>
     </PostBuildEvent>
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Include; ..\..\PC;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

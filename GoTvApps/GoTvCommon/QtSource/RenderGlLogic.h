@@ -23,6 +23,7 @@
 
 class RenderGlWidget;
 class RenderKodiThread;
+class RunKodiThread;
 class RenderGlOffScreenSurface;
 
 class RenderGlLogic : public QObject
@@ -35,9 +36,15 @@ public:
     void						setRenderWindowVisible( bool isVisible ) { m_RenderWindowVisible = isVisible; }
 
     void						setRenderThreadShouldRun( bool shouldRun );
+    void                        setRunKodiThreadShouldRun( bool shouldRun );
+
     bool						isRenderThreadStarted();
+    bool						isRunKodiThreadStarted();
+
     void						startRenderThread();
+    void						startRunKodiThread();
     void						stopRenderThread();
+    void						stopRunKodiThread();
 
     //! called from gui thread when ready for opengl rendering
     void						glWidgetInitialized();
@@ -63,6 +70,7 @@ public:
     // initialized by RenderGlWidget
     RenderGlOffScreenSurface *  m_OffScreenSurface = nullptr;
 
+    RunKodiThread*              m_RunKodiThread = nullptr;
     RenderKodiThread*           m_RenderKodiThread = nullptr;
 
     RenderGlWidget&             m_RenderWidget;

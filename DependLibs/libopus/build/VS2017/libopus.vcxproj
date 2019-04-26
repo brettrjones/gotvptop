@@ -463,7 +463,7 @@
       <SmallerTypeCheck>false</SmallerTypeCheck>
       <EnableEnhancedInstructionSet>NoExtensions</EnableEnhancedInstructionSet>
       <MinimalRebuild>false</MinimalRebuild>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
       <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>

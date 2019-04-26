@@ -2,8 +2,12 @@
 #include <GoTvInterface/IGoTv.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
-#include <CoreLib/VxGlobals.h>
+
+#include "GoTvDebugConfig.h"
 #include <CoreLib/VxDebug.h>
+#include <CoreLib/VxThread.h>
+#include <CoreLib/VxGlobals.h>
+
 #include "RenderKodiThread.h"
 #include "RenderGlOffScreenSurface.h"
 #include "RenderGlWidget.h"
@@ -23,7 +27,7 @@ void RenderKodiThread::run()
     static bool isKodiRunning = false;
     if( !isKodiRunning )
     {
-        LogMsg( LOG_ERROR, "size of bool %d\n", sizeof( bool ) );
+        LogMsg( LOG_ERROR, "RenderKodiThread %d\n", VxGetCurrentThreadId() );
         isKodiRunning = true;
 #ifdef RENDER_LOGO_INSTEAD_OF_KODI
         qDebug() << "hello from worker thread " << currentThreadId();

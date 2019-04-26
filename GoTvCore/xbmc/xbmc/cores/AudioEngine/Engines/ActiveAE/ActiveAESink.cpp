@@ -26,6 +26,7 @@
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxTime.h>
+#include "GoTvDebugConfig.h"
 
 
 using namespace AE;
@@ -304,6 +305,7 @@ void CActiveAESink::StateMachine( int signal, Protocol *port, Message *msg )
 {
     for( int state = m_state; ; state = SINK_parentStates[ state ] )
     {
+#ifdef DEBUG_KODI_AUDIO
         if( g_StreamActive && ( signal != CSinkDataProtocol::SAMPLE ) && ( signal != CActiveAEDataProtocol::STREAMSAMPLE ) )
         {
             if( port == &m_controlPort )
@@ -321,6 +323,7 @@ void CActiveAESink::StateMachine( int signal, Protocol *port, Message *msg )
                 CLog::Log( LOGWARNING, "BRJ CActiveAESink::StateMachine timeout S_TOP_CONFIGURED_PLAY" );
             }
         }
+#endif // DEBUG_KODI_AUDIO
 
         switch( state )
         {
@@ -385,7 +388,9 @@ void CActiveAESink::StateMachine( int signal, Protocol *port, Message *msg )
                     return;
 
                 case CSinkControlProtocol::FLUSH:
+#ifdef DEBUG_KODI_AUDIO
                     LogMsg( LOG_DEBUG, "BRJ CSinkControlProtocol::FLUSH\n" );
+#endif // DEBUG_KODI_AUDIO
                     ReturnBuffers();
                     msg->Reply( CSinkControlProtocol::ACC );
                     return;
@@ -393,7 +398,9 @@ void CActiveAESink::StateMachine( int signal, Protocol *port, Message *msg )
                 case CSinkControlProtocol::APPFOCUSED:
                     m_extAppFocused = *( bool* )msg->data;
                     SetSilenceTimer();
+#ifdef DEBUG_KODI_AUDIO
                     LogMsg( LOG_DEBUG, "BRJ CSinkControlProtocol::APPFOCUSED" );
+#endif // DEBUG_KODI_AUDIO
                     m_extTimeout = 0;
                     return;
 
@@ -526,7 +533,9 @@ void CActiveAESink::StateMachine( int signal, Protocol *port, Message *msg )
                         m_state = S_TOP_CONFIGURED_PLAY;
                         m_extTimeout = delay / 2;
                         m_extSilenceTimer.Set( m_extSilenceTimeout );
+#ifdef DEBUG_KODI_AUDIO
                         CLog::Log( LOGERROR, "BRJ S_TOP_CONFIGURED SAMPLE ext timeout %d silence timeout %d", m_extTimeout, m_extSilenceTimeout );
+#endif // DEBUG_KODI_AUDIO
                    }
                     return;
                 default:
@@ -743,12 +752,14 @@ void CActiveAESink::Process()
         // time out
         else
         {
+#ifdef DEBUG_KODI_AUDIO
             if( g_StreamActive 
                 && ( m_state != S_TOP_CONFIGURED_PLAY )
                 && ( m_state != S_TOP_CONFIGURED_SILENCE ) )
             {
                 CLog::Log( LOGERROR, "BRJ CActiveAESink:: %s timeout %d waiting for out event state %s", __FUNCTION__, m_extTimeout, describeAESinkState( m_state ) );
             }
+#endif // DEBUG_KODI_AUDIO
 
             msg = m_controlPort.GetMessage();
             msg->signal = CSinkControlProtocol::TIMEOUT;

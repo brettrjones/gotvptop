@@ -37,7 +37,9 @@ NetworkStateAvail::NetworkStateAvail( NetworkStateMachine& stateMachine )
 //============================================================================
 void NetworkStateAvail::enterNetworkState( void )
 {
-	LogMsg( LOG_STATUS, "eNetworkStateTypeAvail start\n" );
+#ifdef DEBUG_PTOP_NETWORK_STATE
+    LogMsg( LOG_STATUS, "eNetworkStateTypeAvail start\n" );
+#endif // DEBUG_PTOP_NETWORK_STATE
 	m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeAvail );
 }
 
@@ -45,8 +47,10 @@ void NetworkStateAvail::enterNetworkState( void )
 void NetworkStateAvail::runNetworkState( void )
 {
 	VxTimer availTimer;
-	LogMsg( LOG_INFO, "111 NetworkStateAvail::runNetworkState start %3.3f\n", availTimer.elapsedSec() );
-	std::string netServiceUrl;
+#ifdef DEBUG_PTOP_NETWORK_STATE
+    LogMsg( LOG_INFO, "111 NetworkStateAvail::runNetworkState start %3.3f\n", availTimer.elapsedSec() );
+#endif // DEBUG_PTOP_NETWORK_STATE
+    std::string netServiceUrl;
 	m_Engine.getEngineSettings().getNetServiceWebsiteUrl( netServiceUrl );
 
 	// wait for log on if need be
@@ -73,9 +77,10 @@ void NetworkStateAvail::runNetworkState( void )
  //   {
  //       return;
  //   }
-
+#ifdef DEBUG_PTOP_NETWORK_STATE
 	//LogMsg( LOG_INFO, "111 NetworkStateAvail::runNetworkState resolving urls time %3.3f\n", availTimer.elapsedSec() );
-	bool websitesResolved = m_NetworkStateMachine.resolveWebsiteUrls();
+#endif // DEBUG_PTOP_NETWORK_STATE
+    bool websitesResolved = m_NetworkStateMachine.resolveWebsiteUrls();
 	if( false == websitesResolved )
 	{
 		m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeFailedResolveAnchor, "" );
@@ -95,15 +100,21 @@ void NetworkStateAvail::runNetworkState( void )
 		externAddr.setIp( externIp.c_str() );
 		if( false == externAddr.isValid() )
 		{
-			LogMsg( LOG_STATUS, "eNetworkStateTypeLost Assume No Firewall Setting Must Specify An Valid External IP Address\n" );
+#ifdef DEBUG_PTOP_NETWORK_STATE
+            LogMsg( LOG_STATUS, "eNetworkStateTypeLost Assume No Firewall Setting Must Specify An Valid External IP Address\n" );
 			AppErr( eAppErrBadParameter, "Assume No Firewall Setting Must Specify An Valid External IP Address\n" );
+#endif // DEBUG_PTOP_NETWORK_STATE
+
 			m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeLost, "Assume No Firewall Setting Must Specify An Valid External IP Address\n" );
 		}
 		else
 		{
 			m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( externIp, false );
 			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeAnnounce );
-			LogMsg( LOG_STATUS, "eNetworkStateTypeAvail Assume No Firewall User Extern IP %s\n", externIp.c_str() );
+#ifdef DEBUG_PTOP_NETWORK_STATE
+            LogMsg( LOG_STATUS, "eNetworkStateTypeAvail Assume No Firewall User Extern IP %s\n", externIp.c_str() );
+#endif // DEBUG_PTOP_NETWORK_STATE
+
 			m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeAvail, externIp.c_str() );
 			return;
 		}
@@ -118,25 +129,25 @@ void NetworkStateAvail::runNetworkState( void )
 		waitForListenCnt++;
 		if( waitForListenCnt > 5 )
 		{
-            #ifdef DEBUG_NETWORK_STATE
+            #ifdef DEBUG_PTOP_NETWORK_STATE
                 LogMsg( LOG_ERROR, "NetworkStateAvail::runNetworkState timed out waiting for isReadyToAcceptConnections\n" );
                 char timeoutMsg[128];
                 sprintf( timeoutMsg, "ERROR Timeout waiting for listen port %d", m_PktAnn.getOnlinePort() );
                 m_Engine.getToGui().toGuiStatusMessage( timeoutMsg );
-            #endif // DEBUG_NETWORK_STATE
+            #endif // DEBUG_PTOP_NETWORK_STATE
 			break;
 		}
 	}
 
-    #ifdef DEBUG_NETWORK_STATE
+    #ifdef DEBUG_PTOP_NETWORK_STATE
 	    LogMsg( LOG_INFO, "Notify GUI Starting Direct connect Test %3.3f\n", availTimer.elapsedSec() );            
         m_Engine.getToGui().toGuiStatusMessage( "#Network Testing if port is open" );
-    #endif // DEBUG_NETWORK_STATE
+    #endif // DEBUG_PTOP_NETWORK_STATE
 
 	VxSleep( 3500 ); // give listen port time to open first
-    #ifdef DEBUG_NETWORK_STATE
+    #ifdef DEBUG_PTOP_NETWORK_STATE
 	    LogMsg( LOG_INFO, "Network State Avail Starting Direct connect Test %3.3f\n", availTimer.elapsedSec() );
-    #endif // DEBUG_NETWORK_STATE
+    #endif // DEBUG_PTOP_NETWORK_STATE
 
 	DirectConnectTestResults& directConnectTestResults = m_DirectConnectTester.getDirectConnectTestResults();
 	m_DirectConnectTester.testCanDirectConnect();
@@ -155,7 +166,7 @@ void NetworkStateAvail::runNetworkState( void )
 	if( ( eAppErrNone != directConnectTestResults.m_eAppErr )
 		&& ( eAppErrPortIsClosed != directConnectTestResults.m_eAppErr ) )
 	{
-        #ifdef DEBUG_NETWORK_STATE
+        #ifdef DEBUG_PTOP_NETWORK_STATE
 		LogMsg( LOG_STATUS, "eNetworkStateTypeAvail Failed To Connect To Connection Test Server %s  %3.3f\n", netServiceUrl.c_str(), availTimer.elapsedSec() ); 
 
 		if( EngineSettings::eFirewallTestUrlConnectionTest == firewallTestType )
@@ -174,7 +185,7 @@ void NetworkStateAvail::runNetworkState( void )
 		{
 			// TODO handle failed to connect and other errors
 		}
-        #endif // DEBUG_NETWORK_STATE
+        #endif // DEBUG_PTOP_NETWORK_STATE
 	}
 
 	if( m_NetworkStateMachine.checkAndHandleNetworkEvents() )
@@ -184,25 +195,26 @@ void NetworkStateAvail::runNetworkState( void )
 
 	InetAddress externAddr;
 	externAddr.setIp( directConnectTestResults.m_MyIpAddr.c_str() );
-	if( false == externAddr.isValid() )
+    if( false == externAddr.isValid() )
 	{
 		AppErr( eAppErrBadParameter, "Could not determine external IP.\n" );
 	}
 
-
 	if( ( false == directConnectTestResults.getCanDirectConnect() )
 		&& m_Engine.getEngineSettings().getUseUpnpPortForward() )
 	{
-        #ifdef DEBUG_NETWORK_STATE
+        #ifdef DEBUG_PTOP_NETWORK_STATE
             LogMsg( LOG_INFO, "NetworkStateAvail::runNetworkState Starting UPNP %3.3f\n", availTimer.elapsedSec() );
-        #endif // DEBUG_NETWORK_STATE
+        #endif // DEBUG_PTOP_NETWORK_STATE
 		m_NetworkStateMachine.startUpnpOpenPort();
 	}
 	else
 	{
-		LogMsg( LOG_STATUS, "eNetworkStateTypeAvail extern ip %s\n", 
+#ifdef DEBUG_PTOP_NETWORK_STATE
+        LogMsg( LOG_STATUS, "eNetworkStateTypeAvail extern ip %s\n",
 			directConnectTestResults.m_MyIpAddr.c_str() );
-		m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeAvail, directConnectTestResults.m_MyIpAddr.c_str() );
+#endif // DEBUG_PTOP_NETWORK_STATE
+        m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeAvail, directConnectTestResults.m_MyIpAddr.c_str() );
 	}
 
 	if( m_NetworkStateMachine.checkAndHandleNetworkEvents() )
@@ -214,19 +226,25 @@ void NetworkStateAvail::runNetworkState( void )
 	{
 		std::string availMsg;
 		StdStringFormat( availMsg, "IP %s\n", directConnectTestResults.m_MyIpAddr.c_str() );
-		LogMsg( LOG_STATUS, "eNetworkStateTypeAvail %s %3.3f\n", availMsg.c_str(), availTimer.elapsedSec() ); 
-		m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeAvail, availMsg.c_str() );
+#ifdef DEBUG_PTOP_NETWORK_STATE
+        LogMsg( LOG_STATUS, "eNetworkStateTypeAvail %s %3.3f\n", availMsg.c_str(), availTimer.elapsedSec() );
+#endif // DEBUG_PTOP_NETWORK_STATE
+        m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeAvail, availMsg.c_str() );
 		
 		if( EngineSettings::eFirewallTestAssumeFirewalled == firewallTestType )
 		{
-			LogMsg( LOG_STATUS, "NetworkStateAvail::runNetworkState eFirewallTestAssumeFirewalled %3.3f\n", availTimer.elapsedSec() ); 
-			m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, true );
+#ifdef DEBUG_PTOP_NETWORK_STATE
+            LogMsg( LOG_STATUS, "NetworkStateAvail::runNetworkState eFirewallTestAssumeFirewalled %3.3f\n", availTimer.elapsedSec() );
+#endif // DEBUG_PTOP_NETWORK_STATE
+            m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, true );
 			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeRelaySearch );
 		}
 		else
 		{
-			LogMsg( LOG_STATUS, "NetworkStateAvail::runNetworkState announce with direct connect %3.3f\n", availTimer.elapsedSec() ); 
-			m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, false );
+#ifdef DEBUG_PTOP_NETWORK_STATE
+            LogMsg( LOG_STATUS, "NetworkStateAvail::runNetworkState announce with direct connect %3.3f\n", availTimer.elapsedSec() );
+#endif // DEBUG_PTOP_NETWORK_STATE
+            m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, false );
 			m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
 			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeAnnounce );
 		}
@@ -235,31 +253,42 @@ void NetworkStateAvail::runNetworkState( void )
 	{
 		if( EngineSettings::eFirewallTestUrlConnectionTest == firewallTestType )
 		{
+#ifdef DEBUG_PTOP_NETWORK_STATE
 			LogMsg( LOG_STATUS, "NetworkStateAvail::runNetworkState relay search %3.3f\n", availTimer.elapsedSec() ); 
-			m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, true );
+#endif // DEBUG_PTOP_NETWORK_STATE
+            m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, true );
 			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeRelaySearch );
 		}
 		else if( EngineSettings::eFirewallTestAssumeNoFirewall == firewallTestType )
 		{
-			LogMsg( LOG_STATUS, "NetworkStateAvail::runNetworkState assume no firewall %3.3f\n", availTimer.elapsedSec() ); 
-			m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, false );
+#ifdef DEBUG_PTOP_NETWORK_STATE
+            LogMsg( LOG_STATUS, "NetworkStateAvail::runNetworkState assume no firewall %3.3f\n", availTimer.elapsedSec() );
+#endif // DEBUG_PTOP_NETWORK_STATE
+            m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, false );
 			m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
 			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeAnnounce );
 		}
 		else if( EngineSettings::eFirewallTestAssumeFirewalled == firewallTestType )
 		{
-			LogMsg( LOG_STATUS, "NetworkStateAvail::runNetworkState assume firewall %3.3f\n", availTimer.elapsedSec() ); 
-			m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, true );
+#ifdef DEBUG_PTOP_NETWORK_STATE
+            LogMsg( LOG_STATUS, "NetworkStateAvail::runNetworkState assume firewall %3.3f\n", availTimer.elapsedSec() );
+#endif // DEBUG_PTOP_NETWORK_STATE
+            m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, true );
 			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeRelaySearch );
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "ERROR invalid firewall test type %d  %3.3f\n", firewallTestType, availTimer.elapsedSec() );
+#ifdef DEBUG_PTOP_NETWORK_STATE
+            LogMsg( LOG_ERROR, "ERROR invalid firewall test type %d  %3.3f\n", firewallTestType, availTimer.elapsedSec() );
+#endif // DEBUG_PTOP_NETWORK_STATE
+
 			m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, true );
 			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeTestConnection );
 		}
 	}
 
+#ifdef DEBUG_PTOP_NETWORK_STATE
 	//LogMsg( LOG_INFO, "111 NetworkStateAvail::runNetworkState done  %3.3f\n", availTimer.elapsedSec() );
+#endif // DEBUG_PTOP_NETWORK_STATE
 }
 

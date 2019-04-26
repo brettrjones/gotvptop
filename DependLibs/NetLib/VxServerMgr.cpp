@@ -46,9 +46,9 @@ namespace
 		poMgr->listenForConnectionsToAccept( poVxThread );
 
 		// quitting
-//#ifdef DEBUG_SKT_CONNECTIONS
+#ifdef DEBUG_SKT_CONNECTIONS
 		LogMsg( LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread tid %d quiting\n", poMgr->m_iMgrId, poMgr->getListenPort(), poVxThread->getThreadTid() );
-//#endif // DEBUG_VXSERVER_MGR
+#endif // DEBUG_VXSERVER_MGR
 		//! VxThread calls this just before exit
 		poVxThread->threadAboutToExit();
 		return 0;
@@ -142,10 +142,8 @@ RCODE VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 	std::string ipv4String = ip;
 	m_u16ListenPort = u16ListenPort;
 #if defined(DEBUG_SKT_CONNECTIONS)
-	LogMsg( LOG_INFO, "VxServerMgr::startListening ip %s port %d\n", ip, u16ListenPort );
-#endif // DEBUG_VXSERVER_MGR
-
 	LogMsg( LOG_INFO, "333######### NOT IN THREAD VxServerMgr::startListening ip %s port %d app sec %d\n", ip, u16ListenPort, GetApplicationAliveSec() );
+#endif // DEBUG_SKT_CONNECTIONS
 
 #ifdef TARGET_OS_ANDROID
 	// can't get ip's in native android... for now just do ipv4 TODO listen for ipv6 in android
@@ -154,7 +152,9 @@ RCODE VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 	if( sock < 0 )
 	{
 		RCODE rc = VxGetLastError();
+#if defined(DEBUG_SKT_CONNECTIONS)
         LogMsg( LOG_ERROR, "VxServerMgr::startListening create skt error %d\n", rc );
+#endif // DEBUG_SKT_CONNECTIONS
         if( 0 == rc )
         {
             rc = -1;
@@ -196,9 +196,9 @@ RCODE VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 		return false;
 	}
 
-   //#ifdef DEBUG_VXSERVER_MGR
+   #ifdef DEBUG_VXSERVER_MGR
         LogMsg( LOG_INFO, "StartListen socket %d index %d ip %s port %d \n", sock, m_iActiveListenSktCnt, ip, u16ListenPort );
-    //#endif // DEBUG_VXSERVER_MGR
+   #endif // DEBUG_VXSERVER_MGR
 	m_aoListenSkts[ m_iActiveListenSktCnt ] = sock;
 	m_iActiveListenSktCnt++;
 	m_LclIp.setIp( ip );
@@ -232,10 +232,12 @@ RCODE VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 				//LogMsg( LOG_INFO, "VxServerMgr::startListening Skip ip %s\n", thisIp.c_str() );
 				continue;
 			}
+#ifdef DEBUG_VXSERVER_MGR
 			else
 			{
 				LogMsg( LOG_INFO, "VxServerMgr::startListening found local ip4 %s\n", thisIp.c_str() );
 			}
+#endif // DEBUG_VXSERVER_MGR
 		}
 		else
 		{
@@ -606,9 +608,9 @@ RCODE VxServerMgr::acceptConnection( VxThread * poVxThread, SOCKET oListenSkt )
 		}
     }
 
-#ifdef DEBUG_SKT
+#ifdef DEBUG_SKT_CONNECTIONS
     LogMsg( LOG_INFO, "VxServerMgr::acceptConnection: listen skt %d accepted skt %d\n", oListenSkt, oAcceptSkt );
-#endif // DEBUG_SKT
+#endif // DEBUG_SKT_CONNECTIONS
 	if( poVxThread->isAborted() || VxIsAppShuttingDown() ) 
 	{
 		return -1;
@@ -637,9 +639,9 @@ RCODE VxServerMgr::acceptConnection( VxThread * poVxThread, SOCKET oListenSkt )
 	sktBase->setTransmitCallback( m_pfnOurTransmit, this );
 	m_SktMgrMutex.unlock(__FILE__, __LINE__);
 
-#ifdef DEBUG_SKT
+#ifdef DEBUG_SKT_CONNECTIONS
 	LogMsg( LOG_INFO, "VxServerMgr: doing accept\n" );
-#endif // DEBUG_SKT
+#endif // DEBUG_SKT_CONNECTIONS
 	RCODE rcAccept = sktBase->doAccept( this, *(( struct sockaddr * )&oAcceptAddr) );
 	if( rcAccept || poVxThread->isAborted() || INVALID_SOCKET == oListenSkt )
 	{
@@ -660,8 +662,11 @@ RCODE VxServerMgr::acceptConnection( VxThread * poVxThread, SOCKET oListenSkt )
 //============================================================================
 void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 {
+#ifdef DEBUG_SKT_CONNECTIONS
 	//LogMsg( LOG_INFO, "111 IN THREAD VxServerMgr::listenForConnectionsToAccept started\n" ); 
 	//LogMsg( LOG_INFO, "111 IN THREAD VxServerMgr::listen port %d ip %s skt %d\n", m_LclIp.getPort(), m_LclIp.toStdString().c_str(), m_aoListenSkts[0] ); 
+#endif // DEBUG_SKT_CONNECTIONS
+
 	m_IsReadyToAcceptConnections = true;
 #ifdef TARGET_OS_ANDROID
 	// android set listen skt back to blocking doesn't work so just set to non blocking always ( part of accept hang fix ) 
@@ -753,9 +758,9 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 			{
                 if( FD_ISSET( m_aoListenSkts[iSelectedIdx], &oReadSocketFileDescriptors) )
 				{
-#ifdef DEBUG_SKT
+#ifdef DEBUG_SKT_CONNECTIONS
 					LogMsg( LOG_INFO, "#### VxServerMgr::acceptConnection: accepting at index %d\n", iSelectedIdx );
-#endif // DEBUG_SKT
+#endif // DEBUG_SKT_CONNECTIONS
 					rc = acceptConnection( poVxThread, m_aoListenSkts[iSelectedIdx] );
 					if( rc )
 					{
@@ -763,9 +768,9 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 					}
 					else
 					{
-#ifdef DEBUG_SKT
+#ifdef DEBUG_SKT_CONNECTIONS
 						LogMsg( LOG_INFO, "#### VxServerMgr::acceptConnection: success doing accept\n" );
-#endif // DEBUG_SKT
+#endif // DEBUG_SKT_CONNECTIONS
 					}
 
                     FD_CLR( m_aoListenSkts[iSelectedIdx], &oReadSocketFileDescriptors);

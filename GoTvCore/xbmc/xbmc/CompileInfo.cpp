@@ -54,6 +54,7 @@
 #define GITBRANCH ""
 #endif
 
+// NOTE: in order to be able to use Kodi updates the build has to be the Kodi info
 
 int CCompileInfo::GetMajor()
 {
@@ -62,12 +63,13 @@ int CCompileInfo::GetMajor()
 
 int CCompileInfo::GetMinor()
 {
-  return 0;
+  return 1;
 }
 
 const char* CCompileInfo::GetPackage()
 {
-  return "net.gotvptop";
+  //return "net.gotvptop";
+    return "org.xbmc.kodi";
 }
 
 const char* CCompileInfo::GetClass()
@@ -84,38 +86,57 @@ const char* CCompileInfo::GetClass()
 
 const char* CCompileInfo::GetAppName()
 {
-#if BUILD_GOTV_APP
-    return "GoTvPtoP";
-#elif BUILD_KODIQT_APP
-    return "KodiQt";
-#elif BUILD_KODIP2P_APP
-    return "KodiP2P";
-#else
-    echo you must define your application information in GoTvAppConfig.h
-#endif
+//#if BUILD_GOTV_APP
+//    return "GoTvPtoP";
+//#elif BUILD_KODIQT_APP
+//    return "KodiQt";
+//#elif BUILD_KODIP2P_APP
+//    return "KodiP2P";
+//#else
+//    echo you must define your application information in GoTvAppConfig.h
+//#endif
+    return "Kodi";
 }
 
 const char* CCompileInfo::GetAppNameLowerCase()
 {
-#if BUILD_GOTV_APP
-    return "gotvptop";
-#elif BUILD_KODIQT_APP
-    return "kodiqt";
-#elif BUILD_KODIP2P_APP
-    return "kodiptop";
-#else
-    echo you must define your application information in GoTvAppConfig.h
-#endif
+//#if BUILD_GOTV_APP
+//    return "gotvptop";
+//#elif BUILD_KODIQT_APP
+//    return "kodiqt";
+//#elif BUILD_KODIP2P_APP
+//    return "kodiptop";
+//#else
+//    echo you must define your application information in GoTvAppConfig.h
+//#endif
+    return "kodi";
 }
 
 const char* CCompileInfo::GetSuffix()
 {
-  return "ALPHA1";
+  return "";
 }
 
 const char* CCompileInfo::GetSCMID()
 {
-  return "20180218-0b52591";
+  return "20190310-nogitfound";
+}
+
+const char* CCompileInfo::GetCopyrightYears()
+{
+    return "2005-2018";
+}
+
+std::string  CCompileInfo::GetBuildDate()
+{
+    const std::string bdate = "20190318";
+    if( !bdate.empty() )
+    {
+        std::string datestamp = bdate.substr( 0, 4 ) + "-" + bdate.substr( 4, 2 ) + "-" + bdate.substr( 6, 2 );
+        return datestamp;
+    }
+
+    return "1970-01-01";
 }
 
 const char* CCompileInfo::GetHomeEnvName()
@@ -187,20 +208,4 @@ const char* CCompileInfo::GetUserProfileEnvName()
     echo you must define your application information in GoTvAppConfig.h
 #endif
 
-}
-
-const char* CCompileInfo::GetCopyrightYears()
-{
-    return "2005-2019";
-}
-
-std::string  CCompileInfo::GetBuildDate()
-{
-	const std::string bdate = "20190318";
-	if( !bdate.empty() )
-	{
-		std::string datestamp = bdate.substr( 0, 4 ) + "-" + bdate.substr( 4, 2 ) + "-" + bdate.substr( 6, 2 );
-		return datestamp;
-	}
-	return "1970-01-01";
 }
