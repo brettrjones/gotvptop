@@ -441,6 +441,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvPtoP/AppSource/exportdialog.cpp \
     $$PWD/GoTvInterface/GoTvRenderFrame.cpp \
     $$PWD/GoTvInterface/IGoTv.cpp \
+    $$PWD/GoTvInterface/IGoTvDefs.cpp \
     $$PWD/GoTvInterface/IGoTvFromGui.cpp \
     $$PWD/GoTvInterface/IGoTvRender.cpp \
     $$PWD/GoTvInterface/IGoTvToGui.cpp \
