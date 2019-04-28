@@ -40,100 +40,100 @@ using KODI::UTILITY::TypedDigest;
 
 using KODI::MESSAGING::HELPERS::DialogResponse;
 
-CRepository::ResolveResult CRepository::ResolvePathAndHash(const AddonPtr& addon) const
+CRepository::ResolveResult CRepository::ResolvePathAndHash( const AddonPtr& addon ) const
 {
-  std::string const& path = addon->Path();
+    std::string const& path = addon->Path();
 
-  auto dirIt = std::find_if(m_dirs.begin(), m_dirs.end(), [&path](DirInfo const& dir)
-  {
-    return URIUtils::PathHasParent(path, dir.datadir, true);
-  });
-  if (dirIt == m_dirs.end())
-  {
-    CLog::Log(LOGERROR, "Requested path {} not found in known repository directories", path);
-    return {};
-  }
-
-  if (dirIt->hashType == CDigest::Type::INVALID)
-  {
-    // We have a path, but need no hash
-    return {path, {}};
-  }
-
-  // Do not follow mirror redirect, we want the headers of the redirect response
-  GoTvUrl url{path};
-  url.SetProtocolOption("redirect-limit", "0");
-  CCurlFile file;
-  if (!file.Open(url))
-  {
-    CLog::Log(LOGERROR, "Could not fetch addon location and hash from {}", path);
-    return {};
-  }
-
-  std::string hashTypeStr = CDigest::TypeToString(dirIt->hashType);
-
-  // Return the location from the header so we don't have to look it up again
-  // (saves one request per addon install)
-  std::string location = file.GetRedirectURL();
-  // content-* headers are base64, convert to base16
-  TypedDigest hash{dirIt->hashType, StringUtils::ToHexadecimal(Base64::Decode(file.GetHttpHeader().GetValue(std::string("content-") + hashTypeStr)))};
-
-  if (hash.Empty())
-  {
-    // Expected hash, but none found -> fall back to old method
-    if (!FetchChecksum(path + "." + hashTypeStr, hash.value) || hash.Empty())
+    auto dirIt = std::find_if( m_dirs.begin(), m_dirs.end(), [&path]( DirInfo const& dir )
     {
-      CLog::Log(LOGERROR, "Failed to find hash for {} from HTTP header and in separate file", path);
-      return {};
+        return URIUtils::PathHasParent( path, dir.datadir, true );
+    } );
+    if( dirIt == m_dirs.end() )
+    {
+        CLog::Log( LOGERROR, "Requested path {} not found in known repository directories", path );
+        return {};
     }
-  }
-  if (location.empty())
-  {
-    // Fall back to original URL if we do not get a redirect
-    location = path;
-  }
 
-  CLog::Log(LOGDEBUG, "Resolved addon path {} to {} hash {}", path, location, hash.value);
+    if( dirIt->hashType == CDigest::Type::INVALID )
+    {
+        // We have a path, but need no hash
+        return { path, {} };
+    }
 
-  return {location, hash};
+    // Do not follow mirror redirect, we want the headers of the redirect response
+    GoTvUrl url{ path };
+    url.SetProtocolOption( "redirect-limit", "0" );
+    CCurlFile file;
+    if( !file.Open( url ) )
+    {
+        CLog::Log( LOGERROR, "Could not fetch addon location and hash from {}", path );
+        return {};
+    }
+
+    std::string hashTypeStr = CDigest::TypeToString( dirIt->hashType );
+
+    // Return the location from the header so we don't have to look it up again
+    // (saves one request per addon install)
+    std::string location = file.GetRedirectURL();
+    // content-* headers are base64, convert to base16
+    TypedDigest hash{ dirIt->hashType, StringUtils::ToHexadecimal( Base64::Decode( file.GetHttpHeader().GetValue( std::string( "content-" ) + hashTypeStr ) ) ) };
+
+    if( hash.Empty() )
+    {
+        // Expected hash, but none found -> fall back to old method
+        if( !FetchChecksum( path + "." + hashTypeStr, hash.value ) || hash.Empty() )
+        {
+            CLog::Log( LOGERROR, "Failed to find hash for {} from HTTP header and in separate file", path );
+            return {};
+        }
+    }
+    if( location.empty() )
+    {
+        // Fall back to original URL if we do not get a redirect
+        location = path;
+    }
+
+    CLog::Log( LOGDEBUG, "Resolved addon path {} to {} hash {}", path, location, hash.value );
+
+    return { location, hash };
 }
 
-CRepository::DirInfo CRepository::ParseDirConfiguration(cp_cfg_element_t* configuration)
+CRepository::DirInfo CRepository::ParseDirConfiguration( cp_cfg_element_t* configuration )
 {
-  auto const& mgr = CServiceBroker::GetAddonMgr();
-  DirInfo dir;
-  dir.checksum = mgr.GetExtValue(configuration, "checksum");
-  std::string checksumStr = mgr.GetExtValue(configuration, "checksum@verify");
-  if (!checksumStr.empty())
-  {
-    dir.checksumType = CDigest::TypeFromString(checksumStr);
-  }
-  dir.info = mgr.GetExtValue(configuration, "info");
-  dir.datadir = mgr.GetExtValue(configuration, "datadir");
-  dir.artdir = mgr.GetExtValue(configuration, "artdir");
-  if (dir.artdir.empty())
-  {
-    dir.artdir = dir.datadir;
-  }
-
-  std::string hashStr = mgr.GetExtValue(configuration, "hashes");
-  StringUtils::ToLower(hashStr);
-  if (hashStr == "true")
-  {
-    // Deprecated alias
-    hashStr = "md5";
-  }
-  if (!hashStr.empty() && hashStr != "false")
-  {
-    dir.hashType = CDigest::TypeFromString(hashStr);
-    if (dir.hashType == CDigest::Type::MD5)
+    auto const& mgr = CServiceBroker::GetAddonMgr();
+    DirInfo dir;
+    dir.checksum = mgr.GetExtValue( configuration, "checksum" );
+    std::string checksumStr = mgr.GetExtValue( configuration, "checksum@verify" );
+    if( !checksumStr.empty() )
     {
-      CLog::Log(LOGWARNING, "Repository has MD5 hashes enabled - this hash function is broken and will only guard against unintentional data corruption");
+        dir.checksumType = CDigest::TypeFromString( checksumStr );
     }
-  }
+    dir.info = mgr.GetExtValue( configuration, "info" );
+    dir.datadir = mgr.GetExtValue( configuration, "datadir" );
+    dir.artdir = mgr.GetExtValue( configuration, "artdir" );
+    if( dir.artdir.empty() )
+    {
+        dir.artdir = dir.datadir;
+    }
 
-  dir.version = AddonVersion{mgr.GetExtValue(configuration, "@minversion")};
-  return dir;
+    std::string hashStr = mgr.GetExtValue( configuration, "hashes" );
+    StringUtils::ToLower( hashStr );
+    if( hashStr == "true" )
+    {
+        // Deprecated alias
+        hashStr = "md5";
+    }
+    if( !hashStr.empty() && hashStr != "false" )
+    {
+        dir.hashType = CDigest::TypeFromString( hashStr );
+        if( dir.hashType == CDigest::Type::MD5 )
+        {
+            CLog::Log( LOGWARNING, "Repository has MD5 hashes enabled - this hash function is broken and will only guard against unintentional data corruption" );
+        }
+    }
+
+    dir.version = AddonVersion{ mgr.GetExtValue( configuration, "@minversion" ) };
+    return dir;
 }
 
 std::unique_ptr<CRepository> CRepository::FromExtension( CAddonInfo addonInfo, const cp_extension_t* ext )
@@ -145,11 +145,11 @@ std::unique_ptr<CRepository> CRepository::FromExtension( CAddonInfo addonInfo, c
         version = addonver->Version();
     for( size_t i = 0; i < ext->configuration->num_children; ++i )
     {
-    cp_cfg_element_t* element = &ext->configuration->children[i];
-    if(element->name && strcmp(element->name, "dir") == 0)
+        cp_cfg_element_t* element = &ext->configuration->children[ i ];
+        if( element->name && strcmp( element->name, "dir" ) == 0 )
         {
-      DirInfo dir = ParseDirConfiguration(element);
-      if (dir.version <= version)
+            DirInfo dir = ParseDirConfiguration( element );
+            if( dir.version <= version )
             {
                 dirs.push_back( std::move( dir ) );
             }
@@ -157,7 +157,7 @@ std::unique_ptr<CRepository> CRepository::FromExtension( CAddonInfo addonInfo, c
     }
     if( !CServiceBroker::GetAddonMgr().GetExtValue( ext->configuration, "info" ).empty() )
     {
-    dirs.push_back(ParseDirConfiguration(ext->configuration));
+        dirs.push_back( ParseDirConfiguration( ext->configuration ) );
     }
     return std::unique_ptr<CRepository>( new CRepository( std::move( addonInfo ), std::move( dirs ) ) );
 }
@@ -165,18 +165,18 @@ std::unique_ptr<CRepository> CRepository::FromExtension( CAddonInfo addonInfo, c
 CRepository::CRepository( CAddonInfo addonInfo, DirList dirs )
     : CAddon( std::move( addonInfo ) ), m_dirs( std::move( dirs ) )
 {
-  for (auto const& dir : m_dirs)
-{
-    GoTvUrl datadir(dir.datadir);
-    if (datadir.IsProtocol("http"))
+    for( auto const& dir : m_dirs )
     {
-      CLog::Log(LOGWARNING, "Repository add-on {} uses plain HTTP for add-on downloads in path {} - this is insecure and will make your Kodi installation vulnerable to attacks if enabled!", ID(), datadir.GetRedacted());
-        }
-    else if (datadir.IsProtocol("https") && datadir.HasProtocolOption("verifypeer") && datadir.GetProtocolOption("verifypeer") == "false")
+        GoTvUrl datadir( dir.datadir );
+        if( datadir.IsProtocol( "http" ) )
         {
-      CLog::Log(LOGWARNING, "Repository add-on {} disabled peer verification for add-on downloads in path {} - this is insecure and will make your Kodi installation vulnerable to attacks if enabled!", ID(), datadir.GetRedacted());
-            }
+            CLog::Log( LOGWARNING, "Repository add-on {} uses plain HTTP for add-on downloads in path {} - this is insecure and will make your Kodi installation vulnerable to attacks if enabled!", ID(), datadir.GetRedacted() );
         }
+        else if( datadir.IsProtocol( "https" ) && datadir.HasProtocolOption( "verifypeer" ) && datadir.GetProtocolOption( "verifypeer" ) == "false" )
+        {
+            CLog::Log( LOGWARNING, "Repository add-on {} disabled peer verification for add-on downloads in path {} - this is insecure and will make your Kodi installation vulnerable to attacks if enabled!", ID(), datadir.GetRedacted() );
+        }
+    }
 }
 
 bool CRepository::FetchChecksum( const std::string& url, std::string& checksum ) noexcept
@@ -195,15 +195,15 @@ bool CRepository::FetchChecksum( const std::string& url, std::string& checksum )
     if( read <= -1 )
         return false;
     checksum = ss.str();
-  std::size_t pos = checksum.find_first_of(" \n");
-  if (pos != std::string::npos)
-  {
-    checksum = checksum.substr(0, pos);
-  }
+    std::size_t pos = checksum.find_first_of( " \n" );
+    if( pos != std::string::npos )
+    {
+        checksum = checksum.substr( 0, pos );
+    }
     return true;
 }
 
-bool CRepository::FetchIndex(const DirInfo& repo, std::string const& digest, VECADDONS& addons) noexcept
+bool CRepository::FetchIndex( const DirInfo& repo, std::string const& digest, VECADDONS& addons ) noexcept
 {
     XFILE::CCurlFile http;
     http.SetAcceptEncoding( "gzip" );
@@ -213,16 +213,22 @@ bool CRepository::FetchIndex(const DirInfo& repo, std::string const& digest, VEC
     {
         CLog::Log( LOGERROR, "CRepository: failed to read %s", repo.info.c_str() );
         return false;
-  }
-
-  if (repo.checksumType != CDigest::Type::INVALID)
-  {
-    std::string actualDigest = CDigest::Calculate(repo.checksumType, response);
-    if (!StringUtils::EqualsNoCase(digest, actualDigest))
-    {
-      CLog::Log(LOGERROR, "CRepository: {} index has wrong digest {}, expected: {}", repo.info, actualDigest, digest);
-      return false;
     }
+
+    if( repo.checksumType != CDigest::Type::INVALID )
+    {
+        if( response.empty() )
+        {
+            CLog::Log( LOGERROR, "CRepository: {} has empty response", repo.info );
+            return false;
+        }
+
+        std::string actualDigest = CDigest::Calculate( repo.checksumType, response );
+        if( !StringUtils::EqualsNoCase( digest, actualDigest ) )
+        {
+            CLog::Log( LOGERROR, "CRepository: {} index has wrong digest {}, expected: {}", repo.info, actualDigest, digest );
+            return false;
+        }
     }
 
     if( URIUtils::HasExtension( repo.info, ".gz" )
@@ -242,10 +248,10 @@ bool CRepository::FetchIndex(const DirInfo& repo, std::string const& digest, VEC
 }
 
 CRepository::FetchStatus CRepository::FetchIfChanged( const std::string& oldChecksum,
-                                                      std::string& checksum, VECADDONS& addons ) const
+    std::string& checksum, VECADDONS& addons ) const
 {
     checksum = "";
-  std::vector<std::tuple<DirInfo const&, std::string>> dirChecksums;
+    std::vector<std::tuple<DirInfo const&, std::string>> dirChecksums;
     for( const auto& dir : m_dirs )
     {
         if( !dir.checksum.empty() )
@@ -256,7 +262,7 @@ CRepository::FetchStatus CRepository::FetchIfChanged( const std::string& oldChec
                 CLog::Log( LOGERROR, "CRepository: failed read '%s'", dir.checksum.c_str() );
                 return STATUS_ERROR;
             }
-      dirChecksums.emplace_back(dir, part);
+            dirChecksums.emplace_back( dir, part );
             checksum += part;
         }
     }
@@ -264,10 +270,10 @@ CRepository::FetchStatus CRepository::FetchIfChanged( const std::string& oldChec
     if( oldChecksum == checksum && !oldChecksum.empty() )
         return STATUS_NOT_MODIFIED;
 
-  for (const auto& dirTuple : dirChecksums)
+    for( const auto& dirTuple : dirChecksums )
     {
         VECADDONS tmp;
-    if (!FetchIndex(std::get<0>(dirTuple), std::get<1>(dirTuple), tmp))
+        if( !FetchIndex( std::get<0>( dirTuple ), std::get<1>( dirTuple ), tmp ) )
             return STATUS_ERROR;
         addons.insert( addons.end(), tmp.begin(), tmp.end() );
     }
@@ -284,10 +290,10 @@ bool CRepositoryUpdateJob::DoWork()
 
     std::string oldChecksum;
     if( database.GetRepoChecksum( m_repo->ID(), oldChecksum ) == -1 )
-    oldChecksum = "";
+        oldChecksum = "";
 
-  std::pair<CDateTime, ADDON::AddonVersion> lastCheck = database.LastChecked(m_repo->ID());
-  if (lastCheck.second != m_repo->Version())
+    std::pair<CDateTime, ADDON::AddonVersion> lastCheck = database.LastChecked( m_repo->ID() );
+    if( lastCheck.second != m_repo->Version() )
         oldChecksum = "";
 
     std::string newChecksum;
@@ -295,7 +301,7 @@ bool CRepositoryUpdateJob::DoWork()
     auto status = m_repo->FetchIfChanged( oldChecksum, newChecksum, addons );
 
     database.SetLastChecked( m_repo->ID(), m_repo->Version(),
-                             CDateTime::GetCurrentDateTime().GetAsDBDateTime() );
+        CDateTime::GetCurrentDateTime().GetAsDBDateTime() );
 
     MarkFinished();
 

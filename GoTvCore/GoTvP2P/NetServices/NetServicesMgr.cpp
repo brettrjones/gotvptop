@@ -537,7 +537,9 @@ bool NetServicesMgr::actionReqConnectToAnchor( VxSktConnectSimple& sktSimple )
 
 	if( false == sktSimple.connectToWebsite( anchorUrl.c_str(), strHost, strFile, u16Port, ANCHOR_CONNECT_TIMEOUT ) )
 	{
+#ifdef DEBUG_PTOP_NETWORK_STATE
 		LogMsg( LOG_ERROR, "### ERROR NetServicesMgr::actionReqConnectToAnchor: FAILED to Connect to %s timeout %d\n", anchorUrl.c_str(), ANCHOR_CONNECT_TIMEOUT );
+#endif // DEBUG_PTOP_NETWORK_STATE
 		return false;
 	}
 
@@ -552,8 +554,9 @@ EAppErr NetServicesMgr::doIsMyPortOpen( std::string& retMyExternalIp, bool testL
 	std::string rmtIP = m_NetworkMgr.getLocalIpAddress();
     if( rmtIP.empty() )
     {
-        //if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
+#ifdef DEBUG_PTOP_NETWORK_STATE
             LogMsg( LOG_ERROR, "NetServicesMgr::doIsMyPortOpen no local ip\n" );
+#endif // DEBUG_PTOP_NETWORK_STATE
         return eAppErrBadParameter;
     }
 
@@ -656,9 +659,9 @@ static int lastPort = 0;
 		
 #ifdef DEBUG_PTOP_NETWORK_STATE
             LogMsg( LOG_INFO, "NetServicesMgr::doIsMyPortOpen FAILED Connect to net services\n" );
-#endif // DEBUG_PTOP_NETWORK_STATE
 		m_Engine.sendToGuiStatusMessage( "FAILED Connect to Connect Test Server\n" );
-	}
+#endif // DEBUG_PTOP_NETWORK_STATE
+    }
 
 	if( isCellDataNetwork 
 		|| ( eAppErrNone == portOpenTestError )
@@ -723,8 +726,9 @@ bool NetServicesMgr::testLoobackPing( std::string localIP, uint16_t tcpListenPor
 
 	if( INVALID_SOCKET == toClientConn.connectTo( ipAddress.c_str(), tcpListenPort, 2000 ) )
 	{
-        if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
+#ifdef DEBUG_PTOP_NETWORK_STATE
 		    LogMsg( LOG_ERROR, "##P NetServicesMgr::testLoobackPing: could not connect to %s:%d %3.3f sec\n", ipAddress.c_str(), tcpListenPort, pingTimer.elapsedSec() );
+#endif // DEBUG_PTOP_NETWORK_STATE
 		return false;
 	}
 

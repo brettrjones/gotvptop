@@ -198,7 +198,9 @@ CP_C_API cp_plugin_info_t * cp_get_plugin_info( cp_context_t *context, const cha
         // Lookup plug-in information
         if( id != NULL ) {
             if( ( node = hash_lookup( context->env->plugins, id ) ) == NULL ) {
-                LogMsg( LOG_WARNING, "Could not return information about unknown plug-in %s.", id );
+
+                // this is done by official Kodi also so do not log
+                //LogMsg( LOG_WARNING, "Could not return information about unknown plug-in %s.", id );
                 status = CP_ERR_UNKNOWN;
                 break;
             }

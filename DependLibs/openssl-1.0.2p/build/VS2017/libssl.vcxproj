@@ -873,6 +873,7 @@
     <ClInclude Include="..\..\..\..\GoTvAppConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvCpuArchDefines.h" />
+    <ClInclude Include="..\..\..\..\GoTvDebugConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvDependLibrariesConfig.h" />
     <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h" />
     <ClInclude Include="..\..\crypto\aes\aes.h" />

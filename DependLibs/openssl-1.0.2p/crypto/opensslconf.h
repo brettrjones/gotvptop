@@ -1,11 +1,12 @@
 /* opensslconf.h */
 /* WARNING: Generated automatically from opensslconf.h.in by Configure. */
 
+#include "GoTvCpuArchDefines.h"
+
 #ifdef  __cplusplus
 extern "C" {
 #endif
 
-#define OPENSSL_NO_JPAKE 
 #define OPENSSL_NO_DYNAMIC_ENGINE 
 #define DEBUG_VTPOOLUPLOAD NO_WINDOWS_BRAINDEATH
 #define OPENSSL_NO_EC_NISTP_64_GCC_128 
@@ -38,7 +39,7 @@ extern "C" {
 
 #if defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_LINUX)
 # define m64 
-#endif // efined(TARGET_OS_WINDOWS) || defined(TARGET_OS_LINUX)
+#endif // defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_LINUX)
 
 /* OpenSSL was configured with the following options: */
 #ifndef OPENSSL_DOING_MAKEDEPEND
@@ -216,9 +217,21 @@ extern "C" {
 /* Should we define BN_DIV2W here? */
 
 /* Only one for the following should be defined */
-#define SIXTY_FOUR_BIT_LONG
+#undef SIXTY_FOUR_BIT_LONG
+#undef THIRTY_TWO_BIT_LONG
+
 #undef SIXTY_FOUR_BIT
 #undef THIRTY_TWO_BIT
+
+#if (SIZEOF_LONG == 8)
+# define SIXTY_FOUR_BIT_LONG
+# define SIXTY_FOUR_BIT
+#else
+# define THIRTY_TWO_BIT_LONG
+# define THIRTY_TWO_BIT // microsoft uses 32 bit long even on 64 bit arch
+#endif // (SIZEOF_LONG == 8)
+
+
 #endif
 
 #if defined(HEADER_RC4_LOCL_H) && !defined(CONFIG_HEADER_RC4_LOCL_H)

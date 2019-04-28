@@ -38,6 +38,7 @@
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include <GoTvInterface/IGoTv.h>
+#include "GoTvDebugConfig.h"
 
 using namespace XFILE;
 using namespace XCURL;
@@ -60,6 +61,10 @@ curl_proxytype proxyType2CUrlProxyType[] = {
 // curl calls this routine to debug
 extern "C" int debug_callback(CURL_HANDLE *handle, curl_infotype info, char *output, size_t size, void *data)
 {
+#ifndef DEBUG_KODI_CURL
+    return 0;
+#endif // DEBUG_KODI_CURL
+
   if (info == CURLINFO_DATA_IN || info == CURLINFO_DATA_OUT)
     return 0;
 

@@ -23,6 +23,8 @@
 #include <NetLib/VxSktUtil.h>
 #include <NetLib/VxParseUrlComponents.h>
 
+#include "GoTvDebugConfig.h"
+
 #include <time.h>
 #include <string.h>
 #include <atomic>
@@ -55,8 +57,9 @@ namespace
 	{
         static int threadCnt = 0;
         threadCnt++;
+#ifdef DEBUG_THREADS
         LogMsg( LOG_INFO, "UpnpPortForwardThreadFunc thread starting %d\n", threadCnt );
-
+#endif // DEBUG_THREADS
 
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
@@ -65,10 +68,14 @@ namespace
 
 		poMgr->runPortForward();
 
-		LogMsg( LOG_DEBUG, "UpnpPortForward thread about to exit\n" );
+#ifdef DEBUG_THREADS
+        LogMsg( LOG_DEBUG, "UpnpPortForward thread about to exit\n" );
+#endif // DEBUG_THREADS
 		poThread->threadAboutToExit();
         threadCnt--;
+#ifdef DEBUG_THREADS
         LogMsg( LOG_INFO, "UpnpPortForwardThreadFunc thread exiting %d\n", threadCnt );
+#endif // DEBUG_THREADS
 		return 0;
 	}
 

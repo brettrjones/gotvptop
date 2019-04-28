@@ -197,7 +197,9 @@ void NetworkStateAvail::runNetworkState( void )
 	externAddr.setIp( directConnectTestResults.m_MyIpAddr.c_str() );
     if( false == externAddr.isValid() )
 	{
-		AppErr( eAppErrBadParameter, "Could not determine external IP.\n" );
+#ifdef DEBUG_PTOP_NETWORK_STATE
+        AppErr( eAppErrBadParameter, "Could not determine external IP.\n" );
+#endif // DEBUG_PTOP_NETWORK_STATE
 	}
 
 	if( ( false == directConnectTestResults.getCanDirectConnect() )

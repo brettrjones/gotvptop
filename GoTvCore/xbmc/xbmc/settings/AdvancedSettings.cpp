@@ -1440,6 +1440,9 @@ void CAdvancedSettings::SetDebugMode(bool debug)
 
 bool CAdvancedSettings::CanLogComponent(int component) const
 {
+#ifdef DEBUG_KODI_EXTRA_LOGGING
+    return true;
+#endif // DEBUG_KODI_EXTRA_LOGGING
   if (!m_extraLogEnabled || component <= 0)
     return false;
 

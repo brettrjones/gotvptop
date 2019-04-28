@@ -2322,12 +2322,6 @@
     <ClInclude Include="..\..\crypto\o_time.h">
       <Filter>crypto</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\crypto\opensslconf.h">
-      <Filter>crypto</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\crypto\opensslv.h">
-      <Filter>crypto</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\crypto\ossl_typ.h">
       <Filter>crypto</Filter>
     </ClInclude>
@@ -2662,6 +2656,15 @@
       <Filter>Source Files\include\openssl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\e_os2.h">
+      <Filter>Source Files\include\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvDebugConfig.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\crypto\opensslconf.h">
+      <Filter>Source Files\include\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\crypto\opensslv.h">
       <Filter>Source Files\include\openssl</Filter>
     </ClInclude>
   </ItemGroup>

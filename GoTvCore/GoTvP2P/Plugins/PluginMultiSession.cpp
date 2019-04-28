@@ -557,19 +557,27 @@ void PluginMultiSession::onSessionEnded( PluginSessionBase * session, bool plugi
 //============================================================================
 void PluginMultiSession::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
+#ifdef DEBUG_SKT_CONNECTIONS
 	LogMsg( LOG_INFO, "PluginMultiSession::replaceConnection start\n" );
+#endif // DEBUG_SKT_CONNECTIONS
 	m_AssetXferMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 	m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
-	LogMsg( LOG_INFO, "PluginMultiSession::replaceConnection done\n" );
+#ifdef DEBUG_SKT_CONNECTIONS
+    LogMsg( LOG_INFO, "PluginMultiSession::replaceConnection done\n" );
+#endif // DEBUG_SKT_CONNECTIONS
 }
 
 //============================================================================
 void PluginMultiSession::onConnectionLost( VxSktBase * sktBase )
 {
-	LogMsg( LOG_INFO, "PluginMultiSession::onConnectionLost start\n" );
+#ifdef DEBUG_SKT_CONNECTIONS
+    LogMsg( LOG_INFO, "PluginMultiSession::onConnectionLost start\n" );
+#endif // DEBUG_SKT_CONNECTIONS
 	m_AssetXferMgr.onConnectionLost( sktBase );
 	m_PluginSessionMgr.onConnectionLost( sktBase );
-	LogMsg( LOG_INFO, "PluginMultiSession::onConnectionLost done\n" );
+#ifdef DEBUG_SKT_CONNECTIONS
+    LogMsg( LOG_INFO, "PluginMultiSession::onConnectionLost done\n" );
+#endif // DEBUG_SKT_CONNECTIONS
 }
 
 //============================================================================

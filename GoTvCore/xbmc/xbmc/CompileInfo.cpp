@@ -109,7 +109,7 @@ const char* CCompileInfo::GetAppNameLowerCase()
 //#else
 //    echo you must define your application information in GoTvAppConfig.h
 //#endif
-    return "kodi";
+    return "gotvptop";
 }
 
 const char* CCompileInfo::GetSuffix()

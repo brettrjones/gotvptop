@@ -359,7 +359,7 @@ echo GoTv CPU Config error no cpu arc defined.. unknown processors not supported
 # define SIZEOF_VOID_P 8
 # define SIZEOF_CHAR_P 8
 
-# ifdef TARGET_OS_WINDOWS
+# if defined(TARGET_OS_WINDOWS) && defined(_MSC_VER)
 #  define SIZEOF_UNSIGNED_INT 4
 #  define SIZEOF_UNSIGNED_LONG_INT 4
 #  define SIZEOF_INT 4 // microsoft compiler uses 4 byte int in all arch.. only long long is 64 bit

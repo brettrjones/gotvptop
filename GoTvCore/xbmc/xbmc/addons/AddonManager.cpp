@@ -25,6 +25,8 @@
 #include <array>
 #include <set>
 #include <utility>
+#include "GoTvDebugConfig.h"
+#include <CoreLib/VxDebug.h>
 
 using namespace XFILE;
 
@@ -619,31 +621,38 @@ void CAddonMgr::FillCpluffMetadata(const cp_plugin_info_t* plugin, CAddonBuilder
         std::vector<CAddonBuilder> builders;
         m_database.GetInstalled( builders );
 
+
         for( auto& builder : builders )
         {
             cp_status_t status;
-            cp_plugin_info_t* cp_addon = m_cpluff->get_plugin_info( m_cp_context, builder.GetId().c_str(), &status );
+            cp_plugin_info_t* cp_addon = cp_get_plugin_info( m_cp_context, builder.GetId().c_str(), &status );
             if( status == CP_OK && cp_addon )
             {
                 if( enabledOnly && IsAddonDisabled( cp_addon->identifier ) )
                 {
-                    m_cpluff->release_info( m_cp_context, cp_addon );
+                    cp_release_info( m_cp_context, cp_addon );
+#ifdef DEBUG_KODI_ADDONS
+                    CLog::Log( LOGNOTICE, "ADDON: %s disabled", builder.GetId().c_str() );
+#endif // DEBUG_KODI_ADDONS
                     continue;
                 }
 
                 //FIXME: hack for skipping special dependency addons (xbmc.python etc.).
                 //Will break if any extension point is added to them
-                cp_extension_t *props = GetFirstExtPoint( cp_addon, type );
+                cp_extension_t* props = GetFirstExtPoint( cp_addon, type );
                 if( props == nullptr )
                 {
-                    m_cpluff->release_info( m_cp_context, cp_addon );
+                    cp_release_info( m_cp_context, cp_addon );
+//#ifdef DEBUG_KODI_ADDONS
+//                    CLog::Log( LOGNOTICE, "ADDON: %s skip", builder.GetId().c_str() );
+//#endif // DEBUG_KODI_ADDONS
                     continue;
                 }
 
                 AddonPtr addon;
                 if( Factory( cp_addon, type, builder ) )
                     addon = builder.Build();
-                m_cpluff->release_info( m_cp_context, cp_addon );
+                cp_release_info( m_cp_context, cp_addon );
 
                 if( addon )
                 {
@@ -651,15 +660,39 @@ void CAddonMgr::FillCpluffMetadata(const cp_plugin_info_t* plugin, CAddonBuilder
                     AddonPtr runningAddon = addon->GetRunningInstance();
                     if( runningAddon )
                         addon = runningAddon;
+#ifdef DEBUG_KODI_ADDONS
+                    CLog::Log( LOGNOTICE, "ADDON: %s running", builder.GetId().c_str() );
+#endif // DEBUG_KODI_ADDONS
                     addons.emplace_back( std::move( addon ) );
                 }
+#ifdef DEBUG_KODI_ADDONS
+                else
+                {
+                    CLog::Log( LOGNOTICE, "ADDON: %s fail create", builder.GetId().c_str() );
+                }
+#endif // DEBUG_KODI_ADDONS
             }
+#ifdef DEBUG_KODI_ADDONS
+            else
+            {
+                CLog::Log( LOGNOTICE, "ADDON: %s not ok", builder.GetId().c_str() );
+            }
+#endif // DEBUG_KODI_ADDONS
         }
+
+
         return addons.size() > 0;
     }
 
     bool CAddonMgr::GetAddon( const std::string &str, AddonPtr &addon, const TYPE &type/*=ADDON_UNKNOWN*/, bool enabledOnly /*= true*/ )
     {
+//#ifdef DEBUG_KODI_PLUGINS
+//        if( str == "resource.images.studios.white" )
+//        {
+//            LogMsg( LOG_DEBUG, "addon resource.images.studios.white" );
+//        }
+//#endif // DEBUG_KODI_PLUGINS
+
         CSingleLock lock( m_critSection );
 
         cp_status_t status;

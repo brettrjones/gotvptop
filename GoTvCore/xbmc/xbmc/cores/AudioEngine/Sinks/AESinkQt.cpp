@@ -39,6 +39,7 @@
 
 #include "GoTvInterface/IGoTv.h"
 #include <CoreLib/VxDebug.h>
+#include "GoTvDebugConfig.h"
 
 #define OSS_FRAMES 256
 
@@ -205,10 +206,12 @@ unsigned int CAESinkQt::AddPackets( uint8_t **data, unsigned int frames, unsigne
 		}
     }
 
+#ifdef DEBUG_KODI_AUDIO
 	if( retryCnt >= 5 )
 	{
 		LogMsg( LOG_DEBUG, "CAESinkQt::AddPackets timeout snd buf needs %d free space but has %d \n", size, m_IGoTv.toGuiGetAudioCacheFreeSpace( eAppModuleKodi )  );
 	}
+#endif // DEBUG_KODI_AUDIO
 
     //float* pBuffer = ( float* )data[ 0 ] + offset*m_AvailableFormat.m_frameSize;
     //static int frameCnt = 0;

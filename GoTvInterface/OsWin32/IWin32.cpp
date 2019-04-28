@@ -95,7 +95,7 @@ bool IWin32::doPreStartup()
 
     // check if application is already running
     std::string appName = CCompileInfo::GetAppName();
-    m_AppRunningMutex = CreateMutexW( nullptr, FALSE, ToW( appName + " Media Center" ).c_str() );
+    m_AppRunningMutex = CreateMutexW( nullptr, FALSE, ToW( appName + " GoTvPtoP" ).c_str() );
     if( GetLastError() == ERROR_ALREADY_EXISTS )
     {
         auto appNameW = ToW( appName );
