@@ -6,8 +6,9 @@
 
 //=== render ===//
 
-//# define DEBUG_OPENGL
-//# define DEBUG_QT_RENDER
+# define DEBUG_OPENGL
+# define DEBUG_QT_RENDER
+# define DEBUG_RENDER_THREADS
 
 //=== network ===//
 //# define DEBUG_PTOP_NETWORK_STATE // PtoP networking
@@ -24,17 +25,17 @@
 
 //=== kodi render ===//
 # define DEBUG_KODI_RENDER
-//# define DEBUG_KODI_SHADERS
+# define DEBUG_KODI_SHADERS
 
 //=== kodi other ===//
 # define DEBUG_KODI_ENABLE_DEBUG_LOGGING    // log anything debug level and higher
-# define DEBUG_KODI_EXTRA_LOGGING // enable logging of all kodi extra modules
+//# define DEBUG_KODI_EXTRA_LOGGING // enable logging of all kodi extra modules
 
-# define DEBUG_KODI_ADDONS
-# define DEBUG_KODI_PLUGINS
+//# define DEBUG_KODI_ADDONS
+//# define DEBUG_KODI_PLUGINS
 
-# define DEBUG_KODI_CURL
-# define DEBUG_KODI_UPDATER // NOTE: forces kodi to update every run
+//# define DEBUG_KODI_CURL
+//# define DEBUG_KODI_UPDATER // NOTE: forces kodi to update every run
 # define DEBUG_KODI_PYTHON
 
 //=== threads ===//

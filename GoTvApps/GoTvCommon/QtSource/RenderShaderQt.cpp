@@ -206,7 +206,7 @@ void RenderShaderQt::onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf )
 {
     if( SM_VIDEO_YV12_BASIC == m_ShaderMethod )
     {
-        LogMsg( LOG_ERROR, "onShaderVideoFormatEnabled %s", describeShader( m_ShaderMethod ) );
+        LogMsg( LOG_ERROR, "SM_VIDEO_YV12_BASIC onCompiledAndLinkedVideoFormat %s", describeShader( m_ShaderMethod ) );
     }
 
      // Variables passed directly to the Vertex shader
@@ -638,6 +638,7 @@ bool RenderShaderQt::enableShader()
     }
     else
     {
+        LogMsg( LOG_ERROR, "GL: Error glUseProgram %d", programId() );
         glf->glUseProgram( 0 );
         return false;
     }

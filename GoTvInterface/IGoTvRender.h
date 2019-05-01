@@ -36,8 +36,6 @@ enum ESHADERMETHOD
     SM_TEXTURE_RGBA_BOB,
     SM_TEXTURE_RGBA_BOB_OES,
 
-#ifdef HAVE_QT_GUI
-
     SM_VIDEO_YV12_BASIC,
     SM_VIDEO_NV12_BASIC,
     SM_VIDEO_YUY2_BASIC,
@@ -55,8 +53,6 @@ enum ESHADERMETHOD
     SM_VID_FILTER_CONVOLUTION_4X4_FLOAT,
     SM_VID_FILTER_CONVOLUTION_6X6_RGBA,
     SM_VID_FILTER_CONVOLUTION_6X6_FLOAT,
-
-#endif // HAVE_QT_GUI
 
     SM_SHADER_NONE,
 
@@ -77,6 +73,8 @@ class CScreenshotSurface;
 class IGoTvRender
 {
 public:
+    virtual void                verifyGlState() = 0; // show gl error if any
+
     //=== textures ===//
     virtual void                setActiveGlTexture( unsigned int activeTextureNum /* 0 == GL_TEXTURE0 , 1 == GL_TEXTURE1 etc*/ )  = 0;
 

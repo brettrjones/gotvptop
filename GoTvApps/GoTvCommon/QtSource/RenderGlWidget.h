@@ -56,7 +56,11 @@ public:
 #endif
 
     AppCommon&				    getMyApp() { return  m_MyApp; }
-    QOpenGLFunctions *          getGlFunctions() { return m_GlWidgetFunctions; }
+    QOpenGLFunctions *          getGlFunctions() { return m_GlThreadFunctions; }
+
+    void                        setRenderThreadId( unsigned int threadId ) { m_RenderThreadId = threadId; }
+    unsigned int                getRenderThreadId() { return m_RenderThreadId; }
+    void                        verifyRenderCall( const char * functionName );
 
     //! take a snapshot of current render
     void                        takeSnapshot();
@@ -64,6 +68,7 @@ public:
     virtual void                initializeGL( void ) override;
     virtual void                paintGL( void ) override;
     virtual void                resizeGL(  int w, int h  ) override;
+    virtual void                handleGlResize( int width, int height );
 
     //! ignore from kodi
     void                        initialiseShaders() override;
@@ -125,6 +130,8 @@ public:
     //============================================================================
     //=== to gui media/render ===//
     //============================================================================
+
+    virtual void                verifyGlState() override; // show gl error if any
 
     //=== textures ===//
     void                        setActiveGlTexture( unsigned int activeTextureNum = 0 /* 0 == GL_TEXTURE0 , 1 == GL_TEXTURE1 etc*/ ) override;
@@ -202,6 +209,7 @@ public:
 
 signals:
     void                        signalFrameRendered();
+    void                        signalGlResized( int w, int h );
 
 public slots:
 	void						slotResizeWindowTimeout();
@@ -223,15 +231,15 @@ protected:
     virtual void                keyReleaseEvent( QKeyEvent * ev ) override;
 
     void                        initTextures();
-    void                        initColorMatrix();
-    void                        initYv12();
-
+ 
     //=== vars ===//
     AppCommon&				    m_MyApp;
     EventsQtToGoTv              m_QtToKodi;
     RenderGlLogic               m_RenderLogic;
 
-    bool                        m_RenderWidgetInited;
+    bool                        m_RenderWidgetInited = false;
+    unsigned int                m_RenderThreadId = 0;
+
     GLuint                      m_TextureIds[ MAX_RENDER_PLANES ];
     GlTextureSize               m_TexSize[ MAX_RENDER_PLANES ];
     bool                        m_TexturesInited = false;
@@ -252,7 +260,6 @@ protected:
     QTimer *					m_ResizingTimer = nullptr;
 	bool						m_IsResizing = false;
 
-    QOpenGLFunctions *          m_GlWidgetFunctions = nullptr;
     QOpenGLFunctions *          m_GlThreadFunctions = nullptr;
 
     QMatrix4x4                  m_ColorMatrix;

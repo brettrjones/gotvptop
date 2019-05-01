@@ -114,13 +114,13 @@ public:
     virtual void                shaderEnableVertexAttribArray( int arrayId ) ;
     virtual void                shaderDisableVertexAttribArray( int arrayId );
 
+    static const char *         describeShader( ESHADERMETHOD shaderMethod );
+
 protected:
     void                        onCompiledAndLinked();
     void                        onCompiledAndLinkedGui( QOpenGLFunctions * glf );
     void                        onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf );
     void                        onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf );
-
-    const char *                describeShader( ESHADERMETHOD shaderMethod );
 
     //=== common to all shaders ===//
     ESHADERMETHOD               m_ShaderMethod;

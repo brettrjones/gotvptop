@@ -617,5 +617,14 @@ QSize RenderGlOffScreenSurface::bufferSize() const
     return ( m_SurfaceSize );
 }
 
+//============================================================================
+void RenderGlOffScreenSurface::slotGlResized( int w, int h )
+{
+    m_NextSurfaceSize = QSize( w, h );
+    if( m_functions )
+    {
+        m_functions->glViewport( 0, 0, w, h );
+    }
+}
 
 

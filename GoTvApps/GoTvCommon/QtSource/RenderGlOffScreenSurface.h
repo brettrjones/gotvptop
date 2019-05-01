@@ -137,6 +137,7 @@ protected:
 public slots:
     /// @brief Lazy update routine like QWidget::update().
     void                        update();
+    void                        slotGlResized( int w, int h );
 
 signals:
     /// @brief Emitted when swapBuffers() was called and bufferswapping is done.

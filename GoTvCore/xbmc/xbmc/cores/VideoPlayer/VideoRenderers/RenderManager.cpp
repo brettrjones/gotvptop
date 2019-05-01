@@ -35,6 +35,9 @@
 #include "cores/VideoPlayer/DVDClock.h"
 #include "cores/VideoPlayer/DVDCodecs/Video/DVDVideoCodec.h"
 
+#include "GoTvInterface/IGoTv.h"
+
+
 using namespace KODI::MESSAGING;
 
 void CRenderManager::CClockSync::Reset()
@@ -174,10 +177,14 @@ bool CRenderManager::Configure()
     CSingleLock lock2( m_presentlock );
     CSingleLock lock3( m_datalock );
 
+    IGoTv::getIGoTv().verifyGlState();
+
     if( m_pRenderer )
     {
         DeleteRenderer();
     }
+
+    IGoTv::getIGoTv().verifyGlState();
 
     if( !m_pRenderer )
     {
@@ -185,6 +192,8 @@ bool CRenderManager::Configure()
         if( !m_pRenderer )
             return false;
     }
+
+    IGoTv::getIGoTv().verifyGlState();
 
     m_pRenderer->SetVideoSettings( m_playerPort->GetVideoSettings() );
     bool result = m_pRenderer->Configure( *m_pConfigPicture, m_fps, m_orientation );
@@ -227,7 +236,7 @@ bool CRenderManager::Configure()
         m_renderDebug = false;
         m_clockSync.Reset();
         m_dvdClock.SetVsyncAdjust( 0 );
-    m_overlays.SetStereoMode(m_stereomode);
+        m_overlays.SetStereoMode(m_stereomode);
 
         m_renderState = STATE_CONFIGURED;
 
@@ -354,6 +363,8 @@ void CRenderManager::PreInit()
             return;
     }
 
+    IGoTv::getIGoTv().verifyGlState();
+
     if( !g_application.IsCurrentThread() )
     {
         m_initEvent.Reset();
@@ -376,7 +387,7 @@ void CRenderManager::PreInit()
     m_QueueSize = 2;
     m_QueueSkip = 0;
     m_presentstep = PRESENT_IDLE;
-  m_bRenderGUI = true;
+    m_bRenderGUI = true;
 
     m_initEvent.Set();
 }
@@ -464,6 +475,7 @@ bool CRenderManager::Flush(bool wait, bool saveBuffers)
 
 void CRenderManager::CreateRenderer()
 {
+    IGoTv::getIGoTv().verifyGlState();
     if( !m_pRenderer )
     {
         CVideoBuffer *buffer = nullptr;
@@ -475,6 +487,7 @@ void CRenderManager::CreateRenderer()
         {
             if( id == "default" )
                 continue;
+            IGoTv::getIGoTv().verifyGlState();
 
             m_pRenderer = VIDEOPLAYER::CRendererFactory::CreateRenderer( id, buffer );
             if( m_pRenderer )
@@ -482,6 +495,9 @@ void CRenderManager::CreateRenderer()
                 return;
             }
         }
+
+        IGoTv::getIGoTv().verifyGlState();
+
         m_pRenderer = VIDEOPLAYER::CRendererFactory::CreateRenderer( "default", buffer );
     }
 }

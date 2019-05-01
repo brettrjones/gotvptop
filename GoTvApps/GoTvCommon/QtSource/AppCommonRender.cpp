@@ -79,6 +79,7 @@ void AppCommon::toGuiModuleState( EAppModule moduleNum, EModuleState moduleState
 		if( glWidget )
 		{
 			glWidget->onModuleState( moduleNum, moduleState );
+            glWidget->verifyGlState();
 		}
 	}
 }
@@ -87,6 +88,15 @@ void AppCommon::toGuiModuleState( EAppModule moduleNum, EModuleState moduleState
 //============================================================================
 //=== to gui media/render ===//
 //============================================================================
+//============================================================================
+void AppCommon::verifyGlState()  // show gl error if any
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->verifyGlState();
+    }
+}
 
 //============================================================================
 //=== textures ===//
@@ -99,6 +109,7 @@ void AppCommon::setActiveGlTexture( unsigned int activeTextureNum )
     if( glWidget )
     {
         glWidget->setActiveGlTexture( activeTextureNum );
+        glWidget->verifyGlState();
     }
 }
 
@@ -109,6 +120,7 @@ void AppCommon::createTextureObject( CQtTexture * texture )
     if( glWidget )
     {
         glWidget->createTextureObject( texture );
+        glWidget->verifyGlState();
     }
 }
 
@@ -119,6 +131,7 @@ void AppCommon::destroyTextureObject( CQtTexture * texture )
     if( glWidget )
     {
         glWidget->destroyTextureObject( texture );
+        glWidget->verifyGlState();
     }
 }
 
@@ -130,6 +143,7 @@ bool AppCommon::loadToGPU( CQtTexture * texture )
     if( glWidget )
     {
         result = glWidget->loadToGPU( texture );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -142,6 +156,7 @@ void AppCommon::bindToUnit( CQtTexture * texture, unsigned int unit )
     if( glWidget )
     {
         glWidget->bindToUnit( texture, unit );
+        glWidget->verifyGlState();
     }
 }
 
@@ -152,6 +167,7 @@ void AppCommon::beginGuiTexture( CGUITextureQt * guiTexture, GoTvColor color )
     if( glWidget )
     {
         glWidget->beginGuiTexture( guiTexture, color );
+        glWidget->verifyGlState();
     }
 }
 
@@ -162,6 +178,7 @@ void AppCommon::drawGuiTexture( CGUITextureQt * guiTexture, float * x, float * y
     if( glWidget )
     {
         glWidget->drawGuiTexture( guiTexture, x, y, z, textureRect, diffuse, orientation );
+        glWidget->verifyGlState();
     }
 }
 
@@ -172,6 +189,7 @@ void AppCommon::endGuiTexture( CGUITextureQt * guiTexture )
     if( glWidget )
     {
         glWidget->endGuiTexture( guiTexture );
+        glWidget->verifyGlState();
     }
 }
 
@@ -182,6 +200,7 @@ void AppCommon::drawQuad( const GoTvRect& rect, GoTvColor color, CBaseTexture * 
     if( glWidget )
     {
         glWidget->drawQuad( rect, color, texture, texCoords );
+        glWidget->verifyGlState();
     }
 }
 
@@ -193,6 +212,7 @@ bool AppCommon::firstBegin( CGUIFontTTFQt * font )
     if( glWidget )
     {
         result = glWidget->firstBegin( font );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -205,6 +225,7 @@ void AppCommon::lastEnd( CGUIFontTTFQt * font )
     if( glWidget )
     {
         glWidget->lastEnd( font );
+        glWidget->verifyGlState();
     }
 }
 
@@ -228,6 +249,7 @@ void AppCommon::destroyVertexBuffer( CGUIFontTTFQt * font, CVertexBuffer & vertB
     if( glWidget )
     {
         glWidget->destroyVertexBuffer( font, vertBuffer );
+        glWidget->verifyGlState();
     }
 }
 
@@ -239,6 +261,7 @@ void AppCommon::deleteHardwareTexture( CGUIFontTTFQt * font )
     if( glWidget )
     {
         glWidget->deleteHardwareTexture( font );
+        glWidget->verifyGlState();
     }
 }
 
@@ -249,6 +272,7 @@ void AppCommon::createStaticVertexBuffers( CGUIFontTTFQt * font )
     if( glWidget )
     {
         glWidget->createStaticVertexBuffers( font );
+        glWidget->verifyGlState();
     }
 }
 
@@ -259,6 +283,7 @@ void AppCommon::destroyStaticVertexBuffers( CGUIFontTTFQt * font )
     if( glWidget )
     {
         glWidget->destroyStaticVertexBuffers( font );
+        glWidget->verifyGlState();
     }
 }
 
@@ -274,6 +299,7 @@ void AppCommon::captureScreen( CScreenshotSurface * screenCaptrue, GoTvRect& cap
     if( glWidget )
     {
         glWidget->captureScreen( screenCaptrue, captureArea );
+        glWidget->verifyGlState();
     }
 }
 
@@ -284,6 +310,7 @@ void AppCommon::toGuiRenderVideoFrame( int textureIdx, CRenderBuffer* videoBuffe
     if( glWidget )
     {
         glWidget->toGuiRenderVideoFrame( textureIdx, videoBuffer );
+        glWidget->verifyGlState();
     }
 }
 
@@ -295,6 +322,7 @@ bool AppCommon::initRenderSystem()
     if( glWidget )
     {
         result = glWidget->initRenderSystem( );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -321,6 +349,7 @@ bool AppCommon::resetRenderSystem( int width, int height )
     if( glWidget )
     {
         result = glWidget->resetRenderSystem( width, height );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -334,6 +363,7 @@ int AppCommon::getMaxTextureSize()
     if( glWidget )
     {
         result = glWidget->getMaxTextureSize( );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -347,6 +377,7 @@ bool AppCommon::beginRender()
     if( glWidget )
     {
         result = glWidget->beginRender( );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -360,6 +391,7 @@ bool AppCommon::endRender()
     if( glWidget )
     {
         result = glWidget->endRender();
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -372,6 +404,7 @@ void AppCommon::presentRender( bool rendered, bool videoLayer )
     if( glWidget )
     {
         glWidget->presentRender( rendered, videoLayer );
+        glWidget->verifyGlState();
     }
 }
 
@@ -383,6 +416,7 @@ bool AppCommon::clearBuffers( GoTvColor color )
     if( glWidget )
     {
         result = glWidget->clearBuffers( color );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -396,6 +430,7 @@ bool AppCommon::isExtSupported( const char* extension )
     if( glWidget )
     {
         result = glWidget->isExtSupported( extension );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -408,6 +443,7 @@ void AppCommon::setVSync( bool vsync )
     if( glWidget )
     {
         glWidget->setVSync( vsync );
+        glWidget->verifyGlState();
     }
 }
 
@@ -418,6 +454,7 @@ void AppCommon::setViewPort( const GoTvRect& viewPort )
     if( glWidget )
     {
         glWidget->setViewPort( viewPort );
+        glWidget->verifyGlState();
     }
 }
 
@@ -428,6 +465,7 @@ void AppCommon::getViewPort( GoTvRect& viewPort )
     if( glWidget )
     {
         glWidget->getViewPort( viewPort );
+        glWidget->verifyGlState();
     }
 }
 
@@ -439,6 +477,7 @@ bool AppCommon::scissorsCanEffectClipping()
     if( glWidget )
     {
         result = glWidget->scissorsCanEffectClipping();
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -452,6 +491,7 @@ GoTvRect AppCommon::clipRectToScissorRect( const GoTvRect &rect )
     if( glWidget )
     {
         result = glWidget->clipRectToScissorRect( rect );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -464,6 +504,7 @@ void AppCommon::setScissors( const GoTvRect& rect )
     if( glWidget )
     {
         glWidget->setScissors( rect );
+        glWidget->verifyGlState();
     }
 }
 
@@ -474,6 +515,7 @@ void AppCommon::resetScissors()
     if( glWidget )
     {
         glWidget->resetScissors();
+        glWidget->verifyGlState();
     }
 }
 
@@ -484,6 +526,7 @@ void AppCommon::captureStateBlock()
     if( glWidget )
     {
         glWidget->captureStateBlock();
+        glWidget->verifyGlState();
     }
 }
 
@@ -494,6 +537,7 @@ void AppCommon::applyStateBlock()
     if( glWidget )
     {
         glWidget->applyStateBlock();
+        glWidget->verifyGlState();
     }
 }
 
@@ -504,6 +548,7 @@ void AppCommon::setCameraPosition( const GoTvPoint& camera, int screenWidth, int
     if( glWidget )
     {
         glWidget->setCameraPosition( camera, screenWidth, screenHeight, stereoFactor );
+        glWidget->verifyGlState();
     }
 }
 
@@ -514,6 +559,7 @@ void AppCommon::applyHardwareTransform( const TransformMatrix &matrix )
     if( glWidget )
     {
         glWidget->applyHardwareTransform( matrix );
+        glWidget->verifyGlState();
     }
 }
 
@@ -524,6 +570,7 @@ void AppCommon::restoreHardwareTransform()
     if( glWidget )
     {
         glWidget->restoreHardwareTransform();
+        glWidget->verifyGlState();
     }
 }
 
@@ -535,6 +582,7 @@ bool AppCommon::testRender()
     if( glWidget )
     {
         result = glWidget->testRender();
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -547,6 +595,7 @@ void AppCommon::project( float &x, float &y, float &z )
     if( glWidget )
     {
         glWidget->project( x, y, z );
+        glWidget->verifyGlState();
     }
 }
 
@@ -561,6 +610,7 @@ void AppCommon::initialiseShaders()
     if( glWidget )
     {
         glWidget->initialiseShaders();
+        glWidget->verifyGlState();
     }
 }
 
@@ -571,6 +621,7 @@ void AppCommon::releaseShaders()
     if( glWidget )
     {
         glWidget->releaseShaders();
+        glWidget->verifyGlState();
     }
 }
 
@@ -582,6 +633,7 @@ bool AppCommon::enableShader( ESHADERMETHOD method )
     if( glWidget )
     {
         enabled = glWidget->enableShader( method );
+        glWidget->verifyGlState();
     }
 
     return enabled;
@@ -590,13 +642,15 @@ bool AppCommon::enableShader( ESHADERMETHOD method )
 //============================================================================
 bool AppCommon::isShaderValid( ESHADERMETHOD method )
 {
+    bool result = false;
     RenderGlWidget * glWidget = getRenderConsumer();
     if( glWidget )
     {
-        return glWidget->isShaderValid( method );
+        result = glWidget->isShaderValid( method );
+        glWidget->verifyGlState();
     }
 
-    return false;
+    return result;
 }
 
 //============================================================================
@@ -606,6 +660,7 @@ void AppCommon::disableGUIShader()
     if( glWidget )
     {
         glWidget->disableGUIShader();
+        glWidget->verifyGlState();
     }
 }
 
@@ -616,6 +671,7 @@ void AppCommon::disableShader( ESHADERMETHOD method )
     if( glWidget )
     {
         glWidget->disableShader( method );
+        glWidget->verifyGlState();
     }
 }
 
@@ -627,6 +683,7 @@ int AppCommon::shaderGetPos()
     if( glWidget )
     {
         result = glWidget->shaderGetPos();
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -640,6 +697,7 @@ int AppCommon::shaderGetCol()
     if( glWidget )
     {
         result = glWidget->shaderGetCol();
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -653,6 +711,7 @@ int AppCommon::shaderGetModel()
     if( glWidget )
     {
         result = glWidget->shaderGetModel();
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -666,6 +725,7 @@ int AppCommon::shaderGetCoord0()
     if( glWidget )
     {
         result = glWidget->shaderGetCoord0();
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -679,6 +739,7 @@ int AppCommon::shaderGetCoord1()
     if( glWidget )
     {
         result = glWidget->shaderGetCoord1();
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -692,6 +753,7 @@ int AppCommon::shaderGetUniCol()
     if( glWidget )
     {
         result = glWidget->shaderGetUniCol();
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -705,6 +767,7 @@ void AppCommon::shaderSetField( ESHADERMETHOD shader, int field )
     if( glWidget )
     {
         glWidget->shaderSetField( shader, field );
+        glWidget->verifyGlState();
     }
 }
 
@@ -715,6 +778,7 @@ void AppCommon::shaderSetWidth( ESHADERMETHOD shader, int w )
     if( glWidget )
     {
         glWidget->shaderSetWidth( shader, w );
+        glWidget->verifyGlState();
     }
 }
 
@@ -725,6 +789,7 @@ void AppCommon::shaderSetHeight( ESHADERMETHOD shader, int h )
     if( glWidget )
     {
         glWidget->shaderSetHeight( shader, h );
+        glWidget->verifyGlState();
     }
 }
 
@@ -735,6 +800,7 @@ void AppCommon::shaderSetBlack( ESHADERMETHOD shader, float black )
     if( glWidget )
     {
         glWidget->shaderSetBlack( shader, black );
+        glWidget->verifyGlState();
     }
 }
 
@@ -745,6 +811,7 @@ void AppCommon::shaderSetContrast( ESHADERMETHOD shader, float contrast )
     if( glWidget )
     {
         glWidget->shaderSetContrast( shader, contrast );
+        glWidget->verifyGlState();
     }
 }
 
@@ -755,6 +822,7 @@ void AppCommon::shaderSetConvertFullColorRange( ESHADERMETHOD shader, bool conve
     if( glWidget )
     {
         glWidget->shaderSetConvertFullColorRange( shader, convertFullRange );
+        glWidget->verifyGlState();
     }
 }
 
@@ -766,6 +834,7 @@ int AppCommon::shaderGetVertexLoc( ESHADERMETHOD shader )
     if( glWidget )
     {
         result = glWidget->shaderGetVertexLoc( shader );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -779,6 +848,7 @@ int AppCommon::shaderGetYcoordLoc( ESHADERMETHOD shader )
     if( glWidget )
     {
         result = glWidget->shaderGetYcoordLoc( shader );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -792,6 +862,7 @@ int AppCommon::shaderGetUcoordLoc( ESHADERMETHOD shader )
     if( glWidget )
     {
         result = glWidget->shaderGetUcoordLoc( shader );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -805,6 +876,7 @@ int AppCommon::shaderGetVcoordLoc( ESHADERMETHOD shader )
     if( glWidget )
     {
         result = glWidget->shaderGetVcoordLoc( shader );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -817,6 +889,7 @@ void AppCommon::shaderSetMatrices( ESHADERMETHOD shader, const float *p, const f
     if( glWidget )
     {
         glWidget->shaderSetMatrices( shader, p, m );
+        glWidget->verifyGlState();
     }
 }
 
@@ -827,6 +900,7 @@ void AppCommon::shaderSetAlpha( ESHADERMETHOD shader, float alpha )
     if( glWidget )
     {
         glWidget->shaderSetAlpha( shader, alpha );
+        glWidget->verifyGlState();
     }
 }
 
@@ -837,6 +911,7 @@ void AppCommon::shaderSetFlags( ESHADERMETHOD shader, unsigned int flags )
     if( glWidget )
     {
         glWidget->shaderSetFlags( shader, flags );
+        glWidget->verifyGlState();
     }
 }
 
@@ -847,6 +922,7 @@ void AppCommon::shaderSetFormat( ESHADERMETHOD shader, EShaderFormat format )
     if( glWidget )
     {
         glWidget->shaderSetFormat( shader, format );
+        glWidget->verifyGlState();
     }
 }
 
@@ -867,6 +943,7 @@ void AppCommon::shaderSetStepX( ESHADERMETHOD shader, float stepX )
     if( glWidget )
     {
         glWidget->shaderSetStepX( shader, stepX );
+        glWidget->verifyGlState();
     }
 }
 
@@ -877,6 +954,7 @@ void AppCommon::shaderSetStepY( ESHADERMETHOD shader, float stepY )
     if( glWidget )
     {
         glWidget->shaderSetStepY( shader, stepY );
+        glWidget->verifyGlState();
     }
 }
 
@@ -889,6 +967,7 @@ bool AppCommon::shaderGetTextureFilter( ESHADERMETHOD shader, int& filter )
     if( glWidget )
     {
         result = glWidget->shaderGetTextureFilter( shader, filter );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -902,6 +981,7 @@ int AppCommon::shaderGetcoordLoc( ESHADERMETHOD shader )
     if( glWidget )
     {
         result = glWidget->shaderGetcoordLoc( shader );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -915,6 +995,7 @@ int AppCommon::shaderVertexAttribPointer( ESHADERMETHOD shader, unsigned int ind
     if( glWidget )
     {
         result = glWidget->shaderVertexAttribPointer( shader, index, size, type, normalized, stride, pointer );
+        glWidget->verifyGlState();
     }
 
     return result;
@@ -927,6 +1008,7 @@ void AppCommon::shaderEnableVertexAttribArray( ESHADERMETHOD shader, int arrayId
     if( glWidget )
     {
         glWidget->shaderEnableVertexAttribArray( shader, arrayId );
+        glWidget->verifyGlState();
     }
 }
 
@@ -937,6 +1019,7 @@ void AppCommon::shaderDisableVertexAttribArray( ESHADERMETHOD shader, int arrayI
     if( glWidget )
     {
         glWidget->shaderDisableVertexAttribArray( shader, arrayId );
+        glWidget->verifyGlState();
     }
 }
 
@@ -948,6 +1031,7 @@ void AppCommon::frameBufferGen( int bufCount, unsigned int* fboId )
     if( glWidget )
     {
         glWidget->frameBufferGen( bufCount, fboId );
+        glWidget->verifyGlState();
     }
 }
 
@@ -958,6 +1042,7 @@ void AppCommon::frameBufferDelete( int bufCount, unsigned int* fboId )
     if( glWidget )
     {
         glWidget->frameBufferDelete( bufCount, fboId );
+        glWidget->verifyGlState();
     }
 }
 
@@ -968,6 +1053,7 @@ void AppCommon::frameBufferTexture2D( int target, unsigned int texureId )
     if( glWidget )
     {
         glWidget->frameBufferTexture2D( target, texureId );
+        glWidget->verifyGlState();
     }
 }
 
@@ -978,6 +1064,7 @@ void AppCommon::frameBufferBind( unsigned int fboId )
     if( glWidget )
     {
         glWidget->frameBufferBind( fboId );
+        glWidget->verifyGlState();
     }
 }
 
@@ -989,6 +1076,7 @@ bool AppCommon::frameBufferStatus()
     if( glWidget )
     {
         result = glWidget->frameBufferStatus();
+        glWidget->verifyGlState();
     }
 
     return result;

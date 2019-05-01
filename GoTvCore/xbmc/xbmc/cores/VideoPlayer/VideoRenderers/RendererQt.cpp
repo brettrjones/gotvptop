@@ -152,19 +152,28 @@ bool CRendererQt::ValidateRenderTarget()
 
         // function pointer for texture might change in
         // call to LoadShaders
+        m_IGoTv.verifyGlState();
         glFinish();
         for( int i = 0; i < NUM_BUFFERS; i++ )
+        {
             DeleteTexture( i );
+        }
 
+        m_IGoTv.verifyGlState();
         // create the yuv textures
         UpdateVideoFilter();
+        m_IGoTv.verifyGlState();
         LoadShaders();
+        m_IGoTv.verifyGlState();
         if( m_renderMethod < 0 )
             return false;
 
         for( int i = 0; i < m_NumYV12Buffers; i++ )
+        {
             CreateTexture( i );
+        }
 
+        m_IGoTv.verifyGlState();
         m_bValidated = true;
         return true;
     }
@@ -566,12 +575,16 @@ void CRendererQt::LoadShaders( int field )
         {
             // create regular scan shader
             CLog::Log( LOGNOTICE, "GL: Selecting Single Pass YUV 2 RGB shader" );
-
+            m_IGoTv.verifyGlState();
             EShaderFormat shaderFormat = GetShaderFormat();
             m_pYUVProgShader = new Shaders::YUV2RGBProgressiveShaderQt( m_IGoTv, m_iFlags, shaderFormat );
+            m_IGoTv.verifyGlState();
             m_pYUVProgShader->SetConvertFullColorRange( m_fullRange );
+            m_IGoTv.verifyGlState();
             m_pYUVBobShader = new Shaders::YUV2RGBBobShaderQt( m_IGoTv, m_iFlags, shaderFormat );
+            m_IGoTv.verifyGlState();
             m_pYUVBobShader->SetConvertFullColorRange( m_fullRange );
+            m_IGoTv.verifyGlState();
 
 //               if( ( m_pYUVProgShader && m_pYUVProgShader->CompileAndLink() )
 //                   && ( m_pYUVBobShader && m_pYUVBobShader->CompileAndLink() ) )
@@ -625,7 +638,7 @@ void CRendererQt::ReleaseShaders()
 //============================================================================
 void CRendererQt::UnInit()
 {
-    CLog::Log( LOGDEBUG, "LinuxRendererGL: Cleaning up GL resources" );
+    CLog::Log( LOGDEBUG, "CRendererQt::UnInit: Cleaning up GL resources" );
     CSingleLock lock( CServiceBroker::GetWinSystem()->GetGfxContext() );
 
     glFinish();

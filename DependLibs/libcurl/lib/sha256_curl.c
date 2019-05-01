@@ -31,7 +31,6 @@
 
 #include <openssl/opensslv.h>
 
-BRJ use curl SHA256
 #if (OPENSSL_VERSION_NUMBER >= 0x0090800fL)
 #define USE_OPENSSL_SHA256
 #endif

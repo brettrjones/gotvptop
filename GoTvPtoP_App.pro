@@ -224,6 +224,13 @@ android:{
     LIBS +=  -ldl -lm -landroid -lEGL -lGLESv2  -lc -lstdc++ -llog -ljnigraphics
 }
 
+win32:{
+    LIBS +=  opengl32.lib
+	LIBS +=  glu32.lib
+    LIBS +=  ole32.lib
+    LIBS +=  winmm.lib
+    LIBS +=  Rpcrt4.lib
+}
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

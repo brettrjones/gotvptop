@@ -158,7 +158,7 @@ void RenderGlLogic::render()
         m_initialized = true;
     }
 
-    glViewport( 0, 0, viewSize.width(), viewSize.height() );
+    //glViewport( 0, 0, viewSize.width(), viewSize.height() );
 
 #ifdef RENDER_LOGO_INSTEAD_OF_KODI
     m_LogoRenderer.render();

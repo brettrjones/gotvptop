@@ -1,6 +1,12 @@
 #if defined(SHADERS_INCLUDE)
+
+#if defined(TARGET_OS_WINDOWS)
+static const char * gles_shader_vert =
+"#version 100\n"
+#else
 static const char * gles_shader_vert =
 "#version 120\n"
+#endif
 "attribute vec4 m_attrpos;\n"
 "attribute vec4 m_attrcol;\n"
 "attribute vec4 m_attrcord0;\n"
@@ -20,21 +26,6 @@ static const char * gles_shader_vert =
 "}\n";
 
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_vert_defaut =
-"precision lowp float;\n"
-#else
-static const char * gles_shader_vert_defaut =
-#endif
-"attribute vec4 m_attrpos;\n"
-"uniform mat4 m_proj;\n"
-"uniform mat4 m_model;\n"
-"void main ()\n"
-"{\n"
-"  mat4 mvp    = m_proj * m_model;\n"
-"  gl_Position = mvp * m_attrpos;\n"
-"}\n";
-
-#if defined(TARGET_OS_WINDOWS)
 static const char * gles_shader_default_frag =
 "precision lowp float;\n"
 #else
@@ -45,11 +36,15 @@ static const char * gles_shader_default_frag =
 "void main()\n"
 "{\n"
 "    gl_FragColor = m_unicol;\n"
+"#if defined(KODI_LIMITED_RANGE)\n"
+"   gl_FragColor.rgb *= ( 235.0 - 16.0 ) / 255.0;\n"
+"   gl_FragColor.rgb += 16.0 / 255.0;\n"
+"#endif\n"
 "}\n";
 
 #if defined(TARGET_OS_WINDOWS)
 static const char * gles_shader_texture_frag =
-"precision lowp float;\n"
+"precision mediump   float;\n"
 #else
 static const char * gles_shader_texture_frag =
 #endif

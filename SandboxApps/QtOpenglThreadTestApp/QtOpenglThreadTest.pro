@@ -66,6 +66,7 @@ android:{
 
 win32:{
     LIBS +=  opengl32.lib
+	LIBS +=  glu32.lib
     LIBS +=  ole32.lib
     LIBS +=  winmm.lib
     LIBS +=  Rpcrt4.lib

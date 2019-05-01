@@ -13,6 +13,7 @@
 #include "settings/AdvancedSettings.h"
 #include "settings/SettingsComponent.h"
 #include "GoTvCoreUtil.h"
+#include "GoTvInterface/IGoTv.h"
 
 CRenderSystemBase::CRenderSystemBase()
 {
@@ -76,8 +77,11 @@ void CRenderSystemBase::ShowSplash(const std::string& message)
   BeginRender();
 
   m_splashImage->AllocResources();
+  IGoTv::getIGoTv().verifyGlState();
   m_splashImage->Render();
+  IGoTv::getIGoTv().verifyGlState();
   m_splashImage->FreeResources();
+  IGoTv::getIGoTv().verifyGlState();
 
   if (!message.empty())
   {
@@ -87,6 +91,8 @@ void CRenderSystemBase::ShowSplash(const std::string& message)
       if (messageFont)
         m_splashMessageLayout = std::unique_ptr<CGUITextLayout>(new CGUITextLayout(messageFont, true, 0));
     }
+
+    IGoTv::getIGoTv().verifyGlState();
 
     if (m_splashMessageLayout)
     {
@@ -100,6 +106,7 @@ void CRenderSystemBase::ShowSplash(const std::string& message)
       m_splashMessageLayout->RenderOutline(width/2, y, 0, 0xFF000000, XBFONT_CENTER_X, width);
     }
   }
+  IGoTv::getIGoTv().verifyGlState();
 
   //show it on screen
   EndRender();

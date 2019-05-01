@@ -97,9 +97,9 @@ void RenderGlWidget::initializeGL()
     m_RenderLogic.m_WidgetGlContext = this->context();
 
     makeCurrent();
-    m_GlWidgetFunctions = m_RenderLogic.m_WidgetGlContext->functions();
-    Q_ASSERT( m_GlWidgetFunctions );
-    m_GlWidgetFunctions->initializeOpenGLFunctions();
+    QOpenGLFunctions * widgetGlFunctions = m_RenderLogic.m_WidgetGlContext->functions();
+    Q_ASSERT( widgetGlFunctions );
+    widgetGlFunctions->initializeOpenGLFunctions();
 
     m_RenderLogic.m_ThreadGlContext = new QOpenGLContext;
     m_RenderLogic.m_ThreadGlContext->setShareContext( m_RenderLogic.m_WidgetGlContext ); // required
@@ -115,6 +115,7 @@ void RenderGlWidget::initializeGL()
     m_RenderLogic.m_OffScreenSurface->setFormat( m_RenderLogic.m_ThreadGlContext->format() );
     m_RenderLogic.m_OffScreenSurface->create();
     m_RenderLogic.m_OffScreenSurface->setRenderFunctions( m_GlThreadFunctions );
+    connect( this, SIGNAL( signalGlResized( int, int ) ), m_RenderLogic.m_OffScreenSurface, SLOT( slotGlResized( int, int ) ) );
 
     m_RenderLogic.glWidgetInitialized();
     doneCurrent();
@@ -173,7 +174,35 @@ void RenderGlWidget::paintGL()
 //============================================================================
 void RenderGlWidget::resizeGL( int width, int height )
 {
-    m_RenderLogic.setSurfaceSize( QSize( width, height ) );
+    QOpenGLWidget::resizeGL( width, height );
+    LogMsg( LOG_DEBUG, "resizeGL x(%d) y(%d)", width, height );
+}
+
+//============================================================================
+void RenderGlWidget::handleGlResize( int width, int height )
+{
+    LogMsg( LOG_DEBUG, "handleGlResize x(%d) y(%d)", width, height );
+
+    QSize screenSize = QSize( width, height );
+    if( screenSize != m_ScreenSize )
+    {
+        m_ScreenSize = QSize( width, height );
+        m_ResizingWindowSize = m_ScreenSize;
+
+        m_RenderLogic.setSurfaceSize( m_ScreenSize );
+        if( !m_IsResizing )
+        {
+            m_IsResizing = true;
+            onResizeBegin( m_ResizingWindowSize );
+        }
+
+        onResizeEvent( m_ResizingWindowSize );
+        m_ResizingTimer->stop();
+        m_ResizingTimer->setSingleShot( true );
+        m_ResizingTimer->start( RESIZE_WINDOW_COMPLETED_TIMEOUT );
+
+        emit signalGlResized( width, height );
+    }
 }
 
 //============================================================================
@@ -226,18 +255,8 @@ void RenderGlWidget::closeEvent( QCloseEvent * ev )
 void RenderGlWidget::resizeEvent( QResizeEvent * ev )
 {
     QOpenGLWidget::resizeEvent( ev );
-    m_RenderLogic.setSurfaceSize( ev->size() );
-    m_ResizingWindowSize = ev->size();
-    if( !m_IsResizing )
-	{
-		m_IsResizing = true;
-		onResizeBegin( m_ResizingWindowSize );
-	}
 
-	onResizeEvent( m_ResizingWindowSize );
-    m_ResizingTimer->stop();
-	m_ResizingTimer->setSingleShot( true );
-	m_ResizingTimer->start( RESIZE_WINDOW_COMPLETED_TIMEOUT );
+    handleGlResize( ev->size().width(), ev->size().width() );
 }
 
 //============================================================================
@@ -271,7 +290,7 @@ void RenderGlWidget::onModuleState( EAppModule moduleNum, EModuleState moduleSta
 	if( ( moduleNum == eAppModuleKodi ) && ( moduleState == eModuleStateInitialized ) )
 	{
 		// send a resize message so kodi will resize to fit window
-		m_QtToKodi.fromGuiResizeEnd( geometry().width(), geometry().height() );
+		m_QtToKodi.fromGuiResizeEnd( m_ScreenSize.width(), m_ScreenSize.height() );
 	}
     #endif // DEBUG_OPENGL
 }

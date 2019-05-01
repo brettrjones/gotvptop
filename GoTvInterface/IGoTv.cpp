@@ -161,10 +161,17 @@ void ff_avutil_log(void* ptr, int level, const char* format, va_list va)
 
     buffer += message;
     int pos, start = 0;
-    while( ( pos = buffer.find_first_of( '\n', start ) ) >= 0 )
+    while( buffer.length() && ( pos = buffer.find_first_of( '\n', start ) ) >= 0 )
     {
         if( pos > start )
-            LogMsg( logType, "%s%s", prefix.c_str(), buffer.substr( start, pos - start ).c_str() );
+        {
+            std::string msgStr = buffer.substr( start, pos - start ).c_str();
+            if( buffer.length() && msgStr.length() )
+            {
+                LogMsg( logType, "%s%s", prefix.c_str(), msgStr.c_str() );
+            }
+        }
+
         start = pos + 1;
     }
 

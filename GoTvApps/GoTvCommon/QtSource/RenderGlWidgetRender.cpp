@@ -20,13 +20,17 @@
 #include "GuiHelpers.h"
 #include "RenderKodiThread.h"
 #include "RenderGlOffScreenSurface.h"
+#include "GoTvDebugConfig.h"
 
 #include "GoTvInterface/GoTvRenderFrame.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <CoreLib/VxTimeUtil.h>
+#include <CoreLib/VxThread.h>
 
 #include "rendering/MatrixGL.h"
+#include <GL/GLU.h>
+
 
 //============================================================================
 //=== to gui media/render ===//
@@ -37,14 +41,32 @@
 // if never gets called then kodi failed to initialize and is a fatal error
 bool RenderGlWidget::initRenderSystem()
 {
+#ifdef DEBUG_RENDER_THREADS
+    setRenderThreadId( VxGetCurrentThreadId() );
+    verifyRenderCall( "initRenderSystem" );
+#endif // DEBUG_RENDER_THREADS
+
     m_RenderLogic.initRenderGlSystem();
 
     return m_RenderWidgetInited;
 }
 
 //============================================================================
+void RenderGlWidget::verifyRenderCall( const char * functionName )
+{
+#ifdef DEBUG_RENDER_THREADS
+    if( functionName && getRenderThreadId() && ( getRenderThreadId() != VxGetCurrentThreadId() ) )
+    {
+        LogMsg( LOG_ERROR, "ERROR %s render thread 0x%X != current thread 0x%x", functionName, getRenderThreadId(), VxGetCurrentThreadId() );
+    }
+#endif // DEBUG_RENDER_THREADS
+}
+
+//============================================================================
 bool RenderGlWidget::destroyRenderSystem()
 {
+    verifyRenderCall( "destroyRenderSystem" );
+
 	m_RenderWidgetInited = false;
     m_RenderLogic.destroyRenderGlSystem();
 
@@ -66,17 +88,19 @@ void RenderGlWidget::toGuiRenderVideoFrame( int textureIdx, CRenderBuffer* video
 //============================================================================
 bool RenderGlWidget::resetRenderSystem( int width, int height )
 {
+    verifyRenderCall( "resetRenderSystem" );
+
     m_SrcWidth = width;
     m_SrcHeight = height;
 
     GoTvRect rect( 0, 0, width, height );
     setViewPort( rect );
 
-    //m_GlWidgetFunctions->glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
-    //m_GlWidgetFunctions->glClearColor( 0.5f, 0.1f, 0.2f, 1.0f );
-    m_GlWidgetFunctions->glClearColor( 0.1f, 0.0f, 0.2f, 1.0f );
+    //m_GlThreadFunctions->glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
+    //m_GlThreadFunctions->glClearColor( 0.5f, 0.1f, 0.2f, 1.0f );
+    m_GlThreadFunctions->glClearColor( 0.1f, 0.0f, 0.2f, 1.0f );
 
-    //m_GlWidgetFunctions->glEnable( GL_SCISSOR_TEST );
+    m_GlThreadFunctions->glEnable( GL_SCISSOR_TEST );
 
     glMatrixProject.Clear();
     glMatrixProject->LoadIdentity();
@@ -91,9 +115,9 @@ bool RenderGlWidget::resetRenderSystem( int width, int height )
     glMatrixTexture->LoadIdentity();
     glMatrixTexture.Load();
 
-    m_GlWidgetFunctions->glBlendFunc( GL_SRC_ALPHA, GL_ONE );
-    m_GlWidgetFunctions->glEnable( GL_BLEND );          // Turn Blending On
-    m_GlWidgetFunctions->glDisable( GL_DEPTH_TEST );
+    m_GlThreadFunctions->glBlendFunc( GL_SRC_ALPHA, GL_ONE );
+    m_GlThreadFunctions->glEnable( GL_BLEND );          // Turn Blending On
+    m_GlThreadFunctions->glDisable( GL_DEPTH_TEST );
 
     return true;
 }
@@ -106,16 +130,18 @@ bool RenderGlWidget::clearBuffers( GoTvColor color )
 		return false;
 	}
 
+    verifyRenderCall( "clearBuffers" );
+
     float r = GET_R( color ) / 255.0f;
     float g = GET_G( color ) / 255.0f;
     float b = GET_B( color ) / 255.0f;
     float a = GET_A( color ) / 255.0f;
 
-    //m_GlWidgetFunctions->glClearColor( r, g, b, a );
+    //m_GlThreadFunctions->glClearColor( r, g, b, a );
     //glClearColor( 0.1f, 0.1f, 0.2f, 1.0f );
 
     GLbitfield flags = GL_COLOR_BUFFER_BIT;
-    m_GlWidgetFunctions->glClear( flags );
+    m_GlThreadFunctions->glClear( flags );
 
     return true;
 }
@@ -150,16 +176,18 @@ void RenderGlWidget::setVSync( bool vsync )
 //============================================================================
 void RenderGlWidget::setViewPort( const GoTvRect& viewPort )
 {
-    /*
-    m_GlWidgetFunctions->glScissor( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
-    m_GlWidgetFunctions->glViewport( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
+    verifyRenderCall( "setViewPort" );
+
+
+    m_GlThreadFunctions->glScissor( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
+    m_GlThreadFunctions->glViewport( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
     m_viewPort[ 0 ] = viewPort.x1;
     m_viewPort[ 1 ] = m_SrcHeight - viewPort.y1 - viewPort.Height();
     m_viewPort[ 2 ] = viewPort.Width();
     m_viewPort[ 3 ] = viewPort.Height();
-    */
-    m_GlWidgetFunctions->glScissor( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
-    m_GlWidgetFunctions->glViewport( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
+/*
+    m_GlThreadFunctions->glScissor( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
+    m_GlThreadFunctions->glViewport( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
     glScissor( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
     glViewport( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
 
@@ -167,11 +195,14 @@ void RenderGlWidget::setViewPort( const GoTvRect& viewPort )
     m_viewPort[ 1 ] = viewPort.y1;
     m_viewPort[ 2 ] = viewPort.Width();
     m_viewPort[ 3 ] = viewPort.Height();
+    */
 }
 
 //============================================================================
 void RenderGlWidget::getViewPort( GoTvRect& viewPort )
 {
+    verifyRenderCall( "getViewPort" );
+
     viewPort.x1 = 0;
     viewPort.y1 = 0;
     viewPort.x2 = width();
@@ -181,51 +212,65 @@ void RenderGlWidget::getViewPort( GoTvRect& viewPort )
 //============================================================================
 bool RenderGlWidget::scissorsCanEffectClipping()
 {
+    verifyRenderCall( "scissorsCanEffectClipping" );
+
     return true;
 }
 
 //============================================================================
 GoTvRect RenderGlWidget::clipRectToScissorRect( const GoTvRect &rect )
 {
+    verifyRenderCall( "clipRectToScissorRect" );
+
     return rect;
 }
 
 //============================================================================
 void RenderGlWidget::setScissors( const GoTvRect& rect )
 {
+    verifyRenderCall( "setScissors" );
+
 }
 
 //============================================================================
 void RenderGlWidget::resetScissors()
 {
+    verifyRenderCall( "resetScissors" );
+
 }
 
 //============================================================================
 void RenderGlWidget::captureStateBlock()
 {
+    verifyRenderCall( "captureStateBlock" );
+
     glMatrixProject.Push();
     glMatrixModview.Push();
     glMatrixTexture.Push();
 
-    m_GlWidgetFunctions->glDisable( GL_SCISSOR_TEST ); // fixes FBO corruption on Macs
-    m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE0 );
+    m_GlThreadFunctions->glDisable( GL_SCISSOR_TEST ); // fixes FBO corruption on Macs
+    m_GlThreadFunctions->glActiveTexture( GL_TEXTURE0 );
 }
 
 //============================================================================
 void RenderGlWidget::applyStateBlock()
 {
+    verifyRenderCall( "applyStateBlock" );
+
     glMatrixProject.PopLoad();
     glMatrixModview.PopLoad();
     glMatrixTexture.PopLoad();
-    m_GlWidgetFunctions->glActiveTexture( GL_TEXTURE0 );
-    m_GlWidgetFunctions->glEnable( GL_BLEND );
-    m_GlWidgetFunctions->glEnable( GL_SCISSOR_TEST );
-    m_GlWidgetFunctions->glClear( GL_DEPTH_BUFFER_BIT );
+    m_GlThreadFunctions->glActiveTexture( GL_TEXTURE0 );
+    m_GlThreadFunctions->glEnable( GL_BLEND );
+    m_GlThreadFunctions->glEnable( GL_SCISSOR_TEST );
+    m_GlThreadFunctions->glClear( GL_DEPTH_BUFFER_BIT );
 }
 
 //============================================================================
 void RenderGlWidget::setCameraPosition( const GoTvPoint& camera, int screenWidth, int screenHeight, float stereoFactor )
 {
+    verifyRenderCall( "setCameraPosition" );
+
 	if( !m_RenderWidgetInited )
 	{
 		return;
@@ -252,6 +297,8 @@ void RenderGlWidget::applyHardwareTransform( const TransformMatrix& finalMatrix 
     if( !m_RenderWidgetInited )
         return;
 
+    verifyRenderCall( "applyHardwareTransform" );
+
     glMatrixModview.Push();
     glMatrixModview->MultMatrixf( finalMatrix );
     glMatrixModview.Load();
@@ -262,6 +309,8 @@ void RenderGlWidget::restoreHardwareTransform()
 {
     if( !m_RenderWidgetInited )
         return;
+
+    verifyRenderCall( "restoreHardwareTransform" );
 
     glMatrixModview.PopLoad();
 }
@@ -284,11 +333,11 @@ bool RenderGlWidget::testRender()
     GLint   posLoc = shaderGetPos();
     GLint   colLoc = shaderGetCol();
 
-    m_GlWidgetFunctions->glVertexAttribPointer( posLoc, 2, GL_FLOAT, 0, 0, ver );
-    m_GlWidgetFunctions->glVertexAttribPointer( colLoc, 4, GL_FLOAT, 0, 0, col );
+    m_GlThreadFunctions->glVertexAttribPointer( posLoc, 2, GL_FLOAT, 0, 0, ver );
+    m_GlThreadFunctions->glVertexAttribPointer( colLoc, 4, GL_FLOAT, 0, 0, col );
 
-    m_GlWidgetFunctions->glEnableVertexAttribArray( posLoc );
-    m_GlWidgetFunctions->glEnableVertexAttribArray( colLoc );
+    m_GlThreadFunctions->glEnableVertexAttribArray( posLoc );
+    m_GlThreadFunctions->glEnableVertexAttribArray( colLoc );
 
     // Setup vertex position values
     ver[ 0 ][ 0 ] = 0.0f;
@@ -298,10 +347,10 @@ bool RenderGlWidget::testRender()
     ver[ 2 ][ 0 ] = -0.87f;
     ver[ 2 ][ 1 ] = -0.5f;
 
-    m_GlWidgetFunctions->glDrawArrays( GL_TRIANGLES, 0, 3 );
+    m_GlThreadFunctions->glDrawArrays( GL_TRIANGLES, 0, 3 );
 
-    m_GlWidgetFunctions->glDisableVertexAttribArray( posLoc );
-    m_GlWidgetFunctions->glDisableVertexAttribArray( colLoc );
+    m_GlThreadFunctions->glDisableVertexAttribArray( posLoc );
+    m_GlThreadFunctions->glDisableVertexAttribArray( colLoc );
 
     disableGUIShader();
 
@@ -328,31 +377,41 @@ void RenderGlWidget::project( float &x, float &y, float &z )
 //============================================================================
 void RenderGlWidget::frameBufferGen( int bufCount, unsigned int* fboId )
 {
-    m_GlWidgetFunctions->glGenFramebuffers( bufCount, fboId );
+    verifyRenderCall( "frameBufferGen" );
+
+    m_GlThreadFunctions->glGenFramebuffers( bufCount, fboId );
 }
 
 //============================================================================
 void RenderGlWidget::frameBufferDelete( int bufCount, unsigned int* fboId )
 {
-    m_GlWidgetFunctions->glDeleteFramebuffers( bufCount, fboId );
+    verifyRenderCall( "frameBufferDelete" );
+
+    m_GlThreadFunctions->glDeleteFramebuffers( bufCount, fboId );
 }
 
 //============================================================================
 void RenderGlWidget::frameBufferTexture2D( int target, unsigned int texureId )
 {
-    m_GlWidgetFunctions->glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, target, texureId, 0 );
+    verifyRenderCall( "frameBufferTexture2D" );
+
+    m_GlThreadFunctions->glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, target, texureId, 0 );
 }
 
 //============================================================================
 void RenderGlWidget::frameBufferBind( unsigned int fboId )
 {
-    m_GlWidgetFunctions->glBindFramebuffer( GL_FRAMEBUFFER, fboId );
+    verifyRenderCall( "frameBufferBind" );
+
+    m_GlThreadFunctions->glBindFramebuffer( GL_FRAMEBUFFER, fboId );
 }
 
 //============================================================================
 bool RenderGlWidget::frameBufferStatus()
 {
-    GLenum status = m_GlWidgetFunctions->glCheckFramebufferStatus( GL_FRAMEBUFFER );
+    verifyRenderCall( "frameBufferStatus" );
+
+    GLenum status = m_GlThreadFunctions->glCheckFramebufferStatus( GL_FRAMEBUFFER );
     return ( status == GL_FRAMEBUFFER_COMPLETE );
 }
 
@@ -363,7 +422,7 @@ void  RenderGlWidget::VerifyGLStateQtDbg( const char* szfile, const char* szfunc
     GLenum err = glGetError();
     if( err == GL_NO_ERROR )
         return;
-    LogMsg( LOG_ERROR, "GL ERROR: %d\n", err );
+    LogMsg( LOG_ERROR, "GL ERROR: %d thread %d %s\n", err, VxGetCurrentThreadId(), gluErrorString( err ) );
     if( szfile && szfunction )
     {
        LogMsg( LOG_ERROR, "In file:%s function:%s line:%d", szfile, szfunction, lineno );
@@ -379,3 +438,9 @@ void RenderGlBaseWidget::VerifyGLStateQt()
     LogMsg( LOG_ERROR, "GL ERROR: %s\n", gluErrorString( err ) );
 }
 #endif
+
+//============================================================================
+void RenderGlWidget::verifyGlState() // show gl error if any
+{
+    VerifyGLStateQt();
+}
