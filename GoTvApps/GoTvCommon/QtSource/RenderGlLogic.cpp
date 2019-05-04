@@ -223,7 +223,7 @@ bool RenderGlLogic::beginRenderGl()
 //============================================================================
 bool RenderGlLogic::endRenderGl()
 {
-   render();
+    //render();
 
     if( m_OffScreenSurface )
     {

@@ -133,12 +133,12 @@ bool RenderGlOffScreenSurface::beginRenderGl()
 // called from thread
 bool RenderGlOffScreenSurface::endRenderGl()
 {
-    if( m_RenderThreadContext )
-    {
-        m_RenderThreadContext->functions()->glFlush();
-    }
+ //   if( m_RenderThreadContext )
+//    {
+//        m_RenderThreadContext->functions()->glFlush();
+//    }
 
-    doneCurrent();
+    //doneCurrent();
     return true;
 }
 
@@ -152,16 +152,16 @@ void RenderGlOffScreenSurface::presentRenderGl( bool rendered, bool videoLayer )
     // presentRender
 
     // LogMsg( LOG_DEBUG, " RenderGlOffScreenSurface::endRender swapBuffers" );
-    if( m_functions && m_initialized )
+    if( isValid() )
     {
         // make sure all paint operation have been processed
-        m_functions->glFlush();
+       // m_functions->glFlush();
 
         if( rendered )
         {
   
             m_FrameImage = grabFramebuffer();
-            swapBuffers();
+            //swapBuffers();
 
             checkForSizeChange();
 
@@ -341,7 +341,7 @@ void RenderGlOffScreenSurface::makeCurrent()
 //============================================================================
 void RenderGlOffScreenSurface::doneCurrent()
 {
-    if( m_RenderThreadContext )
+    if( isValid() )
     {
         m_RenderThreadContext->doneCurrent();
     }

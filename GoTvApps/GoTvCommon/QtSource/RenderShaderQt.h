@@ -48,7 +48,7 @@ public:
 
     bool                        compileAndLink( const char * vertexShaderCode, const char * fragmentShaderCode );
 
-    bool                        isShaderValid( ) { return m_validated; }
+    bool                        isShaderValid( ) { return m_shaderValidated; }
     EShaderType                 getShaderType( ) { return m_ShaderType; }
 
     bool                        enableShader();
@@ -65,17 +65,18 @@ public:
     void                        setShaderFlags(  unsigned int flags )                   { m_flags = flags; }
     void                        setShaderScalingMethod( ESCALINGMETHOD scaling )        { m_ScalingMethod = scaling; }
 
-    GLint                       GetPosLoc() { return m_hPos; }
-    GLint                       GetColLoc() { return m_hCol; }
-    GLint                       GetCord0Loc() { return m_hCord0; }
-    GLint                       GetCord1Loc() { return m_hCord1; }
-    GLint                       GetUniColLoc() { return m_hUniCol; }
-    GLint                       GetCoord0MatrixLoc() { return m_hCoord0Matrix; }
-    GLint                       GetFieldLoc() { return m_hField; }
-    GLint                       GetStepLoc() { return m_hStep; }
-    GLint                       GetContrastLoc() { return m_hContrast; }
-    GLint                       GetBrightnessLoc() { return m_hBrightness; }
-    GLint                       GetModelLoc() { return m_hModel; }
+    GLint                       GetPosLoc() { verifyValidValue( m_hPos, "m_hPos" );  return m_hPos; }
+    GLint                       GetColLoc() { verifyValidValue( m_hCol, "m_hCol" );  return m_hCol; }
+    GLint                       GetCord0Loc() { verifyValidValue( m_hCord0, "m_hCord0" ); return m_hCord0; }
+    GLint                       GetCord1Loc() { verifyValidValue( m_hCord1, "m_hCord1" ); return m_hCord1; }
+    GLint                       GetUniColLoc() { verifyValidValue( m_hUniCol, "m_hUniCol" ); return m_hUniCol; }
+    GLint                       GetCoord0MatrixLoc() { verifyValidValue( m_hCoord0Matrix, "m_hCoord0Matrix" ); return m_hCoord0Matrix; }
+    GLint                       GetFieldLoc() { verifyValidValue( m_hField, "m_hField" ); return m_hField; }
+    GLint                       GetStepLoc() { verifyValidValue( m_hStep, "m_hStep" ); return m_hStep; }
+    GLint                       GetContrastLoc() { verifyValidValue( m_hContrast, "m_hContrast" ); return m_hContrast; }
+    GLint                       GetBrightnessLoc() { verifyValidValue( m_hBrightness, "m_hBrightness" ); return m_hBrightness; }
+    GLint                       GetModelLoc() { verifyValidValue( m_hModel, "m_hModel" ); return m_hModel; }
+
     bool                        HardwareClipIsPossible() { return m_clipPossible; }
     GLfloat                     GetClipXFactor() { return m_clipXFactor; }
     GLfloat                     GetClipXOffset() { return m_clipXOffset; }
@@ -118,9 +119,13 @@ public:
 
 protected:
     void                        onCompiledAndLinked();
+    void                        onCompiledAndLinkedCommon( QOpenGLFunctions * glf );
     void                        onCompiledAndLinkedGui( QOpenGLFunctions * glf );
     void                        onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf );
     void                        onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf );
+    void                        verifyShaderValues();
+    bool                        verifyValidValue( GLint handle, const char * msg );
+
 
     //=== common to all shaders ===//
     ESHADERMETHOD               m_ShaderMethod;
@@ -128,7 +133,7 @@ protected:
     EShaderType                 m_ShaderType;
     QString                     m_ShaderName;
     RenderGlWidget *            m_RenderWidget;
-    bool                        m_validated;
+    bool                        m_shaderValidated = false;
 
     const GLfloat *             m_proj = nullptr;
     const GLfloat *             m_model = nullptr;
@@ -136,18 +141,21 @@ protected:
     GLint                       m_hModel = -1;
 
     //=== gui shader ===//
-    GLint                       m_hTex0 = 0;
-    GLint                       m_hTex1 = 0;
-    GLint                       m_hUniCol = 0;
-    GLint                       m_hPos = 0;
-    GLint                       m_hCol = 0;
-    GLint                       m_hCord0 = 0;
+    GLint                       m_hTex0 = -1;
+    GLint                       m_hTex1 = -1;
+    GLint                       m_hUniCol = -1;
+    GLint                       m_hPos = -1;
+    GLint                       m_hCol = -1;
+    GLint                       m_hCord0 = -1;
     GLint                       m_hCord1 = -1;
-    GLint                       m_hCoord0Matrix = 0;
+    GLint                       m_hCoord0Matrix = -1;
 
-    GLint                       m_hField = 0;
-    GLint                       m_hContrast = 0;
-    GLint                       m_hBrightness = 0;
+    GLint                       m_hField = -1;
+
+    GLint                       m_hMethod = -1;
+    GLint                       m_hColor = -1;
+    GLint                       m_hContrast = -1;
+    GLint                       m_hBrightness = -1;
 
     bool                        m_clipPossible;
     GLfloat                     m_clipXFactor;
@@ -156,7 +164,7 @@ protected:
     GLfloat                     m_clipYOffset;
 
     //=== gui and format common ===//
-    GLint                       m_hStep = 0;
+    GLint                       m_hStep = -1;
 
     //=== video format shader ===//
     unsigned int                m_flags = 0;
@@ -167,10 +175,10 @@ protected:
     float                       m_contrast = 0.0f;
 
     // shader attribute handles
-    GLint                       m_hYTex = 0;
-    GLint                       m_hUTex = 0;
-    GLint                       m_hVTex = 0;
-    GLint                       m_hMatrix = 0;
+    GLint                       m_hYTex = -1;
+    GLint                       m_hUTex = -1;
+    GLint                       m_hVTex = -1;
+    GLint                       m_hMatrix = -1;
 
     GLint                       m_hYcoord = -1;
     GLint                       m_hUcoord = -1;
@@ -179,25 +187,32 @@ protected:
     bool                        m_convertFullRange = false;
 
     //=== format and filter common ===//
-    int                         m_width = 1;
-    int                         m_height = 1;
     GLint                       m_hVertex = -1;
     GLint                       m_hAlpha = -1;
+
+    int                         m_width = 1;
+    int                         m_height = 1;
     GLfloat                     m_alpha  = 1;
 
     //=== video filter shader ===//
-    float                       m_stepX = 0;
-    float                       m_stepY = 0;
-    GLint                       m_sourceTexUnit = 0;
+    float                       m_stepX = -1;
+    float                       m_stepY = -1;
+    GLint                       m_sourceTexUnit = -1;
+
+    GLint                       m_hPrimMat = -1;
+    GLint                       m_hGammaDstInv = -1;
+    GLint                       m_hGammaSrc = -1;
+    GLint                       m_hToneP1 = -1;
+    GLint                       m_hCoefsDst = -1;
 
     // shader attribute handles
-    GLint                       m_hSourceTex = 0;
-    GLint                       m_hStepXY = 0;
+    GLint                       m_hSourceTex = -1;
+    GLint                       m_hStepXY = -1;
 
-    GLint                       m_hStepX = 0;
-    GLint                       m_hStepY = 0;
+    GLint                       m_hStepX = -1;
+    GLint                       m_hStepY = -1;
 
-    GLint                       m_hcoord = 0;
+    GLint                       m_hcoord = -1;
 
     // shader handles to kernel textures
     GLint                       m_hKernTex = -1;

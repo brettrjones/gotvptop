@@ -202,7 +202,7 @@ public:
     //=== to gui media/render ===//
     //============================================================================
 
-    virtual void                verifyGlState() override; // show gl error if any
+    virtual void                verifyGlState( const char * msg = nullptr ) override; // show gl error if any
 
     //=== textures ===//
     void                        setActiveGlTexture( unsigned int activeTextureNum = 0 /* 0 == GL_TEXTURE0 , 1 == GL_TEXTURE1 etc*/ ) override;

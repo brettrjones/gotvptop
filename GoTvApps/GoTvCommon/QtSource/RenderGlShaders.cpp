@@ -11,49 +11,15 @@
 #include <QTimer>
 #include <QFile>
 
+#include <GL/glu.h>
+
 #define SHADERS_INCLUDE
 #include "RenderShaderDefsGl.cpp"
 
 //============================================================================
 RenderGlShaders::RenderGlShaders( RenderGlWidget& renderGlWidget )
 : m_RenderGlWidget( renderGlWidget )
-{
-}
-
-//============================================================================
-void RenderGlShaders::compileShader( int shaderIdx )
-{
-    EShaderType shaderType = eShaderGui;
-    ESHADERMETHOD shaderMethod = static_cast<ESHADERMETHOD>(shaderIdx);
-
-    std::string shaderName = "SM_UNKNOWN";
-    std::string vertexShaderCode;
-    std::string fragmentShaderCode;
-
-    getShaderSourceCode( shaderIdx, shaderType, shaderName, vertexShaderCode, fragmentShaderCode );
-
-    if( !vertexShaderCode.empty() && !fragmentShaderCode.empty() )
-    {
-        //LogMsg( LOG_INFO, "Compiling shader %s", shaderName.toUtf8().constData() );
-        VerifyGLStateQt();
-
-        RenderShaderQt * shader = new RenderShaderQt( shaderMethod, shaderType, shaderName.c_str(), &m_RenderGlWidget );
-
-        if( shader->compileAndLink( vertexShaderCode.c_str(), fragmentShaderCode.c_str() ) )
-        {
-            // success
-//            if( shaderIdx == 10 )
-//            {
-//               LogMsg( LOG_INFO, "Success compile shader %s", shaderName.c_str() );
-//            }
-
-            m_Shaders[ shaderIdx ] = shader;
-        }
-        else
-        {
-            LogMsg( LOG_ERROR, "Failed to compile shader %d %s", shaderIdx, shaderName.c_str() );
-        }
-    }
+{ 
 }
 
 //============================================================================
@@ -111,18 +77,16 @@ bool RenderGlShaders::enableShader( ESHADERMETHOD method )
         LogMsg( LOG_ERROR, "enableShader - %s", describeShaderMethod( method ) );
     }
 #endif // DEBUG
-    m_RenderGlWidget.verifyRenderCall( "enableShader" );
 
-    bool eanbled = false;
+    bool enabled = false;
     VerifyGLStateQt();
     if( ( method < SM_MAX) && m_Shaders[ method ] )
     {
-        if( eShaderGui == m_Shaders[ method ]->getShaderType() )
+        enabled = m_Shaders[ method ]->enableShader();
+        if( enabled && ( eShaderGui == m_Shaders[ method ]->getShaderType() ) )
         {
             m_CurShaderMethodType = method;
         }
-
-        eanbled = m_Shaders[ method ]->enableShader();
     }
     else
     {
@@ -130,7 +94,7 @@ bool RenderGlShaders::enableShader( ESHADERMETHOD method )
     }
 
     VerifyGLStateQt();
-    return eanbled;
+    return enabled;
 }
 
 //============================================================================
@@ -139,7 +103,6 @@ bool RenderGlShaders::isShaderValid( ESHADERMETHOD method )
     bool shaderValid = false;
     if( ( method < SM_MAX ) && m_Shaders[ method ] )
     {
-        //m_CurShaderMethodType = method;
         shaderValid = m_Shaders[ method ]->isShaderValid();
     }
     else
@@ -155,27 +118,33 @@ bool RenderGlShaders::isShaderValid( ESHADERMETHOD method )
 void RenderGlShaders::disableShader( ESHADERMETHOD method )
 {
 #ifdef DEBUG_KODI_SHADERS
-    LogMsg( LOG_ERROR, "disableShader - %s", describeShaderMethod( method ) );
+    if( method != SM_FONTS )
+    {
+        LogMsg( LOG_ERROR, "disableShader - %s", describeShaderMethod( method ) );
+    }
 #endif // DEBUG
 
     if( m_Shaders[ method ] )
     {
         m_Shaders[ method ]->disableShader();
+        if( eShaderGui == m_Shaders[ method ]->getShaderType() )
+        {
+            m_CurShaderMethodType = SM_DEFAULT;
+        }
     }
 
-    m_CurShaderMethodType = SM_DEFAULT;
     VerifyGLStateQt();
 }
 
 //============================================================================
 void RenderGlShaders::disableGUIShader()
 {
-    if( m_Shaders[ m_CurShaderMethodType ] )
+    if( ( m_CurShaderMethodType < SM_MAX ) && m_Shaders[ m_CurShaderMethodType ] )
     {
         m_Shaders[ m_CurShaderMethodType ]->disableShader();
+        m_CurShaderMethodType = SM_DEFAULT;
     }
 
-    m_CurShaderMethodType = SM_DEFAULT;
     VerifyGLStateQt();
 }
 
@@ -497,6 +466,7 @@ const char * RenderGlShaders::describeShaderMethod( ESHADERMETHOD method )
     return RenderShaderQt::describeShader( method );
 }
 
+
 //============================================================================
 #ifdef DEBUG
 void  RenderGlShaders::VerifyGLStateQtDbg( const char* szfile, const char* szfunction, int lineno )
@@ -504,10 +474,10 @@ void  RenderGlShaders::VerifyGLStateQtDbg( const char* szfile, const char* szfun
     GLenum err = glGetError();
     if( err == GL_NO_ERROR )
         return;
-    LogMsg( LOG_ERROR, "GL ERROR: %d thread %d\n", err, VxGetCurrentThreadId() );
+    LogMsg( LOG_ERROR, "GL ERROR: %d thread %d %s\n", err, VxGetCurrentThreadId(), gluErrorString( err ) );
     if( szfile && szfunction )
     {
-       LogMsg( LOG_ERROR, "In file:%s function:%s line:%d", szfile, szfunction, lineno );
+        LogMsg( LOG_ERROR, "In file:%s function:%s line:%d", szfile, szfunction, lineno );
     }
 
 }
@@ -520,4 +490,3 @@ void RenderGlShaders::VerifyGLStateQt()
     LogMsg( LOG_ERROR, "GL ERROR: %s\n", gluErrorString( err ) );
 }
 #endif
-

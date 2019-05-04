@@ -43,7 +43,6 @@ bool RenderGlWidget::initRenderSystem()
 {
 #ifdef DEBUG_RENDER_THREADS
     setRenderThreadId( VxGetCurrentThreadId() );
-    verifyRenderCall( "initRenderSystem" );
 #endif // DEBUG_RENDER_THREADS
 
     m_RenderLogic.initRenderGlSystem();
@@ -52,21 +51,8 @@ bool RenderGlWidget::initRenderSystem()
 }
 
 //============================================================================
-void RenderGlWidget::verifyRenderCall( const char * functionName )
-{
-#ifdef DEBUG_RENDER_THREADS
-    if( functionName && getRenderThreadId() && ( getRenderThreadId() != VxGetCurrentThreadId() ) )
-    {
-        LogMsg( LOG_ERROR, "ERROR %s render thread 0x%X != current thread 0x%x", functionName, getRenderThreadId(), VxGetCurrentThreadId() );
-    }
-#endif // DEBUG_RENDER_THREADS
-}
-
-//============================================================================
 bool RenderGlWidget::destroyRenderSystem()
 {
-    verifyRenderCall( "destroyRenderSystem" );
-
 	m_RenderWidgetInited = false;
     m_RenderLogic.destroyRenderGlSystem();
 
@@ -88,8 +74,6 @@ void RenderGlWidget::toGuiRenderVideoFrame( int textureIdx, CRenderBuffer* video
 //============================================================================
 bool RenderGlWidget::resetRenderSystem( int width, int height )
 {
-    verifyRenderCall( "resetRenderSystem" );
-
     m_SrcWidth = width;
     m_SrcHeight = height;
 
@@ -129,8 +113,6 @@ bool RenderGlWidget::clearBuffers( GoTvColor color )
 	{
 		return false;
 	}
-
-    verifyRenderCall( "clearBuffers" );
 
     float r = GET_R( color ) / 255.0f;
     float g = GET_G( color ) / 255.0f;
@@ -176,9 +158,6 @@ void RenderGlWidget::setVSync( bool vsync )
 //============================================================================
 void RenderGlWidget::setViewPort( const GoTvRect& viewPort )
 {
-    verifyRenderCall( "setViewPort" );
-
-
     m_GlThreadFunctions->glScissor( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
     m_GlThreadFunctions->glViewport( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
     m_viewPort[ 0 ] = viewPort.x1;
@@ -201,8 +180,6 @@ void RenderGlWidget::setViewPort( const GoTvRect& viewPort )
 //============================================================================
 void RenderGlWidget::getViewPort( GoTvRect& viewPort )
 {
-    verifyRenderCall( "getViewPort" );
-
     viewPort.x1 = 0;
     viewPort.y1 = 0;
     viewPort.x2 = width();
@@ -212,38 +189,28 @@ void RenderGlWidget::getViewPort( GoTvRect& viewPort )
 //============================================================================
 bool RenderGlWidget::scissorsCanEffectClipping()
 {
-    verifyRenderCall( "scissorsCanEffectClipping" );
-
     return true;
 }
 
 //============================================================================
 GoTvRect RenderGlWidget::clipRectToScissorRect( const GoTvRect &rect )
 {
-    verifyRenderCall( "clipRectToScissorRect" );
-
     return rect;
 }
 
 //============================================================================
 void RenderGlWidget::setScissors( const GoTvRect& rect )
 {
-    verifyRenderCall( "setScissors" );
-
 }
 
 //============================================================================
 void RenderGlWidget::resetScissors()
 {
-    verifyRenderCall( "resetScissors" );
-
 }
 
 //============================================================================
 void RenderGlWidget::captureStateBlock()
 {
-    verifyRenderCall( "captureStateBlock" );
-
     glMatrixProject.Push();
     glMatrixModview.Push();
     glMatrixTexture.Push();
@@ -255,8 +222,6 @@ void RenderGlWidget::captureStateBlock()
 //============================================================================
 void RenderGlWidget::applyStateBlock()
 {
-    verifyRenderCall( "applyStateBlock" );
-
     glMatrixProject.PopLoad();
     glMatrixModview.PopLoad();
     glMatrixTexture.PopLoad();
@@ -269,8 +234,6 @@ void RenderGlWidget::applyStateBlock()
 //============================================================================
 void RenderGlWidget::setCameraPosition( const GoTvPoint& camera, int screenWidth, int screenHeight, float stereoFactor )
 {
-    verifyRenderCall( "setCameraPosition" );
-
 	if( !m_RenderWidgetInited )
 	{
 		return;
@@ -297,8 +260,6 @@ void RenderGlWidget::applyHardwareTransform( const TransformMatrix& finalMatrix 
     if( !m_RenderWidgetInited )
         return;
 
-    verifyRenderCall( "applyHardwareTransform" );
-
     glMatrixModview.Push();
     glMatrixModview->MultMatrixf( finalMatrix );
     glMatrixModview.Load();
@@ -309,8 +270,6 @@ void RenderGlWidget::restoreHardwareTransform()
 {
     if( !m_RenderWidgetInited )
         return;
-
-    verifyRenderCall( "restoreHardwareTransform" );
 
     glMatrixModview.PopLoad();
 }
@@ -364,53 +323,44 @@ bool RenderGlWidget::testRender()
 //============================================================================
 void RenderGlWidget::project( float &x, float &y, float &z )
 {
+    /*
     GLfloat coordX, coordY, coordZ;
     if( CMatrixGL::Project( x, y, z, glMatrixModview.Get(), glMatrixProject.Get(), m_viewPort, &coordX, &coordY, &coordZ ) )
     {
         x = coordX;
         y = ( float )( m_viewPort[ 1 ] + m_viewPort[ 3 ] - coordY );
         z = 0;
-    }
+    }*/
 }
 
 // frame buffers
 //============================================================================
 void RenderGlWidget::frameBufferGen( int bufCount, unsigned int* fboId )
 {
-    verifyRenderCall( "frameBufferGen" );
-
     m_GlThreadFunctions->glGenFramebuffers( bufCount, fboId );
 }
 
 //============================================================================
 void RenderGlWidget::frameBufferDelete( int bufCount, unsigned int* fboId )
 {
-    verifyRenderCall( "frameBufferDelete" );
-
     m_GlThreadFunctions->glDeleteFramebuffers( bufCount, fboId );
 }
 
 //============================================================================
 void RenderGlWidget::frameBufferTexture2D( int target, unsigned int texureId )
 {
-    verifyRenderCall( "frameBufferTexture2D" );
-
     m_GlThreadFunctions->glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, target, texureId, 0 );
 }
 
 //============================================================================
 void RenderGlWidget::frameBufferBind( unsigned int fboId )
 {
-    verifyRenderCall( "frameBufferBind" );
-
     m_GlThreadFunctions->glBindFramebuffer( GL_FRAMEBUFFER, fboId );
 }
 
 //============================================================================
 bool RenderGlWidget::frameBufferStatus()
 {
-    verifyRenderCall( "frameBufferStatus" );
-
     GLenum status = m_GlThreadFunctions->glCheckFramebufferStatus( GL_FRAMEBUFFER );
     return ( status == GL_FRAMEBUFFER_COMPLETE );
 }
@@ -440,7 +390,26 @@ void RenderGlBaseWidget::VerifyGLStateQt()
 #endif
 
 //============================================================================
-void RenderGlWidget::verifyGlState() // show gl error if any
+void RenderGlWidget::verifyGlState( const char * msg ) // show gl error if any
 {
+#ifdef DEBUG_RENDER_THREADS
+    if( msg && getRenderThreadId() && ( getRenderThreadId() != VxGetCurrentThreadId() ) )
+    {
+        LogMsg( LOG_ERROR, "ERROR %s render thread 0x%X != current thread %d ", msg, getRenderThreadId(), VxGetCurrentThreadId() );
+    }
+#endif // DEBUG_RENDER_THREADS
+
+#ifdef DEBUG_LOG_RENDER_CALLS
+    if( msg && getRenderThreadId() && ( getRenderThreadId() != VxGetCurrentThreadId() ) )
+    {
+        LogMsg( LOG_ERROR, "ERROR %s render thread 0x%X != thread %d ", msg, getRenderThreadId(), VxGetCurrentThreadId() );
+    }
+    else if( msg )
+    {
+        LogMsg( LOG_ERROR, "gl func %s render thread %d ", msg, getRenderThreadId() );
+    }
+
+#endif // DEBUG_RENDER_THREADS
+
     VerifyGLStateQt();
 }
