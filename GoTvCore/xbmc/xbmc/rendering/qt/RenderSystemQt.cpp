@@ -154,7 +154,9 @@ void CRenderSystemQt::SetVSync( bool enable )
     m_bVSync = enable;
     m_bVsyncInit = true;
 
+    m_IGoTv.verifyGlState( "SetVSync Begin" );
     SetVSyncImpl( enable );
+    m_IGoTv.verifyGlState( "SetVSync End" );
 
     if( !enable )
         return;

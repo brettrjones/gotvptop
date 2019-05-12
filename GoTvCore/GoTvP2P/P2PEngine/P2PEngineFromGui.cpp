@@ -178,7 +178,7 @@ void P2PEngine::fromGuiSendLog(	uint32_t u32LogFlags )
 	}
 
 	char buf[ 256 ];
-	sprintf( buf, "End of log messages count %ld\n", logMsgs.size() );
+	sprintf( buf, "End of log messages count %zd\n", logMsgs.size() );
 	IToGui::getToGui().toGuiLog( 0, buf );
 }
 

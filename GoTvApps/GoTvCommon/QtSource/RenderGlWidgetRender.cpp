@@ -13,7 +13,7 @@
 //============================================================================
 
 #include "RenderGlWidget.h"
-#include "AppCommon.h"
+#include "RenderGlWidget.h"
 #include "AppGlobals.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
@@ -29,7 +29,7 @@
 #include <CoreLib/VxThread.h>
 
 #include "rendering/MatrixGL.h"
-#include <GL/GLU.h>
+#include <GL/glu.h>
 
 
 //============================================================================
@@ -45,16 +45,15 @@ bool RenderGlWidget::initRenderSystem()
     setRenderThreadId( VxGetCurrentThreadId() );
 #endif // DEBUG_RENDER_THREADS
 
-    m_RenderLogic.initRenderGlSystem();
+    RenderGlLogic::initRenderGlSystem();
 
-    return m_RenderWidgetInited;
+    return m_RenderRunning;
 }
 
 //============================================================================
 bool RenderGlWidget::destroyRenderSystem()
 {
-	m_RenderWidgetInited = false;
-    m_RenderLogic.destroyRenderGlSystem();
+    RenderGlLogic::destroyRenderGlSystem();
 
     return true;
 }
@@ -80,11 +79,11 @@ bool RenderGlWidget::resetRenderSystem( int width, int height )
     GoTvRect rect( 0, 0, width, height );
     setViewPort( rect );
 
-    //m_GlThreadFunctions->glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
-    //m_GlThreadFunctions->glClearColor( 0.5f, 0.1f, 0.2f, 1.0f );
-    m_GlThreadFunctions->glClearColor( 0.1f, 0.0f, 0.2f, 1.0f );
+    //getGlFunctions()->glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
+    //getGlFunctions()->glClearColor( 0.5f, 0.1f, 0.2f, 1.0f );
+    getGlFunctions()->glClearColor( 0.1f, 0.0f, 0.2f, 1.0f );
 
-    m_GlThreadFunctions->glEnable( GL_SCISSOR_TEST );
+    getGlFunctions()->glEnable( GL_SCISSOR_TEST );
 
     glMatrixProject.Clear();
     glMatrixProject->LoadIdentity();
@@ -99,9 +98,9 @@ bool RenderGlWidget::resetRenderSystem( int width, int height )
     glMatrixTexture->LoadIdentity();
     glMatrixTexture.Load();
 
-    m_GlThreadFunctions->glBlendFunc( GL_SRC_ALPHA, GL_ONE );
-    m_GlThreadFunctions->glEnable( GL_BLEND );          // Turn Blending On
-    m_GlThreadFunctions->glDisable( GL_DEPTH_TEST );
+    getGlFunctions()->glBlendFunc( GL_SRC_ALPHA, GL_ONE );
+    getGlFunctions()->glEnable( GL_BLEND );          // Turn Blending On
+    getGlFunctions()->glDisable( GL_DEPTH_TEST );
 
     return true;
 }
@@ -109,21 +108,23 @@ bool RenderGlWidget::resetRenderSystem( int width, int height )
 //============================================================================
 bool RenderGlWidget::clearBuffers( GoTvColor color )
 {
-	if( !m_RenderWidgetInited )
+	if( !isRenderReady() )
 	{
 		return false;
 	}
 
+    VerifyGLStateQt();
     float r = GET_R( color ) / 255.0f;
     float g = GET_G( color ) / 255.0f;
     float b = GET_B( color ) / 255.0f;
     float a = GET_A( color ) / 255.0f;
 
-    //m_GlThreadFunctions->glClearColor( r, g, b, a );
+    //getGlFunctions()->glClearColor( r, g, b, a );
     //glClearColor( 0.1f, 0.1f, 0.2f, 1.0f );
 
     GLbitfield flags = GL_COLOR_BUFFER_BIT;
-    m_GlThreadFunctions->glClear( flags );
+    getGlFunctions()->glClear( flags );
+    VerifyGLStateQt();
 
     return true;
 }
@@ -158,15 +159,15 @@ void RenderGlWidget::setVSync( bool vsync )
 //============================================================================
 void RenderGlWidget::setViewPort( const GoTvRect& viewPort )
 {
-    m_GlThreadFunctions->glScissor( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
-    m_GlThreadFunctions->glViewport( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
+    getGlFunctions()->glScissor( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
+    getGlFunctions()->glViewport( ( GLint )viewPort.x1, ( GLint )( m_SrcHeight - viewPort.y1 - viewPort.Height() ), ( GLsizei )viewPort.Width(), ( GLsizei )viewPort.Height() );
     m_viewPort[ 0 ] = viewPort.x1;
     m_viewPort[ 1 ] = m_SrcHeight - viewPort.y1 - viewPort.Height();
     m_viewPort[ 2 ] = viewPort.Width();
     m_viewPort[ 3 ] = viewPort.Height();
 /*
-    m_GlThreadFunctions->glScissor( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
-    m_GlThreadFunctions->glViewport( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
+    getGlFunctions()->glScissor( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
+    getGlFunctions()->glViewport( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
     glScissor( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
     glViewport( (GLint)viewPort.x1, (GLint)( viewPort.y1 ), (GLsizei)viewPort.Width(), (GLsizei)viewPort.Height() );
 
@@ -180,10 +181,10 @@ void RenderGlWidget::setViewPort( const GoTvRect& viewPort )
 //============================================================================
 void RenderGlWidget::getViewPort( GoTvRect& viewPort )
 {
-    viewPort.x1 = 0;
-    viewPort.y1 = 0;
-    viewPort.x2 = width();
-    viewPort.y2 = height();
+    viewPort.x1 = m_viewPort[ 0 ];
+    viewPort.y1 = m_viewPort[ 1 ];
+    viewPort.x2 = m_viewPort[ 2 ];
+    viewPort.y2 = m_viewPort[ 3 ];
 }
 
 //============================================================================
@@ -215,8 +216,8 @@ void RenderGlWidget::captureStateBlock()
     glMatrixModview.Push();
     glMatrixTexture.Push();
 
-    m_GlThreadFunctions->glDisable( GL_SCISSOR_TEST ); // fixes FBO corruption on Macs
-    m_GlThreadFunctions->glActiveTexture( GL_TEXTURE0 );
+    getGlFunctions()->glDisable( GL_SCISSOR_TEST ); // fixes FBO corruption on Macs
+    getGlFunctions()->glActiveTexture( GL_TEXTURE0 );
 }
 
 //============================================================================
@@ -225,16 +226,16 @@ void RenderGlWidget::applyStateBlock()
     glMatrixProject.PopLoad();
     glMatrixModview.PopLoad();
     glMatrixTexture.PopLoad();
-    m_GlThreadFunctions->glActiveTexture( GL_TEXTURE0 );
-    m_GlThreadFunctions->glEnable( GL_BLEND );
-    m_GlThreadFunctions->glEnable( GL_SCISSOR_TEST );
-    m_GlThreadFunctions->glClear( GL_DEPTH_BUFFER_BIT );
+    getGlFunctions()->glActiveTexture( GL_TEXTURE0 );
+    getGlFunctions()->glEnable( GL_BLEND );
+    getGlFunctions()->glEnable( GL_SCISSOR_TEST );
+    getGlFunctions()->glClear( GL_DEPTH_BUFFER_BIT );
 }
 
 //============================================================================
 void RenderGlWidget::setCameraPosition( const GoTvPoint& camera, int screenWidth, int screenHeight, float stereoFactor )
 {
-	if( !m_RenderWidgetInited )
+	if( !isRenderReady() )
 	{
 		return;
 	}
@@ -257,7 +258,7 @@ void RenderGlWidget::setCameraPosition( const GoTvPoint& camera, int screenWidth
 //============================================================================
 void RenderGlWidget::applyHardwareTransform( const TransformMatrix& finalMatrix )
 {
-    if( !m_RenderWidgetInited )
+    if( !isRenderReady() )
         return;
 
     glMatrixModview.Push();
@@ -268,7 +269,7 @@ void RenderGlWidget::applyHardwareTransform( const TransformMatrix& finalMatrix 
 //============================================================================
 void RenderGlWidget::restoreHardwareTransform()
 {
-    if( !m_RenderWidgetInited )
+    if( !isRenderReady() )
         return;
 
     glMatrixModview.PopLoad();
@@ -292,11 +293,11 @@ bool RenderGlWidget::testRender()
     GLint   posLoc = shaderGetPos();
     GLint   colLoc = shaderGetCol();
 
-    m_GlThreadFunctions->glVertexAttribPointer( posLoc, 2, GL_FLOAT, 0, 0, ver );
-    m_GlThreadFunctions->glVertexAttribPointer( colLoc, 4, GL_FLOAT, 0, 0, col );
+    getGlFunctions()->glVertexAttribPointer( posLoc, 2, GL_FLOAT, 0, 0, ver );
+    getGlFunctions()->glVertexAttribPointer( colLoc, 4, GL_FLOAT, 0, 0, col );
 
-    m_GlThreadFunctions->glEnableVertexAttribArray( posLoc );
-    m_GlThreadFunctions->glEnableVertexAttribArray( colLoc );
+    getGlFunctions()->glEnableVertexAttribArray( posLoc );
+    getGlFunctions()->glEnableVertexAttribArray( colLoc );
 
     // Setup vertex position values
     ver[ 0 ][ 0 ] = 0.0f;
@@ -306,10 +307,10 @@ bool RenderGlWidget::testRender()
     ver[ 2 ][ 0 ] = -0.87f;
     ver[ 2 ][ 1 ] = -0.5f;
 
-    m_GlThreadFunctions->glDrawArrays( GL_TRIANGLES, 0, 3 );
+    getGlFunctions()->glDrawArrays( GL_TRIANGLES, 0, 3 );
 
-    m_GlThreadFunctions->glDisableVertexAttribArray( posLoc );
-    m_GlThreadFunctions->glDisableVertexAttribArray( colLoc );
+    getGlFunctions()->glDisableVertexAttribArray( posLoc );
+    getGlFunctions()->glDisableVertexAttribArray( colLoc );
 
     disableGUIShader();
 
@@ -337,79 +338,102 @@ void RenderGlWidget::project( float &x, float &y, float &z )
 //============================================================================
 void RenderGlWidget::frameBufferGen( int bufCount, unsigned int* fboId )
 {
-    m_GlThreadFunctions->glGenFramebuffers( bufCount, fboId );
+    getGlFunctions()->glGenFramebuffers( bufCount, fboId );
 }
 
 //============================================================================
 void RenderGlWidget::frameBufferDelete( int bufCount, unsigned int* fboId )
 {
-    m_GlThreadFunctions->glDeleteFramebuffers( bufCount, fboId );
+    getGlFunctions()->glDeleteFramebuffers( bufCount, fboId );
 }
 
 //============================================================================
 void RenderGlWidget::frameBufferTexture2D( int target, unsigned int texureId )
 {
-    m_GlThreadFunctions->glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, target, texureId, 0 );
+    getGlFunctions()->glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, target, texureId, 0 );
 }
 
 //============================================================================
 void RenderGlWidget::frameBufferBind( unsigned int fboId )
 {
-    m_GlThreadFunctions->glBindFramebuffer( GL_FRAMEBUFFER, fboId );
+    getGlFunctions()->glBindFramebuffer( GL_FRAMEBUFFER, fboId );
 }
 
 //============================================================================
 bool RenderGlWidget::frameBufferStatus()
 {
-    GLenum status = m_GlThreadFunctions->glCheckFramebufferStatus( GL_FRAMEBUFFER );
+    GLenum status = getGlFunctions()->glCheckFramebufferStatus( GL_FRAMEBUFFER );
     return ( status == GL_FRAMEBUFFER_COMPLETE );
 }
 
 //============================================================================
-#ifdef DEBUG
-void  RenderGlWidget::VerifyGLStateQtDbg( const char* szfile, const char* szfunction, int lineno )
+void RenderGlWidget::glFuncDrawElements( GLenum mode, GLsizei count, GLenum type, const GLvoid *indices )
 {
-    GLenum err = glGetError();
-    if( err == GL_NO_ERROR )
-        return;
-    LogMsg( LOG_ERROR, "GL ERROR: %d thread %d %s\n", err, VxGetCurrentThreadId(), gluErrorString( err ) );
-    if( szfile && szfunction )
-    {
-       LogMsg( LOG_ERROR, "In file:%s function:%s line:%d", szfile, szfunction, lineno );
-    }
-
+    getGlFunctions()->glDrawElements( mode, count, type, indices );
 }
-#else
-void RenderGlBaseWidget::VerifyGLStateQt()
-{
-    GLenum err = glGetError();
-    if( err == GL_NO_ERROR )
-        return;
-    LogMsg( LOG_ERROR, "GL ERROR: %s\n", gluErrorString( err ) );
-}
-#endif
 
 //============================================================================
-void RenderGlWidget::verifyGlState( const char * msg ) // show gl error if any
+void RenderGlWidget::glFuncDisable( GLenum cap )
 {
-#ifdef DEBUG_RENDER_THREADS
-    if( msg && getRenderThreadId() && ( getRenderThreadId() != VxGetCurrentThreadId() ) )
-    {
-        LogMsg( LOG_ERROR, "ERROR %s render thread 0x%X != current thread %d ", msg, getRenderThreadId(), VxGetCurrentThreadId() );
-    }
-#endif // DEBUG_RENDER_THREADS
+    getGlFunctions()->glDisable( cap );
+}
 
-#ifdef DEBUG_LOG_RENDER_CALLS
-    if( msg && getRenderThreadId() && ( getRenderThreadId() != VxGetCurrentThreadId() ) )
-    {
-        LogMsg( LOG_ERROR, "ERROR %s render thread 0x%X != thread %d ", msg, getRenderThreadId(), VxGetCurrentThreadId() );
-    }
-    else if( msg )
-    {
-        LogMsg( LOG_ERROR, "gl func %s render thread %d ", msg, getRenderThreadId() );
-    }
+//============================================================================
+void RenderGlWidget::glFuncBindTexture( GLenum target, GLuint texture )
+{
+    getGlFunctions()->glBindTexture( target, texture );
+}
 
-#endif // DEBUG_RENDER_THREADS
+//============================================================================
+void RenderGlWidget::glFuncViewport( GLint x, GLint y, GLsizei width, GLsizei height )
+{
+    getGlFunctions()->glViewport( x, y, width, height );
+}
 
-    VerifyGLStateQt();
+//============================================================================
+void RenderGlWidget::glFuncScissor( GLint x, GLint y, GLsizei width, GLsizei height )
+{
+    getGlFunctions()->glScissor( x, y, width, height );
+}
+
+//============================================================================
+void RenderGlWidget::glFuncGenTextures( GLsizei n, GLuint * textures )
+{
+    getGlFunctions()->glGenTextures( n, textures );
+}
+
+//============================================================================
+void RenderGlWidget::glFuncDeleteTextures( GLsizei n, const GLuint *textures )
+{
+    getGlFunctions()->glDeleteTextures( n, textures );
+}
+
+//============================================================================
+void RenderGlWidget::glFuncTexImage2D( GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels )
+{
+    getGlFunctions()->glTexImage2D( target, level, internalformat, width, height, border, format, type, pixels );
+}
+
+//============================================================================
+void RenderGlWidget::glFuncTexParameteri( GLenum target, GLenum pname, GLint param )
+{
+    getGlFunctions()->glTexParameteri( target, pname, param );
+}
+
+//============================================================================
+void RenderGlWidget::glFuncReadPixels( GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels )
+{
+    getGlFunctions()->glReadPixels( x, y, width, height, format, type, pixels );
+}
+
+//============================================================================
+void RenderGlWidget::glFuncPixelStorei( GLenum pname, GLint param )
+{
+    getGlFunctions()->glPixelStorei( pname, param );
+}
+
+//============================================================================
+void RenderGlWidget::glFuncFinish()
+{
+    getGlFunctions()->glFinish();
 }

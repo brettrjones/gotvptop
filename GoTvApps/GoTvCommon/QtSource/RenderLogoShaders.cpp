@@ -2,11 +2,11 @@
 
 //============================================================================
 // must be called from gui thread (required for linux)
-bool RenderLogoShaders::initLogoShaders()
+bool RenderLogoShaders::initLogoShaders( QOpenGLFunctions * glf )
 {
-    initializeOpenGLFunctions();
+    m_Glf = glf;
 
-    glClearColor(0.7f, 0.1f, 0.2f, 1.0f);
+    m_Glf->glClearColor(0.1f, 0.1f, 0.2f, 1.0f);
 
 
 //#define TEST_KODI_SHADER

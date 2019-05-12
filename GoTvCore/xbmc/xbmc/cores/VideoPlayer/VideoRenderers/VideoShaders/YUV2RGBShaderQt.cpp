@@ -153,8 +153,11 @@ BaseYUV2RGBShaderQt::BaseYUV2RGBShaderQt(  IGoTv& gotv, unsigned flags, EShaderF
         m_ShaderMethod = SM_VIDEO_YV12_BASIC;
     else if( m_format == SHADER_NV12 )
         m_ShaderMethod = SM_VIDEO_NV12_BASIC;
+#ifdef ENABLE_GLES_SHADERS
     else if( m_format == SHADER_YUY2 )
         m_ShaderMethod = SM_VIDEO_YUY2_BASIC;
+#endif // ENABLE_GLES_SHADERS
+
     else if( m_format == SHADER_UYVY )
         m_ShaderMethod = SM_VIDEO_UYVY_BASIC;
     else if( m_format == SHADER_NV12_RRG )
@@ -226,6 +229,7 @@ YUV2RGBBobShaderQt::YUV2RGBBobShaderQt( IGoTv& gotv, unsigned flags, EShaderForm
     //PixelShader()->LoadSource( "gles_yuv2rgb_bob.frag", m_defines );
     switch( m_ShaderMethod )
     {
+#ifdef ENABLE_GLES_SHADERS
     case SM_VIDEO_YV12_BASIC:
         m_ShaderMethod = SM_VIDEO_YV12_BOB;
         break;
@@ -241,6 +245,8 @@ YUV2RGBBobShaderQt::YUV2RGBBobShaderQt( IGoTv& gotv, unsigned flags, EShaderForm
     case SM_VIDEO_NV12_RGB_BASIC:
         m_ShaderMethod = SM_VIDEO_NV12_RGB_BOB;
         break;
+#endif // ENABLE_GLES_SHADERS
+
     default:
         m_Valid = false;
         break;

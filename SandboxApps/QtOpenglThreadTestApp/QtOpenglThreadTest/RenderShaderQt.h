@@ -419,12 +419,13 @@ inline bool operator!=(const TransformMatrix &a, const TransformMatrix &b)
 }
 
 class RenderGlWidget;
+class RenderGlLogic;
 
 class RenderShaderQt : public QOpenGLShaderProgram
 {
 public:
     RenderShaderQt() = delete;
-    RenderShaderQt( ESHADERMETHOD shaderMethod, EShaderType shaderType, QString shaderName, RenderGlWidget * renderWidget );
+    RenderShaderQt( ESHADERMETHOD shaderMethod, EShaderType shaderType, QString shaderName, RenderGlLogic * renderLogic );
 
     bool                        compileAndLink( const char * vertexShaderCode, const char * fragmentShaderCode );
 
@@ -507,7 +508,7 @@ protected:
     ESCALINGMETHOD              m_ScalingMethod;
     EShaderType                 m_ShaderType;
     QString                     m_ShaderName;
-    RenderGlWidget *            m_RenderWidget;
+    RenderGlLogic *             m_RenderWidget;
     bool                        m_validated;
 
     const GLfloat *             m_proj = nullptr;

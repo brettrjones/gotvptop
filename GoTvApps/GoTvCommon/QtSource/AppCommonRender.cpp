@@ -458,6 +458,7 @@ bool AppCommon::clearBuffers( GoTvColor color )
     RenderGlWidget * glWidget = getRenderConsumer();
     if( glWidget )
     {
+        glWidget->verifyGlState( "clearBuffers" );
         result = glWidget->clearBuffers( color );
         if( result )
         {
@@ -1157,4 +1158,136 @@ bool AppCommon::frameBufferStatus()
     }
 
     return result;
+}
+
+//============================================================================
+void AppCommon::glFuncDrawElements( GLenum mode, GLsizei count, GLenum type, const GLvoid *indices )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncDrawElements( mode, count, type, indices );
+        glWidget->verifyGlState( "glFuncDrawElements" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncDisable( GLenum cap )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncDisable( cap );
+        glWidget->verifyGlState( "glFuncDisable" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncBindTexture( GLenum target, GLuint texture )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncBindTexture( target, texture );
+        glWidget->verifyGlState( "glFuncBindTexture" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncViewport( GLint x, GLint y, GLsizei width, GLsizei height )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncViewport( x, y, width, height );
+        glWidget->verifyGlState( "glFuncViewport" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncScissor( GLint x, GLint y, GLsizei width, GLsizei height )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncScissor( x, y, width, height );
+        glWidget->verifyGlState( "glFuncScissor" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncGenTextures( GLsizei n, GLuint * textures )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncGenTextures( n, textures );
+        glWidget->verifyGlState( "glFuncGenTextures" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncDeleteTextures( GLsizei n, const GLuint *textures )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncDeleteTextures( n, textures );
+        glWidget->verifyGlState( "glFuncDeleteTextures" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncTexImage2D( GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncTexImage2D( target, level, internalformat, width, height, border, format, type, pixels );
+        glWidget->verifyGlState( "glFuncTexImage2D" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncTexParameteri( GLenum target, GLenum pname, GLint param )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncTexParameteri( target, pname, param );
+        glWidget->verifyGlState( "glFuncTexParameteri" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncReadPixels( GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncReadPixels( x, y, width, height, format, type, pixels );
+        glWidget->verifyGlState( "glFuncReadPixels" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncPixelStorei( GLenum pname, GLint param )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncPixelStorei( pname, param );
+        glWidget->verifyGlState( "glFuncPixelStorei" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncFinish()
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncFinish();
+        glWidget->verifyGlState( "glFuncFinish" );
+    }
 }

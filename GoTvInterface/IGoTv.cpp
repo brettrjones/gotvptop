@@ -30,6 +30,8 @@ echo traget os is not defined
 #include "GoTvDebugConfig.h"
 
 #include <CoreLib/VxGlobals.h>
+#include <CoreLib/VxMutex.h>
+
 #include <NetLib/VxPeerMgr.h>
 
 using namespace XFILE;
@@ -88,6 +90,9 @@ void ff_flush_avutil_log_buffers(void)
 //============================================================================
 void ff_avutil_log(void* ptr, int level, const char* format, va_list va)
 {
+    static VxMutex logMutex;
+    logMutex.lock();
+
     unsigned int threadId =	VxGetCurrentThreadId();
     AVClass* avc= ptr ? *(AVClass**)ptr : NULL;
 
@@ -130,22 +135,26 @@ void ff_avutil_log(void* ptr, int level, const char* format, va_list va)
     case AV_LOG_QUIET:
     default:
         //logLevel = LOG_LEVEL_NONE;
+        logMutex.unlock();
         return;
     }
 
     if( logLevel > GetILog().getFfmpegLogLevel() )
     {
+        logMutex.unlock();
         return;
     }
 
     if( level > AV_LOG_DEBUG )
     {
+        logMutex.unlock();
         return;
     }
 
     std::string message = StringUtils::FormatV( format, va );
     if( message.empty() )
     {
+        logMutex.unlock();
         return;
     }
 
@@ -176,6 +185,7 @@ void ff_avutil_log(void* ptr, int level, const char* format, va_list va)
     }
 
     buffer.erase( 0, start );
+    logMutex.unlock();
 }
 
 //============================================================================

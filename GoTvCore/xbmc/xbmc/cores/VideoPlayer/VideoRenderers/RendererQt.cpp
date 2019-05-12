@@ -20,10 +20,6 @@
 #include "config_kodi.h"
 #ifdef HAVE_QT_GUI
 
-#if defined(TARGET_OS_WINDOWS)
-# include <libglew/include/GL/glew.h>
-#endif // defined(TARGET_OS_WINDOWS)
-
 #include "system_gl.h"
 
 #include <locale.h>
@@ -153,7 +149,8 @@ bool CRendererQt::ValidateRenderTarget()
         // function pointer for texture might change in
         // call to LoadShaders
         m_IGoTv.verifyGlState();
-        glFinish();
+        m_IGoTv.glFuncFinish();
+
         for( int i = 0; i < NUM_BUFFERS; i++ )
         {
             DeleteTexture( i );
@@ -581,15 +578,18 @@ void CRendererQt::LoadShaders( int field )
             m_IGoTv.verifyGlState();
             m_pYUVProgShader->SetConvertFullColorRange( m_fullRange );
             m_IGoTv.verifyGlState();
+#ifdef ENABLE_GLES_SHADERS
             m_pYUVBobShader = new Shaders::YUV2RGBBobShaderQt( m_IGoTv, m_iFlags, shaderFormat );
             m_IGoTv.verifyGlState();
             m_pYUVBobShader->SetConvertFullColorRange( m_fullRange );
             m_IGoTv.verifyGlState();
+#endif // ENABLE_GLES_SHADERS
 
-//               if( ( m_pYUVProgShader && m_pYUVProgShader->CompileAndLink() )
-//                   && ( m_pYUVBobShader && m_pYUVBobShader->CompileAndLink() ) )
             if( ( m_pYUVProgShader && m_IGoTv.isShaderValid( m_pYUVProgShader->getShaderMethod() ) )
-                && ( m_pYUVBobShader && m_IGoTv.isShaderValid( m_pYUVBobShader->getShaderMethod() ) ) )
+#ifdef ENABLE_GLES_SHADERS
+                  && ( m_pYUVBobShader && m_IGoTv.isShaderValid( m_pYUVBobShader->getShaderMethod() ) ) 
+#endif // ENABLE_GLES_SHADERS
+                )
             {
                 m_renderMethod = RENDER_GLSL;
                 UpdateVideoFilter();
@@ -626,12 +626,13 @@ void CRendererQt::ReleaseShaders()
     if( m_pYUVProgShader )
     {
         delete m_pYUVProgShader;
-        m_pYUVProgShader = NULL;
+        m_pYUVProgShader = nullptr;
     }
+
     if( m_pYUVBobShader )
     {
         delete m_pYUVBobShader;
-        m_pYUVBobShader = NULL;
+        m_pYUVBobShader = nullptr;
     }
 }
 
@@ -738,15 +739,20 @@ void CRendererQt::Render( unsigned int flags, int index )
         {
         case RQ_LOW:
         case RQ_SINGLEPASS:
+#ifdef HAVE_QT_GUI
+        case RQ_MULTIPASS:
+#endif // HAVE_QT_GUI
             RenderSinglePass( index, m_currentField );
             VerifyGLState();
             break;
 
+#ifndef HAVE_QT_GUI
         case RQ_MULTIPASS:
             RenderToFBO( index, m_currentField );
             RenderFromFBO();
             VerifyGLState();
             break;
+#endif // HAVE_QT_GUI
 
         default:
             break;
@@ -842,9 +848,9 @@ void CRendererQt::RenderSinglePass( int index, int field )
         m_tex[ i ][ 2 ][ 1 ] = m_tex[ i ][ 3 ][ 1 ] = planes[ i ].rect.y2;
     }
 
-    glDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx );
+    m_IGoTv.glFuncDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx );
 
-    //VerifyGLState();
+    VerifyGLState();
 
     m_IGoTv.disableShader( pYUVShader->getShaderMethod() );
     //VerifyGLState();
@@ -854,7 +860,7 @@ void CRendererQt::RenderSinglePass( int index, int field )
     m_IGoTv.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), Uloc );
     m_IGoTv.shaderDisableVertexAttribArray( pYUVShader->getShaderMethod(), Vloc );
 
-    //VerifyGLState();
+    VerifyGLState();
 }
 
 //============================================================================
@@ -882,24 +888,28 @@ void CRendererQt::RenderToFBO( int index, int field, bool weave /*= false*/ )
         }
     }
 
+    m_IGoTv.glFuncDisable( GL_DEPTH_TEST );
     glDisable( GL_DEPTH_TEST );
 
     // Y
     //glActiveTexture( GL_TEXTURE0 );
     m_IGoTv.setActiveGlTexture( 0 );
-    glBindTexture( m_textureTarget, planes[ 0 ].id );
+    m_IGoTv.glFuncBindTexture( m_textureTarget, planes[ 0 ].id );
+    //glBindTexture( m_textureTarget, planes[ 0 ].id );
     //VerifyGLState();
 
     // U
     //glActiveTexture( GL_TEXTURE1 );
     m_IGoTv.setActiveGlTexture( 1 );
-    glBindTexture( m_textureTarget, planes[ 1 ].id );
+    //glBindTexture( m_textureTarget, planes[ 1 ].id );
+    m_IGoTv.glFuncBindTexture( m_textureTarget, planes[ 1 ].id );
     //VerifyGLState();
 
     // V
     //glActiveTexture( GL_TEXTURE2 );
     m_IGoTv.setActiveGlTexture( 2 );
-    glBindTexture( m_textureTarget, planes[ 2 ].id );
+    //glBindTexture( m_textureTarget, planes[ 2 ].id );
+    m_IGoTv.glFuncBindTexture( m_textureTarget, planes[ 2 ].id );
     //VerifyGLState();
 
     //glActiveTexture( GL_TEXTURE0 );
@@ -943,7 +953,9 @@ void CRendererQt::RenderToFBO( int index, int field, bool weave /*= false*/ )
     CRect viewport;
     m_renderSystem->GetViewPort( viewport );
     glViewport( 0, 0, m_sourceWidth, m_sourceHeight );
+    m_IGoTv.glFuncViewport( 0, 0, m_sourceWidth, m_sourceHeight );
     glScissor( 0, 0, m_sourceWidth, m_sourceHeight );
+    m_IGoTv.glFuncScissor( 0, 0, m_sourceWidth, m_sourceHeight );
 
     if( !m_IGoTv.enableShader( pYUVShader->getShaderMethod() ) )
     {
@@ -1047,7 +1059,7 @@ void CRendererQt::RenderFromFBO()
     //glActiveTexture( GL_TEXTURE0 );
     m_IGoTv.setActiveGlTexture( 0 );
 
-    glBindTexture( GL_TEXTURE_2D, m_fbo.fbo.Texture() );
+    m_IGoTv.glFuncBindTexture( GL_TEXTURE_2D, m_fbo.fbo.Texture() );
     VerifyGLState();
 
     // Use regular normalized texture coordinates
@@ -1110,7 +1122,7 @@ void CRendererQt::RenderFromFBO()
     tex[ 1 ][ 0 ] = tex[ 2 ][ 0 ] = imgwidth;
     tex[ 2 ][ 1 ] = tex[ 3 ][ 1 ] = imgheight;
 
-    glDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx );
+    m_IGoTv.glFuncDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx );
 
     VerifyGLState();
 
@@ -1121,7 +1133,7 @@ void CRendererQt::RenderFromFBO()
 
     VerifyGLState();
 
-    glBindTexture( GL_TEXTURE_2D, 0 );
+    m_IGoTv.glFuncBindTexture( GL_TEXTURE_2D, 0 );
     VerifyGLState();
 }
 
@@ -1140,7 +1152,7 @@ bool CRendererQt::RenderCapture( CRenderCapture* capture )
     MarkDirty();
     syncDestRectToRotatedPoints();//syncs the changed destRect to m_rotatedDestCoords
     // clear framebuffer and invert Y axis to get non-inverted image
-    glDisable( GL_BLEND );
+    m_IGoTv.glFuncDisable( GL_BLEND );
 
     glMatrixModview.Push();
     // fixme - we know that cvref  & eglimg are already flipped in y direction
@@ -1158,7 +1170,7 @@ bool CRendererQt::RenderCapture( CRenderCapture* capture )
 
     Render( RENDER_FLAG_NOOSD, m_iYV12RenderBuffer );
     // read pixels
-    glReadPixels( 0, CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight() - capture->GetHeight(), capture->GetWidth(), capture->GetHeight(),
+    m_IGoTv.glFuncReadPixels( 0, CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight() - capture->GetHeight(), capture->GetWidth(), capture->GetHeight(),
                   GL_RGBA, GL_UNSIGNED_BYTE, capture->GetRenderBuffer() );
 
     // OpenGLES returns in RGBA order but CRenderCapture needs BGRA order
@@ -1191,7 +1203,7 @@ bool CRendererQt::UploadYV12Texture( int source )
 
     VerifyGLState();
 
-    glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
+    m_IGoTv.glFuncPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
 
     //Load Y plane
     LoadPlane( buf.fields[ FIELD_FULL ][ 0 ], GL_LUMINANCE,

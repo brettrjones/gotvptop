@@ -7,18 +7,16 @@
 #include <QtGui/QPainter>
 
 //============================================================================
-RenderGlOffScreenSurface::RenderGlOffScreenSurface( RenderKodiThread* kodiThread,
+RenderGlOffScreenSurface::RenderGlOffScreenSurface( RenderGlLogic * renderLogic,
                                                     RenderGlWidget * glWidget,
-                                                    QOpenGLContext * guiRenderContext,
                                                     QOpenGLContext * threadRenderContext,
                                                     QScreen* targetScreen, 
                                                     const QSize& size )
 : QOffscreenSurface( targetScreen )
-, m_KodiThread( kodiThread )
+, m_RenderGlLogic( renderLogic )
 , m_GlWidget( glWidget )
 , m_initialized( false )
 , m_updatePending( false )
-, m_RenderGuiContext( guiRenderContext )
 , m_RenderThreadContext( threadRenderContext )
 , m_SurfaceSize( size )
 , m_NextSurfaceSize( size )
@@ -54,9 +52,6 @@ RenderGlOffScreenSurface::~RenderGlOffScreenSurface()
     delete m_RenderThreadContext;
     m_RenderThreadContext = nullptr;
     // gui will clean up its own context
-    // free paint device
-    delete m_paintDevice;
-    m_paintDevice = nullptr;
     m_initialized = false;
     m_updatePending = false;
     destroy();
@@ -85,7 +80,6 @@ QSize RenderGlOffScreenSurface::getSurfaceSize()
 void RenderGlOffScreenSurface::initRenderGlSystem()
 {
     m_RenderThreadContext->makeCurrent( this );
-    setRenderFunctions( m_RenderThreadContext->functions() );
     initializeInternal();
     m_RenderSystemInitialized = true;
 }
@@ -95,6 +89,23 @@ void RenderGlOffScreenSurface::initRenderGlSystem()
 void RenderGlOffScreenSurface::destroyRenderGlSystem()
 {
     m_RenderSystemInitialized = false;
+    m_RenderThreadContext->makeCurrent( this );
+    // free old FBOs
+    if( m_fbo )
+    {
+        m_fbo->release();
+        delete m_fbo;
+        m_fbo = nullptr;
+    }
+
+    if( m_resolvedFbo )
+    {
+        m_resolvedFbo->release();
+        delete m_resolvedFbo;
+        m_resolvedFbo = nullptr;
+    }
+
+    m_RenderThreadContext->makeCurrent( 0 );
 }
 
 //============================================================================
@@ -103,7 +114,7 @@ bool RenderGlOffScreenSurface::beginRenderGl()
 {
     m_updatePending = true;
 
-    if( m_functions && !m_initialized )
+    if( m_Glf && !m_initialized )
     {
         // initialize for render
         initializeInternal();
@@ -117,13 +128,12 @@ bool RenderGlOffScreenSurface::beginRenderGl()
     bindFramebufferObject();
     if( m_RenderThreadContext )
     {
-        m_RenderThreadContext->functions()->glViewport( 0, 0, getSurfaceSize().width(), getSurfaceSize().height() );
+        m_Glf->glViewport( 0, 0, getSurfaceSize().width(), getSurfaceSize().height() );
     }
 
     //glClearColor(   0, 0, 1, 1 );
     m_RenderThreadContext->functions()->glClearColor( 0.2f, 0.1f, 0.2f, 1.0f );
 
-    glClear( GL_COLOR_BUFFER_BIT );
 
     // testTexureRender( true );
     return true;
@@ -133,13 +143,7 @@ bool RenderGlOffScreenSurface::beginRenderGl()
 // called from thread
 bool RenderGlOffScreenSurface::endRenderGl()
 {
- //   if( m_RenderThreadContext )
-//    {
-//        m_RenderThreadContext->functions()->glFlush();
-//    }
-
-    //doneCurrent();
-    return true;
+     return true;
 }
 
 //============================================================================
@@ -160,13 +164,17 @@ void RenderGlOffScreenSurface::presentRenderGl( bool rendered, bool videoLayer )
         if( rendered )
         {
   
-            m_FrameImage = grabFramebuffer();
-            //swapBuffers();
+            m_RenderGlLogic->VerifyGLStateQt();
+            m_RenderGlLogic->setLastRenderedImage( grabFramebuffer() );
+            m_RenderGlLogic->VerifyGLStateQt();
+            //swapBuffers(); // broken do not use
 
             checkForSizeChange();
+            m_RenderGlLogic->VerifyGLStateQt();
 
-			doneCurrent();
-		}
+			//doneCurrent(); // broken do not use
+            m_RenderGlLogic->VerifyGLStateQt();
+        }
 
         //LogMsg( LOG_DEBUG, " RenderGlOffScreenSurface::presentRender done size x(%d) y(%d)", m_SurfaceSize.width(), m_SurfaceSize.height() );
     }
@@ -266,9 +274,10 @@ void RenderGlOffScreenSurface::testTexureRender( bool startRender )
 
 //============================================================================
 /// @doc must be called from render thread
-void RenderGlOffScreenSurface::setRenderFunctions( QOpenGLFunctions * glFunctions )
+void RenderGlOffScreenSurface::setRenderFunctions( QOpenGLFunctions * glFunctions, QOpenGLExtraFunctions* glExtraFunctions )
 {
-    m_functions = glFunctions;
+    m_Glf = glFunctions;
+    m_GlfExtra = glExtraFunctions;
 }
 
 //============================================================================
@@ -278,6 +287,7 @@ void RenderGlOffScreenSurface::checkForSizeChange()
     if( m_NextSurfaceSize != m_SurfaceSize )
     {
         m_SurfaceSize = m_NextSurfaceSize;
+
         recreateFBOAndPaintDevice();
     }
 }
@@ -285,7 +295,7 @@ void RenderGlOffScreenSurface::checkForSizeChange()
 //============================================================================
 QOpenGLFunctions* RenderGlOffScreenSurface::functions() const
 {
-    return ( m_functions );
+    return ( m_Glf );
 }
 
 //============================================================================
@@ -298,12 +308,6 @@ GLuint RenderGlOffScreenSurface::framebufferObjectHandle() const
 const QOpenGLFramebufferObject* RenderGlOffScreenSurface::getFramebufferObject() const
 {
     return ( m_fbo );
-}
-
-//============================================================================
-QOpenGLPaintDevice* RenderGlOffScreenSurface::getPaintDevice() const
-{
-    return ( m_paintDevice );
 }
 
 //============================================================================
@@ -358,34 +362,32 @@ QImage RenderGlOffScreenSurface::grabFramebuffer()
     {
         // check if we have glFrameBufferBlit support. this is true for desktop OpenGL 3.0+, but not
         // OpenGL ES 2.0
-#if !defined(QT_OPENGL_ES_2)
-        if( m_functions_3_0 )
+        if( m_GlfExtra )
         {
             // only blit the color buffer attachment
-            m_functions_3_0->glBindFramebuffer( GL_READ_FRAMEBUFFER, m_fbo->handle() );
-            m_functions_3_0->glBindFramebuffer( GL_DRAW_FRAMEBUFFER, m_resolvedFbo->handle() );
-            m_functions_3_0->glBlitFramebuffer( 0, 0,
+            m_GlfExtra->glBindFramebuffer( GL_READ_FRAMEBUFFER, m_fbo->handle() );
+            m_GlfExtra->glBindFramebuffer( GL_DRAW_FRAMEBUFFER, m_resolvedFbo->handle() );
+            m_GlfExtra->glBlitFramebuffer( 0, 0,
                                                 bufferSize().width(), bufferSize().height(),
                                                 0, 0,
                                                 bufferSize().width(), bufferSize().height(),
                                                 GL_COLOR_BUFFER_BIT, GL_NEAREST );
 
-            m_functions_3_0->glBindFramebuffer( GL_FRAMEBUFFER, 0 );
+            m_GlfExtra->glBindFramebuffer( GL_FRAMEBUFFER, 0 );
         }
         else
-#endif // !defined(QT_OPENGL_ES_2)
         {
             // we must unbind the FBO here, so we can use its texture and bind the default
             // back-buffer
-            m_functions->glBindFramebuffer( GL_FRAMEBUFFER, m_resolvedFbo->handle() );
+            m_Glf->glBindFramebuffer( GL_FRAMEBUFFER, m_resolvedFbo->handle() );
             // now use its texture for drawing in the shader
             // --> bind shader and draw textured quad here
             // bind regular FBO again
-            m_functions->glBindFramebuffer( GL_FRAMEBUFFER, m_fbo->handle() );
+            m_Glf->glBindFramebuffer( GL_FRAMEBUFFER, m_fbo->handle() );
         }
 
         // check if OpenGL errors happened
-        if( GLenum error = m_functions->glGetError() != GL_NO_ERROR ) 
+        if( GLenum error = m_Glf->glGetError() != GL_NO_ERROR )
         {
             qDebug() << "RenderGlOffScreenSurface::grabFramebuffer() - OpenGL error" << error;
         }
@@ -407,11 +409,14 @@ QImage RenderGlOffScreenSurface::grabFramebufferInternal( QOpenGLFramebufferObje
     QImage image;
 #if !defined(QT_OPENGL_ES_2)
     // bind framebuffer first
-    m_functions->glBindFramebuffer( GL_READ_FRAMEBUFFER, fbo->handle() );
-    if( m_functions_3_0 )
+    m_Glf->glBindFramebuffer( GL_READ_FRAMEBUFFER, fbo->handle() );
+
+#if 0 // this causes error in windows
+    if( m_GlfExtra )
     {
-        m_functions_3_0->glReadBuffer( GL_COLOR_ATTACHMENT0 );
+        m_GlfExtra->glReadBuffer( GL_COLOR_ATTACHMENT0 );
     }
+#endif // 0
 
     GLenum internalFormat = fbo->format().internalTextureFormat();
     bool hasAlpha = internalFormat == GL_RGBA || internalFormat == GL_BGRA
@@ -419,14 +424,18 @@ QImage RenderGlOffScreenSurface::grabFramebufferInternal( QOpenGLFramebufferObje
     if( internalFormat == GL_BGRA )
     {
         image = QImage( fbo->size(), hasAlpha ? QImage::Format_ARGB32 : QImage::Format_RGB32 );
-        m_functions->glReadPixels( 0, 0, fbo->size().width(),
+        m_Glf->glReadPixels( 0, 0, fbo->size().width(),
                                    fbo->size().height(), GL_BGRA, GL_UNSIGNED_BYTE, image.bits() );
     }
     else if( ( internalFormat == GL_RGBA ) || ( internalFormat == GL_RGBA8 ) )
     {
         image = QImage( fbo->size(), hasAlpha ? QImage::Format_RGBA8888 : QImage::Format_RGBX8888 );
-        m_functions->glReadPixels( 0, 0, fbo->size().width(),
+        m_Glf->glReadPixels( 0, 0, fbo->size().width(),
                                    fbo->size().height(), GL_RGBA, GL_UNSIGNED_BYTE, image.bits() );
+       //LogMsg( LOG_DEBUG, "fbo w %d h %d surface w %d h %d image w %d h %d\n", 
+       //    width, height,
+       //    m_SurfaceSize.width(), m_SurfaceSize.height(), 
+       //    image.width(), image.height() );
     }
     else
     {
@@ -436,9 +445,11 @@ QImage RenderGlOffScreenSurface::grabFramebufferInternal( QOpenGLFramebufferObje
 #else
     image = m_fbo->toImage();
 #endif // !defined(QT_OPENGL_ES_2)
-    m_functions->glBindFramebuffer( GL_FRAMEBUFFER, m_fbo->handle() );
 
-    m_GlWidget->VerifyGLStateQt();
+    m_Glf->glBindFramebuffer( GL_FRAMEBUFFER, m_fbo->handle() );
+    m_Glf->glViewport( 0, 0, m_SurfaceSize.width(), m_SurfaceSize.height() );
+
+//    m_GlWidget->VerifyGLStateQt();
 
     return ( image.mirrored() );
 }  // RenderGlOffScreenSurface::grabFramebufferInternal
@@ -454,40 +465,37 @@ void RenderGlOffScreenSurface::swapBuffers()
 void RenderGlOffScreenSurface::swapBuffersInternal()
 {
     // blit framebuffer to back buffer
-    makeCurrent();
+    //makeCurrent();
     // make sure all paint operation have been processed
-    m_functions->glFlush();
+    //m_Glf->glFlush();
     // check if we have glFrameBufferBlit support. this is true for desktop OpenGL 3.0+, but not
     // OpenGL ES 2.0
 #if !defined(QT_OPENGL_ES_2)
-    if( m_functions_3_0 )
+    if( m_GlfExtra )
     {
         // if our framebuffer has multi-sampling, the resolve should be done automagically
-        m_functions_3_0->glBindFramebuffer( GL_READ_FRAMEBUFFER, m_fbo->handle() );
-        m_functions_3_0->glBindFramebuffer( GL_DRAW_FRAMEBUFFER, 0 );
+        m_GlfExtra->glBindFramebuffer( GL_READ_FRAMEBUFFER, m_fbo->handle() );
+        m_GlfExtra->glBindFramebuffer( GL_DRAW_FRAMEBUFFER, 0 );
         // blit all buffers including depth buffer for further rendering
-        m_functions_3_0->glBlitFramebuffer( 0, 0, bufferSize().width(),
+        m_GlfExtra->glBlitFramebuffer( 0, 0, bufferSize().width(),
                                             bufferSize().height(), 0, 0, bufferSize().width(),
                                             bufferSize().height(), GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT,
                                             GL_NEAREST );
-        m_functions_3_0->glBindFramebuffer( GL_FRAMEBUFFER, m_fbo->handle() );
+        m_GlfExtra->glBindFramebuffer( GL_FRAMEBUFFER, m_fbo->handle() );
     }
     else
 #endif // !defined(QT_OPENGL_ES_2)
     {
         // we must unbind the FBO here, so we can use its texture and bind the default back-buffer
-        m_functions->glBindFramebuffer( GL_FRAMEBUFFER, 0 );
+        m_Glf->glBindFramebuffer( GL_FRAMEBUFFER, 0 );
         // now use its texture for drawing in the shader
         // --> bind shader and draw textured quad here
         // bind regular FBO again
-        m_functions->glBindFramebuffer( GL_FRAMEBUFFER, m_fbo->handle() );
+        m_Glf->glBindFramebuffer( GL_FRAMEBUFFER, m_fbo->handle() );
     }
 
     // check if OpenGL errors happened
-    if( GLenum error = m_functions->glGetError() != GL_NO_ERROR ) 
-    {
-        qDebug() << "RenderGlOffScreenSurface::swapBuffersInternal() - OpenGL error" << error;
-    }
+    m_RenderGlLogic->VerifyGLStateQt();
 
     // now swap back buffer to front buffer
     m_RenderThreadContext->swapBuffers( this );
@@ -528,7 +536,7 @@ void RenderGlOffScreenSurface::recreateFBOAndPaintDevice()
 
         // clear framebuffer
         m_fbo->bind();
-        m_functions->glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT );
+        m_Glf->glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT );
         m_fbo->release();
         // if multi sampling is requested and supported we need a resolve FBO
         if( format.samples() > 0 ) 
@@ -544,21 +552,9 @@ void RenderGlOffScreenSurface::recreateFBOAndPaintDevice()
 
             // clear resolve framebuffer
             m_resolvedFbo->bind();
-            m_functions->glClear( GL_COLOR_BUFFER_BIT );
+            m_Glf->glClear( GL_COLOR_BUFFER_BIT );
             m_resolvedFbo->release();
         }
-    }
-
-    // create paint device for painting with QPainter if needed
-    if( !m_paintDevice ) 
-    {
-        m_paintDevice = new QOpenGLPaintDevice;
-    }
-
-    // update paint device size if needed
-    if( m_paintDevice->size() != bufferSize() ) 
-    {
-        m_paintDevice->setSize( bufferSize() );
     }
 } 
 
@@ -568,8 +564,6 @@ void RenderGlOffScreenSurface::initializeInternal()
     if( m_RenderThreadContext && !m_initialized.exchange( true ) )
     {
         // now we have a context, create the FBO
-        QOpenGLFunctions * glF = m_RenderThreadContext->functions();
-        glF->initializeOpenGLFunctions();
 
         recreateFBOAndPaintDevice();
     }
@@ -616,15 +610,4 @@ QSize RenderGlOffScreenSurface::bufferSize() const
 {
     return ( m_SurfaceSize );
 }
-
-//============================================================================
-void RenderGlOffScreenSurface::slotGlResized( int w, int h )
-{
-    m_NextSurfaceSize = QSize( w, h );
-    if( m_functions )
-    {
-        m_functions->glViewport( 0, 0, w, h );
-    }
-}
-
 

@@ -11,22 +11,15 @@
 
 class RenderGlWidget;
 
-class RenderGlShaders : public QOpenGLFunctions
+class RenderGlShaders
 {
 public:
 
-#ifdef DEBUG
-    void VerifyGLStateQtDbg( const char* szfile, const char* szfunction, int lineno );
-#  define VerifyGLStateQt() VerifyGLStateQtDbg(__FILE__, __FUNCTION__, __LINE__)
-#else
-    void VerifyGLStateQt();
-#endif
-
-    RenderGlShaders( RenderGlWidget& renderGlWidget );
+    RenderGlShaders( RenderGlLogic& renderGlLogic );
     virtual ~RenderGlShaders();
 
     // must be called from gui thread (required for linux)
-    void initShaders();
+    void initShaders( QOpenGLFunctions * glf );
 
     // cleanup shaders
     void destroyShaders();
@@ -36,17 +29,18 @@ public:
 
     //virtual void                initialiseShaders();
     //virtual void                releaseShaders();
-    virtual bool                enableShader( ESHADERMETHOD method );
-    virtual bool                isShaderValid( ESHADERMETHOD method );
-    virtual void                disableShader( ESHADERMETHOD method );
-    virtual void                disableGUIShader();
 
-    virtual int                 shaderGetPos( );
-    virtual int                 shaderGetCol( )  ;
-    virtual int                 shaderGetModel( )  ;
-    virtual int                 shaderGetCoord0( );
-    virtual int                 shaderGetCoord1( );
-    virtual int                 shaderGetUniCol( );
+    bool                        enableShader( ESHADERMETHOD method );
+    bool                        isShaderValid( ESHADERMETHOD method );
+    void                        disableShader( ESHADERMETHOD method );
+    void                        disableGUIShader();
+
+    int                         shaderGetPos();
+    int                         shaderGetCol();
+    int                         shaderGetModel();
+    int                         shaderGetCoord0();
+    int                         shaderGetCoord1();
+    int                         shaderGetUniCol();
 
     // yuv shader
     virtual void                shaderSetField( ESHADERMETHOD shader, int field );
@@ -69,8 +63,7 @@ public:
     virtual void                shaderSetFormat( ESHADERMETHOD shader, EShaderFormat format );
     virtual void                shaderSourceTexture( ESHADERMETHOD shader, int ytex );
     virtual void                shaderSetStepX( ESHADERMETHOD shader, float stepX );
-    virtual void                shaderSetStepY( ESHADERMETHOD shader, float stepY );
-
+    virtual void                shaderSetStepY( ESHADERMETHOD shader, float stepY ) ;
 
     // filter shader
     virtual bool                shaderGetTextureFilter( ESHADERMETHOD shader, int& filter );
@@ -81,13 +74,13 @@ public:
     virtual void                shaderEnableVertexAttribArray( ESHADERMETHOD shader, int arrayId );
     virtual void                shaderDisableVertexAttribArray( ESHADERMETHOD shader, int arrayId );
 
-
 protected:
     void                        getShaderSourceCode( int shaderIdx, EShaderType& shaderType, std::string& shaderName, std::string& vertexShaderCode, std::string& fragmentShaderCode );
     void                        compileShader( int shaderIdx );
 
-    RenderGlWidget&             m_RenderGlWidget;
+    RenderGlLogic&              m_RenderLogic;
     // shaders
+    QOpenGLFunctions *          m_Glf = nullptr;
     RenderShaderQt *            m_Shaders[ SM_MAX ];
     bool                        m_ShadersInited = false;
     ESHADERMETHOD               m_CurShaderMethodType = SM_DEFAULT;

@@ -53,16 +53,13 @@ static void CalculateYUVMatrixGLES( GLfloat      res[ 4 ][ 4 ]
 }
 
 //============================================================================
-RenderShaderQt::RenderShaderQt( ESHADERMETHOD shaderMethod, EShaderType shaderType, QString shaderName, RenderGlWidget * renderWidget )
+RenderShaderQt::RenderShaderQt( ESHADERMETHOD shaderMethod, EShaderType shaderType, QString shaderName, RenderGlLogic& renderLogic )
     : QOpenGLShaderProgram()
     , m_ShaderMethod( shaderMethod )
     , m_ScalingMethod( VS_SCALINGMETHOD_LINEAR )
     , m_ShaderType( shaderType )
     , m_ShaderName( shaderName )
-    , m_RenderWidget( renderWidget )
-    , m_proj( nullptr )
-    , m_model( nullptr )
-    , m_clipPossible( false )
+    , m_RenderLogic( renderLogic )
 {
  #ifdef GL_RGBA16F_EXT
     if( CServiceBroker::GetRenderSystem()->IsExtSupported( "GL_EXT_color_buffer_float" ) )
@@ -96,9 +93,9 @@ void RenderGlShaders::compileShader( int shaderIdx )
     if( !vertexShaderCode.empty() && !fragmentShaderCode.empty() )
     {
         //LogMsg( LOG_INFO, "Compiling shader %s", shaderName.toUtf8().constData() );
-        VerifyGLStateQt();
+        m_RenderLogic.VerifyGLStateQt();
 
-        RenderShaderQt * shader = new RenderShaderQt( shaderMethod, shaderType, shaderName.c_str(), &m_RenderGlWidget );
+        RenderShaderQt * shader = new RenderShaderQt( shaderMethod, shaderType, shaderName.c_str(), m_RenderLogic );
 
         if( shader->compileAndLink( vertexShaderCode.c_str(), fragmentShaderCode.c_str() ) )
         {
@@ -124,129 +121,207 @@ bool RenderShaderQt::compileAndLink( const char * vertexShaderCode, const char *
     m_proj = nullptr;
     m_model = nullptr;
     m_clipPossible = false;
-    m_RenderWidget->VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
 
     if( vertexShaderCode )
     {
         if( !addShaderFromSourceCode( QOpenGLShader::Vertex, vertexShaderCode ) )
         {
-            LogMsg( LOG_ERROR, "could not add vertex shader" );
+            LogMsg( LOG_ERROR, "could not add vertex shader %s", describeShader( m_ShaderMethod ) );
             result = false;
         }
     }
     
     if( result && !addShaderFromSourceCode( QOpenGLShader::Fragment, fragmentShaderCode ) )
     {
-        LogMsg( LOG_ERROR, "could not add fragment shader" );
+        LogMsg( LOG_ERROR, "could not add fragment shader %s", describeShader( m_ShaderMethod ) );
         result = false;
     }
     
     if( result && !link() )
     {
-        LogMsg( LOG_ERROR, "could not link shader" );
+        LogMsg( LOG_ERROR, "could not link shader %s", describeShader( m_ShaderMethod ) );
     }
 
-    m_RenderWidget->VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     
     if( result )
     {
         // success
-        onCompiledAndLinked();
+        onCompiledAndLinked( vertexShaderCode, fragmentShaderCode );
     }
 
-    m_RenderWidget->VerifyGLStateQt();
+    if( result && !validateProgram() )
+    {
+        LogMsg( LOG_ERROR, "could not validate shader %s", describeShader( m_ShaderMethod ) );
+    }
+
+    m_RenderLogic.VerifyGLStateQt();
 
     return result;
 }
 
 //============================================================================
-void RenderShaderQt::onCompiledAndLinked()
+void RenderShaderQt::onCompiledAndLinked( const char * vertexShaderCode, const char *fragmentShaderCode )
 {
     // This is called after CompileAndLink()
 
-    if( !m_RenderWidget )
+    QOpenGLFunctions * glf = m_RenderLogic.getGlFunctions();
+    if( !glf )
     {
-        LogMsg( LOG_ERROR, "onCompiledAndLinked has no render widget" );
+        LogMsg( LOG_ERROR, "onCompiledAndLinked could not get gl functions" );
         return;
     }
 
-     QOpenGLFunctions * glf = m_RenderWidget->getGlFunctions();
-     if( !glf )
-     {
-         LogMsg( LOG_ERROR, "onCompiledAndLinked could not get gl functions" );
-         return;
-     }
+    onCompiledAndLinkedCommon( glf, vertexShaderCode, fragmentShaderCode );
+    switch( m_ShaderType )
+    {
+    case eShaderVideoFilter:
+        onCompiledAndLinkedVideoFilter( glf, vertexShaderCode, fragmentShaderCode );
+        break;
 
-     onCompiledAndLinkedCommon( glf );
-     switch( m_ShaderType )
-     {
-     case eShaderVideoFilter:
-         onCompiledAndLinkedVideoFilter( glf );
-         break;
+    case eShaderVideoFormat:
+        onCompiledAndLinkedVideoFormat( glf, vertexShaderCode, fragmentShaderCode );
+        break;
 
-     case eShaderVideoFormat:
-         onCompiledAndLinkedVideoFormat( glf );
-         break;
+    case eShaderGui:
+    default:
+        onCompiledAndLinkedGui( glf, vertexShaderCode, fragmentShaderCode );
+        break;
+    }
 
-     case eShaderGui:
-     default:
-         onCompiledAndLinkedGui( glf );
-         break;
-     }
+    if( !m_shaderValidated )
+    {
+        validateProgram();
+    }
 }
 
 //============================================================================
-void RenderShaderQt::onCompiledAndLinkedCommon( QOpenGLFunctions * glf )
+bool RenderShaderQt::validateProgram()
 {
-    //=== all shaders have these vars ===//
-    m_hProj = glf->glGetUniformLocation( programId(), "m_proj" );
-    verifyValidValue( m_hProj, "m_hProj" );
+    verifyProgramId();
 
-    m_hModel = glf->glGetUniformLocation( programId(), "m_model" );
-    verifyValidValue( m_hModel, "m_hModel" );
+    QOpenGLFunctions * glf = m_RenderLogic.getGlFunctions();
+    if( glf && programId() )
+    {
+        glf->glUseProgram( programId() );
+        //if( onEnabled() )
+        {
+            if( !m_shaderValidated )
+            {
+                // validate the program
+                GLint params[ 4 ];
+                glf->glValidateProgram( programId() );
+                glf->glGetProgramiv( programId(), GL_VALIDATE_STATUS, params );
+                if( params[ 0 ] != GL_TRUE )
+                {
+                    #define LOG_SIZE 1024
 
+                    GLchar log[ LOG_SIZE ];
+                    LogMsg( LOG_ERROR, "GL: Error validating shader" );
+                    glf->glGetProgramInfoLog( programId(), LOG_SIZE, NULL, log );
+                    LogMsg( LOG_ERROR, "%s", log );
+                }
+
+                //verifyShaderValues();
+                m_shaderValidated = true;
+            }
+
+            //VerifyGLStateQt();
+            return true;
+        }
+        //else
+        //{
+        //    LogMsg( LOG_ERROR, "GL: Error glUseProgram %d", programId() );
+        //    glf->glUseProgram( 0 );
+        //    return false;
+        //}
+    }
 }
 
 //============================================================================
-void RenderShaderQt::onCompiledAndLinkedGui( QOpenGLFunctions * glf )
+void RenderShaderQt::onCompiledAndLinkedCommon( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode )
+{
+    if( ( m_ShaderMethod != SM_VID_FILTER_CONVOLUTION_4X4_RGBA )
+        && ( m_ShaderMethod != SM_VID_FILTER_CONVOLUTION_4X4_FLOAT )
+        && ( m_ShaderMethod != SM_VID_FILTER_CONVOLUTION_6X6_RGBA )
+        && ( m_ShaderMethod != SM_VID_FILTER_CONVOLUTION_6X6_FLOAT )
+        )
+    {
+        //=== all other shaders have these vars ===//
+        m_hProj = glf->glGetUniformLocation( programId(), "m_proj" );
+        verifyValidValue( m_hProj, "m_hProj" );
+
+        m_hModel = glf->glGetUniformLocation( programId(), "m_model" );
+        verifyValidValue( m_hModel, "m_hModel" );
+    }
+}
+
+//============================================================================
+void RenderShaderQt::onCompiledAndLinkedGui( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode )
 {
 
     //=== Variables passed directly to the Vertex shader ===//
-
-#ifndef TARGET_OS_WINDOWS
+//#ifdef ENABLE_GLES_SHADERS
     m_hCoord0Matrix = glf->glGetUniformLocation( programId(), "m_coord0Matrix" );
-    verifyValidValue( m_hCoord0Matrix, "m_hCoord0Matrix" ); // evidently microsoft not allowd to have more that 2 matrix ?
-#endif // TARGET_OS_WINDOWS
+//    verifyValidValue( m_hCoord0Matrix, "m_hCoord0Matrix" ); 
+//#endif // ENABLE_GLES_SHADERS
 
     m_hPos = glf->glGetAttribLocation( programId(), "m_attrpos" );
-    verifyValidValue( m_hPos, "m_hPos" ); 
+    verifyValidValue( m_hPos, "m_hPos" );
 
-    m_hCol = glf->glGetAttribLocation( programId(), "m_attrcol" );
-    verifyValidValue( m_hCol, "m_hCol" );
-     
+    if( ( SM_MULTI != m_ShaderMethod )
+        )
+    {
+        m_hCol = glf->glGetAttribLocation( programId(), "m_attrcol" );
+        //verifyValidValue( m_hCol, "m_hCol" );
+    }
+
     m_hCord0 = glf->glGetAttribLocation( programId(), "m_attrcord0" );
-    verifyValidValue( m_hCord0, "m_hCord0" );
+    //verifyValidValue( m_hCord0, "m_hCord0" );
 
     m_hCord1 = glf->glGetAttribLocation( programId(), "m_attrcord1" );
-    verifyValidValue( m_hCord0, "m_hCord1" );
+    //verifyValidValue( m_hCord1, "m_hCord1" );
 
     // Variables passed directly to the Fragment shader
     if( ( SM_MULTI != m_ShaderMethod )
         && ( SM_FONTS != m_ShaderMethod )
         && ( SM_TEXTURE_NOBLEND != m_ShaderMethod )
         && ( SM_MULTI_BLENDCOLOR != m_ShaderMethod )
-        && ( SM_TEXTURE_RGBA != m_ShaderMethod ) )
+#ifdef ENABLE_GLES_SHADERS
+        && ( SM_TEXTURE_RGBA != m_ShaderMethod ) 
+        && ( SM_TEXTURE_RGBA_OES != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_BLENDCOLOR != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_BOB != m_ShaderMethod )    
+        && ( SM_TEXTURE_RGBA_BOB_OES != m_ShaderMethod )
+#endif // ENABLE_GLES_SHADERS
+        )
     {
         m_hUniCol = glf->glGetUniformLocation( programId(), "m_unicol" );
         verifyValidValue( m_hUniCol, "m_hUniCol" );
     }
 
-    m_hTex0 = glf->glGetUniformLocation( programId(), "m_samp0" );
-    verifyValidValue( m_hTex0, "m_hTex0" );
+    if( ( SM_DEFAULT != m_ShaderMethod )
+        && ( SM_VIDEO_YUY2_BASIC != m_ShaderMethod ) 
+        )
+    {
+        m_hTex0 = glf->glGetUniformLocation( programId(), "m_samp0" );
+        verifyValidValue( m_hTex0, "m_hTex0" );
+    }
+
     if( ( SM_DEFAULT != m_ShaderMethod )
         && ( SM_TEXTURE != m_ShaderMethod )
         && ( SM_FONTS != m_ShaderMethod )
-        && ( SM_TEXTURE_NOBLEND != m_ShaderMethod ) )
+        && ( SM_TEXTURE_NOBLEND != m_ShaderMethod )
+#ifdef ENABLE_GLES_SHADERS
+        && ( SM_TEXTURE_RGBA != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_OES != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_BLENDCOLOR != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_BOB != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_BOB_OES != m_ShaderMethod )
+#endif // ENABLE_GLES_SHADERS
+
+        )
     {
         m_hTex1 = glf->glGetUniformLocation( programId(), "m_samp1" );
         verifyValidValue( m_hTex1, "m_hTex1" );
@@ -258,7 +333,13 @@ void RenderShaderQt::onCompiledAndLinkedGui( QOpenGLFunctions * glf )
         && ( SM_FONTS != m_ShaderMethod )
         && ( SM_TEXTURE_NOBLEND != m_ShaderMethod )
         && ( SM_MULTI_BLENDCOLOR != m_ShaderMethod )
-        && ( SM_TEXTURE_RGBA != m_ShaderMethod ) )
+#ifdef ENABLE_GLES_SHADERS
+        && ( SM_TEXTURE_RGBA != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_OES != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_BLENDCOLOR != m_ShaderMethod )
+#endif // ENABLE_GLES_SHADERS
+
+        )
     {
         m_hField = glf->glGetUniformLocation( programId(), "m_field" );
         verifyValidValue( m_hField, "m_hField" );
@@ -271,7 +352,12 @@ void RenderShaderQt::onCompiledAndLinkedGui( QOpenGLFunctions * glf )
         && ( SM_MULTI != m_ShaderMethod )
         && ( SM_FONTS != m_ShaderMethod )
         && ( SM_TEXTURE_NOBLEND != m_ShaderMethod )
-        && ( SM_MULTI_BLENDCOLOR != m_ShaderMethod ) )
+        && ( SM_MULTI_BLENDCOLOR != m_ShaderMethod ) 
+#ifdef ENABLE_GLES_SHADERS
+        && ( SM_TEXTURE_RGBA_BLENDCOLOR != m_ShaderMethod )
+#endif // ENABLE_GLES_SHADERS
+
+        )
     {
         m_hContrast = glf->glGetUniformLocation( programId(), "m_contrast" );
         verifyValidValue( m_hContrast, "m_hContrast" );
@@ -279,13 +365,62 @@ void RenderShaderQt::onCompiledAndLinkedGui( QOpenGLFunctions * glf )
         verifyValidValue( m_hBrightness, "m_hBrightness" );
     }
 
+    if( ( SM_DEFAULT != m_ShaderMethod )
+        && ( SM_TEXTURE != m_ShaderMethod )
+        && ( SM_MULTI != m_ShaderMethod )
+        && ( SM_FONTS != m_ShaderMethod )
+        && ( SM_TEXTURE_NOBLEND != m_ShaderMethod )
+        && ( SM_MULTI_BLENDCOLOR != m_ShaderMethod )
+#ifdef ENABLE_GLES_SHADERS
+        && ( SM_TEXTURE_RGBA != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_OES != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_BLENDCOLOR != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_BOB != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_BOB_OES != m_ShaderMethod )
+#endif // ENABLE_GLES_SHADERS
+
+        )
+    {
+        m_hMethod = glf->glGetUniformLocation( programId(), "m_method" );
+        verifyValidValue( m_hMethod, "m_method" );
+    }
+
+    if( ( SM_DEFAULT != m_ShaderMethod )
+        && ( SM_TEXTURE != m_ShaderMethod )
+        && ( SM_MULTI != m_ShaderMethod )
+        && ( SM_FONTS != m_ShaderMethod )
+        && ( SM_TEXTURE_NOBLEND != m_ShaderMethod )
+        && ( SM_MULTI_BLENDCOLOR != m_ShaderMethod )
+#ifdef ENABLE_GLES_SHADERS
+        && ( SM_TEXTURE_RGBA != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_OES != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_BLENDCOLOR != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_BOB != m_ShaderMethod )
+        && ( SM_TEXTURE_RGBA_BOB_OES != m_ShaderMethod )
+#endif // ENABLE_GLES_SHADERS
+
+
+        )
+    {
+        m_hColor = glf->glGetUniformLocation( programId(), "m_colour" );
+        verifyValidValue( m_hColor, "m_colour" );
+    }
+
     //=== Setup program for use ===//
 
     // It's okay to do this only one time. Textures units never change.
     glf->glUseProgram( programId() );
     glf->glUniform1i( m_hTex0, 0 );
-    glf->glUniform1i( m_hTex1, 1 );
-    glf->glUniform4f( m_hUniCol, 1.0, 1.0, 1.0, 1.0 );
+
+    if( m_hTex1 >= 0 )
+    {
+        glf->glUniform1i( m_hTex1, 1 );
+    }
+
+    if( m_hUniCol >= 0 )
+    {
+        glf->glUniform4f( m_hUniCol, 1.0, 1.0, 1.0, 1.0 );
+    }
 
     static const float identity[ 16 ] = {
       1.0f, 0.0f, 0.0f, 0.0f,
@@ -300,92 +435,83 @@ void RenderShaderQt::onCompiledAndLinkedGui( QOpenGLFunctions * glf )
 }
 
 //============================================================================
-void RenderShaderQt::onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf )
+void RenderShaderQt::onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode )
 {
-    if( SM_VIDEO_YV12_BASIC == m_ShaderMethod )
-    {
-        LogMsg( LOG_ERROR, "SM_VIDEO_YV12_BASIC onCompiledAndLinkedVideoFormat %s", describeShader( m_ShaderMethod ) );
-    }
-
-     // Variables passed directly to the Vertex shader
-    m_hVertex   = glf->glGetAttribLocation( programId(), "m_attrpos" );
+    // Variables passed directly to the Vertex shader
+    m_hVertex = glf->glGetAttribLocation( programId(), "m_attrpos" );
     verifyValidValue( m_hVertex, "m_hVertex" );
 
-    m_hYcoord   = glf->glGetAttribLocation( programId(), "m_attrcordY" );
+    m_hYcoord = glf->glGetAttribLocation( programId(), "m_attrcordY" );
     verifyValidValue( m_hYcoord, "m_hYcoord" );
-    m_hUcoord   = glf->glGetAttribLocation( programId(), "m_attrcordU" );
-    verifyValidValue( m_hUcoord, "m_hUcoord" );
-    m_hVcoord   = glf->glGetAttribLocation( programId(), "m_attrcordV" );
-    verifyValidValue( m_hVcoord, "m_hVcoord" );
-    m_hProj     = glf->glGetUniformLocation( programId(), "m_proj" );
-    verifyValidValue( m_hProj, "m_hProj" );
-    m_hModel    = glf->glGetUniformLocation( programId(), "m_model" );
-    verifyValidValue( m_hModel, "m_hModel" );
+    m_hUcoord = glf->glGetAttribLocation( programId(), "m_attrcordU" );
+    //verifyValidValue( m_hUcoord, "m_hUcoord" );
+    m_hVcoord = glf->glGetAttribLocation( programId(), "m_attrcordV" );
+    //verifyValidValue( m_hVcoord, "m_hVcoord" );
 
     // Variables passed directly to the Fragment shader
-    m_hAlpha    = glf->glGetUniformLocation( programId(), "m_alpha" );
+    m_hAlpha = glf->glGetUniformLocation( programId(), "m_alpha" );
     verifyValidValue( m_hAlpha, "m_hAlpha" );
-    m_hYTex     = glf->glGetUniformLocation( programId(), "m_sampY" );
+
+    m_hYTex = glf->glGetUniformLocation( programId(), "m_sampY" );
     verifyValidValue( m_hYTex, "m_hYTex" );
-    m_hUTex     = glf->glGetUniformLocation( programId(), "m_sampU" );
-    verifyValidValue( m_hUTex, "m_hUTex" );
-    m_hVTex     = glf->glGetUniformLocation( programId(), "m_sampV" );
-    verifyValidValue( m_hVTex, "m_hVTex" );
-    m_hMatrix   = glf->glGetUniformLocation( programId(), "m_yuvmat" );
+    m_hUTex = glf->glGetUniformLocation( programId(), "m_sampU" );
+    //verifyValidValue( m_hUTex, "m_hUTex" );
+    m_hVTex = glf->glGetUniformLocation( programId(), "m_sampV" );
+    //verifyValidValue( m_hVTex, "m_hVTex" );
+
+    m_hMatrix = glf->glGetUniformLocation( programId(), "m_yuvmat" );
     verifyValidValue( m_hMatrix, "m_hMatrix" );
-    m_hStep     = glf->glGetUniformLocation( programId(), "m_step" );
-    verifyValidValue( m_hStep, "m_hStep" );
-    //VerifyGLStateQt();
-    m_hPrimMat = glf->glGetUniformLocation( programId(), "m_primMat" );
-    verifyValidValue( m_hPrimMat, "m_hPrimMat" );
 
-    m_hGammaDstInv = glf->glGetUniformLocation( programId(), "m_gammaDstInv" );
-    verifyValidValue( m_hGammaDstInv, "m_hGammaDstInv" );
-
-    m_hGammaSrc = glf->glGetUniformLocation( programId(), "m_gammaSrc" );
-    verifyValidValue( m_hGammaSrc, "m_hGammaSrc" );
-
-    m_hToneP1 = glf->glGetUniformLocation( programId(), "m_toneP1" );
-    verifyValidValue( m_hToneP1, "m_hToneP1" );
-
-    m_hCoefsDst = glf->glGetUniformLocation( programId(), "m_coefsDst" );
-    verifyValidValue( m_hCoefsDst, "m_hCoefsDst" );
-
-
-
-    switch( m_ShaderMethod )
+    if( ( SM_VIDEO_YV12_BASIC != m_ShaderMethod )
+        && ( SM_VIDEO_NV12_BASIC != m_ShaderMethod )
+        )
     {
-    case SM_VIDEO_YV12_BOB:
-    case SM_VIDEO_NV12_BOB:
-    case SM_VIDEO_YUY2_BOB:
-    case SM_VIDEO_UYVY_BOB:
-    case SM_VIDEO_NV12_RGB_BOB:
+        m_hStep = glf->glGetUniformLocation( programId(), "m_step" );
+        verifyValidValue( m_hStep, "m_hStep" );
+    }
+
+#ifdef ENABLE_GLES_SHADERS
+
+    //VerifyGLStateQt();
+    if( ( SM_VIDEO_YV12_BOB == m_ShaderMethod )
+        || ( SM_VIDEO_YV12_BOB == m_ShaderMethod )
+        || ( SM_VIDEO_NV12_BOB == m_ShaderMethod )
+        || ( SM_VIDEO_YUY2_BOB == m_ShaderMethod )
+        || ( SM_VIDEO_UYVY_BOB == m_ShaderMethod )
+        || ( SM_VIDEO_NV12_RGB_BOB == m_ShaderMethod )
+        )
+    {
         m_hStepX = glf->glGetUniformLocation( programId(), "m_stepX" );
         verifyValidValue( m_hStepX, "m_hStepX" );
         m_hStepY = glf->glGetUniformLocation( programId(), "m_stepY" );
         verifyValidValue( m_hStepY, "m_hStepY" );
         m_hField = glf->glGetUniformLocation( programId(), "m_field" );
         verifyValidValue( m_hField, "m_hField" );
-        // VerifyGLStateQt();
-        break;
-    default:
-        break;
+
+        m_hPrimMat = glf->glGetUniformLocation( programId(), "m_primMat" );
+        verifyValidValue( m_hPrimMat, "m_hPrimMat" );
+        m_hGammaDstInv = glf->glGetUniformLocation( programId(), "m_gammaDstInv" );
+        verifyValidValue( m_hGammaDstInv, "m_hGammaDstInv" );
+        m_hGammaSrc = glf->glGetUniformLocation( programId(), "m_gammaSrc" );
+        verifyValidValue( m_hGammaSrc, "m_hGammaSrc" );
+        m_hToneP1 = glf->glGetUniformLocation( programId(), "m_toneP1" );
+        verifyValidValue( m_hToneP1, "m_hToneP1" );
+        m_hCoefsDst = glf->glGetUniformLocation( programId(), "m_coefsDst" );
+        verifyValidValue( m_hCoefsDst, "m_hCoefsDst" );
     }
+#endif // ENABLE_GLES_SHADERS
+
 }
 
 //============================================================================
-void RenderShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf )
+void RenderShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode )
 {
     m_hVertex = glf->glGetAttribLocation( programId(), "m_attrpos" );
     verifyValidValue( m_hVertex, "m_hVertex" );
     m_hcoord = glf->glGetAttribLocation( programId(), "m_attrcord" );
     verifyValidValue( m_hcoord, "m_hcoord" );
     m_hAlpha = glf->glGetUniformLocation( programId(), "m_alpha" );
-    verifyValidValue( m_hAlpha, "m_hAlpha" );
-    m_hProj = glf->glGetUniformLocation( programId(), "m_proj" );
-    verifyValidValue( m_hProj, "m_hProj" );
-    m_hModel = glf->glGetUniformLocation( programId(), "m_model" );
-    verifyValidValue( m_hModel, "m_hModel" );
+    //verifyValidValue( m_hAlpha, "m_hAlpha" );
 
     switch( m_ShaderMethod )
     {
@@ -394,7 +520,7 @@ void RenderShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf )
     case SM_VID_FILTER_CONVOLUTION_6X6_RGBA:
     case SM_VID_FILTER_CONVOLUTION_6X6_FLOAT:
     {
-        m_RenderWidget->VerifyGLStateQt();
+        m_RenderLogic.VerifyGLStateQt();
 
         // obtain shader attribute handles on successful compilation
         m_hSourceTex    = glf->glGetUniformLocation( programId(), "img" );
@@ -404,9 +530,9 @@ void RenderShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf )
         m_hKernTex      = glf->glGetUniformLocation( programId(), "kernelTex" );
         verifyValidValue( m_hKernTex, "m_hKernTex" );
 
-        m_RenderWidget->VerifyGLStateQt();
+        m_RenderLogic.VerifyGLStateQt();
         CConvolutionKernel kernel( m_ScalingMethod, 256 );
-        m_RenderWidget->VerifyGLStateQt();
+        m_RenderLogic.VerifyGLStateQt();
 
         if( m_kernelTex1 )
         {
@@ -414,11 +540,11 @@ void RenderShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf )
             m_kernelTex1 = 0;
         }
 
-        m_RenderWidget->VerifyGLStateQt();
+        m_RenderLogic.VerifyGLStateQt();
 
         glf->glGenTextures( 1, &m_kernelTex1 );
         verifyValidValue( m_kernelTex1, "m_kernelTex1" );
-        m_RenderWidget->VerifyGLStateQt();
+        m_RenderLogic.VerifyGLStateQt();
 
         if( ( m_kernelTex1 <= 0 ) )
         {
@@ -426,7 +552,7 @@ void RenderShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf )
             return;
         }
 
-        m_RenderWidget->VerifyGLStateQt();
+        m_RenderLogic.VerifyGLStateQt();
 
         //make a kernel texture on GL_TEXTURE2 and set clamping and interpolation
         glf-> glActiveTexture( GL_TEXTURE2 );
@@ -450,14 +576,14 @@ void RenderShaderQt::onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf )
             format = GL_UNSIGNED_BYTE;
             data = ( GLvoid* )kernel.GetUint8Pixels();
         }
-        m_RenderWidget->VerifyGLStateQt();
+        m_RenderLogic.VerifyGLStateQt();
 
         //upload as 2D texture with height of 1
         glf->glTexImage2D( GL_TEXTURE_2D, 0, m_internalformat, kernel.GetSize(), 1, 0, GL_RGBA, format, data );
 
         glf->glActiveTexture( GL_TEXTURE0 );
 
-        m_RenderWidget->VerifyGLStateQt();
+        m_RenderLogic.VerifyGLStateQt();
         break;
     }
 
@@ -471,13 +597,13 @@ bool RenderShaderQt::onEnabled()
 {
     // This is called after glUseProgram()
 
-    if( !m_RenderWidget || !m_RenderWidget->getGlFunctions() )
+    if( !m_RenderLogic.getGlFunctions() )
     {
         LogMsg( LOG_ERROR, "onEnabled has no render widget" );
         return false;
     }
 
-    QOpenGLFunctions * glf = m_RenderWidget->getGlFunctions();
+    QOpenGLFunctions * glf = m_RenderLogic.getGlFunctions();
 
     switch( m_ShaderType )
     {
@@ -598,17 +724,40 @@ bool RenderShaderQt::onShaderGuiEnabled( QOpenGLFunctions * glf )
 bool RenderShaderQt::onShaderVideoFormatEnabled( QOpenGLFunctions * glf )
 {
     //LogMsg( LOG_ERROR, "onShaderVideoFormatEnabled %s", describeShader( m_ShaderMethod ) );
+    /*BaseYUV2RGBGLSLShader
+    m_hYTex = glGetUniformLocation( ProgramHandle(), "m_sampY" );
+    m_hUTex = glGetUniformLocation( ProgramHandle(), "m_sampU" );
+    m_hVTex = glGetUniformLocation( ProgramHandle(), "m_sampV" );
+    m_hYuvMat = glGetUniformLocation( ProgramHandle(), "m_yuvmat" );
+    m_hStretch = glGetUniformLocation( ProgramHandle(), "m_stretch" );
+    m_hStep = glGetUniformLocation( ProgramHandle(), "m_step" );
+    m_hVertex = glGetAttribLocation( ProgramHandle(), "m_attrpos" );
+    m_hYcoord = glGetAttribLocation( ProgramHandle(), "m_attrcordY" );
+    m_hUcoord = glGetAttribLocation( ProgramHandle(), "m_attrcordU" );
+    m_hVcoord = glGetAttribLocation( ProgramHandle(), "m_attrcordV" );
+    m_hProj = glGetUniformLocation( ProgramHandle(), "m_proj" );
+    m_hModel = glGetUniformLocation( ProgramHandle(), "m_model" );
+    m_hAlpha = glGetUniformLocation( ProgramHandle(), "m_alpha" );
+    m_hPrimMat = glGetUniformLocation( ProgramHandle(), "m_primMat" );
+    m_hGammaSrc = glGetUniformLocation( ProgramHandle(), "m_gammaSrc" );
+    m_hGammaDstInv = glGetUniformLocation( ProgramHandle(), "m_gammaDstInv" );
+    m_hCoefsDst = glGetUniformLocation( ProgramHandle(), "m_coefsDst" );
+    m_hToneP1 = glGetUniformLocation( ProgramHandle(), "m_toneP1" );
+    */
 
     // set shader attributes once enabled
-    m_RenderWidget->VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     verifyValidValue( m_hYTex, "m_hYTex" );
     glf->glUniform1i( m_hYTex, 0 );
     verifyValidValue( m_hUTex, "m_hUTex" );
     glf->glUniform1i( m_hUTex, 1 );
     verifyValidValue( m_hVTex, "m_hVTex" );
     glf->glUniform1i( m_hVTex, 2 );
-    verifyValidValue( m_hStep, "m_hStep" );
-    glf->glUniform2f( m_hStep, 1.0 / m_width, 1.0 / m_height );
+    if( m_hStep >= 0 )
+    {
+        verifyValidValue( m_hStep, "m_hStep" );
+        glf->glUniform2f( m_hStep, 1.0 / m_width, 1.0 / m_height );
+    }
 
     GLfloat matrix[ 4 ][ 4 ];
     // keep video levels
@@ -622,7 +771,9 @@ bool RenderShaderQt::onShaderVideoFormatEnabled( QOpenGLFunctions * glf )
     glf->glUniformMatrix4fv( m_hModel, 1, GL_FALSE, m_model );
     verifyValidValue( m_hAlpha, "m_hAlpha" );
     glf->glUniform1f( m_hAlpha, m_alpha );
-    m_RenderWidget->VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
+
+#ifdef ENABLE_GLES_SHADERS
 
     switch( m_ShaderMethod )
     {
@@ -637,12 +788,13 @@ bool RenderShaderQt::onShaderVideoFormatEnabled( QOpenGLFunctions * glf )
         glf->glUniform1f( m_hStepX, 1.0f / ( float )m_width );
         verifyValidValue( m_hStepY, "m_hStepY" );
         glf->glUniform1f( m_hStepY, 1.0f / ( float )m_height );
-        m_RenderWidget->VerifyGLStateQt();
+        m_RenderLogic.VerifyGLStateQt();
         break;
 
     default:
         break;
     }
+#endif // ENABLE_GLES_SHADERS
 
     return true;
 }
@@ -652,7 +804,7 @@ bool RenderShaderQt::onShaderVideoFilterEnabled( QOpenGLFunctions * glf )
 {
     LogMsg( LOG_ERROR, "onShaderVideoFormatEnabled %s", describeShader( m_ShaderMethod ) );
 
-    m_RenderWidget->VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     verifyValidValue( m_hProj, "m_hProj" );
     glf->glUniformMatrix4fv( m_hProj, 1, GL_FALSE, m_proj );
     verifyValidValue( m_hModel, "m_hModel" );
@@ -678,12 +830,24 @@ bool RenderShaderQt::onShaderVideoFilterEnabled( QOpenGLFunctions * glf )
         glf->glUniform1i( m_hKernTex, 2 );
         verifyValidValue( m_hStepXY, "m_hStepXY" );
         glf->glUniform2f( m_hStepXY, m_stepX, m_stepY );
-        m_RenderWidget->VerifyGLStateQt();
+        m_RenderLogic.VerifyGLStateQt();
         break;
     }
 
     default:
         break;
+    }
+
+    return true;
+}
+
+//============================================================================
+bool RenderShaderQt::verifyValidValue( GLint handle, const char * msg )
+{
+    if( handle < 0 )
+    {
+        LogMsg( LOG_DEBUG, "ERROR %s verifyValidValue %s is %d", describeShader( m_ShaderMethod ), msg, handle );
+        return false;
     }
 
     return true;
@@ -706,6 +870,8 @@ const char * RenderShaderQt::describeShader( ESHADERMETHOD shaderType )
         return "SM_TEXTURE_NOBLEND";
     case SM_MULTI_BLENDCOLOR:
         return "SM_MULTI_BLENDCOLOR";
+#ifdef ENABLE_GLES_SHADERS
+
     case SM_TEXTURE_RGBA:
         return "SM_TEXTURE_RGBA";
     case SM_TEXTURE_RGBA_OES:
@@ -716,16 +882,21 @@ const char * RenderShaderQt::describeShader( ESHADERMETHOD shaderType )
         return "SM_TEXTURE_RGBA_BOB";
     case SM_TEXTURE_RGBA_BOB_OES:
         return "SM_TEXTURE_RGBA_BOB_OES";
+#endif // ENABLE_GLES_SHADERS
+
     case SM_VIDEO_YV12_BASIC:
         return "SM_VIDEO_YV12_BASIC";
     case SM_VIDEO_NV12_BASIC:
         return "SM_VIDEO_NV12_BASIC";
+
     case SM_VIDEO_YUY2_BASIC:
         return "SM_VIDEO_YUY2_BASIC";
     case SM_VIDEO_UYVY_BASIC:
         return "SM_VIDEO_UYVY_BASIC";
     case SM_VIDEO_NV12_RGB_BASIC:
         return "SM_VIDEO_NV12_RGB_BASIC";
+
+#ifdef ENABLE_GLES_SHADERS
     case SM_VIDEO_YV12_BOB:
         return "SM_VIDEO_YV12_BOB";
     case SM_VIDEO_NV12_BOB:
@@ -736,6 +907,8 @@ const char * RenderShaderQt::describeShader( ESHADERMETHOD shaderType )
         return "SM_VIDEO_UYVY_BOB";
     case SM_VIDEO_NV12_RGB_BOB:
         return "SM_VIDEO_NV12_RGB_BOB";
+#endif // ENABLE_GLES_SHADERS
+
     case SM_VID_FILTER_DEFAULT:
         return "SM_VID_FILTER_DEFAULT";
     case SM_VID_FILTER_CONVOLUTION_4X4_RGBA:
@@ -773,41 +946,95 @@ void RenderShaderQt::onFree()
 }
 
 //============================================================================
-bool RenderShaderQt::enableShader()
+bool RenderShaderQt::validateShader()
 {
-    QOpenGLFunctions * glf = m_RenderWidget->getGlFunctions();
-    glf->glUseProgram( programId() );
-    if( onEnabled() )
-    {
-        if( !m_shaderValidated )
-        {
-            // validate the program
-            GLint params[ 4 ];
-            glf->glValidateProgram( programId() );
-            glf->glGetProgramiv( programId(), GL_VALIDATE_STATUS, params );
-            if( params[ 0 ] != GL_TRUE )
-            {
-                #define LOG_SIZE 1024
+    m_RenderLogic.VerifyGLStateQt();
 
-                GLchar log[ LOG_SIZE ];
-                LogMsg( LOG_ERROR, "GL: Error validating shader" );
-                glf->glGetProgramInfoLog( programId(), LOG_SIZE, NULL, log );
-                LogMsg( LOG_ERROR, "%s", log );
+    QOpenGLFunctions * glf = m_RenderLogic.getGlFunctions();
+
+    if( glf && m_shaderValidated )
+    {
+        glf->glUseProgram( programId() );
+        if( onEnabled() )
+        {
+            if( !m_shaderValidated )
+            {
+                // validate the program
+                GLint params[ 4 ];
+                glf->glValidateProgram( programId() );
+                glf->glGetProgramiv( programId(), GL_VALIDATE_STATUS, params );
+                if( params[ 0 ] != GL_TRUE )
+                {
+#define LOG_SIZE 1024
+
+                    GLchar log[ LOG_SIZE ];
+                    LogMsg( LOG_ERROR, "GL: Error validating shader" );
+                    glf->glGetProgramInfoLog( programId(), LOG_SIZE, NULL, log );
+                    LogMsg( LOG_ERROR, "%s", log );
+                }
+
+                m_RenderLogic.VerifyGLStateQt();
+                m_shaderValidated = true;
             }
 
-            //verifyShaderValues();
-            m_shaderValidated = true;
+            //VerifyGLStateQt();
+            return true;
         }
+        else
+        {
+            LogMsg( LOG_ERROR, "GL: Error glUseProgram %d", programId() );
+            glf->glUseProgram( 0 );
+        }
+    }
 
-        //VerifyGLStateQt();
-        return true;
+    return false;
+}
+
+//============================================================================
+bool RenderShaderQt::enableShader()
+{
+    verifyProgramId();
+    QOpenGLFunctions * glf = m_RenderLogic.getGlFunctions();
+    if( glf && m_shaderValidated )
+    {
+        glf->glUseProgram( programId() );
+        if( onEnabled() )
+        {
+            if( !m_shaderValidated )
+            {
+                // validate the program
+                GLint params[ 4 ];
+                glf->glValidateProgram( programId() );
+                glf->glGetProgramiv( programId(), GL_VALIDATE_STATUS, params );
+                if( params[ 0 ] != GL_TRUE )
+                {
+#define LOG_SIZE 1024
+
+                    GLchar log[ LOG_SIZE ];
+                    LogMsg( LOG_ERROR, "GL: Error validating shader" );
+                    glf->glGetProgramInfoLog( programId(), LOG_SIZE, NULL, log );
+                    LogMsg( LOG_ERROR, "%s", log );
+                }
+
+                //verifyShaderValues();
+                m_shaderValidated = true;
+            }
+
+            //VerifyGLStateQt();
+            return true;
+        }
+        else
+        {
+            LogMsg( LOG_ERROR, "GL: Error glUseProgram %d", programId() );
+            glf->glUseProgram( 0 );
+            return false;
+        }
     }
     else
     {
-        LogMsg( LOG_ERROR, "GL: Error glUseProgram %d", programId() );
-        glf->glUseProgram( 0 );
-        return false;
+        LogMsg( LOG_ERROR, "GL: Error Shader %s Program %d not validated", programId() );
     }
+
 
     return true;
 }
@@ -824,7 +1051,7 @@ bool RenderShaderQt::disableShader()
         return true; 
     }
 
-    QOpenGLFunctions * glf = m_RenderWidget->getGlFunctions();
+    QOpenGLFunctions * glf = m_RenderLogic.getGlFunctions();
     glf->glUseProgram( 0 );
     onDisabled();
     return true;
@@ -871,14 +1098,15 @@ void RenderShaderQt::shaderSetContrast( float contrast )
 //============================================================================
 void RenderShaderQt::shaderSetConvertFullColorRange( bool convertFullRange )
 {
+    m_RenderLogic.VerifyGLStateQt();
     m_convertFullRange = convertFullRange;
-    //VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
 }
 
 //============================================================================
 int RenderShaderQt::shaderGetVertexLoc(  )
 {
-    //VerifyGLStateQt();
+    verifyValidValue( m_hVertex, "m_hVertex" );
     return m_hVertex;
 }
 
@@ -956,14 +1184,14 @@ bool RenderShaderQt::shaderGetTextureFilter(  int& filter )
 //============================================================================
 int RenderShaderQt::shaderGetcoordLoc(  )
 {
-    //VerifyGLStateQt();
+    verifyValidValue( m_hcoord, "m_hcoord" );
     return m_hcoord;
 }
 
 //============================================================================
 int RenderShaderQt::shaderVertexAttribPointer( unsigned int index, int size, int type, bool normalized, int stride, const void * pointer )
 {
-    QOpenGLFunctions * glf = m_RenderWidget->getGlFunctions();
+    QOpenGLFunctions * glf = m_RenderLogic.getGlFunctions();
     glf->glVertexAttribPointer( index, size, type, normalized, stride, pointer );
     //VerifyGLStateQt();
     return 0; // return value not needed .. should be void
@@ -972,7 +1200,7 @@ int RenderShaderQt::shaderVertexAttribPointer( unsigned int index, int size, int
 //============================================================================
 void RenderShaderQt::shaderEnableVertexAttribArray( int arrayId )
 {
-    QOpenGLFunctions * glf = m_RenderWidget->getGlFunctions();
+    QOpenGLFunctions * glf = m_RenderLogic.getGlFunctions();
     glf->glEnableVertexAttribArray( arrayId );
     //VerifyGLStateQt();
 }
@@ -980,40 +1208,20 @@ void RenderShaderQt::shaderEnableVertexAttribArray( int arrayId )
 //============================================================================
 void RenderShaderQt::shaderDisableVertexAttribArray( int arrayId )
 {
-    QOpenGLFunctions * glf = m_RenderWidget->getGlFunctions();
+    QOpenGLFunctions * glf = m_RenderLogic.getGlFunctions();
     glf->glDisableVertexAttribArray( arrayId );
     //VerifyGLStateQt();
 }
 
-
 //============================================================================
-void RenderShaderQt::verifyShaderValues()
+bool RenderShaderQt::verifyProgramId()
 {
-    switch( m_ShaderMethod )
+    if( programId() <= 0 )
     {
-    case SM_VIDEO_YV12_BOB:
-    case SM_VIDEO_NV12_BOB:
-    case SM_VIDEO_YUY2_BOB:
-    case SM_VIDEO_UYVY_BOB:
-    case SM_VIDEO_NV12_RGB_BOB:
-        verifyValidValue( m_hField, "m_hField" );
-        verifyValidValue( m_hStepX, "m_hStepX" );
-        verifyValidValue( m_hStepY, "m_hStepY" );
-        break;
-
-    default:
-        break;
-    }
-}
-
-//============================================================================
-bool RenderShaderQt::verifyValidValue( GLint handle, const char * msg )
-{
-    if( handle < 0 )
-    { 
-        LogMsg( LOG_DEBUG, "ERROR %s verifyValidValue %s is %d", describeShader( m_ShaderMethod ), msg, handle );
+        LogMsg( LOG_DEBUG, "ERROR %s verifyProgramId id is %d", describeShader( m_ShaderMethod ), programId() );
         return false;
     }
 
     return true;
 }
+

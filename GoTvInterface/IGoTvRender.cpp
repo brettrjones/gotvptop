@@ -528,3 +528,74 @@ bool IGoTv::frameBufferStatus()
     return getAppCommon().frameBufferStatus();
 }
 
+//============================================================================
+void IGoTv::glFuncDrawElements( GLenum mode, GLsizei count, GLenum type, const GLvoid *indices )
+{
+    getAppCommon().glFuncDrawElements( mode, count, type, indices );
+}
+
+//============================================================================
+void IGoTv::glFuncDisable( GLenum cap )
+{
+    getAppCommon().glFuncDisable( cap );
+}
+
+//============================================================================
+void IGoTv::glFuncBindTexture( GLenum target, GLuint texture )
+{
+    getAppCommon().glFuncBindTexture( target, texture );
+}
+
+//============================================================================
+void IGoTv::glFuncViewport( GLint x, GLint y, GLsizei width, GLsizei height )
+{
+    getAppCommon().glFuncViewport( x, y, width, height );
+}
+
+//============================================================================
+void IGoTv::glFuncScissor( GLint x, GLint y, GLsizei width, GLsizei height )
+{
+    getAppCommon().glFuncScissor( x, y, width, height );
+}
+
+//============================================================================
+void IGoTv::glFuncGenTextures( GLsizei n, GLuint * textures )
+{
+    getAppCommon().glFuncGenTextures( n, textures );
+}
+
+//============================================================================
+void IGoTv::glFuncDeleteTextures( GLsizei n, const GLuint *textures )
+{
+    getAppCommon().glFuncDeleteTextures( n, textures );
+}
+
+//============================================================================
+void IGoTv::glFuncTexImage2D( GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels )
+{
+    getAppCommon().glFuncTexImage2D( target, level, internalformat, width, height, border, format, type, pixels );
+}
+
+//============================================================================
+void IGoTv::glFuncTexParameteri( GLenum target, GLenum pname, GLint param )
+{
+    getAppCommon().glFuncTexParameteri( target, pname, param );
+}
+
+//============================================================================
+void IGoTv::glFuncReadPixels( GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels )
+{
+    getAppCommon().glFuncReadPixels( x, y, width, height, format, type, pixels );
+}
+
+//============================================================================
+void IGoTv::glFuncPixelStorei( GLenum pname, GLint param )
+{
+    getAppCommon().glFuncPixelStorei( pname, param );
+}
+
+//============================================================================
+void IGoTv::glFuncFinish()
+{
+    getAppCommon().glFuncFinish();
+}

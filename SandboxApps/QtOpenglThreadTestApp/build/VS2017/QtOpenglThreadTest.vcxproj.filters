@@ -114,13 +114,13 @@
     <ClCompile Include="..\..\QtOpenglThreadTest\RenderLogoShaders.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\QtOpenglThreadTest\RenderShaderDefsGl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\QtOpenglThreadTest\RenderShaderQt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\QtOpenglThreadTest\VxDebug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtOpenglThreadTest\RenderShaderDefsGl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

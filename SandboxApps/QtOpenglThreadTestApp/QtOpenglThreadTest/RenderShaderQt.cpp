@@ -20,16 +20,11 @@
 
 #include "RenderShaderQt.h"
 #include "RenderGlWidget.h"
-
-//#include "ServiceBroker.h"
-//#include "utils/log.h"
-//#include "rendering/RenderSystem.h"
-//#include "rendering/MatrixGL.h"
-//#include "windowing/GraphicContext.h"
-//#include "cores/VideoPlayer/VideoRenderers/VideoShaders/YUVMatrix.h"
-//#include "cores/VideoPlayer/VideoRenderers/VideoShaders/ConvolutionKernels.h"
+#include "RenderGlLogic.h"
 
 #include <VxDebug.h>
+#include <GL/glu.h>
+
 
 #ifndef M_PI
 #define M_PI       3.14159265358979323846
@@ -669,7 +664,7 @@ static void CalculateYUVMatrixGLES( GLfloat      res[ 4 ][ 4 ]
 }
 
 //============================================================================
-RenderShaderQt::RenderShaderQt(  ESHADERMETHOD shaderMethod, EShaderType shaderType, QString shaderName, RenderGlWidget * renderWidget )
+RenderShaderQt::RenderShaderQt(  ESHADERMETHOD shaderMethod, EShaderType shaderType, QString shaderName, RenderGlLogic * renderWidget )
     : QOpenGLShaderProgram()
     , m_ShaderMethod( shaderMethod )
     , m_ScalingMethod( VS_SCALINGMETHOD_LINEAR )
@@ -709,14 +704,14 @@ bool RenderShaderQt::compileAndLink( const char * vertexShaderCode, const char *
 
     if( vertexShaderCode )
     {
-        if( !addShaderFromSourceCode( QOpenGLShader::Vertex, vertexShaderCode ) )
+        if( !addCacheableShaderFromSourceCode( QOpenGLShader::Vertex, vertexShaderCode ) )
         {
             LogMsg( LOG_ERROR, "could not add vertex shader" );
             result = false;
         }
     }
     
-    if( result && !addShaderFromSourceCode( QOpenGLShader::Fragment, fragmentShaderCode ) )
+    if( result && !addCacheableShaderFromSourceCode( QOpenGLShader::Fragment, fragmentShaderCode ) )
     {
         LogMsg( LOG_ERROR, "could not add fragment shader" );
         result = false;

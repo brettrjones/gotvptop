@@ -1,18 +1,17 @@
 //#define SHADERS_INCLUDE
 #if defined(SHADERS_INCLUDE)
 
-static const char * gles_shader_vert =
+static const char * gl_shader_vert =
 "attribute vec4 m_attrpos;\n"
 "attribute vec4 m_attrcol;\n"
 "attribute vec4 m_attrcord0;\n"
 "attribute vec4 m_attrcord1;\n"
-"uniform mat4 m_proj;\n"
-"uniform mat4 m_model;\n"
-"uniform mat4 m_coord0Matrix;\n"
-"varying vec4 m_cord0;\n"
-"varying vec4 m_cord1;\n"
+"varying vec4   m_cord0;\n"
+"varying vec4   m_cord1;\n"
 "varying lowp vec4 m_colour;\n"
-"\n"
+"uniform mat4   m_proj;\n"
+"uniform mat4   m_model;\n"
+"uniform mat4   m_coord0Matrix;\n"
 "void main()\n"
 "{\n"
 "    mat4 mvp = m_proj * m_model;\n"
@@ -24,326 +23,130 @@ static const char * gles_shader_vert =
 
 // SM_DEFAULT
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_default_frag =
+static const char * gl_shader_default_frag =
 "precision mediump float;\n"
 #else
-static const char * gles_shader_default_frag =
+static const char * gl_shader_default_frag =
 #endif
-"uniform lowp vec4 m_unicol;\n"
+"uniform vec4 m_unicol;\n"
+"\n"
+"// SM_DEFAULT shader\n"
 "void main()\n"
 "{\n"
-" vec4 rgb;\n"
-"\n"
-" rgb = m_unicol;\n"
-"\n"
-"#if defined(KODI_LIMITED_RANGE)\n"
-" rgb.rgb *= ( 235.0 - 16.0 ) / 255.0;\n"
-" rgb.rgb += 16.0 / 255.0;\n"
-"#endif\n"
-"\n"
-" gl_FragColor = rgb;\n"
+"    gl_FragColor = m_unicol;\n"
 "}\n";
 
 
 // SM_TEXTURE shader
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_texture_frag =
+static const char * gl_shader_texture_frag =
 "precision mediump   float;\n"
 #else
-static const char * gles_shader_texture_frag =
+static const char * gl_shader_texture_frag =
 #endif
-"uniform sampler2D m_samp0;\n"
-"uniform lowp vec4 m_unicol;\n"
-"varying vec4 m_cord0;\n"
-"\n"
+"uniform   sampler2D m_samp0;\n"
+"uniform   lowp vec4 m_unicol;\n"
+"varying   vec4      m_cord0;\n"
+"// SM_TEXTURE shader\n"
 "void main()\n"
 "{\n"
-"    vec4 rgb;\n"
-"\n"
-"    rgb = texture2D( m_samp0, m_cord0.xy ).rgba * m_unicol;\n"
-"\n"
+"    gl_FragColor.rgba = vec4( texture2D( m_samp0, m_cord0.xy ).rgba * m_unicol );\n"
 "#if defined(KODI_LIMITED_RANGE)\n"
-"    rgb.rgb *= ( 235.0 - 16.0 ) / 255.0;\n"
-"    rgb.rgb += 16.0 / 255.0;\n"
+"   gl_FragColor.rgb *= ( 235.0 - 16.0 ) / 255.0;\n"
+"   gl_FragColor.rgb += 16.0 / 255.0;\n"
 "#endif\n"
-"\n"
-"    gl_FragColor = rgb;\n"
 "}\n";
 
 // SM_MULTI shader;
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_multi_frag =
+static const char * gl_shader_multi_frag =
 "precision mediump   float;\n"
 #else
-static const char * gles_shader_multi_frag =
+static const char * gl_shader_multi_frag =
 #endif
-"uniform sampler2D m_samp0;\n"
-"uniform sampler2D m_samp1;\n"
-"varying vec4 m_cord0;\n"
-"varying vec4 m_cord1;\n"
-"\n"
+"uniform   sampler2D m_samp0;\n"
+"uniform   sampler2D m_samp1;\n"
+"varying   vec4      m_cord0;\n"
+"varying   vec4      m_cord1;\n"
+"// SM_MULTI shader;\n"
 "void main()\n"
 "{\n"
-"    vec4 rgb;\n"
-"\n"
-"    rgb = texture2D( m_samp0, m_cord0.xy ) * texture2D( m_samp1, m_cord1.xy );\n"
-"\n"
+"    gl_FragColor.rgba = ( texture2D( m_samp0, m_cord0.xy ) * texture2D( m_samp1, m_cord1.xy ) ).rgba;\n"
 "#if defined(KODI_LIMITED_RANGE)\n"
-"    rgb.rgb *= ( 235.0 - 16.0 ) / 255.0;\n"
-"    rgb.rgb += 16.0 / 255.0;\n"
+"   gl_FragColor.rgb *= ( 235.0 - 16.0 ) / 255.0;\n"
+"   gl_FragColor.rgb += 16.0 / 255.0;\n"
 "#endif\n"
-"\n"
-"    gl_FragColor = rgb;\n"
 "}\n";
 
 // SM_FONTS
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_fonts_frag =
+static const char * gl_shader_fonts_frag =
 "precision mediump   float;\n"
 #else
-static const char * gles_shader_fonts_frag =
+static const char * gl_shader_fonts_frag =
 #endif
 "uniform   sampler2D m_samp0;\n"
 "varying   vec4      m_cord0;\n"
 "varying   lowp vec4 m_colour;\n"
-"\n"
+"// SM_FONTS shader\n"
 "void main()\n"
 "{\n"
-" vec4 rgb;\n"
-"\n"
-" rgb.rgb = m_colour.rgb;\n"
-" rgb.a = m_colour.a * texture2D( m_samp0, m_cord0.xy ).a;\n"
-"\n"
+"    gl_FragColor.r = m_colour.r;\n"
+"    gl_FragColor.g = m_colour.g;\n"
+"    gl_FragColor.b = m_colour.b;\n"
+"    gl_FragColor.a = m_colour.a * texture2D( m_samp0, m_cord0.xy ).a;\n"
 "#if defined(KODI_LIMITED_RANGE)\n"
-" rgb.rgb *= ( 235.0 - 16.0 ) / 255.0;\n"
-" rgb.rgb += 16.0 / 255.0;\n"
+"   gl_FragColor.rgb *= ( 235.0 - 16.0 ) / 255.0;\n"
+"   gl_FragColor.rgb += 16.0 / 255.0;\n"
 "#endif\n"
-"\n"
-" gl_FragColor = rgb;\n"
 "}\n";
 
 // SM_TEXTURE_NOBLEND
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_texture_noblend_frag =
+static const char * gl_shader_texture_noblend_frag =
 "precision mediump   float;\n"
 #else
-static const char * gles_shader_texture_noblend_frag =
+static const char * gl_shader_texture_noblend_frag =
 #endif
-"uniform sampler2D m_samp0;\n"
-"varying vec4 m_cord0;\n"
-"\n"
+"uniform   sampler2D m_samp0;\n"
+"varying   vec4      m_cord0;\n"
+"// SM_TEXTURE_NOBLEND shader\n"
 "void main()\n"
 "{\n"
-"    vec4 rgb;\n"
-"\n"
-"    rgb = texture2D( m_samp0, m_cord0.xy );\n"
-"\n"
+"    gl_FragColor.rgba = vec4( texture2D( m_samp0, m_cord0.xy ).rgba );\n"
 "#if defined(KODI_LIMITED_RANGE)\n"
-"    rgb.rgb *= ( 235.0 - 16.0 ) / 255.0;\n"
-"    rgb.rgb += 16.0 / 255.0;\n"
+"   gl_FragColor.rgb *= ( 235.0 - 16.0 ) / 255.0;\n"
+"   gl_FragColor.rgb += 16.0 / 255.0;\n"
 "#endif\n"
-"\n"
-"    gl_FragColor = rgb;\n"
 "}\n";
 
 // SM_MULTI_BLENDCOLOR shader
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_multi_blendcolor_frag =
+static const char * gl_shader_multi_blendcolor_frag =
 "precision mediump   float;\n"
 #else
-static const char * gles_shader_multi_blendcolor_frag =
+static const char * gl_shader_multi_blendcolor_frag =
 #endif
-"uniform sampler2D m_samp0;\n"
-"uniform sampler2D m_samp1;\n"
-"varying vec4 m_cord0;\n"
-"varying vec4 m_cord1;\n"
-"uniform lowp vec4 m_unicol;\n"
-"\n"
+"uniform   sampler2D m_samp0;\n"
+"uniform   sampler2D m_samp1;\n"
+"varying   vec4      m_cord0;\n"
+"varying   vec4      m_cord1;\n"
+"uniform   lowp vec4 m_unicol;\n"
+"// SM_MULTI BLEND shader\n"
 "void main()\n"
 "{\n"
-"    vec4 rgb;\n"
-"\n"
-"    rgb = m_unicol * texture2D( m_samp0, m_cord0.xy ) * texture2D( m_samp1, m_cord1.xy );\n"
-"\n"
+"    gl_FragColor.rgba = m_unicol * texture2D( m_samp0, m_cord0.xy ) * texture2D( m_samp1, m_cord1.xy );\n"
 "#if defined(KODI_LIMITED_RANGE)\n"
-"    rgb.rgb *= ( 235.0 - 16.0 ) / 255.0;\n"
-"    rgb.rgb += 16.0 / 255.0;\n"
+"   gl_FragColor.rgb *= ( 235.0 - 16.0 ) / 255.0;\n"
+"   gl_FragColor.rgb += 16.0 / 255.0;\n"
 "#endif\n"
-"\n"
-"    gl_FragColor = rgb;\n"
 "}\n";
 
-// SM_TEXTURE_RGBA
-#if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_rgba_frag =
-"precision mediump   float;\n"
-#else
-static const char * gles_shader_rgba_frag =
-#endif
-"uniform sampler2D m_samp0;\n"
-"uniform sampler2D m_samp1;\n"
-"varying vec4      m_cord0;\n"
-"varying vec4      m_cord1;\n"
-"varying lowp vec4 m_colour;\n"
-"uniform int       m_method;\n"
-"uniform float     m_brightness;\n"
-"uniform float     m_contrast;\n"
-"\n"
-"void main()\n"
-"{\n"
-"    vec4 rgb;\n"
-"\n"
-"    rgb = texture2D( m_samp0, m_cord0.xy );\n"
-"    rgb *= m_contrast;\n"
-"    rgb += m_brightness;\n"
-"\n"
-"    gl_FragColor = rgb;\n"
-"}\n";
-
-// SM_TEXTURE_RGBA_OES
-#if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_rgba_oes_frag =
-"#extension GL_OES_EGL_image_external : require\n"
-"\n"
-"precision mediump   float;\n"
-#else
-static const char * gles_shader_rgba_oes_frag =
-"#extension GL_OES_EGL_image_external : require\n"
-"\n"
-#endif
-"uniform samplerExternalOES m_samp0;\n"
-"varying vec4      m_cord0;\n"
-"\n"
-"uniform float     m_brightness;\n"
-"uniform float     m_contrast;\n"
-"\n"
-"void main ()\n"
-"{\n"
-"    vec4 rgb;\n"
-"\n"
-"    rgb = texture2D( m_samp0, m_cord0.xy );\n"
-"    rgb *= m_contrast;\n"
-"    rgb += m_brightness;\n"
-"\n"
-"    gl_FragColor = rgb;\n"
-"}\n";
-
-// SM_TEXTURE_RGBA_BLENDCOLOR
-#if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_rgba_blendcolor_frag =
-"precision mediump   float;\n"
-#else
-static const char * gles_shader_rgba_blendcolor_frag =
-#endif
-"uniform sampler2D m_samp0;\n"
-"varying vec4 m_cord0;\n"
-"varying vec4 m_cord1;\n"
-"varying lowp vec4 m_colour;\n"
-"uniform int m_method;\n"
-"\n"
-"void main()\n"
-"{\n"
-"    vec4 rgb;\n"
-"\n"
-"    rgb = texture2D( m_samp0, m_cord0.xy ).rgba * m_colour;\n"
-"\n"
-"#if defined(KODI_LIMITED_RANGE)\n"
-"    rgb.rgb *= ( 235.0 - 16.0 ) / 255.0;\n"
-"#endif\n"
-"\n"
-"    gl_FragColor = rgb;\n"
-"}\n";
-
-// SM_TEXTURE_RGBA_BOB
-#if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_rgba_bob_frag =
-"precision highp   float;\n"
-#else
-static const char * gles_shader_rgba_bob_frag =
-#endif
-"uniform sampler2D m_samp0;\n"
-"uniform sampler2D m_samp1;\n"
-"varying vec4      m_cord0;\n"
-"varying vec4      m_cord1;\n"
-"varying lowp vec4 m_colour;\n"
-"uniform int       m_method;\n"
-"uniform int       m_field;\n"
-"uniform float     m_step;\n"
-"\n"
-"uniform float     m_brightness;\n"
-"uniform float     m_contrast;\n"
-"\n"
-"void main()\n"
-"{\n"
-"    vec2 source;\n"
-"    source = m_cord0.xy;\n"
-"\n"
-"    float temp1 = mod( source.y, 2.0*m_step );\n"
-"    float temp2 = source.y - temp1;\n"
-"    source.y = temp2 + m_step / 2.0 - float( m_field )*m_step;\n"
-"\n"
-"    // Blend missing line\n"
-"    vec2 below;\n"
-"    float bstep = step( m_step, temp1 );\n"
-"    below.x = source.x;\n"
-"    below.y = source.y + ( 2.0*m_step*bstep );\n"
-"\n"
-"    vec4 color = mix( texture2D( m_samp0, source ), texture2D( m_samp0, below ), 0.5 );\n"
-"    color = color * m_contrast;\n"
-"    color = color + m_brightness;\n"
-"\n"
-"    gl_FragColor = color;\n"
-"}\n";
-
-// SM_TEXTURE_RGBA_BOB_OES
-#if defined(TARGET_OS_WINDOWS)
-static const char * gles_shader_rgba_bob_oes_frag =
-"#extension GL_OES_EGL_image_external : require\n"
-"precision highp   float;\n"
-#else
-static const char * gles_shader_rgba_bob_oes_frag =
-"#extension GL_OES_EGL_image_external : require\n"
-#endif
-"uniform samplerExternalOES m_samp0;\n"
-"uniform samplerExternalOES m_samp1;\n"
-"varying vec4 m_cord0;\n"
-"varying vec4 m_cord1;\n"
-"varying lowp vec4 m_colour;\n"
-"uniform int m_method;\n"
-"uniform int m_field;\n"
-"uniform float m_step;\n"
-"uniform float m_brightness;\n"
-"uniform float m_contrast;\n"
-"\n"
-"void main()\n"
-"{\n"
-"    vec2 source;\n"
-"    source = m_cord0.xy;\n"
-"\n"
-"    float temp1 = mod( source.y, 2.0 * m_step );\n"
-"    float temp2 = source.y - temp1;\n"
-"    source.y = temp2 + m_step / 2.0 - float( m_field ) * m_step;\n"
-"\n"
-"    // Blend missing line\n"
-"    vec2 below;\n"
-"    float bstep = step( m_step, temp1 );\n"
-"    below.x = source.x;\n"
-"    below.y = source.y + ( 2.0*m_step * bstep );\n"
-"\n"
-"    vec4 color = mix( texture2D( m_samp0, source ), texture2D( m_samp0, below ), 0.5 );\n"
-"    color *= m_contrast;\n"
-"    color += m_brightness;\n"
-"\n"
-"    gl_FragColor = color;\n"
-"}\n"
-"\n";
 //============================================================================
 // video format
 //============================================================================
-// SM_VIDEO_YV12_BASIC
-static const char * gles_yuv2rgb_yv12_vert =
-"uniform mat4 m_proj;\n"
-"uniform mat4 m_model;\n"
+// SM_VIDEO_YV12_BASIC // SM_VIDEO_NV12_BASIC // SM_VIDEO_YUY2_BASIC // SM_VIDEO_UYVY_BASIC // SM_VIDEO_NV12_RGB_BASIC
+static const char * gl_yuv2rgb_vert =
 "attribute vec4 m_attrpos;\n"
 "attribute vec2 m_attrcordY;\n"
 "attribute vec2 m_attrcordU;\n"
@@ -351,6 +154,9 @@ static const char * gles_yuv2rgb_yv12_vert =
 "varying vec2 m_cordY;\n"
 "varying vec2 m_cordU;\n"
 "varying vec2 m_cordV;\n"
+"uniform mat4 m_proj;\n"
+"uniform mat4 m_model;\n"
+"\n"
 "void main()\n"
 "{\n"
 "    mat4 mvp = m_proj * m_model;\n"
@@ -362,242 +168,78 @@ static const char * gles_yuv2rgb_yv12_vert =
 
 // most SM_VIDEO_XXXX_BASIC fragments
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_yuv2rgb_basic_frag =
+static const char * gl_yuv2rgb_basic_frag =
 "precision mediump float;\n"
 #else
-static const char * gles_yuv2rgb_basic_frag =
+static const char * gl_yuv2rgb_basic_frag =
 #endif
 "uniform sampler2D m_sampY;\n"
 "uniform sampler2D m_sampU;\n"
 "uniform sampler2D m_sampV;\n"
-"varying vec2 m_cordY;\n"
-"varying vec2 m_cordU;\n"
-"varying vec2 m_cordV;\n"
-"uniform vec2 m_step;\n"
-"uniform mat4 m_yuvmat;\n"
-"uniform mat3 m_primMat;\n"
-"uniform float m_gammaDstInv;\n"
-"uniform float m_gammaSrc;\n"
-"uniform float m_toneP1;\n"
-"uniform vec3 m_coefsDst;\n"
-"uniform float m_alpha;\n"
-"\n"
+"varying vec2      m_cordY;\n"
+"varying vec2      m_cordU;\n"
+"varying vec2      m_cordV;\n"
+"uniform vec2      m_step;\n"
+"uniform mat4      m_yuvmat;\n"
+"uniform float     m_alpha;\n"
 "void main()\n"
 "{\n"
-"    vec4 rgb;\n"
-"    vec4 yuv;\n"
-"\n"
+"  vec4 rgb;\n"
 "#if defined(XBMC_YV12) || defined(XBMC_NV12)\n"
-"\n"
-"    yuv = vec4( texture2D( m_sampY, m_cordY ).r,\n"
-"        texture2D( m_sampU, m_cordU ).g,\n"
-"        texture2D( m_sampV, m_cordV ).a,\n"
-"        1.0 );\n"
-"\n"
+"  vec4 yuv;\n"
+"  yuv.rgba = vec4( texture2D(m_sampY, m_cordY).r\n"
+"                 , texture2D(m_sampU, m_cordU).g\n"
+"                 , texture2D(m_sampV, m_cordV).a\n"
+"                 , 1.0 );\n"
+"  rgb   = m_yuvmat * yuv;\n"
+"  rgb.a = m_alpha;\n"
 "#elif defined(XBMC_NV12_RRG)\n"
-"\n"
-"    yuv = vec4( texture2D( m_sampY, m_cordY ).r,\n"
-"        texture2D( m_sampU, m_cordU ).r,\n"
-"        texture2D( m_sampV, m_cordV ).g,\n"
-"        1.0 );\n"
-"\n"
+"  vec4 yuv;\n"
+"  yuv.rgba = vec4( texture2D(m_sampY, m_cordY).r\n"
+"                 , texture2D(m_sampU, m_cordU).r\n"
+"                 , texture2D(m_sampV, m_cordV).g\n"
+"                 , 1.0 );\n"
+"  rgb   = m_yuvmat * yuv;\n"
+"  rgb.a = m_alpha;\n"
+"#elif defined(XBMC_YUY2) || defined(XBMC_UYVY)\n"
+"  vec2 stepxy = m_step;\n"
+"  vec2 pos    = m_cordY;\n"
+"  pos         = vec2(pos.x - stepxy.x * 0.25, pos.y);\n"
+"  vec2 f      = fract(pos / stepxy);\n"
+"  //y axis will be correctly interpolated by opengl\n"
+"  //x axis will not, so we grab two pixels at the center of two columns and interpolate ourselves\n"
+"  vec4 c1 = texture2D(m_sampY, vec2(pos.x + (0.5 - f.x) * stepxy.x, pos.y));\n"
+"  vec4 c2 = texture2D(m_sampY, vec2(pos.x + (1.5 - f.x) * stepxy.x, pos.y));\n"
+"  /* each pixel has two Y subpixels and one UV subpixel\n"
+"     YUV  Y  YUV\n"
+"     check if we're left or right of the middle Y subpixel and interpolate accordingly*/\n"
+"#ifdef XBMC_YUY2 //BGRA = YUYV\n"
+"  float leftY   = mix(c1.b, c1.r, f.x * 2.0);\n"
+"  float rightY  = mix(c1.r, c2.b, f.x * 2.0 - 1.0);\n"
+"  vec2  outUV   = mix(c1.ga, c2.ga, f.x);\n"
+"#else //BGRA = UYVY\n"
+"  float leftY   = mix(c1.g, c1.a, f.x * 2.0);\n"
+"  float rightY  = mix(c1.a, c2.g, f.x * 2.0 - 1.0);\n"
+"  vec2  outUV   = mix(c1.br, c2.br, f.x);\n"
+"#endif //XBMC_YUY2\n"
+"  float outY    = mix(leftY, rightY, step(0.5, f.x));\n"
+"  vec4  yuv     = vec4(outY, outUV, 1.0);\n"
+"  rgb           = m_yuvmat * yuv;\n"
+"  rgb.a = m_alpha;\n"
 "#endif\n"
-"\n"
-"    rgb = m_yuvmat * yuv;\n"
-"    rgb.a = m_alpha;\n"
-"\n"
-"#if defined(XBMC_COL_CONVERSION)\n"
-"    rgb.rgb = pow( max( vec3( 0 ), rgb.rgb ), vec3( m_gammaSrc ) );\n"
-"    rgb.rgb = max( vec3( 0 ), m_primMat * rgb.rgb );\n"
-"    rgb.rgb = pow( rgb.rgb, vec3( m_gammaDstInv ) );\n"
-"\n"
-"#if defined(XBMC_TONE_MAPPING)\n"
-"    float luma = dot( rgb.rgb, m_coefsDst );\n"
-"    rgb.rgb *= tonemap( luma ) / luma;\n"
-"#endif\n"
-"\n"
-"#endif\n"
-"\n"
-"    gl_FragColor = rgb;\n"
-"}\n";
-
-// SM_VIDEO_NV12_BASIC
-static const char * gles_yuv2rgb_nv12_vert =
-"#define XBMC_NV12\n"
-"uniform mat4 m_proj;\n"
-"uniform mat4 m_model;\n"
-"attribute vec4 m_attrpos;\n"
-"attribute vec2 m_attrcordY;\n"
-"attribute vec2 m_attrcordU;\n"
-"attribute vec2 m_attrcordV;\n"
-"varying vec2 m_cordY;\n"
-"varying vec2 m_cordU;\n"
-"varying vec2 m_cordV;\n"
-"void main()\n"
-"{\n"
-"    mat4 mvp = m_proj * m_model;\n"
-"    gl_Position = mvp * m_attrpos;\n"
-"    m_cordY = m_attrcordY;\n"
-"    m_cordU = m_attrcordU;\n"
-"    m_cordV = m_attrcordV;\n"
-"}\n";
-
-// SM_VIDEO_YUY2_BASIC
-static const char * gles_yuv2rgb_yuy2_vert =
-"#define XBMC_YUY2\n"
-"attribute vec4 m_attrpos;\n"
-"attribute vec2 m_attrcordY;\n"
-"attribute vec2 m_attrcordU;\n"
-"attribute vec2 m_attrcordV;\n"
-"varying vec2 m_cordY;\n"
-"varying vec2 m_cordU;\n"
-"varying vec2 m_cordV;\n"
-"uniform mat4 m_proj;\n"
-"uniform mat4 m_model;\n"
-"void main()\n"
-"{\n"
-"    mat4 mvp = m_proj * m_model;\n"
-"    gl_Position = mvp * m_attrpos;\n"
-"    m_cordY = m_attrcordY;\n"
-"    m_cordU = m_attrcordU;\n"
-"    m_cordV = m_attrcordV;\n"
-"}\n";
-
-// SM_VIDEO_UYVY_BASIC
-static const char * gles_yuv2rgb_uyvy_vert =
-"#define XBMC_UYVY\n"
-"attribute vec4 m_attrpos;\n"
-"attribute vec2 m_attrcordY;\n"
-"attribute vec2 m_attrcordU;\n"
-"attribute vec2 m_attrcordV;\n"
-"varying vec2 m_cordY;\n"
-"varying vec2 m_cordU;\n"
-"varying vec2 m_cordV;\n"
-"uniform mat4 m_proj;\n"
-"uniform mat4 m_model;\n"
-"void main()\n"
-"{\n"
-"    mat4 mvp = m_proj * m_model;\n"
-"    gl_Position = mvp * m_attrpos;\n"
-"    m_cordY = m_attrcordY;\n"
-"    m_cordU = m_attrcordU;\n"
-"    m_cordV = m_attrcordV;\n"
-"}\n";
-
-// SM_VIDEO_NV12_RGB_BASIC
-static const char * gles_yuv2rgb_nv12_rgb_vert =
-"#define XBMC_NV12_RRG\n"
-"attribute vec4 m_attrpos;\n"
-"attribute vec2 m_attrcordY;\n"
-"attribute vec2 m_attrcordU;\n"
-"attribute vec2 m_attrcordV;\n"
-"varying vec2 m_cordY;\n"
-"varying vec2 m_cordU;\n"
-"varying vec2 m_cordV;\n"
-"uniform mat4 m_proj;\n"
-"uniform mat4 m_model;\n"
-"void main()\n"
-"{\n"
-"    mat4 mvp = m_proj * m_model;\n"
-"    gl_Position = mvp * m_attrpos;\n"
-"    m_cordY = m_attrcordY;\n"
-"    m_cordU = m_attrcordU;\n"
-"    m_cordV = m_attrcordV;\n"
-"}\n";
-
-// SM_VIDEO_YV12_BOB
-#if defined(TARGET_OS_WINDOWS)
-static const char * gles_yuv2rgb_bob_frag =
-"precision highp float;\n"
-#else
-static const char * gles_yuv2rgb_bob_frag =
-#endif
-"uniform sampler2D m_sampY;\n"
-"uniform sampler2D m_sampU;\n"
-"uniform sampler2D m_sampV;\n"
-"varying vec2 m_cordY;\n"
-"varying vec2 m_cordU;\n"
-"varying vec2 m_cordV;\n"
-"uniform float m_alpha;\n"
-"uniform mat4 m_yuvmat;\n"
-"uniform float m_stepX;\n"
-"uniform float m_stepY;\n"
-"uniform int m_field;\n"
-"uniform mat3 m_primMat;\n"
-"uniform float m_gammaDstInv;\n"
-"uniform float m_gammaSrc;\n"
-"uniform float m_toneP1;\n"
-"uniform vec3 m_coefsDst;\n"
-"\n"
-"void main()\n"
-"{\n"
-"    vec4 rgb;\n"
-"\n"
-"    vec2 offsetY;\n"
-"    vec2 offsetU;\n"
-"    vec2 offsetV;\n"
-"    float temp1 = mod( m_cordY.y, 2.0 * m_stepY );\n"
-"\n"
-"    offsetY = m_cordY;\n"
-"    offsetU = m_cordU;\n"
-"    offsetV = m_cordV;\n"
-"\n"
-"    offsetY.y -= ( temp1 - m_stepY / 2.0 + float( m_field ) * m_stepY );\n"
-"    offsetU.y -= ( temp1 - m_stepY / 2.0 + float( m_field ) * m_stepY ) / 2.0;\n"
-"    offsetV.y -= ( temp1 - m_stepY / 2.0 + float( m_field ) * m_stepY ) / 2.0;\n"
-"\n"
-"    float bstep = step( m_stepY, temp1 );\n"
-"\n"
-"    // Blend missing line\n"
-"    vec2 belowY, belowU, belowV;\n"
-"\n"
-"    belowY.x = offsetY.x;\n"
-"    belowY.y = offsetY.y + ( 2.0 * m_stepY * bstep );\n"
-"    belowU.x = offsetU.x;\n"
-"    belowU.y = offsetU.y + ( m_stepY * bstep );\n"
-"    belowV.x = offsetV.x;\n"
-"    belowV.y = offsetV.y + ( m_stepY * bstep );\n"
-"\n"
-"    vec4 rgbAbove;\n"
-"    vec4 rgbBelow;\n"
-"    vec4 yuvAbove;\n"
-"    vec4 yuvBelow;\n"
-"\n"
-"    yuvAbove = vec4( texture2D( m_sampY, offsetY ).r, texture2D( m_sampU, offsetU ).g, texture2D( m_sampV, offsetV ).a, 1.0 );\n"
-"    rgbAbove = m_yuvmat * yuvAbove;\n"
-"    rgbAbove.a = m_alpha;\n"
-"\n"
-"    yuvBelow = vec4( texture2D( m_sampY, belowY ).r, texture2D( m_sampU, belowU ).g, texture2D( m_sampV, belowV ).a, 1.0 );\n"
-"    rgbBelow = m_yuvmat * yuvBelow;\n"
-"    rgbBelow.a = m_alpha;\n"
-"\n"
-"    rgb = mix( rgb, rgbBelow, 0.5 );\n"
-"\n"
-"#if defined(XBMC_COL_CONVERSION)\n"
-"    rgb.rgb = pow( max( vec3( 0 ), rgb.rgb ), vec3( m_gammaSrc ) );\n"
-"    rgb.rgb = max( vec3( 0 ), m_primMat * rgb.rgb );\n"
-"    rgb.rgb = pow( rgb.rgb, vec3( m_gammaDstInv ) );\n"
-"\n"
-"#if defined(XBMC_TONE_MAPPING)\n"
-"    float luma = dot( rgb.rgb, m_coefsDst );\n"
-"    rgb.rgb *= tonemap( luma ) / luma;\n"
-"#endif\n"
-"\n"
-"#endif\n"
-"\n"
-"    gl_FragColor = rgb;\n"
+"  gl_FragColor = rgb;\n"
 "}\n";
 
 //============================================================================
 // video filter
 //============================================================================
 // SM_VID_FILTER_DEFAULT
-static const char * gles_videofilter_vert =
-"uniform mat4 m_proj;\n"
-"uniform mat4 m_model;\n"
+static const char * gl_videofilter_vert =
 "attribute vec4 m_attrpos;\n"
 "attribute vec2 m_attrcord;\n"
 "varying vec2 cord;\n"
+"uniform mat4 m_proj;\n"
+"uniform mat4 m_model;\n"
 "void main()\n"
 "{\n"
 "    mat4 mvp = m_proj * m_model;\n"
@@ -607,10 +249,10 @@ static const char * gles_videofilter_vert =
 
 // SM_VID_FILTER_DEFAULT
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_videofilter_frag =
+static const char * gl_videofilter_frag =
 "precision mediump float;\n"
 #else
-static const char * gles_videofilter_frag =
+static const char * gl_videofilter_frag =
 #endif
 "uniform sampler2D img;\n"
 "varying vec2 cord;\n"
@@ -621,66 +263,12 @@ static const char * gles_videofilter_frag =
 
 // SM_VID_FILTER_CONVOLUTION_4X4_RGBA
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_convolution_4x4_rgba_frag =
+static const char * gl_convolution_4x4_frag =
 "precision highp float;\n"
 #else
-static const char * gles_convolution_4x4_rgba_frag =
+static const char * gl_convolution_4x4_frag =
 #endif
-"#define HAS_FLOAT_TEXTURE 0\n"
-"uniform sampler2D img;\n"
-"uniform vec2      stepxy;\n"
-"varying vec2      cord;\n"
-"uniform float     m_alpha;\n"
-"uniform sampler2D kernelTex;\n"
-"vec4 weight( float pos )\n"
-"{\n"
-"#if (HAS_FLOAT_TEXTURE)\n"
-"    return texture2D( kernelTex, vec2( pos - 0.5 ) );\n"
-"#else\n"
-"    return texture2D( kernelTex, vec2( pos - 0.5 ) ) * 2.0 - 1.0;\n"
-"#endif\n"
-"}\n"
-"vec3 pixel( float xpos, float ypos )\n"
-"{\n"
-"    return texture2D( img, vec2( xpos, ypos ) ).rgb;\n"
-"}\n"
-"vec3 line( float ypos, vec4 xpos, vec4 linetaps )\n"
-"{\n"
-"    return\n"
-"        pixel( xpos.r, ypos ) * linetaps.r +\n"
-"        pixel( xpos.g, ypos ) * linetaps.g +\n"
-"        pixel( xpos.b, ypos ) * linetaps.b +\n"
-"        pixel( xpos.a, ypos ) * linetaps.a;\n"
-"}\n"
-"void main()\n"
-"{\n"
-"    vec4 rgb;\n"
-"    vec2 pos = cord + stepxy * 0.5;\n"
-"    vec2 f = fract( pos / stepxy );\n"
-"    vec4 linetaps = weight( 1.0 - f.x );\n"
-"    vec4 columntaps = weight( 1.0 - f.y );\n"
-"    //make sure all taps added together is exactly 1.0, otherwise some (very small) distortion can occur\n"
-"    linetaps /= linetaps.r + linetaps.g + linetaps.b + linetaps.a;\n"
-"    columntaps /= columntaps.r + columntaps.g + columntaps.b + columntaps.a;\n"
-"    vec2 xystart = ( -1.5 - f ) * stepxy + pos;\n"
-"    vec4 xpos = vec4( xystart.x, xystart.x + stepxy.x, xystart.x + stepxy.x * 2.0, xystart.x + stepxy.x * 3.0 );\n"
-"    rgb.rgb =\n"
-"        line( xystart.y, xpos, linetaps ) * columntaps.r +\n"
-"        line( xystart.y + stepxy.y, xpos, linetaps ) * columntaps.g +\n"
-"        line( xystart.y + stepxy.y * 2.0, xpos, linetaps ) * columntaps.b +\n"
-"        line( xystart.y + stepxy.y * 3.0, xpos, linetaps ) * columntaps.a;\n"
-"    rgb.a = m_alpha;\n"
-"    gl_FragColor = rgb;\n"
-"}\n";
-
-// SM_VID_FILTER_CONVOLUTION_4X4_FLOAT
-#if defined(TARGET_OS_WINDOWS)
-static const char * gles_convolution_4x4_float_frag =
 "precision highp float;\n"
-#else
-static const char * gles_convolution_4x4_float_frag =
-#endif
-"#define HAS_FLOAT_TEXTURE 1\n"
 "uniform sampler2D img;\n"
 "uniform vec2      stepxy;\n"
 "varying vec2      cord;\n"
@@ -729,77 +317,11 @@ static const char * gles_convolution_4x4_float_frag =
 
 // SM_VID_FILTER_CONVOLUTION_6X6_RGBA
 #if defined(TARGET_OS_WINDOWS)
-static const char * gles_convolution_6x6_rgba_frag =
+static const char * gl_convolution_6x6_frag =
 "precision highp float;\n"
 #else
-static const char * gles_convolution_6x6_rgba_frag =
+static const char * gl_convolution_6x6_frag =
 #endif
-"#define HAS_FLOAT_TEXTURE 0\n"
-"uniform sampler2D img;\n"
-"uniform vec2      stepxy;\n"
-"varying vec2      cord;\n"
-"uniform float     m_alpha;\n"
-"uniform sampler2D kernelTex;\n"
-"vec3 weight( float pos )\n"
-"{\n"
-"#if (HAS_FLOAT_TEXTURE)\n"
-"    return texture2D( kernelTex, vec2( pos - 0.5 ) ).rgb;\n"
-"#else\n"
-"    return texture2D( kernelTex, vec2( pos - 0.5 ) ).rgb * 2.0 - 1.0;\n"
-"#endif\n"
-"}\n"
-"vec3 pixel( float xpos, float ypos )\n"
-"{\n"
-"    return texture2D( img, vec2( xpos, ypos ) ).rgb;\n"
-"}\n"
-"vec3 line( float ypos, vec3 xpos1, vec3 xpos2, vec3 linetaps1, vec3 linetaps2 )\n"
-"{\n"
-"    return\n"
-"        pixel( xpos1.r, ypos ) * linetaps1.r +\n"
-"        pixel( xpos1.g, ypos ) * linetaps2.r +\n"
-"        pixel( xpos1.b, ypos ) * linetaps1.g +\n"
-"        pixel( xpos2.r, ypos ) * linetaps2.g +\n"
-"        pixel( xpos2.g, ypos ) * linetaps1.b +\n"
-"        pixel( xpos2.b, ypos ) * linetaps2.b;\n"
-"}\n"
-"void main()\n"
-"{\n"
-"    vec4 rgb;\n"
-"    vec2 pos = cord + stepxy * 0.5;\n"
-"    vec2 f = fract( pos / stepxy );\n"
-"    vec3 linetaps1 = weight( ( 1.0 - f.x ) / 2.0 );\n"
-"    vec3 linetaps2 = weight( ( 1.0 - f.x ) / 2.0 + 0.5 );\n"
-"    vec3 columntaps1 = weight( ( 1.0 - f.y ) / 2.0 );\n"
-"    vec3 columntaps2 = weight( ( 1.0 - f.y ) / 2.0 + 0.5 );\n"
-"    //make sure all taps added together is exactly 1.0, otherwise some (very small) distortion can occur\n"
-"    float sum = linetaps1.r + linetaps1.g + linetaps1.b + linetaps2.r + linetaps2.g + linetaps2.b;\n"
-"    linetaps1 /= sum;\n"
-"    linetaps2 /= sum;\n"
-"    sum = columntaps1.r + columntaps1.g + columntaps1.b + columntaps2.r + columntaps2.g + columntaps2.b;\n"
-"    columntaps1 /= sum;\n"
-"    columntaps2 /= sum;\n"
-"    vec2 xystart = ( -2.5 - f ) * stepxy + pos;\n"
-"    vec3 xpos1 = vec3( xystart.x, xystart.x + stepxy.x, xystart.x + stepxy.x * 2.0 );\n"
-"    vec3 xpos2 = vec3( xystart.x + stepxy.x * 3.0, xystart.x + stepxy.x * 4.0, xystart.x + stepxy.x * 5.0 );\n"
-"    rgb.rgb =\n"
-"        line( xystart.y, xpos1, xpos2, linetaps1, linetaps2 ) * columntaps1.r +\n"
-"        line( xystart.y + stepxy.y, xpos1, xpos2, linetaps1, linetaps2 ) * columntaps2.r +\n"
-"        line( xystart.y + stepxy.y * 2.0, xpos1, xpos2, linetaps1, linetaps2 ) * columntaps1.g +\n"
-"        line( xystart.y + stepxy.y * 3.0, xpos1, xpos2, linetaps1, linetaps2 ) * columntaps2.g +\n"
-"        line( xystart.y + stepxy.y * 4.0, xpos1, xpos2, linetaps1, linetaps2 ) * columntaps1.b +\n"
-"        line( xystart.y + stepxy.y * 5.0, xpos1, xpos2, linetaps1, linetaps2 ) * columntaps2.b;\n"
-"    rgb.a = m_alpha;\n"
-"    gl_FragColor = rgb;\n"
-"}\n";
-
-// SM_VID_FILTER_CONVOLUTION_6X6_FLOAT
-#if defined(TARGET_OS_WINDOWS)
-static const char * gles_convolution_6x6_float_frag =
-"precision highp float;\n"
-#else
-static const char * gles_convolution_6x6_float_frag =
-#endif
-"#define HAS_FLOAT_TEXTURE 1\n"
 "uniform sampler2D img;\n"
 "uniform vec2      stepxy;\n"
 "varying vec2      cord;\n"
@@ -858,7 +380,7 @@ static const char * gles_convolution_6x6_float_frag =
 "}\n";
 
 //============================================================================
-static const char * gles_tonemap_frag =
+static const char * gl_tonemap_frag =
 "float tonemap(float val)\n"
 "{\n"
 "    return val * ( 1.0 + val / ( m_toneP1 * m_toneP1 ) ) / ( 1.0 + val );\n"
@@ -879,169 +401,126 @@ void RenderGlShaders::getShaderSourceCode( int shaderIdx, EShaderType& shaderTyp
     switch( shaderIdx )
     {
     case SM_DEFAULT:
-        vertexShaderCode = gles_shader_vert;
-        fragmentShaderCode = gles_shader_default_frag;
+        vertexShaderCode = gl_shader_vert;
+        fragmentShaderCode = gl_shader_default_frag;
         shaderName = "SM_DEFAULT";
         break;
 
     case SM_TEXTURE:
-        vertexShaderCode = gles_shader_vert;
-        fragmentShaderCode = gles_shader_texture_frag;
+        vertexShaderCode = gl_shader_vert;
+        fragmentShaderCode = gl_shader_texture_frag;
         shaderName = "SM_TEXTURE";
         break;
 
     case SM_MULTI:
-        vertexShaderCode = gles_shader_vert;
-        fragmentShaderCode = gles_shader_multi_frag;
+        vertexShaderCode = gl_shader_vert;
+        fragmentShaderCode = gl_shader_multi_frag;
         shaderName = "SM_MULTI";
         break;
 
     case SM_FONTS:
-        vertexShaderCode = gles_shader_vert;
-        fragmentShaderCode = gles_shader_fonts_frag;
+        vertexShaderCode = gl_shader_vert;
+        fragmentShaderCode = gl_shader_fonts_frag;
         shaderName = "SM_FONTS";
         break;
 
     case SM_TEXTURE_NOBLEND:
-        vertexShaderCode = gles_shader_vert;
-        fragmentShaderCode = gles_shader_texture_noblend_frag;
+        vertexShaderCode = gl_shader_vert;
+        fragmentShaderCode = gl_shader_texture_noblend_frag;
         shaderName = "SM_TEXTURE_NOBLEND";
         break;
 
     case SM_MULTI_BLENDCOLOR:
-        vertexShaderCode = gles_shader_vert;
-        fragmentShaderCode = gles_shader_multi_blendcolor_frag;
+        vertexShaderCode = gl_shader_vert;
+        fragmentShaderCode = gl_shader_multi_blendcolor_frag;
         shaderName = "SM_MULTI_BLENDCOLOR";
-        break;
-
-    case SM_TEXTURE_RGBA:
-        vertexShaderCode = gles_shader_vert;
-        fragmentShaderCode = gles_shader_rgba_frag;
-        shaderName = "SM_TEXTURE_RGBA";
-        break;
-
-    case SM_TEXTURE_RGBA_OES:
-        vertexShaderCode = gles_shader_vert;
-        fragmentShaderCode = gles_shader_rgba_oes_frag;
-        shaderName = "SM_TEXTURE_RGBA_OES";
-        break;
-
-    case SM_TEXTURE_RGBA_BLENDCOLOR:
-        vertexShaderCode = gles_shader_vert;
-        fragmentShaderCode = gles_shader_rgba_blendcolor_frag;
-        shaderName = "SM_TEXTURE_RGBA_BLENDCOLOR";
-        break;
-
-    case SM_TEXTURE_RGBA_BOB:
-        vertexShaderCode = gles_shader_vert;
-        fragmentShaderCode = gles_shader_rgba_bob_frag;
-        shaderName = "SM_TEXTURE_RGBA_BOB";
-        break;
-
-    case SM_TEXTURE_RGBA_BOB_OES:
-        vertexShaderCode = gles_shader_vert;
-        fragmentShaderCode = gles_shader_rgba_bob_oes_frag;
-        shaderName = "SM_TEXTURE_RGBA_BOB_OES";
         break;
 
     //=== video format ===//
     case SM_VIDEO_YV12_BASIC:
-        vertexShaderCode = gles_yuv2rgb_yv12_vert;
-        fragmentShaderCode = gles_yuv2rgb_basic_frag;
+        vertexShaderCode = gl_yuv2rgb_vert;
+        fragmentShaderCode = gl_yuv2rgb_basic_frag;
         shaderType = eShaderVideoFormat;
         shaderName = "SM_VIDEO_YV12_BASIC";
+        vertDefines = "#define XBMC_YV12\n";
         fragDefines = "#define XBMC_YV12\n";
         break;
+
     case SM_VIDEO_NV12_BASIC:
-        vertexShaderCode = gles_yuv2rgb_nv12_vert;
-        fragmentShaderCode = gles_yuv2rgb_basic_frag;
+        vertexShaderCode = gl_yuv2rgb_vert;
+        fragmentShaderCode = gl_yuv2rgb_basic_frag;
         shaderType = eShaderVideoFormat;
         shaderName = "SM_VIDEO_NV12_BASIC";
+        vertDefines = "#define XBMC_NV12\n";
         fragDefines = "#define XBMC_NV12\n";
         break;
+
     case SM_VIDEO_YUY2_BASIC:
-        vertexShaderCode = gles_yuv2rgb_yuy2_vert;
-        fragmentShaderCode = gles_yuv2rgb_basic_frag;
+        vertexShaderCode = gl_yuv2rgb_vert;
+        fragmentShaderCode = gl_yuv2rgb_basic_frag;
         shaderType = eShaderVideoFormat;
         shaderName = "SM_VIDEO_YUY2_BASIC";
+        vertDefines = "#define XBMC_YUY2\n";
         fragDefines = "#define XBMC_YUY2\n";
         break;
+
     case SM_VIDEO_UYVY_BASIC:
-        vertexShaderCode = gles_yuv2rgb_uyvy_vert;
-        fragmentShaderCode = gles_yuv2rgb_basic_frag;
+        vertexShaderCode = gl_yuv2rgb_vert;
+        fragmentShaderCode = gl_yuv2rgb_basic_frag;
         shaderType = eShaderVideoFormat;
         shaderName = "SM_VIDEO_UYVY_BASIC";
-        fragDefines = "#define XBMC_UYVY\n";
-        break;
-    case SM_VIDEO_NV12_RGB_BASIC:
-        vertexShaderCode = gles_yuv2rgb_nv12_rgb_vert;
-        fragmentShaderCode = gles_yuv2rgb_basic_frag;
-        shaderType = eShaderVideoFormat;
-        shaderName = "SM_VIDEO_NV12_RGB_BASIC";
+        vertDefines = "#define XBMC_UYVY\n";
         fragDefines = "#define XBMC_UYVY\n";
         break;
 
-    case SM_VIDEO_YV12_BOB:
-        vertexShaderCode = gles_yuv2rgb_yv12_vert;
-        fragmentShaderCode = gles_yuv2rgb_bob_frag;
+    case SM_VIDEO_NV12_RGB_BASIC:
+        vertexShaderCode = gl_yuv2rgb_vert;
+        fragmentShaderCode = gl_yuv2rgb_basic_frag;
         shaderType = eShaderVideoFormat;
-        shaderName = "SM_VIDEO_YV12_BOB";
+        shaderName = "SM_VIDEO_NV12_RGB_BASIC";
+        vertDefines = "#define XBMC_UYVY\n";
+        fragDefines = "#define XBMC_UYVY\n";
         break;
-    case SM_VIDEO_NV12_BOB:
-        vertexShaderCode = gles_yuv2rgb_nv12_vert;
-        fragmentShaderCode = gles_yuv2rgb_bob_frag;
-        shaderType = eShaderVideoFormat;
-        shaderName = "SM_VIDEO_NV12_BOB";
-        break;
-    case SM_VIDEO_YUY2_BOB:
-        vertexShaderCode = gles_yuv2rgb_yuy2_vert;
-        fragmentShaderCode = gles_yuv2rgb_bob_frag;
-        shaderType = eShaderVideoFormat;
-        shaderName = "SM_VIDEO_YUY2_BOB";
-        break;
-    case SM_VIDEO_UYVY_BOB:
-        vertexShaderCode = gles_yuv2rgb_uyvy_vert;
-        fragmentShaderCode = gles_yuv2rgb_bob_frag;
-        shaderType = eShaderVideoFormat;
-        shaderName = "SM_VIDEO_UYVY_BOB";
-        break;
-    case SM_VIDEO_NV12_RGB_BOB:
-        vertexShaderCode = gles_yuv2rgb_nv12_rgb_vert;
-        fragmentShaderCode = gles_yuv2rgb_bob_frag;
-        shaderType = eShaderVideoFormat;
-        shaderName = "SM_VIDEO_NV12_RGB_BOB";
-        break;
+
 
     //=== video filter ===//
     case SM_VID_FILTER_DEFAULT:
-        vertexShaderCode = gles_videofilter_vert;
-        fragmentShaderCode = gles_videofilter_frag;
+        vertexShaderCode = gl_videofilter_vert;
+        fragmentShaderCode = gl_videofilter_frag;
         shaderType = eShaderVideoFilter;
         shaderName = "SM_VID_FILTER_DEFAULT";
         break;
     case SM_VID_FILTER_CONVOLUTION_4X4_RGBA:
-        vertexShaderCode = gles_videofilter_vert;
-        fragmentShaderCode = gles_convolution_4x4_rgba_frag;
+        vertexShaderCode = gl_videofilter_vert;
+        fragmentShaderCode = gl_convolution_4x4_frag;
         shaderType = eShaderVideoFilter;
         shaderName = "SM_VID_FILTER_CONVOLUTION_4X4_RGBA";
+        vertDefines = "#define HAS_FLOAT_TEXTURE 0\n";
+        fragDefines = "#define HAS_FLOAT_TEXTURE 0\n";
         break;
     case SM_VID_FILTER_CONVOLUTION_4X4_FLOAT:
-        vertexShaderCode = gles_videofilter_vert;
-        fragmentShaderCode = gles_convolution_4x4_float_frag;
+        vertexShaderCode = gl_videofilter_vert;
+        fragmentShaderCode = gl_convolution_4x4_frag;
         shaderType = eShaderVideoFilter;
         shaderName = "SM_VID_FILTER_CONVOLUTION_4X4_FLOAT";
+        vertDefines = "#define HAS_FLOAT_TEXTURE 1\n";
+        fragDefines = "#define HAS_FLOAT_TEXTURE 1\n";
         break;
     case SM_VID_FILTER_CONVOLUTION_6X6_RGBA:
-        vertexShaderCode = gles_videofilter_vert;
-        fragmentShaderCode = gles_convolution_6x6_rgba_frag;
+        vertexShaderCode = gl_videofilter_vert;
+        fragmentShaderCode = gl_convolution_6x6_frag;
         shaderType = eShaderVideoFilter;
         shaderName = "SM_VID_FILTER_CONVOLUTION_6X6_RGBA";
+        vertDefines = "#define HAS_FLOAT_TEXTURE 0\n";
+        fragDefines = "#define HAS_FLOAT_TEXTURE 0\n";
         break;
     case SM_VID_FILTER_CONVOLUTION_6X6_FLOAT:
-        vertexShaderCode = gles_videofilter_vert;
-        fragmentShaderCode = gles_convolution_6x6_float_frag;
+        vertexShaderCode = gl_videofilter_vert;
+        fragmentShaderCode = gl_convolution_6x6_frag;
         shaderType = eShaderVideoFilter;
         shaderName = "SM_VID_FILTER_CONVOLUTION_6X6_FLOAT";
+        vertDefines = "#define HAS_FLOAT_TEXTURE 1\n";
+        fragDefines = "#define HAS_FLOAT_TEXTURE 1\n";
         break;
 
     case SM_SHADER_NONE:
@@ -1058,13 +537,13 @@ void RenderGlShaders::getShaderSourceCode( int shaderIdx, EShaderType& shaderTyp
         LogMsg( LOG_INFO, "ERROR empty Compiling shader %s", shaderName.c_str() );
 #endif // DEBUG_KODI_SHADERS
         //VerifyGLStateQt();
-        vertexShaderCode = gles_shader_vert;
-        fragmentShaderCode = gles_shader_default_frag;
+        vertexShaderCode = gl_shader_vert;
+        fragmentShaderCode = gl_shader_default_frag;
     }
     else
     {
 #ifdef TARGET_OS_WINDOWS
-        vertexShaderCode = "#version 100\n" + vertDefines + vertexShaderCode;
+        vertexShaderCode = vertDefines + vertexShaderCode;
         fragmentShaderCode = fragDefines + fragmentShaderCode;
 #else
         // version must be first line of code on linux

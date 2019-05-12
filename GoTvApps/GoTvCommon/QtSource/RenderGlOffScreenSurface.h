@@ -9,19 +9,19 @@
 #include <QtGui/QResizeEvent>
 #include <QtGui/QOpenGLPaintDevice>
 #include <QtGui/QOpenGLFunctions>
-#include <QtGui/QOpenGLFunctions_3_0>
+#include <QtGui/QOpenGLExtraFunctions>
 #include <QtGui/QOpenGLFramebufferObject>
 #include <QtGui/QSurfaceFormat>
 #include <QtWidgets/QWidget>
 #include <QOpenGLShaderProgram>
 
-#include <QOpenGLFunctions_3_0>
 
 #include <atomic>
 #include <mutex>
 
 class RenderGlWidget;
 class RenderKodiThread;
+class RenderGlLogic;
 
 class RenderGlOffScreenSurface : public QOffscreenSurface
 {
@@ -34,9 +34,8 @@ public:
     /// this is because before the FBO and off-screen surface haven't been created.
     /// By default this uses the QWindow::requestedFormat() for OpenGL context and off-screen
     /// surface.
-    explicit RenderGlOffScreenSurface(	RenderKodiThread* kodiThread,
+    explicit RenderGlOffScreenSurface(  RenderGlLogic * renderLogic,
                                         RenderGlWidget * glWidget,
-                                        QOpenGLContext * guiRenderContext,
                                         QOpenGLContext * threadRenderContext,
 										QScreen* targetScreen = nullptr, 
 										const QSize& size = QSize( 1, 1 ) );
@@ -56,9 +55,6 @@ public:
 
     /// @brief same as getSurfaceSize but no mutex lock
     QSize                       bufferSize() const;
-
-    /// @brief get context that was setup by main gui thread
-    QOpenGLContext*             getGuiRenderContext( )         { return m_RenderGuiContext; }
 
     /// @brief get context for render thread
     QOpenGLContext*             getThreadRenderContext()        { return m_RenderThreadContext; }
@@ -85,11 +81,8 @@ public:
     /// @brief Release the OpenGL context.
     void                        doneCurrent();
 
-    /// @brief get last frame capture
-    QImage&                     getLastRenderedImage()      { return m_FrameImage; }
-
     /// @brief must be called from render thread
-    void                        setRenderFunctions( QOpenGLFunctions * glFunctions );
+    void                        setRenderFunctions( QOpenGLFunctions * glFunctions, QOpenGLExtraFunctions* glExtraFunctions );
 
 protected:
 
@@ -107,9 +100,6 @@ protected:
     /// @return The OpenGL off-screen frame buffer object or nullptr if no FBO has been created yet.
     /// @note This changes on every resize!
     const QOpenGLFramebufferObject* getFramebufferObject() const;
-
-    /// @brief Return the QPaintDevice for paint into it.
-    QOpenGLPaintDevice*         getPaintDevice() const;
 
     /// @brief Return the OpenGL off-screen frame buffer object identifier.
     /// @return The OpenGL off-screen frame buffer object identifier or 0 if no FBO has been created
@@ -137,7 +127,6 @@ protected:
 public slots:
     /// @brief Lazy update routine like QWidget::update().
     void                        update();
-    void                        slotGlResized( int w, int h );
 
 signals:
     /// @brief Emitted when swapBuffers() was called and bufferswapping is done.
@@ -174,13 +163,10 @@ private:
     void                        testTexureRender( bool startRender );
 
 	//=== vars ===//
-	/// @brief kodi thread
-    RenderKodiThread*			m_KodiThread = nullptr;
+	/// @brief render thread
+    RenderGlLogic*				m_RenderGlLogic = nullptr;
 
     RenderGlWidget *            m_GlWidget = nullptr;
-
-    /// @brief OpenGL render context.
-    QOpenGLContext*             m_RenderGuiContext = nullptr;
 
     /// @brief OpenGL render context.
     QOpenGLContext*             m_RenderThreadContext = nullptr;
@@ -201,15 +187,8 @@ private:
     std::atomic_bool            m_updatePending;
 
     /// @brief The OpenGL 2.1 / ES 2.0 function object that can be used the issue OpenGL commands.
-    QOpenGLFunctions*           m_functions = nullptr;
-
-#if !defined(QT_OPENGL_ES_2)
-    /// @brief The OpenGL 3.0 function object that can be used the issue OpenGL commands.
-    QOpenGLFunctions_3_0*       m_functions_3_0 = nullptr;
-#endif // !defined(QT_OPENGL_ES_2)
-
-    /// @brief OpenGL paint device for painting with a QPainter.
-    QOpenGLPaintDevice*         m_paintDevice = nullptr;
+    QOpenGLFunctions*           m_Glf = nullptr;
+    QOpenGLExtraFunctions*      m_GlfExtra = nullptr;
 
     /// @brief Background FBO for off-screen rendering when the window is not exposed.
     QOpenGLFramebufferObject*   m_fbo = nullptr;
@@ -226,9 +205,6 @@ private:
 
     /// @brief new size of surface if window size changed
     QSize                       m_NextSurfaceSize;
-
-    /// @brief storage of image for GL window render
-    QImage                      m_FrameImage;
 
    
     GLuint                      m_TestTexure1;

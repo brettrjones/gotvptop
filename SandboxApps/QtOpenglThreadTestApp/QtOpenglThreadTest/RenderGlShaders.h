@@ -87,7 +87,7 @@ public:
 
 
 
-    virtual std::string         getShaderPath( const std::string &filename ) { return ""; }
+    virtual std::string         getShaderPath( const std::string &/*filename*/ ) { return ""; }
 
     virtual void                initialiseShaders() = 0;
     virtual void                releaseShaders() = 0;
@@ -149,8 +149,10 @@ private:
 };
 
 class RenderGlWidget;
+class RenderGlLogic;
 
-class RenderGlShaders : public QOpenGLFunctions, public IGoTvRender
+
+class RenderGlShaders : public IGoTvRender
 {
 public:
 
@@ -161,11 +163,11 @@ public:
     void VerifyGLStateQt();
 #endif
 
-    RenderGlShaders( RenderGlWidget& renderGlWidget );
+    RenderGlShaders( RenderGlLogic& renderGlLogic );
     virtual ~RenderGlShaders();
 
     // must be called from gui thread (required for linux)
-    void initShaders();
+    void initShaders( QOpenGLFunctions * glf );
 
     // cleanup shaders
     void destroyShaders();
@@ -224,8 +226,9 @@ protected:
     void                        getShaderSourceCode( int shaderIdx, EShaderType& shaderType, std::string& shaderName, std::string& vertexShaderCode, std::string& fragmentShaderCode );
     void                        compileShader( int shaderIdx );
 
-    RenderGlWidget&             m_RenderGlWidget;
+    RenderGlLogic&              m_RenderGlWidget;
     // shaders
+    QOpenGLFunctions *          m_Glf = nullptr;
     RenderShaderQt *            m_Shaders[ SM_MAX ];
     bool                        m_ShadersInited = false;
     ESHADERMETHOD               m_CurShaderMethodType = SM_DEFAULT;

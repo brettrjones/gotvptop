@@ -107,7 +107,10 @@ void NetworkMgr::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNet
 {
     if( m_bNetworkAvailable )
     {
+#ifdef DEBUG_PTOP_NETWORK_STATE
         LogMsg( LOG_DEBUG, "fromGuiNetworkAvailable %s but network already set to %s\n", lclIp, m_strLocalIpAddr.c_str() );
+#endif // DEBUG_PTOP_NETWORK_STATE
+
         return;
     }
 

@@ -8,7 +8,7 @@
 
 #include "config_kodi.h"
 #if defined(TARGET_OS_WINDOWS)
-# include <libglew/include/GL/glew.h>
+//# include <libglew/include/GL/glew.h>
 #endif // defined(TARGET_OS_WINDOWS)
 
 #include "FrameBufferObject.h"
@@ -92,23 +92,35 @@ bool CFrameBufferObject::CreateAndBindToTexture( GLenum target, int width, int h
     if( !IsValid() )
         return false;
 
-    if( m_texid )
-        glDeleteTextures( 1, &m_texid );
+    IGoTv& gotv = IGoTv::getIGoTv();
 
-    glGenTextures( 1, &m_texid );
-    glBindTexture( target, m_texid );
-    glTexImage2D( target, 0, format, width, height, 0, GL_RGBA, type, NULL );
-    glTexParameteri( target, GL_TEXTURE_WRAP_S, clampmode );
-    glTexParameteri( target, GL_TEXTURE_WRAP_T, clampmode );
-    glTexParameteri( target, GL_TEXTURE_MAG_FILTER, filter );
-    glTexParameteri( target, GL_TEXTURE_MIN_FILTER, filter );
-    VerifyGLState();
+    if( m_texid )
+        gotv.glFuncDeleteTextures( 1, &m_texid );
 
     m_bound = false;
+
+    gotv.glFuncGenTextures( 1, &m_texid );
+    gotv.glFuncBindTexture( target, m_texid );
+    gotv.glFuncTexImage2D( target, 0, format, width, height, 0, GL_RGBA, type, NULL );
+    gotv.glFuncTexParameteri( target, GL_TEXTURE_WRAP_S, clampmode );
+    gotv.glFuncTexParameteri( target, GL_TEXTURE_WRAP_T, clampmode );
+    gotv.glFuncTexParameteri( target, GL_TEXTURE_MAG_FILTER, filter );
+    gotv.glFuncTexParameteri( target, GL_TEXTURE_MIN_FILTER, filter );
+    VerifyGLState();
+
 #ifdef HAVE_QT_GUI
-    IGoTv& gotv = IGoTv::getIGoTv();
+    m_bound = false;
+
+    gotv.glFuncGenTextures( 1, &m_texid );
+    gotv.glFuncBindTexture( target, m_texid );
+    gotv.glFuncTexImage2D( target, 0, format, width, height, 0, GL_RGBA, type, NULL );
+    gotv.glFuncTexParameteri( target, GL_TEXTURE_WRAP_S, clampmode );
+    gotv.glFuncTexParameteri( target, GL_TEXTURE_WRAP_T, clampmode );
+    gotv.glFuncTexParameteri( target, GL_TEXTURE_MAG_FILTER, filter );
+    gotv.glFuncTexParameteri( target, GL_TEXTURE_MIN_FILTER, filter );
+
     gotv.frameBufferBind( m_fbo );
-    glBindTexture( target, m_texid );
+    gotv.glFuncBindTexture( target, m_texid );
     gotv.frameBufferTexture2D( target, m_texid );
     VerifyGLState();
     bool status = gotv.frameBufferStatus( );
@@ -119,6 +131,16 @@ bool CFrameBufferObject::CreateAndBindToTexture( GLenum target, int width, int h
         return false;
     }
 #else
+    m_bound = false;
+
+    glGenTextures( 1, &m_texid );
+    glBindTexture( target, m_texid );
+    glTexImage2D( target, 0, format, width, height, 0, GL_RGBA, type, NULL );
+    glTexParameteri( target, GL_TEXTURE_WRAP_S, clampmode );
+    glTexParameteri( target, GL_TEXTURE_WRAP_T, clampmode );
+    glTexParameteri( target, GL_TEXTURE_MAG_FILTER, filter );
+    glTexParameteri( target, GL_TEXTURE_MIN_FILTER, filter );
+
     glBindFramebuffer( GL_FRAMEBUFFER, m_fbo );
     glBindTexture( target, m_texid );
     glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, target, m_texid, 0 );
@@ -138,9 +160,10 @@ bool CFrameBufferObject::CreateAndBindToTexture( GLenum target, int width, int h
 
 void CFrameBufferObject::SetFiltering( GLenum target, GLenum mode )
 {
-    glBindTexture( target, m_texid );
-    glTexParameteri( target, GL_TEXTURE_MAG_FILTER, mode );
-    glTexParameteri( target, GL_TEXTURE_MIN_FILTER, mode );
+    IGoTv& gotv = IGoTv::getIGoTv();
+    gotv.glFuncBindTexture( target, m_texid );
+    gotv.glFuncTexParameteri( target, GL_TEXTURE_MAG_FILTER, mode );
+    gotv.glFuncTexParameteri( target, GL_TEXTURE_MIN_FILTER, mode );
 }
 
 // Begin rendering to FBO

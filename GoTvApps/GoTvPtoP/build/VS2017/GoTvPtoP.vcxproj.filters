@@ -756,7 +756,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AudioOutQt.cpp">
       <Filter>GoTvCommon\Source Files\SoundInputOutput</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RunKodiThread.cpp">
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderDefsGles.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1540,9 +1540,6 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AudioOutQt.h">
       <Filter>GoTvCommon\Source Files\SoundInputOutput</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\RunKodiThread.h">
-      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderKodiThread.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>

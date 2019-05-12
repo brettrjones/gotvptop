@@ -12,12 +12,11 @@
 #define SHADERS_INCLUDE 
 #include "RenderShaderDefsGl.cpp"
 //#include "RenderShaderDefsGlES.cpp"
-
+ 
 //============================================================================
-RenderGlShaders::RenderGlShaders( RenderGlWidget& renderGlWidget )
+RenderGlShaders::RenderGlShaders( RenderGlLogic& renderGlWidget )
 : m_RenderGlWidget( renderGlWidget )
 {
-
 }
 
 //============================================================================
@@ -37,7 +36,7 @@ void  RenderGlShaders::VerifyGLStateQtDbg( const char* szfile, const char* szfun
 #else
 void RenderGlShaders::VerifyGLStateQt()
 {
-    GLenum err = glGetError();
+    GLenum err = m_Glf->glGetError();
     if( err == GL_NO_ERROR )
         return;
     LogMsg( LOG_ERROR, "GL ERROR: %s\n", gluErrorString( err ) );
@@ -55,8 +54,8 @@ void RenderGlShaders::compileShader( int shaderIdx )
     std::string fragmentShaderCode;
 
     getShaderSourceCode( shaderIdx, shaderType, shaderName, vertexShaderCode, fragmentShaderCode );
-
-    if( !vertexShaderCode.empty() && !fragmentShaderCode.empty() )
+     
+    if( !vertexShaderCode.empty() && !fragmentShaderCode.empty() ) 
     {
         //LogMsg( LOG_INFO, "Compiling shader %s", shaderName.toUtf8().constData() );
         VerifyGLStateQt();
@@ -73,7 +72,7 @@ void RenderGlShaders::compileShader( int shaderIdx )
 
             m_Shaders[ shaderIdx ] = shader;
         }
-        else
+        else  
         {
             LogMsg( LOG_ERROR, "Failed to compile shader %d %s", shaderIdx, shaderName.c_str() );
         }
@@ -89,14 +88,13 @@ RenderGlShaders::~RenderGlShaders()
 }
 
 //============================================================================
-void RenderGlShaders::initShaders()
+void RenderGlShaders::initShaders( QOpenGLFunctions * glf )
 {
+    m_Glf = glf;
     if( m_ShadersInited )
     {
         return;
     }
-
-    initializeOpenGLFunctions();
 
     memset( m_Shaders, 0, sizeof( m_Shaders ) );
     for( int i = 0; i < SM_MAX; i++ )
@@ -105,7 +103,7 @@ void RenderGlShaders::initShaders()
     }
 
     m_ShadersInited = true;
-}
+} 
 
 //============================================================================
 void RenderGlShaders::destroyShaders()

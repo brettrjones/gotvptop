@@ -2,14 +2,12 @@
 
 //============================================================================
 // must be called from gui thread (required for linux)
-bool RenderLogoShaders::initLogoShaders()
+bool RenderLogoShaders::initLogoShaders( QOpenGLFunctions * glf )
 {
-    initializeOpenGLFunctions();
+    m_Glf = glf;
 
-    glClearColor(0.1f, 0.1f, 0.2f, 1.0f);
+    m_Glf->glClearColor(0.1f, 0.1f, 0.2f, 1.0f);
 
-    //For testing kodi shaders only.. not required for this opengl test program
-    m_RenderShaders.initShaders();
 
 //#define TEST_KODI_SHADER
 #ifndef TEST_KODI_SHADER
@@ -74,13 +72,16 @@ bool RenderLogoShaders::initLogoShaders()
 
 //QOpenGLShader::compile(Fragment): 0:1(10): error: GLSL 3.10 is not supported. Supported versions are: 1.10, 1.20, 1.30, 1.40, 1.00 ES, and 3.00 ES
 
-    program1.addCacheableShaderFromSourceCode(QOpenGLShader::Vertex, vsrc1);
-    program1.addCacheableShaderFromSourceCode(QOpenGLShader::Fragment, fsrc1);
+    program1.addCacheableShaderFromSourceCode( QOpenGLShader::Vertex, vsrc1 );
+    program1.addCacheableShaderFromSourceCode( QOpenGLShader::Fragment, fsrc1 );
     program1.link();
 
     vertexAttr1 = program1.attributeLocation("vertex");
     normalAttr1 = program1.attributeLocation("normal");
-    matrixUniform1 = program1.uniformLocation("matrix");
+    matrixUniform1 = program1.uniformLocation("matrix"); 
+
+    //For testing kodi shaders only.. not required for this opengl test program
+    m_RenderShaders.initShaders( m_Glf );
 
     return true;
 }

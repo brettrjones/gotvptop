@@ -24,12 +24,6 @@ public:
     void                        startRenderThread();
     void                        stopRenderThread();
 
-signals:
-    void                        signalStartRenderThread();
-
-protected slots:
-    void                        slotStartRenderThread();
-
 protected:
     virtual void                run() override;
 

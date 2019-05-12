@@ -50,7 +50,7 @@ bool RenderGlWidget::firstBegin( CGUIFontTTFQt * font )
 
     if( font->m_textureStatus == CGUIFontTTFQt::TEXTURE_REALLOCATED )
     {
-        if( m_GlThreadFunctions->glIsTexture( font->m_nTexture ) )
+        if( getGlFunctions()->glIsTexture( font->m_nTexture ) )
             CServiceBroker::GetGUI()->GetTextureManager().ReleaseHwTexture( font->m_nTexture );
         font->m_textureStatus = CGUIFontTTFQt::TEXTURE_VOID;
     }
@@ -58,17 +58,17 @@ bool RenderGlWidget::firstBegin( CGUIFontTTFQt * font )
     if( font->m_textureStatus == CGUIFontTTFQt::TEXTURE_VOID )
     {
         // Have OpenGL generate a texture object handle for us
-        m_GlThreadFunctions->glGenTextures( 1, ( GLuint* )&font->m_nTexture );
+        getGlFunctions()->glGenTextures( 1, ( GLuint* )&font->m_nTexture );
 
         // Bind the texture object
-        m_GlThreadFunctions->glBindTexture( GL_TEXTURE_2D, font->m_nTexture );
+        getGlFunctions()->glBindTexture( GL_TEXTURE_2D, font->m_nTexture );
 
         // Set the texture's stretching properties
-        m_GlThreadFunctions->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-        m_GlThreadFunctions->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+        getGlFunctions()->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+        getGlFunctions()->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 
         // Set the texture image -- THIS WORKS, so the pixels must be wrong.
-        m_GlThreadFunctions->glTexImage2D( GL_TEXTURE_2D, 0, pixformat, font->m_texture->GetWidth(), font->m_texture->GetHeight(), 0,
+        getGlFunctions()->glTexImage2D( GL_TEXTURE_2D, 0, pixformat, font->m_texture->GetWidth(), font->m_texture->GetHeight(), 0,
                       pixformat, GL_UNSIGNED_BYTE, 0 );
 
         VerifyGLStateQt();
@@ -77,8 +77,8 @@ bool RenderGlWidget::firstBegin( CGUIFontTTFQt * font )
 
     if( font->m_textureStatus == CGUIFontTTFQt::TEXTURE_UPDATED )
     {
-        m_GlThreadFunctions->glBindTexture( GL_TEXTURE_2D, font->m_nTexture );
-        m_GlThreadFunctions->glTexSubImage2D( GL_TEXTURE_2D, 0, 0, font->m_updateY1, font->m_texture->GetWidth(), font->m_updateY2 - font->m_updateY1, pixformat, GL_UNSIGNED_BYTE,
+        getGlFunctions()->glBindTexture( GL_TEXTURE_2D, font->m_nTexture );
+        getGlFunctions()->glTexSubImage2D( GL_TEXTURE_2D, 0, 0, font->m_updateY1, font->m_texture->GetWidth(), font->m_updateY2 - font->m_updateY1, pixformat, GL_UNSIGNED_BYTE,
                          font->m_texture->GetPixels() + font->m_updateY1 * font->m_texture->GetPitch() );
 
         font->m_updateY1 = font->m_updateY2 = 0;
@@ -88,10 +88,10 @@ bool RenderGlWidget::firstBegin( CGUIFontTTFQt * font )
     VerifyGLStateQt();
 
     // Turn Blending On
-    m_GlThreadFunctions->glBlendFuncSeparate( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA, GL_ONE );
-    m_GlThreadFunctions->glEnable( GL_BLEND );
-    m_GlThreadFunctions->glActiveTexture( GL_TEXTURE0 );
-    m_GlThreadFunctions->glBindTexture( GL_TEXTURE_2D, font->m_nTexture );
+    getGlFunctions()->glBlendFuncSeparate( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA, GL_ONE );
+    getGlFunctions()->glEnable( GL_BLEND );
+    getGlFunctions()->glActiveTexture( GL_TEXTURE0 );
+    getGlFunctions()->glBindTexture( GL_TEXTURE_2D, font->m_nTexture );
 
     VerifyGLStateQt();
 
@@ -116,9 +116,9 @@ void RenderGlWidget::lastEnd( CGUIFontTTFQt * font )
     font->CreateStaticVertexBuffers();
 
     // Enable the attributes used by this shader
-    m_GlThreadFunctions->glEnableVertexAttribArray( posLoc );
-    m_GlThreadFunctions->glEnableVertexAttribArray( colLoc );
-    m_GlThreadFunctions->glEnableVertexAttribArray( tex0Loc );
+    getGlFunctions()->glEnableVertexAttribArray( posLoc );
+    getGlFunctions()->glEnableVertexAttribArray( colLoc );
+    getGlFunctions()->glEnableVertexAttribArray( tex0Loc );
 
     if( !font->m_vertex.empty() )
     {
@@ -139,11 +139,11 @@ void RenderGlWidget::lastEnd( CGUIFontTTFQt * font )
 
         vertices = &vecVertices[ 0 ];
 
-        m_GlThreadFunctions->glVertexAttribPointer( posLoc, 3, GL_FLOAT, GL_FALSE, sizeof( SVertex ), ( char* )vertices + offsetof( SVertex, x ) );
-        m_GlThreadFunctions->glVertexAttribPointer( colLoc, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof( SVertex ), ( char* )vertices + offsetof( SVertex, r ) );
-        m_GlThreadFunctions->glVertexAttribPointer( tex0Loc, 2, GL_FLOAT, GL_FALSE, sizeof( SVertex ), ( char* )vertices + offsetof( SVertex, u ) );
+        getGlFunctions()->glVertexAttribPointer( posLoc, 3, GL_FLOAT, GL_FALSE, sizeof( SVertex ), ( char* )vertices + offsetof( SVertex, x ) );
+        getGlFunctions()->glVertexAttribPointer( colLoc, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof( SVertex ), ( char* )vertices + offsetof( SVertex, r ) );
+        getGlFunctions()->glVertexAttribPointer( tex0Loc, 2, GL_FLOAT, GL_FALSE, sizeof( SVertex ), ( char* )vertices + offsetof( SVertex, u ) );
 
-        m_GlThreadFunctions->glDrawArrays( GL_TRIANGLES, 0, ( GLsizei)vecVertices.size() );
+        getGlFunctions()->glDrawArrays( GL_TRIANGLES, 0, ( GLsizei)vecVertices.size() );
     }
 
     if( !font->m_vertexTrans.empty() )
@@ -151,7 +151,7 @@ void RenderGlWidget::lastEnd( CGUIFontTTFQt * font )
         // Deal with the vertices that can be hardware clipped and therefore translated
 
         // Bind our pre-calculated array to GL_ELEMENT_ARRAY_BUFFER
-        m_GlThreadFunctions->glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, font->m_elementArrayHandle );
+        getGlFunctions()->glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, font->m_elementArrayHandle );
         // Store current scissor
         CRect scissor = CServiceBroker::GetWinSystem()->GetGfxContext().StereoCorrection( CServiceBroker::GetWinSystem()->GetGfxContext().GetScissors() );
 
@@ -172,10 +172,10 @@ void RenderGlWidget::lastEnd( CGUIFontTTFQt * font )
             // Apply the translation to the currently active (top-of-stack) model view matrix
             glMatrixModview.Push();
             glMatrixModview.Get().Translatef( font->m_vertexTrans[ i ].translateX, font->m_vertexTrans[ i ].translateY, font->m_vertexTrans[ i ].translateZ );
-            m_GlThreadFunctions->glUniformMatrix4fv( modelLoc, 1, GL_FALSE, glMatrixModview.Get() );
+            getGlFunctions()->glUniformMatrix4fv( modelLoc, 1, GL_FALSE, glMatrixModview.Get() );
 
             // Bind the buffer to the OpenGL context's GL_ARRAY_BUFFER binding point
-            m_GlThreadFunctions->glBindBuffer( GL_ARRAY_BUFFER, font->m_vertexTrans[ i ].vertexBuffer->bufferHandle );
+            getGlFunctions()->glBindBuffer( GL_ARRAY_BUFFER, font->m_vertexTrans[ i ].vertexBuffer->bufferHandle );
 
             // Do the actual drawing operation, split into groups of characters no
             // larger than the pre-determined size of the element array
@@ -186,11 +186,11 @@ void RenderGlWidget::lastEnd( CGUIFontTTFQt * font )
 
                 // Set up the offsets of the various vertex attributes within the buffer
                 // object bound to GL_ARRAY_BUFFER
-                m_GlThreadFunctions->glVertexAttribPointer( posLoc, 3, GL_FLOAT, GL_FALSE, sizeof( SVertex ), ( GLvoid * )( character * sizeof( SVertex ) * 4 + offsetof( SVertex, x ) ) );
-                m_GlThreadFunctions->glVertexAttribPointer( colLoc, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof( SVertex ), ( GLvoid * )( character * sizeof( SVertex ) * 4 + offsetof( SVertex, r ) ) );
-                m_GlThreadFunctions->glVertexAttribPointer( tex0Loc, 2, GL_FLOAT, GL_FALSE, sizeof( SVertex ), ( GLvoid * )( character * sizeof( SVertex ) * 4 + offsetof( SVertex, u ) ) );
+                getGlFunctions()->glVertexAttribPointer( posLoc, 3, GL_FLOAT, GL_FALSE, sizeof( SVertex ), ( GLvoid * )( character * sizeof( SVertex ) * 4 + offsetof( SVertex, x ) ) );
+                getGlFunctions()->glVertexAttribPointer( colLoc, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof( SVertex ), ( GLvoid * )( character * sizeof( SVertex ) * 4 + offsetof( SVertex, r ) ) );
+                getGlFunctions()->glVertexAttribPointer( tex0Loc, 2, GL_FLOAT, GL_FALSE, sizeof( SVertex ), ( GLvoid * )( character * sizeof( SVertex ) * 4 + offsetof( SVertex, u ) ) );
 
-                m_GlThreadFunctions->glDrawElements( GL_TRIANGLES, 6 * count, GL_UNSIGNED_SHORT, 0 );
+                getGlFunctions()->glDrawElements( GL_TRIANGLES, 6 * count, GL_UNSIGNED_SHORT, 0 );
             }
 
             glMatrixModview.Pop();
@@ -198,16 +198,16 @@ void RenderGlWidget::lastEnd( CGUIFontTTFQt * font )
         // Restore the original scissor rectangle
         renderSystem->SetScissors( scissor );
         // Restore the original model view matrix
-        m_GlThreadFunctions->glUniformMatrix4fv( modelLoc, 1, GL_FALSE, glMatrixModview.Get() );
+        getGlFunctions()->glUniformMatrix4fv( modelLoc, 1, GL_FALSE, glMatrixModview.Get() );
         // Unbind GL_ARRAY_BUFFER and GL_ELEMENT_ARRAY_BUFFER
-        m_GlThreadFunctions->glBindBuffer( GL_ARRAY_BUFFER, 0 );
-        m_GlThreadFunctions->glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
+        getGlFunctions()->glBindBuffer( GL_ARRAY_BUFFER, 0 );
+        getGlFunctions()->glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
     }
 
     // Disable the attributes used by this shader
-    m_GlThreadFunctions->glDisableVertexAttribArray( posLoc );
-    m_GlThreadFunctions->glDisableVertexAttribArray( colLoc );
-    m_GlThreadFunctions->glDisableVertexAttribArray( tex0Loc );
+    getGlFunctions()->glDisableVertexAttribArray( posLoc );
+    getGlFunctions()->glDisableVertexAttribArray( colLoc );
+    getGlFunctions()->glDisableVertexAttribArray( tex0Loc );
 
     renderSystem->DisableGUIShader();
 
@@ -222,15 +222,15 @@ CVertexBuffer RenderGlWidget::createVertexBuffer( CGUIFontTTFQt * font, const st
 
     // Generate a unique buffer object name and put it in bufferHandle
     GLuint bufferHandle;
-    m_GlThreadFunctions->glGenBuffers( 1, &bufferHandle );
+    getGlFunctions()->glGenBuffers( 1, &bufferHandle );
     // Bind the buffer to the OpenGL context's GL_ARRAY_BUFFER binding point
-    m_GlThreadFunctions->glBindBuffer( GL_ARRAY_BUFFER, bufferHandle );
+    getGlFunctions()->glBindBuffer( GL_ARRAY_BUFFER, bufferHandle );
     // Create a data store for the buffer object bound to the GL_ARRAY_BUFFER
     // binding point (i.e. our buffer object) and initialise it from the
     // specified client-side pointer
-    m_GlThreadFunctions->glBufferData( GL_ARRAY_BUFFER, vertices.size() * sizeof( SVertex ), &vertices[ 0 ], GL_STATIC_DRAW );
+    getGlFunctions()->glBufferData( GL_ARRAY_BUFFER, vertices.size() * sizeof( SVertex ), &vertices[ 0 ], GL_STATIC_DRAW );
     // Unbind GL_ARRAY_BUFFER
-    m_GlThreadFunctions->glBindBuffer( GL_ARRAY_BUFFER, 0 );
+    getGlFunctions()->glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
     VerifyGLStateQt();
 
@@ -243,7 +243,7 @@ void RenderGlWidget::destroyVertexBuffer( CGUIFontTTFQt * font, CVertexBuffer& v
     if( vertBuffer.bufferHandle != 0 )
     {
         // Release the buffer name for reuse
-        m_GlThreadFunctions->glDeleteBuffers( 1, ( GLuint * )&vertBuffer.bufferHandle );
+        getGlFunctions()->glDeleteBuffers( 1, ( GLuint * )&vertBuffer.bufferHandle );
         vertBuffer.bufferHandle = 0;
     }
 }
@@ -253,7 +253,7 @@ void RenderGlWidget::deleteHardwareTexture( CGUIFontTTFQt * font )
 {
     if( font->m_textureStatus != CGUIFontTTFQt::TEXTURE_VOID )
     {
-        if( m_GlThreadFunctions->glIsTexture( font->m_nTexture ) )
+        if( getGlFunctions()->glIsTexture( font->m_nTexture ) )
             CServiceBroker::GetGUI()->GetTextureManager().ReleaseHwTexture( font->m_nTexture );
 
         font->m_textureStatus = CGUIFontTTFQt::TEXTURE_VOID;
@@ -267,8 +267,8 @@ void RenderGlWidget::createStaticVertexBuffers( CGUIFontTTFQt * font )
     VerifyGLStateQt();
 
     // Bind a new buffer to the OpenGL context's GL_ELEMENT_ARRAY_BUFFER binding point
-    m_GlThreadFunctions->glGenBuffers( 1, &font->m_elementArrayHandle );
-    m_GlThreadFunctions->glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, font->m_elementArrayHandle );
+    getGlFunctions()->glGenBuffers( 1, &font->m_elementArrayHandle );
+    getGlFunctions()->glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, font->m_elementArrayHandle );
     // Create an array holding the mesh indices to convert quads to triangles
     GLushort index[ ELEMENT_ARRAY_MAX_CHAR_INDEX ][ 6 ];
     for( size_t i = 0; i < ELEMENT_ARRAY_MAX_CHAR_INDEX; i++ )
@@ -281,8 +281,8 @@ void RenderGlWidget::createStaticVertexBuffers( CGUIFontTTFQt * font )
         index[ i ][ 5 ] = 4 * i + 2;
     }
 
-    m_GlThreadFunctions->glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof index, index, GL_STATIC_DRAW );
-    m_GlThreadFunctions->glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
+    getGlFunctions()->glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof index, index, GL_STATIC_DRAW );
+    getGlFunctions()->glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
     font->m_staticVertexBufferCreated = true;
     VerifyGLStateQt();
 
@@ -291,6 +291,6 @@ void RenderGlWidget::createStaticVertexBuffers( CGUIFontTTFQt * font )
 //============================================================================
 void RenderGlWidget::destroyStaticVertexBuffers( CGUIFontTTFQt * font )
 {
-    m_GlThreadFunctions->glDeleteBuffers( 1, &font->m_elementArrayHandle );
+    getGlFunctions()->glDeleteBuffers( 1, &font->m_elementArrayHandle );
     font->m_staticVertexBufferCreated = false;
 }

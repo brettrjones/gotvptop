@@ -39,17 +39,19 @@ enum EShaderType
 };
 
 class RenderGlWidget;
+class RenderGlLogic;
+
 
 class RenderShaderQt : public QOpenGLShaderProgram
 {
 public:
     RenderShaderQt() = delete;
-    RenderShaderQt( ESHADERMETHOD shaderMethod, EShaderType shaderType, QString shaderName, RenderGlWidget * renderWidget );
+    RenderShaderQt( ESHADERMETHOD shaderMethod, EShaderType shaderType, QString shaderName, RenderGlLogic& renderLogic );
 
     bool                        compileAndLink( const char * vertexShaderCode, const char * fragmentShaderCode );
 
-    bool                        isShaderValid( ) { return m_shaderValidated; }
-    EShaderType                 getShaderType( ) { return m_ShaderType; }
+    bool                        isShaderValid()     { return m_shaderValidated; }
+    EShaderType                 getShaderType()     { return m_ShaderType; }
 
     bool                        enableShader();
     bool                        disableShader();
@@ -65,23 +67,23 @@ public:
     void                        setShaderFlags(  unsigned int flags )                   { m_flags = flags; }
     void                        setShaderScalingMethod( ESCALINGMETHOD scaling )        { m_ScalingMethod = scaling; }
 
-    GLint                       GetPosLoc() { verifyValidValue( m_hPos, "m_hPos" );  return m_hPos; }
-    GLint                       GetColLoc() { verifyValidValue( m_hCol, "m_hCol" );  return m_hCol; }
-    GLint                       GetCord0Loc() { verifyValidValue( m_hCord0, "m_hCord0" ); return m_hCord0; }
-    GLint                       GetCord1Loc() { verifyValidValue( m_hCord1, "m_hCord1" ); return m_hCord1; }
-    GLint                       GetUniColLoc() { verifyValidValue( m_hUniCol, "m_hUniCol" ); return m_hUniCol; }
+    GLint                       GetPosLoc()         { verifyValidValue( m_hPos, "m_hPos" );  return m_hPos; }
+    GLint                       GetColLoc()         { verifyValidValue( m_hCol, "m_hCol" );  return m_hCol; }
+    GLint                       GetCord0Loc()       { verifyValidValue( m_hCord0, "m_hCord0" ); return m_hCord0; }
+    GLint                       GetCord1Loc()       { return m_hCord1; } // SM_TEXTURE_NOBLEND calls even though invalid
+    GLint                       GetUniColLoc()      { return m_hUniCol; } // called when not valid so do not validate
     GLint                       GetCoord0MatrixLoc() { verifyValidValue( m_hCoord0Matrix, "m_hCoord0Matrix" ); return m_hCoord0Matrix; }
-    GLint                       GetFieldLoc() { verifyValidValue( m_hField, "m_hField" ); return m_hField; }
-    GLint                       GetStepLoc() { verifyValidValue( m_hStep, "m_hStep" ); return m_hStep; }
-    GLint                       GetContrastLoc() { verifyValidValue( m_hContrast, "m_hContrast" ); return m_hContrast; }
-    GLint                       GetBrightnessLoc() { verifyValidValue( m_hBrightness, "m_hBrightness" ); return m_hBrightness; }
-    GLint                       GetModelLoc() { verifyValidValue( m_hModel, "m_hModel" ); return m_hModel; }
+    GLint                       GetFieldLoc()       { verifyValidValue( m_hField, "m_hField" ); return m_hField; }
+    GLint                       GetStepLoc()        { verifyValidValue( m_hStep, "m_hStep" ); return m_hStep; }
+    GLint                       GetContrastLoc()    { verifyValidValue( m_hContrast, "m_hContrast" ); return m_hContrast; }
+    GLint                       GetBrightnessLoc()  { verifyValidValue( m_hBrightness, "m_hBrightness" ); return m_hBrightness; }
+    GLint                       GetModelLoc()       { verifyValidValue( m_hModel, "m_hModel" ); return m_hModel; }
 
     bool                        HardwareClipIsPossible() { return m_clipPossible; }
-    GLfloat                     GetClipXFactor() { return m_clipXFactor; }
-    GLfloat                     GetClipXOffset() { return m_clipXOffset; }
-    GLfloat                     GetClipYFactor() { return m_clipYFactor; }
-    GLfloat                     GetClipYOffset() { return m_clipYOffset; }
+    GLfloat                     GetClipXFactor()    { return m_clipXFactor; }
+    GLfloat                     GetClipXOffset()    { return m_clipXOffset; }
+    GLfloat                     GetClipYFactor()    { return m_clipYFactor; }
+    GLfloat                     GetClipYOffset()    { return m_clipYOffset; }
 
     // yuv shader
     virtual void                shaderSetField( int field );
@@ -118,21 +120,22 @@ public:
     static const char *         describeShader( ESHADERMETHOD shaderMethod );
 
 protected:
-    void                        onCompiledAndLinked();
-    void                        onCompiledAndLinkedCommon( QOpenGLFunctions * glf );
-    void                        onCompiledAndLinkedGui( QOpenGLFunctions * glf );
-    void                        onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf );
-    void                        onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf );
-    void                        verifyShaderValues();
+    void                        onCompiledAndLinked( const char * vertexShaderCode, const char *fragmentShaderCode );
+    void                        onCompiledAndLinkedCommon( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode );
+    void                        onCompiledAndLinkedGui( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode );
+    void                        onCompiledAndLinkedVideoFormat( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode );
+    void                        onCompiledAndLinkedVideoFilter( QOpenGLFunctions * glf, const char * vertexShaderCode, const char *fragmentShaderCode );
+    bool                        verifyProgramId();
     bool                        verifyValidValue( GLint handle, const char * msg );
-
+    bool                        validateProgram();
+    bool                        validateShader();
 
     //=== common to all shaders ===//
     ESHADERMETHOD               m_ShaderMethod;
     ESCALINGMETHOD              m_ScalingMethod;
     EShaderType                 m_ShaderType;
     QString                     m_ShaderName;
-    RenderGlWidget *            m_RenderWidget;
+    RenderGlLogic&              m_RenderLogic;
     bool                        m_shaderValidated = false;
 
     const GLfloat *             m_proj = nullptr;
@@ -154,14 +157,15 @@ protected:
 
     GLint                       m_hMethod = -1;
     GLint                       m_hColor = -1;
+
     GLint                       m_hContrast = -1;
     GLint                       m_hBrightness = -1;
 
-    bool                        m_clipPossible;
-    GLfloat                     m_clipXFactor;
-    GLfloat                     m_clipXOffset;
-    GLfloat                     m_clipYFactor;
-    GLfloat                     m_clipYOffset;
+    bool                        m_clipPossible = false;
+    GLfloat                     m_clipXFactor = 0.0f;
+    GLfloat                     m_clipXOffset = 0.0f;
+    GLfloat                     m_clipYFactor = 0.0f;
+    GLfloat                     m_clipYOffset = 0.0f;
 
     //=== gui and format common ===//
     GLint                       m_hStep = -1;

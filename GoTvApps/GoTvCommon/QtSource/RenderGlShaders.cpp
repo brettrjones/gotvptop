@@ -13,12 +13,12 @@
 
 #include <GL/glu.h>
 
-#define SHADERS_INCLUDE
-#include "RenderShaderDefsGl.cpp"
+#define SHADERS_INCLUDE // NOTE: must modify this file for changes in RenderShaderDefsGl.cpp to take effect 
+#include "RenderShaderDefsGl.cpp" 
 
 //============================================================================
-RenderGlShaders::RenderGlShaders( RenderGlWidget& renderGlWidget )
-: m_RenderGlWidget( renderGlWidget )
+RenderGlShaders::RenderGlShaders( RenderGlLogic& renderGlLogic )
+: m_RenderLogic( renderGlLogic )
 { 
 }
 
@@ -29,14 +29,13 @@ RenderGlShaders::~RenderGlShaders()
 }
 
 //============================================================================
-void RenderGlShaders::initShaders()
+void RenderGlShaders::initShaders( QOpenGLFunctions * glf )
 {
-    if( m_ShadersInited )
+    m_Glf = glf;
+    if( m_ShadersInited || !m_Glf )
     {
         return;
     }
-
-    initializeOpenGLFunctions();
 
     memset( m_Shaders, 0, sizeof( m_Shaders ) );
     for( int i = 0; i < SM_MAX; i++ )
@@ -71,15 +70,15 @@ void RenderGlShaders::destroyShaders()
 //============================================================================
 bool RenderGlShaders::enableShader( ESHADERMETHOD method )
 {
-#ifdef DEBUG_KODI_SHADERS
+#ifdef DEBUG_SHADER_ENABLE_DISABLE
     if( method != SM_FONTS )
     {
         LogMsg( LOG_ERROR, "enableShader - %s", describeShaderMethod( method ) );
     }
-#endif // DEBUG
+#endif // DEBUG_SHADER_ENABLE_DISABLE
 
     bool enabled = false;
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     if( ( method < SM_MAX) && m_Shaders[ method ] )
     {
         enabled = m_Shaders[ method ]->enableShader();
@@ -93,7 +92,7 @@ bool RenderGlShaders::enableShader( ESHADERMETHOD method )
         LogMsg( LOG_ERROR, "Invalid GUI Shader selected - %d", method );
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     return enabled;
 }
 
@@ -110,19 +109,19 @@ bool RenderGlShaders::isShaderValid( ESHADERMETHOD method )
         LogMsg( LOG_ERROR, "Invalid GUI isShaderValid selected - %d", method );
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     return shaderValid;
 }
 
 //============================================================================
 void RenderGlShaders::disableShader( ESHADERMETHOD method )
 {
-#ifdef DEBUG_KODI_SHADERS
+#ifdef DEBUG_SHADER_ENABLE_DISABLE
     if( method != SM_FONTS )
     {
         LogMsg( LOG_ERROR, "disableShader - %s", describeShaderMethod( method ) );
     }
-#endif // DEBUG
+#endif // DEBUG_SHADER_ENABLE_DISABLE
 
     if( m_Shaders[ method ] )
     {
@@ -133,19 +132,27 @@ void RenderGlShaders::disableShader( ESHADERMETHOD method )
         }
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
 }
 
 //============================================================================
 void RenderGlShaders::disableGUIShader()
 {
+#ifdef DEBUG_SHADER_ENABLE_DISABLE
+    if( m_CurShaderMethodType != SM_FONTS )
+    {
+        LogMsg( LOG_ERROR, "disableGuiShader - %s", describeShaderMethod( m_CurShaderMethodType ) );
+    }
+#endif // DEBUG_SHADER_ENABLE_DISABLE
+
+
     if( ( m_CurShaderMethodType < SM_MAX ) && m_Shaders[ m_CurShaderMethodType ] )
     {
         m_Shaders[ m_CurShaderMethodType ]->disableShader();
         m_CurShaderMethodType = SM_DEFAULT;
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
 }
 
 //============================================================================
@@ -206,128 +213,128 @@ int RenderGlShaders::shaderGetUniCol()
 //============================================================================
 void RenderGlShaders::shaderSetField( ESHADERMETHOD shader, int field )
 {
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     if( m_Shaders[ shader ] )
     {
         m_Shaders[ shader ]->shaderSetField( field );
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
 }
 
 //============================================================================
 void RenderGlShaders::shaderSetWidth( ESHADERMETHOD shader, int w )
 {
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     if( m_Shaders[ shader ] )
     {
         m_Shaders[ shader ]->shaderSetWidth( w );
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
 }
 
 //============================================================================
 void RenderGlShaders::shaderSetHeight( ESHADERMETHOD shader, int h )
 {
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     if( m_Shaders[ shader ] )
     {
         m_Shaders[ shader ]->shaderSetHeight( h );
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
 }
 
 //============================================================================
 void RenderGlShaders::shaderSetBlack( ESHADERMETHOD shader, float black )
 {
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     if( m_Shaders[ shader ] )
     {
         m_Shaders[ shader ]->shaderSetBlack( black );
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
 }
 
 //============================================================================
 void RenderGlShaders::shaderSetContrast( ESHADERMETHOD shader, float contrast )
 {
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     if( m_Shaders[ shader ] )
     {
         m_Shaders[ shader ]->shaderSetContrast( contrast );
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
 }
 
 //============================================================================
 void RenderGlShaders::shaderSetConvertFullColorRange( ESHADERMETHOD shader, bool convertFullRange )
 {
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     if( m_Shaders[ shader ] )
     {
         m_Shaders[ shader ]->shaderSetConvertFullColorRange( convertFullRange );
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
 }
 
 //============================================================================
 int RenderGlShaders::shaderGetVertexLoc( ESHADERMETHOD shader )
 {
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     int result = false;
     if( m_Shaders[ shader ] )
     {
         result = m_Shaders[ shader ]->shaderGetVertexLoc();
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     return result;
 }
 
 //============================================================================
 int RenderGlShaders::shaderGetYcoordLoc( ESHADERMETHOD shader )
 {
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     int result = false;
     if( m_Shaders[ shader ] )
     {
         result = m_Shaders[ shader ]->shaderGetYcoordLoc();
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     return result;
 }
 
 //============================================================================
 int RenderGlShaders::shaderGetUcoordLoc( ESHADERMETHOD shader )
 {
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     int result = false;
     if( m_Shaders[ shader ] )
     {
         result = m_Shaders[ shader ]->shaderGetUcoordLoc();
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     return result;
 }
 
 //============================================================================
 int RenderGlShaders::shaderGetVcoordLoc( ESHADERMETHOD shader )
 {
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     int result = false;
     if( m_Shaders[ shader ] )
     {
         result = m_Shaders[ shader ]->shaderGetVcoordLoc();
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     return result;
 }
 
@@ -410,53 +417,53 @@ bool RenderGlShaders::shaderGetTextureFilter( ESHADERMETHOD shader, int& filter 
 //============================================================================
 int RenderGlShaders::shaderGetcoordLoc( ESHADERMETHOD shader )
 {
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     int result = false;
     if( m_Shaders[ shader ] )
     {
         result = m_Shaders[ shader ]->shaderGetVcoordLoc();
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     return result;
 }
 
 //============================================================================
 int RenderGlShaders::shaderVertexAttribPointer( ESHADERMETHOD shader, unsigned int index, int size, int type, bool normalized, int stride, const void * pointer )
 {
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     int result = false;
     if( m_Shaders[ shader ] )
     {
         result = m_Shaders[ shader ]->shaderVertexAttribPointer( index, size, type, normalized, stride, pointer );
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     return result;
 }
 
 //============================================================================
 void RenderGlShaders::shaderEnableVertexAttribArray( ESHADERMETHOD shader, int arrayId )
 {
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     if( m_Shaders[ shader ] )
     {
         m_Shaders[ shader ]->shaderEnableVertexAttribArray( arrayId );
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
 }
 
 //============================================================================
 void RenderGlShaders::shaderDisableVertexAttribArray( ESHADERMETHOD shader, int arrayId )
 {
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
     if( m_Shaders[ shader ] )
     {
        m_Shaders[ shader ]->shaderDisableVertexAttribArray( arrayId );
     }
 
-    VerifyGLStateQt();
+    m_RenderLogic.VerifyGLStateQt();
 }
 
 //============================================================================
@@ -465,28 +472,3 @@ const char * RenderGlShaders::describeShaderMethod( ESHADERMETHOD method )
 {
     return RenderShaderQt::describeShader( method );
 }
-
-
-//============================================================================
-#ifdef DEBUG
-void  RenderGlShaders::VerifyGLStateQtDbg( const char* szfile, const char* szfunction, int lineno )
-{
-    GLenum err = glGetError();
-    if( err == GL_NO_ERROR )
-        return;
-    LogMsg( LOG_ERROR, "GL ERROR: %d thread %d %s\n", err, VxGetCurrentThreadId(), gluErrorString( err ) );
-    if( szfile && szfunction )
-    {
-        LogMsg( LOG_ERROR, "In file:%s function:%s line:%d", szfile, szfunction, lineno );
-    }
-
-}
-#else
-void RenderGlShaders::VerifyGLStateQt()
-{
-    GLenum err = glGetError();
-    if( err == GL_NO_ERROR )
-        return;
-    LogMsg( LOG_ERROR, "GL ERROR: %s\n", gluErrorString( err ) );
-}
-#endif

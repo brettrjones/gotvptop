@@ -20,6 +20,10 @@
 #include "guilib/GUIFont.h"
 #include "guilib/GUIFontTTF.h"
 #include "cores/VideoPlayer/VideoRenderers/VideoShaders/ShaderFormats.h"
+#include "GL/glu.h"
+
+
+//#define  ENABLE_GLES_SHADERS // uncomment to enable all shaders
 
 
 enum ESHADERMETHOD
@@ -30,29 +34,34 @@ enum ESHADERMETHOD
     SM_FONTS,
     SM_TEXTURE_NOBLEND,
     SM_MULTI_BLENDCOLOR,
-    SM_TEXTURE_RGBA,
-    SM_TEXTURE_RGBA_OES,
-    SM_TEXTURE_RGBA_BLENDCOLOR,
-    SM_TEXTURE_RGBA_BOB,
-    SM_TEXTURE_RGBA_BOB_OES,
 
     SM_VIDEO_YV12_BASIC,
     SM_VIDEO_NV12_BASIC,
     SM_VIDEO_YUY2_BASIC,
+
     SM_VIDEO_UYVY_BASIC,
     SM_VIDEO_NV12_RGB_BASIC,
-
-    SM_VIDEO_YV12_BOB,
-    SM_VIDEO_NV12_BOB,
-    SM_VIDEO_YUY2_BOB,
-    SM_VIDEO_UYVY_BOB,
-    SM_VIDEO_NV12_RGB_BOB,
 
     SM_VID_FILTER_DEFAULT,
     SM_VID_FILTER_CONVOLUTION_4X4_RGBA,
     SM_VID_FILTER_CONVOLUTION_4X4_FLOAT,
     SM_VID_FILTER_CONVOLUTION_6X6_RGBA,
     SM_VID_FILTER_CONVOLUTION_6X6_FLOAT,
+
+#ifdef ENABLE_GLES_SHADERS
+    SM_TEXTURE_RGBA,
+    SM_TEXTURE_RGBA_OES,
+    SM_TEXTURE_RGBA_BLENDCOLOR,
+    SM_TEXTURE_RGBA_BOB,
+    SM_TEXTURE_RGBA_BOB_OES,
+
+    SM_VIDEO_YV12_BOB,
+    SM_VIDEO_NV12_BOB,
+    SM_VIDEO_YUY2_BOB,
+    SM_VIDEO_UYVY_BOB,
+    SM_VIDEO_NV12_RGB_BOB,
+#endif // ENABLE_GLES_SHADERS
+
 
     SM_SHADER_NONE,
 
@@ -193,9 +202,20 @@ public:
     virtual void                frameBufferDelete( int bufCount, unsigned int* fboId ) = 0;
     virtual void                frameBufferTexture2D( int target, unsigned int texureId ) = 0;
     virtual void                frameBufferBind( unsigned int fboId ) = 0;
-    virtual bool                frameBufferStatus( ) = 0; // return true when frame buffer completed
+    virtual bool                frameBufferStatus() = 0; // return true when frame buffer completed
 
+    // gl functions
+    virtual void                glFuncDrawElements( GLenum mode, GLsizei count, GLenum type, const GLvoid *indices ) = 0;
+    virtual void                glFuncDisable( GLenum cap ) = 0;
+    virtual void                glFuncBindTexture( GLenum target, GLuint texture ) = 0;
+    virtual void                glFuncViewport( GLint x, GLint y, GLsizei width, GLsizei height ) = 0;
+    virtual void                glFuncScissor( GLint x, GLint y, GLsizei width, GLsizei height ) = 0;
 
-private:
-
+    virtual void                glFuncGenTextures( GLsizei n, GLuint * textures ) = 0;
+    virtual void                glFuncDeleteTextures( GLsizei n, const GLuint *textures ) = 0;
+    virtual void                glFuncTexImage2D( GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels ) = 0;
+    virtual void                glFuncTexParameteri( GLenum target, GLenum pname, GLint param ) = 0;
+    virtual void                glFuncReadPixels( GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels ) = 0;
+    virtual void                glFuncPixelStorei( GLenum pname, GLint param ) = 0;
+    virtual void                glFuncFinish() = 0;
 };

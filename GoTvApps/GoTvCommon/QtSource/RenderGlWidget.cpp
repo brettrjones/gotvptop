@@ -41,10 +41,9 @@ const int RESIZE_WINDOW_COMPLETED_TIMEOUT = 500;
 
 //============================================================================
 RenderGlWidget::RenderGlWidget(QWidget *parent)
-: QOpenGLWidget(parent)
+: RenderGlLogic( *this, parent)
 , m_MyApp( GetAppInstance() )
 , m_QtToKodi( m_MyApp )
-, m_RenderLogic( *this )
 , m_ScreenSize( 1, 1 )
 , m_ResizingWindowSize( 1, 1 )
 , m_ResizingTimer( new QTimer( this ) )
@@ -53,30 +52,25 @@ RenderGlWidget::RenderGlWidget(QWidget *parent)
     memset( m_TextureIds, 0, sizeof( m_TextureIds ) );
     memset( m_TexSize, 0, sizeof( m_TexSize ) );
 
-    //setMinimumSize(32, 32);
 	connect( m_ResizingTimer, SIGNAL( timeout() ), this, SLOT( slotResizeWindowTimeout() ) );
-    connect( &m_RenderLogic, SIGNAL( signalFrameRendered() ), this, SLOT( slotOnFrameRendered() ) );
-
-//     connect(this, &QOpenGLWidget::aboutToCompose, this, &RenderGlWidget::onAboutToCompose);
-//     connect(this, &QOpenGLWidget::frameSwapped, this, &RenderGlWidget::onFrameSwapped);
-//     connect(this, &QOpenGLWidget::aboutToResize, this, &RenderGlWidget::onAboutToResize);
-//     connect(this, &QOpenGLWidget::resized, this, &RenderGlWidget::onResized);
+    connect( this, SIGNAL( signalFrameRendered() ), this, SLOT( slotOnFrameRendered() ) );
+    initRenderGlContext();
 }
 
 //============================================================================
 RenderGlWidget::~RenderGlWidget()
 {
     m_QtToKodi.fromGuiCloseEvent();
-    m_RenderLogic.aboutToDestroy();
+    aboutToDestroy();
 }
 
 //============================================================================
 void RenderGlWidget::takeSnapshot()
 {
-    if( m_RenderWidgetInited && m_RenderLogic.m_WidgetGlContext && m_RenderLogic.m_OffScreenSurface )
+    if( m_WidgetGlInitialized && getIsRenderInitialized() )
     {
-        m_RenderLogic.lockRenderer();
-        QImage frameImage = m_RenderLogic.m_OffScreenSurface->getLastRenderedImage();
+        lockRenderer();
+        QImage frameImage = getLastRenderedImage();
         if( !frameImage.isNull() )
         {
 #ifdef TARGET_OS_WINDOWS
@@ -86,97 +80,35 @@ void RenderGlWidget::takeSnapshot()
 #endif
         }
 
-        m_RenderLogic.unlockRenderer();
+         unlockRenderer();
     }
 }
 
 //============================================================================
-void RenderGlWidget::initializeGL()
+void RenderGlWidget::slotOnFrameRendered()
 {
-    initializeOpenGLFunctions();
-    m_RenderLogic.m_WidgetGlContext = this->context();
-
-    makeCurrent();
-    QOpenGLFunctions * widgetGlFunctions = m_RenderLogic.m_WidgetGlContext->functions();
-    Q_ASSERT( widgetGlFunctions );
-    widgetGlFunctions->initializeOpenGLFunctions();
-
-    m_RenderLogic.m_ThreadGlContext = new QOpenGLContext;
-    m_RenderLogic.m_ThreadGlContext->setShareContext( m_RenderLogic.m_WidgetGlContext ); // required
-    m_RenderLogic.m_ThreadGlContext->setFormat( m_RenderLogic.m_WidgetGlContext->format() );
-    m_RenderLogic.m_ThreadGlContext->create();
-
-    m_GlThreadFunctions = m_RenderLogic.m_ThreadGlContext->functions();
-    Q_ASSERT( m_GlThreadFunctions );
-    m_GlThreadFunctions->initializeOpenGLFunctions();
-
-
-    m_RenderLogic.m_OffScreenSurface = new RenderGlOffScreenSurface( m_RenderLogic.m_RenderKodiThread, this, m_RenderLogic.m_WidgetGlContext, m_RenderLogic.m_ThreadGlContext ); // BRJ geometry not set at this point nullptr, geometry().size() );
-    m_RenderLogic.m_OffScreenSurface->setFormat( m_RenderLogic.m_ThreadGlContext->format() );
-    m_RenderLogic.m_OffScreenSurface->create();
-    m_RenderLogic.m_OffScreenSurface->setRenderFunctions( m_GlThreadFunctions );
-    connect( this, SIGNAL( signalGlResized( int, int ) ), m_RenderLogic.m_OffScreenSurface, SLOT( slotGlResized( int, int ) ) );
-
-    m_RenderLogic.glWidgetInitialized();
-    doneCurrent();
-    m_RenderWidgetInited = true;
-    m_RenderLogic.startRenderThread();
+   update();
 }
 
 //============================================================================
-void RenderGlWidget::paintGL()
+void RenderGlWidget::paintEvent( QPaintEvent * ev )
 {
-    if( m_RenderWidgetInited && m_RenderLogic.m_WidgetGlContext && m_RenderLogic.m_OffScreenSurface )
-    {
-        if( ( m_ResizingWindowSize.width() > 1 ) && ( m_ResizingWindowSize.height() > 1 ))
-        {
-            m_RenderLogic.lockRenderer();
-            QImage frameImage = m_RenderLogic.m_OffScreenSurface->getLastRenderedImage();
-            m_RenderLogic.unlockRenderer();
+    QWidget::paintEvent( ev );
 
+    if( getIsRenderInitialized() )
+    {
+        QImage frameImage = getLastRenderedImage();
+        if( !frameImage.isNull() )
+        {
             QPainter painter;
             painter.begin( this );
-
-            painter.setRenderHints( QPainter::Antialiasing );
+            painter.setRenderHint( QPainter::Antialiasing );
             painter.drawImage( 0, 0, frameImage );
-
             painter.end();
         }
-
-        /*
-        m_RenderLogic.setSurfaceSize( geometry().size() );
-        if( !m_RenderLogic.isRenderThreadStarted() )
-        {
-            m_RenderLogic.startRenderThread();
-        }
-        else
-        {
-            m_RenderLogic.lockRenderer();
-
-            m_RenderLogic.m_WidgetGlContext->makeCurrent( m_RenderLogic.m_OffScreenSurface );
-            QOpenGLPaintDevice fboPaintDev( width(), height() );
-            QPainter painter( &fboPaintDev );
-            painter.setRenderHints( QPainter::Antialiasing | QPainter::TextAntialiasing );
-            QImage frameImage = m_RenderLogic.m_OffScreenSurface->getLastRenderedImage();
-            if( !frameImage.isNull() )
-            {
-                painter.drawImage( 0, 0, frameImage );
-            }
-
-            painter.end();
-
-           m_RenderLogic.unlockRenderer();
-        }
-    */
     }
 }
 
-//============================================================================
-void RenderGlWidget::resizeGL( int width, int height )
-{
-    QOpenGLWidget::resizeGL( width, height );
-    LogMsg( LOG_DEBUG, "resizeGL x(%d) y(%d)", width, height );
-}
 
 //============================================================================
 void RenderGlWidget::handleGlResize( int width, int height )
@@ -189,7 +121,7 @@ void RenderGlWidget::handleGlResize( int width, int height )
         m_ScreenSize = QSize( width, height );
         m_ResizingWindowSize = m_ScreenSize;
 
-        m_RenderLogic.setSurfaceSize( m_ScreenSize );
+        setSurfaceSize( m_ScreenSize );
         if( !m_IsResizing )
         {
             m_IsResizing = true;
@@ -200,61 +132,36 @@ void RenderGlWidget::handleGlResize( int width, int height )
         m_ResizingTimer->stop();
         m_ResizingTimer->setSingleShot( true );
         m_ResizingTimer->start( RESIZE_WINDOW_COMPLETED_TIMEOUT );
-
-        emit signalGlResized( width, height );
     }
-}
-
-//============================================================================
-bool RenderGlWidget::beginRender()
-{
-    return m_RenderLogic.beginRenderGl();
-}
-
-//============================================================================
-bool RenderGlWidget::endRender()
-{
-    return m_RenderLogic.endRenderGl();
-}
-
-//============================================================================
-void RenderGlWidget::presentRender( bool rendered, bool videoLayer )
-{
-    m_RenderLogic.presentRenderGl( rendered, videoLayer );
-}
-
-//============================================================================
-void RenderGlWidget::slotOnFrameRendered()
-{
-    update();
 }
 
 //============================================================================
 void RenderGlWidget::showEvent( QShowEvent * ev )
 {
-    QOpenGLWidget::showEvent( ev );
-    m_RenderLogic.setRenderWindowVisible( true );
+    QWidget::showEvent( ev );
+    setRenderWindowVisible( true );
 }
 
 //============================================================================
 void RenderGlWidget::hideEvent( QHideEvent * ev )
 {
-    m_RenderLogic.setRenderWindowVisible( false );
-    QOpenGLWidget::hideEvent( ev );
+    setRenderWindowVisible( false );
+    QWidget::hideEvent( ev );
 }
 
 //============================================================================
 void RenderGlWidget::closeEvent( QCloseEvent * ev )
 {
-    m_RenderLogic.setRenderThreadShouldRun(false);
     m_QtToKodi.fromGuiCloseEvent();
-    QOpenGLWidget::closeEvent( ev );
+    setRenderKodiThreadShouldRun(false);
+    aboutToDestroy();
+    QWidget::closeEvent( ev );
 }
 
 //============================================================================
 void RenderGlWidget::resizeEvent( QResizeEvent * ev )
 {
-    QOpenGLWidget::resizeEvent( ev );
+    QWidget::resizeEvent( ev );
 
     handleGlResize( ev->size().width(), ev->size().width() );
 }
@@ -262,37 +169,29 @@ void RenderGlWidget::resizeEvent( QResizeEvent * ev )
 //============================================================================
 void RenderGlWidget::onResizeBegin( QSize& newSize )
 {
- #ifndef DEBUG_OPENGL
 	m_QtToKodi.fromGuiResizeBegin( newSize.width(), newSize.height() );
- #endif // DEBUG_OPENGL
 }
 
 //============================================================================
 void RenderGlWidget::onResizeEvent( QSize& newSize )
 {
-    #ifndef DEBUG_OPENGL
 	m_QtToKodi.fromGuiResizeEvent( newSize.width(), newSize.height() );
-     #endif // DEBUG_OPENGL
 }
 
 //============================================================================
 void RenderGlWidget::onResizeEnd( QSize& newSize )
 {
-    #ifndef DEBUG_OPENGL
 	m_QtToKodi.fromGuiResizeEnd( newSize.width(), newSize.height() );
-   #endif // DEBUG_OPENGL
 }
 
 //============================================================================
 void RenderGlWidget::onModuleState( EAppModule moduleNum, EModuleState moduleState )
 {
-    #ifndef DEBUG_OPENGL
 	if( ( moduleNum == eAppModuleKodi ) && ( moduleState == eModuleStateInitialized ) )
 	{
 		// send a resize message so kodi will resize to fit window
 		m_QtToKodi.fromGuiResizeEnd( m_ScreenSize.width(), m_ScreenSize.height() );
 	}
-    #endif // DEBUG_OPENGL
 }
 
 //============================================================================
@@ -303,7 +202,7 @@ void RenderGlWidget::keyPressEvent( QKeyEvent * ev )
 
     if( ! m_QtToKodi.fromGuiKeyPressEvent( ev->key() ) )
     {
-        QOpenGLWidget::keyPressEvent( ev );
+        QWidget::keyPressEvent( ev );
     }
 }
 
@@ -315,7 +214,7 @@ void RenderGlWidget::keyReleaseEvent( QKeyEvent * ev )
 
     if( !m_QtToKodi.fromGuiKeyReleaseEvent( ev->key() ) )
     {
-        QOpenGLWidget::keyReleaseEvent( ev );
+        QWidget::keyReleaseEvent( ev );
     }
 }
 
@@ -325,7 +224,7 @@ void RenderGlWidget::mousePressEvent( QMouseEvent * ev )
     takeSnapshot();
     if( !m_QtToKodi.fromGuiMousePressEvent( ev->x(), ev->y(), ev->button() ) )
     {
-        QOpenGLWidget::mousePressEvent( ev );
+        QWidget::mousePressEvent( ev );
     }
 }
 
@@ -334,7 +233,7 @@ void RenderGlWidget::mouseReleaseEvent( QMouseEvent * ev )
 {
     if( !m_QtToKodi.fromGuiMouseReleaseEvent( ev->x(), ev->y(), ev->button() ) )
     {
-        QOpenGLWidget::mouseReleaseEvent( ev );
+        QWidget::mouseReleaseEvent( ev );
     }
 }
 
@@ -343,7 +242,7 @@ void RenderGlWidget::mouseMoveEvent( QMouseEvent * ev )
 {
     if( !m_QtToKodi.fromGuiMouseMoveEvent( ev->x(), ev->y() ) )
     {
-        QOpenGLWidget::mouseMoveEvent( ev );
+        QWidget::mouseMoveEvent( ev );
     }
 }
 

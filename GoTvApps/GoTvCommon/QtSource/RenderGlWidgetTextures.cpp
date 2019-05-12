@@ -37,100 +37,100 @@ void RenderGlWidget::setActiveGlTexture( unsigned int activeTextureNum )
     switch( activeTextureNum )
     {
     case 0:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE0 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE0 );
         break;
     case 1:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE1 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE1 );
         break;
     case 2:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE2 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE2 );
         break;
     case 3:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE3 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE3 );
         break;
     case 4:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE4 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE4 );
         break;
     case 5:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE5 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE5 );
         break;
     case 6:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE6 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE6 );
         break;
     case 7:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE7 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE7 );
         break;
     case 8:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE8 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE8 );
         break;
     case 9:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE9 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE9 );
         break;
     case 10:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE10 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE10 );
         break;
     case 11:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE11 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE11 );
         break;
     case 12:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE12 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE12 );
         break;
     case 13:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE13 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE13 );
         break;
     case 14:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE14 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE14 );
         break;
     case 15:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE15 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE15 );
         break;
     case 16:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE16 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE16 );
         break;
     case 17:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE17 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE17 );
         break;
     case 18:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE18 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE18 );
         break;
     case 19:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE19 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE19 );
         break;
     case 20:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE20 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE20 );
         break;
     case 21:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE21 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE21 );
         break;
     case 22:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE22 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE22 );
         break;
     case 23:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE23 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE23 );
         break;
     case 24:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE24 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE24 );
         break;
     case 25:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE25 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE25 );
         break;
     case 26:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE26 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE26 );
         break;
     case 27:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE27 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE27 );
         break;
     case 28:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE28 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE28 );
         break;
     case 29:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE29 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE29 );
         break;
     case 30:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE30 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE30 );
         break;
     case 31:
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE31 );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE31 );
         break;
     default:
         LogMsg( LOG_ERROR, "RenderGlWidget::setActiveGlTextur invalid param %d", activeTextureNum );
@@ -143,10 +143,10 @@ void RenderGlWidget::setActiveGlTexture( unsigned int activeTextureNum )
  //============================================================================
 void RenderGlWidget::createTextureObject( CQtTexture * texture )
 {
-    m_GlThreadFunctions->glGenTextures( 1, ( GLuint* )&texture->m_texture );
+    getGlFunctions()->glGenTextures( 1, ( GLuint* )&texture->m_texture );
 
-    m_GlThreadFunctions->glActiveTexture( GL_TEXTURE0 );
-    //m_GlThreadFunctions->glBindTexture( GL_TEXTURE_2D, texture->m_texture );
+    getGlFunctions()->glActiveTexture( GL_TEXTURE0 );
+    //getGlFunctions()->glBindTexture( GL_TEXTURE_2D, texture->m_texture );
 }
 
 //============================================================================
@@ -171,7 +171,7 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
     }
 
     // Bind the texture object
-    m_GlThreadFunctions->glBindTexture( GL_TEXTURE_2D, texture->m_texture );
+    getGlFunctions()->glBindTexture( GL_TEXTURE_2D, texture->m_texture );
 
     GLenum filter = ( texture->m_scalingMethod == TEXTURE_SCALING::NEAREST ? GL_NEAREST : GL_LINEAR );
 
@@ -179,7 +179,7 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
     if( texture->IsMipmapped() )
     {
         GLenum mipmapFilter = ( texture->m_scalingMethod == TEXTURE_SCALING::NEAREST ? GL_LINEAR_MIPMAP_NEAREST : GL_LINEAR_MIPMAP_LINEAR );
-        m_GlThreadFunctions->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, mipmapFilter );
+        getGlFunctions()->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, mipmapFilter );
 
 //#ifndef HAS_GLES
 //        // Lower LOD bias equals more sharpness, but less smooth animation
@@ -192,12 +192,12 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
     }
     else
     {
-         m_GlThreadFunctions->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter );
+         getGlFunctions()->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter );
     }
 
-     m_GlThreadFunctions->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter );
-     m_GlThreadFunctions->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-     m_GlThreadFunctions->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+     getGlFunctions()->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter );
+     getGlFunctions()->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+     getGlFunctions()->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
 
     unsigned int maxSize = getMaxTextureSize();
     if( texture->m_textureHeight > maxSize )
@@ -209,7 +209,7 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
     {
         LogMsg( LOG_ERROR, "GL: Image width %d too big to fit into single texture unit, truncating to %u", texture->m_textureWidth, maxSize );
 //#ifndef HAS_GLES
-//         m_GlThreadFunctions->glPixelStorei( GL_UNPACK_ROW_LENGTH, texture->m_textureWidth );
+//         getGlFunctions()->glPixelStorei( GL_UNPACK_ROW_LENGTH, texture->m_textureWidth );
 //#endif
         texture->m_textureWidth = maxSize;
     }
@@ -241,23 +241,23 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
 //
 //    if( ( texture->m_format & XB_FMT_DXT_MASK ) == 0 )
 //    {
-//         m_GlThreadFunctions->glTexImage2D( GL_TEXTURE_2D, 0, numcomponents,
+//         getGlFunctions()->glTexImage2D( GL_TEXTURE_2D, 0, numcomponents,
 //                                texture->m_textureWidth, texture->m_textureHeight, 0,
 //                                format, GL_UNSIGNED_BYTE, texture->m_pixels );
 //    }
 //    else
 //    {
-//         m_GlThreadFunctions->glCompressedTexImage2D( GL_TEXTURE_2D, 0, format,
+//         getGlFunctions()->glCompressedTexImage2D( GL_TEXTURE_2D, 0, format,
 //                                texture->m_textureWidth, texture->m_textureHeight, 0,
 //                                texture->GetPitch() * texture->GetRows(), texture->m_pixels );
 //    }
 //
 //    if( texture->IsMipmapped() && texture->m_isOglVersion3orNewer )
 //    {
-//         m_GlThreadFunctions->glGenerateMipmap( GL_TEXTURE_2D );
+//         getGlFunctions()->glGenerateMipmap( GL_TEXTURE_2D );
 //    }
 //
-//     m_GlThreadFunctions->glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 );
+//     getGlFunctions()->glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 );
 //
 //#else	// GLES version
 //
@@ -304,12 +304,12 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
         break;
     }
 
-     m_GlThreadFunctions->glTexImage2D( GL_TEXTURE_2D, 0, internalformat, texture->m_textureWidth, texture->m_textureHeight, 0,
+     getGlFunctions()->glTexImage2D( GL_TEXTURE_2D, 0, internalformat, texture->m_textureWidth, texture->m_textureHeight, 0,
                   pixelformat, GL_UNSIGNED_BYTE,  texture->m_pixels );
 
     if( texture->IsMipmapped() )
     {
-         m_GlThreadFunctions->glGenerateMipmap( GL_TEXTURE_2D );
+         getGlFunctions()->glGenerateMipmap( GL_TEXTURE_2D );
     }
 
 //#endif
@@ -329,8 +329,8 @@ bool RenderGlWidget::loadToGPU( CQtTexture * texture )
 //============================================================================
 void RenderGlWidget::bindToUnit( CQtTexture * texture, unsigned int unit )
 {
-      m_GlThreadFunctions->glActiveTexture( GL_TEXTURE0 + unit );
-      m_GlThreadFunctions->glBindTexture( GL_TEXTURE_2D, texture->m_texture );
+      getGlFunctions()->glActiveTexture( GL_TEXTURE0 + unit );
+      getGlFunctions()->glBindTexture( GL_TEXTURE_2D, texture->m_texture );
 }
 
 //============================================================================
@@ -392,12 +392,12 @@ void RenderGlWidget::beginGuiTexture( CGUITextureQt * guiTexture, GoTvColor colo
 
     if( hasAlpha )
     {
-        m_GlThreadFunctions->glBlendFuncSeparate( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA, GL_ONE );
-        m_GlThreadFunctions->glEnable( GL_BLEND );
+        getGlFunctions()->glBlendFuncSeparate( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA, GL_ONE );
+        getGlFunctions()->glEnable( GL_BLEND );
     }
     else
     {
-        m_GlThreadFunctions->glDisable( GL_BLEND );
+        getGlFunctions()->glDisable( GL_BLEND );
     }
 
     VerifyGLStateQt();
@@ -511,31 +511,31 @@ void RenderGlWidget::endGuiTexture( CGUITextureQt * guiTexture )
 
         if( uniColLoc >= 0 )
         {
-            m_GlThreadFunctions->glUniform4f( uniColLoc, ( guiTexture->m_col[ 0 ] / 255.0f ), ( guiTexture->m_col[ 1 ] / 255.0f ), ( guiTexture->m_col[ 2 ] / 255.0f ), ( guiTexture->m_col[ 3 ] / 255.0f ) );
+            getGlFunctions()->glUniform4f( uniColLoc, ( guiTexture->m_col[ 0 ] / 255.0f ), ( guiTexture->m_col[ 1 ] / 255.0f ), ( guiTexture->m_col[ 2 ] / 255.0f ), ( guiTexture->m_col[ 3 ] / 255.0f ) );
         }
 
         if( guiTexture->m_diffuse.size() )
         {
-            m_GlThreadFunctions->glVertexAttribPointer( tex1Loc, 2, GL_FLOAT, 0, sizeof( PackedVertex ), ( char* )&guiTexture->m_packedVertices[ 0 ] + offsetof( PackedVertex, u2 ) );
-            m_GlThreadFunctions->glEnableVertexAttribArray( tex1Loc );
+            getGlFunctions()->glVertexAttribPointer( tex1Loc, 2, GL_FLOAT, 0, sizeof( PackedVertex ), ( char* )&guiTexture->m_packedVertices[ 0 ] + offsetof( PackedVertex, u2 ) );
+            getGlFunctions()->glEnableVertexAttribArray( tex1Loc );
         }
-        m_GlThreadFunctions->glVertexAttribPointer( posLoc, 3, GL_FLOAT, 0, sizeof( PackedVertex ), ( char* )&guiTexture->m_packedVertices[ 0 ] + offsetof( PackedVertex, x ) );
-        m_GlThreadFunctions->glEnableVertexAttribArray( posLoc );
-        m_GlThreadFunctions->glVertexAttribPointer( tex0Loc, 2, GL_FLOAT, 0, sizeof( PackedVertex ), ( char* )&guiTexture->m_packedVertices[ 0 ] + offsetof( PackedVertex, u1 ) );
-        m_GlThreadFunctions->glEnableVertexAttribArray( tex0Loc );
+        getGlFunctions()->glVertexAttribPointer( posLoc, 3, GL_FLOAT, 0, sizeof( PackedVertex ), ( char* )&guiTexture->m_packedVertices[ 0 ] + offsetof( PackedVertex, x ) );
+        getGlFunctions()->glEnableVertexAttribArray( posLoc );
+        getGlFunctions()->glVertexAttribPointer( tex0Loc, 2, GL_FLOAT, 0, sizeof( PackedVertex ), ( char* )&guiTexture->m_packedVertices[ 0 ] + offsetof( PackedVertex, u1 ) );
+        getGlFunctions()->glEnableVertexAttribArray( tex0Loc );
 
-        m_GlThreadFunctions->glDrawElements( GL_TRIANGLES, guiTexture->m_packedVertices.size() * 6 / 4, GL_UNSIGNED_SHORT, guiTexture->m_idx.data() );
+        getGlFunctions()->glDrawElements( GL_TRIANGLES, guiTexture->m_packedVertices.size() * 6 / 4, GL_UNSIGNED_SHORT, guiTexture->m_idx.data() );
 
         if( guiTexture->m_diffuse.size() )
-            m_GlThreadFunctions->glDisableVertexAttribArray( tex1Loc );
+            getGlFunctions()->glDisableVertexAttribArray( tex1Loc );
 
-        m_GlThreadFunctions->glDisableVertexAttribArray( posLoc );
-        m_GlThreadFunctions->glDisableVertexAttribArray( tex0Loc );
+        getGlFunctions()->glDisableVertexAttribArray( posLoc );
+        getGlFunctions()->glDisableVertexAttribArray( tex0Loc );
     }
 
     if( guiTexture->m_diffuse.size() )
-        m_GlThreadFunctions->glActiveTexture( GL_TEXTURE0 );
-   m_GlThreadFunctions-> glEnable( GL_BLEND );
+        getGlFunctions()->glActiveTexture( GL_TEXTURE0 );
+   getGlFunctions()-> glEnable( GL_BLEND );
    VerifyGLStateQt();
 
 }
@@ -551,8 +551,8 @@ void RenderGlWidget::drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTextu
         texture->BindToUnit( 0 );
     }
 
-    m_GlThreadFunctions->glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-    m_GlThreadFunctions->glEnable( GL_BLEND );          // Turn Blending On
+    getGlFunctions()->glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+    getGlFunctions()->glEnable( GL_BLEND );          // Turn Blending On
 
     VerifyGLStateQt();
 
@@ -570,13 +570,13 @@ void RenderGlWidget::drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTextu
     GLint tex0Loc = shaderGetCoord0();
     GLint uniColLoc = shaderGetUniCol();
 
-    m_GlThreadFunctions->glVertexAttribPointer( posLoc, 3, GL_FLOAT, 0, 0, ver );
+    getGlFunctions()->glVertexAttribPointer( posLoc, 3, GL_FLOAT, 0, 0, ver );
     if( texture )
-        m_GlThreadFunctions->glVertexAttribPointer( tex0Loc, 2, GL_FLOAT, 0, 0, tex );
+        getGlFunctions()->glVertexAttribPointer( tex0Loc, 2, GL_FLOAT, 0, 0, tex );
 
-   m_GlThreadFunctions-> glEnableVertexAttribArray( posLoc );
+   getGlFunctions()-> glEnableVertexAttribArray( posLoc );
     if( texture )
-        m_GlThreadFunctions->glEnableVertexAttribArray( tex0Loc );
+        getGlFunctions()->glEnableVertexAttribArray( tex0Loc );
 
     // Setup Colors
     col[ 0 ] = ( uint8_t )GET_R( color );
@@ -584,7 +584,7 @@ void RenderGlWidget::drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTextu
     col[ 2 ] = ( uint8_t )GET_B( color );
     col[ 3 ] = ( uint8_t )GET_A( color );
 
-    m_GlThreadFunctions->glUniform4f( uniColLoc, col[ 0 ] / 255.0f, col[ 1 ] / 255.0f, col[ 2 ] / 255.0f, col[ 3 ] / 255.0f );
+    getGlFunctions()->glUniform4f( uniColLoc, col[ 0 ] / 255.0f, col[ 1 ] / 255.0f, col[ 2 ] / 255.0f, col[ 3 ] / 255.0f );
 
     ver[ 0 ][ 0 ] = ver[ 3 ][ 0 ] = rect.x1;
     ver[ 0 ][ 1 ] = ver[ 1 ][ 1 ] = rect.y1;
@@ -602,12 +602,12 @@ void RenderGlWidget::drawQuad( const GoTvRect &rect, GoTvColor color, CBaseTextu
         tex[ 2 ][ 1 ] = tex[ 3 ][ 1 ] = coords.y2;
     }
 
-    m_GlThreadFunctions->glDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx );
+    getGlFunctions()->glDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx );
 
-    m_GlThreadFunctions->glDisableVertexAttribArray( posLoc );
+    getGlFunctions()->glDisableVertexAttribArray( posLoc );
     if( texture )
     {
-        m_GlThreadFunctions->glDisableVertexAttribArray( tex0Loc );
+        getGlFunctions()->glDisableVertexAttribArray( tex0Loc );
     }
 
     VerifyGLStateQt();
@@ -619,8 +619,8 @@ void RenderGlWidget::initTextures()
     if( !m_TexturesInited )
     {
         for( unsigned i = 0; i < MAX_RENDER_PLANES; ++i ) {
-            m_GlThreadFunctions->glBindTexture( m_TexDescriptor.m_Target, m_TextureIds[ i ] );
-            m_GlThreadFunctions->glTexImage2D( m_TexDescriptor.m_Target,
+            getGlFunctions()->glBindTexture( m_TexDescriptor.m_Target, m_TextureIds[ i ] );
+            getGlFunctions()->glTexImage2D( m_TexDescriptor.m_Target,
                                  0,
                                  m_TexDescriptor.m_InternalFormat,
                                  m_Frame->m_VisiblePitch[ i ],
@@ -631,17 +631,17 @@ void RenderGlWidget::initTextures()
                                  0 );
             // Scale appropriately so we can change to target geometry without
             // much hassle.
-            m_GlThreadFunctions->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-            m_GlThreadFunctions->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-            m_GlThreadFunctions->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-            m_GlThreadFunctions->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+            getGlFunctions()->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+            getGlFunctions()->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+            getGlFunctions()->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+            getGlFunctions()->glTexParameterf( m_TexDescriptor.m_Target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
             m_TexturesInited = true;
         }
     }
 
     for( unsigned i = 0; i < MAX_RENDER_PLANES; ++i )
     {
-        m_GlThreadFunctions->glBindTexture( m_TexDescriptor.m_Target, m_TextureIds[ i ] );
+        getGlFunctions()->glBindTexture( m_TexDescriptor.m_Target, m_TextureIds[ i ] );
 
 #if !defined(GL_UNPACK_ROW_LENGTH) && !defined(GL_UNPACK_ROW_LENGTH_EXT)
 #define ALIGN(x, y) (((x) + ((y) - 1)) & ~((y) - 1))
@@ -655,7 +655,7 @@ void RenderGlWidget::initTextures()
             destination += dst_pitch;
         }
 
-        m_GlThreadFunctions->glTexSubImage2D( m_TexDescriptor.m_Target, 0,
+        getGlFunctions()->glTexSubImage2D( m_TexDescriptor.m_Target, 0,
                                 0, 0,
                                 m_Frame->m_VisiblePitch[ i ],
                                 m_Frame->m_VisibleLines[ i ],
@@ -665,12 +665,12 @@ void RenderGlWidget::initTextures()
         free( new_plane );
 #else
 # if defined(GL_UNPACK_ROW_LENGTH)
-        m_GlThreadFunctions->glPixelStorei( GL_UNPACK_ROW_LENGTH, m_Frame->m_Pitch[ i ] );
+        getGlFunctions()->glPixelStorei( GL_UNPACK_ROW_LENGTH, m_Frame->m_Pitch[ i ] );
 # else
-        m_GlThreadFunctions->glPixelStorei( GL_UNPACK_ROW_LENGTH_EXT, m_Frame->m_Pitch[ i ] );
+        getGlFunctions()->glPixelStorei( GL_UNPACK_ROW_LENGTH_EXT, m_Frame->m_Pitch[ i ] );
 # endif // defined(GL_UNPACK_ROW_LENGTH)
 
-        m_GlThreadFunctions->glTexSubImage2D( m_TexDescriptor.m_Target, 0,
+        getGlFunctions()->glTexSubImage2D( m_TexDescriptor.m_Target, 0,
                                 0, 0,
                                 m_Frame->m_VisiblePitch[ i ],
                                 m_Frame->m_VisibleLines[ i ],
@@ -678,9 +678,9 @@ void RenderGlWidget::initTextures()
                                 m_TexDescriptor.m_Type,
                                 &m_Frame->m_PlaneData[ i ][ 0 ] );
 # if defined(GL_UNPACK_ROW_LENGTH)
-        m_GlThreadFunctions->glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 ); // reset to default
+        getGlFunctions()->glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 ); // reset to default
 # else
-        m_GlThreadFunctions->glPixelStorei( GL_UNPACK_ROW_LENGTH_EXT, 0 ); // reset to default
+        getGlFunctions()->glPixelStorei( GL_UNPACK_ROW_LENGTH_EXT, 0 ); // reset to default
 # endif // defined(GL_UNPACK_ROW_LENGTH)
 #endif
     }

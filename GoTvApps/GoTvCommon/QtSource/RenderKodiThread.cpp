@@ -17,8 +17,7 @@ RenderKodiThread::RenderKodiThread( RenderGlLogic& renderLogic )
 : QThread()
 , m_RenderLogic( renderLogic )
 {
-    connect( this, SIGNAL( finished() ), this, SLOT( deleteLater() ) );
-    connect( this, SIGNAL( signalStartRenderThread() ), this, SLOT( slotStartRenderThread() ) );
+    //connect( this, SIGNAL( finished() ), this, SLOT( deleteLater() ) );
 }
 
 //============================================================================
@@ -75,14 +74,8 @@ void RenderKodiThread::startRenderThread()
     if( !isRenderThreadStarted() )
     {
         m_IsThreadStarted = true;
-        emit signalStartRenderThread();
+        start();
     }
-}
-
-//============================================================================
-void RenderKodiThread::slotStartRenderThread()
-{
-    start();
 }
 
 //============================================================================

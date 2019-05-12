@@ -79,6 +79,8 @@
 #include <QSettings>
 
 #include "RenderGlWidget.h"
+#include "GoTvDebugConfig.h"
+
 
 namespace
 {
@@ -901,6 +903,7 @@ void AppCommon::toGuiNetworkState( ENetworkStateType eNetworkState, const char* 
 
 	emit signalNetworkStateChanged( eNetworkState );
 
+#ifdef DEBUG_PTOP_NETWORK_STATE
 	const char * networkState = DescribeNetworkState( eNetworkState );
 	std::string formatedMsg;
 	if( stateMsg )
@@ -912,8 +915,9 @@ void AppCommon::toGuiNetworkState( ENetworkStateType eNetworkState, const char* 
 		StdStringFormat( formatedMsg, "#Network %s\n", networkState );
 	}
 
-	//emit signalLog( 0, formatedMsg.c_str() );
 	emit signalStatusMsg( formatedMsg.c_str() );
+#endif // DEBUG_PTOP_NETWORK_STATE
+
 }
 
 //============================================================================

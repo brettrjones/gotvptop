@@ -24,7 +24,7 @@ class CRenderBuffer;
 class QKeyEvent;
 class QMouseEvent;
 
-class RenderGlWidget : public QOpenGLWidget, public IGoTvRender, public QOpenGLFunctions
+class RenderGlWidget : public RenderGlLogic, public IGoTvRender
 {
 	Q_OBJECT
 public:
@@ -48,26 +48,10 @@ public:
     RenderGlWidget( QWidget *parent=0 );
     virtual ~RenderGlWidget( ) override;
 
-#ifdef DEBUG
-    void VerifyGLStateQtDbg( const char* szfile, const char* szfunction, int lineno );
-#  define VerifyGLStateQt() VerifyGLStateQtDbg(__FILE__, __FUNCTION__, __LINE__)
-#else
-    void VerifyGLStateQt();
-#endif
-
     AppCommon&				    getMyApp() { return  m_MyApp; }
-    QOpenGLFunctions *          getGlFunctions() { return m_GlThreadFunctions; }
-
-    void                        setRenderThreadId( unsigned int threadId ) { m_RenderThreadId = threadId; }
-    unsigned int                getRenderThreadId() { return m_RenderThreadId; }
 
     //! take a snapshot of current render
     void                        takeSnapshot();
-
-    virtual void                initializeGL( void ) override;
-    virtual void                paintGL( void ) override;
-    virtual void                resizeGL(  int w, int h  ) override;
-    virtual void                handleGlResize( int width, int height );
 
     //! ignore from kodi
     void                        initialiseShaders() override;
@@ -130,7 +114,7 @@ public:
     //=== to gui media/render ===//
     //============================================================================
 
-    virtual void                verifyGlState( const char * msg = nullptr ) override; // show gl error if any
+    virtual void                verifyGlState( const char * msg = nullptr ) override { RenderGlLogic::verifyGlState( msg ); } // show gl error if any
 
     //=== textures ===//
     void                        setActiveGlTexture( unsigned int activeTextureNum = 0 /* 0 == GL_TEXTURE0 , 1 == GL_TEXTURE1 etc*/ ) override;
@@ -164,9 +148,9 @@ public:
 
     int                         getMaxTextureSize( void ) override { return m_MaxTextureSize; }
 
-    bool                        beginRender() override;
-    bool                        endRender() override;
-    void                        presentRender( bool rendered, bool videoLayer ) override;
+    bool                        beginRender() override{ return RenderGlLogic::beginRenderGl(); }
+    bool                        endRender() override{ return RenderGlLogic::endRenderGl(); }
+    void                        presentRender( bool rendered, bool videoLayer ) override{ RenderGlLogic::presentRenderGl( rendered, videoLayer ); }
 
     bool                        clearBuffers( GoTvColor color ) override;
     bool                        isExtSupported( const char* extension ) override;
@@ -204,18 +188,29 @@ public:
     virtual void                frameBufferBind( unsigned int fboId ) override;
     virtual bool                frameBufferStatus() override;
 
-    void                        onThreadFrameRendered() { emit signalFrameRendered(); }
+    // gl functions
+    void                        glFuncDrawElements( GLenum mode, GLsizei count, GLenum type, const GLvoid *indices ) override;
+    void                        glFuncDisable( GLenum cap ) override;
+    void                        glFuncBindTexture( GLenum target, GLuint texture ) override;
+    void                        glFuncViewport( GLint x, GLint y, GLsizei width, GLsizei height ) override;
+    void                        glFuncScissor( GLint x, GLint y, GLsizei width, GLsizei height ) override;
 
-signals:
-    void                        signalFrameRendered();
-    void                        signalGlResized( int w, int h );
+    virtual void                glFuncGenTextures( GLsizei n, GLuint * textures ) override;
+    virtual void                glFuncDeleteTextures( GLsizei n, const GLuint *textures ) override;
+    virtual void                glFuncTexImage2D( GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels ) override;
+    virtual void                glFuncTexParameteri( GLenum target, GLenum pname, GLint param ) override;
+    virtual void                glFuncReadPixels( GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels ) override;
+    virtual void                glFuncPixelStorei( GLenum pname, GLint param ) override;
+    virtual void                glFuncFinish() override;
+
+    void                        onThreadFrameRendered() { emit signalFrameRendered(); }
 
 public slots:
 	void						slotResizeWindowTimeout();
     void                        slotOnFrameRendered();
 
 protected:
-    //void                        paintEvent(QPaintEvent *) override { }
+    void                        paintEvent( QPaintEvent * ) override;
 
     virtual void				showEvent( QShowEvent * ev ) override;
     virtual void				hideEvent( QHideEvent * ev ) override;
@@ -230,14 +225,12 @@ protected:
     virtual void                keyReleaseEvent( QKeyEvent * ev ) override;
 
     void                        initTextures();
+    void                        handleGlResize( int width, int height );
+
  
     //=== vars ===//
     AppCommon&				    m_MyApp;
     EventsQtToGoTv              m_QtToKodi;
-    RenderGlLogic               m_RenderLogic;
-
-    bool                        m_RenderWidgetInited = false;
-    unsigned int                m_RenderThreadId = 0;
 
     GLuint                      m_TextureIds[ MAX_RENDER_PLANES ];
     GlTextureSize               m_TexSize[ MAX_RENDER_PLANES ];
@@ -259,7 +252,8 @@ protected:
     QTimer *					m_ResizingTimer = nullptr;
 	bool						m_IsResizing = false;
 
-    QOpenGLFunctions *          m_GlThreadFunctions = nullptr;
-
+ 
     QMatrix4x4                  m_ColorMatrix;
+
+    bool                        m_WidgetGlInitialized = false;
 };

@@ -213,6 +213,21 @@ public:
     virtual void                frameBufferBind( unsigned int fboId ) override;
     virtual bool                frameBufferStatus( ) override;
 
+    // gl functions
+    void                        glFuncDrawElements( GLenum mode, GLsizei count, GLenum type, const GLvoid *indices ) override;
+    void                        glFuncDisable( GLenum cap ) override;
+    void                        glFuncBindTexture( GLenum target, GLuint texture ) override;
+    void                        glFuncViewport( GLint x, GLint y, GLsizei width, GLsizei height ) override;
+    void                        glFuncScissor( GLint x, GLint y, GLsizei width, GLsizei height ) override;
+
+    virtual void                glFuncGenTextures( GLsizei n, GLuint * textures ) override;
+    virtual void                glFuncDeleteTextures( GLsizei n, const GLuint *textures ) override;
+    virtual void                glFuncTexImage2D( GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels ) override;
+    virtual void                glFuncTexParameteri( GLenum target, GLenum pname, GLint param ) override;
+    virtual void                glFuncReadPixels( GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels ) override;
+    virtual void                glFuncPixelStorei( GLenum pname, GLint param ) override;
+    virtual void                glFuncFinish() override;
+
     //============================================================================
     //=== end to gui media/render ===//
     //============================================================================
