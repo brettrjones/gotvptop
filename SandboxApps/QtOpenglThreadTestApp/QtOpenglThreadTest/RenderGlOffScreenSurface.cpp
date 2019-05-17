@@ -156,7 +156,8 @@ void RenderGlOffScreenSurface::presentRenderGl( bool rendered, bool videoLayer )
         {
   
             m_RenderGlLogic->VerifyGLStateQt();
-            m_RenderGlLogic->setLastRenderedImage( grabFramebuffer() );
+            QImage image = grabFramebuffer();
+            m_RenderGlLogic->setLastRenderedImage( image );
             m_RenderGlLogic->VerifyGLStateQt();
             //swapBuffers();
             m_RenderGlLogic->VerifyGLStateQt();

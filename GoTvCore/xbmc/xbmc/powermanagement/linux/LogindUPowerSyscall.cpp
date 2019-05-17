@@ -21,6 +21,8 @@
  */
 
 #include "config_kodi.h"
+#if defined (TARGET_OS_LINUX)
+
 #include "LogindUPowerSyscall.h"
 #include <utils/log.h>
 
@@ -308,3 +310,4 @@ void CLogindUPowerSyscall::ReleaseDelayLock()
 }
 
 #endif
+#endif // defined (TARGET_OS_LINUX)

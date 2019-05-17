@@ -4,16 +4,11 @@ TARGET_NAME = _ssl
 
 include(config_python_lib.pri)
 
-include(config_openssl_lib.pri)
 include(config_opensslp_include.pri)
 
 include(python_ssl.pri)
 
 include(config_link.pri)
-
-
-include(config_openssl_lib.pri)
-include(config_opensslp_include.pri)
 
 
 LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
@@ -28,7 +23,7 @@ LIBS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
 
 
 
-include(config_copy_shared_lib.pri)
+include(config_move_python_lib.pri)
 
 
 

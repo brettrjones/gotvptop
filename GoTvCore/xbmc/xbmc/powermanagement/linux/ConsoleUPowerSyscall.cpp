@@ -17,8 +17,8 @@
  *  <http://www.gnu.org/licenses/>.
  *
  */
-
 #include "config_kodi.h"
+#if defined (TARGET_OS_LINUX)
 #include "ConsoleUPowerSyscall.h"
 #include <utils/log.h>
 
@@ -63,3 +63,4 @@ bool CConsoleUPowerSyscall::ConsoleKitMethodCall(const char *method)
   return false;
 }
 #endif
+#endif // defined (TARGET_OS_LINUX)

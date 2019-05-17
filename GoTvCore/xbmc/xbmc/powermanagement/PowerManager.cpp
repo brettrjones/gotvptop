@@ -52,6 +52,10 @@ void CPowerManager::Initialize()
 
 void CPowerManager::SetDefaults()
 {
+    if( m_instance.get() )
+    {
+
+
   int defaultShutdown = m_settings->GetInt(CSettings::SETTING_POWERMANAGEMENT_SHUTDOWNSTATE);
 
   switch (defaultShutdown)
@@ -92,10 +96,13 @@ void CPowerManager::SetDefaults()
   }
 
   std::static_pointer_cast<CSettingInt>(m_settings->GetSetting(CSettings::SETTING_POWERMANAGEMENT_SHUTDOWNSTATE))->SetDefault(defaultShutdown);
+      }
 }
 
 bool CPowerManager::Powerdown()
 {
+    if( m_instance.get() )
+    {
   if (CanPowerdown() && m_instance->Powerdown())
   {
     CGUIDialogBusy* dialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogBusy>(WINDOW_DIALOG_BUSY);
@@ -104,22 +111,38 @@ bool CPowerManager::Powerdown()
 
     return true;
   }
+    }
 
   return false;
 }
 
 bool CPowerManager::Suspend()
 {
+    if( m_instance.get() )
+    {
+
   return (CanSuspend() && m_instance->Suspend());
+    }
+
+    return false;
 }
 
 bool CPowerManager::Hibernate()
 {
+    if( m_instance.get() )
+    {
+
   return (CanHibernate() && m_instance->Hibernate());
+    }
+
+    return false;
 }
 
 bool CPowerManager::Reboot()
 {
+    if( m_instance.get() )
+    {
+
   bool success = CanReboot() ? m_instance->Reboot() : false;
 
   if (success)
@@ -132,6 +155,9 @@ bool CPowerManager::Reboot()
   }
 
   return success;
+    }
+
+    return false;
 }
 
 bool CPowerManager::CanPowerdown()

@@ -55,6 +55,7 @@ namespace
 #else
     std::string			g_strApplicationTitle			= "GoTv PtoP";
     std::string			g_strApplicationNameNoSpaces	= "GoTvPtoP";
+    std::string			g_strApplicationNameNoSpacesLowerCase	= "gotvptop";
     std::string			g_strNetworkName				= "GoTvPtoPNet";
 	std::string			g_strCompanyWebsite				= "http://www.gotvptop.net";
     std::string			g_strCompanyDomain				= "gotvptop.net";
@@ -115,7 +116,7 @@ namespace
 //                  /kodi/		kodi plugins and writable data directory
 //                  /gotv/gui/	gui assets
 //						 /shaders/ opengl shaders
-//                           /profile/ profile default files
+//                       /profile/ profile default files
 //
 // user specific directories.. NOTE: hasnum is 4 digit hash of exe path and userId is user login name
 //                  /storage/GoTvPtoP/hashnum/accounts/userId/settings/		databases for user settings etc

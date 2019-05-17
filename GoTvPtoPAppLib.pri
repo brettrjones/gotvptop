@@ -457,10 +457,8 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlShaders.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderShaderQt.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderLogoShaders.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/RunKodiThread.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogoRenderer.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidgetShaderInterface.cpp
-
 
 FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAbout.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \

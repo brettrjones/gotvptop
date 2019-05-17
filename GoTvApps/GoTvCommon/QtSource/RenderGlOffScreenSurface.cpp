@@ -132,7 +132,7 @@ bool RenderGlOffScreenSurface::beginRenderGl()
     }
 
     //glClearColor(   0, 0, 1, 1 );
-    m_RenderThreadContext->functions()->glClearColor( 0.2f, 0.1f, 0.2f, 1.0f );
+    getGlFunctions()->glClearColor( 0.2f, 0.1f, 0.2f, 1.0f );
 
 
     // testTexureRender( true );
@@ -159,13 +159,13 @@ void RenderGlOffScreenSurface::presentRenderGl( bool rendered, bool videoLayer )
     if( isValid() )
     {
         // make sure all paint operation have been processed
-       // m_functions->glFlush();
+        // m_functions->glFlush();
 
         if( rendered )
         {
-  
             m_RenderGlLogic->VerifyGLStateQt();
-            m_RenderGlLogic->setLastRenderedImage( grabFramebuffer() );
+            QImage image = grabFramebuffer();
+            m_RenderGlLogic->setLastRenderedImage( image );
             m_RenderGlLogic->VerifyGLStateQt();
             //swapBuffers(); // broken do not use
 
@@ -204,19 +204,19 @@ void RenderGlOffScreenSurface::testTexureRender( bool startRender )
     {
         //glShadeModel( GL_FLAT );
         //glEnable( GL_DEPTH_TEST );
-        glEnable( GL_TEXTURE_2D );
+        getGlFunctions()->glEnable( GL_TEXTURE_2D );
 
         if( m_TestTexure1 == -1 )
         {
             m_TestTexure1 = 0;
-            glGenTextures( 1, &m_TestTexure1 );
+            getGlFunctions()->glGenTextures( 1, &m_TestTexure1 );
         }
 
-        glBindTexture( GL_TEXTURE_2D, m_TestTexure1 );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+        getGlFunctions()->glBindTexture( GL_TEXTURE_2D, m_TestTexure1 );
+        getGlFunctions()->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+        getGlFunctions()->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+        getGlFunctions()->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+        getGlFunctions()->glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
 
         // Black/white checkerboard
 #define checkImageWidth 4
@@ -250,23 +250,22 @@ void RenderGlOffScreenSurface::testTexureRender( bool startRender )
             }
         }
 
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-        glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, checkImageWidth, checkImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage );
-
+        getGlFunctions()->glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        getGlFunctions()->glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+        getGlFunctions()->glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, checkImageWidth, checkImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage );
+/*
 #if !defined(QT_OPENGL_ES_2)
-        glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL );
-        glBegin( GL_QUADS );
-            glTexCoord2f( 0.0, 0.0 ); glVertex3f( -0.5, -0.5, 0.0 );
-            glTexCoord2f( 0.0, 1.0 ); glVertex3f( -0.5, 1.0, 0.0 );
-            glTexCoord2f( 1.0, 1.0 ); glVertex3f( 1.0, 1.0, 0.0 );
-            glTexCoord2f( 1.0, 0.0 ); glVertex3f( 1.0, -0.5, 0.0 );
-        glEnd();
+        getGlExtraFunctions()->glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL );
+        getGlExtraFunctions()->glBegin( GL_QUADS );
+        getGlExtraFunctions()->glTexCoord2f( 0.0, 0.0 ); getGlFunctions()->glVertex3f( -0.5, -0.5, 0.0 );
+            getGlExtraFunctions()->glTexCoord2f( 0.0, 1.0 ); getGlFunctions()->glVertex3f( -0.5, 1.0, 0.0 );
+            getGlExtraFunctions()->glTexCoord2f( 1.0, 1.0 ); getGlFunctions()->glVertex3f( 1.0, 1.0, 0.0 );
+            getGlExtraFunctions()->glTexCoord2f( 1.0, 0.0 ); getGlFunctions()->glVertex3f( 1.0, -0.5, 0.0 );
+        getGlExtraFunctions()->glEnd();
 #else
  // figure out equivilent for gles
-
-
 #endif
+*/
 
 
     }

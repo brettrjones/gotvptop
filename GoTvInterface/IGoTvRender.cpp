@@ -599,3 +599,53 @@ void IGoTv::glFuncFinish()
 {
     getAppCommon().glFuncFinish();
 }
+
+//============================================================================
+void IGoTv::glFuncEnable( GLenum cap )
+{
+    getAppCommon().glFuncEnable( cap );
+}
+
+//============================================================================
+void IGoTv:: glFuncTexSubImage2D( GLenum target, GLint level,
+                                      GLint xoffset, GLint yoffset,
+                                      GLsizei width, GLsizei height,
+                                      GLenum format, GLenum type,
+                                      const GLvoid *pixels )
+{
+    getAppCommon().glFuncTexSubImage2D( target, level,
+                                        xoffset, yoffset,
+                                        width, height,
+                                        format, type,
+                                        pixels );
+}
+
+//============================================================================
+void IGoTv::glFuncBlendFunc( GLenum sfactor, GLenum dfactor )
+{
+    getAppCommon().glFuncBlendFunc( sfactor, dfactor );
+}
+
+//============================================================================
+void IGoTv::glFuncVertexAttribPointer( GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer )
+{
+    getAppCommon().glFuncVertexAttribPointer( index, size, type, normalized, stride, pointer );
+}
+
+//============================================================================
+void IGoTv::glFuncDisableVertexAttribArray( GLuint index )
+{
+    getAppCommon().glFuncDisableVertexAttribArray( index );
+}
+
+//============================================================================
+void IGoTv::glFuncEnableVertexAttribArray( GLuint index )
+{
+    getAppCommon().glFuncEnableVertexAttribArray( index );
+}
+
+//============================================================================
+void IGoTv::glFuncDrawArrays( GLenum mode, GLint first, GLsizei count )
+{
+    getAppCommon().glFuncDrawArrays( mode, first, count );
+}

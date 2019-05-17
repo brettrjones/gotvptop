@@ -19,6 +19,7 @@ INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc/platform/qt
 
 HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvCompilerConfig.h \
+    $$PWD/GoTvDebugConfig.h \
     $$PWD/GoTvDependLibrariesConfig.h \
     $$PWD/GoTvCore/xbmc/xbmc/config_kodi.h \
     $$PWD/GoTvCore/xbmc/xbmc/AppParamParser.h \
@@ -1557,7 +1558,14 @@ HEADERS += 	$$PWD/GoTvCpuArchDefines.h \
     $$PWD/GoTvCore/xbmc/xbmc/interfaces/builtins/AndroidBuiltins.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/PeripheralBusAndroid.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/activity/AndroidFeatures.h
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/activity/AndroidFeatures.h \
+    $$PWD/GoTvCore/xbmc/xbmc/powermanagement/android/AndroidPowerSyscall.h \
+    $$PWD/GoTvCore/xbmc/xbmc/powermanagement/linux/ConsoleDeviceKitPowerSyscall.h \
+    $$PWD/GoTvCore/xbmc/xbmc/powermanagement/linux/ConsoleUPowerSyscall.h \
+    $$PWD/GoTvCore/xbmc/xbmc/powermanagement/linux/FallbackPowerSyscall.h \
+    $$PWD/GoTvCore/xbmc/xbmc/powermanagement/linux/LinuxPowerSyscall.h \
+    $$PWD/GoTvCore/xbmc/xbmc/powermanagement/linux/LogindUPowerSyscall.h \
+    $$PWD/GoTvCore/xbmc/xbmc/powermanagement/linux/UPowerSyscall.h
 
 SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/Application.cpp \
@@ -2773,7 +2781,13 @@ SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/AppParamParser.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/posix/MessagePrinterPosix.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/cores/DllLoader/SoLoader.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/KodiQtApp.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/utils/StringUtils2.cpp
+    $$PWD/GoTvCore/xbmc/xbmc/utils/StringUtils2.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/powermanagement/android/AndroidPowerSyscall.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/powermanagement/linux/ConsoleDeviceKitPowerSyscall.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/powermanagement/linux/ConsoleUPowerSyscall.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/powermanagement/linux/LinuxPowerSyscall.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/powermanagement/linux/LogindUPowerSyscall.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/powermanagement/linux/UPowerSyscall.cpp
 
 win32:{
 SOURCES += 	$$PWD/GoTvCore/xbmc/xbmc/platform/win32/CharsetConverterWin32.cpp \

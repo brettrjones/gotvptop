@@ -42,6 +42,7 @@
 #include "utils/MathUtils.h"
 #include "utils/log.h"
 #include "utils/GLUtils.h"
+#include "GoTvInterface/IGoTv.h"
 
 #if HAS_GLES >= 2
  // GLES2.0 cant do CLAMP, but can do CLAMP_TO_EDGE.
@@ -61,8 +62,9 @@ static void LoadTexture( GLenum target
 {
     int width2 = width;
     int height2 = height;
-    char *pixelVector = NULL;
+    char *pixelVector = nullptr;
     const GLvoid *pixelData = pixels;
+    IGoTv& gotv = IGoTv::getIGoTv();
 
 #ifdef HAS_GLES
     /** OpenGL ES does not support BGR so use RGB and swap later **/
@@ -123,34 +125,34 @@ static void LoadTexture( GLenum target
         stride = width;
     }
 #else
-    glPixelStorei( GL_UNPACK_ROW_LENGTH, stride / bytesPerPixel );
+    gotv.glFuncPixelStorei( GL_UNPACK_ROW_LENGTH, stride / bytesPerPixel );
 #endif
 
-    glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
+    gotv.glFuncPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
 
-    glTexImage2D( target, 0, internalFormat
+    gotv.glFuncTexImage2D( target, 0, internalFormat
                   , width2, height2, 0
                   , externalFormat, GL_UNSIGNED_BYTE, NULL );
 
-    glTexSubImage2D( target, 0
+    gotv.glFuncTexSubImage2D( target, 0
                      , 0, 0, width, height
                      , externalFormat, GL_UNSIGNED_BYTE
                      , pixelData );
 
     if( height < height2 )
-        glTexSubImage2D( target, 0
+        gotv.glFuncTexSubImage2D( target, 0
                          , 0, height, width, 1
                          , externalFormat, GL_UNSIGNED_BYTE
                          , ( unsigned char* )pixelData + stride * ( height - 1 ) );
 
     if( width < width2 )
-        glTexSubImage2D( target, 0
+        gotv.glFuncTexSubImage2D( target, 0
                          , width, 0, 1, height
                          , externalFormat, GL_UNSIGNED_BYTE
                          , ( unsigned char* )pixelData + bytesPerPixel * ( width - 1 ) );
 
 #ifndef HAS_GLES
-    glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 );
+    gotv.glFuncPixelStorei( GL_UNPACK_ROW_LENGTH, 0 );
 #endif
 
     free( pixelVector );
@@ -161,6 +163,8 @@ static void LoadTexture( GLenum target
 
 COverlayTextureQt::COverlayTextureQt( CDVDOverlayImage* o )
 {
+    IGoTv& gotv = IGoTv::getIGoTv();
+
     m_texture = 0;
 
     uint32_t* rgba;
@@ -184,13 +188,13 @@ COverlayTextureQt::COverlayTextureQt( CDVDOverlayImage* o )
         return;
     }
 
-    glGenTextures( 1, &m_texture );
-    glBindTexture( GL_TEXTURE_2D, m_texture );
+    gotv.glFuncGenTextures( 1, &m_texture );
+    gotv.glFuncBindTexture( GL_TEXTURE_2D, m_texture );
 
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+    gotv.glFuncTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+    gotv.glFuncTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+    gotv.glFuncTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+    gotv.glFuncTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 
     LoadTexture( GL_TEXTURE_2D
                  , o->width
@@ -202,7 +206,7 @@ COverlayTextureQt::COverlayTextureQt( CDVDOverlayImage* o )
     if( reinterpret_cast< uint8_t* >( rgba ) != o->data )
         free( rgba );
 
-    glBindTexture( GL_TEXTURE_2D, 0 );
+    gotv.glFuncBindTexture( GL_TEXTURE_2D, 0 );
 
     if( o->source_width && o->source_height )
     {
@@ -233,6 +237,7 @@ COverlayTextureQt::COverlayTextureQt( CDVDOverlayImage* o )
 
 COverlayTextureQt::COverlayTextureQt( CDVDOverlaySpu* o )
 {
+    IGoTv& gotv = IGoTv::getIGoTv();
     m_texture = 0;
 
     int min_x, max_x, min_y, max_y;
@@ -276,7 +281,9 @@ COverlayTextureQt::COverlayTextureQt( CDVDOverlaySpu* o )
 
 COverlayGlyphQt::COverlayGlyphQt( ASS_Image* images, int width, int height )
 {
-    m_vertex = NULL;
+    IGoTv& gotv = IGoTv::getIGoTv();
+
+    m_vertex = nullptr;
     m_width = 1.0;
     m_height = 1.0;
     m_align = ALIGN_VIDEO;
@@ -358,24 +365,28 @@ COverlayGlyphQt::COverlayGlyphQt( ASS_Image* images, int width, int height )
 
 COverlayGlyphQt::~COverlayGlyphQt()
 {
-    glDeleteTextures( 1, &m_texture );
+    IGoTv& gotv = IGoTv::getIGoTv();
+
+    gotv.glFuncDeleteTextures( 1, &m_texture );
     free( m_vertex );
 }
 
 void COverlayGlyphQt::Render( SRenderState& state )
 {
+    IGoTv& gotv = IGoTv::getIGoTv();
+
     if( ( m_texture == 0 ) || ( m_count == 0 ) )
         return;
 
-    glEnable( GL_BLEND );
+    gotv.glFuncEnable( GL_BLEND );
 
-    glBindTexture( GL_TEXTURE_2D, m_texture );
-    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+    gotv.glFuncBindTexture( GL_TEXTURE_2D, m_texture );
+    gotv.glFuncBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+    gotv.glFuncTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+    gotv.glFuncTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+    gotv.glFuncTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+    gotv.glFuncTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 
     glMatrixModview.Push();
     glMatrixModview->Translatef( state.x, state.y, 0.0f );
@@ -406,19 +417,19 @@ void COverlayGlyphQt::Render( SRenderState& state )
 
     vertices = &vecVertices[ 0 ];
 
-    glVertexAttribPointer( posLoc, 3, GL_FLOAT, GL_FALSE, sizeof( VERTEX ), ( char* )vertices + offsetof( VERTEX, x ) );
-    glVertexAttribPointer( colLoc, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof( VERTEX ), ( char* )vertices + offsetof( VERTEX, r ) );
-    glVertexAttribPointer( tex0Loc, 2, GL_FLOAT, GL_FALSE, sizeof( VERTEX ), ( char* )vertices + offsetof( VERTEX, u ) );
+    gotv.glFuncVertexAttribPointer( posLoc, 3, GL_FLOAT, GL_FALSE, sizeof( VERTEX ), ( char* )vertices + offsetof( VERTEX, x ) );
+    gotv.glFuncVertexAttribPointer( colLoc, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof( VERTEX ), ( char* )vertices + offsetof( VERTEX, r ) );
+    gotv.glFuncVertexAttribPointer( tex0Loc, 2, GL_FLOAT, GL_FALSE, sizeof( VERTEX ), ( char* )vertices + offsetof( VERTEX, u ) );
 
-    glEnableVertexAttribArray( posLoc );
-    glEnableVertexAttribArray( colLoc );
-    glEnableVertexAttribArray( tex0Loc );
+    gotv.glFuncEnableVertexAttribArray( posLoc );
+    gotv.glFuncEnableVertexAttribArray( colLoc );
+    gotv.glFuncEnableVertexAttribArray( tex0Loc );
 
-    glDrawArrays( GL_TRIANGLES, 0, vecVertices.size() );
+    gotv.glFuncDrawArrays( GL_TRIANGLES, 0, vecVertices.size() );
 
-    glDisableVertexAttribArray( posLoc );
-    glDisableVertexAttribArray( colLoc );
-    glDisableVertexAttribArray( tex0Loc );
+    gotv.glFuncDisableVertexAttribArray( posLoc );
+    gotv.glFuncDisableVertexAttribArray( colLoc );
+    gotv.glFuncDisableVertexAttribArray( tex0Loc );
 
     renderSystem->DisableGUIShader();
 
@@ -510,31 +521,35 @@ void COverlayGlyphQt::Render( SRenderState& state )
 
     glMatrixModview.PopLoad();
 
-    glDisable( GL_BLEND );
+    gotv.glFuncDisable( GL_BLEND );
 
-    glBindTexture( GL_TEXTURE_2D, 0 );
+    gotv.glFuncBindTexture( GL_TEXTURE_2D, 0 );
 }
 
 
 COverlayTextureQt::~COverlayTextureQt()
 {
-    glDeleteTextures( 1, &m_texture );
+    IGoTv& gotv = IGoTv::getIGoTv();
+
+    gotv.glFuncDeleteTextures( 1, &m_texture );
 }
 
 void COverlayTextureQt::Render( SRenderState& state )
 {
-    glEnable( GL_BLEND );
+    IGoTv& gotv = IGoTv::getIGoTv();
 
-    glBindTexture( GL_TEXTURE_2D, m_texture );
+    gotv.glFuncEnable( GL_BLEND );
+
+    gotv.glFuncBindTexture( GL_TEXTURE_2D, m_texture );
     if( m_pma )
-        glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
+        gotv.glFuncBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
     else
-        glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+        gotv.glFuncBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+    gotv.glFuncTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+    gotv.glFuncTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+    gotv.glFuncTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+    gotv.glFuncTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 
     DRAWRECT rd;
     if( m_pos == POSITION_RELATIVE )
@@ -565,13 +580,13 @@ void COverlayTextureQt::Render( SRenderState& state )
     GLfloat tex[ 4 ][ 2 ];
     GLubyte idx[ 4 ] = { 0, 1, 3, 2 };        //determines order of triangle strip
 
-    glVertexAttribPointer( posLoc, 2, GL_FLOAT, 0, 0, ver );
-    glVertexAttribPointer( colLoc, 4, GL_FLOAT, 0, 0, col );
-    glVertexAttribPointer( tex0Loc, 2, GL_FLOAT, 0, 0, tex );
+    gotv.glFuncVertexAttribPointer( posLoc, 2, GL_FLOAT, 0, 0, ver );
+    gotv.glFuncVertexAttribPointer( colLoc, 4, GL_FLOAT, 0, 0, col );
+    gotv.glFuncVertexAttribPointer( tex0Loc, 2, GL_FLOAT, 0, 0, tex );
 
-    glEnableVertexAttribArray( posLoc );
-    glEnableVertexAttribArray( colLoc );
-    glEnableVertexAttribArray( tex0Loc );
+    gotv.glFuncEnableVertexAttribArray( posLoc );
+    gotv.glFuncEnableVertexAttribArray( colLoc );
+    gotv.glFuncEnableVertexAttribArray( tex0Loc );
 
     glUniform4f( uniColLoc, ( col[ 0 ] ), ( col[ 1 ] ), ( col[ 2 ] ), ( col[ 3 ] ) );
     // Setup vertex position values
@@ -585,11 +600,11 @@ void COverlayTextureQt::Render( SRenderState& state )
     tex[ 1 ][ 0 ] = tex[ 2 ][ 0 ] = m_u;
     tex[ 2 ][ 1 ] = tex[ 3 ][ 1 ] = m_v;
 
-    glDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx );
+    gotv.glFuncDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx );
 
-    glDisableVertexAttribArray( posLoc );
-    glDisableVertexAttribArray( colLoc );
-    glDisableVertexAttribArray( tex0Loc );
+    gotv.glFuncDisableVertexAttribArray( posLoc );
+    gotv.glFuncDisableVertexAttribArray( colLoc );
+    gotv.glFuncDisableVertexAttribArray( tex0Loc );
 
     renderSystem->DisableGUIShader();
 
@@ -705,9 +720,9 @@ void COverlayTextureQt::Render( SRenderState& state )
     renderSystem->DisableGUIShader();
 #endif
 
-    glDisable( GL_BLEND );
+    gotv.glFuncDisable( GL_BLEND );
 
-    glBindTexture( GL_TEXTURE_2D, 0 );
+    gotv.glFuncBindTexture( GL_TEXTURE_2D, 0 );
 }
 
 #endif // HAVE_QT_GUI

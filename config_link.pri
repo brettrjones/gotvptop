@@ -13,6 +13,7 @@ CONFIG(debug, debug|release){
   SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug/lib
   SHARED_LIB_SUFFIX=Android_d.so
   SHARED_PYTHON_LIB_SUFFIX=_d.so
+  PYTHON_EXTENTION_LIB_SUFFIX=_d.pyd
  }
 
  unix:!android:{
@@ -22,29 +23,30 @@ CONFIG(debug, debug|release){
   SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug/lib
   SHARED_LIB_SUFFIX=Linux_d.so
   SHARED_PYTHON_LIB_SUFFIX=_d.so
+  PYTHON_EXTENTION_LIB_SUFFIX=_d.pyd
  }
 }
 
 CONFIG(release, debug|release){
 # message(Link in RELEASE mode.)
- android:{
-  STATIC_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/lib
-  STATIC_LIB_SUFFIX=Android.a
-  SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/lib
-  SHARED_LIB_SUFFIX=Android.so
-  SHARED_PYTHON_LIB_SUFFIX=.so
- }
+    android:{
+        STATIC_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/lib
+        STATIC_LIB_SUFFIX=Android.a
+        SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/lib
+        SHARED_LIB_SUFFIX=Android.so
+        SHARED_PYTHON_LIB_SUFFIX=.so
+        PYTHON_EXTENTION_LIB_SUFFIX=.pyd
+    }
 
-unix:!android:{
-  LIBS +=-L$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/
-  STATIC_LIB_PREFIX=LIBS += -l
-  STATIC_LIB_SUFFIX=Linux.so
+    unix:!android:{
+        STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/lib
+        STATIC_LIB_SUFFIX=Linux.a
 
-  LIBS +=  -L$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/
-  SHARED_LIB_PREFIX=LIBS += -l
-  SHARED_LIB_SUFFIX=Linux.so
-  SHARED_PYTHON_LIB_SUFFIX=.so
- }
+        SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/lib
+        SHARED_LIB_SUFFIX=Linux.so
+        SHARED_PYTHON_LIB_SUFFIX=.so
+        PYTHON_EXTENTION_LIB_SUFFIX=.pyd
+    }
 }
 
 #message("**TARGET_OS_NAME-> "$${TARGET_OS_NAME})

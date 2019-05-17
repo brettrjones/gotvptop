@@ -196,14 +196,15 @@ std::string  CUtil::GetHomePath( )
 }
 
 //========================================================================
-std::string  CUtil::GetHomePath( std::string strPath )
+std::string  CUtil::GetHomePath( std::string strTarget )
 {
-    std::string strTarget;
+    std::string strPath;
     if( strTarget.empty() )
         strPath = CEnvironment::getenv( CCompileInfo::GetHomeEnvName() );
     else
         strPath = CEnvironment::getenv( strTarget );
-
+    // /home/user/.local/share/gotvptop
+    // force to gotv paths
     strPath = ""; // force resolve path
     bool isExePath = false;
     if( strPath.empty() )
@@ -324,10 +325,13 @@ std::string  CUtil::GetHomePath( std::string strPath )
             if( realpath( given_path, real_path ) != NULL )
             {
                 strPath = real_path;
+                strPath += PATH_SEPARATOR_CHAR;
 #ifdef BUILD_GOTV_APP
-                strPath += "\\gotvptop";
+                strPath += "assets";
+                strPath += PATH_SEPARATOR_CHAR;
+                strPath += "kodi";
 #else
-                strPath += "\\xbmc";
+                strPath += "xbmc";
 #endif
                 return;
             }
@@ -362,10 +366,14 @@ std::string  CUtil::GetHomePath( std::string strPath )
             }
         }
 #endif
+        strPath += PATH_SEPARATOR_CHAR;
 #ifdef BUILD_GOTV_APP
-        strPath += "\\gotvptop";
+        // /home/user/.local/share/gotvptop
+        strPath += "assets";
+        strPath += PATH_SEPARATOR_CHAR;
+        strPath += "kodi";
 #else
-        strPath += "\\xbmc";
+        strPath += "xbmc";
 #endif
     }
 

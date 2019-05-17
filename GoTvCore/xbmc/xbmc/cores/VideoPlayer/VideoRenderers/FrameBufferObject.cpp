@@ -7,9 +7,9 @@
  */
 
 #include "config_kodi.h"
-#if defined(TARGET_OS_WINDOWS)
+//#if defined(TARGET_OS_WINDOWS)
 //# include <libglew/include/GL/glew.h>
-#endif // defined(TARGET_OS_WINDOWS)
+//#endif // defined(TARGET_OS_WINDOWS)
 
 #include "FrameBufferObject.h"
 #include "ServiceBroker.h"

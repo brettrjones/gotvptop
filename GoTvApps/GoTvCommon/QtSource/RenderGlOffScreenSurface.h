@@ -124,6 +124,12 @@ protected:
 	/// @brief return true if has been initialized from kodi thread
 	bool						isReadyForRender();
 
+    /// @brief get gl function
+    QOpenGLFunctions *          getGlFunctions() { return m_Glf; }
+
+    /// @brief get gl function
+    QOpenGLExtraFunctions *     getGlExtraFunctions() { return m_GlfExtra; }
+
 public slots:
     /// @brief Lazy update routine like QWidget::update().
     void                        update();

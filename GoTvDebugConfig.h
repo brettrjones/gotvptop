@@ -6,12 +6,12 @@
 
 //=== render ===//
 
-//# define DEBUG_OPENGL
-//# define DEBUG_LOG_RENDER_CALLS // log all render calls
+# define DEBUG_OPENGL
+# define DEBUG_LOG_RENDER_CALLS // log all render calls
 //# define DEBUG_ENABLE_BROKEN_GL_CALLS // enable gl calls that cause verify gl errors
-//# define DEBUG_QT_RENDER
-//# define DEBUG_RENDER_THREADS
-//# define DEBUG_SHADER_ENABLE_DISABLE // show when shader is enabled/disable
+# define DEBUG_QT_RENDER
+# define DEBUG_RENDER_THREADS
+# define DEBUG_SHADER_ENABLE_DISABLE // show when shader is enabled/disable
 
 
 //=== network ===//

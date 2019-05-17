@@ -1,6 +1,6 @@
 # Global
 TEMPLATE = lib
-TARGET_NAME = ctypes
+TARGET_NAME = _ctypes
 
 include(config_python_lib.pri)
 
@@ -17,4 +17,4 @@ CONFIG(release, debug|release){
     LIBS +=  $${SHARED_LIB_PREFIX}pythoncore.so
 }
 
-include(config_copy_shared_lib.pri)
+include(config_move_python_lib.pri)

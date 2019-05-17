@@ -6,11 +6,11 @@ unix:!android:{
  QMAKE_CFLAGS += -fPIC
 
  CONFIG(debug, debug|release){
-    DESTDIR = $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
+    DESTDIR = $$PWD/build-pythonlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
  }
 
  CONFIG(release, debug|release){
-    DESTDIR = $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
+    DESTDIR = $$PWD/build-pythonlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
  }
 }
 

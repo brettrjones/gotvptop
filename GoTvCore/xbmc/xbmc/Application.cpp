@@ -446,6 +446,8 @@ bool CApplication::Create( const CAppParamParser &params )
     CopyUserDataIfNeeded( "special://masterprofile/", "RssFeeds.xml" );
     CopyUserDataIfNeeded( "special://masterprofile/", "favourites.xml" );
     CopyUserDataIfNeeded( "special://masterprofile/", "Lircmap.xml" );
+    CopyUserDataIfNeeded( "special://masterprofile/", "guisettings.xml" );
+
 
     //! @todo - move to CPlatformXXX
 #ifdef TARGET_DARWIN_IOS
@@ -684,6 +686,7 @@ bool CApplication::CreateGUI()
         return false;
     }
 
+#ifndef HAVE_QT_GUI // no need for screen saver
     // Set default screen saver mode
     auto screensaverModeSetting = std::static_pointer_cast< CSettingString >( settings->GetSetting( CSettings::SETTING_SCREENSAVER_MODE ) );
     // Can only set this after windowing has been initialized since it depends on it
@@ -697,6 +700,7 @@ bool CApplication::CreateGUI()
         // If OS has no screen saver, use Kodi one by default
         screensaverModeSetting->SetDefault( "screensaver.xbmc.builtin.dim" );
     }
+#endif // HAVE_QT_GUI // no need for screen saver
 
     if( sav_res )
         CDisplaySettings::GetInstance().SetCurrentResolution( RES_DESKTOP, true );
@@ -906,9 +910,11 @@ bool CApplication::Initialize()
 
     CLog::Log( LOGNOTICE, "initialize done" );
 
-  CheckOSScreenSaverInhibitionSetting();
+#ifndef HAVE_QT_GUI // no need for screen saver
+    CheckOSScreenSaverInhibitionSetting();
     // reset our screensaver (starts timers etc.)
     ResetScreenSaver();
+#endif // HAVE_QT_GUI // no need for screen saver
 
     // if the user interfaces has been fully initialized let everyone know
     if( uiInitializationFinished )
@@ -2294,8 +2300,11 @@ void CApplication::OnApplicationMessage( ThreadMessage* pMsg )
         {
             if( items.Size() == 0 )
             {
+#ifndef HAVE_QT_GUI // no need for screen saver
                 CServiceBroker::GetSettingsComponent()->GetSettings()->SetString( CSettings::SETTING_SCREENSAVER_MODE, "screensaver.xbmc.builtin.dim" );
                 ActivateScreenSaver();
+#endif // HAVE_QT_GUI // no need for screen saver
+
             }
             else
                 CServiceBroker::GetGUI()->GetWindowManager().ActivateWindow( WINDOW_SLIDESHOW );
@@ -2590,8 +2599,10 @@ void CApplication::Stop( int exitCode )
         vExitCode[ "exitcode" ] = exitCode;
         CServiceBroker::GetAnnouncementManager()->Announce( ANNOUNCEMENT::System, "xbmc", "OnQuit", vExitCode );
 
+#ifndef HAVE_QT_GUI // no need for screen saver
         // Abort any active screensaver
         WakeUpScreenSaverAndDPMS();
+#endif // HAVE_QT_GUI // no need for screen saver
 
         g_alarmClock.StopThread();
 
@@ -3409,6 +3420,7 @@ void CApplication::ResetSystemIdleTimer()
 
 void CApplication::ResetScreenSaver()
 {
+#ifndef HAVE_QT_GUI // no need for screen saver
     // reset our timers
     m_shutdownTimer.StartZero();
 
@@ -3416,20 +3428,27 @@ void CApplication::ResetScreenSaver()
     // DPMS mode
     if( ( !m_screensaverActive && m_iScreenSaveLock == 0 ) && !m_dpmsIsActive )
         ResetScreenSaverTimer();
+#endif // HAVE_QT_GUI // no need for screen saver
+
 }
 
 void CApplication::ResetScreenSaverTimer()
 {
+#ifndef HAVE_QT_GUI // no need for screen saver
     m_screenSaverTimer.StartZero();
+#endif // HAVE_QT_GUI // no need for screen saver
 }
 
 void CApplication::StopScreenSaverTimer()
 {
+#ifndef HAVE_QT_GUI // no need for screen saver
     m_screenSaverTimer.Stop();
+#endif // HAVE_QT_GUI // no need for screen saver
 }
 
 bool CApplication::ToggleDPMS( bool manual )
 {
+#ifndef HAVE_QT_GUI // no need for screen saver
     if( manual || ( m_dpmsIsManual == manual ) )
     {
         if( m_dpmsIsActive )
@@ -3454,12 +3473,14 @@ bool CApplication::ToggleDPMS( bool manual )
             }
         }
     }
+    #endif // HAVE_QT_GUI // no need for screen saver
     return false;
 }
 
 bool CApplication::WakeUpScreenSaverAndDPMS( bool bPowerOffKeyPressed /* = false */ )
 {
     bool result = false;
+#ifndef HAVE_QT_GUI // no need for screen saver
 
     // First reset DPMS, if active
     if( m_dpmsIsActive )
@@ -3482,12 +3503,15 @@ bool CApplication::WakeUpScreenSaverAndDPMS( bool bPowerOffKeyPressed /* = false
         data[ "shuttingdown" ] = bPowerOffKeyPressed;
         CServiceBroker::GetAnnouncementManager()->Announce( ANNOUNCEMENT::GUI, "xbmc", "OnScreensaverDeactivated", data );
     }
+#endif // HAVE_QT_GUI // no need for screen saver
 
     return result;
 }
 
 bool CApplication::WakeUpScreenSaver( bool bPowerOffKeyPressed /* = false */ )
 {
+#ifndef HAVE_QT_GUI // no need for screen saver
+
     if( m_iScreenSaveLock == 2 )
         return false;
 
@@ -3556,10 +3580,13 @@ bool CApplication::WakeUpScreenSaver( bool bPowerOffKeyPressed /* = false */ )
     }
     else
         return false;
+#endif // HAVE_QT_GUI // no need for screen saver
+
 }
 
 void CApplication::CheckOSScreenSaverInhibitionSetting()
 {
+#ifndef HAVE_QT_GUI // no need for screen saver
     // Kodi screen saver overrides OS one: always inhibit OS screen saver then
   // except when DPMS is active (inhibiting the screen saver then might also
   // disable DPMS again)
@@ -3576,10 +3603,12 @@ void CApplication::CheckOSScreenSaverInhibitionSetting()
     {
         m_globalScreensaverInhibitor.Release();
     }
+  #endif // HAVE_QT_GUI // no need for screen saver
 }
 
 void CApplication::CheckScreenSaverAndDPMS()
 {
+#ifndef HAVE_QT_GUI // no need for screen saver
     bool maybeScreensaver = true;
     if( m_dpmsIsActive )
         maybeScreensaver = false;
@@ -3662,6 +3691,7 @@ void CApplication::CheckScreenSaverAndDPMS()
     {
         ActivateScreenSaver();
     }
+#endif // HAVE_QT_GUI // no need for screen saver
 }
 
 // activate the screensaver.
@@ -3669,6 +3699,7 @@ void CApplication::CheckScreenSaverAndDPMS()
 // the type of screensaver displayed
 void CApplication::ActivateScreenSaver( bool forceType /*= false */ )
 {
+#ifndef HAVE_QT_GUI // no need for screen saver
     const std::shared_ptr<CSettings> settings = CServiceBroker::GetSettingsComponent()->GetSettings();
     if( m_appPlayer.IsPlayingAudio() && settings->GetBool( CSettings::SETTING_SCREENSAVER_USEMUSICVISINSTEAD ) &&
         !settings->GetString( CSettings::SETTING_MUSICPLAYER_VISUALISATION ).empty() )
@@ -3725,6 +3756,7 @@ void CApplication::ActivateScreenSaver( bool forceType /*= false */ )
     }
 
     CServiceBroker::GetGUI()->GetWindowManager().ActivateWindow( WINDOW_SCREENSAVER );
+#endif // HAVE_QT_GUI // no need for screen saver
 }
 
 void CApplication::CheckShutdown()

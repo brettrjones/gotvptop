@@ -145,7 +145,8 @@ bool AppCommon::loadToGPU( CQtTexture * texture )
         result = glWidget->loadToGPU( texture );
         if( !result )
         {
-            glWidget->verifyGlState( "ERROR loadToGPU" );
+            //  this is normal.. once texture is loaded it does not need to load to GPU again
+            //glWidget->verifyGlState( "ERROR loadToGPU" );
         }
         else
         {
@@ -1289,5 +1290,90 @@ void AppCommon::glFuncFinish()
     {
         glWidget->glFuncFinish();
         glWidget->verifyGlState( "glFuncFinish" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncEnable( GLenum cap )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncEnable( cap );
+        glWidget->verifyGlState( "glFuncEnable" );
+    }
+}
+
+//============================================================================
+void AppCommon:: glFuncTexSubImage2D( GLenum target, GLint level,
+                                      GLint xoffset, GLint yoffset,
+                                      GLsizei width, GLsizei height,
+                                      GLenum format, GLenum type,
+                                      const GLvoid *pixels )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget-> glFuncTexSubImage2D( target, level,
+                                        xoffset, yoffset,
+                                        width, height,
+                                        format, type,
+                                        pixels );
+        glWidget->verifyGlState( "glFuncTexSubImage2D" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncBlendFunc( GLenum sfactor, GLenum dfactor )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncBlendFunc( sfactor, dfactor );
+        glWidget->verifyGlState( "glFuncBlendFunc" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncVertexAttribPointer( GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncVertexAttribPointer( index, size, type, normalized, stride, pointer );
+        glWidget->verifyGlState( "glFuncVertexAttribPointer" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncDisableVertexAttribArray( GLuint index )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncDisableVertexAttribArray( index );
+        glWidget->verifyGlState( "glFuncDisableVertexAttribArray" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncEnableVertexAttribArray( GLuint index )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncEnableVertexAttribArray( index );
+        glWidget->verifyGlState( "glFuncEnableVertexAttribArray" );
+    }
+}
+
+//============================================================================
+void AppCommon::glFuncDrawArrays( GLenum mode, GLint first, GLsizei count )
+{
+    RenderGlWidget * glWidget = getRenderConsumer();
+    if( glWidget )
+    {
+        glWidget->glFuncDrawArrays( mode, first, count );
+        glWidget->verifyGlState( "glFuncDrawArrays" );
     }
 }

@@ -19,6 +19,7 @@
  */
 
 #include "config_kodi.h"
+#if defined (TARGET_OS_LINUX)
 #include "ConsoleDeviceKitPowerSyscall.h"
 #include <utils/log.h>
 
@@ -139,3 +140,4 @@ bool CConsoleDeviceKitPowerSyscall::ConsoleKitMethodCall(const char *method)
   return false;
 }
 #endif
+#endif // defined (TARGET_OS_LINUX)

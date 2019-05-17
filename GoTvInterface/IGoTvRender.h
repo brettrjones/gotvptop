@@ -22,9 +22,7 @@
 #include "cores/VideoPlayer/VideoRenderers/VideoShaders/ShaderFormats.h"
 #include "GL/glu.h"
 
-
 //#define  ENABLE_GLES_SHADERS // uncomment to enable all shaders
-
 
 enum ESHADERMETHOD
 {
@@ -218,4 +216,16 @@ public:
     virtual void                glFuncReadPixels( GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels ) = 0;
     virtual void                glFuncPixelStorei( GLenum pname, GLint param ) = 0;
     virtual void                glFuncFinish() = 0;
+
+    virtual void                glFuncEnable( GLenum cap ) = 0;
+    virtual void                glFuncTexSubImage2D( GLenum target, GLint level,
+                                                       GLint xoffset, GLint yoffset,
+                                                       GLsizei width, GLsizei height,
+                                                       GLenum format, GLenum type,
+                                                       const GLvoid *pixels ) = 0;
+    virtual void                glFuncBlendFunc( GLenum sfactor, GLenum dfactor ) = 0;
+    virtual void                glFuncVertexAttribPointer( GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer ) = 0;
+    virtual void                glFuncDisableVertexAttribArray( GLuint index ) = 0;
+    virtual void                glFuncEnableVertexAttribArray( GLuint index ) = 0;
+    virtual void                glFuncDrawArrays( GLenum mode, GLint first, GLsizei count ) = 0;
 };

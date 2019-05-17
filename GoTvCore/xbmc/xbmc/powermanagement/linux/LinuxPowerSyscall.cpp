@@ -17,6 +17,8 @@
  *  <http://www.gnu.org/licenses/>.
  *
  */
+#include "config_kodi.h"
+#if defined (TARGET_OS_LINUX)
 
 #include "LinuxPowerSyscall.h"
 #include "FallbackPowerSyscall.h"
@@ -75,3 +77,5 @@ void CLinuxPowerSyscall::Register()
 {
   IPowerSyscall::RegisterPowerSyscall(CLinuxPowerSyscall::CreateInstance);
 }
+
+#endif // defined (TARGET_OS_LINUX)

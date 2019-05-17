@@ -166,7 +166,14 @@ bool CSettingsComponent::InitDirectoriesLinux( bool bPlatformDirectories )
 #if defined(TARGET_POSIX) && !defined(TARGET_DARWIN)
     std::string appPath;
     std::string appName = CCompileInfo::GetAppName();
+#ifdef BUILD_GOTV_APP
+    // $(HOME)/.local/share/gotvptop
+    appName = "gotvptop";
+    std::string dotLowerAppName = ".local/share/gotvptop";
+#else
+    // $(HOME)/.kodi
     std::string dotLowerAppName = "." + appName;
+#endif // BUILD_GOTV_APP
     StringUtils::ToLower( dotLowerAppName );
     const char* envAppHome = "KODI_HOME";
     const char* envAppBinHome = "KODI_BIN_HOME";
@@ -192,6 +199,7 @@ bool CSettingsComponent::InitDirectoriesLinux( bool bPlatformDirectories )
         userHome.append( "/" + dotLowerAppName );
     }
 
+    mkdir( userHome.c_str(), 0755 );
     std::string strTempPath;
     if( getenv( envAppTemp ) )
         strTempPath = getenv( envAppTemp );
@@ -203,20 +211,25 @@ bool CSettingsComponent::InitDirectoriesLinux( bool bPlatformDirectories )
     if( getenv( "KODI_BINADDON_PATH" ) )
         binaddonAltDir = getenv( "KODI_BINADDON_PATH" );
 
+    // should return something like bin-Linux/assets/kodi
     auto appBinPath = CUtil::GetHomePath( envAppBinHome );
     // overridden by user
     if( getenv( envAppHome ) )
         appPath = getenv( envAppHome );
     else
     {
+        mkdir( appBinPath.c_str(), 0755 );
         // use build time default
-        appPath = INSTALL_PATH;
+        //appPath = INSTALL_PATH;
+        // $(HOME)/.local/share/gotvptop/kodi
+        appPath = userHome + "/kodi";
+        mkdir( appPath.c_str(), 0755 );
         // Check if binaries and arch independent data files are being kept in separate locations.
         if( !XFILE::CDirectory::Exists( URIUtils::AddFileToFolder( appPath, "userdata" ) ) )
         {
             // Attempt to locate arch independent data files.
-            appPath = CUtil::GetHomePath( appBinPath );
-            if( !XFILE::CDirectory::Exists( URIUtils::AddFileToFolder( appPath, "userdata" ) ) )
+            std::string appIndPath = CUtil::GetHomePath( appBinPath );
+            if( !XFILE::CDirectory::Exists( URIUtils::AddFileToFolder( appIndPath, "userdata" ) ) )
             {
                 fprintf( stderr, "Unable to find path to %s data files!\n", appName.c_str() );
                 exit( 1 );
@@ -227,6 +240,8 @@ bool CSettingsComponent::InitDirectoriesLinux( bool bPlatformDirectories )
     // Set some environment variables
     setenv( envAppBinHome, appBinPath.c_str(), 0 );
     setenv( envAppHome, appPath.c_str(), 0 );
+
+    appPath = appBinPath;
 
     if( bPlatformDirectories )
     {

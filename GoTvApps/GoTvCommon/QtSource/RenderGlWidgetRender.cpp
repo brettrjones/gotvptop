@@ -437,3 +437,53 @@ void RenderGlWidget::glFuncFinish()
 {
     getGlFunctions()->glFinish();
 }
+
+//============================================================================
+void RenderGlWidget::glFuncEnable( GLenum cap )
+{
+     getGlFunctions()->glEnable( cap );
+}
+
+//============================================================================
+void RenderGlWidget:: glFuncTexSubImage2D( GLenum target, GLint level,
+                                      GLint xoffset, GLint yoffset,
+                                      GLsizei width, GLsizei height,
+                                      GLenum format, GLenum type,
+                                      const GLvoid *pixels )
+{
+     getGlFunctions()->glTexSubImage2D( target, level,
+                                        xoffset, yoffset,
+                                        width, height,
+                                        format, type,
+                                        pixels );
+}
+
+//============================================================================
+void RenderGlWidget::glFuncBlendFunc( GLenum sfactor, GLenum dfactor )
+{
+     getGlFunctions()->glBlendFunc( sfactor, dfactor );
+}
+
+//============================================================================
+void RenderGlWidget::glFuncVertexAttribPointer( GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer )
+{
+     getGlFunctions()->glVertexAttribPointer( index, size, type, normalized, stride, pointer );
+}
+
+//============================================================================
+void RenderGlWidget::glFuncDisableVertexAttribArray( GLuint index )
+{
+     getGlFunctions()->glDisableVertexAttribArray( index );
+}
+
+//============================================================================
+void RenderGlWidget::glFuncEnableVertexAttribArray( GLuint index )
+{
+     getGlFunctions()->glEnableVertexAttribArray( index );
+}
+
+//============================================================================
+void RenderGlWidget::glFuncDrawArrays( GLenum mode, GLint first, GLsizei count )
+{
+    getGlFunctions()->glDrawArrays( mode, first, count );
+}

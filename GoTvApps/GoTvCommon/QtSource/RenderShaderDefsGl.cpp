@@ -268,7 +268,6 @@ static const char * gl_convolution_4x4_frag =
 #else
 static const char * gl_convolution_4x4_frag =
 #endif
-"precision highp float;\n"
 "uniform sampler2D img;\n"
 "uniform vec2      stepxy;\n"
 "varying vec2      cord;\n"

@@ -34,44 +34,22 @@ PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
 
 LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
 
-#LIBS +=  $${STATIC_LIB_PREFIX}libeay$${STATIC_LIB_SUFFIX}
-#LIBS +=  $${STATIC_LIB_PREFIX}ssleay$${STATIC_LIB_SUFFIX}
-
-
-#LIBS +=  $${STATIC_LIB_PREFIX}iconv$${STATIC_LIB_SUFFIX}
 LIBS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
 LIBS +=  $${STATIC_LIB_PREFIX}curl$${STATIC_LIB_SUFFIX}
 LIBS +=  $${STATIC_LIB_PREFIX}depends$${STATIC_LIB_SUFFIX}
 LIBS +=  $${STATIC_LIB_PREFIX}gnu$${STATIC_LIB_SUFFIX}
-#LIBS +=  $${STATIC_LIB_PREFIX}netlib$${STATIC_LIB_SUFFIX}
-#LIBS +=  $${STATIC_LIB_PREFIX}pktlib$${STATIC_LIB_SUFFIX}
 LIBS +=  $${STATIC_LIB_PREFIX}corelib$${STATIC_LIB_SUFFIX}
 LIBS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
-
-#SUBDIRS += $$PWD/libgnu.pro
-#SUBDIRS += $$PWD/libiconv.pro
-#SUBDIRS += $$PWD/libbz2.pro
-#SUBDIRS += $$PWD/libcurl.pro
-#SUBDIRS += $$PWD/libnetlib.pro
-#SUBDIRS += $$PWD/libpktlib.pro
-
-#LIBS +=  $${SHARED_LIB_PREFIX}intl$${SHARED_LIB_SUFFIX}
-#LIBS +=  $${SHARED_LIB_PREFIX}expat$${SHARED_LIB_SUFFIX}
-#LIBS +=  $${SHARED_LIB_PREFIX}ffi$${SHARED_LIB_SUFFIX}
-#LIBS +=  $${SHARED_LIB_PREFIX}expat$${SHARED_LIB_SUFFIX}
-#LIBS +=  $${SHARED_LIB_PREFIX}util$${SHARED_LIB_SUFFIX}
-#LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_LIB_SUFFIX}
-#LIBS +=  $${SHARED_LIB_PREFIX}crypto$${SHARED_LIB_SUFFIX}
 
 
 #copy to local directory so can easily be linked to
 win:{
 CONFIG(debug, debug|release){
-    copydata.commands = $(COPY_DIR) $$shell_path($$OUT_PWD/*.so) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug)
+    copydata.commands = $(COPY_DIR) $$shell_path($$OUT_PWD/*.dll) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug)
 }
 
 CONFIG(release, debug|release){
-    copydata.commands = $(COPY_DIR) $$shell_path($$OUT_PWD/*.so) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release)
+    copydata.commands = $(COPY_DIR) $$shell_path($$OUT_PWD/*.dll) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release)
  }
  first.depends = $(first) copydata
  export(first.depends)
@@ -105,5 +83,17 @@ DISTFILES += \
     config_copy_shared_lib.pri
 
 
+#copy python core to bin directory
+ CONFIG(debug, debug|release){
+    copydata.commands = $(COPY_DIR)  $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug/* $${DEST_PYTHON_EXE_DIR}
 
+ CONFIG(release, debug|release){
+    copydata.commands = $(COPY_DIR) $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/* $${DEST_PYTHON_EXE_DIR}
+ }
+
+ first.depends = $(first) copydata
+ export(first.depends)
+ export(copydata.commands)
+ QMAKE_EXTRA_TARGETS += first copydata
+}
 

@@ -202,6 +202,19 @@ public:
     virtual void                glFuncReadPixels( GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels ) override;
     virtual void                glFuncPixelStorei( GLenum pname, GLint param ) override;
     virtual void                glFuncFinish() override;
+    
+    virtual void                glFuncEnable( GLenum cap ) override;
+    virtual void                glFuncTexSubImage2D( GLenum target, GLint level,
+                                                       GLint xoffset, GLint yoffset,
+                                                       GLsizei width, GLsizei height,
+                                                       GLenum format, GLenum type,
+                                                       const GLvoid *pixels ) override;
+    virtual void                glFuncBlendFunc( GLenum sfactor, GLenum dfactor ) override;
+    virtual void                glFuncVertexAttribPointer( GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer ) override;
+    virtual void                glFuncDisableVertexAttribArray( GLuint index ) override;
+    virtual void                glFuncEnableVertexAttribArray( GLuint index ) override;
+    virtual void                glFuncDrawArrays( GLenum mode, GLint first, GLsizei count ) override;
+    
 
     void                        onThreadFrameRendered() { emit signalFrameRendered(); }
 

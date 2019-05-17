@@ -179,9 +179,15 @@ extern "C" {
  * 64 bits :-(, don't define BN_LLONG for the DEC Alpha
  */
 # ifdef SIXTY_FOUR_BIT_LONG
-#  define BN_ULLONG       unsigned long long
+#ifdef TARGET_OS_WINDOWS
+// microsoft even 64 bit systems have long as 32 bit.. all other 64 bit systems use 64 bit long on 64 bit systems
 #  define BN_ULONG        unsigned long
 #  define BN_LONG         long
+#else
+#  define BN_ULONG        unsigned long long
+#  define BN_LONG         long long
+#endif // TARGET_OS_WINDOWS
+
 #  define BN_BITS         128
 #  define BN_BYTES        8
 #  define BN_BITS2        64
@@ -209,8 +215,14 @@ extern "C" {
 # ifdef SIXTY_FOUR_BIT
 #  undef BN_LLONG
 #  undef BN_ULLONG
+#ifdef TARGET_OS_WINDOWS
+// microsoft even 64 bit systems have long as 32 bit.. all other 64 bit systems use 64 bit long on 64 bit systems
+#  define BN_ULONG        unsigned long
+#  define BN_LONG         long
+#else
 #  define BN_ULONG        unsigned long long
 #  define BN_LONG         long long
+#endif // TARGET_OS_WINDOWS
 #  define BN_BITS         128
 #  define BN_BYTES        8
 #  define BN_BITS2        64

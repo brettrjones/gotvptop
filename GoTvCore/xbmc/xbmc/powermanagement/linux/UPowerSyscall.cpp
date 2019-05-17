@@ -19,6 +19,8 @@
  */
 
 #include "config_kodi.h"
+#if defined (TARGET_OS_LINUX)
+
 #include "UPowerSyscall.h"
 #include <utils/log.h>
 
@@ -233,3 +235,4 @@ void CUPowerSyscall::UpdateCapabilities()
 }
 
 #endif
+#endif // defined (TARGET_OS_LINUX)
