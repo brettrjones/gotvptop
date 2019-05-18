@@ -20,7 +20,7 @@
 
 #include "strategies/x86_asm/picture-x86-asm.h"
 
-#if defined(KVZ_COMPILE_ASM)
+#if defined(KVZ_COMPILE_ASM) 
 #include <stdlib.h>
 
 #include "kvazaar.h"

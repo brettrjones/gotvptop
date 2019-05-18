@@ -319,15 +319,26 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </YASM>
-    <YASM Include="..\..\src\strategies\x86_asm\picture-x86-asm-sad.asm" />
-    <YASM Include="..\..\src\strategies\x86_asm\picture-x86-asm-satd.asm" />
+    <YASM Include="..\..\src\strategies\x86_asm\picture-x86-asm-sad.asm">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\..\src\strategies\x86_asm\picture-x86-asm-satd.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ExcludedFromBuild>
+    </YASM>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\C_Properties.props">
       <SubType>Designer</SubType>
     </None>
     <None Include="..\Release_Optimizations.props" />
-    <None Include="..\yasm\vsyasm.props" />
+    <None Include="..\yasm\vsyasm.props">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ExcludedFromBuild>
+    </None>
     <None Include="..\yasm\vsyasm.targets">
       <SubType>Designer</SubType>
     </None>

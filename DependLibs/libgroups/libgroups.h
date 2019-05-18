@@ -10,7 +10,7 @@
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
-// brett.jones@engineer.com
+// bjones.engineer@gmail.com
 // http://www.gotvptop.net
 //============================================================================
 #include <libgroups/config_libgroups.h>
