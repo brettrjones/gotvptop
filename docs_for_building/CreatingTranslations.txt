@@ -1,0 +1,59 @@
+languages
+
+static const struct LangId 
+{
+	int m_LangNum;
+	std::string m_LangId;
+	std::string m_EnglishTr;
+}
+
+LangId g_LangId[] =
+{ "af", "Albanian" }
+"ast">Scraper universal pa álbumes</summary>
+    <summary lang="be">Universal Scraper for Albums</summary>
+    <summary lang="bg">Универсален източник за информация за албуми</summary>
+    <summary lang="ca">Arreplegador universal per àlbums</summary>
+    <summary lang="cs">Univerzální zdroj získávání dat pro alba</summary>
+    <summary lang="cy">Crafwr Albymau Cyffredinol</summary>
+    <summary lang="da">Universel Scraper til Albummer</summary>
+    <summary lang="de">Universeller Scraper für Alben</summary>
+    <summary lang="el">Universal Scraper Άλμπουμ</summary>
+    <summary lang="en">Universal Scraper for Albums</summary>
+    <summary lang="en_NZ">Universal Scraper for Albums</summary>
+    <summary lang="en_US">Universal Scraper for Albums</summary>
+    <summary lang="es">Scraper universal para álbumes</summary>
+    <summary lang="es_AR">Scraper Universal para Albumes</summary>
+    <summary lang="es_MX">Scraper Universal para Álbumes</summary>
+    <summary lang="et">Universaalne albumite kraabits</summary>
+    <summary lang="fi">Universaali tiedonhakija albumitiedoille</summary>
+    <summary lang="fr">Scraper universel pour les Albums</summary>
+    <summary lang="fr_CA">Extracteur universel pour les albums</summary>
+    <summary lang="gl">Scraper Universal para Álbums</summary>
+    <summary lang="he">סקרייפר אוניברסלי עבור אלבומים</summary>
+    <summary lang="hr">Univerzalni sakupljač informacija albuma</summary>
+    <summary lang="hu">Univerzális album leolvasó</summary>
+    <summary lang="id">Pengais Universal Album</summary>
+    <summary lang="is">Universal Scraper fyrir Hljómplötur</summary>
+    <summary lang="it">Ricercatore Universale per Albums</summary>
+    <summary lang="ja">汎用アルバムスクレーパー</summary>
+    <summary lang="ko">Universal Scraper for Albums</summary>
+    <summary lang="lt">Universalus albumų skreperis</summary>
+    <summary lang="lv">Albumu universālais skrāpis</summary>
+    <summary lang="mk">Универзален превземач за Албуми</summary>
+    <summary lang="ms">Pengikis Universel untuk Album</summary>
+    <summary lang="nl">Universele Scraper voor Albums</summary>
+    <summary lang="no">Universalskraper for album</summary>
+    <summary lang="pl">Uniwersalny ekstraktor informacji o albumach muzycznych</summary>
+    <summary lang="pt">Colector universal para álbuns</summary>
+    <summary lang="pt_BR">Scraper Universal para Álbuns</summary>
+    <summary lang="ro"> Scraper universal pentru albume</summary>
+    <summary lang="ru">Универсальный скрапер для альбомов</summary>
+    <summary lang="sk">Univerzálny zdroj získavania dát pre albumy</summary>
+    <summary lang="sl">Univerzalni ponudnik informacij o albumih</summary>
+    <summary lang="sv">Universiell albumskrapa</summary>
+    <summary lang="ta_IN">ஆல்பங்களின் ஒட்டு மொத்தமான சுரண்டி</summary>
+    <summary lang="tr">Albümler için Evrensel Scraper</summary>
+    <summary lang="uk">Універсальний здирач для альбомів</summary>
+    <summary lang="vi">Trình lấy dữ liệu album từ nhiều nguồn</summary>
+    <summary lang="zh">通用音乐专辑信息刮削器</summary>
+    <summary lang="zh_TW">通用音樂專輯訊息搜刮器</summary>

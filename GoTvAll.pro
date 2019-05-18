@@ -6,6 +6,8 @@ CONFIG += no_docs_target
 # build the project sequentially as listed in SUBDIRS !
 CONFIG += ordered
 
+SUBDIRS += $$PWD/GoTvPtoPConfigHeaders.pro
+
 SUBDIRS += $$PWD/GoTvPythonLib.pro
 
 SUBDIRS += $$PWD/GoTvDependLibs.pro

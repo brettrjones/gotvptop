@@ -3581,7 +3581,7 @@ bool CApplication::WakeUpScreenSaver( bool bPowerOffKeyPressed /* = false */ )
     else
         return false;
 #endif // HAVE_QT_GUI // no need for screen saver
-
+    return false;
 }
 
 void CApplication::CheckOSScreenSaverInhibitionSetting()

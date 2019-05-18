@@ -1,5 +1,5 @@
 
-#rename and move python extention lib to bin directory
+#rename and move python extention lib to bin/Python directory
 PYTHON_SRC_NAME = ""
 PYTHON_SRC_DIR = ""
 PYTHON_DEST_NAME = ""
@@ -25,7 +25,6 @@ unix {
         PYTHON_DEST_NAME = $${TARGET_NAME}.pyd
      }
 
-    #copydata.commands = cp $${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME} $${DEST_PYTHON_DLL_DIR}/$${PYTHON_DEST_NAME}
     PYTHON_LIB_COPY_CMD = cp $${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME} $${DEST_PYTHON_DLL_DIR}/$${PYTHON_DEST_NAME}
 }
 
@@ -44,18 +43,7 @@ win32 {
     PYTHON_LIB_COPY_CMD = cp $${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME} $${DEST_PYTHON_DLL_DIR}/$${PYTHON_DEST_NAME}
 }
 
-#target.path = DEST_PYTHON_DLL_DIR
-
-#extra_install.path =$$target.path
-#extra_install.files = PYTHON_DEST_NAME
-message("**python dll copy src->$${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME}")
-message("**python dll copy dest->$${DEST_PYTHON_DLL_DIR}/$${PYTHON_DEST_NAME}")
-
-#copy to bin directory so works with app
-
-# first.depends = $(first) copydata
-# export(first.depends)
-# export(copydata.commands)
-# QMAKE_EXTRA_TARGETS += first copydata
+#message("**python dll copy src->$${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME}")
+#message("**python dll copy dest->$${DEST_PYTHON_DLL_DIR}/$${PYTHON_DEST_NAME}")
 
 QMAKE_POST_LINK += $$quote($${PYTHON_LIB_COPY_CMD})

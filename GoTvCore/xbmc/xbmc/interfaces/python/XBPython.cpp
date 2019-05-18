@@ -19,7 +19,6 @@
 #include "utils/log.h"
 #include "utils/Variant.h"
 #include "GoTvCoreUtil.h"
-#ifdef TARGET_WINDOWS
 #include "platform/Environment.h"
 #include "utils/SystemInfo.h"
 
@@ -29,7 +28,6 @@ extern "C"
     char* dll_getenv( const char* szKey );
 }
 
-#endif
 #include "settings/AdvancedSettings.h"
 #include "settings/SettingsComponent.h"
 
@@ -572,7 +570,6 @@ bool XBPython::OnScriptInitialized(ILanguageInvoker *invoker)
   if (!m_bInitialized)
   {
     // first we check if all necessary files are installed
-#ifndef TARGET_POSIX
     if (!FileExist("special://xbmc/system/python/DLLs/_socket.pyd") ||
       !FileExist("special://xbmc/system/python/DLLs/_ssl.pyd") ||
       !FileExist("special://xbmc/system/python/DLLs/bz2.pyd") ||
@@ -584,7 +581,6 @@ bool XBPython::OnScriptInitialized(ILanguageInvoker *invoker)
       Finalize();
       return false;
     }
-#endif
 
     // Darwin packs .pyo files, we need PYTHONOPTIMIZE on in order to load them.
     // linux built with unified builds only packages the pyo files so need it
@@ -594,6 +590,7 @@ bool XBPython::OnScriptInitialized(ILanguageInvoker *invoker)
     // Info about interesting python envvars available
     // at http://docs.python.org/using/cmdline.html#environment-variables
 
+#if 0 // BRJ gotv uses in project built in python
 #if !defined(TARGET_WINDOWS) && !defined(TARGET_ANDROID)
     /* PYTHONOPTIMIZE is set off intentionally when using external Python.
     Reason for this is because we cannot be sure what version of Python
@@ -609,8 +606,10 @@ bool XBPython::OnScriptInitialized(ILanguageInvoker *invoker)
       CLog::Log(LOGDEBUG, "PYTHONHOME -> %s", CSpecialProtocol::TranslatePath("special://frameworks").c_str());
       CLog::Log(LOGDEBUG, "PYTHONPATH -> %s", CSpecialProtocol::TranslatePath("special://frameworks").c_str());
     }
-#elif defined(TARGET_WINDOWS)
-    // because the third party build of python is compiled with vs2008 we need
+#endif //
+#endif // 0
+
+
     // a hack to set the PYTHONPATH
     std::string buf;
     if( !dll_getenv( "PYTHONPATH" ) )
@@ -619,27 +618,31 @@ bool XBPython::OnScriptInitialized(ILanguageInvoker *invoker)
         CEnvironment::putenv( buf ); 
         CLog::Log( LOGDEBUG, "BRJ OnScriptInitialized python path (%s)\n ", buf );
 
-       buf = "PYTHONOPTIMIZE=1";
+        buf = "PYTHONOPTIMIZE=1";
         CEnvironment::putenv( buf );
 
         buf = "PYTHONHOME=" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python" );
         CLog::Log( LOGDEBUG, "BRJ OnScriptInitialized python home (%s)\n ", buf );
         CEnvironment::putenv( buf );
     }
-    else
-    {
-        CSpecialProtocol::SetPath( "special://xbmc/system/python", "C:\\Python27" );
-        CSpecialProtocol::SetPath( "special://xbmc/system/python/DLLs", "C:\\Python27\\DLLs" );
-        CSpecialProtocol::SetPath( "special://xbmc/system/python/Lib", "C:\\Python27\\Lib" );
-    }
-
+#if defined( TARGET_OS_LINUX)
+    buf = "OS=linux";
+    CEnvironment::putenv(buf);
+#elif defined( TARGET_OS_WINDOWS)
     buf = "OS=win32";
     CEnvironment::putenv(buf);
+#elif defined( TARGET_OS_ANDROID)
+    buf = "OS=android";
+    CEnvironment::putenv(buf);
+#else
+    // do nothing
+#endif
+
 #ifdef _DEBUG
     if (CSysInfo::GetWindowsDeviceFamily() == CSysInfo::Xbox)
       CEnvironment::putenv("PYTHONCASEOK=1");
 #endif
-#endif
+//#endif
 
     if (PyEval_ThreadsInitialized())
       PyEval_AcquireLock();

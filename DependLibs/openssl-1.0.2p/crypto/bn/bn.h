@@ -178,7 +178,7 @@ extern "C" {
  * assuming long is 64bit - this is the DEC Alpha unsigned long long is only
  * 64 bits :-(, don't define BN_LLONG for the DEC Alpha
  */
-# ifdef SIXTY_FOUR_BIT_LONG
+# if defined(SIXTY_FOUR_BIT_LONG) && !defined(SIXTY_FOUR_BIT)
 #ifdef TARGET_OS_WINDOWS
 // microsoft even 64 bit systems have long as 32 bit.. all other 64 bit systems use 64 bit long on 64 bit systems
 #  define BN_ULONG        unsigned long

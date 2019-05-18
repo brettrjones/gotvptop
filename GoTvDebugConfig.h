@@ -6,12 +6,12 @@
 
 //=== render ===//
 
-# define DEBUG_OPENGL
-# define DEBUG_LOG_RENDER_CALLS // log all render calls
+//# define DEBUG_OPENGL
+//# define DEBUG_LOG_RENDER_CALLS // log all render calls
 //# define DEBUG_ENABLE_BROKEN_GL_CALLS // enable gl calls that cause verify gl errors
-# define DEBUG_QT_RENDER
-# define DEBUG_RENDER_THREADS
-# define DEBUG_SHADER_ENABLE_DISABLE // show when shader is enabled/disable
+//# define DEBUG_QT_RENDER
+//# define DEBUG_RENDER_THREADS
+//# define DEBUG_SHADER_ENABLE_DISABLE // show when shader is enabled/disable
 
 
 //=== network ===//
@@ -28,8 +28,8 @@
 //# define DEBUG_KODI_AUDIO
 
 //=== kodi render ===//
-# define DEBUG_KODI_RENDER
-# define DEBUG_KODI_SHADERS
+//# define DEBUG_KODI_RENDER
+//# define DEBUG_KODI_SHADERS
 
 //=== kodi other ===//
 # define DEBUG_KODI_ENABLE_DEBUG_LOGGING    // log anything debug level and higher
@@ -40,7 +40,7 @@
 
 //# define DEBUG_KODI_CURL
 //# define DEBUG_KODI_UPDATER // NOTE: forces kodi to update every run
-# define DEBUG_KODI_PYTHON
+//# define DEBUG_KODI_PYTHON
 
 //=== threads ===//
 //# define DEBUG_THREADS

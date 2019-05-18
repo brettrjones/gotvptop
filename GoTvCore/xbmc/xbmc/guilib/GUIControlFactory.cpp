@@ -100,17 +100,22 @@ static const ControlMapping controls[] =
 
 CGUIControl::GUICONTROLTYPES CGUIControlFactory::TranslateControlType( const std::string &type )
 {
-  for (const ControlMapping& control : controls)
-    if (StringUtils::EqualsNoCase(type, control.name))
-      return control.type;
+    for (const ControlMapping& control : controls)
+    {
+        if (StringUtils::EqualsNoCase(type, control.name))
+            return control.type;
+    }
+
     return CGUIControl::GUICONTROL_UNKNOWN;
 }
 
 std::string CGUIControlFactory::TranslateControlType( CGUIControl::GUICONTROLTYPES type )
 {
   for (const ControlMapping& control : controls)
+  {
     if (type == control.type)
       return control.name;
+  }
     return "";
 }
 

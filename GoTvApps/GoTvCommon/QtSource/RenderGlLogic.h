@@ -25,7 +25,6 @@
 
 class RenderGlWidget;
 class RenderKodiThread;
-class RunKodiThread;
 class RenderGlOffScreenSurface;
 
 

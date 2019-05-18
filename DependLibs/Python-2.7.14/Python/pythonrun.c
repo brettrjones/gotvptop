@@ -725,6 +725,7 @@ initsite(void)
     PyObject *m;
     m = PyImport_ImportModule("site");
     if (m == NULL) {
+        printf( "Python FATAL ERROR failed to import site");
         PyErr_Print();
         Py_Finalize();
         exit(1);

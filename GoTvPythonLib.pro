@@ -8,16 +8,11 @@ CONFIG += ordered
 
 include(config_os_detect.pri)
 
-#SUBDIRS += $$PWD/python_libeay.pro #static lib build in GoTvDependLibs.pro
-#SUBDIRS += $$PWD/python_ssleay.pro #static lib build in GoTvDependLibs.pro
 
 SUBDIRS += $$PWD/libdepends.pro
 SUBDIRS += $$PWD/libgnu.pro
-#SUBDIRS += $$PWD/libiconv.pro
 SUBDIRS += $$PWD/libbz2.pro
 SUBDIRS += $$PWD/libcurl.pro
-#SUBDIRS += $$PWD/libnetlib.pro
-#SUBDIRS += $$PWD/libpktlib.pro
 SUBDIRS += $$PWD/libcorelib.pro
 SUBDIRS += $$PWD/libcrossguid.pro
 
@@ -50,7 +45,7 @@ SUBDIRS += $$PWD/python_unicodedata.pro
 
 
 # sigh.. cannot get qt to exclude these when not builing windows so you will have to uncomment them
-#win {
+#win32 {
 #    SUBDIRS += $$PWD/python_multiprocessing.pro #FIXME does not build
 #    SUBDIRS += $$PWD/python_msi.pro
 #    SUBDIRS += $$PWD/python_w9xpopen.pro

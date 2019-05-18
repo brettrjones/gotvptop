@@ -232,7 +232,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlLogic.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlShaders.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderLogoShaders.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/RunKodiThread.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogoRenderer.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderShaderQt.h
 
