@@ -73,7 +73,7 @@ static int thread_debug = 0;
 
 static int initialized;
 
-#ifdef TARGET_OS_LINUX
+#if defined(TARGET_OS_LINUX) || defined(TARGET_OS_ANDROID)
 #ifdef _HAVE_BSDI
 static
 void _noop(void)

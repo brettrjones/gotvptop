@@ -15,12 +15,21 @@ from command prompt
 4.) right click android_winusb.inf and choose install
 5.) reboot computer
 
+
+=== windows enviroment variables ===
+ANDROID_NDK_ROOT F:\android\ndk-windows-x86-64\android-ndk-r18b
+JAVA_HOME F:\android\jdk1.8.0_131
+JRE_HOME F:\android\jre1.8.0_131
+
+=== qt settings ===
+
 1.) In Qt Creator Tools > Options > Devices > Android 
   a.) JDK location - F:\android\jdk1.8.0_131
   b.) Android SDK Location - F:\android\android-sdk
-  c.) Android NDK Location - F:\android\ndk-windows-x86_64\android-ndk-r19
+  c.) Android NDK Location - F:\android\ndk-windows-x86_64\android-ndk-r18b
   d.) In SDK Manager install all packages for Android 5.0
   if get error about .android\repositories.cfg could not be loaded then create a empty file for it using text editor
+  
   
  ==== Android Manifest Permissions required ====
  

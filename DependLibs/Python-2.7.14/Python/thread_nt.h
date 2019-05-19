@@ -93,8 +93,7 @@ long PyThread_get_thread_ident(void);
 /*
  * Initialization of the C package, should not be needed.
  */
-static void
-PyThread__init_thread(void)
+static void PyThread__init_thread(void)
 {
 }
 #else

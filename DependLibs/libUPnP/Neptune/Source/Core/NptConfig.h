@@ -358,11 +358,20 @@ typedef long NPT_PointerLong;
 #endif
 
 #if !defined(NPT_fseek)
-#define NPT_fseek fseeko
+# ifdef TARGET_OS_ANDROID
+#  define NPT_fseek fseek
+# else
+#  define NPT_fseek fseeko
+# endif
 #endif
 
 #if !defined(NPT_ftell)
 #define NPT_ftell ftello
+# ifdef TARGET_OS_ANDROID
+#  define NPT_ftell ftell
+# else
+#  define NPT_ftell ftello
+# endif
 #endif
 
 #if !defined(NPT_stat)

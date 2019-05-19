@@ -122,7 +122,7 @@ typedef struct {
 /*
  * Initialization.
  */
-void PyThread__init_thread(void);
+void PyThread__init_thread();
 
 /*
  * Thread support.

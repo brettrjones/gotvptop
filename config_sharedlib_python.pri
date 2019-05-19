@@ -14,6 +14,19 @@ unix:!android:{
  }
 }
 
+android:{
+ QMAKE_CXXFLAGS += -fPIC
+ QMAKE_CFLAGS += -fPIC
+
+ CONFIG(debug, debug|release){
+    DESTDIR = $$PWD/build-pythonlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
+ }
+
+ CONFIG(release, debug|release){
+    DESTDIR = $$PWD/build-pythonlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
+ }
+}
+
 #do not append os name to name so can have standard python name
 TARGET=$${TARGET_NAME}$${SHARED_LIB_APPEND}
 

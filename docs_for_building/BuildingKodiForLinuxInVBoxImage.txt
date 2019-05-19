@@ -3,6 +3,8 @@
 
 NOTE: building kodi is NOT required. instructions are here as a option to build kodi for comparison
 
+//=== New instructions for Kodi Leia ===//
+
 follow the instructions at https://github.com/xbmc/xbmc/blob/master/docs/README.md
 
 except use git clone -b Leia git://github.com/xbmc/xbmc.git 
@@ -10,7 +12,8 @@ and
 if get a confure error about crosslib then do
 $ sudo make -C tools/depends/target/crossguid/ PREFIX=/usr/local 
 
-//=== new instructions for Kodi Leia ===//
+//=== Old instructions for Kodi Leia ===//
+// recommend using the above instructions for building Kodi
 mkdir $HOME/project_sources/LinuxKodiLeia18.1
 cd $HOME/project_sources/LinuxKodiLeia18.1
 
