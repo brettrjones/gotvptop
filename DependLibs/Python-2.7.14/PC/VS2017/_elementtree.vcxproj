@@ -155,7 +155,7 @@
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Modules\expat;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Modules\expat;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS;USE_PYEXPAT_CAPI;XML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
@@ -183,7 +183,7 @@
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Modules\expat;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Modules\expat;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS;USE_PYEXPAT_CAPI;XML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</AssemblerListingLocation>

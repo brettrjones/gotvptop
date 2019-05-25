@@ -159,7 +159,7 @@
       <BaseAddress>0x1e1D0000</BaseAddress>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Include; ..\..\PC;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Include; ..\..\PC;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;_WIN64;_M_X64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
@@ -189,7 +189,7 @@
       <Command>copy /Y "$(TargetDir)$(TargetName).pyo" "$(ProjectDir)\..\..\..\..\bin-Windows\assets\kodi\system\Python\DLLs\$(TargetName).pyd"</Command>
     </PostBuildEvent>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Include; ..\..\PC;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Include; ..\..\PC;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</ObjectFileName>

@@ -43,6 +43,9 @@
 #if defined(HAVE_UNISTD_H) && !defined(TARGET_OS_LINUX)
 #include <unistd.h>
 #endif
+#ifdef HAVE_CRYPT_H
+#include <crypt.h>
+#endif
 
 /* For size_t? */
 #ifdef HAVE_STDDEF_H

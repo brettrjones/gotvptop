@@ -1735,6 +1735,7 @@ typedef struct _ffi_type
 */
 
 /* align and size are bogus for void, but they must not be zero */
+
 ffi_type ffi_type_void = { 1, 1, FFI_TYPE_VOID };
 
 ffi_type ffi_type_uint8 = { 1, 1, FFI_TYPE_UINT8 };
@@ -1755,10 +1756,11 @@ ffi_type ffi_type_double = { sizeof(double), DOUBLE_ALIGN, FFI_TYPE_DOUBLE };
 #ifdef ffi_type_longdouble
 #undef ffi_type_longdouble
 #endif
-  /* This is already defined on OSX */
+  // This is already defined on OSX
+#ifndef TARGET_OS_APPLE
 ffi_type ffi_type_longdouble = { sizeof(long double), LONGDOUBLE_ALIGN,
                                  FFI_TYPE_LONGDOUBLE };
 
 ffi_type ffi_type_pointer = { sizeof(void *), VOID_P_ALIGN, FFI_TYPE_POINTER };
-
+#endif // TARGET_OS_APPLE
 /*---------------- EOF ----------------*/

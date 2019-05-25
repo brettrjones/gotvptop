@@ -9,7 +9,7 @@ HEADERS += 	$$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/include/ffi.h 
     $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/fficonfig.h
 
 contains(TARGET_ARCH_NAME,arm) {
- message(Python ctypes arm)
+# message(Python ctypes arm)
 
 INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/src/arm
 
@@ -18,7 +18,7 @@ HEADERS += 	$$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/src/arm/ffitar
 
 
 contains(TARGET_ARCH_NAME,x86) {
- message(Python ctypes x86)
+# message(Python ctypes x86)
 
 INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/src/x86
 
@@ -26,7 +26,7 @@ HEADERS += 	$$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/src/x86/ffitar
 }
 
 contains(TARGET_ARCH_NAME,x86_64) {
- message(Python ctypes x86_64)
+# message(Python ctypes x86_64)
 
 INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/src/x86
 
@@ -35,7 +35,7 @@ HEADERS += 	$$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/src/x86/ffitar
 
 
 contains( TARGET_ARCH_NAME, armeabi-v7a ) {
- message(Python ctypes arm)
+# message(Python ctypes arm)
 
 INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/src/arm
 
@@ -71,6 +71,7 @@ HEADERS += 	$$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/ctypes.h \
     $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/ctypes_dlfcn.h \
     $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/include/ffi.h \
     $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/include/ffi_common.h \
+    $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/src/arm/ffitarget.h \
     $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/fficonfig.h
 
 
@@ -79,6 +80,9 @@ SOURCES += 	$$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/_ctypes.c \
     $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/callproc.c \
     $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/cfield.c \
     $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/malloc_closure.c \
+    $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/src/arm/ffi_arm.c \
+    $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/src/arm/sysv.S \
+    $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/libffi/src/arm/trampoline.S \
     $$PWD/DependLibs/Python-2.7.14/Modules/_ctypes/stgdict.c
 }
 

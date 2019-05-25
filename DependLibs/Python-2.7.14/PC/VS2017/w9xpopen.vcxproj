@@ -169,7 +169,7 @@
       <Optimization>Disabled</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Include; ..\..\PC;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Include; ..\..\PC;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
@@ -205,7 +205,7 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Include; ..\..\PC;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Include; ..\..\PC;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</ObjectFileName>

@@ -55,7 +55,6 @@
 
 #ifdef TARGET_OS_WINDOWS
 # include "winconfig.h"
-//BRJ #elif defined(HAVE_EXPAT_CONFIG_H)
 #else
 # include "Modules/expat/expat_config.h"
 #endif // TARGET_OS_WINDOWS

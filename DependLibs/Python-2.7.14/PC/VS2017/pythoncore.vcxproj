@@ -174,7 +174,7 @@
     </Midl>
     <ClCompile>
       <AdditionalOptions>/Zm200  %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Python;..\..\Modules\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Python;..\..\Modules\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;TARGET_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS;TARGET_OS_WINDOWS;_USRDLL;Py_BUILD_CORE;Py_ENABLE_SHARED;WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
@@ -239,7 +239,7 @@
       <Optimization>Disabled</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <IntrinsicFunctions>false</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Python;..\..\Modules\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Python;..\..\Modules\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;TARGET_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS;TARGET_OS_WINDOWS;_USRDLL;Py_BUILD_CORE;Py_ENABLE_SHARED;WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>

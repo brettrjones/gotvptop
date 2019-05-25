@@ -1,5 +1,5 @@
-#ifndef Py_PYCONFIG_H
-#define Py_PYCONFIG_H
+#ifndef Py_PYCONFIG_INCLUDED_H
+#define Py_PYCONFIG_INCLUDED_H
 
 #if defined(TARGET_OS_ANDROID)
 # include "../pyconfig_android.h"
@@ -10,4 +10,4 @@
 #else
 echo target os not defined
 #endif // defined(TARGET_OS_ANDROID)
-#endif // Py_PYCONFIG_H
+#endif // Py_PYCONFIG_INCLUDED_H

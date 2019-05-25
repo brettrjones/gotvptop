@@ -1,5 +1,28 @@
 
+COMPILE_HOST_OS = UNKNOWN_HOST
+COPY_KEYWORD = cp
+MOVE_KEYWORD = mv
+contains(QMAKE_HOST.os,Windows):
+{
+    COMPILE_HOST_OS = Windows
+    COPY_KEYWORD = copy
+    MOVE_KEYWORD = move
+}
+
+contains(QMAKE_HOST.os,Android):{ COMPILE_HOST_OS = Android }
+contains(QMAKE_HOST.os,Linux):{ COMPILE_HOST_OS = Linux }
+#message(copy keyword is $${COPY_KEYWORD})
+#message(host os is $${COMPILE_HOST_OS})
+
 android:{
+#    contains(QMAKE_HOST.os,Windows):
+#    {
+#        #a fix for nasty bug QTBUG-69255 still not fixed in 5.12.2
+#        PRO_DIR_WIN = $${_PRO_FILE_PWD_}
+#        PRO_DIR_WIN ~= s,/,\\,g # replace / with \
+#        QMAKE_MOVE = $${PRO_DIR_WIN}\qt_fix_move.bat
+#    }
+
     DEFINES += TARGET_OS_ANDROID
     DEFINES += TARGET_POSIX
     ANDROID_ARM64 = 0
@@ -7,11 +30,11 @@ android:{
     ANDROID_x86 = 0
     ANDROID_x86_64 = 0
 
-    DEST_EXE_DIR = $$PWD/android/
-    DEST_SHARED_LIBS_DIR = $$PWD/bin-Linux
-    DEST_PYTHON_EXE_DIR = $$PWD/bin-Linux
-    DEST_PYTHON_DLL_DIR = $$PWD/bin-Linux/assets/kodi/system/Python/DLLs
-    DEST_PYTHON_LIB_DIR = $$PWD/bin-Linux/assets/kodi/system/Python/Lib
+    DEST_EXE_DIR = $$PWD/android/lib
+    DEST_SHARED_LIBS_DIR = $$PWD/android/lib
+    DEST_PYTHON_EXE_DIR = $$PWD/android/lib
+    DEST_PYTHON_DLL_DIR = $$PWD/android/assets/python2.7/lib/python2.7
+    DEST_PYTHON_LIB_DIR = $$PWD/android/assets/python2.7/lib/python2.7
 
     contains(ANDROID_TARGET_ARCH,armeabi-v8a) {
         DEFINES += TARGET_CPU_64BIT
@@ -21,12 +44,6 @@ android:{
         TARGET_CPU_BITS=64
         TARGET_ENDIAN_LITTLE=1
         TARGET_ENDIAN_BIG=0
-
-        DEST_SHARED_LIBS_DIR = $$PWD/android/lib/armeabi-v8a
-        DEST_EXE_DIR = $$PWD/android/lib/armeabi-v8a
-        DEST_PYTHON_EXE_DIR = $$PWD/android/lib/armeabi-v8a
-        DEST_PYTHON_DLL_DIR = $$PWD/android/assets/python2.7/lib/python2.7
-        DEST_PYTHON_LIB_DIR = $$PWD/android/assets/python2.7/lib/python2.7
     }
 
     contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
@@ -37,12 +54,6 @@ android:{
         TARGET_CPU_BITS=32
         TARGET_ENDIAN_LITTLE=1
         TARGET_ENDIAN_BIG=0
-
-        DEST_SHARED_LIBS_DIR = $$PWD/android/lib/armeabi-v7a
-        DEST_EXE_DIR = $$PWD/android/lib/armeabi-v7a
-        DEST_PYTHON_EXE_DIR = $$PWD/android/lib/armeabi-v7a
-        DEST_PYTHON_DLL_DIR = $$PWD/android/assets/python2.7/lib/python2.7
-        DEST_PYTHON_LIB_DIR = $$PWD/android/assets/python2.7/lib/python2.7
     }
 
     contains(ANDROID_TARGET_ARCH,x86) {
@@ -53,14 +64,8 @@ android:{
         TARGET_CPU_BITS=32
         TARGET_ENDIAN_LITTLE=1
         TARGET_ENDIAN_BIG=0
-
-        DEST_SHARED_LIBS_DIR = $$PWD/android/lib/x86
-        DEST_EXE_DIR = $$PWD/android/lib/x86
-        DEST_PYTHON_EXE_DIR = $$PWD/android/lib/x86
-        DEST_PYTHON_DLL_DIR = $$PWD/android/assets/python2.7/lib/python2.7
-        DEST_PYTHON_LIB_DIR = $$PWD/android/assets/python2.7/lib/python2.7
-
     }
+
 
     contains(ANDROID_TARGET_ARCH,x86_64) {
         DEFINES += TARGET_CPU_64BIT
@@ -70,13 +75,21 @@ android:{
         TARGET_CPU_BITS=64
         TARGET_ENDIAN_LITTLE=1
         TARGET_ENDIAN_BIG=0
-
-        DEST_SHARED_LIBS_DIR = $$PWD/android/lib/x86_64
-        DEST_EXE_DIR = $$PWD/android/lib/x86_64
-        DEST_PYTHON_EXE_DIR = $$PWD/android/lib/x86_64
-        DEST_PYTHON_DLL_DIR = $$PWD/android/assets/python2.7/lib/python2.7
-        DEST_PYTHON_LIB_DIR = $$PWD/android/assets/python2.7/lib/python2.7
     }
+
+    DEST_SHARED_LIBS_DIR = $$PWD/android/lib/$${TARGET_ARCH_NAME}
+    DEST_EXE_DIR = $$PWD/android/lib/$${TARGET_ARCH_NAME}
+    DEST_PYTHON_EXE_DIR = $$PWD/android/lib/$${TARGET_ARCH_NAME}
+    DEST_PYTHON_DLL_DIR = $$PWD/android/assets/python2.7/lib/python2.7
+    DEST_PYTHON_LIB_DIR = $$PWD/android/assets/python2.7/lib/python2.7
+
+#    contains(QMAKE_HOST.os,Windows):{
+#        DEST_EXE_DIR ~= s,/,\\,g # replace / with \
+#        DEST_SHARED_LIBS_DIR ~= s,/,\\,g # replace / with \
+#        DEST_PYTHON_EXE_DIR ~= s,/,\\,g # replace / with \
+#        DEST_PYTHON_DLL_DIR ~= s,/,\\,g # replace / with \
+#        DEST_PYTHON_LIB_DIR ~= s,/,\\,g # replace / with \
+#    }
 }
 
 win32:{
@@ -135,6 +148,8 @@ CONFIG(debug, debug|release){
 CONFIG(release, debug|release){
     BUILD_TYPE=Release
 }
+
+#message(host os is $${HOST_OS} target os is $${TARGET_OS_NAME})
 
 #contains( TARGET_CPU_BITS, 64 ) {
 #    message(Building $${TARGET_OS_NAME} $${BUILD_TYPE} 64 bit $${TARGET_ARCH_NAME} )

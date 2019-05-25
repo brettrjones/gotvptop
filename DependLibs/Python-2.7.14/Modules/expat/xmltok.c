@@ -43,13 +43,11 @@
 #endif
 
 
-#ifdef _WIN32
-#include "winconfig.h"
+#ifdef TARGET_OS_WINDOWS
+# include "winconfig.h"
 #else
-#ifdef HAVE_EXPAT_CONFIG_H
-#include <expat_config.h>
-#endif
-#endif /* ndef _WIN32 */
+# include "Modules/expat/expat_config.h"
+#endif // TARGET_OS_WINDOWS
 
 #include "expat_external.h"
 #include "internal.h"

@@ -12,13 +12,13 @@ DEFINES += Py_ENABLE_SHARED
 DEFINES += _USRDLL
 
 CONFIG(debug, debug|release){
-    DEPENDPATH += $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
-    DEPENDPATH += $$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
+    DEPENDPATH += $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+    DEPENDPATH += $$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
 }
 
 CONFIG(release, debug|release){
-    DEPENDPATH += $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
-    DEPENDPATH += $$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
+    DEPENDPATH += $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+    DEPENDPATH += $$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
 }
 
 SHARED_LIB_APPEND = .dll
@@ -44,11 +44,11 @@ CONFIG(release, debug|release) {
 }
 
 CONFIG(debug, debug|release){
-    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/debug
+    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${BUILD_TYPE}
 }
 
 CONFIG(release, debug|release){
-    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/release
+    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${BUILD_TYPE}
 }
 
 

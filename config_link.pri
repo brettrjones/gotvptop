@@ -7,20 +7,20 @@
 CONFIG(debug, debug|release){
 # message(Link in DEBUG mode.)
  android:{
-  STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug/lib
+  STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
   STATIC_LIB_SUFFIX=AndroidD.a
 
-  SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug/lib
+  SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
   SHARED_LIB_SUFFIX=Android_d.so
   SHARED_PYTHON_LIB_SUFFIX=_d.so
   PYTHON_EXTENTION_LIB_SUFFIX=_d.pyd
  }
 
  unix:!android:{
-  STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug/lib
+  STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
   STATIC_LIB_SUFFIX=LinuxD.a
 
-  SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug/lib
+  SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
   SHARED_LIB_SUFFIX=Linux_d.so
   SHARED_PYTHON_LIB_SUFFIX=_d.so
   PYTHON_EXTENTION_LIB_SUFFIX=_d.pyd
@@ -30,19 +30,19 @@ CONFIG(debug, debug|release){
 CONFIG(release, debug|release){
 # message(Link in RELEASE mode.)
     android:{
-        STATIC_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/lib
+        STATIC_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
         STATIC_LIB_SUFFIX=Android.a
-        SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/lib
+        SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
         SHARED_LIB_SUFFIX=Android.so
         SHARED_PYTHON_LIB_SUFFIX=.so
         PYTHON_EXTENTION_LIB_SUFFIX=.pyd
     }
 
     unix:!android:{
-        STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/lib
+        STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
         STATIC_LIB_SUFFIX=Linux.a
 
-        SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/lib
+        SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
         SHARED_LIB_SUFFIX=Linux.so
         SHARED_PYTHON_LIB_SUFFIX=.so
         PYTHON_EXTENTION_LIB_SUFFIX=.pyd

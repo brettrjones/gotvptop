@@ -32,12 +32,10 @@
 
 #include <stddef.h>
 
-#ifdef _WIN32
-#include "winconfig.h"
+#ifdef TARGET_OS_WINDOWS
+# include "winconfig.h"
 #else
-#ifdef HAVE_EXPAT_CONFIG_H
-#include <expat_config.h>
-#endif
+# include "Modules/expat/expat_config.h"
 #endif /* ndef _WIN32 */
 
 #include "expat_external.h"

@@ -74,6 +74,8 @@ QMAKE_CXXFLAGS_WARN_OFF -= -Winconsistent-missing-override
 #QMAKE_CXXFLAGS_WARN_ON += -Wno-inconsistent-missing-override
 QMAKE_CFLAGS_WARN_OFF -= -Wmissing-braces
 QMAKE_CXXFLAGS_WARN_ON += -Wno-missing-braces
+QMAKE_CFLAGS_WARN_OFF -= -Wmissing-field-initializers
+QMAKE_CXXFLAGS_WARN_OFF -= -Wmissing-field-initializers
 }
 
 

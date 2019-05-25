@@ -9,11 +9,11 @@ TARGET=$${TARGET_NAME}$${TARGET_OS_NAME}$${SHARED_LIB_APPEND}
 
 #copy to local directory so can easily be linked to
 CONFIG(debug, debug|release){
-    copydata.commands = $(COPY_DIR) $$OUT_PWD/*.so $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
+    copydata.commands = $(COPY_DIR) $$OUT_PWD/*.so $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
 }
 
 CONFIG(release, debug|release){
-    copydata.commands = $(COPY_DIR) $$OUT_PWD/*.so $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
+    copydata.commands = $(COPY_DIR) $$OUT_PWD/*.so $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
  }
 
 first.depends = $(first) copydata
@@ -22,11 +22,11 @@ export(copydata.commands)
 QMAKE_EXTRA_TARGETS += first copydata
 
 CONFIG(debug, debug|release){
-    OBJECTS_DIR=.objs/$${TARGET_NAME}/debug
+    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${BUILD_TYPE}
 }
 
 CONFIG(release, debug|release){
-    OBJECTS_DIR=.objs/$${TARGET_NAME}/release
+    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${BUILD_TYPE}
 }
 
 

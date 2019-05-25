@@ -130,15 +130,25 @@
 
 /* Define to 1 if you have the `copysign' function. */
 #define HAVE_COPYSIGN 1
+/* Define to 1 if you have the <crypt.h> header file. */
+/* #undef HAVE_CRYPT_H */
 
 /* Define to 1 if you have the `ctermid' function. */
 /* #undef HAVE_CTERMID */
 
 /* Define if you have the 'ctermid_r' function. */
 /* #undef HAVE_CTERMID_R */
+/* Define if you have the 'filter' function. */
+/* #undef HAVE_CURSES_FILTER */
 
 /* Define to 1 if you have the <curses.h> header file. */
 /* #undef HAVE_CURSES_H */
+/* Define if you have the 'has_key' function. */
+/* #undef HAVE_CURSES_HAS_KEY */
+/* Define if you have the 'immedok' function. */
+/* #undef HAVE_CURSES_IMMEDOK */
+/* Define if you have the 'is_pad' function or macro. */
+/* #undef HAVE_CURSES_IS_PAD */
 
 /* Define if you have the 'is_term_resized' function. */
 /* #undef HAVE_CURSES_IS_TERM_RESIZED */
@@ -148,6 +158,14 @@
 
 /* Define if you have the 'resize_term' function. */
 /* #undef HAVE_CURSES_RESIZE_TERM */
+/* Define if you have the 'syncok' function. */
+/* #undef HAVE_CURSES_SYNCOK */
+/* Define if you have the 'typeahead' function. */
+/* #undef HAVE_CURSES_TYPEAHEAD */
+/* Define if you have the 'use_env' function. */
+/* #undef HAVE_CURSES_USE_ENV */
+/* Define if you have the 'wchgat' function. */
+/* #undef HAVE_CURSES_WCHGAT */
 
 /* Define to 1 if you have the declaration of `isfinite', and to 0 if you
    don't. */
@@ -402,13 +420,13 @@
 /* #undef HAVE_KQUEUE */
 
 /* Define to 1 if you have the <langinfo.h> header file. */
-/* #undef HAVE_LANGINFO_H */
+#define HAVE_LANGINFO_H 1
 
 /* Defined to enable large file support when an off_t is bigger than a long
    and long long is available and at least as big as an off_t. You may need to
    add some flags for configuration and compilation to enable this mode. (For
    Solaris and Linux, the necessary defines are already defined.) */
-/* #undef HAVE_LARGEFILE_SUPPORT */
+#define HAVE_LARGEFILE_SUPPORT 1
 
 /* Define to 1 if you have the 'lchflags' function. */
 /* #undef HAVE_LCHFLAGS */
@@ -499,6 +517,8 @@
 
 /* Define to 1 if you have the `nice' function. */
 #define HAVE_NICE 1
+/* Define to 1 if you have the `nl_langinfo' function. */
+/* #undef HAVE_NL_LANGINFO */
 
 /* Define to 1 if you have the `openpty' function. */
 /* #undef HAVE_OPENPTY */
@@ -546,7 +566,7 @@
 #define HAVE_PTHREAD_SIGMASK 1
 
 /* Define to 1 if you have the <pty.h> header file. */
-/* #undef HAVE_PTY_H */
+#define HAVE_PTY_H 1
 
 /* Define to 1 if you have the `putenv' function. */
 #define HAVE_PUTENV 1
@@ -675,7 +695,7 @@
 #define HAVE_SOCKETPAIR 1
 
 /* Define to 1 if you have the <spawn.h> header file. */
-/* #undef HAVE_SPAWN_H */
+#define HAVE_SPAWN_H 1
 
 /* Define if your compiler provides ssize_t */
 #define HAVE_SSIZE_T 1
@@ -684,7 +704,7 @@
 #define HAVE_STATVFS 1
 
 /* Define if you have struct stat.st_mtim.tv_nsec */
-/* #undef HAVE_STAT_TV_NSEC */
+#define HAVE_STAT_TV_NSEC 1
 
 /* Define if you have struct stat.st_mtimensec */
 /* #undef HAVE_STAT_TV_NSEC2 */
@@ -742,7 +762,7 @@
 #define HAVE_SYSCONF 1
 
 /* Define to 1 if you have the <sysexits.h> header file. */
-/* #undef HAVE_SYSEXITS_H */
+#define HAVE_SYSEXITS_H 1
 
 /* Define to 1 if you have the <sys/audioio.h> header file. */
 /* #undef HAVE_SYS_AUDIOIO_H */
@@ -784,6 +804,8 @@
 
 /* Define to 1 if you have the <sys/poll.h> header file. */
 #define HAVE_SYS_POLL_H 1
+/* Define to 1 if you have the <sys/random.h> header file. */
+#define HAVE_SYS_RANDOM_H 1
 
 /* Define to 1 if you have the <sys/resource.h> header file. */
 #define HAVE_SYS_RESOURCE_H 1
@@ -799,6 +821,8 @@
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #define HAVE_SYS_STAT_H 1
+/* Define to 1 if you have the <sys/sysmacros.h> header file. */
+#define HAVE_SYS_SYSMACROS_H 1
 
 /* Define to 1 if you have the <sys/termio.h> header file. */
 /* #undef HAVE_SYS_TERMIO_H */
@@ -895,7 +919,7 @@
 /* #undef HAVE_USABLE_WCHAR_T */
 
 /* Define to 1 if you have the <util.h> header file. */
-#define HAVE_UTIL_H 1
+/* #undef HAVE_UTIL_H */
 
 /* Define to 1 if you have the `utimes' function. */
 #define HAVE_UTIMES 1
@@ -940,7 +964,7 @@
 
 /* Define to 1 if `major', `minor', and `makedev' are declared in
    <sysmacros.h>. */
-/* #undef MAJOR_IN_SYSMACROS */
+#define MAJOR_IN_SYSMACROS 1
 
 /* Define if mvwdelch in curses.h is an expression. */
 /* #undef MVWDELCH_IS_EXPRESSION */
@@ -1012,7 +1036,7 @@
 #define SIZEOF_FLOAT 4
 
 /* The size of `fpos_t', as computed by sizeof. */
-#define SIZEOF_FPOS_T 4
+#define SIZEOF_FPOS_T 8
 
 /* The size of `int', as computed by sizeof. */
 #define SIZEOF_INT 4
@@ -1027,7 +1051,7 @@
 #define SIZEOF_LONG_LONG 8
 
 /* The size of `off_t', as computed by sizeof. */
-#define SIZEOF_OFF_T 4
+#define SIZEOF_OFF_T 8
 
 /* The size of `pid_t', as computed by sizeof. */
 #define SIZEOF_PID_T 4

@@ -155,7 +155,7 @@
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Modules\_ctypes\libffi_msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Modules\_ctypes\libffi_msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_OS_WINDOWS;_WIN64;_M_X64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
@@ -184,7 +184,7 @@
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Modules\_ctypes\libffi_msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\..\;$(ProjectDir)..\..\..\..\;$(ProjectDir)..\..\..\openssl-1.0.2p\include;..\..\Modules\_ctypes\libffi_msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <AssemblerListingLocation>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>$(SolutionDir)objs\$(TargetName)\$(Platform)\$(Configuration)\</ObjectFileName>
@@ -251,6 +251,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\Modules\_ctypes\ctypes.h" />
     <ClInclude Include="..\..\Modules\_ctypes\ctypes_dlfcn.h" />
+    <ClInclude Include="..\..\Modules\_ctypes\libffi\src\arm\ffitarget.h" />
+    <ClInclude Include="..\..\Modules\_ctypes\libffi\src\x86\ffitarget.h" />
     <ClInclude Include="..\..\Modules\_ctypes\libffi_msvc\ffi.h" />
     <ClInclude Include="..\..\Modules\_ctypes\libffi_msvc\fficonfig.h" />
     <ClInclude Include="..\..\Modules\_ctypes\libffi_msvc\ffitarget.h" />
@@ -260,8 +262,12 @@
     <ClCompile Include="..\..\Modules\_ctypes\callbacks.c" />
     <ClCompile Include="..\..\Modules\_ctypes\callproc.c" />
     <ClCompile Include="..\..\Modules\_ctypes\cfield.c" />
-    <ClCompile Include="..\..\Modules\_ctypes\libffi_msvc\ffi.c" />
-    <ClCompile Include="..\..\Modules\_ctypes\libffi_msvc\prep_cif.c" />
+    <ClCompile Include="..\..\Modules\_ctypes\libffi\src\arm\ffi_arm.c" />
+    <ClCompile Include="..\..\Modules\_ctypes\libffi\src\x86\ffi64_x86.c" />
+    <ClCompile Include="..\..\Modules\_ctypes\libffi\src\x86\ffi_x86.c" />
+    <ClCompile Include="..\..\Modules\_ctypes\libffi_msvc\ffi_msvc.c" />
+    <ClCompile Include="..\..\Modules\_ctypes\libffi_msvc\prep_cif_msvc.c" />
+    <ClCompile Include="..\..\Modules\_ctypes\libffi_msvc\types_msvc.c" />
     <ClCompile Include="..\..\Modules\_ctypes\libffi_msvc\win32.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='PGInstrument|x64'">true</ExcludedFromBuild>
@@ -297,6 +303,21 @@
       <Project>{cf7ac3d1-e2df-41d2-bea6-1e2556cdea26}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Modules\_ctypes\libffi\src\arm\gentramp.sh" />
+    <None Include="..\..\Modules\_ctypes\libffi\src\arm\sysv.S" />
+    <None Include="..\..\Modules\_ctypes\libffi\src\arm\trampoline.S" />
+    <None Include="..\..\Modules\_ctypes\libffi\src\x86\darwin.S" />
+    <None Include="..\..\Modules\_ctypes\libffi\src\x86\darwin64.S" />
+    <None Include="..\..\Modules\_ctypes\libffi\src\x86\freebsd.S" />
+    <None Include="..\..\Modules\_ctypes\libffi\src\x86\sysv.S" />
+    <None Include="..\..\Modules\_ctypes\libffi\src\x86\unix64.S" />
+    <None Include="..\..\Modules\_ctypes\libffi\src\x86\win32.S" />
+    <None Include="..\..\Modules\_ctypes\libffi\src\x86\win64.S" />
+    <None Include="..\..\Modules\_ctypes\libffi_msvc\LICENSE" />
+    <None Include="..\..\Modules\_ctypes\libffi_msvc\README" />
+    <None Include="..\..\Modules\_ctypes\libffi_msvc\README.ctypes" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

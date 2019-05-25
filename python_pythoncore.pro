@@ -2,7 +2,7 @@
 TEMPLATE = lib
 TARGET_NAME = pythoncore
 
-include(config_shared_lib.pri)
+include(config_sharedlib.pri)
 
 include(config_openssl_lib.pri)
 include(config_opensslp_include.pri)
@@ -10,6 +10,12 @@ include(config_opensslp_include.pri)
 include(python_pythoncore.pri)
 
 include(config_copy_shared_lib.pri)
+
+INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14
+INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Include
+INCLUDEPATH += $$PWD/DependLibs/Python-2.7.14/Modules/expat
+INCLUDEPATH += $$PWD/DependLibs/libgnu
+
 
 $${TARGET_NAME}$${SHARED_LIB_APPEND}.depends += $$PWD/GoTvOpenSslLib.pro
 $${TARGET_NAME}$${SHARED_LIB_APPEND}.depends += $$PWD/libbz2.pro
@@ -43,44 +49,31 @@ LIBS +=  $${STATIC_LIB_PREFIX}depends$${STATIC_LIB_SUFFIX}
 LIBS +=  $${STATIC_LIB_PREFIX}corelib$${STATIC_LIB_SUFFIX}
 LIBS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
 
+OBJECTS_DIR=.objs/$${TARGET_NAME}/$${BUILD_TYPE}
 
 #copy to local directory so can easily be linked to
-win:{
-CONFIG(debug, debug|release){
-    copydata.commands = $(COPY_DIR) $$shell_path($$OUT_PWD/*.dll) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug)
+
+unix:!android:{
+    copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/*.so $$shell_path(${DEST_EXE_DIR}) )
+    first.depends = $(first) copydata
+    export(first.depends)
+    export(copydata.commands)
+    QMAKE_EXTRA_TARGETS += first copydata
 }
 
-CONFIG(release, debug|release){
-    copydata.commands = $(COPY_DIR) $$shell_path($$OUT_PWD/*.dll) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release)
- }
- first.depends = $(first) copydata
- export(first.depends)
- export(copydata.commands)
- QMAKE_EXTRA_TARGETS += first copydata
-}
-
-CONFIG(debug, debug|release){
-    OBJECTS_DIR=.objs/$${TARGET_NAME}/debug
-}
-
-CONFIG(release, debug|release){
-    OBJECTS_DIR=.objs/$${TARGET_NAME}/release
-}
-
+#FIXME post link occures before QMAKE_EXTRA_TARGETS so have to build twice
 android:{
-    #not sure why this works without it in other oses
-    CONFIG(debug, debug|release){
-        copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug) $${DEST_EXE_DIR}
+    #for android we need the extra step of moving the shared libs to android/lib/arch
+    PYTHON_CORE_COPY_CMD = $(COPY_DIR) $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE} $${DEST_EXE_DIR}
+    contains(QMAKE_HOST.os,Windows):
+    {
+       PYTHON_CORE_COPY_CMD = $(COPY_DIR) $$PWD//build-sharedlibs//$${TARGET_OS_NAME}//$${TARGET_ARCH_NAME}//$${BUILD_TYPE}//*.so $$shell_path($${DEST_EXE_DIR})
+       #PYTHON_CORE_COPY_CMD ~= s,/,\\,g # replace / with \
     }
 
-    CONFIG(release, debug|release){
-        copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release) $${DEST_EXE_DIR}
-     }
-     first.depends = $(first) copydata
-     export(first.depends)
-     export(copydata.commands)
-     QMAKE_EXTRA_TARGETS += first copydata
+    message("**android copy libs $$quote($${PYTHON_CORE_COPY_CMD})")
 
+    QMAKE_POST_LINK = $$quote($${PYTHON_CORE_COPY_CMD})
 }
 
 

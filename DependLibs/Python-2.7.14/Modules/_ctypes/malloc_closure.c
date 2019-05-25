@@ -89,6 +89,7 @@ static void more_core(void)
 /******************************************************************/
 
 /* put the item back into the free list */
+
 void ffi_closure_free(void *p)
 {
     ITEM *item = (ITEM *)p;
@@ -96,7 +97,6 @@ void ffi_closure_free(void *p)
     free_list = item;
 }
 
-/* return one item from the free list, allocating more if needed */
 void *ffi_closure_alloc(size_t ignored, void** codeloc)
 {
     ITEM *item;
@@ -109,3 +109,4 @@ void *ffi_closure_alloc(size_t ignored, void** codeloc)
     *codeloc = (void *)item;
     return (void *)item;
 }
+
