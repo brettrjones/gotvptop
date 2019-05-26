@@ -8,7 +8,7 @@ CONFIG += ordered
 
 SUBDIRS += $$PWD/GoTvPtoPConfigHeaders.pro
 
-SUBDIRS += $$PWD/GoTvPythonLib.pro
+#SUBDIRS += $$PWD/GoTvPythonLib.pro
 
 SUBDIRS += $$PWD/GoTvDependLibs.pro
 

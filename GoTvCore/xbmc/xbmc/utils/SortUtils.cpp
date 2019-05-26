@@ -720,18 +720,18 @@ void SortUtils::Sort(SortBy sortBy, SortOrder sortOrder, SortAttribute attribute
         }
 
         std::wstring sortLabel;
-#ifdef TARGET_ANDROID
-        // Android does not support locale; Translate to ASCII
-        std::string dest;
-        g_charsetConverter.utf8ToASCII(preparator(attributes, *item), dest);
-        for (char c : dest)
-        {
-          if (::isalnum(c) || c == ' ')
-            sortLabel.push_back(c);
-        }
-#else
+//#ifdef TARGET_ANDROID
+//        // Android does not support locale; Translate to ASCII
+//        std::string dest;
+//        g_charsetConverter.utf8ToASCII(preparator(attributes, *item), dest);
+//        for (char c : dest)
+//        {
+//          if (::isalnum(c) || c == ' ')
+//            sortLabel.push_back(c);
+//        }
+//#else
         g_charsetConverter.utf8ToW(preparator(attributes, *item), sortLabel, false);
-#endif
+//#endif
         item->insert(std::pair<Field, CVariant>(FieldSort, CVariant(sortLabel)));
       }
 
@@ -770,18 +770,18 @@ void SortUtils::Sort(SortBy sortBy, SortOrder sortOrder, SortAttribute attribute
         }
 
         std::wstring sortLabel;
-#ifdef TARGET_ANDROID
-        // Android does not support locale; Translate to ASCII
-        std::string dest;
-        g_charsetConverter.utf8ToASCII(preparator(attributes, **item), dest);
-        for (char c : dest)
-        {
-          if (::isalnum(c) || c == ' ')
-            sortLabel.push_back(c);
-        }
-#else
+//#ifdef TARGET_ANDROID
+//        // Android does not support locale; Translate to ASCII
+//        std::string dest;
+//        g_charsetConverter.utf8ToASCII(preparator(attributes, **item), dest);
+//        for (char c : dest)
+//        {
+//          if (::isalnum(c) || c == ' ')
+//            sortLabel.push_back(c);
+//        }
+//#else
         g_charsetConverter.utf8ToW(preparator(attributes, **item), sortLabel, false);
-#endif
+//#endif
         (*item)->insert(std::pair<Field, CVariant>(FieldSort, CVariant(sortLabel)));
       }
 

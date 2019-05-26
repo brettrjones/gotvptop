@@ -17,4 +17,4 @@ CONFIG(release, debug|release){
     LIBS +=  $${SHARED_LIB_PREFIX}pythoncore.so
 }
 
-include(config_move_python_lib.pri)
+#include(config_move_python_lib.pri)

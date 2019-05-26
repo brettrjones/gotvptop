@@ -2608,7 +2608,11 @@ void Encoder::readAnalysisFile(x265_analysis_data* analysis, int curPoc)
     static uint64_t consumedBytes = 0;
     static uint64_t totalConsumedBytes = 0;
     uint32_t depthBytes = 0;
+#ifdef TARGET_OS_ANDROID
+    fseek(m_analysisFile, totalConsumedBytes, SEEK_SET);
+#else
     fseeko(m_analysisFile, totalConsumedBytes, SEEK_SET);
+#endif // TARGET_OS_ANDROID
 
     int poc; uint32_t frameRecordSize;
     X265_FREAD(&frameRecordSize, sizeof(uint32_t), 1, m_analysisFile);
@@ -2621,7 +2625,11 @@ void Encoder::readAnalysisFile(x265_analysis_data* analysis, int curPoc)
     while (poc != curPoc && !feof(m_analysisFile))
     {
         currentOffset += frameRecordSize;
+#ifdef TARGET_OS_ANDROID
+        fseek(m_analysisFile, currentOffset, SEEK_SET);
+#else
         fseeko(m_analysisFile, currentOffset, SEEK_SET);
+#endif // TARGET_OS_ANDROID
         X265_FREAD(&frameRecordSize, sizeof(uint32_t), 1, m_analysisFile);
         X265_FREAD(&depthBytes, sizeof(uint32_t), 1, m_analysisFile);
         X265_FREAD(&poc, sizeof(int), 1, m_analysisFile);

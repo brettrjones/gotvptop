@@ -23,7 +23,9 @@ extern "C" {
 #define OPENSSL_NO_WEAK_SSL_CIPHERS
 #define NO_SYSLOG 
 #define OPENSSL_THREADS 
-#define _REENTRANT 
+#ifndef _REENTRANT
+# define _REENTRANT
+#endif // _REENTRANT
 
 #ifdef TARGET_OS_WINDOWS
 # define DSO_WIN32

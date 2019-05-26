@@ -30,7 +30,7 @@ CONFIG(debug, debug|release){
 CONFIG(release, debug|release){
 # message(Link in RELEASE mode.)
     android:{
-        STATIC_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
+        STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
         STATIC_LIB_SUFFIX=Android.a
         SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
         SHARED_LIB_SUFFIX=Android.so

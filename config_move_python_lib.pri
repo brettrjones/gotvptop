@@ -34,22 +34,25 @@ android:{
 
     PYTHON_LIB_COPY_CMD = cp $${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME} $${DEST_PYTHON_DLL_DIR}/$${PYTHON_DEST_NAME}
 
-    contains(QMAKE_HOST.os,Windows):
-    {
-        #work around that DEST qmake and other commands do not work with android make on windows
-        bpythontarget.path = $$shell_quote($$shell_path($$OUT_PWD/$${PYTHON_SRC_NAME}.so))
+    contains(QMAKE_HOST.os,Windows):{
+        #work around that qmake DESTDIR and other commands do not work with android make on windows (Qt 5.12.2)
+        # copy built .so file to shared libs directory
+        #bpythontarget.depends = $$shell_path($$OUT_PWD/$${PYTHON_SRC_NAME})
+        #path just has to be something that can stat successfully
+        bpythontarget.path = $$shell_quote($$shell_path($$PWD/dummyfileforqmakebug.txt))
         export(bpythontarget.path)
-        bpythontarget.target = mytarget
         bpythontarget.commands = @echo copy to shared lib $${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME} && $$quote(cp -f -R  $$quote( $$shell_path($$OUT_PWD/$${PYTHON_SRC_NAME}) $$shell_path($${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME})$$escape_expand(\n\t)))
         export(bpythontarget.commands)
 
-        bpythontarget2.path = $$shell_quote($$shell_path(F:/b/b.so))
+        # rename python lib and move to deploy python libs directory
+        #path just has to be something that can stat successfully
+        bpythontarget2.path =  $$shell_quote($$shell_path($$PWD/dummyfileforqmakebug.txt))
         bpythontarget2.target = mytarget2
         export(bpythontarget2.path)
-        bpythontarget2.commands = @echo moving to $${DEST_PYTHON_DLL_DIR}/$${PYTHON_DEST_NAME} && $$quote(cp -f -R  $$quote( $$shell_path($${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME}) $$shell_path($${DEST_PYTHON_DLL_DIR}/$${PYTHON_DEST_NAME})$$escape_expand(\n\t)))
+        bpythontarget2.commands = @echo moving to $${DEST_PYTHON_DLL_DIR}/$${PYTHON_DEST_NAME} && $$quote( rm $$shell_path($${DEST_PYTHON_DLL_DIR}/$${PYTHON_DEST_NAME})) && $$quote(cp -f -R  $$quote( $$shell_path($${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME})  $$shell_path($${DEST_PYTHON_DLL_DIR}/$${PYTHON_DEST_NAME})$$escape_expand(\n\t)))
         export(bpythontarget2.commands)
 
-        QMAKE_EXTRA_TARGETS += bpythontarget bpythontarget2
+        QMAKE_EXTRA_TARGETS += TARGET bpythontarget bpythontarget2
         export(QMAKE_EXTRA_TARGETS)
         INSTALLS += bpythontarget bpythontarget2
     }
