@@ -29,7 +29,19 @@
 #include <CoreLib/VxThread.h>
 
 #include "rendering/MatrixGL.h"
-#include <GL/glu.h>
+
+# if defined(TARGET_OS_APPLE)
+#  include <OpenGLES/ES2/gl.h>
+# elif defined(TARGET_OS_ANDROID)
+#  include <GLES2/gl2.h>
+#  include <GLES2/gl2ext.h>
+#  include <GLES3/gl3.h>
+# elif defined(TARGET_OS_LINUX)
+#  include <GL/gl.h>
+#  include <GL/glu.h>
+#  include <GL/glext.h>
+# endif // defined(TARGET_OS_ANDROID)
+
 
 
 //============================================================================

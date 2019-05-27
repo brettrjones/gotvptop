@@ -10,7 +10,20 @@
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxThread.h>
 
-#include <GL/glu.h>
+# if defined(TARGET_OS_APPLE)
+#  include <OpenGLES/ES2/gl.h>
+# elif defined(TARGET_OS_ANDROID)
+#  include <GLES2/gl2.h>
+#  include <GLES2/gl2ext.h>
+#  include <GLES3/gl3.h>
+# elif defined(TARGET_OS_LINUX)
+#  include <GL/gl.h>
+#  include <GL/glu.h>
+#  include <GL/glext.h>
+# elif defined(TARGET_OS_WINDOWS)
+#  include <GL/gl.h>
+#  include <GL/glu.h>
+# endif // defined(TARGET_OS_ANDROID)
 
 //============================================================================
 RenderGlLogic::RenderGlLogic( RenderGlWidget& renderWidget, QWidget * parent )
@@ -204,7 +217,6 @@ void RenderGlLogic::presentRenderGl( bool rendered, bool videoLayer )
     VerifyGLStateQt();
 }
 
-
 //============================================================================
 #ifdef DEBUG
 void  RenderGlLogic::VerifyGLStateQtDbg( const char* szfile, const char* szfunction, int lineno )
@@ -212,12 +224,16 @@ void  RenderGlLogic::VerifyGLStateQtDbg( const char* szfile, const char* szfunct
     GLenum err = glGetError();
     if( err == GL_NO_ERROR )
         return;
-    LogMsg( LOG_ERROR, "GL ERROR: %d thread %d %s\n", err, VxGetCurrentThreadId(), gluErrorString( err ) );
+#ifdef TARGET_OS_ANDROID
+    // no equivelent of gluErrorString on android platform
+    LogMsg( LOG_ERROR, "GL ERROR: %d\n", err );
+#else
+    LogMsg( LOG_ERROR, "GL ERROR: %d %s\n", err, gluErrorString( err ) );
+#endif // TARGET_OS_ANDROID
     if( szfile && szfunction )
     {
         LogMsg( LOG_ERROR, "In file:%s function:%s line:%d", szfile, szfunction, lineno );
     }
-
 }
 #else
 void RenderGlBaseWidget::VerifyGLStateQt()

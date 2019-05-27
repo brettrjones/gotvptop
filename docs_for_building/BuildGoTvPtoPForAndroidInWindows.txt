@@ -30,6 +30,14 @@ JRE_HOME F:\android\jre1.8.0_131
   d.) In SDK Manager install all packages for Android 5.0
   if get error about .android\repositories.cfg could not be loaded then create a empty file for it using text editor
   
+2.) Configure Android for armebi-v7a
+	a.) change Buid Android APK to android-28
+	b.) In Build Enviroment change ANDROID_NDK_PLATFORM from android-16 to android-21
+
+3.) Generate keystore
+Instructions at https://doc.qt.io/qtcreator/creator-deploying-android.html#specifying-settings-for-packages
+
+  
   
  ==== Android Manifest Permissions required ====
  

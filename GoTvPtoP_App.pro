@@ -239,8 +239,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_EXTRA_LIBS = \
-        $$PWD/../android/ndk-windows-x86-64/android-ndk-r19/platforms/android-21/arch-arm/usr/lib/libGLESv2.so \
-        $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
+        F:/gotvptop/../android/ndk-windows-x86-64/android-ndk-r19/platforms/android-21/arch-arm/usr/lib/libGLESv2.so \
+        F:/gotvptop/build-sharedlibs/Android/armeabi-v7a/Debug/libpythoncore_d.so \
+        $$PWD/build-sharedlibs/Android/armeabi-v7a/Debug/libssl_d.so
 
 
     ANDROID_PACKAGE_SOURCE_DIR = \

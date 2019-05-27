@@ -2,6 +2,7 @@
 QT       += core gui opengl widgets svg
 
 DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MULTIMEDIA_LIB
+DEFINES += DISABLE_MATHUTILS_ASM_ROUND_INT
 win32:{
 DEFINES += TARGET_OS_WINDOWS
 }
@@ -70,4 +71,18 @@ win32:{
     LIBS +=  ole32.lib
     LIBS +=  winmm.lib
     LIBS +=  Rpcrt4.lib
+}
+
+DISTFILES += \
+    android/AndroidManifest.xml \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/gradlew \
+    android/res/values/libs.xml \
+    android/build.gradle \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew.bat
+
+contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+    ANDROID_PACKAGE_SOURCE_DIR = \
+        $$PWD/android
 }

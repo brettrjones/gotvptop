@@ -20,12 +20,20 @@
 #include "guilib/GUIFont.h"
 #include "guilib/GUIFontTTF.h"
 #include "cores/VideoPlayer/VideoRenderers/VideoShaders/ShaderFormats.h"
-#ifdef TARGET_OS_ANDROID
-# include <GLES2/gl2.h>
-# include <GLES2/gl2ext.h>
-#else
-# include "GL/glu.h"
-#endif // TARGET_OS_ANDROID
+# if defined(TARGET_OS_APPLE)
+#  include <OpenGLES/ES2/gl.h>
+# elif defined(TARGET_OS_ANDROID)
+#  include <GLES2/gl2.h>
+#  include <GLES2/gl2ext.h>
+#  include <GLES3/gl3.h>
+# elif defined(TARGET_OS_LINUX)
+#  include <GL/gl.h>
+#  include <GL/glu.h>
+#  include <GL/glext.h>
+# elif defined(TARGET_OS_WINDOWS)
+#  include <GL/gl.h>
+#  include <GL/glu.h>
+# endif // defined(TARGET_OS_ANDROID)
 
 //#define  ENABLE_GLES_SHADERS // uncomment to enable all shaders
 

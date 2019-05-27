@@ -361,6 +361,7 @@ QImage RenderGlOffScreenSurface::grabFramebuffer()
     {
         // check if we have glFrameBufferBlit support. this is true for desktop OpenGL 3.0+, but not
         // OpenGL ES 2.0
+#ifndef TARGET_OS_ANDROID
         if( m_GlfExtra )
         {
             // only blit the color buffer attachment
@@ -375,6 +376,7 @@ QImage RenderGlOffScreenSurface::grabFramebuffer()
             m_GlfExtra->glBindFramebuffer( GL_FRAMEBUFFER, 0 );
         }
         else
+#endif // TARGET_OS_ANDROID
         {
             // we must unbind the FBO here, so we can use its texture and bind the default
             // back-buffer

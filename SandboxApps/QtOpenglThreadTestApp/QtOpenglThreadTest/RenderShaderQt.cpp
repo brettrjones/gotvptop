@@ -23,8 +23,21 @@
 #include "RenderGlLogic.h"
 
 #include <VxDebug.h>
-#include <GL/glu.h>
 
+# if defined(TARGET_OS_APPLE)
+#  include <OpenGLES/ES2/gl.h>
+# elif defined(TARGET_OS_ANDROID)
+#  include <GLES2/gl2.h>
+#  include <GLES2/gl2ext.h>
+#  include <GLES3/gl3.h>
+# elif defined(TARGET_OS_LINUX)
+#  include <GL/gl.h>
+#  include <GL/glu.h>
+#  include <GL/glext.h>
+# elif defined(TARGET_OS_WINDOWS)
+#  include <GL/gl.h>
+#  include <GL/glu.h>
+# endif // defined(TARGET_OS_ANDROID)
 
 #ifndef M_PI
 #define M_PI       3.14159265358979323846
@@ -676,21 +689,21 @@ RenderShaderQt::RenderShaderQt(  ESHADERMETHOD shaderMethod, EShaderType shaderT
     , m_model( nullptr )
     , m_clipPossible( false )
 {
- #ifdef GL_RGBA16F_EXT
-    if( CServiceBroker::GetRenderSystem()->IsExtSupported( "GL_EXT_color_buffer_float" ) )
-    {
-        m_floattex = true;
-        m_internalformat = GL_RGBA16F_EXT;
-    }
-    else
-    {
-        m_floattex = false;
-        m_internalformat = GL_RGBA;
-    }
-#else
+// #ifdef GL_RGBA16F_EXT
+//    if( CServiceBroker::GetRenderSystem()->IsExtSupported( "GL_EXT_color_buffer_float" ) )
+//    {
+//        m_floattex = true;
+//        m_internalformat = GL_RGBA16F_EXT;
+//    }
+//    else
+//    {
+//        m_floattex = false;
+//        m_internalformat = GL_RGBA;
+//    }
+//#else
     m_floattex = false;
     m_internalformat = GL_RGBA;
-#endif // GL_RGBA16F_EXT
+//#endif // GL_RGBA16F_EXT
 }
 
 //============================================================================

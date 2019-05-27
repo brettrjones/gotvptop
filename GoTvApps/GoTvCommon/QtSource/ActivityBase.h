@@ -91,20 +91,20 @@ public:
 	virtual void				errMessageBox2( QString title, const char * msg, ... );
 
 	//! for derived classes to override and get in session state ( from OfferSessionCallbackInterface )
-	virtual void 				onSessionStateChange( ESessionState eSessionState )			{}	
-    virtual void 				onInSession( bool isInSession )							{}
-	virtual void 				onSessionActivityShouldExit( QString exitReason )							{ emit signalShowShouldExitMsgBox( exitReason ); }
+    virtual void 				onSessionStateChange( ESessionState eSessionState )	override		{}
+    virtual void 				onInSession( bool isInSession )		override						{}
+    virtual void 				onSessionActivityShouldExit( QString exitReason )	override		{ emit signalShowShouldExitMsgBox( exitReason ); }
 
 	// called when activity finish.. override for exit cleanup
-	virtual void				onActivityFinish( void )	{};
+    virtual void				onActivityFinish( void )	{}
     // override default behavior of closing dialog when back button is clicked
     virtual void				onBackButtonClicked( void );
 	// override to handle dialog closing
-	virtual void				onCloseEvent( void )	{};
+    virtual void				onCloseEvent( void )	{}
 	// resizing window
-	virtual void				onResizeBegin( QSize& newSize ){};
-	virtual void				onResizeEvent( QSize& newSize ){};
-	virtual void				onResizeEnd( QSize& newSize ){};
+    virtual void				onResizeBegin( QSize& newSize ){}
+    virtual void				onResizeEvent( QSize& newSize ){}
+    virtual void				onResizeEnd( QSize& newSize ){}
 
 
 	//=== title bar functions ====//
@@ -260,9 +260,9 @@ protected slots:
 	virtual void				slotExpandWindowButtonClicked( void );
 
 protected:
-	virtual void				showEvent( QShowEvent * );
-	virtual void				closeEvent( QCloseEvent * ev );
-	virtual void				resizeEvent( QResizeEvent * ev );
+    virtual void				showEvent( QShowEvent * ) override;
+    virtual void				closeEvent( QCloseEvent * ev ) override;
+    virtual void				resizeEvent( QResizeEvent * ev ) override;
 
     virtual void                updateExpandWindowIcon( void );
 	virtual void				repositionToParent( void );

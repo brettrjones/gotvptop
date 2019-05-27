@@ -1049,6 +1049,8 @@ bool RenderShaderQt::disableShader()
     case SM_VID_FILTER_CONVOLUTION_6X6_RGBA:
     case SM_VID_FILTER_CONVOLUTION_6X6_FLOAT:
         return true; 
+    default:
+        break;
     }
 
     QOpenGLFunctions * glf = m_RenderLogic.getGlFunctions();

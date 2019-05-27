@@ -10,7 +10,20 @@
 #include <QTimer>
 
 #include "VxDebug.h"
-#include <GL/glu.h>
+# if defined(TARGET_OS_APPLE)
+#  include <OpenGLES/ES2/gl.h>
+# elif defined(TARGET_OS_ANDROID)
+#  include <GLES2/gl2.h>
+#  include <GLES2/gl2ext.h>
+#  include <GLES3/gl3.h>
+# elif defined(TARGET_OS_LINUX)
+#  include <GL/gl.h>
+#  include <GL/glu.h>
+#  include <GL/glext.h>
+# elif defined(TARGET_OS_WINDOWS)
+#  include <GL/gl.h>
+#  include <GL/glu.h>
+# endif // defined(TARGET_OS_ANDROID)
 
 
 //============================================================================
@@ -224,6 +237,10 @@ void RenderGlLogic::VerifyGLStateQt()
     GLenum err = m_Glf->glGetError();
     if( err == GL_NO_ERROR )
         return;
+#ifdef TARGET_OS_ANDROID
+    LogMsg( LOG_ERROR, "GL ERROR: %s\n", err );
+#else
     LogMsg( LOG_ERROR, "GL ERROR: %s\n", gluErrorString( err ) );
+#endif // TARGET_OS_ANDROID
 }
 #endif

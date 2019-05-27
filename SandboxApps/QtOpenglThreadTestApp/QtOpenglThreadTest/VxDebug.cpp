@@ -317,11 +317,11 @@ void VxHandleLogMsg( unsigned long u32MsgType, char * logMsg )
 	//}
 
 #ifdef TARGET_OS_ANDROID
-	if( VxIsAppShuttingDown() )
-	{
-		__android_log_write( ANDROID_LOG_INFO, "SHUTDOWN", logMsg);
-		return;
-	}
+//	if( VxIsAppShuttingDown() )
+//	{
+//		__android_log_write( ANDROID_LOG_INFO, "SHUTDOWN", logMsg);
+//		return;
+//	}
 
 	default_log_handler( g_pvUserData, u32MsgType, logMsg);
 	g_pfuncLogHandler( g_pvUserData, u32MsgType, logMsg);
