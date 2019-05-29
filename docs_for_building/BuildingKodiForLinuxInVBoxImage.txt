@@ -12,6 +12,22 @@ and
 if get a confure error about crosslib then do
 $ sudo make -C tools/depends/target/crossguid/ PREFIX=/usr/local 
 
+If try to update sdk from qcreator and see warning 
+Warning: File /home/gotv/.android/repositories.cfg could not be loaded then create it from command line
+$ cd ~
+$ mkdir .android
+$ cd .android
+$ touch repositories.cfg
+
+==== setup enviroment variables ===
+gedit ~/.bash_profile
+
+And add the following environment variables:
+
+export ANDROID_HOME=/home/gotv/Android/Sdk
+export ANDROID_SDK_ROOT=/home/gotv/Android/Sdk
+export ANDROID_NDK_ROOT=/home/gotv/Android/android-ndk-r19c
+
 //=== Old instructions for Kodi Leia ===//
 // recommend using the above instructions for building Kodi
 mkdir $HOME/project_sources/LinuxKodiLeia18.1

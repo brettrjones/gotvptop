@@ -1,6 +1,27 @@
+=== remove old adb ( otherwise will run the wrong adb ) ===
+In Administration->Software Manager
+remove adb
+remove Android-libadb
+In android studio create avd 
+API 24
+CPU arm-7a
+in advanced Graphics: select Hardware GLES 2.0
 
 
+=== add at bottom of ~/.bashrc ===
+export ANDROID_HOME=/home/gotv/Android/Sdk
+export ANDROID_SDK_ROOT=/home/gotv/Android/Sdk
+export ANDROID_AVD_HOME=/home/gotv/.android/avd
+export ANDROID_NDK_ROOT=/home/gotv/Android/android-ndk-r19c
+export PATH=/home/gotv/Android/Sdk/tools:$PATH
+export PATH=/home/gotv/Android/Sdk/platform-tools:$PATH
 
+=== test adb ===
+open terminal
+$ adb devices
+if see
+adb server version (41) doesn't match this client (39); killing...
+you have the wrong adb installed
 
 ==== OLD INSTRUCTIONS .. DO NOT USE ====
 The following instructions were modifiec from instructions at

@@ -62,7 +62,10 @@ unix:!android:{
 }
 
 android:{
-    LIBS +=  -ldl -lm -landroid -lEGL -lGLESv2  -lc -lstdc++ -llog -ljnigraphics
+
+    LIBS +=  -ldl -lm -lEGL -lGLESv2  -llog -ljnigraphics
+# do not use because has error
+#    LIBS += -lc -lstdc++ -landroid
 }
 
 win32:{
