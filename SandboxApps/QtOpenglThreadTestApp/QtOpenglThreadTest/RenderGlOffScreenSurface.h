@@ -208,5 +208,5 @@ private:
     QSize                       m_NextSurfaceSize;
 
    
-    GLuint                      m_TestTexure1;
+    GLuint                      m_TestTexure1 = -1;
 };

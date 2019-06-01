@@ -15,12 +15,9 @@ RenderGlOffScreenSurface::RenderGlOffScreenSurface( RenderGlLogic * renderLogic,
 : QOffscreenSurface( targetScreen )
 , m_RenderGlLogic( renderLogic )
 , m_GlWidget( glWidget )
-, m_initialized( false )
-, m_updatePending( false )
 , m_RenderThreadContext( renderThreadContext )
 , m_SurfaceSize( size )
 , m_NextSurfaceSize( size )
-, m_TestTexure1( -1 )
 {
 }
 
@@ -533,11 +530,15 @@ void RenderGlOffScreenSurface::recreateFBOAndPaintDevice()
             m_resolvedFbo = nullptr;
         }
 
+        LogMsg( LOG_DEBUG, "Creating Surface Buffer ");
         // create new frame buffer
-//        QOpenGLFramebufferObjectFormat format = QGLInfo::DefaultFramebufferFormat();
-//        format.setSamples(QGLInfo::HasMultisamplingSupport(m_context) ? 4 : 0);
+#ifdef TARGET_OS_ANDROID
+        QOpenGLFramebufferObjectFormat format;
+        format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
+#else
         QOpenGLFramebufferObjectFormat format;
         format.setSamples( 0 );
+#endif // TARGET_OS_ANDROID
 
         m_fbo = new QOpenGLFramebufferObject( getSurfaceSize(), format );
         if( !m_fbo->isValid() ) 
@@ -566,6 +567,8 @@ void RenderGlOffScreenSurface::recreateFBOAndPaintDevice()
             m_Glf->glClear( GL_COLOR_BUFFER_BIT );
             m_resolvedFbo->release();
         }
+
+        LogMsg( LOG_DEBUG, "Done Creating Surface Buffer ");
     }
 } 
 

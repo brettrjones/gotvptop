@@ -11,6 +11,7 @@ DEFINES += TARGET_OS_LINUX
 }
 android:{
 DEFINES += TARGET_OS_ANDROID
+
 }
 
 TARGET = QtOpenglThreadTestApp
@@ -63,7 +64,7 @@ unix:!android:{
 
 android:{
 
-    LIBS +=  -ldl -lm -lEGL -lGLESv2  -llog -ljnigraphics
+    LIBS +=  -ldl -lm -lEGL -lGLESv2  -llog -ljnigraphics -landroid
 # do not use because has error
 #    LIBS += -lc -lstdc++ -landroid
 }
@@ -80,6 +81,7 @@ DISTFILES += \
     android/AndroidManifest.xml \
     android/gradle/wrapper/gradle-wrapper.jar \
     android/gradlew \
+    android/local.properties \
     android/res/values/libs.xml \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \

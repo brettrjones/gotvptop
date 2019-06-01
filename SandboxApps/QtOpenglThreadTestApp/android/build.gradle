@@ -37,7 +37,7 @@ android {
     compileSdkVersion androidCompileSdkVersion.toInteger()
 
     buildToolsVersion androidBuildToolsVersion
-
+	
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'

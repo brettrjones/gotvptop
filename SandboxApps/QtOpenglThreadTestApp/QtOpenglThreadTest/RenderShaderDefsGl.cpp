@@ -285,6 +285,9 @@ static const char * gles_shader_rgba_bob_oes_frag =
 //============================================================================
 #if defined(TARGET_OS_WINDOWS)
 static const char * gles_yuv2rgb_yv12_vert =
+#elif defined(TARGET_OS_ANDROID)
+static const char * gles_yuv2rgb_yv12_vert =
+"#version 100\n"
 #else
 static const char * gles_yuv2rgb_yv12_vert =
 "#version 120\n"
@@ -373,6 +376,9 @@ static const char * gles_yuv2rgb_basic_frag =
 #if defined(TARGET_OS_WINDOWS)
 static const char * gles_yuv2rgb_nv12_vert =
 "#version 100\n"
+#elif defined(TARGET_OS_ANDROID)
+static const char * gles_yuv2rgb_nv12_vert =
+"#version 100\n"
 #else
 static const char * gles_yuv2rgb_nv12_vert =
 "#version 120\n"
@@ -398,6 +404,9 @@ static const char * gles_yuv2rgb_nv12_vert =
 
 #if defined(TARGET_OS_WINDOWS)
 static const char * gles_yuv2rgb_yuy2_vert =
+#elif  defined(TARGET_OS_ANDROID)
+static const char * gles_yuv2rgb_yuy2_vert =
+"#version 100\n"
 #else
 static const char * gles_yuv2rgb_yuy2_vert =
 "#version 120\n"
@@ -421,7 +430,10 @@ static const char * gles_yuv2rgb_yuy2_vert =
 "    m_cordV = m_attrcordV;\n"
 "}\n";
 
-#if defined(TARGET_OS_WINDOWS)
+#if defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_ANDROID)
+static const char * gles_yuv2rgb_uyvy_vert =
+"#version 100\n"
+#elif  defined(TARGET_OS_ANDROID)
 static const char * gles_yuv2rgb_uyvy_vert =
 "#version 100\n"
 #else
@@ -447,7 +459,10 @@ static const char * gles_yuv2rgb_uyvy_vert =
 "    m_cordV = m_attrcordV;\n"
 "}\n";
 
-#if defined(TARGET_OS_WINDOWS)
+#if defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_ANDROID)
+static const char * gles_yuv2rgb_nv12_rgb_vert =
+"#version 100\n"
+#elif  defined(TARGET_OS_ANDROID)
 static const char * gles_yuv2rgb_nv12_rgb_vert =
 "#version 100\n"
 #else

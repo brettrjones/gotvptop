@@ -2,11 +2,29 @@
 === Build GoTvPtoP for android in windows ====
 === Build Prerequisites ====
 Follow instructions in docs_for_building/BuildForWindowsPrerequisitesInstructions.txt
+tested with ndk version 18b and Qt version 5.12.3
 
-Android Target is Api 21 and Sdk Android 5.0
+Android Target is Api 21 and Sdk Android 5.0 but built with sdk version android-28
+
+=== android studio ===
+After installing Android studio there are some modifications required to get Qt 5.13.0 to work on windows
+if you get error about Execution failed for task ':compileDebugAidl'.
+then
+1.) In Android Studio->Tools->SDK Manager
+	In tab SDK Tools remove Android Build Tools 29.0.0RC1
+2.) Using your path add a new windows enviroment variable GRADLE_USER_HOME = C:\Users\yourusername\.gradle
+3.) Go into theQT project/app's folder and edit the gradle.properties file... change the line to:
+	androidBuildToolsVersion=28.0.3
+
 
 
 ==== Android usb debugging ====
+If debugger does not stop at breakpoint 
+	Look at log in Qcreator->Window->Views->Debugger Log
+	In my case qt was using a old version of python 2.7 and had some weak reference errors
+	I removed python directory from by PATH and rebooted
+
+
 install the usb driver so can attach/debug android devices
 from command prompt
 1.) cd F:/android/android-sdk/tools/bin
@@ -17,6 +35,9 @@ from command prompt
 
 
 === windows enviroment variables ===
+These are my enviroment variables.. your paths will be different
+ANDROID_HOME F:\android\android-sdk
+ANDROID_SDK_ROOT F:\android\android-sdk
 ANDROID_NDK_ROOT F:\android\ndk-windows-x86-64\android-ndk-r18b
 JAVA_HOME F:\android\jdk1.8.0_131
 JRE_HOME F:\android\jre1.8.0_131
@@ -27,7 +48,7 @@ JRE_HOME F:\android\jre1.8.0_131
   a.) JDK location - F:\android\jdk1.8.0_131
   b.) Android SDK Location - F:\android\android-sdk
   c.) Android NDK Location - F:\android\ndk-windows-x86_64\android-ndk-r18b
-  d.) In SDK Manager install all packages for Android 5.0
+  d.) In SDK Manager install all packages for Android 5.0 and Android 9
   if get error about .android\repositories.cfg could not be loaded then create a empty file for it using text editor
   
 2.) Configure Android for armebi-v7a
