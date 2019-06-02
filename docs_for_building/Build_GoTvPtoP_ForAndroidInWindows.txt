@@ -2,12 +2,17 @@
 === Build GoTvPtoP for android in windows ====
 === Build Prerequisites ====
 Follow instructions in docs_for_building/BuildForWindowsPrerequisitesInstructions.txt
-tested with ndk version 18b and Qt version 5.12.3
+tested with:
+	NDK version 18b
+	Qt version 5.12.3 
+	JDK version oracle JDK 1.8.0
+	Android Studio 3.3.1 ( android studio may be optional )
 
 Android Target is Api 21 and Sdk Android 5.0 but built with sdk version android-28
 
 === android studio ===
 After installing Android studio there are some modifications required to get Qt 5.13.0 to work on windows
+Ignore this fix if using a 5.12.3 Qt version
 if you get error about Execution failed for task ':compileDebugAidl'.
 then
 1.) In Android Studio->Tools->SDK Manager

@@ -2,6 +2,9 @@
 TARGET = gotvptop
 TEMPLATE = app
 
+# keep it all lowercase to match program naming convention on *nix systems
+PROJECT_NAME = gotvptop
+
 TARGET_NAME = gotvptop
 
 QT += gui core concurrent widgets network multimedia opengl xml svg quickwidgets
@@ -238,10 +241,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
-    ANDROID_EXTRA_LIBS = \
-        F:/gotvptop/../android/ndk-windows-x86-64/android-ndk-r19/platforms/android-21/arch-arm/usr/lib/libGLESv2.so \
-        F:/gotvptop/build-sharedlibs/Android/armeabi-v7a/Debug/libpythoncore_d.so \
-        $$PWD/build-sharedlibs/Android/armeabi-v7a/Debug/libssl_d.so
+    ANDROID_EXTRA_LIBS =
 
 
     ANDROID_PACKAGE_SOURCE_DIR = \
