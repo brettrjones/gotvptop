@@ -10,7 +10,7 @@ win:{
     QMAKE_EXTRA_TARGETS += first copydata
 }
 
-!win:{
+unix:!android:  {
     copydata.commands = $(COPY_DIR) $$shell_path($$OUT_PWD/*.so) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE})
     first.depends = $(first) copydata
     export(first.depends)
@@ -19,7 +19,9 @@ win:{
 }
 
 android:{
-    #rename and move android lib to android/lib/target arch directory
+    DESTDIR = $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE})
+
+    #rename and move android lib to android/libs/target arch directory
     SHARED_ANDROID_SRC_NAME = ""
     SHARED_ANDROID_SRC_DIR = ""
     SHARED_ANDROID_DEST_NAME = ""
@@ -38,21 +40,24 @@ android:{
         SHARED_ANDROID_DEST_NAME = lib$${TARGET_NAME}.so
      }
 
-    SHARED_ANDROID_LIB_COPY_CMD = $${COPY_KEYWORD} $${SHARED_ANDROID_SRC_DIR}/$${SHARED_ANDROID_SRC_NAME} $${DEST_EXE_DIR}/$${SHARED_ANDROID_DEST_NAME}
+    SHARED_ANDROID_LIB_COPY_CMD = cp -f $${SHARED_ANDROID_SRC_DIR}/$${SHARED_ANDROID_SRC_NAME} $${DEST_EXE_DIR}/$${SHARED_ANDROID_SRC_NAME}
+    QMAKE_POST_LINK += $$quote($${SHARED_ANDROID_LIB_COPY_CMD})
 #    contains(QMAKE_HOST.os,Windows):
 #    {
 #        #SHARED_ANDROID_LIB_COPY_CMD ~= s,/,\\,g # replace / with \
 #        #work around that qmake DESTDIR and other commands do not work with android make on windows (Qt 5.12.2)
 #        # copy built .so file to shared libs directory
-#         #path just has to be something that can stat successfully
+         #path just has to be something that can stat successfully
 #        bsharetarget.path = $$shell_quote($$shell_path($$PWD/dummyfileforqmakebug.txt))
+#        bsharetarget.path = $${DEST_EXE_DIR}
 #        export(bsharetarget.path)
 #        bsharetarget.target = mytarget
-#        bsharetarget.commands = @echo copy to shared lib $${SHARED_ANDROID_SRC_DIR}/$${SHARED_ANDROID_SRC_NAME} && $$quote(cp -f -R  $$quote( $$shell_path($$OUT_PWD/$${SHARED_ANDROID_SRC_NAME}) $$shell_path($${SHARED_ANDROID_SRC_DIR}/$${SHARED_ANDROID_DEST_NAME})$$escape_expand(\n\t)))
+#         bsharetarget.commands = @echo copy to shared lib $${SHARED_ANDROID_SRC_DIR}/$${SHARED_ANDROID_SRC_NAME} && $$quote(cp -f -R  $$quote( $$shell_path($$OUT_PWD/$$ {SHARED_ANDROID_SRC_NAME}) $$shell_path($${SHARED_ANDROID_SRC_DIR}/$${SHARED_ANDROID_DEST_NAME})$$escape_expand(\n\t)))
+#        bsharetarget.commands = $$quote($(COPY) $$shell_path($${SHARED_ANDROID_SRC_DIR}/$${SHARED_ANDROID_SRC_NAME}) $$shell_path($${DEST_EXE_DIR}/$${SHARED_ANDROID_DEST_NAME})$$escape_expand(\n\t)))
 #        export(bsharetarget.commands)
-
-#        # copy built .so file to deploy libs directory
-#        #path just has to be something that can stat successfully
+#        QMAKE_EXTRA_TARGETS += bsharetarget
+        # copy built .so file to deploy libs directory
+        #path just has to be something that can stat successfully
 #        bsharetarget2.path = $$shell_quote($$shell_path($$PWD/dummyfileforqmakebug.txt))
 #        bsharetarget2.target = mytarget2
 #        export(bsharetarget2.path)
@@ -68,7 +73,8 @@ android:{
     #message("**android dll cmd $${SHARED_ANDROID_LIB_COPY_CMD}")
 
 #    !contains(QMAKE_HOST.os,Windows):{
-        QMAKE_POST_LINK += $${SHARED_ANDROID_LIB_COPY_CMD}
+#        QMAKE_POST_LINK += $${SHARED_ANDROID_LIB_COPY_CMD}
+#QMAKE_POST_LINK += $$quote(cp -f $$shell_path($${SHARED_ANDROID_SRC_DIR}/$${SHARED_ANDROID_SRC_NAME}) $$shell_path($${DEST_EXE_DIR}/$${SHARED_ANDROID_DEST_NAME})$))
 #    }
 }
 

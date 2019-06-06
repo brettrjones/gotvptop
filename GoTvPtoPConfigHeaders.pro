@@ -1,4 +1,7 @@
 TEMPLATE = lib
+TARGET_NAME  = GoTvPtoPConfigHeaders
+
+include(config_static_dependlib.pri)
 
 HEADERS += 	$$PWD/GoTvAppConfig.h \
         $$PWD/GoTvCompilerConfig.h \

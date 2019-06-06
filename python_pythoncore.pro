@@ -2,7 +2,6 @@
 TEMPLATE = lib
 TARGET_NAME = pythoncore
 
-include(config_sharedlib.pri)
 
 include(config_openssl_lib.pri)
 include(config_opensslp_include.pri)
@@ -62,19 +61,19 @@ unix:!android:{
 }
 
 #FIXME post link occures before QMAKE_EXTRA_TARGETS so have to build twice
-android:{
+#android:{
     #for android we need the extra step of moving the shared libs to android/lib/arch
-    PYTHON_CORE_COPY_CMD = $(COPY_DIR) $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE} $${DEST_EXE_DIR}
+#    PYTHON_CORE_COPY_CMD = $(COPY_DIR) $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE} $${DEST_EXE_DIR}
 #    contains(QMAKE_HOST.os,Windows):
 #    {
-       PYTHON_CORE_COPY_CMD = $(COPY_DIR) $$PWD//build-sharedlibs//$${TARGET_OS_NAME}//$${TARGET_ARCH_NAME}//$${BUILD_TYPE}//*.so $$shell_path($${DEST_EXE_DIR})
+#       PYTHON_CORE_COPY_CMD = $(COPY_DIR) $$PWD//build-sharedlibs//$${TARGET_OS_NAME}//$${TARGET_ARCH_NAME}//$${BUILD_TYPE}//*.so $$shell_path($${DEST_EXE_DIR})
        #PYTHON_CORE_COPY_CMD ~= s,/,\\,g # replace / with \
 #    }
 
-    message("**android copy libs $$quote($${PYTHON_CORE_COPY_CMD})")
+#    message("**android copy libs $$quote($${PYTHON_CORE_COPY_CMD})")
 
-    QMAKE_POST_LINK = $$quote($${PYTHON_CORE_COPY_CMD})
-}
+#    QMAKE_POST_LINK = $$quote($${PYTHON_CORE_COPY_CMD})
+#}
 
 
 

@@ -10,7 +10,7 @@ linux:!android: TARGET_OS_DIR = Linux
 android: TARGET_OS__DIR = Android
 macx: TARGET_OS__DIR = Apple
 
-DESTDIR = $$PWD/../../../lib/$$TARGET_OS__DIR/
+DESTDIR = $$PWD/../../../libs/$$TARGET_OS__DIR/
 
 TARGET_LIB_APPEND = .lib
 CONFIG(release, debug|release){

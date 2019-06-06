@@ -14,6 +14,6 @@ SUBDIRS += $$PWD/GoTvDependLibs.pro
 
 SUBDIRS += $$PWD/GoTvCoreLibs.pro
 
-SUBDIRS += $$PWD/GoTvPtoPAppLib.pro
+#SUBDIRS += $$PWD/GoTvPtoPAppLib.pro
 
 SUBDIRS += $$PWD/GoTvPtoP_App.pro

@@ -6,7 +6,6 @@ include(config_python_lib.pri)
 
 include(python_ctypes.pri)
 
-
 include(config_link.pri)
 
 CONFIG(debug, debug|release){
@@ -17,4 +16,4 @@ CONFIG(release, debug|release){
     LIBS +=  $${SHARED_LIB_PREFIX}pythoncore.so
 }
 
-#include(config_move_python_lib.pri)
+include(config_move_python_lib.pri)

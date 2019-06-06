@@ -10,6 +10,7 @@ TARGET_NAME = gotvptop
 QT += gui core concurrent widgets network multimedia opengl xml svg quickwidgets
 
 DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MULTIMEDIA_LIB
+DEFINES += LIB_STATIC _LIB
 
 
 #CONFIG += qt thread silent
@@ -41,8 +42,11 @@ include(config_os_detect.pri)
 include(config_compiler.pri)
 include(config_opensslp_include.pri)
 
+
+include(GoTvPtoPAppLib.pri)
+
 #DESTDIR = $$PWD/bin/
-gotvptop.depends += $$PWD/GoTvPtoPAppLib.pro
+#gotvptop.depends += $$PWD/GoTvPtoPAppLib.pro
 gotvptop.depends += $$PWD/GoTvCoreLibs.pro
 gotvptop.depends += $$PWD/GoTvPythonLib.pro
 gotvptop.depends += $$PWD/GoTvDependLibs.pro
@@ -70,19 +74,10 @@ gotvptop.depends += $$PWD/libcorelib.pro
 gotvptop.depends += $$PWD/libcrossguid.pro
 
 
-CONFIG(debug, debug|release){
-    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
-    MOC_DIR =.moc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
-    RCC_DIR =.qrc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
-    UI_DIR =.ui/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
-}
-
-CONFIG(release, debug|release){
-    OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
-    MOC_DIR =.moc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
-    RCC_DIR =.qrc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
-    UI_DIR =.ui/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release
-}
+OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+MOC_DIR =.moc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+RCC_DIR =.qrc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+UI_DIR =.ui/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
 
 # look in same directory as executable for shared libraries
 unix:{
@@ -107,7 +102,7 @@ PRE_TARGETDEPS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
 
 #static libs
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}gotvptoplib$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}gotvptoplib$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}kodi$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegavdevice$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegavformat$${STATIC_LIB_SUFFIX}
@@ -163,7 +158,7 @@ message(Static Lib prefix($${STATIC_LIB_PREFIX})  suffix($${STATIC_LIB_SUFFIX}) 
 #NOTE: link order is important.. otherwise you will get link errors like libvorbisenc.so.2: error adding symbols: DSO missing from command line
 
     #static libs
-    LIBS +=  $${STATIC_LIB_PREFIX}gotvptoplib$${STATIC_LIB_SUFFIX}
+    LIBS +=  $${STATIC_LIB_PREFIX}ptopengine$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}kodi$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}ffmpegavdevice$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}ffmpegavformat$${STATIC_LIB_SUFFIX}
@@ -213,53 +208,27 @@ message(Static Lib prefix($${STATIC_LIB_PREFIX})  suffix($${STATIC_LIB_SUFFIX}) 
     LIBS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
 
 
+
+unix:!android:{
     #shared libs
     LIBS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
     LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
 
-
-unix:!android:{
     LIBS +=  -lpthread -ldl -lGLU -lGL -lm -luuid -lrt
 }
 
-android:{
-#    LIBS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_LIB_SUFFIX}
-    LIBS +=  -ldl -lm -landroid -lEGL -lGLESv2  -lc -lstdc++ -llog -ljnigraphics
-}
-
 win32:{
+    #shared libs
+    LIBS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
+    LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
+
     LIBS +=  opengl32.lib
 	LIBS +=  glu32.lib
     LIBS +=  ole32.lib
     LIBS +=  winmm.lib
     LIBS +=  Rpcrt4.lib
 }
-
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
-
-contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
-    ANDROID_EXTRA_LIBS =
-
-
-    ANDROID_PACKAGE_SOURCE_DIR = \
-        $$PWD/android
-}
-
-android:{
-DISTFILES += \
-    android/AndroidManifest.xml \
-    android/gradle/wrapper/gradle-wrapper.jar \
-    android/gradlew \
-    android/res/values/libs.xml \
-    android/build.gradle \
-    android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew.bat \
-    android/res/values/strings.xml
-}
-
+!android:{
 #copy shared libraries to out directory
 #message(Static Lib prefix($${STATIC_LIB_PREFIX})  suffix($${STATIC_LIB_SUFFIX})  )
 message( Exe dest dir ($${DEST_EXE_DIR})  )
@@ -268,20 +237,58 @@ message( Share Lib dest dir ($${DEST_SHARED_LIBS_DIR})  )
  DESTDIR = $${DEST_EXE_DIR}
 
 #copy shared libs to local output directory so can easily be linked to
- CONFIG(debug, debug|release){
-    copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug/* $$shell_path($${DEST_SHARED_LIBS_DIR}))
- }
-
- CONFIG(release, debug|release){
-    copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/* $$shell_path($${DEST_SHARED_LIBS_DIR}) )
- }
+    copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/* $$shell_path($${DEST_SHARED_LIBS_DIR}))
 
  first.depends = $(first) copydata
  export(first.depends)
  export(copydata.commands)
  QMAKE_EXTRA_TARGETS += first copydata
+}
 
-unix:{
+unix:!android:{
     #give linux the path of where to load our shared libraries from for debugger
     LIBS += -L$${DEST_SHARED_LIBS_DIR}
 }
+
+
+android:{
+    CONFIG += mobility
+    MOBILITY =
+
+    #shared libs
+#    SHARED_LIB_PREFIX = $$PWD/bin-Android/lib/armeabi-v7a/
+#    ANDROID_EXTRA_LIBS = \
+#            $${SHARED_LIB_PREFIX}libpythoncore$${SHARED_PYTHON_LIB_SUFFIX}
+#            $${SHARED_LIB_PREFIX}libssl$${SHARED_PYTHON_LIB_SUFFIX}
+    ANDROID_LIBS = $$PWD/bin-Android/libs/armeabi-v7a
+#    ANDROID_EXTRA_LIBS += \
+#        $${ANDROID_LIBS}/libpythoncore$${SHARED_PYTHON_LIB_SUFFIX} \
+ #       $${ANDROID_LIBS}/libssl$${SHARED_PYTHON_LIB_SUFFIX}
+
+    LIBS += -l$${ANDROID_LIBS}/libssl$${SHARED_PYTHON_LIB_SUFFIX}
+    LIBS += -l$${ANDROID_LIBS}/libpythoncore$${SHARED_PYTHON_LIB_SUFFIX}
+
+
+#    LIBS +=  -ldl -lm -landroid -lEGL -lGLESv2  -lc -lstdc++ -llog -ljnigraphics
+    LIBS +=  -ldl -lm -lEGL -lGLESv2  -lc -lstdc++ -llog -ljnigraphics -landroid
+
+    # Default rules for deployment.
+    qnx: target.path = /tmp/$${TARGET}/bin
+    else: unix:!android: target.path = /opt/$${TARGET}/bin
+    !isEmpty(target.path): INSTALLS += target
+
+}
+
+
+ANDROID_PACKAGE_SOURCE_DIR = \
+        $$PWD/bin-Android
+
+DISTFILES += \
+    bin-Android/AndroidManifest.xml \
+    bin-Android/gradle/wrapper/gradle-wrapper.jar \
+    bin-Android/gradlew \
+    bin-Android/res/values/libs.xml \
+    bin-Android/build.gradle \
+    bin-Android/gradle/wrapper/gradle-wrapper.properties \
+    bin-Android/gradlew.bat \
+    bin-Android/res/values/strings.xml

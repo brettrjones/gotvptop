@@ -28,16 +28,16 @@ android:{
 CONFIG += mobility
 MOBILITY = 
 
-SHARED_LIB_RES_DIR = $$PWD/androidsimpletest/res/lib/armeabi-v7a/
+#SHARED_LIB_RES_DIR = $$PWD/androidsimpletest/libs/armeabi-v7a/
 
-ANDROID_EXTRA_LIBS = \
-        $$PWD/androidsimpletest/res/lib/armeabi-v7a/libqtsimpletestsharedlib.so
+ANDROID_PACKAGE_SOURCE_DIR = \
+        $$PWD/androidsimpletest
 
 #static libs
 LIBS += -l$$PWD/build-staticlibs/armeabi-v7a/libqtsimpleteststaticlib.a
 
 #shared libs
-LIBS += -l$$PWD/androidsimpletest/res/lib/armeabi-v7a/libqtsimpletestsharedlib.so
+LIBS += -l$$PWD/androidsimpletest/libs/armeabi-v7a/libqtsimpletestsharedlib.so
 
 #os libs
 LIBS +=  -ldl -lm -landroid -lc -lstdc++ -llog

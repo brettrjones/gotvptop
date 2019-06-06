@@ -30,11 +30,11 @@ android:{
     ANDROID_x86 = 0
     ANDROID_x86_64 = 0
 
-    DEST_EXE_DIR = $$PWD/android/lib
-    DEST_SHARED_LIBS_DIR = $$PWD/android/lib
-    DEST_PYTHON_EXE_DIR = $$PWD/android/lib
-    DEST_PYTHON_DLL_DIR = $$PWD/android/assets/python2.7/lib/python2.7
-    DEST_PYTHON_LIB_DIR = $$PWD/android/assets/python2.7/lib/python2.7
+    DEST_EXE_DIR = $$PWD/bin-Android/lib
+    DEST_SHARED_LIBS_DIR = $$PWD/bin-Android/lib
+    DEST_PYTHON_EXE_DIR = $$PWD/bin-Android/lib
+    DEST_PYTHON_DLL_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7
+    DEST_PYTHON_LIB_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7
 
     contains(ANDROID_TARGET_ARCH,armeabi-v8a) {
         DEFINES += TARGET_CPU_64BIT
@@ -77,11 +77,11 @@ android:{
         TARGET_ENDIAN_BIG=0
     }
 
-    DEST_SHARED_LIBS_DIR = $$PWD/android/lib/$${TARGET_ARCH_NAME}
-    DEST_EXE_DIR = $$PWD/android/lib/$${TARGET_ARCH_NAME}
-    DEST_PYTHON_EXE_DIR = $$PWD/android/lib/$${TARGET_ARCH_NAME}
-    DEST_PYTHON_DLL_DIR = $$PWD/android/assets/python2.7/lib/python2.7
-    DEST_PYTHON_LIB_DIR = $$PWD/android/assets/python2.7/lib/python2.7
+    DEST_SHARED_LIBS_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}
+    DEST_EXE_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}
+    DEST_PYTHON_EXE_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}
+    DEST_PYTHON_DLL_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7
+    DEST_PYTHON_LIB_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7
 
 #    contains(QMAKE_HOST.os,Windows):{
 #        DEST_EXE_DIR ~= s,/,\\,g # replace / with \
