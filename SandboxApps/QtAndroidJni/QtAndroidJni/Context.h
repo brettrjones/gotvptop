@@ -20,7 +20,7 @@
  */
 
 #include "JNIBase.h"
-#include "BroadcastReceiver.h"
+//#include "BroadcastReceiver.h"
 
 struct ANativeActivity;
 class CJNIIntent;
@@ -45,34 +45,44 @@ public:
   static std::string CONNECTIVITY_SERVICE;
 
   static CJNIPackageManager GetPackageManager();
-  static void startActivity(const CJNIIntent &intent);
+//  static void startActivity(const CJNIIntent &intent);
   static jni::jhobject getSystemService(const std::string &service);
   static int checkCallingOrSelfPermission(const std::string &permission);
-  static CJNIIntent registerReceiver(const CJNIBroadcastReceiver &receiver, const CJNIIntentFilter &filter);
-  static CJNIIntent registerReceiver(const CJNIIntentFilter &filter);
-  static void unregisterReceiver(const CJNIBroadcastReceiver &receiver);
-  static void sendBroadcast(const CJNIIntent &intent);
-  static CJNIIntent getIntent();
+//  static CJNIIntent registerReceiver(const CJNIBroadcastReceiver &receiver, const CJNIIntentFilter &filter);
+//  static CJNIIntent registerReceiver(const CJNIIntentFilter &filter);
+//  static void unregisterReceiver(const CJNIBroadcastReceiver &receiver);
+//  static void sendBroadcast(const CJNIIntent &intent);
+//  static CJNIIntent getIntent();
   static CJNIClassLoader getClassLoader();
   static CJNIApplicationInfo getApplicationInfo();
   static std::string getPackageName();
   static std::string getPackageResourcePath();
-  static CJNIFile getCacheDir();
-  static CJNIFile getDir(const std::string &path, int mode);
-  static CJNIFile getExternalFilesDir(const std::string &path);
-  static CJNIContentResolver getContentResolver();
-  static CJNIWindow getWindow();
+//  static CJNIFile getCacheDir();
+//  static CJNIFile getDir(const std::string &path, int mode);
+//  static CJNIFile getExternalFilesDir(const std::string &path);
+//  static CJNIContentResolver getContentResolver();
+//  static CJNIWindow getWindow();
 
   CJNIContext( JavaVM * jvm, JNIEnv * env );
 
+  static void activityInialized();
+  static JavaVM * m_JniJvm;
+  static JNIEnv * m_JniEnv;
+
+  void mainWindowInialized();
+
+
 protected:
-  ~CJNIContext();
+  ~CJNIContext() = default;
+
+  // Main activity
+  static jclass m_ActivityClass;
 
   static jni::jhobject m_context;
 
 protected:
   CJNIContext();
 
-  void PopulateStaticFields();
+  static void PopulateStaticFields();
   void operator=(CJNIContext const&){};
 };

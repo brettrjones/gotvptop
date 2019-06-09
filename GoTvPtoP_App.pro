@@ -8,6 +8,9 @@ PROJECT_NAME = gotvptop
 TARGET_NAME = gotvptop
 
 QT += gui core concurrent widgets network multimedia opengl xml svg quickwidgets
+android:{
+    QT += androidextras
+}
 
 DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MULTIMEDIA_LIB
 DEFINES += LIB_STATIC _LIB

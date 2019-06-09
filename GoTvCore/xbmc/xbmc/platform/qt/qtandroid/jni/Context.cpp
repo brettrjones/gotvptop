@@ -57,19 +57,91 @@
 #include "MediaSync.h"
 
 #include <qtandroid/native_activity.h>
+#include <QAndroidJniObject>
+#include <QtAndroid>
+#include <QDebug>
 
 using namespace jni;
 
 jhobject CJNIContext::m_context(0);
 
+CJNIContext * g_JniContext = nullptr;
+
 std::string CJNIContext::CONNECTIVITY_SERVICE;
 
-CJNIContext::CJNIContext(const ANativeActivity *nativeActivity)
+// must be called before main
+void CJNIContext::createJniContext( JavaVM * jvm, JNIEnv * env )
 {
-  m_context.reset(nativeActivity->clazz);
-  xbmc_jni_on_load(nativeActivity->vm, nativeActivity->env);
-  CJNIBase::SetSDKVersion(nativeActivity->sdkVersion);
-  PopulateStaticFields();
+    if( !g_JniContext )
+    {
+        g_JniContext = new CJNIContext( jvm, env );
+    }
+}
+
+CJNIContext& CJNIContext::getJniContext()
+{
+    return *g_JniContext;
+}
+
+void CJNIContext::destroyJniContext()
+{
+    if( g_JniContext )
+    {
+        delete g_JniContext;
+        g_JniContext = nullptr;
+    }
+}
+
+CJNIContext::CJNIContext( JavaVM * jvm, JNIEnv * env )
+{
+  xbmc_jni_on_load( jvm, env );
+  // attach thread may be needed if created in different thread
+  //m_JniJvm->AttachCurrentThread(&m_JniEnv, NULL);
+
+  QAndroidJniObject mainActivity = QtAndroid::androidActivity();
+  if ( mainActivity.isValid() )
+  {
+      jobject activityObj = mainActivity.object();
+      if( activityObj )
+      {
+          jclass clazzObj = env->GetObjectClass(activityObj);
+          if ( clazzObj )
+          {
+              jmethodID idNativeActivity_getAppContext = env->GetMethodID(clazzObj, "getApplicationContext", "()Landroid/content/Context;");
+              if( idNativeActivity_getAppContext )
+              {
+                  jobject appContextObj = env->CallObjectMethod(activityObj, idNativeActivity_getAppContext, "()Landroid/content/Context;");
+                  if( appContextObj )
+                  {
+                       m_context.reset( appContextObj );
+
+                      CJNIBase::SetSDKVersion( 21 );
+                      PopulateStaticFields();
+                  }
+                  else
+                  {
+                      qWarning() << "getApplicationContext object is invalid";
+                  }
+              }
+              else
+              {
+                  qWarning() << "getApplicationContext method id is invalid";
+              }
+          }
+          else
+          {
+              qWarning() << "clazz obj is null";
+          }
+      }
+      else
+      {
+          qWarning() << "activity object is invalid";
+      }
+  }
+  else
+  {
+      qWarning()<<"main activity is invalid";
+  }
 }
 
 CJNIContext::~CJNIContext()

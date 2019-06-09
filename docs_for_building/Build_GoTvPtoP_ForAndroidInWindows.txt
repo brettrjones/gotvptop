@@ -7,6 +7,7 @@ tested with:
 	Qt version 5.12.3 
 	JDK version oracle JDK 1.8.0
 	Android Studio 3.3.1 ( android studio may be optional )
+	NOTE: the latest Android Studio seems incompatable with Qt 5.12.3 so may be best to stay with a older version and not update it
 
 Android Target is Api 21 and Sdk Android 5.0 but built with sdk version android-28
 
@@ -27,7 +28,7 @@ then
 If debugger does not stop at breakpoint 
 	Look at log in Qcreator->Window->Views->Debugger Log
 	In my case qt was using a old version of python 2.7 and had some weak reference errors
-	I removed python directory from by PATH and rebooted
+	I removed python directory from eviroment variable PATH and rebooted
 
 
 install the usb driver so can attach/debug android devices
@@ -48,17 +49,18 @@ JAVA_HOME F:\android\jdk1.8.0_131
 JRE_HOME F:\android\jre1.8.0_131
 
 === qt settings ===
-
 1.) In Qt Creator Tools > Options > Devices > Android 
   a.) JDK location - F:\android\jdk1.8.0_131
   b.) Android SDK Location - F:\android\android-sdk
   c.) Android NDK Location - F:\android\ndk-windows-x86_64\android-ndk-r18b
-  d.) In SDK Manager install all packages for Android 5.0 and Android 9
+  d.) In SDK Manager install sdk packages for Android 5.0 and Android 9
   if get error about .android\repositories.cfg could not be loaded then create a empty file for it using text editor
   
 2.) Configure Android for armebi-v7a
-	a.) change Buid Android APK to android-28
+	a.) change Buid Android APK to android-28 or whatever is the highest sdk installed
 	b.) In Build Enviroment change ANDROID_NDK_PLATFORM from android-16 to android-21
+	c.) In Build Settings->Build Steps you can uncheck Enable QML debugging and Enable Qt Quick Compiler. 
+		There is no dependencies on QtQuick
 
 3.) Generate keystore
 Instructions at https://doc.qt.io/qtcreator/creator-deploying-android.html#specifying-settings-for-packages

@@ -54,7 +54,7 @@ extern "C" int XBMC_Run( bool renderGUI, const CAppParamParser &params )
         return false;
     g_RBP.LogFirmwareVersion();
 #elif defined(TARGET_ANDROID)
-    CXBMCApp::get()->Initialize();
+    //CXBMCApp::get()->Initialize();
 #endif
 
     if( renderGUI && !g_application.CreateGUI() )

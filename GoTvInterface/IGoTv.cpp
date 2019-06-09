@@ -14,6 +14,8 @@
 # include "GoTvInterface/OsLinux/ILinux.h"
 #elif TARGET_OS_ANDROID
 # include "GoTvInterface/OsAndroid/IAndroid.h"
+# include "CoreLib/VxJava.h"
+# include "GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Context.h"
 #else 
 echo traget os is not defined
 #endif 
@@ -319,6 +321,10 @@ void IGoTv::setSslCertFile( std::string certFile )
 //============================================================================
 bool IGoTv::doPreStartup()
 {
+#ifdef TARGET_OS_ANDROID
+    CJNIContext::createJniContext( GetJavaEnvCache().getJavaVM(),  GetJavaEnvCache().getJavaEnv() );
+#endif // TARGET_OS_ANDROID
+
 #ifdef DEBUG_KODI_ENABLE_DEBUG_LOGGING
     CLog::SetLogLevel( LOG_LEVEL_DEBUG );
 #endif //   DEBUG_KODI_ENABLE_DEBUG_LOGGING

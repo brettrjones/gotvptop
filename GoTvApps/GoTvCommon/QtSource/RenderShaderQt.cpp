@@ -61,7 +61,8 @@ RenderShaderQt::RenderShaderQt( ESHADERMETHOD shaderMethod, EShaderType shaderTy
     , m_ShaderName( shaderName )
     , m_RenderLogic( renderLogic )
 {
- #ifdef GL_RGBA16F_EXT
+ //#ifdef GL_RGBA16F_EXT
+#if 0 //  crashes because render system not setup yet
     if( CServiceBroker::GetRenderSystem()->IsExtSupported( "GL_EXT_color_buffer_float" ) )
     {
         m_floattex = true;
