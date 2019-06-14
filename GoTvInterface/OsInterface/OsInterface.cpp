@@ -22,6 +22,13 @@
 #include <WinSock2.h>
 #endif //defined(TARGET_OS_WINDOWS)
 
+#if defined(TARGET_OS_ANDROID)
+# include "platform/qt/qtandroid/jni/Context.h"
+# include "platform/qt/qtandroid/jni/System.h"
+# include "platform/qt/qtandroid/jni/ApplicationInfo.h"
+# include "platform/qt/qtandroid/jni/File.h"
+#endif // TARGET_OS_ANDROID
+
 #include "filesystem/Directory.h"
 #include "filesystem/File.h"
 #include "filesystem/SpecialProtocol.h"
@@ -43,18 +50,21 @@ using namespace XFILE;
 extern "C" int XBMC_Run( bool renderGUI, const CAppParamParser &params );
 
 
+//============================================================================
 OsInterface::OsInterface( IGoTv& gotv )
     : m_IGoTv( gotv )
     , m_RunResultCode( 0 )
 {
 }
 
+//============================================================================
 bool OsInterface::initRun( const CAppParamParser& cmdLineParams )
 {
     m_CmdLineParams = &cmdLineParams;
     return true;
 }
 
+//============================================================================
 bool OsInterface::doRun( EAppModule appModule )
 {
     if( !m_IGoTv.getIsAppModuleRunning( appModule ) )
@@ -81,7 +91,7 @@ bool OsInterface::doRun( EAppModule appModule )
 
 bool OsInterface::initUserPaths()
 {
-	std::string exePath = CUtil::ResolveExecutablePath();
+    std::string exePath = CUtil::ResolveExecutablePath( true );
 #if defined(TARGET_OS_WINDOWS)
 	std::string strHomePath = exePath;
 	// strip off exe name
@@ -111,14 +121,99 @@ bool OsInterface::initUserPaths()
 			delete[] buf;
 		}
 	}
+#elif defined(TARGET_OS_ANDROID)
+    CJNIContext& jniContext = CJNIContext::getJniContext();
+    std::string systemLibsDir = CJNISystem::getProperty("java.library.path");
+    setenv("KODI_ANDROID_SYSTEM_LIBS", systemLibsDir.c_str(), 0);
+    std::string nativeLibsDir = jniContext.getApplicationInfo().nativeLibraryDir;
+    setenv("KODI_ANDROID_LIBS", nativeLibsDir.c_str(), 0);
+    std::string apkResourceDir = jniContext.getPackageResourcePath();
+    setenv("KODI_ANDROID_APK", apkResourceDir.c_str(), 0);
+    LogMsg( LOG_DEBUG, "Sys (%s) native (%s) resource (%s)", systemLibsDir.c_str(), nativeLibsDir.c_str(), apkResourceDir.c_str() );
+
+    std::string appName = CCompileInfo::GetAppName();
+    StringUtils::ToLower(appName);
+    std::string className = CCompileInfo::GetPackage();
+
+    std::string cacheDir = jniContext.getCacheDir().getAbsolutePath();
+    std::string xbmcHome = CJNISystem::getProperty("xbmc.home", "");
+    std::string rootApkDir;
+    if (xbmcHome.empty())
+    {
+        rootApkDir = cacheDir + "/apk";
+    }
+    else
+    {
+        rootApkDir = xbmcHome;
+    }
+
+    std::string kodiAssetsPath = rootApkDir + "/assets/kodi";
+    std::string gotvAssetsDir = rootApkDir + "/assets/gotv";
+
+    setenv("KODI_BIN_HOME", kodiAssetsPath.c_str(), 0);
+    setenv("KODI_HOME", kodiAssetsPath.c_str(), 0);
+    setenv("KODI_BINADDON_PATH", (cacheDir + "/libs").c_str(), 0);
+
+    LogMsg( LOG_DEBUG, "Apk (%s) kodi home (%s) bin addon (%s)", rootApkDir.c_str(), gotvAssetsDir.c_str(), (cacheDir + "/libs").c_str() );
+
+    std::string externalDir = CJNISystem::getProperty("xbmc.data", "");
+    if (externalDir.empty())
+    {
+      CJNIFile androidPath = jniContext.getExternalFilesDir("");
+      if (!androidPath)
+        androidPath = jniContext.getDir(className.c_str(), 1);
+
+      if (androidPath)
+        externalDir = androidPath.getAbsolutePath();
+    }
+
+    if ( externalDir.empty() )
+    {
+        externalDir = getenv("KODI_TEMP");
+    }
+
+    std::string kodiHome = externalDir + "/assets/kodi";
+    setenv("HOME", kodiHome.c_str(), 0);
+
+    std::string pythonPath = getenv("KODI_ANDROID_APK");
+    pythonPath += "/assets/kodi/python2.7";
+    setenv("PYTHONHOME", pythonPath.c_str(), 1);
+    setenv("PYTHONPATH", "", 1);
+    setenv("PYTHONOPTIMIZE","", 1);
+    setenv("PYTHONNOUSERSITE", "1", 1);
+
+    LogMsg( LOG_DEBUG, "externalDir (%s) python home (%s) apk (%s)", externalDir.c_str(), pythonPath.c_str(), apkResourceDir.c_str() );
+
 #endif // defined(TARGET_OS_WINDOWS)
-	// for ptop use forward slash
+    // for gotv use forward slash
 	std::string ptopExePath = exePath;
 	VxFileUtil::makeForwardSlashPath(ptopExePath);
 	VxFileUtil::assureTrailingDirectorySlash(ptopExePath);
 
 	VxSetExeDirectory( ptopExePath.c_str() );
 
+#if defined(TARGET_OS_ANDROID)
+    VxFileUtil::makeForwardSlashPath(kodiAssetsPath);
+    VxFileUtil::assureTrailingDirectorySlash(kodiAssetsPath);
+    VxSetExeKodiAssetsDirectory( kodiAssetsPath.c_str() );
+
+    VxFileUtil::makeForwardSlashPath(gotvAssetsDir);
+    VxFileUtil::assureTrailingDirectorySlash(gotvAssetsDir);
+    VxSetExeGoTvAssetsDirectory( gotvAssetsDir.c_str() );
+
+    VxFileUtil::makeForwardSlashPath(externalDir);
+    VxFileUtil::assureTrailingDirectorySlash(externalDir);
+    VxSetRootDataStorageDirectory( externalDir.c_str() );
+
+    std::string pythonResPath = pythonPath + "/lib/python2.7";
+    VxFileUtil::makeForwardSlashPath(pythonResPath);
+    VxFileUtil::assureTrailingDirectorySlash(pythonResPath);
+    VxSetPythonDllDirectory( pythonResPath.c_str() );
+    VxSetPythonLibDirectory( pythonResPath.c_str() );
+
+    // android only initi directories now so have path to settings.xml needed in startup
+    initDirectories();
+#endif // defined(TARGET_OS_ANDROID)
 	return true;
 }
 
@@ -172,7 +267,8 @@ bool OsInterface::initDirectories()
 	CSpecialProtocol::SetPath( "special://xbmc/system/python/Lib", gotvDir.c_str() );
 
 	// Kodi master profile path ( In Roaming pm windows )
-	CEnvironment::setenv( CCompileInfo::GetUserProfileEnvName(), CSpecialProtocol::TranslatePath( "special://masterprofile/" ) );
+    gotvDir = CSpecialProtocol::TranslatePath( "special://masterprofile/" );
+    CEnvironment::setenv( CCompileInfo::GetUserProfileEnvName(), gotvDir.c_str() );
 
     m_IGoTv.createUserDirs();
 

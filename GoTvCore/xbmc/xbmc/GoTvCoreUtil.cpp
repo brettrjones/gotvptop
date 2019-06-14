@@ -1964,7 +1964,7 @@ int CUtil::TranslateRomanNumeral( const char* roman_numeral )
 }
 
 //========================================================================
-std::string CUtil::ResolveExecutablePath()
+std::string CUtil::ResolveExecutablePath( bool dirOnly )
 {
     std::string strExecutablePath;
 #ifdef TARGET_OS_WINDOWS
@@ -2000,11 +2000,13 @@ std::string CUtil::ResolveExecutablePath()
 #elif defined(TARGET_OS_ANDROID) 
     strExecutablePath = CXBMCApp::getApplicationInfo().nativeLibraryDir;
 
-    std::string appName = CCompileInfo::GetAppName();
-    std::string libName = "lib" + appName + ".so";
-    StringUtils::ToLower( libName );
-    strExecutablePath += "/" + libName;
-
+    if( !dirOnly )
+    {
+        std::string appName = CCompileInfo::GetAppName();
+        std::string libName = "lib" + appName + ".so";
+        StringUtils::ToLower( libName );
+        strExecutablePath += "/" + libName;
+    }
 #else
     /* Get our PID and build the name of the link in /proc */
     pid_t pid = getpid();

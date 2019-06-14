@@ -34,7 +34,7 @@
 //============================================================================
 
 #if defined(TARGET_OS_ANDROID)
-# define PYTHON_RELATIVE_PATH "assets/python2.7/lib/python2.7/"
+# define PYTHON_RELATIVE_PATH "assets/kodi/python2.7/lib/python2.7/"
 #else
 # define PYTHON_RELATIVE_PATH "assets/kodi/system/Python/"
 #endif // TARGET_OS_WINDOWS
@@ -363,9 +363,6 @@ bool VxIsNetworkLoopbackAllowed( void )
 //============================================================================
 //=== directories ===//
 //============================================================================
-void			            VxSetExeDirectory(const char * exeDir);
-std::string&	            VxGetExeDirectory(void);
-
 
 //============================================================================
 void VxSetExeDirectory(const char * exeDir)
@@ -384,8 +381,16 @@ void VxSetExeDirectory(const char * exeDir)
 
 //============================================================================
 std::string& VxGetExeDirectory(void) { return g_strExeDir; }
+
+void VxSetExeKodiAssetsDirectory(const char * assetsDir){ g_strExeKodiAssetsDir = assetsDir; }
 std::string& VxGetExeKodiAssetsDirectory( void ) { return g_strExeKodiAssetsDir; }
+
+void VxSetExeGoTvAssetsDirectory(const char * assetsDir){ g_strExeGoTvAssetsDir = assetsDir; }
 std::string& VxGetExeGoTvAssetsDirectory(void) { return g_strExeGoTvAssetsDir; }
+
+void VxSetPythonExeDirectory( const char * pythonDir ){ g_strExeDirPython = pythonDir; }
+void VxSetPythonDllDirectory( const char * pythonDir ){ g_strExeDirPythonDlls = pythonDir; }
+void VxSetPythonLibDirectory( const char * pythonDir ){ g_strExeDirPythonLib = pythonDir; }
 
 //============================================================================
 void VxSetRootDataStorageDirectory(const char * rootDataDir)

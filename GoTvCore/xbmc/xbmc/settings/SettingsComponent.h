@@ -57,6 +57,7 @@ public:
   std::shared_ptr<CProfileManager> GetProfileManager();
 
 private:
+  bool InitDirectoriesAndroid(bool bPlatformDirectories);
   bool InitDirectoriesLinux(bool bPlatformDirectories);
   bool InitDirectoriesOSX(bool bPlatformDirectories);
   bool InitDirectoriesWin32(bool bPlatformDirectories);

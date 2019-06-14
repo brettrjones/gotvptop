@@ -19,7 +19,7 @@
 #ifdef TARGET_DARWIN_IOS
 #include "platform/darwin/DarwinUtils.h"
 #endif
-#ifdef TARGET_WINDOWS
+#if defined(TARGET_WINDOWS) || defined( TARGET_OS_ANDROID )
 #include "platform/Environment.h"
 #endif
 #include "profiles/ProfileManager.h"
@@ -29,6 +29,9 @@
 #ifdef TARGET_WINDOWS
 #include "win32util.h"
 #endif
+
+#include <CoreLib/VxFileUtil.h>
+#include <CoreLib/VxGlobals.h>
 
 CSettingsComponent::CSettingsComponent()
 {
@@ -50,7 +53,9 @@ void CSettingsComponent::Init( const CAppParamParser &params )
 //        m_advancedSettings->Initialize( params, *m_settings->GetSettingsManager() );
 
         // only the InitDirectories* for the current platform should return true
-        bool inited = InitDirectoriesLinux( params.m_platformDirectories );
+        bool inited = InitDirectoriesAndroid( params.m_platformDirectories );
+        if( !inited )
+            inited = InitDirectoriesLinux( params.m_platformDirectories );
         if( !inited )
             inited = InitDirectoriesOSX( params.m_platformDirectories );
         if( !inited )
@@ -140,6 +145,32 @@ std::shared_ptr<CAdvancedSettings> CSettingsComponent::GetAdvancedSettings()
 std::shared_ptr<CProfileManager> CSettingsComponent::GetProfileManager()
 {
     return m_profileManager;
+}
+
+
+bool CSettingsComponent::InitDirectoriesAndroid( bool bPlatformDirectories )
+{
+#ifdef TARGET_OS_ANDROID
+    // kodi bin assets path
+    std::string xbmcPath = CUtil::GetHomePath();
+    CEnvironment::setenv( "KODI_HOME", xbmcPath.c_str() );
+    CSpecialProtocol::SetXBMCBinPath( xbmcPath );
+    CSpecialProtocol::SetXBMCPath( xbmcPath );
+    CSpecialProtocol::SetXBMCBinAddonPath( xbmcPath + "/addons" );
+
+    // kodi user data storage path
+    std::string strUserDataFolder = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirAppKodiData ).c_str() );
+    CSpecialProtocol::SetHomePath( strUserDataFolder );
+    CSpecialProtocol::SetLogPath( URIUtils::AddFileToFolder( strUserDataFolder, "logs" ) );
+    CSpecialProtocol::SetMasterProfilePath( URIUtils::AddFileToFolder( strUserDataFolder, "userdata" ) );
+    CSpecialProtocol::SetTempPath( URIUtils::AddFileToFolder( strUserDataFolder, "cache" ) );
+
+    CEnvironment::setenv( "KODI_PROFILE_USERDATA", CSpecialProtocol::TranslatePath( "special://masterprofile/" ).c_str() );
+
+    return true;
+#else
+    return false;
+#endif // TARGET_OS_ANDROID
 }
 
 bool CSettingsComponent::InitDirectoriesLinux( bool bPlatformDirectories )

@@ -105,97 +105,97 @@ public:
 	//========================================================================
 	void						assureUserSpecificDirIsSet( const char * checkReason );
 
-	virtual void				fromGuiSetIsAppCommercial( bool isCommercial );
-	virtual bool				fromGuiGetIsAppCommercial( void );
-	virtual uint16_t			fromGuiGetAppVersionBinary( void );
-	const char *				fromGuiGetAppVersionString( void );
-	virtual const char *		fromGuiGetAppName( void );
-	virtual const char *		fromGuiGetAppNameNoSpaces( void );
-	virtual void				fromGuiAppStartup( const char * assetDir, const char * rootDataDir  );
+    virtual void				fromGuiSetIsAppCommercial( bool isCommercial ) override;
+    virtual bool				fromGuiGetIsAppCommercial( void ) override;
+    virtual uint16_t			fromGuiGetAppVersionBinary( void ) override;
+    const char *				fromGuiGetAppVersionString( void ) override;
+    virtual const char *		fromGuiGetAppName( void ) override;
+    virtual const char *		fromGuiGetAppNameNoSpaces( void ) override;
+    virtual void				fromGuiAppStartup( const char * assetDir, const char * rootDataDir  ) override;
 
-	virtual void				fromGuiKickWatchdog( void );
-	virtual void				fromGuiSetUserSpecificDir( const char * userSpecificDir  );
-	virtual void				fromGuiSetUserXferDir( const char * userXferDir  );
-	virtual uint64_t			fromGuiGetDiskFreeSpace( void  ); 
-	virtual void				fromGuiAppShutdown( void  );
-	virtual void				fromGuiAppIdle( void  );
-	virtual void				fromGuiAppPause( void );
-	virtual void				fromGuiAppResume( void );
+    virtual void				fromGuiKickWatchdog( void ) override;
+    virtual void				fromGuiSetUserSpecificDir( const char * userSpecificDir  ) override;
+    virtual void				fromGuiSetUserXferDir( const char * userXferDir  ) override;
+    virtual uint64_t			fromGuiGetDiskFreeSpace( void  ) override;
+    virtual void				fromGuiAppShutdown( void  ) override;
+    virtual void				fromGuiAppIdle( void  ) override;
+    virtual void				fromGuiAppPause( void ) override;
+    virtual void				fromGuiAppResume( void ) override;
 
-	virtual void				fromGuiUserLoggedOn( VxNetIdent * netIdent );
-	virtual void				fromGuiOnlineNameChanged( const char * newOnlineName );
-	virtual void				fromGuiMoodMessageChanged( const char * newMoodMessage );
-	virtual void				fromGuiSetUserHasProfilePicture( bool haveProfilePick );
-	virtual void				fromGuiUpdateMyIdent( VxNetIdent * netIdent, bool permissionAndStatsOnly = false );
-	virtual void				fromGuiQueryMyIdent( VxNetIdent * poRetIdent );
-	virtual void				fromGuiSetIdentHasTextOffers( VxGUID& onlineId, bool hasTextOffers ); 
+    virtual void				fromGuiUserLoggedOn( VxNetIdent * netIdent ) override;
+    virtual void				fromGuiOnlineNameChanged( const char * newOnlineName ) override;
+    virtual void				fromGuiMoodMessageChanged( const char * newMoodMessage ) override;
+    virtual void				fromGuiSetUserHasProfilePicture( bool haveProfilePick ) override;
+    virtual void				fromGuiUpdateMyIdent( VxNetIdent * netIdent, bool permissionAndStatsOnly = false ) override;
+    virtual void				fromGuiQueryMyIdent( VxNetIdent * poRetIdent ) override;
+    virtual void				fromGuiSetIdentHasTextOffers( VxGUID& onlineId, bool hasTextOffers ) override;
 
-	virtual bool				fromGuiOrientationEvent( float f32RotX, float f32RotY, float f32RotZ  );
-	virtual bool				fromGuiMouseEvent( EMouseButtonType eMouseButType, EMouseEventType eMouseEventType, int iMouseXPos, int iMouseYPos  );
-	virtual bool				fromGuiMouseWheel( float f32MouseWheelDist ); 
-	virtual bool				fromGuiKeyEvent( EKeyEventType eKeyEventType, EKeyCode eKey, int iFlags = 0 );
+    virtual bool				fromGuiOrientationEvent( float f32RotX, float f32RotY, float f32RotZ  ) override;
+    virtual bool				fromGuiMouseEvent( EMouseButtonType eMouseButType, EMouseEventType eMouseEventType, int iMouseXPos, int iMouseYPos  ) override;
+    virtual bool				fromGuiMouseWheel( float f32MouseWheelDist ) override;
+    virtual bool				fromGuiKeyEvent( EKeyEventType eKeyEventType, EKeyCode eKey, int iFlags = 0 ) override;
 
-	virtual void				fromGuiNativeGlInit( void );
-	virtual void				fromGuiNativeGlResize( int w, int h );
-	virtual int					fromGuiNativeGlRender( void );
-	virtual void				fromGuiNativeGlPauseRender( void );
-	virtual void				fromGuiNativeGlResumeRender( void );
-	virtual void				fromGuiNativeGlDestroy( void );
+    virtual void				fromGuiNativeGlInit( void ) override;
+    virtual void				fromGuiNativeGlResize( int w, int h ) override;
+    virtual int					fromGuiNativeGlRender( void ) override;
+    virtual void				fromGuiNativeGlPauseRender( void ) override;
+    virtual void				fromGuiNativeGlResumeRender( void ) override;
+    virtual void				fromGuiNativeGlDestroy( void ) override;
 
-	virtual void				fromGuiMicrophoneData( int16_t * pu16PcmData, uint16_t pcmDataLenBytes );
-	virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, int totalDelayTimeMs, int clockDrift );
-	virtual void				fromGuiMuteMicrophone( bool muteMic ); 
-	virtual bool				fromGuiIsMicrophoneMuted( void ); 
-	virtual void				fromGuiMuteSpeaker(	bool muteSpeaker ); 
-	virtual bool				fromGuiIsSpeakerMuted( void ); 
-	virtual void				fromGuiEchoCancelEnable( bool enableEchoCancel ); 
-	virtual bool				fromGuiIsEchoCancelEnabled( void ); 
+    virtual void				fromGuiMicrophoneData( int16_t * pu16PcmData, uint16_t pcmDataLenBytes ) override;
+    virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, int totalDelayTimeMs, int clockDrift ) override;
+    virtual void				fromGuiMuteMicrophone( bool muteMic ) override;
+    virtual bool				fromGuiIsMicrophoneMuted( void ) override;
+    virtual void				fromGuiMuteSpeaker(	bool muteSpeaker ) override;
+    virtual bool				fromGuiIsSpeakerMuted( void ) override;
+    virtual void				fromGuiEchoCancelEnable( bool enableEchoCancel ) override;
+    virtual bool				fromGuiIsEchoCancelEnabled( void ) override;
 
-	virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen );
+    virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen ) override;
 
-	virtual bool				fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName );
-	virtual bool				fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char * fileName );
-	virtual bool				fromGuiPlayLocalMedia( const char * fileName, uint64_t fileLen, uint8_t fileType, int pos0to100000 = 0 );
+    virtual bool				fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName ) override;
+    virtual bool				fromGuiVideoRecord( EVideoRecordState eRecState, VxGUID& feedId, const char * fileName ) override;
+    virtual bool				fromGuiPlayLocalMedia( const char * fileName, uint64_t fileLen, uint8_t fileType, int pos0to100000 = 0 ) override;
 
 
-	virtual bool				fromGuiAssetAction( EAssetAction assetAction, AssetInfo& assetInfo, int pos0to100000 = 0 );
-	virtual bool				fromGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 = 0 );
-	virtual bool				fromGuiSendAsset( AssetInfo& assetInfo );
+    virtual bool				fromGuiAssetAction( EAssetAction assetAction, AssetInfo& assetInfo, int pos0to100000 = 0 ) override;
+    virtual bool				fromGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 = 0 ) override;
+    virtual bool				fromGuiSendAsset( AssetInfo& assetInfo ) override;
 
-	virtual void				fromGuiWantMediaInput( EMediaInputType mediaType, MediaCallbackInterface * callback, void * userData, bool wantInput );
-	virtual void				fromGuiWantMediaInput( VxGUID& onlineId, EMediaInputType mediaType, bool wantInput );
+    virtual void				fromGuiWantMediaInput( EMediaInputType mediaType, MediaCallbackInterface * callback, void * userData, bool wantInput ) override;
+    virtual void				fromGuiWantMediaInput( VxGUID& onlineId, EMediaInputType mediaType, bool wantInput ) override;
 
-	virtual void				fromGuiVideoData( uint32_t u32FourCc, uint8_t * pu8VidDataIn, int iWidth, int iHeight, uint32_t u32VidDataLen, int iRotation );
+    virtual void				fromGuiVideoData( uint32_t u32FourCc, uint8_t * pu8VidDataIn, int iWidth, int iHeight, uint32_t u32VidDataLen, int iRotation ) override;
 	virtual bool				fromGuiMovieDone( void )							{ return true; };
 
-	virtual void				fromGuiNetworkAvailable( const char * lclIp = NULL, bool isCellularNetwork = false );
-	virtual void				fromGuiNetworkLost( void );
-	virtual void				fromGuiNetworkSettingsChanged( void );
+    virtual void				fromGuiNetworkAvailable( const char * lclIp = NULL, bool isCellularNetwork = false ) override;
+    virtual void				fromGuiNetworkLost( void ) override;
+    virtual void				fromGuiNetworkSettingsChanged( void ) override;
 
-	virtual void				fromGuiVerifyAnchorSettings( void );
-	virtual void				fromGuiRunIsPortOpenTest( uint16_t port );
+    virtual void				fromGuiVerifyAnchorSettings( void ) override;
+    virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) override;
 
 	virtual void				fromGuiUpdateWebPageProfile(	const char *	pProfileDir,	// directory containing user profile
 																const char *	strGreeting,	// greeting text
 																const char *	aboutMe,		// about me text
 																const char *	url1,			// favorite url 1
 																const char *	url2,			// favorite url 2
-																const char *	url3 );			// favorite url 3
+                                                                const char *	url3 ) override;			// favorite url 3
 
-	virtual void				fromGuiSetNetSettings( NetSettings& netSettings );
-	virtual void				fromGuiGetNetSettings( NetSettings& netSettings );
-	virtual void				fromGuiSetRelaySettings( int userRelayMaxCnt, int systemRelayMaxCnt );
+    virtual void				fromGuiSetNetSettings( NetSettings& netSettings ) override;
+    virtual void				fromGuiGetNetSettings( NetSettings& netSettings ) override;
+    virtual void				fromGuiSetRelaySettings( int userRelayMaxCnt, int systemRelayMaxCnt ) override;
 
-	virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings );
-	virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings );
+    virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings ) override;
+    virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings ) override;
 
-	virtual void				fromGuiSetPluginPermission( EPluginType ePluginType, EFriendState eFriendState );
-	virtual int					fromGuiGetPluginPermission( EPluginType ePluginType );
-	virtual EPluginServerState	fromGuiGetPluginServerState( EPluginType ePluginType );
+    virtual void				fromGuiSetPluginPermission( EPluginType ePluginType, EFriendState eFriendState ) override;
+    virtual int					fromGuiGetPluginPermission( EPluginType ePluginType ) override;
+    virtual EPluginServerState	fromGuiGetPluginServerState( EPluginType ePluginType ) override;
 
-	virtual void				fromGuiStartPluginSession( EPluginType ePluginType, VxGUID& onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
-	virtual void				fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID()  );
-	virtual bool				fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent * netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+    virtual void				fromGuiStartPluginSession( EPluginType ePluginType, VxGUID& onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
+    virtual void				fromGuiStopPluginSession( EPluginType ePluginType, VxGUID& onlineId, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID()  ) override;
+    virtual bool				fromGuiIsPluginInSession( EPluginType ePluginType, VxNetIdent * netIdent = NULL, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
 
 	virtual bool				fromGuiMakePluginOffer(	EPluginType		ePluginType, 
 														VxGUID&			onlineId,
@@ -203,13 +203,13 @@ public:
 														const char *	pOfferMsg, 
 														const char *	pFileName = NULL,
 														uint8_t *			fileHashId = 0,
-														VxGUID			lclSessionId = VxGUID::nullVxGUID() );
+                                                        VxGUID			lclSessionId = VxGUID::nullVxGUID() ) override;
 
 	virtual bool				fromGuiToPluginOfferReply(	EPluginType		ePluginType,
 															VxGUID&			onlineId,
 															  int			pvUserData,
 															int				iOfferResponse,
-															VxGUID			lclSessionId );
+                                                            VxGUID			lclSessionId ) override;
 
 	virtual int					fromGuiPluginControl(	EPluginType		ePluginType, 
 														VxGUID&			onlineId, 
@@ -217,75 +217,75 @@ public:
 														const char *	pAction,
 														uint32_t				u32ActionData,
 														VxGUID&			fileId = VxGUID::nullVxGUID(),
-														uint8_t *			fileHashId = 0 );
+                                                        uint8_t *			fileHashId = 0 ) override;
 
 	virtual bool				fromGuiInstMsg(		EPluginType		ePluginType, 
 													VxGUID&			onlineId, 
-													const char *	pMsg ); 
+                                                    const char *	pMsg ) override;
 
 	virtual bool				fromGuiChangeMyFriendshipToHim(	VxGUID&			onlineId, 
 																EFriendState	eMyFriendshipToHim,
-																EFriendState	eHisFriendshipToMe );
-	virtual void				fromGuiSendContactList( EFriendViewType eFriendView, int MaxContactsToSend );
-	virtual void				fromGuiRefreshContactList( int MaxContactsToSend );
+                                                                EFriendState	eHisFriendshipToMe ) override;
+    virtual void				fromGuiSendContactList( EFriendViewType eFriendView, int MaxContactsToSend ) override;
+    virtual void				fromGuiRefreshContactList( int MaxContactsToSend ) override;
 
-	virtual void				fromGuiRequireRelay( bool bRequireRelay );
-	virtual void				fromGuiUseRelay( VxGUID& onlineId, bool bUseAsRelay = true );
-	virtual void				fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount ); 
+    virtual void				fromGuiRequireRelay( bool bRequireRelay ) override;
+    virtual void				fromGuiUseRelay( VxGUID& onlineId, bool bUseAsRelay = true ) override;
+    virtual void				fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount );
 
-	virtual void				fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char * pSearchPattern = "" );
-	virtual void				fromGuiNextScan( EScanType eScanType );
-	virtual void				fromGuiStopScan( EScanType eScanType );
+    virtual void				fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char * pSearchPattern = "" ) override;
+    virtual void				fromGuiNextScan( EScanType eScanType ) override;
+    virtual void				fromGuiStopScan( EScanType eScanType ) override;
 
-	virtual InetAddress			fromGuiGetMyIPv4Address( void );
-	virtual InetAddress			fromGuiGetMyIPv6Address( void );
+    virtual InetAddress			fromGuiGetMyIPv4Address( void ) override;
+    virtual InetAddress			fromGuiGetMyIPv6Address( void ) override;
 
-	virtual void				fromGuiUserModifiedStoryboard( void );
+    virtual void				fromGuiUserModifiedStoryboard( void ) override;
 
-	virtual void				fromGuiCancelDownload( VxGUID& fileInstance );
-	virtual void				fromGuiCancelUpload( VxGUID& fileInstance );
+    virtual void				fromGuiCancelDownload( VxGUID& fileInstance ) override;
+    virtual void				fromGuiCancelUpload( VxGUID& fileInstance ) override;
 
 	virtual bool				fromGuiSetGameValueVar( EPluginType	ePluginType, 
 														VxGUID&		onlineId, 
 														int32_t			varId, 
-														int32_t			varValue );
+                                                        int32_t			varValue ) override;
 
 	virtual bool				fromGuiSetGameActionVar(	EPluginType	ePluginType, 
 															VxGUID&		onlineId, 
 															int32_t			actionId, 
-															int32_t			actionValue );
+                                                            int32_t			actionValue ) override;
 
 	virtual bool				fromGuiTestCmd(	ETestParam1		eTestParam1, 
 												int				testParam2 = 0, 
-												const char *	testParam3 = NULL );
+                                                const char *	testParam3 = NULL ) override;
 
-	virtual uint16_t			fromGuiGetRandomTcpPort( void );
+    virtual uint16_t			fromGuiGetRandomTcpPort( void ) override;
 #ifdef TARGET_OS_ANDROID
-	virtual int					fromGuiMulitcastPkt( unsigned char * data, int len );
+    virtual int					fromGuiMulitcastPkt( unsigned char * data, int len ) override;
 #endif // TARGET_OS_ANDROID
-	virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char *	pLogFileName = NULL );
-	virtual void				fromGuiSendLog( uint32_t u32LogFlags );
-	virtual bool				fromGuiBrowseFiles(	const char * dir, bool lookupShareStatus, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY ); 
-	virtual bool				fromGuiGetSharedFiles( uint8_t fileTypeFilter );
-	virtual bool				fromGuiSetFileIsShared( const char * fileName, bool isShared, uint8_t * fileHashId = 0 );
-	virtual bool				fromGuiGetIsFileShared( const char * fileName );
+    virtual void				fromGuiDebugSettings( uint32_t u32LogFlags, const char *	pLogFileName = NULL ) override;
+    virtual void				fromGuiSendLog( uint32_t u32LogFlags ) override;
+    virtual bool				fromGuiBrowseFiles(	const char * dir, bool lookupShareStatus, uint8_t fileFilterMask = VXFILE_TYPE_ALLNOTEXE | VXFILE_TYPE_DIRECTORY ) override;
+    virtual bool				fromGuiGetSharedFiles( uint8_t fileTypeFilter ) override;
+    virtual bool				fromGuiSetFileIsShared( const char * fileName, bool isShared, uint8_t * fileHashId = 0 ) override;
+    virtual bool				fromGuiGetIsFileShared( const char * fileName ) override;
 	// returns -1 if unknown else percent downloaded
-	virtual int					fromGuiGetFileDownloadState( uint8_t * fileHashId );
-	virtual bool				fromGuiAddFileToLibrary( const char * fileName, bool addFile, uint8_t * fileHashId = 0 );
-	virtual void				fromGuiGetFileLibraryList( uint8_t fileTypeFilter );
-	virtual bool				fromGuiGetIsFileInLibrary( const char * fileName );
-	virtual bool				fromGuiIsMyP2PWebVideoFile( const char * fileName );
-	virtual bool				fromGuiIsMyP2PWebAudioFile( const char * fileName );
+    virtual int					fromGuiGetFileDownloadState( uint8_t * fileHashId ) override;
+    virtual bool				fromGuiAddFileToLibrary( const char * fileName, bool addFile, uint8_t * fileHashId = 0 ) override;
+    virtual void				fromGuiGetFileLibraryList( uint8_t fileTypeFilter ) override;
+    virtual bool				fromGuiGetIsFileInLibrary( const char * fileName ) override;
+    virtual bool				fromGuiIsMyP2PWebVideoFile( const char * fileName ) override;
+    virtual bool				fromGuiIsMyP2PWebAudioFile( const char * fileName ) override;
 
-	virtual int					fromGuiDeleteFile( const char * fileName, bool shredFile );
+    virtual int					fromGuiDeleteFile( const char * fileName, bool shredFile ) override;
 
-	virtual void				fromGuiQuerySessionHistory( VxGUID& historyId );
-	virtual bool				fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+    virtual void				fromGuiQuerySessionHistory( VxGUID& historyId ) override;
+    virtual bool				fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId = VxGUID::nullVxGUID() ) override;
 
 	//========================================================================
 	// to gui
 	//========================================================================
-	void						sendToGuiStatusMessage( const char * statusMsg, ... );
+    void						sendToGuiStatusMessage( const char * statusMsg, ... );
 	void						toGuiPluginPermissionChange( PktAnnounce * poPktAnn );
 
 	void						toGuiContactDescChange( PktAnnounce * poPktAnn );
@@ -306,19 +306,19 @@ public:
 	//========================================================================
 	// asset mgr callbacks
 	//========================================================================
-	virtual void				callbackFileWasShredded( std::string& fileName );
-	virtual void				callbackAssetAdded( AssetInfo * assetInfo );
-	virtual void				callbackAssetRemoved( AssetInfo * assetInfo );
+    virtual void				callbackFileWasShredded( std::string& fileName ) override;
+    virtual void				callbackAssetAdded( AssetInfo * assetInfo ) override;
+    virtual void				callbackAssetRemoved( AssetInfo * assetInfo ) override;
 
 	virtual void				callbackSharedFileTypesChanged( uint16_t fileTypes );
 	virtual void				callbackSharedPktFileListUpdated( void );
 
-	virtual void				callbackAssetHistory( void * userData, AssetInfo * assetInfo );
+    virtual void				callbackAssetHistory( void * userData, AssetInfo * assetInfo ) override;
 	//========================================================================
 	// media processor callbacks
 	//========================================================================
-	virtual void				callbackVideoJpgBig( void * userData, VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen );
-	virtual void				callbackVideoJpgSmall(	void * userData, VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen, int motion0to100000 );
+    virtual void				callbackVideoJpgBig( void * userData, VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen ) override;
+    virtual void				callbackVideoJpgSmall(	void * userData, VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen, int motion0to100000 ) override;
 
 	//========================================================================
 	//========================================================================
@@ -389,101 +389,101 @@ protected:
 	// pkt handlers
 	//========================================================================
 
-	virtual void				onPktUnhandled					( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktInvalid					( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktUnhandled					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktInvalid					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktAnnList					( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktAnnounce					( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktAnnList					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktAnnounce					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktLogReq						( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktLogReply					( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktLogReq						( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktLogReply					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktSearchReq					( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktSearchReply				( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktSearchReq					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktSearchReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktPluginOfferReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktPluginOfferReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktPluginOfferReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktPluginOfferReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktChatReq					( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktChatReply					( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktChatReq					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktChatReply					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktVoiceReq					( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktVoiceReply					( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktVoiceReq					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktVoiceReply					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktVideoFeedReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktVideoFeedStatus			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktVideoFeedPic				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktVideoFeedPicChunk			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktVideoFeedPicAck			( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktVideoFeedReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktVideoFeedStatus			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktVideoFeedPic				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktVideoFeedPicChunk			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktVideoFeedPicAck			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktFileGetReq					( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktFileGetReply				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktFileSendReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktFileSendReply				( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktFileGetReq					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFileGetReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFileSendReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFileSendReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktFindFileReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktFindFileReply				( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktFindFileReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFindFileReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktFileListReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktFileListReply				( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktFileListReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFileListReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktFileInfoReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktFileInfoReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktFileChunkReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktFileChunkReply				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktFileSendCompleteReq		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktFileSendCompleteReply		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktFileGetCompleteReq			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktFileGetCompleteReply		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktFileShareErr				( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktFileChunkReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFileChunkReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFileSendCompleteReq		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFileSendCompleteReply		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFileGetCompleteReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFileGetCompleteReply		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktFileShareErr				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktAssetSendReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktAssetSendReply				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktAssetChunkReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktAssetChunkReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktAssetSendCompleteReq		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktAssetSendCompleteReply		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktAssetXferErr				( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktAssetSendReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktAssetSendReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktAssetChunkReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktAssetChunkReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktAssetSendCompleteReq		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktAssetSendCompleteReply		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktAssetXferErr				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktMultiSessionReq			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktMultiSessionReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktMultiSessionReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktMultiSessionReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktSessionStartReq			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktSessionStartReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktSessionStopReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktSessionStopReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktSessionStartReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktSessionStartReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktSessionStopReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktSessionStopReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktRelayServiceReq			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayServiceReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayConnectReq			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayConnectReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayDisconnect			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelaySessionReq			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelaySessionReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayConnectToUserReq		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayConnectToUserReply	( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayUserDisconnect		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayTestReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktRelayTestReply				( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktRelayServiceReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktRelayServiceReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktRelayConnectReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktRelayConnectReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktRelayDisconnect			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktRelaySessionReq			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktRelaySessionReply			( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktRelayConnectToUserReq		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktRelayConnectToUserReply	( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktRelayUserDisconnect		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktRelayTestReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktRelayTestReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktMyPicSendReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktMyPicSendReply				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktWebServerPicChunkTx		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktWebServerPicChunkAck		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktWebServerGetChunkTx		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktWebServerGetChunkAck		( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktWebServerPutChunkTx		( VxSktBase * sktBase, VxPktHdr * poPktHdrt );
-	virtual void				onPktWebServerPutChunkAck		( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktMyPicSendReq				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktMyPicSendReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktWebServerPicChunkTx		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktWebServerPicChunkAck		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktWebServerGetChunkTx		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktWebServerGetChunkAck		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktWebServerPutChunkTx		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktWebServerPutChunkAck		( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktTodGameStats				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktTodGameAction				( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktTodGameValue				( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktTodGameStats				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktTodGameAction				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktTodGameValue				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
-	virtual void				onPktTcpPunch					( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktPingReq					( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktPingReply					( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktImAliveReq					( VxSktBase * sktBase, VxPktHdr * pktHdr );
-	virtual void				onPktImAliveReply				( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktTcpPunch					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktPingReq					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktPingReply					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktImAliveReq					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktImAliveReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
     //========================================================================
     //========================================================================

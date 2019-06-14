@@ -541,7 +541,7 @@ void RenderGlShaders::getShaderSourceCode( int shaderIdx, EShaderType& shaderTyp
     }
     else
     {
-#ifdef TARGET_OS_WINDOWS
+#if defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_ANDROID)
         vertexShaderCode = vertDefines + vertexShaderCode;
         fragmentShaderCode = fragDefines + fragmentShaderCode;
 #else

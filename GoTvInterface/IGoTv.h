@@ -133,8 +133,8 @@ public:
     bool                        clearBuffers( GoTvColor color ) override;
     bool                        isExtSupported( const char* extension )  override;
 
-    void                        setVSync( bool vsync );
-    void                        resetVSync() {  }
+    void                        setVSync( bool vsync )  override;
+    void                        resetVSync() override {  }
 
     void                        setViewPort( const GoTvRect& viewPort ) override;
     void                        getViewPort( GoTvRect& viewPort ) override;
@@ -151,7 +151,7 @@ public:
 
     void                        applyHardwareTransform( const TransformMatrix &matrix ) override;
     void                        restoreHardwareTransform() override;
-    bool                        supportsStereo( RENDER_STEREO_MODE mode ) const { return false; }
+    bool                        supportsStereo( RENDER_STEREO_MODE mode ) const  override { return false; }
 
     bool                        testRender() override;
 

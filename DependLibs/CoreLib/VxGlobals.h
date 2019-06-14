@@ -80,8 +80,15 @@ std::string& 	            VxGetAppDirectory( EAppDir appDir );
 void			            VxSetExeDirectory(const char * exeDir);
 std::string&	            VxGetExeDirectory(void);
 
+void			            VxSetExeKodiAssetsDirectory( const char * assetsDir );
 std::string&	            VxGetExeKodiAssetsDirectory( void );
+
+void			            VxSetExeGoTvAssetsDirectory( const char * assetsDir );
 std::string&	            VxGetExeGoTvAssetsDirectory(void);
+
+void                        VxSetPythonExeDirectory( const char * pythonDir );
+void                        VxSetPythonDllDirectory( const char * pythonDir );
+void                        VxSetPythonLibDirectory( const char * pythonDir );
 
 // user writable directories
 void			            VxSetRootDataStorageDirectory( const char * rootDataDir );

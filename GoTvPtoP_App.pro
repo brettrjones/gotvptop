@@ -155,7 +155,7 @@ PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
 
 
-message(Static Lib prefix($${STATIC_LIB_PREFIX})  suffix($${STATIC_LIB_SUFFIX})  )
+#message(Static Lib prefix($${STATIC_LIB_PREFIX})  suffix($${STATIC_LIB_SUFFIX})  )
     #static libs
 
 #NOTE: link order is important.. otherwise you will get link errors like libvorbisenc.so.2: error adding symbols: DSO missing from command line
@@ -234,8 +234,8 @@ win32:{
 !android:{
 #copy shared libraries to out directory
 #message(Static Lib prefix($${STATIC_LIB_PREFIX})  suffix($${STATIC_LIB_SUFFIX})  )
-message( Exe dest dir ($${DEST_EXE_DIR})  )
-message( Share Lib dest dir ($${DEST_SHARED_LIBS_DIR})  )
+#message( Exe dest dir ($${DEST_EXE_DIR})  )
+#message( Share Lib dest dir ($${DEST_SHARED_LIBS_DIR})  )
 
  DESTDIR = $${DEST_EXE_DIR}
 

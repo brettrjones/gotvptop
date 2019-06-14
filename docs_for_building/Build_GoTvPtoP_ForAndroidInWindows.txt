@@ -25,10 +25,13 @@ then
 
 
 ==== Android usb debugging ====
-If debugger does not stop at breakpoint 
+1.) If debugger does not stop at breakpoint 
 	Look at log in Qcreator->Window->Views->Debugger Log
 	In my case qt was using a old version of python 2.7 and had some weak reference errors
 	I removed python directory from eviroment variable PATH and rebooted
+//2.) If QtCreator-Debugger does not display any content of my std::string-variable
+//	Then try Tools -> Options -> Debugger
+//	Check the option (Load system GDB pretty printers)
 
 
 install the usb driver so can attach/debug android devices

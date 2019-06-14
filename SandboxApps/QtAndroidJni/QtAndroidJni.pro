@@ -38,8 +38,8 @@ HEADERS += \
         $$PWD/QtAndroidJni/JNIBase.h \
         $$PWD/QtAndroidJni/JNIThreading.h \
         $$PWD/QtAndroidJni/jni.inc \
-        $$PWD/QtAndroidJni/jutils.h \
-        $$PWD/QtAndroidJni/jutils-details.h \
+        $$PWD/QtAndroidJni/jutils.hpp \
+        $$PWD/QtAndroidJni/jutils-details.hpp \
         $$PWD/QtAndroidJni/PackageItemInfo.h \
         $$PWD/QtAndroidJni/PackageManager.h \
         $$PWD/QtAndroidJni/VxJava.h \

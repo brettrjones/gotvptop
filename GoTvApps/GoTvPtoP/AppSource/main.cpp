@@ -25,9 +25,9 @@ int main(int argc, char **argv)
 {
     QApplication::setAttribute( Qt::AA_ShareOpenGLContexts );
     QApplication::setAttribute( Qt::AA_DontCheckOpenGLContextThreadAffinity );
+    //QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling );
 
 	// for some reason QApplication must be newed or does not initialize 
-    //QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling );
 	QApplication* myApp = new QApplication( argc, argv );
 
     IGoTv& gotv = IGoTv::getIGoTv();

@@ -74,7 +74,7 @@ QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\'"
 #link dependent librarys
 include(config_link.pri)
 
-message(Static Lib prefix($${STATIC_LIB_PREFIX})  suffix($${STATIC_LIB_SUFFIX})  )
+#message(Static Lib prefix($${STATIC_LIB_PREFIX})  suffix($${STATIC_LIB_SUFFIX})  )
 
 #NOTE: link order is important.. otherwise you will get link errors like libvorbisenc.so.2: error adding symbols: DSO missing from command line
 CONFIG(debug, debug|release){
@@ -177,13 +177,8 @@ DISTFILES += \
 
 
 #copy shared libs to local output directory so can easily be linked to
- CONFIG(debug, debug|release){
-    copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug/* $$shell_path($$OUT_PWD/))
- }
 
- CONFIG(release, debug|release){
-    copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/release/* $$shell_path($$OUT_PWD/) )
- }
+copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/* $$shell_path($$OUT_PWD/))
 
  first.depends = $(first) copydata
  export(first.depends)

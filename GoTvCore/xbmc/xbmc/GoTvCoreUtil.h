@@ -224,7 +224,7 @@ public:
 	//
 	static bool					RunCommandLine( const std::string& cmdLine, bool waitExit = false );
 #endif
-	static std::string			ResolveExecutablePath();
+    static std::string			ResolveExecutablePath( bool dirOnly = false );
 	static std::string			GetFrameworksPath( bool forPython = false );
 
 	static bool					CanBindPrivileged();

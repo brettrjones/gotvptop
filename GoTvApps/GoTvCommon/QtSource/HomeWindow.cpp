@@ -57,10 +57,18 @@ void HomeWindow::initializeHomePage()
     QByteArray restoreGeom = m_WindowSettings->value( "mainWindowGeometry" ).toByteArray();
     if( restoreGeom.isEmpty() )
     {
+#ifdef TARGET_OS_ANDROID
+        // take up most of the screen
+        QDesktopWidget scr;
+        const QRect availableGeometry = scr.availableGeometry(scr.primaryScreen());
+        resize(availableGeometry.width() - 20, availableGeometry.height() - 20 );
+        move( availableGeometry.left() + 10, availableGeometry.top() + 10 );
+#else
         const QRect availableGeometry = QApplication::desktop()->availableGeometry(this);
         resize(availableGeometry.width() / 3, availableGeometry.height() / 2);
         move((availableGeometry.width() - width()) / 2,
              (availableGeometry.height() - height()) / 2);
+#endif // TARGET_OS_ANDROID
     }
     else
     {
