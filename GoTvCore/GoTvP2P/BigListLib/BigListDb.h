@@ -39,9 +39,9 @@ public:
 protected:
 	//=== overrides ===//
 	//! create tables in database 
-	virtual RCODE				onCreateTables( int iDbVersion );
+    virtual RCODE				onCreateTables( int iDbVersion ) override;
 	//! delete tables from database 
-	virtual RCODE				onDeleteTables( int oldVersion );
+    virtual RCODE				onDeleteTables( int oldVersion ) override;
 
 	RCODE						bigListDbStartup( const char * pDbFileName );
 	RCODE						bigListDbShutdown( void );

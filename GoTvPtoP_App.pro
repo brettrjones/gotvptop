@@ -10,6 +10,10 @@ TARGET_NAME = gotvptop
 QT += gui core concurrent widgets network multimedia opengl xml svg quickwidgets
 android:{
     QT += androidextras
+    CONFIG(debug, debug|release){
+        QMAKE_CXXFLAGS += -O0
+        QMAKE_CFLAGS += -O0
+    }
 }
 
 DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MULTIMEDIA_LIB
@@ -32,7 +36,9 @@ MOBILITY =
 #}
 
 # Resource files
+!android:{
 QMAKE_RESOURCE_FLAGS += -compress 9 -threshold 5
+}
 RESOURCES += $$PWD/GoTvApps/GoTvCommon/gotvcommon.qrc
 
 
@@ -101,8 +107,8 @@ QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\'"
 include(config_link.pri)
 
 #shared libs
-PRE_TARGETDEPS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
 
 #static libs
 #PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}gotvptoplib$${STATIC_LIB_SUFFIX}

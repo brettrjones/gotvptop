@@ -20,6 +20,7 @@
  */
 
 #include "JNIBase.h"
+#include <android/asset_manager_jni.h>
 #include "BroadcastReceiver.h"
 
 struct ANativeActivity;
@@ -39,6 +40,7 @@ public:
   static void createJniContext( JavaVM * jvm, JNIEnv * env );
   static CJNIContext& getJniContext();
   static void destroyJniContext();
+  void initJavaContext( JavaVM * jvm, JNIEnv * env );
 
   const jni::jhobject& get_raw() const { return m_context; }
 
@@ -62,16 +64,30 @@ public:
   static CJNIFile getExternalFilesDir(const std::string &path);
   static CJNIContentResolver getContentResolver();
   static CJNIWindow getWindow();
+  static AAssetManager* getAssetManager() { return m_AssetManager; }
+  static JNIEnv * getJNIEnv() { return m_JniEnv; };
+  static JavaVM * getJavaVM() { return m_JniJvm; };
+  int  attachThread();
+  void  detachThread( int attachedState = 0 );
+
 
   CJNIContext( JavaVM * jvm, JNIEnv * env );
 
 protected:
-  ~CJNIContext();
+  ~CJNIContext() = default;
+
+  // Main activity
+  static jclass m_ActivityClass;
 
   static jni::jhobject m_context;
 
+  static  AAssetManager* m_AssetManager;
+
+  static JavaVM * m_JniJvm;
+  static JNIEnv * m_JniEnv;
+
 protected:
-  CJNIContext();
+  CJNIContext() = default;
 
   void PopulateStaticFields();
   void operator=(CJNIContext const&){};

@@ -21,6 +21,7 @@
 #if defined(TARGET_ANDROID)
 # ifdef HAVE_QT_GUI
 #  include <platform/qt/qtandroid/jni/JNIThreading.h>
+#  include <platform/qt/qtandroid/jni/Context.h>
 # else
 #  include <android/jni/JNIThreading.h>
 # endif // HAVE_QT_GUI
@@ -1132,11 +1133,36 @@ void StringUtils::WordToDigits(std::string &word)
 std::string StringUtils::CreateUUID()
 {
 #ifdef TARGET_OS_ANDROID
-  static GuidGenerator guidGenerator( VxJava::getJavaEnv() );
+    JNIEnv * jniEnv = CJNIContext::getJniContext().getJNIEnv();
+    JavaVM * javaVM = CJNIContext::getJniContext().getJavaVM();
+    int threadEnvStat = javaVM->GetEnv((void **)&jniEnv, JNI_VERSION_1_6);
+    if ( threadEnvStat == JNI_EDETACHED )
+    {
+        //std::cout << "GetEnv: not attached" << std::endl;
+        if (javaVM->AttachCurrentThread( &jniEnv, NULL ) != 0)
+        {
+            std::cout << "Failed to attach" << std::endl;
+        }
+    }
+    else if (threadEnvStat == JNI_OK)
+    {
+        //
+    }
+    else if (threadEnvStat == JNI_EVERSION)
+    {
+        std::cout << "GetEnv: version not supported" << std::endl;
+    }
+    static GuidGenerator guidGenerator( jniEnv );
 #else
     static GuidGenerator guidGenerator;
 #endif // TARGET_OS_ANDROID
-  auto guid = guidGenerator.newGuid();
+    auto guid = guidGenerator.newGuid();
+#ifdef TARGET_OS_ANDROID
+    if ( threadEnvStat == JNI_EDETACHED )
+    {
+        javaVM->DetachCurrentThread();
+    }
+#endif // TARGET_OS_ANDROID
 
   std::stringstream strGuid; strGuid << guid;
   return strGuid.str();

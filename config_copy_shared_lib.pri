@@ -19,7 +19,7 @@ unix:!android:  {
 }
 
 android:{
-    DESTDIR = $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE})
+    DESTDIR = $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
 
     #rename and move android lib to android/libs/target arch directory
     SHARED_ANDROID_SRC_NAME = ""

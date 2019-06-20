@@ -28,7 +28,7 @@
 //#include "BroadcastReceiver.h"
 #include "JNIThreading.h"
 #include "ApplicationInfo.h"
-//#include "File.h"
+#include "JNIFile.h"
 //#include "ContentResolver.h"
 //#include "BaseColumns.h"
 //#include "MediaStore.h"
@@ -71,7 +71,7 @@ CJNIContext * g_JniContext = nullptr;
 
 JavaVM * CJNIContext::m_JniJvm = nullptr;
 JNIEnv * CJNIContext::m_JniEnv = nullptr;
-
+AAssetManager* CJNIContext::m_AssetManager = nullptr;
 
 std::string CJNIContext::CONNECTIVITY_SERVICE;
 
@@ -115,10 +115,8 @@ CJNIContext::CJNIContext( JavaVM * jvm, JNIEnv * env )
             if ( clazzObj )
             {
                 jmethodID idNativeActivity_getAppContext = m_JniEnv->GetMethodID(clazzObj, "getApplicationContext", "()Landroid/content/Context;");
-                qWarning() << idNativeActivity_getAppContext;
+                //qWarning() << idNativeActivity_getAppContext;
                 jobject appContextObj = m_JniEnv->CallObjectMethod(activityObj, idNativeActivity_getAppContext, "()Landroid/content/Context;");
-
-                //jclass appContextObj = mainActivity.callObjectMethod<jclass>( "getApplicationContext", "()Landroid/content/Context;" );
 
                 if( appContextObj )
                 {
@@ -129,11 +127,15 @@ CJNIContext::CJNIContext( JavaVM * jvm, JNIEnv * env )
 
                         CJNIBase::SetSDKVersion( 21 );
                         PopulateStaticFields();
+
+                        jmethodID idGetAssets = m_JniEnv->GetMethodID(clazzContextObj, "getAssets", "()Landroid/content/res/AssetManager;");
+                        m_AssetManager = AAssetManager_fromJava(env, env->CallObjectMethod(appContextObj, idGetAssets));
+                        if( !m_AssetManager )
+                        {
+                            qWarning() << "m_AssetManager is null";
+                        }
                     }
-
-                //jmethodID idNativeActivity_getAppContext = m_JniEnv->GetMethodID(clazzObj, "getApplicationContext", "()Landroid/content/Context;");
-                }
-
+                }              
             }
             else
             {
@@ -406,25 +408,25 @@ std::string CJNIContext::getPackageResourcePath()
     "getPackageResourcePath", "()Ljava/lang/String;"));
 }
 
-//CJNIFile CJNIContext::getCacheDir()
-//{
-//  return call_method<jhobject>(m_context,
-//    "getCacheDir", "()Ljava/io/File;");
-//}
+CJNIFile CJNIContext::getCacheDir()
+{
+  return call_method<jhobject>(m_context,
+    "getCacheDir", "()Ljava/io/File;");
+}
 
-//CJNIFile CJNIContext::getDir(const std::string &path, int mode)
-//{
-//  return call_method<jhobject>(m_context,
-//    "getDir", "(Ljava/lang/String;I)Ljava/io/File;",
-//    jcast<jhstring>(path), mode);
-//}
+CJNIFile CJNIContext::getDir(const std::string &path, int mode)
+{
+  return call_method<jhobject>(m_context,
+    "getDir", "(Ljava/lang/String;I)Ljava/io/File;",
+    jcast<jhstring>(path), mode);
+}
 
-//CJNIFile CJNIContext::getExternalFilesDir(const std::string &path)
-//{
-//  return call_method<jhobject>(m_context,
-//    "getExternalFilesDir", "(Ljava/lang/String;)Ljava/io/File;",
-//    jcast<jhstring>(path));
-//}
+CJNIFile CJNIContext::getExternalFilesDir(const std::string &path)
+{
+  return call_method<jhobject>(m_context,
+    "getExternalFilesDir", "(Ljava/lang/String;)Ljava/io/File;",
+    jcast<jhstring>(path));
+}
 
 //CJNIContentResolver CJNIContext::getContentResolver()
 //{

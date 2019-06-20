@@ -238,6 +238,8 @@ bool RenderShaderQt::validateProgram()
         //    return false;
         //}
     }
+
+    return false;
 }
 
 //============================================================================

@@ -20,6 +20,7 @@
  */
 
 #include "JNIBase.h"
+#include <android/asset_manager_jni.h>
 //#include "BroadcastReceiver.h"
 
 struct ANativeActivity;
@@ -57,15 +58,18 @@ public:
   static CJNIApplicationInfo getApplicationInfo();
   static std::string getPackageName();
   static std::string getPackageResourcePath();
-//  static CJNIFile getCacheDir();
-//  static CJNIFile getDir(const std::string &path, int mode);
-//  static CJNIFile getExternalFilesDir(const std::string &path);
+  static CJNIFile getCacheDir();
+  static CJNIFile getDir(const std::string &path, int mode);
+  static CJNIFile getExternalFilesDir(const std::string &path);
 //  static CJNIContentResolver getContentResolver();
 //  static CJNIWindow getWindow();
 
   CJNIContext( JavaVM * jvm, JNIEnv * env );
 
   static void activityInialized();
+  static AAssetManager* getAssetManager() { return m_AssetManager; }
+  static JNIEnv * getJNIEnv() { return m_JniEnv; };
+
   static JavaVM * m_JniJvm;
   static JNIEnv * m_JniEnv;
 
@@ -79,6 +83,8 @@ protected:
   static jclass m_ActivityClass;
 
   static jni::jhobject m_context;
+
+  static  AAssetManager* m_AssetManager;
 
 protected:
   CJNIContext();

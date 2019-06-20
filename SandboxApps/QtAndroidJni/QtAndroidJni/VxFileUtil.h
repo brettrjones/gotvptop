@@ -16,75 +16,32 @@
 
 #ifdef __cplusplus
 
-#include "VxFileInfo.h"
-#include "VxFileTypeMasks.h"
 
 #include <vector>
-//#include <fstream>
+#include <string>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <stddef.h>
+#include <errno.h>
 
-//namespace utf8
-//{
-//	// utf8 version of ifstream
-//#ifdef TARGET_OS_WINDOWS
-//	class ifstream : public std::ifstream
-//	{
-//	public:
-//		ifstream() : std::ifstream() {}
-//
-//		explicit ifstream(const char* fileName, std::ios_base::open_mode mode = std::ios_base::in) :
-//		std::ifstream(Utf8ToWide(fileName).c_str(), mode)
-//		{
-//		}
-//
-//		explicit ifstream(const std::string& fileName, std::ios_base::open_mode mode = std::ios_base::in) :
-//		std::ifstream(Utf8ToWide(fileName).c_str(), mode)
-//		{
-//		}
-//
-//		void open(const char* fileName, std::ios_base::open_mode mode = std::ios_base::in)
-//		{
-//			std::ifstream::open(Utf8ToWide(fileName).c_str(), mode);
-//		}
-//
-//		void open(const std::string& fileName, std::ios_base::open_mode mode = std::ios_base::in)
-//		{
-//			std::ifstream::open(Utf8ToWide(fileName).c_str(), mode);
-//		}
-//	};
-//
-//	class ofstream : public std::ofstream
-//	{
-//	public:
-//		ofstream() : std::ofstream() {}
-//
-//		explicit ofstream(const char* fileName, std::ios_base::open_mode mode = std::ios_base::out) :
-//		std::ofstream(Utf8ToWide(fileName).c_str(), mode)
-//		{
-//		}
-//
-//		explicit ofstream(const std::string& fileName, std::ios_base::open_mode mode = std::ios_base::out) :
-//		std::ofstream(Utf8ToWide(fileName).c_str(), mode)
-//		{
-//		}
-//
-//		void open(const char* fileName, std::ios_base::open_mode mode = std::ios_base::out)
-//		{
-//			std::ofstream::open(Utf8ToWide(fileName).c_str(), mode);
-//		}
-//
-//		void open(const std::string& fileName, std::ios_base::open_mode mode = std::ios_base::out)
-//		{
-//			std::ofstream::open(Utf8ToWide(fileName).c_str(), mode);
-//		}
-//	};
-//#else
-//	typedef std::ifstream ifstream;
-//	typedef std::ofstream ofstream;
-//#endif
-//
-//} // namespace utf8
+#define VXFILE_TYPE_MASK					0xff
+#define VXFILE_TYPE_PHOTO					0x01
+#define VXFILE_TYPE_AUDIO					0x02
+#define VXFILE_TYPE_VIDEO					0x04
+#define VXFILE_TYPE_DOC						0x08
+#define VXFILE_TYPE_ARCHIVE_OR_CDIMAGE		0x10
+#define VXFILE_TYPE_EXECUTABLE				0x20
+#define VXFILE_TYPE_OTHER					0x40
+#define VXFILE_TYPE_DIRECTORY				0x80
 
-class VxKey;
+#define VXFILE_TYPE_ALLNOTEXE				0x5F
+#define VXFILE_TYPE_ANY						0x7F
+
+#define RCODE long
+# define     VxGetLastError()	errno
+# define	 VxMkDir(exp,exp2)	mkdir(exp,exp2)     //make directory command we can use in windows like linux
+# define     VX_MAX_PATH			260
+
 
 class VxFileUtil
 {
@@ -93,7 +50,6 @@ public:
 	static RCODE				setCurrentWorkingDirectory( const char * pDir );
 
 	static bool					isDotDotDirectory( const char * fileName );
-	static bool					isDotDotDirectory( const wchar_t * fileName );
 
 	// append file name to path.. account for url etc
 	static std::string			addFileToFolder( std::string& strFolder, std::string& strFile );
@@ -150,7 +106,7 @@ public:
     //! remove the file name and return just the path
     static std::string			getJustPath( std::string fullPath );	// file name and path
 
-	//! get the . extension of file name
+    //! get the . extension of file name
 	static void					getFileExtension(	std::string&	strFileName,	// file name with extension
 													std::string&	strRetExt );		// return extension ( ie "myfile.etm" would return etm"
 	//! flip back slashes into forward slashes
@@ -165,59 +121,29 @@ public:
 	//! return true if last char is '/' else '\\'
 	static bool					doesPathEndWithSlash( const char * pFileName );
 
-	//! return true if is a root path like C:\dir or /dir
-	static bool					isFullPath( const char * pFileName );
-	//! Make full path to execute directory if full path was not specified
-	//! NOTE: be careful .. assumes pFileName has enough space for full path and file name
-	static void					makeFullPath( char * pFileName );
-	//! Make full path to given directory if full path was not specified.. make path if does not exist
-	static void					makeFullPath( const char * pShortFileName, const char * pDownloadDir, std::string & strRetPath );
-	//! Make short FileName.. if pDownloadDir and full path contains pDownloadDir then will be path in that dir else just filename
-	//! return true if FullFileName contained the download directory
-	static bool 				makeShortFileName( const char * pFullFileName, std::string & strRetShortName, const char * pDownloadDir = NULL );
+    //! return true if is a root path like C:\dir or /dir
+    static bool					isFullPath( const char * pFileName );
 
-	//! Get execution full path
-	static RCODE				getExecuteFullPathAndName( std::string& strRetExePathAndFileName );
-	//! Get directory we execute from
-	static RCODE				getExecuteDirectory( std::string& strRetExeDir );
-	//! Get execution path and file name
-	static RCODE				getExecutePathAndName( std::string& strRetExeDir, std::string& strRetExeFileName );
-	//match file names using dos style wild chars
+    //match file names using dos style wild chars
 	static bool					fileNameWildMatch(const char  * pMatchName, const char * pWildName);
 	//! read whole file of known length into existing buffer
 	//! NOTE assumes buffer has enough room for the whole file
 	static RCODE				readWholeFile(	const char *	pFileName,					// file to read
 												void *			pvBuf,						// buffer to read into
-												uint32_t				u32LenToRead,				// length to read ( assumes is same as file length
-												uint32_t	*			pu32RetAmountRead = NULL );	// return length actually read if not null
+                                                uint32_t		u32LenToRead,				// length to read ( assumes is same as file length
+                                                uint32_t	*	pu32RetAmountRead = NULL );	// return length actually read if not null
 	//! allocate memory and read whole file into memory
 	//! NOTE: USER MUST DELETE THE RETURED POINTER OR MEMORY LEAK WILL OCCURE
 	static RCODE				readWholeFile(	const char *	pFileName,			// file to read	
 												void **			ppvRetBuf,			// return allocated buffer it was read into
-												uint32_t *			pu32RetLenOfFile );	// return length of file
-	//! allocate memory and read whole file into memory and decrypt
-	//! NOTE: USER MUST DELETE THE RETURED POINTER OR MEMORY LEAK WILL OCCURE
-	static RCODE				readWholeFile(	VxKey *			poKey,				// key to decrypt with
-												const char *	pFileName,			// file to read	
-												void **			ppvRetBuf,			// return allocated buffer it was read into
-												uint32_t *			pu32RetLenOfFile );	// return length of file
-
+                                                uint32_t *		pu32RetLenOfFile );	// return length of file
 	//! write all of data to a file
 	static RCODE				writeWholeFile(	const char *	pFileName,			// file to write to
 												void *			pvBuf,				// data to write
-												uint32_t				u32LenOfData );		// data length
-	//! encrypt and write all of data to a file
-	static RCODE				writeWholeFile(	VxKey *			poKey,				// key to encrypt with
-												const char *	pFileName,			// file to write to
-												void *			pvBuf,				// data to write
-												uint32_t				u32LenOfData );		// data length
+                                                uint32_t		u32LenOfData );		// data length
 
 	static RCODE				listFilesInDirectory(	const char *				pSrcDir,
 														std::vector<std::string>&	fileList );
-
-	static RCODE				listFilesAndFolders(	const char *				pSrcDir,
-														std::vector<VxFileInfo>&	fileList,
-														uint8_t							fileFilterMask = VXFILE_TYPE_ANY | VXFILE_TYPE_DIRECTORY );
 
 	static uint8_t				fileExtensionToFileTypeFlag( const char * fileName );
 	static bool					incrementFileName( std::string& strFileName );

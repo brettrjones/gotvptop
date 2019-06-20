@@ -26,7 +26,9 @@
 # include "platform/qt/qtandroid/jni/Context.h"
 # include "platform/qt/qtandroid/jni/System.h"
 # include "platform/qt/qtandroid/jni/ApplicationInfo.h"
-# include "platform/qt/qtandroid/jni/File.h"
+# include "platform/qt/qtandroid/jni/JNIFile.h"
+# include <android/asset_manager.h>
+# include <android/asset_manager_jni.h>
 #endif // TARGET_OS_ANDROID
 
 #include "filesystem/Directory.h"
@@ -74,8 +76,14 @@ bool OsInterface::doRun( EAppModule appModule )
         {
 			if( m_CmdLineParams )
 			{ 
+                #if defined(TARGET_OS_ANDROID)
+                 int attachedThreadState = CJNIContext::getJniContext().attachThread();
+                #endif //  TARGET_OS_ANDROID
 				int runExitCode = XBMC_Run( true, *m_CmdLineParams );
 				setRunResultCode( runExitCode );
+                #if defined(TARGET_OS_ANDROID)
+                 CJNIContext::getJniContext().detachThread( attachedThreadState );
+                #endif //  TARGET_OS_ANDROID
 			}
 			else
 			{
@@ -86,6 +94,7 @@ bool OsInterface::doRun( EAppModule appModule )
 
     return true;
 }
+
 //=== utilities ===//
 //============================================================================
 
@@ -131,6 +140,16 @@ bool OsInterface::initUserPaths()
     setenv("KODI_ANDROID_APK", apkResourceDir.c_str(), 0);
     LogMsg( LOG_DEBUG, "Sys (%s) native (%s) resource (%s)", systemLibsDir.c_str(), nativeLibsDir.c_str(), apkResourceDir.c_str() );
 
+    /*
+    setenv("KODI_ANDROID_SYSTEM_LIBS", CJNISystem::getProperty("java.library.path").c_str(), 0);
+    setenv("KODI_ANDROID_LIBS", getApplicationInfo().nativeLibraryDir.c_str(), 0);
+    setenv("KODI_ANDROID_APK", getPackageResourcePath().c_str(), 0);
+
+    std::string appName = CCompileInfo::GetAppName();
+    StringUtils::ToLower(appName);
+    std::string className = CCompileInfo::GetPackage();
+    */
+
     std::string appName = CCompileInfo::GetAppName();
     StringUtils::ToLower(appName);
     std::string className = CCompileInfo::GetPackage();
@@ -156,6 +175,22 @@ bool OsInterface::initUserPaths()
 
     LogMsg( LOG_DEBUG, "Apk (%s) kodi home (%s) bin addon (%s)", rootApkDir.c_str(), gotvAssetsDir.c_str(), (cacheDir + "/libs").c_str() );
 
+    /*
+    std::string cacheDir = getCacheDir().getAbsolutePath();
+    std::string xbmcHome = CJNISystem::getProperty("xbmc.home", "");
+    if (xbmcHome.empty())
+    {
+      setenv("KODI_BIN_HOME", (cacheDir + "/apk/assets").c_str(), 0);
+      setenv("KODI_HOME", (cacheDir + "/apk/assets").c_str(), 0);
+    }
+    else
+    {
+      setenv("KODI_BIN_HOME", (xbmcHome + "/assets").c_str(), 0);
+      setenv("KODI_HOME", (xbmcHome + "/assets").c_str(), 0);
+    }
+    setenv("KODI_BINADDON_PATH", (cacheDir + "/lib").c_str(), 0);
+    */
+
     std::string externalDir = CJNISystem::getProperty("xbmc.data", "");
     if (externalDir.empty())
     {
@@ -167,13 +202,35 @@ bool OsInterface::initUserPaths()
         externalDir = androidPath.getAbsolutePath();
     }
 
-    if ( externalDir.empty() )
+    std::string kodiHome = externalDir + "/assets/kodi";
+
+    if (!externalDir.empty())
     {
-        externalDir = getenv("KODI_TEMP");
+        setenv("HOME", kodiHome.c_str(), 0);
+    }
+    else
+    {
+        setenv("HOME", getenv("KODI_TEMP"), 0);
     }
 
-    std::string kodiHome = externalDir + "/assets/kodi";
-    setenv("HOME", kodiHome.c_str(), 0);
+    /*
+    std::string externalDir = CJNISystem::getProperty("xbmc.data", "");
+    if (externalDir.empty())
+    {
+      CJNIFile androidPath = getExternalFilesDir("");
+      if (!androidPath)
+        androidPath = getDir(className.c_str(), 1);
+
+      if (androidPath)
+        externalDir = androidPath.getAbsolutePath();
+    }
+
+    if (!externalDir.empty())
+      setenv("HOME", externalDir.c_str(), 0);
+    else
+      setenv("HOME", getenv("KODI_TEMP"), 0);
+      */
+
 
     std::string pythonPath = getenv("KODI_ANDROID_APK");
     pythonPath += "/assets/kodi/python2.7";
@@ -183,6 +240,16 @@ bool OsInterface::initUserPaths()
     setenv("PYTHONNOUSERSITE", "1", 1);
 
     LogMsg( LOG_DEBUG, "externalDir (%s) python home (%s) apk (%s)", externalDir.c_str(), pythonPath.c_str(), apkResourceDir.c_str() );
+
+    /*
+    std::string apkPath = getenv("KODI_ANDROID_APK");
+    apkPath += "/assets/python2.7";
+    setenv("PYTHONHOME", apkPath.c_str(), 1);
+    setenv("PYTHONPATH", "", 1);
+    setenv("PYTHONOPTIMIZE","", 1);
+    setenv("PYTHONNOUSERSITE", "1", 1);
+    */
+
 
 #endif // defined(TARGET_OS_WINDOWS)
     // for gotv use forward slash
@@ -216,6 +283,92 @@ bool OsInterface::initUserPaths()
 #endif // defined(TARGET_OS_ANDROID)
 	return true;
 }
+#if defined( TARGET_OS_ANDROID )
+
+static AAssetManager* android_asset_manager = NULL;
+void android_fopen_set_asset_manager(AAssetManager* manager) {
+    android_asset_manager = manager;
+}
+
+// android:theme=”@android:style/Theme.NoTitleBar.Fullscreen”
+bool CopyIfRequiredApkFile( std::string apkFileName, std::string destFile )
+{
+    bool result = false;
+    if( !VxFileUtil::fileExists( destFile.c_str() ) )
+    {
+        std::string destDir = VxFileUtil::getJustPath( destFile );
+        if( !VxFileUtil::directoryExists( destDir.c_str() ) )
+        {
+            VxFileUtil::makeDirectory( destDir.c_str() );
+        }
+
+        AAssetManager* mgr = android_asset_manager;
+        assert(NULL != mgr);
+        if( mgr )
+        {
+            AAsset* apkAssetFile = AAssetManager_open(mgr, apkFileName.c_str(), AASSET_MODE_UNKNOWN);
+            assert( apkAssetFile );
+
+            if ( apkAssetFile )
+            {
+                size_t assetLength = AAsset_getLength( apkAssetFile );
+
+                __android_log_print(ANDROID_LOG_DEBUG, "Asset File", "Asset file size: %d\n", assetLength);
+
+                char* buffer = (char*) malloc(assetLength + 1);
+                AAsset_read( apkAssetFile, buffer, assetLength);
+                buffer[ assetLength ] = 0;
+                result = ( 0 == VxFileUtil::writeWholeFile( destFile.c_str(), buffer, assetLength ) );
+                AAsset_close( apkAssetFile );
+                free(buffer);
+                if( !VxFileUtil::fileExists( destFile.c_str() ) )
+                {
+                    LogMsg( LOG_DEBUG, "Could not create file %s len %d", destFile.c_str(), assetLength );
+                }
+                else
+                {
+                    result = true;
+                }
+            }
+            else
+            {
+                LogMsg( LOG_ERROR,  "Asset Manager Cannot open file %s", destFile.c_str() );
+            }
+        }
+    }
+    else
+    {
+        result = true;
+    }
+
+    return result;
+}
+
+bool CopyIfRequiredApkDirectory( std::string apkFileDir, std::string destDir )
+{
+    bool result = false;
+    VxFileUtil::assureTrailingDirectorySlash( destDir );
+
+    AAssetManager* assetMgr = android_asset_manager;
+    AAssetDir* assetDir = AAssetManager_openDir( assetMgr, apkFileDir.c_str() );
+    if( assetDir )
+    {
+        const char* fileName;
+        while ((fileName = AAssetDir_getNextFileName(assetDir)) != NULL)
+        {
+            //__android_log_print(ANDROID_LOG_DEBUG, "Debug", filename);
+            CopyIfRequiredApkFile( apkFileDir + "/" + fileName, destDir + fileName );
+        }
+    }
+    else
+    {
+        LogMsg( LOG_DEBUG, "Could not open apk dir %s", apkFileDir.c_str() );
+    }
+
+    return result;
+}
+#endif // defined( TARGET_OS_ANDROID )
+
 
 //============================================================================
 
@@ -270,14 +423,91 @@ bool OsInterface::initDirectories()
     gotvDir = CSpecialProtocol::TranslatePath( "special://masterprofile/" );
     CEnvironment::setenv( CCompileInfo::GetUserProfileEnvName(), gotvDir.c_str() );
 
+#if defined(TARGET_OS_ANDROID)
+    // get user writable data directory
+    CJNIContext& jniContext = CJNIContext::getJniContext();
+    AAssetManager* assetManager = jniContext.getAssetManager();
+    android_fopen_set_asset_manager( assetManager );
+
+    std::string externalDir;
+    std::string packageName = jniContext.getPackageName();
+    CJNIFile androidPath = jniContext.getExternalFilesDir("");
+    if (!androidPath)
+      androidPath = jniContext.getDir(packageName.c_str(), 1);
+
+    if (androidPath)
+      externalDir = androidPath.getAbsolutePath();
+
+#endif //  defined(TARGET_OS_ANDROID)
+
     m_IGoTv.createUserDirs();
 
     std::string cacert = CEnvironment::getenv( "SSL_CERT_FILE" );
     if( cacert.empty() || !XFILE::CFile::Exists( cacert ) )
-    {
-        cacert = CSpecialProtocol::TranslatePath( "special://xbmc/system/certs/cacert.pem" );
-        IGoTv::getIGoTv().setSslCertFile( cacert );
+    {        
+
+#if defined(TARGET_OS_ANDROID)
+        // android assumes the cert file has been cached.. force update of cached file
+        std::string cacertFile = CSpecialProtocol::TranslatePath( "special://xbmc/system/certs/cacert.pem" );
+        if( !XFILE::CFile::Exists( cacert ) )
+        {
+            CopyIfRequiredApkFile( "kodi/system/certs/cacert.pem", cacertFile );
+        }
+ #endif //  defined(TARGET_OS_ANDROID)
+
+        if( !VxFileUtil::fileExists( cacertFile.c_str() ) )
+        {
+            LogMsg( LOG_ERROR, "ERROR could not open cert file %s", cacertFile.c_str() );
+        }
+        else if( cacert.empty() )
+        {
+            CEnvironment::setenv( "SSL_CERT_FILE", cacertFile );
+        }
     }
+
+    // cannot automagically cache files from apk until advanced setting is loaded for path substitution
+    // advanced settings requires settings.xml
+#if defined(TARGET_OS_ANDROID)
+        std::string settingsXmlFile = CSpecialProtocol::TranslatePath( "special://xbmc/system/settings/settings.xml" );
+        VxFileUtil::deleteFile( settingsXmlFile.c_str() );
+ #endif // defined(TARGET_OS_ANDROID)
+
+    std::string settingsXml = "special://xbmc/system/settings/settings.xml";
+    if( !XFILE::CFile::Exists( settingsXml ) )
+    {
+#if defined(TARGET_OS_ANDROID)
+        std::string settingsXmlFile = CSpecialProtocol::TranslatePath( "special://xbmc/system/settings/settings.xml" );
+        VxFileUtil::deleteFile( settingsXmlFile.c_str() );
+        CopyIfRequiredApkFile( "kodi/system/settings/settings.xml", settingsXmlFile );
+#endif //  defined(TARGET_OS_ANDROID)
+
+        if( !VxFileUtil::fileExists( settingsXmlFile.c_str() ) )
+        {
+            LogMsg( LOG_ERROR, "ERROR could not open settings file %s", settingsXmlFile.c_str() );
+        }
+    }
+
+#if defined(TARGET_OS_ANDROID)
+        std::string androidXmlFile = CSpecialProtocol::TranslatePath( "special://xbmc/system/settings/android.xml" );
+        VxFileUtil::deleteFile( androidXmlFile.c_str() );
+ #endif // defined(TARGET_OS_ANDROID)
+
+#if defined(TARGET_OS_ANDROID)
+    std::string androidXml = "special://xbmc/system/settings/android.xml";
+    if( !XFILE::CFile::Exists( androidXml ) )
+    {
+        std::string androidXmlFile = CSpecialProtocol::TranslatePath( "special://xbmc/system/settings/android.xml" );
+        VxFileUtil::deleteFile( androidXmlFile.c_str() );
+        CopyIfRequiredApkFile( "kodi/system/settings/android.xml", androidXmlFile );
+
+        if( !VxFileUtil::fileExists( androidXmlFile.c_str() ) )
+        {
+            LogMsg( LOG_ERROR, "ERROR could not open settings file %s", androidXmlFile.c_str() );
+        }
+    }
+
+    CopyIfRequiredApkDirectory( "gotv/profile", externalDir + "/assets/gotv/profile" );
+#endif //  defined(TARGET_OS_ANDROID)
 
     return true;
 }

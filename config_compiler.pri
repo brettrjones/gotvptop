@@ -4,8 +4,6 @@ DEFINES += LIB_STATIC HAVE_CONFIG_H
 
 DEFINES += FT_DEBUG_LEVEL_ERROR FT_DEBUG_LEVEL_TRACE FT2_BUILD_LIBRARY FT_MAKE_OPTION_SINGLE_OBJECT
 
-DEFINES +=__ANDROID_API__=21
-
 DEFINES +=_FILE_OFFSET_BITS=64
 
 
@@ -14,18 +12,25 @@ CONFIG(debug, debug|release){
     DEFINES += DEBUG
 }
 
+android{
+    DEFINES +=__ANDROID_API__=21
+    DEFINES += BIONIC_IOCTL_NO_SIGNEDNESS_OVERLOAD
+    CONFIG(debug, debug|release){
+        #if do not turn off optimization then android NDK std::string values will get optimized out and not viewable
+        QMAKE_CXXFLAGS += -O0
+        QMAKE_CFLAGS += -O0
+        CONFIG ~= s/-O[0123s]//g
+        CONFIG += -O0
+    }
+}
+
 CONFIG(release, debug|release){
     DEFINES += NDEBUG
     DEFINES += RELEASE
     DEFINES += QT_NO_DEBUG_OUTPUT
 }
 
-
 INCLUDEPATH += $$PWD/DependLibs
-
-android{
-    DEFINES += BIONIC_IOCTL_NO_SIGNEDNESS_OVERLOAD
-}
 
 win32{
     INCLUDEPATH += $$PWD/sysheaders

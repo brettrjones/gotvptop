@@ -13,17 +13,17 @@
 // http://www.gotvptop.net
 //============================================================================
 
-#include "config_corelib.h"
+//#include "config_corelib.h"
 
-#include "VxCrypto.h"
+//#include "VxCrypto.h"
 #include "VxFileUtil.h"
-#include "VxFileIsTypeFunctions.h"
-#include "VxGlobals.h"
-#include "VxParse.h"
+//#include "VxFileIsTypeFunctions.h"
+//#include "VxGlobals.h"
+//#include "VxParse.h"
 #include "VxDebug.h"
-#include "VxUrl.h"
+//#include "VxUrl.h"
 
-#include "SHA1.h"
+//#include "SHA1.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -231,31 +231,9 @@ bool VxFileUtil::isDotDotDirectory( const char * fileName )
 }
 
 //============================================================================
-bool VxFileUtil::isDotDotDirectory( const wchar_t * fileName )
-{
-	int nameLen = wstrlen( fileName );
-	if( ( ( 1 == nameLen ) && ( '.' == fileName[0] ) )
-		|| ( ( 2 == nameLen ) && ( '.' == fileName[0] ) && ( '.' == fileName[1] ) ) )
-	{
-		return true;
-	}
-
-	return false;
-}
-
-//============================================================================
 // append file name to path.. account for url etc
 std::string VxFileUtil::addFileToFolder( std::string& strFolder,  std::string& strFile)
 {
-	if( VxUrl::isURL( strFolder ) )
-	{
-		VxUrl url( strFolder );
-		if( url.getFileName() != strFolder )
-		{
-            url.setFileName( strFile );
-			return url.getUrl();
-		}
-	}
 
 	std::string strResult = strFolder;
 	if (!strResult.empty())
@@ -502,7 +480,7 @@ std::string VxFileUtil::makeUniqueFileName( const char * fileName )
 //! Make all directories that don't exist in a given path
 RCODE VxFileUtil::makeDirectory( const char * pDirectoryPath )
 {
-   vx_assert( pDirectoryPath );
+   //vx_assert( pDirectoryPath );
    char tempDir[VX_MAX_PATH];
    char *pTemp = tempDir;
    //make a copy
@@ -534,26 +512,24 @@ RCODE VxFileUtil::makeDirectory( const char * pDirectoryPath )
    {
 		while((pTemp = strtok(pTemp, "/" )))
 		{
-            //look for drive letter or root path
-            if(0 == strlen(tempDir))
-            {
-                continue;
-            }
-
-            if(!directoryExists(tempDir))
-            {
-                //make directory
-                if( ! (0 == VxMkDir( tempDir, S_IRWXU | S_IRWXG | S_IRWXO )))
-                {
-                    LogMsg( LOG_INFO, "CoreLib:FailedToMakeDir %s\n", tempDir );
-                    return -1;
-                }
-            }
-
-            //move pTemp up
-            pTemp = tempDir + strlen(tempDir);
-            //put the '/' back
-            tempDir[strlen(tempDir)] = '/';
+				//look for drive letter or root path
+				if(0 == strlen(tempDir))
+				{
+					continue;
+				}
+				if(!directoryExists(tempDir))
+				{
+					//make directory
+					if( ! (0 == VxMkDir( tempDir, S_IRWXU | S_IRWXG | S_IRWXO )))
+					{
+						LogMsg( LOG_INFO, "CoreLib:FailedToMakeDir %s\n", tempDir );
+						return -1;
+					}
+				}
+				//move pTemp up
+				pTemp = tempDir + strlen(tempDir);
+				//put the '/' back
+				tempDir[strlen(tempDir)] = '/';
 		}
    }
 
@@ -974,6 +950,26 @@ std::string VxFileUtil::getJustPath( std::string fullPath )	// file name and pat
 }
 
 //============================================================================
+//!	find position of the given char by searching from end to first if not found return -1
+int StdStringReverseFind( std::string& csStr, char cFindChar )
+{
+    int iLen = (int)csStr.length();
+    if( iLen )
+    {
+        char * pTemp = (char *)csStr.c_str();
+        for( int i = iLen-1; i >= 0; i-- )
+        {
+            if( pTemp[i] == cFindChar )
+            {
+                return i;
+            }
+        }
+    }
+
+    return -1;
+}
+
+//============================================================================
 //! get the . extension of file name
 void	VxFileUtil::getFileExtension(	std::string&	strFileName,	// file name with extension
 										std::string&	strRetExt )		// return extension ( ie "myfile.etm" would return etm"
@@ -1071,201 +1067,6 @@ bool VxFileUtil::isFullPath( const char * pFileName )
 }
 
 //============================================================================
-//! Make full path to execute directory if full path was not specified
-//! NOTE: be careful .. assumes pFileName has enough space for full path and file name
-void VxFileUtil::makeFullPath( char * pFileName )
-{
-	if( false == isFullPath(pFileName) )
-	{
-		// add path to the data directory
-		std::string csFullPath;
-		getExecuteDirectory( csFullPath );
-		csFullPath += pFileName;
-		strcpy( pFileName, csFullPath.c_str() );
-	}
-}
-
-//============================================================================
-//! Make full path to given directory if full path was not specified.. make path if does not exist
-void VxFileUtil::makeFullPath( const char * pShortFileName, const char * pDownloadDir, std::string & strRetPath )
-{
-	if( isFullPath( pShortFileName ) )
-	{
-		strRetPath = pShortFileName;
-	}
-	else
-	{
-		strRetPath = pDownloadDir;
-		if( false == doesPathEndWithSlash(pDownloadDir))
-		{
-			strRetPath += "/";
-		}
-
-		strRetPath += pShortFileName;
-	}
-}
-
-//============================================================================
-//! Make short FileName.. if pDownloadDir and full path contains pDownloadDir then will be path in that dir else just filename
-bool VxFileUtil::makeShortFileName( const char * pFullFileName, std::string & strRetShortName, const char * pDownloadDir )
-{
-	bool bUsedDownloadDir = false;
-	if( isFullPath( pDownloadDir ) )
-	{
-		int iDirStrLen = strlen( pDownloadDir );
-		int iFileStrLen = strlen( pFullFileName );
-		if( iFileStrLen > iDirStrLen )
-		{
-			if( 0 == strncmp( pDownloadDir, pFullFileName, iDirStrLen ) )
-			{
-				strRetShortName = &pFullFileName[ iDirStrLen ];
-				bUsedDownloadDir = true;
-			}
-			else
-			{
-				getJustFileName( pFullFileName, strRetShortName);
-			}
-		}
-		else
-		{
-			// return just file name
-			getJustFileName( pFullFileName, strRetShortName);
-		}
-	}
-	else if( isFullPath( pFullFileName ) )
-	{
-		// return just file name
-		std::string strFileName;
-		std::string strPath;
-		RCODE rc = seperatePathAndFile(	pFullFileName,	// path and file name			
-			strPath,		// return path to file
-			strFileName );	// return file name
-		if( 0 == rc )
-		{
-			//! separate Path and file name into separate strings
-			strRetShortName = strFileName;
-		}
-		else
-		{
-			LogMsg( LOG_ERROR, "makeShortFileName: invalid file %s", pFullFileName );
-			strRetShortName = pFullFileName; 
-		}
-	}
-	else
-	{
-		strRetShortName = pFullFileName; 
-	}
-	return bUsedDownloadDir;
-}
-
-//============================================================================
-//! Get execution full path
-RCODE	VxFileUtil::getExecuteFullPathAndName( std::string& strRetExePathAndFileName )
-{
-	std::string strRetExeDir;
-	std::string strRetExeFileName;
-	RCODE rc = getExecutePathAndName( strRetExeDir, strRetExeFileName );
-	strRetExePathAndFileName = strRetExeDir + strRetExeFileName;
-	return rc;
-}
-
-//============================================================================
-//! Get directory we execute from
-RCODE	VxFileUtil::getExecuteDirectory( std::string& strRetExeDir )
-{
-	// try cached version first
-	strRetExeDir = VxGetExeDirectory();
-	if (!strRetExeDir.empty())
-	{
-		return 0;
-	}
-
-	std::string strRetExeFileName;
-	return getExecutePathAndName( strRetExeDir, strRetExeFileName );
-}
-
-//============================================================================
-//! Get execution path and file name
-RCODE	VxFileUtil::getExecutePathAndName( std::string& strRetExeDir, std::string& strRetExeFileName )
-{
-#ifdef TARGET_OS_WINDOWS
-	wchar_t pRetBuf[ VX_MAX_PATH ];
-	int iRetStrLen = GetModuleFileNameW( NULL, pRetBuf, VX_MAX_PATH );
-	if( 0 != iRetStrLen )
-	{
-		// remove file name
-		wchar_t * pTemp = wstrrchr( pRetBuf, '\\' );
-		if( pTemp )
-		{
-			* pTemp = 0;
-			pTemp++;
-			strRetExeFileName = WideToUtf8( pTemp );
-		}
-		// remove debug path if exists
-		pTemp = wstrrchr( pRetBuf, '\\' );
-		if( pTemp )
-		{
-#ifdef _DEBUG
-			if( 0 == wstrcmp( pTemp, L"\\DEBUG" ) ||
-				0 == wstrcmp( pTemp, L"\\Debug" ) )
-			{
-				*pTemp = 0;
-			}
-#endif
-		}
-		// make sure has the final slash
-		if( pRetBuf[ wstrlen( pRetBuf ) - 1 ] != '\\' )
-		{
-			wstrcat( pRetBuf, L"\\" );
-		}
-		// flip the slashes
-		size_t uiStrLen = wstrlen( pRetBuf );
-		for( size_t i = 0; i < uiStrLen; i++ )
-		{
-			if( L'\\' == pRetBuf[ i ] )
-			{
-				pRetBuf[ i ] = L'/';
-			}
-		}
-
-		strRetExeDir = WideToUtf8( pRetBuf );
-		return 0;
-	}
-	else
-	{
-		LogMsg( LOG_INFO, "Error %d occurred getting module directory\n", VxGetLastError());
-		return -1;
-	}
-
-#else // LINUX
-	char pRetBuf[ VX_MAX_PATH ];
-	int iByteCount;
-	char* pTempBuf;
-	iByteCount = readlink("/proc/self/exe", pRetBuf, VX_MAX_PATH);
-	if(-1 == iByteCount)
-	{
-		LogMsg( LOG_INFO, "Error %d occured getting module directory\n", VxGetLastError());
-		return -1;
-
-	}
-	pRetBuf[iByteCount] = '\0';
-
-	if(NULL == (pTempBuf = strrchr(pRetBuf,'/')))
-	{
-		LogMsg( LOG_INFO, "Error %d occured getting module directory\n", VxGetLastError());
-		return -1;
-	}
-	pTempBuf[1] = '\0';
-
-	//const char * dir * name = dirname( pRetBuf );
-
-	strRetExeFileName = &pTempBuf[2];
-	strRetExeDir = pRetBuf;
-#endif // LINUX
-	return 0;
-}
-
-//============================================================================
 bool VxFileUtil::fileNameWildMatch( const char  * pMatchName, const char * pWildName )
 {
 //  test if a file name matches a file name pattern.
@@ -1345,7 +1146,7 @@ bool VxFileUtil::fileNameWildMatch( const char  * pMatchName, const char * pWild
 //! NOTE: USER MUST DELETE THE RETURED POINTER OR MEMORY LEAK WILL OCCURE
 RCODE	VxFileUtil::readWholeFile(	const char *	pFileName,			// file to read	
 									void **			ppvRetBuf,			// return allocated buffer it was read into
-                                    uint32_t *		pu32RetLenOfFile )	// return length of file
+									uint32_t *			pu32RetLenOfFile )	// return length of file
 {
 	RCODE rc = 0;
 	uint32_t u32Len = (uint32_t)getFileLen( pFileName );
@@ -1386,8 +1187,8 @@ RCODE	VxFileUtil::readWholeFile(	const char *	pFileName,			// file to read
 //! NOTE assumes buffer has enough room for the whole file
 RCODE VxFileUtil::readWholeFile(	const char *	pFileName,				// file to read
 									void *			pvBuf,					// buffer to read into
-                                    uint32_t		u32LenToRead,			// length to read ( assumes is same as file length
-                                    uint32_t	*	pu32RetAmountRead )		// return length actually read if not null
+									uint32_t				u32LenToRead,			// length to read ( assumes is same as file length
+									uint32_t	*			pu32RetAmountRead )		// return length actually read if not null
 {
 	RCODE rc = 0;
 	if( pu32RetAmountRead  )
@@ -1425,30 +1226,6 @@ RCODE VxFileUtil::readWholeFile(	const char *	pFileName,				// file to read
 	return rc;
 }
 
-//============================================================================
-//! allocate memory and read whole file into memory and decrypt
-//! NOTE: USER MUST DELETE THE RETURED POINTER OR MEMORY LEAK WILL OCCURE
-RCODE	VxFileUtil::readWholeFile(	VxKey *			poKey,				// key to decrypt with
-									const char *	pFileName,			// file to read	
-									void **			ppvRetBuf,			// return allocated buffer it was read into
-									uint32_t *			pu32RetLenOfFile )	// return length of file
-{
-	uint32_t		u32FileLen;
-
-	RCODE rc = readWholeFile( pFileName,
-		                      ppvRetBuf,
-		                      pu32RetLenOfFile );
-	if( rc )
-	{
-		return rc;
-	}
-
-	u32FileLen = *pu32RetLenOfFile;
-	vx_assert( u32FileLen );
-	vx_assert( 0 == (u32FileLen & 0x0f ) );
-	VxSymDecrypt( poKey, (char *)*ppvRetBuf, u32FileLen );
-	return 0;
-}
 
 //============================================================================
 //! write all of data to a file
@@ -1486,27 +1263,12 @@ RCODE	VxFileUtil::writeWholeFile(	const char *	pFileName,			// file to write to
 	return rc;
 }
 
-//============================================================================
-//! encrypt and write all of data to a file
-RCODE VxFileUtil::writeWholeFile(	VxKey *			poKey,				// key to encrypt with
-									const char *	pFileName,			// file to write to
-									void *			pvBuf,				// data to write
-                                    uint32_t		u32LenOfData )		// data length
-{
-	vx_assert( u32LenOfData );
-	vx_assert( VxIsEncryptable( u32LenOfData ) );
-	// make copy first
-	char * pBuf = new char[ u32LenOfData ];
-	memcpy( pBuf, pvBuf, u32LenOfData );
-	VxSymEncrypt( poKey, (char *)pBuf, u32LenOfData );
-	return writeWholeFile( pFileName, pBuf, u32LenOfData );
-}
 
 //============================================================================
 RCODE VxFileUtil::listFilesInDirectory(	const char *				pSrcDir,
 										std::vector<std::string>&	fileList )
 {
-	vx_assert( pSrcDir );
+//	vx_assert( pSrcDir );
 #ifdef TARGET_OS_WINDOWS
 	std::wstring strSrcDir = Utf8ToWide( pSrcDir );
 	// build path and wild card
@@ -1641,173 +1403,7 @@ RCODE VxFileUtil::listFilesInDirectory(	const char *				pSrcDir,
 }
 
 
-//============================================================================
-RCODE VxFileUtil::listFilesAndFolders(	const char *				pSrcDir,
-										std::vector<VxFileInfo>&	fileList,
-										uint8_t						fileFilterMask )
-{
-	vx_assert( pSrcDir );
-#ifdef TARGET_OS_WINDOWS
-	std::wstring strSrcDir = Utf8ToWide( pSrcDir );
-	// build path and wild card
-	wchar_t srcDir[ VX_MAX_PATH * 2 ];
-	wchar_t srcFile[ VX_MAX_PATH * 2 ];
-	wstrcpy( srcDir, strSrcDir.c_str() );
-	wstrcat( srcDir, L"\\*.*" );
 
-	// start working for files
-	WIN32_FIND_DATAW FindFileData;
-
-	HANDLE hFind = FindFirstFileW( srcDir, &FindFileData);
-	if (hFind == INVALID_HANDLE_VALUE)
-	{
-		// done with listing
-		return 0;
-	}
-	bool bFinished = false;
-	while( false == bFinished )
-	{
-		// skip . and .. files; otherwise, we'd
-		// recur infinitely!
-		if( isDotDotDirectory(  FindFileData.cFileName ) )
-		{
-			if( false == FindNextFileW(hFind, &FindFileData)  )
-				break;
-			continue;
-		}
-
-		// make source file name
-		wstrcpy( srcFile, strSrcDir.c_str()  );
-		wstrcat( srcFile, FindFileData.cFileName );
-
-		struct _stat oStat;
-		if( 0 != _wstat( srcFile, &oStat) )
-		{
-			//LogMsg( LOG_ERROR, "VxFileUtil::listFilesAndFolders ERROR %d\n", VxGetLastError() );
-		}
-		else
-		{
-			VxFileInfo fileInfo( WideToUtf8( srcFile ).c_str() );
-			fileInfo.setFileLength( oStat.st_size );
-
-			if( _S_IFDIR & oStat.st_mode )
-			{
-				// its a directory
-				fileInfo.setFileType( VXFILE_TYPE_DIRECTORY );
-				fileInfo.assureTrailingDirectorySlash();
-			}
-			else
-			{
-				// its a file
-				fileInfo.setFileType( fileExtensionToFileTypeFlag( fileInfo.getFileName().c_str() ) );
-			}
-
-			if( 0 != ( fileInfo.getFileType() & fileFilterMask ) )
-			{
-				fileList.push_back( fileInfo );
-			}
-		}
-
-		if( false == FindNextFileW(hFind, &FindFileData)  )
-		{
-			// done with listing
-			FindClose(hFind);
-			return 0;
-		}
-	}
-
-	return 0;
-#else //LINUX
-	// build path and wild card
-	char as8SrcDir[ VX_MAX_PATH * 2 ];
-	char as8SrcFile[ VX_MAX_PATH * 2 ];
-	strcpy( as8SrcDir, pSrcDir );
-	// find the files in the directory
-	DIR *pDir;
-	struct dirent *pFileEnt;
-	if( directoryExists( as8SrcDir ) )
-	{
-		//LogMsg( LOG_INFO, "listFilesAndFolders:  directory %s exists.. opening dir\n", as8SrcDir );
-		//ok directory exists!
-		if(!(NULL == (pDir = opendir(as8SrcDir))))
-		{
-			//pDir is open
-			while( 0 != (pFileEnt = readdir(pDir)))
-			{
-				//LogMsg( LOG_INFO, "listFilesAndFolders: found file %s\n", pFileEnt->d_name );
-				//got a file or directory
-				if( isDotDotDirectory(  pFileEnt->d_name ) )
-				{
-					// skip . and ..
-					//LogMsg( LOG_INFO, "listFilesAndFolders: skipping file %s\n", pFileEnt->d_name );
-					continue;
-				}
-
-				// valid directory entry
-				// make source file name
-				strcpy( as8SrcFile, as8SrcDir );
-				if( '/' != as8SrcFile[ strlen( as8SrcFile ) - 1 ] )
-				{
-					strcat( as8SrcFile, "/" );
-				}
-
-				strcat( as8SrcFile, pFileEnt->d_name );
-				//LogMsg( LOG_INFO, "listFilesAndFolders:  found file %s\n", as8SrcFile );
-				//=== Last Modification Date ===//
-				struct stat64 oStat;
-				if ( 0 != stat64( as8SrcFile, &oStat ) )
-				{
-					///ERROR how do we handle
-					LogMsg( LOG_ERROR, "listFilesAndFolders: ERROR %d when stat file %s\n", VxGetLastError(), as8SrcFile );
-					continue;
-				}
-
-				VxFileInfo fileInfo( as8SrcFile );
-                fileInfo.setFileLength( oStat.st_size );
-
-				if( pFileEnt->d_type == DT_DIR )
-				{
-					// its a directory
-                    fileInfo.setFileType( VXFILE_TYPE_DIRECTORY );
-					fileInfo.assureTrailingDirectorySlash();
-					LogMsg( LOG_INFO, "listFilesAndFolders: Is Directory %s\n", fileInfo.getFileName().c_str() );
-				}
-				else
-				{
-					// its a file
-					LogMsg( LOG_INFO, "listFilesAndFolders: Is File %s\n", fileInfo.getFileName().c_str() );
-                    fileInfo.setFileType( fileExtensionToFileTypeFlag( fileInfo.getFileName().c_str() ) );
-				}
-
-				if ( 0 != ( fileInfo.getFileType() & fileFilterMask ) )
-				{
-					fileList.push_back( fileInfo );
-				}
-				else
-				{
-					LogMsg( LOG_INFO, "listFilesAndFolders: Skip file type 0x%x not in filter mask 0x%x File %s\n", fileInfo.getFileType(), fileFilterMask, fileInfo.getFileName().c_str() );			
-				}
-			}
-
-			// end of listing
-			// done with listing
-			closedir(pDir);
-			return 0;
-		}
-		else
-		{
-			LogMsg( LOG_INFO, "listFilesInDirectory:  could not open directory %s \n", as8SrcDir );
-		}
-	}
-	else
-	{
-		LogMsg( LOG_INFO, "listFilesInDirectory:  directory %s does not exist \n", as8SrcDir );
-	}
-
-	return 0;
-#endif //LINUX
-
-}
 
 //============================================================================
 bool VxFileUtil::incrementFileName( std::string& strFileName )
@@ -1838,6 +1434,267 @@ bool VxFileUtil::incrementFileName( std::string& strFileName )
 
 	return false;
 }
+
+//============================================================================
+bool VxIsPhotoFile( std::string& cs );
+bool VxIsPhotoFileExtention( const char * pExt );
+bool VxIsAudioFile( std::string& cs );
+bool VxIsAudioFileExtention( const char * pExt );
+bool VxIsVideoFile( std::string& cs );
+bool VxIsVideoFileExtention( const char * pExt );
+bool VxIsDocumentFile( std::string& cs );
+bool VxIsDocumentFileExtention( const char * pExt );
+bool VxIsArcOrCDImageFile( std::string& cs );
+bool VxIsArcOrCDImageFileExtention( const char * pExt );
+bool VxIsExecutableFile( std::string& cs );
+bool VxIsExecutableFileExtention( const char * pExt );
+bool VxIsRecognizedFile( std::string& cs );
+bool VxIsRecognizedFileExtention( const char * pExt );
+
+bool VxIsShortcutFileExtention( const char * pExt );
+bool VxIsShortcutFile( std::string& cs );
+
+uint8_t	VxFileExtensionToFileTypeFlag( const char *	pFileExt );
+
+bool VxIsMediaFile( uint8_t u8FileTypeFlag ); // multimedia
+bool VxShouldOpenFile( uint8_t u8FileTypeFlag ); // includes docs
+
+#define PHOTO_FILE_EXTENTIONS			"jpg,jpeg,bmp,tga,png,gif,pcx,tif,ico"
+#define AUDIO_FILE_EXTENTIONS			"mp3,wav,wma,ogg,opus"
+#define VIDEO_FILE_EXTENTIONS			"asf,mpg,mpeg,mp4,3gp,mov,avi,divx,mkv,wmv,rm"
+#define DOCUMENT_FILE_EXTENTIONS		"doc,txt,htm,html,pdf"
+#define EXECUTABLE_FILE_EXTENTIONS		"exe,com,bat,cmd"
+#define CDIMAGE_OR_ARC_FILE_EXTENTIONS	"7z,zip,rar,tar,gz,iso,cue,ccd,img,sub,bin,mds,nrg,pdi,mds,vob"
+#define COMBINED_FILE_EXTENTIONS		"opus,jpg,jpeg,bmp,tga,png,gif,pcx,mp3,wav,wma,ogg,asf,mpg,mpeg,mp4,3gp,mov,avi,divx,mkv,wmv,rm,exe,com,bat,cmd,7z,zip,rar,tar,doc,txt,htm,html,pdf"
+
+/*
+#define FILE_TYPE_PHOTO_STR				"Photo"
+#define FILE_TYPE_AUDIO_STR				"Audio"
+#define FILE_TYPE_VIDEO_STR				"Video"
+#define FILE_TYPE_EXECUTABLE_STR		"Executable"
+#define FILE_TYPE_ARCHIVE_OR_DOC_STR	"Archive or Document"
+#define FILE_TYPE_CD_IMAGE_STR			"CD or DVD Image"
+#define FILE_TYPE_OTHER_STR				"Other"
+#define FILE_TYPE_ANY_STR				"Any"
+*/
+
+
+//============================================================================
+//! same as strstr but case insensitive
+char * stristr( const char * pString, const char * pPattern )
+{
+    if( !pString || !pPattern )
+        return 0;
+    int slen = ( int )strlen( pString );
+    int plen = ( int )strlen( pPattern );
+    if( (0 == slen ) && (0 == plen ) )
+        return (char *)pString; // both empty strings
+
+    char *pptr, *sptr, *start;
+    for( start = (char *)pString, pptr = (char *)pPattern; slen >= plen; start++, slen--)
+    {
+        // find start of pattern in string
+        while( toupper(*start) != toupper(*pPattern) )
+        {
+            start++;
+            slen--;
+            // if pattern longer than string then cannot be matched
+            if (slen < plen)
+                return(NULL);
+        }
+
+        sptr = start;
+        pptr = (char *)pPattern;
+        while (toupper(*sptr) == toupper(*pptr))
+        {
+            sptr++;
+            pptr++;
+            if ('\0' == *pptr)
+                return (start);
+        }
+    }
+
+    return(NULL);
+}
+
+//============================================================================
+bool VxIsPhotoFile( std::string & cs )
+{
+    std::string csExt;
+    VxFileUtil::getFileExtension( cs, csExt );
+    return VxIsPhotoFileExtention( csExt.c_str() );
+}
+
+//============================================================================
+bool VxIsPhotoFileExtention( const char * pExt )
+{
+    return stristr( PHOTO_FILE_EXTENTIONS, pExt )?1:0;
+}
+
+//============================================================================
+bool VxIsAudioFile( std::string & cs )
+{
+    std::string csExt;
+    VxFileUtil::getFileExtension( cs, csExt );
+    return VxIsAudioFileExtention( csExt.c_str() );
+}
+//============================================================================
+bool VxIsAudioFileExtention( const char * pExt )
+{
+    return stristr( AUDIO_FILE_EXTENTIONS, pExt )?1:0;
+}
+
+//============================================================================
+bool VxIsVideoFile( std::string &cs )
+{
+    std::string csExt;
+    VxFileUtil::getFileExtension( cs, csExt );
+    return VxIsVideoFileExtention( csExt.c_str() );
+}
+//============================================================================
+bool VxIsVideoFileExtention( const char * pExt )
+{
+    return stristr( VIDEO_FILE_EXTENTIONS, pExt )?1:0;
+}
+
+
+//============================================================================
+bool VxIsDocumentFile( std::string &cs )
+{
+    std::string csExt;
+    VxFileUtil::getFileExtension( cs, csExt );
+    return VxIsDocumentFileExtention( csExt.c_str() );
+}
+
+//============================================================================
+bool VxIsDocumentFileExtention( const char * pExt )
+{
+    return stristr( DOCUMENT_FILE_EXTENTIONS, pExt )?1:0;
+}
+
+//============================================================================
+bool VxIsArcOrCDImageFileFile( std::string &cs )
+{
+    std::string csExt;
+    VxFileUtil::getFileExtension( cs, csExt );
+    return VxIsArcOrCDImageFileExtention( csExt.c_str() );
+}
+
+//============================================================================
+bool VxIsArcOrCDImageFileExtention( const char * pExt )
+{
+    return stristr( CDIMAGE_OR_ARC_FILE_EXTENTIONS, pExt )?1:0;
+}
+
+//============================================================================
+bool VxIsExecutableFile( std::string &cs )
+{
+    std::string csExt;
+    VxFileUtil::getFileExtension( cs, csExt );
+    return VxIsExecutableFileExtention( csExt.c_str() );
+}
+
+//============================================================================
+bool VxIsExecutableFileExtention( const char * pExt )
+{
+    return stristr( EXECUTABLE_FILE_EXTENTIONS, pExt )?1:0;
+}
+
+//============================================================================
+bool VxIsRecognizedFile( std::string &cs )
+{
+    std::string csExt;
+    VxFileUtil::getFileExtension( cs, csExt );
+    return VxIsRecognizedFileExtention( csExt.c_str() );
+}
+
+//============================================================================
+bool VxIsRecognizedFileExtention( const char * pExt )
+{
+    return stristr( COMBINED_FILE_EXTENTIONS, pExt )?0:1;
+}
+
+//============================================================================
+bool VxIsShortcutFileExtention( const char * pExt )
+{
+#ifdef TARGET_OS_WINDOWS
+    return stristr( pExt, "lnk" ) ? true : false;
+#else
+    return false; // no support for linux yet
+#endif //TARGET_OS_WINDOWS
+}
+
+//============================================================================
+bool VxIsShortcutFile( std::string& fileName )
+{
+#ifdef TARGET_OS_WINDOWS
+    std::string csExt;
+    VxFileUtil::getFileExtension( fileName, csExt );
+    if( csExt.size() )
+    {
+        return VxIsShortcutFileExtention( csExt.c_str() );
+    }
+#endif //TARGET_OS_WINDOWS
+    return false;
+}
+
+//============================================================================
+uint8_t	VxFileExtensionToFileTypeFlag( const char *	pFileExt )
+{
+    uint8_t u8FileType = VXFILE_TYPE_OTHER;
+    if( pFileExt )
+    {
+        const char * extension = strrchr( pFileExt, '.' );
+        if( extension )
+        {
+            extension++;
+        }
+        else
+        {
+            extension = pFileExt;
+        }
+
+        if( VxIsPhotoFileExtention( extension ) )
+        {
+            u8FileType = VXFILE_TYPE_PHOTO;
+        }
+        else if( VxIsAudioFileExtention( extension ) )
+        {
+            u8FileType = VXFILE_TYPE_AUDIO;
+        }
+        else if( VxIsVideoFileExtention( extension ) )
+        {
+            u8FileType = VXFILE_TYPE_VIDEO;
+        }
+        else if( VxIsDocumentFileExtention( extension ) )
+        {
+            u8FileType = VXFILE_TYPE_DOC;
+        }
+        else if( VxIsArcOrCDImageFileExtention( extension ) )
+        {
+            u8FileType = VXFILE_TYPE_ARCHIVE_OR_CDIMAGE;
+        }
+        else if( VxIsExecutableFileExtention( extension ) )
+        {
+            u8FileType = VXFILE_TYPE_EXECUTABLE;
+        }
+    }
+
+    return u8FileType;
+}
+
+//============================================================================
+bool VxIsMediaFile( uint8_t u8FileTypeFlag )
+{
+    return ( u8FileTypeFlag & ( VXFILE_TYPE_PHOTO | VXFILE_TYPE_AUDIO | VXFILE_TYPE_VIDEO )) ? true : false;
+}
+
+//============================================================================
+bool VxShouldOpenFile( uint8_t u8FileTypeFlag )
+{
+    return ( u8FileTypeFlag & ( VXFILE_TYPE_PHOTO | VXFILE_TYPE_AUDIO | VXFILE_TYPE_VIDEO | VXFILE_TYPE_DOC )) ? true : false;
+}
+
 
 //============================================================================
 uint8_t VxFileUtil::fileExtensionToFileTypeFlag( const char * pFileName )

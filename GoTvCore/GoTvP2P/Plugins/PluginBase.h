@@ -140,24 +140,24 @@ public:
 
 	virtual void				onSharedFilesUpdated( uint16_t u16FileTypes )							{};
 
-	virtual void				onPktUserConnect			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktUserDisconnect			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktPluginOfferReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktPluginOfferReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktUserConnect			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktUserDisconnect			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktPluginOfferReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktPluginOfferReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
-	virtual void				onPktSessionStartReq		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktSessionStartReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktSessionStopReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktSessionStopReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktSessionStartReq		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktSessionStartReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktSessionStopReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktSessionStopReply		( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
-	virtual void				onPktMyPicSendReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktMyPicSendReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktWebServerPicChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktWebServerPicChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktWebServerGetChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktWebServerGetChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktWebServerPutChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
-	virtual void				onPktWebServerPutChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
+    virtual void				onPktMyPicSendReq			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktMyPicSendReply			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktWebServerPicChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktWebServerPicChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktWebServerGetChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktWebServerGetChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktWebServerPutChunkTx	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
+    virtual void				onPktWebServerPutChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
 	bool						txPacket( VxNetIdent * netIdent, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false );
 	virtual EPluginAccessState	canAcceptNewSession( VxNetIdent * netIdent ) { return netIdent->getHisAccessPermissionFromMe( m_ePluginType ); }

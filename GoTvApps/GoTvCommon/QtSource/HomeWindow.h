@@ -51,9 +51,9 @@ private slots:
 	void						slotFrameResized( void );
 
 protected:
-    void                        showEvent( QShowEvent * ev );
-	void						resizeEvent( QResizeEvent * );
-    void						closeEvent( QCloseEvent * );
+    void                        showEvent( QShowEvent * ev ) override;
+    void						resizeEvent( QResizeEvent * ) override;
+    void						closeEvent( QCloseEvent * ) override;
 
 	void						initializeGoTvDynamicLayout( void );
 	void						createAppletLaunchPage( void );

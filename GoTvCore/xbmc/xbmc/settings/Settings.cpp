@@ -647,11 +647,11 @@ void CSettings::InitializeDefaults()
 
     // Initialize deviceUUID if not already set, used in zeroconf advertisements.
     std::shared_ptr<CSettingString> deviceUUID = std::static_pointer_cast< CSettingString >( GetSettingsManager()->GetSetting( CSettings::SETTING_SERVICES_DEVICEUUID ) );
-  if (deviceUUID->GetValue().empty())
-        {
-            const std::string& uuid = StringUtils::CreateUUID();
-            std::static_pointer_cast< CSettingString >( GetSettingsManager()->GetSetting( CSettings::SETTING_SERVICES_DEVICEUUID ) )->SetValue( uuid );
-        }
+    if (deviceUUID->GetValue().empty())
+    {
+        const std::string& uuid = StringUtils::CreateUUID();
+        std::static_pointer_cast< CSettingString >( GetSettingsManager()->GetSetting( CSettings::SETTING_SERVICES_DEVICEUUID ) )->SetValue( uuid );
+    }
 }
 
 void CSettings::InitializeOptionFillers()

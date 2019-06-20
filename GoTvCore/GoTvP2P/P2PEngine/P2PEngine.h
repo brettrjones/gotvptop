@@ -166,7 +166,7 @@ public:
     virtual void				fromGuiWantMediaInput( VxGUID& onlineId, EMediaInputType mediaType, bool wantInput ) override;
 
     virtual void				fromGuiVideoData( uint32_t u32FourCc, uint8_t * pu8VidDataIn, int iWidth, int iHeight, uint32_t u32VidDataLen, int iRotation ) override;
-	virtual bool				fromGuiMovieDone( void )							{ return true; };
+    virtual bool				fromGuiMovieDone( void ) override							{ return true; };
 
     virtual void				fromGuiNetworkAvailable( const char * lclIp = NULL, bool isCellularNetwork = false ) override;
     virtual void				fromGuiNetworkLost( void ) override;

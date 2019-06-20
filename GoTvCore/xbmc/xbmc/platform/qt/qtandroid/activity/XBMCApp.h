@@ -72,11 +72,11 @@ class CXBMCApp : public IActivityHandler, public CJNIMainActivity,
 public:
   CXBMCApp(ANativeActivity *nativeActivity);
   virtual ~CXBMCApp();
-  virtual void onReceive(CJNIIntent intent);
-  virtual void onNewIntent(CJNIIntent intent);
-  virtual void onVolumeChanged(int volume);
-  virtual void onAudioFocusChange(int focusChange);
-  virtual void doFrame(int64_t frameTimeNanos);
+  virtual void onReceive(CJNIIntent intent) override;
+  virtual void onNewIntent(CJNIIntent intent) override;
+  virtual void onVolumeChanged(int volume) override;
+  virtual void onAudioFocusChange(int focusChange) override;
+  virtual void doFrame(int64_t frameTimeNanos) override;
 
   // implementation of CJNIInputManagerInputDeviceListener
   void onInputDeviceAdded(int deviceId) override;
@@ -85,21 +85,21 @@ public:
 
   bool isValid() { return m_activity != NULL; }
 
-  void onStart();
-  void onResume();
-  void onPause();
-  void onStop();
-  void onDestroy();
+  void onStart() override;
+  void onResume() override;
+  void onPause() override;
+  void onStop() override;
+  void onDestroy() override;
 
-  void onSaveState(void **data, size_t *size);
-  void onConfigurationChanged();
-  void onLowMemory();
+  void onSaveState(void **data, size_t *size) override;
+  void onConfigurationChanged() override;
+  void onLowMemory() override;
 
-  void onCreateWindow(ANativeWindow* window);
-  void onResizeWindow();
-  void onDestroyWindow();
-  void onGainFocus();
-  void onLostFocus();
+  void onCreateWindow(ANativeWindow* window) override;
+  void onResizeWindow() override;
+  void onDestroyWindow() override;
+  void onGainFocus() override;
+  void onLostFocus() override;
 
 
   static const ANativeWindow** GetNativeWindow(int timeout);

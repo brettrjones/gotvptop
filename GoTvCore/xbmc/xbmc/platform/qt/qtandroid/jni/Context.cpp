@@ -28,7 +28,7 @@
 #include "BroadcastReceiver.h"
 #include "JNIThreading.h"
 #include "ApplicationInfo.h"
-#include "File.h"
+#include "JNIFile.h"
 #include "ContentResolver.h"
 #include "BaseColumns.h"
 #include "MediaStore.h"
@@ -61,11 +61,16 @@
 #include <QtAndroid>
 #include <QDebug>
 
+#include <CoreLib/VxJava.h>
+
 using namespace jni;
 
 jhobject CJNIContext::m_context(0);
 
 CJNIContext * g_JniContext = nullptr;
+AAssetManager* CJNIContext::m_AssetManager = nullptr;
+JavaVM * CJNIContext::m_JniJvm = nullptr;
+JNIEnv * CJNIContext::m_JniEnv = nullptr;
 
 std::string CJNIContext::CONNECTIVITY_SERVICE;
 
@@ -94,7 +99,16 @@ void CJNIContext::destroyJniContext()
 
 CJNIContext::CJNIContext( JavaVM * jvm, JNIEnv * env )
 {
+    initJavaContext( jvm, env );
+}
+
+void CJNIContext::initJavaContext( JavaVM * jvm, JNIEnv * env )
+{
   xbmc_jni_on_load( jvm, env );
+
+  m_JniJvm = jvm;
+  m_JniEnv = env;
+
   // attach thread may be needed if created in different thread
   //m_JniJvm->AttachCurrentThread(&m_JniEnv, NULL);
 
@@ -115,9 +129,17 @@ CJNIContext::CJNIContext( JavaVM * jvm, JNIEnv * env )
                   {
                        m_context.reset( appContextObj );
 
-                      CJNIBase::SetSDKVersion( 21 );
-                      PopulateStaticFields();
-                  }
+                       CJNIBase::SetSDKVersion( 21 );
+                       PopulateStaticFields();
+
+                       jclass clazzContextObj = env->GetObjectClass(appContextObj);
+                       jmethodID idGetAssets = env->GetMethodID(clazzContextObj, "getAssets", "()Landroid/content/res/AssetManager;");
+                       m_AssetManager = AAssetManager_fromJava(env, env->CallObjectMethod(appContextObj, idGetAssets));
+                       if( !m_AssetManager )
+                       {
+                           qWarning() << "m_AssetManager is null";
+                       }
+                   }
                   else
                   {
                       qWarning() << "getApplicationContext object is invalid";
@@ -144,9 +166,35 @@ CJNIContext::CJNIContext( JavaVM * jvm, JNIEnv * env )
   }
 }
 
-CJNIContext::~CJNIContext()
+int CJNIContext::attachThread()
 {
+    JNIEnv * jniEnv = getJNIEnv();
+    JavaVM * javaVM = getJavaVM();
+    int attachedState  = javaVM->AttachCurrentThread( &jniEnv, NULL );
+    if( attachedState )
+    {
+        qWarning() << "Failed to attach java thread";
+    }
+    else if ( jniEnv )
+    {
+        if( jniEnv->ExceptionCheck() )
+        {
+            jniEnv->ExceptionDescribe();
+        }
+        else
+        {
+            initJavaContext( javaVM, jniEnv );
+        }
+    }
+
+    return attachedState;
+ }
+
+void  CJNIContext::detachThread( int attachedState )
+{
+    getJavaVM()->DetachCurrentThread();
 }
+
 
 void CJNIContext::PopulateStaticFields()
 {

@@ -43,7 +43,6 @@ extern "C" {
 # define L_ENDIAN
 #endif // L_ENDIAN
 
-#define OPENSSL_NO_EC_NISTP_64_GCC_128
 //#define RSA_FLAG_NO_CONSTTIME 
 //#define DSA_FLAG_NO_EXP_CONSTTIME
 

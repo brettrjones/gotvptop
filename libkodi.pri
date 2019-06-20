@@ -2862,7 +2862,7 @@ android {
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniThreading.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniBase.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/System.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/File.h
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JNIFile.h
 
 SOURCES += \
     $$PWD/GoTvCore/xbmc/xbmc/filesystem/AndroidAppDirectory.cpp \
@@ -2885,7 +2885,7 @@ SOURCES += \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/ApplicationInfo.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/PackageItemInfo.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/System.cpp \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/File.cpp
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JNIFile.cpp
 
 }
 

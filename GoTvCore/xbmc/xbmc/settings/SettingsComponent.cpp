@@ -63,8 +63,8 @@ void CSettingsComponent::Init( const CAppParamParser &params )
 
         m_settings->Initialize();
 
-    m_advancedSettings->Initialize(params, *m_settings->GetSettingsManager());
-    URIUtils::RegisterAdvancedSettings(*m_advancedSettings);
+        m_advancedSettings->Initialize(params, *m_settings->GetSettingsManager());
+        URIUtils::RegisterAdvancedSettings(*m_advancedSettings);
 //        CreateUserDirs();
 
         m_profileManager->Initialize( m_settings );
