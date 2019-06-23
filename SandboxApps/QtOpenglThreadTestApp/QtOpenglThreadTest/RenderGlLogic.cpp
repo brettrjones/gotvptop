@@ -75,7 +75,9 @@ void RenderGlLogic::initRenderContext()
     m_ThreadGlContext = new QOpenGLContext( this );
     QSurfaceFormat surfaceFormat = m_ThreadGlContext->format();
     surfaceFormat.setColorSpace( QSurfaceFormat::ColorSpace::sRGBColorSpace );
+#ifndef TARGET_OS_ANDROID
     surfaceFormat.setRenderableType( QSurfaceFormat::RenderableType::OpenGL ); // QSurfaceFormat::RenderableType::OpenGLES );
+#endif // TARGET_OS_ANDROID
     surfaceFormat.setSwapBehavior( QSurfaceFormat::SwapBehavior::DoubleBuffer );
     surfaceFormat.setAlphaBufferSize( 8 );
     surfaceFormat.setRedBufferSize( 8 );
@@ -85,6 +87,7 @@ void RenderGlLogic::initRenderContext()
     surfaceFormat.setStencilBufferSize( 8 );
     surfaceFormat.setSwapInterval( 1 );
     surfaceFormat.setSamples( 0 );
+
 
     m_ThreadGlContext->setFormat( surfaceFormat );
     m_ThreadGlContext->create();
@@ -150,7 +153,7 @@ void RenderGlLogic::render()
     m_RenderThreadSurface->makeCurrent();
   
     // do not call m_RenderThreadSurface->size.. we want the frame buffer surface size
-    QSize viewSize = m_RenderThreadSurface->getSurfaceSize();
+    //QSize viewSize = m_RenderThreadSurface->getSurfaceSize();
 
     locker.unlock();
 
