@@ -120,6 +120,8 @@ void P2PEngine::fromGuiSetUserSpecificDir( const char * userSpecificDir  )
 	LogMsg( LOG_INFO, "P2PEngine::fromGuiSetUserSpecificDir %s\n", userSpecificDir  );
 	VxSetUserSpecificDataDirectory( userSpecificDir );
 
+    //LogMsg( LOG_DEBUG, "IGoTv::fromGuiSetUserSpecificDir %s\n", userDir);
+
 	std::string strDbFileName = VxGetSettingsDirectory();
 	strDbFileName += "biglist.db3";
 	RCODE rc = m_BigListMgr.bigListMgrStartup( strDbFileName.c_str() );
@@ -135,7 +137,6 @@ void P2PEngine::fromGuiSetUserSpecificDir( const char * userSpecificDir  )
 	strDbFileName = VxGetSettingsDirectory();
 	strDbFileName += "EngineParams.db3";
 	getEngineParams().engineParamsStartup( strDbFileName );
-
 
 	m_IsUserSpecificDirSet = true;
 	m_AppStartupCalled = true;

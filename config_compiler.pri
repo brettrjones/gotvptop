@@ -15,13 +15,18 @@ CONFIG(debug, debug|release){
 android{
     DEFINES +=__ANDROID_API__=21
     DEFINES += BIONIC_IOCTL_NO_SIGNEDNESS_OVERLOAD
-    CONFIG(debug, debug|release){
+    #CONFIG(debug, debug|release){
         #if do not turn off optimization then android NDK std::string values will get optimized out and not viewable
-        QMAKE_CXXFLAGS += -O0
-        QMAKE_CFLAGS += -O0
-        CONFIG ~= s/-O[0123s]//g
-        CONFIG += -O0
-    }
+        # sigh if optimization is turned off then the debugger gets hung up so have to live with not being able to view strings
+        #QMAKE_CXXFLAGS += -O0
+        #QMAKE_CFLAGS += -O0
+        #QMAKE_CFLAGS_DEBUG -= -g
+        #QMAKE_CFLAGS_DEBUG -= -Og
+        #QMAKE_CFLAGS_DEBUG += -O0
+        #QMAKE_CXXFLAGS_DEBUG -= -g
+        #QMAKE_CXXFLAGS_DEBUG -= -Og
+        #QMAKE_CXXFLAGS_DEBUG += -O0
+    #}
 }
 
 CONFIG(release, debug|release){

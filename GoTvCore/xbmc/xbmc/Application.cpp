@@ -411,6 +411,9 @@ bool CApplication::Create( const CAppParamParser &params )
 
     Preflight();
 
+    // ffmpeg needs early start so can finish the loading threads before kodi is started
+    GetIGoTv().startupFfmpeg();
+
     // here we register all global classes for the CApplicationMessenger,
     // after that we can send messages to the corresponding modules
     CApplicationMessenger::GetInstance().RegisterReceiver( this );
@@ -440,7 +443,7 @@ bool CApplication::Create( const CAppParamParser &params )
 #endif
 
     // only the InitDirectories* for the current platform should return true
-    bool inited = GetIGoTv().initDirectories();
+    //bool inited = GetIGoTv().initDirectories();
 
     // copy required files
     CopyUserDataIfNeeded( "special://masterprofile/", "RssFeeds.xml" );
@@ -556,6 +559,8 @@ bool CApplication::Create( const CAppParamParser &params )
     //! @todo - move to CPlatformXXX
 #if defined(TARGET_DARWIN)
     setenv( "OS", "OS X", true );
+#elif defined(TARGET_OS_ANDROID)
+    setenv( "OS", "Android", true );
 #elif defined(TARGET_POSIX)
     setenv( "OS", "Linux", true );
 #elif defined(TARGET_WINDOWS)

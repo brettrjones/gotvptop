@@ -94,8 +94,9 @@ void IGoTv::fromGuiSetUserXferDir( const char * userDir )
 //============================================================================
 void IGoTv::fromGuiSetUserSpecificDir( const char * userDir )
 {
-    //LogMsg( LOG_DEBUG, "IGoTv::fromGuiSetUserSpecificDir %s\n", userDir);
     getPtoP().fromGuiSetUserSpecificDir( userDir );
+    // needs called after user specific data folder is set
+    getOsInterface().initDirectories();
 }
 
 //============================================================================

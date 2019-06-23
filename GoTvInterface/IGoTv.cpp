@@ -216,10 +216,7 @@ IGoTv::~IGoTv()
 //============================================================================
 bool IGoTv::initDirectories()
 {
-    bool result = m_OsInterface.initDirectories();
-    // ffmpeg needs early start so can finish the loading threads before kodi is started
-    startupFfmpeg();
-    return result;
+    return m_OsInterface.initDirectories();
 }
 
 //============================================================================

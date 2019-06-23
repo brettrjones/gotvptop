@@ -447,6 +447,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvInterface/ILog.cpp \
     $$PWD/GoTvInterface/IToGui.cpp \
     $$PWD/GoTvInterface/OsInterface/OsInterface.cpp \
+    $$PWD/GoTvInterface/OsInterface/AssetDirectoryList.hh \
     $$PWD/GoTvInterface/OsWin32/IWin32.cpp \
     $$PWD/GoTvInterface/OsLinux/ILinux.cpp \
     $$PWD/GoTvInterface/OsAndroid/IAndroid.cpp \

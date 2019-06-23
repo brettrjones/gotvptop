@@ -108,7 +108,7 @@ void RenderGlLogic::initRenderGlContext()
 
     m_ThreadGlContext->makeCurrent( m_RenderThreadSurface );
 
-    m_Glf = m_ThreadGlContext->functions();
+    m_Glf = m_ThreadGlContext->currentContext()->functions();
     Q_ASSERT( m_Glf );
     m_Glf->initializeOpenGLFunctions();
 

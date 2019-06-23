@@ -20,6 +20,7 @@
 #include "AppGlobals.h"
 #include "GuiHelpers.h"
 
+#include <GoTvInterface/IGoTv.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxGlobals.h>
@@ -49,7 +50,8 @@ static uint64_t getQuuidHiPart( QUuid& uuid )
 void AppCommon::createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg )
 {
 	m_Engine.fromGuiSetUserXferDir( getUserXferDirectoryFromAccountUserName( strUserName.c_str() ).c_str() );
-	m_Engine.fromGuiSetUserSpecificDir( getUserSpecificDataDirectoryFromAccountUserName( strUserName.c_str() ).c_str() );
+    // gotv (kodi) also needs the directory
+    getGoTv().fromGuiSetUserSpecificDir( getUserSpecificDataDirectoryFromAccountUserName( strUserName.c_str() ).c_str() );
 	QUuid uuidTmp = QUuid::createUuid();
 	uint64_t u64HiPart =  getQuuidHiPart( uuidTmp );
 	uint64_t u64LoPart =  getQuuidLoPart( uuidTmp );
@@ -122,7 +124,8 @@ void AppCommon::loadAccountSpecificSettings( const char * userName )
 {
 	m_Engine.fromGuiSetUserXferDir( getUserXferDirectoryFromAccountUserName( userName ).c_str() );
 	std::string strUserSpecificDir = getUserSpecificDataDirectoryFromAccountUserName( userName );
-	m_Engine.fromGuiSetUserSpecificDir( strUserSpecificDir.c_str() );
+    // gotv (kodi) also needs the directory
+    getGoTv().fromGuiSetUserSpecificDir( strUserSpecificDir.c_str() );
     std::string userPicture = VxGetUserProfileDirectory();
     userPicture += "me.jpg";
     if( false == VxFileUtil::fileExists( userPicture.c_str() ) )

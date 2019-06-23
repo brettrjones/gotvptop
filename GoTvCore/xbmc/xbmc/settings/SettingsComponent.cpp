@@ -207,7 +207,7 @@ bool CSettingsComponent::InitDirectoriesLinux( bool bPlatformDirectories )
 #endif // BUILD_GOTV_APP
     StringUtils::ToLower( dotLowerAppName );
     const char* envAppHome = "KODI_HOME";
-    const char* envAppBinHome = "KODI_BIN_HOME";
+    const char* envAppBinHome = "   KODI_BIN_HOME";
     const char* envAppTemp = "KODI_TEMP";
 
     std::string userName;
