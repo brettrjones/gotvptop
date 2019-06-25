@@ -163,10 +163,10 @@ bool CSettingsComponent::InitDirectoriesAndroid( bool bPlatformDirectories )
     CSpecialProtocol::SetHomePath( strUserDataFolder );
     CSpecialProtocol::SetLogPath( URIUtils::AddFileToFolder( strUserDataFolder, "logs" ) );
     CSpecialProtocol::SetMasterProfilePath( URIUtils::AddFileToFolder( strUserDataFolder, "userdata" ) );
-    CSpecialProtocol::SetTempPath( URIUtils::AddFileToFolder( strUserDataFolder, "cache" ) );
+    CSpecialProtocol::SetTempPath( URIUtils::AddFileToFolder( strUserDataFolder, "temp" ) );
 
     CEnvironment::setenv( "KODI_PROFILE_USERDATA", CSpecialProtocol::TranslatePath( "special://masterprofile/" ).c_str() );
-
+    CreateUserDirs();
     return true;
 #else
     return false;

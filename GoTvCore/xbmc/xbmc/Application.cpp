@@ -89,6 +89,8 @@
 
 #include "input/KeyboardLayoutManager.h"
 
+#include <CoreLib/VxDebug.h>
+
 #ifdef HAS_UPNP
 #include "network/upnp/UPnP.h"
 #include "filesystem/UPnPDirectory.h"
@@ -357,6 +359,10 @@ static void CopyUserDataIfNeeded( const std::string &strPath, const std::string 
     {
         // need to copy it across
         std::string srcPath = URIUtils::AddFileToFolder( "special://xbmc/userdata/", file );
+        std::string srcFile = CSpecialProtocol::TranslatePath( srcPath.c_str() );
+        std::string destFile = CSpecialProtocol::TranslatePath( destPath.c_str() );
+        //LogMsg( LOG_DEBUG, "Copy %s to %s", srcFile.c_str(), destFile.c_str() );
+
         CFile::Copy( srcPath, destPath );
     }
 }
@@ -459,7 +465,7 @@ bool CApplication::Create( const CAppParamParser &params )
 
     if( !CLog::Init( CSpecialProtocol::TranslatePath( "special://logpath" ).c_str() ) )
     {
-        fprintf( stderr, "Could not init logging classes. Log folder error (%s)\n", CSpecialProtocol::TranslatePath( "special://logpath" ).c_str() );
+        LogMsg( LOG_DEBUG, "Could not init logging classes. Log folder error (%s)\n", CSpecialProtocol::TranslatePath( "special://logpath" ).c_str() );
         return false;
     }
 

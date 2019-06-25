@@ -415,12 +415,15 @@ bool OsInterface::initUserPaths()
     // Python
     gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExePython ).c_str() );
     CSpecialProtocol::SetPath( "special://xbmc/system/python", gotvDir.c_str() );
+    LogMsg( LOG_DEBUG, "python path %s", gotvDir.c_str() );
 
     gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExePythonDlls ).c_str() );
     CSpecialProtocol::SetPath( "special://xbmc/system/python/DLLs", gotvDir.c_str() );
+    LogMsg( LOG_DEBUG, "python dlls %s", gotvDir.c_str() );
 
     gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExePythonLibs ).c_str() );
     CSpecialProtocol::SetPath( "special://xbmc/system/python/Lib", gotvDir.c_str() );
+    LogMsg( LOG_DEBUG, "python lib %s", gotvDir.c_str() );
 
     // Kodi master profile path ( In Roaming pm windows )
     gotvDir = CSpecialProtocol::TranslatePath( "special://masterprofile/" );

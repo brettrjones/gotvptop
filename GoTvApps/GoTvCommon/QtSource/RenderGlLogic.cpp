@@ -87,7 +87,9 @@ void RenderGlLogic::initRenderGlContext()
     m_ThreadGlContext = new QOpenGLContext( this );
     QSurfaceFormat surfaceFormat = m_ThreadGlContext->format();
     surfaceFormat.setColorSpace( QSurfaceFormat::ColorSpace::sRGBColorSpace );
-#ifndef TARGET_OS_ANDROID
+#ifdef TARGET_OS_ANDROID
+    surfaceFormat.setRenderableType( QSurfaceFormat::RenderableType::OpenGLES );
+#else
     surfaceFormat.setRenderableType( QSurfaceFormat::RenderableType::OpenGL ); // QSurfaceFormat::RenderableType::OpenGLES );
 #endif // TARGET_OS_ANDROID
     surfaceFormat.setSwapBehavior( QSurfaceFormat::SwapBehavior::DoubleBuffer );

@@ -132,74 +132,22 @@ extern "C" void __stdcall init_emu_environ()
     dll_putenv( "OS=win10" );
 #elif defined(TARGET_DARWIN)
     dll_putenv( "OS=darwin" );
+#elif defined(TARGET_OS_ANDROID)
+    dll_putenv( "OS=android" );
 #elif defined(TARGET_POSIX)
     dll_putenv( "OS=linux" );
 #else
     dll_putenv( "OS=unknown" );
 #endif
-
-    // check if we are running as real xbmc.app or just binary
-	
-    //if( !CUtil::GetFrameworksPath( true ).empty() )
-    //{
-    //    // using external python, it's build looking for xxx/lib/python2.7
-    //    // so point it to frameworks which is where python2.7 is located
-    //    dll_putenv( std::string( "PYTHONPATH=" +
-    //                             CSpecialProtocol::TranslatePath( "special://frameworks" ) ).c_str() );
-    //    dll_putenv( std::string( "PYTHONHOME=" +
-    //                             CSpecialProtocol::TranslatePath( "special://frameworks" ) ).c_str() );
-    //    dll_putenv( std::string( "PATH=.;" +
-    //                             CSpecialProtocol::TranslatePath( "special://xbmc" ) + ";" +
-    //                             CSpecialProtocol::TranslatePath( "special://frameworks" ) ).c_str() );
-    //}
-    //else
-    //{
-        //if( !dll_getenv( "PYTHONPATH" ) )
-        {
-            std::string pythonPath( "PYTHONPATH=" +
-                                    CSpecialProtocol::TranslatePath( "special://xbmc/system/python/DLLs" ) + ";" +
-                                    CSpecialProtocol::TranslatePath( "special://xbmc/system/python/Lib" ) );
-            std::string pythonHome( "PYTHONHOME=" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python" ) );
-            std::string sysPath( "PATH=.;" + CSpecialProtocol::TranslatePath( "special://xbmc" ) + ";" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python" ) );
-            CLog::Log( LOGDEBUG, "python path (%s)\n home (%s)\n sys path (%s)", pythonPath.c_str(), pythonHome.c_str(), sysPath.c_str() );
-            dll_putenv( pythonPath.c_str() );
-            dll_putenv( pythonHome.c_str() );
-            dll_putenv( sysPath.c_str() );
-        }
-        //else
-        //{
-        //    CSpecialProtocol::SetPath( "special://xbmc/system/python/DLLs", "C:\\Python27\\DLLs" );
-        //    CSpecialProtocol::SetPath( "special://xbmc/system/python/Lib", "C:\\Python27\\Lib" );
-        //    CSpecialProtocol::SetPath( "special://xbmc/system/python", "C:\\Python27" );
-
-        //}
-        /*
-        std::string dllsPath = CSpecialProtocol::TranslatePath( "special://xbmc/system/python/DLLs" );
-        std::string libPath = CSpecialProtocol::TranslatePath( "special://xbmc/system/python/Lib" );
-        std::string pythonHome = CSpecialProtocol::TranslatePath( "special://xbmc/system/python" );
-        std::string pythonPath = CSpecialProtocol::TranslatePath( "special://xbmc" ) + ";" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python" );
-        CLog::Log( LOGDEBUG, "python dlls %s\nlib %s\nhome %s\npath %s",
-                   dllsPath.c_str(), libPath.c_str(), pythonHome.c_str(), pythonPath.c_str() );
-
-        dll_putenv( std::string( "PYTHONPATH=" +
-        CSpecialProtocol::TranslatePath("special://xbmc/system/python/DLLs") + ";" +
-        CSpecialProtocol::TranslatePath("special://xbmc/system/python/Lib")).c_str());
-        dll_putenv( std::string( "PYTHONHOME=" +
-                                 CSpecialProtocol::TranslatePath( "special://xbmc/system/python" ) ).c_str() );
-                                 */
-
- /*       std::string pythonPath = "PYTHONPATH=C:\\Python27\\DLLs;C:\\Python27\\Lib;" +
-            CSpecialProtocol::TranslatePath("special://xbmc/system/python/DLLs") + ";" +
-            CSpecialProtocol::TranslatePath("special://xbmc/system/python/Lib");;
-        dll_putenv( pythonPath.c_str() );
-          std::string pythonHome = "PYTHONHOME=C:\\Python27";
-        dll_putenv( pythonHome.c_str() );
-
-
-
-        dll_putenv( std::string( CSpecialProtocol::TranslatePath( "special://xbmc" ) + ";" +
-                                 CSpecialProtocol::TranslatePath( "special://xbmc/system/python" ) ).c_str() );
-                                 */
+    std::string pythonPath( "PYTHONPATH=" +
+                            CSpecialProtocol::TranslatePath( "special://xbmc/system/python/DLLs" ) + ";" +
+                            CSpecialProtocol::TranslatePath( "special://xbmc/system/python/Lib" ) );
+    std::string pythonHome( "PYTHONHOME=" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python" ) );
+    std::string sysPath( "PATH=.;" + CSpecialProtocol::TranslatePath( "special://xbmc" ) + ";" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python" ) );
+    CLog::Log( LOGDEBUG, "python path (%s)\n home (%s)\n sys path (%s)", pythonPath.c_str(), pythonHome.c_str(), sysPath.c_str() );
+    dll_putenv( pythonPath.c_str() );
+    dll_putenv( pythonHome.c_str() );
+    dll_putenv( sysPath.c_str() );
 
 #if defined(TARGET_ANDROID)
   std::string apkPath = getenv("KODI_ANDROID_APK");

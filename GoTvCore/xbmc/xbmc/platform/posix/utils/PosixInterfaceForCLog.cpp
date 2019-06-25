@@ -20,6 +20,7 @@
 # include "platform/qt/KodiQtApp.h"
 #endif // defined(TARGET_OS_ANDROID) && !defined(HAVE_QT_GUI)
 #endif // TARGET_ANDROID
+#include <CoreLib/VxDebug.h>
 
 struct FILEWRAP : public FILE
 {};
@@ -77,14 +78,7 @@ bool CPosixInterfaceForCLog::WriteStringToLog(const std::string &logString)
 
 void CPosixInterfaceForCLog::PrintDebugString(const std::string &debugString)
 {
-#ifdef _DEBUG
-#if defined(TARGET_DARWIN)
-  CDarwinUtils::PrintDebugString(debugString);
-#elif defined(TARGET_ANDROID)
-  //print to adb
-  CXBMCApp::android_printf("Debug Print: %s", debugString.c_str());
-#endif // TARGET_ANDROID
-#endif // _DEBUG
+    LogMsg( LOG_DEBUG, debugString.c_str() );
 }
 
 void CPosixInterfaceForCLog::GetCurrentLocalTime(int &hour, int &minute, int &second, double &milliseconds)
