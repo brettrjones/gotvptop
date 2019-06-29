@@ -75,6 +75,8 @@
 #endif
 
 #include <CoreLib/OsDetect.h>
+#include <CoreLib/VxGlobals.h>
+#include <CoreLib/VxDebug.h>
 
 using namespace XFILE;
 
@@ -133,26 +135,43 @@ extern "C" void __stdcall init_emu_environ()
 #elif defined(TARGET_DARWIN)
     dll_putenv( "OS=darwin" );
 #elif defined(TARGET_OS_ANDROID)
-    dll_putenv( "OS=android" );
+    // python does not understand android so treat as linux
+    dll_putenv( "OS=linux" );
 #elif defined(TARGET_POSIX)
     dll_putenv( "OS=linux" );
 #else
     dll_putenv( "OS=unknown" );
 #endif
+#ifdef TARGET_OS_ANDROID
+    // android has all in same directory
+//    std::string pythonPath( "PYTHONPATH=" +
+//                            CSpecialProtocol::TranslatePath( "special://xbmc/system/python" )  );
+    std::string pythonPath( "PYTHONPATH=" +
+                            VxGetAppDirectory( eAppDirExePythonDlls )  );
+    std::string pythonHome = getenv("KODI_ANDROID_APK");
+      pythonHome += "/assets/kodi/python2.7";
+      dll_putenv( std::string( "PYTHONHOME=" + pythonHome ).c_str() );
+#else
     std::string pythonPath( "PYTHONPATH=" +
                             CSpecialProtocol::TranslatePath( "special://xbmc/system/python/DLLs" ) + ";" +
                             CSpecialProtocol::TranslatePath( "special://xbmc/system/python/Lib" ) );
     std::string pythonHome( "PYTHONHOME=" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python" ) );
+#endif
+
+#if defined( TARGET_OS_ANDROID )
+    // android does not translate correctly
+    std::string sysPath( "PATH=.;" + VxGetAppDirectory( eAppDirExeKodiAssets ) + ";" + VxGetAppDirectory( eAppDirExePython ) + ";" +  VxGetAppDirectory( eAppDirExePythonDlls ) );
+#else
     std::string sysPath( "PATH=.;" + CSpecialProtocol::TranslatePath( "special://xbmc" ) + ";" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python" ) );
-    CLog::Log( LOGDEBUG, "python path (%s)\n home (%s)\n sys path (%s)", pythonPath.c_str(), pythonHome.c_str(), sysPath.c_str() );
+#endif // defined( TARGET_OS_ANDROID )
+    //CLog::Log( LOGDEBUG, "python path (%s)\n home (%s)\n sys path (%s)", pythonPath.c_str(), pythonHome.c_str(), sysPath.c_str() );
+    LogMsg( LOG_DEBUG, "python path (%s)\n home (%s)\n sys path (%s)", pythonPath.c_str(), pythonHome.c_str(), sysPath.c_str() );
     dll_putenv( pythonPath.c_str() );
     dll_putenv( pythonHome.c_str() );
     dll_putenv( sysPath.c_str() );
 
 #if defined(TARGET_ANDROID)
-  std::string apkPath = getenv("KODI_ANDROID_APK");
-    apkPath += "/assets/python2.7";
-    dll_putenv( std::string( "PYTHONHOME=" + apkPath ).c_str() );
+    // even though kodi does not optimize we should be able to.. leave unoptimized until certain
     dll_putenv( "PYTHONOPTIMIZE=" );
     dll_putenv( "PYTHONNOUSERSITE=1" );
     dll_putenv( "PYTHONPATH=" );

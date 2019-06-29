@@ -24,6 +24,8 @@
 #include "utils/StringUtils.h"
 #endif
 
+#include <CoreLib/VxDebug.h>
+
 const CProfileManager *CSpecialProtocol::m_profileManager = nullptr;
 
 void CSpecialProtocol::RegisterProfileManager(const CProfileManager &profileManager)
@@ -315,7 +317,7 @@ void CSpecialProtocol::LogPaths()
     CLog::Log( LOGNOTICE, "special://xbmcbin/ is mapped to: %s", GetPath( "xbmcbin" ).c_str() );
     CLog::Log( LOGNOTICE, "special://xbmcbinaddons/ is mapped to: %s", GetPath( "xbmcbinaddons" ).c_str() );
     CLog::Log( LOGNOTICE, "special://masterprofile/ is mapped to: %s", GetPath( "masterprofile" ).c_str() );
-#if defined(TARGET_POSIX)
+#if defined(TARGET_DARWIN_IOS) // apple seems to be the only user of this (Documents/Inbox)
     CLog::Log( LOGNOTICE, "special://envhome/ is mapped to: %s", GetPath( "envhome" ).c_str() );
 #endif
     CLog::Log( LOGNOTICE, "special://home/ is mapped to: %s", GetPath( "home" ).c_str() );
@@ -337,6 +339,7 @@ std::string CSpecialProtocol::GetPath( const std::string &key )
     std::map<std::string, std::string>::iterator it = m_pathMap.find( key );
     if( it != m_pathMap.end() )
         return it->second;
-  assert(false);
+    LogMsg( LOG_FATAL, "FATAL: missing path for %s", key.c_str() );
+    assert(false);
     return "";
 }

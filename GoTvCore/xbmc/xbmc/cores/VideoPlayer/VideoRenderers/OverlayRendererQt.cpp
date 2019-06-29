@@ -237,7 +237,7 @@ COverlayTextureQt::COverlayTextureQt( CDVDOverlayImage* o )
 
 COverlayTextureQt::COverlayTextureQt( CDVDOverlaySpu* o )
 {
-    IGoTv& gotv = IGoTv::getIGoTv();
+    //IGoTv& gotv = IGoTv::getIGoTv();
     m_texture = 0;
 
     int min_x, max_x, min_y, max_y;
@@ -281,7 +281,7 @@ COverlayTextureQt::COverlayTextureQt( CDVDOverlaySpu* o )
 
 COverlayGlyphQt::COverlayGlyphQt( ASS_Image* images, int width, int height )
 {
-    IGoTv& gotv = IGoTv::getIGoTv();
+    //IGoTv& gotv = IGoTv::getIGoTv();
 
     m_vertex = nullptr;
     m_width = 1.0;

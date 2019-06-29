@@ -80,8 +80,8 @@ android:{
     DEST_SHARED_LIBS_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}
     DEST_EXE_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}
     DEST_PYTHON_EXE_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}
-    DEST_PYTHON_DLL_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7
-    DEST_PYTHON_LIB_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7
+    DEST_PYTHON_DLL_DIR = $$PWD/bin-Android/assets/kodi/python2.7/lib/python2.7
+    DEST_PYTHON_LIB_DIR = $$PWD/bin-Android/assets/kodi/python2.7/lib/python2.7
 
 #    contains(QMAKE_HOST.os,Windows):{
 #        DEST_EXE_DIR ~= s,/,\\,g # replace / with \

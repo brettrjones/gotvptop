@@ -590,7 +590,7 @@ bool XBPython::OnScriptInitialized(ILanguageInvoker *invoker)
     // Info about interesting python envvars available
     // at http://docs.python.org/using/cmdline.html#environment-variables
 
-#if 0 // BRJ gotv uses in project built in python
+#if 0 // BRJ gotv uses in project built of python
 #if !defined(TARGET_WINDOWS) && !defined(TARGET_ANDROID)
     /* PYTHONOPTIMIZE is set off intentionally when using external Python.
     Reason for this is because we cannot be sure what version of Python
@@ -609,9 +609,9 @@ bool XBPython::OnScriptInitialized(ILanguageInvoker *invoker)
 #endif //
 #endif // 0
 
-
-    // a hack to set the PYTHONPATH
     std::string buf;
+#if !defined( TARGET_OS_ANDROID)
+    // a hack to set the PYTHONPATH
     if( !dll_getenv( "PYTHONPATH" ) )
     {
         buf = "PYTHONPATH=" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python/DLLs" ) + ";" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python/Lib" );
@@ -625,6 +625,8 @@ bool XBPython::OnScriptInitialized(ILanguageInvoker *invoker)
         CLog::Log( LOGDEBUG, "BRJ OnScriptInitialized python home (%s)\n ", buf );
         CEnvironment::putenv( buf );
     }
+#endif // !defined( TARGET_OS_ANDROID)
+
 #if defined( TARGET_OS_LINUX)
     buf = "OS=linux";
     CEnvironment::putenv(buf);
@@ -632,7 +634,8 @@ bool XBPython::OnScriptInitialized(ILanguageInvoker *invoker)
     buf = "OS=win32";
     CEnvironment::putenv(buf);
 #elif defined( TARGET_OS_ANDROID)
-    buf = "OS=android";
+    // python does not understand android so treat as linux
+    buf = "OS=linux";
     CEnvironment::putenv(buf);
 #else
     // do nothing

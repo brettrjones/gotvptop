@@ -370,8 +370,8 @@ typedef Py_intptr_t     Py_ssize_t;
  *      #define HAVE_STAT_H
  * if <stat.h> does.
  */
-#ifndef DONT_HAVE_STAT
-#define HAVE_STAT
+#if !defined(DONT_HAVE_STAT) && !defined( HAVE_STAT )
+#define HAVE_STAT 1
 #endif
 
 #ifndef DONT_HAVE_FSTAT

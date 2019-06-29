@@ -28,6 +28,7 @@
 #include <cassert>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <CoreLib/VxDebug.h>
 
 using namespace XFILE;
 
@@ -504,18 +505,32 @@ std::string URIUtils::SubstitutePath(const std::string& strPath, bool reverse /*
     return strPath;
   }
 
-    // NOTE: special hack to substitute python path
+#if defined(TARGET_OS_ANDROID)
+    // NOTE: special hack to substitute python path  
     static std::string pythonSpecial =  "special://xbmc/system/python";
+    static std::string pythonDlls =  "special://xbmc/system/python/DLLs";
+    static std::string pythonLib =  "special://xbmc/system/python/Lib";
     if( ( strPath.find( pythonSpecial.c_str() ) != std::string::npos ) )
     {
-/* BRJ FIX PYTHON STUFF        std::string pythonRealPath = CSpecialProtocol::GetPath( pythonSpecial );
+        std::string pythonPath = pythonSpecial;
+        if( ( strPath.find( pythonDlls.c_str() ) != std::string::npos ) )
+        {
+            pythonPath = pythonDlls;
+        }
+        else if( ( strPath.find( pythonLib.c_str() ) != std::string::npos ) )
+        {
+            pythonPath = pythonLib;
+        }
+
+        std::string pythonRealPath = CSpecialProtocol::GetPath( pythonPath );
         if( pythonRealPath.size() )
         {
-            std::string pythonFullFile = pythonRealPath + strPath.substr( pythonSpecial.size() );
+            std::string pythonFullFile = pythonRealPath + strPath.substr( pythonPath.size() );
+            LogMsg( LOG_DEBUG, "python real path %s", pythonFullFile.c_str() );
             return pythonFullFile;
         }
-*/
     }
+#endif // defined(TARGET_OS_ANDROID)
 
   for (const auto& pathPair : m_advancedSettings->m_pathSubstitutions)
   {

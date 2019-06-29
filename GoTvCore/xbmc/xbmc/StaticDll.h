@@ -42,11 +42,11 @@ public:
   //virtual bool Load() = 0;
   //virtual void Unload() = 0;
 
-  virtual int ResolveExport( const char* symbol, void** ptr, bool logging = true );
-  virtual int ResolveOrdinal( unsigned long ordinal, void** ptr );
-  virtual bool IsSystemDll();
-  virtual HMODULE GetHModule();
-  virtual bool HasSymbols();
+  virtual int ResolveExport( const char* symbol, void** ptr, bool logging = true ) override;
+  virtual int ResolveOrdinal( unsigned long ordinal, void** ptr ) override;
+  virtual bool IsSystemDll() override;
+  virtual HMODULE GetHModule() override;
+  virtual bool HasSymbols() override;
 
 protected:
   virtual bool ResolveExports() override;

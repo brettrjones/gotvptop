@@ -254,9 +254,9 @@ CApplication::CApplication( void )
 CApplication::~CApplication( void )
 {
 //BRJ FIXME
-    delete m_pInertialScrollingHandler;
+//    delete m_pInertialScrollingHandler;
 
-    m_actionListeners.clear();
+//    m_actionListeners.clear();
 }
 
 bool CApplication::OnEvent( XBMC_Event& newEvent )
@@ -433,7 +433,7 @@ bool CApplication::Create( const CAppParamParser &params )
 
 
   //! @todo - move to CPlatformXXX
-#if defined(TARGET_POSIX)
+#if defined(TARGET_POSIX) && !defined(TARGET_OS_ANDROID)
   // set special://envhome
     if( getenv( "HOME" ) )
     {
@@ -530,7 +530,7 @@ bool CApplication::Create( const CAppParamParser &params )
     CLog::Log( LOGNOTICE, "Running with %s rights", ( CWIN32Util::IsCurrentUserLocalAdministrator() == TRUE ) ? "administrator" : "restricted" );
     CLog::Log( LOGNOTICE, "Aero is %s", ( g_sysinfo.IsAeroDisabled() == true ) ? "disabled" : "enabled" );
 #endif
-#if defined(TARGET_ANDROID) && !defined(HAVE_QT_GUI)
+#if defined(TARGET_ANDROID)
     CLog::Log( LOGNOTICE,
                "Product: %s, Device: %s, Board: %s - Manufacturer: %s, Brand: %s, Model: %s, Hardware: %s",
                CJNIBuild::PRODUCT.c_str(), CJNIBuild::DEVICE.c_str(), CJNIBuild::BOARD.c_str(),
@@ -566,9 +566,10 @@ bool CApplication::Create( const CAppParamParser &params )
 #if defined(TARGET_DARWIN)
     setenv( "OS", "OS X", true );
 #elif defined(TARGET_OS_ANDROID)
-    setenv( "OS", "Android", true );
+    // treat android as linux for python
+    setenv( "OS", "linux", true );
 #elif defined(TARGET_POSIX)
-    setenv( "OS", "Linux", true );
+    setenv( "OS", "linux", true );
 #elif defined(TARGET_WINDOWS)
     CEnvironment::setenv( "OS", "win32" );
 #endif
@@ -608,6 +609,7 @@ bool CApplication::Create( const CAppParamParser &params )
 
     if( !m_ServiceManager->InitStageTwo( params, m_pSettingsComponent->GetProfileManager()->GetProfileUserDataFolder() ) )
     {
+        LogMsg( LOG_ERROR, "FATAL: failed to init kodi stage 2" );
 #ifdef HAVE_QT_GUI
         IGoTv::getIGoTv().toGuiModuleState( eAppModuleKodi, eModuleStateInitError );
 #endif // HAVE_QT_GUI

@@ -261,11 +261,7 @@ void default_log_handler( void * userData, uint32_t u32MsgType, char * pLogMsg )
 	//	return; // dont log
 	//}
 #ifdef TARGET_OS_ANDROID
-#define MY_LOG_TAG "LogHandler:"
-//#ifndef	_DEBUG
-//	return; // dont do logging in release mode
-//#endif //	_DEBUG
-/* BRJ Android Log now sent to gui
+#define MY_LOG_TAG "AppLog:"
 	switch( u32MsgType )
 	{
 	case LOG_INFO:
@@ -289,8 +285,8 @@ void default_log_handler( void * userData, uint32_t u32MsgType, char * pLogMsg )
 	default:
 		__android_log_write(ANDROID_LOG_DEBUG, MY_LOG_TAG, pLogMsg);
 	}
-	*/
-    printf( pLogMsg );
+
+    //printf( pLogMsg );
 #else
 	printf( pLogMsg );
 #endif// TARGET_OS_ANDROID

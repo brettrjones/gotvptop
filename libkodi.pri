@@ -2859,8 +2859,9 @@ android {
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/DisplayMetrics.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/PackageManager.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Resources.h \
-    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniThreading.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniBase.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JNIEnvironment.h \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniThreading.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/System.h \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JNIFile.h
 
@@ -2876,6 +2877,7 @@ SOURCES += \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/PackageManager.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/Resources.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniBase.cpp \
+    $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JNIEnvironment.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/JniThreading.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/qt/qtandroid/jni/jutils.cpp \
     $$PWD/GoTvCore/xbmc/xbmc/platform/android/peripherals/AndroidJoystickState.cpp \

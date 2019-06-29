@@ -61,6 +61,8 @@
 #if defined(TARGET_OS_ANDROID)
 # include "windowing/android/VideoSyncAndroid.h"
 # include "windowing/android/WinSystemAndroid.h"
+# include "platform/qt/qtandroid/jni/JNIFile.h"
+# include "platform/qt/qtandroid/jni/Environment.h"
 #endif // defined(TARGET_OS_ANDROID)
 
 #include "windowing/WinEvents.h"
@@ -799,9 +801,9 @@ bool CXBMCApp::GetExternalStorage(std::string &path, const std::string &type /* 
 
   if(type == "files" || type.empty())
   {
-//    CJNIFile external = CJNIEnvironment::getExternalStorageDirectory();
-//    if (external)
-//      path = external.getAbsolutePath();
+    CJNIFile external = CJNIEnvironment::getExternalStorageDirectory();
+    if (external)
+      path = external.getAbsolutePath();
   }
   else
   {
@@ -817,14 +819,14 @@ bool CXBMCApp::GetExternalStorage(std::string &path, const std::string &type /* 
       sType = "Download"; // Environment.DIRECTORY_DOWNLOADS
     if (!sType.empty())
     {
-//      CJNIFile external = CJNIEnvironment::getExternalStoragePublicDirectory(sType);
-//      if (external)
-//        path = external.getAbsolutePath();
+      CJNIFile external = CJNIEnvironment::getExternalStoragePublicDirectory(sType);
+      if (external)
+        path = external.getAbsolutePath();
     }
   }
-//  mountedState = CJNIEnvironment::getExternalStorageState();
-//  mounted = (mountedState == "mounted" || mountedState == "mounted_ro");
-//  return mounted && !path.empty();
+  mountedState = CJNIEnvironment::getExternalStorageState();
+  mounted = (mountedState == "mounted" || mountedState == "mounted_ro");
+  return mounted && !path.empty();
   return false;
 }
 
