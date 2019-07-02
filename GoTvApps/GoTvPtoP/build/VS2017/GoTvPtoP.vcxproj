@@ -1618,7 +1618,7 @@
   <ImportGroup Label="ExtensionTargets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties MocDir=".\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" Qt5Version_x0020_x64="vs2017Qt5.12.2-64bit" />
+      <UserProperties MocDir=".\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" Qt5Version_x0020_x64="64BitVs2017Qt5.12.3" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

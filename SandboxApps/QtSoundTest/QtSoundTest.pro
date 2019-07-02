@@ -4,55 +4,70 @@
 #
 #-------------------------------------------------
 
-QT       += core gui svg widgets
+TARGET = QtSoundTest
+TEMPLATE = app
+
+QT += gui core concurrent widgets network multimedia
+
 android:{
     QT += androidextras
 #    QT += gui-private
     DEFINES += TARGET_OS_ANDROID
 }
 
-TARGET = QtAndroidJni
-TEMPLATE = app
+unix:!android:{
+    DEFINES += TARGET_OS_LINUX
+}
+
+win32:{
+    DEFINES += TARGET_OS_WINDOWS
+}
+
 
 CONFIG += c++11
 
 SOURCES += \
-        $$PWD/QtAndroidJni/main.cpp \
-        $$PWD/QtAndroidJni/mainwindow.cpp \
-        $$PWD/QtAndroidJni/ApplicationInfo.cpp \
-        $$PWD/QtAndroidJni/Build.cpp \
-        $$PWD/QtAndroidJni/Context.cpp \
-        $$PWD/QtAndroidJni/guid.cpp \
-        $$PWD/QtAndroidJni/JNIBase.cpp \
-        $$PWD/QtAndroidJni/JNIFile.cpp \
-        $$PWD/QtAndroidJni/JNIThreading.cpp \
-        $$PWD/QtAndroidJni/jutils.cpp \
-        $$PWD/QtAndroidJni/PackageItemInfo.cpp \
-        $$PWD/QtAndroidJni/PackageManager.cpp \
-        $$PWD/QtAndroidJni/VxFileUtil.cpp \
-        $$PWD/QtAndroidJni/VxJava.cpp \
-        $$PWD/QtAndroidJni/VxDebug.cpp
+        $$PWD/QtSoundTest/main.cpp \
+        $$PWD/QtSoundTest/mainwindow.cpp \
+        $$PWD/QtSoundTest/AudioIoMgr.cpp \
+        $$PWD/QtSoundTest/AudioMixer.cpp \
+        $$PWD/QtSoundTest/AudioInIo.cpp \
+        $$PWD/QtSoundTest/AudioOutIo.cpp \
+        $$PWD/QtSoundTest/AudioUtils.cpp \
+        $$PWD/QtSoundTest/AudioTestGenerator.cpp \
+        $$PWD/QtSoundTest/engine.cpp \
+        $$PWD/QtSoundTest/SoundTestLogic.cpp \
+        $$PWD/QtSoundTest/SoundTestThread.cpp \
+        $$PWD/QtSoundTest/VxDebug.cpp \
+        $$PWD/QtSoundTest/VxFileUtil.cpp \
+        $$PWD/QtSoundTest/VxTime.cpp \
+        $$PWD/QtSoundTest/VxTimer.cpp \
+        $$PWD/QtSoundTest/VxTimeUtil.cpp \
+        $$PWD/QtSoundTest/WaveForm.cpp
 
 HEADERS += \
-        $$PWD/QtAndroidJni/mainwindow.h \
-        $$PWD/QtAndroidJni/ApplicationInfo.h \
-        $$PWD/QtAndroidJni/Build.h \
-        $$PWD/QtAndroidJni/Context.h \
-        $$PWD/QtAndroidJni/guid.h \
-        $$PWD/QtAndroidJni/JNIBase.h \
-        $$PWD/QtAndroidJni/JNIFile.h \
-        $$PWD/QtAndroidJni/JNIThreading.h \
-        $$PWD/QtAndroidJni/jni.inc \
-        $$PWD/QtAndroidJni/jutils.hpp \
-        $$PWD/QtAndroidJni/jutils-details.hpp \
-        $$PWD/QtAndroidJni/PackageItemInfo.h \
-        $$PWD/QtAndroidJni/PackageManager.h \
-        $$PWD/QtAndroidJni/VxFileUtil.h \
-        $$PWD/QtAndroidJni/VxJava.h \
-        $$PWD/QtAndroidJni/VxDebug.h
+        $$PWD/QtSoundTest/mainwindow.h \
+        $$PWD/QtSoundTest/AudioDefs.h \
+        $$PWD/QtSoundTest/AudioIoMgr.h \
+        $$PWD/QtSoundTest/AudioMixer.h \
+        $$PWD/QtSoundTest/AudioInIo.h \
+        $$PWD/QtSoundTest/AudioOutIo.h \
+        $$PWD/QtSoundTest/AudioUtils.h \
+        $$PWD/QtSoundTest/AudioTestGenerator.h \
+        $$PWD/QtSoundTest/engine.h \
+        $$PWD/QtSoundTest/IGoTvDefs.h \
+        $$PWD/QtSoundTest/SoundTestLogic.h \
+        $$PWD/QtSoundTest/SoundTestThread.h \
+        $$PWD/QtSoundTest/VxDebug.h \
+        $$PWD/QtSoundTest/VxFileUtil.h \
+        $$PWD/QtSoundTest/VxTime.h \
+        $$PWD/QtSoundTest/VxTimer.h \
+        $$PWD/QtSoundTest/VxTimeUtil.h \
+        $$PWD/QtSoundTest/VxDefs.h \
+        $$PWD/QtSoundTest/WaveForm.h
 
 FORMS += \
-        $$PWD/QtAndroidJni/mainwindow.ui
+        $$PWD/QtSoundTest/mainwindow.ui
 
 android:{
     CONFIG += mobility
@@ -75,14 +90,14 @@ android:{
 
 message($$[QT_INSTALL_BINS])
 ANDROID_PACKAGE_SOURCE_DIR = \
-        $$PWD/androidjnitest
+        $$PWD/androidsoundtest
 
 DISTFILES += \
-    androidjnitest/AndroidManifest.xml \
-    androidjnitest/build.gradle \
-    androidjnitest/gradle.properties \
-    androidjnitest/gradlew \
-    androidjnitest/gradlew.bat \
-    androidjnitest/local.properties \
-    androidjnitest/res/drawable/icon.png \
-    androidjnitest/res/values/strings.xml
+    androidsoundtest/AndroidManifest.xml \
+    androidsoundtest/build.gradle \
+    androidsoundtest/gradle.properties \
+    androidsoundtest/gradlew \
+    androidsoundtest/gradlew.bat \
+    androidsoundtest/local.properties \
+    androidsoundtest/res/drawable/icon.png \
+    androidsoundtest/res/values/strings.xml

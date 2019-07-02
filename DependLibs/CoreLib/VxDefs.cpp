@@ -15,6 +15,7 @@
 
 #include <GoTvDependLibrariesConfig.h>
 
+#if 0 // moved to VxTime.cpp
 #ifdef TARGET_OS_ANDROID
 #include "VxDefs.h"
 
@@ -29,3 +30,4 @@ void VxSleep( int iMilliSec )
 };	
 
 #endif // TARGET_OS_ANDROID
+#endif //0 

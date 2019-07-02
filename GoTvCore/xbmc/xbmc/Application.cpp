@@ -465,7 +465,7 @@ bool CApplication::Create( const CAppParamParser &params )
 
     if( !CLog::Init( CSpecialProtocol::TranslatePath( "special://logpath" ).c_str() ) )
     {
-        LogMsg( LOG_DEBUG, "Could not init logging classes. Log folder error (%s)\n", CSpecialProtocol::TranslatePath( "special://logpath" ).c_str() );
+        LogMsg( LOG_ERROR, "FATAL: Could not init logging classes. Log folder error (%s)\n", CSpecialProtocol::TranslatePath( "special://logpath" ).c_str() );
         return false;
     }
 
@@ -559,7 +559,7 @@ bool CApplication::Create( const CAppParamParser &params )
     CRegExp::LogCheckUtf8Support();
     CLog::Log( LOGNOTICE, "-----------------------------------------------------------------------" );
 
-    std::string strExecutablePath = CUtil::GetExecutablePath();
+    //std::string strExecutablePath = CUtil::GetExecutablePath();
 
     // for python scripts that check the OS
     //! @todo - move to CPlatformXXX
@@ -581,7 +581,10 @@ bool CApplication::Create( const CAppParamParser &params )
 
     CLog::Log( LOGINFO, "loading settings" );
     if( !m_pSettingsComponent->Load() )
+    {
+        LogMsg( LOG_ERROR, "FATAL: Could not load settings" );
         return false;
+    }
 
     CLog::Log( LOGINFO, "creating subdirectories" );
     const std::shared_ptr<CProfileManager> profileManager = m_pSettingsComponent->GetProfileManager();
@@ -605,6 +608,12 @@ bool CApplication::Create( const CAppParamParser &params )
     CServiceBroker::RegisterAppPort( m_pAppPort );
 
     m_pWinSystem = CWinSystemBase::CreateWinSystem();
+    if( !m_pWinSystem )
+    {
+        LogMsg( LOG_ERROR, "FATAL: Could not CreateWinSystem" );
+        return false;
+    }
+
     CServiceBroker::RegisterWinSystem( m_pWinSystem.get() );
 
     if( !m_ServiceManager->InitStageTwo( params, m_pSettingsComponent->GetProfileManager()->GetProfileUserDataFolder() ) )
@@ -1315,7 +1324,8 @@ bool CApplication::LoadSkin( const std::string& skinID )
             currentFocusedControlID = pWindow->GetFocusedControlID();
     }
 
-    UnloadSkin();
+    // BRJ not sure why this is done.. causes crash in android
+    //UnloadSkin();
 
     skin->Start();
 

@@ -804,7 +804,7 @@ void AppCommon::toGuiLog( int logFlags, const char * pMsg )
     QString strMsg = pMsg;
     strMsg.remove(QRegExp("[\\n\\r]"));
 
-#ifndef TARGET_OS_WINDOWS
+#ifdef TARGET_OS_WINDOWS
     qDebug() << strMsg;
 #endif // TARGET_OS_WINDOWS
     emit signalLog( logFlags, strMsg );

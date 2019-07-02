@@ -60,18 +60,7 @@ MySndMgr::MySndMgr( AppCommon& app )
 , m_bMutePhoneRing(false)
 , m_bMuteNotifySnd(false)
 , m_CurSndPlaying( 0 )
-#ifdef USE_ECHO_CANCEL
-, m_WaveWin( 1 )
-, m_MyFrameReadIdx( 0 )
-, m_MyFrameDataAvail( 0 )
-#endif // USE_ECHO_CANCEL
 {
-#ifdef USE_VX_WAVE
-#ifndef USE_ECHO_CANCEL
-	m_WaveIn.setWaveInCallback( this, this );
-	m_WaveOut.setWaveOutCallback( this, this );
-#endif // USE_ECHO_CANCEL
-#endif // USE_VX_WAVE
 }
 
 //============================================================================
@@ -151,89 +140,7 @@ bool MySndMgr::sndMgrStartup( void )
 
     LogMsg( LOG_INFO, "MySndMgr::sndMgrStartup 2222\n" );
 	bool result = true;
-#ifdef USE_VX_WAVE
-#ifdef USE_ECHO_CANCEL
-	m_MyFrameReadIdx	= 0;
-	m_MyFrameDataAvail	= 0;
-	m_MyLastReadSample	= 0;
-
-	memset( m_MyFrameBuf, 0, sizeof( m_MyFrameBuf ) );
-
-	webrtc::AudioDeviceModule::AudioLayer audioLayer = webrtc::AudioDeviceModule::kWindowsWaveAudio;
-	if( -1 == m_WaveWin.ActiveAudioLayer( audioLayer ) ) 
-	{
-		LogMsg( LOG_ERROR, "sndMgrStartup m_WaveWin.ActiveAudioLayer returned error\n");
-		result = false;
-	}
-
-	m_WaveWin.AttachAudioBuffer( &m_AudioDeviceBuffer );
-	m_AudioDeviceBuffer.RegisterAudioCallback( this );
-
-	int rc = m_WaveWin.Init();
-	if( 0 != rc )
-	{
-		LogMsg( LOG_ERROR, "sndMgrStartup m_WaveWin.Init returned error %d\n", rc );
-		result = false;
-	}
-
-
-	rc = m_WaveWin.InitSpeaker();
-	if( 0 != rc )
-	{
-		LogMsg( LOG_ERROR, "sndMgrStartup m_WaveWin.InitSpeaker returned error %d\n", rc );
-		result = false;
-	}
-
-	webrtc::AudioDeviceModule::WindowsDeviceType audioDeviceType = webrtc::AudioDeviceModule::kDefaultDevice;
-	rc = m_WaveWin.SetPlayoutDevice( audioDeviceType );
-	if( 0 != rc )
-	{
-		LogMsg( LOG_ERROR, "sndMgrStartup m_WaveWin.SetPlayoutDevice returned error %d\n", rc );
-		result = false;
-	}
-
-	rc = m_WaveWin.SetRecordingDevice( audioDeviceType );
-	if( 0 != rc )
-	{
-		LogMsg( LOG_ERROR, "sndMgrStartup m_WaveWin.SetRecordingDevice returned error %d\n", rc );
-		result = false;
-	}
-
-	rc = m_WaveWin.InitPlayout();  // InitPlayout calls InitSpeaker
-	if( 0 != rc )
-	{
-		LogMsg( LOG_ERROR, "sndMgrStartup m_WaveWin.InitPlayout returned error %d\n", rc );
-		result = false;
-	}
-
-	rc = m_WaveWin.InitRecording(); // InitRecording calls InitMicrophone
-	if( 0 != rc )
-	{
-		LogMsg( LOG_ERROR, "sndMgrStartup m_WaveWin.InitRecording returned error %d\n", rc );
-		result = false;
-	}
-
-    //BRJ disabled until can replace
-	//rc = m_WaveWin.StartPlayout();
-	if( 0 != rc )
-	{
-		LogMsg( LOG_ERROR, "sndMgrStartup m_WaveWin.StartPlayout returned error %d\n", rc );
-		result = false;
-	}
-
-	rc = m_WaveWin.StartRecording();
-	if( 0 != rc )
-	{
-		LogMsg( LOG_ERROR, "sndMgrStartup m_WaveWin.StartRecording returned error %d\n", rc );
-		result = false;
-	}
-
-#else	
-		m_WaveIn.startWaveInput();
-		m_WaveOut.startWaveOutput();
-#endif // USE_ECHO_CANCEL
-#endif // USE_VX_WAVE
-
+#
 	m_MyApp.wantToGuiHardwareCtrlCallbacks( this, true );
 	return result;
 }
@@ -246,11 +153,6 @@ bool MySndMgr::sndMgrShutdown( void )
 #ifdef DISABLE_AUDIO
 	return false;
 #endif
-#ifdef USE_ECHO_CANCEL
-	m_WaveWin.StopRecording();
-	m_WaveWin.StopPlayout();
-	m_WaveWin.Terminate();
-#endif // USE_ECHO_CANCEL
 
 	return true;
 }

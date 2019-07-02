@@ -362,8 +362,10 @@ void VxHandleLogMsg( unsigned long u32MsgType, char * logMsg )
 		return;
 	}
 
+    // just do default so can debug startup
 	default_log_handler( g_pvUserData, u32MsgType, logMsg);
-	g_pfuncLogHandler( g_pvUserData, u32MsgType, logMsg);
+    // if called will have duplicate logcat entries but also passes log msg to gui
+    //g_pfuncLogHandler( g_pvUserData, u32MsgType, logMsg);
 #else
 	if( false == VxIsAppShuttingDown() )
 	{

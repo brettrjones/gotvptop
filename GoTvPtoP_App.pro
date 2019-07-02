@@ -10,10 +10,6 @@ TARGET_NAME = gotvptop
 QT += gui core concurrent widgets network multimedia opengl xml svg quickwidgets
 android:{
     QT += androidextras
-    CONFIG(debug, debug|release){
-        QMAKE_CXXFLAGS += -O0
-        QMAKE_CFLAGS += -O0
-    }
 }
 
 DEFINES += QT_SVG_LIB QT_OPENGL_LIB QT_WIDGETS_LIB QT_GUI_LIB QT_CORE_LIB QT_MULTIMEDIA_LIB

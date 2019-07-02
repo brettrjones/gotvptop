@@ -1,5 +1,6 @@
 #include "config_corelib.h"
 
+#if 0 // moved to VxTime.cpp
 #ifndef TARGET_OS_WINDOWS
 #include <time.h>
 
@@ -21,3 +22,4 @@ uint64_t GetTickCount64()
 }
 
 #endif // TARGET_OS_WINDOWS
+#endif //0 

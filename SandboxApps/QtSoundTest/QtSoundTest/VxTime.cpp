@@ -1,13 +1,13 @@
 //============================================================================
 // Created by Brett R. Jones in 2018 and issued to public domain
 //============================================================================
-#include "config_corelib.h"
+//#include "config_corelib.h"
 #include "VxTime.h"
 #include "VxTimeUtil.h"
-
-#include <sysheaders/sys/time.h>
-#ifndef TARGET_OS_WINDOWS
 #include <time.h>
+//#include <sysheaders/sys/time.h>
+#ifndef TARGET_OS_WINDOWS
+
 
 uint64_t GetTickCount64()
 {
@@ -26,21 +26,7 @@ uint64_t GetTickCount64()
 #endif // CLOCK_MONOTONIC
 }
 
-#endif // TARGET_OS_WINDOWS
-#ifdef TARGET_OS_ANDROID
-#include "VxDefs.h"
-
-#include <time.h>
-// android doesn't have millisecond sleep like most linux distributions but does have nano sleep
-void VxSleep( int iMilliSec )
-{
-    struct timespec ts;
-    ts.tv_sec = iMilliSec / 1000;
-    ts.tv_nsec = ( iMilliSec % 1000 ) * 1000000;
-    nanosleep( &ts, NULL );
-};
-
-#endif // TARGET_OS_ANDROID
+#endif
 
 namespace
 {
