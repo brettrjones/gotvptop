@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.net
+// http://www.gotvptop.com
 //============================================================================
 #include "config_corelib.h"
 
@@ -49,7 +49,7 @@ namespace
     std::string			g_strApplicationNameNoSpaces	= "GoTvPtoP";
     std::string			g_strApplicationNameNoSpacesLowerCase	= "gotvptop";
     std::string			g_strNetworkName				= "GoTvPtoPTestNet";
-	std::string			g_strCompanyWebsite				= "http://www.gotvptop.net";
+	std::string			g_strCompanyWebsite				= "http://www.gotvptop.com";
     std::string			g_strCompanyDomain				= "gotvptop.net";
 	bool				g_IsAppCommercial				= false;
 #else
@@ -57,7 +57,7 @@ namespace
     std::string			g_strApplicationNameNoSpaces	= "GoTvPtoP";
     std::string			g_strApplicationNameNoSpacesLowerCase	= "gotvptop";
     std::string			g_strNetworkName				= "GoTvPtoPNet";
-	std::string			g_strCompanyWebsite				= "http://www.gotvptop.net";
+	std::string			g_strCompanyWebsite				= "http://www.gotvptop.com";
     std::string			g_strCompanyDomain				= "gotvptop.net";
 	bool				g_IsAppCommercial				= false;
 #endif // APP_MYP2PWEB

@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.net
+// http://www.gotvptop.com
 //============================================================================
 
 #include "RcWebServer.h"
@@ -91,7 +91,7 @@ RCODE RcWebPageSettings::SetWbSettingsDefaults( void )
 
 	SetMyUrlsEnable( true );
 	SetMyUrlTitle( "My Favorite Web Sites." );
-	SetMyUrl( 0, "http://www.gotvptop.net" );
+	SetMyUrl( 0, "http://www.gotvptop.com" );
 
 	SetMyPictureEnable( true );
 	SetMyPictureTitle( "A Picture Of Me" );

@@ -51,6 +51,16 @@
 #ifndef WAVEFORM_H
 #define WAVEFORM_H
 
+class NullDebug
+{
+public:
+    template <typename T>
+    NullDebug& operator<<( const T& ) { return *this; }
+};
+
+inline NullDebug nullDebug() { return NullDebug(); }
+
+
 #include <QAudioFormat>
 #include <QPixmap>
 #include <QScopedPointer>
@@ -77,14 +87,43 @@ public:
     void paintEvent(QPaintEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
 
-    void initialize(const QAudioFormat &format, qint64 audioBufferSize, qint64 windowDurationUs);
+    void initialize(const QAudioFormat &format, qint64 audioBufferSize, qint64 windowDurationUs, qint64 totalBufSize );
     void reset();
 
-    void setAutoUpdatePosition(bool enabled);
+    void speakerAudioPlayed( void * data, int dataLen );
+
+signals:
+    void signalAudioOutPlayed( const QByteArray & buffer );
+
+    /**
+     * Length of buffer has changed.
+     * \param duration Duration in microseconds
+     */
+    void signalBufferLengthChanged( qint64 duration );
+
+    /**
+     * Amount of data in buffer has changed.
+     * \param Length of data in bytes
+     */
+    void signalDataLengthChanged( qint64 duration );
+
+    /**
+     * Position of the audio output device has changed.
+     * \param position Position in bytes
+     */
+    void signalPlayPositionChanged( qint64 position );
+
 
 public slots:
+ 
     void bufferChanged(qint64 position, qint64 length, const QByteArray &buffer);
     void audioPositionChanged(qint64 position);
+
+    void slotAudioOutPlayed( const QByteArray & buffer );
+    void slotBufferLengthChanged( qint64 duration );
+    void slotDataLengthChanged( qint64 duration );
+    void slotPlayPositionChanged( qint64 position );
+
 
 private:
     static const int NullIndex = -1;
@@ -207,6 +246,8 @@ private:
 
     qint64                  m_windowPosition;
     qint64                  m_windowLength;
+    bool                    m_firstAudioData = true;
+
 };
 
 #endif // WAVEFORM_H

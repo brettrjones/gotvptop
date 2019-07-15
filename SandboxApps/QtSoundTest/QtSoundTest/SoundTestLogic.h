@@ -20,6 +20,7 @@
 #include "SoundTestThread.h"
 #include "AudioIoMgr.h"
 #include "AudioTestGenerator.h"
+#include "WaveForm.h"
 
 class SoundTestWidget;
 class SoundTestThread;
@@ -28,14 +29,20 @@ class SoundTestLogic : public QWidget, public IAudioCallbacks
 {
     Q_OBJECT
 public:
-    explicit SoundTestLogic( SoundTestWidget& renderWidget, QWidget *parent );
+    explicit SoundTestLogic( Waveform * waveForm, QWidget *parent );
 
-    void						setRenderThreadShouldRun( bool shouldRun );
+    AudioIoMgr&                 getAudioIoMgr()         { return m_AudioIoMgr; }
+    AudioTestGenerator *        getAudioInGenerator()   { return m_AudioGenIn; }
+    AudioTestGenerator *        getAudioOutGenerator()  { return m_AudioGenOut; }
+    SoundTestThread *           getSoundTestThread()    { return m_SoundTestThread; }
+
+    void						setSoundThreadShouldRun( bool shouldRun );
     void						setRenderWindowVisible( bool isVisible ) { m_RenderWindowVisible = isVisible; }
 
     bool                        getIsRenderInitialized() { return m_RenderInitialized; }
 
-    void                        startRenderThread();
+    void                        startStartSoundTestThread();
+    void                        stopStartSoundTestThread();
 
 
     virtual bool                initSoundTestSystem();
@@ -55,9 +62,9 @@ public:
     virtual void                microphoneAudioRecieved( QAudioFormat& /*format*/, void * /*data*/, int /*dataLen*/ ) override;
 
     /// Microphone sound capture ( 8000hz PCM 16 bit data, 80ms of sound )
-    virtual void				fromGuiMicrophoneData( int16_t* pu16PcmData, uint16_t pcmDataLenBytes )  override;
+    virtual void				fromGuiMicrophoneData( int16_t* pcmData, uint16_t pcmDataLenBytes, bool isSilence )  override;
     /// Microphone sound capture with info for echo cancel ( 8000hz PCM 16 bit data, 80ms of sound )
-    virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, int totalDelayTimeMs, int clockDrift ) override;
+    virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift ) override;
     /// Mute/Unmute microphone
     virtual void				fromGuiMuteMicrophone( bool muteMic ) override;
     /// Returns true if microphone is muted
@@ -77,15 +84,27 @@ signals:
     void                        signalFrameRendered();
 
 public slots:
-    void                        render();
+    void                        audioOutNoneClicked();
+    void                        audioOutPushButtonClicked();
+    void                        audioOutPullButtonClicked();
+    void                        audioOutPushPullButtonClicked();
+
+    void                        pauseVoipState( int );
+    void                        pauseKodiState( int );
+    void                        muteSpeakerState( int );
+    void                        muteMicrophoneState( int );
+
 
 private:
-    SoundTestWidget&            m_RenderWidget;
-    SoundTestThread *			m_SoundTestThread = nullptr;
+    Waveform *                  m_WaveForm;
 
     AudioIoMgr                  m_AudioIoMgr;
-    AudioTestGenerator          m_AudioGenIn;
-    AudioTestGenerator          m_AudioGenOut;
+    AudioTestGenerator *        m_AudioGenIn = nullptr;
+    AudioTestGenerator *        m_AudioGenOut = nullptr;
+
+    SoundTestThread *			m_SoundTestThread = nullptr;
+    bool                        m_PauseVoip = false;
+    VxTimer                     m_VoipTimer;
 
     bool                        m_RenderInitialized = false;
   

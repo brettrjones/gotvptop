@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // brett.jones@engineer.com
-// http://www.gotvptop.net
+// http://www.gotvptop.com
 //============================================================================
 
 #include "config_corelib.h"

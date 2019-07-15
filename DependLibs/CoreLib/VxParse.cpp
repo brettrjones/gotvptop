@@ -10,9 +10,9 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.net
+// http://www.gotvptop.com
 //============================================================================
-#include "config_corelib.h"
+//#include "config_corelib.h"
 #include "VxParse.h"
 #include "VxDefs.h"
 #include "VxDebug.h"
@@ -25,7 +25,10 @@
 #ifndef TARGET_OS_WINDOWS
     #include <ctype.h> // for toupper and tolower
     #include <wctype.h> // for towupper and towlower
+#else
+# include "windows.h"
 #endif
+
 
 //============================================================================
 //! replace \ with / and % with ?

@@ -27,7 +27,7 @@ uint64_t GetTickCount64()
 }
 
 #endif // TARGET_OS_WINDOWS
-#ifdef TARGET_OS_ANDROID
+#if defined( TARGET_OS_ANDROID )
 #include "VxDefs.h"
 
 #include <time.h>
@@ -39,7 +39,18 @@ void VxSleep( int iMilliSec )
     ts.tv_nsec = ( iMilliSec % 1000 ) * 1000000;
     nanosleep( &ts, NULL );
 };
-
+#elif defined(TARGET_OS_WINDOWS)
+int VxSleep( int milliSec ) 
+{ 
+    Sleep( milliSec ); 
+    return 0; 
+} // microsoft sleep returns void so had to make a function to return no error
+#elif defined(TARGET_OS_LINUX)
+int VxSleep( int milliSec )
+{
+    msleep( milliSec );
+    return 0;
+}
 #endif // TARGET_OS_ANDROID
 
 namespace

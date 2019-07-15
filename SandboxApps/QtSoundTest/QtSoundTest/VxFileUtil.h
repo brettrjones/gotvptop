@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.net
+// http://www.gotvptop.com
 //============================================================================
 
 #ifdef __cplusplus
@@ -50,6 +50,9 @@ public:
 	static RCODE				setCurrentWorkingDirectory( const char * pDir );
 
 	static bool					isDotDotDirectory( const char * fileName );
+#ifdef TARGET_OS_WINDOWS
+    static bool					isDotDotDirectory( const wchar_t * fileName );
+#endif // TARGET_OS_WINDOWS
 
 	// append file name to path.. account for url etc
 	static std::string			addFileToFolder( std::string& strFolder, std::string& strFile );

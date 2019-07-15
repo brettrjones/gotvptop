@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "SoundTestLogic.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -17,6 +19,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    SoundTestLogic *            m_SoundTestLogic = nullptr;
 };
 
 #endif // MAINWINDOW_H

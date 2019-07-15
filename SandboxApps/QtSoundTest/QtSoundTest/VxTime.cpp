@@ -1,13 +1,63 @@
-//============================================================================
-// Created by Brett R. Jones in 2018 and issued to public domain
-//============================================================================
-//#include "config_corelib.h"
 #include "VxTime.h"
 #include "VxTimeUtil.h"
 #include <time.h>
 //#include <sysheaders/sys/time.h>
-#ifndef TARGET_OS_WINDOWS
+#if defined(TARGET_OS_WINDOWS)
+# include "windows.h"
+#define ZeroMemory2(Destination,Length) memset((Destination),0,(Length))
 
+#if defined(_MSC_VER) || defined(_MSC_EXTENSIONS)
+#define DEF_DELTA_EPOCH_IN_MICROSECS  11644473600000000Ui64
+#else
+#define DEF_DELTA_EPOCH_IN_MICROSECS  11644473600000000ULL
+#endif
+
+const __int64 DELTA_EPOCH_IN_MICROSECS = DEF_DELTA_EPOCH_IN_MICROSECS;
+
+// simulate gettimeofday
+struct timezone
+{
+    int  tz_minuteswest; /* minutes W of Greenwich */
+    int  tz_dsttime;     /* type of dst correction */
+};
+
+//============================================================================
+int gettimeofday( struct timeval *tv/*in*/, struct timezone *tz/*in*/ )
+{
+    FILETIME ft;
+    __int64 tmpres = 0;
+    TIME_ZONE_INFORMATION tz_winapi;
+    int rez = 0;
+    ZeroMemory2( &ft, sizeof( ft ) );
+    ZeroMemory2( &tz_winapi, sizeof( tz_winapi ) );
+
+    GetSystemTimeAsFileTime( &ft );
+
+    tmpres = ft.dwHighDateTime;
+    tmpres <<= 32;
+    tmpres |= ft.dwLowDateTime;
+
+    /*converting file time to unix epoch*/
+    tmpres /= 10;  /*convert into microseconds*/
+    tmpres -= DELTA_EPOCH_IN_MICROSECS;
+    tv->tv_sec = (__int32)( tmpres*0.000001 );
+    tv->tv_usec = ( tmpres % 1000000 );
+
+
+    //_tzset(),don't work properly, so we use GetTimeZoneInformation
+    if( tz ) // it is normal for tz to be passed as null so do check for null
+    {
+        rez = GetTimeZoneInformation( &tz_winapi );
+        tz->tz_dsttime = ( rez == 2 ) ? true : false;
+        tz->tz_minuteswest = tz_winapi.Bias + ( ( rez == 2 ) ? tz_winapi.DaylightBias : 0 );
+    }
+
+    return 0;
+    }
+
+#endif // defined(TARGET_OS_WINDOWS)
+
+#if !defined(TARGET_OS_WINDOWS)
 
 uint64_t GetTickCount64()
 {

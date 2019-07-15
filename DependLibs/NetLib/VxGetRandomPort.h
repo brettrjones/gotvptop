@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.net
+// http://www.gotvptop.com
 //============================================================================
 
 //! get a random tcp/ip port that is not in use

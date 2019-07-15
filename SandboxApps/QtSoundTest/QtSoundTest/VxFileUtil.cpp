@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.net
+// http://www.gotvptop.com
 //============================================================================
 
 //#include "config_corelib.h"
@@ -19,7 +19,7 @@
 #include "VxFileUtil.h"
 //#include "VxFileIsTypeFunctions.h"
 //#include "VxGlobals.h"
-//#include "VxParse.h"
+#include "VxParse.h"
 #include "VxDebug.h"
 //#include "VxUrl.h"
 
@@ -32,6 +32,18 @@
 #ifdef TARGET_OS_WINDOWS
 	#include "shlobj.h" // for VxGetMyDocumentsDir
 	#include <direct.h>
+# define VxMkDir(exp,exp2)	_mkdir(exp)     //make directory command we can use in windows like linux
+#define S_IRUSR 0000400
+#define S_IWUSR 0000200
+#define S_IXUSR 0000100
+#define	S_IRWXG	0000070			/* RWX mask for group */
+#define S_IRGRP 0000040
+#define S_IWGRP 0000020
+#define S_IXGRP 0000010
+#define	S_IRWXO	0000007			/* RWX mask for other */
+#define S_IROTH 0000004
+#define S_IWOTH 0000002
+#define S_IXOTH 0000001
 #else
 	#include <dirent.h> // for searching directories
 	#include <ctype.h>
@@ -229,6 +241,20 @@ bool VxFileUtil::isDotDotDirectory( const char * fileName )
 
 	return false;
 }
+#ifdef TARGET_OS_WINDOWS
+//============================================================================
+bool VxFileUtil::isDotDotDirectory( const wchar_t * fileName )
+{
+    int nameLen = wcslen( fileName );
+    if( ( ( 1 == nameLen ) && ( '.' == fileName[ 0 ] ) )
+        || ( ( 2 == nameLen ) && ( '.' == fileName[ 0 ] ) && ( '.' == fileName[ 1 ] ) ) )
+    {
+        return true;
+    }
+
+    return false;
+}
+#endif // TARGET_OS_WINDOWS
 
 //============================================================================
 // append file name to path.. account for url etc
@@ -950,26 +976,6 @@ std::string VxFileUtil::getJustPath( std::string fullPath )	// file name and pat
 }
 
 //============================================================================
-//!	find position of the given char by searching from end to first if not found return -1
-int StdStringReverseFind( std::string& csStr, char cFindChar )
-{
-    int iLen = (int)csStr.length();
-    if( iLen )
-    {
-        char * pTemp = (char *)csStr.c_str();
-        for( int i = iLen-1; i >= 0; i-- )
-        {
-            if( pTemp[i] == cFindChar )
-            {
-                return i;
-            }
-        }
-    }
-
-    return -1;
-}
-
-//============================================================================
 //! get the . extension of file name
 void	VxFileUtil::getFileExtension(	std::string&	strFileName,	// file name with extension
 										std::string&	strRetExt )		// return extension ( ie "myfile.etm" would return etm"
@@ -1479,43 +1485,6 @@ bool VxShouldOpenFile( uint8_t u8FileTypeFlag ); // includes docs
 */
 
 
-//============================================================================
-//! same as strstr but case insensitive
-char * stristr( const char * pString, const char * pPattern )
-{
-    if( !pString || !pPattern )
-        return 0;
-    int slen = ( int )strlen( pString );
-    int plen = ( int )strlen( pPattern );
-    if( (0 == slen ) && (0 == plen ) )
-        return (char *)pString; // both empty strings
-
-    char *pptr, *sptr, *start;
-    for( start = (char *)pString, pptr = (char *)pPattern; slen >= plen; start++, slen--)
-    {
-        // find start of pattern in string
-        while( toupper(*start) != toupper(*pPattern) )
-        {
-            start++;
-            slen--;
-            // if pattern longer than string then cannot be matched
-            if (slen < plen)
-                return(NULL);
-        }
-
-        sptr = start;
-        pptr = (char *)pPattern;
-        while (toupper(*sptr) == toupper(*pptr))
-        {
-            sptr++;
-            pptr++;
-            if ('\0' == *pptr)
-                return (start);
-        }
-    }
-
-    return(NULL);
-}
 
 //============================================================================
 bool VxIsPhotoFile( std::string & cs )

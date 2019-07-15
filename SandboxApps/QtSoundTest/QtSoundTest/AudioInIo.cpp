@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.net
+// http://www.gotvptop.com
 //============================================================================
 
 #include "AudioInIo.h"
@@ -29,6 +29,7 @@ AudioInIo::AudioInIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent )
 , m_AudioIoMgr( mgr )
 , m_AudioBufMutex( audioOutMutex )
 {
+    memset( m_MicSilence, 0, sizeof( m_MicSilence ) );
     connect( this, SIGNAL( signalInitialize() ), this, SLOT( slotInitialize() ) );
     connect( this, SIGNAL( signalCheckForBufferUnderun() ), this, SLOT( slotCheckForBufferUnderun() ) );
     connect( this, SIGNAL( signalStart() ), this, SLOT( slotStart() ) );
@@ -40,20 +41,13 @@ AudioInIo::AudioInIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent )
 //============================================================================
 bool AudioInIo::initAudioIn( QAudioFormat& audioFormat )
 {
-    m_AudioFormat = audioFormat;
-    emit signalInitialize();
-    return true;
-}
-
-//============================================================================
-void AudioInIo::slotInitialize()
-{
-    if( m_initialized ) 
+    if( !m_initialized )
     {
-        return;
+        m_AudioFormat = audioFormat;
+        m_initialized = setAudioDevice( QAudioDeviceInfo::defaultInputDevice() );
     }
 
-    m_initialized = setAudioDevice( QAudioDeviceInfo::defaultInputDevice() );
+    return m_initialized;
 }
 
 //============================================================================
@@ -66,7 +60,13 @@ bool AudioInIo::setAudioDevice( QAudioDeviceInfo deviceInfo )
     }
 
     m_deviceInfo = deviceInfo;
-    this->reinit();
+    delete m_AudioInputDevice;
+    m_AudioInputDevice = new QAudioInput( m_deviceInfo, m_AudioFormat, this );
+
+    // Set constant values to new audio output
+    connect( m_AudioInputDevice, SIGNAL( notify() ), SLOT( slotAudioNotified() ) );
+    connect( m_AudioInputDevice, SIGNAL( stateChanged( QAudio::State ) ), SLOT( onAudioDeviceStateChanged( QAudio::State ) ) );
+
     return true;
 }
 
@@ -80,16 +80,8 @@ void AudioInIo::reinit()
 //============================================================================
 void AudioInIo::startAudio()
 {
-	// Reinitialize audio output
-    delete m_AudioInputDevice;
-    m_AudioInputDevice = new QAudioInput( m_deviceInfo, m_AudioFormat, this );
 
-	// Set constant values to new audio output
-    connect( m_AudioInputDevice, SIGNAL( notify() ), SLOT( slotAudioNotified() ) );
-    connect( m_AudioInputDevice, SIGNAL( stateChanged( QAudio::State ) ), SLOT( onAudioDeviceStateChanged( QAudio::State ) ) );
-
-
-    this->open( QIODevice::ReadOnly );
+    this->open( QIODevice::WriteOnly );
     //m_AudioInputDevice->setBufferSize( AUDIO_BUF_SIZE_48000_2 );
     //m_AudioInputDevice->setNotifyInterval( AUDIO_BUF_MS );
     m_AudioInputDevice->start( this );
@@ -167,58 +159,50 @@ static void apply_s16le_volume( float volume, uchar *data, int datalen )
 //============================================================================
 qint64 AudioInIo::readData( char *data, qint64 maxlen )
 {
-    // Calculate output length, always full samples
-    //return m_AudioOutQt.speakerOutReadData( data, maxlen );
-    // If audio is suspended and buffer is full, resume
+    // not used
+    Q_UNUSED( data );
 
-    //apply_s16le_volume( m_volume, ( uchar * )data, outlen );
-
-    //m_buffer.remove( 0, outlen );
-
-	//memset( data, 0, maxlen );
-	m_AudioBufMutex.lock();
-
-	int toWriteByteCnt = std::min( (int)maxlen, m_AudioBuffer.size() );
-	if( toWriteByteCnt )
-	{
-		memcpy( data, m_AudioBuffer.data(), toWriteByteCnt );
-		m_AudioBuffer.remove( 0, toWriteByteCnt ); //pop front what is written
-	}
-
-	//if( toWriteByteCnt )
-	//{
-	//	LogMsg( LOG_DEBUG, "enqueueAudioData total bytes avail %lld", bytesAvailable() );
-	//}
-
-	m_AudioBufMutex.unlock();
-    //if( ( 0 == towritedevice ) && m_AudioInputDevice )
-	//{
-	//	// suspend until we have data available
-    //	m_AudioInputDevice->suspend();
-	//}
-	//else
-	//{
-		//emit signalCheckForBufferUnderun();
-	//}
-
-	return toWriteByteCnt;
+    return maxlen;
 }
 
 //============================================================================
 // not used
-qint64 AudioInIo::writeData( const char *data, qint64 len )
+qint64 AudioInIo::writeData( const char * data, qint64 len )
 {
-    Q_UNUSED( data );
-    Q_UNUSED( len );
+    m_AudioBuffer.append( data, len );
+    if( m_AudioBuffer.size() >= AUDIO_BUF_SIZE_8000_1_S16 )
+    {
+        IAudioCallbacks& audioCallbacks =  m_AudioIoMgr.getAudioCallbacks();
+        while( m_AudioBuffer.size() >= AUDIO_BUF_SIZE_8000_1_S16 )
+        {
+            if( m_AudioIoMgr.fromGuiIsMicrophoneMuted() )
+            {
+                audioCallbacks.fromGuiMicrophoneDataWithInfo( (int16_t*)m_MicSilence, AUDIO_BUF_SIZE_8000_1_S16, true, calculateMicrophonDelayMs(), 0 );
+            }
+            else
+            {
+                audioCallbacks.fromGuiMicrophoneDataWithInfo( (int16_t*)m_AudioBuffer.data(), AUDIO_BUF_SIZE_8000_1_S16, false, calculateMicrophonDelayMs(), 0  );
+            }
 
-    return 0;
+            m_AudioBuffer.remove( 0, AUDIO_BUF_SIZE_8000_1_S16 ); //pop front what is written
+        }
+    }
+
+    return len;
+}
+
+//============================================================================
+/// best guess at delay time
+int AudioInIo::calculateMicrophonDelayMs()
+{
+    return (int)( m_AudioBuffer.size() / 16 ) + 20;
 }
 
 //============================================================================
 /// space available to que audio data into buffer
 int AudioInIo::audioQueFreeSpace()
 {
-	int freeSpace = AUDIO_OUT_CACHE_SIZE - m_AudioBuffer.size();
+	int freeSpace = AUDIO_OUT_CACHE_USABLE_SIZE - m_AudioBuffer.size();
 	if( freeSpace < 0 )
 	{
 		freeSpace = 0;
@@ -278,6 +262,12 @@ void AudioInIo::slotAudioNotified()
 //============================================================================
 void AudioInIo::onAudioDeviceStateChanged( QAudio::State state )
 {
+    if( m_AudioInState != state )
+    {
+        LogMsg( LOG_DEBUG, "Audio Out state change from %s to %s ", m_AudioIoMgr.describeAudioState( m_AudioInState ), m_AudioIoMgr.describeAudioState( state ) );
+        m_AudioInState = state;
+    }
+
     if( m_AudioInputDevice )
 	{
 		// Start buffering again in case of underrun...
@@ -321,13 +311,13 @@ void AudioInIo::slotCheckForBufferUnderun()
 		case QAudio::IdleState:
 			if( audioError == QAudio::UnderrunError )
 			{
-				LogMsg( LOG_DEBUG, "suspending due to underrun" );
-                m_AudioInputDevice->suspend();
+                LogMsg( LOG_DEBUG, "microphone suspending due to underrun" );
+ //               m_AudioInputDevice->suspend();
 			}
 			else if( bufferedAudioData )
 			{
-				LogMsg( LOG_DEBUG, "starting due to idle and have data" );
-				this->startAudio();
+                LogMsg( LOG_DEBUG, "microphone starting due to idle and have data" );
+//				this->startAudio();
                 //m_AudioInputDevice->start( this );
 			}
 			else
@@ -340,16 +330,16 @@ void AudioInIo::slotCheckForBufferUnderun()
 		case QAudio::SuspendedState:
 			if( bufferedAudioData )
 			{ 
-                LogMsg( LOG_DEBUG, "restarting due to suspended and have data" );
-                m_AudioInputDevice->start( this );
+                LogMsg( LOG_DEBUG, "microphone restarting due to suspended and have data" );
+ //               m_AudioInputDevice->start( this );
 			}
 			break;
 
 		case QAudio::StoppedState: 
 			if( bufferedAudioData )
 			{
-                LogMsg( LOG_DEBUG, "restarting due to stopped and have data" );
-                m_AudioInputDevice->start( this );
+                LogMsg( LOG_DEBUG, "rmicrophone estarting due to stopped and have data" );
+ //               m_AudioInputDevice->start( this );
 			}
 			break;
 #ifdef TARGET_OS_WINDOWS // seems to be a windows only thing

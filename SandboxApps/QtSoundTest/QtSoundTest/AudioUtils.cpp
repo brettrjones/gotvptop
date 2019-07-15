@@ -109,3 +109,54 @@ int16_t AudioUtils::floatToPcm( float val )
 {
     return val * PCMS16MaxValue;
 }
+
+int16_t MixPcmSample( int a, int b ) // int16_t sample1, int16_t sample2 ) 
+{
+    // from stack overflow
+
+#if 0
+    // averaging algorithum
+    const int32_t result( ( static_cast<int32_t>( sample1 ) + static_cast<int32_t>( sample2 ) ) / 2 );
+    typedef std::numeric_limits<int16_t> Range;
+    if( Range::max() < result )
+        return Range::max();
+    else if( Range::min() > result )
+        return Range::min();
+    else
+        return result;
+#else
+    int m; // mixed result will go here
+    // Make both samples unsigned (0..65535)
+    a += 32768;
+    b += 32768;
+
+    // Pick the equation
+    if( ( a < 32768 ) || ( b < 32768 ) ) {
+        // Viktor's first equation when both sources are "quiet"
+        // (i.e. less than middle of the dynamic range)
+        m = a * b / 32768;
+    }
+    else {
+        // Viktor's second equation when one or both sources are loud
+        m = 2 * ( a + b ) - ( a * b ) / 32768 - 65536;
+    }
+
+    // Output is unsigned (0..65536) so convert back to signed (-32768..32767)
+    if( m == 65536 ) m = 65535;
+    m -= 32768;
+
+    return (int16_t)m;
+#endif // 0
+}
+
+void AudioUtils::mixPcmAudio( int16_t * pcmData, int16_t * outData, int toMixBytes )
+{
+    int sampleCnt = toMixBytes / 2;
+    if( sampleCnt )
+    {
+        for( int i = 0; i < sampleCnt; i++ )
+        {
+            outData[i] = MixPcmSample( pcmData[ i ], outData[ i ] );
+        }
+    }
+}

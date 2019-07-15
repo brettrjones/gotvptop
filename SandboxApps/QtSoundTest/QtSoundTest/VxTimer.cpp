@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.net
+// http://www.gotvptop.com
 //============================================================================
 //#include "config_corelib.h"
 
@@ -19,18 +19,20 @@
 #include "VxTimer.h"
 
 #ifdef TARGET_OS_WINDOWS
-int int VxSleep( int milliSec ) { Sleep( milliSec ); return 0; } // microsoft sleep returns void so had to make a function to return no error
+#include "windows.h"
+int VxSleep( int milliSec ) { Sleep( milliSec ); return 0; } // microsoft sleep returns void so had to make a function to return no error
 
 # define VxGetLastError		GetLastError
 #else
 //VxSleep.. sleep specified milliseconds
 # if defined( TARGET_OS_ANDROID )
-void VxSleep( int iMilliSec )
+int VxSleep( int iMilliSec )
 {
     struct timespec ts;
     ts.tv_sec = iMilliSec/1000;
     ts.tv_nsec = (iMilliSec%1000)*1000000;
     nanosleep(&ts, NULL);
+    return 0;
 };
 # else
 #  ifndef TARGET_OS_WINDOWS

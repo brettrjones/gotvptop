@@ -1,264 +1,279 @@
+//============================================================================
+// Copyright (C) 2019 Brett R. Jones
+//
+// You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
+// provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
+//
+// This code is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//
+// bjones.engineer@gmail.com
+// http://www.gotvptop.com
+//============================================================================
 
 #include "AudioMixer.h"
+#include "IAudioInterface.h"
+#include "AudioIoMgr.h"
+#include "AudioUtils.h"
+
 #include "VxDebug.h"
 #include <algorithm>
 #include <memory.h>
 
- AudioMixer::AudioMixer()
+//============================================================================
+AudioMixer::AudioMixer( AudioIoMgr& audioIoMgr, IAudioCallbacks& audioCallbacks, QWidget * parent )
+: QWidget( parent )
+, m_AudioIoMgr( audioIoMgr  )
+, m_AudioCallbacks( audioCallbacks )
  {
-     memset( m_DataSize, 0, sizeof( m_DataSize ) );
+     memset( m_BufIndex, 0, sizeof( m_BufIndex ) );
+     m_AtomicBufferSize = 0;
+     m_ElapsedTimer.restart();
  }
 
-// write to buffer.. return amount written
-int AudioMixer::writeData( char * data, int dataLen )
+//============================================================================
+// add audio data to mixer.. assumes pcm signed short 2 channel 48000 Hz.. return total written to buffer
+int AudioMixer::enqueueAudioData( EAppModule appModule, int16_t * pcmData, int pcmDataLenInBytes, bool isSilence )
 {
-    if( !data || ( dataLen <= 0 ) )
+    if( appModule == eAppModulePtoP )
     {
-        LogMsg( LOG_ERROR, " AudioMixer::writeData invalid dataLen %d\n", dataLen );
-        return 0;
+        int appWriteIdx = m_BufIndex[ appModule ];
+        //LogMsg( LOG_DEBUG, "enqueueAudioData in que %d at %lld", appWriteIdx + pcmDataLenInBytes, m_ElapsedTimer.elapsed() );
     }
 
-    int lenLeftToWrite = dataLen;
-    int totalWrote = 0;
-    m_BufMutex.lock();
-    while( totalWrote != dataLen )
+    int toWriteByteCnt = 0;
+
+    if( ( pcmDataLenInBytes > 0 ) && ( appModule > 1 ) && ( appModule < eMaxAppModule ) )
     {
-        autoIncrementHeadIndex();
-        int bytesWritten = writeBufData( &data[totalWrote], lenLeftToWrite );
-        totalWrote += bytesWritten;
-        lenLeftToWrite -= bytesWritten;
-        if( 0 == bytesWritten )
+        m_MixerMutex.lock();
+        int queSpace = audioQueFreeSpace( appModule );
+        int maxSpace = m_AudioIoMgr.getCachedMaxLength();
+
+        int samplesCnt = pcmDataLenInBytes / 2;
+        int toWriteByteCnt = std::min( queSpace, pcmDataLenInBytes );
+        if( pcmDataLenInBytes > toWriteByteCnt )
         {
-            break;
-        }
-    }
-
-    m_BufMutex.unlock();
-    return totalWrote;
-}
-
-// read from buffer.. return amount read
-int AudioMixer::readData( char * data, int maxReadlen )
-{
-    if( !data || ( 0 >= maxReadlen) )
-    {
-        return 0;
-    }
-
-    int totalBytesRead = 0;
-    m_BufMutex.lock();
-    while( totalBytesRead != maxReadlen  )
-    {
-        int bytesRead = readBufData( &data[ totalBytesRead ], maxReadlen - totalBytesRead );
-        if( 0 == bytesRead )
-        {
-            // there may be a bit left in current head buffer
-            int leftOverAmount = m_DataSize[ m_HeadIdx ];
-            if( leftOverAmount )
+            // if not enough space then do not write anything or kodi gets confused
+            if( eAppModuleKodi == appModule )
             {
-                // see if tail is right behind head.. meaning buffers are about empty
-                int tailIdx = m_TailIdx;
-                incrementIndex( tailIdx );
-                if( tailIdx == m_HeadIdx )
-                {
-                    // we can read out what is left in head buffer
-                    int lenToRead = std::min( leftOverAmount, maxReadlen - totalBytesRead );
-                    if( lenToRead )
-                    {
-                        memcpy( &data[ totalBytesRead ], &m_RingBuf[ m_HeadIdx ][ 0 ], lenToRead );
-                        if( lenToRead != leftOverAmount )
-                        {
-                            // move remaining data to start of buffer
-                            memcpy( &m_RingBuf[ m_HeadIdx ][ 0 ], &m_RingBuf[ m_HeadIdx ][ lenToRead ], leftOverAmount - lenToRead );
-                        }
-
-                        m_DataSize[ m_HeadIdx ] -= lenToRead;
-                        bytesRead = lenToRead;
-                    }
-                }
-            }
-
-            if( 0 == bytesRead )
-            {
-                break;
+                m_AtomicBufferSize = m_AudioBuffer.size();
+                LogMsg( LOG_DEBUG, "enqueueAudioData need %d space but have %d ", pcmDataLenInBytes, queSpace );
+                emit signalCheckSpeakerOutState();
+                m_MixerMutex.unlock();
+                return 0;
             }
         }
 
-        totalBytesRead += bytesRead;
-    }
-
-    m_BufMutex.unlock();
-    return totalBytesRead;
-}
-
-// amount of data available in bytes
-int AudioMixer::bytesAvailable()
-{
-    int amountAvailable = 0;
-    m_BufMutex.lock();
-    autoIncrementTailIndex();
-    int currIdx = m_TailIdx;
-    for( int i = 0; i < AUDIO_BUF_COUNT; i++ )
-    {
-        int amountInBuf = getBytesAvailable( currIdx );
-        if( 0 == amountInBuf )
+        if( toWriteByteCnt )
         {
-            break;
-        }
-
-        amountAvailable += amountInBuf;
-
-        incrementIndex( currIdx );
-        if( currIdx == m_HeadIdx )
-        {
-            // include amount in buffer currently being written t0
-            amountAvailable += m_DataSize[ m_HeadIdx ];
-            break;
-        }
-    }
-
-    m_BufMutex.unlock(); 
-    return amountAvailable;
-}
-
-// increment index.. return true if tail == head index
-bool AudioMixer::incrementIndex( int& bufIdx )
-{
-    if(  m_HeadIdx == m_TailIdx )
-    {
-        return true;
-    }
-
-    bufIdx++;
-    if( bufIdx >= AUDIO_BUF_COUNT )
-    {
-        bufIdx = 0;
-    }
-
-    return m_HeadIdx == m_TailIdx;
-}
-
-// increment head index.. do not allow head to reach tail
-bool AudioMixer::incrementHeadIndex( int& bufIdx )
-{
-    bool incrementSuccess = false;
-    int nextIdx = bufIdx;
-    nextIdx++;
-    if( nextIdx >= AUDIO_BUF_COUNT )
-    {
-        nextIdx = 0;
-    }
-
-    if( nextIdx != m_TailIdx )
-    {
-        bufIdx = nextIdx;
-        incrementSuccess = true;
-    }
+            // BRJ what to do with silence
  
-    return incrementSuccess;
-}
-
-// increment head index if needed
-void AudioMixer::autoIncrementHeadIndex( )
-{
-    if( 0 == getBytesFree( m_HeadIdx ) )
-    {
-        incrementHeadIndex( m_HeadIdx );
-    }
-}
-
-// increment tail index.. do not allow tail to reach head.. return true if incremented
-bool AudioMixer::incrementTailIndex( int& bufIdx )
-{
-    bool incrementSuccess = false;
-    int nextIdx = bufIdx;
-    nextIdx++;
-    if( nextIdx >= AUDIO_BUF_COUNT )
-    {
-        nextIdx = 0;
-    }
-
-    if( nextIdx != m_HeadIdx )
-    {
-        bufIdx = nextIdx;
-        incrementSuccess = true;
-    }
-
-    return incrementSuccess;
-}
-
-// increment head index if needed
-void AudioMixer::autoIncrementTailIndex()
-{
-    if( 0 == getBytesAvailable( m_TailIdx ) )
-    {
-        incrementTailIndex( m_TailIdx );
-    }
-}
-
-// return bytes available at given index
-int AudioMixer::getBytesAvailable( int bufIdx )
-{
-    return m_DataSize[ bufIdx ];
-}
-
-// return bytes free at given index
-int AudioMixer::getBytesFree( int bufIdx )
-{
-    return AUDIO_BUF_SIZE_48000_2 - getBytesAvailable( bufIdx );
-}
-
-// write into buffer.. return amount wrote
-int AudioMixer::writeBufData( char * data, int dataLen )
-{
-    int lenWrote = 0;
-    if( data && dataLen )
-    {
-        autoIncrementHeadIndex();
-        int spaceAvailable = getBytesFree( m_HeadIdx );
-        if( spaceAvailable )
-        {
-            int spaceUsed = getBytesAvailable( m_HeadIdx );
-            int lenToWrite = std::min( spaceAvailable, dataLen );
-            if( lenToWrite )
+            int appWriteIdx = m_BufIndex[ appModule ];
+            int curBufSize = m_AudioBuffer.size();
+            if( appWriteIdx > curBufSize )
             {
-                memcpy( &m_RingBuf[ m_HeadIdx ][ spaceUsed ], data, lenToWrite );
-                m_DataSize[ m_HeadIdx ] += lenToWrite;
-                lenWrote = lenToWrite;
-                autoIncrementHeadIndex();
+                LogMsg( LOG_ERROR, "enqueueAudioData mismatch write idx %d existing data %d ", appWriteIdx, curBufSize );
+                appWriteIdx = curBufSize;
             }
-        }
-    }
 
-    return lenWrote;
-}
-
-// read from buffer.. return amount read
-int AudioMixer::readBufData( char * data, int dataLen )
-{
-    int lenRead = 0;
-    if( data && dataLen )
-    {
-        autoIncrementTailIndex();
-        int bytesAvail = getBytesAvailable( m_TailIdx );
-        if( 0 != bytesAvail )
-        {
-            int lenToRead = std::min( bytesAvail, dataLen );
-            if( lenToRead )
+            if( appWriteIdx == curBufSize )
             {
-                memcpy( data, &m_RingBuf[ m_TailIdx ][ 0 ], lenToRead );
-                if( lenToRead != bytesAvail )
+                // no mixing required
+                m_AudioBuffer.append( (char *)pcmData, toWriteByteCnt );
+                updateWriteBufferIndex( appModule, toWriteByteCnt );
+                //LogMsg( LOG_DEBUG, "enqueueAudioData no mix mod %d len %d written %d buf len %d", appModule, m_BufIndex[ appModule ], toWriteByteCnt, m_AudioBuffer.size() );
+            }
+            else
+            {
+                // some or all requires mixing
+                int appEndIdx = appWriteIdx + toWriteByteCnt;
+                int toMixLen = std::min( curBufSize - appWriteIdx, toWriteByteCnt );
+                char * audioOutData = m_AudioBuffer.data();
+                char * audioWriteData = &audioOutData[ appWriteIdx ];
+
+                if( toMixLen > 0 )
                 {
-                    // move remaining data to start of buffer
-                    memcpy( &m_RingBuf[ m_TailIdx ][ 0 ], &m_RingBuf[ m_TailIdx ][ lenToRead ], bytesAvail - lenToRead );
+                    AudioUtils::mixPcmAudio( pcmData, (int16_t *)audioWriteData, toMixLen );
+                    if( toMixLen != toWriteByteCnt )
+                    {
+                        int toAppendLen = toWriteByteCnt - toMixLen;
+                        //LogMsg( LOG_DEBUG, "enqueueAudioData mix len %d append len %d total %d index now %d", toMixLen, toAppendLen, toMixLen + toAppendLen, m_BufIndex[ appModule ] + toWriteByteCnt  );
+                        // append remainder
+                        char * audioPcmData = (char *)pcmData;
+                        char * audioReadData = &audioPcmData[ toMixLen ];
+                        m_AudioBuffer.append( audioReadData, toWriteByteCnt - toMixLen );
+                    }
+
+                    //m_BufIndex[ appModule ] += toWriteByteCnt;
+                    updateWriteBufferIndex( appModule, toWriteByteCnt );
+
+                }
+                else
+                {
+                    LogMsg( LOG_ERROR, "enqueueAudioData error in mix len " );
                 }
 
-                m_DataSize[ m_TailIdx ] -= lenToRead;
-                lenRead = lenToRead;
-                autoIncrementTailIndex();
+                //int16_t * sampleBuf = (int16_t *)( &audioOutData[ appWriteIdx ] );
+                //int sampleCnt = toWriteByteCnt / 2;
+                //LogMsg( LOG_DEBUG, "enqueueAudioData first %d second %d last %d ", sampleBuf[ 0 ], sampleBuf[ 2 ], sampleBuf[ sampleCnt - 1 ] );
+               
             }
+
+        }
+
+//        if( toWriteByteCnt && ( queSpace < maxSpace / 2 ) )
+//        {
+//            emit signalCheckSpeakerOutState();
+//        }
+
+        m_AtomicBufferSize = m_AudioBuffer.size();
+        m_MixerMutex.unlock();
+        emit signalCheckSpeakerOutState();
+    }
+    else
+    {
+        // should probably be considered a fatal error
+        if( 0 == pcmDataLenInBytes )
+        {
+            LogMsg( LOG_ERROR, "enqueueAudioData 0 bytes " );
+            return 0;
+        }
+        else
+        {
+            LogMsg( LOG_ERROR, "enqueueAudioData invalid module %d ", appModule );
         }
     }
 
-    return lenRead;
+    return toWriteByteCnt;
+}
+
+//============================================================================
+// read audio data from mixer.. assumes pcm 2 channel 48000 Hz
+qint64 AudioMixer::readDataFromMixer( char *data, qint64 maxlen )
+{
+    if( maxlen <= 0 )
+    {
+//        LogMsg( LOG_DEBUG, "readDataFromMixer %lld bytes ", maxlen );
+        return maxlen;
+    }
+
+    m_MixerMutex.lock();
+    int toReadByteCnt = std::min( (int)maxlen, m_AudioBuffer.size() );
+ //   LogMsg( LOG_DEBUG, "readDataFromMixer in que %d at %lld ms", toReadByteCnt, m_ElapsedTimer.elapsed() );
+
+    if( 0 == toReadByteCnt )
+    {
+        LogMsg( LOG_DEBUG, "*** readDataFromMixer avail %d of %lld bytes at %3.3f ms ", toReadByteCnt, maxlen, m_ReadBufTimer.elapsedMs() );
+    }
+
+    //if( 0 == toReadByteCnt )
+    //{
+    //    LogMsg( LOG_DEBUG, "*** readDataFromMixer avail %d of %lld bytes at %3.3f ms ", toReadByteCnt, maxlen, m_ReadBufTimer.elapsedMs() );
+    //}
+
+    m_ReadBufTimer.resetTimer();
+
+    if( toReadByteCnt )
+    {
+        if( m_SpeakersMuted )
+        {
+            memset( data, 0, toReadByteCnt );
+        }
+        else
+        {
+            memcpy( data, m_AudioBuffer.data(), toReadByteCnt );
+        }
+
+        m_AudioBuffer.remove( 0, toReadByteCnt ); //pop front what is written
+
+            // update indexes that applications write data into buffer at
+        updateReadBufferIndexes( toReadByteCnt );
+        //int bytesRead = (int)maxlen;
+        //if( bytesRead > toReadByteCnt )
+        //{
+        //    // if not enough data to read then fill with silence
+        //    memset( &data[ toReadByteCnt ], 0, bytesRead - toReadByteCnt );
+        //}
+
+        m_AudioCallbacks.speakerAudioPlayed( m_AudioIoMgr.getAudioOutFormat(), (void *)data, toReadByteCnt );
+        //LogMsg( LOG_ERROR, "readDataFromMixer requested %d read %d len left %d ptop len %d", maxlen, toReadByteCnt, m_AudioBuffer.size(), m_BufIndex[ eAppModulePtoP ] );
+    }
+
+
+    m_AtomicBufferSize = m_AudioBuffer.size();
+    m_MixerMutex.unlock();
+
+    return toReadByteCnt;
+}
+
+//============================================================================
+// update indexes that applications write data into buffer at
+void AudioMixer::updateReadBufferIndexes( int byteCnt )
+{
+    if( byteCnt > 0 )
+    {
+        // 0 = eAppModuleInvalid, 1 = eAppModuleAll
+        for( int i = 2; i < eMaxAppModule; i++ )
+        {
+            if( m_BufIndex[ i ] >= byteCnt )
+            {
+                m_BufIndex[ i ] -= byteCnt;
+                if( m_BufIndex[ i ] )
+                {
+                    int bytesInBuffer = m_BufIndex[ i ];
+                    LogMsg( LOG_ERROR, "updateReadBufferIndexes mod %d bytes %d  ", i, bytesInBuffer );
+                }
+            }
+            else
+            {
+                // more has been read than available so reset
+                m_BufIndex[ i ] = 0;
+            }
+        }
+    }
+}
+
+//============================================================================
+// update indexes that applications write data into buffer at ( add data count written to mixer )
+void AudioMixer::updateWriteBufferIndex( EAppModule appModule, int byteCnt )
+{
+    if( ( byteCnt > 0 ) && ( appModule > 1 ) && ( appModule < eMaxAppModule ) )
+    {
+        m_BufIndex[ appModule ] += byteCnt;
+        int bytesInBuffer = m_BufIndex[ appModule ];
+        LogMsg( LOG_ERROR, "updateWriteBufferIndex mod %d idx %d bytes ", appModule, bytesInBuffer );
+    }
+}
+
+//============================================================================
+/// space available to que audio data into buffer
+int AudioMixer::audioQueFreeSpace( EAppModule appModule )
+{
+    int freeSpace = AUDIO_OUT_CACHE_USABLE_SIZE - audioQueUsedSpace( appModule );
+    if( freeSpace < 0 )
+    {
+        freeSpace = 0;
+    }
+
+    return freeSpace;
+}
+
+//============================================================================
+/// space used in audio que buffer
+int AudioMixer::audioQueUsedSpace( EAppModule appModule )
+{
+    if( ( appModule > 1 ) && ( appModule < eMaxAppModule ) )
+    {
+        return m_BufIndex[ appModule ];
+    }
+
+    return 0;
+}
+
+//============================================================================
+// get length of data buffered and ready for speaker out
+int AudioMixer::getDataReadyForSpeakersLen()
+{
+    return m_AtomicBufferSize;
 }

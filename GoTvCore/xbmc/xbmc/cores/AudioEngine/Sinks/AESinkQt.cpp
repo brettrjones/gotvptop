@@ -245,7 +245,7 @@ unsigned int CAESinkQt::AddPackets( uint8_t **data, unsigned int frames, unsigne
     //    }
     //}
 
-    int wrote = m_IGoTv.toGuiPlayAudio( eAppModuleKodi, (int16_t *)buffer, size );
+    int wrote = m_IGoTv.toGuiPlayAudio( eAppModuleKodi, (float *)buffer, size );
     if( wrote < 0 )
     {
         CLog::Log( LOGERROR, "CAESinkQt::AddPackets - Failed to write" );

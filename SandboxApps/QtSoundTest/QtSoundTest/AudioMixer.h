@@ -1,52 +1,79 @@
+//============================================================================
+// Copyright (C) 2019 Brett R. Jones
+//
+// You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
+// provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
+//
+// This code is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//
+// bjones.engineer@gmail.com
+// http://www.gotvptop.com
+//============================================================================
 #pragma once
 
-#include <QMutex>
-
+#include "IGoTvDefs.h"
 #include "AudioDefs.h"
+#include "VxTimer.h"
 
+#include <QMutex>
+#include <QWidget>
+#include <QElapsedTimer>
 
-class AudioMixer
+class AudioIoMgr;
+class IAudioCallbacks;
+
+class AudioMixer : public QWidget
 {
+    Q_OBJECT
 public:
-    AudioMixer();
+    explicit AudioMixer( AudioIoMgr& audioIoMgr, IAudioCallbacks& audioCallbacks, QWidget * parent );
 
-    // write to buffer.. return amount written
-    int writeData( char * data, int datalen );
+    IAudioCallbacks&            getAudioCallbacks() { return m_AudioCallbacks; }
 
-    // read from buffer.. return amount read
-    int readData( char * data, int maxReadlen );
 
-    // total amount of buffer space in bytes.. leave one buffer free to avoid possible overwrite
-    int totalBufferSize( ) { return (AUDIO_BUF_COUNT - 1) * AUDIO_BUF_SIZE_48000_2; }
+    void                        lockMixer() { m_MixerMutex.lock(); }
+    void                        unlockMixer() { m_MixerMutex.unlock(); }
 
-    // amount of data available in bytes
-    int bytesAvailable();
+    void                        fromGuiMuteSpeaker( bool mute )         { m_SpeakersMuted = mute; }
 
-    // amount of space free
-    int bufSpaceFree() { return bytesAvailable() >= totalBufferSize() ? 0 : bytesAvailable(); }
+
+    // add audio data to mixer.. assumes pcm signed short 2 channel 48000 Hz.. return total written to buffer
+    virtual int				    enqueueAudioData( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence );
+
+    // read audio data from mixer.. assumes pcm 2 channel 48000 Hz
+    qint64                      readDataFromMixer( char *data, qint64 maxlen );
+
+    /// space available to que audio data into buffer
+    int                         audioQueFreeSpace( EAppModule appModule );
+
+    /// space used in audio que buffer
+    int                         audioQueUsedSpace( EAppModule appModule );
+ 
+    // get length of data buffered and ready for speaker out
+    int                         getDataReadyForSpeakersLen();
+
+signals:
+    void                        signalCheckSpeakerOutState();
 
 private:
-    // increment index.. return true if tail == head index
-    bool incrementIndex( int& bufIdx );
-    // increment head index.. do not allow head to reach tail.. return true if incremented
-    bool incrementHeadIndex( int& bufIdx );
-    void autoIncrementHeadIndex();
-    // increment tail index.. do not allow tail to reach head.. return true if incremented
-    bool incrementTailIndex( int& bufIdx );
-    void autoIncrementTailIndex();
+    // update indexes that applications write data into buffer at ( subtract data count read by speakers out )
+    void                        updateReadBufferIndexes( int byteCnt );
 
-    // return bytes available at given index
-    int getBytesAvailable( int bufIdx );
-    // return bytes free at given index
-    int getBytesFree( int bufIdx );
-    // write into buffer.. return amount wrote
-    int writeBufData( char * data, int dataLen );
-    // read from buffer.. return amount read
-    int readBufData( char * data, int dataLen );
+    // update indexes that applications write data into buffer at ( add data count written to mixer )
+    void                        updateWriteBufferIndex( EAppModule appModule, int byteCnt );
 
-    char m_RingBuf[ AUDIO_BUF_COUNT ][ AUDIO_BUF_SIZE_48000_2 ];
-    int m_DataSize[ AUDIO_BUF_COUNT ];
-    int m_HeadIdx = 0;
-    int m_TailIdx = AUDIO_BUF_COUNT - 1;
-    QMutex m_BufMutex;
-};
+    AudioIoMgr&                 m_AudioIoMgr;
+    IAudioCallbacks&            m_AudioCallbacks;
+    QByteArray					m_AudioBuffer;
+    QMutex                      m_MixerMutex;
+    QMutex                      m_QueMutex;
+
+    QAtomicInt                  m_BufIndex[ eMaxAppModule ];
+    bool                        m_SpeakersMuted = false;
+    VxTimer                     m_ReadBufTimer;
+    QElapsedTimer               m_ElapsedTimer;
+    QAtomicInt                  m_AtomicBufferSize;
+ };
+    

@@ -11,10 +11,10 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.net
+// http://www.gotvptop.com
 //============================================================================
 
-//#include "config_gotvapps.h"
+#include "AudioDefs.h"
 
 #include <QObject>
 #include <QIODevice>
@@ -25,7 +25,6 @@
 #include <QIODevice>
 #include <QMutex>
 
-//#include <CoreLib/VxMutex.h>
 
 class AudioIoMgr;
 
@@ -64,7 +63,6 @@ public:
 	int 						enqueueAudioData( char* pcmData, int countBytes );
 
 signals:
-    void                        signalInitialize();
     void						signalCheckForBufferUnderun();
     void						signalStart();
 	void						signalStop();
@@ -75,7 +73,6 @@ protected slots:
     void                        slotAudioNotified();
     void						slotCheckForBufferUnderun();
     void                        onAudioDeviceStateChanged( QAudio::State state );
-    void                        slotInitialize();
     void						slotStart();
 	void						slotStop();
 	void						slotSuspend();
@@ -90,16 +87,19 @@ protected:
 
 private:
     void                        reinit();
+    int                         calculateMicrophonDelayMs();
 
-private:
+
     AudioIoMgr&                 m_AudioIoMgr;
     QMutex&                     m_AudioBufMutex;
 
-    bool                        m_initialized = 0;
+    bool                        m_initialized = false;
     QAudioFormat                m_AudioFormat;
     QAudioDeviceInfo            m_deviceInfo;
     QAudioInput*                m_AudioInputDevice = nullptr;
     float                       m_volume = 1.0f;
 
     QByteArray					m_AudioBuffer;
+    QAudio::State               m_AudioInState = QAudio::State::StoppedState;
+    char                        m_MicSilence[ AUDIO_BUF_SIZE_8000_1_S16 ];
 };

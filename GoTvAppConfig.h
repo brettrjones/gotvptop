@@ -26,7 +26,7 @@
 
 # define PROGRAM_NAME			"GoTvP2P"
 # define PACKAGE_STRING			"GoTvP2P 1.0"	
-# define PACKAGE_URL		    "http://www.gotvptop.net"
+# define PACKAGE_URL		    "http://www.gotvptop.com"
 # define BUILD_KODI_MAIN        1
 
 #elif defined( BUILD_KODIQT_APP )

@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.net
+// http://www.gotvptop.com
 //============================================================================
 
 //#include "config_gotvapps.h"
@@ -24,10 +24,13 @@
 #include <QAudioOutput>
 #include <QIODevice>
 #include <QMutex>
+#include <QElapsedTimer>
 
 //#include <CoreLib/VxMutex.h>
+#include "VxTimer.h"
 
 class AudioIoMgr;
+class QTimer;
 
 class AudioOutIo : public QIODevice
 {
@@ -49,22 +52,12 @@ public:
     void                        setVolume( float volume );
     void                        flush();
 
-    QAudio::State               getState()      { return ( m_AudioOutputDevice ? m_AudioOutputDevice->state() : QAudio::StoppedState); }
+    QAudio::State               getState()      { return ( m_AudioOutputDevice ? m_AudioOutState : QAudio::StoppedState); }
     QAudio::Error               getError()      { return ( m_AudioOutputDevice ? m_AudioOutputDevice->error() : QAudio::NoError); }
 
     QAudioOutput *              getAudioOut( )  { return m_AudioOutputDevice; }
 
-	/// space available to que audio data into buffer
-	int							audioQueFreeSpace();
-
-	/// space used in audio que buffer
-	int							audioQueUsedSpace();
-
-	///  write to audio buffer.. return total written to  buffer
-	int 						enqueueAudioData( char* pcmData, int countBytes );
-
 signals:
-    void                        signalInitialize();
     void						signalCheckForBufferUnderun();
     void						signalStart();
 	void						signalStop();
@@ -72,20 +65,19 @@ signals:
 	void						signalResume();
 
 protected slots:
-    void                        slotAudioNotified();
+    void                        slotAudioNotify();
     void						slotCheckForBufferUnderun();
     void                        onAudioDeviceStateChanged( QAudio::State state );
-    void                        slotInitialize();
     void						slotStart();
 	void						slotStop();
 	void						slotSuspend();
 	void						slotResume();
 
 protected:
-	qint64                      bytesAvailable() const override;
 
 	qint64                      readData( char *data, qint64 maxlen ) override;
     qint64                      writeData( const char *data, qint64 len )  override;
+    qint64                      bytesAvailable() const override;
     bool						isSequential() const  override { return true; }
 
 private:
@@ -99,7 +91,10 @@ private:
     QAudioFormat                m_AudioFormat;
     QAudioDeviceInfo            m_deviceInfo;
     QAudioOutput*               m_AudioOutputDevice = nullptr;
+    qint64                      m_ProccessedMs = 0;
     float                       m_volume = 1.0f;
-
-    QByteArray					m_AudioBuffer;
+    QTimer *                    m_PeriodicTimer;
+    VxTimer                     m_NotifyTimer;
+    QElapsedTimer               m_ElapsedTimer;
+    QAudio::State               m_AudioOutState = QAudio::State::StoppedState;
 };

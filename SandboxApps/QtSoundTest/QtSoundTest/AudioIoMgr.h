@@ -1,3 +1,16 @@
+//============================================================================
+// Copyright (C) 2019 Brett R. Jones
+//
+// You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
+// provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
+//
+// This code is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//
+// bjones.engineer@gmail.com
+// http://www.gotvptop.com
+//============================================================================
 #pragma once
 
 #include <QThread>
@@ -5,61 +18,12 @@
 #include <QWaitCondition>
 #include <QElapsedTimer>
 #include <QWidget>
-#include <QAudioOutput>
-#include <QAudioInput>
 
-#include "IGoTvDefs.h"
+
 #include "AudioMixer.h"
 #include "AudioOutIo.h"
 #include "AudioInIo.h"
-
-class IAudioCallbacks
-{
-public:
-    /// for visualization of audio output
-    virtual void                speakerAudioPlayed( QAudioFormat& /*format*/, void * /*data*/, int /*dataLen*/ ){};
-    /// for visualization of audio input
-    virtual void                microphoneAudioRecieved( QAudioFormat& /*format*/, void * /*data*/, int /*dataLen*/ ){};
-
-    /// Microphone sound capture ( 8000hz PCM 16 bit data, 80ms of sound )
-    virtual void				fromGuiMicrophoneData( int16_t* pu16PcmData, uint16_t pcmDataLenBytes ) = 0;
-    /// Microphone sound capture with info for echo cancel ( 8000hz PCM 16 bit data, 80ms of sound )
-    virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, int totalDelayTimeMs, int clockDrift ) = 0;
-    /// Mute/Unmute microphone
-    virtual void				fromGuiMuteMicrophone( bool muteMic ) = 0;
-    /// Returns true if microphone is muted
-    virtual bool				fromGuiIsMicrophoneMuted( void ) = 0;
-    /// Mute/Unmute speaker
-    virtual void				fromGuiMuteSpeaker(	bool muteSpeaker ) = 0;
-    /// Returns true if speaker is muted
-    virtual bool				fromGuiIsSpeakerMuted( void ) = 0;
-    /// Enable/Disable echo cancellation
-    virtual void				fromGuiEchoCancelEnable( bool enableEchoCancel ) = 0;
-    /// Returns true if echo cancellation is enabled
-    virtual bool				fromGuiIsEchoCancelEnabled( void ) = 0;
-    /// Called when need more sound for speaker output
-    virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen ) = 0;
-
-};
-
-class IAudioRequests
-{
-public:
-    // enable disable fromGuiMicrophoneData callback
-    virtual void				toGuiWantMicrophoneRecording( bool wantMicInput ) = 0;
-    // enable disable
-    virtual void				toGuiWantSpeakerOutput( bool wantSpeakerOutput ) = 0;
-    // add audio data to play.. assumes 16 bit
-    virtual void				toGuiPlayAudio( int16_t * pu16PcmData, int pcmDataLenInBytes ) = 0;
-    // add audio data to play.. convert float to s16 pcm data before calling writeData
-    virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes ) = 0;
-    // delay of audio calculated from amount of data in queue
-    virtual double				toGuiGetAudioDelaySeconds() = 0;
-    // maximum queue cache size in seconds
-    virtual double				toGuiGetAudioCacheTotalSeconds() = 0;
-    // amount of free queue space in bytes
-    virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) = 0;
-};
+#include "IAudioInterface.h"
 
 
 class AudioIoMgr : public QWidget, public IAudioRequests
@@ -73,16 +37,17 @@ public:
     void                        initAudioIoSystem();
     void                        destroyAudioIoSystem();
 
-    QAudioFormat&                getAudioOutFormat() { return m_AudioOutFormat; }
-    QAudioFormat&                getAudioInFormat() { return m_AudioInFormat; }
+    IAudioCallbacks&            getAudioCallbacks()        { return m_AudioCallbacks; }
+    QAudioFormat&               getAudioOutFormat()        { return m_AudioOutFormat; }
+    QAudioFormat&               getAudioInFormat()         { return m_AudioInFormat; }
+    AudioMixer&                 getAudioOutMixer()         { return m_AudioOutMixer; }
 
-    bool                        isMicrophoneAvailable()     { return m_MicrophoneAvailable; }
-    bool                        isMicrophoneEnabled()       { return m_MicrophoneEnabled; }
-    bool                        isMicrophoneMuted()         { return m_MicrophoneMuted; }
-    bool                        isSpeakersMuted()           { return m_SpeakersMuted; }
+    const char *                describeAudioState( QAudio::State state );
+    const char *                describeAudioError( QAudio::Error err );
 
-    void                        lockAudioOut() { m_AudioOutMutex.lock(); }
-    void                        unlockAudioOut() { m_AudioOutMutex.unlock(); }
+
+//    void                        lockAudioOut() { m_AudioOutMixer.lockMixer(); }
+//    void                        unlockAudioOut() { m_AudioOutMixer.unlockMixer(); }
 
     void                        lockAudioIn() { m_AudioInMutex.lock(); }
     void                        unlockAudioIn() { m_AudioInMutex.unlock(); }
@@ -90,46 +55,66 @@ public:
     // volume is from 0.0 to 1.0
     void						setVolume( float volume );
 
-    void                        pauseAudioOut( );
-    void                        resumeAudioOut( );
+    void                        pauseAudioOut();
+    void                        resumeAudioOut();
+
+    bool                        isMicrophoneAvailable()                 { return m_MicrophoneAvailable; }
+    bool                        isMicrophoneEnabled()                   { return m_MicrophoneEnabled; }
+
+    void                        fromGuiMuteMicrophone( bool mute );
+    bool                        fromGuiIsMicrophoneMuted()              { return m_MicrophoneMuted; }
+    void                        fromGuiMuteSpeaker( bool mute );
+    bool                        fromGuiIsSpeakerMuted()                 { return m_SpeakersMuted; }
+    void                        fromGuiEchoCancelEnable( bool enable )  { m_EchoCancelEnabled = enable; }
+    bool                        fromGuiIsEchoCancelEnabled()            { return m_EchoCancelEnabled; }
 
     //=== IAudioRequests ===//
+    // set push/pull/both or paused
+    virtual void				toGuiSetSpeakerMode( ESpeakerMode eSpeakerMode ) override;
+
     // enable disable microphone data callback
-    virtual void				toGuiWantMicrophoneRecording( bool wantMicInput ) override;
-    // enable disable
-    virtual void				toGuiWantSpeakerOutput( bool wantSpeakerOutput ) override;
-    // add audio data to play.. assumes 16 bit
-    virtual void				toGuiPlayAudio( int16_t * pu16PcmData, int pcmDataLenInBytes ) override;
-    // add audio data to play.. convert float to s16 pcm data before calling writeData
-    virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes ) override;
+    virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) override;
+    // enable disable sound out
+    virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) override;
+    // add audio data to play.. assumes float 2 channel 48000 Hz so convert float to s16 pcm data before calling writeData
+    virtual int				    toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) override;
+    // add audio data to play.. assumes pcm mono 8000 Hz so convert to 2 channel 48000 hz pcm before calling writeData
+    virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
     // delay of audio calculated from amount of data in queue
-    virtual double				toGuiGetAudioDelaySeconds( ) override;
+    virtual double				toGuiGetAudioDelaySeconds( EAppModule appModule ) override;
     // maximum queue cache size in seconds
-    virtual double				toGuiGetAudioCacheTotalSeconds() override;
+    virtual double				toGuiGetAudioCacheTotalSeconds( EAppModule appModule ) override;
     // amount of free queue space in bytes
     virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) override;
+
+    // read speaker output from mixer
+    qint64                      readDataFromOutMixer( char * data, qint64 maxlen );
+
+    // get length of data ready for write to speakers
+    int                         getDataReadyForSpeakersLen();
+
+    int                         getCachedMaxLength() { return AUDIO_OUT_CACHE_USABLE_SIZE; }
 
 signals:
     void                        signalNeedMoreAudioData( int requiredLen );
 
 public slots:
     void                        slotNeedMoreAudioData( int  requiredLen );
-    void                        playerStateChanged( QAudio::State state );
+    void                        speakerStateChanged( QAudio::State state );
+    void                        microphoneStateChanged( QAudio::State state );
 
 protected:
     void						stopAudioOut( );
     void                        stopAudioIn();
-    //void                        addToQue( const char * data, int len );
-
-    //void                        run( ) override; // thread override
-
-    int                         getCachedDataLength( bool requireLock = true );
-    int                         getCachedMaxLength( ) { return AUDIO_OUT_CACHE_SIZE; }
-
-    void                        checkAudioState( int lastLenWrote );
-
+ 
+    int                         getCachedDataLength( EAppModule appModule, bool requireLock = true );
 
     void                        aboutToDestroy();
+
+    // update speakers to current mode and output
+    void                        updateSpeakers();
+    // update microphone output
+    void                        updateMicrophone();
 
 private:
     IAudioCallbacks&            m_AudioCallbacks;
@@ -138,10 +123,14 @@ private:
     bool                        m_MicrophoneAvailable = false;
     bool                        m_MicrophoneEnabled = false;
     bool                        m_MicrophoneMuted = false;
+    bool                        m_SpeakerAvailable = false;
     bool                        m_SpeakersMuted = false;
+    bool                        m_EchoCancelEnabled = false;
 
     QMutex                      m_AudioOutMutex;
     QMutex                      m_AudioInMutex;
+
+    AudioMixer                  m_AudioOutMixer;
 
     QAudioFormat                m_AudioOutFormat;
     AudioOutIo                  m_AudioOutIo;
@@ -151,13 +140,17 @@ private:
     AudioInIo                   m_AudioInIo;
     QAudioDeviceInfo            m_AudioInDeviceInfo;
 
-    AudioMixer                  m_AudioOutMixer;
-
-    bool                        m_IsPaused = false;
+    bool                        m_IsOutPaused = false;
     bool                        m_IsTestMode = true;
     int                         m_CacheAuidioLen = 0;
     QMutex                      m_AudioQueueMutex;
     int                         m_OutWriteCount = 0;
-    int16_t                     m_MyLastAudioOutSample = 0;
+    ESpeakerMode                m_SpeakerMode = eSpeakerModePaused;
 
+    int16_t                     m_MyLastAudioOutSample[ eMaxAppModule ];
+    bool                        m_MicrophoneEnable[ eMaxAppModule ];
+    bool                        m_SpeakerEnable[ eMaxAppModule ];
+
+    bool                        m_WantMicrophone = false;
+    bool                        m_WantSpeakerOutput = false;
 };

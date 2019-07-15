@@ -39,4 +39,6 @@ namespace AudioUtils
 //    template<> class PowerOfTwo<0>
 //    { public: static const int Result = 1; };
 
+    void                        mixPcmAudio( int16_t * pcmData,  int16_t * outData, int toMixBytes );
+
 }

@@ -23,8 +23,10 @@ win32:{
     DEFINES += TARGET_OS_WINDOWS
 }
 
-
 CONFIG += c++11
+
+INCLUDEPATH += $$PWD/QtSoundTest
+INCLUDEPATH += $$PWD/Forms
 
 SOURCES += \
         $$PWD/QtSoundTest/main.cpp \
@@ -35,11 +37,12 @@ SOURCES += \
         $$PWD/QtSoundTest/AudioOutIo.cpp \
         $$PWD/QtSoundTest/AudioUtils.cpp \
         $$PWD/QtSoundTest/AudioTestGenerator.cpp \
-        $$PWD/QtSoundTest/engine.cpp \
+        $$PWD/QtSoundTest/LogWidget.cpp \
         $$PWD/QtSoundTest/SoundTestLogic.cpp \
         $$PWD/QtSoundTest/SoundTestThread.cpp \
         $$PWD/QtSoundTest/VxDebug.cpp \
         $$PWD/QtSoundTest/VxFileUtil.cpp \
+        $$PWD/QtSoundTest/VxParse.cpp \
         $$PWD/QtSoundTest/VxTime.cpp \
         $$PWD/QtSoundTest/VxTimer.cpp \
         $$PWD/QtSoundTest/VxTimeUtil.cpp \
@@ -54,12 +57,14 @@ HEADERS += \
         $$PWD/QtSoundTest/AudioOutIo.h \
         $$PWD/QtSoundTest/AudioUtils.h \
         $$PWD/QtSoundTest/AudioTestGenerator.h \
-        $$PWD/QtSoundTest/engine.h \
+        $$PWD/QtSoundTest/IAudioInterface.h \
         $$PWD/QtSoundTest/IGoTvDefs.h \
+        $$PWD/QtSoundTest/LogWidget.h \
         $$PWD/QtSoundTest/SoundTestLogic.h \
         $$PWD/QtSoundTest/SoundTestThread.h \
         $$PWD/QtSoundTest/VxDebug.h \
         $$PWD/QtSoundTest/VxFileUtil.h \
+        $$PWD/QtSoundTest/VxParse.h \
         $$PWD/QtSoundTest/VxTime.h \
         $$PWD/QtSoundTest/VxTimer.h \
         $$PWD/QtSoundTest/VxTimeUtil.h \
@@ -67,7 +72,7 @@ HEADERS += \
         $$PWD/QtSoundTest/WaveForm.h
 
 FORMS += \
-        $$PWD/QtSoundTest/mainwindow.ui
+        $$PWD/Forms/mainwindow.ui
 
 android:{
     CONFIG += mobility

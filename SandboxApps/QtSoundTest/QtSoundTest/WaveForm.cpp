@@ -50,17 +50,20 @@
 
 #include "WaveForm.h"
 #include "AudioUtils.h"
+#include "VxDebug.h"
+
 #include <QPainter>
 #include <QResizeEvent>
 #include <QDebug>
 
 //#define PAINT_EVENT_TRACE
-//#ifdef PAINT_EVENT_TRACE
+#ifdef PAINT_EVENT_TRACE
 #   define WAVEFORM_PAINT_DEBUG qDebug()
 #   define WAVEFORM_DEBUG qDebug()
-//#else
-//#   define WAVEFORM_PAINT_DEBUG nullDebug()
-//#endif
+#else
+#   define WAVEFORM_PAINT_DEBUG nullDebug()
+#   define WAVEFORM_DEBUG nullDebug()
+#endif
 
 Waveform::Waveform(QWidget *parent)
     :   QWidget(parent)
@@ -75,6 +78,11 @@ Waveform::Waveform(QWidget *parent)
 {
     setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     setMinimumHeight(50);
+
+    connect( this, SIGNAL( signalAudioOutPlayed( const QByteArray& ) ), this, SLOT( slotAudioOutPlayed( const QByteArray& ) ) );
+    connect( this, SIGNAL( signalBufferLengthChanged( qint64 ) ), this, SLOT( slotBufferLengthChanged( qint64 ) ) );
+    connect( this, SIGNAL( signalDataLengthChanged( qint64 ) ), this, SLOT( slotDataLengthChanged( qint64 ) ) );
+    connect( this, SIGNAL( signalPlayPositionChanged( qint64 ) ), this, SLOT( slotPlayPositionChanged( qint64 ) ) );
 }
 
 Waveform::~Waveform()
@@ -131,7 +139,7 @@ void Waveform::paintEvent(QPaintEvent * /*event*/)
 
                     if (point.index < m_tiles.count()) {
                         pos = tilePosition(point.index + 1);
-                        WAVEFORM_PAINT_DEBUG << "Waveform::paintEvent" << "pos ->" << pos;
+                        //WAVEFORM_PAINT_DEBUG << "Waveform::paintEvent" << "pos ->" << pos;
                     } else {
                         // Reached end of tile array
                         WAVEFORM_PAINT_DEBUG << "Waveform::paintEvent" << "reached end of tile array";
@@ -159,13 +167,16 @@ void Waveform::resizeEvent(QResizeEvent *event)
         createPixmaps(event->size());
 }
 
-void Waveform::initialize(const QAudioFormat &format, qint64 audioBufferSize, qint64 windowDurationUs)
+void Waveform::initialize(const QAudioFormat &format, qint64 audioBufferSize, qint64 windowDurationUs, qint64 totalBufSize )
 {
     WAVEFORM_DEBUG << "Waveform::initialize"
                    << "audioBufferSize" << audioBufferSize
                    << "windowDurationUs" << windowDurationUs;
 
     reset();
+
+    m_buffer.fill( 0, totalBufSize );
+    m_bufferLength = m_buffer.size();
 
     m_format = format;
 
@@ -213,9 +224,10 @@ void Waveform::reset()
     m_tileArrayStart = 0;
     m_windowPosition = 0;
     m_windowLength = 0;
+    m_firstAudioData = true;
 }
 
-void Waveform::bufferChanged(qint64 position, qint64 length, const QByteArray &buffer)
+void Waveform::bufferChanged(qint64 position, qint64 length, const QByteArray &buffer )
 {
     WAVEFORM_DEBUG << "Waveform::bufferChanged"
                    << "audioPosition" << m_audioPosition
@@ -337,7 +349,7 @@ int Waveform::windowPixelOffset(qint64 positionOffset) const
 
 bool Waveform::paintTiles()
 {
-    WAVEFORM_DEBUG << "Waveform::paintTiles";
+    //WAVEFORM_DEBUG << "Waveform::paintTiles";
     bool updateRequired = false;
 
     for (int i=0; i<m_tiles.count(); ++i) {
@@ -446,3 +458,64 @@ void Waveform::resetTiles(qint64 newStartPos)
     m_tileArrayStart = newStartPos;
 }
 
+void  Waveform::speakerAudioPlayed( void * data, int dataLen )
+{
+    QByteArray audioOutData( (char *)data, dataLen );
+    emit signalAudioOutPlayed( audioOutData );
+}
+
+void  Waveform::slotAudioOutPlayed( const QByteArray& audioOutData )
+{
+    qint64 audioLen = audioOutData.size();
+    
+    //if( m_firstAudioData )
+    //{
+    //    m_firstAudioData = false;
+    //    bufferChanged( 0, audioLen, audioOutData );
+    //}
+
+    // replace the data in the audio buffer
+    m_buffer.replace( (int)m_audioPosition, audioLen, audioOutData );
+
+ //   int16_t * data = (int16_t *)( audioOutData.data() );
+ //   int sampleCnt = (int)( audioLen / 2 );
+//    LogMsg( LOG_DEBUG, "waveform first %d second %d last %d ", data[ 0 ], data[ 2 ], data[ sampleCnt - 1 ] );
+    /*
+    qint64 startPos = m_audioPosition;
+    qint64 endPos = startPos + audioLen;
+    if( endPos >= m_bufferLength )
+    {
+        startPos = 0;
+        endPos = audioLen;
+    }*/
+
+    m_audioPosition += audioLen;
+    if( m_audioPosition >= m_buffer.size() )
+    {
+        m_audioPosition = 0;
+    }
+
+
+    m_bufferPosition += audioLen;
+    if( m_bufferPosition >= m_buffer.size() )
+    {
+        m_bufferPosition = 0;
+    }
+
+    emit audioPositionChanged( m_audioPosition );
+}
+
+void  Waveform::slotBufferLengthChanged( qint64 duration )
+{
+
+}
+
+void  Waveform::slotDataLengthChanged( qint64 duration )
+{
+
+}
+
+void  Waveform::slotPlayPositionChanged( qint64 position )
+{
+
+}

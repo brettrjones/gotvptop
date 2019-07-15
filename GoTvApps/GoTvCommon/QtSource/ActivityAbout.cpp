@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.net
+// http://www.gotvptop.com
 //============================================================================
 
 #include "ActivityAbout.h"
@@ -68,5 +68,5 @@ void ActivityAbout::setupAboutMe( void )
 //============================================================================
 void  ActivityAbout::gotoWebsite( void )
 {
-	QDesktopServices::openUrl(QUrl("http://www.gotvptop.net/"));
+	QDesktopServices::openUrl(QUrl("http://www.gotvptop.com/"));
 }

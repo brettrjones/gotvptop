@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.net
+// http://www.gotvptop.com
 //============================================================================
 
 #include "config_gotvapps.h"
@@ -24,7 +24,7 @@ public:
 	{
 		m_strGreeting = "Lets Communicate!";
 		m_strAboutMe = "I'm Wonderful!";
-		m_strUrl3 = "http://www.gotvptop.net";
+		m_strUrl3 = "http://www.gotvptop.com";
 		m_strPicturePath = "";
 	}
 

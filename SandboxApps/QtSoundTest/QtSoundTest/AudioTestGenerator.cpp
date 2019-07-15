@@ -10,21 +10,14 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.net
+// http://www.gotvptop.com
 //============================================================================
 
 #include "AudioTestGenerator.h"
+#include "VxDebug.h"
 
 #include <qmath.h>
 #include <qendian.h>
-
-namespace // anonymous
-{
-    const int DurationSeconds = 0.800;
-    const int ToneSampleRateHz = 800;
-    const int DataSampleRateHz = 48000;
-    const int BufferSize = 15360 * 10;
-};
 
 //============================================================================
 AudioTestGenerator::AudioTestGenerator( const QAudioFormat &format,
@@ -59,7 +52,9 @@ void AudioTestGenerator::generateData( const QAudioFormat &format, qint64 durati
     const int channelBytes = format.sampleSize() / 8;
     const int sampleBytes = format.channelCount() * channelBytes;
 
-    qint64 length = ( format.sampleRate() * format.channelCount() * ( format.sampleSize() / 8 ) ) * durationUs / 100000;
+    qint64 length = ( ( format.sampleRate() * format.channelCount() * channelBytes ) * durationUs ) / 1000000;
+    LogMsg( LOG_DEBUG, "generate audio len %lld rate %d channels %d channel bytes %d ms %lld", length, format.sampleRate(), format.channelCount(), channelBytes, durationUs / 1000 );
+
 
     Q_ASSERT( length % sampleBytes == 0 );
     Q_UNUSED( sampleBytes ) // suppress warning in release builds
@@ -99,6 +94,17 @@ void AudioTestGenerator::generateData( const QAudioFormat &format, qint64 durati
                     qToLittleEndian<qint16>( value, ptr );
                 else
                     qToBigEndian<qint16>( value, ptr );
+
+                //LogMsg( LOG_DEBUG, "gen s16 idx %d val %d", sampleIndex, value );
+            }
+            else if( format.sampleSize() == 32 && format.sampleType() == QAudioFormat::Float )
+            {
+                float value = static_cast<float>( x );
+                if( format.byteOrder() == QAudioFormat::LittleEndian )
+                    qToLittleEndian<float>( value, ptr );
+                else
+                    qToBigEndian<float>( value, ptr );
+                //LogMsg( LOG_DEBUG, "gen float idx %d val %3.3f", sampleIndex, value );
             }
 
             ptr += channelBytes;
@@ -106,6 +112,26 @@ void AudioTestGenerator::generateData( const QAudioFormat &format, qint64 durati
         }
 
         ++sampleIndex;
+    }
+
+    if( format.sampleType() == QAudioFormat::Float )
+    {
+        float * audioData = reinterpret_cast<float *>( m_buffer.data() );
+        int sampleCnt = (int)( m_buffer.size() / sizeof( float ) );
+        if( audioData && sampleCnt > 2 )
+        {
+            LogMsg( LOG_DEBUG, "type float first %3.3f second %3.3f last %3.3f ", audioData[ 0 ], audioData[ 2 ], audioData[ sampleCnt - 1 ] );
+            sampleCnt = 0;
+        }
+    }
+    else if( ( format.sampleType() == QAudioFormat::SignedInt ) && ( format.sampleSize() == 16 ) )
+    {
+        qint16 * audioData = reinterpret_cast<qint16 *>( m_buffer.data() );
+        int sampleCnt = (int)( m_buffer.size() / sizeof( qint16 ) );
+        if( audioData && sampleCnt > 1 )
+        {
+            LogMsg( LOG_DEBUG, "type int16 first %d second %d last %d ", audioData[ 0 ], audioData[ 1 ], audioData[ sampleCnt - 1 ] );
+        }
     }
 }
 
@@ -127,6 +153,19 @@ qint64 AudioTestGenerator::readData( char *data, qint64 len )
     return total;
 }
 
+//============================================================================
+qint64 AudioTestGenerator::readDataNoPositionUpdate( char * data, qint64 len )
+{
+    qint64 total = 0;
+    if( !m_buffer.isEmpty() )
+    {
+        const qint64 chunk = qMin( ( qint64 )m_buffer.size(), len - total );
+        memcpy( data + total, m_buffer.constData(), chunk );
+        total = chunk;
+    }
+
+    return total;
+}
 
 //============================================================================
 qint64 AudioTestGenerator::readData( QByteArray& retData, qint64 len )
