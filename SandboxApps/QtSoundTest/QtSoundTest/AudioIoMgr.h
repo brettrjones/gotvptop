@@ -37,6 +37,7 @@ public:
     void                        initAudioIoSystem();
     void                        destroyAudioIoSystem();
 
+    bool                        isAudioInitialized()       { return m_AudioIoInitialized;  }
     IAudioCallbacks&            getAudioCallbacks()        { return m_AudioCallbacks; }
     QAudioFormat&               getAudioOutFormat()        { return m_AudioOutFormat; }
     QAudioFormat&               getAudioInFormat()         { return m_AudioInFormat; }
@@ -44,10 +45,6 @@ public:
 
     const char *                describeAudioState( QAudio::State state );
     const char *                describeAudioError( QAudio::Error err );
-
-
-//    void                        lockAudioOut() { m_AudioOutMixer.lockMixer(); }
-//    void                        unlockAudioOut() { m_AudioOutMixer.unlockMixer(); }
 
     void                        lockAudioIn() { m_AudioInMutex.lock(); }
     void                        unlockAudioIn() { m_AudioInMutex.unlock(); }
@@ -69,9 +66,6 @@ public:
     bool                        fromGuiIsEchoCancelEnabled()            { return m_EchoCancelEnabled; }
 
     //=== IAudioRequests ===//
-    // set push/pull/both or paused
-    virtual void				toGuiSetSpeakerMode( ESpeakerMode eSpeakerMode ) override;
-
     // enable disable microphone data callback
     virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) override;
     // enable disable sound out
@@ -80,6 +74,8 @@ public:
     virtual int				    toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) override;
     // add audio data to play.. assumes pcm mono 8000 Hz so convert to 2 channel 48000 hz pcm before calling writeData
     virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
+    // delay of audio calculated from amount of data in queue
+    virtual double				toGuiGetAudioDelayMs( EAppModule appModule );
     // delay of audio calculated from amount of data in queue
     virtual double				toGuiGetAudioDelaySeconds( EAppModule appModule ) override;
     // maximum queue cache size in seconds
@@ -94,12 +90,12 @@ public:
     int                         getDataReadyForSpeakersLen();
 
     int                         getCachedMaxLength() { return AUDIO_OUT_CACHE_USABLE_SIZE; }
+    void                        resetLastSample( EAppModule appModule ) { m_MyLastAudioOutSample[ appModule ] = 0; }
 
 signals:
     void                        signalNeedMoreAudioData( int requiredLen );
 
 public slots:
-    void                        slotNeedMoreAudioData( int  requiredLen );
     void                        speakerStateChanged( QAudio::State state );
     void                        microphoneStateChanged( QAudio::State state );
 
@@ -107,7 +103,7 @@ protected:
     void						stopAudioOut( );
     void                        stopAudioIn();
  
-    int                         getCachedDataLength( EAppModule appModule, bool requireLock = true );
+    int                         getCachedDataLength( EAppModule appModule );
 
     void                        aboutToDestroy();
 
@@ -145,7 +141,6 @@ private:
     int                         m_CacheAuidioLen = 0;
     QMutex                      m_AudioQueueMutex;
     int                         m_OutWriteCount = 0;
-    ESpeakerMode                m_SpeakerMode = eSpeakerModePaused;
 
     int16_t                     m_MyLastAudioOutSample[ eMaxAppModule ];
     bool                        m_MicrophoneEnable[ eMaxAppModule ];

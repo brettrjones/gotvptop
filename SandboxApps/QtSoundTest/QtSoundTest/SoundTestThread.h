@@ -29,7 +29,7 @@ protected:
     AudioTestGenerator *        m_AudioGenOut = nullptr;
 
 	bool						m_ShouldRun = true;
-    bool						m_PauseSound = true;
+    bool						m_PauseSound = false;
 };
 
 #endif // SOUND_TEST_THREAD_H

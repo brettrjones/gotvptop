@@ -15,6 +15,7 @@
 //============================================================================
 
 #include "AudioDefs.h"
+#include "AudioInThread.h"
 
 #include <QObject>
 #include <QIODevice>
@@ -33,12 +34,15 @@ class AudioInIo : public QIODevice
     Q_OBJECT
 public:
     explicit AudioInIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent = 0 );
-    ~AudioInIo() override = default;
+    ~AudioInIo() override;
 
     bool                        initAudioIn( QAudioFormat& audioFormat );
 
     void                        stopAudio();
     void                        startAudio();
+
+    void                        lockAudioIn()       { m_AudioBufMutex.lock(); }
+    void                        unlockAudioIn()     { m_AudioBufMutex.unlock(); }
 
     void                        suspend()           { if( m_AudioInputDevice ) m_AudioInputDevice->suspend(); }
     void                        resume()            { if( m_AudioInputDevice ) m_AudioInputDevice->resume(); }
@@ -48,10 +52,15 @@ public:
     void                        setVolume( float volume );
     void                        flush();
 
-    QAudio::State               getState()      { return ( m_AudioInputDevice ? m_AudioInputDevice->state() : QAudio::StoppedState); }
-    QAudio::Error               getError()      { return ( m_AudioInputDevice ? m_AudioInputDevice->error() : QAudio::NoError); }
+    QAudio::State               getState()          { return ( m_AudioInputDevice ? m_AudioInputDevice->state() : QAudio::StoppedState); }
+    QAudio::Error               getError()          { return ( m_AudioInputDevice ? m_AudioInputDevice->error() : QAudio::NoError); }
 
-    QAudioInput *              getAudioIn( )  { return m_AudioInputDevice; }
+    QAudioInput *               getAudioIn()        { return m_AudioInputDevice; }
+    QByteArray&					getAudioBuffer()    { return m_AudioBuffer; }
+    char *                      getMicSilence()     { return m_MicSilence; }
+
+    int                         getAtomicBufferSize() { return m_AtomicBufferSize; }
+    void                        updateAtomicBufferSize() { m_AtomicBufferSize = m_AudioBuffer.size(); }
 
 	/// space available to que audio data into buffer
 	int							audioQueFreeSpace();
@@ -59,24 +68,15 @@ public:
 	/// space used in audio que buffer
 	int							audioQueUsedSpace();
 
-	///  write to audio buffer.. return total written to  buffer
-	int 						enqueueAudioData( char* pcmData, int countBytes );
+    int                         calculateMicrophonDelayMs();
 
 signals:
     void						signalCheckForBufferUnderun();
-    void						signalStart();
-	void						signalStop();
-	void						signalSuspend();
-	void						signalResume();
 
 protected slots:
     void                        slotAudioNotified();
     void						slotCheckForBufferUnderun();
     void                        onAudioDeviceStateChanged( QAudio::State state );
-    void						slotStart();
-	void						slotStop();
-	void						slotSuspend();
-	void						slotResume();
 
 protected:
 	qint64                      bytesAvailable() const override;
@@ -87,8 +87,6 @@ protected:
 
 private:
     void                        reinit();
-    int                         calculateMicrophonDelayMs();
-
 
     AudioIoMgr&                 m_AudioIoMgr;
     QMutex&                     m_AudioBufMutex;
@@ -102,4 +100,6 @@ private:
     QByteArray					m_AudioBuffer;
     QAudio::State               m_AudioInState = QAudio::State::StoppedState;
     char                        m_MicSilence[ AUDIO_BUF_SIZE_8000_1_S16 ];
+    AudioInThread               m_AudioInThread;
+    QAtomicInt                  m_AtomicBufferSize;
 };

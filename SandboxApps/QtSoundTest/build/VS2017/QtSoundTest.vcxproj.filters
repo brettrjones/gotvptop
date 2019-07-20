@@ -119,6 +119,12 @@
     <ClCompile Include="..\..\QtSoundTest\LogWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\QtSoundTest\AudioOutThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSoundTest\AudioInThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\QtSoundTest\AudioInIo.h">
@@ -149,6 +155,12 @@
       <Filter>Source Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\QtSoundTest\LogWidget.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\QtSoundTest\AudioOutThread.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\QtSoundTest\AudioInThread.h">
       <Filter>Source Files</Filter>
     </QtMoc>
   </ItemGroup>

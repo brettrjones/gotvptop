@@ -28,14 +28,18 @@ AudioInIo::AudioInIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent )
 : QIODevice( parent )
 , m_AudioIoMgr( mgr )
 , m_AudioBufMutex( audioOutMutex )
+, m_AudioInThread( mgr, *this )
 {
     memset( m_MicSilence, 0, sizeof( m_MicSilence ) );
     connect( this, SIGNAL( signalInitialize() ), this, SLOT( slotInitialize() ) );
     connect( this, SIGNAL( signalCheckForBufferUnderun() ), this, SLOT( slotCheckForBufferUnderun() ) );
-    connect( this, SIGNAL( signalStart() ), this, SLOT( slotStart() ) );
-    connect( this, SIGNAL( signalStop() ), this, SLOT( slotStop() ) );
-    connect( this, SIGNAL( signalSuspend() ), this, SLOT( slotSuspend() ) );
-    connect( this, SIGNAL( signalResume() ), this, SLOT( slotResume() ) );
+}
+
+//============================================================================
+AudioInIo::~AudioInIo()
+{
+    m_AudioInThread.setThreadShouldRun( false );
+    m_AudioInThread.stopAudioInThread();
 }
 
 //============================================================================
@@ -45,6 +49,8 @@ bool AudioInIo::initAudioIn( QAudioFormat& audioFormat )
     {
         m_AudioFormat = audioFormat;
         m_initialized = setAudioDevice( QAudioDeviceInfo::defaultInputDevice() );
+        m_AudioInThread.setThreadShouldRun( true );
+        m_AudioInThread.startAudioInThread();
     }
 
     return m_initialized;
@@ -80,37 +86,12 @@ void AudioInIo::reinit()
 //============================================================================
 void AudioInIo::startAudio()
 {
+    m_AudioInThread.setThreadShouldRun( true );
+    m_AudioInThread.startAudioInThread();
 
     this->open( QIODevice::WriteOnly );
-    //m_AudioInputDevice->setBufferSize( AUDIO_BUF_SIZE_48000_2 );
-    //m_AudioInputDevice->setNotifyInterval( AUDIO_BUF_MS );
     m_AudioInputDevice->start( this );
     //LogMsg( LOG_DEBUG, "AudioInIo default buffer size %d periodic size %d", m_AudioInputDevice->bufferSize(), m_AudioInputDevice->periodSize() );
-}
-
-
-//============================================================================
-void AudioInIo::slotStart()
-{
-	startAudio();
-}
-
-//============================================================================
-void AudioInIo::slotStop()
-{
-	stopAudio();
-}
-
-//============================================================================
-void AudioInIo::slotSuspend()
-{
-    stopAudio();
-}
-
-//============================================================================
-void AudioInIo::slotResume()
-{
-	startAudio();
 }
 
 //============================================================================
@@ -136,6 +117,9 @@ void AudioInIo::flush()
 //============================================================================
 void AudioInIo::stopAudio()
 {
+    m_AudioInThread.setThreadShouldRun( false );
+    m_AudioInThread.stopAudioInThread();
+
     if( m_AudioInputDevice && m_AudioInputDevice->state() != QAudio::StoppedState )
     {
         // Stop audio output
@@ -144,17 +128,17 @@ void AudioInIo::stopAudio()
     }
 }
 
-//============================================================================
-static void apply_s16le_volume( float volume, uchar *data, int datalen )
-{
-    int samples = datalen / 2;
-    float mult = pow( 10.0, 0.05*volume );
+////============================================================================
+//static void apply_s16le_volume( float volume, uchar *data, int datalen )
+//{
+//    int samples = datalen / 2;
+//    float mult = pow( 10.0, 0.05 * volume );
 
-    for( int i = 0; i < samples; i++ ) {
-        qint16 val = qFromLittleEndian<qint16>( data + i * 2 )*mult;
-        qToLittleEndian<qint16>( val, data + i * 2 );
-    }
-}
+//    for( int i = 0; i < samples; i++ ) {
+//        qint16 val = qFromLittleEndian<qint16>( data + i * 2 )*mult;
+//        qToLittleEndian<qint16>( val, data + i * 2 );
+//    }
+//}
 
 //============================================================================
 qint64 AudioInIo::readData( char *data, qint64 maxlen )
@@ -166,27 +150,13 @@ qint64 AudioInIo::readData( char *data, qint64 maxlen )
 }
 
 //============================================================================
-// not used
 qint64 AudioInIo::writeData( const char * data, qint64 len )
 {
+    m_AudioBufMutex.lock();
     m_AudioBuffer.append( data, len );
-    if( m_AudioBuffer.size() >= AUDIO_BUF_SIZE_8000_1_S16 )
-    {
-        IAudioCallbacks& audioCallbacks =  m_AudioIoMgr.getAudioCallbacks();
-        while( m_AudioBuffer.size() >= AUDIO_BUF_SIZE_8000_1_S16 )
-        {
-            if( m_AudioIoMgr.fromGuiIsMicrophoneMuted() )
-            {
-                audioCallbacks.fromGuiMicrophoneDataWithInfo( (int16_t*)m_MicSilence, AUDIO_BUF_SIZE_8000_1_S16, true, calculateMicrophonDelayMs(), 0 );
-            }
-            else
-            {
-                audioCallbacks.fromGuiMicrophoneDataWithInfo( (int16_t*)m_AudioBuffer.data(), AUDIO_BUF_SIZE_8000_1_S16, false, calculateMicrophonDelayMs(), 0  );
-            }
-
-            m_AudioBuffer.remove( 0, AUDIO_BUF_SIZE_8000_1_S16 ); //pop front what is written
-        }
-    }
+    updateAtomicBufferSize();
+    m_AudioBufMutex.unlock();
+    m_AudioInThread.releaseAudioInThread();
 
     return len;
 }
@@ -195,14 +165,14 @@ qint64 AudioInIo::writeData( const char * data, qint64 len )
 /// best guess at delay time
 int AudioInIo::calculateMicrophonDelayMs()
 {
-    return (int)( m_AudioBuffer.size() / 16 ) + 20;
+    return (int)( ( getAtomicBufferSize() * BYTES_TO_MS_MULTIPLIER_MICROPHONE ) + m_AudioIoMgr.toGuiGetAudioDelayMs( eAppModulePtoP ) );
 }
 
 //============================================================================
 /// space available to que audio data into buffer
 int AudioInIo::audioQueFreeSpace()
 {
-	int freeSpace = AUDIO_OUT_CACHE_USABLE_SIZE - m_AudioBuffer.size();
+	int freeSpace = AUDIO_OUT_CACHE_USABLE_SIZE - m_AtomicBufferSize;
 	if( freeSpace < 0 )
 	{
 		freeSpace = 0;
@@ -218,30 +188,6 @@ int AudioInIo::audioQueUsedSpace()
 	emit signalCheckForBufferUnderun();
 
 	return m_AudioBuffer.size();
-}
-
-//============================================================================
-// write to audio buffer.. return total written to buffer
-int AudioInIo::enqueueAudioData( char* pcmData, int countBytes )
-{
-	m_AudioBufMutex.lock();
-	int toWriteByteCnt = std::min( audioQueFreeSpace(), countBytes );
-	if( countBytes != toWriteByteCnt )
-	{
-		// if not enough space then do not write anything or kodi gets confused
-		toWriteByteCnt = 0;
-	}
-
-	if( toWriteByteCnt )
-	{
-		m_AudioBuffer.append( pcmData, toWriteByteCnt );
-	}
-
-	m_AudioBufMutex.unlock();
-
-	emit signalCheckForBufferUnderun();
-
-	return toWriteByteCnt;
 }
 
 //============================================================================
@@ -264,36 +210,16 @@ void AudioInIo::onAudioDeviceStateChanged( QAudio::State state )
 {
     if( m_AudioInState != state )
     {
-        LogMsg( LOG_DEBUG, "Audio Out state change from %s to %s ", m_AudioIoMgr.describeAudioState( m_AudioInState ), m_AudioIoMgr.describeAudioState( state ) );
+        LogMsg( LOG_DEBUG, "Audio In state change from %s to %s ", m_AudioIoMgr.describeAudioState( m_AudioInState ), m_AudioIoMgr.describeAudioState( state ) );
         m_AudioInState = state;
     }
-
-    if( m_AudioInputDevice )
-	{
-		// Start buffering again in case of underrun...
-		// Required on Windows, otherwise it stalls idle
-        if( state == QAudio::IdleState && m_AudioInputDevice->error() == QAudio::UnderrunError )
-		{
-			// This check is required, because Mac OS X underruns often
-            m_AudioInputDevice->suspend();
-#ifdef DEBUG_QT_AUDIO
-			qWarning() << "audio suspending due to underrun ";
-#endif // DEBUG_QT_AUDIO
-			return;
-		}      
-#ifdef DEBUG_QT_AUDIO
-		qWarning() << "audio stateChanged state = " << state;
-#endif // DEBUG_QT_AUDIO
-	}
 }
 
 //============================================================================
 // resume qt audio if needed
 void AudioInIo::slotCheckForBufferUnderun()
 {
-	m_AudioBufMutex.lock();
-	int bufferedAudioData = m_AudioBuffer.size();
-	m_AudioBufMutex.unlock();
+	int bufferedAudioData = m_AtomicBufferSize;
 
     if( bufferedAudioData && m_AudioInputDevice )
 	{
@@ -338,15 +264,13 @@ void AudioInIo::slotCheckForBufferUnderun()
 		case QAudio::StoppedState: 
 			if( bufferedAudioData )
 			{
-                LogMsg( LOG_DEBUG, "rmicrophone estarting due to stopped and have data" );
+                LogMsg( LOG_DEBUG, "microphone starting due to stopped and have data" );
  //               m_AudioInputDevice->start( this );
 			}
 			break;
-#ifdef TARGET_OS_WINDOWS // seems to be a windows only thing
 		case QAudio::InterruptedState:
             LogMsg( LOG_DEBUG, "Interrupted state.. how to handle?" );
 			break;
-#endif // // TARGET_OS_WINDOWS
 		};
 	}
 }

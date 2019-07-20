@@ -56,6 +56,7 @@ public:
 
 signals:
     void                        signalCheckSpeakerOutState();
+    void                        signalAvailableSpeakerBytesChanged( int availBytes );
 
 private:
     // update indexes that applications write data into buffer at ( subtract data count read by speakers out )
@@ -64,11 +65,13 @@ private:
     // update indexes that applications write data into buffer at ( add data count written to mixer )
     void                        updateWriteBufferIndex( EAppModule appModule, int byteCnt );
 
+    // for test verification only
+    void                        verifySpeakerSamples();
+
     AudioIoMgr&                 m_AudioIoMgr;
     IAudioCallbacks&            m_AudioCallbacks;
     QByteArray					m_AudioBuffer;
     QMutex                      m_MixerMutex;
-    QMutex                      m_QueMutex;
 
     QAtomicInt                  m_BufIndex[ eMaxAppModule ];
     bool                        m_SpeakersMuted = false;

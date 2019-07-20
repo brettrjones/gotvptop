@@ -34,7 +34,9 @@ SOURCES += \
         $$PWD/QtSoundTest/AudioIoMgr.cpp \
         $$PWD/QtSoundTest/AudioMixer.cpp \
         $$PWD/QtSoundTest/AudioInIo.cpp \
+        $$PWD/QtSoundTest/AudioInThread.cpp \
         $$PWD/QtSoundTest/AudioOutIo.cpp \
+        $$PWD/QtSoundTest/AudioOutThread.cpp \
         $$PWD/QtSoundTest/AudioUtils.cpp \
         $$PWD/QtSoundTest/AudioTestGenerator.cpp \
         $$PWD/QtSoundTest/LogWidget.cpp \
@@ -54,7 +56,9 @@ HEADERS += \
         $$PWD/QtSoundTest/AudioIoMgr.h \
         $$PWD/QtSoundTest/AudioMixer.h \
         $$PWD/QtSoundTest/AudioInIo.h \
+        $$PWD/QtSoundTest/AudioInThread.h \
         $$PWD/QtSoundTest/AudioOutIo.h \
+        $$PWD/QtSoundTest/AudioOutThread.h \
         $$PWD/QtSoundTest/AudioUtils.h \
         $$PWD/QtSoundTest/AudioTestGenerator.h \
         $$PWD/QtSoundTest/IAudioInterface.h \

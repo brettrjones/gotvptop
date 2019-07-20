@@ -19,16 +19,6 @@
 
 #include <QAudioFormat>
 
-enum ESpeakerMode
-{
-    eSpeakerModePaused,
-    eSpeakerModePull,
-    eSpeakerModePush,
-    eSpeakerModePushPull,
-
-    eMaxSpeakerMode
-};
-
 
 class IAudioCallbacks
 {
@@ -62,9 +52,6 @@ public:
 class IAudioRequests
 {
 public:
-    // set push/pull/both or paused
-    virtual void				toGuiSetSpeakerMode( ESpeakerMode eSpeakerMode ) = 0;
-
     // enable disable fromGuiMicrophoneData callback
     virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) = 0;
     // enable disable speaker sound out

@@ -16,36 +16,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QPushButton" name="m_AudioOutNoneButton">
-        <property name="text">
-         <string>No Audio Out</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="m_PushAudioOutButton">
-        <property name="text">
-         <string>Push Audio Out</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="m_PullAudioOutButton">
-        <property name="text">
-         <string>Pull Audio Out</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="m_PushAndPullButton">
-        <property name="text">
-         <string>Push And Pull Audio Out</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <layout class="QHBoxLayout" name="horizontalLayout"/>
     </item>
     <item>
      <widget class="QCheckBox" name="m_PauseVoipCheckBox">

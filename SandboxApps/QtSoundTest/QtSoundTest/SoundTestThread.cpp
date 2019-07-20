@@ -17,7 +17,7 @@ SoundTestThread::SoundTestThread( SoundTestLogic& renderLogic )
 void SoundTestThread::startSoundTestThread()
 {
     //connect( this, &QThread::finished, &m_RenderLogic, &QObject::deleteLater );
- 
+    m_ShouldRun = true;
     start();
 }
 
@@ -25,7 +25,8 @@ void SoundTestThread::startSoundTestThread()
 void SoundTestThread::stopSoundTestThread()
 {
     //connect( this, &QThread::finished, &m_RenderLogic, &QObject::deleteLater );
-
+    m_ShouldRun = false;
+    wait();
     terminate();
 }
 
@@ -53,7 +54,7 @@ void SoundTestThread::run()
             //int sampleCnt = (int)( AUDIO_BUF_SIZE_48000_2_FLOAT / 4 );
             //LogMsg( LOG_DEBUG, "kodi first %3.3f second %3.3f last %3.3f ", audioAsFloat[ 0 ], audioAsFloat[ 2 ], audioAsFloat[ sampleCnt - 1 ] );
 
-            m_AudioIoMgr.toGuiPlayAudio( eAppModuleKodi, (float *)audioBuf, audioBufLen );
+            m_AudioIoMgr.toGuiPlayAudio( eAppModuleKodi, audioAsFloat, audioBufLen );
         }
         else
         {

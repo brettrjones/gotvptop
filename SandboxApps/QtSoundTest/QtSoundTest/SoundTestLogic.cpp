@@ -13,7 +13,7 @@ SoundTestLogic::SoundTestLogic( Waveform * waveForm, QWidget *parent )
 , m_AudioIoMgr( *this, this )
 {
     int displayBufCnt = 17; // 16 * 80ms = 1.280 seconds
-    m_WaveForm->initialize( m_AudioIoMgr.getAudioOutFormat(), AUDIO_BUF_SIZE_48000_2_S16, AUDIO_MS_SPEAKERS * displayBufCnt * 1000, AUDIO_BUF_SIZE_48000_2_S16 * displayBufCnt );
+    m_WaveForm->initialize( m_AudioIoMgr.getAudioOutFormat(), AUDIO_BUF_SIZE_48000_2_S16, AUDIO_MS_SPEAKERS * (displayBufCnt / 2) * 1000, AUDIO_BUF_SIZE_48000_2_S16 * ( displayBufCnt / 2 ) );
 
     //...do pre-caching etc of the sounds here
     m_AudioGenIn = new AudioTestGenerator( m_AudioIoMgr.getAudioInFormat(), AUDIO_MS_MICROPHONE * 1000, 400, this );
@@ -28,7 +28,6 @@ SoundTestLogic::SoundTestLogic( Waveform * waveForm, QWidget *parent )
 
     m_AudioGenOut = new AudioTestGenerator( kodiSpeakerFormat, AUDIO_MS_KODI * 1000, 100, this );
  
-    m_AudioIoMgr.toGuiSetSpeakerMode( eSpeakerModePush );
     m_AudioIoMgr.initAudioIoSystem();
 
     m_SoundTestThread = new SoundTestThread( *this );
@@ -203,39 +202,17 @@ bool SoundTestLogic::endSoundTest()
 }
 
 //============================================================================
-void SoundTestLogic::audioOutNoneClicked()
-{
-
-}
-
-//============================================================================
-void SoundTestLogic::audioOutPushButtonClicked()
-{
-
-}
-
-//============================================================================
-void SoundTestLogic::audioOutPullButtonClicked()
-{
-
-}
-
-//============================================================================
-void SoundTestLogic::audioOutPushPullButtonClicked()
-{
-
-}
-
-//============================================================================
 void SoundTestLogic::pauseVoipState( int state )
 {
     m_PauseVoip = state ? true : false;
+    m_AudioIoMgr.toGuiWantSpeakerOutput( eAppModulePtoP, !m_PauseVoip );
 }
 
 //============================================================================
 void SoundTestLogic::pauseKodiState( int state )
 {
     bool isChecked = state ? true : false;
+    m_AudioIoMgr.toGuiWantSpeakerOutput( eAppModuleKodi, !isChecked );
     m_SoundTestThread->pauseSound( isChecked );
 }
 

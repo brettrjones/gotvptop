@@ -84,10 +84,6 @@ signals:
     void                        signalFrameRendered();
 
 public slots:
-    void                        audioOutNoneClicked();
-    void                        audioOutPushButtonClicked();
-    void                        audioOutPullButtonClicked();
-    void                        audioOutPushPullButtonClicked();
 
     void                        pauseVoipState( int );
     void                        pauseKodiState( int );

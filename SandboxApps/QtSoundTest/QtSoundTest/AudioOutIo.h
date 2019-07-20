@@ -14,7 +14,6 @@
 // http://www.gotvptop.com
 //============================================================================
 
-//#include "config_gotvapps.h"
 
 #include <QObject>
 #include <QIODevice>
@@ -28,6 +27,7 @@
 
 //#include <CoreLib/VxMutex.h>
 #include "VxTimer.h"
+#include "AudioOutThread.h"
 
 class AudioIoMgr;
 class QTimer;
@@ -37,7 +37,7 @@ class AudioOutIo : public QIODevice
     Q_OBJECT
 public:
     explicit AudioOutIo( AudioIoMgr& mgr, QMutex& audioOutMutex, QObject *parent = 0 );
-     ~AudioOutIo() override = default;
+     ~AudioOutIo() override;
 
     bool                        initAudioOut( QAudioFormat& audioFormat );
 
@@ -59,26 +59,20 @@ public:
 
 signals:
     void						signalCheckForBufferUnderun();
-    void						signalStart();
-	void						signalStop();
-	void						signalSuspend();
-	void						signalResume();
 
 protected slots:
     void                        slotAudioNotify();
     void						slotCheckForBufferUnderun();
     void                        onAudioDeviceStateChanged( QAudio::State state );
-    void						slotStart();
-	void						slotStop();
-	void						slotSuspend();
-	void						slotResume();
+    void                        slotAvailableSpeakerBytesChanged( int availBytes );
 
 protected:
 
 	qint64                      readData( char *data, qint64 maxlen ) override;
     qint64                      writeData( const char *data, qint64 len )  override;
+    qint64                      size() const override;
     qint64                      bytesAvailable() const override;
-    bool						isSequential() const  override { return true; }
+    bool						isSequential() const  override { return false; } // if true then could not reposition data position
 
 private:
     void                        reinit();
@@ -94,7 +88,8 @@ private:
     qint64                      m_ProccessedMs = 0;
     float                       m_volume = 1.0f;
     QTimer *                    m_PeriodicTimer;
-    VxTimer                     m_NotifyTimer;
     QElapsedTimer               m_ElapsedTimer;
     QAudio::State               m_AudioOutState = QAudio::State::StoppedState;
+    AudioOutThread              m_AudioOutThread;
+    int                         m_AudioOutBufferSize = 0;
 };
