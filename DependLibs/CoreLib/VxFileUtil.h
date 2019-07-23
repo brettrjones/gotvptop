@@ -188,19 +188,19 @@ public:
 	//! NOTE assumes buffer has enough room for the whole file
 	static RCODE				readWholeFile(	const char *	pFileName,					// file to read
 												void *			pvBuf,						// buffer to read into
-												uint32_t				u32LenToRead,				// length to read ( assumes is same as file length
-												uint32_t	*			pu32RetAmountRead = NULL );	// return length actually read if not null
+												uint32_t		u32LenToRead,				// length to read ( assumes is same as file length
+												uint32_t *		pu32RetAmountRead = NULL );	// return length actually read if not null
 	//! allocate memory and read whole file into memory
 	//! NOTE: USER MUST DELETE THE RETURED POINTER OR MEMORY LEAK WILL OCCURE
 	static RCODE				readWholeFile(	const char *	pFileName,			// file to read	
 												void **			ppvRetBuf,			// return allocated buffer it was read into
-												uint32_t *			pu32RetLenOfFile );	// return length of file
+												uint32_t *		pu32RetLenOfFile );	// return length of file
 	//! allocate memory and read whole file into memory and decrypt
 	//! NOTE: USER MUST DELETE THE RETURED POINTER OR MEMORY LEAK WILL OCCURE
 	static RCODE				readWholeFile(	VxKey *			poKey,				// key to decrypt with
 												const char *	pFileName,			// file to read	
 												void **			ppvRetBuf,			// return allocated buffer it was read into
-												uint32_t *			pu32RetLenOfFile );	// return length of file
+												uint32_t *		pu32RetLenOfFile );	// return length of file
 
 	//! write all of data to a file
 	static RCODE				writeWholeFile(	const char *	pFileName,			// file to write to
@@ -210,14 +210,14 @@ public:
 	static RCODE				writeWholeFile(	VxKey *			poKey,				// key to encrypt with
 												const char *	pFileName,			// file to write to
 												void *			pvBuf,				// data to write
-												uint32_t				u32LenOfData );		// data length
+												uint32_t		u32LenOfData );		// data length
 
 	static RCODE				listFilesInDirectory(	const char *				pSrcDir,
 														std::vector<std::string>&	fileList );
 
 	static RCODE				listFilesAndFolders(	const char *				pSrcDir,
 														std::vector<VxFileInfo>&	fileList,
-														uint8_t							fileFilterMask = VXFILE_TYPE_ANY | VXFILE_TYPE_DIRECTORY );
+														uint8_t						fileFilterMask = VXFILE_TYPE_ANY | VXFILE_TYPE_DIRECTORY );
 
 	static uint8_t				fileExtensionToFileTypeFlag( const char * fileName );
 	static bool					incrementFileName( std::string& strFileName );

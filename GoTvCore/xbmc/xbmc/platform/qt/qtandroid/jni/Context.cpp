@@ -50,7 +50,7 @@
 #include "Intent.h"
 #include "KeyEvent.h"
 #include "Settings.h"
-#include "Environment.h"
+#include "JNIEnvironment.h"
 #include "Document.h"
 #include "RecognizerIntent.h"
 #include "AudioDeviceInfo.h"

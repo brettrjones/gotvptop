@@ -22,7 +22,7 @@
 #include <CoreLib/VxGlobals.h>
 
 //============================================================================
-void AppCommon::toGuiWantMicrophoneRecording( bool wantMicInput )
+void AppCommon::toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput )
 {
 	LogMsg( LOG_INFO, "#### AppCommon::toGuiWantMicrophoneRecording %d\n", wantMicInput );
 	if( VxIsAppShuttingDown() )
@@ -57,7 +57,7 @@ void AppCommon::slotEnableMicrophoneRecording( bool enableMicInput )
 
 //============================================================================
 //! called when microphone recoding not needed
-void AppCommon::toGuiWantSpeakerOutput( bool wantSpeakerOutput )
+void AppCommon::toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput )
 {
 	LogMsg( LOG_INFO, "#### AppCommon::toGuiWantSpeakerOutput %d\n", wantSpeakerOutput );
 	if( VxIsAppShuttingDown() )
@@ -91,50 +91,50 @@ void AppCommon::slotEnableSpeakerOutput( bool enableSpeakerOutput )
 
 //============================================================================
 //! playback audio
-void AppCommon::toGuiPlayAudio( int16_t * pu16PcmData, int pcmDataLenInBytes )
+int AppCommon::toGuiPlayAudio( EAppModule appModule, float * pu16PcmData, int pcmDataLenInBytes )
 {
 	if( VxIsAppShuttingDown() )
 	{
-		return;
+		return 0;
 	}
 
 	//LogMsg( LOG_INFO, "slotPlayAudio %d len %d from %s\n", ePluginType, u16PcmDataLen, netIdent->getOnlineName());
-	m_MySndMgr.recievedAudioData( (char *)pu16PcmData, pcmDataLenInBytes );
+	return m_MySndMgr.toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes );
 }
 
 //============================================================================
 //! playback audio
-int AppCommon::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes )
+int AppCommon::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence )
 {
     if( VxIsAppShuttingDown() )
     {
         return 0;
     }
 
-    return m_AudioOut.toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes );
+    return m_MySndMgr.toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes, isSilence );
 }
 
 //============================================================================
 //! playback audio
-double AppCommon::toGuiGetAudioDelaySeconds( )
+double AppCommon::toGuiGetAudioDelaySeconds( EAppModule appModule )
 {
     if( VxIsAppShuttingDown() )
     {
         return 0;
     }
 
-    return m_AudioOut.getAudioDelaySeconds( );
+    return m_MySndMgr.toGuiGetAudioDelaySeconds( appModule );
 }
 
 //============================================================================
-double AppCommon::toGuiGetAudioCacheTotalSeconds()
+double AppCommon::toGuiGetAudioCacheTotalSeconds( EAppModule appModule )
 {
     if( VxIsAppShuttingDown() )
     {
         return 0;
     }
 
-    return m_AudioOut.toGuiGetAudioCacheTotalSeconds();
+    return m_MySndMgr.toGuiGetAudioCacheTotalSeconds( appModule );
 }
 
 //============================================================================
@@ -145,6 +145,61 @@ int AppCommon::toGuiGetAudioCacheFreeSpace( EAppModule appModule )
         return 0;
     }
 
-    return m_AudioOut.toGuiGetAudioCacheFreeSpace( appModule );
+    return m_MySndMgr.toGuiGetAudioCacheFreeSpace( appModule );
 }
 
+//============================================================================
+/// Microphone sound capture with info for echo cancel ( 8000hz PCM 16 bit data, 80ms of sound )
+void AppCommon::fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift )
+{
+    getEngine().fromGuiMicrophoneDataWithInfo( pcmData, pcmDataLenBytes, isSilence, totalDelayTimeMs, clockDrift );
+}
+
+//============================================================================
+/// Mute/Unmute microphone
+void AppCommon::fromGuiMuteMicrophone( bool muteMic )
+{
+    getEngine().fromGuiMuteMicrophone( muteMic );
+}
+
+//============================================================================
+/// Returns true if microphone is muted
+bool AppCommon::fromGuiIsMicrophoneMuted( void )
+{
+    return getEngine().fromGuiIsMicrophoneMuted();
+}
+
+//============================================================================
+/// Mute/Unmute speaker
+void AppCommon::fromGuiMuteSpeaker( bool muteSpeaker )
+{
+    getEngine().fromGuiMuteSpeaker( muteSpeaker );
+}
+
+//============================================================================
+/// Returns true if speaker is muted
+bool AppCommon::fromGuiIsSpeakerMuted( void )
+{
+    return getEngine().fromGuiIsSpeakerMuted();
+}
+
+//============================================================================
+/// Enable/Disable echo cancellation
+void AppCommon::fromGuiEchoCancelEnable( bool enableEchoCancel )
+{
+    getEngine().fromGuiEchoCancelEnable( enableEchoCancel );
+}
+
+//============================================================================
+/// Returns true if echo cancellation is enabled
+bool AppCommon::fromGuiIsEchoCancelEnabled( void )
+{
+    return getEngine().fromGuiIsEchoCancelEnabled();
+}
+
+//============================================================================
+/// Called when need more sound for speaker output
+void AppCommon::fromGuiAudioOutSpaceAvail( int freeSpaceLen )
+{
+    getEngine().fromGuiAudioOutSpaceAvail( freeSpaceLen );
+}

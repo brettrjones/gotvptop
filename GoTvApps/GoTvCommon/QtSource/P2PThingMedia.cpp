@@ -56,7 +56,7 @@ void AppCommon::slotEnableVideoCapture( bool enableVidCapture )
 #endif // TARGET_OS_WINDOWS
 			}
 
-			int	iDevices = m_VidCap->startupVidCap();
+			uint32_t iDevices = m_VidCap->startupVidCap();
 			if( 0 == iDevices )
 			{
 				QMessageBox::warning(this, tr("Web Cam Video"), tr("No Video Capture Devices Found" ) );

@@ -130,13 +130,14 @@ namespace
 }
 
 //============================================================================
-AppCommon& CreateAppInstance( IGoTv& gotv, QApplication* myApp, AppSettings& appSettings )
+AppCommon& CreateAppInstance( IGoTv& gotv, QApplication* myApp )
 {
-static AppSettings playerSettings;
+static AppSettings appSettings;
 static VxDataHelper myDataHelper;
     if( !g_AppCommon )
     {
-        g_AppCommon = new AppCommon( *myApp, eAppModeDefault, playerSettings, myDataHelper, gotv );
+        // constructor of AppCommon will set g_AppCommon
+        new AppCommon( *myApp, eAppModeDefault, appSettings, myDataHelper, gotv );
     }
 
     return *g_AppCommon;
@@ -171,9 +172,9 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_AppTitle( GetAppTitle( appDefaultMode ) )
 , m_AppShortName( GetAppShortName( appDefaultMode ) )
 
-, m_MyIcons( * new MyIcons( *this ) )
-, m_AppTheme( * new VxAppTheme( *this ) )
-, m_AppStyle(* new VxAppStyle(  *this, m_AppTheme ) )
+, m_MyIcons( *this )
+, m_AppTheme( *this )
+, m_AppStyle( *this, m_AppTheme )
 , m_AppDisplay( *this )
 , m_TilePositioner( * new VxTilePositioner( *this ) )
 
@@ -203,12 +204,10 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_AppCommonInitialized( false )
 , m_LoginBegin( false )
 , m_LoginComplete( false )
-//, m_KodiThread( nullptr )
-, m_AudioOut( *this )
 {
-	connect( m_OncePerSecondTimer, SIGNAL( timeout() ), &m_OffersMgr, SLOT( slotOncePerSecond() ) );
     g_AppCommon = this; // crap.. need a global instance that can accessed immediately with GetAppInstance() for objects created in ui files
-    getQApplication().setStyle( &m_AppStyle );
+
+    connect( m_OncePerSecondTimer, SIGNAL( timeout() ), &m_OffersMgr, SLOT( slotOncePerSecond() ) );
 }
 
 //============================================================================
@@ -249,10 +248,12 @@ void AppCommon::loadWithoutThread( void )
 
     // load icons from resources
     m_MyIcons.myIconsStartup();
-    // load sounds to play and sound hardware
-    m_MySndMgr.sndMgrStartup();
 
     m_AppTheme.selectTheme( getAppSettings().getLastSelectedTheme() );
+    getQApplication().setStyle( &m_AppStyle );
+
+    // load sounds to play and sound hardware
+    m_MySndMgr.sndMgrStartup();
 
     m_HomePage.initializeHomePage();
     connect( &m_HomePage, SIGNAL( signalMainWindowResized( int ) ), this, SLOT( slotMainWindowResized( int ) ) );
@@ -355,28 +356,33 @@ void AppCommon::startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame 
 	VxFileUtil::makeDirectory( strAssetDir );
 
 	m_Engine.fromGuiAppStartup( strAssetDir.c_str(), m_AppSettings.m_strRootUserDataDir.c_str() );
+
+    m_MySndMgr.initAudioIoSystem();
+
 	//restoreWindowPosition();
+}
+
+//============================================================================
+void AppCommon::shutdownAppCommon( void )
+{
+    static bool hasBeenShutdown = false;
+    if( false == hasBeenShutdown )
+    {
+        hasBeenShutdown = true;
+        VxSetAppIsShuttingDown( true );
+        m_IdleTimer->stop();
+        fromGuiCloseEvent( eAppModuleAll );
+        VxSleep( 2000 );
+        m_MySndMgr.sndMgrShutdown();
+        QApplication::closeAllWindows();
+        m_Engine.fromGuiAppShutdown();
+    }
 }
 
 //============================================================================
 void AppCommon::startLogin()
 {
     doLogin();
-}
-
-//============================================================================
-void AppCommon::shutdownAppCommon( void )
-{
-static bool hasBeenShutdown = false;
-	if( false == hasBeenShutdown )
-	{
-		hasBeenShutdown = true;
-		VxSetAppIsShuttingDown( true );
-		m_IdleTimer->stop();
-		m_MySndMgr.sndMgrShutdown();
-		QApplication::closeAllWindows();
-		m_Engine.fromGuiAppShutdown();
-	}
 }
 
 //============================================================================
@@ -1124,6 +1130,11 @@ bool AppCommon::userCanceled( void )
 //! idle timer 20 frames per second
 void AppCommon::onIdleTimer()
 {
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
 	m_Engine.fromGuiAppIdle();
 }
 

@@ -209,6 +209,11 @@ bool P2PEngine::txPluginPkt( 	EPluginType			ePluginType,
 //============================================================================
 void P2PEngine::onOncePerSecond( void )
 {
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
 	m_NetworkMonitor.onOncePerSecond();
 	m_NetworkMgr.onOncePerSecond();
 	m_PluginMgr.onOncePerSecond();

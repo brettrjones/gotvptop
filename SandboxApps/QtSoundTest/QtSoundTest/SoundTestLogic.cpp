@@ -90,14 +90,6 @@ void SoundTestLogic::microphoneAudioRecieved( QAudioFormat& /*format*/, void * /
 }
 
 //============================================================================
-/// Microphone sound capture ( 8000hz PCM 16 bit data, 80ms of sound )
-void SoundTestLogic::fromGuiMicrophoneData( int16_t* pcmData, uint16_t pcmDataLenBytes, bool isSilence )
-{
-    // normally this would go to video chat etc.. but here we just send it to audio out
-    m_AudioIoMgr.toGuiPlayAudio( eAppModuleTest, pcmData, pcmDataLenBytes, isSilence );
-}
-
-//============================================================================
 /// Microphone sound capture with info for echo cancel ( 8000hz PCM 16 bit data, 80ms of sound )
 void SoundTestLogic::fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift )
 {

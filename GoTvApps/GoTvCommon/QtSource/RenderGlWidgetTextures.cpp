@@ -483,7 +483,7 @@ void RenderGlWidget::drawGuiTexture( CGUITextureQt * guiTexture, float * x, floa
 
     if( ( guiTexture->m_packedVertices.size() / 4 ) > ( guiTexture->m_idx.size() / 6 ) )
     {
-        size_t i = guiTexture->m_packedVertices.size() - 4;
+        uint16_t i = (uint16_t)guiTexture->m_packedVertices.size() - 4;
         guiTexture->m_idx.push_back( i + 0 );
         guiTexture->m_idx.push_back( i + 1 );
         guiTexture->m_idx.push_back( i + 2 );

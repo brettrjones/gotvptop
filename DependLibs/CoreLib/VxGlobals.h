@@ -59,6 +59,7 @@ void			            VxSetAppIsShuttingDown( bool bIsShuttingDown );
 bool			            VxIsAppShuttingDown( void );
 
 const char *	            VxGetCompanyDomain( void );
+const char *                VxGetOrginizationNmae( void );
 const char *	            VxGetCompanyWebsite( void );
 
 const char *	            VxGetApplicationTitle( void );

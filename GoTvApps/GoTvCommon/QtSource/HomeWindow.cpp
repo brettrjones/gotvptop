@@ -39,6 +39,44 @@ HomeWindow::HomeWindow( AppCommon&	appCommon, QString title )
 }
 
 //============================================================================
+void HomeWindow::accept()
+{
+    // user has clicked the X to exit application.. prompt if really wants to exit
+    QMessageBox::StandardButton resBtn = QMessageBox::Yes;
+    bool changes = true;
+    if( changes ) {
+        resBtn = QMessageBox::question( this, "Close Application",
+            tr( "Are you sure?\n" ),
+            QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,
+            QMessageBox::Yes );
+    }
+
+    if( resBtn == QMessageBox::Yes )
+    {
+        QDialog::reject();
+    }
+}
+
+//============================================================================
+void HomeWindow::reject()
+{
+    QMessageBox::StandardButton resBtn = QMessageBox::Yes;
+    bool changes = true;
+    if( changes ) {
+        resBtn = QMessageBox::question( this, QObject::tr("Close Application"),
+            tr( "Are you sure you want to exit?\n" ),
+            QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,
+            QMessageBox::Yes );
+    }
+
+    if( resBtn == QMessageBox::Yes ) 
+    {
+        GetAppInstance().shutdownAppCommon();
+        QDialog::reject();
+    }
+}
+
+//============================================================================
 void HomeWindow::resizeEvent( QResizeEvent * )
 {
 	emit signalMainWindowResized();

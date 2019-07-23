@@ -97,8 +97,8 @@
     <Filter Include="QtBuild">
       <UniqueIdentifier>{c163289c-2ac2-42c4-b381-25a9688a4d36}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GoTvCommon\Source Files\AudioInputOutput">
-      <UniqueIdentifier>{c546f7b7-94c2-4d60-ab7d-2af355bd53d4}</UniqueIdentifier>
+    <Filter Include="GoTvCommon\Source Files\soundio">
+      <UniqueIdentifier>{960707f6-388b-4625-acc0-3b69fe551878}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -113,9 +113,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\TitleBarWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\AppSource\GoTvPlayerSettings.cpp">
-      <Filter>AppSource</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\DialogConfirmRemoveMessage.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
@@ -429,15 +426,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetVoiceWidget.cpp">
       <Filter>GoTvCommon\Source Files\AssetWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AudioDeviceCoreWin.cpp">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AudioDeviceWaveWin.cpp">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AudioMixerMgrWin.cpp">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputAllWidget.cpp">
       <Filter>GoTvCommon\Source Files\InputWidgets</Filter>
     </ClCompile>
@@ -458,21 +446,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputVoiceWidget.cpp">
       <Filter>GoTvCommon\Source Files\InputWidgets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MyQtSoundInput.cpp">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MyQtSoundOutput.cpp">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MySndMgr.cpp">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxWaveIn.cpp">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxWaveOut.cpp">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\TodGameDefs.cpp">
       <Filter>GoTvCommon\Source Files\TodGame</Filter>
@@ -702,17 +675,11 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonEvents.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AudioTestGenerator.cpp">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonAudio.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AudioBuffer.cpp">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletMgr.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
@@ -750,14 +717,35 @@
     <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvDefs.cpp">
       <Filter>GoTvInterface</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AudioOutIo.cpp">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AudioOutQt.cpp">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderDefsGles.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInIo.cpp">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInThread.cpp">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioIoMgr.cpp">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioMixer.cpp">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioOutIo.cpp">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioOutThread.cpp">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioTestGenerator.cpp">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioUtils.cpp">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MySndMgr.cpp">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1322,15 +1310,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\InputVoiceWidget.h">
       <Filter>GoTvCommon\Source Files\InputWidgets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\MyQtSoundInput.h">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\MyQtSoundOutput.h">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\MySndMgr.h">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\TodGameLogic.h">
       <Filter>GoTvCommon\Source Files\TodGame</Filter>
     </QtMoc>
@@ -1517,9 +1496,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlOffScreenSurface.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AudioTestGenerator.h">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletMgr.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </QtMoc>
@@ -1535,14 +1511,32 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlLogic.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AudioOutIo.h">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AudioOutQt.h">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderKodiThread.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInIo.h">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInThread.h">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioIoMgr.h">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioMixer.h">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioOutIo.h">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioOutThread.h">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\soundio\AudioTestGenerator.h">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\MySndMgr.h">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -2040,9 +2034,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AnalogClock.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_ActivityAbout.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -2352,9 +2343,6 @@
     <ClInclude Include="..\..\..\..\GoTvTargetOsConfig.h">
       <Filter>GoTvConfig</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\AppSource\GoTvPlayerSettings.h">
-      <Filter>AppSource</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_HomeWindow.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -2414,27 +2402,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\UserProfile.h">
       <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AudioDeviceCoreWin.h">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AudioDeviceWaveWin.h">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AudioMixerMgrWin.h">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\IVxWaveOut.h">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxWaveIn.h">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxWaveOut.h">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxWaveOutLinux.h">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\TodGameDefs.h">
       <Filter>GoTvCommon\Source Files\TodGame</Filter>
@@ -2550,12 +2517,6 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.h">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AudioBuffer.h">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AudioDefs.h">
-      <Filter>GoTvCommon\Source Files\AudioInputOutput</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\RenderGlShaders.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClInclude>
@@ -2567,6 +2528,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\GoTvDebugConfig.h">
       <Filter>GoTvConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\soundio\AudioDefs.h">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\soundio\AudioUtils.h">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\soundio\IAudioInterface.h">
+      <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GoTvInterface\IAudioInterface.h">
+      <Filter>GoTvInterface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

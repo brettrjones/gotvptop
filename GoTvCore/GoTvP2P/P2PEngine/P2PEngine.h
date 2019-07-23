@@ -23,6 +23,8 @@
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.h>
 
 #include <GoTvInterface/IFromGui.h>
+#include <GoTvInterface/IAudioInterface.h>
+
 
 #include <GoTvCore/GoTvP2P/Search/RcScan.h>
 
@@ -55,7 +57,8 @@ class NetServicesMgr;
 class P2PEngine :	public IFromGui,
 					public PktHandlerBase,
 					public AssetCallbackInterface,
-					public MediaCallbackInterface
+					public MediaCallbackInterface,
+                    public IAudioCallbacks
 {
 public:
 	P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr );
@@ -66,7 +69,8 @@ public:
 
     IToGui&						getToGui( void );
 	IFromGui&					getFromGuiInterface( void )						{ return *this; }
-	AssetMgr&					getAssetMgr( void )								{ return m_AssetMgr; }	
+    IAudioRequests&			    getAudioRequest( void );
+    AssetMgr&					getAssetMgr( void )								{ return m_AssetMgr; }
 	EngineSettings&				getEngineSettings( void )						{ return m_EngineSettings; }
 	EngineParams&				getEngineParams( void )							{ return m_EngineParams; }
 	BigListMgr&					getBigListMgr( void )							{ return m_BigListMgr; }
@@ -142,8 +146,8 @@ public:
     virtual void				fromGuiNativeGlResumeRender( void ) override;
     virtual void				fromGuiNativeGlDestroy( void ) override;
 
-    virtual void				fromGuiMicrophoneData( int16_t * pu16PcmData, uint16_t pcmDataLenBytes ) override;
-    virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, int totalDelayTimeMs, int clockDrift ) override;
+    //virtual void				fromGuiMicrophoneData( int16_t * pu16PcmData, uint16_t pcmDataLenBytes ) override;
+    virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift ) override;
     virtual void				fromGuiMuteMicrophone( bool muteMic ) override;
     virtual bool				fromGuiIsMicrophoneMuted( void ) override;
     virtual void				fromGuiMuteSpeaker(	bool muteSpeaker ) override;

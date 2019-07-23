@@ -24,7 +24,7 @@
 #include "GoTvInterface/IToGui.h"
 #include "GoTvInterface/IGoTvRender.h"
 #include "GoTvInterface/IGoTvEvents.h"
-#include "AudioOutQt.h"
+#include "GoTvInterface/IAudioInterface.h"
 
 #include "HomeWindow.h"
 
@@ -39,6 +39,10 @@
 #include <QObject>
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+
+#include "MyIcons.h"
+#include "VxAppTheme.h"
+#include "VxAppStyle.h"
 
 
 class IVxVidCap;
@@ -71,7 +75,7 @@ class KodiThread;
 class CRenderBuffer;
 
 
-class AppCommon : public QWidget, public IToGui, public IGoTvRender, public IGoTvEvents
+class AppCommon : public QWidget, public IToGui, public IGoTvRender, public IGoTvEvents, public IAudioRequests, public IAudioCallbacks
 {
 	Q_OBJECT
 
@@ -108,9 +112,6 @@ public:
 	OffersMgr&					getOffersMgr( void )						{ return m_OffersMgr; }
 
 	QWidget *					getCentralWidget( void )					{ return 0; } // ui.centralWidget; }
-
-//    void                        setKodiThread( KodiThread * kodiThread )    { m_KodiThread = kodiThread; }
-//    KodiThread *                getKodiThread()                             { return m_KodiThread; }
 
 	ActivityDownloads *			getActivityDownloads( void )				{ return m_Downloads; } 
 	ENetworkStateType			getNetworkState( void )						{ return m_LastNetworkState; }
@@ -197,6 +198,29 @@ public:
 
     virtual void                fromGuiCloseEvent( int moduleNum ) override;
     virtual void                fromGuiVisibleEvent( int moduleNum, bool isVisible ) override;
+
+    //============================================================================
+    //=== from gui audio callbacks ===//
+    //============================================================================
+
+    /// Microphone sound capture ( 8000hz PCM 16 bit data, 80ms of sound )
+   // virtual void				fromGuiMicrophoneData( int16_t* pcmData, uint16_t pcmDataLenBytes, bool isSilence );
+    /// Microphone sound capture with info for echo cancel ( 8000hz PCM 16 bit data, 80ms of sound )
+    virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift );
+    /// Mute/Unmute microphone
+    virtual void				fromGuiMuteMicrophone( bool muteMic );
+    /// Returns true if microphone is muted
+    virtual bool				fromGuiIsMicrophoneMuted( void );
+    /// Mute/Unmute speaker
+    virtual void				fromGuiMuteSpeaker( bool muteSpeaker );
+    /// Returns true if speaker is muted
+    virtual bool				fromGuiIsSpeakerMuted( void );
+    /// Enable/Disable echo cancellation
+    virtual void				fromGuiEchoCancelEnable( bool enableEchoCancel );
+    /// Returns true if echo cancellation is enabled
+    virtual bool				fromGuiIsEchoCancelEnabled( void );
+    /// Called when need more sound for speaker output
+    virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen );
 
     //============================================================================
     //=== to gui media/render ===//
@@ -373,12 +397,12 @@ public:
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
     virtual void				toGuiPhoneShakeStatus( EPhoneShakeStatus ePhoneShakeStatus, const char * msg = "" ) override;
 
-    virtual void				toGuiWantMicrophoneRecording( bool wantMicInput ) override;
-    virtual void				toGuiWantSpeakerOutput( bool wantSpeakerOutput ) override;
-    virtual void				toGuiPlayAudio( int16_t * pu16PcmData, int pcmDataLenInBytes ) override;
-    virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes ) override;
-    virtual double				toGuiGetAudioDelaySeconds( ) override;
-    virtual double				toGuiGetAudioCacheTotalSeconds() override;
+    virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) override;
+    virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) override;
+    virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
+    virtual int				    toGuiPlayAudio( EAppModule appModule, float * pu16PcmData, int pcmDataLenInBytes ) override;
+    virtual double				toGuiGetAudioDelaySeconds( EAppModule appModule ) override;
+    virtual double				toGuiGetAudioCacheTotalSeconds( EAppModule appModule ) override;
     virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) override;
 
     virtual void				toGuiWantVideoCapture( bool wantVidCapture ) override;
@@ -676,9 +700,9 @@ private:
 	QString						m_AppTitle;
 	QString						m_AppShortName;
 
-	MyIcons&					m_MyIcons;
-	VxAppTheme&					m_AppTheme;
-	VxAppStyle&					m_AppStyle;
+	MyIcons					    m_MyIcons;
+	VxAppTheme					m_AppTheme;
+	VxAppStyle					m_AppStyle;
     VxAppDisplay				m_AppDisplay;
 	VxTilePositioner&			m_TilePositioner;
 
@@ -737,10 +761,9 @@ private:
     bool                        m_LoginComplete;
 
 //    KodiThread *                m_KodiThread;
-    AudioOutQt                  m_AudioOut;
 };
 
-AppCommon& CreateAppInstance( IGoTv& gotv, QApplication* myApp, AppSettings& appSettings );
+AppCommon& CreateAppInstance( IGoTv& gotv, QApplication* myApp );
 
 AppCommon& GetAppInstance( void );
 

@@ -32,12 +32,13 @@ uint64_t GetTickCount64()
 
 #include <time.h>
 // android doesn't have millisecond sleep like most linux distributions but does have nano sleep
-void VxSleep( int iMilliSec )
+int VxSleep( int iMilliSec )
 {
     struct timespec ts;
     ts.tv_sec = iMilliSec / 1000;
     ts.tv_nsec = ( iMilliSec % 1000 ) * 1000000;
     nanosleep( &ts, NULL );
+    return 0;
 };
 #elif defined(TARGET_OS_WINDOWS)
 int VxSleep( int milliSec ) 

@@ -76,7 +76,7 @@ void NetActionAnnounce::doAction( void )
     buildAnnounceCmd( strNetCmdHdr, acceptedPort, anchorList, eAnchorActionAnnounce );
 	int anchorDataLen = anchorList.m_TotalLen;
 
-	RCODE rc = netServConn.sendData( strNetCmdHdr.c_str(), strNetCmdHdr.length() );
+	RCODE rc = netServConn.sendData( strNetCmdHdr.c_str(), (int)strNetCmdHdr.length() );
 	if( rc )
 	{
 		LogMsg( LOG_ERROR, "### ERROR NetActionAnnounce::doAction: send header error %d %s\n", rc, VxDescribeSktError( rc ) );

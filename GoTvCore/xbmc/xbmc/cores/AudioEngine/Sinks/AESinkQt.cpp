@@ -161,14 +161,14 @@ void CAESinkQt::Stop()
 void CAESinkQt::GetDelay( AEDelayStatus& status )
 {
     // return current cached data duration in seconds 
-    status.SetDelay( m_IGoTv.toGuiGetAudioDelaySeconds() );
+    status.SetDelay( m_IGoTv.toGuiGetAudioDelaySeconds( eAppModuleKodi ) );
 }
 
 //============================================================================
 double CAESinkQt::GetCacheTotal( )
 {
     // return total possible cached data duration in seconds 
-    return  m_IGoTv.toGuiGetAudioCacheTotalSeconds();
+    return  m_IGoTv.toGuiGetAudioCacheTotalSeconds( eAppModuleKodi );
 }
 
 //============================================================================

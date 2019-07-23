@@ -254,6 +254,8 @@ CApplication::CApplication( void )
 CApplication::~CApplication( void )
 {
 //BRJ FIXME
+    // need to notify and destroy all before this occurs
+
 //    delete m_pInertialScrollingHandler;
 
 //    m_actionListeners.clear();

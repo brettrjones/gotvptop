@@ -22,39 +22,39 @@ void IGoTv::toGuiStatusMessage( const char * statusMsg )
 }
 
 //============================================================================
-void IGoTv::toGuiWantMicrophoneRecording( bool wantMicInput )
+void IGoTv::toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput )
 {
-    getAppCommon().toGuiWantMicrophoneRecording( wantMicInput );
+    getAppCommon().toGuiWantMicrophoneRecording( appModule, wantMicInput );
 }
 
 //============================================================================
-void IGoTv::toGuiWantSpeakerOutput( bool wantSpeakerOutput )
+void IGoTv::toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput )
 {
-    getAppCommon().toGuiWantSpeakerOutput( wantSpeakerOutput );
+    getAppCommon().toGuiWantSpeakerOutput( appModule, wantSpeakerOutput );
 }
 
 //============================================================================
-void IGoTv::toGuiPlayAudio( int16_t * pu16PcmData, int pcmDataLenInBytes )
+int IGoTv::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence )
 {
-    getAppCommon().toGuiPlayAudio( pu16PcmData, pcmDataLenInBytes );
+    return getAppCommon().toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes, isSilence );
 }
 
 //============================================================================
-int IGoTv::toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes )
+int IGoTv::toGuiPlayAudio( EAppModule appModule, float * pu16PcmData, int pcmDataLenInBytes )
 {
     return getAppCommon().toGuiPlayAudio( appModule, pu16PcmData, pcmDataLenInBytes );
 }
 
 //============================================================================
-double IGoTv::toGuiGetAudioDelaySeconds( )
+double IGoTv::toGuiGetAudioDelaySeconds( EAppModule appModule )
 {
-    return getAppCommon().toGuiGetAudioDelaySeconds( );
+    return getAppCommon().toGuiGetAudioDelaySeconds( appModule );
 }
 
 //============================================================================
-double IGoTv::toGuiGetAudioCacheTotalSeconds()
+double IGoTv::toGuiGetAudioCacheTotalSeconds( EAppModule appModule )
 {
-    return getAppCommon().toGuiGetAudioCacheTotalSeconds();
+    return getAppCommon().toGuiGetAudioCacheTotalSeconds( appModule  );
 }
 
 //============================================================================
@@ -207,14 +207,14 @@ void IGoTv::toGuiUpdateMyIdent( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void IGoTv::toGuiRxedPluginOffer( VxNetIdent *	netIdent,
-                                      EPluginType		ePluginType,
-                                      const char *	pMsg,
-                                      int			pvUserData,
-                                      const char *	pFileName,
-                                      uint8_t *			fileHashData,
-                                      VxGUID&			lclSessionId,
-                                      VxGUID&			rmtSessionId )
+void IGoTv::toGuiRxedPluginOffer(   VxNetIdent *	netIdent,
+                                    EPluginType		ePluginType,
+                                    const char *	pMsg,
+                                    int			    pvUserData,
+                                    const char *	pFileName,
+                                    uint8_t *		fileHashData,
+                                    VxGUID&			lclSessionId,
+                                    VxGUID&			rmtSessionId )
 {
     getAppCommon().toGuiRxedPluginOffer( netIdent,
                               ePluginType,
@@ -227,31 +227,31 @@ void IGoTv::toGuiRxedPluginOffer( VxNetIdent *	netIdent,
 }
 
 //============================================================================
-void IGoTv::toGuiRxedOfferReply( VxNetIdent *	netIdent,
+void IGoTv::toGuiRxedOfferReply(    VxNetIdent *	    netIdent,
                                      EPluginType		ePluginType,
                                      int				pvUserData,
-                                     EOfferResponse	eOfferResponse,
-                                     const char *	pFileName,
+                                     EOfferResponse	    eOfferResponse,
+                                     const char *	    pFileName,
                                      uint8_t *			fileHashData,
                                      VxGUID&			lclSessionId,
                                      VxGUID&			rmtSessionId )
 {
     getAppCommon().toGuiRxedOfferReply( netIdent,
-                             ePluginType,
-                             pvUserData,
-                             eOfferResponse,
-                             pFileName,
-                             fileHashData,
-                             lclSessionId,
-                             rmtSessionId );
+                                         ePluginType,
+                                         pvUserData,
+                                         eOfferResponse,
+                                         pFileName,
+                                         fileHashData,
+                                         lclSessionId,
+                                         rmtSessionId );
 }
 
 //============================================================================
-void IGoTv::toGuiPluginSessionEnded( VxNetIdent *	netIdent,
-                                         EPluginType		ePluginType,
-                                         int				pvUserData,
-                                         EOfferResponse	eOfferResponse,
-                                         VxGUID&			lclSessionId )
+void IGoTv::toGuiPluginSessionEnded(    VxNetIdent *	netIdent,
+                                        EPluginType		ePluginType,
+                                        int				pvUserData,
+                                        EOfferResponse	eOfferResponse,
+                                        VxGUID&			lclSessionId )
 {
     getAppCommon().toGuiPluginSessionEnded( netIdent,
                                  ePluginType,
@@ -262,64 +262,64 @@ void IGoTv::toGuiPluginSessionEnded( VxNetIdent *	netIdent,
 
 //============================================================================
 void IGoTv::toGuiPluginStatus( EPluginType		ePluginType,
-                                   int				statusType,
-                                   int				statusValue )
+                               int				statusType,
+                               int				statusValue )
 {
     getAppCommon().toGuiPluginStatus( ePluginType,
-                           statusType,
-                           statusValue );
+                                       statusType,
+                                       statusValue );
 }
 
 //============================================================================
-void IGoTv::toGuiInstMsg( VxNetIdent *	netIdent,
-                              EPluginType		ePluginType,
-                              const char *	pMsg )
+void IGoTv::toGuiInstMsg( VxNetIdent *	    netIdent,
+                          EPluginType		ePluginType,
+                          const char *	    pMsg )
 {
-    getAppCommon().toGuiInstMsg( netIdent,
-                      ePluginType,
-                      pMsg );
+    getAppCommon().toGuiInstMsg(  netIdent,
+                                  ePluginType,
+                                  pMsg );
 }
 
 //============================================================================
-void IGoTv::toGuiFileList( const char *	fileName,
-                               uint64_t				fileLen,
-                               uint8_t				fileType,
-                               bool			isShared,
-                               bool			isInLibrary,
-                               uint8_t *			fileHashId )
+void IGoTv::toGuiFileList(  const char *	fileName,
+                            uint64_t		fileLen,
+                            uint8_t			fileType,
+                            bool			isShared,
+                            bool			isInLibrary,
+                            uint8_t *		fileHashId )
 {
     getAppCommon().toGuiFileList( fileName,
-                       fileLen,
-                       fileType,
-                       isShared,
-                       isInLibrary,
-                       fileHashId );
+                                   fileLen,
+                                   fileType,
+                                   isShared,
+                                   isInLibrary,
+                                   fileHashId );
 }
 
 //============================================================================
 void IGoTv::toGuiFileListReply( VxNetIdent *	netIdent,
-                                    EPluginType		ePluginType,
-                                    uint8_t				u8FileType,
-                                    uint64_t				u64FileLen,
-                                    const char *	pFileName,
-                                    uint8_t *			fileHashData )
+                                EPluginType		ePluginType,
+                                uint8_t			u8FileType,
+                                uint64_t		u64FileLen,
+                                const char *	pFileName,
+                                uint8_t *		fileHashData )
 {
     getAppCommon().toGuiFileListReply( netIdent,
-                            ePluginType,
-                            u8FileType,
-                            u64FileLen,
-                            pFileName,
-                            fileHashData );
+                                        ePluginType,
+                                        u8FileType,
+                                        u64FileLen,
+                                        pFileName,
+                                        fileHashData );
 }
 
 //============================================================================
-void IGoTv::toGuiStartUpload( VxNetIdent *	netIdent,
-                                  EPluginType		ePluginType,
-                                  VxGUID&			fileInstanceId,
-                                  uint8_t				u8FileType,
-                                  uint64_t				u64FileLen,
-                                  const char *	pFileName,
-                                  uint8_t *			fileHashData )
+void IGoTv::toGuiStartUpload(   VxNetIdent *	netIdent,
+                                EPluginType		ePluginType,
+                                VxGUID&			fileInstanceId,
+                                uint8_t			u8FileType,
+                                uint64_t		u64FileLen,
+                                const char *	pFileName,
+                                uint8_t *		fileHashData )
 {
     getAppCommon().toGuiStartUpload( netIdent,
                           ePluginType,
@@ -331,21 +331,21 @@ void IGoTv::toGuiStartUpload( VxNetIdent *	netIdent,
 }
 
 //============================================================================
-void IGoTv::toGuiStartDownload( VxNetIdent *	netIdent,
+void IGoTv::toGuiStartDownload(     VxNetIdent *	netIdent,
                                     EPluginType		ePluginType,
                                     VxGUID&			fileInstanceId,
-                                    uint8_t				u8FileType,
-                                    uint64_t				u64FileLen,
+                                    uint8_t			u8FileType,
+                                    uint64_t		u64FileLen,
                                     const char *	pFileName,
-                                    uint8_t *			fileHashData )
+                                    uint8_t *		fileHashData )
 {
     getAppCommon().toGuiStartDownload( netIdent,
-                            ePluginType,
-                            fileInstanceId,
-                            u8FileType,
-                            u64FileLen,
-                            pFileName,
-                            fileHashData );
+                                        ePluginType,
+                                        fileInstanceId,
+                                        u8FileType,
+                                        u64FileLen,
+                                        pFileName,
+                                        fileHashData );
 }
 
 //============================================================================
@@ -415,25 +415,25 @@ void IGoTv::toGuiModuleState( EAppModule moduleNum, EModuleState moduleState )
 //============================================================================
 bool IGoTv::toGuiSetGameValueVar( EPluginType	ePluginType,
                                       VxGUID&	oOnlineId,
-                                      int32_t			s32VarId,
-                                      int32_t			s32VarValue )
+                                      int32_t	s32VarId,
+                                      int32_t	s32VarValue )
 {
-    return getAppCommon().toGuiSetGameValueVar( ePluginType,
-                                     oOnlineId,
-                                     s32VarId,
-                                     s32VarValue );
+    return getAppCommon().toGuiSetGameValueVar(  ePluginType,
+                                                 oOnlineId,
+                                                 s32VarId,
+                                                 s32VarValue );
 }
 
 //============================================================================
 bool IGoTv::toGuiSetGameActionVar( EPluginType	ePluginType,
                                        VxGUID&	oOnlineId,
-                                       int32_t			s32VarId,
-                                       int32_t			s32VarValue )
+                                       int32_t	s32VarId,
+                                       int32_t	s32VarValue )
 {
-    return getAppCommon().toGuiSetGameActionVar( ePluginType,
-                                      oOnlineId,
-                                      s32VarId,
-                                      s32VarValue );
+    return getAppCommon().toGuiSetGameActionVar(  ePluginType,
+                                                  oOnlineId,
+                                                  s32VarId,
+                                                  s32VarValue );
 }
 
 //============================================================================

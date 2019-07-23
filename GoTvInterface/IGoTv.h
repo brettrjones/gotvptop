@@ -21,6 +21,8 @@
 #include <GoTvInterface/IFromGui.h>
 #include <GoTvInterface/IGoTvRender.h>
 #include <GoTvInterface/IGoTvEvents.h>
+#include <GoTvInterface/IAudioInterface.h>
+
 
 #include <string>
 
@@ -34,7 +36,7 @@ class AppCommon;
 class CRenderBuffer;
 
 
-class IGoTv : public IToGui, public IGoTvRender, public IGoTvEvents
+class IGoTv : public IToGui, public IGoTvRender, public IGoTvEvents, public IAudioRequests
 {
 public:
     IGoTv();
@@ -254,14 +256,15 @@ public:
     /// a module has changed state
     virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState )  override;
 
-    virtual void				toGuiWantMicrophoneRecording( bool wantMicInput ) override;
-    virtual void				toGuiWantSpeakerOutput( bool wantSpeakerOutput ) override;
-    virtual void				toGuiPlayAudio( int16_t * pu16PcmData, int pcmDataLenInBytes ) override;
-
-    virtual int  				toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes ) override;
-    virtual double  			toGuiGetAudioDelaySeconds() override;
-    virtual double				toGuiGetAudioCacheTotalSeconds() override;
+    virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) override;
+    virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) override;
+    virtual double  			toGuiGetAudioDelaySeconds( EAppModule appModule ) override;
+    virtual double				toGuiGetAudioCacheTotalSeconds( EAppModule appModule ) override;
     virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) override;
+    // add audio data to play.. assumes float 2 channel 48000 Hz
+    virtual int				    toGuiPlayAudio( EAppModule appModule, float * audioSamples48000, int dataLenInBytes ) override;
+    // add audio data to play.. assumes pcm mono 8000 Hz
+    virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
 
     virtual void				toGuiWantVideoCapture( bool wantVidCapture ) override;
     virtual void				toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
@@ -429,7 +432,7 @@ public:
 
     virtual void				fromGuiNeedMorePlayData( int16_t * retAudioSamples,
                                                          int deviceReqDataLen );
-    virtual void				fromGuiMicrophoneData( int16_t * pcmData, int pcmDataLenInBytes );
+    virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift );
     virtual void				fromGuiMuteMicrophone( bool mute );
     virtual void				fromGuiMuteSpeaker( bool mute );
     virtual void				fromGuiEchoCancelEnable( bool enableEchoCancel );

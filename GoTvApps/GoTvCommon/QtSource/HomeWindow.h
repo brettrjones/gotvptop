@@ -49,6 +49,8 @@ private slots:
 	void						help( void );
 	void						slotHomeButtonClicked( void );
 	void						slotFrameResized( void );
+    void                        accept() override;
+    void                        reject() override;
 
 protected:
     void                        showEvent( QShowEvent * ev ) override;

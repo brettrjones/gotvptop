@@ -16,28 +16,12 @@
 //============================================================================
 
 #include "SoundDefs.h"
-#include "ToGuiHardwareControlInterface.h"
+#include "soundio/AudioIoMgr.h"
 
-#include <PktLib/VxCommon.h>
+#include "ToGuiHardwareControlInterface.h"
 
 #include <QVector>
 #include <QObject>
-
-#ifdef TARGET_OS_WINDOWS
-    #include <QAudioDeviceInfo>
-//  #define USE_VX_WAVE	1
-#endif // TARGET_OS_WINDOWS
-#ifdef USE_VX_WAVE
-	#ifdef USE_ECHO_CANCEL
-	#define USE_AUDIO_CORE	1	// comment this define out to use AudioDeviceWaveWin instead of AudioDeviceCoreWin
-		#include "AudioDeviceWaveWin.h"
-		#include "AudioDeviceCoreWin.h"
-		#include <GoTvCore/GoTvP2P/EchoCancel/audio_device_defines.h>
-	#else
-		#include "VxWaveIn.h"
-		#include "VxWaveOut.h"
-	#endif // USE_ECHO_CANCEL
-#endif // USE_VX_WAVE
 
 const uint32_t					MY_FRAME_DATA_LEN			= 1280;
 const uint32_t					MY_FRAME_SAMPLES			= 640;
@@ -50,12 +34,12 @@ class MyQtSoundInput;
 class MyQtSoundOutput;
 class VxSndInstance;
 
-class MySndMgr : public QObject, public ToGuiHardwareControlInterface
+class MySndMgr : public AudioIoMgr, public ToGuiHardwareControlInterface
 {
 	Q_OBJECT
 public:
 	MySndMgr( AppCommon& app );
-	virtual ~MySndMgr();
+	virtual ~MySndMgr() override = default;
 
 	AppCommon&				    getApp( void )						{ return m_MyApp; }
 
@@ -70,9 +54,6 @@ public:
 
 	void						startMicrophoneRecording();
 	void						stopMicrophoneRecording();
-
-	void						recievedAudioData( char * pu16PcmData, int u16PcmDataLen );
-	void						sendingAudioData( QByteArray& audioData );
 
 signals:
 	void						signalMicrophoneAudioData( QByteArray audioData );
@@ -109,4 +90,3 @@ protected:
 	VxSndInstance *			    m_CurSndPlaying;
 };
 
-MySndMgr& GetSndMgrInstance( void );

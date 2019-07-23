@@ -13,19 +13,8 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#ifdef ANDROID_PLATFORM
-
-#else
-#ifdef TARGET_OS_WINDOWS
-#else
-#define DISABLE_AUDIO
-#endif
-#endif
-
 
 #include "MySndMgr.h"
-#include "MyQtSoundInput.h"
-#include "MyQtSoundOutput.h"
 #include "VxSndInstance.h"
 #include "AppCommon.h"
 
@@ -51,7 +40,8 @@ MySndMgr& GetSndMgrInstance( void )
 
 //============================================================================
 MySndMgr::MySndMgr( AppCommon& app )
-: m_MyApp( app )
+: AudioIoMgr( app, &app )
+, m_MyApp( app )
 , m_Engine( app.getEngine() )
 , m_MicrophoneInput(NULL)
 , m_bMicrophoneEnabled(true)
@@ -60,11 +50,6 @@ MySndMgr::MySndMgr( AppCommon& app )
 , m_bMutePhoneRing(false)
 , m_bMuteNotifySnd(false)
 , m_CurSndPlaying( 0 )
-{
-}
-
-//============================================================================
-MySndMgr::~MySndMgr()
 {
 }
 
@@ -115,18 +100,6 @@ void MySndMgr::muteNotifySound( bool bMute )
 //============================================================================
 bool MySndMgr::sndMgrStartup( void )
 {
-#ifdef ANDROID_PLATFORM
-	LogMsg( LOG_INFO, "MySndMgr::Android defined\n" );
-    return false;
-#else
-	#ifdef TARGET_OS_WINDOWS
-	LogMsg( LOG_INFO, "Windows defined\n" );
- 	#else
-	    LogMsg( LOG_INFO, "Linux defined\n" );
-		#define DISABLE_AUDIO
-	#endif
-#endif
-
     for( int i = 0; i < eMaxSndDef; i++ )
     {
         VxSndInstance * sndInstance = new VxSndInstance( (ESndDef)i, this );
@@ -134,15 +107,8 @@ bool MySndMgr::sndMgrStartup( void )
         m_SndList.push_back( sndInstance );
     }
 
-#ifdef  DISABLE_AUDIO
-    return false;
-#endif //  DISABLE_AUDIO
-
-    LogMsg( LOG_INFO, "MySndMgr::sndMgrStartup 2222\n" );
-	bool result = true;
-#
 	m_MyApp.wantToGuiHardwareCtrlCallbacks( this, true );
-	return result;
+	return true;
 }
 
 
@@ -150,10 +116,7 @@ bool MySndMgr::sndMgrStartup( void )
 bool MySndMgr::sndMgrShutdown( void )
 {
 	m_MyApp.wantToGuiHardwareCtrlCallbacks( this, false );
-#ifdef DISABLE_AUDIO
-	return false;
-#endif
-
+    destroyAudioIoSystem();
 	return true;
 }
 
@@ -266,240 +229,3 @@ void MySndMgr::enableSpeakerOutput( bool bEnable )
 		m_bVoiceOutputEnabled = bEnable;
 	}
 }
-
-//============================================================================
-void MySndMgr::recievedAudioData( char * pu16PcmData, int u16PcmDataLen)
-{
-#ifdef USE_VX_WAVE
-#ifdef USE_ECHO_CANCEL
-		if( u16PcmDataLen == sizeof( m_MyFrameBuf ) )
-		{
-			memcpy( m_MyFrameBuf, pu16PcmData, u16PcmDataLen );
-			m_MyFrameDataAvail = u16PcmDataLen;
-			m_MyFrameReadIdx = 0;
-		}
-#else
-	if( m_bVoiceOutputEnabled )
-	{
-		m_WaveOut.sendAudioDataToSpeaker( pu16PcmData, u16PcmDataLen );
-	}
-#endif // USE_ECHO_CANCEL
-#else
-	if( m_bVoiceOutputEnabled )
-	{
-		if( m_VoiceOutput )
-			m_VoiceOutput->recieveAudioData(pu16PcmData, u16PcmDataLen );
-	}
-#endif // USE_VX_WAVE
-}
-
-#ifdef USE_VX_WAVE
-//============================================================================
-void MySndMgr::waveInPcmDataAvail( char * sndData, int dataLen, void * /*userData*/ )
-{
-	if( m_bMicrophoneEnabled )
-	{
-		m_MyApp.getEngine().fromGuiMicrophoneData( (int16_t *)sndData, dataLen );
-	}
-}
-
-//============================================================================
-void MySndMgr::waveOutSpaceAvail( int freeSpaceLen, void * /*userData*/ )
-{
-	m_MyApp.getEngine().fromGuiAudioOutSpaceAvail( freeSpaceLen );
-}
-
-#ifdef USE_ECHO_CANCEL
-//============================================================================
-int32_t MySndMgr::RecordedDataIsAvailable(			const void* audioSamples,
-													const size_t nSamples,
-													const size_t nBytesPerSample,
-													const size_t nChannels,
-													const uint32_t samplesPerSec,
-													const uint32_t totalDelayMS,
-													const int32_t clockDrift,
-													const uint32_t currentMicLevel,
-													const bool keyPressed,
-													uint32_t& newMicLevel )
-{
-	//LogMsg( LOG_INFO, "MySndMgr::RecordedDataIsAvailable nSamples %d\n", nSamples );
-	float dnFreqDiv = (float)samplesPerSec  / (float)MYP2PWEB_SAMPLE_RATE;
-	float dnResampleDiv = dnFreqDiv * nChannels;
-
-	if( 1.0f == dnResampleDiv )
-	{
-		// no resample required
-		m_Engine.fromGuiMicrophoneDataWithInfo( (int16_t *)audioSamples, nSamples * nBytesPerSample, totalDelayMS, clockDrift );
-	}
-	else
-	{
-		// down resample to 8000 hz
-		int mySampleCnt				= nSamples / dnFreqDiv;
-		int middleOfSampleOffset	= (int)(dnFreqDiv / 2.0f);
-		int16_t * dnSampledBuf			= new int16_t[ mySampleCnt ];
-		int16_t * srcSamples			= (int16_t *)audioSamples;
-		float smpInc				= dnResampleDiv;
-		for( int i = 0; i < mySampleCnt; i++ )
-		{
-			int iSrcIdx = (int)(smpInc * (float)i) + middleOfSampleOffset;
-			dnSampledBuf[i] = srcSamples[ iSrcIdx ];
-		}
-
-		m_Engine.fromGuiMicrophoneDataWithInfo( dnSampledBuf, mySampleCnt << 1, totalDelayMS, clockDrift );
-		delete dnSampledBuf;
-	}
-
-	return 0;
-}
-
-//============================================================================
-int32_t MySndMgr::NeedMorePlayData(		const size_t nSamples,
-										 const size_t nBytesPerSample,
-										 const size_t nChannels,
-										 const uint32_t samplesPerSec,
-										 void* audioSamples,
-										 size_t& nSamplesOut,
-										 int64_t* elapsed_time_ms,
-										 int64_t* ntp_time_ms )
-{
-	//LogMsg( LOG_INFO, "MySndMgr::NeedMorePlayData nSamples %d\n", nSamples );
-	if( 0 == m_MyFrameDataAvail )
-	{
-		m_Engine.fromGuiAudioOutSpaceAvail( MY_FRAME_DATA_LEN );
-	}
-
-	size_t deviceReqDataLen = nSamples * nBytesPerSample * nChannels;
-	float upResampleMultiplier = samplesPerSec  / MYP2PWEB_SAMPLE_RATE;
-	int myUsedDataLen = deviceReqDataLen / upResampleMultiplier;
-	int iDestIdx = 0;
-	if( nChannels == 2 )
-	{
-		upResampleMultiplier *= 2;
-	}
-
-	size_t resampledLenAvail = m_MyFrameDataAvail * upResampleMultiplier;
-
-	if( resampledLenAvail >= deviceReqDataLen )
-	{
-		if( 1 == upResampleMultiplier )
-		{
-			memcpy( audioSamples, &m_MyFrameBuf[m_MyFrameReadIdx], myUsedDataLen );
-		}
-		else
-		{
-			int mySampleCnt = myUsedDataLen >> 1;
-			int16_t * srcSamples	= (int16_t *)&m_MyFrameBuf[m_MyFrameReadIdx];
-			int16_t * destSamples	= (int16_t *)audioSamples;
-			int16_t firstSample		= m_MyLastReadSample;
-			int16_t secondSample	= firstSample;
-			float sampleStep;
-			for( int i = 0; i < mySampleCnt; i++ )
-			{
-				firstSample = secondSample;
-				secondSample = srcSamples[i];
-				if( secondSample >= firstSample )
-				{
-					// ramp up
-					sampleStep = ((secondSample - firstSample) / upResampleMultiplier); 
-				}
-				else
-				{
-					// ramp down
-					sampleStep = -((firstSample - secondSample) / upResampleMultiplier); 
-				}
-
-				if( 0 == sampleStep )
-				{
-					for( int j = 0; j < upResampleMultiplier; ++j )
-					{
-						destSamples[iDestIdx] = firstSample; 
-						iDestIdx++;
-					}
-				}
-				else
-				{
-					float sampleOffs = sampleStep;
-					int resampleCnt = (int)upResampleMultiplier;
-					for( int j = 0; j < resampleCnt; ++j )
-					{
-						destSamples[iDestIdx] = (int16_t)(firstSample + sampleOffs); 
-						iDestIdx++;
-						sampleOffs += sampleStep;
-					}
-				}
-			}
-
-			// save the last sample to be used as first sample reference in next frame
-			m_MyLastReadSample = srcSamples[ mySampleCnt - 1 ];
-		}
-
-		m_MyFrameDataAvail -= myUsedDataLen;
-		m_MyFrameReadIdx	+= myUsedDataLen;
-		if( m_MyFrameReadIdx >= MY_FRAME_DATA_LEN )
-		{
-			m_MyFrameReadIdx = 0;
-		}
-	}
-	else
-	{
-		memset( audioSamples, 0, deviceReqDataLen );
-	}
-
-
-	nSamplesOut = nSamples;
-	return 0;
-}
-
-//============================================================================
-int MySndMgr::OnDataAvailable(	const int voe_channels[],
-											size_t number_of_voe_channels,
-											const int16_t* audio_data,
-											int sample_rate,
-											size_t number_of_channels,
-											size_t number_of_frames,
-											int audio_delay_milliseconds,
-											int current_volume,
-											bool key_pressed,
-											bool need_audio_processing )
-{
-	LogMsg( LOG_INFO, "MySndMgr::OnDataAvailable number_of_frames %d\n", number_of_frames );
-	return 0;
-}
-
-//============================================================================
-void MySndMgr::OnData( int voe_channel,
-								   const void* audio_data,
-								   int bits_per_sample,
-								   int sample_rate,
-								   size_t number_of_channels,
-								   size_t number_of_frames)
-{
-	LogMsg( LOG_INFO, "MySndMgr::OnData number_of_frames %d\n", number_of_frames );
-}
-
-//============================================================================
-void MySndMgr::PushCaptureData(	int voe_channel,
-								const void* audio_data,
-								int bits_per_sample,
-								int sample_rate,
-								size_t number_of_channels,
-								size_t number_of_frames )
-{
-	LogMsg( LOG_INFO, "MySndMgr::PushCaptureData number_of_frames %d\n", number_of_frames );
-}
-
-//============================================================================
-void MySndMgr::PullRenderData(	int bits_per_sample,
-								int sample_rate,
-								size_t number_of_channels,
-								size_t number_of_frames,
-								void* audio_data,
-								int64_t* elapsed_time_ms,
-								int64_t* ntp_time_ms )
-{
-	LogMsg( LOG_INFO, "MySndMgr::PullRenderData number_of_frames %d\n", number_of_frames );
-}
-
-#endif // USE_ECHO_CANCEL
-
-#endif // USE_VX_WAVE

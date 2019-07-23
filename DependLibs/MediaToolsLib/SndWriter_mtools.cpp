@@ -215,22 +215,6 @@ void SndWriter::closeSndFile( void )
 		m_FileHandle = 0;
 	}
 }
-//
-////============================================================================
-//void SndWriter::fromGuiMicrophoneData( uint16_t * pu16PcmData, uint16_t u16PcmDataLen )
-//{
-//	if( getIsRecording() )
-//	{
-//#ifdef MAKE_PCM_INSTEAD_OF_OPUS
-//		if( m_FileHandle )
-//		{
-//			fwrite( pu16PcmData, 1, u16PcmDataLen, m_FileHandle );
-//		}
-//#else
-//		//m_OpusFileEncoder.writeEncodedFrame( uint8_t * encodedFrameData, int32_t encodedLen );
-//#endif // MAKE_PCM_INSTEAD_OF_OPUS
-//	}
-//}
 
 //============================================================================
 void SndWriter::callbackOpusEncoded( void * /*userData*/, uint8_t * encodedAudio, int32_t frame1Len, int32_t	frame2Len )

@@ -16,7 +16,6 @@
 
 #include "config_gotvapps.h"
 #include "ui_SoundCtrlWidget.h"
-#include "IVxWaveOut.h"
 
 #include <PktLib/VxCommon.h>
 
@@ -65,7 +64,4 @@ private:
 	bool						m_SpeakerIsMuted;
 	bool						m_MicIsMuted;
 	VxGUID						m_ChannelId;
-#ifdef TARGET_OS_WINDOWS
-	VxWaveOut					m_SndOut;
-#endif // TARGET_OS_WINDOWS
 };

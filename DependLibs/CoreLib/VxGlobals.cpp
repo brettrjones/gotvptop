@@ -50,7 +50,8 @@ namespace
     std::string			g_strApplicationNameNoSpacesLowerCase	= "gotvptop";
     std::string			g_strNetworkName				= "GoTvPtoPTestNet";
 	std::string			g_strCompanyWebsite				= "http://www.gotvptop.com";
-    std::string			g_strCompanyDomain				= "gotvptop.net";
+    std::string			g_strCompanyDomain				= "gotvptop.com";
+    std::string			g_strOrginizationName           = "gotvptop";
 	bool				g_IsAppCommercial				= false;
 #else
     std::string			g_strApplicationTitle			= "GoTv PtoP";
@@ -58,7 +59,8 @@ namespace
     std::string			g_strApplicationNameNoSpacesLowerCase	= "gotvptop";
     std::string			g_strNetworkName				= "GoTvPtoPNet";
 	std::string			g_strCompanyWebsite				= "http://www.gotvptop.com";
-    std::string			g_strCompanyDomain				= "gotvptop.net";
+    std::string			g_strCompanyDomain				= "gotvptop.com";
+    std::string			g_strOrginizationName           = "gotvptop";
 	bool				g_IsAppCommercial				= false;
 #endif // APP_MYP2PWEB
 	// exe and app resouces paths
@@ -233,6 +235,12 @@ std::string VxGetLclIpAddress( void )
 const char * VxGetCompanyDomain( void )
 {
 	return g_strCompanyDomain.c_str();
+}
+
+//============================================================================
+const char * VxGetOrginizationNmae( void )
+{
+    return g_strOrginizationName.c_str();
 }
 
 //============================================================================

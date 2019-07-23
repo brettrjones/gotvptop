@@ -1,6 +1,5 @@
-#pragma once
 //============================================================================
-// Copyright (C) 2010 Brett R. Jones
+// Copyright (C) 2018 Brett R. Jones
 // Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
@@ -13,43 +12,27 @@
 // bjones.engineer@gmail.com
 // http://www.gotvptop.com
 //============================================================================
+#pragma once
 
-#include "config_gotvapps.h"
+#include <QPlainTextEdit>
+#include <QFile>
+#include <QMutex>
 
-#include <QObject>
-
-class MySndMgr;
-class AppCommon;
-class P2PEngine;
-
-class MyQtSoundInput : public QObject
+class LogWidget : public QPlainTextEdit
 {
-	Q_OBJECT
-
+    Q_OBJECT
 public:
-    MyQtSoundInput( MySndMgr *parent) ;
-	virtual ~MyQtSoundInput();
+    LogWidget( QWidget * parent );
 
-	void						start();
-	void						stop();
-
-	void						sendAudioData( const char * buf, int dataLen );
-
-	qint64						readData(char *data, qint64 maxlen);
-	qint64						writeData(const char *data, qint64 len);
+    void                        toGuiLog( uint32_t u32LogFlags, char * logMsg );
 
 signals:
-	void						update();
+    void                        signalLogMsg( const QString& logMsg );
 
-protected:
-	//=== vars ===//
-	MySndMgr *					m_SndMgr;
-	AppCommon&				    m_MyApp;
-	P2PEngine&					m_Engine;
-	quint16						m_maxAmplitude;
+protected slots:
+    void                        slotLogMsg( const QString& text );
 
-	int							m_iSndInBufferIdx;
-	char						m_as8SndInBuffer[4096];
-
-
+private:
+    QFile                       m_LogFile;
+    QMutex                      m_LogMutex;
 };

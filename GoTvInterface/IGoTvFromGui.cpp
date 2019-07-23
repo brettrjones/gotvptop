@@ -230,9 +230,9 @@ void IGoTv::fromGuiNeedMorePlayData( int16_t * retAudioSamples, int deviceReqDat
 }
 
 //============================================================================
-void IGoTv::fromGuiMicrophoneData( int16_t * pcmData, int pcmDataLenInBytes )
+void IGoTv::fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift )
 {
-    getPtoP().fromGuiMicrophoneData( pcmData, pcmDataLenInBytes );
+    getPtoP().fromGuiMicrophoneDataWithInfo( pcmData, pcmDataLenBytes, isSilence, totalDelayTimeMs, clockDrift );
 }
 
 //============================================================================

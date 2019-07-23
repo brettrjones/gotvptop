@@ -131,20 +131,15 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetVideoWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetVoiceWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetBaseWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AudioBuffer.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AudioDefs.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AudioDeviceCoreWin.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AudioDeviceWaveWin.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AudioMixerMgrWin.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/IVxWaveOut.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxWaveIn.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxWaveOut.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxWaveOutLinux.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AudioOutQt.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AudioTestGenerator.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AudioOutIo.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/MyQtSoundInput.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/MyQtSoundOutput.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioDefs.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioInIo.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioInThread.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioIoMgr.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioMixer.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioOutIo.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioOutThread.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioTestGenerator.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioUtils.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MySndMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxResourceToRealFile.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxTilePositioner.h \
@@ -215,6 +210,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvPtoP/AppSource/GoTvPlayerSettings.h \
     $$PWD/GoTvInterface/config_libgotvptop.h \
     $$PWD/GoTvInterface/GoTvRenderFrame.h \
+	$$PWD/GoTvInterface/IAudioInterface.h \
     $$PWD/GoTvInterface/IDefs.h \
     $$PWD/GoTvInterface/IFromGui.h \
     $$PWD/GoTvInterface/IGoTv.h \
@@ -355,18 +351,15 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetTextWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetVideoWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetVoiceWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AudioBuffer.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AudioDeviceCoreWin.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AudioDeviceWaveWin.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AudioMixerMgrWin.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AudioOutIo.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AudioOutQt.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AudioTestGenerator.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/MyQtSoundInput.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/MyQtSoundOutput.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioInIo.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioInThread.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioIoMgr.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioMixer.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioOutIo.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioOutThread.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioTestGenerator.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioUtils.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MySndMgr.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxWaveIn.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxWaveOut.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AcceptCancelWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AvatarBar.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/BottomBarWidget.cpp \

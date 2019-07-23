@@ -8,15 +8,6 @@
 #include <inttypes.h> // all compilers must support this header to avoid massive typedef clashes
 #include <sys/types.h> // for size_t in linux
 
-//#ifdef TARGET_OS_LINUX
-//# define int8_t char
-//#endif // TARGET_OS_LINUX
-
-
-#ifdef _UNICODE
-//echo configuration error..use Multibyte Character Set instead of _UNICODE
-#endif // _UNICODE
-
 #ifdef TARGET_OS_WINDOWS
 # define PRIdS       "Id"
 # define PRIuS       "Iu"
@@ -76,6 +67,15 @@
 # define GOTV_BEGIN_CDECLARES
 # define GOTV_END_CDECLARES
 #endif // __cplusplus
+
+#if defined __cplusplus
+GOTV_BEGIN_CDECLARES
+#endif // defined __cplusplus
+    int VxSleep( int milliSec ); // microsoft sleep returns void so had to make a function to return no error
+#if defined __cplusplus
+GOTV_END_CDECLARES
+#endif // defined __cplusplus
+
 
 # if !defined(GOTV_GNUC_PREREQ)
 #  if defined(__GNUC__)&&defined(__GNUC_MINOR__)
@@ -610,7 +610,6 @@ GOTV_END_CDECLARES
 # define sleep_os(exp)		VxSleep(exp*1000)
 # define msleep_os(exp)		VxSleep(exp)
 # define usleep_os(exp)		VxSleep(exp/1000)
-GOTV_INLINE int VxSleep( int milliSec ) { Sleep( milliSec ); return 0; } // microsoft sleep returns void so had to make a function to return no error
 
 # define VxGetLastError		GetLastError
 # define VX_MAX_PATH		260
@@ -1076,17 +1075,6 @@ typedef struct tWAVEFORMATEX
 # define     INVALID_SOCKET		-1		// use windows style socket define
 # define     SOCKET_ERROR		-1		// use windows style socket define
 
-
-//VxSleep.. sleep specified milliseconds
-#  if defined( TARGET_OS_ANDROID )
-void VxSleep( int iMilliSec );
-# else
-#  ifndef TARGET_OS_WINDOWS
-// normal Linux
-#   include <unistd.h>
-#   define VxSleep(exp)		usleep(exp * 1000)
-#  endif // TARGET_OS_WINDOWS
-# endif // TARGET_OS_ANDROID
 # endif // _MSC_VER
 
 #if defined( _MSC_VER ) || defined( TARGET_OS_WINDOWS )
@@ -1356,12 +1344,6 @@ typedef int64_t              time64_t;
 #if !defined(TARGET_OS_WINDOWS)
 # define HAVE_SYS_STATVFS_H			1
 #endif // TARGET_OS_WINDOWS
-
-/* Define if you have the <sys/utime.h> header file. */
-// does not seem to exist on any target
-//#if !defined(TARGET_OS_WINDOWS) && !defined(TARGET_OS_ANDROID)
-//# define HAVE_SYS_UTIME_H			1
-//#endif // TARGET_OS_WINDOWS
 
 #define HAVE_SSIZE_T				1
 

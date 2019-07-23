@@ -48,7 +48,6 @@ public:
 
 	bool						fromGuiSndRecord( ESndRecordState eRecState, VxGUID& feedId, const char * fileName  );
 	bool						fromGuiAssetAction( AssetInfo& assetInfo, EAssetAction assetAction, int pos0to100000 );
-	//void						fromGuiMicrophoneData( int16_t * pu16PcmData, uint16_t u16PcmDataLen );
 	virtual void				callbackOpusEncoded( void * userData, uint8_t * encodedAudio, int32_t frame1Len, int32_t	frame2Len );
 
 	bool						startSndWrite( const char * fileName, bool beginInPausedState );

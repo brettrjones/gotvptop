@@ -14,7 +14,6 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "config_gotvapps.h"
 
 enum ESndDef
 {

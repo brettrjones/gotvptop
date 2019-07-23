@@ -115,6 +115,12 @@ IToGui& P2PEngine::getToGui()
 }
 
 //============================================================================
+IAudioRequests& P2PEngine::getAudioRequest()
+{
+    return IToGui::getAudioRequests();
+}
+
+//============================================================================
 void P2PEngine::startupEngine()
 {
     iniitializePtoPEngine();

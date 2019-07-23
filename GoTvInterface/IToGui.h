@@ -15,7 +15,7 @@
 //============================================================================
 
 #include "IDefs.h"
-#include "GoTvInterface/IGoTvDefs.h"
+#include <GoTvInterface/IAudioInterface.h>
 
 #include <CoreLib/AppErr.h>
 #include <CoreLib/AssetDefs.h>
@@ -114,6 +114,7 @@ class IToGui
 {
 public:
     static IToGui&              getToGui();
+    static IAudioRequests&      getAudioRequests();
 
     virtual void				playGoTvMedia( AssetInfo * assetInfo ) {};
 
@@ -125,17 +126,6 @@ public:
 	virtual void				toGuiStatusMessage( const char* errMsg ) = 0;
     /// a module has changed state
     virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState ) = 0;
-
-	/// Start/Stop microphone sound capture
-	virtual void				toGuiWantMicrophoneRecording( bool wantMicInput ) = 0;
-	/// Start/Stop output to speaker
-	virtual void				toGuiWantSpeakerOutput( bool wantSpeakerOutput ) = 0;
-	/// Send audio from MediaProcessor mixer to GUI for playback
-	virtual void				toGuiPlayAudio( int16_t * pu16PcmData, int pcmDataLenInBytes ) = 0;
-    virtual int  				toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes ) = 0;
-    virtual double  			toGuiGetAudioDelaySeconds() = 0;
-    virtual double				toGuiGetAudioCacheTotalSeconds() = 0;
-    virtual int				    toGuiGetAudioCacheFreeSpace( EAppModule appModule ) = 0;
 
 	/// Start/Stop camera capture
 	virtual void				toGuiWantVideoCapture( bool wantVidCapture ) = 0;

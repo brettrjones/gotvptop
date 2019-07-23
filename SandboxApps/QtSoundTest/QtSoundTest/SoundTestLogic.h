@@ -61,8 +61,6 @@ public:
     /// for visualization of audio input
     virtual void                microphoneAudioRecieved( QAudioFormat& /*format*/, void * /*data*/, int /*dataLen*/ ) override;
 
-    /// Microphone sound capture ( 8000hz PCM 16 bit data, 80ms of sound )
-    virtual void				fromGuiMicrophoneData( int16_t* pcmData, uint16_t pcmDataLenBytes, bool isSilence )  override;
     /// Microphone sound capture with info for echo cancel ( 8000hz PCM 16 bit data, 80ms of sound )
     virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift ) override;
     /// Mute/Unmute microphone

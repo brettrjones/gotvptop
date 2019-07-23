@@ -392,25 +392,14 @@ void P2PEngine::fromGuiNativeGlDestroy( void )
 }
 
 //============================================================================
-void P2PEngine::fromGuiMicrophoneData( int16_t * pu16PcmData, uint16_t u16PcmSampleCnt )
+void P2PEngine::fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmSampleCnt, bool isSilence, int totalDelayTimeMs, int clockDrift )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	m_MediaProcessor.fromGuiMicrophoneData( pu16PcmData, u16PcmSampleCnt );
-}
-
-//============================================================================
-void P2PEngine::fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmSampleCnt, int totalDelayTimeMs, int clockDrift )
-{
-	if( VxIsAppShuttingDown() )
-	{
-		return;
-	}
-
-	m_MediaProcessor.fromGuiMicrophoneDataWithInfo( pcmData, pcmSampleCnt, totalDelayTimeMs, clockDrift );
+	m_MediaProcessor.fromGuiMicrophoneDataWithInfo( pcmData, pcmSampleCnt, isSilence, totalDelayTimeMs, clockDrift );
 }
 
 //============================================================================

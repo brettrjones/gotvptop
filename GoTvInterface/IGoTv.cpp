@@ -79,6 +79,12 @@ IToGui& IToGui::getToGui()
 }
 
 //============================================================================
+IAudioRequests& IToGui::getAudioRequests()
+{
+    return IGoTv::getIGoTv();
+}
+
+//============================================================================
 AppCommon& IGoTv::getAppCommon()
 {
     return GetAppInstance();

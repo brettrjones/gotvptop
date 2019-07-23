@@ -152,8 +152,8 @@ public:
 														int yRowStride, int uRowStride, int vRowStride,
 														int yPixStride, int uPixStride, int vPixStride,
 														int imageWidth, int imageHeight, int imageRotate );
-	virtual void				fromGuiMicrophoneData( int16_t * pu16PcmData, uint16_t pcmDataLenBytes );
-	virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, int totalDelayTimeMs, int clockDrift );
+	//virtual void				fromGuiMicrophoneData( int16_t * pu16PcmData, uint16_t pcmDataLenBytes );
+	virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift );
 	virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen );
 
 	virtual void				fromGuiSoundDelayTest( void );

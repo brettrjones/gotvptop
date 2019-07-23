@@ -138,6 +138,84 @@ bool CopyIfRequiredApkDirectory( std::string apkFileDir, std::string destDir, bo
 
     return result;
 }
+#else
+
+// android:theme=”@android:style/Theme.NoTitleBar.Fullscreen”
+bool CopyIfRequiredAssetFile( std::string assetFileName, std::string destFile, bool replaceIfDifferent = true )
+{
+    bool result = false;
+    if( !assetFileName.empty() && !destFile.empty() )
+    {
+        VxFileUtil::makeForwardSlashPath( assetFileName );
+        VxFileUtil::makeForwardSlashPath( destFile );
+
+        size_t assetLength = VxFileUtil::fileExists( assetFileName.c_str() );
+        int64_t destFileLen = VxFileUtil::fileExists( destFile.c_str() );
+        if( !destFileLen || ( replaceIfDifferent && ( assetLength != destFileLen ) ) )
+        {
+            std::string destDir = VxFileUtil::getJustPath( destFile );
+            if( !VxFileUtil::directoryExists( destDir.c_str() ) )
+            {
+                VxFileUtil::makeDirectory( destDir.c_str() );
+            }
+
+            char* buffer = (char*)malloc( assetLength + 1 );
+            VxFileUtil::readWholeFile( assetFileName.c_str(), buffer, assetLength );
+            buffer[ assetLength ] = 0;
+            result = ( 0 == VxFileUtil::writeWholeFile( destFile.c_str(), buffer, assetLength ) );
+            free( buffer );
+        }
+
+        if( ( 0 != assetLength ) && !VxFileUtil::fileExists( destFile.c_str() ) )
+        {
+            LogMsg( LOG_ERROR, "Could not create file %s len %d", destFile.c_str(), assetLength );
+        }
+        else
+        {
+            result = true;
+        }
+    }
+ 
+    return result;
+}
+
+bool CopyIfRequiredAssetDirectory( std::string assetFileDir, std::string destDir, bool replaceIfDifferent = true )
+{
+    bool result = true;
+    if( !assetFileDir.empty() && !destDir.empty() )
+    {
+        VxFileUtil::assureTrailingDirectorySlash( assetFileDir );
+        VxFileUtil::assureTrailingDirectorySlash( destDir );
+        VxFileUtil::makeDirectory( destDir );
+        std::vector<std::string> fileList;
+
+        if( 0 == VxFileUtil::listFilesInDirectory( assetFileDir.c_str(), fileList ) )
+        {
+            for( auto fileNameAndPath : fileList )
+            {
+                //! remove the path and return just the file name
+                std::string justFileName;
+                VxFileUtil::getJustFileName( fileNameAndPath.c_str(), justFileName );
+
+                result &= CopyIfRequiredAssetFile( assetFileDir + justFileName, destDir + justFileName, replaceIfDifferent );
+            }
+        }
+        else
+        {
+            result = false;
+            LogMsg( LOG_DEBUG, "Could list asset dir %s", assetFileDir.c_str() );
+        }
+    }
+    else
+    {
+        result = false;
+        LogMsg( LOG_DEBUG, "Empty asset directory name" );
+    }
+
+
+    return result;
+}
+
 #endif // defined( TARGET_OS_ANDROID )
 
 //============================================================================
@@ -402,7 +480,133 @@ bool OsInterface::initUserPaths()
             CEnvironment::setenv( "SSL_CERT_FILE", cacertFile );
         }
     }
-#endif //  defined(TARGET_OS_ANDROID)
+
+#endif // 
+
+#if !defined(TARGET_OS_ANDROID)
+    // find root of where we can write files
+    std::string storageDir = VxGetRootDataStorageDirectory();
+
+    std::string cachedPath = storageDir + "kodi/cache";
+    std::string kodiCachedAssetsPath = cachedPath + "/kodi";
+    std::string kodiBinStoragePath = kodiCachedAssetsPath + "/libs";
+
+    std::string kodiAssetsPath = exePath + "/assets/kodi";
+
+    std::string kodiStoragePath = storageDir + "kodi";
+    std::string gotvStorageDir = storageDir + "gotv";
+    std::string tempDir = storageDir + "temp";
+    std::string logsDir = storageDir + "logs";
+    //VxFileUtil::makeForwardSlashPath( exePath );
+#ifdef TARGET_OS_WINDOWS
+    // must have backward slash path for python in windows
+    std::string pythonPath = exePath + "\\assets\\kodi\\system\\Python";
+    std::string pythonPathWithSlash = pythonPath + "\\";
+#else
+    std::string pythonPath = exePath + "/assets/kodi/system/Python";
+    std::string pythonPathWithSlash = pythonPath + "/";
+#endif // TARGET_OS_WINDOWS
+    VxSetPythonExeDirectory( pythonPath.c_str() );
+    std::string pythonDlls = pythonPathWithSlash + "Dlls";
+    std::string pythonLibs = pythonPathWithSlash + "Lib";
+    VxSetPythonDllDirectory( pythonDlls.c_str() );
+    VxSetPythonLibDirectory( pythonLibs.c_str() );
+
+#ifdef DEBUG
+    LogMsg( LOG_DEBUG, "storage (%s) kodi (%s) gotv (%s) log (%s) ", storageDir.c_str(), kodiStoragePath.c_str(), gotvStorageDir.c_str(), logsDir.c_str() );
+#endif // DEBUG
+
+    // home of install distrubuted assets ( for android this is cached asset in storage/apk/assets/kodi )
+    setenv( "KODI_HOME", kodiStoragePath.c_str(), 0 );
+
+    // normally this would be the execuatable binary assets path
+    setenv( "KODI_BIN_HOME", kodiAssetsPath.c_str(), 0 );
+
+    // this is where downloaded binary extentions to kodi executable is put
+    setenv( "KODI_BINADDON_PATH", kodiBinStoragePath.c_str(), 0 );
+
+    // writable storage root directory where downloaded addons and stuff goes
+    setenv( "HOME", kodiStoragePath.c_str(), 0 );
+
+    // temporary files
+    setenv( "KODI_TEMP", tempDir.c_str(), 0 );
+
+    // installed python path
+    setenv( "PYTHONHOME", pythonPath.c_str(), 1 );
+    setenv( "PYTHONPATH", "", 1 );
+    setenv( "PYTHONOPTIMIZE", "", 1 );
+
+    // map our special drives
+
+    VxFileUtil::makeForwardSlashPath( kodiAssetsPath );
+    CSpecialProtocol::SetXBMCPath( kodiAssetsPath );
+
+    CSpecialProtocol::SetXBMCBinPath( kodiBinStoragePath );
+    CSpecialProtocol::SetXBMCBinAddonPath( kodiCachedAssetsPath + "/addons" );
+    CSpecialProtocol::SetXBMCAltBinAddonPath( kodiStoragePath + "/addons" );
+
+    CSpecialProtocol::SetHomePath( kodiStoragePath );
+    CSpecialProtocol::SetMasterProfilePath( kodiStoragePath + "/userdata" );
+
+    CSpecialProtocol::SetTempPath( tempDir );
+    CSpecialProtocol::SetLogPath( logsDir );
+
+    // setup paths so accessable outside of kodi
+    VxFileUtil::assureTrailingDirectorySlash( exePath );
+
+    VxFileUtil::makeForwardSlashPath( kodiBinStoragePath );
+    VxFileUtil::assureTrailingDirectorySlash( kodiBinStoragePath );
+    VxSetExeDirectory( kodiBinStoragePath.c_str() );
+
+    // copy profile files for gotv
+    CopyIfRequiredAssetDirectory( exePath + "assets/gotv/profile", gotvStorageDir + "/profile", false );
+
+    // set paths so accessable outside of kodi
+    VxFileUtil::makeForwardSlashPath( kodiBinStoragePath );
+    VxFileUtil::assureTrailingDirectorySlash( kodiBinStoragePath );
+    VxSetExeDirectory( kodiBinStoragePath.c_str() );
+
+    VxFileUtil::makeForwardSlashPath( kodiAssetsPath );
+    VxFileUtil::assureTrailingDirectorySlash( kodiAssetsPath );
+    VxSetExeKodiAssetsDirectory( kodiAssetsPath.c_str() );
+
+    VxFileUtil::makeForwardSlashPath( gotvStorageDir );
+    VxFileUtil::assureTrailingDirectorySlash( gotvStorageDir );
+    VxSetExeGoTvAssetsDirectory( gotvStorageDir.c_str() );
+
+
+    // move some requried files into place for initial startup
+
+    // advanced settings requires settings.xml
+    std::string settingsXmlFile = CSpecialProtocol::TranslatePath( "special://xbmc/system/settings/settings.xml" );
+    if( !VxFileUtil::fileExists( settingsXmlFile.c_str() ) )
+    {
+        CopyIfRequiredAssetFile( exePath + "assets/kodi/system/settings/settings.xml", settingsXmlFile );
+        if( !VxFileUtil::fileExists( settingsXmlFile.c_str() ) )
+        {
+            LogMsg( LOG_ERROR, "ERROR could not open settings file %s", settingsXmlFile.c_str() );
+        }
+    }
+
+    std::string cacert = CEnvironment::getenv( "SSL_CERT_FILE" );
+    if( cacert.empty() || !VxFileUtil::fileExists( ( cacert.c_str() ) ) )
+    {
+        // android assumes the cert file has been cached.. force update of cached file
+        std::string cacertFile = CSpecialProtocol::TranslatePath( "special://xbmc/system/certs/cacert.pem" );
+        if( !VxFileUtil::fileExists( cacertFile.c_str() ) )
+        {
+            CopyIfRequiredAssetFile( kodiAssetsPath + "system/certs/cacert.pem", cacertFile );
+        }
+
+        if( !VxFileUtil::fileExists( cacertFile.c_str() ) )
+        {
+            LogMsg( LOG_ERROR, "ERROR could not open cert file %s", cacertFile.c_str() );
+        }
+        else if( cacert.empty() )
+        {
+            CEnvironment::setenv( "SSL_CERT_FILE", cacertFile );
+        }
+    }
 
     // initialize all the directories we can without the user specific directory that can only be set after log in
     // For PtoP
@@ -413,21 +617,24 @@ bool OsInterface::initUserPaths()
     CSpecialProtocol::SetAppDataPath( URIUtils::AddFileToFolder( gotvDir, "gotvdata" ) );		// /storage/GoTvPtoP/gotv/
 
     // Python
-    gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExePython ).c_str() );
-    CSpecialProtocol::SetPath( "special://xbmc/system/python", gotvDir.c_str() );
-    LogMsg( LOG_DEBUG, "python path %s", gotvDir.c_str() );
+    //gotvDir = VxGetAppDirectory( eAppDirExePython ).c_str();
+    CSpecialProtocol::SetPath( "special://xbmc/system/python", pythonPath.c_str() );
+    LogMsg( LOG_DEBUG, "python path %s", pythonPath.c_str() );
 
-    gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExePythonDlls ).c_str() );
-    CSpecialProtocol::SetPath( "special://xbmc/system/python/DLLs", gotvDir.c_str() );
-    LogMsg( LOG_DEBUG, "python dlls %s", gotvDir.c_str() );
+    //gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExePythonDlls ).c_str() );
+    //gotvDir = VxGetAppDirectory( eAppDirExePythonDlls ).c_str();
+    CSpecialProtocol::SetPath( "special://xbmc/system/python/DLLs", pythonDlls.c_str() );
+    LogMsg( LOG_DEBUG, "python dlls %s", pythonDlls.c_str() );
 
-    gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExePythonLibs ).c_str() );
-    CSpecialProtocol::SetPath( "special://xbmc/system/python/Lib", gotvDir.c_str() );
-    LogMsg( LOG_DEBUG, "python lib %s", gotvDir.c_str() );
+    //gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExePythonLibs ).c_str() );
+    //gotvDir = VxGetAppDirectory( eAppDirExePythonLibs ).c_str();
+    CSpecialProtocol::SetPath( "special://xbmc/system/python/Lib", pythonLibs.c_str() );
+    LogMsg( LOG_DEBUG, "python lib %s", pythonLibs.c_str() );
 
     // Kodi master profile path ( In Roaming pm windows )
     gotvDir = CSpecialProtocol::TranslatePath( "special://masterprofile/" );
     CEnvironment::setenv( CCompileInfo::GetUserProfileEnvName(), gotvDir.c_str() );
+#endif //  defined(TARGET_OS_ANDROID)
 
 #ifdef DEBUG
     LogMsg( LOG_DEBUG, "Initalize directories took %3.3f sec", loadTimer.elapsedSec() );

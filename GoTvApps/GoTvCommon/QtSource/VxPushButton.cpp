@@ -321,8 +321,8 @@ void VxPushButton::drawBorder(  VxAppTheme& appTheme, QPainter& painter )
 void VxPushButton::paintEvent( QPaintEvent* ev )
 {
 	QPainter painter( this );
-    VxAppTheme& appTheme = getMyApp().getAppTheme();
-   if( !text().isEmpty() )
+    VxAppTheme& appTheme = m_MyApp.getAppTheme();
+    if( !text().isEmpty() )
     {
         QPushButton::paintEvent( ev );
         drawBorder( appTheme, painter );
