@@ -36,7 +36,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiHardwareCtrlClient.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiOfferInterface.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/UserProfile.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AnalogClock.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/DialogConfirmRemoveMessage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileActionBarWidget.h \
@@ -428,7 +427,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppTheme.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppDisplay.cpp \
-    $$PWD/GoTvApps/GoTvPtoP/AppSource/GoTvPlayerSettings.cpp \
     $$PWD/GoTvApps/GoTvPtoP/AppSource/main.cpp \
     $$PWD/GoTvApps/GoTvPtoP/AppSource/exportdialog.cpp \
     $$PWD/GoTvInterface/GoTvRenderFrame.cpp \

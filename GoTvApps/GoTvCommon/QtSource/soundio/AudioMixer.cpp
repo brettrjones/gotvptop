@@ -122,7 +122,7 @@ int AudioMixer::enqueueAudioData( EAppModule appModule, int16_t * pcmData, int p
         m_AtomicBufferSize = m_AudioBuffer.size();
         bufData = m_AudioBuffer.data();
         int bytesAvail = m_AtomicBufferSize;
-        verifySpeakerSamples();
+        //verifySpeakerSamples();
         bufData = m_AudioBuffer.data();
         m_MixerMutex.unlock();
         emit signalAvailableSpeakerBytesChanged( bytesAvail );

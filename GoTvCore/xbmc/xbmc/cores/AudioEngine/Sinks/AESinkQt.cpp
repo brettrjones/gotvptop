@@ -171,12 +171,14 @@ double CAESinkQt::GetCacheTotal( )
     return  m_IGoTv.toGuiGetAudioCacheTotalSeconds( eAppModuleKodi );
 }
 
+extern bool movieStarted;
+
 //============================================================================
 unsigned int CAESinkQt::AddPackets( uint8_t **data, unsigned int frames, unsigned int offset )
 {
-    int size = frames * m_AvailableFormat.m_frameSize;
+    int totalBytes = frames * m_AvailableFormat.m_frameSize;
 
-    void * buffer = data[ 0 ] + offset * m_AvailableFormat.m_frameSize;
+    unsigned char* audioBuffer = (unsigned char*)data[ 0 ] + offset * m_AvailableFormat.m_frameSize;
 
     //static bool firstSample = true;
     //if( firstSample && ( frames > 16 ) )
@@ -192,12 +194,12 @@ unsigned int CAESinkQt::AddPackets( uint8_t **data, unsigned int frames, unsigne
     //}
 
 	int retryCnt = 0;
-    while( ( m_IGoTv.toGuiGetAudioCacheFreeSpace( eAppModuleKodi ) < size ) && ( retryCnt < 5 ) )
+    while( ( m_IGoTv.toGuiGetAudioCacheFreeSpace( eAppModuleKodi ) < totalBytes ) && ( retryCnt < 50 ) )
     {
-        int requiredSpace = size - m_IGoTv.toGuiGetAudioCacheFreeSpace( eAppModuleKodi );
+        int requiredSpace = totalBytes - m_IGoTv.toGuiGetAudioCacheFreeSpace( eAppModuleKodi );
         if( requiredSpace > 0 )
         {
-            VxSleep( 100 );
+            VxSleep( 10 );
 			retryCnt++;
         }
 		else
@@ -206,12 +208,12 @@ unsigned int CAESinkQt::AddPackets( uint8_t **data, unsigned int frames, unsigne
 		}
     }
 
-#ifdef DEBUG_KODI_AUDIO
-	if( retryCnt >= 5 )
+//#ifdef DEBUG_KODI_AUDIO
+	if( retryCnt >= 50 )
 	{
-		LogMsg( LOG_DEBUG, "CAESinkQt::AddPackets timeout snd buf needs %d free space but has %d \n", size, m_IGoTv.toGuiGetAudioCacheFreeSpace( eAppModuleKodi )  );
+		LogMsg( LOG_DEBUG, "CAESinkQt::AddPackets timeout snd buf needs %d free space but has %d \n", totalBytes, m_IGoTv.toGuiGetAudioCacheFreeSpace( eAppModuleKodi )  );
 	}
-#endif // DEBUG_KODI_AUDIO
+//#endif // DEBUG_KODI_AUDIO
 
     //float* pBuffer = ( float* )data[ 0 ] + offset*m_AvailableFormat.m_frameSize;
     //static int frameCnt = 0;
@@ -245,13 +247,42 @@ unsigned int CAESinkQt::AddPackets( uint8_t **data, unsigned int frames, unsigne
     //    }
     //}
 
-    int wrote = m_IGoTv.toGuiPlayAudio( eAppModuleKodi, (float *)buffer, size );
+    static int pktCnt = 0;
+    if( movieStarted )
+    {
+        static int lineCnt = 0;
+        float* audioData = (float*)audioBuffer;
+        int sampleCnt = totalBytes / sizeof( float );
+        while( sampleCnt >= 16 )
+        {
+            if( pktCnt > 21 )
+            //if( 0 )
+            {
+                LogMsg( LOG_DEBUG, "pkt %d line %d - %3.3f %3.3f %3.3f %3.3f %3.3f %3.3f %3.3f %3.3f %3.3f %3.3f %3.3f %3.3f %3.3f %3.3f %3.3f %3.3f", pktCnt, lineCnt,
+                    audioData[ 0 ], audioData[ 1 ], audioData[ 2 ], audioData[ 3 ], audioData[ 4 ], audioData[ 5 ],
+                    audioData[ 6 ], audioData[ 7 ], audioData[ 8 ], audioData[ 9 ], audioData[ 10 ], audioData[ 11 ], audioData[ 12 ], audioData[ 13 ],
+                    audioData[ 14 ], audioData[ 15 ] );
+            }
+
+            lineCnt++;
+            sampleCnt -= 16;
+            audioData += 16;
+        }
+
+        pktCnt++;
+        if( pktCnt > 22 )
+        {
+//            LogMsg( LOG_DEBUG, "pkt %d", pktCnt );
+        }
+    }
+
+    int wrote = m_IGoTv.toGuiPlayAudio( eAppModuleKodi, (float *)audioBuffer, totalBytes );
     if( wrote < 0 )
     {
         CLog::Log( LOGERROR, "CAESinkQt::AddPackets - Failed to write" );
         return INT_MAX;
     }
-    else if( wrote != size )
+    else if( wrote != totalBytes )
     {
         CLog::Log( LOGERROR, "CAESinkQt::AddPackets - write not complete %d", wrote );
         return INT_MAX;

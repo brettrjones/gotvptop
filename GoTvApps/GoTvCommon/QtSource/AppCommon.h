@@ -206,21 +206,21 @@ public:
     /// Microphone sound capture ( 8000hz PCM 16 bit data, 80ms of sound )
    // virtual void				fromGuiMicrophoneData( int16_t* pcmData, uint16_t pcmDataLenBytes, bool isSilence );
     /// Microphone sound capture with info for echo cancel ( 8000hz PCM 16 bit data, 80ms of sound )
-    virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift );
+    virtual void				fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDataLenBytes, bool isSilence, int totalDelayTimeMs, int clockDrift ) override;
     /// Mute/Unmute microphone
-    virtual void				fromGuiMuteMicrophone( bool muteMic );
+    virtual void				fromGuiMuteMicrophone( bool muteMic ) override;
     /// Returns true if microphone is muted
-    virtual bool				fromGuiIsMicrophoneMuted( void );
+    virtual bool				fromGuiIsMicrophoneMuted( void ) override;
     /// Mute/Unmute speaker
-    virtual void				fromGuiMuteSpeaker( bool muteSpeaker );
+    virtual void				fromGuiMuteSpeaker( bool muteSpeaker ) override;
     /// Returns true if speaker is muted
-    virtual bool				fromGuiIsSpeakerMuted( void );
+    virtual bool				fromGuiIsSpeakerMuted( void ) override;
     /// Enable/Disable echo cancellation
-    virtual void				fromGuiEchoCancelEnable( bool enableEchoCancel );
+    virtual void				fromGuiEchoCancelEnable( bool enableEchoCancel ) override;
     /// Returns true if echo cancellation is enabled
-    virtual bool				fromGuiIsEchoCancelEnabled( void );
+    virtual bool				fromGuiIsEchoCancelEnabled( void ) override;
     /// Called when need more sound for speaker output
-    virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen );
+    virtual void				fromGuiAudioOutSpaceAvail( int freeSpaceLen ) override;
 
     //============================================================================
     //=== to gui media/render ===//

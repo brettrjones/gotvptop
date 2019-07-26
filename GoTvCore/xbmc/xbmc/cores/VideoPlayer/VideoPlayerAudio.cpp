@@ -74,6 +74,7 @@ CVideoPlayerAudio::~CVideoPlayerAudio()
     // CloseStream(true);
 }
 
+
 bool CVideoPlayerAudio::OpenStream( CDVDStreamInfo hints )
 {
     CLog::Log( LOGNOTICE, "Finding audio codec for: %i", hints.codec );
@@ -106,6 +107,8 @@ bool CVideoPlayerAudio::OpenStream( CDVDStreamInfo hints )
     }
     return true;
 }
+
+bool movieStarted = false;
 
 void CVideoPlayerAudio::OpenStream( CDVDStreamInfo &hints, CDVDAudioCodec* codec )
 {
@@ -147,10 +150,14 @@ void CVideoPlayerAudio::OpenStream( CDVDStreamInfo &hints, CDVDAudioCodec* codec
 
     m_messageParent.Put( new CDVDMsg( CDVDMsg::PLAYER_AVCHANGE ) );
     m_syncState = IDVDStreamPlayer::SYNC_STARTING;
+
+    movieStarted = true;
 }
 
 void CVideoPlayerAudio::CloseStream( bool bWaitForBuffers )
 {
+    movieStarted = false;
+
     bool bWait = bWaitForBuffers && m_speed > 0 && !CServiceBroker::GetActiveAE()->IsSuspended();
 
     // wait until buffers are empty

@@ -370,10 +370,11 @@ double AudioIoMgr::toGuiGetAudioDelaySeconds( EAppModule appModule )
 //============================================================================
 double AudioIoMgr::toGuiGetAudioCacheTotalSeconds( EAppModule appModule )
 {
-    int bytesInCache = m_AudioOutMixer.audioQueUsedSpace( appModule );
+    // total possible cached audio in seconds
+    // int bytesInCache = m_AudioOutMixer.audioQueUsedSpace( appModule );
 
-    double sndSeconds = ( (double)bytesInCache / (double)( 48000 * 2 * 2 )); //48000 * 2 bytes per sample * 2 channels
-    //LogMsg( LOG_DEBUG, "Max soundBuffer seconds %3.3f", sndSeconds );
+    double sndSeconds = ( (double)AUDIO_OUT_CACHE_USABLE_SIZE * BYTES_TO_MS_MULTIPLIER_SPEAKERS ) / 1000; 
+    LogMsg( LOG_DEBUG, "Max soundBuffer seconds %3.3f", sndSeconds );
     return sndSeconds;
 }
 

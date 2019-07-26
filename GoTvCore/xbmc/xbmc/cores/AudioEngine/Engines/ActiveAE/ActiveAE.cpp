@@ -29,9 +29,15 @@ using namespace ActiveAE;
 #include <CoreLib/VxDebug.h>
 #include "GoTvDebugConfig.h"
 
+/* BRJ make more time to more emulate qt large sound buffers
 #define MAX_CACHE_LEVEL 0.4   // total cache time of stream in seconds
 #define MAX_WATER_LEVEL 0.2   // buffered time after stream stages in seconds
 #define MAX_BUFFER_TIME 0.1   // max time of a buffer in seconds
+*/
+
+#define MAX_CACHE_LEVEL 0.8 // total cache time of stream in seconds
+#define MAX_WATER_LEVEL 0.4 // buffered time after stream stages in seconds
+#define MAX_BUFFER_TIME 0.2 // max time of a buffer in seconds
 
 bool g_BeginDebug = false;
 
