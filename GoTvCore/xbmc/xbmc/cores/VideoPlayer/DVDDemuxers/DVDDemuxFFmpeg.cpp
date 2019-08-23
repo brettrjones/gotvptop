@@ -189,8 +189,10 @@ CDVDDemuxFFmpeg::~CDVDDemuxFFmpeg()
 bool CDVDDemuxFFmpeg::Aborted()
 {
 //BRJ comment out for debugging
+#ifndef DEBUG
     if( m_timeout.IsTimePast() )
         return true;
+#endif // DEBUG
 
     std::shared_ptr<CDVDInputStreamFFmpeg> input = std::dynamic_pointer_cast< CDVDInputStreamFFmpeg >( m_pInput );
     if( input && input->Aborted() )
@@ -237,7 +239,12 @@ bool CDVDDemuxFFmpeg::Open( std::shared_ptr<CDVDInputStream> pInput, bool stream
     m_pFormatContext->interrupt_callback = int_cb;
 
     // try to abort after 30 seconds
+      //BRJ for debugging make long timeout
+#ifdef DEBUG
+    m_timeout.Set( 3000000 );
+#else
     m_timeout.Set( 30000 );
+#endif // DEBUG 
 
     if( m_pInput->IsStreamType( DVDSTREAM_TYPE_FFMPEG ) )
     {
@@ -304,7 +311,10 @@ bool CDVDDemuxFFmpeg::Open( std::shared_ptr<CDVDInputStream> pInput, bool stream
 
             if( !trySPDIFonly )
             {
-//BRJ                m_timeout.Set( 30000 );
+                // BRJ for debugging set long timeout
+#ifdef DEBUG
+                m_timeout.Set( 2000000 );
+#endif // DEBUG
                 av_probe_input_buffer( m_ioContext, &iformat, strFile.c_str(), NULL, 0, 0 );
             }
 
@@ -909,7 +919,12 @@ DemuxPacket* CDVDDemuxFFmpeg::Read()
             m_pkt.pkt.data = NULL;
 
             // timeout reads after 100ms
+            // BRJ for debugging set long timeout
+#ifdef DEBUG
+            m_timeout.Set( 2000000 );
+#else
             m_timeout.Set( 20000 );
+#endif // DEBUG
             m_pkt.result = av_read_frame( m_pFormatContext, &m_pkt.pkt );
             m_timeout.SetInfinite();
         }
@@ -1367,7 +1382,9 @@ void CDVDDemuxFFmpeg::CreateStreams( unsigned int program )
             // add streams from selected program
             for( unsigned int i = 0; i < m_pFormatContext->programs[ m_program ]->nb_stream_indexes; i++ )
             {
-                AddStream( m_pFormatContext->programs[ m_program ]->stream_index[ i ] );
+        int streamIdx = m_pFormatContext->programs[m_program]->stream_index[i];
+        m_pFormatContext->streams[streamIdx]->discard = AVDISCARD_NONE;
+        AddStream(streamIdx);
             }
 
             // discard all unneeded streams
@@ -2083,6 +2100,21 @@ bool CDVDDemuxFFmpeg::IsVideoReady()
                 hasVideo = true;
             }
         }
+    // Workaround for live audio-only MPEG-TS streams: If there are no elementary video streams
+    // present attempt to set the start time from the first available elementary audio stream instead
+    if (!hasVideo && !m_startTime)
+    {
+      for (unsigned int i = 0; i < m_pFormatContext->programs[m_program]->nb_stream_indexes; i++)
+      {
+        int idx = m_pFormatContext->programs[m_program]->stream_index[i];
+        st = m_pFormatContext->streams[idx];
+        if (st->codecpar->codec_type == AVMEDIA_TYPE_AUDIO)
+        {
+          m_startTime = static_cast<double>(av_rescale(st->cur_dts, st->time_base.num, st->time_base.den));
+          break;
+        }
+      }
+    }
     }
     else
     {
@@ -2098,6 +2130,20 @@ bool CDVDDemuxFFmpeg::IsVideoReady()
                     return true;
                 }
                 hasVideo = true;
+      }
+    }
+    // Workaround for live audio-only MPEG-TS streams: If there are no elementary video streams
+    // present attempt to set the start time from the first available elementary audio stream instead
+    if (!hasVideo && !m_startTime)
+    {
+      for (unsigned int i = 0; i < m_pFormatContext->nb_streams; i++)
+      {
+        st = m_pFormatContext->streams[i];
+        if (st->codecpar->codec_type == AVMEDIA_TYPE_AUDIO)
+        {
+          m_startTime = static_cast<double>(av_rescale(st->cur_dts, st->time_base.num, st->time_base.den));
+          break;
+        }
             }
         }
     }

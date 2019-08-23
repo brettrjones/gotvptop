@@ -1,0 +1,26 @@
+=== WINDOWS CHECKOUT KODI ===
+=== Build is for kodi Leia on Mint 19.2 64Bit  ===
+F:
+mkdir Kodi-18.3-Leia
+cd Kodi-18.3-Leia
+mkdir KodiInstall-18_3
+mkdir Kodi-18.3-LeiaBuild
+git clone -b 18.3-Leia git://github.com/xbmc/xbmc.git kodi18.3
+
+=== WINDOWS BUILD KODI ===
+cd kodi18.3/tools/buildsteps/windows/x64
+download-dependencies.bat
+// keep running download-dependencies.bat until success
+
+// Download and setup the build environment for libraries:
+
+download-msys2.bat
+
+// Build FFmpeg:
+
+make-mingwlibs.bat
+
+
+BuildSetup.bat
+
+You can now load and run in Visual Studio

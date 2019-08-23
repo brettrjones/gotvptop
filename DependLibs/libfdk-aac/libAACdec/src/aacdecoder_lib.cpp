@@ -88,7 +88,7 @@ amm-info@iis.fraunhofer.de
 
 ******************************************************************************/
 
-#include "aacdecoder_lib.h"
+#include "aacdecoder_fdk_lib.h"
 
 #include "aac_ram.h"
 #include "aacdecoder.h"

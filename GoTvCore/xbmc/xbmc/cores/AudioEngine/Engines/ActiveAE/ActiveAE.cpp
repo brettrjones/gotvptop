@@ -29,17 +29,17 @@ using namespace ActiveAE;
 #include <CoreLib/VxDebug.h>
 #include "GoTvDebugConfig.h"
 
-/* BRJ make more time to more emulate qt large sound buffers
 #define MAX_CACHE_LEVEL 0.4   // total cache time of stream in seconds
 #define MAX_WATER_LEVEL 0.2   // buffered time after stream stages in seconds
 #define MAX_BUFFER_TIME 0.1   // max time of a buffer in seconds
-*/
 
-#define MAX_CACHE_LEVEL 0.8 // total cache time of stream in seconds
-#define MAX_WATER_LEVEL 0.4 // buffered time after stream stages in seconds
-#define MAX_BUFFER_TIME 0.2 // max time of a buffer in seconds
+//BRJ make more time to more emulate qt large sound buffers
+//#define MAX_CACHE_LEVEL 0.8 // total cache time of stream in seconds
+//#define MAX_WATER_LEVEL 0.4 // buffered time after stream stages in seconds
+//#define MAX_BUFFER_TIME 0.2 // max time of a buffer in seconds
 
 bool g_BeginDebug = false;
+extern bool movieStarted;
 
 bool testDataHasVolume( float * data, int floatCnt )
 {
@@ -294,7 +294,7 @@ CActiveAE::CActiveAE() :
     m_vizInitialized = false;
     m_sinkHasVolume = false;
     m_aeGUISoundForce = false;
-    m_stats.Reset( 44800, true );
+    m_stats.Reset( 48000, true );
     m_streamIdGen = 0;
 
     m_settingsHandler.reset( new CActiveAESettings( *this ) );
@@ -1328,6 +1328,11 @@ AEAudioFormat CActiveAE::GetInputFormat( AEAudioFormat *desiredFmt )
 	inputFormat.m_frameSize = 2 * sizeof( float );
 	// frames is misnamed.. is really number of samples per frame 
 	inputFormat.m_frames = 48000 * 0.020;  // 20 ms samples
+    //inputFormat.m_frames = 2400;
+    inputFormat.m_streamInfo.m_channels = 0;
+    inputFormat.m_streamInfo.m_sampleRate = 0;
+
+    m_inputFormat = inputFormat;
 
     return inputFormat;
 }
@@ -1399,7 +1404,10 @@ void CActiveAE::Configure( AEAudioFormat *desiredFmt )
 
         bool streaming = false;
         //BRJ
-        g_StreamActive = false;
+        if( movieStarted )
+        {
+            streaming = false;
+        }
         m_sink.m_controlPort.SendOutMessage( CSinkControlProtocol::STREAMING, &streaming, sizeof( bool ) );
 
         delete m_encoder;
@@ -1425,7 +1433,11 @@ void CActiveAE::Configure( AEAudioFormat *desiredFmt )
     else
     {
         bool streaming = true;
-        g_StreamActive = true;
+        if( movieStarted )
+        {
+            streaming = true; // BRJ for debug breakpoint
+        }
+            
         m_sink.m_controlPort.SendOutMessage( CSinkControlProtocol::STREAMING, &streaming, sizeof( bool ) );
 
         AEAudioFormat outputFormat;

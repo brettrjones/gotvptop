@@ -98,6 +98,9 @@ bool CAESinkQt::Initialize( AEAudioFormat& desiredFormat, std::string &device )
 	desiredFormat.m_frameSize = 2 * sizeof( float );
 	// frames is misnamed.. is really number of samples per frame 
 	desiredFormat.m_frames = 48000 * 0.020;  // 20 ms samples
+    //desiredFormat.m_frames = 2400;
+    desiredFormat.m_streamInfo.m_channels = 0;
+    desiredFormat.m_streamInfo.m_sampleRate = 0;
 
 
 	m_DesiredFormat = desiredFormat;
@@ -115,7 +118,7 @@ bool CAESinkQt::Initialize( AEAudioFormat& desiredFormat, std::string &device )
     // m_frameSize is misnamed.. is really number of bytes per sample of all channels ie 2 channels * 16 bit samples = 4 or if float format then 2 channels * 4 bytes per sample = 8
 //    m_AvailableFormat.m_frameSize = 2 * sizeof( float );
     // frames is misnamed.. is really number of samples per frame 
- //   m_AvailableFormat.m_frames = 48000 * 0.020;  // 20 ms samples
+ //   m_AvailableFormat.m_frames = 48000 * 0.040;  // 40 ms samples
 //#endif // OUTPUT_PCM_SAMPLES
 
     //desiredFormat = m_AvailableFormat;

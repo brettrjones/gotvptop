@@ -91,7 +91,7 @@ amm-info@iis.fraunhofer.de
 #ifndef _CONCEAL_H_
 #define _CONCEAL_H_
 
-#include "aacdecoder_lib.h"
+#include "aacdecoder_fdk_lib.h"
 
 #include "channelinfo.h"
 

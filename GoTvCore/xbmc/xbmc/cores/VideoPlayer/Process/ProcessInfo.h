@@ -116,18 +116,18 @@ protected:
   CDataCacheCore *m_dataCache = nullptr;
 
   // player video info
-  bool m_videoIsHWDecoder;
+  bool m_videoIsHWDecoder = 0;
   std::string m_videoDecoderName;
   std::string m_videoDeintMethod;
   std::string m_videoPixelFormat;
   std::string m_videoStereoMode;
-  int m_videoWidth;
-  int m_videoHeight;
-  float m_videoFPS;
-  float m_videoDAR;
-  bool m_videoIsInterlaced;
+  int m_videoWidth = 0;
+  int m_videoHeight = 0;
+  float m_videoFPS = 0;
+  float m_videoDAR = 0;
+  bool m_videoIsInterlaced = 0;
   std::list<EINTERLACEMETHOD> m_deintMethods;
-  EINTERLACEMETHOD m_deintMethodDefault;
+  EINTERLACEMETHOD m_deintMethodDefault = VS_INTERLACEMETHOD_NONE;
   CCriticalSection m_videoCodecSection;
   CVideoBufferManager m_videoBufferManager;
   std::vector<AVPixelFormat> m_pixFormats;
@@ -135,8 +135,8 @@ protected:
   // player audio info
   std::string m_audioDecoderName;
   std::string m_audioChannels;
-  int m_audioSampleRate;
-  int m_audioBitsPerSample;
+  int m_audioSampleRate = 0;
+  int m_audioBitsPerSample = 0;
   CCriticalSection m_audioCodecSection;
 
   // render info
@@ -149,20 +149,20 @@ protected:
 
   // player states
   CCriticalSection m_stateSection;
-  bool m_stateSeeking;
-  std::atomic_int m_levelVQ;
-  std::atomic_bool m_renderGuiLayer;
-  std::atomic_bool m_renderVideoLayer;
-  float m_tempo;
-  float m_newTempo;
-  float m_speed;
-  float m_newSpeed;
-  bool m_frameAdvance;
-  time_t m_startTime;
-  int64_t m_time;
-  int64_t m_timeMax;
-  int64_t m_timeMin;
-  bool m_realTimeStream;
+  bool m_stateSeeking = 0;
+  std::atomic_int m_levelVQ = 0;
+  std::atomic_bool m_renderGuiLayer = false;
+  std::atomic_bool m_renderVideoLayer = false;
+  float m_tempo = 0.0f;
+  float m_newTempo = 0.0f;
+  float m_speed = 0.0f;
+  float m_newSpeed = 0.0f;
+  bool m_frameAdvance = false;
+  time_t m_startTime = 0;
+  int64_t m_time = 0;
+  int64_t m_timeMax = 0;
+  int64_t m_timeMin = 0;
+  bool m_realTimeStream = false;
 
   // settings
   CCriticalSection m_settingsSection;

@@ -1,16 +1,62 @@
 
 
-
 NOTE: building kodi is NOT required. instructions are here as a option to build kodi for comparison
 
 //=== New instructions for Kodi Leia ===//
 
-follow the instructions at https://github.com/xbmc/xbmc/blob/master/docs/README.md
+=== LINUX MINT Prerequisites ===
+Fresh install Linux Mint 19.2 in Virtual Box
 
-except use git clone -b Leia git://github.com/xbmc/xbmc.git 
-and
-if get a confure error about crosslib then do
-$ sudo make -C tools/depends/target/crossguid/ PREFIX=/usr/local 
+// add yourself to groups to avoid permission errors
+sudo usermod -a -G input,video <username>
+where <username> is gotv so 
+sudo usermod -a -G input,video gotv
+
+sudo add-apt-repository ppa:team-xbmc/ppa
+sudo apt-get update
+sudo apt-get upgrade
+
+
+==== Prerequisite libraries to build kodi ======
+sudo apt-get install libegl1-mesa-dev libgl1-mesa-dev automake autopoint bison build-essential ccache cmake gcc g++ cpp nasm flatbuffers gdc gperf default-jre fp-compiler gawk gettext git-core git libasound2-dev libass-dev libavcodec-dev libavfilter-dev libavformat-dev libavutil-dev libbluetooth-dev libbluray-dev libboost-dev libboost-thread-dev libbz2-dev libcap-dev libcdio-dev libcec-dev libcrystalhd-dev libcrystalhd3 libcwiid-dev libcwiid1 libdbus-1-dev libenca-dev libflac-dev libfontconfig-dev libfreetype6-dev libfribidi-dev libglew-dev libiso9660-dev libjpeg-dev libltdl-dev liblzo2-dev libmad0-dev libmicrohttpd-dev libmodplug-dev libmp3lame-dev libmpeg2-4-dev libmpeg3-dev libmysqlclient-dev libnfs-dev libogg-dev libpcre3-dev libplist-dev libpng-dev libpostproc-dev libpulse-dev libsamplerate-dev libsdl-dev libsdl-gfx1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libshairport-dev libsmbclient-dev libsqlite3-dev libssh-dev libssl-dev libswscale-dev libtiff-dev libtinyxml-dev libtool libudev-dev libusb-dev libva-dev  libvdpau-dev libvorbisenc2 libxml2-dev libxmu-dev libxrandr-dev libxrender-dev libxslt1-dev libxt-dev libyajl-dev pmount python-dev python-sqlite swig unzip yasm zip zlib1g-dev libxkbcommon-dev libglu-dev swig libgif-dev libjpeg-dev libpciaccess-dev libxrandr-dev libinput-dev uuid-dev libmariadb-dev rapidjson-dev libcurl4-openssl-dev libcurl4-openssl-dev libfstrcmp-dev libssl-dev libtag1-dev 
+
+=== LINUX CHECKOUT KODI ===
+=== Build is for kodi Leia on Mint 19.2 64Bit  ===
+cd ~
+git clone -b 18.3-Leia git://github.com/xbmc/xbmc.git kodi18.3
+
+
+=== LINUX BUILD KODI ===
+mkdir ~/kodi18.3-build
+cd ~/kodi18.3-build
+
+
+// cannot use gles because of RenderSystemGL compile error about GL_BACK_RIGHT
+cmake ../kodi18.3 -DCORE_PLATFORM_NAME=x11 -DX11_RENDER_SYSTEM=gl -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Debug -DENABLE_INTERNAL_CROSSGUID=ON -DENABLE_INTERNAL_FLATBUFFERS=ON -DENABLE_INTERNAL_FMT=ON
+
+or
+mkdir ~/kodiInstall8_3
+cmake ../kodi18.3 -DCORE_PLATFORM_NAME=x11 -DX11_RENDER_SYSTEM=gl -DCMAKE_INSTALL_PREFIX=~/kodiInstall8_3 -DCMAKE_BUILD_TYPE=Debug -DENABLE_INTERNAL_CROSSGUID=ON -DENABLE_INTERNAL_FLATBUFFERS=ON -DENABLE_INTERNAL_FMT=ON
+
+// NOTE: do make before doing sudo make install
+make
+sudo make install
+
+=== LINUX RUN KODI ===
+kodi
+
+=== LINUX UNINSTALL KODI ===
+cd ~/kodi18.3-build
+sudo make uninstall kodi
+
+
+//=== ANDROID  BUILD KODI ON LINUX MINT ===// 
+
+
+
+
+
+
 
 If try to update sdk from qcreator and see warning 
 Warning: File /home/gotv/.android/repositories.cfg could not be loaded then create it from command line
@@ -39,10 +85,10 @@ sudo apt update
 sudo apt build-dep kodi
 cd kodi
 sudo make -C tools/depends/target/crossguid PREFIX=/usr/local
-sudo make -C tools/depends/target/flatbuffers PREFIX=/usr/local
-sudo make -C tools/depends/target/libfmt PREFIX=/usr/local
-sudo make -C tools/depends/target/wayland-protocols PREFIX=/usr/local
-sudo make -C tools/depends/target/waylandpp PREFIX=/usr/local
+sudo make -C -g tools/depends/target/flatbuffers PREFIX=/usr/local
+sudo make -C -g tools/depends/target/libfmt PREFIX=/usr/local
+sudo make -C -g tools/depends/target/wayland-protocols PREFIX=/usr/local
+sudo make -C -g tools/depends/target/waylandpp PREFIX=/usr/local
 
 cd $HOME/project_sources/LinuxKodiLeia18.1
 mkdir kodi-build

@@ -90,7 +90,7 @@ amm-info@iis.fraunhofer.de
 
 ******************************************************************************/
 
-#include <libfdk-aac/include/aacdecoder_lib.h>
+#include <libfdk-aac/include/aacdecoder_fdk_lib.h>
 
 #include "genericStds.h"
 

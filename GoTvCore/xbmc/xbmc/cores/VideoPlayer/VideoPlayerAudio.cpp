@@ -108,7 +108,7 @@ bool CVideoPlayerAudio::OpenStream( CDVDStreamInfo hints )
     return true;
 }
 
-bool movieStarted = false;
+bool movieStarted = false; //BRJ
 
 void CVideoPlayerAudio::OpenStream( CDVDStreamInfo &hints, CDVDAudioCodec* codec )
 {

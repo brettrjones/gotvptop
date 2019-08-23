@@ -121,7 +121,7 @@ bool CDVDAudioCodecFFmpeg::Open( CDVDStreamInfo &hints, CDVDCodecOptions &option
 
     m_iSampleFormat = AV_SAMPLE_FMT_NONE;
     m_matrixEncoding = AV_MATRIX_ENCODING_NONE;
-  m_hasDownmix = false;
+    m_hasDownmix = false;
 
     m_codecName = "ff-" + std::string( m_pCodecContext->codec->name );
 

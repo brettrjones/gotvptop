@@ -91,7 +91,7 @@ amm-info@iis.fraunhofer.de
 #ifndef FDK_CORE_H
 #define FDK_CORE_H
 
-#include "aacdecoder_lib.h"
+#include "aacdecoder_fdk_lib.h"
 
 //#include "FDK_audio.h"
 

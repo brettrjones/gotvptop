@@ -94,7 +94,7 @@ amm-info@iis.fraunhofer.de
 #include "common_fix.h"
 
 #include "aac_rom.h"
-#include "aacdecoder_lib.h"
+#include "aacdecoder_fdk_lib.h"
 #include "FDK_bitstream.h"
 #include "overlapadd.h"
 

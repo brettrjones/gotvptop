@@ -150,7 +150,6 @@ void							DumpFloat( unsigned long u32MsgType, float* data, int dataLen, int in
 	#define vx_fatal(exp) (exp)
 #endif // RELEASE_MODE
 
-    extern bool g_StreamActive;
 
 #ifdef __cplusplus
 }

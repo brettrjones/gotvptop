@@ -1,0 +1,19 @@
+download and untar clion to ~/apps
+cd ~/apps/clion-2019.2/bin
+./clion.sh
+
+after setup
+In Build,Execution,Deployment->Toolchains
+change C Compiler to /usr/bin/gcc
+change C++ Compiler to /usr/bin/g++
+
+File->Import new cmake project from source
+follow prompts and import existing cmake project from ~/kodi18.3-build
+
+in In Build,Execution,Deployment->CMake
+change CMake options to -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++ -DCORE_PLATFORM_NAME=x11 -DX11_RENDER_SYSTEM=gl -DCMAKE_INSTALL_PREFIX=~/kodiInstall8_3 -DENABLE_INTERNAL_CROSSGUID=ON -DENABLE_INTERNAL_FLATBUFFERS=ON -DENABLE_INTERNAL_FMT=ON
+
+
+=== some debug hints ===
+// dump 16 bytes of memory location in hex
+(gdb) x/16ux &myVar
