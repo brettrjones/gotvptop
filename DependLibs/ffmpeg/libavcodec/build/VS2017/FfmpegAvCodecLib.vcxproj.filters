@@ -10,9 +10,6 @@
     <ClCompile Include="..\..\aac_adtstoasc_bsf.c" />
     <ClCompile Include="..\..\aac_parser.c" />
     <ClCompile Include="..\..\aaccoder.c" />
-    <ClCompile Include="..\..\aacdec.c" />
-    <ClCompile Include="..\..\aacdec_fixed.c" />
-    <ClCompile Include="..\..\aacdec_template.c" />
     <ClCompile Include="..\..\aacenc.c" />
     <ClCompile Include="..\..\aacenc_is.c" />
     <ClCompile Include="..\..\aacenc_ltp.c" />
@@ -413,7 +410,6 @@
     <ClCompile Include="..\..\lclenc.c" />
     <ClCompile Include="..\..\libcelt_dec.c" />
     <ClCompile Include="..\..\libfaac.c" />
-    <ClCompile Include="..\..\libfdk-aacdec.c" />
     <ClCompile Include="..\..\libgsmdec.c" />
     <ClCompile Include="..\..\libgsmenc.c" />
     <ClCompile Include="..\..\libilbc.c" />
@@ -957,7 +953,8 @@
     <ClCompile Include="..\..\adts_parser.c" />
     <ClCompile Include="..\..\..\libavfilter\lavfutils.c" />
     <ClCompile Include="..\..\magicyuvenc.c" />
-    <ClCompile Include="..\..\libfdk-aacenc.c" />
+    <ClCompile Include="..\..\aacdec_fixed.c" />
+    <ClCompile Include="..\..\aacdec_float.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\a64colors.h" />

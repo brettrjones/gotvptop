@@ -16,9 +16,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#include <ffmpeg/config_ffmpeg.h>
-
 #define FFT_FLOAT 1
 #define FFT_FIXED_32 0
-#include "fft_template.c"
+#include <ffmpeg/config_ffmpeg.h>
+
+#include "fft_template.c" 
 

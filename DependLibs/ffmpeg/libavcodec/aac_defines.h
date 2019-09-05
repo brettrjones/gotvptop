@@ -23,10 +23,6 @@
 
 #include "config_ffmpeg.h"
 
-#ifndef USE_FIXED
-#define USE_FIXED 0
-#endif
-
 #if USE_FIXED
 
 #include "libavutil/softfloat.h"

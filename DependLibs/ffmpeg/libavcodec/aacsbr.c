@@ -26,8 +26,12 @@
  * @author Robert Swain ( rob opendot cl )
  */
 
-#include "ffmpeg/config_ffmpeg.h"
+#undef USE_FIXED
 #define USE_FIXED 0
+#undef USE_FLOATS
+#define USE_FLOATS 1
+
+#include "ffmpeg/config_ffmpeg.h"
 
 #include "aac.h"
 #include "sbr.h"

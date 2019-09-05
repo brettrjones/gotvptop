@@ -26,10 +26,6 @@
 #ifndef AVCODEC_MPEGAUDIO_H
 #define AVCODEC_MPEGAUDIO_H
 
-#ifndef USE_FLOATS
-#   define USE_FLOATS 0
-#endif
-
 #include <stdint.h>
 #include "libavutil/avutil_internal.h"
 

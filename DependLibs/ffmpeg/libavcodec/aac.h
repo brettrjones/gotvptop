@@ -32,11 +32,13 @@
 
 
 #include "aac_defines.h"
-#include "libavutil/float_dsp.h"
-#include "libavutil/fixed_dsp.h"
+
 #include "avcodec.h"
 #if !USE_FIXED
-#include "mdct15.h"
+# include "libavutil/float_dsp.h"
+# include "mdct15.h"
+#else
+# include "libavutil/fixed_dsp.h"
 #endif
 #include "fft.h"
 #include "mpeg4audio.h"

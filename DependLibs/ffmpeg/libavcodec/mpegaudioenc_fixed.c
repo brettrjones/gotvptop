@@ -19,9 +19,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
+#undef USE_FLOATS
+#define USE_FLOATS 0
+
 #include <ffmpeg/config_ffmpeg.h>
-//#if USE_FIXED_POINT_CODECS
-#define FFMPEG_CONFIG_H 1
 
 #include "mpegaudioenc_template.c"
 
@@ -44,4 +45,3 @@ AVCodec ff_mp2fixed_encoder = {
     .defaults              = mp2_defaults,
 };
 
-//#endif // USE_FIXED_POINT_CODECS

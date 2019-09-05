@@ -88,9 +88,16 @@
  *       - HE AAC v2 comprises LC AAC with Spectral Band Replication and
            Parametric Stereo.
  */
-#ifdef FFMPEG_CONFIG_H
+#ifdef USE_FIXED
+//BRJ NOTE: required for visual studio understand not fixed definition of contextes
+#include "mpeg4audio.h"
+#include "aac.h"
+
 #include "libavutil/thread.h"
+
 #include <CoreLib/VxDebug.h>
+
+extern int testDecodeFrameCnt;
 
 static VLC vlc_scalefactors;
 static VLC vlc_spectral[11];
@@ -1163,6 +1170,7 @@ static av_cold int aac_decode_init(AVCodecContext *avctx)
         return AVERROR_UNKNOWN;
 
     ac->avctx = avctx;
+    ac->oc[ 0 ].m4ac.sample_rate = avctx->sample_rate;
     ac->oc[1].m4ac.sample_rate = avctx->sample_rate;
 
     aacdec_init(ac);
@@ -1655,6 +1663,23 @@ static int decode_spectrum_and_dequant(AACContext *ac, INTFLOAT coef[1024],
     const uint16_t *offsets = ics->swb_offset;
     INTFLOAT *coef_base = coef;
 
+    //if( testDecodeFrameCnt == 1 )
+    //{
+    //    uint8_t * data = (uint8_t *) &coef_base[ 0 ];
+    //    LogMsg( LOG_DEBUG, "BRJ decode_spectrum_and_dequant1 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        data[ 0 ], data[ 1 ], data[ 2 ], data[ 3 ], data[ 4 ], data[ 5 ],
+    //        data[ 6 ], data[ 7 ],
+    //        data[ 8 ], data[ 9 ], data[ 10 ], data[ 11 ], data[ 12 ], data[ 13 ],
+    //        data[ 14 ], data[ 15 ], testDecodeFrameCnt );
+    //    data = (uint8_t *)&coef_base[ 1000 ];
+    //    LogMsg( LOG_DEBUG, "BRJ decode_spectrum_and_dequant2 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        data[ 0 ], data[ 1 ], data[ 2 ], data[ 3 ], data[ 4 ], data[ 5 ],
+    //        data[ 6 ], data[ 7 ],
+    //        data[ 8 ], data[ 9 ], data[ 10 ], data[ 11 ], data[ 12 ], data[ 13 ],
+    //        data[ 14 ], data[ 15 ], testDecodeFrameCnt );
+    //    testDecodeFrameCnt = 1;
+    //}
+
     for (g = 0; g < ics->num_windows; g++)
         memset(coef + g * 128 + offsets[ics->max_sfb], 0,
                sizeof(INTFLOAT) * (c - offsets[ics->max_sfb]));
@@ -1935,6 +1960,23 @@ static int decode_spectrum_and_dequant(AACContext *ac, INTFLOAT coef[1024],
         coef += g_len << 7;
     }
 #endif /* USE_FIXED */
+    //if( testDecodeFrameCnt == 1 )
+    //{
+    //    uint8_t * data = (uint8_t *)&coef_base[ 0 ];
+    //    LogMsg( LOG_DEBUG, "BRJ decode_spectrum_and_dequant3 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        data[ 0 ], data[ 1 ], data[ 2 ], data[ 3 ], data[ 4 ], data[ 5 ],
+    //        data[ 6 ], data[ 7 ],
+    //        data[ 8 ], data[ 9 ], data[ 10 ], data[ 11 ], data[ 12 ], data[ 13 ],
+    //        data[ 14 ], data[ 15 ], testDecodeFrameCnt );
+    //    data = (uint8_t *)&coef_base[ 1000 ];
+    //    LogMsg( LOG_DEBUG, "BRJ decode_spectrum_and_dequant4 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        data[ 0 ], data[ 1 ], data[ 2 ], data[ 3 ], data[ 4 ], data[ 5 ],
+    //        data[ 6 ], data[ 7 ],
+    //        data[ 8 ], data[ 9 ], data[ 10 ], data[ 11 ], data[ 12 ], data[ 13 ],
+    //        data[ 14 ], data[ 15 ], testDecodeFrameCnt );
+    //    testDecodeFrameCnt = 1;
+    //}
+
     return 0;
 }
 
@@ -2220,7 +2262,42 @@ static int decode_cpe(AACContext *ac, GetBitContext *gb, ChannelElement *cpe)
         }
     }
 
+    //if( testDecodeFrameCnt == 1 )
+    //{
+    //    uint8_t * data = (uint8_t *)&cpe->ch[ 0 ].coeffs[ 0 ];
+    //    LogMsg( LOG_DEBUG, "BRJ decode_cpe1 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        data[ 0 ], data[ 1 ], data[ 2 ], data[ 3 ], data[ 4 ], data[ 5 ],
+    //        data[ 6 ], data[ 7 ],
+    //        data[ 8 ], data[ 9 ], data[ 10 ], data[ 11 ], data[ 12 ], data[ 13 ],
+    //        data[ 14 ], data[ 15 ], testDecodeFrameCnt );
+    //    data = (uint8_t *)&cpe->ch[ 1 ].coeffs[ 0 ];
+    //    LogMsg( LOG_DEBUG, "BRJ decode_cpe2 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        data[ 0 ], data[ 1 ], data[ 2 ], data[ 3 ], data[ 4 ], data[ 5 ],
+    //        data[ 6 ], data[ 7 ],
+    //        data[ 8 ], data[ 9 ], data[ 10 ], data[ 11 ], data[ 12 ], data[ 13 ],
+    //        data[ 14 ], data[ 15 ], testDecodeFrameCnt );
+    //    testDecodeFrameCnt = 1;
+    //}
+
     apply_intensity_stereo(ac, cpe, ms_present);
+
+    //if( testDecodeFrameCnt == 1 )
+    //{
+    //    uint8_t * data = (uint8_t *)&cpe->ch[ 0 ].coeffs[ 0 ];
+    //    LogMsg( LOG_DEBUG, "BRJ decode_cpe3 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        data[ 0 ], data[ 1 ], data[ 2 ], data[ 3 ], data[ 4 ], data[ 5 ],
+    //        data[ 6 ], data[ 7 ],
+    //        data[ 8 ], data[ 9 ], data[ 10 ], data[ 11 ], data[ 12 ], data[ 13 ],
+    //        data[ 14 ], data[ 15 ], testDecodeFrameCnt );
+    //    data = ( uint8_t * ) &cpe->ch[ 1 ].coeffs[ 0 ];
+    //    LogMsg( LOG_DEBUG, "BRJ decode_cpe4 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        data[ 0 ], data[ 1 ], data[ 2 ], data[ 3 ], data[ 4 ], data[ 5 ],
+    //        data[ 6 ], data[ 7 ],
+    //        data[ 8 ], data[ 9 ], data[ 10 ], data[ 11 ], data[ 12 ], data[ 13 ],
+    //        data[ 14 ], data[ 15 ], testDecodeFrameCnt );
+    //    testDecodeFrameCnt = 1;
+    //}
+
     return 0;
 }
 
@@ -2651,21 +2728,54 @@ static void imdct_and_windowing(AACContext *ac, SingleChannelElement *sce)
     int i;
 
     // imdct
+    //if( testDecodeFrameCnt == 1 )
+    //{
+    //    uint8_t * dataDmp = (uint8_t *)in;
+
+    //    LogMsg( LOG_DEBUG, "BRJ imdct1 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        dataDmp[ 0 ], dataDmp[ 1 ], dataDmp[ 2 ], dataDmp[ 3 ], dataDmp[ 4 ], dataDmp[ 5 ],
+    //        dataDmp[ 6 ], dataDmp[ 7 ],
+    //        dataDmp[ 8 ], dataDmp[ 9 ], dataDmp[ 10 ], dataDmp[ 11 ], dataDmp[ 12 ], dataDmp[ 13 ],
+    //        dataDmp[ 14 ], dataDmp[ 15 ], testDecodeFrameCnt );
+    //}
+
     if (ics->window_sequence[0] == EIGHT_SHORT_SEQUENCE) {
         for (i = 0; i < 1024; i += 128)
             ac->mdct_small.imdct_half(&ac->mdct_small, buf + i, in + i);
     } else {
         ac->mdct.imdct_half(&ac->mdct, buf, in);
+
+
+
 #if USE_FIXED
         for (i=0; i<1024; i++)
           buf[i] = (buf[i] + 4) >> 3;
 #endif /* USE_FIXED */
     }
 
+    //if( testDecodeFrameCnt == 1 )
+    //{
+    //    uint8_t * dataDmp = (uint8_t *)buf;
+
+    //    LogMsg( LOG_DEBUG, "BRJ imdct2 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        dataDmp[ 0 ], dataDmp[ 1 ], dataDmp[ 2 ], dataDmp[ 3 ], dataDmp[ 4 ], dataDmp[ 5 ],
+    //        dataDmp[ 6 ], dataDmp[ 7 ],
+    //        dataDmp[ 8 ], dataDmp[ 9 ], dataDmp[ 10 ], dataDmp[ 11 ], dataDmp[ 12 ], dataDmp[ 13 ],
+    //        dataDmp[ 14 ], dataDmp[ 15 ], testDecodeFrameCnt );
+
+    //    dataDmp = (uint8_t *)buf;
+    //}
+
+    if( testDecodeFrameCnt == 1 )
+    {
+        testDecodeFrameCnt = 1;
+    }
+
     /* window overlapping
      * NOTE: To simplify the overlapping code, all 'meaningless' short to long
      * and long to short transitions are considered to be short to short
-     * transitions. This leaves just two cases (long to long and short to short)
+     * transitions. This leaves just two c
+     ases (long to long and short to short)
      * with a little special sauce for EIGHT_SHORT_SEQUENCE.
      */
     if ((ics->window_sequence[1] == ONLY_LONG_SEQUENCE || ics->window_sequence[1] == LONG_STOP_SEQUENCE) &&
@@ -3127,6 +3237,13 @@ static int aac_decode_frame_int(AVCodecContext *avctx, void *data,
 
     ac->frame = data;
 
+    if( 1 == testDecodeFrameCnt )
+    {
+#if USE_FLOATS
+        testDecodeFrameCnt = 1;
+#endif // USE_FLOATS
+    }
+
     if (show_bits(gb, 12) == 0xfff) {
         if ((err = parse_adts_frame_header(ac, gb)) < 0) {
             av_log(avctx, AV_LOG_ERROR, "Error decoding AAC frame header.\n");
@@ -3158,6 +3275,11 @@ static int aac_decode_frame_int(AVCodecContext *avctx, void *data,
         if (!avctx->channels && elem_type != TYPE_PCE) {
             err = AVERROR_INVALIDDATA;
             goto fail;
+        }
+
+        if( 1 == testDecodeFrameCnt )
+        {
+            printf( "BRJ elem type %d id %d", elem_type, elem_id );
         }
 
         if (elem_type < TYPE_DSE) {
@@ -3278,7 +3400,67 @@ static int aac_decode_frame_int(AVCodecContext *avctx, void *data,
     multiplier = (ac->oc[1].m4ac.sbr == 1) ? ac->oc[1].m4ac.ext_sample_rate > ac->oc[1].m4ac.sample_rate : 0;
     samples <<= multiplier;
 
+    //if( testDecodeFrameCnt == 1 )
+    //{
+    //    ChannelElement * channelElem = ac->che[ 1 ][ 0 ];
+
+    //    uint8_t * dataDmp = (uint8_t *)channelElem->ch[ 0 ].coeffs;
+    //    if( testDecodeFrameCnt == 1 )
+    //    {
+    //        dataDmp += 1785;
+    //    }
+
+    //    LogMsg( LOG_DEBUG, "BRJ pre-spectral1 coeff %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        dataDmp[ 0 ], dataDmp[ 1 ], dataDmp[ 2 ], dataDmp[ 3 ], dataDmp[ 4 ], dataDmp[ 5 ],
+    //        dataDmp[ 6 ], dataDmp[ 7 ],
+    //        dataDmp[ 8 ], dataDmp[ 9 ], dataDmp[ 10 ], dataDmp[ 11 ], dataDmp[ 12 ], dataDmp[ 13 ],
+    //        dataDmp[ 14 ], dataDmp[ 15 ], testDecodeFrameCnt );
+
+    //    dataDmp = (uint8_t *)channelElem->ch[ 1 ].coeffs;
+    //    if( testDecodeFrameCnt == 1 )
+    //    {
+    //        dataDmp += 1785;
+    //    }
+
+    //    LogMsg( LOG_DEBUG, "BRJ pre-spectral2 coeff %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        dataDmp[ 0 ], dataDmp[ 1 ], dataDmp[ 2 ], dataDmp[ 3 ], dataDmp[ 4 ], dataDmp[ 5 ],
+    //        dataDmp[ 6 ], dataDmp[ 7 ],
+    //        dataDmp[ 8 ], dataDmp[ 9 ], dataDmp[ 10 ], dataDmp[ 11 ], dataDmp[ 12 ], dataDmp[ 13 ],
+    //        dataDmp[ 14 ], dataDmp[ 15 ], testDecodeFrameCnt );
+
+    //    testDecodeFrameCnt = 1;
+    //}
+
     spectral_to_sample(ac, samples);
+    //if( testDecodeFrameCnt == 1 )
+    //{
+    //    ChannelElement * channelElem = ac->che[ 1 ][ 0 ];
+
+    //    uint8_t * dataDmp = (uint8_t *)channelElem->ch[ 0 ].ret;
+    //    if( testDecodeFrameCnt == 1 )
+    //    {
+    //        dataDmp += 1785;
+    //    }
+
+    //    LogMsg( LOG_DEBUG, "BRJ spectral1 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        dataDmp[ 0 ], dataDmp[ 1 ], dataDmp[ 2 ], dataDmp[ 3 ], dataDmp[ 4 ], dataDmp[ 5 ],
+    //        dataDmp[ 6 ], dataDmp[ 7 ],
+    //        dataDmp[ 8 ], dataDmp[ 9 ], dataDmp[ 10 ], dataDmp[ 11 ], dataDmp[ 12 ], dataDmp[ 13 ],
+    //        dataDmp[ 14 ], dataDmp[ 15 ], testDecodeFrameCnt );
+
+    //    data = (uint8_t *)channelElem->ch[ 1 ].ret;
+    //    if( testDecodeFrameCnt == 1 )
+    //    {
+    //        dataDmp += 1785;
+    //    }
+
+    //    LogMsg( LOG_DEBUG, "BRJ spectral2 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        dataDmp[ 0 ], dataDmp[ 1 ], dataDmp[ 2 ], dataDmp[ 3 ], dataDmp[ 4 ], dataDmp[ 5 ],
+    //        dataDmp[ 6 ], dataDmp[ 7 ],
+    //        dataDmp[ 8 ], dataDmp[ 9 ], dataDmp[ 10 ], dataDmp[ 11 ], dataDmp[ 12 ], dataDmp[ 13 ],
+    //        dataDmp[ 14 ], dataDmp[ 15 ], testDecodeFrameCnt );
+    //    testDecodeFrameCnt = 1;
+    //}
 
     if (ac->oc[1].status && audio_found) {
         avctx->sample_rate = ac->oc[1].m4ac.sample_rate << multiplier;
@@ -3311,6 +3493,25 @@ static int aac_decode_frame_int(AVCodecContext *avctx, void *data,
         else if (ac->dmono_mode == 2)
             ((AVFrame *)data)->data[0] =((AVFrame *)data)->data[1];
     }
+
+    //if( testDecodeFrameCnt == 1 )
+    //{
+    //    ChannelElement * channelElem = ac->che[ 1 ][ 0 ];
+
+    //    uint8_t * dataDmp = (uint8_t *)channelElem->ch[0].coeffs;
+    //    LogMsg( LOG_DEBUG, "BRJ aac_decode_frame_int1 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        dataDmp[ 0 ], dataDmp[ 1 ], dataDmp[ 2 ], dataDmp[ 3 ], dataDmp[ 4 ], dataDmp[ 5 ],
+    //        dataDmp[ 6 ], dataDmp[ 7 ],
+    //        dataDmp[ 8 ], dataDmp[ 9 ], dataDmp[ 10 ], dataDmp[ 11 ], dataDmp[ 12 ], dataDmp[ 13 ],
+    //        dataDmp[ 14 ], dataDmp[ 15 ], testDecodeFrameCnt );
+    //    data = (uint8_t *)(uint8_t *)channelElem->ch[ 1 ].coeffs;
+    //    LogMsg( LOG_DEBUG, "BRJ aac_decode_frame_int2 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d \n",
+    //        dataDmp[ 0 ], dataDmp[ 1 ], dataDmp[ 2 ], dataDmp[ 3 ], dataDmp[ 4 ], dataDmp[ 5 ],
+    //        dataDmp[ 6 ], dataDmp[ 7 ],
+    //        dataDmp[ 8 ], dataDmp[ 9 ], dataDmp[ 10 ], dataDmp[ 11 ], dataDmp[ 12 ], dataDmp[ 13 ],
+    //        dataDmp[ 14 ], dataDmp[ 15 ], testDecodeFrameCnt );
+    //    testDecodeFrameCnt = 1;
+    //}
 
     return 0;
 fail:

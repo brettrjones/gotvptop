@@ -45,6 +45,11 @@
 #include "avcodec_internal.h"
 #include "thread.h"
 
+#include <CoreLib/VxDebug.h>
+
+int testFfmpegDecodeStarted = 0; //BRJ
+int testDecodeFrameCnt = 0;
+
 static int apply_param_change(AVCodecContext *avctx, const AVPacket *avpkt)
 {
     int size = 0, ret;
@@ -393,6 +398,11 @@ static int decode_simple_internal(AVCodecContext *avctx, AVFrame *frame)
 
     got_frame = 0;
 
+    if( testDecodeFrameCnt == 1 )
+    {
+        testDecodeFrameCnt = 1;
+    }
+
     if (HAVE_THREADS && avctx->active_thread_type & FF_THREAD_FRAME) {
         ret = ff_thread_decode_frame(avctx, frame, &got_frame, pkt);
     } else {
@@ -583,6 +593,38 @@ FF_ENABLE_DEPRECATION_WARNINGS
 
     if (got_frame)
         av_assert0(frame->buf[0]);
+
+    testFfmpegDecodeStarted = avctx->codec_id == AV_CODEC_ID_AAC; //BRJ
+    //if( testFfmpegDecodeStarted && got_frame && testDecodeFrameCnt < 20 )
+    //{
+    //    uint8_t  * dataDmp = &frame->data[ 0 ][ 0 ];
+    //    if( testDecodeFrameCnt == 1 )
+    //    {
+    //        dataDmp += 1786;
+    //    }
+
+    //    LogMsg( LOG_DEBUG, "BRJ decode1 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d size %d pos %d duration %d\n",
+    //        dataDmp[ 0 ], dataDmp[ 1 ], dataDmp[ 2 ], dataDmp[ 3 ], dataDmp[ 4 ], dataDmp[ 5 ],
+    //        dataDmp[ 6 ], dataDmp[ 7 ],
+    //        dataDmp[ 8 ], dataDmp[ 9 ], dataDmp[ 10 ], dataDmp[ 11 ], dataDmp[ 12 ], dataDmp[ 13 ],
+    //        dataDmp[ 14 ], dataDmp[ 15 ], testDecodeFrameCnt, ret, (int)( avci->compat_decode_consumed - ret ), (int)( frame->pkt_duration ) );
+    //    //dataDmp = &frame->dataDmp[ 1 ][ (int)( avci->compat_decode_consumed - ret ) + 160 ];
+    //    dataDmp = &frame->data[ 1 ][ 0 ];
+    //    if( testDecodeFrameCnt == 1 )
+    //    {
+    //        dataDmp += 1786;
+    //    }
+    //    LogMsg( LOG_DEBUG, "BRJ decode2 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X frame %d size %d pos %d duration %d\n",
+    //        dataDmp[ 0 ], dataDmp[ 1 ], dataDmp[ 2 ], dataDmp[ 3 ], dataDmp[ 4 ], dataDmp[ 5 ],
+    //        dataDmp[ 6 ], dataDmp[ 7 ],
+    //        dataDmp[ 8 ], dataDmp[ 9 ], dataDmp[ 10 ], dataDmp[ 11 ], dataDmp[ 12 ], dataDmp[ 13 ],
+    //        dataDmp[ 14 ], dataDmp[ 15 ], testDecodeFrameCnt, ret, (int)( avci->compat_decode_consumed - ret ), (int)( frame->pkt_duration ) );
+    //    testDecodeFrameCnt++;
+    //    if( testDecodeFrameCnt == 2 )
+    //    {
+    //        testDecodeFrameCnt = 2;
+    //    }
+    //}
 
     return ret < 0 ? ret : 0;
 }

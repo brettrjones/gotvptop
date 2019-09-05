@@ -1,0 +1,16 @@
+=== to rebuild without download ===
+cd ~/kodi18.3-build/build/ffmpeg/src/ffmpeg-build
+make clean 
+make -B all
+
+from clion build and run
+
+=== to turn of optimization ===
+in file ffmpeg-build/configure
+replace all -Ox with -O0 ( x is anything not 0 )
+rebuild ffmpeg with the instruction in to rebuild without download
+
+=== show memory in clion ===
+in tab gdb
+(gdb) x/64ux &myVar
+

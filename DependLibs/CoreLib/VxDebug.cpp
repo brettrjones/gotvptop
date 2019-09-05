@@ -343,7 +343,7 @@ void LogMsg( unsigned long u32MsgType, const char* msg, ...)
 void VxHandleLogMsg( unsigned long u32MsgType, char * logMsg )
 {
 	#ifdef TARGET_OS_WINDOWS
-		OutputDebugStringA( logMsg );
+//		OutputDebugStringA( logMsg );
 	#endif // TARGET_OS_WINDOWS
     if( g_iLogNameLen )
 	{

@@ -58,11 +58,18 @@
  * @author Stanislav Ocovaj ( stanislav.ocovaj imgtec com )
  */
 
-#include "ffmpeg/config_ffmpeg.h"
+#undef FFT_FLOAT
+#undef FFT_FIXED_32
+#undef USE_FIXED
 
 #define FFT_FLOAT 0
 #define FFT_FIXED_32 1
 #define USE_FIXED 1
+
+#undef USE_FLOATS
+#define USE_FLOATS 0 
+
+#include "ffmpeg/config_ffmpeg.h"
 
 #include "libavutil/fixed_dsp.h"
 #include "libavutil/opt.h"

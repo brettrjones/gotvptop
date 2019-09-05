@@ -54,6 +54,8 @@
  * @author Robert Swain ( rob opendot cl )
  * @author Stanislav Ocovaj ( stanislav.ocovaj imgtec com )
  */
+
+#undef USE_FIXED
 #define USE_FIXED 1
 
 #include "aac.h"

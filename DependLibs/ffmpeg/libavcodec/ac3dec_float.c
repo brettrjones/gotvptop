@@ -28,6 +28,17 @@
  * Upmix delay samples from stereo to original channel layout.
  */
 
+#undef FFT_FLOAT
+#undef USE_FIXED
+#undef FFT_FIXED_32
+
+#define FFT_FLOAT 1
+#define USE_FIXED 0
+#define FFT_FIXED_32 0
+
+#undef USE_FLOATS
+#define USE_FLOATS 1
+
 #include "ffmpeg/config_ffmpeg.h"
 
 #include "ac3dec.h"

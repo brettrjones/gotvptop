@@ -47,13 +47,20 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#include "ffmpeg/config_ffmpeg.h"
+#undef FFT_FLOAT
+#undef USE_FIXED
+#undef FFT_FIXED_32
 
 #define FFT_FLOAT 0
 #define USE_FIXED 1
 #define FFT_FIXED_32 1
-#include "ac3dec.h"
 
+#undef USE_FLOATS
+#define USE_FLOATS 0
+
+#include "ffmpeg/config_ffmpeg.h"
+
+#include "ac3dec.h"
 
 static const int end_freq_inv_tab[8] =
 {

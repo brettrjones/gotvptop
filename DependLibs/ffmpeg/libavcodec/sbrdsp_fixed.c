@@ -23,9 +23,10 @@
  *
  */
 
-#include <ffmpeg/config_ffmpeg.h>
-
+#undef USE_FIXED
 #define USE_FIXED 1
+
+#include <ffmpeg/config_ffmpeg.h>
 
 #include "aac.h"
 #include "libavutil/avutil_attributes.h"

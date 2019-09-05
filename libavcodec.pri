@@ -485,7 +485,7 @@ SOURCES += 	\
     $$PWD/DependLibs/ffmpeg/libavcodec/aac_adtstoasc_bsf.c \
     $$PWD/DependLibs/ffmpeg/libavcodec/aac_parser.c \
     $$PWD/DependLibs/ffmpeg/libavcodec/aaccoder.c \
-    $$PWD/DependLibs/ffmpeg/libavcodec/aacdec.c \
+    $$PWD/DependLibs/ffmpeg/libavcodec/aacdec_float.c \
     $$PWD/DependLibs/ffmpeg/libavcodec/aacdec_fixed.c \
     $$PWD/DependLibs/ffmpeg/libavcodec/aacdec_template.c \
     $$PWD/DependLibs/ffmpeg/libavcodec/aacenc.c \

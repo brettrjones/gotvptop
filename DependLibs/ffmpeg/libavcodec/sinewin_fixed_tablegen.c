@@ -20,12 +20,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-//#ifdef GENERATING_CODEC_TABLES
-//#if USE_FIXED_POINT_CODECS
 #define FFMPEG_CONFIG_H 1
-
+#undef USE_FIXED
 #define USE_FIXED 1
-#include "sinewin_tablegen_template.c"
 
-//#endif // USE_FIXED_POINT_CODECS
-//#endif // GENERATING_CODEC_TABLES
+#include "sinewin_tablegen_template.c"

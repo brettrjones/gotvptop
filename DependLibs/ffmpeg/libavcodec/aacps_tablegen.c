@@ -21,10 +21,11 @@
  */
 
 #ifdef GENERATING_CODEC_TABLES
+#undef USE_FIXED
+#define USE_FIXED 0
+
 #include "ffmpeg/config_ffmpeg.h"
 
-
-#define USE_FIXED 0
 #include "aacps_tablegen_template.c"
 
 #endif // GENERATING_CODEC_TABLES

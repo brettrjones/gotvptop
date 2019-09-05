@@ -32,12 +32,19 @@
  * @author Maxim Gavrilov ( maxim.gavrilov gmail com )
  */
 
-
-#include "ffmpeg/config_ffmpeg.h"
+#undef FFT_FLOAT
+#undef FFT_FIXED_32
+#undef USE_FIXED
 
 #define FFT_FLOAT 1
 #define FFT_FIXED_32 0
 #define USE_FIXED 0
+
+#undef USE_FLOATS
+#define USE_FLOATS 1
+
+#include "ffmpeg/config_ffmpeg.h"
+
 
 #include "libavutil/float_dsp.h"
 #include "libavutil/opt.h"
@@ -57,7 +64,6 @@
 #include "cbrt_data.h"
 #include "sbr.h"
 #include "aacsbr.h"
-#include "mpeg4audio.h"
 #include "profiles.h"
 #include "libavutil/intfloat.h"
 
@@ -289,7 +295,7 @@ static int latm_decode_audio_specific_config(struct LATMContext *latmctx,
     AACContext *ac        = &latmctx->aac_ctx;
     AVCodecContext *avctx = ac->avctx;
     MPEG4AudioConfig m4ac = { 0 };
-    GetBitContext gbc;
+    GetBitContext gbc; 
     int config_start_bit  = get_bits_count(gb);
     int sync_extension    = 0;
     int bits_consumed, esize, i;

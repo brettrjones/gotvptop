@@ -31,6 +31,8 @@
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 
+#include <CoreLib/VxDebug.h>
+
 #ifdef HAVE_LIBBLURAY
 #include "DVDInputStreams/DVDInputStreamBluray.h"
 #endif
@@ -40,9 +42,9 @@
 #ifndef __STDC_LIMIT_MACROS
 #define __STDC_LIMIT_MACROS
 #endif
-#ifdef TARGET_POSIX
-#include "stdint.h"
-#endif
+
+#include <stdint.h>
+
 
 extern "C" {
 #include "libavutil/dict.h"
@@ -898,6 +900,8 @@ double CDVDDemuxFFmpeg::ConvertTimestamp( int64_t pts, int den, int num )
     return timestamp*DVD_TIME_BASE;
 }
 
+extern int testPlayStarted;
+
 DemuxPacket* CDVDDemuxFFmpeg::Read()
 {
     DemuxPacket* pPacket = NULL;
@@ -927,6 +931,20 @@ DemuxPacket* CDVDDemuxFFmpeg::Read()
 #endif // DEBUG
             m_pkt.result = av_read_frame( m_pFormatContext, &m_pkt.pkt );
             m_timeout.SetInfinite();
+
+            //if( testPlayStarted )
+            //{
+            //    static int pktCnt = 0; //BRJ z
+            //    if( pktCnt < 20 )
+            //    {
+            //        uint8_t * data = m_pkt.pkt.data;
+            //        LogMsg( LOG_DEBUG, "BRJ %d CDVDDemuxFFmpeg::Read %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X size %d frame %d \n",
+            //            pktCnt, data[ 0 ], data[ 1 ], data[ 2 ], data[ 3 ], data[ 4 ], data[ 5 ], data[ 6 ], data[ 7 ],
+            //            data[ 8 ], data[ 9 ], data[ 10 ], data[ 11 ], data[ 12 ], data[ 13 ], data[ 14 ], data[ 15 ], m_pkt.pkt.size, pktCnt );
+
+            //        pktCnt++;
+            //    }
+            //}
         }
 
         if( m_pkt.result == AVERROR( EINTR ) || m_pkt.result == AVERROR( EAGAIN ) )

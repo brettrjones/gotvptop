@@ -52,9 +52,6 @@
 #define EXP_D25   2
 #define EXP_D45   3
 
-#ifndef USE_FIXED
-#define USE_FIXED 0
-#endif
 
 #if USE_FIXED
 

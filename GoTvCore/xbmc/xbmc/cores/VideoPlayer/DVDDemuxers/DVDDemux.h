@@ -350,7 +350,7 @@ protected:
 
   int GetNrOfStreams(StreamType streamType);
 
-  int64_t m_demuxerId;
+  int64_t m_demuxerId = 0;
 
 private:
 

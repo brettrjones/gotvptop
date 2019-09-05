@@ -26,9 +26,8 @@
     <ClCompile Include="..\..\8svx.c" />
     <ClCompile Include="..\..\a64multienc.c" />
     <ClCompile Include="..\..\aaccoder.c" />
-    <ClCompile Include="..\..\aacdec.c" />
     <ClCompile Include="..\..\aacdec_fixed.c" />
-    <ClCompile Include="..\..\aacdec_template.c" />
+    <ClCompile Include="..\..\aacdec_float.c" />
     <ClCompile Include="..\..\aacenc.c" />
     <ClCompile Include="..\..\aacenctab.c" />
     <ClCompile Include="..\..\aacenc_is.c" />
@@ -458,8 +457,6 @@
     <ClCompile Include="..\..\lclenc.c" />
     <ClCompile Include="..\..\libcelt_dec.c" />
     <ClCompile Include="..\..\libfaac.c" />
-    <ClCompile Include="..\..\libfdk-aacdec.c" />
-    <ClCompile Include="..\..\libfdk-aacenc.c" />
     <ClCompile Include="..\..\libgsmdec.c" />
     <ClCompile Include="..\..\libgsmenc.c" />
     <ClCompile Include="..\..\libilbc.c" />

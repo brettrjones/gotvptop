@@ -309,8 +309,11 @@ bool PAPlayer::QueueNextFile(const CFileItem &file)
   return true;
 }
 
+int testPlayStarted = false;
+
 bool PAPlayer::QueueNextFileEx(const CFileItem &file, bool fadeIn)
 {
+    fadeIn = false; //BRJ
   if (m_currentStream)
   {
     // check if we advance a track of a CUE sheet
@@ -347,6 +350,8 @@ bool PAPlayer::QueueNextFileEx(const CFileItem &file, bool fadeIn)
   si->m_decoder.Start();
   while (si->m_decoder.GetDataSize(true) == 0)
   {
+      testPlayStarted = true;
+
     int status = si->m_decoder.GetStatus();
     if (status == STATUS_ENDED   ||
         status == STATUS_NO_FILE ||

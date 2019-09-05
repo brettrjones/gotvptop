@@ -19,13 +19,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-//#ifndef USE_FIXED_POINT_CODECS
+#undef USE_FLOATS
+#define USE_FLOATS 1
 
 #include <ffmpeg/config_ffmpeg.h>
 #include "libavutil/samplefmt.h"
-#define FFMPEG_CONFIG_H	1
-
-#define USE_FLOATS 1
 
 #include "mpegaudio.h"
 
@@ -125,4 +123,3 @@ AVCodec ff_mp3on4float_decoder = {
                                                       AV_SAMPLE_FMT_NONE },
 };
 #endif
-//#endif // USE_FIXED_POINT_CODECS

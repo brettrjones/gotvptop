@@ -256,10 +256,8 @@ av_cold int ff_fft_init(FFTContext *s, int nbits, int inverse)
 	ff_fft_init_ppc( s );
 #  endif // ARCH_PPC
 
-#  if ARCH_X86
-#ifdef USE_CPU_X86_EXTENSIONS
+#  if ARCH_X86 && HAVE_X86_ASM
 	ff_fft_init_x86( s );
-#endif // USE_CPU_X86_EXTENSIONS
 #  endif // ARCH_X86
 
 #  if CONFIG_MDCT  
@@ -276,10 +274,11 @@ av_cold int ff_fft_init(FFTContext *s, int nbits, int inverse)
 #  if ARCH_ARM && HAVE_ARM_ASM
 		ff_fft_fixed_init_arm( s );
 #  endif //ARCH_ARM 
+# endif //FFT_FLOAT 
     for(j=4; j<=nbits; j++) {
         ff_init_ff_cos_tabs(j);
     }
-# endif //defined(FFT_FLOAT) 
+
 #endif /* FFT_FIXED_32 */
 
 

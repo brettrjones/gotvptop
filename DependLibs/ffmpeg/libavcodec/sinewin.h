@@ -31,10 +31,6 @@
 #   define SINETABLE_CONST
 #endif
 
-#ifndef USE_FIXED
-#define USE_FIXED 0
-#endif
-
 #define SINETABLE(size) \
     SINETABLE_CONST DECLARE_ALIGNED(32, INTFLOAT, AAC_RENAME(ff_sine_##size))[size]
 

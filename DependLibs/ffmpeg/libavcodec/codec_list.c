@@ -153,7 +153,7 @@ static const AVCodec * const codec_list[] = {
     &ff_webvtt_encoder,
     &ff_xsub_encoder,
     //&ff_libaom_av1_encoder,
-    &ff_libfdk_aac_encoder,
+    //&ff_libfdk_aac_encoder,
     &ff_libmp3lame_encoder,
     &ff_libopus_encoder,
     &ff_libvorbis_encoder,
@@ -602,7 +602,7 @@ static const AVCodec * const codec_list[] = {
 #if CONFIG_LIBAOM
     &ff_libaom_av1_decoder,
 #endif // CONFIG_LIBAOM
-    &ff_libfdk_aac_decoder,
+    //&ff_libfdk_aac_decoder,
     &ff_libopus_decoder,
     &ff_libvorbis_decoder,
     //&ff_libvpx_vp8_decoder,

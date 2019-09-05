@@ -19,7 +19,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#include "ffmpeg/config_ffmpeg.h"
+#undef USE_FIXED
 #define USE_FIXED 1
+#undef USE_FLOATS
+#define USE_FLOATS 0
+
+#include "ffmpeg/config_ffmpeg.h"
 
 #include "aacps.c"

@@ -18,6 +18,8 @@
 #include "utils/log.h"
 #include <math.h>
 
+#include <CoreLib/VxDebug.h>
+
 CAudioDecoder::CAudioDecoder()
 {
   m_codec = NULL;
@@ -250,6 +252,40 @@ int CAudioDecoder::ReadSamples(int numsamples)
     {
       int readSize = 0;
       int result = m_codec->ReadPCM(m_pcmInputBuffer, numsamples * (m_codec->m_bitsPerSample >> 3), &readSize);
+
+      //static int readCnt = 0;
+      //if( readCnt < 4 )
+      //{
+      //    uint8_t  * data = m_pcmInputBuffer;
+      //    if( 0 == readCnt )
+      //    {
+      //        data = &m_pcmInputBuffer[ 3580 ];
+      //        LogMsg( LOG_DEBUG, "BRJ1 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X size %d\n",
+      //            data[ 0 ], data[ 1 ], data[ 2 ], data[ 3 ], data[ 4 ], data[ 5 ],
+      //            data[ 6 ], data[ 7 ],
+      //            data[ 8 ], data[ 9 ], data[ 10 ], data[ 11 ], data[ 12 ], data[ 13 ],
+      //            data[ 14 ], data[ 15 ], readSize );
+      //        data = &m_pcmInputBuffer[ 3764 ];
+      //        LogMsg( LOG_DEBUG, "BRJ2 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X size %d\n",
+      //            data[ 0 ], data[ 1 ], data[ 2 ], data[ 3 ], data[ 4 ], data[ 5 ],
+      //            data[ 6 ], data[ 7 ],
+      //            data[ 8 ], data[ 9 ], data[ 10 ], data[ 11 ], data[ 12 ], data[ 13 ],
+      //            data[ 14 ], data[ 15 ], readSize );
+
+      //        readCnt = 0;
+      //    }
+
+      //    LogMsg( LOG_DEBUG, "BRJ3 %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X size %d\n",
+      //        data[ 0 ], data[ 1 ], data[ 2 ], data[ 3 ], data[ 4 ], data[ 5 ],
+      //        data[ 6 ], data[ 7 ],
+      //        data[ 8 ], data[ 9 ], data[ 10 ], data[ 11 ], data[ 12 ], data[ 13 ],
+      //        data[ 14 ], data[ 15 ], readSize );
+      //}
+      //readCnt++;
+      //if( readCnt == 3 )
+      //{
+      //    readCnt = 3;
+      //}
 
       if (result != READ_ERROR && readSize)
       {

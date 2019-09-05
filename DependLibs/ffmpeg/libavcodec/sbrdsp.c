@@ -20,11 +20,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#include <ffmpeg/config_ffmpeg.h>
-//#ifndef USE_FIXED_POINT_CODECS
-#define FFMPEG_CONFIG_H 1
-
+#undef USE_FIXED
 #define USE_FIXED 0
+
+#include <ffmpeg/config_ffmpeg.h>
 
 #include "aac.h"
 #include "libavutil/avutil_attributes.h"

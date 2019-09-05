@@ -16,7 +16,9 @@
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
-#include <libfdk-aac/libAACenc/include/aacenc_lib.h>
+
+//BRJ this file confuses Visual Studio as to the definition of AACContext
+//#include <libfdk-aac/libAACenc/include/aacenc_lib.h>
 
 #include "libavutil/channel_layout.h"
 #include "libavutil/avutil_common.h"

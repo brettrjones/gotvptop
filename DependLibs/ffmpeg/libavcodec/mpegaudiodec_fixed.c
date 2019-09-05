@@ -18,13 +18,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
+#undef USE_FLOATS
+#define USE_FLOATS 0
+
 #include <ffmpeg/config_ffmpeg.h>
- //#if USE_FIXED_POINT_CODECS
 
 #include "libavutil/samplefmt.h"
-#define FFMPEG_CONFIG_H	1
-
-#define USE_FLOATS 0
 
 #include "mpegaudio.h"
 
@@ -122,4 +121,3 @@ AVCodec ff_mp3on4_decoder = {
 };
 #endif
 
-//#endif // USE_FIXED_POINT_CODECS

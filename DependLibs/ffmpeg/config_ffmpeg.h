@@ -6,16 +6,10 @@
 #define FFMPEG_CONFIGURATION		"ffmpeg_built_for_GoTvP2P"
 #define FFMPEG_CONFIG_H				1 // some code relies on this being defined to detect if config has been included ( template compile )
 
-#define USE_FIXED_POINT_CODECS      0 // make 1 if want to use fixed point codecs
-#define USE_FLOAT_CODECS            1 // make 1 if want to use floating point codecs
-
-
-
 #define av_restrict GOTV_RESTRICT
 // NOTE: HAVE_INLINE_ASM is defined in GoTvCompilerConfig.h
 //#define HAVE_INLINE_ASM		0
 #define HAVE_ALIGNED_STACK	0
-//#define USE_CPU_X86_EXTENSIONS		1 // used to ifdef out all the x86 cpu extensions
 #define HAVE_MMX2 HAVE_MMXEXT
 
 

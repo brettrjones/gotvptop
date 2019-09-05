@@ -41,7 +41,7 @@ public:
 
   std::string m_description;
 protected:
-  CDVDDemuxFFmpeg *m_parent;
+  CDVDDemuxFFmpeg *m_parent = nullptr;
   AVStream* m_stream  = nullptr;
 };
 
@@ -54,7 +54,7 @@ public:
 
   std::string m_description;
 protected:
-  CDVDDemuxFFmpeg *m_parent;
+  CDVDDemuxFFmpeg *m_parent = nullptr;
   AVStream* m_stream = nullptr;
 };
 
@@ -135,16 +135,16 @@ protected:
   std::map<int, CDemuxStream*> m_streams;
   std::map<int, std::unique_ptr<CDemuxParserFFmpeg>> m_parsers;
 
-  AVIOContext* m_ioContext;
+  AVIOContext* m_ioContext = nullptr;
 
-  double   m_currentPts; // used for stream length estimation
-  bool     m_bMatroska;
-  bool     m_bAVI;
-  bool     m_bSup;
-  int      m_speed;
-  unsigned int m_program;
-  unsigned int m_streamsInProgram;
-  unsigned int m_newProgram;
+  double   m_currentPts = 0; // used for stream length estimation
+  bool     m_bMatroska = false;
+  bool     m_bAVI = false;
+  bool     m_bSup = false;
+  int      m_speed = 0;
+  unsigned int m_program = 0;
+  unsigned int m_streamsInProgram = 0;
+  unsigned int m_newProgram = 0;
 
   XbmcThreads::EndTime  m_timeout;
 
@@ -157,10 +157,10 @@ protected:
     int      result;    // result from av_read_packet
   }m_pkt;
 
-  bool m_streaminfo;
-  bool m_checkvideo;
+  bool m_streaminfo = false;
+  bool m_checkvideo = false;
   int m_displayTime = 0;
-  double m_dtsAtDisplayTime;
+  double m_dtsAtDisplayTime = 0;
   bool m_seekToKeyFrame = false;
   double m_startTime = 0;
 };
