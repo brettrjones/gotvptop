@@ -1,7 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2013 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -15,23 +14,23 @@
 //============================================================================
 
 #include "ActivityBase.h"
+#include <GoTvInterface/IDefs.h>
 
-#include "ui_ActivityDebugSettings.h"
-
-#include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
-#include <CoreLib/AppErr.h>
+#include "ui_ActivityInformation.h"
 
 class AppCommon;
-class P2PEngine;
 
-class ActivityDebugSettings : public ActivityBase
+class ActivityInformation : public ActivityBase
 {
 	Q_OBJECT
 
 public:
 
-	ActivityDebugSettings( AppCommon& app, QWidget * parent = NULL );
-	virtual ~ActivityDebugSettings() = default;
+    ActivityInformation( AppCommon& app, QWidget * parent, EPluginType pluginType );
+	virtual ~ActivityInformation() = default;
+
+    void						setPluginType( EPluginType pluginType ) { m_PluginType = pluginType; updateInformation(); }
+    EPluginType                 getPluginType() { return m_PluginType; }
 
 	void						updateDialogFromProfile();
 	void						updateProfileFromSettings();
@@ -47,10 +46,13 @@ protected slots:
 	void						slotLogToFileCheckBox();
 
 protected:
-	void						updateCheckBoxes();
+    void						initActivityInformation( void );
+    void						updateInformation( void );
+    QString                     getInfoText( void );
+    
+    void						updateCheckBoxes();
 
 	//=== vars ===//
-	Ui::DebugSettingsDialog		ui;
-	bool						m_bLogToFile;
-	uint32_t					m_u32LogFlags;
+	Ui::InformationDialog		ui;
+    EPluginType                 m_PluginType = ePluginTypeInvalid;
 };

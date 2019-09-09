@@ -23,7 +23,7 @@
 #include "MySndMgr.h"
 #include "AppCommon.h"
 #include "VidWidget.h"
-#include "Constants.h"
+#include "GuiParams.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 

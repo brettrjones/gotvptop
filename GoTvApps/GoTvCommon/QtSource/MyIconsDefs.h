@@ -10,7 +10,8 @@ enum EMyIcons
 	eMyIconFriendOverlay,			// is friend
 	eMyIconGlobeOverlay,			// is global shared or unknown person
 
-	eMyIconPeople,
+    eMyIconInformation,
+    eMyIconPeople,
 	eMyIconSearch,
 	eMyIconServers,
 	eMyIconOptions,
@@ -273,6 +274,7 @@ enum EMyIcons
 	eMyIconGoTvNetworkHost,
 
 	eMyIconGroupUser,
+    eMyIconNetHosting,
 	eMyIconGroupHost,
 	eMyIconGroupAnchor,
 

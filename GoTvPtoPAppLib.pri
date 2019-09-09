@@ -50,6 +50,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryListWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/IdentWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/InformationWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InstMsgWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MultiSessionState.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TitleBarWidget.h \
@@ -84,6 +85,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityEditAccount.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityEditProfile.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityFileSearch.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityInformation.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityIsPortOpenTest.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityManageAnchorSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityMessageBox.h \
@@ -184,7 +186,9 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupUser.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupHost.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupAnchor.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletGoTvPtoPNetworkHost.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletKodi.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSharedContent.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.h \
@@ -193,12 +197,13 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppGlobals.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppProfile.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppSettings.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/Constants.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/EventsQtToGoTv.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MenuDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppStyle.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommon.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppTheme.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppDisplay.h \
     $$PWD/GoTvAppConfig.h \
@@ -284,6 +289,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiFileXferClient.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiHardwareCtrlClient.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ChatEntryWidget.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/InformationWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputAllWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputBaseWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputFaceWidget.cpp \
@@ -306,6 +312,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityEditProfile.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityFileSearch.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityIsPortOpenTest.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityInformation.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityManageAnchorSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityMessageBox.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetServiceTest.cpp \
@@ -401,7 +408,9 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupUser.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupHost.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupAnchor.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletGoTvPtoPNetworkHost.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletKodi.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletRemoteControl.cpp \
@@ -421,11 +430,12 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppGlobals.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppProfile.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppSettings.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/Constants.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/EventsQtToGoTv.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppStyle.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppTheme.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppDisplay.cpp \
     $$PWD/GoTvApps/GoTvPtoP/AppSource/main.cpp \
     $$PWD/GoTvApps/GoTvPtoP/AppSource/exportdialog.cpp \
@@ -466,6 +476,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAbout.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityEditAccount.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityEditProfile.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityFileSearch.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/ActivityInformation.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityIsPortOpenTest.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityManageAnchorSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityMessageBox.ui \
@@ -529,6 +540,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAbout.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/FriendListDlg.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/HistoryEntryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/IdentWidget.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/InformationWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/InputAllWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/InputFaceWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/InputPhotoWidget.ui \
@@ -539,6 +551,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAbout.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ListEntryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/OfferBarWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/OfferWidget.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/PermissionWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PopupMenuWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/SessionWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/SoundCtrlWidget.ui \
@@ -555,6 +568,10 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAbout.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPlayerVideo.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ImagePickBar.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGoTvPtoPNetworkHost.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupAnchor \
+ 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupHost \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupUser \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletKodi.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletSharedContent.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletUserIdentity.ui \

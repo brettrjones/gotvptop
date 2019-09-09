@@ -23,7 +23,7 @@ class VxGuidQt : public QObject, public VxGUID
 {
 	Q_OBJECT
 public:
-	VxGuidQt(QWidget *parent = 0 );
+	VxGuidQt( QWidget *parent = 0 );
 	VxGuidQt( const VxGUID& rhs );
 	VxGuidQt( const VxGuidQt& rhs );
 	VxGuidQt( uint64_t u64HiPart, uint64_t u64LoPart );

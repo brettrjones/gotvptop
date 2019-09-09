@@ -37,12 +37,13 @@ enum EPluginType
 	ePluginTypeFileServer		= 10,	//!< Shared files server
 	ePluginTypeStoryBoard		= 11,	//!< User editable story board web page server
     ePluginTypeAvatarImage      = 12,	//!< handle users avatar image
-    ePluginTypeGroupHost		= 13,	//!< group host
-    ePluginTypeGroupAnchor		= 14,	//!< group list host
-    ePluginTypeGroupTier1		= 15,	//!< master group list host
-    ePluginTypeGroupTier2		= 16,	//!< group end user
-	// NOTE: plugin types 17 - 47 not implemented .. reserved for future use
-	eMaxUserPluginType			= 17, 
+    ePluginTypeGroupUser        = 13,	//!< group user
+    ePluginTypeGroupHost		= 14,	//!< group host
+    ePluginTypeGroupAnchor		= 15,	//!< group list host
+    ePluginTypeNetworkHost		= 16,	//!< master group list host
+    ePluginTypeGroupTier2		= 17,	//!< group end user
+	// NOTE: plugin types 18 - 47 not implemented .. reserved for future use
+	eMaxUserPluginType			= 18, 
 	// plugins 0-47 are part of PktAnnounce
 	// plugins after 47 are system plugins and do not go out in announcement pkt
 	eAppPluginsBegin			= 48,

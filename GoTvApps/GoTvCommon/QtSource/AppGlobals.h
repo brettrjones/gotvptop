@@ -24,6 +24,7 @@ class QWidget;
 class P2PEngine;
 class IFromGui;
 class VxNetIdent;
+class GuiParams;
 
 class AppGlobals
 {
@@ -40,7 +41,8 @@ protected:
 	AppCommon&					m_AppCommon;
 };
 
-//AppGlobals *					GetAppGlobals();
+//! gui params and constants
+GuiParams&                      GetGuiParams();
 
 //! update identity and save to database then send permission change to engine
 void							UpdatePluginPermissions(	P2PEngine& engine, 

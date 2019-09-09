@@ -47,11 +47,6 @@ ActivityDebugSettings::ActivityDebugSettings( AppCommon& app, QWidget * parent )
 }
 
 //============================================================================
-ActivityDebugSettings::~ActivityDebugSettings()
-{
-}
-
-//============================================================================
 void ActivityDebugSettings::slotLogToFileCheckBox( void )
 {
 	//m_bLogToFile = ui.LogToFileCheckBox->isChecked();

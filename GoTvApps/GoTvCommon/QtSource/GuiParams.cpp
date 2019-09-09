@@ -1,6 +1,5 @@
 //============================================================================
-// Copyright (C) 2013 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,16 +12,28 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "Constants.h"
+#include "GuiParams.h"
+#include <QApplication>
+#include <QDesktopWidget>
 
 //============================================================================
-QColor Constants::m_OnlineBkgColor( 176, 255, 176 );
-QColor Constants::m_OfflineBkgColor( 192, 192, 192 );
-QColor Constants::m_NearbyBkgColor( 176, 176, 255 );
+QColor GuiParams::m_OnlineBkgColor( 176, 255, 176 );
+QColor GuiParams::m_OfflineBkgColor( 192, 192, 192 );
+QColor GuiParams::m_NearbyBkgColor( 176, 176, 255 );
 
 
 //============================================================================
-Constants::Constants()
+GuiParams::GuiParams()
 {
+    initGuiParams();    
 }
 
+//============================================================================
+void GuiParams::initGuiParams()
+{
+    m_DpiScale = qApp->desktop()->devicePixelRatio();
+    if( m_DpiScale < 1 || m_DpiScale > 5 )
+    {
+        m_DpiScale = 1;
+    }
+}

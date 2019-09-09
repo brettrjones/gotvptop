@@ -29,8 +29,3 @@ AppletGroupAnchor::AppletGroupAnchor( AppCommon& app, QWidget * parent )
 
 	m_MyApp.activityStateChange( this, true );
 }
-
-//============================================================================
-AppletGroupAnchor::~AppletGroupAnchor()
-{
-}

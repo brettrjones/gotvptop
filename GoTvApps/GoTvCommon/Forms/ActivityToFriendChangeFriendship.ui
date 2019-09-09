@@ -281,7 +281,7 @@ image: url(:/MyP2PWeb/Resources/radio_button_green_selected.png);
          </size>
         </property>
         <property name="text">
-         <string>Set To Anonymous Permission</string>
+         <string>Set To Anybody Permission</string>
         </property>
        </widget>
       </item>

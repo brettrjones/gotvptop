@@ -129,6 +129,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconGlobeOverlay:		// is global shared or unknown person
 		return ":/AppRes/Resources/overlay-globe.svg";
 
+    case eMyIconInformation:
+        return ":/AppRes/Resources/info.svg";
 	case eMyIconPeople:
 		return ":/AppRes/Resources/friend.svg";
 	case eMyIconSearch:
@@ -572,6 +574,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/network-host.svg";
 
 	// groups
+    case eMyIconNetHosting:
+        return ":/AppRes/Resources/network-host.svg";
 	case eMyIconGroupUser:
 		return ":/AppRes/Resources/group.svg";
 	case eMyIconGroupHost:
@@ -812,6 +816,22 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 			return eMyIconMultiSessionIgnored;
 		}
 		break;
+
+    case ePluginTypeGroupUser:	
+        return eMyIconGroupUser;
+        break;
+
+    case ePluginTypeGroupHost:
+        return eMyIconGroupHost;
+        break;
+
+    case ePluginTypeGroupAnchor:
+        return eMyIconGroupAnchor;
+        break;
+
+    case ePluginTypeNetworkHost:
+        return eMyIconNetHosting;
+        break;
 
 	default:
 		LogMsg( LOG_ERROR, "MyIcons::getPluginIcon: unrecognized plugin type %d\n", ePluginType );

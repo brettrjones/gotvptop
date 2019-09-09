@@ -45,14 +45,14 @@ protected:
     void                        initializeAppDisplay( void );
 
     AppCommon &					m_MyApp;
-    bool                        m_Initialized;
-    float                       m_StdDisplayWidth;
-    float                       m_StdDisplayHeight;
-    float                       m_DisplayWidthScale;
-    float                       m_DisplayHeightScale;
-    QTimer *                    m_OrientationCheckTimer;
-    Qt::Orientation				m_Orientation;
-    Qt::Orientation				m_LastOrientation;
+    bool                        m_Initialized{ false };
+    float                       m_StdDisplayWidth{ 1920.0f };
+    float                       m_StdDisplayHeight{ 1080.0f };
+    float                       m_DisplayWidthScale{ 1.0f };
+    float                       m_DisplayHeightScale{ 1.0f };
+    QTimer *                    m_OrientationCheckTimer{ nullptr };
+    Qt::Orientation				m_Orientation{ Qt::Orientation::Horizontal };
+    Qt::Orientation				m_LastOrientation{ Qt::Orientation::Horizontal };
 };
 
 

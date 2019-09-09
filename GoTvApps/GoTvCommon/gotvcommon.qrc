@@ -205,5 +205,6 @@
         <file>Resources/group.svg</file>
         <file>Resources/group-anchor.svg</file>
         <file>Resources/group-host.svg</file>
+        <file>Resources/NetworkDesign.png</file>
     </qresource>
 </RCC>

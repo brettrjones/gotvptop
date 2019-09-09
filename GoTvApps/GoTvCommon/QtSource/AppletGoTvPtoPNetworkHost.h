@@ -15,16 +15,24 @@
 
 #include "AppletBase.h"
 
-class AppletGroupAnchor : public AppletBase
+#include "ui_AppletGoTvPtoPNetworkHost.h"
+
+class AppletGoTvPtoPNetworkHost : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletGroupAnchor( AppCommon& app, QWidget * parent );
-	virtual ~AppletGroupAnchor() = default;
+    AppletGoTvPtoPNetworkHost( AppCommon& app, QWidget * parent );
+	virtual ~AppletGoTvPtoPNetworkHost() = default;
 
 
 
 protected:
+    void setupInformation();
+    void loadFromSettings();
+    void saveToSettings();
+
+    Ui::GoTvPtoPNetworkDlgClass ui;
+
 };
 
 

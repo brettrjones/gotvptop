@@ -16,6 +16,8 @@
 #include "AppGlobals.h"
 #include "AppCommon.h"
 #include "VxDataHelper.h"
+#include "GuiParams.h"
+
 
 #include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
 #include <CoreLib/VxFileUtil.h>
@@ -29,14 +31,14 @@
 namespace
 {
 	VxNetIdent			g_oUserIdent;
-	//AppGlobals			g_oAppGlobals;
 }
 
 ////============================================================================
-//AppGlobals * GetAppGlobals()
-//{
-//	return &g_oAppGlobals;
-//}
+GuiParams& GetGuiParams()
+{
+    static GuiParams g_GuiParams;
+    return g_GuiParams;
+}
 
 //============================================================================
 AppGlobals::AppGlobals( AppCommon& appCommon )

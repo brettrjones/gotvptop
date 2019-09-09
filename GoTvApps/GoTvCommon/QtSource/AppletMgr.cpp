@@ -25,6 +25,8 @@
 #include "AppletGroupUser.h"
 #include "AppletGroupHost.h"
 #include "AppletGroupAnchor.h"
+#include "AppletGoTvPtoPNetworkHost.h"
+#include "AppletNetHostingPage.h"
 
 //============================================================================
 AppletMgr::AppletMgr( AppCommon& myMpp, QWidget * parent )
@@ -132,11 +134,17 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletGroupUser:
         appletDialog = new AppletGroupUser( m_MyApp, parent );
         break;
+    case eAppletNetHostingPage:
+        appletDialog = new AppletNetHostingPage( m_MyApp, parent );
+        break;
     case eAppletGroupHost:
         appletDialog = new AppletGroupHost( m_MyApp, parent );
         break;
     case eAppletGroupAnchor:
         appletDialog = new AppletGroupAnchor( m_MyApp, parent );
+        break;
+    case eAppletGoTvPtoPNetworkHost:
+        appletDialog = new AppletGoTvPtoPNetworkHost( m_MyApp, parent );
         break;
 	case ePluginAppletCamProvider:
 		m_MyApp.errMessageBox( appletMissingTitle, "Video Player Not Implemented" );

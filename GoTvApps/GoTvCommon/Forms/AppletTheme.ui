@@ -246,7 +246,7 @@
   <customwidget>
    <class>VxPushButton</class>
    <extends>QPushButton</extends>
-   <header>VxPushButton.h</header>
+   <header location="global">VxPushButton.h</header>
   </customwidget>
   <customwidget>
    <class>VxLabel</class>

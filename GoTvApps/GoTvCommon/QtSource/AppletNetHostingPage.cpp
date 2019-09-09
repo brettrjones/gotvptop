@@ -1,5 +1,5 @@
 //============================================================================
-// Copyright (C) 2017 Brett R. Jones
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -12,7 +12,7 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "AppletLaunchPage.h"
+#include "AppletNetHostingPage.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "VxTilePositioner.h"
@@ -22,21 +22,32 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletLaunchPage::AppletLaunchPage( AppCommon& app, QWidget * parent, EApplet eAppletType, const char * objName )
-: ActivityBase( objName, app, parent, eAppletType )
+AppletNetHostingPage::AppletNetHostingPage( AppCommon& app, QWidget * parent )
+: AppletLaunchPage( app, parent, eAppletNetHostingPage, OBJNAME_APPLET_NET_HOSTING )
 , m_IsInitialized( false )
 {
-	setTitleBarText( QObject::tr( "Home" ) );
-	setupAppletLaunchPage();
-	setHomeButtonVisibility( false );
-	setBackButtonVisibility( false );
-	setPowerButtonVisibility( true );
+    m_EAppletType = eAppletNetHostingPage;
+    setTitleBarText( DescribeApplet( m_EAppletType ) );
+	setupAppletNetHostingPage();
+	setHomeButtonVisibility( true );
+	setBackButtonVisibility( true );
+	setPowerButtonVisibility( false );
 	setExpandWindowVisibility( true );
-	connect( this, SIGNAL( signalPowerButtonClicked() ), this, SLOT( slotPowerButtonClicked() ) );
+
+    slotRepositionToParent();
+ //   connectSignals();
+
+    // save original values so can restore them if need be
+ //   m_Engine.getEngineSettings().getAnchorWebsiteUrl( m_OrigAnchorUrl );
+    //m_Engine.getEngineSettings().getNetworkName( m_OrigNetworkName );
+    //m_Engine.getEngineSettings().getNetServiceWebsiteUrl( m_OrigConnectionTestUrl );
+
+    //updateDlgFromSettings();
+
 }
 
 //============================================================================
-void AppletLaunchPage::slotPowerButtonClicked( void )
+void AppletNetHostingPage::slotPowerButtonClicked( void )
 {
 	if( m_MyApp.confirmAppShutdown( this ) )
 	{
@@ -45,33 +56,15 @@ void AppletLaunchPage::slotPowerButtonClicked( void )
 }
 
 //============================================================================
-void AppletLaunchPage::setupAppletLaunchPage( void )
+void AppletNetHostingPage::setupAppletNetHostingPage( void )
 {
 	if( ! m_IsInitialized )
     {
+        m_AppletList.clear();
         // create launchers for the basic applets
-        for( int i = int( eAppletHomePage + 1 ); i < eMaxBasicApplets; i++ )
+        for( int i = int( eMaxBasicApplets + 1 ); i < eMaxHostApplets; i++ )
         {
             AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ( EApplet )i, this );
-            m_AppletList.push_back( applet );
-        }
-
-        // optional features applets
-        if( getMyApp().getAppSettings().getFeatureEnable( eAppFeatureProvider ) )
-        {
-            AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ePluginAppletCamProvider, this );
-            m_AppletList.push_back( applet );
-        }
-
-        if( getMyApp().getAppSettings().getFeatureEnable( eAppFeatureStation ) )
-        {
-            AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ePluginAppletGoTvStation, this );
-            m_AppletList.push_back( applet );
-        }
-
-        if( getMyApp().getAppSettings().getFeatureEnable( eAppFeatureNetworkHost ) )
-        {
-            AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ePluginAppletGoTvNetworkHost, this );
             m_AppletList.push_back( applet );
         }
 
@@ -80,15 +73,15 @@ void AppletLaunchPage::setupAppletLaunchPage( void )
 }
 
 //============================================================================
-void AppletLaunchPage::resizeEvent( QResizeEvent * ev )
+void AppletNetHostingPage::resizeEvent( QResizeEvent * ev )
 {
 	ActivityBase::resizeEvent( ev );
-	LogMsg( LOG_DEBUG, "AppletLaunchPage::resizeEvent total height %d contentsFrame height %d\n", this->height(), getContentItemsFrame()->height() );
+	LogMsg( LOG_DEBUG, "AppletNetHostingPage::resizeEvent total height %d contentsFrame height %d\n", this->height(), getContentItemsFrame()->height() );
 	getMyApp().getTilePositioner().repositionTiles( m_AppletList, getContentItemsFrame(), 2 );
 }
 
 //============================================================================
-void AppletLaunchPage::showEvent( QShowEvent * showEvent )
+void AppletNetHostingPage::showEvent( QShowEvent * showEvent )
 {
 	ActivityBase::showEvent( showEvent );
 }

@@ -15,6 +15,7 @@
 
 #include "VxAppDisplay.h"
 #include "AppCommon.h"
+#include "GuiParams.h"
 
 #include <QScreen>
 #include <QTimer>
@@ -23,14 +24,7 @@
 VxAppDisplay::VxAppDisplay( AppCommon& appCommon, QWidget * parent )
 : QWidget( parent )
 , m_MyApp( appCommon )
-, m_Initialized( false )
-, m_StdDisplayWidth( 1920.0f )
-, m_StdDisplayHeight( 1080.0f )
-, m_DisplayWidthScale( 1.0f )
-, m_DisplayHeightScale( 1.0f )
 , m_OrientationCheckTimer( new QTimer( this ) )
-, m_Orientation( Qt::Orientation::Horizontal )
-, m_LastOrientation( Qt::Orientation::Horizontal )
 {
 }
 
@@ -84,7 +78,7 @@ void VxAppDisplay::slotCheckOrientationTimer( void )
 float VxAppDisplay::getDisplayScale( void ) 
 { 
     initializeAppDisplay();
-    return m_DisplayHeightScale < m_DisplayWidthScale ? m_DisplayHeightScale : m_DisplayWidthScale; 
+    return m_DisplayHeightScale < m_DisplayWidthScale ? m_DisplayHeightScale : m_DisplayWidthScale;
 }
 
 //============================================================================

@@ -100,6 +100,12 @@
     <Filter Include="GoTvCommon\Source Files\soundio">
       <UniqueIdentifier>{960707f6-388b-4625-acc0-3b69fe551878}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GoTvCommon\Source Files\GuiSettings">
+      <UniqueIdentifier>{3dbb3c17-a9e6-4751-aff2-0b8f6035f2be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvCommon\Source Files\NetService">
+      <UniqueIdentifier>{1c03ddd4-be42-473c-9889-e12658320184}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppSource\main.cpp">
@@ -561,9 +567,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppSettings.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\Constants.cpp">
-      <Filter>GoTvCommon\Source Files\AppCommon</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\MessengerPage.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
@@ -746,6 +749,30 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\MySndMgr.cpp">
       <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetHostingPage.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PermissionWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiParams.cpp">
+      <Filter>GoTvCommon\Source Files\AppCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetHostGuiLogic.cpp">
+      <Filter>GoTvCommon\Source Files\NetService</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetClientGuiLogic.cpp">
+      <Filter>GoTvCommon\Source Files\NetService</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityInformation.cpp">
+      <Filter>GoTvCommon\Source Files\Activities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGoTvPtoPNetworkHost.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InformationWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1537,6 +1564,27 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\MySndMgr.h">
       <Filter>GoTvCommon\Source Files\soundio</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletNetHostingPage.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\PermissionWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetHostGuiLogic.h">
+      <Filter>GoTvCommon\Source Files\NetService</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetClientGuiLogic.h">
+      <Filter>GoTvCommon\Source Files\NetService</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityInformation.h">
+      <Filter>GoTvCommon\Source Files\Activities</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGoTvPtoPNetworkHost.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\InformationWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -2451,9 +2499,6 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\Constants.h">
-      <Filter>GoTvCommon\Source Files\AppCommon</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_ImagePickBar.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -2541,6 +2586,9 @@
     <ClInclude Include="..\..\..\..\GoTvInterface\IAudioInterface.h">
       <Filter>GoTvInterface</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiParams.h">
+      <Filter>GoTvCommon\Source Files\AppCommon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\GoTvCommon\Resources\msg_state_fail_resend.png">
@@ -2555,5 +2603,28 @@
     <Text Include="..\..\..\GoTvCommon\Resources\CreditsArt.txt">
       <Filter>GoTvCommon\Resource Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupAnchor.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupHost.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupUser.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\PermissionWidget.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGoTvPtoPNetworkHost.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityInformation.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\InformationWidget.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2018 Brett R. Jones
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,18 +13,27 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "AppletBase.h"
+#include "AppCommon.h"
 
-class AppletGroupAnchor : public AppletBase
+#include "ui_PermissionWidget.h"
+
+class PermissionWidget : public QWidget
 {
 	Q_OBJECT
+
 public:
-	AppletGroupAnchor( AppCommon& app, QWidget * parent );
-	virtual ~AppletGroupAnchor() = default;
+    PermissionWidget( QWidget * parent = 0 );
 
+    void						setPluginType( EPluginType pluginType ) { m_PluginType = pluginType; updatePermissions(); }
 
+protected slots:
+    void                        slotHandleSelectionChanged( int );
 
 protected:
+	void						initPermissionWidget( void );
+    void						updatePermissions( void );
+
+    AppCommon&                  m_MyApp;
+    EPluginType                 m_PluginType = ePluginTypeInvalid;
+	Ui::PermissionWidgetUi	    ui;
 };
-
-

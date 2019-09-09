@@ -36,15 +36,9 @@ VxComboBox::VxComboBox(QWidget *parent)
 }
 
 //============================================================================
-VxComboBox::~VxComboBox()
-{
-}
-
-//============================================================================
 void VxComboBox::paintEvent( QPaintEvent *ev )
 {
     VxAppTheme& appTheme = GetAppInstance().getAppTheme();
-    //QColor textColor = GetAppInstance().getAppTheme().getColor( eButtonTextNormal );
     QPalette pal = appTheme.getBasePalette();
     pal.setColor( QPalette::Text, appTheme.getColor( eButtonTextNormal ) );
     setPalette( pal );
@@ -56,22 +50,10 @@ void VxComboBox::paintEvent( QPaintEvent *ev )
    }
 
     QComboBox::paintEvent( ev );
-    /*
-    QPainter p;
-    p.begin( this );
-    QStyleOptionComboBox opt;
-    opt.initFrom( this );
-    style()->drawPrimitive( QStyle::PE_PanelButtonBevel, &opt, &p, this );
-    style()->drawPrimitive( QStyle::PE_PanelButtonCommand, &opt, &p, this );
-    style()->drawItemText( &p, rect(), Qt::AlignLeft, palette(), isEnabled(), currentText() );
-    p.end();*/
-}
+ }
 
 //============================================================================
 void VxComboBox::showEvent( QShowEvent *ev )
 {
-
-
     QComboBox::showEvent( ev );
-
 }

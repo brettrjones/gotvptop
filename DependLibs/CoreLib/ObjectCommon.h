@@ -65,10 +65,12 @@
 #define OBJNAME_ACTIVITY_VIEW_VIDEO_FILE				"ActivityViewVideoFile"
 #define OBJNAME_ACTIVITY_WEB_CAM_CLIENT				    "ActivityWebCamClient"
 #define OBJNAME_ACTIVITY_YES_NO_MSG_BOX					"ActivityYesNoMsgBox"
+#define OBJNAME_ACTIVITY_INFORMATION					"ActivityInformation"
 
 #define OBJNAME_APPLET_BASE								"AppletBase"
 #define OBJNAME_APPLET_KODI						        "AppletKodi"
 #define OBJNAME_APPLET_LAUNCH_PAGE						"AppletLaunchPage"
+#define OBJNAME_APPLET_NET_HOSTING						"AppletNetHosting"
 #define OBJNAME_APPLET_LAUNCH_WIDGET					"AppletLaunchWidget"
 #define OBJNAME_APPLET_PLAYER_VIDEO						"AppletPlayerVideo"
 #define OBJNAME_APPLET_REMOTE_CONTROL					"AppletRemoteControl"
@@ -79,6 +81,7 @@
 #define OBJNAME_APPLET_GROUP_USER						"AppletGroupUser"
 #define OBJNAME_APPLET_GROUP_HOST						"AppletGroupHost"
 #define OBJNAME_APPLET_GROUP_ANCHOR						"AppletGroupAnchor"
+#define OBJNAME_APPLET_GOTVPTOP_NETWORK_HOST			"AppletGoTvPtoPNetworkHost"
 
 #define OBJNAME_FILE_ACTION_MENU						"FileActionMenu"
 #define OBJNAME_MESSAGER_PAGE							"MessengerPage"

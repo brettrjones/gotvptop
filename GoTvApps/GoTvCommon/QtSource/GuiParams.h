@@ -1,6 +1,5 @@
-#pragma once
 //============================================================================
-// Copyright (C) 2018 Brett R. Jones
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -12,19 +11,26 @@
 // bjones.engineer@gmail.com
 // http://www.gotvptop.com
 //============================================================================
+#pragma once
 
-#include "AppletBase.h"
+#include "config_gotvapps.h"
+#include <QColor>
 
-class AppletGroupAnchor : public AppletBase
+class GuiParams
 {
-	Q_OBJECT
 public:
-	AppletGroupAnchor( AppCommon& app, QWidget * parent );
-	virtual ~AppletGroupAnchor() = default;
+    GuiParams();
+    virtual ~GuiParams() = default;
 
-
+    /// @brief get scaling required to make icons etc. usable on high dpi screens
+    int                         getGuiDpiScale() const { return m_DpiScale; }
 
 protected:
+    void                        initGuiParams();
+
+    static QColor				m_OnlineBkgColor;
+    static QColor				m_OfflineBkgColor;
+    static QColor				m_NearbyBkgColor;
+
+    int                         m_DpiScale{ 0 };
 };
-
-

@@ -14,6 +14,7 @@
 //============================================================================
 
 #include "AppletBase.h"
+#include "ui_AppletGroupUser.h"
 
 class AppletGroupUser : public AppletBase
 {
@@ -22,9 +23,8 @@ public:
 	AppletGroupUser( AppCommon& app, QWidget * parent );
 	virtual ~AppletGroupUser();
 
-
-
 protected:
+
 };
 
 
