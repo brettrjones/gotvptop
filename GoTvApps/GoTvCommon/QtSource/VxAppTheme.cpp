@@ -58,6 +58,15 @@ VxAppTheme::VxAppTheme( AppCommon& appCommon )
 }
 
 //============================================================================
+void VxAppTheme::applyTheme( QWidget * widget )
+{
+    if( widget )
+    {
+        widget->setPalette( m_BasePalette );
+    }
+}
+
+//============================================================================
 void VxAppTheme::updateWindowTheme( void )
 {
 	QColor windowBkgColor( getColor( eWindowBackground ) );

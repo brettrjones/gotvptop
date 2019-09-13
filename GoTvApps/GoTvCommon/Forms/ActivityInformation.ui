@@ -49,6 +49,12 @@
    </property>
    <item>
     <widget class="QGroupBox" name="StyledDlgItemsBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="minimumSize">
       <size>
        <width>0</width>
@@ -97,6 +103,18 @@
       </item>
       <item>
        <widget class="VxLabel" name="m_PictureLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>320</height>
+         </size>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -110,7 +128,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="ClipboardButton">
+       <widget class="VxPushButton" name="ClipboardButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>

@@ -26,6 +26,7 @@ AppletGoTvPtoPNetworkHost::AppletGoTvPtoPNetworkHost( AppCommon& app, QWidget * 
     setAppletType( eAppletGoTvPtoPNetworkHost );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
+    m_MyApp.activityStateChange( this, true );
     setupInformation();
     loadFromSettings();
 }

@@ -27,6 +27,7 @@
 #include "AppletGroupAnchor.h"
 #include "AppletGoTvPtoPNetworkHost.h"
 #include "AppletNetHostingPage.h"
+#include "ActivityAbout.h"
 
 //============================================================================
 AppletMgr::AppletMgr( AppCommon& myMpp, QWidget * parent )
@@ -83,6 +84,7 @@ QFrame *  AppletMgr::getAppletFrame( EApplet applet )
 //============================================================================
 void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 {
+    ActivityAbout * activity;
 	ActivityBase * appletDialog = findAppletDialog( applet );
 	if( 0 != appletDialog )
 	{
@@ -164,6 +166,11 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 	case eAppletUnknown:
 		m_MyApp.errMessageBox( appletMissingTitle, "Video Player Not Implemented" );
 		return;
+    case eAppletUserIdentity:
+        //m_MyApp.errMessageBox( appletMissingTitle, "User Identity Not Implemented" );
+        activity = new ActivityAbout( m_MyApp, parent );
+        activity->show();
+        return;
 	default:
 		m_MyApp.errMessageBox2( "AppCommon::launchApplet", "Invalid Applet enum %d\n", applet );
 		return;

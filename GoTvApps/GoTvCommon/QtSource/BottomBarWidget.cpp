@@ -23,6 +23,7 @@ BottomBarWidget::BottomBarWidget( QWidget * parent )
 , m_MyApp( GetAppInstance() )
 {
 	ui.setupUi( this );
+    m_MyApp.getAppTheme().applyTheme( this );
 
 	setArrowLeftButtonIcon();
 	set30SecBackwardButtonIcon();

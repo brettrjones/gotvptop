@@ -41,6 +41,8 @@ public:
 	void						setTitleStatusBarMsg( QString statusMsg );
 	QLabel *					getTitleStatusBarLabel( void );
 	VxPushButton *				getAppIconPushButton( void );
+    VxPushButton *				getBackButton( void ) { return ui.m_BackDlgButton; }
+
     void						setTitleBarAppletIcon( EMyIcons appletIcon );
 
 	void						enableAudioControls( bool enable );

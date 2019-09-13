@@ -42,6 +42,8 @@ public:
 
 signals:
 	void						signalMainWindowResized( void );
+    void						signalMainWindowMoved( void );
+
 	void						signalDeviceOrientationChanged( int qtOrientation ); // pass on signal that orientation has changed
 
 private slots:
@@ -55,6 +57,7 @@ private slots:
 protected:
     void                        showEvent( QShowEvent * ev ) override;
     void						resizeEvent( QResizeEvent * ) override;
+    void						moveEvent( QMoveEvent * ) override;
     void						closeEvent( QCloseEvent * ) override;
 
 	void						initializeGoTvDynamicLayout( void );

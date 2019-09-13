@@ -68,8 +68,10 @@
 #define OBJNAME_ACTIVITY_INFORMATION					"ActivityInformation"
 
 #define OBJNAME_APPLET_BASE								"AppletBase"
-#define OBJNAME_APPLET_KODI						        "AppletKodi"
 #define OBJNAME_APPLET_LAUNCH_PAGE						"AppletLaunchPage"
+#define OBJNAME_MESSAGER_PAGE							"MessengerPage"
+
+#define OBJNAME_APPLET_KODI						        "AppletKodi"
 #define OBJNAME_APPLET_NET_HOSTING						"AppletNetHosting"
 #define OBJNAME_APPLET_LAUNCH_WIDGET					"AppletLaunchWidget"
 #define OBJNAME_APPLET_PLAYER_VIDEO						"AppletPlayerVideo"
@@ -84,7 +86,6 @@
 #define OBJNAME_APPLET_GOTVPTOP_NETWORK_HOST			"AppletGoTvPtoPNetworkHost"
 
 #define OBJNAME_FILE_ACTION_MENU						"FileActionMenu"
-#define OBJNAME_MESSAGER_PAGE							"MessengerPage"
 #define OBJNAME_POPUP_MENU							    "AppletRemoteControl"
 
 #define OBJNAME_UNKNOWN							        "OBJ_UNKNOW"

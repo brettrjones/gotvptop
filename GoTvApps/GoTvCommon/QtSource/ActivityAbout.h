@@ -28,7 +28,11 @@ class ActivityAbout : public ActivityBase
 	Q_OBJECT
 public:
 	ActivityAbout( AppCommon& app, QWidget * parent = NULL );
-    virtual ~ActivityAbout();
+    virtual ~ActivityAbout() = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 protected slots:
 	void						gotoWebsite( void );
@@ -38,5 +42,4 @@ protected:
 
 	//=== vars ===//
 	Ui::ActivityAbout			ui;
-
 };

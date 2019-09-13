@@ -25,23 +25,22 @@
 
 //============================================================================
 ActivityAbout::ActivityAbout( AppCommon& app, QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_ABOUT, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_ABOUT, app, parent, eAppletActivityDialog, Qt::Dialog | Qt::WindowStaysOnTopHint )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("About ") );
+    ui.m_TitleBarWidget->setHomeButtonVisibility( false );
 	ui.m_AppNameLabel->setText( VxGetApplicationTitle() );
 	ui.m_AppVersionLabel->setText( VxGetAppVersionString() );
+
+    connectTitleBarWidget( ui.m_TitleBarWidget );
+    connectBottomBarWidget( ui.m_BottomBarWidget );
 
 	slotRepositionToParent();
 
 	connect( ui.gotoWebsiteButton, SIGNAL(clicked()), this, SLOT(gotoWebsite()) );
 
 	setupAboutMe();
-}
-
-//============================================================================
-ActivityAbout::~ActivityAbout()
-{
 }
 
 //============================================================================

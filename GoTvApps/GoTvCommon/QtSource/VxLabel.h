@@ -29,7 +29,7 @@ public:
 
 	virtual void				setTextBreakAnywhere( QString text, int maxLines = 2 );
 
-	void						setResourceImage( QString resourceUrl );
+	void						setResourceImage( QString resourceUrl, bool scaleToLabelSize = true );
 	void						setImageFromFile( QString fileName );
 
 	void						playVideoFrame( unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 );

@@ -83,6 +83,12 @@ void HomeWindow::resizeEvent( QResizeEvent * )
 }
 
 //============================================================================
+void HomeWindow::moveEvent( QMoveEvent * )
+{
+    emit signalMainWindowMoved();
+}
+
+//============================================================================
 void HomeWindow::showEvent( QShowEvent * ev )
 {
     QDialog::showEvent( ev );
@@ -116,6 +122,7 @@ void HomeWindow::initializeHomePage()
 	initializeGoTvDynamicLayout();
 	connect( &m_AppDisplay, SIGNAL( signalDeviceOrientationChanged( int ) ), this, SLOT( slotDeviceOrientationChanged( int ) ) );
     connect( this, SIGNAL( signalMainWindowResized() ), &m_MyApp, SLOT( slotMainWindowResized() ) );
+    connect( this, SIGNAL( signalMainWindowMoved() ), &m_MyApp, SLOT( slotMainWindowMoved() ) );
 	m_AppDisplay.forceOrientationUpdate();
 }
 

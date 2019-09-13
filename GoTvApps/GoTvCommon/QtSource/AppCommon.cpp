@@ -311,7 +311,8 @@ void AppCommon::slotFinishedLoadingGui( void )
 	m_AppTheme.selectTheme( getAppSettings().getLastSelectedTheme() );
 
 	m_HomePage.initializeHomePage();
-	connect( &m_HomePage, SIGNAL( signalMainWindowResized(int) ), this, SLOT(slotMainWindowResized(int) ) );
+	connect( &m_HomePage, SIGNAL( signalMainWindowResized() ), this, SLOT(slotMainWindowResized() ) );
+    connect( &m_HomePage, SIGNAL( signalMainWindowMoved() ), this, SLOT( slotMainWindowMoved() ) );
 	m_HomePage.show();
 }
 
@@ -734,6 +735,12 @@ void AppCommon::setCamCaptureRotation( uint32_t rot )
 void AppCommon::slotMainWindowResized( void )
 {
 	emit signalMainWindowResized();
+}
+
+//============================================================================
+void AppCommon::slotMainWindowMoved( void )
+{
+    emit signalMainWindowMoved();
 }
 
 //============================================================================

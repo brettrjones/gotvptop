@@ -556,7 +556,10 @@ public:
 
 signals:
 	void						signalHomeFrameFullSize( bool isFullSize );
-	void						signalFinishedLoadingGui( void );
+    void						signalMainWindowResized( void );    // emitted if main window is resized
+    void						signalMainWindowMoved( void );      // emitted if main window is moved
+
+    void						signalFinishedLoadingGui( void );
 	void						signalFinishedLoadingEngine( void );
 	void						signalPlaySound( ESndDef sndDef );
 	void						signalLog( int iPluginNum, QString strMsg );
@@ -570,7 +573,6 @@ signals:
 
 	void						signalRefreshFriend( VxGuidQt onlineId ); // emitted if friend has changed
 	void						signalAssetViewMsgAction( EAssetAction, VxGuidQt onlineId, int pos0to100000 );
-	void						signalMainWindowResized( void ); // emitted if main window is resized'
 
 	void						signalToGuiInstMsg( VxNetIdent * netIdent, EPluginType ePluginType, QString pMsg );
 	void						signalRemoveContact( VxNetIdent * netIdent );
@@ -653,6 +655,7 @@ protected slots:
 
 private slots:
 	void						slotMainWindowResized( void );
+    void						slotMainWindowMoved( void );
 
 	void						slotStartLoadingFromThread( void );
 	void						slotFinishedLoadingGui( void );

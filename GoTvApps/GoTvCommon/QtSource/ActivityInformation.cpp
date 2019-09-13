@@ -66,12 +66,14 @@ void ActivityInformation::updateInformation( void )
     case ePluginTypeGroupAnchor:
     case ePluginTypeNetworkHost:
         ui.m_PictureLabel->setResourceImage( ":/AppRes/Resources/NetworkDesign.png" );
+        ui.m_PictureLabel->setVisible( true );
         break;
     default:
+        ui.m_PictureLabel->setVisible( false );
         break;
     }
    
-    ui.m_InfoText->setPlainText( getInfoText() );
+    ui.m_InfoText->appendPlainText( getInfoText() );
 }
 
 //============================================================================

@@ -42,7 +42,7 @@ const int RESIZE_WINDOW_COMPLETED_TIMEOUT = 500;
 
 //============================================================================
 ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType, Qt::WindowFlags flags )
-: QDialog( parent,  Qt::SubWindow )
+: QDialog( parent, flags )
 , ObjectCommon( objName )
 , m_MyApp( app )
 , m_Engine( app.getEngine() )
@@ -61,9 +61,39 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
 		LogMsg( LOG_FATAL, "ActivityBase::ActivityBase: Bad Param\n");
 	}
 
-	ui.setupUi( this );
+    m_HomeActivity = getHomeActivity();
 
-	connect( &m_MyApp,			SIGNAL(signalMainWindowResized()),			    this, SLOT(slotRepositionToParent()) );
+    m_IsDialog = ( eAppletUnknown == eAppletType ) 
+                || ( eAppletActivityDialog == eAppletType ); // do not setup base class ui in the case of activity dialog because of conflict with dialog ui
+    if( !m_IsDialog )
+    {
+        m_WindowFlags = Qt::SubWindow;
+        setWindowFlags( m_WindowFlags );
+        ui.setupUi( this );
+    }
+    else
+    {
+        // dialog needs to cover parent
+
+        //m_WindowFlags = Qt::Window;
+        //m_WindowFlags = Qt::SubWindow;
+        //m_WindowFlags = Qt::Popup;
+        m_WindowFlags = Qt::Dialog | Qt::FramelessWindowHint;
+        //m_WindowFlags = Qt::Sheet;
+        //m_WindowFlags = Qt::Drawer;
+        //m_WindowFlags = Qt::Tool;
+        //m_WindowFlags = Qt::ForeignWindow;
+        //m_WindowFlags = Qt::CoverWindow;
+        setWindowFlags( m_WindowFlags );
+        m_MyApp.getAppTheme().applyTheme( this );
+        connect( &m_MyApp, SIGNAL( signalMainWindowMoved() ), this, SLOT( slotRepositionToParent() ) );
+
+        LogMsg( LOG_DEBUG, "ActivityBase::ActivityBase: Activity Dialog %s\n", objectName().toUtf8().constData() );
+    }
+
+	connect( &m_MyApp,			SIGNAL( signalMainWindowResized() ),			this, SLOT( slotRepositionToParent() ) );
+    connect( &m_MyApp,          SIGNAL( signalMainWindowMoved() ),              this, SLOT( slotRepositionToParent() ) );
+
 	connect( &m_MyApp,			SIGNAL(signalUserMsg(QString)),					this, SLOT(slotStatusMsg(QString)) );
 	connect( &m_MyApp,			SIGNAL(signalStatusMsg(QString)),				this, SLOT(slotStatusMsg(QString)) );
 	connect( this,				SIGNAL(signalShowShouldExitMsgBox(QString)),	this, SLOT(slotShowShouldExitMsgBox(QString)), Qt::QueuedConnection );
@@ -81,31 +111,45 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
 				&m_MyApp.getSoundMgr(), 
 				SLOT(slotPlayShredderSound()) );
 
-	//=== title bar connections ====//
-	connect( ui.m_TitleBarWidget, SIGNAL( signalPowerButtonClicked() ), this, SLOT( slotPowerButtonClicked() ) );
-	connect( ui.m_TitleBarWidget, SIGNAL( signalHomeButtonClicked() ), this, SLOT( slotHomeButtonClicked() ) );
-	connect( ui.m_TitleBarWidget, SIGNAL( signalMuteMicButtonClicked(bool) ), this, SLOT( slotMuteMicButtonClicked(bool) ) );
-	connect( ui.m_TitleBarWidget, SIGNAL( signalMuteSpeakerButtonClicked( bool ) ), this, SLOT( slotMuteSpeakerButtonClicked(bool) ) );
-	connect( ui.m_TitleBarWidget, SIGNAL( signalCameraSnapshotButtonClicked() ), this, SLOT( slotCameraSnapshotButtonClicked() ) );
-	connect( ui.m_TitleBarWidget, SIGNAL( signalCamPreviewClicked() ), this, SLOT( slotCamPreviewClicked() ) );
-	connect( ui.m_TitleBarWidget, SIGNAL( signalTrashButtonClicked() ), this, SLOT( slotTrashButtonClicked() ) );
-	connect( ui.m_TitleBarWidget, SIGNAL( signalShareButtonClicked() ), this, SLOT( slotShareButtonClicked() ) );
-	connect( ui.m_TitleBarWidget, SIGNAL( signalMenuTopButtonClicked() ), this, SLOT( slotMenuTopButtonClicked() ) );
-	connect( ui.m_TitleBarWidget, SIGNAL( signalBackButtonClicked() ), this, SLOT( slotBackButtonClicked() ) );
+    if( !m_IsDialog )
+    {
+        connectTitleBarWidget( ui.m_TitleBarWidget );
+        connectBottomBarWidget( ui.m_BottomBarWidget );
+        updateExpandWindowIcon();
+    }
+}
 
-	//=== bottom bar signals ===// 
-	connect( ui.m_BottomBarWidget, SIGNAL( signalArrowLeftButtonClicked() ), this, SLOT( slotArrowLeftButtonClicked() ) );
-	connect( ui.m_BottomBarWidget, SIGNAL( signal30SecBackwardButtonClicked() ), this, SLOT( slot30SecBackwardButtonClicked() ) );
-	connect( ui.m_BottomBarWidget, SIGNAL( signalMediaPlayButtonClicked() ), this, SLOT( slotMediaPlayButtonClicked() ) );
-	connect( ui.m_BottomBarWidget, SIGNAL( signalMediaTrashButtonClicked() ), this, SLOT( slotMediaTrashButtonClicked() ) );
-	connect( ui.m_BottomBarWidget, SIGNAL( signalMediaFileShareClicked() ), this, SLOT( slotMediaFileShareClicked() ) );
-	connect( ui.m_BottomBarWidget, SIGNAL( signalMediaLibraryButtonClicked() ), this, SLOT( slotMediaLibraryButtonClicked() ) );
-	connect( ui.m_BottomBarWidget, SIGNAL( signal30SecForwardButtonClicked() ), this, SLOT( slot30SecForwardButtonClicked() ) );
-	connect( ui.m_BottomBarWidget, SIGNAL( signalArrowRightButtonClicked() ), this, SLOT( slotArrowRightButtonClicked() ) );
-	connect( ui.m_BottomBarWidget, SIGNAL( signalMediaRepeatButtonClicked() ), this, SLOT( slotMediaRepeatButtonClicked() ) );
-	connect( ui.m_BottomBarWidget, SIGNAL( signalMenuBottomButtonClicked() ), this, SLOT( slotMenuBottomButtonClicked() ) );
-	connect( ui.m_BottomBarWidget, SIGNAL( signalExpandWindowButtonClicked() ), this, SLOT( slotExpandWindowButtonClicked() ) );
-    updateExpandWindowIcon();
+//============================================================================
+void ActivityBase::connectTitleBarWidget( TitleBarWidget * titleBar )
+{
+    //=== title bar connections ====//
+    connect( titleBar, SIGNAL( signalPowerButtonClicked() ), this, SLOT( slotPowerButtonClicked() ) );
+    connect( titleBar, SIGNAL( signalHomeButtonClicked() ), this, SLOT( slotHomeButtonClicked() ) );
+    connect( titleBar, SIGNAL( signalMuteMicButtonClicked( bool ) ), this, SLOT( slotMuteMicButtonClicked( bool ) ) );
+    connect( titleBar, SIGNAL( signalMuteSpeakerButtonClicked( bool ) ), this, SLOT( slotMuteSpeakerButtonClicked( bool ) ) );
+    connect( titleBar, SIGNAL( signalCameraSnapshotButtonClicked() ), this, SLOT( slotCameraSnapshotButtonClicked() ) );
+    connect( titleBar, SIGNAL( signalCamPreviewClicked() ), this, SLOT( slotCamPreviewClicked() ) );
+    connect( titleBar, SIGNAL( signalTrashButtonClicked() ), this, SLOT( slotTrashButtonClicked() ) );
+    connect( titleBar, SIGNAL( signalShareButtonClicked() ), this, SLOT( slotShareButtonClicked() ) );
+    connect( titleBar, SIGNAL( signalMenuTopButtonClicked() ), this, SLOT( slotMenuTopButtonClicked() ) );
+    connect( titleBar, SIGNAL( signalBackButtonClicked() ), this, SLOT( slotBackButtonClicked() ) );
+}
+
+//============================================================================
+void ActivityBase::connectBottomBarWidget( BottomBarWidget * bottomBar )
+{
+    //=== bottom bar signals ===// 
+    connect( bottomBar, SIGNAL( signalArrowLeftButtonClicked() ), this, SLOT( slotArrowLeftButtonClicked() ) );
+    connect( bottomBar, SIGNAL( signal30SecBackwardButtonClicked() ), this, SLOT( slot30SecBackwardButtonClicked() ) );
+    connect( bottomBar, SIGNAL( signalMediaPlayButtonClicked() ), this, SLOT( slotMediaPlayButtonClicked() ) );
+    connect( bottomBar, SIGNAL( signalMediaTrashButtonClicked() ), this, SLOT( slotMediaTrashButtonClicked() ) );
+    connect( bottomBar, SIGNAL( signalMediaFileShareClicked() ), this, SLOT( slotMediaFileShareClicked() ) );
+    connect( bottomBar, SIGNAL( signalMediaLibraryButtonClicked() ), this, SLOT( slotMediaLibraryButtonClicked() ) );
+    connect( bottomBar, SIGNAL( signal30SecForwardButtonClicked() ), this, SLOT( slot30SecForwardButtonClicked() ) );
+    connect( bottomBar, SIGNAL( signalArrowRightButtonClicked() ), this, SLOT( slotArrowRightButtonClicked() ) );
+    connect( bottomBar, SIGNAL( signalMediaRepeatButtonClicked() ), this, SLOT( slotMediaRepeatButtonClicked() ) );
+    connect( bottomBar, SIGNAL( signalMenuBottomButtonClicked() ), this, SLOT( slotMenuBottomButtonClicked() ) );
+    connect( bottomBar, SIGNAL( signalExpandWindowButtonClicked() ), this, SLOT( slotExpandWindowButtonClicked() ) );
 }
 
 //============================================================================
@@ -127,24 +171,44 @@ void ActivityBase::setIsMaxScreenSize( bool fullScreen )
 }
 
 //============================================================================
+// only available for applets
+QFrame * ActivityBase::getContentItemsFrame( void )
+{
+    return ui.m_ContentItemsFrame;
+}
+
+//============================================================================
+// get home page activity ( Launch or Messenger Page )
+ActivityBase * ActivityBase::getHomeActivity( void )
+{
+    ActivityBase * parentActivity = nullptr;
+    ActivityBase * curActivity = this;
+    QString launchPageObjName = OBJNAME_APPLET_LAUNCH_PAGE;
+    QString messengerPageObjName = OBJNAME_MESSAGER_PAGE;
+    while( curActivity )
+    {
+        QString objName = curActivity->objectName();
+        if( ( objName == launchPageObjName ) || ( objName == messengerPageObjName ) )
+        {
+            parentActivity = curActivity;
+            break;
+        }
+
+        curActivity = dynamic_cast<ActivityBase *>( curActivity->parent() );
+    }
+
+    return parentActivity;
+}
+
+//============================================================================
+// overridden in dialogs
 TitleBarWidget * ActivityBase::getTitleBarWidget( void )
 {
 	return ui.m_TitleBarWidget;
 }
 
 //============================================================================
-VxPushButton * ActivityBase::getAppIconPushButton( void )
-{
-	return ui.m_TitleBarWidget->getAppIconPushButton();
-}
-
-//============================================================================
-QFrame * ActivityBase::getContentItemsFrame( void )
-{
-	return ui.m_ContentItemsFrame;
-}
-
-//============================================================================
+// overridden in dialogs
 BottomBarWidget * ActivityBase::getBottomBarWidget( void )
 {
 	return ui.m_BottomBarWidget;
@@ -179,19 +243,19 @@ void ActivityBase::setupStyledDlg(	VxNetIdent *		poFriend,
 //============================================================================
 void ActivityBase::setTitleBarText( QString titleText )
 {
-	ui.m_TitleBarWidget->setTitleBarText( titleText );
+	getTitleBarWidget()->setTitleBarText( titleText );
 }
 
 //============================================================================
 void ActivityBase::setTitleStatusBarMsg( QString statusMsg )
 {
-	ui.m_TitleBarWidget->setTitleStatusBarMsg( statusMsg );
+    getTitleBarWidget()->setTitleStatusBarMsg( statusMsg );
 }
 
 //============================================================================
 QLabel * ActivityBase::getTitleStatusBarLabel( void )
 {
-	return ui.m_TitleBarWidget->getTitleStatusBarLabel();
+	return getTitleBarWidget()->getTitleStatusBarLabel();
 }
 
 //============================================================================  
@@ -404,13 +468,27 @@ void ActivityBase::slotExpandWindowButtonClicked( void )
 //============================================================================
 void ActivityBase::updateExpandWindowIcon( void )
 {
-    if( m_MyApp.getIsMaxScreenSize( isMessagerFrame() ) )
+    if( !m_IsDialog )
     {
-        ui.m_BottomBarWidget->setExpandWindowButtonIcon( eMyIconWindowShrink );
+        if( m_MyApp.getIsMaxScreenSize( isMessagerFrame() ) )
+        {
+            ui.m_BottomBarWidget->setExpandWindowButtonIcon( eMyIconWindowShrink );
+        }
+        else
+        {
+            ui.m_BottomBarWidget->setExpandWindowButtonIcon( eMyIconWindowExpand );
+        }
     }
     else
     {
-        ui.m_BottomBarWidget->setExpandWindowButtonIcon( eMyIconWindowExpand );
+        if( m_MyApp.getIsMaxScreenSize( isMessagerFrame() ) )
+        {
+            getBottomBarWidget()->setExpandWindowButtonIcon( eMyIconWindowShrink );
+        }
+        else
+        {
+            getBottomBarWidget()->setExpandWindowButtonIcon( eMyIconWindowExpand );
+        }
     }
 }
 
@@ -429,8 +507,8 @@ void ActivityBase::slotActivityFinished( int finishResult )
 //============================================================================
 void ActivityBase::repositionToParent( void )
 {
-	if( m_ParentWidget
-		&& ( 0 == ( m_WindowFlags & Qt::Popup ) ) )
+	if( m_ParentWidget )
+		//&& ( 0 == ( m_WindowFlags & Qt::Popup ) ) )
 	{
 		if( 0xcdcdcdcdcdcdcdcd == (uint64_t)m_ParentWidget )
 		{
@@ -445,14 +523,27 @@ void ActivityBase::repositionToParent( void )
 			return;
 		}
 
+        if( m_IsPopup )
+        {
+            QRect parentRect( m_ParentWidget->mapToGlobal( QPoint( 0, 0 ) ), m_ParentWidget->size() );
+            move( QStyle::alignedRect( Qt::LeftToRight, Qt::AlignCenter, size(), parentRect ).topLeft() );
+        }
+        else if( m_IsDialog )
+        {
+            QRect parentRect( m_ParentWidget->mapToGlobal( QPoint( 0, 0 ) ), m_ParentWidget->size() );
+            setGeometry( parentRect );
+        }
+        else
+        {
+            parentRect.setRight( parentRect.right() - parentRect.left() );
+            parentRect.setLeft( 0 );
+            parentRect.setBottom( parentRect.bottom() - parentRect.top() );
+            parentRect.setTop( 0 );
 
-		parentRect.setRight( parentRect.right() - parentRect.left() );
-		parentRect.setLeft( 0 );
-		parentRect.setBottom( parentRect.bottom() - parentRect.top() );
-		parentRect.setTop( 0 );
-        //LogMsg( LOG_DEBUG, "Reposition to x=%4d y=%4d w=%d h=%4d %s\n",
-        //        parentRect.left(), parentRect.top(), parentRect.width(), parentRect.height(), getObjName() );
-		setGeometry( parentRect );
+            LogMsg( LOG_DEBUG, "Reposition to x=%d y=%d w=%d h=%d %s parent %s\n",
+                parentRect.left(), parentRect.top(), parentRect.width(), parentRect.height(), getObjName(), m_ParentWidget->objectName().toUtf8().constData() );
+            setGeometry( parentRect );
+        }
 	}
 }
 

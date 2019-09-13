@@ -51,7 +51,8 @@ enum EHomeLayout
 
 enum EApplet
 {
-	eAppletUnknown = 0,
+	eAppletUnknown = 0, // do not setup base class ui in the case of unknown
+    eAppletActivityDialog,          // place dialog over home window.. do not setup base class ui in the case of dialog
 	eAppletHomePage,
     eAppletKodi,
     eAppletUserIdentity,

@@ -16,6 +16,7 @@
 #include "AppCommon.h"
 #include "MyIcons.h"
 #include "ActivityInformation.h"
+#include "ActivityAbout.h"
 
 
 //============================================================================
@@ -78,8 +79,18 @@ void InformationWidget::slotShowInformation()
        QWidget * myParent2 = (QWidget *)myParent->parent();
        if( myParent2 )
        {
-           m_ActivityInfo = new ActivityInformation( m_MyApp, myParent2, m_PluginType );
-           m_ActivityInfo->show();
+           QWidget * myParent3 = (QWidget *)myParent2->parent();
+           if( myParent3 )
+           {
+               QWidget * myParent4 = (QWidget *)myParent3->parent();
+               if( myParent4 )
+               {
+                   //m_ActivityInfo = new ActivityInformation( m_MyApp, myParent3, m_PluginType );
+                  // m_ActivityInfo->show();
+                   ActivityAbout * activity = new ActivityAbout( m_MyApp, myParent4 );
+                   activity->show();
+               }
+           }
        }
    }
 }

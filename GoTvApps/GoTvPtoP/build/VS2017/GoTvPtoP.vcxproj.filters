@@ -774,6 +774,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\InformationWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\LogWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -1584,6 +1587,9 @@
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\InformationWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\LogWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
   </ItemGroup>

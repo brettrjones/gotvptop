@@ -132,6 +132,8 @@ class VxAppTheme : public QWidget
 public:
 	VxAppTheme( AppCommon& appCommon );
 
+    virtual void                applyTheme( QWidget * widget );
+
 	virtual void				selectTheme( EThemeType eThemeType );
 	virtual QString				describeTheme( EThemeType eThemeType );
 

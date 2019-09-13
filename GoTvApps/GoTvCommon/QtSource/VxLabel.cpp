@@ -158,11 +158,34 @@ void VxLabel::setTextBreakAnywhere( QString text, int maxLines )
 }
 
 //============================================================================
-void VxLabel::setResourceImage( QString resourceUrl )
+void VxLabel::setResourceImage( QString resourceUrl, bool scaleToLabelSize )
 {
 	setAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
 	QImage picBitmap( resourceUrl ); 
-	showScaledImage( picBitmap );
+    if( !picBitmap.isNull() )
+    {
+        if( scaleToLabelSize )
+        {
+            showScaledImage( picBitmap );
+        }
+        else
+        {
+            QPixmap pixmap = QPixmap::fromImage( picBitmap );
+            if( !pixmap.isNull() )
+            {
+                setPixmap( pixmap );
+                update();
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "VxLabel::setResourceImage NULL pixmap" );
+            }
+        }
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "VxLabel::setResourceImage %s failed\n", resourceUrl.toUtf8().constData() );
+    }
 }
 
 //============================================================================

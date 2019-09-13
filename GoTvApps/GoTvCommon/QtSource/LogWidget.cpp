@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "LogWidget.h"
-#include "VxDebug.h"
+#include <CoreLib/VxDebug.h>
 
 
 #include <QScrollBar>
