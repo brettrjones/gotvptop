@@ -31,12 +31,12 @@
 
 //============================================================================
 ActivityAddRemoveLibraryFiles::ActivityAddRemoveLibraryFiles(	AppCommon& app, QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_ADD_REMOVE_LIB_FILES, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_ADD_REMOVE_LIB_FILES, app, parent, eAppletMessenger, true )
 , m_bFetchInProgress( false )
 , m_WidgetClickEventFixTimer( new QTimer( this ) )
 {
 	ui.setupUi(this);
-	slotRepositionToParent();
+    connectBarWidgets();
 	ui.m_UpDirectoryButton->setIcon( eMyIconUpOneDirectory );
 	connect( m_WidgetClickEventFixTimer, SIGNAL(timeout()), this, SLOT(slotRequestFileList()) );
 

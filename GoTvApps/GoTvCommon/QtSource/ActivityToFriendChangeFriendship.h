@@ -29,7 +29,11 @@ class ActivityToFriendChangeFriendship : public ActivityBase
 public:
 
 	ActivityToFriendChangeFriendship( AppCommon& app, QWidget * parent = NULL );
-	virtual ~ActivityToFriendChangeFriendship();
+	virtual ~ActivityToFriendChangeFriendship() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 	//=== helpers ===//
 	//! set friend to change your permission to him   

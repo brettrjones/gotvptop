@@ -31,7 +31,11 @@ class ActivityDebugSettings : public ActivityBase
 public:
 
 	ActivityDebugSettings( AppCommon& app, QWidget * parent = NULL );
-	virtual ~ActivityDebugSettings() = default;
+	virtual ~ActivityDebugSettings() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 	void						updateDialogFromProfile();
 	void						updateProfileFromSettings();

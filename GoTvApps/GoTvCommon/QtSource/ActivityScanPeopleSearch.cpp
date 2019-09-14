@@ -29,12 +29,12 @@
 ActivityScanPeopleSearch::ActivityScanPeopleSearch(	AppCommon&		app, 
 													EScanType			eSearchType,
 													QWidget *			parent )
-: ActivityBase( OBJNAME_ACTIVITY_PEOPLE_SEARCH, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_PEOPLE_SEARCH, app, parent, eAppletMessenger, true )
 , m_eScanType( eSearchType )
 {
 	ui.setupUi(this);
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
     connect( ui.m_TitleBarWidget,	SIGNAL(signalBackButtonClicked()),			this, SLOT(close()) );
 	connect( this,					SIGNAL(finished(int)),						this, SLOT(slotHomeButtonClicked()) );
@@ -54,11 +54,6 @@ ActivityScanPeopleSearch::ActivityScanPeopleSearch(	AppCommon&		app,
 		setTitle( "Search for people by mood message" );
 		ui.SearchLabel->setText( "Search for mood message (at least 3 characters)" );
 	}
-}
-
-//============================================================================
-ActivityScanPeopleSearch::~ActivityScanPeopleSearch()
-{
 }
 
 //============================================================================

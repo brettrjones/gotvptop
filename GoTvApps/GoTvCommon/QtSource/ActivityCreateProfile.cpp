@@ -31,13 +31,9 @@
 ActivityCreateProfile::ActivityCreateProfile( AppCommon& app, QWidget * parent )
 : ActivityBase( OBJNAME_ACTIVITY_CREATE_PROFILE, app, parent, eActivityCreateProfile )
 {
-	ui.setupUi( getContentItemsFrame() );
+	ui.setupUi( this );
+    connectBarWidgets();
 	connect( ui.loginButton, SIGNAL(clicked()), this, SLOT(buttonLoginClicked()));
-}
-
-//============================================================================
-ActivityCreateProfile::~ActivityCreateProfile()
-{
 }
 
 //============================================================================

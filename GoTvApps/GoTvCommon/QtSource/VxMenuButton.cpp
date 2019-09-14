@@ -21,6 +21,7 @@ VxMenuButton::VxMenuButton( QWidget * parent )
 : VxPushButton( parent )
 , m_ContextMenu( getMyApp(), this )
 {
+    setObjectName( "VxMenuButton" );
     connect( this, SIGNAL( clicked() ), this, SLOT( slotMenuButtonClicked() ) );
     connect( &m_ContextMenu, SIGNAL( signalMenuItemSelected( int, EMenuItemType ) ), this, SLOT( slotMenuItemSelected( int, EMenuItemType ) ) );
 }

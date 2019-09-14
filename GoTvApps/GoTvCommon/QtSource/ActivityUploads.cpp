@@ -30,15 +30,14 @@
 //============================================================================
 ActivityUploads::ActivityUploads(	AppCommon&	app, 
 									QWidget *		parent )
-: ActivityBase( OBJNAME_ACTIVITY_UPLOADS, app, parent, eAppletMessenger, Qt::SubWindow ) //Qt::Popup ) //
+: ActivityBase( OBJNAME_ACTIVITY_UPLOADS, app, parent, eAppletMessenger, true ) //Qt::Popup ) //
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr( "Uploads" ) );
 	connect( &m_MyApp,				SIGNAL(signalStatusMsg(QString)),		ui.m_TitleBarWidget,	SLOT(slotTitleStatusBarMsg(QString)) );
 	connect( ui.m_TitleBarWidget,			SIGNAL(signalBackButtonClicked()),			this,	SLOT(slotHomeButtonClicked()) );
 
-
-	slotRepositionToParent();
+    connectBarWidgets();
 
     connect(ui.m_FileItemList,	SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));
     connect(ui.m_FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));

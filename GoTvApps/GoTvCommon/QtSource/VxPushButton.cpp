@@ -123,6 +123,7 @@ MyIcons&  VxPushButton::getMyIcons( void )
 //============================================================================
 void VxPushButton::initQButtonPro( void )
 {
+    setObjectName( "VxPushButton" );
 
 	m_BlinkTimer->setInterval( 800 );
 	connect( m_BlinkTimer, SIGNAL(timeout()), this, SLOT(slotBlinkTimeout()) );

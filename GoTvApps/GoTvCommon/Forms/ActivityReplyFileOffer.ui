@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>302</width>
+    <width>327</width>
     <height>339</height>
    </rect>
   </property>
@@ -24,78 +24,6 @@
   </property>
   <property name="windowTitle">
    <string>Accept File Offer</string>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">QDialog#ReplyFileOfferDialog
-{   
-color: transparent;
-background-color: transparent;
-border: 1px solid transparent;
-border-radius: 8px; 
-}
-
-#StyledDlgTitleBox
-{   
-color: black;
-background-color: rgb(50,238,17);
-border: 2px solid green;
-border-top-left-radius: 8px; 
-border-top-right-radius: 8px;
-}
-
-#StyledDlgTitleLabel
-{   
-color: black;
-}
-
-#StyledDlgItemsBox
-{   
-background-color: rgb(50,238,17);
-border: 2px solid green;
-border-top-color: green; 
-border-bottom-left-radius: 8px; 
-border-bottom-right-radius: 8px;
-}
-QPushButton#CancelButton
-{
-color: white;
-font: bold 14px;
-border-width: 10;
-border-image: url(:/MyP2PWeb/Resources/button_green_normal.png) 10;
-padding: -10;
-}
-QPushButton#CancelButton:pressed
-{
-border-width: 10;
-border-image: url(:/MyP2PWeb/Resources/button_green_pressed.png) 10;
-padding: -10;
-}
-QPushButton#AcceptButton
-{
-color: white;
-font: bold 14px;
-border-width: 10;
-border-image: url(:/MyP2PWeb/Resources/button_green_normal.png) 10;
-padding: -10;
-}
-QPushButton#AcceptButton:pressed
-{
-border-width: 10;
-border-image: url(:/MyP2PWeb/Resources/button_green_pressed.png) 10;
-padding: -10;
-}
-QLabel#PermissionLabel
-{
-font: bold 14px;
-}
-QLineEdit#FileNameEdit
-{
-background-color: rgb(238,238,238);
-}
-QPlainTextEdit#OfferMsgEdit
-{
-background-color: rgb(238,238,238);
-}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -340,19 +268,44 @@ background-color: rgb(238,238,238);
      </layout>
     </widget>
    </item>
+   <item>
+    <widget class="BottomBarWidget" name="m_BottomBarWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>30</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>VxPushButton</class>
-   <extends>QPushButton</extends>
-   <header>VxPushButton.h</header>
-  </customwidget>
   <customwidget>
    <class>TitleBarWidget</class>
    <extends>QWidget</extends>
    <header>TitleBarWidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BottomBarWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">BottomBarWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>VxPushButton</class>
+   <extends>QPushButton</extends>
+   <header>VxPushButton.h</header>
   </customwidget>
   <customwidget>
    <class>IdentWidget</class>

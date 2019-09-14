@@ -29,12 +29,12 @@ namespace
 
 //============================================================================
 ActivityNetworkState::ActivityNetworkState( AppCommon& app, QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_NETWORK_STATE, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_NETWORK_STATE, app, parent, eAppletMessenger, true )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr( "Network State" ) );
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	setupActivityNetworkState();
 
@@ -42,11 +42,6 @@ ActivityNetworkState::ActivityNetworkState( AppCommon& app, QWidget * parent )
 	connect( ui.gotoWebsiteButton,	SIGNAL(clicked()),										this, SLOT(gotoWebsite()) );
 	connect( &app,					SIGNAL(signalNetworkStateChanged(ENetworkStateType)),	this, SLOT(slotNetworkStateChanged(ENetworkStateType)) );
 	slotNetworkStateChanged( app.getNetworkState() );
-}
-
-//============================================================================
-ActivityNetworkState::~ActivityNetworkState()
-{
 }
 
 //============================================================================

@@ -36,7 +36,11 @@ public:
 							bool					bIsMyself,
 							QWidget *				parent = NULL );
 
-	virtual ~ActivityVideoOptions();
+	virtual ~ActivityVideoOptions() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 	void						playVideoFrame( VxGUID& feedId, unsigned char * pu8Jpg, unsigned long u32JpgLen, int motion0To100000 );
 

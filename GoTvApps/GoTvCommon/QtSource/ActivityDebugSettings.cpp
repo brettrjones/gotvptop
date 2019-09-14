@@ -26,11 +26,12 @@ namespace
 
 //============================================================================
 ActivityDebugSettings::ActivityDebugSettings( AppCommon& app, QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_DEBUG_SETTINGS, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_DEBUG_SETTINGS, app, parent, eAppletMessenger, true )
 , m_bLogToFile(false)
 , m_u32LogFlags( 0xff )
 {
 	ui.setupUi(this);
+    connectBarWidgets();
 
 	//connect( ui.LogToFileCheckBox, SIGNAL(clicked()), this, SLOT(slotLogToFileCheckBox()));
 

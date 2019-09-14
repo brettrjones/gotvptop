@@ -35,7 +35,7 @@
 ActivitySelectFileToSend::ActivitySelectFileToSend(	AppCommon&	app, 
 													VxNetIdent *	hisIdent, 
 													QWidget *		parent )
-: ActivityBase( OBJNAME_ACTIVITY_SELECT_FILE_TO_SEND, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_SELECT_FILE_TO_SEND, app, parent, eAppletMessenger, true )
 , m_ePluginType( ePluginTypeFileOffer )
 , m_HisIdent( hisIdent )
 {
@@ -54,7 +54,7 @@ ActivitySelectFileToSend::ActivitySelectFileToSend(	AppCommon&	app,
 	ui.m_BrowseForFileButton->setIcons( eMyIconFileBrowseNormal );
 	ui.m_SendOfferButton->setIcons( eMyIconSendFileNormal );
 	ui.m_OfferMsgEdit->appendPlainText(QObject::tr("File "));
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	connect( ui.m_TitleBarWidget,			SIGNAL(signalBackButtonClicked()),			this,	SLOT(accept()) );
 	connect( ui.m_ChooseFromLibraryButton,	SIGNAL(clicked()),							this,	SLOT(onBrowseLibraryButClick()) );
@@ -62,11 +62,6 @@ ActivitySelectFileToSend::ActivitySelectFileToSend(	AppCommon&	app,
 	connect( ui.m_BrowseForFileButton,		SIGNAL(clicked()),							this,	SLOT(onBrowseForFileButClick()) );
 	connect( ui.m_BrowseForFileLabel,		SIGNAL(clicked()),							this,	SLOT(onBrowseForFileButClick()) );
 	connect( ui.m_SendOfferButton,			SIGNAL(clicked()),							this,	SLOT(onSendButClick()) );
-}
-
-//============================================================================
-ActivitySelectFileToSend::~ActivitySelectFileToSend()
-{
 }
 
 //============================================================================

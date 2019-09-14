@@ -33,10 +33,7 @@ ActivityAbout::ActivityAbout( AppCommon& app, QWidget * parent )
 	ui.m_AppNameLabel->setText( VxGetApplicationTitle() );
 	ui.m_AppVersionLabel->setText( VxGetAppVersionString() );
 
-    connectTitleBarWidget( ui.m_TitleBarWidget );
-    connectBottomBarWidget( ui.m_BottomBarWidget );
-
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	connect( ui.gotoWebsiteButton, SIGNAL(clicked()), this, SLOT(gotoWebsite()) );
 

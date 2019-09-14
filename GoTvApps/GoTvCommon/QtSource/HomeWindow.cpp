@@ -23,9 +23,9 @@ HomeWindow::HomeWindow( AppCommon&	appCommon, QString title )
 , m_WindowSettings( 0 )
 , m_LastHomeLayout( eHomeLayoutPlayerPlusMessenger )
 , m_MainLayout( 0 )
-, m_HomeFrameUpperLeft( new VxFrame() )
-, m_HomeFrameRight( new VxFrame() )
-, m_HomeFrameBottom( new VxFrame() )
+, m_HomeFrameUpperLeft( new VxFrame( this ) )
+, m_HomeFrameRight( new VxFrame( this ) )
+, m_HomeFrameBottom( new VxFrame( this ) )
 , m_MediaPlayerPage( 0 )
 , m_AppletLaunchPage( 0 )
 , m_MessengerParent( 0 )
@@ -34,6 +34,12 @@ HomeWindow::HomeWindow( AppCommon&	appCommon, QString title )
 , m_HomeFrameFullSize( false )
 , m_EngineInitialized( false )
 {
+    setObjectName( "HomeWindow" );
+    m_HomeFrameUpperLeft->setObjectName( OBJNAME_FRAME_LAUNCH_PAGE );
+    // messenger can be in right frame or bottom frame depending on layout orientation
+    m_HomeFrameRight->setObjectName( OBJNAME_FRAME_MESSAGER_PAGE );
+    m_HomeFrameBottom->setObjectName( OBJNAME_FRAME_MESSAGER_PAGE );
+
     VxAppInfo appInfo;
     m_WindowSettings = new QSettings( appInfo.getCompanyDomain(), appInfo.getAppNameNoSpaces(), this );
 }

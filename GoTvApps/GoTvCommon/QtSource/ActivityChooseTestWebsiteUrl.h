@@ -28,8 +28,11 @@ class ActivityChooseTestWebsiteUrl : public ActivityBase
 	Q_OBJECT
 public:
 	ActivityChooseTestWebsiteUrl( AppCommon& app, QWidget * parent = NULL );
-	virtual ~ActivityChooseTestWebsiteUrl();
-signals: 
+	virtual ~ActivityChooseTestWebsiteUrl() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 public slots:
 	void						updateValues();

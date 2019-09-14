@@ -33,13 +33,13 @@
 
 //============================================================================
 ActivityViewMySharedFiles::ActivityViewMySharedFiles(	AppCommon& app, QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_VIEW_MY_SHARED_FILES, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_VIEW_MY_SHARED_FILES, app, parent, eAppletMessenger, true )
 , m_bFetchInProgress( false )
 , m_WidgetClickEventFixTimer( new QTimer( this ) )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr( "My Shared Files" ) );
-	slotRepositionToParent();
+    connectBarWidgets();
 	m_WidgetClickEventFixTimer->setInterval( 10 );
 	connect( m_WidgetClickEventFixTimer, SIGNAL(timeout()), this, SLOT(slotRequestFileList()) );
 

@@ -29,6 +29,8 @@ ActivitySnapShot::ActivitySnapShot( AppCommon& app, QWidget * parent )
 , m_u32BitmapLen(0)
 {
 	ui.setupUi(this);
+    connectBarWidgets();
+
 	connect( ui.snapshotButton, SIGNAL(clicked()), this, SLOT(onSnapShotButClick()));
 	connect( ui.cancelButton, SIGNAL(clicked()), this, SLOT(onCancelButClick()));
 #ifdef TARGET_OS_WINDOWS
@@ -51,10 +53,6 @@ ActivitySnapShot::ActivitySnapShot( AppCommon& app, QWidget * parent )
 									oWndRect.height() );
 		
 	}
-}
-//============================================================================
-ActivitySnapShot::~ActivitySnapShot()
-{
 }
 
 //============================================================================

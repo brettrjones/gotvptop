@@ -33,9 +33,10 @@ ActivityToFriendBase::ActivityToFriendBase(	const char *			objName,
 										    EPluginType				ePluginType,
 											VxNetIdent *			netIdent, 
 											QWidget *				parent,
-                                             EApplet                 eAppletType,
-											Qt::WindowFlags			flags )
-: ActivityBase( objName, app, parent, eAppletType, flags ? flags : Qt::WindowSystemMenuHint | Qt::WindowMinMaxButtonsHint )
+                                            EApplet                 eAppletType,
+                                            bool                    isDialog,
+                                            bool                    isPopup )
+: ActivityBase( objName, app, parent, eAppletType, isDialog, isPopup )
 , m_bFirstMsg( true )
 , m_VidCamWidget( 0 )
 , m_TitleBarWidget( 0 )
@@ -53,9 +54,10 @@ ActivityToFriendBase::ActivityToFriendBase(	const char *			objName,
 										    EPluginType				ePluginType,
 											GuiOfferSession *		poOffer, 
 											QWidget *				parent,
-                                             EApplet                 eAppletType,
-											Qt::WindowFlags			flags )
-: ActivityBase( objName, app, parent, eAppletType, flags ? flags : Qt::WindowSystemMenuHint | Qt::WindowMinMaxButtonsHint )
+                                            EApplet                 eAppletType,
+                                            bool                    isDialog,
+                                            bool                    isPopup )
+: ActivityBase( objName, app, parent, eAppletType, isDialog, isPopup )
 , m_bFirstMsg( true )
 , m_VidCamWidget( 0 )
 , m_TitleBarWidget( 0 )
@@ -65,11 +67,6 @@ ActivityToFriendBase::ActivityToFriendBase(	const char *			objName,
 	setHisIdent( poOffer->getHisIdent() );
 
 	setupActivityToFriendBase();
-}
-
-//============================================================================
-ActivityToFriendBase::~ActivityToFriendBase()
-{
 }
 
 //============================================================================

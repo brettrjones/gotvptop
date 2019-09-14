@@ -20,12 +20,12 @@
 
 //============================================================================
 ActivityToFriendChangeFriendship::ActivityToFriendChangeFriendship( AppCommon& app, QWidget * parent )
-	: ActivityBase( OBJNAME_ACTIVITY_TO_FRIEND_CHANGE_FRIENDSHIP, app, parent, eAppletMessenger, Qt::SubWindow )
+	: ActivityBase( OBJNAME_ACTIVITY_TO_FRIEND_CHANGE_FRIENDSHIP, app, parent, eAppletMessenger, true )
 	, m_Friend(0)
 {
 	ui.setupUi(this);
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	connect( ui.ToFriendButton,		SIGNAL(clicked()), this, SLOT(onPermissionClick()) );
 	connect( ui.ToGuestButton,		SIGNAL(clicked()), this, SLOT(onPermissionClick()) );
@@ -34,10 +34,6 @@ ActivityToFriendChangeFriendship::ActivityToFriendChangeFriendship( AppCommon& a
 	connect( ui.OkButton,			SIGNAL(clicked()), this, SLOT(onOkButClick()) );
 	connect( ui.CancelButton,		SIGNAL(clicked()), this, SLOT(onCancelButClick()) );
 	connect( ui.m_TitleBarWidget,	SIGNAL(signalBackButtonClicked()), this, SLOT(onCancelButClick()) );
-}
-//============================================================================
-ActivityToFriendChangeFriendship::~ActivityToFriendChangeFriendship()
-{
 }
 
 //============================================================================

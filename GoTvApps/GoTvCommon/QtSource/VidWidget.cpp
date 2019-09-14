@@ -59,6 +59,7 @@ VidWidget::VidWidget(QWidget *parent)
 , m_MotionRecordExpireTimer( new QTimer( this ) )
 , m_InNormalRecord( false )
 {
+    setObjectName( "VxWidget" );
 	ui.setupUi(this);
 	showAllControls( false );
 	m_ThumbnailPreview = new VxLabel( ui.m_VideoScreen );

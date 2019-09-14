@@ -23,6 +23,7 @@ VxLabel::VxLabel(QWidget *parent, Qt::WindowFlags f)
 , m_MaxLines( 1 )
 , m_VidImageRotation( 0 )
 {
+    setObjectName( "VxLabel" );
     m_behindFrameCnt = 0;
 	connect( this, SIGNAL(signalPlayVideoFrame( QImage, int )), this, SLOT(slotPlayVideoFrame( QImage, int )),  Qt::QueuedConnection );
 }

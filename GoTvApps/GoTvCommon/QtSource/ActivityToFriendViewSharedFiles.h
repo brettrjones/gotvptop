@@ -37,7 +37,11 @@ public:
 	ActivityToFriendViewSharedFiles(	AppCommon&	myApp, 
 										VxNetIdent *	netIdent, 
 										QWidget *		parent = NULL );
-	virtual ~ActivityToFriendViewSharedFiles();
+	virtual ~ActivityToFriendViewSharedFiles() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 public:
     void						addFile( VxNetIdent * netIdent, VxMyFileInfo& fileInfo  );

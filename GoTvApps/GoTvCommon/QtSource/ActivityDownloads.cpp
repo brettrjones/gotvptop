@@ -33,13 +33,13 @@
 //============================================================================
 ActivityDownloads::ActivityDownloads(	AppCommon&	app, 
 										QWidget *		parent )
-: ActivityBase( OBJNAME_ACTIVITY_DOWNLOADS, app, parent, eAppletMessenger, Qt::SubWindow ) //Qt::Popup ) //
+: ActivityBase( OBJNAME_ACTIVITY_DOWNLOADS, app, parent, eAppletMessenger, true ) 
 {
 	ui.setupUi( this );
 	connect( &m_MyApp,				SIGNAL(signalStatusMsg(QString)),		ui.m_TitleBarWidget,	SLOT(slotTitleStatusBarMsg(QString)) );
 
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr( "Downloads" ) );
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	connect( ui.m_TitleBarWidget,					SIGNAL(signalBackButtonClicked()),				this, SLOT(slotHomeButtonClicked()) );
     connect( ui.m_FileItemList, SIGNAL(itemClicked(QListWidgetItem *)),		this, SLOT(slotFileXferItemClicked(QListWidgetItem *)));

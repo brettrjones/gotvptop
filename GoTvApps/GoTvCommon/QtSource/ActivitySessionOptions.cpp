@@ -40,11 +40,6 @@ ActivitySessionOptions::ActivitySessionOptions(	AppCommon&				app,
 }
 
 //============================================================================
-ActivitySessionOptions::~ActivitySessionOptions()
-{
-}
-
-//============================================================================
 void ActivitySessionOptions::setup()
 {
 	//setContentWidget( &m_VideoChatWidget );

@@ -41,6 +41,7 @@ VxTagLabel::~VxTagLabel()
 //============================================================================
 void VxTagLabel::setupQTagLabel( void )
 {
+    setObjectName( "VxTagLabel" );
 	connect( this, SIGNAL(clicked()), this, SLOT(slotOnClicked()) );
 }
 

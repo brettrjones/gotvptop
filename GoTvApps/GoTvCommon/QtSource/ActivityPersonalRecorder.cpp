@@ -25,7 +25,7 @@
 ActivityPersonalRecorder::ActivityPersonalRecorder(	AppCommon&			app,
 													VxNetIdent *			ident, 
 													QWidget *				parent )
-: ActivityToFriendBase( OBJNAME_ACTIVITY_PERSONAL_RECORDER, app, ePluginTypePersonalRecorder, ident, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityToFriendBase( OBJNAME_ACTIVITY_PERSONAL_RECORDER, app, ePluginTypePersonalRecorder, ident, parent, eAppletMessenger, true )
 {
 	setupMultiSessionActivity();
 	m_MyApp.wantToGuiActivityCallbacks( this, this, true );
@@ -42,7 +42,7 @@ void ActivityPersonalRecorder::setupMultiSessionActivity( void )
 {
 	ui.setupUi( this );
 	connect( ui.m_TitleBarWidget,	SIGNAL(signalBackButtonClicked()), this,	SLOT(accept()) );
-	slotRepositionToParent();
+    connectBarWidgets();
 	ui.m_SessionWidget->setIsPersonalRecorder( true );
 	ui.m_SessionWidget->setIdents( &m_Engine.getMyPktAnnounce(), &m_Engine.getMyPktAnnounce() );
 	ui.m_SessionWidget->setEntryMode( eAssetTypeUnknown );

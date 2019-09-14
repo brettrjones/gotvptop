@@ -20,6 +20,7 @@ VxFrame::VxFrame( QWidget* parent, Qt::WindowFlags f )
 	: QFrame( parent, f )
 	, m_FrameId( 1 )
 {
+    setObjectName( "VxFrame" );
 }
 
 //============================================================================

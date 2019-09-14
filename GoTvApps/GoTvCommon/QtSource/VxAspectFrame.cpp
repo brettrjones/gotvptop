@@ -25,6 +25,7 @@ VxAspectFrame::VxAspectFrame( QWidget *parent )
 , m_ThumbnailScale( 0.25 )
 , m_VideoScreen( 0 )
 {
+    setObjectName( "VxAspectFrame" );
 }
 
 //============================================================================

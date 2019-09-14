@@ -33,19 +33,14 @@ namespace
 
 //============================================================================
 ActivityNetworkSettings::ActivityNetworkSettings( AppCommon& app, QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_NETWORK_SETTINGS, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_NETWORK_SETTINGS, app, parent, eAppletMessenger, true )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Network Settings") );
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	connectSignals();
 	updateDlgFromSettings();
-}
-
-//============================================================================
-ActivityNetworkSettings::~ActivityNetworkSettings()
-{
 }
 
 //============================================================================

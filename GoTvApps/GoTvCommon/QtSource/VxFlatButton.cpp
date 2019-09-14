@@ -29,6 +29,7 @@ VxFlatButton::VxFlatButton( QWidget *parent )
 , m_MyApp( GetAppInstance() )
 , m_MyIcon( eMyIconUnknown )
 {
+    setObjectName( "VxFlatButton" );
 }
 
 //============================================================================

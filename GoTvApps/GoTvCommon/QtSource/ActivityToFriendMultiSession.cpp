@@ -29,7 +29,7 @@
 ActivityToFriendMultiSession::ActivityToFriendMultiSession(	AppCommon&			app,
 															VxNetIdent *			netIdent, 
 															QWidget *				parent )
-: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_MULTISESSION, app, ePluginTypeMultiSession, netIdent, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_MULTISESSION, app, ePluginTypeMultiSession, netIdent, parent, eAppletMessenger, true )
 , m_TodGameWidget( 0 )
 , m_TodGameLogic( app, app.getEngine(), ePluginTypeMultiSession, this )
 , m_IsInitialized( false )
@@ -46,7 +46,7 @@ ActivityToFriendMultiSession::ActivityToFriendMultiSession(	AppCommon&			app,
 ActivityToFriendMultiSession::ActivityToFriendMultiSession(	AppCommon&			app,
 															GuiOfferSession *		poOffer, 
 															QWidget *				parent )
-: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_MULTISESSION, app, ePluginTypeMultiSession, poOffer, parent, eAppletMessenger, Qt::SubWindow  )
+: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_MULTISESSION, app, ePluginTypeMultiSession, poOffer, parent, eAppletMessenger, true )
 , m_TodGameWidget( 0 )
 , m_TodGameLogic( app, app.getEngine(), ePluginTypeMultiSession, this )
 , m_IsInitialized( false )
@@ -60,12 +60,6 @@ ActivityToFriendMultiSession::ActivityToFriendMultiSession(	AppCommon&			app,
 }
 
 //============================================================================
-ActivityToFriendMultiSession::~ActivityToFriendMultiSession()
-{
-	m_IsInitialized = false;
-}
-
-//============================================================================
 void ActivityToFriendMultiSession::setupMultiSessionActivity( VxNetIdent * hisIdent )
 {
 	m_HisIdent = hisIdent;
@@ -73,6 +67,7 @@ void ActivityToFriendMultiSession::setupMultiSessionActivity( VxNetIdent * hisId
     QString titleText = QObject::tr("Text Chat - ");
     titleText += hisIdent->getOnlineName();
     ui.m_TitleBarWidget->setTitleBarText( titleText );
+    connectBarWidgets();
 
 	m_OffersFrame			= ui.m_OffersFrame;
 	m_ResponseFrame			= ui.m_ResponseFrame;

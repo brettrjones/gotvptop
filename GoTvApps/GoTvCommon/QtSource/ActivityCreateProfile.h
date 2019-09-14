@@ -29,7 +29,7 @@ class ActivityCreateProfile : public ActivityBase
 	Q_OBJECT
 public:
 	ActivityCreateProfile( AppCommon& app, QWidget * parent = NULL );
-	virtual ~ActivityCreateProfile();
+	virtual ~ActivityCreateProfile() override = default;
 
 	void						setRootUserDataDirectory( const char * userDir ) { m_strRootUserDataDir = userDir; };
 	//! validate user input

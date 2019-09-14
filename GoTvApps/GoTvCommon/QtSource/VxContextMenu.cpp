@@ -29,6 +29,7 @@ VxContextMenu::VxContextMenu( AppCommon& appCommon, QWidget * parent )
 , m_GlobalPoint( 0, 0 )
 , m_ShowAboveButton( false )
 {
+    setObjectName( "VxContextMenu" );
 }
 
 //============================================================================

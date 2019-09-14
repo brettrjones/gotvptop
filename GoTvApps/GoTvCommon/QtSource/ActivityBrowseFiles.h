@@ -36,6 +36,10 @@ public:
 	ActivityBrowseFiles( AppCommon& app, EFileFilterType fileFilter, ActivityBase * parent = NULL, bool isSelectAFileMode = false );
 	virtual ~ActivityBrowseFiles();
 
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
+
 public:
 	void						setFileFilter( EFileFilterType eFileFilter );
 

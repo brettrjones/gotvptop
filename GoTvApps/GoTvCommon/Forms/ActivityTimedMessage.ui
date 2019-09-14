@@ -26,7 +26,13 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
     <number>0</number>
    </property>
    <item>
@@ -97,6 +103,25 @@
      </layout>
     </widget>
    </item>
+   <item>
+    <widget class="BottomBarWidget" name="m_BottomBarWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>30</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -104,6 +129,12 @@
    <class>TitleBarWidget</class>
    <extends>QWidget</extends>
    <header>TitleBarWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BottomBarWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">BottomBarWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

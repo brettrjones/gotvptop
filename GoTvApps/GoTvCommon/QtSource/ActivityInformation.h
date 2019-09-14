@@ -27,32 +27,28 @@ class ActivityInformation : public ActivityBase
 public:
 
     ActivityInformation( AppCommon& app, QWidget * parent, EPluginType pluginType );
-	virtual ~ActivityInformation() = default;
+	virtual ~ActivityInformation() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
     void						setPluginType( EPluginType pluginType ) { m_PluginType = pluginType; updateInformation(); }
     EPluginType                 getPluginType() { return m_PluginType; }
 
-	void						updateDialogFromProfile();
-	void						updateProfileFromSettings();
-
 protected slots:
-
-	void						slotLog( int iPluginNum, QString strMsg );
-	void						slotHomeButtonClicked( void );
-	void						onFullLogButtonClicked( void );
-	void						onErrorLogButtonClicked( void );
-	void						onStatusLogButtonClicked( void );
-
-	void						slotLogToFileCheckBox();
+	void						slotCopyToClipboardButtonClicked( void );
 
 protected:
+    virtual void				showEvent( QShowEvent * ev ) override;
+
     void						initActivityInformation( void );
     void						updateInformation( void );
-    QString                     getInfoText( void );
-    
-    void						updateCheckBoxes();
+    QString&                    getInfoText( void );
 
 	//=== vars ===//
 	Ui::InformationDialog		ui;
     EPluginType                 m_PluginType = ePluginTypeInvalid;
+    static QString              m_NoInfoAvailable;
+    static QString              m_NetworkDesign;
 };

@@ -32,7 +32,11 @@ class ActivityEditProfile : public ActivityBase
 public:
 
 	ActivityEditProfile( AppCommon& app, const char * pUserSpecificDataDir, QWidget * parent = NULL );
-	virtual ~ActivityEditProfile();
+	virtual ~ActivityEditProfile() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 private:
 	//! validate user input

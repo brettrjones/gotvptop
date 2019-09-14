@@ -26,7 +26,11 @@ class ActivityPermissionsRelay : public ActivityBase
 	Q_OBJECT
 public:
 	ActivityPermissionsRelay( AppCommon& app, QWidget * parent = NULL );
-	virtual ~ActivityPermissionsRelay();
+	virtual ~ActivityPermissionsRelay() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 	//=== helpers ===//
 	//! Set plugin to set permissions on   

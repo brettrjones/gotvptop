@@ -68,8 +68,11 @@
 #define OBJNAME_ACTIVITY_INFORMATION					"ActivityInformation"
 
 #define OBJNAME_APPLET_BASE								"AppletBase"
+#define OBJNAME_FRAME_LAUNCH_PAGE						"FrameLaunchPage" // layout frame for launch page
+#define OBJNAME_FRAME_MESSAGER_PAGE						"FrameMessengerPage" // layout frame for messenger page
+
 #define OBJNAME_APPLET_LAUNCH_PAGE						"AppletLaunchPage"
-#define OBJNAME_MESSAGER_PAGE							"MessengerPage"
+#define OBJNAME_APPLET_MESSAGER_PAGE					"AppletMessengerPage"
 
 #define OBJNAME_APPLET_KODI						        "AppletKodi"
 #define OBJNAME_APPLET_NET_HOSTING						"AppletNetHosting"

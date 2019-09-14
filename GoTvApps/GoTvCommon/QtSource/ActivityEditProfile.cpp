@@ -36,12 +36,14 @@
 
 //============================================================================
 ActivityEditProfile::ActivityEditProfile( AppCommon& app, const char * pUserSpecificDataDir, QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_EDIT_PROFILE, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_EDIT_PROFILE, app, parent, eAppletMessenger, true )
 , m_bUserPickedImage( false)
 , m_bUsingDefaultImage(true)
 , m_strUserSepecificDataDir(pUserSpecificDataDir)
 {
-    ui.setupUi( getContentItemsFrame() );
+    ui.setupUi( this );
+    connectBarWidgets();
+
     setTitleBarText( QObject::tr( "Edit My Profile" ) );
 
 	VxFileUtil::makeDirectory( m_strUserSepecificDataDir.c_str() );
@@ -85,11 +87,6 @@ ActivityEditProfile::ActivityEditProfile( AppCommon& app, const char * pUserSpec
 	connect( ui.m_DoneButton, SIGNAL(clicked()), this, SLOT(onDoneButClick()));
 
 	loadContentFromDb();
-}
-
-//============================================================================
-ActivityEditProfile::~ActivityEditProfile()
-{
 }
 
 //============================================================================

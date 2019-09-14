@@ -24,7 +24,7 @@
 ActivityToFriendVoicePhone::ActivityToFriendVoicePhone(	AppCommon&			app,
 														VxNetIdent *			hisIdent, 
 														QWidget *				parent )
-: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_VOICE_PHONE, app, ePluginTypeVoicePhone, hisIdent, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_VOICE_PHONE, app, ePluginTypeVoicePhone, hisIdent, parent, eAppletMessenger, true )
 {
 	setupActivityVoicePhone();
 	m_OfferSessionLogic.sendOfferOrResponse();
@@ -34,15 +34,10 @@ ActivityToFriendVoicePhone::ActivityToFriendVoicePhone(	AppCommon&			app,
 ActivityToFriendVoicePhone::ActivityToFriendVoicePhone(	AppCommon&			app,
 														GuiOfferSession *		offerSession, 
 														QWidget *				parent )
-: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_VOICE_PHONE, app, ePluginTypeVoicePhone, offerSession, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_VOICE_PHONE, app, ePluginTypeVoicePhone, offerSession, parent, eAppletMessenger, true )
 {
 	setupActivityVoicePhone();
 	m_OfferSessionLogic.sendOfferOrResponse();
-}
-
-//============================================================================
-ActivityToFriendVoicePhone::~ActivityToFriendVoicePhone()
-{
 }
 
 //============================================================================
@@ -54,7 +49,7 @@ void ActivityToFriendVoicePhone::setupActivityVoicePhone( void )
     titleText += m_HisIdent->getOnlineName();
     ui.m_TitleBarWidget->setTitleBarText( titleText );
 	ui.m_TitleBarWidget->enableAudioControls( true );
-	slotRepositionToParent();
+    connectBarWidgets();
 	ui.m_InstMsgWidget->setInstMsgWidgets( m_ePluginType, m_HisIdent );
 	ui.m_HangUpButton->setIcon( eMyIconVoicePhoneCancel );
 	connect( ui.m_HangUpButton, SIGNAL(clicked()), this, SLOT(reject()) );

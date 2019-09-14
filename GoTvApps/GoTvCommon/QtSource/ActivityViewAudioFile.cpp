@@ -24,12 +24,12 @@
 //============================================================================
 ActivityViewAudioFile::ActivityViewAudioFile(	AppCommon&			app,
 												QWidget *				parent )
-: ActivityBase( OBJNAME_ACTIVITY_VIEW_AUDIO_FILE, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_VIEW_AUDIO_FILE, app, parent, eAppletMessenger, true )
 , m_HisIdent( &app.getEngine().getMyPktAnnounce() )
 , m_bIsMyself( true )
 {
 	ui.setupUi( this );
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	//ui.m_AudioWidget->setAudioFeedId( m_HisIdent->getMyOnlineId() );
 
@@ -43,11 +43,6 @@ ActivityViewAudioFile::ActivityViewAudioFile(	AppCommon&			app,
 	connect( this, SIGNAL(finished(int)), this, SLOT(onStopButClick()));
 	connect( ui.m_LibraryButton, SIGNAL(clicked()), this, SLOT(onLibraryButtonClick()));
 	connect( ui.m_ShareButton, SIGNAL(clicked()), this, SLOT(onShareButtonClick()));
-}
-
-//============================================================================
-ActivityViewAudioFile::~ActivityViewAudioFile()
-{
 }
 
 //============================================================================

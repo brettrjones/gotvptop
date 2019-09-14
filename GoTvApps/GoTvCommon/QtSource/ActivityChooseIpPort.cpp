@@ -30,6 +30,7 @@ ActivityChooseIpPort::ActivityChooseIpPort(	AppCommon& app, QWidget * parent )
 , m_Engine( app.getEngine() )
 {
 	ui.setupUi(this);
+    connectBarWidgets();
 
 	connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(reject()) );
 	connect( ui.CancelButton, SIGNAL(clicked()), this, SLOT(reject()) );
@@ -37,11 +38,6 @@ ActivityChooseIpPort::ActivityChooseIpPort(	AppCommon& app, QWidget * parent )
 	connect( ui.RandomPortButton, SIGNAL(clicked()), this, SLOT(chooseRandomPort()) );
 
 	updateValues();
-}
-
-//============================================================================
-ActivityChooseIpPort::~ActivityChooseIpPort()
-{
 }
 
 //============================================================================

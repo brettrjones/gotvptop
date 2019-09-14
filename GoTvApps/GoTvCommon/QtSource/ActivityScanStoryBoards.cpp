@@ -27,7 +27,7 @@ ActivityScanStoryBoards * g_poScanStoryBoardsActivity = NULL;
 //! constructor
 ActivityScanStoryBoards::ActivityScanStoryBoards(	AppCommon& app, 
 													QWidget *		parent )
-	: ActivityBase( OBJNAME_ACTIVITY_SCAN_STORYBOARDS, app, parent, eAppletMessenger, Qt::SubWindow ) //Qt::Popup ) //
+	: ActivityBase( OBJNAME_ACTIVITY_SCAN_STORYBOARDS, app, parent, eAppletMessenger, true ) //Qt::Popup ) //
 	, m_bAutoScan(true)
 	, m_eScanType(eScanTypeCamServer)
 {
@@ -37,7 +37,7 @@ ActivityScanStoryBoards::ActivityScanStoryBoards(	AppCommon& app,
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Story Board" ) );
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
     connect( this, SIGNAL(signalScanStoryBoard( VxNetIdent *, QString )), this, SLOT(slotScanStoryBoard( VxNetIdent *, QString )));
     connect(ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotHomeButtonClicked()));

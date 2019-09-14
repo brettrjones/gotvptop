@@ -48,6 +48,8 @@ VxSpinProgress::~VxSpinProgress()
 //============================================================================
 void VxSpinProgress::initQSpinProgress( void )
 {
+    setObjectName( "VxSpinProgress" );
+
 	setAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
 	m_AnimationTimer->setInterval( 1000 );
 	connect( m_AnimationTimer, SIGNAL(timeout()), this, SLOT(slotAnimationTickTock()) );

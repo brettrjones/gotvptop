@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>EditProfileDialog</class>
- <widget class="QWidget" name="EditProfileDialog">
+ <widget class="QDialog" name="EditProfileDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>647</width>
-    <height>1051</height>
+    <width>407</width>
+    <height>632</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,6 +32,28 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
+   <item>
+    <widget class="TitleBarWidget" name="m_TitleBarWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+    </widget>
+   </item>
    <item>
     <widget class="QGroupBox" name="DialogItemsGroupBox">
      <layout class="QVBoxLayout" name="DialogItemsGroupBox_3">
@@ -158,15 +180,48 @@
       <item>
        <widget class="QLineEdit" name="favoriteWebsite3Edit">
         <property name="text">
-         <string>http://www.gotvp2p.com</string>
+         <string>http://www.gotvptop.com</string>
         </property>
        </widget>
       </item>
      </layout>
     </widget>
    </item>
+   <item>
+    <widget class="BottomBarWidget" name="m_BottomBarWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>30</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TitleBarWidget</class>
+   <extends>QWidget</extends>
+   <header>TitleBarWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BottomBarWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">BottomBarWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../gotvcommon.qrc"/>
  </resources>

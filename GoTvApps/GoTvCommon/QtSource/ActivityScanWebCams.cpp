@@ -30,7 +30,7 @@ namespace
 //============================================================================
 ActivityScanWebCams::ActivityScanWebCams(	AppCommon&	app, 
 											QWidget *		parent )
-: ActivityBase( OBJNAME_ACTIVITY_SCAN_WEB_CAMS, app, parent, eAppletMessenger, Qt::SubWindow ) //Qt::Popup ) //
+: ActivityBase( OBJNAME_ACTIVITY_SCAN_WEB_CAMS, app, parent, eAppletMessenger, true ) //Qt::Popup ) //
 , m_HisIdent( NULL )
 , m_iCountdownCnt( 0 )
 , m_bPaused( false )
@@ -44,7 +44,7 @@ ActivityScanWebCams::ActivityScanWebCams(	AppCommon&	app,
 	setPluginType( ePluginTypeCamServer );
 	ui.setupUi(this);
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
     connect( this, SIGNAL(signalNewWebCamSession( VxNetIdent * )), this, SLOT(slotNewWebCamSession( VxNetIdent * )));
     connect( this, SIGNAL(signalPlayVideoFrame( QImage, int )), this, SLOT(slotPlayVideoFrame( QImage, int )));

@@ -22,14 +22,14 @@
 ActivitySessionFileOffer::ActivitySessionFileOffer(	AppCommon& app, 
 													GuiOfferSession * poOffer, 
 													QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_SESSION_FILE_OFFER, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_SESSION_FILE_OFFER, app, parent, eAppletMessenger, true )
 , m_ePluginType(ePluginTypeFileOffer)
 , m_Offer(poOffer)
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Offer File"));
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	setupStyledDlg(	
 		poOffer->getHisIdent(), 		
@@ -40,11 +40,6 @@ ActivitySessionFileOffer::ActivitySessionFileOffer(	AppCommon& app,
 	ui.progressBar->setValue( poOffer->getProgress() );
 	connect( ui.AcceptButton, SIGNAL(clicked()), this, SLOT(onAcceptButClick()) );
 	connect( ui.CancelButton, SIGNAL(clicked()), this, SLOT(onCancelButClick()) );
-}
-
-//============================================================================
-ActivitySessionFileOffer::~ActivitySessionFileOffer()
-{
 }
 
 //============================================================================

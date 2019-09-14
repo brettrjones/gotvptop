@@ -22,6 +22,7 @@ VxGuidQt::VxGuidQt(QWidget *parent)
 : QObject(parent)
 , VxGUID()
 {
+    setObjectName( "VxGuidQt" );
 }
 
 //============================================================================

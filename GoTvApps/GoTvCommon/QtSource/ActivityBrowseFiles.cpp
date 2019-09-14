@@ -46,12 +46,12 @@ ActivityBrowseFiles::ActivityBrowseFiles( AppCommon& app,  EFileFilterType fileF
 , m_eFileFilterType( fileFilter )
 , m_FileFilterMask( VXFILE_TYPE_ALLNOTEXE )
 {
-	ui.setupUi( getContentItemsFrame() );
+	ui.setupUi( this );
     setFileFilter( m_eFileFilterType );
 
 	setTitleBarText( QObject::tr("Browse Device Files") );
 	ui.m_DoubleTapInstructionLabel->setVisible( m_IsSelectAFileMode );
-	slotRepositionToParent();
+    connectBarWidgets();
 	ui.m_UpDirectoryButton->setIcon( eMyIconMoveUpDirNormal );
 	m_WidgetClickEventFixTimer->setInterval( 10 );
 	connect( m_WidgetClickEventFixTimer, SIGNAL(timeout()), this, SLOT(slotRequestFileList()) );

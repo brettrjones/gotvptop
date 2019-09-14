@@ -19,6 +19,7 @@
 VxMenuButtonBottom::VxMenuButtonBottom( QWidget * parent )
 : VxMenuButton( parent )
 {
+    setObjectName( "VxMenuButtonBottom" );
     setMenuLocation( true );
 }
 

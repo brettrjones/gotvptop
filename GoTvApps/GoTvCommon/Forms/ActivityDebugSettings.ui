@@ -13,94 +13,20 @@
   <property name="windowTitle">
    <string>Debug Settings</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">QDialog#ActivityAbout
-{   
-color: transparent;
-background-color: transparent;
-border: 1px solid transparent;
-border-radius: 8px; 
-}
-
-#StyledDlgTitleBox
-{   
-color: black;
-background-color: rgb(50,238,17);
-border: 2px solid green;
-border-top-left-radius: 8px; 
-border-top-right-radius: 8px;
-}
-
-#StyledDlgTitleLabel
-{   
-color: black;
-}
-
-#StyledDlgItemsBox
-{   
-background-color: rgb(50,238,17);
-border: 2px solid green;
-border-top-color: green; 
-border-bottom-left-radius: 8px; 
-border-bottom-right-radius: 8px;
-}
-QPushButton#CancelButton
-{
-color: white;
-font: bold 14px;
-border-width: 10;
-border-image: url(:/TruthOrDare/Resources/button_green_normal.png) 10;
-padding: -10;
-}
-QPushButton#CancelButton:pressed
-{
-border-width: 10;
-border-image: url(:/TruthOrDare/Resources/button_green_pressed.png) 10;
-padding: -10;
-}
-QPushButton#AcceptButton
-{
-color: white;
-font: bold 14px;
-border-width: 10;
-border-image: url(:/TruthOrDare/Resources/button_green_normal.png) 10;
-padding: -10;
-}
-QPushButton#AcceptButton:pressed
-{
-border-width: 10;
-border-image: url(:/TruthOrDare/Resources/button_green_pressed.png) 10;
-padding: -10;
-}
-QPushButton#ViewLogButton
-{
-color: white;
-font: bold 14px;
-border-width: 10;
-border-image: url(:/TruthOrDare/Resources/button_green_normal.png) 10;
-padding: -10;
-}
-QPushButton#ViewLogButton:pressed
-{
-border-width: 10;
-border-image: url(:/TruthOrDare/Resources/button_green_pressed.png) 10;
-padding: -10;
-}
-QLabel#PermissionLabel
-{
-font: bold 14px;
-}
-QLineEdit#FileNameEdit
-{
-background-color: rgb(238,238,238);
-}
-QPlainTextEdit#OfferMsgEdit</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -185,6 +111,25 @@ QPlainTextEdit#OfferMsgEdit</string>
      </layout>
     </widget>
    </item>
+   <item>
+    <widget class="BottomBarWidget" name="m_BottomBarWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>30</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -192,6 +137,12 @@ QPlainTextEdit#OfferMsgEdit</string>
    <class>TitleBarWidget</class>
    <extends>QWidget</extends>
    <header>TitleBarWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BottomBarWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">BottomBarWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

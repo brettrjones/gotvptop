@@ -33,7 +33,7 @@ namespace
 ActivityToFriendTodGame::ActivityToFriendTodGame(	AppCommon&			app,
 													VxNetIdent *			netIdent, 
 													QWidget *				parent )
-: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_TOD_GAME, app, ePluginTypeTruthOrDare, netIdent, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_TOD_GAME, app, ePluginTypeTruthOrDare, netIdent, parent, eAppletMessenger, true )
 , m_TodGameLogic( app, app.getEngine(), ePluginTypeTruthOrDare, this )
 {
 	setupActivityToFriendTodGame();
@@ -60,17 +60,12 @@ ActivityToFriendTodGame::ActivityToFriendTodGame(	AppCommon&			app,
 ActivityToFriendTodGame::ActivityToFriendTodGame(	AppCommon&			    app,
 													GuiOfferSession *		poOffer, 
 													QWidget *				parent )
-: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_TOD_GAME, app, ePluginTypeTruthOrDare, poOffer, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_TOD_GAME, app, ePluginTypeTruthOrDare, poOffer, parent, eAppletMessenger, true )
 , m_TodGameLogic( app, app.getEngine(), ePluginTypeTruthOrDare, this )
 {
 	setupActivityToFriendTodGame();
 	m_TodGameLogic.beginGame( false );
 	m_OfferSessionLogic.sendOfferOrResponse();
-}
-
-//============================================================================
-ActivityToFriendTodGame::~ActivityToFriendTodGame()
-{
 }
 
 //============================================================================
@@ -80,7 +75,7 @@ void ActivityToFriendTodGame::setupActivityToFriendTodGame( void )
 	setupBaseWidgets( ui.m_TitleBarWidget, ui.m_FriendIdentWidget, ui.m_PermissionButton, ui.m_PermissionLabel );
 	ui.m_TitleBarWidget->setTitleBarText( tr("Truth Or Dare Game") );
 	ui.m_TitleBarWidget->enableAudioControls( true );
-	slotRepositionToParent();
+    connectBarWidgets();
 	m_TodGameLogic.setGuiWidgets( m_HisIdent, ui.m_TodGameWidget );
 	ui.m_InstMsgWidget->setInstMsgWidgets( m_ePluginType, m_HisIdent );
 

@@ -27,10 +27,10 @@ ActivityYesNoMsgBox::ActivityYesNoMsgBox(	AppCommon&	app,
 											QWidget *		parent, 
 											QString			title, 
 											QString			bodyText ) 
-: ActivityBase( OBJNAME_ACTIVITY_YES_NO_MSG_BOX, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_YES_NO_MSG_BOX, app, parent, eAppletMessenger, true )
 {
 	ui.setupUi(this);
-	slotRepositionToParent();
+    connectBarWidgets();
 	ui.m_AcceptButton->setIcon( eMyIconAcceptNormal );
 	ui.m_CancelButton->setIcon( eMyIconCancelNormal );
 	setTitle( title );
@@ -44,10 +44,6 @@ ActivityYesNoMsgBox::ActivityYesNoMsgBox(	AppCommon&	app,
 	ui.m_AcceptButton->setFocus();
 }
 
-//============================================================================
-ActivityYesNoMsgBox::~ActivityYesNoMsgBox()
-{
-}
 
 //============================================================================
 void ActivityYesNoMsgBox::setTitle( QString strTitle )

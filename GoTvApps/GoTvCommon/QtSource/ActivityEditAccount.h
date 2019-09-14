@@ -30,7 +30,11 @@ class ActivityEditAccount : public ActivityBase
 	Q_OBJECT
 public:
 	ActivityEditAccount(AppCommon& app, QWidget * parent = NULL );
-	virtual ~ActivityEditAccount();
+	virtual ~ActivityEditAccount() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 	void						updateValuesFromDatabase();
 

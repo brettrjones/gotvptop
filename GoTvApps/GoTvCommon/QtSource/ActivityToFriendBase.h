@@ -36,7 +36,8 @@ public:
 							VxNetIdent *			netIdent, 
 							QWidget *				parent	= NULL,
                             EApplet                 eAppletType = eAppletMessenger, 
-							Qt::WindowFlags			flags	= 0 );
+							bool                    isDialog = false,
+                            bool                    isPopup = false );
 
 	ActivityToFriendBase(	const char *			objName,
 							AppCommon&				app,
@@ -44,9 +45,14 @@ public:
 							GuiOfferSession *		poOffer, 
 							QWidget *				parent	= NULL,
                             EApplet                 eAppletType = eAppletMessenger,
-							Qt::WindowFlags			flags	= 0 );
+                            bool                    isDialog = false,
+                            bool                    isPopup = false );
 
-	virtual ~ActivityToFriendBase();
+	virtual ~ActivityToFriendBase() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 	void						setupBaseWidgets(	TitleBarWidget *	titleBarWidget, 
 													IdentWidget *		friendIdentWidget = 0, 

@@ -27,17 +27,13 @@ ActivityChooseTestWebsiteUrl::ActivityChooseTestWebsiteUrl(	AppCommon& app, QWid
 , m_Engine( app.getEngine() )
 {
 	ui.setupUi(this);
+    connectBarWidgets();
 
 	connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(reject()) );
 	connect( ui.CancelButton, SIGNAL(clicked()), this, SLOT(reject()) );
 	connect( ui.OkButton, SIGNAL(clicked()), this, SLOT(applyResultsAndExit()) );
 
 	updateValues();
-}
-
-//============================================================================
-ActivityChooseTestWebsiteUrl::~ActivityChooseTestWebsiteUrl()
-{
 }
 
 //============================================================================

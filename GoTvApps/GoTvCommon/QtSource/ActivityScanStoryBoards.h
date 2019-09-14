@@ -30,7 +30,11 @@ class ActivityScanStoryBoards :  public ActivityBase
 public:
 	ActivityScanStoryBoards(	AppCommon& app, 
 								QWidget *		parent = NULL );
-	virtual ~ActivityScanStoryBoards();
+	virtual ~ActivityScanStoryBoards() override;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 public:
 	void						setTitle( QString strTitle );

@@ -34,7 +34,11 @@ class ActivityViewLibraryFiles : public ActivityBase, public ToGuiFileXferInterf
 	Q_OBJECT
 public:
 	ActivityViewLibraryFiles( AppCommon& app, QWidget * parent = NULL, bool isSelectAFileMode = false );
-	virtual ~ActivityViewLibraryFiles();
+	virtual ~ActivityViewLibraryFiles() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 public:
 	void						addFile( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );

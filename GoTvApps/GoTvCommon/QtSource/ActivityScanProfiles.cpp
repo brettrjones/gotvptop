@@ -31,7 +31,7 @@ namespace
 //============================================================================
 ActivityScanProfiles::ActivityScanProfiles(	AppCommon&	app, 
 											QWidget *		parent )
-: ActivityBase( OBJNAME_ACTIVITY_SCAN_PROFILES, app, parent, eAppletMessenger, Qt::SubWindow ) 
+: ActivityBase( OBJNAME_ACTIVITY_SCAN_PROFILES, app, parent, eAppletMessenger, true )
 , m_Ident( NULL )
 , m_iCountdownCnt( 0 )
 , m_bPaused( false )
@@ -49,6 +49,7 @@ ActivityScanProfiles::ActivityScanProfiles(	AppCommon&	app,
 	oRect.setBottom(oRect.bottom() - oRect.top());
 	oRect.setTop(0);
 	this->setGeometry(oRect);
+    connectBarWidgets();
 
     connect(this, SIGNAL(signalSearchResultProfilePic(VxNetIdent*, QImage)), this, SLOT(slotSearchResultProfilePic(VxNetIdent*, QImage)));
     connect(m_CountdownTimer, SIGNAL(timeout()), this, SLOT(onCountdownTimer()));
@@ -68,11 +69,6 @@ ActivityScanProfiles::ActivityScanProfiles(	AppCommon&	app,
 	m_CountdownTimer->setInterval( COUNTDOWN_INTERVAL_MS );
 	m_MyApp.wantToGuiActivityCallbacks( this, this, true );
 	slotStartScanClicked();
-}
-
-//============================================================================
-ActivityScanProfiles::~ActivityScanProfiles()
-{
 }
 
 //============================================================================

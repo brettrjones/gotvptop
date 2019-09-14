@@ -30,12 +30,12 @@
 //============================================================================
 ActivityAnchorSettings::ActivityAnchorSettings(	AppCommon& app,
 												QWidget * parent )
-: ActivityBase( "ActivityAnchorSettings", app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( "ActivityAnchorSettings", app, parent, eAppletMessenger, true )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Anchor Settings") );
 
-	slotRepositionToParent();
+    connectBarWidgets();
 	connectSignals();
 
 	// save original values so can restore them if need be
@@ -44,11 +44,6 @@ ActivityAnchorSettings::ActivityAnchorSettings(	AppCommon& app,
 	m_Engine.getEngineSettings().getNetServiceWebsiteUrl( m_OrigConnectionTestUrl );
 
 	updateDlgFromSettings();
-}
-
-//============================================================================
-ActivityAnchorSettings::~ActivityAnchorSettings()
-{
 }
 
 //============================================================================

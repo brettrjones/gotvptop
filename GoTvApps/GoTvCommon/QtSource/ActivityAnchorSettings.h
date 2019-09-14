@@ -31,7 +31,11 @@ class ActivityAnchorSettings : public ActivityBase
 public:
 	ActivityAnchorSettings(	AppCommon& app,
 							QWidget * parent = NULL );
-	virtual ~ActivityAnchorSettings();
+	virtual ~ActivityAnchorSettings() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 public slots:
 	void						slotHomeButtonClicked();

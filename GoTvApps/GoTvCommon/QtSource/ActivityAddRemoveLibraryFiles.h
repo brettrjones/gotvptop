@@ -35,6 +35,10 @@ public:
     ActivityAddRemoveLibraryFiles( AppCommon& app, QWidget * parent = NULL );
     virtual ~ActivityAddRemoveLibraryFiles();
 
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
+
 	void						setTitle( QString strTitle );
 
 	FileShareItemWidget *		fileToWidget( uint8_t u8FileType, const char * pFileName, uint64_t u64FileLen, bool isShared );

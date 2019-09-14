@@ -32,7 +32,11 @@ public:
 	ActivityToFriendVoicePhone(	AppCommon&			app,
 								GuiOfferSession *		poOffer, 
 								QWidget *				parent = NULL );
-	virtual ~ActivityToFriendVoicePhone();
+	virtual ~ActivityToFriendVoicePhone() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 	//! called by base class with in session state
 	virtual void				onInSession( bool isInSession );

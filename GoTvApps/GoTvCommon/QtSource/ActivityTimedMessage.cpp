@@ -27,6 +27,7 @@ ActivityTimedMessage::ActivityTimedMessage( QString strTitle, QString strMessage
 	oRect.setTop(0);
 	this->setGeometry(oRect);
 
+
 	connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(reject()) );
 
 	this->ui.m_TitleBarWidget->setTitleBarText( strTitle );
@@ -38,10 +39,4 @@ ActivityTimedMessage::ActivityTimedMessage( QString strTitle, QString strMessage
 		m_CloseDlgTimer.start( iTimeoutSeconds * 1000 );
 	}
 }
-
-//============================================================================
-ActivityTimedMessage::~ActivityTimedMessage()
-{
-}
-
 

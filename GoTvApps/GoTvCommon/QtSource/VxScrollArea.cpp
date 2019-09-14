@@ -19,6 +19,7 @@
 VxScrollArea::VxScrollArea( QWidget * parent )
 : QScrollArea( parent )
 {
+    setObjectName( "VxScrollArea" );
 	setWidgetResizable( true );
 }
 

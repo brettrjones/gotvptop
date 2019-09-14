@@ -31,6 +31,7 @@ VxMyFileInfo::VxMyFileInfo(QWidget *parent)
 , m_IsInLibrary( false )
 , m_IsShared( false )
 {
+    setObjectName( "VxMyFileInfo" );
 }
 
 //============================================================================

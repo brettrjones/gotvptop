@@ -61,7 +61,11 @@ class ActivityScanProfiles : public ActivityBase
 public:
 	ActivityScanProfiles(	AppCommon& app, 
 							QWidget *		parent = NULL );
-	virtual ~ActivityScanProfiles();
+	virtual ~ActivityScanProfiles() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 public:
 	virtual void				toGuiClientScanSearchComplete( void * userData, EScanType eScanType );

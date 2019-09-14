@@ -21,12 +21,12 @@
 ActivityReplyFileOffer::ActivityReplyFileOffer(	AppCommon& app, 
 												GuiOfferSession * poOffer, 
 												QWidget * parent )
-: ActivityToFriendBase( OBJNAME_ACTIVITY_REPLY_FILE_OFFER, app, ePluginTypeFileOffer, poOffer, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityToFriendBase( OBJNAME_ACTIVITY_REPLY_FILE_OFFER, app, ePluginTypeFileOffer, poOffer, parent, eAppletMessenger, true )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Reply File Offer" ) );
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	setupStyledDlg( 	
 		poOffer->getHisIdent(), 
@@ -43,11 +43,6 @@ ActivityReplyFileOffer::ActivityReplyFileOffer(	AppCommon& app,
 
 	connect( ui.AcceptButton, SIGNAL(clicked()), this, SLOT(onReceiveFileButClick()) );
 	connect( ui.CancelButton, SIGNAL(clicked()), this, SLOT(onCancelButClick()) );
-}
-
-//============================================================================
-ActivityReplyFileOffer::~ActivityReplyFileOffer()
-{
 }
 
 //============================================================================

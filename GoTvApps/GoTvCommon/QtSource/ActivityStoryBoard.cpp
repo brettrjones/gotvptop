@@ -28,11 +28,11 @@ ActivityStoryBoard * g_poStoryBoardActivity = NULL;
 //============================================================================
 ActivityStoryBoard::ActivityStoryBoard(	AppCommon&	app, 
 										QWidget *		parent )
-: ActivityBase( OBJNAME_ACTIVITY_STORYBOARD, app, parent, eAppletMessenger, Qt::SubWindow ) //Qt::Popup ) //
+: ActivityBase( OBJNAME_ACTIVITY_STORYBOARD, app, parent, eAppletMessenger, true ) 
 {
 	ui.setupUi(this);
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
     connect( ui.StoryEditWidget, SIGNAL(signalStoryBoardSavedModified()), this, SLOT(slotStoryBoardSavedModified()));
     connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotHomeButtonClicked()) );

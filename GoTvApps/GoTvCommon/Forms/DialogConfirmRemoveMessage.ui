@@ -28,37 +28,6 @@
   <property name="toolTip">
    <string/>
   </property>
-  <property name="styleSheet">
-   <string notr="true">QDialog#FileActionMenuDialog
-{   
-color: transparent;
-background-color: transparent;
-border: 1px solid transparent;
-border-radius: 8px; 
-}
-
-#StyledDlgTitleBox
-{   
-color: black;
-background-color: rgb(50,238,17);
-border: 2px solid green;
-border-top-left-radius: 8px; 
-border-top-right-radius: 8px;
-}
-#popupTitleLabel
-{   
-color: black;
-}
-#m_ItemsGroupBox
-{   
-background-color: rgb(255,255,255);
-border: 2px solid green;
-border-top-color: green; 
-border-bottom-left-radius: 8px; 
-border-bottom-right-radius: 8px;
-}
-</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
@@ -414,9 +383,34 @@ border-bottom-right-radius: 8px;
      </layout>
     </widget>
    </item>
+   <item>
+    <widget class="BottomBarWidget" name="m_BottomBarWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>30</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>BottomBarWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">BottomBarWidget.h</header>
+   <container>1</container>
+  </customwidget>
   <customwidget>
    <class>VxPushButton</class>
    <extends>QPushButton</extends>

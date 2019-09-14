@@ -27,6 +27,7 @@
 VxComboBox::VxComboBox(QWidget *parent) 
 : QComboBox(parent) 
 {
+    setObjectName( "VxComboBox" );
     //setEditable( true );
     setStyleSheet( "QComboBox::down-arrow{\
     image: :/AppRes/Resources/arrow-thick-thin-down.svg;\

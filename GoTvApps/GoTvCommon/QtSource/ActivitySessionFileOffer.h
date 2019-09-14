@@ -34,7 +34,11 @@ public:
 	ActivitySessionFileOffer(	AppCommon& app, 
 								GuiOfferSession * poOffer, 
 								QWidget * parent = NULL );
-	virtual ~ActivitySessionFileOffer();
+	virtual ~ActivitySessionFileOffer() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 	void						setPluginType( EPluginType ePluginType );
 

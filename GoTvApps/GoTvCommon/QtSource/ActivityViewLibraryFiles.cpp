@@ -37,7 +37,7 @@
 
 //============================================================================
 ActivityViewLibraryFiles::ActivityViewLibraryFiles(	AppCommon& app, QWidget *	parent, bool isSelectAFileMode )
-: ActivityBase( OBJNAME_ACTIVITY_VIEW_LIBRARY_FILES, app, parent, eAppletMessenger, Qt::SubWindow ) 
+: ActivityBase( OBJNAME_ACTIVITY_VIEW_LIBRARY_FILES, app, parent, eAppletMessenger, true )
 , m_ePluginType( ePluginTypeInvalid )
 , m_IsSelectAFileMode( isSelectAFileMode )
 , m_FileWasSelected( false )
@@ -65,12 +65,7 @@ ActivityViewLibraryFiles::ActivityViewLibraryFiles(	AppCommon& app, QWidget *	pa
 	statusMsg( "Requesting Library File List " );
 	m_MyApp.wantToGuiFileXferCallbacks( this, this, true );
 	slotApplyFileFilter( ui.m_FileFilterComboBox->getCurrentFileFilterMask() );
-	slotRepositionToParent();
-}
-
-//============================================================================
-ActivityViewLibraryFiles::~ActivityViewLibraryFiles()
-{
+    connectBarWidgets();
 }
 
 //============================================================================

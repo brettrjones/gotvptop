@@ -28,12 +28,12 @@
 //============================================================================
 ActivitySoundOptions::	ActivitySoundOptions(	AppCommon& app, 
 												QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_SOUND_OPTIONS, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_SOUND_OPTIONS, app, parent, eAppletMessenger, true )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Sound Options"));
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	connect( ui.AcceptButton, SIGNAL(clicked()), this, SLOT(onApplyButClick()) );
 	connect( ui.CancelButton, SIGNAL(clicked()), this, SLOT(onCancelButClick()) );
@@ -44,11 +44,6 @@ ActivitySoundOptions::	ActivitySoundOptions(	AppCommon& app,
 
 	ui.MutePhoneRingCheckBox->setCheckState( bMutePhoneRing ? Qt::Checked : Qt::Unchecked );
 	ui.MuteNotifySouncCheckBox->setCheckState( bMuteNotifySound ? Qt::Checked : Qt::Unchecked );
-}
-
-//============================================================================
-ActivitySoundOptions::~ActivitySoundOptions()
-{
 }
 
 //============================================================================  

@@ -27,12 +27,12 @@
 ActivityPhoneShake::ActivityPhoneShake(	AppCommon&		app, 
 										EScanType			eSearchType,
 										QWidget *			parent )
-: ActivityBase( OBJNAME_ACTIVITY_PHONE_SHAKE, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_PHONE_SHAKE, app, parent, eAppletMessenger, true )
 , m_eScanType( eSearchType )
 {
 	ui.setupUi(this);
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
     connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(close()));
 	connect( this, SIGNAL(finished(int)), this, SLOT(slotHomeButtonClicked()));
@@ -47,11 +47,6 @@ ActivityPhoneShake::ActivityPhoneShake(	AppCommon&		app,
 
 
 	setTitle( "Add Friend By Shaking Phone" );
-}
-
-//============================================================================
-ActivityPhoneShake::~ActivityPhoneShake()
-{
 }
 
 //============================================================================

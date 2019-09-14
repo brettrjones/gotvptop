@@ -31,7 +31,11 @@ class ActivityFileSearch : public ActivityBase
 	Q_OBJECT
 public:
 	ActivityFileSearch(	AppCommon& app, QWidget * parent = NULL );
-	virtual ~ActivityFileSearch();
+	virtual ~ActivityFileSearch() override;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 	void						setTitle( QString strTitle );
 	void						addFile(	VxNetIdent *	netIdent, 

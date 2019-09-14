@@ -35,14 +35,14 @@
 ActivityNetServiceTest::ActivityNetServiceTest( 
 				AppCommon&	app,
 				QWidget *		parent )
-: ActivityBase( OBJNAME_ACTIVITY_NET_SERVICE_TEST, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_NET_SERVICE_TEST, app, parent, eAppletMessenger, true )
 , m_Timer(new QTimer(this))
 {
 	m_Timer->setSingleShot(true);
 
 	ui.setupUi(this);
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotExitDialogButtonClick()) );
 	connect( ui.m_RunTestButton, SIGNAL(clicked()), this, SLOT(slotRunTestButClick()) );
@@ -52,11 +52,6 @@ ActivityNetServiceTest::ActivityNetServiceTest(
 				SIGNAL(signalAnchorStatus(EAnchorTestStatus,QString)), 
 				this, 
 				SLOT(slotAnchorStatus(EAnchorTestStatus,QString)) );
-}
-
-//============================================================================
-ActivityNetServiceTest::~ActivityNetServiceTest()
-{
 }
 
 //============================================================================

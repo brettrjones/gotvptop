@@ -34,7 +34,7 @@ public:
 	ActivityDownloadItemMenu(	AppCommon& app, 
 								GuiFileXferSession * poSession, 
 								QWidget * parent = NULL );
-	virtual ~ActivityDownloadItemMenu();
+	virtual ~ActivityDownloadItemMenu() override = default;
 
 public slots:
 	void						onCancelButClick(); 

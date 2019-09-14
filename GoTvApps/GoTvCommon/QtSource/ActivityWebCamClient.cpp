@@ -70,15 +70,11 @@ ActivityWebCamClient::ActivityWebCamClient( AppCommon&			    app,
 }
 
 //============================================================================
-ActivityWebCamClient::~ActivityWebCamClient()
-{
-}
-
-//============================================================================
 void ActivityWebCamClient::setupActivityWebCamClient()
 {
 	ui.setupUi( this );
 	setupBaseWidgets( ui.m_TitleBarWidget, ui.m_FriendIdentWidget, 0, 0 );
+    connectBarWidgets();
 
 	ui.m_CamVidWidget->setVideoFeedId( m_HisIdent->getMyOnlineId() );
 	setVidCamWidget( ui.m_CamVidWidget );

@@ -25,14 +25,14 @@
 ActivityToFriendRequestRelay::ActivityToFriendRequestRelay(	AppCommon&	app, 
 															VxNetIdent * poFriend, 
 															QWidget * parent )
-	: ActivityBase( OBJNAME_ACTIVITY_TO_FRIEND_REQUEST_RELAY, app, parent, eAppletMessenger, Qt::SubWindow )
+	: ActivityBase( OBJNAME_ACTIVITY_TO_FRIEND_REQUEST_RELAY, app, parent, eAppletMessenger, true )
 	, m_ePluginType(ePluginTypeRelay)
 	, m_Friend( poFriend )
 { 
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Request Relay Service") );
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(accept()) );
 	connect( ui.TestButton, SIGNAL(clicked()), this, SLOT(onTestButClick()) );
@@ -44,11 +44,6 @@ ActivityToFriendRequestRelay::ActivityToFriendRequestRelay(	AppCommon&	app,
 	setHisPermissionToMe( hisPermissionToMe );
 	EFriendState myPermissionToHim = m_Friend->getMyFriendshipToHim();
 	setMyPermissionToHim( myPermissionToHim );
-}
-
-//============================================================================
-ActivityToFriendRequestRelay::~ActivityToFriendRequestRelay()
-{
 }
 
 //============================================================================

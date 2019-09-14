@@ -27,20 +27,15 @@
 
 //============================================================================
 ActivityManageAnchorSettings::ActivityManageAnchorSettings(	AppCommon& app, QWidget * parent )
-: ActivityBase(  "ActivityManageAnchorSettings", app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase(  "ActivityManageAnchorSettings", app, parent, eAppletMessenger, true )
 , m_MyApp( app )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Manage Anchor Settings") );
 
-	slotRepositionToParent();
+    connectBarWidgets();
 	updateDlgFromSettings();
 	connectSignals();
-}
-
-//============================================================================
-ActivityManageAnchorSettings::~ActivityManageAnchorSettings()
-{
 }
 
 //============================================================================

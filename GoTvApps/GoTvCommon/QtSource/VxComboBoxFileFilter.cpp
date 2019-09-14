@@ -58,7 +58,7 @@ VxComboBoxFileFilter::VxComboBoxFileFilter(QWidget *parent)
 , m_CurFileMask( VXFILE_TYPE_ALLNOTEXE )
 , m_FileFilterType( eFileFilterAll )
 {
-
+    setObjectName( "VxComboBoxFileFilter" );
     setFileFilter( m_FileFilterType );
 
 	connect( this, SIGNAL(currentIndexChanged(int)),	this,	SLOT(handleSelectionChanged(int)) );

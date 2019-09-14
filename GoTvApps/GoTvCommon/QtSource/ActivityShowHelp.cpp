@@ -28,15 +28,11 @@ ActivityShowHelp::ActivityShowHelp( AppCommon& app, QWidget * parent )
 {
 	Q_UNUSED(parent);
 	ui.setupUi(this);
+    connectBarWidgets();
 
 	connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotReject()) );
 
 	loadHelp();
-}
-
-//============================================================================
-ActivityShowHelp::~ActivityShowHelp()
-{
 }
 
 //============================================================================

@@ -35,6 +35,7 @@ VxShredderButton::VxShredderButton( QWidget *parent )
 , m_BlinkTimer( new QTimer( this ) )
 , m_BlinkRateMs( 300 )
 {
+    setObjectName( "VxShredderButton" );
 	initQShreaderButton();
 }
 

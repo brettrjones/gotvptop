@@ -66,6 +66,7 @@ VxSndInstance::VxSndInstance( ESndDef sndDef, QObject * parent )
 , m_IsPlaying( false )
 , m_IsInitialized( false )
 {
+    setObjectName( "VxSndInstance" );
 	connect( m_CheckFinishTimer, SIGNAL( timeout() ), this, SLOT(slotCheckForFinish()) );
 }
 

@@ -21,12 +21,12 @@
 
 //============================================================================
 ActivityPermissionsRelay::ActivityPermissionsRelay( AppCommon& app, QWidget * parent )
-	: ActivityBase(  OBJNAME_ACTIVITY_PERMISSIONS_RELAY, app, parent, eAppletMessenger, Qt::SubWindow )
+	: ActivityBase(  OBJNAME_ACTIVITY_PERMISSIONS_RELAY, app, parent, eAppletMessenger, true )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Relay Permissions" ) );
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	connect( ui.AnybodyButton,				SIGNAL(clicked()), this, SLOT(onPermissionClick()) );
 	connect( ui.FriendsOnlyButton,			SIGNAL(clicked()), this, SLOT(onPermissionClick()) );
@@ -42,11 +42,6 @@ ActivityPermissionsRelay::ActivityPermissionsRelay( AppCommon& app, QWidget * pa
 	m_Engine.getEngineSettings().getMaxRelaysInUse( maxUserRelaysInUse, maxAnonRelaysInUse );
 	ui.m_UserAllowCntSpinBox->setValue( maxUserRelaysInUse );
 	ui.m_AnonAllowCntSpinBox->setValue( maxAnonRelaysInUse );
-}
-
-//============================================================================
-ActivityPermissionsRelay::~ActivityPermissionsRelay()
-{
 }
 
 //============================================================================

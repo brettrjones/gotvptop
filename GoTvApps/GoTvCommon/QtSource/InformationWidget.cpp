@@ -85,10 +85,10 @@ void InformationWidget::slotShowInformation()
                QWidget * myParent4 = (QWidget *)myParent3->parent();
                if( myParent4 )
                {
-                   //m_ActivityInfo = new ActivityInformation( m_MyApp, myParent3, m_PluginType );
-                  // m_ActivityInfo->show();
-                   ActivityAbout * activity = new ActivityAbout( m_MyApp, myParent4 );
-                   activity->show();
+                   m_ActivityInfo = new ActivityInformation( m_MyApp, this, m_PluginType );
+                   m_ActivityInfo->show();
+                   //ActivityAbout * activity = new ActivityAbout( m_MyApp, myParent4 );
+                   //activity->show();
                }
            }
        }

@@ -25,13 +25,13 @@
 
 //============================================================================
 ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessenger, false, true )
 , m_OkButtonClicked( false )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Message") );
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	connect( ui.m_OkButton,					SIGNAL(clicked()), this, SLOT(onOkButClick()) );
 	connect( ui.m_CancelButton,				SIGNAL(clicked()), this, SLOT(onCancelButClick()) );
@@ -40,13 +40,13 @@ ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent )
 
 //============================================================================
 ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent, int infoLevel, const char * msgFormat, ... )
-: ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessenger, true )
 , m_OkButtonClicked( false )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Message") );
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	connect( ui.m_OkButton,					SIGNAL(clicked()), this, SLOT(onOkButClick()) );
 	//connect( ui.m_CancelButton,				SIGNAL(clicked()), this, SLOT(onCancelButClick()) );
@@ -71,12 +71,12 @@ ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent, int in
 
 //============================================================================
 ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent, int infoLevel, QString msg )
-: ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_MESSAGE_BOX, app, parent, eAppletMessenger, true )
 , m_OkButtonClicked( false )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Message") );
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	connect( ui.m_OkButton,					SIGNAL(clicked()), this, SLOT(onOkButClick()) );
 	//connect( ui.m_CancelButton,				SIGNAL(clicked()), this, SLOT(onCancelButClick()) );
@@ -86,11 +86,6 @@ ActivityMessageBox::ActivityMessageBox( AppCommon& app, QWidget * parent, int in
 	setBodyText( msg );
 	this->setFocus();
 	ui.m_OkButton->setFocus();
-}
-
-//============================================================================
-ActivityMessageBox::~ActivityMessageBox()
-{
 }
 
 //============================================================================

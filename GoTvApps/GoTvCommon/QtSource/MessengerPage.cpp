@@ -22,7 +22,7 @@
 
 //============================================================================
 MessengerPage::MessengerPage( AppCommon& app, QWidget * parent )
-: ActivityBase( OBJNAME_MESSAGER_PAGE, app, parent )
+: ActivityBase( OBJNAME_APPLET_MESSAGER_PAGE, app, parent )
 , m_IsVisible( false )
 , m_IsFullSize( false )
 {
@@ -30,11 +30,6 @@ MessengerPage::MessengerPage( AppCommon& app, QWidget * parent )
 	m_IsFullSize = getMyApp().getAppSettings().getIsMessengerFullScreen();
 	setExpandWindowVisibility( true );
 	setMenuBottomVisibility( true );
-}
-
-//============================================================================
-MessengerPage::~MessengerPage()
-{
 }
 
 //============================================================================

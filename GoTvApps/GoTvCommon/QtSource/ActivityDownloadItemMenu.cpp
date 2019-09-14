@@ -23,14 +23,14 @@
 ActivityDownloadItemMenu::ActivityDownloadItemMenu(	AppCommon& app, 
 													GuiFileXferSession * poSession, 
 													QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_DOWNLOAD_ITEM_MENU, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_DOWNLOAD_ITEM_MENU, app, parent, eAppletMessenger, false, true )
 , m_ePluginType( ePluginTypeFileServer )
 , m_Session( poSession )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Download Item Menu") );
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	setupStyledDlg(	poSession->getIdent(), 
 					ui.FriendIdentWidget,
@@ -44,11 +44,6 @@ ActivityDownloadItemMenu::ActivityDownloadItemMenu(	AppCommon& app,
 	ui.FileNameEdit->setText( m_Session->getJustFileName() );
 
 	connect( ui.CancelButton, SIGNAL(clicked()), this, SLOT(onCancelButClick()) );
-}
-
-//============================================================================
-ActivityDownloadItemMenu::~ActivityDownloadItemMenu()
-{
 }
 
 //============================================================================

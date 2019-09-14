@@ -21,11 +21,11 @@
 
 //============================================================================
 ActivityPermissions::ActivityPermissions( AppCommon& app, QWidget * parent )
-	: ActivityBase( OBJNAME_ACTIVITY_PERMISSIONS, app, parent, eAppletMessenger, Qt::SubWindow )
+	: ActivityBase( OBJNAME_ACTIVITY_PERMISSIONS, app, parent, eAppletMessenger, true )
 {
 	ui.setupUi(this);
 
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	connect( ui.AnybodyButton,				SIGNAL(clicked()), this, SLOT(onPermissionClick()) );
 	connect( ui.FriendsOnlyButton,			SIGNAL(clicked()), this, SLOT(onPermissionClick()) );
@@ -35,11 +35,6 @@ ActivityPermissions::ActivityPermissions( AppCommon& app, QWidget * parent )
 	connect( ui.OkButton,					SIGNAL(clicked()), this, SLOT(onOkButClick()) );
 	connect( ui.CancelButton,				SIGNAL(clicked()), this, SLOT(onCancelButClick()) );
 	connect( ui.m_TitleBarWidget,			SIGNAL(signalBackButtonClicked()), this, SLOT(onCancelButClick()) );
-}
-
-//============================================================================
-ActivityPermissions::~ActivityPermissions()
-{
 }
 
 //============================================================================

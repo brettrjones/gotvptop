@@ -31,7 +31,7 @@ ActivityVideoOptions::ActivityVideoOptions( AppCommon&			app,
 {
 	ui.setupUi( this );
 	ui.m_RotateButton->setIcons( eMyIconRefreshNormal );
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	//ui.m_VideoWidget->setRecordFileName( "F:/Junk.dat" );
 	//ui.m_VideoWidget->setRecordFileName( "F:/Junk.avi" );
@@ -50,11 +50,6 @@ ActivityVideoOptions::ActivityVideoOptions( AppCommon&			app,
 
 
 	m_FromGui.fromGuiStartPluginSession( ePluginTypeCamServer, m_HisIdent->getMyOnlineId(), NULL );
-}
-
-//============================================================================
-ActivityVideoOptions::~ActivityVideoOptions()
-{
 }
 
 //============================================================================

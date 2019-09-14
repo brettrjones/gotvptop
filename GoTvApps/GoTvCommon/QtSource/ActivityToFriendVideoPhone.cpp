@@ -25,7 +25,7 @@
 ActivityToFriendVideoPhone::ActivityToFriendVideoPhone(	AppCommon&			app,
 														VxNetIdent *			hisIdent, 
 														QWidget *				parent )
-: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_VIDEO_PHONE, app, ePluginTypeVideoPhone, hisIdent, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_VIDEO_PHONE, app, ePluginTypeVideoPhone, hisIdent, parent, eAppletMessenger, true )
 {
 	setupActivityVideoPhone();
 	m_OfferSessionLogic.sendOfferOrResponse();
@@ -35,15 +35,10 @@ ActivityToFriendVideoPhone::ActivityToFriendVideoPhone(	AppCommon&			app,
 ActivityToFriendVideoPhone::ActivityToFriendVideoPhone(	AppCommon&			app,
 														GuiOfferSession *		offerSession, 
 														QWidget *				parent )
-: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_VIDEO_PHONE, app, ePluginTypeVideoPhone, offerSession, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_VIDEO_PHONE, app, ePluginTypeVideoPhone, offerSession, parent, eAppletMessenger, true )
 {
 	setupActivityVideoPhone();
 	m_OfferSessionLogic.sendOfferOrResponse();
-}
-
-//============================================================================
-ActivityToFriendVideoPhone::~ActivityToFriendVideoPhone()
-{
 }
 
 //============================================================================
@@ -53,7 +48,7 @@ void ActivityToFriendVideoPhone::setupActivityVideoPhone()
 	setupBaseWidgets( ui.m_TitleBarWidget, ui.m_FriendIdentWidget, ui.m_PermissionButton, ui.m_PermissionLabel );
 	ui.m_TitleBarWidget->setTitleBarText( tr("Video Chat") );
 	ui.m_TitleBarWidget->enableAudioControls( true );
-	slotRepositionToParent();
+    connectBarWidgets();
 	ui.m_InstMsgWidget->setInstMsgWidgets( m_ePluginType, m_HisIdent );
 
 	ui.m_CamVidWidget->setVideoFeedId( m_HisIdent->getMyOnlineId() );

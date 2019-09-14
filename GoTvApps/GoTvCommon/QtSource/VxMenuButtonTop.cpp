@@ -19,6 +19,7 @@
 VxMenuButtonTop::VxMenuButtonTop( QWidget * parent )
 : VxMenuButton( parent )
 {
+    setObjectName( "VxMenuButtonTop" );
     setMenuLocation( false );
 }
 

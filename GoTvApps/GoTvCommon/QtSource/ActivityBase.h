@@ -43,7 +43,7 @@ class ActivityBase : public QDialog, public ObjectCommon, public ToGuiActivityIn
 {
 	Q_OBJECT
 public:
-	ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType = eAppletMessenger, Qt::WindowFlags flags = 0 );
+	ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType = eAppletMessenger, bool isDialog = false, bool isPopup = false );
 	virtual ~ActivityBase() override = default;
 
 	AppCommon&					getMyApp( void )					{ return m_MyApp; }
@@ -51,11 +51,7 @@ public:
 	P2PEngine&					getEngine( void )					{ return m_Engine; }
 	IFromGui&					getFromGuiInterface( void )			{ return m_FromGui; }
 	QFrame *					getContentItemsFrame( void ); // only available for applets
-    ActivityBase *				getHomeActivity( void ); // get home page activity ( Launch or Messenger Page )
-
-    virtual TitleBarWidget *	getTitleBarWidget( void );
-    virtual BottomBarWidget *	getBottomBarWidget( void );
-    VxPushButton *		        getAppIconPushButton( void )        { return getTitleBarWidget()->getAppIconPushButton(); }
+    QWidget *				    getParentPageFrame( void ); // get home page frame ( Launch or Messenger Page )
 
     void                        setIsMaxScreenSize( bool fullScreen );
     bool                        getIsMaxScreenSize( void );
@@ -64,6 +60,11 @@ public:
 	EApplet						getAppletType( void )				{ return m_EAppletType; }
 	bool						isApplet( void )					{ return ( eAppletUnknown != m_EAppletType ); }	
     bool                        isMessagerFrame( void );
+
+    virtual TitleBarWidget *	getTitleBarWidget( void );
+    virtual BottomBarWidget *	getBottomBarWidget( void );
+    VxPushButton *		        getAppIconPushButton( void )        { return getTitleBarWidget()->getAppIconPushButton(); }
+    virtual void                connectBarWidgets( void );
 
     // called just before first show of applet.. override for special initialization needs
     virtual void                aboutToLaunchApplet( void ) {}
@@ -107,10 +108,7 @@ public:
     virtual void				onResizeEvent( QSize& newSize ){}
     virtual void				onResizeEnd( QSize& newSize ){}
 
-
 	//=== title bar functions ====//
-    void                        connectTitleBarWidget( TitleBarWidget * titleBar );
-
 	void						setTitleBarText( QString titleText );
 	void						setTitleStatusBarMsg( QString statusMsg );
 	QLabel *					getTitleStatusBarLabel( void );
@@ -119,8 +117,6 @@ public:
 	void						enableVideoControls( bool enable );
 
 	//=== bottom bar functions ====//
-    void                        connectBottomBarWidget( BottomBarWidget * bottomBar );
-
 	virtual void				setPlayProgressPlayedTime( int timeSec );
 	virtual void				setPlayProgressTotalTime( int timeSec );
 
@@ -269,6 +265,9 @@ protected:
     virtual void				closeEvent( QCloseEvent * ev ) override;
     virtual void				resizeEvent( QResizeEvent * ev ) override;
 
+    void                        connectTitleBarWidget( TitleBarWidget * titleBar );
+    void                        connectBottomBarWidget( BottomBarWidget * bottomBar );
+
     virtual void                updateExpandWindowIcon( void );
 	virtual void				repositionToParent( void );
 	void						playSound( ESndDef sndDef );
@@ -283,7 +282,6 @@ protected:
 	IFromGui&					m_FromGui;	
     Qt::WindowFlags				m_WindowFlags = Qt::Widget;
     QWidget *					m_ParentWidget = nullptr;
-    ActivityBase *				m_HomeActivity = nullptr; // which home applet activity is our parent ( Launch or Messenger ) 
 
 	EApplet						m_EAppletType = eAppletUnknown;
 	QLabel *					m_StatusMsgLabel = nullptr;

@@ -28,7 +28,11 @@ class ActivityChooseIpPort : public ActivityBase
 	Q_OBJECT
 public:
 	ActivityChooseIpPort( AppCommon& app, QWidget * parent = NULL );
-	virtual ~ActivityChooseIpPort();
+	virtual ~ActivityChooseIpPort() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 
 public slots:

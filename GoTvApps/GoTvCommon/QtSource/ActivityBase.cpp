@@ -41,29 +41,34 @@
 const int RESIZE_WINDOW_COMPLETED_TIMEOUT = 500;
 
 //============================================================================
-ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType, Qt::WindowFlags flags )
-: QDialog( parent, flags )
+ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType, bool isDialog, bool isPopup )
+: QDialog( parent, 0 )
 , ObjectCommon( objName )
 , m_MyApp( app )
 , m_Engine( app.getEngine() )
 , m_FromGui( m_Engine.getFromGuiInterface() )
 , m_ParentWidget( parent )
-, m_WindowFlags( flags )
+, m_WindowFlags( 0 )
 , m_EAppletType( eAppletType )
 , m_StatusMsgLabel( 0 )
 , m_ePluginType( ePluginTypeInvalid )
 , m_HisIdent( 0 )
 , m_ResizingTimer( new QTimer(this) )
+, m_IsDialog( isDialog )
+, m_IsPopup( isPopup )
 {
+    vx_assert( objName );
+    setObjectName( objName );
+
 	if( 0xcdcdcdcdcdcdcdcd == (uint64_t)parent )
 	{
 		vx_assert( false );
 		LogMsg( LOG_FATAL, "ActivityBase::ActivityBase: Bad Param\n");
 	}
 
-    m_HomeActivity = getHomeActivity();
 
-    m_IsDialog = ( eAppletUnknown == eAppletType ) 
+    m_IsDialog = isDialog 
+                || ( eAppletUnknown == eAppletType ) 
                 || ( eAppletActivityDialog == eAppletType ); // do not setup base class ui in the case of activity dialog because of conflict with dialog ui
     if( !m_IsDialog )
     {
@@ -86,6 +91,7 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
         //m_WindowFlags = Qt::CoverWindow;
         setWindowFlags( m_WindowFlags );
         m_MyApp.getAppTheme().applyTheme( this );
+        m_ParentWidget = getParentPageFrame();
         connect( &m_MyApp, SIGNAL( signalMainWindowMoved() ), this, SLOT( slotRepositionToParent() ) );
 
         LogMsg( LOG_DEBUG, "ActivityBase::ActivityBase: Activity Dialog %s\n", objectName().toUtf8().constData() );
@@ -113,9 +119,20 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
 
     if( !m_IsDialog )
     {
-        connectTitleBarWidget( ui.m_TitleBarWidget );
-        connectBottomBarWidget( ui.m_BottomBarWidget );
-        updateExpandWindowIcon();
+        // if dialog then have to wait for dialog sets up title and bottom bar widgets before connecting them
+        connectBarWidgets();
+    }
+}
+
+//============================================================================
+void ActivityBase::connectBarWidgets( )
+{
+    connectTitleBarWidget( getTitleBarWidget() );
+    connectBottomBarWidget( getBottomBarWidget() );
+    updateExpandWindowIcon();
+    if( m_IsDialog )
+    {
+        slotRepositionToParent();
     }
 }
 
@@ -179,22 +196,37 @@ QFrame * ActivityBase::getContentItemsFrame( void )
 
 //============================================================================
 // get home page activity ( Launch or Messenger Page )
-ActivityBase * ActivityBase::getHomeActivity( void )
+QWidget * ActivityBase::getParentPageFrame( void )
 {
-    ActivityBase * parentActivity = nullptr;
-    ActivityBase * curActivity = this;
-    QString launchPageObjName = OBJNAME_APPLET_LAUNCH_PAGE;
-    QString messengerPageObjName = OBJNAME_MESSAGER_PAGE;
-    while( curActivity )
+    QWidget * parentActivity = nullptr;
+    QObject * curParent = this;
+
+    QString launchPageObjName;
+    QString messengerPageObjName;
+    
+    launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
+    messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
+//        launchPageObjName = OBJNAME_APPLET_LAUNCH_PAGE;
+//        messengerPageObjName = OBJNAME_APPLET_MESSAGER_PAGE;
+
+    while( curParent )
     {
-        QString objName = curActivity->objectName();
+        QString objName = curParent->objectName();
         if( ( objName == launchPageObjName ) || ( objName == messengerPageObjName ) )
         {
-            parentActivity = curActivity;
-            break;
+            parentActivity = dynamic_cast<QWidget *>( curParent );
+            if( parentActivity )
+            {
+                break;
+            }
         }
 
-        curActivity = dynamic_cast<ActivityBase *>( curActivity->parent() );
+        if( !curParent->parent() )
+        {
+            LogMsg( LOG_WARNING, "Object %s has no parent", objName.toUtf8().constData() );
+        }
+
+        curParent = dynamic_cast<QObject *>( curParent->parent() );
     }
 
     return parentActivity;
@@ -545,6 +577,10 @@ void ActivityBase::repositionToParent( void )
             setGeometry( parentRect );
         }
 	}
+    else
+    {
+        LogMsg( LOG_WARNING, "Object %s has no parent page\n", objectName().toUtf8().constData() );
+    }
 }
 
 //============================================================================

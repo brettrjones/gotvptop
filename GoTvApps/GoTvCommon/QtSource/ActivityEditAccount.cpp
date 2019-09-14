@@ -25,22 +25,17 @@
 
 //============================================================================
 ActivityEditAccount::ActivityEditAccount( AppCommon& app, QWidget * parent )
-	: ActivityBase( "ActivityEditAccount", app, parent, eAppletMessenger, Qt::SubWindow )
+	: ActivityBase( "ActivityEditAccount", app, parent, eAppletMessenger, true )
 {
 
 	ui.setupUi(this);
+    connectBarWidgets();
 
-	slotRepositionToParent();
 	connect( ui.AcceptButton, SIGNAL(clicked()), this, SLOT(slotApplyResults()));
 	connect( ui.CancelButton, SIGNAL(clicked()), this, SLOT(reject()) );
 	connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(reject()) );
 
 	updateValuesFromDatabase();
-}
-
-//============================================================================
-ActivityEditAccount::~ActivityEditAccount()
-{
 }
 
 //============================================================================

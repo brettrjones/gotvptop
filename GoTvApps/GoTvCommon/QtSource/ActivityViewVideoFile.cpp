@@ -24,11 +24,11 @@
 //============================================================================
 ActivityViewVideoFile::ActivityViewVideoFile(	AppCommon&			app,
 												QWidget *			parent )
-: ActivityBase( OBJNAME_ACTIVITY_VIEW_VIDEO_FILE, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_ACTIVITY_VIEW_VIDEO_FILE, app, parent, eAppletMessenger, true )
 , m_HisIdent( &app.getEngine().getMyPktAnnounce() )
 {
 	ui.setupUi( this );
-	slotRepositionToParent();
+    connectBarWidgets();
 
 	//ui.m_VideoWidget->setVideoFeedId( m_HisIdent->getMyOnlineId() );
 
@@ -42,11 +42,6 @@ ActivityViewVideoFile::ActivityViewVideoFile(	AppCommon&			app,
 	connect( this, SIGNAL(finished(int)), this, SLOT(onStopButClick()));
 	connect( ui.m_LibraryButton, SIGNAL(clicked()), this, SLOT(onLibraryButtonClick()));
 	connect( ui.m_ShareButton, SIGNAL(clicked()), this, SLOT(onShareButtonClick()));
-}
-
-//============================================================================
-ActivityViewVideoFile::~ActivityViewVideoFile()
-{
 }
 
 //============================================================================

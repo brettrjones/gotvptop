@@ -21,7 +21,7 @@ class MessengerPage : public ActivityBase
 	Q_OBJECT
 public:
 	MessengerPage( AppCommon& app, QWidget * parent );
-	virtual ~MessengerPage();
+	virtual ~MessengerPage() override = default;
 
 signals:
 	void						signalMessengerPageChanged( bool isVisible, bool isFullScreen );

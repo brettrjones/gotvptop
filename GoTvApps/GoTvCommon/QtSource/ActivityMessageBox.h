@@ -28,7 +28,11 @@ public:
 	ActivityMessageBox( AppCommon& app, QWidget * parent = NULL );
 	ActivityMessageBox( AppCommon& app, QWidget * parent, int infoLevel, const char * msgFormat, ... );
 	ActivityMessageBox( AppCommon& app, QWidget * parent, int infoLevel, QString msg );
-	virtual ~ActivityMessageBox();
+	virtual ~ActivityMessageBox() override = default;
+
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 	void						setTitleText( QString titleText );
 	void						setBodyText( QString bodyText );

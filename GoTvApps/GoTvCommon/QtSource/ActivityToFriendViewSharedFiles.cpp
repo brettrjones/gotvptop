@@ -40,7 +40,7 @@
 ActivityToFriendViewSharedFiles::ActivityToFriendViewSharedFiles(	AppCommon&	app, 
 																	VxNetIdent *	netIdent, 
 																	QWidget *		parent )
-: ActivityBase( OBJNAME_ACTIVITY_TO_FRIEND_VIEW_SHARED_FILES, app, parent, eAppletMessenger, Qt::SubWindow ) 
+: ActivityBase( OBJNAME_ACTIVITY_TO_FRIEND_VIEW_SHARED_FILES, app, parent, eAppletMessenger, true )
 , m_Friend(netIdent) 
 , m_iMenuItemHeight(34)
 , m_SelectedFileInfo(0)
@@ -49,7 +49,7 @@ ActivityToFriendViewSharedFiles::ActivityToFriendViewSharedFiles(	AppCommon&	app
 {
 	m_LclSessionId.initializeWithNewVxGUID();
 	ui.setupUi(this);
-	slotRepositionToParent();
+    connectBarWidgets();
 
     connect(ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotHomeButtonClicked()));
     connect(ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *)));
@@ -72,11 +72,6 @@ ActivityToFriendViewSharedFiles::ActivityToFriendViewSharedFiles(	AppCommon&	app
 	//"ViewDirectory"
 	//"DownloadFile"
 	checkDiskSpace();
-}
-
-//============================================================================
-ActivityToFriendViewSharedFiles::~ActivityToFriendViewSharedFiles()
-{
 }
 
 //============================================================================
