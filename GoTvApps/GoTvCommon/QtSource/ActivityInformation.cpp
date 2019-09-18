@@ -146,7 +146,7 @@ QString ActivityInformation::m_NetworkDesign( QObject::tr(
 " *FILE SHARE PLUGIN: Provides user or host file sharing with other users.\n"
 " *FILE TRANSFER PLUGIN: Provides user file transfer to another person.\n"
 " *GOTVPTOP NETWORK SERVICE: Provides Connection test and list of group host listing hosts for search for groups to join.\n"
-" *GROUP CHAT SERVICE: Provides group based text chat service.\n"
+" *GROUP CHAT PLUGIN: Provides group based text chat service.\n"
 " *GROUP HOST LISTING SERVICE: Provides List of Group Hosts and thier address for users to connect to and search or join.\n"
 " *GROUP HOST SERVICE: Provides connection and other services to members who have joined the Group Host.\n"
 " *PERMISSION LEVELS: Friendship level required to be allowed to use a service or connect to a person.\n"

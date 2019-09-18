@@ -250,6 +250,7 @@ void AppCommon::loadWithoutThread( void )
     m_MyIcons.myIconsStartup();
 
     m_AppTheme.selectTheme( getAppSettings().getLastSelectedTheme() );
+    // TODO: finish VxAppStyle..
     getQApplication().setStyle( &m_AppStyle );
 
     // load sounds to play and sound hardware

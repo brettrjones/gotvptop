@@ -26,7 +26,7 @@ public:
 	VxComboBox(QWidget *parent=0);
 	virtual ~VxComboBox() = default;
 
-    void                        paintEvent (QPaintEvent *ev);
+    //void                        paintEvent (QPaintEvent *ev);
     void                        showEvent( QShowEvent *ev );
 };
 

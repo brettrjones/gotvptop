@@ -23,7 +23,10 @@ public:
     virtual ~GuiParams() = default;
 
     /// @brief get scaling required to make icons etc. usable on high dpi screens
-    int                         getGuiDpiScale() const { return m_DpiScale; }
+    int                         getGuiDpiScale( void ) const { return m_DpiScale; }
+    
+    static int                  getControlIndicatorWidth( void );
+
 
 protected:
     void                        initGuiParams();

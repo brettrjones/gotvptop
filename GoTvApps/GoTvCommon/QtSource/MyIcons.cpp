@@ -23,6 +23,7 @@
 #include <CoreLib/VxTimer.h>
 
 #include <QFileInfo>
+#include <QPainter>
 
 //============================================================================
 MyIcons::MyIcons( AppCommon& appCommon )
@@ -939,3 +940,24 @@ EMyIcons MyIcons::getFileIcon( uint8_t u8FileType )
 	}
 }
 
+//============================================================================
+//! draw a icon with given color
+void MyIcons::drawIcon( EMyIcons eIcon, QPainter* painter, const QRect& rect, QColor& iconColor )
+{
+    if( ( eIcon < eMaxMyIcon ) && painter )
+    {
+        QPixmap	pixmap = getIconPixmap( eIcon, rect.size(), iconColor );
+        if( !pixmap.isNull() )
+        {
+            painter->save();
+
+            painter->setRenderHint( QPainter::Antialiasing, true );
+            painter->setRenderHint( QPainter::TextAntialiasing, true );
+            painter->setRenderHint( QPainter::SmoothPixmapTransform, true );
+
+            painter->drawPixmap( rect, pixmap );
+
+            painter->restore();
+        }
+    }
+}

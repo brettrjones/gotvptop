@@ -23,6 +23,7 @@
 
 class AppCommon;
 class QIcon;
+class QPainter;
 
 //! stores all icons
 class MyIcons
@@ -57,6 +58,9 @@ public:
 	//! get path to icon file
 	QString						getIconFile( EMyIcons eMyIcon );
 	bool						isSvgFile( QString& iconFileName );
+
+    //! draw a icon with given color
+    void                        drawIcon( EMyIcons eIcon, QPainter* painter, const QRect& rect, QColor& iconColor );
 
 	std::vector< QIcon >		m_aoIcons;
 

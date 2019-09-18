@@ -29,13 +29,15 @@ VxComboBox::VxComboBox(QWidget *parent)
 {
     setObjectName( "VxComboBox" );
     //setEditable( true );
+    /*
     setStyleSheet( "QComboBox::down-arrow{\
     image: :/AppRes/Resources/arrow-thick-thin-down.svg;\
     width: 24px;\
-    height: 24px; }" );
+    height: 24px; }" );*/
 
 }
 
+/*
 //============================================================================
 void VxComboBox::paintEvent( QPaintEvent *ev )
 {
@@ -51,7 +53,7 @@ void VxComboBox::paintEvent( QPaintEvent *ev )
    }
 
     QComboBox::paintEvent( ev );
- }
+ }*/
 
 //============================================================================
 void VxComboBox::showEvent( QShowEvent *ev )

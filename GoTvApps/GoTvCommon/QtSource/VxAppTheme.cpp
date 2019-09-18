@@ -81,15 +81,15 @@ void VxAppTheme::updateWindowTheme( void )
 	// palette.setColor( QPalette::Background, QColor( COLOR_RED ) );          // Background and Window
     // palette.setColor( QPalette::Foreground, QColor( COLOR_GREEN ) );        // Foreground and WindowText
 	palette.setColor( QPalette::AlternateBase, QColor( COLOR_LIGHT_PINK ) );// AlternateBase
-    palette.setColor( QPalette::Light, QColor( COLOR_LIGHT_PINK ) );        // Light
-    palette.setColor( QPalette::Midlight, QColor( COLOR_LIGHT_PINK ) );     // Midlight
-    palette.setColor( QPalette::Dark, QColor( COLOR_LIGHT_PINK ) );         // Dark
-    palette.setColor( QPalette::Mid, QColor( COLOR_LIGHT_PINK ) );          // Mid
+    palette.setColor( QPalette::Light, windowTextColor );        // Light
+    palette.setColor( QPalette::Midlight, windowTextColor.darker() );     // Midlight.. mostly for 
+    palette.setColor( QPalette::Mid, windowTextColor.dark() );          // Mid
+    palette.setColor( QPalette::Dark, windowTextColor.dark().darker() );         // Dark .. mostly for frame shadow and radio button outline
 
-	palette.setColor( QPalette::Button, QColor( COLOR_DARK_GREY ) );      // Button
+	palette.setColor( QPalette::Button, getColor( eButtonBackgroundNormal ) );      // Button
 
-    palette.setColor( QPalette::ButtonText, QColor( COLOR_GREEN ) );  // ButtonText and drop down button icon color
-	palette.setColor( QPalette::BrightText, QColor( COLOR_RED ) );  // BrightText
+    palette.setColor( QPalette::ButtonText, buttonTextColor );  // ButtonText and drop down button icon color
+	palette.setColor( QPalette::BrightText, buttonTextColor.lighter() );  // BrightText
 	palette.setColor( QPalette::WindowText, windowTextColor );  // WindowText
 	palette.setColor( QPalette::Text, windowTextColor );        // Text and foreground
 	palette.setColor( QPalette::Window, windowBkgColor );       // Window and background
@@ -103,6 +103,38 @@ void VxAppTheme::updateWindowTheme( void )
     palette.setColor( QPalette::LinkVisited, QColor( COLOR_PURPLE ) );      // LinkVisited
     palette.setColor( QPalette::ToolTipText, windowTextColor );                 // ToolTipText
     palette.setColor( QPalette::ToolTipBase, QColor( COLOR_DARK_YELLOW ) );     // ToolTipBase
+
+/*
+    palette.setColor( QPalette::Shadow, QColor( COLOR_RED ) );     // ToolTipBase
+    palette.setColor( QPalette::AlternateBase, QColor( COLOR_RED ) );                 // ToolTipText
+    palette.setColor( QPalette::PlaceholderText, QColor( COLOR_PURPLE ) );      // LinkVisited
+
+    QColor bronze( 207, 155, 95 );
+    QColor veryLightBlue( 239, 239, 247 );
+    QColor lightBlue( 223, 223, 239 );
+    QColor darkBlue( 95, 95, 191 );
+    palette.setColor( QPalette::BrightText, Qt::white );
+    palette.setColor( QPalette::Base, veryLightBlue );
+    palette.setColor( QPalette::AlternateBase, lightBlue );
+    palette.setColor( QPalette::Highlight, darkBlue );
+    palette.setColor( QPalette::Disabled, QPalette::Highlight,
+        Qt::darkGray );
+
+    palette.setColor( QPalette::ToolTipBase, lightBlue );
+    palette.setColor( QPalette::WindowText, lightBlue );
+    palette.setColor( QPalette::Light, QColor( COLOR_RED ) );
+    palette.setColor( QPalette::Midlight, QColor( COLOR_RED ) );
+    palette.setColor( QPalette::Dark, QColor( COLOR_RED ) );
+    palette.setColor( QPalette::Mid, QColor( COLOR_RED ) );
+    palette.setColor( QPalette::Text, QColor( COLOR_RED ) );
+    palette.setColor( QPalette::Highlight, QColor( COLOR_RED ) );
+    palette.setColor( QPalette::HighlightedText, QColor( COLOR_RED ) );
+    */
+
+    //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eShadowColor,
+    //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
+    //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eAlternateBase,
+
 
   //palette.setColor( QPalette::NColorRoles, QColor( COLOR_RED ) );
  /*   enum ColorRole {
@@ -618,7 +650,7 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 		m_ThemeColors.push_back( QColor( COLOR_MEDIUM_GREY ) ); //eTitleBarBackground,
 		m_ThemeColors.push_back( QColor( COLOR_CREAM_WHITE ) ); //eTitleBarTextText,
 
-		m_ThemeColors.push_back( QColor( COLOR_DARK_GREY ) ); //eButtonBackgroundNormal,
+		m_ThemeColors.push_back( QColor( COLOR_DARK_GREY ).darker() ); //eButtonBackgroundNormal,
 		m_ThemeColors.push_back( QColor( COLOR_MEDIUM_GREY ) ); //eButtonBackgroundDisabled,
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eButtonBackgroundPressed,
 
@@ -626,15 +658,19 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 		m_ThemeColors.push_back( QColor( COLOR_MEDIUM_GREY ) ); //eButtonForegroundDisabled,
 		m_ThemeColors.push_back( QColor( COLOR_BURNT_ORANGE ) ); //eButtonForegroundPressed,
 
-		m_ThemeColors.push_back( QColor( COLOR_CREAM_WHITE ) ); //eButtonTextNormal,
-		m_ThemeColors.push_back( QColor( COLOR_SILVER ) ); //eButtonTextDisabled,
-		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eButtonTextPressed,
+		m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eButtonTextNormal,
+		m_ThemeColors.push_back( QColor( COLOR_GREEN ).darker() ); //eButtonTextDisabled,
+		m_ThemeColors.push_back( QColor( COLOR_WHITE ).darker() ); //eButtonTextPressed,
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE ) ); //eLayerOverlayColor,
 		m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyColor,
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE ) ); //eProgressBarColor,
-		break;
+
+        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eShadowColor,
+        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
+        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eAlternateBase,
+        break;
 
 	case eThemeTypeBlueOnWhite:
 		m_ThemeColors.push_back( QColor( COLOR_BURNT_ORANGE ) ); //eFocusRect,
@@ -660,6 +696,11 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 		m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyColor,
 
 		m_ThemeColors.push_back( QColor( COLOR_BLUE ) ); //eProgressBarColor,
+
+       // m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eShadowColor,
+        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
+        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eAlternateBase,
+
 		break;
 
 	case eThemeTypeGreenOnWhite:
@@ -686,7 +727,11 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 		m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyColor,
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE ) ); //eProgressBarColor,
-		break;
+
+        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eShadowColor,
+        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
+        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eAlternateBase,
+        break;
 
 	case eThemeTypeUnknown:
 	case eThemeTypeLight:
@@ -714,7 +759,11 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 		m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyColor,
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE ) ); //eProgressBarColor,
-		break;
+
+        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eShadowColor,
+        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
+        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eAlternateBase,
+        break;
 	}
 
 	updateWindowTheme();

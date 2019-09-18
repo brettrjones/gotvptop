@@ -32,10 +32,12 @@ AppletTheme::AppletTheme( AppCommon& app, QWidget * parent )
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 	ui.m_ThemeExampleButton->setIcon( eMyIconPeople );
 	fillThemeCombo();
+    fillExampleCombo();
 
 	connect( ui.m_AcceptCancelFrame, SIGNAL( signalAccepted() ), this, SLOT( slotThemeAccepted() ) );
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( slotThemeCanceled() ) );
 	connect( ui.m_AcceptCancelFrame, SIGNAL( signalCanceled() ), this, SLOT( slotThemeCanceled() ) );
+    connect( ui.m_ExampleCheckBox, SIGNAL( stateChanged(int) ), this, SLOT( slotCheckBoxClicked(int) ) );
 
 	m_MyApp.activityStateChange( this, true );
 }
@@ -44,7 +46,9 @@ AppletTheme::AppletTheme( AppCommon& app, QWidget * parent )
 void AppletTheme::slotThemeAccepted( void )
 {
 	m_MyApp.getAppSettings().setLastSelectedTheme( m_CurTheme );
-	close();
+    getMyApp().getAppTheme().selectTheme( m_CurTheme );
+    m_MyApp.activityStateChange( this, false );
+    close();
 }
 
 //============================================================================
@@ -57,7 +61,14 @@ void AppletTheme::onBackButtonClicked( void )
 void AppletTheme::slotThemeCanceled( void )
 {
 	restoreSavedTheme();
-	close();
+    m_MyApp.activityStateChange( this, false );
+    close();
+}
+
+//============================================================================
+void AppletTheme::slotCheckBoxClicked( int checkedState )
+{
+    LogMsg( LOG_DEBUG,  "check box state %d", checkedState );
 }
 
 //============================================================================
@@ -78,6 +89,17 @@ void AppletTheme::fillThemeCombo( void )
 	}
 
 	connect( ui.m_ThemeComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotThemeSelectionChanged( int ) ) );
+}
+
+//============================================================================
+void AppletTheme::fillExampleCombo( void )
+{
+    ui.m_ExampleComboBox->addItem( "Selection 1" );
+    ui.m_ExampleComboBox->addItem( "Selection 2" );
+    ui.m_ExampleComboBox->addItem( "Selection 3" );
+    ui.m_ExampleComboBox->addItem( "Selection 4" );
+    ui.m_ExampleComboBox->addItem( "Selection 5" );
+    ui.m_ExampleComboBox->setCurrentIndex( 0 );
 }
 
 //============================================================================

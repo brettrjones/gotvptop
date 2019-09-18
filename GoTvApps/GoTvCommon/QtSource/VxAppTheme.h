@@ -67,6 +67,16 @@
 #define COLOR_DARK_PURPLE						0,0,153,255			// 
 
 #define COLOR_UNKNOWN							254,153,254,254			// pink color to indicate has not been initialized
+/*
+enum ColorRole {
+    WindowText, Button, Light, Midlight, Dark, Mid,
+    Text, BrightText, ButtonText, Base, Window, Shadow,
+    Highlight, HighlightedText,
+    Link, LinkVisited,
+    AlternateBase,
+    NoRole,
+    ToolTipBase, ToolTipText,
+    PlaceholderText,*/
 
 enum EThemeColorRole
 {
@@ -96,6 +106,11 @@ enum EThemeColorRole
 	eLayerNotifyColor, 
 	
 	eProgressBarColor,
+
+    eShadowColor,
+    ePlaceholderText,
+    eAlternateBase,
+
 
 	MaxThemeColorRole
 };

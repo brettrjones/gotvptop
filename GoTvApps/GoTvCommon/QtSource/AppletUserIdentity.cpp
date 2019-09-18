@@ -29,8 +29,3 @@ AppletUserIdentity::AppletUserIdentity( AppCommon& app, QWidget * parent )
 
 	m_MyApp.activityStateChange( this, true );
 }
-
-//============================================================================
-AppletUserIdentity::~AppletUserIdentity()
-{
-}

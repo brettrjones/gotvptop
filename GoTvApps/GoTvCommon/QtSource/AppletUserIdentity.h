@@ -20,7 +20,7 @@ class AppletUserIdentity : public AppletBase
 	Q_OBJECT
 public:
 	AppletUserIdentity( AppCommon& app, QWidget * parent );
-	virtual ~AppletUserIdentity();
+	virtual ~AppletUserIdentity() = default;
 
 
 

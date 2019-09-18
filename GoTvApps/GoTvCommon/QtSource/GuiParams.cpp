@@ -37,3 +37,9 @@ void GuiParams::initGuiParams()
         m_DpiScale = 1;
     }
 }
+
+//============================================================================
+int GuiParams::getControlIndicatorWidth( void )
+{ 
+    return 10; 
+}
