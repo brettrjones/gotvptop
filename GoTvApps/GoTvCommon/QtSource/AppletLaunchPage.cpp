@@ -26,13 +26,16 @@ AppletLaunchPage::AppletLaunchPage( AppCommon& app, QWidget * parent, EApplet eA
 : ActivityBase( objName, app, parent, eAppletType )
 , m_IsInitialized( false )
 {
-	setTitleBarText( QObject::tr( "Home" ) );
-	setupAppletLaunchPage();
-	setHomeButtonVisibility( false );
-	setBackButtonVisibility( false );
-	setPowerButtonVisibility( true );
-	setExpandWindowVisibility( true );
-	connect( this, SIGNAL( signalPowerButtonClicked() ), this, SLOT( slotPowerButtonClicked() ) );
+    if( !( eAppletNetHostingPage == eAppletType ) )
+    {
+        setTitleBarText( QObject::tr( "Home" ) );
+        setupAppletLaunchPage();
+        setHomeButtonVisibility( false );
+        setBackButtonVisibility( false );
+        setPowerButtonVisibility( true );
+        setExpandWindowVisibility( true );
+        connect( this, SIGNAL( signalPowerButtonClicked() ), this, SLOT( slotPowerButtonClicked() ) );
+    }
 }
 
 //============================================================================
@@ -71,7 +74,7 @@ void AppletLaunchPage::setupAppletLaunchPage( void )
 
         if( getMyApp().getAppSettings().getFeatureEnable( eAppFeatureNetworkHost ) )
         {
-            AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ePluginAppletGoTvNetworkHost, this );
+            AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, eAppletNetHostingPage, this );
             m_AppletList.push_back( applet );
         }
 
@@ -82,13 +85,13 @@ void AppletLaunchPage::setupAppletLaunchPage( void )
 //============================================================================
 void AppletLaunchPage::resizeEvent( QResizeEvent * ev )
 {
-	ActivityBase::resizeEvent( ev );
-	LogMsg( LOG_DEBUG, "AppletLaunchPage::resizeEvent total height %d contentsFrame height %d\n", this->height(), getContentItemsFrame()->height() );
+    ActivityBase::resizeEvent( ev );
+	//LogMsg( LOG_DEBUG, "AppletLaunchPage::resizeEvent total height %d contentsFrame height %d\n", this->height(), getContentItemsFrame()->height() );
 	getMyApp().getTilePositioner().repositionTiles( m_AppletList, getContentItemsFrame(), 2 );
 }
 
 //============================================================================
 void AppletLaunchPage::showEvent( QShowEvent * showEvent )
 {
-	ActivityBase::showEvent( showEvent );
+    ActivityBase::showEvent( showEvent );
 }

@@ -198,38 +198,7 @@ QFrame * ActivityBase::getContentItemsFrame( void )
 // get home page activity ( Launch or Messenger Page )
 QWidget * ActivityBase::getParentPageFrame( void )
 {
-    QWidget * parentActivity = nullptr;
-    QObject * curParent = this;
-
-    QString launchPageObjName;
-    QString messengerPageObjName;
-    
-    launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
-    messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
-//        launchPageObjName = OBJNAME_APPLET_LAUNCH_PAGE;
-//        messengerPageObjName = OBJNAME_APPLET_MESSAGER_PAGE;
-
-    while( curParent )
-    {
-        QString objName = curParent->objectName();
-        if( ( objName == launchPageObjName ) || ( objName == messengerPageObjName ) )
-        {
-            parentActivity = dynamic_cast<QWidget *>( curParent );
-            if( parentActivity )
-            {
-                break;
-            }
-        }
-
-        if( !curParent->parent() )
-        {
-            LogMsg( LOG_WARNING, "Object %s has no parent", objName.toUtf8().constData() );
-        }
-
-        curParent = dynamic_cast<QObject *>( curParent->parent() );
-    }
-
-    return parentActivity;
+    return GuiHelpers::getParentPageFrame( this );
 }
 
 //============================================================================
@@ -460,6 +429,14 @@ void ActivityBase::showEvent( QShowEvent * showEvent )
 	}
 
 	QDialog::showEvent( showEvent );
+    if( !m_InitialFocusWasSet )
+    {
+        m_InitialFocusWasSet = true;
+        if( getTitleBarWidget() )
+        {
+            getTitleBarWidget()->getBackButton()->setFocus();
+        }
+    }
 
 	emit signalDialogWasShown();
 }
@@ -1058,6 +1035,7 @@ void ActivityBase::slotBackButtonClicked( void )
 void ActivityBase::onBackButtonClicked( void )
 {
     emit signalBackButtonClicked();
+    m_MyApp.activityStateChange( this, false );
     close();
 }
 

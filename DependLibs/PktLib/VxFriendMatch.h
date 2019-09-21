@@ -78,8 +78,7 @@ public:
 	const char *				describeMyFriendshipToHim( void );
 
 	//=== vars ===//
-	uint8_t							m_u8FriendMatch;
-
+	uint8_t						m_u8FriendMatch = 0;
 };
 
 #pragma pack(pop)

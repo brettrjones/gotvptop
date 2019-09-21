@@ -32,11 +32,6 @@ AppletLaunchWidget::AppletLaunchWidget( AppCommon& myApp, EApplet appletType, Ap
 }
 
 //============================================================================
-AppletLaunchWidget::~AppletLaunchWidget()
-{
-}
-
-//============================================================================
 VxPushButton * AppletLaunchWidget::getButton( void )
 {
 	return ui.m_LaunchButton;

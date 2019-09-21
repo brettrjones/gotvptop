@@ -18,6 +18,14 @@
 
 #include "ui_ActivityInformation.h"
 
+enum EInfoType
+{
+    eInfoTypeInvalid,
+    eInfoTypePlugin,
+    eInfoTypePermission,
+
+};
+
 class AppCommon;
 
 class ActivityInformation : public ActivityBase
@@ -27,13 +35,17 @@ class ActivityInformation : public ActivityBase
 public:
 
     ActivityInformation( AppCommon& app, QWidget * parent, EPluginType pluginType );
+    ActivityInformation( AppCommon& app, QWidget * parent, EInfoType infoType );
+
 	virtual ~ActivityInformation() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets
     virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
     virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
-    void						setPluginType( EPluginType pluginType ) { m_PluginType = pluginType; updateInformation(); }
+    void						setPluginType( EPluginType pluginType ) { m_InfoType = eInfoTypePlugin; m_PluginType = pluginType; updateInformation(); }
+    void						setInformationType( EInfoType infoType ) { m_InfoType = infoType; updateInformation(); }
+
     EPluginType                 getPluginType() { return m_PluginType; }
 
 protected slots:
@@ -44,11 +56,15 @@ protected:
 
     void						initActivityInformation( void );
     void						updateInformation( void );
-    QString&                    getInfoText( void );
+    QString                     getInfoText( void );
 
 	//=== vars ===//
 	Ui::InformationDialog		ui;
+    EInfoType                   m_InfoType = eInfoTypeInvalid;
     EPluginType                 m_PluginType = ePluginTypeInvalid;
+
     static QString              m_NoInfoAvailable;
     static QString              m_NetworkDesign;
+    static QString              m_PluginDefinitions;
+    static QString              m_Permissions;
 };

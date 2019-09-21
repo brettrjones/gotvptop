@@ -293,4 +293,5 @@ protected:
 	QSize						m_ResizingWindowSize;
     bool						m_IsDialog = false;
     bool						m_IsPopup = false; // center on parent filling about half of parent
+    bool						m_InitialFocusWasSet = false;
 };

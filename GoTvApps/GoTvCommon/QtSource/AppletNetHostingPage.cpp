@@ -26,7 +26,7 @@ AppletNetHostingPage::AppletNetHostingPage( AppCommon& app, QWidget * parent )
 : AppletLaunchPage( app, parent, eAppletNetHostingPage, OBJNAME_APPLET_NET_HOSTING )
 , m_IsInitialized( false )
 {
-    m_EAppletType = eAppletNetHostingPage;
+    setAppletType( eAppletNetHostingPage );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 	setupAppletNetHostingPage();
 	setHomeButtonVisibility( true );
@@ -83,5 +83,6 @@ void AppletNetHostingPage::resizeEvent( QResizeEvent * ev )
 //============================================================================
 void AppletNetHostingPage::showEvent( QShowEvent * showEvent )
 {
-	ActivityBase::showEvent( showEvent );
+    AppletLaunchPage::showEvent( showEvent );
+    getMyApp().getTilePositioner().repositionTiles( m_AppletList, getContentItemsFrame(), 2 );
 }

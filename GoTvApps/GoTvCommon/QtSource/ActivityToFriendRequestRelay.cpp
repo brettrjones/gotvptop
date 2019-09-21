@@ -51,8 +51,8 @@ void ActivityToFriendRequestRelay::setHisPermissionToMe( EFriendState hisFriends
 {
 	ui.m_HisPermissionButton->setIcon( getMyIcons().getFriendshipIcon( hisFriendshipToMe ) );
 	QString strHisFriendship = m_Friend->getOnlineName();
-	strHisFriendship += "\'s Friendship To Me-";
-	strHisFriendship += DescribeFriendState(hisFriendshipToMe);
+	strHisFriendship += QObject::tr( "\'s Friendship To Me-" );
+	strHisFriendship += DescribeFriendState( hisFriendshipToMe );
 	ui.m_HisPermissionLabel->setText(strHisFriendship);
 }
 
@@ -61,7 +61,7 @@ void ActivityToFriendRequestRelay::setMyPermissionToHim( EFriendState myFriendsh
 {
 	ui.m_MyPermissionButton->setIcon( getMyIcons().getFriendshipIcon( myFriendshipToHim ) );
 	QString strHisName = m_Friend->getOnlineName();
-	QString strMyFriendship =  "My Friendship To ";
+	QString strMyFriendship = QObject::tr( "My Friendship To " );
 	strMyFriendship += strHisName + "-" + DescribeFriendState( myFriendshipToHim );
 	ui.m_MyPermissionLabel->setText(strMyFriendship);
 }

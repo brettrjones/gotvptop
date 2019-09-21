@@ -50,6 +50,10 @@ void							UpdatePluginPermissions(	P2PEngine& engine,
 															EFriendState ePluginPermission );
 //! update has picture and save to database then send picture change to engine
 void							UpdateHasPicture( P2PEngine& engine, int bHasPicture );
+
+//! Describe permission level ( and/or friend state )
+QString							DescribePermissionLevel( EFriendState friendState );
+
 //! Describe type of plugin
 QString							DescribePluginType( EPluginType ePluginType );
 QString							DescribePluginAccess( EPluginAccessState accessState );

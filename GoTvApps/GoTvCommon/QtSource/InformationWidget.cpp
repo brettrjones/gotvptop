@@ -36,22 +36,6 @@ void InformationWidget::initInformationWidget( void )
 
     connect( ui.m_ContextButton, SIGNAL( clicked() ), this, SLOT( slotShowInformation() ) );
     connect( ui.m_InfoButton, SIGNAL( clicked() ), this, SLOT( slotShowInformation() ) );
-
-
-	//ui.m_PlayPauseButton->setIcons( eMyIconPlayNormal );
-	//ui.m_PlayPauseButton->setPressedSound( eSndDefNone );
-	//ui.m_PlayPosSlider->setRange( 0, 100000 );
-	//ui.m_PlayPosSlider->setMinimum( 0 );
-	//ui.m_PlayPosSlider->setMaximum( 100000 );
-	//ui.m_TagFrame->setVisible( false );
-
-	//connect( ui.m_PlayPauseButton, SIGNAL( clicked() ), this, SLOT( slotPlayButtonClicked() ) );
-	//connect( ui.m_LeftAvatarBar, SIGNAL( signalShredAsset() ), this, SLOT( slotShredAsset() ) );
-	//connect( ui.m_RightAvatarBar, SIGNAL( signalShredAsset() ), this, SLOT( slotShredAsset() ) );
-	////connect( &m_MyApp, SIGNAL(signalAssetAction(EAssetAction, VxGuidQt, int)), this, SLOT(slotToGuiAssetAction(EAssetAction, VxGuidQt, int)) );
-	//connect( ui.m_PlayPosSlider, SIGNAL( sliderPressed() ), this, SLOT( slotSliderPressed() ) );
-	//connect( ui.m_PlayPosSlider, SIGNAL( sliderReleased() ), this, SLOT( slotSliderReleased() ) );
-	//connect( ui.m_LeftAvatarBar, SIGNAL( signalResendAsset() ), this, SLOT( slotResendAsset() ) );
 }
 
 //============================================================================
@@ -73,24 +57,6 @@ void InformationWidget::slotShowInformation()
        return;
    }
 
-   QWidget * myParent = ( QWidget *)parent();
-   if( myParent )
-   {
-       QWidget * myParent2 = (QWidget *)myParent->parent();
-       if( myParent2 )
-       {
-           QWidget * myParent3 = (QWidget *)myParent2->parent();
-           if( myParent3 )
-           {
-               QWidget * myParent4 = (QWidget *)myParent3->parent();
-               if( myParent4 )
-               {
-                   m_ActivityInfo = new ActivityInformation( m_MyApp, this, m_PluginType );
-                   m_ActivityInfo->show();
-                   //ActivityAbout * activity = new ActivityAbout( m_MyApp, myParent4 );
-                   //activity->show();
-               }
-           }
-       }
-   }
+   m_ActivityInfo = new ActivityInformation( m_MyApp, this, m_PluginType );
+   m_ActivityInfo->show();
 }

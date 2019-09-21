@@ -94,11 +94,11 @@ void AppletTheme::fillThemeCombo( void )
 //============================================================================
 void AppletTheme::fillExampleCombo( void )
 {
-    ui.m_ExampleComboBox->addItem( "Selection 1" );
-    ui.m_ExampleComboBox->addItem( "Selection 2" );
-    ui.m_ExampleComboBox->addItem( "Selection 3" );
-    ui.m_ExampleComboBox->addItem( "Selection 4" );
-    ui.m_ExampleComboBox->addItem( "Selection 5" );
+    ui.m_ExampleComboBox->addItem( QObject::tr( "Selection 1" ) );
+    ui.m_ExampleComboBox->addItem( QObject::tr( "Selection 2" ) );
+    ui.m_ExampleComboBox->addItem( QObject::tr( "Selection 3" ) );
+    ui.m_ExampleComboBox->addItem( QObject::tr( "Selection 4" ) );
+    ui.m_ExampleComboBox->addItem( QObject::tr( "Selection 5" ) );
     ui.m_ExampleComboBox->setCurrentIndex( 0 );
 }
 

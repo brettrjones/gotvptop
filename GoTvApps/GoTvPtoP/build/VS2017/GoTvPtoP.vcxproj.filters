@@ -162,9 +162,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileXferSession.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferSession.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
@@ -776,6 +773,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\LogWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.cpp">
+      <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2415,9 +2415,6 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiFileXferSession.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\OfferSessionCallbackInterface.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClInclude>
@@ -2593,6 +2590,9 @@
       <Filter>GoTvInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiParams.h">
+      <Filter>GoTvCommon\Source Files\AppCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.h">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClInclude>
   </ItemGroup>

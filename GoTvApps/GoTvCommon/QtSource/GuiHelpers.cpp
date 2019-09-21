@@ -20,6 +20,7 @@
 #include <CoreLib/VxFileIsTypeFunctions.h>
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxFileUtil.h>
+#include <CoreLib/ObjectCommon.h>
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -454,4 +455,39 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
 	}
 
 	return strPluginDesc;
+}
+
+//============================================================================
+QWidget * GuiHelpers::getParentPageFrame( QWidget * curWidget )
+{
+    QWidget * parentActivity = nullptr;
+    QObject * curParent = curWidget;
+
+    QString launchPageObjName;
+    QString messengerPageObjName;
+
+    launchPageObjName = OBJNAME_FRAME_LAUNCH_PAGE;
+    messengerPageObjName = OBJNAME_FRAME_MESSAGER_PAGE;
+
+    while( curParent )
+    {
+        QString objName = curParent->objectName();
+        if( ( objName == launchPageObjName ) || ( objName == messengerPageObjName ) )
+        {
+            parentActivity = dynamic_cast<QWidget *>( curParent );
+            if( parentActivity )
+            {
+                break;
+            }
+        }
+
+        if( !curParent->parent() )
+        {
+            LogMsg( LOG_WARNING, "Object %s has no parent", objName.toUtf8().constData() );
+        }
+
+        curParent = dynamic_cast<QObject *>( curParent->parent() );
+    }
+
+    return parentActivity;
 }

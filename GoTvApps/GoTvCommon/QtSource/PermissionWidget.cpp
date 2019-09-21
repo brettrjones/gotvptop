@@ -14,8 +14,48 @@
 
 #include "PermissionWidget.h"
 #include "AppCommon.h"
+#include "AppGlobals.h"
+#include "ActivityInformation.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+
+namespace
+{
+    EFriendState ComboIdxToFriendState( int comboIdx )
+    {
+        switch( comboIdx )
+        {
+        case 0:
+            return eFriendStateAdmin;
+        case 1:
+            return eFriendStateFriend;
+        case 2:
+            return eFriendStateGuest;
+        case 3:
+            return eFriendStateAnonymous;
+        default:
+            return eFriendStateIgnore;
+        }
+    }
+
+    int FriendStateToComboIdx( EFriendState friendState )
+    {
+        switch( friendState )
+        {
+        case eFriendStateAdmin:
+            return 0;
+        case eFriendStateFriend:
+            return 1;
+        case eFriendStateGuest:
+            return 2;
+        case eFriendStateAnonymous:
+            return 3;
+        default:
+            return 4;
+        }
+    }
+
+}
 
 //============================================================================
 PermissionWidget::PermissionWidget( QWidget * parent )
@@ -29,34 +69,46 @@ PermissionWidget::PermissionWidget( QWidget * parent )
 void PermissionWidget::initPermissionWidget( void )
 {
 	ui.setupUi( this );
+    ui.m_InfoButton->setIcon( eMyIconInformation );
+    fillPermissionComboBox();
 
+    connect( ui.m_InfoButton, SIGNAL( clicked() ), this, SLOT( slotShowPermissionInformation() ) );
+    connect( ui.m_PermissionButton, SIGNAL( clicked() ), this, SLOT( slotShowPermissionInformation() ) );
     connect( ui.m_PermissionComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHandleSelectionChanged( int ) ) );
-
-
-	//ui.m_PlayPauseButton->setIcons( eMyIconPlayNormal );
-	//ui.m_PlayPauseButton->setPressedSound( eSndDefNone );
-	//ui.m_PlayPosSlider->setRange( 0, 100000 );
-	//ui.m_PlayPosSlider->setMinimum( 0 );
-	//ui.m_PlayPosSlider->setMaximum( 100000 );
-	//ui.m_TagFrame->setVisible( false );
-
-	//connect( ui.m_PlayPauseButton, SIGNAL( clicked() ), this, SLOT( slotPlayButtonClicked() ) );
-	//connect( ui.m_LeftAvatarBar, SIGNAL( signalShredAsset() ), this, SLOT( slotShredAsset() ) );
-	//connect( ui.m_RightAvatarBar, SIGNAL( signalShredAsset() ), this, SLOT( slotShredAsset() ) );
-	////connect( &m_MyApp, SIGNAL(signalAssetAction(EAssetAction, VxGuidQt, int)), this, SLOT(slotToGuiAssetAction(EAssetAction, VxGuidQt, int)) );
-	//connect( ui.m_PlayPosSlider, SIGNAL( sliderPressed() ), this, SLOT( slotSliderPressed() ) );
-	//connect( ui.m_PlayPosSlider, SIGNAL( sliderReleased() ), this, SLOT( slotSliderReleased() ) );
-	//connect( ui.m_LeftAvatarBar, SIGNAL( signalResendAsset() ), this, SLOT( slotResendAsset() ) );
+}
+//============================================================================
+void PermissionWidget::fillPermissionComboBox( void )
+{
+    ui.m_PermissionComboBox->addItem( DescribePermissionLevel( eFriendStateAdmin ) );
+    ui.m_PermissionComboBox->addItem( DescribePermissionLevel( eFriendStateFriend ) );
+    ui.m_PermissionComboBox->addItem( DescribePermissionLevel( eFriendStateGuest ) );
+    ui.m_PermissionComboBox->addItem( DescribePermissionLevel( eFriendStateAnonymous ) );
+    ui.m_PermissionComboBox->addItem( DescribePermissionLevel( eFriendStateIgnore ) );
+    ui.m_PermissionComboBox->setCurrentIndex( 4 );
 }
 
 //============================================================================
-void PermissionWidget::updatePermissions( void )
+void PermissionWidget::updateUi( void )
 {
     if( m_PluginType == ePluginTypeInvalid )
     {
         return;
     }
 
+    EFriendState pluginPermission = m_MyApp.getMyIdentity()->getPluginPermission( m_PluginType );
+    ui.m_PermissionComboBox->setCurrentIndex( FriendStateToComboIdx( pluginPermission ) );
+    updatePermissionIcon();
+}
+
+//============================================================================
+void PermissionWidget::updatePermissionIcon( void )
+{
+    if( m_PluginType == ePluginTypeInvalid )
+    {
+        return;
+    }
+
+    ui.m_PermissionButton->setIcon( m_MyApp.getMyIcons().getFriendshipIcon( ComboIdxToFriendState( ui.m_PermissionComboBox->currentIndex() ) ) );
 }
 
 //============================================================================
@@ -67,4 +119,14 @@ void PermissionWidget::slotHandleSelectionChanged( int )
         return;
     }
 
+    EFriendState pluginPermission = ComboIdxToFriendState( ui.m_PermissionComboBox->currentIndex() );
+    UpdatePluginPermissions( m_MyApp.getEngine(), m_PluginType, pluginPermission );
+    updatePermissionIcon();
+}
+
+//============================================================================
+void PermissionWidget::slotShowPermissionInformation()
+{
+    ActivityInformation * activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypePermission );
+    activityInfo->show();
 }

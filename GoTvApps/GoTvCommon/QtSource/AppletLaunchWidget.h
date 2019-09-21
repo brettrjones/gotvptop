@@ -26,7 +26,7 @@ class AppletLaunchWidget : public VxWidgetBase
 	Q_OBJECT;
 public:
 	AppletLaunchWidget( AppCommon& myApp, EApplet appletType,  AppletLaunchPage * parent = 0 );
-	virtual ~AppletLaunchWidget();
+	virtual ~AppletLaunchWidget() override = default;
 
 	VxPushButton *				getButton( void );
 

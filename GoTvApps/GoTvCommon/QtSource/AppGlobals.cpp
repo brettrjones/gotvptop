@@ -453,6 +453,40 @@ QString DescribePluginAction( VxNetIdent * netIdent, EPluginType ePluginType, EP
 }
 
 //============================================================================
+//! Describe permission level ( and/or friend state )
+QString	DescribePermissionLevel( EFriendState friendState )
+{
+    QString strPermLevel;
+    switch( friendState )
+    {
+    case eFriendStateAdmin:
+        strPermLevel = QObject::tr( "Administrator" );
+        break;
+
+    case eFriendStateFriend:
+        strPermLevel = QObject::tr( "Friend" );
+        break;
+
+    case eFriendStateGuest:
+        strPermLevel = QObject::tr( "Guest" );
+        break;
+
+    case eFriendStateAnonymous:
+        strPermLevel = QObject::tr( "Anybody" );
+        break;
+
+    case eFriendStateIgnore:
+        strPermLevel = QObject::tr( "Disabled or ignored" );
+        break;
+
+    default:
+        strPermLevel = QObject::tr( "Unknown" );
+    }
+
+    return strPermLevel;
+}
+
+//============================================================================
 //! Describe action user can take for given plugin and access
 QString DescribePluginType( EPluginType ePluginType )
 {

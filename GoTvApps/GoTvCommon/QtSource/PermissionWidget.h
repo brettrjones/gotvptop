@@ -24,14 +24,18 @@ class PermissionWidget : public QWidget
 public:
     PermissionWidget( QWidget * parent = 0 );
 
-    void						setPluginType( EPluginType pluginType ) { m_PluginType = pluginType; updatePermissions(); }
+    void						setPluginType( EPluginType pluginType ) { m_PluginType = pluginType; updateUi();  updatePermissionIcon(); }
 
 protected slots:
     void                        slotHandleSelectionChanged( int );
+    void                        slotShowPermissionInformation();
 
 protected:
 	void						initPermissionWidget( void );
-    void						updatePermissions( void );
+    void						fillPermissionComboBox( void );
+
+    void						updatePermissionIcon( void );
+    void                        updateUi( void );
 
     AppCommon&                  m_MyApp;
     EPluginType                 m_PluginType = ePluginTypeInvalid;

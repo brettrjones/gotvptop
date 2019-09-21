@@ -46,5 +46,8 @@ public:
 	static QString				describeEXferError( EXferError xferError );
 	static QString				describeFileLength( uint64_t fileLen );
 
+    /// @brief get home or messenger topmost widget
+    static QWidget *            getParentPageFrame( QWidget * curWidget );
+
 };
 

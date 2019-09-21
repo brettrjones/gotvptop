@@ -32,6 +32,14 @@ ActivityInformation::ActivityInformation( AppCommon& app, QWidget * parent, EPlu
 }
 
 //============================================================================
+ActivityInformation::ActivityInformation( AppCommon& app, QWidget * parent, EInfoType infoType )
+    : ActivityBase( OBJNAME_ACTIVITY_INFORMATION, app, parent, eAppletActivityDialog )
+    , m_InfoType( infoType )
+{
+    initActivityInformation();
+}
+
+//============================================================================
 void ActivityInformation::initActivityInformation( void )
 {
     ui.setupUi( this );
@@ -57,27 +65,26 @@ void ActivityInformation::slotCopyToClipboardButtonClicked( void )
 //============================================================================
 void ActivityInformation::updateInformation( void )
 {
-    if( m_PluginType == ePluginTypeInvalid )
+    ui.m_PictureLabel->setVisible( false );
+
+    if( m_PluginType != ePluginTypeInvalid )
     {
-        return;
+        ui.m_ServiceInfoButton->setIcon( m_MyApp.getMyIcons().getPluginIcon( m_PluginType ) );
+
+        switch( m_PluginType )
+        {
+        case ePluginTypeGroupUser:
+        case ePluginTypeGroupHost:
+        case ePluginTypeGroupAnchor:
+        case ePluginTypeNetworkHost:
+            ui.m_PictureLabel->setResourceImage( ":/AppRes/Resources/NetworkDesign.png", true );
+            ui.m_PictureLabel->setVisible( true );
+            break;
+        default:
+            break;
+        }
     }
 
-    ui.m_ServiceInfoButton->setIcon( m_MyApp.getMyIcons().getPluginIcon( m_PluginType ) );
-
-    switch( m_PluginType )
-    {
-    case ePluginTypeGroupUser:
-    case ePluginTypeGroupHost:
-    case ePluginTypeGroupAnchor:
-    case ePluginTypeNetworkHost:
-        ui.m_PictureLabel->setResourceImage( ":/AppRes/Resources/NetworkDesign.png", true );
-        ui.m_PictureLabel->setVisible( true );
-        break;
-    default:
-        ui.m_PictureLabel->setVisible( false );
-        break;
-    }
-   
     ui.m_InfoText->clear();
     ui.m_InfoText->appendPlainText( getInfoText() );
 }
@@ -85,60 +92,65 @@ void ActivityInformation::updateInformation( void )
 QString ActivityInformation::m_NoInfoAvailable( QObject::tr( "No Information is local available. please visit http://wwww.gotvptop.com for latest infomation and help" ) );
 
 QString ActivityInformation::m_NetworkDesign( QObject::tr(
-"NOTE1: For anyone hosting services I suggest using good anti-virus/anti-malware and a service like PeerBlock to avoid bandwidth useage by those who make money spying on others.\n"
-"NOTE2: For anyone not hosting a GoTvPtoP Network a VPN is also suggested ( A VPN is not recommended when hosting a GoTvPtoP Network because of the requirement of a fixed ip address )\n"
-"\n"
-"=== TIER 1: GOTVPTOP NETWORK SERVICE* ===\n"
-"NOTE3: This service requires a fixed IP Address or a DNS url like http://www.gotvptop.net.\n"
-"REQUIRED SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
-" CONNECTION TEST SERVICE - ANONYMOUSE\n"
-" GOTVPTOP NETWORK SERVICE - ANONYMOUSE\n"
-"\n"
-"SUGGESTED OPTIONAL SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
-" PHONE SHAKE SERVICE - ANONYMOUSE\n"
-" ABOUT PAGE SERVICE - GUEST\n"
-" SEARCH AND SCAN SERVICES - GUEST\n"
-" STORY BOARD PAGE SERVICE - GUEST\n"
-"\n"
-"OTHER OPTIONAL SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
-" RELAY SERVICE - FRIEND\n"
-"\n"
-"\n"
-"=== TIER 2: GROUP HOST LISTING HOST SERVICE* ===\n"
-"REQUIRED SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
-" GROUP HOST LISTING SERVICE - ANONYMOUSE\n"
-"\n"
-"SUGGESTED OPTIONAL SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
-" CONNECTION TEST SERVICE - ANONYMOUSE\n"
-" PHONE SHAKE SERVICE - ANONYMOUSE\n"
-" PROFILE PAGE SERVICE - GUEST\n"
-" SEARCH AND SCAN SERVICES - GUEST\n"
-" STORY BOARD PAGE SERVICE - GUEST\n"
-"\n"
-"OTHER OPTIONAL SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
-" RELAY SERVICE - FRIEND\n"
-"\n"
-"=== TIER 3: GROUP HOST SERVICE* ===\n"
-" MEMEBERSHIP LEVEL means the permission level required to join the group - can be anonymous but suggest at least guest level\n"
-" Members of a group will be automatically given guest permission level between users. Higher level permissions can be granted by individual users to another user.\n"
-"REQUIRED SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
-" GROUP HOST SERVICE - MEMEBERSHIP LEVEL\n"
-" RELAY SERVICE - MEMEBERSHIP LEVEL\n"
-"\n"
-"SUGGESTED OPTIONAL SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
-" CONNECTION TEST SERVICE - ANONYMOUSE\n"
-" GROUP CHAT SERVICE - MEMEBERSHIP LEVEL\n"
-" PHONE SHAKE SERVICE - ANONYMOUSE\n"
-" ABOUT PAGE SERVICE - MEMEBERSHIP LEVEL\n"
-" SEARCH AND SCAN SERVICES - MEMEBERSHIP LEVEL\n"
-" STORY BOARD PAGE SERVICE - MEMEBERSHIP LEVEL\n"
-"\n"
-"OTHER OPTIONAL SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
-"\n"
-"\n"
-"=== TIER 4: USERS ===\n"
-" USERS should set their permission levels of services and/or streams to be as public or private as desired by user.\n"
-"\n"
+    "=== NETWORK DESIGN ===\n"
+    "NOTE1: For anyone hosting services I suggest using good anti-virus/anti-malware and a service like PeerBlock to avoid bandwidth useage by those who make money spying on others.\n"
+    "NOTE2: For anyone not hosting a GoTvPtoP Hosting Service a VPN is also suggested ( A VPN is not recommended when hosting a GoTvPtoP Network because of the requirement of a fixed ip address )\n"
+    "\n"
+    "=== TIER 1: GOTVPTOP NETWORK SERVICE* ===\n"
+    "NOTE3: This service requires a fixed IP Address or a DNS url like http://www.gotvptop.net.\n"
+    "REQUIRED SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
+    " CONNECTION TEST SERVICE - ANYBODY\n"
+    " GOTVPTOP NETWORK SERVICE - ANYBODY\n"
+    "\n"
+    "SUGGESTED OPTIONAL SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
+    " PHONE SHAKE SERVICE - ANYBODY\n"
+    " ABOUT PAGE SERVICE - GUEST\n"
+    " SEARCH AND SCAN SERVICES - GUEST\n"
+    " STORY BOARD PAGE SERVICE - GUEST\n"
+    "\n"
+    "OTHER OPTIONAL SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
+    " RELAY SERVICE - FRIEND\n"
+    "\n"
+    "\n"
+    "=== TIER 2: GROUP HOST LISTING HOST SERVICE* ===\n"
+    "REQUIRED SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
+    " GROUP HOST LISTING SERVICE - ANYBODY\n"
+    "\n"
+    "SUGGESTED OPTIONAL SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
+    " CONNECTION TEST SERVICE - ANYBODY\n"
+    " PHONE SHAKE SERVICE - ANYBODY\n"
+    " PROFILE PAGE SERVICE - GUEST\n"
+    " SEARCH AND SCAN SERVICES - GUEST\n"
+    " STORY BOARD PAGE SERVICE - GUEST\n"
+    "\n"
+    "OTHER OPTIONAL SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
+    " RELAY SERVICE - FRIEND\n"
+    "\n"
+    "=== TIER 3: GROUP HOST SERVICE* ===\n"
+    " MEMEBERSHIP LEVEL means the permission level required to join the group - can be anonymous but suggest at least guest level\n"
+    " Members of a group will be automatically given guest permission level between users. Higher level permissions can be granted by individual users to another user.\n"
+    "REQUIRED SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
+    " GROUP HOST SERVICE - MEMEBERSHIP LEVEL\n"
+    " RELAY SERVICE - MEMEBERSHIP LEVEL\n"
+    "\n"
+    "SUGGESTED OPTIONAL SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
+    " CONNECTION TEST SERVICE - ANYBODY\n"
+    " GROUP CHAT SERVICE - MEMEBERSHIP LEVEL\n"
+    " PHONE SHAKE SERVICE - ANYBODY\n"
+    " ABOUT PAGE SERVICE - MEMEBERSHIP LEVEL\n"
+    " SEARCH AND SCAN SERVICES - MEMEBERSHIP LEVEL\n"
+    " STORY BOARD PAGE SERVICE - MEMEBERSHIP LEVEL\n"
+    "\n"
+    "OTHER OPTIONAL SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
+    "\n"
+    "\n"
+    "=== TIER 4: USERS ===\n"
+    " USERS should set their permission levels of services and/or streams to be as public or private as desired by user.\n"
+    "\n"
+) );
+
+QString ActivityInformation::m_PluginDefinitions( QObject::tr(
+    "\n"
 "DEFINITIONS:\n"
 " *ABOUT PAGE SERVICE - Provide a information page about a host or person\n"
 " *CAM STREAM SERVICE: A host or user can provide streaming video live from their device camera or cam\n"
@@ -151,7 +163,7 @@ QString ActivityInformation::m_NetworkDesign( QObject::tr(
 " *GROUP HOST SERVICE: Provides connection and other services to members who have joined the Group Host.\n"
 " *PERMISSION LEVELS: Friendship level required to be allowed to use a service or connect to a person.\n"
 " *PHONE CALL PLUGIN: Provides user with voice phone calling to others using the GoTvPtoP app and internet.\n"
-" *PHONE SHAKE SERVICE: Provides list of current persons using phone shake mode to discover and connect to others.\n"
+" *PHONE SHAKE CONNECT SERVICE: Provides list of current persons using phone shake mode to discover and connect to others.\n"
 " *RELAY SERVICE: Provides data transfer services for persons without a open port to accept incomming connections.\n"
 " *SEARCH AND SCAN SERVICES: provide user a list of known persons with the desired search critera or service or stream or files\n"
 " *STORY BOARD PAGE SERVICE - Provide a blog like page a host or person can post to for others to view/read\n"
@@ -159,20 +171,74 @@ QString ActivityInformation::m_NetworkDesign( QObject::tr(
 " *VIDEO CHAT PLUGIN: Provides user video chat to others using the GoTvPtoP app and internet.\n"
 ) );
 
+QString ActivityInformation::m_Permissions( QObject::tr(
+    "=== PERMISSION LEVELS ===\n"
+    " Permission Levels are used for setting either what level of permission is required to access a plugin or"
+    " the permission level granted to another person to control what that person has access to."
+    "\n"
+    "\n"
+    " NOTE 1: If you join a group then other members of that group are granted Guest Permission Level automatically and"
+    " you can grant individual users a higher permission level if you want to."
+    "\n"
+    "\n"
+    " NOTE 2: If you put your device in PHONE SHAKE CONNECT mode then others that are in PHONE SHAKE CONNECT mode"
+    " are granted Guest Permission Level automatically and you can grant individual users a higher permission level if you want to."
+    "\n"
+    "\n"
+    "=== ADMINISTRATOR PERMISSION ===\n"
+    " This is the highest level of permission.\n"
+    " A person granted this permission level can access plugins or services set to permission level Admistrator, Friend, Guest or Anybody.\n"
+    " A example of usage would be if you wanted to set up a web cam stream service as a nanny or security cam that only you can access."
+    " You would set the web cam service to permission level admistrator and only grant your self administrator permission level."
+    "\n"
+    "\n"
+    "=== FRIEND PERMISSION ===\n"
+    " A person granted this permission level can access plugins or services set to permission level Friend, Guest or Anybody.\n"
+    " A example of usage would be if you wanted other members of a group you joined to be able to message you and view your about page"
+    " but not be able to access your shared files."
+    " You would set the file share service to permission level to friend ( or higher ) and set messenger and about page to guest level permission."
+    "\n"
+    "\n"
+    "=== GUEST PERMISSION ===\n"
+    " A person granted this permission level can access plugins or services set to permission level Guest or Anybody.\n"
+    " A example of usage would be granting a person guest permission even if not a member of your group."
+    "\n"
+    "\n"
+    "=== ANYBODY PERMISSION ===\n"
+    " This permission grants anybody that can connect to you access to plugin or service set to this level."
+    " A example of usage would be setting STORY BOARD service to anybody so everyone can see your story."
+    "\n"
+    "\n"
+    "=== NOBODY (DISABLED or IGNORED) PERMISSION ===\n"
+    " This permission level when applied to a person means that this person will be ignored and cannot access"
+    " any of your services or plugins.\n"
+    " This permission level when applied to a plugin or service means that the plugin or sevice will be completely"
+    " disabled and nobody can access that plugin or service.\n"
+    "\n"
+) );
+
 //============================================================================
-QString& ActivityInformation::getInfoText( void )
+QString ActivityInformation::getInfoText( void )
 {
-    switch( m_PluginType )
+    if( m_PluginType != ePluginTypeInvalid )
     {
-    case ePluginTypeGroupUser:
-    case ePluginTypeGroupHost:
-    case ePluginTypeGroupAnchor:
-    case ePluginTypeNetworkHost:
-        return m_NetworkDesign;
-        break;
-    default:
-        return m_NoInfoAvailable;
-        break;
+        switch( m_PluginType )
+        {
+        case ePluginTypeGroupUser:
+        case ePluginTypeGroupHost:
+        case ePluginTypeGroupAnchor:
+        case ePluginTypeNetworkHost:
+            return m_NetworkDesign + m_PluginDefinitions;
+            break;
+        default:
+            return m_NoInfoAvailable;
+            break;
+        }
+    }
+
+    if( m_InfoType == eInfoTypePermission )
+    {
+        return m_Permissions;
     }
 
     return m_NoInfoAvailable;
