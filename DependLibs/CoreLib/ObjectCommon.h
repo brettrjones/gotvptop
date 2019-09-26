@@ -87,6 +87,8 @@
 #define OBJNAME_APPLET_GROUP_HOST						"AppletGroupHost"
 #define OBJNAME_APPLET_GROUP_ANCHOR						"AppletGroupAnchor"
 #define OBJNAME_APPLET_GOTVPTOP_NETWORK_HOST			"AppletGoTvPtoPNetworkHost"
+#define OBJNAME_APPLET_NETWORK_KEY			            "AppletNetworkKey"
+#define OBJNAME_APPLET_NETWORK_SETTINGS			        "AppletNetworkSettings"
 
 #define OBJNAME_FILE_ACTION_MENU						"FileActionMenu"
 #define OBJNAME_POPUP_MENU							    "AppletRemoteControl"

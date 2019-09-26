@@ -79,6 +79,9 @@ public:
     void						setLastAppletLaunched( EApplet applet );
     EApplet						getLastAppletLaunched( void );
 
+    void                        setVerboseLog( bool verbose );
+    bool                        getVerboseLog( void );
+
 protected:
 	bool						appModeSettingsAreInitialize( void );
 	void						setupAppModeSettings( EDefaultAppMode appDefaultMode );

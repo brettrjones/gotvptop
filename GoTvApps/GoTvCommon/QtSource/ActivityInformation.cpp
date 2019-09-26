@@ -18,6 +18,8 @@
 
 #include <CoreLib/VxDebug.h>
 
+#include <QClipboard>
+
 namespace
 {
 	const int MAX_LOG_EDIT_BLOCK_CNT = 1000;
@@ -59,7 +61,8 @@ void ActivityInformation::showEvent( QShowEvent * ev )
 //============================================================================
 void ActivityInformation::slotCopyToClipboardButtonClicked( void )
 {
-    // TODO implement me
+    QClipboard * clipboard = QApplication::clipboard();
+    clipboard->setText( ui.m_InfoText->toPlainText() );
 }
 
 //============================================================================
@@ -83,6 +86,18 @@ void ActivityInformation::updateInformation( void )
         default:
             break;
         }
+    }
+
+    switch( m_InfoType )
+    {
+    case eInfoTypePermission:
+        ui.m_ServiceInfoButton->setIcon( eMyIconPermissions );
+        break;
+    case eInfoTypeNetworkKey:
+        ui.m_ServiceInfoButton->setIcon( eMyIconNetworkKey );
+        break;
+    default:
+        break;
     }
 
     ui.m_InfoText->clear();
@@ -217,6 +232,21 @@ QString ActivityInformation::m_Permissions( QObject::tr(
     "\n"
 ) );
 
+QString ActivityInformation::m_NetworkKey( QObject::tr(
+    "=== NETWORK KEY ===\n"
+    "The network key is a text string used for person to person network encryption.\n"
+    "The network key should only be changed if connecting to or hosting a private network seperate from GoTvPtoP.\n"
+    "If the network key is changed then connecting to the GoTvPtoP network will no longer be possible.\n"
+    "A private network can be hosted/connected to without changing the network key, however, changing the "
+    "network key will give you the best privacy GoTvPtoP has to offer.\n"
+    "\n"
+    "GoTvPtoP has weak encryption and should NOT be considered secure."
+    "If you truly need anonymity and a secure network you should consider products with security as"
+    " the primary goal such as Tor.\n"
+    "\n"
+    "Use of a VPN is recommended to improve your privacy."
+) );
+
 //============================================================================
 QString ActivityInformation::getInfoText( void )
 {
@@ -236,10 +266,14 @@ QString ActivityInformation::getInfoText( void )
         }
     }
 
-    if( m_InfoType == eInfoTypePermission )
+    switch( m_InfoType )
     {
+    case eInfoTypePermission:
         return m_Permissions;
-    }
+    case eInfoTypeNetworkKey:
+        return m_NetworkKey;
 
-    return m_NoInfoAvailable;
+    default:
+        return m_NoInfoAvailable;
+    }
 }

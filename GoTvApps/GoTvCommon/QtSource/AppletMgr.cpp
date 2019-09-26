@@ -13,8 +13,8 @@
 //============================================================================
 
 #include "AppletMgr.h"
+#include "ActivityAbout.h"
 #include "ActivityBase.h"
-#include "HomeWindow.h"
 #include "AppCommon.h"
 #include "AppletRemoteControl.h"
 #include "AppletSettings.h"
@@ -27,7 +27,10 @@
 #include "AppletGroupAnchor.h"
 #include "AppletGoTvPtoPNetworkHost.h"
 #include "AppletNetHostingPage.h"
-#include "ActivityAbout.h"
+#include "AppletNetworkKey.h"
+#include "AppletNetworkSettings.h"
+#include "HomeWindow.h"
+
 
 //============================================================================
 AppletMgr::AppletMgr( AppCommon& myMpp, QWidget * parent )
@@ -130,6 +133,12 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 	case eAppletTheme:
 		appletDialog = new AppletTheme( m_MyApp, parent );
 		break;
+    case eAppletNetworkSettings:
+        appletDialog = new AppletNetworkSettings( m_MyApp, parent );
+        break;
+    case eAppletNetworkKey:
+        appletDialog = new AppletNetworkKey( m_MyApp, parent );
+        break;
 	case eAppletSettings:
 		appletDialog = new AppletSettings( m_MyApp, parent );
 		break;

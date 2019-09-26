@@ -57,6 +57,8 @@ EMyIcons GetAppletIcon( EApplet applet )
 	case eAppletPlugins:				return eMyIconPlugins;
 
 	case eAppletTheme:					return eMyIconTheme;
+    case eAppletNetworkKey:				return eMyIconNetworkKey;
+    case eAppletNetworkSettings:	    return eMyIconNetworkSettings;
 	case eAppletSettings:				return eMyIconSettings;
 
     case eAppletGroupUser:              return eMyIconGroupUser;
@@ -96,6 +98,9 @@ QString DescribeApplet( EApplet applet )
 	case eAppletRemoteControl:			return QObject::tr( "Remote Control" );
 
 	case eAppletTheme:					return QObject::tr( "Theme" );
+    case eAppletNetworkKey:				return QObject::tr( "NetworkKey" );
+    case eAppletNetworkSettings:		return QObject::tr( "NetworkSettings" );
+
 	case eAppletSettings:				return QObject::tr( "Settings" );
 
     case eAppletGroupUser:              return QObject::tr( "Join Group" );

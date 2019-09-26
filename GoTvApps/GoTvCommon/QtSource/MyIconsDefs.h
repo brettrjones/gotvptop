@@ -68,6 +68,8 @@ enum EMyIcons
 	eMyIconTruthOrDareIgnored,
 
 	eMyIconPermissions,
+    eMyIconKeyEnabled,
+    eMyIconKeyDisabled,
 
 	eMyIconNotifyStarWhite,
 	eMyIconNotifyStarGreen,
@@ -267,6 +269,9 @@ enum EMyIcons
 	eMyIconPlugins,
 	eMyIconTheme,
 	eMyIconSettings,
+
+    eMyIconNetworkKey,
+    eMyIconNetworkSettings,
 
 	// built in plugin options
 	eMyIconCamStreamProvider,

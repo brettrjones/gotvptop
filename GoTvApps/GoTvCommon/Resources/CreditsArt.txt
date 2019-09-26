@@ -31,6 +31,8 @@ file-folder-normal.svg
 file-folder-plus.svg
 file-folder-share.svg (modified)
 friend.svg
+key-disabled.svg
+key-enabled.svg
 mediatype-audio.svg
 mediatype-video.svg
 microphone.svg
@@ -58,6 +60,9 @@ overlay-minus.svg (modified)
 overlay-plus.svg (modified)
 window-expand.svg
 window-shrink.svg
+wireless-7.svg
+wireless-key.svg (modified)
+wireless-setup.svg (modified)
 
 By Anton Barbarov, RU at https://thenounproject.com
 camera-snapshot.svg

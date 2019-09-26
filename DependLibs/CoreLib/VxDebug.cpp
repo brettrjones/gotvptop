@@ -203,6 +203,9 @@ void VxSetLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData )
 	g_pvUserData = userData;
 }
 
+LOG_FUNCTION VxGetLogHandler( void ) { return g_pfuncLogHandler;  }
+void * VxGetLogUserData( void ) { return g_pvUserData; }
+
 //============================================================================
 // This function is called by vx_assert() when the assertion fails.
 void  vx_error_output( unsigned long u32MsgType, char* exp,char * file, int line)

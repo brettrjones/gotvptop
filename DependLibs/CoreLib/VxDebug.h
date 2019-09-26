@@ -115,6 +115,8 @@ void                            VxSetModuleLogFlags( uint32_t flags );
 uint32_t                        VxGetModuleLogFlags( void );
 
 void							VxSetLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData );
+LOG_FUNCTION					VxGetLogHandler( void );
+void *					        VxGetLogUserData( void );
 void							VxSetLogToFile( const char * pFileName );
 void							VxSetLogFlags( unsigned long u32LogFlags );
 void							LogMsg( unsigned long u32MsgType, const char* msg, ...);

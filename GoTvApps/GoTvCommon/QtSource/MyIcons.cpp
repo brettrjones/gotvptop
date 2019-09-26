@@ -242,7 +242,10 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 
 	case eMyIconPermissions:
 		return ":/AppRes/Resources/key.svg";
-
+    case eMyIconKeyEnabled:
+        return ":/AppRes/Resources/key-enabled.svg";
+    case eMyIconKeyDisabled:
+        return ":/AppRes/Resources/key-disabled.svg";
 	case eMyIconNotifyStarWhite:
 		return ":/AppRes/Resources/notify-dot.svg";
 	case eMyIconNotifyStarGreen:
@@ -565,6 +568,12 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/theme.svg";
 	case eMyIconSettings:
 		return ":/AppRes/Resources/settings-gear.svg";
+
+
+    case eMyIconNetworkKey:
+        return ":/AppRes/Resources/wireless-key.svg";
+    case eMyIconNetworkSettings:
+        return ":/AppRes/Resources/wireless-setup.svg";
 
 	// built in plugin options
 	case eMyIconCamStreamProvider:

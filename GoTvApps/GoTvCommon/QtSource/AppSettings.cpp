@@ -248,6 +248,21 @@ EApplet AppSettings::getLastAppletLaunched( void )
 }
 
 //============================================================================
+void AppSettings::setVerboseLog( bool verbose )
+{
+    uint32_t appletVal = verbose;
+    setIniValue( getAppShortName(), "VerboseLog", appletVal );
+}
+
+//============================================================================
+bool AppSettings::getVerboseLog( void )
+{
+    uint32_t appletVal = 0;
+    getIniValue( getAppShortName(), "VerboseLog", appletVal, 0 );
+    return (bool)appletVal;
+}
+
+//============================================================================
 bool AppSettings::getMutePhoneRing( void )
 {
 	bool bMute;

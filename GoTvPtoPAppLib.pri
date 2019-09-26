@@ -53,10 +53,13 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/InformationWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InstMsgWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MultiSessionState.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/NetworkKeyWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/NetworkTestWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TitleBarWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferBarWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OffersMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenu.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenu.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/SessionWidget.h \
@@ -90,6 +93,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityManageAnchorSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityMessageBox.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetServiceTest.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkKey.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkState.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissions.h \
@@ -189,6 +193,8 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletGoTvPtoPNetworkHost.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletKodi.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkKey.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSharedContent.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.h \
@@ -260,6 +266,8 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InstMsgWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MultiSessionState.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MyIcons.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/NetworkKeyWidget.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/NetworkTestWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferBarWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionLogic.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionState.cpp \
@@ -276,6 +284,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingSearch.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingServers.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingMedia.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenu.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenuDelegate.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenu.cpp \
@@ -316,6 +325,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityManageAnchorSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityMessageBox.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetServiceTest.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkKey.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkState.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissions.cpp \
@@ -410,6 +420,8 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupAnchor.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletGoTvPtoPNetworkHost.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletKodi.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkKey.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.cpp \
@@ -435,7 +447,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppStyle.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppTheme.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppDisplay.cpp \
     $$PWD/GoTvApps/GoTvPtoP/AppSource/main.cpp \
     $$PWD/GoTvApps/GoTvPtoP/AppSource/exportdialog.cpp \
@@ -481,6 +492,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAbout.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityManageAnchorSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityMessageBox.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetServiceTest.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkKey.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkStartupTest.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkStatus.ui \
@@ -548,7 +560,10 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAbout.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/InputVideoWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/InputVoiceWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/InstMsgWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ListEntryWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/LogWidget.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/ListEntryWidget.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/NetworkKeyWidget.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/NetworkTestWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/OfferBarWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/OfferWidget.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/PermissionWidget.ui \

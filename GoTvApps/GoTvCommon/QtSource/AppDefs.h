@@ -56,6 +56,7 @@ enum EApplet
 	eAppletHomePage,
     eAppletKodi,
     eAppletUserIdentity,
+    eAppletGroupUser,	// user who can join group
     eAppletSharedContent,
 	eAppletMessenger,
 	eAppletPlayerVideo,
@@ -69,13 +70,17 @@ enum EApplet
 	eAppletPlugins,
 	eAppletTheme,
 	eAppletSettings,
-	eAppletGroupUser,	// user who can join group
+    eAppletNetworkKey,
+    eAppletNetworkSettings,
     eAppletNetHostingPage,	// page to setup group or group listing hosts
+
 	eMaxBasicApplets, // marker.. past here is hosting applets
 
     eAppletGroupHost,	// user who hosts a group
     eAppletGroupAnchor, // network service for group hosts.. search, provide ip address etc
     eAppletGoTvPtoPNetworkHost, // network service for a gotvptop network.. privide fixed ip address, group anchor lists
+
+
     eMaxHostApplets, // marker.. past here is optional applets based on feature
 
 	ePluginAppletCamProvider,

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>NetworkSettingsDlg</class>
- <widget class="QDialog" name="NetworkSettingsDlg">
+ <class>AppletNetworkSettingsWidget</class>
+ <widget class="QWidget" name="AppletNetworkSettingsWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -231,25 +231,6 @@
      </layout>
     </widget>
    </item>
-   <item>
-    <widget class="BottomBarWidget" name="m_BottomBarWidget" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>30</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="autoFillBackground">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -257,12 +238,6 @@
    <class>TitleBarWidget</class>
    <extends>QWidget</extends>
    <header>TitleBarWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>BottomBarWidget</class>
-   <extends>QWidget</extends>
-   <header location="global">BottomBarWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

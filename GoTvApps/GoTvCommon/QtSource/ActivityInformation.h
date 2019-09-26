@@ -23,7 +23,10 @@ enum EInfoType
     eInfoTypeInvalid,
     eInfoTypePlugin,
     eInfoTypePermission,
+    eInfoTypeNetworkKey,
 
+
+    eMaxInfoType // must be last
 };
 
 class AppCommon;
@@ -67,4 +70,5 @@ protected:
     static QString              m_NetworkDesign;
     static QString              m_PluginDefinitions;
     static QString              m_Permissions;
+    static QString              m_NetworkKey;
 };

@@ -119,7 +119,7 @@ void ActivityNetworkState::showNoInternetHelp( void )
 void ActivityNetworkState::showDiscoverNetworkHelp( void )
 {
 	clearHelpLines();
-	setHelpLine( 0, QObject::tr("Internet connected and My P2P Web ") );
+	setHelpLine( 0, QObject::tr("Internet connected and GoTvPtoP ") );
 	setHelpLine( 1, QObject::tr("is testing the network.") );
 }
 
@@ -129,8 +129,8 @@ void ActivityNetworkState::showRelaySearchHelp( void )
 	setHelpLine( 0, QObject::tr("Internet connected but incoming TCP Port is blocked. ") );
 	setHelpLine( 1, QObject::tr("This may be because UPNP is disable on the router or ") );
 	setHelpLine( 2, QObject::tr("your device has a firewall or anti-virus program that ") );
-	setHelpLine( 3, QObject::tr("blocks the TCP Port used by My P2P Web.  ") );
-	setHelpLine( 4, QObject::tr("My P2P Web is searching for another node to act as  ") );
+	setHelpLine( 3, QObject::tr("blocks the TCP Port used by GoTvPtoP.  ") );
+	setHelpLine( 4, QObject::tr("GoTvPtoP is searching for another node to act as  ") );
 	setHelpLine( 5, QObject::tr("relay/proxy for this device. Check Website for more details ") );
 }
 
@@ -145,22 +145,21 @@ void ActivityNetworkState::showDirectConnectMessage( void )
 //============================================================================
 void ActivityNetworkState::showRelayConnectedHelp( void )
 {
-	setHelpLine( 0, QObject::tr("My P2P Web connected but incoming TCP Port is blocked. ") );
+	setHelpLine( 0, QObject::tr("GoTvPtoP connected but incoming TCP Port is blocked. ") );
 	setHelpLine( 1, QObject::tr("This may be because UPNP is disable on the router or ") );
 	setHelpLine( 2, QObject::tr("your device has a firewall or anti-virus program that ") );
-	setHelpLine( 3, QObject::tr("blocks the TCP Port used by My P2P Web.  ") );
-	setHelpLine( 4, QObject::tr("My P2P Web is using another node to act as  ") );
-	setHelpLine( 5, QObject::tr("relay/proxy for this device which results in slow " ) );
+	setHelpLine( 3, QObject::tr("blocks the TCP Port used by GoTvPtoP.  ") );
+	setHelpLine( 4, QObject::tr("GoTvPtoP requires relay service for this device which results in slow " ) );
 	setHelpLine( 6, QObject::tr("data transfer and unstable connectivity." ) );
-	setHelpLine( 7, QObject::tr("Visit My P2P Web Website for help on how to direct connect.") );
+	setHelpLine( 7, QObject::tr("Visit GoTvPtoP Website for help on how to direct connect.") );
 }
 
 //============================================================================
 void ActivityNetworkState::showAnchorError( void )
 {
-	setHelpLine( 0, QObject::tr("My P2P Web connected but could not contact the Anchor Node. ") );
-	setHelpLine( 1, QObject::tr("Check your network setting and Anchor node url.") );
-	setHelpLine( 2, QObject::tr("Visit My P2P Web  Website for details.") );
+	setHelpLine( 0, QObject::tr("GoTvPtoP connected but could not contact the Network Host. ") );
+	setHelpLine( 1, QObject::tr("Check your network setting and Network Host url.") );
+	setHelpLine( 2, QObject::tr("Visit GoTvPtoP  Website for details.") );
 }
 
 //============================================================================

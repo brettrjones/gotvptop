@@ -681,9 +681,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletMgr.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupAnchor.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
@@ -776,6 +773,24 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetworkKeyWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkKey.cpp">
+      <Filter>GoTvCommon\Source Files\Activities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetworkKey.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettings.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletMgr.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetworkTestWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1526,9 +1541,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlOffScreenSurface.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletMgr.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupAnchor.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
@@ -1590,6 +1602,24 @@
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\LogWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetworkKeyWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkKey.h">
+      <Filter>GoTvCommon\Source Files\Activities</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletNetworkKey.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettings.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletMgr.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetworkTestWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
   </ItemGroup>
@@ -2085,6 +2115,15 @@
     </None>
     <None Include="..\..\..\..\GoTvPtoPAppLib.pro">
       <Filter>QtBuild</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\wireless-7.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\wireless-key.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\wireless-setup.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -2630,6 +2669,24 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\InformationWidget.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\NetworkKeyWidget.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkKey.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletNetworkKey.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletNetworkSettings.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\NetworkTestWidget.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\LogWidget.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

@@ -206,5 +206,9 @@
         <file>Resources/group-anchor.svg</file>
         <file>Resources/group-host.svg</file>
         <file>Resources/NetworkDesign.png</file>
+        <file>Resources/wireless-key.svg</file>
+        <file>Resources/wireless-setup.svg</file>
+        <file>Resources/key-disabled.svg</file>
+        <file>Resources/key-enabled.svg</file>
     </qresource>
 </RCC>
