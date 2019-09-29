@@ -41,29 +41,46 @@ NetworkTestWidget::NetworkTestWidget( QWidget *		parent )
 
 	ui.setupUi(this);
 
+    connect( &m_MyApp,
+             SIGNAL( signalIsPortOpenStatus( EIsPortOpenStatus, QString ) ),
+             this,
+             SLOT( slotIsPortOpenStatus( EIsPortOpenStatus, QString ) ) );
 
-	//connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotExitDialogButtonClick()) );
-	//connect( ui.m_RunTestButton, SIGNAL(clicked()), this, SLOT(slotRunTestButClick()) );
-	//connect( this, SIGNAL(signalDialogWasShown()), this, SLOT(slotDialogWasShown()) );
+    connect( ui.m_RunFullTestButton, SIGNAL( clicked() ), this, SLOT( slotRunFullTestButClick() ) );
+    connect( ui.m_IsMyPortOpenButton, SIGNAL( clicked() ), this, SLOT( slotIsPortOpenButClick() ) );
 
-	//connect(	&app, 
-	//			SIGNAL(signalAnchorStatus(EAnchorTestStatus,QString)), 
-	//			this, 
-	//			SLOT(slotAnchorStatus(EAnchorTestStatus,QString)) );
 }
 
 //============================================================================
-void NetworkTestWidget::slotRunTestButClick( void )
+void NetworkTestWidget::slotRunFullTestButClick( void )
 {
 	bool isBusyWithTest = false;
 	if( false == isBusyWithTest )
 	{
 		isBusyWithTest = true;
-		ui.m_LogWidget->clear();
+		getLogWidget()->clear();
 		m_MyApp.getEngine().getFromGuiInterface().fromGuiVerifyAnchorSettings();
 		isBusyWithTest = false;
 	}
 }
+
+//============================================================================
+void NetworkTestWidget::slotIsPortOpenButClick( void )
+{
+    uint16_t tcpPort = m_MyApp.getEngine().getEngineSettings().getTcpIpPort();
+
+    if( !tcpPort )
+    {
+        QMessageBox::information( this, QObject::tr( "Network Settings Error" ), QObject::tr( "TCP Port cannot be zero." ) );
+    }
+    else
+    {
+        getLogWidget()->clear();
+        m_MyApp.getEngine().getFromGuiInterface().fromGuiRunIsPortOpenTest( tcpPort );
+    }
+}
+
+
 //
 ////============================================================================
 //void NetworkTestWidget::slotAnchorStatus( EAnchorTestStatus eAnchorStatus, QString strMsg )

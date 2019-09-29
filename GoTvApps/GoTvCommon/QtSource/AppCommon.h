@@ -89,6 +89,8 @@ public:
 
     // load profile and icons etc without using thread to avoid linux crash
     void                        loadWithoutThread( void );
+    void                        setIsAppInitialized( bool initialized )     { m_AppInitialized = initialized; }
+    bool                        getIsAppInitialized( void )                 { return m_AppInitialized; }
 
     IFromGui&					getFromGuiInterface( void );
 	QApplication&				getQApplication( void )						{ return m_QApp; }
@@ -762,6 +764,7 @@ private:
     bool                        m_AppCommonInitialized;
     bool                        m_LoginBegin;
     bool                        m_LoginComplete;
+    bool                        m_AppInitialized = false;
 
 //    KodiThread *                m_KodiThread;
 };

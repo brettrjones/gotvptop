@@ -62,8 +62,7 @@ void ActivityNetworkSettings::connectSignals( void )
 //============================================================================
 void ActivityNetworkSettings::updateDlgFromSettings()
 {
-	uint16_t u16Port;
-	m_Engine.getEngineSettings().getTcpIpPort(u16Port);
+	uint16_t u16Port = m_Engine.getEngineSettings().getTcpIpPort();
 	ui.PortEdit->setText(QString("%1").arg(u16Port));
 
 	ui.AutoDetectProxyRadioButton->setChecked( false );

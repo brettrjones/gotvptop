@@ -44,14 +44,14 @@ ActivityNetServiceTest::ActivityNetServiceTest(
 
     connectBarWidgets();
 
-	connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotExitDialogButtonClick()) );
-	connect( ui.m_RunTestButton, SIGNAL(clicked()), this, SLOT(slotRunTestButClick()) );
-	connect( this, SIGNAL(signalDialogWasShown()), this, SLOT(slotDialogWasShown()) );
+	//connect( ui.m_TitleBarWidget, SIGNAL(signalBackButtonClicked()), this, SLOT(slotExitDialogButtonClick()) );
+	//connect( ui.m_RunTestButton, SIGNAL(clicked()), this, SLOT(slotRunTestButClick()) );
+	//connect( this, SIGNAL(signalDialogWasShown()), this, SLOT(slotDialogWasShown()) );
 
-	connect(	&app, 
-				SIGNAL(signalAnchorStatus(EAnchorTestStatus,QString)), 
-				this, 
-				SLOT(slotAnchorStatus(EAnchorTestStatus,QString)) );
+	//connect(	&app, 
+	//			SIGNAL(signalAnchorStatus(EAnchorTestStatus,QString)), 
+	//			this, 
+	//			SLOT(slotAnchorStatus(EAnchorTestStatus,QString)) );
 }
 
 //============================================================================
@@ -63,25 +63,25 @@ void ActivityNetServiceTest::slotExitDialogButtonClick( void )
 //============================================================================
 void ActivityNetServiceTest::slotRunTestButClick( void )
 {
-	bool isBusyWithTest = false;
-	if( false == isBusyWithTest )
-	{
-		isBusyWithTest = true;
-		ui.m_LogEdit->clear();
-		m_Engine.getFromGuiInterface().fromGuiVerifyAnchorSettings();
-		isBusyWithTest = false;
-	}
+	//bool isBusyWithTest = false;
+	//if( false == isBusyWithTest )
+	//{
+	//	isBusyWithTest = true;
+	//	ui.m_LogWidget->clear();
+	//	m_Engine.getFromGuiInterface().fromGuiVerifyAnchorSettings();
+	//	isBusyWithTest = false;
+	//}
 }
 
 //============================================================================
 void ActivityNetServiceTest::slotDialogWasShown( void )
 {
-	slotRunTestButClick();
+	//slotRunTestButClick();
 }
 
 //============================================================================
 void ActivityNetServiceTest::slotAnchorStatus( EAnchorTestStatus eAnchorStatus, QString strMsg )
 {
 	//strMsg.remove(QRegExp("[\\n\\r]"));
-	ui.m_LogEdit->append(strMsg);
+	//ui.m_LogWidget->append(strMsg);
 }

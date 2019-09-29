@@ -96,6 +96,11 @@ void ActivityInformation::updateInformation( void )
     case eInfoTypeNetworkKey:
         ui.m_ServiceInfoButton->setIcon( eMyIconNetworkKey );
         break;
+    case eInfoTypeNetworkHost:
+        ui.m_PictureLabel->setResourceImage( ":/AppRes/Resources/NetworkDesign.png", true );
+        ui.m_PictureLabel->setVisible( true );
+        ui.m_ServiceInfoButton->setIcon( eMyIconNetHosting );
+        break;
     default:
         break;
     }
@@ -247,6 +252,23 @@ QString ActivityInformation::m_NetworkKey( QObject::tr(
     "Use of a VPN is recommended to improve your privacy."
 ) );
 
+QString ActivityInformation::m_NetworkHost( QObject::tr(
+    "=== NETWORK HOST ===\n"
+    "The network host provides group host listing and connection test services for a PtoP Network.\n"
+    "The network host URL should only be changed if connecting to or hosting a private network seperate from GoTvPtoP.\n"
+    "The network host URL can be one of two formats.\n"
+    "\n"
+    "Format 1 using host web name and port\n"
+    " Example 1 ptop://www.gotvptop.net:45124\n"
+    "\n"
+    "Format 2 using host external IP Adrress and port\n"
+    " Example 2 ptop://111.122.133.144:45124\n"
+    "\n"
+    "NOTE 1: The network host IP port is normally 45124 but can be any open port.\n"\
+    "NOTE 2: The network host address must eitehr be a fixed/permenent ip or be a web url name\n"
+    " that can be resolved to a IP using DNS ( Domain Name Service ).\n"
+) );
+
 //============================================================================
 QString ActivityInformation::getInfoText( void )
 {
@@ -272,6 +294,8 @@ QString ActivityInformation::getInfoText( void )
         return m_Permissions;
     case eInfoTypeNetworkKey:
         return m_NetworkKey;
+    case eInfoTypeNetworkHost:
+        return m_NetworkHost;
 
     default:
         return m_NoInfoAvailable;

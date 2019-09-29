@@ -29,14 +29,6 @@ AppletNetworkKey::AppletNetworkKey( AppCommon& app, QWidget * parent )
 	setAppletType( eAppletNetworkKey );
 	ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	//ui.m_NetworkKeyExampleButton->setIcon( eMyIconPeople );
-	//fillNetworkKeyCombo();
- //   fillExampleCombo();
-
-	//connect( ui.m_AcceptCancelFrame, SIGNAL( signalAccepted() ), this, SLOT( slotNetworkKeyAccepted() ) );
-	//connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( slotNetworkKeyCanceled() ) );
-	//connect( ui.m_AcceptCancelFrame, SIGNAL( signalCanceled() ), this, SLOT( slotNetworkKeyCanceled() ) );
- //   connect( ui.m_ExampleCheckBox, SIGNAL( stateChanged(int) ), this, SLOT( slotCheckBoxClicked(int) ) );
 
 	m_MyApp.activityStateChange( this, true );
 }
@@ -44,8 +36,6 @@ AppletNetworkKey::AppletNetworkKey( AppCommon& app, QWidget * parent )
 //============================================================================
 void AppletNetworkKey::slotNetworkKeyAccepted( void )
 {
-	//m_MyApp.getAppSettings().setLastSelectedNetworkKey( m_CurNetworkKey );
-    //getMyApp().getAppNetworkKey().selectNetworkKey( m_CurNetworkKey );
     m_MyApp.activityStateChange( this, false );
     close();
 }

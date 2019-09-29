@@ -117,9 +117,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\MyIcons.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TitleBarWidget.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\DialogConfirmRemoveMessage.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
@@ -204,9 +201,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFriend.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingLogin.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingNotify.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
@@ -229,15 +223,6 @@
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\PopupMenuDelegate.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\SessionWidget.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\SoundCtrlWidget.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\StoryWidget.cpp">
       <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\TextChatLogic.cpp">
@@ -792,6 +777,18 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetworkTestWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TitleBarWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\StoryWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\SoundCtrlWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\SessionWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -1082,9 +1079,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\VidWidget.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\TitleBarWidget.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
     <QtUic Include="..\..\..\GoTvCommon\Forms\HomeWindow.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
@@ -1143,15 +1137,6 @@
       <Filter>GoTvCommon\Source Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\PopupMenu.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\SessionWidget.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\SoundCtrlWidget.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\StoryWidget.h">
       <Filter>GoTvCommon\Source Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\TextChatLogic.h">
@@ -1620,6 +1605,18 @@
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetworkTestWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\TitleBarWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\StoryWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\SoundCtrlWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\SessionWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
   </ItemGroup>

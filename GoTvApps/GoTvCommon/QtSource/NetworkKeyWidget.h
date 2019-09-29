@@ -27,8 +27,8 @@ public:
     QString						getNetworkKey( void ) { return ui.m_NetworkKeyEdit->text();  }
 
 protected slots:
-    //void                        slotHandleSelectionChanged( int );
-    void                        slotShowNetworkKeyInformation();
+    void                        slotShowNetworkKeyInformation( void );
+    void                        slotApplyNetworkKey( void );
 
 protected:
 	void						initNetworkKeyWidget( void );
@@ -36,6 +36,7 @@ protected:
 
     void						updateNetworkKeyIcon( void );
     void                        updateUi( void );
+    bool                        verifyNetworkKey( QString& keyVal );
 
     AppCommon&                  m_MyApp;
     EPluginType                 m_PluginType = ePluginTypeInvalid;

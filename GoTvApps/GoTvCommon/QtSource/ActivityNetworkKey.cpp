@@ -26,11 +26,6 @@
 
 #include <QMessageBox>
 
-namespace
-{
-	QString				DEFAULT_ADAPTER_IP_CHOICE			= "default";
-}
-
 //============================================================================
 ActivityNetworkKey::ActivityNetworkKey( AppCommon& app, QWidget * parent )
 : ActivityBase( OBJNAME_ACTIVITY_NETWORK_SETTINGS, app, parent, eAppletMessenger, true )
@@ -47,132 +42,17 @@ ActivityNetworkKey::ActivityNetworkKey( AppCommon& app, QWidget * parent )
 void ActivityNetworkKey::connectSignals( void )
 {
 	connect( ui.m_TitleBarWidget,					SIGNAL(signalBackButtonClicked()), this, SLOT( slotExitButtonClick() ) );
-	//connect( ui.m_GoToAnchorSettingsButton,			SIGNAL(clicked()), this, SLOT( slotGoToAnchorSettingsButtonClick() ) );
-
-	//connect( ui.AutoDetectProxyRadioButton,			SIGNAL(clicked()), this, SLOT( slotAutoDetectProxyClick() ) );
-	//connect( ui.AssumeNoProxyRadioButton,			SIGNAL(clicked()), this, SLOT( slotNoProxyClick() ) );
-	//connect( ui.AssumeProxyRadioButton,				SIGNAL(clicked()), this, SLOT( slotYesProxyClick() ) );
-
-	//connect( ui.RandomPortButton,					SIGNAL(clicked()), this, SLOT( slotRandomPortButtonClick() ) );
-	//connect( ui.m_IsPortOpenTesButton,				SIGNAL(clicked()), this, SLOT( slotRunIsPortOpenButtonClick() ) );
-	//connect( ui.m_UseUpnpCheckBox,					SIGNAL(clicked()), this, SLOT( slotUseUpnpCheckBoxClick() ) );
-	//connect( ui.m_ExternIpHelpButton,				SIGNAL(clicked()), this, SLOT( slotExternIpHelpButtonClick() ) );
 }
 
 //============================================================================
 void ActivityNetworkKey::updateDlgFromSettings()
 {
-	//uint16_t u16Port;
-	//m_Engine.getEngineSettings().getTcpIpPort(u16Port);
-	//ui.PortEdit->setText(QString("%1").arg(u16Port));
-
-	//ui.AutoDetectProxyRadioButton->setChecked( false );
-	//ui.AssumeNoProxyRadioButton->setChecked( false );
-	//ui.AssumeProxyRadioButton->setChecked( false );
-	//EngineSettings::EFirewallTestType iDetectProxySetting = m_Engine.getEngineSettings().getFirewallTestSetting();
-	//switch( iDetectProxySetting )
-	//{
-	//case EngineSettings::eFirewallTestAssumeNoFirewall:
-	//	ui.AssumeNoProxyRadioButton->setChecked( true );
-	//	break;
-
-	//case EngineSettings::eFirewallTestAssumeFirewalled:
-	//	ui.AssumeProxyRadioButton->setChecked( true );
-	//	break;
-
-	//case EngineSettings::eFirewallTestUrlConnectionTest:
-	//default:
-	//	ui.AutoDetectProxyRadioButton->setChecked( true );
-	//	break;
-	//}
-
-	//ui.m_UseUpnpCheckBox->setChecked( m_Engine.getEngineSettings().getUseUpnpPortForward() );
-	//ui.m_LclIpListComboBox->clear();
-	//ui.m_LclIpListComboBox->addItem( DEFAULT_ADAPTER_IP_CHOICE );
-
-	//std::string strPreferredIp = m_Engine.getEngineSettings().getPreferredNetworkAdapterIp();
-	//std::vector<InetAddress> lclIpAddresses;
-	//VxGetLocalIps(	lclIpAddresses );
-	//std::vector<InetAddress>::iterator iter;
-	//std::string ipAddr;
-	//int preferredAddrIndex = 0;
-	//int currIdx = 0;
-	//for( iter = lclIpAddresses.begin(); iter != lclIpAddresses.end(); ++iter )
-	//{
-	//	InetAddress& inetAddr = (*iter);
-	//	if( inetAddr.isIPv4() 
-	//		&& ( false == inetAddr.isLoopBack() ) )
-	//	{
-	//		currIdx++;
-	//		ipAddr = inetAddr.toStdString();
-	//		if( ipAddr == strPreferredIp )
-	//		{
-	//			preferredAddrIndex = currIdx;
-	//		}
-	//		
-	//		ui.m_LclIpListComboBox->addItem( ipAddr.c_str() );
-	//	}
-	//}
-
-	//ui.m_LclIpListComboBox->setCurrentIndex( preferredAddrIndex );
-	//std::string externIP;
-	//m_Engine.getEngineSettings().getExternalIp( externIP );
-	//ui.m_ExternIpEdit->setText( externIP.c_str() );
 }
 
 //============================================================================
 void ActivityNetworkKey::updateSettingsFromDlg()
 {
-	//std::string strPreferredIp = "";
-	//if( 0 != ui.m_LclIpListComboBox->currentIndex() )
-	//{
-	//	strPreferredIp = ui.m_LclIpListComboBox->currentText().toUtf8().constData();
-	//}
-
-	//m_Engine.getEngineSettings().setPreferredNetworkAdapterIp( strPreferredIp.c_str() );
-
-	//uint16_t u16TcpPort = ui.PortEdit->text().toUShort();
-	//if( 0 != u16TcpPort )
-	//{
-	//	m_Engine.getEngineSettings().setTcpIpPort( u16TcpPort );
-	//	m_Engine.getMyPktAnnounce().setMyOnlinePort( u16TcpPort );
-	//	m_MyApp.getAppGlobals().getUserIdent()->m_DirectConnectId.setPort( u16TcpPort );
-	//}
-
-	//std::string externIp = ui.m_ExternIpEdit->text().toUtf8().constData();
-	//if( externIp.length() )
-	//{
-	//	m_Engine.getEngineSettings().setExternalIp( externIp );
-	//}
-
-	//EngineSettings::EFirewallTestType eFirewallTestType = EngineSettings::eFirewallTestUrlConnectionTest;
-	//if( ui.AssumeNoProxyRadioButton->isChecked() )
-	//{
-	//	eFirewallTestType= EngineSettings::eFirewallTestAssumeNoFirewall;
-	//	if( externIp.length() )
-	//	{
-	//		m_Engine.getMyPktAnnounce().setOnlineIpAddress( externIp.c_str() );
-	//	}
-	//}
-	//else if( ui.AssumeProxyRadioButton->isChecked() )
-	//{
-	//	eFirewallTestType = EngineSettings::eFirewallTestAssumeFirewalled;
-	//}
-	////else if( ui.AssumeIsNetworkServiceNodeButton->isChecked() )
-	////{
-	////	eFirewallTestType = EngineSettings::eFirewallTestIsNetService;
-	////}
-	//m_Engine.getEngineSettings().setFirewallTestSetting( eFirewallTestType );
-	//m_Engine.getEngineSettings().setUseUpnpPortForward( ui.m_UseUpnpCheckBox->isChecked() );
 }
-
-////============================================================================
-//void ActivityNetworkKey::slotApplyButtonClick()
-//{
-//	updateSettingsFromDlg();
-//	QMessageBox::warning(this, tr("Application"), tr("You must restart application for settings to take effect." ) );
-//	accept();
-//}
 
 //============================================================================
 void ActivityNetworkKey::slotExitButtonClick()
@@ -213,24 +93,6 @@ void ActivityNetworkKey::slotYesProxyClick( void )
 //============================================================================
 void ActivityNetworkKey::SetFirewallTest( EngineSettings::EFirewallTestType eFirewallType )
 {
-	//ui.AutoDetectProxyRadioButton->setChecked( false );
-	//ui.AssumeNoProxyRadioButton->setChecked( false );
-	//ui.AssumeProxyRadioButton->setChecked( false );
-
-	//switch( eFirewallType )
-	//{
-	//case EngineSettings::eFirewallTestUrlConnectionTest:
-	//	ui.AutoDetectProxyRadioButton->setChecked( true );
-	//	break;
-
-	//case EngineSettings::eFirewallTestAssumeFirewalled:
-	//	ui.AssumeProxyRadioButton->setChecked( true );
-	//	break;
-
-	//case EngineSettings::eFirewallTestAssumeNoFirewall:
-	//	ui.AssumeNoProxyRadioButton->setChecked( true );
-	//	break;
-	//}
 }
 
 //============================================================================

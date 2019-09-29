@@ -98,8 +98,8 @@ QString DescribeApplet( EApplet applet )
 	case eAppletRemoteControl:			return QObject::tr( "Remote Control" );
 
 	case eAppletTheme:					return QObject::tr( "Theme" );
-    case eAppletNetworkKey:				return QObject::tr( "NetworkKey" );
-    case eAppletNetworkSettings:		return QObject::tr( "NetworkSettings" );
+    case eAppletNetworkKey:				return QObject::tr( "Network Key" );
+    case eAppletNetworkSettings:		return QObject::tr( "Network Settings" );
 
 	case eAppletSettings:				return QObject::tr( "Settings" );
 

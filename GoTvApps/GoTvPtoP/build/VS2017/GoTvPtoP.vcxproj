@@ -585,7 +585,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFileMenu.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFileShare.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFriend.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingLogin.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingNotify.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingOfferToFriend.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingOptions.cpp" />

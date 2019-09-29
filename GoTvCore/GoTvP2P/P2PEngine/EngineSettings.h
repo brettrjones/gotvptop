@@ -44,7 +44,7 @@ public:
 	void						getExternalIp( std::string& strIpAddress );
 
 	void						setTcpIpPort( uint16_t u16IpPort );
-	void						getTcpIpPort( uint16_t& u16IpPort, bool bGetRandomIfDoesntExist = true );
+    uint16_t					getTcpIpPort( bool bGetRandomIfDoesntExist = true );
 
 	void						setMulticastPort( uint16_t u16IpPort );
 	void						getMulticastPort( uint16_t& u16IpPort );
@@ -103,7 +103,7 @@ public:
 	bool						getAllowMulticastBroadcast( void );
 
 	void						setLastFirewallPort( uint16_t u16IpPort );
-	uint16_t							getLastFirewallPort( void );
+	uint16_t					getLastFirewallPort( void );
 
 private:
 	bool						m_Initialized;

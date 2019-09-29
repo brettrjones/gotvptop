@@ -20,8 +20,9 @@
 
 //#ifdef APP_MYP2PWEB
 	#define NET_DEFAULT_NETWORK_NAME			"GoTvPtoPWeb"
-	#define NET_DEFAULT_ANNOUNCE_URL			"http://www.myp2panchor.com:45124"
-	#define NET_DEFAULT_NETSERVICE_URL			"http://www.myp2pconnect.com:45124"
+	#define NET_DEFAULT_ANNOUNCE_URL			"ptop://www.gotvptop.net:45124"
+	#define NET_DEFAULT_NETSERVICE_URL			"ptop://www.gotvptop.net:45124"
+    #define NET_DEFAULT_NETSERVICE_PORT			45124
 //#else
 //	#define NET_DEFAULT_NETWORK_NAME			"TestNet"
 //	#define NET_DEFAULT_ANNOUNCE_URL			"http://www.p2pthing.com:45124"

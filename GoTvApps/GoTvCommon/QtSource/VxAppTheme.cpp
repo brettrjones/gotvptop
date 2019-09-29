@@ -644,7 +644,7 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 	case eThemeTypeDark:
 		m_ThemeColors.push_back( QColor( COLOR_BURNT_ORANGE ) ); //eFocusRect,
 		m_ThemeColors.push_back( QColor( COLOR_BLACK ) ); //eWindowBackground,
-		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eWindowTextColor,
+		m_ThemeColors.push_back( QColor( COLOR_VERY_LIGHT_GREY ) ); //eWindowTextColor,
 
 		m_ThemeColors.push_back( QColor( COLOR_CREAM_WHITE ) ); //eWindowHighlightTextColor,
 		m_ThemeColors.push_back( QColor( COLOR_MEDIUM_GREY ) ); //eTitleBarBackground,

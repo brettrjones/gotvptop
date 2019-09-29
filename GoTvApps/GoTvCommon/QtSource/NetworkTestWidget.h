@@ -33,9 +33,11 @@ public:
 protected slots:
 	//void						gotoWebsite( void );
 	//void						slotNetworkStateChanged( ENetworkStateType eNetworkState );
-    void                        slotRunTestButClick( void );
+    void                        slotRunFullTestButClick( void );
+    void                        slotIsPortOpenButClick( void );
 
 protected:
+    LogWidget*                  getLogWidget( void ) { return ui.m_LogWidget; }
 	//void						setupNetworkTestWidget( void );
 
 	//void						showNoInternetHelp( void );

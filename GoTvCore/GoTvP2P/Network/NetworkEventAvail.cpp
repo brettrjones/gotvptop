@@ -51,7 +51,7 @@ void NetworkEventAvail::runNetworkEvent( void )
 
 	//m_PktAnn.getLanIPv4().setIp( m_LclIp.c_str() );
 	//uint16_t u16TcpPort;
-	//m_Engine.getEngineSettings().getTcpIpPort( u16TcpPort );
+	//m_Engine.getEngineSettings().getTcpIpPort();
 	//m_PktAnn.setOnlinePort( u16TcpPort );
 	//m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
 #ifdef DEBUG_NETWORK_STATE

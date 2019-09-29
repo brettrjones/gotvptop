@@ -23,7 +23,7 @@
 
 //============================================================================
 PopupMenu::PopupMenu( AppCommon& app, QWidget * parent )
-: ActivityBase( OBJNAME_POPUP_MENU, app, parent, eAppletMessenger, Qt::SubWindow )
+: ActivityBase( OBJNAME_POPUP_MENU, app, parent, eAppletMessenger, true, false )
 , m_iMenuItemHeight(34)
 , m_SelectedFriend(NULL)
 {

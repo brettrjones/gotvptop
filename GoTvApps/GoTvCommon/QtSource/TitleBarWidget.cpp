@@ -47,6 +47,7 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 
 	enableAudioControls( false );
 	enableVideoControls( false );
+
 	setCameraButtonVisibility( false );
 	setTrashButtonVisibility( false );
 	setShareButtonVisibility( false );
@@ -54,8 +55,9 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 
 	// everyone except home page has home button and back button but not power off button
 	setPowerButtonVisibility( false );
-	setHomeButtonVisibility( true );
-	setBackButtonVisibility( true );
+	//setHomeButtonVisibility( true );
+    setHomeButtonVisibility( false );
+    setBackButtonVisibility( true );
 
 	connect( ui.m_PowerOffButton,			SIGNAL(clicked()),		this, SLOT(slotPowerButtonClicked()) );
 	connect( ui.m_HomeButton,				SIGNAL( clicked() ),	this, SLOT( slotHomeButtonClicked() ) );

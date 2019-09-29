@@ -20,22 +20,22 @@ class NetSettings : public AnchorSetting
 {
 public:
 	NetSettings();
-	virtual ~NetSettings(){};
+	virtual ~NetSettings() = default;
 
 	NetSettings&				operator =( const NetSettings& rhs );
 
-	void						setMyTcpInPort( uint16_t port )									{ m_u16MyTcpInPort = port; }
-	uint16_t							getMyTcpInPort( void )										{ return m_u16MyTcpInPort; }
-	void						setMyMulticastPort( uint16_t port )								{ m_u16MyMulticastPort = port; }
-	uint16_t							getMyMulticastPort( void )									{ return m_u16MyMulticastPort; }
+	void						setMyTcpInPort( uint16_t port )								{ m_u16MyTcpInPort = port; }
+	uint16_t					getMyTcpInPort( void )										{ return m_u16MyTcpInPort; }
+	void						setMyMulticastPort( uint16_t port )							{ m_u16MyMulticastPort = port; }
+	uint16_t					getMyMulticastPort( void )									{ return m_u16MyMulticastPort; }
 
 	void						setUseUpnpPortForward( bool enable )						{ m_bAttemptPortForward = enable; }
 	bool						getUseUpnpPortForward( void )								{ return m_bAttemptPortForward; }
 
 	void						setUserRelayPermissionCount( int count )					{ m_UserRelayPermissionCount = count; }
-	uint16_t							getUserRelayPermissionCount( void )							{ return m_UserRelayPermissionCount; }
+	uint16_t					getUserRelayPermissionCount( void )							{ return m_UserRelayPermissionCount; }
 	void						setSystemRelayPermissionCount( int count )					{ m_SystemRelayPermissionCount = count; }
-	uint16_t							getSystemRelayPermissionCount( void )						{ return m_SystemRelayPermissionCount; }
+	uint16_t					getSystemRelayPermissionCount( void )						{ return m_SystemRelayPermissionCount; }
 
 	void						setAllowUserLocation( bool enable )							{ m_AllowUserLocation = enable; }
 	bool						getAllowUserLocation( void )								{ return m_AllowUserLocation; }
@@ -46,8 +46,8 @@ public:
 
 protected:
 	//=== vars ===//
-	uint16_t							m_u16MyTcpInPort;
-	uint16_t							m_u16MyMulticastPort;
+	uint16_t					m_u16MyTcpInPort = NET_DEFAULT_NETSERVICE_PORT;
+	uint16_t					m_u16MyMulticastPort;
 	bool						m_bMulticastEnable;
 	bool						m_bAttemptPortForward;
 	int							m_UserRelayPermissionCount;

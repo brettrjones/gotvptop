@@ -276,7 +276,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFileMenu.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFileShare.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFriend.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingLogin.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingNotify.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingOfferToFriend.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingOptions.cpp \

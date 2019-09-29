@@ -361,8 +361,7 @@ void NetworkStateMachine::fromGuiUserLoggedOn( void )
 //============================================================================
 void NetworkStateMachine::logonUpdateFromEngineSettings( EngineSettings& engineSettings )
 {
-	uint16_t u16TcpPort;
-	engineSettings.getTcpIpPort( u16TcpPort );
+	uint16_t u16TcpPort = engineSettings.getTcpIpPort();
 	m_PktAnn.setOnlinePort( u16TcpPort );
 
 	std::string networkName;
@@ -385,11 +384,10 @@ void NetworkStateMachine::restartNetwork( void )
 void NetworkStateMachine::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork )
 {
 	m_LocalNetworkIp = lclIp;
-	uint16_t u16TcpPort;
 	VxSetLclIpAddress( lclIp );
 	//LogMsg( LOG_INFO, "NetworkStateMachine::fromGuiNetworkAvailable\n" );
 
-	m_Engine.getEngineSettings().getTcpIpPort( u16TcpPort );
+    uint16_t u16TcpPort = m_Engine.getEngineSettings().getTcpIpPort();
 	m_PktAnn.setOnlinePort( u16TcpPort );
 	m_PktAnn.getLanIPv4().setIp( lclIp );
 	m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
@@ -467,7 +465,7 @@ void NetworkStateMachine::startUpnpOpenPort( void )
 		uint16_t u16Port;
 		//LogMsg( LOG_INFO, "NetworkStateMachine::startUpnpOpenPort\n" );
 
-		m_Engine.getEngineSettings().getTcpIpPort( u16Port );
+        u16Port = m_Engine.getEngineSettings().getTcpIpPort();
 		if( u16Port != m_PktAnn.getOnlinePort() )
 		{
 #ifdef DEBUG_PTOP_NETWORK_STATE

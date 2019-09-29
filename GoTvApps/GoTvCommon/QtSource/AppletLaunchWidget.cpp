@@ -40,7 +40,20 @@ VxPushButton * AppletLaunchWidget::getButton( void )
 //============================================================================
 void AppletLaunchWidget::slotAppletIconPressed( void )
 {
-	m_MyApp.launchApplet( m_AppletType, m_MyApp.getAppletFrame( m_AppletType ) );
-	emit signalAppletLaunchClicked( m_AppletType );
+    if( m_MyApp.getIsAppInitialized()
+        || ( eAppletKodi == m_AppletType )
+        || ( eAppletUserIdentity == m_AppletType )
+        || ( eAppletPlayerVideo == m_AppletType )
+        || ( eAppletPlayerMusic == m_AppletType )
+        || ( eAppletPlayerPhoto == m_AppletType )
+        )
+    {
+        m_MyApp.launchApplet( m_AppletType, m_MyApp.getAppletFrame( m_AppletType ) );
+        emit signalAppletLaunchClicked( m_AppletType );
+    }
+    else
+    {
+        QMessageBox::information( this, QObject::tr( "Application Not Ready" ), QObject::tr( "Cannot Launch Applet Until Application Has Initialized" ) );
+    }
 }
 

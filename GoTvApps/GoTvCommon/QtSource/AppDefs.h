@@ -70,8 +70,9 @@ enum EApplet
 	eAppletPlugins,
 	eAppletTheme,
 	eAppletSettings,
-    eAppletNetworkKey,
     eAppletNetworkSettings,
+    eAppletNetworkKey,
+
     eAppletNetHostingPage,	// page to setup group or group listing hosts
 
 	eMaxBasicApplets, // marker.. past here is hosting applets

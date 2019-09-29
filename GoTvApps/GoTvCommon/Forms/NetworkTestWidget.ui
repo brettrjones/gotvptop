@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Applete Network Key</string>
+   <string>Network Test Widget</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -70,7 +70,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="m_RunTestButton">
+       <widget class="QPushButton" name="m_RunFullTestButton">
         <property name="text">
          <string>Run Full Network Test</string>
         </property>

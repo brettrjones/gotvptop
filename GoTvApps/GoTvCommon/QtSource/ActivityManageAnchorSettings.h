@@ -56,6 +56,6 @@ protected:
 
 	//=== vars ===//
 	Ui::ManageAnchorSettingsDlg	ui; 
-	AppCommon&				m_MyApp;
+	AppCommon&				    m_MyApp;
 	NetSettings					m_NetSettings;
 };

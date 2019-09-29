@@ -19,15 +19,7 @@
 # include "WS2tcpip.h"
 #endif // TARGET_OS_WINDOWS
 
-
-//#ifdef TARGET_OS_WINDOWS
-//#include <WinSock2.h>
-//#include <Ws2tcpip.h>  
-////#define EINPROGRESS	WSAEWOULDBLOCK 
-//#endif // TARGET_OS_WINDOWS
-
-#define EIM_ALIVE_TIMEDOUT  20000
-
+#define EIM_ALIVE_TIMEDOUT          20000
 
 #define WEBSITE_CONNECT_TIMEOUT		12000
 #define NETSERVICE_CONNECT_TIMEOUT	15000
@@ -39,12 +31,13 @@
 #define ROUTER_RECIEVE_TIMEOUT		8000
 
 // error codes
-#define VX_NO_HOST_IPS_FOUND	-1
-#define VX_INVALID_SOCK_ADDRESS -2
+#define VX_NO_HOST_IPS_FOUND	    -1
+#define VX_INVALID_SOCK_ADDRESS     -2
 
-#define VX_MAX_HOST_IPS 10 //maximum host ips returned by
+#define VX_MAX_HOST_IPS             10 //maximum host ips returned by VxGetLocalIps
 
 #ifdef __cplusplus
+
 #include "InetAddress.h"
 
 //! initialize sockets
@@ -57,7 +50,7 @@ bool							VxSplitHostAndFile( const char * pFullUrl,			// full url.. example ht
 													std::string& strRetFileName,	// return file name.. images/me.jpg
 													uint16_t& u16RetPort );				// return port if specified else return 80 as default	
 void							VxIpInNetOrderToString( uint32_t u32IpAddr, std::string& retIp );
-uint32_t								VxStringToIpInNetOrder( std::string ip );
+uint32_t						VxStringToIpInNetOrder( std::string ip );
 std::string						VxIpToString( struct sockaddr * addr );
 void							VxFillHints( struct addrinfo& oHints, bool bUdpSkt = false, bool ipv6Only = false );
 void							VxGetLocalIps( std::vector<InetAddress>& aRetIpAddress );

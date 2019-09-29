@@ -43,8 +43,7 @@ ActivityChooseIpPort::ActivityChooseIpPort(	AppCommon& app, QWidget * parent )
 //============================================================================
 void ActivityChooseIpPort::updateValues()
 {
-	uint16_t u16TcpPort = 0;
-	m_Engine.getEngineSettings().getTcpIpPort(u16TcpPort);
+	uint16_t u16TcpPort = m_Engine.getEngineSettings().getTcpIpPort();
 	QString strPort;
 	strPort.sprintf("%d", u16TcpPort);
 	ui.IpPortEdit->setText(strPort);

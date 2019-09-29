@@ -79,8 +79,7 @@ void EngineSettings::getNetSettings( NetSettings& netSettings )
 	//getAltNetServiceWebsiteUrl( strValue );
 	//netSettings.setAltNetServiceWebsiteUrl( strValue.c_str() );
 
-	uint16_t u16Port;
-	getTcpIpPort( u16Port );
+	uint16_t u16Port = getTcpIpPort();
 	netSettings.setMyTcpInPort( u16Port );
 
 	getMulticastPort( u16Port );
@@ -138,14 +137,25 @@ void EngineSettings::setExternalIp( std::string& strIpAddress )
 }
 
 //============================================================================
-void EngineSettings::getTcpIpPort( uint16_t& u16IpPort, bool bGetRandomIfDoesntExist )
+uint16_t EngineSettings::getTcpIpPort( bool bGetRandomIfDoesntExist )
 {
+    uint16_t u16IpPort;
 	getIniValue( MY_SETTINGS_KEY, "TcpIpPort", u16IpPort, 0 );
-	if( ( 0 == u16IpPort ) && bGetRandomIfDoesntExist )
+	if( 0 == u16IpPort )
 	{
-		u16IpPort = VxGetRandomTcpPort();
+        if( bGetRandomIfDoesntExist )
+        {
+            u16IpPort = VxGetRandomTcpPort();
+        }
+        else
+        {
+            u16IpPort = NET_DEFAULT_NETSERVICE_PORT;
+        }
+
 		setTcpIpPort( u16IpPort );
 	}
+
+    return u16IpPort;
 }
 
 //============================================================================
