@@ -23,9 +23,10 @@
 AppletUserIdentity::AppletUserIdentity( AppCommon& app, QWidget * parent )
 : AppletBase( OBJNAME_APPLET_USER_IDENTITY, app, parent )
 {
-	m_EAppletType = eAppletUserIdentity;
+    setAppletType( eAppletUserIdentity );
+    ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
+    ui.m_PermissionWidget->setPluginType( ePluginTypeWebServer );
 
 	m_MyApp.activityStateChange( this, true );
 }

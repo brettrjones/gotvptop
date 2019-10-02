@@ -13,7 +13,7 @@
 //============================================================================
 
 #include "AppletMgr.h"
-#include "ActivityAbout.h"
+#include "AppletAboutApp.h"
 #include "ActivityBase.h"
 #include "AppCommon.h"
 #include "AppletRemoteControl.h"
@@ -26,9 +26,16 @@
 #include "AppletGroupHost.h"
 #include "AppletGroupAnchor.h"
 #include "AppletGoTvPtoPNetworkHost.h"
+#include "AppletLibrary.h"
 #include "AppletNetHostingPage.h"
-#include "AppletNetworkKey.h"
 #include "AppletNetworkSettings.h"
+#include "AppletPersonalRecorder.h"
+#include "AppletShareServicesPage.h"
+#include "AppletSharedContent.h"
+#include "AppletSharedWebCam.h"
+#include "AppletStoryboard.h"
+#include "AppletUserIdentity.h"
+
 #include "HomeWindow.h"
 
 
@@ -87,7 +94,7 @@ QFrame *  AppletMgr::getAppletFrame( EApplet applet )
 //============================================================================
 void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 {
-    ActivityAbout * activity;
+//    ActivityAbout * activity;
 	ActivityBase * appletDialog = findAppletDialog( applet );
 	if( 0 != appletDialog )
 	{
@@ -103,42 +110,51 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 	QString appletMissingTitle = "Applet Not Yet Implemented";
 	switch( applet )
 	{
+    case eAppletAboutGoTvPtoP:
+        appletDialog = new AppletAboutApp( m_MyApp, parent );
+        break;
     case eAppletKodi:
         appletDialog = new AppletKodi( m_MyApp, parent );
         break;
-	case eAppletPlayerVideo:
-		appletDialog = new AppletPlayerVideo( m_MyApp, parent );
-		break;
-	case eAppletPlayerMusic:
-		m_MyApp.errMessageBox( appletMissingTitle, "MusicPlayer Not Implemented" );
-		return;
-	case eAppletPlayerPhoto:
-		m_MyApp.errMessageBox( appletMissingTitle, "ImagePlayer Not Implemented" );
-		return;
-	case eAppletStreamViewerVideo:
-		m_MyApp.errMessageBox( appletMissingTitle, "VideoStreamViewer Not Implemented" );
-		return;
-	case eAppletStreamViewerCam:
-		m_MyApp.errMessageBox( appletMissingTitle, "CamStreamViewer Not Implemented" );
-		return;
-	case eAppletStreamViewerMusic:
-		m_MyApp.errMessageBox( appletMissingTitle, "MusicStreamViewer Not Implemented" );
-		return;
-	case eAppletRemoteControl:
-		appletDialog = new AppletRemoteControl( m_MyApp, parent );
-		break;
-	case eAppletPlugins:
-		m_MyApp.errMessageBox( appletMissingTitle, "Applet Plugins Not Implemented" );
-		return;
+//	case eAppletPlayerVideo:
+//		appletDialog = new AppletPlayerVideo( m_MyApp, parent );
+//		break;
+//	case eAppletPlayerMusic:
+//		m_MyApp.errMessageBox( appletMissingTitle, "MusicPlayer Not Implemented" );
+//		return;
+//	case eAppletPlayerPhoto:
+//		m_MyApp.errMessageBox( appletMissingTitle, "ImagePlayer Not Implemented" );
+//		return;
+	//case eAppletStreamViewerVideo:
+	//	m_MyApp.errMessageBox( appletMissingTitle, "VideoStreamViewer Not Implemented" );
+	//	return;
+	//case eAppletStreamViewerCam:
+	//	m_MyApp.errMessageBox( appletMissingTitle, "CamStreamViewer Not Implemented" );
+	//	return;
+	//case eAppletStreamViewerMusic:
+	//	m_MyApp.errMessageBox( appletMissingTitle, "MusicStreamViewer Not Implemented" );
+	//	return;
+	//case eAppletRemoteControl:
+	//	appletDialog = new AppletRemoteControl( m_MyApp, parent );
+	//	break;
+	//case eAppletPlugins:
+	//	m_MyApp.errMessageBox( appletMissingTitle, "Applet Plugins Not Implemented" );
+	//	return;
+    case eAppletPersonalRecorder:
+        appletDialog = new AppletPersonalRecorder( m_MyApp, parent );
+        return;
+    case eAppletLibrary:
+        appletDialog = new AppletLibrary( m_MyApp, parent );
+    	return;
 	case eAppletTheme:
 		appletDialog = new AppletTheme( m_MyApp, parent );
 		break;
     case eAppletNetworkSettings:
         appletDialog = new AppletNetworkSettings( m_MyApp, parent );
         break;
-    case eAppletNetworkKey:
-        appletDialog = new AppletNetworkKey( m_MyApp, parent );
-        break;
+    //case eAppletNetworkKey:
+   //     appletDialog = new AppletNetworkKey( m_MyApp, parent );
+   //     break;
 	case eAppletSettings:
 		appletDialog = new AppletSettings( m_MyApp, parent );
 		break;
@@ -147,6 +163,9 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
         break;
     case eAppletNetHostingPage:
         appletDialog = new AppletNetHostingPage( m_MyApp, parent );
+        break;
+    case eAppletShareServicesPage:
+        appletDialog = new AppletShareServicesPage( m_MyApp, parent );
         break;
     case eAppletGroupHost:
         appletDialog = new AppletGroupHost( m_MyApp, parent );
@@ -157,29 +176,40 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletGoTvPtoPNetworkHost:
         appletDialog = new AppletGoTvPtoPNetworkHost( m_MyApp, parent );
         break;
-	case ePluginAppletCamProvider:
-		m_MyApp.errMessageBox( appletMissingTitle, "Video Player Not Implemented" );
-		return;
-	case ePluginAppletGoTvStation:
-		m_MyApp.errMessageBox( appletMissingTitle, "Video Player Not Implemented" );
-		return;
-	case ePluginAppletGoTvNetworkHost:
-		m_MyApp.errMessageBox( appletMissingTitle, "Video Player Not Implemented" );
-		return;
+//	case ePluginAppletCamProvider:
+//		m_MyApp.errMessageBox( appletMissingTitle, "Cam Provider Not Implemented" );
+//		return;
+//	case ePluginAppletGoTvStation:
+//		m_MyApp.errMessageBox( appletMissingTitle, "Video Player Not Implemented" );
+//		return;
+//	case ePluginAppletGoTvNetworkHost:
+//		m_MyApp.errMessageBox( appletMissingTitle, "Network Host Not Implemented" );
+//		return;
 	case eAppletHomePage:
-		m_MyApp.errMessageBox( appletMissingTitle, "Video Player Not Implemented" );
+		m_MyApp.errMessageBox( appletMissingTitle, "Home Page Not Implemented" );
 		return;
 	case eAppletMessenger:
-		m_MyApp.errMessageBox( appletMissingTitle, "Video Player Not Implemented" );
+		m_MyApp.errMessageBox( appletMissingTitle, "Messenger Not Implemented" );
 		return;
 	case eAppletUnknown:
-		m_MyApp.errMessageBox( appletMissingTitle, "Video Player Not Implemented" );
+		m_MyApp.errMessageBox( appletMissingTitle, "Unknown Not Implemented" );
 		return;
     case eAppletUserIdentity:
         //m_MyApp.errMessageBox( appletMissingTitle, "User Identity Not Implemented" );
-        activity = new ActivityAbout( m_MyApp, parent );
-        activity->show();
-        return;
+        //activity = new ActivityAbout( m_MyApp, parent );
+        //activity->show();
+        //return;
+        appletDialog = new AppletUserIdentity( m_MyApp, parent );
+        break;
+    case eAppletSharedContent:
+        appletDialog = new AppletSharedContent( m_MyApp, parent );
+        break;
+    case eAppletSharedWebCam:
+        appletDialog = new AppletSharedWebCam( m_MyApp, parent );
+        break;
+    case eAppletStoryboard:
+        appletDialog = new AppletStoryboard( m_MyApp, parent );
+        break;
 	default:
 		m_MyApp.errMessageBox2( "AppCommon::launchApplet", "Invalid Applet enum %d\n", applet );
 		return;

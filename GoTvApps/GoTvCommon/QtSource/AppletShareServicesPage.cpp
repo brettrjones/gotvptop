@@ -12,7 +12,7 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "AppletNetHostingPage.h"
+#include "AppletShareServicesPage.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "VxTilePositioner.h"
@@ -22,23 +22,32 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletNetHostingPage::AppletNetHostingPage( AppCommon& app, QWidget * parent )
-: AppletLaunchPage( app, parent, eAppletNetHostingPage, OBJNAME_APPLET_NET_HOSTING_PAGE )
+AppletShareServicesPage::AppletShareServicesPage( AppCommon& app, QWidget * parent )
+: AppletLaunchPage( app, parent, eAppletShareServicesPage, OBJNAME_APPLET_SHARE_SEVICES_PAGE )
 , m_IsInitialized( false )
 {
-    setAppletType( eAppletNetHostingPage );
+    setAppletType( eAppletShareServicesPage );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
-	setupAppletNetHostingPage();
+	setupAppletShareServicesPage();
 	setHomeButtonVisibility( true );
 	setBackButtonVisibility( true );
 	setPowerButtonVisibility( false );
 	setExpandWindowVisibility( true );
 
     slotRepositionToParent();
+ //   connectSignals();
+
+    // save original values so can restore them if need be
+ //   m_Engine.getEngineSettings().getAnchorWebsiteUrl( m_OrigAnchorUrl );
+    //m_Engine.getEngineSettings().getNetworkName( m_OrigNetworkName );
+    //m_Engine.getEngineSettings().getNetServiceWebsiteUrl( m_OrigConnectionTestUrl );
+
+    //updateDlgFromSettings();
+
 }
 
 //============================================================================
-void AppletNetHostingPage::slotPowerButtonClicked( void )
+void AppletShareServicesPage::slotPowerButtonClicked( void )
 {
 	if( m_MyApp.confirmAppShutdown( this ) )
 	{
@@ -47,13 +56,13 @@ void AppletNetHostingPage::slotPowerButtonClicked( void )
 }
 
 //============================================================================
-void AppletNetHostingPage::setupAppletNetHostingPage( void )
+void AppletShareServicesPage::setupAppletShareServicesPage( void )
 {
 	if( ! m_IsInitialized )
     {
         m_AppletList.clear();
         // create launchers for the basic applets
-        for( int i = int( eMaxBasicApplets + 1 ); i < eMaxHostApplets; i++ )
+        for( int i = int( eMaxHostApplets + 1 ); i < eMaxSharedServicesApplets; i++ )
         {
             AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ( EApplet )i, this );
             m_AppletList.push_back( applet );
@@ -64,15 +73,15 @@ void AppletNetHostingPage::setupAppletNetHostingPage( void )
 }
 
 //============================================================================
-void AppletNetHostingPage::resizeEvent( QResizeEvent * ev )
+void AppletShareServicesPage::resizeEvent( QResizeEvent * ev )
 {
 	ActivityBase::resizeEvent( ev );
-	//LogMsg( LOG_DEBUG, "AppletNetHostingPage::resizeEvent total height %d contentsFrame height %d\n", this->height(), getContentItemsFrame()->height() );
+	//LogMsg( LOG_DEBUG, "AppletShareServicesPage::resizeEvent total height %d contentsFrame height %d\n", this->height(), getContentItemsFrame()->height() );
 	getMyApp().getTilePositioner().repositionTiles( m_AppletList, getContentItemsFrame(), 2 );
 }
 
 //============================================================================
-void AppletNetHostingPage::showEvent( QShowEvent * showEvent )
+void AppletShareServicesPage::showEvent( QShowEvent * showEvent )
 {
     AppletLaunchPage::showEvent( showEvent );
     getMyApp().getTilePositioner().repositionTiles( m_AppletList, getContentItemsFrame(), 2 );

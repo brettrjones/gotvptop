@@ -26,7 +26,7 @@ AppletLaunchPage::AppletLaunchPage( AppCommon& app, QWidget * parent, EApplet eA
 : ActivityBase( objName, app, parent, eAppletType )
 , m_IsInitialized( false )
 {
-    if( !( eAppletNetHostingPage == eAppletType ) )
+    if( !( ( eAppletNetHostingPage == eAppletType ) || ( eAppletShareServicesPage == eAppletType ) ) )
     {
         setTitleBarText( QObject::tr( "Home" ) );
         setupAppletLaunchPage();
@@ -60,23 +60,23 @@ void AppletLaunchPage::setupAppletLaunchPage( void )
         }
 
         // optional features applets
-        if( getMyApp().getAppSettings().getFeatureEnable( eAppFeatureProvider ) )
-        {
-            AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ePluginAppletCamProvider, this );
-            m_AppletList.push_back( applet );
-        }
+        //if( getMyApp().getAppSettings().getFeatureEnable( eAppFeatureProvider ) )
+        //{
+        //    AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ePluginAppletCamProvider, this );
+        //    m_AppletList.push_back( applet );
+        //}
 
-        if( getMyApp().getAppSettings().getFeatureEnable( eAppFeatureStation ) )
-        {
-            AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ePluginAppletGoTvStation, this );
-            m_AppletList.push_back( applet );
-        }
+        //if( getMyApp().getAppSettings().getFeatureEnable( eAppFeatureStation ) )
+        //{
+        //    AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ePluginAppletGoTvStation, this );
+        //    m_AppletList.push_back( applet );
+        //}
 
-        if( getMyApp().getAppSettings().getFeatureEnable( eAppFeatureNetworkHost ) )
-        {
-            AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, eAppletNetHostingPage, this );
-            m_AppletList.push_back( applet );
-        }
+        //if( getMyApp().getAppSettings().getFeatureEnable( eAppFeatureNetworkHost ) )
+        //{
+        //    AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, eAppletNetHostingPage, this );
+        //    m_AppletList.push_back( applet );
+        //}
 
         m_IsInitialized = true;
     }

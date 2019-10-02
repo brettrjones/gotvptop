@@ -13,18 +13,31 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "AppletBase.h"
+#include "AppletLaunchPage.h"
 
-class AppletSharedContent : public AppletBase
+class VxWidgetBase;
+
+class AppletShareServicesPage : public AppletLaunchPage
 {
 	Q_OBJECT
 public:
-	AppletSharedContent( AppCommon& app, QWidget * parent );
-	virtual ~AppletSharedContent();
+	AppletShareServicesPage( AppCommon& app, QWidget * parent );
+	virtual ~AppletShareServicesPage() = default;
 
 
+protected slots:
+	void						slotPowerButtonClicked( void );
 
 protected:
+	virtual void				showEvent( QShowEvent * );
+	//virtual void				hideEvent( QHideEvent * );
+	void						resizeEvent( QResizeEvent * );
+
+private:
+	void						setupAppletShareServicesPage( void );
+
+	bool						m_IsInitialized;
+	QVector<VxWidgetBase*>		m_AppletList;
 };
 
 

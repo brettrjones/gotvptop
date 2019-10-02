@@ -1,5 +1,5 @@
 //============================================================================
-// Copyright (C) 2019 Brett R. Jones
+// Copyright (C) 2018 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -12,7 +12,7 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "AppletSharedContent.h"
+#include "AppletSharedWebCam.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
@@ -20,10 +20,10 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSharedContent::AppletSharedContent( AppCommon& app, QWidget * parent )
-: AppletBase( OBJNAME_APPLET_SHARED_CONTENT, app, parent )
+AppletSharedWebCam::AppletSharedWebCam( AppCommon& app, QWidget * parent )
+: AppletBase( OBJNAME_APPLET_SHARED_WEB_CAM, app, parent )
 {
-	m_EAppletType = eAppletSharedContent;
+	m_EAppletType = eAppletSharedWebCam;
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
 
@@ -31,7 +31,7 @@ AppletSharedContent::AppletSharedContent( AppCommon& app, QWidget * parent )
 }
 
 //============================================================================
-AppletSharedContent::~AppletSharedContent()
+AppletSharedWebCam::~AppletSharedWebCam()
 {
     m_MyApp.activityStateChange( this, false );
 }

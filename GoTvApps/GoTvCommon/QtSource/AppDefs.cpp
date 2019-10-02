@@ -45,19 +45,20 @@ EMyIcons GetAppletIcon( EApplet applet )
 	case eAppletHomePage:				return eMyIconHome;
     case eAppletKodi:				    return eMyIconKodi;
     case eAppletUserIdentity:			return eMyIconUserIdentity;
-    case eAppletSharedContent:			return eMyIconSharedContent;
 	case eAppletMessenger:				return eMyIconMessenger;
 	case eAppletPlayerVideo:			return eMyIconVideoPhoneNormal;
-	case eAppletPlayerMusic:			return eMyIconMusic;
-	case eAppletPlayerPhoto:			return eMyIconGallery;
-	case eAppletStreamViewerVideo:		return eMyIconVideoStreamViewer;
-	case eAppletStreamViewerCam:		return eMyIconCamStreamViewer;
-	case eAppletStreamViewerMusic:		return eMyIconMusicStreamPlayer;
-	case eAppletRemoteControl:			return eMyIconRemoteControl;
-	case eAppletPlugins:				return eMyIconPlugins;
+//	case eAppletPlayerMusic:			return eMyIconMusic;
+//	case eAppletPlayerPhoto:			return eMyIconGallery;
+//	case eAppletStreamViewerVideo:		return eMyIconVideoStreamViewer;
+//	case eAppletStreamViewerCam:		return eMyIconCamStreamViewer;
+//	case eAppletStreamViewerMusic:		return eMyIconMusicStreamPlayer;
+	//case eAppletRemoteControl:			return eMyIconRemoteControl;
+	//case eAppletPlugins:				return eMyIconPlugins;
+    case eAppletPersonalRecorder:		return eMyIconNotepadNormal;
+    case eAppletLibrary:				return eMyIconLibraryNormal;
 
 	case eAppletTheme:					return eMyIconTheme;
-    case eAppletNetworkKey:				return eMyIconNetworkKey;
+    //case eAppletNetworkKey:				return eMyIconNetworkKey;
     case eAppletNetworkSettings:	    return eMyIconNetworkSettings;
 	case eAppletSettings:				return eMyIconSettings;
 
@@ -66,6 +67,12 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletGroupHost:              return eMyIconGroupHost;
     case eAppletGroupAnchor:            return eMyIconGroupAnchor;
     case eAppletGoTvPtoPNetworkHost:    return eMyIconNetHosting;
+
+    case eAppletShareServicesPage:      return eMyIconShareServices;
+    case eAppletStoryboard:             return eMyIconStoryBoardNormal;
+    case eAppletSharedWebCam:           return eMyIconCamStreamProvider;
+    case eAppletSharedContent:			return eMyIconSharedContent;
+    case eAppletAboutGoTvPtoP:			return eMyIconApp;
 
 	case eMaxBasicApplets:				return eMyIconUnknown; // this should never happen
 
@@ -85,20 +92,22 @@ QString DescribeApplet( EApplet applet )
 	switch( applet )
 	{
 	case eAppletHomePage:				return QObject::tr( "Home" );
+    case eAppletAboutGoTvPtoP:		    return QObject::tr( "About GoTv Person to Person" );
     case eAppletKodi:				    return QObject::tr( "Kodi (TM)" );
     case eAppletUserIdentity:			return QObject::tr( "User Identity" );
-    case eAppletSharedContent:			return QObject::tr( "Shared Content" );
 	case eAppletMessenger:				return QObject::tr( "Messenger" );
 	case eAppletPlayerVideo:			return QObject::tr( "Video Player" );
-	case eAppletPlayerMusic:			return QObject::tr( "Music Player" );
-	case eAppletPlayerPhoto:			return QObject::tr( "Image Gallery" );
-	case eAppletStreamViewerVideo:		return QObject::tr( "Video Streams" );
-	case eAppletStreamViewerCam:		return QObject::tr( "Cam Streams" );
-	case eAppletStreamViewerMusic:		return QObject::tr( "Music Streams" );
-	case eAppletRemoteControl:			return QObject::tr( "Remote Control" );
+	//case eAppletPlayerMusic:			return QObject::tr( "Music Player" );
+	//case eAppletPlayerPhoto:			return QObject::tr( "Image Gallery" );
+	//case eAppletStreamViewerVideo:		return QObject::tr( "Video Streams" );
+//	case eAppletStreamViewerCam:		return QObject::tr( "Search Cam Streams" );
+	//case eAppletStreamViewerMusic:		return QObject::tr( "Music Streams" );
+	//case eAppletRemoteControl:			return QObject::tr( "Remote Control" );
+    case eAppletPersonalRecorder:		return QObject::tr( "Personal Notes And Records" );
+    case eAppletLibrary:				return QObject::tr( "My Library Of Media" );
 
 	case eAppletTheme:					return QObject::tr( "Theme" );
-    case eAppletNetworkKey:				return QObject::tr( "Network Key" );
+    //case eAppletNetworkKey:				return QObject::tr( "Network Key" );
     case eAppletNetworkSettings:		return QObject::tr( "Network Settings" );
 
 	case eAppletSettings:				return QObject::tr( "Settings" );
@@ -108,6 +117,11 @@ QString DescribeApplet( EApplet applet )
     case eAppletGroupHost:              return QObject::tr( "Host A Group" );
     case eAppletGroupAnchor:            return QObject::tr( "Host List Of Groups" );
     case eAppletGoTvPtoPNetworkHost:    return QObject::tr( "Host A GoTvPtoP Network" );
+
+    case eAppletShareServicesPage:      return QObject::tr( "Share with others sevices" );
+    case eAppletStoryboard:             return QObject::tr( "Share story (Blog)" );
+    case eAppletSharedWebCam:           return QObject::tr( "Share your web cam" );
+    case eAppletSharedContent:			return QObject::tr( "Share Media Files" );
 
 	case ePluginAppletCamProvider:		return QObject::tr( "Provide Cam Stream" );
 	case ePluginAppletGoTvStation:		return QObject::tr( "Manage Station" );

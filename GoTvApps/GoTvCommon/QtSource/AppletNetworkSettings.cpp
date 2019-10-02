@@ -49,6 +49,15 @@ AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
     ui.m_NetworkKeyButton->setIcon( eMyIconNetworkKey );
 
     connectSignals();
+
+    // save original values so can restore them if need be
+//   m_Engine.getEngineSettings().getAnchorWebsiteUrl( m_OrigAnchorUrl );
+   //m_Engine.getEngineSettings().getNetworkName( m_OrigNetworkName );
+   //m_Engine.getEngineSettings().getNetServiceWebsiteUrl( m_OrigConnectionTestUrl );
+
+   //updateDlgFromSettings();
+
+
     updateDlgFromSettings();
 
 	m_MyApp.activityStateChange( this, true );

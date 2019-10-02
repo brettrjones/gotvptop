@@ -43,6 +43,7 @@ plugin.svg
 radio-tower.svg
 remote-control.svg
 settings-gear.svg
+share-services.svg
 speech-bubble.svg
 speech-bubble-disabled.svg
 star-empty.svg

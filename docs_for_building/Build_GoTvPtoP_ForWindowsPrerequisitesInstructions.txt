@@ -2,10 +2,10 @@
 External Prerequisites to install GoTvP2P or KodiP2P
 
 === For reference here is my install paths. ====
-Python - C:/Python27
+should not be required but if is then Python - C:/Python27
 YASM - default install
 Visual Studio 2015 Community Edition - default install location
-Qt 5.12.2 - F:/Qt/5.12.2
+Qt 5.12.3 - F:/Qt/5.12.3
 Java jre - F:/android/jre1.8.0_131
 Java jdk - F:/android/jdk1.8.0_131
 Android NDK - F:\android\android-ndk-windows-x86_64\android-ndk-r18b
@@ -16,22 +16,32 @@ Android Studio F:/android/AndroidStudio
 ANDROID_NDK_ROOT F:\android\android-ndk-windows-x86_64\android-ndk-r18b
 JAVA_HOME  F:\android\jdk1.8.0_131
 JRE_HOME F:\android\jre1.8.0_131
+QTDIR F:\Qt\Qt5.12\5.12.3\msvc2017_64
 
-// Should not be requered.. Python is build into project
+// Should not be required.. Python is build into project
 // PythonPath C:\Python27\Lib;C:\Python27\DLLs;C:\Python27\Lib\lib-tk
-QTDIR F:\Qt\Qt5.12\5.12.2\msvc2017_64
 
 
 === GoTvPtoP For Windows Prerequisites ====
-1.) Python 2.7.14
+1.) Python 2.7.14 ( should not be required )
 2.) YASM 
 3.) visual studio 2017 ( Community edition is fine )
 	a.) Follow the instructions of visual studio install for kodi at https://github.com/xbmc/xbmc/blob/master/docs/README.md
+		NOTE: it is important to install the specified components or GoTvPtoP will not compile
 	b.) if you see "failed to locate a 64-bit linker on %PATH%" then must manually add it to front of PATH enviroment variable ( bug in VS2017 )
 		my path to linker was "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
-4.) Qt 5.12.2 ( Tested with Qt 5.12.2 but other versions may work )
+4.) Qt 5.12.3 ( Tested with Qt 5.12.3 but other versions may work )
 5.) Java Oracle JDK/JRE 1.8.0_131 
 6.) MingWin is NOT required.. even for ffmpeg build ( have removed all dependecy on migwin and made substitute functions )
+
+=== check enviroment ===
+from command line run nasm
+if nasm is not found then will need to add to path. Mine was 
+C:\Program Files (x86)\NASM
+from command line run yasm
+if nasm is not found then will need to add to path. Mine was 
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin
+
 
 
 === GoTvPtoP Android GoTvP2P custom build ====
@@ -39,7 +49,7 @@ After many frustrating days attempting to work within qt android frame work I di
 
 1.) Install AndroidStudio to F:/android/AndroidStudio
 2.) add gradle to enviroment variables 
-	edit path enviroment variable and add F:\Qt\Qt5.12.2\Tools\QtCreator\bin 
+	edit path enviroment variable and add F:\Qt\Qt5.12.3\Tools\QtCreator\bin 
 	and F:\android\AndroidStudio\gradle\gradle-4.10.1\bin
 	and F:\android\android-sdk\platform-tools
 	

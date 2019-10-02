@@ -210,5 +210,6 @@
         <file>Resources/wireless-setup.svg</file>
         <file>Resources/key-disabled.svg</file>
         <file>Resources/key-enabled.svg</file>
+        <file>Resources/share-services.svg</file>
     </qresource>
 </RCC>

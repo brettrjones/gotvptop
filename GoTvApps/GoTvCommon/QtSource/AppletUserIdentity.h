@@ -15,6 +15,8 @@
 
 #include "AppletBase.h"
 
+#include "ui_AppletIdentity.h"
+
 class AppletUserIdentity : public AppletBase
 {
 	Q_OBJECT
@@ -25,6 +27,7 @@ public:
 
 
 protected:
+    Ui::AppletIdentityClass		ui;
 };
 
 

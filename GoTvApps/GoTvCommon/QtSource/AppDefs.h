@@ -57,23 +57,23 @@ enum EApplet
     eAppletKodi,
     eAppletUserIdentity,
     eAppletGroupUser,	// user who can join group
-    eAppletSharedContent,
-	eAppletMessenger,
-	eAppletPlayerVideo,
-	eAppletPlayerMusic,
-	eAppletPlayerPhoto,
-	eAppletStreamViewerVideo,
-	eAppletStreamViewerCam,
-	eAppletStreamViewerMusic,
-	eAppletRemoteControl,
-
-	eAppletPlugins,
-	eAppletTheme,
-	eAppletSettings,
-    eAppletNetworkSettings,
-    eAppletNetworkKey,
+    eAppletMessenger,
+    eAppletShareServicesPage, // page to setup share with others services
+    eAppletPersonalRecorder,
+    eAppletLibrary,
+//	eAppletPlayerMusic,
+//	eAppletPlayerPhoto,
+//	eAppletStreamViewerVideo,
+//	eAppletStreamViewerCam,
+//	eAppletStreamViewerMusic,
+//  eAppletRemoteControl,
+	//eAppletPlugins,
 
     eAppletNetHostingPage,	// page to setup group or group listing hosts
+    eAppletTheme,
+    eAppletSettings,
+    eAppletNetworkSettings,
+    eAppletAboutGoTvPtoP,
 
 	eMaxBasicApplets, // marker.. past here is hosting applets
 
@@ -81,8 +81,16 @@ enum EApplet
     eAppletGroupAnchor, // network service for group hosts.. search, provide ip address etc
     eAppletGoTvPtoPNetworkHost, // network service for a gotvptop network.. privide fixed ip address, group anchor lists
 
+    eMaxHostApplets, // marker.. past here is optional applets for user share services
 
-    eMaxHostApplets, // marker.. past here is optional applets based on feature
+    eAppletStoryboard,
+    eAppletSharedWebCam,
+    eAppletSharedContent,
+
+
+    eMaxSharedServicesApplets, // marker.. past here is optional applets based on feature
+
+    eAppletPlayerVideo,
 
 	ePluginAppletCamProvider,
 	ePluginAppletGoTvStation,

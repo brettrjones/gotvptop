@@ -283,5 +283,7 @@ enum EMyIcons
 	eMyIconGroupHost,
 	eMyIconGroupAnchor,
 
+    eMyIconShareServices,
+
 	eMaxMyIcon	// must be last
 };

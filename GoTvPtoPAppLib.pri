@@ -180,6 +180,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameLogic.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletTheme.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletRemoteControl.h \
@@ -195,10 +196,14 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkKey.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSharedContent.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareServicesPage.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletSharedWebCam.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletStoryboard.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppGlobals.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppProfile.h \
@@ -413,6 +418,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameDefs.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameLogic.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameWidget.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupUser.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupHost.cpp \
@@ -423,6 +429,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletRemoteControl.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettings.cpp \
@@ -432,6 +439,9 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareServicesPage.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletSharedWebCam.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletStoryboard.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommon.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommonAudio.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommonEvents.cpp \
@@ -582,11 +592,13 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAbout.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPlayerVideo.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ImagePickBar.ui \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGoTvPtoPNetworkHost.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupAnchor \
  	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupHost \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupUser \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletKodi.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPersonalRecorder.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletSharedContent.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletUserIdentity.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PlayerGlWidget.ui

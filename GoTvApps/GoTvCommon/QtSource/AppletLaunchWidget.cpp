@@ -43,9 +43,9 @@ void AppletLaunchWidget::slotAppletIconPressed( void )
     if( m_MyApp.getIsAppInitialized()
         || ( eAppletKodi == m_AppletType )
         || ( eAppletUserIdentity == m_AppletType )
-        || ( eAppletPlayerVideo == m_AppletType )
-        || ( eAppletPlayerMusic == m_AppletType )
-        || ( eAppletPlayerPhoto == m_AppletType )
+//        || ( eAppletPlayerVideo == m_AppletType )
+//        || ( eAppletPlayerMusic == m_AppletType )
+//        || ( eAppletPlayerPhoto == m_AppletType )
         )
     {
         m_MyApp.launchApplet( m_AppletType, m_MyApp.getAppletFrame( m_AppletType ) );

@@ -1,6 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2019 Brett R. Jones
+// Copyright (C) 2018 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -15,16 +15,23 @@
 
 #include "AppletBase.h"
 
-class AppletSharedContent : public AppletBase
+#include "ui_AppletAboutApp.h"
+
+class AppletAboutApp : public AppletBase
 {
 	Q_OBJECT
 public:
-	AppletSharedContent( AppCommon& app, QWidget * parent );
-	virtual ~AppletSharedContent();
+    AppletAboutApp( AppCommon& app, QWidget * parent );
+	virtual ~AppletAboutApp();
 
-
+protected slots:
+    void						gotoWebsite( void );
 
 protected:
+    void						setupAboutMe( void );
+
+    Ui::AppletAboutAppClass ui;
+
 };
 
 

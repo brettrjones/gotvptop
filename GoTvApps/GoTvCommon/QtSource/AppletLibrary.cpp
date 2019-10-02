@@ -12,7 +12,7 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "AppletSharedContent.h"
+#include "AppletLibrary.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
@@ -20,10 +20,10 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSharedContent::AppletSharedContent( AppCommon& app, QWidget * parent )
+AppletLibrary::AppletLibrary( AppCommon& app, QWidget * parent )
 : AppletBase( OBJNAME_APPLET_SHARED_CONTENT, app, parent )
 {
-	m_EAppletType = eAppletSharedContent;
+	m_EAppletType = eAppletLibrary;
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
 
@@ -31,7 +31,7 @@ AppletSharedContent::AppletSharedContent( AppCommon& app, QWidget * parent )
 }
 
 //============================================================================
-AppletSharedContent::~AppletSharedContent()
+AppletLibrary::~AppletLibrary()
 {
     m_MyApp.activityStateChange( this, false );
 }

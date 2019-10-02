@@ -141,7 +141,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconOptions:
 		return ":/AppRes/Resources/settings-gear.svg";
 	case eMyIconFileServer:
-		return ":/AppRes/Resources/file-folder-normal.svg";
+		return ":/AppRes/Resources/file-folder-share.svg";
 
 	case eMyIconAdministrator:
 		return ":/AppRes/Resources/user-tie.svg";
@@ -592,6 +592,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/group-host.svg";
 	case eMyIconGroupAnchor:
 		return ":/AppRes/Resources/group-anchor.svg";
+    case eMyIconShareServices:
+        return ":/AppRes/Resources/share-services.svg";
 
 	default:
 		return ":/AppRes/Resources/question_mark.svg";// Icon with question mark
