@@ -1,7 +1,8 @@
 Solution Description
 
-Before running a solution you need to copy resouces to the bin directory
-For windows copy the contents of deploy-common and deploy-windows to the bin-Windows directory 
+=== must build python first because other solutions depend on it
+GoTvPython.sln - Python only 
+Build Both Release and Debug x64 builds if plan to debug else just the release build
 
 GoTvAll.sln - Contains all projects to build and run GoTvPtoP
 NOTE: libkazza has a build issue. If you get error about linking asm object file 
@@ -10,5 +11,5 @@ NOTE: libkazza has a build issue. If you get error about linking asm object file
 GoTvPtoPAndCore.sln - a cut down subset of GoTvAll.sln to most likely to change projects 
 	This solution can be used after GoTvAll.sln is built to cut down on rebuild time
 
-GoTvPython.sln - Python only 
+
 
