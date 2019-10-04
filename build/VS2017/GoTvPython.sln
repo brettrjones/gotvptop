@@ -19,6 +19,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_socket", "..\..\DependLibs\Python-2.7.14\PC\VS2017\_socket.vcxproj", "{86937F53-C189-40EF-8CE8-8759D8E7D480}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_sqlite3", "..\..\DependLibs\Python-2.7.14\PC\VS2017\_sqlite3.vcxproj", "{13CECB97-4119-4316-9D42-8534019A5A44}"
+	ProjectSection(ProjectDependencies) = postProject
+		{56462B02-59B7-4672-8F89-30A674E802FE} = {56462B02-59B7-4672-8F89-30A674E802FE}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bz2", "..\..\DependLibs\Python-2.7.14\PC\VS2017\bz2.vcxproj", "{73FCD2BD-F133-46B7-8EC1-144CD82A59D5}"
 EndProject
@@ -50,6 +53,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bzlib", "..\..\DependLibs\bzlib\build\VS2017\libbz2.vcxproj", "{9F3B9100-AEC8-406E-BA2B-A8F8A71CACE9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "select", "..\..\DependLibs\Python-2.7.14\PC\VS2017\select.vcxproj", "{18CAE28C-B454-46C1-87A0-493D91D97F03}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreLib", "..\..\DependLibs\CoreLib\build\VS2017\CoreLib.vcxproj", "{56462B02-59B7-4672-8F89-30A674E802FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -399,6 +404,22 @@ Global
 		{18CAE28C-B454-46C1-87A0-493D91D97F03}.Release|x64.Build.0 = Release|x64
 		{18CAE28C-B454-46C1-87A0-493D91D97F03}.Release|x86.ActiveCfg = Release|Win32
 		{18CAE28C-B454-46C1-87A0-493D91D97F03}.Release|x86.Build.0 = Release|Win32
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Debug|x64.ActiveCfg = Debug|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Debug|x64.Build.0 = Debug|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Debug|x86.ActiveCfg = Debug|Win32
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Debug|x86.Build.0 = Debug|Win32
+		{56462B02-59B7-4672-8F89-30A674E802FE}.PGInstrument|x64.ActiveCfg = Release|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.PGInstrument|x64.Build.0 = Release|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.PGInstrument|x86.ActiveCfg = Release|Win32
+		{56462B02-59B7-4672-8F89-30A674E802FE}.PGInstrument|x86.Build.0 = Release|Win32
+		{56462B02-59B7-4672-8F89-30A674E802FE}.PGUpdate|x64.ActiveCfg = Release|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.PGUpdate|x64.Build.0 = Release|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.PGUpdate|x86.ActiveCfg = Release|Win32
+		{56462B02-59B7-4672-8F89-30A674E802FE}.PGUpdate|x86.Build.0 = Release|Win32
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Release|x64.ActiveCfg = Release|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Release|x64.Build.0 = Release|x64
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Release|x86.ActiveCfg = Release|Win32
+		{56462B02-59B7-4672-8F89-30A674E802FE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

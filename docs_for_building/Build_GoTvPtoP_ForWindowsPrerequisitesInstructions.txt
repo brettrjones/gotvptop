@@ -23,13 +23,15 @@ QTDIR F:\Qt\Qt5.12\5.12.3\msvc2017_64
 
 
 === GoTvPtoP For Windows Prerequisites ====
-1.) Python 2.7.14 ( should not be required )
-2.) YASM 
-3.) visual studio 2017 ( Community edition is fine )
+1.) NASM from https://www.nasm.us/ 
+2.) YASM from https://yasm.tortall.net/Download.html
+    If YASM does not install the extract yasm.exe and copy to the NASM install folder
+3.) Visual Studio 2017 ( Community edition is fine )
 	a.) Follow the instructions of visual studio install for kodi at https://github.com/xbmc/xbmc/blob/master/docs/README.md
-		NOTE: it is important to install the specified components or GoTvPtoP will not compile
 	b.) if you see "failed to locate a 64-bit linker on %PATH%" then must manually add it to front of PATH enviroment variable ( bug in VS2017 )
 		my path to linker was "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
+    c.) If after install nasm is not found when run from command line then add the nasm directory
+        to the PATH enviroment variable
 4.) Qt 5.12.3 ( Tested with Qt 5.12.3 but other versions may work )
 5.) Java Oracle JDK/JRE 1.8.0_131 
 6.) MingWin is NOT required.. even for ffmpeg build ( have removed all dependecy on migwin and made substitute functions )
