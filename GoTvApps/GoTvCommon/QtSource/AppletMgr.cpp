@@ -18,7 +18,6 @@
 #include "AppSettings.h"
 
 #include "AppletAboutApp.h"
-#include "AppletCreateAccount.h"
 #include "AppletKodi.h"
 #include "AppletGroupUser.h"
 #include "AppletGroupHost.h"
@@ -114,9 +113,6 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 	{
     case eAppletAboutGoTvPtoP:
         appletDialog = new AppletAboutApp( m_MyApp, parent );
-        break;
-    case eAppletCreateAccount:
-        appletDialog = new AppletCreateAccount( m_MyApp, parent );
         break;
     case eAppletKodi:
         appletDialog = new AppletKodi( m_MyApp, parent );

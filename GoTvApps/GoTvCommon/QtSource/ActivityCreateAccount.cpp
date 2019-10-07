@@ -32,6 +32,8 @@ ActivityCreateAccount::ActivityCreateAccount( AppCommon& app, QWidget * parent )
 : ActivityBase( OBJNAME_ACTIVITY_CREATE_ACCOUNT, app, parent, eAppletCreateAccount, true, false )
 {
 	ui.setupUi( this );
+    setTitleBarText( QObject::tr( "Create Account" ) );
+
     connectBarWidgets();
 
     GuiHelpers::fillGender( ui.m_GenderComboBox );
@@ -39,7 +41,6 @@ ActivityCreateAccount::ActivityCreateAccount( AppCommon& app, QWidget * parent )
     GuiHelpers::fillContentRating( ui.m_ContentComboBox );
 
     connect( ui.m_LoginButton, SIGNAL( clicked() ), this, SLOT( slotButtonLoginClicked() ) );
-
 }
 
 //============================================================================

@@ -63,20 +63,19 @@ doover:
         applySoundSettings( true );
         // user needs to create login and profile
         m_CreateAccountDlg->setRootUserDataDirectory( m_AppSettings.m_strRootUserDataDir.c_str() );
-        QWidget * win = static_cast<QWidget*>( QApplication::activeWindow() );
-        if( win )
-        {
-            m_CreateAccountDlg->setParent( win );
-            //m_CreateAccountDlg->setNewParent( win );
-        }
-
-        //m_CreateAccountDlg->show();
         
         if( QDialog::Rejected == m_CreateAccountDlg->exec() )
         {
             m_bUserCanceledCreateProfile = true;
-            close();
-            return;
+            if( QMessageBox::Yes == QMessageBox::question( this, QObject::tr( "Exit Application" ), QObject::tr( "Create account was canceled. Do you want to exit application?" ), QMessageBox::Yes | QMessageBox::No ) )
+            {
+                QCoreApplication::quit();
+                return;
+            }
+            else
+            {
+                goto doover;
+            }
         }
 
         if( false == m_CreateAccountDlg->wasLoginNameEntered() )

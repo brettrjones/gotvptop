@@ -703,7 +703,7 @@ void GuiHelpers::setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident,
 {
     if( curWidget && ident && age && genderCombo && languageCombo && contentCombo )
     {
-        QString ageStr( ident->getAge() );
+        QString ageStr = QString::number( ident->getAge() );
         age->setText( ageStr );
         genderCombo->setCurrentIndex( ident->getGender() );
         languageCombo->setCurrentIndex( ident->getPrimaryLanguage() );
