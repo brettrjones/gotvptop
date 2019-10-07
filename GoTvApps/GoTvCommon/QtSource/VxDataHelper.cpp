@@ -23,7 +23,7 @@
 
 namespace
 {
-	std::string 		DATABASE_NAME 					= "myp2pweb_acct.db";
+	std::string 		DATABASE_NAME 					= "gotvptop_acct.db";
 	const int 			DATABASE_VERSION 				= 1;
 
 	std::string 		TABLE_LAST_LOGIN	 			= "last_login";
@@ -38,8 +38,8 @@ namespace
 	std::string 		CREATE_COLUMNS_LAST_LOGIN		= " (id INTEGER PRIMARY KEY AUTOINCREMENT, online_name  TEXT) ";
 	std::string 		COLUMNS_ACOUNT_LOGIN			= "online_id,online_name,ident";
 	std::string 		CREATE_COLUMNS_ACOUNT_LOGIN		= " (online_id TEXT PRIMARY KEY, online_name TEXT, ident BLOB)";
-	std::string 		COLUMNS_ACOUNT_PROFILE  		= "online_id,greeting,about,picture,url1,url2,url3";
-	std::string 		CREATE_COLUMNS_ACOUNT_PROFILE  	= " (online_id TEXT PRIMARY KEY, greeting TEXT, greet TEXT, about TEXT, picture TEXT, url1 TEXT, url2 TEXT, url3 TEXT) ";
+	std::string 		COLUMNS_ACOUNT_PROFILE  		= "online_id,greeting,about,picture,url1,url2,url3,donation";
+	std::string 		CREATE_COLUMNS_ACOUNT_PROFILE  	= " (online_id TEXT PRIMARY KEY, greeting TEXT, greet TEXT, about TEXT, picture TEXT, url1 TEXT, url2 TEXT, url3 TEXT, donation TEXT) ";
 	std::string 		COLUMNS_FRIENDS  				= "online_id,his_friendship,my_friendship,ident";
 	std::string 		CREATE_COLUMNS_FRIENDS  		= " (online_id TEXT PRIMARY KEY, his_friendship TINYINT, my_friendship TINYINT, ident BLOB ) ";
 
@@ -288,7 +288,7 @@ bool VxDataHelper::getUserProfile( VxNetIdent& oUserAccount, UserProfile& oProfi
 	bool bResult = false;
 	std::string strOnlineIdHex = oUserAccount.getMyOnlineId().toVxGUIDHexString();
 
-	DbCursor * cursor = startQueryInsecure("SELECT greeting,about,picture,url1,url2,url3 FROM account_profile WHERE online_id='%s'",
+	DbCursor * cursor = startQueryInsecure("SELECT greeting,about,picture,url1,url2,url3,donation FROM account_profile WHERE online_id='%s'",
 		strOnlineIdHex.c_str() );
 	if( NULL != cursor )
 	{
@@ -352,6 +352,15 @@ bool VxDataHelper::getUserProfile( VxNetIdent& oUserAccount, UserProfile& oProfi
 				oProfile.m_strUrl3 = "";
 			}
 
+            if( 0 != cursor->getString( 6 ) )
+            {
+                oProfile.m_strDonation = cursor->getString( 6 );
+            }
+            else
+            {
+                oProfile.m_strDonation = "";
+            }
+
 			bResult = true;
 		}
 
@@ -367,12 +376,13 @@ bool VxDataHelper::updateUserProfile( VxNetIdent& oUserAccount, UserProfile& oPr
 {
 	RCODE rc = 0;
 	std::string strOnlineIdHex = oUserAccount.getMyOnlineId().toVxGUIDHexString();
-	DbBindList bindList( (const char *)oProfile.m_strGreeting.toLatin1().constData() );
-	bindList.add( (const char *)oProfile.m_strAboutMe.toLatin1().constData() );
-	bindList.add( (const char *)oProfile.m_strPicturePath.toLatin1().constData() );
-	bindList.add( (const char *)oProfile.m_strUrl1.toLatin1().constData() );
-	bindList.add( (const char *)oProfile.m_strUrl2.toLatin1().constData() );
-	bindList.add( (const char *)oProfile.m_strUrl3.toLatin1().constData() );
+	DbBindList bindList( (const char *)oProfile.m_strGreeting.toUtf8().constData() );
+	bindList.add( (const char *)oProfile.m_strAboutMe.toUtf8().constData() );
+	bindList.add( (const char *)oProfile.m_strPicturePath.toUtf8().constData() );
+	bindList.add( (const char *)oProfile.m_strUrl1.toUtf8().constData() );
+	bindList.add( (const char *)oProfile.m_strUrl2.toUtf8().constData() );
+	bindList.add( (const char *)oProfile.m_strUrl3.toUtf8().constData() );
+    bindList.add( (const char *)oProfile.m_strDonation.toUtf8().constData() );
 	bindList.add( strOnlineIdHex.c_str() );
 
 	if( onlineUidExistsInTable( oUserAccount.getMyOnlineId(), TABLE_ACCOUNT_PROFILE ))
@@ -384,7 +394,7 @@ bool VxDataHelper::updateUserProfile( VxNetIdent& oUserAccount, UserProfile& oPr
 		//rc = sqlExec( "UPDATE account_profile SET greeting=?, about=?, picture=?, url1=?, url2=?, url3=? WHERE online_id=?", bindList );
 	}
 	
-	rc |= sqlExec( "INSERT INTO account_profile (greeting,about,picture,url1,url2,url3,online_id) values(?,?,?,?,?,?,?)", bindList );
+	rc |= sqlExec( "INSERT INTO account_profile (greeting,about,picture,url1,url2,url3,donation,online_id) values(?,?,?,?,?,?,?,?)", bindList );
 
 
 	return ( 0 == rc ) ? true : false;

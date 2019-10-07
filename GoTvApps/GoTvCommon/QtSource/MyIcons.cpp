@@ -590,7 +590,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/group.svg";
 	case eMyIconGroupHost:
 		return ":/AppRes/Resources/group-host.svg";
-	case eMyIconGroupAnchor:
+	case eMyIconGroupListingHost:
 		return ":/AppRes/Resources/group-anchor.svg";
     case eMyIconShareServices:
         return ":/AppRes/Resources/share-services.svg";
@@ -829,7 +829,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 		}
 		break;
 
-    case ePluginTypeGroupUser:	
+    case ePluginTypeRandomConnect:	
         return eMyIconGroupUser;
         break;
 
@@ -837,8 +837,8 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
         return eMyIconGroupHost;
         break;
 
-    case ePluginTypeGroupAnchor:
-        return eMyIconGroupAnchor;
+    case ePluginTypeGroupListingHost:
+        return eMyIconGroupListingHost;
         break;
 
     case ePluginTypeNetworkHost:

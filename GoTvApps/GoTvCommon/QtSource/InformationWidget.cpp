@@ -16,7 +16,6 @@
 #include "AppCommon.h"
 #include "MyIcons.h"
 #include "ActivityInformation.h"
-#include "ActivityAbout.h"
 
 
 //============================================================================

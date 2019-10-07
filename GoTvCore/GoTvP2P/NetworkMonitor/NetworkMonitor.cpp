@@ -154,7 +154,8 @@ static time_t timeLastAttempt = 0;
 				// picking the first one might pick one that is disconnected we need a active connection to internet
 				//m_strLastFoundIp = pickAddresss[0];
 				VxSktConnectSimple sktConnect;
-				SOCKET skt = sktConnect.connectTo(	"www.myp2pweb.com",		// remote ip or url
+                // TODO: replace hardcoded url with NetworkHost url
+				SOCKET skt = sktConnect.connectTo(	"gotvptop.com",		// remote ip or url 
 					80,						// port to connect to
 					8000 );					// timeout attempt to connect
 				if( INVALID_SOCKET != skt )

@@ -76,7 +76,7 @@ AppletKodi::AppletKodi( AppCommon& app, QWidget * parent )
 //============================================================================
 void AppletKodi::initAppletKodi( void )
 {
-	m_EAppletType = eAppletKodi;
+    setAppletType( eAppletKodi );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
 

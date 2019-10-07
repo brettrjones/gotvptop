@@ -35,4 +35,5 @@ public:
     QString			m_strUrl1;
     QString			m_strUrl2;
     QString			m_strUrl3;
+    QString			m_strDonation;
 };

@@ -43,6 +43,7 @@ EMyIcons GetAppletIcon( EApplet applet )
 	switch( applet )
 	{
 	case eAppletHomePage:				return eMyIconHome;
+    case eAppletCreateAccount:			return eMyIconUserIdentity;
     case eAppletKodi:				    return eMyIconKodi;
     case eAppletUserIdentity:			return eMyIconUserIdentity;
 	case eAppletMessenger:				return eMyIconMessenger;
@@ -65,7 +66,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletGroupUser:              return eMyIconGroupUser;
     case eAppletNetHostingPage:         return eMyIconNetHosting;
     case eAppletGroupHost:              return eMyIconGroupHost;
-    case eAppletGroupAnchor:            return eMyIconGroupAnchor;
+    case eAppletGroupAnchor:            return eMyIconGroupListingHost;
     case eAppletGoTvPtoPNetworkHost:    return eMyIconNetHosting;
 
     case eAppletShareServicesPage:      return eMyIconShareServices;
@@ -93,6 +94,7 @@ QString DescribeApplet( EApplet applet )
 	{
 	case eAppletHomePage:				return QObject::tr( "Home" );
     case eAppletAboutGoTvPtoP:		    return QObject::tr( "About GoTv Person to Person" );
+    case eAppletCreateAccount:			return QObject::tr( "Create Account" );
     case eAppletKodi:				    return QObject::tr( "Kodi (TM)" );
     case eAppletUserIdentity:			return QObject::tr( "User Identity" );
 	case eAppletMessenger:				return QObject::tr( "Messenger" );

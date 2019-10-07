@@ -84,8 +84,8 @@ EPluginAccessState PluginRelay::canAcceptNewSession( VxNetIdent * netIdent )
 		return ePluginAccessDisabled;
 	}
 
-	int userSessionCount = 0;
-	int anonSessionCount = 0;
+	uint32_t userSessionCount = 0;
+    uint32_t anonSessionCount = 0;
 	std::map<VxGUID, PluginSessionBase *>& sessions = m_PluginSessionMgr.getSessions();
 	std::map<VxGUID, PluginSessionBase *>::iterator iter;
 	for( iter = sessions.begin(); iter != sessions.end(); ++iter )

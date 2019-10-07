@@ -70,13 +70,29 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
     m_IsDialog = isDialog 
                 || ( eAppletUnknown == eAppletType ) 
                 || ( eAppletActivityDialog == eAppletType ); // do not setup base class ui in the case of activity dialog because of conflict with dialog ui
-    if( !m_IsDialog )
+    if( !m_IsDialog && !m_IsPopup )
     {
         m_WindowFlags = Qt::SubWindow;
         setWindowFlags( m_WindowFlags );
         ui.setupUi( this );
     }
-    else
+    else if( m_IsPopup )
+    {
+        //m_WindowFlags = Qt::Popup;
+        m_WindowFlags = Qt::Dialog | Qt::WindowStaysOnTopHint;
+        setWindowFlags( m_WindowFlags );
+   /*     m_MyApp.getAppTheme().applyTheme( this );
+        if( !m_ParentWidget )
+        {
+            m_ParentWidget = getParentPageFrame();
+        }*/
+
+        connect( &m_MyApp, SIGNAL( signalMainWindowMoved() ), this, SLOT( slotRepositionToParent() ) );
+
+
+        LogMsg( LOG_DEBUG, "ActivityBase::ActivityBase: Activity Popup %s\n", objectName().toUtf8().constData() );
+    }
+    else if( parent )
     {
         // dialog needs to cover parent
 
@@ -117,7 +133,7 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
 				&m_MyApp.getSoundMgr(), 
 				SLOT(slotPlayShredderSound()) );
 
-    if( !m_IsDialog )
+    if( !m_IsDialog && !m_IsPopup )
     {
         // if dialog then have to wait for dialog sets up title and bottom bar widgets before connecting them
         connectBarWidgets();
@@ -130,7 +146,7 @@ void ActivityBase::connectBarWidgets( )
     connectTitleBarWidget( getTitleBarWidget() );
     connectBottomBarWidget( getBottomBarWidget() );
     updateExpandWindowIcon();
-    if( m_IsDialog )
+    if( m_IsDialog || m_IsPopup )
     {
         slotRepositionToParent();
     }
@@ -477,7 +493,7 @@ void ActivityBase::slotExpandWindowButtonClicked( void )
 //============================================================================
 void ActivityBase::updateExpandWindowIcon( void )
 {
-    if( !m_IsDialog )
+    if( !m_IsDialog && !m_IsPopup )
     {
         if( m_MyApp.getIsMaxScreenSize( isMessagerFrame() ) )
         {
@@ -535,6 +551,7 @@ void ActivityBase::repositionToParent( void )
         if( m_IsPopup )
         {
             QRect parentRect( m_ParentWidget->mapToGlobal( QPoint( 0, 0 ) ), m_ParentWidget->size() );
+
             move( QStyle::alignedRect( Qt::LeftToRight, Qt::AlignCenter, size(), parentRect ).topLeft() );
         }
         else if( m_IsDialog )
@@ -549,8 +566,8 @@ void ActivityBase::repositionToParent( void )
             parentRect.setBottom( parentRect.bottom() - parentRect.top() );
             parentRect.setTop( 0 );
 
-            LogMsg( LOG_DEBUG, "Reposition to x=%d y=%d w=%d h=%d %s parent %s\n",
-                parentRect.left(), parentRect.top(), parentRect.width(), parentRect.height(), getObjName(), m_ParentWidget->objectName().toUtf8().constData() );
+            //LogMsg( LOG_DEBUG, "Reposition to x=%d y=%d w=%d h=%d %s parent %s\n",
+            //    parentRect.left(), parentRect.top(), parentRect.width(), parentRect.height(), getObjName(), m_ParentWidget->objectName().toUtf8().constData() );
             setGeometry( parentRect );
         }
 	}

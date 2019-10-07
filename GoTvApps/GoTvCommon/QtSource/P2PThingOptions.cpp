@@ -17,8 +17,6 @@
 #include "AppCommon.h"
 #include "MyIcons.h"
 #include "AppGlobals.h"
-#include "ActivityAbout.h"
-#include "ActivityEditAccount.h"
 #include "ActivitySoundOptions.h"
 #include "ActivityPermissions.h"
 #include "ActivityPermissionsRelay.h"
@@ -39,14 +37,8 @@ void AppCommon::slotOptionsButtonClick( void )
 {
 	PopupMenu popupMenu( *this, this );
 	popupMenu.setTitle( "Options");
-	QString aboutText = QObject::tr( "About " );
-	aboutText += m_Engine.fromGuiGetAppName();
 	popupMenu.addMenuItem( 1, getMyIcons().getIcon( eMyIconPermissions),  QObject::tr( "Edit Plugin Permissions" ) );
-	popupMenu.addMenuItem( 2, getMyIcons().getIcon( eMyIconApp ),  QObject::tr( "Edit My Account" ) );
-	popupMenu.addMenuItem( 3, getMyIcons().getIcon( eMyIconRelay ),  QObject::tr( "Network Settings" ) );
-	popupMenu.addMenuItem( 4, getMyIcons().getIcon( eMyIconSpeakerOn ),  QObject::tr( "Sound Options" ) );
-	popupMenu.addMenuItem( 5, getMyIcons().getIcon( eMyIconVideo ),  QObject::tr( "Video Options" ) );
-	popupMenu.addMenuItem( 6, getMyIcons().getIcon( eMyIconApp ), aboutText );
+	popupMenu.addMenuItem( 2, getMyIcons().getIcon( eMyIconSpeakerOn ),  QObject::tr( "Sound Options" ) );
 	//popupMenu.addMenuItem( 6, getMyIcons().getIcon( eMyIconDebug ),  QObject::tr( "Debug Only" ) );
 	//popupMenu.addMenuItem( 8, getMyIcons().getIcon( eMyIconFolder ), "Setup file share" );
 	//popupMenu.addMenuItem( 12, getMyIcons().getIcon( eMyIconDebug ), "Debug Settings" );
@@ -105,41 +97,9 @@ void AppCommon::onMenuOptionsSelected( int iMenuId, QWidget * senderPopupMenu )
 			break;
 		}
 
-
-	case 2: // edit account
-		{
-			ActivityEditAccount oDlg( *this, this );
-			oDlg.exec();
-			break;
-		}
-
-
-	case 3: //Network settings
-		{
-			ActivityNetworkSettings oDlg( *this, this );
-			oDlg.exec();
-			break;
-		}
-
-	case 4: //Sound Options
+	case 2: //Sound Options
 		{
 			ActivitySoundOptions oDlg( *this, this );
-			oDlg.exec();
-			break;
-		}
-
-	//case 5: //Video Options
-	//	{
-	//		ActivityVideoOptions * poDlg = new ActivityVideoOptions(	*this,
-	//			getAppGlobals().getUserIdent(),
-	//																	true, 
-	//																	getCentralWidget() );
-	//		break;
-	//	}
-
-	case 6: // about
-		{
-			ActivityAbout oDlg( *this, this );
 			oDlg.exec();
 			break;
 		}

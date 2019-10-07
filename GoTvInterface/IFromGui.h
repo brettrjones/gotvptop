@@ -197,6 +197,9 @@ public:
 	virtual void				fromGuiOnlineNameChanged( const char * newOnlineName ) = 0;
 	/// Called when user changes his/her mood message
 	virtual void				fromGuiMoodMessageChanged( const char * newMoodMessage ) = 0;
+    /// Called when user changes his/her personal info
+    virtual void				fromGuiIdentPersonalInfoChanged( int age, int gender, int language, int preferredContent ) = 0;
+
 	/// Called when user changes his/her About Me web page picture.. sets flag that user has About Me Picture for scanning
 	virtual void				fromGuiSetUserHasProfilePicture( bool haveAboutMePicture ) = 0;
 	/// Called when user changes permission level of plugin
@@ -238,7 +241,8 @@ public:
 																const char *	aboutMe,		// about me text
 																const char *	url1,			// favorite url 1
 																const char *	url2,			// favorite url 2
-																const char *	url3 ) = 0;		// favorite url 3
+                                                                const char *	url3,           // favorite url 3
+                                                                const char *	donation ) = 0;	// donation		
 	/// Set permission level required to access a plugin
 	virtual void				fromGuiSetPluginPermission( EPluginType ePluginType, EFriendState eFriendState ) = 0;
 	/// Get permission level required to access a plugin

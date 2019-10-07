@@ -129,6 +129,8 @@ public:
     virtual void				fromGuiUserLoggedOn( VxNetIdent * netIdent ) override;
     virtual void				fromGuiOnlineNameChanged( const char * newOnlineName ) override;
     virtual void				fromGuiMoodMessageChanged( const char * newMoodMessage ) override;
+    virtual void				fromGuiIdentPersonalInfoChanged( int age, int gender, int language, int preferredContent ) override;
+
     virtual void				fromGuiSetUserHasProfilePicture( bool haveProfilePick ) override;
     virtual void				fromGuiUpdateMyIdent( VxNetIdent * netIdent, bool permissionAndStatsOnly = false ) override;
     virtual void				fromGuiQueryMyIdent( VxNetIdent * poRetIdent ) override;
@@ -184,7 +186,8 @@ public:
 																const char *	aboutMe,		// about me text
 																const char *	url1,			// favorite url 1
 																const char *	url2,			// favorite url 2
-                                                                const char *	url3 ) override;			// favorite url 3
+                                                                const char *	url3,           // favorite url 3
+                                                                const char *	donation ) override;	// donation		
 
     virtual void				fromGuiSetNetSettings( NetSettings& netSettings ) override;
     virtual void				fromGuiGetNetSettings( NetSettings& netSettings ) override;

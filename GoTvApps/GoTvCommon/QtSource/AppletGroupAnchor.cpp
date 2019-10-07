@@ -23,7 +23,7 @@
 AppletGroupAnchor::AppletGroupAnchor( AppCommon& app, QWidget * parent )
 : AppletBase( OBJNAME_APPLET_GROUP_ANCHOR, app, parent )
 {
-	m_EAppletType = eAppletGroupAnchor;
+    setAppletType( eAppletGroupAnchor );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
 

@@ -281,7 +281,7 @@ enum EMyIcons
 	eMyIconGroupUser,
     eMyIconNetHosting,
 	eMyIconGroupHost,
-	eMyIconGroupAnchor,
+	eMyIconGroupListingHost,
 
     eMyIconShareServices,
 

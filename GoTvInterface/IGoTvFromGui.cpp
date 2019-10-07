@@ -158,6 +158,12 @@ void IGoTv::fromGuiMoodMessageChanged( const char * newMoodMessage )
 }
 
 //============================================================================
+void IGoTv::fromGuiIdentPersonalInfoChanged( int age, int gender, int language, int preferredContent )
+{
+    getPtoP().fromGuiIdentPersonalInfoChanged( age, gender, language, preferredContent );
+}
+
+//============================================================================
 void IGoTv::fromGuiSetUserHasProfilePicture( bool haveProfilePick )
 {
     getPtoP().fromGuiSetUserHasProfilePicture( haveProfilePick );
@@ -349,14 +355,16 @@ void IGoTv::fromGuiUpdateWebPageProfile( const char *	pProfileDir,	// directory 
                                              const char *	aboutMe,		// about me text
                                              const char *	url1,			// favorite url 1
                                              const char *	url2,			// favorite url 2
-                                             const char *	url3 )
+                                             const char *	url3,
+                                             const char *	donation )
 {
     getPtoP().fromGuiUpdateWebPageProfile( pProfileDir,	// directory containing user profile
                                           strGreeting,	// greeting text
                                           aboutMe,		// about me text
                                           url1,			// favorite url 1
                                           url2,			// favorite url 2
-                                          url3 );
+                                          url3,
+                                          donation );
 }
 
 //============================================================================

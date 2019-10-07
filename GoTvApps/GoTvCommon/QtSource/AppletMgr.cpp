@@ -13,15 +13,13 @@
 //============================================================================
 
 #include "AppletMgr.h"
-#include "AppletAboutApp.h"
 #include "ActivityBase.h"
 #include "AppCommon.h"
-#include "AppletRemoteControl.h"
-#include "AppletSettings.h"
-#include "AppletTheme.h"
-#include "AppletPlayerVideo.h"
-#include "AppletKodi.h"
 #include "AppSettings.h"
+
+#include "AppletAboutApp.h"
+#include "AppletCreateAccount.h"
+#include "AppletKodi.h"
 #include "AppletGroupUser.h"
 #include "AppletGroupHost.h"
 #include "AppletGroupAnchor.h"
@@ -30,10 +28,14 @@
 #include "AppletNetHostingPage.h"
 #include "AppletNetworkSettings.h"
 #include "AppletPersonalRecorder.h"
+#include "AppletPlayerVideo.h"
+#include "AppletSettings.h"
 #include "AppletShareServicesPage.h"
 #include "AppletSharedContent.h"
 #include "AppletSharedWebCam.h"
 #include "AppletStoryboard.h"
+#include "AppletTheme.h"
+#include "AppletRemoteControl.h"
 #include "AppletUserIdentity.h"
 
 #include "HomeWindow.h"
@@ -112,6 +114,9 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 	{
     case eAppletAboutGoTvPtoP:
         appletDialog = new AppletAboutApp( m_MyApp, parent );
+        break;
+    case eAppletCreateAccount:
+        appletDialog = new AppletCreateAccount( m_MyApp, parent );
         break;
     case eAppletKodi:
         appletDialog = new AppletKodi( m_MyApp, parent );

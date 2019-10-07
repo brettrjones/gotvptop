@@ -15,16 +15,16 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <property name="leftMargin">
-    <number>5</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>5</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>5</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>5</number>
+    <number>0</number>
    </property>
    <item>
     <widget class="QGroupBox" name="m_OnlineIdentityGroupBox">
@@ -32,6 +32,9 @@
       <string>Online Identity</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <property name="spacing">
+       <number>2</number>
+      </property>
       <property name="leftMargin">
        <number>5</number>
       </property>
@@ -52,14 +55,14 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QLabel" name="rogueUserNameLabel">
+           <widget class="QLabel" name="m_UserNameLabel">
             <property name="text">
              <string>User Online Name: ( 4 to 23 characters )</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="userNameEdit"/>
+           <widget class="QLineEdit" name="m_OnlineNameEdit"/>
           </item>
          </layout>
         </item>
@@ -80,14 +83,14 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QLabel" name="moodMessageLabel">
+           <widget class="QLabel" name="m_MoodMessageLabel">
             <property name="text">
              <string>Mood Message: ( Up to 27 characters )</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="moodMessageEdit">
+           <widget class="QLineEdit" name="m_MoodMessageEdit">
             <property name="text">
              <string>Let's Communicate!</string>
             </property>
@@ -97,6 +100,93 @@
         </item>
         <item>
          <widget class="QPushButton" name="m_ApplyMoodButton">
+          <property name="text">
+           <string>Apply</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Age:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="m_AgeEdit">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Preferred Content:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="m_ContentComboBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_ApplyAgeButton">
+          <property name="text">
+           <string>Apply</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Gender:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="m_GenderComboBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Primary Language:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="m_LanguageComboBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_ApplyGenderButton">
           <property name="text">
            <string>Apply</string>
           </property>
@@ -114,7 +204,7 @@
      </property>
      <layout class="QVBoxLayout" name="DialogItemsGroupBox_3">
       <property name="spacing">
-       <number>5</number>
+       <number>2</number>
       </property>
       <property name="leftMargin">
        <number>5</number>
@@ -128,13 +218,6 @@
       <property name="bottomMargin">
        <number>5</number>
       </property>
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>NOTE: Permission Level affects access to both About Me and Storyboard Pages</string>
-        </property>
-       </widget>
-      </item>
       <item>
        <widget class="PermissionWidget" name="m_PermissionWidget" native="true"/>
       </item>
@@ -163,7 +246,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="greetingEdit">
+       <widget class="QLineEdit" name="m_GreetingEdit">
         <property name="text">
          <string>Hi There!</string>
         </property>
@@ -177,7 +260,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPlainTextEdit" name="aboutMeEdit">
+       <widget class="QPlainTextEdit" name="m_AboutMeEdit">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -196,7 +279,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="pictureOfMeLabel">
+       <widget class="QLabel" name="m_PictureOfMeLabel">
         <property name="text">
          <string>My Picture</string>
         </property>
@@ -205,14 +288,14 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QPushButton" name="browsePictureButton">
+         <widget class="QPushButton" name="m_BrowsePictureButton">
           <property name="text">
            <string>Browse</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="takeSnapshotButton">
+         <widget class="QPushButton" name="m_TakeSnapshotButton">
           <property name="text">
            <string>Take Snapshot</string>
           </property>
@@ -221,14 +304,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Click picture to expand</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="pictureOfMeFrame">
+       <widget class="QLabel" name="m_PictureOfMeFrame">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -245,13 +321,13 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="favoriteWebsite1Edit"/>
+       <widget class="QLineEdit" name="m_FavoriteWebsite1Edit"/>
       </item>
       <item>
-       <widget class="QLineEdit" name="favoriteWebsite2Edit"/>
+       <widget class="QLineEdit" name="m_FavoriteWebsite2Edit"/>
       </item>
       <item>
-       <widget class="QLineEdit" name="favoriteWebsite3Edit">
+       <widget class="QLineEdit" name="m_FavoriteWebsite3Edit">
         <property name="text">
          <string>http://www.gotvptop.com</string>
         </property>
@@ -265,7 +341,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPlainTextEdit" name="m_DonateToMeEdit">
+       <widget class="QPlainTextEdit" name="m_DonationEdit">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>

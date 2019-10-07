@@ -76,9 +76,8 @@ void ActivityInformation::updateInformation( void )
 
         switch( m_PluginType )
         {
-        case ePluginTypeGroupUser:
         case ePluginTypeGroupHost:
-        case ePluginTypeGroupAnchor:
+        case ePluginTypeGroupListingHost:
         case ePluginTypeNetworkHost:
             ui.m_PictureLabel->setResourceImage( ":/AppRes/Resources/NetworkDesign.png", true );
             ui.m_PictureLabel->setVisible( true );
@@ -276,9 +275,8 @@ QString ActivityInformation::getInfoText( void )
     {
         switch( m_PluginType )
         {
-        case ePluginTypeGroupUser:
         case ePluginTypeGroupHost:
-        case ePluginTypeGroupAnchor:
+        case ePluginTypeGroupListingHost:
         case ePluginTypeNetworkHost:
             return m_NetworkDesign + m_PluginDefinitions;
             break;

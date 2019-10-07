@@ -16,7 +16,6 @@
 #include "NetworkTestWidget.h"
 #include "AppCommon.h"
 #include "ActivityChooseTestWebsiteUrl.h"
-#include "ActivityChooseIpPort.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
 #include <NetLib/VxSktUtil.h>

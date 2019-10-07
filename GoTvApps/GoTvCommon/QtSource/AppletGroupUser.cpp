@@ -23,7 +23,7 @@
 AppletGroupUser::AppletGroupUser( AppCommon& app, QWidget * parent )
 : AppletBase( OBJNAME_APPLET_GROUP_USER, app, parent )
 {
-	m_EAppletType = eAppletGroupUser;
+    setAppletType( eAppletGroupUser );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
 

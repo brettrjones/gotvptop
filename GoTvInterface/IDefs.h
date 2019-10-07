@@ -18,36 +18,37 @@
 
 #include <NetLib/VxXferDefs.h>
 
-
 //! \public Enumerated plugins
 enum EPluginType
 {
 	//! NOTE: don't handle packets for ePluginTypeInvalid or ePluginTypeWebServer
 	ePluginTypeInvalid			= 0,	//!< unknown or disabled
 
-	ePluginTypeAdmin			= 1,	//!< Administration ( not currently used )
-	ePluginTypeRelay			= 2,	//!< Relay services plugin
-	ePluginTypeWebServer		= 3,	//!< Web server plugin ( for About Me and Story Board web pages )
-	ePluginTypeCamServer		= 4,	//!< Web cam broadcast plugin
-	ePluginTypeMultiSession		= 5,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
-	ePluginTypeVoicePhone		= 6,	//!< VOIP audio only phone call
-	ePluginTypeVideoPhone		= 7,	//!< Video Chat with motion detect and stream recording
-	ePluginTypeTruthOrDare		= 8,	//!< Video Chat Truth Or Dare game  
-	ePluginTypeFileOffer		= 9,	//!< Offer/accept send a file person to person
-	ePluginTypeFileServer		= 10,	//!< Shared files server
-	ePluginTypeStoryBoard		= 11,	//!< User editable story board web page server
-    ePluginTypeAvatarImage      = 12,	//!< handle users avatar image
-    ePluginTypeGroupUser        = 13,	//!< group user
-    ePluginTypeGroupHost		= 14,	//!< group host
-    ePluginTypeGroupAnchor		= 15,	//!< group list host
-    ePluginTypeNetworkHost		= 16,	//!< master group list host
-    ePluginTypeGroupTier2		= 17,	//!< group end user
-	// NOTE: plugin types 18 - 47 not implemented .. reserved for future use
-	eMaxUserPluginType			= 18, 
+	ePluginTypeAdmin			= 1,	//!< Administration ( meant for updates but not currently used )
+    ePluginTypeGroupHost        = 2,	//!< group host
+    ePluginTypeGroupListingHost = 3,	//!< group list host
+    ePluginTypeNetworkHost      = 4,	//!< master group list host
+    ePluginTypeConnectTest      = 5,	//!< Connection Test Service
+    ePluginTypeRelay            = 6,	//!< Relay services plugin
+    ePluginTypeRandomConnect    = 7,	//!< Random connect to another person ( Using Phone Shake )
+    ePluginTypeAvatarImage      = 9,	//!< handle users avatar image
+    ePluginTypeAboutMePage      = 10,	//!< about me page plugin ( using web page server )
+    ePluginTypeStoryBoard       = 11,	//!< User editable story board web page server
+    ePluginTypeMultiSession     = 12,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
+    ePluginTypeVoicePhone       = 13,	//!< VOIP audio only phone call
+    ePluginTypeVideoPhone       = 14,	//!< Video Chat with motion detect and stream recording
+    ePluginTypeTruthOrDare      = 15,	//!< Video Chat Truth Or Dare game  
+    ePluginTypeFileOffer        = 16,	//!< Offer/accept send a file person to person
+    ePluginTypeFileServer       = 17,	//!< Shared files server
+    ePluginTypeCamServer		= 18,	//!< Web cam broadcast plugin
+	// NOTE: plugin types 19 - 47 not implemented .. reserved for future use
+	eMaxUserPluginType			= 19, 
 	// plugins 0-47 are part of PktAnnounce
 	// plugins after 47 are system plugins and do not go out in announcement pkt
 	eAppPluginsBegin			= 48,
-	ePluginTypeNetServices,	
+    ePluginTypeRandomConnectRelay,	//!< Relay service for Random connect to another person ( Uses same permission as ePluginTypePhoneShake )
+    ePluginTypeWebServer,	//!< Web server plugin ( for About Me and Story Board web pages )
+    ePluginTypeNetServices,
 	ePluginTypeSearch,	
 	ePluginTypeSndWriter,
 	ePluginTypeSndReader,
@@ -159,4 +160,34 @@ enum EPhoneShakeStatus
 	ePhoneShakeStatusSearchComplete					= 7,
 
 	eMaxPhoneShakeStatusType
+};
+
+enum EGenderType
+{
+    eGenderTypeUnspecified,
+    eGenderTypeMale,
+    eGenderTypeFemale,
+
+    eMaxGenderType
+};
+
+enum ELanguageType
+{
+    eLanguageUnspecified,
+    eLanguageEnglishUS,
+    eLanguageEnglishBritian,
+
+    eMaxLanguageType
+};
+
+enum EContentType
+{
+    eContentUnspecified,
+    eContentFamily,
+    eContentAdult,
+    eContentXXX,
+    eContentDarkWeb,
+    eContentPersonal,
+
+    eMaxContentType
 };

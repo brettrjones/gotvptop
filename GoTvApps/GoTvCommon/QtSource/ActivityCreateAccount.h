@@ -16,37 +16,39 @@
 
 #include "ActivityBase.h"
 
-#include <QDialog>
-#include "ui_ActivityEditAccount.h"
-#include "ActivityEditAccount.h"
+#include <PktLib/VxCommon.h>
 
-#include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
+#include <QDialog>
+#include "ui_ActivityCreateAccount.h"
 
 class AppCommon;
 class P2PEngine;
 
-class ActivityEditAccount : public ActivityBase
+class ActivityCreateAccount : public ActivityBase
 {
 	Q_OBJECT
 public:
-	ActivityEditAccount(AppCommon& app, QWidget * parent = NULL );
-	virtual ~ActivityEditAccount() override = default;
+    ActivityCreateAccount( AppCommon& app, QWidget * parent = NULL );
+	virtual ~ActivityCreateAccount() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets
     virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
     virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
-	void						updateValuesFromDatabase();
+	void						setRootUserDataDirectory( const char * userDir ) { m_strRootUserDataDir = userDir; };
+	//! validate user input
+	bool						accountValidate( void );
+    bool						wasLoginNameEntered( void );
 
-protected slots:
-	void						slotApplyResults();
+private slots:
+	//! login was clicked
+	void						slotButtonLoginClicked( void );
 
 protected:
-	bool						validateMoodMessage( void );
-
-
 	//=== vars ===//
-	 Ui::EditAccountDialog		ui; 
-	VxNetIdent *				m_MyIdent;
-	QString						m_strMoodMessage;
+	Ui::CreateAccountClass		ui;
+	VxNetIdent					m_UserAccount;
+	std::string					m_strRootUserDataDir;
 };
+
+

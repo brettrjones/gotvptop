@@ -156,10 +156,10 @@ void NetConnector::handleAnnounceResults( AnchorList * anchorList, EConnectReaso
 		}
 
 		std::string onlineName = entry->getOnlineName();
-		if( ( onlineName == "myp2panchor.com" ) 
-			|| ( onlineName == "myp2pconnect.com" ) )
+		if( ( onlineName == "gotvptop.com" ) 
+			|| ( onlineName == "gotvptop.com" ) )
 		{
-			// hack to exclude myp2pweb anchor and connect servers.. TODO fix with some kind of settings instead
+			// hack to exclude gotvptop anchor and connect servers.. TODO fix with some kind of settings instead
 			continue;
 		}
 

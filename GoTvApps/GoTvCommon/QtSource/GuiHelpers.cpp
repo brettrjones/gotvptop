@@ -22,13 +22,14 @@
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/ObjectCommon.h>
 
+#include <QDesktopServices>
+#include <QComboBox>
+#include <QDebug>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFile>
-
-#include <QDesktopServices>
+#include <QLineEdit>
 #include <QUrl>
-#include <QDebug>
 
 //============================================================================
 const char * GuiHelpers::describeResponse( EOfferResponse eOfferResponse )
@@ -490,4 +491,261 @@ QWidget * GuiHelpers::getParentPageFrame( QWidget * curWidget )
     }
 
     return parentActivity;
+}
+
+
+//============================================================================
+bool GuiHelpers::validateUserName( QWidget * curWidget, QString strUserName )
+{
+    if( strUserName.contains( "GoTv PtoP Web" )
+        || strUserName.contains( "GoTvPtoPWeb" )
+        || strUserName.contains( "gotvptopweb" )
+        || strUserName.contains( "gotv ptop web" )
+        || strUserName.contains( "GoTv PtoP Web" )
+        || strUserName.contains( "GoTvPtoPWeb" )
+        || strUserName.contains( "gotvptopweb" )
+        || strUserName.contains( "gotv ptop web" ) )
+    {
+        QMessageBox::warning( curWidget, QObject::tr( "Invalid User Name" ), QObject::tr( "User Name cannot have GoTv PtoP Web in name." ) );
+        return false;
+    }
+
+    if( strUserName.contains( "'" ) || strUserName.contains( "\"" ) )
+    {
+        QMessageBox::warning( curWidget, QObject::tr( "Invalid User Name" ), QObject::tr( "User Name cannot have special character quote." ) );
+        return false;
+    }
+
+    if( strUserName.contains( "," ) )
+    {
+        QMessageBox::warning( curWidget, QObject::tr( "Invalid User Name" ), QObject::tr( "User Name cannot have comma." ) );
+        return false;
+    }
+
+    if( strUserName.contains( "(" ) || strUserName.contains( ")" ) )
+    {
+        QMessageBox::warning( curWidget, QObject::tr( "Invalid User Name" ), QObject::tr( "User Name cannot have special character parentheses." ) );
+        return false;
+    }
+
+    if( strUserName.contains( "/" ) || strUserName.contains( "\\" ) )
+    {
+        QMessageBox::warning( curWidget, QObject::tr( "Invalid User Name" ), QObject::tr( "User Name cannot have special character slashes." ) );
+        return false;
+    }
+
+    if( strUserName.length() > 23 )
+    {
+        QMessageBox::warning( curWidget, QObject::tr( "Invalid User Name" ), QObject::tr( "User Name is too long (maximum 23 chars)." ) );
+        return false;
+    }
+
+    if( strUserName.length() < 4 )
+    {
+        QMessageBox::warning( curWidget, QObject::tr( "Invalid User Name" ), QObject::tr( "User Name is too short (minimum 4 chars)." ) );
+        return false;
+    }
+
+    return true;
+}
+
+//============================================================================
+bool GuiHelpers::validateMoodMessage( QWidget * curWidget, QString strMoodMsg )
+{
+    //if( strMoodMsg.contains( "'" ) )
+    //{
+    //    QMessageBox::warning( curWidget, QObject::tr( "Application" ), QObject::tr( "Mood Message cannot have special character quote." ) );
+    //    return false;
+    //}
+
+    int iLen = strMoodMsg.length();
+    if( iLen > 27 )
+    {
+        QMessageBox::warning( curWidget, QObject::tr( "Application" ), QObject::tr( "Mood Message is too long (maximum 27 chars)" ) );
+        return false;
+    }
+
+    return true;
+}
+
+//============================================================================
+bool GuiHelpers::validateAge( QWidget * curWidget, int age )
+{
+    if( age < 0 )
+    {
+        QMessageBox::warning( curWidget, QObject::tr( "Age Verify" ), QObject::tr( "Invalid Age" ) );
+        return false;
+    }
+
+    if( age > 120 )
+    {
+        QMessageBox::warning( curWidget, QObject::tr( "Age Verify" ), QObject::tr( "Age Connot be greater than 120 years old" ) );
+        return false;
+    }
+
+    return true;
+}
+
+//============================================================================
+QString GuiHelpers::describeGender( EGenderType gender )
+{
+    switch( gender )
+    {
+    case eGenderTypeUnspecified:
+        return QObject::tr( "Any" );
+    case eGenderTypeMale:
+        return QObject::tr( "Male" );
+    case eGenderTypeFemale:
+        return QObject::tr( "Female" );
+    default:
+        return QObject::tr( "Unknown" );
+    }
+}
+
+//============================================================================
+void GuiHelpers::fillGender( QComboBox * comboBox )
+{
+    if( comboBox )
+    {
+        comboBox->clear();
+        for( int i = 0; i < eMaxGenderType; i++ )
+        {
+            comboBox->addItem( describeGender( (EGenderType)i ) );
+        }
+    }
+}
+
+
+//============================================================================
+QString GuiHelpers::describePreferredContent( EContentType content )
+{
+    switch( content )
+    {
+    case eContentUnspecified:
+        return QObject::tr( "Any" );
+    case eContentFamily:
+        return QObject::tr( "Family" );
+    case eContentAdult:
+        return QObject::tr( "Adult" );
+    case eContentXXX:
+        return QObject::tr( "XXX" );
+    case eContentDarkWeb:
+        return QObject::tr( "DarkWeb" );
+    case eContentPersonal:
+        return QObject::tr( "Personal" );
+
+    default:
+        return QObject::tr( "Unknown" );
+    }
+}
+
+//============================================================================
+void GuiHelpers::fillContentRating( QComboBox * comboBox )
+{
+    if( comboBox )
+    {
+        comboBox->clear();
+        for( int i = 0; i < eMaxContentType; i++ )
+        {
+            comboBox->addItem( describePreferredContent( (EContentType)i ) );
+        }
+    }
+}
+
+//============================================================================
+QString GuiHelpers::describeLanguage( ELanguageType language )
+{
+    switch( language )
+    {
+    case eLanguageUnspecified:
+        return QObject::tr( "Any" );
+    case eLanguageEnglishUS:
+        return QObject::tr( "English (USA)" );
+    case eLanguageEnglishBritian:
+        return QObject::tr( "English (Britain)" );
+
+    default:
+        return QObject::tr( "Unknown" );
+    }
+}
+
+//============================================================================
+void GuiHelpers::fillLanguage( QComboBox * comboBox )
+{
+    if( comboBox )
+    {
+        comboBox->clear();
+        for( int i = 0; i < eMaxLanguageType; i++ )
+        {
+            comboBox->addItem( describeLanguage( (ELanguageType)i ) );
+        }
+    }
+}
+
+//============================================================================
+QString GuiHelpers::describeAge( int age )
+{
+    QString ageStr( age );
+    if( ( age > 80 ) || ( age < 0 ) )
+    {
+        ageStr = "Old";
+    }
+    else if( age == 0 )
+    {
+        ageStr = "Any";
+    }
+
+    return ageStr;
+}
+
+//============================================================================
+void GuiHelpers::setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident, QLineEdit * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
+{
+    if( curWidget && ident && age && genderCombo && languageCombo && contentCombo )
+    {
+        QString ageStr( ident->getAge() );
+        age->setText( ageStr );
+        genderCombo->setCurrentIndex( ident->getGender() );
+        languageCombo->setCurrentIndex( ident->getPrimaryLanguage() );
+        contentCombo->setCurrentIndex( ident->getPreferredContent() );
+    }
+}
+
+//============================================================================
+void GuiHelpers::setIdentityFromValues( QWidget * curWidget, VxNetIdent * ident, QLineEdit * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo )
+{
+    if( curWidget && ident && age && genderCombo && languageCombo && contentCombo )
+    {
+        int ageValue = age->text().toInt();
+        if( ( 0 > ageValue ) || ( 120 < ageValue ) )
+        {
+            ageValue = 0;
+        }
+
+        ident->setAge( ageValue );
+
+        int genderValue = genderCombo->currentIndex();
+        if( ( 0 > genderValue ) || ( eMaxGenderType <= genderValue ) )
+        {
+            genderValue = 0;
+        }
+
+        ident->setGender( genderValue );
+
+        int languageValue = languageCombo->currentIndex();
+        if( ( 0 > languageValue ) || ( eMaxLanguageType <= genderValue ) )
+        {
+            languageValue = 0;
+        }
+
+        ident->setPrimaryLanguage( languageValue );
+
+        int contentValue = contentCombo->currentIndex();
+        if( ( 0 > contentValue ) || ( eMaxContentType <= genderValue ) )
+        {
+            contentValue = 0;
+        }
+
+        ident->setPreferredContent( contentValue );
+    }
 }

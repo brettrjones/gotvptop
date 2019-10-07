@@ -28,9 +28,8 @@
 
 #include "HomeWindow.h"
 
-#include "ActivityAbout.h"
 #include "ActivityTimedMessage.h"
-#include "ActivityCreateProfile.h"
+#include "ActivityCreateAccount.h"
 #include "ActivityDownloads.h"
 #include "ActivityUploads.h"
 #include "ActivityDebugSettings.h"
@@ -184,9 +183,6 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 
 , m_HomePage( *this, m_AppTitle )
 
-, m_CreateProfileDlg( 0 )
-, m_Downloads( NULL )
-, m_Uploads( NULL )
 , m_VidCap( NULL )
 , m_VidCapTimer( NULL )
 , m_IdleTimer( new QTimer( this ) )
@@ -196,14 +192,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_LastNetworkState( eNetworkStateTypeUnknown )
 , m_CamSourceId( 1 )
 , m_CamCaptureRotation( 0 )
-, m_LibraryActivityActive( false )
-, m_VidCaptureEnabled( false )
-, m_MicrophoneHardwareEnabled( false )
-, m_SpeakerHardwareEnabled( false )
 , m_AppletMgr( *( new AppletMgr( *this, this) ) )
-, m_AppCommonInitialized( false )
-, m_LoginBegin( false )
-, m_LoginComplete( false )
 {
     g_AppCommon = this; // crap.. need a global instance that can accessed immediately with GetAppInstance() for objects created in ui files
 
@@ -339,7 +328,7 @@ void AppCommon::startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame 
 	m_Uploads = new ActivityUploads( *this, messangerFrame );
 	m_Uploads->hide();
 
-	m_CreateProfileDlg = new ActivityCreateProfile( *this, appletFrame );
+	m_CreateAccountDlg = new ActivityCreateAccount( *this, appletFrame );
 
 	m_DebugSettingsDlg = new ActivityDebugSettings( *this, appletFrame );
 	m_DebugSettingsDlg->hide();

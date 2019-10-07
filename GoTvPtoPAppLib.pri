@@ -77,23 +77,18 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputVoiceWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityAbout.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityAddRemoveLibraryFiles.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityAnchorSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityBrowseFiles.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityChooseIpPort.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityChooseTestWebsiteUrl.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityCreateProfile.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityCreateAccount.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDebugSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloadItemMenu.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloads.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityEditAccount.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityEditProfile.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityFileSearch.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityInformation.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityIsPortOpenTest.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityManageAnchorSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityMessageBox.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetServiceTest.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkKey.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkState.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissions.h \
@@ -310,26 +305,20 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputTextWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputVideoWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputVoiceWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityAbout.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityAddRemoveLibraryFiles.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityAnchorSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityBrowseFiles.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityChooseIpPort.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityChooseTestWebsiteUrl.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityCreateProfile.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityCreateAccount.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDebugSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloadItemMenu.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloads.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityEditAccount.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityEditProfile.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityFileSearch.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityIsPortOpenTest.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityInformation.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityManageAnchorSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityMessageBox.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetServiceTest.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkKey.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkState.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissions.cpp \
@@ -481,27 +470,19 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogoRenderer.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidgetShaderInterface.cpp
 
-FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAbout.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAnchorSettings.ui \
+FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityBrowseFiles.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityChooseIpAddress.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityChooseIpPort.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityChooseTestWebsiteUrl.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityConnectionOptions.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityCreateProfile.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityCreateAccount.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDebugSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDownloadItemMenu.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDownloads.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityEditAccount.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityEditProfile.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityFileSearch.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/ActivityInformation.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityIsPortOpenTest.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityManageAnchorSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityMessageBox.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetServiceTest.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkKey.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkStartupTest.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkStatus.ui \

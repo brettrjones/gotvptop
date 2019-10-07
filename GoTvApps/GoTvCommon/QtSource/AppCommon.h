@@ -48,7 +48,7 @@
 class IVxVidCap;
 class ListEntryWidget;
 class FileListReplySession;
-class ActivityCreateProfile;
+class ActivityCreateAccount;
 class ActivityOfferListDlg;
 class ActivityDownloads;
 class ActivityUploads;
@@ -89,6 +89,11 @@ public:
 
     // load profile and icons etc without using thread to avoid linux crash
     void                        loadWithoutThread( void );
+    // cannot launch any applets until logon is completed
+    void                        setLoginCompleted( bool completed )         { m_LoginComplete = completed; }
+    bool                        getLoginCompleted( void )                   { return m_LoginComplete; }
+
+    // some applets cannot be launched until application is fully ready for network use
     void                        setIsAppInitialized( bool initialized )     { m_AppInitialized = initialized; }
     bool                        getIsAppInitialized( void )                 { return m_AppInitialized; }
 
@@ -550,7 +555,7 @@ public:
 
 	void						viewWebServerPage( VxNetIdentBase * netIdent, const char * webPageFileName );
 
-	void						createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg );
+	void						createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg, int gender, int age, int primaryLanguage, int contentType );
 	std::string					getUserXferDirectoryFromAccountUserName( const char * userName );
 	std::string 				getUserSpecificDataDirectoryFromAccountUserName( const char * userName );
 
@@ -717,11 +722,11 @@ private:
 
 	HomeWindow					m_HomePage;
 
-	ActivityCreateProfile *		m_CreateProfileDlg;
-	ActivityDownloads *			m_Downloads;
-	ActivityUploads *			m_Uploads;
-	ActivityDebugSettings*		m_DebugSettingsDlg;
-	ActivityShowHelp *			m_ActivityShowHelpDlg;
+	ActivityCreateAccount *		m_CreateAccountDlg = nullptr;
+	ActivityDownloads *			m_Downloads = nullptr;
+	ActivityUploads *			m_Uploads = nullptr;
+	ActivityDebugSettings*		m_DebugSettingsDlg = nullptr;
+	ActivityShowHelp *			m_ActivityShowHelpDlg = nullptr;
 
 	std::string					m_strAccountUserName;
 
@@ -755,15 +760,15 @@ private:
 	VxMutex						m_ToGuiHardwareCtrlMutex;
 	std::vector<ToGuiHardwareCtrlClient> m_ToGuiHardwareCtrlList;
 
-	bool						m_LibraryActivityActive;
-	bool						m_VidCaptureEnabled;
-	bool						m_MicrophoneHardwareEnabled;
-	bool						m_SpeakerHardwareEnabled;
+	bool						m_LibraryActivityActive = false;
+	bool						m_VidCaptureEnabled = false;
+	bool						m_MicrophoneHardwareEnabled = false;
+	bool						m_SpeakerHardwareEnabled = false;
 	QVector<EPluginType>		m_VisiblePluginsList;
 	AppletMgr&					m_AppletMgr;
-    bool                        m_AppCommonInitialized;
-    bool                        m_LoginBegin;
-    bool                        m_LoginComplete;
+    bool                        m_AppCommonInitialized = false;
+    bool                        m_LoginBegin = false;
+    bool                        m_LoginComplete = false;
     bool                        m_AppInitialized = false;
 
 //    KodiThread *                m_KodiThread;

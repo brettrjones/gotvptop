@@ -24,6 +24,9 @@
 class AppCommon;
 class QWidget;
 class QFontMetrics;
+class QComboBox;
+class QLineEdit;
+class VxNetIdent;
 
 class GuiHelpers
 {
@@ -48,6 +51,19 @@ public:
 
     /// @brief get home or messenger topmost widget
     static QWidget *            getParentPageFrame( QWidget * curWidget );
+    static bool                 validateUserName( QWidget * curWidget, QString strUserName );
+    static bool                 validateMoodMessage( QWidget * curWidget, QString strMoodMsg );
+    static bool                 validateAge( QWidget * curWidget, int age );
 
+    static void                 setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident, QLineEdit * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
+    static void                 setIdentityFromValues( QWidget * curWidget, VxNetIdent * ident, QLineEdit * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
+
+    static QString              describeAge( int age );
+    static void                 fillGender( QComboBox * comboBox );
+    static QString              describeGender( EGenderType gender );
+    static void                 fillLanguage( QComboBox * comboBox );
+    static QString              describeLanguage( ELanguageType language );
+    static void                 fillContentRating( QComboBox * comboBox );
+    static QString              describePreferredContent( EContentType content );
 };
 

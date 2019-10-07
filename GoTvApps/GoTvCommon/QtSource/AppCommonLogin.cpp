@@ -17,7 +17,7 @@
 #include "AppSettings.h"
 #include "AppletMgr.h"
 
-#include "ActivityCreateProfile.h"
+#include "ActivityCreateAccount.h"
 
 #include "GuiHelpers.h"
 #include "VxDataHelper.h"
@@ -62,15 +62,24 @@ doover:
     {
         applySoundSettings( true );
         // user needs to create login and profile
-        m_CreateProfileDlg->setRootUserDataDirectory( m_AppSettings.m_strRootUserDataDir.c_str() );
-        if( QDialog::Rejected == m_CreateProfileDlg->exec() )
+        m_CreateAccountDlg->setRootUserDataDirectory( m_AppSettings.m_strRootUserDataDir.c_str() );
+        QWidget * win = static_cast<QWidget*>( QApplication::activeWindow() );
+        if( win )
+        {
+            m_CreateAccountDlg->setParent( win );
+            //m_CreateAccountDlg->setNewParent( win );
+        }
+
+        //m_CreateAccountDlg->show();
+        
+        if( QDialog::Rejected == m_CreateAccountDlg->exec() )
         {
             m_bUserCanceledCreateProfile = true;
             close();
             return;
         }
 
-        if( false == m_CreateProfileDlg->wasLoginNameEntered() )
+        if( false == m_CreateAccountDlg->wasLoginNameEntered() )
         {
             goto doover;
         }
@@ -101,10 +110,9 @@ void AppCommon::doAccountStartup( void )
 //============================================================================
 void AppCommon::completeLogin( void )
 {
-    //showUserNameInTitle();
-
     VxNetIdent * netIdent = getAppGlobals().getUserIdent();
     m_Engine.fromGuiUserLoggedOn( netIdent );
+    setLoginCompleted( true );
 
     // get settings from engine
     m_eLastSelectedWhichContactsToView = m_Engine.getEngineSettings().getWhichContactsToView();
@@ -156,7 +164,7 @@ bool AppCommon::loadLastUserAccount( void )
 }
 
 //============================================================================
-void AppCommon::createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg )
+void AppCommon::createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg, int gender, int age, int primaryLanguage, int contentType )
 {
     m_Engine.fromGuiSetUserXferDir( getUserXferDirectoryFromAccountUserName( strUserName.c_str() ).c_str() );
     // gotv (kodi) also needs the directory
@@ -173,6 +181,10 @@ void AppCommon::createAccountForUser( std::string& strUserName, VxNetIdent& user
 
     SafeStrCopy( userAccountIdent.getOnlineName(), strUserName.c_str(), MAX_ONLINE_NAME_LEN );
     SafeStrCopy( userAccountIdent.getOnlineDescription(), moodMsg, MAX_ONLINE_DESC_LEN );
+    userAccountIdent.setGender( gender );
+    userAccountIdent.setAge( age );
+    userAccountIdent.setPrimaryLanguage( primaryLanguage );
+    userAccountIdent.setPreferredContent( contentType );
 
     userAccountIdent.setPluginPermissionsToDefaultValues();
 

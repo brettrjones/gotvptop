@@ -14,7 +14,6 @@
 //============================================================================
 
 #include "AppletNetworkSettings.h"
-#include "ActivityAnchorSettings.h"
 #include "ActivityIsPortOpenTest.h"
 #include "ActivityNetworkState.h"
 #include "ActivityInformation.h"
@@ -61,6 +60,12 @@ AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
     updateDlgFromSettings();
 
 	m_MyApp.activityStateChange( this, true );
+}
+
+//============================================================================
+AppletNetworkSettings::~AppletNetworkSettings()
+{
+    m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================

@@ -25,25 +25,11 @@
 //============================================================================
 VxNetIdentBase::VxNetIdentBase()
 : VxConnectInfo()
-, m_u8Res( 0 )
-, m_u8OfferCnt(0)					// offer count ( used as part of rating )
-, m_u8ReplyCnt(0)					// reply count ( used as part of rating )
-, m_u32TruthCnt(0)						
-, m_u32DareCnt(0)					
-, m_u16RejectedTruthsCnt(0)				
-, m_u16RejectedDaresCnt(0)				
 {
 }
 
 //============================================================================
 VxNetIdentBase::VxNetIdentBase( const VxNetIdentBase &rhs )
-: m_u8Res( 0 )
-, m_u8OfferCnt(0)					// offer count ( used as part of rating )
-, m_u8ReplyCnt(0)					// reply count ( used as part of rating )
-, m_u32TruthCnt(0)
-, m_u32DareCnt(0)
-, m_u16RejectedTruthsCnt(0)				
-, m_u16RejectedDaresCnt(0)				
 {
 	*this = rhs;
 }

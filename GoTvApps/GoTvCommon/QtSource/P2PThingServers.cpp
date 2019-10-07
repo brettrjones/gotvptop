@@ -19,7 +19,6 @@
 #include "AppGlobals.h"
 
 #include "ActivityPermissions.h"
-#include "ActivityEditProfile.h"
 #include "ActivityStoryBoard.h"
 
 #include <CoreLib/VxGlobals.h>
@@ -46,10 +45,8 @@ void AppCommon::slotServerButtonClick( void )
 		break;
 	}
 
-	popupMenu.addMenuItem( 2, getMyIcons().getIcon( eMyIconProfile ), "Edit My Profile" );
-	popupMenu.addMenuItem( 3, getMyIcons().getIcon( eMyIconProfile ), "View My Profile" );
-	popupMenu.addMenuItem( 4, getMyIcons().getIcon( eMyIconStoryBoardNormal ), "Edit My Story Board" );
-	popupMenu.addMenuItem( 5, getMyIcons().getIcon( eMyIconStoryBoardNormal ), "View My Story Board" );
+	popupMenu.addMenuItem( 2, getMyIcons().getIcon( eMyIconProfile ), "View My Profile" );
+	popupMenu.addMenuItem( 3, getMyIcons().getIcon( eMyIconStoryBoardNormal ), "View My Story Board" );
 
 	connect( &popupMenu, SIGNAL(menuItemClicked(int, QWidget *)), this, SLOT(onMenuServerSelected(int, QWidget *)));
 	LogMsg( LOG_INFO, "AppCommon::slotServerButtonClick 4\n" );
@@ -85,27 +82,13 @@ void AppCommon::onMenuServerSelected( int iMenuId, QWidget * )
 
 		break;
 
-	case 2: // edit profile
-		{
-			ActivityEditProfile oDlg( *this,  VxGetUserSpecificDataDirectory().c_str(), this );
-			oDlg.exec();
-			break;
-		}
-
-	case 3: // view my profile
+	case 2: // view my profile
 		{
 			viewWebServerPage( getAppGlobals().getUserIdent(), "index.htm" );
 			break;
 		}
 
-	case 4: // edit storyboard
-		{
-			ActivityStoryBoard oDlg( *this, this );
-			oDlg.exec();
-			break;
-		}
-
-	case 5: // view my storyboard
+	case 3: // view my storyboard
 		{
 			viewWebServerPage( getAppGlobals().getUserIdent(), "story_board.htm" );
 			break;

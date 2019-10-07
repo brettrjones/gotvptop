@@ -23,7 +23,7 @@
 AppletSharedContent::AppletSharedContent( AppCommon& app, QWidget * parent )
 : AppletBase( OBJNAME_APPLET_SHARED_CONTENT, app, parent )
 {
-	m_EAppletType = eAppletSharedContent;
+	setAppletType( eAppletSharedContent );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
 

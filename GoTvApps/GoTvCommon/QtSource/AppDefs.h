@@ -90,6 +90,7 @@ enum EApplet
 
     eMaxSharedServicesApplets, // marker.. past here is optional applets based on feature
 
+
     eAppletPlayerVideo,
 
 	ePluginAppletCamProvider,
@@ -97,7 +98,7 @@ enum EApplet
 	ePluginAppletGoTvNetworkHost,
 
     // not lauched by user
-    eActivityCreateProfile,
+    eAppletCreateAccount,
 
 	eMaxApplets // must be last
 };

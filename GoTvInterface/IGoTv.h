@@ -23,7 +23,6 @@
 #include <GoTvInterface/IGoTvEvents.h>
 #include <GoTvInterface/IAudioInterface.h>
 
-
 #include <string>
 
 class OsInterface;
@@ -34,7 +33,6 @@ class P2PEngine;
 class AppCommon;
 // media player
 class CRenderBuffer;
-
 
 class IGoTv : public IToGui, public IGoTvRender, public IGoTvEvents, public IAudioRequests
 {
@@ -447,6 +445,8 @@ public:
     virtual void				fromGuiUserLoggedOn( VxNetIdent * netIdent );
     virtual void				fromGuiOnlineNameChanged( const char * newOnlineName );
     virtual void				fromGuiMoodMessageChanged( const char * newMoodMessage );
+    virtual void				fromGuiIdentPersonalInfoChanged( int age, int gender, int language, int preferredContent );
+
     virtual void				fromGuiSetUserHasProfilePicture( bool haveProfilePick );
     virtual void				fromGuiUpdateMyIdent( VxNetIdent * netIdent, bool permissionAndStatsOnly );
     virtual void				fromGuiQueryMyIdent( VxNetIdent * poRetIdent );
@@ -469,7 +469,8 @@ public:
                                                              const char *	aboutMe,		// about me text
                                                              const char *	url1,			// favorite url 1
                                                              const char *	url2,			// favorite url 2
-                                                             const char *	url3 );			// favorite url 3
+                                                             const char *	url3,			// favorite url 3
+                                                             const char *	donation );     // donation
 
     virtual void 				fromGuiSetPluginPermission( EPluginType ePluginType, int eFriendState );
     virtual int					fromGuiGetPluginPermission( EPluginType ePluginType );
