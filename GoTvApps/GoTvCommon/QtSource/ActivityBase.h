@@ -58,7 +58,8 @@ public:
 
 	void						setAppletType( EApplet applet )		{ m_EAppletType = applet; }
 	EApplet						getAppletType( void )				{ return m_EAppletType; }
-	bool						isApplet( void )					{ return ( eAppletUnknown != m_EAppletType ); }	
+    void						setIsAppletLaunchWidget( bool isLaunchWidget ) { m_IsAppletLaunchWidget = isLaunchWidget; }
+    bool						getIsAppletLaunchWidget( void )     { return m_IsAppletLaunchWidget; }
     bool                        isMessagerFrame( void );
 
     virtual TitleBarWidget *	getTitleBarWidget( void );
@@ -284,6 +285,7 @@ protected:
     QWidget *					m_ParentWidget = nullptr;
 
 	EApplet						m_EAppletType = eAppletUnknown;
+    bool                        m_IsAppletLaunchWidget = false;
 	QLabel *					m_StatusMsgLabel = nullptr;
 
 	EPluginType					m_ePluginType = ePluginTypeInvalid;

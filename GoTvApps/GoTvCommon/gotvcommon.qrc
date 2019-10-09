@@ -211,5 +211,6 @@
         <file>Resources/key-disabled.svg</file>
         <file>Resources/key-enabled.svg</file>
         <file>Resources/share-services.svg</file>
+        <file>Resources/search-random-person.svg</file>
     </qresource>
 </RCC>

@@ -282,9 +282,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPersonalRecorder.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPhoneShake.cpp">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityReplyFileOffer.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
@@ -777,6 +774,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityIsPortOpenTest.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletRandomPerson.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -825,9 +825,6 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityPersonalRecorder.ui">
-      <Filter>GoTvCommon\Forms</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityPhoneShake.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityReplyFileOffer.ui">
@@ -1143,9 +1140,6 @@
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityPersonalRecorder.h">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityPhoneShake.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityReplyFileOffer.h">
@@ -1561,6 +1555,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityIsPortOpenTest.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletRandomPerson.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -2115,9 +2112,6 @@
     <ClInclude Include="GeneratedFiles\ui_ActivityPersonalRecorder.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_ActivityPhoneShake.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_ActivityReplyFileOffer.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -2606,6 +2600,9 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityInformation.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletRandomPerson.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

@@ -226,7 +226,7 @@
       </PrecompiledHeaderOutputFile>
       <CallingConvention>Cdecl</CallingConvention>
       <BufferSecurityCheck>true</BufferSecurityCheck>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <FloatingPointModel>Fast</FloatingPointModel>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -420,7 +420,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\GoTvP2P\AnchorTest\AnchorTest.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\AnchorTest\AnchorTest.cpp">
+      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</MultiProcessorCompilation>
+    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Anchor\AnchorDb.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Anchor\AnchorList.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Anchor\AnchorListEntry.cpp" />

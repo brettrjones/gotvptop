@@ -9,6 +9,7 @@ Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
 
  SimpleIcon http://www.simpleicon.com/
  magnifier-on-a-user.svg
+ search-random-person.svg ( modified )
 
   
  https://commons.wikimedia.org

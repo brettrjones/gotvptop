@@ -574,6 +574,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/wireless-key.svg";
     case eMyIconNetworkSettings:
         return ":/AppRes/Resources/wireless-setup.svg";
+    case eMyIconSearchRandomPerson:
+        return ":/AppRes/Resources/search-random-person.svg";
 
 	// built in plugin options
 	case eMyIconCamStreamProvider:

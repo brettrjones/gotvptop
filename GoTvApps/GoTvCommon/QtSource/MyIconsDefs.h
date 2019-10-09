@@ -272,6 +272,7 @@ enum EMyIcons
 
     eMyIconNetworkKey,
     eMyIconNetworkSettings,
+    eMyIconSearchRandomPerson,
 
 	// built in plugin options
 	eMyIconCamStreamProvider,

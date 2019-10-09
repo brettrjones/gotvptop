@@ -28,6 +28,7 @@
 #include "AppletNetworkSettings.h"
 #include "AppletPersonalRecorder.h"
 #include "AppletPlayerVideo.h"
+#include "AppletRandomPerson.h"
 #include "AppletSettings.h"
 #include "AppletShareServicesPage.h"
 #include "AppletSharedContent.h"
@@ -51,7 +52,7 @@ AppletMgr::AppletMgr( AppCommon& myMpp, QWidget * parent )
 RenderGlWidget * AppletMgr::getRenderConsumer( void )
 {
     RenderGlWidget * renderConsumer = nullptr;
-    for( auto iter = m_AppletList.begin(); iter != m_AppletList.end(); ++iter )
+    for( auto iter = m_ActivityList.begin(); iter != m_ActivityList.end(); ++iter )
     {
         if( eAppletKodi == (*iter)->getAppletType()  )
         {
@@ -97,9 +98,13 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 {
 //    ActivityAbout * activity;
 	ActivityBase * appletDialog = findAppletDialog( applet );
-	if( 0 != appletDialog )
+	if( appletDialog )
 	{
 		bringAppletToFront( appletDialog );
+#ifdef DEBUG
+        m_MyApp.errMessageBox2( QObject::tr( "AppletMgr::launchApplet" ).toUtf8().constData(), QObject::tr( "Applet enum %d already launched\n" ).toUtf8().constData(), applet );
+#endif // DEBUG
+
 		return;
 	}
 
@@ -108,7 +113,7 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 		parent = getActiveWindow();
 	}
 
-	QString appletMissingTitle = "Applet Not Yet Implemented";
+	QString appletMissingTitle = QObject::tr( "Applet Not Yet Implemented" );
 	switch( applet )
 	{
     case eAppletAboutGoTvPtoP:
@@ -153,10 +158,10 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletNetworkSettings:
         appletDialog = new AppletNetworkSettings( m_MyApp, parent );
         break;
-    //case eAppletNetworkKey:
-   //     appletDialog = new AppletNetworkKey( m_MyApp, parent );
-   //     break;
-	case eAppletSettings:
+    case eAppletRandomPerson:
+        appletDialog = new AppletRandomPerson( m_MyApp, parent );
+        break;
+    case eAppletSettings:
 		appletDialog = new AppletSettings( m_MyApp, parent );
 		break;
     case eAppletGroupUser:
@@ -196,10 +201,6 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 		m_MyApp.errMessageBox( appletMissingTitle, "Unknown Not Implemented" );
 		return;
     case eAppletUserIdentity:
-        //m_MyApp.errMessageBox( appletMissingTitle, "User Identity Not Implemented" );
-        //activity = new ActivityAbout( m_MyApp, parent );
-        //activity->show();
-        //return;
         appletDialog = new AppletUserIdentity( m_MyApp, parent );
         break;
     case eAppletSharedContent:
@@ -212,7 +213,7 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
         appletDialog = new AppletStoryboard( m_MyApp, parent );
         break;
 	default:
-		m_MyApp.errMessageBox2( "AppCommon::launchApplet", "Invalid Applet enum %d\n", applet );
+		m_MyApp.errMessageBox2( QObject::tr( "AppCommon::launchApplet").toUtf8().constData(), QObject::tr( "Invalid Applet enum %d\n" ).toUtf8().constData(), applet );
 		return;
 	}
 
@@ -221,25 +222,26 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
         AppSettings& appSettings = m_MyApp.getAppSettings();
         appSettings.setLastAppletLaunched( applet );
 
-        m_AppletList.push_back( appletDialog );
         appletDialog->aboutToLaunchApplet();
         appletDialog->show();
-	}
+        if( !findAppletDialog( appletDialog ) )
+        {
+            m_ActivityList.push_back( appletDialog );
+        }
+    }
 }
 
 //============================================================================
 void AppletMgr::activityStateChange( ActivityBase * activity, bool isCreated )
 {
-	if( activity->isApplet() )
+	if( !isCreated )
 	{
-		if( !isCreated )
-		{
-			removeApplet( activity->getAppletType() );
-		}
-		else
-		{
-			addApplet( activity );
-		}
+		//removeApplet( activity->getAppletType() );
+        removeApplet( activity );
+	}
+	else
+	{
+		addApplet( activity );
 	}
 }
 
@@ -253,7 +255,7 @@ void AppletMgr::bringAppletToFront( ActivityBase * appletDialog )
 ActivityBase * AppletMgr::findAppletDialog( EApplet applet )
 {
 	QVector<ActivityBase *>::iterator iter;
-	for( iter = m_AppletList.begin(); iter != m_AppletList.end(); ++iter )
+	for( iter = m_ActivityList.begin(); iter != m_ActivityList.end(); ++iter )
 	{
 		if( applet == (*iter)->getAppletType() )
 		{
@@ -261,15 +263,33 @@ ActivityBase * AppletMgr::findAppletDialog( EApplet applet )
 		}
 	}
 	
-	return 0;
+	return nullptr;
+}
+
+//============================================================================
+ActivityBase * AppletMgr::findAppletDialog( ActivityBase * activity )
+{
+    if( activity )
+    {
+        QVector<ActivityBase *>::iterator iter;
+        for( iter = m_ActivityList.begin(); iter != m_ActivityList.end(); ++iter )
+        {
+            if( activity == ( *iter ) )
+            {
+                return *iter;
+            }
+        }
+    }
+
+    return nullptr;
 }
 
 //============================================================================
 void AppletMgr::addApplet( ActivityBase * activity )
 {
-	if( 0 == findAppletDialog( activity->getAppletType() ) )
+	if( 0 == findAppletDialog( activity ) )
 	{
-		m_AppletList.push_back( activity );
+        m_ActivityList.push_back( activity );
 	}
 	else 
 	{
@@ -281,12 +301,26 @@ void AppletMgr::addApplet( ActivityBase * activity )
 void AppletMgr::removeApplet( EApplet applet )
 {
 	QVector<ActivityBase *>::iterator iter;
-	for( iter = m_AppletList.begin(); iter != m_AppletList.end(); ++iter )
+	for( iter = m_ActivityList.begin(); iter != m_ActivityList.end(); ++iter )
 	{
 		if( applet == ( *iter )->getAppletType() )
 		{
-			m_AppletList.erase( iter );
-			return;;
+            m_ActivityList.erase( iter );
+			break;
 		}
 	}
+}
+
+//============================================================================
+void AppletMgr::removeApplet( ActivityBase * activity )
+{
+    QVector<ActivityBase *>::iterator iter;
+    for( iter = m_ActivityList.begin(); iter != m_ActivityList.end(); ++iter )
+    {
+        if( activity == ( *iter ) )
+        {
+            m_ActivityList.erase( iter );
+            break;
+        }
+    }
 }

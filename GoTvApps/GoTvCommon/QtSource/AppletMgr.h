@@ -23,6 +23,7 @@ class AppCommon;
 class HomeWindow;
 class QFrame;
 class RenderGlWidget;
+class AppletLaunchWidget;
 
 class AppletMgr : public QWidget
 {
@@ -41,13 +42,16 @@ public:
 protected:
 	void						addApplet( ActivityBase * activity );
 	void						removeApplet( EApplet applet );
+    void						removeApplet( ActivityBase * activity );
 
 	void						bringAppletToFront( ActivityBase * appletDialog );
 	ActivityBase *				findAppletDialog( EApplet applet );
+    ActivityBase *              findAppletDialog( ActivityBase * activity );
+
 	QWidget *					getActiveWindow( void );
 
-
 	AppCommon&					m_MyApp;
-	QVector<ActivityBase *>		m_AppletList;
+    QVector<AppletLaunchWidget *>		m_AppletList;
+	QVector<ActivityBase *>		m_ActivityList;
 };
 

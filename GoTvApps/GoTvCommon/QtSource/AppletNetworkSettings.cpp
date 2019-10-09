@@ -42,22 +42,22 @@ AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
 	setAppletType( eAppletNetworkSettings );
 	ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
+
     ui.m_NetworkHostInfoButton->setIcon( eMyIconInformation );
     ui.m_NetworkHostButton->setIcon( eMyIconNetHosting );
     ui.m_NetworkKeyInfoButton->setIcon( eMyIconInformation );
     ui.m_NetworkKeyButton->setIcon( eMyIconNetworkKey );
-
-    connectSignals();
 
     // save original values so can restore them if need be
 //   m_Engine.getEngineSettings().getAnchorWebsiteUrl( m_OrigAnchorUrl );
    //m_Engine.getEngineSettings().getNetworkName( m_OrigNetworkName );
    //m_Engine.getEngineSettings().getNetServiceWebsiteUrl( m_OrigConnectionTestUrl );
 
-   //updateDlgFromSettings();
 
 
     updateDlgFromSettings();
+
+    connectSignals();
 
 	m_MyApp.activityStateChange( this, true );
 }
@@ -276,9 +276,9 @@ void AppletNetworkSettings::updateSettingsFromDlg()
 //============================================================================
 void AppletNetworkSettings::slotExitButtonClick()
 {
-    updateSettingsFromDlg();
-    m_Engine.fromGuiNetworkSettingsChanged();
-    accept();
+    //updateSettingsFromDlg();
+    //m_Engine.fromGuiNetworkSettingsChanged();
+    close();
 }
 
 //============================================================================

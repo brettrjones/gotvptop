@@ -82,6 +82,7 @@
 #define OBJNAME_APPLET_NETWORK_SETTINGS			        "AppletNetworkSettings"
 #define OBJNAME_APPLET_PERSONAL_RECORDER				"AppletPersonalRecorder"
 #define OBJNAME_APPLET_PLAYER_VIDEO						"AppletPlayerVideo"
+#define OBJNAME_APPLET_RANDOM_PERSON				    "AppletRandomPerson"
 #define OBJNAME_APPLET_REMOTE_CONTROL					"AppletRemoteControl"
 #define OBJNAME_APPLET_SHARE_SEVICES_PAGE				"AppletShareServices"
 #define OBJNAME_APPLET_SHARED_CONTENT				    "AppletSharedContent"

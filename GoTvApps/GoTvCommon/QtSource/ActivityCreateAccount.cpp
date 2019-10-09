@@ -90,7 +90,7 @@ bool ActivityCreateAccount::accountValidate( void )
     QString strMoodMsg = ui.m_MoodMessageEdit->text();
     validAccount &= GuiHelpers::validateMoodMessage( this, strMoodMsg );
 
-        validAccount &= GuiHelpers::validateAge( this, ui.m_AgeEdit->text().toInt() );
+    validAccount &= GuiHelpers::validateAge( this, ui.m_AgeEdit->text().toInt() );
 
     return validAccount;
 }
@@ -99,6 +99,6 @@ bool ActivityCreateAccount::accountValidate( void )
 bool ActivityCreateAccount::wasLoginNameEntered( void )
 {
     QString strUserName = ui.m_UserNameEdit->text();
-    return strUserName.length() > 0 ? true : false;
+    return strUserName.length() > 3 ? true : false;
 }
 

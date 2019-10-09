@@ -94,7 +94,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissions.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissionsRelay.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPersonalRecorder.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPhoneShake.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityReplyFileOffer.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanPeopleSearch.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanProfiles.h \
@@ -192,6 +191,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerVideo.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletRandomPerson.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSharedContent.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.h \
@@ -324,7 +324,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissions.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissionsRelay.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPersonalRecorder.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPhoneShake.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityReplyFileOffer.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanPeopleSearch.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanProfiles.cpp \
@@ -428,6 +427,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletRandomPerson.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareServicesPage.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletSharedWebCam.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletStoryboard.cpp \
@@ -490,7 +490,6 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPermissions.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPermissionsRelay.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPersonalRecorder.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPhoneShake.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityReplyFileOffer.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanPeopleSearch.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanProfiles.ui \
@@ -578,7 +577,8 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupUser \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletKodi.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPersonalRecorder.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletSharedContent.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletRandomPerson.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletSharedContent.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletUserIdentity.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/BottomBarWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PlayerGlWidget.ui \

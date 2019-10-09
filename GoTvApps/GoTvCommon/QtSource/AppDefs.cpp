@@ -61,6 +61,7 @@ EMyIcons GetAppletIcon( EApplet applet )
 	case eAppletTheme:					return eMyIconTheme;
     //case eAppletNetworkKey:				return eMyIconNetworkKey;
     case eAppletNetworkSettings:	    return eMyIconNetworkSettings;
+    case eAppletRandomPerson:	        return eMyIconSearchRandomPerson;
 	case eAppletSettings:				return eMyIconSettings;
 
     case eAppletGroupUser:              return eMyIconGroupUser;
@@ -111,7 +112,7 @@ QString DescribeApplet( EApplet applet )
 	case eAppletTheme:					return QObject::tr( "Theme" );
     //case eAppletNetworkKey:				return QObject::tr( "Network Key" );
     case eAppletNetworkSettings:		return QObject::tr( "Network Settings" );
-
+    case eAppletRandomPerson:		    return QObject::tr( "Connect With Random Person" );
 	case eAppletSettings:				return QObject::tr( "Settings" );
 
     case eAppletGroupUser:              return QObject::tr( "Join Group" );

@@ -20,11 +20,8 @@ class AppletSharedContent : public AppletBase
 	Q_OBJECT
 public:
 	AppletSharedContent( AppCommon& app, QWidget * parent );
-	virtual ~AppletSharedContent();
+	virtual ~AppletSharedContent() override;
 
-
-
-protected:
 };
 
 

@@ -56,11 +56,12 @@ enum EApplet
 	eAppletHomePage,
     eAppletKodi,
     eAppletUserIdentity,
-    eAppletGroupUser,	// user who can join group
     eAppletMessenger,
-    eAppletShareServicesPage, // page to setup share with others services
     eAppletPersonalRecorder,
     eAppletLibrary,
+    eAppletShareServicesPage, // page to setup share with others services
+    eAppletRandomPerson, // connect to random person
+    eAppletGroupUser,	// user who can join group
 //	eAppletPlayerMusic,
 //	eAppletPlayerPhoto,
 //	eAppletStreamViewerVideo,
@@ -69,10 +70,10 @@ enum EApplet
 //  eAppletRemoteControl,
 	//eAppletPlugins,
 
-    eAppletNetHostingPage,	// page to setup group or group listing hosts
-    eAppletTheme,
     eAppletSettings,
     eAppletNetworkSettings,
+    eAppletNetHostingPage,	// page to setup group or group listing hosts
+    eAppletTheme,
     eAppletAboutGoTvPtoP,
 
 	eMaxBasicApplets, // marker.. past here is hosting applets
@@ -87,9 +88,7 @@ enum EApplet
     eAppletSharedWebCam,
     eAppletSharedContent,
 
-
     eMaxSharedServicesApplets, // marker.. past here is optional applets based on feature
-
 
     eAppletPlayerVideo,
 
