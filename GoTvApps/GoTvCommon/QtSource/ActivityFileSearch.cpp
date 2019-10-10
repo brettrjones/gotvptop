@@ -22,7 +22,7 @@ ActivityFileSearch * g_poFileSearchActivity = NULL;
 
 //============================================================================
 ActivityFileSearch::ActivityFileSearch(	AppCommon& app,  QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_FILE_SEARCH, app, parent, eAppletMessenger, true, false ) 
+: ActivityBase( OBJNAME_ACTIVITY_FILE_SEARCH, app, parent, eAppletScanSharedFiles, true, false )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("File Search" ) );
@@ -33,7 +33,7 @@ ActivityFileSearch::ActivityFileSearch(	AppCommon& app,  QWidget * parent )
     connect(ui.FileItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *)));
     connect(ui.FileItemList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(slotItemClicked(QListWidgetItem *)));
 
-            g_poFileSearchActivity = this;
+    g_poFileSearchActivity = this;
 	setTitle("FileSearch" );
 }
 

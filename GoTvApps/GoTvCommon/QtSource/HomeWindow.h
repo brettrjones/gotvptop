@@ -39,6 +39,7 @@ public:
 
 	QFrame *					getAppletFrame( EApplet applet );
 	QFrame *					getMessengerParentFrame( void );
+    QFrame *					getLaunchPageFrame( void );
 
 signals:
 	void						signalMainWindowResized( void );

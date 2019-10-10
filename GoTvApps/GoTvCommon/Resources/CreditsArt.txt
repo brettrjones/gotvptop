@@ -9,7 +9,12 @@ Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
 
  SimpleIcon http://www.simpleicon.com/
  magnifier-on-a-user.svg
- search-random-person.svg ( modified )
+ search-random-person.svg 	( modified )
+ search-normal.svg 			( modified )
+ search-heart.svg 			( modified )
+ search-image.svg 			( modified )
+ search-storyboard.svg 		( modified )
+ search-webcam.svg 			( modified )
 
   
  https://commons.wikimedia.org
@@ -96,6 +101,7 @@ align-left.svg
  share.svg
 arrow-expand.svg
 arrow-shrink.svg
+heart.svg
 pause.svg
 
  

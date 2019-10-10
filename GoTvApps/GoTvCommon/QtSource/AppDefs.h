@@ -59,36 +59,40 @@ enum EApplet
     eAppletMessenger,
     eAppletPersonalRecorder,
     eAppletLibrary,
-    eAppletShareServicesPage, // page to setup share with others services
-    eAppletRandomPerson, // connect to random person
     eAppletGroupUser,	// user who can join group
-//	eAppletPlayerMusic,
-//	eAppletPlayerPhoto,
-//	eAppletStreamViewerVideo,
-//	eAppletStreamViewerCam,
-//	eAppletStreamViewerMusic,
-//  eAppletRemoteControl,
-	//eAppletPlugins,
+    eAppletSearchPage,
+    eAppletShareServicesPage, // page to setup share with others services
 
     eAppletSettings,
     eAppletNetworkSettings,
-    eAppletNetHostingPage,	// page to setup group or group listing hosts
+    eAppletNetHostingPage,	    // page to setup group or group listing hosts
     eAppletTheme,
     eAppletAboutGoTvPtoP,
 
-	eMaxBasicApplets, // marker.. past here is hosting applets
+	eMaxBasicApplets,           // marker.. past here is search applets
 
-    eAppletGroupHost,	// user who hosts a group
-    eAppletGroupAnchor, // network service for group hosts.. search, provide ip address etc
+    eAppletSearchPersons,       // search for person in group by name
+    eAppletSearchMood,          // search for mood message
+    eAppletScanAboutMe,         // scan group for pictures in about me page
+    eAppletScanStoryboard,      // scan group for pictures in about me page
+    eAppletScanSharedFiles,     // searc group for shared files
+    eAppletScanWebCam,          // scan group for shared web cams
+
+    eAppletRandomPerson,        // connect to random person
+
+    eMaxSearchApplets,          // marker.. past here is hosting applets
+
+    eAppletGroupHost,	        // user who hosts a group
+    eAppletGroupAnchor,         // network service for group hosts.. search, provide ip address etc
     eAppletGoTvPtoPNetworkHost, // network service for a gotvptop network.. privide fixed ip address, group anchor lists
 
-    eMaxHostApplets, // marker.. past here is optional applets for user share services
+    eMaxHostApplets,            // marker.. past here is optional applets for user share services
 
     eAppletStoryboard,
     eAppletSharedWebCam,
     eAppletSharedContent,
 
-    eMaxSharedServicesApplets, // marker.. past here is optional applets based on feature
+    eMaxSharedServicesApplets,  // marker.. past here is optional applets based on feature
 
     eAppletPlayerVideo,
 
@@ -98,6 +102,14 @@ enum EApplet
 
     // not lauched by user
     eAppletCreateAccount,
+
+    //	eAppletPlayerMusic,
+    //	eAppletPlayerPhoto,
+    //	eAppletStreamViewerVideo,
+    //	eAppletStreamViewerCam,
+    //	eAppletStreamViewerMusic,
+    //  eAppletRemoteControl,
+        //eAppletPlugins,
 
 	eMaxApplets // must be last
 };

@@ -48,6 +48,9 @@ protected:
 	ActivityBase *				findAppletDialog( EApplet applet );
     ActivityBase *              findAppletDialog( ActivityBase * activity );
 
+    void                        makeMessengerFullSized( void );
+
+
 	QWidget *					getActiveWindow( void );
 
 	AppCommon&					m_MyApp;

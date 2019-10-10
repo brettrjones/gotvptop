@@ -29,7 +29,7 @@
 ActivityScanPeopleSearch::ActivityScanPeopleSearch(	AppCommon&		app, 
 													EScanType			eSearchType,
 													QWidget *			parent )
-: ActivityBase( OBJNAME_ACTIVITY_PEOPLE_SEARCH, app, parent, eAppletMessenger, true )
+: ActivityBase( OBJNAME_ACTIVITY_PEOPLE_SEARCH, app, parent, eAppletSearchPersons, true )
 , m_eScanType( eSearchType )
 {
 	ui.setupUi(this);

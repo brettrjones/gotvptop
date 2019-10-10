@@ -31,7 +31,7 @@ namespace
 //============================================================================
 ActivityScanProfiles::ActivityScanProfiles(	AppCommon&	app, 
 											QWidget *		parent )
-: ActivityBase( OBJNAME_ACTIVITY_SCAN_PROFILES, app, parent, eAppletMessenger, true )
+: ActivityBase( OBJNAME_ACTIVITY_SCAN_PROFILES, app, parent, eAppletScanAboutMe, true )
 , m_Ident( NULL )
 , m_iCountdownCnt( 0 )
 , m_bPaused( false )

@@ -30,7 +30,7 @@ namespace
 //============================================================================
 ActivityScanWebCams::ActivityScanWebCams(	AppCommon&	app, 
 											QWidget *		parent )
-: ActivityBase( OBJNAME_ACTIVITY_SCAN_WEB_CAMS, app, parent, eAppletMessenger, true ) //Qt::Popup ) //
+: ActivityBase( OBJNAME_ACTIVITY_SCAN_WEB_CAMS, app, parent, eAppletScanWebCam, true ) //Qt::Popup ) //
 , m_HisIdent( NULL )
 , m_iCountdownCnt( 0 )
 , m_bPaused( false )

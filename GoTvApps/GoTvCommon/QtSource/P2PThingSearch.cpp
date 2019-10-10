@@ -21,7 +21,6 @@
 #include "ActivityScanProfiles.h"
 #include "ActivityScanWebCams.h"
 #include "ActivityFileSearch.h"
-#include "ActivityPhoneShake.h"
 
 //============================================================================
 void AppCommon::slotSearchButtonClick( void )

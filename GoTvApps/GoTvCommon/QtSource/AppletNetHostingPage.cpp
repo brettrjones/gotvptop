@@ -53,7 +53,7 @@ void AppletNetHostingPage::setupAppletNetHostingPage( void )
     {
         m_AppletList.clear();
         // create launchers for the basic applets
-        for( int i = int( eMaxBasicApplets + 1 ); i < eMaxHostApplets; i++ )
+        for( int i = int( eMaxSearchApplets + 1 ); i < eMaxHostApplets; i++ )
         {
             AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ( EApplet )i, this );
             m_AppletList.push_back( applet );

@@ -212,5 +212,9 @@
         <file>Resources/key-enabled.svg</file>
         <file>Resources/share-services.svg</file>
         <file>Resources/search-random-person.svg</file>
+        <file>Resources/search-heart.svg</file>
+        <file>Resources/search-image.svg</file>
+        <file>Resources/search-webcam.svg</file>
+        <file>Resources/search-storyboard.svg</file>
     </qresource>
 </RCC>

@@ -134,8 +134,22 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/info.svg";
 	case eMyIconPeople:
 		return ":/AppRes/Resources/friend.svg";
+
 	case eMyIconSearch:
 		return ":/AppRes/Resources/search-normal.svg";
+    case eMyIconSearchFolder:
+        return ":/AppRes/Resources/file-folder-search.svg";
+    case eMyIconSearchPerson:
+        return ":/AppRes/Resources/magnifier-on-a-user.svg";
+    case eMyIconSearchHeart:
+        return ":/AppRes/Resources/search-heart.svg";
+    case eMyIconSearchImage:
+        return ":/AppRes/Resources/search-image.svg";
+    case eMyIconSearchStoryboard:
+        return ":/AppRes/Resources/search-storyboard.svg";
+    case eMyIconSearchWebCam:
+        return ":/AppRes/Resources/search-webcam.svg";
+
 	case eMyIconServers:
 		return ":/AppRes/Resources/radio-tower.svg";
 	case eMyIconOptions:

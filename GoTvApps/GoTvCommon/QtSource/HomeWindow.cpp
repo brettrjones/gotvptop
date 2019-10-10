@@ -247,6 +247,12 @@ QFrame * HomeWindow::getMessengerParentFrame( void )
 }
 
 //============================================================================
+QFrame * HomeWindow::getLaunchPageFrame( void )
+{ 
+    return m_HomeFrameUpperLeft;
+}
+
+//============================================================================
 void HomeWindow::slotDeviceOrientationChanged( int qtOrientation )
 {
     m_Orientation = (Qt::Orientation)qtOrientation;

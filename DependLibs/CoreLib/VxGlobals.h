@@ -106,11 +106,7 @@ std::string&	            VxGetRootUserDataDirectory(void);
 void			            VxSetUserSpecificDataDirectory( const char * userDataDir  );
 std::string&	            VxGetUserSpecificDataDirectory( void  );
 std::string&	            VxGetSettingsDirectory( void );
-std::string&	            VxGetUserProfileDirectory( void );
-
-// storyboard is same as profile directory
-//std::string&	VxGetStoryboardDirectory( void );
-
+std::string&	            VxGetUserProfileDirectory( void ); // storyboard is same as profile directory
 
 void			            VxSetRootXferDirectory( const char * rootXferDir  );
 std::string&	            VxGetRootXferDirectory( void ) ;
@@ -122,15 +118,11 @@ std::string&	            VxGetUploadsDirectory( void );
 std::string&	            VxGetIncompleteDirectory( void );
 std::string&	            VxGetPersonalRecordDirectory( void );
 
-
 //============================================================================
 //=== miscellaneous ===//
 //============================================================================
 void			VxSetNetworkLoopbackAllowed( bool bIsLoopbackAllowed );
 bool			VxIsNetworkLoopbackAllowed( void );
-
-uint16_t		VxGetP2PDefaultTcpPort();
-uint16_t		VxGetP2PDefaultUdpPort();
 
 void			VxSetDebugEnable( bool enableDebug );
 bool			VxIsDebugEnabled( void );

@@ -12,10 +12,17 @@ enum EMyIcons
 
     eMyIconInformation,
     eMyIconPeople,
-	eMyIconSearch,
 	eMyIconServers,
 	eMyIconOptions,
 	eMyIconFileServer,
+
+    eMyIconSearch,
+    eMyIconSearchPerson,
+    eMyIconSearchHeart,
+    eMyIconSearchWebCam,
+    eMyIconSearchImage,
+    eMyIconSearchStoryboard,
+    eMyIconSearchFolder,
 
 	eMyIconAdministrator,
 	eMyIconFriend,
