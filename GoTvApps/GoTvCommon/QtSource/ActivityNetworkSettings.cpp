@@ -15,7 +15,7 @@
 
 #include "ActivityNetworkSettings.h"
 #include "AppCommon.h"
-#include "ActivityAnchorSettings.h"
+#include "ActivityNetHostSettings.h"
 #include "ActivityIsPortOpenTest.h"
 #include "AppGlobals.h"
 
@@ -47,7 +47,7 @@ ActivityNetworkSettings::ActivityNetworkSettings( AppCommon& app, QWidget * pare
 void ActivityNetworkSettings::connectSignals( void )
 {
 	connect( ui.m_TitleBarWidget,					SIGNAL(signalBackButtonClicked()), this, SLOT( slotExitButtonClick() ) );
-	connect( ui.m_GoToAnchorSettingsButton,			SIGNAL(clicked()), this, SLOT( slotGoToAnchorSettingsButtonClick() ) );
+	connect( ui.m_GoToNetHostSettingsButton,			SIGNAL(clicked()), this, SLOT( slotGoToNetHostSettingsButtonClick() ) );
 
 	connect( ui.AutoDetectProxyRadioButton,			SIGNAL(clicked()), this, SLOT( slotAutoDetectProxyClick() ) );
 	connect( ui.AssumeNoProxyRadioButton,			SIGNAL(clicked()), this, SLOT( slotNoProxyClick() ) );
@@ -182,10 +182,10 @@ void ActivityNetworkSettings::slotExitButtonClick()
 }
 
 //============================================================================
-void ActivityNetworkSettings::slotGoToAnchorSettingsButtonClick()
+void ActivityNetworkSettings::slotGoToNetHostSettingsButtonClick()
 {
 
-	ActivityAnchorSettings * dlg = new ActivityAnchorSettings( 
+	ActivityNetHostSettings * dlg = new ActivityNetHostSettings( 
 		m_MyApp,
 		this			);
 	dlg->exec();

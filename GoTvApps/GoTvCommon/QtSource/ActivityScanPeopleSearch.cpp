@@ -46,13 +46,13 @@ ActivityScanPeopleSearch::ActivityScanPeopleSearch(	AppCommon&		app,
 
 	if( eScanTypePeopleSearch == getScanType() )
 	{
-		setTitle( "Search for people by name" );
-		ui.SearchLabel->setText( "Search for name (at least 3 characters)" );
+		setTitle( QObject::tr( "Search for people by name" ) );
+		ui.SearchLabel->setText( QObject::tr( "Search for name (at least 3 characters)" ) );
 	}
 	else
 	{
-		setTitle( "Search for people by mood message" );
-		ui.SearchLabel->setText( "Search for mood message (at least 3 characters)" );
+		setTitle( QObject::tr( "Search for people by mood message" ) );
+		ui.SearchLabel->setText( QObject::tr( "Search for mood message (at least 3 characters)" ) );
 	}
 }
 
@@ -124,12 +124,12 @@ void ActivityScanPeopleSearch::slotStartSearchClicked()
 	QString strSearch = ui.searchEdit->text();
 	if( 3 > strSearch.length() )
 	{
-		ActivityMessageBox errMsgBox( m_MyApp, this, LOG_ERROR, "Search must have at least 3 characters");
+		ActivityMessageBox errMsgBox( m_MyApp, this, LOG_ERROR, QObject::tr( "Search must have at least 3 characters" ) );
 		errMsgBox.exec();
 	}
 	else
 	{
-		setStatusLabel( "Search Started" );
+		setStatusLabel( QObject::tr( "Search Started" ) );
 		m_FromGui.fromGuiStartScan( m_eScanType, 0, 0, strSearch.toStdString().c_str() );
 	}
 }
@@ -138,13 +138,13 @@ void ActivityScanPeopleSearch::slotStartSearchClicked()
 void ActivityScanPeopleSearch::slotStopSearchClicked()
 {
 	m_FromGui.fromGuiStopScan( m_eScanType );
-	setStatusLabel( "Search Stopped" );
+	setStatusLabel( QObject::tr( "Search Stopped" ) );
 }
 
 //============================================================================
 void ActivityScanPeopleSearch::slotSearchComplete()
 {
-	setStatusLabel( "Search Complete" );
+	setStatusLabel( QObject::tr( "Search Complete" ) );
 }
 
 ////============================================================================

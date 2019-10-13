@@ -59,42 +59,63 @@ enum EApplet
     eAppletMessenger,
     eAppletPersonalRecorder,
     eAppletLibrary,
-    eAppletGroupUser,	// user who can join group
+    eAppletGroupUser,	
     eAppletSearchPage,
-    eAppletShareServicesPage, // page to setup share with others services
+    eAppletShareServicesPage,   // page to setup share with others services
 
     eAppletSettings,
     eAppletNetworkSettings,
-    eAppletNetHostingPage,	    // page to setup group or group listing hosts
+    eAppletNetHostingPage,	    // page to setup network/group hosts and services
     eAppletTheme,
     eAppletAboutGoTvPtoP,
 
 	eMaxBasicApplets,           // marker.. past here is search applets
 
-    eAppletSearchPersons,       // search for person in group by name
-    eAppletSearchMood,          // search for mood message
-    eAppletScanAboutMe,         // scan group for pictures in about me page
-    eAppletScanStoryboard,      // scan group for pictures in about me page
-    eAppletScanSharedFiles,     // searc group for shared files
-    eAppletScanWebCam,          // scan group for shared web cams
+    eAppletSearchPersons,           // search for person in group by name
+    eAppletSearchMood,              // search for mood message
+    eAppletScanAboutMe,             // scan group for pictures in about me page
+    eAppletScanStoryboard,          // scan group for pictures in about me page
+    eAppletScanSharedFiles,         // searc group for shared files
+    eAppletScanWebCam,              // scan group for shared web cams
 
-    eAppletRandomPerson,        // connect to random person
+    eAppletClientRandomPerson,      // connect to random person
 
     eMaxSearchApplets,          // marker.. past here is hosting applets
 
-    eAppletGroupHost,	        // user who hosts a group
-    eAppletGroupAnchor,         // network service for group hosts.. search, provide ip address etc
-    eAppletGoTvPtoPNetworkHost, // network service for a gotvptop network.. privide fixed ip address, group anchor lists
+    eAppletServiceGroupHost,	    // hosts a group. provide search and relay services for group users
+    eAppletServiceGroupListingHost, // group listing host service for group hosts. provide search for groups to join, provide ip address etc
+    eAppletServiceNetworkHost,      // network host service for a gotvptop network.. requires fixed ip address, group list hosts announce to network host
+    eAppletServiceConnectionTest,   // network test service for users to test if they have a open port
+    eAppletServiceRelay,            // network relay service for users without a open port
 
-    eMaxHostApplets,            // marker.. past here is optional applets for user share services
+    eAppletServiceRandomPerson,     // connect to random person service
+    eAppletServiceRandomPersonRelay,   // connect to random person relay service for users without a open port
 
-    eAppletStoryboard,
-    eAppletSharedWebCam,
-    eAppletSharedContent,
+    eMaxHostApplets,            // marker.. past here is service applets for user share services
 
-    eMaxSharedServicesApplets,  // marker.. past here is optional applets based on feature
+    eAppletServiceAvatarImage,
+    eAppletServiceAboutMe,
+    eAppletServiceStoryboard,
+    eAppletServiceShareWebCam,
+    eAppletServiceShareFiles,
 
+    eMaxSharedServicesApplets,  // marker.. past here is applets not launched by user
+
+    // not launched by user
     eAppletPlayerVideo,
+
+    eAppletClientAvatarImage,	    // get users avatar imaage from other user
+    eAppletClientAboutMe,	        // users about me page
+    eAppletClientGroupHost,	        // hosts a group. provide search and relay services for group users
+    eAppletClientGroupListingHost,  // group listing host service for group hosts. provide search for groups to join, provide ip address etc
+    eAppletClientNetworkHost,       // network host service for a gotvptop network.. requires fixed ip address, group list hosts announce to network host
+    eAppletClientConnectionTest,    // network test service for users to test if they have a open port
+    eAppletClientRelay,             // network relay service for users without a open port
+
+    eAppletClientRandomPersonRelay, // connect to random person relay service for users without a open port
+    eAppletClientShareFiles,
+    eAppletClientShareWebCam,
+    eAppletClientStoryboard,
 
 	ePluginAppletCamProvider,
 	ePluginAppletGoTvStation,

@@ -14,7 +14,7 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include <NetLib/AnchorSetting.h>
+#include <NetLib/NetHostSetting.h>
 
 #define DEFAULT_TCP_PORT 45124
 #define DEFAULT_UDP_PORT 45123

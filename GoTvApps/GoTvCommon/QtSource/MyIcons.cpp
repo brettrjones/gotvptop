@@ -119,6 +119,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/question_mark.svg";
 	case eMyIconApp:
 		return ":/AppRes/Resources/gotv_icon.svg";
+    case eMyIconAvatarImage:
+        return ":/AppRes/Resources/avatar.svg";
 	case eMyIconNotifyOverlay:		// activity flashing dot
 		return ":/AppRes/Resources/notify-dot.svg";
 	case eMyIconPlusOverlay:		// add to library or shared files
@@ -149,6 +151,9 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/search-storyboard.svg";
     case eMyIconSearchWebCam:
         return ":/AppRes/Resources/search-webcam.svg";
+
+    case eMyIconShareWithPerson:
+        return ":/AppRes/Resources/share-with-person.svg";
 
 	case eMyIconServers:
 		return ":/AppRes/Resources/radio-tower.svg";
@@ -610,7 +615,24 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/group-anchor.svg";
     case eMyIconShareServices:
         return ":/AppRes/Resources/share-services.svg";
-
+    case eMyIconServiceAvatarImage:
+        return ":/AppRes/Resources/share-avatar.svg";
+    case eMyIconServiceConnectionTest:
+        return ":/AppRes/Resources/service-connection-test.svg";
+    case eMyIconServiceShareAboutMe:
+        return ":/AppRes/Resources/share-about-me.svg";
+    case eMyIconServiceShareFiles :
+        return ":/AppRes/Resources/share-files.svg";
+    case eMyIconServiceShareStoryboard:
+        return ":/AppRes/Resources/share-storyboard.svg";
+    case eMyIconServiceShareWebCam:
+        return ":/AppRes/Resources/share-webcam.svg";
+    case eMyIconServiceRandomPerson:
+        return ":/AppRes/Resources/service-connect-random.svg";
+    case eMyIconServiceRandomPersonRelay:
+        return ":/AppRes/Resources/service-connect-random-relay.svg";
+    case eMyIconServiceRelay:
+        return ":/AppRes/Resources/service-relay.svg";
 	default:
 		return ":/AppRes/Resources/question_mark.svg";// Icon with question mark
 	}

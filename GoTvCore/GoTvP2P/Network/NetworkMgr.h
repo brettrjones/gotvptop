@@ -44,8 +44,8 @@ public:
 	P2PEngine&					getEngine( void )											{ return m_Engine; }
 	VxPeerMgr&					getPeerMgr( void )											{ return m_PeerMgr; }
 	std::string					getLocalIpAddress( void )									{ return m_strLocalIpAddr; }
-	void						setNetworkName( const char * networkName )					{ m_NetworkName = networkName; }
-	const char *				getNetworkName( void )										{ return m_NetworkName.c_str(); }
+	void						setNetworkKey( const char * networkName )					{ m_NetworkName = networkName; }
+	const char *				getNetworkKey( void )										{ return m_NetworkName.c_str(); }
 
 	void						networkMgrStartup( void );
 	void						networkMgrShutdown( void );

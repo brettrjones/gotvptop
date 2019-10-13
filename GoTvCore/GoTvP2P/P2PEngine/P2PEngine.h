@@ -178,7 +178,7 @@ public:
     virtual void				fromGuiNetworkLost( void ) override;
     virtual void				fromGuiNetworkSettingsChanged( void ) override;
 
-    virtual void				fromGuiVerifyAnchorSettings( void ) override;
+    virtual void				fromGuiVerifyNetHostSettings( void ) override;
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) override;
 
 	virtual void				fromGuiUpdateWebPageProfile(	const char *	pProfileDir,	// directory containing user profile

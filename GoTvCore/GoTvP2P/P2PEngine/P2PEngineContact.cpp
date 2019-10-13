@@ -316,7 +316,7 @@ void P2PEngine::fromGuiSendContactList( EFriendViewType eFriendView, int maxCont
 	time_t timeNow = time( 0 );
 	if( 60 < ( timeNow - m_LastTimeAnnounceFromContactListCalled )  )
 	{
-		if( m_NetworkStateMachine.isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnAnchor() ) )
+		if( m_NetworkStateMachine.isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnNetHost() ) )
 		{
 			m_LastTimeAnnounceFromContactListCalled = timeNow;
 			m_NetServicesMgr.announceToAnchor( m_NetworkStateMachine.getAnchorIp(), m_NetworkStateMachine.getAnchorPort() );
@@ -336,7 +336,7 @@ void P2PEngine::fromGuiRefreshContactList( int maxContactsToSend )
 	}
 	else if( 60 < ( timeNow - m_LastTimeAnnounceFromContactListCalled )  )
 	{
-		if( m_NetworkStateMachine.isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnAnchor() ) )
+		if( m_NetworkStateMachine.isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnNetHost() ) )
 		{
 			m_LastTimeAnnounceFromContactListCalled = timeNow;
 			m_NetServicesMgr.announceToAnchor( m_NetworkStateMachine.getAnchorIp(), m_NetworkStateMachine.getAnchorPort() );

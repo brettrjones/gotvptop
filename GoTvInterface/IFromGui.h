@@ -98,7 +98,7 @@ public:
 	/// if APP_MYP2PWEB is not defined then is commercial Test App build with source code for sale else is My P2P Web production build
 	/// Test App has 2 differences from production build of My P2P Web 
 	///  1.) Encryption is different so is not compatible with My P2P Web network. 
-	///  2.) Default url for connection test and anchor services is p2pthing.com instead of myp2pconnect.com and myp2panchor.com 
+	///  2.) Default url for connection test and anchor services is p2pthing.com instead of gotvptop.com 
 	virtual bool				fromGuiGetIsAppCommercial( void ) = 0;
 	/// return engine version in binary
 	virtual uint16_t			fromGuiGetAppVersionBinary( void ) = 0;
@@ -227,7 +227,7 @@ public:
 	virtual void				fromGuiNetworkLost( void ) = 0;
 
 	/// Run anchor settings connection tests
-	virtual void				fromGuiVerifyAnchorSettings( void ) = 0;
+	virtual void				fromGuiVerifyNetHostSettings( void ) = 0;
 	/// Run test to see if TCP port is open and what the external IP Address is
 	virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) = 0;
 

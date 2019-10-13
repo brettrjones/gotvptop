@@ -17,7 +17,7 @@
 
 #include <CoreLib/sqlite3.h>
 #include <PktLib/VxCommon.h>
-#include <NetLib/AnchorSetting.h>
+#include <NetLib/NetHostSetting.h>
 
 #include <stdio.h>
 
@@ -446,23 +446,23 @@ bool VxDataHelper::updateFriend( VxNetIdent& oIdent )
 
 
 //============================================================================
-bool VxDataHelper::updateAnchorSetting( AnchorSetting& anchorSetting )
+bool VxDataHelper::updateNetHostSetting( NetHostSetting& anchorSetting )
 {
-	removeAnchorSettingByName( anchorSetting.getAnchorSettingName().c_str() );
+	removeNetHostSettingByName( anchorSetting.getNetHostSettingName().c_str() );
 
-	DbBindList bindList( anchorSetting.getAnchorSettingName().c_str() );
-	bindList.add( anchorSetting.getNetworkName().c_str() );
-	bindList.add( anchorSetting.getAnchorWebsiteUrl().c_str() );
+	DbBindList bindList( anchorSetting.getNetHostSettingName().c_str() );
+	bindList.add( anchorSetting.getNetworkKey().c_str() );
+	bindList.add( anchorSetting.getNetHostWebsiteUrl().c_str() );
 	bindList.add( anchorSetting.getNetServiceWebsiteUrl().c_str() );
-	bindList.add( anchorSetting.getIsThisNodeAnAnchor() );
-	bindList.add( anchorSetting.getExcludeMeFromAnchorList() );
+	bindList.add( anchorSetting.getIsThisNodeAnNetHost() );
+	bindList.add( anchorSetting.getExcludeMeFromNetHostList() );
 
 	RCODE rc = sqlExec( "INSERT INTO anchor_settings (anchor_setting_name,network_name,anchor_url,connect_test_url,is_anchor_node,exclude_me) values(?,?,?,?,?,?)", bindList );
 	return ( 0 == rc ) ? true : false;
 }
 
 //============================================================================
-bool VxDataHelper::getAnchorSettingByName( const char * name, AnchorSetting& anchorSetting )
+bool VxDataHelper::getNetHostSettingByName( const char * name, NetHostSetting& anchorSetting )
 {
 	bool bResult = false;
 	DbCursor * cursor = startQueryInsecure( "SELECT * FROM anchor_settings WHERE anchor_setting_name='%s'", name );
@@ -470,12 +470,12 @@ bool VxDataHelper::getAnchorSettingByName( const char * name, AnchorSetting& anc
 	{
 		if( cursor->getNextRow() )
 		{
-			anchorSetting.setAnchorSettingName( name );
-			anchorSetting.setNetworkName( cursor->getString(1) );
-			anchorSetting.setAnchorWebsiteUrl( cursor->getString(2) );
+			anchorSetting.setNetHostSettingName( name );
+			anchorSetting.setNetworkKey( cursor->getString(1) );
+			anchorSetting.setNetHostWebsiteUrl( cursor->getString(2) );
 			anchorSetting.setNetServiceWebsiteUrl( cursor->getString(3) );
-			anchorSetting.setIsThisNodeAnAnchor(  ( 0 == cursor->getS32(4) ) ? false : true );
-			anchorSetting.setExcludeMeFromAnchorList(  ( 0 == cursor->getS32(5) ) ? false : true );
+			anchorSetting.setIsThisNodeAnNetHost(  ( 0 == cursor->getS32(4) ) ? false : true );
+			anchorSetting.setExcludeMeFromNetHostList(  ( 0 == cursor->getS32(5) ) ? false : true );
 
 			bResult = true;
 		}
@@ -487,7 +487,7 @@ bool VxDataHelper::getAnchorSettingByName( const char * name, AnchorSetting& anc
 }
 
 //============================================================================
-bool VxDataHelper::getAllAnchorSettings( std::vector<AnchorSetting>& anchorSettingList )
+bool VxDataHelper::getAllNetHostSettings( std::vector<NetHostSetting>& anchorSettingList )
 {
 	bool bResult = false;
 	DbCursor * cursor = startQueryInsecure( "SELECT * FROM anchor_settings" );
@@ -495,14 +495,14 @@ bool VxDataHelper::getAllAnchorSettings( std::vector<AnchorSetting>& anchorSetti
 	{
 		while( cursor->getNextRow() )
 		{
-			AnchorSetting anchorSetting;
+			NetHostSetting anchorSetting;
 
-			anchorSetting.setAnchorSettingName( cursor->getString(0) );
-			anchorSetting.setNetworkName( cursor->getString(1) );
-			anchorSetting.setAnchorWebsiteUrl( cursor->getString(2) );
+			anchorSetting.setNetHostSettingName( cursor->getString(0) );
+			anchorSetting.setNetworkKey( cursor->getString(1) );
+			anchorSetting.setNetHostWebsiteUrl( cursor->getString(2) );
 			anchorSetting.setNetServiceWebsiteUrl( cursor->getString(3) );
-			anchorSetting.setIsThisNodeAnAnchor(  ( 0 == cursor->getS32(4) ) ? false : true );
-			anchorSetting.setExcludeMeFromAnchorList(  ( 0 == cursor->getS32(5) ) ? false : true );
+			anchorSetting.setIsThisNodeAnNetHost(  ( 0 == cursor->getS32(4) ) ? false : true );
+			anchorSetting.setExcludeMeFromNetHostList(  ( 0 == cursor->getS32(5) ) ? false : true );
 			anchorSettingList.push_back( anchorSetting );
 
 			bResult = true;
@@ -515,7 +515,7 @@ bool VxDataHelper::getAllAnchorSettings( std::vector<AnchorSetting>& anchorSetti
 }
 
 //============================================================================
-bool VxDataHelper::removeAnchorSettingByName( const char * name )
+bool VxDataHelper::removeNetHostSettingByName( const char * name )
 {
 	DbBindList bindList( name );
 	RCODE rc = sqlExec(  "DELETE FROM anchor_settings WHERE anchor_setting_name=?", bindList );
@@ -523,7 +523,7 @@ bool VxDataHelper::removeAnchorSettingByName( const char * name )
 }
 
 //============================================================================
-bool VxDataHelper::updateLastAnchorSettingName( const char * name )
+bool VxDataHelper::updateLastNetHostSettingName( const char * name )
 {
 	DbBindList bindList( name );
 	RCODE rc = sqlExec(  "DELETE FROM last_anchor_setting" );
@@ -532,7 +532,7 @@ bool VxDataHelper::updateLastAnchorSettingName( const char * name )
 }
 
 //============================================================================
-std::string VxDataHelper::getLastAnchorSettingName( void )
+std::string VxDataHelper::getLastNetHostSettingName( void )
 {
 	std::string strSettingName = "";
 	DbCursor * cursor = startQueryInsecure("SELECT * FROM %s", TABLE_LAST_ANCHOR_SETTING.c_str() );

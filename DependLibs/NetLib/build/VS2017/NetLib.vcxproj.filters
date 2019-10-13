@@ -7,9 +7,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\AnchorSetting.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\InetAddress.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -91,11 +88,11 @@
     <ClCompile Include="..\..\VxSktWaitingList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NetHostSetting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\AnchorSetting.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\InetAddress.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -192,10 +189,14 @@
     <ClInclude Include="..\..\VxXferDefs.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\NetHostSetting.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\NetLib.pro">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="..\..\..\..\libnetlib.pri" />
   </ItemGroup>
 </Project>

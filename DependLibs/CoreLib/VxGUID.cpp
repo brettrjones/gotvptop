@@ -211,6 +211,15 @@ static VxGUID nullGuid;
 }
 
 //============================================================================
+VxGUID& VxGUID::anybodyVxGUID( void )
+{
+    const uint64_t  anybodyPart1 = 0x1F2E3D4C5B6A7986;
+    const uint64_t  anybodyPart2 = 0x79865B6A3D4C1F2E;
+    static VxGUID anybodyGuid( anybodyPart1, anybodyPart2 );
+    return anybodyGuid;
+}
+
+//============================================================================
 std::string VxGUID::toGUIDStandardFormatedString( void )
 {
 #ifdef TARGET_OS_WINDOWS

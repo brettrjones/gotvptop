@@ -86,7 +86,7 @@ const char * AnchorTest::getTestName( bool isAnchor )
 }
 
 //============================================================================
-void AnchorTest::fromGuiVerifyAnchorSettings( void )
+void AnchorTest::fromGuiVerifyNetHostSettings( void )
 {
 	startAnchorUrlTest();
 	startNetServiceUrlTest();
@@ -145,7 +145,7 @@ void AnchorTest::sendTestLog( const char * msg, ... )
 //============================================================================
 void AnchorTest::doAnchorUrlTest( void )
 {
-	if( m_EngineSettings.getIsThisNodeAnAnchor() )
+	if( m_EngineSettings.getIsThisNodeAnNetHost() )
 	{
 		sendTestStatus( eAnchorTestStatusAnchorOk,
 			":Skipped Anchor Test Because Is Anchor\n" );
@@ -153,7 +153,7 @@ void AnchorTest::doAnchorUrlTest( void )
 	}
 
 	std::string anchorUrl;
-	m_EngineSettings.getAnchorWebsiteUrl( anchorUrl );
+	m_EngineSettings.getNetHostWebsiteUrl( anchorUrl );
 	doConnectionTest( anchorUrl, true );
 }
 

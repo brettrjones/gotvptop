@@ -15,7 +15,7 @@
 //============================================================================
 
 #include "VxTime.h" // time stamp and other time functions
-#include <string>
+
 
 #define DEFAULT_ONLINE_LISTEN_PORT		45654
 #define DEFAULT_GUEST_UDP_PORT			45653

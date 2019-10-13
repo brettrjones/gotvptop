@@ -58,7 +58,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		// setup tx crypto
 		isFirstAnnounce = true;
 		std::string networkName;
-		m_EngineSettings.getNetworkName( networkName );
+		m_EngineSettings.getNetworkKey( networkName );
 		GenerateTxConnectionKey( sktBase, &pkt->m_DirectConnectId, networkName.c_str() );
 	}
 

@@ -43,7 +43,7 @@ void NetworkKeyWidget::initNetworkKeyWidget( void )
 void NetworkKeyWidget::fillNetworkKeyEditField( void )
 {
     std::string networkKey;
-    m_MyApp.getEngine().getEngineSettings().getNetworkName( networkKey );
+    m_MyApp.getEngine().getEngineSettings().getNetworkKey( networkKey );
     ui.m_NetworkKeyEdit->setText( networkKey.c_str() );
 }
 
@@ -61,7 +61,7 @@ void NetworkKeyWidget::slotApplyNetworkKey()
     if( verifyNetworkKey( keyVal ) )
     {
         std::string keyString = keyVal.toUtf8().constData();
-        m_MyApp.getEngine().getEngineSettings().setNetworkName( keyString );
+        m_MyApp.getEngine().getEngineSettings().setNetworkKey( keyString );
         QMessageBox::warning( this, QObject::tr( "Network Key" ), QObject::tr( "You may need to restart application to avoid connection problems." ) );
     }
 }

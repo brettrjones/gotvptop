@@ -30,7 +30,7 @@ public:
 	virtual ~BigListDb() override = default;
 
 	bool						isBigListInitialized( void )			{ return m_BigListDbInitialized; }
-	std::string&				getNetworkName( void )					{ return m_NetworkName; }
+	std::string&				getNetworkKey( void )					{ return m_NetworkName; }
 
 	//! restore all of given network to lists from database
 	RCODE						dbRestoreAll( const char * networkName );

@@ -67,7 +67,7 @@ void ActivityNetServiceTest::slotRunTestButClick( void )
 	//{
 	//	isBusyWithTest = true;
 	//	ui.m_LogWidget->clear();
-	//	m_Engine.getFromGuiInterface().fromGuiVerifyAnchorSettings();
+	//	m_Engine.getFromGuiInterface().fromGuiVerifyNetHostSettings();
 	//	isBusyWithTest = false;
 	//}
 }

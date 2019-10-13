@@ -1,7 +1,7 @@
 
 INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
 
-HEADERS += 	$$PWD/DependLibs/NetLib/AnchorSetting.h \
+HEADERS += 	$$PWD/DependLibs/NetLib/NetHostSetting.h \
     $$PWD/DependLibs/NetLib/InetAddress.h \
     $$PWD/DependLibs/NetLib/NetSettings.h \
     $$PWD/DependLibs/NetLib/VxAnyRandomPort.h \
@@ -35,7 +35,7 @@ HEADERS += 	$$PWD/DependLibs/NetLib/AnchorSetting.h \
     $$PWD/DependLibs/NetLib/VxSktWaitingList.h \
     $$PWD/DependLibs/NetLib/VxXferDefs.h
 
-SOURCES += 	$$PWD/DependLibs/NetLib/AnchorSetting.cpp \
+SOURCES += 	$$PWD/DependLibs/NetLib/NetHostSetting.cpp \
     $$PWD/DependLibs/NetLib/InetAddress.cpp \
     $$PWD/DependLibs/NetLib/NetSettings.cpp \
     $$PWD/DependLibs/NetLib/VxBaseSktInfo.cpp \

@@ -370,6 +370,80 @@ QString GuiHelpers::describeFileLength( uint64_t fileLen )
 }
 
 //============================================================================
+bool GuiHelpers::isAppletAService( EApplet applet )
+{
+    return ( ( eAppletServiceAboutMe == applet )
+             || ( eAppletServiceAvatarImage == applet )
+             || ( eAppletServiceConnectionTest == applet )
+             || ( eAppletServiceGroupHost == applet )
+             || ( eAppletServiceGroupListingHost == applet )
+             || ( eAppletServiceNetworkHost == applet )
+             || ( eAppletServiceRandomPerson == applet )
+             || ( eAppletServiceRandomPersonRelay == applet )
+             || ( eAppletServiceShareFiles == applet )
+             || ( eAppletServiceShareWebCam == applet )
+             || ( eAppletServiceStoryboard == applet )
+             || ( eAppletServiceRelay == applet )
+             );
+}
+
+//============================================================================
+bool GuiHelpers::isAppletAClient( EApplet applet )
+{
+    return ( ( eAppletClientAboutMe == applet )
+             || ( eAppletClientAvatarImage == applet )
+             || ( eAppletClientConnectionTest == applet )
+             || ( eAppletClientGroupHost == applet )
+             || ( eAppletClientGroupListingHost == applet )
+             || ( eAppletClientRandomPerson == applet )
+             || ( eAppletClientRandomPersonRelay == applet )
+             || ( eAppletClientShareFiles == applet )
+             || ( eAppletClientShareWebCam == applet )
+             || ( eAppletClientStoryboard == applet )
+             || ( eAppletClientRelay == applet )
+             );
+}
+
+//============================================================================
+EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
+{
+    EPluginType pluginType = ePluginTypeInvalid;
+    switch( applet )
+    {
+    case eAppletClientAboutMe:              return ePluginTypeAboutMePage;
+    case eAppletClientAvatarImage:          return ePluginTypeAvatarImage;
+    case eAppletClientConnectionTest:       return ePluginTypeConnectTest;
+    case eAppletClientGroupHost:            return ePluginTypeGroupHost;
+    case eAppletClientGroupListingHost:     return ePluginTypeGroupListingHost;
+    case eAppletClientNetworkHost:          return ePluginTypeNetworkHost;
+    case eAppletClientRandomPerson:         return ePluginTypeRandomConnect;
+    case eAppletClientRandomPersonRelay:    return ePluginTypeRandomConnectRelay;
+    case eAppletClientShareFiles:           return ePluginTypeFileServer;
+    case eAppletClientShareWebCam:          return ePluginTypeCamServer;
+    case eAppletClientStoryboard:           return ePluginTypeStoryBoard;
+    case eAppletClientRelay:                return ePluginTypeRelay;
+
+    case eAppletServiceAboutMe:              return ePluginTypeAboutMePage;
+    case eAppletServiceAvatarImage:          return ePluginTypeAvatarImage;
+    case eAppletServiceConnectionTest:       return ePluginTypeConnectTest;
+    case eAppletServiceGroupHost:            return ePluginTypeGroupHost;
+    case eAppletServiceGroupListingHost:     return ePluginTypeGroupListingHost;
+    case eAppletServiceNetworkHost:          return ePluginTypeNetworkHost;
+    case eAppletServiceRandomPerson:         return ePluginTypeRandomConnect;
+    case eAppletServiceRandomPersonRelay:    return ePluginTypeRandomConnectRelay;
+    case eAppletServiceShareFiles:           return ePluginTypeFileServer;
+    case eAppletServiceShareWebCam:          return ePluginTypeCamServer;
+    case eAppletServiceStoryboard:           return ePluginTypeStoryBoard;
+    case eAppletServiceRelay:                return ePluginTypeRelay;
+
+    default:
+        break;
+    }
+
+    return pluginType;
+}
+
+//============================================================================
 bool GuiHelpers::isPluginSingleSession( EPluginType ePluginType )
 {
     bool isSingleSessionPlugin = false;
@@ -403,56 +477,157 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
 	switch(ePluginType)
 	{
     case ePluginTypeAdmin:
-		strPluginDesc = "Admin Server";
-		break;
-	case ePluginTypeWebServer:
-		if( rmtInitiated )
-		{
-			strPluginDesc = "Profile Page";
-		}
-		else
-		{
-			strPluginDesc = "Web Server";       		
-		}
-		break;
-	case ePluginTypeRelay:
-		strPluginDesc = "Relay";
-		break;
-	case ePluginTypeCamServer:
-		if( rmtInitiated )
-		{
-			strPluginDesc = "Cam Client";
-		}
-		else
-		{
-			strPluginDesc = "Cam Server";       		
-		}
-
+		strPluginDesc = QObject::tr( "Administration Service" ).toUtf8().constData();
 		break;
 
-	case ePluginTypeMultiSession:
-		strPluginDesc = "Text Chat";
-		break;
-	case ePluginTypeVoicePhone:
-		strPluginDesc = "Voice Phone (VOIP)";
-		break;
-	case ePluginTypeVideoPhone:
-		strPluginDesc = "Video Chat";
-		break;
-	case ePluginTypeTruthOrDare:
-		strPluginDesc = "Truth or Dare";
-		break;
-	case ePluginTypeStoryBoard: 
-		strPluginDesc = "Storyboard";
-		break;	
-	case ePluginTypeFileServer:
-		strPluginDesc = "Share Files";
-		break;
-	case ePluginTypeFileOffer:
-		strPluginDesc = "File Send";
-		break;
+    case ePluginTypeAboutMePage:
+        if( rmtInitiated )
+        {
+            strPluginDesc = QObject::tr( "Shared About Me Page" ).toUtf8().constData();
+        }
+        else
+        {
+            strPluginDesc = QObject::tr( "About Me Page Service" ).toUtf8().constData();
+        }
+        break;
+
+    case ePluginTypeAvatarImage:
+        strPluginDesc = QObject::tr( "Avatar Image Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeCamServer:
+        if( rmtInitiated )
+        {
+            strPluginDesc = QObject::tr( "Shared Web Cam" ).toUtf8().constData();
+        }
+        else
+        {
+            strPluginDesc = QObject::tr( "Web Cam Service" ).toUtf8().constData();
+        }
+        break;
+
+    case ePluginTypeConnectTest:
+        strPluginDesc = QObject::tr( "Connection Test Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeFileOffer:
+        strPluginDesc = QObject::tr( "Person To Person File Transfer" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeFileServer:
+        if( rmtInitiated )
+        {
+            strPluginDesc = QObject::tr( "Shared Files" ).toUtf8().constData();
+        }
+        else
+        {
+            strPluginDesc = QObject::tr( "Shared Files Service" ).toUtf8().constData();
+        }
+        break;
+
+    case ePluginTypeGroupHost:
+        if( rmtInitiated )
+        {
+            strPluginDesc = QObject::tr( "Hosted Group Service" ).toUtf8().constData();
+        }
+        else
+        {
+            strPluginDesc = QObject::tr( "Group Host Service" ).toUtf8().constData();
+        }
+        break;
+
+    case ePluginTypeGroupListingHost:
+        if( rmtInitiated )
+        {
+            strPluginDesc = QObject::tr( "Hosted Group List Search Service" ).toUtf8().constData();
+        }
+        else
+        {
+            strPluginDesc = QObject::tr( "Group Host List Search Service" ).toUtf8().constData();
+        }
+        break;
+
+    case ePluginTypeMultiSession:
+        strPluginDesc = QObject::tr( "Messanger Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeNetworkHost:
+        strPluginDesc = QObject::tr( "Host GoTvPtoP Network Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeRelay:
+        strPluginDesc = QObject::tr( "Relay Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeRandomConnect:
+        strPluginDesc = QObject::tr( "Connect To Random Person Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeRandomConnectRelay:
+        strPluginDesc = QObject::tr( "Connect To Random Person Relay Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeStoryBoard:
+        if( rmtInitiated )
+        {
+            strPluginDesc = QObject::tr( "Shared Story Page (Blog)" ).toUtf8().constData();
+        }
+        else
+        {
+            strPluginDesc = QObject::tr( "Shared Story Page Service (Blog)" ).toUtf8().constData();
+        }
+        break;
+
+    case ePluginTypeTruthOrDare:
+        strPluginDesc = QObject::tr( "Truth Or Dare Game With Video Chat" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeVideoPhone:
+        strPluginDesc = QObject::tr( "Phone Call With Video Chat" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeVoicePhone:
+        strPluginDesc = QObject::tr( "Phone Call With Voice Only" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeCameraService:
+        strPluginDesc = QObject::tr( "Camera Feed Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeMJPEGReader:
+        strPluginDesc = QObject::tr( "MJPEG Movie Reader" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeMJPEGWriter:
+        strPluginDesc = QObject::tr( "MJPEG Movie Recorder" ).toUtf8().constData();
+        break;
+
+    case ePluginTypePersonalRecorder:
+        strPluginDesc = QObject::tr( "Personal Notes And Media Recorder" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeNetServices:
+        strPluginDesc = QObject::tr( "Network Services" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeSearch:
+        strPluginDesc = QObject::tr( "Search Services" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeSndReader:
+        strPluginDesc = QObject::tr( "Recorded Audio Reader" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeSndWriter:
+        strPluginDesc = QObject::tr( "Audio Recorder" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeWebServer:
+        strPluginDesc = QObject::tr( "Server for About Me And Story Pages" ).toUtf8().constData();
+        break;
+
     default:
-        strPluginDesc = "UNKNOWN PLUGIN";
+        strPluginDesc = QObject::tr( "UNKNOWN PLUGIN" ).toUtf8().constData();
 	}
 
 	return strPluginDesc;

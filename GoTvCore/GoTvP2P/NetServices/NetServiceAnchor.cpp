@@ -91,7 +91,7 @@ RCODE NetServiceAnchor::handleNetCmdAnchorReq( VxSktBase * sktBase, NetServiceHd
 	}
 
 	AnchorList anchorResult;
-	if( m_Engine.getEngineSettings().getExcludeMeFromAnchorList() )
+	if( m_Engine.getEngineSettings().getExcludeMeFromNetHostList() )
 	{
 		rc = m_AnchorDb.handleAnnounce( *anchorList, anchorResult, m_Engine.getMyOnlineId() );
 	}

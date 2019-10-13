@@ -64,20 +64,14 @@ void EngineSettings::engineSettingsShutdown( void )
 void EngineSettings::getNetSettings( NetSettings& netSettings )
 {
 	std::string strValue;
-	getNetworkName( strValue );
-	netSettings.setNetworkName( strValue.c_str() );
+	getNetworkKey( strValue );
+	netSettings.setNetworkKey( strValue.c_str() );
 	
-	getAnchorWebsiteUrl( strValue );
-	netSettings.setAnchorWebsiteUrl( strValue.c_str() );
-
-	//getAltAnchorWebsiteUrl( strValue );
-	//netSettings.setAltAnchorWebsiteUrl( strValue.c_str() );
+	getNetHostWebsiteUrl( strValue );
+	netSettings.setNetHostWebsiteUrl( strValue.c_str() );
 
 	getNetServiceWebsiteUrl( strValue );
 	netSettings.setNetServiceWebsiteUrl( strValue.c_str() );
-
-	//getAltNetServiceWebsiteUrl( strValue );
-	//netSettings.setAltNetServiceWebsiteUrl( strValue.c_str() );
 
 	uint16_t u16Port = getTcpIpPort();
 	netSettings.setMyTcpInPort( u16Port );
@@ -97,8 +91,8 @@ void EngineSettings::getNetSettings( NetSettings& netSettings )
 //============================================================================
 void EngineSettings::setNetSettings( NetSettings& netSettings )
 {
-	setNetworkName( netSettings.getNetworkName() );
-	setAnchorWebsiteUrl( netSettings.getAnchorWebsiteUrl() );
+	setNetworkKey( netSettings.getNetworkKey() );
+	setNetHostWebsiteUrl( netSettings.getNetHostWebsiteUrl() );
 	setNetServiceWebsiteUrl( netSettings.getNetServiceWebsiteUrl() );
 
 	setTcpIpPort( netSettings.getMyTcpInPort() );
@@ -201,25 +195,25 @@ void EngineSettings::setNetServiceWebsiteUrl( std::string& strWebsiteUrl )
 }
 
 //============================================================================
-void EngineSettings::getAnchorWebsiteUrl( std::string& strWebsiteUrl )
+void EngineSettings::getNetHostWebsiteUrl( std::string& strWebsiteUrl )
 {
-	getIniValue( MY_SETTINGS_KEY, "AnchorUrl", strWebsiteUrl, NET_DEFAULT_ANNOUNCE_URL );
+	getIniValue( MY_SETTINGS_KEY, "AnchorUrl", strWebsiteUrl, NET_DEFAULT_NET_HOST_URL );
 }
 
 //============================================================================
-void EngineSettings::setAnchorWebsiteUrl( std::string& strWebsiteUrl )
+void EngineSettings::setNetHostWebsiteUrl( std::string& strWebsiteUrl )
 {
 	setIniValue( MY_SETTINGS_KEY, "AnchorUrl", strWebsiteUrl );
 }
 
 //============================================================================
-void EngineSettings::setIsThisNodeAnAnchor( bool isAnchor )
+void EngineSettings::setIsThisNodeAnNetHost( bool isAnchor )
 {
 	setIniValue( MY_SETTINGS_KEY, "IsNodeAnchor", isAnchor );
 }
 
 //============================================================================
-bool EngineSettings::getIsThisNodeAnAnchor( void )
+bool EngineSettings::getIsThisNodeAnNetHost( void )
 {
 	bool isAnchor = false;
 	getIniValue( MY_SETTINGS_KEY, "IsNodeAnchor", isAnchor, false );
@@ -227,13 +221,13 @@ bool EngineSettings::getIsThisNodeAnAnchor( void )
 }
 
 //============================================================================
-void EngineSettings::setExcludeMeFromAnchorList( bool excludeFromAnchorList )
+void EngineSettings::setExcludeMeFromNetHostList( bool excludeFromAnchorList )
 {
 	setIniValue( MY_SETTINGS_KEY, "ExcludeFromAnchorList", excludeFromAnchorList );
 }
 
 //============================================================================
-bool EngineSettings::getExcludeMeFromAnchorList( void )
+bool EngineSettings::getExcludeMeFromNetHostList( void )
 {
 	bool excludeMe = false;
 	getIniValue( MY_SETTINGS_KEY, "ExcludeFromAnchorList", excludeMe, false );
@@ -241,7 +235,7 @@ bool EngineSettings::getExcludeMeFromAnchorList( void )
 }
 
 //============================================================================
-void EngineSettings::getNetworkName( std::string& strNetworkName )
+void EngineSettings::getNetworkKey( std::string& strNetworkName )
 {
 	if( m_CachedNetworkName.length() )
 	{
@@ -255,7 +249,7 @@ void EngineSettings::getNetworkName( std::string& strNetworkName )
 }
 
 //============================================================================
-void EngineSettings::setNetworkName( std::string& strNetworkName )
+void EngineSettings::setNetworkKey( std::string& strNetworkName )
 {
 	m_CachedNetworkName = strNetworkName;
 	setIniValue( MY_SETTINGS_KEY, "NetworkName", strNetworkName );

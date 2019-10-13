@@ -567,7 +567,7 @@ void NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers( void )
 {
     if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
 	    LogMsg( LOG_STATUS, "NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers\n" );
-	if( m_Engine.getEngineSettings().getIsThisNodeAnAnchor() )
+	if( m_Engine.getEngineSettings().getIsThisNodeAnNetHost() )
 	{
 		// we are the anchor
 		// put ourself directly into the database

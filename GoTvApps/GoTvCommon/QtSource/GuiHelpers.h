@@ -15,6 +15,7 @@
 //============================================================================
 
 #include "config_gotvapps.h"
+#include "AppDefs.h"
 
 #include <NetLib/VxXferDefs.h>
 #include <PktLib/VxCommon.h>
@@ -39,6 +40,10 @@ public:
 	static bool				    playFile( AppCommon& myApp, QString fullFileName, int pos0to100000 );
 
     static int					calculateTextHeight( QFontMetrics& fontMetrics, QString textStr );
+
+    static bool                 isAppletAService( EApplet applet );
+    static bool                 isAppletAClient( EApplet applet );
+    static EPluginType          getAppletAssociatedPlugin( EApplet applet );
 
     static bool                 isPluginSingleSession( EPluginType ePluginType );
 

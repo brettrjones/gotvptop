@@ -21,7 +21,7 @@
 
 //============================================================================
 AppletLibrary::AppletLibrary( AppCommon& app, QWidget * parent )
-: AppletBase( OBJNAME_APPLET_SHARED_CONTENT, app, parent )
+: AppletBase( OBJNAME_APPLET_LIBRARY, app, parent )
 {
     setAppletType( eAppletLibrary );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );

@@ -20,8 +20,6 @@
 #include <GoTvInterface/IToGui.h>
 #include <NetLib/InetAddress.h>
 
-#include <QDialog>
-
 class VxNetIdent;
 class NetSettings;
 

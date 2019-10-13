@@ -25,7 +25,7 @@
 #include "VxDataHelper.h"
 
 #include <CoreLib/VxDebug.h>
-#include <NetLib/AnchorSetting.h>
+#include <NetLib/NetHostSetting.h>
 #include <NetLib/VxGetRandomPort.h>
 #include <NetLib/VxSktUtil.h>
 
@@ -48,13 +48,6 @@ AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
     ui.m_NetworkKeyInfoButton->setIcon( eMyIconInformation );
     ui.m_NetworkKeyButton->setIcon( eMyIconNetworkKey );
 
-    // save original values so can restore them if need be
-//   m_Engine.getEngineSettings().getAnchorWebsiteUrl( m_OrigAnchorUrl );
-   //m_Engine.getEngineSettings().getNetworkName( m_OrigNetworkName );
-   //m_Engine.getEngineSettings().getNetServiceWebsiteUrl( m_OrigConnectionTestUrl );
-
-
-
     updateDlgFromSettings();
 
     connectSignals();
@@ -76,7 +69,7 @@ void AppletNetworkSettings::connectSignals( void )
     connect( ui.m_NetworkKeyInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowNetworkKeyInformation() ) );
     connect( ui.m_NetworkKeyButton, SIGNAL( clicked() ), this, SLOT( slotShowNetworkKeyInformation() ) );
 
-    connect( ui.m_GoToAnchorSettingsButton, SIGNAL( clicked() ), this, SLOT( slotGoToAnchorSettingsButtonClick() ) );
+    //connect( ui.m_GoToAnchortSettingsButton, SIGNAL( clicked() ), this, SLOT( slotGoToNetHostSettingsButtonClick() ) );
 
     connect( ui.AutoDetectProxyRadioButton, SIGNAL( clicked() ), this, SLOT( slotAutoDetectProxyClick() ) );
     connect( ui.AssumeNoProxyRadioButton, SIGNAL( clicked() ), this, SLOT( slotNoProxyClick() ) );
@@ -104,25 +97,25 @@ void AppletNetworkSettings::updateDlgFromSettings()
 
     bool validDbSettings = false;
     VxDataHelper& dataHelper = m_MyApp.getDataHelper();
-    std::vector<AnchorSetting> anchorSettingList;
-    std::string lastSettingsName = dataHelper.getLastAnchorSettingName();
+    std::vector<NetHostSetting> anchorSettingList;
+    std::string lastSettingsName = dataHelper.getLastNetHostSettingName();
     int selectedIdx = 0;
     int currentSettingIdx = 0;
     if( ( 0 != lastSettingsName.length() )
-        && dataHelper.getAllAnchorSettings( anchorSettingList )
+        && dataHelper.getAllNetHostSettings( anchorSettingList )
         && ( 0 != anchorSettingList.size() ) )
     {
-        std::vector<AnchorSetting>::iterator iter;
+        std::vector<NetHostSetting>::iterator iter;
         for( iter = anchorSettingList.begin(); iter != anchorSettingList.end(); ++iter )
         {
-            AnchorSetting& anchorSetting = *iter;
-            ui.m_NetworkSettingsNameComboBox->addItem( anchorSetting.getAnchorSettingName().c_str() );
-            if( anchorSetting.getAnchorSettingName() == lastSettingsName )
+            NetHostSetting& anchorSetting = *iter;
+            ui.m_NetworkSettingsNameComboBox->addItem( anchorSetting.getNetHostSettingName().c_str() );
+            if( anchorSetting.getNetHostSettingName() == lastSettingsName )
             {
                 // found last settings used
                 selectedIdx = currentSettingIdx;
                 validDbSettings = true;
-                populateDlgFromAnchorSetting( anchorSetting );
+                populateDlgFromNetHostSetting( anchorSetting );
             }
 
             currentSettingIdx++;
@@ -135,19 +128,19 @@ void AppletNetworkSettings::updateDlgFromSettings()
     }
     else if( anchorSettingList.size() )
     {
-        ui.m_NetworkSettingsNameComboBox->addItem( anchorSettingList[ 0 ].getAnchorSettingName().c_str() );
-        populateDlgFromAnchorSetting( anchorSettingList[ 0 ] );
-        dataHelper.updateLastAnchorSettingName( anchorSettingList[ 0 ].getAnchorSettingName().c_str() );
+        ui.m_NetworkSettingsNameComboBox->addItem( anchorSettingList[ 0 ].getNetHostSettingName().c_str() );
+        populateDlgFromNetHostSetting( anchorSettingList[ 0 ] );
+        dataHelper.updateLastNetHostSettingName( anchorSettingList[ 0 ].getNetHostSettingName().c_str() );
     }
     else
     {
         ui.m_NetworkSettingsNameComboBox->addItem( "default" );
         std::string strValue;
 
-        m_Engine.getEngineSettings().getAnchorWebsiteUrl( strValue );
+        m_Engine.getEngineSettings().getNetHostWebsiteUrl( strValue );
         ui.m_NetworkHostUrlEdit->setText( strValue.c_str() );
 
-        m_Engine.getEngineSettings().getNetworkName( strValue );
+        m_Engine.getEngineSettings().getNetworkKey( strValue );
         ui.m_NetworkKeyEdit->setText( strValue.c_str() );
     }
 
@@ -211,7 +204,7 @@ void AppletNetworkSettings::updateDlgFromSettings()
 //============================================================================
 void AppletNetworkSettings::updateSettingsFromDlg()
 {
-    AnchorSetting anchorSetting;
+    NetHostSetting anchorSetting;
     std::string anchorSettingsName;
     anchorSettingsName = ui.m_NetworkSettingsNameComboBox->currentText().toUtf8().constData();
     if( 0 == anchorSettingsName.length() )
@@ -219,19 +212,24 @@ void AppletNetworkSettings::updateSettingsFromDlg()
         anchorSettingsName = "default";
     }
 
-    anchorSetting.setAnchorSettingName( anchorSettingsName.c_str() );
+    anchorSetting.setNetHostSettingName( anchorSettingsName.c_str() );
 
     std::string strValue;
     strValue = ui.m_NetworkHostUrlEdit->text().toUtf8().constData();
-    m_Engine.getEngineSettings().setAnchorWebsiteUrl( strValue );
-    anchorSetting.setAnchorWebsiteUrl( strValue.c_str() );
+
+    // for now NetHost and NetService ( connection port open test ) urls are the same
+    m_Engine.getEngineSettings().setNetHostWebsiteUrl( strValue );
+    anchorSetting.setNetHostWebsiteUrl( strValue.c_str() );
+
+    m_Engine.getEngineSettings().setNetServiceWebsiteUrl( strValue );
+    anchorSetting.setNetServiceWebsiteUrl( strValue.c_str() );
 
     strValue = ui.m_NetworkKeyEdit->text().toUtf8().constData();
-    m_Engine.getEngineSettings().setNetworkName( strValue );
-    anchorSetting.setNetworkName( strValue.c_str() );
+    m_Engine.getEngineSettings().setNetworkKey( strValue );
+    anchorSetting.setNetworkKey( strValue.c_str() );
 
-    m_MyApp.getDataHelper().updateAnchorSetting( anchorSetting );
-    m_MyApp.getDataHelper().updateLastAnchorSettingName( anchorSettingsName.c_str() );
+    m_MyApp.getDataHelper().updateNetHostSetting( anchorSetting );
+    m_MyApp.getDataHelper().updateLastNetHostSettingName( anchorSettingsName.c_str() );
 
     std::string strPreferredIp = "";
     if( 0 != ui.m_LclIpListComboBox->currentIndex() )
@@ -282,7 +280,7 @@ void AppletNetworkSettings::slotExitButtonClick()
 }
 
 //============================================================================
-void AppletNetworkSettings::slotGoToAnchorSettingsButtonClick()
+void AppletNetworkSettings::slotGoToNetHostSettingsButtonClick()
 {
     ActivityNetworkState * activityInfo = new ActivityNetworkState( m_MyApp, this );
     activityInfo->show();
@@ -379,19 +377,19 @@ void AppletNetworkSettings::onComboBoxTextChanged( const QString & text )
 void AppletNetworkSettings::onComboBoxSelectionChange( const QString& anchorSettingName )
 {
     VxDataHelper& dataHelper = m_MyApp.getDataHelper();
-    AnchorSetting anchorSetting;
-    if( dataHelper.getAnchorSettingByName( anchorSettingName.toUtf8(), anchorSetting ) )
+    NetHostSetting anchorSetting;
+    if( dataHelper.getNetHostSettingByName( anchorSettingName.toUtf8(), anchorSetting ) )
     {
-        populateDlgFromAnchorSetting( anchorSetting );
+        populateDlgFromNetHostSetting( anchorSetting );
         updateSettingsFromDlg();
     }
 }
 
 //============================================================================
-void AppletNetworkSettings::populateDlgFromAnchorSetting( AnchorSetting& anchorSetting )
+void AppletNetworkSettings::populateDlgFromNetHostSetting( NetHostSetting& anchorSetting )
 {
-    ui.m_NetworkHostUrlEdit->setText( anchorSetting.getAnchorWebsiteUrl().c_str() );
-    ui.m_NetworkKeyEdit->setText( anchorSetting.getNetworkName().c_str() );
+    ui.m_NetworkHostUrlEdit->setText( anchorSetting.getNetHostWebsiteUrl().c_str() );
+    ui.m_NetworkKeyEdit->setText( anchorSetting.getNetworkKey().c_str() );
 }
 
 //============================================================================
@@ -430,8 +428,8 @@ void AppletNetworkSettings::onSaveButtonClick( void )
             return;
         }
 
-        AnchorSetting anchorSetting;
-        if( m_MyApp.getDataHelper().getAnchorSettingByName( anchorSettingsName.c_str(), anchorSetting ) )
+        NetHostSetting anchorSetting;
+        if( m_MyApp.getDataHelper().getNetHostSettingByName( anchorSettingsName.c_str(), anchorSetting ) )
         {
             // setting exists.. check if user wants to change setting name
             if( QMessageBox::Yes != QMessageBox::question( this, QObject::tr( "Network Setting" ), 
@@ -442,7 +440,7 @@ void AppletNetworkSettings::onSaveButtonClick( void )
             }
         }
 
-        m_MyApp.getEngine().getEngineSettings().setNetworkName( keyString );
+        m_MyApp.getEngine().getEngineSettings().setNetworkKey( keyString );
         updateSettingsFromDlg();
         QMessageBox::information( this, QObject::tr( "Network Setting" ), QObject::tr( "Network setting was saved." ) );
         //QMessageBox::warning( this, QObject::tr( "Network Key" ), QObject::tr( "You may need to restart application to avoid connection problems." ) );
@@ -463,7 +461,7 @@ void AppletNetworkSettings::onDeleteButtonClick( void )
     anchorSettingsName = ui.m_NetworkSettingsNameComboBox->currentText().toUtf8().constData();
     if( 0 != anchorSettingsName.length() )
     {
-        m_MyApp.getDataHelper().removeAnchorSettingByName( anchorSettingsName.c_str() );
+        m_MyApp.getDataHelper().removeNetHostSettingByName( anchorSettingsName.c_str() );
         updateDlgFromSettings();
     }
 }

@@ -42,11 +42,11 @@ NetActionAnnounce::~NetActionAnnounce()
 //============================================================================
 void NetActionAnnounce::doAction( void )
 {
-	if( m_Engine.getEngineSettings().getIsThisNodeAnAnchor() )
+	if( m_Engine.getEngineSettings().getIsThisNodeAnNetHost() )
 	{
-		if( m_Engine.getEngineSettings().getExcludeMeFromAnchorList() )
+		if( m_Engine.getEngineSettings().getExcludeMeFromNetHostList() )
 		{
-			LogMsg( LOG_INFO, "NetActionAnnounce::doAction ignoring because getExcludeMeFromAnchorList true\n" );
+			LogMsg( LOG_INFO, "NetActionAnnounce::doAction ignoring because getExcludeMeFromNetHostList true\n" );
 			return;
 		}
 

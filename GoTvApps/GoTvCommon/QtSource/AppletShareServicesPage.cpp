@@ -23,7 +23,7 @@
 
 //============================================================================
 AppletShareServicesPage::AppletShareServicesPage( AppCommon& app, QWidget * parent )
-: AppletLaunchPage( app, parent, eAppletShareServicesPage, OBJNAME_APPLET_SHARE_SEVICES_PAGE )
+: AppletLaunchPage( app, parent, eAppletShareServicesPage, OBJNAME_APPLET_SERVICE_SHARE_PAGE )
 , m_IsInitialized( false )
 {
     setAppletType( eAppletShareServicesPage );
@@ -38,8 +38,8 @@ AppletShareServicesPage::AppletShareServicesPage( AppCommon& app, QWidget * pare
  //   connectSignals();
 
     // save original values so can restore them if need be
- //   m_Engine.getEngineSettings().getAnchorWebsiteUrl( m_OrigAnchorUrl );
-    //m_Engine.getEngineSettings().getNetworkName( m_OrigNetworkName );
+ //   m_Engine.getEngineSettings().getNetHostWebsiteUrl( m_OrigAnchorUrl );
+    //m_Engine.getEngineSettings().getNetworkKey( m_OrigNetworkName );
     //m_Engine.getEngineSettings().getNetServiceWebsiteUrl( m_OrigConnectionTestUrl );
 
     //updateDlgFromSettings();

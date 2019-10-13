@@ -52,15 +52,15 @@ public:
 	void						setMulticastEnable( bool enableMulticast );
 	void						getMulticastEnable( bool& enableMulticast );
 
-	void						setNetworkName( std::string& strNetworkName );
-	void						getNetworkName( std::string& strNetworkName );
+	void						setNetworkKey( std::string& strNetworkName );
+	void						getNetworkKey( std::string& strNetworkName );
 
-	void						setAnchorWebsiteUrl( std::string& strWebsiteUrl );
-	void						getAnchorWebsiteUrl( std::string& strWebsiteUrl );
-	void						setIsThisNodeAnAnchor( bool isAnchor );
-	bool						getIsThisNodeAnAnchor( void );
-	void						setExcludeMeFromAnchorList( bool excludeFromAnchorList );
-	bool						getExcludeMeFromAnchorList( void );
+	void						setNetHostWebsiteUrl( std::string& strWebsiteUrl );
+	void						getNetHostWebsiteUrl( std::string& strWebsiteUrl );
+	void						setIsThisNodeAnNetHost( bool isAnchor );
+	bool						getIsThisNodeAnNetHost( void );
+	void						setExcludeMeFromNetHostList( bool excludeFromAnchorList );
+	bool						getExcludeMeFromNetHostList( void );
 
 	void						setNetServiceWebsiteUrl( std::string& strWebsiteUrl );
 	void						getNetServiceWebsiteUrl( std::string& strWebsiteUrl );

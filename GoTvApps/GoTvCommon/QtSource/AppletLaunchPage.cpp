@@ -61,25 +61,6 @@ void AppletLaunchPage::setupAppletLaunchPage( void )
             m_AppletList.push_back( applet );
         }
 
-        // optional features applets
-        //if( getMyApp().getAppSettings().getFeatureEnable( eAppFeatureProvider ) )
-        //{
-        //    AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ePluginAppletCamProvider, this );
-        //    m_AppletList.push_back( applet );
-        //}
-
-        //if( getMyApp().getAppSettings().getFeatureEnable( eAppFeatureStation ) )
-        //{
-        //    AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ePluginAppletGoTvStation, this );
-        //    m_AppletList.push_back( applet );
-        //}
-
-        //if( getMyApp().getAppSettings().getFeatureEnable( eAppFeatureNetworkHost ) )
-        //{
-        //    AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, eAppletNetHostingPage, this );
-        //    m_AppletList.push_back( applet );
-        //}
-
         m_IsInitialized = true;
     }
 }

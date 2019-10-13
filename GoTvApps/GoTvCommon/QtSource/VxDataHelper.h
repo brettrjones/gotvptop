@@ -23,7 +23,7 @@
 #define DATA_HELPER_DB_VERSION 1
 
 class VxNetIdent;
-class AnchorSetting;
+class NetHostSetting;
 class VxGUID;
 
 //! implements database for gui
@@ -77,13 +77,13 @@ public:
 
 	//=========================================================================
 	//=== anchor settings ===//
-	bool						updateAnchorSetting( AnchorSetting& anchorSetting ); 
-	bool						getAnchorSettingByName( const char * name, AnchorSetting& anchorSetting ); 
-	bool						getAllAnchorSettings( std::vector<AnchorSetting>& anchorSettingList ); 
-	bool 						removeAnchorSettingByName( const char * name ); 
+	bool						updateNetHostSetting( NetHostSetting& anchorSetting ); 
+	bool						getNetHostSettingByName( const char * name, NetHostSetting& anchorSetting ); 
+	bool						getAllNetHostSettings( std::vector<NetHostSetting>& anchorSettingList ); 
+	bool 						removeNetHostSettingByName( const char * name ); 
 
-	bool						updateLastAnchorSettingName( const char * name ); 
-	std::string 				getLastAnchorSettingName( void ); 
+	bool						updateLastNetHostSettingName( const char * name ); 
+	std::string 				getLastNetHostSettingName( void ); 
 
 protected:
 	//=== vars ===//

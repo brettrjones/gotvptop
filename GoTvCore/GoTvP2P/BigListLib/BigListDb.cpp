@@ -103,10 +103,10 @@ RCODE BigListDb::dbRestoreAll( const char * networkName )
 {
 	int iRestoredCount = 0;
 	std::string strNetworkName = networkName;
-	if( getNetworkName() != networkName )
+	if( getNetworkKey() != networkName )
 	{
 #ifdef DEBUG_BIGLIST_DB
-        LogMsg( LOG_INFO, "BigListDb::dbRestoreAll changing networks %s to %s\n", getNetworkName().c_str(), networkName );
+        LogMsg( LOG_INFO, "BigListDb::dbRestoreAll changing networks %s to %s\n", getNetworkKey().c_str(), networkName );
 #endif // DEBUG_BIGLIST_DB
 		m_NetworkName = strNetworkName;
 	}
@@ -417,7 +417,7 @@ UINT BigListLoadThreadFunction( void * pvParam )
 	poThread->setIsThreadRunning( true );
 	BigListMgr * poMgr = (BigListMgr *)poThread->getThreadUserParam();
 	// load all lists urls from database
-	rc = poMgr->dbRestoreAll( poMgr->getNetworkName().c_str() );
+	rc = poMgr->dbRestoreAll( poMgr->getNetworkKey().c_str() );
 	if( rc )
 	{
 		LogMsg( LOG_INFO, "BigListLoadThreadFunction: Restore Error %d\n" );

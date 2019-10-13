@@ -579,9 +579,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletKodi.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSharedContent.cpp">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletUserIdentity.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
@@ -632,12 +629,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupAnchor.cpp">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupHost.cpp">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupUser.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
@@ -711,9 +702,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetClientGuiLogic.cpp">
       <Filter>GoTvCommon\Source Files\NetService</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGoTvPtoPNetworkHost.cpp">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\InformationWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
@@ -744,15 +732,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\SessionWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletShareServicesPage.cpp">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletStoryboard.cpp">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSharedWebCam.cpp">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLibrary.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
@@ -774,10 +753,67 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityIsPortOpenTest.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletRandomPerson.cpp">
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSearchPage.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSearchPage.cpp">
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientRandomPerson.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientShareFiles.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientShareWebCam.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientStoryboard.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceBase.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceConnectionTest.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceGroupHost.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceGroupListingHost.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceNetworkHost.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceRandomPerson.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceRelay.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceShareFiles.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceShareWebCam.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientBase.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletShareServicesPage.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceAboutMe.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceStoryboard.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceRandomPersonRelay.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceAvatarImage.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientAvatarImage.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1430,9 +1466,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletUserIdentity.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSharedContent.h">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletUserIdentity.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
@@ -1447,12 +1480,6 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RenderGlOffScreenSurface.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupAnchor.h">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupHost.h">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupUser.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
@@ -1499,9 +1526,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\NetClientGuiLogic.h">
       <Filter>GoTvCommon\Source Files\NetService</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGoTvPtoPNetworkHost.h">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\InformationWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
@@ -1529,15 +1553,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\SessionWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletShareServicesPage.h">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletStoryboard.h">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSharedWebCam.h">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletLibrary.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
@@ -1559,10 +1574,67 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityIsPortOpenTest.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletRandomPerson.h">
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSearchPage.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSearchPage.h">
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletClientRandomPerson.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletClientShareFiles.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletClientShareWebCam.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletClientStoryboard.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceBase.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceConnectionTest.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceGroupHost.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceGroupListingHost.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceNetworkHost.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceRandomPerson.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceRelay.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceShareFiles.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceShareWebCam.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletClientBase.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletShareServicesPage.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceAboutMe.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceStoryboard.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceRandomPersonRelay.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceAvatarImage.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletClientAvatarImage.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
   </ItemGroup>
@@ -2608,7 +2680,10 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityInformation.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletRandomPerson.ui">
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletClientRandomPerson.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletServiceBase.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

@@ -40,6 +40,7 @@ public:
 
 	static void					generateNewVxGUID( VxGUID& retNewGUID );
 	static VxGUID&				nullVxGUID( void );
+    static VxGUID&				anybodyVxGUID( void );
 
 	void						initializeWithNewVxGUID( void );
 	void						clearVxGUID( void );

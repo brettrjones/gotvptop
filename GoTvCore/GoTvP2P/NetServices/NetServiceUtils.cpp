@@ -541,7 +541,7 @@ void NetServiceUtils::generateNetServiceChallengeHash(	std::string&			strKey,
 														VxSktConnectSimple *	skt )
 {
 	uint16_t clientPort = skt->m_LclIp.getPort();
-	//LogMsg( LOG_INFO, "NetServiceUtils::generateNetServiceKey: clientPort = %d, network %s\n", clientPort, m_NetworkMgr.getNetworkName() );
+	//LogMsg( LOG_INFO, "NetServiceUtils::generateNetServiceKey: clientPort = %d, network %s\n", clientPort, m_NetworkMgr.getNetworkKey() );
 	generateNetServiceChallengeHash( strKey, clientPort );
 }
 
@@ -552,7 +552,7 @@ void NetServiceUtils::generateNetServiceChallengeHash(	std::string&			strKeyHash
 	std::string strPwd;
 	StdStringFormat( strPwd, "xs%ddfj%sd%d75!?jsaf", 
 		clientPort,
-		m_NetworkMgr.getNetworkName(), 
+		m_NetworkMgr.getNetworkKey(), 
 		clientPort );
 
 	VxKey key;
@@ -567,7 +567,7 @@ void NetServiceUtils::generateNetServiceCryptoKey(	VxKey&					key,
 	std::string strPwd;
 	StdStringFormat( strPwd, "xz&gdf%d%s!?d%d759sdc", 
 		clientPort,
-		m_NetworkMgr.getNetworkName(), 
+		m_NetworkMgr.getNetworkKey(), 
 		clientPort );
 	key.setKeyFromPassword( strPwd.c_str(), (int)strPwd.size() );
 }

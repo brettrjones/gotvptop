@@ -458,7 +458,7 @@ public:
     virtual void				fromGuiNetworkAvailable( const char * lclIp = NULL, bool isCellularNetwork = false );
     virtual void				fromGuiNetworkLost( void );
 
-    virtual void				fromGuiVerifyAnchorSettings( void );
+    virtual void				fromGuiVerifyNetHostSettings( void );
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port );
 
     virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings );

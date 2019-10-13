@@ -267,7 +267,7 @@ void PktAnnounce::DebugDump( void )
 	uint16_t u16Port = this->getOnlinePort();
 	strName = this->getOnlineName();
 	strDesc = this->getOnlineDescription();
-	//strNetwork = this->getNetworkName();
+	//strNetwork = this->getNetworkKey();
 
 	LogMsg( LOG_INFO, "PktAnnounce Len %d Version #%d name %s Ip %s Port %d desc %s\n",
 			getPktLength(),		// packet length

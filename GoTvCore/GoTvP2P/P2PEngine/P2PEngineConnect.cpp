@@ -223,7 +223,7 @@ void P2PEngine::onOncePerSecond( void )
 //	if( 0 >= announceCntInSeconds )
 //	{
 //		announceCntInSeconds = 60;
-//		if( isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnAnchor() ) )
+//		if( isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnNetHost() ) )
 //		{
 //			m_NetServicesMgr.announceToAnchor( m_NetworkStateMachine.getAnchorIp(), m_NetworkStateMachine.getAnchorPort() );
 //		}

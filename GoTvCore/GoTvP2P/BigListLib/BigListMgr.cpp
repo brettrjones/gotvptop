@@ -225,7 +225,7 @@ EPktAnnUpdateType BigListMgr::updatePktAnn(	PktAnnounce *		poPktAnnIn,				// ann
 			poInfo->setIsOnline( true );
 			poInfo->setIsConnected( true );
 			bigInsertInfo( poInfo->getMyOnlineId(), poInfo, true );
-			updateBigListDatabase( poInfo, GetPtoPEngine().getNetworkMgr().getNetworkName() );
+			updateBigListDatabase( poInfo, GetPtoPEngine().getNetworkMgr().getNetworkKey() );
 			//! notify new contact found
 			eUpdateType = ePktAnnUpdateTypeNewContact;
 		}

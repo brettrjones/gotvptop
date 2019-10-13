@@ -4,7 +4,8 @@ enum EMyIcons
 	eMyIconNone			= 0,		// no icon to show
 	eMyIconUnknown,					// Icon with question mark
 	eMyIconApp,
-	eMyIconNotifyOverlay,			// activity flashing dot
+    eMyIconAvatarImage,
+    eMyIconNotifyOverlay,			// activity flashing dot
 	eMyIconPlusOverlay,				// add to shared or library icon overlay
 	eMyIconMinusOverlay,			// remove from shared or library
 	eMyIconFriendOverlay,			// is friend
@@ -23,6 +24,8 @@ enum EMyIcons
     eMyIconSearchImage,
     eMyIconSearchStoryboard,
     eMyIconSearchFolder,
+
+    eMyIconShareWithPerson,
 
 	eMyIconAdministrator,
 	eMyIconFriend,
@@ -281,6 +284,7 @@ enum EMyIcons
     eMyIconNetworkSettings,
     eMyIconSearchRandomPerson,
 
+ 
 	// built in plugin options
 	eMyIconCamStreamProvider,
 	eMyIconGoTvStation,
@@ -292,6 +296,18 @@ enum EMyIcons
 	eMyIconGroupListingHost,
 
     eMyIconShareServices,
+
+    eMyIconServiceAvatarImage,
+    eMyIconServiceConnectionTest,
+    eMyIconServiceShareAboutMe,
+    eMyIconServiceShareFiles,
+    eMyIconServiceShareStoryboard,
+    eMyIconServiceShareWebCam,
+    eMyIconServiceRandomPerson,
+    eMyIconServiceRandomPersonRelay,
+    eMyIconServiceRelay,
+
+
 
 	eMaxMyIcon	// must be last
 };

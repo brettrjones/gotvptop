@@ -32,7 +32,7 @@ public:
 	virtual ~AnchorTest() = default;
 
     IToGui&                     getToGui();
-	virtual void				fromGuiVerifyAnchorSettings( void );
+	virtual void				fromGuiVerifyNetHostSettings( void );
 
 	void						doAnchorUrlTest( void );
 	void						doNetServiceUrlTest( void );

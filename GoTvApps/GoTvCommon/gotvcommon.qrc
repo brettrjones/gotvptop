@@ -216,5 +216,17 @@
         <file>Resources/search-image.svg</file>
         <file>Resources/search-webcam.svg</file>
         <file>Resources/search-storyboard.svg</file>
+        <file>Resources/share-about-me.svg</file>
+        <file>Resources/share-relay.svg</file>
+        <file>Resources/share-storyboard.svg</file>
+        <file>Resources/share-webcam.svg</file>
+        <file>Resources/share-files.svg</file>
+        <file>Resources/service-connection-test.svg</file>
+        <file>Resources/service-connect-random.svg</file>
+        <file>Resources/service-connect-random-relay.svg</file>
+        <file>Resources/service-relay.svg</file>
+        <file>Resources/avatar.svg</file>
+        <file>Resources/share-avatar.svg</file>
+        <file>Resources/share-with-person.svg</file>
     </qresource>
 </RCC>

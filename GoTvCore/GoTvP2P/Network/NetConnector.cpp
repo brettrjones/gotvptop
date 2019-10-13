@@ -667,12 +667,12 @@ RCODE NetConnector::directConnectTo(	VxConnectInfo&		connectInfo,
 		LogMsg( LOG_SKT, "NetworkMgr::DirectConnectTo: connect success.. generating tx key\n" );
 #endif // DEBUG_SKTS
 
-		GenerateTxConnectionKey( sktBase, &connectInfo.m_DirectConnectId, m_NetworkMgr.getNetworkName() );
+		GenerateTxConnectionKey( sktBase, &connectInfo.m_DirectConnectId, m_NetworkMgr.getNetworkKey() );
 #ifdef DEBUG_SKTS
 		LogMsg( LOG_SKT, "NetworkMgr::DirectConnectTo: connect success.. generating rx key\n" );
 #endif // DEBUG_SKTS
 
-		GenerateRxConnectionKey( sktBase, &m_PktAnn.m_DirectConnectId, m_NetworkMgr.getNetworkName() );
+		GenerateRxConnectionKey( sktBase, &m_PktAnn.m_DirectConnectId, m_NetworkMgr.getNetworkKey() );
 #ifdef DEBUG_SKTS
 		LogMsg( LOG_SKT, "NetworkMgr::DirectConnectTo: connect success.. sending announce\n" );
 #endif // DEBUG_SKTS
@@ -721,8 +721,8 @@ RCODE NetConnector::rmtUserRelayConnectTo(	VxConnectInfo&		connectInfo,
 	if( sktBase )
 	{
 		// generate encryption keys
-		GenerateTxConnectionKey( sktBase, &connectInfo.m_RelayConnectId, m_NetworkMgr.getNetworkName() );
-		GenerateRxConnectionKey( sktBase, &m_PktAnn.m_DirectConnectId, m_NetworkMgr.getNetworkName() );
+		GenerateTxConnectionKey( sktBase, &connectInfo.m_RelayConnectId, m_NetworkMgr.getNetworkKey() );
+		GenerateRxConnectionKey( sktBase, &m_PktAnn.m_DirectConnectId, m_NetworkMgr.getNetworkKey() );
 
 		// we are connected to users proxy
 		// first send announcement to his proxy then to him

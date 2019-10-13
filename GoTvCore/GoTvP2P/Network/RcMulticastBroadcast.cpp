@@ -56,7 +56,7 @@ void RcMulticastBroadcast::onPktAnnUpdated( void )
 	m_PktAnnEncrypted.setHisFriendshipToMe(eFriendStateGuest);
 
 	std::string networkName;
-	m_Engine.getEngineSettings().getNetworkName( networkName );
+	m_Engine.getEngineSettings().getNetworkKey( networkName );
 
 	if( networkName.length() )
 	{

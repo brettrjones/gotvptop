@@ -45,7 +45,7 @@ NetActionPhoneShake::~NetActionPhoneShake()
 //============================================================================
 void NetActionPhoneShake::doAction( void )
 {
-	if( m_Engine.getEngineSettings().getIsThisNodeAnAnchor() )
+	if( m_Engine.getEngineSettings().getIsThisNodeAnNetHost() )
 	{
 		// we are the anchor
 		// put ourself directly into the database

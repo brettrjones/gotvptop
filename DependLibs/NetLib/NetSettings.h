@@ -14,9 +14,9 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "AnchorSetting.h"
+#include "NetHostSetting.h"
 
-class NetSettings : public AnchorSetting
+class NetSettings : public NetHostSetting
 {
 public:
 	NetSettings();

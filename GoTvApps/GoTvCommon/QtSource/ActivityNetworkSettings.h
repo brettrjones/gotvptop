@@ -38,7 +38,7 @@ public:
 
 public slots:
 	void						slotExitButtonClick( void );
-	void						slotGoToAnchorSettingsButtonClick( void );
+	void						slotGoToNetHostSettingsButtonClick( void );
 	void						slotRandomPortButtonClick( void );
 	void						slotRunIsPortOpenButtonClick( void );
 	void						slotExternIpHelpButtonClick( void );

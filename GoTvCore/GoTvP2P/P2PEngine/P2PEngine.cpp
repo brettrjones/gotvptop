@@ -235,7 +235,7 @@ void P2PEngine::onSessionStart( EPluginType ePluginType, VxNetIdent * netIdent )
 		int64_t sysTimeMs = GetGmtTimeMs();
 		
 		netIdent->setLastSessionTimeMs( sysTimeMs );
-		m_BigListMgr.dbUpdateSessionTime( netIdent->getMyOnlineId(), sysTimeMs, getNetworkMgr().getNetworkName() );
+		m_BigListMgr.dbUpdateSessionTime( netIdent->getMyOnlineId(), sysTimeMs, getNetworkMgr().getNetworkKey() );
 		IToGui::getToGui().toGuiContactLastSessionTimeChange( netIdent );
 	}
 }

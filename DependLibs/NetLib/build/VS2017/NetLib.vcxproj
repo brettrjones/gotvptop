@@ -190,8 +190,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\AnchorSetting.cpp" />
     <ClCompile Include="..\..\InetAddress.cpp" />
+    <ClCompile Include="..\..\NetHostSetting.cpp" />
     <ClCompile Include="..\..\NetSettings.cpp" />
     <ClCompile Include="..\..\VxBaseSktInfo.cpp" />
     <ClCompile Include="..\..\VxClientMgr.cpp" />
@@ -275,8 +275,8 @@
     <ClCompile Include="..\..\VxSktWaitingList.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\AnchorSetting.h" />
     <ClInclude Include="..\..\InetAddress.h" />
+    <ClInclude Include="..\..\NetHostSetting.h" />
     <ClInclude Include="..\..\NetSettings.h" />
     <ClInclude Include="..\..\VxAnyRandomPort.h" />
     <ClInclude Include="..\..\VxBaseSktInfo.h" />
@@ -310,6 +310,7 @@
     <ClInclude Include="..\..\VxXferDefs.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\libnetlib.pri" />
     <None Include="..\..\NetLib.pro" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

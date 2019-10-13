@@ -116,7 +116,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 			// decrypt it
 			//m_PktAnn.DebugDump();
 			//vx_assert( sktBase->getRxDecryptedLen() == 0 );
-			GenerateRxConnectionKey( sktBase, &m_PktAnn.m_DirectConnectId, m_NetworkMgr.getNetworkName() );
+			GenerateRxConnectionKey( sktBase, &m_PktAnn.m_DirectConnectId, m_NetworkMgr.getNetworkKey() );
 			sktBase->decryptReceiveData();
 			iDataLen = sktBase->getRxDecryptedLen();
 		}

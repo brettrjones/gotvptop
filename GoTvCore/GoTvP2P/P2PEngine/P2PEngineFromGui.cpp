@@ -265,7 +265,7 @@ void P2PEngine::fromGuiSetIdentHasTextOffers( VxGUID& onlineId, bool hasTextOffe
 		if( bigListInfo->getHasTextOffers() != hasTextOffers )
 		{
 			bigListInfo->setHasTextOffers( hasTextOffers );
-			m_BigListMgr.updateBigListDatabase( bigListInfo, getNetworkMgr().getNetworkName() );
+			m_BigListMgr.updateBigListDatabase( bigListInfo, getNetworkMgr().getNetworkKey() );
 		}
 	}
 }
@@ -903,7 +903,7 @@ bool P2PEngine::fromGuiChangeMyFriendshipToHim(	VxGUID&			oOnlineId,
 			EFriendState eOldFriendship = poInfo->getMyFriendshipToHim();
 			poInfo->setMyFriendshipToHim( eMyFriendshipToHim );
 			m_BigListMgr.updateVectorList( eOldFriendship, poInfo );
-			m_BigListMgr.updateBigListDatabase( poInfo, getNetworkMgr().getNetworkName() );
+			m_BigListMgr.updateBigListDatabase( poInfo, getNetworkMgr().getNetworkKey() );
 			LogMsg(LOG_INFO, "P2PEngine::fromGuiChangeMyFriendshipToHim: SUCCESS changed %s friendship to %s\n", 
 				poInfo->getOnlineName(),
 				poInfo->describeMyFriendshipToHim());
@@ -947,7 +947,7 @@ void P2PEngine::fromGuiUseRelay( VxGUID& oOnlineId, bool bUseAsRelay )
 	if( poInfo )
 	{
 		poInfo->setIsMyPreferedRelay( bUseAsRelay );
-		m_BigListMgr.updateBigListDatabase( poInfo, getNetworkMgr().getNetworkName() );
+		m_BigListMgr.updateBigListDatabase( poInfo, getNetworkMgr().getNetworkKey() );
 	}
 }
 
@@ -1144,10 +1144,10 @@ int P2PEngine::fromGuiMulitcastPkt( unsigned char * data, int len )
 #endif // TARGET_OS_ANDROID
 
 //============================================================================
-void P2PEngine::fromGuiVerifyAnchorSettings( void )
+void P2PEngine::fromGuiVerifyNetHostSettings( void )
 {
-	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiVerifyAnchorSettings" );
-	m_AnchorTest.fromGuiVerifyAnchorSettings();
+	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiVerifyNetHostSettings" );
+	m_AnchorTest.fromGuiVerifyNetHostSettings();
 }
 
 //============================================================================

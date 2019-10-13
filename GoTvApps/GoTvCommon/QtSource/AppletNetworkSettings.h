@@ -32,7 +32,7 @@ protected slots:
 	void						slotNetworkSettingsSelectionChanged( int idx );
 
     void						slotExitButtonClick( void );
-    void						slotGoToAnchorSettingsButtonClick( void );
+    void						slotGoToNetHostSettingsButtonClick( void );
     void						slotRandomPortButtonClick( void );
     void						slotRunIsPortOpenButtonClick( void );
     void						slotExternIpHelpButtonClick( void );
@@ -59,7 +59,7 @@ protected:
 
     void						updateDlgFromSettings( void );
     void						updateSettingsFromDlg( void );
-    void						populateDlgFromAnchorSetting( AnchorSetting& anchorSetting );
+    void						populateDlgFromNetHostSetting( NetHostSetting& anchorSetting );
     void						setFirewallTest( EngineSettings::EFirewallTestType eFirewallType );
 
 	Ui::AppletNetworkSettingsWidget		ui;

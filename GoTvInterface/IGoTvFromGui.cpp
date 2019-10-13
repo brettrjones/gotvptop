@@ -314,9 +314,9 @@ void IGoTv::fromGuiNetworkSettingsChanged( void )
 }
 
 //============================================================================
-void IGoTv::fromGuiVerifyAnchorSettings( void )
+void IGoTv::fromGuiVerifyNetHostSettings( void )
 {
-    getPtoP().fromGuiVerifyAnchorSettings();
+    getPtoP().fromGuiVerifyNetHostSettings();
 }
 
 //============================================================================

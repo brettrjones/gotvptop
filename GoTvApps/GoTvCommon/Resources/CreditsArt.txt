@@ -29,7 +29,9 @@ Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
 
  
 https://iconmonstr.com/
+avatar.svg
 check-mark.svg
+connection-test.svg (modified)
 file-folder-cancel.svg
 file-folder-locked.svg
 file-folder-minus.svg
@@ -37,6 +39,7 @@ file-folder-normal.svg
 file-folder-plus.svg
 file-folder-share.svg (modified)
 friend.svg
+flask.svg
 key-disabled.svg
 key-enabled.svg
 mediatype-audio.svg
@@ -49,7 +52,15 @@ plugin.svg
 radio-tower.svg
 remote-control.svg
 settings-gear.svg
+share-about-me.svg ( modified )
+share-avatar.svg ( modified )
+share-files.svg ( modified )
+share-hand.svg ( modified )
+share-relay.svg ( modified )
 share-services.svg
+share-storyboard.svg ( modified )
+share-webcam.svg ( modified )
+share-with-person.svg ( modified )
 speech-bubble.svg
 speech-bubble-disabled.svg
 star-empty.svg

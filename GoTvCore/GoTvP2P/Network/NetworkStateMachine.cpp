@@ -365,8 +365,8 @@ void NetworkStateMachine::logonUpdateFromEngineSettings( EngineSettings& engineS
 	m_PktAnn.setOnlinePort( u16TcpPort );
 
 	std::string networkName;
-	engineSettings.getNetworkName( networkName );
-	m_NetworkMgr.setNetworkName( networkName.c_str() );
+	engineSettings.getNetworkKey( networkName );
+	m_NetworkMgr.setNetworkKey( networkName.c_str() );
 
 	m_Engine.getBigListMgr().dbRestoreAll( networkName.c_str() );
 }
@@ -559,7 +559,7 @@ void NetworkStateMachine::setPktAnnounceWithRelayInfo( const char * relayOnlineI
 bool NetworkStateMachine::resolveWebsiteUrls( void )
 {
 	std::string anchorWebsiteUrl;
-	m_EngineSettings.getAnchorWebsiteUrl( anchorWebsiteUrl );
+	m_EngineSettings.getNetHostWebsiteUrl( anchorWebsiteUrl );
 	std::string netServiceWebsiteUrl;
 	m_EngineSettings.getNetServiceWebsiteUrl( netServiceWebsiteUrl );
 	if( m_bWebsiteUrlsResolved
@@ -672,7 +672,7 @@ void NetworkStateMachine::onOncePerHour( void )
 	//	}
 	//}
 
-	if( isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnAnchor() ) )
+	if( isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnNetHost() ) )
 	{
 		m_NetServicesMgr.announceToAnchor( getAnchorIp(), getAnchorPort() );
 	}

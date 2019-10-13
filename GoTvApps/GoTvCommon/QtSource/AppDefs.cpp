@@ -45,9 +45,6 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletAboutGoTvPtoP:			return eMyIconApp;
     case eAppletCreateAccount:			return eMyIconUserIdentity;
     case eAppletGroupUser:              return eMyIconGroupUser;
-    case eAppletGroupHost:              return eMyIconGroupHost;
-    case eAppletGroupAnchor:            return eMyIconGroupListingHost;
-    case eAppletGoTvPtoPNetworkHost:    return eMyIconNetHosting;
     case eAppletHomePage:				return eMyIconHome;
     case eAppletKodi:				    return eMyIconKodi;
     case eAppletLibrary:				return eMyIconLibraryNormal;
@@ -57,11 +54,8 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletPlayerVideo:			return eMyIconVideoPhoneNormal;
     case eAppletPersonalRecorder:		return eMyIconNotepadNormal;
     case eAppletSettings:				return eMyIconSettings;
-    case eAppletShareServicesPage:      return eMyIconShareServices;
-    case eAppletStoryboard:             return eMyIconStoryBoardNormal;
-    case eAppletSharedWebCam:           return eMyIconCamStreamProvider;
-    case eAppletSharedContent:			return eMyIconSharedContent;
-
+    case eAppletClientStoryboard:       return eMyIconStoryBoardNormal;
+   
     case eAppletSearchPage:	            return eMyIconSearch;
     case eAppletSearchPersons:	        return eMyIconSearchPerson;
     case eAppletSearchMood:	            return eMyIconSearchHeart;
@@ -70,13 +64,30 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletScanSharedFiles:	    return eMyIconSearchFolder;
     case eAppletScanWebCam:	            return eMyIconSearchWebCam;
 
-    case eAppletRandomPerson:	        return eMyIconSearchRandomPerson;
-    case eAppletTheme:					return eMyIconTheme;
+    case eAppletClientAvatarImage:          return eMyIconAvatarImage;
+    case eAppletClientRandomPerson:	        return eMyIconSearchRandomPerson;
+    case eAppletTheme:					    return eMyIconTheme;
 
-	case ePluginAppletCamProvider:		return eMyIconCamStreamProvider;
-	case ePluginAppletGoTvStation:		return eMyIconGoTvStation;
-	case ePluginAppletGoTvNetworkHost:	return eMyIconGoTvNetworkHost;
-    case eAppletUserIdentity:			return eMyIconUserIdentity;
+	case ePluginAppletCamProvider:		    return eMyIconCamStreamProvider;
+	case ePluginAppletGoTvStation:		    return eMyIconGoTvStation;
+	case ePluginAppletGoTvNetworkHost:	    return eMyIconGoTvNetworkHost;
+    case eAppletUserIdentity:			    return eMyIconUserIdentity;
+
+    case eAppletShareServicesPage:          return eMyIconShareServices;
+    case eAppletServiceAboutMe:             return eMyIconServiceShareAboutMe;
+    case eAppletServiceAvatarImage:         return eMyIconServiceAvatarImage;
+    case eAppletServiceShareFiles:          return eMyIconServiceShareFiles;
+    case eAppletServiceShareWebCam:         return eMyIconServiceShareWebCam;
+    case eAppletServiceStoryboard:          return eMyIconServiceShareStoryboard;
+
+    case eAppletServiceGroupHost:           return eMyIconGroupHost;
+    case eAppletServiceGroupListingHost:    return eMyIconGroupListingHost;
+    case eAppletServiceNetworkHost:         return eMyIconNetHosting;
+
+    case eAppletServiceConnectionTest:      return eMyIconServiceConnectionTest;
+    case eAppletServiceRandomPerson:        return eMyIconServiceRandomPerson;
+    case eAppletServiceRandomPersonRelay:   return eMyIconServiceRandomPersonRelay;
+    case eAppletServiceRelay:               return eMyIconServiceRelay;
 
         //	case eAppletPlayerMusic:			return eMyIconMusic;
         //	case eAppletPlayerPhoto:			return eMyIconGallery;
@@ -110,31 +121,42 @@ QString DescribeApplet( EApplet applet )
 	case eAppletTheme:					return QObject::tr( "Theme" );
     case eAppletNetworkSettings:		return QObject::tr( "Network Settings" );
 
-    case eAppletSettings:				return QObject::tr( "Settings" );
+    case eAppletSettings:				    return QObject::tr( "Settings" );
 
-    case eAppletSearchPage:				return QObject::tr( "Search" );
-    case eAppletSearchPersons:			return QObject::tr( "Search Group For Person Name" );
-    case eAppletSearchMood:			    return QObject::tr( "Search Group For Mood Message" );
-    case eAppletScanAboutMe:			return QObject::tr( "Search Group For About Me Pictures" );
-    case eAppletScanStoryboard:			return QObject::tr( "Search Group For Story Boards" );
-    case eAppletScanSharedFiles:		return QObject::tr( "Search Group For Shared Files" );
-    case eAppletScanWebCam:				return QObject::tr( "Search Group For Shared Web Cams" );
-    case eAppletRandomPerson:		    return QObject::tr( "Connect With Random Person" );
+    case eAppletSearchPage:				    return QObject::tr( "Search" );
+    case eAppletSearchPersons:			    return QObject::tr( "Search Group For Person Name" );
+    case eAppletSearchMood:			        return QObject::tr( "Search Group For Mood Message" );
+    case eAppletScanAboutMe:			    return QObject::tr( "Search Group For About Me Pictures" );
+    case eAppletScanStoryboard:			    return QObject::tr( "Search Group For Story Boards" );
+    case eAppletScanSharedFiles:		    return QObject::tr( "Search Group For Shared Files" );
+    case eAppletScanWebCam:				    return QObject::tr( "Search Group For Shared Web Cams" );
+    case eAppletClientRandomPerson:		    return QObject::tr( "Connect With Random Person" );
 
-    case eAppletGroupUser:              return QObject::tr( "Join Group" );
-    case eAppletNetHostingPage:         return QObject::tr( "Group And Network Hosting" );
-    case eAppletGroupHost:              return QObject::tr( "Host A Group" );
-    case eAppletGroupAnchor:            return QObject::tr( "Host List Of Groups" );
-    case eAppletGoTvPtoPNetworkHost:    return QObject::tr( "Host A GoTvPtoP Network" );
+    case eAppletGroupUser:                  return QObject::tr( "Join Group" );
+    case eAppletNetHostingPage:             return QObject::tr( "Group And Network Hosting" );
+    case eAppletServiceGroupHost:           return QObject::tr( "Host A Group" );
+    case eAppletServiceGroupListingHost:    return QObject::tr( "Host List Of Groups" );
+    case eAppletServiceNetworkHost:         return QObject::tr( "Host A GoTvPtoP Network" );
 
-    case eAppletShareServicesPage:      return QObject::tr( "Share with others sevices" );
-    case eAppletStoryboard:             return QObject::tr( "Share story (Blog)" );
-    case eAppletSharedWebCam:           return QObject::tr( "Share your web cam" );
-    case eAppletSharedContent:			return QObject::tr( "Share Media Files" );
+    case eAppletClientAvatarImage:          return QObject::tr( "Get Persons Avatar Image For Contact List" );
+    case eAppletClientStoryboard:           return QObject::tr( "Share story (Blog)" );
+
+    case eAppletShareServicesPage:          return QObject::tr( "Share with others sevices" );
+    case eAppletServiceAboutMe:             return QObject::tr( "Share About Me Page" );
+    case eAppletServiceAvatarImage:         return QObject::tr( "Share Your Avatar Image For Contact List" );
+    case eAppletServiceConnectionTest:      return QObject::tr( "Service Connection Test" );
+    case eAppletServiceShareFiles:			return QObject::tr( "Share Media Files" );
+    case eAppletServiceShareWebCam:         return QObject::tr( "Share your web cam" );
+    case eAppletServiceStoryboard:          return QObject::tr( "Share Story Page (Blog)" );
+    case eAppletServiceRandomPerson:        return QObject::tr( "Service Random Person Connect" );
+    case eAppletServiceRandomPersonRelay:   return QObject::tr( "Service Random Person Relay" );
+    case eAppletServiceRelay:               return QObject::tr( "Service Relay" );
+
+
 
 	case ePluginAppletCamProvider:		return QObject::tr( "Provide Cam Stream" );
 	case ePluginAppletGoTvStation:		return QObject::tr( "Manage Station" );
-	case ePluginAppletGoTvNetworkHost:	return QObject::tr( "Manage Network Host" );
+	case ePluginAppletGoTvNetworkHost:	return QObject::tr( "Manage Station Network Host" );
 
         //case eAppletPlayerMusic:			return QObject::tr( "Music Player" );
 //case eAppletPlayerPhoto:			return QObject::tr( "Image Gallery" );

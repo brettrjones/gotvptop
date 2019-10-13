@@ -528,7 +528,7 @@ bool NetServicesMgr::actionReqConnectToAnchor( VxSktConnectSimple& sktSimple )
 	}
 	else
 	{
-		m_EngineSettings.getAnchorWebsiteUrl( anchorUrl );
+		m_EngineSettings.getNetHostWebsiteUrl( anchorUrl );
 	}
 
 	std::string strHost;
