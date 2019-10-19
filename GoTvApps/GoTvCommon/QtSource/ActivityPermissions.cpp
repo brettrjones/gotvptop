@@ -57,7 +57,7 @@ void ActivityPermissions::setPluginType( EPluginType ePluginType )
 	case ePluginTypeRelay:	// proxy plugin
 		ui.PermissionLabel->setText( "Who can use my device as a relay" );
 		break;
-	case ePluginTypeFileOffer:	
+	case ePluginTypeFileXfer:	
 		ui.PermissionLabel->setText( "Who can offer to send a file" );
 		break;
 	case ePluginTypeFileServer:	
@@ -66,7 +66,7 @@ void ActivityPermissions::setPluginType( EPluginType ePluginType )
 	case 	ePluginTypeCamServer:	
 		ui.PermissionLabel->setText( "Who can access web cam broadcast" );
 		break;
-	case 	ePluginTypeMultiSession:	
+	case 	ePluginTypeMessenger:	
 		ui.PermissionLabel->setText( "Who can offer chat session" );
 		break;
 	case 	ePluginTypeVoicePhone:	
@@ -79,7 +79,7 @@ void ActivityPermissions::setPluginType( EPluginType ePluginType )
 		ui.PermissionLabel->setText( "Who can offer to play truth or dare" );
 		break;
 
-	case 	ePluginTypeStoryBoard:	
+	case 	ePluginTypeStoryboard:	
 		ui.PermissionLabel->setText( "Who can read my story board" );
 		break;
 

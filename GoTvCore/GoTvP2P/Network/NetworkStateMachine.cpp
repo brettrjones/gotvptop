@@ -376,21 +376,34 @@ void NetworkStateMachine::restartNetwork( void )
 {
 	bool isCell		= m_bIsCellNetwork;
 	std::string ip	= m_LocalNetworkIp;
-	fromGuiNetworkLost();
-	fromGuiNetworkAvailable( ip.c_str(), isCell );
+
+    static bool hasCnaged = false;
+    static bool lastIsCell = false;
+    static std::string lastIpFound;
+    if( ( lastIpFound != m_LocalNetworkIp )  || ( lastIsCell != isCell ) )
+    {
+        fromGuiNetworkLost();
+        fromGuiNetworkAvailable( ip.c_str(), isCell );
+    }
 }
 
 //============================================================================
 void NetworkStateMachine::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork )
 {
+    bool hasChanged = ( m_LocalNetworkIp != lclIp );
 	m_LocalNetworkIp = lclIp;
 	VxSetLclIpAddress( lclIp );
 	//LogMsg( LOG_INFO, "NetworkStateMachine::fromGuiNetworkAvailable\n" );
 
     uint16_t u16TcpPort = m_Engine.getEngineSettings().getTcpIpPort();
 	m_PktAnn.setOnlinePort( u16TcpPort );
+    hasChanged |= ( m_PktAnn.getOnlinePort() != u16TcpPort );
 	m_PktAnn.getLanIPv4().setIp( lclIp );
-	m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
+    hasChanged |= ( m_bIsCellNetwork != isCellularNetwork );
+    if( hasChanged )
+    {
+        m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
+    }
 
 	m_bIsCellNetwork = isCellularNetwork;
 	m_NetworkStateMutex.lock();

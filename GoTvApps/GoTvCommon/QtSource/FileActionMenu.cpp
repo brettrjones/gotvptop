@@ -84,7 +84,7 @@ void FileActionMenu::setupMenuItems( void )
 	menuIndex++;
 	if( m_SelectedFriend )
 	{
-		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileOffer ) )
+		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileXfer ) )
 		{
 			QString menuText = "Send File To ";
 			menuText += m_SelectedFriend->getOnlineName();
@@ -174,9 +174,9 @@ void FileActionMenu::itemClicked(QListWidgetItem *item)
 			break;
 
 		case eFileMenuActionSendToFriend:
-			if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileOffer ) )
+			if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileXfer ) )
 			{
-				if( false == m_FromGui.fromGuiMakePluginOffer(	ePluginTypeFileOffer, 
+				if( false == m_FromGui.fromGuiMakePluginOffer(	ePluginTypeFileXfer, 
 																m_SelectedFriend->getMyOnlineId(), 
 																NULL,
 																"", 

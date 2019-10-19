@@ -29,9 +29,9 @@
 ActivityToFriendMultiSession::ActivityToFriendMultiSession(	AppCommon&			app,
 															VxNetIdent *			netIdent, 
 															QWidget *				parent )
-: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_MULTISESSION, app, ePluginTypeMultiSession, netIdent, parent, eAppletMessenger, true )
+: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_MULTISESSION, app, ePluginTypeMessenger, netIdent, parent, eAppletMessenger, true )
 , m_TodGameWidget( 0 )
-, m_TodGameLogic( app, app.getEngine(), ePluginTypeMultiSession, this )
+, m_TodGameLogic( app, app.getEngine(), ePluginTypeMessenger, this )
 , m_IsInitialized( false )
 , m_OfferOrResponseIsSent( false )
 , m_CanSend( false )
@@ -46,9 +46,9 @@ ActivityToFriendMultiSession::ActivityToFriendMultiSession(	AppCommon&			app,
 ActivityToFriendMultiSession::ActivityToFriendMultiSession(	AppCommon&			app,
 															GuiOfferSession *		poOffer, 
 															QWidget *				parent )
-: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_MULTISESSION, app, ePluginTypeMultiSession, poOffer, parent, eAppletMessenger, true )
+: ActivityToFriendBase( OBJNAME_ACTIVITY_TO_FRIEND_MULTISESSION, app, ePluginTypeMessenger, poOffer, parent, eAppletMessenger, true )
 , m_TodGameWidget( 0 )
-, m_TodGameLogic( app, app.getEngine(), ePluginTypeMultiSession, this )
+, m_TodGameLogic( app, app.getEngine(), ePluginTypeMessenger, this )
 , m_IsInitialized( false )
 , m_OfferOrResponseIsSent( false )
 , m_CanSend( false )

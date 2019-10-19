@@ -16,7 +16,7 @@
 
 
 // forward declare
-class PluginRelay;
+class PluginBaseRelay;
 class VxSktBase;
 class VxPktHdr;
 
@@ -26,7 +26,7 @@ public:
 	Relay();
 	virtual ~Relay();
 
-	void						setPlugin( PluginRelay * poPlugin ) { m_Plugin = poPlugin; }
+	void						setPlugin( PluginBaseRelay * poPlugin ) { m_Plugin = poPlugin; }
 
 	virtual void				onPktRelaySessionReq	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) = 0;
 	virtual void				onPktRelaySessionReply	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) = 0;
@@ -39,5 +39,5 @@ public:
 	//=== vars ====//
 	int							m_iMaxRelayPktType;
 	PROXY_PKT_FUNCTION *		m_paRelayPktFuncTable;
-	PluginRelay *				m_Plugin;
+	PluginBaseRelay *			m_Plugin;
 };

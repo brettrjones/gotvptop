@@ -37,7 +37,7 @@ enum ENetCmdType
 	eNetCmdIsMyPortOpenReply			= 4,		
 	eNetCmdAnchorReq					= 5,		
 	eNetCmdAnchorReply					= 6,		
-	eNetCmdProfilePage					= 7,		
+	eNetCmdAboutMePage					= 7,		
 	eNetCmdStoryboardPage				= 8,		
 
 	eMaxNetCmdType

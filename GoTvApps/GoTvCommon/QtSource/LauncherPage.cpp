@@ -108,13 +108,13 @@ void LauncherPage::showFriendMenu( VxNetIdent * poSelectedFriend )
 	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeWebServer, ePluginAccess );
 	addMenuItem( (int)ePluginTypeWebServer, getMyIcons().getPluginIcon( ePluginTypeWebServer, ePluginAccess ), strAction );
 
-	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeStoryBoard );
-	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeStoryBoard, ePluginAccess );
-	addMenuItem( (int)ePluginTypeStoryBoard, getMyIcons().getPluginIcon( ePluginTypeStoryBoard, ePluginAccess ), strAction );
+	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeStoryboard );
+	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeStoryboard, ePluginAccess );
+	addMenuItem( (int)ePluginTypeStoryboard, getMyIcons().getPluginIcon( ePluginTypeStoryboard, ePluginAccess ), strAction );
 
-	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeMultiSession );
-	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeMultiSession, ePluginAccess );
-	addMenuItem( (int)ePluginTypeMultiSession, getMyIcons().getPluginIcon( ePluginTypeMultiSession, ePluginAccess ), strAction );
+	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim( ePluginTypeMessenger );
+	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeMessenger, ePluginAccess );
+	addMenuItem( (int)ePluginTypeMessenger, getMyIcons().getPluginIcon( ePluginTypeMessenger, ePluginAccess ), strAction );
 
 	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim(ePluginTypeVideoPhone);
 	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeVideoPhone, ePluginAccess );
@@ -132,9 +132,9 @@ void LauncherPage::showFriendMenu( VxNetIdent * poSelectedFriend )
 	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeCamServer, ePluginAccess );
 	addMenuItem( (int)ePluginTypeCamServer, getMyIcons().getPluginIcon( ePluginTypeCamServer, ePluginAccess ), strAction );
 
-	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim(ePluginTypeFileOffer);
-	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeFileOffer, ePluginAccess );
-	addMenuItem( (int)ePluginTypeFileOffer, getMyIcons().getPluginIcon( ePluginTypeFileOffer, ePluginAccess ), strAction );
+	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim(ePluginTypeFileXfer);
+	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeFileXfer, ePluginAccess );
+	addMenuItem( (int)ePluginTypeFileXfer, getMyIcons().getPluginIcon( ePluginTypeFileXfer, ePluginAccess ), strAction );
 
 	ePluginAccess = poSelectedFriend->getMyAccessPermissionFromHim(ePluginTypeFileServer);
 	strAction = DescribePluginAction( poSelectedFriend, ePluginTypeFileServer, ePluginAccess );
@@ -161,8 +161,8 @@ void LauncherPage::onFriendActionSelected( int iMenuId, QWidget * )
 
 		break;
 
-	case ePluginTypeStoryBoard: 
-		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeStoryBoard ) )
+	case ePluginTypeStoryboard: 
+		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeStoryboard ) )
 		{
 			m_MyApp.offerToFriendViewStoryboard( m_SelectedFriend );
 		}
@@ -173,7 +173,7 @@ void LauncherPage::onFriendActionSelected( int iMenuId, QWidget * )
 	case ePluginTypeVoicePhone:	
 	case ePluginTypeTruthOrDare: 
 	case ePluginTypeCamServer: 
-	case ePluginTypeMultiSession: 
+	case ePluginTypeMessenger: 
 		if( m_SelectedFriend->isMyAccessAllowedFromHim( (EPluginType)iMenuId ) )
 		{
 			m_MyApp.offerToFriendPluginSession( m_SelectedFriend, (EPluginType)iMenuId );
@@ -195,8 +195,8 @@ void LauncherPage::onFriendActionSelected( int iMenuId, QWidget * )
 
 		break;
 
-	case ePluginTypeFileOffer:
-		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileOffer ) )
+	case ePluginTypeFileXfer:
+		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeFileXfer ) )
 		{
 			m_MyApp.offerToFriendSendFile( m_SelectedFriend );
 		}

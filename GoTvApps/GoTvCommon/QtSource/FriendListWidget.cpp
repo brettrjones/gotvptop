@@ -173,7 +173,7 @@ void FriendListWidget::slotFriendListItemClicked( ListEntryWidget* item )
 	m_SelectedFriend = widgetToFriend( item );
 	if( m_SelectedFriend )
 	{
-		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeMultiSession ) )
+		if( m_SelectedFriend->isMyAccessAllowedFromHim( ePluginTypeMessenger ) )
 		{
 			QWidget * parent2 = 0;
 			QWidget * parent1 = (QWidget *)this->parent();
@@ -182,13 +182,13 @@ void FriendListWidget::slotFriendListItemClicked( ListEntryWidget* item )
 				parent2 = (QWidget *)parent1->parent();
 			}
 
-			m_MyApp.offerToFriendPluginSession( m_SelectedFriend, ePluginTypeMultiSession, parent2 ? parent2 : parent1 );
+			m_MyApp.offerToFriendPluginSession( m_SelectedFriend, ePluginTypeMessenger, parent2 ? parent2 : parent1 );
 			emit signalFriendClicked( m_SelectedFriend );
 		}
 		else
 		{
 			QString warnTitle = QObject::tr("Insufficient Permission Level");
-			QString warmPermission = warnTitle + QObject::tr(" To Access Plugin ") + DescribePluginType( ePluginTypeMultiSession );
+			QString warmPermission = warnTitle + QObject::tr(" To Access Plugin ") + DescribePluginType( ePluginTypeMessenger );
 			QMessageBox::warning(this, QObject::tr("Insufficient Permission Level "), warmPermission );
 		}
 	}

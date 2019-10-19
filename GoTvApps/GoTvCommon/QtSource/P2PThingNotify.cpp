@@ -74,7 +74,7 @@ void AppCommon::toGuiRxedPluginOffer(			VxNetIdent *	netIdent,			// identity of 
 
 	switch( ePluginType )
 	{
-	case ePluginTypeFileOffer:
+	case ePluginTypeFileXfer:
 		poOffer->setRequiresReply( true );
 		break;
 	default:

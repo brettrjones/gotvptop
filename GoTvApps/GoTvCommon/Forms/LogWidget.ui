@@ -36,21 +36,25 @@
     <number>5</number>
    </property>
    <item>
-    <widget class="QCheckBox" name="m_VerboseCheckBox">
-     <property name="text">
-      <string>Verbose Log</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QCheckBox" name="m_VerboseCheckBox">
+       <property name="text">
+        <string>Verbose Log</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_CopyToClipboardButton">
+       <property name="text">
+        <string>Copy Log To Clipboard</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QPlainTextEdit" name="m_LogPlainTextEdit"/>
-   </item>
-   <item>
-    <widget class="QPushButton" name="m_CopyToClipboardButton">
-     <property name="text">
-      <string>Copy Log To Clipboard</string>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>

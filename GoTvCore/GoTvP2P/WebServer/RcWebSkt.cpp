@@ -14,7 +14,7 @@
 //============================================================================
 
 #include "RcWebServer.h"
-#include <GoTvCore/GoTvP2P/Plugins/PluginWebServer.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginBaseWebServer.h>
 #include <NetLib/VxSktUtil.h>
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxLinuxOnly.h>
@@ -53,13 +53,13 @@ RcWebSkt::~RcWebSkt()
 }
 
 //============================================================================
-void RcWebSkt::setWebServerPlugin( PluginWebServer * poPlugin )
+void RcWebSkt::setWebServerPlugin( PluginBaseWebServer * poPlugin )
 {
 	m_WebServerPlugin = poPlugin;
 }
 
 //============================================================================
-PluginWebServer *	RcWebSkt::getWebServerPlugin( void )
+PluginBaseWebServer *	RcWebSkt::getWebServerPlugin( void )
 {
 	return m_WebServerPlugin;
 }

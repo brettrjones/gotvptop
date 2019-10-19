@@ -21,16 +21,11 @@
 
 //============================================================================
 PluginNetServices::PluginNetServices( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, myIdent )
+: PluginBaseService( engine, pluginMgr, myIdent )
 , m_NetServicesMgr( engine.getNetServicesMgr() )
 //, m_NetServiceUtil( m_NetServicesMgr.getNetUtils() )
 {
 	setPluginType( ePluginTypeNetServices );
-}
-
-//============================================================================
-PluginNetServices::~PluginNetServices()
-{
 }
 
 //============================================================================
@@ -65,8 +60,8 @@ RCODE PluginNetServices::internalHandleHttpConnection( VxSktBase * sktBase, NetS
 {
 	switch( netServiceHdr.m_NetCmdType )
 	{
-	case eNetCmdProfilePage:
-		LogMsg( LOG_ERROR, "PluginNetServices::handleHttpConnection: invalid cmd  eNetCmdProfilePage\n" );
+	case eNetCmdAboutMePage:
+		LogMsg( LOG_ERROR, "PluginNetServices::handleHttpConnection: invalid cmd  eNetCmdAboutMePage\n" );
 		return -1;
 
 	case eNetCmdStoryboardPage:		

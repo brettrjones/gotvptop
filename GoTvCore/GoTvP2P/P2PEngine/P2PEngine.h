@@ -43,8 +43,8 @@ class AssetMgr;
 class AnchorTest;
 class IsPortOpenTest;
 class RcConnectInfo;
-class PluginRelay;
-class PluginFileShare;
+class PluginServiceRelay;
+class PluginServiceFileShare;
 class PluginNetServices;
 class ConnectRequest;
 class MediaProcessor;
@@ -92,8 +92,8 @@ public:
 	VxGUID&						getMyOnlineId( void )							{ return m_PktAnn.getMyOnlineId(); }
 	void						unlockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.unlock(); }
 
-	PluginRelay&				getPluginRelay( void )							{ return * m_PluginRelay; }
-	PluginFileShare&			getPluginFileShare( void )						{ return * m_PluginFileShare; }
+	PluginServiceRelay&				getPluginServiceRelay( void )							{ return * m_PluginServiceRelay; }
+	PluginServiceFileShare&			getPluginServiceFileShare( void )						{ return * m_PluginServiceFileShare; }
 	PluginNetServices&			getPluginNetServices( void )					{ return * m_PluginNetServices; }
 
 	virtual void				setPluginPermission( EPluginType ePluginType, int iPluginPermission );
@@ -531,8 +531,8 @@ protected:
 
 	PluginMgr&					m_PluginMgr;
 	MediaProcessor&				m_MediaProcessor;
-	PluginRelay *				m_PluginRelay;
-	PluginFileShare *			m_PluginFileShare;
+	PluginServiceRelay *				m_PluginServiceRelay;
+	PluginServiceFileShare *			m_PluginServiceFileShare;
 	PluginNetServices *			m_PluginNetServices;
 	IsPortOpenTest&				m_IsPortOpenTest;
 

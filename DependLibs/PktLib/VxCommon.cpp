@@ -129,13 +129,13 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
 	setPluginPermission( ePluginTypeRelay, eFriendStateFriend );	
 	setPluginPermission( ePluginTypeWebServer, eFriendStateAnonymous );	
 	setPluginPermission( ePluginTypeCamServer, eFriendStateAnonymous );	
-	setPluginPermission( ePluginTypeMultiSession, eFriendStateAnonymous );	
+	setPluginPermission( ePluginTypeMessenger, eFriendStateAnonymous );	
 	setPluginPermission( ePluginTypeVoicePhone, eFriendStateAnonymous );	
 	setPluginPermission( ePluginTypeVideoPhone, eFriendStateAnonymous );	
 	setPluginPermission( ePluginTypeTruthOrDare, eFriendStateAnonymous );	
-	setPluginPermission( ePluginTypeFileOffer, eFriendStateFriend );	
+	setPluginPermission( ePluginTypeFileXfer, eFriendStateFriend );	
 	setPluginPermission( ePluginTypeFileServer, eFriendStateAnonymous );	
-	setPluginPermission( ePluginTypeStoryBoard, eFriendStateAnonymous );	
+	setPluginPermission( ePluginTypeStoryboard, eFriendStateAnonymous );	
 } 
 
 //============================================================================
@@ -191,7 +191,7 @@ EPluginAccessState	VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePlugin
 		}
 
 		if( ( ePluginTypeWebServer == ePluginType )
-			|| ( ePluginTypeStoryBoard == ePluginType )
+			|| ( ePluginTypeStoryboard == ePluginType )
 			|| ( ePluginTypeRelay == ePluginType ) )
 		{
 			if( false == isOnline() )
@@ -204,7 +204,7 @@ EPluginAccessState	VxNetIdent::getMyAccessPermissionFromHim( EPluginType ePlugin
 				accessState = ePluginAccessRequiresDirectConnect;
 			}
 		}
-		else if( ePluginTypeMultiSession != ePluginType )
+		else if( ePluginTypeMessenger != ePluginType )
 		{
 			if( false == isOnline() )
 			{
@@ -262,7 +262,7 @@ EPluginAccessState	VxNetIdent::getPluginAccessState( EPluginType ePluginType, EF
 
 	EPluginAccessState accessState = ePluginAccessOk;
 	if( ( ePluginTypeWebServer		== ePluginType )
-		|| ( ePluginTypeStoryBoard	== ePluginType )
+		|| ( ePluginTypeStoryboard	== ePluginType )
 		|| ( ePluginTypeRelay		== ePluginType ) )
 	{
 		if( false == isOnline() )
@@ -275,7 +275,7 @@ EPluginAccessState	VxNetIdent::getPluginAccessState( EPluginType ePluginType, EF
 			accessState = ePluginAccessRequiresDirectConnect;
 		}
 	}
-	else if( ePluginTypeMultiSession != ePluginType )
+	else if( ePluginTypeMessenger != ePluginType )
 	{
 		if( false == isOnline() )
 		{
@@ -336,11 +336,11 @@ const char * DescribePluginLclName( EPluginType ePluginType )
 		return "Connection Relay";
 	case 	ePluginTypeFileServer:	// file share plugin
 		return "Shared Files";	
-	case 	ePluginTypeFileOffer:	// file share plugin
+	case 	ePluginTypeFileXfer:	// file share plugin
 		return "Offer A File";
 	case 	ePluginTypeCamServer:	// web cam broadcast plugin
 		return "Shared Video Broadcast";
-	case 	ePluginTypeMultiSession:	// instant message p2p plugin
+	case 	ePluginTypeMessenger:	// instant message p2p plugin
 		return "Chat Session";
 	case 	ePluginTypeVoicePhone:	// VOIP p2p plugin
 		return "VOIP Voice Phone";
@@ -348,7 +348,7 @@ const char * DescribePluginLclName( EPluginType ePluginType )
 		return "Video Phone";
 	case 	ePluginTypeTruthOrDare:	// Web Cam Truth Or Dare game p2p plugin
 		return "Web Cam Truth Or Dare";
-	case 	ePluginTypeStoryBoard:	// Web Cam Truth Or Dare game p2p plugin
+	case 	ePluginTypeStoryboard:	// Web Cam Truth Or Dare game p2p plugin
 		return "Story Board";
 	default:		
 		return "Unknown Plugin";

@@ -29,11 +29,6 @@ PluginBase::PluginBase( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * my
 , m_Engine(engine)
 , m_PluginMgr( pluginMgr )
 , m_MyIdent(myIdent)
-, m_ePluginType(ePluginTypeInvalid)
-, m_ePluginState(eAppStateInvalid)
-, m_bPluginIsInSession( false )
-, m_ServerIsInSession( false )
-, m_AppIsPaused( false )
 {
 }
 

@@ -18,7 +18,7 @@
 
 #include <GoTvInterface/IToGui.h>
 
-#include <GoTvCore/GoTvP2P/Plugins/PluginRelay.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceRelay.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginMgr.h>
 #include <GoTvCore/GoTvP2P/Network/NetConnector.h>
 #include <GoTvCore/GoTvP2P/Network/NetworkStateMachine.h>
@@ -138,7 +138,7 @@ void P2PEngine::onPktRelayServiceReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		PluginBase * pluginBase = m_PluginMgr.findPlugin( ePluginTypeRelay );
 		if( 0 != pluginBase )
 		{
-			EPluginAccessState eAccess = ( ( PluginRelay * )pluginBase)->handlePktRelayServiceReq( bigListInfo, sktBase, pktReq, pktReply );
+			EPluginAccessState eAccess = ( ( PluginServiceRelay * )pluginBase)->handlePktRelayServiceReq( bigListInfo, sktBase, pktReq, pktReply );
 			pktReply.setAccessState( eAccess );
 		}
 

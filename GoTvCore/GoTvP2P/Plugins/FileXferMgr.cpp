@@ -236,7 +236,7 @@ void FileXferMgr::onPktFileSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNe
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "PluginFileOffer::onPktFileSendReq: Could not find session\n" );
+			LogMsg( LOG_ERROR, "PluginBaseFileXfer::onPktFileSendReq: Could not find session\n" );
 		}
 	}
 }

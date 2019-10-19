@@ -21,7 +21,7 @@
 ActivityReplyFileOffer::ActivityReplyFileOffer(	AppCommon& app, 
 												GuiOfferSession * poOffer, 
 												QWidget * parent )
-: ActivityToFriendBase( OBJNAME_ACTIVITY_REPLY_FILE_OFFER, app, ePluginTypeFileOffer, poOffer, parent, eAppletMessenger, true )
+: ActivityToFriendBase( OBJNAME_ACTIVITY_REPLY_FILE_OFFER, app, ePluginTypeFileXfer, poOffer, parent, eAppletMessenger, true )
 {
 	ui.setupUi(this);
 	ui.m_TitleBarWidget->setTitleBarText( QObject::tr("Reply File Offer" ) );

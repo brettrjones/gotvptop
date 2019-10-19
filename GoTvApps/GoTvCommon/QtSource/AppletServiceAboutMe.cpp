@@ -23,9 +23,9 @@
 AppletServiceAboutMe::AppletServiceAboutMe( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_SHARE_WEB_CAM, app, parent )
 {
-	m_EAppletType = eAppletServiceAboutMe;
-	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
+    setAppletType( eAppletServiceAboutMe );
+    ui.setupUi( this );
+    setTitleBarText( DescribeApplet( m_EAppletType ) );
 
 	m_MyApp.activityStateChange( this, true );
 }

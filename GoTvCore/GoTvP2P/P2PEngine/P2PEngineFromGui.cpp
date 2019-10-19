@@ -30,10 +30,10 @@
 
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginBase.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginFileShare.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceFileShare.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginNetServices.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginMgr.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginRelay.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceRelay.h>
 
 #include <NetLib/VxGetRandomPort.h>
 #include <CoreLib/VxParse.h>
@@ -982,7 +982,7 @@ void P2PEngine::fromGuiUserModifiedStoryboard( void )
 void P2PEngine::fromGuiCancelDownload( VxGUID& fileInstance )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiCancelDownload" );
-	m_PluginMgr.getPlugin(ePluginTypeFileOffer)->fromGuiCancelDownload( fileInstance );
+	m_PluginMgr.getPlugin(ePluginTypeFileXfer)->fromGuiCancelDownload( fileInstance );
 	m_PluginMgr.getPlugin(ePluginTypeFileServer)->fromGuiCancelDownload( fileInstance );
 }
 
@@ -990,7 +990,7 @@ void P2PEngine::fromGuiCancelDownload( VxGUID& fileInstance )
 void P2PEngine::fromGuiCancelUpload( VxGUID& fileInstance )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiCancelUpload" );
-	m_PluginMgr.getPlugin(ePluginTypeFileOffer)->fromGuiCancelUpload( fileInstance );
+	m_PluginMgr.getPlugin(ePluginTypeFileXfer)->fromGuiCancelUpload( fileInstance );
 	m_PluginMgr.getPlugin(ePluginTypeFileServer)->fromGuiCancelUpload( fileInstance );
 }
 
@@ -1009,7 +1009,7 @@ void P2PEngine::fromGuiSetNetSettings( NetSettings& netSettings )
 	PluginBase * pluginBase = m_PluginMgr.findPlugin( ePluginTypeRelay );
 	if( pluginBase )
 	{
-		((PluginRelay *)pluginBase)->fromGuiRelayPermissionCount( netSettings.getUserRelayPermissionCount(), netSettings.getSystemRelayPermissionCount() ); 
+		((PluginServiceRelay *)pluginBase)->fromGuiRelayPermissionCount( netSettings.getUserRelayPermissionCount(), netSettings.getSystemRelayPermissionCount() ); 
 	}
 }
 
@@ -1020,7 +1020,7 @@ void P2PEngine::fromGuiSetRelaySettings( int userRelayMaxCnt, int systemRelayMax
 	PluginBase * pluginBase = m_PluginMgr.findPlugin( ePluginTypeRelay );
 	if( pluginBase )
 	{
-		((PluginRelay *)pluginBase)->fromGuiRelayPermissionCount( userRelayMaxCnt, systemRelayMaxCnt ); 
+		((PluginServiceRelay *)pluginBase)->fromGuiRelayPermissionCount( userRelayMaxCnt, systemRelayMaxCnt ); 
 	}
 }
 
@@ -1161,28 +1161,28 @@ void P2PEngine::fromGuiRunIsPortOpenTest( uint16_t port )
 bool P2PEngine::fromGuiBrowseFiles(	const char * dir, bool lookupShareStatus, uint8_t fileFilterMask )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiBrowseFiles" );
-	return getPluginFileShare().fromGuiBrowseFiles(	dir, lookupShareStatus, fileFilterMask );
+	return getPluginServiceFileShare().fromGuiBrowseFiles(	dir, lookupShareStatus, fileFilterMask );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiGetSharedFiles( uint8_t fileTypeFilter )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiGetSharedFiles" );
-	return getPluginFileShare().fromGuiGetSharedFiles( fileTypeFilter );
+	return getPluginServiceFileShare().fromGuiGetSharedFiles( fileTypeFilter );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiSetFileIsShared( const char * fileName, bool isShared, uint8_t * fileHashId )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiSetFileIsShared" );
-	return getPluginFileShare().fromGuiSetFileIsShared(	fileName, isShared, fileHashId );
+	return getPluginServiceFileShare().fromGuiSetFileIsShared(	fileName, isShared, fileHashId );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiGetIsFileShared( const char * fileName )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiGetIsFileShared" );
-	return getPluginFileShare().fromGuiGetIsFileShared(	fileName );
+	return getPluginServiceFileShare().fromGuiGetIsFileShared(	fileName );
 }
 
 //============================================================================
@@ -1190,28 +1190,28 @@ bool P2PEngine::fromGuiGetIsFileShared( const char * fileName )
 int P2PEngine::fromGuiGetFileDownloadState( uint8_t * fileHashId )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiGetFileDownloadState" );
-	return getPluginFileShare().fromGuiGetFileDownloadState( fileHashId );
+	return getPluginServiceFileShare().fromGuiGetFileDownloadState( fileHashId );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiAddFileToLibrary( const char * fileName, bool addFile, uint8_t * fileHashId )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiAddFileToLibrary" );
-	return getPluginFileShare().fromGuiAddFileToLibrary( fileName, addFile, fileHashId );
+	return getPluginServiceFileShare().fromGuiAddFileToLibrary( fileName, addFile, fileHashId );
 }
 
 //============================================================================
 void P2PEngine::fromGuiGetFileLibraryList( uint8_t fileTypeFilter )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiGetFileLibraryList" );
-	getPluginFileShare().fromGuiGetFileLibraryList(	fileTypeFilter );
+	getPluginServiceFileShare().fromGuiGetFileLibraryList(	fileTypeFilter );
 }
 
 //============================================================================
 bool P2PEngine::fromGuiGetIsFileInLibrary( const char * fileName )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiGetIsFileInLibrary" );
-	return getPluginFileShare().fromGuiGetIsFileInLibrary( fileName );
+	return getPluginServiceFileShare().fromGuiGetIsFileInLibrary( fileName );
 }
 
 //============================================================================
@@ -1248,7 +1248,7 @@ int P2PEngine::fromGuiDeleteFile( const char * fileName, bool shredFile )
 
 	m_PluginMgr.fromGuiDeleteFile( fileName, shredFile );
 
-	getPluginFileShare().deleteFile( fileName, shredFile );	
+	getPluginServiceFileShare().deleteFile( fileName, shredFile );	
 
 	return result;
 }

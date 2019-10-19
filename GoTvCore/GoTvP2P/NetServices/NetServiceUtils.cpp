@@ -359,13 +359,13 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 	netServiceHdr.m_SktDataUsed = dataUsed;
 
 	EPluginType ePluginType = ePluginTypeNetServices;
-	if( eNetCmdProfilePage == netServiceHdr.m_NetCmdType )
+	if( eNetCmdAboutMePage == netServiceHdr.m_NetCmdType )
 	{
 		ePluginType = ePluginTypeWebServer; 
 	}
 	else if( eNetCmdStoryboardPage == netServiceHdr.m_NetCmdType )
 	{
-		ePluginType = ePluginTypeStoryBoard; 
+		ePluginType = ePluginTypeStoryboard; 
 	}
 
 	return ePluginType;
@@ -423,7 +423,7 @@ ENetCmdType  NetServiceUtils::netCmdStringToEnum( const char * netCmd )
 {
 	if( 0 == strcmp( NET_CMD_PROFILE, netCmd ) )
 	{
-		return eNetCmdProfilePage;
+		return eNetCmdAboutMePage;
 	}
 	else if( 0 == strcmp( NET_CMD_STORYBOARD, netCmd ) )
 	{
@@ -476,7 +476,7 @@ const char *  NetServiceUtils::netCmdEnumToString( ENetCmdType	eNetCmdType )
 		return NET_CMD_ANCHOR_REQ;
 	case eNetCmdAnchorReply	:
 		return NET_CMD_ANCHOR_REPLY;
-	case eNetCmdProfilePage:
+	case eNetCmdAboutMePage:
 		return NET_CMD_PROFILE;
 	case eNetCmdStoryboardPage:
 		return NET_CMD_STORYBOARD;

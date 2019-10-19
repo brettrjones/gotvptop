@@ -21,7 +21,7 @@
 #include <NetLib/VxSktBaseMgr.h>
 #include <CoreLib/VxFileLists.h>
 
-class PluginWebServer;
+class PluginBaseWebServer;
 
 //HTTP ERRORS
 //
@@ -103,7 +103,7 @@ public:
 	virtual ~RcWebServer();
 
 	//=== helpers ===//
-	void						setPluginWebServer( PluginWebServer * poPlugin );
+	void						setPluginBaseWebServer( PluginBaseWebServer * poPlugin );
 
 	void						setWebSiteDir( const char * pWebSiteDir );
 	std::string&				getWebSiteDir(  void );
@@ -171,7 +171,7 @@ public:
 	bool						isExecuteableFile( std::string& strWebFileName );
 
 	//=== vars ===//
-	PluginWebServer *			m_WebPlugin;
+	PluginBaseWebServer *			m_WebPlugin;
 	bool						m_bWebServerEnabled;
 	bool						m_bShuttingDown;
 #ifdef USE_WEB_FILESHARE

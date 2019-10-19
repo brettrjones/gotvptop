@@ -361,7 +361,7 @@ void OffersMgr::acceptOfferButtonClicked( EPluginType ePluginType, VxGUID offerS
 		return;
 	}
 
-	if( ePluginTypeFileOffer == offerSession->getPluginType() )
+	if( ePluginTypeFileXfer == offerSession->getPluginType() )
 	{
 		VxGUID lclSessionId = offerSession->getLclSessionId();
 		if( false == lclSessionId.isVxGUIDValid() )

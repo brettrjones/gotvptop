@@ -1,8 +1,5 @@
 <RCC>
     <qresource prefix="/AppRes">
-        <file>Resources/bubbles.svg</file>
-        <file>Resources/cubic.svg</file>
-        <file>Resources/spheres.svg</file>
         <file>Resources/align-center.svg</file>
         <file>Resources/align-left.svg</file>
         <file>Resources/align-right.svg</file>
@@ -163,7 +160,6 @@
         <file>Resources/overlay-plus.svg</file>
         <file>Resources/video-stream-viewer.svg</file>
         <file>Resources/music-stream-player.svg</file>
-        <file>Resources/network-host.svg</file>
         <file>Resources/window-expand.svg</file>
         <file>Resources/window-shrink.svg</file>
         <file>Resources/ic_cam_black.png</file>
@@ -203,8 +199,6 @@
         <file>Resources/kodi.svg</file>
         <file>Resources/user-ident.svg</file>
         <file>Resources/group.svg</file>
-        <file>Resources/group-anchor.svg</file>
-        <file>Resources/group-host.svg</file>
         <file>Resources/NetworkDesign.png</file>
         <file>Resources/wireless-key.svg</file>
         <file>Resources/wireless-setup.svg</file>
@@ -228,5 +222,27 @@
         <file>Resources/avatar.svg</file>
         <file>Resources/share-avatar.svg</file>
         <file>Resources/share-with-person.svg</file>
+        <file>Resources/service-connection-test-settings.svg</file>
+        <file>Resources/service-connect-random-relay-settings.svg</file>
+        <file>Resources/service-connect-random-settings.svg</file>
+        <file>Resources/service-group-host.svg</file>
+        <file>Resources/service-group-host-settings.svg</file>
+        <file>Resources/service-group-listing-host.svg</file>
+        <file>Resources/service-group-listing-host-settings.svg</file>
+        <file>Resources/service-network-host.svg</file>
+        <file>Resources/service-network-host-settings.svg</file>
+        <file>Resources/service-relay-settings.svg</file>
+        <file>Resources/share-about-me-settings.svg</file>
+        <file>Resources/share-avatar-settings.svg</file>
+        <file>Resources/share-files-settings.svg</file>
+        <file>Resources/share-storyboard-settings.svg</file>
+        <file>Resources/share-webcam-settings.svg</file>
+        <file>Resources/avatar.png</file>
+        <file>Resources/voice-phone-settings.svg</file>
+        <file>Resources/file-xfer.svg</file>
+        <file>Resources/file-xfer-settings.svg</file>
+        <file>Resources/messenger-settings.svg</file>
+        <file>Resources/truth-or-dare.svg</file>
+        <file>Resources/truth-or-dare-settings.svg</file>
     </qresource>
 </RCC>

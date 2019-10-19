@@ -69,12 +69,13 @@ PermissionWidget::PermissionWidget( QWidget * parent )
 void PermissionWidget::initPermissionWidget( void )
 {
 	ui.setupUi( this );
-    ui.m_InfoButton->setIcon( eMyIconInformation );
+    ui.m_PermissionInfoButton->setIcon( eMyIconInformation );
     fillPermissionComboBox();
 
-    connect( ui.m_InfoButton, SIGNAL( clicked() ), this, SLOT( slotShowPermissionInformation() ) );
+    connect( ui.m_PermissionInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowPermissionInformation() ) );
     connect( ui.m_PermissionButton, SIGNAL( clicked() ), this, SLOT( slotShowPermissionInformation() ) );
     connect( ui.m_PermissionComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHandleSelectionChanged( int ) ) );
+    connect( ui.m_PluginInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowPluginInformation() ) );
 }
 //============================================================================
 void PermissionWidget::fillPermissionComboBox( void )
@@ -109,6 +110,7 @@ void PermissionWidget::updatePermissionIcon( void )
     }
 
     ui.m_PermissionButton->setIcon( m_MyApp.getMyIcons().getFriendshipIcon( ComboIdxToFriendState( ui.m_PermissionComboBox->currentIndex() ) ) );
+    ui.m_PluginInfoButton->setIcon( m_MyApp.getMyIcons().getPluginIcon( m_PluginType ) );
 }
 
 //============================================================================
@@ -128,5 +130,12 @@ void PermissionWidget::slotHandleSelectionChanged( int )
 void PermissionWidget::slotShowPermissionInformation()
 {
     ActivityInformation * activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypePermission );
+    activityInfo->show();
+}
+
+//============================================================================
+void PermissionWidget::slotShowPluginInformation()
+{
+    ActivityInformation * activityInfo = new ActivityInformation( m_MyApp, this, m_PluginType );
     activityInfo->show();
 }

@@ -74,11 +74,11 @@ void AppCommon::onMenuOptionsSelected( int iMenuId, QWidget * senderPopupMenu )
 			// file share plugin
 			addPermissionMenuEntry( &popupMenu, ePluginTypeFileServer, eMyIconShareFilesNormal, "(%s) Who can access shared files" );
 			// file offer plugin
-			addPermissionMenuEntry( &popupMenu, ePluginTypeFileOffer, eMyIconSendFileNormal, "(%s) Who can offer to send a file" );
+			addPermissionMenuEntry( &popupMenu, ePluginTypeFileXfer, eMyIconSendFileNormal, "(%s) Who can offer to send a file" );
 			// web cam broadcast plugin
 			addPermissionMenuEntry( &popupMenu, ePluginTypeCamServer, eMyIconWebCamServer, "(%s) Who can access web cam broadcast" );
 			// instant message p2p plugin
-			addPermissionMenuEntry( &popupMenu, ePluginTypeMultiSession, eMyIconMultiSession, "(%s) Who can offer chat session" );
+			addPermissionMenuEntry( &popupMenu, ePluginTypeMessenger, eMyIconMultiSession, "(%s) Who can offer chat session" );
 			// VOIP p2p plugin
 			addPermissionMenuEntry( &popupMenu, ePluginTypeVoicePhone, eMyIconVoicePhoneNormal, "(%s) Who can offer voice phone call" );
 			// Video phone p2p plugin
@@ -90,7 +90,7 @@ void AppCommon::onMenuOptionsSelected( int iMenuId, QWidget * senderPopupMenu )
 			// Profile 
 			addPermissionMenuEntry( &popupMenu, ePluginTypeWebServer, eMyIconProfile, "(%s) Who can view my profile" );
 			// Storyboard
-			addPermissionMenuEntry( &popupMenu, ePluginTypeStoryBoard, eMyIconStoryBoardNormal, "(%s) Who can view my storyboard" );
+			addPermissionMenuEntry( &popupMenu, ePluginTypeStoryboard, eMyIconStoryBoardNormal, "(%s) Who can view my storyboard" );
             connect( &popupMenu, SIGNAL(menuItemClicked(int, QWidget *)), this, SLOT(onEditPermissionsSelected(int, QWidget *)));
 
 			popupMenu.exec();

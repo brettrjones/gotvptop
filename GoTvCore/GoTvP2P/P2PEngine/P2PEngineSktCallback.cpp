@@ -21,7 +21,7 @@
 
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginMgr.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginRelay.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceRelay.h>
 
 #include <NetLib/VxSktBase.h>
 #include <PktLib/PktsRelay.h>
@@ -270,7 +270,7 @@ void P2PEngine::handleIncommingRelayData( VxSktBase * sktBase, VxPktHdr * pktHdr
 	}
 
 	RCODE rc = 0;
-	if( getPluginRelay().isUserRelayOk( pktHdr->getSrcOnlineId(), pktHdr->getDestOnlineId() ) )
+	if( getPluginServiceRelay().isUserRelayOk( pktHdr->getSrcOnlineId(), pktHdr->getDestOnlineId() ) )
 	{
 		relayAvailable = true;
 		m_ConnectionList.connectListLock();

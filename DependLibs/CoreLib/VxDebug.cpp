@@ -291,6 +291,10 @@ void default_log_handler( void * userData, uint32_t u32MsgType, char * pLogMsg )
 
     //printf( pLogMsg );
 #else
+    #ifdef TARGET_OS_WINDOWS
+        OutputDebugStringA( pLogMsg );
+    #endif // TARGET_OS_WINDOWS
+
 	printf( pLogMsg );
 #endif// TARGET_OS_ANDROID
 }

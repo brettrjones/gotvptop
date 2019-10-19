@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>351</width>
-    <height>66</height>
+    <height>79</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,13 +39,13 @@
        <number>5</number>
       </property>
       <property name="topMargin">
-       <number>2</number>
+       <number>5</number>
       </property>
       <property name="rightMargin">
        <number>5</number>
       </property>
       <property name="bottomMargin">
-       <number>2</number>
+       <number>5</number>
       </property>
       <item>
        <widget class="VxPushButton" name="m_PermissionButton">
@@ -76,7 +76,32 @@
        <widget class="QComboBox" name="m_PermissionComboBox"/>
       </item>
       <item>
-       <widget class="VxPushButton" name="m_InfoButton">
+       <widget class="VxPushButton" name="m_PluginInfoButton">
+        <property name="minimumSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="VxPushButton" name="m_PermissionInfoButton">
         <property name="minimumSize">
          <size>
           <width>48</width>

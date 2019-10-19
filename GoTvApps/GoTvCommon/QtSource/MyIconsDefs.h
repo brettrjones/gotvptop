@@ -282,31 +282,49 @@ enum EMyIcons
 
     eMyIconNetworkKey,
     eMyIconNetworkSettings,
-    eMyIconSearchRandomPerson,
+    eMyIconSearchRandomConnect,
 
  
 	// built in plugin options
 	eMyIconCamStreamProvider,
 	eMyIconGoTvStation,
-	eMyIconGoTvNetworkHost,
 
 	eMyIconGroupUser,
-    eMyIconNetHosting,
-	eMyIconGroupHost,
-	eMyIconGroupListingHost,
 
     eMyIconShareServices,
 
     eMyIconServiceAvatarImage,
     eMyIconServiceConnectionTest,
+    eMyIconServiceGroupHost,
+    eMyIconServiceGroupListingHost,
+    eMyIconServiceNetworkHost,
     eMyIconServiceShareAboutMe,
     eMyIconServiceShareFiles,
     eMyIconServiceShareStoryboard,
     eMyIconServiceShareWebCam,
-    eMyIconServiceRandomPerson,
-    eMyIconServiceRandomPersonRelay,
+    eMyIconServiceRandomConnect,
+    eMyIconServiceRandomConnectRelay,
     eMyIconServiceRelay,
 
+    eMyIconSettingsAboutMe,
+    eMyIconSettingsAvatarImage,
+    eMyIconSettingsConnectionTest,
+    eMyIconSettingsHostGroup,
+    eMyIconSettingsHostGroupListing,
+    eMyIconSettingsHostNetwork,
+    eMyIconSettingsShareFiles,
+    eMyIconSettingsShareStoryboard,
+    eMyIconSettingsShareWebCam,
+    eMyIconSettingsRandomConnect,
+    eMyIconSettingsRandomConnectRelay,
+    eMyIconSettingsRelay,
+        eMyIconFileXfer,
+        eMyIconSettingsFileXfer,
+    eMyIconSettingsMessenger,
+        eMyIconTruthOrDare,
+        eMyIconSettingsTruthOrDare,
+    eMyIconSettingsVoicePhone,
+    eMyIconSettingsVideoPhone,
 
 
 	eMaxMyIcon	// must be last

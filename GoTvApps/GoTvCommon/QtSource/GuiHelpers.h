@@ -43,7 +43,12 @@ public:
 
     static bool                 isAppletAService( EApplet applet );
     static bool                 isAppletAClient( EApplet applet );
+
     static EPluginType          getAppletAssociatedPlugin( EApplet applet );
+    static EApplet              pluginTypeToEditApplet( EPluginType pluginType );
+    static EApplet              pluginTypeToSettingsApplet( EPluginType pluginType );
+    static EMyIcons             pluginTypeToSettingsIcon( EPluginType pluginType );
+    static EApplet              pluginTypeToViewApplet( EPluginType pluginType );
 
     static bool                 isPluginSingleSession( EPluginType ePluginType );
 

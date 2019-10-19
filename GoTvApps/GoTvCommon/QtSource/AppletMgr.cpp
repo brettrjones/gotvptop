@@ -26,7 +26,7 @@
 #include "ActivityScanWebCams.h"
 
 #include "AppletAboutApp.h"
-#include "AppletClientRandomPerson.h"
+#include "AppletClientRandomConnect.h"
 #include "AppletKodi.h"
 #include "AppletGroupUser.h"
 #include "AppletLibrary.h"
@@ -35,19 +35,38 @@
 #include "AppletPersonalRecorder.h"
 #include "AppletPlayerVideo.h"
 
-#include "AppletServiceRandomPerson.h"
-#include "AppletServiceRandomPersonRelay.h"
+#include "AppletServiceRandomConnect.h"
+#include "AppletServiceRandomConnectRelay.h"
 #include "AppletServiceRelay.h"
 
 #include "AppletServiceAboutMe.h"
 #include "AppletServiceAvatarImage.h"
 #include "AppletServiceConnectionTest.h"
-#include "AppletServiceGroupHost.h"
-#include "AppletServiceGroupListingHost.h"
-#include "AppletServiceNetworkHost.h"
+#include "AppletServiceHostGroup.h"
+#include "AppletServiceHostGroupListing.h"
+#include "AppletServiceHostNetwork.h"
 #include "AppletServiceShareFiles.h"
 #include "AppletServiceShareWebCam.h"
 #include "AppletServiceStoryboard.h"
+
+#include "AppletSettingsAboutMe.h"
+#include "AppletSettingsAvatarImage.h"
+#include "AppletSettingsConnectionTest.h"
+#include "AppletSettingsFileXfer.h"
+#include "AppletSettingsHostGroup.h"
+#include "AppletSettingsHostGroupListing.h"
+#include "AppletSettingsHostNetwork.h"
+#include "AppletSettingsMessenger.h"
+#include "AppletSettingsHostNetwork.h"
+#include "AppletSettingsRandomConnect.h"
+#include "AppletSettingsRandomConnectRelay.h"
+#include "AppletSettingsRelay.h"
+#include "AppletSettingsShareFiles.h"
+#include "AppletSettingsShareWebCam.h"
+#include "AppletSettingsStoryboard.h"
+#include "AppletSettingsTruthOrDare.h"
+#include "AppletSettingsVideoPhone.h"
+#include "AppletSettingsVoicePhone.h"
 
 #include "AppletSettings.h"
 #include "AppletSearchPage.h"
@@ -89,9 +108,9 @@ RenderGlWidget * AppletMgr::getRenderConsumer( void )
 
 
 //============================================================================
-void AppletMgr::launchApplet( EApplet applet )
+ActivityBase * AppletMgr::launchApplet( EApplet applet )
 {
-	launchApplet( applet, getActiveWindow() );
+	return launchApplet( applet, getActiveWindow() );
 }
 
 //============================================================================
@@ -113,7 +132,7 @@ QFrame *  AppletMgr::getAppletFrame( EApplet applet )
 }
 
 //============================================================================
-void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
+ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 {
     bool isActivity = false;
 	ActivityBase * appletDialog = findAppletDialog( applet );
@@ -124,7 +143,7 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
         m_MyApp.errMessageBox2( QObject::tr( "AppletMgr::launchApplet" ).toUtf8().constData(), QObject::tr( "Applet enum %d already launched\n" ).toUtf8().constData(), applet );
 #endif // DEBUG
 
-		return;
+		return appletDialog;
 	}
 
 	if( 0 == parent )
@@ -143,33 +162,33 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletGroupUser:
         appletDialog = new AppletGroupUser( m_MyApp, parent );
         break;
-    case eAppletServiceGroupHost:
-        appletDialog = new AppletServiceGroupHost( m_MyApp, parent );
+    case eAppletServiceHostGroup:
+        appletDialog = new AppletServiceHostGroup( m_MyApp, parent );
         break;
-    case eAppletServiceGroupListingHost:
-        appletDialog = new AppletServiceGroupListingHost( m_MyApp, parent );
+    case eAppletServiceHostGroupListing:
+        appletDialog = new AppletServiceHostGroupListing( m_MyApp, parent );
         break;
-    case eAppletServiceNetworkHost:
-        appletDialog = new AppletServiceNetworkHost( m_MyApp, parent );
+    case eAppletServiceHostNetwork:
+        appletDialog = new AppletServiceHostNetwork( m_MyApp, parent );
         break;
     case eAppletHomePage:
         m_MyApp.errMessageBox( appletMissingTitle, "Home Page Not Implemented" );
-        return;
+        return nullptr;
     case eAppletKodi:
         appletDialog = new AppletKodi( m_MyApp, parent );
         break;
     case eAppletLibrary:
         appletDialog = new AppletLibrary( m_MyApp, parent );
-        return;
+        break;
     case eAppletMessenger:
         makeMessengerFullSized();
-        return;
+        return appletDialog;
     case eAppletNetworkSettings:
         appletDialog = new AppletNetworkSettings( m_MyApp, parent );
         break;
     case eAppletPersonalRecorder:
         appletDialog = new ActivityPersonalRecorder( m_MyApp, m_MyApp.getAppGlobals().getUserIdent(), parent );
-        return;
+        break;
     case eAppletSettings:
         appletDialog = new AppletSettings( m_MyApp, parent );
         break;
@@ -202,8 +221,8 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
         isActivity = true;
         break;
 
-    case eAppletClientRandomPerson:
-        appletDialog = new AppletClientRandomPerson( m_MyApp, parent );
+    case eAppletClientRandomConnect:
+        appletDialog = new AppletClientRandomConnect( m_MyApp, parent );
         break;
     case eAppletClientStoryboard:
         appletDialog = new AppletClientStoryboard( m_MyApp, parent );
@@ -225,11 +244,11 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletServiceConnectionTest:
         appletDialog = new AppletServiceConnectionTest( m_MyApp, parent );
         break;
-    case eAppletServiceRandomPerson:
-        appletDialog = new AppletServiceRandomPerson( m_MyApp, parent );
+    case eAppletServiceRandomConnect:
+        appletDialog = new AppletServiceRandomConnect( m_MyApp, parent );
         break;
-    case eAppletServiceRandomPersonRelay:
-        appletDialog = new AppletServiceRandomPersonRelay ( m_MyApp, parent );
+    case eAppletServiceRandomConnectRelay:
+        appletDialog = new AppletServiceRandomConnectRelay ( m_MyApp, parent );
         break;
     case eAppletServiceRelay:
         appletDialog = new AppletServiceRelay( m_MyApp, parent );
@@ -244,12 +263,30 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
         appletDialog = new AppletServiceStoryboard( m_MyApp, parent );
         break;
 
-   case eAppletTheme:
+    case eAppletSettingsAboutMe:            appletDialog = new AppletSettingsAboutMe( m_MyApp, parent ); break;
+    case eAppletSettingsAvatarImage:        appletDialog = new AppletSettingsAvatarImage( m_MyApp, parent ); break;
+    case eAppletSettingsConnectTest:        appletDialog = new AppletSettingsConnectionTest( m_MyApp, parent ); break;
+    case eAppletSettingsFileXfer:           appletDialog = new AppletSettingsFileXfer( m_MyApp, parent ); break;
+    case eAppletSettingsHostGroup:          appletDialog = new AppletSettingsHostGroup( m_MyApp, parent ); break;
+    case eAppletSettingsHostGroupListing:   appletDialog = new AppletSettingsHostGroupListing( m_MyApp, parent ); break;
+    case eAppletSettingsHostNetwork:        appletDialog = new AppletSettingsHostNetwork( m_MyApp, parent ); break;
+    case eAppletSettingsMessenger:          appletDialog = new AppletSettingsMessenger( m_MyApp, parent ); break;
+    case eAppletSettingsRandomConnect:      appletDialog = new AppletSettingsRandomConnect( m_MyApp, parent ); break;
+    case eAppletSettingsRandomConnectRelay: appletDialog = new AppletSettingsRandomConnectRelay( m_MyApp, parent ); break;
+    case eAppletSettingsRelay:              appletDialog = new AppletSettingsRelay( m_MyApp, parent ); break;
+    case eAppletSettingsShareFiles:         appletDialog = new AppletSettingsShareFiles( m_MyApp, parent ); break;
+    case eAppletSettingsStoryboard:         appletDialog = new AppletSettingsStoryboard( m_MyApp, parent ); break;
+    case eAppletSettingsTruthOrDare:        appletDialog = new AppletSettingsTruthOrDare( m_MyApp, parent ); break;
+    case eAppletSettingsVideoPhone:         appletDialog = new AppletSettingsVideoPhone( m_MyApp, parent ); break;
+    case eAppletSettingsVoicePhone:         appletDialog = new AppletSettingsTruthOrDare( m_MyApp, parent ); break;
+    case eAppletSettingsWebCamServer:       appletDialog = new AppletSettingsShareWebCam( m_MyApp, parent ); break;
+
+    case eAppletTheme:
         appletDialog = new AppletTheme( m_MyApp, parent );
         break;
     case eAppletUnknown:
         m_MyApp.errMessageBox( appletMissingTitle, "Unknown Not Implemented" );
-        return;
+        return nullptr;
     case eAppletUserIdentity:
         appletDialog = new AppletUserIdentity( m_MyApp, parent );
         break;
@@ -290,7 +327,7 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 //		return;
 	default:
 		m_MyApp.errMessageBox2( QObject::tr( "AppCommon::launchApplet").toUtf8().constData(), QObject::tr( "Invalid Applet enum %d\n" ).toUtf8().constData(), applet );
-		return;
+		return nullptr;
 	}
 
 	if( appletDialog )
@@ -305,6 +342,8 @@ void AppletMgr::launchApplet( EApplet applet, QWidget * parent )
             m_ActivityList.push_back( appletDialog );
         }
     }
+
+    return appletDialog;
 }
 
 //============================================================================

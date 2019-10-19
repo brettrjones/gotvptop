@@ -53,6 +53,8 @@ enum EApplet
 {
 	eAppletUnknown = 0, // do not setup base class ui in the case of unknown
     eAppletActivityDialog,          // place dialog over home window.. do not setup base class ui in the case of dialog
+    eAppletEditAboutMe,
+    eAppletEditAvatarImage,
 	eAppletHomePage,
     eAppletKodi,
     eAppletUserIdentity,
@@ -78,18 +80,18 @@ enum EApplet
     eAppletScanSharedFiles,         // searc group for shared files
     eAppletScanWebCam,              // scan group for shared web cams
 
-    eAppletClientRandomPerson,      // connect to random person
+    eAppletClientRandomConnect,      // connect to random person
 
     eMaxSearchApplets,          // marker.. past here is hosting applets
 
-    eAppletServiceGroupHost,	    // hosts a group. provide search and relay services for group users
-    eAppletServiceGroupListingHost, // group listing host service for group hosts. provide search for groups to join, provide ip address etc
-    eAppletServiceNetworkHost,      // network host service for a gotvptop network.. requires fixed ip address, group list hosts announce to network host
+    eAppletServiceHostGroup,	    // hosts a group. provide search and relay services for group users
+    eAppletServiceHostGroupListing, // group listing host service for group hosts. provide search for groups to join, provide ip address etc
+    eAppletServiceHostNetwork,      // network host service for a gotvptop network.. requires fixed ip address, group list hosts announce to network host
     eAppletServiceConnectionTest,   // network test service for users to test if they have a open port
     eAppletServiceRelay,            // network relay service for users without a open port
 
-    eAppletServiceRandomPerson,     // connect to random person service
-    eAppletServiceRandomPersonRelay,   // connect to random person relay service for users without a open port
+    eAppletServiceRandomConnect,     // connect to random person service
+    eAppletServiceRandomConnectRelay,   // connect to random person relay service for users without a open port
 
     eMaxHostApplets,            // marker.. past here is service applets for user share services
 
@@ -99,9 +101,9 @@ enum EApplet
     eAppletServiceShareWebCam,
     eAppletServiceShareFiles,
 
-    eMaxSharedServicesApplets,  // marker.. past here is applets not launched by user
+    eMaxSharedServicesApplets,  // marker.. past here is applets not launched by user page icon
 
-    // not launched by user
+    // not launched from launch page icon
     eAppletPlayerVideo,
 
     eAppletClientAvatarImage,	    // get users avatar imaage from other user
@@ -112,10 +114,30 @@ enum EApplet
     eAppletClientConnectionTest,    // network test service for users to test if they have a open port
     eAppletClientRelay,             // network relay service for users without a open port
 
-    eAppletClientRandomPersonRelay, // connect to random person relay service for users without a open port
+    eAppletClientRandomConnectRelay, // connect to random person relay service for users without a open port
     eAppletClientShareFiles,
     eAppletClientShareWebCam,
     eAppletClientStoryboard,
+
+    eAppletServiceSettings,
+
+    eAppletSettingsAboutMe,
+    eAppletSettingsAvatarImage,
+    eAppletSettingsWebCamServer,
+    eAppletSettingsConnectTest,
+    eAppletSettingsShareFiles,
+    eAppletSettingsFileXfer,
+    eAppletSettingsHostGroup,
+    eAppletSettingsHostGroupListing,
+    eAppletSettingsHostNetwork,
+    eAppletSettingsMessenger,
+    eAppletSettingsRandomConnect,
+    eAppletSettingsRandomConnectRelay,
+    eAppletSettingsRelay,
+    eAppletSettingsStoryboard,
+    eAppletSettingsTruthOrDare,
+    eAppletSettingsVideoPhone,
+    eAppletSettingsVoicePhone,
 
 	ePluginAppletCamProvider,
 	ePluginAppletGoTvStation,

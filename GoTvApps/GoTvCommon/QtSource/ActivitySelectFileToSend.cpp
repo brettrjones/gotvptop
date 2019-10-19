@@ -36,7 +36,7 @@ ActivitySelectFileToSend::ActivitySelectFileToSend(	AppCommon&	app,
 													VxNetIdent *	hisIdent, 
 													QWidget *		parent )
 : ActivityBase( OBJNAME_ACTIVITY_SELECT_FILE_TO_SEND, app, parent, eAppletMessenger, true )
-, m_ePluginType( ePluginTypeFileOffer )
+, m_ePluginType( ePluginTypeFileXfer )
 , m_HisIdent( hisIdent )
 {
 	ui.setupUi(this);

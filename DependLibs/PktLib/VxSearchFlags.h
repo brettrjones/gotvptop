@@ -25,9 +25,9 @@ public:
 	VxSearchFlags();
 
 	void						setSearchFlags( uint8_t flags )			{ m_u8SearchFlags = flags; }
-	uint8_t							getSearchFlags( void )				{ return m_u8SearchFlags; }
+	uint8_t						getSearchFlags( void )				    { return m_u8SearchFlags; }
 	void						setSharedFileTypes( uint8_t flags )		{ m_u8FileTypeFlags = flags; }
-	uint8_t							getSharedFileTypes( void )			{ return m_u8FileTypeFlags; }
+	uint8_t						getSharedFileTypes( void )			    { return m_u8FileTypeFlags; }
 
 	bool 						hasSearchFlags( void );
 	bool						hasSharedFiles( void );

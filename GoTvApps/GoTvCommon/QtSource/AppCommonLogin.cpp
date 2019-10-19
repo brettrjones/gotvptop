@@ -95,6 +95,8 @@ void AppCommon::doAccountStartup( void )
 {
     // tell engine were to load settings from
     loadAccountSpecificSettings( getAppGlobals().getUserIdent()->getOnlineName() );
+    uint32_t startMs = GetApplicationAliveMs();
+
     getAppGlobals().getUserIdent()->setHasSharedWebCam( false ); // user must restart cam server each startup.. assume no shared cam yet
 
     applySoundSettings();
@@ -104,6 +106,9 @@ void AppCommon::doAccountStartup( void )
     startNetworkMonitor();
 
     completeLogin();
+
+    uint32_t endMs = GetApplicationAliveMs();
+    LogMsg( LOG_DEBUG, "Applied settings ms %d alive ms %d", endMs - startMs, endMs );
 }
 
 //============================================================================
@@ -241,6 +246,8 @@ std::string AppCommon::getUserSpecificDataDirectoryFromAccountUserName( const ch
 //============================================================================
 void AppCommon::loadAccountSpecificSettings( const char * userName )
 {
+    uint32_t loadStartMs = GetApplicationAliveMs();
+
     m_Engine.fromGuiSetUserXferDir( getUserXferDirectoryFromAccountUserName( userName ).c_str() );
     std::string strUserSpecificDir = getUserSpecificDataDirectoryFromAccountUserName( userName );
     // gotv (kodi) also needs the directory
@@ -280,6 +287,9 @@ void AppCommon::loadAccountSpecificSettings( const char * userName )
     uint16_t tcpPort = m_Engine.getEngineSettings().getTcpIpPort();
     getAppGlobals().getUserIdent()->m_DirectConnectId.setPort( tcpPort );
     getAppGlobals().getUserIdent()->m_DirectConnectId.m_IPv6OnlineIp = m_Engine.getFromGuiInterface().fromGuiGetMyIPv6Address();
+
+    uint32_t aliveMs = GetApplicationAliveMs();
+    LogMsg( LOG_DEBUG, "Account Loaded ms %d alive ms %d", aliveMs - loadStartMs, aliveMs );
     setIsAppInitialized( true );
 }
 

@@ -25,7 +25,6 @@ AppletServiceConnectionTest::AppletServiceConnectionTest( AppCommon& app, QWidge
 {
 	setAppletType( eAppletServiceConnectionTest );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
 
 	m_MyApp.activityStateChange( this, true );
 }

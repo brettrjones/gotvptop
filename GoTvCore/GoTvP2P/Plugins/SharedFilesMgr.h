@@ -23,7 +23,7 @@
 
 class SharedFileInfo;
 class IToGui;
-class PluginFileShare;
+class PluginServiceFileShare;
 class P2PEngine;
 class PktFileListReply;
 class VxSha1Hash;
@@ -32,7 +32,7 @@ class AssetMgr;
 class SharedFilesMgr
 {
 public:
-	SharedFilesMgr( PluginFileShare& plugin );
+	SharedFilesMgr( PluginServiceFileShare& plugin );
 	virtual ~SharedFilesMgr();
 
 	void						lockSharedFiles( void )				{ m_FilesListMutex.lock(); }
@@ -70,7 +70,7 @@ public:
 
 private:
 	//=== vars ===//
-	PluginFileShare&			m_Plugin;
+	PluginServiceFileShare&			m_Plugin;
 	P2PEngine&					m_Engine;
 	
 

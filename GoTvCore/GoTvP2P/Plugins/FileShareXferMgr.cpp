@@ -515,7 +515,7 @@ void FileShareXferMgr::onPktFileSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr,
 	}
 	else
 	{
-		LogMsg(LOG_ERROR, "PluginFileOffer::onPktFileSendReq: Could not find session\n");
+		LogMsg( LOG_ERROR, "PluginBaseFileXfer::onPktFileSendReq: Could not find session\n" );
 		pktReply.setError( eXferErrorBadParam );
 		m_Plugin.txPacket( netIdent, sktBase, &pktReply );
 	}
@@ -525,7 +525,7 @@ void FileShareXferMgr::onPktFileSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr,
 void FileShareXferMgr::onPktFileSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent )
 {
 	PluginBase::AutoPluginLock pluginMutexLock( &m_Plugin );
-	LogMsg( LOG_INFO, "FileShareXferMgr::onPktFileSendReply\n");
+	LogMsg( LOG_INFO, "FileShareXferMgr::onPktFileSendReply\n" );
 	PktPluginOfferReply * poPkt = (PktPluginOfferReply *)pktHdr;
 	FileTxSession * xferSession = findTxSession( poPkt->getRmtSessionId() );
 	if( xferSession )

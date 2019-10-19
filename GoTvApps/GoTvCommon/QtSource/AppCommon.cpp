@@ -208,6 +208,8 @@ IFromGui& AppCommon::getFromGuiInterface( void )
 //============================================================================
 void AppCommon::loadWithoutThread( void )
 {
+    uint32_t startMs = GetApplicationAliveMs();
+
     registerMetaData();
 
     // set application short name used for directory paths
@@ -235,8 +237,14 @@ void AppCommon::loadWithoutThread( void )
     // asset database and user specific setting database will be created in sub directory of account login
     // after user has logged into account
 
+    uint32_t loadingMs = GetApplicationAliveMs();
+    LogMsg( LOG_DEBUG, "LoadSettings %d ms alive ms %d", loadingMs - startMs, loadingMs );
+
     // load icons from resources
     m_MyIcons.myIconsStartup();
+
+    uint32_t iconsMs = GetApplicationAliveMs();
+    LogMsg( LOG_DEBUG, "Load Icons %d ms alive ms %d", iconsMs - loadingMs, iconsMs );
 
     m_AppTheme.selectTheme( getAppSettings().getLastSelectedTheme() );
     // TODO: finish VxAppStyle..
@@ -245,9 +253,15 @@ void AppCommon::loadWithoutThread( void )
     // load sounds to play and sound hardware
     m_MySndMgr.sndMgrStartup();
 
+    uint32_t styleMs = GetApplicationAliveMs();
+    LogMsg( LOG_DEBUG, "Setup Style %d ms alive ms %d", styleMs - iconsMs, styleMs );
+
     m_HomePage.initializeHomePage();
     connect( &m_HomePage, SIGNAL( signalMainWindowResized( int ) ), this, SLOT( slotMainWindowResized( int ) ) );
     m_HomePage.show();
+
+    uint32_t homePageMs = GetApplicationAliveMs();
+    LogMsg( LOG_DEBUG, "Initialize Home Page %d ms alive ms %d", homePageMs - styleMs, homePageMs );
 }
 
 //============================================================================
@@ -580,9 +594,9 @@ void AppCommon::startActivity( EPluginType ePluginType, VxNetIdent * netIdent, Q
 
 		break;
 
-	case ePluginTypeMultiSession:
+	case ePluginTypeMessenger:
 		{
-			if( false == getIsPluginVisible( ePluginTypeMultiSession ) )
+			if( false == getIsPluginVisible( ePluginTypeMessenger ) )
 			{
 				ActivityToFriendMultiSession * poDlg;
 				haveExistingOffer ? poDlg = new ActivityToFriendMultiSession( *this, exitingOffer, parent ) 
@@ -648,7 +662,7 @@ void AppCommon::executeActivity( GuiOfferSession * offer, QWidget * parent )
 {
 	switch( offer->getPluginType() )
 	{
-	case ePluginTypeFileOffer:
+	case ePluginTypeFileXfer:
 		{
 			ActivitySessionFileOffer * poDlg = new ActivitySessionFileOffer( *this, offer, parent );
 			poDlg->exec();
@@ -656,9 +670,9 @@ void AppCommon::executeActivity( GuiOfferSession * offer, QWidget * parent )
 
 		break;
 
-	case ePluginTypeMultiSession:
+	case ePluginTypeMessenger:
 		{
-			if( false == getIsPluginVisible( ePluginTypeMultiSession ) )
+			if( false == getIsPluginVisible( ePluginTypeMessenger ) )
 			{
 				ActivityToFriendMultiSession * poDlg = new ActivityToFriendMultiSession( *this, offer, parent );
 				poDlg->exec();
@@ -1138,8 +1152,10 @@ void AppCommon::onIdleTimer()
 //============================================================================
 void AppCommon::onOncePerSecond( void )
 {
+    // the wait is probably no longer needed since not running seperate threads for loading
+    // but it does give other things a chance to run a bit
     static int waitCnt = 0;
-    if( waitCnt > 5 )
+    if( waitCnt > 1 )
     {
         if( !m_LoginBegin )
         {
@@ -1151,6 +1167,7 @@ void AppCommon::onOncePerSecond( void )
     else
     {
         waitCnt++;
+        LogMsg( LOG_DEBUG, "Wait to login seconds %d alive ms %d", waitCnt, GetApplicationAliveMs() );
     }
 }
 

@@ -14,15 +14,15 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "PluginBase.h"
+#include "PluginBaseService.h"
 
 #include <GoTvCore/GoTvP2P/NetServices/NetServicesMgr.h>
 
-class PluginNetServices : public PluginBase
+class PluginNetServices : public PluginBaseService
 {
 public:
 	PluginNetServices( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-	virtual ~PluginNetServices();
+	virtual ~PluginNetServices() = default;
 
 	virtual RCODE				handleHttpConnection( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 

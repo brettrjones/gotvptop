@@ -42,7 +42,7 @@ PluginGroupHost::PluginGroupHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNet
 , m_MaxUserRelayAllowCnt( 1 )
 , m_MaxAnonRelayAllowCnt( 2 )
 {
-    m_ePluginType = ePluginTypeGroupHost;
+    m_ePluginType = ePluginTypeHostGroup;
 }
 
 //============================================================================

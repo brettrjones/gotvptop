@@ -62,13 +62,13 @@ void ActivityPermissionsRelay::setPluginType( EPluginType ePluginType )
 		break;
 	case ePluginTypeRelay:	// proxy plugin
 		break;
-	case ePluginTypeFileOffer:	
+	case ePluginTypeFileXfer:	
 		break;
 	case ePluginTypeFileServer:	
 		break;
 	case 	ePluginTypeCamServer:	
 		break;
-	case 	ePluginTypeMultiSession:	
+	case 	ePluginTypeMessenger:	
 		break;
 	case 	ePluginTypeVoicePhone:	
 		break;
@@ -76,7 +76,7 @@ void ActivityPermissionsRelay::setPluginType( EPluginType ePluginType )
 		break;
 	case 	ePluginTypeTruthOrDare:	
 		break;
-	case 	ePluginTypeStoryBoard:	
+	case 	ePluginTypeStoryboard:	
 		break;
 	//case 	eStoryBoardWritePermission:	
 	//	ui.PermissionLabel->setText( "Who can add to my story board" );

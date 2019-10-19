@@ -24,8 +24,8 @@
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetworkMonitor.h>
 #include <GoTvCore/GoTvP2P/NetServices/NetServicesMgr.h>
 
-#include <GoTvCore/GoTvP2P/Plugins/PluginRelay.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginFileShare.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceRelay.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceFileShare.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginNetServices.h>
 
 #include <GoTvCore/GoTvP2P/Search/RcScan.h>
@@ -86,8 +86,8 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
 , m_AnchorTest( * ( new AnchorTest( m_EngineSettings, m_NetServicesMgr ) ) )
 , m_PluginMgr( * new PluginMgr( *this ) )
 , m_MediaProcessor( * ( new MediaProcessor( *this ) ) )
-, m_PluginRelay( new PluginRelay( *this, m_PluginMgr, &m_PktAnn ) )
-, m_PluginFileShare( new PluginFileShare( *this, m_PluginMgr, &m_PktAnn ) )
+, m_PluginServiceRelay( new PluginServiceRelay( *this, m_PluginMgr, &m_PktAnn ) )
+, m_PluginServiceFileShare( new PluginServiceFileShare( *this, m_PluginMgr, &m_PktAnn ) )
 , m_PluginNetServices( new PluginNetServices( *this, m_PluginMgr, &m_PktAnn ) )
 , m_IsPortOpenTest( * new IsPortOpenTest( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
 , m_RcScan( *this, m_ConnectionList )
@@ -179,8 +179,8 @@ void P2PEngine::shutdownEngine( void )
 	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: waiting threads exit\n" );
 	//delete (IsPortOpenTest *)&m_IsPortOpenTest;
 	//delete (PluginNetServices *)&m_PluginNetServices;
-	//delete (PluginFileShare *)&m_PluginFileShare;
-	//delete &m_PluginRelay;
+	//delete (PluginServiceFileShare *)&m_PluginServiceFileShare;
+	//delete &m_PluginServiceRelay;
 	//delete &m_MediaProcessor;
 	//delete &m_PluginMgr;
 	//delete &m_NetConnector;
@@ -203,8 +203,8 @@ void P2PEngine::shutdownEngine( void )
 		VxSleep( 1000 );
 	}
 	
-	m_PluginRelay			= 0;
-	m_PluginFileShare		= 0;
+	m_PluginServiceRelay			= 0;
+	m_PluginServiceFileShare		= 0;
 	m_PluginNetServices		= 0;
 	LogMsg( LOG_INFO, "P2PEngine::shutdownEngine: done\n" );
 }
@@ -221,7 +221,7 @@ void P2PEngine::onSessionStart( EPluginType ePluginType, VxNetIdent * netIdent )
 	bool shouldUpdateLastSessionTime = false;
 	switch( ePluginType )
 	{
-	case ePluginTypeMultiSession:
+	case ePluginTypeMessenger:
 	case ePluginTypeVoicePhone:
 	case ePluginTypeVideoPhone:
 	case ePluginTypeTruthOrDare:

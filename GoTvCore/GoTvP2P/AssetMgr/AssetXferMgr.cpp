@@ -20,7 +20,7 @@
 
 #include "../Plugins/PluginBase.h"
 #include "../Plugins/PluginMgr.h"
-#include "../Plugins/PluginMultiSession.h"
+#include "../Plugins/PluginMessenger.h"
 #include "AssetTxSession.h"
 #include "AssetRxSession.h"
 
@@ -63,7 +63,7 @@ namespace
 
 
 //============================================================================
-AssetXferMgr::AssetXferMgr( PluginMultiSession&		plugin, 
+AssetXferMgr::AssetXferMgr( PluginMessenger&		plugin, 
 							PluginSessionMgr&		pluginSessionMgr )
 : m_Plugin( plugin )
 , m_PluginSessionMgr( pluginSessionMgr )

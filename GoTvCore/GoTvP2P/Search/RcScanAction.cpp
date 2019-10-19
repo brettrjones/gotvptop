@@ -21,8 +21,8 @@
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvInterface/IToGui.h>
 
-#include <GoTvCore/GoTvP2P/Plugins/PluginCamServer.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginWebServer.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceWebCam.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginBaseWebServer.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginMgr.h>
 
 #include <CoreLib/VxFileUtil.h>
@@ -142,7 +142,7 @@ void RcScanAction::addMatchedConnection( VxNetIdent * netIdent, VxSktBase * sktB
 		if( matchedConn )
 		{
 			matchedConn->setActionStartTimeMs( GetGmtTimeMs() );
-			PluginWebServer * poPlugin = (PluginWebServer *)m_Engine.getPluginMgr().getPlugin( ePluginTypeWebServer );
+			PluginBaseWebServer * poPlugin = (PluginBaseWebServer *)m_Engine.getPluginMgr().getPlugin( ePluginTypeWebServer );
 			if( false == poPlugin->searchActionProfilePic( netIdent, sktBase ) )
 			{
 				LogMsg( LOG_ERROR, "RcScanAction::fetchProfilePic failed pic for user %s\n", netIdent->getOnlineName() );

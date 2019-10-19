@@ -24,8 +24,11 @@ Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
  
  
  https://thenounproject.com/edward/
- bug.svg
  unknown by Bybzee from the Noun Project
+ bug.svg 
+ Created by Universal Icons from the Noun Project
+ truth-or-dare.svg (modified)
+ truth-or-dare-settings.svg (modified)
 
  
 https://iconmonstr.com/
@@ -38,12 +41,15 @@ file-folder-minus.svg
 file-folder-normal.svg
 file-folder-plus.svg
 file-folder-share.svg (modified)
+file-xfer.svg (modified)
+file-xfer-settings.svg (modified)
 friend.svg
 flask.svg
 key-disabled.svg
 key-enabled.svg
 mediatype-audio.svg
 mediatype-video.svg
+messenger-settings.svg (modified)
 microphone.svg
 microphone-muted.svg (modified)
 notify-dot.svg (modified)
@@ -76,6 +82,7 @@ overlay-friend.svg (modified)
 overlay-globe.svg (modified)
 overlay-minus.svg (modified)
 overlay-plus.svg (modified)
+video-chat-settings.svg (modified)
 window-expand.svg
 window-shrink.svg
 wireless-7.svg

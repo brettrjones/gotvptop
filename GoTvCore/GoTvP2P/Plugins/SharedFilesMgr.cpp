@@ -16,7 +16,7 @@
 #include "SharedFilesMgr.h"
 #include "SharedFileInfo.h"
 
-#include "PluginFileShare.h"
+#include "PluginServiceFileShare.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvInterface/IToGui.h>
@@ -60,7 +60,7 @@ namespace
 }
 
 //============================================================================
-SharedFilesMgr::SharedFilesMgr( PluginFileShare& plugin )
+SharedFilesMgr::SharedFilesMgr( PluginServiceFileShare& plugin )
 : m_Plugin( plugin )
 , m_Engine( plugin.getEngine() )
 , m_s64TotalByteCnt(0)

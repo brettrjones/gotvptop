@@ -30,7 +30,7 @@ class MyIcons
 {
 public:
 	MyIcons( AppCommon& appCommon );
-	~MyIcons();
+	~MyIcons() = default;
 
 	AppCommon&					getMyApp( void )			{ return m_MyApp; }
 	//! load all icons
@@ -44,6 +44,8 @@ public:
 	QPixmap						getIconPixmap( EMyIcons myIcon, QSize iconSize );
 	//! get icon for give friendship
 	EMyIcons					getFriendshipIcon( EFriendState eFriendship );
+    //! get setting icon for given plugin
+    EMyIcons					getPluginSettingsIcon( EPluginType ePluginType );
 	//! get icon for given plugin
 	EMyIcons					getPluginIcon( EPluginType ePluginType, EPluginAccessState ePluginAccess = ePluginAccessOk );
 	//! get locked plugin icon

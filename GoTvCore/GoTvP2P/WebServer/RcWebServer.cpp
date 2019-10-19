@@ -38,7 +38,7 @@ RcWebServer::~RcWebServer()
 }
 
 //============================================================================
-void RcWebServer::setPluginWebServer( PluginWebServer * poPlugin ) 
+void RcWebServer::setPluginBaseWebServer( PluginBaseWebServer * poPlugin ) 
 { 
 	m_WebPlugin = poPlugin; 
 }

@@ -29,6 +29,7 @@ public:
 protected slots:
     void                        slotHandleSelectionChanged( int );
     void                        slotShowPermissionInformation();
+    void                        slotShowPluginInformation();
 
 protected:
 	void						initPermissionWidget( void );

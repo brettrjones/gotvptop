@@ -20,8 +20,8 @@
 #include <GoTvCore/GoTvP2P/NetServices/NetServicesMgr.h>
 #include <GoTvCore/GoTvP2P/Network/NetConnector.h>
 
-#include <GoTvCore/GoTvP2P/Plugins/PluginWebServer.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginCamServer.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginBaseWebServer.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceWebCam.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 
 #include <CoreLib/VxParse.h>
@@ -134,7 +134,7 @@ void RcScan::fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t
 		return;
 	}
 
-	if( eScanTypeRandomPerson == eScanType )
+	if( eScanTypeRandomConnect == eScanType )
 	{
 		m_Engine.getNetServicesMgr().performPhoneShake();
 		return;

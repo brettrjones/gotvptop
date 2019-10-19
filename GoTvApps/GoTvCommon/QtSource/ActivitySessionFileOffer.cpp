@@ -23,7 +23,7 @@ ActivitySessionFileOffer::ActivitySessionFileOffer(	AppCommon& app,
 													GuiOfferSession * poOffer, 
 													QWidget * parent )
 : ActivityBase( OBJNAME_ACTIVITY_SESSION_FILE_OFFER, app, parent, eAppletMessenger, true )
-, m_ePluginType(ePluginTypeFileOffer)
+, m_ePluginType(ePluginTypeFileXfer)
 , m_Offer(poOffer)
 {
 	ui.setupUi(this);

@@ -26,7 +26,7 @@
 
 #include <map>
 
-class PluginMultiSession;
+class PluginMessenger;
 class PluginSessionMgr;
 class PluginMgr;
 class VxPktHdr;
@@ -49,7 +49,7 @@ public:
 	typedef std::map<VxGUID, AssetRxSession *>::iterator AssetRxIter;
 	typedef std::vector<AssetTxSession *>::iterator AssetTxIter;
 
-	AssetXferMgr( PluginMultiSession& plugin, PluginSessionMgr&	pluginSessionMgr );
+	AssetXferMgr( PluginMessenger& plugin, PluginSessionMgr&	pluginSessionMgr );
 	virtual ~AssetXferMgr();
 
 	VxMutex&					getAssetQueMutex( void )					{ return m_AssetSendQueMutex; }
@@ -122,7 +122,7 @@ protected:
 	std::vector<AssetTxSession *>		m_TxSessions;
 	VxMutex						m_TxSessionsMutex;
 
-	PluginMultiSession&			m_Plugin;	
+	PluginMessenger&			m_Plugin;	
 	PluginSessionMgr&			m_PluginSessionMgr;
 	PluginMgr&					m_PluginMgr;
 	P2PEngine&					m_Engine;					

@@ -126,7 +126,7 @@ void PluginTruthOrDare::fromGuiStopPluginSession( VxNetIdent * netIdent, int pvU
 //============================================================================
 bool PluginTruthOrDare::fromGuiInstMsg( VxNetIdent * netIdent, const char * msg )
 {
-	LogMsg( LOG_ERROR, "PluginCamServer::fromGuiInstMsg\n" );
+	LogMsg( LOG_ERROR, "PluginServiceWebCam::fromGuiInstMsg\n" );
 	PluginBase::AutoPluginLock pluginMutexLock( this );
 	P2PSession * poSession = (P2PSession *)m_PluginSessionMgr.findP2PSessionByOnlineId( netIdent->getMyOnlineId(), true );
 	if( poSession )

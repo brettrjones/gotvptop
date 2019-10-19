@@ -25,12 +25,13 @@
 AppletServiceBase::AppletServiceBase( const char * objName, AppCommon& app, QWidget * parent )
     : AppletBase( objName, app, parent )
 {
-    setupServiceApplet();
 }
 
 //============================================================================
-AppletServiceBase::~AppletServiceBase()
+void AppletServiceBase::setAppletType( EApplet applet )
 {
+    AppletBase::setAppletType( applet );
+    setupServiceApplet();
 }
 
 //============================================================================

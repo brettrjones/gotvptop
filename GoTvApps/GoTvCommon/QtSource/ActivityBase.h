@@ -56,8 +56,8 @@ public:
     void                        setIsMaxScreenSize( bool fullScreen );
     bool                        getIsMaxScreenSize( void );
 
-	void						setAppletType( EApplet applet )		{ m_EAppletType = applet; }
-	EApplet						getAppletType( void )				{ return m_EAppletType; }
+	virtual void				setAppletType( EApplet applet )		{ m_EAppletType = applet; }
+    virtual EApplet				getAppletType( void )				{ return m_EAppletType; }
     void						setIsAppletLaunchWidget( bool isLaunchWidget ) { m_IsAppletLaunchWidget = isLaunchWidget; }
     bool						getIsAppletLaunchWidget( void )     { return m_IsAppletLaunchWidget; }
     bool                        isMessagerFrame( void );

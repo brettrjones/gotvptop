@@ -185,7 +185,7 @@ QString DescribePluginAction( VxNetIdent * netIdent, EPluginType ePluginType, EP
         }
 		break;
 
-	case ePluginTypeStoryBoard:	// web server plugin ( for storyboard web page )
+	case ePluginTypeStoryboard:	// web server plugin ( for storyboard web page )
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:			// plugin access allowed
@@ -193,7 +193,7 @@ QString DescribePluginAction( VxNetIdent * netIdent, EPluginType ePluginType, EP
 			break;
 		case ePluginAccessLocked:		// insufficient Friend permission level
 			strAction = "View Story Board Requires ";
-			strAction += DescribeFriendState(  netIdent->getPluginPermission( ePluginTypeStoryBoard ) );
+			strAction += DescribeFriendState(  netIdent->getPluginPermission( ePluginTypeStoryboard ) );
 			strAction += " permission";
 			break;
 		case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
@@ -217,7 +217,7 @@ QString DescribePluginAction( VxNetIdent * netIdent, EPluginType ePluginType, EP
 		}
 		break;
 
-	case ePluginTypeFileOffer:	// file offer plugin
+	case ePluginTypeFileXfer:	// file offer plugin
 		switch( ePluginAccess )
 		{
 
@@ -227,7 +227,7 @@ QString DescribePluginAction( VxNetIdent * netIdent, EPluginType ePluginType, EP
 
 		case ePluginAccessLocked:		// insufficient Friend permission level
 			strAction = "Send A File Requires ";
-			strAction += DescribeFriendState(  netIdent->getPluginPermission( ePluginTypeFileOffer ) );
+			strAction += DescribeFriendState(  netIdent->getPluginPermission( ePluginTypeFileXfer ) );
 			strAction += " permission";
 			break;
 
@@ -380,7 +380,7 @@ QString DescribePluginAction( VxNetIdent * netIdent, EPluginType ePluginType, EP
         }
 		break;
 
-	case ePluginTypeMultiSession:	
+	case ePluginTypeMessenger:	
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:			// plugin access allowed
@@ -388,7 +388,7 @@ QString DescribePluginAction( VxNetIdent * netIdent, EPluginType ePluginType, EP
 			break;
 		case ePluginAccessLocked:		// insufficient Friend permission level
 			strAction = "Text Chat Requires ";
-			strAction += DescribeFriendState( netIdent->getPluginPermission( ePluginTypeMultiSession ) );
+			strAction += DescribeFriendState( netIdent->getPluginPermission( ePluginTypeMessenger ) );
 			strAction += " permission";
 			break;
 		case ePluginAccessDisabled:		// plugin disabled or no files shared or no web cam broadcast
@@ -505,7 +505,7 @@ QString DescribePluginType( EPluginType ePluginType )
 		strPluginType = QObject::tr("Profile Web Page");
 		break;
 
-	case ePluginTypeFileOffer:	// file offer plugin
+	case ePluginTypeFileXfer:	// file offer plugin
 		strPluginType = QObject::tr("Send A File");
 		break;
 
@@ -517,7 +517,7 @@ QString DescribePluginType( EPluginType ePluginType )
 		strPluginType = QObject::tr("Shared Web Cam");
 		break;
 
-	case ePluginTypeMultiSession:	// multi session chat plugin
+	case ePluginTypeMessenger:	// multi session chat plugin
 		strPluginType = QObject::tr("Chat Session");
 		break;
 
@@ -533,7 +533,7 @@ QString DescribePluginType( EPluginType ePluginType )
 		strPluginType = QObject::tr("Play Truth Or Dare");
 		break;
 
-	case ePluginTypeStoryBoard:	// story board plugin
+	case ePluginTypeStoryboard:	// story board plugin
 		strPluginType = QObject::tr("Story Board");
 		break;
 

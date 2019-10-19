@@ -18,7 +18,7 @@
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginRelay.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceRelay.h>
 
 #include <GoTvCore/GoTvP2P/Anchor/AnchorList.h>
 #include <GoTvCore/GoTvP2P/NetServices/NetServiceHdr.h>

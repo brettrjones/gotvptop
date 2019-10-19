@@ -16,7 +16,7 @@
 #include <NetLib/VxSktBase.h> 
 
 class RcWebServer;
-class PluginWebServer;
+class PluginBaseWebServer;
 class VxNetIdent;
 
 // type of request being made
@@ -92,8 +92,8 @@ public:
 	RcWebSkt();
 	virtual ~RcWebSkt();
 
-	void						setWebServerPlugin( PluginWebServer * poPlugin );
-	PluginWebServer *			getWebServerPlugin( void );
+	void						setWebServerPlugin( PluginBaseWebServer * poPlugin );
+	PluginBaseWebServer *			getWebServerPlugin( void );
 
 	void						setIdentity( VxNetIdent * netIdent )		{ m_Ident = netIdent; }
 	VxNetIdent *				getIdentity( void )							{ return m_Ident; }
@@ -118,7 +118,7 @@ public:
 	std::vector<WbQueEntry>		m_aoQuedFiles;	// files and prompts qued to be sent
 
 private:
-	PluginWebServer *			m_WebServerPlugin;
+	PluginBaseWebServer *			m_WebServerPlugin;
 };
 
 uint32_t RcSktWebReceiveThreadFunc(  void * pvContext );

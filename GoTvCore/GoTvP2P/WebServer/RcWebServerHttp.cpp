@@ -15,7 +15,7 @@
 
 #include "RcWebServer.h"
 
-#include <GoTvCore/GoTvP2P/Plugins/PluginWebServer.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginBaseWebServer.h>
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxFileIsTypeFunctions.h>
 #include <CoreLib/VxLinuxOnly.h>

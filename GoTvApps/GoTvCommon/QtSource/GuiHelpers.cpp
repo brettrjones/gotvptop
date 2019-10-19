@@ -16,6 +16,7 @@
 #include "GuiHelpers.h"
 
 #include "AppCommon.h"
+#include "MyIconsDefs.h"
 
 #include <CoreLib/VxFileIsTypeFunctions.h>
 #include <CoreLib/VxParse.h>
@@ -375,11 +376,11 @@ bool GuiHelpers::isAppletAService( EApplet applet )
     return ( ( eAppletServiceAboutMe == applet )
              || ( eAppletServiceAvatarImage == applet )
              || ( eAppletServiceConnectionTest == applet )
-             || ( eAppletServiceGroupHost == applet )
-             || ( eAppletServiceGroupListingHost == applet )
-             || ( eAppletServiceNetworkHost == applet )
-             || ( eAppletServiceRandomPerson == applet )
-             || ( eAppletServiceRandomPersonRelay == applet )
+             || ( eAppletServiceHostGroup == applet )
+             || ( eAppletServiceHostGroupListing == applet )
+             || ( eAppletServiceHostNetwork == applet )
+             || ( eAppletServiceRandomConnect == applet )
+             || ( eAppletServiceRandomConnectRelay == applet )
              || ( eAppletServiceShareFiles == applet )
              || ( eAppletServiceShareWebCam == applet )
              || ( eAppletServiceStoryboard == applet )
@@ -395,8 +396,8 @@ bool GuiHelpers::isAppletAClient( EApplet applet )
              || ( eAppletClientConnectionTest == applet )
              || ( eAppletClientGroupHost == applet )
              || ( eAppletClientGroupListingHost == applet )
-             || ( eAppletClientRandomPerson == applet )
-             || ( eAppletClientRandomPersonRelay == applet )
+             || ( eAppletClientRandomConnect == applet )
+             || ( eAppletClientRandomConnectRelay == applet )
              || ( eAppletClientShareFiles == applet )
              || ( eAppletClientShareWebCam == applet )
              || ( eAppletClientStoryboard == applet )
@@ -413,34 +414,173 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletClientAboutMe:              return ePluginTypeAboutMePage;
     case eAppletClientAvatarImage:          return ePluginTypeAvatarImage;
     case eAppletClientConnectionTest:       return ePluginTypeConnectTest;
-    case eAppletClientGroupHost:            return ePluginTypeGroupHost;
-    case eAppletClientGroupListingHost:     return ePluginTypeGroupListingHost;
-    case eAppletClientNetworkHost:          return ePluginTypeNetworkHost;
-    case eAppletClientRandomPerson:         return ePluginTypeRandomConnect;
-    case eAppletClientRandomPersonRelay:    return ePluginTypeRandomConnectRelay;
+    case eAppletClientGroupHost:            return ePluginTypeHostGroup;
+    case eAppletClientGroupListingHost:     return ePluginTypeHostGroupListing;
+    case eAppletClientNetworkHost:          return ePluginTypeHostNetwork;
+    case eAppletClientRandomConnect:         return ePluginTypeRandomConnect;
+    case eAppletClientRandomConnectRelay:    return ePluginTypeRandomConnectRelay;
     case eAppletClientShareFiles:           return ePluginTypeFileServer;
     case eAppletClientShareWebCam:          return ePluginTypeCamServer;
-    case eAppletClientStoryboard:           return ePluginTypeStoryBoard;
+    case eAppletClientStoryboard:           return ePluginTypeStoryboard;
     case eAppletClientRelay:                return ePluginTypeRelay;
 
     case eAppletServiceAboutMe:              return ePluginTypeAboutMePage;
     case eAppletServiceAvatarImage:          return ePluginTypeAvatarImage;
     case eAppletServiceConnectionTest:       return ePluginTypeConnectTest;
-    case eAppletServiceGroupHost:            return ePluginTypeGroupHost;
-    case eAppletServiceGroupListingHost:     return ePluginTypeGroupListingHost;
-    case eAppletServiceNetworkHost:          return ePluginTypeNetworkHost;
-    case eAppletServiceRandomPerson:         return ePluginTypeRandomConnect;
-    case eAppletServiceRandomPersonRelay:    return ePluginTypeRandomConnectRelay;
+    case eAppletServiceHostGroup:            return ePluginTypeHostGroup;
+    case eAppletServiceHostGroupListing:     return ePluginTypeHostGroupListing;
+    case eAppletServiceHostNetwork:          return ePluginTypeHostNetwork;
+    case eAppletServiceRandomConnect:         return ePluginTypeRandomConnect;
+    case eAppletServiceRandomConnectRelay:    return ePluginTypeRandomConnectRelay;
     case eAppletServiceShareFiles:           return ePluginTypeFileServer;
     case eAppletServiceShareWebCam:          return ePluginTypeCamServer;
-    case eAppletServiceStoryboard:           return ePluginTypeStoryBoard;
+    case eAppletServiceStoryboard:           return ePluginTypeStoryboard;
     case eAppletServiceRelay:                return ePluginTypeRelay;
+
+    case eAppletSettingsAboutMe:            return ePluginTypeAboutMePage;
+    case eAppletSettingsAvatarImage:        return ePluginTypeAvatarImage;
+    case eAppletSettingsWebCamServer:       return ePluginTypeCamServer;
+    case eAppletSettingsConnectTest:        return ePluginTypeConnectTest;
+    case eAppletSettingsShareFiles:         return ePluginTypeFileServer;
+    case eAppletSettingsFileXfer:           return ePluginTypeFileXfer;
+    case eAppletSettingsHostGroup:          return ePluginTypeHostGroup;
+    case eAppletSettingsHostGroupListing:   return ePluginTypeHostGroupListing;
+    case eAppletSettingsHostNetwork:        return ePluginTypeHostNetwork;
+    case eAppletSettingsMessenger:          return ePluginTypeMessenger;
+    case eAppletSettingsRandomConnect:      return ePluginTypeRandomConnect;
+    case eAppletSettingsRandomConnectRelay: return ePluginTypeRandomConnectRelay;
+    case eAppletSettingsRelay:              return ePluginTypeRelay;
+    case eAppletSettingsStoryboard:         return ePluginTypeStoryboard;
+    case eAppletSettingsTruthOrDare:        return ePluginTypeTruthOrDare;
+    case eAppletSettingsVideoPhone:         return ePluginTypeVideoPhone;
+    case eAppletSettingsVoicePhone:         return ePluginTypeVoicePhone;
+
 
     default:
         break;
     }
 
     return pluginType;
+}
+
+//============================================================================
+EApplet GuiHelpers::pluginTypeToEditApplet( EPluginType pluginType )
+{
+    EApplet appletType = eAppletUnknown;
+
+    switch( pluginType )
+    {
+    case ePluginTypeAboutMePage:            return eAppletEditAboutMe;
+    case ePluginTypeAvatarImage:            return eAppletEditAvatarImage;
+    case ePluginTypeCamServer:              return eAppletUnknown;
+    case ePluginTypeConnectTest:            return eAppletUnknown;
+    case ePluginTypeFileServer:             return eAppletUnknown;
+    case ePluginTypeFileXfer:               return eAppletUnknown;
+    case ePluginTypeHostGroup:              return eAppletUnknown;
+    case ePluginTypeHostGroupListing:       return eAppletUnknown;
+    case ePluginTypeHostNetwork:            return eAppletUnknown;
+    case ePluginTypeRandomConnect:          return eAppletUnknown;
+    case ePluginTypeRandomConnectRelay:     return eAppletUnknown;
+    case ePluginTypeStoryboard:             return eAppletUnknown;
+    case ePluginTypeRelay:                  return eAppletUnknown;
+    default:
+        break;
+    }
+
+    return appletType;
+}
+
+
+//============================================================================
+EApplet GuiHelpers::pluginTypeToSettingsApplet( EPluginType pluginType )
+{
+    EApplet appletType = eAppletUnknown;
+
+    switch( pluginType )
+    {
+    case ePluginTypeAboutMePage:            return eAppletSettingsAboutMe;
+    case ePluginTypeAvatarImage:            return eAppletSettingsAvatarImage;
+    case ePluginTypeCamServer:              return eAppletSettingsWebCamServer;
+    case ePluginTypeConnectTest:            return eAppletSettingsConnectTest;
+    case ePluginTypeFileServer:             return eAppletSettingsShareFiles;
+    case ePluginTypeFileXfer:               return eAppletSettingsFileXfer;
+    case ePluginTypeHostGroup:              return eAppletSettingsHostGroup;
+    case ePluginTypeHostGroupListing:       return eAppletSettingsHostGroupListing;
+    case ePluginTypeHostNetwork:            return eAppletSettingsHostNetwork;
+    case ePluginTypeMessenger:              return eAppletSettingsMessenger;
+    case ePluginTypeRandomConnect:          return eAppletSettingsRandomConnect;
+    case ePluginTypeRandomConnectRelay:     return eAppletSettingsRandomConnectRelay;
+    case ePluginTypeRelay:                  return eAppletSettingsRelay;
+    case ePluginTypeStoryboard:             return eAppletSettingsStoryboard;
+    case ePluginTypeTruthOrDare:            return eAppletSettingsTruthOrDare;
+    case ePluginTypeVideoPhone:             return eAppletSettingsVideoPhone;
+    case ePluginTypeVoicePhone:             return eAppletSettingsVoicePhone;
+
+    default:
+        break;
+    }
+
+    return appletType;
+}
+
+//============================================================================
+EMyIcons GuiHelpers::pluginTypeToSettingsIcon( EPluginType pluginType )
+{
+    EMyIcons iconType = eMyIconUnknown;
+
+    switch( pluginType )
+    {
+    case ePluginTypeAboutMePage:            return eMyIconSettingsAboutMe;
+    case ePluginTypeAvatarImage:            return eMyIconSettingsAvatarImage;
+    case ePluginTypeCamServer:              return eMyIconSettingsShareWebCam;
+    case ePluginTypeConnectTest:            return eMyIconSettingsConnectionTest;
+    case ePluginTypeFileServer:             return eMyIconSettingsShareFiles;
+    case ePluginTypeFileXfer:               return eMyIconSettingsFileXfer;
+    case ePluginTypeHostGroup:              return eMyIconSettingsHostGroup;
+    case ePluginTypeHostGroupListing:       return eMyIconSettingsHostGroupListing;
+    case ePluginTypeHostNetwork:            return eMyIconSettingsHostNetwork;
+    case ePluginTypeMessenger:              return eMyIconSettingsMessenger;
+    case ePluginTypeRandomConnect:          return eMyIconSettingsRandomConnect;
+    case ePluginTypeRandomConnectRelay:     return eMyIconSettingsRandomConnectRelay;
+    case ePluginTypeRelay:                  return eMyIconSettingsRelay;
+    case ePluginTypeStoryboard:             return eMyIconSettingsShareStoryboard;
+    case ePluginTypeTruthOrDare:            return eMyIconSettingsTruthOrDare;
+    case ePluginTypeVideoPhone:             return eMyIconSettingsVideoPhone;
+    case ePluginTypeVoicePhone:             return eMyIconSettingsVoicePhone;
+
+    default:
+        break;
+    }
+
+    return iconType;
+}
+
+
+//============================================================================
+EApplet GuiHelpers::pluginTypeToViewApplet( EPluginType pluginType )
+{
+    EApplet appletType = eAppletUnknown;
+
+    switch( pluginType )
+    {
+    case ePluginTypeAboutMePage:            return eAppletEditAboutMe;
+    case ePluginTypeAvatarImage:            return eAppletEditAvatarImage;
+    case ePluginTypeCamServer:              return eAppletUnknown;
+    case ePluginTypeConnectTest:            return eAppletUnknown;
+    case ePluginTypeFileServer:             return eAppletUnknown;
+    case ePluginTypeFileXfer:               return eAppletUnknown;
+    case ePluginTypeHostGroup:              return eAppletUnknown;
+    case ePluginTypeHostGroupListing:       return eAppletUnknown;
+    case ePluginTypeHostNetwork:            return eAppletUnknown;
+    case ePluginTypeRandomConnect:          return eAppletUnknown;
+    case ePluginTypeRandomConnectRelay:     return eAppletUnknown;
+    case ePluginTypeStoryboard:             return eAppletUnknown;
+    case ePluginTypeRelay:                  return eAppletUnknown;
+    default:
+        break;
+    }
+
+    return appletType;
 }
 
 //============================================================================
@@ -452,16 +592,16 @@ bool GuiHelpers::isPluginSingleSession( EPluginType ePluginType )
 	case ePluginTypeVoicePhone:
 	case ePluginTypeVideoPhone:
 	case ePluginTypeTruthOrDare:
-	case ePluginTypeMultiSession:
+	case ePluginTypeMessenger:
 	case ePluginTypeAdmin:
 		isSingleSessionPlugin = true;
 		break;
 	case ePluginTypeWebServer:
 	case ePluginTypeRelay:
 	case ePluginTypeCamServer:
-	case ePluginTypeStoryBoard: 
+	case ePluginTypeStoryboard: 
 	case ePluginTypeFileServer:
-	case ePluginTypeFileOffer:
+	case ePluginTypeFileXfer:
 	default:
 		break;
 	}
@@ -510,7 +650,7 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         strPluginDesc = QObject::tr( "Connection Test Service" ).toUtf8().constData();
         break;
 
-    case ePluginTypeFileOffer:
+    case ePluginTypeFileXfer:
         strPluginDesc = QObject::tr( "Person To Person File Transfer" ).toUtf8().constData();
         break;
 
@@ -525,7 +665,7 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         }
         break;
 
-    case ePluginTypeGroupHost:
+    case ePluginTypeHostGroup:
         if( rmtInitiated )
         {
             strPluginDesc = QObject::tr( "Hosted Group Service" ).toUtf8().constData();
@@ -536,7 +676,7 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         }
         break;
 
-    case ePluginTypeGroupListingHost:
+    case ePluginTypeHostGroupListing:
         if( rmtInitiated )
         {
             strPluginDesc = QObject::tr( "Hosted Group List Search Service" ).toUtf8().constData();
@@ -547,11 +687,11 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         }
         break;
 
-    case ePluginTypeMultiSession:
+    case ePluginTypeMessenger:
         strPluginDesc = QObject::tr( "Messanger Service" ).toUtf8().constData();
         break;
 
-    case ePluginTypeNetworkHost:
+    case ePluginTypeHostNetwork:
         strPluginDesc = QObject::tr( "Host GoTvPtoP Network Service" ).toUtf8().constData();
         break;
 
@@ -567,7 +707,7 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         strPluginDesc = QObject::tr( "Connect To Random Person Relay Service" ).toUtf8().constData();
         break;
 
-    case ePluginTypeStoryBoard:
+    case ePluginTypeStoryboard:
         if( rmtInitiated )
         {
             strPluginDesc = QObject::tr( "Shared Story Page (Blog)" ).toUtf8().constData();

@@ -40,16 +40,16 @@ bool SessionMgrBase::isPluginSingleSession( void )
 	case ePluginTypeVoicePhone:
 	case ePluginTypeVideoPhone:
 	case ePluginTypeTruthOrDare:
-	case ePluginTypeMultiSession:
+	case ePluginTypeMessenger:
 	case ePluginTypeCamServer:
 	case ePluginTypeAdmin:
 		isSingleSessionPlugin = true;
 		break;
 	case ePluginTypeWebServer:
 	case ePluginTypeRelay:
-	case ePluginTypeStoryBoard: 
+	case ePluginTypeStoryboard: 
 	case ePluginTypeFileServer:
-	case ePluginTypeFileOffer:
+	case ePluginTypeFileXfer:
 	default:
 		break;
 	}

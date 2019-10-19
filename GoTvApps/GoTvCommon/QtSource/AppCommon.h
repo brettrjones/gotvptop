@@ -100,6 +100,7 @@ public:
     IFromGui&					getFromGuiInterface( void );
 	QApplication&				getQApplication( void )						{ return m_QApp; }
 	AppGlobals&					getAppGlobals( void )						{ return m_AppGlobals; }
+    AppletMgr&					getAppletMgr( void )						{ return m_AppletMgr; }
 	AppSettings&				getAppSettings( void )						{ return m_AppSettings; }
 	VxDataHelper&				getDataHelper( void )						{ return m_DataHelper; }
     IGoTv&				        getGoTv( void )						        { return m_GoTv; }

@@ -14,7 +14,7 @@
 //============================================================================
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/Search/RcScan.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginWebServer.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginBaseWebServer.h>
 
 //============================================================================
 void P2PEngine::fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t fileTypeFlags, const char * pSearchPattern )

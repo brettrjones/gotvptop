@@ -32,9 +32,9 @@ public:
 	AppletMgr( AppCommon& myMpp, QWidget * parent );
 	virtual ~AppletMgr(){}
 
-	void						launchApplet( EApplet applet );
-	QFrame *					getAppletFrame( EApplet applet );
-	void						launchApplet( EApplet applet, QWidget * parent );
+    QFrame *					getAppletFrame( EApplet applet );
+    ActivityBase *				launchApplet( EApplet applet );
+    ActivityBase *				launchApplet( EApplet applet, QWidget * parent );
 	void						activityStateChange( ActivityBase * activity, bool isCreated );
 
     RenderGlWidget *            getRenderConsumer( void );

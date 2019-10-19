@@ -397,18 +397,6 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBase.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginCamServer.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginFileOffer.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginFileOfferPktHandlers.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginFileShare.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginInvalid.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
@@ -418,28 +406,13 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginMgrSktApi.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginMultiSession.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginNetServices.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginRelay.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginRelayPktHandlers.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginRelayTests.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginSessionBase.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginSessionMgr.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginStoryBoard.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginTruthOrDare.cpp">
@@ -449,15 +422,6 @@
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginVoicePhone.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginWebServer.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginWebServerFiles.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginWebServerPktHandlers.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\RcWebProxy.cpp">
@@ -549,6 +513,78 @@
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\IsPortOpenTest\PingResponseServer.cpp">
       <Filter>GoTvP2P\IsPortOpenTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseRelay.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseService.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceRelay.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceWebCam.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceRandomConnectRelay.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceFileShare.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseHostService.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceConnectionTest.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceHostGroup.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceHostGroupListing.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceHostNetwork.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseFileXfer.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginFileXfer.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseFileXferPktHandlers.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginMessenger.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceRandomConnect.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceAboutMe.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceAvatarImage.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceStoryboard.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseWebServer.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseWebServerFiles.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseWebServerPktHandlers.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseRelayPktHandlers.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseRelayTests.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1042,37 +1078,19 @@
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBase.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginCamServer.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginFileOffer.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginFileShare.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginInvalid.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginMgr.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginMultiSession.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginNetServices.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginRelay.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginSessionBase.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginSessionMgr.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginStoryBoard.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginTruthOrDare.h">
@@ -1082,9 +1100,6 @@
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginVoicePhone.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginWebServer.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\RcWebProxy.h">
@@ -1203,6 +1218,63 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvInterface\IToGui.h">
       <Filter>GoTvInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseRelay.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseService.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceRelay.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceRandomConnectRelay.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceFileShare.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseHostService.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceConnectionTest.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceHostGroup.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceHostGroupListing.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceHostNetwork.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseFileXfer.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginFileXfer.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceWebCam.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginMessenger.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceRandomConnect.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceAboutMe.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceAvatarImage.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceStoryboard.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseWebServer.h">
+      <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

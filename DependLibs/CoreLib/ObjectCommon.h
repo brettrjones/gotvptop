@@ -63,8 +63,8 @@
 #define OBJNAME_ACTIVITY_YES_NO_MSG_BOX					"ActivityYesNoMsgBox"
 
 #define OBJNAME_APPLET_BASE								"AppletBase"
-#define OBJNAME_FRAME_LAUNCH_PAGE						"FrameLaunchPage" // layout frame for launch page
-#define OBJNAME_FRAME_MESSAGER_PAGE						"FrameMessengerPage" // layout frame for messenger page
+#define OBJNAME_APPLET_EDIT_ABOUT_ME					"AppletEditAboutMe"
+#define OBJNAME_APPLET_EDIT_AVATAR_IMAGE				"AppletEditAvatarImage"
 #define OBJNAME_APPLET_LAUNCH_PAGE						"AppletLaunchPage"
 #define OBJNAME_APPLET_MESSAGER_PAGE					"AppletMessengerPage"
 #define OBJNAME_APPLET_LAUNCH_WIDGET					"AppletLaunchWidget"
@@ -75,8 +75,8 @@
 #define OBJNAME_APPLET_CLIENT_AVATAR_IMAGE				"AppletServiceAvatarImage"
 #define OBJNAME_APPLET_CLIENT_SHARE_FILES				"AppletClientShareFiles"
 #define OBJNAME_APPLET_CLIENT_SHARE_WEB_CAM				"AppletClientShareWebCam"
-#define OBJNAME_APPLET_CLIENT_RANDOM_PERSON			    "AppletClientRandomPerson"
-#define OBJNAME_APPLET_CLIENT_RANDOM_PERSON_RELAY		"AppletClientRandomPersonRelay"
+#define OBJNAME_APPLET_CLIENT_RANDOM_PERSON			    "AppletClientRandomConnect"
+#define OBJNAME_APPLET_CLIENT_RANDOM_PERSON_RELAY		"AppletClientRandomConnectRelay"
 #define OBJNAME_APPLET_CLIENT_STORYBOARD				"AppletClientStoryboard"
 
 #define OBJNAME_APPLET_GROUP_USER						"AppletGroupUser"
@@ -91,23 +91,45 @@
 #define OBJNAME_APPLET_SEARCH_PAGE					    "AppletSearchPage"
 #define OBJNAME_APPLET_SETTINGS							"AppletSettings"
 
-#define OBJNAME_APPLET_SERVICE_AVATAR_IMAGE				"AppletServiceAvatarImage"
 #define OBJNAME_APPLET_SERVICE_ABOUT_ME				    "AppletServiceAboutMe"
+#define OBJNAME_APPLET_SERVICE_AVATAR_IMAGE				"AppletServiceAvatarImage"
 #define OBJNAME_APPLET_SERVICE_CONNECT_TEST				"AppletServiceConnectTest"
-#define OBJNAME_APPLET_SERVICE_GROUP_HOST				"AppletServiceGroupHost"
-#define OBJNAME_APPLET_SERVICE_GROUP_LISTING_HOST		"AppletServiceGroupListingHost"
-#define OBJNAME_APPLET_SERVICE_NETWORK_HOST			    "AppletServiceNetworkHost"
-#define OBJNAME_APPLET_SERVICE_RANDOM_PERSON		    "AppletServiceRandomPerson"
-#define OBJNAME_APPLET_SERVICE_RANDOM_PERSON_RELAY		"AppletServiceRandomPersonRelay"
+#define OBJNAME_APPLET_SERVICE_HOST_GROUP				"AppletServiceHostGroup"
+#define OBJNAME_APPLET_SERVICE_HOST_GROUP_LISTING		"AppletServiceHosGroupListingt"
+#define OBJNAME_APPLET_SERVICE_HOST_NETWORK			    "AppletServiceHostNetwork"
+#define OBJNAME_APPLET_SERVICE_RANDOM_PERSON		    "AppletServiceRandomConnect"
+#define OBJNAME_APPLET_SERVICE_RANDOM_PERSON_RELAY		"AppletServiceRandomConnectRelay"
 #define OBJNAME_APPLET_SERVICE_RELAY					"AppletServiceRelay"
 #define OBJNAME_APPLET_SERVICE_SHARE_PAGE				"AppletServiceSharePage"
 #define OBJNAME_APPLET_SERVICE_SHARE_FILES				"AppletServiceShareFiles"
 #define OBJNAME_APPLET_SERVICE_SHARE_STORYBOARD			"AppletServiceShareStoryboard"
 #define OBJNAME_APPLET_SERVICE_SHARE_WEB_CAM			"AppletServiceShareWebCam"
 
+
+#define OBJNAME_APPLET_SETTINGS_ABOUT_ME				"AppletSettingsAboutMe"
+#define OBJNAME_APPLET_SETTINGS_AVATAR_IMAGE			"AppletSettingsAvatarImage"
+#define OBJNAME_APPLET_SETTINGS_CONNECT_TEST			"AppletSettingsConnectTest"
+#define OBJNAME_APPLET_SETTINGS_FILE_XFER			    "AppletSettingsFileXfer"
+#define OBJNAME_APPLET_SETTINGS_HOST_GROUP				"AppletSettingsHostGroup"
+#define OBJNAME_APPLET_SETTINGS_HOST_GROUP_LISTING		"AppletSettingsHostGroupListing"
+#define OBJNAME_APPLET_SETTINGS_HOST_NETWORK			"AppletSettingsHostNetwork"
+#define OBJNAME_APPLET_SETTINGS_MESSENGER			    "AppletSettingsMessenger"
+#define OBJNAME_APPLET_SETTINGS_RANDOM_CONNECT		    "AppletSettingsRandomConnect"
+#define OBJNAME_APPLET_SETTINGS_RANDOM_CONNECT_RELAY	"AppletSettingsRandomConnectRelay"
+#define OBJNAME_APPLET_SETTINGS_RELAY					"AppletSettingsRelay"
+#define OBJNAME_APPLET_SETTINGS_SHARE_FILES				"AppletSettingsShareFiles"
+#define OBJNAME_APPLET_SETTINGS_SHARE_STORYBOARD		"AppletSettingsShareStoryboard"
+#define OBJNAME_APPLET_SETTINGS_SHARE_WEB_CAM			"AppletSettingsShareWebCam"
+#define OBJNAME_APPLET_SETTINGS_TRUTH_OR_DARE			"AppletSettingsTruthOrDare"
+#define OBJNAME_APPLET_SETTINGS_VIDEO_PHONE			    "AppletSettingsVideoPhone"
+#define OBJNAME_APPLET_SETTINGS_VOICE_PHONE			    "AppletSettingsVoicePhone"
+
+
 #define OBJNAME_APPLET_THEME							"AppletTheme"
 #define OBJNAME_APPLET_USER_IDENTITY				    "AppletUserIdentity"
 
+#define OBJNAME_FRAME_LAUNCH_PAGE						"FrameLaunchPage" // layout frame for launch page
+#define OBJNAME_FRAME_MESSAGER_PAGE						"FrameMessengerPage" // layout frame for messenger page
 #define OBJNAME_FILE_ACTION_MENU						"FileActionMenu"
 #define OBJNAME_POPUP_MENU							    "PopupMenu"
 

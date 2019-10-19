@@ -310,7 +310,7 @@ bool OfferSessionLogic::sendOfferOrResponse()
 																		eOfferResponseAccept,
 																		m_OfferSessionId ) )
 			{
-				if( ePluginTypeMultiSession != m_ePluginType )
+				if( ePluginTypeMessenger != m_ePluginType )
 				{
 					showOfflineMsg();
 				}
@@ -336,7 +336,7 @@ bool OfferSessionLogic::sendOfferOrResponse()
 																		m_FileHashId.getHashData(),
 																		m_OfferSessionId ) )
 			{
-				if( ePluginTypeMultiSession != m_ePluginType )
+				if( ePluginTypeMessenger != m_ePluginType )
 				{
 					showOfflineMsg();
 				}
@@ -645,7 +645,7 @@ void OfferSessionLogic::handleSessionEnded( EOfferResponse responseCode )
 		}
 		
 		postStatusMsg( responseDesc.c_str() );
-		if( ( ePluginTypeMultiSession != m_ePluginType )
+		if( ( ePluginTypeMessenger != m_ePluginType )
 			&& ( ePluginTypeCamServer != m_ePluginType ) )
 		{
 			if( GuiHelpers::isPluginSingleSession( m_ePluginType ) )

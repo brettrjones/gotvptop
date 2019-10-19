@@ -23,11 +23,14 @@ class AppletServiceBase : public AppletBase
 	Q_OBJECT
 public:
     AppletServiceBase( const char * objName, AppCommon& app, QWidget * parent );
-	virtual ~AppletServiceBase();
+	virtual ~AppletServiceBase() = default;
+
+    // override so we do initialization after applet type is set
+    void						setAppletType( EApplet applet )	override;
 
     virtual QLabel *            getServiceTitle() { return ui.m_ServiceTitleLabel; }
-    virtual QLabel *            getStatusLabel() { return ui.m_StatusLabel; }
-    virtual QLabel *            getServiceStatusLabel() { return ui.m_ServiceStatusLabel; }
+    //virtual QLabel *            getStatusLabel() { return ui.m_StatusLabel; }
+    //virtual QLabel *            getServiceStatusLabel() { return ui.m_ServiceStatusLabel; }
 
     virtual QLabel *            getServiceUrlLabel() { return ui.m_UrlDescriptionLabel; }
     virtual QLineEdit *         getServiceUrlEdit() { return ui.m_UrlEdit; }
@@ -39,7 +42,7 @@ public:
     virtual QPlainTextEdit *    getServiceDescriptionEdit() { return ui.m_DescriptionEdit; }
 
     virtual QPushButton *       getStartButton() { return ui.m_StartButton; }
-    virtual QPushButton *       getStopButton() { return ui.m_StartButton; }
+    virtual QPushButton *       getStopButton() { return ui.m_StopButton; }
 
     virtual PermissionWidget *  getPermissionWidget() { return ui.m_PermissionWidget; }
     virtual InformationWidget * getInformationWidget() { return ui.m_InfoWidget; }
@@ -52,9 +55,7 @@ protected:
     virtual void                saveServiceToSettings();
 
 
-
     Ui::AppletServiceBaseClass ui;
-
     QWidget *                   m_HostServiceWidget;
 };
 

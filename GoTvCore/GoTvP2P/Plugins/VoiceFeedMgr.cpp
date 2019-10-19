@@ -18,7 +18,7 @@
 #include "PluginMgr.h"
 #include "PluginSessionMgr.h"
 #include "P2PSession.h"
-#include "PluginCamServer.h"
+#include "PluginServiceWebCam.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>

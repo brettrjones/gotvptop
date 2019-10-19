@@ -16,7 +16,7 @@
 #include "AppletBase.h"
 #include "UserProfile.h"
 
-#include "ui_AppletIdentity.h"
+#include "ui_AppletUserIdentity.h"
 
 class AppletUserIdentity : public AppletBase
 {
@@ -33,27 +33,14 @@ public slots:
     void						onApplyAgeClick( void );
     void						onApplyContentClick( void );
 
-    //! browse for picture of me
-    void						onBrowseButClick( void );
-    //! Implement the OnClickListener callback    
-    void						onSnapshotButClick( void );
-    //! Implement the OnClickListener callback    
-    void						onApplyAboutMeButClick( void );
-    //! slot called when user takes snapshot
-    void						onSnapshot( uint8_t* pu8JpgData, uint32_t u32DataLen, int iWidth, int iHeight );
+    void						slotEditAboutMeButClick( void );
+    void						slotEditAvatarButClick( void );
 
 protected:
     void                        loadIdentityFromDb();
- 
-    //! load user profile data from database
-    void						loadContentFromDb( void );
-
-    void						updateSnapShot( QPixmap& pixmap );
     //! validate user input
     QString						validateString( QString charSeq );
-    //! save user profile data to database
-    void						saveContentToDb( void );
-
+ 
     bool                        validateUserName( void );
     bool                        validateMoodMessage( void );
 
@@ -62,7 +49,7 @@ protected:
     static const int CAMERA_SNAPSHOT = 1; // selector for image gallery call
 
     //=== vars ===//
-    Ui::AppletIdentityClass		ui;
+    Ui::AppletUserIdentityUi	ui;
     UserProfile 				m_UserProfile;
     VxNetIdent *				m_MyIdent = nullptr;
     QString                     m_strOrigOnlineName;

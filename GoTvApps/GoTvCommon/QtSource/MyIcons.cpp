@@ -33,11 +33,6 @@ MyIcons::MyIcons( AppCommon& appCommon )
 }
 
 //============================================================================
-MyIcons::~MyIcons()
-{
-}
-
-//============================================================================
 void MyIcons::myIconsStartup( void )
 {
 	VxTimer timer;
@@ -593,7 +588,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/wireless-key.svg";
     case eMyIconNetworkSettings:
         return ":/AppRes/Resources/wireless-setup.svg";
-    case eMyIconSearchRandomPerson:
+    case eMyIconSearchRandomConnect:
         return ":/AppRes/Resources/search-random-person.svg";
 
 	// built in plugin options
@@ -601,38 +596,77 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/webcam-server.svg";
 	case eMyIconGoTvStation:
 		return ":/AppRes/Resources/radio-tower.svg";
-	case eMyIconGoTvNetworkHost:
-		return ":/AppRes/Resources/network-host.svg";
 
 	// groups
-    case eMyIconNetHosting:
-        return ":/AppRes/Resources/network-host.svg";
 	case eMyIconGroupUser:
 		return ":/AppRes/Resources/group.svg";
-	case eMyIconGroupHost:
-		return ":/AppRes/Resources/group-host.svg";
-	case eMyIconGroupListingHost:
-		return ":/AppRes/Resources/group-anchor.svg";
     case eMyIconShareServices:
         return ":/AppRes/Resources/share-services.svg";
     case eMyIconServiceAvatarImage:
         return ":/AppRes/Resources/share-avatar.svg";
     case eMyIconServiceConnectionTest:
         return ":/AppRes/Resources/service-connection-test.svg";
+    case eMyIconServiceGroupHost:
+        return ":/AppRes/Resources/service-group-host.svg";
+    case eMyIconServiceGroupListingHost:
+        return ":/AppRes/Resources/service-group-listing-host.svg";
+    case eMyIconServiceNetworkHost:
+        return ":/AppRes/Resources/service-network-host.svg";
     case eMyIconServiceShareAboutMe:
         return ":/AppRes/Resources/share-about-me.svg";
-    case eMyIconServiceShareFiles :
+    case eMyIconServiceShareFiles:
         return ":/AppRes/Resources/share-files.svg";
     case eMyIconServiceShareStoryboard:
         return ":/AppRes/Resources/share-storyboard.svg";
     case eMyIconServiceShareWebCam:
         return ":/AppRes/Resources/share-webcam.svg";
-    case eMyIconServiceRandomPerson:
+    case eMyIconServiceRandomConnect:
         return ":/AppRes/Resources/service-connect-random.svg";
-    case eMyIconServiceRandomPersonRelay:
+    case eMyIconServiceRandomConnectRelay:
         return ":/AppRes/Resources/service-connect-random-relay.svg";
     case eMyIconServiceRelay:
         return ":/AppRes/Resources/service-relay.svg";
+
+    case eMyIconSettingsAboutMe:
+        return ":/AppRes/Resources/share-about-me-settings.svg";
+    case eMyIconSettingsAvatarImage:
+        return ":/AppRes/Resources/share-avatar-settings.svg";
+    case eMyIconSettingsConnectionTest:
+        return ":/AppRes/Resources/service-connection-test-settings.svg";
+    case eMyIconSettingsHostGroup:
+        return ":/AppRes/Resources/service-group-host-settings.svg";
+    case eMyIconSettingsHostGroupListing:
+        return ":/AppRes/Resources/service-group-listing-host-settings.svg";
+    case eMyIconSettingsHostNetwork:
+        return ":/AppRes/Resources/service-network-host-settings.svg";
+    case eMyIconSettingsShareFiles:
+        return ":/AppRes/Resources/share-files-settings.svg";
+    case eMyIconSettingsShareStoryboard:
+        return ":/AppRes/Resources/share-storyboard-settings.svg";
+    case eMyIconSettingsShareWebCam:
+        return ":/AppRes/Resources/share-webcam-settings.svg";
+    case eMyIconSettingsRandomConnect:
+        return ":/AppRes/Resources/service-connect-random-settings.svg";
+    case eMyIconSettingsRandomConnectRelay:
+        return ":/AppRes/Resources/service-connect-random-relay-settings.svg";
+    case eMyIconSettingsRelay:
+        return ":/AppRes/Resources/service-relay-settings.svg";
+    case eMyIconSettingsFileXfer:
+        return ":/AppRes/Resources/file-xfer-settings.svg";
+    case eMyIconSettingsMessenger:
+        return ":/AppRes/Resources/messenger-settings.svg";
+    case eMyIconSettingsTruthOrDare:
+        return ":/AppRes/Resources/truth-or-dare-settings.svg";
+    case eMyIconSettingsVideoPhone:
+        return ":/AppRes/Resources/video-phone-settings.svg";
+    case eMyIconSettingsVoicePhone:
+        return ":/AppRes/Resources/voice-phone-settings.svg";
+    case eMyIconFileXfer:
+        return ":/AppRes/Resources/file-xfer.svg";
+    case eMyIconTruthOrDare:
+        return ":/AppRes/Resources/truth-or-dare.svg";
+
+
 	default:
 		return ":/AppRes/Resources/question_mark.svg";// Icon with question mark
 	}
@@ -665,6 +699,74 @@ EMyIcons MyIcons::getFriendshipIcon( EFriendState eFriendship )
 		return eMyIconUnknown;
 	}
 }
+
+//============================================================================
+//! get icon for given plugin
+EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
+{
+    switch( ePluginType )
+    {
+    case ePluginTypeAdmin:
+        return eMyIconAdministrator;
+
+    case ePluginTypeAboutMePage:
+        return eMyIconSettingsAboutMe;
+
+    case ePluginTypeAvatarImage:
+        return eMyIconSettingsAvatarImage;
+
+    case ePluginTypeCamServer:
+        return eMyIconSettingsShareWebCam;
+
+    case ePluginTypeConnectTest:
+        return eMyIconSettingsConnectionTest;
+
+    case ePluginTypeFileXfer:
+        return eMyIconSendFileNormal;
+
+    case ePluginTypeFileServer:
+        return eMyIconSettingsShareFiles;
+
+    case ePluginTypeHostGroup:
+        return eMyIconServiceGroupHost;
+
+    case ePluginTypeHostGroupListing:
+        return eMyIconServiceGroupListingHost;
+
+    case ePluginTypeHostNetwork:
+        return eMyIconServiceNetworkHost;
+
+    case ePluginTypeMessenger:
+        return eMyIconMessenger; // eMyIconMultiSession
+
+    case ePluginTypeRelay:
+        return eMyIconSettingsRelay;
+
+    case ePluginTypeRandomConnect:
+        return eMyIconSettingsRelay;
+
+    case ePluginTypeRandomConnectRelay:
+        return eMyIconSettingsRelay;
+
+    case ePluginTypeStoryboard:
+        return eMyIconSettingsRelay;
+
+    case ePluginTypeTruthOrDare:
+        return eMyIconTruthOrDareNormal;
+
+    case ePluginTypeVideoPhone:
+        return eMyIconVideoPhoneNormal;
+
+    case ePluginTypeVoicePhone:
+        return eMyIconVoicePhoneNormal;
+
+    default:
+        LogMsg( LOG_ERROR, "MyIcons::getPluginIcon: unrecognized plugin type %d\n", ePluginType );
+    }
+
+    return eMyIconUnknown;
+}
+
 //============================================================================
 //! get icon for given plugin
 EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePluginAccess )
@@ -706,7 +808,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 		}
 		break;
 
-	case ePluginTypeStoryBoard:
+	case ePluginTypeStoryboard:
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
@@ -742,7 +844,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 		}
 		break;
 
-	case 	ePluginTypeFileOffer:	// file offer plugin
+	case 	ePluginTypeFileXfer:	// file offer plugin
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
@@ -849,7 +951,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 			return eMyIconTruthOrDareIgnored;
 		}
 
-	case 	ePluginTypeMultiSession:	// multisession p2p plugin
+	case 	ePluginTypeMessenger:	// multisession p2p plugin
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
@@ -871,16 +973,16 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
         return eMyIconGroupUser;
         break;
 
-    case ePluginTypeGroupHost:
-        return eMyIconGroupHost;
+    case ePluginTypeHostGroup:
+        return eMyIconServiceGroupHost;
         break;
 
-    case ePluginTypeGroupListingHost:
-        return eMyIconGroupListingHost;
+    case ePluginTypeHostGroupListing:
+        return eMyIconServiceGroupListingHost;
         break;
 
-    case ePluginTypeNetworkHost:
-        return eMyIconNetHosting;
+    case ePluginTypeHostNetwork:
+        return eMyIconServiceNetworkHost;
         break;
 
 	default:
@@ -896,7 +998,7 @@ EMyIcons MyIcons::getDisabledPluginIcon( EPluginType ePluginType )
 	{
 	case	ePluginTypeWebServer:	// web server plugin ( for profile web page )
 		return eMyIconProfileDisabled;
-	case 	ePluginTypeFileOffer:	// file share plugin
+	case 	ePluginTypeFileXfer:	// file share plugin
 		return eMyIconSendFileDisabled;
 	case 	ePluginTypeFileServer:	// file share plugin
 		return eMyIconShareFilesDisabled;
@@ -908,7 +1010,7 @@ EMyIcons MyIcons::getDisabledPluginIcon( EPluginType ePluginType )
 		return eMyIconVideoPhoneDisabled;
 	case 	ePluginTypeTruthOrDare:	// Web Cam Truth Or Dare game p2p plugin
 		return eMyIconTruthOrDareDisabled;
-	case 	ePluginTypeMultiSession:	// Web Cam Truth Or Dare game p2p plugin
+	case 	ePluginTypeMessenger:	// Web Cam Truth Or Dare game p2p plugin
 		return eMyIconMultiSessionDisabled;
 	default:		
 		return eMyIconUnknown;
@@ -923,7 +1025,7 @@ EMyIcons MyIcons::getLockedPluginIcon( EPluginType ePluginType )
 	{
 	case	ePluginTypeWebServer:	// web server plugin ( for profile web page )
 		return eMyIconProfileLocked;
-	case 	ePluginTypeFileOffer:	// file offer plugin
+	case 	ePluginTypeFileXfer:	// file offer plugin
 		return eMyIconSendFileNormal;
 	case 	ePluginTypeFileServer:	// file share plugin
 		return eMyIconShareFilesCancel;
@@ -935,7 +1037,7 @@ EMyIcons MyIcons::getLockedPluginIcon( EPluginType ePluginType )
 		return eMyIconVideoPhoneLocked;
 	case 	ePluginTypeTruthOrDare:	// Web Cam Truth Or Dare game p2p plugin
 		return eMyIconTruthOrDareLocked;
-	case 	ePluginTypeMultiSession:	// Web Cam Truth Or Dare game p2p plugin
+	case 	ePluginTypeMessenger:	// Web Cam Truth Or Dare game p2p plugin
 		return eMyIconMultiSessionLocked;
 	default:		
 		return eMyIconUnknown;
@@ -948,7 +1050,7 @@ EMyIcons MyIcons::getIgnoredPluginIcon( EPluginType ePluginType )
 	{
 	case	ePluginTypeWebServer:	// web server plugin ( for profile web page )
 		return eMyIconProfileIgnored;
-	case 	ePluginTypeFileOffer:	// file share plugin
+	case 	ePluginTypeFileXfer:	// file share plugin
 		return eMyIconSendFileIgnored;
 	case 	ePluginTypeFileServer:	// file share plugin
 		return eMyIconShareFilesCancel;
@@ -960,7 +1062,7 @@ EMyIcons MyIcons::getIgnoredPluginIcon( EPluginType ePluginType )
 		return eMyIconVideoPhoneIgnored;
 	case 	ePluginTypeTruthOrDare:	// Web Cam Truth Or Dare game p2p plugin
 		return eMyIconTruthOrDareIgnored;
-	case 	ePluginTypeMultiSession:	// Web Cam Truth Or Dare game p2p plugin
+	case 	ePluginTypeMessenger:	// Web Cam Truth Or Dare game p2p plugin
 		return eMyIconMultiSessionIgnored;
 	default:		
 		return eMyIconUnknown;

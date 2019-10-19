@@ -20,7 +20,7 @@
 enum EScanType
 {
 	eScanTypeNone,				//!< Unknown or not set search type
-	eScanTypeRandomPerson,		//!< Get contacts who have done phone shake connect in last 20 seconds
+	eScanTypeRandomConnect,		//!< Get contacts who have done phone shake connect in last 20 seconds
 	eScanTypePeopleSearch,		//!< Search for contact of given name 
 	eScanTypeMoodMsgSearch,		//!< Search for contacts with given text in mood message
 	eScanTypeProfilePic,		//!< Search for contacts with not default About Me Web Page picture

@@ -18,25 +18,31 @@
 
 #include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>
 
-#include <GoTvCore/GoTvP2P/Plugins/PluginVoicePhone.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginVideoPhone.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginTruthOrDare.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginCamServer.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginRelay.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginFileShare.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginFileOffer.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginWebServer.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginStoryBoard.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginNetServices.h>
-#include <GoTvCore/GoTvP2P/Plugins/PluginMultiSession.h>
-
+#include <GoTvCore/GoTvP2P/Plugins/PluginFileXfer.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginInvalid.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginMessenger.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceAboutMe.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceAvatarImage.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceConnectionTest.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceFileShare.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroup.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroupListing.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceHostNetwork.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceRandomConnect.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceRandomConnectRelay.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceRelay.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceStoryboard.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceWebCam.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginTruthOrDare.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginVideoPhone.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginVoicePhone.h>
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 #include <GoTvCore/GoTvP2P/NetServices/NetServiceHdr.h>
 #include <NetLib/VxPeerMgr.h>
+#include <NetLib/VxSktBase.h>
 
 #include <string.h>
 #include <stdarg.h>
@@ -74,62 +80,93 @@ PluginMgr::~PluginMgr()
 //============================================================================
 void PluginMgr::pluginMgrStartup( void )
 {
-	LogMsg( LOG_INFO, "pluginMgrStartup start\n" );
+    uint32_t startTime = (uint32_t)GetApplicationAliveMs();
+	LogMsg( LOG_VERBOSE, "pluginMgrStartup start %d ms\n", startTime );
 
 	PluginBase * poPlugin;
 	// invalid
 	poPlugin = new PluginInvalid( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
-	//LogMsg( LOG_INFO, "pluginMgrStartup create admin plugin\n" );
+	LogMsg( LOG_VERBOSE, "pluginMgrStartup create admin plugin\n" );
 	poPlugin = new PluginInvalid( m_Engine, *this, &this->m_PktAnn );
 	poPlugin->setPluginType( ePluginTypeAdmin );
 	m_aoPlugins.push_back( poPlugin );
 
-	//LogMsg( LOG_INFO, "pluginMgrStartup create web server plugin\n" );
-	poPlugin = new PluginWebServer( m_Engine, *this, &this->m_PktAnn );
+    LogMsg( LOG_VERBOSE, "pluginMgrStartup create file xfer plugin\n" );
+    poPlugin = new PluginFileXfer( m_Engine, *this, &this->m_PktAnn );
+    m_aoPlugins.push_back( poPlugin );
+
+    LogMsg( LOG_VERBOSE, "pluginMgrStartup create messenger plugin\n" );
+    poPlugin = new PluginMessenger( m_Engine, *this, &this->m_PktAnn );
+    m_aoPlugins.push_back( poPlugin );
+
+	LogMsg( LOG_VERBOSE, "pluginMgrStartup create about me plugin\n" );
+	poPlugin = new PluginServiceAboutMe( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
+
+    LogMsg( LOG_VERBOSE, "pluginMgrStartup create avatar imag plugin\n" );
+    poPlugin = new PluginServiceAvatarImage( m_Engine, *this, &this->m_PktAnn );
+    m_aoPlugins.push_back( poPlugin );
+
+    LogMsg( LOG_VERBOSE, "pluginMgrStartup create connection test plugin\n" );
+    poPlugin = new PluginServiceConnectionTest( m_Engine, *this, &this->m_PktAnn );
+    m_aoPlugins.push_back( poPlugin );
+
+    //LogMsg( LOG_INFO, "pluginMgrStartup create file share plugin\n" );
+    m_aoPlugins.push_back( &m_Engine.getPluginServiceFileShare() );
+
+    LogMsg( LOG_VERBOSE, "pluginMgrStartup create host group plugin\n" );
+    poPlugin = new PluginServiceHostGroup( m_Engine, *this, &this->m_PktAnn );
+    m_aoPlugins.push_back( poPlugin );
+
+    LogMsg( LOG_VERBOSE, "pluginMgrStartup create host group listing plugin\n" );
+    poPlugin = new PluginServiceHostGroupListing( m_Engine, *this, &this->m_PktAnn );
+    m_aoPlugins.push_back( poPlugin );
+
+    LogMsg( LOG_VERBOSE, "pluginMgrStartup create host network plugin\n" );
+    poPlugin = new PluginServiceHostNetwork( m_Engine, *this, &this->m_PktAnn );
+    m_aoPlugins.push_back( poPlugin );
+
+    LogMsg( LOG_VERBOSE, "pluginMgrStartup create random connect plugin\n" );
+    poPlugin = new PluginServiceRandomConnect( m_Engine, *this, &this->m_PktAnn );
+    m_aoPlugins.push_back( poPlugin );
+
+    LogMsg( LOG_VERBOSE, "pluginMgrStartup create random connect relay plugin\n" );
+    poPlugin = new PluginServiceRandomConnectRelay( m_Engine, *this, &this->m_PktAnn );
+    m_aoPlugins.push_back( poPlugin );
 
 	// relay pre created by engine
-	m_aoPlugins.push_back( &m_Engine.getPluginRelay() );
+	m_aoPlugins.push_back( &m_Engine.getPluginServiceRelay() );
 
-	//LogMsg( LOG_INFO, "pluginMgrStartup create file share plugin\n" );
-	m_aoPlugins.push_back( &m_Engine.getPluginFileShare() );
+    LogMsg( LOG_VERBOSE, "pluginMgrStartup create storyboard plugin\n" );
+    poPlugin = new PluginServiceStoryboard( m_Engine, *this, &this->m_PktAnn );
+    m_aoPlugins.push_back( poPlugin );
 
-	//LogMsg( LOG_INFO, "pluginMgrStartup create file offer plugin\n" );
-	poPlugin = new PluginFileOffer( m_Engine, *this, &this->m_PktAnn );
+	LogMsg( LOG_VERBOSE, "pluginMgrStartup create cam server plugin\n" );
+	poPlugin = new PluginServiceWebCam( m_Engine, *this, &this->m_PktAnn);
 	m_aoPlugins.push_back( poPlugin );
 
-	//LogMsg( LOG_INFO, "pluginMgrStartup create cam server plugin\n" );
-	poPlugin = new PluginCamServer( m_Engine, *this, &this->m_PktAnn);
-	m_aoPlugins.push_back( poPlugin );
-
-	//LogMsg( LOG_INFO, "pluginMgrStartup create multisession plugin\n" );
-	poPlugin = new PluginMultiSession( m_Engine, *this, &this->m_PktAnn );
-	m_aoPlugins.push_back( poPlugin );
-
-	//LogMsg( LOG_INFO, "pluginMgrStartup create voice phone plugin\n" );
+	LogMsg( LOG_INFO, "pluginMgrStartup create voice phone plugin\n" );
 	poPlugin = new PluginVoicePhone( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
-	//LogMsg( LOG_INFO, "pluginMgrStartup create video phone plugin\n" );
+	LogMsg( LOG_INFO, "pluginMgrStartup create video phone plugin\n" );
 	poPlugin = new PluginVideoPhone( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
-	//LogMsg( LOG_INFO, "pluginMgrStartup create truth or dare plugin\n" );
+	LogMsg( LOG_INFO, "pluginMgrStartup create truth or dare plugin\n" );
 	poPlugin = new PluginTruthOrDare( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
-	//LogMsg( LOG_INFO, "pluginMgrStartup create storyboard plugin\n" );
-	poPlugin = new PluginStoryBoard( m_Engine, *this, &this->m_PktAnn );
-	m_aoPlugins.push_back( poPlugin );
 
 	//LogMsg( LOG_INFO, "pluginMgrStartup adding net services\n" );
 	// net services pre created by engine
-	m_aoPlugins.push_back( &m_Engine.getPluginNetServices() );
+	//m_aoPlugins.push_back( &m_Engine.getPluginNetServices() );
 	m_PluginMgrInitialized = true;
 
-	//LogMsg( LOG_INFO, "pluginMgrStartup done\n" );
+    uint32_t endTime = ( uint32_t)GetApplicationAliveMs();
+    LogMsg( LOG_INFO, "pluginMgrStartup done in %d ms at %d ms\n", endTime - startTime, endTime );
 }
 
 //============================================================================
@@ -650,7 +687,7 @@ PluginBase * PluginMgr::findPlugin( EPluginType ePluginType )
 bool PluginMgr::fromGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000, VxGUID lclSessionId )
 {
 	bool result = false;
-	PluginBase * plugin = findPlugin( ePluginTypeMultiSession );
+	PluginBase * plugin = findPlugin( ePluginTypeMessenger );
 	if( plugin )
 	{
 		BigListInfo * bigInfo = m_BigListMgr.findBigListInfo( onlineId );

@@ -17,11 +17,11 @@
 
 #include "RcHttpConnection.h"
 
-#include <RcPluginLib/RcPluginWebServer.h>
+#include <RcPluginLib/RcPluginBaseWebServer.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 #include <RcPluginLib/RcPluginBase.h>
-#include <RcPluginLib/RcPluginWebServer.h>
+#include <RcPluginLib/RcPluginBaseWebServer.h>
 
 RcHttpConnection g_oHttpConnection;
 

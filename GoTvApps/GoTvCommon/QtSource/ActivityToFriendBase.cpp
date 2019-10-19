@@ -337,7 +337,7 @@ QString ActivityToFriendBase::describePluginOffer( EPluginType ePluginType )
 		strPluginOffer = QObject::tr(" View Profile Page " );
 		break;
 
-	case ePluginTypeFileOffer:	// file offer plugin
+	case ePluginTypeFileXfer:	// file offer plugin
 		strPluginOffer = QObject::tr(" Receive A File " );
 		break;
 
@@ -349,7 +349,7 @@ QString ActivityToFriendBase::describePluginOffer( EPluginType ePluginType )
 		strPluginOffer = QObject::tr(" View Shared Web Cam ");
 		break;
 
-	case ePluginTypeMultiSession:	// multi session chat plugin
+	case ePluginTypeMessenger:	// multi session chat plugin
 		strPluginOffer = QObject::tr(" Join Chat Session " );
 		break;
 
@@ -365,7 +365,7 @@ QString ActivityToFriendBase::describePluginOffer( EPluginType ePluginType )
 		strPluginOffer = QObject::tr(" Play Truth Or Dare ");
 		break;
 
-	case ePluginTypeStoryBoard:	// story board plugin
+	case ePluginTypeStoryboard:	// story board plugin
 		strPluginOffer = QObject::tr(" View Story Board ");
 		break;
 
