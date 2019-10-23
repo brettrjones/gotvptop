@@ -28,22 +28,23 @@ enum EPluginType
     ePluginTypeAboutMePage      = 2,	//!< about me page plugin ( using web page server )
     ePluginTypeAvatarImage      = 3,	//!< handle users avatar image
     ePluginTypeCamServer        = 4,	//!< Web cam broadcast plugin
-    ePluginTypeConnectTest      = 5,	//!< Connection Test Service
-    ePluginTypeFileServer       = 6,	//!< Shared files server
-    ePluginTypeFileXfer         = 7,	//!< Offer/accept send a file person to person
-    ePluginTypeHostGroup        = 8,	//!< group host
-    ePluginTypeHostGroupListing = 9,	//!< group list host
-    ePluginTypeHostNetwork      = 10,	//!< master network host
-    ePluginTypeMessenger        = 11,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
-    ePluginTypeRandomConnect    = 12,	//!< Random connect to another person ( Using Phone Shake )
-    ePluginTypeRandomConnectRelay    = 13,	//!< Random connect to another person relay service
-    ePluginTypeRelay            = 14,	//!< Relay services plugin
-    ePluginTypeStoryboard       = 15,	//!< User editable story board web page server
-    ePluginTypeTruthOrDare      = 16,	//!< Video Chat Truth Or Dare game  
-    ePluginTypeVideoPhone       = 17,	//!< Video Chat with motion detect and stream recording
-    ePluginTypeVoicePhone       = 18,	//!< VOIP audio only phone call
-	// NOTE: plugin types 19 - 47 not implemented .. reserved for future use
-	eMaxUserPluginType			= 19, 
+    ePluginTypeChatRoom         = 5,	//!< Web cam broadcast plugin
+    ePluginTypeConnectTest      = 6,	//!< Connection Test Service
+    ePluginTypeFileServer       = 7,	//!< Shared files server
+    ePluginTypeFileXfer         = 8,	//!< Offer/accept send a file person to person
+    ePluginTypeHostGroup        = 9,	//!< group host
+    ePluginTypeHostGroupListing = 10,	//!< group list host
+    ePluginTypeHostNetwork      = 11,	//!< master network host
+    ePluginTypeMessenger        = 12,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
+    ePluginTypeRandomConnect    = 13,	//!< Random connect to another person ( Using Phone Shake )
+    ePluginTypeRandomConnectRelay    = 14,	//!< Random connect to another person relay service
+    ePluginTypeRelay            = 15,	//!< Relay services plugin
+    ePluginTypeStoryboard       = 16,	//!< User editable story board web page server
+    ePluginTypeTruthOrDare      = 17,	//!< Video Chat Truth Or Dare game  
+    ePluginTypeVideoPhone       = 18,	//!< Video Chat with motion detect and stream recording
+    ePluginTypeVoicePhone       = 19,	//!< VOIP audio only phone call
+	// NOTE: plugin types 20 - 47 not implemented .. reserved for future use
+	eMaxUserPluginType			= 20, 
 	// plugins 0-47 are part of PktAnnounce
 	// plugins after 47 are system plugins and do not go out in announcement pkt
 	eAppPluginsBegin			= 48,

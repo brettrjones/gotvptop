@@ -1,6 +1,6 @@
-#pragma once
 //============================================================================
-// Copyright (C) 2018 Brett R. Jones
+// Copyright (C) 2010 Brett R. Jones
+// Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,24 +13,19 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "AppletBase.h"
+#include "PluginServiceChatRoom.h"
+#include "PluginMgr.h"
+#include "P2PSession.h"
+#include "RxSession.h"
+#include "TxSession.h"
 
-#include "ui_AppletAboutApp.h"
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
-class AppletAboutApp : public AppletBase
+#include <CoreLib/VxFileUtil.h>
+
+//============================================================================
+PluginServiceChatRoom::PluginServiceChatRoom( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+: PluginBase( engine, pluginMgr, myIdent )
 {
-	Q_OBJECT
-public:
-    AppletAboutApp( AppCommon& app, QWidget * parent );
-	virtual ~AppletAboutApp();
-
-protected slots:
-    void						gotoWebsite( void );
-
-protected:
-    void						setupAboutMe( void );
-
-    Ui::AppletAboutAppClass     ui;
-};
-
-
+    setPluginType( ePluginTypeChatRoom );
+}

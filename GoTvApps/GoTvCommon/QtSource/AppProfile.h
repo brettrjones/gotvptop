@@ -33,8 +33,8 @@ public:
 
 	//=== vars ===//
 	bool						m_bIsValid;
-	uint16_t							m_u16TcpPort;
-	uint16_t							m_u16UdpPort;
+	uint16_t					m_u16TcpPort;
+	uint16_t					m_u16UdpPort;
 	std::string					m_strUserName;
 	std::string					m_strUserGuid;
 	std::string					m_strNetworkName;

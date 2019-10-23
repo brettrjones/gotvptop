@@ -53,6 +53,7 @@ class ActivityOfferListDlg;
 class ActivityDownloads;
 class ActivityUploads;
 class ActivityAbout;
+class ActivityAppSetup;
 class ActivityDebugSettings;
 class ActivityShowHelp;
 class GuiOfferSession;
@@ -97,44 +98,40 @@ public:
     void                        setIsAppInitialized( bool initialized )     { m_AppInitialized = initialized; }
     bool                        getIsAppInitialized( void )                 { return m_AppInitialized; }
 
-    IFromGui&					getFromGuiInterface( void );
-	QApplication&				getQApplication( void )						{ return m_QApp; }
-	AppGlobals&					getAppGlobals( void )						{ return m_AppGlobals; }
+    ActivityDownloads *			getActivityDownloads( void )				{ return m_Downloads; }
+    VxAppDisplay&				getAppDisplay( void )                       { return m_AppDisplay; }
+    AppGlobals&					getAppGlobals( void )						{ return m_AppGlobals; }
+    QFrame *					getAppletFrame( EApplet applet );
     AppletMgr&					getAppletMgr( void )						{ return m_AppletMgr; }
 	AppSettings&				getAppSettings( void )						{ return m_AppSettings; }
-	VxDataHelper&				getDataHelper( void )						{ return m_DataHelper; }
+    QString&					getAppShortName( void )						{ return m_AppShortName; }
+    VxAppStyle&					getAppStyle( void )							{ return m_AppStyle; }
+    QString&					getAppTitle( void )							{ return m_AppTitle; }
+    VxAppTheme&					getAppTheme( void )							{ return m_AppTheme; }
+    QWidget *					getCentralWidget( void )					{ return 0; } // ui.centralWidget; }
+    VxDataHelper&				getDataHelper( void )						{ return m_DataHelper; }
+    P2PEngine&					getEngine( void )							{ return m_Engine; }
+    IFromGui&					getFromGuiInterface( void );
     IGoTv&				        getGoTv( void )						        { return m_GoTv; }
-	VxPeerMgr&					getPeerMgr( void )							{ return m_VxPeerMgr; }
-	QString&					getAppTitle( void )							{ return m_AppTitle; }
-	QString&					getAppShortName( void )						{ return m_AppShortName; }
-	MyIcons&					getMyIcons( void )							{ return m_MyIcons; }
-	VxAppTheme&					getAppTheme( void )							{ return m_AppTheme; }
-	VxAppStyle&					getAppStyle( void )							{ return m_AppStyle; }
-    VxAppDisplay&				getAppDisplay( void )                       { return m_AppDisplay; }
-
-	P2PEngine&					getEngine( void )							{ return m_Engine; }
-	MySndMgr&					getSoundMgr( void )							{ return m_MySndMgr; }
-	HomeWindow&					getHomePage( void )							{ return m_HomePage; }
-	VxTilePositioner&			getTilePositioner( void )					{ return m_TilePositioner; }
-
-	OffersMgr&					getOffersMgr( void )						{ return m_OffersMgr; }
-
-	QWidget *					getCentralWidget( void )					{ return 0; } // ui.centralWidget; }
-
-	ActivityDownloads *			getActivityDownloads( void )				{ return m_Downloads; } 
-	ENetworkStateType			getNetworkState( void )						{ return m_LastNetworkState; }
+    HomeWindow&					getHomePage( void )							{ return m_HomePage; }
+    bool						getIsVidCaptureEnabled( void )				{ return m_VidCaptureEnabled; }
+    bool						getIsMicrophoneHardwareEnabled( void )		{ return m_MicrophoneHardwareEnabled; }
+    bool						getIsSpeakerHardwareEnabled( void )			{ return m_SpeakerHardwareEnabled; }
+    MyIcons&					getMyIcons( void )							{ return m_MyIcons; }
+    VxNetIdent *				getMyIdentity( void );
+    ENetworkStateType			getNetworkState( void )						{ return m_LastNetworkState; }
+    OffersMgr&					getOffersMgr( void )						{ return m_OffersMgr; }
+    VxPeerMgr&					getPeerMgr( void )							{ return m_VxPeerMgr; }
     RenderGlWidget *            getRenderConsumer( void );
-
-	bool						getIsVidCaptureEnabled( void )				{ return m_VidCaptureEnabled; }
-	bool						getIsMicrophoneHardwareEnabled( void )		{ return m_MicrophoneHardwareEnabled; }
-	bool						getIsSpeakerHardwareEnabled( void )			{ return m_SpeakerHardwareEnabled; }
+    MySndMgr&					getSoundMgr( void )							{ return m_MySndMgr; }
+	VxTilePositioner&			getTilePositioner( void )					{ return m_TilePositioner; }
+    QApplication&				getQApplication( void )						{ return m_QApp; }
 
 	void						setCamCaptureRotation( uint32_t rot );
 	int							getCamCaptureRotation( void )				{ return m_CamCaptureRotation; }
 
 	void 						setAccountUserName( const char * name )		{ m_strAccountUserName = name; } 
 	std::string					getAccountUserName( void )					{ return m_strAccountUserName; } 
-	VxNetIdent *				getMyIdentity( void );
 
 	void						setIsMaxScreenSize(  bool isMessagerFrame, bool isFullSizeWindow );
 	bool						getIsMaxScreenSize( bool isMessagerFrame );
@@ -158,6 +155,7 @@ public:
 	virtual void				startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame );
     virtual void				startLogin( void );
     virtual void				doLogin( void );
+    virtual void				doLoginStep2( void );
     virtual void				completeLogin( void );
 
 	// prompt user to confirm wants to shutdown app.. caller must call appCommonShutdown if answer is yes
@@ -166,7 +164,6 @@ public:
 
 	void						loadAccountSpecificSettings( const char * userName );
 
-	QFrame *					getAppletFrame( EApplet applet );
 	void						launchApplet( EApplet applet, QWidget * parent );
 
 	void						activityStateChange( ActivityBase * activity, bool isCreated );
@@ -661,6 +658,9 @@ protected slots:
 
 	void						onUpdateMyIdent( VxNetIdent * poMyIdent );
 
+    void						slotCheckSetupTimer();
+
+
 private slots:
 	void						slotMainWindowResized( void );
     void						slotMainWindowMoved( void );
@@ -771,6 +771,8 @@ private:
     bool                        m_LoginBegin = false;
     bool                        m_LoginComplete = false;
     bool                        m_AppInitialized = false;
+    QTimer *                    m_CheckSetupTimer = nullptr;
+    ActivityAppSetup *          m_AppSetupDlg = nullptr;
 
 //    KodiThread *                m_KodiThread;
 };

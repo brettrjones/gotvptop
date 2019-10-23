@@ -49,20 +49,20 @@ public:
 	void						enableVideoControls( bool enable );
 
 	//=== button visiblility ====//
-	void						setPowerButtonVisibility( bool visible );
-	void						setHomeButtonVisibility( bool visible );
-	void						setMuteSpeakerVisibility( bool visible );
-	void						setMuteMicrophoneVisibility( bool visible );
+    void				        setBackButtonVisibility( bool visible );
 	void						setCamPreviewVisibility( bool visible );
 	void						setCamViewerCountVisibility( bool visible );
 	void						setCameraButtonVisibility( bool visible );
-	void						setTrashButtonVisibility( bool visible );
+    void						setHomeButtonVisibility( bool visible );
+    void						setMuteSpeakerVisibility( bool visible );
+    void						setMuteMicrophoneVisibility( bool visible );
+    void						setMenuTopButtonVisibility( bool visible );
+    void						setPowerButtonVisibility( bool visible );
 	void						setShareButtonVisibility( bool visible );
-	void						setMenuTopButtonVisibility( bool visible );
-	void						setBackButtonVisibility( bool visible );
+    void						setTrashButtonVisibility( bool visible );
 
 	//=== button icons ====//
-	virtual void				setPowerButtonIcon( EMyIcons myIcon = eMyIconPowerOff );
+    virtual void				setPowerButtonIcon( EMyIcons myIcon = eMyIconPowerOff );
 	virtual void				setHomeButtonIcon( EMyIcons myIcon = eMyIconHome );
 	virtual void				setMicrophoneIcon( EMyIcons myIcon = eMyIconMicrophoneOn );
 	virtual void				setSpeakerIcon( EMyIcons myIcon = eMyIconSpeakerOn );

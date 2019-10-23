@@ -84,6 +84,7 @@ enum EApplet
 
     eMaxSearchApplets,          // marker.. past here is hosting applets
 
+    eAppletServiceChatRoom,	        // hosts a chat room. provide chat room services for group users
     eAppletServiceHostGroup,	    // hosts a group. provide search and relay services for group users
     eAppletServiceHostGroupListing, // group listing host service for group hosts. provide search for groups to join, provide ip address etc
     eAppletServiceHostNetwork,      // network host service for a gotvptop network.. requires fixed ip address, group list hosts announce to network host
@@ -104,17 +105,20 @@ enum EApplet
     eMaxSharedServicesApplets,  // marker.. past here is applets not launched by user page icon
 
     // not launched from launch page icon
+    eActivityAppSetup,	            // application initialize
+
     eAppletPlayerVideo,
 
-    eAppletClientAvatarImage,	    // get users avatar imaage from other user
     eAppletClientAboutMe,	        // users about me page
-    eAppletClientGroupHost,	        // hosts a group. provide search and relay services for group users
-    eAppletClientGroupListingHost,  // group listing host service for group hosts. provide search for groups to join, provide ip address etc
-    eAppletClientNetworkHost,       // network host service for a gotvptop network.. requires fixed ip address, group list hosts announce to network host
+    eAppletClientAvatarImage,	    // get users avatar imaage from other user
+    eAppletClientChatRoom,	        // use chat room
     eAppletClientConnectionTest,    // network test service for users to test if they have a open port
-    eAppletClientRelay,             // network relay service for users without a open port
+    eAppletClientHostGroup,	        // hosts a group. provide search and relay services for group users
+    eAppletClientHostGroupListing,  // group listing host service for group hosts. provide search for groups to join, provide ip address etc
+    eAppletClientHostNetwork,       // network host service for a gotvptop network.. requires fixed ip address, group list hosts announce to network host
 
     eAppletClientRandomConnectRelay, // connect to random person relay service for users without a open port
+    eAppletClientRelay,             // network relay service for users without a open port
     eAppletClientShareFiles,
     eAppletClientShareWebCam,
     eAppletClientStoryboard,
@@ -124,6 +128,7 @@ enum EApplet
     eAppletSettingsAboutMe,
     eAppletSettingsAvatarImage,
     eAppletSettingsWebCamServer,
+    eAppletSettingsChatRoom,
     eAppletSettingsConnectTest,
     eAppletSettingsShareFiles,
     eAppletSettingsFileXfer,

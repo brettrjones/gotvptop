@@ -16,6 +16,7 @@
 
 #define OBJNAME_ACTIVITY_ABOUT							"ActivityAbout"
 #define OBJNAME_ACTIVITY_ADD_REMOVE_LIB_FILES			"ActivityAddRemoveLibraryFiles"
+#define OBJNAME_ACTIVITY_APP_SETUP          			"ActivityAppSetup"
 #define OBJNAME_ACTIVITY_BROWSE_FILES					"ActivityBrowseFiles"
 #define OBJNAME_ACTIVITY_CHOOSE_TEST_WEBSITE_URL		"ActivityChooseTestWebsiteUrl"
 #define OBJNAME_ACTIVITY_CREATE_ACCOUNT		            "ActivityCreateAccount"
@@ -72,7 +73,8 @@
 #define OBJNAME_APPLET_ABOUT_APP						"AppletAboutApp"
 #define OBJNAME_APPLET_CREATE_ACCOUNT					"AppletCreateAccount"
 
-#define OBJNAME_APPLET_CLIENT_AVATAR_IMAGE				"AppletServiceAvatarImage"
+#define OBJNAME_APPLET_CLIENT_AVATAR_IMAGE				"AppletClientAvatarImage"
+#define OBJNAME_APPLET_CLIENT_CHAT_ROOM				    "AppletClientChatRoom"
 #define OBJNAME_APPLET_CLIENT_SHARE_FILES				"AppletClientShareFiles"
 #define OBJNAME_APPLET_CLIENT_SHARE_WEB_CAM				"AppletClientShareWebCam"
 #define OBJNAME_APPLET_CLIENT_RANDOM_PERSON			    "AppletClientRandomConnect"
@@ -93,6 +95,7 @@
 
 #define OBJNAME_APPLET_SERVICE_ABOUT_ME				    "AppletServiceAboutMe"
 #define OBJNAME_APPLET_SERVICE_AVATAR_IMAGE				"AppletServiceAvatarImage"
+#define OBJNAME_APPLET_SERVICE_CHAT_ROOM				"AppletServiceChatRoom"
 #define OBJNAME_APPLET_SERVICE_CONNECT_TEST				"AppletServiceConnectTest"
 #define OBJNAME_APPLET_SERVICE_HOST_GROUP				"AppletServiceHostGroup"
 #define OBJNAME_APPLET_SERVICE_HOST_GROUP_LISTING		"AppletServiceHosGroupListingt"
@@ -105,9 +108,9 @@
 #define OBJNAME_APPLET_SERVICE_SHARE_STORYBOARD			"AppletServiceShareStoryboard"
 #define OBJNAME_APPLET_SERVICE_SHARE_WEB_CAM			"AppletServiceShareWebCam"
 
-
 #define OBJNAME_APPLET_SETTINGS_ABOUT_ME				"AppletSettingsAboutMe"
 #define OBJNAME_APPLET_SETTINGS_AVATAR_IMAGE			"AppletSettingsAvatarImage"
+#define OBJNAME_APPLET_SETTINGS_CHAT_ROOM   			"AppletSettingsChatRoom"
 #define OBJNAME_APPLET_SETTINGS_CONNECT_TEST			"AppletSettingsConnectTest"
 #define OBJNAME_APPLET_SETTINGS_FILE_XFER			    "AppletSettingsFileXfer"
 #define OBJNAME_APPLET_SETTINGS_HOST_GROUP				"AppletSettingsHostGroup"

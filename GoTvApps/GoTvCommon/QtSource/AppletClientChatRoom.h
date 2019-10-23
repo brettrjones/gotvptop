@@ -1,6 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2018 Brett R. Jones
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,24 +13,15 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "AppletBase.h"
+#include "AppletClientBase.h"
 
-#include "ui_AppletAboutApp.h"
-
-class AppletAboutApp : public AppletBase
+class AppletClientChatRoom : public AppletClientBase
 {
 	Q_OBJECT
 public:
-    AppletAboutApp( AppCommon& app, QWidget * parent );
-	virtual ~AppletAboutApp();
+    AppletClientChatRoom( AppCommon& app, QWidget * parent );
+	virtual ~AppletClientChatRoom() override;
 
-protected slots:
-    void						gotoWebsite( void );
-
-protected:
-    void						setupAboutMe( void );
-
-    Ui::AppletAboutAppClass     ui;
 };
 
 

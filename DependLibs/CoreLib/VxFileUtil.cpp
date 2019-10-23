@@ -16,6 +16,7 @@
 #include "config_corelib.h"
 
 #include "VxCrypto.h"
+#include "VxFileCopier.h"
 #include "VxFileUtil.h"
 #include "VxFileIsTypeFunctions.h"
 #include "VxGlobals.h"
@@ -25,6 +26,7 @@
 
 #include "SHA1.h"
 
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -648,6 +650,61 @@ RCODE VxFileUtil::copyFile( const char * pOldPath, const char * pNewPath )
 		return 0;
 	#endif // LINUX
 }
+//============================================================================
+//! copy all files and directories to destination directory
+RCODE VxFileUtil::recursiveCopyDirectory( const char * pSrcDir, const char * pDestDir, int64_t& totalCopied )
+{
+    RCODE rc = 0;
+    totalCopied = 0;
+    if( pDestDir && pSrcDir )
+    {
+        LogMsg( LOG_INFO, "recursive copy files from %s to %s\n", pSrcDir, pDestDir );
+
+        std::string curPath = pSrcDir;
+        std::string srcDir = pSrcDir;
+        std::string destDir = pDestDir;
+        std::vector<VxFileInfo> retFileList;
+
+        if( !srcDir.empty() && !destDir.empty() )
+        {
+            //makeForwardSlashPath( srcDir );
+            //makeForwardSlashPath( destDir );
+
+            //assureTrailingDirectorySlash( srcDir );
+            //assureTrailingDirectorySlash( destDir );
+
+            if( directoryExists( srcDir.c_str() ) && directoryExists( destDir.c_str() ) )
+            {
+                VxFileCopier dirCopier;
+                rc = dirCopier.copyDirectory( curPath, srcDir, destDir, retFileList, true );
+                if( !rc )
+                {
+                    for( VxFileInfo& fileInfo : retFileList )
+                    {
+                        totalCopied += fileInfo.getFileLength();
+                    }
+                }
+            }
+            else
+            {
+                rc = EBADF;
+                LogMsg( LOG_ERROR, "recursiveCopyDirectory invalid directory\n" );
+            }
+        }
+        else
+        {
+            rc = EBADF;
+            LogMsg( LOG_ERROR, "recursiveCopyDirectory empty directory path\n" );
+        }
+    }
+    else
+    {
+        rc = EBADF;
+        LogMsg( LOG_ERROR, "recursiveCopyDirectory null param\n" );
+    }
+
+    return rc;
+}
 
 //============================================================================
 RCODE VxFileUtil::deleteFile( const char * pFileName )
@@ -1174,7 +1231,7 @@ RCODE	VxFileUtil::getExecuteFullPathAndName( std::string& strRetExePathAndFileNa
 RCODE	VxFileUtil::getExecuteDirectory( std::string& strRetExeDir )
 {
 	// try cached version first
-	strRetExeDir = VxGetExeDirectory();
+	strRetExeDir = VxGetAppExeDirectory();
 	if (!strRetExeDir.empty())
 	{
 		return 0;

@@ -43,7 +43,7 @@ class ActivityBase : public QDialog, public ObjectCommon, public ToGuiActivityIn
 {
 	Q_OBJECT
 public:
-	ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType = eAppletMessenger, bool isDialog = false, bool isPopup = false );
+	ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType = eAppletMessenger, bool isDialog = false, bool isPopup = false, bool fullWindowSize = false );
 	virtual ~ActivityBase() override = default;
 
 	AppCommon&					getMyApp( void )					{ return m_MyApp; }
@@ -295,5 +295,6 @@ protected:
 	QSize						m_ResizingWindowSize;
     bool						m_IsDialog = false;
     bool						m_IsPopup = false; // center on parent filling about half of parent
+    bool						m_FullWindowSize = false;
     bool						m_InitialFocusWasSet = false;
 };

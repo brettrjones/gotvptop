@@ -208,6 +208,12 @@ void TitleBarWidget::slotBackButtonClicked( void )
 
 //======= button visibility ====//
 //============================================================================
+void TitleBarWidget::setBackButtonVisibility( bool visible )
+{
+    ui.m_BackDlgButton->setVisible( visible );
+}
+
+//============================================================================
 void TitleBarWidget::setCamPreviewVisibility( bool visible )
 {
 	ui.m_CamPreviewScreen->setVisible( visible );
@@ -247,12 +253,6 @@ void TitleBarWidget::setShareButtonVisibility( bool visible )
 void TitleBarWidget::setMenuTopButtonVisibility( bool visible )
 {
 	ui.m_MenuTopButton->setVisible( visible );
-}
-
-//============================================================================
-void TitleBarWidget::setBackButtonVisibility( bool visible )
-{
-	ui.m_BackDlgButton->setVisible( visible );
 }
 
 //============================================================================

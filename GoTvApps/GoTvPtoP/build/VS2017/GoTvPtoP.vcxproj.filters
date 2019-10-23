@@ -879,6 +879,21 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientRandomConnect.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppSetup.cpp">
+      <Filter>GoTvCommon\Source Files\AppCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceChatRoom.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsChatRoom.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityAppSetup.cpp">
+      <Filter>GoTvCommon\Source Files\Activities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientChatRoom.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -1762,6 +1777,21 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletClientRandomConnect.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletServiceChatRoom.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsChatRoom.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityAppSetup.h">
+      <Filter>GoTvCommon\Source Files\Activities</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletClientChatRoom.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppSetup.h">
+      <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -2825,6 +2855,9 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletClientRandomConnect.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityAppSetup.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

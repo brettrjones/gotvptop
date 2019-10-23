@@ -98,7 +98,7 @@ void ActivityInformation::updateInformation( void )
     case eInfoTypeNetworkHost:
         ui.m_PictureLabel->setResourceImage( ":/AppRes/Resources/NetworkDesign.png", true );
         ui.m_PictureLabel->setVisible( true );
-        ui.m_ServiceInfoButton->setIcon( eMyIconServiceNetworkHost );
+        ui.m_ServiceInfoButton->setIcon( eMyIconServiceHostNetwork );
         break;
     default:
         break;

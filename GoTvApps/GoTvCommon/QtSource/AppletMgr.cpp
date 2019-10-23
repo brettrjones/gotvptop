@@ -17,6 +17,7 @@
 #include "AppCommon.h"
 #include "AppSettings.h"
 
+#include "ActivityAppSetup.h"
 #include "ActivityFileSearch.h"
 #include "ActivityPersonalRecorder.h"
 #include "ActivityScanPeopleSearch.h"
@@ -26,6 +27,7 @@
 #include "ActivityScanWebCams.h"
 
 #include "AppletAboutApp.h"
+
 #include "AppletClientRandomConnect.h"
 #include "AppletKodi.h"
 #include "AppletGroupUser.h"
@@ -41,6 +43,7 @@
 
 #include "AppletServiceAboutMe.h"
 #include "AppletServiceAvatarImage.h"
+#include "AppletServiceChatRoom.h"
 #include "AppletServiceConnectionTest.h"
 #include "AppletServiceHostGroup.h"
 #include "AppletServiceHostGroupListing.h"
@@ -51,6 +54,7 @@
 
 #include "AppletSettingsAboutMe.h"
 #include "AppletSettingsAvatarImage.h"
+#include "AppletSettingsChatRoom.h"
 #include "AppletSettingsConnectionTest.h"
 #include "AppletSettingsFileXfer.h"
 #include "AppletSettingsHostGroup.h"
@@ -156,6 +160,9 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 	QString appletMissingTitle = QObject::tr( "Applet Not Yet Implemented" );
 	switch( applet )
 	{
+    case eActivityAppSetup:
+        appletDialog = new ActivityAppSetup( m_MyApp, parent );
+        break;
     case eAppletAboutGoTvPtoP:
         appletDialog = new AppletAboutApp( m_MyApp, parent );
         break;
@@ -235,36 +242,19 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
         appletDialog = new AppletShareServicesPage( m_MyApp, parent );
         break;
 
-    case eAppletServiceAboutMe:
-        appletDialog = new AppletServiceAboutMe( m_MyApp, parent );
-        break;
-    case eAppletServiceAvatarImage:
-        appletDialog = new AppletServiceAvatarImage( m_MyApp, parent );
-        break;
-    case eAppletServiceConnectionTest:
-        appletDialog = new AppletServiceConnectionTest( m_MyApp, parent );
-        break;
-    case eAppletServiceRandomConnect:
-        appletDialog = new AppletServiceRandomConnect( m_MyApp, parent );
-        break;
-    case eAppletServiceRandomConnectRelay:
-        appletDialog = new AppletServiceRandomConnectRelay ( m_MyApp, parent );
-        break;
-    case eAppletServiceRelay:
-        appletDialog = new AppletServiceRelay( m_MyApp, parent );
-        break;
-    case eAppletServiceShareFiles:
-        appletDialog = new AppletServiceShareFiles( m_MyApp, parent );
-        break;
-    case eAppletServiceShareWebCam:
-        appletDialog = new AppletServiceShareWebCam( m_MyApp, parent );
-        break;
-    case eAppletServiceStoryboard:
-        appletDialog = new AppletServiceStoryboard( m_MyApp, parent );
-        break;
+    case eAppletServiceAboutMe:             appletDialog = new AppletServiceAboutMe( m_MyApp, parent ); break;
+    case eAppletServiceAvatarImage:         appletDialog = new AppletServiceAvatarImage( m_MyApp, parent ); break;
+    case eAppletServiceConnectionTest:      appletDialog = new AppletServiceConnectionTest( m_MyApp, parent ); break;
+    case eAppletServiceRandomConnect:       appletDialog = new AppletServiceRandomConnect( m_MyApp, parent ); break;
+    case eAppletServiceRandomConnectRelay:  appletDialog = new AppletServiceRandomConnectRelay ( m_MyApp, parent ); break;
+    case eAppletServiceRelay:               appletDialog = new AppletServiceRelay( m_MyApp, parent ); break;
+    case eAppletServiceShareFiles:          appletDialog = new AppletServiceShareFiles( m_MyApp, parent ); break;
+    case eAppletServiceShareWebCam:         appletDialog = new AppletServiceShareWebCam( m_MyApp, parent ); break;
+    case eAppletServiceStoryboard:          appletDialog = new AppletServiceStoryboard( m_MyApp, parent ); break;
 
     case eAppletSettingsAboutMe:            appletDialog = new AppletSettingsAboutMe( m_MyApp, parent ); break;
     case eAppletSettingsAvatarImage:        appletDialog = new AppletSettingsAvatarImage( m_MyApp, parent ); break;
+    case eAppletSettingsChatRoom:           appletDialog = new AppletSettingsChatRoom( m_MyApp, parent ); break;
     case eAppletSettingsConnectTest:        appletDialog = new AppletSettingsConnectionTest( m_MyApp, parent ); break;
     case eAppletSettingsFileXfer:           appletDialog = new AppletSettingsFileXfer( m_MyApp, parent ); break;
     case eAppletSettingsHostGroup:          appletDialog = new AppletSettingsHostGroup( m_MyApp, parent ); break;

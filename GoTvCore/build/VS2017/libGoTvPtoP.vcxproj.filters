@@ -586,6 +586,9 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseRelayTests.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceChatRoom.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1274,6 +1277,9 @@
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseWebServer.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceChatRoom.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
   </ItemGroup>

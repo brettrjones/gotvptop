@@ -41,7 +41,7 @@
 const int RESIZE_WINDOW_COMPLETED_TIMEOUT = 500;
 
 //============================================================================
-ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType, bool isDialog, bool isPopup )
+ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * parent, EApplet eAppletType, bool isDialog, bool isPopup, bool fullWindowSize )
 : QDialog( parent, 0 )
 , ObjectCommon( objName )
 , m_MyApp( app )
@@ -56,6 +56,7 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
 , m_ResizingTimer( new QTimer(this) )
 , m_IsDialog( isDialog )
 , m_IsPopup( isPopup )
+, m_FullWindowSize( fullWindowSize )
 {
     vx_assert( objName );
     setObjectName( objName );
@@ -107,7 +108,11 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
         //m_WindowFlags = Qt::CoverWindow;
         setWindowFlags( m_WindowFlags );
         m_MyApp.getAppTheme().applyTheme( this );
-        m_ParentWidget = getParentPageFrame();
+        if( !m_FullWindowSize )
+        {
+            m_ParentWidget = getParentPageFrame();
+        }
+
         connect( &m_MyApp, SIGNAL( signalMainWindowMoved() ), this, SLOT( slotRepositionToParent() ) );
 
         LogMsg( LOG_DEBUG, "ActivityBase::ActivityBase: Activity Dialog %s\n", objectName().toUtf8().constData() );

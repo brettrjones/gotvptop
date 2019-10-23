@@ -1973,6 +1973,16 @@ std::string CUtil::ResolveExecutablePath( bool dirOnly )
     buf[ 0 ] = 0;
     ::GetModuleFileNameW( 0, buf, bufSize );
     buf[ bufSize - 1 ] = 0;
+    if( dirOnly )
+    {
+        // remove process name
+        wchar_t * lastSlash = wcsrchr( buf, '\\' );
+        if( lastSlash )
+        {
+            *lastSlash = 0;
+        }
+    }
+
     g_charsetConverter.wToUTF8( buf, strExecutablePath );
     delete[] buf;
     strExecutablePath = WindowsRelativeToAbsolutePath( strExecutablePath );

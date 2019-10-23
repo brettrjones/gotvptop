@@ -57,6 +57,8 @@ notepad.svg
 plugin.svg
 radio-tower.svg
 remote-control.svg
+service-group-chat.svg
+service-group-chat-settings.svg ( modified )
 settings-gear.svg
 share-about-me.svg ( modified )
 share-avatar.svg ( modified )

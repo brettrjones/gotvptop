@@ -95,7 +95,7 @@ RCODE VxFileFinder::FindFilesByExtension(	std::string				csPath,					//start pat
 					{
 						if( ! HasSameExtension( oCurFileNode.getFileName(), acsExtensionList ) )
 						{
-							oCurFileNode.setFileType( fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
+							oCurFileNode.setFileType( VxFileUtil::fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
 							oCurFileNode.setFileLength( ((uint64_t)sFindData.nFileSizeHigh << 32) | sFindData.nFileSizeLow );
     						aoFileList.push_back( oCurFileNode );
 						}
@@ -104,7 +104,7 @@ RCODE VxFileFinder::FindFilesByExtension(	std::string				csPath,					//start pat
 					{
 						if( HasSameExtension( oCurFileNode.getFileName(), acsExtensionList ) )
 						{
-							oCurFileNode.setFileType( fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
+							oCurFileNode.setFileType( VxFileUtil::fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
 							oCurFileNode.setFileLength( ((uint64_t)sFindData.nFileSizeHigh << 32) | sFindData.nFileSizeLow );
 							aoFileList.push_back( oCurFileNode );
 						}
@@ -284,7 +284,7 @@ RCODE VxFileFinder::FindFilesByName(	std::string csPath,	//start path to search 
                 if ( 0 != (sFindData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) )
                 {
 				    if ( ( bRecurse ) 
-						&& ( false == isDotDotDirectory( sFindData.cFileName ) ) )
+						&& ( false == VxFileUtil::isDotDotDirectory( sFindData.cFileName ) ) )
 				    {
 					    FindFilesByName(	oCurFileNode.getFileName(),
 											acsWildNameList,
@@ -301,9 +301,9 @@ RCODE VxFileFinder::FindFilesByName(	std::string csPath,	//start path to search 
 					{
 						if( ! HasMatchingName( oCurFileNode.getFileName(), acsWildNameList ) )
 						{
-							oCurFileNode.setFileType( fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
+							oCurFileNode.setFileType( VxFileUtil::fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
 							oCurFileNode.setFileLength( ((uint64_t)sFindData.nFileSizeHigh << 32) | sFindData.nFileSizeLow );
-							makeForwardSlashPath( oCurFileNode.getFileName() );
+                            VxFileUtil::makeForwardSlashPath( oCurFileNode.getFileName() );
     						aoFileList.push_back( oCurFileNode );
 						}
 					}
@@ -311,9 +311,9 @@ RCODE VxFileFinder::FindFilesByName(	std::string csPath,	//start path to search 
 					{
 						if( HasMatchingName( oCurFileNode.getFileName(), acsWildNameList ) )
 						{
-							oCurFileNode.setFileType( fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
+							oCurFileNode.setFileType( VxFileUtil::fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
 							oCurFileNode.setFileLength( ((uint64_t)sFindData.nFileSizeHigh << 32) | sFindData.nFileSizeLow );
-							makeForwardSlashPath( oCurFileNode.getFileName() );
+                            VxFileUtil::makeForwardSlashPath( oCurFileNode.getFileName() );
 							aoFileList.push_back( oCurFileNode );
 						}
 					}
@@ -383,7 +383,7 @@ RCODE VxFileFinder::FindFilesByName(	std::string csPath,	//start path to search 
 					{
                         if( ! HasMatchingName( oCurFileNode.getFileName(), acsWildNameList ) )
 						{
-                            oCurFileNode.setFileType( fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
+                            oCurFileNode.setFileType( VxFileUtil::fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
                             oCurFileNode.setFileLength( oStat.st_size );
 							aoFileList.push_back( oCurFileNode );
 						}
@@ -392,7 +392,7 @@ RCODE VxFileFinder::FindFilesByName(	std::string csPath,	//start path to search 
 					{
                         if( HasMatchingName( oCurFileNode.getFileName(), acsWildNameList ) )
 						{
-                            oCurFileNode.setFileType( fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
+                            oCurFileNode.setFileType( VxFileUtil::fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
                             oCurFileNode.setFileLength( oStat.st_size );
 							aoFileList.push_back( oCurFileNode );
 						}
@@ -426,7 +426,7 @@ bool VxFileFinder::HasMatchingName( std::string csCurrentNode,
 	int iCnt = (int)acsWildNameList.size();
 	for( int i = 0; i < iCnt; i++ )
 	{
-		if( fileNameWildMatch( csCurrentNode.c_str(), acsWildNameList[ i ].c_str() ) )
+		if( VxFileUtil::fileNameWildMatch( csCurrentNode.c_str(), acsWildNameList[ i ].c_str() ) )
 		{
 			return true;
 		}

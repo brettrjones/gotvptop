@@ -32,14 +32,16 @@ class VxNetIdent;
 class GuiHelpers
 {
 public:
-	static QString				getJustFileName( QString& fileNameAndPath );
-	static void					splitPathAndFileName( QString& fileNameAndPath, QString& retFileName, QString& retPath );
+    static QString				getAvailableStorageSpaceText();
+    static QString				getJustFileName( QString& fileNameAndPath );
+
 	static QString				browseForDirectory( QString startDir = "", QWidget * parent = 0 );
-	static bool					copyResourceToOnDiskFile( QString resourcePath, QString fileNameAndPath );
+    static int					calculateTextHeight( QFontMetrics& fontMetrics, QString textStr );
+    static bool					copyResourceToOnDiskFile( QString resourcePath, QString fileNameAndPath );
 
 	static bool				    playFile( AppCommon& myApp, QString fullFileName, int pos0to100000 );
+    static void					splitPathAndFileName( QString& fileNameAndPath, QString& retFileName, QString& retPath );
 
-    static int					calculateTextHeight( QFontMetrics& fontMetrics, QString textStr );
 
     static bool                 isAppletAService( EApplet applet );
     static bool                 isAppletAClient( EApplet applet );

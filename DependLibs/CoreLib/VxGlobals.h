@@ -25,7 +25,8 @@ class VxGUID;
 enum EAppDir
 {
 	eAppDirUnknown = 0,
-	eAppDirExe,
+	eAppDirAppExe,
+    eAppDirKodiExe,
 	eAppDirExeKodiAssets,
 	eAppDirExeGoTvAssets,
 	eAppDirExePython,
@@ -78,8 +79,11 @@ const char *	            VxGetAppVersionString( void );
 std::string& 	            VxGetAppDirectory( EAppDir appDir );
 
 // exe and app resource paths
-void			            VxSetExeDirectory(const char * exeDir);
-std::string&	            VxGetExeDirectory(void);
+void			            VxSetAppExeDirectory( const char * exeDir );
+std::string&	            VxGetAppExeDirectory( void );
+
+void			            VxSetKodiExeDirectory( const char * exeDir );
+std::string&	            VxGetKodiExeDirectory( void );
 
 void			            VxSetExeKodiAssetsDirectory( const char * assetsDir );
 std::string&	            VxGetExeKodiAssetsDirectory( void );

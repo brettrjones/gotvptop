@@ -270,6 +270,11 @@ bool OsInterface::initUserPaths()
     VxTimer loadTimer;
 #endif // DEBUG
     std::string exePath = CUtil::ResolveExecutablePath( true );
+    std::string appExePath = exePath;
+    VxFileUtil::makeForwardSlashPath( appExePath );
+    VxFileUtil::assureTrailingDirectorySlash( appExePath );
+    VxSetAppExeDirectory( appExePath.c_str() );
+
 #if defined(TARGET_OS_WINDOWS)
 	std::string strHomePath = exePath;
 	// strip off exe name
@@ -556,7 +561,6 @@ bool OsInterface::initUserPaths()
 
     VxFileUtil::makeForwardSlashPath( kodiBinStoragePath );
     VxFileUtil::assureTrailingDirectorySlash( kodiBinStoragePath );
-    VxSetExeDirectory( kodiBinStoragePath.c_str() );
 
     // copy profile files for gotv
     CopyIfRequiredAssetDirectory( exePath + "assets/gotv/profile", gotvStorageDir + "/profile", false );
@@ -564,7 +568,7 @@ bool OsInterface::initUserPaths()
     // set paths so accessable outside of kodi
     VxFileUtil::makeForwardSlashPath( kodiBinStoragePath );
     VxFileUtil::assureTrailingDirectorySlash( kodiBinStoragePath );
-    VxSetExeDirectory( kodiBinStoragePath.c_str() );
+    VxSetKodiExeDirectory( kodiBinStoragePath.c_str() );
 
     VxFileUtil::makeForwardSlashPath( kodiAssetsPath );
     VxFileUtil::assureTrailingDirectorySlash( kodiAssetsPath );

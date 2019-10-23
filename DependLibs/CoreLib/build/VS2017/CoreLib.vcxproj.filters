@@ -23,6 +23,9 @@
     <Filter Include="GoTvConfig\linux">
       <UniqueIdentifier>{bee2905c-d0fb-4512-b494-54911986b5ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="QtBuild">
+      <UniqueIdentifier>{d2acf9d3-3caf-48a2-9c94-fb6dfe5793d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h">
@@ -319,6 +322,9 @@
     <ClInclude Include="..\..\VxXml.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\VxFileCopier.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppErr_corelib.cpp">
@@ -489,5 +495,16 @@
     <ClCompile Include="..\..\VxXml.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\VxFileCopier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\libcorelib.pri">
+      <Filter>QtBuild</Filter>
+    </None>
+    <None Include="..\..\..\..\libcorelib.pro">
+      <Filter>QtBuild</Filter>
+    </None>
   </ItemGroup>
 </Project>

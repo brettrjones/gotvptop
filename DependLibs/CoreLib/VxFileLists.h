@@ -16,7 +16,7 @@
 
 #include "VxFileUtil.h"
 
-class VxFileFinder : public VxFileUtil
+class VxFileFinder
 {
 public:
 	bool m_bAbort;

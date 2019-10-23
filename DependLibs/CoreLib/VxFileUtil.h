@@ -124,7 +124,9 @@ public:
 	static RCODE				deleteFile( const char * pFileName );
 	static RCODE				renameFile( const char * pFileOldName, const char * pFileNewName );
 
-	//! copy files to destination directory then delete the source files
+    //! copy all files and directories to destination directory
+    static RCODE				recursiveCopyDirectory( const char * pSrcDir, const char * pDestDir, int64_t& totalCopied );
+    //! copy files to destination directory then delete the source files
 	static RCODE				moveFiles( char * pDestDir, char * pSrcDir );
 	//! move a file from one directory to another
 	static RCODE				moveAFile( const char * srcFile, const char * destFile );

@@ -64,25 +64,26 @@ namespace
 	bool				g_IsAppCommercial				= false;
 #endif // APP_MYP2PWEB
 	// exe and app resouces paths
-	std::string			g_strExeDir						= "";
+    std::string			g_strAppExeDir                  = "";
+	std::string			g_strKodiExeDir				    = "";
     std::string			g_strExeDirPython				= "";
     std::string			g_strExeDirPythonDlls			= "";
     std::string			g_strExeDirPythonLib			= "";
-    std::string			g_strExeKodiAssetsDir = "";
-	std::string			g_strExeGoTvAssetsDir = "";
+    std::string			g_strExeKodiAssetsDir           = "";
+	std::string			g_strExeGoTvAssetsDir           = "";
 
 	// user writeable paths
-	std::string			g_strRootDataStorageDir = "";
-	std::string			g_strAppTempDir = "";
-	std::string			g_strAppLogsDir = "";
-	std::string			g_strAppGoTvDataDir = "";
-	std::string			g_strAppKodiDataDir = "";
+	std::string			g_strRootDataStorageDir         = "";
+	std::string			g_strAppTempDir                 = "";
+	std::string			g_strAppLogsDir                 = "";
+	std::string			g_strAppGoTvDataDir             = "";
+	std::string			g_strAppKodiDataDir             = "";
 
 	// user specific writable paths
-	std::string			g_strRootUserDataDir = "";
+	std::string			g_strRootUserDataDir            = "";
 
-	std::string			g_strUserSpecificDataDir = "";
-	std::string			g_strUserXferDir = "";
+	std::string			g_strUserSpecificDataDir        = "";
+	std::string			g_strUserXferDir                = "";
 
 	std::string			g_strRootXferDir				= "";
     std::string			g_strUserProfileDir             = "";
@@ -134,8 +135,10 @@ std::string& VxGetAppDirectory(EAppDir appDir)
 {
 	switch (appDir)
 	{
-	case eAppDirExe:
-		return g_strExeDir;
+    case eAppDirAppExe:
+        return g_strAppExeDir;
+	case eAppDirKodiExe:
+		return g_strKodiExeDir;
 	case eAppDirExeKodiAssets:
 		return g_strExeKodiAssetsDir;
 	case eAppDirExeGoTvAssets:
@@ -371,11 +374,15 @@ bool VxIsNetworkLoopbackAllowed( void )
 //============================================================================
 //=== directories ===//
 //============================================================================
+void VxSetAppExeDirectory( const char * exeDir )
+{
+    g_strAppExeDir = exeDir;
+}
 
 //============================================================================
-void VxSetExeDirectory(const char * exeDir)
+void VxSetKodiExeDirectory(const char * exeDir)
 {
-	g_strExeDir = exeDir;
+	g_strKodiExeDir = exeDir;
     g_strExeDirPython = exeDir;
     g_strExeDirPythonDlls = exeDir;
     g_strExeDirPythonDlls = g_strExeDirPythonDlls + PYTHON_RELATIVE_PATH;
@@ -383,12 +390,13 @@ void VxSetExeDirectory(const char * exeDir)
     g_strExeDirPythonDlls = g_strExeDirPythonDlls + "DLLs/";
     g_strExeDirPythonLib = g_strExeDirPythonLib + "Lib/";
 
-	g_strExeKodiAssetsDir = g_strExeDir + "assets/kodi/";
-	g_strExeGoTvAssetsDir = g_strExeDir + "assets/gotv/";
+	g_strExeKodiAssetsDir = g_strKodiExeDir + "assets/kodi/";
+	g_strExeGoTvAssetsDir = g_strKodiExeDir + "assets/gotv/";
 }
 
 //============================================================================
-std::string& VxGetExeDirectory(void) { return g_strExeDir; }
+std::string& VxGetAppExeDirectory( void ) { return g_strAppExeDir; }
+std::string& VxGetKodiExeDirectory(void) { return g_strKodiExeDir; }
 
 void VxSetExeKodiAssetsDirectory(const char * assetsDir){ g_strExeKodiAssetsDir = assetsDir; }
 std::string& VxGetExeKodiAssetsDirectory( void ) { return g_strExeKodiAssetsDir; }

@@ -31,13 +31,13 @@ public:
 	void						setFileName( std::string fileName )		{ m_FileName = fileName; }
 	std::string&				getFileName( void )						{ return m_FileName; }
 	const char *				getFileNameConstString( void ) const	{ return m_FileName.c_str(); }
-	void						setFileType( uint8_t	fileType )				{ m_u8FileType = fileType; }
-	uint8_t							getFileType( void ) const				{ return m_u8FileType; }
-	void						setFileLength( int64_t fileLen )			{ m_s64FileLen = fileLen; }
-	int64_t							getFileLength( void ) const				{ return m_s64FileLen; }
+	void						setFileType( uint8_t	fileType )		{ m_u8FileType = fileType; }
+	uint8_t						getFileType( void ) const				{ return m_u8FileType; }
+	void						setFileLength( int64_t fileLen )		{ m_s64FileLen = fileLen; }
+	int64_t						getFileLength( void ) const				{ return m_s64FileLen; }
 	VxSha1Hash&					getFileHashId( void )					{ return m_FileHashId; }
 	void						setFileHashId( VxSha1Hash& id )			{ m_FileHashId = id; }
-	void						setFileHashData( uint8_t * hashData )		{ m_FileHashId.setHashData( hashData ); }
+	void						setFileHashData( uint8_t * hashData )	{ m_FileHashId.setHashData( hashData ); }
 
 	void						setIsInLibrary( bool inLibaray )		{ m_IsInLibrary = inLibaray; }
 	bool						getIsInLibrary( void ) const			{ return m_IsInLibrary; }
@@ -55,8 +55,8 @@ public:
 
 protected:
 	//=== vars ===//
-	int64_t							m_s64FileLen;
-	uint8_t							m_u8FileType;
+	int64_t						m_s64FileLen;
+	uint8_t						m_u8FileType;
 	VxSha1Hash					m_FileHashId;
 	bool						m_IsInLibrary;
 	bool						m_IsShared;

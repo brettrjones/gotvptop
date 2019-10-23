@@ -15,8 +15,10 @@
 
 #include "AppCommon.h"	
 #include "AppSettings.h"
+#include "AppSetup.h"
 #include "AppletMgr.h"
 
+#include "ActivityAppSetup.h"
 #include "ActivityCreateAccount.h"
 
 #include "GuiHelpers.h"
@@ -51,7 +53,31 @@ static uint64_t getQuuidHiPart( QUuid& uuid )
 //============================================================================
 void AppCommon::doLogin()
 {
+    AppSetup appSetup;
+    if( false == appSetup.areUserAssetsInitilized() )
+    {
+        m_AppSetupDlg = new ActivityAppSetup( *this, &getHomePage() );
+        m_AppSetupDlg->show();
+    }
+    else
+    {
+        doLoginStep2();
+    }
+}
 
+//============================================================================
+void AppCommon::slotCheckSetupTimer()
+{
+    if( m_AppSetupDlg && m_AppSetupDlg->isSetupCompleted() )
+    {
+        m_AppSetupDlg->close();
+        doLoginStep2();
+    }
+}
+
+//============================================================================
+void AppCommon::doLoginStep2()
+{
 doover:
     bool bLastUserAccountLoaded = loadLastUserAccount();
     if( bLastUserAccountLoaded )

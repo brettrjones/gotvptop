@@ -28,6 +28,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/CoreLib/VxCrypto.h \
     $$PWD/DependLibs/CoreLib/VxDebug.h \
     $$PWD/DependLibs/CoreLib/VxDefs.h \
+    $$PWD/DependLibs/CoreLib/VxFileCopier.h \
     $$PWD/DependLibs/CoreLib/VxFileCrc32.h \
     $$PWD/DependLibs/CoreLib/VxFileInfo.h \
     $$PWD/DependLibs/CoreLib/VxFileIsTypeFunctions.h \
@@ -83,6 +84,7 @@ SOURCES += 	\
     $$PWD/DependLibs/CoreLib/VxCrypto.cpp \
     $$PWD/DependLibs/CoreLib/VxDebug.cpp \
     $$PWD/DependLibs/CoreLib/VxDefs.cpp \
+    $$PWD/DependLibs/CoreLib/VxFileCopier.cpp \
     $$PWD/DependLibs/CoreLib/VxFileCrc32.cpp \
     $$PWD/DependLibs/CoreLib/VxFileInfo.cpp \
     $$PWD/DependLibs/CoreLib/VxFileIsTypeFunctions.cpp \

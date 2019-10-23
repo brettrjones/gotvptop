@@ -168,8 +168,10 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconIgnored:
 		return ":/AppRes/Resources/forbidden.svg";
 
-	case eMyIconWebCamClient:
-		return ":/AppRes/Resources/webcam-client.svg";
+    case eMyIconClientChatRoom:
+        return ":/AppRes/Resources/client-chat-room.svg";
+    case eMyIconClientWebCam:
+		return ":/AppRes/Resources/client-webcam.svg";
 
 	case eMyIconRelay:
 		return ":/AppRes/Resources/question_mark.svg";
@@ -604,13 +606,15 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/share-services.svg";
     case eMyIconServiceAvatarImage:
         return ":/AppRes/Resources/share-avatar.svg";
+    case eMyIconServiceChatRoom:
+        return ":/AppRes/Resources/service-chat-room.svg";
     case eMyIconServiceConnectionTest:
         return ":/AppRes/Resources/service-connection-test.svg";
-    case eMyIconServiceGroupHost:
+    case eMyIconServiceHostGroup:
         return ":/AppRes/Resources/service-group-host.svg";
-    case eMyIconServiceGroupListingHost:
+    case eMyIconServiceHostGroupListing:
         return ":/AppRes/Resources/service-group-listing-host.svg";
-    case eMyIconServiceNetworkHost:
+    case eMyIconServiceHostNetwork:
         return ":/AppRes/Resources/service-network-host.svg";
     case eMyIconServiceShareAboutMe:
         return ":/AppRes/Resources/share-about-me.svg";
@@ -631,6 +635,8 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
         return ":/AppRes/Resources/share-about-me-settings.svg";
     case eMyIconSettingsAvatarImage:
         return ":/AppRes/Resources/share-avatar-settings.svg";
+    case eMyIconSettingsChatRoom:
+        return ":/AppRes/Resources/service-chat-room-settings.svg";
     case eMyIconSettingsConnectionTest:
         return ":/AppRes/Resources/service-connection-test-settings.svg";
     case eMyIconSettingsHostGroup:
@@ -728,13 +734,13 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
         return eMyIconSettingsShareFiles;
 
     case ePluginTypeHostGroup:
-        return eMyIconServiceGroupHost;
+        return eMyIconServiceHostGroup;
 
     case ePluginTypeHostGroupListing:
-        return eMyIconServiceGroupListingHost;
+        return eMyIconServiceHostGroupListing;
 
     case ePluginTypeHostNetwork:
-        return eMyIconServiceNetworkHost;
+        return eMyIconServiceHostNetwork;
 
     case ePluginTypeMessenger:
         return eMyIconMessenger; // eMyIconMultiSession
@@ -974,15 +980,15 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
         break;
 
     case ePluginTypeHostGroup:
-        return eMyIconServiceGroupHost;
+        return eMyIconServiceHostGroup;
         break;
 
     case ePluginTypeHostGroupListing:
-        return eMyIconServiceGroupListingHost;
+        return eMyIconServiceHostGroupListing;
         break;
 
     case ePluginTypeHostNetwork:
-        return eMyIconServiceNetworkHost;
+        return eMyIconServiceHostNetwork;
         break;
 
 	default:

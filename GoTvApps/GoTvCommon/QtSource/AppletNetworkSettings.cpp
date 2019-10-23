@@ -44,7 +44,7 @@ AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
     ui.m_NetworkHostInfoButton->setIcon( eMyIconInformation );
-    ui.m_NetworkHostButton->setIcon( eMyIconServiceNetworkHost );
+    ui.m_NetworkHostButton->setIcon( eMyIconServiceHostNetwork );
     ui.m_NetworkKeyInfoButton->setIcon( eMyIconInformation );
     ui.m_NetworkKeyButton->setIcon( eMyIconNetworkKey );
 

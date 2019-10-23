@@ -21,6 +21,7 @@
 #include <CoreLib/VxFileIsTypeFunctions.h>
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxFileUtil.h>
+#include <CoreLib/VxGlobals.h>
 #include <CoreLib/ObjectCommon.h>
 
 #include <QDesktopServices>
@@ -122,6 +123,12 @@ void GuiHelpers::splitPathAndFileName( QString& fileNameAndPath, QString& retFil
 			retPath = fileNameAndPath.left( lastSlashIdx );
 		}
 	}
+}
+
+//============================================================================
+QString GuiHelpers::getAvailableStorageSpaceText()
+{
+    return describeFileLength( VxFileUtil::getDiskFreeSpace( VxGetAppDirectory( eAppDirRootDataStorage ).c_str() ) );
 }
 
 //============================================================================
@@ -344,30 +351,36 @@ QString GuiHelpers::describeEXferState( EXferState xferState )
 //============================================================================
 QString GuiHelpers::describeFileLength( uint64_t fileLen )
 {
-	std::string strLen;
+    QString scaleText;
+    char buf[ 128 ];
 	if( fileLen >= 1000000000000ULL )
 	{
-		StdStringFormat( strLen, "%3.1fTB ", (double)(fileLen) / 1000000000000.0);
+        scaleText = QObject::tr( "TB" );
+		sprintf( buf, "%3.1f ", (double)(fileLen) / 1000000000000.0);
 	}
 	else if( fileLen >= 1000000000ULL )
 	{
-		StdStringFormat( strLen, "%3.1fGB ", (double)(fileLen) / 1000000000.0);
+        scaleText = QObject::tr( "GB" );
+        sprintf( buf, "%3.1f ", (double)(fileLen) / 1000000000.0);
 	}
 	else if( fileLen >= 1000000 )
 	{
-		StdStringFormat( strLen, "%3.1fMB ", (double)(fileLen) / 1000000.0);
+        scaleText = QObject::tr( "MB" );
+        sprintf( buf, "%3.1fMB ", (double)(fileLen) / 1000000.0);
 	}
 	else if( fileLen >= 1000 )
 	{
-		StdStringFormat( strLen, "%3.1fKB ", (double)(fileLen) / 1000.0);
+        scaleText = QObject::tr( "KB" );
+        sprintf( buf, "%3.1fKB ", (double)(fileLen) / 1000.0);
 	}
 	else
 	{
-		StdStringFormat( strLen, "%3.1fBytes ", (double)fileLen );
+        scaleText = QObject::tr( "Bytes" );
+        sprintf( buf, "%3.1fBytes ", (double)fileLen );
 	}
 
-	QString strFormatedLen = strLen.c_str();
-	return strFormatedLen;
+	QString strFormatedLen = buf;
+	return strFormatedLen + scaleText;
 }
 
 //============================================================================
@@ -394,8 +407,8 @@ bool GuiHelpers::isAppletAClient( EApplet applet )
     return ( ( eAppletClientAboutMe == applet )
              || ( eAppletClientAvatarImage == applet )
              || ( eAppletClientConnectionTest == applet )
-             || ( eAppletClientGroupHost == applet )
-             || ( eAppletClientGroupListingHost == applet )
+             || ( eAppletClientHostGroup == applet )
+             || ( eAppletClientHostGroupListing == applet )
              || ( eAppletClientRandomConnect == applet )
              || ( eAppletClientRandomConnectRelay == applet )
              || ( eAppletClientShareFiles == applet )
@@ -414,9 +427,9 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletClientAboutMe:              return ePluginTypeAboutMePage;
     case eAppletClientAvatarImage:          return ePluginTypeAvatarImage;
     case eAppletClientConnectionTest:       return ePluginTypeConnectTest;
-    case eAppletClientGroupHost:            return ePluginTypeHostGroup;
-    case eAppletClientGroupListingHost:     return ePluginTypeHostGroupListing;
-    case eAppletClientNetworkHost:          return ePluginTypeHostNetwork;
+    case eAppletClientHostGroup:            return ePluginTypeHostGroup;
+    case eAppletClientHostGroupListing:     return ePluginTypeHostGroupListing;
+    case eAppletClientHostNetwork:          return ePluginTypeHostNetwork;
     case eAppletClientRandomConnect:         return ePluginTypeRandomConnect;
     case eAppletClientRandomConnectRelay:    return ePluginTypeRandomConnectRelay;
     case eAppletClientShareFiles:           return ePluginTypeFileServer;

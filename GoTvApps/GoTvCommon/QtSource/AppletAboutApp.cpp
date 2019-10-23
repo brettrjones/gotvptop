@@ -15,8 +15,8 @@
 #include "AppletAboutApp.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
+#include "GuiHelpers.h"
 #include "MyIcons.h"
-#include "AppCommon.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <CoreLib/IsBigEndianCpu.h>
@@ -48,6 +48,7 @@ AppletAboutApp::AppletAboutApp( AppCommon& app, QWidget * parent )
 //============================================================================
 void AppletAboutApp::setupAboutMe( void )
 {
+    ui.m_AvailSpace->setText( GuiHelpers::getAvailableStorageSpaceText() );
     LogMsg( LOG_INFO, "htonl 4 = 0x%x\n", ntohl( 4L ) );
     VxNetIdent oMyIdent;
     m_FromGui.fromGuiQueryMyIdent( &oMyIdent );

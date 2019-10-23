@@ -193,10 +193,12 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_CamSourceId( 1 )
 , m_CamCaptureRotation( 0 )
 , m_AppletMgr( *( new AppletMgr( *this, this) ) )
+, m_CheckSetupTimer( new QTimer( this ) )
 {
     g_AppCommon = this; // crap.. need a global instance that can accessed immediately with GetAppInstance() for objects created in ui files
 
     connect( m_OncePerSecondTimer, SIGNAL( timeout() ), &m_OffersMgr, SLOT( slotOncePerSecond() ) );
+    connect( m_CheckSetupTimer, SIGNAL( timeout() ), this, SLOT( slotCheckSetupTimer() ) );
 }
 
 //============================================================================

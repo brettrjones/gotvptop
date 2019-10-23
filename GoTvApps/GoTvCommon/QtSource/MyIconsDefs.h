@@ -33,7 +33,8 @@ enum EMyIcons
 	eMyIconAnonymous,
 	eMyIconIgnored,
 
-	eMyIconWebCamClient,
+    eMyIconClientChatRoom,
+    eMyIconClientWebCam,
 
 	eMyIconRelay,
 	eMyIconRelayLocked,
@@ -294,10 +295,11 @@ enum EMyIcons
     eMyIconShareServices,
 
     eMyIconServiceAvatarImage,
+    eMyIconServiceChatRoom,
     eMyIconServiceConnectionTest,
-    eMyIconServiceGroupHost,
-    eMyIconServiceGroupListingHost,
-    eMyIconServiceNetworkHost,
+    eMyIconServiceHostGroup,
+    eMyIconServiceHostGroupListing,
+    eMyIconServiceHostNetwork,
     eMyIconServiceShareAboutMe,
     eMyIconServiceShareFiles,
     eMyIconServiceShareStoryboard,
@@ -308,6 +310,7 @@ enum EMyIcons
 
     eMyIconSettingsAboutMe,
     eMyIconSettingsAvatarImage,
+    eMyIconSettingsChatRoom,
     eMyIconSettingsConnectionTest,
     eMyIconSettingsHostGroup,
     eMyIconSettingsHostGroupListing,
@@ -318,11 +321,11 @@ enum EMyIcons
     eMyIconSettingsRandomConnect,
     eMyIconSettingsRandomConnectRelay,
     eMyIconSettingsRelay,
-        eMyIconFileXfer,
-        eMyIconSettingsFileXfer,
+    eMyIconFileXfer,
+    eMyIconSettingsFileXfer,
     eMyIconSettingsMessenger,
-        eMyIconTruthOrDare,
-        eMyIconSettingsTruthOrDare,
+    eMyIconTruthOrDare,
+    eMyIconSettingsTruthOrDare,
     eMyIconSettingsVoicePhone,
     eMyIconSettingsVideoPhone,
 

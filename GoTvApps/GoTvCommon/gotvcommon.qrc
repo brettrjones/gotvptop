@@ -146,7 +146,6 @@
         <file>Resources/videocam-record.svg</file>
         <file>Resources/video-motion-record.svg</file>
         <file>Resources/forbidden.svg</file>
-        <file>Resources/webcam-client.svg</file>
         <file>Resources/webcam-server.svg</file>
         <file>Resources/notify-dot.svg</file>
         <file>Resources/file-folder-up-directory.svg</file>
@@ -244,5 +243,10 @@
         <file>Resources/messenger-settings.svg</file>
         <file>Resources/truth-or-dare.svg</file>
         <file>Resources/truth-or-dare-settings.svg</file>
+        <file>Resources/service-chat-room.svg</file>
+        <file>Resources/service-chat-room-settings.svg</file>
+        <file>Resources/client-chat-room.svg</file>
+        <file>Resources/client-chat-room-settings.svg</file>
+        <file>Resources/client-webcam.svg</file>
     </qresource>
 </RCC>

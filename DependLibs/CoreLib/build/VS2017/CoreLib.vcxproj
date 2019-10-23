@@ -282,6 +282,7 @@
     <ClInclude Include="..\..\VxCrypto.h" />
     <ClInclude Include="..\..\VxDebug.h" />
     <ClInclude Include="..\..\VxDefs.h" />
+    <ClInclude Include="..\..\VxFileCopier.h" />
     <ClInclude Include="..\..\VxFileCrc32.h" />
     <ClInclude Include="..\..\VxFileInfo.h" />
     <ClInclude Include="..\..\VxFileIsTypeFunctions.h" />
@@ -345,6 +346,7 @@
     <ClCompile Include="..\..\VxCrypto.cpp" />
     <ClCompile Include="..\..\VxDebug.cpp" />
     <ClCompile Include="..\..\VxDefs.cpp" />
+    <ClCompile Include="..\..\VxFileCopier.cpp" />
     <ClCompile Include="..\..\VxFileCrc32.cpp" />
     <ClCompile Include="..\..\VxFileInfo.cpp" />
     <ClCompile Include="..\..\VxFileIsTypeFunctions.cpp" />
@@ -378,6 +380,10 @@
     <ClCompile Include="..\..\VxUrl.cpp" />
     <ClCompile Include="..\..\VxValuePair.cpp" />
     <ClCompile Include="..\..\VxXml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\libcorelib.pri" />
+    <None Include="..\..\..\..\libcorelib.pro" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
