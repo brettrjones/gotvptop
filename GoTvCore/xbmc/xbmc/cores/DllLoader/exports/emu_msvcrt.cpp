@@ -162,7 +162,7 @@ extern "C" void __stdcall init_emu_environ()
     // android does not translate correctly
     std::string sysPath( "PATH=.;" + VxGetAppDirectory( eAppDirExeKodiAssets ) + ";" + VxGetAppDirectory( eAppDirExePython ) + ";" +  VxGetAppDirectory( eAppDirExePythonDlls ) );
 #else
-    std::string sysPath( "PATH=.;" + CSpecialProtocol::TranslatePath( "special://xbmc" ) + ";" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python" ) );
+    std::string sysPath( "PATH=.;" + CSpecialProtocol::TranslatePath( "special://xbmc" ) + ";" + CSpecialProtocol::TranslatePath( "special://xbmc/system/python" ) + ";" + VxGetAppDirectory( eAppDirAppExe ) );
 #endif // defined( TARGET_OS_ANDROID )
     //CLog::Log( LOGDEBUG, "python path (%s)\n home (%s)\n sys path (%s)", pythonPath.c_str(), pythonHome.c_str(), sysPath.c_str() );
     LogMsg( LOG_DEBUG, "python path (%s)\n home (%s)\n sys path (%s)", pythonPath.c_str(), pythonHome.c_str(), sysPath.c_str() );

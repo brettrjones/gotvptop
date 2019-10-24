@@ -53,16 +53,16 @@ static uint64_t getQuuidHiPart( QUuid& uuid )
 //============================================================================
 void AppCommon::doLogin()
 {
-    AppSetup appSetup;
-    if( false == appSetup.areUserAssetsInitilized() )
-    {
-        m_AppSetupDlg = new ActivityAppSetup( *this, &getHomePage() );
-        m_AppSetupDlg->show();
-    }
-    else
-    {
+    //AppSetup appSetup;
+    //if( false == appSetup.areUserAssetsInitilized() )
+    //{
+    //    m_AppSetupDlg = new ActivityAppSetup( *this, &getHomePage() );
+    //    m_AppSetupDlg->show();
+    //}
+    //else
+    //{
         doLoginStep2();
-    }
+    //}
 }
 
 //============================================================================

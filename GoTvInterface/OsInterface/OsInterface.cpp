@@ -277,6 +277,7 @@ bool OsInterface::initUserPaths()
 
 #if defined(TARGET_OS_WINDOWS)
 	std::string strHomePath = exePath;
+    /* Not needed i think ??
 	// strip off exe name
 	size_t last_sep = strHomePath.find_last_of(PATH_SEPARATOR_CHAR);
 	if (last_sep != std::string::npos)
@@ -304,6 +305,7 @@ bool OsInterface::initUserPaths()
 			delete[] buf;
 		}
 	}
+    */
 #elif defined(TARGET_OS_ANDROID)
     CJNIContext& jniContext = CJNIContext::getJniContext();
     AAssetManager* assetMgr = jniContext.getAssetManager();
@@ -493,16 +495,23 @@ bool OsInterface::initUserPaths()
     std::string storageDir = VxGetRootDataStorageDirectory();
 
     std::string cachedPath = storageDir + "kodi/cache";
+    VxFileUtil::makeDirectory( cachedPath );
     std::string kodiCachedAssetsPath = cachedPath + "/kodi";
+    VxFileUtil::makeDirectory( kodiCachedAssetsPath );
     std::string kodiBinStoragePath = kodiCachedAssetsPath + "/libs";
+    VxFileUtil::makeDirectory( kodiBinStoragePath );
 
-    std::string kodiAssetsPath = exePath + "/assets/kodi";
+    std::string kodiExeAssetsPath = exePath + "/assets/kodi";
 
     std::string kodiStoragePath = storageDir + "kodi";
+    VxFileUtil::makeDirectory( kodiStoragePath );
     std::string gotvStorageDir = storageDir + "gotv";
+    VxFileUtil::makeDirectory( gotvStorageDir );
     std::string tempDir = storageDir + "temp";
+    VxFileUtil::makeDirectory( gotvStorageDir );
     std::string logsDir = storageDir + "logs";
-    //VxFileUtil::makeForwardSlashPath( exePath );
+    VxFileUtil::makeDirectory( gotvStorageDir );
+
 #ifdef TARGET_OS_WINDOWS
     // must have backward slash path for python in windows
     std::string pythonPath = exePath + "\\assets\\kodi\\system\\Python";
@@ -518,14 +527,14 @@ bool OsInterface::initUserPaths()
     VxSetPythonLibDirectory( pythonLibs.c_str() );
 
 #ifdef DEBUG
-    LogMsg( LOG_DEBUG, "storage (%s) kodi (%s) gotv (%s) log (%s) ", storageDir.c_str(), kodiStoragePath.c_str(), gotvStorageDir.c_str(), logsDir.c_str() );
+    LogMsg( LOG_VERBOSE, "storage (%s) kodi (%s) gotv (%s) log (%s) ", storageDir.c_str(), kodiStoragePath.c_str(), gotvStorageDir.c_str(), logsDir.c_str() );
 #endif // DEBUG
 
     // home of install distrubuted assets ( for android this is cached asset in storage/apk/assets/kodi )
     setenv( "KODI_HOME", kodiStoragePath.c_str(), 0 );
 
     // normally this would be the execuatable binary assets path
-    setenv( "KODI_BIN_HOME", kodiAssetsPath.c_str(), 0 );
+    setenv( "KODI_BIN_HOME", kodiExeAssetsPath.c_str(), 0 );
 
     // this is where downloaded binary extentions to kodi executable is put
     setenv( "KODI_BINADDON_PATH", kodiBinStoragePath.c_str(), 0 );
@@ -543,15 +552,23 @@ bool OsInterface::initUserPaths()
 
     // map our special drives
 
-    VxFileUtil::makeForwardSlashPath( kodiAssetsPath );
-    CSpecialProtocol::SetXBMCPath( kodiAssetsPath );
+    VxFileUtil::makeForwardSlashPath( kodiExeAssetsPath );
+    CSpecialProtocol::SetXBMCPath( kodiExeAssetsPath );
+    CSpecialProtocol::SetXBMCBinPath( kodiExeAssetsPath );
 
-    CSpecialProtocol::SetXBMCBinPath( kodiBinStoragePath );
-    CSpecialProtocol::SetXBMCBinAddonPath( kodiCachedAssetsPath + "/addons" );
-    CSpecialProtocol::SetXBMCAltBinAddonPath( kodiStoragePath + "/addons" );
+    std::string binAddonPath = kodiCachedAssetsPath + "/addons";
+    VxFileUtil::makeDirectory( binAddonPath );
+    CSpecialProtocol::SetXBMCBinAddonPath( binAddonPath );
+
+    std::string binAltAddonPath = kodiStoragePath + "/addons";
+    VxFileUtil::makeDirectory( binAltAddonPath );
+    CSpecialProtocol::SetXBMCAltBinAddonPath( binAltAddonPath );
 
     CSpecialProtocol::SetHomePath( kodiStoragePath );
-    CSpecialProtocol::SetMasterProfilePath( kodiStoragePath + "/userdata" );
+
+    std::string masterProfilePath = kodiStoragePath + "/userdata";
+    VxFileUtil::makeDirectory( masterProfilePath );
+    CSpecialProtocol::SetMasterProfilePath( masterProfilePath );
 
     CSpecialProtocol::SetTempPath( tempDir );
     CSpecialProtocol::SetLogPath( logsDir );
@@ -570,9 +587,9 @@ bool OsInterface::initUserPaths()
     VxFileUtil::assureTrailingDirectorySlash( kodiBinStoragePath );
     VxSetKodiExeDirectory( kodiBinStoragePath.c_str() );
 
-    VxFileUtil::makeForwardSlashPath( kodiAssetsPath );
-    VxFileUtil::assureTrailingDirectorySlash( kodiAssetsPath );
-    VxSetExeKodiAssetsDirectory( kodiAssetsPath.c_str() );
+    VxFileUtil::makeForwardSlashPath( kodiExeAssetsPath );
+    VxFileUtil::assureTrailingDirectorySlash( kodiExeAssetsPath );
+    VxSetExeKodiAssetsDirectory( kodiExeAssetsPath.c_str() );
 
     VxFileUtil::makeForwardSlashPath( gotvStorageDir );
     VxFileUtil::assureTrailingDirectorySlash( gotvStorageDir );
@@ -582,33 +599,48 @@ bool OsInterface::initUserPaths()
     // move some requried files into place for initial startup
 
     // advanced settings requires settings.xml
-    std::string settingsXmlFile = CSpecialProtocol::TranslatePath( "special://xbmc/system/settings/settings.xml" );
-    if( !VxFileUtil::fileExists( settingsXmlFile.c_str() ) )
+    std::string settingsXmlCachedPath = kodiStoragePath + "/system/settings/";
+    std::string settingsXmlCachedFile = settingsXmlCachedPath + "settings.xml";
+    std::string settingsXmlBinFile = CSpecialProtocol::TranslatePath( "special://xbmc/system/settings/settings.xml" );
+    if( !VxFileUtil::fileExists( settingsXmlCachedFile.c_str() ) )
     {
-        CopyIfRequiredAssetFile( exePath + "assets/kodi/system/settings/settings.xml", settingsXmlFile );
-        if( !VxFileUtil::fileExists( settingsXmlFile.c_str() ) )
+        VxFileUtil::makeDirectory( settingsXmlCachedPath );
+        CopyIfRequiredAssetFile( settingsXmlBinFile, settingsXmlCachedFile );
+        if( !VxFileUtil::fileExists( settingsXmlCachedFile.c_str() ) )
         {
-            LogMsg( LOG_ERROR, "ERROR could not open settings file %s", settingsXmlFile.c_str() );
+            LogMsg( LOG_ERROR, "ERROR could not copy settings file %s", settingsXmlCachedFile.c_str() );
         }
     }
 
     std::string cacert = CEnvironment::getenv( "SSL_CERT_FILE" );
     if( cacert.empty() || !VxFileUtil::fileExists( ( cacert.c_str() ) ) )
     {
-        // android assumes the cert file has been cached.. force update of cached file
-        std::string cacertFile = CSpecialProtocol::TranslatePath( "special://xbmc/system/certs/cacert.pem" );
-        if( !VxFileUtil::fileExists( cacertFile.c_str() ) )
+        std::string xbmcCachedCertPath = kodiStoragePath + "/system/certs/";
+        std::string xbmcCachedCertFile = xbmcCachedCertPath + "cacert.pem";
+
+        if( !VxFileUtil::fileExists( xbmcCachedCertFile.c_str() ) )
         {
-            CopyIfRequiredAssetFile( kodiAssetsPath + "system/certs/cacert.pem", cacertFile );
+            VxFileUtil::makeDirectory( xbmcCachedCertPath );
+            // android assumes the cert file has been cached.. force update of cached file
+            std::string cacertBinFile = CSpecialProtocol::TranslatePath( "special://xbmc/system/certs/cacert.pem" );
+            if( !VxFileUtil::fileExists( cacertBinFile.c_str() ) )
+            {
+                LogMsg( LOG_ERROR, "ERROR could not open cert file %s", cacertBinFile.c_str() );
+            }
+            else
+            {
+                CopyIfRequiredAssetFile( cacertBinFile, xbmcCachedCertFile );
+            }
+
+            if( !VxFileUtil::fileExists( xbmcCachedCertFile.c_str() ) )
+            {
+                LogMsg( LOG_ERROR, "ERROR could not copy cert file %s", xbmcCachedCertPath.c_str() );
+            }
         }
 
-        if( !VxFileUtil::fileExists( cacertFile.c_str() ) )
+        if( !xbmcCachedCertFile.empty() )
         {
-            LogMsg( LOG_ERROR, "ERROR could not open cert file %s", cacertFile.c_str() );
-        }
-        else if( cacert.empty() )
-        {
-            CEnvironment::setenv( "SSL_CERT_FILE", cacertFile );
+            CEnvironment::setenv( "SSL_CERT_FILE", xbmcCachedCertFile );
         }
     }
 
@@ -623,25 +655,27 @@ bool OsInterface::initUserPaths()
     // Python
     //gotvDir = VxGetAppDirectory( eAppDirExePython ).c_str();
     CSpecialProtocol::SetPath( "special://xbmc/system/python", pythonPath.c_str() );
-    LogMsg( LOG_DEBUG, "python path %s", pythonPath.c_str() );
+    LogMsg( LOG_VERBOSE, "python home path %s", pythonPath.c_str() );
+    CEnvironment::setenv( "PYTHONHOME", pythonPath.c_str() );
 
     //gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExePythonDlls ).c_str() );
     //gotvDir = VxGetAppDirectory( eAppDirExePythonDlls ).c_str();
     CSpecialProtocol::SetPath( "special://xbmc/system/python/DLLs", pythonDlls.c_str() );
-    LogMsg( LOG_DEBUG, "python dlls %s", pythonDlls.c_str() );
+    LogMsg( LOG_VERBOSE, "python dlls %s", pythonDlls.c_str() );
 
     //gotvDir = VxFileUtil::makeKodiPath( VxGetAppDirectory( eAppDirExePythonLibs ).c_str() );
     //gotvDir = VxGetAppDirectory( eAppDirExePythonLibs ).c_str();
     CSpecialProtocol::SetPath( "special://xbmc/system/python/Lib", pythonLibs.c_str() );
-    LogMsg( LOG_DEBUG, "python lib %s", pythonLibs.c_str() );
+    LogMsg( LOG_VERBOSE, "python lib %s", pythonLibs.c_str() );
 
     // Kodi master profile path ( In Roaming pm windows )
     gotvDir = CSpecialProtocol::TranslatePath( "special://masterprofile/" );
     CEnvironment::setenv( CCompileInfo::GetUserProfileEnvName(), gotvDir.c_str() );
+    LogMsg( LOG_VERBOSE, "master profile path %s", gotvDir.c_str() );
 #endif //  defined(TARGET_OS_ANDROID)
 
 #ifdef DEBUG
-    LogMsg( LOG_DEBUG, "Initalize directories took %3.3f sec", loadTimer.elapsedSec() );
+    LogMsg( LOG_VERBOSE, "Initalize directories took %3.3f sec", loadTimer.elapsedSec() );
 #endif // DEBUG
 	return true;
 }

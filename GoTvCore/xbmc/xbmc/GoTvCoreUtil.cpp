@@ -2031,10 +2031,13 @@ std::string CUtil::ResolveExecutablePath( bool dirOnly )
     if( ret != -1 )
         buf[ ret ] = 0;
     // remove process name
-    char * lastSlash = strrchr( buf, '/' );
-    if( lastSlash )
+    if( !dirOnly )
     {
-        *lastSlash = 0;
+        char * lastSlash = strrchr( buf, '/' );
+        if( lastSlash )
+        {
+            *lastSlash = 0;
+        }
     }
 
     strExecutablePath = buf;
