@@ -25,7 +25,7 @@ class VxSpinProgress : public QLabel
 public:
 	VxSpinProgress(QWidget *parent=0, Qt::WindowFlags f=0);
 	VxSpinProgress(const QString &text, QWidget *parent=0, Qt::WindowFlags f=0);
-	virtual ~VxSpinProgress();
+	virtual ~VxSpinProgress() = default;
 
 	QSize						sizeHint() const;
 	void						setValue( int progressPercent );

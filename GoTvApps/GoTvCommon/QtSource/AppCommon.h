@@ -44,7 +44,6 @@
 #include "VxAppTheme.h"
 #include "VxAppStyle.h"
 
-
 class IVxVidCap;
 class ListEntryWidget;
 class FileListReplySession;
@@ -63,18 +62,14 @@ class PopupMenu;
 class VxDataHelper;
 class VxMyFileInfo;
 class AppSettings;
-class VxAppTheme;
-class VxAppStyle;
 class VxTilePositioner;
 class AppletMgr;
 class IGoTv;
 class RenderGlWidget;
 class KodiThread;
 
-
 // media
 class CRenderBuffer;
-
 
 class AppCommon : public QWidget, public IToGui, public IGoTvRender, public IGoTvEvents, public IAudioRequests, public IAudioCallbacks
 {

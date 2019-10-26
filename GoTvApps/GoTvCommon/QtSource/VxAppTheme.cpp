@@ -52,7 +52,7 @@ namespace
 VxAppTheme::VxAppTheme( AppCommon& appCommon )
 : m_MyApp( appCommon )
 , m_TransparentColor( COLOR_TRANSPARENT )
-, m_InvalidColor( COLOR_LIGHT_PINK )
+, m_InvalidColor( COLOR_PINK_LIGHT )
 , m_SvgRenderer( this )
 {
 }
@@ -67,122 +67,6 @@ void VxAppTheme::applyTheme( QWidget * widget )
 }
 
 //============================================================================
-void VxAppTheme::updateWindowTheme( void )
-{
-	QColor windowBkgColor( getColor( eWindowBackground ) );
-	QColor windowTextColor( getColor( eWindowTextColor ) );
-
-	//QColor buttonBkgColor( getColor( eButtonBackgroundNormal ) );
-    QColor buttonBkgColor( QColor( COLOR_RED ) );
-	QColor buttonTextColor( getColor( eButtonTextNormal ) );
-
-	QPalette palette( buttonBkgColor, windowBkgColor );
-	palette.setColor( QPalette::Base,  getColor( eButtonBackgroundNormal ) ); // Base drop down combo box background
-	// palette.setColor( QPalette::Background, QColor( COLOR_RED ) );          // Background and Window
-    // palette.setColor( QPalette::Foreground, QColor( COLOR_GREEN ) );        // Foreground and WindowText
-	palette.setColor( QPalette::AlternateBase, QColor( COLOR_LIGHT_PINK ) );// AlternateBase
-    palette.setColor( QPalette::Light, windowTextColor );        // Light
-    palette.setColor( QPalette::Midlight, windowTextColor.darker() );     // Midlight.. mostly for 
-    palette.setColor( QPalette::Mid, windowTextColor.dark() );          // Mid
-    palette.setColor( QPalette::Dark, windowTextColor.dark().darker() );         // Dark .. mostly for frame shadow and radio button outline
-
-	palette.setColor( QPalette::Button, getColor( eButtonBackgroundNormal ) );      // Button
-
-    palette.setColor( QPalette::ButtonText, buttonTextColor );  // ButtonText and drop down button icon color
-	palette.setColor( QPalette::BrightText, buttonTextColor.lighter() );  // BrightText
-	palette.setColor( QPalette::WindowText, windowTextColor );  // WindowText
-	palette.setColor( QPalette::Text, windowTextColor );        // Text and foreground
-	palette.setColor( QPalette::Window, windowBkgColor );       // Window and background
-
-    palette.setColor( QPalette::NoRole, QColor( COLOR_RED ) );  // NoRole
-    palette.setColor( QPalette::Shadow, QColor( COLOR_GREEN ) );  // shadow
-
-    palette.setColor( QPalette::Highlight, getColor( eProgressBarColor ) );		// Highlight and progress bar
-    palette.setColor( QPalette::HighlightedText, getColor( eWindowHighlightTextColor ) );	// HighlightedText
-    palette.setColor( QPalette::Link, QColor( COLOR_BLUE ) );               // Link
-    palette.setColor( QPalette::LinkVisited, QColor( COLOR_PURPLE ) );      // LinkVisited
-    palette.setColor( QPalette::ToolTipText, windowTextColor );                 // ToolTipText
-    palette.setColor( QPalette::ToolTipBase, QColor( COLOR_DARK_YELLOW ) );     // ToolTipBase
-
-/*
-    palette.setColor( QPalette::Shadow, QColor( COLOR_RED ) );     // ToolTipBase
-    palette.setColor( QPalette::AlternateBase, QColor( COLOR_RED ) );                 // ToolTipText
-    palette.setColor( QPalette::PlaceholderText, QColor( COLOR_PURPLE ) );      // LinkVisited
-
-    QColor bronze( 207, 155, 95 );
-    QColor veryLightBlue( 239, 239, 247 );
-    QColor lightBlue( 223, 223, 239 );
-    QColor darkBlue( 95, 95, 191 );
-    palette.setColor( QPalette::BrightText, Qt::white );
-    palette.setColor( QPalette::Base, veryLightBlue );
-    palette.setColor( QPalette::AlternateBase, lightBlue );
-    palette.setColor( QPalette::Highlight, darkBlue );
-    palette.setColor( QPalette::Disabled, QPalette::Highlight,
-        Qt::darkGray );
-
-    palette.setColor( QPalette::ToolTipBase, lightBlue );
-    palette.setColor( QPalette::WindowText, lightBlue );
-    palette.setColor( QPalette::Light, QColor( COLOR_RED ) );
-    palette.setColor( QPalette::Midlight, QColor( COLOR_RED ) );
-    palette.setColor( QPalette::Dark, QColor( COLOR_RED ) );
-    palette.setColor( QPalette::Mid, QColor( COLOR_RED ) );
-    palette.setColor( QPalette::Text, QColor( COLOR_RED ) );
-    palette.setColor( QPalette::Highlight, QColor( COLOR_RED ) );
-    palette.setColor( QPalette::HighlightedText, QColor( COLOR_RED ) );
-    */
-
-    //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eShadowColor,
-    //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
-    //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eAlternateBase,
-
-
-  //palette.setColor( QPalette::NColorRoles, QColor( COLOR_RED ) );
- /*   enum ColorRole {
-        WindowText, Button, Light, Midlight, Dark, Mid,
-        Text, BrightText, ButtonText, Base, Window, Shadow,
-        Highlight, HighlightedText,
-        Link, LinkVisited,
-        AlternateBase,
-        NoRole,
-        ToolTipBase, ToolTipText,
-        NColorRoles = ToolTipText + 1,
-        Foreground = WindowText, Background = Window
-    };*/
-    
-  
-/*
-    QBrush buttonNormalBackgroundBrush = initBrush( getColor( eButtonBackgroundNormal ) );
-    QBrush buttonInactiveBackgroundBrush = initBrush( getColor( eButtonBackgroundNormal ) );
-    QBrush buttonDisabledBackgroundBrush = initBrush( getColor( eButtonBackgroundDisabled ) );
-
-    QBrush normalTextBrush = initBrush( windowTextColor );
-    QBrush disabledTextBrush = initBrush( getColor( eButtonTextDisabled ) );
-    QBrush inactiveTextBrush = initBrush( buttonTextColor );
-    QBrush highlightTextBrush = initBrush( getColor( eWindowHighlightTextColor ) );
-
-    QBrush uknownBrush = initBrush( QColor( COLOR_RED ) );
-    palette.setBrush( QPalette::NColorGroups,   QPalette::Shadow, uknownBrush );
-    palette.setBrush( QPalette::Current,        QPalette::Shadow, uknownBrush );
-    palette.setBrush( QPalette::All,            QPalette::Shadow, uknownBrush );
-
-	palette.setBrush( QPalette::Active,         QPalette::Button, buttonNormalBackgroundBrush );
-    palette.setBrush( QPalette::Inactive,       QPalette::Button, buttonInactiveBackgroundBrush );
-	palette.setBrush( QPalette::Disabled,       QPalette::Button, buttonDisabledBackgroundBrush );
-
-	palette.setBrush( QPalette::Active,         QPalette::Text, normalTextBrush );
-	palette.setBrush( QPalette::Inactive,       QPalette::Text, inactiveTextBrush );
-	palette.setBrush( QPalette::Disabled,       QPalette::Text, disabledTextBrush );
-
-	palette.setBrush( QPalette::Active,         QPalette::HighlightedText, highlightTextBrush );
-	palette.setBrush( QPalette::Inactive,       QPalette::HighlightedText, highlightTextBrush );
-	palette.setBrush( QPalette::Disabled,       QPalette::HighlightedText, disabledTextBrush );
-*/
-
-	m_BasePalette = palette;
-	m_MyApp.getHomePage().setPalette( m_BasePalette );
-}
-
-//============================================================================
 void VxAppTheme::updateButton( QPushButton * button )
 {
 
@@ -191,13 +75,13 @@ void VxAppTheme::updateButton( QPushButton * button )
 //============================================================================
 void VxAppTheme::updateProgressBar( QProgressBar * progressBar )
 {
-	setHighlightColor( progressBar, getColor( eProgressBarColor ) );
+    setHighlightColor( progressBar, getColor( eProgressBarColor ) );
 }
 
 //============================================================================
 QPixmap VxAppTheme::replaceImageColor( QPixmap srcImage, QColor newColor )
 {
-	if( srcImage.isNull() )
+    if( srcImage.isNull() )
 	{
 		LogMsg( LOG_ERROR, "ERROR VxAppTheme::replaceImageColor srcImage is NULL " );
 		return srcImage;
@@ -249,7 +133,8 @@ QPixmap VxAppTheme::svgRenderer( QString svgName, QSize imageSize, QColor iconCo
 QPixmap VxAppTheme::svgRenderer( QString svgName, QSize imageSize )
 {
 	QPixmap renderdPixmap( imageSize );
-	renderdPixmap.fill( getTransparentColor() );
+
+    renderdPixmap.fill( getTransparentColor() );
 	if( svgName.isEmpty()
 		|| ( imageSize.width() < 1 )
 		|| ( imageSize.height() < 1 ) )
@@ -315,6 +200,7 @@ QString  VxAppTheme::getResourceFullFileName( QString resourceName )
 //============================================================================
 void VxAppTheme::drawButton( QPushButton * button, QPainter& painter )
 {
+
     painter.save();
 	QRect drawAreaRect( BUTTON_BKG_PADDING, BUTTON_BKG_PADDING, button->width() - ( BUTTON_BKG_PADDING * 2 ), button->height() - ( BUTTON_BKG_PADDING * 2 ) );
 
@@ -332,6 +218,7 @@ void VxAppTheme::drawButton( QPushButton * button, QPainter& painter )
 //============================================================================
 void VxAppTheme::drawFocusRect( QPainter& painter, const QRect& focusRect, int lineWidth )
 {
+
     painter.save();
 	QColor bkgColor( getTransparentColor() );
 	QColor fgdColor( getColor( eFocusRect ) );
@@ -420,7 +307,8 @@ QColor VxAppTheme::getButtonColor( QPushButton * button, EColorLayerType colorLa
 //============================================================================
 void VxAppTheme::drawBitmapOnWidget( QPainter& painter, QPixmap& widgetPixmap, QSize sizeOfWidget )
 {
-	int xOffset = 0;
+
+    int xOffset = 0;
 	int yOffset = 0;
 	int least = sizeOfWidget.width() < sizeOfWidget.height() ? sizeOfWidget.width() : sizeOfWidget.height();
 	xOffset = ( sizeOfWidget.width() - least ) / 2;
@@ -443,7 +331,8 @@ void VxAppTheme::drawBitmapOnWidget( QPainter& painter, QPixmap& widgetPixmap, Q
 //============================================================================
 void VxAppTheme::setHighlightColor( QWidget* widget, const QColor highlightColor )
 {
-	QPalette palette;
+
+    QPalette palette;
 	QBrush brush;
 
 	brush = initBrush( highlightColor );
@@ -458,7 +347,8 @@ void VxAppTheme::setHighlightColor( QWidget* widget, const QColor highlightColor
 //============================================================================
 void VxAppTheme::setBackgroundColor( QWidget * widget, const QColor backgroundColor )
 {
-	QPalette widgetPalette = widget->palette();
+
+    QPalette widgetPalette = widget->palette();
 	widgetPalette.setColor( QPalette::Base, backgroundColor );
 	widgetPalette.setColor( QPalette::Background, backgroundColor );
 	widgetPalette.setColor( QPalette::Window, backgroundColor );
@@ -471,7 +361,8 @@ void VxAppTheme::setBackgroundColor( QWidget * widget, const QColor backgroundCo
 //============================================================================
 void VxAppTheme::setBackgroundColor( QFrame * frame, const QColor backgroundColor )
 {
-	QPalette framePalette = frame->palette();
+
+    QPalette framePalette = frame->palette();
 	framePalette.setColor( QPalette::Base, backgroundColor );
 	framePalette.setColor( QPalette::Background, backgroundColor );
 	framePalette.setColor( QPalette::Window, backgroundColor );
@@ -484,7 +375,8 @@ void VxAppTheme::setBackgroundColor( QFrame * frame, const QColor backgroundColo
 //============================================================================
 void VxAppTheme::setWidgetBackgroundToTransparent( QWidget * widget )
 {
-	QColor transparentColor( Qt::transparent );
+
+    QColor transparentColor( Qt::transparent );
 	QPalette transparentPalette = widget->palette();
 	transparentPalette.setColor( QPalette::Base, transparentColor );
 	widget->setPalette( transparentPalette );
@@ -493,7 +385,8 @@ void VxAppTheme::setWidgetBackgroundToTransparent( QWidget * widget )
 //============================================================================
 void VxAppTheme::setPainterPen( QPainter& painter, QColor penColor )
 {
-	QPen painterPen( penColor );
+
+    QPen painterPen( penColor );
 	painterPen.setStyle( Qt::SolidLine );
 	painter.setPen( painterPen );
 }
@@ -501,7 +394,8 @@ void VxAppTheme::setPainterPen( QPainter& painter, QColor penColor )
 //============================================================================
 void VxAppTheme::setPainterBrush( QPainter& painter, QColor brushColor )
 {
-	QBrush brush( brushColor );
+
+    QBrush brush( brushColor );
 	brush.setStyle( Qt::SolidPattern );
 	painter.setBrush( brush );
 }
@@ -531,7 +425,8 @@ QPalette VxAppTheme::getWidgetPalette( QWidget* widget )
 //============================================================================
 void VxAppTheme::setWidgetPallette( QWidget* widget, QPalette& palette )
 {
-	if( widget )
+
+    if( widget )
 	{
 		widget->setPalette( palette );
 	}
@@ -540,18 +435,19 @@ void VxAppTheme::setWidgetPallette( QWidget* widget, QPalette& palette )
 //============================================================================
 void VxAppTheme::setTextColor( const QColor& color, QWidget* widget )
 {
-	QPalette palette;
 	QBrush brush;
 
 	brush = initBrush( color );
-	palette = getWidgetPalette( widget );
+	QPalette palette = getWidgetPalette( widget );
 	palette.setBrush( QPalette::Active, QPalette::Text, brush );
 	palette.setBrush( QPalette::Inactive, QPalette::Text, brush );
 	palette.setBrush( QPalette::Disabled, QPalette::Text, brush );
-	palette.setBrush( QPalette::Active, QPalette::HighlightedText, brush );
+    palette.setBrush( QPalette::Normal, QPalette::Text, brush );
+    palette.setBrush( QPalette::Active, QPalette::HighlightedText, brush );
 	palette.setBrush( QPalette::Inactive, QPalette::HighlightedText, brush );
 	palette.setBrush( QPalette::Disabled, QPalette::HighlightedText, brush );
-	palette.setColor( QPalette::WindowText, color );
+    palette.setBrush( QPalette::Normal, QPalette::HighlightedText, brush );
+    palette.setColor( QPalette::WindowText, color );
 
 	setWidgetPallette( widget, palette );
 }
@@ -634,6 +530,340 @@ QString VxAppTheme::describeTheme( EThemeType eThemeType )
 }
 
 //============================================================================
+// set every color role for testing
+void VxAppTheme::setEveryColorPossible( QPalette& palette, const QColor& bkgColor, const QColor& fgdColor )
+{
+    palette.setBrush( QPalette::Active, QPalette::Window, bkgColor );
+    palette.setBrush( QPalette::Inactive, QPalette::Window, bkgColor );
+    palette.setBrush( QPalette::Disabled, QPalette::Window, bkgColor );
+    palette.setBrush( QPalette::Normal, QPalette::Window, bkgColor );
+    palette.setColor( QPalette::Active, QPalette::Window, bkgColor );
+    palette.setColor( QPalette::Inactive, QPalette::Window, bkgColor );
+    palette.setColor( QPalette::Disabled, QPalette::Window, bkgColor );
+    palette.setColor( QPalette::Normal, QPalette::Window, bkgColor );
+
+    palette.setBrush( QPalette::Active, QPalette::WindowText, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::WindowText, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::WindowText, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::WindowText, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::WindowText, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::WindowText, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::WindowText, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::WindowText, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::Base, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::Base, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::Base, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::Base, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::Base, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::Base, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::Base, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::Base, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::AlternateBase, bkgColor );
+    palette.setBrush( QPalette::Inactive, QPalette::AlternateBase, bkgColor );
+    palette.setBrush( QPalette::Disabled, QPalette::AlternateBase, bkgColor );
+    palette.setBrush( QPalette::Normal, QPalette::AlternateBase, bkgColor );
+    palette.setColor( QPalette::Active, QPalette::AlternateBase, bkgColor );
+    palette.setColor( QPalette::Inactive, QPalette::AlternateBase, bkgColor );
+    palette.setColor( QPalette::Disabled, QPalette::AlternateBase, bkgColor );
+    palette.setColor( QPalette::Normal, QPalette::AlternateBase, bkgColor );
+
+    palette.setBrush( QPalette::Active, QPalette::ToolTipBase, bkgColor );
+    palette.setBrush( QPalette::Inactive, QPalette::ToolTipBase, bkgColor );
+    palette.setBrush( QPalette::Disabled, QPalette::ToolTipBase, bkgColor );
+    palette.setBrush( QPalette::Normal, QPalette::ToolTipBase, bkgColor );
+    palette.setColor( QPalette::Active, QPalette::ToolTipBase, bkgColor );
+    palette.setColor( QPalette::Inactive, QPalette::ToolTipBase, bkgColor );
+    palette.setColor( QPalette::Disabled, QPalette::ToolTipBase, bkgColor );
+    palette.setColor( QPalette::Normal, QPalette::ToolTipBase, bkgColor );
+
+    palette.setBrush( QPalette::Active, QPalette::ToolTipText, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::ToolTipText, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::ToolTipText, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::ToolTipText, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::ToolTipText, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::ToolTipText, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::ToolTipText, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::ToolTipText, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::PlaceholderText, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::PlaceholderText, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::PlaceholderText, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::PlaceholderText, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::PlaceholderText, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::PlaceholderText, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::PlaceholderText, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::PlaceholderText, fgdColor );
+
+
+    palette.setBrush( QPalette::Active, QPalette::Text, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::Text, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::Text, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::Text, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::Text, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::Text, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::Text, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::Text, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::Button, bkgColor );
+    palette.setBrush( QPalette::Inactive, QPalette::Button, bkgColor );
+    palette.setBrush( QPalette::Disabled, QPalette::Button, bkgColor );
+    palette.setBrush( QPalette::Normal, QPalette::Button, bkgColor );
+    palette.setColor( QPalette::Active, QPalette::Button, bkgColor );
+    palette.setColor( QPalette::Inactive, QPalette::Button, bkgColor );
+    palette.setColor( QPalette::Disabled, QPalette::Button, bkgColor );
+    palette.setColor( QPalette::Normal, QPalette::Button, bkgColor );
+
+    palette.setBrush( QPalette::Active, QPalette::ButtonText, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::ButtonText, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::ButtonText, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::ButtonText, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::ButtonText, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::ButtonText, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::ButtonText, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::ButtonText, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::BrightText, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::BrightText, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::BrightText, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::BrightText, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::BrightText, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::BrightText, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::BrightText, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::BrightText, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::Light, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::Light, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::Light, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::Light, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::Light, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::Light, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::Light, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::Light, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::Midlight, fgdColor.darker() );
+    palette.setBrush( QPalette::Inactive, QPalette::Midlight, fgdColor.darker() );
+    palette.setBrush( QPalette::Disabled, QPalette::Midlight, fgdColor.darker() );
+    palette.setBrush( QPalette::Normal, QPalette::Midlight, fgdColor.darker() );
+    palette.setColor( QPalette::Active, QPalette::Midlight, fgdColor.darker() );
+    palette.setColor( QPalette::Inactive, QPalette::Midlight, fgdColor.darker() );
+    palette.setColor( QPalette::Disabled, QPalette::Midlight, fgdColor.darker() );
+    palette.setColor( QPalette::Normal, QPalette::Midlight, fgdColor.darker() );
+
+    palette.setBrush( QPalette::Active, QPalette::Dark, bkgColor );
+    palette.setBrush( QPalette::Inactive, QPalette::Dark, bkgColor );
+    palette.setBrush( QPalette::Disabled, QPalette::Dark, bkgColor );
+    palette.setBrush( QPalette::Normal, QPalette::Dark, bkgColor );
+    palette.setColor( QPalette::Active, QPalette::Dark, bkgColor );
+    palette.setColor( QPalette::Inactive, QPalette::Dark, bkgColor );
+    palette.setColor( QPalette::Disabled, QPalette::Dark, bkgColor );
+    palette.setColor( QPalette::Normal, QPalette::Dark, bkgColor );
+
+    palette.setBrush( QPalette::Active, QPalette::Mid, bkgColor.lighter() );
+    palette.setBrush( QPalette::Inactive, QPalette::Mid, bkgColor.lighter() );
+    palette.setBrush( QPalette::Disabled, QPalette::Mid, bkgColor.lighter() );
+    palette.setBrush( QPalette::Normal, QPalette::Mid, bkgColor.lighter() );
+    palette.setColor( QPalette::Active, QPalette::Mid, bkgColor.lighter() );
+    palette.setColor( QPalette::Inactive, QPalette::Mid, bkgColor.lighter() );
+    palette.setColor( QPalette::Disabled, QPalette::Mid, bkgColor.lighter() );
+    palette.setColor( QPalette::Normal, QPalette::Mid, bkgColor.lighter() );
+
+    palette.setBrush( QPalette::Active, QPalette::Shadow, bkgColor.lighter() );
+    palette.setBrush( QPalette::Inactive, QPalette::Shadow, bkgColor.lighter() );
+    palette.setBrush( QPalette::Disabled, QPalette::Shadow, bkgColor.lighter() );
+    palette.setBrush( QPalette::Normal, QPalette::Shadow, bkgColor.lighter() );
+    palette.setColor( QPalette::Active, QPalette::Shadow, bkgColor.lighter() );
+    palette.setColor( QPalette::Inactive, QPalette::Shadow, bkgColor.lighter() );
+    palette.setColor( QPalette::Disabled, QPalette::Shadow, bkgColor.lighter() );
+    palette.setColor( QPalette::Normal, QPalette::Shadow, bkgColor.lighter() );
+
+    palette.setBrush( QPalette::Active, QPalette::Highlight, fgdColor.darker() );
+    palette.setBrush( QPalette::Inactive, QPalette::Highlight, fgdColor.darker() );
+    palette.setBrush( QPalette::Disabled, QPalette::Highlight, fgdColor.darker() );
+    palette.setBrush( QPalette::Normal, QPalette::Highlight, fgdColor.darker() );
+    palette.setColor( QPalette::Active, QPalette::Highlight, fgdColor.darker() );
+    palette.setColor( QPalette::Inactive, QPalette::Highlight, fgdColor.darker() );
+    palette.setColor( QPalette::Disabled, QPalette::Highlight, fgdColor.darker() );
+    palette.setColor( QPalette::Normal, QPalette::Highlight, fgdColor.darker() );
+
+
+    palette.setBrush( QPalette::Active, QPalette::HighlightedText, fgdColor.lighter() );
+    palette.setBrush( QPalette::Inactive, QPalette::HighlightedText, fgdColor.lighter() );
+    palette.setBrush( QPalette::Disabled, QPalette::HighlightedText, fgdColor.lighter() );
+    palette.setBrush( QPalette::Normal, QPalette::HighlightedText, fgdColor.lighter() );
+    palette.setColor( QPalette::Active, QPalette::HighlightedText, fgdColor.lighter() );
+    palette.setColor( QPalette::Inactive, QPalette::HighlightedText, fgdColor.lighter() );
+    palette.setColor( QPalette::Disabled, QPalette::HighlightedText, fgdColor.lighter() );
+    palette.setColor( QPalette::Normal, QPalette::HighlightedText, fgdColor.lighter() );
+
+
+    palette.setBrush( QPalette::Active, QPalette::Link, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::Link, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::Link, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::Link, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::Link, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::Link, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::Link, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::Link, fgdColor );
+
+    palette.setBrush( QPalette::Active, QPalette::LinkVisited, fgdColor.lighter() );
+    palette.setBrush( QPalette::Inactive, QPalette::LinkVisited, fgdColor.lighter() );
+    palette.setBrush( QPalette::Disabled, QPalette::LinkVisited, fgdColor.lighter() );
+    palette.setBrush( QPalette::Normal, QPalette::LinkVisited, fgdColor.lighter() );
+    palette.setColor( QPalette::Active, QPalette::LinkVisited, fgdColor.lighter() );
+    palette.setColor( QPalette::Inactive, QPalette::LinkVisited, fgdColor.lighter() );
+    palette.setColor( QPalette::Disabled, QPalette::LinkVisited, fgdColor.lighter() );
+    palette.setColor( QPalette::Normal, QPalette::LinkVisited, fgdColor.lighter() );
+
+    palette.setBrush( QPalette::Active, QPalette::NoRole, fgdColor );
+    palette.setBrush( QPalette::Inactive, QPalette::NoRole, fgdColor );
+    palette.setBrush( QPalette::Disabled, QPalette::NoRole, fgdColor );
+    palette.setBrush( QPalette::Normal, QPalette::NoRole, fgdColor );
+    palette.setColor( QPalette::Active, QPalette::NoRole, fgdColor );
+    palette.setColor( QPalette::Inactive, QPalette::NoRole, fgdColor );
+    palette.setColor( QPalette::Disabled, QPalette::NoRole, fgdColor );
+    palette.setColor( QPalette::Normal, QPalette::NoRole, fgdColor );
+}
+
+//============================================================================
+void VxAppTheme::updateWindowTheme( void )
+{
+    QColor windowBkgColor( getColor( eWindowBackground ) );
+    QColor windowTextColor( getColor( eWindowTextColor ) );
+
+    QColor buttonBkgColor( getColor( eButtonBackgroundNormal ) );
+    //QColor buttonBkgColor( QColor( COLOR_GREEN ) );
+    QColor buttonTextColor( getColor( eButtonTextNormal ) );
+
+    QPalette palette( buttonBkgColor, windowBkgColor );
+    palette.setColor( QPalette::Base, getColor( eButtonBackgroundNormal ) );   // Base drop down combo box background
+
+    //palette.setBrush( QPalette::All, QPalette::Button, buttonBkgColor );
+
+
+    palette.setColor( QPalette::BrightText, isBlackOnWhite() ? buttonTextColor.darker() : buttonTextColor.lighter() );        // BrightText
+    palette.setColor( QPalette::WindowText, windowTextColor );                  // WindowText
+    palette.setColor( QPalette::Text, windowTextColor );                        // Text and foreground
+    palette.setColor( QPalette::Window, windowBkgColor );                       // Window and background
+
+    //palette.setColor( QPalette::Shadow, QColor( COLOR_GREEN ) );                // shadow
+
+    palette.setColor( QPalette::Highlight, getColor( eProgressBarColor ) );		// Highlight and progress bar
+    palette.setColor( QPalette::HighlightedText, getColor( eWindowHighlightTextColor ) );	// HighlightedText
+    palette.setColor( QPalette::Link, QColor( COLOR_BLUE ) );                   // Link
+    palette.setColor( QPalette::LinkVisited, QColor( COLOR_PURPLE ) );          // LinkVisited
+    palette.setColor( QPalette::ToolTipText, windowTextColor );                 // ToolTipText
+    palette.setColor( QPalette::ToolTipBase, QColor( COLOR_YELLOW_DARK ) );     // ToolTipBase
+
+    palette.setColor( QPalette::Shadow, getColor( eShadowColor ) );                // shadow
+
+    palette.setColor( QPalette::Light, windowTextColor );                       // Light
+    palette.setColor( QPalette::Midlight, windowTextColor.darker() );           // Midlight.. mostly for 
+    palette.setColor( QPalette::Mid, windowTextColor.dark() );                  // Mid
+    palette.setColor( QPalette::Dark, windowTextColor.dark().darker() );        // Dark .. mostly for frame shadow and radio button outline
+
+    palette.setColor( QPalette::AlternateBase, QColor( COLOR_PINK_LIGHT ) );     // AlternateBase ( for alternating row color )
+
+    palette.setColor( QPalette::ButtonText, buttonTextColor );                  // ButtonText and drop down button icon color
+    palette.setColor( QPalette::Button, buttonBkgColor );                       // Scroll and spin button background color
+
+    palette.setColor( QPalette::Light, QColor( COLOR_RED ) );                       // Light
+    palette.setColor( QPalette::Midlight, QColor( COLOR_RED ) );                // Midlight.. mostly for 
+    palette.setColor( QPalette::Mid, QColor( COLOR_RED ) );                     // Mid
+    palette.setColor( QPalette::Dark, QColor( COLOR_RED ) );                    // Dark .. mostly for frame shadow and radio button outline
+    palette.setColor( QPalette::NoRole, QColor( COLOR_RED ) );                  // NoRole
+    palette.setColor( QPalette::PlaceholderText, QColor( COLOR_RED ) );         // dont know
+
+    // Light some of frame hightlight.. also scroll bar background color
+    palette.setColor( QPalette::Light, isBlackOnWhite() ? getColor( eShadowColor ).lighter() : getColor( eShadowColor ).darker() );                 
+    palette.setColor( QPalette::Midlight, isBlackOnWhite() ? getColor( eShadowColor ).lighter() : getColor( eShadowColor ).darker() );                // Midlight.. mostly for 
+    palette.setColor( QPalette::Mid, getColor( eShadowColor ) );                     // Mid
+     // Dark .. combo box upper frame line and spin buttons outline and scroll buttons bottom line
+    palette.setColor( QPalette::Dark, isBlackOnWhite() ? getColor( eShadowColor ).lighter() : getColor( eShadowColor ).darker() );                   
+    palette.setColor( QPalette::NoRole, QColor( COLOR_RED ) );                  // NoRole
+    palette.setColor( QPalette::PlaceholderText, QColor( COLOR_RED ) );         // dont know
+
+
+/*
+    palette.setColor( QPalette::Shadow, QColor( COLOR_RED ) );     // ToolTipBase
+    palette.setColor( QPalette::AlternateBase, QColor( COLOR_RED ) );                 // ToolTipText
+    palette.setColor( QPalette::PlaceholderText, QColor( COLOR_PURPLE ) );      // LinkVisited
+
+    QColor bronze( 207, 155, 95 );
+    QColor veryLightBlue( 239, 239, 247 );
+    QColor lightBlue( 223, 223, 239 );
+    QColor darkBlue( 95, 95, 191 );
+    palette.setColor( QPalette::BrightText, Qt::white );
+    palette.setColor( QPalette::Base, veryLightBlue );
+    palette.setColor( QPalette::AlternateBase, lightBlue );
+    palette.setColor( QPalette::Highlight, darkBlue );
+    palette.setColor( QPalette::Disabled, QPalette::Highlight,
+        Qt::darkGray );
+
+    palette.setColor( QPalette::ToolTipBase, lightBlue );
+    palette.setColor( QPalette::WindowText, lightBlue );
+    palette.setColor( QPalette::Light, QColor( COLOR_RED ) );
+    palette.setColor( QPalette::Midlight, QColor( COLOR_RED ) );
+    palette.setColor( QPalette::Dark, QColor( COLOR_RED ) );
+    palette.setColor( QPalette::Mid, QColor( COLOR_RED ) );
+    palette.setColor( QPalette::Text, QColor( COLOR_RED ) );
+    palette.setColor( QPalette::Highlight, QColor( COLOR_RED ) );
+    palette.setColor( QPalette::HighlightedText, QColor( COLOR_RED ) );
+    */
+
+    //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eShadowColor,
+    //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
+    //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eAlternateBase,
+
+
+  //palette.setColor( QPalette::NColorRoles, QColor( COLOR_RED ) );
+ /*   enum ColorRole {
+        WindowText, Button, Light, Midlight, Dark, Mid,
+        Text, BrightText, ButtonText, Base, Window, Shadow,
+        Highlight, HighlightedText,
+        Link, LinkVisited,
+        AlternateBase,
+        NoRole,
+        ToolTipBase, ToolTipText,
+        NColorRoles = ToolTipText + 1,
+        Foreground = WindowText, Background = Window
+    };*/
+
+
+    /*
+        QBrush buttonNormalBackgroundBrush = initBrush( getColor( eButtonBackgroundNormal ) );
+        QBrush buttonInactiveBackgroundBrush = initBrush( getColor( eButtonBackgroundNormal ) );
+        QBrush buttonDisabledBackgroundBrush = initBrush( getColor( eButtonBackgroundDisabled ) );
+
+        QBrush normalTextBrush = initBrush( windowTextColor );
+        QBrush disabledTextBrush = initBrush( getColor( eButtonTextDisabled ) );
+        QBrush inactiveTextBrush = initBrush( buttonTextColor );
+        QBrush highlightTextBrush = initBrush( getColor( eWindowHighlightTextColor ) );
+
+        QBrush uknownBrush = initBrush( QColor( COLOR_RED ) );
+        palette.setBrush( QPalette::NColorGroups,   QPalette::Shadow, uknownBrush );
+        palette.setBrush( QPalette::Current,        QPalette::Shadow, uknownBrush );
+        palette.setBrush( QPalette::All,            QPalette::Shadow, uknownBrush );
+
+        palette.setBrush( QPalette::Active,         QPalette::Button, buttonNormalBackgroundBrush );
+        palette.setBrush( QPalette::Inactive,       QPalette::Button, buttonInactiveBackgroundBrush );
+        palette.setBrush( QPalette::Disabled,       QPalette::Button, buttonDisabledBackgroundBrush );
+
+        palette.setBrush( QPalette::Active,         QPalette::Text, normalTextBrush );
+        palette.setBrush( QPalette::Inactive,       QPalette::Text, inactiveTextBrush );
+        palette.setBrush( QPalette::Disabled,       QPalette::Text, disabledTextBrush );
+
+        palette.setBrush( QPalette::Active,         QPalette::HighlightedText, highlightTextBrush );
+        palette.setBrush( QPalette::Inactive,       QPalette::HighlightedText, highlightTextBrush );
+        palette.setBrush( QPalette::Disabled,       QPalette::HighlightedText, disabledTextBrush );
+    */
+
+    m_BasePalette = palette;
+    m_MyApp.getHomePage().setPalette( m_BasePalette );
+}
+
+//============================================================================
 void VxAppTheme::selectTheme( EThemeType eThemeType )
 {
     LogMsg( LOG_DEBUG, "setupTheme %s ", describeTheme( eThemeType ).toUtf8().constData() );
@@ -642,129 +872,134 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 	switch( eThemeType )
 	{
 	case eThemeTypeDark:
-		m_ThemeColors.push_back( QColor( COLOR_BURNT_ORANGE ) ); //eFocusRect,
+        m_ContrastType = eContrastTypeWhiteOnBlack;
+		m_ThemeColors.push_back( QColor( COLOR_ORANGE ) ); //eFocusRect,
 		m_ThemeColors.push_back( QColor( COLOR_BLACK ) ); //eWindowBackground,
-		m_ThemeColors.push_back( QColor( COLOR_VERY_LIGHT_GREY ) ); //eWindowTextColor,
+		m_ThemeColors.push_back( QColor( COLOR_GREY_VERY_LIGHT ) ); //eWindowTextColor,
 
-		m_ThemeColors.push_back( QColor( COLOR_CREAM_WHITE ) ); //eWindowHighlightTextColor,
-		m_ThemeColors.push_back( QColor( COLOR_MEDIUM_GREY ) ); //eTitleBarBackground,
-		m_ThemeColors.push_back( QColor( COLOR_CREAM_WHITE ) ); //eTitleBarTextText,
+		m_ThemeColors.push_back( QColor( COLOR_WHITE_CREAM ) ); //eWindowHighlightTextColor,
 
-		m_ThemeColors.push_back( QColor( COLOR_DARK_GREY ).darker() ); //eButtonBackgroundNormal,
-		m_ThemeColors.push_back( QColor( COLOR_MEDIUM_GREY ) ); //eButtonBackgroundDisabled,
+		m_ThemeColors.push_back( QColor( COLOR_GREY_MEDIUM ) ); //eTitleBarBackground,
+		m_ThemeColors.push_back( QColor( COLOR_WHITE_CREAM ) ); //eTitleBarTextText,
+
+		m_ThemeColors.push_back( QColor( COLOR_GREY_DARK ).darker() ); //eButtonBackgroundNormal,
+		m_ThemeColors.push_back( QColor( COLOR_GREY_MEDIUM ) ); //eButtonBackgroundDisabled,
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eButtonBackgroundPressed,
 
 		m_ThemeColors.push_back( QColor( COLOR_SILVER ) ); //eButtonForegroundNormal,
-		m_ThemeColors.push_back( QColor( COLOR_MEDIUM_GREY ) ); //eButtonForegroundDisabled,
-		m_ThemeColors.push_back( QColor( COLOR_BURNT_ORANGE ) ); //eButtonForegroundPressed,
+		m_ThemeColors.push_back( QColor( COLOR_GREY_MEDIUM ) ); //eButtonForegroundDisabled,
+		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eButtonForegroundPressed,
 
-		m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eButtonTextNormal,
-		m_ThemeColors.push_back( QColor( COLOR_GREEN ).darker() ); //eButtonTextDisabled,
+		m_ThemeColors.push_back( QColor( COLOR_GREEN_LIGHT ) ); //eButtonTextNormal,
+		m_ThemeColors.push_back( QColor( COLOR_GREEN_MEDIUM ).darker() ); //eButtonTextDisabled,
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ).darker() ); //eButtonTextPressed,
 
-		m_ThemeColors.push_back( QColor( COLOR_ORANGE ) ); //eLayerOverlayColor,
+		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eLayerOverlayColor,
 		m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyColor,
 
-		m_ThemeColors.push_back( QColor( COLOR_ORANGE ) ); //eProgressBarColor,
+		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eProgressBarColor,
 
-        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eShadowColor,
-        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
-        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eAlternateBase,
+        m_ThemeColors.push_back( QColor( COLOR_GREEN_DARK ) ); //eShadowColor,
+        m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
+        m_ThemeColors.push_back( QColor( COLOR_PINK_LIGHT ) ); //eAlternateBase,
         break;
 
 	case eThemeTypeBlueOnWhite:
-		m_ThemeColors.push_back( QColor( COLOR_BURNT_ORANGE ) ); //eFocusRect,
+        m_ContrastType = eContrastTypeBlackOnWhite;
+		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eFocusRect,
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eWindowBackground,
-		m_ThemeColors.push_back( QColor( COLOR_MEDIUM_BLUE ) ); //eWindowTextColor,
-		m_ThemeColors.push_back( QColor( COLOR_BLUE ) ); //eWindowHighlightTextColor,
-		m_ThemeColors.push_back( QColor( COLOR_CREAM_WHITE ) ); //eTitleBarBackground,
+		m_ThemeColors.push_back( QColor( COLOR_BLUE_MEDIUM ) ); //eWindowTextColor,
+		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eWindowHighlightTextColor,
+		m_ThemeColors.push_back( QColor( COLOR_WHITE_CREAM ) ); //eTitleBarBackground,
 		m_ThemeColors.push_back( QColor( COLOR_BLUE ) ); //eTitleBarTextText,
 
-		m_ThemeColors.push_back( QColor( COLOR_CREAM_WHITE ) ); //eButtonBackgroundNormal,
-		m_ThemeColors.push_back( QColor( COLOR_MEDIUM_GREY ) ); //eButtonBackgroundDisabled,
+		m_ThemeColors.push_back( QColor( COLOR_WHITE_CREAM ) ); //eButtonBackgroundNormal,
+		m_ThemeColors.push_back( QColor( COLOR_GREY_MEDIUM ) ); //eButtonBackgroundDisabled,
 		m_ThemeColors.push_back( QColor( COLOR_BLUE ) ); //eButtonBackgroundPressed,
 
 		m_ThemeColors.push_back( QColor( COLOR_BLUE ) ); //eButtonForegroundNormal,
-		m_ThemeColors.push_back( QColor( COLOR_MEDIUM_GREY ) ); //eButtonForegroundDisabled,
+		m_ThemeColors.push_back( QColor( COLOR_GREY_MEDIUM ) ); //eButtonForegroundDisabled,
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eButtonForegroundPressed,
 
 		m_ThemeColors.push_back( QColor( COLOR_BLUE ) ); //eButtonTextNormal,
 		m_ThemeColors.push_back( QColor( COLOR_SILVER ) ); //eButtonTextDisabled,
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eButtonTextPressed,
 
-		m_ThemeColors.push_back( QColor( COLOR_BURNT_ORANGE ) ); //eLayerOverlayColor,
+		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eLayerOverlayColor,
 		m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyColor,
 
 		m_ThemeColors.push_back( QColor( COLOR_BLUE ) ); //eProgressBarColor,
 
-       // m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eShadowColor,
-        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
-        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eAlternateBase,
+        m_ThemeColors.push_back( QColor( COLOR_BLUE_DARK ) ); //eShadowColor,
+        m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
+        m_ThemeColors.push_back( QColor( COLOR_PINK_LIGHT ) ); //eAlternateBase,
 
 		break;
 
 	case eThemeTypeGreenOnWhite:
-		m_ThemeColors.push_back( QColor( COLOR_BURNT_ORANGE ) ); //eFocusRect,
+        m_ContrastType = eContrastTypeBlackOnWhite;
+		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eFocusRect,
 		m_ThemeColors.push_back( QColor( COLOR_SEASHELL ) ); //eWindowBackground,
-		m_ThemeColors.push_back( QColor( COLOR_LIME_GREEN ) ); //eWindowTextColor,
+		m_ThemeColors.push_back( QColor( COLOR_GREEN_LIME ) ); //eWindowTextColor,
 		m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eWindowHighlightTextColor,
-		m_ThemeColors.push_back( QColor( COLOR_CREAM_WHITE ) ); //eTitleBarBackground,
+		m_ThemeColors.push_back( QColor( COLOR_WHITE_CREAM ) ); //eTitleBarBackground,
 		m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eTitleBarTextText,
 
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eButtonBackgroundNormal,
-		m_ThemeColors.push_back( QColor( COLOR_MEDIUM_GREY ) ); //eButtonBackgroundDisabled,
-		m_ThemeColors.push_back( QColor( COLOR_LIME_GREEN ) ); //eButtonBackgroundPressed,
+		m_ThemeColors.push_back( QColor( COLOR_GREY_MEDIUM ) ); //eButtonBackgroundDisabled,
+		m_ThemeColors.push_back( QColor( COLOR_GREEN_LIME ) ); //eButtonBackgroundPressed,
 
 		m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eButtonForegroundNormal,
-		m_ThemeColors.push_back( QColor( COLOR_MEDIUM_GREY ) ); //eButtonForegroundDisabled,
+		m_ThemeColors.push_back( QColor( COLOR_GREY_MEDIUM ) ); //eButtonForegroundDisabled,
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eButtonForegroundPressed,
 
 		m_ThemeColors.push_back( QColor( COLOR_GREEN ) ); //eButtonTextNormal,
 		m_ThemeColors.push_back( QColor( COLOR_SILVER ) ); //eButtonTextDisabled,
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eButtonTextPressed,
 
-		m_ThemeColors.push_back( QColor( COLOR_BURNT_ORANGE ) ); //eLayerOverlayColor,
+		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eLayerOverlayColor,
 		m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyColor,
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE ) ); //eProgressBarColor,
 
-        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eShadowColor,
-        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
-        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eAlternateBase,
+        m_ThemeColors.push_back( QColor( COLOR_GREEN_MEDIUM ) ); //eShadowColor,
+        m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
+        m_ThemeColors.push_back( QColor( COLOR_PINK_LIGHT ) ); //eAlternateBase,
         break;
 
 	case eThemeTypeUnknown:
 	case eThemeTypeLight:
 	default:
-		m_ThemeColors.push_back( QColor( COLOR_BURNT_ORANGE ) ); //eFocusRect,
+        m_ContrastType = eContrastTypeBlackOnWhite;
+		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eFocusRect,
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eWindowBackground,
 		m_ThemeColors.push_back( QColor( COLOR_BLACK ) ); //eWindowTextColor,
-		m_ThemeColors.push_back( QColor( COLOR_BURNT_ORANGE ) ); //eWindowHighlightTextColor,
-		m_ThemeColors.push_back( QColor( COLOR_CREAM_WHITE ) ); //eTitleBarBackground,
+		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eWindowHighlightTextColor,
+		m_ThemeColors.push_back( QColor( COLOR_WHITE_CREAM ) ); //eTitleBarBackground,
 		m_ThemeColors.push_back( QColor( COLOR_BLACK ) ); //eTitleBarTextText,
 
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eButtonBackgroundNormal,
-		m_ThemeColors.push_back( QColor( COLOR_MEDIUM_GREY ) ); //eButtonBackgroundDisabled,
+		m_ThemeColors.push_back( QColor( COLOR_GREY_MEDIUM ) ); //eButtonBackgroundDisabled,
 		m_ThemeColors.push_back( QColor( COLOR_BLACK ) ); //eButtonBackgroundPressed,
 
 		m_ThemeColors.push_back( QColor( COLOR_BLACK ) ); //eButtonForegroundNormal,
-		m_ThemeColors.push_back( QColor( COLOR_MEDIUM_GREY ) ); //eButtonForegroundDisabled,
+		m_ThemeColors.push_back( QColor( COLOR_GREY_MEDIUM ) ); //eButtonForegroundDisabled,
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eButtonForegroundPressed,
 
 		m_ThemeColors.push_back( QColor( COLOR_BLACK ) ); //eButtonTextNormal,
 		m_ThemeColors.push_back( QColor( COLOR_SILVER ) ); //eButtonTextDisabled,
 		m_ThemeColors.push_back( QColor( COLOR_WHITE ) ); //eButtonTextPressed,
 
-		m_ThemeColors.push_back( QColor( COLOR_BURNT_ORANGE ) ); //eLayerOverlayColor,
+		m_ThemeColors.push_back( QColor( COLOR_ORANGE_BURNT ) ); //eLayerOverlayColor,
 		m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eLayerNotifyColor,
 
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE ) ); //eProgressBarColor,
 
-        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eShadowColor,
-        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
-        //m_ThemeColors.push_back( QColor( COLOR_RED ) ); //eAlternateBase,
+        m_ThemeColors.push_back( QColor( COLOR_GREEN_MEDIUM ) ); //eShadowColor,
+        m_ThemeColors.push_back( QColor( COLOR_RED ) ); //ePlaceholderText,
+        m_ThemeColors.push_back( QColor( COLOR_PINK_LIGHT ) ); //eAlternateBase,
         break;
 	}
 
-	updateWindowTheme();
+    updateWindowTheme();
 }

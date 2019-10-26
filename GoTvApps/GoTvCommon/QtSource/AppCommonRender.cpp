@@ -21,8 +21,6 @@
 #include "OffersMgr.h"
 #include "MySndMgr.h"
 #include "MyIcons.h"
-#include "VxAppTheme.h"
-#include "VxAppStyle.h"
 #include "VxTilePositioner.h"
 
 #include "HomeWindow.h"

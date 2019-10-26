@@ -153,7 +153,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletShareServicesPage:          return QObject::tr( "Share with others sevices" );
     case eAppletServiceAboutMe:             return QObject::tr( "Share About Me Page" );
     case eAppletServiceAvatarImage:         return QObject::tr( "Share Your Avatar Image For Contact List" );
-    case eAppletServiceChatRoom:            return QObject::tr( "Service Chat Room" );
+    case eAppletServiceChatRoom:            return QObject::tr( "Host A Chat Room" );
     case eAppletServiceConnectionTest:      return QObject::tr( "Service Connection Test" );
     case eAppletServiceShareFiles:			return QObject::tr( "Share Media Files" );
     case eAppletServiceShareWebCam:         return QObject::tr( "Share your web cam" );

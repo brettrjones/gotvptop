@@ -41,11 +41,6 @@ VxSpinProgress::VxSpinProgress(const QString &text, QWidget *parent, Qt::WindowF
 }
 
 //============================================================================
-VxSpinProgress::~VxSpinProgress()
-{
-}
-
-//============================================================================
 void VxSpinProgress::initQSpinProgress( void )
 {
     setObjectName( "VxSpinProgress" );

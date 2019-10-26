@@ -275,6 +275,9 @@
         </layout>
        </widget>
       </item>
+      <item>
+       <widget class="VxPlainTextEdit" name="m_PlainTextEdit"/>
+      </item>
      </layout>
     </widget>
    </item>
@@ -341,6 +344,11 @@
    <class>VxComboBox</class>
    <extends>QComboBox</extends>
    <header>VxComboBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>VxPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header>VxPlainTextEdit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

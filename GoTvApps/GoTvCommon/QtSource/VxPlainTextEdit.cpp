@@ -12,41 +12,28 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "AppletServiceHostNetwork.h"
+#include "VxPlainTextEdit.h"
 #include "AppCommon.h"
-#include "AppSettings.h"
-#include "MyIcons.h"
-
-#include <CoreLib/VxDebug.h>
+#include "VxAppTheme.h"
 
 //============================================================================
-AppletServiceHostNetwork::AppletServiceHostNetwork( AppCommon& app, QWidget * parent )
-: AppletServiceBase( OBJNAME_APPLET_SERVICE_HOST_NETWORK, app, parent )
+VxPlainTextEdit::VxPlainTextEdit( QWidget *parent )
+: QPlainTextEdit( parent )
 {
-    setAppletType( eAppletServiceHostNetwork );
-    setTitleBarText( DescribeApplet( m_EAppletType ) );
-    setupApplet();
-    loadFromSettings();
-    ui.m_PermissionWidget->setPluginType( ePluginTypeHostNetwork );
-
-    m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================
-void AppletServiceHostNetwork::setupApplet()
+VxPlainTextEdit::VxPlainTextEdit( const QString &text, QWidget *parent )
+    : QPlainTextEdit( text, parent )
 {
-    ui.m_InfoWidget->setPluginType( ePluginTypeHostNetwork );
 }
 
 //============================================================================
-void AppletServiceHostNetwork::loadFromSettings()
+void VxPlainTextEdit::contextMenuEvent( QContextMenuEvent *event )
 {
-
+    QMenu *menu = createStandardContextMenu();
+    GetAppInstance().getAppTheme().applyTheme( menu );
+    menu->addAction( tr( "My Menu Item" ) );
+    menu->exec( event->globalPos() );
+    delete menu;
 }
-
-//============================================================================
-void AppletServiceHostNetwork::saveToSettings()
-{
-
-}
-

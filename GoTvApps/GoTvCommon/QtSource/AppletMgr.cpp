@@ -28,7 +28,9 @@
 
 #include "AppletAboutApp.h"
 
+#include "AppletClientChatRoom.h"
 #include "AppletClientRandomConnect.h"
+
 #include "AppletKodi.h"
 #include "AppletGroupUser.h"
 #include "AppletLibrary.h"
@@ -37,9 +39,6 @@
 #include "AppletPersonalRecorder.h"
 #include "AppletPlayerVideo.h"
 
-#include "AppletServiceRandomConnect.h"
-#include "AppletServiceRandomConnectRelay.h"
-#include "AppletServiceRelay.h"
 
 #include "AppletServiceAboutMe.h"
 #include "AppletServiceAvatarImage.h"
@@ -51,6 +50,9 @@
 #include "AppletServiceShareFiles.h"
 #include "AppletServiceShareWebCam.h"
 #include "AppletServiceStoryboard.h"
+#include "AppletServiceRandomConnect.h"
+#include "AppletServiceRandomConnectRelay.h"
+#include "AppletServiceRelay.h"
 
 #include "AppletSettingsAboutMe.h"
 #include "AppletSettingsAvatarImage.h"
@@ -138,7 +140,6 @@ QFrame *  AppletMgr::getAppletFrame( EApplet applet )
 //============================================================================
 ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 {
-    bool isActivity = false;
 	ActivityBase * appletDialog = findAppletDialog( applet );
 	if( appletDialog )
 	{
@@ -160,91 +161,41 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 	QString appletMissingTitle = QObject::tr( "Applet Not Yet Implemented" );
 	switch( applet )
 	{
-    case eActivityAppSetup:
-        appletDialog = new ActivityAppSetup( m_MyApp, parent );
-        break;
-    case eAppletAboutGoTvPtoP:
-        appletDialog = new AppletAboutApp( m_MyApp, parent );
-        break;
-    case eAppletGroupUser:
-        appletDialog = new AppletGroupUser( m_MyApp, parent );
-        break;
-    case eAppletServiceHostGroup:
-        appletDialog = new AppletServiceHostGroup( m_MyApp, parent );
-        break;
-    case eAppletServiceHostGroupListing:
-        appletDialog = new AppletServiceHostGroupListing( m_MyApp, parent );
-        break;
-    case eAppletServiceHostNetwork:
-        appletDialog = new AppletServiceHostNetwork( m_MyApp, parent );
-        break;
-    case eAppletHomePage:
-        m_MyApp.errMessageBox( appletMissingTitle, "Home Page Not Implemented" );
-        return nullptr;
-    case eAppletKodi:
-        appletDialog = new AppletKodi( m_MyApp, parent );
-        break;
-    case eAppletLibrary:
-        appletDialog = new AppletLibrary( m_MyApp, parent );
-        break;
-    case eAppletMessenger:
-        makeMessengerFullSized();
-        return appletDialog;
-    case eAppletNetworkSettings:
-        appletDialog = new AppletNetworkSettings( m_MyApp, parent );
-        break;
-    case eAppletPersonalRecorder:
-        appletDialog = new ActivityPersonalRecorder( m_MyApp, m_MyApp.getAppGlobals().getUserIdent(), parent );
-        break;
-    case eAppletSettings:
-        appletDialog = new AppletSettings( m_MyApp, parent );
-        break;
+    case eActivityAppSetup:                 appletDialog = new ActivityAppSetup( m_MyApp, parent ); break;
+    case eAppletAboutGoTvPtoP:              appletDialog = new AppletAboutApp( m_MyApp, parent ); break;
+    case eAppletGroupUser:                  appletDialog = new AppletGroupUser( m_MyApp, parent ); break;
 
-    case eAppletSearchPage:	
-        appletDialog = new AppletSearchPage( m_MyApp, parent );
-        break;
-    case eAppletSearchPersons:
-        appletDialog = new ActivityScanPeopleSearch( m_MyApp, eScanTypePeopleSearch, launchFrame );
-        isActivity = true;
-        break;
-    case eAppletSearchMood:
-        appletDialog = new ActivityScanPeopleSearch( m_MyApp, eScanTypeMoodMsgSearch, launchFrame );
-        isActivity = true;
-        break;
-    case eAppletScanAboutMe:
-        appletDialog = new ActivityScanProfiles( m_MyApp, launchFrame );
-        isActivity = true;
-        break;
-    case eAppletScanStoryboard:
-        appletDialog = new ActivityScanStoryBoards( m_MyApp, launchFrame );
-        isActivity = true;
-        break;
-    case eAppletScanSharedFiles:
-        appletDialog = new ActivityFileSearch( m_MyApp, launchFrame );
-        isActivity = true;
-        break;
-    case eAppletScanWebCam:
-        appletDialog = new ActivityScanWebCams( m_MyApp, launchFrame );
-        isActivity = true;
-        break;
+    case eAppletHomePage:                   m_MyApp.errMessageBox( appletMissingTitle, "Home Page Not Implemented" ); return nullptr;
 
-    case eAppletClientRandomConnect:
-        appletDialog = new AppletClientRandomConnect( m_MyApp, parent );
-        break;
-    case eAppletClientStoryboard:
-        appletDialog = new AppletClientStoryboard( m_MyApp, parent );
-        break;
+    case eAppletKodi:                       appletDialog = new AppletKodi( m_MyApp, parent ); break;
+    case eAppletLibrary:                    appletDialog = new AppletLibrary( m_MyApp, parent ); break;
+    case eAppletMessenger:                  makeMessengerFullSized(); return appletDialog;
+    case eAppletNetworkSettings:            appletDialog = new AppletNetworkSettings( m_MyApp, parent ); break;
+    case eAppletPersonalRecorder:           appletDialog = new ActivityPersonalRecorder( m_MyApp, m_MyApp.getAppGlobals().getUserIdent(), parent ); break;
+    case eAppletSettings:                   appletDialog = new AppletSettings( m_MyApp, parent ); break;
 
-    case eAppletNetHostingPage:
-        appletDialog = new AppletNetHostingPage( m_MyApp, parent );
-        break;
-    case eAppletShareServicesPage:
-        appletDialog = new AppletShareServicesPage( m_MyApp, parent );
-        break;
+    case eAppletSearchPage:	                appletDialog = new AppletSearchPage( m_MyApp, parent ); break;
+    case eAppletSearchPersons:              appletDialog = new ActivityScanPeopleSearch( m_MyApp, eScanTypePeopleSearch, launchFrame ); break;
+    case eAppletSearchMood:                 appletDialog = new ActivityScanPeopleSearch( m_MyApp, eScanTypeMoodMsgSearch, launchFrame ); break;
+    case eAppletScanAboutMe:                appletDialog = new ActivityScanProfiles( m_MyApp, launchFrame ); break;
+    case eAppletScanStoryboard:             appletDialog = new ActivityScanStoryBoards( m_MyApp, launchFrame ); break;
+    case eAppletScanSharedFiles:            appletDialog = new ActivityFileSearch( m_MyApp, launchFrame ); break;
+    case eAppletScanWebCam:                 appletDialog = new ActivityScanWebCams( m_MyApp, launchFrame ); break;
+
+    case eAppletClientChatRoom:             appletDialog = new AppletClientChatRoom( m_MyApp, parent ); break;
+    case eAppletClientRandomConnect:        appletDialog = new AppletClientRandomConnect( m_MyApp, parent ); break;
+    case eAppletClientStoryboard:           appletDialog = new AppletClientStoryboard( m_MyApp, parent ); break;
+
+    case eAppletNetHostingPage:             appletDialog = new AppletNetHostingPage( m_MyApp, parent ); break;
+    case eAppletShareServicesPage:          appletDialog = new AppletShareServicesPage( m_MyApp, parent ); break;
 
     case eAppletServiceAboutMe:             appletDialog = new AppletServiceAboutMe( m_MyApp, parent ); break;
     case eAppletServiceAvatarImage:         appletDialog = new AppletServiceAvatarImage( m_MyApp, parent ); break;
+    case eAppletServiceChatRoom:            appletDialog = new AppletServiceChatRoom( m_MyApp, parent ); break;
     case eAppletServiceConnectionTest:      appletDialog = new AppletServiceConnectionTest( m_MyApp, parent ); break;
+    case eAppletServiceHostGroup:           appletDialog = new AppletServiceHostGroup( m_MyApp, parent ); break;
+    case eAppletServiceHostGroupListing:    appletDialog = new AppletServiceHostGroupListing( m_MyApp, parent ); break;
+    case eAppletServiceHostNetwork:         appletDialog = new AppletServiceHostNetwork( m_MyApp, parent ); break;
     case eAppletServiceRandomConnect:       appletDialog = new AppletServiceRandomConnect( m_MyApp, parent ); break;
     case eAppletServiceRandomConnectRelay:  appletDialog = new AppletServiceRandomConnectRelay ( m_MyApp, parent ); break;
     case eAppletServiceRelay:               appletDialog = new AppletServiceRelay( m_MyApp, parent ); break;
@@ -271,15 +222,9 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletSettingsVoicePhone:         appletDialog = new AppletSettingsTruthOrDare( m_MyApp, parent ); break;
     case eAppletSettingsWebCamServer:       appletDialog = new AppletSettingsShareWebCam( m_MyApp, parent ); break;
 
-    case eAppletTheme:
-        appletDialog = new AppletTheme( m_MyApp, parent );
-        break;
-    case eAppletUnknown:
-        m_MyApp.errMessageBox( appletMissingTitle, "Unknown Not Implemented" );
-        return nullptr;
-    case eAppletUserIdentity:
-        appletDialog = new AppletUserIdentity( m_MyApp, parent );
-        break;
+    case eAppletTheme:                      appletDialog = new AppletTheme( m_MyApp, parent ); break;
+    case eAppletUnknown:                    m_MyApp.errMessageBox( appletMissingTitle, "Unknown Not Implemented" ); return nullptr;
+    case eAppletUserIdentity:               appletDialog = new AppletUserIdentity( m_MyApp, parent ); break;
 
 //	case eAppletPlayerVideo:
 //		appletDialog = new AppletPlayerVideo( m_MyApp, parent );

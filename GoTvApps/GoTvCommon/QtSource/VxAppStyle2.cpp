@@ -13,7 +13,7 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "VxAppStyle.h"
+#include "VxAppStyle2.h"
 #include "AppCommon.h"
 #include "VxAppTheme.h"
 #include "AppGlobals.h"
@@ -38,7 +38,6 @@
 
 #include <qdrawutil.h>
 
-
 class AppFocusFrame;
 
 namespace
@@ -51,7 +50,7 @@ namespace
 class AppFocusFrame : public QFocusFrame
 {
 public:
-    AppFocusFrame( VxAppStyle& appStyle, QWidget* parent )
+    AppFocusFrame( VxAppStyle2& appStyle, QWidget* parent )
         : QFocusFrame( parent )
         , m_AppStyle( appStyle )
     {
@@ -67,24 +66,76 @@ protected:
         painter.restore();
     }
 
-    VxAppStyle&					m_AppStyle;
+    VxAppStyle2&					m_AppStyle;
 };
 
 //============================================================================
-VxAppStyle::VxAppStyle( AppCommon& appCommon, VxAppTheme& appTheme )
-    : m_MyApp( appCommon )
+VxAppStyle2::VxAppStyle2( AppCommon& appCommon, VxAppTheme& appTheme )
+#ifdef TARGET_OS_WINDOWS
+    : QProxyStyle()
+#else
+    : QCommonStyle()
+#endif // TARGET_OS_WINDOWS
+    , m_MyApp( appCommon )
     , m_AppTheme( appTheme )
 {
 }
 
 //============================================================================
-int VxAppStyle::focusFrameBoarderWidth()
+int VxAppStyle2::focusFrameBoarderWidth()
 {
     return g_FocusFrameWidth;
 }
 
 //============================================================================
-bool VxAppStyle::event( QEvent* e )
+void VxAppStyle2::drawFocusFrame( QPainter& painter, const QRect& focusRect ) const
+{
+    m_AppTheme.drawFocusRect( painter, focusRect, focusFrameBoarderWidth() );
+}
+
+//============================================================================
+void VxAppStyle2::drawArrow( QPainter* painter, const QRect& rect, QColor arrowColor, GuiDrawDirection drawDir ) const
+{
+    QPolygon points( 3 );
+
+    int x = rect.x();
+    int y = rect.y();
+    int w = rect.width() / 2;
+    int h = rect.height() / 2;
+    x += ( rect.width() - w ) / 2;
+    y += ( rect.height() - h ) / 2;
+
+    if( drawDir == eGuiDirUp )
+    {
+        points[ 0 ] = QPoint( x, y + h );
+        points[ 1 ] = QPoint( x + w, y + h );
+        points[ 2 ] = QPoint( x + w / 2, y );
+    }
+    else if( drawDir == eGuiDirDown )
+    {
+        points[ 0 ] = QPoint( x, y );
+        points[ 1 ] = QPoint( x + w, y );
+        points[ 2 ] = QPoint( x + w / 2, y + h );
+    }
+
+    painter->save();
+    painter->setRenderHint( QPainter::Antialiasing, true );
+
+    painter->setBrush( arrowColor );
+    painter->drawPolygon( points );
+
+    painter->restore();
+}
+
+//============================================================================
+void VxAppStyle2::drawComboBoxArrow( QPainter* painter, const QRect& rect, const QPalette& palette, bool enabled ) const
+{
+    QColor arrowColor = enabled ? palette.buttonText().color() : palette.mid().color();
+    drawArrow( painter, rect, arrowColor, eGuiDirDown );
+}
+
+//============================================================================
+bool VxAppStyle2::event( QEvent* e )
 {
     bool result = QCommonStyle::event( e );
 
@@ -133,121 +184,27 @@ bool VxAppStyle::event( QEvent* e )
 }
 
 //============================================================================
-void VxAppStyle::drawFocusFrame( QPainter& painter, const QRect& focusRect ) const
+void VxAppStyle2::polish( QPalette &palette )
 {
-    m_AppTheme.drawFocusRect( painter, focusRect, focusFrameBoarderWidth() );
+    palette.setBrush( QPalette::Button, Qt::red );
 }
 
 //============================================================================
-void VxAppStyle::drawArrow( QPainter* painter, const QRect& rect, QColor arrowColor, GuiDrawDirection drawDir ) const
-{
-    QPolygon points( 3 );
-
-    int x = rect.x();
-    int y = rect.y();
-    int w = rect.width() / 2;
-    int h = rect.height() / 2;
-    x += ( rect.width() - w ) / 2;
-    y += ( rect.height() - h ) / 2;
-
-    if( drawDir == eGuiDirUp )
-    {
-        points[ 0 ] = QPoint( x, y + h );
-        points[ 1 ] = QPoint( x + w, y + h );
-        points[ 2 ] = QPoint( x + w / 2, y );
-    }
-    else if( drawDir == eGuiDirDown )
-    {
-        points[ 0 ] = QPoint( x, y );
-        points[ 1 ] = QPoint( x + w, y );
-        points[ 2 ] = QPoint( x + w / 2, y + h );
-    }
-
-    painter->save();
-    painter->setRenderHint( QPainter::Antialiasing, true );
-
-    painter->setBrush( arrowColor );
-    painter->drawPolygon( points );
-
-    painter->restore();
-}
-
-//============================================================================
-void VxAppStyle::drawComboBoxArrow( QPainter* painter, const QRect& rect, const QPalette& palette, bool enabled ) const
-{
-    QColor arrowColor = enabled ? palette.buttonText().color() : palette.mid().color();
-    drawArrow( painter, rect, arrowColor, eGuiDirDown );
-}
-
-//============================================================================
-void VxAppStyle::drawPrimitive( PrimitiveElement		primativeElem,
-                                const QStyleOption*		option,
-                                QPainter*				painter,
-                                const QWidget*			widget ) const
-{
-    if( primativeElem == PE_PanelItemViewRow )
-    {
-        // allow default
-    }
-
-    if( primativeElem == PE_PanelItemViewItem )
-    {
-        // allow default
-    }
-
-    if( primativeElem == QStyle::PE_FrameWindow )
-    {
-        // allow default
-    }
-
-    if( primativeElem == QStyle::PE_FrameFocusRect )
-    {
-        // focus frame drawn in filter
-        return;
-    }
-
-
-    if( primativeElem == PE_FrameDefaultButton )
-    {
-        // do we need a default indicator ?
-    }
-
-
-    if( primativeElem == PE_PanelButtonCommand )
-    {
-        // Could draw custom button look
-    }
-
-    if( primativeElem == PE_PanelLineEdit )
-    {
-        // allow default
-      }
-
-    if( primativeElem == PE_IndicatorCheckBox )
-    {
-        // allow default
-    }
-
-    if( primativeElem == PE_IndicatorMenuCheckMark )
-    {
-        // allow default
-    }
-
-    if( primativeElem == PE_IndicatorViewItemCheck )
-    {
-        // allow default
-    }
-
-    QCommonStyle::drawPrimitive( primativeElem, option, painter, widget );
-}
-
-//============================================================================
-void VxAppStyle::drawControl(   ControlElement			element,
-                                const QStyleOption*		option,
-                                QPainter*				painter,
-                                const QWidget*			widget ) const
+void VxAppStyle2::drawControl( ControlElement			element,
+                              const QStyleOption*		option,
+                              QPainter*				    painter,
+                              const QWidget*			widget ) const
 {
     painter->save();
+    // setting the pen here sets text color for progress bar, comobo boxe
+    painter->setPen( m_AppTheme.getColor( eWindowTextColor ) );
+    painter->setBrush( m_AppTheme.getColor( eWindowBackground ) );
+
+    painter->setBackground( m_AppTheme.getColor( eWindowBackground ) );
+    QPalette pal( option->palette );
+    pal.setColor( QPalette::Window, m_AppTheme.getColor( eWindowBackground ) );
+
+
     if( element == CE_ScrollBarSubLine || element == CE_ScrollBarAddLine )
     {
         if( ( option->state & State_Sunken ) )
@@ -268,7 +225,7 @@ void VxAppStyle::drawControl(   ControlElement			element,
             pal.setColor( QPalette::Button, option->palette.light().color() );
             pal.setColor( QPalette::Light, option->palette.button().color() );
             qDrawWinButton( painter, option->rect, pal, option->state & ( State_Sunken | State_On ),
-                             &option->palette.brush( QPalette::Button ) );
+                            &option->palette.brush( QPalette::Button ) );
         }
 
         PrimitiveElement arrow;
@@ -299,7 +256,6 @@ void VxAppStyle::drawControl(   ControlElement			element,
         arrowOpt.rect = option->rect.adjusted( 2, 2, -2, -2 );
         QCommonStyle::drawPrimitive( arrow, &arrowOpt, painter, widget );
         painter->restore();
-
         return;
     }
 
@@ -352,7 +308,7 @@ void VxAppStyle::drawControl(   ControlElement			element,
         QBrush bg = painter->background();
         Qt::BGMode bg_mode = painter->backgroundMode();
         painter->setPen( Qt::NoPen );
-        painter->setBackgroundMode( Qt::OpaqueMode );
+        painter->setBackgroundMode( Qt::OpaqueMode ); // otherwise scroll area will be transparent
 
         if( option->state & State_Sunken )
         {
@@ -392,27 +348,36 @@ void VxAppStyle::drawControl(   ControlElement			element,
 
     if( element == CE_CheckBox )
     {
-        // draw the default
+#ifdef TARGET_OS_WINDOWS
+        QProxyStyle::drawControl( element, option, painter, widget );
+#else
         QCommonStyle::drawControl( element, option, painter, widget );
+#endif // TARGET_OS_WINDOWS
 
         // draw custom check mark if checked
         if( const QStyleOptionButton * butOpt = qstyleoption_cast<const QStyleOptionButton  *>( option ) )
         {
+            QRect checkRect = subElementRect( SE_ItemViewItemCheckIndicator, butOpt, widget );
+            QColor bkgColor = m_AppTheme.getColor( eWindowBackground );
+            painter->setBrush( bkgColor );
+            painter->setPen( m_AppTheme.getColor( eShadowColor ) );
+
+            painter->drawRect( checkRect );
+
             if( butOpt->state & QStyle::State_On )
             {
-                painter->save();
                 painter->setClipRect( option->rect );
 
                 QRect checkRect = subElementRect( SE_ItemViewItemCheckIndicator, butOpt, widget );
 
                 QPalette palette( option->palette );
-                QColor checkColor = widget->isEnabled() ? palette.buttonText().color() : palette.mid().color();
+                QColor checkColor = widget->isEnabled() ? ( palette.buttonText().color().lighter() )  : palette.mid().color();
                 QColor bkgColor = palette.window().color();
                 m_MyApp.getMyIcons().drawIcon( eMyIconCheckMark, painter, checkRect, checkColor );
 
-                painter->restore();
             }
         }
+
         painter->restore();
         return;
     }
@@ -428,67 +393,147 @@ void VxAppStyle::drawControl(   ControlElement			element,
         return;
     }
 
+    //painter->setBackground( QColor( COLOR_GREEN ) );
+    //painter->setPen( QColor( COLOR_BLUE ) );
+    //painter->setBrush( QColor( COLOR_RED ) );
     if( element == QStyle::CE_ProgressBar )
     {
-        // allow default
-        QCommonStyle::drawControl( element, option, painter, widget );
+        //pal.setColor( QPalette::Window, m_AppTheme.getColor( eWindowBackground ) );
+        //m_AppTheme.setEveryColorPossible( const_cast<QPalette&>( option->palette ), QColor( COLOR_PURPLE ), QColor( COLOR_PINK_LIGHT ) );
+        //QColor bkgColor = m_AppTheme.getColor( eWindowBackground );
+        //painter->setBrush( bkgColor );
+        //painter->setPen( m_AppTheme.getColor( eShadowColor ) );
+        //painter->drawRect( option->rect );
+        //painter->restore();
+        painter->setPen( m_AppTheme.getColor( eShadowColor ) );
+        painter->setBrush( m_AppTheme.getColor( eWindowBackground ) );
+        painter->drawRect( option->rect );
         painter->restore();
         return;
+
+
     }
     else if( element == QStyle::CE_ProgressBarLabel )
     {
         // allow default
         // would be nice to draw percentage in middle of bar instead of at end
-        QCommonStyle::drawControl( element, option, painter, widget );
-        painter->restore();
-        return;
+        //painter->setPen( m_AppTheme.getColor( eShadowColor ) );
+        //painter->setBrush( m_AppTheme.getColor( eWindowBackground ) );
     }
     else if( element == QStyle::CE_ProgressBarGroove )
     {
-        // allow default
-        QCommonStyle::drawControl( element, option, painter, widget );
-        painter->restore();
-        return;
+       // painter->drawRect( option->rect );
+        //painter->restore();
+        //return;
+
+        //pal.setColor( QPalette::Window, m_AppTheme.getColor( eWindowBackground ) );
+        //m_AppTheme.setEveryColorPossible( const_cast<QPalette&>( option->palette ), QColor( COLOR_PURPLE ), QColor( COLOR_PINK_LIGHT ) );
+        //painter->setBackground( QColor( COLOR_PURPLE ) );
+        //painter->setPen( QColor( COLOR_PINK_LIGHT ) );
+        //painter->setBrush( QColor( COLOR_PINK_LIGHT ) );
     }
     else if( element == QStyle::CE_ProgressBarContents )
     {
-        // allow default
-        QCommonStyle::drawControl( element, option, painter, widget );
-        painter->restore();
-        return;
-    }
-    else if( element == QStyle::CE_PushButton )
-    {
-        QCommonStyle::drawControl( element, option, painter, widget );
-        painter->restore();
-        return;
-    }
-    else if( element == QStyle::CE_PushButtonBevel )
-    {
-        QCommonStyle::drawControl( element, option, painter, widget );
-        painter->restore();
-        return;
+        //pal.setColor( QPalette::Window, m_AppTheme.getColor( eWindowBackground ) );
+        //m_AppTheme.setEveryColorPossible( const_cast<QPalette&>(option->palette), QColor( COLOR_PURPLE ), QColor( COLOR_PINK_LIGHT ) );
+        //painter->setBackground( QColor( COLOR_PURPLE ) );
+        //painter->setPen( QColor( COLOR_PINK_LIGHT ) );
+        //painter->setBrush( QColor( COLOR_PINK_LIGHT ) );
+        //QPalette pal( option->palette );
+        //pal.setColor( QPalette::Button, option->palette.light().color() );
+        //pal.setColor( QPalette::Light, option->palette.button().color() );
+        //painter->setBackground( QColor( COLOR_PURPLE ) );
+        //painter->setPen( QColor( COLOR_PINK_LIGHT ) );
+        //painter->setBrush( QColor( COLOR_PINK_LIGHT ) );
+
+        //qDrawWinButton( painter, option->rect, pal, false, &option->palette.brush( QPalette::Button ) );
+        //painter->restore();
+
+        //return;
+        //painter->save();
+
+        //painter->setPen( m_AppTheme.getColor( eShadowColor ) );
+        //painter->setBrush( m_AppTheme.getColor( eWindowBackground ) );
+
+        //painter->drawRect( option->rect );
+        //painter->restore();
+        //return;
+
     }
     else if( element == QStyle::CE_PushButtonLabel )
     {
-        // could do something custom to the text if button is disabled
-        // allow default
-        QCommonStyle::drawControl( element, option, painter, widget );
+        //if( element->pressed() )
+        //// could do something custom to the text if button is disabled
+        //painter->setPen( m_AppTheme.getColor( eButtonTextNormal ) );
+        //painter->setBrush( m_AppTheme.getColor( eButtonBackgroundNormal ) );
+
+        //painter->drawRect( option->rect );        
+        QPalette palette( option->palette );
+        painter->save();
+        qDrawWinButton( painter, option->rect, palette, false, &option->palette.brush( QPalette::Button ) );
         painter->restore();
-        return;
     }
 
+    /*
+    QStyle::CE_MenuBarItem	20	A menu item in a QMenuBar.
+        QStyle::CE_MenuBarEmptyArea	21	The empty area of a QMenuBar.
+        QStyle::CE_MenuItem	14	A menu item in a QMenu.
+        QStyle::CE_MenuScroller	15	Scrolling areas in a QMenu when the style supports scrolling.
+        QStyle::CE_MenuTearoff	18	A menu item representing the tear off section of a QMenu.
+        QStyle::CE_MenuEmptyArea	19	The area in a menu without menu items.
+        QStyle::CE_MenuHMargin	17	The horizontal extra space on the left / right of a menu.
+        QStyle::CE_MenuVMargin	16	The vertical extra space on the top / bottom of a menu.
+*/
+#ifdef TARGET_OS_WINDOWS
     QProxyStyle::drawControl( element, option, painter, widget );
+#else
+    QCommonStyle::drawControl( element, option, painter, widget );
+#endif // TARGET_OS_WINDOWS
     painter->restore();
 }
 
 //============================================================================
-void VxAppStyle::drawComplexControl( ComplexControl				control,
+QPalette VxAppStyle2::standardPalette() const
+{
+    return m_AppTheme.getBasePalette(); //QCommonStyle::standardPalette();
+}
+
+//============================================================================
+int VxAppStyle2::styleHint( StyleHint hint, const QStyleOption* option,
+                           const QWidget* widget, QStyleHintReturn* returnData ) const
+{
+
+    if( hint == QStyle::SH_FocusFrame_AboveWidget )
+    {
+        // we do our own focus frame
+        return true;
+    }
+
+    if( hint == QStyle::SH_ItemView_ShowDecorationSelected )
+    {
+        //return true;
+    }
+
+    if( hint == QStyle::SH_GroupBox_TextLabelColor )
+    {
+        // Qt does not seem to set the right color for groupbox text
+        return  int( m_AppTheme.getColor( eWindowTextColor ).rgba() );
+    }
+
+#ifdef TARGET_OS_WINDOWS
+    return QProxyStyle::styleHint( hint, option, widget, returnData );
+#else
+    return QCommonStyle::styleHint( hint, option, widget, returnData );
+#endif // TARGET_OS_WINDOWS
+}
+
+//============================================================================
+void VxAppStyle2::drawComplexControl( ComplexControl				control,
                                      const QStyleOptionComplex*	option,
                                      QPainter*					painter,
                                      const QWidget*				widget ) const
 {
-    painter->save();
+
     if( control == CC_TitleBar )
     {
         painter->save();
@@ -594,7 +639,6 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
             drawComboBoxArrow( painter, rect, opt->palette, widget->isEnabled() );
         }
 
-        painter->restore();
         return;
     }
 
@@ -685,7 +729,6 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
             }
         }
 
-        painter->restore();
         return;
     }
 
@@ -733,7 +776,12 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
             {
                 QStyleOptionSlider tmpSlider = *slider;
                 tmpSlider.subControls = SC_SliderTickmarks;
+#ifdef TARGET_OS_WINDOWS
+                QProxyStyle::drawComplexControl( control, &tmpSlider, painter, widget );
+#else
                 QCommonStyle::drawComplexControl( control, &tmpSlider, painter, widget );
+#endif // TARGET_OS_WINDOWS
+
                 return;
             }
 
@@ -936,7 +984,6 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
             }
         }
 
-        painter->restore();
         return;
     }
 
@@ -1051,356 +1098,9 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
         // allow default
     }
 
+#ifdef TARGET_OS_WINDOWS
+    QProxyStyle::drawComplexControl( control, option, painter, widget );
+#else
     QCommonStyle::drawComplexControl( control, option, painter, widget );
-    painter->restore();
-}
-
-//============================================================================
-int VxAppStyle::pixelMetric( PixelMetric			metric,
-                             const QStyleOption*    option,
-                             const QWidget*		    widget ) const
-{
-    switch( metric )
-    {
-    case PM_IndicatorWidth:
-    case PM_IndicatorHeight:
-        break;
-
-    case PM_ListViewIconSize:
-    case PM_IconViewIconSize:
-        break;
-
-    case PM_FocusFrameVMargin:
-    case PM_FocusFrameHMargin:
-        return focusFrameBoarderWidth();
-
-    case PM_ScrollBarExtent:
-        return 2 * GetGuiParams().getControlIndicatorWidth();
-
-    case PM_ProgressBarChunkWidth:
-        return 1;
-
-    case PM_ButtonDefaultIndicator:
-    case PM_ButtonShiftHorizontal:
-    case PM_ButtonShiftVertical:
-        break;
-
-    case PM_SliderControlThickness:
-        break;
-
-    case PM_SliderLength:
-        break;
-
-    case PM_SliderTickmarkOffset:
-         break;
-
-    case PM_ButtonIconSize:
-        break;
-
-    default:
-        break;
-    }
-
-    int metricVal = QCommonStyle::pixelMetric( metric, option, widget );
-    //LogMsg( LOG_DEBUG, "Metric Val %d for case %d", metricVal, metric );
-    return metricVal;
-}
-
-//============================================================================
-QSize VxAppStyle::sizeFromContents( ContentsType type,
-    const QStyleOption* option, const QSize& contentsSize,
-    const QWidget* widget ) const
-{
-    return QCommonStyle::sizeFromContents( type, option, contentsSize, widget );
-}
-
-//============================================================================
-int VxAppStyle::styleHint( StyleHint hint, const QStyleOption* option,
-                            const QWidget* widget, QStyleHintReturn* returnData ) const
-{
-
-    if( hint == QStyle::SH_FocusFrame_AboveWidget )
-    {
-        // we do our own focus frame
-        return true;
-    }
-
-    if( hint == QStyle::SH_ItemView_ShowDecorationSelected )
-    {
-        //return true;
-    }
-
-    if( hint == QStyle::SH_GroupBox_TextLabelColor )
-    {
-        // Qt does not seem to set the right color for groupbox text
-        return  int( m_AppTheme.getColor( eTitleBarTextText ).rgba() );
-    }
-
-    return QCommonStyle::styleHint( hint, option, widget, returnData );
-}
-
-//============================================================================
-void VxAppStyle::drawItemPixmap( QPainter* painter, const QRect& rectangle, int alignment, const QPixmap& pixmap ) const
-{
-    QCommonStyle::drawItemPixmap( painter, rectangle, alignment, pixmap );
-}
-
-//============================================================================
-void VxAppStyle::drawItemText(  QPainter* painter,
-                                const QRect& rectangle, int alignment, const QPalette& palette,
-                                bool enabled, const QString& text, QPalette::ColorRole textRole ) const
-{
-    QCommonStyle::drawItemText( painter, rectangle, alignment, palette, enabled, text, textRole );
-}
-
-//============================================================================
-QPixmap VxAppStyle::generatedIconPixmap( QIcon::Mode iconMode, const QPixmap& pixmap, const QStyleOption* option ) const
-{
-    return pixmap;
-}
-
-//============================================================================
-QStyle::SubControl VxAppStyle::hitTestComplexControl(   ComplexControl				control,
-                                                        const QStyleOptionComplex*	option,
-                                                        const QPoint&				position,
-                                                        const QWidget*				widget ) const
-{
-    SubControl subControl = SC_None;
-    switch( control )
-    {
-    case CC_ScrollBar:
-        if( const QStyleOptionSlider * scrollbar = qstyleoption_cast<const QStyleOptionSlider *>( option ) )
-        {
-            QRect r;
-            uint ctrl = SC_ScrollBarAddLine;
-            while( ctrl <= SC_ScrollBarGroove )
-            {
-                r = subControlRect( control, scrollbar, QStyle::SubControl( ctrl ), widget );
-                if( r.isValid() && r.contains( position ) )
-                {
-                    subControl = QStyle::SubControl( ctrl );
-                    break;
-                }
-
-                ctrl <<= 1;
-            }
-        }
-
-        return subControl;
-
-    default:
-        break;
-    }
-
-    return QCommonStyle::hitTestComplexControl( control, option, position, widget );
-}
-
-//============================================================================
-QRect VxAppStyle::itemPixmapRect( const QRect& rectangle, int alignment, const QPixmap&	pixmap ) const
-{
-    return QCommonStyle::itemPixmapRect( rectangle, alignment, (QPixmap&)pixmap );
-}
-
-//============================================================================
-QRect VxAppStyle::itemTextRect(     const QFontMetrics&		metrics,
-                                    const QRect&			rectangle,
-                                    int						alignment,
-                                    bool					enabled,
-                                    const QString&			text ) const
-{
-    return QCommonStyle::itemTextRect( metrics, rectangle, alignment, enabled, text );
-}
-
-//============================================================================
-QPalette VxAppStyle::standardPalette() const
-{
-    return m_AppTheme.getBasePalette(); //QCommonStyle::standardPalette();
-}
-
-//============================================================================
-QPixmap VxAppStyle::standardPixmap( StandardPixmap pm, const QStyleOption* option, const QWidget* widget ) const
-{
-    return QCommonStyle::standardPixmap( pm, option, widget );
-}
-
-//============================================================================
-QRect VxAppStyle::subControlRect(   ComplexControl control,
-                                    const QStyleOptionComplex* option, SubControl subControl,
-                                    const QWidget* widget ) const
-{
-    // scroll bars do not render if allowed to default.. so customize
-    if( control == CC_Slider )
-    {
-        QRect ret;
-
-        if( const QStyleOptionSlider *slider = qstyleoption_cast<const QStyleOptionSlider *>( option ) )
-        {
-            int tickOffset = pixelMetric( PM_SliderTickmarkOffset, slider, widget );
-            int thickness = pixelMetric( PM_SliderControlThickness, slider, widget );
-
-            switch( subControl ) 
-            {
-            case SC_SliderHandle:
-            {
-                int sliderPos = 0;
-                int len = pixelMetric( PM_SliderLength, slider, widget );
-                bool horizontal = slider->orientation == Qt::Horizontal;
-                sliderPos = sliderPositionFromValue( slider->minimum, slider->maximum,
-                                                    slider->sliderPosition,
-                                                    ( horizontal ? slider->rect.width() : slider->rect.height() ) - len,
-                                                    slider->upsideDown );
-                if( horizontal )
-                {
-                    ret.setRect( slider->rect.x() + sliderPos, slider->rect.y() + tickOffset, len, thickness );
-                }
-                else
-                {
-                    ret.setRect( slider->rect.x() + tickOffset, slider->rect.y() + sliderPos, thickness, len );
-                }
-
-                break; 
-            }
-
-            case SC_SliderGroove:
-                if( slider->orientation == Qt::Horizontal )
-                {
-                    ret.setRect( slider->rect.x(), slider->rect.y() + tickOffset, slider->rect.width(), thickness );
-                }
-                else
-                {
-                    ret.setRect( slider->rect.x() + tickOffset, slider->rect.y(), thickness, slider->rect.height() );
-                }
-
-                break;
-
-            default:
-                break;
-            }
-
-            return visualRect( slider->direction, slider->rect, ret );
-        }
-    }
-
-    if( control == CC_ScrollBar )
-    {
-        QRect ret;
-        if( const QStyleOptionSlider *scrollbar = qstyleoption_cast<const QStyleOptionSlider *>( option ) )
-        {
-            const QRect scrollBarRect = scrollbar->rect;
-            int sbextent = 0;
-            if( !styleHint( SH_ScrollBar_Transient, scrollbar, widget ) )
-            {
-                sbextent = pixelMetric( PM_ScrollBarExtent, scrollbar, widget );
-            }
-
-            int maxlen = ( ( scrollbar->orientation == Qt::Horizontal ) ? scrollBarRect.width() : scrollBarRect.height() ) - ( sbextent * 2 );
-
-            int sliderlen;
-
-            // slider length
-            if( scrollbar->maximum != scrollbar->minimum )
-            {
-                uint range = scrollbar->maximum - scrollbar->minimum;
-                sliderlen = ( qint64( scrollbar->pageStep ) * maxlen ) / ( range + scrollbar->pageStep );
-
-                int slidermin = proxy()->pixelMetric( PM_ScrollBarSliderMin, scrollbar, widget );
-                if( sliderlen < slidermin || range > INT_MAX / 2 )
-                {
-                    sliderlen = slidermin;
-                }
-
-                if( sliderlen > maxlen )
-                {
-                    sliderlen = maxlen;
-                }
-            }
-            else
-            {
-                sliderlen = maxlen;
-            }
-
-            int sliderstart = sbextent + sliderPositionFromValue( scrollbar->minimum,
-                                                                    scrollbar->maximum,
-                                                                    scrollbar->sliderPosition,
-                                                                    maxlen - sliderlen,
-                                                                    scrollbar->upsideDown );
-            switch( subControl )
-            {
-            case SC_ScrollBarSubLine:  // top/left button
-                if( scrollbar->orientation == Qt::Horizontal )
-                {
-                    int buttonWidth = qMin( scrollBarRect.width() / 2, sbextent );
-                    ret.setRect( 0, 0, buttonWidth, scrollBarRect.height() );
-                }
-                else
-                {
-                    int buttonHeight = qMin( scrollBarRect.height() / 2, sbextent );
-                    ret.setRect( 0, 0, scrollBarRect.width(), buttonHeight );
-                }
-
-                break;
-
-            case SC_ScrollBarAddLine:  // bottom/right button
-                if( scrollbar->orientation == Qt::Horizontal )
-                {
-                    int buttonWidth = qMin( scrollBarRect.width() / 2, sbextent );
-                    ret.setRect( scrollBarRect.width() - buttonWidth, 0, buttonWidth, scrollBarRect.height() );
-                }
-                else
-                {
-                    int buttonHeight = qMin( scrollBarRect.height() / 2, sbextent );
-                    ret.setRect( 0, scrollBarRect.height() - buttonHeight, scrollBarRect.width(), buttonHeight );
-                }
-
-                break;
-
-            case SC_ScrollBarSlider:  // slider rect
-                if( scrollbar->orientation == Qt::Horizontal )
-                {
-                    ret.setRect( sliderstart, 0, sliderlen, scrollBarRect.height() );
-                }
-                else
-                {
-                    ret.setRect( 0, sliderstart, scrollBarRect.width(), sliderlen );
-                }
-
-                break;
-
-            default:
-                return QCommonStyle::subControlRect( control, option, subControl, widget );
-                break;
-            }
-
-            return visualRect( scrollbar->direction, scrollBarRect, ret );
-        }
-    }
-
-    if( control == CC_GroupBox )
-    {
-        // allow default
-    }
-
-    return QCommonStyle::subControlRect( control, option, subControl, widget );
-}
-
-//============================================================================
-QRect VxAppStyle::subElementRect( SubElement element,
-    const QStyleOption* option,
-    const QWidget* widget ) const
-{
-    switch( element )
-    {
-    case SE_ProgressBarGroove:
-    case SE_ProgressBarContents:
-    case SE_ProgressBarLabel:
-    {
-        // would be nice to put percent in middle of progress bar instead of end
-        break;
-    }
-
-    default:
-        break;
-    }
-
-    return QCommonStyle::subElementRect( element, option, widget );
+#endif // TARGET_OS_WINDOWS
 }

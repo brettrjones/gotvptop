@@ -33,6 +33,7 @@ AppletTheme::AppletTheme( AppCommon& app, QWidget * parent )
 	ui.m_ThemeExampleButton->setIcon( eMyIconPeople );
 	fillThemeCombo();
     fillExampleCombo();
+    ui.m_PlainTextEdit->appendPlainText( QObject::tr( "Some Text To Edit" ) );
 
 	connect( ui.m_AcceptCancelFrame, SIGNAL( signalAccepted() ), this, SLOT( slotThemeAccepted() ) );
 	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( slotThemeCanceled() ) );

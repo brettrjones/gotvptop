@@ -25,7 +25,7 @@ class VxAppTheme;
 class AppFocusFrame;
 class QRect;
 
-class VxAppStyle : public QCommonStyle
+class VxAppStyle : public QProxyStyle
 {
 public:
 	VxAppStyle( AppCommon& appCommon, VxAppTheme& appTheme );
