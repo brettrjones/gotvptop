@@ -47,8 +47,10 @@ public:
 
 	bool						isVxGUIDValid()	const;
 	std::string					toGUIDStandardFormatedString( void );
-	void						toVxGUIDHexString( std::string& strRetId );
-	std::string					toVxGUIDHexString( void );
+	void						toHexString( std::string& strRetId );
+    // buffer must be at least 33 characters in length
+    void                        toHexString( char * retBuf );
+	std::string					toHexString( void );
 	//! set VxGUID by converting hex string into VxGUID
 	bool						fromVxGUIDHexString( const char * pHexString );
 	//! get low part of online id
@@ -72,6 +74,10 @@ public:
 	static bool					isVxGUIDHexStringValid( const char * pId );
 
 protected:
+    // buffer must be at least 17 characters in length
+    void                        uint64ToHexAscii( char * retBuf, uint64_t& val );
+    char                        nibbleToHex( uint8_t val );
+
 	uint64_t					m_u64HiPart;
 	uint64_t					m_u64LoPart;
 };

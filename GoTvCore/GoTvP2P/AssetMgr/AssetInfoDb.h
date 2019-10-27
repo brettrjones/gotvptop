@@ -38,10 +38,10 @@ public:
 											VxGUID&			creatorId, 
 											VxGUID&			historyId, 
 											const char *	assetName, 
-											int64_t				assetLen, 
-											uint32_t				assetType, 							
+											int64_t			assetLen, 
+											uint32_t		assetType, 							
 											VxSha1Hash&		hashId, 
-											uint32_t				locationFlags, 
+											uint32_t		locationFlags, 
 											const char *	assetTag = "", 
 											time_t			timestamp = 0,
 											EAssetSendState sendState = eAssetSendStateNone );

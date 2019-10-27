@@ -439,11 +439,11 @@ ENetCmdType  NetServiceUtils::netCmdStringToEnum( const char * netCmd )
 	}
 	else if( 0 == strcmp( NET_CMD_ANCHOR_REQ, netCmd ) )
 	{
-		return eNetCmdAnchorReq;
+		return eNetCmdHostReq;
 	}
 	else if( 0 == strcmp( NET_CMD_ANCHOR_REPLY, netCmd ) )
 	{
-		return eNetCmdAnchorReply;
+		return eNetCmdHostReply;
 	}
 	else if( 0 == strcmp( NET_CMD_PORT_TEST_REQ, netCmd ) )
 	{
@@ -472,9 +472,9 @@ const char *  NetServiceUtils::netCmdEnumToString( ENetCmdType	eNetCmdType )
 		return NET_CMD_PORT_TEST_REQ;
 	case eNetCmdIsMyPortOpenReply:
 		return NET_CMD_PORT_TEST_REPLY;
-	case eNetCmdAnchorReq:
+	case eNetCmdHostReq:
 		return NET_CMD_ANCHOR_REQ;
-	case eNetCmdAnchorReply	:
+	case eNetCmdHostReply	:
 		return NET_CMD_ANCHOR_REPLY;
 	case eNetCmdAboutMePage:
 		return NET_CMD_PROFILE;
@@ -561,8 +561,7 @@ void NetServiceUtils::generateNetServiceChallengeHash(	std::string&			strKeyHash
 }
 
 //============================================================================
-void NetServiceUtils::generateNetServiceCryptoKey(	VxKey&					key,		
-													uint16_t						clientPort )
+void NetServiceUtils::generateNetServiceCryptoKey(	VxKey& key, uint16_t clientPort )
 {
 	std::string strPwd;
 	StdStringFormat( strPwd, "xz&gdf%d%s!?d%d759sdc", 

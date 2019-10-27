@@ -12,7 +12,7 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "PluginGroupAnchor.h"
+#include "PluginGroupHost.h"
 #include "PluginMgr.h"
 
 #include "RelayServerSession.h"
@@ -33,7 +33,7 @@
 #endif
  
 //============================================================================
-PluginGroupAnchor::PluginGroupAnchor( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+PluginGroupHost::PluginGroupHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PluginBase( engine, pluginMgr, myIdent )
 , m_PluginSessionMgr( *this, pluginMgr )
 , m_TestTimer()
@@ -42,16 +42,16 @@ PluginGroupAnchor::PluginGroupAnchor( P2PEngine& engine, PluginMgr& pluginMgr, V
 , m_MaxUserRelayAllowCnt( 1 )
 , m_MaxAnonRelayAllowCnt( 2 )
 {
-    m_ePluginType = ePluginTypeGroupAnchor;
+    m_ePluginType = ePluginTypeGroupHost;
 }
 
 //============================================================================
-PluginGroupAnchor::~PluginGroupAnchor()
+PluginGroupHost::~PluginGroupHost()
 {
 }
 
 //============================================================================
-void PluginGroupAnchor::fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount )
+void PluginGroupHost::fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount )
 {
 	m_MaxUserRelayAllowCnt = userPermittedCount;
 	if( 65000 < m_MaxUserRelayAllowCnt )
@@ -76,7 +76,7 @@ void PluginGroupAnchor::fromGuiRelayPermissionCount( int userPermittedCount, int
 }
 
 //============================================================================
-EPluginAccessState PluginGroupAnchor::canAcceptNewSession( VxNetIdent * netIdent )
+EPluginAccessState PluginGroupHost::canAcceptNewSession( VxNetIdent * netIdent )
 {
 	if( m_PluginMgr.getPktAnnounce().requiresRelay() )
 	{
@@ -118,7 +118,7 @@ EPluginAccessState PluginGroupAnchor::canAcceptNewSession( VxNetIdent * netIdent
 }
 
 //============================================================================
-bool PluginGroupAnchor::isUserRelayOk( VxGUID& srcOnlineId, VxGUID& destOnlineId )
+bool PluginGroupHost::isUserRelayOk( VxGUID& srcOnlineId, VxGUID& destOnlineId )
 {
 	if( findRelay( destOnlineId ) || findRelay( srcOnlineId )  )
 	{
@@ -129,7 +129,7 @@ bool PluginGroupAnchor::isUserRelayOk( VxGUID& srcOnlineId, VxGUID& destOnlineId
 }
 
 //============================================================================
-EPluginAccessState PluginGroupAnchor::handlePktRelayServiceReq( BigListInfo * bigListInfo, VxSktBase * sktBase, PktRelayServiceReq * relayServiceReq, PktRelayServiceReply& pktReply )
+EPluginAccessState PluginGroupHost::handlePktRelayServiceReq( BigListInfo * bigListInfo, VxSktBase * sktBase, PktRelayServiceReq * relayServiceReq, PktRelayServiceReply& pktReply )
 {
 	pktReply.setAccessState( ePluginAccessBusy );
 	if( relayServiceReq->m_u8CancelService )
@@ -200,7 +200,7 @@ EPluginAccessState PluginGroupAnchor::handlePktRelayServiceReq( BigListInfo * bi
 
 //============================================================================
 // called by Plugin Session Mgr.. plugin mutex is NOT locked
-void PluginGroupAnchor::onSessionEnded( PluginSessionBase * poSession, bool pluginIsLocked, EOfferResponse eOfferResponse )
+void PluginGroupHost::onSessionEnded( PluginSessionBase * poSession, bool pluginIsLocked, EOfferResponse eOfferResponse )
 {
 	if( false == pluginIsLocked )
 	{
@@ -218,7 +218,7 @@ void PluginGroupAnchor::onSessionEnded( PluginSessionBase * poSession, bool plug
 
 //============================================================================
 //! user wants to send offer to friend
-bool PluginGroupAnchor::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
+bool PluginGroupHost::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
 											int				pvUserData, 
 											const char *	pOfferMsg, 
 											const char *	pFileName,
@@ -248,17 +248,17 @@ bool PluginGroupAnchor::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
 		}
 		*/
 		bOfferSent = doRelayTest( netIdent );
-        LogMsg( LOG_INFO, "PluginGroupAnchor::fromGuiMakePluginOffer: doRelayTest done\n" );
+        LogMsg( LOG_INFO, "PluginGroupHost::fromGuiMakePluginOffer: doRelayTest done\n" );
 	}
 	else
 	{
-        LogMsg( LOG_ERROR, "PluginGroupAnchor::fromGuiMakePluginOffer: Invalid Offer\n" );
+        LogMsg( LOG_ERROR, "PluginGroupHost::fromGuiMakePluginOffer: Invalid Offer\n" );
 	}
 	return bOfferSent;
 }
 
 //============================================================================
-RelaySession * PluginGroupAnchor::startNewRelayService( VxSktBase * sktBase, VxNetIdent * netIdent, VxGUID& rmtInstance )
+RelaySession * PluginGroupHost::startNewRelayService( VxSktBase * sktBase, VxNetIdent * netIdent, VxGUID& rmtInstance )
 {
 	RelayServerSession * serverSession = findOrCreateRelayServer( sktBase, netIdent );
 	serverSession->setRmtSessionId( rmtInstance );
@@ -271,7 +271,7 @@ RelaySession * PluginGroupAnchor::startNewRelayService( VxSktBase * sktBase, VxN
 }
 
 //============================================================================
-RelaySession * PluginGroupAnchor::startNewRelayClient( VxSktBase * sktBase, VxNetIdent * netIdent, VxGUID& rmtInstance )
+RelaySession * PluginGroupHost::startNewRelayClient( VxSktBase * sktBase, VxNetIdent * netIdent, VxGUID& rmtInstance )
 {
 	RelayClientSession * poSession = findOrCreateRelayClient( sktBase, netIdent );
 	poSession->setRmtSessionId( rmtInstance );
@@ -284,7 +284,7 @@ RelaySession * PluginGroupAnchor::startNewRelayClient( VxSktBase * sktBase, VxNe
 }
 
 //============================================================================
-RelaySession * PluginGroupAnchor::requestRelayService( VxNetIdent * netIdent, RelayClientSession * poSessionIn, bool bTest )
+RelaySession * PluginGroupHost::requestRelayService( VxNetIdent * netIdent, RelayClientSession * poSessionIn, bool bTest )
 {
 	VxSktBase * sktBase = NULL;
 	RelaySession * poSession = poSessionIn;
@@ -343,7 +343,7 @@ RelaySession * PluginGroupAnchor::requestRelayService( VxNetIdent * netIdent, Re
 }
 
 //============================================================================
-PluginSessionBase * PluginGroupAnchor::findRelay( VxGUID& onlineId )
+PluginSessionBase * PluginGroupHost::findRelay( VxGUID& onlineId )
 {
 	AutoPluginLock pluginMutexLock( this );
 	std::map<VxGUID, PluginSessionBase *>&	sessionList = m_PluginSessionMgr.getSessions();
@@ -357,7 +357,7 @@ PluginSessionBase * PluginGroupAnchor::findRelay( VxGUID& onlineId )
 }
 
 //============================================================================
-RelayClientSession * PluginGroupAnchor::findOrCreateRelayClient( VxSktBase * sktBase, VxNetIdent * netIdent )
+RelayClientSession * PluginGroupHost::findOrCreateRelayClient( VxSktBase * sktBase, VxNetIdent * netIdent )
 {
 	RelayClientSession * poSession = NULL;
 
@@ -388,7 +388,7 @@ RelayClientSession * PluginGroupAnchor::findOrCreateRelayClient( VxSktBase * skt
 }
 
 //============================================================================
-RelayServerSession * PluginGroupAnchor::findOrCreateRelayServer(  VxSktBase * sktBase, VxNetIdent * netIdent )
+RelayServerSession * PluginGroupHost::findOrCreateRelayServer(  VxSktBase * sktBase, VxNetIdent * netIdent )
 {
 	RelayServerSession * poSession = NULL;
 
@@ -422,20 +422,20 @@ RelayServerSession * PluginGroupAnchor::findOrCreateRelayServer(  VxSktBase * sk
 }
 
 //============================================================================
-void PluginGroupAnchor::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
+void PluginGroupHost::replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt )
 {
 	m_PluginSessionMgr.replaceConnection( netIdent, poOldSkt, poNewSkt );
 }
 
 //============================================================================
-void PluginGroupAnchor::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
+void PluginGroupHost::onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase )
 {
 	m_PluginSessionMgr.onContactWentOffline( netIdent, sktBase );
 	m_FriendGuidList.removeGuid( netIdent->getMyOnlineId() );
 }
 
 //============================================================================
-void PluginGroupAnchor::onConnectionLost( VxSktBase * sktBase )
+void PluginGroupHost::onConnectionLost( VxSktBase * sktBase )
 {
 	m_PluginSessionMgr.onConnectionLost( sktBase );
 }

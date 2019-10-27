@@ -16,7 +16,7 @@
 
 #include "NetServiceDefs.h"
 #include "NetServiceUtils.h"
-#include "NetServiceAnchor.h"
+#include "NetServiceHost.h"
 
 #include "NetActionIdle.h"
 
@@ -37,7 +37,7 @@ class P2PEngine;
 class EngineSettings;
 class PktAnnounce;
 class NetworkMgr;
-class AnchorList;
+class HostList;
 
 typedef void (*MY_PORT_OPEN_CALLBACK_FUNCTION )( void *, EAppErr, std::string& );
 
@@ -54,7 +54,7 @@ public:
 
 	P2PEngine&					getEngine( void )			{ return m_Engine; }
 	NetServiceUtils&			getNetUtils( void )			{ return m_NetServiceUtils; }
-	NetServiceAnchor&			getNetServiceAnchor( void )	{ return m_NetServiceAnchor; }
+	NetServiceHost&			getNetServiceHost( void )	{ return m_NetServiceHost; }
 
 	VxGUID&						getMyOnlineId( void );
 
@@ -62,14 +62,14 @@ public:
 	void						netServicesShutdown( void );
 
 	void						testIsMyPortOpen( void );
-	void						announceToAnchor( std::string& anchorIp, uint16_t u16AnchorPort, EAnchorAction eAnchorAction = eAnchorActionAnnounce );
-	void						performPhoneShake( void );
+	void						announceToHost( std::string& anchorIp, uint16_t u16HostPort, EHostAction eHostAction = eHostActionAnnounce );
+	void						performRandomConnect( void );
 
 	void						queryWhatsMyIp( void );
 	void						netActionResultQueryWhatsMyIp( const char * ipAddress );
 	void						netActionResultIsMyPortOpen( EAppErr eAppErr, std::string& myExternalIp );
-	void						netActionResultAnnounce( EAppErr eAppErr, AnchorList * anchorList, EAnchorAction eAnchorAction = eAnchorActionAnnounce );
-	void						netActionResultPhoneShake( EAppErr eAppErr, AnchorList * anchorList );
+	void						netActionResultAnnounce( EAppErr eAppErr, HostList * anchorList, EHostAction eHostAction = eHostActionAnnounce );
+	void						netActionResultRandomConnect( EAppErr eAppErr, HostList * anchorList );
 
 	void						setMyPortOpenResultCallback( MY_PORT_OPEN_CALLBACK_FUNCTION pfuncPortOpenCallbackHandler, void * userData );
 
@@ -77,15 +77,15 @@ public:
 	RCODE						handleNetCmdPong( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 	RCODE						handleNetCmdIsMyPortOpenReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 	RCODE						handleNetCmdIsMyPortOpenReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
-	RCODE						handleNetCmdAnchorReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
-	RCODE						handleNetCmdAnchorReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+	RCODE						handleNetCmdHostReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+	RCODE						handleNetCmdHostReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 
 	void						runNetActions( void );
 
 	VxSktConnectSimple *		actionReqConnectToNetService( void );
 	bool						actionReqConnectToNetService( VxSktConnectSimple& sktSimple );
-	VxSktConnectSimple *		actionReqConnectToAnchor( void );
-	bool						actionReqConnectToAnchor( VxSktConnectSimple& sktSimple );
+	VxSktConnectSimple *		actionReqConnectToHost( void );
+	bool						actionReqConnectToHost( VxSktConnectSimple& sktSimple );
 
 	bool						doNetCmdPing( const char * ipAddress, uint16_t u16Port, std::string& retPong );
 
@@ -113,7 +113,7 @@ protected:
 	EngineSettings&				m_EngineSettings;
 	NetworkMgr&					m_NetworkMgr;
 	NetServiceUtils				m_NetServiceUtils;
-	NetServiceAnchor			m_NetServiceAnchor;
+	NetServiceHost			m_NetServiceHost;
 
 	std::vector<NetActionBase*>	m_NetActionList;
 	NetActionIdle				m_NetActionIdle;
@@ -127,7 +127,7 @@ protected:
 	MY_PORT_OPEN_CALLBACK_FUNCTION	m_pfuncPortOpenCallbackHandler;
 	void *						m_PortOpenCallbackUserData;
 
-	VxSktConnectSimple			m_SktToAnchor;
+	VxSktConnectSimple			m_SktToHost;
 
 private:
 	NetServicesMgr(); // don't allow default constructor

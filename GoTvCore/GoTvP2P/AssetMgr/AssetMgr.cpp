@@ -608,10 +608,10 @@ void AssetMgr::updateFileListPackets( void )
 		if( 0 == pktFileList )
 		{
 			pktFileList = new PktFileListReply();
-			pktFileList->setListIndex( m_FileListPackets.size() );
+			pktFileList->setListIndex( (uint32_t)m_FileListPackets.size() );
 		}
 
-		if( pktFileList->canAddFile( assetInfo->getRemoteAssetName().size() + 1 ) )
+		if( pktFileList->canAddFile( (uint32_t)(assetInfo->getRemoteAssetName().size() + 1) ) )
 		{
 			pktFileList->addFile(	assetInfo->getAssetHashId(),
 									assetInfo->getAssetLength(),
@@ -622,7 +622,7 @@ void AssetMgr::updateFileListPackets( void )
 		{
 			m_FileListPackets.push_back( pktFileList );
 			pktFileList = new PktFileListReply();
-			pktFileList->setListIndex( m_FileListPackets.size() );
+			pktFileList->setListIndex( (uint32_t)m_FileListPackets.size() );
 			pktFileList->addFile(	assetInfo->getAssetHashId(),
 									assetInfo->getAssetLength(),
 									assetInfo->getAssetType(),

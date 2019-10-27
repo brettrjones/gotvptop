@@ -42,7 +42,7 @@ private slots:
 
     void						slotHomeButtonClicked( void );
     void						slotSimulateShakeClicked( void );
-    void						slotPhoneShakeStatus( EPhoneShakeStatus eAnchorStatus, QString strMsg );
+    void						slotRandomConnectStatus( ERandomConnectStatus eHostStatus, QString strMsg );
 
 protected:
     virtual void				showEvent( QShowEvent * ev );

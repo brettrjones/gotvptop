@@ -82,11 +82,11 @@ RCODE PluginNetServices::internalHandleHttpConnection( VxSktBase * sktBase, NetS
 	case eNetCmdIsMyPortOpenReply:		
 		return m_NetServicesMgr.handleNetCmdIsMyPortOpenReply( sktBase, netServiceHdr );
 
-	case eNetCmdAnchorReq:		
-		return m_NetServicesMgr.handleNetCmdAnchorReq( sktBase, netServiceHdr );
+	case eNetCmdHostReq:		
+		return m_NetServicesMgr.handleNetCmdHostReq( sktBase, netServiceHdr );
 
-	case eNetCmdAnchorReply	:		
-		return m_NetServicesMgr.handleNetCmdAnchorReply( sktBase, netServiceHdr );
+	case eNetCmdHostReply	:		
+		return m_NetServicesMgr.handleNetCmdHostReply( sktBase, netServiceHdr );
 
 	case eNetCmdUnknown:
 	default:

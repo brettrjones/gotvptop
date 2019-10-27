@@ -1,6 +1,5 @@
 //============================================================================
-// Copyright (C) 2014 Brett R. Jones 
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2019 Brett R. Jones 
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,7 +12,7 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "AnchorTest.h"
+#include "HostTest.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/NetServices/NetServicesMgr.h>
@@ -32,14 +31,14 @@
 namespace
 {
 	//============================================================================
-	uint32_t AnchorUrlTestThreadFunc( void * pvContext )
+	uint32_t HostUrlTestThreadFunc( void * pvContext )
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
-		AnchorTest * anchorTest = (AnchorTest *)poThread->getThreadUserParam();
+		HostTest * anchorTest = (HostTest *)poThread->getThreadUserParam();
 		if( false == poThread->isAborted() )
 		{
-			anchorTest->doAnchorUrlTest();
+			anchorTest->doHostUrlTest();
 		}
 
 		poThread->threadAboutToExit();
@@ -51,33 +50,34 @@ namespace
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
-		AnchorTest * anchorTest = (AnchorTest *)poThread->getThreadUserParam();
+		HostTest * anchorTest = (HostTest *)poThread->getThreadUserParam();
 		if( false == poThread->isAborted() )
 		{
 			anchorTest->doNetServiceUrlTest();
 		}
+
 		poThread->threadAboutToExit();
 		return 0;
 	}
 }
 
 //============================================================================
-AnchorTest::AnchorTest( EngineSettings& engineSettings, NetServicesMgr& netServicesMgr )
+HostTest::HostTest( EngineSettings& engineSettings, NetServicesMgr& netServicesMgr )
 : m_EngineSettings( engineSettings )
 , m_NetServicesMgr( netServicesMgr )
 {
 }
 
 //============================================================================
-IToGui& AnchorTest::getToGui()
+IToGui& HostTest::getToGui()
 {
     return IToGui::getToGui();
 }
 
 //============================================================================
-const char * AnchorTest::getTestName( bool isAnchor )
+const char * HostTest::getTestName( bool isHost )
 {
-	if( isAnchor )
+	if( isHost )
 	{
 		return "ANCHOR TEST: ";
 	}
@@ -86,26 +86,26 @@ const char * AnchorTest::getTestName( bool isAnchor )
 }
 
 //============================================================================
-void AnchorTest::fromGuiVerifyNetHostSettings( void )
+void HostTest::fromGuiVerifyNetHostSettings( void )
 {
-	startAnchorUrlTest();
+	startHostUrlTest();
 	startNetServiceUrlTest();
 }
 
 //============================================================================
-void AnchorTest::startAnchorUrlTest( void )
+void HostTest::startHostUrlTest( void )
 {
-	m_AnchorThread.abortThreadRun( true );
-	while( m_AnchorThread.isThreadRunning() )
+	m_HostThread.abortThreadRun( true );
+	while( m_HostThread.isThreadRunning() )
 	{
 		VxSleep( 200 );
 	}
 
-	m_AnchorThread.startThread( (VX_THREAD_FUNCTION_T)AnchorUrlTestThreadFunc, this, "AnchorUrlTestThread" );
+	m_HostThread.startThread( (VX_THREAD_FUNCTION_T)HostUrlTestThreadFunc, this, "HostUrlTestThread" );
 }
 
 //============================================================================
-void AnchorTest::startNetServiceUrlTest( void )
+void HostTest::startNetServiceUrlTest( void )
 {
 	m_NetServiceThread.abortThreadRun( true );
 	while( m_NetServiceThread.isThreadRunning() )
@@ -117,7 +117,7 @@ void AnchorTest::startNetServiceUrlTest( void )
 }
 
 //============================================================================
-void AnchorTest::sendTestStatus( EAnchorTestStatus eStatus, const char * msg, ... )
+void HostTest::sendTestStatus( EHostTestStatus eStatus, const char * msg, ... )
 {
 	char as8Buf[ 1024 ];
 	va_list argList;
@@ -125,12 +125,12 @@ void AnchorTest::sendTestStatus( EAnchorTestStatus eStatus, const char * msg, ..
 	vsnprintf( as8Buf, sizeof( as8Buf ), msg, argList );
 	as8Buf[sizeof( as8Buf ) - 1] = 0;
 	va_end( argList );
-	LogMsg( LOG_STATUS, "Test Status %s: %s\n", DescribeAnchorStatus( eStatus), as8Buf ); 
-	IToGui::getToGui().toGuiAnchorStatus( eStatus, as8Buf );
+	LogMsg( LOG_STATUS, "Test Status %s: %s\n", DescribeHostStatus( eStatus), as8Buf ); 
+	IToGui::getToGui().toGuiHostStatus( eStatus, as8Buf );
 }
 
 //============================================================================
-void AnchorTest::sendTestLog( const char * msg, ... )
+void HostTest::sendTestLog( const char * msg, ... )
 {
 	char as8Buf[ 1024 ];
 	va_list argList;
@@ -138,17 +138,17 @@ void AnchorTest::sendTestLog( const char * msg, ... )
 	vsnprintf( as8Buf, sizeof( as8Buf ), msg, argList );
 	as8Buf[sizeof( as8Buf ) - 1] = 0;
 	va_end( argList );
-	LogMsg( LOG_STATUS, "Anchor Test Log %s\n", as8Buf ); 
-	IToGui::getToGui().toGuiAnchorStatus( eAnchorTestStatusLogMsg, as8Buf );
+	LogMsg( LOG_STATUS, "Host Test Log %s\n", as8Buf ); 
+	IToGui::getToGui().toGuiHostStatus( eHostTestStatusLogMsg, as8Buf );
 }
 
 //============================================================================
-void AnchorTest::doAnchorUrlTest( void )
+void HostTest::doHostUrlTest( void )
 {
 	if( m_EngineSettings.getIsThisNodeAnNetHost() )
 	{
-		sendTestStatus( eAnchorTestStatusAnchorOk,
-			":Skipped Anchor Test Because Is Anchor\n" );
+		sendTestStatus( eHostTestStatusHostOk,
+			":Skipped Host Test Because Is Host\n" );
 		return;
 	}
 
@@ -158,7 +158,7 @@ void AnchorTest::doAnchorUrlTest( void )
 }
 
 //============================================================================
-void AnchorTest::doNetServiceUrlTest( void )
+void HostTest::doNetServiceUrlTest( void )
 {
 	std::string netServiceUrl;
 	m_EngineSettings.getNetServiceWebsiteUrl( netServiceUrl );
@@ -166,9 +166,9 @@ void AnchorTest::doNetServiceUrlTest( void )
 }
 
 //============================================================================
-bool AnchorTest::doConnectionTest( std::string& nodeUrl, bool isAnchor )
+bool HostTest::doConnectionTest( std::string& nodeUrl, bool isHost )
 {
-	sendTestLog( "%s test start using %s", getTestName( isAnchor ), nodeUrl.c_str() );
+	sendTestLog( "%s test start using %s", getTestName( isHost ), nodeUrl.c_str() );
 
 	VxSktConnectSimple sktSimple;
 	VxTimer testTimer;
@@ -182,9 +182,9 @@ bool AnchorTest::doConnectionTest( std::string& nodeUrl, bool isAnchor )
 												u16Port, 
 												ANCHOR_CONNECT_TIMEOUT ) )
 	{
-		sendTestStatus( isAnchor ? eAnchorTestStatusAnchorConnectFail : eAnchorTestStatusNetServiceConnectFail,
-			"%s Could not connect to %s (%s)", getTestName( isAnchor ), nodeUrl.c_str(), sktSimple.getRemoteIpAddress()  );
-		return doConnectTestFailed( isAnchor );
+		sendTestStatus( isHost ? eHostTestStatusHostConnectFail : eHostTestStatusNetServiceConnectFail,
+			"%s Could not connect to %s (%s)", getTestName( isHost ), nodeUrl.c_str(), sktSimple.getRemoteIpAddress()  );
+		return doConnectTestFailed( isHost );
 	}
 
 	sktSimple.dumpConnectionInfo();
@@ -192,29 +192,29 @@ bool AnchorTest::doConnectionTest( std::string& nodeUrl, bool isAnchor )
 	std::string retPong;
 	if( false == m_NetServicesMgr.sendAndRecievePing( testTimer, sktSimple, retPong, 5000 ) )
 	{
-		sendTestStatus( isAnchor ? eAnchorTestStatusAnchorConnectionDropped : eAnchorTestStatusNetServiceConnectionDropped,
-			"%s Connected to %s but dropped connection (wrong network name ?)", getTestName( isAnchor ), nodeUrl.c_str() );
+		sendTestStatus( isHost ? eHostTestStatusHostConnectionDropped : eHostTestStatusNetServiceConnectionDropped,
+			"%s Connected to %s but dropped connection (wrong network name ?)", getTestName( isHost ), nodeUrl.c_str() );
 		sktSimple.closeSkt();
-		return doConnectTestFailed( isAnchor );
+		return doConnectTestFailed( isHost );
 	}
 
 	sktSimple.closeSkt();
-	return doConnectTestSuccess( isAnchor, retPong );
+	return doConnectTestSuccess( isHost, retPong );
 }
 
 //============================================================================
-bool AnchorTest::doConnectTestFailed( bool isAnchor )
+bool HostTest::doConnectTestFailed( bool isHost )
 {
-	sendTestStatus( isAnchor ? eAnchorTestStatusAnchorTestComplete : eAnchorTestStatusNetServiceTestComplete,
-		"%s Test Failed", getTestName( isAnchor ) );
+	sendTestStatus( isHost ? eHostTestStatusHostTestComplete : eHostTestStatusNetServiceTestComplete,
+		"%s Test Failed", getTestName( isHost ) );
 	return false;
 }
 
 //============================================================================
-bool AnchorTest::doConnectTestSuccess( bool isAnchor, std::string& pongResult )
+bool HostTest::doConnectTestSuccess( bool isHost, std::string& pongResult )
 {
-	sendTestStatus( isAnchor ? eAnchorTestStatusAnchorTestComplete : eAnchorTestStatusNetServiceTestComplete,
-		"%s Test Success %s", getTestName( isAnchor ), pongResult.c_str() );
+	sendTestStatus( isHost ? eHostTestStatusHostTestComplete : eHostTestStatusNetServiceTestComplete,
+		"%s Test Success %s", getTestName( isHost ), pongResult.c_str() );
 	return true;
 }
 

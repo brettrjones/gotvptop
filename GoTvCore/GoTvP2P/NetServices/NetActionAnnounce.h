@@ -17,7 +17,7 @@
 #include "NetActionBase.h"
 #include "NetServiceDefs.h"
 
-#include <GoTvCore/GoTvP2P/Anchor/AnchorDefs.h>
+#include <GoTvCore/GoTvP2P/HostMgr/HostDefs.h>
 
 #include <string>
 
@@ -25,23 +25,23 @@ class VxSktBase;
 class NetServicesMgr;
 class NetServiceHdr;
 class VxSktConnectSimple;
-class AnchorList;
+class HostList;
 
 class NetActionAnnounce : public NetActionBase
 {
 public:
-	NetActionAnnounce( NetServicesMgr& netServicesMgr, std::string& anchorIp, uint16_t u16AnchorPort, EAnchorAction eAnchorAction );
-	virtual ~NetActionAnnounce();
+	NetActionAnnounce( NetServicesMgr& netServicesMgr, std::string& anchorIp, uint16_t u16HostPort, EHostAction eHostAction );
+	virtual ~NetActionAnnounce() = default;
 
 	virtual ENetActionType		getNetActionType( void )			{ return eNetActionAnnounce; }
 	void						doAction( void );
 
 protected:
-	int							buildAnnounceCmd( std::string& strNetCmdHdr, uint16_t clientPort, AnchorList& anchorList, EAnchorAction anchorAction );
+	int							buildAnnounceCmd( std::string& strNetCmdHdr, uint16_t clientPort, HostList& anchorList, EHostAction anchorAction );
 	int							getAnnounceData( VxSktConnectSimple * netServConn, char * pRxBuf, int bufLen );
-	bool						decryptAnchorList( char * content, int contentDataLen, uint16_t clientPort );
+	bool						decryptHostList( char * content, int contentDataLen, uint16_t clientPort );
 
-	EAnchorAction				m_eAnchorAction;
+	EHostAction				m_eHostAction;
 };
 
 

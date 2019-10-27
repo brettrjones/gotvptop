@@ -56,7 +56,9 @@ enum ENetworkStateType
 	eNetworkStateTypeOnlineThroughRelay		= 7,
 	eNetworkStateTypeGetRelayList			= 8,
 	eNetworkStateTypeNoInternetConnection	= 9,
-	eNetworkStateTypeFailedResolveAnchor	= 10,
+	eNetworkStateTypeFailedResolveHostNetwork	    = 10,
+    eNetworkStateTypeFailedResolveHostGroupList = 11,
+    eNetworkStateTypeFailedResolveHostGroup = 12,
 
 	eMaxNetworkStateType
 };
@@ -64,27 +66,26 @@ enum ENetworkStateType
 //! Network State as text
 const char * DescribeNetworkState( ENetworkStateType networkStateType );
 
-//! \public Anchor connection test state
-enum EAnchorTestStatus
+//! \public Host connection test state
+enum EHostTestStatus
 {
-	eAnchorTestStatusUnknown						= 0,
-	eAnchorTestStatusLogMsg							= 1,
+    eHostTestStatusUnknown = 0,
+    eHostTestStatusLogMsg = 1,
 
-	eAnchorTestStatusAnchorOk						= 2,
-	eAnchorTestStatusAnchorConnectFail				= 3,
-	eAnchorTestStatusAnchorConnectionDropped		= 4,
-	eAnchorTestStatusAnchorTestComplete				= 5,
+    eHostTestStatusHostOk = 2,
+    eHostTestStatusHostConnectFail = 3,
+    eHostTestStatusHostConnectionDropped = 4,
+    eHostTestStatusHostTestComplete = 5,
 
-	eAnchorTestStatusNetServiceOk					= 6,
-	eAnchorTestStatusNetServiceConnectFail			= 7,
-	eAnchorTestStatusNetServiceConnectionDropped	= 8,
-	eAnchorTestStatusNetServiceTestComplete			= 9,
+    eHostTestStatusNetServiceOk = 6,
+    eHostTestStatusNetServiceConnectFail = 7,
+    eHostTestStatusNetServiceConnectionDropped = 8,
+    eHostTestStatusNetServiceTestComplete = 9,
 
-	eMaxAnchorTestStatusType
+    eMaxHostTestStatusType
 };
-
-//! Anchor connection test state as text
-const char * DescribeAnchorStatus( EAnchorTestStatus eAnchorStatus );
+//! Host connection test state as text
+const char * DescribeHostStatus( EHostTestStatus eHostStatus );
 
 //! \public Can Direct Connect test state
 enum EIsPortOpenStatus
@@ -107,7 +108,7 @@ const char * DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus );
 
 
 //! Describe connect by shaking phone ( or press simulate phone shake ) status as text
-const char * DescribePhoneShakeStatus( EPhoneShakeStatus ePortOpenStatus );
+const char * DescribeRandomConnectStatus( ERandomConnectStatus ePortOpenStatus );
 
 //! IToGui is an abstract interface for calls to GUI from native C++/C code
 class IToGui
@@ -137,11 +138,12 @@ public:
 	/// Send Network state to GUI for display
 	virtual void				toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" ) = 0;
 	/// Send anchor status to GUI for display
-	virtual void				toGuiAnchorStatus( EAnchorTestStatus eAnchorStatus, const char * msg = "" ) = 0;
+	virtual void				toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg = "" ) = 0;
+
 	/// Send is port open test state/status to GUI
 	virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) = 0;
 	/// Send connect by phone shake status to GUI
-	virtual void				toGuiPhoneShakeStatus( EPhoneShakeStatus ePhoneShakeStatus, const char * msg = "" ) = 0;
+	virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) = 0;
 	/// Send relay status to GUI for display
 	virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) = 0;
 

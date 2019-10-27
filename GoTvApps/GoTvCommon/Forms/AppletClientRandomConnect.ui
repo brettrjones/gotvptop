@@ -110,7 +110,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="m_SearchForRandomPersonLabel">
         <property name="text">
          <string>Random Person Search List</string>
         </property>

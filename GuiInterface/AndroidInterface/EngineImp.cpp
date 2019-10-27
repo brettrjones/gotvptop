@@ -153,9 +153,9 @@ void EngineImp::toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * ms
 }
 
 //============================================================================
-void EngineImp::toGuiAnchorStatus( EAnchorTestStatus eAnchorStatus, const char * msg )
+void EngineImp::toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg )
 {
-	JavaToGuiAnchorStatus( eAnchorStatus, msg );
+	JavaToGuiHostStatus( eHostStatus, msg );
 }
 
 //============================================================================
@@ -165,9 +165,9 @@ void EngineImp::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, cons
 }
 
 //============================================================================
-void EngineImp::toGuiPhoneShakeStatus( EPhoneShakeStatus ePhoneShakeStatus, const char * msg )
+void EngineImp::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg )
 {
-	JavaToGuiPhoneShakeStatus( ePhoneShakeStatus, msg );
+	JavaToGuiRandomConnectStatus( eRandomConnectStatus, msg );
 }
 
 //============================================================================
@@ -801,9 +801,9 @@ void EngineImp::fromGuiNetworkSettingsChanged( void )
 }
 
 //============================================================================
-void EngineImp::fromGuiVerifyAnchorSettings( void )
+void EngineImp::fromGuiVerifyHostSettings( void )
 {
-	m_Engine.fromGuiVerifyAnchorSettings();
+	m_Engine.fromGuiVerifyHostSettings();
 }
 
 //============================================================================

@@ -28,11 +28,11 @@ class BigListInfo;
 class PktRelayServiceReq;
 class PktRelayServiceReply;
 
-class PluginGroupAnchor : public PluginBase
+class PluginGroupHost : public PluginBase
 {
 public:
-    PluginGroupAnchor( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-    virtual ~PluginGroupAnchor();
+    PluginGroupHost( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+    virtual ~PluginGroupHost();
 
 	bool						verboseLog( void )					{ return m_bVerbose; }
 	bool						isTest( void )						{ return m_bTest; }	
@@ -101,7 +101,7 @@ protected:
 	void						onConnectionLost( VxSktBase * sktBase );
 
 	//=== constants ===//
-    typedef long (PluginGroupAnchor::*RELAY_PKT_FUNCTION)( VxSktBase *, VxPktHdr *, VxNetIdent * );
+    typedef long (PluginGroupHost::*RELAY_PKT_FUNCTION)( VxSktBase *, VxPktHdr *, VxNetIdent * );
 
 	//=== vars ====//
 	PluginSessionMgr			m_PluginSessionMgr;

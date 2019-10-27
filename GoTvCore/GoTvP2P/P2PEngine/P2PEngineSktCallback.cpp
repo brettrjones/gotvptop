@@ -131,7 +131,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 																							pktHdr->getPktLength(),
 																							sktBase->getRemoteIp(),
 																							sktBase->getRemotePort(),
-																							pktHdr->getSrcOnlineId().toVxGUIDHexString().c_str() );
+																							pktHdr->getSrcOnlineId().toHexString().c_str() );
 
 			//hackerOffense( NULL, 1, sktBase->getRemoteIpBinary(), "Hacker no announcement attack from ip %s\n", sktBase->getRemoteIp() );
 			// release the mutex

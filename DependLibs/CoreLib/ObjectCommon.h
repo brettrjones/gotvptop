@@ -33,7 +33,7 @@
 #define OBJNAME_ACTIVITY_PERMISSIONS					"ActivityPermissions"
 #define OBJNAME_ACTIVITY_PERMISSIONS_RELAY				"ActivityPermissionsRelay"
 #define OBJNAME_ACTIVITY_PERSONAL_RECORDER				"ActivityPersonalRecorder"
-//#define OBJNAME_ACTIVITY_PHONE_SHAKE					"ActivityPhoneShake"
+//#define OBJNAME_ACTIVITY_RANDOM_CONNECT					"ActivityRandomConnect"
 #define OBJNAME_ACTIVITY_PEOPLE_SEARCH					"ActivityScanPeopleSearch"
 #define OBJNAME_ACTIVITY_SCAN_PROFILES					"ActivityScanProfiles"
 #define OBJNAME_ACTIVITY_SCAN_STORYBOARDS				"ActivityScanStoryBoards"

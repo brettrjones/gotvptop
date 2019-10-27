@@ -57,9 +57,9 @@ public:
 
 	void						setNetHostWebsiteUrl( std::string& strWebsiteUrl );
 	void						getNetHostWebsiteUrl( std::string& strWebsiteUrl );
-	void						setIsThisNodeAnNetHost( bool isAnchor );
+	void						setIsThisNodeAnNetHost( bool isHost );
 	bool						getIsThisNodeAnNetHost( void );
-	void						setExcludeMeFromNetHostList( bool excludeFromAnchorList );
+	void						setExcludeMeFromNetHostList( bool excludeFromHostList );
 	bool						getExcludeMeFromNetHostList( void );
 
 	void						setNetServiceWebsiteUrl( std::string& strWebsiteUrl );

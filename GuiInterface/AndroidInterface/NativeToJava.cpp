@@ -220,12 +220,12 @@ NativeToJavaClass * GetNativeToJavaClass( void )
 	//MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiNetworkState 0x%x\n", poClass->m_methToGuiNetworkState );
 	poClass->m_methToGuiMyRelayStatus 			= poClass->m_poEnv->GetStaticMethodID( ( jclass )poClass->m_JavaClass, "toGuiMyRelayStatus", "(ILjava/lang/String;)V" );
 	//MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiMyRelayStatus 0x%x\n", poClass->m_methToGuiMyRelayStatus );
-	poClass->m_methToGuiAnchorStatus 			= poClass->m_poEnv->GetStaticMethodID( ( jclass )poClass->m_JavaClass, "toGuiAnchorStatus", "(ILjava/lang/String;)V" );
-	//MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiAnchorStatus 0x%x\n", poClass->m_methToGuiAnchorStatus );
+	poClass->m_methToGuiHostStatus 			= poClass->m_poEnv->GetStaticMethodID( ( jclass )poClass->m_JavaClass, "toGuiHostStatus", "(ILjava/lang/String;)V" );
+	//MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiHostStatus 0x%x\n", poClass->m_methToGuiHostStatus );
 	poClass->m_methToGuiIsPortOpenStatus 		= poClass->m_poEnv->GetStaticMethodID( ( jclass )poClass->m_JavaClass, "toGuiIsPortOpenStatus", "(ILjava/lang/String;)V" );
 	//MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiIsPortOpenStatus 0x%x\n", poClass->m_methToGuiIsPortOpenStatus );
-	poClass->m_methToGuiPhoneShakeStatus 		= poClass->m_poEnv->GetStaticMethodID( ( jclass )poClass->m_JavaClass, "toGuiPhoneShakeStatus", "(ILjava/lang/String;)V" );
-	//MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiPhoneShakeStatus 0x%x\n", poClass->m_methToGuiPhoneShakeStatus );
+	poClass->m_methToGuiRandomConnectStatus 		= poClass->m_poEnv->GetStaticMethodID( ( jclass )poClass->m_JavaClass, "toGuiRandomConnectStatus", "(ILjava/lang/String;)V" );
+	//MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiRandomConnectStatus 0x%x\n", poClass->m_methToGuiRandomConnectStatus );
 
 	poClass->m_methToGuiContactOnline 			= poClass->m_poEnv->GetStaticMethodID( ( jclass )poClass->m_JavaClass, "toGuiContactOnline", "(Lcom/waycoolapps/myp2pweb/VxNetIdent;Z)V" );
 	//MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiContactOnline 0x%x\n", poClass->m_methToGuiContactOnline );
@@ -541,16 +541,16 @@ void JavaToGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg )
 }
 
 //============================================================================
-void JavaToGuiAnchorStatus( EAnchorTestStatus eAnchorStatus, const char * msg )
+void JavaToGuiHostStatus( EHostTestStatus eHostStatus, const char * msg )
 {
 	LockToJavaAccess( 39 );
 	NativeToJavaClass * poClass = GetNativeToJavaClass();
 	if( poClass )
 	{
-		jint jiStatus = (jint)eAnchorStatus;
+		jint jiStatus = (jint)eHostStatus;
 		jstring jstrMsg;
 		jstrMsg = poClass->m_poEnv->NewStringUTF(msg);
-		poClass->m_poEnv->CallStaticVoidMethod( poClass->m_JavaClass, poClass->m_methToGuiAnchorStatus, jiStatus, jstrMsg );
+		poClass->m_poEnv->CallStaticVoidMethod( poClass->m_JavaClass, poClass->m_methToGuiHostStatus, jiStatus, jstrMsg );
 		poClass->m_poEnv->DeleteLocalRef(jstrMsg);
 	}
 
@@ -575,16 +575,16 @@ void JavaToGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char 
 }
 
 //============================================================================
-void JavaToGuiPhoneShakeStatus( EPhoneShakeStatus ePhoneShakeStatus, const char * msg )
+void JavaToGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg )
 {
 	LockToJavaAccess( 322 );
 	NativeToJavaClass * poClass = GetNativeToJavaClass();
 	if( poClass )
 	{
-		jint jiStatus = (jint)ePhoneShakeStatus;
+		jint jiStatus = (jint)eRandomConnectStatus;
 		jstring jstrMsg;
 		jstrMsg = poClass->m_poEnv->NewStringUTF(msg);
-		poClass->m_poEnv->CallStaticVoidMethod( poClass->m_JavaClass, poClass->m_methToGuiPhoneShakeStatus, jiStatus, jstrMsg );
+		poClass->m_poEnv->CallStaticVoidMethod( poClass->m_JavaClass, poClass->m_methToGuiRandomConnectStatus, jiStatus, jstrMsg );
 		poClass->m_poEnv->DeleteLocalRef(jstrMsg);
 	}
 

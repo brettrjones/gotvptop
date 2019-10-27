@@ -13,8 +13,8 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "NetServiceAnchor.h"
-#include <GoTvCore/GoTvP2P/Anchor/AnchorList.h>
+#include "NetServiceHost.h"
+#include <GoTvCore/GoTvP2P/HostMgr/HostList.h>
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/NetServices/NetServiceHdr.h>
@@ -29,12 +29,12 @@
 namespace
 {
 	//const int		NET_CMD_ANCHOR_REPLY_VERSION			= 1;	 
-	const char *	ANCHOR_DB_FILE_NAME						= "AnchorDb.db3";
+	const char *	ANCHOR_DB_FILE_NAME						= "HostDb.db3";
 	const int 		ANCHOR_DATABASE_VERSION 				= 1;
 }
 
 //============================================================================
-NetServiceAnchor::NetServiceAnchor( P2PEngine& engine, NetServicesMgr& netServicesMgr, NetServiceUtils& netServiceUtils )
+NetServiceHost::NetServiceHost( P2PEngine& engine, NetServicesMgr& netServicesMgr, NetServiceUtils& netServiceUtils )
 : m_Engine( engine )
 , m_NetServicesMgr( netServicesMgr )
 , m_NetServiceUtils( netServiceUtils )
@@ -42,31 +42,31 @@ NetServiceAnchor::NetServiceAnchor( P2PEngine& engine, NetServicesMgr& netServic
 }
 
 //============================================================================
-NetServiceAnchor::~NetServiceAnchor()
+NetServiceHost::~NetServiceHost()
 {
 }
 
 //============================================================================
-void NetServiceAnchor::netServiceAnchorStartup( void )
+void NetServiceHost::netServiceHostStartup( void )
 {
 	std::string anchorFileName = VxGetSettingsDirectory() + ANCHOR_DB_FILE_NAME;
-	m_AnchorDb.dbStartup( ANCHOR_DATABASE_VERSION, anchorFileName );
+	m_HostDb.dbStartup( ANCHOR_DATABASE_VERSION, anchorFileName );
 }
 
 //============================================================================
-void NetServiceAnchor::netServiceAnchorShutdown( void )
+void NetServiceHost::netServiceHostShutdown( void )
 {
-	m_AnchorDb.dbShutdown();
+	m_HostDb.dbShutdown();
 }
 
 //============================================================================
-RCODE NetServiceAnchor::handleNetCmdAnchorReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE NetServiceHost::handleNetCmdHostReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
 {
 	RCODE rc = -1;
 	if( ( 0 == netServiceHdr.m_ContentDataLen )
 		|| ( 0x0f & netServiceHdr.m_ContentDataLen ) )
 	{
-		VxReportHack( sktBase, "handleNetCmdAnchorReq: Invalid content len %d\n", netServiceHdr.m_ContentDataLen );
+		VxReportHack( sktBase, "handleNetCmdHostReq: Invalid content len %d\n", netServiceHdr.m_ContentDataLen );
 		sktBase->closeSkt( 8776 );
 		return -1;
 	}
@@ -77,33 +77,33 @@ RCODE NetServiceAnchor::handleNetCmdAnchorReq( VxSktBase * sktBase, NetServiceHd
 	char * content = &pSktBuf[ netServiceHdr.m_SktDataUsed ];
 	int contentDataLen = netServiceHdr.m_ContentDataLen;
 	uint16_t clientPort = sktBase->getCryptoKeyPort();
-	AnchorList * anchorList = (AnchorList *)content;
+	HostList * anchorList = (HostList *)content;
 
 	VxKey key;
 	m_NetServiceUtils.generateNetServiceCryptoKey( key, clientPort );
 	VxSymDecrypt( &key, content, contentDataLen );
 
-	if( false == verifyAnchorList( anchorList, contentDataLen ) )
+	if( false == verifyHostList( anchorList, contentDataLen ) )
 	{
-		VxReportHack( sktBase, "handleNetCmdAnchorReq: Invalid list\n" );
+		VxReportHack( sktBase, "handleNetCmdHostReq: Invalid list\n" );
 		sktBase->closeSkt( 8776 );
 		return -1;
 	}
 
-	AnchorList anchorResult;
+	HostList anchorResult;
 	if( m_Engine.getEngineSettings().getExcludeMeFromNetHostList() )
 	{
-		rc = m_AnchorDb.handleAnnounce( *anchorList, anchorResult, m_Engine.getMyOnlineId() );
+		rc = m_HostDb.handleAnnounce( *anchorList, anchorResult, m_Engine.getMyOnlineId() );
 	}
 	else
 	{
-		rc = m_AnchorDb.handleAnnounce( *anchorList, anchorResult );
+		rc = m_HostDb.handleAnnounce( *anchorList, anchorResult );
 	}
 
 	int sendContentLen = anchorResult.calculateLength();
 
 	std::string cmdHdr;
-	m_NetServiceUtils.buildNetCmdHeader( cmdHdr, eNetCmdAnchorReply, netServiceHdr.m_ChallengeHash, sendContentLen, rc, 1 );
+	m_NetServiceUtils.buildNetCmdHeader( cmdHdr, eNetCmdHostReply, netServiceHdr.m_ChallengeHash, sendContentLen, rc, 1 );
 	VxSymEncrypt( &key, (char *)&anchorResult, sendContentLen );
 
 	if( sktBase->isConnected() )
@@ -120,18 +120,18 @@ RCODE NetServiceAnchor::handleNetCmdAnchorReq( VxSktBase * sktBase, NetServiceHd
 }
 
 //============================================================================
-bool NetServiceAnchor::verifyAnchorList( AnchorList * anchorList, int contentDataLen )
+bool NetServiceHost::verifyHostList( HostList * anchorList, int contentDataLen )
 {
 	if( anchorList->m_TotalLen != contentDataLen )
 	{
-		LogMsg( LOG_ERROR, "handleNetCmdAnchorReq: invalid nchorList->m_TotalLen\n" );
+		LogMsg( LOG_ERROR, "handleNetCmdHostReq: invalid nchorList->m_TotalLen\n" );
 		return false;
 	}
 
 	if( ( 0 == anchorList->m_EntryCount )
 		|| ( MAX_ANCHOR_ENTRIES < anchorList->m_EntryCount ) )
 	{
-		LogMsg( LOG_ERROR, "handleNetCmdAnchorReq: invalid anchorList->m_EntryCount\n" );
+		LogMsg( LOG_ERROR, "handleNetCmdHostReq: invalid anchorList->m_EntryCount\n" );
 		return false;
 	}
 
@@ -139,7 +139,7 @@ bool NetServiceAnchor::verifyAnchorList( AnchorList * anchorList, int contentDat
 }
 
 //============================================================================
-RCODE NetServiceAnchor::handleNetCmdAnchorReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE NetServiceHost::handleNetCmdHostReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
 {
 	// not done here .. done by net action
 	return 0;

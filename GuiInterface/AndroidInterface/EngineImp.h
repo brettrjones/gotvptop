@@ -52,9 +52,9 @@ public:
 
 	virtual void				toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" );
 	virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" );
-	virtual void				toGuiAnchorStatus( EAnchorTestStatus eAnchorStatus, const char * msg = "" );
+	virtual void				toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg = "" );
 	virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" );
-	virtual void				toGuiPhoneShakeStatus( EPhoneShakeStatus ePhoneShakeStatus, const char * msg = "" );
+	virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" );
 
 	virtual void				toGuiContactOnline( VxNetIdent * netIdent, bool newContact = false );
 	virtual void				toGuiContactOffline( VxNetIdent * netIdent );
@@ -238,7 +238,7 @@ public:
 	virtual void				fromGuiNetworkAvailable( const char * lclIp = NULL, bool isCellularNetwork = false );
 	virtual void				fromGuiNetworkLost( void );
 
-	virtual void				fromGuiVerifyAnchorSettings( void );
+	virtual void				fromGuiVerifyHostSettings( void );
 	virtual void				fromGuiRunIsPortOpenTest( uint16_t port );
 
 	virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings );

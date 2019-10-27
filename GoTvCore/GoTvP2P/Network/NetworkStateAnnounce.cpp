@@ -71,7 +71,7 @@ void NetworkStateAnnounce::runNetworkState( void )
 		}
 	}
 
-	m_NetServicesMgr.announceToAnchor( m_NetworkStateMachine.getAnchorIp(), m_NetworkStateMachine.getAnchorPort() );
+	m_NetServicesMgr.announceToHost( m_NetworkStateMachine.getHostIp(), m_NetworkStateMachine.getHostPort() );
 
 	if( m_PktAnn.requiresRelay() )
 	{

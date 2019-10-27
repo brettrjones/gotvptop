@@ -29,7 +29,7 @@ namespace
 		"Online Through Relay",
 		"Get Relay List ",
 		"No Internet Connection ",
-		"Failed Resolve Anchor URL ",
+		"Failed Resolve Host URL ",
 		"Max Network State "
 	};
 
@@ -46,22 +46,22 @@ namespace
 		"Max Relay Status "
 	};
 
-	const char * AnchorStatusEnumStrings[] = 
+	const char * HostStatusEnumStrings[] = 
 	{ 
-		"Anchor Status Unknown",
-		"Anchor LogMsg",
+		"Host Status Unknown",
+		"Host LogMsg",
 
-		"Anchor OK",
-		"Anchor Connect Fail",
-		"Anchor Connection Dropped",
-		"Anchor TestComplete",
+		"Host OK",
+		"Host Connect Fail",
+		"Host Connection Dropped",
+		"Host TestComplete",
 
 		"NetService OK",
 		"NetService Connect Fail",
 		"NetService Connection Dropped",
 		"NetService Test Complete",
 
-		"Max Anchor Status",
+		"Max Host Status",
 	};
 
 	const char * PortOpenStatusEnumStrings[] = 
@@ -79,10 +79,10 @@ namespace
 		"Max Port Open Status",
 	};
 
-	const char * PhoneShakeStatusEnumStrings[] = 
+	const char * RandomConnectStatusEnumStrings[] = 
 	{ 
 		"Phone Shake: Status Unknown ",
-		"Phone Shake: Contact Anchor Failed ",
+		"Phone Shake: Contact Host Failed ",
 
 		"Phone Shake: Found Friend ",
 		"Phone Shake: Empty List ",
@@ -105,9 +105,9 @@ const char * DescribeRelayStatus( EMyRelayStatus eRelayStatus )
 	return RelayStatusEnumStrings[ eRelayStatus ];
 }
 
-const char * DescribeAnchorStatus( EAnchorTestStatus eAnchorStatus )
+const char * DescribeHostStatus( EHostTestStatus eHostStatus )
 {
-	return AnchorStatusEnumStrings[ eAnchorStatus ];
+	return HostStatusEnumStrings[ eHostStatus ];
 }
 
 const char * DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus )
@@ -115,7 +115,7 @@ const char * DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus )
 	return PortOpenStatusEnumStrings[ ePortOpenStatus ];
 }
 
-const char * DescribePhoneShakeStatus( EPhoneShakeStatus ePhoneShakeStatus )
+const char * DescribeRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus )
 {
-	return PhoneShakeStatusEnumStrings[ ePhoneShakeStatus ];
+	return RandomConnectStatusEnumStrings[ eRandomConnectStatus ];
 }

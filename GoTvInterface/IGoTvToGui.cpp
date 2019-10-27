@@ -104,9 +104,9 @@ void IGoTv::toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg )
 }
 
 //============================================================================
-void IGoTv::toGuiAnchorStatus( EAnchorTestStatus eAnchorStatus, const char * msg )
+void IGoTv::toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg )
 {
-    getAppCommon().toGuiAnchorStatus( eAnchorStatus, msg );
+    getAppCommon().toGuiHostStatus( eHostStatus, msg );
 }
 
 //============================================================================
@@ -116,9 +116,9 @@ void IGoTv::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const ch
 }
 
 //============================================================================
-void IGoTv::toGuiPhoneShakeStatus( EPhoneShakeStatus ePhoneShakeStatus, const char * msg )
+void IGoTv::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg )
 {
-    getAppCommon().toGuiPhoneShakeStatus( ePhoneShakeStatus, msg );
+    getAppCommon().toGuiRandomConnectStatus( eRandomConnectStatus, msg );
 }
 
 //============================================================================

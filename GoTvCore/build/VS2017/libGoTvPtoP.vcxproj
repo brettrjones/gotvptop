@@ -420,13 +420,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\GoTvP2P\AnchorTest\AnchorTest.cpp">
-      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</MultiProcessorCompilation>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Anchor\AnchorDb.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\Anchor\AnchorList.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\Anchor\AnchorListEntry.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\Anchor\PhoneShakeEntry.cpp" />
     <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetInfo.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
@@ -539,6 +532,12 @@
     <ClCompile Include="..\..\GoTvP2P\EchoCancel\wav_header.cpp" />
     <ClCompile Include="..\..\GoTvP2P\EchoCancel\win32.cpp" />
     <ClCompile Include="..\..\GoTvP2P\EchoCancel\win32filesystem.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostDb.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostList.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostListEntry.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostSettingBase.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostTest.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\RandomConnectEntry.cpp" />
     <ClCompile Include="..\..\GoTvP2P\IsPortOpenTest\IsPortOpenTest.cpp" />
     <ClCompile Include="..\..\GoTvP2P\IsPortOpenTest\PingResponseServer.cpp" />
     <ClCompile Include="..\..\GoTvP2P\MediaProcessor\AudioUtil.cpp" />
@@ -548,10 +547,10 @@
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionBase.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionIdle.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionIsMyPortOpen.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionPhoneShake.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionQueryMyIp.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceAnchor.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionRandomConnect.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceDefs.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceHost.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServicesMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceUtils.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetworkMonitor\NetworkMonitor.cpp" />
@@ -685,12 +684,6 @@
     <ClInclude Include="..\..\..\GoTvInterface\IToGui.h" />
     <ClInclude Include="..\..\..\GoTvTargetOsConfig.h" />
     <ClInclude Include="..\..\config_gotvcore.h" />
-    <ClInclude Include="..\..\GoTvP2P\AnchorTest\AnchorTest.h" />
-    <ClInclude Include="..\..\GoTvP2P\Anchor\AnchorDb.h" />
-    <ClInclude Include="..\..\GoTvP2P\Anchor\AnchorDefs.h" />
-    <ClInclude Include="..\..\GoTvP2P\Anchor\AnchorList.h" />
-    <ClInclude Include="..\..\GoTvP2P\Anchor\AnchorListEntry.h" />
-    <ClInclude Include="..\..\GoTvP2P\Anchor\PhoneShakeEntry.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetCallbackInterface.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetInfoDb.h" />
@@ -783,6 +776,13 @@
     <ClInclude Include="..\..\GoTvP2P\EchoCancel\win32.h" />
     <ClInclude Include="..\..\GoTvP2P\EchoCancel\win32filesystem.h" />
     <ClInclude Include="..\..\GoTvP2P\Groups\GroupDefs.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDb.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDefs.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostList.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostListEntry.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostSettingBase.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostTest.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\RandomConnectEntry.h" />
     <ClInclude Include="..\..\GoTvP2P\IsPortOpenTest\IsPortOpenTest.h" />
     <ClInclude Include="..\..\GoTvP2P\IsPortOpenTest\PingResponseServer.h" />
     <ClInclude Include="..\..\GoTvP2P\MediaProcessor\AudioUtil.h" />
@@ -795,11 +795,11 @@
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionBase.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionIdle.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionIsMyPortOpen.h" />
-    <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionPhoneShake.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionQueryMyIp.h" />
-    <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceAnchor.h" />
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionRandomConnect.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceDefs.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceHdr.h" />
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceHost.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServicesMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceUtils.h" />
     <ClInclude Include="..\..\GoTvP2P\NetworkMonitor\NetworkMonitor.h" />

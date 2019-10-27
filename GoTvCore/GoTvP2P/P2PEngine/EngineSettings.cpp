@@ -197,40 +197,40 @@ void EngineSettings::setNetServiceWebsiteUrl( std::string& strWebsiteUrl )
 //============================================================================
 void EngineSettings::getNetHostWebsiteUrl( std::string& strWebsiteUrl )
 {
-	getIniValue( MY_SETTINGS_KEY, "AnchorUrl", strWebsiteUrl, NET_DEFAULT_NET_HOST_URL );
+	getIniValue( MY_SETTINGS_KEY, "HostUrl", strWebsiteUrl, NET_DEFAULT_NET_HOST_URL );
 }
 
 //============================================================================
 void EngineSettings::setNetHostWebsiteUrl( std::string& strWebsiteUrl )
 {
-	setIniValue( MY_SETTINGS_KEY, "AnchorUrl", strWebsiteUrl );
+	setIniValue( MY_SETTINGS_KEY, "HostUrl", strWebsiteUrl );
 }
 
 //============================================================================
-void EngineSettings::setIsThisNodeAnNetHost( bool isAnchor )
+void EngineSettings::setIsThisNodeAnNetHost( bool isHost )
 {
-	setIniValue( MY_SETTINGS_KEY, "IsNodeAnchor", isAnchor );
+	setIniValue( MY_SETTINGS_KEY, "IsNodeHost", isHost );
 }
 
 //============================================================================
 bool EngineSettings::getIsThisNodeAnNetHost( void )
 {
-	bool isAnchor = false;
-	getIniValue( MY_SETTINGS_KEY, "IsNodeAnchor", isAnchor, false );
-	return isAnchor;
+	bool isHost = false;
+	getIniValue( MY_SETTINGS_KEY, "IsNodeHost", isHost, false );
+	return isHost;
 }
 
 //============================================================================
-void EngineSettings::setExcludeMeFromNetHostList( bool excludeFromAnchorList )
+void EngineSettings::setExcludeMeFromNetHostList( bool excludeFromHostList )
 {
-	setIniValue( MY_SETTINGS_KEY, "ExcludeFromAnchorList", excludeFromAnchorList );
+	setIniValue( MY_SETTINGS_KEY, "ExcludeFromHostList", excludeFromHostList );
 }
 
 //============================================================================
 bool EngineSettings::getExcludeMeFromNetHostList( void )
 {
 	bool excludeMe = false;
-	getIniValue( MY_SETTINGS_KEY, "ExcludeFromAnchorList", excludeMe, false );
+	getIniValue( MY_SETTINGS_KEY, "ExcludeFromHostList", excludeMe, false );
 	return excludeMe;
 }
 

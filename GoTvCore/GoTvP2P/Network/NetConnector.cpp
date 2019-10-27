@@ -19,7 +19,7 @@
 #include <GoTvCore/GoTvP2P/Network/NetworkStateRelaySearch.h>
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvCore/GoTvP2P/Anchor/AnchorList.h>
+#include <GoTvCore/GoTvP2P/HostMgr/HostList.h>
 
 #include <GoTvCore/GoTvP2P/BigListLib/BigListLib.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
@@ -131,13 +131,13 @@ void NetConnector::stayConnectedShutdown( void )
 }
 
 //============================================================================
-void NetConnector::handlePhoneShakeResults( AnchorList * anchorList )
+void NetConnector::handleRandomConnectResults( HostList * anchorList )
 {
-	handleAnnounceResults( anchorList, eConnectReasonPhoneShake );
+	handleAnnounceResults( anchorList, eConnectReasonRandomConnect );
 }
 
 //============================================================================
-void NetConnector::handleAnnounceResults( AnchorList * anchorList, EConnectReason connectReason )
+void NetConnector::handleAnnounceResults( HostList * anchorList, EConnectReason connectReason )
 {
 	if( 0 == anchorList->m_EntryCount )
 	{
@@ -148,7 +148,7 @@ void NetConnector::handleAnnounceResults( AnchorList * anchorList, EConnectReaso
 	//for( int i = anchorList->m_EntryCount - 1; i >= 0; --i )
 	for( int i = 0; i < anchorList->m_EntryCount; ++i )
 	{	
-		AnchorListEntry * entry = &anchorList->m_List[i];
+		HostListEntry * entry = &anchorList->m_List[i];
 		if( entry->getMyOnlineId() == m_PktAnn.getMyOnlineId() )
 		{
 			// it is ourself
@@ -173,7 +173,7 @@ void NetConnector::handleAnnounceResults( AnchorList * anchorList, EConnectReaso
 		}
 		else 
 		{
-			if( eConnectReasonPhoneShake == connectReason )
+			if( eConnectReasonRandomConnect == connectReason )
 			{
 				BigListInfo * bigListInfo = m_Engine.getBigListMgr().findBigListInfo( entry->getMyOnlineId() );
 				m_Engine.getToGui().toGuiSearchResultSuccess( eScanTypeRandomConnect, bigListInfo );
@@ -1042,7 +1042,7 @@ void NetConnector::handleConnectSuccess(  BigListInfo * bigListInfo, VxSktBase *
 		bigListInfo->setTimeLastConnectAttemptMs( timeNow );
 		bigListInfo->setIsOnline( true );
 		bigListInfo->setIsConnected( true );
-		if( eConnectReasonPhoneShake == connectReason )
+		if( eConnectReasonRandomConnect == connectReason )
 		{
 			m_Engine.getToGui().toGuiSearchResultSuccess( eScanTypeRandomConnect, bigListInfo );
 		}
@@ -1108,7 +1108,7 @@ void  NetConnector::closeConnection( VxGUID& onlineId, VxSktBase * skt, BigListI
 
 	if( NULL == poInfo )
 	{
-		LogMsg( LOG_ERROR, "Failed to find info for %s\n", onlineId.toVxGUIDHexString().c_str() );
+		LogMsg( LOG_ERROR, "Failed to find info for %s\n", onlineId.toHexString().c_str() );
 		skt->closeSkt( 235 );
 		return;
 	}
@@ -1131,7 +1131,7 @@ void  NetConnector::closeConnection( VxGUID& onlineId, VxSktBase * skt, BigListI
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "Failed to find RcConnectInfo for %s\n", onlineId.toVxGUIDHexString().c_str() );
+		LogMsg( LOG_ERROR, "Failed to find RcConnectInfo for %s\n", onlineId.toHexString().c_str() );
 		skt->closeSkt( 237 );
 	}
 }

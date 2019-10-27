@@ -17,7 +17,7 @@
 #include "ConnectRequest.h"
 #include "NetworkStateBase.h"
 
-#include <GoTvCore/GoTvP2P/Anchor/AnchorDefs.h>
+#include <GoTvCore/GoTvP2P/HostMgr/HostDefs.h>
 
 #include <CoreLib/VxThread.h>
 #include <CoreLib/VxMutex.h>
@@ -29,7 +29,7 @@ class ContactList;
 class PossibleRelayList;
 class NetworkMgr;
 class NetServiceUtils;
-class AnchorList;
+class HostList;
 class VxSktConnectSimple;
 class DirectConnectTester;
 
@@ -72,8 +72,8 @@ protected:
 	bool						connectRelayService( ConnectRequest& connectRequest );
 	bool						checkFromGuiList( void );
 	void						getMoreRelaysFromAnnounceServers( void );
-	bool						decryptAnchorList( char * content, int contentDataLen, uint16_t clientPort );
-	int							buildAnnounceCmd( std::string& strNetCmdHdr, uint16_t clientPort, AnchorList& anchorList, EAnchorAction anchorAction );
+	bool						decryptHostList( char * content, int contentDataLen, uint16_t clientPort );
+	int							buildAnnounceCmd( std::string& strNetCmdHdr, uint16_t clientPort, HostList& anchorList, EHostAction anchorAction );
 	int							getAnnounceData( VxSktConnectSimple * netServConn, char * pRxBuf, int bufLen );
 	ERelayStatus				requestRelayService( VxGUID& onlineId, VxSktBase * sktBase );
 

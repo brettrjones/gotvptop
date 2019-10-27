@@ -37,9 +37,9 @@ public:
 
 	jmethodID 					m_methToGuiNetworkState;
 	jmethodID 					m_methToGuiMyRelayStatus;
-	jmethodID 					m_methToGuiAnchorStatus;
+	jmethodID 					m_methToGuiHostStatus;
 	jmethodID 					m_methToGuiIsPortOpenStatus;
-	jmethodID 					m_methToGuiPhoneShakeStatus;
+	jmethodID 					m_methToGuiRandomConnectStatus;
 
 	jmethodID 					m_methToGuiContactOnline;
 	jmethodID 					m_methToGuiContactOffline;
@@ -118,9 +118,9 @@ void		JavaToGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32J
 
 void		JavaToGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" );
 void		JavaToGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" );
-void		JavaToGuiAnchorStatus( EAnchorTestStatus eAnchorStatus, const char * msg = "" );
+void		JavaToGuiHostStatus( EHostTestStatus eHostStatus, const char * msg = "" );
 void		JavaToGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" );
-void		JavaToGuiPhoneShakeStatus( EPhoneShakeStatus ePhoneShakeStatus, const char * msg = "" );
+void		JavaToGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" );
 
 void		JavaToGuiContactOnline( VxNetIdent * netIdent, bool newContact );
 void		JavaToGuiContactOffline( VxNetIdent * netIdent );

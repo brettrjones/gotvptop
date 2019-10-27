@@ -1032,7 +1032,7 @@ void PluginSessionMgr::addSession( VxGUID& sessionId, PluginSessionBase * sessio
 
 	if( sessionId != session->getLclSessionId() )
 	{
-		LogMsg( LOG_INFO, "WARNING SESSION IDS DONT MATCH PluginSessionMgr::addSession %s session id %s connect info %s\n", session->getOnlineName(), sessionId.toVxGUIDHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+		LogMsg( LOG_INFO, "WARNING SESSION IDS DONT MATCH PluginSessionMgr::addSession %s session id %s connect info %s\n", session->getOnlineName(), sessionId.toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 	}
 
 	if( false == sessionId.isVxGUIDValid() )
@@ -1040,7 +1040,7 @@ void PluginSessionMgr::addSession( VxGUID& sessionId, PluginSessionBase * sessio
 		sessionId = session->getLclSessionId();
 	}
 
-	LogMsg( LOG_INFO, "PluginSessionMgr::addSession %s session id %s connect info %s\n", session->getOnlineName(), sessionId.toVxGUIDHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+	LogMsg( LOG_INFO, "PluginSessionMgr::addSession %s session id %s connect info %s\n", session->getOnlineName(), sessionId.toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 	if( pluginIsLocked )
 	{
 		m_aoSessions.insert(  std::make_pair( sessionId, session ) );
@@ -1081,7 +1081,7 @@ void PluginSessionMgr::endPluginSession( PluginSessionBase * session, bool plugi
 	{
 		if( session == (*iter).second )
 		{
-			LogMsg( LOG_INFO, "PluginSessionMgr::endPluginSession %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toVxGUIDHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+			LogMsg( LOG_INFO, "PluginSessionMgr::endPluginSession %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 			delete (*iter).second;
 			m_aoSessions.erase(iter);
 			break;
@@ -1116,7 +1116,7 @@ VxMutex& pluginMutex = m_Plugin.getPluginMutex();
 	if( iter != m_aoSessions.end() )
 	{
 		PluginSessionBase * session = (*iter).second;
-		LogMsg( LOG_INFO, "PluginSessionMgr::endPluginSession %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toVxGUIDHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+		LogMsg( LOG_INFO, "PluginSessionMgr::endPluginSession %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 		m_aoSessions.erase(iter);
 		delete session;
 	}
@@ -1191,7 +1191,7 @@ void PluginSessionMgr::removeTxSessionByOnlineId( VxGUID& onlineId, bool pluginI
 		if( session->isTxSession()
 			&& ( session->getOnlineId() == onlineId ) )
 		{
-			LogMsg( LOG_INFO, "PluginSessionMgr::removeTxSessionByOnlineId %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toVxGUIDHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+			LogMsg( LOG_INFO, "PluginSessionMgr::removeTxSessionByOnlineId %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 			delete session;
 			m_aoSessions.erase(iter);	
 			break;
@@ -1230,7 +1230,7 @@ void PluginSessionMgr::removeRxSessionBySessionId( VxGUID& sessionId, bool plugi
 			PluginSessionBase * session = (*iter).second;
 			if( session->isRxSession() )
 			{
-				LogMsg( LOG_INFO, "PluginSessionMgr::removeRxSessionBySessionId %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toVxGUIDHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+				LogMsg( LOG_INFO, "PluginSessionMgr::removeRxSessionBySessionId %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 				delete session;
 				m_aoSessions.erase(iter);	
 				break;
@@ -1269,7 +1269,7 @@ void PluginSessionMgr::removeRxSessionByOnlineId( VxGUID& onlineId, bool pluginI
 		if( session->isRxSession()
 			&& ( session->getOnlineId() == onlineId ) )
 		{
-			LogMsg( LOG_INFO, "PluginSessionMgr::removeRxSessionByOnlineId %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toVxGUIDHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+			LogMsg( LOG_INFO, "PluginSessionMgr::removeRxSessionByOnlineId %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 			delete session;
 			m_aoSessions.erase(iter);	
 			break;
@@ -1367,7 +1367,7 @@ bool PluginSessionMgr::removeSession( bool pluginIsLocked, VxNetIdent * netIdent
 				// notify gui session removed ??
 			}
 			
-			LogMsg( LOG_INFO, "PluginSessionMgr::removeSession %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toVxGUIDHexString().c_str(), session->getSkt()->describeSktType().c_str() );
+			LogMsg( LOG_INFO, "PluginSessionMgr::removeSession %s session id %s connect info %s\n", session->getOnlineName(), session->getLclSessionId().toHexString().c_str(), session->getSkt()->describeSktType().c_str() );
 			if( false == pluginIsLocked )
 			{
 #ifdef DEBUG_AUTOPLUGIN_LOCK

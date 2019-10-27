@@ -243,7 +243,7 @@ enum EMyIcons
 	eMyIconNetworkStateDiscover,
 	eMyIconNetworkStateDisconnected,
 	eMyIconNetworkStateDirectConnected,
-	eMyIconNetworkStateAnchorFail,
+	eMyIconNetworkStateHostFail,
 	eMyIconNetworkStateRelayConnected,
 
 

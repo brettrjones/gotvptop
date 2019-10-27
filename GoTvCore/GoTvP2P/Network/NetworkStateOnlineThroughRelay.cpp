@@ -18,8 +18,8 @@
 #include <GoTvCore/GoTvP2P/NetServices/NetServicesMgr.h>
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <GoTvCore/GoTvP2P/Anchor/AnchorDb.h>
-#include <GoTvCore/GoTvP2P/Anchor/AnchorList.h>
+#include <GoTvCore/GoTvP2P/HostMgr/HostDb.h>
+#include <GoTvCore/GoTvP2P/HostMgr/HostList.h>
 
 //============================================================================
 NetworkStateOnlineThroughRelay::NetworkStateOnlineThroughRelay( NetworkStateMachine& stateMachine )
@@ -32,11 +32,11 @@ NetworkStateOnlineThroughRelay::NetworkStateOnlineThroughRelay( NetworkStateMach
 void NetworkStateOnlineThroughRelay::enterNetworkState( void )
 {
 	// force update of ourself in anchor db in case we are being used as anchor
-	AnchorList			anchorListIn;
+	HostList			anchorListIn;
 	anchorListIn.addEntry( &m_Engine.getMyPktAnnounce() );
-	AnchorList			anchorListOut;
+	HostList			anchorListOut;
 
-	m_Engine.getNetServicesMgr().getNetServiceAnchor().getAnchorDb().handleAnnounce( anchorListIn, anchorListOut );
+	m_Engine.getNetServicesMgr().getNetServiceHost().getHostDb().handleAnnounce( anchorListIn, anchorListOut );
 
 	m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeOnlineThroughRelay );
 }

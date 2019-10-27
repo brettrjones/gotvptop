@@ -149,18 +149,18 @@ enum ERelayStatus
 
 
 //! \public Connect by shaking phone ( or press simulate phone shake ) status
-enum EPhoneShakeStatus
+enum ERandomConnectStatus
 {
-	ePhoneShakeStatusUnknown						= 0,
-	ePhoneShakeStatusContactAnchorFail				= 1,
-	ePhoneShakeStatusFoundFriend					= 2,
-	ePhoneShakeStatusEmptyList						= 3,
-	ePhoneShakeStatusSendRequestFail				= 4,
-	ePhoneShakeStatusInvalidResponse				= 5,
-	ePhoneShakeStatusDecryptError					= 6,
-	ePhoneShakeStatusSearchComplete					= 7,
+	eRandomConnectStatusUnknown						= 0,
+	eRandomConnectStatusContactHostFail				= 1,
+	eRandomConnectStatusFoundFriend					= 2,
+	eRandomConnectStatusEmptyList						= 3,
+	eRandomConnectStatusSendRequestFail				= 4,
+	eRandomConnectStatusInvalidResponse				= 5,
+	eRandomConnectStatusDecryptError					= 6,
+	eRandomConnectStatusSearchComplete					= 7,
 
-	eMaxPhoneShakeStatusType
+	eMaxRandomConnectStatusType
 };
 
 enum EGenderType

@@ -28,10 +28,10 @@ public:
 	RCODE						engineParamsStartup( std::string& strDbFileName );
 	void						engineParamsShutdown( void );
 
-	void						setLastAnchorWebsiteUrl( std::string& strWebsiteUrl );
-	void						getLastAnchorWebsiteUrl( std::string& strWebsiteUrl );
-	void						setLastAnchorWebsiteResolvedIp( std::string& strWebsiteIp );
-	void						getLastAnchorWebsiteResolvedIp( std::string& strWebsiteIp );
+	void						setLastHostWebsiteUrl( std::string& strWebsiteUrl );
+	void						getLastHostWebsiteUrl( std::string& strWebsiteUrl );
+	void						setLastHostWebsiteResolvedIp( std::string& strWebsiteIp );
+	void						getLastHostWebsiteResolvedIp( std::string& strWebsiteIp );
 
 	void						setLastNetServiceWebsiteUrl( std::string& strWebsiteUrl );
 	void						getLastNetServiceWebsiteUrl( std::string& strWebsiteUrl );

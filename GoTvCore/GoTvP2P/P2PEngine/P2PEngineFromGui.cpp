@@ -23,7 +23,7 @@
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
-#include <GoTvCore/GoTvP2P/AnchorTest/AnchorTest.h>
+#include <GoTvCore/GoTvP2P/HostMgr/HostTest.h>
 #include <GoTvCore/GoTvP2P/IsPortOpenTest/IsPortOpenTest.h>
 #include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>
 #include <MediaToolsLib/MediaTools.h>
@@ -727,7 +727,7 @@ bool P2PEngine::fromGuiMakePluginOffer(	EPluginType		ePluginType,
 	else
 	{
 		std::string onlineId;
-		oOnlineId.toVxGUIDHexString(onlineId);
+		oOnlineId.toHexString(onlineId);
 		LogMsg(LOG_ERROR, "P2PEngine::fromGuiMakePluginOffer: poInfo not found VxGUID %s\n", onlineId.c_str());
 	}
 
@@ -1111,7 +1111,7 @@ bool P2PEngine::fromGuiTestCmd(	ETestParam1		eTestParam1,
 
 	case eTestParam1AnnounceNow:
 		{
-			m_NetServicesMgr.announceToAnchor( m_NetworkStateMachine.getAnchorIp(), m_NetworkStateMachine.getAnchorPort() );
+			m_NetServicesMgr.announceToHost( m_NetworkStateMachine.getHostIp(), m_NetworkStateMachine.getHostPort() );
 		}
 		break;
 
@@ -1147,7 +1147,7 @@ int P2PEngine::fromGuiMulitcastPkt( unsigned char * data, int len )
 void P2PEngine::fromGuiVerifyNetHostSettings( void )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiVerifyNetHostSettings" );
-	m_AnchorTest.fromGuiVerifyNetHostSettings();
+	m_HostTest.fromGuiVerifyNetHostSettings();
 }
 
 //============================================================================

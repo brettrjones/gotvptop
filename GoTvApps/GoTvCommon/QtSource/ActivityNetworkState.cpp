@@ -95,8 +95,8 @@ void ActivityNetworkState::slotNetworkStateChanged( ENetworkStateType eNetworkSt
 		showRelayConnectedHelp();
 		break;
 
-	case eNetworkStateTypeFailedResolveAnchor:
-		showAnchorError();
+	case eNetworkStateTypeFailedResolveHostNetwork:
+		showHostError();
 		break;
 	}
 
@@ -155,7 +155,7 @@ void ActivityNetworkState::showRelayConnectedHelp( void )
 }
 
 //============================================================================
-void ActivityNetworkState::showAnchorError( void )
+void ActivityNetworkState::showHostError( void )
 {
 	setHelpLine( 0, QObject::tr("GoTvPtoP connected but could not contact the Network Host. ") );
 	setHelpLine( 1, QObject::tr("Check your network setting and Network Host url.") );

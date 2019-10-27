@@ -69,7 +69,7 @@ void AppletNetworkSettings::connectSignals( void )
     connect( ui.m_NetworkKeyInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowNetworkKeyInformation() ) );
     connect( ui.m_NetworkKeyButton, SIGNAL( clicked() ), this, SLOT( slotShowNetworkKeyInformation() ) );
 
-    //connect( ui.m_GoToAnchortSettingsButton, SIGNAL( clicked() ), this, SLOT( slotGoToNetHostSettingsButtonClick() ) );
+    //connect( ui.m_GoToHosttSettingsButton, SIGNAL( clicked() ), this, SLOT( slotGoToNetHostSettingsButtonClick() ) );
 
     connect( ui.AutoDetectProxyRadioButton, SIGNAL( clicked() ), this, SLOT( slotAutoDetectProxyClick() ) );
     connect( ui.AssumeNoProxyRadioButton, SIGNAL( clicked() ), this, SLOT( slotNoProxyClick() ) );

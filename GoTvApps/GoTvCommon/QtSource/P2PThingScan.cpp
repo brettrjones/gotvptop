@@ -17,7 +17,7 @@
 #include "ActivityScanProfiles.h"
 #include "ActivityScanWebCams.h"
 #include "ActivityScanPeopleSearch.h"
-//#include "ActivityPhoneShake.h"
+//#include "ActivityRandomConnect.h"
 #include "ToGuiActivityInterface.h"
 
 #include <CoreLib/VxGlobals.h>

@@ -37,7 +37,7 @@ NetSettings& NetSettings::operator =( const NetSettings& rhs )
 	{
 		m_NetworkName				= rhs.m_NetworkName;
         m_NetHostWebsiteUrl         = rhs.m_NetHostWebsiteUrl;
-		m_ThisNodeIsAnchor			= rhs.m_ThisNodeIsAnchor;
+		m_ThisNodeIsHost			= rhs.m_ThisNodeIsHost;
 		m_u16MyTcpInPort			= rhs.m_u16MyTcpInPort;
 		m_u16MyMulticastPort		= rhs.m_u16MyMulticastPort;
 		m_bMulticastEnable			= rhs.m_bMulticastEnable;

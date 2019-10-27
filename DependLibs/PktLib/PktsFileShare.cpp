@@ -44,7 +44,7 @@ void PktFileGetReq::setFileName( std::string &csName )
 		m_FileName[ 0 ] = 0; 
 	}
 
-	uint16_t u16PktLen = (sizeof( PktFileGetReq ) - sizeof( m_FileName )) + strlen( m_FileName ) + 1;
+	uint16_t u16PktLen = ( uint16_t )((sizeof( PktFileGetReq ) - sizeof( m_FileName )) + strlen( m_FileName ) + 1);
 	setPktLength( ROUND_TO_16BYTE_BOUNDRY( u16PktLen ) );
 }
 
@@ -117,7 +117,7 @@ PktFileSendReq::PktFileSendReq()
 void PktFileSendReq::setFileName( const char * pFileName )
 {
 	strcpy( (char *)m_FileName, pFileName );
-	uint16_t u16PktLen = (sizeof( PktFileSendReq ) - sizeof( m_FileName )) + strlen( m_FileName ) + 1;
+	uint16_t u16PktLen = (uint16_t)((sizeof( PktFileSendReq ) - sizeof( m_FileName )) + strlen( m_FileName ) + 1);
 	setPktLength( ROUND_TO_16BYTE_BOUNDRY( u16PktLen ) );
 }
 
@@ -142,7 +142,7 @@ PktFileSendReply::PktFileSendReply()
 void PktFileSendReply::setFileName( const char * pFileName )
 {
 	strcpy( (char *)m_FileName, pFileName );
-	uint16_t u16PktLen = (sizeof( PktFileSendReply ) - sizeof( m_FileName )) + strlen( m_FileName ) + 1;
+	uint16_t u16PktLen = (uint16_t)((sizeof( PktFileSendReply ) - sizeof( m_FileName )) + strlen( m_FileName ) + 1);
 	setPktLength( ROUND_TO_16BYTE_BOUNDRY( u16PktLen ) );
 }
 

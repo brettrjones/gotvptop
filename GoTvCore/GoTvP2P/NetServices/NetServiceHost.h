@@ -14,7 +14,7 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include <GoTvCore/GoTvP2P/Anchor/AnchorDb.h>
+#include <GoTvCore/GoTvP2P/HostMgr/HostDb.h>
 #include <CoreLib/VxDefs.h>
 
 class NetServicesMgr;
@@ -24,29 +24,29 @@ class VxGUID;
 class P2PEngine;
 class NetServiceHdr;
 
-class NetServiceAnchor
+class NetServiceHost
 {
 public:
-	NetServiceAnchor( P2PEngine& engine, NetServicesMgr& netServicesMgr, NetServiceUtils& netServiceUtils );
-	virtual ~NetServiceAnchor();
+	NetServiceHost( P2PEngine& engine, NetServicesMgr& netServicesMgr, NetServiceUtils& netServiceUtils );
+	virtual ~NetServiceHost();
 
-	void						netServiceAnchorStartup( void );
-	void						netServiceAnchorShutdown( void );
+	void						netServiceHostStartup( void );
+	void						netServiceHostShutdown( void );
 
-	AnchorDb&					getAnchorDb( void )						{ return m_AnchorDb; }
+	HostDb&					getHostDb( void )						{ return m_HostDb; }
 
-	RCODE						handleNetCmdAnchorReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
-	RCODE						handleNetCmdAnchorReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+	RCODE						handleNetCmdHostReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+	RCODE						handleNetCmdHostReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 
 protected:
-	bool						verifyAnchorList( AnchorList * anchorList, int contentDataLen );
+	bool						verifyHostList( HostList * anchorList, int contentDataLen );
 
 	P2PEngine&					m_Engine;
 	NetServicesMgr&				m_NetServicesMgr;
 	NetServiceUtils&			m_NetServiceUtils;
-	AnchorDb					m_AnchorDb;
+	HostDb					m_HostDb;
 
 private:
-	NetServiceAnchor(); // don't allow default constructor
-	NetServiceAnchor(const NetServiceAnchor&); // don't allow copy constructor
+	NetServiceHost(); // don't allow default constructor
+	NetServiceHost(const NetServiceHost&); // don't allow copy constructor
 };

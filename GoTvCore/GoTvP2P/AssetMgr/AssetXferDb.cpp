@@ -77,7 +77,7 @@ void AssetXferDb::purgeAllAssetXfer( void )
 void AssetXferDb::removeAsset( VxGUID& assetUniqueId )
 {
 	std::string strId;
-	assetUniqueId.toVxGUIDHexString( strId );
+	assetUniqueId.toHexString( strId );
 	DbBindList bindList( strId.c_str() );
 	sqlExec( "DELETE FROM asset_xfer WHERE unique_id=?", bindList );
 }
@@ -86,7 +86,7 @@ void AssetXferDb::removeAsset( VxGUID& assetUniqueId )
 void AssetXferDb::addAsset( VxGUID& assetUniqueId )
 {
 	std::string strId;
-	assetUniqueId.toVxGUIDHexString( strId );
+	assetUniqueId.toHexString( strId );
 	DbBindList bindList( strId.c_str() );
 	sqlExec( "DELETE FROM asset_xfer WHERE unique_id=?", bindList );
 

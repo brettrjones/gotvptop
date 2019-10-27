@@ -27,16 +27,10 @@ namespace
 }
 
 //============================================================================
-VxConnectBaseInfo::VxConnectBaseInfo()
-{
-}
-
-//============================================================================
 VxConnectBaseInfo::VxConnectBaseInfo( const VxConnectBaseInfo &rhs )
 {
 	*this = rhs;
 }
-
 
 //============================================================================
 VxConnectBaseInfo& VxConnectBaseInfo::operator =( const VxConnectBaseInfo &rhs )
@@ -62,12 +56,12 @@ VxGUID& VxConnectBaseInfo::getMyOnlineId()
 	return m_DirectConnectId; 
 }
 
-void			VxConnectBaseInfo::getMyOnlineId( std::string& strRetId )		{ return m_DirectConnectId.toVxGUIDHexString( strRetId ); }
+void			VxConnectBaseInfo::getMyOnlineId( std::string& strRetId )		{ return m_DirectConnectId.toHexString( strRetId ); }
 uint64_t		VxConnectBaseInfo::getMyOnlineIdLoPart()						{ return m_DirectConnectId.getVxGUIDLoPart(); }
 uint64_t		VxConnectBaseInfo::getMyOnlineIdHiPart()						{ return m_DirectConnectId.getVxGUIDHiPart(); }
 
 VxGUID&			VxConnectBaseInfo::getRelayOnlineId()							{ return m_RelayConnectId; }
-void			VxConnectBaseInfo::getRelayOnlineId( std::string& strRetId )	{ return m_RelayConnectId.toVxGUIDHexString( strRetId ); }
+void			VxConnectBaseInfo::getRelayOnlineId( std::string& strRetId )	{ return m_RelayConnectId.toHexString( strRetId ); }
 uint64_t		VxConnectBaseInfo::getRelayOnlineIdLoPart()						{ return m_RelayConnectId.getVxGUIDLoPart(); }
 uint64_t		VxConnectBaseInfo::getRelayOnlineIdHiPart()						{ return m_RelayConnectId.getVxGUIDHiPart(); }
 void			VxConnectBaseInfo::setRelayPort( uint16_t port )						{ m_RelayConnectId.setPort( port ); }		
@@ -77,7 +71,7 @@ void			VxConnectBaseInfo::getMyOnlineIPv4( std::string& strRetIp )		{ strRetIp =
 void			VxConnectBaseInfo::getMyOnlineIPv6( std::string& strRetIp )		{ m_DirectConnectId.getIPv6( strRetIp );}
 InetAddrIPv4&	VxConnectBaseInfo::getMyOnlineIPv4( void )						{ return m_DirectConnectId.m_IPv4OnlineIp; }
 InetAddress&	VxConnectBaseInfo::getMyOnlineIPv6( void )						{ return m_DirectConnectId.m_IPv6OnlineIp;}
-void			VxConnectBaseInfo::setMyOnlinePort( uint16_t port )					{ m_DirectConnectId.setPort( port ); }		
+void			VxConnectBaseInfo::setMyOnlinePort( uint16_t port )				{ m_DirectConnectId.setPort( port ); }		
 uint16_t		VxConnectBaseInfo::getMyOnlinePort( void )						{ return m_DirectConnectId.getPort(); }
 
 //============================================================================
@@ -157,6 +151,7 @@ bool VxConnectBaseInfo::hasValidRelay( void )
 	{
 		return false;
 	}
+
 	return true;
 }
 
@@ -200,9 +195,19 @@ char *	VxConnectIdent::getOnlineDescription( void )
 
 //============================================================================
 //! set users online description
-void 	VxConnectIdent::setOnlineDescription( const char * pUserDesc )	
+void VxConnectIdent::setOnlineDescription( const char * pUserDesc )	
 { 
 	SafeStrCopy( m_OnlineDesc, pUserDesc, sizeof( m_OnlineDesc )); 
+}
+
+//============================================================================
+/// @brief return indenty unique folder name in the form of OnlineName_GuidHexString
+std::string VxConnectIdent::getIdentFolderName( void )
+{
+    std::string folderName = getOnlineName();
+    folderName += '_';
+    folderName += getMyOnlineIdHexString();
+    return folderName;
 }
 
 //============================================================================

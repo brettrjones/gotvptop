@@ -1,7 +1,5 @@
-#pragma once
 //============================================================================
-// Copyright (C) 2014 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,21 +11,23 @@
 // bjones.engineer@gmail.com
 // http://www.gotvptop.com
 //============================================================================
+#pragma once
 
 #include "config_gotvcore.h"
 
-enum EAnchorAction
+enum EHostAction
 {
-	eAnchorActionUnknown					= -1,
-	eAnchorActionAnnounce					= 0,
-	eAnchorActionRelaysOnly					= 1,
-	eAnchorActionList						= 2,
-	eAnchorActionPhoneShake					= 3,
+	eHostActionUnknown					= 0,
+	eHostActionAnnounce					= 1,
+	eHostActionRelaysOnly				= 2,
+	eHostActionList						= 3,
+	eHostActionRandomConnect			= 4,
+    eHostActionRandomConnectRelay       = 5,
 
-	eMaxAnchorAction
+	eMaxHostAction
 };
 
-EAnchorAction			AnchorActionStringToEnum( const char * action );
-const char *			AnchorActionEnumToString( EAnchorAction eAnchorAction );
+EHostAction			            HostActionStringToEnum( const char * action );
+const char *			        HostActionEnumToString( EHostAction eHostAction );
 
 

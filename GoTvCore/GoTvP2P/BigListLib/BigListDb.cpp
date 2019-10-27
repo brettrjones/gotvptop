@@ -160,7 +160,7 @@ RCODE BigListDb::dbUpdateSessionTime( VxGUID& onlineId, int64_t lastSessionTime,
 		return rc;
 	}
 
-	std::string strHexOnlineId = onlineId.toVxGUIDHexString();
+	std::string strHexOnlineId = onlineId.toHexString();
 	sprintf(SQL_Statement, "UPDATE BigList SET ConnectTime=%lld WHERE online_id='%s'", lastSessionTime, strHexOnlineId.c_str() );
 	retval = sqlite3_prepare( m_Db, SQL_Statement, (int)strlen(SQL_Statement), &pStatement, NULL );
 	if( !( SQLITE_OK == retval ) )
@@ -216,7 +216,7 @@ RCODE BigListDb::dbRemoveBigListInfo( VxGUID& onlineId )
 		return rc;
 	}
 
-	std::string strHexOnlineId = onlineId.toVxGUIDHexString();
+	std::string strHexOnlineId = onlineId.toHexString();
 	// make statement
 	sprintf(SQL_Statement, "DELETE FROM BigList WHERE online_id='%s'", 
 		strHexOnlineId.c_str() );
@@ -271,7 +271,7 @@ RCODE BigListDb::dbInsertBigListInfoIntoDb( BigListInfo * poInfo, const char * n
 
 	vx_assert( pu8Blob );
 	vx_assert( iBlobLen );
-	std::string strOnlineIdHex = poInfo->getMyOnlineId().toVxGUIDHexString();
+	std::string strOnlineIdHex = poInfo->getMyOnlineId().toHexString();
     const char * SQL_Statement = "INSERT INTO BigList (online_id,NetworkName,ConnectTime,Object) VALUES (?,?,?,?)";
 	rc = dbOpen();
 	if( rc )
@@ -345,7 +345,7 @@ RCODE BigListDb::dbUpdateBigListInfoInDb( BigListInfo * poInfo, const char * net
 	RCODE rc = saveBigListInfoIntoBlob( poInfo, &pu8Blob, &iBlobLen );
 	if( rc )
 	{
-		LogMsg( LOG_ERROR,"BigListDb::InsertAnchorList:Make Blob Error:%d\n",rc);
+		LogMsg( LOG_ERROR,"BigListDb::InsertHostList:Make Blob Error:%d\n",rc);
 		vx_assert( false );
 		return -1;
 	}
@@ -365,7 +365,7 @@ RCODE BigListDb::dbUpdateBigListInfoInDb( BigListInfo * poInfo, const char * net
 	}
 
 	// make statement
-	std::string onlineIdHex = poInfo->getMyOnlineId().toVxGUIDHexString();
+	std::string onlineIdHex = poInfo->getMyOnlineId().toHexString();
 	sprintf(SQL_Statement, "UPDATE BigList SET ConnectTime=?,Object=? WHERE online_id='%s' AND NetworkName='%s'", 
 		onlineIdHex.c_str(), 
 		networkName );

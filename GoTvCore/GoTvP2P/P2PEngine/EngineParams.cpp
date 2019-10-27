@@ -61,27 +61,27 @@ void EngineParams::engineParamsShutdown( void )
 
 
 //============================================================================
-void EngineParams::setLastAnchorWebsiteUrl( std::string& strWebsiteUrl )
+void EngineParams::setLastHostWebsiteUrl( std::string& strWebsiteUrl )
 {
-	setIniValue( MY_SETTINGS_KEY, "AnchorUrl", strWebsiteUrl );
+	setIniValue( MY_SETTINGS_KEY, "HostUrl", strWebsiteUrl );
 }
 
 //============================================================================
-void EngineParams::getLastAnchorWebsiteUrl( std::string& strWebsiteUrl )
+void EngineParams::getLastHostWebsiteUrl( std::string& strWebsiteUrl )
 {
-	getIniValue( MY_SETTINGS_KEY, "AnchorUrl", strWebsiteUrl, "" );
+	getIniValue( MY_SETTINGS_KEY, "HostUrl", strWebsiteUrl, "" );
 }
 
 //============================================================================
-void EngineParams::setLastAnchorWebsiteResolvedIp( std::string& strWebsiteIp )
+void EngineParams::setLastHostWebsiteResolvedIp( std::string& strWebsiteIp )
 {
-	setIniValue( MY_SETTINGS_KEY, "AnchorIp", strWebsiteIp );
+	setIniValue( MY_SETTINGS_KEY, "HostIp", strWebsiteIp );
 }
 
 //============================================================================
-void EngineParams::getLastAnchorWebsiteResolvedIp( std::string& strWebsiteIp )
+void EngineParams::getLastHostWebsiteResolvedIp( std::string& strWebsiteIp )
 {
-	getIniValue( MY_SETTINGS_KEY, "AnchorIp", strWebsiteIp, "" );
+	getIniValue( MY_SETTINGS_KEY, "HostIp", strWebsiteIp, "" );
 }
 
 //============================================================================

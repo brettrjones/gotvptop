@@ -319,7 +319,7 @@ void P2PEngine::fromGuiSendContactList( EFriendViewType eFriendView, int maxCont
 		if( m_NetworkStateMachine.isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnNetHost() ) )
 		{
 			m_LastTimeAnnounceFromContactListCalled = timeNow;
-			m_NetServicesMgr.announceToAnchor( m_NetworkStateMachine.getAnchorIp(), m_NetworkStateMachine.getAnchorPort() );
+			m_NetServicesMgr.announceToHost( m_NetworkStateMachine.getHostIp(), m_NetworkStateMachine.getHostPort() );
 		}
 	}
 }
@@ -339,7 +339,7 @@ void P2PEngine::fromGuiRefreshContactList( int maxContactsToSend )
 		if( m_NetworkStateMachine.isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnNetHost() ) )
 		{
 			m_LastTimeAnnounceFromContactListCalled = timeNow;
-			m_NetServicesMgr.announceToAnchor( m_NetworkStateMachine.getAnchorIp(), m_NetworkStateMachine.getAnchorPort() );
+			m_NetServicesMgr.announceToHost( m_NetworkStateMachine.getHostIp(), m_NetworkStateMachine.getHostPort() );
 		}
 	}
 

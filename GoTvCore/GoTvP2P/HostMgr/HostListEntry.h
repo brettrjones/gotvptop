@@ -1,9 +1,5 @@
-#ifndef ANCHOR_LIST_ENTRY_H
-#define ANCHOR_LIST_ENTRY_H
-
 //============================================================================
-// Copyright (C) 2014 Brett R. Jones 
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2019 Brett R. Jones 
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -15,17 +11,16 @@
 // bjones.engineer@gmail.com
 // http://www.gotvptop.com
 //============================================================================
+#pragma once
 
 #include <PktLib/VxCommon.h>
 
 #pragma pack(push) 
 #pragma pack(1)
 
-class AnchorListEntry : public VxConnectIdent
+class HostListEntry : public VxConnectIdent
 {
 public:
 };
 
 #pragma pack(pop)
-
-#endif // ANCHOR_LIST_ENTRY_H

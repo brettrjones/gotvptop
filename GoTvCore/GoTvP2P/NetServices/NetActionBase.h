@@ -21,7 +21,7 @@ enum ENetActionType
 	eNetActionQueryMyIp			= 2,
 	eNetActionAnnounce			= 3,
 	eNetActionIsPortOpen		= 4,
-	eNetActionPhoneShake		= 5,
+	eNetActionRandomConnect		= 5,
 
 	eMaxNetAction
 };

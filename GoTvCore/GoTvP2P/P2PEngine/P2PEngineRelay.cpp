@@ -145,13 +145,13 @@ void P2PEngine::onPktRelayServiceReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
 #ifdef DEBUG_RELAY
 		else
 		{
-			LogMsg( LOG_ERROR, "onPktRelayServiceReq %s Connection NOT FOUND\n", srcOnlineId.toVxGUIDHexString().c_str() );
+			LogMsg( LOG_ERROR, "onPktRelayServiceReq %s Connection NOT FOUND\n", srcOnlineId.toHexString().c_str() );
 		}
 #endif // DEBUG_RELAY
 	}
 	else
 	{
-		LogMsg( LOG_ERROR, "onPktRelayServiceReq NO BIG LIST INFO\n", srcOnlineId.toVxGUIDHexString().c_str() );
+		LogMsg( LOG_ERROR, "onPktRelayServiceReq NO BIG LIST INFO\n", srcOnlineId.toHexString().c_str() );
 	}
 
 	txSystemPkt( pktHdr->getSrcOnlineId(), sktBase, &pktReply );
@@ -259,10 +259,10 @@ void P2PEngine::onPktRelayConnectToUserReply( VxSktBase * sktBase, VxPktHdr * pk
 		poPkt->m_ConnectId.getIpAddress(strIp);
 
 		std::string strFromId;
-		poPkt->getSrcOnlineId().toVxGUIDHexString( strFromId );
+		poPkt->getSrcOnlineId().toHexString( strFromId );
 
 		std::string connectToId;
-		poPkt->m_ConnectId.getOnlineId().toVxGUIDHexString( connectToId );
+		poPkt->m_ConnectId.getOnlineId().toHexString( connectToId );
 
 //#ifdef DEBUG_RELAY
 //		LogMsg( LOG_INFO, "onPktRelayConnectToUserReply: FAIL proxy %s id %s to %s id %s ip %s port %d\n",

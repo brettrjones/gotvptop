@@ -96,7 +96,7 @@ void AssetBaseWidget::toGuiClientAssetAction( void * userData, EAssetAction asse
 	{
 		if( eAssetActionTxError == assetAction )
 		{
-			LogMsg( LOG_ERROR, "toGuiClientAssetAction txError %s\n ", m_AssetInfo.getAssetUniqueId().toVxGUIDHexString().c_str() );
+			LogMsg( LOG_ERROR, "toGuiClientAssetAction txError %s\n ", m_AssetInfo.getAssetUniqueId().toHexString().c_str() );
 		}
 
 		emit signalToGuiAssetAction( assetAction, pos0to100000 );

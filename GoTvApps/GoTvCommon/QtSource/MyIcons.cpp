@@ -528,7 +528,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 		return ":/AppRes/Resources/question_mark.svg";
 	case eMyIconNetworkStateDirectConnected:
 		return ":/AppRes/Resources/question_mark.svg";
-	case eMyIconNetworkStateAnchorFail:
+	case eMyIconNetworkStateHostFail:
 		return ":/AppRes/Resources/question_mark.svg";
 	case eMyIconNetworkStateRelayConnected:
 		return ":/AppRes/Resources/question_mark.svg";

@@ -576,7 +576,7 @@ bool NetworkStateMachine::resolveWebsiteUrls( void )
 	std::string netServiceWebsiteUrl;
 	m_EngineSettings.getNetServiceWebsiteUrl( netServiceWebsiteUrl );
 	if( m_bWebsiteUrlsResolved
-		&& ( anchorWebsiteUrl == m_LastResolvedAnchorWebsite )
+		&& ( anchorWebsiteUrl == m_LastResolvedHostWebsite )
 		&& ( netServiceWebsiteUrl == m_LastResolvedNetServiceWebsite ) )
 	{
 		//LogMsg( LOG_INFO, "NetworkStateMachine::resolveWebsiteUrls already resolved\n" );
@@ -588,28 +588,28 @@ bool NetworkStateMachine::resolveWebsiteUrls( void )
 	}
 
 	//LogMsg( LOG_INFO, "NetworkStateMachine::resolveWebsiteUrls\n" );
-	bool resolveAnchorResult		= resolveUrl( anchorWebsiteUrl, m_AnchorIp, m_u16AnchorPort );
+	bool resolveHostResult		= resolveUrl( anchorWebsiteUrl, m_HostIp, m_u16HostPort );
 	bool resolveConnectTestResult	= resolveUrl( netServiceWebsiteUrl, m_NetServiceIp, m_u16NetServicePort );
 	EngineParams& engineParams		= m_Engine.getEngineParams();
-	if( resolveAnchorResult )
+	if( resolveHostResult )
 	{
-		m_LastResolvedAnchorWebsite = anchorWebsiteUrl;
-		engineParams.setLastAnchorWebsiteUrl( m_LastResolvedAnchorWebsite );
-		engineParams.setLastAnchorWebsiteResolvedIp( m_AnchorIp );
+		m_LastResolvedHostWebsite = anchorWebsiteUrl;
+		engineParams.setLastHostWebsiteUrl( m_LastResolvedHostWebsite );
+		engineParams.setLastHostWebsiteResolvedIp( m_HostIp );
 	}
 	else
 	{
 		// use last known resolved ip
-		std::string lastAnchorUrl;
-		engineParams.getLastAnchorWebsiteUrl( lastAnchorUrl );
-		if( lastAnchorUrl == anchorWebsiteUrl )
+		std::string lastHostUrl;
+		engineParams.getLastHostWebsiteUrl( lastHostUrl );
+		if( lastHostUrl == anchorWebsiteUrl )
 		{
-			std::string lastAnchorIp = "";
-			engineParams.setLastAnchorWebsiteResolvedIp( lastAnchorIp );
-			if( 0 != lastAnchorIp.length() )
+			std::string lastHostIp = "";
+			engineParams.setLastHostWebsiteResolvedIp( lastHostIp );
+			if( 0 != lastHostIp.length() )
 			{
-				m_AnchorIp = lastAnchorIp;
-				resolveAnchorResult = true;
+				m_HostIp = lastHostIp;
+				resolveHostResult = true;
 			}
 		}
 	}
@@ -637,15 +637,15 @@ bool NetworkStateMachine::resolveWebsiteUrls( void )
 		}
 	}
 
-	if( resolveAnchorResult && resolveConnectTestResult )
+	if( resolveHostResult && resolveConnectTestResult )
 	{
 		m_bWebsiteUrlsResolved = true;
 		std::string myLclIp = VxGetLclIpAddress();
 
-		m_bAnchorIpMatch = false;
-		if( myLclIp == m_AnchorIp )
+		m_bHostIpMatch = false;
+		if( myLclIp == m_HostIp )
 		{
-			m_bAnchorIpMatch = true;
+			m_bHostIpMatch = true;
 		}
 
 		m_bNetServiceIpMatch = false;
@@ -662,7 +662,7 @@ bool NetworkStateMachine::resolveWebsiteUrls( void )
 	}
 
 
-	return ( resolveAnchorResult && resolveConnectTestResult );
+	return ( resolveHostResult && resolveConnectTestResult );
 }
 
 //============================================================================
@@ -687,6 +687,6 @@ void NetworkStateMachine::onOncePerHour( void )
 
 	if( isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnNetHost() ) )
 	{
-		m_NetServicesMgr.announceToAnchor( getAnchorIp(), getAnchorPort() );
+		m_NetServicesMgr.announceToHost( getHostIp(), getHostPort() );
 	}
 }

@@ -714,10 +714,10 @@ void Java_com_waycoolapps_myp2pweb_NativeTxTo_fromGuiNetworkLost( JNIEnv* env, j
 }
 
 //============================================================================
-int Java_com_waycoolapps_myp2pweb_NativeTxTo_fromGuiVerifyAnchorSettings( JNIEnv* env, jobject thiz )
+int Java_com_waycoolapps_myp2pweb_NativeTxTo_fromGuiVerifyHostSettings( JNIEnv* env, jobject thiz )
 {
-	MyAndroidPrint( ANDROID_LOG_INFO, FROM_NATIVE_LOG_TAG, "NativeTxTo_fromGuiVerifyAnchorSettings\n" );
-	GetEngineImp().fromGuiVerifyAnchorSettings();
+	MyAndroidPrint( ANDROID_LOG_INFO, FROM_NATIVE_LOG_TAG, "NativeTxTo_fromGuiVerifyHostSettings\n" );
+	GetEngineImp().fromGuiVerifyHostSettings();
 	return 0;
 }
 

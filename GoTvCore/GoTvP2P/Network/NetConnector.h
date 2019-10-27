@@ -33,7 +33,7 @@ class NetworkMgr;
 class VxPktHdr;
 class VxPeerMgr;
 class VxGUID;
-class AnchorList;
+class HostList;
 class BigListInfo;
 
 class NetConnector
@@ -66,8 +66,8 @@ public:
 
 	bool						getShouldRequestTop10( void );
 
-	void						handleAnnounceResults( AnchorList * anchorList, EConnectReason connectReason = eConnectReasonAnnouncePing );
-	void						handlePhoneShakeResults( AnchorList * anchorList );
+	void						handleAnnounceResults( HostList * anchorList, EConnectReason connectReason = eConnectReasonAnnouncePing );
+	void						handleRandomConnectResults( HostList * anchorList );
 
 	void						doNetConnectionsThread( void );
 	void						doStayConnectedThread( void );

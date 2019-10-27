@@ -270,9 +270,9 @@ public:
 
     virtual void				toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" ) override;
     virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) override;
-    virtual void				toGuiAnchorStatus( EAnchorTestStatus eAnchorStatus, const char * msg = "" ) override;
+    virtual void				toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg = "" ) override;
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
-    virtual void				toGuiPhoneShakeStatus( EPhoneShakeStatus ePhoneShakeStatus, const char * msg = "" ) override;
+    virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) override;
 
     virtual void				toGuiContactOnline( VxNetIdent * netIdent, bool newContact = false ) override;
     virtual void				toGuiContactOffline( VxNetIdent * netIdent ) override;

@@ -48,9 +48,9 @@ ActivityNetServiceTest::ActivityNetServiceTest(
 	//connect( this, SIGNAL(signalDialogWasShown()), this, SLOT(slotDialogWasShown()) );
 
 	//connect(	&app, 
-	//			SIGNAL(signalAnchorStatus(EAnchorTestStatus,QString)), 
+	//			SIGNAL(signalHostStatus(EHostTestStatus,QString)), 
 	//			this, 
-	//			SLOT(slotAnchorStatus(EAnchorTestStatus,QString)) );
+	//			SLOT(slotHostStatus(EHostTestStatus,QString)) );
 }
 
 //============================================================================
@@ -79,7 +79,7 @@ void ActivityNetServiceTest::slotDialogWasShown( void )
 }
 
 //============================================================================
-void ActivityNetServiceTest::slotAnchorStatus( EAnchorTestStatus eAnchorStatus, QString strMsg )
+void ActivityNetServiceTest::slotHostStatus( EHostTestStatus eHostStatus, QString strMsg )
 {
 	//strMsg.remove(QRegExp("[\\n\\r]"));
 	//ui.m_LogWidget->append(strMsg);

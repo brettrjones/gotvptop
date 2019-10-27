@@ -1,9 +1,5 @@
-#ifndef PHONE_SHAKE_ENTRY_H
-#define PHONE_SHAKE_ENTRY_H
-
 //============================================================================
-// Copyright (C) 2014 Brett R. Jones 
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2019 Brett R. Jones 
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -15,26 +11,26 @@
 // bjones.engineer@gmail.com
 // http://www.gotvptop.com
 //============================================================================
+#pragma once
 
-#include "AnchorListEntry.h"
+#include "HostListEntry.h"
 
-class PhoneShakeEntry : public AnchorListEntry
+class RandomConnectEntry : public HostListEntry
 {
 public:
-	PhoneShakeEntry();
-	PhoneShakeEntry( const PhoneShakeEntry& rhs );
-	PhoneShakeEntry( const AnchorListEntry& anchorEntry, int64_t postTime );
-	~PhoneShakeEntry();
+	RandomConnectEntry() = default;
+	RandomConnectEntry( const RandomConnectEntry& rhs );
+	RandomConnectEntry( const HostListEntry& anchorEntry, int64_t postTime );
+	~RandomConnectEntry() = default;
 
-	PhoneShakeEntry& operator=( const PhoneShakeEntry& rhs );
+	RandomConnectEntry& operator=( const RandomConnectEntry& rhs );
 
-	void						setAnchorListEntry( AnchorListEntry& entry );
+	void						setHostListEntry( HostListEntry& entry );
 	void						setPostTimeMs( int64_t postTimeMs )			{ m_PostTimeMs = postTimeMs; }
-	int64_t							getPostTimeMs( void )					{ return m_PostTimeMs; }
-	AnchorListEntry *			getAnchorListEntry( void )				{ return (AnchorListEntry *)this; }
+	int64_t						getPostTimeMs( void )					{ return m_PostTimeMs; }
+	HostListEntry *			    getHostListEntry( void )				{ return (HostListEntry *)this; }
 
 private:
-	int64_t							m_PostTimeMs;
+	int64_t						m_PostTimeMs = 0;
 };
 
-#endif // PHONE_SHAKE_ENTRY_H

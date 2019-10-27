@@ -109,9 +109,9 @@ NetSettingsJavaClass * GetNetSettingsJavaClass( void )
 	//LogMsg( LOG_INFO, "GetNetSettingsJavaClass: Getting ID\n" );
 	poClass->m_NetworkNameID 				= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_NetworkName", "Ljava/lang/String;");
 	poClass->m_NetServiceWebsiteUrlID 		= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_NetServiceWebsiteUrl", "Ljava/lang/String;");
-	poClass->m_AnchorWebsiteUrlID 			= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_AnchorWebsiteUrl", "Ljava/lang/String;");
+	poClass->m_HostWebsiteUrlID 			= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_HostWebsiteUrl", "Ljava/lang/String;");
 
-	poClass->m_ThisDeviceIsAnAnchorID 		= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_ThisDeviceIsAnAnchor", "Z");
+	poClass->m_ThisDeviceIsAnHostID 		= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_ThisDeviceIsAnHost", "Z");
 	poClass->m_MyTcpInPortID 				= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_MyTcpInPort", "I");
 	poClass->m_MyMulticastPortID 			= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_MyMulticastPort", "I");
 
@@ -135,9 +135,9 @@ bool Java2NetSettings( jobject& o, NetSettings& netSettings )
 	{
 		poClass->m_NetworkNameID 			= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_NetworkName", "Ljava/lang/String;");
 		poClass->m_NetServiceWebsiteUrlID 	= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_NetServiceWebsiteUrl", "Ljava/lang/String;");
-		poClass->m_AnchorWebsiteUrlID 		= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_AnchorWebsiteUrl", "Ljava/lang/String;");
+		poClass->m_HostWebsiteUrlID 		= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_HostWebsiteUrl", "Ljava/lang/String;");
 
-		poClass->m_ThisDeviceIsAnAnchorID 	= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_ThisDeviceIsAnAnchor", "Z");
+		poClass->m_ThisDeviceIsAnHostID 	= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_ThisDeviceIsAnHost", "Z");
 		poClass->m_MyTcpInPortID 			= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_MyTcpInPort", "I");
 		poClass->m_MyMulticastPortID 		= poClass->m_poEnv->GetFieldID(poClass->m_JavaClass, "m_MyMulticastPort", "I");
 
@@ -155,16 +155,16 @@ bool Java2NetSettings( jobject& o, NetSettings& netSettings )
 		netSettings.setNetServiceWebsiteUrl( pNetServiceUrl );
 		poClass->m_poEnv->ReleaseStringUTFChars( jstrNetServiceUrl, pNetServiceUrl );
 
-		jstring jstrAnchorWebsiteUrl = (jstring) poClass->m_poEnv->GetObjectField( o, poClass->m_AnchorWebsiteUrlID );
-		const char * pAnchorWebsiteUrl = poClass->m_poEnv->GetStringUTFChars(jstrAnchorWebsiteUrl, 0);
-		netSettings.setAnchorWebsiteUrl( pAnchorWebsiteUrl );
-		poClass->m_poEnv->ReleaseStringUTFChars( jstrAnchorWebsiteUrl, pAnchorWebsiteUrl );
+		jstring jstrHostWebsiteUrl = (jstring) poClass->m_poEnv->GetObjectField( o, poClass->m_HostWebsiteUrlID );
+		const char * pHostWebsiteUrl = poClass->m_poEnv->GetStringUTFChars(jstrHostWebsiteUrl, 0);
+		netSettings.setHostWebsiteUrl( pHostWebsiteUrl );
+		poClass->m_poEnv->ReleaseStringUTFChars( jstrHostWebsiteUrl, pHostWebsiteUrl );
 
 		uint16_t port = (uint16_t)poClass->m_poEnv->GetIntField( o, poClass->m_MyTcpInPortID );
 		netSettings.setMyTcpInPort( port );
 
-		bool bValue = poClass->m_poEnv->GetBooleanField( o, poClass->m_ThisDeviceIsAnAnchorID );
-		netSettings.setIsThisNodeAnAnchor( bValue );
+		bool bValue = poClass->m_poEnv->GetBooleanField( o, poClass->m_ThisDeviceIsAnHostID );
+		netSettings.setIsThisNodeAnHost( bValue );
 
 		uint16_t multicastPort = poClass->m_poEnv->GetIntField( o, poClass->m_MyMulticastPortID );
 		netSettings.setMyMulticastPort( multicastPort );
@@ -189,9 +189,9 @@ void javaFillNetSettingsClass( NetSettingsJavaClass * poClass, NetSettings& netS
 {
 	poClass->m_poEnv->SetObjectField(oNetSettingsClass, poClass->m_NetworkNameID, poClass->m_poEnv->NewStringUTF( netSettings.getNetworkName().c_str() ) );
 	poClass->m_poEnv->SetObjectField(oNetSettingsClass, poClass->m_NetServiceWebsiteUrlID, poClass->m_poEnv->NewStringUTF( netSettings.getNetServiceWebsiteUrl().c_str() ) );
-	poClass->m_poEnv->SetObjectField(oNetSettingsClass, poClass->m_AnchorWebsiteUrlID, poClass->m_poEnv->NewStringUTF( netSettings.getAnchorWebsiteUrl().c_str() ) );
+	poClass->m_poEnv->SetObjectField(oNetSettingsClass, poClass->m_HostWebsiteUrlID, poClass->m_poEnv->NewStringUTF( netSettings.getHostWebsiteUrl().c_str() ) );
 
-	poClass->m_poEnv->SetBooleanField(oNetSettingsClass, poClass->m_ThisDeviceIsAnAnchorID, netSettings.getIsThisNodeAnAnchor() );
+	poClass->m_poEnv->SetBooleanField(oNetSettingsClass, poClass->m_ThisDeviceIsAnHostID, netSettings.getIsThisNodeAnHost() );
 	poClass->m_poEnv->SetShortField(oNetSettingsClass, poClass->m_MyTcpInPortID, netSettings.getMyTcpInPort() );
 	poClass->m_poEnv->SetShortField(oNetSettingsClass, poClass->m_MyMulticastPortID, netSettings.getMyMulticastPort() );
 

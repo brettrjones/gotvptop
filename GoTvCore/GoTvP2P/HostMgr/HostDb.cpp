@@ -1,6 +1,5 @@
 //============================================================================
-// Copyright (C) 2014 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,8 +12,8 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "AnchorDb.h"
-#include "AnchorList.h"
+#include "HostDb.h"
+#include "HostList.h"
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxParse.h>
@@ -34,23 +33,23 @@ namespace
 
 	const int 			LIMIT_DATABASE_ROWS 			= 1000; // limit database size by limiting database table to this many rows
 
-	const int			MAX_PHONE_SHAKE_IN_LIST_TIME_MS = 30000;
+	const int			MAX_RANDOM_CONNECT_IN_LIST_TIME_MS = 30000;
 }
 
 //============================================================================
-AnchorDb::AnchorDb()
-: DbBase( "AnchorDb" )
+HostDb::HostDb()
+: DbBase( "HostDb" )
 , m_iInseredEntryCount(0)
 {
 }
 
 //============================================================================
-AnchorDb::~AnchorDb()
+HostDb::~HostDb()
 {
 }
 
 //============================================================================
-RCODE AnchorDb::onCreateTables( int iDbVersion )
+RCODE HostDb::onCreateTables( int iDbVersion )
 {
 	RCODE rc = sqlExec( "CREATE TABLE table_ann (ann_datetime BIGINT, ann_id TEXT, ann_blob BLOB, ann_name TEXT, ann_desc TEXT, firewalled INTEGER)" );
 	vx_assert( 0 == rc );
@@ -58,7 +57,7 @@ RCODE AnchorDb::onCreateTables( int iDbVersion )
 }
 
 //============================================================================
-RCODE AnchorDb::onDeleteTables( int iOldVersion )
+RCODE HostDb::onDeleteTables( int iOldVersion )
 {
 	RCODE rc = sqlExec( (char *)"DROP TABLE table_ann" );
 	vx_assert( 0 == rc );
@@ -66,7 +65,7 @@ RCODE AnchorDb::onDeleteTables( int iOldVersion )
 }
 
 //============================================================================
-void AnchorDb::addIgnoreId( VxGUID& onlineIdToIgnore )
+void HostDb::addIgnoreId( VxGUID& onlineIdToIgnore )
 {
 	std::vector<VxGUID>::iterator iter;
 	for( iter = m_IgnoreIdList.begin(); iter != m_IgnoreIdList.end(); ++iter )
@@ -82,22 +81,22 @@ void AnchorDb::addIgnoreId( VxGUID& onlineIdToIgnore )
 }
 
 //============================================================================
-RCODE AnchorDb::handleAnnounce(		AnchorList&			anchorListIn, 
-									AnchorList&			anchorListOut,
+RCODE HostDb::handleAnnounce(		HostList&			anchorListIn, 
+									HostList&			anchorListOut,
 									VxGUID				ignoreMe )
 {
 	RCODE rc = 0;
 	std::vector<VxGUID>::iterator ignoreIter;
 
-	anchorListOut.m_AnchorAction = anchorListIn.m_AnchorAction;
+	anchorListOut.m_HostAction = anchorListIn.m_HostAction;
 	anchorListOut.m_EntryCount = 0;
 	if( 1 != anchorListIn.m_EntryCount )
 	{
-		LogMsg( LOG_ERROR, "AnchorDb::handleAnnounce: invalid anchorListIn count\n" );
+		LogMsg( LOG_ERROR, "HostDb::handleAnnounce: invalid anchorListIn count\n" );
 		return -2;
 	}
 
-	AnchorListEntry * callerEntry		= &anchorListIn.m_List[0];
+	HostListEntry * callerEntry		= &anchorListIn.m_List[0];
 	int				isFireWalled		= callerEntry->requiresRelay();
 	std::string		annId;
 	callerEntry->getMyOnlineId( annId );
@@ -120,7 +119,7 @@ RCODE AnchorDb::handleAnnounce(		AnchorList&			anchorListIn,
 	}
 
 	DbBindList bindList( s64PostTimeMs );
-	bindList.add( callerEntry, sizeof( AnchorListEntry ) );
+	bindList.add( callerEntry, sizeof( HostListEntry ) );
 	bindList.add( callerEntry->getOnlineName() );
 	bindList.add( callerEntry->getOnlineDescription() );
 	bindList.add( isFireWalled );
@@ -150,15 +149,15 @@ RCODE AnchorDb::handleAnnounce(		AnchorList&			anchorListIn,
 
 	if( rc )
 	{
-		LogMsg( LOG_ERROR, "AnchorDb::handleAnnounce: ERROR %d updating user\n", rc );
+		LogMsg( LOG_ERROR, "HostDb::handleAnnounce: ERROR %d updating user\n", rc );
 	}
 
-	if( eAnchorActionPhoneShake == anchorListIn.m_AnchorAction )
+	if( eHostActionRandomConnect == anchorListIn.m_HostAction )
 	{
 		m_DbMutex.unlock();
-		return handlePhoneShake( *callerEntry, anchorListOut, s64PostTimeMs );
+		return handleRandomConnect( *callerEntry, anchorListOut, s64PostTimeMs );
 	}
-	else if( eAnchorActionRelaysOnly == anchorListIn.m_AnchorAction )
+	else if( eHostActionRelaysOnly == anchorListIn.m_HostAction )
 	{
 		// get rows where user is not firewalled ( potential relays )
 		cursor =  startQuery( "SELECT ann_datetime,ann_blob FROM table_ann WHERE firewalled=0" ); // ORDER BY ann_datetime DESC" ); // BRJ don't know why ORDER BY quit working on android.. do in code
@@ -171,7 +170,7 @@ RCODE AnchorDb::handleAnnounce(		AnchorList&			anchorListIn,
 
 	bool foundCallerContact = false;
     const int MAX_ANN_MATCH_ENTRIES = 500;
-	AnchorListEntry tmpEntries[MAX_ANN_MATCH_ENTRIES];
+	HostListEntry tmpEntries[MAX_ANN_MATCH_ENTRIES];
 	int foundEntryIdx = 0;
 	uint64_t minTimeFound = 0x7fffffffffffffff;
 
@@ -185,10 +184,10 @@ RCODE AnchorDb::handleAnnounce(		AnchorList&			anchorListIn,
 			{
 				bool ignoreThisEntry = false;
 				int blobLen = 0;
-				AnchorListEntry * listEntry = (AnchorListEntry *) cursor->getBlob( 1, &blobLen );
-				if( blobLen != sizeof( AnchorListEntry ) )
+				HostListEntry * listEntry = (HostListEntry *) cursor->getBlob( 1, &blobLen );
+				if( blobLen != sizeof( HostListEntry ) )
 				{
-					LogMsg( LOG_ERROR, "AnchorDb::handleAnnounce: invalid blob len %d\n", blobLen );
+					LogMsg( LOG_ERROR, "HostDb::handleAnnounce: invalid blob len %d\n", blobLen );
 				}
 				else
 				{
@@ -231,7 +230,7 @@ RCODE AnchorDb::handleAnnounce(		AnchorList&			anchorListIn,
 						}
 
 						listEntry->setTimeLastContact( timeOfEntry );
-						memcpy( &tmpEntries[ foundEntryIdx ], listEntry, sizeof( AnchorListEntry ) );
+						memcpy( &tmpEntries[ foundEntryIdx ], listEntry, sizeof( HostListEntry ) );
 						foundEntryIdx++;
 						if( MAX_ANN_MATCH_ENTRIES == foundEntryIdx )
 						{
@@ -273,7 +272,7 @@ RCODE AnchorDb::handleAnnounce(		AnchorList&			anchorListIn,
 
 		if( timeFoundIdx != -1 )
 		{
-			memcpy( &anchorListOut.m_List[ anchorListOut.m_EntryCount ], &tmpEntries[timeFoundIdx], sizeof( AnchorListEntry ) );
+			memcpy( &anchorListOut.m_List[ anchorListOut.m_EntryCount ], &tmpEntries[timeFoundIdx], sizeof( HostListEntry ) );
 			anchorListOut.m_EntryCount++;
 		}
 		
@@ -289,7 +288,7 @@ RCODE AnchorDb::handleAnnounce(		AnchorList&			anchorListIn,
 		rc = sqlExec( "DELETE FROM table_ann WHERE ann_datetime < ?", bindList );
 		if( rc )
         {
-			LogMsg( LOG_INFO, "Error %d limiting AnchorDb\n", rc );
+			LogMsg( LOG_INFO, "Error %d limiting HostDb\n", rc );
 		}
 	}
 
@@ -298,22 +297,22 @@ RCODE AnchorDb::handleAnnounce(		AnchorList&			anchorListIn,
 }
 
 //============================================================================
-RCODE AnchorDb::handlePhoneShake(		AnchorListEntry&	callerEntry, 
-										AnchorList&			anchorListOut,
+RCODE HostDb::handleRandomConnect(		HostListEntry&	callerEntry, 
+										HostList&			anchorListOut,
 										int64_t					s64PostTimeMs )
 {
 	RCODE rc = 0;
-	m_PhoneShakeMutex.lock();
+	m_RandomConnectMutex.lock();
 	// remove ourself and all that are to old
-	int64_t toOldTime = s64PostTimeMs - MAX_PHONE_SHAKE_IN_LIST_TIME_MS;
-    std::vector<PhoneShakeEntry>::iterator iter;
-	iter = m_PhoneShakeList.begin();
-	while( iter != m_PhoneShakeList.end() )
+	int64_t toOldTime = s64PostTimeMs - MAX_RANDOM_CONNECT_IN_LIST_TIME_MS;
+    std::vector<RandomConnectEntry>::iterator iter;
+	iter = m_RandomConnectList.begin();
+	while( iter != m_RandomConnectList.end() )
 	{
 		if( ( toOldTime > (*iter).getPostTimeMs() ) 
 			|| ( (*iter).getMyOnlineId() == callerEntry.getMyOnlineId() ) )
 		{
-			iter = m_PhoneShakeList.erase( iter );
+			iter = m_RandomConnectList.erase( iter );
 		}
 		else
 		{
@@ -322,50 +321,50 @@ RCODE AnchorDb::handlePhoneShake(		AnchorListEntry&	callerEntry,
 	}
 
 	// put ourself in list for anybody else
-	PhoneShakeEntry shakeEntry( callerEntry, s64PostTimeMs );
-	m_PhoneShakeList.push_back( shakeEntry );
-	m_PhoneShakeMutex.unlock();
+	RandomConnectEntry shakeEntry( callerEntry, s64PostTimeMs );
+	m_RandomConnectList.push_back( shakeEntry );
+	m_RandomConnectMutex.unlock();
 
 	VxSleep( 1000 );
 
 	// get list of anyone left in list
 	int entryCnt = 0;
-	AnchorListEntry * anchorEntry;
-	m_PhoneShakeMutex.lock();
-	for( iter = m_PhoneShakeList.begin(); iter != m_PhoneShakeList.end(); ++iter )
+	HostListEntry * anchorEntry;
+	m_RandomConnectMutex.lock();
+	for( iter = m_RandomConnectList.begin(); iter != m_RandomConnectList.end(); ++iter )
 	{
-		anchorEntry = (*iter).getAnchorListEntry();
+		anchorEntry = (*iter).getHostListEntry();
 		if( anchorEntry->getMyOnlineId() != callerEntry.getMyOnlineId() )
 		{
-			memcpy( &anchorListOut.m_List[entryCnt], (*iter).getAnchorListEntry(), sizeof( AnchorListEntry ) );
+			memcpy( &anchorListOut.m_List[entryCnt], (*iter).getHostListEntry(), sizeof( HostListEntry ) );
 			entryCnt++;
 		}
 	}
 
-	m_PhoneShakeMutex.unlock();
+	m_RandomConnectMutex.unlock();
     anchorListOut.m_EntryCount = entryCnt;
 
 	return rc;
 }
 
 //============================================================================
-bool AnchorDb::validateId( std::string& onlineId )
+bool HostDb::validateId( std::string& onlineId )
 {
 	return true;
 }
 
 //============================================================================
-bool AnchorDb::validatePort( std::string& port )
+bool HostDb::validatePort( std::string& port )
 {
 	return true;
 }
 //============================================================================
-bool AnchorDb::validateIPv4( std::string& ipv4 )
+bool HostDb::validateIPv4( std::string& ipv4 )
 {
 	return true;
 }
 //============================================================================
-bool AnchorDb::validateIPv6( std::string& ipv6 )
+bool HostDb::validateIPv6( std::string& ipv6 )
 {
 	return true;
 }

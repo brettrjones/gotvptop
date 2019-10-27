@@ -14,23 +14,23 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "AnchorDefs.h"
-#include "PhoneShakeEntry.h"
+#include "HostDefs.h"
+#include "RandomConnectEntry.h"
 
 #include <GoTvCore/GoTvP2P/NetServices/NetServiceDefs.h>
 
 #include <CoreLib/DbBase.h>
 
-class AnchorList;
+class HostList;
 
-class AnchorDb : public DbBase
+class HostDb : public DbBase
 {
 public:
-	AnchorDb();
-	virtual ~AnchorDb();
+	HostDb();
+	virtual ~HostDb();
 
-	virtual RCODE				handleAnnounce(		AnchorList&			anchorListIn, 
-													AnchorList&			anchorListOut,
+	virtual RCODE				handleAnnounce(		HostList&			anchorListIn, 
+													HostList&			anchorListOut,
 													VxGUID				ignoreMe = VxGUID::nullVxGUID() );
 	void						addIgnoreId( VxGUID& onlineIdToIgnore );
 
@@ -42,13 +42,13 @@ protected:
 	bool						validatePort( std::string& port );
 	bool						validateIPv4( std::string& ipv4 );
 	bool						validateIPv6( std::string& ipv6 );
-	RCODE						handlePhoneShake(	AnchorListEntry&	callerEntry, 
-													AnchorList&			anchorListOut,
+	RCODE						handleRandomConnect(	HostListEntry&	callerEntry, 
+													HostList&			anchorListOut,
 													int64_t					s64PostTimeMs );
 
 	int							m_iInseredEntryCount;
-	std::vector<PhoneShakeEntry>	m_PhoneShakeList;
-	VxMutex						m_PhoneShakeMutex;
+	std::vector<RandomConnectEntry>	m_RandomConnectList;
+	VxMutex						m_RandomConnectMutex;
 	std::vector<VxGUID>			m_IgnoreIdList;
 };
 

@@ -17,7 +17,7 @@
 #include "NetServicesMgr.h"
 #include "NetServiceHdr.h"
 
-#include <GoTvCore/GoTvP2P/Anchor/AnchorList.h>
+#include <GoTvCore/GoTvP2P/HostMgr/HostList.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
 #include <CoreLib/VxGlobals.h>
@@ -28,14 +28,9 @@
 #include <string.h>
 
 //============================================================================
-NetActionAnnounce::NetActionAnnounce( NetServicesMgr& netServicesMgr, std::string& anchorIp, uint16_t u16AnchorPort, EAnchorAction eAnchorAction )
+NetActionAnnounce::NetActionAnnounce( NetServicesMgr& netServicesMgr, std::string& anchorIp, uint16_t u16HostPort, EHostAction eHostAction )
 : NetActionBase( netServicesMgr )
-, m_eAnchorAction( eAnchorAction )
-{
-}
-
-//============================================================================
-NetActionAnnounce::~NetActionAnnounce()
+, m_eHostAction( eHostAction )
 {
 }
 
@@ -52,28 +47,28 @@ void NetActionAnnounce::doAction( void )
 
 		LogMsg( LOG_INFO, "NetActionAnnounce::doAction anouncing as anchor\n" );
 		// we are the anchor
-		AnchorList			anchorListOut;
-		AnchorList			anchorListIn;
+		HostList			anchorListOut;
+		HostList			anchorListIn;
 		// put ourself directly into the database
 		anchorListIn.addEntry( &m_Engine.getMyPktAnnounce() );
 
-		m_NetServicesMgr.getNetServiceAnchor().getAnchorDb().handleAnnounce( anchorListIn, anchorListOut );
+		m_NetServicesMgr.getNetServiceHost().getHostDb().handleAnnounce( anchorListIn, anchorListOut );
 		m_NetServicesMgr.netActionResultAnnounce( eAppErrNone, &anchorListOut );
 		return;
 	}
 
 	VxSktConnectSimple netServConn;
-	if( false == m_NetServicesMgr.actionReqConnectToAnchor( netServConn ) )
+	if( false == m_NetServicesMgr.actionReqConnectToHost( netServConn ) )
 	{
-		m_NetServicesMgr.netActionResultAnnounce( eAppErrFailedConnectAnchor, 0 );
-		AppErr( eAppErrFailedConnectAnchor, "Anchor Announce: Could not connect to Anchor\n" );
+		m_NetServicesMgr.netActionResultAnnounce( eAppErrFailedConnectHost, 0 );
+		AppErr( eAppErrFailedConnectHost, "Host Announce: Could not connect to Host\n" );
 		return;
 	}
 
 	std::string strNetCmdHdr;
-	AnchorList anchorList;
+	HostList anchorList;
 	uint16_t acceptedPort = netServConn.getRemotePort();
-    buildAnnounceCmd( strNetCmdHdr, acceptedPort, anchorList, eAnchorActionAnnounce );
+    buildAnnounceCmd( strNetCmdHdr, acceptedPort, anchorList, eHostActionAnnounce );
 	int anchorDataLen = anchorList.m_TotalLen;
 
 	RCODE rc = netServConn.sendData( strNetCmdHdr.c_str(), (int)strNetCmdHdr.length() );
@@ -81,7 +76,7 @@ void NetActionAnnounce::doAction( void )
 	{
 		LogMsg( LOG_ERROR, "### ERROR NetActionAnnounce::doAction: send header error %d %s\n", rc, VxDescribeSktError( rc ) );
 		m_NetServicesMgr.netActionResultAnnounce( eAppErrTxError, 0 );
-		AppErr( eAppErrTxError, "Anchor Announce: send anchor header error %d %s\n", rc, VxDescribeSktError( rc ) );
+		AppErr( eAppErrTxError, "Host Announce: send anchor header error %d %s\n", rc, VxDescribeSktError( rc ) );
 		netServConn.closeSkt();
 		return;
 	}
@@ -96,7 +91,7 @@ void NetActionAnnounce::doAction( void )
 		netServConn.closeSkt();
 		LogMsg( LOG_ERROR, "### ERROR NetActionAnnounce::doAction: send anchor list error %d %s\n", rc, VxDescribeSktError( rc ) );
 		m_NetServicesMgr.netActionResultAnnounce( eAppErrTxError, 0 );
-		AppErr( eAppErrTxError, "Anchor Announce: send anchor list error %d %s\n", rc, VxDescribeSktError( rc ) );
+		AppErr( eAppErrTxError, "Host Announce: send anchor list error %d %s\n", rc, VxDescribeSktError( rc ) );
 		return;
 	}
 
@@ -112,40 +107,40 @@ void NetActionAnnounce::doAction( void )
 		LogMsg( LOG_ERROR, "### ERROR NetActionAnnounce::rxNetServiceCmd: hdr timout %d data timeout %d\n", ANCHOR_RX_HDR_TIMEOUT, ANCHOR_RX_DATA_TIMEOUT );
 		netServConn.closeSkt();
 		m_NetServicesMgr.netActionResultAnnounce( eAppErrRxError, 0 );
-		AppErr( eAppErrRxError, "Anchor Announce: receive cmd error \n" );
+		AppErr( eAppErrRxError, "Host Announce: receive cmd error \n" );
 		return;
 	}
 
-	if( false == decryptAnchorList( rxBuf, netServiceHdr.m_ContentDataLen, acceptedPort ) )
+	if( false == decryptHostList( rxBuf, netServiceHdr.m_ContentDataLen, acceptedPort ) )
 	{
 		netServConn.closeSkt();
 		m_NetServicesMgr.netActionResultAnnounce( eAppErrRxError, 0 );
-		AppErr( eAppErrRxError, "Anchor Announce: decrypt error \n" );
+		AppErr( eAppErrRxError, "Host Announce: decrypt error \n" );
 		return;
 	}
 
 	netServConn.closeSkt();
-	m_NetServicesMgr.netActionResultAnnounce( eAppErrNone, (AnchorList *)rxBuf );
+	m_NetServicesMgr.netActionResultAnnounce( eAppErrNone, (HostList *)rxBuf );
 }
 
 //============================================================================
-bool NetActionAnnounce::decryptAnchorList( char * content, int contentDataLen, uint16_t clientPort )
+bool NetActionAnnounce::decryptHostList( char * content, int contentDataLen, uint16_t clientPort )
 {
 	if( false == m_NetServiceUtils.decryptNetServiceContent( content, contentDataLen, clientPort ) )
 	{
 		return 0;
 	}
 
-	AnchorList * anchorList = (AnchorList *)content;
+	HostList * anchorList = (HostList *)content;
 	if( anchorList->m_TotalLen != contentDataLen )
 	{
-		LogMsg( LOG_ERROR, "NetActionAnnounce::decryptAnchorList: invalid nchorList->m_TotalLen\n" );
+		LogMsg( LOG_ERROR, "NetActionAnnounce::decryptHostList: invalid nchorList->m_TotalLen\n" );
 		return false;
 	}
 
     if( MAX_ANCHOR_ENTRIES < anchorList->m_EntryCount )
 	{
-		LogMsg( LOG_ERROR, "NetActionAnnounce::decryptAnchorList: invalid anchorList->m_EntryCount\n" );
+		LogMsg( LOG_ERROR, "NetActionAnnounce::decryptHostList: invalid anchorList->m_EntryCount\n" );
 		return false;
 	}
 
@@ -153,19 +148,19 @@ bool NetActionAnnounce::decryptAnchorList( char * content, int contentDataLen, u
 }
 
 //============================================================================
-int NetActionAnnounce::buildAnnounceCmd( std::string& strNetCmdHdr, uint16_t clientPort, AnchorList& anchorList, EAnchorAction anchorAction )
+int NetActionAnnounce::buildAnnounceCmd( std::string& strNetCmdHdr, uint16_t clientPort, HostList& anchorList, EHostAction anchorAction )
 {
-	// build Anchor list
+	// build Host list
 	PktAnnounce& pktAnn = m_Engine.getMyPktAnnounce();
 	
-	anchorList.m_AnchorAction = anchorAction;
+	anchorList.m_HostAction = anchorAction;
 	anchorList.addEntry( &pktAnn );
 	int listLen = anchorList.calculateLength();
 
 	std::string netServChallengeHash;
 	m_NetServiceUtils.generateNetServiceChallengeHash( netServChallengeHash, clientPort );
 
-	int totalLen = m_NetServiceUtils.buildNetCmdHeader( strNetCmdHdr, eNetCmdAnchorReq, netServChallengeHash, listLen );
+	int totalLen = m_NetServiceUtils.buildNetCmdHeader( strNetCmdHdr, eNetCmdHostReq, netServChallengeHash, listLen );
 	return totalLen;
 }
 

@@ -136,7 +136,7 @@ void RcScan::fromGuiStartScan( EScanType eScanType, uint8_t searchFlags, uint8_t
 
 	if( eScanTypeRandomConnect == eScanType )
 	{
-		m_Engine.getNetServicesMgr().performPhoneShake();
+		m_Engine.getNetServicesMgr().performRandomConnect();
 		return;
 	}
 

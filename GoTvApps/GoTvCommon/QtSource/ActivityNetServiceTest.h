@@ -38,7 +38,7 @@ public:
 
 
 public slots:
-	void						slotAnchorStatus( EAnchorTestStatus eAnchorStatus, QString strMsg );
+	void						slotHostStatus( EHostTestStatus eHostStatus, QString strMsg );
 
 	void						slotExitDialogButtonClick( void );
 	void						slotRunTestButClick( void );

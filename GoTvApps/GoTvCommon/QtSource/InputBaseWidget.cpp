@@ -224,7 +224,7 @@ void InputBaseWidget::updateElapsedTime( void )
 void InputBaseWidget::generateFileName( EAssetType assetType, VxGUID& uniqueId )
 {
 	//std::string hisOnlineId;
-	//m_HisIdent->getMyOnlineId().toVxGUIDHexString( hisOnlineId );
+	//m_HisIdent->getMyOnlineId().toHexString( hisOnlineId );
 	//m_FileName = VxGetUserXferDirectory() + hisOnlineId + "/" + AssetInfo::getSubDirectoryName( assetType );
 	std::string mediaSubDir = "contacts/";
 	if( m_HisIdent->getMyOnlineId() == m_MyIdent->getMyOnlineId() )
@@ -240,6 +240,6 @@ void InputBaseWidget::generateFileName( EAssetType assetType, VxGUID& uniqueId )
 	m_FileName += "_";
 	m_FileName += VxTimeUtil::getFileNameCompatibleDateAndTime( time(0) );
 	m_FileName += "#";
-	m_FileName += uniqueId.toVxGUIDHexString();
+	m_FileName += uniqueId.toHexString();
 	m_FileName += AssetInfo::getDefaultFileExtension( assetType );
 }

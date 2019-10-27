@@ -83,7 +83,7 @@ void NetworkStateAvail::runNetworkState( void )
     bool websitesResolved = m_NetworkStateMachine.resolveWebsiteUrls();
 	if( false == websitesResolved )
 	{
-		m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeFailedResolveAnchor, "" );
+		m_Engine.getToGui().toGuiNetworkState( eNetworkStateTypeFailedResolveHostNetwork, "" );
 	}
 
     if( m_NetworkStateMachine.checkAndHandleNetworkEvents() )

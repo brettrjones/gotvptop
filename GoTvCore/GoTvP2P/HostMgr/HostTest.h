@@ -1,7 +1,5 @@
-#pragma once
 //============================================================================
-// Copyright (C) 2014 Brett R. Jones 
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2019 Brett R. Jones 
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,6 +11,7 @@
 // bjones.engineer@gmail.com
 // http://www.gotvptop.com
 //============================================================================
+#pragma once
 
 #include <GoTvInterface/IToGui.h>
 
@@ -25,28 +24,28 @@ class PktAnnounce;
 class NetworkMgr;
 class NetServicesMgr;
 
-class AnchorTest
+class HostTest
 {
 public:
-	AnchorTest( EngineSettings& engineSettings, NetServicesMgr& netServicesMgr );
-	virtual ~AnchorTest() = default;
+	HostTest( EngineSettings& engineSettings, NetServicesMgr& netServicesMgr );
+	virtual ~HostTest() = default;
 
     IToGui&                     getToGui();
 	virtual void				fromGuiVerifyNetHostSettings( void );
 
-	void						doAnchorUrlTest( void );
+	void						doHostUrlTest( void );
 	void						doNetServiceUrlTest( void );
 
 private:
 
-	const char *				getTestName( bool isAnchor );
-	void						startAnchorUrlTest( void );
+	const char *				getTestName( bool isHost );
+	void						startHostUrlTest( void );
 	void						startNetServiceUrlTest( void );
-	void						sendTestStatus( EAnchorTestStatus eStatus, const char * msg, ... );
+	void						sendTestStatus( EHostTestStatus eStatus, const char * msg, ... );
 	void						sendTestLog( const char * msg, ... );
-	bool						doConnectionTest( std::string& nodeUrl, bool isAnchor );
-	bool						doConnectTestFailed( bool isAnchor );
-	bool						doConnectTestSuccess( bool isAnchor, std::string& pongResult );
+	bool						doConnectionTest( std::string& nodeUrl, bool isHost );
+	bool						doConnectTestFailed( bool isHost );
+	bool						doConnectTestSuccess( bool isHost, std::string& pongResult );
 
 	//=== vars ===//
 	//P2PEngine&					m_Engine;
@@ -54,7 +53,7 @@ private:
 	EngineSettings&				m_EngineSettings;
 	NetServicesMgr&				m_NetServicesMgr;
 
-	VxThread					m_AnchorThread;
+	VxThread					m_HostThread;
 	VxThread					m_NetServiceThread;
 };
 

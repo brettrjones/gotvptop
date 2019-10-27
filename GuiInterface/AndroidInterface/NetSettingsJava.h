@@ -29,9 +29,9 @@ public:
 	//=== java class ids ===//
 	jfieldID					m_NetworkNameID;
 	jfieldID					m_NetServiceWebsiteUrlID;
-	jfieldID					m_AnchorWebsiteUrlID;
+	jfieldID					m_HostWebsiteUrlID;
 
-	jfieldID					m_ThisDeviceIsAnAnchorID;
+	jfieldID					m_ThisDeviceIsAnHostID;
 
 	jfieldID					m_MyTcpInPortID;
 	jfieldID					m_MyMulticastPortID;

@@ -17,32 +17,32 @@
 
 //namespace
 //{
-//	const char * g_AnchorActions[] = {"Announce","RelaysOnly","List"};
+//	const char * g_HostActions[] = {"Announce","RelaysOnly","List"};
 //}
 //
 ////============================================================================
-//EAnchorAction AnchorActionStringToEnum( const char * action )
+//EHostAction HostActionStringToEnum( const char * action )
 //{
 //	if( 0 == strcmp( action, "Announce" ) )
 //	{
-//		return eAnchorActionAnnounce;
+//		return eHostActionAnnounce;
 //	}
 //	else if( 0 == strcmp( action, "List" ) )
 //	{
-//		return eAnchorActionList;
+//		return eHostActionList;
 //	}
 //	else if( 0 == strcmp( action, "RelaysOnly" ) )
 //	{
-//		return eAnchorActionRelaysOnly;
+//		return eHostActionRelaysOnly;
 //	}
 //	else
 //	{
-//		return eAnchorActionUnknown;
+//		return eHostActionUnknown;
 //	}
 //}
 //
 ////============================================================================
-//const char *	AnchorActionEnumToString( EAnchorAction eAnchorAction )
+//const char *	HostActionEnumToString( EHostAction eHostAction )
 //{
-//	return g_AnchorActions[ eAnchorAction ];
+//	return g_HostActions[ eHostAction ];
 //}

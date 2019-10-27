@@ -47,7 +47,7 @@ protected:
 	void						showRelaySearchHelp( void );
 	void						showDirectConnectMessage( void );
 	void						showRelayConnectedHelp( void );
-	void						showAnchorError( void );
+	void						showHostError( void );
 
 	void						clearHelpLines( void );
 	void						setHelpLine( int lineIdx, QString helpText );

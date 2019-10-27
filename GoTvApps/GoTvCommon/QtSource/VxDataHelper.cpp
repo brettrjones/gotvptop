@@ -103,7 +103,7 @@ RCODE VxDataHelper::onDeleteTables( int oldVersion )
 bool VxDataHelper::onlineUidExistsInTable( VxGUID& onlineId, std::string& strTableName )
 {
 	bool bExists = false;
-	std::string strOnlineIdHex = onlineId.toVxGUIDHexString();
+	std::string strOnlineIdHex = onlineId.toHexString();
 
 	DbCursor * cursor = startQueryInsecure(  "SELECT * FROM %s WHERE online_id='%s'", strTableName.c_str(), strOnlineIdHex.c_str() );
 	if( NULL != cursor )
@@ -156,7 +156,7 @@ std::string VxDataHelper::getLastLogin()
 //! insert new account
 bool VxDataHelper::insertAccount( VxNetIdent& oUserAccount ) 
 {
-	std::string strOnlineNameHex = oUserAccount.getMyOnlineId().toVxGUIDHexString();
+	std::string strOnlineNameHex = oUserAccount.getMyOnlineId().toHexString();
 	DbBindList bindList( oUserAccount.getOnlineName() );
 	sqlExec(  "DELETE FROM account_login WHERE online_name=?", bindList );
 	bindList.add( &oUserAccount, sizeof( VxNetIdent ) );
@@ -178,7 +178,7 @@ bool VxDataHelper::updateAccount( VxNetIdent& oUserAccount )
 	bool bResult = false;
 	sqlite3_stmt * poSqlStatement;
 	char SQL_Statement[2048];
-	std::string strOnlineNameHex = oUserAccount.getMyOnlineId().toVxGUIDHexString();
+	std::string strOnlineNameHex = oUserAccount.getMyOnlineId().toHexString();
 
 	sprintf(SQL_Statement, "UPDATE account_login SET online_name=?, ident=? WHERE online_id='%s'",
 			strOnlineNameHex.c_str() );
@@ -286,7 +286,7 @@ bool VxDataHelper::removeAccountByName(const char * name )
 bool VxDataHelper::getUserProfile( VxNetIdent& oUserAccount, UserProfile& oProfile ) 
 {
 	bool bResult = false;
-	std::string strOnlineIdHex = oUserAccount.getMyOnlineId().toVxGUIDHexString();
+	std::string strOnlineIdHex = oUserAccount.getMyOnlineId().toHexString();
 
 	DbCursor * cursor = startQueryInsecure("SELECT greeting,about,picture,url1,url2,url3,donation FROM account_profile WHERE online_id='%s'",
 		strOnlineIdHex.c_str() );
@@ -375,7 +375,7 @@ bool VxDataHelper::getUserProfile( VxNetIdent& oUserAccount, UserProfile& oProfi
 bool VxDataHelper::updateUserProfile( VxNetIdent& oUserAccount, UserProfile& oProfile ) 
 {
 	RCODE rc = 0;
-	std::string strOnlineIdHex = oUserAccount.getMyOnlineId().toVxGUIDHexString();
+	std::string strOnlineIdHex = oUserAccount.getMyOnlineId().toHexString();
 	DbBindList bindList( (const char *)oProfile.m_strGreeting.toUtf8().constData() );
 	bindList.add( (const char *)oProfile.m_strAboutMe.toUtf8().constData() );
 	bindList.add( (const char *)oProfile.m_strPicturePath.toUtf8().constData() );
@@ -426,7 +426,7 @@ void VxDataHelper::getFriendList(uint8_t u8MyFrienship,  std::vector<VxNetIdent>
 bool VxDataHelper::updateFriend( VxNetIdent& oIdent ) 
 {
 	RCODE rc;
-	std::string strOnlineIdHex = oIdent.getMyOnlineId().toVxGUIDHexString();
+	std::string strOnlineIdHex = oIdent.getMyOnlineId().toHexString();
 	DbBindList bindList( oIdent.getHisFriendshipToMe() );
 	bindList.add( oIdent.getMyFriendshipToHim() );
 	bindList.add( &oIdent, sizeof( VxNetIdent ) );

@@ -9706,8 +9706,8 @@
 //#                          Bruce Carlson <bruce.carlson&iprintl.com> January 2003
 //newton-dock     3679/tcp   Newton Dock
 //newton-dock     3679/udp   Newton Dock
-//npds-tracker    3680/tcp   NPDS AnchorNode
-//npds-tracker    3680/udp   NPDS AnchorNode
+//npds-tracker    3680/tcp   NPDS HostNode
+//npds-tracker    3680/udp   NPDS HostNode
 //#                          Paul Guyot <pguyot&kallisys.net> January 2003
 //bts-x73         3681/tcp   BTS X73 Port
 //bts-x73         3681/udp   BTS X73 Port
@@ -9883,8 +9883,8 @@
 //wysdma          3741/tcp   WysDM Agent
 //wysdma          3741/udp   WysDM Agent
 //#                          Jim McDonald <Jim.McDonald&sysdm.com> April 2003
-//cst-port        3742/tcp   CST - Configuration & Service AnchorNode
-//cst-port        3742/udp   CST - Configuration & Service AnchorNode
+//cst-port        3742/tcp   CST - Configuration & Service HostNode
+//cst-port        3742/udp   CST - Configuration & Service HostNode
 //#                          Hai Ou-Yang <hai.ou-yang&sun.com> April 2003
 //ipcs-command    3743/tcp   IP Control Systems Ltd.
 //ipcs-command    3743/udp   IP Control Systems Ltd.

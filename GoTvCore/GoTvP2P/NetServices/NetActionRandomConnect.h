@@ -17,7 +17,7 @@
 #include "NetActionBase.h"
 #include "NetServiceDefs.h"
 
-#include <GoTvCore/GoTvP2P/Anchor/AnchorDefs.h>
+#include <GoTvCore/GoTvP2P/HostMgr/HostDefs.h>
 #include <GoTvInterface/IToGui.h>
 
 #include <string>
@@ -26,25 +26,25 @@ class VxSktBase;
 class NetServicesMgr;
 class NetServiceHdr;
 class VxSktConnectSimple;
-class AnchorList;
+class HostList;
 
-class NetActionPhoneShake : public NetActionBase
+class NetActionRandomConnect : public NetActionBase
 {
 public:
-	NetActionPhoneShake( NetServicesMgr& netServicesMgr, std::string& anchorIp, uint16_t u16AnchorPort, EAnchorAction eAnchorAction );
-	virtual ~NetActionPhoneShake();
+	NetActionRandomConnect( NetServicesMgr& netServicesMgr, std::string& anchorIp, uint16_t u16HostPort, EHostAction eHostAction );
+	virtual ~NetActionRandomConnect();
 
-	virtual ENetActionType		getNetActionType( void )			{ return eNetActionPhoneShake; }
+	virtual ENetActionType		getNetActionType( void )			{ return eNetActionRandomConnect; }
 	void						doAction( void );
 
 protected:
-	bool						doPhoneShakeAction( VxSktConnectSimple& netServConn, int tryCnt );
-	int							buildAnnounceCmd( std::string& strNetCmdHdr, uint16_t clientPort, AnchorList& anchorList, EAnchorAction anchorAction );
+	bool						doRandomConnectAction( VxSktConnectSimple& netServConn, int tryCnt );
+	int							buildAnnounceCmd( std::string& strNetCmdHdr, uint16_t clientPort, HostList& anchorList, EHostAction anchorAction );
 	int							getAnnounceData( VxSktConnectSimple * netServConn, char * pRxBuf, int bufLen );
-	bool						decryptAnchorList( char * content, int contentDataLen, uint16_t clientPort );
-	void						sendPhoneShakeStatus( EPhoneShakeStatus eStatus, const char * msg, ... );
+	bool						decryptHostList( char * content, int contentDataLen, uint16_t clientPort );
+	void						sendRandomConnectStatus( ERandomConnectStatus eStatus, const char * msg, ... );
 
-	EAnchorAction				m_eAnchorAction;
+	EHostAction				m_eHostAction;
 	int							m_FoundCnt;
 };
 

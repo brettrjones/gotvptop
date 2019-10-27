@@ -41,18 +41,18 @@ void NetworkStateGetRelayList::runNetworkState( void )
 	}
 
 #ifdef DEBUG_PTOP_NETWORK_STATE
-    LogMsg( LOG_INFO, "NetworkStateGetRelayList anchor ip %s", m_NetworkStateMachine.getAnchorIp().c_str() );
+    LogMsg( LOG_INFO, "NetworkStateGetRelayList anchor ip %s", m_NetworkStateMachine.getHostIp().c_str() );
 #endif // DEBUG_PTOP_NETWORK_STATE
-	if( 0 == m_NetworkStateMachine.getAnchorIp().length() )
+	if( 0 == m_NetworkStateMachine.getHostIp().length() )
 	{
 #ifdef DEBUG_PTOP_NETWORK_STATE
-        AppErr( eAppErrFailedConnectAnchor, "Failed connect to anchor. Please check network settings"  );
+        AppErr( eAppErrFailedConnectHost, "Failed connect to anchor. Please check network settings"  );
 #endif // DEBUG_PTOP_NETWORK_STATE
 		m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeLost);
 		return;
 	}
 
-	m_NetServicesMgr.announceToAnchor( m_NetworkStateMachine.getAnchorIp(), m_NetworkStateMachine.getAnchorPort(), eAnchorActionRelaysOnly );
+	m_NetServicesMgr.announceToHost( m_NetworkStateMachine.getHostIp(), m_NetworkStateMachine.getHostPort(), eHostActionRelaysOnly );
 
 	m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeRelaySearch );
 }

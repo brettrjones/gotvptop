@@ -95,7 +95,7 @@ std::string PktAssetSendReq::getAssetTag()
 //============================================================================
 void PktAssetSendReq::setAssetNameAndTag( const char * pAssetName, const char * pAssetTag )
 {
-	int nameLen = strlen( pAssetName );
+	int nameLen = (int)strlen( pAssetName );
 	if( nameLen > 4095 )
 	{
 		nameLen = 4095;
@@ -113,7 +113,7 @@ void PktAssetSendReq::setAssetNameAndTag( const char * pAssetName, const char * 
 	int tagLen = 0;
 	if( pAssetTag )
 	{
-		tagLen = strlen( pAssetTag );
+		tagLen = (int)strlen( pAssetTag );
 		if( tagLen > 0 )
 		{
 			if( tagLen > 4095 )

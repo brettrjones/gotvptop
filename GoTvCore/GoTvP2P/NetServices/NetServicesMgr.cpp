@@ -18,7 +18,7 @@
 #include "NetActionQueryMyIp.h"
 #include "NetActionIsMyPortOpen.h"
 #include "NetActionAnnounce.h"
-#include "NetActionPhoneShake.h"
+#include "NetActionRandomConnect.h"
 #include <GoTvCore/GoTvP2P/Network/NetworkStateMachine.h>
 #include <GoTvCore/GoTvP2P/Network/NetworkMgr.h>
 
@@ -68,7 +68,7 @@ NetServicesMgr::NetServicesMgr( P2PEngine& engine )
 , m_EngineSettings( engine.getEngineSettings() )
 , m_NetworkMgr( engine.getNetworkMgr() )
 , m_NetServiceUtils( engine )
-, m_NetServiceAnchor( engine, *this, m_NetServiceUtils )
+, m_NetServiceHost( engine, *this, m_NetServiceUtils )
 , m_NetActionIdle( *this )
 , m_CurNetAction( &m_NetActionIdle )
 , m_pfuncPortOpenCallbackHandler(0)
@@ -91,7 +91,7 @@ VxGUID& NetServicesMgr::getMyOnlineId( void )
 //============================================================================
 void NetServicesMgr::netServicesStartup( void )
 {
-	m_NetServiceAnchor.netServiceAnchorStartup();
+	m_NetServiceHost.netServiceHostStartup();
 	m_NetActionThread.startThread( (VX_THREAD_FUNCTION_T)NetServicesMgrThreadFunc, this, "NetServMgrThrd" );
 }
 
@@ -107,7 +107,7 @@ void NetServicesMgr::netServicesShutdown( void )
 
 	m_NetActionMutex.unlock();
 	m_NetActionSemaphore.signal();
-	m_NetServiceAnchor.netServiceAnchorShutdown();
+	m_NetServiceHost.netServiceHostShutdown();
 	m_NetActionThread.killThread();
 }
 
@@ -365,15 +365,15 @@ RCODE NetServicesMgr::handleNetCmdIsMyPortOpenReply( VxSktBase * sktBase, NetSer
 }
 
 //============================================================================
-RCODE NetServicesMgr::handleNetCmdAnchorReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE NetServicesMgr::handleNetCmdHostReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
 {
-	return m_NetServiceAnchor.handleNetCmdAnchorReq( sktBase, netServiceHdr );
+	return m_NetServiceHost.handleNetCmdHostReq( sktBase, netServiceHdr );
 }
 
 //============================================================================
-RCODE NetServicesMgr::handleNetCmdAnchorReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+RCODE NetServicesMgr::handleNetCmdHostReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
 {
-	return m_NetServiceAnchor.handleNetCmdAnchorReply( sktBase, netServiceHdr );
+	return m_NetServiceHost.handleNetCmdHostReply( sktBase, netServiceHdr );
 }
 
 //============================================================================
@@ -402,37 +402,37 @@ void NetServicesMgr::testIsMyPortOpen( void )
 }
 
 //============================================================================
-void NetServicesMgr::announceToAnchor( std::string& anchorIp, uint16_t u16AnchorPort, EAnchorAction eAnchorAction )
+void NetServicesMgr::announceToHost( std::string& anchorIp, uint16_t u16HostPort, EHostAction eHostAction )
 {
-	addNetActionCommand( new NetActionAnnounce( *this, anchorIp, u16AnchorPort, eAnchorAction ) );
+	addNetActionCommand( new NetActionAnnounce( *this, anchorIp, u16HostPort, eHostAction ) );
 }
 
 //============================================================================
-void NetServicesMgr::performPhoneShake( void )
+void NetServicesMgr::performRandomConnect( void )
 {
-	if( false == isActionQued( eNetActionPhoneShake ) )
+	if( false == isActionQued( eNetActionRandomConnect ) )
 	{
-		addNetActionCommand( new NetActionPhoneShake( *this, 
-			m_Engine.getNetworkStateMachine().getAnchorIp(),
-			m_Engine.getNetworkStateMachine().getAnchorPort(),
-			eAnchorActionPhoneShake ) );
+		addNetActionCommand( new NetActionRandomConnect( *this, 
+			m_Engine.getNetworkStateMachine().getHostIp(),
+			m_Engine.getNetworkStateMachine().getHostPort(),
+			eHostActionRandomConnect ) );
 	}
 	else
 	{
-		LogMsg( LOG_INFO, "Net Action Phone Shake already qued\n" );
+		LogMsg( LOG_INFO, "Net Action Random Connect already qued\n" );
 	}
 }
 
 //============================================================================
-void NetServicesMgr::netActionResultPhoneShake( EAppErr eAppErr, AnchorList * anchorList )
+void NetServicesMgr::netActionResultRandomConnect( EAppErr eAppErr, HostList * anchorList )
 {
 	if( eAppErrNone == eAppErr )
 	{
-		m_Engine.getNetConnector().handlePhoneShakeResults( anchorList );
+		m_Engine.getNetConnector().handleRandomConnectResults( anchorList );
 	}
 	else
 	{
-		LogMsg( LOG_INFO, "NetServicesMgr::netActionResultPhoneShake ERROR %d\n", eAppErr );
+		LogMsg( LOG_INFO, "NetServicesMgr::netActionResultRandomConnect ERROR %d\n", eAppErr );
 	}
 }
 
@@ -449,11 +449,11 @@ void NetServicesMgr::netActionResultIsMyPortOpen( EAppErr eAppErr, std::string& 
 }
 
 //============================================================================
-void NetServicesMgr::netActionResultAnnounce( EAppErr eAppErr, AnchorList * anchorList, EAnchorAction eAnchorAction )
+void NetServicesMgr::netActionResultAnnounce( EAppErr eAppErr, HostList * anchorList, EHostAction eHostAction )
 {
 	if( eAppErrNone == eAppErr )
 	{
-		m_Engine.getNetConnector().handleAnnounceResults( anchorList, ( eAnchorActionRelaysOnly == eAnchorAction ) ?  eConnectReasonRelaySearch : eConnectReasonAnnouncePing );
+		m_Engine.getNetConnector().handleAnnounceResults( anchorList, ( eHostActionRelaysOnly == eHostAction ) ?  eConnectReasonRelaySearch : eConnectReasonAnnouncePing );
 	}
 }
 
@@ -502,29 +502,29 @@ bool NetServicesMgr::actionReqConnectToNetService( VxSktConnectSimple& sktSimple
 }
 
 //============================================================================
-VxSktConnectSimple * NetServicesMgr::actionReqConnectToAnchor( void )
+VxSktConnectSimple * NetServicesMgr::actionReqConnectToHost( void )
 {
-	if( m_SktToAnchor.isConnected() )
+	if( m_SktToHost.isConnected() )
 	{
 		// already connected
-		return &m_SktToAnchor;
+		return &m_SktToHost;
 	}
 
-	if( false == actionReqConnectToAnchor( m_SktToAnchor ) )
+	if( false == actionReqConnectToHost( m_SktToHost ) )
 	{
 		return 0;
 	}
 
-	return &m_SktToAnchor;
+	return &m_SktToHost;
 }
 
 //============================================================================
-bool NetServicesMgr::actionReqConnectToAnchor( VxSktConnectSimple& sktSimple )
+bool NetServicesMgr::actionReqConnectToHost( VxSktConnectSimple& sktSimple )
 {
 	std::string anchorUrl;
 	if( m_Engine.getNetworkStateMachine().isNetworkWebsitesResolved() )
 	{
-		StdStringFormat( anchorUrl, "http://%s:%d",  m_Engine.getNetworkStateMachine().getAnchorIp().c_str(),  m_Engine.getNetworkStateMachine().getAnchorPort() );
+		StdStringFormat( anchorUrl, "http://%s:%d",  m_Engine.getNetworkStateMachine().getHostIp().c_str(),  m_Engine.getNetworkStateMachine().getHostPort() );
 	}
 	else
 	{
@@ -538,12 +538,12 @@ bool NetServicesMgr::actionReqConnectToAnchor( VxSktConnectSimple& sktSimple )
 	if( false == sktSimple.connectToWebsite( anchorUrl.c_str(), strHost, strFile, u16Port, ANCHOR_CONNECT_TIMEOUT ) )
 	{
 #ifdef DEBUG_PTOP_NETWORK_STATE
-		LogMsg( LOG_ERROR, "### ERROR NetServicesMgr::actionReqConnectToAnchor: FAILED to Connect to %s timeout %d\n", anchorUrl.c_str(), ANCHOR_CONNECT_TIMEOUT );
+		LogMsg( LOG_ERROR, "### ERROR NetServicesMgr::actionReqConnectToHost: FAILED to Connect to %s timeout %d\n", anchorUrl.c_str(), ANCHOR_CONNECT_TIMEOUT );
 #endif // DEBUG_PTOP_NETWORK_STATE
 		return false;
 	}
 
-	//LogMsg( LOG_INFO, "actionReqConnectToAnchor: SUCCESS\n" );
+	//LogMsg( LOG_INFO, "actionReqConnectToHost: SUCCESS\n" );
 	return true;
 }
 

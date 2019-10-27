@@ -21,8 +21,8 @@ NetHostSetting::NetHostSetting()
 , m_NetworkName( NET_DEFAULT_NETWORK_NAME )
 , m_NetServiceWebsiteUrl( NET_DEFAULT_NETSERVICE_URL )
 , m_NetHostWebsiteUrl( NET_DEFAULT_NET_HOST_URL )
-, m_ThisNodeIsAnchor( false )
-, m_ExcludeMeFromAnchorList( false )
+, m_ThisNodeIsHost( false )
+, m_ExcludeMeFromHostList( false )
 {
 }
 
@@ -35,9 +35,9 @@ NetHostSetting& NetHostSetting::operator =( const NetHostSetting& rhs )
 		m_NetworkName				= rhs.m_NetworkName;
 		m_NetServiceWebsiteUrl		= rhs.m_NetServiceWebsiteUrl;
         m_NetHostWebsiteUrl         = rhs.m_NetHostWebsiteUrl;
-		m_ThisNodeIsAnchor			= rhs.m_ThisNodeIsAnchor;
-		m_ExcludeMeFromAnchorList	= rhs.m_ExcludeMeFromAnchorList;
-		//m_AltAnchorWebsiteUrl		= rhs.m_AltAnchorWebsiteUrl;
+		m_ThisNodeIsHost			= rhs.m_ThisNodeIsHost;
+		m_ExcludeMeFromHostList	= rhs.m_ExcludeMeFromHostList;
+		//m_AltHostWebsiteUrl		= rhs.m_AltHostWebsiteUrl;
 		//m_AltNetServiceWebsiteUrl	= rhs.m_AltNetServiceWebsiteUrl;
 	}
 

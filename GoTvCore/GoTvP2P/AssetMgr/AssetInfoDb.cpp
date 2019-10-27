@@ -101,7 +101,7 @@ void AssetInfoDb::removeAsset( const char * assetName )
 //============================================================================
 void AssetInfoDb::removeAsset( VxGUID& assetId )
 {
-	std::string assetStr = assetId.toVxGUIDHexString();
+	std::string assetStr = assetId.toHexString();
 	DbBindList bindList( assetStr.c_str() );
 	sqlExec( "DELETE FROM tblAssets WHERE unique_id=?", bindList );
 }
@@ -110,8 +110,8 @@ void AssetInfoDb::removeAsset( VxGUID& assetId )
 void AssetInfoDb::removeAsset( AssetInfo * assetInfo )
 {
 	// the bind string is not copied so must be in memory until sql is executed
-	//DbBindList bindList( assetInfo->getAssetUniqueId().toVxGUIDHexString().c_str() );
-	std::string hexId = assetInfo->getAssetUniqueId().toVxGUIDHexString();
+	//DbBindList bindList( assetInfo->getAssetUniqueId().toHexString().c_str() );
+	std::string hexId = assetInfo->getAssetUniqueId().toHexString();
 	DbBindList bindList( hexId.c_str() );
 	sqlExec( "DELETE FROM tblAssets WHERE unique_id=?", bindList );
 }
@@ -121,19 +121,19 @@ void AssetInfoDb::addAsset( VxGUID&			assetId,
 							VxGUID&			creatorId, 
 							VxGUID&			historyId, 
 							const char *	assetName, 
-							int64_t				assetLen, 
-							uint32_t				assetType, 							
+							int64_t			assetLen, 
+							uint32_t		assetType, 							
 							VxSha1Hash&		hashId, 
-							uint32_t				locationFlags, 
+							uint32_t		locationFlags, 
 							const char *	assetTag, 
 							time_t			creationTimeStamp,
                             EAssetSendState sendState )
 {
 	removeAsset( assetId );
 
-	std::string assetIdStr		= assetId.toVxGUIDHexString();
-	std::string creatorIdStr	= creatorId.toVxGUIDHexString();
-	std::string historyIdStr	= historyId.toVxGUIDHexString();
+	std::string assetIdStr		= assetId.toHexString();
+	std::string creatorIdStr	= creatorId.toHexString();
+	std::string historyIdStr	= historyId.toHexString();
 
 	DbBindList bindList( assetIdStr.c_str() );
 	bindList.add( creatorIdStr.c_str() );
@@ -158,7 +158,7 @@ void AssetInfoDb::addAsset( VxGUID&			assetId,
 //============================================================================
 void AssetInfoDb::updateAssetSendState( VxGUID& assetId, EAssetSendState sendState )
 {
-	std::string assetIdStr		= assetId.toVxGUIDHexString();
+	std::string assetIdStr		= assetId.toHexString();
 	DbBindList bindList(  (int)sendState );
 	bindList.add( assetIdStr.c_str() );
 	RCODE rc  = sqlExec( "UPDATE tblAssets SET sendState=? WHERE unique_id=?",

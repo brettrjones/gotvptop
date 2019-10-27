@@ -20,7 +20,7 @@
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceRelay.h>
 
-#include <GoTvCore/GoTvP2P/Anchor/AnchorList.h>
+#include <GoTvCore/GoTvP2P/HostMgr/HostList.h>
 #include <GoTvCore/GoTvP2P/NetServices/NetServiceHdr.h>
 #include <GoTvCore/GoTvP2P/NetServices/NetServicesMgr.h>
 #include <GoTvCore/GoTvP2P/Network/NetConnector.h>
@@ -413,7 +413,7 @@ void NetworkStateRelaySearch::doCurrentConnectionsList( void )
 					if( eRelayStatusOk ==  relayStatus )
 					{
                         if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
-						    LogMsg( LOG_ERROR, "NetworkStateRelaySearch::connectRelayService: id %s Relay Service Success\n", bigInfo->getMyOnlineId().toVxGUIDHexString().c_str());
+						    LogMsg( LOG_ERROR, "NetworkStateRelaySearch::connectRelayService: id %s Relay Service Success\n", bigInfo->getMyOnlineId().toHexString().c_str());
 						return;
 					}
 
@@ -571,28 +571,28 @@ void NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers( void )
 	{
 		// we are the anchor
 		// put ourself directly into the database
-		AnchorList			anchorListIn;
+		HostList			anchorListIn;
 		anchorListIn.addEntry( &m_Engine.getMyPktAnnounce() );
-		anchorListIn.m_AnchorAction = eAnchorActionRelaysOnly;
-		AnchorList			anchorListOut;
+		anchorListIn.m_HostAction = eHostActionRelaysOnly;
+		HostList			anchorListOut;
 
-		m_NetServicesMgr.getNetServiceAnchor().getAnchorDb().handleAnnounce( anchorListIn, anchorListOut );
+		m_NetServicesMgr.getNetServiceHost().getHostDb().handleAnnounce( anchorListIn, anchorListOut );
 		m_NetServicesMgr.netActionResultAnnounce( eAppErrNone, &anchorListOut );
 		return;
 	}
 
 	VxSktConnectSimple netServConn;
-	if( false == m_NetServicesMgr.actionReqConnectToAnchor( netServConn ) )
+	if( false == m_NetServicesMgr.actionReqConnectToHost( netServConn ) )
 	{
         if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
-		    LogMsg( LOG_ERROR, "getMoreRelaysFromAnnounceServers: Could not connect to Anchor\n" );
+		    LogMsg( LOG_ERROR, "getMoreRelaysFromAnnounceServers: Could not connect to Host\n" );
 		return;
 	}
 
 	std::string strNetCmdHdr;
-	AnchorList anchorList;
+	HostList anchorList;
 	uint16_t acceptedPort = netServConn.getRemotePort();
-	buildAnnounceCmd( strNetCmdHdr, acceptedPort, anchorList, eAnchorActionRelaysOnly );
+	buildAnnounceCmd( strNetCmdHdr, acceptedPort, anchorList, eHostActionRelaysOnly );
 	int anchorDataLen = anchorList.m_TotalLen;
 
 	RCODE rc = netServConn.sendData( strNetCmdHdr.c_str(), strNetCmdHdr.length() );
@@ -616,7 +616,7 @@ void NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers( void )
 	}
 
 	NetServiceHdr netServiceHdr;
-	char rxBuf[ sizeof( AnchorList ) + 1024 ];
+	char rxBuf[ sizeof( HostList ) + 1024 ];
 	if( false == m_NetServiceUtils.rxNetServiceCmd( &netServConn, 
 													rxBuf, 
 													sizeof( rxBuf ), 
@@ -629,7 +629,7 @@ void NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers( void )
 		return;
 	}
 
-	if( false == decryptAnchorList( rxBuf, netServiceHdr.m_ContentDataLen, acceptedPort ) )
+	if( false == decryptHostList( rxBuf, netServiceHdr.m_ContentDataLen, acceptedPort ) )
 	{
 		netServConn.closeSkt();
 		LogMsg( LOG_ERROR, "getMoreRelaysFromAnnounceServers: decrypt error \n" );
@@ -637,18 +637,18 @@ void NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers( void )
 	}
 
 	netServConn.closeSkt();
-	m_NetServicesMgr.netActionResultAnnounce( eAppErrNone, (AnchorList *)rxBuf, eAnchorActionRelaysOnly );
+	m_NetServicesMgr.netActionResultAnnounce( eAppErrNone, (HostList *)rxBuf, eHostActionRelaysOnly );
 }
 
 //============================================================================
-bool NetworkStateRelaySearch::decryptAnchorList( char * content, int contentDataLen, uint16_t clientPort )
+bool NetworkStateRelaySearch::decryptHostList( char * content, int contentDataLen, uint16_t clientPort )
 {
 	if( false == m_NetServiceUtils.decryptNetServiceContent( content, contentDataLen, clientPort ) )
 	{
 		return 0;
 	}
 
-	AnchorList * anchorList = (AnchorList *)content;
+	HostList * anchorList = (HostList *)content;
 	if( anchorList->m_TotalLen != contentDataLen )
 	{
 		LogMsg( LOG_ERROR, "getMoreRelaysFromAnnounceServers:: invalid anchorList->m_TotalLen\n" );
@@ -665,19 +665,19 @@ bool NetworkStateRelaySearch::decryptAnchorList( char * content, int contentData
 }
 
 //============================================================================
-int NetworkStateRelaySearch::buildAnnounceCmd( std::string& strNetCmdHdr, uint16_t clientPort, AnchorList& anchorList, EAnchorAction anchorAction )
+int NetworkStateRelaySearch::buildAnnounceCmd( std::string& strNetCmdHdr, uint16_t clientPort, HostList& anchorList, EHostAction anchorAction )
 {
-	// build Anchor list
+	// build Host list
 	PktAnnounce& pktAnn = m_Engine.getMyPktAnnounce();
 
-	anchorList.m_AnchorAction = anchorAction;
+	anchorList.m_HostAction = anchorAction;
 	anchorList.addEntry( &pktAnn );
 	int listLen = anchorList.calculateLength();
 
 	std::string netServChallengeHash;
 	m_NetServiceUtils.generateNetServiceChallengeHash( netServChallengeHash, clientPort );
 
-	int totalLen = m_NetServiceUtils.buildNetCmdHeader( strNetCmdHdr, eNetCmdAnchorReq, netServChallengeHash, listLen );
+	int totalLen = m_NetServiceUtils.buildNetCmdHeader( strNetCmdHdr, eNetCmdHostReq, netServChallengeHash, listLen );
 	return totalLen;
 }
 
@@ -734,7 +734,7 @@ bool NetworkStateRelaySearch::handlePossibleRelayConnect(	VxConnectInfo&		connec
 	if( eNetworkStateTypeRelaySearch == m_NetworkStateMachine.getCurNetworkStateType() )
 	{
 		std::string onlineHexStr;
-		connectInfo.getMyOnlineId().toVxGUIDHexString( onlineHexStr );
+		connectInfo.getMyOnlineId().toHexString( onlineHexStr );
 		ConnectRequest connectRequest( connectInfo, eConnectReasonRelaySearch );
 
 		ERelayStatus relayStatus = requestRelayService( connectInfo.getMyOnlineId(), sktBase );
@@ -776,7 +776,7 @@ bool NetworkStateRelaySearch::connectRelayService( ConnectRequest& connectReques
 	connectRequest.setTimeLastConnectAttemptMs( GetGmtTimeMs() );
 	VxConnectInfo& connectInfo = connectRequest.getConnectInfo();
 	std::string onlineId;
-	connectInfo.getMyOnlineId().toVxGUIDHexString( onlineId );
+	connectInfo.getMyOnlineId().toHexString( onlineId );
 	VxSktBase * sktBase = NULL;
 	if( connectInfo.requiresRelay() )
 	{
@@ -826,7 +826,7 @@ ERelayStatus NetworkStateRelaySearch::requestRelayService( VxGUID& onlineId, VxS
 	}
 	else
 	{
-		onlineId.toVxGUIDHexString( strRelayOnlineName );
+		onlineId.toHexString( strRelayOnlineName );
 	}
 
 	LogMsg( LOG_STATUS, " Requesting Relay Service ( %s )\n", strRelayOnlineName.c_str()  );
@@ -906,7 +906,7 @@ void NetworkStateRelaySearch::onPktRelayServiceReply( VxSktBase * sktBase, PktRe
 		// not the right id
 #ifdef DEBUG_RELAY
 		LogMsg( LOG_ERROR, "onPktRelayServiceReply wrong id got %s expected %s\n", 
-			poPkt->getSrcOnlineId().toVxGUIDHexString().c_str(), m_RelayRequestOnlineId.toVxGUIDHexString().c_str() );
+			poPkt->getSrcOnlineId().toHexString().c_str(), m_RelayRequestOnlineId.toHexString().c_str() );
 #endif // DEBUG_RELAY
 		return;
 	}
@@ -925,7 +925,7 @@ void NetworkStateRelaySearch::onPktRelayServiceReply( VxSktBase * sktBase, PktRe
 		{
 #ifdef DEBUG_RELAY
 			LogMsg( LOG_ERROR, "onPktRelayServiceReply %s SUCCESS startNewRelayClient\n", 
-				poPkt->getSrcOnlineId().toVxGUIDHexString().c_str() );
+				poPkt->getSrcOnlineId().toHexString().c_str() );
 #endif // DEBUG_RELAY
 			poInfo->setIsRelayServer(true);
 			m_Engine.onRelayServiceAvailable( poInfo, true );
@@ -951,7 +951,7 @@ void NetworkStateRelaySearch::onPktRelayServiceReply( VxSktBase * sktBase, PktRe
 #ifdef DEBUG_RELAY
 	else
 	{
-		LogMsg( LOG_ERROR, "onPktRelayServiceReply %s Connection NOT FOUND\n", poPkt->getSrcOnlineId().toVxGUIDHexString().c_str() );
+		LogMsg( LOG_ERROR, "onPktRelayServiceReply %s Connection NOT FOUND\n", poPkt->getSrcOnlineId().toHexString().c_str() );
 	}
 #endif // DEBUG_RELAY
 

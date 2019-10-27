@@ -40,7 +40,7 @@ class FileShareSettings;
 class VxPeerMgr;
 class PluginMgr;
 class AssetMgr;
-class AnchorTest;
+class HostTest;
 class IsPortOpenTest;
 class RcConnectInfo;
 class PluginServiceRelay;
@@ -527,7 +527,7 @@ protected:
 	NetServicesMgr&				m_NetServicesMgr;
 	NetConnector&				m_NetConnector;
 	NetworkStateMachine&		m_NetworkStateMachine;
-	AnchorTest&					m_AnchorTest;
+	HostTest&					m_HostTest;
 
 	PluginMgr&					m_PluginMgr;
 	MediaProcessor&				m_MediaProcessor;

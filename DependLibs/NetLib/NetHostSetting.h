@@ -42,11 +42,11 @@ public:
     void						setNetServiceWebsiteUrl( const char * netServiceUrl )		{ m_NetServiceWebsiteUrl = netServiceUrl; }
     std::string&				getNetServiceWebsiteUrl( void )								{ return m_NetServiceWebsiteUrl; }
 
-	void						setIsThisNodeAnNetHost( bool isAnchor )						{ m_ThisNodeIsAnchor = isAnchor; }
-	bool						getIsThisNodeAnNetHost( void )								{ return m_ThisNodeIsAnchor; }
+	void						setIsThisNodeAnNetHost( bool isHost )						{ m_ThisNodeIsHost = isHost; }
+	bool						getIsThisNodeAnNetHost( void )								{ return m_ThisNodeIsHost; }
 
-	void						setExcludeMeFromNetHostList( bool excludeMe )				{ m_ExcludeMeFromAnchorList = excludeMe; }
-	bool						getExcludeMeFromNetHostList( void )							{ return m_ExcludeMeFromAnchorList; }
+	void						setExcludeMeFromNetHostList( bool excludeMe )				{ m_ExcludeMeFromHostList = excludeMe; }
+	bool						getExcludeMeFromNetHostList( void )							{ return m_ExcludeMeFromHostList; }
 
 
 protected:
@@ -56,6 +56,6 @@ protected:
 
 	std::string					m_NetServiceWebsiteUrl;
 	std::string					m_NetHostWebsiteUrl;
-	bool						m_ThisNodeIsAnchor;
-	bool						m_ExcludeMeFromAnchorList;
+	bool						m_ThisNodeIsHost;
+	bool						m_ExcludeMeFromHostList;
 };

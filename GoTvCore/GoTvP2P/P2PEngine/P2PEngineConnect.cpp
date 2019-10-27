@@ -225,7 +225,7 @@ void P2PEngine::onOncePerSecond( void )
 //		announceCntInSeconds = 60;
 //		if( isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnNetHost() ) )
 //		{
-//			m_NetServicesMgr.announceToAnchor( m_NetworkStateMachine.getAnchorIp(), m_NetworkStateMachine.getAnchorPort() );
+//			m_NetServicesMgr.announceToHost( m_NetworkStateMachine.getHostIp(), m_NetworkStateMachine.getHostPort() );
 //		}
 //	}
 static int thirtySecCntInSeconds = 31;
@@ -298,7 +298,7 @@ std::string P2PEngine::describeContact( BigListInfo * bigListInfo )
 	VxConnectInfo& connectInfo = bigListInfo->getConnectInfo();
 
 	std::string hexId;
-	connectInfo.getMyOnlineId().toVxGUIDHexString( hexId );
+	connectInfo.getMyOnlineId().toHexString( hexId );
 
 	std::string strDesc;
 	if( connectInfo.requiresRelay() )
@@ -331,7 +331,7 @@ std::string P2PEngine::describeContact( VxConnectInfo& connectInfo )
 	}
 
 	std::string hexId;
-	connectInfo.getMyOnlineId().toVxGUIDHexString( hexId );
+	connectInfo.getMyOnlineId().toHexString( hexId );
 
 	std::string strDesc;
 	if( connectInfo.requiresRelay() )

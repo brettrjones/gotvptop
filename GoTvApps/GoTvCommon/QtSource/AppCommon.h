@@ -393,9 +393,9 @@ public:
 
     virtual void				toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" ) override;
     virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) override;
-    virtual void				toGuiAnchorStatus( EAnchorTestStatus eAnchorStatus, const char * msg = "" ) override;
+    virtual void				toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg = "" ) override;
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
-    virtual void				toGuiPhoneShakeStatus( EPhoneShakeStatus ePhoneShakeStatus, const char * msg = "" ) override;
+    virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) override;
 
     virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) override;
     virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) override;
@@ -566,9 +566,9 @@ signals:
 	void						signalAppErr( EAppErr eAppErr, QString errMsg );
 	void						signalStatusMsg( QString strMsg );
 	void						signalUserMsg( QString strMsg );
-	void						signalAnchorStatus( EAnchorTestStatus eAnchorStatus, QString strMsg );
+	void						signalHostStatus( EHostTestStatus eHostStatus, QString strMsg );
 	void						signalIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, QString strMsg );
-	void						signalPhoneShakeStatus( EPhoneShakeStatus ePhoneShakeStatus, QString strMsg );
+	void						signalRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, QString strMsg );
 	void						signalNetworkStateChanged( ENetworkStateType eNetworkState );
 
 	void						signalRefreshFriend( VxGuidQt onlineId ); // emitted if friend has changed

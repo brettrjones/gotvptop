@@ -82,7 +82,7 @@ void NetworkTestWidget::slotIsPortOpenButClick( void )
 
 //
 ////============================================================================
-//void NetworkTestWidget::slotAnchorStatus( EAnchorTestStatus eAnchorStatus, QString strMsg )
+//void NetworkTestWidget::slotHostStatus( EHostTestStatus eHostStatus, QString strMsg )
 //{
 //	//strMsg.remove(QRegExp("[\\n\\r]"));
 //	ui.m_LogEdit->append(strMsg);

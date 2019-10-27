@@ -1,18 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\..\GoTvP2P\Anchor\AnchorDb.cpp">
-      <Filter>GoTvP2P\Anchor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Anchor\AnchorList.cpp">
-      <Filter>GoTvP2P\Anchor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Anchor\AnchorListEntry.cpp">
-      <Filter>GoTvP2P\Anchor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Anchor\PhoneShakeEntry.cpp">
-      <Filter>GoTvP2P\Anchor</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\AssetMgr\AssetInfo.cpp">
       <Filter>GoTvP2P\AssetMgr</Filter>
     </ClCompile>
@@ -208,13 +196,7 @@
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionIsMyPortOpen.cpp">
       <Filter>GoTvP2P\NetServices</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionPhoneShake.cpp">
-      <Filter>GoTvP2P\NetServices</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionQueryMyIp.cpp">
-      <Filter>GoTvP2P\NetServices</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceAnchor.cpp">
       <Filter>GoTvP2P\NetServices</Filter>
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceDefs.cpp">
@@ -505,9 +487,6 @@
     <ClCompile Include="..\..\GoTvP2P\EchoCancel\cpu_features_android.cpp">
       <Filter>GoTvP2P\EchoCancel</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\AnchorTest\AnchorTest.cpp">
-      <Filter>GoTvP2P\AnchorTest</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\IsPortOpenTest\IsPortOpenTest.cpp">
       <Filter>GoTvP2P\IsPortOpenTest</Filter>
     </ClCompile>
@@ -589,6 +568,30 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceChatRoom.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostList.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostListEntry.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostSettingBase.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\RandomConnectEntry.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostDb.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostTest.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionRandomConnect.cpp">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceHost.cpp">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -603,21 +606,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvTargetOsConfig.h">
       <Filter>GoTvConfig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Anchor\AnchorDb.h">
-      <Filter>GoTvP2P\Anchor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Anchor\AnchorDefs.h">
-      <Filter>GoTvP2P\Anchor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Anchor\AnchorList.h">
-      <Filter>GoTvP2P\Anchor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Anchor\AnchorListEntry.h">
-      <Filter>GoTvP2P\Anchor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Anchor\PhoneShakeEntry.h">
-      <Filter>GoTvP2P\Anchor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\AssetMgr\AssetCallbackInterface.h">
       <Filter>GoTvP2P\AssetMgr</Filter>
@@ -922,13 +910,7 @@
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionIsMyPortOpen.h">
       <Filter>GoTvP2P\NetServices</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionPhoneShake.h">
-      <Filter>GoTvP2P\NetServices</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionQueryMyIp.h">
-      <Filter>GoTvP2P\NetServices</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceAnchor.h">
       <Filter>GoTvP2P\NetServices</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceDefs.h">
@@ -1183,9 +1165,6 @@
     <ClInclude Include="..\..\GoTvP2P\WebServer\RcWebSkt.h">
       <Filter>GoTvP2P\WebServer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\AnchorTest\AnchorTest.h">
-      <Filter>GoTvP2P\AnchorTest</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\IsPortOpenTest\IsPortOpenTest.h">
       <Filter>GoTvP2P\IsPortOpenTest</Filter>
     </ClInclude>
@@ -1282,6 +1261,33 @@
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceChatRoom.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostList.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostListEntry.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostSettingBase.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\RandomConnectEntry.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDb.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDefs.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostTest.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionRandomConnect.h">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceHost.h">
+      <Filter>GoTvP2P\NetServices</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -1313,9 +1319,6 @@
     </Filter>
     <Filter Include="GoTvP2P">
       <UniqueIdentifier>{4ec8ff0d-76a6-4311-89b3-1305b2840f0a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GoTvP2P\Anchor">
-      <UniqueIdentifier>{6560cdac-fe33-4bb0-a36e-1ea09883083e}</UniqueIdentifier>
     </Filter>
     <Filter Include="GoTvP2P\AssetMgr">
       <UniqueIdentifier>{d695dc88-9f47-48f0-9a5b-e4bc8a13199a}</UniqueIdentifier>
@@ -1350,9 +1353,6 @@
     <Filter Include="GoTvP2P\WebServer">
       <UniqueIdentifier>{caa85f20-2991-480c-8d7d-78d5db3ecf35}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GoTvP2P\AnchorTest">
-      <UniqueIdentifier>{f09d53ff-bf1f-4bbc-b4d8-8925d0d76256}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GoTvP2P\IsPortOpenTest">
       <UniqueIdentifier>{ed111a95-6ab8-41c6-bcc0-635c5211abcc}</UniqueIdentifier>
     </Filter>
@@ -1361,6 +1361,9 @@
     </Filter>
     <Filter Include="GoTvInterface">
       <UniqueIdentifier>{a7d7cf01-9fe8-4738-89a1-b8f9e2826363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\HostMgr">
+      <UniqueIdentifier>{5d9a321a-319e-43d0-941b-9e189c002499}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

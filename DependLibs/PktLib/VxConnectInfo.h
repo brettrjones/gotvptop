@@ -41,7 +41,7 @@
 class VxConnectBaseInfo : public VxRelayFlags, public FriendMatch, public VxSearchFlags
 {
 public:
-	VxConnectBaseInfo();
+	VxConnectBaseInfo() = default;
 	VxConnectBaseInfo( const VxConnectBaseInfo& rhs );
 
 	VxConnectBaseInfo& operator =( const VxConnectBaseInfo& rhs );
@@ -49,7 +49,8 @@ public:
 	void						setMyOnlineId( uint64_t u64HiPart, uint64_t u64LoPart );
 	VxGUID&						getMyOnlineId();
 	void						getMyOnlineId( std::string& strRetId );
-	uint64_t					getMyOnlineIdLoPart();
+    std::string&				getMyOnlineIdHexString( void )  { return m_DirectConnectId.toHexString(); }
+    uint64_t					getMyOnlineIdLoPart();
 	uint64_t					getMyOnlineIdHiPart();
 	void						setMyOnlinePort( uint16_t port );
 	uint16_t					getMyOnlinePort( void );
@@ -112,6 +113,9 @@ public:
 
 	void 						setTimeLastContact( int64_t timeStamp )				{ m_TimeLastContact = timeStamp; }
 	int64_t	    				getTimeLastContact( void )					        { return m_TimeLastContact; }		
+
+    /// @brief return indenty unique folder name in the form of OnlineName_GuidHexString
+    std::string	    			getIdentFolderName( void );
 
 	//=== vars ===//
 private:

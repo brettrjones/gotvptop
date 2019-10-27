@@ -20,7 +20,7 @@ enum EConnectReason
 {
 	eConnectReasonAnnouncePing,
 	eConnectReasonStayConnected,
-	eConnectReasonPhoneShake,
+	eConnectReasonRandomConnect,
 	eConnectReasonRelaySearch,
 	eConnectReasonPlugin,
 	eConnectReasonOtherSearch,

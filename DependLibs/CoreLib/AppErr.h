@@ -29,7 +29,7 @@ enum EAppErr
 	eAppErrThreadCreateFailed				= 1000006,
 	eAppErrFailedConnectNetServices			= 1000007,
 	eAppErrNetServicesFailedToRespond		= 1000008,
-	eAppErrFailedConnectAnchor				= 1000009,
+	eAppErrFailedConnectHost				= 1000009,
 	eAppErrAccessDenied						= 1000010,
 	eAppErrBadParameter						= 1000011,
 	eAppErrNoFileExist						= 1000012,

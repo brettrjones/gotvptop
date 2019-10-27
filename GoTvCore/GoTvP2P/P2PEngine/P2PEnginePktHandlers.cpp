@@ -71,7 +71,7 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 		LogMsg( LOG_INFO, "Ignoring %s ip %s id %s\n",
 			pkt->getOnlineName(),
 			sktBase->getRemoteIp(),
-			contactOnlineId.toVxGUIDHexString().c_str() );
+			contactOnlineId.toHexString().c_str() );
 		m_NetConnector.closeConnection( contactOnlineId, sktBase );	
 		return;
 	}
@@ -729,7 +729,7 @@ void P2PEngine::onPktPingReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
 	}
 	else
 	{
-		pktHdr->getSrcOnlineId().toVxGUIDHexString( onlineName );
+		pktHdr->getSrcOnlineId().toHexString( onlineName );
 	}
 	
 	LogMsg( LOG_DEBUG, "Ping %s Time ms %d\n", onlineName.c_str(), timeDiff );

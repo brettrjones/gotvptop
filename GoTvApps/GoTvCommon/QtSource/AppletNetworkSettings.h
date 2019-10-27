@@ -64,7 +64,7 @@ protected:
 
 	Ui::AppletNetworkSettingsWidget		ui;
     NetSettings					m_NetSettings;
-    std::string					m_OrigAnchorUrl;
+    std::string					m_OrigHostUrl;
     std::string					m_OrigNetworkName;
     std::string					m_OrigNetworkKey;
 };

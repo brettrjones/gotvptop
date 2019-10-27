@@ -971,8 +971,8 @@ void AppCommon::slotNetworkStateChanged( ENetworkStateType eNetworkState )
 		//ui.searchButton->setIcon( getMyIcons().getIcon( eMyIconSearch ) );
 		break;
 
-	case eNetworkStateTypeFailedResolveAnchor:
-		//ui.notifyButton->setIcon( getMyIcons().getIcon( eMyIconNetworkStateAnchorFail ) );
+	case eNetworkStateTypeFailedResolveHostNetwork:
+		//ui.notifyButton->setIcon( getMyIcons().getIcon( eMyIconNetworkStateHostFail ) );
 		break;
 	}
 }
@@ -1016,14 +1016,14 @@ void AppCommon::toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * ms
 }
 
 //============================================================================
-void AppCommon::toGuiAnchorStatus( EAnchorTestStatus eAnchorStatus, const char * msg )
+void AppCommon::toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	const char * anchorStatus = DescribeAnchorStatus( eAnchorStatus );
+	const char * anchorStatus = DescribeHostStatus( eHostStatus );
 	std::string formatedMsg;
 	if( msg )
 	{
@@ -1037,7 +1037,7 @@ void AppCommon::toGuiAnchorStatus( EAnchorTestStatus eAnchorStatus, const char *
 	emit signalLog( 0, formatedMsg.c_str() );
 	emit signalStatusMsg( formatedMsg.c_str() );
 
-	emit signalAnchorStatus( eAnchorStatus, formatedMsg.c_str() );
+	emit signalHostStatus( eHostStatus, formatedMsg.c_str() );
 }
 
 //============================================================================
@@ -1067,14 +1067,14 @@ void AppCommon::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, cons
 
 
 //============================================================================
-void AppCommon::toGuiPhoneShakeStatus( EPhoneShakeStatus ePhoneShakeStatus, const char * msg )
+void AppCommon::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg )
 {
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	const char * phoneShakeStatus = DescribePhoneShakeStatus( ePhoneShakeStatus );
+	const char * phoneShakeStatus = DescribeRandomConnectStatus( eRandomConnectStatus );
 	std::string formatedMsg;
 	if( msg )
 	{
@@ -1088,7 +1088,7 @@ void AppCommon::toGuiPhoneShakeStatus( EPhoneShakeStatus ePhoneShakeStatus, cons
 	emit signalLog( 0, formatedMsg.c_str() );
 	emit signalStatusMsg( formatedMsg.c_str() );
 
-	emit signalPhoneShakeStatus( ePhoneShakeStatus, formatedMsg.c_str() );
+	emit signalRandomConnectStatus( eRandomConnectStatus, formatedMsg.c_str() );
 }
 
 //============================================================================
@@ -1735,11 +1735,11 @@ void AppCommon::refreshFriend( VxGUID& onlineId )
 void  AppCommon::registerMetaData( void )
 {
 	qRegisterMetaType<EAppErr>( "EAppErr" );
-	qRegisterMetaType<EAnchorTestStatus>( "EAnchorTestStatus" );
+	qRegisterMetaType<EHostTestStatus>( "EHostTestStatus" );
 	qRegisterMetaType<EMyRelayStatus>( "EMyRelayStatus" );
 	qRegisterMetaType<ENetworkStateType>( "ENetworkStateType" );
 	qRegisterMetaType<EIsPortOpenStatus>( "EIsPortOpenStatus" );
-	qRegisterMetaType<EPhoneShakeStatus>( "EPhoneShakeStatus" );
+	qRegisterMetaType<ERandomConnectStatus>( "ERandomConnectStatus" );
 	qRegisterMetaType<VxGuidQt>( "VxGuidQt" );
 	qRegisterMetaType<EAssetType>( "EAssetType" );
 	qRegisterMetaType<EAssetAction>( "EAssetAction" );

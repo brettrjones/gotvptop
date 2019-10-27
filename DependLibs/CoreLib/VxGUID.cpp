@@ -270,18 +270,49 @@ bool VxGUID::isVxGUIDValid() const
 }
 
 //============================================================================
-void VxGUID::toVxGUIDHexString( std::string& strRetId )	
+void VxGUID::toHexString( std::string& strRetId )	
 { 
-	char lclBuf[ 64 ];
-	sprintf( lclBuf, "%llX%llX", m_u64HiPart, m_u64LoPart );
+	char lclBuf[ 33 ];
+    toHexString( lclBuf );
 	strRetId = lclBuf; 
 } 
 
 //============================================================================
-std::string VxGUID::toVxGUIDHexString( void )	
+// buffer must be at least 33 characters in length
+void VxGUID::toHexString( char * retBuf )
+{
+    uint64ToHexAscii( &retBuf[ 0 ], m_u64HiPart );
+    uint64ToHexAscii( &retBuf[ 16 ], m_u64LoPart );
+    retBuf[ 32 ] = 0;
+}
+
+//============================================================================
+// buffer must be at least 17 characters in length
+void VxGUID::uint64ToHexAscii( char * retBuf, uint64_t& val )
+{
+    uint8_t * byteArray = (uint8_t *)&val;
+    int charIdx = 0;
+    for( int byteIdx = 0; byteIdx < 8; byteIdx++ )
+    {
+        uint8_t bytePart = byteArray[ byteIdx ];
+        retBuf[ charIdx++ ] = nibbleToHex( ( bytePart >> 4 ) & 0x0f );
+        retBuf[ charIdx++ ] = nibbleToHex( bytePart & 0x0f );
+    }
+
+    retBuf[ 16 ] = 0;
+}
+
+//============================================================================
+char VxGUID::nibbleToHex( uint8_t val )
+{
+    return val > 9 ? ( val - 10 ) + 'A' : val + 0x30;
+}
+
+//============================================================================
+std::string VxGUID::toHexString( void )	
 { 
-	char lclBuf[ 64 ];
-	sprintf( lclBuf, "%llX%llX", m_u64HiPart, m_u64LoPart );
+	char lclBuf[ 33 ];
+    toHexString( lclBuf );
 	return lclBuf; 
 } 
 
@@ -373,19 +404,19 @@ uint64_t		VxGUID::getVxGUIDLoPart() const								{ return m_u64LoPart; }
 
 //============================================================================
 //! get high part of online id
-uint64_t		VxGUID::getVxGUIDHiPart() const								{ return m_u64HiPart; }
+uint64_t		VxGUID::getVxGUIDHiPart() const						{ return m_u64HiPart; }
 
 //============================================================================
 //! return users online id
-VxGUID&	VxGUID::getVxGUID( void )								{ return *this; }
+VxGUID&	VxGUID::getVxGUID( void )						            { return *this; }
 
 //============================================================================
 //! return users online id as string
-void VxGUID::getVxGUID( std::string& strRetId )			{ return this->toVxGUIDHexString( strRetId ); }
+void VxGUID::getVxGUID( std::string& strRetId )			            { return this->toHexString( strRetId ); }
 
 //============================================================================
 //! set users online id
-void VxGUID::setVxGUID( VxGUID& oId )					{ *this = oId; }
+void VxGUID::setVxGUID( VxGUID& oId )					            { *this = oId; }
 
 //============================================================================
 //! set users online id
@@ -396,7 +427,7 @@ void VxGUID::setVxGUID( uint64_t& u64HiPart, uint64_t& u64LoPart )	{ m_u64HiPart
 void VxGUID::getVxGUID( uint64_t& u64HiPart, uint64_t& u64LoPart )	{  u64HiPart = m_u64HiPart; u64LoPart = m_u64LoPart; }
 
 //============================================================================
-void VxGUID::setVxGUID( const char * pId )					{ this->fromVxGUIDHexString( pId ); }
+void VxGUID::setVxGUID( const char * pId )					        { this->fromVxGUIDHexString( pId ); }
 
 //============================================================================
 void VxGUID::clearVxGUID( void )

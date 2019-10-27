@@ -33,7 +33,7 @@
 #include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>
 
 #include <GoTvCore/GoTvP2P/IsPortOpenTest/IsPortOpenTest.h>
-#include <GoTvCore/GoTvP2P/AnchorTest/AnchorTest.h>
+#include <GoTvCore/GoTvP2P/HostMgr/HostTest.h>
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginMgr.h>
@@ -83,7 +83,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
 , m_NetServicesMgr( * new NetServicesMgr( *this ) )
 , m_NetConnector( * new NetConnector( *this ) )
 , m_NetworkStateMachine( * new NetworkStateMachine( *this, m_NetworkMgr ) )
-, m_AnchorTest( * ( new AnchorTest( m_EngineSettings, m_NetServicesMgr ) ) )
+, m_HostTest( * ( new HostTest( m_EngineSettings, m_NetServicesMgr ) ) )
 , m_PluginMgr( * new PluginMgr( *this ) )
 , m_MediaProcessor( * ( new MediaProcessor( *this ) ) )
 , m_PluginServiceRelay( new PluginServiceRelay( *this, m_PluginMgr, &m_PktAnn ) )
@@ -184,7 +184,7 @@ void P2PEngine::shutdownEngine( void )
 	//delete &m_MediaProcessor;
 	//delete &m_PluginMgr;
 	//delete &m_NetConnector;
-	//delete &m_AnchorTest;
+	//delete &m_HostTest;
 	//delete &m_NetworkStateMachine;
 	//delete &m_NetServicesMgr;
 	//delete &m_NetworkMonitor;

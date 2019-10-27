@@ -34,9 +34,9 @@ AppletClientRandomConnect::AppletClientRandomConnect( AppCommon& app, QWidget * 
     connect( this, SIGNAL( signalSearchComplete() ), this, SLOT( slotSearchComplete() ) );
     connect( this, SIGNAL( signalSearchResult( VxNetIdent* ) ), this, SLOT( slotSearchResult( VxNetIdent* ) ) );
     connect( &app,
-             SIGNAL( signalPhoneShakeStatus( EPhoneShakeStatus, QString ) ),
+             SIGNAL( signalRandomConnectStatus( ERandomConnectStatus, QString ) ),
              this,
-             SLOT( slotPhoneShakeStatus( EPhoneShakeStatus, QString ) ) );
+             SLOT( slotRandomConnectStatus( ERandomConnectStatus, QString ) ) );
 
 	m_MyApp.activityStateChange( this, true );
 }
@@ -122,7 +122,7 @@ void AppletClientRandomConnect::slotSearchResult( VxNetIdent * netIdent )
 }
 
 //============================================================================
-void AppletClientRandomConnect::slotPhoneShakeStatus( EPhoneShakeStatus eAnchorStatus, QString strMsg )
+void AppletClientRandomConnect::slotRandomConnectStatus( ERandomConnectStatus eHostStatus, QString strMsg )
 {
     m_MyApp.toGuiUserMessage( strMsg.toUtf8().constData() );
 }

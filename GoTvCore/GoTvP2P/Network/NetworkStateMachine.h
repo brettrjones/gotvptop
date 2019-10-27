@@ -52,11 +52,11 @@ public:
 	NetworkMgr&					getNetworkMgr( void )							{ return m_NetworkMgr; }
 	DirectConnectTester&		getDirectConnectTester( void )					{ return m_DirectConnectTester; }
 
-	bool						isThisNodeAnchorWebsite( void )					{ return m_bAnchorIpMatch; }
+	bool						isThisNodeHostWebsite( void )					{ return m_bHostIpMatch; }
 	bool						isThisNodeNetServiceWebsite( void )				{ return m_bNetServiceIpMatch; }
 	bool						isNetworkWebsitesResolved( void )				{ return m_bWebsiteUrlsResolved; }
-	std::string&				getAnchorIp( void )								{ return m_AnchorIp; }
-	uint16_t							getAnchorPort( void )							{ return m_u16AnchorPort; }
+	std::string&				getHostIp( void )								{ return m_HostIp; }
+	uint16_t							getHostPort( void )							{ return m_u16HostPort; }
 	std::string&				getNetServiceIp( void )							{ return m_NetServiceIp; }
 	uint16_t							getNetServicePort( void )						{ return m_u16NetServicePort; }
 
@@ -137,16 +137,16 @@ protected:
 
 	std::vector<NetworkEventBase*>	m_NetworkEventList;
 
-	std::string					m_AnchorIp;
-	uint16_t							m_u16AnchorPort;
-	std::string					m_LastResolvedAnchorWebsite;
+	std::string					m_HostIp;
+	uint16_t							m_u16HostPort;
+	std::string					m_LastResolvedHostWebsite;
 
 	std::string					m_NetServiceIp;
 	uint16_t							m_u16NetServicePort;
 	std::string					m_LastResolvedNetServiceWebsite;
 
 	bool						m_bWebsiteUrlsResolved;
-	bool						m_bAnchorIpMatch;
+	bool						m_bHostIpMatch;
 	bool						m_bNetServiceIpMatch;
 	std::string					m_LastKnownExternalIpAddr;
 
