@@ -796,6 +796,115 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 
 		break;
 
+    case	ePluginTypeAboutMePage:
+        switch( ePluginAccess )
+        {
+        case ePluginAccessOk:
+            return eMyIconProfile;
+        case ePluginAccessDisabled:
+        case ePluginAccessInactive:
+        case ePluginAccessRequiresDirectConnect:
+        case ePluginAccessRequiresOnline:
+            return eMyIconProfileDisabled;
+        case ePluginAccessLocked:
+            return eMyIconProfileLocked;
+        case ePluginAccessIgnored:
+        case ePluginAccessBusy:
+            return eMyIconProfileIgnored;
+        }
+        break;
+
+    case ePluginTypeAvatarImage:
+        switch( ePluginAccess )
+        {
+        case ePluginAccessOk:
+            return eMyIconAvatarImage;
+        case ePluginAccessDisabled:
+        case ePluginAccessInactive:
+        case ePluginAccessRequiresDirectConnect:
+        case ePluginAccessRequiresOnline:
+            return eMyIconAvatarImage;
+        case ePluginAccessLocked:
+            return eMyIconAvatarImage;
+        case ePluginAccessIgnored:
+        case ePluginAccessBusy:
+            return eMyIconAvatarImage;
+        }
+        break;
+
+    case ePluginTypeChatRoom:
+        switch( ePluginAccess )
+        {
+        case ePluginAccessOk:
+            return eMyIconServiceChatRoom;
+        case ePluginAccessDisabled:
+        case ePluginAccessInactive:
+        case ePluginAccessRequiresDirectConnect:
+        case ePluginAccessRequiresOnline:
+            return eMyIconServiceChatRoom;
+        case ePluginAccessLocked:
+            return eMyIconServiceChatRoom;
+        case ePluginAccessIgnored:
+        case ePluginAccessBusy:
+            return eMyIconServiceChatRoom;
+        }
+        break;
+
+    case ePluginTypeConnectTest:
+        switch( ePluginAccess )
+        {
+        case ePluginAccessOk:
+            return eMyIconServiceConnectionTest;
+        case ePluginAccessDisabled:
+        case ePluginAccessInactive:
+        case ePluginAccessRequiresDirectConnect:
+        case ePluginAccessRequiresOnline:
+            return eMyIconServiceConnectionTest;
+        case ePluginAccessLocked:
+            return eMyIconServiceConnectionTest;
+        case ePluginAccessIgnored:
+        case ePluginAccessBusy:
+            return eMyIconServiceConnectionTest;
+        }
+        break;
+
+
+    case ePluginTypeRandomConnect:
+        switch( ePluginAccess )
+        {
+        case ePluginAccessOk:
+            return eMyIconServiceRandomConnect;
+        case ePluginAccessDisabled:
+        case ePluginAccessInactive:
+        case ePluginAccessRequiresDirectConnect:
+        case ePluginAccessRequiresOnline:
+            return eMyIconServiceRandomConnect;
+        case ePluginAccessLocked:
+            return eMyIconServiceRandomConnect;
+        case ePluginAccessIgnored:
+        case ePluginAccessBusy:
+            return eMyIconServiceRandomConnect;
+        }
+        break;
+
+    case ePluginTypeRandomConnectRelay:
+        switch( ePluginAccess )
+        {
+        case ePluginAccessOk:
+            return eMyIconServiceRandomConnectRelay;
+        case ePluginAccessDisabled:
+        case ePluginAccessInactive:
+        case ePluginAccessRequiresDirectConnect:
+        case ePluginAccessRequiresOnline:
+            return eMyIconServiceRandomConnectRelay;
+        case ePluginAccessLocked:
+            return eMyIconServiceRandomConnectRelay;
+        case ePluginAccessIgnored:
+        case ePluginAccessBusy:
+            return eMyIconServiceRandomConnectRelay;
+        }
+        break;
+
 	case	ePluginTypeRelay:
 		switch( ePluginAccess )
 		{
@@ -974,10 +1083,6 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 			return eMyIconMultiSessionIgnored;
 		}
 		break;
-
-    case ePluginTypeRandomConnect:	
-        return eMyIconGroupUser;
-        break;
 
     case ePluginTypeHostGroup:
         return eMyIconServiceHostGroup;

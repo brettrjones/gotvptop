@@ -16,7 +16,7 @@
 #include "ActivityCreateAccount.h"
 #include "AppGlobals.h"
 #include "AppCommon.h"
-#include "VxDataHelper.h"
+#include "AccountMgr.h"
 #include "AppSettings.h"
 #include "GuiHelpers.h"
 
@@ -29,7 +29,7 @@
 
 //============================================================================
 ActivityCreateAccount::ActivityCreateAccount( AppCommon& app, QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_CREATE_ACCOUNT, app, parent, eAppletCreateAccount, true, false )
+: ActivityBase( OBJNAME_ACTIVITY_CREATE_ACCOUNT, app, parent, eAppletCreateAccount, true, false, true )
 {
 	ui.setupUi( this );
     setTitleBarText( QObject::tr( "Create Account" ) );
@@ -67,15 +67,15 @@ void ActivityCreateAccount::slotButtonLoginClicked( void )
 
         // fill in database info
         LogMsg( LOG_VERBOSE, "created acct name %s UUID 0x%llX 0x%llX\n", m_UserAccount.getOnlineName(), m_UserAccount.getMyOnlineIdLoPart(), m_UserAccount.getMyOnlineIdHiPart() );
-        if( true == m_MyApp.getDataHelper().insertAccount( m_UserAccount ) )
+        if( true == m_MyApp.getAccountMgr().insertAccount( m_UserAccount ) )
         {
-            m_MyApp.getDataHelper().updateLastLogin( m_UserAccount.getOnlineName() );
+            m_MyApp.getAccountMgr().updateLastLogin( m_UserAccount.getOnlineName() );
             accept();
         }
         else
         {
             LogMsg( LOG_ERROR, "Insert New User into Database failed." );
-            QMessageBox::warning( this, tr( "Application" ), tr( "Insert New User into Database failed." ) );
+            QMessageBox::warning( this, QObject::tr( "Application" ), QObject::tr( "Insert New User into Database failed." ) );
         }
     }
 }

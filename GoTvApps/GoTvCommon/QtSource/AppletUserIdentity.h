@@ -26,23 +26,25 @@ public:
 	virtual ~AppletUserIdentity() = default;
 
 public slots:
-    //! apply name change
-    void						onApplyNameClick( void );
-    //! apply name change
     void						onApplyMoodMsgClick( void );
     void						onApplyAgeClick( void );
     void						onApplyContentClick( void );
 
     void						slotEditAboutMeButClick( void );
     void						slotEditAvatarButClick( void );
+    void						slotCreateNewAccount( void );
+    void						slotDeleteAccount( void );
+
+    void                        slotAccountSelectionChanged( int idx );
 
 protected:
-    void                        loadIdentityFromDb();
+
+    void                        loadIdentity( VxNetIdent& ident );
+    void                        saveIdentity( VxNetIdent& ident );
     //! validate user input
     QString						validateString( QString charSeq );
- 
-    bool                        validateUserName( void );
     bool                        validateMoodMessage( void );
+    void                        resetComboIdxToOriginalAccount( void );
 
     //=== constants ===//
     static const int SELECT_IMAGE = 0; // selector for image gallery call
@@ -50,8 +52,10 @@ protected:
 
     //=== vars ===//
     Ui::AppletUserIdentityUi	ui;
+    std::vector<VxNetIdent>     m_AccountList;
+
     UserProfile 				m_UserProfile;
-    VxNetIdent *				m_MyIdent = nullptr;
+    VxNetIdent *				m_CurIdent = nullptr;
     QString                     m_strOrigOnlineName;
     QString                     m_strOrigMoodMessage;
 

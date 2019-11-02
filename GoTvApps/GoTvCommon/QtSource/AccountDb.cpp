@@ -13,7 +13,7 @@
 // http://www.gotvptop.com
 //============================================================================
 
-#include "VxDataHelper.h"
+#include "AccountDb.h"
 
 #include <CoreLib/sqlite3.h>
 #include <PktLib/VxCommon.h>
@@ -53,22 +53,17 @@ namespace
 //============================================================================
 //=== globals ===//
 //============================================================================
-VxDataHelper g_oDataHelper;
+AccountDb g_oDataHelper;
 
 //============================================================================
-VxDataHelper::VxDataHelper()
+AccountDb::AccountDb()
 : DbBase( "DataHelperDb" )
 {
 }
 
 //============================================================================
-VxDataHelper::~VxDataHelper()
-{
-}
-
-//============================================================================
 //! create tables in database 
-RCODE VxDataHelper::onCreateTables( int iDbVersion )
+RCODE AccountDb::onCreateTables( int iDbVersion )
 {
     std::string exeStr = "CREATE TABLE " + TABLE_LAST_LOGIN + CREATE_COLUMNS_LAST_LOGIN;
     RCODE rc = sqlExec(exeStr);
@@ -87,7 +82,7 @@ RCODE VxDataHelper::onCreateTables( int iDbVersion )
 
 //============================================================================
 // delete tables in database
-RCODE VxDataHelper::onDeleteTables( int oldVersion ) 
+RCODE AccountDb::onDeleteTables( int oldVersion ) 
 {
     RCODE rc = sqlExec("DROP TABLE IF EXISTS last_login" );
     rc |= sqlExec("DROP TABLE IF EXISTS account_login" );
@@ -100,7 +95,7 @@ RCODE VxDataHelper::onDeleteTables( int oldVersion )
 
 //============================================================================
 //! return true if online id exists in table
-bool VxDataHelper::onlineUidExistsInTable( VxGUID& onlineId, std::string& strTableName )
+bool AccountDb::onlineUidExistsInTable( VxGUID& onlineId, std::string& strTableName )
 {
 	bool bExists = false;
 	std::string strOnlineIdHex = onlineId.toHexString();
@@ -122,7 +117,7 @@ bool VxDataHelper::onlineUidExistsInTable( VxGUID& onlineId, std::string& strTab
 //=========================================================================
 //============================================================================
 //! update last login name
-bool VxDataHelper::updateLastLogin( const char * pThingName ) 
+bool AccountDb::updateLastLogin( const char * pThingName ) 
 {
 	DbBindList bindList( pThingName );
 	RCODE rc = sqlExec(  "DELETE FROM last_login" );
@@ -132,7 +127,7 @@ bool VxDataHelper::updateLastLogin( const char * pThingName )
 
 //============================================================================
 //! get last login name.. return "" if doesn't exist
-std::string VxDataHelper::getLastLogin() 
+std::string AccountDb::getLastLogin() 
 {
 	std::string strThingName = "";
 	DbCursor * cursor = startQueryInsecure("SELECT * FROM %s", TABLE_LAST_LOGIN.c_str() );
@@ -154,7 +149,7 @@ std::string VxDataHelper::getLastLogin()
 //=========================================================================
 //============================================================================
 //! insert new account
-bool VxDataHelper::insertAccount( VxNetIdent& oUserAccount ) 
+bool AccountDb::insertAccount( VxNetIdent& oUserAccount ) 
 {
 	std::string strOnlineNameHex = oUserAccount.getMyOnlineId().toHexString();
 	DbBindList bindList( oUserAccount.getOnlineName() );
@@ -165,7 +160,7 @@ bool VxDataHelper::insertAccount( VxNetIdent& oUserAccount )
 	RCODE rc = sqlExec( "INSERT INTO account_login (online_name,ident,online_id) values(?,?,?)", bindList );
 	if( rc )
 	{
-		LogMsg( LOG_ERROR, "VxDataHelper::insertAccount: ERROR %d %s\n", rc, sqlite3_errmsg(m_Db) );
+		LogMsg( LOG_ERROR, "AccountDb::insertAccount: ERROR %d %s\n", rc, sqlite3_errmsg(m_Db) );
 	}
 	
 	return rc ? false : true;
@@ -173,7 +168,7 @@ bool VxDataHelper::insertAccount( VxNetIdent& oUserAccount )
 
 //============================================================================
 //! update existing account
-bool VxDataHelper::updateAccount( VxNetIdent& oUserAccount ) 
+bool AccountDb::updateAccount( VxNetIdent& oUserAccount ) 
 {
 	bool bResult = false;
 	sqlite3_stmt * poSqlStatement;
@@ -199,17 +194,17 @@ bool VxDataHelper::updateAccount( VxNetIdent& oUserAccount )
 				}
 				else
 				{
-					LogMsg( LOG_ERROR, "VxDataHelper::updateAccount: ERROR %s stepping\n", sqlite3_errmsg(m_Db) );
+					LogMsg( LOG_ERROR, "AccountDb::updateAccount: ERROR %s stepping\n", sqlite3_errmsg(m_Db) );
 				}
 			}
 			else
 			{
-				LogMsg( LOG_ERROR, "VxDataHelper::updateAccount: ERROR %s\n", sqlite3_errmsg(m_Db) );
+				LogMsg( LOG_ERROR, "AccountDb::updateAccount: ERROR %s\n", sqlite3_errmsg(m_Db) );
 			}
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "VxDataHelper::updateAccount: ERROR %s\n", sqlite3_errmsg(m_Db) );
+			LogMsg( LOG_ERROR, "AccountDb::updateAccount: ERROR %s\n", sqlite3_errmsg(m_Db) );
 		}
 
         sqlite3_exec( m_Db, "END", NULL, NULL, NULL );
@@ -221,11 +216,11 @@ bool VxDataHelper::updateAccount( VxNetIdent& oUserAccount )
 
 //============================================================================
 //! retrieve account by name
-bool VxDataHelper::getAccountByName(const char * name, VxNetIdent& oUserAccount ) 
+bool AccountDb::getAccountByName(const char * name, VxNetIdent& oUserAccount ) 
 {
     if( NULL == name )
     {
-        LogMsg( LOG_ERROR, "VxDataHelper::getAccountByName: null name\n" );
+        LogMsg( LOG_ERROR, "AccountDb::getAccountByName: null name\n" );
         return false;
     }
 
@@ -244,14 +239,14 @@ bool VxDataHelper::getAccountByName(const char * name, VxNetIdent& oUserAccount 
 			}
 			else
 			{
-				LogMsg( LOG_ERROR, "VxDataHelper::getAccountByName: incorrect blob len in db.. was code changed????\n");
+				LogMsg( LOG_ERROR, "AccountDb::getAccountByName: incorrect blob len in db.. was code changed????\n");
 				cursor->close();
 				// remove the invalid blob
 				DbBindList bindList( name );
 				RCODE rc = sqlExec(  "DELETE FROM account_login WHERE online_name=?", bindList );
 				if( rc )
 				{
-					LogMsg( LOG_ERROR, "VxDataHelper::getAccountByName: could not remove login by name %s\n", name );
+					LogMsg( LOG_ERROR, "AccountDb::getAccountByName: could not remove login by name %s\n", name );
 				}
 
 				return false;
@@ -266,7 +261,7 @@ bool VxDataHelper::getAccountByName(const char * name, VxNetIdent& oUserAccount 
 
 //============================================================================
 //! remove account by name
-bool VxDataHelper::removeAccountByName(const char * name ) 
+bool AccountDb::removeAccountByName(const char * name ) 
 {
 	DbBindList bindList( name );
 	RCODE rc = sqlExec( "DELETE FROM account_login WHERE online_name=?", bindList );
@@ -283,7 +278,7 @@ bool VxDataHelper::removeAccountByName(const char * name )
 //=========================================================================
 //============================================================================
 //! get all known about friend
-bool VxDataHelper::getUserProfile( VxNetIdent& oUserAccount, UserProfile& oProfile ) 
+bool AccountDb::getUserProfile( VxNetIdent& oUserAccount, UserProfile& oProfile ) 
 {
 	bool bResult = false;
 	std::string strOnlineIdHex = oUserAccount.getMyOnlineId().toHexString();
@@ -372,7 +367,7 @@ bool VxDataHelper::getUserProfile( VxNetIdent& oUserAccount, UserProfile& oProfi
 
 //============================================================================
 //! update friend profile
-bool VxDataHelper::updateUserProfile( VxNetIdent& oUserAccount, UserProfile& oProfile ) 
+bool AccountDb::updateUserProfile( VxNetIdent& oUserAccount, UserProfile& oProfile ) 
 {
 	RCODE rc = 0;
 	std::string strOnlineIdHex = oUserAccount.getMyOnlineId().toHexString();
@@ -402,7 +397,7 @@ bool VxDataHelper::updateUserProfile( VxNetIdent& oUserAccount, UserProfile& oPr
 
 //============================================================================
 //! get list of friend with give friendship
-void VxDataHelper::getFriendList(uint8_t u8MyFrienship,  std::vector<VxNetIdent>& aoIdent ) 
+void AccountDb::getFriendList(uint8_t u8MyFrienship,  std::vector<VxNetIdent>& aoIdent ) 
 {
     DbCursor * cursor = startQueryInsecure("SELECT ident FROM friends WHERE my_frienship = %d;", u8MyFrienship );
 	VxNetIdent oIdent;
@@ -423,7 +418,7 @@ void VxDataHelper::getFriendList(uint8_t u8MyFrienship,  std::vector<VxNetIdent>
 
 //============================================================================
 //! update net info about friend
-bool VxDataHelper::updateFriend( VxNetIdent& oIdent ) 
+bool AccountDb::updateFriend( VxNetIdent& oIdent ) 
 {
 	RCODE rc;
 	std::string strOnlineIdHex = oIdent.getMyOnlineId().toHexString();
@@ -444,9 +439,8 @@ bool VxDataHelper::updateFriend( VxNetIdent& oIdent )
 	return ( 0 == rc ) ? true : false;
 }
 
-
 //============================================================================
-bool VxDataHelper::updateNetHostSetting( NetHostSetting& anchorSetting )
+bool AccountDb::updateNetHostSetting( NetHostSetting& anchorSetting )
 {
 	removeNetHostSettingByName( anchorSetting.getNetHostSettingName().c_str() );
 
@@ -462,7 +456,7 @@ bool VxDataHelper::updateNetHostSetting( NetHostSetting& anchorSetting )
 }
 
 //============================================================================
-bool VxDataHelper::getNetHostSettingByName( const char * name, NetHostSetting& anchorSetting )
+bool AccountDb::getNetHostSettingByName( const char * name, NetHostSetting& anchorSetting )
 {
 	bool bResult = false;
 	DbCursor * cursor = startQueryInsecure( "SELECT * FROM anchor_settings WHERE anchor_setting_name='%s'", name );
@@ -487,7 +481,7 @@ bool VxDataHelper::getNetHostSettingByName( const char * name, NetHostSetting& a
 }
 
 //============================================================================
-bool VxDataHelper::getAllNetHostSettings( std::vector<NetHostSetting>& anchorSettingList )
+bool AccountDb::getAllNetHostSettings( std::vector<NetHostSetting>& anchorSettingList )
 {
 	bool bResult = false;
 	DbCursor * cursor = startQueryInsecure( "SELECT * FROM anchor_settings" );
@@ -515,7 +509,7 @@ bool VxDataHelper::getAllNetHostSettings( std::vector<NetHostSetting>& anchorSet
 }
 
 //============================================================================
-bool VxDataHelper::removeNetHostSettingByName( const char * name )
+bool AccountDb::removeNetHostSettingByName( const char * name )
 {
 	DbBindList bindList( name );
 	RCODE rc = sqlExec(  "DELETE FROM anchor_settings WHERE anchor_setting_name=?", bindList );
@@ -523,7 +517,7 @@ bool VxDataHelper::removeNetHostSettingByName( const char * name )
 }
 
 //============================================================================
-bool VxDataHelper::updateLastNetHostSettingName( const char * name )
+bool AccountDb::updateLastNetHostSettingName( const char * name )
 {
 	DbBindList bindList( name );
 	RCODE rc = sqlExec(  "DELETE FROM last_anchor_setting" );
@@ -532,7 +526,7 @@ bool VxDataHelper::updateLastNetHostSettingName( const char * name )
 }
 
 //============================================================================
-std::string VxDataHelper::getLastNetHostSettingName( void )
+std::string AccountDb::getLastNetHostSettingName( void )
 {
 	std::string strSettingName = "";
 	DbCursor * cursor = startQueryInsecure("SELECT * FROM %s", TABLE_LAST_ANCHOR_SETTING.c_str() );
@@ -550,4 +544,46 @@ std::string VxDataHelper::getLastNetHostSettingName( void )
 	}
 
 	return strSettingName;
+}
+
+
+//============================================================================
+bool AccountDb::getAllAccounts( std::vector<VxNetIdent>& accountList )
+{
+    accountList.clear();
+
+    bool bResult = false;
+    DbCursor * cursor = startQueryInsecure( "SELECT * FROM account_login" );
+    if( NULL != cursor )
+    {
+        while( cursor->getNextRow() )
+        {
+            int iBlobLen = 0;
+            VxNetIdent * netIdent = ( VxNetIdent * )cursor->getBlob( 2, &iBlobLen );
+            if( iBlobLen == sizeof( VxNetIdent ) )
+            {
+                accountList.push_back( *netIdent );
+                bResult = true;
+            }
+            else if( iBlobLen >= sizeof( VxConnectIdent ) )
+            {
+                LogMsg( LOG_ERROR, "AccountDb::getAllAccounts: incorrect blob len in db.. was code changed????\n" );
+                cursor->close();
+                // remove the invalid blob
+                DbBindList bindList( netIdent->getOnlineName() );
+                RCODE rc = sqlExec( "DELETE FROM account_login WHERE online_name=?", bindList );
+                if( rc )
+                {
+                    LogMsg( LOG_ERROR, "AccountDb::getAccountByName: could not remove login by name %s\n", netIdent->getOnlineName() );
+                }
+
+                return false;
+            }
+        }
+
+        cursor->close();
+    }
+
+
+    return accountList.size();
 }

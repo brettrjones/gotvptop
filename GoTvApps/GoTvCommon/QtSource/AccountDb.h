@@ -27,11 +27,11 @@ class NetHostSetting;
 class VxGUID;
 
 //! implements database for gui
-class VxDataHelper : public DbBase
+class AccountDb : public DbBase
 {
 public:
-	VxDataHelper();
-	virtual ~VxDataHelper();
+	AccountDb();
+	virtual ~AccountDb() = default;
 
 	bool						isValid( void )							{ return m_bIsValid; }
 	void						setIsValid( bool bValid )				{ m_bIsValid = bValid; }
@@ -56,14 +56,18 @@ public:
 	//=========================================================================
 	//=== accounts ===//
 	//! insert new account
-	bool						insertAccount( VxNetIdent& oUserAccount );
+	bool						insertAccount( VxNetIdent& userAccount );
 	//! update existing account
-	bool						updateAccount( VxNetIdent& oUserAccount ); 
+	bool						updateAccount( VxNetIdent& userAccount );
 	//! retrieve account by name
 	bool						getAccountByName( const char * name, VxNetIdent& oUserAccount ); 
 	//! remove account by name
 	bool 						removeAccountByName( const char * name ); 
-	//! get profile data for account
+    //! retrieve all accounts
+    bool						getAllAccounts( std::vector<VxNetIdent>& accountList );
+
+    //=========================================================================
+    //! get profile data for account
 	bool						getUserProfile( VxNetIdent& oUserAccount, UserProfile& oProfile ); 
 	//! update friend profile
 	bool						updateUserProfile( VxNetIdent& oUserAccount, UserProfile& oProfile ); 
@@ -76,7 +80,7 @@ public:
 	bool						updateFriend( VxNetIdent& oIdent );
 
 	//=========================================================================
-	//=== anchor settings ===//
+	//=== host settings ===//
 	bool						updateNetHostSetting( NetHostSetting& anchorSetting ); 
 	bool						getNetHostSettingByName( const char * name, NetHostSetting& anchorSetting ); 
 	bool						getAllNetHostSettings( std::vector<NetHostSetting>& anchorSettingList ); 
@@ -84,10 +88,10 @@ public:
 
 	bool						updateLastNetHostSettingName( const char * name ); 
 	std::string 				getLastNetHostSettingName( void ); 
+    //=========================================================================
 
 protected:
 	//=== vars ===//
 	bool						m_bIsValid;
 };
 
-//extern VxDataHelper g_oDataHelper;

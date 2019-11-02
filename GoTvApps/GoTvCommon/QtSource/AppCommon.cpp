@@ -45,10 +45,10 @@
 
 #include "GuiOfferSession.h"
 
+#include "AccountMgr.h"
 #include "AppSettings.h"
 #include "AppletMgr.h"
 
-#include "VxDataHelper.h"
 #include "FileListReplySession.h"
 #include "VxPushButton.h"
 
@@ -66,7 +66,6 @@
 
 #include <GoTvInterface/IGoTv.h>
 
-#include "VxDataHelper.h"
 #include <NetLib/VxPeerMgr.h>
 
 #include <QApplication>
@@ -131,11 +130,11 @@ namespace
 AppCommon& CreateAppInstance( IGoTv& gotv, QApplication* myApp )
 {
 static AppSettings appSettings;
-static VxDataHelper myDataHelper;
+static AccountMgr accountMgr;
     if( !g_AppCommon )
     {
         // constructor of AppCommon will set g_AppCommon
-        new AppCommon( *myApp, eAppModeDefault, appSettings, myDataHelper, gotv );
+        new AppCommon( *myApp, eAppModeDefault, appSettings, accountMgr, gotv );
     }
 
     return *g_AppCommon;
@@ -157,14 +156,14 @@ void DestroyAppInstance()
 AppCommon::AppCommon(	QApplication&	myQApp,
 						EDefaultAppMode appDefaultMode,
 						AppSettings&	appSettings, 
-						VxDataHelper&	myDataHelper,
+                        AccountMgr&	    accountMgr,
 						IGoTv&		    gotv )
 : QWidget()
 , m_QApp( myQApp )
 , m_AppDefaultMode( appDefaultMode )
 , m_AppGlobals( *this )
 , m_AppSettings( appSettings )
-, m_DataHelper( myDataHelper )
+, m_AccountMgr( accountMgr )
 , m_GoTv( gotv )
 , m_VxPeerMgr( gotv.getPeerMgr() )
 , m_AppTitle( GetAppTitle( appDefaultMode ) )
@@ -233,7 +232,7 @@ void AppCommon::loadWithoutThread( void )
     // database of multiple accounts
     // create accounts database appshortname_accounts.db3 in /appshortName/data/
     QString strAccountDbFileName = VxGetAppGoTvDataDirectory().c_str() + m_AppShortName + "_accounts.db3";
-    m_DataHelper.dbStartup( DATA_HELPER_DB_VERSION, strAccountDbFileName.toUtf8().constData() );
+    m_AccountMgr.startupAccountMgr( strAccountDbFileName.toUtf8().constData() );
 
     // asset database and user specific setting database will be created in sub directory of account login
     // after user has logged into account
@@ -292,7 +291,7 @@ void AppCommon::slotStartLoadingFromThread( void )
 	// database of multiple accounts
 	// create accounts database appshortname_accounts.db3 in /appshortName/data/
 	QString strAccountDbFileName = VxGetAppGoTvDataDirectory().c_str() + m_AppShortName + "_accounts.db3";
-	m_DataHelper.dbStartup( DATA_HELPER_DB_VERSION, strAccountDbFileName.toUtf8().constData() );
+	m_AccountMgr.startupAccountMgr( strAccountDbFileName.toUtf8().constData() );
 
 	// asset database and user specific setting database will be created in sub directory of account login
 	// after user has logged into account

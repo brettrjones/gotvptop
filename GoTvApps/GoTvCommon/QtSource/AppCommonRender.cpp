@@ -25,16 +25,14 @@
 
 #include "HomeWindow.h"
 
-
 #include "GuiOfferSession.h"
 
+#include "AccountMgr.h"
 #include "AppSettings.h"
 #include "AppletMgr.h"
 
-#include "VxDataHelper.h"
 #include "FileListReplySession.h"
 #include "RenderGlWidget.h"
-
 
 #include <PktLib/VxCommon.h>
 
@@ -44,10 +42,7 @@
 #include <CoreLib/IsBigEndianCpu.h>
 #include <CoreLib/VxGUID.h>
 
-
-#include "VxDataHelper.h"
 #include <NetLib/VxPeerMgr.h>
-
 
 #include <QApplication>
 #include <QMainWindow>

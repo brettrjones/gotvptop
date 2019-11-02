@@ -150,6 +150,8 @@ enum EApplet
 
     // not lauched by user
     eAppletCreateAccount,
+    eAppletSnapShot,
+    eAppletBrowseFiles,
 
     //	eAppletPlayerMusic,
     //	eAppletPlayerPhoto,

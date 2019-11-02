@@ -414,9 +414,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\TodGameWidget.cpp">
       <Filter>GoTvCommon\Source Files\TodGame</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxDataHelper.cpp">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAvatarImage.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
@@ -899,6 +896,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.cpp">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AccountMgr.cpp">
+      <Filter>GoTvCommon\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AccountDb.cpp">
+      <Filter>GoTvCommon\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2643,9 +2646,6 @@
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\TodGameDefs.h">
       <Filter>GoTvCommon\Source Files\TodGame</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxDataHelper.h">
-      <Filter>GoTvCommon\Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxResourceToRealFile.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClInclude>
@@ -2783,6 +2783,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.h">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountMgr.h">
+      <Filter>GoTvCommon\Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h">
+      <Filter>GoTvCommon\Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

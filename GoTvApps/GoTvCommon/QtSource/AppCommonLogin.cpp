@@ -22,7 +22,7 @@
 #include "ActivityCreateAccount.h"
 
 #include "GuiHelpers.h"
-#include "VxDataHelper.h"
+#include "AccountMgr.h"
 
 #include <GoTvInterface/IGoTv.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
@@ -173,19 +173,19 @@ void AppCommon::completeLogin( void )
 //! load last successful user account
 bool AppCommon::loadLastUserAccount( void )
 {
-    m_strAccountUserName = m_DataHelper.getLastLogin();
+    m_strAccountUserName = m_AccountMgr.getLastLogin();
 
     if( 0 != m_strAccountUserName.length() )
     {
         // get identity out of database
-        if( true == m_DataHelper.getAccountByName( m_strAccountUserName.c_str(), *getAppGlobals().getUserIdent() ) )
+        if( true == m_AccountMgr.getAccountByName( m_strAccountUserName.c_str(), *getAppGlobals().getUserIdent() ) )
         {
             return true;
         }
         else
         {
             // remove old missing or corrupted account 
-            m_DataHelper.removeAccountByName( m_strAccountUserName.c_str() );
+            m_AccountMgr.removeAccountByName( m_strAccountUserName.c_str() );
             LogMsg( LOG_INFO, "AppCommon:Could not retrieve user\n" );
         }
     }
@@ -196,9 +196,7 @@ bool AppCommon::loadLastUserAccount( void )
 //============================================================================
 void AppCommon::createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg, int gender, int age, int primaryLanguage, int contentType )
 {
-    m_Engine.fromGuiSetUserXferDir( getUserXferDirectoryFromAccountUserName( strUserName.c_str() ).c_str() );
-    // gotv (kodi) also needs the directory
-    getGoTv().fromGuiSetUserSpecificDir( getUserSpecificDataDirectoryFromAccountUserName( strUserName.c_str() ).c_str() );
+
     QUuid uuidTmp = QUuid::createUuid();
     uint64_t u64HiPart = getQuuidHiPart( uuidTmp );
     uint64_t u64LoPart = getQuuidLoPart( uuidTmp );
@@ -217,6 +215,16 @@ void AppCommon::createAccountForUser( std::string& strUserName, VxNetIdent& user
     userAccountIdent.setPreferredContent( contentType );
 
     userAccountIdent.setPluginPermissionsToDefaultValues();
+    setupAccountResources( userAccountIdent );
+}
+
+//============================================================================
+void AppCommon::setupAccountResources( VxNetIdent& userAccountIdent )
+{
+    std::string strUserName = userAccountIdent.getOnlineName();
+    m_Engine.fromGuiSetUserXferDir( getUserXferDirectoryFromAccountUserName( strUserName.c_str() ).c_str() );
+    // gotv (kodi) also needs the directory
+    getGoTv().fromGuiSetUserSpecificDir( getUserSpecificDataDirectoryFromAccountUserName( strUserName.c_str() ).c_str() );
 
     // get port to listen on 
     uint16_t tcpPort = m_Engine.getEngineSettings().getTcpIpPort();

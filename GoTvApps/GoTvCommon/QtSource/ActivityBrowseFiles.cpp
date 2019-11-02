@@ -33,7 +33,7 @@
 
 //============================================================================
 ActivityBrowseFiles::ActivityBrowseFiles( AppCommon& app,  EFileFilterType fileFilter, ActivityBase * parent, bool isSelectAFileMode )
-: ActivityBase( OBJNAME_ACTIVITY_BROWSE_FILES, app, parent, parent ? parent->getAppletType() : eAppletMessenger )
+: ActivityBase( OBJNAME_ACTIVITY_BROWSE_FILES, app, parent, eAppletBrowseFiles, true )
 , m_bFetchInProgress( false )
 , m_WidgetClickEventFixTimer( new QTimer( this ) )
 , m_IsSelectAFileMode( isSelectAFileMode )

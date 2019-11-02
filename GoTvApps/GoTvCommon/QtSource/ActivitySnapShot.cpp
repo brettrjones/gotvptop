@@ -24,7 +24,7 @@
 
 //============================================================================
 ActivitySnapShot::ActivitySnapShot( AppCommon& app, QWidget * parent )
-: ActivityBase( OBJNAME_ACTIVITY_SNAP_SHOT, app, parent, eAppletMessenger, 0 )
+: ActivityBase( OBJNAME_ACTIVITY_SNAP_SHOT, app, parent, eAppletSnapShot, true, false, true )
 , m_pu8BitmapData(0)
 , m_u32BitmapLen(0)
 {

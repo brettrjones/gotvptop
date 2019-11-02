@@ -20,6 +20,18 @@
    <string>User Identity</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
+   <property name="leftMargin">
+    <number>5</number>
+   </property>
+   <property name="topMargin">
+    <number>5</number>
+   </property>
+   <property name="rightMargin">
+    <number>5</number>
+   </property>
+   <property name="bottomMargin">
+    <number>5</number>
+   </property>
    <item>
     <widget class="QGroupBox" name="m_OnlineIdentityGroupBox">
      <property name="title">
@@ -51,21 +63,14 @@
           <item>
            <widget class="QLabel" name="m_UserNameLabel">
             <property name="text">
-             <string>User Online Name: ( 4 to 23 characters )</string>
+             <string>Select Account</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="m_OnlineNameEdit"/>
+           <widget class="QComboBox" name="m_AccountComboBox"/>
           </item>
          </layout>
-        </item>
-        <item>
-         <widget class="QPushButton" name="m_ApplyNameButton">
-          <property name="text">
-           <string>Apply</string>
-          </property>
-         </widget>
         </item>
        </layout>
       </item>
@@ -85,6 +90,12 @@
           </item>
           <item>
            <widget class="QLineEdit" name="m_MoodMessageEdit">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>Let's Communicate!</string>
             </property>
@@ -112,6 +123,12 @@
         </item>
         <item>
          <widget class="QLineEdit" name="m_AgeEdit">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>0</string>
           </property>
@@ -286,17 +303,25 @@
     </widget>
    </item>
    <item>
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+    <widget class="QPushButton" name="m_CreateNewAccountButton">
+     <property name="text">
+      <string>Create New Account</string>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>360</height>
-      </size>
-     </property>
-    </spacer>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_8">
+     <item>
+      <widget class="QListWidget" name="m_AccountListWidget"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_DeleteAccountButton">
+       <property name="text">
+        <string>Delete Account</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

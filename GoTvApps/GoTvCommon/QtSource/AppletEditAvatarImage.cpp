@@ -19,7 +19,7 @@
 #include "ActivitySnapShot.h"
 #include "AppGlobals.h"
 #include "AppCommon.h"
-#include "VxDataHelper.h"
+#include "AccountMgr.h"
 #include "GuiHelpers.h"
 
 #include <QMessageBox>
@@ -169,7 +169,7 @@ void AppletEditAvatarImage::onApplyButClick( void )
             if( true != m_MyApp.getAppGlobals().getUserIdent()->hasProfilePicture() )
             {
                 m_MyApp.getAppGlobals().getUserIdent()->setHasProfilePicture( true );
-                m_MyApp.getDataHelper().updateAccount( *m_MyApp.getAppGlobals().getUserIdent() );
+                m_MyApp.getAccountMgr().updateAccount( *m_MyApp.getAppGlobals().getUserIdent() );
                 m_Engine.setHasPicture( true );
             }
         }
@@ -226,12 +226,12 @@ QString AppletEditAvatarImage::validateString( QString charSeq )
 //! load user profile data from database
 void AppletEditAvatarImage::loadContentFromDb( void )
 {
-    m_MyApp.getDataHelper().getUserProfile( *m_MyApp.getAppGlobals().getUserIdent(), m_UserProfile );
+    m_MyApp.getAccountMgr().getUserProfile( *m_MyApp.getAppGlobals().getUserIdent(), m_UserProfile );
 }
 
 //============================================================================
 //! save user profile data to database
 void AppletEditAvatarImage::saveContentToDb( void )
 {
-    m_MyApp.getDataHelper().updateUserProfile( *m_MyApp.getAppGlobals().getUserIdent(), m_UserProfile );
+    m_MyApp.getAccountMgr().updateUserProfile( *m_MyApp.getAppGlobals().getUserIdent(), m_UserProfile );
 }

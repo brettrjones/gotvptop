@@ -44,6 +44,7 @@
 #include "VxAppTheme.h"
 #include "VxAppStyle.h"
 
+class AccountMgr;
 class IVxVidCap;
 class ListEntryWidget;
 class FileListReplySession;
@@ -59,7 +60,6 @@ class GuiOfferSession;
 class GuiFileXferSession;
 class VxPeerMgr;
 class PopupMenu;
-class VxDataHelper;
 class VxMyFileInfo;
 class AppSettings;
 class VxTilePositioner;
@@ -79,7 +79,7 @@ public:
 	AppCommon(	QApplication&   myQApp,
 				EDefaultAppMode appDefaultMode,
 				AppSettings&    appSettings,
-				VxDataHelper&   myDataHelper,
+				AccountMgr&     myDataHelper,
 				IGoTv&		    gotv );
 	virtual ~AppCommon() override = default;
 
@@ -104,7 +104,7 @@ public:
     QString&					getAppTitle( void )							{ return m_AppTitle; }
     VxAppTheme&					getAppTheme( void )							{ return m_AppTheme; }
     QWidget *					getCentralWidget( void )					{ return 0; } // ui.centralWidget; }
-    VxDataHelper&				getDataHelper( void )						{ return m_DataHelper; }
+    AccountMgr&				    getAccountMgr( void )						{ return m_AccountMgr; }
     P2PEngine&					getEngine( void )							{ return m_Engine; }
     IFromGui&					getFromGuiInterface( void );
     IGoTv&				        getGoTv( void )						        { return m_GoTv; }
@@ -549,10 +549,13 @@ public:
 	void						viewWebServerPage( VxNetIdentBase * netIdent, const char * webPageFileName );
 
 	void						createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg, int gender, int age, int primaryLanguage, int contentType );
+    void                        setupAccountResources( VxNetIdent& userAccountIdent );
+
 	std::string					getUserXferDirectoryFromAccountUserName( const char * userName );
 	std::string 				getUserSpecificDataDirectoryFromAccountUserName( const char * userName );
 
 	void						refreshFriend( VxGUID& onlineId ); // called to emit signalRefreshFriend
+    bool						loadLastUserAccount( void );
 
 signals:
 	void						signalHomeFrameFullSize( bool isFullSize );
@@ -667,7 +670,6 @@ private slots:
 private:
 	void						restoreWindowPosition( void );
 
-	bool						loadLastUserAccount( void );
 	void						showUserNameInTitle();
 	void						sendAppSettingsToEngine( void );
 	void						startNetworkMonitor( void );
@@ -700,7 +702,7 @@ private:
 	EDefaultAppMode				m_AppDefaultMode;
 	AppGlobals					m_AppGlobals;
 	AppSettings&				m_AppSettings;
-	VxDataHelper&				m_DataHelper;
+    AccountMgr&				    m_AccountMgr;
     IGoTv&                      m_GoTv;
 	VxPeerMgr&					m_VxPeerMgr;
 	QString						m_AppTitle;

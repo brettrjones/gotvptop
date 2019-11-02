@@ -413,6 +413,8 @@
     <ClCompile Include="..\..\..\..\GoTvInterface\OsInterface\OsInterface.cpp" />
     <ClCompile Include="..\..\..\..\GoTvInterface\OsWin32\IWin32.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AccountDb.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AccountMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityAddRemoveLibraryFiles.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityAppSetup.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityBase.cpp" />
@@ -580,7 +582,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAspectFrame.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxComboBox.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxContextMenu.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxDataHelper.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\DialogConfirmRemoveMessage.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileActionBarWidget.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileActionMenu.cpp" />
@@ -1255,6 +1256,8 @@
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\release;$(QTDIR)\mkspecs\win64-msvc</IncludePath>
     </QtMoc>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h" />
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountMgr.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppDefs.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppGlobals.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletMgr.h">
@@ -2224,7 +2227,6 @@
     </QtMoc>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.h" />
-    <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxDataHelper.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\DialogConfirmRemoveMessage.h">
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\FileActionBarWidget.h">

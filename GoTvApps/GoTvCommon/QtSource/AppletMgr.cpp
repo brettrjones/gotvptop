@@ -30,7 +30,8 @@
 
 #include "AppletClientChatRoom.h"
 #include "AppletClientRandomConnect.h"
-
+#include "AppletEditAboutMe.h"
+#include "AppletEditAvatarImage.h"
 #include "AppletKodi.h"
 #include "AppletGroupUser.h"
 #include "AppletLibrary.h"
@@ -38,7 +39,6 @@
 #include "AppletNetworkSettings.h"
 #include "AppletPersonalRecorder.h"
 #include "AppletPlayerVideo.h"
-
 
 #include "AppletServiceAboutMe.h"
 #include "AppletServiceAvatarImage.h"
@@ -163,6 +163,8 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 	{
     case eActivityAppSetup:                 appletDialog = new ActivityAppSetup( m_MyApp, parent ); break;
     case eAppletAboutGoTvPtoP:              appletDialog = new AppletAboutApp( m_MyApp, parent ); break;
+    case eAppletEditAboutMe:                appletDialog = new AppletEditAboutMe( m_MyApp, parent ); break;
+    case eAppletEditAvatarImage:            appletDialog = new AppletEditAvatarImage( m_MyApp, parent ); break;
     case eAppletGroupUser:                  appletDialog = new AppletGroupUser( m_MyApp, parent ); break;
 
     case eAppletHomePage:                   m_MyApp.errMessageBox( appletMissingTitle, "Home Page Not Implemented" ); return nullptr;

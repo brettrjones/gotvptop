@@ -22,7 +22,7 @@
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
-#include "VxDataHelper.h"
+#include "AccountMgr.h"
 
 #include <CoreLib/VxDebug.h>
 #include <NetLib/NetHostSetting.h>
@@ -96,7 +96,7 @@ void AppletNetworkSettings::updateDlgFromSettings()
     ui.m_NetworkSettingsNameComboBox->clear();
 
     bool validDbSettings = false;
-    VxDataHelper& dataHelper = m_MyApp.getDataHelper();
+    AccountMgr& dataHelper = m_MyApp.getAccountMgr();
     std::vector<NetHostSetting> anchorSettingList;
     std::string lastSettingsName = dataHelper.getLastNetHostSettingName();
     int selectedIdx = 0;
@@ -228,8 +228,8 @@ void AppletNetworkSettings::updateSettingsFromDlg()
     m_Engine.getEngineSettings().setNetworkKey( strValue );
     anchorSetting.setNetworkKey( strValue.c_str() );
 
-    m_MyApp.getDataHelper().updateNetHostSetting( anchorSetting );
-    m_MyApp.getDataHelper().updateLastNetHostSettingName( anchorSettingsName.c_str() );
+    m_MyApp.getAccountMgr().updateNetHostSetting( anchorSetting );
+    m_MyApp.getAccountMgr().updateLastNetHostSettingName( anchorSettingsName.c_str() );
 
     std::string strPreferredIp = "";
     if( 0 != ui.m_LclIpListComboBox->currentIndex() )
@@ -376,7 +376,7 @@ void AppletNetworkSettings::onComboBoxTextChanged( const QString & text )
 //============================================================================
 void AppletNetworkSettings::onComboBoxSelectionChange( const QString& anchorSettingName )
 {
-    VxDataHelper& dataHelper = m_MyApp.getDataHelper();
+    AccountMgr& dataHelper = m_MyApp.getAccountMgr();
     NetHostSetting anchorSetting;
     if( dataHelper.getNetHostSettingByName( anchorSettingName.toUtf8(), anchorSetting ) )
     {
@@ -429,7 +429,7 @@ void AppletNetworkSettings::onSaveButtonClick( void )
         }
 
         NetHostSetting anchorSetting;
-        if( m_MyApp.getDataHelper().getNetHostSettingByName( anchorSettingsName.c_str(), anchorSetting ) )
+        if( m_MyApp.getAccountMgr().getNetHostSettingByName( anchorSettingsName.c_str(), anchorSetting ) )
         {
             // setting exists.. check if user wants to change setting name
             if( QMessageBox::Yes != QMessageBox::question( this, QObject::tr( "Network Setting" ), 
@@ -461,7 +461,7 @@ void AppletNetworkSettings::onDeleteButtonClick( void )
     anchorSettingsName = ui.m_NetworkSettingsNameComboBox->currentText().toUtf8().constData();
     if( 0 != anchorSettingsName.length() )
     {
-        m_MyApp.getDataHelper().removeNetHostSettingByName( anchorSettingsName.c_str() );
+        m_MyApp.getAccountMgr().removeNetHostSettingByName( anchorSettingsName.c_str() );
         updateDlgFromSettings();
     }
 }

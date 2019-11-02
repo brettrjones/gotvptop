@@ -87,8 +87,14 @@ int VxAppStyle::focusFrameBoarderWidth()
 bool VxAppStyle::event( QEvent* e )
 {
     bool result = QCommonStyle::event( e );
-
-    if( e->type() == QEvent::FocusIn )
+    if( ( e->type() == QEvent::Close ) || ( e->type() == QEvent::Quit ) || ( e->type() == QEvent::FocusAboutToChange ) )
+    {
+        if( g_FocusFrame )
+        {
+            g_FocusFrame->setWidget( NULL );
+        }
+    }
+    else if( e->type() == QEvent::FocusIn )
     {
         QWidget* focusedWidget = QApplication::focusWidget();
 

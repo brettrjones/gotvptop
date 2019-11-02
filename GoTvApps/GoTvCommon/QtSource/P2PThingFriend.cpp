@@ -17,7 +17,7 @@
 #include "MyIcons.h"
 #include "AppCommon.h"
 #include "AppGlobals.h"
-#include "VxDataHelper.h"
+#include "AccountMgr.h"
 #include "ToGuiActivityInterface.h"
 
 #include <CoreLib/VxGlobals.h>
@@ -342,7 +342,7 @@ void AppCommon::onUpdateMyIdent( VxNetIdent * netIdent )
     if( netIdent )
     {
 	    memcpy( getAppGlobals().getUserIdent(), netIdent, sizeof( VxNetIdent ) );
-	    m_DataHelper.updateAccount(*netIdent);
+	    m_AccountMgr.updateAccount(*netIdent);
     }
 }
 

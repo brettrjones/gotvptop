@@ -27,16 +27,16 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <item>
     <widget class="TitleBarWidget" name="m_TitleBarWidget" native="true">
@@ -82,7 +82,14 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="m_UserNameEdit"/>
+    <widget class="QLineEdit" name="m_UserNameEdit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QLabel" name="m_MoodMessageLabel">
@@ -93,6 +100,12 @@
    </item>
    <item>
     <widget class="QLineEdit" name="m_MoodMessageEdit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string>Let's Communicate!</string>
      </property>
@@ -109,6 +122,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="m_AgeEdit">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>0</string>
        </property>

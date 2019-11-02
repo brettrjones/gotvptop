@@ -16,7 +16,7 @@
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxFileUtil.h>
-#include "VxDataHelper.h"
+#include "AccountMgr.h"
 #include <NetLib/VxPeerMgr.h>
 #include <GoTvInterface/IGoTv.h>
 

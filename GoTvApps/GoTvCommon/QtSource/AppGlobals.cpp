@@ -15,7 +15,7 @@
 
 #include "AppGlobals.h"
 #include "AppCommon.h"
-#include "VxDataHelper.h"
+#include "AccountMgr.h"
 #include "GuiParams.h"
 
 
@@ -55,7 +55,7 @@ VxNetIdent * AppGlobals::getUserIdent( void )
 //============================================================================
 bool AppGlobals::saveUserIdentToDatabase( void )
 {
-	if( false == m_AppCommon.getDataHelper().updateAccount( g_oUserIdent ) )
+	if( false == m_AppCommon.getAccountMgr().updateAccount( g_oUserIdent ) )
 	{
 		LogMsg( LOG_ERROR, "AppGlobals::saveUserIdentToDatabase: ERROR updating database\n" );
 		return false;
@@ -82,7 +82,7 @@ void AppGlobals::launchWebBrowser( const char * pUri )
 void UpdatePluginPermissions( P2PEngine& engine, EPluginType ePluginType, EFriendState ePluginPermission )
 {
 	g_oUserIdent.setPluginPermission( ePluginType, ePluginPermission );
-	if( false == GetAppInstance().getDataHelper().updateAccount( g_oUserIdent ) )
+	if( false == GetAppInstance().getAccountMgr().updateAccount( g_oUserIdent ) )
 	{
 		LogMsg( LOG_ERROR, "UpdatePluginPermissions: ERROR updating database\n");
 	}
@@ -95,7 +95,7 @@ void UpdatePluginPermissions( P2PEngine& engine, EPluginType ePluginType, EFrien
 void UpdateHasPicture( P2PEngine& engine, int bHasPicture )
 {
 	g_oUserIdent.setHasProfilePicture(bHasPicture);
-	if( false == GetAppInstance().getDataHelper().updateAccount( g_oUserIdent ) )
+	if( false == GetAppInstance().getAccountMgr().updateAccount( g_oUserIdent ) )
 	{
 		LogMsg( LOG_ERROR, "UpdateHasPicture: ERROR updating database\n");
 	}

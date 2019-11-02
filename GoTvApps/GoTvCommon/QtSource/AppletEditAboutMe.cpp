@@ -19,7 +19,7 @@
 #include "ActivitySnapShot.h"
 #include "AppGlobals.h"
 #include "AppCommon.h"
-#include "VxDataHelper.h"
+#include "AccountMgr.h"
 #include "GuiHelpers.h"
 
 #include <QMessageBox>
@@ -169,7 +169,7 @@ void AppletEditAboutMe::onApplyAboutMeButClick( void )
             if( true != m_MyApp.getAppGlobals().getUserIdent()->hasProfilePicture() )
             {
                 m_MyApp.getAppGlobals().getUserIdent()->setHasProfilePicture( true );
-                m_MyApp.getDataHelper().updateAccount( *m_MyApp.getAppGlobals().getUserIdent() );
+                m_MyApp.getAccountMgr().updateAccount( *m_MyApp.getAppGlobals().getUserIdent() );
                 m_Engine.setHasPicture( true );
             }
         }
@@ -226,7 +226,7 @@ QString AppletEditAboutMe::validateString( QString charSeq )
 //! load user profile data from database
 void AppletEditAboutMe::loadContentFromDb( void )
 {
-    m_MyApp.getDataHelper().getUserProfile( *m_MyApp.getAppGlobals().getUserIdent(), m_UserProfile );
+    m_MyApp.getAccountMgr().getUserProfile( *m_MyApp.getAppGlobals().getUserIdent(), m_UserProfile );
     ui.m_AboutMeEdit->setPlainText( m_UserProfile.m_strAboutMe );
     ui.m_GreetingEdit->setText( m_UserProfile.m_strGreeting );
     ui.m_FavoriteWebsite1Edit->setText( m_UserProfile.m_strUrl1 );
@@ -245,5 +245,5 @@ void AppletEditAboutMe::saveContentToDb( void )
     m_UserProfile.m_strUrl2 = ui.m_FavoriteWebsite2Edit->text();
     m_UserProfile.m_strUrl3 = ui.m_FavoriteWebsite3Edit->text();
     m_UserProfile.m_strDonation = ui.m_DonationEdit->toPlainText();
-    m_MyApp.getDataHelper().updateUserProfile( *m_MyApp.getAppGlobals().getUserIdent(), m_UserProfile );
+    m_MyApp.getAccountMgr().updateUserProfile( *m_MyApp.getAppGlobals().getUserIdent(), m_UserProfile );
 }
