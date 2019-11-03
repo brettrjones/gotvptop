@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "VxSktThrottle.h"
@@ -41,7 +41,7 @@ public:
 
 	virtual bool				isReadyToAcceptConnections( void )			{ return m_IsReadyToAcceptConnections; }
 	virtual bool				isListening( void )							{ return m_ListenVxThread.isThreadRunning(); }
-	virtual uint16_t					getListenPort( void )						{ return m_u16ListenPort; }
+	virtual uint16_t			getListenPort( void )						{ return m_u16ListenPort; }
 	virtual InetAddrAndPort		getLocalIp( void )							{ return m_LclIp; }
 	virtual void				fromGuiKickWatchdog( void );
 	virtual bool				checkWatchdog( void );
@@ -55,20 +55,20 @@ public:
 
 public:
     VxThread					m_ListenVxThread;		// thread to listen for incoming connections
-    int							m_iMgrId;									// unique id for this manager
+    int							m_iMgrId = 0;									// unique id for this manager
 
 protected:
     RCODE						internalStartListen( void );
     RCODE 						acceptConnection( VxThread * poVxThread, SOCKET oListenSkt );
 
-    static int					m_iAcceptMgrCnt;				// number of managers created
-    RCODE						m_rcLastError;					// last error that occurred
+    static int					m_iAcceptMgrCnt;				    // number of managers created
+    RCODE						m_rcLastError = 0;					// last error that occurred
 
-    uint16_t							m_u16ListenPort;				// what port to listen on
-    SOCKET						m_aoListenSkts[ FD_SETSIZE ];	// array of listen sockets
-    int							m_iActiveListenSktCnt;			// number of active listening sockets
+    uint16_t					m_u16ListenPort = 0;				// what port to listen on
+    SOCKET						m_aoListenSkts[ FD_SETSIZE ];	    // array of listen sockets
+    int							m_iActiveListenSktCnt = 0;			// number of active listening sockets
 	InetAddrAndPort				m_LclIp;
-	time_t						m_LastWatchdogKick;
-	bool						m_IsReadyToAcceptConnections;
+	int64_t						m_LastWatchdogKickMs = 0;
+	bool						m_IsReadyToAcceptConnections = false;
 };
 

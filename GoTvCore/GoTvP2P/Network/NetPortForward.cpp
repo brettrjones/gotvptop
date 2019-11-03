@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "NetPortForward.h"
@@ -95,7 +95,7 @@ void NetPortForward::netPortForwardShutdown( void )
 //============================================================================
 time_t	 NetPortForward::elapsedSecondsLastAttempt( void )
 {
-	return time(0) - m_TimeLastAttempt;
+	return GetTimeStampMs() - m_TimeLastAttempt;
 }
 
 //============================================================================
@@ -106,7 +106,7 @@ void NetPortForward::beginPortForward( uint16_t u16Port, const char * ipToForwar
 	settings.m_strAppName		= VxGetApplicationNameNoSpaces();
 	settings.m_strIPv4			= ipToForwardTo;
 	m_bIsCompleted				= false;
-	m_TimeLastAttempt			= time( 0 );
+	m_TimeLastAttempt			= GetTimeStampMs();
 
 	if( ( settings.m_u16Port == m_LastUsedSettings.m_u16Port )
 		&& ( settings.m_strIPv4 == m_LastUsedSettings.m_strIPv4 ) )

@@ -9,7 +9,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "AppSetup.h"
@@ -61,7 +61,7 @@ void AppSetup::slotSetupResult( int rc, qint64 bytesCopied )
     {
         std::string completedFile = getAssetsInitilizedFileName();
         const char * completedText = "SUCCESS\n";
-        VxFileUtil::writeWholeFile( completedFile .c_str(), (void *)completedText, strlen( completedText ) );
+        VxFileUtil::writeWholeFile( completedFile .c_str(), (void *)completedText, (uint32_t)strlen( completedText ) );
         LogMsg( LOG_ERROR, "AppSetup SUCESS bytes copied %lld ", bytesCopied );
     }
 

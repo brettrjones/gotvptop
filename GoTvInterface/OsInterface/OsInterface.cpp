@@ -60,6 +60,7 @@ void android_fopen_set_asset_manager(AAssetManager* manager) {
     android_asset_manager = manager;
 }
 
+//============================================================================
 // android:theme=”@android:style/Theme.NoTitleBar.Fullscreen”
 bool CopyIfRequiredApkFile( std::string apkFileName, std::string destFile, bool replaceIfDifferent = true )
 {
@@ -114,6 +115,7 @@ bool CopyIfRequiredApkFile( std::string apkFileName, std::string destFile, bool 
     return result;
 }
 
+//============================================================================
 bool CopyIfRequiredApkDirectory( std::string apkFileDir, std::string destDir, bool replaceIfDifferent = true )
 {
     bool result = true;
@@ -140,6 +142,7 @@ bool CopyIfRequiredApkDirectory( std::string apkFileDir, std::string destDir, bo
 }
 #else
 
+//============================================================================
 // android:theme=”@android:style/Theme.NoTitleBar.Fullscreen”
 bool CopyIfRequiredAssetFile( std::string assetFileName, std::string destFile, bool replaceIfDifferent = true )
 {
@@ -149,7 +152,7 @@ bool CopyIfRequiredAssetFile( std::string assetFileName, std::string destFile, b
         VxFileUtil::makeForwardSlashPath( assetFileName );
         VxFileUtil::makeForwardSlashPath( destFile );
 
-        size_t assetLength = VxFileUtil::fileExists( assetFileName.c_str() );
+        int64_t assetLength = VxFileUtil::fileExists( assetFileName.c_str() );
         int64_t destFileLen = VxFileUtil::fileExists( destFile.c_str() );
         if( !destFileLen || ( replaceIfDifferent && ( assetLength != destFileLen ) ) )
         {
@@ -179,6 +182,7 @@ bool CopyIfRequiredAssetFile( std::string assetFileName, std::string destFile, b
     return result;
 }
 
+//============================================================================
 bool CopyIfRequiredAssetDirectory( std::string assetFileDir, std::string destDir, bool replaceIfDifferent = true )
 {
     bool result = true;

@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include <config_gotvcore.h>
@@ -167,7 +167,8 @@ BigListInfo::~BigListInfo()
 	{
 		delete m_aoInQue[ i ];
 	}
-	iCnt = m_aoOutQue.size();
+
+	iCnt = (int)m_aoOutQue.size();
 	for( int i = 0; i < iCnt; i++ )
 	{
 		delete m_aoOutQue[ i ];

@@ -9,7 +9,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "GuiParams.h"
@@ -42,4 +42,10 @@ void GuiParams::initGuiParams()
 int GuiParams::getControlIndicatorWidth( void )
 { 
     return 10; 
+}
+
+//============================================================================
+QSize GuiParams::getThumbnailSize( void )
+{
+    return QSize( 240, 240 ); 
 }

@@ -84,7 +84,6 @@ bool GetUseMillitaryTime()
 
 int64_t	GetTimeStampMs( void )			      // milli seconds since January 1, 1970 GMT time
 {
-    InitializeTimeIfNeeded();
     return GetGmtTimeMs();
 }
 

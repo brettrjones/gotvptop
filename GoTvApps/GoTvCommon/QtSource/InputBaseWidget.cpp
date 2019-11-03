@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "InputBaseWidget.h"
@@ -79,7 +79,7 @@ bool InputBaseWidget::voiceRecord( EAssetAction action )
 		actionResult = m_MyApp.getEngine().fromGuiSndRecord( eSndRecordStateStartRecording, m_AssetInfo.getCreatorId(), m_FileName.c_str() );
 		if( true == actionResult )
 		{
-			m_TimeRecStart		= time(0);
+			m_TimeRecStart		= GetTimeStampMs();
 			m_TimeRecCurrent	= m_TimeRecStart;
 			m_AssetInfo.setCreationTime( m_TimeRecCurrent );
 			m_ElapseTimer->start( 400 );
@@ -148,7 +148,7 @@ bool InputBaseWidget::videoRecord( EAssetAction action )
 		actionResult = m_MyApp.getEngine().fromGuiVideoRecord( eVideoRecordStateStartRecording, m_AssetInfo.getCreatorId(), m_FileName.c_str() );
 		if( true == actionResult )
 		{
-			m_TimeRecStart		= time(0);
+			m_TimeRecStart		= GetTimeStampMs();
 			m_TimeRecCurrent	= m_TimeRecStart;
 			m_AssetInfo.setCreationTime( m_TimeRecCurrent );
 			m_ElapseTimer->start( 400 );
@@ -214,7 +214,7 @@ void InputBaseWidget::slotElapsedTimerTimeout( void )
 //============================================================================
 void InputBaseWidget::updateElapsedTime( void )
 {
-	m_TimeRecCurrent = time(0);
+	m_TimeRecCurrent = GetTimeStampMs();
 	time_t timeDif = m_TimeRecCurrent - m_TimeRecStart;
 	std::string elapsedTime = VxTimeUtil::formatTimeDiffIntoMinutesAndSeconds( timeDif );
 	emit signalElapsedRecTime( elapsedTime.c_str() );

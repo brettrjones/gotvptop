@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "VxSktUtil.h"
@@ -58,10 +58,6 @@ namespace
 //============================================================================
 VxServerMgr::VxServerMgr()
 : VxSktBaseMgr()
-, m_u16ListenPort( 0 )		// what port to listen on
-, m_iActiveListenSktCnt( 0 )		// listening socket
-, m_LastWatchdogKick( 0 )
-, m_IsReadyToAcceptConnections( false )
 {
 	m_iAcceptMgrCnt++;
 	m_iMgrId = m_iAcceptMgrCnt;
@@ -87,7 +83,7 @@ void VxServerMgr::sktMgrShutdown( void )
 void VxServerMgr::fromGuiKickWatchdog( void )
 {
 	//LogMsg( LOG_SKT, "VxServerMgr: fromGuiKickWatchdog\n" );
-	m_LastWatchdogKick = time(0);
+	m_LastWatchdogKickMs = GetTimeStampMs();
 }
 
 //============================================================================
@@ -103,7 +99,7 @@ bool VxServerMgr::checkWatchdog( void )
 	return true; // if we are debugging don't timeout because we are on a breakpoint
 #endif 
 
-	if( ( time(0) - m_LastWatchdogKick ) < 4 )
+	if( ( GetTimeStampMs() - m_LastWatchdogKickMs ) < 4000 )
 	{
 		return true;
 	}
@@ -138,7 +134,7 @@ RCODE VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 		return -1;
 	}
 
-	m_LastWatchdogKick = time( 0 );
+	m_LastWatchdogKickMs = GetTimeStampMs();
 	std::string ipv4String = ip;
 	m_u16ListenPort = u16ListenPort;
 #if defined(DEBUG_SKT_CONNECTIONS)

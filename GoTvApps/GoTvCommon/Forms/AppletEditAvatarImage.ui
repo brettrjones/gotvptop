@@ -76,32 +76,7 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QPushButton" name="m_BrowsePictureButton">
-          <property name="text">
-           <string>Browse</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="m_TakeSnapshotButton">
-          <property name="text">
-           <string>Take Snapshot</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QLabel" name="m_PictureOfMeFrame">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
+       <widget class="ThumbnailEditWidget" name="widget" native="true"/>
       </item>
       <item>
        <spacer name="verticalSpacer">
@@ -126,6 +101,12 @@
    <class>ServiceSettingsWidget</class>
    <extends>QWidget</extends>
    <header>ServiceSettingsWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ThumbnailEditWidget</class>
+   <extends>QWidget</extends>
+   <header>ThumbnailEditWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

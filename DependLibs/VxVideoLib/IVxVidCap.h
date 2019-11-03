@@ -49,8 +49,8 @@ IVxVidCap * VxGetVidCapInterface( void );
 class IVxVidCap
 {
 public:
-	IVxVidCap(){};
-	virtual ~IVxVidCap(){};
+	IVxVidCap() = default;
+	virtual ~IVxVidCap() = default;
 	//! startup return number of video sources ( iVidSrcNum is zero to number of Video Sources - 1 )
 	virtual int				startupVidCap( int iPreferedImageWidth = 640, int iPreferedImageHeight = 480 ) = 0;
 	//! shutdown

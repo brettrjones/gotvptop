@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include <CoreLib/AssetDefs.h>
@@ -55,14 +55,14 @@ protected:
 	void						updateElapsedTime( void );
 
 	//=== vars ===//
-	AppCommon&				m_MyApp;
+	AppCommon&				    m_MyApp;
 	ChatEntryWidget *			m_ChatEntryWidget;
 	VxNetIdent *				m_MyIdent;
 	VxNetIdent *				m_HisIdent;
 	AssetInfo					m_AssetInfo;
 	std::string					m_FileName;
-	time_t						m_TimeRecStart;
-	time_t						m_TimeRecCurrent;
+	int64_t						m_TimeRecStart;
+    int64_t						m_TimeRecCurrent;
 	QTimer *					m_ElapseTimer;
 	bool						m_IsPersonalRecorder;
 };

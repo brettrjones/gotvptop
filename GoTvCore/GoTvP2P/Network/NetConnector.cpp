@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "NetConnector.h"
@@ -156,8 +156,8 @@ void NetConnector::handleAnnounceResults( HostList * anchorList, EConnectReason 
 		}
 
 		std::string onlineName = entry->getOnlineName();
-		if( ( onlineName == "gotvptop.com" ) 
-			|| ( onlineName == "gotvptop.com" ) )
+		if( ( onlineName == "nolimitconnect.net" ) 
+			|| ( onlineName == "nolimitconnect.com" ) )
 		{
 			// hack to exclude gotvptop anchor and connect servers.. TODO fix with some kind of settings instead
 			continue;

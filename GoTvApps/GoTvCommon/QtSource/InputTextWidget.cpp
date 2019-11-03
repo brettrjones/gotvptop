@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "InputTextWidget.h"
@@ -52,7 +52,7 @@ void InputTextWidget::slotSendButtonClicked( void )
 		m_AssetInfo.setAssetName( message.toUtf8().constData() );
 		m_AssetInfo.generateNewUniqueId();
 		m_AssetInfo.setAssetLength( message.length() );
-		m_TimeRecCurrent	= time(0);
+		m_TimeRecCurrent	= GetTimeStampMs();
 		m_AssetInfo.setCreationTime( m_TimeRecCurrent );
 		m_MyApp.getEngine().fromGuiAssetAction( m_IsPersonalRecorder ? eAssetActionAddToAssetMgr : eAssetActionAddAssetAndSend,  m_AssetInfo );
 	}

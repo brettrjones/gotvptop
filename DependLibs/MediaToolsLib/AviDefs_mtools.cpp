@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "AviDefs.h"
@@ -250,7 +250,7 @@ AviVidJunk::AviVidJunk()
 , m_JunkLen( sizeof( AviVidJunk )  - 8 )
 {
 	memset( m_JunkData, 0, sizeof( m_JunkData ) );
-	strcpy( (char *)m_JunkData, "Created by My P2P Web at http://www.gotvptop.com" );
+	strcpy( (char *)m_JunkData, "Created by My P2P Web at http://www.nolimitconnect.com" );
 }
 
 //============================================================================
@@ -259,7 +259,7 @@ AviAudioJunk::AviAudioJunk()
 , m_JunkLen( sizeof( AviAudioJunk )  - 8 )
 {
 	memset( m_JunkData, 0, sizeof( m_JunkData ) );
-	strcpy( (char *)m_JunkData, "Created by My P2P Web at http://www.gotvptop.com" );
+	strcpy( (char *)m_JunkData, "Created by My P2P Web at http://www.nolimitconnect.com" );
 }
 
 //============================================================================

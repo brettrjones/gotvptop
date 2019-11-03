@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "NetworkStateMachine.h"
@@ -490,9 +490,9 @@ void NetworkStateMachine::startUpnpOpenPort( void )
 		if( m_Engine.getEngineSettings().getUseUpnpPortForward() )
 		{
 			std::string			lclIp			= m_NetworkMgr.getLocalIpAddress();
-			time_t				timeNow			= time( 0 );
+			int64_t				timeNow			= GetTimeStampMs();
 
-			if( ( ( timeNow - m_LastUpnpForwardTime ) < 180 )
+			if( ( ( timeNow - m_LastUpnpForwardTime ) < 180000 )
 				&& ( m_LastUpnpForwardPort == u16Port )
 				&& ( m_LastUpnpForwardIp == lclIp ) )
 			{

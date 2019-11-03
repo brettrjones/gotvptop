@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "RcWebServer.h"
@@ -377,7 +377,7 @@ bool RcWebServer::VerifyPwd( uint32_t u32IpAddr, EWbMyFiles eFileType, const cha
 	}
 	bool	bPwdOk		= m_aoMyFiles[ eFileType ].VerifyPwd( pPwd );
 	bool	bFoundEntry = false;
-	uint32_t		u32CurTime	= time( NULL );
+    int64_t		curTime	= GetTimeStampMs();
 
 	std::vector<VxSharedFilesAuth>::iterator iter;
 	m_SktMgrMutex.lock(__FILE__,__LINE__);
@@ -386,7 +386,7 @@ bool RcWebServer::VerifyPwd( uint32_t u32IpAddr, EWbMyFiles eFileType, const cha
 		if( (*iter).m_u32Ip == u32IpAddr )
 		{
 			bFoundEntry = true;
-			(*iter).m_u64LastAttemptTime = u32CurTime;
+			(*iter).m_u64LastAttemptTime = curTime;
 			if( bPwdOk )
 			{
 				(*iter).m_aoPwds[ eFileType ].m_strPwd = pPwd;
@@ -409,7 +409,7 @@ bool RcWebServer::VerifyPwd( uint32_t u32IpAddr, EWbMyFiles eFileType, const cha
 		// make a entry for next time
 		VxSharedFilesAuth oAuth;
 		oAuth.m_u32Ip = u32IpAddr;
-		oAuth.m_u64LastAttemptTime = u32CurTime;
+		oAuth.m_LastAttemptTimeMs = curTime;
 		if( bPwdOk )
 		{
 			oAuth.m_aoPwds[ eFileType ].m_strPwd = pPwd;
@@ -418,6 +418,7 @@ bool RcWebServer::VerifyPwd( uint32_t u32IpAddr, EWbMyFiles eFileType, const cha
 		{
 			oAuth.m_aoPwds[ eFileType ].m_iPwdAttempts++;
 		}
+
 		m_aoAuthorizations.push_back( oAuth );
 	}
 
@@ -441,13 +442,13 @@ static int iSecCnt = 0;
 	iSecCnt = 0;
 
 	std::vector<VxSharedFilesAuth>::iterator iter;
-	uint64_t u64CurTime = time( NULL );
+	int64_t curTime = time( NULL );
 
 	m_SktMgrMutex.lock(__FILE__,__LINE__);
 	for( iter = m_aoAuthorizations.begin(); iter != m_aoAuthorizations.end(); ++iter )
 	{
 
-		if( u64CurTime - (*iter).m_u64LastAttemptTime > 3600 )
+		if( curTime - (*iter).m_LastAttemptTimeMs > 3600000 )
 		{
 			m_aoAuthorizations.erase( iter );
 		}

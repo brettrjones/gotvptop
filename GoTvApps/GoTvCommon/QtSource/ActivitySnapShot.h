@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "ActivityBase.h"
@@ -34,17 +34,19 @@ public:
     virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
     virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
-public slots:
-	void						onSnapShotButClick( void );
-	void						onCancelButClick( void ); 
-
 signals:
 	void						signalJpgSnapshot(uint8_t* pu8JpgData,uint32_t u32DataLen,int iWidth,int iHeight );
+
+public slots:
+    void						onSnapShotButClick( void );
+    void						onCancelButClick( void );
 
 protected:
 	Ui::snapshotDialog			ui;
 	IVxVidCap *					m_VidCap;
+    bool 					    m_CameraSourceAvail = false;
+    QTimer *                    m_CloseDlgTimer = nullptr;
 
-	uint8_t *						m_pu8BitmapData;	// snapshot bitmap
-	uint32_t							m_u32BitmapLen;		// bitmap length
+	uint8_t *					m_pu8BitmapData = nullptr;	// snapshot bitmap
+	uint32_t					m_u32BitmapLen = 0;		// bitmap length
 };

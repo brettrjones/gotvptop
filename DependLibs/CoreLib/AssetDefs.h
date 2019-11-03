@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include <config_gotvcore.h>
@@ -41,7 +41,9 @@ enum EAssetType
 	eAssetTypeChatText				= 0x100,
 	eAssetTypeChatFace				= 0x200,
 	eAssetTypeChatStockAvatar		= 0x400,
-	eAssetTypeChatCustomAvatar		= 0x800
+	eAssetTypeChatCustomAvatar		= 0x800,
+    eAssetTypeThumbnail             = 0x1000,
+    eAssetTypeCamRecord             = 0x2000
 };
 
 enum EAssetLocation
@@ -50,6 +52,8 @@ enum EAssetLocation
 	eAssetLocLibrary				= 0x01,
 	eAssetLocShared					= 0x02,
 	eAssetLocPersonalRec			= 0x04,
+    eAssetLocThumbDirectory         = 0x08,
+    eAssetLocCamRecord              = 0x10
 };
 
 enum EAssetAction

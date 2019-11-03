@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "PktTypes.h"
@@ -132,7 +132,7 @@ void PktAssetSendReq::setAssetNameAndTag( const char * pAssetName, const char * 
 		}
 	}
 
-	uint16_t u16PktLen = (sizeof( PktAssetSendReq ) - sizeof( m_AssetNameAndTag )) + nameLen + tagLen;
+	uint16_t u16PktLen = ( uint16_t )( ( sizeof( PktAssetSendReq ) - sizeof( m_AssetNameAndTag ) ) + nameLen + tagLen );
 	setPktLength( ROUND_TO_16BYTE_BOUNDRY( u16PktLen ) );
 }
 

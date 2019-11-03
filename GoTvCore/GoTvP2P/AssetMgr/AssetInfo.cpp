@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include <config_gotvcore.h>
@@ -67,7 +67,7 @@ AssetInfo::AssetInfo( const std::string& fileName, uint64_t assetLen, uint16_t a
 , m_u16AssetType( assetType )
 , m_LocationFlags( 0 )
 , m_AssetSendState( eAssetSendStateNone )
-, m_CreationTime( 0 )
+, m_CreationTime( GetTimeStampMs() )
 , m_PlayPosition0to100000( 0 )
 { 
 }
@@ -80,7 +80,7 @@ AssetInfo::AssetInfo( const char * fileName, uint64_t fileLen, uint8_t fileType 
 , m_u16AssetType( fileType )
 , m_LocationFlags( 0 )
 , m_AssetSendState( eAssetSendStateNone )
-, m_CreationTime( time( 0 ) )
+, m_CreationTime( GetTimeStampMs() )
 , m_PlayPosition0to100000( 0 )
 {
 }

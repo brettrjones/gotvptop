@@ -9,7 +9,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "AppletEditAboutMe.h"
@@ -31,13 +31,9 @@
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxGlobals.h>
 
-#define SUPPORTED_IMAGE_FILES "Image files (*.bmp *.gif *.jpg *.jpeg *.png *.pbm *.pgm *.ppm *.xbm *.xpm)"
-
 //============================================================================
 AppletEditAboutMe::AppletEditAboutMe( AppCommon& app, QWidget * parent )
 : AppletBase( OBJNAME_APPLET_EDIT_ABOUT_ME, app, parent )
-, m_bUserPickedImage( false )
-, m_bUsingDefaultImage( true )
 {
     setAppletType( eAppletEditAboutMe );
     ui.setupUi( getContentItemsFrame() );

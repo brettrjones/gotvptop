@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Network Settings</string>
+   <string>Edit About Me</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -117,6 +117,21 @@
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <property name="spacing">
+         <number>10</number>
+        </property>
+        <property name="leftMargin">
+         <number>5</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>5</number>
+        </property>
+        <property name="bottomMargin">
+         <number>5</number>
+        </property>
         <item>
          <widget class="QPushButton" name="m_BrowsePictureButton">
           <property name="text">
@@ -141,6 +156,9 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
        </widget>
       </item>
       <item>
@@ -163,7 +181,7 @@
       <item>
        <widget class="QLineEdit" name="m_FavoriteWebsite3Edit">
         <property name="text">
-         <string>http://www.gotvptop.com</string>
+         <string>http://www.nolimitconnect.com</string>
         </property>
        </widget>
       </item>

@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "PktTypes.h"
@@ -82,7 +82,7 @@ void PktFileGetReply::setFileName( std::string &csName )
         m_FileName[ 0 ] = 0;
     }
 
-	uint16_t u16PktLen = (sizeof( PktFileGetReply ) - sizeof( m_FileName )) + strlen( m_FileName ) + 1;
+	uint16_t u16PktLen = ( uint16_t)(( sizeof( PktFileGetReply ) - sizeof( m_FileName )) + strlen( m_FileName ) + 1);
 	setPktLength( ROUND_TO_16BYTE_BOUNDRY( u16PktLen ) );
 }
 

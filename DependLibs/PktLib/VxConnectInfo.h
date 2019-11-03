@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "VxConnectId.h"
@@ -25,8 +25,9 @@
 #define OS_WINDOWS_FLAG				0x08	
 
 
-#define MAX_ONLINE_NAME_LEN		24	//maximum length of online name including 0 terminator
-#define MAX_ONLINE_DESC_LEN		28	//maximum length of online description including 0 terminator
+#define MAX_ONLINE_NAME_LEN		    24	//maximum length of online name including 0 terminator
+#define MAX_ONLINE_DESC_LEN		    28	//maximum length of online description including 0 terminator
+#define MAX_NET_HOST_URL_LEN		64	//maximum length of online description including 0 terminator
 
 #pragma pack(push) 
 #pragma pack(1)
@@ -49,7 +50,7 @@ public:
 	void						setMyOnlineId( uint64_t u64HiPart, uint64_t u64LoPart );
 	VxGUID&						getMyOnlineId();
 	void						getMyOnlineId( std::string& strRetId );
-    std::string&				getMyOnlineIdHexString( void )  { return m_DirectConnectId.toHexString(); }
+    std::string				    getMyOnlineIdHexString( void )  { return m_DirectConnectId.toHexString(); }
     uint64_t					getMyOnlineIdLoPart();
 	uint64_t					getMyOnlineIdHiPart();
 	void						setMyOnlinePort( uint16_t port );
@@ -111,8 +112,8 @@ public:
 	void 						setOnlineDescription( const char * pUserDesc );
 	char *						getOnlineDescription( void );
 
-	void 						setTimeLastContact( int64_t timeStamp )				{ m_TimeLastContact = timeStamp; }
-	int64_t	    				getTimeLastContact( void )					        { return m_TimeLastContact; }		
+	void 						setTimeLastContact( int64_t timeStamp )				{ m_TimeLastContactMs = timeStamp; }
+	int64_t	    				getTimeLastContact( void )					        { return m_TimeLastContactMs; }
 
     /// @brief return indenty unique folder name in the form of OnlineName_GuidHexString
     std::string	    			getIdentFolderName( void );
@@ -121,13 +122,21 @@ public:
 private:
 	char						m_OnlineName[ MAX_ONLINE_NAME_LEN ];	// users online name
 	char						m_OnlineDesc[ MAX_ONLINE_DESC_LEN ]; // users online description 28 bytes
-	int64_t	    				m_TimeLastContact;
-	uint32_t					m_IdentRes1;
-	uint32_t					m_IdentRes2;
+	int64_t	    				m_TimeLastContactMs = 0;
+	uint32_t					m_IdentRes1 = 0;
+	uint32_t					m_IdentRes2 = 0;
+    VxGUID                      m_AvatarGuid;
+
+    VxGUID                      m_NetHostGuid;
+    VxGUID                      m_GroupListGuid;
+    VxGUID                      m_GroupHostGuid;
+    char						m_NetHostUrl[ MAX_NET_HOST_URL_LEN ];
+    char						m_GroupListHostUrl[ MAX_NET_HOST_URL_LEN ]; 
+    char						m_GroupHostUrl[ MAX_NET_HOST_URL_LEN ];
 };
 
 //   152 bytes VxConnectBaseInfo
-// +   8 bytes m_u32TimeTcpLastContact
+// +   8 bytes m_s64TimeTcpLastContactMs
 // +   8 bytes last connect attempt
 // +   8 bytes reserved to fill to 16 byte boundary
 // = 176 bytes total

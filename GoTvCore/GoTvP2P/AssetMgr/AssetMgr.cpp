@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include <config_gotvcore.h>
@@ -27,6 +27,8 @@
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxFileIsTypeFunctions.h>
 #include <CoreLib/VxGlobals.h>
+#include <CoreLib/VxTime.h>
+
 
 #include <time.h>
 
@@ -260,7 +262,7 @@ bool AssetMgr::addAssetFile(	    const char *	fileName,
 									uint8_t *		hashId, 
 									EAssetLocation	locationFlags, 
 									const char *	assetTag, 
-									time_t			timestamp )
+                                    int64_t			timestamp )
 {
 	AssetInfo * assetInfo = createAssetInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
 	if( assetInfo )
@@ -279,7 +281,7 @@ bool AssetMgr::addAssetFile(	    const char *	fileName,
 									uint8_t *		hashId, 
 									EAssetLocation	locationFlags, 
 									const char *	assetTag, 
-									time_t			timestamp )
+                                    int64_t			timestamp )
 {
 	AssetInfo * assetInfo = createAssetInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
 	if( assetInfo )
@@ -318,7 +320,7 @@ AssetInfo * AssetMgr::createAssetInfo( 	const char *	fileName,
 										uint8_t *	    hashId, 
 										EAssetLocation	locationFlags, 
 										const char *	assetTag, 
-										time_t			timestamp )
+                                        int64_t			timestamp )
 {
 	uint64_t  fileLen = VxFileUtil::getFileLen( fileName );
 	uint8_t	fileType = VxFileExtensionToFileTypeFlag( fileName );
@@ -339,7 +341,7 @@ AssetInfo * AssetMgr::createAssetInfo( 	const char *	fileName,
 	assetInfo->getAssetHashId().setHashData( hashId );
 	assetInfo->setLocationFlags( locationFlags );
 	assetInfo->setAssetTag( assetTag );
-	assetInfo->setCreationTime( timestamp ? timestamp : time(0) );
+	assetInfo->setCreationTime( timestamp ? timestamp : GetTimeStampMs() );
 
 	return assetInfo;
 }
@@ -361,7 +363,7 @@ bool AssetMgr::insertNewInfo( AssetInfo * assetInfo )
 
 	if( 0 == assetInfo->getCreationTime() )
 	{
-		assetInfo->setCreationTime( time(0) );
+		assetInfo->setCreationTime( GetTimeStampMs() );
 	}
 
 	//if( assetInfo->needsHashGenerated() )

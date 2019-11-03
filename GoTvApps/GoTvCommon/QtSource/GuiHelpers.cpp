@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "GuiHelpers.h"
@@ -24,6 +24,11 @@
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/ObjectCommon.h>
 
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <VxVideoLib/VxVideoLib.h>
+#include <VxVideoLib/VxVidCap.h>
+
+
 #include <QDesktopServices>
 #include <QComboBox>
 #include <QDebug>
@@ -32,6 +37,27 @@
 #include <QFile>
 #include <QLineEdit>
 #include <QUrl>
+
+
+//============================================================================
+bool GuiHelpers::isCameraSourceAvailable()
+{
+    bool cameraAvail = false;
+#ifdef TARGET_OS_WINDOWS
+    IVxVidCap * vidCap = VxGetVidCapInterface();
+    if( vidCap )
+    {
+        if( 0 != vidCap->startupVidCap() )
+        {
+            cameraAvail = true;
+        }
+
+        vidCap->shutdownVidCap();
+    }
+#endif // TARGET_OS_WINDOWS
+
+    return cameraAvail;
+}
 
 //============================================================================
 const char * GuiHelpers::describeResponse( EOfferResponse eOfferResponse )

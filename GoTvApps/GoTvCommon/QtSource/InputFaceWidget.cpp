@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "InputFaceWidget.h"
@@ -133,7 +133,7 @@ void InputFaceWidget::faceLabelClicked( int faceNum )
 	m_AssetInfo.setAssetName( assetBuf );
 	m_AssetInfo.generateNewUniqueId();
 	m_AssetInfo.setAssetLength( 0 );
-	m_TimeRecCurrent	= time(0);
+	m_TimeRecCurrent	= GetTimeStampMs();
 	m_AssetInfo.setCreationTime( m_TimeRecCurrent );
 	m_MyApp.getEngine().fromGuiAssetAction( m_IsPersonalRecorder ? eAssetActionAddToAssetMgr : eAssetActionAddAssetAndSend,  m_AssetInfo );
 

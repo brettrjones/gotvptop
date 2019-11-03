@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "AppletBase.h"
@@ -60,6 +60,7 @@ protected:
     std::string					m_strUserSepecificDataDir;
     bool						m_bUserPickedImage = false;
     bool						m_bUsingDefaultImage = true;
+    bool						m_HaveCameraSource = false;
 };
 
 

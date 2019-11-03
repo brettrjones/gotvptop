@@ -9,7 +9,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "AppletEditAvatarImage.h"
@@ -36,8 +36,6 @@
 //============================================================================
 AppletEditAvatarImage::AppletEditAvatarImage( AppCommon& app, QWidget * parent )
 : AppletBase( OBJNAME_APPLET_EDIT_AVATAR_IMAGE, app, parent )
-, m_bUserPickedImage( false )
-, m_bUsingDefaultImage( true )
 {
     setAppletType( eAppletEditAvatarImage );
     ui.setupUi( getContentItemsFrame() );
@@ -47,6 +45,8 @@ AppletEditAvatarImage::AppletEditAvatarImage( AppCommon& app, QWidget * parent )
     m_MyIdent = m_MyApp.getAppGlobals().getUserIdent();
     m_strOrigOnlineName = m_MyIdent->getOnlineName();
     m_strOrigMoodMessage = m_MyIdent->getOnlineDescription();
+
+
 
     m_strUserSepecificDataDir = VxGetUserSpecificDataDirectory();
     m_strDefaultPicPath = m_strUserSepecificDataDir + "profile/";
@@ -84,8 +84,6 @@ AppletEditAvatarImage::AppletEditAvatarImage( AppCommon& app, QWidget * parent )
         m_bUsingDefaultImage = true;
     }
 
-    connect( ui.m_BrowsePictureButton, SIGNAL( clicked() ), this, SLOT( onBrowseButClick() ) );
-    connect( ui.m_TakeSnapshotButton, SIGNAL( clicked() ), this, SLOT( onSnapshotButClick() ) );
     connect( ui.m_ApplyAboutMeButton, SIGNAL( clicked() ), this, SLOT( onApplyButClick() ) );
 
 	m_MyApp.activityStateChange( this, true );

@@ -9,7 +9,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "RenderGlWidget.h"
@@ -126,10 +126,10 @@ bool RenderGlWidget::clearBuffers( GoTvColor color )
 	}
 
     VerifyGLStateQt();
-    float r = GET_R( color ) / 255.0f;
-    float g = GET_G( color ) / 255.0f;
-    float b = GET_B( color ) / 255.0f;
-    float a = GET_A( color ) / 255.0f;
+    //float r = GET_R( color ) / 255.0f;
+    //float g = GET_G( color ) / 255.0f;
+    //float b = GET_B( color ) / 255.0f;
+    //float a = GET_A( color ) / 255.0f;
 
     //getGlFunctions()->glClearColor( r, g, b, a );
     //glClearColor( 0.1f, 0.1f, 0.2f, 1.0f );

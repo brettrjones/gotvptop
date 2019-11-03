@@ -20,7 +20,7 @@ extern "C" {
 void                        SetUseMillitaryTime( bool useMilitaryTime );
 bool                        GetUseMillitaryTime( );
 
-int64_t				        GetTimeStampMs( void );			            // milli seconds since January 1, 1970 GMT time
+int64_t				        GetTimeStampMs( void );			            // milli seconds since January 1, 1970 GMT time ( Same as GetGmtTimeMs )
 
 int64_t				        GetApplicationAliveMs( void );              // milliseconds since application initialize
 inline uint32_t				GetApplicationAliveSec( void )              { return ( uint32_t) (GetApplicationAliveMs() / 1000); }

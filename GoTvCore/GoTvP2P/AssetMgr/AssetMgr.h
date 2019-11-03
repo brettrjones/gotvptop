@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include <config_gotvcore.h>
@@ -71,7 +71,7 @@ public:
 												uint8_t *		hashId = 0, 
 												EAssetLocation	locationFlags = eAssetLocUnknown, 
 												const char *	assetTag = "", 
-												time_t			timestamp = 0 );
+												int64_t		    timestamp = 0 );
 
 	bool						addAssetFile(	const char *	fileName, 
 												VxGUID&			assetId,  
@@ -80,7 +80,7 @@ public:
 												uint8_t *		hashId = 0, 
 												EAssetLocation	locationFlags = eAssetLocUnknown, 
 												const char *	assetTag = "", 
-												time_t			timestamp = 0 );
+                                                int64_t			timestamp = 0 );
 
 	bool						addAsset( AssetInfo& assetInfo );
 	bool						removeAsset( std::string fileName );

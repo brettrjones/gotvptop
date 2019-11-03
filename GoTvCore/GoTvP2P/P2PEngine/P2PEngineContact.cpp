@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
@@ -313,8 +313,8 @@ void P2PEngine::fromGuiSendContactList( EFriendViewType eFriendView, int maxCont
 	}
 
 	sendToGuiTheContactList( maxContactsToSend );
-	time_t timeNow = time( 0 );
-	if( 60 < ( timeNow - m_LastTimeAnnounceFromContactListCalled )  )
+	int64_t timeNow = GetTimeStampMs();
+	if( 60000 < ( timeNow - m_LastTimeAnnounceFromContactListCalled )  )
 	{
 		if( m_NetworkStateMachine.isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnNetHost() ) )
 		{
@@ -327,14 +327,14 @@ void P2PEngine::fromGuiSendContactList( EFriendViewType eFriendView, int maxCont
 //============================================================================
 void P2PEngine::fromGuiRefreshContactList( int maxContactsToSend )
 {
-	time_t timeNow = time( 0 );
-	if( 180 < ( timeNow - m_LastTimeAnnounceFromContactListCalled )  )
+    int64_t timeNow = GetTimeStampMs();
+	if( 180000 < ( timeNow - m_LastTimeAnnounceFromContactListCalled )  )
 	{
 		m_LastTimeAnnounceFromContactListCalled = timeNow;
 		// force reconnect etc
 		fromGuiNetworkSettingsChanged();
 	}
-	else if( 60 < ( timeNow - m_LastTimeAnnounceFromContactListCalled )  )
+	else if( 60000 < ( timeNow - m_LastTimeAnnounceFromContactListCalled )  )
 	{
 		if( m_NetworkStateMachine.isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnNetHost() ) )
 		{

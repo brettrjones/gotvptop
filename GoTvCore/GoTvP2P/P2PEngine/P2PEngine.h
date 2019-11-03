@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "config_gotvcore.h"
@@ -531,8 +531,8 @@ protected:
 
 	PluginMgr&					m_PluginMgr;
 	MediaProcessor&				m_MediaProcessor;
-	PluginServiceRelay *				m_PluginServiceRelay;
-	PluginServiceFileShare *			m_PluginServiceFileShare;
+	PluginServiceRelay *		m_PluginServiceRelay;
+	PluginServiceFileShare *	m_PluginServiceFileShare;
 	PluginNetServices *			m_PluginNetServices;
 	IsPortOpenTest&				m_IsPortOpenTest;
 
@@ -543,7 +543,7 @@ protected:
 	EFriendViewType				m_eFriendView;
 	unsigned int				m_iCurPreferredRelayConnectIdx;
 	VxGUID						m_NextFileInstance;
-	time_t						m_LastTimeAnnounceFromContactListCalled;
+    int64_t						m_LastTimeAnnounceFromContactListCalled;
 	bool						m_AppStartupCalled;
 	bool						m_AppIsPaused;
 	bool						m_IsUserSpecificDirSet;

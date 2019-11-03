@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "PktLogReply.h"
@@ -33,7 +33,7 @@ PktLogReply::PktLogReply()
 void PktLogReply::setLogMsg( const char * msg )
 {
 	vx_assert( msg );
-	uint16_t msgLen = strlen( msg );
+	uint16_t msgLen = ( uint16_t)strlen( msg );
 	vx_assert( MAX_LOG_MSG_LEN > msgLen );
 	strcpy( (char *)m_au8Data, msg );
 	setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktLogReply ) - sizeof(m_au8Data) + msgLen ) ); 

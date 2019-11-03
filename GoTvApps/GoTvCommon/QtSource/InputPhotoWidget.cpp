@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "InputPhotoWidget.h"
@@ -75,7 +75,7 @@ void InputPhotoWidget::slotSnapShotButtonClicked( void )
 			else
 			{
 				m_AssetInfo.setAssetLength( fileLen );
-				m_TimeRecStart		= time(0);
+				m_TimeRecStart		= GetTimeStampMs();
 				m_TimeRecCurrent	= m_TimeRecStart;
 				m_AssetInfo.setCreationTime( m_TimeRecCurrent );
 				m_MyApp.getEngine().fromGuiAssetAction( m_IsPersonalRecorder ? eAssetActionAddToAssetMgr : eAssetActionAddAssetAndSend,  m_AssetInfo );

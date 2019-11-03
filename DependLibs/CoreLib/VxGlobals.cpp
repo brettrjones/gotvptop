@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 #include "config_corelib.h"
 
@@ -45,24 +45,28 @@ namespace
 
 	uint16_t			g_u16AppVersion					= 0x104;
 #ifdef DEBUG
-    std::string			g_strApplicationTitle			= "GoTv PtoP";
-    std::string			g_strApplicationNameNoSpaces	= "GoTvPtoP";
-    std::string			g_strApplicationNameNoSpacesLowerCase	= "gotvptop";
-    std::string			g_strNetworkName				= "GoTvPtoPTestNet";
-	std::string			g_strCompanyWebsite				= "http://www.gotvptop.com";
-    std::string			g_strCompanyDomain				= "gotvptop.com";
-    std::string			g_strOrginizationName           = "gotvptop";
+    std::string			g_strApplicationTitle			= "No Limit Connect";
+    std::string			g_strApplicationNameNoSpaces	= "NoLimitConnect";
+    std::string			g_strApplicationNameNoSpacesLowerCase	= "nolimitconnect";
+    std::string			g_strNetworkName				= "NoLimitNet";
+	std::string			g_strCompanyWebsite				= "http://www.nolimitconnect.com";
+    std::string			g_strCompanyDomain				= "nolimitconnect.com";
+    std::string			g_strOrginizationName           = "nolimitconnect";
 	bool				g_IsAppCommercial				= false;
 #else
-    std::string			g_strApplicationTitle			= "GoTv PtoP";
-    std::string			g_strApplicationNameNoSpaces	= "GoTvPtoP";
-    std::string			g_strApplicationNameNoSpacesLowerCase	= "gotvptop";
-    std::string			g_strNetworkName				= "GoTvPtoPNet";
-	std::string			g_strCompanyWebsite				= "http://www.gotvptop.com";
-    std::string			g_strCompanyDomain				= "gotvptop.com";
-    std::string			g_strOrginizationName           = "gotvptop";
+    std::string			g_strApplicationTitle			= "No Limit Connect";
+    std::string			g_strApplicationNameNoSpaces	= "NoLimitConnect";
+    std::string			g_strApplicationNameNoSpacesLowerCase	= "nolimitconnect";
+    std::string			g_strNetworkName				= "NoLimitNet";
+	std::string			g_strCompanyWebsite				= "http://www.nolimitconnect.com";
+    std::string			g_strCompanyDomain				= "nolimitconnect.com";
+    std::string			g_strOrginizationName           = "nolimitconnect";
 	bool				g_IsAppCommercial				= false;
 #endif // APP_MYP2PWEB
+    std::string			g_strNetworkHostName            = "nolimitconnect.net";
+    std::string			g_strNetworkHostUrl             = "ptop://nolimitconnect.net";
+
+
 	// exe and app resouces paths
     std::string			g_strAppExeDir                  = "";
 	std::string			g_strKodiExeDir				    = "";
@@ -93,6 +97,8 @@ namespace
 	std::string			g_strDownloadsDir				= "";
 	std::string			g_strIncompleteDir				= "";
 	std::string			g_strPersonalRecordDir			= "";
+    std::string			g_strAppThumbsDir               = "";
+    std::string			g_strAppCamRecord               = "";
 
 
 	bool				g_bIsAppShuttingDown			= false;
@@ -100,6 +106,24 @@ namespace
 	bool				g_bIsDebugEnabled				= true;
 	VxGUID				g_MyOnlineId;
 	std::string			g_LclIpAddress					= "";
+}
+
+//============================================================================
+void VxSetGoTvNetworkHostName( const char * netHostName )
+{
+    g_strNetworkHostName = netHostName;
+    g_strNetworkHostUrl = "ptop://";
+    g_strNetworkHostUrl += netHostName;
+}
+//============================================================================
+const char * VxGetNetworkHostName( void )
+{
+    return g_strNetworkHostName.c_str();
+}
+//============================================================================
+const char * VxGetNetworkHostUrl( void )
+{
+    return g_strNetworkHostUrl.c_str();
 }
 
 // directory structure on disk
@@ -120,6 +144,7 @@ namespace
 //                  /gotv/gui/	gui assets
 //						 /shaders/ opengl shaders
 //                       /profile/ profile default files
+//                       /thumbs/ thumbnail assets directory
 //
 // user specific directories.. NOTE: hasnum is 4 digit hash of exe path and userId is user login name
 //                  /storage/GoTvPtoP/hashnum/accounts/userId/settings/		databases for user settings etc
@@ -130,6 +155,8 @@ namespace
 //																/incomplete		not yet completed downloads
 //																/me/			personal recordings
 //																/contacts/		contact assets
+//																/camrecord/		web cam recordings
+
 
 std::string& VxGetAppDirectory(EAppDir appDir)
 {
@@ -183,6 +210,11 @@ std::string& VxGetAppDirectory(EAppDir appDir)
 		return g_strIncompleteDir;
 	case eAppDirPersonalRecords:
 		return g_strPersonalRecordDir;
+    case eAppDirThumbs:
+        return g_strAppThumbsDir;
+    case eAppDirCamRecord:
+        return g_strAppCamRecord;
+
 	}
 
 static std::string emptyStr = "";
@@ -423,6 +455,9 @@ void VxSetRootDataStorageDirectory(const char * rootDataDir)
 	g_strAppGoTvDataDir = g_strRootDataStorageDir + "gotv/";
 	VxFileUtil::makeDirectory(g_strAppGoTvDataDir.c_str());
 
+    g_strAppThumbsDir = g_strRootDataStorageDir + "gotv/thumbs/";
+    VxFileUtil::makeDirectory( g_strAppThumbsDir.c_str() );
+
 	g_strAppKodiDataDir = g_strRootDataStorageDir + "kodi/";
 	VxFileUtil::makeDirectory( g_strAppKodiDataDir.c_str());
 
@@ -493,6 +528,10 @@ void VxSetUserXferDirectory( const char * userXferDir  )
 
 	g_strPersonalRecordDir	= g_strUserXferDir + "me/";
 	VxFileUtil::makeDirectory( g_strPersonalRecordDir.c_str() );
+
+    g_strAppCamRecord       = g_strUserXferDir + "camrecord/";
+    VxFileUtil::makeDirectory( g_strAppCamRecord.c_str() );
+
 }
 
 //============================================================================

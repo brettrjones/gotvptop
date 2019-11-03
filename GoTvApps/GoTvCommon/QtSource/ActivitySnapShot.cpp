@@ -10,14 +10,14 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "ActivitySnapShot.h"
 #include "AppCommon.h"
 
 #include <QMessageBox>
-#include <QUuid>
+#include <QTimer>
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <VxVideoLib/VxVideoLib.h>
@@ -25,21 +25,23 @@
 //============================================================================
 ActivitySnapShot::ActivitySnapShot( AppCommon& app, QWidget * parent )
 : ActivityBase( OBJNAME_ACTIVITY_SNAP_SHOT, app, parent, eAppletSnapShot, true, false, true )
-, m_pu8BitmapData(0)
-, m_u32BitmapLen(0)
+, m_CloseDlgTimer( new QTimer( this ) )
 {
 	ui.setupUi(this);
     connectBarWidgets();
+    setTitleBarText( QObject::tr( "Take Snapshot" ) );
 
 	connect( ui.snapshotButton, SIGNAL(clicked()), this, SLOT(onSnapShotButClick()));
 	connect( ui.cancelButton, SIGNAL(clicked()), this, SLOT(onCancelButClick()));
-#ifdef TARGET_OS_WINDOWS
-	m_VidCap = VxGetVidCapInterface();
-#endif // TARGET_OS_WINDOWS
-	if( 0 == m_VidCap->startupVidCap() )
+    #ifdef TARGET_OS_WINDOWS
+	    m_VidCap = VxGetVidCapInterface();
+    #endif // TARGET_OS_WINDOWS
+	if( !m_VidCap || 0 == m_VidCap->startupVidCap() )
 	{
-		QMessageBox::warning(this, tr("Video Capture"), tr("No Video Source Available.") );
-		onCancelButClick();
+		QMessageBox::warning(this, QObject::tr("Camera Capture"), QObject::tr("No Camera Source Available.") );
+        connect( m_CloseDlgTimer, SIGNAL( timeout() ), this, SLOT( onCancelButClick() ) );
+        m_CloseDlgTimer->setSingleShot( true );
+        m_CloseDlgTimer->start(300);
 	}
 	else
 	{
@@ -56,7 +58,7 @@ ActivitySnapShot::ActivitySnapShot( AppCommon& app, QWidget * parent )
 }
 
 //============================================================================
-//! browse for picture of me
+//! take picture for me
 void ActivitySnapShot::onSnapShotButClick( void )
 {
 #ifdef TARGET_OS_WINDOWS
@@ -87,8 +89,9 @@ void ActivitySnapShot::onSnapShotButClick( void )
 		delete m_pu8BitmapData;
 		m_pu8BitmapData = NULL; 
 	}
-	close();
+
 #endif // TARGET_OS_WINDOWS
+    close();
 }
 
 //============================================================================
@@ -97,6 +100,6 @@ void ActivitySnapShot::onCancelButClick( void )
 {
 	m_VidCap->shutdownVidCap();
 
-	close();
+    close();
 }
 

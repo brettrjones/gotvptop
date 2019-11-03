@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "RcWebPageSettings.h"
@@ -84,15 +84,11 @@ public:
 class VxSharedFilesAuth
 {
 public:
-	VxSharedFilesAuth()
-		: m_u32Ip(0)
-		, m_u64LastAttemptTime(0)
-	{
-	}
+    VxSharedFilesAuth() = default;
 
 	//=== vars ===//
-	uint32_t							m_u32Ip;							// ip address of remote user				
-	uint64_t							m_u64LastAttemptTime;				// time last attempt was made ( successfull or not )
+	uint32_t					m_u32Ip = 0;							// ip address of remote user				
+	int64_t						m_LastAttemptTimeMs = 0;				// time last attempt was made ( successfull or not )
 	VxPwdEntry					m_aoPwds[ eMaxNormalWbMyFiles ];	// password attempts etc
 };
 

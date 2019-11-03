@@ -9,12 +9,12 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 #pragma once
 
-#include "config_gotvapps.h"
 #include <QColor>
+#include <QSize>
 
 class GuiParams
 {
@@ -26,7 +26,8 @@ public:
     int                         getGuiDpiScale( void ) const { return m_DpiScale; }
     
     static int                  getControlIndicatorWidth( void );
-
+    /// @brief thumbnails are square so this is both width and height
+    static QSize                getThumbnailSize( void );
 
 protected:
     void                        initGuiParams();

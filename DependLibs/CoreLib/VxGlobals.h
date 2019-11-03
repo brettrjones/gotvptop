@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "VxTime.h" // time stamp and other time functions
@@ -51,6 +51,9 @@ enum EAppDir
 	eAppDirIncomplete,
 	eAppDirPersonalRecords,
 
+    eAppDirThumbs,
+    eAppDirCamRecord,
+
 	eMaxAppDir
 
 };
@@ -62,6 +65,11 @@ bool			            VxIsAppShuttingDown( void );
 const char *	            VxGetCompanyDomain( void );
 const char *                VxGetOrginizationNmae( void );
 const char *	            VxGetCompanyWebsite( void );
+
+void	                    VxSetNetworkHostName( const char * netHostName );
+const char *	            VxGetNetworkHostName( void );
+const char *	            VxGetNetworkHostUrl( void );
+
 
 const char *	            VxGetApplicationTitle( void );
 void			            VxSetApplicationNameNoSpaces( const char * pAppName );

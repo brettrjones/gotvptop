@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "config_gotvapps.h"
@@ -21,6 +21,8 @@
 #include <PktLib/VxCommon.h>
 
 #include <QString>
+
+#define SUPPORTED_IMAGE_FILES "Image files (*.bmp *.gif *.jpg *.jpeg *.png *.pbm *.pgm *.ppm *.xbm *.xpm)"
 
 class AppCommon;
 class QWidget;
@@ -32,6 +34,8 @@ class VxNetIdent;
 class GuiHelpers
 {
 public:
+    static bool				    isCameraSourceAvailable();
+
     static QString				getAvailableStorageSpaceText();
     static QString				getJustFileName( QString& fileNameAndPath );
 

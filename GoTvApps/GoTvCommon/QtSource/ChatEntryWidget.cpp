@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "AppCommon.h"
@@ -186,8 +186,7 @@ void ChatEntryWidget::slotAllGalleryButtonClicked( void )
 			assetInfo.setCreatorId( m_MyIdent->getMyOnlineId() );
 			assetInfo.setHistoryId( m_HisIdent->getMyOnlineId() );
 			assetInfo.generateNewUniqueId();
-			time_t timeNow		= time(0);
-			assetInfo.setCreationTime( timeNow );
+			assetInfo.setCreationTime( GetTimeStampMs() );
 			GetAppInstance().getEngine().fromGuiAssetAction( eAssetActionAddToAssetMgr,  assetInfo );
 		}
 	}	

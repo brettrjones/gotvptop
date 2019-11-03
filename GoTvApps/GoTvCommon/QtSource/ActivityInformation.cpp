@@ -9,7 +9,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "ActivityInformation.h"
@@ -108,7 +108,7 @@ void ActivityInformation::updateInformation( void )
     ui.m_InfoText->appendPlainText( getInfoText() );
 }
 
-QString ActivityInformation::m_NoInfoAvailable( QObject::tr( "No Information is local available. please visit http://wwww.gotvptop.com for latest infomation and help" ) );
+QString ActivityInformation::m_NoInfoAvailable( QObject::tr( "No Information is local available. please visit http://wwww.nolimitconnect.com for latest infomation and help" ) );
 
 QString ActivityInformation::m_NetworkDesign( QObject::tr(
     "=== NETWORK DESIGN ===\n"
@@ -116,7 +116,7 @@ QString ActivityInformation::m_NetworkDesign( QObject::tr(
     "NOTE2: For anyone not hosting a GoTvPtoP Hosting Service a VPN is also suggested ( A VPN is not recommended when hosting a GoTvPtoP Network because of the requirement of a fixed ip address )\n"
     "\n"
     "=== TIER 1: GOTVPTOP NETWORK SERVICE* ===\n"
-    "NOTE3: This service requires a fixed IP Address or a DNS url like http://www.gotvptop.net.\n"
+    "NOTE3: This service requires a fixed IP Address or a DNS url like http://www.nolimitconnect.net.\n"
     "REQUIRED SERVICES* AND SUGGESTED PERMISSION LEVELS*\n"
     " CONNECTION TEST SERVICE - ANYBODY\n"
     " GOTVPTOP NETWORK SERVICE - ANYBODY\n"

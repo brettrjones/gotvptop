@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "NetworkMonitor.h"
@@ -146,18 +146,18 @@ void NetworkMonitor::onOncePerSecond( void )
 	{
 		if( m_strCellNetIp.empty() && m_strPreferredAdapterIp.empty() )
 		{
-static time_t timeLastAttempt = 0;
-			time_t timeNow = time( 0 );
-			if( ( timeNow - timeLastAttempt ) > 10 )
+static int64_t timeLastAttempt = 0;
+			int64_t timeNow = GetTimeStampMs();
+			if( ( timeNow - timeLastAttempt ) > 10000 )
 			{
 				// no network ip specified..
 				// picking the first one might pick one that is disconnected we need a active connection to internet
 				//m_strLastFoundIp = pickAddresss[0];
 				VxSktConnectSimple sktConnect;
                 // TODO: replace hardcoded url with NetworkHost url
-				SOCKET skt = sktConnect.connectTo(	"gotvptop.com",		// remote ip or url 
-					80,						// port to connect to
-					8000 );					// timeout attempt to connect
+				SOCKET skt = sktConnect.connectTo( VxGetNetworkHostName(),		// remote ip or url 
+					                                80,						// port to connect to
+					                                8000 );					// timeout attempt to connect
 				if( INVALID_SOCKET != skt )
 				{
 					// get local address

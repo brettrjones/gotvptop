@@ -9,7 +9,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "AppletAboutApp.h"
@@ -70,7 +70,7 @@ void AppletAboutApp::setupAboutMe( void )
 //============================================================================
 void  AppletAboutApp::gotoWebsite( void )
 {
-    QDesktopServices::openUrl( QUrl( "http://www.gotvptop.com/" ) );
+    QDesktopServices::openUrl( QUrl( "http://www.nolimitconnect.com/" ) );
 }
 
 //============================================================================

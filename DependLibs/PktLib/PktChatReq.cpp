@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "PktTypes.h"
@@ -51,7 +51,7 @@ int PktChatReq::addImages( int iImageCnt, uint16_t * pu16Images )
 //============================================================================
 void PktChatReq::addMsg( const char * pMsg )
 {
-	int iLen = strlen( pMsg );
+	int iLen = (int)strlen( pMsg );
 	if( iLen < PKT_CHAT_MAX_MSG_LEN )
 	{
 		strcpy( (char *)m_au8Additional, pMsg );

@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 //
 // bjones.engineer@gmail.com
-// http://www.gotvptop.com
+// http://www.nolimitconnect.com
 //============================================================================
 
 #include "VxConnectInfo.h"
@@ -159,12 +159,12 @@ bool VxConnectBaseInfo::hasValidRelay( void )
 // VxConnectIdent
 //============================================================================
 VxConnectIdent::VxConnectIdent()
-: m_TimeLastContact( 0 )
-, m_IdentRes1( 0 )
-, m_IdentRes2( 0 )
 {
-	m_OnlineName[0] = 0;
-	m_OnlineDesc[0] = 0;
+	m_OnlineName[ 0 ] = 0;
+	m_OnlineDesc[ 0 ] = 0;
+    m_NetHostUrl[ 0 ] = 0;
+    m_GroupListHostUrl[ 0 ] = 0;
+    m_GroupHostUrl[ 0 ] = 0;
 }
 
 //============================================================================
