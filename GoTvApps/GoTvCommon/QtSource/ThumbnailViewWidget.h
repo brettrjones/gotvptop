@@ -25,11 +25,15 @@ public:
     ThumbnailViewWidget( QWidget * parent );
     ~ThumbnailViewWidget() override = default;
 
-    void                        setUserPickedImage( bool userPicked )       { m_bUserPickedImage = userPicked;  }
-    bool                        getUserPickedImage( void )                  { return m_bUserPickedImage; }
+    void                        setIsUserPickedImage( bool userPicked )       { m_bUserPickedImage = userPicked;  }
+    bool                        getIsUserPickedImage( void )                  { return m_bUserPickedImage; }
 
-    void                        browseForImage( void );
+    void                        setThumbnailImage( QPixmap& pixmap )            { cropAndUpdateImage( pixmap ); }
+    const QPixmap *             getThumbnailImage( void )                       { return pixmap(); }
+
+    bool                        loadFromFile( QString fileName );
     bool                        saveToPngFile( QString pngFileName );
+    void                        browseForImage( void );
 
 protected slots:
     void                        slotJpgSnapshot( uint8_t* pu8JpgData, uint32_t u32DataLen, int iWidth, int iHeight );

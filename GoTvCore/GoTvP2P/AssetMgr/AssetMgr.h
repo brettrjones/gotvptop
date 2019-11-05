@@ -102,7 +102,7 @@ protected:
 													uint8_t *		hashId, 
 													EAssetLocation	locationFlags = eAssetLocUnknown, 
 													const char *	assetTag = "", 
-													time_t			timestamp = 0 );
+													int64_t			timestamp = 0 );
 	bool						insertNewInfo( AssetInfo * assetInfo );
 	void						updateDatabase( AssetInfo * assetInfo );
 	void						updateAssetDatabaseSendState( VxGUID& assetUniqueId, EAssetSendState sendState );
@@ -122,8 +122,8 @@ protected:
 	VxThread					m_GenHashThread;
 	VxSemaphore					m_GenHashSemaphore;
 
-	uint16_t							m_u16AssetFileTypes;
+	uint16_t					m_u16AssetFileTypes;
 	VxMutex						m_FileListPacketsMutex;
-	std::vector<PktFileListReply*>m_FileListPackets;
+	std::vector<PktFileListReply*> m_FileListPackets;
 };
 

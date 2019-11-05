@@ -120,8 +120,7 @@ void TodGameLogic::saveMyGameStats( void )
 	//m_MySettings.setIniValue( GAME_SETTINGS_KEY, "eTodGameVarIdTruthRejectedCnt", val );
 	myIdent->setRejectedTruthCount( rejectedCnt );
 
-	m_MyApp.getAppGlobals().saveUserIdentToDatabase();
-	m_Engine.fromGuiUpdateMyIdent( myIdent, true );
+    m_MyApp.updateMyIdent( myIdent, true );
 }
 
 //============================================================================

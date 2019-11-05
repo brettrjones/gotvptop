@@ -203,7 +203,7 @@ void AssetInfoDb::getAllAssets( std::vector<AssetInfo*>& AssetAssetList )
 			assetLen =  (uint64_t)cursor->getS64( COLUMN_ASSET_LEN );
 			assetType = (uint16_t)cursor->getS32( COLUMN_ASSET_TYPE );
 
-			AssetInfo * assetInfo = new AssetInfo( assetName, assetLen, assetType );
+			AssetInfo * assetInfo = new AssetInfo( assetName.c_str(), assetLen, assetType );
 			assetInfo->setAssetUniqueId( cursor->getString( COLUMN_ASSET_UNIQUE_ID ) );
 			assetInfo->setCreatorId( cursor->getString( COLUMN_ASSET_CREATOR_ID ) );
 			assetInfo->setHistoryId( cursor->getString( COLUMN_ASSET_HISTORY_ID ) );

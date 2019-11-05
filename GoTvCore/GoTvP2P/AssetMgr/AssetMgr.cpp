@@ -226,19 +226,19 @@ AssetInfo * AssetMgr::findAsset( VxGUID& assetId )
 	if( false == assetId.isVxGUIDValid() )
 	{
 		LogMsg( LOG_ERROR, "AssetMgr::findAsset: invalid VxGUID asset id\n" );
-		return 0;
+        return nullptr;
 	}
 
 	std::vector<AssetInfo*>::iterator iter;
-	for( iter = m_AssetInfoList.begin(); iter != m_AssetInfoList.end(); ++iter )
+	for( AssetInfo * assetInfo : m_AssetInfoList )
 	{
-		if( (*iter)->getAssetUniqueId() == assetId )
+		if( assetInfo->getAssetUniqueId() == assetId )
 		{
-			return (*iter);
+			return assetInfo;
 		}
 	}
 
-	return 0;
+	return nullptr;
 }
 
 //============================================================================

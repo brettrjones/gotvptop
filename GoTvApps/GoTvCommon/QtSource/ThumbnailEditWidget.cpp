@@ -18,12 +18,15 @@
 #include "AppCommon.h"
 #include "GuiHelpers.h"
 
-
 #include <CoreLib/VxDebug.h>
+#include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
+#include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+
 #include <VxVideoLib/VxVideoLib.h>
 
 #include <QMessageBox>
+#include <QPainter>
 
 //============================================================================
 ThumbnailEditWidget::ThumbnailEditWidget( QWidget * parent )
@@ -35,10 +38,24 @@ ThumbnailEditWidget::ThumbnailEditWidget( QWidget * parent )
 
     connect( ui.m_TakeSnapshotButton, SIGNAL( clicked() ), this, SLOT( slotSnapShotButClick() ) );
     connect( ui.m_BrowsePictureButton, SIGNAL( clicked() ), this, SLOT( slotBrowseButClick() ) );
+    connect( ui.m_MakeCircleButton, SIGNAL( clicked() ), this, SLOT( slotMakeCircleButClick() ) );
+    connect( ui.m_UndoCircleButton, SIGNAL( clicked() ), this, SLOT( slotUndoCircleClick() ) );
+
 }
 
 //============================================================================
-//! take picture for me
+bool ThumbnailEditWidget::loadFromAsset( AssetInfo * thumbAsset )
+{
+    bool loadOk = false;
+    if( thumbAsset )
+    {
+        loadOk = ui.m_ThumbnailViewWidget->loadFromFile( thumbAsset->getAssetName().c_str() );
+    }
+
+    return loadOk;
+}
+
+//============================================================================
 void ThumbnailEditWidget::slotSnapShotButClick( void )
 {
     if( m_CameraSourceAvail )
@@ -46,6 +63,7 @@ void ThumbnailEditWidget::slotSnapShotButClick( void )
         ActivitySnapShot oDlg( m_MyApp, this );
         connect( &oDlg, SIGNAL( signalJpgSnapshot( uint8_t*, uint32_t, int, int ) ), ui.m_ThumbnailViewWidget, SLOT( slotJpgSnapshot( uint8_t*, uint32_t, int, int ) ) );
         oDlg.exec();
+        m_IsCircle = !ui.m_ThumbnailViewWidget->getIsUserPickedImage();
     }
     else
     {
@@ -54,8 +72,48 @@ void ThumbnailEditWidget::slotSnapShotButClick( void )
 }
 
 //============================================================================
-//! take picture for me
 void ThumbnailEditWidget::slotBrowseButClick( void )
 {
     ui.m_ThumbnailViewWidget->browseForImage();
+    m_IsCircle = !ui.m_ThumbnailViewWidget->getIsUserPickedImage();
+}
+
+//============================================================================
+void ThumbnailEditWidget::slotMakeCircleButClick( void )
+{
+    if( !m_IsCircle )
+    {
+        m_SquarePixmap = *ui.m_ThumbnailViewWidget->getThumbnailImage();
+        if( !m_SquarePixmap.isNull() )
+        {
+            m_IsCircle = true;
+            ui.m_ThumbnailViewWidget->setThumbnailImage( makeCircleImage( m_SquarePixmap ) );
+        }
+    }
+}
+
+//============================================================================
+void ThumbnailEditWidget::slotUndoCircleClick( void )
+{
+    if( m_IsCircle && !m_SquarePixmap.isNull() )
+    {
+        m_IsCircle = false;
+        ui.m_ThumbnailViewWidget->setThumbnailImage( m_SquarePixmap );
+    }
+}
+
+//============================================================================
+QPixmap ThumbnailEditWidget::makeCircleImage( QPixmap& pixmap )
+{
+    QPixmap target( pixmap.width(), pixmap.height() );
+    target.fill( Qt::transparent );
+
+    QPainter painter( &target );
+
+    // Set clipped region (circle) in the center of the target image
+    QRegion clipRegion( QRect( 0, 0, pixmap.width(), pixmap.height() ), QRegion::Ellipse );
+    painter.setClipRegion( clipRegion );
+
+    painter.drawPixmap( 0, 0, pixmap );  
+    return target;
 }

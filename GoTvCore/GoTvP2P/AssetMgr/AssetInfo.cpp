@@ -60,24 +60,11 @@ AssetInfo::AssetInfo( const std::string& fileName )
 }
 
 //============================================================================
-AssetInfo::AssetInfo( const std::string& fileName, uint64_t assetLen, uint16_t assetType )
-: m_AssetName( fileName )
-, m_AssetTag( "" )
-, m_s64AssetLen( assetLen )
-, m_u16AssetType( assetType )
-, m_LocationFlags( 0 )
-, m_AssetSendState( eAssetSendStateNone )
-, m_CreationTime( GetTimeStampMs() )
-, m_PlayPosition0to100000( 0 )
-{ 
-}
-
-//============================================================================
-AssetInfo::AssetInfo( const char * fileName, uint64_t fileLen, uint8_t fileType )
+AssetInfo::AssetInfo( const char * fileName, uint64_t fileLen, uint16_t assetType )
 : m_AssetName( fileName )
 , m_AssetTag( "" )
 , m_s64AssetLen( fileLen )
-, m_u16AssetType( fileType )
+, m_u16AssetType( assetType )
 , m_LocationFlags( 0 )
 , m_AssetSendState( eAssetSendStateNone )
 , m_CreationTime( GetTimeStampMs() )

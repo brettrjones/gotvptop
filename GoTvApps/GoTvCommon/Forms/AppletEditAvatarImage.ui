@@ -76,7 +76,7 @@
        </widget>
       </item>
       <item>
-       <widget class="ThumbnailEditWidget" name="widget" native="true"/>
+       <widget class="ThumbnailEditWidget" name="m_ThumbnailEditWidget" native="true"/>
       </item>
       <item>
        <spacer name="verticalSpacer">

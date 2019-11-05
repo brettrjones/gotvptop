@@ -38,12 +38,26 @@ ThumbnailViewWidget::ThumbnailViewWidget( QWidget * parent )
 }
 
 //============================================================================
+bool ThumbnailViewWidget::loadFromFile( QString fileName )
+{
+    QPixmap pixmap;
+    bool result = pixmap.load( fileName );
+    if( result )
+    {
+        cropAndUpdateImage( pixmap );
+    }
+
+    return result;
+}
+
+//============================================================================
 void ThumbnailViewWidget::slotJpgSnapshot( uint8_t* pu8JpgData, uint32_t u32DataLen, int iWidth, int iHeight )
 {
     QPixmap bitmap;
     if( bitmap.loadFromData( pu8JpgData, u32DataLen, "JPG" ) )
     {
         cropAndUpdateImage( bitmap );
+        setIsUserPickedImage( true );
     }
     else
     {
@@ -63,7 +77,7 @@ void ThumbnailViewWidget::cropAndUpdateImage( QPixmap& pixmap )
         // no need to scale or crop image
         setPixmap( pixmap );
     }
-    else
+    else if( !pixmap.isNull() )
     {
         int minSize = origSize.width() < origSize.height() ? origSize.width() : origSize.height();
         int leftMargin = ( origSize.width() - minSize ) / 2;
@@ -71,10 +85,21 @@ void ThumbnailViewWidget::cropAndUpdateImage( QPixmap& pixmap )
         QRect rect( leftMargin, topMargin, origSize.width() - leftMargin, origSize.height() - topMargin );
         QPixmap cropped = pixmap.copy( rect );
         QPixmap scaledPixmap = cropped.scaled( GuiParams::getThumbnailSize() );
-        setPixmap( scaledPixmap );
+        if( !scaledPixmap.isNull() )
+        {
+            setPixmap( scaledPixmap );
+        }
+        else
+        {
+            QString msgText = QObject::tr( "Failed to scale and crop image " );
+            QMessageBox::warning( this, QObject::tr( "Error scaling image." ), msgText );
+        }
     }
-
-    m_bUserPickedImage = true;
+    else
+    {
+        QString msgText = QObject::tr( "Null image " );
+        QMessageBox::warning( this, QObject::tr( "Null image." ), msgText );
+    }
 }
 
 //============================================================================
@@ -113,6 +138,7 @@ void ThumbnailViewWidget::browseForImage( void )
             }
 
             cropAndUpdateImage( oBitmap );
+            setIsUserPickedImage( true );
         }
     }
 }

@@ -51,6 +51,23 @@ static uint64_t getQuuidHiPart( QUuid& uuid )
 }
 
 //============================================================================
+// updates my ident in database and engine and global ident
+void AppCommon::updateMyIdent( VxNetIdent * myIdent, bool permissionAndStateOnly )
+{
+    if( myIdent )
+    {
+        if( myIdent != getAppGlobals().getUserIdent() )
+        {
+            memcpy( getAppGlobals().getUserIdent(), myIdent, sizeof( VxNetIdent ) );
+            myIdent = getAppGlobals().getUserIdent();
+        }
+
+       getAccountMgr().updateAccount( *myIdent );
+       getEngine().fromGuiUpdateMyIdent( myIdent, permissionAndStateOnly );
+    }
+}
+
+//============================================================================
 void AppCommon::doLogin()
 {
     //AppSetup appSetup;

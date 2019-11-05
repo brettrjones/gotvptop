@@ -170,6 +170,7 @@ bool AccountDb::insertAccount( VxNetIdent& oUserAccount )
 //! update existing account
 bool AccountDb::updateAccount( VxNetIdent& oUserAccount ) 
 {
+    /*
 	bool bResult = false;
 	sqlite3_stmt * poSqlStatement;
 	char SQL_Statement[2048];
@@ -212,6 +213,8 @@ bool AccountDb::updateAccount( VxNetIdent& oUserAccount )
 	}
 
 	return bResult;
+    */
+    return insertAccount( oUserAccount );
 }
 
 //============================================================================

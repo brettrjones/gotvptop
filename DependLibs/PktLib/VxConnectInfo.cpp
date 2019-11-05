@@ -168,13 +168,7 @@ VxConnectIdent::VxConnectIdent()
 }
 
 //============================================================================
-char *	VxConnectIdent::getOnlineName( void )							
-{ 
-	return m_OnlineName; 
-}
-
-//============================================================================
-void 	VxConnectIdent::setOnlineName( const char * pUserName )			
+void VxConnectIdent::setOnlineName( const char * pUserName )			
 { 
     if( !pUserName )
     {
@@ -187,10 +181,42 @@ void 	VxConnectIdent::setOnlineName( const char * pUserName )
 }
 
 //============================================================================
-//! return users online description
-char *	VxConnectIdent::getOnlineDescription( void )					
-{	
-	return m_OnlineDesc; 
+void VxConnectIdent::setNetHostUrl( const char * netHostUrl )
+{
+    if( !netHostUrl )
+    {
+        m_NetHostUrl[ 0 ] = 0;
+    }
+    else
+    {
+        SafeStrCopy( m_NetHostUrl, netHostUrl, sizeof( m_NetHostUrl ) );
+    }
+}
+
+//============================================================================
+void VxConnectIdent::setGroupListHostUrl( const char * groupListUrl )
+{
+    if( !groupListUrl )
+    {
+        m_GroupListHostUrl[ 0 ] = 0;
+    }
+    else
+    {
+        SafeStrCopy( m_GroupListHostUrl, groupListUrl, sizeof( m_GroupListHostUrl ) );
+    }
+}
+
+//============================================================================
+void VxConnectIdent::setGroupHostUrl( const char * groupHostUrl )
+{
+    if( !groupHostUrl )
+    {
+        m_GroupHostUrl[ 0 ] = 0;
+    }
+    else
+    {
+        SafeStrCopy( m_GroupHostUrl, groupHostUrl, sizeof( m_GroupHostUrl ) );
+    }
 }
 
 //============================================================================

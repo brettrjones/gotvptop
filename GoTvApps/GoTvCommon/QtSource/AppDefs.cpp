@@ -116,6 +116,7 @@ QString DescribeApplet( EApplet applet )
 	switch( applet )
 	{
     case eActivityAppSetup:				return QObject::tr( "Application Initialize" );
+    case eAppletEditAvatarImage:		return QObject::tr( "Edit My Avatar Image" );
     case eAppletHomePage:				return QObject::tr( "Home" );
     case eAppletAboutGoTvPtoP:		    return QObject::tr( "About GoTv Person to Person" );
     case eAppletCreateAccount:			return QObject::tr( "Create Account" );

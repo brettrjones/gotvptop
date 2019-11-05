@@ -26,6 +26,7 @@ public:
     ServiceSettingsWidget( QWidget * parent = 0 );
 
     void						setPluginType( EPluginType pluginType ) { m_PluginType = pluginType;  updateUi();  updateIcons(); }
+    void						setViewServiceVisible( bool visible )   { ui.m_ViewServiceFrame->setVisible( visible ); }
 
 protected slots:
     void                        slotServiceSettingsClicked();

@@ -44,9 +44,9 @@ public:
 	void						addFile( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );
 	void						setFileFilter( EFileFilterType eFileFilter );
 	bool						getWasFileSelected( void )						{ return m_FileWasSelected; }
-	uint8_t							getSelectedFileType( void )						{ return m_SelectedFileType; }
+	uint8_t						getSelectedFileType( void )						{ return m_SelectedFileType; }
 	QString						getSelectedFileName( void )						{ return m_SelectedFileName; }
-	uint64_t							getSelectedFileLen( void )						{ return m_SelectedFileLen; }
+	uint64_t					getSelectedFileLen( void )						{ return m_SelectedFileLen; }
 	bool						getSelectedFileIsShared( void )					{ return m_SelectedFileIsShared; }
 	bool						getSelectedFileIsInLibrary( void )				{ return m_SelectedFileIsInLibrary; }
 
@@ -87,11 +87,11 @@ protected:
     EPluginType					m_ePluginType;
 	bool						m_IsSelectAFileMode;
 	bool						m_FileWasSelected;
-	uint8_t							m_SelectedFileType;
+	uint8_t						m_SelectedFileType;
 	QString						m_SelectedFileName;
-	uint64_t							m_SelectedFileLen;
+	uint64_t					m_SelectedFileLen;
 	bool						m_SelectedFileIsShared;
 	bool						m_SelectedFileIsInLibrary;
 	EFileFilterType				m_eFileFilterType;
-	uint8_t							m_FileFilterMask;
+	uint8_t						m_FileFilterMask;
 };

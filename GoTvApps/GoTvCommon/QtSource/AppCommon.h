@@ -550,6 +550,8 @@ public:
 
 	void						createAccountForUser( std::string& strUserName, VxNetIdent& userAccountIdent, const char * moodMsg, int gender, int age, int primaryLanguage, int contentType );
     void                        setupAccountResources( VxNetIdent& userAccountIdent );
+    // updates my ident in database and engine and global ident
+    void                        updateMyIdent( VxNetIdent * myIdent, bool permissionAndStateOnly = false );
 
 	std::string					getUserXferDirectoryFromAccountUserName( const char * userName );
 	std::string 				getUserSpecificDataDirectoryFromAccountUserName( const char * userName );

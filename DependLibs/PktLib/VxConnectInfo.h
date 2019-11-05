@@ -103,20 +103,35 @@ class VxConnectIdent : public VxConnectBaseInfo
 public:
 	VxConnectIdent();
 
-	VxConnectBaseInfo& 			getConnectBaseInfo( void )	{ return * ((VxConnectBaseInfo *)this); }
-	VxConnectIdent& 			getConnectIdent( void )		{ return * ((VxConnectIdent *)this); }
+	VxConnectBaseInfo& 			getConnectBaseInfo( void )	                        { return * ((VxConnectBaseInfo *)this); }
+	VxConnectIdent& 			getConnectIdent( void )		                        { return * ((VxConnectIdent *)this); }
 
 	void 						setOnlineName( const char * pUserName );
-    char *                      getOnlineName( void );
-
+    char *                      getOnlineName( void )                               { return m_OnlineName; }
 	void 						setOnlineDescription( const char * pUserDesc );
-	char *						getOnlineDescription( void );
+	char *						getOnlineDescription( void )                        { return m_OnlineDesc; }
+
+    void 						setNetHostUrl( const char * netHostUrl );
+    char *						getNetHostUrl( void )                               { return m_NetHostUrl; }
+    void 						setGroupListHostUrl( const char * groupListUrl );
+    char *						getGroupListHostUrl( void )                         { return m_GroupListHostUrl; }
+    void 						setGroupHostUrl( const char * groupHostUrl );
+    char *						getGroupHostUrl( void )                             { return m_GroupHostUrl; }
 
 	void 						setTimeLastContact( int64_t timeStamp )				{ m_TimeLastContactMs = timeStamp; }
 	int64_t	    				getTimeLastContact( void )					        { return m_TimeLastContactMs; }
 
     /// @brief return indenty unique folder name in the form of OnlineName_GuidHexString
     std::string	    			getIdentFolderName( void );
+
+    void                        setAvatarGuid( VxGUID& guid )       { m_AvatarGuid = guid;  }
+    VxGUID&                     getAvatarGuid( void )               { return m_AvatarGuid; }
+    void                        setNetHostGuid( VxGUID& guid )      { m_NetHostGuid = guid; }
+    VxGUID&                     getNetHostGuid( void )              { return m_NetHostGuid; }
+    void                        setGroupListGuid( VxGUID& guid )    { m_GroupListGuid = guid; }
+    VxGUID&                     getGroupListGuid( void )            { return m_NetHostGuid; }
+    void                        setGroupHostGuid( VxGUID& guid )    { m_GroupHostGuid = guid; }
+    VxGUID&                     getGroupHostGuid( void )            { return m_GroupHostGuid; }
 
 	//=== vars ===//
 private:

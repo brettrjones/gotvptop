@@ -165,8 +165,8 @@ void AppletEditAboutMe::onApplyAboutMeButClick( void )
             if( true != m_MyApp.getAppGlobals().getUserIdent()->hasProfilePicture() )
             {
                 m_MyApp.getAppGlobals().getUserIdent()->setHasProfilePicture( true );
-                m_MyApp.getAccountMgr().updateAccount( *m_MyApp.getAppGlobals().getUserIdent() );
                 m_Engine.setHasPicture( true );
+                m_MyApp.updateMyIdent( m_MyApp.getAppGlobals().getUserIdent() );
             }
         }
         else

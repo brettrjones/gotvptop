@@ -34,8 +34,7 @@ public:
 	AssetInfo();
 	AssetInfo( const AssetInfo& rhs );
 	AssetInfo( const std::string& fileName );
-	AssetInfo( const std::string& fileName, uint64_t assetLen, uint16_t assetType );
-    AssetInfo( const char * fileName, uint64_t fileLen, uint8_t fileType );
+    AssetInfo( const char * fileName, uint64_t fileLen, uint16_t assetType );
 
 	AssetInfo&					operator=( const AssetInfo& rhs ); 
 

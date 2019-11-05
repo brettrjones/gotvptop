@@ -16,6 +16,7 @@
 
 #include "VxGUID.h"
 
+#include <CoreLib/IsBigEndianCpu.h>
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxDebug.h>
 
@@ -290,7 +291,8 @@ void VxGUID::toHexString( char * retBuf )
 // buffer must be at least 17 characters in length
 void VxGUID::uint64ToHexAscii( char * retBuf, uint64_t& val )
 {
-    uint8_t * byteArray = (uint8_t *)&val;
+    uint64_t netOrderedVal = htonU64( val );
+    uint8_t * byteArray = (uint8_t *)&netOrderedVal;
     int charIdx = 0;
     for( int byteIdx = 0; byteIdx < 8; byteIdx++ )
     {
@@ -359,7 +361,7 @@ bool VxGUID::fromVxGUIDHexString( const char * pHexString )
 		u64Part |= u8Byte;
 	}
 
-	m_u64HiPart = u64Part;
+    m_u64HiPart = u64Part;
 	u64Part = 0;
 	for( int i = 0; i < 8; i++ )
 	{
@@ -371,7 +373,8 @@ bool VxGUID::fromVxGUIDHexString( const char * pHexString )
 		u64Part |= u8Byte;
 	}
 
-	m_u64LoPart = u64Part;
+    m_u64LoPart = u64Part;
+
 	return true;
 }
 
@@ -440,6 +443,16 @@ void VxGUID::clearVxGUID( void )
 std::string	VxGUID::describeVxGUID( void )
 {
 	std::string strId;
-	StdStringFormat( strId, " 0x%llX 0x%llX ", m_u64HiPart, m_u64LoPart);
+    char bufHiPart[ 33 ];
+    char bufLoPart[ 33 ];
+
+    uint64ToHexAscii( bufHiPart, m_u64HiPart );
+    uint64ToHexAscii( bufLoPart, m_u64LoPart );
+    strId = " 0x";
+    strId += bufHiPart;
+    strId += " 0x";
+    strId += bufLoPart;
+    strId += " ";
+
 	return strId;
 }
