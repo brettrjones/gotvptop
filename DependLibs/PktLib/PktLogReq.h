@@ -29,8 +29,8 @@ public:
 	bool						isEnable( void );
 
 private:
-	uint32_t							m_u16Res;								
-	uint32_t							m_u32Enable;								
+	uint32_t					m_u16Res = 0;								
+	uint32_t					m_u32Enable = 0;								
 };
 
 #pragma pack()

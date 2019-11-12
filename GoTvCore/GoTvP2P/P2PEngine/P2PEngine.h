@@ -43,9 +43,6 @@ class AssetMgr;
 class HostTest;
 class IsPortOpenTest;
 class RcConnectInfo;
-class PluginServiceRelay;
-class PluginServiceFileShare;
-class PluginNetServices;
 class ConnectRequest;
 class MediaProcessor;
 class NetworkMgr;
@@ -53,6 +50,11 @@ class NetworkStateMachine;
 class NetConnector;
 class NetworkMonitor;
 class NetServicesMgr;
+class PluginNetServices;
+class PluginServiceFileShare;
+class PluginServiceRelay;
+class PluginSetting;
+class PluginSettingMgr;
 
 class P2PEngine :	public IFromGui,
 					public PktHandlerBase,
@@ -71,19 +73,20 @@ public:
 	IFromGui&					getFromGuiInterface( void )						{ return *this; }
     IAudioRequests&			    getAudioRequest( void );
     AssetMgr&					getAssetMgr( void )								{ return m_AssetMgr; }
-	EngineSettings&				getEngineSettings( void )						{ return m_EngineSettings; }
+    BigListMgr&					getBigListMgr( void )							{ return m_BigListMgr; }
+    EngineSettings&				getEngineSettings( void )						{ return m_EngineSettings; }
 	EngineParams&				getEngineParams( void )							{ return m_EngineParams; }
-	BigListMgr&					getBigListMgr( void )							{ return m_BigListMgr; }
-	P2PConnectList&				getConnectList( void )							{ return m_ConnectionList; }
-	NetworkMgr&					getNetworkMgr( void )							{ return m_NetworkMgr; } 
-	NetConnector&				getNetConnector( void )							{ return m_NetConnector; } 
+    NetConnector&				getNetConnector( void )							{ return m_NetConnector; }
+    NetworkMgr&					getNetworkMgr( void )							{ return m_NetworkMgr; }
+    NetworkStateMachine&		getNetworkStateMachine( void )					{ return m_NetworkStateMachine; }
 	NetworkMonitor&				getNetworkMonitor( void )						{ return m_NetworkMonitor; } 
 	NetServicesMgr&				getNetServicesMgr( void )						{ return m_NetServicesMgr; }
-	PluginMgr&					getPluginMgr( void )							{ return m_PluginMgr; }
 	MediaProcessor&				getMediaProcesser( void )						{ return m_MediaProcessor; }
 	VxPeerMgr&					getPeerMgr( void )								{ return m_PeerMgr; }
-	RcScan&						getRcScan( void )								{ return m_RcScan; }
-	NetworkStateMachine&		getNetworkStateMachine( void )					{ return m_NetworkStateMachine; }
+    P2PConnectList&				getConnectList( void )							{ return m_ConnectionList; }
+    PluginMgr&					getPluginMgr( void )							{ return m_PluginMgr; }
+    PluginSettingMgr&			getPluginSettingMgr( void )						{ return m_PluginSettingMgr; }
+    RcScan&						getRcScan( void )								{ return m_RcScan; }
 	bool						isAppPaused( void )								{ return m_AppIsPaused; }
 	bool						isP2POnline( void );
 
@@ -92,12 +95,15 @@ public:
 	VxGUID&						getMyOnlineId( void )							{ return m_PktAnn.getMyOnlineId(); }
 	void						unlockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.unlock(); }
 
-	PluginServiceRelay&				getPluginServiceRelay( void )							{ return * m_PluginServiceRelay; }
-	PluginServiceFileShare&			getPluginServiceFileShare( void )						{ return * m_PluginServiceFileShare; }
-	PluginNetServices&			getPluginNetServices( void )					{ return * m_PluginNetServices; }
+    bool                        setPluginSetting( PluginSetting& pluginSetting );
+    bool                        getPluginSetting( EPluginType pluginType, PluginSetting& pluginSetting );
 
-	virtual void				setPluginPermission( EPluginType ePluginType, int iPluginPermission );
-	virtual int					getPluginPermission( int iPluginType );
+    virtual void				setPluginPermission( EPluginType ePluginType, int iPluginPermission );
+    virtual int					getPluginPermission( int iPluginType );
+
+	PluginServiceRelay&			getPluginServiceRelay( void )							{ return * m_PluginServiceRelay; }
+	PluginServiceFileShare&		getPluginServiceFileShare( void )						{ return * m_PluginServiceFileShare; }
+	PluginNetServices&			getPluginNetServices( void )					{ return * m_PluginNetServices; }
 
 	virtual void				setHasPicture( int bHasPicture );
 	virtual void				setHasSharedWebCam( int bHasShaeredWebCam );
@@ -522,7 +528,8 @@ protected:
 	EngineParams				m_EngineParams;
 	AssetMgr&					m_AssetMgr;
 	P2PConnectList				m_ConnectionList;
-	NetworkMgr&					m_NetworkMgr;
+    MediaProcessor&				m_MediaProcessor;
+    NetworkMgr&					m_NetworkMgr;
 	NetworkMonitor&				m_NetworkMonitor;
 	NetServicesMgr&				m_NetServicesMgr;
 	NetConnector&				m_NetConnector;
@@ -530,7 +537,8 @@ protected:
 	HostTest&					m_HostTest;
 
 	PluginMgr&					m_PluginMgr;
-	MediaProcessor&				m_MediaProcessor;
+    PluginSettingMgr&			m_PluginSettingMgr;
+
 	PluginServiceRelay *		m_PluginServiceRelay;
 	PluginServiceFileShare *	m_PluginServiceFileShare;
 	PluginNetServices *			m_PluginNetServices;

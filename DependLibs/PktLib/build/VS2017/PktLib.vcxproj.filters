@@ -5,6 +5,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="QtBuild">
+      <UniqueIdentifier>{fe66c958-0cac-4011-8d92-7d39f5cc3dbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AllPkts.h">
@@ -121,6 +124,12 @@
     <ClInclude Include="..\..\VxSearchFlags.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\PktsThumb.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PktsPluginSetting.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\PktAnnList.cpp">
@@ -225,10 +234,19 @@
     <ClCompile Include="..\..\VxSearchFlags.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\PktsThumb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PktsPluginSetting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\PktLib.pro">
-      <Filter>Source Files</Filter>
+    <None Include="..\..\..\..\libpktlib.pri">
+      <Filter>QtBuild</Filter>
+    </None>
+    <None Include="..\..\..\..\libpktlib.pro">
+      <Filter>QtBuild</Filter>
     </None>
   </ItemGroup>
 </Project>

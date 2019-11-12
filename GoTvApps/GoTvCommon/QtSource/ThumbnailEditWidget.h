@@ -32,7 +32,6 @@ public:
     bool                        loadFromAsset( AssetInfo * thumbAsset );
     bool                        saveToPngFile( QString& fileName )          { return ui.m_ThumbnailViewWidget->saveToPngFile( fileName ); }
 
-
 protected slots:
     void                        slotSnapShotButClick( void );
     void                        slotBrowseButClick( void );

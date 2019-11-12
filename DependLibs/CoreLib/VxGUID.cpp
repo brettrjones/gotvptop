@@ -433,6 +433,22 @@ void VxGUID::getVxGUID( uint64_t& u64HiPart, uint64_t& u64LoPart )	{  u64HiPart 
 void VxGUID::setVxGUID( const char * pId )					        { this->fromVxGUIDHexString( pId ); }
 
 //============================================================================
+// set bytes to network order
+void VxGUID::setToNetOrder()
+{
+    m_u64HiPart = htonU64( m_u64HiPart );
+    m_u64LoPart = htonU64( m_u64LoPart );
+}
+
+//============================================================================
+// set bytes to host cpu endianess
+void VxGUID::setToHostOrder()
+{
+    m_u64HiPart = ntohU64( m_u64HiPart );
+    m_u64LoPart = ntohU64( m_u64LoPart );
+}
+
+//============================================================================
 void VxGUID::clearVxGUID( void )
 {
 	m_u64LoPart = 0;

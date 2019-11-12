@@ -42,7 +42,7 @@ GuiParams& GetGuiParams()
 
 //============================================================================
 AppGlobals::AppGlobals( AppCommon& appCommon )
-: m_AppCommon( appCommon )
+: m_MyApp( appCommon )
 {
 }
 
@@ -55,7 +55,7 @@ VxNetIdent * AppGlobals::getUserIdent( void )
 //============================================================================
 bool AppGlobals::saveUserIdentToDatabase( void )
 {
-	if( false == m_AppCommon.getAccountMgr().updateAccount( g_oUserIdent ) )
+	if( false == m_MyApp.getAccountMgr().updateAccount( g_oUserIdent ) )
 	{
 		LogMsg( LOG_ERROR, "AppGlobals::saveUserIdentToDatabase: ERROR updating database\n" );
 		return false;
@@ -76,18 +76,17 @@ void AppGlobals::launchWebBrowser( const char * pUri )
 #endif //TARGET_OS_WINDOWS
 }
 
-
 //============================================================================
 //! update ident and save to database then send permission change to engine
-void UpdatePluginPermissions( P2PEngine& engine, EPluginType ePluginType, EFriendState ePluginPermission )
+void  AppGlobals::updatePluginPermission( EPluginType ePluginType, EFriendState ePluginPermission )
 {
 	g_oUserIdent.setPluginPermission( ePluginType, ePluginPermission );
-	if( false == GetAppInstance().getAccountMgr().updateAccount( g_oUserIdent ) )
+	if( false == m_MyApp.getAccountMgr().updateAccount( g_oUserIdent ) )
 	{
 		LogMsg( LOG_ERROR, "UpdatePluginPermissions: ERROR updating database\n");
 	}
 
-	engine.setPluginPermission( ePluginType, ePluginPermission );
+    m_MyApp.getEngine().setPluginPermission( ePluginType, ePluginPermission );
 }
 
 //============================================================================

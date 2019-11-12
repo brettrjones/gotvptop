@@ -71,12 +71,17 @@ void PermissionWidget::initPermissionWidget( void )
 	ui.setupUi( this );
     ui.m_PermissionInfoButton->setIcon( eMyIconInformation );
     fillPermissionComboBox();
+    if( m_PluginType != ePluginTypeInvalid )
+    {
+        updateUi();
+    }
 
     connect( ui.m_PermissionInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowPermissionInformation() ) );
     connect( ui.m_PermissionButton, SIGNAL( clicked() ), this, SLOT( slotShowPermissionInformation() ) );
     connect( ui.m_PermissionComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHandleSelectionChanged( int ) ) );
     connect( ui.m_PluginInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowPluginInformation() ) );
 }
+
 //============================================================================
 void PermissionWidget::fillPermissionComboBox( void )
 {
@@ -97,8 +102,32 @@ void PermissionWidget::updateUi( void )
     }
 
     EFriendState pluginPermission = m_MyApp.getMyIdentity()->getPluginPermission( m_PluginType );
+    if( !m_OrigPermissionIsSet )
+    {
+        m_OrigPermissionIsSet = true;
+        m_OrigPermissionLevel = m_MyApp.getMyIdentity()->getPluginPermission( m_PluginType );;
+    }
+
+
     ui.m_PermissionComboBox->setCurrentIndex( FriendStateToComboIdx( pluginPermission ) );
     updatePermissionIcon();
+}
+
+//============================================================================
+void PermissionWidget::setPluginType( EPluginType pluginType, int subType ) 
+{ 
+    if( !m_OrigPermissionIsSet )
+    {
+        m_OrigPermissionIsSet = true;
+        m_OrigPermissionLevel = m_MyApp.getMyIdentity()->getPluginPermission( m_PluginType );;
+    }
+
+    m_PluginType = pluginType; 
+    m_SubPluginType = subType;  
+    setPermissionLevel( m_OrigPermissionLevel );
+
+    updateUi();  
+    updatePermissionIcon(); 
 }
 
 //============================================================================
@@ -122,7 +151,7 @@ void PermissionWidget::slotHandleSelectionChanged( int )
     }
 
     EFriendState pluginPermission = ComboIdxToFriendState( ui.m_PermissionComboBox->currentIndex() );
-    UpdatePluginPermissions( m_MyApp.getEngine(), m_PluginType, pluginPermission );
+    m_MyApp.getAppGlobals().updatePluginPermission( m_PluginType, pluginPermission );
     updatePermissionIcon();
 }
 
@@ -138,4 +167,26 @@ void PermissionWidget::slotShowPluginInformation()
 {
     ActivityInformation * activityInfo = new ActivityInformation( m_MyApp, this, m_PluginType );
     activityInfo->show();
+}
+
+//============================================================================
+void PermissionWidget::setPermissionLevel( EFriendState permLevel )
+{
+    if( m_PluginType == ePluginTypeInvalid )
+    {
+        return;
+    }
+
+    ui.m_PermissionComboBox->setCurrentIndex( FriendStateToComboIdx( permLevel ) );
+}
+
+//============================================================================
+EFriendState PermissionWidget::getPermissionLevel( void )
+{
+    if( m_PluginType == ePluginTypeInvalid )
+    {
+        return eFriendStateIgnore;
+    }
+
+    return  ComboIdxToFriendState( ui.m_PermissionComboBox->currentIndex() );
 }

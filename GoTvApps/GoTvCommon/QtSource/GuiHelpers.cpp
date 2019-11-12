@@ -15,8 +15,11 @@
 
 #include "GuiHelpers.h"
 
+#include "ActivityBase.h"
+#include "AppletBase.h"
 #include "AppCommon.h"
 #include "MyIconsDefs.h"
+#include "VxFrame.h"
 
 #include <CoreLib/VxFileIsTypeFunctions.h>
 #include <CoreLib/VxParse.h>
@@ -1102,4 +1105,76 @@ void GuiHelpers::setIdentityFromValues( QWidget * curWidget, VxNetIdent * ident,
 
         ident->setPreferredContent( contentValue );
     }
+}
+
+//============================================================================
+ActivityBase * GuiHelpers::findParentActivity( QWidget * widget )
+{
+    ActivityBase * actBase = nullptr;
+    QObject * objWidget = widget;
+    while( objWidget )
+    {
+        ActivityBase * actTemp = dynamic_cast<ActivityBase *>( objWidget );
+        if( actTemp )
+        {
+            actBase = actTemp;
+            break;
+        }
+
+        objWidget = objWidget->parent();
+    }
+
+    return actBase;
+}
+
+//============================================================================
+QWidget * GuiHelpers::findAppletContentFrame( QWidget * widget )
+{
+    ActivityBase * actBase = findLaunchWindow( widget );
+    if( actBase )
+    {
+        return actBase->getContentItemsFrame();
+    }
+
+    return nullptr;
+}
+
+//============================================================================
+ActivityBase * GuiHelpers::findLaunchWindow( QWidget * widget )
+{
+    QObject * objWidget = findParentActivity( widget );
+    QObject * prevWidget = objWidget;
+    while( objWidget )
+    {
+        if( dynamic_cast<VxFrame *>( objWidget ) )
+        {
+            return dynamic_cast<ActivityBase *>( prevWidget );
+        }
+
+        prevWidget = objWidget;
+        objWidget = objWidget->parent();
+    }
+
+    return nullptr;
+}
+
+//============================================================================
+AppletBase * GuiHelpers::findParentApplet( QWidget * widget )
+{
+    AppletBase * actBase = nullptr;
+    QObject * objWidget = widget;
+    while( objWidget )
+    {
+        AppletBase * actTemp = dynamic_cast<AppletBase *>( objWidget );
+        if( actTemp )
+        {
+            actBase = actTemp;
+            break;
+        }
+
+        objWidget = objWidget->parent();
+    }
+
+    return actBase;
+
 }

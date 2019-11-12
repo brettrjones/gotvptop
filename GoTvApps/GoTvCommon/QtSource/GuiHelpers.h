@@ -30,6 +30,8 @@ class QFontMetrics;
 class QComboBox;
 class QLineEdit;
 class VxNetIdent;
+class ActivityBase;
+class AppletBase;
 
 class GuiHelpers
 {
@@ -81,5 +83,10 @@ public:
     static QString              describeLanguage( ELanguageType language );
     static void                 fillContentRating( QComboBox * comboBox );
     static QString              describePreferredContent( EContentType content );
+
+    static ActivityBase *       findParentActivity( QWidget * widget );
+    static QWidget *            findAppletContentFrame( QWidget * widget );
+    static ActivityBase *       findLaunchWindow( QWidget * widget );
+    static AppletBase *         findParentApplet( QWidget * widget );
 };
 

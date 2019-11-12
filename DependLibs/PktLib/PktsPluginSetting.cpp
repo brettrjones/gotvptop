@@ -1,6 +1,5 @@
 //============================================================================
-// Copyright (C) 2003 Brett R. Jones 
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2019 Brett R. Jones 
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software 
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -14,48 +13,39 @@
 //============================================================================
 
 #include "PktTypes.h"
-#include "PktAnnList.h"
-#include "PktAnnounce.h"
+#include "PktsPluginSetting.h"
+#include "PktsPluginSetting.h"
 
-#include <memory.h>
-
-//============================================================================
-PktAnnList::PktAnnList()
-{ 
-	setPktLength( emptyLen() ); 
-	setPktType( PKT_TYPE_ANN_LIST ); 
-	m_u16Flags = 0;
-	m_u16ListCnt = 0; 
-	m_u16Reason = 0;
-	m_u16Res1 = 0;
-	m_u32Res2 = 0;
-}
+#include <string.h>
 
 //============================================================================
-int PktAnnList::emptyLen( void )
-{  
-	return sizeof( PktAnnList ) - MAX_PKT_ANN_LIST_LEN ; 
-}
-
-//============================================================================
-void PktAnnList::calcPktLen( void )
-{ 
-	setPktLength( ROUND_TO_16BYTE_BOUNDRY( getPktLength() ) ); 
-}
-
-//============================================================================
-int PktAnnList::addAnn( PktAnnBase * poPktAnn )
+PktPluginSettingReq::PktPluginSettingReq()
 {
-	if( sizeof( PktAnnBase ) * m_u16ListCnt > MAX_PKT_ANN_LIST_LEN )
-	{
-		return -1;
-	}
+	setPktType( PKT_TYPE_PLUGIN_SETTING_REQ );
+    setPktLength( sizeof( PktPluginSettingReq ) );
+}
 
-	int iOffs = getPktLength() - emptyLen();
-	*(( uint16_t *)&m_au8List[ iOffs ]) = ntohs( (uint16_t)sizeof( PktAnnBase ) );
-	iOffs += 2;
-	memcpy( &m_au8List[ iOffs ], poPktAnn, sizeof( PktAnnBase ) );
-	m_u16ListCnt++;
-	setPktLength( getPktLength() + sizeof( uint16_t ) + sizeof( PktAnnBase ) );
-	return 0;
+//============================================================================
+PktPluginSettingReply::PktPluginSettingReply()
+{
+    setPktType( PKT_TYPE_PLUGIN_SETTING_REPLY );
+}
+
+//============================================================================
+void PktPluginSettingReply::calcPktLen( void )
+{
+    setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktPluginSettingReply ) - ( MAX_PLUGIN_SETTING_STORAGE_LEN + 16 ) + getSettingBinary()->getSettingTotalStorgeLength() ) );
+}
+
+//============================================================================
+PluginSettingBinary * PktPluginSettingReply::getSettingBinary( void )
+{
+    return ( PluginSettingBinary * )m_SettingData;
+}
+
+//============================================================================
+void PktPluginSettingReply::setSettingBinary( PluginSettingBinary& settingBinary )
+{
+    memcpy( m_SettingData, &settingBinary, settingBinary.getSettingTotalStorgeLength() );
+    calcPktLen();
 }

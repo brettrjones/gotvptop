@@ -23,7 +23,7 @@
 
 namespace
 {
-	std::string 		DATABASE_NAME 					= "gotvptop_acct.db";
+	std::string 		DATABASE_NAME 					= "nolimitconnect_acct.db";
 	const int 			DATABASE_VERSION 				= 1;
 
 	std::string 		TABLE_LAST_LOGIN	 			= "last_login";
@@ -107,9 +107,11 @@ bool AccountDb::onlineUidExistsInTable( VxGUID& onlineId, std::string& strTableN
 		{
 			bExists = true;
 		}
+
+        cursor->close();
 	}
-	cursor->close();
-	return bExists;
+
+    return bExists;
 }
 
 //=========================================================================

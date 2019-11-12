@@ -61,6 +61,10 @@ enum EPluginType
 	eMaxPluginType	
 };
 
+// for use in database mainly 
+// If you add a plugin type be sure to update getPluginName
+const char * getPluginName( EPluginType pluginType );
+
 //! \public Enumeration of plugin accessibility
 enum EPluginAccessState
 {

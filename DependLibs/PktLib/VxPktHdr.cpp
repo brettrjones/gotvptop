@@ -128,3 +128,18 @@ VxPktHdr * VxPktHdr::makeCopy( void )
     memcpy( pu8Copy, this, getPktLength() );
     return (VxPktHdr *)pu8Copy;
 }
+
+//============================================================================
+void  VxPktHdr::setGuidToNetOrder( VxGUID& srcGuid, VxGUID& destGuid )
+{
+    destGuid = srcGuid;
+    destGuid.setToNetOrder();
+}
+
+//============================================================================
+VxGUID  VxPktHdr::getGuidInHostOrder( VxGUID& srcGuid )
+{
+    VxGUID guidCopy = srcGuid;
+    guidCopy.setToHostOrder();
+    return guidCopy;
+}

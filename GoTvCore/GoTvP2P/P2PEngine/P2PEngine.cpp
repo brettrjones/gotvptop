@@ -17,6 +17,7 @@
 #include "P2PConnectList.h"
 #include <GoTvInterface/IToGui.h>
 #include "Application.h"
+#include "PluginSettingMgr.h"
 
 #include <GoTvCore/GoTvP2P/Network/NetworkMgr.h>
 #include <GoTvCore/GoTvP2P/Network/NetworkStateMachine.h>
@@ -85,6 +86,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
 , m_NetworkStateMachine( * new NetworkStateMachine( *this, m_NetworkMgr ) )
 , m_HostTest( * ( new HostTest( m_EngineSettings, m_NetServicesMgr ) ) )
 , m_PluginMgr( * new PluginMgr( *this ) )
+, m_PluginSettingMgr( GetPluginSettingMgrInstance() )
 , m_MediaProcessor( * ( new MediaProcessor( *this ) ) )
 , m_PluginServiceRelay( new PluginServiceRelay( *this, m_PluginMgr, &m_PktAnn ) )
 , m_PluginServiceFileShare( new PluginServiceFileShare( *this, m_PluginMgr, &m_PktAnn ) )
@@ -310,6 +312,29 @@ void P2PEngine::onBigListLoadComplete( RCODE rc )
 void P2PEngine::doAppStateChange( EAppState eAppState )
 {
 	m_PluginMgr.onAppStateChange( eAppState );
+}
+
+//============================================================================
+bool P2PEngine::setPluginSetting( PluginSetting& pluginSetting )
+{
+    bool result = false;
+    if( ( ePluginTypeInvalid < pluginSetting.getPluginType() ) && ( eMaxPluginType > pluginSetting.getPluginType() ) )
+    {
+        return getPluginSettingMgr().setPluginSetting( pluginSetting );
+    }
+
+    return false;
+}
+
+//============================================================================
+bool P2PEngine::getPluginSetting( EPluginType pluginType, PluginSetting& pluginSetting )
+{
+    if( ( ePluginTypeInvalid < pluginType ) && ( eMaxPluginType > pluginType ) )
+    {
+        return getPluginSettingMgr().getPluginSetting( pluginType, pluginSetting );
+    }
+
+    return false;
 }
 
 //============================================================================

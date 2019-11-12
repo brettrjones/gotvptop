@@ -1,0 +1,111 @@
+//============================================================================
+// Copyright (C) 2019 Brett R. Jones
+//
+// You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
+// provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
+//
+// This code is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//
+// bjones.engineer@gmail.com
+// http://www.nolimitconnect.com
+//============================================================================
+#pragma once
+
+#include <GoTvInterface/IDefs.h>
+#include <CoreLib/VxGUID.h>
+
+#include <string>
+#include <vector>
+
+#pragma pack(push)
+#pragma pack(1)
+
+
+// do not add any virtual s so can be used in network packets directly
+class PluginSettingHdr
+{
+public:
+    PluginSettingHdr() = default;  // default constructor
+    ~PluginSettingHdr() = default;
+
+    void                        setSettingTotalLen( int totalStorageLen )           { m_SettingTotalLen = totalStorageLen; }
+    int                         getSettingTotalLen( void )                          { return m_SettingTotalLen; }
+
+    void                        setPluginType( EPluginType pluginType )             { m_PluginType = ( uint16_t )pluginType; }
+    EPluginType                 getPluginType( void )                               { return ( EPluginType )m_PluginType; }
+    void                        setThumnailId( VxGUID&  thumbAssetId )              { m_PluginThumb = thumbAssetId; }
+    VxGUID&                     getThumnailId( void )                               { return m_PluginThumb; }
+    void                        setMaxConnectPerUser( int maxConnect )              { m_MaxConnectionsPerUser = (uint32_t)maxConnect; }
+    int                         getMaxConnectPerUser( void )                        { return m_MaxConnectionsPerUser; }
+    void                        setMaxStoreAndForwardPerUser( int maxStoreCnt )     { m_MaxStoreAndForwardPerUser = (uint32_t)maxStoreCnt; }
+    int                         getMaxStoreAndForwardPerUser( void )                { return m_MaxStoreAndForwardPerUser; }
+
+    void                        setSecondaryPermissionLevel( int permLevel )        { m_SecondaryPermissionLevel = (uint8_t)permLevel; }
+    int                         getSecondaryPermissionLevel( void )                 { return m_SecondaryPermissionLevel; }
+    void                        setSecondaryPluginType( EPluginType pluginType )    { m_SecondaryPluginType = ( uint16_t )pluginType; }
+    EPluginType                 getSecondaryPluginType( void )                      { return ( EPluginType )m_SecondaryPluginType; }
+    void                        setSecondaryThumnailId( VxGUID&  thumbAssetId )     { m_SecondaryPluginThumb = thumbAssetId; }
+    VxGUID&                     getSecondaryThumnailId( void )                      { return m_SecondaryPluginThumb; }
+    void                        setSecondaryIdentGuid( VxGUID&  identGuid )         { m_SecondaryIdentGuid = identGuid; }
+    VxGUID&                     getSecondaryIdentGuid( void )                       { return m_SecondaryIdentGuid; }
+    void                        setRes1( int res1 )                                 { m_Reserve1Setting = (uint32_t)res1; }
+    int                         getRes1( void )                                     { return m_Reserve1Setting; }
+    void                        setRes2( int res2 )                                 { m_Reserve2Setting = (uint32_t)res2; }
+    int                         getRes2( void )                                     { return m_Reserve2Setting; }
+
+    void                        setLastUpdateTimestamp( int64_t timeStamp )         { m_UpdateTimestamp = timeStamp; }
+    int64_t                     getLastUpdateTimestamp( void )                      { return m_UpdateTimestamp; }
+
+protected:
+    uint16_t                    m_SettingTotalLen = 0;
+    uint16_t                    m_SecondaryPermissionLevel = 0;
+    uint16_t                    m_PluginType = ( uint16_t )ePluginTypeInvalid;
+    uint16_t                    m_SecondaryPluginType = ( uint16_t )ePluginTypeInvalid;
+    int64_t                     m_UpdateTimestamp = 0;
+    VxGUID                      m_PluginThumb;
+    VxGUID                      m_SecondaryPluginThumb;
+    VxGUID                      m_SecondaryIdentGuid;
+
+    uint32_t                    m_MaxConnectionsPerUser = 0;
+    uint32_t                    m_MaxStoreAndForwardPerUser = 0;
+    uint32_t                    m_Reserve1Setting = 0;
+    uint32_t                    m_Reserve2Setting = 0;
+
+};
+
+#pragma pack(pop)
+
+class PluginSettingBinary;
+
+class PluginSetting : public PluginSettingHdr
+{
+public:
+    PluginSetting() = default;
+
+    void                        setTitle( std::string title )                       { m_PluginTitle = title; }
+    std::string&                getTitle( void )                                    { return m_PluginTitle; }
+    void                        setDescription( std::string desc )                  { m_PluginDesc = desc; }
+    std::string&                getDescription( void )                              { return m_PluginDesc; }
+    void                        setSecondaryTitle( std::string title )              { m_SecondaryPluginTitle = title; }
+    std::string&                getSecondaryTitle( void )                           { return m_SecondaryPluginTitle; }
+    void                        setSecondaryDescription( std::string desc )         { m_SecondaryPluginDesc = desc; }
+    std::string&                getSecondaryDescription( void )                     { return m_SecondaryPluginDesc; }
+    void                        setSecondaryUrl( std::string  url )                 { m_SecondaryUrl = url; }
+    std::string&                getSecondaryUrl( void )                             { return m_SecondaryUrl; }
+
+    bool                        toBinary( PluginSettingBinary& binarySetting );
+    bool                        fromBinary( PluginSettingBinary& binarySetting );
+
+protected:
+    bool                        setStringList( std::vector<std::string>& stringList );
+    bool                        getStringList( std::vector<std::string>& stringList );
+
+    std::string                 m_PluginTitle;
+    std::string                 m_PluginDesc;
+    std::string                 m_SecondaryPluginTitle;
+    std::string                 m_SecondaryPluginDesc;
+    std::string                 m_SecondaryUrl;
+
+};

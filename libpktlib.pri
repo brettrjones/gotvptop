@@ -23,6 +23,7 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktsMultiSession.h \
     $$PWD/DependLibs/PktLib/PktsPing.h \
     $$PWD/DependLibs/PktLib/PktsPluginOffer.h \
+    $$PWD/DependLibs/PktLib/PktsPluginSetting.h \
     $$PWD/DependLibs/PktLib/PktsRelay.h \
     $$PWD/DependLibs/PktLib/PktsSession.h \
     $$PWD/DependLibs/PktLib/PktsStoryBoard.h \
@@ -59,6 +60,7 @@ SOURCES += 	$$PWD/DependLibs/PktLib/PktAnnList.cpp \
     $$PWD/DependLibs/PktLib/PktsMultiSession.cpp \
     $$PWD/DependLibs/PktLib/PktsPing.cpp \
     $$PWD/DependLibs/PktLib/PktsPluginOffer.cpp \
+    $$PWD/DependLibs/PktLib/PktsPluginSetting.cpp \
     $$PWD/DependLibs/PktLib/PktsRelay.cpp \
     $$PWD/DependLibs/PktLib/PktsSession.cpp \
     $$PWD/DependLibs/PktLib/PktsStoryBoard.cpp \

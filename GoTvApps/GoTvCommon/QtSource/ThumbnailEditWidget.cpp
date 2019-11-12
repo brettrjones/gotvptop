@@ -17,6 +17,8 @@
 #include "ActivitySnapShot.h"
 #include "AppCommon.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
+
 
 #include <CoreLib/VxDebug.h>
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
@@ -35,6 +37,8 @@ ThumbnailEditWidget::ThumbnailEditWidget( QWidget * parent )
 {
     m_CameraSourceAvail = GuiHelpers::isCameraSourceAvailable();
     ui.setupUi( this );
+    QSize frameSize( GuiParams::getThumbnailSize().width() + 30, GuiParams::getThumbnailSize().height() + 30 );
+    ui.m_ThumbnailFrame->setFixedSize( frameSize );
 
     connect( ui.m_TakeSnapshotButton, SIGNAL( clicked() ), this, SLOT( slotSnapShotButClick() ) );
     connect( ui.m_BrowsePictureButton, SIGNAL( clicked() ), this, SLOT( slotBrowseButClick() ) );

@@ -260,6 +260,19 @@ void PluginMgr::setPluginPermission( EPluginType ePluginType, EFriendState ePlug
 }
 
 //============================================================================
+bool PluginMgr::setPluginSetting( PluginSetting& pluginSetting )
+{
+    bool result = false;
+    PluginBase * plugin = getPlugin( pluginSetting.getPluginType() );
+    if( plugin )
+    {
+        result = plugin->setPluginSetting( pluginSetting );
+    }
+
+    return result;
+}
+
+//============================================================================
 void PluginMgr::pluginApiLog( EPluginType ePluginType, const char * pMsg, ... )
 {
 	char szBuffer[2048];

@@ -34,6 +34,7 @@ protected slots:
 
 protected:
 	void						initServiceSettingsWidget( void );
+    void						launchApplet( EApplet appletType );
 
     void						updateIcons( void );
     void                        updateUi( void );

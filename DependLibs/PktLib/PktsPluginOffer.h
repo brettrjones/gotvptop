@@ -36,7 +36,7 @@ public:
 	VxGUID&						getRmtSessionId( void )					{ return m_RmtSessionId; }
 
 	void						setFileHashId( VxSha1Hash& id )			{ m_FileHashId = id; }
-	void						setFileHashId( uint8_t * id )				{ m_FileHashId.setHashData( id ); }
+	void						setFileHashId( uint8_t * id )			{ m_FileHashId.setHashData( id ); }
 	VxSha1Hash&					getFileHashId( void )					{ return m_FileHashId; }
 
 	void						setMessages( const char * pMsg1, const char * fileName = NULL );
@@ -47,14 +47,14 @@ public:
 
 private:
 	//=== vars ===//
-	uint16_t							m_u16Msg1Len;		// length of message string
-	uint16_t							m_u16FileNameLen;	// length of file name
-	uint8_t							m_u8Version;		// version
-	uint8_t							m_u8Reserved;		// reserved
-	uint16_t							m_u16Res;
-	uint32_t							m_u32Res1; 
-	uint32_t							m_u32Res2; 
-	uint32_t							m_u32Res3; 
+	uint16_t					m_u16Msg1Len;		// length of message string
+	uint16_t					m_u16FileNameLen;	// length of file name
+	uint8_t						m_u8Version;		// version
+	uint8_t						m_u8Reserved;		// reserved
+	uint16_t					m_u16Res;
+	uint32_t					m_u32Res1; 
+	uint32_t					m_u32Res2; 
+	uint32_t					m_u32Res3; 
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_FileHashId;
@@ -79,16 +79,16 @@ public:
 	EOfferResponse				getOfferResponse( void )						{ return (EOfferResponse)m_u8Response; }
 
 private:
-	uint8_t							m_u8Version;		// version
-	uint8_t							m_u8Reserved;		// reserved
-	uint8_t							m_u8Response;		// response
-	uint8_t							m_u8Res2;			// reserved2
-	uint32_t							m_u32Error;			// error if any
-	uint64_t							m_u64Arg2;			// arg2
-	uint64_t							m_u64Arg3;			// third arg if can be binary
-	uint32_t							m_u32Res1; 
-	uint32_t							m_u32Res2; 
-	uint32_t							m_u32Res3; 
+	uint8_t						m_u8Version;		// version
+	uint8_t						m_u8Reserved;		// reserved
+	uint8_t						m_u8Response;		// response
+	uint8_t						m_u8Res2;			// reserved2
+	uint32_t					m_u32Error;			// error if any
+	uint64_t					m_u64Arg2;			// arg2
+	uint64_t					m_u64Arg3;			// third arg if can be binary
+	uint32_t					m_u32Res1; 
+	uint32_t					m_u32Res2; 
+	uint32_t					m_u32Res3; 
 	VxGUID						m_LclSessionId;
 	VxGUID						m_RmtSessionId;
 	VxSha1Hash					m_FileHashId;

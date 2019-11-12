@@ -13,11 +13,14 @@
 //============================================================================
 
 #include "ServiceSettingsWidget.h"
+#include "AppletBase.h"
 #include "AppCommon.h"
 #include "AppGlobals.h"
-#include "ActivityInformation.h"
+#include "AppletMgr.h"
 #include "GuiHelpers.h"
 
+#include "ActivityInformation.h"
+#include "GuiHelpers.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
@@ -59,7 +62,7 @@ void ServiceSettingsWidget::updateIcons( void )
 
     ui.m_SettingsButton->setIcon( m_MyApp.getMyIcons().getPluginSettingsIcon( m_PluginType ) );
     QString settingsText = GuiHelpers::describePlugin( m_PluginType, false ).c_str();
-    settingsText += QObject::tr( " Settings" );
+    settingsText += QObject::tr( "Settings" );
     ui.m_SettingsLabel->setText( settingsText );
 
 
@@ -77,19 +80,35 @@ void ServiceSettingsWidget::updateIcons( void )
 //============================================================================
 void ServiceSettingsWidget::slotServiceSettingsClicked()
 {
-    EApplet viewAppletType = GuiHelpers::pluginTypeToSettingsApplet( m_PluginType );
-    if( eAppletUnknown == viewAppletType )
-    {
-        ui.m_ViewServiceFrame->setVisible( false );
-    }
+    launchApplet( GuiHelpers::pluginTypeToSettingsApplet( m_PluginType ) );
 }
 
 //============================================================================
 void ServiceSettingsWidget::slotViewServiceClicked()
 {
-    EApplet viewAppletType = GuiHelpers::pluginTypeToViewApplet( m_PluginType );
-    if( eAppletUnknown != viewAppletType )
+    launchApplet( GuiHelpers::pluginTypeToViewApplet( m_PluginType ) );
+}
+
+//============================================================================
+void ServiceSettingsWidget::launchApplet( EApplet appletType )
+{
+    if( eAppletUnknown != appletType )
     {
-        ui.m_ViewServiceFrame->setVisible( false );
+        AppletBase * parentApplet = GuiHelpers::findParentApplet( this );
+        if( parentApplet )
+        {
+            m_MyApp.getAppletMgr().launchApplet( appletType, parentApplet );
+        }
+        else
+        {
+            QString msgText = QObject::tr( "Unable to determine parent" );
+            QMessageBox::information( this, msgText, msgText );
+        }
+    }
+    else
+    {
+        QString msgText = QObject::tr( "Unknown Applet " );
+        QMessageBox::information( this, msgText, msgText );
     }
 }
+

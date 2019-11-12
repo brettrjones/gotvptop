@@ -177,6 +177,10 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/FileShareSettings.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PConnectList.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h \
+	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSetting.h \
+	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingBinary.h \
+	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingDb.h \
+	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingMgr.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/AudioJitterBuffer.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/FileLibraryDb.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/FileLibraryMgr.h \
@@ -361,6 +365,10 @@ SOURCES += 	$$PWD/GoTvCore/GoTvP2P/Anchor/AnchorDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineScan.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineSearch.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineSktCallback.cpp \
+	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSetting.cpp \
+	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingBinary.cpp \
+	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingDb.cpp \
+	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/AudioJitterBuffer.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/FileLibraryDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/FileLibraryMgr.cpp \

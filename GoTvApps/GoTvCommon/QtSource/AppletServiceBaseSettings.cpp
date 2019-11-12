@@ -25,43 +25,25 @@
 AppletServiceBaseSettings::AppletServiceBaseSettings( const char * objName, AppCommon& app, QWidget * parent )
     : AppletBase( objName, app, parent )
 {
-    setAppletType( eAppletServiceSettings );
-    ui.setupUi( this );
-    setTitleBarText( DescribeApplet( m_EAppletType ) );
-}
-
-////============================================================================
-//void AppletServiceBaseSettings::setAppletType( EApplet applet )
-//{
-//    AppletBase::setAppletType( applet );
-//    setupServiceApplet();
-//}
-
-//============================================================================
-void AppletServiceBaseSettings::setPluginType( EPluginType pluginType )
-{
-    m_PluginType = pluginType;
-    //AppletBase::setAppletType( applet );
-    setupServiceApplet();
 }
 
 //============================================================================
-void AppletServiceBaseSettings::setupServiceApplet()
+void AppletServiceBaseSettings::setupServiceBaseApplet( EApplet applet, EPluginType pluginType )
 {
+    setAppletType( applet );
+    setPluginType( pluginType );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
     getServiceUrlLabel()->setVisible( false );
     getServiceUrlEdit()->setVisible( false );
-    getStartButton()->setVisible( false );
-    getStopButton()->setVisible( false );
     getInformationWidget()->setVisible( false );
 
-    //EPluginType pluginType = GuiHelpers::getAppletAssociatedPlugin( m_EAppletType );
-    if( ePluginTypeInvalid != m_PluginType )
+    if( ePluginTypeInvalid != getPluginType() )
     {
-        getPermissionWidget()->setPluginType( m_PluginType );
-        getServiceTitle()->setText( GuiHelpers::describePlugin( m_PluginType, false ).c_str() );
+        getPermissionWidget()->setPluginType( getPluginType() );
+        getServiceTitle()->setText( GuiHelpers::describePlugin( getPluginType(), false ).c_str() );
+        loadPluginSetting();
     }
 
     connectServiceWidgets();
@@ -70,14 +52,51 @@ void AppletServiceBaseSettings::setupServiceApplet()
 //============================================================================
 void AppletServiceBaseSettings::connectServiceWidgets()
 {
+    connect( getApplyButton(), SIGNAL( clicked() ), this, SLOT( slotApplyButtonClicked() ) );
 }
 
 //============================================================================
-void AppletServiceBaseSettings::loadServiceFromSettings()
+void AppletServiceBaseSettings::loadPluginSetting()
 {
+    if( ePluginTypeInvalid != getPluginType() )
+    {
+        m_OrigPermissionLevel = m_MyApp.getAppGlobals().getUserIdent()->getPluginPermission( getPluginType() );
+        getPermissionWidget()->setPermissionLevel( m_OrigPermissionLevel );
+        m_MyApp.getEngine().getPluginSettingMgr().getPluginSetting( getPluginType(), m_PluginSetting );
+        loadUiFromSetting();
+    }
 }
 
 //============================================================================
-void AppletServiceBaseSettings::saveServiceToSettings()
+void AppletServiceBaseSettings::savePluginSetting()
 {
+    if( ePluginTypeInvalid != getPluginType() )
+    {
+        saveUiToSetting();
+        m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
+    }
+}
+
+//============================================================================
+void AppletServiceBaseSettings::loadUiFromSetting()
+{
+    if( ePluginTypeInvalid != getPluginType() )
+    {
+
+    }
+}
+
+//============================================================================
+void AppletServiceBaseSettings::saveUiToSetting()
+{
+    if( ePluginTypeInvalid != getPluginType() )
+    {
+    }
+}
+
+//============================================================================
+void AppletServiceBaseSettings::slotApplyButtonClicked()
+{
+    saveUiToSetting();
+    m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
 }

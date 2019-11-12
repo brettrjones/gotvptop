@@ -26,9 +26,9 @@
 //============================================================================
 PluginBase::PluginBase( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PktPluginHandlerBase()
-, m_Engine(engine)
+, m_Engine( engine )
 , m_PluginMgr( pluginMgr )
-, m_MyIdent(myIdent)
+, m_MyIdent( myIdent )
 {
 }
 
@@ -36,6 +36,32 @@ PluginBase::PluginBase( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * my
 IToGui& PluginBase::getToGui()
 { 
     return m_Engine.getToGui(); 
+}
+
+//============================================================================
+void PluginBase::setPluginType( EPluginType ePluginType )
+{
+    m_ePluginType = ePluginType;
+    m_PluginSetting.setPluginType( ePluginType );
+    m_Engine.getPluginSetting( ePluginType, m_PluginSetting );
+    generateSettingPkt( m_PluginSetting );
+}
+
+//============================================================================
+bool PluginBase::setPluginSetting( PluginSetting& pluginSetting )
+{
+    m_PluginSetting = pluginSetting;
+    generateSettingPkt( pluginSetting );
+    return true;
+}
+
+//============================================================================
+bool PluginBase::generateSettingPkt( PluginSetting& pluginSetting )
+{
+    PluginSettingBinary settingBinary;
+    pluginSetting.toBinary( settingBinary );
+    m_PktPluginSettingReply.setSettingBinary( settingBinary );
+    return true;
 }
 
 //============================================================================
@@ -252,6 +278,12 @@ bool PluginBase::fromGuiInstMsg(	VxNetIdent *	netIdent,
 void PluginBase::makeShortFileName( const char * pFullFileName, std::string& strShortFileName )
 {
 	makeShortFileName( pFullFileName, strShortFileName );
+}
+
+//============================================================================ 
+EPluginAccessState PluginBase::canAcceptNewSession( VxNetIdent * netIdent ) 
+{ 
+    return netIdent->getHisAccessPermissionFromMe( m_ePluginType ); 
 }
 
 //============================================================================ 

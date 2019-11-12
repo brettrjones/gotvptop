@@ -1,4 +1,3 @@
-#pragma once
 //============================================================================
 // Copyright (C) 2013 Brett R. Jones
 // Issued to MIT style license by Brett R. Jones in 2017
@@ -13,7 +12,7 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-
+#pragma once
 
 #include <CoreLib/DbBase.h>
 #include "UserProfile.h"

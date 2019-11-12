@@ -16,23 +16,25 @@
 
 #include <GoTvInterface/IDefs.h>
 #include <PktLib/PktPluginHandlerBase.h>
+#include <PktLib/PktsPluginSetting.h>
 #include <PktLib/VxCommon.h>
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetXferMgr.h>
+#include <GoTvCore/GoTvP2P/P2PEngine/PluginSetting.h>
 
 #include <CoreLib/VxMutex.h>
 #include <CoreLib/MediaCallbackInterface.h>
 
-class PluginSessionBase;
-class VxSktBase;
-class PluginMgr;
-class IToGui;
-class P2PEngine;
 class FileShareSettings;
-class PluginSessionBase;
+class IToGui;
+class NetServiceHdr;
+class P2PEngine;
 class P2PSession;
+class PluginMgr;
+class PluginSessionBase;
+class PluginSetting;
 class RxSession;
 class TxSession;
-class NetServiceHdr;
+class VxSktBase;
 
 class PluginBase : public PktPluginHandlerBase, public MediaCallbackInterface
 {
@@ -60,6 +62,7 @@ public:
 	virtual bool				isPluginEnabled( void );
 	virtual EFriendState		getPluginPermission( void );
 	virtual void				setPluginPermission( EFriendState eFriendState );
+
 	virtual bool				isAccessAllowed( VxNetIdent * hisIdent );
 	virtual bool				isAppPaused( void )										{ return m_AppIsPaused; }
 	virtual void				setIsPluginInSession( bool inSession )					{ m_bPluginIsInSession = inSession; }
@@ -71,13 +74,15 @@ public:
 	//=== getter/setters ===//
 	virtual P2PEngine&			getEngine( void )										{ return m_Engine; }
     virtual IToGui&			    getToGui( void );
-	virtual void				setPluginType( EPluginType ePluginType )				{ m_ePluginType = ePluginType; }					
-	virtual EPluginType			getPluginType( void )									{ return m_ePluginType; }					
+    virtual void				setPluginType( EPluginType ePluginType );
+    virtual EPluginType			getPluginType( void )									{ return m_ePluginType; }
+    virtual bool                setPluginSetting( PluginSetting& pluginSetting );
+    virtual PluginSetting&      getPluginSetting( void )                                { return m_PluginSetting; }
+
 	virtual PluginMgr&			getPluginMgr( void )									{ return m_PluginMgr;	}
 	virtual	VxMutex&			getPluginMutex( void )									{ return m_PluginMutex; }					
 	virtual	EAppState			getPluginState( void );
 	virtual	void				setPluginState( EAppState ePluginState )				{ m_ePluginState = ePluginState;};
-
 
 	virtual void				fromGuiUserLoggedOn( void )								{};
 
@@ -160,7 +165,7 @@ public:
     virtual void				onPktWebServerPutChunkAck	( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent ) override;
 
 	bool						txPacket( VxNetIdent * netIdent, VxSktBase * sktBase, VxPktHdr * poPkt, bool bDisconnectAfterSend = false );
-	virtual EPluginAccessState	canAcceptNewSession( VxNetIdent * netIdent ) { return netIdent->getHisAccessPermissionFromMe( m_ePluginType ); }
+    virtual EPluginAccessState	canAcceptNewSession( VxNetIdent * netIdent );
 
 	virtual P2PSession *		createP2PSession( VxSktBase * sktBase, VxNetIdent * netIdent );
 	virtual P2PSession *		createP2PSession( VxGUID& lclSessionId, VxSktBase * sktBase, VxNetIdent * netIdent );
@@ -175,6 +180,7 @@ public:
 
 protected:
 	virtual void				makeShortFileName( const char * pFullFileName, std::string& strShortFileName );
+    virtual bool                generateSettingPkt( PluginSetting& pluginSetting );
 
 	//=== vars ===//
 	P2PEngine&					m_Engine;
@@ -182,9 +188,12 @@ protected:
 	
 	VxNetIdent *				m_MyIdent;
 
-	EPluginType					m_ePluginType;
+	EPluginType					m_ePluginType = ePluginTypeInvalid;
 	EAppState					m_ePluginState;
 	VxMutex						m_PluginMutex;
+    PluginSetting               m_PluginSetting;
+    PktPluginSettingReply       m_PktPluginSettingReply;
+
 	bool						m_bPluginIsInSession;
 	bool						m_ServerIsInSession;
 	bool						m_AppIsPaused;

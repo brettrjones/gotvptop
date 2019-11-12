@@ -16,6 +16,7 @@
 #include "ActivityPermissions.h"
 #include "MyIcons.h"
 #include "AppGlobals.h"
+#include "AppCommon.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
@@ -137,7 +138,7 @@ EFriendState ActivityPermissions::getPermissionSelection( void )
 //! Implement the OnClickListener callback    
 void ActivityPermissions::onOkButClick( void )
 {
-	UpdatePluginPermissions( m_Engine, m_ePluginType, getPermissionSelection() );
+	m_MyApp.getAppGlobals().updatePluginPermission( m_ePluginType, getPermissionSelection() );
 	accept();
 }
 

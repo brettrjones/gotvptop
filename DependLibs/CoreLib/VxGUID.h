@@ -73,6 +73,11 @@ public:
 	std::string					describeVxGUID( void );
 	static bool					isVxGUIDHexStringValid( const char * pId );
 
+    // set bytes to network order
+    void                       setToNetOrder();
+    // set bytes to host cpu endianess
+    void                       setToHostOrder();
+
 protected:
     // buffer must be at least 17 characters in length
     void                        uint64ToHexAscii( char * retBuf, uint64_t& val );

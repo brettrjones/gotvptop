@@ -592,6 +592,18 @@
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceHost.cpp">
       <Filter>GoTvP2P\NetServices</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSetting.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSettingMgr.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSettingDb.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSettingBinary.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1288,6 +1300,18 @@
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceHost.h">
       <Filter>GoTvP2P\NetServices</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSetting.h">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSettingDb.h">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSettingMgr.h">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSettingBinary.h">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -1365,6 +1389,9 @@
     <Filter Include="GoTvP2P\HostMgr">
       <UniqueIdentifier>{5d9a321a-319e-43d0-941b-9e189c002499}</UniqueIdentifier>
     </Filter>
+    <Filter Include="QtBuild">
+      <UniqueIdentifier>{0921fc77-19ec-4125-8b2f-00cc5b3f5e56}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\GoTvVersion.txt" />
@@ -1374,5 +1401,13 @@
     <Text Include="..\..\GoTvP2P\EchoCancel\WEBRTC_LICENSE_THIRD_PARTY.txt">
       <Filter>GoTvP2P\EchoCancel</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\libptopengine.pri">
+      <Filter>QtBuild</Filter>
+    </None>
+    <None Include="..\..\..\libptopengine.pro">
+      <Filter>QtBuild</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -24,7 +24,9 @@ class PermissionWidget : public QWidget
 public:
     PermissionWidget( QWidget * parent = 0 );
 
-    void						setPluginType( EPluginType pluginType, int subType = 0 ) { m_PluginType = pluginType; m_SubPluginType = subType;  updateUi();  updatePermissionIcon(); }
+    void						setPluginType( EPluginType pluginType, int subType = 0 );
+    void						setPermissionLevel( EFriendState permLevel );
+    EFriendState                getPermissionLevel( void );
 
 protected slots:
     void                        slotHandleSelectionChanged( int );
@@ -41,5 +43,7 @@ protected:
     AppCommon&                  m_MyApp;
     EPluginType                 m_PluginType = ePluginTypeInvalid;
     int                         m_SubPluginType = 0;
+    bool                        m_OrigPermissionIsSet = false;
+    EFriendState                m_OrigPermissionLevel = eFriendStateIgnore;
 	Ui::PermissionWidgetUi	    ui;
 };

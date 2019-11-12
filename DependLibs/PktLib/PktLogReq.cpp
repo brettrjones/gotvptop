@@ -17,8 +17,6 @@
 
 //============================================================================
 PktLogReq::PktLogReq()
-: m_u16Res(0)
-, m_u32Enable(0)
 {
 	setPktType( PKT_TYPE_LOG_REQ );
 	setPktLength( sizeof( PktLogReq ) );

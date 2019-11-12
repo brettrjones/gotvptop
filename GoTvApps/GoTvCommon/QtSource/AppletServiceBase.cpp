@@ -18,7 +18,6 @@
 #include "MyIcons.h"
 #include "GuiHelpers.h"
 
-
 #include <CoreLib/VxDebug.h>
 
 //============================================================================

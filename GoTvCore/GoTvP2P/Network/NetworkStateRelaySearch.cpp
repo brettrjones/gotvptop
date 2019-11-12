@@ -595,7 +595,7 @@ void NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers( void )
 	buildAnnounceCmd( strNetCmdHdr, acceptedPort, anchorList, eHostActionRelaysOnly );
 	int anchorDataLen = anchorList.m_TotalLen;
 
-	RCODE rc = netServConn.sendData( strNetCmdHdr.c_str(), strNetCmdHdr.length() );
+	RCODE rc = netServConn.sendData( strNetCmdHdr.c_str(), (int)strNetCmdHdr.length() );
 	if( rc )
 	{
 		LogMsg( LOG_ERROR, "getMoreRelaysFromAnnounceServers: send header error %d %s\n", rc, VxDescribeSktError( rc ) );

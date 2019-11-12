@@ -45,16 +45,11 @@ AppletEditAvatarImage::AppletEditAvatarImage( AppCommon& app, QWidget * parent )
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
     ui.m_ServiceSettingsWidget->setPluginType( ePluginTypeAvatarImage );
     ui.m_ServiceSettingsWidget->setViewServiceVisible( false );
+
  
     m_MyIdent = m_MyApp.getAppGlobals().getUserIdent();
     m_strOrigOnlineName = m_MyIdent->getOnlineName();
     m_strOrigMoodMessage = m_MyIdent->getOnlineDescription();
-    VxGUID testGuid = m_MyIdent->getAvatarGuid();
-    std::string hexStr = testGuid.toHexString();
-    VxGUID testGuid2;
-    testGuid2.fromVxGUIDHexString( hexStr.c_str() );
-    LogMsg( LOG_DEBUG, "Test guid %s %s", testGuid.toHexString().c_str(), testGuid2.toHexString().c_str() );
-
     if( m_MyIdent->getAvatarGuid().isVxGUIDValid() )
     {
         AssetInfo * thumbAsset = m_AssetMgr.findAsset( m_MyIdent->getAvatarGuid() );
@@ -76,7 +71,7 @@ void AppletEditAvatarImage::onApplyButClick( void )
         VxGUID::generateNewVxGUID( assetGuid );
         QString fileName = VxGetAppDirectory( eAppDirThumbs ).c_str();
         fileName += assetGuid.toHexString().c_str();
-        fileName += ".png";
+        fileName += ".nlt"; // use extension not known as image so thumbs will not be scanned by android image gallery etc
         if( ui.m_ThumbnailEditWidget->saveToPngFile( fileName ) && VxFileUtil::fileExists( fileName.toUtf8().constData() ) )
         {
             AssetInfo assetInfo( (const char *)fileName.toUtf8().constData(), VxFileUtil::fileExists( fileName.toUtf8().constData() ), (uint16_t)eAssetTypeThumbnail );

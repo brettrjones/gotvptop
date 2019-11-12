@@ -23,7 +23,7 @@ class PktHandlerBase
 {
 public:
 	PktHandlerBase();
-	virtual ~PktHandlerBase();
+	virtual ~PktHandlerBase() = default;
 
 	virtual void				handlePkt				( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
@@ -124,6 +124,24 @@ public:
 
 	virtual void				onPktImAliveReq				( VxSktBase * sktBase, VxPktHdr * pktHdr );
 	virtual void				onPktImAliveReply			( VxSktBase * sktBase, VxPktHdr * pktHdr );
+
+    virtual void				onPktPluginSettingReq       ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktPluginSettingReply     ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+
+    virtual void				onPktThumbSettingReq        ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbSettingReply      ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbSettingChunkReq   ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbSettingChunkReply ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+
+    virtual void				onPktThumbAvatarReq         ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbAvatarReply       ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbAvatarChunkReq    ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbAvatarChunkReply  ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+
+    virtual void				onPktThumbFileReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbFileReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbFileChunkReq      ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktThumbFileChunkReply    ( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
 	//packet type 250 and greater not allowed
 	typedef void (PktHandlerBase::*RC_SYS_BASE_PKT_FUNCTION)( VxSktBase *, VxPktHdr * );  

@@ -599,6 +599,10 @@
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineScan.cpp" />
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineSearch.cpp" />
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineSktCallback.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSetting.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSettingBinary.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSettingDb.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSettingMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\AudioJitterBuffer.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\FileLibraryDb.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\FileLibraryMgr.cpp" />
@@ -834,6 +838,10 @@
     <ClInclude Include="..\..\GoTvP2P\P2PEngine\FileShareSettings.h" />
     <ClInclude Include="..\..\GoTvP2P\P2PEngine\P2PConnectList.h" />
     <ClInclude Include="..\..\GoTvP2P\P2PEngine\P2PEngine.h" />
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSetting.h" />
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSettingBinary.h" />
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSettingDb.h" />
+    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSettingMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\AudioJitterBuffer.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\FileLibraryDb.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\FileLibraryMgr.h" />
@@ -907,6 +915,10 @@
     <Text Include="..\..\..\GoTvVersion.txt" />
     <Text Include="..\..\GoTvP2P\EchoCancel\WEBRTC_LICENSE.txt" />
     <Text Include="..\..\GoTvP2P\EchoCancel\WEBRTC_LICENSE_THIRD_PARTY.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\libptopengine.pri" />
+    <None Include="..\..\..\libptopengine.pro" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

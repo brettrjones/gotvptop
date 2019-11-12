@@ -14,29 +14,47 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-class PktAnnBase;
+#include "VxPktHdr.h"
+#include "VxSearchFlags.h"
+#include "VxCommon.h"
+#include <GoTvInterface/IScan.h>
+
+#include <GoTvCore/GoTvP2P/P2PEngine/PluginSettingBinary.h>
+
 
 #pragma pack(push) 
 #pragma pack(1)
-#define MAX_PKT_ANN_LIST_LEN 4080
-
-class PktAnnList : public VxPktHdr
+class PktPluginSettingReq : public VxPktHdr
 {
 public:
-	PktAnnList();
-
-	int							emptyLen( void );
-	void						calcPktLen( void );
-	int						    addAnn( PktAnnBase * pgPktAnn );
+    PktPluginSettingReq();
 
 private:
 	//=== vars ===//
-	uint16_t					m_u16ListCnt;
-	uint16_t					m_u16Flags;
-	uint32_t					m_u16Reason;
-	uint32_t					m_u16Res1;
-	uint32_t					m_u32Res2;
-	uint8_t						m_au8List[ MAX_PKT_ANN_LIST_LEN ];
+    uint32_t					m_SettingRes1 = 0;
+    uint32_t					m_SettingRes2 = 0;
+};
+
+class PktPluginSettingReply : public VxPktHdr
+{
+public:
+    PktPluginSettingReply();
+
+	void calcPktLen( void );
+
+    PluginSettingBinary *       getSettingBinary( void );
+    void                        setSettingBinary( PluginSettingBinary& settingBinary );
+
+private:
+	//=== vars ===//
+    uint32_t					m_SettingRes1 = 0;
+    uint32_t					m_SettingRes2 = 0;
+    uint8_t						m_SettingData[ MAX_PLUGIN_SETTING_STORAGE_LEN + 16 ];
 };
 
 #pragma pack(pop)
+
+
+
+
+

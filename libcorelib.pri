@@ -19,6 +19,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/CoreLib/OsDetect.h \
     $$PWD/DependLibs/CoreLib/SHA1.h \
     $$PWD/DependLibs/CoreLib/StdOutRedirect.h \
+	$$PWD/DependLibs/CoreLib/StringListBinary.h \
     $$PWD/DependLibs/CoreLib/VarToString.h \
     $$PWD/DependLibs/CoreLib/VxAppInfo.h \
     $$PWD/DependLibs/CoreLib/VxBuffer.h \
@@ -131,5 +132,7 @@ SOURCES += 	\
     $$PWD/DependLibs/CoreLib/SHA1_corelib.cpp \
     $$PWD/DependLibs/CoreLib/sqlite3_corelib.c \
     $$PWD/DependLibs/CoreLib/sqlitedataset_corelib.cpp \
-    $$PWD/DependLibs/CoreLib/StdOutRedirect_corelib.cpp
+    $$PWD/DependLibs/CoreLib/StdOutRedirect_corelib.cpp \
+	$$PWD/DependLibs/CoreLib/StringListBinary.cpp \
+
 

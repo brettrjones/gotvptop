@@ -16,6 +16,8 @@
 #include "ActivityPermissionsRelay.h"
 #include "MyIcons.h"
 #include "AppGlobals.h"
+#include "AppCommon.h"
+
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
@@ -134,7 +136,7 @@ EFriendState ActivityPermissionsRelay::getPermissionSelection( void )
 //! Implement the OnClickListener callback    
 void ActivityPermissionsRelay::onOkButClick( void )
 {
-	UpdatePluginPermissions( m_Engine, m_ePluginType, getPermissionSelection() );
+	m_MyApp.getAppGlobals().updatePluginPermission( m_ePluginType, getPermissionSelection() );
     //int userCnt = ui.m_UserAllowCntSpinBox->value();
     //int anonCnt = ui.m_AnonAllowCntSpinBox->value();
 	NetSettings netSettings;

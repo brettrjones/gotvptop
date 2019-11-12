@@ -15,6 +15,7 @@
 
 #include "AppletBase.h"
 #include <GoTvInterface/IToGui.h>
+#include <GoTvCore/GoTvP2P/P2PEngine/PluginSettingMgr.h>
 
 #include "ui_AppletServiceBaseSettings.h"
 
@@ -26,8 +27,7 @@ public:
 	virtual ~AppletServiceBaseSettings() = default;
 
     // override so we do initialization after applet type is set
-    //void						setAppletType( EApplet applet )	override;
-    void						setPluginType( EPluginType pluginType );
+    virtual void                setupServiceBaseApplet( EApplet applet, EPluginType pluginType );
 
     virtual QLabel *            getServiceTitle() { return ui.m_ServiceTitleLabel; }
     //virtual QLabel *            getStatusLabel() { return ui.m_StatusLabel; }
@@ -42,25 +42,28 @@ public:
     virtual QLineEdit *         getServiceNameEdit() { return ui.m_NameEdit; }
     virtual QPlainTextEdit *    getServiceDescriptionEdit() { return ui.m_DescriptionEdit; }
 
-    virtual QPushButton *       getStartButton() { return ui.m_StartButton; }
-    virtual QPushButton *       getStopButton() { return ui.m_StopButton; }
+    virtual QPushButton *       getApplyButton()            { return ui.m_ApplyButton; }
 
-    virtual PermissionWidget *  getPermissionWidget() { return ui.m_PermissionWidget; }
-    virtual InformationWidget * getInformationWidget() { return ui.m_InfoWidget; }
-    virtual LogWidget *         getLogWidget() { return ui.m_LogWidget; }
+    virtual PermissionWidget *  getPermissionWidget()       { return ui.m_PermissionWidget; }
+    virtual InformationWidget * getInformationWidget()      { return ui.m_InfoWidget; }
+    virtual LogWidget *         getLogWidget()              { return ui.m_LogWidget; }
+
+protected slots:
+    virtual void                slotApplyButtonClicked();
 
 protected:
-    virtual void                setupServiceApplet();
     virtual void                connectServiceWidgets();
-    virtual void                loadServiceFromSettings();
-    virtual void                saveServiceToSettings();
-
+    virtual void                loadPluginSetting();
+    virtual void                savePluginSetting();
+    virtual void                loadUiFromSetting();
+    virtual void                saveUiToSetting();
 
 
     Ui::AppletServiceBaseSettingsUi ui;
 
     QWidget *                   m_HostServiceWidget;
-    EPluginType                 m_PluginType = ePluginTypeInvalid;
+    PluginSetting               m_PluginSetting;
+    EFriendState                m_OrigPermissionLevel = eFriendStateIgnore;
 };
 
 

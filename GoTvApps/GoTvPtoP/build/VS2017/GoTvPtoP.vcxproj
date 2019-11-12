@@ -911,13 +911,6 @@
     <None Include="..\..\..\..\GoTvPtoPAppLib.pri" />
     <None Include="..\..\..\..\GoTvPtoPAppLib.pro" />
     <None Include="..\..\..\..\GoTvPtoP_App.pro" />
-    <None Include="..\..\..\GoTvCommon\QtSource\Resources\story_board.htm">
-      <DeploymentContent>true</DeploymentContent>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </None>
     <None Include="..\..\..\GoTvCommon\Resources\aligh-left.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\align-center.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\align-left.svg" />
@@ -933,12 +926,6 @@
     <None Include="..\..\..\GoTvCommon\Resources\arrow-up-right.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\arrow-up.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\bell.svg" />
-    <None Include="..\..\..\GoTvCommon\Resources\bubbles.svg">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </None>
     <None Include="..\..\..\GoTvCommon\Resources\bug.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\cam-preview.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\cam-rotate.svg" />
@@ -951,12 +938,6 @@
     <None Include="..\..\..\GoTvCommon\Resources\cloud-check.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\cloud-download.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\cloud-upload.svg" />
-    <None Include="..\..\..\GoTvCommon\Resources\cubic.svg">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </None>
     <None Include="..\..\..\GoTvCommon\Resources\dice.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\earth-globe.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\emoj01.svg" />

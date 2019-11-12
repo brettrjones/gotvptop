@@ -28,6 +28,7 @@ class IToGui;
 class P2PEngine;
 class MediaProcesser;
 class PktAnnounce;
+class PluginSetting;
 class BigListMgr;
 class VxPktHdr;
 
@@ -59,6 +60,8 @@ public:
 
 	EFriendState				getPluginPermission( EPluginType ePluginType );
 	void						setPluginPermission( EPluginType ePluginType, EFriendState ePluginPermission );
+
+    bool                        setPluginSetting( PluginSetting& pluginSetting );
 
 	virtual void				fromGuiNetworkAvailable( void );
 

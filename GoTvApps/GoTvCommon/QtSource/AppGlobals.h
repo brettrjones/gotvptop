@@ -35,19 +35,17 @@ public:
 	bool						getRequiresProxy( void );
 	VxNetIdent	*				getUserIdent( void );
 	bool						saveUserIdentToDatabase( void );
+    //! update identity and save to database then send permission change to engine
+    void						updatePluginPermission( EPluginType ePluginType, EFriendState ePluginPermission );
 
 	void						launchWebBrowser( const char * pUri );
 protected:
-	AppCommon&					m_AppCommon;
+	AppCommon&					m_MyApp;
 };
 
 //! gui params and constants
 GuiParams&                      GetGuiParams();
 
-//! update identity and save to database then send permission change to engine
-void							UpdatePluginPermissions(	P2PEngine& engine, 
-															EPluginType ePluginType, 
-															EFriendState ePluginPermission );
 //! update has picture and save to database then send picture change to engine
 void							UpdateHasPicture( P2PEngine& engine, int bHasPicture );
 
