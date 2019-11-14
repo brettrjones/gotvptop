@@ -56,9 +56,9 @@ public:
 	bool						isThisNodeNetServiceWebsite( void )				{ return m_bNetServiceIpMatch; }
 	bool						isNetworkWebsitesResolved( void )				{ return m_bWebsiteUrlsResolved; }
 	std::string&				getHostIp( void )								{ return m_HostIp; }
-	uint16_t							getHostPort( void )							{ return m_u16HostPort; }
+	uint16_t					getHostPort( void )							    { return m_u16HostPort; }
 	std::string&				getNetServiceIp( void )							{ return m_NetServiceIp; }
-	uint16_t							getNetServicePort( void )						{ return m_u16NetServicePort; }
+	uint16_t					getNetServicePort( void )						{ return m_u16NetServicePort; }
 
 	bool						isP2POnline( void );
 

@@ -13,7 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginServiceConnectionTest.h"
+#include "PluginClientConnectionTest.h"
 #include "PluginMgr.h"
 #include "P2PSession.h"
 #include "RxSession.h"
@@ -24,8 +24,8 @@
 #include <CoreLib/VxFileUtil.h>
 
 //============================================================================
-PluginServiceConnectionTest::PluginServiceConnectionTest( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBaseHostService( engine, pluginMgr, myIdent )
+PluginClientConnectionTest::PluginClientConnectionTest( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+: PluginBaseClient( engine, pluginMgr, myIdent )
 {
-    setPluginType( ePluginTypeServiceConnectTest );
+    setPluginType( ePluginTypeClientConnectTest );
 }

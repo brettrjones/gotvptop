@@ -51,7 +51,8 @@ const char * getPluginName( EPluginType pluginType )
     case ePluginTypeAvatarImage: return "ePluginTypeAvatarImage";
     case ePluginTypeCamServer: return "ePluginTypeCamServer";
     case ePluginTypeChatRoom: return "ePluginTypeChatRoom";
-    case ePluginTypeConnectTest: return "ePluginTypeConnectTest";
+    case ePluginTypeServiceConnectTest: return "ePluginTypeServiceConnectTest";
+    case ePluginTypeClientConnectTest: return "ePluginTypeClientConnectTest";
     case ePluginTypeFileServer: return "ePluginTypeFileServer";
     case ePluginTypeFileXfer: return "ePluginTypeFileXfer";
     case ePluginTypeHostGroup: return "ePluginTypeHostGroup";

@@ -58,7 +58,8 @@ public:
 	PluginBase(	P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
 	virtual ~PluginBase() override = default;
 
-	virtual void				pluginShutdown( void ){}
+    virtual void				pluginStartup( void );
+    virtual void				pluginShutdown( void ){}
 	virtual bool				isPluginEnabled( void );
 	virtual EFriendState		getPluginPermission( void );
 	virtual void				setPluginPermission( EFriendState eFriendState );
@@ -186,15 +187,15 @@ protected:
 	P2PEngine&					m_Engine;
 	PluginMgr&					m_PluginMgr;
 	
-	VxNetIdent *				m_MyIdent;
+	VxNetIdent *				m_MyIdent = nullptr;
 
 	EPluginType					m_ePluginType = ePluginTypeInvalid;
-	EAppState					m_ePluginState;
+	EAppState					m_ePluginState = eAppStateInvalid;
 	VxMutex						m_PluginMutex;
     PluginSetting               m_PluginSetting;
     PktPluginSettingReply       m_PktPluginSettingReply;
 
-	bool						m_bPluginIsInSession;
-	bool						m_ServerIsInSession;
-	bool						m_AppIsPaused;
+	bool						m_bPluginIsInSession = false;
+	bool						m_ServerIsInSession = false;
+	bool						m_AppIsPaused = false;
 };

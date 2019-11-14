@@ -724,7 +724,10 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
     case ePluginTypeCamServer:
         return eMyIconSettingsShareWebCam;
 
-    case ePluginTypeConnectTest:
+    case ePluginTypeServiceConnectTest:
+        return eMyIconSettingsConnectionTest;
+
+    case ePluginTypeClientConnectTest:
         return eMyIconSettingsConnectionTest;
 
     case ePluginTypeFileXfer:
@@ -749,22 +752,22 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
         return eMyIconSettingsRelay;
 
     case ePluginTypeRandomConnect:
-        return eMyIconSettingsRelay;
+        return eMyIconSettingsRandomConnect;
 
     case ePluginTypeRandomConnectRelay:
-        return eMyIconSettingsRelay;
+        return eMyIconSettingsRandomConnectRelay;
 
     case ePluginTypeStoryboard:
-        return eMyIconSettingsRelay;
+        return eMyIconSettingsShareStoryboard;
 
     case ePluginTypeTruthOrDare:
-        return eMyIconTruthOrDareNormal;
+        return eMyIconSettingsTruthOrDare;
 
     case ePluginTypeVideoPhone:
-        return eMyIconVideoPhoneNormal;
+        return eMyIconSettingsVideoPhone;
 
     case ePluginTypeVoicePhone:
-        return eMyIconVoicePhoneNormal;
+        return eMyIconSettingsVoicePhone;
 
     default:
         LogMsg( LOG_ERROR, "MyIcons::getPluginIcon: unrecognized plugin type %d\n", ePluginType );
@@ -850,7 +853,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
         }
         break;
 
-    case ePluginTypeConnectTest:
+    case ePluginTypeServiceConnectTest:
         switch( ePluginAccess )
         {
         case ePluginAccessOk:
@@ -868,6 +871,23 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
         }
         break;
 
+    case ePluginTypeClientConnectTest:
+        switch( ePluginAccess )
+        {
+        case ePluginAccessOk:
+            return eMyIconServiceConnectionTest;
+        case ePluginAccessDisabled:
+        case ePluginAccessInactive:
+        case ePluginAccessRequiresDirectConnect:
+        case ePluginAccessRequiresOnline:
+            return eMyIconServiceConnectionTest;
+        case ePluginAccessLocked:
+            return eMyIconServiceConnectionTest;
+        case ePluginAccessIgnored:
+        case ePluginAccessBusy:
+            return eMyIconServiceConnectionTest;
+        }
+        break;
 
     case ePluginTypeRandomConnect:
         switch( ePluginAccess )

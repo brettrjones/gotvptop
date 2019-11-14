@@ -528,9 +528,9 @@ void PluginMgr::fromGuiUserLoggedOn( void )
 {
 	// set all plugin permissions
 	std::vector<PluginBase * >::iterator iter;
-	for( iter = m_aoPlugins.begin(); iter != m_aoPlugins.end(); ++iter )
+	for( PluginBase * pluginBase : m_aoPlugins )
 	{
-		(*iter)->setPluginPermission( m_PktAnn.getPluginPermission( (*iter)->getPluginType() ) );
+        pluginBase->setPluginPermission( m_PktAnn.getPluginPermission( pluginBase->getPluginType() ) );
 	}
 
 	// now tell plugins we are logged on

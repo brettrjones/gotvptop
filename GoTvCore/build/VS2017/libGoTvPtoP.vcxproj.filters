@@ -604,6 +604,12 @@
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSettingBinary.cpp">
       <Filter>GoTvP2P\P2PEngine</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginClientConnectionTest.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseClient.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1311,6 +1317,12 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSettingBinary.h">
       <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginClientConnectionTest.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseClient.h">
+      <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

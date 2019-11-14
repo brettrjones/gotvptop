@@ -30,6 +30,14 @@ public:
     PluginSettingHdr() = default;  // default constructor
     ~PluginSettingHdr() = default;
 
+    //! copy constructor
+    PluginSettingHdr( const PluginSettingHdr & rhs ) = default;
+    //! copy operator
+    PluginSettingHdr& operator =( const PluginSettingHdr & rhs ) = default;
+    //! move operator
+    PluginSettingHdr& operator =( PluginSettingHdr && rhs ) = default;
+
+
     void                        setSettingTotalLen( int totalStorageLen )           { m_SettingTotalLen = totalStorageLen; }
     int                         getSettingTotalLen( void )                          { return m_SettingTotalLen; }
 
@@ -83,6 +91,14 @@ class PluginSetting : public PluginSettingHdr
 {
 public:
     PluginSetting() = default;
+    virtual ~PluginSetting() = default;
+    //! copy constructor
+    PluginSetting( const PluginSetting & rhs ) = default;
+    //! copy operator
+    PluginSetting& operator =( const PluginSetting & rhs ) = default;
+    //! move operator
+    PluginSetting& operator =( PluginSetting && rhs ) = default;
+
 
     void                        setTitle( std::string title )                       { m_PluginTitle = title; }
     std::string&                getTitle( void )                                    { return m_PluginTitle; }

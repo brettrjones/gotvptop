@@ -43,8 +43,16 @@ void PluginBase::setPluginType( EPluginType ePluginType )
 {
     m_ePluginType = ePluginType;
     m_PluginSetting.setPluginType( ePluginType );
-    m_Engine.getPluginSetting( ePluginType, m_PluginSetting );
-    generateSettingPkt( m_PluginSetting );
+}
+
+//============================================================================
+void PluginBase::pluginStartup( void )
+{
+    if( getPluginType() != ePluginTypeInvalid )
+    {
+        m_Engine.getPluginSetting( getPluginType(), m_PluginSetting );
+        generateSettingPkt( m_PluginSetting );
+    }
 }
 
 //============================================================================

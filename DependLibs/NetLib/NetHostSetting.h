@@ -18,9 +18,9 @@
 
 #include <string>
 
-#define NET_DEFAULT_NETWORK_NAME			"GoTvPtoPWeb"
-#define NET_DEFAULT_NET_HOST_URL			"ptop://www.gotvptop.net:45124"
-#define NET_DEFAULT_NETSERVICE_URL			"ptop://www.gotvptop.net:45124" // for connection test.. for now same as Network Host but could be seperated to spread network load
+#define NET_DEFAULT_NETWORK_NAME			"NoLimitNet"
+#define NET_DEFAULT_NET_HOST_URL			"ptop://www.nolimitconnect.net:45124"
+#define NET_DEFAULT_NETSERVICE_URL			"ptop://www.nolimitconnect.net:45124" // for connection test.. for now same as Network Host but could be seperated to spread network load
 #define NET_DEFAULT_NETSERVICE_PORT			45124
 
 class NetHostSetting

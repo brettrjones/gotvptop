@@ -35,10 +35,13 @@
 //============================================================================
 bool VxResolveHostToIp(	const char *	pUrl,			// web name to resolve
 						std::string &	strRetIp,		// return dotted ip string 
-						uint16_t&			u16RetPort )	// return port
+						uint16_t&		u16RetPort )	// return port
 {
 	std::string strHost;
 	std::string strFileName;
+
+    strRetIp.clear();
+    u16RetPort = 0;
 
 	if( VxSplitHostAndFile( pUrl,
 		strHost,
