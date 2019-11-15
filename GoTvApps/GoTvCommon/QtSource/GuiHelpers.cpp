@@ -738,7 +738,7 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         break;
 
     case ePluginTypeHostNetwork:
-        strPluginDesc = QObject::tr( "Host GoTvPtoP Network Service" ).toUtf8().constData();
+        strPluginDesc = QObject::tr( "Host NoLimitConnect Network Service" ).toUtf8().constData();
         break;
 
     case ePluginTypeRelay:
@@ -859,12 +859,12 @@ QWidget * GuiHelpers::getParentPageFrame( QWidget * curWidget )
 bool GuiHelpers::validateUserName( QWidget * curWidget, QString strUserName )
 {
     if( strUserName.contains( "GoTv PtoP Web" )
-        || strUserName.contains( "GoTvPtoPWeb" )
-        || strUserName.contains( "gotvptopweb" )
+        || strUserName.contains( "NoLimitConnectWeb" )
+        || strUserName.contains( "nolimitconnectweb" )
         || strUserName.contains( "gotv ptop web" )
         || strUserName.contains( "GoTv PtoP Web" )
-        || strUserName.contains( "GoTvPtoPWeb" )
-        || strUserName.contains( "gotvptopweb" )
+        || strUserName.contains( "NoLimitConnectWeb" )
+        || strUserName.contains( "nolimitconnectweb" )
         || strUserName.contains( "gotv ptop web" ) )
     {
         QMessageBox::warning( curWidget, QObject::tr( "Invalid User Name" ), QObject::tr( "User Name cannot have GoTv PtoP Web in name." ) );

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GoTvPtoPNetworkDlgClass</class>
- <widget class="QWidget" name="GoTvPtoPNetworkDlgClass">
+ <class>NoLimitConnectNetworkDlgClass</class>
+ <widget class="QWidget" name="NoLimitConnectNetworkDlgClass">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>GoTvPtoP Network Host</string>
+   <string>NoLimitConnect Network Host</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -54,7 +54,7 @@
       <item>
        <widget class="QLabel" name="SearchLabel">
         <property name="text">
-         <string>Host A GoTvPtoP Network ( Global Network Service )</string>
+         <string>Host A NoLimitConnect Network ( Global Network Service )</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -84,7 +84,7 @@
       <item>
        <widget class="QLabel" name="m_GroupHostLabel">
         <property name="text">
-         <string>This GoTvPtoP Network URL or IP Address</string>
+         <string>This NoLimitConnect Network URL or IP Address</string>
         </property>
        </widget>
       </item>
@@ -94,7 +94,7 @@
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Name Of GoTvPtoP Network</string>
+         <string>Name Of NoLimitConnect Network</string>
         </property>
        </widget>
       </item>
@@ -104,7 +104,7 @@
       <item>
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Description Of GoTvPtoP Network</string>
+         <string>Description Of NoLimitConnect Network</string>
         </property>
        </widget>
       </item>
@@ -114,7 +114,7 @@
       <item>
        <widget class="QPushButton" name="m_StartButton">
         <property name="text">
-         <string>Start GoTvPtoP Network Service</string>
+         <string>Start NoLimitConnect Network Service</string>
         </property>
        </widget>
       </item>
@@ -133,7 +133,7 @@
          </size>
         </property>
         <property name="text">
-         <string>Stop GoTvPtoP Network Service</string>
+         <string>Stop NoLimitConnect Network Service</string>
         </property>
        </widget>
       </item>

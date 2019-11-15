@@ -90,16 +90,16 @@ namespace
 		case eAppModeDefault:
 			return QObject::tr( "GoTv PtoP" );
 		case eAppModeGoTvViewer:
-			return QObject::tr( "GoTvPtoP Player" );
+			return QObject::tr( "NoLimitConnect Player" );
 		case eAppModeGoTvProvider:
-			return QObject::tr( "GoTvPtoP Provider" );
+			return QObject::tr( "NoLimitConnect Provider" );
 		case eAppModeGoTvStation:
-			return QObject::tr( "GoTvPtoP Station" );
+			return QObject::tr( "NoLimitConnect Station" );
 		case eAppModeGoTvNetworkHost:
-			return QObject::tr( "GoTvPtoP Network Host" );
+			return QObject::tr( "NoLimitConnect Network Host" );
 		case eAppModeUnknown:
 		default:
-			return QObject::tr( "GoTvPtoP Unknown App" );	
+			return QObject::tr( "NoLimitConnect Unknown App" );	
 		}
 	}
 
@@ -503,7 +503,7 @@ void AppCommon::launchLibraryActivity( uint8_t fileTypeFilter )
 //============================================================================
 void AppCommon::restoreWindowPosition( void )
 {
-	QSettings settings("P2PThing", "GoTvPtoP");
+	QSettings settings("P2PThing", "NoLimitConnect");
 	restoreGeometry(settings.value("mainWindowGeometry").toByteArray());
 	//restoreState(settings.value("mainWindowState").toByteArray());
 }

@@ -180,7 +180,7 @@ border-image: none;
       <item>
        <widget class="QLabel" name="m_GoTvHostLabel">
         <property name="text">
-         <string>GoTvPtoP Network Host ( may be blank )</string>
+         <string>NoLimitConnect Network Host ( may be blank )</string>
         </property>
        </widget>
       </item>

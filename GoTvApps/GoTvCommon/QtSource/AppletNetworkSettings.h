@@ -34,8 +34,7 @@ protected slots:
     void						slotExitButtonClick( void );
     void						slotGoToNetHostSettingsButtonClick( void );
     void						slotRandomPortButtonClick( void );
-    void						slotRunIsPortOpenButtonClick( void );
-    void						slotExternIpHelpButtonClick( void );
+    void						slotRunTestButtonClick( void );
 
     void						slotAutoDetectProxyClick( void );
     void						slotNoProxyClick( void );
@@ -49,6 +48,9 @@ protected slots:
 
     void                        slotShowNetworkHostInformation( void );
     void                        slotShowNetworkKeyInformation( void );
+    void                        slotShowConnectUrlInformation( void );
+    void						slotShowConnetTestInformation( void );
+
 protected:
     void						closeEvent( QCloseEvent *event );
 

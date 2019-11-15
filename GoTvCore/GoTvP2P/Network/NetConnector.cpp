@@ -159,7 +159,7 @@ void NetConnector::handleAnnounceResults( HostList * anchorList, EConnectReason 
 		if( ( onlineName == "nolimitconnect.net" ) 
 			|| ( onlineName == "nolimitconnect.com" ) )
 		{
-			// hack to exclude gotvptop anchor and connect servers.. TODO fix with some kind of settings instead
+			// hack to exclude nolimitconnect anchor and connect servers.. TODO fix with some kind of settings instead
 			continue;
 		}
 

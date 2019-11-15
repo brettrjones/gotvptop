@@ -95,6 +95,13 @@ void ActivityInformation::updateInformation( void )
     case eInfoTypeNetworkKey:
         ui.m_ServiceInfoButton->setIcon( eMyIconNetworkKey );
         break;
+    case eInfoTypeConnectTestUrl:
+        ui.m_ServiceInfoButton->setIcon( eMyIconServiceConnectionTest );
+        break;
+    case eInfoTypeConnectTestSettings:
+        ui.m_ServiceInfoButton->setIcon( eMyIconSettingsConnectionTest );
+        break;
+
     case eInfoTypeNetworkHost:
         ui.m_PictureLabel->setResourceImage( ":/AppRes/Resources/NetworkDesign.png", true );
         ui.m_PictureLabel->setVisible( true );
@@ -113,7 +120,7 @@ QString ActivityInformation::m_NoInfoAvailable( QObject::tr( "No Information is 
 QString ActivityInformation::m_NetworkDesign( QObject::tr(
     "=== NETWORK DESIGN ===\n"
     "NOTE1: For anyone hosting services I suggest using good anti-virus/anti-malware and a service like PeerBlock to avoid bandwidth useage by those who make money spying on others.\n"
-    "NOTE2: For anyone not hosting a GoTvPtoP Hosting Service a VPN is also suggested ( A VPN is not recommended when hosting a GoTvPtoP Network because of the requirement of a fixed ip address )\n"
+    "NOTE2: For anyone not hosting a NoLimitConnect Hosting Service a VPN is also suggested ( A VPN is not recommended when hosting a NoLimitConnect Network because of the requirement of a fixed ip address )\n"
     "\n"
     "=== TIER 1: NOLIMITCONNECT NETWORK SERVICE* ===\n"
     "NOTE3: This service requires a fixed IP Address or a DNS url like http://www.nolimitconnect.net.\n"
@@ -181,13 +188,13 @@ QString ActivityInformation::m_PluginDefinitions( QObject::tr(
 " *GROUP HOST LISTING SERVICE: Provides List of Group Hosts and thier address for users to connect to and search or join.\n"
 " *GROUP HOST SERVICE: Provides connection and other services to members who have joined the Group Host.\n"
 " *PERMISSION LEVELS: Friendship level required to be allowed to use a service or connect to a person.\n"
-" *PHONE CALL PLUGIN: Provides user with voice phone calling to others using the GoTvPtoP app and internet.\n"
+" *PHONE CALL PLUGIN: Provides user with voice phone calling to others using the NoLimitConnect app and internet.\n"
 " *RANDOM CONNECT CONNECT SERVICE: Provides list of current persons using phone shake mode to discover and connect to others.\n"
 " *RELAY SERVICE: Provides data transfer services for persons without a open port to accept incomming connections.\n"
 " *SEARCH AND SCAN SERVICES: provide user a list of known persons with the desired search critera or service or stream or files\n"
 " *STORY BOARD PAGE SERVICE - Provide a blog like page a host or person can post to for others to view/read\n"
 " *TRUTH OR DARE PLUGIN: provides truth or dare video chat game between individuals\n"
-" *VIDEO CHAT PLUGIN: Provides user video chat to others using the GoTvPtoP app and internet.\n"
+" *VIDEO CHAT PLUGIN: Provides user video chat to others using the NoLimitConnect app and internet.\n"
 ) );
 
 QString ActivityInformation::m_Permissions( QObject::tr(
@@ -239,12 +246,12 @@ QString ActivityInformation::m_Permissions( QObject::tr(
 QString ActivityInformation::m_NetworkKey( QObject::tr(
     "=== NETWORK KEY ===\n"
     "The network key is a text string used for person to person network encryption.\n"
-    "The network key should only be changed if connecting to or hosting a private network seperate from GoTvPtoP.\n"
-    "If the network key is changed then connecting to the GoTvPtoP network will no longer be possible.\n"
+    "The network key should only be changed if connecting to or hosting a private network seperate from NoLimitConnect.\n"
+    "If the network key is changed then connecting to the NoLimitConnect network will no longer be possible.\n"
     "A private network can be hosted/connected to without changing the network key, however, changing the "
-    "network key will give you the best privacy GoTvPtoP has to offer.\n"
+    "network key will give you the best privacy NoLimitConnect has to offer.\n"
     "\n"
-    "GoTvPtoP has weak encryption and should NOT be considered secure."
+    "NoLimitConnect has weak encryption and should NOT be considered secure."
     "If you truly need anonymity and a secure network you should consider products with security as"
     " the primary goal such as Tor.\n"
     "\n"
@@ -254,20 +261,57 @@ QString ActivityInformation::m_NetworkKey( QObject::tr(
 QString ActivityInformation::m_NetworkHost( QObject::tr(
     "=== NETWORK HOST ===\n"
     "The network host provides group host listing and connection test services for a PtoP Network.\n"
-    "The network host URL should only be changed if connecting to or hosting a private network seperate from GoTvPtoP.\n"
+    "The network host URL should only be changed if connecting to or hosting a private network seperate from NoLimitConnect.\n"
     "The network host URL can be one of two formats.\n"
     "\n"
     "Format 1 using host web name and port\n"
-    " Example 1 ptop://www.gotvptop.net:45124\n"
+    " Example 1 ptop://www.nolimitconnect.net:45124\n"
     "\n"
     "Format 2 using host external IP Adrress and port\n"
     " Example 2 ptop://111.122.133.144:45124\n"
     "\n"
-    "NOTE 1: The network host IP port is normally 45124 but can be any open port.\n"\
+    "NOTE 1: The network host IP port is normally 45124 but can be any open port.\n"
     "NOTE 2: The network host address must eitehr be a fixed/permenent ip or be a web url name\n"
     " that can be resolved to a IP using DNS ( Domain Name Service ).\n"
 ) );
 
+QString ActivityInformation::m_ConnectTestUrl( QObject::tr(
+    "=== CONNECTION TEST URL ===\n"
+    "The connection test service provides services to test if your device's port is open.\n"
+    "If your port is open then others can connect directly to your device.\n"
+    "A open port provides highest possible speed of connect and data transfer.\n"
+    "A blocked port requires the device to use a relay service which greatly limits speed and number of connections possible.\n"
+    "\n"
+    "Format 1 using host web name and port\n"
+    " Example 1 ptop://www.nolimitconnect.net:45124\n"
+    "\n"
+    "Format 2 using host external IP Adrress and port\n"
+    " Example 2 ptop://111.122.133.144:45124\n"
+    "\n"
+) );
+
+QString ActivityInformation::m_ConnectTestSettings( QObject::tr(
+    "=== Enable UPNP check box ===\n"
+    "If enabled then UPNP protocol will be used to attempt to open a port to your devcice\n"
+    "Because of the various implementations of router firmware this only sometimes is succesfull in opening your port  \n"
+    "Consult your router specific instructions for how to forward a port to your device or visit\n"
+    "https://www.wikihow.com/Open-Ports\n\n"
+    "=== CONNECTION TEST SETTINGS ===\n\n"
+    "Option 1 - Use connection test service.\n"
+    "This is the most reliable and recommended method of determining your external IP Address and\n"
+    "determining if your device's port is open.\n"
+    "\n"
+    "Option 2 - Specify your external IP Address and assume your port is open.\n"
+    "This setting is only recommended if you have a fixed IP Address because\n"
+    "your IP Address may change at the whim of your Internet Service Provider.\n"
+    "You can determine your IP Address by doing a google search for \"what is my ip address\"\n"
+    "\n"
+    "Option 3 - Always assume your device's port is blocked.\n"
+    "This option is only recommended for users that always use mobile data service and do not use a VPN.\n"
+    "It will somewhat speed up searches for relay services by not attempting to open port or testing your connection\n"
+    "\n"
+    "\n"
+) );
 //============================================================================
 QString ActivityInformation::getInfoText( void )
 {
@@ -294,6 +338,10 @@ QString ActivityInformation::getInfoText( void )
         return m_NetworkKey;
     case eInfoTypeNetworkHost:
         return m_NetworkHost;
+    case eInfoTypeConnectTestUrl:
+        return m_ConnectTestUrl;
+    case eInfoTypeConnectTestSettings:
+        return m_ConnectTestSettings;
 
     default:
         return m_NoInfoAvailable;

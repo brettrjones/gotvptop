@@ -134,10 +134,10 @@ const char * VxGetNetworkHostUrl( void )
 // /exe/assets/kodi		kodi exe assets path
 //            /gotv		gotv assets path
 
-// data storage paths linux      /home/user/.local/share/gotvptop
-//                    windows    C:\Users\user\AppData\Roaming\GoTvPtoP
+// data storage paths linux      /home/user/.local/share/nolimitconnect
+//                    windows    C:\Users\user\AppData\Roaming\NoLimitConnect
 //                    android ?
-// /storage/gotvptop/temp/		temporary files path
+// /storage/nolimitconnect/temp/		temporary files path
 //                  /logs/		log files path
 //                  /gotv/		ShredFilesDb.db3 and app generated files
 //                  /kodi/		kodi plugins and writable data directory
@@ -147,10 +147,10 @@ const char * VxGetNetworkHostUrl( void )
 //                       /thumbs/ thumbnail assets directory
 //
 // user specific directories.. NOTE: hasnum is 4 digit hash of exe path and userId is user login name
-//                  /storage/GoTvPtoP/hashnum/accounts/userId/settings/		databases for user settings etc
+//                  /storage/NoLimitConnect/hashnum/accounts/userId/settings/		databases for user settings etc
 //									 /hashnum/accounts/userId/profile/		profile and story board user web pages
 // user xfer directories      
-//                  Documents Directory/GoTvPtoP/hashnum/userId/downloads
+//                  Documents Directory/NoLimitConnect/hashnum/userId/downloads
 //																/uploads		uploading directory
 //																/incomplete		not yet completed downloads
 //																/me/			personal recordings
@@ -474,7 +474,7 @@ std::string& VxGetAppKodiDataDirectory(void) { return g_strAppKodiDataDir; }
 //============================================================================
 void VxSetRootUserDataDirectory( const char * rootUserDataDir )
 {
-	// basically /storage/ GoTvPtoP/hasnum/ where hashnum is hash of exe path
+	// basically /storage/ NoLimitConnect/hasnum/ where hashnum is hash of exe path
 	g_strRootUserDataDir = rootUserDataDir;
 	VxFileUtil::makeDirectory( g_strRootUserDataDir.c_str() );
 }

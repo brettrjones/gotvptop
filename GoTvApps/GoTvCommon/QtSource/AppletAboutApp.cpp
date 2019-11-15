@@ -31,7 +31,7 @@
 AppletAboutApp::AppletAboutApp( AppCommon& app, QWidget * parent )
 : AppletBase( OBJNAME_APPLET_ABOUT_APP, app, parent )
 {
-    setAppletType( eAppletAboutGoTvPtoP );
+    setAppletType( eAppletAboutNoLimitConnect );
     ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
     ui.m_AppNameLabel->setText( VxGetApplicationTitle() );

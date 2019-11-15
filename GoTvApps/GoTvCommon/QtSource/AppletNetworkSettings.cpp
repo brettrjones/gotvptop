@@ -47,6 +47,9 @@ AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
     ui.m_NetworkHostButton->setIcon( eMyIconServiceHostNetwork );
     ui.m_NetworkKeyInfoButton->setIcon( eMyIconInformation );
     ui.m_NetworkKeyButton->setIcon( eMyIconNetworkKey );
+    ui.m_ConnectTestUrlInfoButton->setIcon( eMyIconInformation );
+    ui.m_ConnectIsOpenInfoButton->setIcon( eMyIconInformation );
+    ui.m_ConnectTestHostButton->setIcon( eMyIconServiceConnectionTest );
 
     updateDlgFromSettings();
 
@@ -69,17 +72,19 @@ void AppletNetworkSettings::connectSignals( void )
     connect( ui.m_NetworkKeyInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowNetworkKeyInformation() ) );
     connect( ui.m_NetworkKeyButton, SIGNAL( clicked() ), this, SLOT( slotShowNetworkKeyInformation() ) );
 
-    //connect( ui.m_GoToHosttSettingsButton, SIGNAL( clicked() ), this, SLOT( slotGoToNetHostSettingsButtonClick() ) );
-
     connect( ui.AutoDetectProxyRadioButton, SIGNAL( clicked() ), this, SLOT( slotAutoDetectProxyClick() ) );
     connect( ui.AssumeNoProxyRadioButton, SIGNAL( clicked() ), this, SLOT( slotNoProxyClick() ) );
     connect( ui.AssumeProxyRadioButton, SIGNAL( clicked() ), this, SLOT( slotYesProxyClick() ) );
 
     connect( ui.RandomPortButton, SIGNAL( clicked() ), this, SLOT( slotRandomPortButtonClick() ) );
     connect( ui.m_UseUpnpCheckBox, SIGNAL( clicked() ), this, SLOT( slotUseUpnpCheckBoxClick() ) );
-    connect( ui.m_ExternIpHelpButton, SIGNAL( clicked() ), this, SLOT( slotExternIpHelpButtonClick() ) );
+    connect( ui.m_ConnectTestHostButton, SIGNAL( clicked() ), this, SLOT( slotShowConnectUrlInformation() ) );
+    connect( ui.m_ConnectTestUrlInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowConnectUrlInformation() ) );
+    connect( ui.m_ConnectIsOpenInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowConnetTestInformation() ) );
     connect( ui.m_SaveSettingsButton, SIGNAL( clicked() ), this, SLOT( onSaveButtonClick() ) );
     connect( ui.m_DeleteSettingsButton, SIGNAL( clicked() ), this, SLOT( onDeleteButtonClick() ) );
+    connect( ui.m_RunNetworkTestButton, SIGNAL( clicked() ), this, SLOT( slotRunTestButtonClick() ) );
+
     connect( ui.m_NetworkSettingsNameComboBox, SIGNAL( currentIndexChanged( const QString& ) ), this, SLOT( onComboBoxSelectionChange( const QString& ) ) );
     connect( ui.m_NetworkSettingsNameComboBox, SIGNAL( editTextChanged( const QString& ) ), this, SLOT( onComboBoxTextChanged( const QString& ) ) );
 }
@@ -142,6 +147,9 @@ void AppletNetworkSettings::updateDlgFromSettings()
 
         m_Engine.getEngineSettings().getNetworkKey( strValue );
         ui.m_NetworkKeyEdit->setText( strValue.c_str() );
+
+        m_Engine.getEngineSettings().getNetServiceWebsiteUrl( strValue );
+        ui.m_ConnectTestUrlEdit->setText( strValue.c_str() );
     }
 
     uint16_t u16Port = m_Engine.getEngineSettings().getTcpIpPort();
@@ -216,17 +224,16 @@ void AppletNetworkSettings::updateSettingsFromDlg()
 
     std::string strValue;
     strValue = ui.m_NetworkHostUrlEdit->text().toUtf8().constData();
-
-    // for now NetHost and NetService ( connection port open test ) urls are the same
     m_Engine.getEngineSettings().setNetHostWebsiteUrl( strValue );
     anchorSetting.setNetHostWebsiteUrl( strValue.c_str() );
-
-    m_Engine.getEngineSettings().setNetServiceWebsiteUrl( strValue );
-    anchorSetting.setNetServiceWebsiteUrl( strValue.c_str() );
 
     strValue = ui.m_NetworkKeyEdit->text().toUtf8().constData();
     m_Engine.getEngineSettings().setNetworkKey( strValue );
     anchorSetting.setNetworkKey( strValue.c_str() );
+
+    strValue = ui.m_ConnectTestUrlEdit->text().toUtf8().constData();
+    m_Engine.getEngineSettings().setNetServiceWebsiteUrl( strValue );
+    anchorSetting.setNetServiceWebsiteUrl( strValue.c_str() );
 
     m_MyApp.getAccountMgr().updateNetHostSetting( anchorSetting );
     m_MyApp.getAccountMgr().updateLastNetHostSettingName( anchorSettingsName.c_str() );
@@ -269,13 +276,13 @@ void AppletNetworkSettings::updateSettingsFromDlg()
 
     m_Engine.getEngineSettings().setFirewallTestSetting( eFirewallTestType );
     m_Engine.getEngineSettings().setUseUpnpPortForward( ui.m_UseUpnpCheckBox->isChecked() );
+
+    m_Engine.fromGuiNetworkSettingsChanged();
 }
 
 //============================================================================
 void AppletNetworkSettings::slotExitButtonClick()
 {
-    //updateSettingsFromDlg();
-    //m_Engine.fromGuiNetworkSettingsChanged();
     close();
 }
 
@@ -338,7 +345,7 @@ void AppletNetworkSettings::slotRandomPortButtonClick( void )
 }
 
 //============================================================================
-void AppletNetworkSettings::slotRunIsPortOpenButtonClick( void )
+void AppletNetworkSettings::slotRunTestButtonClick( void )
 {
     uint16_t u16Port = ui.PortEdit->text().toUShort();
     if( 0 != u16Port )
@@ -359,12 +366,6 @@ void AppletNetworkSettings::slotRunIsPortOpenButtonClick( void )
 //============================================================================
 void AppletNetworkSettings::slotUseUpnpCheckBoxClick( void )
 {
-}
-
-//============================================================================
-void AppletNetworkSettings::slotExternIpHelpButtonClick( void )
-{
-    QMessageBox::information( this, tr( "Information" ), tr( "You can determine your external IP Address by browsing to http://www.google.com and searching for 'what is my ip'." ) );
 }
 
 //============================================================================
@@ -390,12 +391,13 @@ void AppletNetworkSettings::populateDlgFromNetHostSetting( NetHostSetting& ancho
 {
     ui.m_NetworkHostUrlEdit->setText( anchorSetting.getNetHostWebsiteUrl().c_str() );
     ui.m_NetworkKeyEdit->setText( anchorSetting.getNetworkKey().c_str() );
+    ui.m_ConnectTestUrlEdit->setText( anchorSetting.getNetServiceWebsiteUrl().c_str() );
 }
 
 //============================================================================
 void AppletNetworkSettings::closeEvent( QCloseEvent * event )
 {
-    updateSettingsFromDlg();
+    //updateSettingsFromDlg();
     QWidget::closeEvent( event );
 }
 
@@ -425,6 +427,14 @@ void AppletNetworkSettings::onSaveButtonClick( void )
         if( keyString.empty() )
         {
             QMessageBox::information( this, QObject::tr( "Network Setting" ), QObject::tr( "Network key cannot be blank." ) );
+            return;
+        }
+
+        std::string connectTestUrl;
+        connectTestUrl = ui.m_ConnectTestUrlEdit->text().toUtf8().constData();
+        if( connectTestUrl.empty() )
+        {
+            QMessageBox::information( this, QObject::tr( "Network Setting" ), QObject::tr( "Connection Test URL cannot be blank." ) );
             return;
         }
 
@@ -477,6 +487,20 @@ void AppletNetworkSettings::slotShowNetworkHostInformation()
 void AppletNetworkSettings::slotShowNetworkKeyInformation()
 {
     ActivityInformation * activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeNetworkKey );
+    activityInfo->show();
+}
+
+//============================================================================
+void AppletNetworkSettings::slotShowConnectUrlInformation( void )
+{
+    ActivityInformation * activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeConnectTestUrl );
+    activityInfo->show();
+}
+
+//============================================================================
+void AppletNetworkSettings::slotShowConnetTestInformation( void )
+{
+    ActivityInformation * activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeConnectTestSettings );
     activityInfo->show();
 }
 

@@ -43,7 +43,7 @@ EMyIcons GetAppletIcon( EApplet applet )
 	switch( applet )
 	{
     case eActivityAppSetup:             return eMyIconApp;
-    case eAppletAboutGoTvPtoP:			return eMyIconApp;
+    case eAppletAboutNoLimitConnect:			return eMyIconApp;
     case eAppletCreateAccount:			return eMyIconUserIdentity;
     case eAppletGroupUser:              return eMyIconGroupUser;
     case eAppletHomePage:				return eMyIconHome;
@@ -118,7 +118,7 @@ QString DescribeApplet( EApplet applet )
     case eActivityAppSetup:				return QObject::tr( "Application Initialize" );
     case eAppletEditAvatarImage:		return QObject::tr( "Edit My Avatar Image" );
     case eAppletHomePage:				return QObject::tr( "Home" );
-    case eAppletAboutGoTvPtoP:		    return QObject::tr( "About GoTv Person to Person" );
+    case eAppletAboutNoLimitConnect:		    return QObject::tr( "About GoTv Person to Person" );
     case eAppletCreateAccount:			return QObject::tr( "Create Account" );
     case eAppletKodi:				    return QObject::tr( "Kodi (TM)" );
     case eAppletUserIdentity:			return QObject::tr( "User Identity" );
@@ -146,7 +146,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletNetHostingPage:             return QObject::tr( "Group And Network Hosting" );
     case eAppletServiceHostGroup:           return QObject::tr( "Host A Group" );
     case eAppletServiceHostGroupListing:    return QObject::tr( "Host List Of Groups" );
-    case eAppletServiceHostNetwork:         return QObject::tr( "Host A GoTvPtoP Network" );
+    case eAppletServiceHostNetwork:         return QObject::tr( "Host A NoLimitConnect Network" );
 
     case eAppletClientAvatarImage:          return QObject::tr( "Get Persons Avatar Image For Contact List" );
     case eAppletClientStoryboard:           return QObject::tr( "Share story (Blog)" );

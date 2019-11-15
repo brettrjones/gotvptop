@@ -25,6 +25,8 @@ enum EInfoType
     eInfoTypePermission,
     eInfoTypeNetworkKey,
     eInfoTypeNetworkHost,
+    eInfoTypeConnectTestUrl,
+    eInfoTypeConnectTestSettings,
 
 
     eMaxInfoType // must be last
@@ -73,4 +75,6 @@ protected:
     static QString              m_Permissions;
     static QString              m_NetworkKey;
     static QString              m_NetworkHost;
+    static QString              m_ConnectTestUrl;
+    static QString              m_ConnectTestSettings;
 };

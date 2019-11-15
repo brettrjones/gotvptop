@@ -162,7 +162,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 	switch( applet )
 	{
     case eActivityAppSetup:                 appletDialog = new ActivityAppSetup( m_MyApp, parent ); break;
-    case eAppletAboutGoTvPtoP:              appletDialog = new AppletAboutApp( m_MyApp, parent ); break;
+    case eAppletAboutNoLimitConnect:              appletDialog = new AppletAboutApp( m_MyApp, parent ); break;
     case eAppletEditAboutMe:                appletDialog = new AppletEditAboutMe( m_MyApp, parent ); break;
     case eAppletEditAvatarImage:            appletDialog = new AppletEditAvatarImage( m_MyApp, parent ); break;
     case eAppletGroupUser:                  appletDialog = new AppletGroupUser( m_MyApp, parent ); break;

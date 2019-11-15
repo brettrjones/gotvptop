@@ -89,9 +89,9 @@ void RenderGlWidget::takeSnapshot()
         if( !frameImage.isNull() )
         {
 #ifdef TARGET_OS_WINDOWS
-            frameImage.save( QString( "F:\\GoTvPtoP_Image.png" ) );
+            frameImage.save( QString( "F:\\NoLimitConnect_Image.png" ) );
 #else
-            frameImage.save( QString( "~/GoTvPtoP_Image.png" ) );
+            frameImage.save( QString( "~/NoLimitConnect_Image.png" ) );
 #endif
         }
 
