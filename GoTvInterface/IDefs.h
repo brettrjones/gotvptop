@@ -45,10 +45,10 @@ enum EPluginType
     ePluginTypeVideoPhone       = 19,	//!< Video Chat with motion detect and stream recording
     ePluginTypeVoicePhone       = 20,	//!< VOIP audio only phone call
 	// NOTE: plugin types 20 - 47 not implemented .. reserved for future use
-	eMaxUserPluginType			= 21, 
+	eMaxImplementedPluginType	= 21, 
 	// plugins 0-47 are part of PktAnnounce
 	// plugins after 47 are system plugins and do not go out in announcement pkt
-	eAppPluginsBegin			= 48,
+    eMaxUserPluginType = 48, // this marks end of announced permission
     ePluginTypeCameraService,
     ePluginTypeMJPEGReader,
     ePluginTypeMJPEGWriter,

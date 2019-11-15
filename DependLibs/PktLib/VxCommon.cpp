@@ -92,7 +92,7 @@ EFriendState PluginPermission::getPluginPermission( EPluginType ePluginType )
 //! set type of permission user has set for givin plugin
 void PluginPermission::setPluginPermission( EPluginType ePluginType, EFriendState eFriendState ) 
 { 
-	if(( ePluginType > 0 ) && ( ePluginType < eMaxPluginType ) )
+	if(( ePluginType > 0 ) && ( ePluginType < eMaxUserPluginType ) )
 	{
 		int pluginNum = (int)(ePluginType - 1);
 		int byteIdx = pluginNum >> 1;
@@ -126,16 +126,23 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
 { 
 	memset( m_au8Permissions, 0, sizeof( m_au8Permissions ) );
 	setPluginPermission( ePluginTypeAdmin, eFriendStateAdmin );	
-	setPluginPermission( ePluginTypeRelay, eFriendStateFriend );	
-	setPluginPermission( ePluginTypeWebServer, eFriendStateAnonymous );	
-	setPluginPermission( ePluginTypeCamServer, eFriendStateAnonymous );	
-	setPluginPermission( ePluginTypeMessenger, eFriendStateAnonymous );	
-	setPluginPermission( ePluginTypeVoicePhone, eFriendStateAnonymous );	
-	setPluginPermission( ePluginTypeVideoPhone, eFriendStateAnonymous );	
-	setPluginPermission( ePluginTypeTruthOrDare, eFriendStateAnonymous );	
-	setPluginPermission( ePluginTypeFileXfer, eFriendStateFriend );	
-	setPluginPermission( ePluginTypeFileServer, eFriendStateAnonymous );	
-	setPluginPermission( ePluginTypeStoryboard, eFriendStateAnonymous );	
+    setPluginPermission( ePluginTypeAvatarImage, eFriendStateAnonymous );
+    setPluginPermission( ePluginTypeServiceConnectTest, eFriendStateAnonymous );
+    setPluginPermission( ePluginTypeClientConnectTest, eFriendStateAnonymous );
+    setPluginPermission( ePluginTypeCamServer, eFriendStateAnonymous );
+    setPluginPermission( ePluginTypeChatRoom, eFriendStateAnonymous );
+    setPluginPermission( ePluginTypeFileServer, eFriendStateAnonymous );
+    setPluginPermission( ePluginTypeFileXfer, eFriendStateFriend );
+    setPluginPermission( ePluginTypeHostGroup, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeHostGroupListing, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeHostNetwork, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeRandomConnect, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeRandomConnectRelay, eFriendStateIgnore );
+    setPluginPermission( ePluginTypeRelay, eFriendStateAnonymous );
+    setPluginPermission( ePluginTypeStoryboard, eFriendStateAnonymous );
+    setPluginPermission( ePluginTypeTruthOrDare, eFriendStateAnonymous );
+    setPluginPermission( ePluginTypeVideoPhone, eFriendStateAnonymous );
+    setPluginPermission( ePluginTypeVoicePhone, eFriendStateAnonymous );
 } 
 
 //============================================================================
