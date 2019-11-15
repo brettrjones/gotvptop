@@ -67,7 +67,6 @@ const char * getPluginName( EPluginType pluginType )
     case ePluginTypeVideoPhone: return "ePluginTypeVideoPhone";
     case ePluginTypeVoicePhone: return "ePluginTypeVoicePhone";
     case eMaxUserPluginType: return "eMaxUserPluginType";
-    case eAppPluginsBegin: return "eAppPluginsBegin";
     case ePluginTypeCameraService: return "ePluginTypeCameraService";
     case ePluginTypeMJPEGReader: return "ePluginTypeMJPEGReader";
     case ePluginTypeMJPEGWriter: return "ePluginTypeMJPEGWriter";
