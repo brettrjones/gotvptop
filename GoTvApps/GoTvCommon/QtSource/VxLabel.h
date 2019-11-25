@@ -25,7 +25,7 @@ class VxLabel : public QLabel
 public:
 	VxLabel( QWidget *parent=0, Qt::WindowFlags f=0 );
 	VxLabel( const QString &text, QWidget *parent=0, Qt::WindowFlags f=0 );
-	virtual ~VxLabel();
+    virtual ~VxLabel() = default;
 
 	virtual void				setTextBreakAnywhere( QString text, int maxLines = 2 );
 
@@ -52,8 +52,8 @@ protected:
 	void						resizeBitmapToFitScreen( QImage& picBitmap );
 	void						loadImageFromFile( QString fileName );
 
-	virtual void				mousePressEvent( QMouseEvent * ev );
-	virtual void				resizeEvent( QResizeEvent * ev );
+	virtual void				mousePressEvent( QMouseEvent * ev ) override;
+	virtual void				resizeEvent( QResizeEvent * ev ) override;
 
 	//=== vars ===//
     std::atomic_char32_t        m_behindFrameCnt;

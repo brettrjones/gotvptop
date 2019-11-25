@@ -53,7 +53,10 @@ AppletEditAvatarImage::AppletEditAvatarImage( AppCommon& app, QWidget * parent )
     if( m_MyIdent->getAvatarGuid().isVxGUIDValid() )
     {
         AssetInfo * thumbAsset = m_AssetMgr.findAsset( m_MyIdent->getAvatarGuid() );
-        ui.m_ThumbnailEditWidget->loadFromAsset( thumbAsset );
+        if( thumbAsset )
+        {
+            ui.m_ThumbnailEditWidget->loadFromAsset( thumbAsset );
+        }
     }
 
     connect( ui.m_ApplyAboutMeButton, SIGNAL( clicked() ), this, SLOT( onApplyButClick() ) );
@@ -65,53 +68,44 @@ AppletEditAvatarImage::AppletEditAvatarImage( AppCommon& app, QWidget * parent )
 //! Implement the OnClickListener callback    
 void AppletEditAvatarImage::onApplyButClick( void )
 {
-    if( ui.m_ThumbnailEditWidget->getIsUserPickedImage() )
+    bool assetExists = ui.m_ThumbnailEditWidget->isAssetIdValid();
+    if( assetExists )
     {
-        VxGUID assetGuid;
-        VxGUID::generateNewVxGUID( assetGuid );
-        QString fileName = VxGetAppDirectory( eAppDirThumbs ).c_str();
-        fileName += assetGuid.toHexString().c_str();
-        fileName += ".nlt"; // use extension not known as image so thumbs will not be scanned by android image gallery etc
-        if( ui.m_ThumbnailEditWidget->saveToPngFile( fileName ) && VxFileUtil::fileExists( fileName.toUtf8().constData() ) )
+        AssetInfo * existingAsset = m_MyApp.getEngine().getAssetMgr().findAsset( ui.m_ThumbnailEditWidget->getAssetId() );
+        if( existingAsset )
         {
-            AssetInfo assetInfo( (const char *)fileName.toUtf8().constData(), VxFileUtil::fileExists( fileName.toUtf8().constData() ), (uint16_t)eAssetTypeThumbnail );
-            assetInfo.setAssetUniqueId( assetGuid );
-            assetInfo.setCreatorId( m_MyIdent->getMyOnlineId() );
-            if( m_MyApp.getEngine().getAssetMgr().addAsset( assetInfo ) )
+            if( m_MyIdent->getAvatarGuid().isVxGUIDValid() && m_MyIdent->getAvatarGuid() == existingAsset->getAssetUniqueId() )
             {
-                // delete the old one if exists
-                if( m_MyIdent->getAvatarGuid().isVxGUIDValid() )
-                {
-                    AssetInfo * oldAsset = m_MyApp.getEngine().getAssetMgr().findAsset( m_MyIdent->getAvatarGuid() );
-                    if( oldAsset )
-                    {
-                        VxFileUtil::deleteFile( oldAsset->getAssetName().c_str() );
-                        m_MyApp.getEngine().getAssetMgr().removeAsset( m_MyIdent->getAvatarGuid() );
-                    }
-                }
-
+                QString msgText = QObject::tr( "No Avatar Image Changes " );
+                QMessageBox::information( this, QObject::tr( "Avatar Image is not changed" ), msgText );
+            }
+            else
+            {
                 // setup identity with new avatar image
-                m_MyIdent->setAvatarGuid( assetGuid );
+                m_MyIdent->setAvatarGuid( existingAsset->getAssetUniqueId() );
                 m_MyApp.updateMyIdent( m_MyIdent );
 
                 QString msgText = QObject::tr( "Applied Avatar Image Changes " );
                 QMessageBox::information( this, QObject::tr( "Applied Avatar Image Success" ), msgText );
             }
-            else
-            {
-                QString msgText = QObject::tr( "Could not create thumbnail asset" );
-                QMessageBox::information( this, QObject::tr( "Error occured creating thumbnail asset " ) + fileName, msgText );
-            }
         }
         else
         {
-            QString msgText = QObject::tr( "Could not save avatar image" );
-            QMessageBox::information( this, QObject::tr( "Error occured saving avatar to file " ) + fileName, msgText );
+            assetExists = false;
         }
     }
-    else
+    
+    if( !assetExists && ui.m_ThumbnailEditWidget->getIsUserPickedImage()  )
     {
-        QString msgText = QObject::tr( "No Avatar Changes" );
-        QMessageBox::information( this, QObject::tr( "The Avatar Image was not changed" ), msgText );
+        AssetInfo assetInfo;
+        if( ui.m_ThumbnailEditWidget->generateThumbAsset( assetInfo ) )
+        {
+            // setup identity with new avatar image
+            m_MyIdent->setAvatarGuid( assetInfo.getAssetUniqueId() );
+            m_MyApp.updateMyIdent( m_MyIdent );
+
+            QString msgText = QObject::tr( "Applied Avatar Image Changes " );
+            QMessageBox::information( this, QObject::tr( "Applied Avatar Image Success" ), msgText );
+        }
     }
 }

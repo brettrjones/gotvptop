@@ -46,6 +46,8 @@ AppletUserIdentity::AppletUserIdentity( AppCommon& app, QWidget * parent )
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
     ui.m_EditAboutMeButton->setIcon( eMyIconServiceShareAboutMe );
     ui.m_EditAvatarImageButton->setIcon( eMyIconServiceAvatarImage );
+    ui.m_EditStoryboardButton->setIcon( eMyIconServiceShareStoryboard );
+
     GuiHelpers::fillGender( ui.m_GenderComboBox );
     GuiHelpers::fillLanguage( ui.m_LanguageComboBox );
     GuiHelpers::fillContentRating( ui.m_ContentComboBox );
@@ -72,6 +74,8 @@ AppletUserIdentity::AppletUserIdentity( AppCommon& app, QWidget * parent )
 
     connect( ui.m_EditAboutMeButton, SIGNAL( clicked() ), this, SLOT( slotEditAboutMeButClick() ) );
     connect( ui.m_EditAvatarImageButton, SIGNAL( clicked() ), this, SLOT( slotEditAvatarButClick() ) );
+    connect( ui.m_EditStoryboardButton, SIGNAL( clicked() ), this, SLOT( slotEditStoryboardButClick() ) );
+
     connect( ui.m_CreateNewAccountButton, SIGNAL( clicked() ), this, SLOT( slotCreateNewAccount() ) );
     connect( ui.m_DeleteAccountButton, SIGNAL( clicked() ), this, SLOT( slotDeleteAccount() ) );
 
@@ -227,17 +231,21 @@ void AppletUserIdentity::onApplyContentClick( void )
 }
 
 //============================================================================
-//! Implement the OnClickListener callback    
 void AppletUserIdentity::slotEditAboutMeButClick( void )
 {
     m_MyApp.getAppletMgr().launchApplet( eAppletEditAboutMe, this );
 }
 
 //============================================================================
-//! Implement the OnClickListener callback    
 void AppletUserIdentity::slotEditAvatarButClick( void )
 {
     m_MyApp.getAppletMgr().launchApplet( eAppletEditAvatarImage, this );
+}
+
+//============================================================================
+void AppletUserIdentity::slotEditStoryboardButClick( void )
+{
+    m_MyApp.getAppletMgr().launchApplet( eAppletEditStoryboard, this );
 }
 
 //============================================================================

@@ -1,6 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2018 Brett R. Jones
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,21 +13,32 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletServiceBase.h"
+#include "AppletBase.h"
+#include "ui_AppletGalleryThumb.h"
 
 
-class AppletServiceHostNetwork : public AppletServiceBase
+class ThumbnailViewWidget;
+class AssetMgr;
+
+class AppletGalleryThumb : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletServiceHostNetwork( AppCommon& app, QWidget * parent );
-	virtual ~AppletServiceHostNetwork() = default;
+	AppletGalleryThumb( AppCommon& app, QWidget * parent = NULL );
+	virtual ~AppletGalleryThumb() override = default;
 
+signals:
+    void                        signalImageSelected( ThumbnailViewWidget * thumb );
 
+private slots:
+	void						slotImageClicked( ThumbnailViewWidget * thumb );
 
 protected:
-    void loadFromSettings();
-    void saveToSettings();
+    void                        resizeEvent( QResizeEvent * ev );
+
+    void                        loadAssets( void );
+
+	//=== vars ===//
+	Ui::AppletGalleryThumbUi	ui;
+    AssetMgr&					m_AssetMgr;
 };
-
-

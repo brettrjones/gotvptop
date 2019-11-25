@@ -26,7 +26,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <property name="spacing">
-      <number>10</number>
+      <number>7</number>
      </property>
      <property name="leftMargin">
       <number>5</number>
@@ -40,6 +40,13 @@
      <property name="bottomMargin">
       <number>5</number>
      </property>
+     <item>
+      <widget class="QPushButton" name="m_PickThumbButton">
+       <property name="text">
+        <string>Thumbnail Gallery</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QPushButton" name="m_BrowsePictureButton">
        <property name="text">

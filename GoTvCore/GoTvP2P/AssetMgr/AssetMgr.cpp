@@ -225,7 +225,7 @@ AssetInfo * AssetMgr::findAsset( VxGUID& assetId )
 {
 	if( false == assetId.isVxGUIDValid() )
 	{
-		LogMsg( LOG_ERROR, "AssetMgr::findAsset: invalid VxGUID asset id\n" );
+		//LogMsg( LOG_ERROR, "AssetMgr::findAsset: invalid VxGUID asset id\n" );
         return nullptr;
 	}
 

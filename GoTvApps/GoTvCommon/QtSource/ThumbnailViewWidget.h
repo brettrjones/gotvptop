@@ -13,10 +13,14 @@
 //============================================================================
 #pragma once
 
+#include <CoreLib/VxGUID.h>
+
 #include <QLabel>
 
 class AppCommon;
 class QPixmap;
+class AssetInfo;
+
 
 class ThumbnailViewWidget : public QLabel
 {
@@ -25,23 +29,34 @@ public:
     ThumbnailViewWidget( QWidget * parent );
     ~ThumbnailViewWidget() override = default;
 
-    void                        setIsUserPickedImage( bool userPicked )       { m_bUserPickedImage = userPicked;  }
-    bool                        getIsUserPickedImage( void )                  { return m_bUserPickedImage; }
+    void                        setIsUserPickedImage( bool userPicked )     { m_bUserPickedImage = userPicked;  }
+    bool                        getIsUserPickedImage( void )                { return m_bUserPickedImage; }
 
-    void                        setThumbnailImage( QPixmap& pixmap )            { cropAndUpdateImage( pixmap ); }
-    const QPixmap *             getThumbnailImage( void )                       { return pixmap(); }
+    void                        setThumbnailImage( QPixmap& pixmap )        { cropAndUpdateImage( pixmap ); }
+    const QPixmap *             getThumbnailImage( void )                   { return pixmap(); }
 
+    void                        setThumbnailId( VxGUID& id )                { m_ThumbnailId = id; }
+    VxGUID&                     getThumbnailId( void )                      { return m_ThumbnailId; }
+
+    bool                        loadFromAsset( AssetInfo * asset );
     bool                        loadFromFile( QString fileName );
+
     bool                        saveToPngFile( QString pngFileName );
     void                        browseForImage( void );
+
+
+signals:
+    void                        clicked( void );
+    void						signalImageClicked( ThumbnailViewWidget * widget );
 
 protected slots:
     void                        slotJpgSnapshot( uint8_t* pu8JpgData, uint32_t u32DataLen, int iWidth, int iHeight );
 
 protected:
+    virtual void				mousePressEvent( QMouseEvent * ev ) override;
     void                        cropAndUpdateImage( QPixmap& pixmap );
 
     AppCommon&					m_MyApp;
     bool                        m_bUserPickedImage = false;
-
+    VxGUID                      m_ThumbnailId;
 };

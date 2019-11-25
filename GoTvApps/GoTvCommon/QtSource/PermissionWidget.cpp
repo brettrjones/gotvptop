@@ -75,11 +75,6 @@ void PermissionWidget::initPermissionWidget( void )
     {
         updateUi();
     }
-
-    connect( ui.m_PermissionInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowPermissionInformation() ) );
-    connect( ui.m_PermissionButton, SIGNAL( clicked() ), this, SLOT( slotShowPermissionInformation() ) );
-    connect( ui.m_PermissionComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHandleSelectionChanged( int ) ) );
-    connect( ui.m_PluginInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowPluginInformation() ) );
 }
 
 //============================================================================
@@ -105,26 +100,39 @@ void PermissionWidget::updateUi( void )
     if( !m_OrigPermissionIsSet )
     {
         m_OrigPermissionIsSet = true;
-        m_OrigPermissionLevel = m_MyApp.getMyIdentity()->getPluginPermission( m_PluginType );;
+        m_OrigPermissionLevel = pluginPermission;
     }
 
-
     ui.m_PermissionComboBox->setCurrentIndex( FriendStateToComboIdx( pluginPermission ) );
+    if( !m_PermissionsConnected )
+    {
+        m_PermissionsConnected = true;
+        connect( ui.m_PermissionInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowPermissionInformation() ) );
+        connect( ui.m_PermissionButton, SIGNAL( clicked() ), this, SLOT( slotShowPermissionInformation() ) );
+        connect( ui.m_PermissionComboBox, SIGNAL( currentIndexChanged( int ) ), this, SLOT( slotHandleSelectionChanged( int ) ) );
+        connect( ui.m_PluginInfoButton, SIGNAL( clicked() ), this, SLOT( slotShowPluginInformation() ) );
+    }
+
     updatePermissionIcon();
 }
 
 //============================================================================
 void PermissionWidget::setPluginType( EPluginType pluginType, int subType ) 
 { 
+    if( pluginType == ePluginTypeInvalid )
+    {
+        return;
+    }
+
+    m_PluginType = pluginType;
+    m_SubPluginType = subType;
+
     if( !m_OrigPermissionIsSet )
     {
         m_OrigPermissionIsSet = true;
         m_OrigPermissionLevel = m_MyApp.getMyIdentity()->getPluginPermission( m_PluginType );;
+        setPermissionLevel( m_OrigPermissionLevel );
     }
-
-    m_PluginType = pluginType; 
-    m_SubPluginType = subType;  
-    setPermissionLevel( m_OrigPermissionLevel );
 
     updateUi();  
     updatePermissionIcon(); 

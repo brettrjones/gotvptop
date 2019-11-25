@@ -1,5 +1,6 @@
 //============================================================================
 // Copyright (C) 2019 Brett R. Jones
+// Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -12,33 +13,43 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletServiceHostNetwork.h"
+#include "ImageListEntry.h"
+#include "ActivitySnapShot.h"
 #include "AppCommon.h"
-#include "AppSettings.h"
-#include "MyIcons.h"
+#include "GuiHelpers.h"
+#include "GuiParams.h"
+
 
 #include <CoreLib/VxDebug.h>
+#include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
+#include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+
+#include <VxVideoLib/VxVideoLib.h>
+
+#include <QMessageBox>
+#include <QPainter>
 
 //============================================================================
-AppletServiceHostNetwork::AppletServiceHostNetwork( AppCommon& app, QWidget * parent )
-: AppletServiceBase( OBJNAME_APPLET_SERVICE_HOST_NETWORK, app, parent )
+ImageListEntry::ImageListEntry( QWidget * parent )
+    : ThumbnailViewWidget( parent )
 {
-    setPluginType( ePluginTypeHostNetwork );
-    setAppletType( eAppletServiceHostNetwork );
-    setTitleBarText( DescribeApplet( m_EAppletType ) );
-    loadFromSettings();
-    m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================
-void AppletServiceHostNetwork::loadFromSettings()
+bool ImageListEntry::loadFromAsset( AssetInfo * thumbAsset )
 {
+    bool loadOk = false;
+    if( thumbAsset )
+    {
+        loadOk = loadFromFile( thumbAsset->getAssetName().c_str() );
+    }
 
+    return loadOk;
 }
 
 //============================================================================
-void AppletServiceHostNetwork::saveToSettings()
+void ImageListEntry::slotThumbGalleryClick( void )
 {
 
 }
-

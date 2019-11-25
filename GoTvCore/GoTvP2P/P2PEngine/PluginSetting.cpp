@@ -18,7 +18,7 @@
 #include <CoreLib/StringListBinary.h>
 #include <CoreLib/VxDebug.h>
 
-#define PLUGIN_SETTINGS_STRING_COUNT 5
+#define PLUGIN_SETTINGS_STRING_COUNT 6
 
 //============================================================================
 bool PluginSetting::toBinary( PluginSettingBinary& binarySetting )
@@ -122,9 +122,10 @@ bool PluginSetting::setStringList( std::vector<std::string>& stringList )
     {
         m_PluginTitle = stringList[ 0 ];
         m_PluginDesc = stringList[ 1 ];
-        m_SecondaryPluginTitle = stringList[ 2 ];
-        m_SecondaryPluginDesc = stringList[ 3 ];
-        m_SecondaryUrl = stringList[ 4 ];
+        m_PluginUrl = stringList[ 2 ];
+        m_SecondaryPluginTitle = stringList[ 3 ];
+        m_SecondaryPluginDesc = stringList[ 4 ];
+        m_SecondaryUrl = stringList[ 5 ];
         result = true;
     }
 
@@ -136,6 +137,7 @@ bool PluginSetting::getStringList( std::vector<std::string>& stringList )
 {
     stringList.push_back( m_PluginTitle );
     stringList.push_back( m_PluginDesc );
+    stringList.push_back( m_PluginUrl );
     stringList.push_back( m_SecondaryPluginTitle );
     stringList.push_back( m_SecondaryPluginDesc );
     stringList.push_back( m_SecondaryUrl );

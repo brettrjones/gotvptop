@@ -514,6 +514,7 @@ EApplet GuiHelpers::pluginTypeToEditApplet( EPluginType pluginType )
     {
     case ePluginTypeAboutMePage:            return eAppletEditAboutMe;
     case ePluginTypeAvatarImage:            return eAppletEditAvatarImage;
+    case ePluginTypeStoryboard:             return eAppletEditStoryboard;
     case ePluginTypeCamServer:              return eAppletUnknown;
     case ePluginTypeServiceConnectTest:     return eAppletSettingsConnectTest;
     case ePluginTypeFileServer:             return eAppletUnknown;
@@ -523,7 +524,6 @@ EApplet GuiHelpers::pluginTypeToEditApplet( EPluginType pluginType )
     case ePluginTypeHostNetwork:            return eAppletUnknown;
     case ePluginTypeRandomConnect:          return eAppletUnknown;
     case ePluginTypeRandomConnectRelay:     return eAppletUnknown;
-    case ePluginTypeStoryboard:             return eAppletUnknown;
     case ePluginTypeRelay:                  return eAppletUnknown;
     default:
         break;
@@ -607,6 +607,7 @@ EApplet GuiHelpers::pluginTypeToViewApplet( EPluginType pluginType )
     {
     case ePluginTypeAboutMePage:            return eAppletEditAboutMe;
     case ePluginTypeAvatarImage:            return eAppletEditAvatarImage;
+    case ePluginTypeStoryboard:             return eAppletEditStoryboard;
     case ePluginTypeCamServer:              return eAppletUnknown;
     case ePluginTypeServiceConnectTest:     return eAppletSettingsConnectTest;
     case ePluginTypeFileServer:             return eAppletUnknown;
@@ -616,7 +617,6 @@ EApplet GuiHelpers::pluginTypeToViewApplet( EPluginType pluginType )
     case ePluginTypeHostNetwork:            return eAppletUnknown;
     case ePluginTypeRandomConnect:          return eAppletUnknown;
     case ePluginTypeRandomConnectRelay:     return eAppletUnknown;
-    case ePluginTypeStoryboard:             return eAppletUnknown;
     case ePluginTypeRelay:                  return eAppletUnknown;
     default:
         break;
@@ -976,23 +976,22 @@ void GuiHelpers::fillGender( QComboBox * comboBox )
     }
 }
 
-
 //============================================================================
-QString GuiHelpers::describePreferredContent( EContentType content )
+QString GuiHelpers::describeContentRating( EContentRating content )
 {
     switch( content )
     {
-    case eContentUnspecified:
+    case eContentRatingUnspecified:
         return QObject::tr( "Any" );
-    case eContentFamily:
+    case eContentRatingFamily:
         return QObject::tr( "Family" );
-    case eContentAdult:
+    case eContentRatingAdult:
         return QObject::tr( "Adult" );
-    case eContentXXX:
+    case eContentRatingXXX:
         return QObject::tr( "XXX" );
-    case eContentDarkWeb:
+    case eContentRatingDarkWeb:
         return QObject::tr( "DarkWeb" );
-    case eContentPersonal:
+    case eContentRatingPersonal:
         return QObject::tr( "Personal" );
 
     default:
@@ -1001,17 +1000,78 @@ QString GuiHelpers::describePreferredContent( EContentType content )
 }
 
 //============================================================================
+uint16_t GuiHelpers::contentRatingToIndex( EContentRating rating )
+{
+    if( ( rating >= 0 ) && ( rating < eMaxContentRating ) )
+    {
+        return ( uint16_t )rating;
+    }
+
+    return 0;
+}
+
+//============================================================================
 void GuiHelpers::fillContentRating( QComboBox * comboBox )
 {
     if( comboBox )
     {
         comboBox->clear();
-        for( int i = 0; i < eMaxContentType; i++ )
+        for( int i = 0; i < eMaxContentRating; i++ )
         {
-            comboBox->addItem( describePreferredContent( (EContentType)i ) );
+            comboBox->addItem( describeContentRating( (EContentRating)i ) );
         }
     }
 }
+
+//============================================================================
+QString GuiHelpers::describeContentCatagory( EContentCatagory content )
+{
+    switch( content )
+    {
+    case eContentCatagoryUnspecified:
+        return QObject::tr( "Any" );
+    case eContentCatagoryVideo:
+        return QObject::tr( "Video" );
+    case eContentCatagoryAudio:
+        return QObject::tr( "Auidio" );
+    case eContentCatagoryImage:
+        return QObject::tr( "Image" );
+    case eContentCatagoryText:
+        return QObject::tr( "Text" );
+    case eContentCatagoryPersonal:
+        return QObject::tr( "Personal" );
+    case eContentCatagoryOther:
+        return QObject::tr( "Other" );
+
+    default:
+        return QObject::tr( "Unknown" );
+    }
+}
+
+//============================================================================
+uint16_t GuiHelpers::contentCatagoryToIndex( EContentCatagory rating )
+{
+    if( ( rating >= 0 ) && ( rating < eMaxContentCatagory ) )
+    {
+        return ( uint16_t )rating;
+    }
+
+    return 0;
+}
+
+//============================================================================
+void GuiHelpers::fillContentCatagory( QComboBox * comboBox )
+{
+    if( comboBox )
+    {
+        comboBox->clear();
+        for( int i = 0; i < eMaxContentCatagory; i++ )
+        {
+            comboBox->addItem( describeContentCatagory( ( EContentCatagory )i ) );
+        }
+    }
+}
+
 
 //============================================================================
 QString GuiHelpers::describeLanguage( ELanguageType language )
@@ -1029,6 +1089,18 @@ QString GuiHelpers::describeLanguage( ELanguageType language )
         return QObject::tr( "Unknown" );
     }
 }
+
+//============================================================================
+uint16_t GuiHelpers::languageToIndex( ELanguageType language )
+{
+    if( ( language >= 0 ) && ( language < eMaxLanguageType ) )
+    {
+        return ( uint16_t )language;
+    }
+
+    return 0;
+}
+
 
 //============================================================================
 void GuiHelpers::fillLanguage( QComboBox * comboBox )
@@ -1102,7 +1174,7 @@ void GuiHelpers::setIdentityFromValues( QWidget * curWidget, VxNetIdent * ident,
         ident->setPrimaryLanguage( languageValue );
 
         int contentValue = contentCombo->currentIndex();
-        if( ( 0 > contentValue ) || ( eMaxContentType <= genderValue ) )
+        if( ( 0 > contentValue ) || ( eMaxContentRating <= genderValue ) )
         {
             contentValue = 0;
         }

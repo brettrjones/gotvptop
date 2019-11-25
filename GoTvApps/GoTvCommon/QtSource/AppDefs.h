@@ -55,7 +55,8 @@ enum EApplet
     eAppletActivityDialog,          // place dialog over home window.. do not setup base class ui in the case of dialog
     eAppletEditAboutMe,
     eAppletEditAvatarImage,
-	eAppletHomePage,
+    eAppletEditStoryboard,
+    eAppletHomePage,
     eAppletKodi,
     eAppletUserIdentity,
     eAppletMessenger,
@@ -122,6 +123,9 @@ enum EApplet
     eAppletClientShareFiles,
     eAppletClientShareWebCam,
     eAppletClientStoryboard,
+
+    eAppletGalleryImage,
+    eAppletGalleryThumb,
 
     eAppletServiceSettings,
 

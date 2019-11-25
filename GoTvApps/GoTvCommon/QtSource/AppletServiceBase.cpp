@@ -27,15 +27,11 @@ AppletServiceBase::AppletServiceBase( const char * objName, AppCommon& app, QWid
 }
 
 //============================================================================
-void AppletServiceBase::setAppletType( EApplet applet )
+void AppletServiceBase::setupServiceBaseApplet( EApplet applet, EPluginType pluginType )
 {
-    AppletBase::setAppletType( applet );
-    setupServiceApplet();
-}
+    setAppletType( applet );
+    setPluginType( pluginType );
 
-//============================================================================
-void AppletServiceBase::setupServiceApplet()
-{
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
@@ -45,11 +41,20 @@ void AppletServiceBase::setupServiceApplet()
     getStopButton()->setVisible( false );
     getInformationWidget()->setVisible( false );
 
-    EPluginType pluginType = GuiHelpers::getAppletAssociatedPlugin( m_EAppletType );
+    GuiHelpers::fillLanguage( ui.m_LanguageComboBox );
+    GuiHelpers::fillContentRating( ui.m_ContentRatingComboBox );
+
+
+    if( ePluginTypeInvalid == pluginType )
+    {
+        pluginType = GuiHelpers::getAppletAssociatedPlugin( m_EAppletType );
+    }
+
     if( ePluginTypeInvalid != pluginType )
     {
         getPermissionWidget()->setPluginType( pluginType );
         getServiceTitle()->setText( GuiHelpers::describePlugin( pluginType, false ).c_str() );
+        ui.m_InfoWidget->setPluginType( pluginType );
     }
 
     connectServiceWidgets();
@@ -58,14 +63,72 @@ void AppletServiceBase::setupServiceApplet()
 //============================================================================
 void AppletServiceBase::connectServiceWidgets()
 {
+    connect( ui.m_ApplyButton, SIGNAL( clicked() ), this, SLOT( slotApplyServiceSettings() ) );
+}
+
+
+//============================================================================
+void AppletServiceBase::loadPluginSetting()
+{
+    if( ePluginTypeInvalid != getPluginType() )
+    {
+        m_OrigPermissionLevel = m_MyApp.getAppGlobals().getUserIdent()->getPluginPermission( getPluginType() );
+        getPermissionWidget()->setPermissionLevel( m_OrigPermissionLevel );
+        m_MyApp.getEngine().getPluginSettingMgr().getPluginSetting( getPluginType(), m_PluginSetting );
+        loadUiFromSetting();
+    }
 }
 
 //============================================================================
-void AppletServiceBase::loadServiceFromSettings()
+void AppletServiceBase::savePluginSetting()
 {
+    if( ( ePluginTypeInvalid != getPluginType() ) && ( ePluginTypeInvalid != m_PluginSetting.getPluginType() ) )
+    {
+        saveUiToSetting();
+        m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
+    }
 }
 
 //============================================================================
-void AppletServiceBase::saveServiceToSettings()
+void AppletServiceBase::loadUiFromSetting()
 {
+    if( ePluginTypeInvalid != getPluginType() )
+    {
+        ui.m_ContentRatingComboBox->setCurrentIndex( GuiHelpers::contentRatingToIndex( m_PluginSetting.getContentRating() ) );
+        ui.m_LanguageComboBox->setCurrentIndex( GuiHelpers::languageToIndex( m_PluginSetting.getLanguage() ) );
+        ui.m_UrlEdit->setText( m_PluginSetting.getPluginUrl().c_str() );
+        ui.m_NameEdit->setText( m_PluginSetting.getTitle().c_str() );
+        ui.m_DescriptionEdit->appendPlainText( m_PluginSetting.getDescription().c_str() );
+        ui.m_ThumbnailEditWidget->loadThumbnail( m_PluginSetting.getThumnailId() );
+    }
+}
+
+//============================================================================
+void AppletServiceBase::saveUiToSetting()
+{
+    if( ePluginTypeInvalid != getPluginType() )
+    {
+        m_PluginSetting.setContentRating( ( EContentRating)ui.m_ContentRatingComboBox->currentIndex() );
+        m_PluginSetting.setLanguage( ( ELanguageType )ui.m_LanguageComboBox->currentIndex() );
+        m_PluginSetting.setPluginUrl( ui.m_UrlEdit->text().toUtf8().constData() );
+        m_PluginSetting.setTitle( ui.m_NameEdit->text().toUtf8().constData() );
+        m_PluginSetting.setThumnailId( ui.m_ThumbnailEditWidget->updateAndGetThumbnailId() );
+
+        QString description = ui.m_DescriptionEdit->toPlainText().trimmed();
+        if( !description.isEmpty() )
+        {
+            m_PluginSetting.setDescription( description.toUtf8().constData() );
+        }
+        else
+        {
+            m_PluginSetting.setDescription( "" );
+        }
+    }
+}
+
+//============================================================================
+void AppletServiceBase::slotApplyServiceSettings()
+{
+    saveUiToSetting();
+    m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
 }

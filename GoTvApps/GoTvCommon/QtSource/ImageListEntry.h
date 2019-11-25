@@ -1,6 +1,5 @@
-#pragma once
 //============================================================================
-// Copyright (C) 2018 Brett R. Jones
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -12,22 +11,24 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
+#pragma once
 
-#include "AppletServiceBase.h"
+#include "ThumbnailViewWidget.h"
 
+class AssetInfo;  
 
-class AppletServiceHostNetwork : public AppletServiceBase
+class ImageListEntry : public ThumbnailViewWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-    AppletServiceHostNetwork( AppCommon& app, QWidget * parent );
-	virtual ~AppletServiceHostNetwork() = default;
+    ImageListEntry( QWidget * parent );
+    ~ImageListEntry() override = default;
 
+    bool                        loadFromAsset( AssetInfo * thumbAsset );
 
+protected slots:
+    void                        slotThumbGalleryClick( void );
 
 protected:
-    void loadFromSettings();
-    void saveToSettings();
+
 };
-
-

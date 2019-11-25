@@ -21,7 +21,7 @@ class AppletBase : public ActivityBase
 {
 	Q_OBJECT
 public:
-	AppletBase( const char * ObjName, AppCommon& app, QWidget * parent );
+	AppletBase( const char * ObjName, AppCommon& app, QWidget * parent, int launchParam = 0 );
 	virtual ~AppletBase(){};
 
     void						setTitleBarAppletIcon( EMyIcons appletIcon );
@@ -44,6 +44,7 @@ protected:
 	bool						m_ActivityCallbacksEnabled;
 	bool						m_IsPlaying;
 	bool						m_SliderIsPressed;
+    int                         m_LaunchParam;
 };
 
 

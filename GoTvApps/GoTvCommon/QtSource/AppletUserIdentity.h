@@ -32,6 +32,7 @@ public slots:
 
     void						slotEditAboutMeButClick( void );
     void						slotEditAvatarButClick( void );
+    void                        slotEditStoryboardButClick( void );
     void						slotCreateNewAccount( void );
     void						slotDeleteAccount( void );
 

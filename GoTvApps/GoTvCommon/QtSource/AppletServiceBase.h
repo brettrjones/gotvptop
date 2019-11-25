@@ -15,6 +15,7 @@
 
 #include "AppletBase.h"
 #include <GoTvInterface/IToGui.h>
+#include <GoTvCore/GoTvP2P/P2PEngine/PluginSettingMgr.h>
 
 #include "ui_AppletServiceBase.h"
 
@@ -25,12 +26,9 @@ public:
     AppletServiceBase( const char * objName, AppCommon& app, QWidget * parent );
 	virtual ~AppletServiceBase() = default;
 
-    // override so we do initialization after applet type is set
-    void						setAppletType( EApplet applet )	override;
+    void						setupServiceBaseApplet( EApplet applet, EPluginType pluginType );
 
     virtual QLabel *            getServiceTitle() { return ui.m_ServiceTitleLabel; }
-    //virtual QLabel *            getStatusLabel() { return ui.m_StatusLabel; }
-    //virtual QLabel *            getServiceStatusLabel() { return ui.m_ServiceStatusLabel; }
 
     virtual QLabel *            getServiceUrlLabel() { return ui.m_UrlDescriptionLabel; }
     virtual QLineEdit *         getServiceUrlEdit() { return ui.m_UrlEdit; }
@@ -47,16 +45,23 @@ public:
     virtual PermissionWidget *  getPermissionWidget() { return ui.m_PermissionWidget; }
     virtual InformationWidget * getInformationWidget() { return ui.m_InfoWidget; }
     virtual LogWidget *         getLogWidget() { return ui.m_LogWidget; }
+    virtual ThumbnailEditWidget *   getThumbEditWidget() { return ui.m_ThumbnailEditWidget; }
+
+protected slots:
+    virtual void                slotApplyServiceSettings();
 
 protected:
-    virtual void                setupServiceApplet();
     virtual void                connectServiceWidgets();
-    virtual void                loadServiceFromSettings();
-    virtual void                saveServiceToSettings();
+    virtual void                loadPluginSetting();
+    virtual void                savePluginSetting();
 
+    virtual void                loadUiFromSetting();
+    virtual void                saveUiToSetting();
 
-    Ui::AppletServiceBaseClass ui;
+    Ui::AppletServiceBaseUi     ui;
     QWidget *                   m_HostServiceWidget;
+    PluginSetting               m_PluginSetting;
+    EFriendState                m_OrigPermissionLevel = eFriendStateIgnore;
 };
 
 

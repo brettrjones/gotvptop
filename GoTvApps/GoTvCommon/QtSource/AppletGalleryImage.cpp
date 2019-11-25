@@ -12,33 +12,43 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletServiceHostNetwork.h"
-#include "AppCommon.h"
+#include "AppCommon.h"	
 #include "AppSettings.h"
-#include "MyIcons.h"
 
-#include <CoreLib/VxDebug.h>
+#include "AppletGalleryImage.h"
+
+#include "FileShareItemWidget.h"
+#include "MyIcons.h"
+#include "ListEntryWidget.h"
+#include "PopupMenu.h"
+#include "AppGlobals.h"
+#include "FileItemInfo.h"
+#include "FileActionMenu.h"
+#include "GuiHelpers.h"
+
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
+
+#include <PktLib/VxSearchDefs.h>
+#include <NetLib/VxFileXferInfo.h>
+#include <CoreLib/VxFileInfo.h>
 
 //============================================================================
-AppletServiceHostNetwork::AppletServiceHostNetwork( AppCommon& app, QWidget * parent )
-: AppletServiceBase( OBJNAME_APPLET_SERVICE_HOST_NETWORK, app, parent )
+AppletGalleryImage::AppletGalleryImage(	AppCommon& app, QWidget * parent )
+: AppletBase( OBJNAME_APPLET_GALLERY_IMAGE, app, parent )
+, m_AssetMgr( app.getEngine().getAssetMgr() )
 {
-    setPluginType( ePluginTypeHostNetwork );
-    setAppletType( eAppletServiceHostNetwork );
+    setAppletType( eAppletGalleryImage );
+    ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
-    loadFromSettings();
+
+
+
     m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================
-void AppletServiceHostNetwork::loadFromSettings()
+void AppletGalleryImage::slotImageClicked( ImageListEntry * imageEntry )
 {
 
 }
-
-//============================================================================
-void AppletServiceHostNetwork::saveToSettings()
-{
-
-}
-

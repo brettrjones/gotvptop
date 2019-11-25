@@ -15,16 +15,20 @@
 
 #include "ThumbnailEditWidget.h"
 #include "ActivitySnapShot.h"
+#include "AppletGalleryThumb.h"
+#include "AppletMgr.h"
+
 #include "AppCommon.h"
 #include "GuiHelpers.h"
 #include "GuiParams.h"
 
-
-#include <CoreLib/VxDebug.h>
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
+#include <CoreLib/VxFileUtil.h>
+#include <CoreLib/VxDebug.h>
+#include <CoreLib/VxGlobals.h>
 #include <VxVideoLib/VxVideoLib.h>
 
 #include <QMessageBox>
@@ -44,7 +48,7 @@ ThumbnailEditWidget::ThumbnailEditWidget( QWidget * parent )
     connect( ui.m_BrowsePictureButton, SIGNAL( clicked() ), this, SLOT( slotBrowseButClick() ) );
     connect( ui.m_MakeCircleButton, SIGNAL( clicked() ), this, SLOT( slotMakeCircleButClick() ) );
     connect( ui.m_UndoCircleButton, SIGNAL( clicked() ), this, SLOT( slotUndoCircleClick() ) );
-
+    connect( ui.m_PickThumbButton, SIGNAL( clicked() ), this, SLOT( slotThumbGalleryClick() ) );
 }
 
 //============================================================================
@@ -54,9 +58,46 @@ bool ThumbnailEditWidget::loadFromAsset( AssetInfo * thumbAsset )
     if( thumbAsset )
     {
         loadOk = ui.m_ThumbnailViewWidget->loadFromFile( thumbAsset->getAssetName().c_str() );
+        if( loadOk )
+        {
+            setAssetId( thumbAsset->getAssetUniqueId() );
+        }
     }
 
     return loadOk;
+}
+
+//============================================================================
+bool ThumbnailEditWidget::generateThumbAsset( AssetInfo& assetInfo )
+{
+    bool assetGenerated = false;
+    VxGUID assetGuid;
+    VxGUID::generateNewVxGUID( assetGuid );
+    QString fileName = VxGetAppDirectory( eAppDirThumbs ).c_str();
+    fileName += assetGuid.toHexString().c_str();
+    fileName += ".nlt"; // use extension not known as image so thumbs will not be scanned by android image gallery etc
+    if( saveToPngFile( fileName ) && VxFileUtil::fileExists( fileName.toUtf8().constData() ) )
+    {
+        AssetInfo assetInfo( ( const char * )fileName.toUtf8().constData(), VxFileUtil::fileExists( fileName.toUtf8().constData() ), ( uint16_t )eAssetTypeThumbnail );
+        assetInfo.setAssetUniqueId( assetGuid );
+        assetInfo.setCreatorId( m_MyApp.getAppGlobals().getUserIdent()->getMyOnlineId() );
+        if( m_MyApp.getEngine().getAssetMgr().addAsset( assetInfo ) )
+        {
+            assetGenerated = true;
+        }
+        else
+        {
+            QString msgText = QObject::tr( "Could not create thumbnail asset" );
+            QMessageBox::information( this, QObject::tr( "Error occured creating thumbnail asset " ) + fileName, msgText );
+        }
+    }
+    else
+    {
+        QString msgText = QObject::tr( "Could not save thumbnail image" );
+        QMessageBox::information( this, QObject::tr( "Error occured saving thumbnail to file " ) + fileName, msgText );
+    }
+
+    return assetGenerated;
 }
 
 //============================================================================
@@ -68,6 +109,10 @@ void ThumbnailEditWidget::slotSnapShotButClick( void )
         connect( &oDlg, SIGNAL( signalJpgSnapshot( uint8_t*, uint32_t, int, int ) ), ui.m_ThumbnailViewWidget, SLOT( slotJpgSnapshot( uint8_t*, uint32_t, int, int ) ) );
         oDlg.exec();
         m_IsCircle = !ui.m_ThumbnailViewWidget->getIsUserPickedImage();
+        if( ui.m_ThumbnailViewWidget->getIsUserPickedImage() )
+        {
+            clearAssetId();
+        }
     }
     else
     {
@@ -80,6 +125,10 @@ void ThumbnailEditWidget::slotBrowseButClick( void )
 {
     ui.m_ThumbnailViewWidget->browseForImage();
     m_IsCircle = !ui.m_ThumbnailViewWidget->getIsUserPickedImage();
+    if( ui.m_ThumbnailViewWidget->getIsUserPickedImage() )
+    {
+        clearAssetId();
+    }
 }
 
 //============================================================================
@@ -103,6 +152,7 @@ void ThumbnailEditWidget::slotUndoCircleClick( void )
     {
         m_IsCircle = false;
         ui.m_ThumbnailViewWidget->setThumbnailImage( m_SquarePixmap );
+        clearAssetId();
     }
 }
 
@@ -119,5 +169,83 @@ QPixmap ThumbnailEditWidget::makeCircleImage( QPixmap& pixmap )
     painter.setClipRegion( clipRegion );
 
     painter.drawPixmap( 0, 0, pixmap );  
+    clearAssetId();
     return target;
+}
+
+//============================================================================
+void ThumbnailEditWidget::slotThumbGalleryClick( void )
+{
+    AppletGalleryThumb * galleryThumb = dynamic_cast< AppletGalleryThumb * >( m_MyApp.getAppletMgr().launchApplet( eAppletGalleryThumb ) );
+    if( galleryThumb )
+    {
+        connect( galleryThumb, SIGNAL( signalImageSelected( ThumbnailViewWidget * thumb ) ), this, SLOT( slotImageSelected( ThumbnailViewWidget * thumb ) ) );
+    }
+}
+
+//============================================================================
+void ThumbnailEditWidget::slotImageSelected( ThumbnailViewWidget * thumb )
+{
+    if( thumb )
+    {
+        VxGUID assetGuid = thumb->getThumbnailId();
+        AssetInfo * thumbAsset = m_MyApp.getEngine().getAssetMgr().findAsset( assetGuid );
+        if( thumbAsset )
+        {
+            if( loadFromAsset( thumbAsset ) )
+            {
+                setAssetId( assetGuid );
+            }
+        }
+    }
+}
+
+//============================================================================
+bool ThumbnailEditWidget::loadThumbnail( VxGUID& assetId )
+{
+    bool result = false;
+    if( false == assetId.isVxGUIDValid() )
+    {
+        AssetInfo * thumbAsset = m_MyApp.getEngine().getAssetMgr().findAsset( assetId );
+        if( thumbAsset )
+        {
+            if( loadFromAsset( thumbAsset ) )
+            {
+                setAssetId( assetId );
+                result = true;
+            }
+        }
+    }
+
+    return result;
+}
+
+//============================================================================
+VxGUID ThumbnailEditWidget::updateAndGetThumbnailId( void )
+{
+    bool assetExists = isAssetIdValid();
+    if( assetExists )
+    {
+        AssetInfo * existingAsset = m_MyApp.getEngine().getAssetMgr().findAsset( getAssetId() );
+        if( existingAsset )
+        {
+            return existingAsset->getAssetUniqueId();
+        }
+        else
+        {
+            assetExists = false;
+        }
+    }
+
+    if( !assetExists && getIsUserPickedImage() )
+    {
+        AssetInfo assetInfo;
+        if( generateThumbAsset( assetInfo ) )
+        {
+            return assetInfo.getAssetUniqueId();
+        }
+    }
+
+    VxGUID nullGuid;
+    return nullGuid;
 }

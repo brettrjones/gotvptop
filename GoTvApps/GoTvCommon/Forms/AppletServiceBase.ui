@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AppletServiceBaseClass</class>
- <widget class="QWidget" name="AppletServiceBaseClass">
+ <class>AppletServiceBaseUi</class>
+ <widget class="QWidget" name="AppletServiceBaseUi">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Group Host Service</string>
+   <string>Service</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -71,6 +71,54 @@
     </layout>
    </item>
    <item>
+    <widget class="QPushButton" name="m_ApplyButton">
+     <property name="text">
+      <string>Apply Service Settings</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Rating</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="m_ContentRatingComboBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maxCount">
+        <number>100</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Language</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="m_LanguageComboBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QLabel" name="m_UrlDescriptionLabel">
      <property name="text">
       <string>Service URL or IP Address</string>
@@ -78,12 +126,16 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="m_UrlEdit"/>
+    <widget class="QLineEdit" name="m_UrlEdit">
+     <property name="maxLength">
+      <number>63</number>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QLabel" name="m_UserDisplayedNameLabel">
      <property name="text">
-      <string>Name Of Service ( Optional For Detail Information )</string>
+      <string>Title Of Service ( Optional For Detail Information )</string>
      </property>
     </widget>
    </item>
@@ -111,6 +163,9 @@
       </sizepolicy>
      </property>
     </widget>
+   </item>
+   <item>
+    <widget class="ThumbnailEditWidget" name="m_ThumbnailEditWidget" native="true"/>
    </item>
    <item>
     <widget class="LogWidget" name="m_LogWidget" native="true">
@@ -141,6 +196,12 @@
    <class>LogWidget</class>
    <extends>QWidget</extends>
    <header>LogWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ThumbnailEditWidget</class>
+   <extends>QWidget</extends>
+   <header>ThumbnailEditWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

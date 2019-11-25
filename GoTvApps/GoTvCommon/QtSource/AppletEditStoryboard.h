@@ -13,21 +13,27 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletServiceBase.h"
+#include "AppletBase.h"
 
+#include "ui_AppletEditStoryboard.h"
+#include "ui_StoryWidget.h"
 
-class AppletServiceHostNetwork : public AppletServiceBase
+class AppletEditStoryboard : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletServiceHostNetwork( AppCommon& app, QWidget * parent );
-	virtual ~AppletServiceHostNetwork() = default;
+    AppletEditStoryboard( AppCommon& app, QWidget * parent );
+	virtual ~AppletEditStoryboard() = default;
 
-
+private slots:
+    void						slotStoryBoardSavedModified();
 
 protected:
-    void loadFromSettings();
-    void saveToSettings();
+    //=== vars ===//
+    Ui::AppletEditStoryboardUi	ui;
+    std::string					m_strSavedCwd;
+    std::string					m_strStoryBoardDir;
+    std::string					m_strStoryBoardFile;
 };
 
 

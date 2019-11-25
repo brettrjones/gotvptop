@@ -15,7 +15,6 @@
 
 #include "AppletServiceBase.h"
 
-#include "ui_AppletServiceBase.h"
 
 class AppletServiceHostGroupListing : public AppletServiceBase
 {
@@ -29,7 +28,6 @@ protected:
     void loadFromSettings();
     void saveToSettings();
 
-    Ui::AppletServiceBaseClass ui;
 
 };
 

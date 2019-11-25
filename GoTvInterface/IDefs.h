@@ -186,14 +186,61 @@ enum ELanguageType
     eMaxLanguageType
 };
 
-enum EContentType
+enum EContentRating
 {
-    eContentUnspecified,
-    eContentFamily,
-    eContentAdult,
-    eContentXXX,
-    eContentDarkWeb,
-    eContentPersonal,
+    eContentRatingUnspecified,
+    eContentRatingFamily,
+    eContentRatingAdult,
+    eContentRatingXXX,
+    eContentRatingDarkWeb,
+    eContentRatingPersonal,
 
-    eMaxContentType
+    eMaxContentRating
+};
+
+enum EContentCatagory
+{
+    eContentCatagoryUnspecified,
+    eContentCatagoryVideo,
+    eContentCatagoryAudio,
+    eContentCatagoryImage,
+    eContentCatagoryText,
+    eContentCatagoryPersonal,
+    eContentCatagoryOther,
+
+    eMaxContentCatagory
+};
+
+enum ESubCatagory
+{
+    eSubCatagoryUnspecified,
+
+    eSubCatagoryVideoOther,
+    eSubCatagoryVideoPersonal,
+    eSubCatagoryVideoXXX,
+    eSubCatagoryVideoMovie,
+    eSubCatagoryVideoMovieClip,
+    eSubCatagoryVideoTvShow,
+    eSubCatagoryVideo3d,
+    eSubCatagoryVideoCam,
+    
+    eSubCatagoryAudioOther,
+    eSubCatagoryAudioPersonal,
+    eSubCatagoryAudioXXX,
+    eSubCatagoryAudioMusic,
+    eSubCatagoryAudioBook,
+    eSubCatagoryAudioSoundClip,
+
+    eSubCatagoryImageOther,
+    eSubCatagoryImagePersonal,
+    eSubCatagoryImageXXX,
+    eSubCatagoryImagePictures,
+    eSubCatagoryImageCovers,
+
+    eSubCatagoryOtherPersonal,
+    eSubCatagoryOtherXXX,
+    eSubCatagoryOtherEBook,
+    eSubCatagoryOtherComic,
+
+    eMaxSubCatagory
 };

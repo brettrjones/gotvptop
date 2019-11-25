@@ -67,7 +67,7 @@ void LogWidget::toGuiLog( uint32_t u32LogFlags, char * logMsg )
 {
     m_LogMutex.lock();
     if( m_VerboseLog
-        || !( u32LogFlags && ( LOG_VERBOSE | LOG_DEBUG ) ) )
+        || ( u32LogFlags & ~LOG_VERBOSE ) )
     {
         QString logStr( logMsg );
         logStr.remove( QRegExp( "[\\n\\r]" ) );

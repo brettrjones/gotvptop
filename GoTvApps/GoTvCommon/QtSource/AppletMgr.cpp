@@ -32,8 +32,11 @@
 #include "AppletClientRandomConnect.h"
 #include "AppletEditAboutMe.h"
 #include "AppletEditAvatarImage.h"
-#include "AppletKodi.h"
+#include "AppletEditStoryboard.h"
+#include "AppletGalleryImage.h"
+#include "AppletGalleryThumb.h"
 #include "AppletGroupUser.h"
+#include "AppletKodi.h"
 #include "AppletLibrary.h"
 #include "AppletNetHostingPage.h"
 #include "AppletNetworkSettings.h"
@@ -162,12 +165,16 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 	switch( applet )
 	{
     case eActivityAppSetup:                 appletDialog = new ActivityAppSetup( m_MyApp, parent ); break;
-    case eAppletAboutNoLimitConnect:              appletDialog = new AppletAboutApp( m_MyApp, parent ); break;
+    case eAppletAboutNoLimitConnect:        appletDialog = new AppletAboutApp( m_MyApp, parent ); break;
     case eAppletEditAboutMe:                appletDialog = new AppletEditAboutMe( m_MyApp, parent ); break;
     case eAppletEditAvatarImage:            appletDialog = new AppletEditAvatarImage( m_MyApp, parent ); break;
+    case eAppletEditStoryboard:             appletDialog = new AppletEditStoryboard( m_MyApp, parent ); break;
+    case eAppletGalleryImage:               appletDialog = new AppletGalleryImage( m_MyApp, parent ); break;
+    case eAppletGalleryThumb:               appletDialog = new AppletGalleryThumb( m_MyApp, parent ); break;
     case eAppletGroupUser:                  appletDialog = new AppletGroupUser( m_MyApp, parent ); break;
 
     case eAppletHomePage:                   m_MyApp.errMessageBox( appletMissingTitle, "Home Page Not Implemented" ); return nullptr;
+
 
     case eAppletKodi:                       appletDialog = new AppletKodi( m_MyApp, parent ); break;
     case eAppletLibrary:                    appletDialog = new AppletLibrary( m_MyApp, parent ); break;

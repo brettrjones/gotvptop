@@ -1,6 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2018 Brett R. Jones
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,21 +13,29 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletServiceBase.h"
+#include "AppletBase.h"
+#include "ui_AppletGalleryImage.h"
 
 
-class AppletServiceHostNetwork : public AppletServiceBase
+class ImageListEntry;
+class AssetMgr;
+
+class AppletGalleryImage : public AppletBase
 {
 	Q_OBJECT
 public:
-    AppletServiceHostNetwork( AppCommon& app, QWidget * parent );
-	virtual ~AppletServiceHostNetwork() = default;
+	AppletGalleryImage( AppCommon& app, QWidget * parent = NULL );
+	virtual ~AppletGalleryImage() override = default;
 
+signals:
+    void                        signalImageSelected( ImageListEntry * imageEntry );
 
+private slots:
+	void						slotImageClicked( ImageListEntry * imageEntry );
 
 protected:
-    void loadFromSettings();
-    void saveToSettings();
+
+	//=== vars ===//
+	Ui::AppletGalleryImageUi	ui;
+    AssetMgr&					m_AssetMgr;
 };
-
-

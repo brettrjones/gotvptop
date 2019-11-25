@@ -45,6 +45,14 @@ public:
     EPluginType                 getPluginType( void )                               { return ( EPluginType )m_PluginType; }
     void                        setThumnailId( VxGUID&  thumbAssetId )              { m_PluginThumb = thumbAssetId; }
     VxGUID&                     getThumnailId( void )                               { return m_PluginThumb; }
+
+    void                        setLanguage( ELanguageType language )               { m_Language = ( uint16_t )language; }
+    ELanguageType               getLanguage( void )                                 { return ( ELanguageType )m_Language; }
+    void                        setContentRating( EContentRating contentType )      { m_ContentRating = ( uint16_t )contentType; }
+    EContentRating              getContentRating( void )                            { return ( EContentRating )m_ContentRating; }
+    void                        setContentCatagory( EContentCatagory contentCat )   { m_ContentCatagory = ( uint16_t )contentCat; }
+    EContentCatagory            getContentCatagory( void )                           { return ( EContentCatagory )m_ContentCatagory; }
+
     void                        setMaxConnectPerUser( int maxConnect )              { m_MaxConnectionsPerUser = (uint32_t)maxConnect; }
     int                         getMaxConnectPerUser( void )                        { return m_MaxConnectionsPerUser; }
     void                        setMaxStoreAndForwardPerUser( int maxStoreCnt )     { m_MaxStoreAndForwardPerUser = (uint32_t)maxStoreCnt; }
@@ -76,8 +84,14 @@ protected:
     VxGUID                      m_SecondaryPluginThumb;
     VxGUID                      m_SecondaryIdentGuid;
 
-    uint32_t                    m_MaxConnectionsPerUser = 0;
-    uint32_t                    m_MaxStoreAndForwardPerUser = 0;
+    uint16_t                    m_Language = 0;
+    uint16_t                    m_ContentRating = 0;
+    uint16_t                    m_ContentCatagory = 0;
+    uint16_t                    m_ContentSubCatagory = 0;
+    uint16_t                    m_MaxConnectionsPerUser = 0;
+    uint16_t                    m_MaxStoreAndForwardPerUser = 0;
+    uint16_t                    m_ResBw1 = 0;
+    uint16_t                    m_ResBw2 = 0;
     uint32_t                    m_Reserve1Setting = 0;
     uint32_t                    m_Reserve2Setting = 0;
 
@@ -99,11 +113,12 @@ public:
     //! move operator
     PluginSetting& operator =( PluginSetting && rhs ) = default;
 
-
     void                        setTitle( std::string title )                       { m_PluginTitle = title; }
     std::string&                getTitle( void )                                    { return m_PluginTitle; }
     void                        setDescription( std::string desc )                  { m_PluginDesc = desc; }
     std::string&                getDescription( void )                              { return m_PluginDesc; }
+    void                        setPluginUrl( std::string  url )                    { m_PluginUrl = url; }
+    std::string&                getPluginUrl( void )                                { return m_PluginUrl; }
     void                        setSecondaryTitle( std::string title )              { m_SecondaryPluginTitle = title; }
     std::string&                getSecondaryTitle( void )                           { return m_SecondaryPluginTitle; }
     void                        setSecondaryDescription( std::string desc )         { m_SecondaryPluginDesc = desc; }
@@ -119,6 +134,7 @@ protected:
     bool                        getStringList( std::vector<std::string>& stringList );
 
     std::string                 m_PluginTitle;
+    std::string                 m_PluginUrl;
     std::string                 m_PluginDesc;
     std::string                 m_SecondaryPluginTitle;
     std::string                 m_SecondaryPluginDesc;

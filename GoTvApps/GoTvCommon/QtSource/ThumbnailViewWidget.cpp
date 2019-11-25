@@ -19,15 +19,19 @@
 #include "GuiHelpers.h"
 #include "GuiParams.h"
 
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
+#include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
+
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxFileUtil.h>
 #include <CoreLib/VxGlobals.h>
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-#include <VxVideoLib/VxVideoLib.h>
 
 #include <QMessageBox>
 #include <QUuid>
 #include <QFileDialog>
+#include <QResizeEvent>
+
 
 //============================================================================
 ThumbnailViewWidget::ThumbnailViewWidget( QWidget * parent )
@@ -35,6 +39,26 @@ ThumbnailViewWidget::ThumbnailViewWidget( QWidget * parent )
     , m_MyApp( GetAppInstance() )
 {
     setFixedSize( GuiParams::getThumbnailSize() );
+}
+
+//============================================================================
+void ThumbnailViewWidget::mousePressEvent( QMouseEvent * event )
+{
+    QWidget::mousePressEvent( event );
+    emit clicked();
+    emit signalImageClicked( this );
+}
+
+//============================================================================
+bool ThumbnailViewWidget::loadFromAsset( AssetInfo * asset )
+{
+    if( asset && ( asset->isPhotoAsset() || asset->isThumbAsset() ) )
+    {
+        setThumbnailId( asset->getAssetUniqueId() );
+        return loadFromFile( asset->getAssetName().c_str() );
+    }
+
+    return false;
 }
 
 //============================================================================

@@ -40,10 +40,11 @@ protected:
     void						updatePermissionIcon( void );
     void                        updateUi( void );
 
+    Ui::PermissionWidgetUi	    ui;
     AppCommon&                  m_MyApp;
     EPluginType                 m_PluginType = ePluginTypeInvalid;
     int                         m_SubPluginType = 0;
     bool                        m_OrigPermissionIsSet = false;
     EFriendState                m_OrigPermissionLevel = eFriendStateIgnore;
-	Ui::PermissionWidgetUi	    ui;
+    bool                        m_PermissionsConnected = false;
 };

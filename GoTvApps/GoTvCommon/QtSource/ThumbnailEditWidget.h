@@ -16,6 +16,9 @@
 #include <QWidget>
 #include "ui_ThumbnailEditWidget.h"
 
+#include <CoreLib/VxGUID.h>
+
+
 class IVxVidCap;
 class AssetInfo;  
 
@@ -26,17 +29,29 @@ public:
     ThumbnailEditWidget( QWidget * parent );
     ~ThumbnailEditWidget() override = default;
 
-    void                        setIsUserPickedImage( bool userPicked )       { ui.m_ThumbnailViewWidget->setIsUserPickedImage( userPicked ); }
-    bool                        getIsUserPickedImage( void )                  { return ui.m_ThumbnailViewWidget->getIsUserPickedImage(); }
+    void                        setIsUserPickedImage( bool userPicked )         { ui.m_ThumbnailViewWidget->setIsUserPickedImage( userPicked ); }
+    bool                        getIsUserPickedImage( void )                    { return ui.m_ThumbnailViewWidget->getIsUserPickedImage(); }
 
     bool                        loadFromAsset( AssetInfo * thumbAsset );
-    bool                        saveToPngFile( QString& fileName )          { return ui.m_ThumbnailViewWidget->saveToPngFile( fileName ); }
+    bool                        saveToPngFile( QString& fileName )              { return ui.m_ThumbnailViewWidget->saveToPngFile( fileName ); }
+
+    void                        setAssetId( VxGUID& assetGuid )                 { m_AsssetId = assetGuid; }
+    VxGUID&                     getAssetId( void )                              { return m_AsssetId; }
+    void                        clearAssetId( void )                            { m_AsssetId.clearVxGUID(); }
+    bool                        isAssetIdValid( void )                          { return m_AsssetId.isVxGUIDValid(); }
+
+    bool                        generateThumbAsset( AssetInfo& assetInfo );
+
+    bool                        loadThumbnail( VxGUID& assetGuid );
+    VxGUID                      updateAndGetThumbnailId( void );
 
 protected slots:
+    void                        slotThumbGalleryClick( void );
     void                        slotSnapShotButClick( void );
     void                        slotBrowseButClick( void );
     void                        slotMakeCircleButClick( void );
     void                        slotUndoCircleClick( void );
+    void                        slotImageSelected( ThumbnailViewWidget * thumb );
 
 protected:
     QPixmap                     makeCircleImage( QPixmap& pixmap );
@@ -47,7 +62,7 @@ protected:
     bool 					    m_CameraSourceAvail = false;
     bool 					    m_IsCircle = false;
     QPixmap                     m_SquarePixmap;
-
+    VxGUID                      m_AsssetId;
     bool                        m_WasModifiedByUser = false;
     uint8_t *					m_pu8BitmapData = nullptr;	// snapshot bitmap
     uint32_t					m_u32BitmapLen = 0;		// bitmap length

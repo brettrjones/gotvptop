@@ -43,12 +43,13 @@ public:
 
 	bool						isDirectory( void );
 	bool						isUnknownAsset( void )						{ return ( 0 == m_u16AssetType) ? true : false; }
-	bool						isChatTextAsset( void )						{ return (eAssetTypeChatText & m_u16AssetType) ? true : false; }
+	bool						isChatTextAsset( void )						{ return ( eAssetTypeChatText & m_u16AssetType) ? true : false; }
 	bool						isChatFaceAsset( void )						{ return ( ( eAssetTypeChatFace ) & m_u16AssetType ) ? true : false; }
 	bool						isChatAvatarAsset( void )					{ return ( ( eAssetTypeChatStockAvatar | eAssetTypeChatCustomAvatar ) & m_u16AssetType ) ? true : false; }
-	bool						isPhotoAsset( void )						{ return (eAssetTypePhoto & m_u16AssetType) ? true : false; }
-	bool						isAudioAsset( void )						{ return (eAssetTypeAudio & m_u16AssetType) ? true : false; }
-	bool						isVideoAsset( void )						{ return (eAssetTypeVideo & m_u16AssetType) ? true : false; }
+	bool						isPhotoAsset( void )						{ return ( eAssetTypePhoto & m_u16AssetType ) ? true : false; }
+    bool						isThumbAsset( void )						{ return ( eAssetTypeThumbnail & m_u16AssetType ) ? true : false; }
+	bool						isAudioAsset( void )						{ return ( eAssetTypeAudio & m_u16AssetType ) ? true : false; }
+	bool						isVideoAsset( void )						{ return ( eAssetTypeVideo & m_u16AssetType ) ? true : false; }
 	bool						getIsFileAsset( void );
 	bool						hasFileName( void );
 

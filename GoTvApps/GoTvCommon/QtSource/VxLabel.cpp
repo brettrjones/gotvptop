@@ -39,11 +39,6 @@ VxLabel::VxLabel(const QString &text, QWidget *parent, Qt::WindowFlags f)
 }
 
 //============================================================================
-VxLabel::~VxLabel()
-{
-}
-
-//============================================================================
 void VxLabel::mousePressEvent(QMouseEvent * event)
 {
 	QWidget::mousePressEvent(event);

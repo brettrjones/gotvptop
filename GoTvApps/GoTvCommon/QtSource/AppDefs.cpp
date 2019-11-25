@@ -117,9 +117,12 @@ QString DescribeApplet( EApplet applet )
 	{
     case eActivityAppSetup:				return QObject::tr( "Application Initialize" );
     case eAppletEditAvatarImage:		return QObject::tr( "Edit My Avatar Image" );
+    case eAppletEditStoryboard:		    return QObject::tr( "Edit My Story Board (Blog)" );
     case eAppletHomePage:				return QObject::tr( "Home" );
-    case eAppletAboutNoLimitConnect:		    return QObject::tr( "About GoTv Person to Person" );
+    case eAppletAboutNoLimitConnect:    return QObject::tr( "About GoTv Person to Person" );
     case eAppletCreateAccount:			return QObject::tr( "Create Account" );
+    case eAppletGalleryImage:			return QObject::tr( "Image Gallery" );
+    case eAppletGalleryThumb:			return QObject::tr( "Thumbnail Gallery" );
     case eAppletKodi:				    return QObject::tr( "Kodi (TM)" );
     case eAppletUserIdentity:			return QObject::tr( "User Identity" );
 	case eAppletMessenger:				return QObject::tr( "Messenger" );

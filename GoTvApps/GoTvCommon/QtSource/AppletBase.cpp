@@ -24,11 +24,12 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletBase::AppletBase( const char * ObjName, AppCommon& app, QWidget * parent )
+AppletBase::AppletBase( const char * ObjName, AppCommon& app, QWidget * parent, int launchParam )
 : ActivityBase( ObjName, app, parent )
 , m_ActivityCallbacksEnabled( false )
 , m_IsPlaying( false )
 , m_SliderIsPressed( false )
+, m_LaunchParam( launchParam )
 {
 	initAppletBase();
 }

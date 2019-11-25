@@ -66,6 +66,7 @@
 #define OBJNAME_APPLET_BASE								"AppletBase"
 #define OBJNAME_APPLET_EDIT_ABOUT_ME					"AppletEditAboutMe"
 #define OBJNAME_APPLET_EDIT_AVATAR_IMAGE				"AppletEditAvatarImage"
+#define OBJNAME_APPLET_EDIT_STORYBOARD				    "AppletEditStoryboard"
 #define OBJNAME_APPLET_LAUNCH_PAGE						"AppletLaunchPage"
 #define OBJNAME_APPLET_MESSAGER_PAGE					"AppletMessengerPage"
 #define OBJNAME_APPLET_LAUNCH_WIDGET					"AppletLaunchWidget"
@@ -81,6 +82,8 @@
 #define OBJNAME_APPLET_CLIENT_RANDOM_PERSON_RELAY		"AppletClientRandomConnectRelay"
 #define OBJNAME_APPLET_CLIENT_STORYBOARD				"AppletClientStoryboard"
 
+#define OBJNAME_APPLET_GALLERY_IMAGE				    "AppletGalleryImage"
+#define OBJNAME_APPLET_GALLERY_THUMB				    "AppletGalleryThumb"
 #define OBJNAME_APPLET_GROUP_USER						"AppletGroupUser"
 #define OBJNAME_APPLET_KODI						        "AppletKodi"
 #define OBJNAME_APPLET_LIBRARY					        "AppletLibrary"
