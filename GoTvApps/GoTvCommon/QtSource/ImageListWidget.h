@@ -40,18 +40,23 @@ public:
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 
+    void                        loadAssets( void );
+    void                        clearImages( void );
+    void                        clearItems( void );
+
     void                        addAsset( AssetInfo * asset );
 
 signals:
 	void						signalImageClicked( ThumbnailViewWidget * thumb );
 
 private slots:
-	void						slotItemClicked(QListWidgetItem *);
+	void						slotItemClicked( QListWidgetItem * );
     void						slotImageClicked( ThumbnailViewWidget * thumb );
 
 protected:
     void                        resizeEvent( QResizeEvent * ev );
 
+    bool                        thumbExistsInList( VxGUID& assetId );
     ImageListRow *              getRowWithRoomForThumbnail();
 
 	//=== vars ===//

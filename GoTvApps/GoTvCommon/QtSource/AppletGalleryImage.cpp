@@ -48,7 +48,7 @@ AppletGalleryImage::AppletGalleryImage(	AppCommon& app, QWidget * parent )
 }
 
 //============================================================================
-void AppletGalleryImage::slotImageClicked( ImageListEntry * imageEntry )
+void AppletGalleryImage::slotImageClicked( ThumbnailViewWidget * imageEntry )
 {
 
 }

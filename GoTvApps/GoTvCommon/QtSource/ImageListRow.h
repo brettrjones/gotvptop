@@ -23,6 +23,7 @@
 
 class ThumbnailViewWidget;
 class QHBoxLayout;
+class VxGUID;
 
 class ImageListRow : public QWidget, public QListWidgetItem
 {
@@ -32,17 +33,27 @@ public:
 	virtual ~ImageListRow() = default;
 
     void                        addThumbnail( ThumbnailViewWidget * thumbnail );
-    bool                        hasRoomForThumbnail( void );
+    bool                        hasRoomForThumbnail( int idx = 0 );
     void                        setRowNum( int rowNum );
 
+    void                        clearImages( void );
+    void                        recalculateSizeHint( int listWidth, float displayScale );
+    bool                        thumbExistsInList( VxGUID& assetId );
+
+signals:
+    void                        signalImageClicked( ThumbnailViewWidget * thumbnail );
+
+protected slots:
+    void                        slotImageClicked( ThumbnailViewWidget * thumbnail );
+
 protected:
-    void                        resizeEvent( QResizeEvent * ev );
+    virtual QSize				sizeHint() const override;
 
     //=== vars ===//
     Ui::ImageListRowUi	        ui;
+    QSize                       m_SizeHint;
     bool                        m_LayoutInited = false;
     int                         m_ThumbnailCnt = 0;
-    QHBoxLayout *               m_Layout = nullptr;
 };
 
 

@@ -179,14 +179,14 @@ void ThumbnailEditWidget::slotThumbGalleryClick( void )
     AppletGalleryThumb * galleryThumb = dynamic_cast< AppletGalleryThumb * >( m_MyApp.getAppletMgr().launchApplet( eAppletGalleryThumb ) );
     if( galleryThumb )
     {
-        connect( galleryThumb, SIGNAL( signalImageSelected( ThumbnailViewWidget * thumb ) ), this, SLOT( slotImageSelected( ThumbnailViewWidget * thumb ) ) );
+        connect( galleryThumb, SIGNAL( signalThumbSelected( AppletBase *, ThumbnailViewWidget * ) ), this, SLOT( slotThumbSelected( AppletBase *, ThumbnailViewWidget * ) ) );
     }
 }
 
 //============================================================================
-void ThumbnailEditWidget::slotImageSelected( ThumbnailViewWidget * thumb )
+void ThumbnailEditWidget::slotThumbSelected( AppletBase * thumbGallery, ThumbnailViewWidget * thumb )
 {
-    if( thumb )
+    if( thumbGallery && thumb )
     {
         VxGUID assetGuid = thumb->getThumbnailId();
         AssetInfo * thumbAsset = m_MyApp.getEngine().getAssetMgr().findAsset( assetGuid );
@@ -197,6 +197,9 @@ void ThumbnailEditWidget::slotImageSelected( ThumbnailViewWidget * thumb )
                 setAssetId( assetGuid );
             }
         }
+
+        disconnect( thumbGallery, SIGNAL( signalThumbSelected( AppletBase *, ThumbnailViewWidget * ) ), this, SLOT( slotThumbSelected( AppletBase *, ThumbnailViewWidget * ) ) );
+        thumbGallery->close();
     }
 }
 

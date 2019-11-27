@@ -47,27 +47,104 @@ ImageListWidget::ImageListWidget( QWidget * parent )
 }
 
 //============================================================================
+void ImageListWidget::clearImages( void )
+{
+    ImageListRow * listRow;
+    int iIdx = 0;
+    while( iIdx < this->count() )
+    {
+        listRow = dynamic_cast< ImageListRow * >( this->item( iIdx ) );
+        listRow->clearImages();
+        iIdx++;
+    }
+}
+//============================================================================
+void ImageListWidget::clearItems( void )
+{
+    while( this->count() )
+    {
+        takeItem( 0 );
+    }
+}
+
+
+//============================================================================
 void ImageListWidget::resizeEvent( QResizeEvent * ev )
 {
     QListWidget::resizeEvent( ev );
     LogMsg( LOG_DEBUG, "ImageListWidget Resize w %d h %d\n", ev->size().width(), ev->size().height() );
+    ImageListRow * listRow;
+    int iIdx = 0;
+    while( iIdx < this->count() )
+    {
+        listRow = dynamic_cast< ImageListRow * >( this->item( iIdx ) );
+        listRow->recalculateSizeHint( width(), m_MyApp.getAppDisplay().getDisplayScale() );
+        iIdx++;
+    }
+
+    //clearImages();
+    //clearItems();
+//    loadAssets();
+//    update();
+//    repaint();
+
+//}
+    //refresh();
+}
+
+//============================================================================
+void ImageListWidget::loadAssets( void )
+{
+    std::vector<AssetInfo*>& assetList = m_AssetMgr.getAssetInfoList();
+    for( AssetInfo* assetInfo : assetList )
+    {
+        if( eAssetTypeThumbnail == assetInfo->getAssetType() )
+        {
+            addAsset( assetInfo );
+        }
+    }
 }
 
 //============================================================================
 void ImageListWidget::addAsset( AssetInfo * asset )
 {
-    int curWidth = width();
     if( asset && ( eAssetTypeThumbnail == asset->getAssetType() ) )
     {
-        ImageListRow * listRow = getRowWithRoomForThumbnail();
-        if( listRow )
+        if( !thumbExistsInList( asset->getAssetUniqueId() ) )
         {
-            ThumbnailViewWidget * thumbnail = new ThumbnailViewWidget( listRow );
-            thumbnail->loadFromAsset( asset );
-            connect( thumbnail, SIGNAL( signalImageClicked( ThumbnailViewWidget * ) ), this, SLOT( slotImageClicked( ThumbnailViewWidget * ) ) );
-            listRow->addThumbnail( thumbnail );
+            ImageListRow * listRow = getRowWithRoomForThumbnail();
+            if( listRow )
+            {
+                ThumbnailViewWidget * thumbnail = new ThumbnailViewWidget( listRow );
+                thumbnail->loadFromAsset( asset );
+                connect( thumbnail, SIGNAL( signalImageClicked( ThumbnailViewWidget * ) ), this, SLOT( slotImageClicked( ThumbnailViewWidget * ) ) );
+                listRow->addThumbnail( thumbnail );
+            }
+        }
+        else
+        {
+            LogMsg( LOG_DEBUG, "ImageListWidget asset already exists %s %s\n", asset->getAssetUniqueId().toHexString().c_str(), asset->getAssetName().c_str() );
         }
     }
+}
+
+//============================================================================
+bool ImageListWidget::thumbExistsInList( VxGUID& assetId )
+{
+    ImageListRow * listRow;
+    int iIdx = 0;
+    while( iIdx < this->count() )
+    {
+        listRow = dynamic_cast< ImageListRow * >( this->item( iIdx ) );
+        if( listRow && listRow->thumbExistsInList( assetId ) )
+        {
+            return true;
+        }
+
+        iIdx++;
+    }
+
+    return false;
 }
 
 //============================================================================
@@ -78,7 +155,7 @@ ImageListRow * ImageListWidget::getRowWithRoomForThumbnail( void )
     while( iIdx < this->count() )
     {
         listRow = dynamic_cast< ImageListRow * >( this->item( iIdx ) );
-        if( listRow && listRow->hasRoomForThumbnail() )
+        if( listRow && listRow->hasRoomForThumbnail( iIdx ) )
         {
             return listRow;
         }
@@ -87,10 +164,16 @@ ImageListRow * ImageListWidget::getRowWithRoomForThumbnail( void )
     }
 
     listRow = new ImageListRow( this );
-    listRow->setSizeHint( QSize( ( int )( m_MyApp.getAppDisplay().getDisplayScale() * 200 ),
-        ( int )( GuiParams::getThumbnailSize().height() * m_MyApp.getAppDisplay().getDisplayScale() ) ) );
-    addItem( listRow );
+    QListWidgetItem * lineItem = dynamic_cast< QListWidgetItem * >( listRow );
+    QWidget * lineWidget = dynamic_cast< QWidget * >( listRow );
+
+    addItem( lineItem );
+    listRow->recalculateSizeHint( width(), m_MyApp.getAppDisplay().getDisplayScale() );
     listRow->setRowNum( count() );
+
+    setItemWidget( lineItem, lineWidget );
+    connect( listRow, SIGNAL( signalImageClicked( ThumbnailViewWidget * ) ), this, SLOT( slotImageClicked( ThumbnailViewWidget * ) ) );
+
     return listRow;
 }
 
@@ -113,115 +196,4 @@ void ImageListWidget::slotImageClicked( ThumbnailViewWidget * thumb )
 
 	m_ClickEventTimer.startTimer();
     emit signalImageClicked( thumb );
-    /*
-	m_SelectedImage = widgetToImage( item );
-	if( m_SelectedImage )
-	{
-		if( m_SelectedImage->isMyAccessAllowedFromHim( ePluginTypeMessenger ) )
-		{
-			QWidget * parent2 = 0;
-			QWidget * parent1 = (QWidget *)this->parent();
-			if( parent1 )
-			{
-				parent2 = (QWidget *)parent1->parent();
-			}
-
-			m_MyApp.offerToImagePluginSession( m_SelectedImage, ePluginTypeMessenger, parent2 ? parent2 : parent1 );
-			emit signalImageClicked( m_SelectedImage );
-		}
-		else
-		{
-			QString warnTitle = QObject::tr("Insufficient Permission Level");
-			QString warmPermission = warnTitle + QObject::tr(" To Access Plugin ") + DescribePluginType( ePluginTypeMessenger );
-			QMessageBox::warning(this, QObject::tr("Insufficient Permission Level "), warmPermission );
-		}
-	}*/
 }
-
-/*
-
-//============================================================================
-void ImageListWidget::slotUpdateImage( VxNetIdent * netIdent, bool sessionTimeChange ) 
-{
-	LogMsg( LOG_INFO, "ImageListWidget::slotUpdateImage  %d\n", this->count() );
-	ImageListEntry * poWidget = findImageListEntry( netIdent );
-	if( poWidget )
-	{
-		LogMsg( LOG_INFO, "ImageListWidget::onImageUpdated %s online ? %d widget exists\n", netIdent->getOnlineName(), netIdent->isOnline() );
-		updateImageListEntry( poWidget, netIdent );
-	}
-	else
-	{
-		ImageListEntry * poImageItem = friendToWidget( netIdent ); 
-		int64_t hisSessionTime = netIdent->getLastSessionTimeMs();
-		if( 0 == this->count() )
-		{
-			insertItem( this->count(), poImageItem );
-			LogMsg( LOG_INFO, "ImageListWidget::onImageUpdated %s First Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), this->count() - 1, hisSessionTime );
-			//addItem( poImageItem );
-		}
-		else
-		{
-			bool wasInserted = false;
-			int rowIdx = 0;
-			ImageListEntry * listEntryWidget;
-			while( rowIdx < this->count() )
-			{
-				listEntryWidget = (ImageListEntry *)this->item( rowIdx );
-				if( listEntryWidget )
-				{
-					Image * listEntryImage = (Image *)listEntryWidget->data( Qt::UserRole + 2 ).toULongLong();
-					if( listEntryImage )
-					{
-						int64_t listSessionTime = listEntryImage->getLastSessionTimeMs();
-						if( listSessionTime < hisSessionTime )
-						{
-							LogMsg( LOG_INFO, "ImageListWidget::onImageUpdated %s Insert Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), rowIdx, hisSessionTime  );
-							insertItem( rowIdx, poImageItem );
-							wasInserted = true;
-							break;
-						}
-					}
-				}
-
-				rowIdx++;
-			}
-
-			if( false == wasInserted )
-			{
-				//addItem( poImageItem );
-				LogMsg( LOG_INFO, "ImageListWidget::onImageUpdated %s Add Item online ? %d inserted %d time %d\n", netIdent->getOnlineName(), netIdent->isOnline(), this->count(), hisSessionTime );
-				insertItem( this->count(), poImageItem );
-			}
-		}
-
-		poImageItem->setSizeHint( poImageItem->getSubWidget()->size() );
-
-		setItemWidget( poImageItem, poImageItem->getSubWidget() );
-
-		updateImageListEntry( poImageItem, netIdent );
-	}
-}
-*/
-
-//============================================================================
-//!	fill friend into new QListWidgetItem *
-/*
-ImageListEntry * ImageListWidget::friendToWidget( VxNetIdent * poImage )
-{
-	ImageListEntry * item = new ImageListEntry( this );
-    item->setData( Qt::UserRole + 1, QVariant((quint64)(item->getSubWidget())) );
-    item->setData( Qt::UserRole + 2, QVariant((quint64)(poImage)) );
-    connect( item, SIGNAL(listButtonClicked(ImageListEntry*)), this, SLOT(slotImageListItemClicked(ImageListEntry*)));
-
-    connect( item, SIGNAL(signalMenuButtonClicked(ImageListEntry*)), this, SLOT(slotImageMenuButtonClicked(ImageListEntry*)));
-
-	return item;
-}*/
-/*
-//============================================================================
-//!	get friend from QListWidgetItem data
-Image * ImageListWidget::widgetToImage( ImageListEntry * item )
-{
-	return (Image *)item->data( Qt::UserRole + 2 ).toULongLong();
-}*/

@@ -23,37 +23,86 @@
 
 //============================================================================
 ImageListRow::ImageListRow( QListWidget * parent  )
-: QWidget( parent )
+: QListWidgetItem( parent )
+, QWidget( 0 )
+, m_SizeHint( ( GuiParams::getThumbnailSize().width() + 20 ) * 2, GuiParams::getThumbnailSize().height() + 30 )
 {
     ui.setupUi( this );
 }
 
 //============================================================================
-void ImageListRow::resizeEvent( QResizeEvent * ev )
+void ImageListRow::slotImageClicked( ThumbnailViewWidget * thumbnail )
 {
-    QWidget::resizeEvent( ev );
-    LogMsg( LOG_DEBUG, "ImageListRow Resize w %d h %d\n", ev->size().width(), ev->size().height() );
+    emit signalImageClicked( thumbnail );
 }
 
 //============================================================================
 void ImageListRow::addThumbnail( ThumbnailViewWidget * thumbnail )
 {
-    layout()->addWidget( thumbnail );
-    m_ThumbnailCnt++;
+    if( thumbnail )
+    {
+        ui.m_RowFrame->layout()->addWidget( thumbnail );
+        m_ThumbnailCnt++;
+        connect( thumbnail, SIGNAL( signalImageClicked( ThumbnailViewWidget * ) ), this, SLOT( slotImageClicked( ThumbnailViewWidget * ) ) );
+    }
 }
 
 //============================================================================
 void ImageListRow::setRowNum( int rowNum )
 {
-    ui.m_RowLabel->setText( QString::number( rowNum ) );
+    //ui.m_RowLabel->setText( QString::number( rowNum ) );
 }
 
 //============================================================================
-bool ImageListRow::hasRoomForThumbnail( void )
+bool ImageListRow::hasRoomForThumbnail( int idx )
 {
     int curWidth = width();
     int curHeight = height();
-    LogMsg( LOG_DEBUG, "ImageListRow Resize w %d h %d\n", curWidth, curHeight );
     int requiredWidth = ( ( m_ThumbnailCnt + 1 ) * ( GuiParams::getThumbnailSize().width() + 20 ) + 20 );
-    return requiredWidth < curWidth;
+    LogMsg( LOG_DEBUG, "ImageListRow hasRoomForThumbnail idx %d ? %d cnt %d w %d h %d\n", idx, requiredWidth < curWidth, m_ThumbnailCnt, curWidth, curHeight );
+    return requiredWidth < sizeHint().width();
+}
+
+//============================================================================
+bool ImageListRow::thumbExistsInList( VxGUID& assetId )
+{
+    for( int i = 0; i < ui.m_RowFrame->layout()->count(); ++i )
+    {
+        ThumbnailViewWidget * thumbWidget = dynamic_cast< ThumbnailViewWidget * >(ui.m_RowFrame->layout()->itemAt( i )->widget());
+        if( thumbWidget && thumbWidget->getThumbnailId() == assetId )
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+//============================================================================
+void ImageListRow::clearImages( void )
+{
+    QLayoutItem * layoutItem;
+    while( ( layoutItem = ui.m_RowFrame->layout()->takeAt( 0 ) ) != nullptr )
+    {
+        delete layoutItem->widget();
+        delete layoutItem;
+    }
+
+    m_ThumbnailCnt = 0;
+}
+
+//============================================================================
+void ImageListRow::recalculateSizeHint( int listWidth, float displayScale )
+{
+    if( listWidth > 40 )
+    {
+        m_SizeHint.setWidth( listWidth - 40 );
+        QListWidgetItem::setSizeHint( sizeHint() );
+    }
+}
+
+//============================================================================
+QSize ImageListRow::sizeHint( void ) const
+{
+    return m_SizeHint;
 }

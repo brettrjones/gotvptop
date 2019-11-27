@@ -44,8 +44,6 @@ AppletGalleryThumb::AppletGalleryThumb(	AppCommon& app, QWidget * parent )
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
-    loadAssets();
-
     connect( ui.m_ImageListWidget, SIGNAL( signalImageClicked( ThumbnailViewWidget * ) ), this, SLOT( slotImageClicked( ThumbnailViewWidget * ) ) );
 
     m_MyApp.activityStateChange( this, true );
@@ -55,7 +53,20 @@ AppletGalleryThumb::AppletGalleryThumb(	AppCommon& app, QWidget * parent )
 void AppletGalleryThumb::resizeEvent( QResizeEvent * ev )
 {
     AppletBase::resizeEvent( ev );
-    LogMsg( LOG_DEBUG, "AppletGalleryThumb Resize w %d h %d\n", ev->size().width(), ev->size().height() );
+    //LogMsg( LOG_DEBUG, "AppletGalleryThumb Resize w %d h %d\n", ev->size().width(), ev->size().height() );
+    if( m_isShown && !m_isLoaded )
+    {
+        m_isLoaded = true;
+        loadAssets();
+    }
+}
+
+//============================================================================
+void AppletGalleryThumb::showEvent( QShowEvent * ev )
+{
+    //LogMsg( LOG_DEBUG, "AppletGalleryThumb show event\n" );
+    m_isShown = true;
+    AppletBase::showEvent( ev );
 }
 
 //============================================================================
@@ -72,7 +83,10 @@ void AppletGalleryThumb::loadAssets( void )
 }
 
 //============================================================================
-void AppletGalleryThumb::slotImageClicked( ThumbnailViewWidget * imageEntry )
+void AppletGalleryThumb::slotImageClicked( ThumbnailViewWidget * thumb )
 {
-
+    if( thumb )
+    {
+        emit signalThumbSelected( this, thumb );
+    }
 }

@@ -28,17 +28,21 @@ public:
 	virtual ~AppletGalleryThumb() override = default;
 
 signals:
-    void                        signalImageSelected( ThumbnailViewWidget * thumb );
+    void                        signalThumbSelected( AppletBase * applet, ThumbnailViewWidget * thumb );
 
 private slots:
 	void						slotImageClicked( ThumbnailViewWidget * thumb );
 
 protected:
     void                        resizeEvent( QResizeEvent * ev );
+    void                        showEvent( QShowEvent * ev );
 
     void                        loadAssets( void );
 
 	//=== vars ===//
 	Ui::AppletGalleryThumbUi	ui;
     AssetMgr&					m_AssetMgr;
+    bool                        m_isShown = false;
+    bool                        m_isLoaded = false;
+
 };

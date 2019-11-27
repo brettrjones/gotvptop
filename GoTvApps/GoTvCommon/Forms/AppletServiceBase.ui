@@ -168,14 +168,17 @@
     <widget class="ThumbnailEditWidget" name="m_ThumbnailEditWidget" native="true"/>
    </item>
    <item>
-    <widget class="LogWidget" name="m_LogWidget" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
-    </widget>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>
@@ -190,12 +193,6 @@
    <class>InformationWidget</class>
    <extends>QWidget</extends>
    <header>InformationWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>LogWidget</class>
-   <extends>QWidget</extends>
-   <header>LogWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

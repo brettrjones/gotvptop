@@ -28,10 +28,10 @@ public:
 	virtual ~AppletGalleryImage() override = default;
 
 signals:
-    void                        signalImageSelected( ImageListEntry * imageEntry );
+    void                        signalImageSelected( ThumbnailViewWidget * imageEntry );
 
 private slots:
-	void						slotImageClicked( ImageListEntry * imageEntry );
+	void						slotImageClicked( ThumbnailViewWidget * imageEntry );
 
 protected:
 

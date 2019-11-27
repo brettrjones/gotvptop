@@ -21,6 +21,7 @@
 
 class IVxVidCap;
 class AssetInfo;  
+class AppletBase;
 
 class ThumbnailEditWidget : public QWidget
 {
@@ -51,7 +52,7 @@ protected slots:
     void                        slotBrowseButClick( void );
     void                        slotMakeCircleButClick( void );
     void                        slotUndoCircleClick( void );
-    void                        slotImageSelected( ThumbnailViewWidget * thumb );
+    void                        slotThumbSelected( AppletBase * thumbGallery, ThumbnailViewWidget * thumb );
 
 protected:
     QPixmap                     makeCircleImage( QPixmap& pixmap );
