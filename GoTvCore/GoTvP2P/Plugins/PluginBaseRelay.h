@@ -39,15 +39,15 @@ public:
 	bool						isTest( void )						{ return m_bTest; }	
 
 	virtual bool				fromGuiMakePluginOffer( VxNetIdent *	netIdent, 
-														int			pvUserData, 
+                                                        int             pvUserData,
 														const char *	pOfferMsg, 
 														const char *	pFileName = 0,
-														uint8_t *			fileHashId = 0,
+                                                        uint8_t *		fileHashId = 0,
 														VxGUID			lclSessionId = VxGUID::nullVxGUID() );
 	virtual void				fromGuiRelayPermissionCount( int userPermittedCount, int anonymousCount ); 
 
 	EPluginAccessState			handlePktRelayServiceReq( BigListInfo * bigListInfo, VxSktBase * sktBase, PktRelayServiceReq * relayServiceReq, PktRelayServiceReply& pktReply );
-	bool 						isUserRelayOk( VxGUID& srcOnlineId, VxGUID& destOnlineId );
+    bool 						isUserRelayOk( const VxGUID& srcOnlineId, const VxGUID& destOnlineId );
 
 	RelaySession *				startNewRelayService( VxSktBase * sktBase, VxNetIdent * netIdent, VxGUID& rmtInstance );
 	RelaySession *				startNewRelayClient( VxSktBase * sktBase, VxNetIdent * netIdent, VxGUID& rmtInstance );
@@ -92,7 +92,7 @@ protected:
 
 	RelaySession *				requestRelayService( VxNetIdent * netIdent, RelayClientSession * poSessionIn = NULL, bool bTest = false );
 	void						endSession( RelaySession * poSession );
-	PluginSessionBase *			findRelay( VxGUID& onlineId );
+    PluginSessionBase *			findRelay( const VxGUID& onlineId );
 	RelayClientSession *		findOrCreateRelayClient( VxSktBase * sktBase, VxNetIdent * netIdent );		
 	RelayServerSession *		findOrCreateRelayServer(  VxSktBase * sktBase, VxNetIdent * netIdent );
 

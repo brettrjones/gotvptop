@@ -32,7 +32,7 @@ public:
     void                        setIsUserPickedImage( bool userPicked )     { m_bUserPickedImage = userPicked;  }
     bool                        getIsUserPickedImage( void )                { return m_bUserPickedImage; }
 
-    void                        setThumbnailImage( QPixmap& pixmap )        { cropAndUpdateImage( pixmap ); }
+    void                        setThumbnailImage( QPixmap pixmap )         { cropAndUpdateImage( pixmap ); }
     const QPixmap *             getThumbnailImage( void )                   { return pixmap(); }
 
     void                        setThumbnailId( VxGUID& id )                { m_ThumbnailId = id; }

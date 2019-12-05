@@ -109,7 +109,7 @@ EPluginAccessState PluginBaseRelay::canAcceptNewSession( VxNetIdent * netIdent )
 }
 
 //============================================================================
-bool PluginBaseRelay::isUserRelayOk( VxGUID& srcOnlineId, VxGUID& destOnlineId )
+bool PluginBaseRelay::isUserRelayOk( const VxGUID& srcOnlineId, const VxGUID& destOnlineId )
 {
 	if( findRelay( destOnlineId ) || findRelay( srcOnlineId )  )
 	{
@@ -334,7 +334,7 @@ RelaySession * PluginBaseRelay::requestRelayService( VxNetIdent * netIdent, Rela
 }
 
 //============================================================================
-PluginSessionBase * PluginBaseRelay::findRelay( VxGUID& onlineId )
+PluginSessionBase * PluginBaseRelay::findRelay( const VxGUID& onlineId )
 {
 	AutoPluginLock pluginMutexLock( this );
 	std::map<VxGUID, PluginSessionBase *>&	sessionList = m_PluginSessionMgr.getSessions();

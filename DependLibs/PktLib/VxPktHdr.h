@@ -72,10 +72,10 @@ private:
 class VxPktHdr : public VxPktHdrPrefix
 {
 public:
-    VxGUID						getSrcOnlineId( void )						{ return getGuidInHostOrder( m_SrcOnlineId ); }
-	void						setSrcOnlineId( VxGUID& onlineId )			{ setGuidToNetOrder( onlineId, m_SrcOnlineId ); }
-	VxGUID						getDestOnlineId( void )						{ return getGuidInHostOrder( m_DestOnlineId ); }
-	void						setDestOnlineId( VxGUID& onlineId )			{ setGuidToNetOrder( onlineId, m_DestOnlineId ); }
+    VxGUID						getSrcOnlineId( void );
+    void						setSrcOnlineId( VxGUID onlineId )			{ setGuidToNetOrder( onlineId, m_SrcOnlineId ); }
+    VxGUID						getDestOnlineId( void );
+    void						setDestOnlineId( VxGUID onlineId )			{ setGuidToNetOrder( onlineId, m_DestOnlineId ); }
 
     //! make a copy of this packet
     VxPktHdr *					makeCopy( void );

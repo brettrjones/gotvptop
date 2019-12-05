@@ -11,11 +11,11 @@ win:{
 }
 
 unix:!android:  {
-    copydata.commands = $(COPY_DIR) $$shell_path($$OUT_PWD/*.so) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE})
-    first.depends = $(first) copydata
-    export(first.depends)
-    export(copydata.commands)
-    QMAKE_EXTRA_TARGETS += first copydata
+#    copydata.commands = $(COPY_DIR) $$shell_path($$OUT_PWD/*.so) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE})
+#    first.depends = $(first) copydata
+#    export(first.depends)
+#    export(copydata.commands)
+#    QMAKE_EXTRA_TARGETS += first copydata
 }
 
 android:{

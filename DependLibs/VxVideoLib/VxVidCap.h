@@ -14,6 +14,7 @@
 // http://www.p2panarchy.com
 //============================================================================
 
+#if defined(TARGET_OS_WINDOWS)
 
 #include "IVxVidCap.h"
 #include "VxVidCapImp.h"
@@ -65,4 +66,4 @@ public:
 	int					m_iStartupCnt; // track startup so can be called multiple times before shutdown
 };
 
-
+#endif // defined(TARGET_OS_WINDOWS)

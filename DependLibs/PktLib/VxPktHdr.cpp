@@ -121,6 +121,18 @@ uint8_t	VxPktHdrPrefix::getPktVersionNum( void )
 }
 
 //============================================================================
+VxGUID VxPktHdr::getSrcOnlineId( void )
+{
+    return getGuidInHostOrder( m_SrcOnlineId );
+}
+
+//============================================================================
+VxGUID VxPktHdr::getDestOnlineId( void )
+{
+    return getGuidInHostOrder( m_DestOnlineId );
+}
+
+//============================================================================
 //! make a copy of this packet
 VxPktHdr * VxPktHdr::makeCopy( void )
 {

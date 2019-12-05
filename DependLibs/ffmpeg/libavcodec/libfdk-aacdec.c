@@ -17,8 +17,10 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-//BRJ this file confuses Visual Studio as to the definition of AACContext
-//#include <libfdk-aac/include/aacdecoder_fdk_lib.h>
+//NOTE: this file aacdecoder_fdk_lib.h confuses Visual Studio as to the definition of AACContext
+#if !defined(_MSC_VER)
+# include <libfdk-aac/include/aacdecoder_fdk_lib.h>
+#endif // !defined(_MSC_VER)
 
 #include "libavutil/channel_layout.h"
 #include "libavutil/avutil_common.h"

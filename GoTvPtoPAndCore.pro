@@ -7,9 +7,11 @@ CONFIG += no_docs_target
 # build the project sequentially as listed in SUBDIRS !
 CONFIG += ordered
 
-#SUBDIRS += $$PWD/libcrossguid.pro
-SUBDIRS += $$PWD/libcorelib.pro
+SUBDIRS += $$PWD/GoTvOpenSslLib.pro
+
+SUBDIRS += $$PWD/GoTvPtoP_App.pro
 
 SUBDIRS += $$PWD/GoTvCoreLibs.pro
 
-SUBDIRS += $$PWD/GoTvPtoP_App.pro
+#SUBDIRS += $$PWD/libcrossguid.pro
+SUBDIRS += $$PWD/libcorelib.pro

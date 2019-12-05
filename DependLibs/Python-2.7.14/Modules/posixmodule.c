@@ -19,6 +19,9 @@
 # define MS_WINDOWS
 #endif // defined(TARGET_OS_WINDOWS)
 
+#if !defined(TARGET_OS_ANDROID) && !defined(TARGET_OS_WINDOWS) && !defined(__APPLE__)
+# include <unistd.h>
+#endif // !defined(TARGET_OS_ANDROID) && !defined(TARGET_OS_WINDOWS) && !defined(__APPLE__)
 
 #ifdef __APPLE__
    /*

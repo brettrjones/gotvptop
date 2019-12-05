@@ -14,9 +14,11 @@
 
 #include "PluginSetting.h"
 #include "PluginSettingBinary.h"
-
+#include <string.h>
 #include <CoreLib/StringListBinary.h>
 #include <CoreLib/VxDebug.h>
+
+
 
 #define PLUGIN_SETTINGS_STRING_COUNT 6
 

@@ -191,7 +191,7 @@ public:
 												const char *	pData,					// data to send
 												int				iDataLen,				// length of data
 												bool			bDisconnect = false );	// if true disconnect after send
-	virtual RCODE				txPacket(	VxGUID&				destOnlineId,			// online id of destination user
+    virtual RCODE				txPacket(	VxGUID				destOnlineId,			// online id of destination user
 											VxPktHdr *			pktHdr, 				// packet to send
 											bool				bDisconnect = false );	// if true disconnect after send
 	virtual RCODE				txPacketWithDestId(	VxPktHdr *		pktHdr, 				// packet to send

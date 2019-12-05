@@ -39,12 +39,7 @@ P2PConnectList::P2PConnectList( P2PEngine& engine )
 }
 
 //============================================================================
-P2PConnectList::~P2PConnectList()
-{
-}
-
-//============================================================================
-void P2PConnectList::fromGuiChangeMyFriendshipToHim(	VxGUID&		oOnlineId, 
+void P2PConnectList::fromGuiChangeMyFriendshipToHim(	const VxGUID&	oOnlineId,
 														EFriendState	eMyFriendshipToHim,
 														EFriendState	eHisFriendshipToMe )
 {
@@ -139,7 +134,7 @@ RcConnectInfo * P2PConnectList::addConnection( VxSktBase * sktBase, BigListInfo 
 }
 
 //============================================================================
-RcConnectInfo * P2PConnectList::addConnection( VxGUID& oOnlineId, RcConnectInfo * poInfoIn, bool bNewContact )
+RcConnectInfo * P2PConnectList::addConnection( const VxGUID& oOnlineId, RcConnectInfo * poInfoIn, bool bNewContact )
 {
 #ifdef DEBUG_MUTEXES
 	LogMsg( LOG_INFO, "P2PConnectList::addConnection: connectListLock()\n" );
@@ -220,7 +215,7 @@ RcConnectInfo * P2PConnectList::addConnection( VxGUID& oOnlineId, RcConnectInfo 
 }
 
 //============================================================================
-void P2PConnectList::removeConnection( VxGUID& oOnlineId )
+void P2PConnectList::removeConnection( const VxGUID& oOnlineId )
 {
 	RcConnectInfo * poInfo = NULL;
 	std::map<VxGUID, RcConnectInfo *, cmp_vxguid>::iterator oMapIter;
@@ -266,7 +261,7 @@ void P2PConnectList::removeConnection( VxGUID& oOnlineId )
 }
 
 //============================================================================
-RcConnectInfo * P2PConnectList::findConnection( VxGUID& oOnlineId )
+RcConnectInfo * P2PConnectList::findConnection( const VxGUID& oOnlineId )
 {
 	RcConnectInfo * poInfo = NULL;
 	ConnectListIter oMapIter;
@@ -403,7 +398,7 @@ void P2PConnectList::broadcastSystemPkt( VxPktHdr * pkt, VxGUIDList& guidList, b
 
 
 //============================================================================
-bool P2PConnectList::isContactConnected( VxGUID& onlineId )
+bool P2PConnectList::isContactConnected( const VxGUID& onlineId )
 {
 	bool contactIsConnected = false;
 #ifdef DEBUG_MUTEXES
@@ -453,6 +448,6 @@ void P2PConnectList::removeContactInfo( VxConnectInfo& contactInfo )
 }
 
 //============================================================================
-void P2PConnectList::sendMyTop10( VxSktBase * sktBase, VxGUID& idToExclude )
+void P2PConnectList::sendMyTop10( VxSktBase * sktBase, const VxGUID& idToExclude )
 {
 }

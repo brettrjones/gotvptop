@@ -85,7 +85,7 @@ bool P2PEngine::connectToContact(	VxConnectInfo&		connectInfo,
 }
 
 //============================================================================
-bool P2PEngine::txSystemPkt(	VxGUID&				destOnlineId, 
+bool P2PEngine::txSystemPkt(	const VxGUID&		destOnlineId,
 								VxSktBase *			sktBase, 
 								VxPktHdr *			poPkt, 
 								bool				bDisconnectAfterSend )

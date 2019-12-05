@@ -73,7 +73,7 @@ ActivityWebCamClient::ActivityWebCamClient( AppCommon&			    app,
 void ActivityWebCamClient::setupActivityWebCamClient()
 {
 	ui.setupUi( this );
-	setupBaseWidgets( ui.m_TitleBarWidget, ui.m_FriendIdentWidget, 0, 0 );
+    setupBaseWidgets( ui.m_TitleBarWidget, ui.m_FriendIdentWidget, nullptr, nullptr );
     connectBarWidgets();
 
 	ui.m_CamVidWidget->setVideoFeedId( m_HisIdent->getMyOnlineId() );
@@ -117,7 +117,7 @@ void ActivityWebCamClient::hideEvent( QHideEvent * ev )
 void ActivityWebCamClient::closeEvent( QCloseEvent * ev )
 {
 	// don't call ActivityToFriendBase::hideEvent ... we don't want plugin offer/response for web cam server or client
-	m_FromGui.fromGuiStopPluginSession( m_ePluginType, m_HisIdent->getMyOnlineId(), NULL );
+    m_FromGui.fromGuiStopPluginSession( m_ePluginType, m_HisIdent->getMyOnlineId(), 0 );
 	if( m_bIsMyself )
 	{
 		m_MyApp.getAppGlobals().getUserIdent()->setHasSharedWebCam( false );

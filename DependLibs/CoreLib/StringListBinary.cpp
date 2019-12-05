@@ -15,7 +15,7 @@
 #include "StringListBinary.h"
 #include "IsBigEndianCpu.h"
 #include "VxDebug.h"
-
+#include <string.h>
 
 //============================================================================
 StringListBinary::StringListBinary()

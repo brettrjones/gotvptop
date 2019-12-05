@@ -62,7 +62,7 @@ class P2PConnectList
 {
 public:
 	P2PConnectList( P2PEngine& engine );
-	virtual ~P2PConnectList();
+    virtual ~P2PConnectList() = default;
 
 	ContactList&				getPreferredRelayList( void )						{ return m_PreferedRelayList; }
 	ContactList&				getPossibleRelayList( void )						{ return m_PossibleRelayList; }
@@ -73,13 +73,13 @@ public:
 	void						broadcastSystemPkt( VxPktHdr * pkt, bool onlyIncludeMyContacts );
 	void						broadcastSystemPkt( VxPktHdr * pkt, VxGUIDList& retIdsSentPktTo, bool onlyIncludeMyContacts = false );
 
-	void						fromGuiChangeMyFriendshipToHim(	VxGUID&		oOnlineId, 
+    void						fromGuiChangeMyFriendshipToHim(	const VxGUID&	oOnlineId,
 																EFriendState	eMyFriendshipToHim,
 																EFriendState	eHisFriendshipToMe );
 
 	void						onConnectionLost( VxSktBase * sktBase );
 
-	bool						isContactConnected( VxGUID&	onlineId );
+    bool						isContactConnected( const VxGUID&	onlineId );
 	bool						isRelayRequired( void )								{ return m_bRequireRelayService; }
 	void						setIsRelayRequired( bool bRequireRelayService )		{ m_bRequireRelayService = bRequireRelayService; }
 	bool						isMyRelayAvailable( void )							{ return m_RelayServiceConnection?1:0; }
@@ -87,12 +87,12 @@ public:
 	virtual void				addRelayServerConnection( RcConnectInfo * poInfo );
 
 	RcConnectInfo *				addConnection( VxSktBase * sktBase, BigListInfo * poBigListInfo, bool bNewContact = false );
-	RcConnectInfo *				addConnection( VxGUID& oOnlineId, RcConnectInfo * poInfo, bool bNewContact = false );
-	RcConnectInfo *				findConnection( VxGUID& oOnlineId );
-	void						removeConnection( VxGUID& oOnlineId );
+    RcConnectInfo *				addConnection( const VxGUID& oOnlineId, RcConnectInfo * poInfo, bool bNewContact = false );
+    RcConnectInfo *				findConnection( const VxGUID& oOnlineId );
+    void						removeConnection( const VxGUID& oOnlineId );
 
 	void						removeContactInfo( VxConnectInfo& contactInfo );
-	void						sendMyTop10( VxSktBase * sktBase, VxGUID& idToExclude );
+    void						sendMyTop10( VxSktBase * sktBase, const VxGUID& idToExclude );
 	void						onPotentialRelayServiceAvailable( RcConnectInfo * poConnection, bool connectionListIsLocked );
 
 	void						cancelRelayService( void );

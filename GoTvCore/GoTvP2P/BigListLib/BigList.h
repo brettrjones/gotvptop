@@ -63,7 +63,7 @@ public:
 	//Note assume caller has already done a mutex lock
 
 	//! find contact
-	BigListInfo *				findBigListInfo( VxGUID& oOnlineId, bool isAlreadyLocked = false );					// id of contact to look for
+    BigListInfo *				findBigListInfo( const VxGUID& oOnlineId, bool isAlreadyLocked = false );					// id of contact to look for
 	//! find contact
 	BigListInfo *				findBigListInfo( const char * pUserName, bool isAlreadyLocked = false );				// contact to look for
 	//! update which list person is in

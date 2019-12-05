@@ -831,7 +831,7 @@ RCODE VxSktBase::txEncrypted(	VxKey *			poKey,			// key to encrypt with
 }
 
 //============================================================================
-RCODE VxSktBase::txPacket(	VxGUID&				destOnlineId,
+RCODE VxSktBase::txPacket(	VxGUID				destOnlineId,
 							VxPktHdr *			pktHdr, 			// packet to send
 							bool				bDisconnect )	// if true disconnect after send
 {

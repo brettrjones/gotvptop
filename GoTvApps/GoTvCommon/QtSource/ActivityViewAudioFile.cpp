@@ -26,7 +26,6 @@ ActivityViewAudioFile::ActivityViewAudioFile(	AppCommon&			app,
 												QWidget *				parent )
 : ActivityBase( OBJNAME_ACTIVITY_VIEW_AUDIO_FILE, app, parent, eAppletMessenger, true )
 , m_HisIdent( &app.getEngine().getMyPktAnnounce() )
-, m_bIsMyself( true )
 {
 	ui.setupUi( this );
     connectBarWidgets();

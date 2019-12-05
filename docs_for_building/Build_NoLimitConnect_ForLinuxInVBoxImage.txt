@@ -1,0 +1,10 @@
+=== Build No Limit Connect For Linux in Virtual Box Image ===
+1.) Follow the instructions in
+        Create_Linux_Virtual_Image_With_Oracle_VirtualBoxMint19_2.txt
+2.) Open GoTvOpenSslLib and build it
+3.) Open GoTvPythonLib and build it
+    if you get mv/copy errors the build the projects one by one ( may have to build twice )
+4.) Open GoTvAll and build it
+5.) after GoTvAll is built you can avoid extreme long rebuild times by buiding/debuging with
+    GoTvPtoPAndCore  and libdepends.core and libpktlib and libnetlib as these are the most likely to be modified
+

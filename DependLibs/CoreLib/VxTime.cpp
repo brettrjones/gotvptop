@@ -47,9 +47,10 @@ int VxSleep( int milliSec )
     return 0; 
 } // microsoft sleep returns void so had to make a function to return no error
 #elif defined(TARGET_OS_LINUX)
+#include <unistd.h>
 int VxSleep( int milliSec )
 {
-    msleep( milliSec );
+    usleep( milliSec * 1000 );
     return 0;
 }
 #endif // TARGET_OS_ANDROID

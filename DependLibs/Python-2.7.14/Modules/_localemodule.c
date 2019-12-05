@@ -24,10 +24,6 @@ This software comes with no warranty. Use at your own risk.
 #include <langinfo.h>
 #endif
 
-#ifdef HAVE_LIBINTL_H
-#include <libintl.h>
-#endif
-
 #ifdef HAVE_WCHAR_H
 #include <wchar.h>
 #endif
@@ -36,6 +32,8 @@ This software comes with no warranty. Use at your own risk.
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #endif
+
+
 
 #ifdef RISCOS
 char *strdup(const char *);
@@ -592,6 +590,10 @@ PyIntl_dcgettext(PyObject *self, PyObject *args)
         return 0;
     return PyString_FromString(dcgettext(domain,msgid,category));
 }
+
+#if defined( TARGET_OS_LINUX )
+# undef libintl_textdomain
+#endif // defined( TARGET_OS_LINUX )
 
 PyDoc_STRVAR(textdomain__doc__,
 "textdomain(domain) -> string\n"

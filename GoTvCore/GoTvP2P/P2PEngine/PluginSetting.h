@@ -43,7 +43,7 @@ public:
 
     void                        setPluginType( EPluginType pluginType )             { m_PluginType = ( uint16_t )pluginType; }
     EPluginType                 getPluginType( void )                               { return ( EPluginType )m_PluginType; }
-    void                        setThumnailId( VxGUID&  thumbAssetId )              { m_PluginThumb = thumbAssetId; }
+    void                        setThumnailId( VxGUID  thumbAssetId )               { m_PluginThumb = thumbAssetId; }
     VxGUID&                     getThumnailId( void )                               { return m_PluginThumb; }
 
     void                        setLanguage( ELanguageType language )               { m_Language = ( uint16_t )language; }

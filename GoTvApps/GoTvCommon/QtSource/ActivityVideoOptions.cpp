@@ -49,13 +49,13 @@ ActivityVideoOptions::ActivityVideoOptions( AppCommon&			app,
 	}
 
 
-	m_FromGui.fromGuiStartPluginSession( ePluginTypeCamServer, m_HisIdent->getMyOnlineId(), NULL );
+    m_FromGui.fromGuiStartPluginSession( ePluginTypeCamServer, m_HisIdent->getMyOnlineId(), 0 );
 }
 
 //============================================================================
 void ActivityVideoOptions::onStopButClick( void )
 {
-	m_FromGui.fromGuiStopPluginSession( ePluginTypeCamServer, m_HisIdent->getMyOnlineId(), NULL );
+    m_FromGui.fromGuiStopPluginSession( ePluginTypeCamServer, m_HisIdent->getMyOnlineId(), 0 );
 	if( m_bIsMyself )
 	{
 		m_Engine.setHasSharedWebCam(false);

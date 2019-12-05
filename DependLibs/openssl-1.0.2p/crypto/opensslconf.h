@@ -47,7 +47,9 @@ extern "C" {
 //#define DSA_FLAG_NO_EXP_CONSTTIME
 
 #if defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_LINUX)
-# define m64 
+# if !defined( m64 )
+#  define m64
+# endif // !defined( m64 )
 #endif // defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_LINUX)
 
 /* OpenSSL was configured with the following options: */

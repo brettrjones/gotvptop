@@ -106,6 +106,7 @@ GuiFileXferSession& GuiFileXferSession::operator =( const GuiFileXferSession &rh
 {
 	if( this != &rhs )   
 	{
+
 		m_ePluginType		= rhs.m_ePluginType;
 		m_Ident				= rhs.m_Ident;
 		m_LclSessionId		= rhs.m_LclSessionId;

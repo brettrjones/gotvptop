@@ -150,9 +150,9 @@ protected:
   // player states
   CCriticalSection m_stateSection;
   bool m_stateSeeking = 0;
-  std::atomic_int m_levelVQ = 0;
-  std::atomic_bool m_renderGuiLayer = false;
-  std::atomic_bool m_renderVideoLayer = false;
+  std::atomic_int m_levelVQ{ 0 };
+  std::atomic_bool m_renderGuiLayer{ false };
+  std::atomic_bool m_renderVideoLayer{ false };
   float m_tempo = 0.0f;
   float m_newTempo = 0.0f;
   float m_speed = 0.0f;

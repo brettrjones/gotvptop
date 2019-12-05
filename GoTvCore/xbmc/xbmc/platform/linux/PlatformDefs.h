@@ -185,7 +185,10 @@ typedef struct _TIME_ZONE_INFORMATION {
 //#define SOCKET_ERROR (-1) // defined in GoTvCompilerConfig.h
 //#define INVALID_SOCKET (~0) // defined in GoTvCompilerConfig.h
 #define closesocket(s)  close(s)
-#define ioctlsocket(s, f, v) ioctl(s, f, v)
+#if !defined( ioctlsocket )
+# define ioctlsocket(s, f, v) ioctl(s, f, v)
+#endif // !defined( ioctlsocket )
+
 #define WSAGetLastError() (errno)
 #define WSAECONNRESET ECONNRESET
 

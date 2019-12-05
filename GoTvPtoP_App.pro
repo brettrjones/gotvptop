@@ -56,9 +56,6 @@ gotvptop.depends += $$PWD/GoTvCoreLibs.pro
 gotvptop.depends += $$PWD/GoTvPythonLib.pro
 gotvptop.depends += $$PWD/GoTvDependLibs.pro
 
-
-
-
 gotvptop.depends += $$PWD/libcurl.pro
 gotvptop.depends += $$PWD/python_pythoncore.pro
 gotvptop.depends += $$PWD/python_bz2.pro
@@ -74,7 +71,11 @@ gotvptop.depends += $$PWD/python_pyexpat.pro
 gotvptop.depends += $$PWD/python_select.pro
 gotvptop.depends += $$PWD/python_unicodedata.pro
 
+gotvptop.depends += $$PWD/GoTvOpenSslLib.pro
+
 gotvptop.depends += $$PWD/libgnu.pro
+gotvptop.depends += $$PWD/libnetlib.pro
+gotvptop.depends += $$PWD/libpktlib.pro
 gotvptop.depends += $$PWD/libcorelib.pro
 gotvptop.depends += $$PWD/libcrossguid.pro
 
@@ -142,8 +143,9 @@ PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}depends$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ogg$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}curl$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ssh$${STATIC_LIB_SUFFIX}
+PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}netlib$${STATIC_LIB_SUFFIX}
+PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}pktlib$${STATIC_LIB_SUFFIX}
 #PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ssl$${STATIC_LIB_SUFFIX} // shared lib
-#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}pktlib$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}fribidi$${STATIC_LIB_SUFFIX}
 #PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}iconv$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}freetype$${STATIC_LIB_SUFFIX}
@@ -153,7 +155,7 @@ PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}xml2$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}compress$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}corelib$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
-#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
+PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
 PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
 
 
@@ -161,7 +163,6 @@ PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
     #static libs
 
 #NOTE: link order is important.. otherwise you will get link errors like libvorbisenc.so.2: error adding symbols: DSO missing from command line
-
     #static libs
     LIBS +=  $${STATIC_LIB_PREFIX}ptopengine$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}kodi$${STATIC_LIB_SUFFIX}
@@ -196,10 +197,15 @@ PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}gnu$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}depends$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}ogg$${STATIC_LIB_SUFFIX}
-    LIBS +=  $${STATIC_LIB_PREFIX}curl$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}ssh$${STATIC_LIB_SUFFIX}
+    LIBS +=  $${STATIC_LIB_PREFIX}netlib$${STATIC_LIB_SUFFIX}
+
+    LIBS +=  $${STATIC_LIB_PREFIX}pktlib$${STATIC_LIB_SUFFIX}
+
+
+
+
 #    LIBS +=  $${STATIC_LIB_PREFIX}ssl$${STATIC_LIB_SUFFIX} // shared lib
-#    LIBS +=  $${STATIC_LIB_PREFIX}pktlib$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}fribidi$${STATIC_LIB_SUFFIX}
 #    LIBS +=  $${STATIC_LIB_PREFIX}iconv$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}freetype$${STATIC_LIB_SUFFIX}
@@ -209,16 +215,47 @@ PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}compress$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}corelib$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
-#    LIBS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
+    LIBS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
+    LIBS +=  $${STATIC_LIB_PREFIX}curl$${STATIC_LIB_SUFFIX}
 
+!android:{
+#copy shared libraries to out directory
+#message(Static Lib prefix($${STATIC_LIB_PREFIX})  suffix($${STATIC_LIB_SUFFIX})  )
+#message( Exe dest dir ($${DEST_EXE_DIR})  )
+# message( Share Lib dest dir ($${DEST_SHARED_LIBS_DIR})  )
+
+ DESTDIR = $${DEST_EXE_DIR}
+
+#copy shared libs to local output directory so can easily be linked to
+    copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/* $$shell_path($${DEST_SHARED_LIBS_DIR}))
+
+ first.depends = $(first) copydata
+ export(first.depends)
+ export(copydata.commands)
+ QMAKE_EXTRA_TARGETS += first copydata
+}
 
 
 unix:!android:{
-    #shared libs
-    LIBS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
-    LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
+    #give linux the path of where to load our shared libraries from for debugger
+    LIBS += -L$${DEST_SHARED_LIBS_DIR}
+}
 
+
+
+LINK_SSL_SUFFIX=.1.0.0
+unix:!android:{
+ #    LIBS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
+ #    LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX
+}
+
+unix:!android:{
+    #shared libs
+     #LIBS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
+     #LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
+    LIBS +=  -lpythoncore{SHARED_LIB_APPEND}
+    LIBS +=  -lssl{SHARED_LIB_APPEND}
     LIBS +=  -lpthread -ldl -lGLU -lGL -lm -luuid -lrt
 }
 
@@ -233,28 +270,6 @@ win32:{
     LIBS +=  winmm.lib
     LIBS +=  Rpcrt4.lib
 }
-!android:{
-#copy shared libraries to out directory
-#message(Static Lib prefix($${STATIC_LIB_PREFIX})  suffix($${STATIC_LIB_SUFFIX})  )
-#message( Exe dest dir ($${DEST_EXE_DIR})  )
-#message( Share Lib dest dir ($${DEST_SHARED_LIBS_DIR})  )
-
- DESTDIR = $${DEST_EXE_DIR}
-
-#copy shared libs to local output directory so can easily be linked to
-    copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/* $$shell_path($${DEST_SHARED_LIBS_DIR}))
-
- first.depends = $(first) copydata
- export(first.depends)
- export(copydata.commands)
- QMAKE_EXTRA_TARGETS += first copydata
-}
-
-unix:!android:{
-    #give linux the path of where to load our shared libraries from for debugger
-    LIBS += -L$${DEST_SHARED_LIBS_DIR}
-}
-
 
 android:{
     CONFIG += mobility

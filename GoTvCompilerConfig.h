@@ -871,7 +871,9 @@ typedef struct _TIME_ZONE_INFORMATION {
 #define IN_ADDR             struct in_addr
 typedef int					SOCKET;
 #define closesocket(s)		close(s)
-#define ioctlsocket(s, f, v) ioctl(s, f, v)
+#if !defined( ioctlsocket )
+# define ioctlsocket(s, f, v) ioctl(s, f, v)
+#endif // !defined( ioctlsocket )
 #define WSAGetLastError()	(errno)
 #define WSASetLastError(e)	(errno = e)
 #define WSAECONNRESET		ECONNRESET
@@ -1115,7 +1117,11 @@ typedef int64_t              time64_t;
 # define HAVE_ARPA_INET_H		1
 #endif // _MSC_VER
 
+#if defined( TARGET_OS_LINUX )
+# define HAVE_ASM_TYPES_H       0 // really 1 for python but causes other fails if defined 1 here
+#else
 # define HAVE_ASM_TYPES_H		0
+#endif // defined( TARGET_OS_LINUX )
 
 /* Define to 1 if you have the `asprintf' function. */
 #define HAVE_ASPRINTF			1 // windows simulated in CoreLib

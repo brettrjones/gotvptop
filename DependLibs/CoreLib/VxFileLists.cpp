@@ -126,7 +126,7 @@ RCODE VxFileFinder::FindFilesByExtension(	std::string				csPath,					//start pat
 	// find the files in the directory
 	DIR *pDir;
 	struct dirent *pFileEnt;
-	if( directoryExists( csPath.c_str() ) )
+    if( VxFileUtil::directoryExists( csPath.c_str() ) )
 	{
 		//LogMsg( LOG_INFO, "FindFilesByExtension: directory %s exists.. opening dir\n", csPath.c_str() );
 		//ok directory exists!
@@ -173,7 +173,7 @@ RCODE VxFileFinder::FindFilesByExtension(	std::string				csPath,					//start pat
 					{
                         if( ! HasSameExtension( oCurFileNode.getFileName(), acsExtensionList ) )
 						{
-                            oCurFileNode.setFileType( fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
+                            oCurFileNode.setFileType( VxFileUtil::fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
                             oCurFileNode.setFileLength( oStat.st_size );
 							aoFileList.push_back( oCurFileNode );
 						}
@@ -182,7 +182,7 @@ RCODE VxFileFinder::FindFilesByExtension(	std::string				csPath,					//start pat
 					{
                         if( HasSameExtension( oCurFileNode.getFileName(), acsExtensionList ) )
 						{
-                            oCurFileNode.setFileType(  fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
+                            oCurFileNode.setFileType(  VxFileUtil::fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
                             oCurFileNode.setFileLength( oStat.st_size );
 							aoFileList.push_back( oCurFileNode );
 						}
@@ -337,7 +337,7 @@ RCODE VxFileFinder::FindFilesByName(	std::string csPath,	//start path to search 
 	strcpy( as8SrcDir, csPath.c_str() );
 
 	struct dirent *pFileEnt;
-	if( directoryExists( as8SrcDir ) )
+    if( VxFileUtil::directoryExists( as8SrcDir ) )
 	{
 		//LogMsg( LOG_ERROR, "VxListFiles: directory %s exists.. opening dir\n", as8SrcDir );
 		//ok directory exists!
@@ -366,7 +366,7 @@ RCODE VxFileFinder::FindFilesByName(	std::string csPath,	//start path to search 
 				if( S_IFDIR & oStat.st_mode  )
 				{
 					if ( ( bRecurse ) &&
-                        ( !isDotDotDirectory( pFileEnt->d_name ) ) )
+                        ( !VxFileUtil::isDotDotDirectory( pFileEnt->d_name ) ) )
 					{
                         FindFilesByName(    oCurFileNode.getFileName(),
                                             acsWildNameList,

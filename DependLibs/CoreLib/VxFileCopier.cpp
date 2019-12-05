@@ -34,18 +34,17 @@
 
 
 //============================================================================
-RCODE VxFileCopier::copyDirectory(  std::string				 curPath,              // file or path to copy
+RCODE VxFileCopier::copyDirectory(  std::string				 curPath,               // file or path to copy
                                     std::string&			 srcPath,			    // start path to search in
 									std::string&             destPath,		        // destination directory
-									std::vector<VxFileInfo> &aoFileList,			// return FileInfo in array
-									bool					bRecurse				// recurse subdirectories if true
+                                    std::vector<VxFileInfo>& aoFileList,			// return FileInfo in array
+                                    bool					 bRecurse				// recurse subdirectories if true
 									)
 {
 	m_bAbort = false;
     VxFileInfo oCurFileNode;
     RCODE rc = createDestDirectoryIfNeeded( curPath, srcPath, destPath );
 
- 
 #ifdef TARGET_OS_WINDOWS
     HANDLE hFind = INVALID_HANDLE_VALUE;
     WIN32_FIND_DATAW sFindData;
@@ -125,23 +124,23 @@ RCODE VxFileCopier::copyDirectory(  std::string				 curPath,              // fil
 	// find the files in the directory
 	DIR *pDir;
 	struct dirent *pFileEnt;
-	if( directoryExists( csPath.c_str() ) )
+    if( VxFileUtil::directoryExists( curPath.c_str() ) )
 	{
 		//LogMsg( LOG_INFO, "FindFilesByExtension: directory %s exists.. opening dir\n", csPath.c_str() );
 		//ok directory exists!
-		if(!(NULL == (pDir = opendir( csPath.c_str() ))))
+        if( !( nullptr == ( pDir = opendir( curPath.c_str() ) ) ) )
 		{
 			//pDir is open
-			while( 0 != ( pFileEnt = readdir(pDir) ))
+            while( nullptr != ( pFileEnt = readdir(pDir) ) )
 			{
 				LogMsg( LOG_INFO, "FindFilesByExtension: found file %s\n", pFileEnt->d_name );
-				if ( '/' == csPath[ csPath.size( ) - 1 ] )
+                if ( '/' == curPath[ curPath.size( ) - 1 ] )
 				{
-                    oCurFileNode.setFileName( csPath + pFileEnt->d_name );
+                    oCurFileNode.setFileName( curPath + pFileEnt->d_name );
 				}
 				else
 				{
-                    oCurFileNode.setFileName( csPath + '/' + pFileEnt->d_name );
+                    oCurFileNode.setFileName( curPath + '/' + pFileEnt->d_name );
 				}
 				struct stat oStat;
                 if( 0 != stat( oCurFileNode.getFileName().c_str(), &oStat ) )
@@ -156,7 +155,7 @@ RCODE VxFileCopier::copyDirectory(  std::string				 curPath,              // fil
 					if( bRecurse  
 						&& ( ! VxFileUtil::isDotDotDirectory( pFileEnt->d_name ) ) )
 					{
-                        CopyDirectory( oCurFileNode.getFileName(),
+                        copyDirectory( oCurFileNode.getFileName(),
                                        srcPath,
                                        destPath,
                                        aoFileList,
@@ -172,7 +171,7 @@ RCODE VxFileCopier::copyDirectory(  std::string				 curPath,              // fil
                     {
                         LogMsg( LOG_VERBOSE, "File Copied %s", oCurFileNode.getFileName().c_str() );
                         oCurFileNode.setFileType( VxFileUtil::fileExtensionToFileTypeFlag( oCurFileNode.getFileName().c_str() ) );
-                        oCurFileNode.setFileLength( ( (uint64_t)sFindData.nFileSizeHigh << 32 ) | sFindData.nFileSizeLow );
+                        oCurFileNode.setFileLength( VxFileUtil::getFileLen( oCurFileNode.getFileName().c_str() ) );
                         aoFileList.push_back( oCurFileNode );
                     }
                     else
@@ -189,12 +188,12 @@ RCODE VxFileCopier::copyDirectory(  std::string				 curPath,              // fil
 		}
 		else
 		{
-			LogMsg( LOG_INFO, "VxListSubDirectories: could not open directory %s \n", csPath.c_str() );
+            LogMsg( LOG_INFO, "VxListSubDirectories: could not open directory %s \n", curPath.c_str() );
 		}
 	}
 	else
 	{
-		LogMsg( LOG_INFO, "VxListSubDirectories: directory %s does not exist \n", csPath.c_str() );
+        LogMsg( LOG_INFO, "VxListSubDirectories: directory %s does not exist \n", curPath.c_str() );
 	}
 
 	return 0;

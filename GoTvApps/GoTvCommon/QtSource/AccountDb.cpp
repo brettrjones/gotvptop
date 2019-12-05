@@ -559,7 +559,7 @@ bool AccountDb::getAllAccounts( std::vector<VxNetIdent>& accountList )
 
     bool bResult = false;
     DbCursor * cursor = startQueryInsecure( "SELECT * FROM account_login" );
-    if( NULL != cursor )
+    if( nullptr != cursor )
     {
         while( cursor->getNextRow() )
         {
@@ -590,5 +590,5 @@ bool AccountDb::getAllAccounts( std::vector<VxNetIdent>& accountList )
     }
 
 
-    return accountList.size();
+    return bResult && accountList.size() > 0;
 }

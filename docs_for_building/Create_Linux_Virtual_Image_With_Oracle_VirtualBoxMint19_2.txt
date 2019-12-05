@@ -75,17 +75,21 @@ Instructions to create a virtual box Linux Mint 19.1 Image for GoTvPtoP develope
 	sudo apt-get install uuid-dev	
 
 ==== install android studio ====
+NOTE: use uppercase /home/gotv/Android because that is the default install directory for android studio
 After many tries the only way I could get android studio installed correctly was by using Mint 18.3 64Bit
 1.) Download NDK r19c from https://developer.android.com/ndk/downloads/
-2.) extract ndk to ~/android/android-ndk-r19c 
+2.) extract ndk to ~/Android/android-ndk-r19c 
 3.) from Mint Software Manager 
 	Install yasm, nasm, Android Studio
+3a.) If cannot install Android studio then try the download from https://developer.android.com/studio/
+	extract to /home/gotv/Android/android-studio follow th install-Linux-tar.txt from the archive
 4.) Start Android Studio and install sdks (install kvm when says can support accelerated emulator)
 	Sdks install Lollipop 5.1, cmake
 5.) Set ndk path in Project Structure to point to home/gotv/android/android-ndk-r19c
 
-//======= install Qt 5.12.2 ======//
-1.) Download the qt installer from https://doc.qt.io/qt-5/gettingstarted.html
+//======= install Qt 5.12.3 ======//
+1.) Download the qt installer from https://doc.qt.io/qt-5/gettingstarted.html or https://www.qt.io/
+2.) run /home/gotv/Downloads/qt-unified-linux-x64-3.1.1-online.run
 2.) Install to home/gotv/Qt
 3.) After install setup the correct paths by editing qtchooser default
 	cd /usr/lib/x86_64-linux-gnu/qt-default/qtchooser
@@ -94,8 +98,8 @@ After many tries the only way I could get android studio installed correctly was
 	/usr/lib/x86_64-linux-gnu/qt4/bin
 	/usr/lib/x86_64-linux-gnu
 	to
-	/home/gotv/Qt/5.12.2/gcc_64/bin
-	/home/gotv/Qt/5.12.2/gcc_64/lib
+	/home/gotv/Qt/5.12.3/gcc_64/bin
+	/home/gotv/Qt/5.12.3/gcc_64/lib
 	
 4.) change qt include directory
 	In Qt Creator->Projects->Build Enviroment change QTDIR from /usr/lib/x86_64-linux-gnu/qt5 to /home/gotv/Qt/5.12.2/gcc_64
@@ -103,37 +107,11 @@ After many tries the only way I could get android studio installed correctly was
 5.)	after reboot $qmake --version
 	should show
 	QMake version 3.1
-	Using Qt version 5.12.2 in /home/gotv/Qt/5.12.2/gcc_64/lib
+	Using Qt version 5.12.2 in /home/gotv/Qt/5.12.3/gcc_64/lib
+6.)	In Options->Device 
+	The Android SDK location should be /home/gotv/Android/Sdk
+	The Android NDK location should be /home/gotv/Android/android-ndk-r20b/
 	
-	
-	
-	
-	
-
-
-
-	
-// DO NOT USE.. NEED Qt 5 or later
-//======= install Qt 4.8.7 ======
-// DO NOT USE.. NEED Qt 5 or later
-//1.) Install Qt Sdk from Software Manager
-//	no need to install qt creator.. was installed with the qt sdk
-
-//3.) Restart then make sure qt creator runs without crashing
-//4.) If crashes then will have to turn off 3D acceleration in VirtualBox
-//4.) Now would be a good time to make a clone or Time Snapshot
-
-//======= install Qt 5.9.5 ======//
-// NOTE: had render issues with 5.1.1 .. recommend 5.12.1
-
-2.) sudo apt-get install qtcreator
-3.) sudo apt-get install qtdeclarative5-dev
-4.) sudo apt-get install qtmultimedia5-dev
-5.) sudo apt-get install libqt5svg5-dev
-6.) sudo apt-get install libqt5opengl5-dev
-7.) libraries are in /usr/lib/x86_64-linux-gnu/qt5/
-8.) you can check the version with command qmake --version
-
 
 ==== install python 2.7 ======
 	sudo apt install python-dev

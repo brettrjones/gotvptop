@@ -129,8 +129,8 @@ include(libzvbi.pri)
 ### build seperately include(../../DependLibs/MediaToolsLib/build/Qt/libmediatools.pri)
 
 
-include(libnetlib.pri)
-include(libpktlib.pri)
+### build seperately because changes often include(libnetlib.pri)
+### build seperately because changes often include(libpktlib.pri)
 include(libupnp2lib.pri)
 
 ### include(../../DependLibs/libasprintf/build/Qt/libasprintf.pri)

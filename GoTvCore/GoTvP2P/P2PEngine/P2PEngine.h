@@ -369,7 +369,7 @@ public:
 												VxPktHdr *			poPkt, 
 												bool				bDisconnectAfterSend = false );
 
-	virtual bool				txSystemPkt(	VxGUID&				destOnlineId, 
+    virtual bool				txSystemPkt(	const VxGUID&		destOnlineId,
 												VxSktBase *			sktBase, 
 												VxPktHdr *			poPkt, 
 												bool				bDisconnectAfterSend = false );

@@ -20,7 +20,9 @@
 #include <CoreLib/VxThread.h>
 #include <CoreLib/VxSemaphore.h>
 
-#include <vfw.h>
+#if defined(TARGET_OS_WINDOWS)
+# include <vfw.h>
+
 #include "IVxVidCap.h"
 
 #include <string>
@@ -60,7 +62,7 @@ public:
 	bool						m_bSwapRgb;
 	bool						m_bRealSizePreview;
 	bool						m_bUseOverlay;
-	uint32_t							m_u32OverlayTransColor;
+    uint32_t					m_u32OverlayTransColor;
 	int							m_iMotionSnapshotInvervalMiliSec;
 	int							m_iPreviewFramesPerSec;
 	char						m_as8OverlayBmpFile[ MAX_PATH ];
@@ -175,7 +177,7 @@ private:
 	{ 
 #ifdef SHOW_VID_LOCKS
 		LogMsg( LOG_DEBUG,  "Locking VxVidCap Inst %d\n", iInst );
-#endif SHOW_VID_LOCKS
+#endif // SHOW_VID_LOCKS
 		m_ImageProtect.lock(); 
 	}
 	//! unlock image access
@@ -183,7 +185,7 @@ private:
 	{ 
 #ifdef SHOW_VID_LOCKS
 		LogMsg( LOG_DEBUG,  "Unlocking VxVidCap Inst %d\n", iInst );
-#endif SHOW_VID_LOCKS
+#endif // SHOW_VID_LOCKS
 		m_ImageProtect.unlock(); 
 	}
 
@@ -209,7 +211,9 @@ private:
 	friend uint32_t					CaptureWindowThreadFunc( void * pvContext );
 	//thread to detect motion
 	friend uint32_t					CaptureMotionThreadFunc( void * pvContext );
-
-
 };
+
+#endif // defined(TARGET_OS_WINDOWS)
+
+
 

@@ -28,12 +28,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvInterface/IToGui.h \
     $$PWD/GoTvInterface/config_libgotvptop.h \
     $$PWD/GoTvTargetOsConfig.h \
-    $$PWD/GoTvCore/GoTvP2P/Anchor/AnchorDb.h \
-    $$PWD/GoTvCore/GoTvP2P/Anchor/AnchorDefs.h \
-    $$PWD/GoTvCore/GoTvP2P/Anchor/AnchorList.h \
-    $$PWD/GoTvCore/GoTvP2P/Anchor/AnchorListEntry.h \
-    $$PWD/GoTvCore/GoTvP2P/Anchor/PhoneShakeEntry.h \
-    $$PWD/GoTvCore/GoTvP2P/AnchorTest/AnchorTest.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetInfoDb.h \
@@ -128,6 +122,13 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Groups/GroupDefs.h \
     $$PWD/GoTvCore/GoTvP2P/IsPortOpenTest/IsPortOpenTest.h \
     $$PWD/GoTvCore/GoTvP2P/IsPortOpenTest/PingResponseServer.h \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.h \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDefs.h \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostList.h \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostListEntry.h \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostSettingBase.h \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostTest.h \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/RandomConnectEntry.h \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/AudioUtil.h \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/EchoCancel.h \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/MediaClient.h \
@@ -138,9 +139,9 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionBase.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionIdle.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionIsMyPortOpen.h \
-    $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionPhoneShake.h \
+    $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionRandomConnect.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionQueryMyIp.h \
-    $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceAnchor.h \
+    $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceHost.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceDefs.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceHdr.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceUtils.h \
@@ -177,10 +178,10 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/FileShareSettings.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PConnectList.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h \
-	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSetting.h \
-	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingBinary.h \
-	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingDb.h \
-	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSetting.h \
+    $$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingBinary.h \
+    $$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingDb.h \
+    $$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingMgr.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/AudioJitterBuffer.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/FileLibraryDb.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/FileLibraryMgr.h \
@@ -195,17 +196,33 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/LibraryFileInfo.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/P2PSession.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBase.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginCamServer.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginFileOffer.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginFileShare.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseClient.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseFileXfer.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseHostService.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseRelay.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseService.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseWebServer.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginClientConnectionTest.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginFileXfer.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginInvalid.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginMgr.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginMultiSession.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginMessenger.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginNetServices.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginRelay.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAboutMe.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAvatarImage.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceChatRoom.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceConnectionTest.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceFileShare.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroup.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroupListing.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostNetwork.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceRandomConnect.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceRandomConnectRelay.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceRelay.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceStoryboard.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceWebCam.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginSessionBase.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginSessionMgr.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginStoryBoard.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginTruthOrDare.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginVideoPhone.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginVoicePhone.h \
@@ -235,16 +252,10 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageSettings.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.h \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServerLib.h \
-    $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebSkt.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginGroupAnchor.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginGroupHost.h
+    $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebSkt.h
 
 
-SOURCES += 	$$PWD/GoTvCore/GoTvP2P/Anchor/AnchorDb.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Anchor/AnchorList.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Anchor/AnchorListEntry.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Anchor/PhoneShakeEntry.cpp \
-    $$PWD/GoTvCore/GoTvP2P/AnchorTest/AnchorTest.cpp \
+SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetInfoDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/AssetMgr/AssetMgr.cpp \
@@ -309,6 +320,12 @@ SOURCES += 	$$PWD/GoTvCore/GoTvP2P/Anchor/AnchorDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32filesystem.cpp \
     $$PWD/GoTvCore/GoTvP2P/IsPortOpenTest/IsPortOpenTest.cpp \
     $$PWD/GoTvCore/GoTvP2P/IsPortOpenTest/PingResponseServer.cpp \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.cpp \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostList.cpp \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostListEntry.cpp \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostSettingBase.cpp \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostTest.cpp \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/RandomConnectEntry.cpp \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/AudioUtil.cpp \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/EchoCancel.cpp \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.cpp \
@@ -316,9 +333,9 @@ SOURCES += 	$$PWD/GoTvCore/GoTvP2P/Anchor/AnchorDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionBase.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionIdle.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionIsMyPortOpen.cpp \
-    $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionPhoneShake.cpp \
+    $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionRandomConnect.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionQueryMyIp.cpp \
-    $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceAnchor.cpp \
+    $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceHost.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceDefs.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceUtils.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServicesMgr.cpp \
@@ -383,27 +400,42 @@ SOURCES += 	$$PWD/GoTvCore/GoTvP2P/Anchor/AnchorDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/LibraryFileInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/P2PSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBase.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginCamServer.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginFileOffer.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginFileOfferPktHandlers.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginFileShare.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseClient.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseFileXfer.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseFileXferPktHandlers.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseHostService.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseRelay.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseRelayPktHandlers.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseRelayTests.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseService.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseWebServer.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseWebServerFiles.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseWebServerPktHandlers.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginClientConnectionTest.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginFileXfer.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginInvalid.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginMgrSktApi.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginMultiSession.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginMessenger.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginNetServices.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginRelay.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginRelayPktHandlers.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginRelayTests.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAboutMe.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAvatarImage.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceChatRoom.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceConnectionTest.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceFileShare.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroup.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroupListing.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostNetwork.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceRandomConnect.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceRandomConnectRelay.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceRelay.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceStoryboard.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceWebCam.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginSessionBase.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginSessionMgr.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginStoryBoard.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginTruthOrDare.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginVideoPhone.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginVoicePhone.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginWebServer.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginWebServerFiles.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginWebServerPktHandlers.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/RcWebProxy.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/Relay.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/RelayClientSession.cpp \
@@ -426,7 +458,5 @@ SOURCES += 	$$PWD/GoTvCore/GoTvP2P/Anchor/AnchorDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebPageSettings.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServer.cpp \
     $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebServerHttp.cpp \
-    $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebSkt.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginGroupAnchor.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginGroupHost.cpp
+    $$PWD/GoTvCore/GoTvP2P/WebServer/RcWebSkt.cpp
 

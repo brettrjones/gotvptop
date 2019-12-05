@@ -61,7 +61,7 @@ void BigList::bigListUnlock( int iInst )
 
 //============================================================================
 //! find contact
-BigListInfo * BigList::findBigListInfo(	VxGUID& oOnlineId, bool isAlreadyLocked )			// id of contact to look for
+BigListInfo * BigList::findBigListInfo( const VxGUID& oOnlineId, bool isAlreadyLocked )			// id of contact to look for
 {
 	if( oOnlineId.isVxGUIDValid() )
 	{
