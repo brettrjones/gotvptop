@@ -236,18 +236,9 @@ PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
  QMAKE_EXTRA_TARGETS += first copydata
 }
 
-
 unix:!android:{
     #give linux the path of where to load our shared libraries from for debugger
     LIBS += -L$${DEST_SHARED_LIBS_DIR}
-}
-
-
-
-LINK_SSL_SUFFIX=.1.0.0
-unix:!android:{
- #    LIBS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
- #    LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX
 }
 
 unix:!android:{
