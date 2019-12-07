@@ -28,17 +28,31 @@
 #define LOG_INFO	(0x0080)
 #define LOG_STATUS	(0x0100)
 
-
-#define LOG_SKT		(LOG_INFO | 0x0200)
-#define LOG_JNI		(LOG_INFO | 0x0400)
-#define LOG_TEST	(LOG_INFO | 0x0800)
-#define LOG_PKT	    (LOG_INFO | 0x1000)
-#define LOG_THREAD	(LOG_INFO | 0x2000)
-
 // defines so less work converting Linux code
 #define LOG_WARNING		LOG_WARN
 #define LOG_ERR			LOG_ERROR
 #define LOG_CRIT		LOG_FATAL
+
+enum ELogModule
+{
+    eLogModuleNone          = 0,
+    eLogModuleAssets        = 0x0001,
+    eLogModuleConnect       = 0x0002,
+    eLogModuleMulticast     = 0x0004,
+    eLogModuleNetworkMgr    = 0x0008,
+    eLogModulePkt           = 0x0010,
+    eLogModulePlayer        = 0x0020,
+    eLogModuleSkt           = 0x0040,
+    eLogModuleTest          = 0x0080,
+    eLogModuleThread        = 0x0100,
+
+
+    eMaxLogModule
+};
+
+/// @brief return true if should log the given module
+bool IsLogEnabled( ELogModule logModule );
+
 
 #define MAX_ERR_MSG_SIZE 4096
 typedef void (*LOG_FUNCTION )( void *, uint32_t, char * );

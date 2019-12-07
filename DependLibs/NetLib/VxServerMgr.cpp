@@ -40,15 +40,15 @@ namespace
 		poVxThread->setIsThreadRunning( true );
 		VxServerMgr * poMgr = (VxServerMgr *)poVxThread->getThreadUserParam();
 
-#if defined(DEBUG_SKT_CONNECTIONS)
-		LogMsg( LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread started\n", poMgr->m_iMgrId, poMgr->m_u16ListenPort );
-#endif // DEBUG_VXSERVER_MGR
+        if( IsLogEnabled( eLogModuleSkt ) )
+		    LogMsg( LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread started\n", poMgr->m_iMgrId, poMgr->getListenPort() );
+
 		poMgr->listenForConnectionsToAccept( poVxThread );
 
 		// quitting
-#ifdef DEBUG_SKT_CONNECTIONS
-		LogMsg( LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread tid %d quiting\n", poMgr->m_iMgrId, poMgr->getListenPort(), poVxThread->getThreadTid() );
-#endif // DEBUG_VXSERVER_MGR
+        if( IsLogEnabled( eLogModuleSkt ) )
+		    LogMsg( LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread tid %d quiting\n", poMgr->m_iMgrId, poMgr->getListenPort(), poVxThread->getThreadTid() );
+
 		//! VxThread calls this just before exit
 		poVxThread->threadAboutToExit();
 		return 0;
@@ -137,9 +137,9 @@ RCODE VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 	m_LastWatchdogKickMs = GetTimeStampMs();
 	std::string ipv4String = ip;
 	m_u16ListenPort = u16ListenPort;
-#if defined(DEBUG_SKT_CONNECTIONS)
-	LogMsg( LOG_INFO, "333######### NOT IN THREAD VxServerMgr::startListening ip %s port %d app sec %d\n", ip, u16ListenPort, GetApplicationAliveSec() );
-#endif // DEBUG_SKT_CONNECTIONS
+    if( IsLogEnabled( eLogModuleSkt ) )
+	    LogMsg( LOG_INFO, "333######### NOT IN THREAD VxServerMgr::startListening ip %s port %d app sec %d\n", ip, u16ListenPort, GetApplicationAliveSec() );
+
 
 #ifdef TARGET_OS_ANDROID
 	// can't get ip's in native android... for now just do ipv4 TODO listen for ipv6 in android
@@ -148,9 +148,9 @@ RCODE VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 	if( sock < 0 )
 	{
 		RCODE rc = VxGetLastError();
-#if defined(DEBUG_SKT_CONNECTIONS)
-        LogMsg( LOG_ERROR, "VxServerMgr::startListening create skt error %d\n", rc );
-#endif // DEBUG_SKT_CONNECTIONS
+        if( IsLogEnabled( eLogModuleSkt ) )
+            LogMsg( LOG_ERROR, "VxServerMgr::startListening create skt error %d\n", rc );
+
         if( 0 == rc )
         {
             rc = -1;
@@ -162,9 +162,9 @@ RCODE VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 	// don't know why reuse port doesn't work
 	VxSetSktAllowReusePort( sock );
 
-#ifdef DEBUG_VXSERVER_MGR
-	LogMsg( LOG_INFO, "StartListen binding ip %s port %d \n", ip, u16ListenPort );
-#endif // DEBUG_VXSERVER_MGR
+    if( IsLogEnabled( eLogModuleSkt ) )
+	    LogMsg( LOG_INFO, "StartListen binding ip %s port %d \n", ip, u16ListenPort );
+
 	struct sockaddr_in listenAddr;
     memset(&listenAddr, 0, sizeof( struct sockaddr_in ) );
 	listenAddr.sin_family = AF_INET;
@@ -192,9 +192,9 @@ RCODE VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 		return false;
 	}
 
-   #ifdef DEBUG_VXSERVER_MGR
+    if( IsLogEnabled( eLogModuleSkt ) )
         LogMsg( LOG_INFO, "StartListen socket %d index %d ip %s port %d \n", sock, m_iActiveListenSktCnt, ip, u16ListenPort );
-   #endif // DEBUG_VXSERVER_MGR
+
 	m_aoListenSkts[ m_iActiveListenSktCnt ] = sock;
 	m_iActiveListenSktCnt++;
 	m_LclIp.setIp( ip );

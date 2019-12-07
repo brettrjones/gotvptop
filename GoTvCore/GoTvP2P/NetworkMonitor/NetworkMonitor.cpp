@@ -40,11 +40,6 @@ NetworkMonitor::NetworkMonitor( P2PEngine& engine )
 }
 
 //============================================================================
-NetworkMonitor::~NetworkMonitor()
-{
-}
-
-//============================================================================
 void NetworkMonitor::networkMonitorStartup( const char * preferredNetIp, const char * cellNetIp )
 {
 	m_strPreferredAdapterIp	= preferredNetIp;
@@ -92,19 +87,19 @@ void NetworkMonitor::onOncePerSecond( void )
 	m_strPreferredAdapterIp = m_Engine.getEngineSettings().getPreferredNetworkAdapterIp();
 
 	std::vector<InetAddress> aipAddresses;
-	InetAddress	inetAddr;
-	inetAddr.getAllAddresses( aipAddresses );
+	InetAddress	netAddr;
+	netAddr.getAllAddresses( aipAddresses );
+    //netAddr.dumpAddresses( aipAddresses );   
 
-	std::vector<InetAddress>::iterator iter;
-	for( iter = aipAddresses.begin(); iter != aipAddresses.end(); ++iter )
+	for( InetAddress& inetAddr : aipAddresses )
 	{
-		if( ( false == (*iter).isIPv4() )
-			|| (*iter).isLoopBack() )
+		if( ( false == inetAddr.isIPv4() )
+			|| inetAddr.isLoopBack() )
 		{
 			continue;
 		}
 		
-		std::string strIp = (*iter).toStdString();
+		std::string strIp = inetAddr.toStdString();
 		pickAddresss.push_back( strIp );
 		if( strIp == m_strLastFoundIp )
 		{

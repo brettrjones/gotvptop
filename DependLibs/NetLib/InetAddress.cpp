@@ -669,6 +669,18 @@ int InetAddress::getAllAddresses( std::vector<InetAddress>& retAddresses )
 }
 
 //============================================================================
+void InetAddress::dumpAddresses( std::vector<InetAddress>& addressList )
+{
+    LogMsg( LOG_INFO, "InetAddress::dumpAddresses count %d", addressList.size() );
+    static int addrIdx = 0;
+    for( InetAddress& addr : addressList )
+    {
+        addrIdx++;
+        LogMsg( LOG_INFO, "Addr %d - %s isIPv4 %d isLoopback %d isLocal %d", addrIdx, addr.toStdString().c_str(), addr.isIPv4(), addr.isLoopBack(), addr.isLocalAddress() );
+    }
+}
+
+//============================================================================
 bool InetAddress::isLoopBack() const
 {
 	bool isLoopBack = true;

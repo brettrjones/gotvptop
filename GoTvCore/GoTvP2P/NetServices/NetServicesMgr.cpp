@@ -703,13 +703,13 @@ static int lastPort = 0;
 
 	if( eAppErrNone == portOpenTestError )
 	{
-        if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
+        if( IsLogEnabled( eLogModuleConnect ) )
 		    LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction: (2)Your TCP Port %d IS OPEN :) IP is %s->%s in %3.3f sec\n", tcpListenPort, retMyExternalIp.c_str(), rmtIP.c_str(), retMyExternalIp.c_str(), portTestTimer.elapsedSec() );
 		m_Engine.sendToGuiStatusMessage( "(2)Your TCP Port %d IS OPEN :)", tcpListenPort  );
 	}
 	else
 	{
-        if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
+        if( IsLogEnabled( eLogModuleConnect ) )
 		    LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction: (2)Your TCP Port %d IS CLOSED :) IP %s->%s in %3.3f sec\n", tcpListenPort, retMyExternalIp.c_str(), rmtIP.c_str(), portTestTimer.elapsedSec() );
 		m_Engine.sendToGuiStatusMessage( "(2)Your TCP Port %d IS CLOSED :( IP is %s->%s  (%3.3f sec)", tcpListenPort, retMyExternalIp.c_str(), rmtIP.c_str(), portTestTimer.elapsedSec() );
 	}
@@ -845,7 +845,7 @@ EAppErr NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
 
 	std::string strPayload = contentParts[0];
 #ifdef DEBUG_NETSERVICE
-    if( LOG_FLAG_CONNECT & VxGetModuleLogFlags() )
+    if( IsLogEnabled( eLogModuleConnect ) )
 	    LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction: can direct connect %s my ip %s:%d\n", strPayload.c_str(), retMyExternalIp.c_str(), tcpListenPort );
 #endif // DEBUG_NETSERVICE
 	int iIsOpen = atoi( contentParts[0].c_str() );

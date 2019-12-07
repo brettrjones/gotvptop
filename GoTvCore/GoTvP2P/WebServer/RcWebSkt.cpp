@@ -41,7 +41,8 @@ RcWebSkt::RcWebSkt()
 //============================================================================
 RcWebSkt::~RcWebSkt()
 {
-	LogMsg( LOG_SKT,  "RcWebSkt::~RcWebSkt %d 0x%x %s skt handle %d destructing\n", this->m_iSktId, this, this->m_strRmtIp.c_str(), m_Socket );
+    if( IsLogEnabled( eLogModuleSkt ) )
+	    LogMsg( LOG_DEBUG,  "RcWebSkt::~RcWebSkt %d 0x%x %s skt handle %d destructing\n", this->m_iSktId, this, this->m_strRmtIp.c_str(), m_Socket );
 	m_bIsConnected = false;
 	m_bClosingFromDestructor = true;
 	m_SktRxThread.abortThreadRun( true );
@@ -195,7 +196,8 @@ uint32_t RcSktWebTransmitThreadFunc(  void * pvContext )
 	poThread->setIsThreadRunning( true );
 
 	RcWebSkt *		sktBase		= (RcWebSkt *)poThread->getThreadUserParam();
-	LogMsg( LOG_SKT,  "skt %d %s RcSktWebTransmitThreadFunc start\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str() );
+    if( IsLogEnabled( eLogModuleSkt ) )
+	    LogMsg( LOG_DEBUG,  "skt %d %s RcSktWebTransmitThreadFunc start\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str() );
 
 	do
 	{
@@ -308,7 +310,8 @@ uint32_t RcSktWebTransmitThreadFunc(  void * pvContext )
 	}while( (false == poThread->isAborted() ) &&
 			sktBase->isConnected() );
 
-	LogMsg( LOG_SKT,  "skt %d 0x%x %s RcSktWebTransmitThreadFunc exit\n", sktBase->m_iSktId, sktBase, sktBase->m_strRmtIp.c_str() );
+    if( IsLogEnabled( eLogModuleSkt ) )
+        LogMsg( LOG_DEBUG,  "skt %d 0x%x %s RcSktWebTransmitThreadFunc exit\n", sktBase->m_iSktId, sktBase, sktBase->m_strRmtIp.c_str() );
 
 	//! Thread calls this just before exit
 	poThread->threadAboutToExit();

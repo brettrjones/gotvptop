@@ -78,6 +78,7 @@ public:
 	static uint16_t				getIpFromAddr(const struct sockaddr *sa, std::string& retStr);
 	static InetAddress		    getDefaultIp( void );
     static int				    getAllAddresses( std::vector<InetAddress>& retAddress );
+    static void                 dumpAddresses( std::vector<InetAddress>& addressList );
 
 private:
 	//! returns port in host order

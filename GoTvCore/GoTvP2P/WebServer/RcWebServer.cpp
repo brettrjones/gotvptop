@@ -87,9 +87,11 @@ bool RcWebServer::isWebServerAvailable( void )
 // shutdown web server
 void RcWebServer::webServerShutdown( void )
 {
-	LogMsg( LOG_SKT, "RcWebServer::webServerShutdown\n" );
+    if( IsLogEnabled( eLogModuleSkt ) )
+	    LogMsg( LOG_DEBUG, "RcWebServer::webServerShutdown\n" );
 	setWebServerEnable( false );
-	LogMsg( LOG_SKT, "RcWebServer::webServerShutdown done\n" );
+    if( IsLogEnabled( eLogModuleSkt ) )
+	    LogMsg( LOG_DEBUG, "RcWebServer::webServerShutdown done\n" );
 }
 
 //============================================================================
@@ -150,7 +152,8 @@ RCODE RcWebServer::acceptRawLocalHttpConnection( VxSktBase * poSktIn, VxNetIdent
 
 		addSkt( sktBase );
 
-		LogMsg( LOG_SKT,  "skt %d to %s raw accept from skt %d\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str(), poSktIn->m_iSktId );
+        if( IsLogEnabled( eLogModuleSkt ) )
+		    LogMsg( LOG_DEBUG,  "skt %d to %s raw accept from skt %d\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str(), poSktIn->m_iSktId );
 
 		* ppoRetWebSkt = sktBase;
 
@@ -184,7 +187,8 @@ uint32_t RcSktWebReceiveThreadFunc(  void * pvContext )
 		return 0;
 	}
 
-	LogMsg( LOG_SKT,  "skt %d %s SktWebReceiveThreadFunc start\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str() );
+    if( IsLogEnabled( eLogModuleSkt ) )
+	    LogMsg( LOG_DEBUG,  "skt %d %s SktWebReceiveThreadFunc start\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str() );
 
 	if( eSktTypeTcpAccept != sktBase->getSktType() )
 	{
@@ -227,14 +231,17 @@ uint32_t RcSktWebReceiveThreadFunc(  void * pvContext )
 			continue;
 		}
 
-		LogMsg( LOG_SKT,  "skt %d SktWebReceiveThreadFunc wait for recv\n", sktBase->m_iSktId );
+        if( IsLogEnabled( eLogModuleSkt ) )
+            LogMsg( LOG_DEBUG,  "skt %d SktWebReceiveThreadFunc wait for recv\n", sktBase->m_iSktId );
 
 		iDataLen = recv(		sktBase->m_Socket,	// socket
 								as8Buf,				// buffer to read into
 								iAttemptLen,		// length of buffer space
 								0 );				// flags
 
-		LogMsg( LOG_SKT,  "skt %d SktWebReceiveThreadFunc wait for recv done len %d\n", sktBase->m_iSktId, iDataLen );
+        if( IsLogEnabled( eLogModuleSkt ) )
+            LogMsg( LOG_DEBUG,  "skt %d SktWebReceiveThreadFunc wait for recv done len %d\n", sktBase->m_iSktId, iDataLen );
+
 		if( poThread->isAborted() 
 			|| ( eSktCallbackReasonData != sktBase->getCallbackReason() ) 
 			|| ( INVALID_SOCKET == sktBase->m_Socket ) 

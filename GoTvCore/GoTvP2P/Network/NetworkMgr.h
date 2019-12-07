@@ -39,7 +39,7 @@ public:
 				VxPeerMgr&		peerMgr,
 				BigListMgr&		bigListMgr,
 				P2PConnectList&	connectionList );
-	virtual ~NetworkMgr();
+	virtual ~NetworkMgr() = default;
 
 	P2PEngine&					getEngine( void )											{ return m_Engine; }
 	VxPeerMgr&					getPeerMgr( void )											{ return m_PeerMgr; }
@@ -78,8 +78,8 @@ protected:
 #endif // ENABLE_MULTICAST
 	std::string					m_NetworkName;
 
-	bool						m_bNetworkAvailable;
-	bool						m_bIsCellularNetwork;
+    bool						m_bNetworkAvailable{ false };
+	bool						m_bIsCellularNetwork{ false };
 	std::string					m_strLocalIpAddr;
 	InetAddress					m_LocalIp;
 };

@@ -71,8 +71,6 @@ NetworkMgr::NetworkMgr( P2PEngine&		engine,
 , m_MulticastBroadcast( *this )
 , m_MulticastListen( *this, *this )
 #endif // ENABLE_MULTICAST
-, m_bNetworkAvailable( false )
-, m_bIsCellularNetwork( false )
 {
 	VxSetNetworkLoopbackAllowed( false );
 
@@ -80,11 +78,6 @@ NetworkMgr::NetworkMgr( P2PEngine&		engine,
 #ifdef ENABLE_MULTICAST
 	m_MulticastListen.getUdpSkt().setReceiveCallback( NetworkMulticastCallbackHandler, this );
 #endif // ENABLE_MULTICAST
-}
-
-//============================================================================
-NetworkMgr::~NetworkMgr()
-{
 }
 
 //============================================================================
@@ -107,10 +100,8 @@ void NetworkMgr::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNet
 {
     if( m_bNetworkAvailable )
     {
-#ifdef DEBUG_PTOP_NETWORK_STATE
-        LogMsg( LOG_DEBUG, "fromGuiNetworkAvailable %s but network already set to %s\n", lclIp, m_strLocalIpAddr.c_str() );
-#endif // DEBUG_PTOP_NETWORK_STATE
-
+        if( IsLogEnabled( eLogModuleNetworkMgr ) )
+            LogMsg( LOG_DEBUG, "fromGuiNetworkAvailable %s but network already set to %s\n", lclIp, m_strLocalIpAddr.c_str() );
         return;
     }
 
@@ -208,15 +199,13 @@ void NetworkMgr::handleTcpSktCallback( VxSktBase * sktBase )
 	switch( sktBase->getCallbackReason() )
 	{
 	case eSktCallbackReasonConnectError:
-#ifdef DEBUG_NETWORK_MGR
-		LogMsg( LOG_ERROR, "NetworkMgr:TCP Skt %d connect error %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->m_rcLastError ) );
-#endif // DEBUG_NETWORK_MGR
+        if( IsLogEnabled( eLogModuleNetworkMgr ) )
+		    LogMsg( LOG_ERROR, "NetworkMgr:TCP Skt %d connect error %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ) );
 		break;
 
 	case eSktCallbackReasonConnected:
-#ifdef DEBUG_NETWORK_MGR
-        LogMsg( LOG_INFO, "NetworkMgr:TCP %s port %d to local port %d\n", sktBase->describeSktType().c_str(), sktBase->m_RmtIp.getPort(), sktBase->m_LclIp.getPort() );
-#endif // DEBUG_NETWORK_MGR
+        if( IsLogEnabled( eLogModuleNetworkMgr ) )
+            LogMsg( LOG_INFO, "NetworkMgr:TCP %s port %d to local port %d\n", sktBase->describeSktType().c_str(), sktBase->m_RmtIp.getPort(), sktBase->m_LclIp.getPort() );
 		break;
 
 	case eSktCallbackReasonData:
@@ -225,27 +214,23 @@ void NetworkMgr::handleTcpSktCallback( VxSktBase * sktBase )
 
 	case eSktCallbackReasonClosed:
 		m_Engine.onConnectionLost( sktBase );
-#ifdef DEBUG_NETWORK_MGR
-		LogMsg( LOG_INFO, "NetworkMgr:TCP Skt %d closed %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->m_rcLastError ) );
-#endif // DEBUG_NETWORK_MGR
+        if( IsLogEnabled( eLogModuleNetworkMgr ) )
+		    LogMsg( LOG_INFO, "NetworkMgr:TCP Skt %d closed %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ) );
 		break;
 
 	case eSktCallbackReasonError:
-#ifdef DEBUG_NETWORK_MGR
-		LogMsg( LOG_ERROR, "NetworkMgr:TCP Skt %d error %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->m_rcLastError ) );
-#endif // DEBUG_NETWORK_MGR
+        if( IsLogEnabled( eLogModuleNetworkMgr ) )
+		    LogMsg( LOG_ERROR, "NetworkMgr:TCP Skt %d error %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ) );
 		break;
 
 	case eSktCallbackReasonClosing:
-#ifdef DEBUG_NETWORK_MGR
-		LogMsg( LOG_INFO, "NetworkMgr:TCP eSktCallbackReasonClosing Skt %d \n", sktBase->m_iSktId );
-#endif // DEBUG_NETWORK_MGR
+        if( IsLogEnabled( eLogModuleNetworkMgr ) )
+		    LogMsg( LOG_INFO, "NetworkMgr:TCP eSktCallbackReasonClosing Skt %d \n", sktBase->m_iSktId );
 		break;
 
 	case eSktCallbackReasonConnecting:
-#ifdef DEBUG_NETWORK_MGR
-		LogMsg( LOG_INFO, "NetworkMgr:TCP eSktCallbackReasonConnecting Skt %d \n", sktBase->m_iSktId );
-#endif // DEBUG_NETWORK_MGR
+        if( IsLogEnabled( eLogModuleNetworkMgr ) )
+		    LogMsg( LOG_INFO, "NetworkMgr:TCP eSktCallbackReasonConnecting Skt %d \n", sktBase->m_iSktId );
 		break;
 
 	default:
@@ -265,15 +250,13 @@ void NetworkMgr::handleMulticastSktCallback( VxSktBase * sktBase )
 	switch( sktBase->getCallbackReason() )
 	{
 	case eSktCallbackReasonConnectError:
-#ifdef DEBUG_MULTICAST
-		LogMsg( LOG_ERROR, "NetworkMgr:Multicast Skt %d connect error %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->m_rcLastError ) );
-#endif // DEBUG_MULTICAST
+        if( IsLogEnabled( eLogModuleMulticast ) )
+		    LogMsg( LOG_ERROR, "NetworkMgr:Multicast Skt %d connect error %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ) );
 		break;
 
 	case eSktCallbackReasonConnected:
-#ifdef DEBUG_MULTICAST
-		LogMsg( LOG_INFO, "NetworkMgr:Multicast Skt %d connected from %s port %d\n", sktBase->m_iSktId, sktBase->getRemoteIp(), sktBase->m_LclIp.getPort() );
-#endif // DEBUG_MULTICAST
+        if( IsLogEnabled( eLogModuleMulticast ) )
+		    LogMsg( LOG_INFO, "NetworkMgr:Multicast Skt %d connected from %s port %d\n", sktBase->m_iSktId, sktBase->getRemoteIp(), sktBase->m_LclIp.getPort() );
 		break;
 
 	case eSktCallbackReasonData:
@@ -283,34 +266,29 @@ void NetworkMgr::handleMulticastSktCallback( VxSktBase * sktBase )
 			break;
 		}
 
-#ifdef DEBUG_MULTICAST
-		LogMsg( LOG_INFO, "NetworkMgr:Multicast Data Skt %d\n", sktBase->m_iSktId );
-#endif // DEBUG_MULTICAST
+        if( IsLogEnabled( eLogModuleMulticast ) )
+		    LogMsg( LOG_INFO, "NetworkMgr:Multicast Data Skt %d\n", sktBase->m_iSktId );
 		m_Engine.handleMulticastData( sktBase );
 		break;
 
 	case eSktCallbackReasonClosed:
-#ifdef DEBUG_MULTICAST
-		LogMsg( LOG_INFO, "NetworkMgr:Multicast Skt %d closed %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->m_rcLastError ) );
-#endif // DEBUG_MULTICAST
+        if( IsLogEnabled( eLogModuleMulticast ) )
+		    LogMsg( LOG_INFO, "NetworkMgr:Multicast Skt %d closed %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ) );
 		break;
 
 	case eSktCallbackReasonError:
-#ifdef DEBUG_MULTICAST
-		LogMsg( LOG_ERROR, "NetworkMgr:Multicast Skt %d error %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->m_rcLastError ) );
-#endif // DEBUG_MULTICAST
+        if( IsLogEnabled( eLogModuleMulticast ) )
+		    LogMsg( LOG_ERROR, "NetworkMgr:Multicast Skt %d error %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ) );
 		break;
 
 	case eSktCallbackReasonClosing:
-#ifdef DEBUG_MULTICAST
-		LogMsg( LOG_INFO, "NetworkMgr:Multicast eSktCallbackReasonClosing Skt %d \n", sktBase->m_iSktId );
-#endif // DEBUG_MULTICAST
+        if( IsLogEnabled( eLogModuleMulticast ) )
+		    LogMsg( LOG_INFO, "NetworkMgr:Multicast eSktCallbackReasonClosing Skt %d \n", sktBase->m_iSktId );
 		break;
 
 	case eSktCallbackReasonConnecting:
-#ifdef DEBUG_MULTICAST
-		LogMsg( LOG_INFO, "NetworkMgr:Multicast eSktCallbackReasonConnecting Skt %d \n", sktBase->m_iSktId );
-#endif // DEBUG_MULTICAST
+        if( IsLogEnabled( eLogModuleMulticast ) )
+		    LogMsg( LOG_INFO, "NetworkMgr:Multicast eSktCallbackReasonConnecting Skt %d \n", sktBase->m_iSktId );
 		break;
 
 	default:

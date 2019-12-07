@@ -217,7 +217,7 @@ RCODE  VxSktUdp::sendTo(	const char *	pData,		// data to send
 RCODE  VxSktUdp::sendToMulticast(	const char *	pData,		// data to send
 									int				iDataLen,	// data len
 									const char *	pRmtIp, 	// destination ip in dotted format
-									uint16_t				u16Port )	// port to send to ( if 0 then port specified when opened )
+									uint16_t		u16Port )	// port to send to ( if 0 then port specified when opened )
 {
 	InetAddress oAddr( pRmtIp );
 	struct ip_mreq mreq;
@@ -226,7 +226,8 @@ RCODE  VxSktUdp::sendToMulticast(	const char *	pData,		// data to send
 	if( setsockopt( m_Socket, IPPROTO_IP, IP_ADD_MEMBERSHIP,(char*)&mreq, sizeof(mreq)) < 0)
 	{
 		m_rcLastSktError = VxGetLastError();
-		LogMsg( LOG_SKT, "VxSktUdp::sendToMulticast setsockopt mreq failed %s\n", VxDescribeSktError( m_rcLastSktError ) );
+        if( IsLogEnabled( eLogModuleSkt ) )
+		    LogMsg( LOG_ERROR, "VxSktUdp::sendToMulticast setsockopt mreq failed %s\n", VxDescribeSktError( m_rcLastSktError ) );
 	}
 
 	return sendTo( pData, iDataLen, oAddr, u16Port );
@@ -237,7 +238,7 @@ RCODE  VxSktUdp::sendToMulticast(	const char *	pData,		// data to send
 RCODE VxSktUdp::sendTo(		const char *	pData,		// data to send
 							int				iDataLen,	// data len
 							InetAddress&	oRmtIp, 	// destination ip in host ordered u32
-							uint16_t				u16Port )	// port to send to ( if 0 then port specified when opened )
+							uint16_t		u16Port )	// port to send to ( if 0 then port specified when opened )
 {
 	if(	( false == isConnected()) 
 		|| ( m_pfnReceive && ( false == m_SktRxThread.isThreadCreated()) ) )

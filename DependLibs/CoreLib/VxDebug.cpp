@@ -74,6 +74,13 @@ namespace
 }
 
 //============================================================================
+/// @brief return true if should log the given module
+bool IsLogEnabled( ELogModule logModule )
+{
+    return true;
+}
+
+//============================================================================
 void VxGetLogMessages( unsigned long u32MsgTypes, std::vector<LogEntry>& retMsgs )
 {
 #if ENABLE_LOG_LIST

@@ -1162,7 +1162,11 @@ void AppCommon::onOncePerSecond( void )
             m_LoginBegin = true;
             startLogin();
         }
-        //m_OffersMgr.onOncePerSecond();
+
+        if( getLoginCompleted() )
+        {
+            getEngine().onOncePerSecond();
+        }
     }
     else
     {
@@ -1280,7 +1284,7 @@ void AppCommon::toGuiAssetAdded( AssetInfo * assetInfo )
 		return;
 	}
 
-	if( LOG_FLAG_ASSETS & VxGetModuleLogFlags() )
+	if( IsLogEnabled( eLogModuleAssets ) )
 		LogMsg( LOG_INFO, "toGuiAssetAdded: toGuiActivityClientsLock\n" );
 	//#endif // DEBUG_TOGUI_CLIENT_MUTEX
 
@@ -1292,7 +1296,7 @@ void AppCommon::toGuiAssetAdded( AssetInfo * assetInfo )
 		client.m_Callback->toGuiAssetAdded( client.m_UserData, assetInfo );
 	}
 
-	if( LOG_FLAG_ASSETS & VxGetModuleLogFlags() )
+	if( IsLogEnabled( eLogModuleAssets ) )
 		LogMsg( LOG_INFO, "toGuiAssetAdded toGuiActivityClientsUnlock\n");
 
 	toGuiActivityClientsUnlock();

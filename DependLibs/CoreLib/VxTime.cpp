@@ -143,26 +143,28 @@ static void InitializeTimeIfNeeded( )
     // get gmt time in milliseconds since since January 1, 1970 GMT time
     struct timeval gmtTimeVal;
     gettimeofday ( &gmtTimeVal, NULL );
-    int64_t gmtTimeMs =  ( gmtTimeVal.tv_sec * 1000 ) + ( gmtTimeVal.tv_usec / 1000 );
+    int64_t gmtTimeMs =  ( ( int64_t )gmtTimeVal.tv_sec * 1000 );
 
-    int64_t localTimeMs = 0;
-#ifdef TARGET_OS_WINDOWS
-    // FILETIME is 100 nanoseconds since JAN 1, 1601
-    FILETIME ft;
-    GetSystemTimeAsFileTime( &ft );
-    // takes the last modified date
-    LARGE_INTEGER date, adjust;
-    date.HighPart = ft.dwHighDateTime;
-    date.LowPart = ft.dwLowDateTime;
-    // 100-nanoseconds = milliseconds * 10000
-    adjust.QuadPart = 11644473600000 * 10000;
-    // removes the difference between 1970 and 1601
-    date.QuadPart -= adjust.QuadPart;
-    // convert from 100-nanoseconds to milliseconds
-    localTimeMs = date.QuadPart / 10000;
-#else
-    localTimeMs = time( NULL ) * 1000; // only second resolution but does not matter as an offset
-#endif // TARGET_OS_WINDOWS
+//    int64_t localTimeMs = 0;
+// 
+//#ifdef TARGET_OS_WINDOWS
+    // it appears this is unusable because gives gmt time instead of local time
+//    // FILETIME is 100 nanoseconds since JAN 1, 1601
+//    FILETIME ft;
+//    GetSystemTimeAsFileTime( &ft );
+//    // takes the last modified date
+//    LARGE_INTEGER date, adjust;
+//    date.HighPart = ft.dwHighDateTime;
+//    date.LowPart = ft.dwLowDateTime;
+//    // 100-nanoseconds = milliseconds * 10000
+//    adjust.QuadPart = 11644473600000 * 10000;
+//    // removes the difference between 1970 and 1601
+//    date.QuadPart -= adjust.QuadPart;
+//    // convert from 100-nanoseconds to milliseconds
+//    localTimeMs = date.QuadPart / 10000;
+//#else
+
+    int64_t localTimeMs = time( NULL ) * 1000; // only second resolution but does not matter as an offset
 
     g_localTimezoneDifferenceMs = localTimeMs - gmtTimeMs;
     g_tickCountOffsetMsFromGmtTime = gmtTimeMs - g_tickCountWhenAppInitialized;
