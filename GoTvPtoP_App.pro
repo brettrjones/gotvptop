@@ -243,10 +243,20 @@ unix:!android:{
 
 unix:!android:{
     #shared libs
+#linux seems to be very particular and the absolute path does not work
      #LIBS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
      #LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
-    LIBS +=  -lpythoncore{SHARED_LIB_APPEND}
-    LIBS +=  -lssl{SHARED_LIB_APPEND}
+CONFIG(debug, debug|release){
+    LIBS +=  -lpythoncore_d
+    LIBS +=  -lssl_d
+}
+
+CONFIG(release, debug|release){
+    LIBS +=  -lpythoncore
+    LIBS +=  -lss
+}
+
+
     LIBS +=  -lpthread -ldl -lGLU -lGL -lm -luuid -lrt
 }
 
