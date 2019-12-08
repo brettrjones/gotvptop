@@ -33,18 +33,27 @@
 #define LOG_ERR			LOG_ERROR
 #define LOG_CRIT		LOG_FATAL
 
+
+#define MAX_ERR_MSG_SIZE 4096
+typedef void (*LOG_FUNCTION )( void *, uint32_t, char * );
+
+// protected by #ifdef __cplusplus so can be included in .c code
+#ifdef __cplusplus
+#include <string>
+#include <vector>
+
 enum ELogModule
 {
-    eLogModuleNone          = 0,
-    eLogModuleAssets        = 0x0001,
-    eLogModuleConnect       = 0x0002,
-    eLogModuleMulticast     = 0x0004,
-    eLogModuleNetworkMgr    = 0x0008,
-    eLogModulePkt           = 0x0010,
-    eLogModulePlayer        = 0x0020,
-    eLogModuleSkt           = 0x0040,
-    eLogModuleTest          = 0x0080,
-    eLogModuleThread        = 0x0100,
+    eLogModuleNone = 0,
+    eLogModuleAssets = 0x0001,
+    eLogModuleConnect = 0x0002,
+    eLogModuleMulticast = 0x0004,
+    eLogModuleNetworkMgr = 0x0008,
+    eLogModulePkt = 0x0010,
+    eLogModulePlayer = 0x0020,
+    eLogModuleSkt = 0x0040,
+    eLogModuleTest = 0x0080,
+    eLogModuleThread = 0x0100,
 
 
     eMaxLogModule
@@ -54,12 +63,6 @@ enum ELogModule
 bool IsLogEnabled( ELogModule logModule );
 
 
-#define MAX_ERR_MSG_SIZE 4096
-typedef void (*LOG_FUNCTION )( void *, uint32_t, char * );
-
-#ifdef __cplusplus
-#include <string>
-#include <vector>
 class LogEntry
 {
 public:
