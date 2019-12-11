@@ -344,7 +344,6 @@ void HomeWindow::createAppletLaunchPage( void )
 {
 	m_AppletLaunchPage = new AppletLaunchPage( getMyApp(), m_HomeFrameUpperLeft, eAppletHomePage, OBJNAME_APPLET_LAUNCH_PAGE );
 	connect( m_AppletLaunchPage, SIGNAL( signalBackButtonClicked() ), this, SLOT( help() ) );
-	connect( this, SIGNAL( signalHomeFrameFullSize( bool ) ), this, SLOT( slotHomeFrameFullSize( bool ) ) );
 }
 
 //============================================================================

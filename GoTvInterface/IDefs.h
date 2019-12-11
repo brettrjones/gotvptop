@@ -62,6 +62,20 @@ enum EPluginType
 	eMaxPluginType	
 };
 
+enum EHostServiceType
+{
+    eHostServiceInvalid = 0,
+    eHostServiceNetworkHost,        // Tier 1 network host service
+    eHostServiceGroupListing,       // Tier 2 group listing service
+    eHostServiceGroup,              // Tier 3 host a group service ( group users are considered Tier 4 )
+    eHostServiceRelay,              // relay service normally provided by group host ( Tier 3 )
+    eHostServiceRandomConnect,      // random connect service normally provided by network host ( Tier 1 )
+    eHostServiceRandomConnectRelay, // random connection relay service normally provided by network host ( Tier 1 )
+    eHostServiceConnectTest,        // test connection for relay requirement and IP Address  ( normally provided by all Tiers )
+
+    eMaxHostServiceType
+};
+
 // for use in database mainly 
 // If you add a plugin type be sure to update getPluginName
 const char * getPluginName( EPluginType pluginType );

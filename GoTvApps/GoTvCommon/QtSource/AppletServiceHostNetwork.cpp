@@ -23,10 +23,8 @@
 AppletServiceHostNetwork::AppletServiceHostNetwork( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_HOST_NETWORK, app, parent )
 {
-    setPluginType( ePluginTypeHostNetwork );
-    setAppletType( eAppletServiceHostNetwork );
-    setTitleBarText( DescribeApplet( m_EAppletType ) );
-    loadFromSettings();
+    setupServiceBaseApplet( eAppletServiceHostNetwork, ePluginTypeHostNetwork );
+
     m_MyApp.activityStateChange( this, true );
 }
 

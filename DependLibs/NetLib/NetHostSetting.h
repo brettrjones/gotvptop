@@ -27,7 +27,7 @@ class NetHostSetting
 {
 public:
 	NetHostSetting();
-	virtual ~NetHostSetting(){};
+	virtual ~NetHostSetting() = default;
 
 	NetHostSetting&				operator =( const NetHostSetting& rhs );
 
@@ -41,13 +41,12 @@ public:
 	std::string&				getNetHostWebsiteUrl( void )								{ return m_NetHostWebsiteUrl; }
     void						setNetServiceWebsiteUrl( const char * netServiceUrl )		{ m_NetServiceWebsiteUrl = netServiceUrl; }
     std::string&				getNetServiceWebsiteUrl( void )								{ return m_NetServiceWebsiteUrl; }
-
-	void						setIsThisNodeAnNetHost( bool isHost )						{ m_ThisNodeIsHost = isHost; }
-	bool						getIsThisNodeAnNetHost( void )								{ return m_ThisNodeIsHost; }
+    
+	void						setIsThisNodeAnNetHostOld( bool isHost )						{ m_ThisNodeIsHost = isHost; }// TODO remove
+	bool						getIsThisNodeAnNetHostOld( void )								{ return m_ThisNodeIsHost; }// TODO remove
 
 	void						setExcludeMeFromNetHostList( bool excludeMe )				{ m_ExcludeMeFromHostList = excludeMe; }
 	bool						getExcludeMeFromNetHostList( void )							{ return m_ExcludeMeFromHostList; }
-
 
 protected:
 	//=== vars ===//
@@ -56,6 +55,6 @@ protected:
 
 	std::string					m_NetServiceWebsiteUrl;
 	std::string					m_NetHostWebsiteUrl;
-	bool						m_ThisNodeIsHost;
-	bool						m_ExcludeMeFromHostList;
+    bool						m_ThisNodeIsHost{ false };  // TODO remove
+    bool						m_ExcludeMeFromHostList{ false };
 };

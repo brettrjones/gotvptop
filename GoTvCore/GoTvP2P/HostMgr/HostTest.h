@@ -27,7 +27,7 @@ class NetServicesMgr;
 class HostTest
 {
 public:
-	HostTest( EngineSettings& engineSettings, NetServicesMgr& netServicesMgr );
+	HostTest( P2PEngine& engine, EngineSettings& engineSettings, NetServicesMgr& netServicesMgr );
 	virtual ~HostTest() = default;
 
     IToGui&                     getToGui();
@@ -48,8 +48,7 @@ private:
 	bool						doConnectTestSuccess( bool isHost, std::string& pongResult );
 
 	//=== vars ===//
-	//P2PEngine&					m_Engine;
-	//
+    P2PEngine&					m_Engine;
 	EngineSettings&				m_EngineSettings;
 	NetServicesMgr&				m_NetServicesMgr;
 

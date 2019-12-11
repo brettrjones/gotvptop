@@ -567,7 +567,7 @@ void NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers( void )
 {
     if( IsLogEnabled( eLogModuleConnect ) )
 	    LogMsg( LOG_STATUS, "NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers\n" );
-	if( m_Engine.getEngineSettings().getIsThisNodeAnNetHost() )
+	if( m_Engine.getHasHostService( eHostServiceNetworkHost ) )
 	{
 		// we are the anchor
 		// put ourself directly into the database

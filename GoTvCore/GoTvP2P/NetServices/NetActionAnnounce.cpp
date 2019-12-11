@@ -37,7 +37,7 @@ NetActionAnnounce::NetActionAnnounce( NetServicesMgr& netServicesMgr, std::strin
 //============================================================================
 void NetActionAnnounce::doAction( void )
 {
-	if( m_Engine.getEngineSettings().getIsThisNodeAnNetHost() )
+	if( m_Engine.getHasHostService( eHostServiceNetworkHost ) )
 	{
 		if( m_Engine.getEngineSettings().getExcludeMeFromNetHostList() )
 		{

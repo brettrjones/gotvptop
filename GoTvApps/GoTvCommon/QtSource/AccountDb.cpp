@@ -448,12 +448,12 @@ bool AccountDb::updateFriend( VxNetIdent& oIdent )
 bool AccountDb::updateNetHostSetting( NetHostSetting& anchorSetting )
 {
 	removeNetHostSettingByName( anchorSetting.getNetHostSettingName().c_str() );
-
+   
 	DbBindList bindList( anchorSetting.getNetHostSettingName().c_str() );
 	bindList.add( anchorSetting.getNetworkKey().c_str() );
 	bindList.add( anchorSetting.getNetHostWebsiteUrl().c_str() );
 	bindList.add( anchorSetting.getNetServiceWebsiteUrl().c_str() );
-	bindList.add( anchorSetting.getIsThisNodeAnNetHost() );
+	bindList.add( anchorSetting.getIsThisNodeAnNetHostOld() );
 	bindList.add( anchorSetting.getExcludeMeFromNetHostList() );
 
 	RCODE rc = sqlExec( "INSERT INTO anchor_settings (anchor_setting_name,network_name,anchor_url,connect_test_url,is_anchor_node,exclude_me) values(?,?,?,?,?,?)", bindList );
@@ -473,7 +473,7 @@ bool AccountDb::getNetHostSettingByName( const char * name, NetHostSetting& anch
 			anchorSetting.setNetworkKey( cursor->getString(1) );
 			anchorSetting.setNetHostWebsiteUrl( cursor->getString(2) );
 			anchorSetting.setNetServiceWebsiteUrl( cursor->getString(3) );
-			anchorSetting.setIsThisNodeAnNetHost(  ( 0 == cursor->getS32(4) ) ? false : true );
+			anchorSetting.setIsThisNodeAnNetHostOld(  ( 0 == cursor->getS32(4) ) ? false : true );
 			anchorSetting.setExcludeMeFromNetHostList(  ( 0 == cursor->getS32(5) ) ? false : true );
 
 			bResult = true;
@@ -500,7 +500,7 @@ bool AccountDb::getAllNetHostSettings( std::vector<NetHostSetting>& anchorSettin
 			anchorSetting.setNetworkKey( cursor->getString(1) );
 			anchorSetting.setNetHostWebsiteUrl( cursor->getString(2) );
 			anchorSetting.setNetServiceWebsiteUrl( cursor->getString(3) );
-			anchorSetting.setIsThisNodeAnNetHost(  ( 0 == cursor->getS32(4) ) ? false : true );
+			anchorSetting.setIsThisNodeAnNetHostOld(  ( 0 == cursor->getS32(4) ) ? false : true );
 			anchorSetting.setExcludeMeFromNetHostList(  ( 0 == cursor->getS32(5) ) ? false : true );
 			anchorSettingList.push_back( anchorSetting );
 

@@ -23,12 +23,9 @@
 AppletServiceAvatarImage::AppletServiceAvatarImage( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_AVATAR_IMAGE, app, parent )
 {
-	setAppletType( eAppletServiceAvatarImage );
-    ui.setupUi( this );
-    setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
+    setupServiceBaseApplet( eAppletServiceAvatarImage, ePluginTypeAvatarImage );
 
-	m_MyApp.activityStateChange( this, true );
+    m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================

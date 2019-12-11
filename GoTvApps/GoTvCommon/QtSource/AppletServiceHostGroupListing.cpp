@@ -23,9 +23,7 @@
 AppletServiceHostGroupListing::AppletServiceHostGroupListing( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_HOST_GROUP_LISTING, app, parent )
 {
-    setAppletType( eAppletServiceHostGroupListing );
-	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
+    setupServiceBaseApplet( eAppletServiceHostGroupListing, ePluginTypeHostGroupListing );
 
-	m_MyApp.activityStateChange( this, true );
+    m_MyApp.activityStateChange( this, true );
 }

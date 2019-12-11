@@ -57,8 +57,10 @@ public:
 
 	void						setNetHostWebsiteUrl( std::string& strWebsiteUrl );
 	void						getNetHostWebsiteUrl( std::string& strWebsiteUrl );
-	void						setIsThisNodeAnNetHost( bool isHost );
-	bool						getIsThisNodeAnNetHost( void );
+
+	void						setIsThisNodeAnNetHostOld( bool isHost ); // TODO remove
+	bool						getIsThisNodeAnNetHostOld( void ); // TODO remove
+
 	void						setExcludeMeFromNetHostList( bool excludeFromHostList );
 	bool						getExcludeMeFromNetHostList( void );
 

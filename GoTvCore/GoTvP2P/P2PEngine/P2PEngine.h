@@ -89,6 +89,7 @@ public:
     RcScan&						getRcScan( void )								{ return m_RcScan; }
 	bool						isAppPaused( void )								{ return m_AppIsPaused; }
 	bool						isP2POnline( void );
+    bool                        getHasHostService( EHostServiceType hostService );
 
 	void						lockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.lock(); }
 	PktAnnounce&				getMyPktAnnounce( void )						{ return m_PktAnn; }
@@ -549,13 +550,13 @@ protected:
 	EAppState					m_eAppState;
 
 	EFriendViewType				m_eFriendView;
-	unsigned int				m_iCurPreferredRelayConnectIdx;
+	unsigned int				m_iCurPreferredRelayConnectIdx{ 0 };
 	VxGUID						m_NextFileInstance;
-    int64_t						m_LastTimeAnnounceFromContactListCalled;
-	bool						m_AppStartupCalled;
-	bool						m_AppIsPaused;
-	bool						m_IsUserSpecificDirSet;
-    bool                        m_EngineInitialized;
+    int64_t						m_LastTimeAnnounceFromContactListCalled{ 0 };
+    bool						m_AppStartupCalled{ false };
+	bool						m_AppIsPaused{ false };
+	bool						m_IsUserSpecificDirSet{ false };
+    bool                        m_EngineInitialized{ false };
 
 	PktImAliveReq				m_PktImAliveReq;
 

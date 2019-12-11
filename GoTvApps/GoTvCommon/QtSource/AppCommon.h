@@ -560,7 +560,6 @@ public:
     bool						loadLastUserAccount( void );
 
 signals:
-	void						signalHomeFrameFullSize( bool isFullSize );
     void						signalMainWindowResized( void );    // emitted if main window is resized
     void						signalMainWindowMoved( void );      // emitted if main window is moved
 

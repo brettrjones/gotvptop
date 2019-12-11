@@ -21,8 +21,6 @@ NetHostSetting::NetHostSetting()
 , m_NetworkName( NET_DEFAULT_NETWORK_NAME )
 , m_NetServiceWebsiteUrl( NET_DEFAULT_NETSERVICE_URL )
 , m_NetHostWebsiteUrl( NET_DEFAULT_NET_HOST_URL )
-, m_ThisNodeIsHost( false )
-, m_ExcludeMeFromHostList( false )
 {
 }
 

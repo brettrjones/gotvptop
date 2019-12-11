@@ -147,6 +147,26 @@
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="m_KeyWordsLabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Comma Delimited Key Words ( Optional For Searches )</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="m_KeyWordsEdit">
+     <property name="maxLength">
+      <number>63</number>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QLabel" name="m_DescriptionLabel">
      <property name="text">
       <string>Description Of Service ( Optional For Detail Information )

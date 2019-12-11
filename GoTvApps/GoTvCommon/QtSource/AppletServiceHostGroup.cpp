@@ -23,8 +23,7 @@
 AppletServiceHostGroup::AppletServiceHostGroup( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_HOST_GROUP, app, parent )
 {
-    setAppletType( eAppletServiceHostGroup );
-	connect( this, SIGNAL( signalBackButtonClicked() ), this, SLOT( close() ) );
+    setupServiceBaseApplet( eAppletServiceHostGroup, ePluginTypeHostGroup );
 
 	m_MyApp.activityStateChange( this, true );
 }
@@ -32,4 +31,5 @@ AppletServiceHostGroup::AppletServiceHostGroup( AppCommon& app, QWidget * parent
 //============================================================================
 AppletServiceHostGroup::~AppletServiceHostGroup()
 {
+    m_MyApp.activityStateChange( this, false );
 }

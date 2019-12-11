@@ -44,7 +44,6 @@ void AppletServiceBase::setupServiceBaseApplet( EApplet applet, EPluginType plug
     GuiHelpers::fillLanguage( ui.m_LanguageComboBox );
     GuiHelpers::fillContentRating( ui.m_ContentRatingComboBox );
 
-
     if( ePluginTypeInvalid == pluginType )
     {
         pluginType = GuiHelpers::getAppletAssociatedPlugin( m_EAppletType );
@@ -65,7 +64,6 @@ void AppletServiceBase::connectServiceWidgets()
 {
     connect( ui.m_ApplyButton, SIGNAL( clicked() ), this, SLOT( slotApplyServiceSettings() ) );
 }
-
 
 //============================================================================
 void AppletServiceBase::loadPluginSetting()
@@ -98,6 +96,7 @@ void AppletServiceBase::loadUiFromSetting()
         ui.m_LanguageComboBox->setCurrentIndex( GuiHelpers::languageToIndex( m_PluginSetting.getLanguage() ) );
         ui.m_UrlEdit->setText( m_PluginSetting.getPluginUrl().c_str() );
         ui.m_NameEdit->setText( m_PluginSetting.getTitle().c_str() );
+        ui.m_KeyWordsEdit->setText( m_PluginSetting.getKeyWords().c_str() );
         ui.m_DescriptionEdit->appendPlainText( m_PluginSetting.getDescription().c_str() );
         ui.m_ThumbnailEditWidget->loadThumbnail( m_PluginSetting.getThumnailId() );
     }
@@ -112,6 +111,7 @@ void AppletServiceBase::saveUiToSetting()
         m_PluginSetting.setLanguage( ( ELanguageType )ui.m_LanguageComboBox->currentIndex() );
         m_PluginSetting.setPluginUrl( ui.m_UrlEdit->text().toUtf8().constData() );
         m_PluginSetting.setTitle( ui.m_NameEdit->text().toUtf8().constData() );
+        m_PluginSetting.setKeyWords( ui.m_KeyWordsEdit->text().toUtf8().constData() );
         m_PluginSetting.setThumnailId( ui.m_ThumbnailEditWidget->updateAndGetThumbnailId() );
 
         QString description = ui.m_DescriptionEdit->toPlainText().trimmed();
@@ -131,4 +131,5 @@ void AppletServiceBase::slotApplyServiceSettings()
 {
     saveUiToSetting();
     m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
+    QMessageBox::information( this, QObject::tr( "Service Settings" ), QObject::tr( "Service Settings Applied" ), QMessageBox::Ok );
 }

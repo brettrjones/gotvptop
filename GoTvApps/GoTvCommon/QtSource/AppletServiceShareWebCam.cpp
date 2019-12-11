@@ -23,11 +23,9 @@
 AppletServiceShareWebCam::AppletServiceShareWebCam( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_SHARE_WEB_CAM, app, parent )
 {
-	m_EAppletType = eAppletServiceShareWebCam;
-	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
+    setupServiceBaseApplet( eAppletServiceShareWebCam, ePluginTypeCamServer );
 
-	m_MyApp.activityStateChange( this, true );
+    m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================

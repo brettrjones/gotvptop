@@ -62,8 +62,9 @@ namespace
 }
 
 //============================================================================
-HostTest::HostTest( EngineSettings& engineSettings, NetServicesMgr& netServicesMgr )
-: m_EngineSettings( engineSettings )
+HostTest::HostTest( P2PEngine& engine, EngineSettings& engineSettings, NetServicesMgr& netServicesMgr )
+: m_Engine( engine )
+, m_EngineSettings( engineSettings )
 , m_NetServicesMgr( netServicesMgr )
 {
 }
@@ -145,7 +146,7 @@ void HostTest::sendTestLog( const char * msg, ... )
 //============================================================================
 void HostTest::doHostUrlTest( void )
 {
-	if( m_EngineSettings.getIsThisNodeAnNetHost() )
+	if( m_Engine.getHasHostService( eHostServiceNetworkHost ) )
 	{
 		sendTestStatus( eHostTestStatusHostOk,
 			":Skipped Host Test Because Is Host\n" );

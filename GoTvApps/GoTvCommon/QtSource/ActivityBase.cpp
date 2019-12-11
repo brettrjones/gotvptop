@@ -329,7 +329,7 @@ void ActivityBase::slotStatusMsg( QString strMsg )
 //============================================================================
 void ActivityBase::slotShowShouldExitMsgBox( QString exitReason )
 {
-	QMessageBox::information( this, "Session End Message", exitReason, QMessageBox::Ok );
+	QMessageBox::information( this, QObject::tr("Session End Message"), exitReason, QMessageBox::Ok );
 	accept();
 }
 

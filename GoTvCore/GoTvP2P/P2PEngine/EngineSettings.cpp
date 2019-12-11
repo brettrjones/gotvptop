@@ -207,13 +207,13 @@ void EngineSettings::setNetHostWebsiteUrl( std::string& strWebsiteUrl )
 }
 
 //============================================================================
-void EngineSettings::setIsThisNodeAnNetHost( bool isHost )
+void EngineSettings::setIsThisNodeAnNetHostOld( bool isHost )
 {
 	setIniValue( MY_SETTINGS_KEY, "IsNodeHost", isHost );
 }
 
 //============================================================================
-bool EngineSettings::getIsThisNodeAnNetHost( void )
+bool EngineSettings::getIsThisNodeAnNetHostOld( void )
 {
 	bool isHost = false;
 	getIniValue( MY_SETTINGS_KEY, "IsNodeHost", isHost, false );

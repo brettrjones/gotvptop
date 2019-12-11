@@ -688,16 +688,15 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         }
         break;
 
-    case ePluginTypeServiceConnectTest:
-        strPluginDesc = QObject::tr( "Connection Test Service" ).toUtf8().constData();
-        break;
-
-    case ePluginTypeClientConnectTest:
-        strPluginDesc = QObject::tr( "Connection Test Client" ).toUtf8().constData();
-        break;
-
-    case ePluginTypeFileXfer:
-        strPluginDesc = QObject::tr( "Person To Person File Transfer" ).toUtf8().constData();
+    case ePluginTypeChatRoom:
+        if( rmtInitiated )
+        {
+            strPluginDesc = QObject::tr( "Shared Chat Room" ).toUtf8().constData();
+        }
+        else
+        {
+            strPluginDesc = QObject::tr( "Chat Room Service" ).toUtf8().constData();
+        }
         break;
 
     case ePluginTypeFileServer:
@@ -709,6 +708,18 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         {
             strPluginDesc = QObject::tr( "Shared Files Service" ).toUtf8().constData();
         }
+        break;
+
+    case ePluginTypeFileXfer:
+        strPluginDesc = QObject::tr( "Person To Person File Transfer" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeServiceConnectTest:
+        strPluginDesc = QObject::tr( "Connection Test Service" ).toUtf8().constData();
+        break;
+
+    case ePluginTypeClientConnectTest:
+        strPluginDesc = QObject::tr( "Connection Test Client" ).toUtf8().constData();
         break;
 
     case ePluginTypeHostGroup:
@@ -733,13 +744,14 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         }
         break;
 
+    case ePluginTypeHostNetwork:
+        strPluginDesc = QObject::tr( "Host NoLimitConnect Network Service" ).toUtf8().constData();
+        break;
+
     case ePluginTypeMessenger:
         strPluginDesc = QObject::tr( "Messanger Service" ).toUtf8().constData();
         break;
 
-    case ePluginTypeHostNetwork:
-        strPluginDesc = QObject::tr( "Host NoLimitConnect Network Service" ).toUtf8().constData();
-        break;
 
     case ePluginTypeRelay:
         strPluginDesc = QObject::tr( "Relay Service" ).toUtf8().constData();

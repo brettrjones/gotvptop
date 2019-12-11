@@ -23,11 +23,9 @@
 AppletServiceStoryboard::AppletServiceStoryboard( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_SHARE_STORYBOARD, app, parent )
 {
-	setAppletType( eAppletServiceStoryboard );
-	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
+    setupServiceBaseApplet( eAppletServiceStoryboard, ePluginTypeStoryboard );
 
-	m_MyApp.activityStateChange( this, true );
+    m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================

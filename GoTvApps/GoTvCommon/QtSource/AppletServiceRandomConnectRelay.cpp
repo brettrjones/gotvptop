@@ -23,11 +23,9 @@
 AppletServiceRandomConnectRelay::AppletServiceRandomConnectRelay( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_RANDOM_PERSON_RELAY, app, parent )
 {
-	setAppletType( eAppletServiceRandomConnectRelay );
-	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
+    setupServiceBaseApplet( eAppletServiceRandomConnectRelay, ePluginTypeRandomConnectRelay );
 
-	m_MyApp.activityStateChange( this, true );
+    m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================

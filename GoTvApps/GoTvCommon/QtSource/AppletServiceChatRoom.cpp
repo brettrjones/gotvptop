@@ -23,12 +23,9 @@
 AppletServiceChatRoom::AppletServiceChatRoom( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_CHAT_ROOM, app, parent )
 {
-	setAppletType( eAppletServiceChatRoom );
-    ui.setupUi( this );
-    setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
+    setupServiceBaseApplet( eAppletServiceChatRoom, ePluginTypeChatRoom );
 
-	m_MyApp.activityStateChange( this, true );
+    m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================

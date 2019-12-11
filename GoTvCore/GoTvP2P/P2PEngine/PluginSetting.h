@@ -119,6 +119,8 @@ public:
     std::string&                getDescription( void )                              { return m_PluginDesc; }
     void                        setPluginUrl( std::string  url )                    { m_PluginUrl = url; }
     std::string&                getPluginUrl( void )                                { return m_PluginUrl; }
+    void                        setKeyWords( std::string keyWords )                 { m_KeyWords = keyWords; }
+    std::string&                getKeyWords( void )                                 { return m_KeyWords; }
     void                        setSecondaryTitle( std::string title )              { m_SecondaryPluginTitle = title; }
     std::string&                getSecondaryTitle( void )                           { return m_SecondaryPluginTitle; }
     void                        setSecondaryDescription( std::string desc )         { m_SecondaryPluginDesc = desc; }
@@ -136,6 +138,7 @@ protected:
     std::string                 m_PluginTitle;
     std::string                 m_PluginUrl;
     std::string                 m_PluginDesc;
+    std::string                 m_KeyWords;
     std::string                 m_SecondaryPluginTitle;
     std::string                 m_SecondaryPluginDesc;
     std::string                 m_SecondaryUrl;

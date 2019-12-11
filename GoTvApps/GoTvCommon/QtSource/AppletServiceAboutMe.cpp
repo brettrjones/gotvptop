@@ -21,13 +21,11 @@
 
 //============================================================================
 AppletServiceAboutMe::AppletServiceAboutMe( AppCommon& app, QWidget * parent )
-: AppletServiceBase( OBJNAME_APPLET_SERVICE_SHARE_WEB_CAM, app, parent )
+: AppletServiceBase( OBJNAME_APPLET_SERVICE_ABOUT_ME, app, parent )
 {
-    setAppletType( eAppletServiceAboutMe );
-    ui.setupUi( this );
-    setTitleBarText( DescribeApplet( m_EAppletType ) );
+    setupServiceBaseApplet( eAppletServiceAboutMe, ePluginTypeAboutMePage );
 
-	m_MyApp.activityStateChange( this, true );
+    m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================

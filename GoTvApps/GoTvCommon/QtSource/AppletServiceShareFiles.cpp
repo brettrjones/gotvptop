@@ -23,10 +23,9 @@
 AppletServiceShareFiles::AppletServiceShareFiles( AppCommon& app, QWidget * parent )
 : AppletServiceBase( OBJNAME_APPLET_SERVICE_SHARE_FILES, app, parent )
 {
-	setAppletType( eAppletServiceShareFiles );
-	setTitleBarText( DescribeApplet( m_EAppletType ) );
+    setupServiceBaseApplet( eAppletServiceShareFiles, ePluginTypeFileServer );
 
-	m_MyApp.activityStateChange( this, true );
+    m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================

@@ -45,7 +45,7 @@ NetActionRandomConnect::~NetActionRandomConnect()
 //============================================================================
 void NetActionRandomConnect::doAction( void )
 {
-	if( m_Engine.getEngineSettings().getIsThisNodeAnNetHost() )
+	if( m_Engine.getHasHostService( eHostServiceNetworkHost ) )
 	{
 		// we are the anchor
 		// put ourself directly into the database

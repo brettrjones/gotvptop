@@ -685,7 +685,7 @@ void NetworkStateMachine::onOncePerHour( void )
 	//	}
 	//}
 
-	if( isP2POnline() && ( false == m_EngineSettings.getIsThisNodeAnNetHost() ) )
+	if( isP2POnline() && ( false == m_Engine.getHasHostService( eHostServiceNetworkHost ) ) )
 	{
 		m_NetServicesMgr.announceToHost( getHostIp(), getHostPort() );
 	}

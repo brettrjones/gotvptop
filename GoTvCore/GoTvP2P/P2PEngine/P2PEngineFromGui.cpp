@@ -824,6 +824,25 @@ bool P2PEngine::isP2POnline( void )
 }
 
 //============================================================================
+bool P2PEngine::getHasHostService( EHostServiceType hostService )
+{
+    switch( hostService )
+    {
+    case eHostServiceNetworkHost: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    case eHostServiceGroupListing: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    case eHostServiceGroup: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    case eHostServiceRelay: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    case eHostServiceRandomConnect: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    case eHostServiceRandomConnectRelay: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    case eHostServiceConnectTest: return m_PktAnn.getPluginPermission( ePluginTypeHostNetwork ) != eFriendStateIgnore;
+    default:
+        break;
+    }
+
+    return false;
+}
+
+//============================================================================
 void P2PEngine::fromGuiMuteMicrophone(	bool muteMic )
 {
 	m_MediaProcessor.muteMicrophone( muteMic );
