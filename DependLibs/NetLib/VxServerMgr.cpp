@@ -34,7 +34,7 @@ int VxServerMgr::m_iAcceptMgrCnt = 0;				// number of accept managers that have 
 //============================================================================
 namespace
 {
-	int32_t VxServerMgrVxThreadFunc(  void * pvContext )
+    void * VxServerMgrVxThreadFunc(  void * pvContext )
 	{
 		VxThread * poVxThread = (VxThread *)pvContext;
 		poVxThread->setIsThreadRunning( true );
@@ -51,7 +51,7 @@ namespace
 
 		//! VxThread calls this just before exit
 		poVxThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 }
 

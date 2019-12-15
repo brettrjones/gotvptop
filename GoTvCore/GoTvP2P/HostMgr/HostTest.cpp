@@ -31,7 +31,7 @@
 namespace
 {
 	//============================================================================
-	uint32_t HostUrlTestThreadFunc( void * pvContext )
+    void * HostUrlTestThreadFunc( void * pvContext )
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
@@ -42,7 +42,7 @@ namespace
 		}
 
 		poThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 
 	//============================================================================

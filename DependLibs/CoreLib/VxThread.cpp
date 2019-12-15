@@ -66,7 +66,7 @@ public:
     }
 
     //============================================================================
-    void                            dumpThreadInfo( void )
+    void                        dumpThreadInfo( void )
     {
         LogMsg( LOG_INFO, "ThreadsInfo id %d thread name %s\n", m_ThreadId, m_ThreadName.c_str() );
     }
@@ -74,16 +74,16 @@ public:
 protected:
 
 private:
-    unsigned int				    m_ThreadId;
-    std::string                     m_ThreadName;   
+    unsigned int				m_ThreadId;
+    std::string                 m_ThreadName;
 };
 
 namespace
 {
-	int							    g_ThreadCreateCnt	= 0;
-	VxMutex						    g_DebugThreadsMutex;
-	std::vector<VxThread *>		    g_RuningThreadList;
-    std::vector<VxThreadInfo>		g_RuningThreadInfo;
+    int							g_ThreadCreateCnt	= 0;
+    VxMutex						g_DebugThreadsMutex;
+    std::vector<VxThread *>		g_RuningThreadList;
+    std::vector<VxThreadInfo>   g_RuningThreadInfo;
 }
 
 //============================================================================

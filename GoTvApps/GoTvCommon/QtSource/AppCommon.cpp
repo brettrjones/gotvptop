@@ -257,7 +257,7 @@ void AppCommon::loadWithoutThread( void )
     LogMsg( LOG_DEBUG, "Setup Style %d ms alive ms %d", styleMs - iconsMs, styleMs );
 
     m_HomePage.initializeHomePage();
-    connect( &m_HomePage, SIGNAL( signalMainWindowResized( int ) ), this, SLOT( slotMainWindowResized( int ) ) );
+    connect( &m_HomePage, SIGNAL( signalMainWindowResized() ), this, SLOT( slotMainWindowResized() ) );
     m_HomePage.show();
 
     uint32_t homePageMs = GetApplicationAliveMs();

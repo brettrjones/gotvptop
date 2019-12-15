@@ -33,7 +33,7 @@ namespace
 	const char * SHARED_FILES_DB_NAME = "SharedFilesDb.db3";
 
 	//============================================================================
-	static uint32_t UpdateSharedFilesThreadFunc( void * pvContext )
+    static void * UpdateSharedFilesThreadFunc( void * pvContext )
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
@@ -42,11 +42,11 @@ namespace
 		poMgr->updateFilesListFromDb( poThread );
 		LogMsg( LOG_ERROR, "SharedFilesMgr UpdateSharedFiles thread exit\n" );
 		poThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 
 	//============================================================================
-	static uint32_t SharedFilesGenHashIdsThreadFunc( void * pvContext )
+    static void * SharedFilesGenHashIdsThreadFunc( void * pvContext )
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
@@ -55,7 +55,7 @@ namespace
 		poMgr->generateHashIds( poThread );
 		LogMsg( LOG_ERROR, "SharedFilesMgr GenHashIds thread exit\n" );
 		poThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 }
 

@@ -173,7 +173,7 @@ void RcWebServer::startWebSktThreads( RcWebSkt * poWebSkt )
 
 //============================================================================
 //! thread function to receive data from socket
-uint32_t RcSktWebReceiveThreadFunc(  void * pvContext )
+void * RcSktWebReceiveThreadFunc(  void * pvContext )
 {
 	VxThread * poThread = (VxThread *)pvContext;
 	poThread->setIsThreadRunning( true );
@@ -184,7 +184,7 @@ uint32_t RcSktWebReceiveThreadFunc(  void * pvContext )
 		// something has already happened to the connection
 		//! Thread calls this just before exit
 		poThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 
     if( IsLogEnabled( eLogModuleSkt ) )
@@ -196,7 +196,7 @@ uint32_t RcSktWebReceiveThreadFunc(  void * pvContext )
 		sktBase->m_bClosingFromRxThread = true;
 		sktBase->closeSkt(8888);
 		poThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 
 	char as8Buf[ 0x8000 ];
@@ -327,7 +327,7 @@ uint32_t RcSktWebReceiveThreadFunc(  void * pvContext )
 
 	//! Thread calls this just before exit
 	poThread->threadAboutToExit();
-	return 0;
+    return nullptr;
 }
 
 //============================================================================

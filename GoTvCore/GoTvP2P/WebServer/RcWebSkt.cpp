@@ -190,7 +190,7 @@ password: <INPUT TYPE=PASSWORD NAME=\"tc_pwd\">\
 
 //============================================================================
 //! thread function to transmit data socket
-uint32_t RcSktWebTransmitThreadFunc(  void * pvContext )
+void * RcSktWebTransmitThreadFunc(  void * pvContext )
 {
 	VxThread * poThread = (VxThread *)pvContext;
 	poThread->setIsThreadRunning( true );
@@ -315,5 +315,5 @@ uint32_t RcSktWebTransmitThreadFunc(  void * pvContext )
 
 	//! Thread calls this just before exit
 	poThread->threadAboutToExit();
-	return 0;
+    return nullptr;
 }

@@ -25,14 +25,14 @@
 namespace
 {
 	//============================================================================
-	static uint32_t FileShredderThreadFunc( void * pvContext )
+    static void * FileShredderThreadFunc( void * pvContext )
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		VxFileShredder * shredder = (VxFileShredder *)poThread->getThreadUserParam();
 		shredder->shredFiles();
 		poThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 
 	VxFileShredder * g_FileShredder = 0;

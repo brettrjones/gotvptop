@@ -35,25 +35,25 @@ namespace
 	const char * FILE_LIBRARY_DB_NAME = "FileLibraryDb.db3";
 
 	//============================================================================
-	static uint32_t UpdateFileLibraryThreadFunc( void * pvContext )
+    static void * UpdateFileLibraryThreadFunc( void * pvContext )
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		FileLibraryMgr * poMgr = (FileLibraryMgr *)poThread->getThreadUserParam();
 		poMgr->updateFilesListFromDb( poThread );
 		poThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 
 	//============================================================================
-	static uint32_t GenHashIdsThreadFunc( void * pvContext )
+    static void * GenHashIdsThreadFunc( void * pvContext )
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		FileLibraryMgr * poMgr = (FileLibraryMgr *)poThread->getThreadUserParam();
 		poMgr->generateHashIds( poThread );
 		poThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 }
 

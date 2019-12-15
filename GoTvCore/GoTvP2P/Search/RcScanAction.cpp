@@ -36,7 +36,7 @@ namespace
 
 //============================================================================
 //! thread function to load all nodes in big list
-UINT SearchActionThreadFunction( void * pvParam )
+void * SearchActionThreadFunction( void * pvParam )
 {
 	VxThread * poThread = (VxThread *)pvParam;
 	poThread->setIsThreadRunning( true );
@@ -45,7 +45,7 @@ UINT SearchActionThreadFunction( void * pvParam )
 	poScan->doSearchResultActions();
 
 	poThread->threadAboutToExit();
-	return 0;
+    return nullptr;
 }
 
 //============================================================================

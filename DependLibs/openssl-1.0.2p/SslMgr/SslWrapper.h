@@ -62,7 +62,7 @@ class SslWrapper
 {
 public:
 	SslWrapper( ISslCallback& sslCallback, VxFileUtil& fileUtil );
-	virtual ~SslWrapper();
+    virtual ~SslWrapper() = default;
 
 	ISslCallback&				getSslCallback( void )								{ return m_SslCallback; }
 	SslMgrCmdMgr&				getCmdMgr( void )									{ return m_SslMgrCmdMgr; }
@@ -101,23 +101,23 @@ protected:
 
 	ISslCallback&				m_SslCallback;
 	VxFileUtil&					m_FileUtil;
-	bool						m_bSslInitialized;
+    bool						m_bSslInitialized{false};
 
 	std::string					m_strCertPemFileName;
 	std::string					m_strKeyPemFileName;
 	std::string					m_strSslMgrServerIp;
-	uint16_t							m_u16SslMgrServerPort;
+    uint16_t					m_u16SslMgrServerPort{0};
 	VxThread					m_SslThread;
     
     VxThread                    m_SslMonitorThread;
 
-	SSL *						m_Ssl; 
-	SSL_CTX *					m_SslCtx;  
+    SSL *						m_Ssl{nullptr};
+    SSL_CTX *					m_SslCtx{nullptr};
 	int							m_ConnectRetryIntervalMs;
-	bool						m_bIsConnectedToServer;
-	int							m_SslSocket;
+    bool						m_bIsConnectedToServer{false};
+    int							m_SslSocket{0};
     
-    bool                        m_NegotiationSSL;
+    bool                        m_NegotiationSSL{false};
     
 	SslMgrCmdMgr				m_SslMgrCmdMgr;
     

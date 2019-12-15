@@ -41,7 +41,7 @@ namespace
 	const unsigned int		TIMEOUT_MILLISEC_STAY_CONNECTED					= 2000; 
 
 	//============================================================================
-	uint32_t NetConnectorThreadFunction( void * pvParam )
+    void * NetConnectorThreadFunction( void * pvParam )
 	{
 		VxThread * poThread = (VxThread *)pvParam;
 		poThread->setIsThreadRunning( true );
@@ -50,11 +50,11 @@ namespace
 		poMgr->doNetConnectionsThread();
 
 		poThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 
 	//============================================================================
-	uint32_t StayConnectedThreadFunction( void * pvParam )
+    void * StayConnectedThreadFunction( void * pvParam )
 	{
 		VxThread * poThread = (VxThread *)pvParam;
 		poThread->setIsThreadRunning( true );
@@ -63,7 +63,7 @@ namespace
 		poMgr->doStayConnectedThread();
 
 		poThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 
 } // namespace
@@ -867,7 +867,6 @@ void NetConnector::doStayConnectedThread( void )
 	int iConnectToIdx							= 0;
 	VxMutex * poListMutex						= &m_BigListMgr.m_FriendListMutex;
 	std::vector< BigListInfo * >& friendList	= m_BigListMgr.m_FriendList;
-	bool bConnectAttempted;
 	int iSize;
 	BigListInfo * poInfo;
 
@@ -886,7 +885,6 @@ void NetConnector::doStayConnectedThread( void )
 		if( 0 != friendList.size() )
 		{
 			//LogMsg( LOG_ERROR, "doStayConnected attempt lock\n" );
-			bConnectAttempted = false;
 			poListMutex->lock();
 			//LogMsg( LOG_ERROR, "doStayConnected attempt lock success\n" );
 			iSize = friendList.size();
@@ -903,7 +901,6 @@ void NetConnector::doStayConnectedThread( void )
 				{
 					if( MIN_TIME_BETWEEN_CONNECT_ATTEMPTS_SEC < ( GetGmtTimeMs() - poInfo->getTimeLastConnectAttemptMs() ) )
 					{
-						bConnectAttempted = true;
 						bool isNewConnection = false;
 						if( m_Engine.connectToContact( poInfo->getConnectInfo(), &sktBase, isNewConnection, eConnectReasonStayConnected ) )
 						{

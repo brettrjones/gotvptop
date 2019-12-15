@@ -310,8 +310,8 @@ void AudioIoMgr::initAudioIoSystem()
         m_AudioOutIo.initAudioOut( m_AudioOutFormat );
 
         connect( m_AudioOutIo.getAudioOut(), SIGNAL( stateChanged( QAudio::State ) ), this, SLOT( speakerStateChanged( QAudio::State ) ) );
-        //connect( m_AudioOutIo.getAudioOut(), SIGNAL( notify() ), SLOT( notifyNeedData() ) );
-        connect( this, SIGNAL( signalNeedMoreAudioData( int ) ), SLOT( slotNeedMoreAudioData( int ) ) );
+        //connect( m_AudioOutIo.getAudioOut(), SIGNAL( notify() ), this, SLOT( notifyNeedData() ) );
+        //connect( this, SIGNAL( signalNeedMoreAudioData( int ) ), this, SLOT( slotNeedMoreAudioData( int ) ) );
         m_AudioOutIo.startAudio();
 
         if( isMicrophoneAvailable() )
@@ -319,8 +319,8 @@ void AudioIoMgr::initAudioIoSystem()
             m_AudioInIo.initAudioIn( m_AudioInFormat );
 
             connect( m_AudioInIo.getAudioIn(), SIGNAL( stateChanged( QAudio::State ) ), this, SLOT( microphoneStateChanged( QAudio::State ) ) );
-            //connect( m_AudioInIo.getAudioOut(), SIGNAL( notify() ), SLOT( notifyNeedData() ) );
-            connect( this, SIGNAL( signalNeedMoreAudioData( int ) ), SLOT( slotNeedMoreAudioData( int ) ) );
+            //connect( m_AudioInIo.getAudioOut(), SIGNAL( notify() ), this, SLOT( notifyNeedData() ) );
+            //connect( this, SIGNAL( signalNeedMoreAudioData( int ) ), this, SLOT( slotNeedMoreAudioData( int ) ) );
             m_AudioInIo.startAudio();
         }
 

@@ -44,7 +44,7 @@ namespace
 }
 
 //============================================================================
-static int32_t VxSktBaseReceiveVxThreadFunc( void * pvContext );
+static void * VxSktBaseReceiveVxThreadFunc( void * pvContext );
 int VxSktBase::m_TotalCreatedSktCnt = 0;
 int VxSktBase::m_CurrentSktCnt = 0;
 
@@ -68,7 +68,7 @@ VxSktBase::VxSktBase()
 , m_CryptoMutex()
 , m_bClosingFromRxThread(false) 
 , m_bClosingFromDestructor(false) 
-, m_SktMgr(0)
+, m_SktMgr(nullptr)
 , m_iLastRxLen(0)
 , m_iLastTxLen(0)
 , m_strMulticastGroupIp("")
@@ -78,15 +78,15 @@ VxSktBase::VxSktBase()
 , m_TxCrypto()				// encryption object for transmit
 //, m_u8TxSeqNum;			// sequence number used to twart replay attacks ( do not set )
 , m_RelayEventSemaphore()
-, m_pfnReceive(0)			// receive function must be set by user
+, m_pfnReceive(nullptr)			// receive function must be set by user
 , m_iConnectTimeout(0)	
 , m_bIsConnected(false )	
 , m_eSktType( eSktTypeNone )            		
 , m_eSktCallbackReason( eSktCallbackReasonUnknown )	// why callback is being performed
-, m_pfnTransmit(0)			// optional function for transmit statistics
-, m_pvRxCallbackUserData(0)	// user defined rx callback data
-, m_pvTxCallbackUserData(0)	// user defined tx callback data
-, m_pvUserExtraData(0)		// user defined extra data
+, m_pfnTransmit(nullptr)			// optional function for transmit statistics
+, m_pvRxCallbackUserData(nullptr)	// user defined rx callback data
+, m_pvTxCallbackUserData(nullptr)	// user defined tx callback data
+, m_pvUserExtraData(nullptr)		// user defined extra data
 , m_bIsWebSkt(false)
 , m_bIsPluginSpecificSkt(false)
 , m_u8PluginSpecificNum(0)
@@ -968,7 +968,7 @@ void VxSktBase::setLastSktError( RCODE rc )
 }
 
 //============================================================================
-int32_t VxSktBaseReceiveVxThreadFunc( void * pvContext )
+void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
 {
 	VxThread * poVxThread = (VxThread *)pvContext;
 	poVxThread->setIsThreadRunning( true );
@@ -999,7 +999,7 @@ int32_t VxSktBaseReceiveVxThreadFunc( void * pvContext )
 		// something has already happened to the connection
 		//! VxThread calls this just before exit
 		poVxThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 
 	sktBase->setLastSktError( 0 );
@@ -1259,7 +1259,7 @@ closed_skt_exit:
 
 
 	poVxThread->threadAboutToExit();
-	return 0;
+    return nullptr;
 }
 
 //============================================================================

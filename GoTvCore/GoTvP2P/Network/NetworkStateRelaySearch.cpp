@@ -36,7 +36,7 @@ namespace
 {
 	const int	RELAY_SERVICE_REQUEST_TIMEOUT_MS			= 6000;
 	//============================================================================
-	uint32_t NetworkStateRelaySearchThreadFunction( void * pvParam )
+    void * NetworkStateRelaySearchThreadFunction( void * pvParam )
 	{
         static std::atomic<int> threadCnt(0);
         threadCnt++;
@@ -52,7 +52,7 @@ namespace
 		poThread->threadAboutToExit();
         threadCnt--;
         //LogMsg( LOG_INFO, "NetworkStateRelaySearchThreadFunction Thread exiting %d\n", threadCnt );
-		return 0;
+        return nullptr;
 	}
 } // namespace
 

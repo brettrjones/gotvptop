@@ -93,7 +93,7 @@ public:
 	virtual ~RcWebSkt();
 
 	void						setWebServerPlugin( PluginBaseWebServer * poPlugin );
-	PluginBaseWebServer *			getWebServerPlugin( void );
+    PluginBaseWebServer *		getWebServerPlugin( void );
 
 	void						setIdentity( VxNetIdent * netIdent )		{ m_Ident = netIdent; }
 	VxNetIdent *				getIdentity( void )							{ return m_Ident; }
@@ -110,16 +110,16 @@ public:
 	VxNetIdent *				m_Ident;
 
 	FILE *						m_File;
-	uint64_t							m_u64FileLen;			// total file len
-	uint64_t							m_u64LenSent;			// how much of file has been sent
+    uint64_t					m_u64FileLen;			// total file len
+    uint64_t					m_u64LenSent;			// how much of file has been sent
 	std::string					m_strWebFileName;
 	std::string					m_strRealFileName;
 
 	std::vector<WbQueEntry>		m_aoQuedFiles;	// files and prompts qued to be sent
 
 private:
-	PluginBaseWebServer *			m_WebServerPlugin;
+    PluginBaseWebServer *		m_WebServerPlugin;
 };
 
-uint32_t RcSktWebReceiveThreadFunc(  void * pvContext );
-uint32_t RcSktWebTransmitThreadFunc(  void * pvContext );
+void * RcSktWebReceiveThreadFunc(  void * pvContext );
+void * RcSktWebTransmitThreadFunc(  void * pvContext );

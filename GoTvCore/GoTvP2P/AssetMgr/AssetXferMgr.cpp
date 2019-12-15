@@ -50,14 +50,14 @@ namespace
 	const char * ASSET_XFER_DB_NAME = "AssetXferDb.db3";
 
 	//============================================================================
-	static uint32_t AssetXferMgrThreadFunc( void * pvContext )
+    static void * AssetXferMgrThreadFunc( void * pvContext )
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		AssetXferMgr * poMgr = (AssetXferMgr *)poThread->getThreadUserParam();
 		poMgr->assetXferThreadWork( poThread );
 		poThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 }
 

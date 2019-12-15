@@ -226,7 +226,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginTruthOrDare.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginVideoPhone.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginVoicePhone.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginWebServer.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/RcWebProxy.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/Relay.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/RelayClientSession.h \

@@ -37,14 +37,14 @@ namespace
 	const char * ASSET_INFO_DB_NAME = "AssetInfoDb.db3";
 
 	//============================================================================
-	static uint32_t AssetMgrGenHashIdsThreadFunc( void * pvContext )
+    static void * AssetMgrGenHashIdsThreadFunc( void * pvContext )
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		AssetMgr * poMgr = (AssetMgr *)poThread->getThreadUserParam();
 		poMgr->assetInfoMgrStartup( poThread );
 		poThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 }
 

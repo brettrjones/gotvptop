@@ -105,16 +105,17 @@ extern LIBINTL_DLL_EXPORTED int libintl_version;
 /* The user can define _INTL_REDIRECT_INLINE or _INTL_REDIRECT_MACROS.
    If he doesn't, we choose the method.  A third possible method is
    _INTL_REDIRECT_ASM, supported only by GCC.  */
+//BRJ confuses some compilers so just force compiler independence
 #if !(defined _INTL_REDIRECT_INLINE || defined _INTL_REDIRECT_MACROS)
-# if defined __GNUC__ && __GNUC__ >= 2 && !(defined __APPLE_CC__ && __APPLE_CC__ > 1) && !defined __MINGW32__ && !(__GNUC__ == 2 && defined _AIX) && (defined __STDC__ || defined __cplusplus)
-#  define _INTL_REDIRECT_ASM
-# else
+//# if defined __GNUC__ && __GNUC__ >= 2 && !(defined __APPLE_CC__ && __APPLE_CC__ > 1) && !defined __MINGW32__ && !(__GNUC__ == 2 && defined _AIX) && (defined __STDC__ || defined __cplusplus)
+//#  define _INTL_REDIRECT_ASM
+//# else
 #  ifdef __cplusplus
 #   define _INTL_REDIRECT_INLINE
 #  else
 #   define _INTL_REDIRECT_MACROS
 #  endif
-# endif
+//# endif
 #endif
 /* Auxiliary macros.  */
 #ifdef _INTL_REDIRECT_ASM

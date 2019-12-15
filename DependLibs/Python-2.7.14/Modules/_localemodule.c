@@ -524,6 +524,21 @@ static struct langinfo_constant{
     {0, 0}
 };
 
+#if !defined( TARGET_OS_WINDOWS)
+#ifdef libintl_textdomain
+# undef libintl_textdomain
+#endif // libintl_textdomain
+#ifdef libintl_gettext
+# undef libintl_gettext
+#endif // libintl_gettext
+
+# include <libintl.h>
+#define libintl_textdomain textdomain
+#define libintl_gettext gettext
+
+#endif // !defined( TARGET_OS_WINDOWS)
+
+
 PyDoc_STRVAR(nl_langinfo__doc__,
 "nl_langinfo(key) -> string\n"
 "Return the value for the locale information associated with key.");
@@ -591,9 +606,9 @@ PyIntl_dcgettext(PyObject *self, PyObject *args)
     return PyString_FromString(dcgettext(domain,msgid,category));
 }
 
-#if defined( TARGET_OS_LINUX )
-# undef libintl_textdomain
-#endif // defined( TARGET_OS_LINUX )
+//#if defined( TARGET_OS_LINUX )
+//# undef libintl_textdomain
+//#endif // defined( TARGET_OS_LINUX )
 
 PyDoc_STRVAR(textdomain__doc__,
 "textdomain(domain) -> string\n"

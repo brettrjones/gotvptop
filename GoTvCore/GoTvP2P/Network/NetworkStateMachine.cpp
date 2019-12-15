@@ -51,7 +51,7 @@
 namespace
 {
 	//============================================================================
-	uint32_t NetworkStateMachineThreadFunc( void * pvContext )
+    void * NetworkStateMachineThreadFunc( void * pvContext )
 	{
         static std::atomic_int threadCnt(0);
 #ifdef DEBUG_PTOP_NETWORK_STATE
@@ -70,7 +70,7 @@ namespace
 #ifdef DEBUG_PTOP_NETWORK_STATE
         LogMsg( LOG_INFO, "NetworkStateMachineThreadFunc Thread exiting %d\n", threadCnt.load() );
 #endif // DEBUG_PTOP_NETWORK_STATE
-        return 0;
+        return nullptr;
 	}
 }
 

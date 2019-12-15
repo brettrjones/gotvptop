@@ -202,9 +202,6 @@ PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
 
     LIBS +=  $${STATIC_LIB_PREFIX}pktlib$${STATIC_LIB_SUFFIX}
 
-
-
-
 #    LIBS +=  $${STATIC_LIB_PREFIX}ssl$${STATIC_LIB_SUFFIX} // shared lib
     LIBS +=  $${STATIC_LIB_PREFIX}fribidi$${STATIC_LIB_SUFFIX}
 #    LIBS +=  $${STATIC_LIB_PREFIX}iconv$${STATIC_LIB_SUFFIX}
@@ -214,10 +211,33 @@ PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}xml2$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}compress$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}corelib$${STATIC_LIB_SUFFIX}
-    LIBS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
-    LIBS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}curl$${STATIC_LIB_SUFFIX}
+
+unix:!android:{
+    #give linux the path of where to load our shared libraries from for debugger
+    LIBS += -L$${DEST_SHARED_LIBS_DIR}
+}
+    #shared libs
+#linux seems to be very particular and the absolute path does not work
+     #LIBS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
+     #LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
+CONFIG(debug, debug|release){
+    LIBS +=  -lpythoncore_d
+    LIBS +=  -lssl_d
+}
+
+CONFIG(release, debug|release){
+    LIBS +=  -lpythoncore
+    LIBS +=  -lssl
+}
+
+    LIBS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
+    LIBS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
+
+unix:!android:{
+    LIBS +=  -lpthread -ldl -lGLU -lGL -lm -luuid -lrt
+}
 
 !android:{
 #copy shared libraries to out directory
@@ -236,29 +256,6 @@ PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
  QMAKE_EXTRA_TARGETS += first copydata
 }
 
-unix:!android:{
-    #give linux the path of where to load our shared libraries from for debugger
-    LIBS += -L$${DEST_SHARED_LIBS_DIR}
-}
-
-unix:!android:{
-    #shared libs
-#linux seems to be very particular and the absolute path does not work
-     #LIBS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
-     #LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
-CONFIG(debug, debug|release){
-    LIBS +=  -lpythoncore_d
-    LIBS +=  -lssl_d
-}
-
-CONFIG(release, debug|release){
-    LIBS +=  -lpythoncore
-    LIBS +=  -lss
-}
-
-
-    LIBS +=  -lpthread -ldl -lGLU -lGL -lm -luuid -lrt
-}
 
 win32:{
     #shared libs

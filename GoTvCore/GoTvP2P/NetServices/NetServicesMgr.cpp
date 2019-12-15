@@ -47,7 +47,7 @@
 namespace
 {
 	//============================================================================
-	int32_t NetServicesMgrThreadFunc( void * pvContext )
+    void * NetServicesMgrThreadFunc( void * pvContext )
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
@@ -57,7 +57,7 @@ namespace
 		poMgr->runNetActions();
 
 		poThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 }
 
@@ -71,8 +71,6 @@ NetServicesMgr::NetServicesMgr( P2PEngine& engine )
 , m_NetServiceHost( engine, *this, m_NetServiceUtils )
 , m_NetActionIdle( *this )
 , m_CurNetAction( &m_NetActionIdle )
-, m_pfuncPortOpenCallbackHandler(0)
-, m_PortOpenCallbackUserData(0)
 {
 }
 

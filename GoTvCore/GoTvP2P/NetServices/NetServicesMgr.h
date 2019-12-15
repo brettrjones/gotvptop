@@ -124,8 +124,8 @@ protected:
 	VxSemaphore					m_NetActionSemaphore;
 
 	VxSktConnectSimple			m_SktToNetServices;
-	MY_PORT_OPEN_CALLBACK_FUNCTION	m_pfuncPortOpenCallbackHandler;
-	void *						m_PortOpenCallbackUserData;
+    MY_PORT_OPEN_CALLBACK_FUNCTION	m_pfuncPortOpenCallbackHandler{nullptr};
+    void *						m_PortOpenCallbackUserData{nullptr};
 
 	VxSktConnectSimple			m_SktToHost;
 

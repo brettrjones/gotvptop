@@ -16,7 +16,7 @@
 
 #ifdef USE_WEB_FILESHARE
 //! thread function to build websit
-static uint32_t BuildWebSiteThreadFunc(  void * pvContext )
+static void * BuildWebSiteThreadFunc( void * pvContext )
 {
 	VxThread * poThread = (VxThread *)pvContext;
 	poThread->setIsThreadRunning( true );
@@ -39,7 +39,7 @@ static uint32_t BuildWebSiteThreadFunc(  void * pvContext )
 
 	//! Thread calls this just before exit
 	poThread->threadAboutToExit();
-	return 0;
+    return nullprt;
 }
 
 //============================================================================

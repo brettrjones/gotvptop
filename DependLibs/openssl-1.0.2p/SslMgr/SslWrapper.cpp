@@ -59,7 +59,7 @@ namespace
 	const int	CONNECT_RETRY_INTERVAL_MS		= 5000;
 
 
-	int32_t SslWrapperThreadFunc( void * pvContext )
+    void * SslWrapperThreadFunc( void * pvContext )
 	{
 		VxThread * poVxThread = (VxThread *)pvContext;
 		poVxThread->setIsThreadRunning( true );
@@ -72,38 +72,31 @@ namespace
 
 		//LogMsg( LOG_ERROR, "SslWrapperThreadFunc: About To Exit\n" );
 		poVxThread->threadAboutToExit();
-		return result;
+        return nullptr;
 	}
     
    
-    void SslWrapperMonitorFunc( void * pvContext )
+    void * SslWrapperMonitorFunc( void * pvContext )
 	{
 		VxThread * poVxThread = (VxThread *)pvContext;
 		poVxThread->setIsThreadRunning( true );
 		SslWrapper * sslWrapper = (SslWrapper *)poVxThread->getThreadUserParam();
 		sslWrapper->sslMonitorThreadFunction();
 		poVxThread->threadAboutToExit();
+        return nullptr;
 	}
 }
 
 //============================================================================
 SslWrapper::SslWrapper( ISslCallback& sslCallback, VxFileUtil& fileUtil )
-: m_bSslInitialized( false )
-, m_SslCallback( sslCallback )
+: m_SslCallback( sslCallback )
 , m_FileUtil( fileUtil )
 , m_strCertPemFileName( DEFAULT_CERT_FILE_NAME )
 , m_strKeyPemFileName( DEFAULT_KEY_FILE_NAME )
 , m_strSslMgrServerIp( DEFAULT_SSLMGR_SERVER_IP )
 , m_u16SslMgrServerPort( DEFAULT_SSLMGR_SERVER_PORT )
 , m_ConnectRetryIntervalMs( CONNECT_RETRY_INTERVAL_MS )
-, m_bIsConnectedToServer( false )
-, m_NegotiationSSL(false)
 , m_SslMgrCmdMgr( *this )
-{
-}
-
-//============================================================================
-SslWrapper::~SslWrapper()
 {
 }
 

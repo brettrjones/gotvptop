@@ -60,25 +60,25 @@ namespace
 	const int32_t MAX_PIC_CHUNK_PKTS_REQUIRED			= MAX_TOTAL_PIC_CHUNKS_PAYLOAD / MAX_PIC_CHUNK_LEN + (MAX_TOTAL_PIC_CHUNKS_PAYLOAD % MAX_PIC_CHUNK_LEN) ? 1 : 0;
 
 	//============================================================================
-	static uint32_t AudioProcessThreadFunc( void * pvContext )
+    static void * AudioProcessThreadFunc( void * pvContext )
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		MediaProcessor * processor = (MediaProcessor *)poThread->getThreadUserParam();
 		processor->processAudioIn();
 		poThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 
 	//============================================================================
-	static uint32_t VideoProcessThreadFunc( void * pvContext )
+    static void * VideoProcessThreadFunc( void * pvContext )
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		MediaProcessor * processor = (MediaProcessor *)poThread->getThreadUserParam();
 		processor->processVideoIn();
 		poThread->threadAboutToExit();
-		return 0;
+        return nullptr;
 	}
 };
 

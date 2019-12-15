@@ -410,7 +410,7 @@ error_exit:
 
 //============================================================================
 //! thread function to load all nodes in big list
-UINT BigListLoadThreadFunction( void * pvParam )
+void * BigListLoadThreadFunction( void * pvParam )
 {
 	RCODE rc = 0;
 	VxThread * poThread = (VxThread *)pvParam;
@@ -425,7 +425,7 @@ UINT BigListLoadThreadFunction( void * pvParam )
 
 	GetPtoPEngine().onBigListLoadComplete( rc );
 	poThread->threadAboutToExit();
-	return rc;
+    return nullptr;
 }
 
 //============================================================================
