@@ -36,7 +36,7 @@ namespace
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		HostTest * anchorTest = (HostTest *)poThread->getThreadUserParam();
-		if( false == poThread->isAborted() )
+        if( anchorTest && false == poThread->isAborted() )
 		{
 			anchorTest->doHostUrlTest();
 		}
@@ -51,7 +51,7 @@ namespace
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		HostTest * anchorTest = (HostTest *)poThread->getThreadUserParam();
-		if( false == poThread->isAborted() )
+        if( anchorTest && false == poThread->isAborted() )
 		{
 			anchorTest->doNetServiceUrlTest();
 		}

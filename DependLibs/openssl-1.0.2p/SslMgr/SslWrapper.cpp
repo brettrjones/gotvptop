@@ -81,7 +81,11 @@ namespace
 		VxThread * poVxThread = (VxThread *)pvContext;
 		poVxThread->setIsThreadRunning( true );
 		SslWrapper * sslWrapper = (SslWrapper *)poVxThread->getThreadUserParam();
-		sslWrapper->sslMonitorThreadFunction();
+        if( sslWrapper )
+        {
+            sslWrapper->sslMonitorThreadFunction();
+        }
+
 		poVxThread->threadAboutToExit();
         return nullptr;
 	}

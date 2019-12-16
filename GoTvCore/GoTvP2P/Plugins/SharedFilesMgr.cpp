@@ -39,8 +39,12 @@ namespace
 		poThread->setIsThreadRunning( true );
 		LogMsg( LOG_ERROR, "SharedFilesMgr UpdateSharedFiles thread run\n" );
 		SharedFilesMgr * poMgr = (SharedFilesMgr *)poThread->getThreadUserParam();
-		poMgr->updateFilesListFromDb( poThread );
-		LogMsg( LOG_ERROR, "SharedFilesMgr UpdateSharedFiles thread exit\n" );
+        if( poMgr && false == poThread->isAborted() )
+        {
+            poMgr->updateFilesListFromDb( poThread );
+            LogMsg( LOG_ERROR, "SharedFilesMgr UpdateSharedFiles thread exit\n" );
+        }
+
 		poThread->threadAboutToExit();
         return nullptr;
 	}
@@ -52,8 +56,12 @@ namespace
 		poThread->setIsThreadRunning( true );
 		LogMsg( LOG_ERROR, "SharedFilesMgr GenHashIds thread run\n" );
 		SharedFilesMgr * poMgr = (SharedFilesMgr *)poThread->getThreadUserParam();
-		poMgr->generateHashIds( poThread );
-		LogMsg( LOG_ERROR, "SharedFilesMgr GenHashIds thread exit\n" );
+        if( poMgr && false == poThread->isAborted() )
+        {
+            poMgr->generateHashIds( poThread );
+            LogMsg( LOG_ERROR, "SharedFilesMgr GenHashIds thread exit\n" );
+        }
+
 		poThread->threadAboutToExit();
         return nullptr;
 	}

@@ -40,7 +40,11 @@ namespace
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		FileLibraryMgr * poMgr = (FileLibraryMgr *)poThread->getThreadUserParam();
-		poMgr->updateFilesListFromDb( poThread );
+        if( poMgr && false == poThread->isAborted() )
+        {
+            poMgr->updateFilesListFromDb( poThread );
+        }
+
 		poThread->threadAboutToExit();
         return nullptr;
 	}
@@ -51,7 +55,11 @@ namespace
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		FileLibraryMgr * poMgr = (FileLibraryMgr *)poThread->getThreadUserParam();
-		poMgr->generateHashIds( poThread );
+        if( poMgr && false == poThread->isAborted() )
+        {
+            poMgr->generateHashIds( poThread );
+        }
+
 		poThread->threadAboutToExit();
         return nullptr;
 	}

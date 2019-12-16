@@ -41,8 +41,10 @@ void * SearchActionThreadFunction( void * pvParam )
 	VxThread * poThread = (VxThread *)pvParam;
 	poThread->setIsThreadRunning( true );
 	RcScanAction * poScan = (RcScanAction *)poThread->getThreadUserParam();
-
-	poScan->doSearchResultActions();
+    if( poScan && false == poThread->isAborted() )
+    {
+        poScan->doSearchResultActions();
+    }
 
 	poThread->threadAboutToExit();
     return nullptr;

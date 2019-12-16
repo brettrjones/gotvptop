@@ -951,7 +951,6 @@ void VxSktBase::startReceiveThread( const char * pVxThreadName )
 	m_SktRxThread.startThread( (VX_THREAD_FUNCTION_T)VxSktBaseReceiveVxThreadFunc, this, pVxThreadName );
 }
 
-
 //============================================================================
 void VxSktBase::setLastSktError( RCODE rc )						
 { 
@@ -973,290 +972,292 @@ void * VxSktBaseReceiveVxThreadFunc( void * pvContext )
 	VxThread * poVxThread = (VxThread *)pvContext;
 	poVxThread->setIsThreadRunning( true );
 	VxSktBase * sktBase = (VxSktBase *)poVxThread->getThreadUserParam();
-	char as8Buf[ 0x8000 ];
-    int iDataLen = 0;
-    //int iBufferAlmostFull = sktBase->getSktBufSize() - sktBase->getSktBufSize() / 10;
-	struct sockaddr_storage oAddr;
-	bool bIsUdpSkt = true;
+    if( sktBase )
+    {
+        char as8Buf[ 0x8000 ];
+        int iDataLen = 0;
+        //int iBufferAlmostFull = sktBase->getSktBufSize() - sktBase->getSktBufSize() / 10;
+        struct sockaddr_storage oAddr;
+        bool bIsUdpSkt = true;
 
-	if( eSktTypeTcpConnect == sktBase->getSktType() ||
-		eSktTypeTcpAccept == sktBase->getSktType() )
-	{
-		bIsUdpSkt = false;
-		sktBase->setLastImAliveTimeMs(  GetGmtTimeMs() ); // so we don't get closed if takes awhile for everything to get going
-		if( eSktTypeTcpConnect == sktBase->getSktType()  )
-		{
-			// we couldn't do callbacks in connect function ( mutex issues ) so
-			// do the callback now
-			sktBase->setCallbackReason( eSktCallbackReasonConnecting );
-			sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
-		}
-	}
+        if( eSktTypeTcpConnect == sktBase->getSktType() ||
+            eSktTypeTcpAccept == sktBase->getSktType() )
+        {
+            bIsUdpSkt = false;
+            sktBase->setLastImAliveTimeMs(  GetGmtTimeMs() ); // so we don't get closed if takes awhile for everything to get going
+            if( eSktTypeTcpConnect == sktBase->getSktType()  )
+            {
+                // we couldn't do callbacks in connect function ( mutex issues ) so
+                // do the callback now
+                sktBase->setCallbackReason( eSktCallbackReasonConnecting );
+                sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+            }
+        }
 
-	if(	( poVxThread->isAborted() ) ||
-		( INVALID_SOCKET == sktBase->m_Socket ) )
-	{
-		// something has already happened to the connection
-		//! VxThread calls this just before exit
-		poVxThread->threadAboutToExit();
-        return nullptr;
-	}
+        if(	( poVxThread->isAborted() ) ||
+            ( INVALID_SOCKET == sktBase->m_Socket ) )
+        {
+            // something has already happened to the connection
+            //! VxThread calls this just before exit
+            poVxThread->threadAboutToExit();
+            return nullptr;
+        }
 
-	sktBase->setLastSktError( 0 );
-	sktBase->setIsConnected( true );
-	sktBase->setCallbackReason( eSktCallbackReasonConnected );
-	sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
-	sktBase->setCallbackReason( eSktCallbackReasonData );
+        sktBase->setLastSktError( 0 );
+        sktBase->setIsConnected( true );
+        sktBase->setCallbackReason( eSktCallbackReasonConnected );
+        sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+        sktBase->setCallbackReason( eSktCallbackReasonData );
 
-	//LogMsg( LOG_SKT, "VxSktBaseReceiveVxThreadFunc: set blocking true\n" );
-	sktBase->setSktBlocking( true );
+        //LogMsg( LOG_SKT, "VxSktBaseReceiveVxThreadFunc: set blocking true\n" );
+        sktBase->setSktBlocking( true );
 
-	while(	( false == poVxThread->isAborted() ) && 
-			( INVALID_SOCKET != sktBase->m_Socket ) &&
-			( eSktCallbackReasonData == sktBase->getCallbackReason() ) )
-	{
-		if(  false == sktBase->isConnected() ) 
-		{
-#ifdef DEBUG_SKT_CONNECTIONS
-			if( !sktBase->isUdpSocket() && ( 0 != sktBase->getLastActiveTimeMs() ) )
-			{
-				LogMsg( LOG_SKT, "VxSktBaseReceiveVxThreadFunc: %s no longer connected\n", sktBase->describeSktType().c_str() );
-			}
-#endif // DEBUG_SKT_CONNECTIONS
+        while(	( false == poVxThread->isAborted() ) &&
+                ( INVALID_SOCKET != sktBase->m_Socket ) &&
+                ( eSktCallbackReasonData == sktBase->getCallbackReason() ) )
+        {
+            if(  false == sktBase->isConnected() )
+            {
+    #ifdef DEBUG_SKT_CONNECTIONS
+                if( !sktBase->isUdpSocket() && ( 0 != sktBase->getLastActiveTimeMs() ) )
+                {
+                    LogMsg( LOG_SKT, "VxSktBaseReceiveVxThreadFunc: %s no longer connected\n", sktBase->describeSktType().c_str() );
+                }
+    #endif // DEBUG_SKT_CONNECTIONS
 
-			break;
-		}
+                break;
+            }
 
-		int iAttemptLen = sktBase->getSktBufFreeSpace();
-		vx_assert( iAttemptLen >= 0 );
-		if( iAttemptLen >= (int)sizeof( as8Buf ) )
-		{
-			iAttemptLen = (int)sizeof( as8Buf ) - 16;
-		}
+            int iAttemptLen = sktBase->getSktBufFreeSpace();
+            vx_assert( iAttemptLen >= 0 );
+            if( iAttemptLen >= (int)sizeof( as8Buf ) )
+            {
+                iAttemptLen = (int)sizeof( as8Buf ) - 16;
+            }
 
-		if( bIsUdpSkt )
-		{
-			memset( &oAddr, 0, sizeof( struct sockaddr_storage ) );
-			socklen_t iSktAddrLen = sizeof( struct sockaddr_storage );
-			if(  sktBase->m_LclIp.isIPv4() )
-			{
-				iSktAddrLen = sizeof( struct sockaddr_in );
-				((struct sockaddr_in *)&oAddr)->sin_family = AF_INET;
-			}
-			else
-			{
-				#ifdef DEBUG_SKTS
-						LogMsg( LOG_INFO, "udp recvfrom IPV6\n" );
-				#endif// DEBUG_SKTS
-				iSktAddrLen = sizeof( struct sockaddr_in6 );
-				((struct sockaddr_in6 *)&oAddr)->sin6_family = AF_INET6;
-			}
+            if( bIsUdpSkt )
+            {
+                memset( &oAddr, 0, sizeof( struct sockaddr_storage ) );
+                socklen_t iSktAddrLen = sizeof( struct sockaddr_storage );
+                if(  sktBase->m_LclIp.isIPv4() )
+                {
+                    iSktAddrLen = sizeof( struct sockaddr_in );
+                    ((struct sockaddr_in *)&oAddr)->sin_family = AF_INET;
+                }
+                else
+                {
+                    #ifdef DEBUG_SKTS
+                            LogMsg( LOG_INFO, "udp recvfrom IPV6\n" );
+                    #endif// DEBUG_SKTS
+                    iSktAddrLen = sizeof( struct sockaddr_in6 );
+                    ((struct sockaddr_in6 *)&oAddr)->sin6_family = AF_INET6;
+                }
 
-			#ifdef DEBUG_SKTS
-					LogMsg( LOG_INFO, "udp wait for rx attempt len %d on skt handle %d lcl ip %s\n", iAttemptLen, sktBase->m_Socket, sktBase->m_strLclIp.c_str() );
-			#endif// DEBUG_SKTS
+                #ifdef DEBUG_SKTS
+                        LogMsg( LOG_INFO, "udp wait for rx attempt len %d on skt handle %d lcl ip %s\n", iAttemptLen, sktBase->m_Socket, sktBase->m_strLclIp.c_str() );
+                #endif// DEBUG_SKTS
 
-			iDataLen = recvfrom(	sktBase->m_Socket,	// socket
-									as8Buf,				// buffer to read into
-									iAttemptLen,		// length of buffer space
-									0,					// flags
-									(struct sockaddr *)&oAddr, // source address
-									&iSktAddrLen );		// size of address structure
+                iDataLen = recvfrom(	sktBase->m_Socket,	// socket
+                                        as8Buf,				// buffer to read into
+                                        iAttemptLen,		// length of buffer space
+                                        0,					// flags
+                                        (struct sockaddr *)&oAddr, // source address
+                                        &iSktAddrLen );		// size of address structure
 
-			if( INVALID_SOCKET == sktBase->m_Socket )
-			{
-				// has been closed by outside thread
-				sktBase->setCallbackReason( eSktCallbackReasonClosing );
-				goto closed_skt_exit;
-			}
+                if( INVALID_SOCKET == sktBase->m_Socket )
+                {
+                    // has been closed by outside thread
+                    sktBase->setCallbackReason( eSktCallbackReasonClosing );
+                    goto closed_skt_exit;
+                }
 
-			if( iDataLen > 0 )
-			{
-				sktBase->m_RmtIp.m_u16Port = sktBase->m_RmtIp.setIp( oAddr );
-				sktBase->m_strRmtIp = sktBase->m_RmtIp.toStdString();
+                if( iDataLen > 0 )
+                {
+                    sktBase->m_RmtIp.m_u16Port = sktBase->m_RmtIp.setIp( oAddr );
+                    sktBase->m_strRmtIp = sktBase->m_RmtIp.toStdString();
 
-				#ifdef DEBUG_SKTS
-						LogMsg( LOG_INFO, "udp recvfrom skt %d len %d port %d\n", sktBase->m_iSktId, iDataLen, sktBase->m_RmtIp.getPort() );
-				#endif// DEBUG_SKTS
+                    #ifdef DEBUG_SKTS
+                            LogMsg( LOG_INFO, "udp recvfrom skt %d len %d port %d\n", sktBase->m_iSktId, iDataLen, sktBase->m_RmtIp.getPort() );
+                    #endif// DEBUG_SKTS
 
-				if( sktBase->m_RxKey.isKeySet() )
-				{
-					if( false == sktBase->m_RxKey.isValidDataLen( iDataLen ) )
-					{
-						// throw away the data because not valid length
-						LogMsg( LOG_INFO, "udp recvfrom not valid data length\n" );
-						continue;
-					}
-					// set encryption context
-					sktBase->m_RxCrypto.importKey( &sktBase->m_RxKey );
-				}
-			}
-#ifdef DEBUG_SKTS
-			else
-			{
-					LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: udp recvfrom skt %d len %d\n", iDataLen );
-			}
-#endif// DEBUG_SKTS
-		}
-		else
-		{
-			//LogMsg( LOG_SKT, "VxSktBaseReceiveVxThreadFunc: recv skt handle %d attempt len %d\n", sktBase->m_Socket, iAttemptLen );
+                    if( sktBase->m_RxKey.isKeySet() )
+                    {
+                        if( false == sktBase->m_RxKey.isValidDataLen( iDataLen ) )
+                        {
+                            // throw away the data because not valid length
+                            LogMsg( LOG_INFO, "udp recvfrom not valid data length\n" );
+                            continue;
+                        }
+                        // set encryption context
+                        sktBase->m_RxCrypto.importKey( &sktBase->m_RxKey );
+                    }
+                }
+    #ifdef DEBUG_SKTS
+                else
+                {
+                        LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: udp recvfrom skt %d len %d\n", iDataLen );
+                }
+    #endif// DEBUG_SKTS
+            }
+            else
+            {
+                //LogMsg( LOG_SKT, "VxSktBaseReceiveVxThreadFunc: recv skt handle %d attempt len %d\n", sktBase->m_Socket, iAttemptLen );
 
-			iDataLen = recv(		sktBase->m_Socket,	// socket
-									as8Buf,				// buffer to read into
-									iAttemptLen,		// length of buffer space
-									0 );				// flags
-			if( INVALID_SOCKET == sktBase->m_Socket )
-			{
-				// has been closed by outside thread
-				sktBase->setCallbackReason( eSktCallbackReasonClosing );
-				goto closed_skt_exit;
-			}
-#ifdef DEBUG_SKTS
-			if( sktBase->isTcpSocket() )
-			{
-					LogMsg( LOG_SKT, "VxSktBaseReceiveVxThreadFunc: tcp recv skt %d len %d attempt len %d\n", sktBase->m_iSktId, iDataLen, iAttemptLen );
-			}
-#endif // DEBUG_SKTS
-		}
+                iDataLen = recv(		sktBase->m_Socket,	// socket
+                                        as8Buf,				// buffer to read into
+                                        iAttemptLen,		// length of buffer space
+                                        0 );				// flags
+                if( INVALID_SOCKET == sktBase->m_Socket )
+                {
+                    // has been closed by outside thread
+                    sktBase->setCallbackReason( eSktCallbackReasonClosing );
+                    goto closed_skt_exit;
+                }
+    #ifdef DEBUG_SKTS
+                if( sktBase->isTcpSocket() )
+                {
+                        LogMsg( LOG_SKT, "VxSktBaseReceiveVxThreadFunc: tcp recv skt %d len %d attempt len %d\n", sktBase->m_iSktId, iDataLen, iAttemptLen );
+                }
+    #endif // DEBUG_SKTS
+            }
 
-		if( poVxThread->isAborted() 
-			|| ( eSktCallbackReasonData != sktBase->getCallbackReason() ) 
-			|| ( INVALID_SOCKET == sktBase->m_Socket ) 
-			|| ( iDataLen <= 0 ) )
-		{
-			if( poVxThread->isAborted() || ( INVALID_SOCKET == sktBase->m_Socket ) )
-			{
-				// normal close or shutdown
-				//if( !sktBase->isUdpSocket() && ( 0 != sktBase->getLastActiveTime() ) )
-				//{
-				//	LogMsg( LOG_SKT, "VxSktBaseReceiveVxThreadFunc: skt %d 0x%x closed or aborted\n", sktBase->m_Socket, sktBase );
-				//}
+            if( poVxThread->isAborted()
+                || ( eSktCallbackReasonData != sktBase->getCallbackReason() )
+                || ( INVALID_SOCKET == sktBase->m_Socket )
+                || ( iDataLen <= 0 ) )
+            {
+                if( poVxThread->isAborted() || ( INVALID_SOCKET == sktBase->m_Socket ) )
+                {
+                    // normal close or shutdown
+                    //if( !sktBase->isUdpSocket() && ( 0 != sktBase->getLastActiveTime() ) )
+                    //{
+                    //	LogMsg( LOG_SKT, "VxSktBaseReceiveVxThreadFunc: skt %d 0x%x closed or aborted\n", sktBase->m_Socket, sktBase );
+                    //}
 
-				sktBase->setLastSktError( 0 );
-				break;
-			}
+                    sktBase->setLastSktError( 0 );
+                    break;
+                }
 
-			// socket error occurred
-			sktBase->setLastSktError(  VxGetLastError() );
-			if( 0 == sktBase->getLastSktError() )
-			{
-				sktBase->setLastSktError( -1 );
-			}
+                // socket error occurred
+                sktBase->setLastSktError(  VxGetLastError() );
+                if( 0 == sktBase->getLastSktError() )
+                {
+                    sktBase->setLastSktError( -1 );
+                }
 
-#ifdef TARGET_OS_WINDOWS
-			if ((iDataLen < 0)
-				&& ((11 == sktBase->getLastSktError()) || (WSAEWOULDBLOCK == sktBase->getLastSktError())))
-#else
-			if ((iDataLen < 0)
-				&& ((11 == sktBase->getLastSktError()) || (EINPROGRESS == sktBase->getLastSktError())))
-#endif // TARGET_OS_WINDOWS
-			{
-				// try again
-#ifdef DEBUG_SKTS
-					LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt Id %d trying again\n", sktBase->getSktId() );
-#endif // DEBUG_SKTS
-				if( sktBase->checkForImAliveTimeout( true ) )
-				{
-#ifdef DEBUG_SKTS
-					LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt Id %d I Am Alive Timeout\n", sktBase->getSktId() );
-#endif // DEBUG_SKTS
-					sktBase->setLastSktError( EIM_ALIVE_TIMEDOUT );
-					break;
-				}
+    #ifdef TARGET_OS_WINDOWS
+                if ((iDataLen < 0)
+                    && ((11 == sktBase->getLastSktError()) || (WSAEWOULDBLOCK == sktBase->getLastSktError())))
+    #else
+                if ((iDataLen < 0)
+                    && ((11 == sktBase->getLastSktError()) || (EINPROGRESS == sktBase->getLastSktError())))
+    #endif // TARGET_OS_WINDOWS
+                {
+                    // try again
+    #ifdef DEBUG_SKTS
+                        LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt Id %d trying again\n", sktBase->getSktId() );
+    #endif // DEBUG_SKTS
+                    if( sktBase->checkForImAliveTimeout( true ) )
+                    {
+    #ifdef DEBUG_SKTS
+                        LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt Id %d I Am Alive Timeout\n", sktBase->getSktId() );
+    #endif // DEBUG_SKTS
+                        sktBase->setLastSktError( EIM_ALIVE_TIMEDOUT );
+                        break;
+                    }
 
-				VxSleep( SKT_RX_RETRY_SLEEP_TIME_MS );
-				continue;
-			}
+                    VxSleep( SKT_RX_RETRY_SLEEP_TIME_MS );
+                    continue;
+                }
 
-			break;
-		}
+                break;
+            }
 
-		sktBase->setLastSktError( 0 );
-		if( iDataLen > 0 )
-		{
-			//if( sktBase->isTcpSocket() )
-			//{
-			//	LogMsg( LOG_SKT,  "skt %d Received length %d from %s:%d\n", 
-			//		sktBase->m_iSktId, 
-			//		iDataLen, 
-			//		sktBase->m_strRmtIp.c_str(), 
-			//		sktBase->m_RmtIp.getPort() );
-			//}
+            sktBase->setLastSktError( 0 );
+            if( iDataLen > 0 )
+            {
+                //if( sktBase->isTcpSocket() )
+                //{
+                //	LogMsg( LOG_SKT,  "skt %d Received length %d from %s:%d\n",
+                //		sktBase->m_iSktId,
+                //		iDataLen,
+                //		sktBase->m_strRmtIp.c_str(),
+                //		sktBase->m_RmtIp.getPort() );
+                //}
 
-			sktBase->setLastActiveTimeMs( GetGmtTimeMs() );
-			sktBase->m_iLastRxLen = iDataLen;
+                sktBase->setLastActiveTimeMs( GetGmtTimeMs() );
+                sktBase->m_iLastRxLen = iDataLen;
 
-			memcpy( sktBase->getSktWriteBuf(), as8Buf, iDataLen );
-			sktBase->sktBufAmountWrote( iDataLen );
-			if( false == sktBase->isUdpSocket() )
-			{
-				// decrypt as much as possible
-				sktBase->decryptReceiveData();
-			}
+                memcpy( sktBase->getSktWriteBuf(), as8Buf, iDataLen );
+                sktBase->sktBufAmountWrote( iDataLen );
+                if( false == sktBase->isUdpSocket() )
+                {
+                    // decrypt as much as possible
+                    sktBase->decryptReceiveData();
+                }
 
-			sktBase->RxedPkt( iDataLen );
-			// call back user with the good news.. we have data
-#ifdef DEBUG_SKTS
-				LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt %d receiving len %d\n", sktBase->m_iSktId, iDataLen );
-#endif // DEBUG_SKTS
-			sktBase->updateLastActiveTime();
-			sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
-		}
-	}
+                sktBase->RxedPkt( iDataLen );
+                // call back user with the good news.. we have data
+    #ifdef DEBUG_SKTS
+                    LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt %d receiving len %d\n", sktBase->m_iSktId, iDataLen );
+    #endif // DEBUG_SKTS
+                sktBase->updateLastActiveTime();
+                sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+            }
+        }
 
-closed_skt_exit:
-	sktBase->setIsConnected( false );
-	if( eSktCallbackReasonNewMgr != sktBase->getCallbackReason() )
-	{
-		if( 0 != sktBase->getLastSktError() )
-		{
-//#ifdef DEBUG_SKTS
-			if( !sktBase->isUdpSocket() && ( 0 != sktBase->getLastActiveTimeMs() ) )
-			{
-				LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: %s exit with error %d %s \n", 
-						sktBase->describeSktType().c_str(),
-						sktBase->getLastSktError(), 
-						sktBase->describeSktError( sktBase->getLastSktError() )
-						 );
-			}
-//#endif // DEBUG_SKTS
-			// we had a error
-			sktBase->setCallbackReason( eSktCallbackReasonError );
-			sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
-		}
+    closed_skt_exit:
+        sktBase->setIsConnected( false );
+        if( eSktCallbackReasonNewMgr != sktBase->getCallbackReason() )
+        {
+            if( 0 != sktBase->getLastSktError() )
+            {
+    //#ifdef DEBUG_SKTS
+                if( !sktBase->isUdpSocket() && ( 0 != sktBase->getLastActiveTimeMs() ) )
+                {
+                    LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: %s exit with error %d %s \n",
+                            sktBase->describeSktType().c_str(),
+                            sktBase->getLastSktError(),
+                            sktBase->describeSktError( sktBase->getLastSktError() )
+                             );
+                }
+    //#endif // DEBUG_SKTS
+                // we had a error
+                sktBase->setCallbackReason( eSktCallbackReasonError );
+                sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+            }
 
-		if( false == poVxThread->isAborted() )
-		{
-			// we are closing due to error .. not because user called close
-			sktBase->m_bClosingFromRxThread = true;
-		}
+            if( false == poVxThread->isAborted() )
+            {
+                // we are closing due to error .. not because user called close
+                sktBase->m_bClosingFromRxThread = true;
+            }
 
-		sktBase->setCallbackReason( eSktCallbackReasonClosing );
-		sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
-		sktBase->setCallbackReason( eSktCallbackReasonClosed );
-		sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
-	}
+            sktBase->setCallbackReason( eSktCallbackReasonClosing );
+            sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+            sktBase->setCallbackReason( eSktCallbackReasonClosed );
+            sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+        }
 
-#ifdef DEBUG_SKTS
-		LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt %d 0x%x exiting\n", sktBase->m_iSktId, sktBase );
-#endif // DEBUG_SKTS
-		//if( !sktBase->isUdpSocket() && ( 0 != sktBase->getLastActiveTime() ) )
-		//{
-		//	LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: exiting %s\n", sktBase->describeSktType().c_str() );
-		//}
+    #ifdef DEBUG_SKTS
+            LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt %d 0x%x exiting\n", sktBase->m_iSktId, sktBase );
+    #endif // DEBUG_SKTS
+            //if( !sktBase->isUdpSocket() && ( 0 != sktBase->getLastActiveTime() ) )
+            //{
+            //	LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: exiting %s\n", sktBase->describeSktType().c_str() );
+            //}
 
-	if( INVALID_SOCKET != sktBase->m_Socket )
-	{
-		sktBase->m_bClosingFromRxThread = true;
-		sktBase->closeSkt( 96295 ); 
-	}
+        if( INVALID_SOCKET != sktBase->m_Socket )
+        {
+            sktBase->m_bClosingFromRxThread = true;
+            sktBase->closeSkt( 96295 );
+        }
 
-	if( sktBase->m_SktMgr )
-	{
-		sktBase->m_SktMgr->handleSktCloseEvent( sktBase );
-	}
-
+        if( sktBase->m_SktMgr )
+        {
+            sktBase->m_SktMgr->handleSktCloseEvent( sktBase );
+        }
+    }
 
 	poVxThread->threadAboutToExit();
     return nullptr;

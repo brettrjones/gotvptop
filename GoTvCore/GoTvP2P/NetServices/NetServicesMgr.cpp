@@ -53,8 +53,10 @@ namespace
 		poThread->setIsThreadRunning( true );
 
 		NetServicesMgr * poMgr = (NetServicesMgr *)poThread->getThreadUserParam();
-
-		poMgr->runNetActions();
+        if( poMgr && false == poThread->isAborted() )
+        {
+            poMgr->runNetActions();
+        }
 
 		poThread->threadAboutToExit();
         return nullptr;
@@ -535,9 +537,11 @@ bool NetServicesMgr::actionReqConnectToHost( VxSktConnectSimple& sktSimple )
 
 	if( false == sktSimple.connectToWebsite( anchorUrl.c_str(), strHost, strFile, u16Port, ANCHOR_CONNECT_TIMEOUT ) )
 	{
-#ifdef DEBUG_PTOP_NETWORK_STATE
-		LogMsg( LOG_ERROR, "### ERROR NetServicesMgr::actionReqConnectToHost: FAILED to Connect to %s timeout %d\n", anchorUrl.c_str(), ANCHOR_CONNECT_TIMEOUT );
-#endif // DEBUG_PTOP_NETWORK_STATE
+        if( IsLogEnabled( eLogModuleNetworkState ) )
+        {
+            LogMsg( LOG_ERROR, "### ERROR NetServicesMgr::actionReqConnectToHost: FAILED to Connect to %s timeout %d\n", anchorUrl.c_str(), ANCHOR_CONNECT_TIMEOUT );
+        }
+
 		return false;
 	}
 
@@ -552,9 +556,11 @@ EAppErr NetServicesMgr::doIsMyPortOpen( std::string& retMyExternalIp, bool testL
 	std::string rmtIP = m_NetworkMgr.getLocalIpAddress();
     if( rmtIP.empty() )
     {
-#ifdef DEBUG_PTOP_NETWORK_STATE
+        if( IsLogEnabled( eLogModuleNetworkState ) )
+        {
             LogMsg( LOG_ERROR, "NetServicesMgr::doIsMyPortOpen no local ip\n" );
-#endif // DEBUG_PTOP_NETWORK_STATE
+        }
+
         return eAppErrBadParameter;
     }
 
@@ -655,10 +661,11 @@ static int lastPort = 0;
 	else if( false == portOpenConn1.isConnected() )
 	{
 		
-#ifdef DEBUG_PTOP_NETWORK_STATE
+        if( IsLogEnabled( eLogModuleNetworkState ) )
+        {
             LogMsg( LOG_INFO, "NetServicesMgr::doIsMyPortOpen FAILED Connect to net services\n" );
-		m_Engine.sendToGuiStatusMessage( "FAILED Connect to Connect Test Server\n" );
-#endif // DEBUG_PTOP_NETWORK_STATE
+            m_Engine.sendToGuiStatusMessage( "FAILED Connect to Connect Test Server\n" );
+        }
     }
 
 	if( isCellDataNetwork 
@@ -668,26 +675,30 @@ static int lastPort = 0;
 
 		if( eAppErrNone == portOpenTestError )
 		{
-#ifdef DEBUG_PTOP_NETWORK_STATE
-			LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS OPEN :) IP is %s->%s in %3.3f sec\n", tcpListenPort, retMyExternalIp.c_str(), rmtIP.c_str(), retMyExternalIp.c_str(), portTestTimer.elapsedSec() );
-            m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS OPEN :)", tcpListenPort  );
-#endif // DEBUG_PTOP_NETWORK_STATE
+            if( IsLogEnabled( eLogModuleNetworkState ) )
+            {
+                LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS OPEN :) IP is %s->%s in %3.3f sec\n", tcpListenPort, retMyExternalIp.c_str(), rmtIP.c_str(), retMyExternalIp.c_str(), portTestTimer.elapsedSec() );
+                m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS OPEN :)", tcpListenPort  );
+            }
 		}
 		else
 		{
-#ifdef DEBUG_PTOP_NETWORK_STATE
-			LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS CLOSED :) IP %s->%s in %3.3f sec\n", tcpListenPort, retMyExternalIp.c_str(), rmtIP.c_str(), portTestTimer.elapsedSec() );
-            m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS CLOSED :( IP is %s->%s  (%3.3f sec)", tcpListenPort, retMyExternalIp.c_str(), rmtIP.c_str(), portTestTimer.elapsedSec() );
-#endif // DEBUG_PTOP_NETWORK_STATE
+            if( IsLogEnabled( eLogModuleNetworkState ) )
+            {
+                LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction: Your TCP Port %d IS CLOSED :) IP %s->%s in %3.3f sec\n", tcpListenPort, retMyExternalIp.c_str(), rmtIP.c_str(), portTestTimer.elapsedSec() );
+                m_Engine.sendToGuiStatusMessage( "Your TCP Port %d IS CLOSED :( IP is %s->%s  (%3.3f sec)", tcpListenPort, retMyExternalIp.c_str(), rmtIP.c_str(), portTestTimer.elapsedSec() );
+            }
 		}
 
 		return portOpenTestError; // messages sent and result set and no sense in retying because all ports blocked on cell network
 	}
 
 	// try again with new connection
-#ifdef DEBUG_PTOP_NETWORK_STATE
+    if( IsLogEnabled( eLogModuleNetworkState ) )
+    {
 	    LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction: retry port open test\n" );
-#endif // DEBUG_PTOP_NETWORK_STATE
+    }
+
 	VxSktConnectSimple portOpenConn2;
 	if( actionReqConnectToNetService( portOpenConn2 ) )
 	{
@@ -724,9 +735,11 @@ bool NetServicesMgr::testLoobackPing( std::string localIP, uint16_t tcpListenPor
 
 	if( INVALID_SOCKET == toClientConn.connectTo( ipAddress.c_str(), tcpListenPort, 2000 ) )
 	{
-#ifdef DEBUG_PTOP_NETWORK_STATE
+        if( IsLogEnabled( eLogModuleNetworkState ) )
+        {
 		    LogMsg( LOG_ERROR, "##P NetServicesMgr::testLoobackPing: could not connect to %s:%d %3.3f sec\n", ipAddress.c_str(), tcpListenPort, pingTimer.elapsedSec() );
-#endif // DEBUG_PTOP_NETWORK_STATE
+        }
+
 		return false;
 	}
 

@@ -42,7 +42,11 @@ namespace
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		AssetMgr * poMgr = (AssetMgr *)poThread->getThreadUserParam();
-		poMgr->assetInfoMgrStartup( poThread );
+        if( poMgr )
+        {
+            poMgr->assetInfoMgrStartup( poThread );
+        }
+
 		poThread->threadAboutToExit();
         return nullptr;
 	}

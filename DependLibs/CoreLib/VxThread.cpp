@@ -283,10 +283,10 @@ RCODE VxThread::startThread(	VX_THREAD_FUNCTION_T	pfuncThreadFunc,	// function t
 		StdStringFormat( m_strThreadName, "WorkerThread0x%x-%d", this, g_ThreadCreateCnt );
 	}
 
-	if( m_strThreadName == "VxSktBaseUDP3" )
-	{
-		m_pvUserParam = pvUserParam;		
-	}
+//	if( m_strThreadName == "VxSktBaseUDP3" )
+//	{
+//		m_pvUserParam = pvUserParam;
+//	}
 	
 
 	abortThreadRun( false );

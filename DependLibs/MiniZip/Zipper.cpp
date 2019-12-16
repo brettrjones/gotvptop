@@ -37,10 +37,14 @@ namespace
 		VxThread * poVxThread = (VxThread *)pvContext;
 		poVxThread->setIsThreadRunning( true );
 		Zipper * zipper = (Zipper *)poVxThread->getThreadUserParam();
-		zipper->doZipOperation();
-#ifdef DEBUG_ZIPPER
-		LogMsg( LOG_INFO, "Zipper::zipFiles compress in thread DoZipThreadFunc done\n" );
-#endif // DEBUG_ZIPPER
+        if( zipper )
+        {
+            zipper->doZipOperation();
+    #ifdef DEBUG_ZIPPER
+            LogMsg( LOG_INFO, "Zipper::zipFiles compress in thread DoZipThreadFunc done\n" );
+    #endif // DEBUG_ZIPPER
+        }
+
 		poVxThread->threadAboutToExit();
 		return 0;
 	}
@@ -50,13 +54,17 @@ namespace
 		VxThread * poVxThread = (VxThread *)pvContext;
 		poVxThread->setIsThreadRunning( true );
 		Zipper * zipper = (Zipper *)poVxThread->getThreadUserParam();
-#ifdef DEBUG_UNZIP
-		LogMsg( LOG_INFO, "DoUnzipThreadFunc start\n" );
-#endif // DEBUG_UNZIP
-		zipper->doUnzipOperation();
-#ifdef DEBUG_UNZIP
-		LogMsg( LOG_INFO, "DoUnzipThreadFunc about to exit\n" );
-#endif // DEBUG_UNZIP
+        if( zipper )
+        {
+    #ifdef DEBUG_UNZIP
+            LogMsg( LOG_INFO, "DoUnzipThreadFunc start\n" );
+    #endif // DEBUG_UNZIP
+            zipper->doUnzipOperation();
+    #ifdef DEBUG_UNZIP
+            LogMsg( LOG_INFO, "DoUnzipThreadFunc about to exit\n" );
+    #endif // DEBUG_UNZIP
+        }
+
 		poVxThread->threadAboutToExit();
 		return 0;
 	}

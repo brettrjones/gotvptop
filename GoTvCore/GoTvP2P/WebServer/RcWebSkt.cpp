@@ -190,128 +190,130 @@ password: <INPUT TYPE=PASSWORD NAME=\"tc_pwd\">\
 
 //============================================================================
 //! thread function to transmit data socket
-void * RcSktWebTransmitThreadFunc(  void * pvContext )
+static void * RcSktWebTransmitThreadFunc(  void * pvContext )
 {
 	VxThread * poThread = (VxThread *)pvContext;
 	poThread->setIsThreadRunning( true );
+    RcWebSkt * sktBase		= (RcWebSkt *)poThread->getThreadUserParam();
+    if( sktBase && false == poThread->isAborted() )
+    {
+        if( IsLogEnabled( eLogModuleSkt ) )
+            LogMsg( LOG_DEBUG,  "skt %d %s RcSktWebTransmitThreadFunc start\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str() );
 
-	RcWebSkt *		sktBase		= (RcWebSkt *)poThread->getThreadUserParam();
-    if( IsLogEnabled( eLogModuleSkt ) )
-	    LogMsg( LOG_DEBUG,  "skt %d %s RcSktWebTransmitThreadFunc start\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str() );
+        do
+        {
+            sktBase->m_SktTxSemaphore.wait();
+            while( sktBase->m_aoQuedFiles.size() )
+            {
+                if( poThread->isAborted() ||
+                    ( false == sktBase->isConnected() ) )
+                {
+                    break;
+                }
 
-	do
-	{
-		sktBase->m_SktTxSemaphore.wait();
-		while( sktBase->m_aoQuedFiles.size() )
-		{
-			if( poThread->isAborted() ||
-				( false == sktBase->isConnected() ) )
-			{
-				break;
-			}
+                std::string		strFileName;
+                std::string		strPwd;
+                EWbMyFiles		eFileType;
+                EHttpReqType	eHttpReqType;
 
-			std::string		strFileName;
-			std::string		strPwd;
-			EWbMyFiles		eFileType;
-            EHttpReqType	eHttpReqType;
+                sktBase->lockSkt();
+                //if( sktBase->m_aoQuedFiles.size() )
+                //{
+                    WbQueEntry * poEntry = &sktBase->m_aoQuedFiles[0];
+                    strFileName		= poEntry->m_strFileName.c_str();
+                    eFileType		= poEntry->m_eFileType;
+                    eHttpReqType	= poEntry->m_eHttpReqType;
+                    strPwd			= poEntry->m_strPwd;
+                    sktBase->m_aoQuedFiles.erase( sktBase->m_aoQuedFiles.begin() );
+                //}
 
-			sktBase->lockSkt();
-            //if( sktBase->m_aoQuedFiles.size() )
-            //{
-				WbQueEntry * poEntry = &sktBase->m_aoQuedFiles[0];
-				strFileName		= poEntry->m_strFileName.c_str();
-				eFileType		= poEntry->m_eFileType;
-				eHttpReqType	= poEntry->m_eHttpReqType;
-				strPwd			= poEntry->m_strPwd;
-				sktBase->m_aoQuedFiles.erase( sktBase->m_aoQuedFiles.begin() );
-            //}
+                sktBase->unlockSkt();
+    #ifdef USE_WEB_FILESHARE
+                if( eFileType )
+                {
+                    if( eHttpReqGet == eHttpReqType )
+                    {
+                        // check to see if needs password prompt
+                        if( false == poWebMgr->IsPasswordOk( sktBase->m_RmtIp, eFileType ) )
+                        {
+                            // need to prompt for file share password
+                            char as8Buf[ 1024 ];
 
-			sktBase->unlockSkt();
-#ifdef USE_WEB_FILESHARE
-			if( eFileType ) 
-			{
-				if( eHttpReqGet == eHttpReqType )
-				{
-					// check to see if needs password prompt
-					if( false == poWebMgr->IsPasswordOk( sktBase->m_RmtIp, eFileType ) )
-					{
-						// need to prompt for file share password
-						char as8Buf[ 1024 ];
+                            // truncate root of website from file name.. we dont want to send where the real file is
+                            const char * pTemp = strFileName.c_str();
+                            if( 0 == strncmp( pTemp, poWebMgr->GetWebPageDir(), strlen( poWebMgr->GetWebPageDir() ) ) )
+                            {
+                                strFileName = &pTemp[ strlen( poWebMgr->GetWebPageDir()) - 1 ];
+                            }
+                            else if( 0 == strncmp( pTemp, poWebMgr->GetMyFilesDir(eFileType), strlen( poWebMgr->GetMyFilesDir(eFileType) ) ) )
+                            {
+                                std::string strPostFile = "/";
+                                strPostFile = strPostFile + poWebMgr->GetMyFilesAlias(eFileType);
+                                strPostFile = strPostFile + &pTemp[ strlen( poWebMgr->GetMyFilesDir(eFileType) ) ];
+                                strFileName = strPostFile;
 
-						// truncate root of website from file name.. we dont want to send where the real file is
-						const char * pTemp = strFileName.c_str();
-						if( 0 == strncmp( pTemp, poWebMgr->GetWebPageDir(), strlen( poWebMgr->GetWebPageDir() ) ) )
-						{
-							strFileName = &pTemp[ strlen( poWebMgr->GetWebPageDir()) - 1 ];
-						}
-						else if( 0 == strncmp( pTemp, poWebMgr->GetMyFilesDir(eFileType), strlen( poWebMgr->GetMyFilesDir(eFileType) ) ) )
-						{
-							std::string strPostFile = "/";
-							strPostFile = strPostFile + poWebMgr->GetMyFilesAlias(eFileType);
-							strPostFile = strPostFile + &pTemp[ strlen( poWebMgr->GetMyFilesDir(eFileType) ) ];
-							strFileName = strPostFile;
+                            }
+                            else
+                            {
+                                vx_assert( false );
+                            }
 
-						}
-						else
-						{
-							vx_assert( false );
-						}
+                            sprintf( as8Buf, WEB_PWD_PROMPT, strFileName.c_str(), strFileName.c_str() );
 
-						sprintf( as8Buf, WEB_PWD_PROMPT, strFileName.c_str(), strFileName.c_str() );
+                            char as8SendBuf[ 1024 ];
+                            // send http header
+                            sprintf( as8SendBuf, "HTTP/1.1 200 OK.\r\nContent-Length: %ld\r\nConnection: Keep-Alive\r\n\r\n", strlen( as8Buf ) );
+                            rc = sktBase->sendData( as8SendBuf,  strlen( as8SendBuf ) );
+                            if( rc )
+                            {
+                                LogMsg( LOG_INFO, "RcWebSkt::PwdPrompt: skt error %d %s sending header for pwd prompt\n", rc,VxDescribeSktError( rc ) );
+                                continue;
+                            }
+                            rc = sktBase->sendData( as8Buf, strlen( as8Buf ) );
+                            if( rc )
+                            {
+                                LogMsg( LOG_INFO, "RcWebSkt::PwdPrompt: skt error %d %s sending content for pwd prompt\n", rc,VxDescribeSktError( rc ) );
+                                continue;
+                            }
+                            continue;
+                        }
+                    }
+                    else if( eHttpReqPost == eHttpReqType )
+                    {
+                        // user posted password
+                        if( false == poWebMgr->VerifyPwd( sktBase->m_RmtIp, eFileType, strPwd.c_str() ) )
+                        {
+                            SendHttpErr( sktBase, HTTP_STATUS_UNAUTHORIZED );
+                            continue;
+                        }
+                    }
+                }
+    #else
+                // don't allow posting if not serving Personal Shared files
+                if( eHttpReqPost == eHttpReqType )
+                {
 
-						char as8SendBuf[ 1024 ];
-						// send http header 
-						sprintf( as8SendBuf, "HTTP/1.1 200 OK.\r\nContent-Length: %ld\r\nConnection: Keep-Alive\r\n\r\n", strlen( as8Buf ) );
-						rc = sktBase->sendData( as8SendBuf,  strlen( as8SendBuf ) );
-						if( rc )
-						{
-							LogMsg( LOG_INFO, "RcWebSkt::PwdPrompt: skt error %d %s sending header for pwd prompt\n", rc,VxDescribeSktError( rc ) );
-							continue;
-						}
-						rc = sktBase->sendData( as8Buf, strlen( as8Buf ) );
-						if( rc )
-						{
-							LogMsg( LOG_INFO, "RcWebSkt::PwdPrompt: skt error %d %s sending content for pwd prompt\n", rc,VxDescribeSktError( rc ) );
-							continue;
-						}
-						continue;
-					}
-				}
-				else if( eHttpReqPost == eHttpReqType )
-				{
-					// user posted password
-					if( false == poWebMgr->VerifyPwd( sktBase->m_RmtIp, eFileType, strPwd.c_str() ) )
-					{
-						SendHttpErr( sktBase, HTTP_STATUS_UNAUTHORIZED ); 
-						continue;
-					}
-				}
-			}
-#else
-			// don't allow posting if not serving Personal Shared files
-			if( eHttpReqPost == eHttpReqType )
-			{
+                    sktBase->getWebServerPlugin()->sendHttpErr( false, sktBase->getIdentity(), sktBase, HTTP_STATUS_UNAUTHORIZED );
+                    continue;
+                }
+    #endif // USE_WEB_FILESHARE
 
-				sktBase->getWebServerPlugin()->sendHttpErr( false, sktBase->getIdentity(), sktBase, HTTP_STATUS_UNAUTHORIZED ); 
-				continue;
-			}
-#endif // USE_WEB_FILESHARE
+                if( strFileName.size() )
+                {
+                    sktBase->doSendFile( strFileName.c_str() );
+                }
+            }
+            if( poThread->isAborted() ||
+                ( false == sktBase->isConnected() ) )
+            {
+                break;
+            }
+        }while( (false == poThread->isAborted() ) &&
+                sktBase->isConnected() );
 
-			if( strFileName.size() )
-			{
-				sktBase->doSendFile( strFileName.c_str() );
-			}
-		}
-		if( poThread->isAborted() ||
-			( false == sktBase->isConnected() ) )
-		{
-			break;
-		}
-	}while( (false == poThread->isAborted() ) &&
-			sktBase->isConnected() );
-
-    if( IsLogEnabled( eLogModuleSkt ) )
-        LogMsg( LOG_DEBUG,  "skt %d 0x%x %s RcSktWebTransmitThreadFunc exit\n", sktBase->m_iSktId, sktBase, sktBase->m_strRmtIp.c_str() );
+        if( IsLogEnabled( eLogModuleSkt ) )
+            LogMsg( LOG_DEBUG,  "skt %d 0x%x %s RcSktWebTransmitThreadFunc exit\n", sktBase->m_iSktId, sktBase, sktBase->m_strRmtIp.c_str() );
+    }
 
 	//! Thread calls this just before exit
 	poThread->threadAboutToExit();

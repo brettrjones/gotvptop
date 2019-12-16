@@ -60,7 +60,7 @@ namespace
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		NetworkStateMachine * stateMachine = (NetworkStateMachine *)poThread->getThreadUserParam();
-		if( false == poThread->isAborted() )
+        if( stateMachine && false == poThread->isAborted() )
 		{
 			stateMachine->runStateMachineThread();
 		}
@@ -190,20 +190,21 @@ bool NetworkStateMachine::shouldAbort( void )
 		|| m_NetworkStateThread.isAborted() 
 		|| VxIsAppShuttingDown() )
 	{
-#ifdef DEBUG_PTOP_NETWORK_STATE
-        if( false == m_StateMachineInitialized )
+        if( IsLogEnabled( eLogModuleNetworkState ) )
         {
-            LogMsg( LOG_INFO, "NetworkStateMachine::shouldAbort: m_StateMachineInitialized false\n" );
+            if( false == m_StateMachineInitialized )
+            {
+                LogMsg( LOG_INFO, "NetworkStateMachine::shouldAbort: m_StateMachineInitialized false\n" );
+            }
+            else if( m_NetworkStateThread.isAborted() )
+            {
+                LogMsg( LOG_INFO, "NetworkStateMachine::shouldAbort: m_NetworkStateThread.isAborted()\n" );
+            }
+            else
+            {
+                LogMsg( LOG_INFO, "NetworkStateMachine::shouldAbort: VxIsAppShuttingDown()\n" );
+            }
         }
-        else if( m_NetworkStateThread.isAborted() )
-        {
-            LogMsg( LOG_INFO, "NetworkStateMachine::shouldAbort: m_NetworkStateThread.isAborted()\n" );
-        }
-        else
-        {
-            LogMsg( LOG_INFO, "NetworkStateMachine::shouldAbort: VxIsAppShuttingDown()\n" );
-        }
-#endif // DEBUG_PTOP_NETWORK_STATE
 
 		return true;
 	}

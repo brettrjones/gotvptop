@@ -54,6 +54,7 @@ enum ELogModule
     eLogModuleSkt = 0x0040,
     eLogModuleTest = 0x0080,
     eLogModuleThread = 0x0100,
+    eLogModuleNetworkState = 0x0200,
 
 
     eMaxLogModule

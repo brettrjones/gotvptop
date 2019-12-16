@@ -45,9 +45,11 @@ namespace
 		VxThread * poThread = (VxThread *)pvParam;
 		poThread->setIsThreadRunning( true );
 		NetworkStateRelaySearch * poMgr = (NetworkStateRelaySearch *)poThread->getThreadUserParam();
-
-		poMgr->doRelayAnnounceListAndSearch();
-		poMgr->setRelayListSearchComplete( true );
+        if( poMgr && false == poThread->isAborted() )
+        {
+            poMgr->doRelayAnnounceListAndSearch();
+            poMgr->setRelayListSearchComplete( true );
+        }
 
 		poThread->threadAboutToExit();
         threadCnt--;

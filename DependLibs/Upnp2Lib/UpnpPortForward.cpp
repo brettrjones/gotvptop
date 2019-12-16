@@ -65,8 +65,10 @@ namespace
 		poThread->setIsThreadRunning( true );
 
 		UpnpPortForward * poMgr = (UpnpPortForward *)poThread->getThreadUserParam();
-
-		poMgr->runPortForward();
+        if( poMgr )
+        {
+            poMgr->runPortForward();
+        }
 
 #ifdef DEBUG_THREADS
         LogMsg( LOG_DEBUG, "UpnpPortForward thread about to exit\n" );

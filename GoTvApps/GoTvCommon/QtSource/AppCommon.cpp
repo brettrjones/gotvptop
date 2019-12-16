@@ -920,21 +920,21 @@ void AppCommon::toGuiNetworkState( ENetworkStateType eNetworkState, const char* 
 
 	emit signalNetworkStateChanged( eNetworkState );
 
-#ifdef DEBUG_PTOP_NETWORK_STATE
-	const char * networkState = DescribeNetworkState( eNetworkState );
-	std::string formatedMsg;
-	if( stateMsg )
-	{
-		StdStringFormat( formatedMsg, "#Network %s %s", networkState, stateMsg );
-	}
-	else
-	{
-		StdStringFormat( formatedMsg, "#Network %s\n", networkState );
-	}
+    if( IsLogEnabled( eLogModuleNetworkState ) )
+    {
+        const char * networkState = DescribeNetworkState( eNetworkState );
+        std::string formatedMsg;
+        if( stateMsg )
+        {
+            StdStringFormat( formatedMsg, "#Network %s %s", networkState, stateMsg );
+        }
+        else
+        {
+            StdStringFormat( formatedMsg, "#Network %s\n", networkState );
+        }
 
-	emit signalStatusMsg( formatedMsg.c_str() );
-#endif // DEBUG_PTOP_NETWORK_STATE
-
+        emit signalStatusMsg( formatedMsg.c_str() );
+    }
 }
 
 //============================================================================

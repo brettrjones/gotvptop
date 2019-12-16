@@ -41,9 +41,10 @@ namespace
 {
 	void NetworkPeerSktCallbackHandler( VxSktBase *  sktBase, void * pvUserCallbackData )
 	{
-		if( pvUserCallbackData )
+        if( pvUserCallbackData )
 		{
-			((NetworkMgr *)pvUserCallbackData)->handleTcpSktCallback( sktBase );
+            NetworkMgr * netMgr = (NetworkMgr *)pvUserCallbackData;
+            netMgr->handleTcpSktCallback( sktBase );
 		}
 	}
 

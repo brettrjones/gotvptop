@@ -65,7 +65,11 @@ namespace
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		MediaProcessor * processor = (MediaProcessor *)poThread->getThreadUserParam();
-		processor->processAudioIn();
+        if( processor )
+        {
+            processor->processAudioIn();
+        }
+
 		poThread->threadAboutToExit();
         return nullptr;
 	}
@@ -76,7 +80,11 @@ namespace
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		MediaProcessor * processor = (MediaProcessor *)poThread->getThreadUserParam();
-		processor->processVideoIn();
+        if( processor && false == poThread->isAborted() )
+        {
+            processor->processVideoIn();
+        }
+
 		poThread->threadAboutToExit();
         return nullptr;
 	}

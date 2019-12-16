@@ -46,8 +46,10 @@ namespace
 		VxThread * poThread = (VxThread *)pvParam;
 		poThread->setIsThreadRunning( true );
 		NetConnector * poMgr = (NetConnector *)poThread->getThreadUserParam();
-
-		poMgr->doNetConnectionsThread();
+        if( poMgr && false == poThread->isAborted() )
+        {
+            poMgr->doNetConnectionsThread();
+        }
 
 		poThread->threadAboutToExit();
         return nullptr;

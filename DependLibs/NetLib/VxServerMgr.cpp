@@ -36,21 +36,26 @@ namespace
 {
     void * VxServerMgrVxThreadFunc(  void * pvContext )
 	{
-		VxThread * poVxThread = (VxThread *)pvContext;
-		poVxThread->setIsThreadRunning( true );
-		VxServerMgr * poMgr = (VxServerMgr *)poVxThread->getThreadUserParam();
+        if( pvContext )
+        {
+            VxThread * poVxThread = (VxThread *)pvContext;
+            poVxThread->setIsThreadRunning( true );
+            VxServerMgr * poMgr = (VxServerMgr *)poVxThread->getThreadUserParam();
+            if( poMgr )
+            {
+                if( IsLogEnabled( eLogModuleSkt ) )
+                    LogMsg( LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread started\n", poMgr->m_iMgrId, poMgr->getListenPort() );
 
-        if( IsLogEnabled( eLogModuleSkt ) )
-		    LogMsg( LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread started\n", poMgr->m_iMgrId, poMgr->getListenPort() );
+                poMgr->listenForConnectionsToAccept( poVxThread );
 
-		poMgr->listenForConnectionsToAccept( poVxThread );
+                // quitting
+                if( IsLogEnabled( eLogModuleSkt ) )
+                    LogMsg( LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread tid %d quiting\n", poMgr->m_iMgrId, poMgr->getListenPort(), poVxThread->getThreadTid() );
+            }
 
-		// quitting
-        if( IsLogEnabled( eLogModuleSkt ) )
-		    LogMsg( LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread tid %d quiting\n", poMgr->m_iMgrId, poMgr->getListenPort(), poVxThread->getThreadTid() );
-
-		//! VxThread calls this just before exit
-		poVxThread->threadAboutToExit();
+            //! VxThread calls this just before exit
+            poVxThread->threadAboutToExit();
+        }
         return nullptr;
 	}
 }

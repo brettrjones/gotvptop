@@ -30,6 +30,31 @@
 #include "GoTvDebugConfig.h"
 
 //============================================================================
+//! thread function to load all nodes in big list
+static void * BigListLoadThreadFunction( void * pvParam )
+{
+    RCODE rc = 0;
+    VxThread * poThread = (VxThread *)pvParam;
+    poThread->setIsThreadRunning( true );
+    BigListMgr * poMgr = (BigListMgr *)poThread->getThreadUserParam();
+    if( poMgr )
+    {
+        // load all lists urls from database
+        rc = poMgr->dbRestoreAll( poMgr->getNetworkKey().c_str() );
+        if( rc )
+        {
+            LogMsg( LOG_INFO, "BigListLoadThreadFunction: Restore Error %d\n" );
+        }
+
+        GetPtoPEngine().onBigListLoadComplete( rc );
+    }
+
+    poThread->threadAboutToExit();
+    return nullptr;
+}
+
+
+//============================================================================
 BigListDb::BigListDb( BigListMgr& bigListMgr )
 : DbBase( "BigListDb" )
 , BigList()
@@ -73,9 +98,10 @@ RCODE BigListDb::bigListDbStartup(  const char * pDbFileName )
 		LogMsg( LOG_INFO, "bigListDbStartup  before Restore All\n");
 	}
 
-	//m_BigListLoadThread.startThread( (VX_THREAD_FUNCTION_T)BigListLoadThreadFunction, &m_BigListMgr ); 
 	LogMsg( LOG_INFO, "bigListDbStartup  result %d\n", rc );
 #endif // DEBUG_BIGLIST_DB
+    m_BigListLoadThread.startThread( (VX_THREAD_FUNCTION_T)BigListLoadThreadFunction, &m_BigListMgr );
+
 	m_BigListDbInitialized = true;
 	return rc;
 }
@@ -407,27 +433,6 @@ error_exit:
 	delete pu8Blob;
 	return -1;
 }
-
-//============================================================================
-//! thread function to load all nodes in big list
-void * BigListLoadThreadFunction( void * pvParam )
-{
-	RCODE rc = 0;
-	VxThread * poThread = (VxThread *)pvParam;
-	poThread->setIsThreadRunning( true );
-	BigListMgr * poMgr = (BigListMgr *)poThread->getThreadUserParam();
-	// load all lists urls from database
-	rc = poMgr->dbRestoreAll( poMgr->getNetworkKey().c_str() );
-	if( rc )
-	{
-		LogMsg( LOG_INFO, "BigListLoadThreadFunction: Restore Error %d\n" );
-	}
-
-	GetPtoPEngine().onBigListLoadComplete( rc );
-	poThread->threadAboutToExit();
-    return nullptr;
-}
-
 //============================================================================
 //! restore big list info from blob
 RCODE BigListDb::restoreBigListInfoFromBlob( uint8_t * pu8Temp, int iDataLen, BigListInfo * poInfo, uint64_t lastSessionTime )

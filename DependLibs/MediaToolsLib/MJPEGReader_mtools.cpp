@@ -33,10 +33,14 @@ namespace
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
 		MJPEGReader * reader = (MJPEGReader *)poThread->getThreadUserParam();
-		reader->setIsVidThreadRunning( true );
-		reader->setIsStartThreadCommanded( false );
-		reader->readerThread();
-		reader->setIsVidThreadRunning( false );
+        if( reader )
+        {
+            reader->setIsVidThreadRunning( true );
+            reader->setIsStartThreadCommanded( false );
+            reader->readerThread();
+            reader->setIsVidThreadRunning( false );
+        }
+
 		poThread->threadAboutToExit();
 		return 0;
 	}

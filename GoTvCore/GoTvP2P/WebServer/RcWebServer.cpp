@@ -178,152 +178,155 @@ void * RcSktWebReceiveThreadFunc(  void * pvContext )
 	VxThread * poThread = (VxThread *)pvContext;
 	poThread->setIsThreadRunning( true );
 	VxSktBase * sktBase = (VxSktBase *)poThread->getThreadUserParam();
-	if(	( poThread->isAborted() ) 
-		|| ( INVALID_SOCKET == sktBase->m_Socket ) )
-	{
-		// something has already happened to the connection
-		//! Thread calls this just before exit
-		poThread->threadAboutToExit();
-        return nullptr;
-	}
-
-    if( IsLogEnabled( eLogModuleSkt ) )
-	    LogMsg( LOG_DEBUG,  "skt %d %s SktWebReceiveThreadFunc start\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str() );
-
-	if( eSktTypeTcpAccept != sktBase->getSktType() )
-	{
-		LogMsg( LOG_ERROR, "ERROR skt %d SktWebReceiveThreadFunc is not an accept socket \n", sktBase->m_iSktId );
-		sktBase->m_bClosingFromRxThread = true;
-		sktBase->closeSkt(8888);
-		poThread->threadAboutToExit();
-        return nullptr;
-	}
-
-	char as8Buf[ 0x8000 ];
-	int iDataLen;
-	int iBufferAlmostFull = sktBase->getSktBufSize() - ( sktBase->getSktBufSize() / 10 );
-
-	sktBase->setIsConnected( true );
-	sktBase->setCallbackReason( eSktCallbackReasonConnected );
-	sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
-	sktBase->setCallbackReason( eSktCallbackReasonData );
-	if( sktBase->getSktBufDataLen() )
-	{
-		sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
-	}
-
-	sktBase->setSktBlocking( true );
-
-	while(	( false == poThread->isAborted() ) 
-			&& ( INVALID_SOCKET != sktBase->m_Socket )
-			&& ( eSktCallbackReasonData == sktBase->getCallbackReason() ) )
-	{
-		int iAttemptLen = sktBase->getSktBufFreeSpace();
-		if( iAttemptLen >= (int)sizeof( as8Buf ) )
-		{
-			iAttemptLen = (int)sizeof( as8Buf ) - 16;
-		}
-
-		if( iAttemptLen < iBufferAlmostFull ) 
-		{
-			// socket buffer is almost full.. let app empty some out
-			VxSleep( 200 );
-			continue;
-		}
+    if( sktBase && false == poThread->isAborted() )
+    {
+        if(	( poThread->isAborted() )
+            || ( INVALID_SOCKET == sktBase->m_Socket ) )
+        {
+            // something has already happened to the connection
+            //! Thread calls this just before exit
+            poThread->threadAboutToExit();
+            return nullptr;
+        }
 
         if( IsLogEnabled( eLogModuleSkt ) )
-            LogMsg( LOG_DEBUG,  "skt %d SktWebReceiveThreadFunc wait for recv\n", sktBase->m_iSktId );
+            LogMsg( LOG_DEBUG,  "skt %d %s SktWebReceiveThreadFunc start\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str() );
 
-		iDataLen = recv(		sktBase->m_Socket,	// socket
-								as8Buf,				// buffer to read into
-								iAttemptLen,		// length of buffer space
-								0 );				// flags
+        if( eSktTypeTcpAccept != sktBase->getSktType() )
+        {
+            LogMsg( LOG_ERROR, "ERROR skt %d SktWebReceiveThreadFunc is not an accept socket \n", sktBase->m_iSktId );
+            sktBase->m_bClosingFromRxThread = true;
+            sktBase->closeSkt(8888);
+            poThread->threadAboutToExit();
+            return nullptr;
+        }
 
-        if( IsLogEnabled( eLogModuleSkt ) )
-            LogMsg( LOG_DEBUG,  "skt %d SktWebReceiveThreadFunc wait for recv done len %d\n", sktBase->m_iSktId, iDataLen );
+        char as8Buf[ 0x8000 ];
+        int iDataLen;
+        int iBufferAlmostFull = sktBase->getSktBufSize() - ( sktBase->getSktBufSize() / 10 );
 
-		if( poThread->isAborted() 
-			|| ( eSktCallbackReasonData != sktBase->getCallbackReason() ) 
-			|| ( INVALID_SOCKET == sktBase->m_Socket ) 
-			|| ( iDataLen <= 0 ) )
-		{
-			if( ( iDataLen < 0 ) 
-				&& ( false == poThread->isAborted() ) )
-			{
-				// socket error occurred
-				sktBase->setLastSktError( VxGetLastError() );
-				if( 0 == sktBase->getLastSktError() )
-				{
-					sktBase->setLastSktError( -1 );
-				}
-			}
-			else
-			{
-				sktBase->setLastSktError( 0 );
-			}
+        sktBase->setIsConnected( true );
+        sktBase->setCallbackReason( eSktCallbackReasonConnected );
+        sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+        sktBase->setCallbackReason( eSktCallbackReasonData );
+        if( sktBase->getSktBufDataLen() )
+        {
+            sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+        }
 
-			break;
-		}
+        sktBase->setSktBlocking( true );
 
-		if( iDataLen > 0 )
-		{
-			sktBase->updateLastActiveTime();
-			sktBase->m_iLastRxLen = iDataLen;
+        while(	( false == poThread->isAborted() )
+                && ( INVALID_SOCKET != sktBase->m_Socket )
+                && ( eSktCallbackReasonData == sktBase->getCallbackReason() ) )
+        {
+            int iAttemptLen = sktBase->getSktBufFreeSpace();
+            if( iAttemptLen >= (int)sizeof( as8Buf ) )
+            {
+                iAttemptLen = (int)sizeof( as8Buf ) - 16;
+            }
 
-			memcpy( sktBase->getSktWriteBuf(), as8Buf, iDataLen );
-			sktBase->sktBufAmountWrote( iDataLen );
-			sktBase->RxedPkt( iDataLen );
-			// call back user with the good news.. we have data
-			sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
-		}
-	}
+            if( iAttemptLen < iBufferAlmostFull )
+            {
+                // socket buffer is almost full.. let app empty some out
+                VxSleep( 200 );
+                continue;
+            }
 
-	if( 0 != sktBase->getLastSktError() )
-	{
-		// we had a error
-		sktBase->setCallbackReason( eSktCallbackReasonError );
-		sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
-	}
+            if( IsLogEnabled( eLogModuleSkt ) )
+                LogMsg( LOG_DEBUG,  "skt %d SktWebReceiveThreadFunc wait for recv\n", sktBase->m_iSktId );
 
-	if( false == poThread->isAborted() )
-	{
-		// we are closing due to error .. not because user called close
-		sktBase->m_bClosingFromRxThread = true;
-	}
+            iDataLen = recv(		sktBase->m_Socket,	// socket
+                                    as8Buf,				// buffer to read into
+                                    iAttemptLen,		// length of buffer space
+                                    0 );				// flags
 
-#ifdef DEBUG_SKTS
-	LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt %d closing func 0x%x\n", sktBase->m_iSktId, sktBase->m_pfnReceive );
-#endif // DEBUG_SKTS
-	sktBase->setCallbackReason( eSktCallbackReasonClosing );
-	sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
-	sktBase->setCallbackReason( eSktCallbackReasonClosed );
-	sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+            if( IsLogEnabled( eLogModuleSkt ) )
+                LogMsg( LOG_DEBUG,  "skt %d SktWebReceiveThreadFunc wait for recv done len %d\n", sktBase->m_iSktId, iDataLen );
 
-	#ifdef DEBUG_SKTS
-	LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt %d 0x%x exiting\n", sktBase->m_iSktId, sktBase );
-	#endif // DEBUG_SKTS
+            if( poThread->isAborted()
+                || ( eSktCallbackReasonData != sktBase->getCallbackReason() )
+                || ( INVALID_SOCKET == sktBase->m_Socket )
+                || ( iDataLen <= 0 ) )
+            {
+                if( ( iDataLen < 0 )
+                    && ( false == poThread->isAborted() ) )
+                {
+                    // socket error occurred
+                    sktBase->setLastSktError( VxGetLastError() );
+                    if( 0 == sktBase->getLastSktError() )
+                    {
+                        sktBase->setLastSktError( -1 );
+                    }
+                }
+                else
+                {
+                    sktBase->setLastSktError( 0 );
+                }
 
-	if( INVALID_SOCKET != sktBase->m_Socket )
-	{
-		sktBase->m_bClosingFromRxThread = true;
-		sktBase->closeSkt( 96296 ); 
-	}
+                break;
+            }
 
-	sktBase->setCallbackReason( eSktCallbackReasonClosing );
-	sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
-	if( false == poThread->isAborted() )
-	{
-		// we are closing due to error .. not because user called close
-		sktBase->m_bClosingFromRxThread = true;
-		sktBase->closeSkt(88887);
-	}
+            if( iDataLen > 0 )
+            {
+                sktBase->updateLastActiveTime();
+                sktBase->m_iLastRxLen = iDataLen;
 
-	sktBase->setCallbackReason( eSktCallbackReasonClosed );
-	sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
-	if( sktBase->m_SktMgr )
-	{
-		sktBase->m_SktMgr->handleSktCloseEvent( sktBase );
-	}
+                memcpy( sktBase->getSktWriteBuf(), as8Buf, iDataLen );
+                sktBase->sktBufAmountWrote( iDataLen );
+                sktBase->RxedPkt( iDataLen );
+                // call back user with the good news.. we have data
+                sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+            }
+        }
+
+        if( 0 != sktBase->getLastSktError() )
+        {
+            // we had a error
+            sktBase->setCallbackReason( eSktCallbackReasonError );
+            sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+        }
+
+        if( false == poThread->isAborted() )
+        {
+            // we are closing due to error .. not because user called close
+            sktBase->m_bClosingFromRxThread = true;
+        }
+
+    #ifdef DEBUG_SKTS
+        LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt %d closing func 0x%x\n", sktBase->m_iSktId, sktBase->m_pfnReceive );
+    #endif // DEBUG_SKTS
+        sktBase->setCallbackReason( eSktCallbackReasonClosing );
+        sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+        sktBase->setCallbackReason( eSktCallbackReasonClosed );
+        sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+
+        #ifdef DEBUG_SKTS
+        LogMsg( LOG_INFO, "VxSktBaseReceiveVxThreadFunc: skt %d 0x%x exiting\n", sktBase->m_iSktId, sktBase );
+        #endif // DEBUG_SKTS
+
+        if( INVALID_SOCKET != sktBase->m_Socket )
+        {
+            sktBase->m_bClosingFromRxThread = true;
+            sktBase->closeSkt( 96296 );
+        }
+
+        sktBase->setCallbackReason( eSktCallbackReasonClosing );
+        sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+        if( false == poThread->isAborted() )
+        {
+            // we are closing due to error .. not because user called close
+            sktBase->m_bClosingFromRxThread = true;
+            sktBase->closeSkt(88887);
+        }
+
+        sktBase->setCallbackReason( eSktCallbackReasonClosed );
+        sktBase->m_pfnReceive( sktBase, sktBase->getRxCallbackUserData() );
+        if( sktBase->m_SktMgr )
+        {
+            sktBase->m_SktMgr->handleSktCloseEvent( sktBase );
+        }
+    }
 
 	//! Thread calls this just before exit
 	poThread->threadAboutToExit();

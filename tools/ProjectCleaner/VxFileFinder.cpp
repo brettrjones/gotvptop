@@ -8,8 +8,12 @@ long DoFinderThreadFunc(void * pvContext)
 	VxThread * poVxThread = (VxThread *)pvContext;
 	poVxThread->setIsThreadRunning(true);
 	VxFileFinder * finder = (VxFileFinder *)poVxThread->getThreadUserParam();
-	finder->doFinderOperation();
-	//LogMsg(LOG_INFO, "Zipper::zipFiles compress in thread DoZipThreadFunc done\n");
+    if( finder && false == poThread->isAborted() )
+    {
+        finder->doFinderOperation();
+        //LogMsg(LOG_INFO, "Zipper::zipFiles compress in thread DoZipThreadFunc done\n");
+    }
+
 	poVxThread->threadAboutToExit();
 	return 0;
 }

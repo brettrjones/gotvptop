@@ -43,9 +43,9 @@ namespace
 		if( poDevice )
 		{
 			bResult = poDevice->doRootDeviceQueryThreadFunction();
-		}
+            poDevice->m_bDisabled = bResult;
+        }
 
-		poDevice->m_bDisabled = bResult;
 		poThread->threadAboutToExit();
 		return 0;
 	}
