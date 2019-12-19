@@ -171,10 +171,14 @@ void NetworkStateAvail::runNetworkState( void )
         if( m_Engine.getPeerMgr().isListening() )
         {
             // already listening
+            LogMsg( LOG_INFO, "Listening on port %d at time %3.3f\n", m_Engine.getPeerMgr().getListenPort(), availTimer.elapsedSec() );
+            m_Engine.getToGui().toGuiStatusMessage( "#Network Testing listen port is open" );
             break;
         }
 
-        VxSleep( 500 );
+        LogMsg( LOG_INFO, "Waiting for listen port to open %3.3f\n", availTimer.elapsedSec() );
+        m_Engine.getToGui().toGuiStatusMessage( "#Network Testing waiting for our listen port to open" );
+        VxSleep( 1000 );
         timeEnd = GetGmtTimeMs();
     }
 

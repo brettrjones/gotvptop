@@ -395,9 +395,10 @@ RCODE VxServerMgr::startListening(  uint16_t u16ListenPort )
 			return -1;
 	}
 
-#if defined(DEBUG_SKT_CONNECTIONS)
-	LogMsg( LOG_INFO, "VxServerMgr::startListening port %d\n", u16ListenPort );
-#endif // DEBUG_VXSERVER_MGR
+    if( IsLogEnabled( eLogModuleConnect ) )
+    {
+        LogMsg( LOG_INFO, "VxServerMgr::startListening attempt on port %d\n", u16ListenPort );
+    }
 	RCODE rc = 0;
 
 	//

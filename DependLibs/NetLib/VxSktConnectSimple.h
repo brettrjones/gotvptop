@@ -24,23 +24,23 @@ public:
 	VxSktConnectSimple();
 	virtual ~VxSktConnectSimple();
 
-	uint16_t							getRemotePort( void )							{ return m_RmtIp.getPort(); }
+	uint16_t					getRemotePort( void )							{ return m_RmtIp.getPort(); }
 	const char *				getRemoteIpAddress( void )                      { return m_RmtIp.toStdString().c_str(); }
-	uint16_t							getLocalPort( void )							{ return m_LclIp.getPort(); }
+	uint16_t					getLocalPort( void )							{ return m_LclIp.getPort(); }
 	const char *				getLocalIpAddress( void )						{ return m_LclIp.toStdString().c_str(); }
 
-	uint16_t							getCryptoKeyPort( void )						{ return m_RmtIp.getPort(); }
+	uint16_t					getCryptoKeyPort( void )						{ return m_RmtIp.getPort(); }
 
 	virtual bool				isConnected( void );
 
 	virtual SOCKET				connectTo(	const char *	pIpOrUrl,						// remote ip or url
-											uint16_t				u16Port,						// port to connect to
+											uint16_t		u16Port,						// port to connect to
 											int				iTimeoutMilliSeconds = WEBSITE_CONNECT_TIMEOUT );	// timeout attempt to connect
 
 	virtual bool				connectToWebsite( 	const char *		pWebsiteUrl,
 													std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
 													std::string&		strFile,		// return file name.. images/me.jpg
-													uint16_t&				u16Port,
+													uint16_t&			u16Port,
 													int					iConnectTimeoutMs = WEBSITE_CONNECT_TIMEOUT );
 
 	virtual RCODE				sendData(	const char *	pData,							// data to send

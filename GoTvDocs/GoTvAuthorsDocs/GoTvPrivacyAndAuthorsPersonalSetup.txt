@@ -1,10 +1,12 @@
 
-As the author of GoTvPtoP got a bit paranoid about privacy. In USA it takes 3 forms of identity to get a job but only a IP Address logged somewhere to convict you of a crime.
+As the author of NoLimitConnect got a bit paranoid about privacy. In USA it takes 3 forms of identity to get a job but only a IP Address logged somewhere to convict you of a crime.
 In the USA "you are your IP Address" even if someone else used it. You can be sued for thousands of dollars using just your IP Address as your identity. GoTvPtoP and Kodi use 3rd Party plugins, I was paranoid that they might cause copywrite infringement and in the USA copywrite infringement penalties can be over $30,000 fine per work infringed and up to 5 years in jail (In USA we have the highest percentage of our citizens in jail of any country in the world), however, I needed to be able to make GoTvPtoP work with these plugins.
 
 You might want to
 
-1.) Use a VPN. NordVPN service seems ok. ExpressVPN is probably a good alternative to NordVPN but I have no personal experince with them and NordVPN has worked well so far.
+1.) NordVPN and ExpressVPN do NOT allow port forwarding that is required to greatly speeds up No Limit Connect network. You should chose a VPN that allows port forwarding https://www.reddit.com/r/VPNTorrents/comments/3oar5m/list_of_vpns_that_allow_p2p_and_port_forwarding/
+also you should look at
+https://thatoneprivacysite.net/#vpn-review-badge-chart
  
 2.) Use Tor Web Browser for Web searchs. The url of Tor is https://www.torproject.org/download/download-easy.html.en#warning
  
@@ -15,7 +17,7 @@ You might want to
  
 5.) Netflix and DramaFever was ok but had to Cancel my SlingBlade account because would only show warning "We Have Detected You Are Using A Proxy" instead of showing movies :(
  
-6.) Use vanilla VISA gift cards to pay for things like PeerBlock subscription etc. Vanilla VISA seem to require the least amount of personal info. There url is https://www.vanillavisa.com
+6.) Use vanilla VISA gift cards to pay for things like VPN subscription etc. Vanilla VISA seem to require the least amount of personal info. There url is https://www.vanillavisa.com
  
 7.) Microsoft has gone crazy with spyware and redirecting your searches etc to microsoft sites. I wont explain it all because it envolved a lot of work to fix Windows 10 and I wasn't completely successfull with getting rid of cortana but the Firefox plugin "Redirect To DuckDuckGo" helped.
  
