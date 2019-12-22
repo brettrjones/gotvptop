@@ -1157,16 +1157,22 @@ connected:
 SOCKET VxConnectTo(		InetAddress&		lclIp,
 						InetAddrAndPort&	rmtIp,
 						const char *		pIpAddr,				// remote ip
-						uint16_t					u16Port,				// port to connect to
+						uint16_t			u16Port,				// port to connect to
 						int					iTimeoutMilliSeconds,
 						RCODE *				retSktError )	// milli seconds before connect attempt times out
 {
 	if( VxIsIPv4Address( pIpAddr) || VxIsIPv6Address( pIpAddr) )
 	{
 		rmtIp.setIp( pIpAddr );
+        rmtIp.setPort( u16Port );
 	}
-	else if( false == VxResolveHostToIp( pIpAddr, u16Port, rmtIp ) )
+    if( VxResolveHostToIp( pIpAddr, u16Port, rmtIp ) )
+    {
+        rmtIp.setPort( u16Port );
+    }
+    else
 	{
+        LogModule( eLogModuleConnect, LOG_INFO, "VxConnectTo: FAILED to resolve %s\n", pIpAddr );
 		return INVALID_SOCKET;
 	}
 
@@ -1174,15 +1180,14 @@ SOCKET VxConnectTo(		InetAddress&		lclIp,
 	SOCKET sktHandle = VxConnectTo( lclIp, rmtIp, u16Port, iTimeoutMilliSeconds, retSktError );
 	if( INVALID_SOCKET == sktHandle )
 	{
-        if( IsLogEnabled( eLogModuleConnect ) )
-		    LogMsg( LOG_INFO, "VxConnectTo: FAIL connect %3.3f sec lcl ip %s to %s:%d timeout %d error %d\n",
-	    connectToTimer.elapsedSec(), lclIp.toStdString().c_str(), rmtIp.toStdString().c_str(), u16Port, iTimeoutMilliSeconds, retSktError ? *retSktError : -1 );
+        LogModule( eLogModuleConnect, LOG_DEBUG, "VxConnectTo: FAIL connect %3.3f sec lcl ip %s to %s:%d timeout %d error %d\n",
+	            connectToTimer.elapsedSec(), lclIp.toStdString().c_str(), rmtIp.toStdString().c_str(), u16Port, iTimeoutMilliSeconds, retSktError ? *retSktError : -1 );
 	}
-	//else
-	//{
-	//	LogMsg( LOG_INFO, "VxConnectTo: SUCCESS connect %3.3f sec lcl ip %s to %s:%d\n",
-	//		connectToTimer.elapsedSec(), lclIp.toStdString().c_str(), rmtIp.toStdString().c_str(), u16Port );
-	//}
+	else
+	{
+        LogModule( eLogModuleConnect, LOG_DEBUG, "VxConnectTo: SUCCESS connect %3.3f sec lcl ip %s to %s:%d\n",
+			connectToTimer.elapsedSec(), lclIp.toStdString().c_str(), rmtIp.toStdString().c_str(), u16Port );
+	}
 
 	return sktHandle;
 	/*
@@ -1251,7 +1256,7 @@ SOCKET VxConnectToWebsite(	InetAddress&		lclIp,			// ip of adapter to use
 							const char *		pWebsiteUrl,
 							std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
 							std::string&		strFile,		// return file name.. images/me.jpg
-							uint16_t&				u16Port,		// return port
+							uint16_t&			u16Port,		// return port
 							int					iConnectTimeoutMs )
 {
 	// split host name from file path
@@ -1758,6 +1763,7 @@ RCODE VxReceiveSktData( SOCKET&			sktHandle,
 
 	return m_rcLastError;
 }
+
 //============================================================================
 bool VxBindSkt( SOCKET oSocket, struct sockaddr_storage * poAddr )
 {
@@ -1768,8 +1774,6 @@ bool VxBindSkt( SOCKET oSocket, struct sockaddr_storage * poAddr )
 	}
 	return true;
 }
-
-
 
 //============================================================================
 // C functions

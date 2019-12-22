@@ -95,9 +95,7 @@ const char *					VxStripIPv6ScopeID( const char *addr, std::string &buf );
 void							VxRefreshDefaultIps( void );
 bool							VxCanConnectUsingIPv6( void );
 SOCKET							VxConnectToIPv6( const char * ipv6, uint16_t u16Port, int iTimeoutMs = SKT_IPV6_CONNECT_TIMEOUT, RCODE * retSktErr = 0 );
-
-
-																											//! receive data.. if timeout is set then will keep trying till buffer is full or error or timeout expires
+																										//! receive data.. if timeout is set then will keep trying till buffer is full or error or timeout expires
 RCODE							VxReceiveSktData( SOCKET&			oSkt,
 												  char *			pRetBuf,				// buffer to receive data into
 												  int				iBufLenIn,				// length of buffer
@@ -106,9 +104,6 @@ RCODE							VxReceiveSktData( SOCKET&			oSkt,
 												  bool			bAbortIfCrLfCrLf = false,		// if true then abort receive when \r\n\r\n is received
 												  bool *			pbRetGotCrLfCrLf = NULL );		// if received \r\n\r\n set to truevoid							VxFillHints( struct addrinfo& oHints, bool bUdpSkt = false, bool ipv6Only = false );
 
-//bool							VxBindSkt( SOCKET oSocket, uint16_t u16Port ); // assumes default ip
-
-																			   //! return true if port is already in use on this local ip address
 bool							VxBindSkt( SOCKET oSocket, struct sockaddr_storage * poAddr );
 bool							VxIsIpPortInUse( uint16_t u16Port, const char * pLocalIp = NULL);
 #endif // __cplusplus

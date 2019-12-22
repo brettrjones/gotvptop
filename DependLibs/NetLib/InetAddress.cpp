@@ -1198,3 +1198,10 @@ void InetAddrAndPort::setIpAndPort( struct sockaddr& oAddr )
 {
 	m_u16Port = setIp( oAddr );
 }
+
+//============================================================================
+void InetAddrAndPort::setIpAndPort( const char * ipAddr, uint16_t port )
+{
+    setIp( ipAddr );
+    m_u16Port = port;
+}

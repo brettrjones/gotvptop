@@ -81,6 +81,38 @@ bool IsLogEnabled( ELogModule logModule )
 }
 
 //============================================================================
+GOTV_BEGIN_CDECLARES
+void LogAppendLineFeed( char * buf, size_t sizeOfBuf );
+GOTV_END_CDECLARES
+
+//============================================================================
+void LogModule( ELogModule eLogModule, unsigned long u32MsgType, const char* msg, ... )
+{
+    if( ( false == VxIsDebugEnabled() ) )
+    {
+        return;
+    }
+
+    if( 0 == ( g_u32LogFlags && u32MsgType ) )
+    {
+        return; // don't log
+    }
+
+    if( IsLogEnabled( eLogModule ) )
+    {
+        char as8Buf[ MAX_ERR_MSG_SIZE ];
+        va_list argList;
+        va_start( argList, msg );
+        vsnprintf( as8Buf, sizeof( as8Buf ), msg, argList );
+        as8Buf[ sizeof( as8Buf ) - 1 ] = 0;
+        LogAppendLineFeed( as8Buf, sizeof( as8Buf ) );
+        va_end( argList );
+
+        VxHandleLogMsg( u32MsgType, as8Buf );
+    }
+}
+
+//============================================================================
 void VxGetLogMessages( unsigned long u32MsgTypes, std::vector<LogEntry>& retMsgs )
 {
 #if ENABLE_LOG_LIST
@@ -327,7 +359,6 @@ void LogMsgVarg(unsigned long u32MsgType, const char *fmt, va_list argList )
 	
 	VxHandleLogMsg( u32MsgType, as8Buf );
 }
-
 
 //============================================================================
 void LogMsg( unsigned long u32MsgType, const char* msg, ...)

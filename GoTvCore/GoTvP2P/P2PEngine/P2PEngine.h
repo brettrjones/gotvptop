@@ -134,6 +134,7 @@ public:
     virtual void				fromGuiAppResume( void ) override;
 
     virtual void				fromGuiUserLoggedOn( VxNetIdent * netIdent ) override;
+    void                        updateFromEngineSettings( EngineSettings& engineSettings ); 
     virtual void				fromGuiOnlineNameChanged( const char * newOnlineName ) override;
     virtual void				fromGuiMoodMessageChanged( const char * newMoodMessage ) override;
     virtual void				fromGuiIdentPersonalInfoChanged( int age, int gender, int language, int preferredContent ) override;

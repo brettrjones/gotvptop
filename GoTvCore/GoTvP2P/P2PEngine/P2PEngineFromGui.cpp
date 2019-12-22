@@ -197,10 +197,41 @@ void P2PEngine::fromGuiUserLoggedOn( VxNetIdent * netIdent )
 	
 	memcpy( (VxNetIdent *)&m_PktAnn, netIdent, sizeof( VxNetIdent ));
 	m_PktAnn.setSrcOnlineId( netIdent->getMyOnlineId() );
+    // set network settings from saved settings
+
 	startupEngine();
+    updateFromEngineSettings( getEngineSettings() );
 	m_PluginMgr.fromGuiUserLoggedOn();
 	m_NetworkStateMachine.fromGuiUserLoggedOn();
 	LogMsg( LOG_INFO, "P2PEngine fromGuiUserLoggedOn done\n" );
+}
+//============================================================================
+void P2PEngine::updateFromEngineSettings( EngineSettings& engineSettings )
+{
+    //std::string networkKeyString;
+    //std::string netServiceUrl;
+    std::string netHostUrl;
+
+    //engineSettings.getNetworkKey( networkKeyString );
+    //engineSettings.getNetServiceWebsiteUrl( netServiceUrl );
+    engineSettings.getNetHostWebsiteUrl( netHostUrl );
+    // we need to update the globals so accessable everywhere
+    std::string webHostName;
+    std::string webFileName;
+    uint16_t port = 0;
+    VxSplitHostAndFile( netHostUrl.c_str(), webHostName, webFileName, port );
+    if( !webHostName.empty() )
+    {
+        VxSetNetworkHostName( webHostName.c_str() );
+        VxSetNetworkHostPort( port );
+        VxSetNetworkHostUrl( netHostUrl.c_str() );
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "Empty Network Host Name" );
+    }
+
+    m_NetworkStateMachine.updateFromEngineSettings( engineSettings );
 }
 
 //============================================================================

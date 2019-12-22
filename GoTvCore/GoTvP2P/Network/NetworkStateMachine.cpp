@@ -350,26 +350,30 @@ bool NetworkStateMachine::checkAndHandleNetworkEvents( void )
 //============================================================================
 void NetworkStateMachine::fromGuiUserLoggedOn( void )
 {
-#ifdef DEBUG_PTOP_NETWORK_STATE
-	LogMsg( LOG_INFO, "NetworkStateMachine::fromGuiUserLoggedOn\n" );
-#endif // DEBUG_PTOP_NETWORK_STATE
-	EngineSettings& engineSettings = m_Engine.getEngineSettings();
-	logonUpdateFromEngineSettings( engineSettings );
+    if( IsLogEnabled( eLogModuleNetworkState ) )
+    {
+        LogMsg( LOG_INFO, "NetworkStateMachine::fromGuiUserLoggedOn\n" );
+    }
 
 	m_bUserLoggedOn = true;
 }
 
 //============================================================================
-void NetworkStateMachine::logonUpdateFromEngineSettings( EngineSettings& engineSettings )
+void NetworkStateMachine::updateFromEngineSettings( EngineSettings& engineSettings )
 {
+    // TODO: should probably use a mutex here
 	uint16_t u16TcpPort = engineSettings.getTcpIpPort();
 	m_PktAnn.setOnlinePort( u16TcpPort );
 
-	std::string networkName;
-	engineSettings.getNetworkKey( networkName );
-	m_NetworkMgr.setNetworkKey( networkName.c_str() );
+	std::string networkKey;
+	engineSettings.getNetworkKey( networkKey );
+    if( !networkKey.empty() && ( networkKey != m_NetworkMgr.getNetworkKey() ) )
+    {
+        m_NetworkMgr.setNetworkKey( networkKey.c_str() );
+    }
 
-	m_Engine.getBigListMgr().dbRestoreAll( networkName.c_str() );
+    // will restore only if network key has changed
+    m_Engine.getBigListMgr().dbRestoreAll( networkKey.c_str() );
 }
 
 //============================================================================
@@ -392,21 +396,22 @@ void NetworkStateMachine::restartNetwork( void )
 void NetworkStateMachine::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork )
 {
     bool hasChanged = ( m_LocalNetworkIp != lclIp );
-	m_LocalNetworkIp = lclIp;
-	VxSetLclIpAddress( lclIp );
-	//LogMsg( LOG_INFO, "NetworkStateMachine::fromGuiNetworkAvailable\n" );
-
     uint16_t u16TcpPort = m_Engine.getEngineSettings().getTcpIpPort();
-	m_PktAnn.setOnlinePort( u16TcpPort );
     hasChanged |= ( m_PktAnn.getOnlinePort() != u16TcpPort );
-	m_PktAnn.getLanIPv4().setIp( lclIp );
     hasChanged |= ( m_bIsCellNetwork != isCellularNetwork );
+
     if( hasChanged )
     {
+        m_LocalNetworkIp = lclIp;
+        m_bIsCellNetwork = isCellularNetwork;
+        VxSetLclIpAddress( lclIp );
+        m_PktAnn.getLanIPv4().setIp( lclIp );
+        m_PktAnn.setOnlinePort( u16TcpPort );
         m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
     }
 
-	m_bIsCellNetwork = isCellularNetwork;
+    LogModule( eLogModuleNetworkState, LOG_INFO, "NetworkStateMachine::fromGuiNetworkAvailable %s", lclIp );
+
 	m_NetworkStateMutex.lock();
 	m_NetworkEventList.push_back( new NetworkEventAvail( *this, lclIp, isCellularNetwork ) );
 	m_NetworkStateMutex.unlock();

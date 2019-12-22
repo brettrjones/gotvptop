@@ -60,6 +60,8 @@ enum ELogModule
     eMaxLogModule
 };
 
+void LogModule( ELogModule eLogModule, unsigned long u32MsgType, const char* msg, ... );
+
 /// @brief return true if should log the given module
 bool IsLogEnabled( ELogModule logModule );
 

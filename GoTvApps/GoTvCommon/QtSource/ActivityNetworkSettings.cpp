@@ -163,6 +163,8 @@ void ActivityNetworkSettings::updateSettingsFromDlg()
 	//}
 	m_Engine.getEngineSettings().setFirewallTestSetting( eFirewallTestType );
 	m_Engine.getEngineSettings().setUseUpnpPortForward( ui.m_UseUpnpCheckBox->isChecked() );
+
+    m_Engine.engineSettingsUpdate( m_Engine.getEngineSettings() );
 }
 
 ////============================================================================

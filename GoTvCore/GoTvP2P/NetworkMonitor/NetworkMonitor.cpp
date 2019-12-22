@@ -29,6 +29,7 @@
 namespace
 {
 	const int NET_MONITOR_CHECK_INTERVAL_SEC = 4;
+    const int NET_MONITOR_CONNECT_TO_HOST_TIMOUT_MS = 8000;
 }
 
 //============================================================================
@@ -137,6 +138,7 @@ void NetworkMonitor::onOncePerSecond( void )
 		return;
 	}
 
+    static int findIpTryCnt = 0;
 	if( pickAddresss.size() )
 	{
 		if( m_strCellNetIp.empty() && m_strPreferredAdapterIp.empty() )
@@ -145,31 +147,57 @@ static int64_t timeLastAttempt = 0;
 			int64_t timeNow = GetTimeStampMs();
 			if( ( timeNow - timeLastAttempt ) > 10000 )
 			{
+                timeLastAttempt = timeNow;
+                findIpTryCnt++;
+                m_strLastFoundIp.clear();
+
 				// no network ip specified..
 				// picking the first one might pick one that is disconnected we need a active connection to internet
 				//m_strLastFoundIp = pickAddresss[0];
 				VxSktConnectSimple sktConnect;
-                // TODO: replace hardcoded url with NetworkHost url
-				SOCKET skt = sktConnect.connectTo( VxGetNetworkHostName(),		// remote ip or url 
-					                                80,						// port to connect to
-					                                8000 );					// timeout attempt to connect
-				if( INVALID_SOCKET != skt )
+                std::string externIp;
+                m_Engine.getEngineSettings().getExternalIp( externIp );
+    
+				if( !m_Engine.getHasHostService( eHostServiceNetworkHost ) 
+                    || ( VxIsIPv4Address( VxGetNetworkHostName() ) && !externIp.empty() && ( externIp != VxGetNetworkHostName() ) ) )
 				{
-					// get local address
-					InetAddrAndPort lclAddr;
-					if( 0 == VxGetLclAddress( skt, lclAddr ) )
-					{
-						m_strLastFoundIp = lclAddr.toStdString();
-					}
+                    SOCKET skt = sktConnect.connectTo( VxGetNetworkHostName(),		// remote ip or url 
+                                                       VxGetNetworkHostPort(),		// port to connect to 
+                                                       NET_MONITOR_CONNECT_TO_HOST_TIMOUT_MS );					    // timeout attempt to connect
+                    if( INVALID_SOCKET != skt )
+                    {
+                        // get local address
+                        InetAddrAndPort lclAddr;
+                        if( 0 == VxGetLclAddress( skt, lclAddr ) )
+                        {
+                            m_strLastFoundIp = lclAddr.toStdString();
+                            findIpTryCnt = 0;
+                        }
 
-					VxCloseSkt( skt );
+                        VxCloseSkt( skt );
+                        /* NOT REQUIRED TO VERIFY LOCAL ADAPTER IP
+                        skt = sktConnect2.connectTo( m_strLastFoundIp.c_str(),                  // local adapter ip
+                                                     VxGetNetworkHostName(),		            // remote ip or url
+                                                     VxGetNetworkHostPort(),					// port to connect to
+                                                     NET_MONITOR_CONNECT_TO_HOST_TIMOUT_MS );	// timeout attempt to connect
+                        if( INVALID_SOCKET != skt )
+                        {
+                            VxCloseSkt( skt );
+                        }
+                        else
+                        {
+                            m_strLastFoundIp.clear();
+                        }
+                        */
+                    }
 				}
-				else
+				
+                if( m_strLastFoundIp.empty() )
 				{
 					// try again but use google
-					skt = sktConnect.connectTo(	"www.google.com",		// remote ip or url
-						80,						// port to connect to
-						8000 );					// timeout attempt to connect
+                    SOCKET skt = sktConnect.connectTo( "www.google.com",		// remote ip or url
+						                               80,						// port to connect to
+                                                       NET_MONITOR_CONNECT_TO_HOST_TIMOUT_MS );					// timeout attempt to connect
 					if( INVALID_SOCKET != skt )
 					{
 						// get local address
@@ -177,9 +205,24 @@ static int64_t timeLastAttempt = 0;
 						if( 0 == VxGetLclAddress( skt, lclAddr ) )
 						{
 							m_strLastFoundIp = lclAddr.toStdString();
+                            findIpTryCnt = 0;
 						}
 
-						VxCloseSkt( skt );
+						VxCloseSkt( skt );        
+                        /* NOT REQUIRED TO VERIFY LOCAL ADAPTER IP
+                        skt = sktConnect2.connectTo( m_strLastFoundIp.c_str(),  // local adapter ip
+                                                     "www.google.com",		    // remote ip or url
+                                                     80,						// port to connect to
+                                                     NET_MONITOR_CONNECT_TO_HOST_TIMOUT_MS );					// timeout attempt to connect
+                        if( INVALID_SOCKET != skt )
+                        {
+                            VxCloseSkt( skt );
+                        }
+                        else
+                        {
+                            m_strLastFoundIp.clear();
+                        }
+                        */
 					}
 				}
 			}
@@ -193,6 +236,11 @@ static int64_t timeLastAttempt = 0;
 		{
 			m_Engine.fromGuiNetworkLost();
 		}
+
+        if( findIpTryCnt > 3 )
+        {
+            LogMsg( LOG_ERROR, "Could Not Get Connection To Internet" );
+        }
 
 		return;
 	}

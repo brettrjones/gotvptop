@@ -27,15 +27,22 @@ public:
 	uint16_t					getRemotePort( void )							{ return m_RmtIp.getPort(); }
 	const char *				getRemoteIpAddress( void )                      { return m_RmtIp.toStdString().c_str(); }
 	uint16_t					getLocalPort( void )							{ return m_LclIp.getPort(); }
+    void				        setLocalIpAddress( const char * lclIp )			{ m_LclIp.setIp( lclIp ); }
 	const char *				getLocalIpAddress( void )						{ return m_LclIp.toStdString().c_str(); }
+    void				        setLocalIpAndPort( const char * lclIp, uint16_t port )			{ m_LclIp.setIpAndPort( lclIp, port ); }
 
 	uint16_t					getCryptoKeyPort( void )						{ return m_RmtIp.getPort(); }
 
 	virtual bool				isConnected( void );
 
-	virtual SOCKET				connectTo(	const char *	pIpOrUrl,						// remote ip or url
-											uint16_t		u16Port,						// port to connect to
-											int				iTimeoutMilliSeconds = WEBSITE_CONNECT_TIMEOUT );	// timeout attempt to connect
+    virtual SOCKET				connectTo( const char *	pIpOrUrl,						// remote ip or url
+                                           uint16_t		u16Port,						// port to connect to
+                                           int			iTimeoutMilliSeconds = WEBSITE_CONNECT_TIMEOUT );	// timeout attempt to connect
+
+    virtual SOCKET				connectTo( const char * lclAdapterIp,					// local adapter ip
+                                           const char *	pIpOrUrl,						// remote ip or url
+                                           uint16_t		u16Port,						// port to connect to
+                                           int			iTimeoutMilliSeconds = WEBSITE_CONNECT_TIMEOUT );	// timeout attempt to connect
 
 	virtual bool				connectToWebsite( 	const char *		pWebsiteUrl,
 													std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com

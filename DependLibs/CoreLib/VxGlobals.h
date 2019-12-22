@@ -68,6 +68,9 @@ const char *	            VxGetCompanyWebsite( void );
 
 void	                    VxSetNetworkHostName( const char * netHostName );
 const char *	            VxGetNetworkHostName( void );
+void	                    VxSetNetworkHostPort( uint16_t netHostPort );
+uint16_t	                VxGetNetworkHostPort( void );
+void	                    VxSetNetworkHostUrl( const char * netHostUrl );
 const char *	            VxGetNetworkHostUrl( void );
 
 

@@ -26,12 +26,11 @@
 
 //============================================================================
 //! generate connection key from network identity
-RCODE GenerateConnectionKey( VxKey *					poRetKey,		// set this key
-                                VxConnectId *			poConnectId,	// network identity
-                                uint16_t						cryptoPort,
-                                const char *			networkName )
+RCODE GenerateConnectionKey( VxKey *				poRetKey,		// set this key
+                             VxConnectId *			poConnectId,	// network identity
+                             uint16_t				cryptoPort,
+                             const char *			networkName )
 {
-    //std::string csNetName	= VxGetP2PNetworkName(); //network name
     std::string strNetName = networkName;
 
     uint64_t u64IdLowPart = poConnectId->getVxGUIDLoPart();

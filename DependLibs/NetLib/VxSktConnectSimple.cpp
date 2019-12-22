@@ -12,7 +12,9 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
+
 #include "VxSktConnectSimple.h"
+#include "VxResolveHost.h"
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxGlobals.h>
@@ -50,7 +52,7 @@ bool VxSktConnectSimple::isConnected( void )
 //============================================================================
 //! connect to remote ip
 SOCKET VxSktConnectSimple::connectTo(	const char *	pIpOrUrl,				// remote ip or url
-										uint16_t				u16Port,				// port to connect to
+										uint16_t		u16Port,				// port to connect to
 										int				iTimeoutMilliSeconds )	// milli seconds before connect attempt times out
 {
 	if( isConnected() )
@@ -68,6 +70,73 @@ SOCKET VxSktConnectSimple::connectTo(	const char *	pIpOrUrl,				// remote ip or 
 	}
 
 	return m_Socket;
+}
+
+//============================================================================
+SOCKET VxSktConnectSimple::connectTo( const char *  lclAdapterIp,					// local adapter ip
+                                      const char *	pIpOrUrl,						// remote ip or url
+                                      uint16_t		u16Port,						// port to connect to
+                                      int			iTimeoutMilliSeconds )	        // timeout attempt to connect
+{
+    InetAddrAndPort	rmtIpAddr;
+    if( VxIsIPv4Address( pIpOrUrl ) || VxIsIPv6Address( pIpOrUrl ) )
+    {
+        rmtIpAddr.setIp( pIpOrUrl );
+        rmtIpAddr.setPort( u16Port );
+    }
+    else if( VxResolveHostToIp( pIpOrUrl, u16Port, rmtIpAddr ) )
+    {
+        rmtIpAddr.setPort( u16Port );
+    }
+    else
+    {
+        return INVALID_SOCKET;
+    }
+
+    bool bConnectionOk = false;
+    std::string strLclAddr = lclAdapterIp;
+    InetAddress lclIpAddr( lclAdapterIp );				// local ip address
+
+    // attempt connect
+    // Open a socket with the correct address family for this address.
+    SOCKET skt = socket( rmtIpAddr.isIPv4() ? PF_INET : PF_INET6, SOCK_STREAM, 0 );
+    if( skt == INVALID_SOCKET )
+    {
+        LogMsg( LOG_INFO, "VxSktConnectSimple::connectTo: failed to create socket\n" );
+    }
+    else
+    {
+        struct sockaddr_storage oLclSktStorage;
+        lclIpAddr.fillAddress( oLclSktStorage, 0 );
+        if( false == VxBindSkt( skt, &oLclSktStorage ) )
+        {
+            LogMsg( LOG_INFO, "VxSktConnectSimple::connectTo: failed to bind skt with ip %s\n", strLclAddr.c_str() );
+        }
+        else
+        {
+            struct sockaddr_storage oRmtSktAddr;
+            int iRmtSktAddrLen = rmtIpAddr.fillAddress( oRmtSktAddr, 80 );
+
+            int result = connect( skt, ( struct sockaddr * )&oRmtSktAddr, iRmtSktAddrLen );
+            if( 0 == result )
+            {
+                bConnectionOk = true;
+            }
+            else
+            {
+                if( skt != INVALID_SOCKET )
+                {
+                    VxCloseSkt( skt );
+                    skt = INVALID_SOCKET;
+                }
+
+                result = VxGetLastError();
+                LogMsg( LOG_ERROR, "TestConnectionOnSpecificLclAddress: connect error %s\n", VxDescribeSktError( result ) );
+            }
+        }
+    }
+
+    return skt;
 }
 
 //============================================================================
@@ -120,7 +189,7 @@ void VxSktConnectSimple::closeSkt( int iInstance )
 bool VxSktConnectSimple::connectToWebsite( 	const char *		pWebsiteUrl,
 											std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
 											std::string&		strFile,		// return file name.. images/me.jpg
-											uint16_t&				u16Port,
+											uint16_t&			u16Port,
 											int					iConnectTimeoutMs )
 {
 	closeSkt( 99 );

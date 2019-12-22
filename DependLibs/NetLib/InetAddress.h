@@ -122,6 +122,7 @@ public:
 
     void                        setIpAndPort( struct sockaddr_storage& oAddr );
 	void                        setIpAndPort( struct sockaddr& oAddr );
+    void                        setIpAndPort( const char * ipAddr, uint16_t port );
 
 	//=== vars ===//
 	uint16_t                    m_u16Port;

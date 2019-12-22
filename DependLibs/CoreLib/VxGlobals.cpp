@@ -48,7 +48,6 @@ namespace
     std::string			g_strApplicationTitle			= "No Limit Connect";
     std::string			g_strApplicationNameNoSpaces	= "NoLimitConnect";
     std::string			g_strApplicationNameNoSpacesLowerCase	= "nolimitconnect";
-    std::string			g_strNetworkName				= "NoLimitNet";
 	std::string			g_strCompanyWebsite				= "http://www.nolimitconnect.com";
     std::string			g_strCompanyDomain				= "nolimitconnect.com";
     std::string			g_strOrginizationName           = "nolimitconnect";
@@ -57,14 +56,14 @@ namespace
     std::string			g_strApplicationTitle			= "No Limit Connect";
     std::string			g_strApplicationNameNoSpaces	= "NoLimitConnect";
     std::string			g_strApplicationNameNoSpacesLowerCase	= "nolimitconnect";
-    std::string			g_strNetworkName				= "NoLimitNet";
 	std::string			g_strCompanyWebsite				= "http://www.nolimitconnect.com";
     std::string			g_strCompanyDomain				= "nolimitconnect.com";
     std::string			g_strOrginizationName           = "nolimitconnect";
 	bool				g_IsAppCommercial				= false;
 #endif // APP_MYP2PWEB
     std::string			g_strNetworkHostName            = "nolimitconnect.net";
-    std::string			g_strNetworkHostUrl             = "ptop://nolimitconnect.net";
+    uint16_t            g_NetworkHostPort               = 45124;
+    std::string			g_strNetworkHostUrl             = "ptop://nolimitconnect.net:45124";
 
 
 	// exe and app resouces paths
@@ -109,22 +108,12 @@ namespace
 }
 
 //============================================================================
-void VxSetGoTvNetworkHostName( const char * netHostName )
-{
-    g_strNetworkHostName = netHostName;
-    g_strNetworkHostUrl = "ptop://";
-    g_strNetworkHostUrl += netHostName;
-}
-//============================================================================
-const char * VxGetNetworkHostName( void )
-{
-    return g_strNetworkHostName.c_str();
-}
-//============================================================================
-const char * VxGetNetworkHostUrl( void )
-{
-    return g_strNetworkHostUrl.c_str();
-}
+void            VxSetNetworkHostName( const char * netHostName )    { g_strNetworkHostName = netHostName; }
+const char *    VxGetNetworkHostName( void )                        { return g_strNetworkHostName.c_str(); }
+void            VxSetNetworkHostPort( uint16_t netHostPort )        { g_NetworkHostPort = netHostPort; }
+uint16_t        VxGetNetworkHostPort( void )                        { return g_NetworkHostPort; }
+void            VxSetNetworkHostUrl( const char * netHostUrl )      { g_strNetworkHostUrl = netHostUrl; }
+const char *    VxGetNetworkHostUrl( void )                         { return g_strNetworkHostUrl.c_str(); }
 
 // directory structure on disk
 // exe paths
@@ -156,7 +145,6 @@ const char * VxGetNetworkHostUrl( void )
 //																/me/			personal recordings
 //																/contacts/		contact assets
 //																/camrecord/		web cam recordings
-
 
 std::string& VxGetAppDirectory(EAppDir appDir)
 {
@@ -372,23 +360,9 @@ bool VxIsDebugEnabled( void )
 	return g_bIsDebugEnabled;
 }
 
-
 //============================================================================
 //=== miscellaneous ===//
 //============================================================================
-
-//============================================================================
-const char * VxGetP2PNetworkName()
-{
-	return g_strNetworkName.c_str();
-}
-
-//============================================================================
-void VxSetP2PNetworkName( const char * pNetName )
-{
-	g_strNetworkName = pNetName;
-}
-
 //============================================================================
 //! set true if loop back is allowed ( default is false )
 void VxSetNetworkLoopbackAllowed( bool bIsLoopbackAllowed )

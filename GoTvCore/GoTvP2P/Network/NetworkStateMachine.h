@@ -100,9 +100,9 @@ public:
 	bool						isNetworkStateChangePending( void );
 
 	bool						resolveWebsiteUrls( void );
+    void						updateFromEngineSettings( EngineSettings& engineSettings );
 
 protected:
-	void						logonUpdateFromEngineSettings( EngineSettings& engineSettings );
 	void						destroyNetworkStates( void );
 	NetworkStateBase *			findNetworkState( ENetworkStateType eNetworkStateType );
 	bool						resolveUrl( std::string& websiteUrl, std::string& retIp, uint16_t& u16RetPort );
@@ -138,11 +138,11 @@ protected:
 	std::vector<NetworkEventBase*>	m_NetworkEventList;
 
 	std::string					m_HostIp;
-	uint16_t							m_u16HostPort;
+	uint16_t					m_u16HostPort;
 	std::string					m_LastResolvedHostWebsite;
 
 	std::string					m_NetServiceIp;
-	uint16_t							m_u16NetServicePort;
+	uint16_t					m_u16NetServicePort;
 	std::string					m_LastResolvedNetServiceWebsite;
 
 	bool						m_bWebsiteUrlsResolved;
@@ -151,7 +151,7 @@ protected:
 	std::string					m_LastKnownExternalIpAddr;
 
 	time_t						m_LastUpnpForwardTime;
-	uint16_t							m_LastUpnpForwardPort;
+	uint16_t					m_LastUpnpForwardPort;
 	std::string					m_LastUpnpForwardIp;
 
 private:
