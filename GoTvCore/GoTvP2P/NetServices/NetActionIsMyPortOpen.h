@@ -25,7 +25,7 @@ class NetActionIsMyPortOpen : public NetActionBase
 {
 public:
 	NetActionIsMyPortOpen( NetServicesMgr& netServicesMgr );
-	virtual ~NetActionIsMyPortOpen();
+	virtual ~NetActionIsMyPortOpen() = default;
 
 	virtual ENetActionType		getNetActionType( void )			{ return eNetActionIsPortOpen; }
 	virtual void				doAction( void );

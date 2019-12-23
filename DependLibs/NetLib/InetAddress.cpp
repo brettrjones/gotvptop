@@ -987,6 +987,7 @@ uint16_t InetAddress::setIp( struct sockaddr_storage& oAddr )
 //! fill address with this ip address and the given port
 int InetAddress::fillAddress( struct sockaddr_storage& oAddr, uint16_t u16Port )
 {
+    memset( &oAddr, 0, sizeof( struct sockaddr_storage ) );
 	if( isIPv4() )
 	{
         return fillAddress( *((struct sockaddr_in*)&oAddr), u16Port );

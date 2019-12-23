@@ -28,7 +28,7 @@
 #include <CoreLib/VxTimer.h>
 
 #ifdef TARGET_OS_WINDOWS
-#include <GoTvCore/GoTvP2P/Network/Firewall.h>
+# include <GoTvCore/GoTvP2P/Network/Firewall.h>
 #endif // TARGET_OS_WINDOWS
 
 class VxSktBase;
@@ -53,8 +53,9 @@ public:
 	static const int			CONTENT_PART_IDX_PAYLOAD	= 7;
 
 	P2PEngine&					getEngine( void )			{ return m_Engine; }
+    EngineSettings&				getEngineSettings( void )	{ return m_EngineSettings; }
 	NetServiceUtils&			getNetUtils( void )			{ return m_NetServiceUtils; }
-	NetServiceHost&			getNetServiceHost( void )	{ return m_NetServiceHost; }
+	NetServiceHost&			    getNetServiceHost( void )	{ return m_NetServiceHost; }
 
 	VxGUID&						getMyOnlineId( void );
 
@@ -113,7 +114,7 @@ protected:
 	EngineSettings&				m_EngineSettings;
 	NetworkMgr&					m_NetworkMgr;
 	NetServiceUtils				m_NetServiceUtils;
-	NetServiceHost			m_NetServiceHost;
+	NetServiceHost			    m_NetServiceHost;
 
 	std::vector<NetActionBase*>	m_NetActionList;
 	NetActionIdle				m_NetActionIdle;

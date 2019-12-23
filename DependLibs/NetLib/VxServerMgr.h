@@ -40,15 +40,15 @@ public:
 	virtual VxSktBase *			makeNewAcceptSkt( void );
 
 	virtual bool				isReadyToAcceptConnections( void )			{ return m_IsReadyToAcceptConnections; }
-	virtual bool				isListening( void )							{ return m_ListenVxThread.isThreadRunning(); }
+    virtual bool				isListening( void );
 	virtual uint16_t			getListenPort( void )						{ return m_u16ListenPort; }
 	virtual InetAddrAndPort		getLocalIp( void )							{ return m_LclIp; }
 	virtual void				fromGuiKickWatchdog( void );
 	virtual bool				checkWatchdog( void );
 
 
-	virtual RCODE				startListening(  const char * ip, uint16_t u16ListenPort );
-	virtual RCODE				startListening( uint16_t u16ListenPort );
+	virtual bool				startListening(  const char * ip, uint16_t u16ListenPort );
+	virtual bool				startListening( uint16_t u16ListenPort );
 	virtual RCODE				stopListening( void );
 
 	void						listenForConnectionsToAccept( VxThread * poVxThread );

@@ -324,8 +324,7 @@ void NetworkStateRelaySearch::doRelaySearchState( void )
             }
 
 			//BRJ.. we queried anchors and tried all.. just start over
-            if( IsLogEnabled( eLogModuleConnect ) )
-			    LogMsg( LOG_INFO, "NetworkStateRelaySearch Search Timeout.. resetting network\n" );
+			LogModule( eLogModuleConnect, LOG_INFO, "NetworkStateRelaySearch Search Timeout.. resetting network\n" );
 			m_NetworkStateMachine.restartNetwork();
 			return;
 		}
@@ -339,8 +338,7 @@ void NetworkStateRelaySearch::moveToAnnounceState( void )
 	EngineSettings::EFirewallTestType firewallTestType = m_Engine.getEngineSettings().getFirewallTestSetting();
 	if( EngineSettings::eFirewallTestUrlConnectionTest == firewallTestType )
 	{
-        if( IsLogEnabled( eLogModuleConnect ) )
-		    LogMsg( LOG_INFO, "111 NetworkStateRelaySearch Starting Direct connect Test\n" );
+        LogModule( eLogModuleConnect, LOG_INFO, "111 NetworkStateRelaySearch Starting Direct connect Test\n" );
 		DirectConnectTestResults& directConnectTestResults = m_DirectConnectTester.getDirectConnectTestResults();
 		m_DirectConnectTester.testCanDirectConnect();
 		while( ( false == m_NetworkStateMachine.checkAndHandleNetworkEvents() )

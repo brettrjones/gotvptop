@@ -93,7 +93,8 @@ SOCKET VxSktConnectSimple::connectTo( const char *  lclAdapterIp,					// local a
         return INVALID_SOCKET;
     }
 
-    bool bConnectionOk = false;
+    m_bIsConnected = false;
+    m_Socket = INVALID_SOCKET;
     std::string strLclAddr = lclAdapterIp;
     InetAddress lclIpAddr( lclAdapterIp );				// local ip address
 
@@ -115,22 +116,26 @@ SOCKET VxSktConnectSimple::connectTo( const char *  lclAdapterIp,					// local a
         else
         {
             struct sockaddr_storage oRmtSktAddr;
-            int iRmtSktAddrLen = rmtIpAddr.fillAddress( oRmtSktAddr, 80 );
+            int iRmtSktAddrLen = rmtIpAddr.fillAddress( oRmtSktAddr, u16Port );
 
             int result = connect( skt, ( struct sockaddr * )&oRmtSktAddr, iRmtSktAddrLen );
             if( 0 == result )
             {
-                bConnectionOk = true;
+                m_Socket = skt;
+                VxGetLclAddress( m_Socket, m_LclIp );
+                VxGetRmtAddress( m_Socket, m_RmtIp );
+
+                m_bIsConnected = true;
             }
             else
             {
+                result = VxGetLastError();
                 if( skt != INVALID_SOCKET )
                 {
                     VxCloseSkt( skt );
                     skt = INVALID_SOCKET;
                 }
 
-                result = VxGetLastError();
                 LogMsg( LOG_ERROR, "TestConnectionOnSpecificLclAddress: connect error %s\n", VxDescribeSktError( result ) );
             }
         }

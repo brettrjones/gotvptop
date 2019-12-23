@@ -19,6 +19,7 @@
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
+#include <NetLib/VxPeerMgr.h>
 #include <PktLib/PktAnnounce.h>
 #include <CoreLib/VxGlobals.h>
 
@@ -47,6 +48,13 @@ void NetworkEventAvail::runNetworkEvent( void )
 	LogMsg( LOG_INFO, "NetworkEventAvail::runNetworkEvent start\n" );
 #endif // DEBUG_NETWORK_STATE
 	m_NetworkStateMachine.resolveWebsiteUrls();
+    if( !m_LclIp.empty() )
+    {
+        if( !m_Engine.getPeerMgr().isListening() )
+        {
+            m_Engine.getPeerMgr().startListening( m_LclIp.c_str(), m_Engine.getEngineSettings().getTcpIpPort() );
+        }
+    }
 	//m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeAvail );
 
 	//m_PktAnn.getLanIPv4().setIp( m_LclIp.c_str() );

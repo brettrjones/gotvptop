@@ -176,16 +176,13 @@ void NetworkStateAvail::runNetworkState( void )
             break;
         }
 
-        LogMsg( LOG_INFO, "Waiting for listen port to open %3.3f\n", availTimer.elapsedSec() );
+        LogMsg( LOG_INFO, "Waiting for listen port %d to open at sec %3.3f\n", m_Engine.getPeerMgr().getListenPort(), availTimer.elapsedSec() );
         m_Engine.getToGui().toGuiStatusMessage( "#Network Testing waiting for our listen port to open" );
         VxSleep( 1000 );
         timeEnd = GetGmtTimeMs();
     }
 
-    if( IsLogEnabled( eLogModuleNetworkState ) )
-    {
-        LogMsg( LOG_INFO, "Network State Avail Starting Direct connect Test %3.3f thread %d\n", availTimer.elapsedSec(), VxGetCurrentThreadId() );
-    }
+    LogModule( eLogModuleNetworkState, LOG_INFO, "Network State Avail Starting Direct connect Test %3.3f thread %d\n", availTimer.elapsedSec(), VxGetCurrentThreadId() );
 
     if( shouldAbort )
     {

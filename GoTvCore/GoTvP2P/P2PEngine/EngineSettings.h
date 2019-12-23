@@ -25,7 +25,9 @@ public:
 	{
 		eFirewallTestUrlConnectionTest	= 0,
 		eFirewallTestAssumeNoFirewall	= 1,
-		eFirewallTestAssumeFirewalled	= 2
+        eFirewallTestAssumeFirewalled   = 2,
+
+        eMaxFirewallTestType
 	};
 
 	EngineSettings();

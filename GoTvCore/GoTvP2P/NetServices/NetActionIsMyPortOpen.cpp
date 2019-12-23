@@ -27,17 +27,11 @@ NetActionIsMyPortOpen::NetActionIsMyPortOpen( NetServicesMgr& netServicesMgr )
 }
 
 //============================================================================
-NetActionIsMyPortOpen::~NetActionIsMyPortOpen()
-{
-}
-
-//============================================================================
 void NetActionIsMyPortOpen::doAction( void )
 {
 	std::string myIp = "";
-	EAppErr eResult = 	m_NetServicesMgr.doIsMyPortOpen( myIp, true );
-    if( IsLogEnabled( eLogModuleConnect ) )
-	    LogMsg( LOG_INFO, "NetActionIsMyPortOpen::doAction result %d ip %s\n", eResult, myIp.c_str() );
+	EAppErr eResult = 	m_NetServicesMgr.doIsMyPortOpen( myIp, false );
+	LogModule( eLogModuleIsPortOpenTest, LOG_INFO, "NetActionIsMyPortOpen::doAction result %d ip %s\n", eResult, myIp.c_str() );
 	m_NetServicesMgr.netActionResultIsMyPortOpen( eResult, myIp );
 }
 
