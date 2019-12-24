@@ -44,14 +44,18 @@ NetworkEventAvail::NetworkEventAvail( NetworkStateMachine& stateMachine, const c
 //============================================================================
 void NetworkEventAvail::runNetworkEvent( void )
 {
-#ifdef DEBUG_NETWORK_STATE
-	LogMsg( LOG_INFO, "NetworkEventAvail::runNetworkEvent start\n" );
-#endif // DEBUG_NETWORK_STATE
+	LogModule( eLogModuleNetworkState, LOG_VERBOSE, "NetworkEventAvail::runNetworkEvent start\n" );
 	m_NetworkStateMachine.resolveWebsiteUrls();
     if( !m_LclIp.empty() )
     {
-        if( !m_Engine.getPeerMgr().isListening() )
+        uint16_t listenPort = m_Engine.getEngineSettings().getTcpIpPort();
+        if( !m_Engine.getPeerMgr().isListening() || ( listenPort != m_Engine.getPeerMgr().getListenPort() ) )
         {
+            if( !m_Engine.getPeerMgr().isListening() )
+            {
+                m_Engine.getPeerMgr().stopListening();
+            }
+
             m_Engine.getPeerMgr().startListening( m_LclIp.c_str(), m_Engine.getEngineSettings().getTcpIpPort() );
         }
     }
@@ -62,9 +66,8 @@ void NetworkEventAvail::runNetworkEvent( void )
 	//m_Engine.getEngineSettings().getTcpIpPort();
 	//m_PktAnn.setOnlinePort( u16TcpPort );
 	//m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
-#ifdef DEBUG_NETWORK_STATE
-	LogMsg( LOG_INFO, "NetworkEventAvail::runNetworkEvent done\n" );
-#endif // DEBUG_NETWORK_STATE
+
+    LogModule( eLogModuleNetworkState, LOG_VERBOSE, "NetworkEventAvail::runNetworkEvent done\n" );
 }
 
 
