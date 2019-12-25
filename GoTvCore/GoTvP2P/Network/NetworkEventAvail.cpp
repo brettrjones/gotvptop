@@ -46,26 +46,30 @@ void NetworkEventAvail::runNetworkEvent( void )
 {
 	LogModule( eLogModuleNetworkState, LOG_VERBOSE, "NetworkEventAvail::runNetworkEvent start\n" );
 	m_NetworkStateMachine.resolveWebsiteUrls();
-    if( !m_LclIp.empty() )
+    uint16_t listenPort = m_Engine.getEngineSettings().getTcpIpPort();
+    if( !m_Engine.getPeerMgr().isListening() || ( listenPort != m_Engine.getPeerMgr().getListenPort() ) )
     {
-        uint16_t listenPort = m_Engine.getEngineSettings().getTcpIpPort();
-        if( !m_Engine.getPeerMgr().isListening() || ( listenPort != m_Engine.getPeerMgr().getListenPort() ) )
+        if( !m_Engine.getPeerMgr().isListening() )
         {
-            if( !m_Engine.getPeerMgr().isListening() )
-            {
-                m_Engine.getPeerMgr().stopListening();
-            }
+            m_Engine.getPeerMgr().stopListening();
+        }
 
+        if( !m_LclIp.empty() )
+        {
             m_Engine.getPeerMgr().startListening( m_LclIp.c_str(), m_Engine.getEngineSettings().getTcpIpPort() );
         }
+        else
+        {
+            m_Engine.getPeerMgr().startListening( m_Engine.getEngineSettings().getTcpIpPort() );
+        }
     }
-	//m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeAvail );
 
 	//m_PktAnn.getLanIPv4().setIp( m_LclIp.c_str() );
-	//uint16_t u16TcpPort;
-	//m_Engine.getEngineSettings().getTcpIpPort();
-	//m_PktAnn.setOnlinePort( u16TcpPort );
-	//m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
+    if( listenPort != m_PktAnn.getOnlinePort() )
+    {
+        m_PktAnn.setOnlinePort( listenPort );
+        m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
+    }
 
     LogModule( eLogModuleNetworkState, LOG_VERBOSE, "NetworkEventAvail::runNetworkEvent done\n" );
 }
