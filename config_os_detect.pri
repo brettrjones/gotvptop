@@ -2,21 +2,45 @@
 COMPILE_HOST_OS = UNKNOWN_HOST
 COPY_KEYWORD = cp
 MOVE_KEYWORD = mv
-contains(QMAKE_HOST.os,Windows):
-{
+
+COMPILE_HOST_NAME=$${QMAKE_HOST.os}
+#message(compile host is $${COMPILE_HOST_NAME})
+
+#NOTE .. the { must come right after the contains() or will alwayse execute what is in the brackes
+contains( COMPILE_HOST_NAME, Windows ) {
     COMPILE_HOST_OS = Windows
     COPY_KEYWORD = copy
     MOVE_KEYWORD = move
+
+    DETECTED_BUILD_DATE=$$system(date /t)
+    BUILD_DATE
+#    DEFINES += BUILD_DATE=\\"$${DETECTED_BUILD_DATE})\\"
+    message(windows build date is $${DETECTED_BUILD_DATE})
+
+    GIT_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
+    message(windows git is $${GIT_VERSION})
 }
 
-contains(QMAKE_HOST.os,Android):{ COMPILE_HOST_OS = Android }
-contains(QMAKE_HOST.os,Linux):{ COMPILE_HOST_OS = Linux }
+contains( $${COMPILE_HOST_NAME}, Android ) {
+    COMPILE_HOST_OS = Android
+    message(Compiling with Android as host has not been tested)
+}
+
+contains( $${QMAKE_HOST.os}, Linux) {
+    COMPILE_HOST_OS = Linux
+    DEFINES += BUILD_DATE=$$system(date)
+    message(linux build date is $${BUILD_DATE})
+
+    GIT_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
+    message(linux git is $${GIT_VERSION})
+ }
+
 #message(copy keyword is $${COPY_KEYWORD})
 #message(host os is $${COMPILE_HOST_OS})
 
+
 android:{
-#    contains(QMAKE_HOST.os,Windows):
-#    {
+#    contains(QMAKE_HOST.os,Windows){
 #        #a fix for nasty bug QTBUG-69255 still not fixed in 5.12.2
 #        PRO_DIR_WIN = $${_PRO_FILE_PWD_}
 #        PRO_DIR_WIN ~= s,/,\\,g # replace / with \
@@ -36,7 +60,19 @@ android:{
     DEST_PYTHON_DLL_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7
     DEST_PYTHON_LIB_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7
 
+    message(ANDROID_TARGET $${ANDROID_TARGET_ARCH})
+
     contains(ANDROID_TARGET_ARCH,armeabi-v8a) {
+        DEFINES += TARGET_CPU_64BIT
+        DEFINES += TARGET_CPU_ARM
+        ANDROID_ARM64 = 1
+        TARGET_ARCH_NAME=armeabi-v8a
+        TARGET_CPU_BITS=64
+        TARGET_ENDIAN_LITTLE=1
+        TARGET_ENDIAN_BIG=0
+    }
+
+    contains(ANDROID_TARGET_ARCH,arm64-v8a) {
         DEFINES += TARGET_CPU_64BIT
         DEFINES += TARGET_CPU_ARM
         ANDROID_ARM64 = 1

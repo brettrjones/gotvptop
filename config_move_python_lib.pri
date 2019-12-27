@@ -21,7 +21,7 @@ unix:!android:{
     PYTHON_LIB_COPY_CMD = cp -f $${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME} $${DEST_PYTHON_DLL_DIR}/$${PYTHON_DEST_NAME}
 }
 
-android:{
+android{
     CONFIG(debug, debug|release){
         PYTHON_SRC_NAME = lib$${TARGET_NAME}_d.so
         PYTHON_DEST_NAME = $${TARGET_NAME}_d.pyd
@@ -34,7 +34,7 @@ android:{
 
     PYTHON_LIB_COPY_CMD = cp -f $${PYTHON_SRC_DIR}/$${PYTHON_SRC_NAME} $${DEST_PYTHON_DLL_DIR}/$${PYTHON_DEST_NAME}
 
-#    contains(QMAKE_HOST.os,Windows):{
+#    contains(QMAKE_HOST.os,Windows){
 #        #work around that qmake DESTDIR and other commands do not work with android make on windows (Qt 5.12.2)
 #        # copy built .so file to shared libs directory
 #        #bpythontarget.depends = $$shell_path($$OUT_PWD/$${PYTHON_SRC_NAME})
@@ -57,8 +57,7 @@ android:{
 #        INSTALLS += bpythontarget bpythontarget2
 #    }
 
-#    !contains(QMAKE_HOST.os,Windows):
-#    {
+#    !contains(QMAKE_HOST.os,Windows){
         QMAKE_POST_LINK += $$quote($${PYTHON_LIB_COPY_CMD})
 #    }
 }

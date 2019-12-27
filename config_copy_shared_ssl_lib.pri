@@ -19,33 +19,37 @@ unix:!android:  {
 }
 
 android:{
-    DESTDIR = $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+    message(DESTDIR_SSL is $${DESTDIR})
 
     #rename and move android lib to android/libs/target arch directory
-    SHARED_CP_ANDROID_SRC_NAME = ""
-    SHARED_CP_ANDROID_SRC_DIR = ""
-    SHARED_CP_ANDROID_DEST_NAME = ""
+    SHARED_SSL_ANDROID_SRC_NAME = ""
+    SHARED_SSL_ANDROID_SRC_DIR = ""
+    SHARED_SSL_ANDROID_DEST_NAME = ""
 
-    SHARED_CP_ANDROID_LIB_COPY_CMD = ""
+    SHARED_SSL_ANDROID_LIB_COPY_CMD = ""
 
-    SHARED_CP_ANDROID_SRC_DIR = $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+    SHARED_SSL_ANDROID_SRC_DIR = $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
     contains(QMAKE_HOST.os,Windows){
-        SHARED_CP_ANDROID_SRC_DIR = $$(OUT_PWD)
-#        SHARED_CP_ANDROID_SRC_DIR = $$(OUT_PWD)
+        SHARED_SSL_ANDROID_SRC_DIR = $$OUT_PWD
     }
 
+    message(OUT_PWD_DIR is $${OUT_PWD})
+    message(SHARED_SSL_ANDROID_SRC_DIR is $${SHARED_SSL_ANDROID_SRC_DIR})
+
     CONFIG(debug, debug|release){
-        SHARED_CP_ANDROID_SRC_NAME = lib$${TARGET_NAME}_d.so
-        SHARED_CP_ANDROID_DEST_NAME = lib$${TARGET_NAME}_d.so
+        SHARED_SSL_ANDROID_SRC_NAME = lib$${TARGET_NAME}_d.so
+        SHARED_SSL_ANDROID_DEST_NAME = lib$${TARGET_NAME}_d.so
      }
 
      CONFIG(release, debug|release){
-        SHARED_CP_ANDROID_SRC_NAME = lib$${TARGET_NAME}.so
-        SHARED_CP_ANDROID_DEST_NAME = lib$${TARGET_NAME}.so
+        SHARED_SSL_ANDROID_SRC_NAME = lib$${TARGET_NAME}.so
+        SHARED_SSL_ANDROID_DEST_NAME = lib$${TARGET_NAME}.so
      }
 
-    SHARED_CP_ANDROID_LIB_COPY_CMD = cp -f $${SHARED_CP_ANDROID_SRC_DIR}/$${SHARED_CP_ANDROID_SRC_NAME} $${DEST_EXE_DIR}/$${SHARED_CP_ANDROID_SRC_NAME}
-    QMAKE_POST_LINK += $$quote($${SHARED_CP_ANDROID_LIB_COPY_CMD})
+    SHARED_SSL_ANDROID_LIB_COPY_CMD = cp -f $${SHARED_SSL_ANDROID_SRC_DIR}/$${SHARED_SSL_ANDROID_SRC_NAME} $${DEST_EXE_DIR}/$${SHARED_SSL_ANDROID_SRC_NAME}
+    message(SSL CP COMMAND is $${SHARED_SSL_ANDROID_LIB_COPY_CMD})
+
+    QMAKE_POST_LINK += $$quote($${SHARED_SSL_ANDROID_LIB_COPY_CMD})
 #    contains(QMAKE_HOST.os,Windows){
 #        #SHARED_ANDROID_LIB_COPY_CMD ~= s,/,\\,g # replace / with \
 #        #work around that qmake DESTDIR and other commands do not work with android make on windows (Qt 5.12.2)

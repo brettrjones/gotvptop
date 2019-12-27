@@ -77,7 +77,7 @@
 # define GOTV_ARCH_LITTLE_ENDIAN		1
 # define GOTV_ARCH_BIG_ENDIAN			0
 
-# if defined(__ARMEL__)
+# if defined(TARGET_CPU_ARM)
 #  define TARGET_CPU_ARM				1  // general cpu type
 #  define ARCH_X86                      0
 #  define ARCH_ARM                      1
@@ -86,9 +86,17 @@
 #   define ARM_FEATURE_NEON 1
 #  endif // (defined(__ARM_NEON__) || defined(__ARM_NEON))
 
-// only vanilla 32bit arm is supported right now
-#  define ARCH_32_BITS					1
-#  define ARCH_64_BITS					0
+#  if defined(TARGET_CPU_64BIT)
+#   define ARCH_32_BITS					0
+#   define ARCH_64_BITS					1
+#  else
+#   if !defined(ARCH_32_BITS)
+#    define ARCH_32_BITS					1
+#   endif // defined(ARCH_32_BITS)
+#   if !defined(ARCH_32_BITS)
+#    define ARCH_64_BITS					0
+#   endif // defined(ARCH_32_BITS)
+#  endif
 /* Defined if ARM architecture is v6 or newer */
 #  define HAVE_ARM_ARCH_V6				1 // we don't support the really old processors
 # else
@@ -241,7 +249,6 @@ echo GoTv CPU Arch Defines error no cpu target defined
 //============================================================================
 //=== cpu features ===//
 #if defined(TARGET_CPU_X86) || defined(TARGET_CPU_X86_64)
-
 # if defined(TARGET_CPU_X86_64)
 // less work to define TARGET_CPU_X86 also and then check for TARGET_CPU_X86_64 if needed
 #  define TARGET_CPU_X86 1

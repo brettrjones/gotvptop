@@ -38,10 +38,6 @@ include(config_os_detect.pri)
 include(config_compiler.pri)
 include(config_opensslp_include.pri)
 
-#DESTDIR = $$PWD/bin/
-
-
-
 CONFIG(debug, debug|release){
     OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug
     MOC_DIR =.moc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/debug

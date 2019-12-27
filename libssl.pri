@@ -11,19 +11,6 @@ HEADERS += 	$$PWD/DependLibs/openssl-1.0.2p/../../GoTvAppConfig.h \
     $$PWD/GoTvDependLibrariesConfig.h \
     $$PWD/GoTvTargetOsConfig.h \
     $$PWD/config_gotvcore.h \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.h \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdDeleteFile.h \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdError.h \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdGetFile.h \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdIdle.h \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdListFiles.h \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdLogOff.h \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdLogOn.h \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdMgr.h \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdSendFile.h \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdSendText.h \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrWrapper.h \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslWrapper.h \
     $$PWD/DependLibs/openssl-1.0.2p/apps/apps.h \
     $$PWD/DependLibs/openssl-1.0.2p/apps/progs.h \
     $$PWD/DependLibs/openssl-1.0.2p/apps/s_apps.h \
@@ -249,20 +236,7 @@ HEADERS += 	$$PWD/DependLibs/openssl-1.0.2p/../../GoTvAppConfig.h \
     $$PWD/DependLibs/openssl-1.0.2p/ssl/tls1.h \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/bn/rsaz_exp.h
 
-SOURCES += 	$$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.cpp \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdDeleteFile.cpp \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdError.cpp \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdGetFile.cpp \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdIdle.cpp \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdListFiles.cpp \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdLogOff.cpp \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdLogOn.cpp \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdMgr.cpp \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdSendFile.cpp \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdSendText.cpp \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrWrapper.cpp \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrWrapperCallback.cpp \
-    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslWrapper.cpp \
+SOURCES += 	\
     $$PWD/DependLibs/openssl-1.0.2p/crypto/aes/aes_cbc.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/aes/aes_cfb.c \
     $$PWD/DependLibs/openssl-1.0.2p/crypto/aes/aes_core.c \
@@ -943,3 +917,33 @@ unix:{
 SOURCES += 	 $$PWD/DependLibs/openssl-1.0.2p/crypto/dso/dso_dlfcn.c
 
 }
+
+#TODO fix me the SslMgr causes circular dependencies
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.h \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdDeleteFile.h \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdError.h \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdGetFile.h \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdIdle.h \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdListFiles.h \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdLogOff.h \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdLogOn.h \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdMgr.h \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdSendFile.h \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdSendText.h \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrWrapper.h \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslWrapper.h \
+#
+# $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdBase.cpp \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdDeleteFile.cpp \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdError.cpp \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdGetFile.cpp \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdIdle.cpp \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdListFiles.cpp \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdLogOff.cpp \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdLogOn.cpp \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdMgr.cpp \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdSendFile.cpp \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrCmdSendText.cpp \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrWrapper.cpp \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslMgrWrapperCallback.cpp \
+#    $$PWD/DependLibs/openssl-1.0.2p/SslMgr/SslWrapper.cpp \

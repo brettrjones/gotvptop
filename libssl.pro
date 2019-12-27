@@ -7,7 +7,7 @@ include(config_opensslp_include.pri)
 
 include(libssl.pri)
 
-include(config_copy_shared_lib.pri)
+include(config_copy_shared_ssl_lib.pri)
 
 
 LIBS +=  $${STATIC_LIB_PREFIX}gnu$${STATIC_LIB_SUFFIX}

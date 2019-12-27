@@ -358,7 +358,7 @@ bool SslWrapper::connectToServer( void )
 		}
 		else
 		{
-			LogMsg( LOG_ERROR, "connectToSslMgrServer: connect error %d %s\n", err, VxDescribeSktError( err ) );
+            LogMsg( LOG_ERROR, "connectToSslMgrServer: connect error %d\n", err );
 		}
 
 

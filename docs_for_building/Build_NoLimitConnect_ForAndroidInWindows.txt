@@ -1,5 +1,9 @@
 
-=== Build GoTvPtoP for android in windows ====
+=== Build NoLimitConnect for android in windows ====
+NOTES: ( some hard earned lessons )
+1.) Cannot build multiple .pro projects in same build unless all the same DESTDIR etc
+2.) For Qt the projects must be built in a certain order
+	1.) 
 === Build Prerequisites ====
 Follow instructions in docs_for_building/BuildForWindowsPrerequisitesInstructions.txt
 tested with:
@@ -9,7 +13,7 @@ tested with:
 	Android Studio 3.3.1 ( android studio may be optional )
 	NOTE: the latest Android Studio seems incompatable with Qt 5.12.3 so may be best to stay with a older version and not update it
 
-Android Target is Api 21 and Sdk Android 5.0 but built with sdk version android-28
+Android NDK Target api is Api 21 and Sdk Android 5.0 but built with sdk version android-28
 
 === android studio ===
 After installing Android studio there are some modifications required to get Qt 5.13.0 to work on windows

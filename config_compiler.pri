@@ -2,15 +2,25 @@
 #even if not building lib these need defined so included headers are defined correctly
 DEFINES += LIB_STATIC HAVE_CONFIG_H
 
-DEFINES += FT_DEBUG_LEVEL_ERROR FT_DEBUG_LEVEL_TRACE FT2_BUILD_LIBRARY FT_MAKE_OPTION_SINGLE_OBJECT
+DEFINES += FT_DEBUG_LEVEL_ERROR=1
+DEFINES += T_DEBUG_LEVEL_TRACE=1
+DEFINES += FT2_BUILD_LIBRARY=1
+DEFINES += FT_MAKE_OPTION_SINGLE_OBJECT=1
 
 DEFINES +=_FILE_OFFSET_BITS=64
-
 
 CONFIG(debug, debug|release){
     DEFINES += _DEBUG
     DEFINES += DEBUG
 }
+
+CONFIG(release, debug|release){
+    DEFINES += NDEBUG
+    DEFINES += RELEASE
+    DEFINES += QT_NO_DEBUG_OUTPUT
+}
+
+INCLUDEPATH += $$PWD/DependLibs
 
 android{
     DEFINES +=__ANDROID_API__=21
@@ -28,14 +38,6 @@ android{
         #QMAKE_CXXFLAGS_DEBUG += -O0
     #}
 }
-
-CONFIG(release, debug|release){
-    DEFINES += NDEBUG
-    DEFINES += RELEASE
-    DEFINES += QT_NO_DEBUG_OUTPUT
-}
-
-INCLUDEPATH += $$PWD/DependLibs
 
 win32{
     INCLUDEPATH += $$PWD/sysheaders
