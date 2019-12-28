@@ -13,7 +13,7 @@
 
    You should have received a copy of the GNU Lesser General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
-
+#if !defined(TARGET_OS_LINUX) || defined(BUILD_GNU_INTERNAL)
 #ifndef _LIBINTL_H
 #define _LIBINTL_H 1
 #include <GoTvCompilerConfig.h>
@@ -463,3 +463,4 @@ extern void
 #endif
 
 #endif /* libintl.h */
+#endif // !defined(TARGET_OS_LINUX)

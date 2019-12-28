@@ -29,7 +29,7 @@ android:{
     SHARED_CP_ANDROID_LIB_COPY_CMD = ""
 
     SHARED_CP_ANDROID_SRC_DIR = $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
-    contains(QMAKE_HOST.os,Windows){
+    contains(COMPILE_HOST_OS,Windows){
         SHARED_CP_ANDROID_SRC_DIR = $$(OUT_PWD)
 #        SHARED_CP_ANDROID_SRC_DIR = $$(OUT_PWD)
     }
@@ -46,7 +46,7 @@ android:{
 
     SHARED_CP_ANDROID_LIB_COPY_CMD = cp -f $${SHARED_CP_ANDROID_SRC_DIR}/$${SHARED_CP_ANDROID_SRC_NAME} $${DEST_EXE_DIR}/$${SHARED_CP_ANDROID_SRC_NAME}
     QMAKE_POST_LINK += $$quote($${SHARED_CP_ANDROID_LIB_COPY_CMD})
-#    contains(QMAKE_HOST.os,Windows){
+#    contains(COMPILE_HOST_OS,Windows){
 #        #SHARED_ANDROID_LIB_COPY_CMD ~= s,/,\\,g # replace / with \
 #        #work around that qmake DESTDIR and other commands do not work with android make on windows (Qt 5.12.2)
 #        # copy built .so file to shared libs directory

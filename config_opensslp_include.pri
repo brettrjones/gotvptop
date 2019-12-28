@@ -20,7 +20,7 @@ android{
     INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
 }
 
-unix{
+unix:!android{
     INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p
     INCLUDEPATH += $$PWD/DependLibs/openssl-1.0.2p/include
 }

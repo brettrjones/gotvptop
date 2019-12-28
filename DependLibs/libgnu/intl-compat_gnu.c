@@ -16,6 +16,8 @@
    You should have received a copy of the GNU Lesser General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
+#if !defined(TARGET_OS_LINUX)
+
 # include <libgnu/config_libgnu.h>
 
 #include  "gettextP.h"
@@ -128,3 +130,69 @@ bind_textdomain_codeset (const char *domainname, const char *codeset)
 {
   return libintl_bind_textdomain_codeset (domainname, codeset);
 }
+
+#else
+#include <libintl.h>
+
+char *
+libintl_gettext (const char *msgid)
+{
+  return gettext (msgid);
+}
+
+
+char *
+libintl_dgettext (const char *domainname, const char *msgid)
+{
+  return dgettext (domainname, msgid);
+}
+
+
+char *
+libintl_dcgettext (const char *domainname, const char *msgid, int category)
+{
+  return dcgettext (domainname, msgid, category);
+}
+
+
+char *
+libintl_ngettext (const char *msgid1, const char *msgid2, unsigned long int n)
+{
+  return ngettext (msgid1, msgid2, n);
+}
+
+
+char *
+libintl_dngettext (const char *domainname,
+           const char *msgid1, const char *msgid2, unsigned long int n)
+{
+  return dngettext (domainname, msgid1, msgid2, n);
+}
+
+char *
+libintl_dcngettext (const char *domainname,
+            const char *msgid1, const char *msgid2, unsigned long int n,
+            int category)
+{
+  return dcngettext (domainname, msgid1, msgid2, n, category);
+}
+
+char *
+libintl_textdomain (const char *domainname)
+{
+  return textdomain (domainname);
+}
+
+char *
+bindtextdomain (const char *domainname, const char *dirname)
+{
+  return libintl_bindtextdomain (domainname, dirname);
+}
+
+char *
+libintl_bind_textdomain_codeset (const char *domainname, const char *codeset)
+{
+  return bind_textdomain_codeset (domainname, codeset);
+}
+
+#endif // !defined(TARGET_OS_LINUX)

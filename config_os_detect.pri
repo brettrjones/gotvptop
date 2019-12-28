@@ -4,7 +4,7 @@ COPY_KEYWORD = cp
 MOVE_KEYWORD = mv
 
 COMPILE_HOST_NAME=$${QMAKE_HOST.os}
-#message(compile host is $${COMPILE_HOST_NAME})
+message(compile host is $${COMPILE_HOST_NAME})
 
 #NOTE .. the { must come right after the contains() or will alwayse execute what is in the brackes
 contains( COMPILE_HOST_NAME, Windows ) {
@@ -21,15 +21,17 @@ contains( COMPILE_HOST_NAME, Windows ) {
     message(windows git is $${GIT_VERSION})
 }
 
-contains( $${COMPILE_HOST_NAME}, Android ) {
+contains( COMPILE_HOST_NAME, Android ) {
     COMPILE_HOST_OS = Android
     message(Compiling with Android as host has not been tested)
 }
 
-contains( $${QMAKE_HOST.os}, Linux) {
+contains( COMPILE_HOST_NAME, Linux) {
     COMPILE_HOST_OS = Linux
-    DEFINES += BUILD_DATE=$$system(date)
-    message(linux build date is $${BUILD_DATE})
+
+    DETECTED_BUILD_DATE=$$system(date)
+#    DEFINES += BUILD_DATE=$$system(date)
+    message(linux build date is $${DETECTED_BUILD_DATE})
 
     GIT_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
     message(linux git is $${GIT_VERSION})
@@ -37,7 +39,6 @@ contains( $${QMAKE_HOST.os}, Linux) {
 
 #message(copy keyword is $${COPY_KEYWORD})
 #message(host os is $${COMPILE_HOST_OS})
-
 
 android:{
 #    contains(QMAKE_HOST.os,Windows){
@@ -55,7 +56,6 @@ android:{
     ANDROID_x86_64 = 0
 
     DEST_EXE_DIR = $$PWD/bin-Android/lib
-    DEST_SHARED_LIBS_DIR = $$PWD/bin-Android/lib
     DEST_PYTHON_EXE_DIR = $$PWD/bin-Android/lib
     DEST_PYTHON_DLL_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7
     DEST_PYTHON_LIB_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7
@@ -194,3 +194,6 @@ CONFIG(release, debug|release){
 #contains( TARGET_CPU_BITS, 32 ) {
 #    message(Building $${TARGET_OS_NAME} $${BUILD_TYPE} 32 bit $${TARGET_ARCH_NAME}  )
 #}
+
+DEST_STATIC_LIBS_DIR=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/
+SHARED_LIB_BUILD_DIR=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/

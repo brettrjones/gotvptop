@@ -167,7 +167,7 @@ void BZ2_hbAssignCodes ( Int32 *code,
 
 
 /*---------------------------------------------------*/
-void BZ2_hbCreateDecodeTables ( Int32 *limit,
+void BZ2_hbCreateDecodeTables_python ( Int32 *limit,
                                 Int32 *base,
                                 Int32 *perm,
                                 UChar *length,

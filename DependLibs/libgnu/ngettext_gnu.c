@@ -15,6 +15,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 # include <config_libgnu.h>
+
 #ifdef BUILD_NGETTEXT_TOOL
 #include  <getopt.h>
 #include  <stdbool.h>

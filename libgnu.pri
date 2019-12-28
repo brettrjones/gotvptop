@@ -1,4 +1,4 @@
-DEFINES += GLIB_COMPILATION _MBCS __need_nettle_getopt
+DEFINES += GLIB_COMPILATION _MBCS __need_nettle_getopt BUILD_GNU_INTERNAL
 
 INCLUDEPATH += $$PWD/DependLibs/libgnu
 

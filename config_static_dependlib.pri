@@ -2,15 +2,15 @@
 include(config_version.pri)
 include(config_os_detect.pri)
 include(config_compiler.pri)
-
+include(config_opensslp_include.pri)
 
 QT       -= gui
 CONFIG += staticlib
+CONFIG -= sharedlib
 
-DESTDIR = $$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+DESTDIR = $${DEST_STATIC_LIBS_DIR}
 
-
-DEFINES += LIB_STATIC _LIB
+DEFINES += LIB_STATIC_LIB
 
 
 TARGET_LIB_APPEND = .lib
@@ -20,7 +20,7 @@ win32 {
     TARGET_LIB_APPEND =  D.lib
 }
 
-unix: {
+unix {
     TARGET_LIB_APPEND =  D
 }
 
@@ -31,14 +31,13 @@ win32 {
     TARGET_LIB_APPEND =  .lib
 }
 
-unix: {
+unix {
     TARGET_LIB_APPEND =
 }
 
 }
 
 TARGET=$${TARGET_NAME}$${TARGET_OS_NAME}$${TARGET_LIB_APPEND}
-
 
 OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
 

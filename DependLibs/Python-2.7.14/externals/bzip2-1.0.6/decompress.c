@@ -103,7 +103,7 @@ void makeMaps_d ( DState* s )
 
 
 /*---------------------------------------------------*/
-Int32 BZ2_decompress ( DState* s )
+Int32 BZ2_decompress_python ( DState* s )
 {
    UChar      uc;
    Int32      retVal;

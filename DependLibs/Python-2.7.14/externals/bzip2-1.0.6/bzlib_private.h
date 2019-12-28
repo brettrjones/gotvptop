@@ -270,19 +270,19 @@ typedef
 /*-- externs for compression. --*/
 
 extern void 
-BZ2_blockSort ( EState* );
+BZ2_blockSort_python ( EState* );
 
 extern void 
-BZ2_compressBlock ( EState*, Bool );
+BZ2_compressBlock_python ( EState*, Bool );
 
 extern void 
-BZ2_bsInitWrite ( EState* );
+BZ2_bsInitWrite_python ( EState* );
 
 extern void 
-BZ2_hbAssignCodes ( Int32*, UChar*, Int32, Int32, Int32 );
+BZ2_hbAssignCodes_python ( Int32*, UChar*, Int32, Int32, Int32 );
 
 extern void 
-BZ2_hbMakeCodeLengths ( UChar*, Int32*, Int32, Int32 );
+BZ2_hbMakeCodeLengths_python ( UChar*, Int32*, Int32, Int32 );
 
 
 

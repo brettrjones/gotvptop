@@ -1,20 +1,39 @@
 # Global
 TEMPLATE = lib
-TARGET_NAME = ssl
 
-include(config_openssl_lib.pri)
+CONFIG -= staticlib
+CONFIG += sharedlib
+
+DEFINES -= LIB_STATIC_LIB
+DEFINES += LIB_SHARED_LIB
+
+include(config_version.pri)
+include(config_os_detect.pri)
+include(config_compiler.pri)
 include(config_opensslp_include.pri)
+
+include(config_link.pri)
+# normally would just include config_link.pri but it adds a extra lib prefix so can be loaded with -l but since the project is named libssl it comes out liblibssl so set target here
+CONFIG(debug, debug|release){
+TARGET = ssl_d
+}
+
+CONFIG(release, debug|release){
+TARGET = ssl
+}
+
+DESTDIR = $${DEST_SHARED_LIBS_DIR}
 
 include(libssl.pri)
 
-include(config_copy_shared_ssl_lib.pri)
-
+unix:!android:{
+    #give linux the path of where to load static libraries from
+    LIBS += -L$${DEST_SHARED_SSL_LIBS_DIR}
+}
 
 LIBS +=  $${STATIC_LIB_PREFIX}gnu$${STATIC_LIB_SUFFIX}
 LIBS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
 LIBS +=  $${STATIC_LIB_PREFIX}depends$${STATIC_LIB_SUFFIX}
-LIBS +=  $${STATIC_LIB_PREFIX}curl$${STATIC_LIB_SUFFIX}
 LIBS +=  $${STATIC_LIB_PREFIX}corelib$${STATIC_LIB_SUFFIX}
 LIBS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
 
-#LIBS +=  $${STATIC_LIB_PREFIX}iconv$${STATIC_LIB_SUFFIX}

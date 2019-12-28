@@ -12,7 +12,7 @@ include(python_pyexpat.pri)
 
 include(config_link.pri)
 
-LIBS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
+include(config_python_core_link.pri)
 
 include(config_move_python_lib.pri)
 

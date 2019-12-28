@@ -52,32 +52,32 @@ include(GoTvPtoPAppLib.pri)
 
 #DESTDIR = $$PWD/bin/
 #gotvptop.depends += $$PWD/GoTvPtoPAppLib.pro
-gotvptop.depends += $$PWD/GoTvCoreLibs.pro
-gotvptop.depends += $$PWD/GoTvPythonLib.pro
-gotvptop.depends += $$PWD/GoTvDependLibs.pro
+#gotvptop.depends += $$PWD/GoTvCoreLibs.pro
+#gotvptop.depends += $$PWD/GoTvPythonLib.pro
+#gotvptop.depends += $$PWD/GoTvDependLibs.pro
 
-gotvptop.depends += $$PWD/libcurl.pro
-gotvptop.depends += $$PWD/python_pythoncore.pro
-gotvptop.depends += $$PWD/python_bz2.pro
-gotvptop.depends += $$PWD/python_ctypes.pro
-gotvptop.depends += $$PWD/python_ctypes_test.pro
-gotvptop.depends += $$PWD/python_elementtree.pro
-gotvptop.depends += $$PWD/python_hashlib.pro
-gotvptop.depends += $$PWD/python_sqlite3.pro
-gotvptop.depends += $$PWD/python_socket.pro
-gotvptop.depends += $$PWD/python_ssl.pro
-gotvptop.depends += $$PWD/python_testcapi.pro
-gotvptop.depends += $$PWD/python_pyexpat.pro
-gotvptop.depends += $$PWD/python_select.pro
-gotvptop.depends += $$PWD/python_unicodedata.pro
+#gotvptop.depends += $$PWD/libcurl.pro
+#gotvptop.depends += $$PWD/python_pythoncore.pro
+#gotvptop.depends += $$PWD/python_bz2.pro
+#gotvptop.depends += $$PWD/python_ctypes.pro
+#gotvptop.depends += $$PWD/python_ctypes_test.pro
+#gotvptop.depends += $$PWD/python_elementtree.pro
+#gotvptop.depends += $$PWD/python_hashlib.pro
+#gotvptop.depends += $$PWD/python_sqlite3.pro
+#gotvptop.depends += $$PWD/python_socket.pro
+#gotvptop.depends += $$PWD/python_ssl.pro
+#gotvptop.depends += $$PWD/python_testcapi.pro
+#gotvptop.depends += $$PWD/python_pyexpat.pro
+#gotvptop.depends += $$PWD/python_select.pro
+#gotvptop.depends += $$PWD/python_unicodedata.pro
 
-gotvptop.depends += $$PWD/GoTvOpenSslLib.pro
+#gotvptop.depends += $$PWD/GoTvOpenSslLib.pro
 
-gotvptop.depends += $$PWD/libgnu.pro
-gotvptop.depends += $$PWD/libnetlib.pro
-gotvptop.depends += $$PWD/libpktlib.pro
-gotvptop.depends += $$PWD/libcorelib.pro
-gotvptop.depends += $$PWD/libcrossguid.pro
+#gotvptop.depends += $$PWD/libgnu.pro
+#gotvptop.depends += $$PWD/libnetlib.pro
+#gotvptop.depends += $$PWD/libpktlib.pro
+#gotvptop.depends += $$PWD/libcorelib.pro
+#gotvptop.depends += $$PWD/libcrossguid.pro
 
 
 OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
@@ -108,56 +108,55 @@ include(config_link.pri)
 #PRE_TARGETDEPS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
 
 #static libs
-#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}gotvptoplib$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}kodi$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegavdevice$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegavformat$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegavfilter$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegavcodec$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegpostproc$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegswresample$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegswscale$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegavutil$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}nfs$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}cdio$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}pcre$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}armrwbenc$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}fdk-aac$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}opencore-amr$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}openmpt-full$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}vpx$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}x264$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}x265$${STATIC_LIB_SUFFIX}
+##PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}gotvptoplib$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}kodi$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegavdevice$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegavformat$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegavfilter$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegavcodec$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegpostproc$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegswresample$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegswscale$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ffmpegavutil$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}nfs$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}cdio$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}pcre$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}armrwbenc$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}fdk-aac$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}opencore-amr$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}openmpt-full$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}vpx$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}x264$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}x265$${STATIC_LIB_SUFFIX}
 
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ptopengine$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}mediatools$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}opus$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}speex$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}lame$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ptopengine$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}mediatools$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}opus$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}speex$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}lame$${STATIC_LIB_SUFFIX}
 
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}vorbis2$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}vorbis2$${STATIC_LIB_SUFFIX}
 
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}microhttpd$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}gnu$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}depends$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ogg$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}curl$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ssh$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}netlib$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}pktlib$${STATIC_LIB_SUFFIX}
-#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ssl$${STATIC_LIB_SUFFIX} // shared lib
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}fribidi$${STATIC_LIB_SUFFIX}
-#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}iconv$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}freetype$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}png$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}tinyxml$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}xml2$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}compress$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}corelib$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
-PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
-
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}microhttpd$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}gnu$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}depends$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ogg$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}curl$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ssh$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}netlib$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}pktlib$${STATIC_LIB_SUFFIX}
+##PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}ssl$${STATIC_LIB_SUFFIX} // shared lib
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}fribidi$${STATIC_LIB_SUFFIX}
+##PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}iconv$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}freetype$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}png$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}tinyxml$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}xml2$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}compress$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}corelib$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
+#PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
 
 #message(Static Lib prefix($${STATIC_LIB_PREFIX})  suffix($${STATIC_LIB_SUFFIX})  )
     #static libs
@@ -214,24 +213,30 @@ PRE_TARGETDEPS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}zlib$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}curl$${STATIC_LIB_SUFFIX}
 
-unix:!android:{
+
+unix:!android{
+message( Unix load dir $${DEST_SHARED_LIBS_DIR} )
     #give linux the path of where to load our shared libraries from for debugger
     LIBS += -L$${DEST_SHARED_LIBS_DIR}
 }
+
+unix{
     #shared libs
+message( Unix )
 #linux seems to be very particular and the absolute path does not work
      #LIBS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
      #LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
 CONFIG(debug, debug|release){
     LIBS +=  -lpythoncore_d
     LIBS +=  -lssl_d
+
 }
 
 CONFIG(release, debug|release){
     LIBS +=  -lpythoncore
     LIBS +=  -lssl
 }
-
+}
     LIBS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
 
@@ -239,14 +244,16 @@ unix:!android:{
     LIBS +=  -lpthread -ldl -lGLU -lGL -lm -luuid -lrt
 }
 
-!android:{
+!android{
 #copy shared libraries to out directory
 #message(Static Lib prefix($${STATIC_LIB_PREFIX})  suffix($${STATIC_LIB_SUFFIX})  )
 #message( Exe dest dir ($${DEST_EXE_DIR})  )
 # message( Share Lib dest dir ($${DEST_SHARED_LIBS_DIR})  )
 
  DESTDIR = $${DEST_EXE_DIR}
+}
 
+!unix{
 #copy shared libs to local output directory so can easily be linked to
     copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/* $$shell_path($${DEST_SHARED_LIBS_DIR}))
 
@@ -255,7 +262,6 @@ unix:!android:{
  export(copydata.commands)
  QMAKE_EXTRA_TARGETS += first copydata
 }
-
 
 win32:{
     #shared libs

@@ -19,6 +19,7 @@
 #define _GETTEXTP_GNU_H
 
 #include  <stddef.h>		/* Get size_t.  */
+#include  <limits.h> // PATH_MAX
 
 #ifdef _LIBC
 # include "../iconv/gconv_int.h"

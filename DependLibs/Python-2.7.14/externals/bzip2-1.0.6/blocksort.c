@@ -1028,7 +1028,7 @@ void mainSort ( UInt32* ptr,
       ftab [ 0 .. 65536 ] destroyed
       arr1 [0 .. nblock-1] holds sorted order
 */
-void BZ2_blockSort ( EState* s )
+void BZ2_blockSort_python ( EState* s )
 {
    UInt32* ptr    = s->ptr; 
    UChar*  block  = s->block;

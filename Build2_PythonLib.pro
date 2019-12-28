@@ -8,7 +8,6 @@ CONFIG += ordered
 
 include(config_os_detect.pri)
 #NOTE: be sure you have build Build1_PythonDepends first
-
 SUBDIRS += $$PWD/python_pythoncore.pro
 
 SUBDIRS += $$PWD/python_bz2.pro
@@ -19,13 +18,16 @@ SUBDIRS += $$PWD/python_elementtree.pro
 SUBDIRS += $$PWD/python_hashlib.pro
 SUBDIRS += $$PWD/python_sqlite3.pro
 SUBDIRS += $$PWD/python_socket.pro
-SUBDIRS += $$PWD/python_ssl.pro
 SUBDIRS += $$PWD/python_testcapi.pro
 
 SUBDIRS += $$PWD/python_pyexpat.pro
 
 SUBDIRS += $$PWD/python_select.pro
 SUBDIRS += $$PWD/python_unicodedata.pro
+
+SUBDIRS += $$PWD/python_ssl.pro
+
+
 
 #SUBDIRS += $$PWD/python_bsddb.pro #FIXME does not build
 

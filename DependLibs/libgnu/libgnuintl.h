@@ -267,7 +267,7 @@ extern LIBINTL_DLL_EXPORTED char *dcngettext (const char *__domainname,
    If DOMAINNAME is null, return the current default.
    If DOMAINNAME is "", reset to the default of "messages".  */
 #ifdef _INTL_REDIRECT_INLINE
-extern LIBINTL_DLL_EXPORTED char *libintl_textdomain (const char *__domainname);
+extern LIBINTL_DLL_EXPORTED char * libintl_textdomain (const char *__domainname);
 static GOTV_INLINE char *textdomain (const char *__domainname)
 {
   return libintl_textdomain (__domainname);

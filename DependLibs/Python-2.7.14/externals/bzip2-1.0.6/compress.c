@@ -34,7 +34,7 @@
 /*---------------------------------------------------*/
 
 /*---------------------------------------------------*/
-void BZ2_bsInitWrite ( EState* s )
+void BZ2_bsInitWrite_python ( EState* s )
 {
    s->bsLive = 0;
    s->bsBuff = 0;
@@ -43,7 +43,7 @@ void BZ2_bsInitWrite ( EState* s )
 
 /*---------------------------------------------------*/
 static
-void bsFinishWrite ( EState* s )
+void bsFinishWrite_python ( EState* s )
 {
    while (s->bsLive > 0) {
       s->zbits[s->numZ] = (UChar)(s->bsBuff >> 24);

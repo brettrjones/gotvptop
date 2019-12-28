@@ -2,11 +2,10 @@
 
 #link dependent library
 
-
 #link dependent libraries
 CONFIG(debug, debug|release){
 # message(Link in DEBUG mode.)
- android:{
+ android{
   STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
   STATIC_LIB_SUFFIX=AndroidD.a
 
@@ -16,7 +15,7 @@ CONFIG(debug, debug|release){
   PYTHON_EXTENTION_LIB_SUFFIX=_d.pyd
  }
 
- unix:!android:{
+ unix:!android{
   STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
   STATIC_LIB_SUFFIX=LinuxD.a
 
@@ -32,6 +31,8 @@ CONFIG(release, debug|release){
     android:{
         STATIC_LIB_PREFIX=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
         STATIC_LIB_SUFFIX=Android.a
+
+        SHARED_LIB_BUILD_DIR=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/
         SHARED_LIB_PREFIX=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/lib
         SHARED_LIB_SUFFIX=Android.so
         SHARED_PYTHON_LIB_SUFFIX=.so

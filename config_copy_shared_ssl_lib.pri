@@ -2,7 +2,7 @@
 
 #copy to local directory so can easily be linked to
 
-win:{
+win{
     copydata.commands = $(COPY_DIR) $$shell_path($$OUT_PWD/*.dll) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE})
     first.depends = $(first) copydata
     export(first.depends)
@@ -10,7 +10,8 @@ win:{
     QMAKE_EXTRA_TARGETS += first copydata
 }
 
-unix:!android:  {
+unix:!android {
+    message(DESTDIR_SSL is $${DESTDIR})
     copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}) $$shell_path($${DEST_EXE_DIR})
     first.depends = $(first) copydata
     export(first.depends)
@@ -18,7 +19,7 @@ unix:!android:  {
     QMAKE_EXTRA_TARGETS += first copydata
 }
 
-android:{
+android{
     message(DESTDIR_SSL is $${DESTDIR})
 
     #rename and move android lib to android/libs/target arch directory
@@ -29,7 +30,7 @@ android:{
     SHARED_SSL_ANDROID_LIB_COPY_CMD = ""
 
     SHARED_SSL_ANDROID_SRC_DIR = $$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
-    contains(QMAKE_HOST.os,Windows){
+    contains(COMPILE_HOST_OS,Windows){
         SHARED_SSL_ANDROID_SRC_DIR = $$OUT_PWD
     }
 

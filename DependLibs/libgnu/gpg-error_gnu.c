@@ -19,6 +19,8 @@
    02111-1307, USA.  */
 
 #include <libgnu/config_libgnu.h>
+#define BUILD_GNU_INTERNAL
+
 #ifdef BUILD_GPG_ERROR_TOOL
 
 #include <stddef.h>
