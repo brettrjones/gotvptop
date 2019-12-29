@@ -69,7 +69,7 @@ public:
 	virtual bool				fromGuiSetGameValueVar(	int32_t varId, int32_t varValue );
 	virtual bool				fromGuiSetGameActionVar( int32_t actionId, int32_t actionValue );
 
-	virtual void				onActivityFinish( void );
+    virtual void				onActivityFinish( void ) override;
 
 signals:
 	void						signalToGuiSetGameValueVar( long varId, long varValue );
@@ -81,10 +81,10 @@ signals:
 	void						signalToGuiContactOffline( VxNetIdent * hisIdent );
 
 public slots:
-	void						slotMuteMicButtonClicked( bool muteMic );
-	void						slotMuteSpeakerButtonClicked( bool muteSpeaker );
-    void						slotCameraSnapshotButtonClicked( void );
-	void						slotCamPreviewClicked( void );
+    void						slotMuteMicButtonClicked( bool muteMic ) override;
+    void						slotMuteSpeakerButtonClicked( bool muteSpeaker ) override;
+    void						slotCameraSnapshotButtonClicked( void ) override;
+    void						slotCamPreviewClicked( void ) override;
 
 protected slots:
 	void						slotToGuiRxedPluginOffer( GuiOfferSession * offerSession );
@@ -96,40 +96,38 @@ private:
 	void						setupActivityToFriendBase( void );
 
 protected:
-	virtual void				toGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer ); 
-	virtual void				toGuiRxedOfferReply( void * callbackData, GuiOfferSession * offerReply ); 
-	virtual void				toGuiPluginSessionEnded(void * callbackData, GuiOfferSession * offer ); 
-	virtual void				toGuiContactOnline( void * callbackData, VxNetIdent * friendIdent, bool newContact ); 
-	virtual void				toGuiContactOffline( void * callbackData, VxNetIdent * friendIdent ); 
+    virtual void				toGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer );
+    virtual void				toGuiRxedOfferReply( void * callbackData, GuiOfferSession * offerReply );
+    virtual void				toGuiPluginSessionEnded(void * callbackData, GuiOfferSession * offer ) override;
+    virtual void				toGuiContactOnline( void * callbackData, VxNetIdent * friendIdent, bool newContact ) override;
+    virtual void				toGuiContactOffline( void * callbackData, VxNetIdent * friendIdent ) override;
 	virtual void				toGuiClientPlayVideoFrame(	void *			userData, 
 															VxGUID&			onlineId, 
-															uint8_t *			pu8Jpg, 
-															uint32_t				u32JpgDataLen,
-															int				motion0To100000 );
+                                                            uint8_t *		pu8Jpg,
+                                                            uint32_t		u32JpgDataLen,
+                                                            int				motion0To100000 ) override;
 
-	virtual void				toGuiSetGameValueVar(	void *		userData, 
-														EPluginType ePluginType, 
-														VxGUID&		onlineId, 
+    virtual void				toGuiSetGameValueVar(	void *          userData,
+                                                        EPluginType     ePluginType,
+                                                        VxGUID&         onlineId,
 														int32_t			s32VarId, 
-														int32_t			s32VarValue );
+                                                        int32_t			s32VarValue ) override;
 
-	virtual void				toGuiSetGameActionVar(	void *		userData, 
-														EPluginType ePluginType, 
-														VxGUID&		onlineId, 
+    virtual void				toGuiSetGameActionVar(	void *          userData,
+                                                        EPluginType     ePluginType,
+                                                        VxGUID&         onlineId,
 														int32_t			s32VarId, 
-														int32_t			s32VarValue );
+                                                        int32_t			s32VarValue ) override;
 
-	virtual void				showEvent( QShowEvent * ev );
-	virtual void				hideEvent( QHideEvent * ev );
-	virtual void				closeEvent( QCloseEvent * ev );
+    virtual void				showEvent( QShowEvent * ev ) override;
+    virtual void				hideEvent( QHideEvent * ev ) override;
+    virtual void				closeEvent( QCloseEvent * ev ) override;
 
 	QString						describePluginOffer( EPluginType ePluginType );
 
-
 	//=== vars ===//
-	bool						m_bFirstMsg;
-	VidWidget *					m_VidCamWidget;
-	TitleBarWidget *			m_TitleBarWidget;
+    bool						m_bFirstMsg{false};
+    VidWidget *					m_VidCamWidget{nullptr};
+    TitleBarWidget *			m_TitleBarWidget{nullptr};
 	OfferSessionLogic			m_OfferSessionLogic;
-
 };

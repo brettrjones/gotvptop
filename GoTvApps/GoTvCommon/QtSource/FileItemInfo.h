@@ -38,8 +38,8 @@ public:
 	QString&					getFullFileName( void )					{ return m_FileInfo.getFullFileName(); }
 	QString						getJustFileName( void )					{ return m_FileInfo.getJustFileName(); }
 
-	uint8_t							getFileType( void )						{ return m_FileInfo.getFileType(); }
-	uint64_t							getFileLength( void )					{ return m_FileInfo.getFileLength(); }
+    uint8_t						getFileType( void )						{ return m_FileInfo.getFileType(); }
+    uint64_t					getFileLength( void )					{ return m_FileInfo.getFileLength(); }
 	VxSha1Hash&					getFileHashId( void )					{ return m_FileInfo.getFileHashId(); }
 
 	bool						toggleIsShared( void );
@@ -56,9 +56,8 @@ public:
 
 	//=== vars ===//
 private:
-	VxMyFileInfo					m_FileInfo;
-	VxNetIdent *				m_Ident;
-	QWidget *					m_Widget;
-	bool						m_IsShared;
-	bool						m_IsInLibrary;
+    VxMyFileInfo				m_FileInfo;
+    QWidget *					m_Widget{nullptr};
+    bool						m_IsShared{false};
+    bool						m_IsInLibrary{false};
 };

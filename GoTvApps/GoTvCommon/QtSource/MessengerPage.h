@@ -27,11 +27,11 @@ signals:
 	void						signalMessengerPageChanged( bool isVisible, bool isFullScreen );
 
 protected slots :
-	virtual void				slotBackButtonClicked( void );
+    virtual void				slotBackButtonClicked( void ) override;
 
 protected:
-	virtual void				showEvent( QShowEvent * );
-	virtual void				hideEvent( QHideEvent * );
+    virtual void				showEvent( QShowEvent * ) override;
+    virtual void				hideEvent( QHideEvent * ) override;
 
 	bool						m_IsVisible;
 	bool						m_IsFullSize;

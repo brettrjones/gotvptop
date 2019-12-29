@@ -427,7 +427,8 @@ bool OsInterface::initUserPaths()
     // set paths so accessable outside of kodi
     VxFileUtil::makeForwardSlashPath( kodiBinStoragePath );
     VxFileUtil::assureTrailingDirectorySlash( kodiBinStoragePath );
-    VxSetExeDirectory( kodiBinStoragePath.c_str() );
+    // ?? not sure this is right
+    VxSetKodiExeDirectory( kodiBinStoragePath.c_str() );
 
     VxFileUtil::makeForwardSlashPath( storageDir );
     VxFileUtil::assureTrailingDirectorySlash( storageDir );

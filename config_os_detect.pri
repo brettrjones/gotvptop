@@ -4,10 +4,10 @@ COPY_KEYWORD = cp
 MOVE_KEYWORD = mv
 
 COMPILE_HOST_NAME=$${QMAKE_HOST.os}
-message(compile host is $${COMPILE_HOST_NAME})
+message(target $${TARGET_NAME} compile host is $${COMPILE_HOST_NAME})
 
 #NOTE .. the { must come right after the contains() or will alwayse execute what is in the brackes
-contains( COMPILE_HOST_NAME, Windows ) {
+contains( COMPILE_HOST_NAME, Windows ){
     COMPILE_HOST_OS = Windows
     COPY_KEYWORD = copy
     MOVE_KEYWORD = move
@@ -15,10 +15,23 @@ contains( COMPILE_HOST_NAME, Windows ) {
     DETECTED_BUILD_DATE=$$system(date /t)
     BUILD_DATE
 #    DEFINES += BUILD_DATE=\\"$${DETECTED_BUILD_DATE})\\"
-    message(windows build date is $${DETECTED_BUILD_DATE})
+#    message(windows build date is $${DETECTED_BUILD_DATE})
 
     GIT_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
-    message(windows git is $${GIT_VERSION})
+#    message(windows git is $${GIT_VERSION})
+
+    android{
+        message(sigh FIXME do not compile android on windows unless can add NDK_APP_SHORT_COMMANDS and LOCAL_SHORT_COMMANDS or will get error 87 )
+
+        # sigh this does not work
+        LOCAL_SHORT_COMMANDS=true
+        APP_SHORT_COMMANDS=true
+        NDK_APP_SHORT_COMMANDS=true
+
+        DEFINES += LOCAL_SHORT_COMMANDS
+        DEFINES += APP_SHORT_COMMANDS
+        DEFINES += NDK_APP_SHORT_COMMANDS
+    }
 }
 
 contains( COMPILE_HOST_NAME, Android ) {
@@ -48,6 +61,7 @@ android:{
 #        QMAKE_MOVE = $${PRO_DIR_WIN}\qt_fix_move.bat
 #    }
 
+
     DEFINES += TARGET_OS_ANDROID
     DEFINES += TARGET_POSIX
     ANDROID_ARM64 = 0
@@ -55,10 +69,10 @@ android:{
     ANDROID_x86 = 0
     ANDROID_x86_64 = 0
 
-    DEST_EXE_DIR = $$PWD/bin-Android/lib
-    DEST_PYTHON_EXE_DIR = $$PWD/bin-Android/lib
-    DEST_PYTHON_DLL_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7
-    DEST_PYTHON_LIB_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7
+    DEST_EXE_DIR = $$PWD/bin-Android/lib/
+    DEST_PYTHON_EXE_DIR = $$PWD/bin-Android/lib/
+    DEST_PYTHON_DLL_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7/
+    DEST_PYTHON_LIB_DIR = $$PWD/bin-Android/assets/python2.7/lib/python2.7/
 
     message(ANDROID_TARGET $${ANDROID_TARGET_ARCH})
 
@@ -113,11 +127,11 @@ android:{
         TARGET_ENDIAN_BIG=0
     }
 
-    DEST_SHARED_LIBS_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}
-    DEST_EXE_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}
-    DEST_PYTHON_EXE_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}
-    DEST_PYTHON_DLL_DIR = $$PWD/bin-Android/assets/kodi/python2.7/lib/python2.7
-    DEST_PYTHON_LIB_DIR = $$PWD/bin-Android/assets/kodi/python2.7/lib/python2.7
+    DEST_SHARED_LIBS_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}/
+    DEST_EXE_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}/
+    DEST_PYTHON_EXE_DIR = $$PWD/bin-Android/libs/$${TARGET_ARCH_NAME}/
+    DEST_PYTHON_DLL_DIR = $$PWD/bin-Android/assets/kodi/python2.7/lib/python2.7/
+    DEST_PYTHON_LIB_DIR = $$PWD/bin-Android/assets/kodi/python2.7/lib/python2.7/
 
 #    contains(QMAKE_HOST.os,Windows):{
 #        DEST_EXE_DIR ~= s,/,\\,g # replace / with \
@@ -196,4 +210,5 @@ CONFIG(release, debug|release){
 #}
 
 DEST_STATIC_LIBS_DIR=$$PWD/build-staticlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/
+
 SHARED_LIB_BUILD_DIR=$$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/

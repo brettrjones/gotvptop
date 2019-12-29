@@ -24,7 +24,6 @@
 //============================================================================
 FileItemInfo::FileItemInfo( uint8_t u8FileType, const char * pFileName, uint64_t u64FileLen, VxNetIdent * netIdent, uint8_t * fileHashId )
 : m_FileInfo( pFileName, u8FileType, u64FileLen, fileHashId )
-, m_Ident( netIdent )
 , m_Widget( 0 )
 , m_IsShared( false )
 , m_IsInLibrary( false )
@@ -34,7 +33,6 @@ FileItemInfo::FileItemInfo( uint8_t u8FileType, const char * pFileName, uint64_t
 //============================================================================
 FileItemInfo::FileItemInfo( VxMyFileInfo& fileInfo, VxNetIdent * netIdent, bool isShared, bool isInLibrary )
 : m_FileInfo( fileInfo )
-, m_Ident( netIdent )
 , m_Widget( 0 )
 , m_IsShared( isShared )
 , m_IsInLibrary( isInLibrary )
