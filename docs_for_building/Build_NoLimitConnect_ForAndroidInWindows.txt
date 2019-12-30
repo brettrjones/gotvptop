@@ -2,8 +2,10 @@
 === Build NoLimitConnect for android in windows ====
 NOTES: ( some hard earned lessons )
 1.) Cannot build multiple .pro projects in same build unless all the same DESTDIR etc
-2.) For Qt the projects must be built in a certain order
-	1.) 
+2.) BuildAll.pro may hang because of it's size unless you have a awsome computer so is better to build individualy
+	 Build1_xxx Build2_xxx etc
+3.) For Qt the projects must be built in a certain order which is why they are named Build1_xxx Build2_xxx etc
+
 === Build Prerequisites ====
 Follow instructions in docs_for_building/BuildForWindowsPrerequisitesInstructions.txt
 tested with:
@@ -27,7 +29,6 @@ then
 	androidBuildToolsVersion=28.0.3
 
 
-
 ==== Android usb debugging ====
 1.) If debugger does not stop at breakpoint 
 	Look at log in Qcreator->Window->Views->Debugger Log
@@ -45,6 +46,7 @@ from command prompt
 3.) from windows explorer browse to F:\android\android-sdk\extras\google\usb_driver
 4.) right click android_winusb.inf and choose install
 5.) reboot computer
+6.) extract android ndk 18b to F:\android\ndk-windows-x86_64\android-ndk-r18b
 
 
 === windows enviroment variables ===
@@ -52,6 +54,7 @@ These are my enviroment variables.. your paths will be different
 ANDROID_HOME F:\android\android-sdk
 ANDROID_SDK_ROOT F:\android\android-sdk
 ANDROID_NDK_ROOT F:\android\ndk-windows-x86-64\android-ndk-r18b
+ANDROID_NDK_PLATFORM android-21
 JAVA_HOME F:\android\jdk1.8.0_131
 JRE_HOME F:\android\jre1.8.0_131
 

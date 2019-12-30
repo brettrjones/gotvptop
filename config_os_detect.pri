@@ -20,18 +20,18 @@ contains( COMPILE_HOST_NAME, Windows ){
     GIT_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
 #    message(windows git is $${GIT_VERSION})
 
-    android{
-        message(sigh FIXME do not compile android on windows unless can add NDK_APP_SHORT_COMMANDS and LOCAL_SHORT_COMMANDS or will get error 87 )
+#    android{
+#        message(sigh FIXME do not compile android on windows unless can add NDK_APP_SHORT_COMMANDS and LOCAL_SHORT_COMMANDS or will get error 87 )
 
         # sigh this does not work
-        LOCAL_SHORT_COMMANDS=true
-        APP_SHORT_COMMANDS=true
-        NDK_APP_SHORT_COMMANDS=true
+#        LOCAL_SHORT_COMMANDS=true
+#        APP_SHORT_COMMANDS=true
+#        NDK_APP_SHORT_COMMANDS=true
 
-        DEFINES += LOCAL_SHORT_COMMANDS
-        DEFINES += APP_SHORT_COMMANDS
-        DEFINES += NDK_APP_SHORT_COMMANDS
-    }
+#        DEFINES += LOCAL_SHORT_COMMANDS
+#        DEFINES += APP_SHORT_COMMANDS
+#        DEFINES += NDK_APP_SHORT_COMMANDS
+#    }
 }
 
 contains( COMPILE_HOST_NAME, Android ) {

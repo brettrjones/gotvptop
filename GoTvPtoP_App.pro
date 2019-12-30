@@ -1,11 +1,11 @@
 # Global
-TARGET = gotvptop
+TARGET = nolimitconnect
 TEMPLATE = app
 
 # keep it all lowercase to match program naming convention on *nix systems
-PROJECT_NAME = gotvptop
+PROJECT_NAME = nolimitconnect
 
-TARGET_NAME = gotvptop
+TARGET_NAME = nolimitconnect
 
 QT += gui core concurrent widgets network multimedia opengl xml svg quickwidgets
 android:{
@@ -84,6 +84,16 @@ OBJECTS_DIR=.objs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUI
 MOC_DIR =.moc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
 RCC_DIR =.qrc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
 UI_DIR =.ui/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+
+# fails because command line limit in windoz is 32,768.. so
+#short obj path so does not overflow windows command line limit "make (e=87): The parameter is incorrect"
+CONFIG(debug, debug|release){
+    OBJECTS_DIR=.ad
+}
+
+CONFIG(release, debug|release){
+    OBJECTS_DIR=.ar
+}
 
 # look in same directory as executable for shared libraries
 unix:{
@@ -215,27 +225,24 @@ include(config_link.pri)
 
 
 unix:!android{
-message( Unix load dir $${DEST_SHARED_LIBS_DIR} )
-    #give linux the path of where to load our shared libraries from for debugger
-    LIBS += -L$${DEST_SHARED_LIBS_DIR}
-}
+    message( Unix load dir $${DEST_SHARED_LIBS_DIR} )
+        #give linux the path of where to load our shared libraries from for debugger
+        LIBS += -L$${DEST_SHARED_LIBS_DIR}
+        #shared libs
+    message( Unix )
+    #linux seems to be very particular and the absolute path does not work
+         #LIBS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
+         #LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
+    CONFIG(debug, debug|release){
+        LIBS +=  -lpythoncore_d
+        LIBS +=  -lssl_d
 
-unix{
-    #shared libs
-message( Unix )
-#linux seems to be very particular and the absolute path does not work
-     #LIBS +=  $${SHARED_LIB_PREFIX}pythoncore$${SHARED_PYTHON_LIB_SUFFIX}
-     #LIBS +=  $${SHARED_LIB_PREFIX}ssl$${SHARED_PYTHON_LIB_SUFFIX}
-CONFIG(debug, debug|release){
-    LIBS +=  -lpythoncore_d
-    LIBS +=  -lssl_d
+    }
 
-}
-
-CONFIG(release, debug|release){
-    LIBS +=  -lpythoncore
-    LIBS +=  -lssl
-}
+    CONFIG(release, debug|release){
+        LIBS +=  -lpythoncore
+        LIBS +=  -lssl
+    }
 }
     LIBS +=  $${STATIC_LIB_PREFIX}crossguid$${STATIC_LIB_SUFFIX}
     LIBS +=  $${STATIC_LIB_PREFIX}bz2$${STATIC_LIB_SUFFIX}
@@ -250,17 +257,17 @@ unix:!android:{
 #message( Exe dest dir ($${DEST_EXE_DIR})  )
 # message( Share Lib dest dir ($${DEST_SHARED_LIBS_DIR})  )
 
- DESTDIR = $${DEST_EXE_DIR}
+    DESTDIR = $${DEST_EXE_DIR}
 }
 
-!unix{
+unix:!android{
 #copy shared libs to local output directory so can easily be linked to
     copydata.commands = $(COPY_DIR) $$shell_path($$PWD/build-sharedlibs/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}/* $$shell_path($${DEST_SHARED_LIBS_DIR}))
 
- first.depends = $(first) copydata
- export(first.depends)
- export(copydata.commands)
- QMAKE_EXTRA_TARGETS += first copydata
+    first.depends = $(first) copydata
+    export(first.depends)
+    export(copydata.commands)
+    QMAKE_EXTRA_TARGETS += first copydata
 }
 
 win32:{
@@ -292,7 +299,6 @@ android:{
     LIBS += -l$${ANDROID_LIBS}/libssl$${SHARED_PYTHON_LIB_SUFFIX}
     LIBS += -l$${ANDROID_LIBS}/libpythoncore$${SHARED_PYTHON_LIB_SUFFIX}
 
-
 #    LIBS +=  -ldl -lm -landroid -lEGL -lGLESv2  -lc -lstdc++ -llog -ljnigraphics
     LIBS +=  -ldl -lm -lEGL -lGLESv2  -lc -lstdc++ -llog -ljnigraphics -landroid
 
@@ -300,9 +306,7 @@ android:{
     qnx: target.path = /tmp/$${TARGET}/bin
     else: unix:!android: target.path = /opt/$${TARGET}/bin
     !isEmpty(target.path): INSTALLS += target
-
 }
-
 
 ANDROID_PACKAGE_SOURCE_DIR = \
         $$PWD/bin-Android
