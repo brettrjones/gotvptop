@@ -261,7 +261,7 @@ const char * VxGetCompanyDomain( void )
 }
 
 //============================================================================
-const char * VxGetOrginizationNmae( void )
+const char * VxGetOrginizationName( void )
 {
     return g_strOrginizationName.c_str();
 }

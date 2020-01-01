@@ -26,11 +26,6 @@ VxSktAccept::VxSktAccept()
 {
 	m_eSktType = eSktTypeTcpAccept;
 }
-//============================================================================
-
-VxSktAccept::~VxSktAccept()
-{
-}
 
 //============================================================================
 //! called when socket is accepted
@@ -43,20 +38,16 @@ RCODE	VxSktAccept::doAccept( VxServerMgr * poMgr, struct sockaddr& oAcceptAddr )
 	VxGetLclAddress( m_Socket, m_LclIp );
 	m_strLclIp = m_LclIp.toStdString();
 	m_strRmtIp = m_RmtIp.toStdString();
-	//LogMsg( LOG_INFO, "VxSktAccept::doAccept: Lcl ip %s port %d (0x%4.4x) Rmt ip %s port %d (0x%4.4x)\n", 
-	//	m_strLclIp.c_str(),
-	//	m_LclIp.getPort(),
-	//	m_LclIp.getPort(),
-	//	m_strRmtIp.c_str(),
-	//	m_RmtIp.getPort(),
-	//	m_RmtIp.getPort() );
 
+    LogModule( eLogModuleConnect, LOG_INFO, "VxSktAccept accept Lcl ip %s port %d (0x%4.4x) Rmt ip %s port %d (0x%4.4x)", 
+		m_strLclIp.c_str(),
+		m_LclIp.getPort(),
+		m_LclIp.getPort(),
+		m_strRmtIp.c_str(),
+		m_RmtIp.getPort(),
+		m_RmtIp.getPort() );
 
-#ifdef DEBUG_SKT
-    LogMsg( LOG_INFO, "VxSktAccept::doAccept: skt %d remote ip %s\n", this->m_iSktId, getRemoteIp().c_str() );
-#endif // DEBUG_SKT
-
-	// tell user we connecting
+    // tell user we connecting
 	//VerifyCodePtr( m_pfnReceive );
 	m_pfnReceive( this, getRxCallbackUserData() );
 	// make a useful thread name

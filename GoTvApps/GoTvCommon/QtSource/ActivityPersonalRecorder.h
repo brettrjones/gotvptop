@@ -28,8 +28,8 @@ class ActivityPersonalRecorder : public ActivityToFriendBase
 public:
 
 	ActivityPersonalRecorder(	AppCommon&			app,
-								VxNetIdent *			netIdent, 
-								QWidget *				parent = NULL );
+                                VxNetIdent *		netIdent,
+                                QWidget *			parent = NULL );
 
 	virtual ~ActivityPersonalRecorder() override;
 
@@ -38,12 +38,12 @@ public:
     virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 	virtual void				toGuiClientPlayVideoFrame(	void *			userData, 
-															VxGUID&		onlineId, 
-															uint8_t *			pu8Jpg, 
-															uint32_t				u32JpgDataLen,
-															int				motion0To100000 );
+                                                            VxGUID&         onlineId,
+                                                            uint8_t *		pu8Jpg,
+                                                            uint32_t		u32JpgDataLen,
+                                                            int				motion0To100000 ) override;
 
-	virtual void				onActivityFinish( void );
+    virtual void				onActivityFinish( void ) override;
 
 protected:
 	void						setupMultiSessionActivity( void );

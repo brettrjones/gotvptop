@@ -43,9 +43,9 @@ public:
 public:
 	void						setTitle( QString strTitle );
 
-	virtual void				toGuiClientScanSearchComplete( void * userData, EScanType eScanType );	
-	virtual void				toGuiSearchResultSuccess( void * userData, EScanType eScanType, VxNetIdent * netIdent );
-	virtual void				toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen,int motion0To100000 );
+    virtual void				toGuiClientScanSearchComplete( void * userData, EScanType eScanType ) override;
+    virtual void				toGuiSearchResultSuccess( void * userData, EScanType eScanType, VxNetIdent * netIdent ) override;
+    virtual void				toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen,int motion0To100000 ) override;
 	//! handle audio
 	void						playAudio( uint16_t * pu16PcmData, uint16_t u16PcmDataLen, VxGUID& onlineId );
 
@@ -61,7 +61,7 @@ public slots:
 	void						slotPlayVideoFrame( QImage oPicBitmap, int iRotate );
 	void						slotPlayAudio(  unsigned short * pu16PcmData, unsigned short u16PcmDataLen );
 
-	void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void ) override;
 
 	void						slotStartScanClicked();
 	void						slotPauseScanClicked();
@@ -71,8 +71,8 @@ public slots:
 	void						slotFriendClicked( void );
 
 protected:
-	void						showEvent( QShowEvent * ev );
-	void						hideEvent( QHideEvent * ev );
+    void						showEvent( QShowEvent * ev ) override;
+    void						hideEvent( QHideEvent * ev ) override;
 
 	void						setScanStatusText( QString strMsg );
 	void						setupIdentWidget( VxNetIdent * netIdent );

@@ -39,6 +39,8 @@ NetworkEventAvail::NetworkEventAvail( NetworkStateMachine& stateMachine, const c
 
 	VxSetLclIpAddress( m_LclIp.c_str() );
 	m_bIsCellNetwork = isCellularNetwork;
+
+    LogMsg( LOG_DEBUG, "NetworkEventAvail created with ip %s", lclIp ? lclIp : "" );
 }
 
 //============================================================================
@@ -49,7 +51,7 @@ void NetworkEventAvail::runNetworkEvent( void )
     uint16_t listenPort = m_Engine.getEngineSettings().getTcpIpPort();
     if( !m_Engine.getPeerMgr().isListening() || ( listenPort != m_Engine.getPeerMgr().getListenPort() ) )
     {
-        if( !m_Engine.getPeerMgr().isListening() )
+        if( m_Engine.getPeerMgr().isListening() )
         {
             m_Engine.getPeerMgr().stopListening();
         }

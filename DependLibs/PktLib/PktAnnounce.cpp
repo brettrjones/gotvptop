@@ -26,8 +26,8 @@
 
 namespace
 {
-    const uint64_t           g_u64NearbyUdpTimeoutMs       = 60000;		// if haven't received udp broadcast in these milli seconds then user is no longer nearby
-    const uint64_t           g_u64OnlineStatusTimeoutMs    = 600000;	// if haven't had udp or tcp activity in these milli seconds then user is no longer online
+    const int64_t           g_u64NearbyUdpTimeoutMs       = 60000;		// if haven't received udp broadcast in these milli seconds then user is no longer nearby
+    const int64_t           g_u64OnlineStatusTimeoutMs    = 600000;	// if haven't had udp or tcp activity in these milli seconds then user is no longer online
 }
 
 //============================================================================

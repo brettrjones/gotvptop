@@ -26,15 +26,15 @@ public:
 
 	virtual void				setAssetInfo( AssetInfo& assetInfo ) override;
 
-	virtual void				toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 );
-    virtual int	    			toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight );
+    virtual void				toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;
+    virtual int	    			toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) override;
 
 	virtual void				showShredder( bool show );
 	virtual void				showXferProgress( bool show );
 	virtual void				setXferProgress( int sendProgress );
 
 protected slots:
-	virtual void				slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 );
+    virtual void				slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 ) override;
 	void						slotPlayButtonClicked( void );
 	void						slotShredAsset( void );
 	void						slotSliderPressed( void );
@@ -48,9 +48,9 @@ protected:
 	void						initAppletPlayerVideo( void );
 	void						onAppletStop( void );
 
-	void						showEvent( QShowEvent * ev );
-    void						hideEvent( QHideEvent * ev );
-	void						resizeEvent( QResizeEvent * ev );
+    void						showEvent( QShowEvent * ev ) override;
+    void						hideEvent( QHideEvent * ev ) override;
+    void						resizeEvent( QResizeEvent * ev ) override;
 
 	void						setReadyForCallbacks( bool isReady );
 	void						updateGuiPlayControls( bool isPlaying );

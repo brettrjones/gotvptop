@@ -68,8 +68,8 @@ public:
     virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 public:
-	virtual void				toGuiClientScanSearchComplete( void * userData, EScanType eScanType );
-	virtual void				toGuiSearchResultProfilePic( void * userData, VxNetIdent * netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen );
+    virtual void				toGuiClientScanSearchComplete( void * userData, EScanType eScanType ) override;
+    virtual void				toGuiSearchResultProfilePic( void * userData, VxNetIdent * netIdent, uint8_t * pu8JpgData, uint32_t u32JpgDataLen ) override;
 
 signals:
 	 void						signalSearchResultProfilePic( VxNetIdent * netIdent, QImage oPicBitmap );
@@ -80,7 +80,7 @@ protected slots:
 
 	void						slotSearchResultProfilePic( VxNetIdent * netIdent, QImage oPicBitmap ); 
 
-	void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void ) override;
 	void						slotPauseScanClicked( void );
 	void						slotStartScanClicked( void );
 	void						slotNextScanClicked( void );
@@ -89,8 +89,8 @@ protected slots:
 	void						slotFriendClicked( void );
 
 protected:
-	void						showEvent( QShowEvent * ev );
-	void						hideEvent( QHideEvent * ev );
+    void						showEvent( QShowEvent * ev ) override;
+    void						hideEvent( QHideEvent * ev ) override;
 
 	void						startStopScan( bool startScan );
 	void						startCountdown();
@@ -115,6 +115,6 @@ protected:
 	bool						m_bIconConnected;
 	bool						m_bSearchComplete;
 	QVector<ScanProfilePair>	m_ScanList;
-		bool						m_ShowNextImage;
-		bool						m_IsScanning;
+    bool						m_ShowNextImage;
+    bool						m_IsScanning;
 };

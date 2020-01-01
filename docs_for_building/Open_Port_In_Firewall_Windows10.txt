@@ -1,0 +1,21 @@
+=== How to open port in Windows 10 firewall ===
+
+Hopefully by the time NoLimitConnect is published this will be automated by applicaion
+and these steps will not be required
+
+1.) Open Windows Settings
+2.) Click Network & Internet
+3.) Click Windows Firewall
+4.) Click Advanced Settings
+5.) Click Inbound Rules
+6.) Click New Rule
+7.) Select Program then next
+8.) Use the browse button to browse to NoLimitConnect.exe then next
+9.) select Allow the connection then click Next
+10.) check all boxes then click Next
+11.) Give the rule a name like No Limit Connect Inbound Rule then finish
+12.) VERY IMPORTANT: After rule is created select the rule from the list and click Properties
+13.) In Advanced Tab change Edge Transverse to Allow edge transversal
+14.) Apply and close out of dialogs
+
+

@@ -21,6 +21,7 @@
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/AppErr.h>
+#include <CoreLib/VxTime.h>
 
 #include <stdio.h>
 #include <memory.h>
@@ -128,7 +129,7 @@ bool VxServerMgr::isListening( void )
 //============================================================================
 bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 {
-	stopListening();
+	//stopListening();
 	if( m_ListenVxThread.isThreadRunning() )
 	{
 		m_ListenVxThread.killThread();
@@ -261,7 +262,7 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 		SOCKET sock = socket( thisAddr.isIPv4() ? AF_INET : AF_INET6, SOCK_STREAM, 0);
 		if( INVALID_SOCKET == sock )
 		{
-			LogMsg( LOG_ERROR,  "VxServerMgr::startListening socket() failed with error %d: %s\n",
+			LogMsg( LOG_ERROR,  "VxServerMgr::startListening socket() port %d ip %s failed with error %d: %s\n", u16ListenPort, thisIp.c_str(),
 				VxGetLastError(), VxDescribeSktError( VxGetLastError() ) );
 			continue;
 		}
@@ -272,7 +273,7 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 			memset(&oAddr, '\0', sizeof( struct sockaddr_in ) );
 			oAddr.sin_family = AF_INET;
 			oAddr.sin_port = htons(u16ListenPort);
-			oAddr.sin_addr.s_addr = inet_addr(thisIp.c_str());
+            oAddr.sin_addr.s_addr = ADDR_ANY; // if set to specific address then PureVPN does not work //inet_addr( thisIp.c_str() );
 			bool bindFailed = true;
 			for( int i = 0; i < 3; i++ )
 			{
@@ -401,12 +402,7 @@ bool VxServerMgr::startListening(  uint16_t u16ListenPort )
 		return false;
 	}
 
-    if( IsLogEnabled( eLogModuleConnect ) )
-    {
-        LogMsg( LOG_INFO, "VxServerMgr::startListening attempt on port %d\n", u16ListenPort );
-    }
-
-	RCODE rc = 0;
+    LogModule( eLogModuleConnect, LOG_INFO, "VxServerMgr::startListening attempt on port %d\n", u16ListenPort );
 
 	// By setting the AI_PASSIVE flag in the hints to getaddrinfo, we're
 	// indicating that we intend to use the resulting address(es) to bind
@@ -618,7 +614,7 @@ RCODE VxServerMgr::acceptConnection( VxThread * poVxThread, SOCKET oListenSkt )
 	// valid accept socket
 	if( m_aoSkts.size() >= m_u32MaxConnections )
 	{
-        LogModule( eLogModuleSkt, LOG_ERROR, "VxServerMgr: reached max connections %d\n", m_u32MaxConnections );
+        LogMsg( LOG_ERROR, "VxServerMgr: reached max connections %d\n", m_u32MaxConnections );
 		// we have reached max connections
 		// just close it immediately
         VxCloseSktNow( oAcceptSkt );
@@ -638,9 +634,8 @@ RCODE VxServerMgr::acceptConnection( VxThread * poVxThread, SOCKET oListenSkt )
 	sktBase->setTransmitCallback( m_pfnOurTransmit, this );
 	m_SktMgrMutex.unlock(__FILE__, __LINE__);
 
-#ifdef DEBUG_SKT_CONNECTIONS
-	LogMsg( LOG_INFO, "VxServerMgr: doing accept\n" );
-#endif // DEBUG_SKT_CONNECTIONS
+    LogModule( eLogModuleConnect, LOG_INFO, "VxServerMgr: doing accept\n" );
+
 	RCODE rcAccept = sktBase->doAccept( this, *(( struct sockaddr * )&oAcceptAddr) );
 	if( rcAccept || poVxThread->isAborted() || INVALID_SOCKET == oListenSkt )
 	{
@@ -652,10 +647,10 @@ RCODE VxServerMgr::acceptConnection( VxThread * poVxThread, SOCKET oListenSkt )
 		m_aoSkts.pop_back();
 		m_SktMgrMutex.unlock(__FILE__, __LINE__);
 		delete sktBase;
-		return false;
+        rc = -5;
 	}
 
-	return true;
+	return rc;
 }
 
 //============================================================================
@@ -721,6 +716,7 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
     FD_ZERO( &oListenSocketFileDescriptors );
     FD_ZERO( &oReadSocketFileDescriptors );
 
+    LogModule( eLogModuleConnect, LOG_INFO, "listenForConnectionsToAccept has %d listen sockets", m_iActiveListenSktCnt );
     // keep track of the biggest file descriptor
     SOCKET largestFileDescriptor = 0;
     for( int iSktSetIdx = 0; iSktSetIdx < m_iActiveListenSktCnt; iSktSetIdx++ )
@@ -741,7 +737,7 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
         oListenTimeout.tv_sec	= 3;
         oListenTimeout.tv_usec	= 0;
         iSelectResult = select( largestFileDescriptor + 1, &oReadSocketFileDescriptors, 0, 0, &oListenTimeout );
-        //LogMsg( LOG_INFO, "Listen VxThread select result %d\n", iSelectResult );
+        // LogModule( eLogModuleConnect, LOG_INFO, "Listen VxThread select result %d at %d seconds", iSelectResult, GetApplicationAliveSec() );
 
 		if( poVxThread->isAborted() 
 			|| VxIsAppShuttingDown()
@@ -757,9 +753,7 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 			{
                 if( FD_ISSET( m_aoListenSkts[iSelectedIdx], &oReadSocketFileDescriptors) )
 				{
-#ifdef DEBUG_SKT_CONNECTIONS
-					LogMsg( LOG_INFO, "#### VxServerMgr::acceptConnection: accepting at index %d\n", iSelectedIdx );
-#endif // DEBUG_SKT_CONNECTIONS
+                    LogModule( eLogModuleConnect, LOG_INFO, "#### VxServerMgr::acceptConnection: accepting at index %d\n", iSelectedIdx );
 					rc = acceptConnection( poVxThread, m_aoListenSkts[iSelectedIdx] );
 					if( rc )
 					{
@@ -767,9 +761,7 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 					}
 					else
 					{
-#ifdef DEBUG_SKT_CONNECTIONS
-						LogMsg( LOG_INFO, "#### VxServerMgr::acceptConnection: success doing accept\n" );
-#endif // DEBUG_SKT_CONNECTIONS
+						LogModule( eLogModuleConnect, LOG_INFO, "#### VxServerMgr::acceptConnection: success doing accept\n" );
 					}
 
                     FD_CLR( m_aoListenSkts[iSelectedIdx], &oReadSocketFileDescriptors);
@@ -796,6 +788,8 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 			break;
 		}
     }
-#endif // 	
+#endif 
+
+    LogModule( eLogModuleConnect, LOG_INFO, "Listen Thread is exiting\n" );
 	m_IsReadyToAcceptConnections = false;
 }

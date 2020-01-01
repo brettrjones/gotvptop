@@ -27,6 +27,6 @@ public:
 	virtual ~VxComboBox() = default;
 
     //void                        paintEvent (QPaintEvent *ev);
-    void                        showEvent( QShowEvent *ev );
+    void                        showEvent( QShowEvent *ev ) override;
 };
 

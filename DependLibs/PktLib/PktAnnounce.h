@@ -34,7 +34,7 @@ public:
     void						    getP2PEngineVersion( std::string& strRetP2PEngineVersion );
 
 private:
-    uint8_t							m_u8P2PEngineVersion;
+    uint8_t							m_u8P2PEngineVersion{0};
 };
 
 class MyOSVersion
@@ -46,7 +46,7 @@ public:
 	void						    getOSVersion( std::string& strRetOSVersion );
 
 private:
-	uint8_t							m_u8OSVersion;
+    uint8_t							m_u8OSVersion{0};
 };
 
 //=== request FLAGS ===//
@@ -79,16 +79,16 @@ public:
 
 private:
 	//=== vars ===//
-	uint8_t						m_u8TimeToLive;			// 
-	uint8_t						m_u8RequestFlags;		// request flags								
-	uint32_t				    m_u32ActionRes1;		// Action Flags				.. not currently used				
-	uint32_t					m_u32ActionRes2;		// Action Data				.. not currently used							
-	uint32_t					m_u32ActionRes3;	
-	uint32_t					m_u32ActionRes4;	
-	uint32_t					m_u32ActionRes5;	
-	uint32_t					m_u32ActionRes6;	
-	uint32_t					m_u32ActionRes7;	
-	uint32_t					m_u32ActionRes8;		
+    uint8_t						m_u8TimeToLive{0};			//
+    uint8_t						m_u8RequestFlags{0};		// request flags
+    uint32_t				    m_u32ActionRes1{0};		// Action Flags				.. not currently used
+    uint32_t					m_u32ActionRes2{0};		// Action Data				.. not currently used
+    uint32_t					m_u32ActionRes3{0};
+    uint32_t					m_u32ActionRes4{0};
+    uint32_t					m_u32ActionRes5{0};
+    uint32_t					m_u32ActionRes6{0};
+    uint32_t					m_u32ActionRes7{0};
+    uint32_t					m_u32ActionRes8{0};
 };
 
 //! this is the part of pkt announce that we would not expect to change often

@@ -42,8 +42,8 @@ public:
 	void						setTitle( QString strTitle );
 	void						setStatusLabel( QString strMsg );
 
-	virtual void				toGuiSearchResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent );
-	virtual void				toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType );	
+    virtual void				toGuiSearchResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent ) override;
+    virtual void				toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType ) override;
 
 signals:
 	void						signalSearchResult( VxNetIdent * netIdent );
@@ -58,8 +58,8 @@ private slots:
 	//void						slotFriendClicked( VxNetIdent * netIdent );
 
 protected:
-	void						showEvent( QShowEvent * ev );
-	void						hideEvent( QHideEvent * ev );
+    void						showEvent( QShowEvent * ev ) override;
+    void						hideEvent( QHideEvent * ev ) override;
 
 	//=== vars ===//
 	Ui::PeopleSearchDlg			ui;

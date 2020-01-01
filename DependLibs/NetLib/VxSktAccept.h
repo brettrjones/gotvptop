@@ -25,7 +25,7 @@ public:
 	
 	VxSktAccept();
 	
-	virtual ~VxSktAccept();
+	virtual ~VxSktAccept() = default;
 
 	//! called when socket is accepted
     RCODE	doAccept( VxServerMgr * poMgr, struct sockaddr& oAcceptAddr );

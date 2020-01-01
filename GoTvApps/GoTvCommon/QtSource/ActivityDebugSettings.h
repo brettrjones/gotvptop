@@ -43,7 +43,7 @@ public:
 protected slots:
 
 	void						slotLog( int iPluginNum, QString strMsg );
-	void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void ) override;
 	void						onFullLogButtonClicked( void );
 	void						onErrorLogButtonClicked( void );
 	void						onStatusLogButtonClicked( void );

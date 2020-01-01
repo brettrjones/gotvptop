@@ -265,7 +265,7 @@ void VxSktBaseMgr::doReceiveCallback( VxSktBase * sktBase )
 void VxSktBaseMgr::handleSktCloseEvent( VxSktBase * sktBase )
 {
 	//LogMsg( LOG_INFO, "VxSktBaseMgr::handleSktCloseEvent: for skt %d 0x%x \n", sktBase->m_iSktId, sktBase );
-	uint64_t timeNowMs = GetGmtTimeMs();
+    int64_t timeNowMs = GetGmtTimeMs();
 	bool deletedSkt = true;
 	while( deletedSkt )
 	{

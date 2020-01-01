@@ -65,9 +65,9 @@ private slots:
     void						slotListShredIconClicked( QListWidgetItem * item );
 
 protected:
-    virtual void				showEvent( QShowEvent * ev );
-    virtual void				hideEvent( QHideEvent * ev );
-    virtual void				toGuiFileList( void * userData, VxMyFileInfo& fileInfo );
+    virtual void				showEvent( QShowEvent * ev ) override;
+    virtual void				hideEvent( QHideEvent * ev ) override;
+    virtual void				toGuiFileList( void * userData, VxMyFileInfo& fileInfo ) override;
 
     FileShareItemWidget *		fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary );
     FileItemInfo *				widgetToFileItemInfo( FileShareItemWidget * item );

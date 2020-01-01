@@ -99,22 +99,37 @@ void NetworkMgr::networkMgrShutdown( void )
 //============================================================================
 void NetworkMgr::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork )
 {
-    if( m_bNetworkAvailable )
+    if( !lclIp )
     {
-        if( IsLogEnabled( eLogModuleNetworkMgr ) )
-            LogMsg( LOG_DEBUG, "fromGuiNetworkAvailable %s but network already set to %s\n", lclIp, m_strLocalIpAddr.c_str() );
+        LogMsg( LOG_SEVERE, "fromGuiNetworkAvailable invalid param lclIp is null" );
+        return;
+    }
+
+    std::string strIp = lclIp;
+    if( strIp.empty() )
+    {
+        LogMsg( LOG_ERROR, "fromGuiNetworkAvailable param lclIp is empty" );
+        return;
+    }
+
+    if( m_bNetworkAvailable 
+        && ( m_strLocalIpAddr == strIp )
+        && ( m_bIsCellularNetwork == isCellularNetwork ) )
+    {
+        LogModule( eLogModuleNetworkMgr, LOG_DEBUG, "fromGuiNetworkAvailable but network already set to %s\n", m_strLocalIpAddr.c_str() );
         return;
     }
 
 	m_bIsCellularNetwork = isCellularNetwork;
 	m_strLocalIpAddr = lclIp;
 	m_LocalIp.setIp( lclIp );
-	
+    m_bNetworkAvailable = true;
+
 	m_PeerMgr.setLocalIp( m_LocalIp );
-#ifdef ENABLE_MULTICAST
-	m_MulticastListen.setLocalIp( m_LocalIp );
-	m_MulticastBroadcast.setLocalIp( m_LocalIp );
-#endif // ENABLE_MULTICAST
+//#ifdef ENABLE_MULTICAST
+//	m_MulticastListen.setLocalIp( m_LocalIp );
+//	m_MulticastBroadcast.setLocalIp( m_LocalIp );
+//#endif // ENABLE_MULTICAST
 
 	if( m_LocalIp.isIPv4() && m_LocalIp.isValid() )
 	{
@@ -125,11 +140,11 @@ void NetworkMgr::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNet
 		m_Engine.getMyPktAnnounce().getLanIPv4().setToInvalid();
 	}
 
-	m_PeerMgr.startListening( lclIp, m_Engine.getMyPktAnnounce().getOnlinePort() );
+    // no need for this .. NetworkEventAvail will start listening to network
+	// m_PeerMgr.startListening( lclIp, m_Engine.getMyPktAnnounce().getOnlinePort() );
 #ifdef ENABLE_MULTICAST
 	m_MulticastListen.beginListen();	
 #endif // ENABLE_MULTICAST
-	m_bNetworkAvailable =  true ;
 }
 
 //============================================================================
@@ -137,7 +152,8 @@ void NetworkMgr::fromGuiNetworkLost( void )
 {
 	m_bNetworkAvailable =  false ;
 
-	m_PeerMgr.stopListening();
+    // no need for this .. NetworkEventLost will stop listening
+	// m_PeerMgr.stopListening();
 #ifdef ENABLE_MULTICAST
 	m_MulticastListen.stopListen();
 #endif // ENABLE_MULTICAST

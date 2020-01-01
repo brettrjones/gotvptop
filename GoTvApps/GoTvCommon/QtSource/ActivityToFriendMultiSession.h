@@ -43,12 +43,12 @@ public:
 
 	virtual void				toGuiClientPlayVideoFrame(	void *			userData, 
 															VxGUID&			onlineId, 
-															uint8_t *			pu8Jpg, 
-															uint32_t				u32JpgDataLen,
-															int				motion0To100000 );
-	virtual void				toGuiMultiSessionAction( void * callbackData, EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 );
+                                                            uint8_t *		pu8Jpg,
+                                                            uint32_t		u32JpgDataLen,
+                                                            int				motion0To100000 ) override;
+    virtual void				toGuiMultiSessionAction( void * callbackData, EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
 
-	virtual void				onActivityFinish( void );
+    virtual void				onActivityFinish( void ) override;
 
 signals:
 	void						signalToGuiMultiSessionAction( VxGuidQt onlineId, EMSessionAction mSessionAction, int pos );
@@ -62,19 +62,19 @@ protected slots:
 	void						slotUserInputButtonClicked( void );
 
 protected:
-	virtual void				showEvent( QShowEvent * ev );
-	virtual void				hideEvent( QHideEvent * ev );
+    virtual void				showEvent( QShowEvent * ev ) override;
+    virtual void				hideEvent( QHideEvent * ev ) override;
 
 	// override of ToGuiActivityInterface
-	virtual void				doToGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer );
-	virtual void				doToGuiRxedOfferReply( void * callbackData, GuiOfferSession * offer );
+    virtual void				doToGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer ) override;
+    virtual void				doToGuiRxedOfferReply( void * callbackData, GuiOfferSession * offer ) override;
 
 	virtual bool 				checkForSendAccess( bool sendOfferIfPossible );
 	virtual void				showReasonAccessNotAllowed( void );
 
-	virtual void 				onSessionStateChange( ESessionState eSessionState );	
+    virtual void 				onSessionStateChange( ESessionState eSessionState ) override;
 	// called from session logic
-	virtual void				onInSession( bool isInSession );
+    virtual void				onInSession( bool isInSession ) override;
 
 	void						setupMultiSessionActivity(  VxNetIdent * hisIdent );
 	void						setStatusMsg( QString strStatus );
@@ -83,13 +83,13 @@ protected:
 														EPluginType ePluginType, 
 														VxGUID&		onlineId, 
 														int32_t			s32VarId, 
-														int32_t			s32VarValue );
+                                                        int32_t			s32VarValue ) override;
 
 	void						toGuiSetGameActionVar(	void *		userData, 
 														EPluginType ePluginType, 
 														VxGUID&		onlineId, 
 														int32_t			s32VarId, 
-														int32_t			s32VarValue );
+                                                        int32_t			s32VarValue ) override;
 	void						setup( void );
 	//virtual bool				handleOfferResponse( EOfferResponse offerResponse, QWidget * parent );
     //void						onInSessionResponse( bool bResponseOk );

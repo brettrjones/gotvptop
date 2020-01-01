@@ -17,8 +17,8 @@
 #include "VxTime.h" // time stamp and other time functions
 
 
-#define DEFAULT_ONLINE_LISTEN_PORT		45654
-#define DEFAULT_GUEST_UDP_PORT			45653
+#define DEFAULT_ONLINE_LISTEN_PORT		45124
+#define DEFAULT_GUEST_UDP_PORT			45126
 
 class VxGUID;
 
@@ -63,7 +63,7 @@ void			            VxSetAppIsShuttingDown( bool bIsShuttingDown );
 bool			            VxIsAppShuttingDown( void );
 
 const char *	            VxGetCompanyDomain( void );
-const char *                VxGetOrginizationNmae( void );
+const char *                VxGetOrginizationName( void );
 const char *	            VxGetCompanyWebsite( void );
 
 void	                    VxSetNetworkHostName( const char * netHostName );
@@ -72,7 +72,6 @@ void	                    VxSetNetworkHostPort( uint16_t netHostPort );
 uint16_t	                VxGetNetworkHostPort( void );
 void	                    VxSetNetworkHostUrl( const char * netHostUrl );
 const char *	            VxGetNetworkHostUrl( void );
-
 
 const char *	            VxGetApplicationTitle( void );
 void			            VxSetApplicationNameNoSpaces( const char * pAppName );

@@ -58,7 +58,7 @@ signals:
 protected slots:
 	void						slotToGuiFileList( VxMyFileInfo& fileInfo );
 
-	void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void ) override;
 	void						slotUpDirectoryClicked( void );
 	void						slotBrowseButtonClicked( void );
 

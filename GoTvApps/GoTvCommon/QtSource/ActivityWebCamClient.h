@@ -57,9 +57,9 @@ protected slots:
 	void						slotToGuiContactOffline( VxNetIdent * hisIdent );
 
 protected:
-	virtual void				showEvent( QShowEvent * ev );
-	virtual void				hideEvent( QHideEvent * ev );
-	virtual void				closeEvent( QCloseEvent * ev );
+    virtual void				showEvent( QShowEvent * ev ) override;
+    virtual void				hideEvent( QHideEvent * ev ) override;
+    virtual void				closeEvent( QCloseEvent * ev ) override;
 
 	void						setupActivityWebCamClient();
 	void						resizeBitmapToFitScreen( QLabel * VideoScreen, QImage& oPicBitmap );

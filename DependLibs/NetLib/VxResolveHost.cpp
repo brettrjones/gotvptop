@@ -134,8 +134,8 @@ bool VxResolveHostToIp(	const char *	pHostOnly,			//web host name to resolve
 
 		rmtIp.setIp( *((struct sockaddr_storage *)aip->ai_addr) );
 		std::string strRmtIp = rmtIp.toStdString();
-		double elapsed = resolveTimer.elapsedSec();
         #ifdef DEBUG_NETLIB
+        double elapsed = resolveTimer.elapsedSec();
             LogMsg( LOG_INFO, "Resolve %s to %s:%d in %3.3f sec on try %d\n",
                 pHostOnly,
                 strRmtIp.c_str(), u16Port,
@@ -174,9 +174,9 @@ bool VxResolveHostToIp(	const char *	pHostOnly,			//web host name to resolve
 		{
 			bFoundAddr = true;
 			oRetIp.setIp( strRmtIp.c_str() );
-			double connectSuccessTime = resolveTimer.elapsedSec();
             #ifdef DEBUG_NETLIB
-			    LogMsg( LOG_INFO, "Resolve Connect Success to %s:%d in %3.3f sec on try %d\n", 
+            double connectSuccessTime = resolveTimer.elapsedSec();
+                LogMsg( LOG_INFO, "Resolve Connect Success to %s:%d in %3.3f sec on try %d\n",
                         oRetIp.toStdString().c_str(), u16Port,
                         connectSuccessTime - elapsed,
                         tryCnt );
@@ -186,9 +186,9 @@ bool VxResolveHostToIp(	const char *	pHostOnly,			//web host name to resolve
 		}
 		else
 		{
-			double connectFailTime = resolveTimer.elapsedSec();
         #ifdef DEBUG_NETLIB
-			    LogMsg( LOG_INFO, "Resolve Connect Failed to %s:%d in %3.3f sec on try %d\n", 
+            double connectFailTime = resolveTimer.elapsedSec();
+                LogMsg( LOG_INFO, "Resolve Connect Failed to %s:%d in %3.3f sec on try %d\n",
 														pHostOnly, 
 														u16Port,
 														connectFailTime - elapsed,

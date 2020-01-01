@@ -34,8 +34,8 @@ private slots:
 	void						slotImageClicked( ThumbnailViewWidget * thumb );
 
 protected:
-    void                        resizeEvent( QResizeEvent * ev );
-    void                        showEvent( QShowEvent * ev );
+    void                        resizeEvent( QResizeEvent * ev ) override;
+    void                        showEvent( QShowEvent * ev ) override;
 
     void                        loadAssets( void );
 

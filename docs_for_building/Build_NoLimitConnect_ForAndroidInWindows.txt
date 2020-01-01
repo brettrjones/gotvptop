@@ -3,7 +3,7 @@
 NOTES: ( some hard earned lessons )
 1.) Cannot build multiple .pro projects in same build unless all the same DESTDIR etc
 2.) BuildAll.pro may hang because of it's size unless you have a awsome computer so is better to build individualy
-	 Build1_xxx Build2_xxx etc
+	Build1_xxx Build2_xxx etc
 3.) For Qt the projects must be built in a certain order which is why they are named Build1_xxx Build2_xxx etc
 
 === Build Prerequisites ====

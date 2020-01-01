@@ -54,7 +54,7 @@ private slots:
 	void						slotToGuiFileXferState( VxGuidQt lclSessionId, EXferState eXferState, int param1, int param2 );
 	void						slotToGuiFileUploadComplete( VxGuidQt lclSessionId, int xferError );
 
-	void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void ) override;
 	void						slotFileXferItemClicked( QListWidgetItem * item );
 
 	void						slotFileIconButtonClicked( QListWidgetItem * item );
@@ -65,12 +65,12 @@ private slots:
 	void						slotShredButtonClicked( QListWidgetItem * item );
 
 protected:
-	virtual void				showEvent( QShowEvent * ev );
-	virtual void				hideEvent( QHideEvent * ev );
+    virtual void				showEvent( QShowEvent * ev ) override;
+    virtual void				hideEvent( QHideEvent * ev ) override;
 
-	virtual void				toGuiStartUpload( void * userData, GuiFileXferSession * xferSession );
-	virtual void				toGuiFileXferState( void * userData, VxGUID& lclSession, EXferState eXferState, int param1, int param2 );
-	virtual void				toGuiFileUploadComplete( void * userData, VxGUID& lclSession, EXferError xferError );
+    virtual void				toGuiStartUpload( void * userData, GuiFileXferSession * xferSession ) override;
+    virtual void				toGuiFileXferState( void * userData, VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
+    virtual void				toGuiFileUploadComplete( void * userData, VxGUID& lclSession, EXferError xferError ) override;
 
 	FileXferWidget *			sessionToWidget( GuiFileXferSession * poSession );
 	void						updateListEntryWidget( FileXferWidget * item, GuiFileXferSession * poSession );

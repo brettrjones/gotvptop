@@ -174,6 +174,8 @@ bool MultiSessionState::canSend( void )
 		case eMSessionTypeTruthOrDare:
 			accessState = m_HisIdent->getMyAccessPermissionFromHim( ePluginTypeTruthOrDare );
 			break;
+        default:
+            break;
 		}
 
 		return ( ePluginAccessOk == accessState );
@@ -356,6 +358,8 @@ void MultiSessionState::setSessionState( EMSessionState sessionState )
 		case eMSessionTypeTruthOrDare:
 			setStatusText( tr("Truth Or Dare Offer Available" ) );
 			break;
+        default:
+            break;
 		}
 
 		break;

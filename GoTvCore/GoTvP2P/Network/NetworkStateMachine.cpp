@@ -332,10 +332,13 @@ bool NetworkStateMachine::checkAndHandleNetworkEvents( void )
 
 		if( eNetworkEventTypeLost == eventBase->getNetworkEventType() )
 		{
+            LogMsg( LOG_DEBUG, "checkAndHandleNetworkEvents network event LOST" );
 			changeNetworkState( eNetworkStateTypeLost );
 		}
 		else if( eNetworkEventTypeAvail == eventBase->getNetworkEventType() )
 		{
+            LogMsg( LOG_DEBUG, "checkAndHandleNetworkEvents network event avail" );
+
 			NetworkEventAvail * eventAvail = (NetworkEventAvail *)eventBase;
 			eventAvail->runNetworkEvent();
 			m_NetworkMgr.fromGuiNetworkAvailable( eventAvail->getLclIp(), eventAvail->getIsCellNetwork() );
@@ -381,6 +384,7 @@ void NetworkStateMachine::restartNetwork( void )
 {
 	bool isCell		= m_bIsCellNetwork;
 	std::string ip	= m_LocalNetworkIp;
+    LogModule( eLogModuleNetworkState, LOG_INFO, "##NetworkStateMachine::restartNetwork" );
 
     static bool hasCnaged = false;
     static bool lastIsCell = false;
@@ -410,7 +414,7 @@ void NetworkStateMachine::fromGuiNetworkAvailable( const char * lclIp, bool isCe
         m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
     }
 
-    LogModule( eLogModuleNetworkState, LOG_INFO, "NetworkStateMachine::fromGuiNetworkAvailable %s", lclIp );
+    LogModule( eLogModuleNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiNetworkAvailable creating network available event %s", lclIp );
 
 	m_NetworkStateMutex.lock();
 	m_NetworkEventList.push_back( new NetworkEventAvail( *this, lclIp, isCellularNetwork ) );
@@ -420,6 +424,7 @@ void NetworkStateMachine::fromGuiNetworkAvailable( const char * lclIp, bool isCe
 //============================================================================
 void NetworkStateMachine::fromGuiNetworkLost( void )
 {
+    LogModule( eLogModuleNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiNetworkLost" );
 	m_Engine.getPeerMgr().stopListening();
 	m_LocalNetworkIp = "";
 	m_NetworkStateMutex.lock();
@@ -434,7 +439,7 @@ void NetworkStateMachine::fromGuiNetworkSettingsChanged( void )
 	{
 		bool isCell = isCellularNetwork();
 		std::string ip = m_LocalNetworkIp;
-
+        LogModule( eLogModuleNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiNetworkSettingsChanged" );
 		fromGuiNetworkLost();
 		m_PktAnn.getLanIPv4().setIp( ip.c_str() );
 		fromGuiNetworkAvailable( ip.c_str(), isCell );

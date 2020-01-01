@@ -51,7 +51,7 @@ signals:
 	void						signalToGuiFileList( VxMyFileInfo& fileInfo );
 
 protected slots:
-	void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void ) override;
 	void						slotAddFilesButtonClicked( void );
 	void						slotToGuiFileList( VxMyFileInfo& fileInfo );
 
@@ -67,9 +67,9 @@ protected slots:
 	void						slotApplyFileFilter( unsigned char fileFilter );
 	
 protected:
-	virtual void				showEvent( QShowEvent * ev );
-	virtual void				hideEvent( QHideEvent * ev );
-	virtual void				toGuiFileList( void * userData, VxMyFileInfo& fileInfo );
+    virtual void				showEvent( QShowEvent * ev ) override;
+    virtual void				hideEvent( QHideEvent * ev ) override;
+    virtual void				toGuiFileList( void * userData, VxMyFileInfo& fileInfo ) override;
 
 	void						setActionEnable( bool enable );
 	void						addFile(	VxMyFileInfo&	fileInfo,

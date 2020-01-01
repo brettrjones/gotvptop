@@ -1,4 +1,4 @@
-#message("Building GoTvPtoP")
+#message("Building NoLimitConnect")
 
 INCLUDEPATH += $$PWD/GoTvApps/GoTvCommon/QtSource
 INCLUDEPATH += $$PWD/GoTvApps

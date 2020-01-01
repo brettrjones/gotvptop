@@ -29,8 +29,8 @@ public:
     EScanType					getScanType() { return m_eScanType; }
     void						searchResult( VxNetIdent * netIdent );
 
-    virtual void				toGuiSearchResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent );
-    virtual void				toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType );
+    virtual void				toGuiSearchResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent ) override;
+    virtual void				toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType ) override;
 
 signals:
     void						signalSearchResult( VxNetIdent * netIdent );
@@ -40,13 +40,13 @@ private slots:
     void						slotSearchResult( VxNetIdent * netIdent );
     void						slotSearchComplete();
 
-    void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void ) override;
     void						slotSimulateShakeClicked( void );
     void						slotRandomConnectStatus( ERandomConnectStatus eHostStatus, QString strMsg );
 
 protected:
-    virtual void				showEvent( QShowEvent * ev );
-    virtual void				hideEvent( QHideEvent * ev );
+    virtual void				showEvent( QShowEvent * ev ) override;
+    virtual void				hideEvent( QHideEvent * ev ) override;
 
     //=== vars ===//
     Ui::AppletRandomConnectUi	ui;

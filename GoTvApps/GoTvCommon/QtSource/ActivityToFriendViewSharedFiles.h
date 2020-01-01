@@ -58,7 +58,7 @@ private slots:
 	void						slotToGuiStartDownload( GuiFileXferSession * xferSession );
 	void						slotToGuiFileDownloadComplete( VxGuidQt lclSessionId, QString newFileName, EXferError xferError );
 
-	void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void ) override;
 	void						statusMsg( QString strMsg );
 	void						slotApplyFileFilter( unsigned char fileTypeMask );
 	void						slotDownloadFileSelected( int iMenuId, QWidget * popupMenu );
@@ -72,13 +72,13 @@ private slots:
 
 
 protected:
-	virtual void				showEvent( QShowEvent * ev );
-	virtual void				hideEvent( QHideEvent * ev );
+    virtual void				showEvent( QShowEvent * ev ) override;
+    virtual void				hideEvent( QHideEvent * ev ) override;
 
-	virtual void				toGuiFileListReply(	void * userData, FileListReplySession * replySession );
-	virtual void				toGuiFileXferState( void * userData, VxGUID& lclSession, EXferState eXferState, int param1, int param2 );
-	virtual void				toGuiStartDownload( void * userData, GuiFileXferSession * xferSession );
-	virtual void				toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError );
+    virtual void				toGuiFileListReply(	void * userData, FileListReplySession * replySession ) override;
+    virtual void				toGuiFileXferState( void * userData, VxGUID& lclSession, EXferState eXferState, int param1, int param2 ) override;
+    virtual void				toGuiStartDownload( void * userData, GuiFileXferSession * xferSession ) override;
+    virtual void				toGuiFileDownloadComplete( void * userData, VxGUID& lclSession, QString newFileName, EXferError xferError ) override;
 
 	FileXferWidget *			fileToWidget( VxNetIdent *      netIdent,
                                               VxMyFileInfo&     fileInfo );

@@ -46,8 +46,8 @@ public:
 	bool						sndMgrStartup( void );
 	bool						sndMgrShutdown( void );
 
-	virtual void 				doGuiWantMicrophoneRecording( bool wantMicInput ); 
-	virtual void 				doGuiWantSpeakerOutput( bool wantSpeakerOutput ); 
+    virtual void 				doGuiWantMicrophoneRecording( bool wantMicInput ) override;
+    virtual void 				doGuiWantSpeakerOutput( bool wantSpeakerOutput ) override;
 
 	VxSndInstance *			    playSnd( ESndDef sndDef, bool loopContinuous = false );
 	void						stopSnd( ESndDef sndDef );
