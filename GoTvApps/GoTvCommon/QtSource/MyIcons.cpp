@@ -573,7 +573,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconVideoStreamViewer:
 		return ":/AppRes/Resources/video-stream-viewer.svg";
 	case eMyIconCamStreamViewer:
-		return ":/AppRes/Resources/webcam-client.svg";
+        return ":/AppRes/Resources/client-webcam.svg";
 	case eMyIconMusicStreamPlayer:
 		return ":/AppRes/Resources/music-stream-player.svg";
 	case eMyIconRemoteControl:
@@ -664,7 +664,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
     case eMyIconSettingsTruthOrDare:
         return ":/AppRes/Resources/truth-or-dare-settings.svg";
     case eMyIconSettingsVideoPhone:
-        return ":/AppRes/Resources/video-phone-settings.svg";
+        return ":/AppRes/Resources/video-chat-settings.svg";
     case eMyIconSettingsVoicePhone:
         return ":/AppRes/Resources/voice-phone-settings.svg";
     case eMyIconFileXfer:

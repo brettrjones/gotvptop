@@ -96,8 +96,20 @@ void ActivityNetworkState::slotNetworkStateChanged( ENetworkStateType eNetworkSt
 		break;
 
 	case eNetworkStateTypeFailedResolveHostNetwork:
-		showHostError();
+        showHostNetworkError();
 		break;
+
+    case eNetworkStateTypeFailedResolveHostGroup:
+        showHostGroupError();
+        break;
+
+    case eNetworkStateTypeFailedResolveHostGroupList:
+        showHostGroupListError();
+        break;
+
+    case eMaxNetworkStateType:
+    default:
+        break;
 	}
 
 	if( networkConnected )
@@ -155,9 +167,25 @@ void ActivityNetworkState::showRelayConnectedHelp( void )
 }
 
 //============================================================================
-void ActivityNetworkState::showHostError( void )
+void ActivityNetworkState::showHostNetworkError( void )
 {
-	setHelpLine( 0, QObject::tr("NoLimitConnect connected but could not contact the Network Host. ") );
+    setHelpLine( 0, QObject::tr("NoLimitConnect connected but could not contact the Network Host. ") );
+    setHelpLine( 1, QObject::tr("Check your network setting and Network Host url.") );
+    setHelpLine( 2, QObject::tr("Visit NoLimitConnect  Website for details.") );
+}
+
+//============================================================================
+void ActivityNetworkState::showHostGroupError( void )
+{
+    setHelpLine( 0, QObject::tr("NoLimitConnect connected but could not contact the Group Host. ") );
+    setHelpLine( 1, QObject::tr("Check your network setting and Group Host url.") );
+    setHelpLine( 2, QObject::tr("Visit NoLimitConnect  Website for details.") );
+}
+
+//============================================================================
+void ActivityNetworkState::showHostGroupListError( void )
+{
+    setHelpLine( 0, QObject::tr("NoLimitConnect connected but could not contact the Group List Host. ") );
 	setHelpLine( 1, QObject::tr("Check your network setting and Network Host url.") );
 	setHelpLine( 2, QObject::tr("Visit NoLimitConnect  Website for details.") );
 }

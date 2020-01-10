@@ -26,9 +26,6 @@ public:
     VxAppDisplay( AppCommon& appCommon, QWidget * parent = 0 );
     virtual ~VxAppDisplay() {};
 
-    float				        getDisplayScale( void );
-    float				        getDisplayWidthScale( void )                    { return m_DisplayWidthScale; }
-    float				        getDisplayHeightScale( void )                   { return m_DisplayHeightScale; }
     bool						isVerticalOrientation( void )                   { return ( m_Orientation == Qt::Orientation::Vertical ); }
 
     Qt::Orientation             getNativeOrientation( void );

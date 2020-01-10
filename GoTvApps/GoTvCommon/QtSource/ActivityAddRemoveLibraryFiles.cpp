@@ -160,7 +160,7 @@ void ActivityAddRemoveLibraryFiles::slotUpDirectoryClicked( void )
 
 		m_strCurBrowseDirectory = pBuf;
 		VxFileUtil::assureTrailingDirectorySlash( m_strCurBrowseDirectory );
-		delete pBuf;
+        delete[] pBuf;
 		setActionEnable( false );
 		slotRequestFileList();
 	}

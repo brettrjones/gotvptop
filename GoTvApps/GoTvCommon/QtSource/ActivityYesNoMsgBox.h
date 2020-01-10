@@ -40,7 +40,7 @@ public:
 	bool						wasNeverShowAgainChecked( void );
 
 private slots:
-	void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void ) override;
 
 protected:
 

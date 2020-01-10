@@ -20,11 +20,6 @@
 
 #include <QClipboard>
 
-namespace
-{
-	const int MAX_LOG_EDIT_BLOCK_CNT = 1000;
-}
-
 //============================================================================
 ActivityInformation::ActivityInformation( AppCommon& app, QWidget * parent, EPluginType pluginType )
 : ActivityBase( OBJNAME_ACTIVITY_INFORMATION, app, parent, eAppletActivityDialog )

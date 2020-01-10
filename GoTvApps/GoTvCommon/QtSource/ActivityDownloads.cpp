@@ -19,6 +19,7 @@
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "GuiHelpers.h"	
+#include "GuiParams.h"
 
 #include "FileXferWidget.h"
 #include "GuiFileXferSession.h"
@@ -96,8 +97,8 @@ void ActivityDownloads::slotHomeButtonClicked( void )
 FileXferWidget * ActivityDownloads::sessionToWidget( GuiFileXferSession * poSession )
 {
 	FileXferWidget * item = new FileXferWidget(ui.m_FileItemList);
-    item->setSizeHint( QSize( ( int )( m_MyApp.getAppDisplay().getDisplayScale() * 200 ),
-        ( int )( 62 * m_MyApp.getAppDisplay().getDisplayScale() ) ) );
+    item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
+        ( int )( 62 * GuiParams::getGuiScale() ) ) );
 
     item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant((quint64)poSession) );
 

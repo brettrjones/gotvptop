@@ -1436,9 +1436,9 @@ EXferError AssetXferMgr::beginAssetReceive( AssetRxSession * xferSession, PktAss
 
 	std::string strRmtPath;
 	std::string strRmtAssetNameOnly;
-	RCODE rc = VxFileUtil::seperatePathAndFile(		xferInfo.getRmtFileName(),			
-													strRmtPath,			
-													strRmtAssetNameOnly );	
+    VxFileUtil::seperatePathAndFile(		xferInfo.getRmtFileName(),
+                                            strRmtPath,
+                                            strRmtAssetNameOnly );
 
 
 	if( eXferErrorNone == xferErr )

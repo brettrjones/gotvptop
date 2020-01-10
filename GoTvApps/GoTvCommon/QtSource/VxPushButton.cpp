@@ -17,6 +17,7 @@
 #include "AppCommon.h"
 #include "VxAppTheme.h"
 #include "MyIcons.h"
+#include "GuiParams.h"
 
 #include <CoreLib/VxDebug.h>
 
@@ -132,18 +133,18 @@ void VxPushButton::initQButtonPro( void )
 //============================================================================
 int VxPushButton::heightForWidth( int width ) const
 {
-	if( width >= (int)( MIN_PUSHBUTTON_SIZE * m_MyApp.getAppDisplay().getDisplayScale() ) )
+    if( width >= (int)( MIN_PUSHBUTTON_SIZE * GuiParams::getGuiScale() ) )
 	{
 		return width;
 	}
 
-	return ( int )( MIN_PUSHBUTTON_SIZE  * m_MyApp.getAppDisplay().getDisplayScale() );
+    return ( int )( MIN_PUSHBUTTON_SIZE  * GuiParams::getGuiScale() );
 }
 
 //============================================================================
 QSize VxPushButton::sizeHint( void ) const
 {
-    int buttonSize = (int)( MIN_PUSHBUTTON_SIZE * m_MyApp.getAppDisplay().getDisplayScale() );
+    int buttonSize = (int)( MIN_PUSHBUTTON_SIZE * GuiParams::getGuiScale() );
 	return QSize( buttonSize, buttonSize );
 }
 
@@ -152,8 +153,8 @@ void VxPushButton::setFixedSize( const QSize & fixedSize )
 {
     if( fixedSize.width() == fixedSize.height() )
     {
-        QPushButton::setFixedSize( ( int )( fixedSize.width() * m_MyApp.getAppDisplay().getDisplayScale() ),
-            ( int )( fixedSize.height() * m_MyApp.getAppDisplay().getDisplayScale() ) );
+        QPushButton::setFixedSize( ( int )( fixedSize.width() * GuiParams::getGuiScale() ),
+            ( int )( fixedSize.height() * GuiParams::getGuiScale() ) );
     }
     else
     {
@@ -167,8 +168,8 @@ void VxPushButton::setFixedSize( int width, int height )
 {
     if( width == height )
     {
-        QPushButton::setFixedSize(  (int)( width * m_MyApp.getAppDisplay().getDisplayScale() ), 
-                                    (int)( height * m_MyApp.getAppDisplay().getDisplayScale() ) );
+        QPushButton::setFixedSize(  (int)( width * GuiParams::getGuiScale() ),
+                                    (int)( height * GuiParams::getGuiScale() ) );
     }
     else
     {
@@ -180,7 +181,7 @@ void VxPushButton::setFixedSize( int width, int height )
 //============================================================================
 void VxPushButton::setFixedWidth( int width )
 {
-    QPushButton::setFixedWidth( ( int )( width * m_MyApp.getAppDisplay().getDisplayWidthScale() ) );
+    QPushButton::setFixedWidth( ( int )( width * GuiParams::getGuiScale() ) );
 }
 
 //============================================================================
@@ -198,7 +199,7 @@ void VxPushButton::setFixedSizeAbsolute( int fixedWidth, int fixedHeight )
 //============================================================================
 void VxPushButton::setFixedHeight( int height )
 {
-    QPushButton::setFixedWidth( ( int )( height * m_MyApp.getAppDisplay().getDisplayHeightScale() ) );
+    QPushButton::setFixedWidth( ( int )( height * GuiParams::getGuiScale() ) );
 }
 
 //============================================================================
@@ -206,13 +207,13 @@ void VxPushButton::setMinimumSize( const QSize & minSize )
 {
     if( minSize.height() == minSize.width() )
     {
-        QPushButton::setMinimumSize( ( int )( minSize.width() * m_MyApp.getAppDisplay().getDisplayScale() ),
-                        ( int )( minSize.height() * m_MyApp.getAppDisplay().getDisplayScale() ) );
+        QPushButton::setMinimumSize( ( int )( minSize.width() * GuiParams::getGuiScale() ),
+                        ( int )( minSize.height() * GuiParams::getGuiScale() ) );
     }
     else
     {
-       QPushButton:: setMinimumSize( ( int )( minSize.width() * m_MyApp.getAppDisplay().getDisplayWidthScale() ),
-                        ( int )( minSize.height() * m_MyApp.getAppDisplay().getDisplayHeightScale() ) );
+       QPushButton:: setMinimumSize( ( int )( minSize.width() * GuiParams::getGuiScale() ),
+                        ( int )( minSize.height() * GuiParams::getGuiScale() ) );
     }
 }
 
@@ -221,13 +222,13 @@ void VxPushButton::setMinimumSize( int minw, int minh )
 {
     if( minw == minh )
     {
-        QPushButton::setMaximumSize( ( int )( minw * m_MyApp.getAppDisplay().getDisplayScale() ),
-            ( int )( minh * m_MyApp.getAppDisplay().getDisplayScale() ) );
+        QPushButton::setMaximumSize( ( int )( minw * GuiParams::getGuiScale() ),
+            ( int )( minh * GuiParams::getGuiScale() ) );
     }
     else
     {
-        QPushButton::setMaximumSize( ( int )( minw * m_MyApp.getAppDisplay().getDisplayWidthScale() ),
-            ( int )( minh * m_MyApp.getAppDisplay().getDisplayHeightScale() ) );
+        QPushButton::setMaximumSize( ( int )( minw * GuiParams::getGuiScale() ),
+            ( int )( minh * GuiParams::getGuiScale() ) );
     }
 }
 
@@ -236,29 +237,21 @@ void VxPushButton::setMaximumSize( const QSize & maxSize )
 {
     if( maxSize.width() == maxSize.height() )
     {
-        QPushButton::setMaximumSize( ( int )( maxSize.width() * m_MyApp.getAppDisplay().getDisplayScale() ),
-            ( int )( maxSize.height() * m_MyApp.getAppDisplay().getDisplayScale() ) );
+        QPushButton::setMaximumSize( ( int )( maxSize.width() * GuiParams::getGuiScale() ),
+            ( int )( maxSize.height() * GuiParams::getGuiScale() ) );
     }
     else
     {
-        QPushButton::setMaximumSize( ( int )( maxSize.width()  * m_MyApp.getAppDisplay().getDisplayWidthScale() ),
-            ( int )( maxSize.height() * m_MyApp.getAppDisplay().getDisplayHeightScale() ) );
+        QPushButton::setMaximumSize( ( int )( maxSize.width()  * GuiParams::getGuiScale() ),
+            ( int )( maxSize.height() * GuiParams::getGuiScale() ) );
     }
 }
 
 //============================================================================
 void VxPushButton::setMaximumSize( int maxw, int maxh )
 {
-    if( maxw == maxh )
-    {
-        QPushButton::setMaximumSize( ( int )( maxw * m_MyApp.getAppDisplay().getDisplayScale() ),
-                                     ( int )( maxh * m_MyApp.getAppDisplay().getDisplayScale() ) );
-    }
-    else
-    {
-        QPushButton::setMaximumSize( ( int )( maxw * m_MyApp.getAppDisplay().getDisplayWidthScale() ),
-                                     ( int )( maxh * m_MyApp.getAppDisplay().getDisplayHeightScale() ) );
-    }
+    QPushButton::setMaximumSize( ( int )( maxw * GuiParams::getGuiScale() ),
+                                    ( int )( maxh * GuiParams::getGuiScale() ) );
 }
 
 //============================================================================

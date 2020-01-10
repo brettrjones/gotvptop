@@ -36,7 +36,7 @@ public:
 	virtual	void				onConnectionLost( VxSktBase * sktBase );
 	virtual void				cancelSessionByOnlineId( VxGUID& onlineId );
 
-	virtual bool				fromGuiIsPluginInSession( bool pluginIsLocked, VxNetIdent * netIdent, VxGUID lclSessionId = VxGUID::nullVxGUID() );
+    virtual bool				fromGuiIsPluginInSession( bool pluginIsLocked, VxNetIdent * netIdent, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
 	virtual bool				fromGuiMakePluginOffer(		bool			pluginIsLocked,
 															VxNetIdent *	netIdent,		// identity of friend

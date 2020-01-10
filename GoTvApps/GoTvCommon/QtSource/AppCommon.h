@@ -659,7 +659,6 @@ protected slots:
 
     void						slotCheckSetupTimer();
 
-
 private slots:
 	void						slotMainWindowResized( void );
     void						slotMainWindowMoved( void );
@@ -669,8 +668,6 @@ private slots:
 	void						slotFinishedLoadingEngine( void );
 
 private:
-	void						restoreWindowPosition( void );
-
 	void						showUserNameInTitle();
 	void						sendAppSettingsToEngine( void );
 	void						startNetworkMonitor( void );

@@ -72,6 +72,7 @@
 #define OBJNAME_APPLET_LAUNCH_WIDGET					"AppletLaunchWidget"
 
 #define OBJNAME_APPLET_ABOUT_APP						"AppletAboutApp"
+#define OBJNAME_APPLET_APPLICATION_INFO				    "AppletApplicationInfo"
 #define OBJNAME_APPLET_CREATE_ACCOUNT					"AppletCreateAccount"
 
 #define OBJNAME_APPLET_CLIENT_AVATAR_IMAGE				"AppletClientAvatarImage"

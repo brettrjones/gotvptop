@@ -88,9 +88,9 @@ public:
 	virtual void				fromGuiUserLoggedOn( void )								{};
 
 	virtual void				fromGuiStartPluginSession( PluginSessionBase * poOffer )	{};
-	virtual void				fromGuiStartPluginSession( VxNetIdent * netIdent = NULL,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() )	{};
-	virtual void				fromGuiStopPluginSession( VxNetIdent * netIdent = NULL,		int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() )	{};
-	virtual bool				fromGuiIsPluginInSession( VxNetIdent * netIdent = NULL,		int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() )	{ return true; }
+    virtual void				fromGuiStartPluginSession( VxNetIdent * netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() )	{};
+    virtual void				fromGuiStopPluginSession( VxNetIdent * netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() )	{};
+    virtual bool				fromGuiIsPluginInSession( VxNetIdent * netIdent = nullptr,	int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() )	{ return true; }
 
 	virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings );
 	virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings );

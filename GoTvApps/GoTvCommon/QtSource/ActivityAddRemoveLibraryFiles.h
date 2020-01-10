@@ -45,7 +45,7 @@ public:
 	void						updateListEntryWidget( FileShareItemWidget * item );
 
 protected slots:
-	void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void ) override;
 	void						slotUpDirectoryClicked( void );
 	void						slotFileList( const char * fileName, uint8_t fileType, int64_t dataLen, int done, bool isShared );
 	void						slotBrowseButtonClicked( void );

@@ -501,14 +501,6 @@ void AppCommon::launchLibraryActivity( uint8_t fileTypeFilter )
 }
 
 //============================================================================
-void AppCommon::restoreWindowPosition( void )
-{
-	QSettings settings("P2PThing", "NoLimitConnect");
-	restoreGeometry(settings.value("mainWindowGeometry").toByteArray());
-	//restoreState(settings.value("mainWindowState").toByteArray());
-}
-
-//============================================================================
 bool AppCommon::getIsPluginVisible( EPluginType ePluginType )
 {
 	QVector<EPluginType>::iterator iter;

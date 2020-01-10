@@ -27,7 +27,7 @@ PluginServiceStoryboard::PluginServiceStoryboard( P2PEngine& engine, PluginMgr& 
 
 //============================================================================
 //! return true if is plugin session
-bool PluginServiceStoryboard::fromGuiIsPluginInSession( VxNetIdent * netIdent, void * pvUserData )
+bool PluginServiceStoryboard::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	return true;
 }

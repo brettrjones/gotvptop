@@ -24,7 +24,7 @@ class VxTilePositioner
 {
 public:
 	VxTilePositioner( AppCommon& myApp );
-	virtual ~VxTilePositioner();
+    virtual ~VxTilePositioner() = default;
 
 	static void					repositionTiles( QVector<VxWidgetBase *>& widgetList, QWidget * parentWindow, int padding = 5 );
 

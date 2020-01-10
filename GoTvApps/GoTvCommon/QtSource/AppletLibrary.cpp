@@ -31,6 +31,7 @@
 #include "FileItemInfo.h"
 #include "FileActionMenu.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <PktLib/VxSearchDefs.h>
@@ -150,8 +151,8 @@ void AppletLibrary::slotRequestFileList( void )
 FileShareItemWidget * AppletLibrary::fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary )
 {
     FileShareItemWidget * item = new FileShareItemWidget( ui.m_FileItemList );
-    item->setSizeHint( QSize( ( int )( m_MyApp.getAppDisplay().getDisplayScale() * 200 ),
-        ( int )( 62 * m_MyApp.getAppDisplay().getDisplayScale() ) ) );
+    item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
+        ( int )( 62 * GuiParams::getGuiScale() ) ) );
 
     FileItemInfo * poItemInfo = new FileItemInfo( fileInfo, 0, isShared, isInLibrary );
     item->QListWidgetItem::setData( Qt::UserRole + 1, QVariant( ( quint64 )poItemInfo ) );

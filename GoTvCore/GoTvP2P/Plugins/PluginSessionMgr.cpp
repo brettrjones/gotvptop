@@ -300,7 +300,7 @@ void PluginSessionMgr::doEndAndEraseSession( PluginSessionBase * sessionBase, EO
 }
 
 //============================================================================
-bool PluginSessionMgr::fromGuiIsPluginInSession( bool pluginIsLocked, VxNetIdent * netIdent, VxGUID lclSessionId )
+bool PluginSessionMgr::fromGuiIsPluginInSession( bool pluginIsLocked, VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	bool isInSesion = false;
 	VxMutex& pluginMutex = m_Plugin.getPluginMutex();

@@ -101,7 +101,7 @@ void OffersMgr::slotToGuiRxedOfferReply( GuiOfferSession * offerSession )
 			break;
 
 		default:
-			LogMsg( LOG_INFO, "toGuiRxedOfferReply Unknown Response " + offerSession->getOfferResponse() );
+            LogMsg( LOG_INFO, "toGuiRxedOfferReply Unknown Response %d", offerSession->getOfferResponse() );
 			newOfferState = eOfferStateUnknown;
 			break;
 		}
@@ -223,7 +223,7 @@ void OffersMgr::changeOfferState( OfferSessionState * sessionState, EOfferState 
 		break;
 
 	default:
-		LogMsg( LOG_INFO, "changeOfferState Unknown Offer State " + newOfferState );
+        LogMsg( LOG_INFO, "changeOfferState Unknown Offer State %d", newOfferState );
 		break;
 	}	
 

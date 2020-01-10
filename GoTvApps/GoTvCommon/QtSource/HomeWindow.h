@@ -50,7 +50,7 @@ signals:
 private slots:
 	void						slotDeviceOrientationChanged( int qtOrientation ); // from m_AppDisplay
 	void						help( void );
-	void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void );
 	void						slotFrameResized( void );
     void                        accept() override;
     void                        reject() override;
@@ -70,39 +70,38 @@ protected:
 	AppCommon&					m_MyApp;
     VxAppDisplay&               m_AppDisplay;
 	QString						m_AppTitle;
-    QSettings *                 m_WindowSettings;
+    QSettings *                 m_WindowSettings{nullptr};
 
     Qt::Orientation				m_Orientation;
 	EHomeLayout					m_LastHomeLayout;
-	QGridLayout *				m_MainLayout;
-	VxFrame *					m_HomeFrameUpperLeft;
-	VxFrame *					m_HomeFrameRight;
-	VxFrame *					m_HomeFrameBottom;
+    QGridLayout *				m_MainLayout{nullptr};
+    VxFrame *					m_HomeFrameUpperLeft{nullptr};
+    VxFrame *					m_HomeFrameRight{nullptr};
+    VxFrame *					m_HomeFrameBottom{nullptr};
 
-	PageMediaPlayer *			m_MediaPlayerPage;
-	AppletLaunchPage *			m_AppletLaunchPage;
-	QWidget *					m_MessengerParent;
-	MessengerPage *				m_MessengerPage;
+    PageMediaPlayer *			m_MediaPlayerPage{nullptr};
+    AppletLaunchPage *			m_AppletLaunchPage{nullptr};
+    QWidget *					m_MessengerParent{nullptr};
+    MessengerPage *				m_MessengerPage{nullptr};
 
-	bool						m_MessengerIsFullSize;
-	bool						m_HomeFrameFullSize;
+    bool						m_MessengerIsFullSize{false};
+    bool						m_HomeFrameFullSize{false};
 
 	//=== demo mode vars ===//
-	QGroupBox *					rotableGroupBox;
-	QQueue<QWidget *>			rotableWidgets;
+    QGroupBox *					rotableGroupBox{nullptr};
+    QQueue<QWidget *>			rotableWidgets;
 
-	QGroupBox *					optionsGroupBox;
-	QLabel *					buttonsOrientationLabel;
-	QComboBox *					buttonsOrientationComboBox;
+    QGroupBox *					optionsGroupBox{nullptr};
+    QLabel *					buttonsOrientationLabel{nullptr};
+    QComboBox *					buttonsOrientationComboBox{nullptr};
 
-	QDialogButtonBox *			buttonBox;
-	QPushButton *				closeButton;
-	QPushButton *				helpButton;
-	QPushButton *				rotateWidgetsButton;
+    QDialogButtonBox *			buttonBox{nullptr};
+    QPushButton *				closeButton{nullptr};
+    QPushButton *				helpButton{nullptr};
+    QPushButton *				rotateWidgetsButton{nullptr};
 
-	QGridLayout *				rotableLayout;
-	QGridLayout *				optionsLayout;
-    bool                        m_EngineInitialized;
-
+    QGridLayout *				rotableLayout{nullptr};
+    QGridLayout *				optionsLayout{nullptr};
+    bool                        m_EngineInitialized{false};
 };
 

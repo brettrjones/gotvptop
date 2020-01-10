@@ -78,7 +78,7 @@ void ImageListWidget::resizeEvent( QResizeEvent * ev )
     while( iIdx < this->count() )
     {
         listRow = dynamic_cast< ImageListRow * >( this->item( iIdx ) );
-        listRow->recalculateSizeHint( width(), m_MyApp.getAppDisplay().getDisplayScale() );
+        listRow->recalculateSizeHint( width(), GuiParams::getGuiScale() );
         iIdx++;
     }
 
@@ -168,7 +168,7 @@ ImageListRow * ImageListWidget::getRowWithRoomForThumbnail( void )
     QWidget * lineWidget = dynamic_cast< QWidget * >( listRow );
 
     addItem( lineItem );
-    listRow->recalculateSizeHint( width(), m_MyApp.getAppDisplay().getDisplayScale() );
+    listRow->recalculateSizeHint( width(), GuiParams::getGuiScale() );
     listRow->setRowNum( count() );
 
     setItemWidget( lineItem, lineWidget );

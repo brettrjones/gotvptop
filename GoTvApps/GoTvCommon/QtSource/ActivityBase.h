@@ -282,19 +282,19 @@ protected:
 	P2PEngine&					m_Engine;
 	IFromGui&					m_FromGui;	
     Qt::WindowFlags				m_WindowFlags = Qt::Widget;
-    QWidget *					m_ParentWidget = nullptr;
+    QWidget *					m_ParentWidget{nullptr};
 
 	EApplet						m_EAppletType = eAppletUnknown;
-    bool                        m_IsAppletLaunchWidget = false;
-	QLabel *					m_StatusMsgLabel = nullptr;
+    bool                        m_IsAppletLaunchWidget{false};
+    QLabel *					m_StatusMsgLabel{nullptr};
 
 	EPluginType					m_ePluginType = ePluginTypeInvalid;
-	VxNetIdent *				m_HisIdent = nullptr;
-	QTimer *					m_ResizingTimer = nullptr;
-	bool						m_IsResizing = false;
+    VxNetIdent *				m_HisIdent{nullptr};
+    QTimer *					m_ResizingTimer{nullptr};
+    bool						m_IsResizing{false};
 	QSize						m_ResizingWindowSize;
-    bool						m_IsDialog = false;
-    bool						m_IsPopup = false; // center on parent filling about half of parent
-    bool						m_FullWindowSize = false;
-    bool						m_InitialFocusWasSet = false;
+    bool						m_IsDialog{false};
+    bool						m_IsPopup{false}; // center on parent filling about half of parent
+    bool						m_FullWindowSize{false};
+    bool						m_InitialFocusWasSet{false};
 };

@@ -27,7 +27,7 @@ PluginServiceAboutMe::PluginServiceAboutMe( P2PEngine& engine, PluginMgr& plugin
 
 //============================================================================
 //! return true if is plugin session
-bool PluginServiceAboutMe::fromGuiIsPluginInSession( VxNetIdent * netIdent, void * pvUserData )
+bool PluginServiceAboutMe::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	return true;
 }

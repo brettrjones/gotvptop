@@ -22,19 +22,21 @@ public:
     GuiParams();
     virtual ~GuiParams() = default;
 
+    /// @brief initialize gui scaling etc
+    static void                 initGuiParams();
+
     /// @brief get scaling required to make icons etc. usable on high dpi screens
-    int                         getGuiDpiScale( void ) const { return m_DpiScale; }
+    static int                  getGuiScale( void )  { return m_DisplayScale; }
     
     static int                  getControlIndicatorWidth( void );
     /// @brief thumbnails are square so this is both width and height
     static QSize                getThumbnailSize( void );
 
 protected:
-    void                        initGuiParams();
 
     static QColor				m_OnlineBkgColor;
     static QColor				m_OfflineBkgColor;
     static QColor				m_NearbyBkgColor;
 
-    int                         m_DpiScale{ 0 };
+    static int                  m_DisplayScale;
 };

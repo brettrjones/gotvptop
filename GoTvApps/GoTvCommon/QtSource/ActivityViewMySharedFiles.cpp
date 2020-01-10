@@ -22,6 +22,7 @@
 #include "FileShareItemWidget.h"
 #include "FileItemInfo.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxFileLists.h>
@@ -109,8 +110,8 @@ void ActivityViewMySharedFiles::setTitle( QString strTitle )
 FileShareItemWidget * ActivityViewMySharedFiles::fileToWidget( VxMyFileInfo&	fileInfo, bool isShared )
 {
 	FileShareItemWidget * item = new FileShareItemWidget(ui.FileItemList);
-    item->setSizeHint( QSize( ( int )( m_MyApp.getAppDisplay().getDisplayScale() * 200 ),
-        ( int )( 62 * m_MyApp.getAppDisplay().getDisplayScale() ) ) );
+    item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
+        ( int )( 62 * GuiParams::getGuiScale() ) ) );
 
 	FileItemInfo * poItemInfo = new FileItemInfo( fileInfo );
 	bool isInLibrary = m_Engine.fromGuiGetIsFileInLibrary( fileInfo.getFullFileName().toUtf8().constData() );

@@ -43,7 +43,9 @@ EMyIcons GetAppletIcon( EApplet applet )
 	switch( applet )
 	{
     case eActivityAppSetup:             return eMyIconApp;
-    case eAppletAboutNoLimitConnect:			return eMyIconApp;
+    case eAppletAboutNoLimitConnect:	return eMyIconApp;
+    //case eAppletApplicationInfo:	    return eMyIconDebug;
+    case eAppletApplicationInfo:	    return eMyIconUnknown;
     case eAppletCreateAccount:			return eMyIconUserIdentity;
     case eAppletGroupUser:              return eMyIconGroupUser;
     case eAppletHomePage:				return eMyIconHome;
@@ -94,15 +96,13 @@ EMyIcons GetAppletIcon( EApplet applet )
 
     case eAppletServiceSettings:            return eMyIconUnknown;
 
-
-
-        //	case eAppletPlayerMusic:			return eMyIconMusic;
-        //	case eAppletPlayerPhoto:			return eMyIconGallery;
-        //	case eAppletStreamViewerVideo:		return eMyIconVideoStreamViewer;
-        //	case eAppletStreamViewerCam:		return eMyIconCamStreamViewer;
-        //	case eAppletStreamViewerMusic:		return eMyIconMusicStreamPlayer;
-            //case eAppletRemoteControl:			return eMyIconRemoteControl;
-            //case eAppletPlugins:				return eMyIconPlugins;
+    // case eAppletPlayerMusic:			return eMyIconMusic;
+    // case eAppletPlayerPhoto:			return eMyIconGallery;
+    // case eAppletStreamViewerVideo:		return eMyIconVideoStreamViewer;
+    // case eAppletStreamViewerCam:		return eMyIconCamStreamViewer;
+    // case eAppletStreamViewerMusic:		return eMyIconMusicStreamPlayer;
+    // case eAppletRemoteControl:			return eMyIconRemoteControl;
+    // case eAppletPlugins:				return eMyIconPlugins;
 
 	case eAppletUnknown:
 	default:
@@ -119,7 +119,8 @@ QString DescribeApplet( EApplet applet )
     case eAppletEditAvatarImage:		return QObject::tr( "Edit My Avatar Image" );
     case eAppletEditStoryboard:		    return QObject::tr( "Edit My Story Board (Blog)" );
     case eAppletHomePage:				return QObject::tr( "Home" );
-    case eAppletAboutNoLimitConnect:    return QObject::tr( "About GoTv Person to Person" );
+    case eAppletAboutNoLimitConnect:    return QObject::tr( "About No Limit Connect" );
+    case eAppletApplicationInfo:        return QObject::tr( "Application Information" );
     case eAppletCreateAccount:			return QObject::tr( "Create Account" );
     case eAppletGalleryImage:			return QObject::tr( "Image Gallery" );
     case eAppletGalleryThumb:			return QObject::tr( "Thumbnail Gallery" );

@@ -15,26 +15,50 @@
 #include "GuiParams.h"
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QScreen>
+
+#include <CoreLib/VxDebug.h>
 
 //============================================================================
 QColor GuiParams::m_OnlineBkgColor( 176, 255, 176 );
 QColor GuiParams::m_OfflineBkgColor( 192, 192, 192 );
 QColor GuiParams::m_NearbyBkgColor( 176, 176, 255 );
-
+int GuiParams::m_DisplayScale{1};
 
 //============================================================================
 GuiParams::GuiParams()
 {
-    initGuiParams();    
+    //initGuiParams();
 }
 
 //============================================================================
 void GuiParams::initGuiParams()
 {
-    m_DpiScale = qApp->desktop()->devicePixelRatio();
-    if( m_DpiScale < 1 || m_DpiScale > 5 )
+    QScreen *screen = QGuiApplication::primaryScreen();
+    if( screen )
     {
-        m_DpiScale = 1;
+        float dpi = screen->physicalDotsPerInch();
+        QRect  screenGeometry = screen->geometry();
+        float iconSizeInches = ( 48.0f / dpi );
+        float maxPixels = screenGeometry.width() > screenGeometry.height() ? screenGeometry.width() : screenGeometry.height();
+        float screenSizeInches = maxPixels / dpi;
+        float normalPercentOfScreenForIcon = 48.0f/1280.0f;
+        float curPercentOfScreenForIcon = 48.0f/maxPixels;
+
+        if( iconSizeInches < 0.3 )
+        {
+            // 48 pixel icons are less than a quarter inch wide
+            // scale up
+            m_DisplayScale = 2;
+        }
+        else if( ( screenSizeInches > 17 ) && ( curPercentOfScreenForIcon < normalPercentOfScreenForIcon ) )
+        {
+            m_DisplayScale = 2;
+        }
+
+        LogMsg( LOG_VERBOSE, "Screen dpi %3.0f pixels %3.0f size 0x%3.0f icon size 0x%3f scale %d",
+                dpi, maxPixels, screenSizeInches, iconSizeInches, m_DisplayScale );
+
     }
 }
 

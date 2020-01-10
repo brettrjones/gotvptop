@@ -29,11 +29,6 @@ VxTilePositioner::VxTilePositioner( AppCommon& myApp )
 {
 }
 
-//============================================================================
-VxTilePositioner::~VxTilePositioner()
-{
-}
-
 // find optimal (largest) tile size for which
 // at least N tiles fit in WxH rectangle
 double optimal_size( double W, double H, int N )
@@ -71,6 +66,7 @@ void VxTilePositioner::repositionTiles( QVector<VxWidgetBase *>& widgetList, QWi
 		LogMsg( LOG_ERROR, "VxTilePositioner::repositionTiles invalid Window size %d %d\n", windowSize.width(),  windowSize.height()  );
 		return;
 	}
+
 
 	int totalTiles = widgetList.size();
 	// need plus totalTiles + 1 to account for rounding issues
@@ -111,13 +107,20 @@ void VxTilePositioner::repositionTiles( QVector<VxWidgetBase *>& widgetList, QWi
 			   && ( tilesDisplayed < totalTiles ) )
 		{
 			VxWidgetBase * widget = widgetList[ tilesDisplayed ];
-			widget->setFixedSize( tileWidthAfterPadding, tileWidthAfterPadding );
-			widget->move( iXPos, tileRowOffs );
+            widget->setFixedSize( tileWidthAfterPadding, tileWidthAfterPadding );
+            widget->move( iXPos, tileRowOffs );
+
+#if defined(TARGET_OS_ANDROID)
+            widget->updateGeometry();
+            widget->update();
+#endif // defined(TARGET_OS_ANDROID)
+
+            LogMsg( LOG_ERROR, "BRJ reposition tile %d width %d  pos %d %d\n", tilesDisplayed, tileWidthAfterPadding, iXPos, tileRowOffs );
+
 			tilesDisplayed++;
 			iXPos += optimumTileSize;
 		}
 
 		tileRowOffs += optimumTileSize;
 	}
-
 }

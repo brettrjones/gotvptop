@@ -21,6 +21,7 @@
 
 #include "FileShareItemWidget.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxFileLists.h>
@@ -255,8 +256,8 @@ void ActivityBrowseFiles::setFileFilter( EFileFilterType eFileFilter )
 FileShareItemWidget * ActivityBrowseFiles::fileToWidget( VxMyFileInfo& fileInfo, bool isShared, bool isInLibrary )
 {
 	FileShareItemWidget * item = new FileShareItemWidget(ui.FileItemList);
-	item->setSizeHint(QSize( (int)(m_MyApp.getAppDisplay().getDisplayScale() * 200),
-                             (int)(62 * m_MyApp.getAppDisplay().getDisplayScale()) ) );
+	item->setSizeHint(QSize( (int)(GuiParams::getGuiScale() * 200),
+                             (int)(62 * GuiParams::getGuiScale()) ) );
 
 	FileItemInfo * poItemInfo = new FileItemInfo( fileInfo, 0, isShared, isInLibrary );
 	poItemInfo->setIsShared( isShared );
@@ -368,7 +369,7 @@ void ActivityBrowseFiles::slotUpDirectoryClicked( void )
 
 		m_CurBrowseDirectory = pBuf;
 		VxFileUtil::assureTrailingDirectorySlash( m_CurBrowseDirectory );
-		delete pBuf;
+        delete[] pBuf;
 		setActionEnable( false );
 		slotRequestFileList();
 	}

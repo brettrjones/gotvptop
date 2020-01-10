@@ -559,6 +559,8 @@ void MultiSessionState::setButtonImage( VxPushButton * button, EImageType imageT
 //		case eImageTypeYellow:
 //			button->setIcons( eMyIconVideoPhoneYellow );
 //			break;
+        default:
+            break;
 		}
 
 		break;
@@ -581,7 +583,9 @@ void MultiSessionState::setButtonImage( VxPushButton * button, EImageType imageT
 		//case eImageTypeYellow: 			
 		//	button->setIcons( eMyIconTruthOrDareYellow );
 		//	break;
-		}		
+        default:
+            break;
+        }
 
 		break;
 

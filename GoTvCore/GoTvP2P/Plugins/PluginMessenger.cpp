@@ -117,9 +117,9 @@ void PluginMessenger::fromGuiSendAsset( AssetInfo& assetInfo )
 }
 
 //============================================================================
-bool PluginMessenger::fromGuiIsPluginInSession( VxNetIdent * netIdent, VxGUID lclSessionId )
+bool PluginMessenger::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
 {
-	return m_PluginSessionMgr.fromGuiIsPluginInSession( false, netIdent, lclSessionId );
+	return m_PluginSessionMgr.fromGuiIsPluginInSession( false, netIdent, pvUserData, lclSessionId );
 }
 
 //============================================================================

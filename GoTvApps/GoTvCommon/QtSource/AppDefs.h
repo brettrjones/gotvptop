@@ -70,6 +70,7 @@ enum EApplet
     eAppletNetworkSettings,
     eAppletNetHostingPage,	    // page to setup network/group hosts and services
     eAppletTheme,
+    eAppletApplicationInfo,
     eAppletAboutNoLimitConnect,
 
 	eMaxBasicApplets,           // marker.. past here is search applets

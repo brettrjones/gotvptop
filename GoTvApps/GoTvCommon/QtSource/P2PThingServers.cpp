@@ -43,6 +43,8 @@ void AppCommon::slotServerButtonClick( void )
 	case ePluginServerStateStopped:	
 		popupMenu.addMenuItem( 1, getMyIcons().getIcon(eMyIconWebCamServer), tr( "Start Web Cam Server" ) );
 		break;
+    default:
+        break;
 	}
 
 	popupMenu.addMenuItem( 2, getMyIcons().getIcon( eMyIconProfile ), "View My Profile" );
@@ -78,6 +80,8 @@ void AppCommon::onMenuServerSelected( int iMenuId, QWidget * )
 				poDlg->exec();
 			}
 			break;
+        default:
+            break;
 		}
 
 		break;

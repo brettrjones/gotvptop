@@ -6,6 +6,7 @@
 
 #include "AppletLaunchPage.h"
 #include "MessengerPage.h"
+#include "GuiParams.h"
 
 #include "VxFrame.h"
 
@@ -104,10 +105,11 @@ void HomeWindow::showEvent( QShowEvent * ev )
 //============================================================================
 void HomeWindow::initializeHomePage()
 {
+#if !defined(TARGET_OS_ANDROID)
     QByteArray restoreGeom = m_WindowSettings->value( "mainWindowGeometry" ).toByteArray();
     if( restoreGeom.isEmpty() )
     {
-#ifdef TARGET_OS_ANDROID
+#if defined(TARGET_OS_ANDROID)
         // take up most of the screen
         QDesktopWidget scr;
         const QRect availableGeometry = scr.availableGeometry(scr.primaryScreen());
@@ -124,6 +126,15 @@ void HomeWindow::initializeHomePage()
     {
         restoreGeometry(restoreGeom);
     }
+#else
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect  screenGeometry = screen->geometry();
+    int height = screenGeometry.height();
+    int width = screenGeometry.width();
+    resize(width, height);
+    LogMsg( LOG_DEBUG, "Home Screen Size %d %d", width, height);
+
+#endif // !defined(TARGET_OS_ANDROID)
 
 	initializeGoTvDynamicLayout();
 	connect( &m_AppDisplay, SIGNAL( signalDeviceOrientationChanged( int ) ), this, SLOT( slotDeviceOrientationChanged( int ) ) );
@@ -135,7 +146,9 @@ void HomeWindow::initializeHomePage()
 //============================================================================
 void HomeWindow::initializeGoTvDynamicLayout( void )
 {
-    setMinimumSize( (int)( 400.0f * m_AppDisplay.getDisplayWidthScale() ), (int)( 400.0f * m_AppDisplay.getDisplayHeightScale() ) );
+#if !defined(TARGET_OS_ANDROID)
+    setMinimumSize( (int)( 400.0f * GuiParams::getGuiScale() ), (int)( 400.0f * GuiParams::getGuiScale()     ) );
+#endif // !defined(TARGET_OS_ANDROID)
 
 	m_MainLayout = new QGridLayout();
 	m_MainLayout->setSizeConstraint( QLayout::SetNoConstraint );

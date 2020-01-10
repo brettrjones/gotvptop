@@ -109,13 +109,13 @@ void                        VxSetPythonLibDirectory( const char * pythonDir );
 void			            VxSetRootDataStorageDirectory( const char * rootDataDir );
 std::string&	            VxGetRootDataStorageDirectory( void );
 
-std::string&	            VxGetAppTempDirectory(void);
-std::string&	            VxGetAppLogsDirectory(void);
-std::string&	            VxGetAppKodiDataDirectory(void);
-std::string&	            VxGetAppGoTvDataDirectory(void);
+std::string&	            VxGetAppTempDirectory( void );
+std::string&	            VxGetAppLogsDirectory( void );
+std::string&	            VxGetAppKodiDataDirectory( void );
+std::string&	            VxGetAppGoTvDataDirectory( void );
 
 void			            VxSetRootUserDataDirectory( const char * rootUserDataDir );
-std::string&	            VxGetRootUserDataDirectory(void);
+std::string&	            VxGetRootUserDataDirectory( void );
 
 void			            VxSetUserSpecificDataDirectory( const char * userDataDir  );
 std::string&	            VxGetUserSpecificDataDirectory( void  );

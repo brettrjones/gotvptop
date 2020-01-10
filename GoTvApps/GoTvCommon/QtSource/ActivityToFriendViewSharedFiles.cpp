@@ -30,6 +30,7 @@
 #include "GuiFileXferSession.h"
 #include "FileListReplySession.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <PktLib/VxSearchDefs.h>
@@ -216,8 +217,8 @@ FileXferWidget * ActivityToFriendViewSharedFiles::fileToWidget(  VxNetIdent *   
                                                                  VxMyFileInfo&     fileInfo )
 {
 	FileXferWidget * item = new FileXferWidget(ui.FileItemList);
-    item->setSizeHint( QSize( ( int )( m_MyApp.getAppDisplay().getDisplayScale() * 200 ),
-        ( int )( 62 * m_MyApp.getAppDisplay().getDisplayScale() ) ) );
+    item->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ),
+        ( int )( 62 * GuiParams::getGuiScale() ) ) );
     VxGuidQt lclSessionId;
     lclSessionId.initializeWithNewVxGUID();
 	GuiFileXferSession * xferSession = new GuiFileXferSession(	ePluginTypeFileServer, 

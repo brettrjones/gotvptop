@@ -273,7 +273,7 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 			memset(&oAddr, '\0', sizeof( struct sockaddr_in ) );
 			oAddr.sin_family = AF_INET;
 			oAddr.sin_port = htons(u16ListenPort);
-            oAddr.sin_addr.s_addr = ADDR_ANY; // if set to specific address then PureVPN does not work //inet_addr( thisIp.c_str() );
+            oAddr.sin_addr.s_addr = INADDR_ANY; // if set to specific address then PureVPN does not work //inet_addr( thisIp.c_str() );
 			bool bindFailed = true;
 			for( int i = 0; i < 3; i++ )
 			{

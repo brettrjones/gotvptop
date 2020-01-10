@@ -52,7 +52,7 @@ signals:
 private slots:
 	void						slotSearchResult( VxNetIdent * netIdent );
 	void						slotSearchComplete( void );
-	void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void ) override;
 	void						slotStartSearchClicked();
 	void						slotStopSearchClicked();
 	//void						slotFriendClicked( VxNetIdent * netIdent );

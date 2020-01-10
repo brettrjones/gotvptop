@@ -48,7 +48,7 @@ signals:
     void						signalToGuiFileList( VxMyFileInfo& fileInfo );
 
 private slots:
-    void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void ) override;
     void						statusMsg( QString strMsg );
     void						slotRequestFileList( void );
     void						slotApplyFileFilter( unsigned char fileTypeMask );

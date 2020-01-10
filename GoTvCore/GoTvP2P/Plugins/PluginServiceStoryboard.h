@@ -22,7 +22,7 @@ public:
 	PluginServiceStoryboard( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
 	virtual ~PluginServiceStoryboard() = default;
 
-	bool						fromGuiIsPluginInSession( VxNetIdent * netIdent, void * pvUserData );
+	bool						fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData = 0, VxGUID lclSessionId = VxGUID::nullVxGUID() );
 
 	virtual void				replaceConnection( VxNetIdent * netIdent, VxSktBase * poOldSkt, VxSktBase * poNewSkt );
 	virtual void				onContactWentOffline( VxNetIdent * netIdent, VxSktBase * sktBase );

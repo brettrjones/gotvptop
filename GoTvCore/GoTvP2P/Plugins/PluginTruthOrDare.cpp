@@ -92,7 +92,7 @@ bool PluginTruthOrDare::fromGuiMakePluginOffer(	VxNetIdent *	netIdent,
 
 //============================================================================
 bool PluginTruthOrDare::fromGuiOfferReply(	VxNetIdent *	netIdent,
-											int			pvUserData,				
+											int			    pvUserData,				
 											EOfferResponse	eOfferResponse,
 											VxGUID			lclSessionId )
 {
@@ -100,14 +100,14 @@ bool PluginTruthOrDare::fromGuiOfferReply(	VxNetIdent *	netIdent,
 }
 
 //============================================================================
-bool PluginTruthOrDare::fromGuiIsPluginInSession( VxNetIdent * netIdent, VxGUID lclSessionId )
+bool PluginTruthOrDare::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
 {
-	return m_PluginSessionMgr.fromGuiIsPluginInSession( false, netIdent, lclSessionId );
+	return m_PluginSessionMgr.fromGuiIsPluginInSession( false, netIdent, pvUserData, lclSessionId );
 }
 
 //============================================================================
 //! called to start service or session with remote friend
-void PluginTruthOrDare::fromGuiStartPluginSession( VxNetIdent * netIdent, int, VxGUID )
+void PluginTruthOrDare::fromGuiStartPluginSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
 {
 	m_VoiceFeedMgr.fromGuiStartPluginSession( false, netIdent );
 	m_VideoFeedMgr.fromGuiStartPluginSession( false, netIdent );

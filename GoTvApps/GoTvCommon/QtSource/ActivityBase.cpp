@@ -47,12 +47,12 @@ ActivityBase::ActivityBase( const char * objName, AppCommon& app, QWidget * pare
 , m_MyApp( app )
 , m_Engine( app.getEngine() )
 , m_FromGui( m_Engine.getFromGuiInterface() )
+//, m_WindowFlags( 0 )
 , m_ParentWidget( parent )
-, m_WindowFlags( 0 )
 , m_EAppletType( eAppletType )
-, m_StatusMsgLabel( 0 )
+//, m_StatusMsgLabel( 0 )
 , m_ePluginType( ePluginTypeInvalid )
-, m_HisIdent( 0 )
+//, m_HisIdent( 0 )
 , m_ResizingTimer( new QTimer(this) )
 , m_IsDialog( isDialog )
 , m_IsPopup( isPopup )
@@ -558,10 +558,12 @@ void ActivityBase::repositionToParent( void )
             QRect parentRect( m_ParentWidget->mapToGlobal( QPoint( 0, 0 ) ), m_ParentWidget->size() );
 
             move( QStyle::alignedRect( Qt::LeftToRight, Qt::AlignCenter, size(), parentRect ).topLeft() );
+            LogMsg( LOG_DEBUG, "Popup %s size %d %d", getObjName(), parentRect.width(), parentRect.height() );
         }
         else if( m_IsDialog )
         {
             QRect parentRect( m_ParentWidget->mapToGlobal( QPoint( 0, 0 ) ), m_ParentWidget->size() );
+            LogMsg( LOG_DEBUG, "Dialog %s size %d %d", getObjName(), parentRect.width(), parentRect.height() );
             setGeometry( parentRect );
         }
         else
@@ -574,6 +576,7 @@ void ActivityBase::repositionToParent( void )
             //LogMsg( LOG_DEBUG, "Reposition to x=%d y=%d w=%d h=%d %s parent %s\n",
             //    parentRect.left(), parentRect.top(), parentRect.width(), parentRect.height(), getObjName(), m_ParentWidget->objectName().toUtf8().constData() );
             setGeometry( parentRect );
+            LogMsg( LOG_DEBUG, "Normal %s size %d %d", getObjName(), parentRect.width(), parentRect.height() );
         }
 	}
     else
@@ -1007,7 +1010,7 @@ void ActivityBase::slotHomeButtonClicked( void )
 //============================================================================
 void ActivityBase::slotMuteMicButtonClicked( bool muteMic )
 {
-	emit slotMuteMicButtonClicked( muteMic );
+    emit signalMuteMicButtonClicked( muteMic );
 }
 
 //============================================================================

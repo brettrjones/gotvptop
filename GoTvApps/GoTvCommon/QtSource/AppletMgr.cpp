@@ -18,6 +18,7 @@
 #include "AppSettings.h"
 
 #include "ActivityAppSetup.h"
+#include "AppletApplicationInfo.h"
 #include "ActivityFileSearch.h"
 #include "ActivityPersonalRecorder.h"
 #include "ActivityScanPeopleSearch.h"
@@ -166,7 +167,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 	{
     case eActivityAppSetup:                 appletDialog = new ActivityAppSetup( m_MyApp, parent ); break;
     case eAppletAboutNoLimitConnect:        appletDialog = new AppletAboutApp( m_MyApp, parent ); break;
-    case eAppletEditAboutMe:                appletDialog = new AppletEditAboutMe( m_MyApp, parent ); break;
+    case eAppletApplicationInfo:            appletDialog = new AppletApplicationInfo( m_MyApp, parent ); break;
     case eAppletEditAvatarImage:            appletDialog = new AppletEditAvatarImage( m_MyApp, parent ); break;
     case eAppletEditStoryboard:             appletDialog = new AppletEditStoryboard( m_MyApp, parent ); break;
     case eAppletGalleryImage:               appletDialog = new AppletGalleryImage( m_MyApp, parent ); break;
@@ -174,7 +175,6 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletGroupUser:                  appletDialog = new AppletGroupUser( m_MyApp, parent ); break;
 
     case eAppletHomePage:                   m_MyApp.errMessageBox( appletMissingTitle, "Home Page Not Implemented" ); return nullptr;
-
 
     case eAppletKodi:                       appletDialog = new AppletKodi( m_MyApp, parent ); break;
     case eAppletLibrary:                    appletDialog = new AppletLibrary( m_MyApp, parent ); break;

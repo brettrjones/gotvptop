@@ -109,9 +109,9 @@ bool PluginVideoPhone::fromGuiOfferReply(	VxNetIdent *	netIdent,
 }
 
 //============================================================================
-bool PluginVideoPhone::fromGuiIsPluginInSession( VxNetIdent * netIdent, VxGUID lclSessionId )
+bool PluginVideoPhone::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
 {
-	return m_PluginSessionMgr.fromGuiIsPluginInSession( false, netIdent, lclSessionId );
+	return m_PluginSessionMgr.fromGuiIsPluginInSession( false, netIdent, pvUserData, lclSessionId );
 }
 
 //============================================================================

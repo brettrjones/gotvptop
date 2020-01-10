@@ -39,7 +39,7 @@ public:
 	void						setTitle( QString strTitle );
 
 private slots:
-	void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void ) override;
 	void						slotStoryBoardSavedModified();
 
 protected:

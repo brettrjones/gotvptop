@@ -331,6 +331,10 @@ void AppletNetworkSettings::setFirewallTest( EngineSettings::EFirewallTestType e
     case EngineSettings::eFirewallTestAssumeNoFirewall:
         ui.AssumeNoProxyRadioButton->setChecked( true );
         break;
+
+    case EngineSettings::eMaxFirewallTestType:
+    default:
+        break;
     }
 }
 

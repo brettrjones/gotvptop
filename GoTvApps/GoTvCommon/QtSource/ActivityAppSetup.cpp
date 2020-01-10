@@ -21,11 +21,6 @@
 
 #include <QClipboard>
 
-namespace
-{
-	const int MAX_LOG_EDIT_BLOCK_CNT = 1000;
-}
-
 //============================================================================
 ActivityAppSetup::ActivityAppSetup( AppCommon& app, QWidget * parent )
 : ActivityBase( OBJNAME_ACTIVITY_APP_SETUP, app, parent, eActivityAppSetup, true, false, true )

@@ -15,6 +15,7 @@
 
 #include "AssetVoiceWidget.h"
 #include "AppCommon.h"
+#include "GuiParams.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
@@ -74,13 +75,13 @@ void AssetVoiceWidget::setAssetInfo( AssetInfo& assetInfo )
 	{
 		ui.m_TagLabel->setVisible( false );
 		ui.m_TagTitleLabel->setVisible( false );
-        this->setSizeHint( QSize( ( int )( m_MyApp.getAppDisplay().getDisplayScale() * 200 ), ( int )( 46 * m_MyApp.getAppDisplay().getDisplayScale() ) ) );
+        this->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ), ( int )( 46 * GuiParams::getGuiScale() ) ) );
     }
 	else
 	{
 		ui.m_TagLabel->setVisible( true );
 		ui.m_TagTitleLabel->setVisible( true );
-        this->setSizeHint( QSize( ( int )( m_MyApp.getAppDisplay().getDisplayScale() * 200 ), ( int )( 62 * m_MyApp.getAppDisplay().getDisplayScale() ) ) );
+        this->setSizeHint( QSize( ( int )( GuiParams::getGuiScale() * 200 ), ( int )( 62 * GuiParams::getGuiScale() ) ) );
 	}
 
 	if( assetInfo.isMine() )

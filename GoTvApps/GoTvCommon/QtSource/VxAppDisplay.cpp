@@ -34,26 +34,31 @@ void VxAppDisplay::initializeAppDisplay( void )
     if( !m_Initialized )
     {
         m_Initialized = true;
-       QScreen * dispScreen = m_MyApp.getQApplication().primaryScreen();
-        if( dispScreen->isPortrait( dispScreen->orientation() ) )
+        QScreen * dispScreen = m_MyApp.getQApplication().primaryScreen();
+        if( dispScreen )
         {
-            m_Orientation = Qt::Vertical;
-        }
-        else
-        {
-            m_Orientation = Qt::Horizontal;
-        }
+            if( dispScreen->isPortrait( dispScreen->orientation() ) )
+            {
+                m_Orientation = Qt::Vertical;
+            }
+            else
+            {
+                m_Orientation = Qt::Horizontal;
+            }
 
-        QSize screenSize = dispScreen->availableSize();
-        if( screenSize.width() > screenSize.height() )
-        {
-            m_DisplayWidthScale =  ( float ) screenSize.width() / m_StdDisplayWidth;
-            m_DisplayHeightScale = ( float ) screenSize.height() / m_StdDisplayHeight;
-        }
-        else
-        {
-            m_DisplayWidthScale = ( float ) screenSize.height() / m_StdDisplayWidth;
-            m_DisplayHeightScale = ( float ) screenSize.width() / m_StdDisplayHeight;        
+            QSize screenSize = dispScreen->availableSize();
+            if( screenSize.width() > screenSize.height() )
+            {
+                m_DisplayWidthScale =  ( float ) screenSize.width() / m_StdDisplayWidth;
+                m_DisplayHeightScale = ( float ) screenSize.height() / m_StdDisplayHeight;
+            }
+            else
+            {
+                m_DisplayWidthScale = ( float ) screenSize.height() / m_StdDisplayWidth;
+                m_DisplayHeightScale = ( float ) screenSize.width() / m_StdDisplayHeight;
+            }
+
+            LogMsg( LOG_DEBUG, "Display scale x=%3.1f y==%3.1f ", m_DisplayWidthScale, m_DisplayWidthScale);
         }
 
         connect( m_OrientationCheckTimer, SIGNAL(timeout()), this, SLOT(slotCheckOrientationTimer()) );
@@ -72,13 +77,6 @@ void VxAppDisplay::slotCheckOrientationTimer( void )
         m_Orientation = curOrientation;
         emit signalDeviceOrientationChanged( (int) m_Orientation );
     }
-}
-
-//============================================================================
-float VxAppDisplay::getDisplayScale( void ) 
-{ 
-    initializeAppDisplay();
-    return m_DisplayHeightScale < m_DisplayWidthScale ? m_DisplayHeightScale : m_DisplayWidthScale;
 }
 
 //============================================================================

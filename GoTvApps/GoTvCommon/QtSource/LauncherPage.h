@@ -43,7 +43,7 @@ public slots:
 
 private slots:
 	//! user clicked the upper right x button
-	void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void ) override;
 	//! user checked or unchecked menu item
 	//void			userCheckedOrUncheckedAnItem( QListWidgetItem * item );
 	//! user selected menu item

@@ -40,17 +40,12 @@ PluginVoicePhone::PluginVoicePhone( P2PEngine& engine, PluginMgr& pluginMgr, VxN
 }
 
 //============================================================================
-PluginVoicePhone::~PluginVoicePhone()
-{
-}
-
-//============================================================================
 //! user wants to send offer to friend.. return false if cannot connect
 bool PluginVoicePhone::fromGuiMakePluginOffer(		VxNetIdent *	netIdent,		
-													int			pvUserData,
+													int			    pvUserData,
 													const char *	pOfferMsg,		
 													const char *	pFileName,
-													uint8_t *			fileHashId,
+													uint8_t *		fileHashId,
 													VxGUID			lclSessionId )	
 {
 	bool result = false;
@@ -84,9 +79,9 @@ bool PluginVoicePhone::fromGuiMakePluginOffer(		VxNetIdent *	netIdent,
 }
 
 //============================================================================
-bool PluginVoicePhone::fromGuiIsPluginInSession( VxNetIdent * netIdent, VxGUID lclSessionId )
+bool PluginVoicePhone::fromGuiIsPluginInSession( VxNetIdent * netIdent, int pvUserData, VxGUID lclSessionId )
 {
-	return m_PluginSessionMgr.fromGuiIsPluginInSession( false, netIdent, lclSessionId );
+	return m_PluginSessionMgr.fromGuiIsPluginInSession( false, netIdent, pvUserData, lclSessionId );
 }
 
 //============================================================================

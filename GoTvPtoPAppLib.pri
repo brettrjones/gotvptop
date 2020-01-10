@@ -70,7 +70,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/SoundCtrlWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/StoryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TextChatLogic.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RasterWindow.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ChatEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputAllWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InputBaseWidget.h \
@@ -176,6 +175,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameLogic.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientAvatarImage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientBase.h \
@@ -333,7 +333,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenu.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenuDelegate.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenu.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RasterWindow.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/SessionWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/SoundCtrlWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/StoryWidget.cpp \
@@ -454,6 +453,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameLogic.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientAvatarImage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientBase.cpp \
@@ -660,6 +660,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityBase.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AcceptCancelWidget.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletAboutApp.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletApplicationInfo.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletClientRandomConnect.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletEditAboutMe.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletEditAvatarImage.ui \

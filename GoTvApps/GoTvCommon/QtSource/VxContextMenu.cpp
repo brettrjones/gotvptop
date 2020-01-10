@@ -17,6 +17,7 @@
 #include "AppCommon.h"
 #include "VxAppTheme.h"
 #include "VxMenu.h"
+#include "GuiParams.h"
 
 #include <QWidgetAction>
 #include <CoreLib/VxDebug.h>
@@ -159,7 +160,7 @@ QPoint VxContextMenu::calculatePos( QWidget * menuWidget )
         }
         else
         {
-            return QPoint( m_GlobalPoint.x() - widgetWidth, ( int )( m_GlobalPoint.y() + 10.0f * m_MyApp.getAppDisplay().getDisplayScale() ) );
+            return QPoint( m_GlobalPoint.x() - widgetWidth, ( int )( m_GlobalPoint.y() + 10.0f * GuiParams::getGuiScale() ) );
         }
     }
     else

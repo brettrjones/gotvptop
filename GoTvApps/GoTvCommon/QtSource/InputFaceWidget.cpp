@@ -15,6 +15,8 @@
 
 #include "InputFaceWidget.h"
 #include "AppCommon.h"
+#include "GuiParams.h"
+
 #include <CoreLib/VxGlobals.h>
 
 #include <QDebug>
@@ -114,8 +116,8 @@ InputFaceWidget::InputFaceWidget( QWidget * parent )
 //============================================================================
 QSize InputFaceWidget::sizeHint() const
 {
-	QSize thisSizeHint( ( int )( m_MyApp.getAppDisplay().getDisplayScale() * 228 ), 
-                        ( int )( 347 * m_MyApp.getAppDisplay().getDisplayScale() ) );
+	QSize thisSizeHint( ( int )( GuiParams::getGuiScale() * 228 ), 
+                        ( int )( 347 * GuiParams::getGuiScale() ) );
 	return thisSizeHint;
 }
 

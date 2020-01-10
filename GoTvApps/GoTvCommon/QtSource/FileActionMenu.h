@@ -83,7 +83,7 @@ signals:
 	void						menuItemClicked( int iItemId, QWidget * popupMenu );
 
 private slots:
-	void						slotHomeButtonClicked( void );
+    void						slotHomeButtonClicked( void ) override;
 	void						itemClicked(QListWidgetItem *item);
 
 protected:

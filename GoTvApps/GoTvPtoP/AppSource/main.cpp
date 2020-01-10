@@ -4,6 +4,7 @@
 
 #include <GoTvCommon/QtSource/AppCommon.h>
 #include <GoTvCommon/QtSource/HomeWindow.h>
+#include <GoTvCommon/QtSource/GuiParams.h>
 
 #include <QApplication>
 #include <QCommandLineParser>
@@ -54,10 +55,23 @@ int main(int argc, char **argv)
 {
     QApplication::setAttribute( Qt::AA_ShareOpenGLContexts );
     QApplication::setAttribute( Qt::AA_DontCheckOpenGLContextThreadAffinity );
-    //QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling );
 
 	// for some reason QApplication must be newed or does not initialize 
 	QApplication* myApp = new QApplication( argc, argv );
+
+#if !defined(TARGET_OS_ANDROID) // on android it causes main page to be quarter size
+    //if( myApp->screens().at( 0 )->geometry().width() > 1090 )
+    //{
+        QGuiApplication::setAttribute( Qt::AA_EnableHighDpiScaling, true );
+    //}
+    //else 
+    //{
+    //    QGuiApplication::setAttribute( Qt::AA_EnableHighDpiScaling, false );
+    //}
+#endif // !defined(TARGET_OS_ANDROID)
+
+    // initialize display scaling etc
+    GuiParams::initGuiParams();
 
     // chicken and egg kind of thing.. we need the storage path here
     QGuiApplication::setApplicationDisplayName( VxGetApplicationTitle() );
