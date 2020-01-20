@@ -246,7 +246,6 @@ void AppCommon::loadWithoutThread( void )
     uint32_t iconsMs = GetApplicationAliveMs();
     LogMsg( LOG_DEBUG, "Load Icons %d ms alive ms %d", iconsMs - loadingMs, iconsMs );
 
-    m_AppTheme.selectTheme( getAppSettings().getLastSelectedTheme() );
     // TODO: finish VxAppStyle..
     getQApplication().setStyle( &m_AppStyle );
 
@@ -312,7 +311,7 @@ void AppCommon::slotStartLoadingFromThread( void )
 void AppCommon::slotFinishedLoadingGui( void )
 {
 	// theme must be loaded from gui thread
-	m_AppTheme.selectTheme( getAppSettings().getLastSelectedTheme() );
+    //m_AppTheme.selectTheme( getAppSettings().getLastSelectedTheme() );
 
 	m_HomePage.initializeHomePage();
 	connect( &m_HomePage, SIGNAL( signalMainWindowResized() ), this, SLOT(slotMainWindowResized() ) );

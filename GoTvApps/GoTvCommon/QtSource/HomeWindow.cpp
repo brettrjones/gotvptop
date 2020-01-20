@@ -2,6 +2,7 @@
 #include "HomeWindow.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
+#include "VxAppTheme.h"
 #include "VxAppDisplay.h"
 
 #include "AppletLaunchPage.h"
@@ -100,6 +101,8 @@ void HomeWindow::showEvent( QShowEvent * ev )
 {
     QDialog::showEvent( ev );
     m_MyApp.startupAppCommon( getAppletFrame( eAppletHomePage ), getAppletFrame( eAppletMessenger ) );
+
+    m_MyApp.getAppTheme().selectTheme( m_MyApp.getAppSettings().getLastSelectedTheme() );
 }
 
 //============================================================================
@@ -109,18 +112,10 @@ void HomeWindow::initializeHomePage()
     QByteArray restoreGeom = m_WindowSettings->value( "mainWindowGeometry" ).toByteArray();
     if( restoreGeom.isEmpty() )
     {
-#if defined(TARGET_OS_ANDROID)
-        // take up most of the screen
-        QDesktopWidget scr;
-        const QRect availableGeometry = scr.availableGeometry(scr.primaryScreen());
-        resize(availableGeometry.width() - 20, availableGeometry.height() - 20 );
-        move( availableGeometry.left() + 10, availableGeometry.top() + 10 );
-#else
         const QRect availableGeometry = QApplication::desktop()->availableGeometry(this);
         resize(availableGeometry.width() / 3, availableGeometry.height() / 2);
         move((availableGeometry.width() - width()) / 2,
              (availableGeometry.height() - height()) / 2);
-#endif // TARGET_OS_ANDROID
     }
     else
     {
@@ -128,10 +123,11 @@ void HomeWindow::initializeHomePage()
     }
 #else
     QScreen *screen = QGuiApplication::primaryScreen();
-    QRect  screenGeometry = screen->geometry();
+    QRect  screenGeometry = screen->availableGeometry();
     int height = screenGeometry.height();
-    int width = screenGeometry.width();
+    int width = screenGeometry.width() - 10;
     resize(width, height);
+    move( screenGeometry.left() + 5, screenGeometry.top() );
     LogMsg( LOG_DEBUG, "Home Screen Size %d %d", width, height);
 
 #endif // !defined(TARGET_OS_ANDROID)

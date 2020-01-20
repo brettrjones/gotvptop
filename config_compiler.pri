@@ -25,18 +25,20 @@ INCLUDEPATH += $$PWD/DependLibs
 android{
     DEFINES +=__ANDROID_API__=21
     DEFINES += BIONIC_IOCTL_NO_SIGNEDNESS_OVERLOAD
-    #CONFIG(debug, debug|release){
+}
+
+CONFIG(debug, debug|release){
+# message(Link in DEBUG mode.)
+    android{
         #if do not turn off optimization then android NDK std::string values will get optimized out and not viewable
-        # sigh if optimization is turned off then the debugger gets hung up so have to live with not being able to view strings
-        #QMAKE_CXXFLAGS += -O0
-        #QMAKE_CFLAGS += -O0
-        #QMAKE_CFLAGS_DEBUG -= -g
-        #QMAKE_CFLAGS_DEBUG -= -Og
-        #QMAKE_CFLAGS_DEBUG += -O0
-        #QMAKE_CXXFLAGS_DEBUG -= -g
-        #QMAKE_CXXFLAGS_DEBUG -= -Og
-        #QMAKE_CXXFLAGS_DEBUG += -O0
-    #}
+        # sigh if optimization is turned off then the debugger gets hung up so may have to live with not being able to view strings.. also ndk strings sometimes are still optimized out
+        QMAKE_CXXFLAGS -= -O1
+        QMAKE_CXXFLAGS -= -O2
+        QMAKE_CXXFLAGS -= -O3
+        QMAKE_CXXFLAGS -= -O4
+        QMAKE_CXXFLAGS += -O0
+    #message(cxx flasgs $${QMAKE_CXXFLAGS})
+    }
 }
 
 win32{
@@ -49,8 +51,6 @@ win32{
 #nasm.output = ${QMAKE_FILE_BASE}.o
 #nasm.commands = yasm $$NASMEXTRAFLAGS -o ${QMAKE_FILE_BASE}.o ${QMAKE_FILE_NAME}
 #nasm.input = NASM_SOURCES
-
-
 
 unix:QMAKE_CXXFLAGS += -std=c++11
 unix:QMAKE_CXXFLAGS += -fpermissive

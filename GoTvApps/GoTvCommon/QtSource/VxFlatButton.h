@@ -26,14 +26,14 @@ class VxFlatButton : public QPushButton
 	Q_OBJECT
 public:
 	VxFlatButton(QWidget *parent=0);
-	virtual ~VxFlatButton();
+	virtual ~VxFlatButton() = default;
 
 	AppCommon&					getMyApp( void )						{ return m_MyApp; }
 	virtual void				setMyIcon( EMyIcons myIcon )			{ m_MyIcon = myIcon; }
 	MyIcons&					getMyIcons( void );
 
 protected:
-	virtual void                paintEvent( QPaintEvent* ev );
+	virtual void                paintEvent( QPaintEvent* ev ) override;
 
 	//=== vars ===//
 	AppCommon&					m_MyApp;

@@ -146,7 +146,94 @@ const char *    VxGetNetworkHostUrl( void )                         { return g_s
 //																/contacts/		contact assets
 //																/camrecord/		web cam recordings
 
-std::string& VxGetAppDirectory(EAppDir appDir)
+//============================================================================
+void VxSetAppDirectory( EAppDir appDir, const char * setDir )
+{
+    if( setDir )
+    {
+        switch (appDir)
+        {
+        case eAppDirAppExe:
+            g_strAppExeDir = setDir;
+            break;
+        case eAppDirKodiExe:
+            g_strKodiExeDir = setDir;
+            break;
+        case eAppDirExeKodiAssets:
+            g_strExeKodiAssetsDir = setDir;
+            break;
+        case eAppDirExeGoTvAssets:
+            g_strExeGoTvAssetsDir = setDir;
+            break;
+        case eAppDirExePython:
+            g_strExeDirPython = setDir;
+            break;
+        case eAppDirExePythonDlls:
+            g_strExeDirPythonDlls = setDir;
+            break;
+        case eAppDirExePythonLibs:
+            g_strExeDirPythonLib = setDir;
+            break;
+
+        case eAppDirRootDataStorage:
+            g_strRootDataStorageDir = setDir;
+            break;
+        case eAppDirAppTempData:
+            g_strAppTempDir = setDir;
+            break;
+        case eAppDirAppLogs:
+            g_strAppLogsDir = setDir;
+            break;
+        case eAppDirAppKodiData:
+            g_strAppKodiDataDir = setDir;
+            break;
+        case eAppDirAppGoTvData:
+            g_strAppGoTvDataDir = setDir;
+            break;
+
+        case eAppDirRootUserData:
+            g_strRootUserDataDir = setDir;
+            break;
+
+        case eAppDirUserSpecific:
+            g_strUserSpecificDataDir = setDir;
+            break;
+        case eAppDirSettings:
+            g_strSettingsDir = setDir;
+            break;
+        case eAppDirProfile:
+            g_strUserProfileDir = setDir;
+            break;
+        case eAppDirRootXfer:
+            g_strRootXferDir = setDir;
+            break;
+        case eAppDirUserXfer:
+            g_strUserXferDir = setDir;
+            break;
+        case eAppDirDownloads:
+            g_strDownloadsDir = setDir;
+            break;
+        case eAppDirUploads:
+            g_strUploadsDir = setDir;
+            break;
+        case eAppDirIncomplete:
+            g_strIncompleteDir = setDir;
+            break;
+        case eAppDirPersonalRecords:
+            g_strPersonalRecordDir = setDir;
+            break;
+        case eAppDirThumbs:
+            g_strAppThumbsDir = setDir;
+            break;
+        case eAppDirCamRecord:
+            g_strAppCamRecord = setDir;
+            break;
+        }
+    }
+}
+
+//============================================================================
+std::string& VxGetAppDirectory( EAppDir appDir )
 {
 	switch (appDir)
 	{
@@ -202,13 +289,12 @@ std::string& VxGetAppDirectory(EAppDir appDir)
         return g_strAppThumbsDir;
     case eAppDirCamRecord:
         return g_strAppCamRecord;
-
 	}
 
+    LogMsg( LOG_ERROR, "VxGetAppDirectory ERROR No directory for %d", appDir );
 static std::string emptyStr = "";
 	return emptyStr;
 }
-
 
 //============================================================================
 void VxSetAppIsShuttingDown( bool bIsShuttingDown )

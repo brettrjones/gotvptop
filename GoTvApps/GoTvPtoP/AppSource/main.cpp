@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 #if !defined(TARGET_OS_ANDROID) // on android it causes main page to be quarter size
     //if( myApp->screens().at( 0 )->geometry().width() > 1090 )
     //{
-        QGuiApplication::setAttribute( Qt::AA_EnableHighDpiScaling, true );
+    //    QGuiApplication::setAttribute( Qt::AA_EnableHighDpiScaling, true );
     //}
     //else 
     //{

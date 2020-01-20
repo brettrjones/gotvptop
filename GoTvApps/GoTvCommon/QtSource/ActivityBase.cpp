@@ -444,7 +444,12 @@ void ActivityBase::errMessageBox2( QString title, const char * msg, ... )
 //============================================================================
 void ActivityBase::showEvent( QShowEvent * showEvent )
 {
-	if( m_ParentWidget )
+#if defined(TARGET_OS_ANDROID)
+    // not sure why but android seems to loose the theme text color so reapply
+    m_MyApp.getAppTheme().applyTheme( this );
+#endif // defined(TARGET_OS_ANDROID)
+
+    if( m_ParentWidget )
 	{
 		slotRepositionToParent();
 	}

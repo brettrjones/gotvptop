@@ -84,19 +84,19 @@ protected slots:
 protected:
 	void						initQButtonPro( void );
 
-	virtual void				mousePressEvent( QMouseEvent * event );
-	virtual void				mouseReleaseEvent( QMouseEvent * event );
-	virtual void				mouseMoveEvent( QMouseEvent * event );
-    void						paintEvent( QPaintEvent* ev );
+	virtual void				mousePressEvent( QMouseEvent * event ) override;
+	virtual void				mouseReleaseEvent( QMouseEvent * event ) override;
+	virtual void				mouseMoveEvent( QMouseEvent * event ) override;
+    virtual void				paintEvent( QPaintEvent* ev ) override;
     void                        drawBorder( VxAppTheme& appTheme, QPainter& painter );
 
 	//=== vars ===//
 	AppCommon&					m_MyApp;
 	QColor						m_DefaultIconColor;
-	bool						m_IconColorWasSet;
-	bool						m_DrawButtonBorder;
-	bool						m_UseTheme;
-	bool						m_NotifyEnabled;
+    bool						m_IconColorWasSet{ false };
+	bool						m_DrawButtonBorder{ false };
+	bool						m_UseTheme{ true };
+	bool						m_NotifyEnabled{ false };
 
 	EMyIcons					m_MyIcon;
     EMyIcons					m_MyIconLast;
@@ -116,10 +116,10 @@ protected:
 	QColor						m_OverlayLastIconColor;
 	QSize						m_OverlayLastIconSize;
 
-	bool						m_ToggleStateOn;
-	bool						m_IsToggleButton;
-	bool						m_IsSlideLeftButton;
-	bool						m_InSlideLeftMode;
+	bool						m_ToggleStateOn{ false };
+	bool						m_IsToggleButton{ false };
+	bool						m_IsSlideLeftButton{ false };
+	bool						m_InSlideLeftMode{ false };
 	ESndDef						m_ESndDefPressed;
 	QPoint						m_MousePressedPoint;
 	QPoint						m_ButtonPressedPos;

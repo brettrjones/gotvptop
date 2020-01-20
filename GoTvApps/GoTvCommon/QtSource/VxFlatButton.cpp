@@ -33,11 +33,6 @@ VxFlatButton::VxFlatButton( QWidget *parent )
 }
 
 //============================================================================
-VxFlatButton::~VxFlatButton()
-{
-}
-
-//============================================================================
 MyIcons&  VxFlatButton::getMyIcons( void )
 {
 	return m_MyApp.getMyIcons();

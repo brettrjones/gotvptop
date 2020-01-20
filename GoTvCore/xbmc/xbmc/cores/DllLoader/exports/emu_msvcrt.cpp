@@ -146,11 +146,15 @@ extern "C" void __stdcall init_emu_environ()
     // android has all in same directory
 //    std::string pythonPath( "PYTHONPATH=" +
 //                            CSpecialProtocol::TranslatePath( "special://xbmc/system/python" )  );
-    std::string pythonPath( "PYTHONPATH=" +
-                            VxGetAppDirectory( eAppDirExePythonDlls )  );
+    LogMsg( LOG_DEBUG, "python path 1 (%s)", VxGetAppDirectory( eAppDirExePythonDlls ).c_str() );
+    std::string pythonPath( "PYTHONPATH=" + VxGetAppDirectory( eAppDirExePythonDlls ) );
+    LogMsg( LOG_DEBUG, "python path 2 (%s)", pythonPath.c_str() );
     std::string pythonHome = getenv("KODI_ANDROID_APK");
-      pythonHome += "/assets/kodi/python2.7";
-      dll_putenv( std::string( "PYTHONHOME=" + pythonHome ).c_str() );
+    LogMsg( LOG_DEBUG, "KODI_ANDROID_APK (%s)", pythonHome.c_str() );
+
+    pythonHome += "/assets/kodi/python2.7";
+    pythonHome = "PYTHONHOME=" + pythonHome ;
+    LogMsg( LOG_DEBUG, "PYTHONHOME (%s)", pythonHome.c_str() );
 #else
     std::string pythonPath( "PYTHONPATH=" +
                             CSpecialProtocol::TranslatePath( "special://xbmc/system/python/DLLs" ) + ";" +

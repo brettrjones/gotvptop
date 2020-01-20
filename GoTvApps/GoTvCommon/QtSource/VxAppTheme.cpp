@@ -62,7 +62,9 @@ void VxAppTheme::applyTheme( QWidget * widget )
 {
     if( widget )
     {
-        widget->setPalette( m_BasePalette );
+        // make a copy so original is not disturbed
+        QPalette widPalette( m_BasePalette );
+        widget->setPalette( widPalette );
     }
 }
 
@@ -745,6 +747,9 @@ void VxAppTheme::updateWindowTheme( void )
     palette.setColor( QPalette::BrightText, isBlackOnWhite() ? buttonTextColor.darker() : buttonTextColor.lighter() );        // BrightText
     palette.setColor( QPalette::WindowText, windowTextColor );                  // WindowText
     palette.setColor( QPalette::Text, windowTextColor );                        // Text and foreground
+    //palette.setColor( QPalette::WindowText, COLOR_RED );                  // WindowText
+    //palette.setColor( QPalette::Text, COLOR_RED );                        // Text and foreground
+
     palette.setColor( QPalette::Window, windowBkgColor );                       // Window and background
 
     //palette.setColor( QPalette::Shadow, QColor( COLOR_GREEN ) );                // shadow
@@ -860,7 +865,7 @@ void VxAppTheme::updateWindowTheme( void )
     */
 
     m_BasePalette = palette;
-    m_MyApp.getHomePage().setPalette( m_BasePalette );
+    m_MyApp.getHomePage().setPalette( palette );
 }
 
 //============================================================================
@@ -876,9 +881,7 @@ void VxAppTheme::selectTheme( EThemeType eThemeType )
 		m_ThemeColors.push_back( QColor( COLOR_ORANGE ) ); //eFocusRect,
 		m_ThemeColors.push_back( QColor( COLOR_BLACK ) ); //eWindowBackground,
 		m_ThemeColors.push_back( QColor( COLOR_GREY_VERY_LIGHT ) ); //eWindowTextColor,
-
 		m_ThemeColors.push_back( QColor( COLOR_WHITE_CREAM ) ); //eWindowHighlightTextColor,
-
 		m_ThemeColors.push_back( QColor( COLOR_GREY_MEDIUM ) ); //eTitleBarBackground,
 		m_ThemeColors.push_back( QColor( COLOR_WHITE_CREAM ) ); //eTitleBarTextText,
 

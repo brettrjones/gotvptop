@@ -336,7 +336,7 @@ void CSpecialProtocol::SetPath( const std::string &key, const std::string &path 
 
 std::string CSpecialProtocol::GetPath( const std::string &key )
 {
-    std::map<std::string, std::string>::iterator it = m_pathMap.find( key );
+        std::map<std::string, std::string>::iterator it = m_pathMap.find( key );
     if( it != m_pathMap.end() )
         return it->second;
     LogMsg( LOG_FATAL, "FATAL: missing path for %s", key.c_str() );

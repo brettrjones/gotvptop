@@ -38,7 +38,7 @@ void GuiParams::initGuiParams()
     if( screen )
     {
         float dpi = screen->physicalDotsPerInch();
-        QRect  screenGeometry = screen->geometry();
+        QRect  screenGeometry = screen->availableGeometry();
         float iconSizeInches = ( 48.0f / dpi );
         float maxPixels = screenGeometry.width() > screenGeometry.height() ? screenGeometry.width() : screenGeometry.height();
         float screenSizeInches = maxPixels / dpi;
@@ -56,9 +56,8 @@ void GuiParams::initGuiParams()
             m_DisplayScale = 2;
         }
 
-        LogMsg( LOG_VERBOSE, "Screen dpi %3.0f pixels %3.0f size 0x%3.0f icon size 0x%3f scale %d",
+        LogMsg( LOG_VERBOSE, "Screen dpi %3.0f pixels %3.0f screen size %3.0f icon size 0x%3f scale %d",
                 dpi, maxPixels, screenSizeInches, iconSizeInches, m_DisplayScale );
-
     }
 }
 

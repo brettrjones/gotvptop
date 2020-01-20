@@ -350,7 +350,7 @@ bool OsInterface::initUserPaths()
     std::string pythonPath = kodiCachedAssetsPath + "/python2.7/lib/python2.7";
 
 #ifdef DEBUG
-    LogMsg( LOG_DEBUG, "storage (%s) resource (%s) sys (%s) native (%s) ", storageDir.c_str(), apkResourceDir.c_str(), systemLibsDir.c_str(), nativeLibsDir.c_str() );
+    LogMsg( LOG_DEBUG, " storage (%s)\n resource (%s)\n sys (%s)\n native (%s) ", storageDir.c_str(), apkResourceDir.c_str(), systemLibsDir.c_str(), nativeLibsDir.c_str() );
 #endif // DEBUG
 
     // copy profile files for gotv
@@ -386,6 +386,9 @@ bool OsInterface::initUserPaths()
     // asset manager will not copy native libs
     //setenv( "KODI_ANDROID_LIBS", cachedLibsPath.c_str(), 0 );
     //CopyIfRequiredApkDirectory( nativeLibsDir, cachedLibsPath );
+
+    // TODO: find out why nativeLibsDir looks like
+    // /data/app/com.nolimitconnect.nolimitconnect-oO3ZXHSRDp2lPf3GpOMXrA==/lib/arm
     setenv( "KODI_ANDROID_LIBS", nativeLibsDir.c_str(), 0 );
     setenv( "KODI_ANDROID_SYSTEM_LIBS", systemLibsDir.c_str(), 0);
     setenv( "KODI_ANDROID_APK", apkResourceDir.c_str(), 0);
@@ -444,6 +447,15 @@ bool OsInterface::initUserPaths()
 
     std::string pythonResPath = pythonPath;
     VxFileUtil::makeForwardSlashPath(pythonResPath);
+
+    // do before adding the trailing slash
+    //static std::string pythonSpecial =  "special://xbmc/system/python";
+    static std::string pythonDlls =  "special://xbmc/system/python/DLLs";
+    static std::string pythonLib =  "special://xbmc/system/python/Lib";
+    // in android python dlls and lib are same path
+    CSpecialProtocol::SetPath( pythonDlls, pythonResPath );
+    CSpecialProtocol::SetPath( pythonLib, pythonResPath );
+
     VxFileUtil::assureTrailingDirectorySlash(pythonResPath);
     VxSetPythonDllDirectory( pythonResPath.c_str() );
     VxSetPythonLibDirectory( pythonResPath.c_str() );
@@ -475,7 +487,6 @@ bool OsInterface::initUserPaths()
     std::string cacert = CEnvironment::getenv( "SSL_CERT_FILE" );
     if( cacert.empty() || !VxFileUtil::fileExists(( cacert.c_str()) ) )
     {
-
         // android assumes the cert file has been cached.. force update of cached file
         std::string cacertFile = CSpecialProtocol::TranslatePath( "special://xbmc/system/certs/cacert.pem" );
         if( !VxFileUtil::fileExists( cacertFile.c_str() ) )
@@ -684,7 +695,6 @@ bool OsInterface::initUserPaths()
 #endif // DEBUG
 	return true;
 }
-
 
 //============================================================================
 
