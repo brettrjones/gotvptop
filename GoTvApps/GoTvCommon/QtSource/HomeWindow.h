@@ -64,6 +64,7 @@ protected:
 	void						initializeGoTvDynamicLayout( void );
 	void						createAppletLaunchPage( void );
 	void						createMessengerPage( void );
+    void                        updateAndroidGeomety();
 
 	//=== vars ===//
 	Ui::HomeWindowClass			ui;

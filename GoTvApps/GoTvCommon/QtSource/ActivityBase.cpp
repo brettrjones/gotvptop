@@ -455,6 +455,11 @@ void ActivityBase::showEvent( QShowEvent * showEvent )
 	}
 
 	QDialog::showEvent( showEvent );
+#if defined(TARGET_OS_ANDROID)
+    // not sure why but android seems to loose the theme text color so reapply
+    m_MyApp.getAppTheme().applyTheme( this );
+#endif // defined(TARGET_OS_ANDROID)
+
     if( !m_InitialFocusWasSet )
     {
         m_InitialFocusWasSet = true;
@@ -465,6 +470,12 @@ void ActivityBase::showEvent( QShowEvent * showEvent )
     }
 
 	emit signalDialogWasShown();
+#if defined(TARGET_OS_ANDROID)
+    // not sure why but android seems to loose the theme text color so reapply
+    m_MyApp.getAppTheme().applyTheme( this );
+    m_MyApp.getAppTheme().selectTheme( m_MyApp.getAppSettings().getLastSelectedTheme() );
+#endif // defined(TARGET_OS_ANDROID)
+
 }
 
 //============================================================================

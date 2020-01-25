@@ -99,7 +99,12 @@ bool RenderGlWidget::resetRenderSystem( int width, int height )
 
     glMatrixProject.Clear();
     glMatrixProject->LoadIdentity();
+#if defined(TARGET_OS_ANDROID)
+    // android needs flipped veritical
+    glMatrixProject->Ortho( 0.0f, width - 1, 0.0f, height - 1, -1.0f, 1.0f );
+#else
     glMatrixProject->Ortho( 0.0f, width - 1, height - 1, 0.0f, -1.0f, 1.0f );
+#endif // defined(TARGET_OS_ANDROID)
     glMatrixProject.Load();
 
     glMatrixModview.Clear();

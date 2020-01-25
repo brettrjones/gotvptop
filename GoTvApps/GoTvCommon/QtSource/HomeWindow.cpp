@@ -8,6 +8,7 @@
 #include "AppletLaunchPage.h"
 #include "MessengerPage.h"
 #include "GuiParams.h"
+#include "GuiHelpers.h"
 
 #include "VxFrame.h"
 
@@ -85,14 +86,16 @@ void HomeWindow::reject()
 }
 
 //============================================================================
-void HomeWindow::resizeEvent( QResizeEvent * )
+void HomeWindow::resizeEvent( QResizeEvent * ev)
 {
+    LogMsg( LOG_ERROR, "HomeWindow::resizeEvent w %d h %d", ev->size().width(), ev->size().height()  );
 	emit signalMainWindowResized();
 }
 
 //============================================================================
 void HomeWindow::moveEvent( QMoveEvent * )
 {
+    LogMsg( LOG_ERROR, "HomeWindow::moveEvent" );
     emit signalMainWindowMoved();
 }
 
@@ -100,9 +103,13 @@ void HomeWindow::moveEvent( QMoveEvent * )
 void HomeWindow::showEvent( QShowEvent * ev )
 {
     QDialog::showEvent( ev );
-    m_MyApp.startupAppCommon( getAppletFrame( eAppletHomePage ), getAppletFrame( eAppletMessenger ) );
-
-    m_MyApp.getAppTheme().selectTheme( m_MyApp.getAppSettings().getLastSelectedTheme() );
+static bool firstShow = true;
+    if( firstShow )
+    {
+        firstShow = false;
+        m_MyApp.startupAppCommon( getAppletFrame( eAppletHomePage ), getAppletFrame( eAppletMessenger ) );
+        m_MyApp.getAppTheme().selectTheme( m_MyApp.getAppSettings().getLastSelectedTheme() );
+    }
 }
 
 //============================================================================
@@ -122,13 +129,7 @@ void HomeWindow::initializeHomePage()
         restoreGeometry(restoreGeom);
     }
 #else
-    QScreen *screen = QGuiApplication::primaryScreen();
-    QRect  screenGeometry = screen->availableGeometry();
-    int height = screenGeometry.height();
-    int width = screenGeometry.width() - 10;
-    resize(width, height);
-    move( screenGeometry.left() + 5, screenGeometry.top() );
-    LogMsg( LOG_DEBUG, "Home Screen Size %d %d", width, height);
+    updateAndroidGeomety();
 
 #endif // !defined(TARGET_OS_ANDROID)
 
@@ -267,9 +268,11 @@ void HomeWindow::slotDeviceOrientationChanged( int qtOrientation )
     m_Orientation = (Qt::Orientation)qtOrientation;
 	if( 0 == m_MessengerPage )
 	{
-		LogMsg( LOG_ERROR, "m_MessengerPage is null\n" );
+        LogMsg( LOG_ERROR, "m_MessengerPage is null" );
 		return;
 	}
+
+    LogMsg( LOG_ERROR, "HomeWindow::slotDeviceOrientationChanged %s", GuiHelpers::describeOrientation(m_Orientation).toUtf8().constData() );
 
     getMessengerParentFrame()->setVisible( false );
 	if( Qt::Vertical == m_Orientation )
@@ -287,8 +290,22 @@ void HomeWindow::slotDeviceOrientationChanged( int qtOrientation )
         getMessengerParentFrame()->setVisible( true );
     }
 
+    updateAndroidGeomety();
+
     emit signalDeviceOrientationChanged( m_Orientation );
 	emit signalMainWindowResized( );
+}
+
+//============================================================================
+void HomeWindow::updateAndroidGeomety()
+{
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect  screenGeometry = screen->availableGeometry();
+    int height = screenGeometry.height() - 20;
+    int width = screenGeometry.width() - 20;
+    resize(width, height);
+    move( screenGeometry.left() + 10, screenGeometry.top() + 10 );
+    LogMsg( LOG_DEBUG, "Home Screen Size %d %d", width, height);
 }
 
 //============================================================================

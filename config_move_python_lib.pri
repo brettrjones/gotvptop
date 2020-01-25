@@ -62,7 +62,7 @@ android{
 
     contains(QMAKE_HOST.os,Windows){
         #this actually works on Windows.. TODO: find a way to commonize copy or move commands
-        #because we cannot define DESTDIR due to Qt bug we copy twice.. once to build directory and once to dest dir
+        #because we cannot define DESTDIR.  Due to Qt bug we copy twice.. once to build directory and once to dest dir
         SRCDIR_WIN = $${OUT_PWD}/$${PYTHON_SRC_NAME}
         SRCDIR_WIN ~= s,/,\\,g
         DESTDIR_WIN1 = $${DEST_PYTHON_DLL_DIR}$${PYTHON_DEST_NAME}

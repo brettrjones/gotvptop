@@ -28,7 +28,6 @@ public:
 
     bool						isVerticalOrientation( void )                   { return ( m_Orientation == Qt::Orientation::Vertical ); }
 
-    Qt::Orientation             getNativeOrientation( void );
     Qt::Orientation             getCurrentOrientation( void );
     Qt::Orientation             forceOrientationUpdate( void );
 
@@ -43,10 +42,6 @@ protected:
 
     AppCommon &					m_MyApp;
     bool                        m_Initialized{ false };
-    float                       m_StdDisplayWidth{ 1920.0f };
-    float                       m_StdDisplayHeight{ 1080.0f };
-    float                       m_DisplayWidthScale{ 1.0f };
-    float                       m_DisplayHeightScale{ 1.0f };
     QTimer *                    m_OrientationCheckTimer{ nullptr };
     Qt::Orientation				m_Orientation{ Qt::Orientation::Horizontal };
     Qt::Orientation				m_LastOrientation{ Qt::Orientation::Horizontal };

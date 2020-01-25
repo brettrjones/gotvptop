@@ -413,6 +413,19 @@ QString GuiHelpers::describeFileLength( uint64_t fileLen )
 }
 
 //============================================================================
+QString GuiHelpers::describeOrientation( Qt::Orientation qtOrientation )
+{
+    switch( qtOrientation )
+    {
+    case Qt::Horizontal:
+        return QObject::tr("Horizontal");
+    case Qt::Vertical:
+    default:
+        return QObject::tr("Vertical");
+    }
+}
+
+//============================================================================
 bool GuiHelpers::isAppletAService( EApplet applet )
 {
     return ( ( eAppletServiceAboutMe == applet )

@@ -32,8 +32,8 @@ public:
 	VxPushButton(const QString &text, QWidget *parent=0);
 	virtual ~VxPushButton();
 
-	virtual int					heightForWidth( int width ) const;
-	virtual QSize				sizeHint() const;
+    virtual int					heightForWidth( int width ) const override;
+    virtual QSize				sizeHint() const override;
     virtual QSize				getMinimumSizeHint( void ) { return sizeHint(); }
     virtual void				setFixedSize( const QSize & fixedSize );
     virtual void				setFixedSize( int width, int height );

@@ -66,6 +66,7 @@ public:
 	static QString				describeEXferState( EXferState xferState );
 	static QString				describeEXferError( EXferError xferError );
 	static QString				describeFileLength( uint64_t fileLen );
+    static QString				describeOrientation( Qt::Orientation qtOrientation );
 
     /// @brief get home or messenger topmost widget
     static QWidget *            getParentPageFrame( QWidget * curWidget );

@@ -45,20 +45,6 @@ void VxAppDisplay::initializeAppDisplay( void )
             {
                 m_Orientation = Qt::Horizontal;
             }
-
-            QSize screenSize = dispScreen->availableSize();
-            if( screenSize.width() > screenSize.height() )
-            {
-                m_DisplayWidthScale =  ( float ) screenSize.width() / m_StdDisplayWidth;
-                m_DisplayHeightScale = ( float ) screenSize.height() / m_StdDisplayHeight;
-            }
-            else
-            {
-                m_DisplayWidthScale = ( float ) screenSize.height() / m_StdDisplayWidth;
-                m_DisplayHeightScale = ( float ) screenSize.width() / m_StdDisplayHeight;
-            }
-
-            LogMsg( LOG_DEBUG, "Display scale x=%3.1f y==%3.1f ", m_DisplayWidthScale, m_DisplayWidthScale);
         }
 
         connect( m_OrientationCheckTimer, SIGNAL(timeout()), this, SLOT(slotCheckOrientationTimer()) );
@@ -80,27 +66,11 @@ void VxAppDisplay::slotCheckOrientationTimer( void )
 }
 
 //============================================================================
-Qt::Orientation VxAppDisplay::getNativeOrientation( void )
-{
-    initializeAppDisplay();
-    QScreen * dispScreen = m_MyApp.getQApplication().primaryScreen();
-    Qt::ScreenOrientation screenOrientation = dispScreen->orientation();
-    if( dispScreen->isPortrait( screenOrientation ) )
-    {
-        return Qt::Vertical;
-    }
-    else
-    {
-        return Qt::Horizontal;
-    }
-}
-
-//============================================================================
 Qt::Orientation VxAppDisplay::getCurrentOrientation( void )
 {
     initializeAppDisplay();
     QScreen * dispScreen = m_MyApp.getQApplication().primaryScreen();
-    if( dispScreen->isPortrait( dispScreen->orientation() ) )
+    if( dispScreen && dispScreen->isPortrait( dispScreen->orientation() ) )
     {
         return Qt::Vertical;
     }
@@ -113,6 +83,16 @@ Qt::Orientation VxAppDisplay::getCurrentOrientation( void )
 //============================================================================
 Qt::Orientation VxAppDisplay::forceOrientationUpdate( void ) 
 { 
+    QScreen *screen = QGuiApplication::primaryScreen();
+    if( screen && screen->isPortrait( screen->orientation() ) )
+    {
+        m_Orientation = Qt::Vertical;
+    }
+    else
+    {
+        m_Orientation = Qt::Horizontal;
+    }
+
     emit signalDeviceOrientationChanged( ( int )m_Orientation ); 
     return m_Orientation; 
 }
