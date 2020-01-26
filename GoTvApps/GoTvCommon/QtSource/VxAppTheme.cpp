@@ -333,7 +333,6 @@ void VxAppTheme::drawBitmapOnWidget( QPainter& painter, QPixmap& widgetPixmap, Q
 //============================================================================
 void VxAppTheme::setHighlightColor( QWidget* widget, const QColor highlightColor )
 {
-
     QPalette palette;
 	QBrush brush;
 
@@ -863,7 +862,12 @@ void VxAppTheme::updateWindowTheme( void )
         palette.setBrush( QPalette::Inactive,       QPalette::HighlightedText, highlightTextBrush );
         palette.setBrush( QPalette::Disabled,       QPalette::HighlightedText, disabledTextBrush );
     */
+	// for test only
+    // QColor fgdColor( 128, 0, 0, 255 );
+    // QColor bgdColor( 0, 0, 128, 255 );
+    // setEveryColorPossible( palette, fgdColor, bgdColor );
 
+	// save standard pallette
     m_BasePalette = palette;
     m_MyApp.getHomePage().setPalette( palette );
 }

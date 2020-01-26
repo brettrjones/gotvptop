@@ -254,6 +254,16 @@ void VxAppStyle::drawControl(   ControlElement			element,
                                 const QWidget*			widget ) const
 {
     painter->save();
+#if defined(TARGET_OS_ANDROID)
+    // for some reason android keeps reseting the text color when moving to new dialog
+    // so keep setting the pallete
+    QWidget* modWidget = const_cast<QWidget*>( widget );
+    if( modWidget )
+    {
+        modWidget->setPalette( m_AppTheme.getBasePalette() );
+    }
+#endif // defined(TARGET_OS_ANDROID)
+
     if( element == CE_ScrollBarSubLine || element == CE_ScrollBarAddLine )
     {
         if( ( option->state & State_Sunken ) )
