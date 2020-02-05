@@ -102,8 +102,8 @@ public:
     virtual void				setPluginPermission( EPluginType ePluginType, int iPluginPermission );
     virtual int					getPluginPermission( int iPluginType );
 
-	PluginServiceRelay&			getPluginServiceRelay( void )							{ return * m_PluginServiceRelay; }
-	PluginServiceFileShare&		getPluginServiceFileShare( void )						{ return * m_PluginServiceFileShare; }
+	PluginServiceRelay&			getPluginServiceRelay( void )					{ return * m_PluginServiceRelay; }
+	PluginServiceFileShare&		getPluginServiceFileShare( void )				{ return * m_PluginServiceFileShare; }
 	PluginNetServices&			getPluginNetServices( void )					{ return * m_PluginNetServices; }
 
 	virtual void				setHasPicture( int bHasPicture );

@@ -44,14 +44,12 @@ namespace
             VxServerMgr * poMgr = (VxServerMgr *)poVxThread->getThreadUserParam();
             if( poMgr )
             {
-                if( IsLogEnabled( eLogModuleSkt ) )
-                    LogMsg( LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread started\n", poMgr->m_iMgrId, poMgr->getListenPort() );
+                LogModule( eLogModuleListen, LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread started\n", poMgr->m_iMgrId, poMgr->getListenPort() );
 
                 poMgr->listenForConnectionsToAccept( poVxThread );
 
                 // quitting
-                if( IsLogEnabled( eLogModuleSkt ) )
-                    LogMsg( LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread tid %d quiting\n", poMgr->m_iMgrId, poMgr->getListenPort(), poVxThread->getThreadTid() );
+                LogModule( eLogModuleListen, LOG_INFO, "#### VxServerMgr: Mgr id %d Listen port %d thread tid %d quiting\n", poMgr->m_iMgrId, poMgr->getListenPort(), poVxThread->getThreadTid() );
             }
 
             //! VxThread calls this just before exit
@@ -150,7 +148,7 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 	std::string ipv4String = ip;
 	m_u16ListenPort = u16ListenPort;
 
-    LogModule( eLogModuleSkt, LOG_INFO, "### NOT IN THREAD VxServerMgr::startListening ip %s port %d app sec %d\n", ip, u16ListenPort, GetApplicationAliveSec() );
+    LogModule( eLogModuleListen, LOG_INFO, "### NOT IN THREAD VxServerMgr::startListening ip %s port %d app sec %d\n", ip, u16ListenPort, GetApplicationAliveSec() );
 
 #ifdef TARGET_OS_ANDROID
 	// can't get ip's in native android... for now just do ipv4 TODO listen for ipv6 in android
@@ -159,7 +157,7 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 	if( sock < 0 )
 	{
 		RCODE rc = VxGetLastError();
-        LogModule( eLogModuleSkt, LOG_ERROR, "VxServerMgr::startListening create skt error %d\n", rc );
+        LogMsg( LOG_ERROR, "VxServerMgr::startListening create skt error %d\n", rc );
 
         if( 0 == rc )
         {
@@ -172,7 +170,7 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 	// don't know why reuse port doesn't work
 	VxSetSktAllowReusePort( sock );
 
-    LogModule( eLogModuleSkt, LOG_INFO, "StartListen binding ip %s port %d \n", ip, u16ListenPort );
+    LogModule( eLogModuleListen, LOG_INFO, "StartListen binding ip %s port %d \n", ip, u16ListenPort );
 
 	struct sockaddr_in listenAddr;
     memset(&listenAddr, 0, sizeof( struct sockaddr_in ) );
@@ -201,8 +199,7 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 		return false;
 	}
 
-    if( IsLogEnabled( eLogModuleSkt ) )
-        LogMsg( LOG_INFO, "StartListen socket %d index %d ip %s port %d \n", sock, m_iActiveListenSktCnt, ip, u16ListenPort );
+    LogModule( eLogModuleListen, LOG_INFO, "StartListen socket %d index %d ip %s port %d \n", sock, m_iActiveListenSktCnt, ip, u16ListenPort );
 
 	m_aoListenSkts[ m_iActiveListenSktCnt ] = sock;
 	m_iActiveListenSktCnt++;
@@ -237,12 +234,10 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 				//LogMsg( LOG_INFO, "VxServerMgr::startListening Skip ip %s\n", thisIp.c_str() );
 				continue;
 			}
-#ifdef DEBUG_VXSERVER_MGR
 			else
 			{
-				LogMsg( LOG_INFO, "VxServerMgr::startListening found local ip4 %s\n", thisIp.c_str() );
+                LogModule( eLogModuleListen, LOG_INFO, "VxServerMgr::startListening found local ip4 %s\n", thisIp.c_str() );
 			}
-#endif // DEBUG_VXSERVER_MGR
 		}
 		else
 		{
@@ -252,7 +247,7 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 				continue;
 			}
 
-			LogMsg( LOG_INFO, "VxServerMgr::startListening found global ipv6 %s\n", thisIp.c_str() );
+            LogModule( eLogModuleListen, LOG_INFO, "VxServerMgr::startListening found global ipv6 %s\n", thisIp.c_str() );
 #else
 			continue;
 #endif //  SUPPORT_IPV6
@@ -280,7 +275,7 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 				if (bind (sock, (struct sockaddr *) &oAddr, sizeof (oAddr)) < 0)
 				{
 					RCODE rc = VxGetLastError();
-					LogMsg( LOG_INFO, "VxServerMgr::startListening bind skt error %d %s try %d\n", rc, VxDescribeSktError( rc ), i+1 );
+                    LogModule( eLogModuleListen, LOG_INFO, "VxServerMgr::startListening bind skt error %d %s try %d\n", rc, VxDescribeSktError( rc ), i+1 );
 					VxSleep( 1000 );
 					continue;
 				}
@@ -300,14 +295,14 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 	
 			if( SOCKET_ERROR == listen( sock, 10 ) ) // SOMAXCONN) ) ( SOMAXCONN == maximum number of qued allowed
 			{
-				LogMsg( LOG_ERROR, "ipv4 listen() failed with error %d: %s\n", VxGetLastError(), VxDescribeSktError( VxGetLastError() ) );
+                LogModule( eLogModuleListen, LOG_ERROR, "ipv4 listen() failed with error %d: %s\n", VxGetLastError(), VxDescribeSktError( VxGetLastError() ) );
 				// fail completely
 				::VxCloseSktNow( sock );
 				continue;
 			}
             else
             {
-                LogModule( eLogModuleSkt, LOG_DEBUG, "ipv4 listen() success lcl ip %s port %d\n", thisIp.c_str(), u16ListenPort );
+                LogModule( eLogModuleListen, LOG_DEBUG, "ipv4 listen() success lcl ip %s port %d\n", thisIp.c_str(), u16ListenPort );
             }
 
 			m_LclIp.setIp( thisIp.c_str() );
@@ -359,7 +354,7 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 			m_aoListenSkts[ m_iActiveListenSktCnt ] = sock;
 			m_iActiveListenSktCnt++;
 
-			LogMsg( LOG_INFO, "VxServerMgr::startListening success ipv6 %s\n", thisIp.c_str() ); 
+            LogModule( eLogModuleListen, LOG_INFO, "VxServerMgr::startListening success ipv6 %s\n", thisIp.c_str() );
 			break;
 		}
 	}
@@ -502,7 +497,7 @@ bool VxServerMgr::startListening(  uint16_t u16ListenPort )
             continue;
         }
 
-		LogMsg( LOG_INFO, "'Listening' on port %s, protocol %s, protocol family %s\n",
+        LogModule( eLogModuleListen, LOG_INFO, "'Listening' on port %s, protocol %s, protocol family %s\n",
 			as8Port, 
 			"TCP",
 			(AI->ai_family == PF_INET) ? "PF_INET" : "PF_INET6");
@@ -524,7 +519,7 @@ bool VxServerMgr::startListening(  uint16_t u16ListenPort )
 RCODE VxServerMgr::stopListening( void )
 {
 	m_IsReadyToAcceptConnections = false;
-	LogModule( eLogModuleConnect, LOG_DEBUG, "### VxServerMgr: Mgr %d stop listening %d skt cnt %d\n", m_iMgrId, m_u16ListenPort, m_iActiveListenSktCnt );
+    LogModule( eLogModuleListen, LOG_DEBUG, "### VxServerMgr: Mgr %d stop listening %d skt cnt %d\n", m_iMgrId, m_u16ListenPort, m_iActiveListenSktCnt );
     m_u16ListenPort = 0;
 
 	// kill previous thread if running
@@ -532,14 +527,14 @@ RCODE VxServerMgr::stopListening( void )
 
 	if( 0 == m_iActiveListenSktCnt )
 	{
-		LogModule( eLogModuleSkt, LOG_ERROR, "VxServerMgr:stopListening called with no listen sockets\n" );
+		LogMsg( LOG_ERROR, "VxServerMgr:stopListening called with no listen sockets\n" );
 	}
 
 	for( int i = 0; i < m_iActiveListenSktCnt; i++ )
 	{
 		if( INVALID_SOCKET != m_aoListenSkts[ i ] )
 		{
-            LogModule( eLogModuleSkt, LOG_INFO, "VxServerMgr: Mgr %d closing listen skt %d\n", m_iMgrId, i );
+            LogModule( eLogModuleListen, LOG_INFO, "VxServerMgr: Mgr %d closing listen skt %d\n", m_iMgrId, i );
 
 			// closing the thread should release it so it can exit
 			SOCKET sktToClose = m_aoListenSkts[ i ];
@@ -570,6 +565,8 @@ RCODE VxServerMgr::acceptConnection( VxThread * poVxThread, SOCKET oListenSkt )
 	{
 		return -3;
 	}
+
+    LogModule( eLogModuleListen, LOG_INFO, "VxServerMgr: start acceptConnection skt %d\n", oListenSkt );
 
 	// perform accept
 	// setup address
@@ -605,7 +602,7 @@ RCODE VxServerMgr::acceptConnection( VxThread * poVxThread, SOCKET oListenSkt )
 		}
     }
 
-    LogModule( eLogModuleConnect, LOG_DEBUG, "VxServerMgr::acceptConnection: listen skt %d accepted skt %d\n", oListenSkt, oAcceptSkt );
+    LogModule( eLogModuleListen, LOG_DEBUG, "VxServerMgr::acceptConnection: listen skt %d accepted skt %d\n", oListenSkt, oAcceptSkt );
 	if( poVxThread->isAborted() || VxIsAppShuttingDown() ) 
 	{
 		return -1;
@@ -634,7 +631,7 @@ RCODE VxServerMgr::acceptConnection( VxThread * poVxThread, SOCKET oListenSkt )
 	sktBase->setTransmitCallback( m_pfnOurTransmit, this );
 	m_SktMgrMutex.unlock(__FILE__, __LINE__);
 
-    LogModule( eLogModuleConnect, LOG_INFO, "VxServerMgr: doing accept\n" );
+    LogModule( eLogModuleListen, LOG_INFO, "VxServerMgr: doing accept\n" );
 
 	RCODE rcAccept = sktBase->doAccept( this, *(( struct sockaddr * )&oAcceptAddr) );
 	if( rcAccept || poVxThread->isAborted() || INVALID_SOCKET == oListenSkt )
@@ -649,6 +646,10 @@ RCODE VxServerMgr::acceptConnection( VxThread * poVxThread, SOCKET oListenSkt )
 		delete sktBase;
         rc = -5;
 	}
+    else
+    {
+        LogModule( eLogModuleListen, LOG_INFO, "VxServerMgr: accept success\n" );
+    }
 
 	return rc;
 }

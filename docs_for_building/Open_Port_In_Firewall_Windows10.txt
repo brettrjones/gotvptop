@@ -18,4 +18,58 @@ and these steps will not be required
 13.) In Advanced Tab change Edge Transverse to Allow edge transversal
 14.) Apply and close out of dialogs
 
+UPDATE: It seems that the above instructions did not work in all cases so here is a setup
+that seems to always work (May have to restart computer after setup)
+1.) follow steps 1 through 5 above to get to inbound rules
+NOTE: for the following PATH_TO_APP means full path to application
+	ie something like F:\nolimitconnect\bin-Windows\NoLimitConnect.exe
+2.) Create the following Inbound rule
+	General
+		Name: NoLimitConnect (TCP-In-No Edge)
+		Enabled: checked
+		Action: Allow the Connection
+	
+	Programs and Services
+		This Program: PATH_TO_APP
+		Compartments: All compartments
+		
+	Protocols and Ports
+		Protocol Type: TCP
+		Local port: All Ports
+		Remote port: All Ports
+	
+	Advanced
+		Domain: checked
+		Private: checked
+		Public: checked
+		Edge transversal: Block edge transversal
+		
+3.) Create another inbound rule same as above except
+	General	
+		Name: NoLimitConnect (TCP-In-Yes Edge)
+		
+	Advanced
+		Edge transversal: Allow edge transversal
+		
+4.) Create Outbound Rule
+	General
+		Name: NoLimitConnect (TCP-Out)
+		Enabled: checked
+		Action: Allow the Connection
+	
+	Programs and Services
+		This Program: PATH_TO_APP
+		Compartments: All compartments
+		
+	Protocols and Ports
+		Protocol Type: TCP
+		Local port: All Ports
+		Remote port: All Ports
+	
+	Advanced
+		Domain: checked
+		Private: checked
+		Public: checked
+5.) Click Ok and exit Windows Defender Firewall
+	May have to restart device for settings to take effect
 

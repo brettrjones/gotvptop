@@ -579,7 +579,7 @@ void ActivityBase::repositionToParent( void )
         else if( m_IsDialog )
         {
             QRect parentRect( m_ParentWidget->mapToGlobal( QPoint( 0, 0 ) ), m_ParentWidget->size() );
-            LogMsg( LOG_DEBUG, "Dialog %s size %d %d", getObjName(), parentRect.width(), parentRect.height() );
+            // LogMsg( LOG_DEBUG, "Dialog %s size %d %d", getObjName(), parentRect.width(), parentRect.height() );
             setGeometry( parentRect );
         }
         else
@@ -592,7 +592,7 @@ void ActivityBase::repositionToParent( void )
             //LogMsg( LOG_DEBUG, "Reposition to x=%d y=%d w=%d h=%d %s parent %s\n",
             //    parentRect.left(), parentRect.top(), parentRect.width(), parentRect.height(), getObjName(), m_ParentWidget->objectName().toUtf8().constData() );
             setGeometry( parentRect );
-            LogMsg( LOG_DEBUG, "Normal %s size %d %d", getObjName(), parentRect.width(), parentRect.height() );
+            // LogMsg( LOG_DEBUG, "Normal %s size %d %d", getObjName(), parentRect.width(), parentRect.height() );
         }
 	}
     else

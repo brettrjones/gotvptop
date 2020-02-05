@@ -13,6 +13,7 @@ class AppletLaunchPage;
 class PageMediaPlayer;
 class MessengerPage;
 class VxFrame;
+class AppletBase;
 
 class QDialogButtonBox;
 class QGroupBox;
@@ -30,6 +31,8 @@ public:
 	MyIcons&					getMyIcons( void );
 
 	void						initializeHomePage( void );
+    void                        restoreHomeWindowGeometry( void );
+    void                        saveHomeWindowGeometry( void );
 
 	void						launchApplet( EApplet applet );
 	void						switchWindowFocus( QWidget * goTvButton );
@@ -65,6 +68,7 @@ protected:
 	void						createAppletLaunchPage( void );
 	void						createMessengerPage( void );
     void                        updateAndroidGeomety();
+    AppletBase *                findActiveApplet( void );
 
 	//=== vars ===//
 	Ui::HomeWindowClass			ui;

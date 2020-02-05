@@ -194,7 +194,7 @@ bool HostTest::doConnectionTest( std::string& nodeUrl, bool isHost )
 	if( false == m_NetServicesMgr.sendAndRecievePing( testTimer, sktSimple, retPong, 5000 ) )
 	{
 		sendTestStatus( isHost ? eHostTestStatusHostConnectionDropped : eHostTestStatusNetServiceConnectionDropped,
-			"%s Connected to %s but dropped connection (wrong network name ?)", getTestName( isHost ), nodeUrl.c_str() );
+			"%s Connected to %s but dropped connection (wrong network key ?)", getTestName( isHost ), nodeUrl.c_str() );
 		sktSimple.closeSkt();
 		return doConnectTestFailed( isHost );
 	}

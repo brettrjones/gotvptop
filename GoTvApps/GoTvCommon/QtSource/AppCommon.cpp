@@ -362,8 +362,6 @@ void AppCommon::startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame 
 	m_Engine.fromGuiAppStartup( strAssetDir.c_str(), m_AppSettings.m_strRootUserDataDir.c_str() );
 
     m_MySndMgr.initAudioIoSystem();
-
-	//restoreWindowPosition();
 }
 
 //============================================================================

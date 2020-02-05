@@ -45,7 +45,20 @@ bool g_StreamActive = false;
 
 namespace
 {
-    uint32_t                    g_ModuleEnableLoggingFlags      = LOG_FLAG_VIDEO_PLAY | LOG_FLAG_PLAYER_SYNC | LOG_FLAG_THREADS;
+    uint32_t g_ModuleEnableLoggingFlags = ( uint32_t )(
+                    eLogModuleMulticast
+                    | eLogModuleConnect
+                    | eLogModuleListen
+                    | eLogModuleSkt
+                    | eLogModulePkt
+                    | eLogModuleNetworkState
+                    | eLogModuleNetworkMgr
+                    | eLogModuleIsPortOpenTest
+                    | eLogModuleThread
+                    | eLogModuleAssets
+                    | eLogModulePlugins
+                    | eLogModuleWindowPositions );
+
     unsigned long				g_u32LogFlags                   = LOG_PRIORITY_MASK;
 
 	VxMutex						g_oFileLogMutex;
@@ -77,7 +90,7 @@ namespace
 /// @brief return true if should log the given module
 bool IsLogEnabled( ELogModule logModule )
 {
-    return true;
+    return ( g_ModuleEnableLoggingFlags & logModule) ? true : false;
 }
 
 //============================================================================
@@ -144,8 +157,6 @@ void                    vx_error( unsigned long u32MsgType, const char* msg, ...
 
 LOG_FUNCTION		    g_pfuncLogHandler = default_log_handler;
 //============================================================================
-
-
 //============================================================================
 uint32_t VxGetModuleLogFlags( void )
 {
@@ -153,21 +164,21 @@ uint32_t VxGetModuleLogFlags( void )
 }
 
 //============================================================================
-void  VxSetLogPriorityMask( uint32_t flags )
+void  VxSetModuleLogFlags( uint32_t flags )
 {
     g_ModuleEnableLoggingFlags = flags;
+}
+
+//============================================================================
+void  VxSetLogPriorityMask( uint32_t flags )
+{
+    g_u32LogFlags = flags;
 }
 
 //============================================================================
 uint32_t VxGetLogPriorityMask( void )
 {
     return g_u32LogFlags;
-}
-
-//============================================================================
-void  VxSetModuleLogFlags( uint32_t flags )
-{
-    g_u32LogFlags = flags;
 }
 
 //============================================================================
@@ -249,16 +260,16 @@ void * VxGetLogUserData( void ) { return g_pvUserData; }
 // This function is called by vx_assert() when the assertion fails.
 void  vx_error_output( unsigned long u32MsgType, char* exp,char * file, int line)
 {
-    vx_error(u32MsgType, "** VX ASSERTION **\r\nexpression: %s\r\nfile: %s\r\nline: %d\r\n", exp, file, line);
-	AppErr( eAppErrBadParameter, "ASSERTION: %s\r\nfile: %s\r\nline: %d\r\n", exp, file, line );
+    vx_error(u32MsgType, "** VX ASSERTION **\r\n expression: %s\r\n file: %s\r\n line: %d\r\n", exp, file, line);
+	AppErr( eAppErrBadParameter, "ASSERTION: %s\r\n file: %s\r\n line: %d\r\n", exp, file, line );
 }
 
 //============================================================================
 // This function is called by vx_assert2() when the assertion fails.
 void vx_error_output2(unsigned long u32MsgType, char* exp,  char* msg, char* file, int line)
 {
-    vx_error(u32MsgType, "** VX ASSERTION ***\r\nprogrammer says: %s\r\nexpression: %s\r\nfile: %s\r\nline: %d\r\n", msg, exp, file, line);
-	AppErr( eAppErrBadParameter, "ASSERTION: %s\r\nexpression: %s\r\nfile: %s\r\nline: %d\r\n", msg, exp, file, line );
+    vx_error(u32MsgType, "** VX ASSERTION ***\r\n programmer says: %s\r\nexpression: %s\r\n file: %s\r\n line: %d\r\n", msg, exp, file, line);
+	AppErr( eAppErrBadParameter, "ASSERTION: %s\r\n expression: %s\r\n file: %s\r\n line: %d\r\n", msg, exp, file, line );
 }
 
 //============================================================================

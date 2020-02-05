@@ -84,7 +84,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 					return;
 				} 
 				
-                if( 0 == strncmp( (char *)pSktBuf, "http://", 7 ) )
+                if( ( iDataLen > 7 ) && ( 0 == strncmp( ( char * )pSktBuf, "http://", 7 ) ) )
 				{
 					// probably net services
 					if( NetServiceUtils::verifyAllDataArrivedOfNetServiceUrl( sktBase ) )

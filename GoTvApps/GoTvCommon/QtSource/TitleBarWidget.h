@@ -96,7 +96,7 @@ signals:
 	void						signalMenuTopButtonClicked( void );
 	void						signalBackButtonClicked( void );
 
-protected slots:
+public slots:
 	virtual void				slotPowerButtonClicked( void );
 	virtual void				slotHomeButtonClicked( void );
 	virtual void				slotMuteMicButtonClicked( void );

@@ -88,81 +88,82 @@ void PluginMgr::pluginMgrStartup( void )
 	poPlugin = new PluginInvalid( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
-	LogMsg( LOG_VERBOSE, "pluginMgrStartup create admin plugin\n" );
+    LogModule( eLogModulePlugins, LOG_VERBOSE, "pluginMgrStartup create admin plugin\n" );
 	poPlugin = new PluginInvalid( m_Engine, *this, &this->m_PktAnn );
 	poPlugin->setPluginType( ePluginTypeAdmin );
 	m_aoPlugins.push_back( poPlugin );
 
-    LogMsg( LOG_VERBOSE, "pluginMgrStartup create file xfer plugin\n" );
+    LogModule( eLogModulePlugins, LOG_VERBOSE, "pluginMgrStartup create file xfer plugin\n" );
     poPlugin = new PluginFileXfer( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
-    LogMsg( LOG_VERBOSE, "pluginMgrStartup create messenger plugin\n" );
+    LogModule( eLogModulePlugins, LOG_VERBOSE, "pluginMgrStartup create messenger plugin\n" );
     poPlugin = new PluginMessenger( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
-	LogMsg( LOG_VERBOSE, "pluginMgrStartup create about me plugin\n" );
+    LogModule( eLogModulePlugins, LOG_VERBOSE, "pluginMgrStartup create about me plugin\n" );
 	poPlugin = new PluginServiceAboutMe( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
-    LogMsg( LOG_VERBOSE, "pluginMgrStartup create avatar imag plugin\n" );
+    LogModule( eLogModulePlugins, LOG_VERBOSE, "pluginMgrStartup create avatar imag plugin\n" );
     poPlugin = new PluginServiceAvatarImage( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
-    LogMsg( LOG_VERBOSE, "pluginMgrStartup create connection test plugin\n" );
+    LogModule( eLogModulePlugins, LOG_VERBOSE, "pluginMgrStartup create connection test plugin\n" );
     poPlugin = new PluginServiceConnectionTest( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
-    //LogMsg( LOG_INFO, "pluginMgrStartup create file share plugin\n" );
+    LogModule( eLogModulePlugins, LOG_INFO, "pluginMgrStartup create file share plugin\n" );
     m_aoPlugins.push_back( &m_Engine.getPluginServiceFileShare() );
 
-    LogMsg( LOG_VERBOSE, "pluginMgrStartup create host group plugin\n" );
+    LogModule( eLogModulePlugins, LOG_VERBOSE, "pluginMgrStartup create host group plugin\n" );
     poPlugin = new PluginServiceHostGroup( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
-    LogMsg( LOG_VERBOSE, "pluginMgrStartup create host group listing plugin\n" );
+    LogModule( eLogModulePlugins, LOG_VERBOSE, "pluginMgrStartup create host group listing plugin\n" );
     poPlugin = new PluginServiceHostGroupListing( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
-    LogMsg( LOG_VERBOSE, "pluginMgrStartup create host network plugin\n" );
+    LogModule( eLogModulePlugins, LOG_VERBOSE, "pluginMgrStartup create host network plugin\n" );
     poPlugin = new PluginServiceHostNetwork( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
-    LogMsg( LOG_VERBOSE, "pluginMgrStartup create random connect plugin\n" );
+    LogModule( eLogModulePlugins, LOG_VERBOSE, "pluginMgrStartup create random connect plugin\n" );
     poPlugin = new PluginServiceRandomConnect( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
-    LogMsg( LOG_VERBOSE, "pluginMgrStartup create random connect relay plugin\n" );
+    LogModule( eLogModulePlugins, LOG_VERBOSE, "pluginMgrStartup create random connect relay plugin\n" );
     poPlugin = new PluginServiceRandomConnectRelay( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
 	// relay pre created by engine
-	m_aoPlugins.push_back( &m_Engine.getPluginServiceRelay() );
+    LogModule( eLogModulePlugins, LOG_VERBOSE, "pluginMgrStartup create relay plugin\n" );
+    m_aoPlugins.push_back( &m_Engine.getPluginServiceRelay() );
 
-    LogMsg( LOG_VERBOSE, "pluginMgrStartup create storyboard plugin\n" );
+    LogModule( eLogModulePlugins, LOG_VERBOSE, "pluginMgrStartup create storyboard plugin\n" );
     poPlugin = new PluginServiceStoryboard( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 
-	LogMsg( LOG_VERBOSE, "pluginMgrStartup create cam server plugin\n" );
+    LogModule( eLogModulePlugins, LOG_VERBOSE, "pluginMgrStartup create cam server plugin\n" );
 	poPlugin = new PluginServiceWebCam( m_Engine, *this, &this->m_PktAnn);
 	m_aoPlugins.push_back( poPlugin );
 
-	LogMsg( LOG_INFO, "pluginMgrStartup create voice phone plugin\n" );
+    LogModule( eLogModulePlugins, LOG_INFO, "pluginMgrStartup create voice phone plugin\n" );
 	poPlugin = new PluginVoicePhone( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
-	LogMsg( LOG_INFO, "pluginMgrStartup create video phone plugin\n" );
+    LogModule( eLogModulePlugins, LOG_INFO, "pluginMgrStartup create video phone plugin\n" );
 	poPlugin = new PluginVideoPhone( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
-	LogMsg( LOG_INFO, "pluginMgrStartup create truth or dare plugin\n" );
+    LogModule( eLogModulePlugins, LOG_INFO, "pluginMgrStartup create truth or dare plugin\n" );
 	poPlugin = new PluginTruthOrDare( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
-
-	//LogMsg( LOG_INFO, "pluginMgrStartup adding net services\n" );
+    LogModule( eLogModulePlugins, LOG_INFO, "pluginMgrStartup adding net services\n" );
 	// net services pre created by engine
-	//m_aoPlugins.push_back( &m_Engine.getPluginNetServices() );
+	m_aoPlugins.push_back( &m_Engine.getPluginNetServices() );
+
 	m_PluginMgrInitialized = true;
 
     uint32_t endTime = ( uint32_t)GetApplicationAliveMs();

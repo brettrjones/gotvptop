@@ -11,6 +11,7 @@
 #include "GuiHelpers.h"
 
 #include "VxFrame.h"
+#include "AppletBase.h"
 
 #include <CoreLib/VxAppInfo.h>
 
@@ -69,6 +70,35 @@ void HomeWindow::accept()
 //============================================================================
 void HomeWindow::reject()
 {
+#if defined(TARGET_OS_ANDROID)
+    // this also gets called on android when android device back button is pressed
+    bool isMessenger = false;
+    AppletBase * curApplet = findActiveApplet();
+    if(curApplet && (curApplet->getAppletType() != eAppletHomePage))
+    {
+        if( curApplet->getTitleBarWidget() )
+        {
+            curApplet->getTitleBarWidget()->slotBackButtonClicked();
+        }
+    }
+    else
+    {
+        QMessageBox::StandardButton resBtn = QMessageBox::Yes;
+        bool changes = true;
+        if( changes ) {
+            resBtn = QMessageBox::question( this, QObject::tr("Close Application"),
+                tr( "Are you sure you want to exit?\n" ),
+                QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,
+                QMessageBox::Yes );
+        }
+
+        if( resBtn == QMessageBox::Yes )
+        {
+            GetAppInstance().shutdownAppCommon();
+            QDialog::reject();
+        }
+    }
+#else
     QMessageBox::StandardButton resBtn = QMessageBox::Yes;
     bool changes = true;
     if( changes ) {
@@ -83,6 +113,7 @@ void HomeWindow::reject()
         GetAppInstance().shutdownAppCommon();
         QDialog::reject();
     }
+#endif //defined(TARGET_OS_ANDROID)
 }
 
 //============================================================================
@@ -115,29 +146,49 @@ static bool firstShow = true;
 //============================================================================
 void HomeWindow::initializeHomePage()
 {
-#if !defined(TARGET_OS_ANDROID)
-    QByteArray restoreGeom = m_WindowSettings->value( "mainWindowGeometry" ).toByteArray();
-    if( restoreGeom.isEmpty() )
-    {
-        const QRect availableGeometry = QApplication::desktop()->availableGeometry(this);
-        resize(availableGeometry.width() / 3, availableGeometry.height() / 2);
-        move((availableGeometry.width() - width()) / 2,
-             (availableGeometry.height() - height()) / 2);
-    }
-    else
-    {
-        restoreGeometry(restoreGeom);
-    }
-#else
-    updateAndroidGeomety();
-
-#endif // !defined(TARGET_OS_ANDROID)
+    restoreHomeWindowGeometry();
 
 	initializeGoTvDynamicLayout();
 	connect( &m_AppDisplay, SIGNAL( signalDeviceOrientationChanged( int ) ), this, SLOT( slotDeviceOrientationChanged( int ) ) );
     connect( this, SIGNAL( signalMainWindowResized() ), &m_MyApp, SLOT( slotMainWindowResized() ) );
     connect( this, SIGNAL( signalMainWindowMoved() ), &m_MyApp, SLOT( slotMainWindowMoved() ) );
 	m_AppDisplay.forceOrientationUpdate();
+}
+
+//============================================================================
+void HomeWindow::restoreHomeWindowGeometry()
+{
+#if !defined(TARGET_OS_ANDROID)
+    QByteArray restoreGeom = m_WindowSettings->value( "mainWindowGeometry" ).toByteArray();
+    if( restoreGeom.isEmpty() )
+    {
+        const QRect availableGeometry = QApplication::desktop()->availableGeometry( this );
+        resize( availableGeometry.width() / 3, availableGeometry.height() / 2 );
+        move( ( availableGeometry.width() - width() ) / 2,
+            ( availableGeometry.height() - height() ) / 2 );
+    }
+    else
+    {
+        restoreGeometry( restoreGeom );
+    }
+#else
+    updateAndroidGeomety();
+#endif // !defined(TARGET_OS_ANDROID)}
+}
+
+//============================================================================
+void HomeWindow::saveHomeWindowGeometry()
+{
+#if !defined(TARGET_OS_ANDROID)
+    if( !QWidget::isMaximized() && !QWidget::isMinimized() )
+    {
+        QByteArray saveGeom = saveGeometry();
+        m_WindowSettings->setValue( "mainWindowGeometry", saveGeom );
+    }
+
+    //settings.setValue( "mainWindowState", saveState() );
+#endif // !defined(TARGET_OS_ANDROID)
+
 }
 
 //============================================================================
@@ -299,6 +350,7 @@ void HomeWindow::slotDeviceOrientationChanged( int qtOrientation )
 //============================================================================
 void HomeWindow::updateAndroidGeomety()
 {
+#if defined(TARGET_OS_ANDROID)
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect  screenGeometry = screen->availableGeometry();
     int height = screenGeometry.height() - 20;
@@ -306,6 +358,7 @@ void HomeWindow::updateAndroidGeomety()
     resize(width, height);
     move( screenGeometry.left() + 10, screenGeometry.top() + 10 );
     LogMsg( LOG_DEBUG, "Home Screen Size %d %d", width, height);
+#endif // defined(TARGET_OS_ANDROID)
 }
 
 //============================================================================
@@ -400,12 +453,27 @@ MyIcons& HomeWindow::getMyIcons( void )
 //============================================================================
 void HomeWindow::closeEvent(QCloseEvent *event)
 {
-    if( !QWidget::isMaximized() && !QWidget::isMinimized() )
+    saveHomeWindowGeometry();
+	QDialog::closeEvent( event );
+}
+
+//============================================================================
+AppletBase * HomeWindow::findActiveApplet( void )
+{
+    AppletBase * curApplet = nullptr;
+    // get the widget with focus then find a parent that is a base applet
+    QWidget * curWidget = QApplication::focusWidget();
+    while(curWidget)
     {
-        QByteArray saveGeom = saveGeometry();
-        m_WindowSettings->setValue( "mainWindowGeometry", saveGeom );
+        curApplet = dynamic_cast<AppletBase *>(curWidget);
+        if( curApplet )
+        {
+            break;
+        }
+
+        curWidget = dynamic_cast<QWidget *>(curWidget->parent());
     }
 
-    //settings.setValue( "mainWindowState", saveState() );
-	QDialog::closeEvent( event );
+
+    return curApplet;
 }

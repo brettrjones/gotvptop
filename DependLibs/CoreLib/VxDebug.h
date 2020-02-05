@@ -45,16 +45,22 @@ typedef void (*LOG_FUNCTION )( void *, uint32_t, char * );
 enum ELogModule
 {
     eLogModuleNone = 0,
-    eLogModuleAssets = 0x0001,
+
+    eLogModuleMulticast = 0x0001,
     eLogModuleConnect = 0x0002,
-    eLogModuleMulticast = 0x0004,
-    eLogModuleNetworkMgr = 0x0008,
+    eLogModuleListen = 0x0004,
+    eLogModuleSkt = 0x0008,
+
     eLogModulePkt = 0x0010,
-    eLogModulePlayer = 0x0020,
-    eLogModuleSkt = 0x0040,
+    eLogModuleNetworkState = 0x0020,
+    eLogModuleNetworkMgr = 0x0040,
     eLogModuleIsPortOpenTest = 0x0080,
+
     eLogModuleThread = 0x0100,
-    eLogModuleNetworkState = 0x0200,
+    eLogModuleAssets = 0x0200,
+    eLogModuleWindowPositions = 0x0400,
+    eLogModulePlugins = 0x0800,
+    eLogModulePlayer = 0x1000,
 
     eMaxLogModule
 };
