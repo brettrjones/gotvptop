@@ -73,6 +73,8 @@ public:
 	void						fromGuiUserLoggedOn( void );
 	void						fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork = false );
 	void						fromGuiNetworkLost( void );
+    virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet );
+
 	void						fromGuiNetworkSettingsChanged( void );
 	void						fromGuiUseRelay( VxConnectInfo& connectInfo, bool useRelay ); // so if searching for relay can try immediately 
 
@@ -101,6 +103,9 @@ public:
 
 	bool						resolveWebsiteUrls( void );
     void						updateFromEngineSettings( EngineSettings& engineSettings );
+
+    void                        setNetLayerState( ENetLayerType layerType, ENetLayerState layerState );
+    ENetLayerState              getNetLayerState( ENetLayerType layerType );
 
 protected:
 	void						destroyNetworkStates( void );
@@ -153,6 +158,8 @@ protected:
 	time_t						m_LastUpnpForwardTime;
 	uint16_t					m_LastUpnpForwardPort;
 	std::string					m_LastUpnpForwardIp;
+
+    ENetLayerState              m_NetLayerStates[ eMaxNetLayerType ];
 
 private:
 	NetworkStateMachine(); // don't allow default constructor

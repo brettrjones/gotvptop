@@ -334,6 +334,8 @@ void AppCommon::startupAppCommon( QFrame * appletFrame, QFrame * messangerFrame 
     }
 
     m_AppCommonInitialized = true;
+    // need to setup theme before the first window or dialog is created
+    getAppTheme().selectTheme( getAppSettings().getLastSelectedTheme() );
 
 	m_Downloads = new ActivityDownloads( *this, messangerFrame );
 	m_Downloads->hide();

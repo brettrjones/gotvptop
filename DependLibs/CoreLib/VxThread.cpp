@@ -543,21 +543,19 @@ void VxThread::threadAboutToExit( bool bExitThreadNow )
 	
 	if ( m_funcExitCallback )
 	{
-        #if defined(DEBUG_THREADS)
-            LogMsg( LOG_ERROR, "Thread %s %d tid %d exiting with callback total running %d\n", m_strThreadName.c_str(), m_uiThreadId, getThreadTid(), g_RuningThreadList.size() );
-        #endif // DEBUG_THREADS
+       LogModule( eLogModuleThread, LOG_ERROR, "Thread %s %d tid %d exiting with callback total running %d\n", m_strThreadName.c_str(), m_uiThreadId, getThreadTid(), g_RuningThreadList.size() );
+
 		// if android cannot log after thread is detached in exit callback 
 		m_funcExitCallback( m_ThreadTid, m_bIsExitCallbackLocked, m_strThreadName.c_str() );
 	}
 	else
 	{
-        #if defined(DEBUG_THREADS)
-            LogMsg( LOG_THREAD, "threadAboutToExit %s %d tid %d\n", m_strThreadName.c_str(), m_uiThreadId, getThreadTid() );
 
-            #ifdef TARGET_OS_ANDROID
-                LogMsg( LOG_ERROR, "threadAboutToExit %s tid %d MUST HAVE CALLBACK\n", m_strThreadName.c_str(), getThreadTid() );
-            #endif // TARGET_OS_ANDROID
-        #endif // defined(DEBUG_THREADS)
+        LogModule( eLogModuleThread, LOG_VERBOSE, "threadAboutToExit %s %d tid %d\n", m_strThreadName.c_str(), m_uiThreadId, getThreadTid() );
+
+        #ifdef TARGET_OS_ANDROID
+            LogMsg( LOG_ERROR, "threadAboutToExit %s tid %d MUST HAVE CALLBACK\n", m_strThreadName.c_str(), getThreadTid() );
+        #endif // TARGET_OS_ANDROID
 	}
 
 	setIsThreadCreated( false );

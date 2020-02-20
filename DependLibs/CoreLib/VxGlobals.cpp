@@ -228,7 +228,13 @@ void VxSetAppDirectory( EAppDir appDir, const char * setDir )
         case eAppDirCamRecord:
             g_strAppCamRecord = setDir;
             break;
+        default:
+            LogMsg( LOG_ERROR, "VxSetAppDirectory invalid param %d", appDir);
         }
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "VxSetAppDirectory setDir is null");
     }
 }
 
@@ -289,6 +295,8 @@ std::string& VxGetAppDirectory( EAppDir appDir )
         return g_strAppThumbsDir;
     case eAppDirCamRecord:
         return g_strAppCamRecord;
+    default:
+        break;
 	}
 
     LogMsg( LOG_ERROR, "VxGetAppDirectory ERROR No directory for %d", appDir );

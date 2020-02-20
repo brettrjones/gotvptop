@@ -258,3 +258,26 @@ enum ESubCatagory
 
     eMaxSubCatagory
 };
+
+//! \public Network protocol layer
+enum ENetLayerType
+{
+    eNetLayerTypeUndefined,		        //< not specified/initialized
+    eNetLayerTypeInternet,		        //< can communicate with internet
+    eNetLayerTypePtoP,		            //< tcp and extern ip found
+    eNetLayerTypeNetHost,		        //< network host available
+    eNetLayerTypeNetGroup,		        //< network host available
+
+    eMaxNetLayerType		            //< max must be last
+};
+
+enum ENetLayerState
+{
+    eNetLayerStateUndefined,		    //< not specified/initialized
+    eNetLayerStateWrongType,		    //< invalid or not relevant net layer typ
+    eNetLayerStateTesting,		        //< testing for available 
+    eNetLayerStateFailed,		        //< failed or some issue
+    eNetLayerStateAvailable,		    //< available and ready for use
+
+    eMaxNetLayerState		            //< max must be last
+};

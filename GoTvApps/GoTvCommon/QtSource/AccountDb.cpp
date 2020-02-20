@@ -24,7 +24,7 @@
 namespace
 {
 	std::string 		DATABASE_NAME 					= "nolimitconnect_acct.db";
-	const int 			DATABASE_VERSION 				= 1;
+//	const int 			DATABASE_VERSION 				= 1;
 
 	std::string 		TABLE_LAST_LOGIN	 			= "last_login";
 	std::string 		TABLE_ACCOUNT_LOGIN	 			= "account_login";
@@ -565,12 +565,12 @@ bool AccountDb::getAllAccounts( std::vector<VxNetIdent>& accountList )
         {
             int iBlobLen = 0;
             VxNetIdent * netIdent = ( VxNetIdent * )cursor->getBlob( 2, &iBlobLen );
-            if( iBlobLen == sizeof( VxNetIdent ) )
+            if( iBlobLen == (int)sizeof( VxNetIdent ) )
             {
                 accountList.push_back( *netIdent );
                 bResult = true;
             }
-            else if( iBlobLen >= sizeof( VxConnectIdent ) )
+            else if( iBlobLen >= (int)sizeof( VxConnectIdent ) )
             {
                 LogMsg( LOG_ERROR, "AccountDb::getAllAccounts: incorrect blob len in db.. was code changed????\n" );
                 cursor->close();

@@ -40,10 +40,7 @@
 #include "utils/URIUtils.h"
 #include "GoTvCoreUtil.h"
 
-
-
 using namespace XFILE;
-
 
 //============================================================================
 ILinux::ILinux( IGoTv& gotv )
@@ -55,7 +52,8 @@ ILinux::ILinux( IGoTv& gotv )
 //============================================================================
 bool ILinux::doPreStartup()
 {
-    // this fixes crash if OPENSSL_CONF is set to existed openssl.cfg  
+    LogModule(eLogModuleStartup, LOG_VERBOSE, "ILinux::doPreStartup");
+    // this fixes crash if OPENSSL_CONF is set to existed openssl.cfg
     // need to set it as soon as possible  
     CEnvironment::unsetenv( "OPENSSL_CONF" );
     //g_advancedSettings.Initialize();
@@ -64,6 +62,7 @@ bool ILinux::doPreStartup()
 
 bool ILinux::doStartup()
 {
+    LogModule(eLogModuleStartup, LOG_VERBOSE, "ILinux::doStartup");
     return true;
 }
 
@@ -76,16 +75,15 @@ bool ILinux::doStartup()
 //============================================================================
 void ILinux::doPreShutdown( )
 {
-
-
+    LogModule(eLogModuleStartup, LOG_VERBOSE, "ILinux::doPreShutdown");
 }
 
+//============================================================================
 void ILinux::doShutdown( )
 {
-
+    LogModule(eLogModuleStartup, LOG_VERBOSE, "ILinux::doShutdown");
     // clear previously set timer resolution
-//    timeEndPeriod( 1 );
-
+    // timeEndPeriod( 1 );
 }
 
 //=== utilities ===//

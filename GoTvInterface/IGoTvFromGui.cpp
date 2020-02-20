@@ -332,6 +332,12 @@ void IGoTv::fromGuiNetworkLost( void )
 }
 
 //============================================================================
+ENetLayerState IGoTv::fromGuiGetNetLayerState( ENetLayerType netLayer )
+{
+    return getPtoP().fromGuiGetNetLayerState( netLayer );
+}
+
+//============================================================================
 void IGoTv::fromGuiRunIsPortOpenTest( uint16_t port )
 {
     getPtoP().fromGuiRunIsPortOpenTest( port );

@@ -72,7 +72,6 @@ void HomeWindow::reject()
 {
 #if defined(TARGET_OS_ANDROID)
     // this also gets called on android when android device back button is pressed
-    bool isMessenger = false;
     AppletBase * curApplet = findActiveApplet();
     if(curApplet && (curApplet->getAppletType() != eAppletHomePage))
     {
@@ -119,14 +118,14 @@ void HomeWindow::reject()
 //============================================================================
 void HomeWindow::resizeEvent( QResizeEvent * ev)
 {
-    LogMsg( LOG_ERROR, "HomeWindow::resizeEvent w %d h %d", ev->size().width(), ev->size().height()  );
+    LogModule(eLogModuleWindowPositions, LOG_VERBOSE, "HomeWindow::resizeEvent w %d h %d", ev->size().width(), ev->size().height()  );
 	emit signalMainWindowResized();
 }
 
 //============================================================================
 void HomeWindow::moveEvent( QMoveEvent * )
 {
-    LogMsg( LOG_ERROR, "HomeWindow::moveEvent" );
+    LogModule(eLogModuleWindowPositions, LOG_VERBOSE, "HomeWindow::moveEvent" );
     emit signalMainWindowMoved();
 }
 
@@ -357,7 +356,7 @@ void HomeWindow::updateAndroidGeomety()
     int width = screenGeometry.width() - 20;
     resize(width, height);
     move( screenGeometry.left() + 10, screenGeometry.top() + 10 );
-    LogMsg( LOG_DEBUG, "Home Screen Size %d %d", width, height);
+    LogModule(eLogModuleWindowPositions, LOG_VERBOSE, "Home Screen Size %d %d", width, height);
 #endif // defined(TARGET_OS_ANDROID)
 }
 

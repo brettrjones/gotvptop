@@ -51,6 +51,8 @@
 #include "ServiceBroker.h"
 #include "settings/SettingsComponent.h"
 
+#include <CoreLib/VxDebug.h>
+
 using namespace XFILE;
 
 //============================================================================
@@ -73,6 +75,7 @@ IWin32::IWin32( IGoTv& gotv )
 //============================================================================
 bool IWin32::doPreStartup()
 {
+    LogModule( eLogModuleStartup, LOG_VERBOSE, "IWin32::doPreStartup" );
     using KODI::PLATFORM::WINDOWS::ToW;
     // this fixes crash if OPENSSL_CONF is set to existed openssl.cfg  
     // need to set it as soon as possible  
@@ -153,13 +156,13 @@ bool IWin32::doStartup()
 //============================================================================
 void IWin32::doPreShutdown( )
 {
-
-
+    LogModule( eLogModuleStartup, LOG_VERBOSE, "IWin32::doPreShutdown" );
 }
 
 //============================================================================
 void IWin32::doShutdown( )
 {
+    LogModule( eLogModuleStartup, LOG_VERBOSE, "IWin32::doShutdown" );
 
     // clear previously set timer resolution
     timeEndPeriod( 1 );

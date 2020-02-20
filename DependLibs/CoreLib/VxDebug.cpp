@@ -55,9 +55,13 @@ namespace
                     | eLogModuleNetworkMgr
                     | eLogModuleIsPortOpenTest
                     | eLogModuleThread
+                    | eLogModuleStorage
                     | eLogModuleAssets
                     | eLogModulePlugins
-                    | eLogModuleWindowPositions );
+                    | eLogModuleStartup
+                    | eLogModuleHosts
+                    //| eLogModuleWindowPositions
+                    );
 
     unsigned long				g_u32LogFlags                   = LOG_PRIORITY_MASK;
 

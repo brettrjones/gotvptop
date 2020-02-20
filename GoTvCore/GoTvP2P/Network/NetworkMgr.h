@@ -22,6 +22,8 @@
 #include <CoreLib/VxDefs.h>
 #include <PktLib/VxFriendMatch.h>
 
+#include <GoTvInterface/IDefs.h>
+
 class P2PEngine;
 class VxPeerMgr;
 class BigListMgr;
@@ -52,6 +54,10 @@ public:
 
 	virtual void				fromGuiNetworkAvailable( const char * lclIp, bool isCellularNetwork = false );
 	virtual void				fromGuiNetworkLost( void );
+    virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet );
+
+    virtual bool				isInternetAvailable( void )									{ return eNetLayerStateAvailable == fromGuiGetNetLayerState( eNetLayerTypeInternet ); }
+
 	virtual bool				isNetworkAvailable( void )									{ return m_bNetworkAvailable; }
 	virtual bool				isCellularNetwork( void )									{ return m_bIsCellularNetwork; }
 

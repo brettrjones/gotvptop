@@ -20,6 +20,7 @@
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PConnectList.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListMgr.h>
 #include <GoTvCore/GoTvP2P/BigListLib/BigListInfo.h>
+#include <GoTvCore/GoTvP2P/NetworkMonitor/NetworkMonitor.h>
 
 #include <NetLib/VxSktBase.h>
 #include <NetLib/VxPeerMgr.h>
@@ -157,6 +158,27 @@ void NetworkMgr::fromGuiNetworkLost( void )
 #ifdef ENABLE_MULTICAST
 	m_MulticastListen.stopListen();
 #endif // ENABLE_MULTICAST
+}
+
+//============================================================================
+ENetLayerState NetworkMgr::fromGuiGetNetLayerState( ENetLayerType netLayer )
+{
+    ENetLayerState netState = eNetLayerStateWrongType;
+    if( netLayer == eNetLayerTypeInternet )
+    {
+        NetworkMonitor&	netMonitor = m_Engine.getNetworkMonitor();
+
+        if( !netMonitor.getIsInitialized() )
+        {
+            netState = eNetLayerStateUndefined;
+        }
+        else
+        {
+            netState = netMonitor.getIsInternetAvailable() ? eNetLayerStateAvailable : eNetLayerStateFailed;
+        }
+    }
+
+    return netState;
 }
 
 //============================================================================

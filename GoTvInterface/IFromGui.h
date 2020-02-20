@@ -69,7 +69,6 @@ enum ESndRecordState
 	eMaxSndRecordState
 };
 
-
 //! \public Media request for callback when processed MediaProcessor types
 enum EMediaInputType
 {
@@ -225,6 +224,8 @@ public:
 	virtual void				fromGuiNetworkAvailable( const char * lclIp = NULL, bool isCellularNetwork = false ) = 0;
 	/// Call when internet connection is disconnected
 	virtual void				fromGuiNetworkLost( void ) = 0;
+    /// state of a network layer
+    virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet ) = 0;
 
 	/// Run anchor settings connection tests
 	virtual void				fromGuiVerifyNetHostSettings( void ) = 0;

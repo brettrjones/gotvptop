@@ -57,10 +57,14 @@ enum ELogModule
     eLogModuleIsPortOpenTest = 0x0080,
 
     eLogModuleThread = 0x0100,
-    eLogModuleAssets = 0x0200,
-    eLogModuleWindowPositions = 0x0400,
+    eLogModuleStorage = 0x0200, // mostly user and app directories
+    eLogModuleAssets = 0x0400,
     eLogModulePlugins = 0x0800,
-    eLogModulePlayer = 0x1000,
+
+    eLogModuleWindowPositions = 0x1000,
+    eLogModuleStartup = 0x2000,
+    eLogModuleHosts = 0x4000,
+    eLogModulePlayer = 0x8000,
 
     eMaxLogModule
 };

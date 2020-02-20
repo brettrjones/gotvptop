@@ -136,6 +136,7 @@ doover:
 //============================================================================
 void AppCommon::doAccountStartup( void )
 {
+    LogModule( eLogModuleStartup, LOG_DEBUG, "doAccountStartup");
     // tell engine were to load settings from
     loadAccountSpecificSettings( getAppGlobals().getUserIdent()->getOnlineName() );
     uint32_t startMs = GetApplicationAliveMs();
@@ -143,12 +144,17 @@ void AppCommon::doAccountStartup( void )
     getAppGlobals().getUserIdent()->setHasSharedWebCam( false ); // user must restart cam server each startup.. assume no shared cam yet
 
     applySoundSettings();
+    LogModule( eLogModuleStartup, LOG_DEBUG, "applySoundSettings" );
 
     sendAppSettingsToEngine();
+    LogModule( eLogModuleStartup, LOG_DEBUG, "sendAppSettingsToEngine" );
 
+    LogModule( eLogModuleStartup, LOG_DEBUG, "startNetworkMonitor" );
     startNetworkMonitor();
+    LogModule( eLogModuleStartup, LOG_DEBUG, "after startNetworkMonitor" );
 
     completeLogin();
+    LogModule( eLogModuleStartup, LOG_DEBUG, "completed Login" );
 
     uint32_t endMs = GetApplicationAliveMs();
     LogMsg( LOG_DEBUG, "Applied settings ms %d alive ms %d", endMs - startMs, endMs );

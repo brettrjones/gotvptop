@@ -25,7 +25,6 @@
 #include <GoTvInterface/IFromGui.h>
 #include <GoTvInterface/IAudioInterface.h>
 
-
 #include <GoTvCore/GoTvP2P/Search/RcScan.h>
 
 #include <GoTvCore/GoTvP2P/BigListLib/BigListMgr.h>
@@ -184,6 +183,8 @@ public:
 
     virtual void				fromGuiNetworkAvailable( const char * lclIp = NULL, bool isCellularNetwork = false ) override;
     virtual void				fromGuiNetworkLost( void ) override;
+    virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet ) override;
+
     virtual void				fromGuiNetworkSettingsChanged( void ) override;
 
     virtual void				fromGuiVerifyNetHostSettings( void ) override;

@@ -233,12 +233,14 @@ OsInterface::OsInterface( IGoTv& gotv )
 bool OsInterface::initRun( const CAppParamParser& cmdLineParams )
 {
     m_CmdLineParams = &cmdLineParams;
+    LogModule(eLogModuleStartup, LOG_VERBOSE, "OsInterface::initRun");
     return true;
 }
 
 //============================================================================
 bool OsInterface::doRun( EAppModule appModule )
 {
+    LogModule(eLogModuleStartup, LOG_VERBOSE, "OsInterface::doRun");
     if( !m_IGoTv.getIsAppModuleRunning( appModule ) )
     {
         m_IGoTv.setIsAppModuleRunning( appModule, true );
@@ -270,6 +272,7 @@ bool OsInterface::doRun( EAppModule appModule )
 
 bool OsInterface::initUserPaths()
 {
+    LogModule(eLogModuleStartup, LOG_VERBOSE, "OsInterface::initUserPaths");
 #ifdef DEBUG
     VxTimer loadTimer;
 #endif // DEBUG
@@ -700,6 +703,7 @@ bool OsInterface::initUserPaths()
 
 bool OsInterface::initDirectories()
 {
+    LogModule(eLogModuleStartup, LOG_VERBOSE, "OsInterface::initDirectories");
 	//=== relative to executable paths ===//
     // do not call this until user logs on so that eAppDirUserSpecific is set
 

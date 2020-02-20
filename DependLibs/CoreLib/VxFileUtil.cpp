@@ -419,7 +419,7 @@ bool VxFileUtil::directoryExists( const char * pDir )
 	{
 		bIsDir = false;
 	}
-#else // LINUX
+#else // LINUX or android
 	oFileStat.st_mode = S_IFDIR; //check for dir not file
 	if( 0 == stat( acBuf, &oFileStat ) )
 	{
@@ -504,24 +504,42 @@ std::string VxFileUtil::makeUniqueFileName( const char * fileName )
 //! Make all directories that don't exist in a given path
 RCODE VxFileUtil::makeDirectory( const char * pDirectoryPath )
 {
-   vx_assert( pDirectoryPath );
-   char tempDir[VX_MAX_PATH];
-   char *pTemp = tempDir;
-   //make a copy
-   strcpy(tempDir, pDirectoryPath);
-   //replace '\' with '/'
-   while((pTemp = strchr(tempDir, '\\')))
-   {
-        pTemp[0] = '/';
-   }
-   //if no '/' at end put it there
-   if( '/' != tempDir[strlen(tempDir) - 1] )
-   {
+    vx_assert( pDirectoryPath );
+    if( !pDirectoryPath )
+    {
+        LogMsg( LOG_ERROR, "makeDirectory null path");
+        return -1;
+    }
+
+    int pathLen = strlen(pDirectoryPath);
+    vx_assert( pathLen < VX_MAX_PATH );
+    if( ( pathLen >= VX_MAX_PATH ) || ( pathLen < 2 ) )
+    {
+        LogMsg( LOG_ERROR, "makeDirectory invalid path");
+        return -2;
+    }
+
+    bool createdDirectories = false;
+    char tempDir[VX_MAX_PATH * 2];
+    //make a copy
+    strcpy(tempDir, pDirectoryPath);
+    for(int i = 0; i < pathLen; i++)
+    {
+        if( tempDir[i] == '\\' )
+        {
+             tempDir[i] = '/';
+        }
+    }
+
+    //if no '/' at end put it there
+    if( '/' != tempDir[strlen(tempDir) - 1] )
+    {
         strcat(tempDir , "/");
-   }
-   //make the path
-   pTemp = tempDir;
-   #ifdef TARGET_OS_WINDOWS
+    }
+
+    //make the path
+    char * pTemp = tempDir;
+    #ifdef TARGET_OS_WINDOWS
 		// for windows .. if root drive skip it
 		if( ':' == pTemp[1] )
 		{
@@ -532,8 +550,8 @@ RCODE VxFileUtil::makeDirectory( const char * pDirectoryPath )
 			}
 		}
 	#endif //TARGET_OS_WINDOWS
-   if( pTemp && strlen( pTemp ) )
-   {
+    if( pTemp && strlen( pTemp ) )
+    {
 		while((pTemp = strtok(pTemp, "/" )))
 		{
             //look for drive letter or root path
@@ -548,7 +566,12 @@ RCODE VxFileUtil::makeDirectory( const char * pDirectoryPath )
                 if( ! (0 == VxMkDir( tempDir, S_IRWXU | S_IRWXG | S_IRWXO )))
                 {
                     LogMsg( LOG_INFO, "CoreLib:FailedToMakeDir %s\n", tempDir );
-                    return -1;
+                    return -3;
+                }
+                else
+                {
+                    LogModule( eLogModuleStorage, LOG_VERBOSE, "created directory %s", tempDir);
+                    createdDirectories = true;
                 }
             }
 
@@ -557,6 +580,11 @@ RCODE VxFileUtil::makeDirectory( const char * pDirectoryPath )
             //put the '/' back
             tempDir[strlen(tempDir)] = '/';
 		}
+   }
+
+   if( createdDirectories )
+   {
+       LogModule( eLogModuleStorage, LOG_VERBOSE, "created directory %s", tempDir);
    }
 
    return 0;

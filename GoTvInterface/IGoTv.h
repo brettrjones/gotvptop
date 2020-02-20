@@ -457,6 +457,7 @@ public:
 
     virtual void				fromGuiNetworkAvailable( const char * lclIp = NULL, bool isCellularNetwork = false );
     virtual void				fromGuiNetworkLost( void );
+    virtual ENetLayerState	    fromGuiGetNetLayerState( ENetLayerType netLayer = eNetLayerTypeInternet );
 
     virtual void				fromGuiVerifyNetHostSettings( void );
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port );

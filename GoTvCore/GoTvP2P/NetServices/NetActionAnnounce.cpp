@@ -134,7 +134,7 @@ bool NetActionAnnounce::decryptHostList( char * content, int contentDataLen, uin
 	HostList * anchorList = (HostList *)content;
 	if( anchorList->m_TotalLen != contentDataLen )
 	{
-		LogMsg( LOG_ERROR, "NetActionAnnounce::decryptHostList: invalid nchorList->m_TotalLen\n" );
+		LogMsg( LOG_ERROR, "NetActionAnnounce::decryptHostList: invalid anchorList->m_TotalLen\n" );
 		return false;
 	}
 

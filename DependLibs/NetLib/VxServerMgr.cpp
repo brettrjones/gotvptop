@@ -686,6 +686,13 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 			break;
 		}
 		
+        if( VxGetLastError() == EAGAIN )
+        {
+            // LogModule( eLogModuleConnect, LOG_VERBOSE, "listenForConnectionsToAccept: try again\n" );
+            VxSleep(200);
+            continue;
+        }
+
 		acceptConnection( poVxThread, m_aoListenSkts[0] );
 	}	
 	

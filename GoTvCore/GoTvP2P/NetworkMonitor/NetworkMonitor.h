@@ -14,6 +14,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <GoTvInterface/IDefs.h>
+
 #include <string>
 
 class P2PEngine;
@@ -29,12 +31,19 @@ public:
 
 	void						onOncePerSecond( void );
 
+    bool                        getIsInitialized( void )                    { return m_bIsStarted; }
+    void                        setIsInternetAvailable( bool isAvail )      { m_InternetAvailable = isAvail; }
+    bool                        getIsInternetAvailable( void )              { return m_InternetAvailable; }
+
 protected:
+    std::string                 determineLocalIp( void );
+
 	P2PEngine&					m_Engine;
-	bool						m_bIsStarted;
+	bool						m_bIsStarted = false;
+    bool						m_InternetAvailable = false;
+    int							m_iCheckInterval = 0;
+
 	std::string					m_strPreferredAdapterIp;
 	std::string					m_strCellNetIp;
 	std::string					m_strLastFoundIp;
-	int							m_iCheckInterval;
-
 };

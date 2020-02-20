@@ -314,25 +314,27 @@ bool CDirectory::Create(const std::string& strPath)
 
 bool CDirectory::Create(const GoTvUrl& url)
 {
-  try
-  {
-    GoTvUrl realURL = URIUtils::SubstitutePath(url);
+    GoTvUrl realURL;
+    try
+    {
+        realURL = URIUtils::SubstitutePath(url);
 
-    if (CPasswordManager::GetInstance().IsURLSupported(realURL) && realURL.GetUserName().empty())
-      CPasswordManager::GetInstance().AuthenticateURL(realURL);
+        if (CPasswordManager::GetInstance().IsURLSupported(realURL) && realURL.GetUserName().empty())
+            CPasswordManager::GetInstance().AuthenticateURL(realURL);
 
-    std::unique_ptr<IDirectory> pDirectory(CDirectoryFactory::Create(realURL));
-    if (pDirectory.get())
-      if(pDirectory->Create(realURL))
-        return true;
-  }
-  XBMCCOMMONS_HANDLE_UNCHECKED
-  catch (...)
-  {
-    CLog::Log(LOGERROR, "%s - Unhandled exception", __FUNCTION__);
-  }
-  CLog::Log(LOGERROR, "%s - Error creating %s", __FUNCTION__, url.GetRedacted().c_str());
-  return false;
+        std::unique_ptr<IDirectory> pDirectory(CDirectoryFactory::Create(realURL));
+        if (pDirectory.get())
+            if(pDirectory->Create(realURL))
+            return true;
+    }
+    XBMCCOMMONS_HANDLE_UNCHECKED
+    catch (...)
+    {
+        CLog::Log(LOGERROR, "%s - Unhandled exception", __FUNCTION__);
+    }
+
+    CLog::Log(LOGERROR, "%s - Error creating %s %s", __FUNCTION__, url.GetRedacted().c_str(), realURL.GetFileName().c_str());
+    return false;
 }
 
 bool CDirectory::Exists(const std::string& strPath, bool bUseCache /* = true */)

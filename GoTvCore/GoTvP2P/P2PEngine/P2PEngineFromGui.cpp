@@ -360,6 +360,12 @@ void P2PEngine::fromGuiNetworkLost( void )
 }
 
 //============================================================================
+ENetLayerState P2PEngine::fromGuiGetNetLayerState( ENetLayerType netLayer )
+{
+    return m_NetworkStateMachine.fromGuiGetNetLayerState( netLayer );
+}
+
+//============================================================================
 void P2PEngine::fromGuiNetworkSettingsChanged( void )
 {
 	//assureUserSpecificDirIsSet( "P2PEngine::fromGuiNetworkSettingsChanged" );

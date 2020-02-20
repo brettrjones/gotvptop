@@ -96,6 +96,10 @@ NetworkStateMachine::NetworkStateMachine(	P2PEngine& engine,
 , m_LastUpnpForwardPort( 0 )
 , m_LastUpnpForwardIp( "" )
 {
+    for( int i = 0; i < eMaxNetLayerType; i++ )
+    {
+        m_NetLayerStates[ i ] = eNetLayerStateUndefined;
+    }
 }
 
 //============================================================================
@@ -412,6 +416,7 @@ void NetworkStateMachine::fromGuiNetworkAvailable( const char * lclIp, bool isCe
         m_PktAnn.getLanIPv4().setIp( lclIp );
         m_PktAnn.setOnlinePort( u16TcpPort );
         m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
+        LogModule( eLogModuleNetworkState, LOG_INFO, " fromGuiNetworkAvailable hasChanged %s", m_LocalNetworkIp.c_str() );
     }
 
     LogModule( eLogModuleNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiNetworkAvailable creating network available event %s", lclIp );
@@ -430,6 +435,58 @@ void NetworkStateMachine::fromGuiNetworkLost( void )
 	m_NetworkStateMutex.lock();
 	m_NetworkEventList.push_back( new NetworkEventLost( *this ) );
 	m_NetworkStateMutex.unlock();
+}
+
+//============================================================================
+ENetLayerState NetworkStateMachine::fromGuiGetNetLayerState( ENetLayerType netLayer )
+{
+    ENetLayerState netState = eNetLayerStateUndefined;
+
+    LogModule( eLogModuleNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiGetNetLayerState" );
+    if( netLayer == eNetLayerTypeInternet )
+    {
+        netState - getNetworkMgr().fromGuiGetNetLayerState( netLayer );
+    }
+    else
+    {
+        // TODO add network layer states to NetworkStateMachine
+        netState = eNetLayerStateAvailable;
+    }
+
+    return netState;
+}
+
+//============================================================================
+void NetworkStateMachine::setNetLayerState( ENetLayerType layerType, ENetLayerState layerState )
+{
+    if( ( layerType >= eNetLayerTypeUndefined ) && ( layerType >= eNetLayerTypeUndefined ) )
+    {
+        m_NetLayerStates[ layerType ] = layerState;
+    }
+    else
+    {
+        LogModule( eLogModuleNetworkState, LOG_INFO, "##NetworkStateMachine::setNetLayerState invalid param" );
+    }
+}
+
+//============================================================================
+ENetLayerState NetworkStateMachine::getNetLayerState( ENetLayerType netLayer )
+{
+    if( ( netLayer >= eNetLayerTypeUndefined ) && ( netLayer >= eNetLayerTypeUndefined ) )
+    {
+        if( netLayer == eNetLayerTypeInternet )
+        {
+            setNetLayerState( netLayer, getNetworkMgr().fromGuiGetNetLayerState( netLayer ) );
+        }
+
+        // TODO update other layer states
+
+        return m_NetLayerStates[ netLayer ];
+    }
+    else
+    {
+        LogModule( eLogModuleNetworkState, LOG_INFO, "##NetworkStateMachine::setNetLayerState invalid param" );
+    }
 }
 
 //============================================================================
@@ -492,9 +549,7 @@ void NetworkStateMachine::startUpnpOpenPort( void )
         u16Port = m_Engine.getEngineSettings().getTcpIpPort();
 		if( u16Port != m_PktAnn.getOnlinePort() )
 		{
-#ifdef DEBUG_PTOP_NETWORK_STATE
-            LogMsg( LOG_ERROR, "startUpnpOpenPort engine port %d different than pkt ann port %d\n", u16Port, m_PktAnn.getOnlinePort() );
-#endif // DEBUG_PTOP_NETWORK_STATE
+            LogModule( eLogModuleNetworkState, LOG_INFO, "startUpnpOpenPort engine port %d different than pkt ann port %d\n", u16Port, m_PktAnn.getOnlinePort() );
 			m_PktAnn.setMyOnlinePort( u16Port );
 		}
 
@@ -667,9 +722,7 @@ bool NetworkStateMachine::resolveWebsiteUrls( void )
 	}
 	else
 	{
-#ifdef DEBUG_PTOP_NETWORK_STATE
-		    LogMsg( LOG_ERROR, "Failed to resolve network websites %s %s\n", anchorWebsiteUrl.c_str(), netServiceWebsiteUrl.c_str() );
-#endif // DEBUG_PTOP_NETWORK_STATE
+        LogModule( eLogModuleNetworkState, LOG_ERROR, "Failed to resolve network websites %s %s\n", anchorWebsiteUrl.c_str(), netServiceWebsiteUrl.c_str() );
 	}
 
 
@@ -685,9 +738,7 @@ bool NetworkStateMachine::resolveUrl( std::string& websiteUrl, std::string& retI
 //============================================================================
 void NetworkStateMachine::onOncePerHour( void )
 {
-#ifdef DEBUG_PTOP_NETWORK_STATE
-	LogMsg( LOG_INFO, "NetworkStateMachine::onOncePerHour\n" );
-#endif // DEBUG_PTOP_NETWORK_STATE
+    LogModule( eLogModuleNetworkState, LOG_INFO, "NetworkStateMachine::onOncePerHour" );
 	//if( isP2POnline() && m_EngineSettings.getUseUpnpPortForward() )
 	//{
 	//	if( m_NetPortForward.elapsedSecondsLastAttempt() > 60 )
