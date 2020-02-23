@@ -217,6 +217,28 @@
        </widget>
       </item>
       <item>
+       <widget class="NetAvailStatusWidget" name="m_NetAvailStatusWidget" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -551,6 +573,12 @@ background-color: rgb(255,255,191);
    <class>VxMenuButtonTop</class>
    <extends>QPushButton</extends>
    <header>VxMenuButtonTop.h</header>
+  </customwidget>
+  <customwidget>
+   <class>NetAvailStatusWidget</class>
+   <extends>QWidget</extends>
+   <header>NetAvailStatusWidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

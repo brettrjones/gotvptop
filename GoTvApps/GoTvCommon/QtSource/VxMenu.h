@@ -27,9 +27,9 @@ public:
     void                        setShowAbove( bool showAbove );
 
 protected:
-    virtual void                resizeEvent( QResizeEvent * ev );
+    virtual void                resizeEvent( QResizeEvent * ev ) override;
 
-    bool                        m_ShowAbove;
+    bool                        m_ShowAbove{ false };
     QPoint                      m_MenuPos;
     QSize                       m_OrigSize;
 };

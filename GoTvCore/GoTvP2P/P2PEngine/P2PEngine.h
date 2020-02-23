@@ -21,6 +21,7 @@
 #include "EngineParams.h"
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.h>
+#include <GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h>
 
 #include <GoTvInterface/IFromGui.h>
 #include <GoTvInterface/IAudioInterface.h>
@@ -76,6 +77,7 @@ public:
     EngineSettings&				getEngineSettings( void )						{ return m_EngineSettings; }
 	EngineParams&				getEngineParams( void )							{ return m_EngineParams; }
     NetConnector&				getNetConnector( void )							{ return m_NetConnector; }
+    NetStatusAccum&             getNetStatusAccum( void )                       { return m_NetStatusAccum; }
     NetworkMgr&					getNetworkMgr( void )							{ return m_NetworkMgr; }
     NetworkStateMachine&		getNetworkStateMachine( void )					{ return m_NetworkStateMachine; }
 	NetworkMonitor&				getNetworkMonitor( void )						{ return m_NetworkMonitor; } 
@@ -529,6 +531,7 @@ protected:
 	VxMutex						m_AnnouncePktMutex;
 	EngineSettings				m_EngineSettings;
 	EngineParams				m_EngineParams;
+    NetStatusAccum              m_NetStatusAccum;
 	AssetMgr&					m_AssetMgr;
 	P2PConnectList				m_ConnectionList;
     MediaProcessor&				m_MediaProcessor;

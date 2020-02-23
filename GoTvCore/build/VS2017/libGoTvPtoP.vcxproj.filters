@@ -610,6 +610,9 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseClient.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetworkMonitor\NetStatusAccum.cpp">
+      <Filter>GoTvP2P\NetworkMonitor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1323,6 +1326,9 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseClient.h">
       <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetworkMonitor\NetStatusAccum.h">
+      <Filter>GoTvP2P\NetworkMonitor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

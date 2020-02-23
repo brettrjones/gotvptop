@@ -553,6 +553,7 @@
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceHost.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServicesMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceUtils.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\NetworkMonitor\NetStatusAccum.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetworkMonitor\NetworkMonitor.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Network\ConnectRequest.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Network\DirectConnectTester.cpp" />
@@ -808,6 +809,7 @@
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceHost.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServicesMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceUtils.h" />
+    <ClInclude Include="..\..\GoTvP2P\NetworkMonitor\NetStatusAccum.h" />
     <ClInclude Include="..\..\GoTvP2P\NetworkMonitor\NetworkMonitor.h" />
     <ClInclude Include="..\..\GoTvP2P\Network\ConnectRequest.h" />
     <ClInclude Include="..\..\GoTvP2P\Network\DirectConnectTester.h" />

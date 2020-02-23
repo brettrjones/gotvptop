@@ -169,6 +169,9 @@ void NetworkMonitor::onOncePerSecond( void )
         }
         else
         {
+            m_Engine.getNetStatusAccum().setInternetAvail( false );
+            m_Engine.getNetStatusAccum().setNetHostAvail( false );
+
             LogModule( eLogModuleNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond network lost" );
             if( findIpTryCnt > 3 )
             {
@@ -205,6 +208,8 @@ std::string NetworkMonitor::determineLocalIp( void )
             if( 0 == VxGetLclAddress( skt, lclAddr ) )
             {
                 localIp = lclAddr.toStdString();
+                m_Engine.getNetStatusAccum().setInternetAvail( true );
+                m_Engine.getNetStatusAccum().setNetHostAvail( true );
             }
 
             VxCloseSkt( skt );
@@ -225,6 +230,7 @@ std::string NetworkMonitor::determineLocalIp( void )
             InetAddrAndPort lclAddr;
             if( 0 == VxGetLclAddress( skt, lclAddr ) )
             {
+                m_Engine.getNetStatusAccum().setInternetAvail( true );
                 localIp = lclAddr.toStdString();
             }
 

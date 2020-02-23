@@ -890,6 +890,17 @@ void AppCommon::toGuiUserMessage( const char * userMsg, ... )
 		emit signalStatusMsg( szBuffer );
 	}
 }
+//============================================================================
+/// Send Network available status to GUI for display
+void AppCommon::toGuiNetAvailableStatus( ENetAvailStatus eNetAvailStatus )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    emit signalNetAvailStatus( eNetAvailStatus );
+}
 
 //============================================================================
 void AppCommon::toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg )
@@ -1729,22 +1740,23 @@ void AppCommon::refreshFriend( VxGUID& onlineId )
 void  AppCommon::registerMetaData( void )
 {
 	qRegisterMetaType<EAppErr>( "EAppErr" );
-	qRegisterMetaType<EHostTestStatus>( "EHostTestStatus" );
-	qRegisterMetaType<EMyRelayStatus>( "EMyRelayStatus" );
-	qRegisterMetaType<ENetworkStateType>( "ENetworkStateType" );
-	qRegisterMetaType<EIsPortOpenStatus>( "EIsPortOpenStatus" );
-	qRegisterMetaType<ERandomConnectStatus>( "ERandomConnectStatus" );
-	qRegisterMetaType<VxGuidQt>( "VxGuidQt" );
-	qRegisterMetaType<EAssetType>( "EAssetType" );
-	qRegisterMetaType<EAssetAction>( "EAssetAction" );
+    qRegisterMetaType<EApplet>( "EApplet" );
+    qRegisterMetaType<EAssetAction>( "EAssetAction" );
+    qRegisterMetaType<EAssetType>( "EAssetType" );
+    qRegisterMetaType<EFileFilterType>( "EFileFilterType" );
+    qRegisterMetaType<EFriendViewType>( "EFriendViewType" );
+    qRegisterMetaType<EHostTestStatus>( "EHostTestStatus" );
+    qRegisterMetaType<EIsPortOpenStatus>( "EIsPortOpenStatus" );
+    qRegisterMetaType<EMyRelayStatus>( "EMyRelayStatus" );
+    qRegisterMetaType<ENetAvailStatus>( "ENetAvailStatus" );
+    qRegisterMetaType<ENetworkStateType>( "ENetworkStateType" );
+    qRegisterMetaType<EOfferResponse>( "EOfferResponse" );
+    qRegisterMetaType<EPluginType>( "EPluginType" );
+    qRegisterMetaType<ERandomConnectStatus>( "ERandomConnectStatus" );
 	qRegisterMetaType<EMSessionAction>( "EMSessionAction" );
-	qRegisterMetaType<EPluginType>( "EPluginType" );
-	qRegisterMetaType<EFriendViewType>( "EFriendViewType" );
-	qRegisterMetaType<EOfferResponse>( "EOfferResponse" );
 	qRegisterMetaType<ESndDef>( "ESndDef" );
-	qRegisterMetaType<EFileFilterType>( "EFileFilterType" );
-	qRegisterMetaType<EXferState>( "EXferState" );
-	qRegisterMetaType<EXferError>( "EXferError" );
-	qRegisterMetaType<EApplet>( "EApplet" );
-	
+    qRegisterMetaType<EXferError>( "EXferError" );
+    qRegisterMetaType<EXferState>( "EXferState" );
+    qRegisterMetaType<VxGuidQt>( "VxGuidQt" );
+
 }

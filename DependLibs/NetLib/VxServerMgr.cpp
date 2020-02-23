@@ -566,7 +566,7 @@ RCODE VxServerMgr::acceptConnection( VxThread * poVxThread, SOCKET oListenSkt )
 		return -3;
 	}
 
-    LogModule( eLogModuleListen, LOG_INFO, "VxServerMgr: start acceptConnection skt %d\n", oListenSkt );
+    LogModule( eLogModuleListen, LOG_INFO, "VxServerMgr: start acceptConnection skt %d rc %d\n", oListenSkt, VxGetLastError() );
 
 	// perform accept
 	// setup address

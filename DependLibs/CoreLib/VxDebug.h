@@ -46,25 +46,27 @@ enum ELogModule
 {
     eLogModuleNone = 0,
 
-    eLogModuleMulticast = 0x0001,
-    eLogModuleConnect = 0x0002,
-    eLogModuleListen = 0x0004,
-    eLogModuleSkt = 0x0008,
+    eLogModuleMulticast     = 0x0001,
+    eLogModuleConnect       = 0x0002,
+    eLogModuleListen        = 0x0004,
+    eLogModuleSkt           = 0x0008,
 
-    eLogModulePkt = 0x0010,
-    eLogModuleNetworkState = 0x0020,
-    eLogModuleNetworkMgr = 0x0040,
-    eLogModuleIsPortOpenTest = 0x0080,
+    eLogModulePkt           = 0x0010,
+    eLogModuleNetAccessStatus = 0x0020,  // internet and p2p access status
+    eLogModuleNetworkState  = 0x0040,
+    eLogModuleNetworkMgr    = 0x0080,
 
-    eLogModuleThread = 0x0100,
-    eLogModuleStorage = 0x0200, // mostly user and app directories
-    eLogModuleAssets = 0x0400,
-    eLogModulePlugins = 0x0800,
+    eLogModuleIsPortOpenTest = 0x0100,
+    eLogModuleThread        = 0x0200,
+    eLogModuleStorage       = 0x0400, // mostly user and app directories
+    eLogModuleAssets        = 0x0800,
 
-    eLogModuleWindowPositions = 0x1000,
-    eLogModuleStartup = 0x2000,
-    eLogModuleHosts = 0x4000,
-    eLogModulePlayer = 0x8000,
+    eLogModulePlugins       = 0x1000,
+    eLogModuleWindowPositions = 0x2000,
+    eLogModuleStartup       = 0x4000,
+    eLogModuleHosts         = 0x8000,
+
+    eLogModulePlayer        = 0x00010000,
 
     eMaxLogModule
 };

@@ -25,6 +25,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileXferSession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHelpers.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MyIcons.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/NetAvailStatusWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionCallbackInterface.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionLogic.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionState.h \
@@ -249,6 +250,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ListEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/NetAvailStatusWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailEditWidget.h \
@@ -312,6 +314,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/InstMsgWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MultiSessionState.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MyIcons.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/NetAvailStatusWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/NetworkKeyWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/NetworkTestWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferBarWidget.cpp \
@@ -530,6 +533,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ListEntryWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/NetAvailStatusWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailEditWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailViewWidget.cpp \

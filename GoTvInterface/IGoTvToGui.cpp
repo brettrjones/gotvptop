@@ -90,16 +90,20 @@ int IGoTv::toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t pic
 }
 
 //============================================================================
+void IGoTv::toGuiNetAvailableStatus( ENetAvailStatus eNetAvailStatus )
+{
+    getAppCommon().toGuiNetAvailableStatus( eNetAvailStatus );
+}
+
+//============================================================================
 void IGoTv::toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg )
 {
-    //__android_log_write( ANDROID_LOG_INFO, ENGINE_LOG_TAG, "toGuiNetworkState" );
     getAppCommon().toGuiNetworkState( eNetworkState, stateMsg );
 }
 
 //============================================================================
 void IGoTv::toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg )
 {
-    //__android_log_write( ANDROID_LOG_INFO, ENGINE_LOG_TAG, "toGuiMyRelayStatus" );
     getAppCommon().toGuiMyRelayStatus( eRelayStatus, msg );
 }
 
@@ -124,7 +128,6 @@ void IGoTv::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus,
 //============================================================================
 void IGoTv::toGuiContactOnline( VxNetIdent * netIdent, bool newContact )
 {
-    //__android_log_write( ANDROID_LOG_INFO, ENGINE_LOG_TAG, "toGuiContactOnline" );
     getAppCommon().toGuiContactOnline( netIdent, newContact );
 }
 

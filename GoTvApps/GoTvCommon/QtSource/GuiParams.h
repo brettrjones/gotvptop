@@ -22,6 +22,8 @@ public:
     GuiParams();
     virtual ~GuiParams() = default;
 
+    static const int            MIN_TITLE_BAR_BUTTON_SIZE = 30;
+
     /// @brief initialize gui scaling etc
     static void                 initGuiParams();
 

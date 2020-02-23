@@ -281,3 +281,15 @@ enum ENetLayerState
 
     eMaxNetLayerState		            //< max must be last
 };
+
+enum ENetAvailStatus
+{
+    eNetAvailNoInternet = 0,
+    eNetAvailHostAvail,
+    eNetAvailP2PAvail,
+    eNetAvailGroupHost,
+    eNetAvailFullOnlineWithRelay,
+    eNetAvailFullOnlineDirectConnect,
+
+    eMaxNetAvailStatus
+};

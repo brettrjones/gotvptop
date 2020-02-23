@@ -17,6 +17,12 @@
 #include "MyIcons.h"
 #include "AppCommon.h"
 
+namespace
+{
+    const int MIN_CAM_PREVIEW_HEIGHT = 30;
+    const int MIN_CAM_PREVIEW_WIDTH = 30;
+}
+
 //============================================================================
 TitleBarWidget::TitleBarWidget( QWidget * parent )
 : QWidget( parent )
@@ -68,11 +74,7 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 	connect( ui.m_CamPreviewScreen,			SIGNAL(clicked()),		this, SLOT(slotCamPreviewClicked()) );
 	connect( &m_MyApp,						SIGNAL(signalStatusMsg(QString)),	this, SLOT(slotTitleStatusBarMsg(QString)) );
 	connect( &m_MyApp,						SIGNAL(signalToGuiPluginStatus(EPluginType,int,int)),	this, SLOT(slotToGuiPluginStatus(EPluginType,int,int)) );
-}
-
-//============================================================================
-TitleBarWidget::~TitleBarWidget()
-{
+    connect( &m_MyApp,                      SIGNAL( signalNetAvailStatus( ENetAvailStatus ) ), this, SLOT( slotToGuiNetAvailStatus( ENetAvailStatus ) ) );
 }
 
 //============================================================================
@@ -383,3 +385,8 @@ void TitleBarWidget::setBackButtonColor( QColor iconColor )
 	ui.m_BackDlgButton->setIconColor( iconColor );
 }
 
+//============================================================================
+void TitleBarWidget::slotToGuiNetAvailStatus( ENetAvailStatus eNetAvailStatus )
+{
+    ui.m_NetAvailStatusWidget->toGuiNetAvailStatus( eNetAvailStatus );
+}

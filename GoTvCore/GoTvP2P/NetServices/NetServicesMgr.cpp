@@ -439,10 +439,13 @@ void NetServicesMgr::netActionResultRandomConnect( EAppErr eAppErr, HostList * a
 //============================================================================
 void NetServicesMgr::netActionResultIsMyPortOpen( EAppErr eAppErr, std::string& myExternalIp )
 {
-    #ifdef LOG_PORT_TEST
-	LogMsg( LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen %d ip %s\n", eAppErr, myExternalIp.c_str() );
-    #endif // LOG_PORT_TEST
-	if( m_pfuncPortOpenCallbackHandler )
+	LogModule( eLogModuleNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen %d ip %s\n", eAppErr, myExternalIp.c_str() );
+    if( eAppErr != eAppErrNone )
+    {
+        m_Engine.getNetStatusAccum().setDirectConnectTested( false, false );
+    }
+
+ 	if( m_pfuncPortOpenCallbackHandler )
 	{
 		m_pfuncPortOpenCallbackHandler( m_PortOpenCallbackUserData, eAppErr, myExternalIp );
 	}
@@ -624,7 +627,7 @@ static int uint16_t = 0;
 		{
 			if( false == testLoobackPing( lclIP, tcpListenPort ) )
 			{
-				//LogMsg( LOG_INFO, "666 FAILED LOOPBACK Test ip %s port %d app sec %d\n", rmtIP.c_str(), tcpListenPort, GetApplicationAliveSec() );
+				LogMsg( LOG_INFO, "666 FAILED LOOPBACK Test ip %s port %d app sec %d\n", lclIP.c_str(), tcpListenPort, GetApplicationAliveSec() );
 				VxSleep( 1000 );
 				retryLoopbackCnt--;
 				continue;

@@ -135,6 +135,8 @@ public:
     /// Send video feed frame to GUI for playback.. 
     virtual int				    toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * picBuf, uint32_t picBufLen, int picWidth, int picHeight ) = 0;
 
+    /// Send Network available status to GUI for display
+    virtual void				toGuiNetAvailableStatus( ENetAvailStatus eNetAvailStatus ) = 0;
 	/// Send Network state to GUI for display
 	virtual void				toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" ) = 0;
 	/// Send anchor status to GUI for display

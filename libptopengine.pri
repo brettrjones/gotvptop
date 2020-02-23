@@ -170,6 +170,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Network/RcMulticastBroadcast.h \
     $$PWD/GoTvCore/GoTvP2P/Network/RcMulticastListen.h \
     $$PWD/GoTvCore/GoTvP2P/NetworkMonitor/NetworkMonitor.h \
+    $$PWD/GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/BrowserHttpConnection.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/ContactList.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/EngineParams.h \
@@ -360,6 +361,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/Network/RcMulticastBase.cpp \
     $$PWD/GoTvCore/GoTvP2P/Network/RcMulticastBroadcast.cpp \
     $$PWD/GoTvCore/GoTvP2P/Network/RcMulticastListen.cpp \
+    $$PWD/GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetworkMonitor/NetworkMonitor.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/BrowserHttpConnection.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/ContactList.cpp \

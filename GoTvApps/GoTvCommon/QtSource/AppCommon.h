@@ -391,6 +391,8 @@ public:
 	// NOTE: toGuiUserMessage should be called from in gui on gui thread only
     virtual void				toGuiUserMessage( const char * userMsg, ... );
 
+    /// Send Network available status to GUI for display
+    virtual void				toGuiNetAvailableStatus( ENetAvailStatus eNetAvailStatus ) override;
     virtual void				toGuiNetworkState( ENetworkStateType eNetworkState, const char* stateMsg = "" ) override;
     virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) override;
     virtual void				toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg = "" ) override;
@@ -573,7 +575,8 @@ signals:
 	void						signalHostStatus( EHostTestStatus eHostStatus, QString strMsg );
 	void						signalIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, QString strMsg );
 	void						signalRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, QString strMsg );
-	void						signalNetworkStateChanged( ENetworkStateType eNetworkState );
+    void						signalNetworkStateChanged( ENetworkStateType eNetworkState );
+    void						signalNetAvailStatus( ENetAvailStatus eNetAvailStatus );
 
 	void						signalRefreshFriend( VxGuidQt onlineId ); // emitted if friend has changed
 	void						signalAssetViewMsgAction( EAssetAction, VxGuidQt onlineId, int pos0to100000 );

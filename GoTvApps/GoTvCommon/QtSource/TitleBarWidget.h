@@ -32,7 +32,7 @@ class TitleBarWidget : public QWidget
 
 public:
 	TitleBarWidget( QWidget * parent = 0 );
-	virtual ~TitleBarWidget();
+	virtual ~TitleBarWidget() = default;
 
 	AppCommon&					getMyApp( void ) { return m_MyApp; }
 	MyIcons&					getMyIcons( void );
@@ -111,6 +111,7 @@ public slots:
 
 	virtual void				slotTitleStatusBarMsg( QString msg );
 	virtual void				slotToGuiPluginStatus( EPluginType ePluginType, int statusType, int statusValue );
+    virtual void				slotToGuiNetAvailStatus( ENetAvailStatus eNetAvailStatus );
 
 protected:
 	Ui::TitleBarWidgetClass		ui;
