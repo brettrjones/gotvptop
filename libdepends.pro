@@ -11,6 +11,8 @@ INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
 
 include(config_static_dependlib.pri)
 
+PRE_TARGETDEPS += $$PWD/libgnu.pro
+
 #short obj path so does not overflow windows 32K command line limit "make (e=87): The parameter is incorrect"
 CONFIG(debug, debug|release){
     OBJECTS_DIR=.dependd

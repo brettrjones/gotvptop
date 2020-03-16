@@ -95,30 +95,19 @@ namespace
     {
     public:
         const int MAX_LOG_FUNCTIONS = 16;
-        class VxLogFuncPair
-        {
-        public:
-            VxLogFuncPair( LOG_FUNCTION pfuncLogHandler, void * userData )
-                : m_Func( pfuncLogHandler ), m_UserData( userData )
-            {
-            }
-
-            LOG_FUNCTION m_Func;
-            void * m_UserData;
-        };
 
         LogMgr() = default;
  
         void handleLog( void * userData, uint32_t u32LogFlags, char * logMsg )
         {
-            if( m_LogFuncList.size() )
+            if( m_LogCallbackList.size() )
             {
                 g_oLogMutex.lock();
-                if( m_LogFuncList.size() && logMsg )
+                if( m_LogCallbackList.size() && logMsg )
                 {
-                    for( VxLogFuncPair& pair : m_LogFuncList )
+                    for( auto callback : m_LogCallbackList )
                     {
-                        pair.m_Func( pair.m_UserData, u32LogFlags, logMsg );
+                        callback->onLogEvent( u32LogFlags, logMsg );
                     }
                 }
 
@@ -127,29 +116,28 @@ namespace
         }
 
         // add a log handler
-        void addLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData )
+        void addLogHandler( ILogCallbackInterface * callbackHandler )
         {
             g_oLogMutex.lock();
-            if( pfuncLogHandler && ( m_LogFuncList.size() < MAX_LOG_FUNCTIONS ) )
+            if( callbackHandler && ( m_LogCallbackList.size() < MAX_LOG_FUNCTIONS ) )
             {
-                LogMgr::VxLogFuncPair funcPair( pfuncLogHandler, userData );
-                m_LogFuncList.push_back( funcPair );
+                m_LogCallbackList.push_back( callbackHandler );
             }
 
             g_oLogMutex.unlock();
         }
 
         // remove a log handler
-        void removeLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData )
+        void removeLogHandler( ILogCallbackInterface * callbackHandler )
         {
             g_oLogMutex.lock();
-            if( userData && m_LogFuncList.size() )
+            if( callbackHandler && m_LogCallbackList.size() )
             {
-                for( auto iter = m_LogFuncList.begin(); iter != m_LogFuncList.end(); ++iter )
+                for( auto iter = m_LogCallbackList.begin(); iter != m_LogCallbackList.end(); ++iter )
                 {
-                    if( ( *iter ).m_UserData == userData )
+                    if( ( *iter ) == callbackHandler )
                     {
-                        m_LogFuncList.erase( iter );
+                        m_LogCallbackList.erase( iter );
                         break;
                     }
                 }
@@ -158,7 +146,7 @@ namespace
             g_oLogMutex.unlock();
         }
 
-        std::vector<LogMgr::VxLogFuncPair>		m_LogFuncList;
+        std::vector<ILogCallbackInterface *> m_LogCallbackList;
     };
 
     LogMgr& GetLogMgr()
@@ -171,18 +159,20 @@ namespace
     {
         GetLogMgr().handleLog( userData, u32LogFlags, logMsg );
     }
+}
 
-    // add a log handler
-    void AddLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData )
-    {
-        GetLogMgr().addLogHandler( pfuncLogHandler, userData );
-    }
+//============================================================================
+// add a log handler
+void VxAddLogHandler( ILogCallbackInterface * callbackHandler )
+{
+    GetLogMgr().addLogHandler( callbackHandler );
+}
 
-    // remove a log handler
-    void RemoveLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData )
-    {
-        GetLogMgr().removeLogHandler( pfuncLogHandler, userData );
-    }
+//============================================================================
+// remove a log handler
+void VxRemoveLogHandler( ILogCallbackInterface * callbackHandler )
+{
+    GetLogMgr().removeLogHandler( callbackHandler );
 }
 
 //============================================================================
@@ -268,20 +258,6 @@ void VxSetLogFlags( unsigned long u32LogFlags )
 void VxEnableDefaultLogHandler( bool enableDefaultHandler )
 {
     g_enableDefaultHandler = enableDefaultHandler;
-}
-
-//============================================================================
-// add a log handler
-void VxAddLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData )
-{
-    GetLogMgr().addLogHandler( pfuncLogHandler, userData );
-}
-
-//============================================================================
-// remove a log handler
-void VxRemoveLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData )
-{
-    GetLogMgr().removeLogHandler( pfuncLogHandler, userData );
 }
 
 //============================================================================

@@ -22,6 +22,8 @@ CONFIG(release, debug|release){
 TARGET = ssl
 }
 
+PRE_TARGETDEPS += $$PWD/libcorelib.pro
+
 DESTDIR = $${DEST_SHARED_LIBS_DIR}
 
 include(libssl.pri)

@@ -10,3 +10,4 @@ include(config_static_dependlib.pri)
 
 include(libcorelib.pri)
 
+PRE_TARGETDEPS += $$PWD/libcrossguid.pro

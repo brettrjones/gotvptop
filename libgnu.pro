@@ -17,6 +17,8 @@ CONFIG(release, debug|release){
 
 include(libgnu.pri)
 
+PRE_TARGETDEPS += $$PWD/libssl.pro
+
 HEADERS += \
     GoTvAppConfig.h \
     GoTvCompilerConfig.h \
