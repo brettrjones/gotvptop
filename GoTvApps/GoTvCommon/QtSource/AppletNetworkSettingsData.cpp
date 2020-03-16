@@ -1,6 +1,6 @@
+#include "AppletNetworkSettingsData.h"
 //============================================================================
-// Copyright (C) 2014 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2020 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,26 +13,21 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "NetActionIsMyPortOpen.h"
-#include "NetServicesMgr.h"
-
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-
-#include <CoreLib/VxParse.h>
+#include "AppletNetworkSettingsData.h"
 
 //============================================================================
-NetActionIsMyPortOpen::NetActionIsMyPortOpen( NetServicesMgr& netServicesMgr )
-: NetActionBase( netServicesMgr )
+bool AppletNetworkSettingsData::operator == ( const AppletNetworkSettingsData& rhs ) const
 {
+    return ( m_NetHostSetting == rhs.m_NetHostSetting )
+        && m_PreferredNetworkAdapterIp == rhs.m_PreferredNetworkAdapterIp
+        && m_TcpPort == rhs.m_TcpPort
+        && m_ExternalIp == rhs.m_ExternalIp
+        && m_FirewallTestType == rhs.m_FirewallTestType
+        && m_UseUpnp == rhs.m_UseUpnp;
 }
 
 //============================================================================
-void NetActionIsMyPortOpen::doAction( void )
+bool AppletNetworkSettingsData::operator != ( const AppletNetworkSettingsData& rhs ) const
 {
-	std::string myIp = "";
-	EAppErr eResult = 	m_NetServicesMgr.doIsMyPortOpen( myIp, false );
-	LogModule( eLogIsPortOpenTest, LOG_INFO, "NetActionIsMyPortOpen::doAction result %d ip %s\n", eResult, myIp.c_str() );
-	m_NetServicesMgr.netActionResultIsMyPortOpen( eResult, myIp );
+    return !( *this == rhs );
 }
-
-

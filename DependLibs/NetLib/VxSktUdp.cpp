@@ -46,16 +46,20 @@ RCODE VxSktUdp::udpOpen( InetAddress& oLclIp, uint16_t u16Port, bool enableRecei
 	RCODE rc = createSocket( oLclIp, u16Port, &poResultAddr );
 	if( 0 == rc )
 	{
+#if USE_BIND_LOCAL_IP
 		VxSetSktAllowReusePort( m_Socket );
 		if( false == VxBindSkt( m_Socket, oLclIp, u16Port ) )
 		{
+#endif // #if USE_BIND_LOCAL_IP
 			m_rcLastSktError = VxGetLastError();
 			if( 0 == m_rcLastSktError )
 			{
 				m_rcLastSktError = -1;
 			}
 			rc = m_rcLastSktError;
+#if USE_BIND_LOCAL_IP
 		}
+#endif // #if USE_BIND_LOCAL_IP
 	}
 
 	if( ( 0 == rc ) && enableReceive )
@@ -80,6 +84,7 @@ RCODE VxSktUdp::udpOpenUnicast( InetAddress& oLclIp, uint16_t u16Port )
 {
 	struct addrinfo * poResultAddr = 0;
 	RCODE rc = createSocket( oLclIp, u16Port, &poResultAddr );
+#if USE_BIND_LOCAL_IP
 	if( 0 == rc )
 	{
 		if( false == VxBindSkt( m_Socket, oLclIp, u16Port ) )
@@ -87,6 +92,7 @@ RCODE VxSktUdp::udpOpenUnicast( InetAddress& oLclIp, uint16_t u16Port )
 			rc = -1;
 		}
 	}
+#endif // USE_BIND_LOCAL_IP
 
 	if( 0 == rc )
 	{
@@ -111,10 +117,12 @@ RCODE VxSktUdp::udpOpenMulticastListen( InetAddress& oLclIp, uint16_t u16Port, c
 	if( 0 == rc )
 	{
 		VxSetSktAllowReusePort( m_Socket );
+#if USE_BIND_LOCAL_IP
 		if( false == VxBindSkt( m_Socket, oLclIp, u16Port ) )
 		{
 			rc = -1;
 		}
+#endif // USE_BIND_LOCAL_IP
 	}
 
 	if( false == joinMulticastGroup( oLclIp, m_strMulticastGroupIp.c_str() ) )
@@ -226,7 +234,7 @@ RCODE  VxSktUdp::sendToMulticast(	const char *	pData,		// data to send
 	if( setsockopt( m_Socket, IPPROTO_IP, IP_ADD_MEMBERSHIP,(char*)&mreq, sizeof(mreq)) < 0)
 	{
 		m_rcLastSktError = VxGetLastError();
-        if( IsLogEnabled( eLogModuleSkt ) )
+        if( IsLogEnabled( eLogSkt ) )
 		    LogMsg( LOG_ERROR, "VxSktUdp::sendToMulticast setsockopt mreq failed %s\n", VxDescribeSktError( m_rcLastSktError ) );
 	}
 

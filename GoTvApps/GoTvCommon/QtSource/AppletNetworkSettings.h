@@ -18,8 +18,7 @@
 
 #include "AppletBase.h"
 #include "AppDefs.h"
-#include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
-
+#include "AppletNetworkSettingsData.h"
 
 class AppletNetworkSettings : public AppletBase
 {
@@ -59,16 +58,14 @@ protected:
     QString						getNetworkKey( void ) { return ui.m_NetworkKeyEdit->text(); }
     bool                        verifyNetworkKey( QString& keyVal );
 
-    void						updateDlgFromSettings( void );
+    void						updateDlgFromSettings( bool initialSettings );
     void						updateSettingsFromDlg( void );
     void						populateDlgFromNetHostSetting( NetHostSetting& anchorSetting );
     void						setFirewallTest( EngineSettings::EFirewallTestType eFirewallType );
+    void                        populateNetData( AppletNetworkSettingsData& netData );
 
 	Ui::AppletNetworkSettingsWidget		ui;
-    NetSettings					m_NetSettings;
-    std::string					m_OrigHostUrl;
-    std::string					m_OrigNetworkName;
-    std::string					m_OrigNetworkKey;
+    AppletNetworkSettingsData   m_OriginalSettings;
 };
 
 

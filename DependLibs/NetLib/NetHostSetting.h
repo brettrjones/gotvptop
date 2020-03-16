@@ -30,6 +30,8 @@ public:
 	virtual ~NetHostSetting() = default;
 
 	NetHostSetting&				operator =( const NetHostSetting& rhs );
+    bool						operator == ( const NetHostSetting& rhs ) const;
+    bool						operator != ( const NetHostSetting& rhs ) const;
 
 	void						setNetHostSettingName( const char * settingName )			{ m_NetHostSettingName = settingName; }
 	std::string&				getNetHostSettingName( void )								{ return m_NetHostSettingName; }

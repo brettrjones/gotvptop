@@ -41,7 +41,7 @@ namespace
 NetworkMonitor::NetworkMonitor( P2PEngine& engine )
 : m_Engine( engine )
 , m_bIsStarted( false )
-, m_iCheckInterval( 0 )
+, m_iCheckInterval( NET_MONITOR_CHECK_INTERVAL_SEC )
 {
 }
 
@@ -51,7 +51,7 @@ void NetworkMonitor::networkMonitorStartup( const char * preferredNetIp, const c
 	m_strPreferredAdapterIp	= preferredNetIp;
 	m_strCellNetIp			= cellNetIp;
 	m_bIsStarted			= true;
-    LogModule( eLogModuleStartup, LOG_INFO, "networkMonitorStartup preferred ip %s cell ip %s", m_strPreferredAdapterIp.c_str(), m_strCellNetIp.c_str() );
+    LogModule( eLogStartup, LOG_INFO, "networkMonitorStartup preferred ip %s cell ip %s", m_strPreferredAdapterIp.c_str(), m_strCellNetIp.c_str() );
 }
 
 //============================================================================
@@ -122,14 +122,14 @@ void NetworkMonitor::onOncePerSecond( void )
 
 	if( foundSameAsLastIp && getIsInternetAvailable() )
 	{
-        // LogModule( eLogModuleNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond foundSameAsLastIp" );
+        // LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond foundSameAsLastIp" );
         return;
 	}
 
 	if( foundPreferredAdapterIp )
 	{
 		m_strLastFoundIp = m_strPreferredAdapterIp;
-        LogModule( eLogModuleNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond foundPreferredAdapterIp %s", m_strLastFoundIp.c_str() );
+        LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond foundPreferredAdapterIp %s", m_strLastFoundIp.c_str() );
         setIsInternetAvailable( true );
         m_Engine.fromGuiNetworkAvailable( m_strLastFoundIp.c_str(), false );
 		return;
@@ -138,7 +138,7 @@ void NetworkMonitor::onOncePerSecond( void )
 	if( foundCellIp )
 	{
 		m_strLastFoundIp = m_strCellNetIp;
-        LogModule( eLogModuleNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond foundCellIp %s", m_strLastFoundIp.c_str() );
+        LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond foundCellIp %s", m_strLastFoundIp.c_str() );
         setIsInternetAvailable( true );
 		m_Engine.fromGuiNetworkAvailable( m_strLastFoundIp.c_str(), true );
 		return;
@@ -159,7 +159,7 @@ void NetworkMonitor::onOncePerSecond( void )
         if( lclIp.length() )
         {
             findIpTryCnt = 0;
-            LogModule( eLogModuleNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond net avail %s", lclIp.c_str() );
+            // LogModule( eLogNetworkState, LOG_VERBOSE, " NetworkMonitor::onOncePerSecond net avail %s", lclIp.c_str() );
             if( ( lclIp != m_strLastFoundIp ) || !getIsInternetAvailable() )
             {
                 m_strLastFoundIp = lclIp;
@@ -172,7 +172,7 @@ void NetworkMonitor::onOncePerSecond( void )
             m_Engine.getNetStatusAccum().setInternetAvail( false );
             m_Engine.getNetStatusAccum().setNetHostAvail( false );
 
-            LogModule( eLogModuleNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond network lost" );
+            LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond network lost" );
             if( findIpTryCnt > 3 )
             {
                 LogMsg( LOG_ERROR, "Could Not Get Connection To Internet" );
@@ -218,7 +218,7 @@ std::string NetworkMonitor::determineLocalIp( void )
 
     if( localIp.empty() )
     {
-        LogModule( eLogModuleNetworkState, LOG_WARNING, "Failed verify No Limit Hosted internet coneection to %s:%d", VxGetNetworkHostName(), VxGetNetworkHostPort() );
+        LogModule( eLogNetworkState, LOG_WARNING, "Failed verify No Limit Hosted internet conection to %s:%d", VxGetNetworkHostName(), VxGetNetworkHostPort() );
 
         // try again but use google
         SOCKET skt = sktConnect.connectTo( NET_TEST_WEB_CONNECTION_HOST,		// remote ip or url
@@ -253,7 +253,7 @@ std::string NetworkMonitor::determineLocalIp( void )
 
         if( localIp.empty() )
         {
-            LogModule( eLogModuleNetworkState, LOG_WARNING, "Failed verify internet coneection to %s:%d", NET_TEST_WEB_CONNECTION_HOST, VxGetNetworkHostName(), 80 );
+            LogModule( eLogNetworkState, LOG_WARNING, "Failed verify internet conection to %s:%d", NET_TEST_WEB_CONNECTION_HOST, VxGetNetworkHostName(), 80 );
         }
     }
 

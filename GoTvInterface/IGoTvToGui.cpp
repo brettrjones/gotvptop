@@ -442,8 +442,7 @@ bool IGoTv::toGuiSetGameActionVar( EPluginType	ePluginType,
 //============================================================================
 void IGoTv::toGuiAssetAdded( AssetInfo * assetInfo )
 {
-    if( LOG_FLAG_ASSETS & VxGetModuleLogFlags() )
-        LogMsg( LOG_DEBUG, "IGoTv::toGuiAssetAdded\n" );
+    LogModule( eLogAssets, LOG_DEBUG, "IGoTv::toGuiAssetAdded\n" );
     getAppCommon().toGuiAssetAdded( assetInfo );
 }
 

@@ -7,6 +7,7 @@ include(config_static_dependlib.pri)
 
 include(libpktlib.pri)
 
+pktlib.depends += $$PWD/libcorelib.pro
 
 
 

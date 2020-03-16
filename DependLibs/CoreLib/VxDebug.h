@@ -27,15 +27,15 @@
 #define LOG_DEBUG	(0x0040)
 #define LOG_INFO	(0x0080)
 #define LOG_STATUS	(0x0100)
+#define LOG_PRIORITY_MASK	    0x000001ff
 
 // defines so less work converting Linux code
 #define LOG_WARNING		LOG_WARN
 #define LOG_ERR			LOG_ERROR
 #define LOG_CRIT		LOG_FATAL
 
-
 #define MAX_ERR_MSG_SIZE 4096
-typedef void (*LOG_FUNCTION )( void *, uint32_t, char * );
+typedef void ( *LOG_FUNCTION )( void *, uint32_t, char * );
 
 // protected by #ifdef __cplusplus so can be included in .c code
 #ifdef __cplusplus
@@ -44,37 +44,45 @@ typedef void (*LOG_FUNCTION )( void *, uint32_t, char * );
 
 enum ELogModule
 {
-    eLogModuleNone = 0,
+    eLogNone = 0,
 
-    eLogModuleMulticast     = 0x0001,
-    eLogModuleConnect       = 0x0002,
-    eLogModuleListen        = 0x0004,
-    eLogModuleSkt           = 0x0008,
+    eLogMulticast     = 0x0001,
+    eLogConnect       = 0x0002,
+    eLogListen        = 0x0004,
+    eLogSkt           = 0x0008,
 
-    eLogModulePkt           = 0x0010,
-    eLogModuleNetAccessStatus = 0x0020,  // internet and p2p access status
-    eLogModuleNetworkState  = 0x0040,
-    eLogModuleNetworkMgr    = 0x0080,
+    eLogPkt           = 0x0010,
+    eLogNetAccessStatus = 0x0020,  // internet and p2p access status
+    eLogNetworkState  = 0x0040,
+    eLogNetworkMgr    = 0x0080,
 
-    eLogModuleIsPortOpenTest = 0x0100,
-    eLogModuleThread        = 0x0200,
-    eLogModuleStorage       = 0x0400, // mostly user and app directories
-    eLogModuleAssets        = 0x0800,
+    eLogIsPortOpenTest = 0x0100,
+    eLogThread        = 0x0200,
+    eLogStorage       = 0x0400, // mostly user and app directories
+    eLogAssets        = 0x0800,
 
-    eLogModulePlugins       = 0x1000,
-    eLogModuleWindowPositions = 0x2000,
-    eLogModuleStartup       = 0x4000,
-    eLogModuleHosts         = 0x8000,
+    eLogPlugins       = 0x1000,
+    eLogWindowPositions = 0x2000,
+    eLogStartup       = 0x4000,
+    eLogHosts         = 0x8000,
 
-    eLogModulePlayer        = 0x00010000,
+    eLogPlayer        = 0x00010000,
+    eLogTcpData       = 0x00020000,
+    eLogUdpData       = 0x00040000,
 
     eMaxLogModule
 };
 
-void LogModule( ELogModule eLogModule, unsigned long u32MsgType, const char* msg, ... );
+void LogModule( ELogModule eLog, unsigned long u32MsgType, const char* msg, ... );
 
 /// @brief return true if should log the given module
 bool IsLogEnabled( ELogModule logModule );
+
+class ILogCallbackInterface
+{
+public:
+    virtual void                onLogEvent( uint32_t u32LogFlags, char * logMsg ) = 0;
+};
 
 
 class LogEntry
@@ -115,23 +123,13 @@ public:
 //#define ENABLE_LOG_LIST 1
 
 void							VxGetLogMessages( unsigned long u32MsgTypes, std::vector<LogEntry>& retMsgs );
+// add a log handler
+void							VxAddLogHandler( ILogCallbackInterface * logHandler );
+// remove a log handler
+void							VxRemoveLogHandler( ILogCallbackInterface * logHandler );
+
 #endif // __cplusplus
 
-#define LOG_PRIORITY_MASK	    0x000001ff
-#define LOG_MODULE_MASK		    0xfffffe00
-
-#define LOG_FLAG_THREADS        0x00000400
-#define LOG_FLAG_ASSETS         0x00000800
-#define LOG_FLAG_P2P_ENGINE     0x00001000
-#define LOG_FLAG_FFMPEG         0x00002000
-#define LOG_FLAG_XPMC           0x00004000
-#define LOG_FLAG_PORT_TEST      0x00008000
-#define LOG_FLAG_CONNECT        0x00010000
-
-#define LOG_FLAG_VIDEO_PLAY     0x00200000
-#define LOG_FLAG_AUDIO_PLAY     0x00400000
-#define LOG_FLAG_PLAYER_SYNC    0x00800000
-#define LOG_FLAG_PLAYER         0x00F00000
 
 #ifdef __cplusplus
 extern "C" {
@@ -145,11 +143,13 @@ uint32_t                        VxGetLogPriorityMask( void );
 void                            VxSetModuleLogFlags( uint32_t flags );
 uint32_t                        VxGetModuleLogFlags( void );
 
-void							VxSetLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData );
-LOG_FUNCTION					VxGetLogHandler( void );
-void *					        VxGetLogUserData( void );
+// enable log to file
 void							VxSetLogToFile( const char * pFileName );
 void							VxSetLogFlags( unsigned long u32LogFlags );
+
+// enable/disable default log handler
+void                            VxEnableDefaultLogHandler( bool enableDefaultHandler );
+
 void							LogMsg( unsigned long u32MsgType, const char* msg, ...);
 void							LogMsgVarg(unsigned long u32MsgType, const char *fmt, va_list vargs);
 void							VxHandleLogMsg(unsigned long u32MsgType, char * msg);

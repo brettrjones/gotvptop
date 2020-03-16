@@ -39,6 +39,7 @@ public:
 	virtual ~VxThread(void);
 
 	const char * 				getThreadName( void );
+    unsigned int				getThreadId( void )				    { return m_uiThreadId; } // In android this returns the TID you see in eclipse
 	unsigned int				getThreadTid( void )				{ return m_ThreadTid; } // In android this returns the TID you see in eclipse
 	void * 						getThreadUserParam( void );
 
@@ -88,19 +89,19 @@ protected:
 	static VX_THREAD_EXIT_CALLBACK_T 	m_funcExitCallback;
 
 #ifdef TARGET_OS_WINDOWS
-	DWORD 						m_uiThreadId;		// thread ID
-	HANDLE 						m_hThread;		    // handle to thread
+    DWORD 						m_uiThreadId{0};		// thread ID
+    HANDLE 						m_hThread{0};		    // handle to thread
 #else
-	unsigned int 				m_uiThreadId;		// thread ID
+    unsigned int 				m_uiThreadId{0};		// thread ID
 	pthread_t 					m_ThreadInfo;      // pthread info
 	pthread_attr_t 				m_ThreadAttr;
 #endif
-	unsigned int				m_ThreadTid;
-	uint64_t					m_ThreadStartTimeGmtMs;
+    unsigned int				m_ThreadTid{0};
+    uint64_t					m_ThreadStartTimeGmtMs{0};
 
 private:
-	VxThread(const VxThread& rhs);// don't allow copy constructor
-	VxThread& operator=(const VxThread& rhs);// don't allow copy operation
+	VxThread(const VxThread& rhs) = delete;// don't allow copy constructor
+	VxThread& operator=(const VxThread& rhs) = delete;// don't allow copy operation
 };
 
 //============================================================================

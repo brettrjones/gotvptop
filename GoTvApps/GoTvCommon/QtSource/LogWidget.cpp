@@ -16,22 +16,12 @@
 #include "LogWidget.h"
 #include "AppSettings.h"
 
-#include <CoreLib/VxDebug.h>
-
 #include <QScrollBar>
 #include <QClipboard>
 
 namespace
 {
     const int MAX_LOG_EDIT_BLOCK_CNT = 1000;
-
-    void LogHandler( void * userData, uint32_t u32LogFlags, char * logMsg )
-    {
-        if( userData )
-        {
-            ( (LogWidget *)userData )->toGuiLog( u32LogFlags, logMsg );
-        }
-    }
 }
 
 
@@ -51,19 +41,17 @@ LogWidget::LogWidget( QWidget * parent )
 
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotLogMsg( const QString& ) ) );
 
-    m_OldLogFunction = VxGetLogHandler();
-    m_OldLogUserData = VxGetLogUserData();
-    VxSetLogHandler( LogHandler, this );
+    VxAddLogHandler( this );
 }
 
 //============================================================================
 LogWidget::~LogWidget()
 {
-    VxSetLogHandler( m_OldLogFunction, m_OldLogUserData );
+    VxRemoveLogHandler( this );
 }
 
 //============================================================================
-void LogWidget::toGuiLog( uint32_t u32LogFlags, char * logMsg )
+void LogWidget::onLogEvent( uint32_t u32LogFlags, char * logMsg )
 {
     m_LogMutex.lock();
     if( m_VerboseLog

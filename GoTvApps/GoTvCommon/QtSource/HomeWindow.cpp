@@ -118,14 +118,14 @@ void HomeWindow::reject()
 //============================================================================
 void HomeWindow::resizeEvent( QResizeEvent * ev)
 {
-    LogModule(eLogModuleWindowPositions, LOG_VERBOSE, "HomeWindow::resizeEvent w %d h %d", ev->size().width(), ev->size().height()  );
+    LogModule(eLogWindowPositions, LOG_VERBOSE, "HomeWindow::resizeEvent w %d h %d", ev->size().width(), ev->size().height()  );
 	emit signalMainWindowResized();
 }
 
 //============================================================================
 void HomeWindow::moveEvent( QMoveEvent * )
 {
-    LogModule(eLogModuleWindowPositions, LOG_VERBOSE, "HomeWindow::moveEvent" );
+    LogModule(eLogWindowPositions, LOG_VERBOSE, "HomeWindow::moveEvent" );
     emit signalMainWindowMoved();
 }
 
@@ -356,7 +356,7 @@ void HomeWindow::updateAndroidGeomety()
     int width = screenGeometry.width() - 20;
     resize(width, height);
     move( screenGeometry.left() + 10, screenGeometry.top() + 10 );
-    LogModule(eLogModuleWindowPositions, LOG_VERBOSE, "Home Screen Size %d %d", width, height);
+    LogModule(eLogWindowPositions, LOG_VERBOSE, "Home Screen Size %d %d", width, height);
 #endif // defined(TARGET_OS_ANDROID)
 }
 

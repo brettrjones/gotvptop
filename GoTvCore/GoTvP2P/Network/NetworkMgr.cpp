@@ -117,7 +117,7 @@ void NetworkMgr::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNet
         && ( m_strLocalIpAddr == strIp )
         && ( m_bIsCellularNetwork == isCellularNetwork ) )
     {
-        LogModule( eLogModuleNetworkMgr, LOG_DEBUG, "fromGuiNetworkAvailable but network already set to %s\n", m_strLocalIpAddr.c_str() );
+        LogModule( eLogNetworkMgr, LOG_DEBUG, "fromGuiNetworkAvailable but network already set to %s\n", m_strLocalIpAddr.c_str() );
         return;
     }
 
@@ -127,7 +127,7 @@ void NetworkMgr::fromGuiNetworkAvailable( const char * lclIp, bool isCellularNet
     m_bNetworkAvailable = true;
 
 	m_PeerMgr.setLocalIp( m_LocalIp );
-//#ifdef ENABLE_MULTICAST
+//#ifdef ENABLE_MULTICAST // do not specify local address .. does not work with vpn
 //	m_MulticastListen.setLocalIp( m_LocalIp );
 //	m_MulticastBroadcast.setLocalIp( m_LocalIp );
 //#endif // ENABLE_MULTICAST
@@ -238,13 +238,13 @@ void NetworkMgr::handleTcpSktCallback( VxSktBase * sktBase )
 	switch( sktBase->getCallbackReason() )
 	{
 	case eSktCallbackReasonConnectError:
-        if( IsLogEnabled( eLogModuleNetworkMgr ) )
-		    LogMsg( LOG_ERROR, "NetworkMgr:TCP Skt %d connect error %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ) );
+        LogModule( eLogNetworkMgr, LOG_ERROR, "NetworkMgr:TCP skt %d skt id %d connect error %s thread 0x%x",
+                    sktBase->getSktHandle(), sktBase->getSktId(), sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonConnected:
-        if( IsLogEnabled( eLogModuleNetworkMgr ) )
-            LogMsg( LOG_INFO, "NetworkMgr:TCP %s port %d to local port %d\n", sktBase->describeSktType().c_str(), sktBase->m_RmtIp.getPort(), sktBase->m_LclIp.getPort() );
+        LogModule( eLogNetworkMgr, LOG_INFO, "NetworkMgr:TCP skt %d skt id %d %s port %d to local port %d thread 0x%x",
+                    sktBase->getSktHandle(), sktBase->getSktId(), sktBase->describeSktType().c_str(), sktBase->m_RmtIp.getPort(), sktBase->m_LclIp.getPort(), VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonData:
@@ -253,27 +253,26 @@ void NetworkMgr::handleTcpSktCallback( VxSktBase * sktBase )
 
 	case eSktCallbackReasonClosed:
 		m_Engine.onConnectionLost( sktBase );
-        if( IsLogEnabled( eLogModuleNetworkMgr ) )
-		    LogMsg( LOG_INFO, "NetworkMgr:TCP Skt %d closed %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ) );
+        LogModule( eLogNetworkMgr, LOG_INFO, "NetworkMgr:TCP skt %d skt id %d closed %s thread 0x%x",
+                    sktBase->getSktHandle(), sktBase->getSktId(), sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonError:
-        if( IsLogEnabled( eLogModuleNetworkMgr ) )
-		    LogMsg( LOG_ERROR, "NetworkMgr:TCP Skt %d error %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ) );
+ 		LogModule( eLogNetworkMgr, LOG_ERROR, "NetworkMgr:TCP skt %d skt id %d error %s thread 0x%x",
+                    sktBase->getSktHandle(), sktBase->getSktId(), sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonClosing:
-        if( IsLogEnabled( eLogModuleNetworkMgr ) )
-		    LogMsg( LOG_INFO, "NetworkMgr:TCP eSktCallbackReasonClosing Skt %d \n", sktBase->m_iSktId );
+        LogModule( eLogNetworkMgr, LOG_INFO, "NetworkMgr:TCP eSktCallbackReasonClosing skt %d skt id %d thread 0x%x", sktBase->getSktHandle(), sktBase->getSktId(), VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonConnecting:
-        if( IsLogEnabled( eLogModuleNetworkMgr ) )
-		    LogMsg( LOG_INFO, "NetworkMgr:TCP eSktCallbackReasonConnecting Skt %d \n", sktBase->m_iSktId );
+        LogModule( eLogNetworkMgr, LOG_INFO, "NetworkMgr:TCP eSktCallbackReasonConnecting skt %d skt id %d thread 0x%x", sktBase->getSktHandle(), sktBase->getSktId(), VxGetCurrentThreadId() );
 		break;
 
 	default:
-		LogMsg( LOG_ERROR, "NetworkMgrTCP: UNKNOWN CallbackReason %d Skt %d error %s\n", sktBase->getCallbackReason(), sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ) );
+		LogMsg( LOG_ERROR, "NetworkMgrTCP: UNKNOWN CallbackReason %d skt %d skt id %d error %s thread 0x%x", 
+                sktBase->getCallbackReason(), sktBase->getSktHandle(), sktBase->getSktId(), sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
 		break;
 	}
 }
@@ -289,13 +288,13 @@ void NetworkMgr::handleMulticastSktCallback( VxSktBase * sktBase )
 	switch( sktBase->getCallbackReason() )
 	{
 	case eSktCallbackReasonConnectError:
-        if( IsLogEnabled( eLogModuleMulticast ) )
-		    LogMsg( LOG_ERROR, "NetworkMgr:Multicast Skt %d connect error %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ) );
+        if( IsLogEnabled( eLogMulticast ) )
+		    LogMsg( LOG_ERROR, "NetworkMgr:Multicast Skt %d connect error %s thread 0x%x", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonConnected:
-        if( IsLogEnabled( eLogModuleMulticast ) )
-		    LogMsg( LOG_INFO, "NetworkMgr:Multicast Skt %d connected from %s port %d\n", sktBase->m_iSktId, sktBase->getRemoteIp(), sktBase->m_LclIp.getPort() );
+        if( IsLogEnabled( eLogMulticast ) )
+		    LogMsg( LOG_INFO, "NetworkMgr:Multicast Skt %d connected from %s port %d thread 0x%x", sktBase->m_iSktId, sktBase->getRemoteIp(), sktBase->m_LclIp.getPort(), VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonData:
@@ -305,33 +304,33 @@ void NetworkMgr::handleMulticastSktCallback( VxSktBase * sktBase )
 			break;
 		}
 
-        if( IsLogEnabled( eLogModuleMulticast ) )
-		    LogMsg( LOG_INFO, "NetworkMgr:Multicast Data Skt %d\n", sktBase->m_iSktId );
+        if( IsLogEnabled( eLogMulticast ) )
+		    LogMsg( LOG_INFO, "NetworkMgr:Multicast Data Skt %d thread 0x%x", sktBase->m_iSktId, VxGetCurrentThreadId() );
 		m_Engine.handleMulticastData( sktBase );
 		break;
 
 	case eSktCallbackReasonClosed:
-        if( IsLogEnabled( eLogModuleMulticast ) )
-		    LogMsg( LOG_INFO, "NetworkMgr:Multicast Skt %d closed %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ) );
+        if( IsLogEnabled( eLogMulticast ) )
+		    LogMsg( LOG_INFO, "NetworkMgr:Multicast Skt %d closed %s thread 0x%x", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonError:
-        if( IsLogEnabled( eLogModuleMulticast ) )
-		    LogMsg( LOG_ERROR, "NetworkMgr:Multicast Skt %d error %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ) );
+        if( IsLogEnabled( eLogMulticast ) )
+		    LogMsg( LOG_ERROR, "NetworkMgr:Multicast Skt %d error %s thread 0x%x", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonClosing:
-        if( IsLogEnabled( eLogModuleMulticast ) )
-		    LogMsg( LOG_INFO, "NetworkMgr:Multicast eSktCallbackReasonClosing Skt %d \n", sktBase->m_iSktId );
+        if( IsLogEnabled( eLogMulticast ) )
+		    LogMsg( LOG_INFO, "NetworkMgr:Multicast eSktCallbackReasonClosing Skt %d thread 0x%x", sktBase->m_iSktId, VxGetCurrentThreadId() );
 		break;
 
 	case eSktCallbackReasonConnecting:
-        if( IsLogEnabled( eLogModuleMulticast ) )
-		    LogMsg( LOG_INFO, "NetworkMgr:Multicast eSktCallbackReasonConnecting Skt %d \n", sktBase->m_iSktId );
+        if( IsLogEnabled( eLogMulticast ) )
+		    LogMsg( LOG_INFO, "NetworkMgr:Multicast eSktCallbackReasonConnecting Skt %d thread 0x%x", sktBase->m_iSktId, VxGetCurrentThreadId() );
 		break;
 
 	default:
-		LogMsg( LOG_ERROR, "NetworkMgr:Multicast: Skt %d error %s\n", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ) );
+		LogMsg( LOG_ERROR, "NetworkMgr:Multicast: Skt %d error %s thread 0x%x", sktBase->m_iSktId, sktBase->describeSktError( sktBase->getLastSktError() ), VxGetCurrentThreadId() );
 		break;
 	}
 }

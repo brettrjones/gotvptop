@@ -38,26 +38,26 @@ public:
 									                                                        // startTimer was called or VxTimer was constructed...it doesn't mater if the time
 									                                                        // specified in the startTimer parameter has elapsed or not
     // same as start timer.. start at 0 then read elapsed time since reset or start timer
-    void                        resetTimer( void )                          { startTimerMs( 0.0 ); }
+    void                        resetTimer( void )                          { startTimerMs( 0 ); }
 
 	// just sets start time for elapsed time
-	void						startTimer( void )							{ startTimerMs(0.0); }
+    void						startTimer( void )							{ startTimerMs(0); }
 
     // starts a timer and sets time in milliseconds till timerDone returns true
-    void						startTimerMs( double milliSec );
+    void						startTimerMs( int milliSec );
 
 	// starts a timer and sets time till timerDone returns true
-    void						startTimerSec( double dSec  )               { startTimerMs( dSec * 1000 ); }
+    void						startTimerSec( int dSec  )                  { startTimerMs( dSec * 1000 ); }
 
     // returns true when time specified has expired
 	bool						timerDone( void )							{ return elapsedMs() > m_TimeTillDoneMs ? true : false; }
 
-	void						waitTimeMs( double milliSec );
-	void						waitTimeSec( double dSec )		            { waitTimeMs( dSec * 1000 ); }
+    void						waitTimeMs( int milliSec );
+    void						waitTimeSec( int dSec )                     { waitTimeMs( dSec * 1000 ); }
 
 private:
-	double						m_TimeTillDoneMs;
-    double						m_StartTickMs;
+    int64_t						m_TimeTillDoneMs{0};
+    int64_t						m_StartTickMs{0};
 };
 
 

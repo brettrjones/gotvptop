@@ -41,7 +41,7 @@ RcWebSkt::RcWebSkt()
 //============================================================================
 RcWebSkt::~RcWebSkt()
 {
-    if( IsLogEnabled( eLogModuleSkt ) )
+    if( IsLogEnabled( eLogSkt ) )
 	    LogMsg( LOG_DEBUG,  "RcWebSkt::~RcWebSkt %d 0x%x %s skt handle %d destructing\n", this->m_iSktId, this, this->m_strRmtIp.c_str(), m_Socket );
 	m_bIsConnected = false;
 	m_bClosingFromDestructor = true;
@@ -197,7 +197,7 @@ void * RcSktWebTransmitThreadFunc(  void * pvContext )
     RcWebSkt * sktBase		= (RcWebSkt *)poThread->getThreadUserParam();
     if( sktBase && false == poThread->isAborted() )
     {
-        if( IsLogEnabled( eLogModuleSkt ) )
+        if( IsLogEnabled( eLogSkt ) )
             LogMsg( LOG_DEBUG,  "skt %d %s RcSktWebTransmitThreadFunc start\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str() );
 
         do
@@ -311,7 +311,7 @@ void * RcSktWebTransmitThreadFunc(  void * pvContext )
         }while( (false == poThread->isAborted() ) &&
                 sktBase->isConnected() );
 
-        if( IsLogEnabled( eLogModuleSkt ) )
+        if( IsLogEnabled( eLogSkt ) )
             LogMsg( LOG_DEBUG,  "skt %d 0x%x %s RcSktWebTransmitThreadFunc exit\n", sktBase->m_iSktId, sktBase, sktBase->m_strRmtIp.c_str() );
     }
 

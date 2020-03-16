@@ -16,6 +16,7 @@
 #include "AudioIoMgr.h"
 #include <QDebug>
 #include <CoreLib/VxDebug.h>
+#include <CoreLib/VxThread.h>
 #include "AudioDefs.h"
 
 //============================================================================
@@ -45,7 +46,7 @@ void AudioInThread::stopAudioInThread()
 //============================================================================
 void AudioInThread::run()
 {
-    LogMsg( LOG_DEBUG, "AudioInThread thread start %d", currentThreadId() );
+    LogMsg( LOG_DEBUG, "AudioInThread thread start 0x%x", VxGetCurrentThreadId() );
     while( m_ShouldRun )
     {
         m_AudioSemaphore.acquire();
@@ -77,5 +78,5 @@ void AudioInThread::run()
         }
     }
  
-    LogMsg( LOG_DEBUG, "AudioInThread done thread %d", currentThreadId() );
+    LogMsg( LOG_DEBUG, "AudioInThread done thread 0x%x", VxGetCurrentThreadId() );
 }

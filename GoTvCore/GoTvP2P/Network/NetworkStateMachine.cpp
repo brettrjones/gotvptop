@@ -194,7 +194,7 @@ bool NetworkStateMachine::shouldAbort( void )
 		|| m_NetworkStateThread.isAborted() 
 		|| VxIsAppShuttingDown() )
 	{
-        if( IsLogEnabled( eLogModuleNetworkState ) )
+        if( IsLogEnabled( eLogNetworkState ) )
         {
             if( false == m_StateMachineInitialized )
             {
@@ -357,7 +357,7 @@ bool NetworkStateMachine::checkAndHandleNetworkEvents( void )
 //============================================================================
 void NetworkStateMachine::fromGuiUserLoggedOn( void )
 {
-    if( IsLogEnabled( eLogModuleNetworkState ) )
+    if( IsLogEnabled( eLogNetworkState ) )
     {
         LogMsg( LOG_INFO, "NetworkStateMachine::fromGuiUserLoggedOn\n" );
     }
@@ -388,7 +388,7 @@ void NetworkStateMachine::restartNetwork( void )
 {
 	bool isCell		= m_bIsCellNetwork;
 	std::string ip	= m_LocalNetworkIp;
-    LogModule( eLogModuleNetworkState, LOG_INFO, "##NetworkStateMachine::restartNetwork" );
+    LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::restartNetwork" );
 
     static bool hasCnaged = false;
     static bool lastIsCell = false;
@@ -416,10 +416,10 @@ void NetworkStateMachine::fromGuiNetworkAvailable( const char * lclIp, bool isCe
         m_PktAnn.getLanIPv4().setIp( lclIp );
         m_PktAnn.setOnlinePort( u16TcpPort );
         m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
-        LogModule( eLogModuleNetworkState, LOG_INFO, " fromGuiNetworkAvailable hasChanged %s", m_LocalNetworkIp.c_str() );
+        LogModule( eLogNetworkState, LOG_INFO, " fromGuiNetworkAvailable hasChanged %s", m_LocalNetworkIp.c_str() );
     }
 
-    LogModule( eLogModuleNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiNetworkAvailable creating network available event %s", lclIp );
+    LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiNetworkAvailable creating network available event %s", lclIp );
 
 	m_NetworkStateMutex.lock();
 	m_NetworkEventList.push_back( new NetworkEventAvail( *this, lclIp, isCellularNetwork ) );
@@ -429,7 +429,7 @@ void NetworkStateMachine::fromGuiNetworkAvailable( const char * lclIp, bool isCe
 //============================================================================
 void NetworkStateMachine::fromGuiNetworkLost( void )
 {
-    LogModule( eLogModuleNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiNetworkLost" );
+    LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiNetworkLost" );
 	m_Engine.getPeerMgr().stopListening();
 	m_LocalNetworkIp = "";
 	m_NetworkStateMutex.lock();
@@ -442,7 +442,7 @@ ENetLayerState NetworkStateMachine::fromGuiGetNetLayerState( ENetLayerType netLa
 {
     ENetLayerState netState = eNetLayerStateUndefined;
 
-    LogModule( eLogModuleNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiGetNetLayerState" );
+    LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiGetNetLayerState" );
     if( netLayer == eNetLayerTypeInternet )
     {
         netState - getNetworkMgr().fromGuiGetNetLayerState( netLayer );
@@ -465,7 +465,7 @@ void NetworkStateMachine::setNetLayerState( ENetLayerType layerType, ENetLayerSt
     }
     else
     {
-        LogModule( eLogModuleNetworkState, LOG_INFO, "##NetworkStateMachine::setNetLayerState invalid param" );
+        LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::setNetLayerState invalid param" );
     }
 }
 
@@ -485,7 +485,7 @@ ENetLayerState NetworkStateMachine::getNetLayerState( ENetLayerType netLayer )
     }
     else
     {
-        LogModule( eLogModuleNetworkState, LOG_INFO, "##NetworkStateMachine::setNetLayerState invalid param" );
+        LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::setNetLayerState invalid param" );
     }
 }
 
@@ -496,7 +496,7 @@ void NetworkStateMachine::fromGuiNetworkSettingsChanged( void )
 	{
 		bool isCell = isCellularNetwork();
 		std::string ip = m_LocalNetworkIp;
-        LogModule( eLogModuleNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiNetworkSettingsChanged" );
+        LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiNetworkSettingsChanged" );
 		fromGuiNetworkLost();
 		m_PktAnn.getLanIPv4().setIp( ip.c_str() );
 		fromGuiNetworkAvailable( ip.c_str(), isCell );
@@ -549,7 +549,7 @@ void NetworkStateMachine::startUpnpOpenPort( void )
         u16Port = m_Engine.getEngineSettings().getTcpIpPort();
 		if( u16Port != m_PktAnn.getOnlinePort() )
 		{
-            LogModule( eLogModuleNetworkState, LOG_INFO, "startUpnpOpenPort engine port %d different than pkt ann port %d\n", u16Port, m_PktAnn.getOnlinePort() );
+            LogModule( eLogNetworkState, LOG_INFO, "startUpnpOpenPort engine port %d different than pkt ann port %d\n", u16Port, m_PktAnn.getOnlinePort() );
 			m_PktAnn.setMyOnlinePort( u16Port );
 		}
 
@@ -722,7 +722,7 @@ bool NetworkStateMachine::resolveWebsiteUrls( void )
 	}
 	else
 	{
-        LogModule( eLogModuleNetworkState, LOG_ERROR, "Failed to resolve network websites %s %s\n", anchorWebsiteUrl.c_str(), netServiceWebsiteUrl.c_str() );
+        LogModule( eLogNetworkState, LOG_ERROR, "Failed to resolve network websites %s %s\n", anchorWebsiteUrl.c_str(), netServiceWebsiteUrl.c_str() );
 	}
 
 
@@ -738,7 +738,7 @@ bool NetworkStateMachine::resolveUrl( std::string& websiteUrl, std::string& retI
 //============================================================================
 void NetworkStateMachine::onOncePerHour( void )
 {
-    LogModule( eLogModuleNetworkState, LOG_INFO, "NetworkStateMachine::onOncePerHour" );
+    LogModule( eLogNetworkState, LOG_INFO, "NetworkStateMachine::onOncePerHour" );
 	//if( isP2POnline() && m_EngineSettings.getUseUpnpPortForward() )
 	//{
 	//	if( m_NetPortForward.elapsedSecondsLastAttempt() > 60 )

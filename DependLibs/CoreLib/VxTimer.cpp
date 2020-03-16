@@ -22,20 +22,19 @@
 
 //============================================================================
 VxTimer::VxTimer()
-: m_TimeTillDoneMs(0.0)
 {
     m_StartTickMs = GetGmtTimeMs();
 }
 
 //============================================================================
-void VxTimer::startTimerMs( double milliSec )
+void VxTimer::startTimerMs( int milliSec )
 {
     m_StartTickMs = GetGmtTimeMs();
 	m_TimeTillDoneMs = m_StartTickMs + milliSec;
 }
 
 //============================================================================
-void VxTimer::waitTimeMs( double milliSec )
+void VxTimer::waitTimeMs( int milliSec )
 {
 	//===for all other modes just loop and wait for time to run out ===//
    startTimerMs( milliSec  );
@@ -64,7 +63,7 @@ void VxTimer::waitTimeMs( double milliSec )
 //============================================================================
 double VxTimer::elapsedMs( void )
 {
-     return GetGmtTimeMs() - m_StartTickMs;
+     return (double)(GetGmtTimeMs() - m_StartTickMs);
 }
 
 //============================================================================

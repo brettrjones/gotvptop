@@ -51,7 +51,7 @@ AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
     ui.m_ConnectIsOpenInfoButton->setIcon( eMyIconInformation );
     ui.m_ConnectTestHostButton->setIcon( eMyIconServiceConnectionTest );
 
-    updateDlgFromSettings();
+    updateDlgFromSettings(true);
 
     connectSignals();
 
@@ -96,10 +96,11 @@ void AppletNetworkSettings::slotNetworkSettingsSelectionChanged( int idx )
 }
 
 //============================================================================
-void AppletNetworkSettings::updateDlgFromSettings()
+void AppletNetworkSettings::updateDlgFromSettings( bool origSettings )
 {
     ui.m_NetworkSettingsNameComboBox->clear();
 
+    bool hasPrevSetttings = false;
     bool validDbSettings = false;
     AccountMgr& dataHelper = m_MyApp.getAccountMgr();
     std::vector<NetHostSetting> anchorSettingList;
@@ -113,14 +114,18 @@ void AppletNetworkSettings::updateDlgFromSettings()
         std::vector<NetHostSetting>::iterator iter;
         for( iter = anchorSettingList.begin(); iter != anchorSettingList.end(); ++iter )
         {
-            NetHostSetting& anchorSetting = *iter;
-            ui.m_NetworkSettingsNameComboBox->addItem( anchorSetting.getNetHostSettingName().c_str() );
-            if( anchorSetting.getNetHostSettingName() == lastSettingsName )
+            NetHostSetting& netHostSetting = *iter;
+            ui.m_NetworkSettingsNameComboBox->addItem( netHostSetting.getNetHostSettingName().c_str() );
+            if( netHostSetting.getNetHostSettingName() == lastSettingsName )
             {
                 // found last settings used
                 selectedIdx = currentSettingIdx;
                 validDbSettings = true;
-                populateDlgFromNetHostSetting( anchorSetting );
+                populateDlgFromNetHostSetting( netHostSetting );
+                if( origSettings )
+                {
+                    hasPrevSetttings = true;
+                }
             }
 
             currentSettingIdx++;
@@ -207,36 +212,86 @@ void AppletNetworkSettings::updateDlgFromSettings()
     std::string externIP;
     m_Engine.getEngineSettings().getExternalIp( externIP );
     ui.m_ExternIpEdit->setText( externIP.c_str() );
+    if( hasPrevSetttings )
+    {
+        populateNetData( m_OriginalSettings );
+    }
 }
 
 //============================================================================
 void AppletNetworkSettings::updateSettingsFromDlg()
 {
-    NetHostSetting anchorSetting;
-    std::string anchorSettingsName;
-    anchorSettingsName = ui.m_NetworkSettingsNameComboBox->currentText().toUtf8().constData();
-    if( 0 == anchorSettingsName.length() )
+    AppletNetworkSettingsData curData;
+    populateNetData( curData );
+    if( curData != m_OriginalSettings )
     {
-        anchorSettingsName = "default";
+        LogMsg( LOG_DEBUG, "AppletNetworkSettings has changed" );
+        NetHostSetting& netHostSetting = curData.getNetHostSetting();
+
+        m_Engine.getEngineSettings().setNetHostWebsiteUrl( netHostSetting.getNetHostWebsiteUrl() );
+        m_Engine.getEngineSettings().setNetworkKey( netHostSetting.getNetworkKey() );
+        m_Engine.getEngineSettings().setNetServiceWebsiteUrl( netHostSetting.getNetServiceWebsiteUrl() );
+        m_MyApp.getAccountMgr().updateNetHostSetting( netHostSetting );
+        m_MyApp.getAccountMgr().updateLastNetHostSettingName( netHostSetting.getNetHostSettingName().c_str() );
+
+        m_Engine.getEngineSettings().setPreferredNetworkAdapterIp( curData.getPreferredNetworkAdapterIp().c_str() );
+        if( 0 != curData.getTcpPort() )
+        {
+            m_Engine.getEngineSettings().setTcpIpPort( curData.getTcpPort() );
+            m_Engine.getMyPktAnnounce().setMyOnlinePort( curData.getTcpPort() );
+            m_MyApp.getAppGlobals().getUserIdent()->m_DirectConnectId.setPort( curData.getTcpPort() );
+        }
+
+        if( !curData.getExternalIp().empty() )
+        {
+            m_Engine.getEngineSettings().setExternalIp( curData.getExternalIp() );
+            m_Engine.getMyPktAnnounce().setOnlineIpAddress( curData.getExternalIp().c_str() );
+        }
+
+        EngineSettings::EFirewallTestType eFirewallTestType = curData.getFirewallTestType();
+        if( eFirewallTestType == EngineSettings::eFirewallTestAssumeNoFirewall )
+        {
+            if( !curData.getExternalIp().empty() )
+            {
+                m_Engine.getMyPktAnnounce().setOnlineIpAddress( curData.getExternalIp().c_str() );
+            }
+        }
+
+        m_Engine.getEngineSettings().setFirewallTestSetting( eFirewallTestType );
+        m_Engine.getEngineSettings().setUseUpnpPortForward( curData.getUseUpnpPortForward() );
+
+        m_OriginalSettings = curData;
+        m_Engine.fromGuiNetworkSettingsChanged();
+    }
+    else
+    {
+        LogMsg( LOG_DEBUG, "AppletNetworkSettings no change" );
+    }
+}
+
+//============================================================================
+void AppletNetworkSettings::populateNetData( AppletNetworkSettingsData& netData )
+{
+    NetHostSetting& netHostSetting = netData.getNetHostSetting();
+    // get user name of the setting
+    std::string netSettingsName;
+    netSettingsName = ui.m_NetworkSettingsNameComboBox->currentText().toUtf8().constData();
+    if( 0 == netSettingsName.length() )
+    {
+        netSettingsName = "default";
     }
 
-    anchorSetting.setNetHostSettingName( anchorSettingsName.c_str() );
+    netHostSetting.setNetHostSettingName( netSettingsName.c_str() );
 
     std::string strValue;
     strValue = ui.m_NetworkHostUrlEdit->text().toUtf8().constData();
-    m_Engine.getEngineSettings().setNetHostWebsiteUrl( strValue );
-    anchorSetting.setNetHostWebsiteUrl( strValue.c_str() );
+    netHostSetting.setNetHostWebsiteUrl( strValue.c_str() );
 
     strValue = ui.m_NetworkKeyEdit->text().toUtf8().constData();
-    m_Engine.getEngineSettings().setNetworkKey( strValue );
-    anchorSetting.setNetworkKey( strValue.c_str() );
+    netHostSetting.setNetworkKey( strValue.c_str() );
 
     strValue = ui.m_ConnectTestUrlEdit->text().toUtf8().constData();
-    m_Engine.getEngineSettings().setNetServiceWebsiteUrl( strValue );
-    anchorSetting.setNetServiceWebsiteUrl( strValue.c_str() );
-
-    m_MyApp.getAccountMgr().updateNetHostSetting( anchorSetting );
-    m_MyApp.getAccountMgr().updateLastNetHostSettingName( anchorSettingsName.c_str() );
+    netHostSetting.setNetServiceWebsiteUrl( strValue.c_str() );
 
     std::string strPreferredIp = "";
     if( 0 != ui.m_LclIpListComboBox->currentIndex() )
@@ -244,40 +299,36 @@ void AppletNetworkSettings::updateSettingsFromDlg()
         strPreferredIp = ui.m_LclIpListComboBox->currentText().toUtf8().constData();
     }
 
-    m_Engine.getEngineSettings().setPreferredNetworkAdapterIp( strPreferredIp.c_str() );
+    netData.setPreferredNetworkAdapterIp( strPreferredIp );
 
     uint16_t u16TcpPort = ui.PortEdit->text().toUShort();
     if( 0 != u16TcpPort )
     {
-        m_Engine.getEngineSettings().setTcpIpPort( u16TcpPort );
-        m_Engine.getMyPktAnnounce().setMyOnlinePort( u16TcpPort );
-        m_MyApp.getAppGlobals().getUserIdent()->m_DirectConnectId.setPort( u16TcpPort );
+        netData.setTcpPort( u16TcpPort );
+    }
+    else
+    {
+        netData.setTcpPort( NET_DEFAULT_NETSERVICE_PORT );
     }
 
     std::string externIp = ui.m_ExternIpEdit->text().toUtf8().constData();
     if( externIp.length() )
     {
-        m_Engine.getEngineSettings().setExternalIp( externIp );
+        netData.setExternalIp( externIp );
     }
 
     EngineSettings::EFirewallTestType eFirewallTestType = EngineSettings::eFirewallTestUrlConnectionTest;
     if( ui.AssumeNoProxyRadioButton->isChecked() )
     {
         eFirewallTestType = EngineSettings::eFirewallTestAssumeNoFirewall;
-        if( externIp.length() )
-        {
-            m_Engine.getMyPktAnnounce().setOnlineIpAddress( externIp.c_str() );
-        }
     }
     else if( ui.AssumeProxyRadioButton->isChecked() )
     {
         eFirewallTestType = EngineSettings::eFirewallTestAssumeFirewalled;
     }
 
-    m_Engine.getEngineSettings().setFirewallTestSetting( eFirewallTestType );
-    m_Engine.getEngineSettings().setUseUpnpPortForward( ui.m_UseUpnpCheckBox->isChecked() );
-
-    m_Engine.fromGuiNetworkSettingsChanged();
+    netData.setFirewallTestType( eFirewallTestType );
+    netData.setUseUpnpPortForward( ui.m_UseUpnpCheckBox->isChecked() );
 }
 
 //============================================================================
@@ -476,7 +527,7 @@ void AppletNetworkSettings::onDeleteButtonClick( void )
     if( 0 != anchorSettingsName.length() )
     {
         m_MyApp.getAccountMgr().removeNetHostSettingByName( anchorSettingsName.c_str() );
-        updateDlgFromSettings();
+        updateDlgFromSettings( false );
     }
 }
 

@@ -33,7 +33,7 @@ void SoundTestThread::stopSoundTestThread()
 //============================================================================
 void SoundTestThread::run()
 {
-    LogMsg( LOG_DEBUG, "SoundTestThread thread %d", currentThreadId() );
+    LogMsg( LOG_DEBUG, "SoundTestThread thread %u", currentThreadId() );
     const qreal audioBufLen = AUDIO_BUF_SIZE_48000_2_FLOAT;
     char audioBuf[ AUDIO_BUF_SIZE_48000_2_FLOAT ];
     qreal amountRead = m_AudioGenOut->readDataNoPositionUpdate( audioBuf, audioBufLen );
@@ -64,5 +64,5 @@ void SoundTestThread::run()
 
     m_AudioIoMgr.toGuiWantSpeakerOutput( eAppModuleKodi, false );
 
-    LogMsg( LOG_DEBUG, "SoundTestThread done thread %d", currentThreadId() );
+    LogMsg( LOG_DEBUG, "SoundTestThread done thread %u", currentThreadId() );
 }

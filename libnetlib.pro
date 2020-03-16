@@ -7,7 +7,7 @@ include(config_static_dependlib.pri)
 
 include(libnetlib.pri)
 
-
+netlib.depends += $$PWD/libpktlib.pro
 
 
 

@@ -198,6 +198,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettingsData.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerVideo.h \
@@ -478,6 +479,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettingsData.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerVideo.cpp \
@@ -533,7 +535,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ListEntryWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/NetAvailStatusWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailEditWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailViewWidget.cpp \

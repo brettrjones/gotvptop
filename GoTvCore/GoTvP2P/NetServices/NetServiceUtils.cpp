@@ -368,6 +368,8 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 		ePluginType = ePluginTypeStoryboard; 
 	}
 
+    LogMsg( LOG_VERBOSE, "parseHttpNetServiceUrl: cmd %s plugin %d\n", netCmdEnumToString( netServiceHdr.m_NetCmdType ), ePluginType );
+
 	return ePluginType;
 }
 
@@ -547,7 +549,7 @@ void NetServiceUtils::generateNetServiceChallengeHash(	std::string&			strKey,
 
 //============================================================================
 void NetServiceUtils::generateNetServiceChallengeHash(	std::string&			strKeyHash,	
-														uint16_t						clientPort )
+														uint16_t				clientPort )
 {
 	std::string strPwd;
 	StdStringFormat( strPwd, "xs%ddfj%sd%d75!?jsaf", 
@@ -595,6 +597,7 @@ bool NetServiceUtils::rxNetServiceCmd( VxSktConnectSimple * netServConn, char * 
 
 	int iRxed = 0;
 	bool bGotCrLfCrLf = false;
+    VxTimer rxCmdTimer;
 	netServConn->recieveData(		rxBuf,					// data buffer to read into
 									NET_SERVICE_HDR_LEN,	// length of data	
 									&iRxed,					// number of bytes actually received
@@ -604,7 +607,7 @@ bool NetServiceUtils::rxNetServiceCmd( VxSktConnectSimple * netServConn, char * 
 
 	if( iRxed != NET_SERVICE_HDR_LEN )
 	{
-		LogMsg( LOG_ERROR, "### ERROR NetServiceUtils::rxNetServiceCmd: hdr timeout %d rxed data len %d\n", rxHdrTimeout, iRxed );
+		LogMsg( LOG_ERROR, "### ERROR NetServiceUtils::rxNetServiceCmd: hdr timeout %3.3f sec rxed data len %d\n", rxCmdTimer.elapsedSec(), iRxed );
 		return false;
 	}
 
@@ -622,7 +625,7 @@ bool NetServiceUtils::rxNetServiceCmd( VxSktConnectSimple * netServConn, char * 
 	//}
 
 	int contentLen = netServiceHdr.m_TotalDataLen - NET_SERVICE_HDR_LEN;
-
+    VxTimer rxTimer;
 	netServConn->recieveData(		rxBuf,					// data buffer to read into
 									contentLen,				// length of data	
 									&iRxed,					// number of bytes actually received
@@ -631,7 +634,7 @@ bool NetServiceUtils::rxNetServiceCmd( VxSktConnectSimple * netServConn, char * 
 									&bGotCrLfCrLf );	
 	if( contentLen != iRxed )
 	{
-		LogMsg( LOG_ERROR, "### ERROR NetActionAnnounce::rxNetServiceCmd: timeout %d recieving content\n", rxDataTimeout );
+		LogMsg( LOG_ERROR, "### ERROR NetActionAnnounce::rxNetServiceCmd: timeout %3.3f sec recieving content\n", rxTimer.elapsedSec() );
 		return false;
 	}
 

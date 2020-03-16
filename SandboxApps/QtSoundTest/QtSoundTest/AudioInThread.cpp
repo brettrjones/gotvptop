@@ -46,7 +46,7 @@ void AudioInThread::stopAudioInThread()
 //============================================================================
 void AudioInThread::run()
 {
-    LogMsg( LOG_DEBUG, "AudioInThread thread start %d", currentThreadId() );
+    LogMsg( LOG_DEBUG, "AudioInThread thread start %u", currentThreadId() );
     while( m_ShouldRun )
     {
         m_AudioSemaphore.acquire();
@@ -78,5 +78,5 @@ void AudioInThread::run()
         }
     }
  
-    LogMsg( LOG_DEBUG, "AudioInThread done thread %d", currentThreadId() );
+    LogMsg( LOG_DEBUG, "AudioInThread done thread %u", currentThreadId() );
 }

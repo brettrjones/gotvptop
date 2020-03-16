@@ -21,7 +21,7 @@
 
 #include <CoreLib/VxDebug.h>
 
-class AppletApplicationInfo : public AppletBase
+class AppletApplicationInfo : public AppletBase, public ILogCallbackInterface
 {
     Q_OBJECT
 public:
@@ -31,7 +31,7 @@ public:
     void                        logMsg( const char* logMsg, ... );
     void                        infoMsg( const char * infoMsg, ... );
 
-    void                        toGuiLog( uint32_t u32LogFlags, char * logMsg );
+    void                        onLogEvent( uint32_t u32LogFlags, char * logMsg ) override;
     void                        toGuiInfoMsg( char * logMsg );
 
 signals:

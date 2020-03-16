@@ -29,7 +29,7 @@ void RenderKodiThread::run()
         LogMsg( LOG_ERROR, "RenderKodiThread %d\n", VxGetCurrentThreadId() );
         isKodiRunning = true;
 #ifdef RENDER_LOGO_INSTEAD_OF_KODI
-        qDebug() << "hello from worker thread " << currentThreadId();
+        qDebug() << "hello from worker thread " << VxGetCurrentThreadId();
         m_RenderLogic.initRenderGlSystem();
         while( m_ShouldRun )
         {
@@ -50,7 +50,7 @@ void RenderKodiThread::run()
         }
 
         m_RenderLogic.destroyRenderGlSystem();
-        qDebug() << "worker thread done " << currentThreadId();
+        qDebug() << "worker thread done " << VxGetCurrentThreadId();
 #else
         IGoTv& iGoTv = IGoTv::getIGoTv();
         // will not return from doRun until kodi is shutdown

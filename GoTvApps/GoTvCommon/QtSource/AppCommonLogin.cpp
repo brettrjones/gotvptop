@@ -136,28 +136,28 @@ doover:
 //============================================================================
 void AppCommon::doAccountStartup( void )
 {
-    LogModule( eLogModuleStartup, LOG_DEBUG, "doAccountStartup");
+    LogModule( eLogStartup, LOG_DEBUG, "doAccountStartup");
     // tell engine were to load settings from
     loadAccountSpecificSettings( getAppGlobals().getUserIdent()->getOnlineName() );
-    uint32_t startMs = GetApplicationAliveMs();
+    uint64_t startMs = GetApplicationAliveMs();
 
     getAppGlobals().getUserIdent()->setHasSharedWebCam( false ); // user must restart cam server each startup.. assume no shared cam yet
 
     applySoundSettings();
-    LogModule( eLogModuleStartup, LOG_DEBUG, "applySoundSettings" );
+    LogModule( eLogStartup, LOG_DEBUG, "applySoundSettings" );
 
     sendAppSettingsToEngine();
-    LogModule( eLogModuleStartup, LOG_DEBUG, "sendAppSettingsToEngine" );
+    LogModule( eLogStartup, LOG_DEBUG, "sendAppSettingsToEngine" );
 
-    LogModule( eLogModuleStartup, LOG_DEBUG, "startNetworkMonitor" );
+    LogModule( eLogStartup, LOG_DEBUG, "startNetworkMonitor" );
     startNetworkMonitor();
-    LogModule( eLogModuleStartup, LOG_DEBUG, "after startNetworkMonitor" );
+    LogModule( eLogStartup, LOG_DEBUG, "after startNetworkMonitor" );
 
     completeLogin();
-    LogModule( eLogModuleStartup, LOG_DEBUG, "completed Login" );
+    LogModule( eLogStartup, LOG_DEBUG, "completed Login" );
 
-    uint32_t endMs = GetApplicationAliveMs();
-    LogMsg( LOG_DEBUG, "Applied settings ms %d alive ms %d", endMs - startMs, endMs );
+    uint64_t endMs = GetApplicationAliveMs();
+    LogMsg( LOG_DEBUG, "Applied settings ms %lld alive ms %lld", endMs - startMs, endMs );
 }
 
 //============================================================================
@@ -303,7 +303,7 @@ std::string AppCommon::getUserSpecificDataDirectoryFromAccountUserName( const ch
 //============================================================================
 void AppCommon::loadAccountSpecificSettings( const char * userName )
 {
-    uint32_t loadStartMs = GetApplicationAliveMs();
+    uint64_t loadStartMs = GetApplicationAliveMs();
 
     m_Engine.fromGuiSetUserXferDir( getUserXferDirectoryFromAccountUserName( userName ).c_str() );
     std::string strUserSpecificDir = getUserSpecificDataDirectoryFromAccountUserName( userName );
@@ -345,8 +345,8 @@ void AppCommon::loadAccountSpecificSettings( const char * userName )
     getAppGlobals().getUserIdent()->m_DirectConnectId.setPort( tcpPort );
     getAppGlobals().getUserIdent()->m_DirectConnectId.m_IPv6OnlineIp = m_Engine.getFromGuiInterface().fromGuiGetMyIPv6Address();
 
-    uint32_t aliveMs = GetApplicationAliveMs();
-    LogMsg( LOG_DEBUG, "Account Loaded ms %d alive ms %d", aliveMs - loadStartMs, aliveMs );
+    uint64_t aliveMs = GetApplicationAliveMs();
+    LogMsg( LOG_DEBUG, "Account Loaded ms %lld alive ms %lld", aliveMs - loadStartMs, aliveMs );
     setIsAppInitialized( true );
 }
 

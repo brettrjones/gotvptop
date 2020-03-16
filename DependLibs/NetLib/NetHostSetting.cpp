@@ -29,15 +29,30 @@ NetHostSetting& NetHostSetting::operator =( const NetHostSetting& rhs )
 {
 	if( this != &rhs )
 	{
-		m_NetHostSettingName			= rhs.m_NetHostSettingName;
+		m_NetHostSettingName		= rhs.m_NetHostSettingName;
 		m_NetworkName				= rhs.m_NetworkName;
 		m_NetServiceWebsiteUrl		= rhs.m_NetServiceWebsiteUrl;
         m_NetHostWebsiteUrl         = rhs.m_NetHostWebsiteUrl;
 		m_ThisNodeIsHost			= rhs.m_ThisNodeIsHost;
-		m_ExcludeMeFromHostList	= rhs.m_ExcludeMeFromHostList;
-		//m_AltHostWebsiteUrl		= rhs.m_AltHostWebsiteUrl;
-		//m_AltNetServiceWebsiteUrl	= rhs.m_AltNetServiceWebsiteUrl;
+		m_ExcludeMeFromHostList	    = rhs.m_ExcludeMeFromHostList;
 	}
 
 	return *this;
+}
+
+//============================================================================
+bool NetHostSetting::operator == ( const NetHostSetting& rhs ) const
+{
+    return 	m_NetHostSettingName == rhs.m_NetHostSettingName &&
+        m_NetworkName == rhs.m_NetworkName &&
+        m_NetServiceWebsiteUrl == rhs.m_NetServiceWebsiteUrl &&
+        m_NetHostWebsiteUrl == rhs.m_NetHostWebsiteUrl &&
+        m_ThisNodeIsHost == rhs.m_ThisNodeIsHost &&
+        m_ExcludeMeFromHostList == rhs.m_ExcludeMeFromHostList;
+}
+
+//============================================================================
+bool NetHostSetting::operator != ( const NetHostSetting& rhs ) const
+{
+    return !( *this == rhs );
 }

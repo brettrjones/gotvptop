@@ -509,7 +509,7 @@ bool NetConnector::connectUsingTcp(	VxConnectInfo&		connectInfo,
 			else
 			{
 #ifdef DEBUG_NET_CONNECTOR
-                if( IsLogEnabled( eLogModuleConnect ) )
+                if( IsLogEnabled( eLogConnect ) )
 				    LogMsg( LOG_SKT, "connectUsingTcp: FAIL connect to proxy to %s with proxy ip %s port %d for id %s\n",
 					    m_Engine.knownContactNameFromId( connectInfo.getMyOnlineId() ),
 					    strRelayConnectIp.c_str(),
@@ -682,7 +682,7 @@ RCODE NetConnector::directConnectTo(	VxConnectInfo&		connectInfo,
 		//LogMsg( LOG_INFO, "sendMyPktAnnounce 2\n" ); 
 		if( false == sendMyPktAnnounce( connectInfo.getMyOnlineId(), sktBase, true, getShouldRequestTop10() ) )
 		{
-            if( IsLogEnabled( eLogModuleConnect ) )
+            if( IsLogEnabled( eLogConnect ) )
 			    LogMsg( LOG_DEBUG, "NetworkMgr::DirectConnectTo: connect failed sending announce\n" );
 			return -1;
 		}
@@ -697,11 +697,11 @@ RCODE NetConnector::directConnectTo(	VxConnectInfo&		connectInfo,
 	{
 
 		//LogMsg( LOG_INFO, "NetConnector::directConnectTo: connect FAIL to %s:%d\n", strIpAddress.c_str(), connectInfo.getOnlinePort() );
-        if( IsLogEnabled( eLogModuleConnect ) )
+        if( IsLogEnabled( eLogConnect ) )
 		    LogMsg( LOG_DEBUG, "NetworkMgr::DirectConnectTo: failed\n" );
 	}
 
-    if( IsLogEnabled( eLogModuleConnect ) )
+    if( IsLogEnabled( eLogConnect ) )
 	    LogMsg( LOG_DEBUG, "NetworkMgr::DirectConnectTo: done\n" );
 
 	return rc;

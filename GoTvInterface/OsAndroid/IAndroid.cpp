@@ -55,7 +55,7 @@ IAndroid::IAndroid( IGoTv& gotv )
 //============================================================================
 bool IAndroid::doPreStartup()
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "IAndroid::doPreStartup");
+    LogModule(eLogStartup, LOG_VERBOSE, "IAndroid::doPreStartup");
     // Initialize before CAppParamParser so it can set the log level
     //g_advancedSettings.Initialize();
     return true;
@@ -63,7 +63,7 @@ bool IAndroid::doPreStartup()
 
 bool IAndroid::doStartup()
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "IAndroid::doStartup");
+    LogModule(eLogStartup, LOG_VERBOSE, "IAndroid::doStartup");
     return true;
 }
 
@@ -76,12 +76,12 @@ bool IAndroid::doStartup()
 //============================================================================
 void IAndroid::doPreShutdown( )
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "IAndroid::doPreShutdown");
+    LogModule(eLogStartup, LOG_VERBOSE, "IAndroid::doPreShutdown");
 }
 
 void IAndroid::doShutdown( )
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "IAndroid::doShutdown");
+    LogModule(eLogStartup, LOG_VERBOSE, "IAndroid::doShutdown");
 }
 
 #endif // TARGET_OS_ANDROID

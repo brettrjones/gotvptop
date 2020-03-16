@@ -208,7 +208,7 @@ IFromGui& AppCommon::getFromGuiInterface( void )
 //============================================================================
 void AppCommon::loadWithoutThread( void )
 {
-    uint32_t startMs = GetApplicationAliveMs();
+    uint64_t startMs = GetApplicationAliveMs();
 
     registerMetaData();
 
@@ -237,14 +237,14 @@ void AppCommon::loadWithoutThread( void )
     // asset database and user specific setting database will be created in sub directory of account login
     // after user has logged into account
 
-    uint32_t loadingMs = GetApplicationAliveMs();
-    LogMsg( LOG_DEBUG, "LoadSettings %d ms alive ms %d", loadingMs - startMs, loadingMs );
+    uint64_t loadingMs = GetApplicationAliveMs();
+    LogMsg( LOG_DEBUG, "LoadSettings %lld ms alive ms %lld", loadingMs - startMs, loadingMs );
 
     // load icons from resources
     m_MyIcons.myIconsStartup();
 
-    uint32_t iconsMs = GetApplicationAliveMs();
-    LogMsg( LOG_DEBUG, "Load Icons %d ms alive ms %d", iconsMs - loadingMs, iconsMs );
+    uint64_t iconsMs = GetApplicationAliveMs();
+    LogMsg( LOG_DEBUG, "Load Icons %lld ms alive ms %lld", iconsMs - loadingMs, iconsMs );
 
     // TODO: finish VxAppStyle..
     getQApplication().setStyle( &m_AppStyle );
@@ -252,15 +252,15 @@ void AppCommon::loadWithoutThread( void )
     // load sounds to play and sound hardware
     m_MySndMgr.sndMgrStartup();
 
-    uint32_t styleMs = GetApplicationAliveMs();
-    LogMsg( LOG_DEBUG, "Setup Style %d ms alive ms %d", styleMs - iconsMs, styleMs );
+    uint64_t styleMs = GetApplicationAliveMs();
+    LogMsg( LOG_DEBUG, "Setup Style %lld ms alive ms %lld", styleMs - iconsMs, styleMs );
 
     m_HomePage.initializeHomePage();
     connect( &m_HomePage, SIGNAL( signalMainWindowResized() ), this, SLOT( slotMainWindowResized() ) );
     m_HomePage.show();
 
-    uint32_t homePageMs = GetApplicationAliveMs();
-    LogMsg( LOG_DEBUG, "Initialize Home Page %d ms alive ms %d", homePageMs - styleMs, homePageMs );
+    uint64_t homePageMs = GetApplicationAliveMs();
+    LogMsg( LOG_DEBUG, "Initialize Home Page %lld ms alive ms %lld", homePageMs - styleMs, homePageMs );
 }
 
 //============================================================================
@@ -922,7 +922,7 @@ void AppCommon::toGuiNetworkState( ENetworkStateType eNetworkState, const char* 
 
 	emit signalNetworkStateChanged( eNetworkState );
 
-    if( IsLogEnabled( eLogModuleNetworkState ) )
+    if( IsLogEnabled( eLogNetworkState ) )
     {
         const char * networkState = DescribeNetworkState( eNetworkState );
         std::string formatedMsg;
@@ -1173,7 +1173,7 @@ void AppCommon::onOncePerSecond( void )
     else
     {
         waitCnt++;
-        LogMsg( LOG_DEBUG, "Wait to login seconds %d alive ms %d", waitCnt, GetApplicationAliveMs() );
+        LogMsg( LOG_DEBUG, "Wait to login seconds %d alive ms %lld", waitCnt, GetApplicationAliveMs() );
     }
 }
 
@@ -1286,7 +1286,7 @@ void AppCommon::toGuiAssetAdded( AssetInfo * assetInfo )
 		return;
 	}
 
-	if( IsLogEnabled( eLogModuleAssets ) )
+	if( IsLogEnabled( eLogAssets ) )
 		LogMsg( LOG_INFO, "toGuiAssetAdded: toGuiActivityClientsLock\n" );
 	//#endif // DEBUG_TOGUI_CLIENT_MUTEX
 
@@ -1298,7 +1298,7 @@ void AppCommon::toGuiAssetAdded( AssetInfo * assetInfo )
 		client.m_Callback->toGuiAssetAdded( client.m_UserData, assetInfo );
 	}
 
-	if( IsLogEnabled( eLogModuleAssets ) )
+	if( IsLogEnabled( eLogAssets ) )
 		LogMsg( LOG_INFO, "toGuiAssetAdded toGuiActivityClientsUnlock\n");
 
 	toGuiActivityClientsUnlock();

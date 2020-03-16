@@ -39,13 +39,13 @@ RCODE	VxSktAccept::doAccept( VxServerMgr * poMgr, struct sockaddr& oAcceptAddr )
 	m_strLclIp = m_LclIp.toStdString();
 	m_strRmtIp = m_RmtIp.toStdString();
 
-    LogModule( eLogModuleConnect, LOG_INFO, "VxSktAccept accept Lcl ip %s port %d (0x%4.4x) Rmt ip %s port %d (0x%4.4x)", 
+    LogModule( eLogConnect, LOG_INFO, "VxSktAccept accept Lcl ip %s port %d (0x%4.4x) Rmt ip %s port %d (0x%4.4x) thread 0x%x", 
 		m_strLclIp.c_str(),
 		m_LclIp.getPort(),
 		m_LclIp.getPort(),
 		m_strRmtIp.c_str(),
 		m_RmtIp.getPort(),
-		m_RmtIp.getPort() );
+		m_RmtIp.getPort(), VxGetCurrentThreadId() );
 
     // tell user we connecting
 	//VerifyCodePtr( m_pfnReceive );
@@ -53,6 +53,7 @@ RCODE	VxSktAccept::doAccept( VxServerMgr * poMgr, struct sockaddr& oAcceptAddr )
 	// make a useful thread name
 	std::string strVxThreadName;
 	StdStringFormat( strVxThreadName, "VxSktBaseAccept%d", m_iSktId );
+    LogModule( eLogConnect, LOG_INFO, "VxSktAccept starting rx thread %s for skt %d skt id %d", strVxThreadName.c_str(), m_Socket, m_iSktId );
 	startReceiveThread( strVxThreadName.c_str() );
 	return 0;
 }

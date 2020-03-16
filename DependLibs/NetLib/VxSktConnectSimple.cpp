@@ -18,6 +18,7 @@
 
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxGlobals.h>
+#include <CoreLib/VxThread.h>
 
 #include <memory.h>
 
@@ -57,7 +58,7 @@ SOCKET VxSktConnectSimple::connectTo(	const char *	pIpOrUrl,				// remote ip or 
 {
 	if( isConnected() )
 	{
-		LogMsg( LOG_INFO, "VxSktConnectSimple::connectTo: connect attempt on allready connected socket\n" );
+		LogMsg( LOG_INFO, "VxSktConnectSimple::connectTo: connect attempt on allready connected socket thread 0x%x", VxGetCurrentThreadId() );
 		return -1;
 	}
 
@@ -103,10 +104,12 @@ SOCKET VxSktConnectSimple::connectTo( const char *  lclAdapterIp,					// local a
     SOCKET skt = socket( rmtIpAddr.isIPv4() ? PF_INET : PF_INET6, SOCK_STREAM, 0 );
     if( skt == INVALID_SOCKET )
     {
-        LogMsg( LOG_INFO, "VxSktConnectSimple::connectTo: failed to create socket\n" );
+        LogMsg( LOG_INFO, "VxSktConnectSimple::connectTo: failed to create socket thread 0x%x", VxGetCurrentThreadId() );
     }
     else
     {
+#if USE_BIND_LOCAL_IP
+        // when using a vpn then binding to local ip causes connection fail..
         struct sockaddr_storage oLclSktStorage;
         lclIpAddr.fillAddress( oLclSktStorage, 0 );
         if( false == VxBindSkt( skt, &oLclSktStorage ) )
@@ -115,10 +118,11 @@ SOCKET VxSktConnectSimple::connectTo( const char *  lclAdapterIp,					// local a
         }
         else
         {
-            struct sockaddr_storage oRmtSktAddr;
-            int iRmtSktAddrLen = rmtIpAddr.fillAddress( oRmtSktAddr, u16Port );
+#endif // USE_BIND_LOCAL_IP
+            struct sockaddr_storage rmtSktAddr;
+            int iRmtSktAddrLen = rmtIpAddr.fillAddress( rmtSktAddr, u16Port );
 
-            int result = connect( skt, ( struct sockaddr * )&oRmtSktAddr, iRmtSktAddrLen );
+            int result = connect( skt, ( struct sockaddr * )&rmtSktAddr, iRmtSktAddrLen );
             if( 0 == result )
             {
                 m_Socket = skt;
@@ -136,9 +140,11 @@ SOCKET VxSktConnectSimple::connectTo( const char *  lclAdapterIp,					// local a
                     skt = INVALID_SOCKET;
                 }
 
-                LogMsg( LOG_ERROR, "TestConnectionOnSpecificLclAddress: connect error %s\n", VxDescribeSktError( result ) );
+                LogMsg( LOG_ERROR, "TestConnectionOnSpecificLclAddress: connect error %s thread 0x%x", VxDescribeSktError( result ), VxGetCurrentThreadId() );
             }
+#if USE_BIND_LOCAL_IP
         }
+#endif // #if USE_BIND_LOCAL_IP
     }
 
     return skt;
@@ -151,7 +157,7 @@ RCODE VxSktConnectSimple::sendData(	const char *	pData,					// data to send
 {
 	if( false == this->isConnected() )
 	{
-		LogMsg( LOG_INFO, "VxSktConnectSimple::sendData: attempted send on disconnected socket\n" );
+		LogMsg( LOG_INFO, "VxSktConnectSimple::sendData: attempted send on disconnected socket thread 0x%x", VxGetCurrentThreadId() );
 		return -1;
 	}
 
@@ -231,21 +237,21 @@ void VxSktConnectSimple::dumpConnectionInfo( void )
 	uint16_t lclPort = lclAddr.getPort();
 	std::string lclIp = lclAddr.toStdString();
 
-	LogMsg( LOG_INFO, "VxSktConnectSimple: Rmt ip %s port %d Lcl ip %s port %d\n",
+	LogMsg( LOG_INFO, "VxSktConnectSimple: Rmt ip %s port %d Lcl ip %s port %d thread 0x%x",
 			rmtIp.c_str(),
 			rmtPort,
 			lclIp.c_str(),
-			lclPort );
+			lclPort, VxGetCurrentThreadId() );
 
 	rmtPort = m_RmtIp.getPort();
 	rmtIp = m_RmtIp.toStdString();
 
 	lclPort = m_LclIp.getPort();
 	lclIp = m_LclIp.toStdString();
-	LogMsg( LOG_INFO, "VxSktConnectSimple: 2 Rmt ip %s port %d Lcl ip %s port %d\n",
+	LogMsg( LOG_INFO, "VxSktConnectSimple: 2 Rmt ip %s port %d Lcl ip %s port %d thread 0x%x",
 		rmtIp.c_str(),
 		rmtPort,
 		lclIp.c_str(),
-		lclPort );
+		lclPort, VxGetCurrentThreadId() );
 
 }

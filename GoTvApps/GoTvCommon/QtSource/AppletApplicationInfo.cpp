@@ -35,14 +35,6 @@ namespace
 {
     const int MAX_LOG_EDIT_BLOCK_CNT = 1000;
     const int MAX_INFO_MSG_SIZE = 2048;
-
-    void LogHandler( void * userData, uint32_t u32LogFlags, char * logMsg )
-    {
-        if( userData )
-        {
-            ( ( AppletApplicationInfo * )userData )->toGuiLog( u32LogFlags, logMsg );
-        }
-    }
 }
 
 //============================================================================
@@ -56,12 +48,14 @@ AppletApplicationInfo::AppletApplicationInfo( AppCommon& app, QWidget * parent )
 	m_MyApp.activityStateChange( this, true );
 
     setupApplet();
+    VxAddLogHandler( this );
 }
 
 //============================================================================
 AppletApplicationInfo::~AppletApplicationInfo()
 {
-    VxSetLogHandler( m_OldLogFunction, m_OldLogUserData );
+    VxRemoveLogHandler( this );
+
     m_MyApp.activityStateChange( this, false );
 }
 
@@ -78,16 +72,12 @@ void AppletApplicationInfo::setupApplet( void )
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotLogMsg( const QString& ) ) );
     connect( this, SIGNAL( signalInfoMsg( const QString& ) ), this, SLOT( slotInfoMsg( const QString& ) ) );
 
-    m_OldLogFunction = VxGetLogHandler();
-    m_OldLogUserData = VxGetLogUserData();
-    VxSetLogHandler( LogHandler, this );
-
     fillBasicInfo();
     fillExtraInfo();
 }
 
 //============================================================================
-void AppletApplicationInfo::toGuiLog( uint32_t u32LogFlags, char * logMsg )
+void AppletApplicationInfo::onLogEvent( uint32_t u32LogFlags, char * logMsg )
 {
     m_LogMutex.lock();
     if( m_VerboseLog
@@ -171,7 +161,7 @@ void AppletApplicationInfo::logMsg( const char* logMsg, ... )
     as8Buf[ sizeof( as8Buf ) - 1 ] = 0;
     va_end( argList );
 
-    toGuiLog( LOG_INFO, as8Buf );
+    onLogEvent( LOG_INFO, as8Buf );
 }
 
 //============================================================================

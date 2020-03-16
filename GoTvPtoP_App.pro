@@ -50,6 +50,14 @@ include(config_opensslp_include.pri)
 
 include(GoTvPtoPAppLib.pri)
 
+
+PRE_TARGETDEPS += $$PWD/libptopengine.pro
+PRE_TARGETDEPS += $$PWD/libnetlib.pro
+PRE_TARGETDEPS += $$PWD/libpktlib.pro
+PRE_TARGETDEPS += $$PWD/libcorelib.pro
+PRE_TARGETDEPS += $$PWD/libcrossguid.pro
+
+
 #DESTDIR = $$PWD/bin/
 #gotvptop.depends += $$PWD/GoTvPtoPAppLib.pro
 #gotvptop.depends += $$PWD/GoTvCoreLibs.pro

@@ -78,7 +78,7 @@ void NetStatusAccum::setInternetAvail( bool avail )
     if( avail != m_InternetAvail )
     {
         m_InternetAvail = avail;
-        LogModule( eLogModuleNetAccessStatus, LOG_VERBOSE, "Internet available %d", avail );
+        LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Internet available %d", avail );
         onNetStatusChange();
     }
 }
@@ -89,7 +89,7 @@ void NetStatusAccum::setNetHostAvail( bool avail )
     if( avail != m_NetworkHostAvail )
     {
         m_NetworkHostAvail = avail;
-        LogModule( eLogModuleNetAccessStatus, LOG_VERBOSE, "Network Host available %d", avail );
+        LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Network Host available %d", avail );
         onNetStatusChange();
     }
 }
@@ -100,7 +100,7 @@ void NetStatusAccum::setConnectionTestAvail( bool avail )
     if( avail != m_ConnectionTestAvail )
     {
         m_ConnectionTestAvail = avail;
-        LogModule( eLogModuleNetAccessStatus, LOG_VERBOSE, "Connection Test available %d", avail );
+        LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Connection Test available %d", avail );
         onNetStatusChange();
     }
 }
@@ -112,7 +112,7 @@ void NetStatusAccum::setDirectConnectTested( bool isTested, bool requiresRelay )
     {
         m_DirectConnectTested = isTested;
         m_RequriesRelay = requiresRelay;
-        LogModule( eLogModuleNetAccessStatus, LOG_VERBOSE, "Direct Connect Tested %d relay required ? %d", isTested, requiresRelay );
+        LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Direct Connect Tested %d relay required ? %d", isTested, requiresRelay );
         onNetStatusChange();
     }
 }
@@ -123,7 +123,7 @@ void NetStatusAccum::setConnectToRelay( bool connectedToRelay )
     if( connectedToRelay != m_ConnectedToRelay )
     {
         m_ConnectedToRelay = connectedToRelay;
-        LogModule( eLogModuleNetAccessStatus, LOG_VERBOSE, "Connected to relay %d", connectedToRelay );
+        LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Connected to relay %d", connectedToRelay );
         onNetStatusChange();
     }
 }

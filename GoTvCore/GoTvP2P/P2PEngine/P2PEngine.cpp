@@ -136,7 +136,7 @@ void P2PEngine::iniitializePtoPEngine( void )
     {
         m_EngineInitialized = true;
         VxSetNetworkLoopbackAllowed( false );
-        VxSetLogHandler( LogHandler, this );
+        // not needed if do not need to send log to gui VxSetLogHandler( LogHandler, this );
         VxSetAppErrHandler( AppErrHandler, this );
         VxSocketsStartup();
         m_PluginMgr.pluginMgrStartup();

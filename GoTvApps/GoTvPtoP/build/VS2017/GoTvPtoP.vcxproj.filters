@@ -930,6 +930,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetAvailStatusWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettingsData.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -2834,6 +2837,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AccountDb.h">
       <Filter>GoTvCommon\Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettingsData.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

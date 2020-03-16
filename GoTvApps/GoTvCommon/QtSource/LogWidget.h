@@ -21,7 +21,7 @@
 #include <QFile>
 #include <QMutex>
 
-class LogWidget : public QWidget
+class LogWidget : public QWidget, public ILogCallbackInterface
 {
     Q_OBJECT
 public:
@@ -29,7 +29,7 @@ public:
     ~LogWidget() override;
 
 
-    void                        toGuiLog( uint32_t u32LogFlags, char * logMsg );
+    void                        onLogEvent( uint32_t u32LogFlags, char * logMsg ) override;
 
     void                        clear()                 { getLogEdit()->clear(); }
 
@@ -48,7 +48,5 @@ protected:
     AppCommon&                  m_MyApp;
     QFile                       m_LogFile;
     QMutex                      m_LogMutex;
-    LOG_FUNCTION                m_OldLogFunction = nullptr;
-    void *                      m_OldLogUserData = nullptr;
     bool                        m_VerboseLog = false;
 };

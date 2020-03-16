@@ -228,7 +228,7 @@ bool IGoTv::initDirectories()
 //============================================================================
 void IGoTv::createUserDirs() const
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "IGoTv::createUserDirs");
+    LogModule(eLogStartup, LOG_VERBOSE, "IGoTv::createUserDirs");
     CDirectory::Create( "special://home/" );
     CDirectory::Create( "special://home/addons" );
     CDirectory::Create( "special://home/addons/packages" );
@@ -277,7 +277,7 @@ void IGoTv::playGoTvMedia( AssetInfo * assetInfo )
 //============================================================================
 void IGoTv::startupFfmpeg()
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "IGoTv::startupFfmpeg");
+    LogModule(eLogStartup, LOG_VERBOSE, "IGoTv::startupFfmpeg");
     static bool ffmpegStarted = false;
     if( !ffmpegStarted )
     {
@@ -312,7 +312,7 @@ void IGoTv::shutdownFfmpeg()
 //============================================================================
 void IGoTv::setSslCertFile( std::string certFile )
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "IGoTv::setSslCertFile (%s)", certFile.c_str());
+    LogModule(eLogStartup, LOG_VERBOSE, "IGoTv::setSslCertFile (%s)", certFile.c_str());
     m_SslCertFile = certFile;
     if( !m_SslCertFile.empty() )
     {
@@ -329,7 +329,7 @@ void IGoTv::setSslCertFile( std::string certFile )
 //============================================================================
 bool IGoTv::doPreStartup()
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "IGoTv::doPreStartup");
+    LogModule(eLogStartup, LOG_VERBOSE, "IGoTv::doPreStartup");
 #ifdef TARGET_OS_ANDROID
     CJNIContext::createJniContext( GetJavaEnvCache().getJavaVM(),  GetJavaEnvCache().getJavaEnv() );
 #endif // TARGET_OS_ANDROID
@@ -352,7 +352,7 @@ bool IGoTv::doPreStartup()
 //============================================================================
 bool IGoTv::doStartup()
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "IGoTv::doStartup");
+    LogModule(eLogStartup, LOG_VERBOSE, "IGoTv::doStartup");
     return m_OsInterface.doStartup();
 }
 
@@ -361,14 +361,14 @@ bool IGoTv::doStartup()
 //============================================================================
 bool IGoTv::initRun( const CAppParamParser& params )
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "IGoTv::initRun");
+    LogModule(eLogStartup, LOG_VERBOSE, "IGoTv::initRun");
     return m_OsInterface.initRun( params );
 }
 
 //============================================================================
 bool IGoTv::doRun( EAppModule appModule )
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "IGoTv::doRun");
+    LogModule(eLogStartup, LOG_VERBOSE, "IGoTv::doRun");
     return m_OsInterface.doRun( appModule );
 }
 
@@ -376,14 +376,14 @@ bool IGoTv::doRun( EAppModule appModule )
 //============================================================================
 void IGoTv::doPreShutdown()
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "IGoTv::doPreShutdown");
+    LogModule(eLogStartup, LOG_VERBOSE, "IGoTv::doPreShutdown");
     m_OsInterface.doPreShutdown();
 }
 
 //============================================================================
 void IGoTv::doShutdown()
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "IGoTv::doShutdown");
+    LogModule(eLogStartup, LOG_VERBOSE, "IGoTv::doShutdown");
     m_OsInterface.doShutdown();
 }
 

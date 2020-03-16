@@ -489,6 +489,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletMgr.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetHostingPage.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettings.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettingsData.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPersonalRecorder.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSearchPage.cpp" />
@@ -1975,6 +1976,7 @@
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\release;$(QTDIR)\mkspecs\win64-msvc</IncludePath>
     </QtMoc>
+    <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettingsData.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppProfile.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppSettings.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\HomeWindow.h">

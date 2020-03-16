@@ -52,7 +52,7 @@ ILinux::ILinux( IGoTv& gotv )
 //============================================================================
 bool ILinux::doPreStartup()
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "ILinux::doPreStartup");
+    LogModule(eLogStartup, LOG_VERBOSE, "ILinux::doPreStartup");
     // this fixes crash if OPENSSL_CONF is set to existed openssl.cfg
     // need to set it as soon as possible  
     CEnvironment::unsetenv( "OPENSSL_CONF" );
@@ -62,7 +62,7 @@ bool ILinux::doPreStartup()
 
 bool ILinux::doStartup()
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "ILinux::doStartup");
+    LogModule(eLogStartup, LOG_VERBOSE, "ILinux::doStartup");
     return true;
 }
 
@@ -75,13 +75,13 @@ bool ILinux::doStartup()
 //============================================================================
 void ILinux::doPreShutdown( )
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "ILinux::doPreShutdown");
+    LogModule(eLogStartup, LOG_VERBOSE, "ILinux::doPreShutdown");
 }
 
 //============================================================================
 void ILinux::doShutdown( )
 {
-    LogModule(eLogModuleStartup, LOG_VERBOSE, "ILinux::doShutdown");
+    LogModule(eLogStartup, LOG_VERBOSE, "ILinux::doShutdown");
     // clear previously set timer resolution
     // timeEndPeriod( 1 );
 }

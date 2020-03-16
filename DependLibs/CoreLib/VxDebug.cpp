@@ -15,7 +15,6 @@
 
 #include "config_corelib.h"
 
-
 #ifdef TARGET_OS_WINDOWS
 # include <WinSock2.h>
 # include <windows.h>
@@ -43,38 +42,43 @@
 
 bool g_StreamActive = false;
 
+GOTV_BEGIN_CDECLARES
+GOTV_END_CDECLARES
+
+
 namespace
 {
     uint32_t g_ModuleEnableLoggingFlags = ( uint32_t )(
-                    eLogModuleMulticast
-                    | eLogModuleConnect
-                    | eLogModuleListen
-                    | eLogModuleSkt
-                    | eLogModulePkt
-                    | eLogModuleNetworkState
-                    | eLogModuleNetworkMgr
-                    | eLogModuleIsPortOpenTest
-                    | eLogModuleThread
-                    | eLogModuleStorage
-                    | eLogModuleAssets
-                    | eLogModulePlugins
-                    | eLogModuleStartup
-                    | eLogModuleHosts
-                    //| eLogModuleWindowPositions
+                    eLogMulticast
+                    | eLogConnect
+                    | eLogListen
+                    | eLogSkt
+                    | eLogPkt
+                    | eLogNetworkState
+                    | eLogNetworkMgr
+                    | eLogIsPortOpenTest
+                    | eLogThread
+                    | eLogStorage
+                    | eLogAssets
+                    | eLogPlugins
+                    | eLogStartup
+                    | eLogHosts
+                    | eLogTcpData
+                    | eLogUdpData
+        //| eLogPlayer
+        //| eLogWindowPositions
                     );
 
+    VxMutex						g_oLogMutex;
+    VxMutex						g_oFileLogMutex;
     unsigned long				g_u32LogFlags                   = LOG_PRIORITY_MASK;
-
-	VxMutex						g_oFileLogMutex;
-    void *						g_pvUserData                    = 0;
-
+    void *						g_pvUserData                    = nullptr;
 
     int							g_iLogNameLen                   = 0;
 	char						g_as8LogFileName[VX_MAX_PATH]	= {0};
-	VxMutex						g_oLogMutex;
 
 #if ENABLE_LOG_LIST
-	std::vector<LogEntry>		g_LogEntryList;
+    std::vector<LogEntry>		g_LogEntryList;
 	void						AddLogEntry( unsigned long flags, const char * text )
 	{
 		g_oFileLogMutex.lock();
@@ -86,8 +90,99 @@ namespace
 
 		g_oFileLogMutex.unlock();
 	}
-
 #endif // ENABLE_LOG_LIST
+    class LogMgr
+    {
+    public:
+        const int MAX_LOG_FUNCTIONS = 16;
+        class VxLogFuncPair
+        {
+        public:
+            VxLogFuncPair( LOG_FUNCTION pfuncLogHandler, void * userData )
+                : m_Func( pfuncLogHandler ), m_UserData( userData )
+            {
+            }
+
+            LOG_FUNCTION m_Func;
+            void * m_UserData;
+        };
+
+        LogMgr() = default;
+ 
+        void handleLog( void * userData, uint32_t u32LogFlags, char * logMsg )
+        {
+            if( m_LogFuncList.size() )
+            {
+                g_oLogMutex.lock();
+                if( m_LogFuncList.size() && logMsg )
+                {
+                    for( VxLogFuncPair& pair : m_LogFuncList )
+                    {
+                        pair.m_Func( pair.m_UserData, u32LogFlags, logMsg );
+                    }
+                }
+
+                g_oLogMutex.unlock();
+            }
+        }
+
+        // add a log handler
+        void addLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData )
+        {
+            g_oLogMutex.lock();
+            if( pfuncLogHandler && ( m_LogFuncList.size() < MAX_LOG_FUNCTIONS ) )
+            {
+                LogMgr::VxLogFuncPair funcPair( pfuncLogHandler, userData );
+                m_LogFuncList.push_back( funcPair );
+            }
+
+            g_oLogMutex.unlock();
+        }
+
+        // remove a log handler
+        void removeLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData )
+        {
+            g_oLogMutex.lock();
+            if( userData && m_LogFuncList.size() )
+            {
+                for( auto iter = m_LogFuncList.begin(); iter != m_LogFuncList.end(); ++iter )
+                {
+                    if( ( *iter ).m_UserData == userData )
+                    {
+                        m_LogFuncList.erase( iter );
+                        break;
+                    }
+                }
+            }
+
+            g_oLogMutex.unlock();
+        }
+
+        std::vector<LogMgr::VxLogFuncPair>		m_LogFuncList;
+    };
+
+    LogMgr& GetLogMgr()
+    {
+        static LogMgr g_LogMgr;
+        return g_LogMgr;
+    }
+
+    void ExtendLogHandler( void * userData, uint32_t u32LogFlags, char * logMsg )
+    {
+        GetLogMgr().handleLog( userData, u32LogFlags, logMsg );
+    }
+
+    // add a log handler
+    void AddLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData )
+    {
+        GetLogMgr().addLogHandler( pfuncLogHandler, userData );
+    }
+
+    // remove a log handler
+    void RemoveLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData )
+    {
+        GetLogMgr().removeLogHandler( pfuncLogHandler, userData );
+    }
 }
 
 //============================================================================
@@ -100,10 +195,15 @@ bool IsLogEnabled( ELogModule logModule )
 //============================================================================
 GOTV_BEGIN_CDECLARES
 void LogAppendLineFeed( char * buf, size_t sizeOfBuf );
+void                    default_log_output( void * userData, uint32_t u32MsgType, char * pLogMsg );
+void                    vx_error( unsigned long u32MsgType, const char* msg, ... );
+
+static LOG_FUNCTION		g_pfuncLogHandler = ExtendLogHandler;
+static bool             g_enableDefaultHandler = true;
 GOTV_END_CDECLARES
 
 //============================================================================
-void LogModule( ELogModule eLogModule, unsigned long u32MsgType, const char* msg, ... )
+void LogModule( ELogModule eLog, unsigned long u32MsgType, const char* msg, ... )
 {
     if( ( false == VxIsDebugEnabled() ) )
     {
@@ -115,7 +215,7 @@ void LogModule( ELogModule eLogModule, unsigned long u32MsgType, const char* msg
         return; // don't log
     }
 
-    if( IsLogEnabled( eLogModule ) )
+    if( IsLogEnabled( eLog ) )
     {
         char as8Buf[ MAX_ERR_MSG_SIZE ];
         va_list argList;
@@ -156,10 +256,34 @@ void VxGetLogMessages( unsigned long u32MsgTypes, std::vector<LogEntry>& retMsgs
 
 GOTV_BEGIN_CDECLARES
 //============================================================================
-void                    default_log_handler( void * userData, uint32_t u32MsgType, char * pLogMsg );
-void                    vx_error( unsigned long u32MsgType, const char* msg, ... );
 
-LOG_FUNCTION		    g_pfuncLogHandler = default_log_handler;
+//============================================================================
+void VxSetLogFlags( unsigned long u32LogFlags )
+{
+    g_u32LogFlags = u32LogFlags;
+}
+
+//============================================================================
+// enable/disable default log handler
+void VxEnableDefaultLogHandler( bool enableDefaultHandler )
+{
+    g_enableDefaultHandler = enableDefaultHandler;
+}
+
+//============================================================================
+// add a log handler
+void VxAddLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData )
+{
+    GetLogMgr().addLogHandler( pfuncLogHandler, userData );
+}
+
+//============================================================================
+// remove a log handler
+void VxRemoveLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData )
+{
+    GetLogMgr().removeLogHandler( pfuncLogHandler, userData );
+}
+
 //============================================================================
 //============================================================================
 uint32_t VxGetModuleLogFlags( void )
@@ -244,23 +368,6 @@ void LogAppendLineFeed( char * buf, size_t sizeOfBuf )
 }
 
 //============================================================================
-void VxSetLogFlags( unsigned long u32LogFlags )
-{
-	g_u32LogFlags = u32LogFlags;
-}
-
-//============================================================================
-// This function sets the handler of log messages
-void VxSetLogHandler( LOG_FUNCTION pfuncLogHandler, void * userData )
-{
-	g_pfuncLogHandler = pfuncLogHandler;
-	g_pvUserData = userData;
-}
-
-LOG_FUNCTION VxGetLogHandler( void ) { return g_pfuncLogHandler;  }
-void * VxGetLogUserData( void ) { return g_pvUserData; }
-
-//============================================================================
 // This function is called by vx_assert() when the assertion fails.
 void  vx_error_output( unsigned long u32MsgType, char* exp,char * file, int line)
 {
@@ -307,9 +414,10 @@ void vx_error( unsigned long u32MsgType, const char* msg, ...)
 		//exit(99);
 	}
 };
+
 //============================================================================
 /// default log handler
-void default_log_handler( void * userData, uint32_t u32MsgType, char * pLogMsg )
+void default_log_output( void * userData, uint32_t u32MsgType, char * pLogMsg )
 {
     GOTV_UNUSED( userData );
 	u32MsgType = (u32MsgType & LOG_PRIORITY_MASK);
@@ -347,12 +455,13 @@ void default_log_handler( void * userData, uint32_t u32MsgType, char * pLogMsg )
 #else
     #ifdef TARGET_OS_WINDOWS
         OutputDebugStringA( pLogMsg );
+    #else
+        printf( pLogMsg );
     #endif // TARGET_OS_WINDOWS
-
-	printf( pLogMsg );
 #endif// TARGET_OS_ANDROID
 }
 
+//============================================================================
 void LogMsgVarg(unsigned long u32MsgType, const char *fmt, va_list argList )
 {
 	if ((false == VxIsDebugEnabled()))
@@ -402,36 +511,32 @@ void LogMsg( unsigned long u32MsgType, const char* msg, ...)
 //============================================================================
 void VxHandleLogMsg( unsigned long u32MsgType, char * logMsg )
 {
-	#ifdef TARGET_OS_WINDOWS
-//		OutputDebugStringA( logMsg );
-	#endif // TARGET_OS_WINDOWS
     if( g_iLogNameLen )
 	{
         log_to_file( g_as8LogFileName, logMsg);
 	}
 
-	//if( false == VxIsAppShuttingDown() )
-	//{
-	//	AddLogEntry( u32MsgType, as8Buf );
-	//}
-
+    if( VxIsAppShuttingDown() )
+    {
 #ifdef TARGET_OS_ANDROID
-	if( VxIsAppShuttingDown() )
-	{
-		__android_log_write( ANDROID_LOG_INFO, "SHUTDOWN", logMsg);
-		return;
-	}
+        __android_log_write( ANDROID_LOG_INFO, "SHUTDOWN", logMsg );
+#endif // TARGET_OS_ANDROID
+        return;
+    }
 
-    // just do default so can debug startup
-	default_log_handler( g_pvUserData, u32MsgType, logMsg);
-    // if called will have duplicate logcat entries but also passes log msg to gui
-    //g_pfuncLogHandler( g_pvUserData, u32MsgType, logMsg);
-#else
-	if( false == VxIsAppShuttingDown() )
-	{
-		g_pfuncLogHandler( g_pvUserData, u32MsgType, logMsg );
-	}
-#endif // TARGET_OS_WINDOWS
+#if ENABLE_LOG_LIST
+	AddLogEntry( u32MsgType, as8Buf );
+#endif // ENABLE_LOG_LIST
+
+    if( g_enableDefaultHandler )
+    {
+        default_log_output( g_pvUserData, u32MsgType, logMsg );
+    }
+
+    if( g_pfuncLogHandler )
+    {
+        g_pfuncLogHandler( g_pvUserData, u32MsgType, logMsg );
+    }
 }
 
 //============================================================================

@@ -78,6 +78,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 			{
 				pSktBuf[ iDataLen ] = 0;
 				sktBase->sktBufAmountRead( 0 ); // release mutex
+                LogMsg( LOG_VERBOSE, "Rxed ascii %s", pSktBuf );
 				if( m_PluginMgr.handleFirstWebPageConnection( sktBase ) )
 				{
 					// was either profile or storyboard web page
@@ -86,6 +87,7 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 				
                 if( ( iDataLen > 7 ) && ( 0 == strncmp( ( char * )pSktBuf, "http://", 7 ) ) )
 				{
+                    LogMsg( LOG_VERBOSE, "Rxed net %s", pSktBuf );
 					// probably net services
 					if( NetServiceUtils::verifyAllDataArrivedOfNetServiceUrl( sktBase ) )
 					{

@@ -87,10 +87,10 @@ bool RcWebServer::isWebServerAvailable( void )
 // shutdown web server
 void RcWebServer::webServerShutdown( void )
 {
-    if( IsLogEnabled( eLogModuleSkt ) )
+    if( IsLogEnabled( eLogSkt ) )
 	    LogMsg( LOG_DEBUG, "RcWebServer::webServerShutdown\n" );
 	setWebServerEnable( false );
-    if( IsLogEnabled( eLogModuleSkt ) )
+    if( IsLogEnabled( eLogSkt ) )
 	    LogMsg( LOG_DEBUG, "RcWebServer::webServerShutdown done\n" );
 }
 
@@ -152,7 +152,7 @@ RCODE RcWebServer::acceptRawLocalHttpConnection( VxSktBase * poSktIn, VxNetIdent
 
 		addSkt( sktBase );
 
-        if( IsLogEnabled( eLogModuleSkt ) )
+        if( IsLogEnabled( eLogSkt ) )
 		    LogMsg( LOG_DEBUG,  "skt %d to %s raw accept from skt %d\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str(), poSktIn->m_iSktId );
 
 		* ppoRetWebSkt = sktBase;
@@ -189,7 +189,7 @@ void * RcSktWebReceiveThreadFunc(  void * pvContext )
             return nullptr;
         }
 
-        if( IsLogEnabled( eLogModuleSkt ) )
+        if( IsLogEnabled( eLogSkt ) )
             LogMsg( LOG_DEBUG,  "skt %d %s SktWebReceiveThreadFunc start\n", sktBase->m_iSktId, sktBase->m_strRmtIp.c_str() );
 
         if( eSktTypeTcpAccept != sktBase->getSktType() )
@@ -233,7 +233,7 @@ void * RcSktWebReceiveThreadFunc(  void * pvContext )
                 continue;
             }
 
-            if( IsLogEnabled( eLogModuleSkt ) )
+            if( IsLogEnabled( eLogSkt ) )
                 LogMsg( LOG_DEBUG,  "skt %d SktWebReceiveThreadFunc wait for recv\n", sktBase->m_iSktId );
 
             iDataLen = recv(		sktBase->m_Socket,	// socket
@@ -241,7 +241,7 @@ void * RcSktWebReceiveThreadFunc(  void * pvContext )
                                     iAttemptLen,		// length of buffer space
                                     0 );				// flags
 
-            if( IsLogEnabled( eLogModuleSkt ) )
+            if( IsLogEnabled( eLogSkt ) )
                 LogMsg( LOG_DEBUG,  "skt %d SktWebReceiveThreadFunc wait for recv done len %d\n", sktBase->m_iSktId, iDataLen );
 
             if( poThread->isAborted()
