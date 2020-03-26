@@ -25,7 +25,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileXferSession.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHelpers.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/MyIcons.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/NetAvailStatusWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionCallbackInterface.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionLogic.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionState.h \

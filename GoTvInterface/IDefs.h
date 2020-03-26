@@ -274,7 +274,7 @@ enum ENetLayerType
 enum ENetLayerState
 {
     eNetLayerStateUndefined,		    //< not specified/initialized
-    eNetLayerStateWrongType,		    //< invalid or not relevant net layer typ
+    eNetLayerStateWrongType,		    //< invalid or not relevant net layer type
     eNetLayerStateTesting,		        //< testing for available 
     eNetLayerStateFailed,		        //< failed or some issue
     eNetLayerStateAvailable,		    //< available and ready for use

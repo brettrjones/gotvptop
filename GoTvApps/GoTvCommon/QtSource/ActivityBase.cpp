@@ -1150,3 +1150,17 @@ void ActivityBase::slotResizeWindowTimeout()
 		onResizeEnd( m_ResizingWindowSize );
 	}
 }
+
+//============================================================================
+void ActivityBase::fillMyNodeUrl( QLabel * myUrlLabel )
+{
+    if( myUrlLabel )
+    {
+        std::string url;
+        m_MyApp.getEngine().fromGuiGetNodeUrl( url );
+        if( !url.empty() )
+        {
+            myUrlLabel->setText( QString( url.c_str() ) );
+        }
+    }
+}

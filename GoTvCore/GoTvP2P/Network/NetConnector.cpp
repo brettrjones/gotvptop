@@ -889,7 +889,7 @@ void NetConnector::doStayConnectedThread( void )
 			//LogMsg( LOG_ERROR, "doStayConnected attempt lock\n" );
 			poListMutex->lock();
 			//LogMsg( LOG_ERROR, "doStayConnected attempt lock success\n" );
-			iSize = friendList.size();
+			iSize = (int)friendList.size();
 			if( iSize )
 			{
 				iConnectToIdx++;

@@ -371,6 +371,9 @@ public:
 	
 	/// Get random TCP port that is not currently in use
 	virtual uint16_t			fromGuiGetRandomTcpPort( void ) = 0;
+
+    /// Get url for this node
+    virtual void                fromGuiGetNodeUrl( std::string& nodeUrl ) = 0;
 #ifdef TARGET_OS_ANDROID
 	/// Not used.. in android multicast for discovery of contact on same LAN is done in Jave code
 	virtual int					fromGuiMulitcastPkt( unsigned char * data, int len ) = 0;

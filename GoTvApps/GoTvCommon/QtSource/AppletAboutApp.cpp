@@ -48,6 +48,7 @@ AppletAboutApp::AppletAboutApp( AppCommon& app, QWidget * parent )
 //============================================================================
 void AppletAboutApp::setupAboutMe( void )
 {
+    fillMyNodeUrl( ui.m_NodeUrlLabel );
     ui.m_AvailSpace->setText( GuiHelpers::getAvailableStorageSpaceText() );
     LogMsg( LOG_INFO, "htonl 4 = 0x%x\n", ntohl( 4L ) );
     VxNetIdent oMyIdent;

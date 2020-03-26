@@ -153,6 +153,13 @@
        </spacer>
       </item>
       <item>
+       <widget class="QLabel" name="m_NodeUrlLabel">
+        <property name="text">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QLabel" name="label">

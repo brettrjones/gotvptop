@@ -1318,9 +1318,9 @@ bool VxTestConnectionOnSpecificLclAddress( InetAddress& oLclAddr )
 		}
 		else
 		{
-			struct sockaddr_storage oLclSktStorage;
 #if USE_BIND_LOCAL_IP
-			oLclAddr.fillAddress( oLclSktStorage, 0 );
+            struct sockaddr_storage oLclSktStorage;
+            oLclAddr.fillAddress( oLclSktStorage, 0 );
 			if ( false == VxBindSkt( oVxSktConnect, &oLclSktStorage ) )
 			{
 				LogMsg( LOG_INFO, "TestConnectionOnSpecificLclAddress: failed to bind skt with ip %s\n", strLclAddr.c_str() );

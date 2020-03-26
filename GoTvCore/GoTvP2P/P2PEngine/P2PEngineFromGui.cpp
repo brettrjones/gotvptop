@@ -1190,6 +1190,13 @@ uint16_t P2PEngine::fromGuiGetRandomTcpPort( void )
 	return VxGetRandomTcpPort();
 }
 
+/// Get url for this node
+//============================================================================
+void P2PEngine::fromGuiGetNodeUrl( std::string& nodeUrl )
+{
+    return getNetStatusAccum().getNodeUrl( nodeUrl );
+}
+
 //============================================================================
 #ifdef TARGET_OS_ANDROID
 int P2PEngine::fromGuiMulitcastPkt( unsigned char * data, int len )

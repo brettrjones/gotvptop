@@ -208,6 +208,8 @@ std::string NetworkMonitor::determineLocalIp( void )
             if( 0 == VxGetLclAddress( skt, lclAddr ) )
             {
                 localIp = lclAddr.toStdString();
+                m_Engine.getNetStatusAccum().setIpAddress( localIp );
+                m_Engine.getNetStatusAccum().setIpPort( m_Engine.getEngineSettings().getTcpIpPort() );
                 m_Engine.getNetStatusAccum().setInternetAvail( true );
                 m_Engine.getNetStatusAccum().setNetHostAvail( true );
             }
@@ -230,9 +232,11 @@ std::string NetworkMonitor::determineLocalIp( void )
             InetAddrAndPort lclAddr;
             if( 0 == VxGetLclAddress( skt, lclAddr ) )
             {
-                m_Engine.getNetStatusAccum().setInternetAvail( true );
                 localIp = lclAddr.toStdString();
-            }
+                m_Engine.getNetStatusAccum().setIpAddress( localIp );
+                m_Engine.getNetStatusAccum().setIpPort( m_Engine.getEngineSettings().getTcpIpPort() );
+                m_Engine.getNetStatusAccum().setInternetAvail( true );
+             }
 
             VxCloseSkt( skt );
             /* NOT REQUIRED TO VERIFY LOCAL ADAPTER IP.. also while using VPN specifing local ip address causes issues

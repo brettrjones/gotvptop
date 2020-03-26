@@ -46,9 +46,10 @@ public:
 	virtual void				fromGuiKickWatchdog( void );
 	virtual bool				checkWatchdog( void );
 
-
 	virtual bool				startListening(  const char * ip, uint16_t u16ListenPort );
 	virtual bool				startListening( uint16_t u16ListenPort );
+    /// @brief listen on port without binding to a ip address
+    virtual bool                startListeningNoBind( uint16_t u16ListenPort );
 	virtual RCODE				stopListening( void );
 
 	void						listenForConnectionsToAccept( VxThread * poVxThread );
@@ -60,6 +61,7 @@ public:
 protected:
     RCODE						internalStartListen( void );
     RCODE 						acceptConnection( VxThread * poVxThread, SOCKET oListenSkt );
+    void                        closeListenSocket( void );
 
     static int					m_iAcceptMgrCnt;				    // number of managers created
     RCODE						m_rcLastError = 0;					// last error that occurred
@@ -70,5 +72,6 @@ protected:
 	InetAddrAndPort				m_LclIp;
 	int64_t						m_LastWatchdogKickMs = 0;
 	bool						m_IsReadyToAcceptConnections = false;
+    VxMutex                     m_ListenMutex;
 };
 

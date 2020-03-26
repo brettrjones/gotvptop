@@ -480,6 +480,13 @@
        </layout>
       </item>
       <item>
+       <widget class="QLabel" name="m_NodeUrlLabel">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="m_RunNetworkTestButton">
         <property name="text">
          <string>Run Network Tests</string>

@@ -127,3 +127,55 @@ void NetStatusAccum::setConnectToRelay( bool connectedToRelay )
         onNetStatusChange();
     }
 }
+
+//============================================================================
+void NetStatusAccum::setIpAddress( std::string& ipAddr )
+{
+    m_AccumMutex.lock();
+    m_IpAddr = ipAddr;
+    m_AccumMutex.unlock();
+}
+
+//============================================================================
+void NetStatusAccum::setIpPort( uint16_t ipPort )
+{
+    m_AccumMutex.lock();
+    m_IpPort = ipPort;
+    m_AccumMutex.unlock();
+}
+
+//============================================================================
+void NetStatusAccum::getNodeUrl( std::string& retNodeUrl )
+{
+    if( !isInternetAvailable() )
+    {
+        retNodeUrl = "No Internet Connection";
+    }
+    else
+    {
+        retNodeUrl = "ptop://";
+        retNodeUrl += getIpAddress();
+        retNodeUrl += ":";
+        retNodeUrl += std::to_string( m_IpPort );
+    }
+}
+
+//============================================================================
+std::string NetStatusAccum::getIpAddress( void )
+{
+    std::string ipAddr;
+    m_AccumMutex.lock();
+    ipAddr = m_IpAddr;
+    m_AccumMutex.unlock();
+    return ipAddr;
+}
+
+//============================================================================
+uint16_t NetStatusAccum::getIpPort( void )
+{
+    uint16_t port = 0;
+    m_AccumMutex.lock();
+    port = m_IpPort;
+    m_AccumMutex.unlock();
+    return port;
+}

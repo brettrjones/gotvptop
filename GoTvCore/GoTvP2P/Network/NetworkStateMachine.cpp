@@ -486,6 +486,7 @@ ENetLayerState NetworkStateMachine::getNetLayerState( ENetLayerType netLayer )
     else
     {
         LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::setNetLayerState invalid param" );
+        return eNetLayerStateWrongType;
     }
 }
 

@@ -56,6 +56,7 @@ AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
     connectSignals();
 
 	m_MyApp.activityStateChange( this, true );
+    fillMyNodeUrl( ui.m_NodeUrlLabel );
 }
 
 //============================================================================

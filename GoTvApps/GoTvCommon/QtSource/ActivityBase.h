@@ -274,6 +274,7 @@ protected:
 	void						playSound( ESndDef sndDef );
 	bool						playFile( QString fileName, int pos0to100000 = 0 );
 	bool						confirmDeleteFile( QString fileName, bool shredFile );
+    void                        fillMyNodeUrl( QLabel * myUrlLabel );
 
 	//=== vars ===//
 	Ui::ActivityBaseClass		ui;

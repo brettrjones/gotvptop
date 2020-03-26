@@ -57,6 +57,12 @@ PRE_TARGETDEPS += $$PWD/libpktlib.pro
 PRE_TARGETDEPS += $$PWD/libcorelib.pro
 PRE_TARGETDEPS += $$PWD/libcrossguid.pro
 
+nolimitconnect.depends += $$PWD/libptopengine.pro
+nolimitconnect.depends += $$PWD/libnetlib.pro
+nolimitconnect.depends += $$PWD/libpktlib.pro
+nolimitconnect.depends += $$PWD/libcorelib.pro
+nolimitconnect.depends += $$PWD/libcrossguid.pro
+
 
 #DESTDIR = $$PWD/bin/
 #gotvptop.depends += $$PWD/GoTvPtoPAppLib.pro

@@ -18,7 +18,7 @@
 #ifdef TARGET_OS_WINDOWS
 # include "WS2tcpip.h"
 #endif // TARGET_OS_WINDOWS
-#define USE_BIND_LOCAL_IP 0 // bind to local ip address when using vpn causes connect fail with error 110 (Connection timed out)
+#define USE_BIND_LOCAL_IP 1  // bind to local ip address when using vpn causes connect fail with error 110 (Connection timed out)
 
 #define EIM_ALIVE_TIMEDOUT          20000
 

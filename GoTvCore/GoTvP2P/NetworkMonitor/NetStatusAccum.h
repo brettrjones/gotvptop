@@ -14,6 +14,7 @@
 //============================================================================
 
 #include <GoTvInterface/IDefs.h>
+#include <CoreLib/VxMutex.h>
 
 class P2PEngine;
 
@@ -31,18 +32,23 @@ public:
     void                        setConnectionTestAvail( bool avail );
     void                        setDirectConnectTested( bool isTested, bool requiresRelay = false );
     void                        setConnectToRelay( bool connectedToRelay );
+    void                        setIpAddress( std::string& ipAddr );
+    void                        setIpPort( uint16_t ipPort );
 
     bool                        isInternetAvailable( void )       { return m_InternetAvail; };
     bool                        isNetHostAvailable( void )        { return m_NetworkHostAvail; };
     bool                        isDirectConnectTested( void )     { return m_DirectConnectTested; };
     bool                        isP2PAvailable( void )            { return m_DirectConnectTested && (!m_RequriesRelay || m_ConnectedToRelay); };
     bool                        requiresRelay( void )             { return m_RequriesRelay; };
-
+    void                        getNodeUrl( std::string& retNodeUrl );
+    std::string                 getIpAddress( void );
+    uint16_t                    getIpPort( void );
 
 protected:
     void                        onNetStatusChange( void );
 
     P2PEngine&					m_Engine;
+    VxMutex                     m_AccumMutex;
 
     bool                        m_InternetAvail{ false };
     bool                        m_NetworkHostAvail{ false };
@@ -53,5 +59,6 @@ protected:
     bool                        m_GroupListHostAvail{ false };
     bool                        m_GroupHostAvail{ false };
     bool                        m_IsConnectedGroupHost{ false };
-
+    std::string                 m_IpAddr;
+    uint16_t                    m_IpPort{ 0 };
 };
