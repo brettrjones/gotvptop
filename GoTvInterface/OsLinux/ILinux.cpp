@@ -39,6 +39,7 @@
 #include "utils/log.h"
 #include "utils/URIUtils.h"
 #include "GoTvCoreUtil.h"
+#include <CoreLib/VxDebug.h>
 
 using namespace XFILE;
 

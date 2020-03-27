@@ -15,7 +15,7 @@
 
 #include "AppletBase.h"
 
-#include "ui_AppletEditStoryboard.h"
+#include "ui_AppletEditStoryBoard.h"
 #include "ui_StoryWidget.h"
 
 class AppletEditStoryboard : public AppletBase

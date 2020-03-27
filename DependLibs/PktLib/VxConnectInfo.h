@@ -158,7 +158,7 @@ private:
 class VxConnectInfo : public VxConnectIdent
 {
 public:
-	VxConnectInfo();
+    VxConnectInfo() = default;
 	VxConnectInfo( const VxConnectInfo& rhs );
 
 	VxConnectInfo& operator =( const VxConnectInfo& rhs );
@@ -175,9 +175,9 @@ public:
 
 	//=== vars ===//
 private:
-	int64_t					    m_s64TimeLastConnectAttemptMs;
-	int64_t					    m_s64TimeTcpLastContactMs;	// time of last contact via tcp
-    int64_t					    m_u64TimeReserved;
+    int64_t					    m_s64TimeLastConnectAttemptMs{0};
+    int64_t					    m_s64TimeTcpLastContactMs{0};	// time of last contact via tcp
+    int64_t					    m_u64TimeReserved{0};
 };
 
 #pragma pack(pop)

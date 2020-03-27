@@ -1,4 +1,4 @@
-Instructions to create a virtual box Linux Mint 19.1 Image for GoTvPtoP developement
+Instructions to create a virtual box Linux Mint 19.2 Image for NoLimitConnect developement
 
 === KNOWN ISSUES ===
 1.) Turning on 3D acceleration in VBox causes Qt Creator to crash but works fine for just running GoTvPtoP
@@ -8,7 +8,7 @@ Instructions to create a virtual box Linux Mint 19.1 Image for GoTvPtoP develope
 	a.) With 3d acceleration turned off launch Qt Creator
 	b.) In Help->About Plugins uncheck welcome screen
 	c.) exit qt, restart virtual box with 3d acceleration turned on.
-	
+4.) This issue seems to have been fixed in in the Mint 19.2 version and latest Qt tools
 
 === setup linux mint ===
 
@@ -79,12 +79,14 @@ NOTE: use uppercase /home/gotv/Android because that is the default install direc
 After many tries the only way I could get android studio installed correctly was by using Mint 18.3 64Bit
 1.) Download NDK r19c from https://developer.android.com/ndk/downloads/
 2.) extract ndk to ~/Android/android-ndk-r19c 
+2b.) install adb
+        sudo apt install adb
 3.) from Mint Software Manager 
 	Install yasm, nasm, Android Studio
 3a.) If cannot install Android studio then try the download from https://developer.android.com/studio/
 	extract to /home/gotv/Android/android-studio follow th install-Linux-tar.txt from the archive
 4.) Start Android Studio and install sdks (install kvm when says can support accelerated emulator)
-	Sdks install Lollipop 5.1, cmake
+    Sdks install Lollipop 5.1 (Sdk Api 22), cmake
 5.) Set ndk path in Project Structure to point to home/gotv/android/android-ndk-r19c
 
 //======= install Qt 5.12.3 ======//

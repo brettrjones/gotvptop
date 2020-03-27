@@ -237,16 +237,6 @@ std::string VxConnectIdent::getIdentFolderName( void )
 }
 
 //============================================================================
-// VxConnectInfo
-//============================================================================
-VxConnectInfo::VxConnectInfo()
-: m_s64TimeTcpLastContactMs( 0 )
-, m_s64TimeLastConnectAttemptMs( 0 )
-, m_u64TimeReserved( 0 )
-{
-}
-
-//============================================================================
 VxConnectInfo::VxConnectInfo( const VxConnectInfo &rhs )
 {
 	*this = rhs;

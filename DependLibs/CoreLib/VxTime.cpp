@@ -21,7 +21,7 @@ uint64_t GetTickCount64()
     struct timespec tspec;
     tspec.tv_sec = tspec.tv_nsec = 0;
     clock_gettime( CLOCK_MONOTONIC, &tspec );
-# if defined(TARGET_OS_ANDROID)
+# if defined(TARGET_OS_ANDROID) || defined(TARGET_OS_LINUX)
     int64_t timeNow = ( (int64_t)tspec.tv_sec * 1000LL ) + ( (int64_t)tspec.tv_nsec / 1000000L );
 # else
     int64_t timeNow = ( (int64_t)tspec.tv_sec * 1000LL ) + ( (int64_t)tspec.tv_usec / 1000L );
