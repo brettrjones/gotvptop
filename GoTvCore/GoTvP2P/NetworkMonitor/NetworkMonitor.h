@@ -17,6 +17,9 @@
 #include <GoTvInterface/IDefs.h>
 
 #include <string>
+#include <CoreLib/VxMutex.h>
+#include <CoreLib/VxSemaphore.h>
+#include <CoreLib/VxThread.h>
 
 class P2PEngine;
 
@@ -24,7 +27,7 @@ class NetworkMonitor
 {
 public:
 	NetworkMonitor( P2PEngine& engine );
-	~NetworkMonitor() = default;
+    virtual~NetworkMonitor();
 
 	void						networkMonitorStartup( const char * preferredNetIp = "", const char * cellNetIp = "" );
 	void						networkMonitorShutdown( void );
@@ -35,13 +38,19 @@ public:
     void                        setIsInternetAvailable( bool isAvail )      { m_InternetAvailable = isAvail; }
     bool                        getIsInternetAvailable( void )              { return m_InternetAvailable; }
 
+    void                        doNetworkMonitoring( VxThread * startupThread );
+
 protected:
+    void                        triggerDetermineIp( void );
+    void                        onDetermineIp( void );
     std::string                 determineLocalIp( void );
 
 	P2PEngine&					m_Engine;
 	bool						m_bIsStarted = false;
     bool						m_InternetAvailable = false;
     int							m_iCheckInterval = 0;
+    VxThread                    m_NetMonitorThread;
+    VxSemaphore                 m_NetSemaphore;
 
 	std::string					m_strPreferredAdapterIp;
 	std::string					m_strCellNetIp;

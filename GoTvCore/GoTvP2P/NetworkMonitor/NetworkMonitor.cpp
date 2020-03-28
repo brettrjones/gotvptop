@@ -35,6 +35,94 @@ namespace
     const int NET_INTERNET_VERIFY_ACITIVE_TIMEOUT_MS = 55000;
 
     const char * NET_TEST_WEB_CONNECTION_HOST = "www.google.com";
+
+    //============================================================================
+    static void * NetworkMonitorThreadFunc( void * pvContext )
+    {
+        VxThread * poThread = ( VxThread * )pvContext;
+        poThread->setIsThreadRunning( true );
+        NetworkMonitor * netMonitor = ( NetworkMonitor * )poThread->getThreadUserParam();
+        if( netMonitor )
+        {
+            netMonitor->doNetworkMonitoring( poThread );
+        }
+
+        poThread->threadAboutToExit();
+        return nullptr;
+    }
+}
+
+//============================================================================
+void NetworkMonitor::doNetworkMonitoring( VxThread * startupThread )
+{
+    while ( !startupThread->isAborted() )
+    {
+        bool wasSignaled = m_NetSemaphore.wait( 1000 );
+        if( startupThread->isAborted() )
+        {
+            return;
+        }
+
+        if( wasSignaled )
+        {
+            onDetermineIp();
+        }
+    }
+}
+
+//============================================================================
+void NetworkMonitor::triggerDetermineIp( void )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    if(!m_NetMonitorThread.isThreadRunning() )
+    {
+        m_NetMonitorThread.startThread( ( VX_THREAD_FUNCTION_T )NetworkMonitorThreadFunc, this, "NetworkMonitor" );
+    }
+
+    LogMsg( LOG_DEBUG, "triggerDetermineIp" );
+    m_NetSemaphore.signal();
+}
+
+//============================================================================
+void NetworkMonitor::onDetermineIp( void )
+{
+    std::string lclIp = determineLocalIp();
+    LogMsg( LOG_DEBUG, "NetworkMonitor::onDetermineIp %s", lclIp.c_str() );
+
+    static int findIpTryCnt = 0;
+    findIpTryCnt++;
+
+    if( lclIp.length() )
+    {
+        findIpTryCnt = 0;
+        // LogModule( eLogNetworkState, LOG_VERBOSE, " NetworkMonitor::onOncePerSecond net avail %s", lclIp.c_str() );
+        if( ( lclIp != m_strLastFoundIp ) || !getIsInternetAvailable() )
+        {
+            m_strLastFoundIp = lclIp;
+            setIsInternetAvailable( true );
+            m_Engine.fromGuiNetworkAvailable( m_strLastFoundIp.c_str(), false );
+        }
+    }
+    else
+    {
+        m_Engine.getNetStatusAccum().setInternetAvail( false );
+        m_Engine.getNetStatusAccum().setNetHostAvail( false );
+
+        LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond network lost" );
+        if( findIpTryCnt > 3 )
+        {
+            LogMsg( LOG_ERROR, "Could Not Get Connection To Internet" );
+            if( getIsInternetAvailable() )
+            {
+                setIsInternetAvailable( false );
+                m_Engine.fromGuiNetworkLost();
+            }
+        }
+    }
 }
 
 //============================================================================
@@ -64,6 +152,14 @@ void NetworkMonitor::networkMonitorShutdown( void )
 }
 
 //============================================================================
+NetworkMonitor::~NetworkMonitor()
+{
+    m_NetMonitorThread.abortThreadRun( true );
+    m_NetSemaphore.signal();
+    m_NetMonitorThread.killThread();
+}
+
+//============================================================================
 void NetworkMonitor::onOncePerSecond( void )
 {
 	if( ( false == m_bIsStarted )
@@ -85,6 +181,7 @@ void NetworkMonitor::onOncePerSecond( void )
 
 	m_iCheckInterval = 0;
 
+    /*
 	//LogMsg( LOG_INFO, "NetworkStateMachine::onOncePerSecond\n" );
 	m_strPreferredAdapterIp = m_Engine.getEngineSettings().getPreferredNetworkAdapterIp();
 
@@ -143,46 +240,18 @@ void NetworkMonitor::onOncePerSecond( void )
 		m_Engine.fromGuiNetworkAvailable( m_strLastFoundIp.c_str(), true );
 		return;
 	}
+    */
 
     // only reevaluate network every 10 seconds
-    static int findIpTryCnt = 0;
     static int64_t timeLastAttempt = 0;
     int64_t timeNow = GetTimeStampMs();
 
     if( ( !getIsInternetAvailable() && ( timeNow - timeLastAttempt ) > NET_INTERNET_ATTEMPT_CONNECT_TIMEOUT_MS ) || // time to attempt internet connect/verifiy local ip 
         ( getIsInternetAvailable() && ( timeNow - timeLastAttempt ) > NET_INTERNET_VERIFY_ACITIVE_TIMEOUT_MS ) ) // time to verify internet still connected and what is local ip 
     {
-        findIpTryCnt++;
         timeLastAttempt = timeNow;
-        std::string lclIp = determineLocalIp();
-
-        if( lclIp.length() )
-        {
-            findIpTryCnt = 0;
-            // LogModule( eLogNetworkState, LOG_VERBOSE, " NetworkMonitor::onOncePerSecond net avail %s", lclIp.c_str() );
-            if( ( lclIp != m_strLastFoundIp ) || !getIsInternetAvailable() )
-            {
-                m_strLastFoundIp = lclIp;
-                setIsInternetAvailable( true );
-                m_Engine.fromGuiNetworkAvailable( m_strLastFoundIp.c_str(), false );
-            }
-        }
-        else
-        {
-            m_Engine.getNetStatusAccum().setInternetAvail( false );
-            m_Engine.getNetStatusAccum().setNetHostAvail( false );
-
-            LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond network lost" );
-            if( findIpTryCnt > 3 )
-            {
-                LogMsg( LOG_ERROR, "Could Not Get Connection To Internet" );
-                if( getIsInternetAvailable() )
-                {
-                    setIsInternetAvailable( false );
-                    m_Engine.fromGuiNetworkLost();
-                }
-            }
-        }
+        // it can take many seconds to determine ip address .. fire off a thread to do this
+        triggerDetermineIp();
 	}
 }
 
