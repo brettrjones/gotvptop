@@ -133,8 +133,6 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
     return startListeningNoBind( u16ListenPort );
 #endif 
 
-	stopListening();
-
 	if( VxIsAppShuttingDown() )
 	{
 		return false;
@@ -612,7 +610,6 @@ bool VxServerMgr::startListeningNoBind( uint16_t u16ListenPort )
 //============================================================================
 void VxServerMgr::closeListenSocket( void )
 {
-    m_ListenMutex.lock();
     if( m_iActiveListenSktCnt )
     {
         m_IsReadyToAcceptConnections = false;
@@ -621,6 +618,7 @@ void VxServerMgr::closeListenSocket( void )
 
         // kill previous thread if running
         m_ListenVxThread.abortThreadRun( true );
+        m_ListenMutex.lock();
         for( int i = 0; i < m_iActiveListenSktCnt; i++ )
         {
             if( INVALID_SOCKET != m_aoListenSkts[ i ] )
@@ -639,6 +637,7 @@ void VxServerMgr::closeListenSocket( void )
         }
 
         m_iActiveListenSktCnt = 0;
+        m_ListenMutex.unlock();
         if( m_ListenVxThread.isThreadRunning() )
         {
             m_ListenVxThread.killThread();
@@ -648,8 +647,6 @@ void VxServerMgr::closeListenSocket( void )
     {
         LogModule( eLogListen, LOG_DEBUG, "VxServerMgr:stopListening called with no listen sockets\n" );
     }
-
-    m_ListenMutex.unlock();
 }
 
 //============================================================================
