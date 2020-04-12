@@ -41,6 +41,9 @@ inline int64_t				LocalTimeZoneDifferenceMinutes( void )        { return LocalTi
 inline int32_t              TimeElapsedSec( int64_t startTimeMs, int64_t endTimeMs ) { return (int32_t)( ( endTimeMs - startTimeMs ) / 1000 ); };
 inline int64_t              TimeElapsedMs( int64_t startTimeMs, int64_t endTimeMs ) { return ( endTimeMs - startTimeMs ); };
 
+inline int32_t              TimeElapsedGmtSec( int64_t startTimeGmtMs )   { return (int32_t)( ( GetGmtTimeMs() - startTimeGmtMs ) / 1000 ); };
+inline int64_t              TimeElapsedGmtMs( int64_t startTimeGmtMs )    { return ( GetGmtTimeMs() - startTimeGmtMs ); };
+
 #ifdef __cplusplus
 }
 #endif

@@ -26,8 +26,9 @@ class P2PEngine;
 class NetworkMonitor
 {
 public:
+    NetworkMonitor() = delete;
 	NetworkMonitor( P2PEngine& engine );
-    virtual~NetworkMonitor();
+    ~NetworkMonitor();
 
 	void						networkMonitorStartup( const char * preferredNetIp = "", const char * cellNetIp = "" );
 	void						networkMonitorShutdown( void );

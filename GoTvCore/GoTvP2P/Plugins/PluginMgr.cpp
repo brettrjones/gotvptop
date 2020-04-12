@@ -105,7 +105,7 @@ void PluginMgr::pluginMgrStartup( void )
 	poPlugin = new PluginServiceAboutMe( m_Engine, *this, &this->m_PktAnn );
 	m_aoPlugins.push_back( poPlugin );
 
-    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create avatar imag plugin\n" );
+    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create avatar image plugin\n" );
     poPlugin = new PluginServiceAvatarImage( m_Engine, *this, &this->m_PktAnn );
     m_aoPlugins.push_back( poPlugin );
 

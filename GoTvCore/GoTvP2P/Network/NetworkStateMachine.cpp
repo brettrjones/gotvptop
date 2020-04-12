@@ -445,7 +445,7 @@ ENetLayerState NetworkStateMachine::fromGuiGetNetLayerState( ENetLayerType netLa
     LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::fromGuiGetNetLayerState" );
     if( netLayer == eNetLayerTypeInternet )
     {
-        netState - getNetworkMgr().fromGuiGetNetLayerState( netLayer );
+        netState = getNetworkMgr().fromGuiGetNetLayerState( netLayer );
     }
     else
     {
