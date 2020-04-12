@@ -34,7 +34,6 @@ void AppCommon::slotSearchButtonClick( void )
 	oPopupMenu.addMenuItem( 5, getMyIcons().getIcon(eMyIconFolder), "Search For Shared Files");
 	connect( &oPopupMenu, SIGNAL(menuItemClicked(int, QWidget *)), this, SLOT(onMenuSearchSelected(int, QWidget *)));
 	oPopupMenu.exec();
-
 }
 
 //============================================================================

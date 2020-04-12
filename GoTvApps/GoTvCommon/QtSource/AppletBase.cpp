@@ -31,35 +31,9 @@ AppletBase::AppletBase( const char * ObjName, AppCommon& app, QWidget * parent, 
 , m_SliderIsPressed( false )
 , m_LaunchParam( launchParam )
 {
-	initAppletBase();
-}
-
-//============================================================================
-void AppletBase::initAppletBase( void )
-{
-}
-
-//============================================================================
-void AppletBase::setTitleBarAppletIcon( EMyIcons appletIcon )
-{
-    TitleBarWidget * titleBar = getTitleBarWidget();
-    if( titleBar )
-    {
-        VxPushButton * titleButton = titleBar->getAppIconPushButton();
-        if( titleButton )
-        {
-            titleButton->setIcon( appletIcon );
-        }
-    }
 }
 
 //============================================================================
 void AppletBase::slotToGuiAssetAction( EAssetAction assetAction, int pos0to100000 )
 {
 }
-
-////============================================================================
-//void AppletBase::repositionToParent( void )
-//{
-//
-//}

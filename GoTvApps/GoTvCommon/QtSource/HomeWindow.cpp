@@ -27,9 +27,9 @@ HomeWindow::HomeWindow( AppCommon&	appCommon, QString title )
 , m_WindowSettings( 0 )
 , m_LastHomeLayout( eHomeLayoutPlayerPlusMessenger )
 , m_MainLayout( 0 )
-, m_HomeFrameUpperLeft( new VxFrame( this ) )
-, m_HomeFrameRight( new VxFrame( this ) )
-, m_HomeFrameBottom( new VxFrame( this ) )
+, m_HomeFrameUpperLeft( new VxFrame( appCommon, this ) )
+, m_HomeFrameRight( new VxFrame( appCommon, this ) )
+, m_HomeFrameBottom( new VxFrame( appCommon, this ) )
 , m_MediaPlayerPage( 0 )
 , m_AppletLaunchPage( 0 )
 , m_MessengerParent( 0 )
@@ -118,14 +118,14 @@ void HomeWindow::reject()
 //============================================================================
 void HomeWindow::resizeEvent( QResizeEvent * ev)
 {
-    LogModule(eLogWindowPositions, LOG_VERBOSE, "HomeWindow::resizeEvent w %d h %d", ev->size().width(), ev->size().height()  );
+    LogModule( eLogWindowPositions, LOG_VERBOSE, "HomeWindow::resizeEvent w %d h %d", ev->size().width(), ev->size().height() );
 	emit signalMainWindowResized();
 }
 
 //============================================================================
 void HomeWindow::moveEvent( QMoveEvent * )
 {
-    LogModule(eLogWindowPositions, LOG_VERBOSE, "HomeWindow::moveEvent" );
+    LogModule( eLogWindowPositions, LOG_VERBOSE, "HomeWindow::moveEvent" );
     emit signalMainWindowMoved();
 }
 
@@ -434,7 +434,6 @@ void HomeWindow::createMessengerPage( void )
 //============================================================================
 void HomeWindow::slotHomeButtonClicked( void )
 {
-
 }
 
 //============================================================================
@@ -472,7 +471,6 @@ AppletBase * HomeWindow::findActiveApplet( void )
 
         curWidget = dynamic_cast<QWidget *>(curWidget->parent());
     }
-
 
     return curApplet;
 }

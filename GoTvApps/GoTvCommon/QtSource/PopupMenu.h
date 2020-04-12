@@ -19,19 +19,29 @@
 
 class VxNetIdent;
 class AppCommon;
+class TitleBarWidget;
+class BottomBarWidget;
+
 
 class PopupMenu : public ActivityBase
 {
 	Q_OBJECT
 public:
 	PopupMenu( AppCommon& app, QWidget * parent );
-	virtual ~PopupMenu();
+	virtual ~PopupMenu() override = default;
+
+    virtual void	            setTitleBarWidget( TitleBarWidget * titleWidget ) { m_TitleBarWidget = titleWidget; }
+    virtual void	            setBottomBarWidget( BottomBarWidget * bottomWidget ) { m_BottomBarWidget = bottomWidget; }
+    // overrides required for dialogs with there own title bar and bottom bar widgets
+    virtual TitleBarWidget *	getTitleBarWidget( void ) override { return m_TitleBarWidget; }
+    virtual BottomBarWidget *	getBottomBarWidget( void ) override { return m_BottomBarWidget; }
 
 	void						setTitle( QString strTitle );
 	void						addMenuItem( int iItemId, QIcon& oIcon, QString strMenuItemText );
 
 	void						showRefreshMenu();
 	void						showFriendMenu( VxNetIdent * poSelectedFriend );
+    void						showAppSystemMenu( void );
 
 signals:
 	void						menuItemClicked( int iItemId, QWidget * popupMenu );
@@ -50,8 +60,10 @@ private slots:
 protected:
 	//=== vars ===//
 	Ui::popupMenu				ui;
-	int							m_iMenuItemHeight;
-	VxNetIdent *				m_SelectedFriend;
+    int							m_iMenuItemHeight{ 48 };
+    VxNetIdent *				m_SelectedFriend{ nullptr };
+    TitleBarWidget *			m_TitleBarWidget{ nullptr };
+    BottomBarWidget *			m_BottomBarWidget{ nullptr };
 };
 
 

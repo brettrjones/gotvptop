@@ -66,6 +66,7 @@ public:
     virtual BottomBarWidget *	getBottomBarWidget( void );
     VxPushButton *		        getAppIconPushButton( void )        { return getTitleBarWidget()->getAppIconPushButton(); }
     virtual void                connectBarWidgets( void );
+    virtual void				setTitleBarAppletIcon( EMyIcons appletIcon );
 
     // called just before first show of applet.. override for special initialization needs
     virtual void                aboutToLaunchApplet( void ) {}
@@ -248,6 +249,9 @@ protected slots:
 	virtual void				slotShareButtonClicked( void );
 	virtual void				slotMenuTopButtonClicked( void );
 	virtual void				slotBackButtonClicked( void );
+    virtual void				slotAppIconSpecialClick( void );
+    virtual void                slotAppSystemMenuSelected( int menuId, QWidget* popupMenu );
+
 	//=== bottom bar slots ===// 
 	virtual void				slotArrowLeftButtonClicked( void );
 	virtual void				slot30SecBackwardButtonClicked( void );
@@ -275,6 +279,8 @@ protected:
 	bool						playFile( QString fileName, int pos0to100000 = 0 );
 	bool						confirmDeleteFile( QString fileName, bool shredFile );
     void                        fillMyNodeUrl( QLabel * myUrlLabel );
+
+    virtual void                onAppIconSpecialClick( ActivityBase * activityBase );
 
 	//=== vars ===//
 	Ui::ActivityBaseClass		ui;

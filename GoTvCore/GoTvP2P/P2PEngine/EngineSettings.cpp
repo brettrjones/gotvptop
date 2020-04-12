@@ -179,7 +179,7 @@ void EngineSettings::setMulticastEnable( bool enableMulticast )
 //============================================================================
 void EngineSettings::getMulticastEnable( bool& enableMulticast )
 {
-	getIniValue( MY_SETTINGS_KEY, "MulticastEnable", enableMulticast, true );
+	getIniValue( MY_SETTINGS_KEY, "MulticastEnable", enableMulticast, false );
 }
 
 //============================================================================
@@ -259,7 +259,7 @@ void EngineSettings::setNetworkKey( std::string& strNetworkName )
 bool EngineSettings::getUseUpnpPortForward( void )
 {
 	bool bUseUpnp = true;
-	getIniValue( MY_SETTINGS_KEY, "UseUpnp", bUseUpnp, true );
+	getIniValue( MY_SETTINGS_KEY, "UseUpnp", bUseUpnp, false );
 	return bUseUpnp;
 }
 
@@ -273,7 +273,7 @@ void EngineSettings::setUseUpnpPortForward( bool bUseUpnpPortForward )
 bool EngineSettings::getUseNatPortForward( void )
 {
 	bool bUseNat = true;
-	getIniValue( MY_SETTINGS_KEY, "UseNat", bUseNat, true );
+	getIniValue( MY_SETTINGS_KEY, "UseNat", bUseNat, false );
 	return bUseNat;
 }
 
@@ -422,7 +422,7 @@ void EngineSettings::setAllowMulticastBroadcast( bool allowBroadcast )
 bool EngineSettings::getAllowMulticastBroadcast( void )
 {
 	bool allowBroadcast = true;
-	getIniValue( MY_SETTINGS_KEY, "AllowBroadcast", allowBroadcast, true );
+	getIniValue( MY_SETTINGS_KEY, "AllowBroadcast", allowBroadcast, false );
 	return allowBroadcast;
 }
 

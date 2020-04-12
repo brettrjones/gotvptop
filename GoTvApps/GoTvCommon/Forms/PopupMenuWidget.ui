@@ -30,40 +30,22 @@ background-color: transparent;
 border: 1px solid transparent;
 border-radius: 8px; 
 }
-
-#popupTitleBox
-{   
-color: black;
-background-color: rgb(50,238,17);
-border: 2px solid green;
-border-top-left-radius: 8px; 
-border-top-right-radius: 8px;
-}
-#popupTitleLabel
-{   
-color: black;
-}
-#popupMenuItemsBox
-{   
-background-color: rgb(50,238,17);
-border: 2px solid green;
-border-top-color: green; 
-border-bottom-left-radius: 8px; 
-border-bottom-right-radius: 8px;
-}
-#menuList
-{   
-background-color: transparent;
-border: 1px solid transparent;
-border-bottom-left-radius: 8px; 
-border-bottom-right-radius: 8px;
-}</string>
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -115,7 +97,7 @@ border-bottom-right-radius: 8px;
          </font>
         </property>
         <property name="text">
-         <string>TextLabel</string>
+         <string/>
         </property>
        </widget>
       </item>

@@ -354,7 +354,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Enable UPNP to open router port ( recommended )</string>
+         <string>Enable UPNP to open router port </string>
         </property>
        </widget>
       </item>

@@ -30,7 +30,7 @@ class VxPushButton : public QPushButton
 public:
 	VxPushButton(QWidget *parent=0);
 	VxPushButton(const QString &text, QWidget *parent=0);
-	virtual ~VxPushButton();
+	virtual ~VxPushButton() = default;
 
     virtual int					heightForWidth( int width ) const override;
     virtual QSize				sizeHint() const override;
@@ -74,9 +74,12 @@ public:
 	void						setIcons(	EMyIcons	normalIcon, 
 											EMyIcons	overlay1Icon		= eMyIconNone );
 
+    virtual void                setAppIcon( EMyIcons appletIcon, QWidget * parentAppFrame );
+
 signals:
 	void						buttonToggleState( bool isOn );
 	void						slideLeftCompleted( void );
+    void                        signalAppIconSpecialClick( void );
 
 protected slots:
 	void						slotBlinkTimeout( void );
@@ -126,6 +129,9 @@ protected:
 	QPoint						m_MouseCurPoint;
 
 	QTimer *					m_BlinkTimer;
-    int							m_BlinkState;
+    int							m_BlinkState{ 0 };
+    QWidget *					m_AppFrame{ nullptr };
+    int							m_AppClickCount{ 0 };
+    int64_t                     m_AppClickTime{ 0 };
 };
 

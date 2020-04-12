@@ -20,6 +20,7 @@
 #include "GuiOfferSession.h"
 #include "ActivityMessageBox.h"
 #include "IdentWidget.h"
+#include "PopupMenu.h"
 
 #include "GuiHelpers.h"
 #include "MySndMgr.h"
@@ -525,7 +526,7 @@ void ActivityBase::updateExpandWindowIcon( void )
             ui.m_BottomBarWidget->setExpandWindowButtonIcon( eMyIconWindowExpand );
         }
     }
-    else
+    else if( getBottomBarWidget() )
     {
         if( m_MyApp.getIsMaxScreenSize( isMessagerFrame() ) )
         {
@@ -1162,5 +1163,60 @@ void ActivityBase::fillMyNodeUrl( QLabel * myUrlLabel )
         {
             myUrlLabel->setText( QString( url.c_str() ) );
         }
+    }
+}
+
+//============================================================================
+void ActivityBase::setTitleBarAppletIcon( EMyIcons appletIcon )
+{
+    TitleBarWidget * titleBar = getTitleBarWidget();
+    if( titleBar )
+    {
+        VxPushButton * titleButton = titleBar->getAppIconPushButton();
+        if( titleButton )
+        {
+            titleButton->setAppIcon( appletIcon, this );
+            disconnect( titleButton, SIGNAL( signalAppIconSpecialClick() ), this, SLOT( slotAppIconSpecialClick() ) );
+            connect( titleButton, SIGNAL( signalAppIconSpecialClick() ), this, SLOT( slotAppIconSpecialClick() ) );
+        }
+    }
+}
+
+//============================================================================
+void ActivityBase::slotAppIconSpecialClick( void )
+{
+    onAppIconSpecialClick( this );
+}
+
+//============================================================================
+void ActivityBase::onAppIconSpecialClick( ActivityBase * activityBase )
+{
+    LogMsg( LOG_DEBUG, "onAppIconSpecialClick" );
+    PopupMenu popupMenu( m_MyApp, ( QWidget * )this->parent() );
+    popupMenu.setTitleBarWidget( this->getTitleBarWidget() );
+    popupMenu.setBottomBarWidget( this->getBottomBarWidget() );
+    connect( &popupMenu, SIGNAL( menuItemClicked( int, QWidget* ) ), &popupMenu, SLOT( slotAppSystemMenuSelected( int, QWidget* ) ) );
+
+    popupMenu.showAppSystemMenu();
+}
+
+
+//============================================================================
+//! user selected app icon system menu
+void ActivityBase::slotAppSystemMenuSelected( int menuId, QWidget * )
+{
+    LogMsg( LOG_DEBUG, "slotAppSystemMenuSelected menu id %d", menuId );
+    switch( menuId )
+    {
+    case 0: // debug settings
+        LogMsg( LOG_DEBUG, "slotAppSystemMenuSelected debug settings menu id %d", menuId );
+        break;
+
+    case 1: // debug log
+        LogMsg( LOG_DEBUG, "slotAppSystemMenuSelected debug log menu id %d", menuId );
+        break;
+
+    default:
+        break;
     }
 }

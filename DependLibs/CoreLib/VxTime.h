@@ -34,9 +34,6 @@ inline int64_t				GetLocalTimeSec( void )                     { return GetLocalT
 int64_t				        GmtTimeMsToLocalTimeMs( int64_t gmtTime );	  // convert GMT time to local time
 inline int64_t				GmtTimeSecToLocalTimeSec( int64_t gmtTime )   { return GmtTimeMsToLocalTimeMs( gmtTime * 1000 ) / 1000; }
 
-int64_t				        LocalTimeSecToGmtTimeMs( int64_t lclTime );	  // convert local time to GMT time
-inline int64_t				LocalTimeMsToGmtTimeSec( int64_t lclTime )    { return LocalTimeSecToGmtTimeMs( lclTime * 1000 ) / 1000; }
-
 int64_t				        LocalTimeZoneDifferenceMs( void );		      // time difference in milliseconds between GMT and local time
 inline int64_t				LocalTimeZoneDifferenceSec( void )            { return LocalTimeZoneDifferenceMs() / 1000; }
 inline int64_t				LocalTimeZoneDifferenceMinutes( void )        { return LocalTimeZoneDifferenceMs() / 60000; }

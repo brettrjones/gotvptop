@@ -445,7 +445,7 @@ void NetServicesMgr::netActionResultRandomConnect( EAppErr eAppErr, HostList * a
 //============================================================================
 void NetServicesMgr::netActionResultIsMyPortOpen( EAppErr eAppErr, std::string& myExternalIp )
 {
-	LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen %d ip %s\n", eAppErr, myExternalIp.c_str() );
+	LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen err %d extern ip %s\n", eAppErr, myExternalIp.c_str() );
     if( eAppErr != eAppErrNone )
     {
         m_Engine.getNetStatusAccum().setDirectConnectTested( false, false );

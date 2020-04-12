@@ -40,7 +40,12 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 
 	ui.m_GoTvButton->setUseTheme( false );
 	ui.m_GoTvButton->setProperty("GoTvIcon", true);
-	ui.m_GoTvButton->setIcon( eMyIconApp );
+	ui.m_GoTvButton->setAppIcon( eMyIconApp, parent );
+    if( parent )
+    {
+        connect( ui.m_GoTvButton, SIGNAL( signalAppIconSpecialClick() ), parent, SLOT( slotAppIconSpecialClick() ) );
+    }
+
 	setPowerButtonIcon();
 	setHomeButtonIcon();
 	setMicrophoneIcon( m_MuteMic ? eMyIconMicrophoneOff : eMyIconMicrophoneOn );

@@ -168,14 +168,6 @@ int64_t	GmtTimeMsToLocalTimeMs( int64_t gmtTime )
 }
 
 //============================================================================
-// convert local time to GMT time
-int64_t	LocalTimeMsToGmtTimeMs( int64_t lclTime )
-{
-    InitializeTimeIfNeeded();
-    return lclTime - g_localTimezoneDifferenceMs;
-}
-
-//============================================================================
 // time difference in milliseconds between GMT and local
 int64_t	LocalTimeZoneDifferenceMs( void )
 {

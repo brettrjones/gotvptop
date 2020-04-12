@@ -16,11 +16,13 @@
 
 #include <QFrame>
 
+class AppCommon;
+
 class VxFrame : public QFrame
 {
 	Q_OBJECT
 public:
-	explicit VxFrame( QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags() );
+	explicit VxFrame( AppCommon& appCommon, QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags() );
 
 	void						setFrameId( int frameId )		{ m_FrameId = frameId; }
 	int							getFrameId( void )				{ return m_FrameId; }
@@ -28,8 +30,13 @@ public:
 signals:
 	void						signalFrameResized();
 
+protected slots:
+    void                        slotAppSystemMenuSelected( int menuId, QWidget* popupMenu );
+
 protected:
 	void						resizeEvent( QResizeEvent * ev );
 
-	int							m_FrameId;
+    //=== vars ===//
+    AppCommon&					m_MyApp;
+    int							m_FrameId;
 };

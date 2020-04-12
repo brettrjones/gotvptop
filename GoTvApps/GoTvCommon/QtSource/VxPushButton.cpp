@@ -19,6 +19,7 @@
 #include "MyIcons.h"
 #include "GuiParams.h"
 
+#include <CoreLib/VxTime.h>
 #include <CoreLib/VxDebug.h>
 
 #include <QTimer>
@@ -28,7 +29,9 @@
 
 namespace
 {
-	const int MIN_PUSHBUTTON_SIZE = 30;
+    const int APP_CLICK_MAX_MS_BETWEEN_SHORT_CLICKS = 600;
+    const int APP_CLICK_MIN_MS_BETWEEN_SEQUENCE_CLICKS = 1000;
+    const int APP_CLICK_MAX_MS_BETWEEN_SEQUENCE_CLICKS = 4000;
 }
 
 //============================================================================
@@ -97,11 +100,6 @@ VxPushButton::VxPushButton( const QString &text, QWidget *parent )
 }
 
 //============================================================================
-VxPushButton::~VxPushButton()
-{
-}
-
-//============================================================================
 MyIcons&  VxPushButton::getMyIcons( void )
 {
 	return m_MyApp.getMyIcons();
@@ -119,18 +117,18 @@ void VxPushButton::initQButtonPro( void )
 //============================================================================
 int VxPushButton::heightForWidth( int width ) const
 {
-    if( width >= (int)( MIN_PUSHBUTTON_SIZE * GuiParams::getGuiScale() ) )
+    if( width >= (int)( GuiParams::getButtonSize() ) )
 	{
 		return width;
 	}
 
-    return ( int )( MIN_PUSHBUTTON_SIZE  * GuiParams::getGuiScale() );
+    return ( int )( GuiParams::getButtonSize() );
 }
 
 //============================================================================
 QSize VxPushButton::sizeHint( void ) const
 {
-    int buttonSize = (int)( MIN_PUSHBUTTON_SIZE * GuiParams::getGuiScale() );
+    int buttonSize = (int)( GuiParams::getButtonSize() );
 	return QSize( buttonSize, buttonSize );
 }
 
@@ -425,6 +423,14 @@ void VxPushButton::setIcons(	EMyIcons	normalIcon,
 }
 
 //============================================================================
+void VxPushButton::setAppIcon( EMyIcons appletIcon, QWidget * parentAppFrame )
+{
+    m_AppFrame = parentAppFrame;
+    m_AppClickCount = 0;
+    setIcons( appletIcon );
+}
+
+//============================================================================
 void VxPushButton::mousePressEvent( QMouseEvent * event )
 {
 	if( m_IsSlideLeftButton )
@@ -465,6 +471,59 @@ void VxPushButton::mousePressEvent( QMouseEvent * event )
 	//}
 
 	m_MyApp.playSound( m_ESndDefPressed );
+
+    if( m_AppFrame )
+    {
+        // detect 3 quick clicks then 1 second gap then 2 quick clicks
+        m_AppClickCount++;
+        int64_t timeNow = GetGmtTimeMs();
+        int64_t elapsedMs = TimeElapsedMs( m_AppClickTime, timeNow );
+        if( elapsedMs > APP_CLICK_MAX_MS_BETWEEN_SEQUENCE_CLICKS )
+        {
+            // reset click time
+            m_AppClickCount = 1;
+            m_AppClickTime = timeNow;
+        }
+
+        if( 1 == m_AppClickCount )
+        {
+            m_AppClickTime = timeNow;
+        }
+        else if( m_AppClickCount == 4 )
+        {
+            if( ( elapsedMs < APP_CLICK_MIN_MS_BETWEEN_SEQUENCE_CLICKS )
+                || ( elapsedMs > APP_CLICK_MAX_MS_BETWEEN_SEQUENCE_CLICKS ) )
+            {
+                m_AppClickCount = 0;
+            }
+            else
+            {
+                m_AppClickTime = timeNow;
+            }
+        }
+        else
+        {
+            // validate click time
+            bool validClick = elapsedMs < APP_CLICK_MAX_MS_BETWEEN_SHORT_CLICKS;
+            if( validClick )
+            {
+                if( m_AppClickCount == 5 )
+                {
+                    // finished special sequence
+                    m_AppClickCount = 0;
+                    emit signalAppIconSpecialClick();
+                }
+                else
+                {
+                    m_AppClickTime = timeNow;
+                }
+            }
+            else
+            {
+                m_AppClickCount = 0;
+            }
+        }
+    }
 }
 
 //============================================================================

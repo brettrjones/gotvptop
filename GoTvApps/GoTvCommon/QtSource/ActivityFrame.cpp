@@ -36,11 +36,6 @@ PopupMenu::PopupMenu( AppCommon& app, QWidget * parent )
 }
 
 //============================================================================
-PopupMenu::~PopupMenu()
-{
-}
-
-//============================================================================
 void PopupMenu::setTitle( QString strTitle )
 {
 	ui.popupTitleLabel->setText(strTitle);

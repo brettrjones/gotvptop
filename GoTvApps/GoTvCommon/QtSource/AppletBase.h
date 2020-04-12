@@ -16,15 +16,12 @@
 #include "ActivityBase.h"
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
 
-
 class AppletBase : public ActivityBase
 {
 	Q_OBJECT
 public:
 	AppletBase( const char * ObjName, AppCommon& app, QWidget * parent, int launchParam = 0 );
 	virtual ~AppletBase(){};
-
-    void						setTitleBarAppletIcon( EMyIcons appletIcon );
 
 	virtual void				setAssetInfo( AssetInfo& assetInfo ) { m_AssetInfo = assetInfo; }
 	virtual AssetInfo&			getAssetInfo( void ) { return m_AssetInfo; }
@@ -37,7 +34,6 @@ protected slots:
 	virtual void				slotToGuiAssetAction( EAssetAction assetAction, int pos );
 
 protected:
-	void						initAppletBase( void );
 
 	//=== vars ===//
 	AssetInfo					m_AssetInfo;

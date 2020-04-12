@@ -15,6 +15,7 @@
 
 #include "PopupMenu.h"
 #include "MyIcons.h"
+#include "GuiParams.h"
 #include "AppGlobals.h"
 #include "AppCommon.h"
 
@@ -24,21 +25,13 @@
 //============================================================================
 PopupMenu::PopupMenu( AppCommon& app, QWidget * parent )
 : ActivityBase( OBJNAME_POPUP_MENU, app, parent, eAppletMessenger, true, false )
-, m_iMenuItemHeight(34)
-, m_SelectedFriend(NULL)
+, m_iMenuItemHeight( GuiParams::getButtonSize() )
 {
 	m_MyApp.playSound( eSndDefButtonClick );
-	ui.setupUi(this);
-	// no need to call this.. base class will call it in showEvent()
-	//repositionToParent();
+	ui.setupUi(this);;
 
-    connect(ui.exitPopupButton, SIGNAL(clicked()), this, SLOT(slotHomeButtonClicked()));
+    connect(ui.exitPopupButton, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui.menuItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(itemClicked(QListWidgetItem *)));
-}
-
-//============================================================================
-PopupMenu::~PopupMenu()
-{
 }
 
 //============================================================================
@@ -79,15 +72,23 @@ void PopupMenu::itemClicked(QListWidgetItem *item)
 void PopupMenu::showRefreshMenu()
 {
 	setTitle( "Who to show in list");
-	addMenuItem( 0, getMyIcons().getIcon(eMyIconFriend),			tr("Everybody"));
-	addMenuItem( 1, getMyIcons().getIcon(eMyIconFriend),			tr("Friends And Guests"));
+	addMenuItem( 0, getMyIcons().getIcon(eMyIconFriend),		tr("Everybody"));
+	addMenuItem( 1, getMyIcons().getIcon(eMyIconFriend),		tr("Friends And Guests"));
 	addMenuItem( 2, getMyIcons().getIcon(eMyIconAnonymous),		tr("Anonymous"));
 	addMenuItem( 3, getMyIcons().getIcon(eMyIconAdministrator),	tr("Administrators"));
-	addMenuItem( 4, getMyIcons().getIcon(eMyIconIgnored),			tr("Ignored"));
+	addMenuItem( 4, getMyIcons().getIcon(eMyIconIgnored),		tr("Ignored"));
 	addMenuItem( 5, getMyIcons().getIcon(eMyIconRelay),			tr("My Relays"));
 	addMenuItem( 6, getMyIcons().getIcon(eMyIconRelay),			tr("All Possible Relays"));
 	addMenuItem( 7, getMyIcons().getIcon(eMyIconRefreshNormal),	tr("Refresh List"));
 	exec();
+}
+
+//============================================================================
+void PopupMenu::showAppSystemMenu( void )
+{
+    addMenuItem( 0, getMyIcons().getIcon( eMyIconDebug ), tr( "Debug Settings" ) );
+    addMenuItem( 1, getMyIcons().getIcon( eMyIconDebug ), tr( "Debug Long" ) );
+    exec();
 }
 
 //============================================================================

@@ -536,13 +536,15 @@ bool ActivityToFriendViewSharedFiles::confirmDeleteFile( bool shredFile )
 void ActivityToFriendViewSharedFiles::promptForDownload( GuiFileXferSession * poInfo )
 {
 	m_SelectedFileInfo = poInfo;
-	PopupMenu oPopupMenu( m_MyApp, this);
-	oPopupMenu.setTitle( QObject::tr( "Download A File" ) );
-	oPopupMenu.addMenuItem( 1, getMyIcons().getIcon(eMyIconFileDownload), QObject::tr( "Download A File" ) );
-	oPopupMenu.addMenuItem( 2, getMyIcons().getIcon(getMyIcons().getFileIcon(poInfo->getFileType())), poInfo->getJustFileName() );
-    connect( &oPopupMenu, SIGNAL(menuItemClicked(int,QWidget *)), this, SLOT(slotDownloadFileSelected(int,QWidget *)));
+	PopupMenu popupMenu( m_MyApp, this);
+    popupMenu.setTitleBarWidget( this->getTitleBarWidget() );
+    popupMenu.setBottomBarWidget( this->getBottomBarWidget() );
+    popupMenu.setTitle( QObject::tr( "Download A File" ) );
+    popupMenu.addMenuItem( 1, getMyIcons().getIcon(eMyIconFileDownload), QObject::tr( "Download A File" ) );
+    popupMenu.addMenuItem( 2, getMyIcons().getIcon(getMyIcons().getFileIcon(poInfo->getFileType())), poInfo->getJustFileName() );
+    connect( &popupMenu, SIGNAL(menuItemClicked(int,QWidget *)), this, SLOT(slotDownloadFileSelected(int,QWidget *)));
 
-	oPopupMenu.exec();
+    popupMenu.exec();
 }
 
 //============================================================================
