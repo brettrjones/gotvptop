@@ -82,6 +82,12 @@ public:
     void                        setVerboseLog( bool verbose );
     bool                        getVerboseLog( void );
 
+    void                        setLogLevels( uint32_t logLevelFlags );
+    uint32_t                    getLogLevels( void );
+
+    void                        setLogModules( uint32_t logModuleFlags );
+    uint32_t                    getLogModules( void );
+
 protected:
 	bool						appModeSettingsAreInitialize( void );
 	void						setupAppModeSettings( EDefaultAppMode appDefaultMode );

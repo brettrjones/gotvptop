@@ -45,9 +45,9 @@ bool g_StreamActive = false;
 GOTV_BEGIN_CDECLARES
 GOTV_END_CDECLARES
 
-
 namespace
 {
+#if defined(DEBUG)
     uint32_t g_ModuleEnableLoggingFlags = ( uint32_t )(
                     eLogMulticast
                     | eLogConnect
@@ -68,6 +68,9 @@ namespace
         //| eLogPlayer
         //| eLogWindowPositions
                     );
+#else
+    uint32_t g_ModuleEnableLoggingFlags = 0;
+#endif // defined(DEBUG)
 
     VxMutex						g_oLogMutex;
     VxMutex						g_oFileLogMutex;
@@ -91,12 +94,12 @@ namespace
 		g_oFileLogMutex.unlock();
 	}
 #endif // ENABLE_LOG_LIST
-    class LogMgr
+    class VxLogMgr
     {
     public:
         const int MAX_LOG_FUNCTIONS = 16;
 
-        LogMgr() = default;
+        VxLogMgr() = default;
  
         void handleLog( void * userData, uint32_t u32LogFlags, char * logMsg )
         {
@@ -149,15 +152,15 @@ namespace
         std::vector<ILogCallbackInterface *> m_LogCallbackList;
     };
 
-    LogMgr& GetLogMgr()
+    VxLogMgr& GetVxLogMgr()
     {
-        static LogMgr g_LogMgr;
-        return g_LogMgr;
+        static VxLogMgr g_VxLogMgr;
+        return g_VxLogMgr;
     }
 
     void ExtendLogHandler( void * userData, uint32_t u32LogFlags, char * logMsg )
     {
-        GetLogMgr().handleLog( userData, u32LogFlags, logMsg );
+        GetVxLogMgr().handleLog( userData, u32LogFlags, logMsg );
     }
 }
 
@@ -165,14 +168,14 @@ namespace
 // add a log handler
 void VxAddLogHandler( ILogCallbackInterface * callbackHandler )
 {
-    GetLogMgr().addLogHandler( callbackHandler );
+    GetVxLogMgr().addLogHandler( callbackHandler );
 }
 
 //============================================================================
 // remove a log handler
 void VxRemoveLogHandler( ILogCallbackInterface * callbackHandler )
 {
-    GetLogMgr().removeLogHandler( callbackHandler );
+    GetVxLogMgr().removeLogHandler( callbackHandler );
 }
 
 //============================================================================

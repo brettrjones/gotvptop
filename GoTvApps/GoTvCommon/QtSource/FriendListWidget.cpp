@@ -210,10 +210,10 @@ void FriendListWidget::slotFriendMenuButtonClicked( ListEntryWidget* item )
         ActivityBase *activityBase = dynamic_cast< ActivityBase * >( this->parent() );
         if( activityBase )
         {
-            PopupMenu popupMenu( m_MyApp, ( QWidget * )this->parent() );
+            PopupMenu popupMenu( m_MyApp, activityBase );
             popupMenu.setTitleBarWidget( activityBase->getTitleBarWidget() );
             popupMenu.setBottomBarWidget( activityBase->getBottomBarWidget() );
-            connect( &popupMenu, SIGNAL( menuItemClicked( int, QWidget * ) ), &popupMenu, SLOT( onFriendActionSelected( int, QWidget * ) ) );
+            connect( &popupMenu, SIGNAL( menuItemClicked( int, PopupMenu *, ActivityBase * ) ), &popupMenu, SLOT( onFriendActionSelected( int, PopupMenu *, ActivityBase * ) ) );
 
             popupMenu.showFriendMenu( m_SelectedFriend );
         }

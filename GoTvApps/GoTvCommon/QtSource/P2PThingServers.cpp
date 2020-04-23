@@ -23,7 +23,7 @@
 
 #include <CoreLib/VxGlobals.h>
 
-
+/*
 //============================================================================
 void AppCommon::slotServerButtonClick( void )
 {
@@ -50,14 +50,15 @@ void AppCommon::slotServerButtonClick( void )
 	popupMenu.addMenuItem( 2, getMyIcons().getIcon( eMyIconProfile ), "View My Profile" );
 	popupMenu.addMenuItem( 3, getMyIcons().getIcon( eMyIconStoryBoardNormal ), "View My Story Board" );
 
-	connect( &popupMenu, SIGNAL(menuItemClicked(int, QWidget *)), this, SLOT(onMenuServerSelected(int, QWidget *)));
+	connect( &popupMenu, SIGNAL(menuItemClicked(int, PopupMenu *, ActivityBase *)), this, SLOT(onMenuServerSelected(int, PopupMenu *, ActivityBase * )));
 	LogMsg( LOG_INFO, "AppCommon::slotServerButtonClick 4\n" );
 	popupMenu.exec();
 	LogMsg( LOG_INFO, "AppCommon::slotServerButtonClick 5\n" );
 }
+*/
 
 //============================================================================
-void AppCommon::onMenuServerSelected( int iMenuId, QWidget * )
+void AppCommon::onMenuServerSelected( int iMenuId, PopupMenu *, ActivityBase * )
 {
 	switch( iMenuId )
 	{

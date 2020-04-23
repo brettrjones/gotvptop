@@ -70,7 +70,7 @@ void LauncherPage::itemClicked(QListWidgetItem *item)
 	m_MyApp.playSound( eSndDefButtonClick );
 	// resignal with id set by user
 	int iItemId = item->data(Qt::UserRole).toInt();
-	emit menuItemClicked( iItemId, this );
+	emit launchItemClicked( iItemId, this );
 	close();
 }
 

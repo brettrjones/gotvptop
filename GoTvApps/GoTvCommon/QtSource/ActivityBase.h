@@ -38,6 +38,7 @@ class GuiOfferSession;
 class IdentWidget;
 class TitleBarWidget;
 class VxPushButton;
+class PopupMenu;
 
 class ActivityBase : public QDialog, public ObjectCommon, public ToGuiActivityInterface, public OfferSessionCallbackInterface
 {
@@ -50,7 +51,6 @@ public:
 	MyIcons&					getMyIcons( void );
 	P2PEngine&					getEngine( void )					{ return m_Engine; }
 	IFromGui&					getFromGuiInterface( void )			{ return m_FromGui; }
-	QFrame *					getContentItemsFrame( void ); // only available for applets
     QWidget *				    getParentPageFrame( void ); // get home page frame ( Launch or Messenger Page )
 
     void                        setIsMaxScreenSize( bool fullScreen );
@@ -64,6 +64,8 @@ public:
 
     virtual TitleBarWidget *	getTitleBarWidget( void );
     virtual BottomBarWidget *	getBottomBarWidget( void );
+    virtual QFrame *			getContentItemsFrame( void );
+
     VxPushButton *		        getAppIconPushButton( void )        { return getTitleBarWidget()->getAppIconPushButton(); }
     virtual void                connectBarWidgets( void );
     virtual void				setTitleBarAppletIcon( EMyIcons appletIcon );
@@ -250,7 +252,7 @@ protected slots:
 	virtual void				slotMenuTopButtonClicked( void );
 	virtual void				slotBackButtonClicked( void );
     virtual void				slotAppIconSpecialClick( void );
-    virtual void                slotAppSystemMenuSelected( int menuId, QWidget* popupMenu );
+    virtual void                slotAppSystemMenuSelected( int menuId, PopupMenu* popupMenu, ActivityBase * parentActivity );
 
 	//=== bottom bar slots ===// 
 	virtual void				slotArrowLeftButtonClicked( void );

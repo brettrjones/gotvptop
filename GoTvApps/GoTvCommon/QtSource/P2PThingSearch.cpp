@@ -22,6 +22,7 @@
 #include "ActivityScanWebCams.h"
 #include "ActivityFileSearch.h"
 
+/*
 //============================================================================
 void AppCommon::slotSearchButtonClick( void )
 {
@@ -32,12 +33,13 @@ void AppCommon::slotSearchButtonClick( void )
 	oPopupMenu.addMenuItem( 3, getMyIcons().getIcon(eMyIconProfile), "Scan Profile Pictures");
 	oPopupMenu.addMenuItem( 4, getMyIcons().getIcon(eMyIconWebCamServer), "Scan Shared Web Cams");
 	oPopupMenu.addMenuItem( 5, getMyIcons().getIcon(eMyIconFolder), "Search For Shared Files");
-	connect( &oPopupMenu, SIGNAL(menuItemClicked(int, QWidget *)), this, SLOT(onMenuSearchSelected(int, QWidget *)));
+	connect( &oPopupMenu, SIGNAL(menuItemClicked(int, PopupMenu *, ActivityBase *)), this, SLOT(onMenuSearchSelected(int, PopupMenu *, ActivityBase *)));
 	oPopupMenu.exec();
 }
+*/
 
 //============================================================================
-void AppCommon::onMenuSearchSelected( int iMenuId, QWidget * senderPopupMenu )
+void AppCommon::onMenuSearchSelected( int iMenuId, PopupMenu * senderPopupMenu, ActivityBase * )
 {
 	Q_UNUSED( senderPopupMenu );
 	switch( iMenuId )

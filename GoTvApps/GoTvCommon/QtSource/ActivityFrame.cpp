@@ -64,7 +64,7 @@ void PopupMenu::itemClicked(QListWidgetItem *item)
 	m_MyApp.playSound( eSndDefButtonClick );
 	// resignal with id set by user
 	int iItemId = item->data(Qt::UserRole).toInt();
-	emit menuItemClicked( iItemId, this );
+	emit menuItemClicked( iItemId, this, this->parent() );
 	close();
 }
 

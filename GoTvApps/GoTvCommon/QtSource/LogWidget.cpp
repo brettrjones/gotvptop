@@ -24,7 +24,6 @@ namespace
     const int MAX_LOG_EDIT_BLOCK_CNT = 1000;
 }
 
-
 //============================================================================
 LogWidget::LogWidget( QWidget * parent )
     : QWidget( parent )
@@ -41,7 +40,6 @@ LogWidget::LogWidget( QWidget * parent )
 
     connect( this, SIGNAL( signalLogMsg( const QString& ) ), this, SLOT( slotLogMsg( const QString& ) ) );
 
-    VxAddLogHandler( this );
 }
 
 //============================================================================
@@ -51,7 +49,13 @@ LogWidget::~LogWidget()
 }
 
 //============================================================================
-void LogWidget::onLogEvent( uint32_t u32LogFlags, char * logMsg )
+void LogWidget::initLogCallback()
+{
+    VxAddLogHandler( this );
+}
+
+//============================================================================
+void LogWidget::onLogEvent( uint32_t u32LogFlags, const char * logMsg )
 {
     m_LogMutex.lock();
     if( m_VerboseLog

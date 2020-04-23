@@ -131,9 +131,11 @@
 #define OBJNAME_APPLET_SETTINGS_VIDEO_PHONE			    "AppletSettingsVideoPhone"
 #define OBJNAME_APPLET_SETTINGS_VOICE_PHONE			    "AppletSettingsVoicePhone"
 
-
 #define OBJNAME_APPLET_THEME							"AppletTheme"
 #define OBJNAME_APPLET_USER_IDENTITY				    "AppletUserIdentity"
+
+#define OBJNAME_APPLET_LOG_SETTINGS				        "AppletLogSettings"
+#define OBJNAME_APPLET_LOG_VIEW				            "AppletViewLog"
 
 #define OBJNAME_FRAME_LAUNCH_PAGE						"FrameLaunchPage" // layout frame for launch page
 #define OBJNAME_FRAME_MESSAGER_PAGE						"FrameMessengerPage" // layout frame for messenger page

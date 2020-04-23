@@ -310,11 +310,12 @@ void ActivityScanProfiles::slotFriendClicked( void )
 {
 	if( m_Ident )
 	{
-		PopupMenu popupMenu( m_MyApp, (QWidget *)this->parent() );
+		PopupMenu popupMenu( m_MyApp, this );
         popupMenu.setTitleBarWidget( this->getTitleBarWidget() );
         popupMenu.setBottomBarWidget( this->getBottomBarWidget() );
+        popupMenu.setContentItemsFrame( this->getContentItemsFrame() );
 
-        connect( &popupMenu, SIGNAL(menuItemClicked(int,QWidget*)), &popupMenu, SLOT(onFriendActionSelected(int,QWidget*)) );
+        connect( &popupMenu, SIGNAL(menuItemClicked(int, PopupMenu*, ActivityBase*)), &popupMenu, SLOT(onFriendActionSelected(int, PopupMenu*, ActivityBase*)) );
 
         popupMenu.showFriendMenu( m_Ident );
 	}

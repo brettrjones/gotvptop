@@ -619,12 +619,12 @@ protected slots:
 
 	void						slotToGuiInstMsg( VxNetIdent * netIdent, EPluginType ePluginType, QString pMsg );
 
-	void						slotSearchButtonClick( void );
-	void						slotFileMenuButtonClick( void );
-	void						slotServerButtonClick( void );
-	void						slotOptionsButtonClick( void );
-	void						slotNotifyButtonClick( void );
-	void						slotRefreshListButtonClick( void );
+	//void						slotSearchButtonClick( void );
+	// void						slotFileMenuButtonClick( void );
+	//void						slotServerButtonClick( void );
+	//void						slotOptionsButtonClick( void );
+	//void						slotNotifyButtonClick( void );
+	// void						slotRefreshListButtonClick( void );
 
 	void						slotListViewTypeChanged( int viewSelectedIdx );
 
@@ -632,17 +632,17 @@ protected slots:
 	void						slotSetRelayHelpButtonVisibility( bool isVisible );
 	void						slotNetworkStateChanged( ENetworkStateType eNetworkState );
 
-	void						onMenuFileSelected( int iMenuId, QWidget * popupMenu );
-	void						onMenuSearchSelected( int iMenuId, QWidget * popupMenu );
-	void						onMenuServerSelected( int iMenuId, QWidget * popupMenu );
-	void						onMenuOptionsSelected( int iMenuId, QWidget * popupMenu );
-	void						onMenuNotifySelected( int iMenuId, QWidget * popupMenu );
+	void						onMenuFileSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
+	void						onMenuSearchSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
+	void						onMenuServerSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
+	void						onMenuOptionsSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
+	// void						onMenuNotifySelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
 
 	void						onVidCapTimer( void );
 	void						onIdleTimer( void );
 	void						onOncePerSecond( void );
 
-	void						onEditPermissionsSelected( int iMenuId, QWidget * popupMenu );
+	void						onEditPermissionsSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * contentFrame );
 	void						slotRemoveContact( VxNetIdent * netIdent );
 	void						slotContactOnline( VxNetIdent * netIdent, bool newContact );
 	void						slotContactOffline( VxNetIdent * netIdent );

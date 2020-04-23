@@ -16,6 +16,7 @@
 #include "AppCommon.h"	
 #include "AppGlobals.h"
 #include "VxAppDisplay.h"
+#include "LogMgr.h"
 #include "MyIcons.h"
 #include "PopupMenu.h"
 #include "ToGuiActivityInterface.h"
@@ -228,6 +229,9 @@ void AppCommon::loadWithoutThread( void )
     // create settings database appshortname_settings.db3 in /appshortName/data/
     QString strSettingsDbFileName = VxGetAppGoTvDataDirectory().c_str() + m_AppShortName + "_settings.db3";
     m_AppSettings.appSettingStartup( strSettingsDbFileName.toUtf8().constData(), m_AppDefaultMode );
+
+    // Now that settings are set up we can enable logging with log settings
+    GetLogMgrInstance().startupLogMgr();
 
     // database of multiple accounts
     // create accounts database appshortname_accounts.db3 in /appshortName/data/
@@ -711,6 +715,7 @@ void AppCommon::executeActivity( GuiOfferSession * offer, QWidget * parent )
 	}
 }
 
+/*
 //============================================================================
 void AppCommon::slotRefreshListButtonClick( void )
 {
@@ -718,7 +723,7 @@ void AppCommon::slotRefreshListButtonClick( void )
 	//ui.mainFriendList->update();
 	//LogMsg( LOG_INFO, "AppCommon::slotRefreshListButtonClick count %d\n", //ui.mainFriendList->count() );
 	getEngine().fromGuiRefreshContactList( 500 );
-}
+}*/
 
 //============================================================================
 void AppCommon::setCamCaptureRotation( uint32_t rot )
@@ -1758,5 +1763,5 @@ void  AppCommon::registerMetaData( void )
     qRegisterMetaType<EXferError>( "EXferError" );
     qRegisterMetaType<EXferState>( "EXferState" );
     qRegisterMetaType<VxGuidQt>( "VxGuidQt" );
-
+    qRegisterMetaType<uint32_t>( "uint32_t" );
 }

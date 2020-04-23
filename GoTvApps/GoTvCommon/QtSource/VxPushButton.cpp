@@ -523,6 +523,8 @@ void VxPushButton::mousePressEvent( QMouseEvent * event )
                 m_AppClickCount = 0;
             }
         }
+
+        LogMsg( LOG_DEBUG, "VxPushButton::mousePressEvent cnt %d elapsedMs %lld", m_AppClickCount, elapsedMs );
     }
 }
 

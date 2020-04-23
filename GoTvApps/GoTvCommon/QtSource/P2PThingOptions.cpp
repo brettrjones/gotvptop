@@ -32,6 +32,7 @@
 
 #include <CoreLib/VxGlobals.h>
 
+/*
 //============================================================================
 void AppCommon::slotOptionsButtonClick( void )
 {
@@ -43,9 +44,9 @@ void AppCommon::slotOptionsButtonClick( void )
 	//popupMenu.addMenuItem( 8, getMyIcons().getIcon( eMyIconFolder ), "Setup file share" );
 	//popupMenu.addMenuItem( 12, getMyIcons().getIcon( eMyIconDebug ), "Debug Settings" );
 
-	connect( &popupMenu, SIGNAL(menuItemClicked(int, QWidget *)), this, SLOT(onMenuOptionsSelected(int, QWidget *)));
+	connect( &popupMenu, SIGNAL(menuItemClicked(int, PopupMenu *, ActivityBase *)), this, SLOT(onMenuOptionsSelected(int, PopupMenu *, ActivityBase *)));
 	popupMenu.exec();
-}
+}*/
 
 //============================================================================
 void AppCommon::addPermissionMenuEntry(	PopupMenu *		poPopupMenu, 
@@ -61,10 +62,10 @@ void AppCommon::addPermissionMenuEntry(	PopupMenu *		poPopupMenu,
 }
 
 //============================================================================
-void AppCommon::onMenuOptionsSelected( int iMenuId, QWidget * senderPopupMenu )
+void AppCommon::onMenuOptionsSelected( int iMenuId, PopupMenu * senderPopupMenu, ActivityBase * activityBase )
 {
 	std::string strTmp;
-	PopupMenu popupMenu( *this, this );
+	PopupMenu popupMenu( *this, activityBase );
 	switch( iMenuId )
 	{
 
@@ -91,7 +92,7 @@ void AppCommon::onMenuOptionsSelected( int iMenuId, QWidget * senderPopupMenu )
 			addPermissionMenuEntry( &popupMenu, ePluginTypeWebServer, eMyIconProfile, "(%s) Who can view my profile" );
 			// Storyboard
 			addPermissionMenuEntry( &popupMenu, ePluginTypeStoryboard, eMyIconStoryBoardNormal, "(%s) Who can view my storyboard" );
-            connect( &popupMenu, SIGNAL(menuItemClicked(int, QWidget *)), this, SLOT(onEditPermissionsSelected(int, QWidget *)));
+            connect( &popupMenu, SIGNAL(menuItemClicked(int, PopupMenu *, ActivityBase *)), this, SLOT(onEditPermissionsSelected(int, PopupMenu *, ActivityBase *)));
 
 			popupMenu.exec();
 			break;
@@ -128,7 +129,7 @@ void AppCommon::onMenuOptionsSelected( int iMenuId, QWidget * senderPopupMenu )
 
 //============================================================================
 //! user selected permission to edit
-void AppCommon::onEditPermissionsSelected( int iMenuId, QWidget * senderPopupMenu )
+void AppCommon::onEditPermissionsSelected( int iMenuId, PopupMenu * senderPopupMenu, ActivityBase * )
 {
 	Q_UNUSED( senderPopupMenu );
 	if( iMenuId > 0 )

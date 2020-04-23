@@ -23,6 +23,7 @@
 
 #include <CoreLib/VxGlobals.h>
 
+/*
 //============================================================================
 void AppCommon::slotNotifyButtonClick( void )
 {
@@ -33,14 +34,15 @@ void AppCommon::slotNotifyButtonClick( void )
 
 	ActivityNetworkState oDlg( *this, this );
 	oDlg.exec();
-}
-
+}*/
+/*
 //============================================================================
-void AppCommon::onMenuNotifySelected( int iMenuId, QWidget * senderPopupMenu )
+void AppCommon::onMenuNotifySelected( int iMenuId, PopupMenu * senderPopupMenu, ActivityBase * contentFrame )
 {
 	Q_UNUSED( iMenuId );
 	Q_UNUSED( senderPopupMenu );
-}
+    Q_UNUSED( contentFrame );
+}*/
 
 //============================================================================
 //! received offer from friend

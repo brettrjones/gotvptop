@@ -39,6 +39,9 @@
 #include "AppletGroupUser.h"
 #include "AppletKodi.h"
 #include "AppletLibrary.h"
+#include "AppletLogSettings.h"
+#include "AppletLogView.h"
+
 #include "AppletNetHostingPage.h"
 #include "AppletNetworkSettings.h"
 #include "AppletPersonalRecorder.h"
@@ -178,6 +181,9 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 
     case eAppletKodi:                       appletDialog = new AppletKodi( m_MyApp, parent ); break;
     case eAppletLibrary:                    appletDialog = new AppletLibrary( m_MyApp, parent ); break;
+    case eAppletLogSettings:                appletDialog = new AppletLogSettings( m_MyApp, parent ); break;
+    case eAppletLogView:                    appletDialog = new AppletLogView( m_MyApp, parent ); break;
+
     case eAppletMessenger:                  makeMessengerFullSized(); return appletDialog;
     case eAppletNetworkSettings:            appletDialog = new AppletNetworkSettings( m_MyApp, parent ); break;
     case eAppletPersonalRecorder:           appletDialog = new ActivityPersonalRecorder( m_MyApp, m_MyApp.getAppGlobals().getUserIdent(), parent ); break;

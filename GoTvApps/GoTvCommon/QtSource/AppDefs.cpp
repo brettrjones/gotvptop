@@ -96,6 +96,9 @@ EMyIcons GetAppletIcon( EApplet applet )
 
     case eAppletServiceSettings:            return eMyIconUnknown;
 
+    case eAppletLogSettings:                return eMyIconDebug;
+    case eAppletLogView:                    return eMyIconDebug;
+
     // case eAppletPlayerMusic:			return eMyIconMusic;
     // case eAppletPlayerPhoto:			return eMyIconGallery;
     // case eAppletStreamViewerVideo:		return eMyIconVideoStreamViewer;
@@ -135,6 +138,9 @@ QString DescribeApplet( EApplet applet )
     case eAppletNetworkSettings:		return QObject::tr( "Network Settings" );
 
     case eAppletSettings:				    return QObject::tr( "Settings" );
+
+    case eAppletLogSettings:		        return QObject::tr( "Log Settings" );
+    case eAppletLogView:	                return QObject::tr( "View Log" );
 
     case eAppletSearchPage:				    return QObject::tr( "Search" );
     case eAppletSearchPersons:			    return QObject::tr( "Search Group For Person Name" );
@@ -193,6 +199,7 @@ QString DescribeApplet( EApplet applet )
 	case ePluginAppletCamProvider:		return QObject::tr( "Provide Cam Stream" );
 	case ePluginAppletGoTvStation:		return QObject::tr( "Manage Station" );
 	case ePluginAppletGoTvNetworkHost:	return QObject::tr( "Manage Station Network Host" );
+
 
         //case eAppletPlayerMusic:			return QObject::tr( "Music Player" );
 //case eAppletPlayerPhoto:			return QObject::tr( "Image Gallery" );

@@ -151,7 +151,7 @@ void ActivityScanPeopleSearch::slotSearchComplete()
 //void ActivityScanPeopleSearch::slotFriendClicked( VxNetIdent * netIdent )
 //{
 //	PopupMenu oPopupMenu( (QWidget *)this->parent() );
-//	if( false == connect( &oPopupMenu, SIGNAL(menuItemClicked(int)), &oPopupMenu, SLOT(onFriendActionSelected(int)) ) )
+//	if( false == connect( &oPopupMenu, SIGNAL(menuItemClicked(int, PopupMenu *, ActivityBase *)), &oPopupMenu, SLOT(onFriendActionSelected(int)) ) )
 //	{
 //		LogMsg( LOG_ERROR, "FriendListWidget::findListEntryWidget failed connect\n" );
 //	}

@@ -194,6 +194,8 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLibrary.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogSettings.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogView.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.h \
@@ -475,6 +477,8 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLibrary.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogSettings.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogView.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.cpp \
@@ -678,6 +682,8 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletKodi.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletLaunchWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletLibrary.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletLogSettings.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletLogView.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkKey.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPersonalRecorder.ui \

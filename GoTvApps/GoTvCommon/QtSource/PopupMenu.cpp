@@ -23,12 +23,20 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-PopupMenu::PopupMenu( AppCommon& app, QWidget * parent )
+PopupMenu::PopupMenu( AppCommon& app, ActivityBase * parent )
 : ActivityBase( OBJNAME_POPUP_MENU, app, parent, eAppletMessenger, true, false )
+, m_ParentActivity( parent )
 , m_iMenuItemHeight( GuiParams::getButtonSize() )
 {
+    vx_assert( parent );
+    QFrame * contentFrame = dynamic_cast< QFrame * >( parent );
+    if( contentFrame )
+    {
+        setContentItemsFrame( contentFrame );
+    }
+
 	m_MyApp.playSound( eSndDefButtonClick );
-	ui.setupUi(this);;
+	ui.setupUi( this );
 
     connect(ui.exitPopupButton, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui.menuItemList, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(itemClicked(QListWidgetItem *)));
@@ -64,30 +72,31 @@ void PopupMenu::itemClicked(QListWidgetItem *item)
 	m_MyApp.playSound( eSndDefButtonClick );
 	// resignal with id set by user
 	int iItemId = item->data(Qt::UserRole).toInt();
-	emit menuItemClicked( iItemId, this );
+	emit menuItemClicked( iItemId, this, m_ParentActivity );
 	close();
 }
 
 //============================================================================
 void PopupMenu::showRefreshMenu()
 {
-	setTitle( "Who to show in list");
-	addMenuItem( 0, getMyIcons().getIcon(eMyIconFriend),		tr("Everybody"));
-	addMenuItem( 1, getMyIcons().getIcon(eMyIconFriend),		tr("Friends And Guests"));
-	addMenuItem( 2, getMyIcons().getIcon(eMyIconAnonymous),		tr("Anonymous"));
-	addMenuItem( 3, getMyIcons().getIcon(eMyIconAdministrator),	tr("Administrators"));
-	addMenuItem( 4, getMyIcons().getIcon(eMyIconIgnored),		tr("Ignored"));
-	addMenuItem( 5, getMyIcons().getIcon(eMyIconRelay),			tr("My Relays"));
-	addMenuItem( 6, getMyIcons().getIcon(eMyIconRelay),			tr("All Possible Relays"));
-	addMenuItem( 7, getMyIcons().getIcon(eMyIconRefreshNormal),	tr("Refresh List"));
+	setTitle( QObject::tr("Who to show in list") );
+	addMenuItem( 0, getMyIcons().getIcon(eMyIconFriend),        QObject::tr("Everybody"));
+	addMenuItem( 1, getMyIcons().getIcon(eMyIconFriend),        QObject::tr("Friends And Guests"));
+	addMenuItem( 2, getMyIcons().getIcon(eMyIconAnonymous),     QObject::tr("Anonymous"));
+	addMenuItem( 3, getMyIcons().getIcon(eMyIconAdministrator), QObject::tr("Administrators"));
+	addMenuItem( 4, getMyIcons().getIcon(eMyIconIgnored),       QObject::tr("Ignored"));
+	addMenuItem( 5, getMyIcons().getIcon(eMyIconRelay),         QObject::tr("My Relays"));
+	addMenuItem( 6, getMyIcons().getIcon(eMyIconRelay),         QObject::tr("All Possible Relays"));
+	addMenuItem( 7, getMyIcons().getIcon(eMyIconRefreshNormal), QObject::tr("Refresh List"));
 	exec();
 }
 
 //============================================================================
 void PopupMenu::showAppSystemMenu( void )
 {
-    addMenuItem( 0, getMyIcons().getIcon( eMyIconDebug ), tr( "Debug Settings" ) );
-    addMenuItem( 1, getMyIcons().getIcon( eMyIconDebug ), tr( "Debug Long" ) );
+    setTitle( QObject::tr( "System Menu" ) );
+    addMenuItem( 0, getMyIcons().getIcon( eMyIconDebug ), QObject::tr( "Debug Settings" ) );
+    addMenuItem( 1, getMyIcons().getIcon( eMyIconDebug ), QObject::tr( "Debug Long" ) );
     exec();
 }
 
@@ -151,7 +160,7 @@ void PopupMenu::showFriendMenu( VxNetIdent * poSelectedFriend )
 
 //============================================================================
 //! user selected friend action
-void PopupMenu::onFriendActionSelected( int iMenuId, QWidget * )
+void PopupMenu::onFriendActionSelected( int iMenuId, PopupMenu *, ActivityBase * )
 {
 	switch( iMenuId )
 	{

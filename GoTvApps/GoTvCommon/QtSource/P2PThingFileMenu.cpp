@@ -28,6 +28,7 @@
 #include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
 #include <CoreLib/VxGlobals.h>
 
+/*
 //============================================================================
 void AppCommon::slotFileMenuButtonClick( void )
 {
@@ -42,12 +43,12 @@ void AppCommon::slotFileMenuButtonClick( void )
 	oPopupMenu.addMenuItem( 7, getMyIcons().getIcon(eMyIconFolder),				QObject::tr( "Open Download Folder" ) );
 	//oPopupMenu.addMenuItem( 8, getMyIcons().getIcon(eMyIconFileShareOptions),		QObject::tr( "File Share Options" ) );
 
-	connect( &oPopupMenu, SIGNAL(menuItemClicked(int, QWidget *)), this, SLOT(onMenuFileSelected(int, QWidget *)));
+	connect( &oPopupMenu, SIGNAL(menuItemClicked(int, PopupMenu *, ActivityBase *)), this, SLOT(onMenuFileSelected(int, PopupMenu *, ActivityBase *)));
 	oPopupMenu.exec();
-}
+}*/
 
 //============================================================================
-void AppCommon::onMenuFileSelected( int iMenuId, QWidget * senderPopupMenu )
+void AppCommon::onMenuFileSelected( int iMenuId, PopupMenu * senderPopupMenu, ActivityBase * activityBase )
 {
 	Q_UNUSED( senderPopupMenu );
 	switch( iMenuId )
@@ -140,5 +141,4 @@ void AppCommon::onMenuFileSelected( int iMenuId, QWidget * senderPopupMenu )
 		LogMsg( LOG_ERROR, "onMenuServerSelected: ERROR unknown menu id %d\n", iMenuId );
 		break;
 	}
-
 }

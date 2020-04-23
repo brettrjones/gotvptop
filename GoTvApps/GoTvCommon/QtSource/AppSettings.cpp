@@ -263,6 +263,72 @@ bool AppSettings::getVerboseLog( void )
 }
 
 //============================================================================
+void AppSettings::setLogLevels( uint32_t logLevelFlags )
+{
+#if defined(DEBUG)
+    setIniValue( getAppShortName(), "LogLevelsD", logLevelFlags );
+#else
+    setIniValue( getAppShortName(), "LogLevels", logLevelFlags );
+#endif // defined(DEBUG)
+}
+
+//============================================================================
+uint32_t AppSettings::getLogLevels( void )
+{
+    uint32_t logLevelFlags = 0;
+#if defined(DEBUG)
+    logLevelFlags = LOG_FATAL | LOG_SEVERE | LOG_ASSERT | LOG_ERROR | LOG_WARN | LOG_DEBUG | LOG_INFO | LOG_STATUS;	// LOG_VERBOSE
+    getIniValue( getAppShortName(), "LogLevelsD", logLevelFlags, logLevelFlags );
+#else
+    logLevelFlags = LOG_FATAL | LOG_SEVERE | LOG_ASSERT;
+    getIniValue( getAppShortName(), "LogLevels", logLevelFlags, logLevelFlags );
+#endif // defined(DEBUG)
+    return logLevelFlags;
+}
+
+//============================================================================
+void AppSettings::setLogModules( uint32_t logLevelFlags )
+{
+#if defined(DEBUG)
+    setIniValue( getAppShortName(), "LogModulesD", logLevelFlags );
+#else
+    setIniValue( getAppShortName(), "LogModules", logLevelFlags );
+#endif // defined(DEBUG)
+}
+
+//============================================================================
+uint32_t AppSettings::getLogModules( void )
+{
+    uint32_t logModuleFlags = 0;
+#if defined(DEBUG)
+    logModuleFlags = ( uint32_t )(
+        eLogMulticast
+        | eLogConnect
+        | eLogListen
+        | eLogSkt
+        | eLogPkt
+        | eLogNetworkState
+        | eLogNetworkMgr
+        | eLogIsPortOpenTest
+        | eLogThread
+        | eLogStorage
+        | eLogAssets
+        | eLogPlugins
+        | eLogStartup
+        | eLogHosts
+        | eLogTcpData
+        | eLogUdpData
+        //| eLogPlayer
+        //| eLogWindowPositions
+        );
+    getIniValue( getAppShortName(), "LogModulessD", logModuleFlags, logModuleFlags );
+#else
+    getIniValue( getAppShortName(), "LogModules", logModuleFlags, logModuleFlags );
+#endif // defined(DEBUG)
+    return logModuleFlags;
+}
+
+//============================================================================
 bool AppSettings::getMutePhoneRing( void )
 {
 	bool bMute;

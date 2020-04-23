@@ -80,7 +80,7 @@ public:
 	void						addMenuItem( int iItemId, QIcon& oIcon, QString strMenuItemText );
 
 signals:
-	void						menuItemClicked( int iItemId, QWidget * popupMenu );
+	void						menuItemClicked( int iItemId, PopupMenu * popupMenu, ActivityBase *);
 
 private slots:
     void						slotHomeButtonClicked( void ) override;

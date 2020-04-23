@@ -536,13 +536,13 @@ bool ActivityToFriendViewSharedFiles::confirmDeleteFile( bool shredFile )
 void ActivityToFriendViewSharedFiles::promptForDownload( GuiFileXferSession * poInfo )
 {
 	m_SelectedFileInfo = poInfo;
-	PopupMenu popupMenu( m_MyApp, this);
+	PopupMenu popupMenu( m_MyApp, this );
     popupMenu.setTitleBarWidget( this->getTitleBarWidget() );
     popupMenu.setBottomBarWidget( this->getBottomBarWidget() );
     popupMenu.setTitle( QObject::tr( "Download A File" ) );
     popupMenu.addMenuItem( 1, getMyIcons().getIcon(eMyIconFileDownload), QObject::tr( "Download A File" ) );
     popupMenu.addMenuItem( 2, getMyIcons().getIcon(getMyIcons().getFileIcon(poInfo->getFileType())), poInfo->getJustFileName() );
-    connect( &popupMenu, SIGNAL(menuItemClicked(int,QWidget *)), this, SLOT(slotDownloadFileSelected(int,QWidget *)));
+    connect( &popupMenu, SIGNAL(menuItemClicked(int, PopupMenu *, ActivityBase *)), this, SLOT(slotDownloadFileSelected(int, PopupMenu *, ActivityBase *)));
 
     popupMenu.exec();
 }

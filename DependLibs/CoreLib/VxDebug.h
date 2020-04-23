@@ -81,7 +81,7 @@ bool IsLogEnabled( ELogModule logModule );
 class ILogCallbackInterface
 {
 public:
-    virtual void                onLogEvent( uint32_t u32LogFlags, char * logMsg ) = 0;
+    virtual void                onLogEvent( uint32_t u32LogFlags, const char * logMsg ) = 0;
 };
 
 

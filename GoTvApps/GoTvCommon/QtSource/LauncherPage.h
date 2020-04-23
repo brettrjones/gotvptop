@@ -36,10 +36,10 @@ public:
 	void						showFriendMenu( VxNetIdent * poSelectedFriend );
 
 signals:
-	void						menuItemClicked( int iItemId, QWidget * popupMenu );
+	void						launchItemClicked( int iItemId, PopupMenu * popupMenu, ActivityBase * );
 
 public slots:
-	void						onFriendActionSelected( int iMenuId, QWidget * popupMenu );
+	void						onFriendActionSelected( int iMenuId, PopupMenu * popupMenu, ActivityBase * );
 
 private slots:
 	//! user clicked the upper right x button

@@ -153,6 +153,10 @@ enum EApplet
 	ePluginAppletGoTvStation,
 	ePluginAppletGoTvNetworkHost,
 
+    // app icon easter egg appletes
+    eAppletLogSettings,
+    eAppletLogView,
+
     // not lauched by user
     eAppletCreateAccount,
     eAppletSnapShot,

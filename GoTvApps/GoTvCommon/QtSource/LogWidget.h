@@ -28,8 +28,9 @@ public:
     LogWidget( QWidget * parent );
     ~LogWidget() override;
 
+    void                        initLogCallback();
 
-    void                        onLogEvent( uint32_t u32LogFlags, char * logMsg ) override;
+    void                        onLogEvent( uint32_t u32LogFlags, const char * logMsg ) override;
 
     void                        clear()                 { getLogEdit()->clear(); }
 
