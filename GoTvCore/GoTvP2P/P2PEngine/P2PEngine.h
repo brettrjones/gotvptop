@@ -279,7 +279,7 @@ public:
 
     virtual uint16_t			fromGuiGetRandomTcpPort( void ) override;
     /// Get url for this node
-    virtual void                fromGuiGetNodeUrl( std::string& nodeUrl );
+    virtual void                fromGuiGetNodeUrl( std::string& nodeUrl ) override;
 
 #ifdef TARGET_OS_ANDROID
     virtual int					fromGuiMulitcastPkt( unsigned char * data, int len ) override;

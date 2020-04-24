@@ -251,6 +251,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommon.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ListEntryWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/LogMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/NetAvailStatusWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.h \
@@ -537,6 +538,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/EventsQtToGoTv.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ListEntryWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/LogMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailEditWidget.cpp \
