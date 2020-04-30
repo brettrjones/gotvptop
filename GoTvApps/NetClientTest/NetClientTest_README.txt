@@ -1,0 +1,1 @@
+This is a test application to periodically attempt connect and ping a no limit connect node
