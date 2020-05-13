@@ -55,8 +55,8 @@ void HomeWindow::accept()
     QMessageBox::StandardButton resBtn = QMessageBox::Yes;
     bool changes = true;
     if( changes ) {
-        resBtn = QMessageBox::question( this, "Close Application",
-            tr( "Are you sure?\n" ),
+        resBtn = QMessageBox::question( this, QObject::tr("Close Application"),
+            QObject::tr( "Are you sure?\n" ),
             QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,
             QMessageBox::Yes );
     }

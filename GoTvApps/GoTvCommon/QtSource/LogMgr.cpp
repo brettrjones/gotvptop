@@ -19,11 +19,6 @@
 #include <QScrollBar>
 #include <QClipboard>
 
-namespace
-{
-    const int MAX_LOG_EDIT_BLOCK_CNT = 1000;
-}
-
 //============================================================================
 // get log manager singleton
 LogMgr& GetLogMgrInstance()

@@ -300,7 +300,6 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 				continue;
 			}
 
-	
 			if( SOCKET_ERROR == listen( sock, 10 ) ) // SOMAXCONN) ) ( SOMAXCONN == maximum number of qued allowed
 			{
                 LogModule( eLogListen, LOG_ERROR, "ipv4 listen() failed with error %d: %s thread 0x%x", VxGetLastError(), VxDescribeSktError( VxGetLastError() ), VxGetCurrentThreadId() );
@@ -567,6 +566,7 @@ bool VxServerMgr::startListeningNoBind( uint16_t u16ListenPort )
         else
         {
             bindFailed = false;
+            m_ListenSktIsBoundToIp = true;
             break;
         }
     }
@@ -612,6 +612,7 @@ void VxServerMgr::closeListenSocket( void )
 {
     if( m_iActiveListenSktCnt )
     {
+        m_ListenSktIsBoundToIp = false;
         m_IsReadyToAcceptConnections = false;
         LogModule( eLogListen, LOG_DEBUG, "### VxServerMgr: Mgr %d stop listening %d skt cnt %d thread 0x%x\n", m_iMgrId, m_u16ListenPort, m_iActiveListenSktCnt, VxGetCurrentThreadId() );
         m_u16ListenPort = 0;
@@ -673,10 +674,11 @@ RCODE VxServerMgr::acceptConnection( VxThread * poVxThread, SOCKET oListenSkt )
 
 	if( VxIsAppShuttingDown() )
 	{
-		return -3;
+        LogModule( eLogListen, LOG_ERROR, "VxServerMgr::acceptConnection App Shutting down thread 0x%x", VxGetCurrentThreadId() );
+        return -3;
 	}
 
-    // LogModule( eLogListen, LOG_INFO, "VxServerMgr: start acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
+    LogModule( eLogListen, LOG_INFO, "VxServerMgr: start acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
 
 	// perform accept
 	// setup address
@@ -710,6 +712,7 @@ static int acceptErrCnt = 0;
 		{
 			// not sure how it happens but seems to get in a loop where the clear doesn't clear and there is no error
 			// so sleep just in case so doesn't eat up all the CPU
+                LogModule( eLogListen, LOG_INFO, "VxServerMgr: no rc acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
 			VxSleep( 500 );
 			return -1;
 		}
@@ -717,10 +720,19 @@ static int acceptErrCnt = 0;
         {
             // windows non blocking operation could not be done immediate error
             VxSleep( 200 );
+            LogModule( eLogListen, LOG_INFO, "VxServerMgr: non blocking operation  acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
+            return 0;
+        }
+        else if( 11 == rc )
+        {
+            // linux/android non blocking operation could not be done immediate error
+            VxSleep( 200 );
+            LogModule( eLogListen, LOG_INFO, "VxServerMgr: non blocking operation  acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
             return 0;
         }
 		else
 		{
+            LogModule( eLogListen, LOG_INFO, "VxServerMgr: other error acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
 			VxSleep( 200 );
 			return rc;
 		}
@@ -787,7 +799,7 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 	//LogMsg( LOG_INFO, "111 IN THREAD VxServerMgr::listen port %d ip %s skt %d\n", m_LclIp.getPort(), m_LclIp.toStdString().c_str(), m_aoListenSkts[0] ); 
 #endif // DEBUG_SKT_CONNECTIONS
 
-	m_IsReadyToAcceptConnections = true;
+    m_IsReadyToAcceptConnections = true;
 //#ifdef TARGET_OS_ANDROID
 	// android set listen skt back to blocking doesn't work so just set to non blocking always ( part of accept hang fix ) 
 	VxSetSktBlocking( m_aoListenSkts[0], false );
@@ -822,7 +834,7 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
                 if( listenErrCnt > 50 )
                 {
                     listenErrCnt = 0;
-                    LogModule( eLogListen, LOG_DEBUG, "listenForConnectionsToAccept: try again: listen port %d skt %d error %d thread 0x%x", m_u16ListenPort, m_aoListenSkts[0], rc, VxGetCurrentThreadId() );
+                    LogModule( eLogListen, LOG_DEBUG, "listenForConnectionsToAccept: try again: listen ip %s port %d skt %d error %d thread 0x%x", m_LclIp.toStdString().c_str(), m_u16ListenPort, m_aoListenSkts[0], rc, VxGetCurrentThreadId() );
                 }
 
                 VxSleep( 200 );

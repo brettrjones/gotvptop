@@ -73,5 +73,6 @@ protected:
 	int64_t						m_LastWatchdogKickMs = 0;
 	bool						m_IsReadyToAcceptConnections = false;
     VxMutex                     m_ListenMutex;
+    bool                        m_ListenSktIsBoundToIp{ false };
 };
 

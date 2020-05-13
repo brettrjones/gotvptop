@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>480</height>
+    <width>399</width>
+    <height>596</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,28 +33,12 @@
      </widget>
     </item>
     <item>
-     <widget class="RenderGlWidget" name="m_RenderWidget" native="true">
+     <widget class="NetWidget" name="m_NetWidget" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="labelTextOut">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
       </property>
      </widget>
     </item>
@@ -64,9 +48,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>RenderGlWidget</class>
+   <class>NetWidget</class>
    <extends>QWidget</extends>
-   <header location="global">RenderGlWidget.h</header>
+   <header location="global">NetWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

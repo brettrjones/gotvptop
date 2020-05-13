@@ -34,11 +34,26 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\NetClientTest\NetClientCommon.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
       <Filter>GeneratedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_LogWidget.h">
+      <Filter>GeneratedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_NetWidget.h">
+      <Filter>GeneratedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NetClientTest\AppSettings.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NetClientTest\NlcTestCommon.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NetClientTest\NlcPingResponseServer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NetClientTest\NlcPingSend.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -54,32 +69,50 @@
     <ClCompile Include="GeneratedFiles\Release\moc_mainwindow.cpp">
       <Filter>GeneratedFiles</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\NetClientTest\NetClientLogic.cpp">
+    <ClCompile Include="..\..\NetClientTest\LogWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_NetClientLogic.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_LogWidget.cpp">
       <Filter>GeneratedFiles</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_NetClientLogic.cpp">
-      <Filter>GeneratedFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\NetClientTest\NetClientThread.cpp">
+    <ClCompile Include="..\..\NetClientTest\AppLogic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_NetClientThread.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_AppLogic.cpp">
       <Filter>GeneratedFiles</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_NetClientThread.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_AppLogic.cpp">
       <Filter>GeneratedFiles</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\NetClientTest\NetClientWidget.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_LogWidget.cpp">
+      <Filter>GeneratedFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NetClientTest\NetWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_NetClientWidget.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_NetWidget.cpp">
       <Filter>GeneratedFiles</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_NetClientWidget.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_NetWidget.cpp">
       <Filter>GeneratedFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NetClientTest\AppSettings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NetClientTest\NlcTestThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_NlcTestThread.cpp">
+      <Filter>GeneratedFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_NlcTestThread.cpp">
+      <Filter>GeneratedFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NetClientTest\NlcPingResponseServer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NetClientTest\NlcPingSend.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,13 +122,22 @@
     <CustomBuild Include="..\..\NetClientTest\mainwindow.ui">
       <Filter>Source Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\..\NetClientTest\NetClientLogic.h">
+    <CustomBuild Include="..\..\NetClientTest\LogWidget.h">
       <Filter>Source Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\..\NetClientTest\NetClientThread.h">
+    <CustomBuild Include="..\..\NetClientTest\LogWidget.ui">
       <Filter>Source Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\..\NetClientTest\NetClientWidget.h">
+    <CustomBuild Include="..\..\NetClientTest\AppLogic.h">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\NetClientTest\NetWidget.h">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\NetClientTest\NetWidget.ui">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\NetClientTest\NlcTestThread.h">
       <Filter>Source Files</Filter>
     </CustomBuild>
   </ItemGroup>
