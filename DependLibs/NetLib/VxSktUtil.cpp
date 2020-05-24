@@ -1223,7 +1223,7 @@ SOCKET VxConnectTo(		InetAddress&		lclIp,
 		rmtIp.setIp( pIpAddr );
         rmtIp.setPort( u16Port );
 	}
-    if( VxResolveHostToIp( pIpAddr, u16Port, rmtIp ) )
+    else if( VxResolveHostToIp( pIpAddr, u16Port, rmtIp ) )
     {
         rmtIp.setPort( u16Port );
     }

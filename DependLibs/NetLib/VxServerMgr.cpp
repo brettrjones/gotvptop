@@ -495,6 +495,7 @@ bool VxServerMgr::startListening(  uint16_t u16ListenPort )
 
 		m_LclIp.setIpAndPort( *AI->ai_addr );
 		m_LclIp.setPort( u16ListenPort );
+        m_u16ListenPort = u16ListenPort;
 		m_aoListenSkts[ m_iActiveListenSktCnt ] = sock;
 		m_iActiveListenSktCnt++;
 
@@ -678,7 +679,13 @@ RCODE VxServerMgr::acceptConnection( VxThread * poVxThread, SOCKET oListenSkt )
         return -3;
 	}
 
-    LogModule( eLogListen, LOG_INFO, "VxServerMgr: start acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
+    static int dumpAcceptCnt = 0;
+    dumpAcceptCnt++;
+    if( dumpAcceptCnt > 20 )
+    {
+        dumpAcceptCnt = 0;
+        LogModule( eLogAcceptConn, LOG_INFO, "VxServerMgr: start acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
+    }
 
 	// perform accept
 	// setup address
@@ -712,7 +719,7 @@ static int acceptErrCnt = 0;
 		{
 			// not sure how it happens but seems to get in a loop where the clear doesn't clear and there is no error
 			// so sleep just in case so doesn't eat up all the CPU
-                LogModule( eLogListen, LOG_INFO, "VxServerMgr: no rc acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
+            LogModule( eLogListen, LOG_INFO, "VxServerMgr: no rc acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
 			VxSleep( 500 );
 			return -1;
 		}
@@ -720,14 +727,28 @@ static int acceptErrCnt = 0;
         {
             // windows non blocking operation could not be done immediate error
             VxSleep( 200 );
-            LogModule( eLogListen, LOG_INFO, "VxServerMgr: non blocking operation  acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
+            static int intRetry1Cnt = 0;
+            intRetry1Cnt++;
+            if( intRetry1Cnt > 20 )
+            {
+                intRetry1Cnt = 0;
+                LogModule( eLogAcceptConn, LOG_INFO, "VxServerMgr: non blocking operation  acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
+            }
+
             return 0;
         }
         else if( 11 == rc )
         {
             // linux/android non blocking operation could not be done immediate error
             VxSleep( 200 );
-            LogModule( eLogListen, LOG_INFO, "VxServerMgr: non blocking operation  acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
+            static int intRetry2Cnt = 0;
+            intRetry2Cnt++;
+            if( intRetry2Cnt > 20 )
+            {
+                intRetry2Cnt = 0;
+                LogModule( eLogAcceptConn, LOG_INFO, "VxServerMgr: non blocking operation  acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
+            }
+
             return 0;
         }
 		else
@@ -736,6 +757,10 @@ static int acceptErrCnt = 0;
 			VxSleep( 200 );
 			return rc;
 		}
+    }
+    else
+    {
+        acceptErrCnt = 0;
     }
 
     LogModule( eLogListen, LOG_DEBUG, "VxServerMgr::acceptConnection: listen skt %d accepted skt %d thread 0x%x", oListenSkt, oAcceptSkt, VxGetCurrentThreadId() );

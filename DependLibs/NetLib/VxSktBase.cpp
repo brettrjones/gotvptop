@@ -1256,6 +1256,34 @@ const char * VxSktBase::describeSktError( RCODE rc )
 }
 
 //============================================================================
+const char * VxSktBase::describeSktCallbackReason( ESktCallbackReason reason )
+{
+    switch( reason )
+    {
+    case eSktCallbackReasonUnknown:
+        return "SktCallbackReasonUnknown";
+    case eSktCallbackReasonConnecting:
+        return "eSktCallbackReasonConnecting";
+    case eSktCallbackReasonConnectError:
+        return "eSktCallbackReasonConnectError";
+    case eSktCallbackReasonConnected:
+        return "eSktCallbackReasonConnected";
+    case eSktCallbackReasonData:
+        return "eSktCallbackReasonData";
+    case eSktCallbackReasonClosing:
+        return "eSktCallbackReasonClosing";
+    case eSktCallbackReasonClosed:
+        return "eSktCallbackReasonClosed";
+    case eSktCallbackReasonError:
+        return "eSktCallbackReasonError";
+    case eSktCallbackReasonNewMgr:
+        return "eSktCallbackReasonNewMgr";
+    default:
+        return "SktCallbackReasonInvalid";
+    }
+}
+
+//============================================================================
 std::string VxSktBase::describeSktType( void )
 {
     std::string typeDesc;

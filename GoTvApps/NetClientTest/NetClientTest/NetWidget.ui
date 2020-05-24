@@ -40,24 +40,27 @@
      <property name="title">
       <string>Connect To Node</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_8">
-      <property name="spacing">
-       <number>2</number>
-      </property>
-      <property name="leftMargin">
-       <number>5</number>
-      </property>
-      <property name="topMargin">
-       <number>5</number>
-      </property>
-      <property name="rightMargin">
-       <number>5</number>
-      </property>
-      <property name="bottomMargin">
-       <number>5</number>
-      </property>
+     <layout class="QVBoxLayout" name="verticalLayout_10">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Port</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="m_ConnectPortEdit">
+            <property name="maxLength">
+             <number>63</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
@@ -80,20 +83,16 @@
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <layout class="QVBoxLayout" name="verticalLayout_9">
           <item>
-           <widget class="QLabel" name="label_4">
+           <widget class="QLabel" name="label_6">
             <property name="text">
-             <string>Port</string>
+             <string>Timeout</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="m_ConnectPortEdidt">
-            <property name="maxLength">
-             <number>63</number>
-            </property>
-           </widget>
+           <widget class="QSpinBox" name="m_ConnectTimeout"/>
           </item>
          </layout>
         </item>
@@ -102,7 +101,7 @@
           <item>
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>Seconds Between Attmpts</string>
+             <string>Connect Interval</string>
             </property>
            </widget>
           </item>

@@ -212,16 +212,17 @@ public:
 	void						setRxCryptoPassword( const char * data, int len );
 	bool						isTxCryptoKeySet( void );
 	bool						isRxCryptoKeySet( void );
-	const char *				describeSktError( RCODE rc );
     std::string                 describeSktType( void );
 
-	void						lockSkt( void )							{ m_SktMutex.lock(); }
-	void						unlockSkt( void )						{ m_SktMutex.unlock(); }
-	void						lockCryptoAccess( void )				{ m_CryptoMutex.lock(); }
-	void						unlockCryptoAccess( void )				{ m_CryptoMutex.unlock(); }
+	void						lockSkt( void )							        { m_SktMutex.lock(); }
+	void						unlockSkt( void )						        { m_SktMutex.unlock(); }
+	void						lockCryptoAccess( void )				        { m_CryptoMutex.lock(); }
+	void						unlockCryptoAccess( void )				        { m_CryptoMutex.unlock(); }
 
-	static int					getTotalCreatedSktCount( void )			{ return m_TotalCreatedSktCnt; }
-	static int					getCurrentSktCount( void )				{ return m_CurrentSktCnt; }
+	static int					getTotalCreatedSktCount( void )			        { return m_TotalCreatedSktCnt; }
+	static int					getCurrentSktCount( void )				        { return m_CurrentSktCnt; }
+    static const char *		    describeSktError( RCODE rc );
+    static const char *		    describeSktCallbackReason( ESktCallbackReason reason );
 
 protected:
 	bool						toSocketAddrInfo(	int sockType, 

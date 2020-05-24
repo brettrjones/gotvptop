@@ -69,6 +69,7 @@ enum ELogModule
     eLogPlayer        = 0x00010000,
     eLogTcpData       = 0x00020000,
     eLogUdpData       = 0x00040000,
+    eLogAcceptConn    = 0x00080000,
 
     eMaxLogModule
 };

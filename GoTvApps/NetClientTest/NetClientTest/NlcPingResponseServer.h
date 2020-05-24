@@ -30,7 +30,7 @@ public:
 	void						handleTcpSktCallback( VxSktBase * sktBase );
 
 protected:
-    void						handleTcpPingData( VxSktBase * sktBase );
+    void						handleTcpRxData( VxSktBase * sktBase );
 
     AppLogic&				    m_AppLogic;
 };

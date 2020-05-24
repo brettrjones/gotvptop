@@ -14,7 +14,9 @@
 //============================================================================
 
 #include "NlcPingResponseServer.h"
+#include "NetTestUtil.h"
 
+#include <CoreLib/VxParse.h>
 #include <NetLib/VxSktBase.h>
 
 namespace
@@ -41,7 +43,7 @@ bool NlcPingResponseServer::startListening( uint16_t u16ListenPort, const char *
 {
     if( ip && strlen(ip) )
     {
-        LogMsg( LOG_DEBUG, "startListening on port %d ip %d", u16ListenPort, ip );
+        LogMsg( LOG_DEBUG, "startListening on port %d and adapter ip %s", u16ListenPort, ip );
         return VxServerMgr::startListening( ip, u16ListenPort );
     }
     else
@@ -72,11 +74,11 @@ void NlcPingResponseServer::handleTcpSktCallback( VxSktBase * sktBase )
 {
     if( sktBase )
     {
-        LogMsg( LOG_DEBUG, "handleTcpSktCallback reason %d", sktBase->getCallbackReason() );
+        LogMsg( LOG_DEBUG, "handleTcpSktCallback reason %s", VxSktBase::describeSktCallbackReason( sktBase->getCallbackReason() ) );
         switch( sktBase->getCallbackReason() )
         {
         case eSktCallbackReasonData:
-            handleTcpPingData( sktBase );
+            handleTcpRxData( sktBase );
             break;
         case eSktCallbackReasonConnectError:
         case eSktCallbackReasonConnected:
@@ -95,28 +97,35 @@ void NlcPingResponseServer::handleTcpSktCallback( VxSktBase * sktBase )
 }
 
 //============================================================================
-void NlcPingResponseServer::handleTcpPingData( VxSktBase * sktBase )
+void NlcPingResponseServer::handleTcpRxData( VxSktBase * sktBase )
 {
-    if( sktBase )
+    if( !sktBase )
     {
-        LogMsg( LOG_DEBUG, "handleTcpSktCallback data avail %d", sktBase->getRxCallbackUserData());
-        switch( sktBase->getCallbackReason() )
-        {
-        case eSktCallbackReasonData:
-            handleTcpPingData( sktBase );
-            break;
-        case eSktCallbackReasonConnectError:
-        case eSktCallbackReasonConnected:
-        case eSktCallbackReasonClosed:
-        case eSktCallbackReasonError:
-        case eSktCallbackReasonClosing:
-        case eSktCallbackReasonConnecting:
-        default:
-            break;
-        }
+        LogMsg( LOG_DEBUG, "handleTcpRxData null sktBase" );
+        return;
+    }
+
+    LogModule( eLogIsPortOpenTest, LOG_VERBOSE, "IsPortOpenTest::handleTcpData thread 0x%x" );
+    if( false == NetTestUtil::verifyAllDataArrivedOfNetServiceUrl( sktBase ) )
+    {
+        LogModule( eLogIsPortOpenTest, LOG_VERBOSE, "IsPortOpenTest::handleTcpData not all data arrived thread 0x%x", VxGetCurrentThreadId() );
+        return;
+    }
+
+    NetServiceHdr netServiceHdr;
+    EPluginType pluginType = NetTestUtil::parseHttpNetServiceUrl( sktBase, netServiceHdr );
+    if( ( ePluginTypeNetServices == pluginType )
+        && ( eNetCmdPing == netServiceHdr.m_NetCmdType ) )
+    {
+        LogModule( eLogIsPortOpenTest, LOG_VERBOSE, "IsPortOpenTest::handleTcpData got pinged thread 0x%x", VxGetCurrentThreadId() );
+        LogMsg( LOG_DEBUG, "got pinged\n" );
+        std::string content;
+        StdStringFormat( content, "PONG-%s", sktBase->getRemoteIp() );
+        NetTestUtil::buildAndSendCmd( sktBase, eNetCmdPong, content, 0, 1 );
     }
     else
     {
-        LogMsg( LOG_DEBUG, "handleTcpSktCallback null sktBase" );
+        LogModule( eLogIsPortOpenTest, LOG_VERBOSE, "IsPortOpenTest::handleTcpData got unknown data from ip %s thread 0x%x", sktBase->getRemoteIp(), VxGetCurrentThreadId() );
+        LogMsg( LOG_DEBUG, "got unknown data from ip %s\n", sktBase->getRemoteIp() );
     }
 }

@@ -618,11 +618,17 @@ bool NetServiceUtils::rxNetServiceCmd( VxSktConnectSimple * netServConn, char * 
 		return false;
 	}
 
-	//if( netServiceHdr.m_TotalDataLen > rxBufLen )
-	//{
-	//	LogMsg( LOG_ERROR, "### ERROR NetActionAnnounce::rxNetServiceCmd: too large netServiceHdr.m_TotalDataLen %d\n", netServiceHdr.m_TotalDataLen );
-	//	return false;
-	//}
+    if( netServiceHdr.m_TotalDataLen <= NET_SERVICE_HDR_LEN )
+    {
+        LogMsg( LOG_ERROR, "### ERROR NetServiceUtils::rxNetServiceCmd: too smal netServiceHdr.m_TotalDataLen %d\n", netServiceHdr.m_TotalDataLen );
+        return false;
+    }
+
+	if( netServiceHdr.m_TotalDataLen > rxBufLen )
+	{
+		LogMsg( LOG_ERROR, "### ERROR NetActionAnnounce::rxNetServiceCmd: too large netServiceHdr.m_TotalDataLen %d\n", netServiceHdr.m_TotalDataLen );
+		return false;
+	}
 
 	int contentLen = netServiceHdr.m_TotalDataLen - NET_SERVICE_HDR_LEN;
     VxTimer rxTimer;

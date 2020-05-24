@@ -35,7 +35,7 @@ enum ENetCmdType
 	eNetCmdPong							= 2,		
 	eNetCmdIsMyPortOpenReq				= 3,		
 	eNetCmdIsMyPortOpenReply			= 4,		
-	eNetCmdHostReq					= 5,		
+	eNetCmdHostReq					    = 5,		
 	eNetCmdHostReply					= 6,		
 	eNetCmdAboutMePage					= 7,		
 	eNetCmdStoryboardPage				= 8,		

@@ -14,8 +14,7 @@
 #pragma once
 
 #include "AppLogic.h"
-#include "PingResponseServer.h"
-#include "PingSend.h"
+#include "NlcPingResponseServer.h"
 
 #include "ui_NetWidget.h"
 
@@ -26,6 +25,8 @@
     
 
 #include <CoreLib/VxDebug.h>
+
+class VxSktConnectSimple;
 
 class NetWidget : public QWidget, public ILogCallbackInterface
 {
@@ -60,6 +61,7 @@ protected:
     QPushButton *               getStopListenButton( void )         { return ui.m_StopListenButton; }
 
     void                        loadFromSettings( void );
+    void                        updateVarsFromGui( void );
     void                        saveToSettings( void );
 
     void                        setConnectionStatus( bool isConnected );
@@ -68,21 +70,21 @@ protected:
     bool                        isUrlValid( std::string& url );
     bool                        isIpValid( std::string& ipAddr );
     bool                        isPortValid( uint16_t ipPort );
-
+    void                        setPingStatus( QString status ) { ui.m_ConnectStatusLabel->setText( status ); }
 
     Ui::NetWidgetClass	        ui;
     AppLogic&                   m_AppLogic;
-    PingResponseServer			m_PingResponseServer;
-    PingSend		            m_PingSend;
+    NlcPingResponseServer		m_PingResponseServer;
 
-    std::string                 m_ConnectUrl;
     QTimer *                    m_ConnectTimer{ nullptr };
-    uint16_t                    m_ListenPort{ 0 };
-    std::string                 m_AdapterIp;
     QTimer *                    m_ListenTimer{ nullptr };
 
     QString                     m_ConnectIp;
-    uint16_t                    m_ConnectPort;
-    QString                     m_ListenIp;
-    uint16_t                    m_ListenPort;
+    QString                     m_ConnectPortText;
+    uint16_t                    m_ConnectPort{ 0 };
+    int                         m_ConnectTimeout{ 0 };
+    int                         m_ConnectIntervalSeconds{ 0 };
+    QString                     m_AdapterIp;
+    QString                     m_ListenPortText;
+    uint16_t                    m_ListenPort{ 0 };
 };

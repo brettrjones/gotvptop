@@ -346,6 +346,14 @@ bool NetServicesMgr::sendAndRecievePing( VxTimer& pingTimer, VxSktConnectSimple&
 	toClientConn.closeSkt();
 
 	double successResponseTime = pingTimer.elapsedSec();
+
+    if( netServiceHdr.m_ContentDataLen <= 0 )
+    {
+        LogModule( eLogIsPortOpenTest, LOG_ERROR, "## NetServicesMgr::sendAndRecievePing: No Content connect %3.3f sec send %3.3f sec fail respond %3.3f sec thread 0x%x",
+                   startSendTime, endSendTime - startSendTime, successResponseTime - startSendTime, VxGetCurrentThreadId() );
+        return false;
+    }
+
 	if( ( 0 == netServiceHdr.m_TotalDataLen )
 		|| ( 511 <= netServiceHdr.m_TotalDataLen )
 		|| ( '/' != rxBuf[ netServiceHdr.m_ContentDataLen - 1 ] ) )

@@ -65,6 +65,7 @@ namespace
                     | eLogHosts
                     | eLogTcpData
                     | eLogUdpData
+        //| eLogAcceptConn
         //| eLogPlayer
         //| eLogWindowPositions
                     );

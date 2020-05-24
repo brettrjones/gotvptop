@@ -38,7 +38,7 @@ public:
 	int							m_CmdError; 
 	int							m_TotalDataLen;
 	int							m_ContentDataLen;
-	VxGUID					m_OnlineId;
+	VxGUID					    m_OnlineId;
 	VxNetIdent *				m_Ident;
 	int							m_SktDataUsed;
 };

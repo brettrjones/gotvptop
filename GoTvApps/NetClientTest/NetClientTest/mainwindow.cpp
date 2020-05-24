@@ -2,6 +2,10 @@
 #include "ui_mainwindow.h"
 
 #include "AppLogic.h"
+
+#include <CoreLib/VxDebug.h>
+#include <CoreLib/VxGlobals.h>
+
 #include <QApplication>
 #include <QDesktopWidget>
 
@@ -13,6 +17,17 @@ MainWindow::MainWindow(QWidget *parent)
     , m_AppLogic( GetAppLogic() )
 {
     ui->setupUi(this);
+
+#if defined(NET_CLIENT_TEST)
+    VxSetApplicationNameNoSpaces( "NetClientTest" );
+    this->setWindowTitle( "Net Client Test" );
+#endif
+
+#if defined(NET_LISTEN_TEST)
+    VxSetApplicationNameNoSpaces( "NetListenTest" );
+    this->setWindowTitle( "Net Listen Test" );
+#endif
+
     restoreHomeWindowGeometry();
 }
 

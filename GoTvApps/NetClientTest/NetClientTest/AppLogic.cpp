@@ -58,6 +58,13 @@ AppLogic::AppLogic( )
     : m_AppSettings()
 {
     registerMetaData();
+#ifdef TARGET_OS_WINDOWS
+    WSADATA wd;
+    if( WSAStartup( MAKEWORD( 2, 2 ), &wd ) != 0 )
+    {
+        LogMsg( LOG_ERROR, " WSAStartup failed" );
+    }
+#endif
 }
 
 //============================================================================

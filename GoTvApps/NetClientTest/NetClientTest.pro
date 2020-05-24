@@ -1,28 +1,39 @@
 
 QT       += core gui opengl widgets
 
-TARGET = QtOpenglThreadTestApp
+TARGET = NetClientTest
 TEMPLATE = app
 
 CONFIG += c++11
 
-INCLUDEPATH += $$PWD/QtOpenglThreadTest
+INCLUDEPATH += $$PWD/NetClientTest
 
 
 SOURCES += \
-        $$PWD/QtOpenglThreadTest/main.cpp \
-        $$PWD/QtOpenglThreadTest/mainwindow.cpp \
-    QtOpenglThreadTest/RenderGlThread.cpp \
-    QtOpenglThreadTest/RenderGlWidget.cpp \
-    QtOpenglThreadTest/RenderGlLogic.cpp
+        $$PWD/NetClientTest/main.cpp \
+        $$PWD/NetClientTest/mainwindow.cpp \
+		$$PWD/NetClientTest/AppLogic.cpp \
+		$$PWD/NetClientTest/AppSettings.cpp \
+		$$PWD/NetClientTest/LogWidget.cpp \
+		$$PWD/NetClientTest/NetTestUtil.cpp \
+		$$PWD/NetClientTest/NetWidget.cpp \
+		$$PWD/NetClientTest/NlcPingResponseServer.cpp \
+		$$PWD/NetClientTest/NlcTestThread.cpp
 
 HEADERS += \
-        $$PWD/QtOpenglThreadTest/mainwindow.h \
-    QtOpenglThreadTest/RenderGlThread.h \
-    QtOpenglThreadTest/RenderGlWidget.h \
-    QtOpenglThreadTest/GlTestCommon.h \
-    QtOpenglThreadTest/RenderGlLogic.h
+        $$PWD/NetClientTest/mainwindow.h \
+		$$PWD/NetClientTest/RenderGlThread.h \
+		$$PWD/NetClientTest/AppLogic.h \
+		$$PWD/NetClientTest/AppSettings.h \
+		$$PWD/NetClientTest/LogWidget.h \
+		$$PWD/NetClientTest/NetTestUtil.h \
+		$$PWD/NetClientTest/NetWidget.h \
+		$$PWD/NetClientTest/NlcPingResponseServer.h \
+		$$PWD/NetClientTest/NlcTestCommon.h \
+		$$PWD/NetClientTest/NlcTestThread.h
 
 FORMS += \
-        $$PWD/QtOpenglThreadTest/mainwindow.ui
+        $$PWD/NetClientTest/mainwindow.ui \
+		$$PWD/NetClientTest/LogWidget.ui \
+		$$PWD/NetClientTest/NlcTestThread.ui 
 

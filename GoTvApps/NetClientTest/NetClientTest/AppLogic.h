@@ -13,16 +13,13 @@
 //============================================================================
 #pragma once
 
-#include "PingResponseServer.h"
-#include "PingSend.h"
+#include "NlcPingResponseServer.h"
 #include "AppSettings.h"
-
 
 #include <QObject>
 #include <QThread>
 #include <QMutex>
 #include <QSettings>
-
 
 class NetClientWidget;
 class NetClientThread;
@@ -38,9 +35,8 @@ public:
     QString                     getAppDomain() { return m_AppSettings.getAppDomain(); }
 
     void						setLogicThread( NetClientThread * renderThread ) { m_RenderThread = renderThread; }
-	
 
-public slots:
+// public slots:
 
 protected:
     void                        registerMetaData( void );
