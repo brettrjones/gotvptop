@@ -8,7 +8,7 @@
 
 #include <QApplication>
 #include <QDesktopWidget>
-
+#include <QScreen>
 
 //============================================================================
 MainWindow::MainWindow(QWidget *parent)
