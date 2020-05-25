@@ -24,7 +24,7 @@ public:
     NlcPingResponseServer( AppLogic& appLogic );
 	~NlcPingResponseServer() override = default;
 
-    virtual bool				startListening( uint16_t u16ListenPort, const char * ip = nullptr );
+    virtual bool				startListening( uint16_t u16ListenPort, const char * ip = nullptr ) override;
     virtual RCODE				stopListening( void ) override;
 
 	void						handleTcpSktCallback( VxSktBase * sktBase );

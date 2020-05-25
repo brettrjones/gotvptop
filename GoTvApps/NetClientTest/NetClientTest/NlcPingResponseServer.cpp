@@ -44,7 +44,7 @@ bool NlcPingResponseServer::startListening( uint16_t u16ListenPort, const char *
     if( ip && strlen(ip) )
     {
         LogMsg( LOG_DEBUG, "startListening on port %d and adapter ip %s", u16ListenPort, ip );
-        return VxServerMgr::startListening( ip, u16ListenPort );
+        return VxServerMgr::startListening( u16ListenPort, ip );
     }
     else
     {

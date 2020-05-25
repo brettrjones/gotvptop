@@ -126,7 +126,7 @@ bool VxServerMgr::isListening( void )
 }
 
 //============================================================================
-bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
+bool VxServerMgr::startListening( uint16_t u16ListenPort, const char * ip )
 {
     stopListening();
 #if !USE_BIND_LOCAL_IP
@@ -145,10 +145,83 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 	}
 
 	m_LastWatchdogKickMs = GetTimeStampMs();
-	std::string ipv4String = ip;
+    std::string ipv4String;
+    if( ip && strlen(ip) )
+    {
+        ipv4String = ip;
+    }
+
+    bool haveAdapterIp = !ipv4String.empty();
 	m_u16ListenPort = u16ListenPort;
 
     LogModule( eLogListen, LOG_INFO, "### NOT IN THREAD VxServerMgr::startListening ip %s port %d app sec %d thread 0x%X", ip, u16ListenPort, GetApplicationAliveSec(), VxGetCurrentThreadId() );
+
+    if( haveAdapterIp )
+    {
+#if defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_ANDROID)
+        // can't get ip's in native android... for now just do ipv4 TODO listen for ipv6 in android
+        // ipv4 only
+        SOCKET sock = socket( AF_INET, SOCK_STREAM, 0 );
+        if( sock < 0 )
+        {
+            RCODE rc = VxGetLastError();
+            LogMsg( LOG_ERROR, "VxServerMgr::startListening create skt error %d thread 0x%x", rc, VxGetCurrentThreadId() );
+
+            if( 0 == rc )
+            {
+                rc = -1;
+            }
+
+            return false;
+        }
+
+        // don't know why reuse port doesn't work
+        VxSetSktAllowReusePort( sock );
+
+        LogModule( eLogListen, LOG_INFO, "StartListen binding ip %s port %d thread 0x%x", ip, u16ListenPort, VxGetCurrentThreadId() );
+
+        struct sockaddr_in listenAddr;
+        memset( &listenAddr, 0, sizeof( struct sockaddr_in ) );
+        listenAddr.sin_family = AF_INET;
+        listenAddr.sin_port = htons( u16ListenPort );
+        listenAddr.sin_addr.s_addr = haveAdapterIp ? inet_addr( ipv4String.c_str() ) : INADDR_ANY;
+
+        if( haveAdapterIp )
+        {
+            bool bindSuccess = false;
+            for( int tryCnt = 0; tryCnt < 5; tryCnt++ )
+            {
+                if( 0 > bind( sock, ( struct sockaddr * ) &listenAddr, sizeof( sockaddr_in ) ) )
+                {
+                    RCODE rc = VxGetLastError();
+                    LogMsg( LOG_ERROR, "VxServerMgr::startListening bind skt %d error %d %s try cnt %d thread 0x%x", sock, rc, VxDescribeSktError( rc ), tryCnt + 1, VxGetCurrentThreadId() );
+                    VxSleep( 1000 );
+                    continue;
+                }
+
+                bindSuccess = true;
+                break;
+            }
+
+            if( false == bindSuccess )
+            {
+                LogMsg( LOG_ERROR, "VxServerMgr::startListening bind skt %d FAILED thread 0x%x", sock, VxGetCurrentThreadId() );
+                ::VxCloseSktNow( sock );
+                return false;
+            }
+        }
+
+        LogModule( eLogListen, LOG_INFO, "StartListen socket %d index %d ip %s port %d thread 0x%x", sock, m_iActiveListenSktCnt, ip, u16ListenPort, VxGetCurrentThreadId() );
+
+        m_aoListenSkts[ m_iActiveListenSktCnt ] = sock;
+        m_iActiveListenSktCnt++;
+        m_LclIp.setIp( ip );
+        m_LclIp.setPort( u16ListenPort );
+
+        return internalStartListen();
+#endif // TARGET_OS_WINDOWS
+    }
+
 
 #ifdef TARGET_OS_ANDROID
 	// can't get ip's in native android... for now just do ipv4 TODO listen for ipv6 in android
@@ -179,7 +252,7 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 #if !USE_BIND_LOCAL_IP
     listenAddr.sin_addr.s_addr = INADDR_ANY; //inet_addr(ip);;
 #else
-    listenAddr.sin_addr.s_addr = ip ? inet_addr(ip) : INADDR_ANY;
+    listenAddr.sin_addr.s_addr = ( ip && strlen(ip) ) ? inet_addr(ip) : INADDR_ANY;
 #endif
 	bool bindSuccess = false;
 	for( int tryCnt = 0; tryCnt < 5; tryCnt++ )
@@ -207,7 +280,11 @@ bool VxServerMgr::startListening( const char * ip,  uint16_t u16ListenPort )
 
 	m_aoListenSkts[ m_iActiveListenSktCnt ] = sock;
 	m_iActiveListenSktCnt++;
-	m_LclIp.setIp( ip );
+    if( ip )
+    {
+        m_LclIp.setIp( ip );
+    }
+
 	m_LclIp.setPort( u16ListenPort );
 
     return internalStartListen();
@@ -384,6 +461,7 @@ RCODE VxServerMgr::internalStartListen( void )
     return m_ListenVxThread.startThread( (VX_THREAD_FUNCTION_T)VxServerMgrVxThreadFunc, this, strVxThreadName.c_str() );
 }
 
+/*
 //============================================================================
 bool VxServerMgr::startListening(  uint16_t u16ListenPort )
 {
@@ -522,6 +600,7 @@ bool VxServerMgr::startListening(  uint16_t u16ListenPort )
 
 	return true;
 }
+*/
 
 //============================================================================
 /// @brief listen on port without binding to a ip address

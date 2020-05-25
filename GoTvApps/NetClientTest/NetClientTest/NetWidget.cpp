@@ -19,6 +19,8 @@
 
 #include <CoreLib/VxParse.h>
 #include <NetLib/VxSktConnectSimple.h>
+#include <NetLib/VxSktUtil.h>
+#include <NetLib/InetAddress.h>
 
 #include <QScrollBar>
 #include <QClipboard>
@@ -55,7 +57,41 @@ void NetWidget::initNetWidget()
     setConnectionStatus( false );
     setListenStatus( false );
     loadFromSettings();
+    fillAdapterComboBox();
+
+    connect( ui.m_OverrideAdapterComboBox, SIGNAL( currentTextChanged( const QString& ) ), this, SLOT( slotAdapterIpSelectionChanged( const QString& ) ) );
 }
+
+//============================================================================
+void NetWidget::fillAdapterComboBox( void )
+{
+    std::vector<InetAddress> addrList;
+    InetAddress::getAllAddresses( addrList );
+    InetAddress::dumpAddresses( addrList );
+    addAdapterAddr( ANY_IP_DEF );
+    for( auto inetAddr : addrList )
+    {
+        if( inetAddr.isIPv4() )
+        {
+            addAdapterAddr( inetAddr.toStdString().c_str() );
+        }
+    }
+
+    addAdapterAddr( "127.0.0.1" );
+}
+
+//============================================================================
+void NetWidget::addAdapterAddr( QString ipString )
+{
+    ui.m_OverrideAdapterComboBox->addItem( ipString );
+}
+
+//============================================================================
+void NetWidget::slotAdapterIpSelectionChanged( const QString& ipText )
+{
+    ui.m_OverrideAdapterIpEdit->setText( ipText );
+}
+
 //============================================================================
 void NetWidget::loadFromSettings()
 {
@@ -100,6 +136,12 @@ void NetWidget::updateVarsFromGui()
     m_AdapterIp = ui.m_OverrideAdapterIpEdit->text();
     m_ListenPortText = ui.m_ListenPortLineEdit->text();
     m_ListenPort = (uint16_t)m_ListenPortText.toInt();
+
+    if( m_AdapterIp == ANY_IP_DEF )
+    {
+        // any ip or default ip requires ip setting to blank
+        m_AdapterIp = "";
+    }
 
     if( m_ConnectIntervalSeconds )
     {

@@ -32,6 +32,8 @@ class NetWidget : public QWidget, public ILogCallbackInterface
 {
     Q_OBJECT
 public:
+    const char *                ANY_IP_DEF = "ANY";
+
     NetWidget( QWidget * parent );
     ~NetWidget() override = default;
 
@@ -49,6 +51,7 @@ protected slots:
     void                        slotDisconnectButtonClicked( void );
     void                        slotListenButtonClicked( void );
     void                        slotStopListenButtonClicked( void );
+    void                        slotAdapterIpSelectionChanged( const QString& ipText );
 
     void                        slotConnectTimeout( void );
     void                        slotListenTimeout( void );
@@ -71,6 +74,8 @@ protected:
     bool                        isIpValid( std::string& ipAddr );
     bool                        isPortValid( uint16_t ipPort );
     void                        setPingStatus( QString status ) { ui.m_ConnectStatusLabel->setText( status ); }
+    void                        fillAdapterComboBox( void );
+    void                        addAdapterAddr( QString ipStr );
 
     Ui::NetWidgetClass	        ui;
     AppLogic&                   m_AppLogic;

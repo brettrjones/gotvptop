@@ -222,6 +222,9 @@
            </widget>
           </item>
           <item>
+           <widget class="QComboBox" name="m_OverrideAdapterComboBox"/>
+          </item>
+          <item>
            <widget class="QLineEdit" name="m_OverrideAdapterIpEdit">
             <property name="maxLength">
              <number>63</number>

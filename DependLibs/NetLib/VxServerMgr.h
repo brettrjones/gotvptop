@@ -46,8 +46,8 @@ public:
 	virtual void				fromGuiKickWatchdog( void );
 	virtual bool				checkWatchdog( void );
 
-	virtual bool				startListening(  const char * ip, uint16_t u16ListenPort );
-	virtual bool				startListening( uint16_t u16ListenPort );
+    virtual bool				startListening( uint16_t u16ListenPort, const char * ip = nullptr );
+    // virtual bool				startListening( uint16_t u16ListenPort );
     /// @brief listen on port without binding to a ip address
     virtual bool                startListeningNoBind( uint16_t u16ListenPort );
 	virtual RCODE				stopListening( void );
