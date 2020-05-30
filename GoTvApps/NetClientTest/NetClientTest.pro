@@ -91,11 +91,12 @@ CONFIG(debug, debug|release){
 #os libs
 LIBS +=  -ldl -lm -landroid -lc -lstdc++ -llog
 
-
+contains( COMPILE_HOST_NAME, Linux) {
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 } # end android config
+}
 
 message($$[QT_INSTALL_BINS])

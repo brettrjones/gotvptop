@@ -71,8 +71,9 @@ protected:
     int							m_iActiveListenSktCnt = 0;			// number of active listening sockets
 	InetAddrAndPort				m_LclIp;
 	int64_t						m_LastWatchdogKickMs = 0;
-	bool						m_IsReadyToAcceptConnections = false;
+    bool						m_IsReadyToAcceptConnections{ false };
     VxMutex                     m_ListenMutex;
     bool                        m_ListenSktIsBoundToIp{ false };
+    bool                        m_IsAndroidOs{ false };
 };
 

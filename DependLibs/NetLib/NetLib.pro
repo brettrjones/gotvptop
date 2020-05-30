@@ -30,15 +30,15 @@ win32 {
     }
 }
 
-unix:!symbian {
-    QMAKE_CXXFLAGS += -Wno-unused-parameter
-    maemo5 {
-        target.path = /opt/usr/lib
-    } else {
-        target.path = /usr/lib
-    }
-    INSTALLS += target
-}
+#unix:!android {
+#    QMAKE_CXXFLAGS += -Wno-unused-parameter
+#    maemo5 {
+#        target.path = /opt/usr/lib
+#    } else {
+#        target.path = /usr/lib
+#    }
+#    INSTALLS += target
+#}
 
 INCLUDEPATH += ../
 

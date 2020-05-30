@@ -3,7 +3,9 @@ INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
 
 HEADERS += 	$$PWD/DependLibs/NetLib/NetHostSetting.h \
     $$PWD/DependLibs/NetLib/InetAddress.h \
+    $$PWD/DependLibs/NetLib/JniHelpers.h \
     $$PWD/DependLibs/NetLib/NetSettings.h \
+    $$PWD/DependLibs/NetLib/ScopedFd.h \
     $$PWD/DependLibs/NetLib/VxAnyRandomPort.h \
     $$PWD/DependLibs/NetLib/VxBaseSktInfo.h \
     $$PWD/DependLibs/NetLib/VxClientMgr.h \
@@ -33,7 +35,8 @@ HEADERS += 	$$PWD/DependLibs/NetLib/NetHostSetting.h \
     $$PWD/DependLibs/NetLib/VxSktUdpBroadcast.h \
     $$PWD/DependLibs/NetLib/VxSktUtil.h \
     $$PWD/DependLibs/NetLib/VxSktWaitingList.h \
-    $$PWD/DependLibs/NetLib/VxXferDefs.h
+    $$PWD/DependLibs/NetLib/VxXferDefs.h \
+    $$PWD/DependLibs/NetLib/ifaddrs-android-impl.h
 
 SOURCES += 	$$PWD/DependLibs/NetLib/NetHostSetting.cpp \
     $$PWD/DependLibs/NetLib/InetAddress.cpp \

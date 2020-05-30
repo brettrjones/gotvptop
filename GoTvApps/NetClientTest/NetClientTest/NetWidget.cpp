@@ -89,7 +89,15 @@ void NetWidget::addAdapterAddr( QString ipString )
 //============================================================================
 void NetWidget::slotAdapterIpSelectionChanged( const QString& ipText )
 {
-    ui.m_OverrideAdapterIpEdit->setText( ipText );
+    if( ipText == ANY_IP_DEF )
+    {
+        // leave blank for any ip address
+        ui.m_OverrideAdapterIpEdit->setText( "" );
+    }
+    else
+    {
+        ui.m_OverrideAdapterIpEdit->setText( ipText );
+    }
 }
 
 //============================================================================

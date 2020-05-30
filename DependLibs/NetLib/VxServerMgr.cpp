@@ -64,6 +64,10 @@ namespace
 VxServerMgr::VxServerMgr()
 : VxSktBaseMgr()
 {
+#if defined(TARGET_OS_ANDROID)
+    m_IsAndroidOs = true;
+#endif // defined(TARGET_OS_ANDROID)
+
 	m_iAcceptMgrCnt++;
 	m_iMgrId = m_iAcceptMgrCnt;
 	m_eSktMgrType = eSktMgrTypeTcpAccept;
@@ -129,9 +133,6 @@ bool VxServerMgr::isListening( void )
 bool VxServerMgr::startListening( uint16_t u16ListenPort, const char * ip )
 {
     stopListening();
-#if !USE_BIND_LOCAL_IP
-    return startListeningNoBind( u16ListenPort );
-#endif 
 
 	if( VxIsAppShuttingDown() )
 	{
@@ -144,7 +145,8 @@ bool VxServerMgr::startListening( uint16_t u16ListenPort, const char * ip )
 		return false;
 	}
 
-	m_LastWatchdogKickMs = GetTimeStampMs();
+	m_LastWatchdogKickMs = GetTimeStampMs();    
+
     std::string ipv4String;
     if( ip && strlen(ip) )
     {
@@ -156,7 +158,7 @@ bool VxServerMgr::startListening( uint16_t u16ListenPort, const char * ip )
 
     LogModule( eLogListen, LOG_INFO, "### NOT IN THREAD VxServerMgr::startListening ip %s port %d app sec %d thread 0x%X", ip, u16ListenPort, GetApplicationAliveSec(), VxGetCurrentThreadId() );
 
-    if( haveAdapterIp )
+    if( haveAdapterIp || m_IsAndroidOs )
     {
 #if defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_ANDROID)
         // can't get ip's in native android... for now just do ipv4 TODO listen for ipv6 in android
@@ -186,7 +188,7 @@ bool VxServerMgr::startListening( uint16_t u16ListenPort, const char * ip )
         listenAddr.sin_port = htons( u16ListenPort );
         listenAddr.sin_addr.s_addr = haveAdapterIp ? inet_addr( ipv4String.c_str() ) : INADDR_ANY;
 
-        if( haveAdapterIp )
+        if( haveAdapterIp || m_IsAndroidOs)
         {
             bool bindSuccess = false;
             for( int tryCnt = 0; tryCnt < 5; tryCnt++ )
@@ -373,7 +375,7 @@ bool VxServerMgr::startListening( uint16_t u16ListenPort, const char * ip )
 
 			if( bindFailed )
 			{
-				::VxCloseSktNow( sock );
+                ::VxCloseSktNow( sock );
 				continue;
 			}
 
@@ -738,6 +740,11 @@ RCODE VxServerMgr::stopListening( void )
         return 0; // not listening
     }
 
+    m_ListenMutex.lock();
+    m_u16ListenPort = 0;
+    m_LclIp.setIpAndPort( "", m_u16ListenPort );
+    m_ListenMutex.unlock();
+
     closeListenSocket();
 	return 0;
 }
@@ -787,6 +794,12 @@ static int acceptErrCnt = 0;
     if( INVALID_SOCKET == oAcceptSkt )
     {
 		rc = VxGetLastError();
+#if defined(TARGET_OS_WINDOWS)
+        if( rc == WSAEWOULDBLOCK )
+        {
+            rc = EAGAIN;
+        }
+#endif // defined(TARGET_OS_WINDOWS)
         acceptErrCnt++;
         if( acceptErrCnt > 50 )
         {
@@ -802,7 +815,7 @@ static int acceptErrCnt = 0;
 			VxSleep( 500 );
 			return -1;
 		}
-        else if( 10035 == rc )
+        else if( EAGAIN == rc )
         {
             // windows non blocking operation could not be done immediate error
             VxSleep( 200 );
@@ -816,21 +829,7 @@ static int acceptErrCnt = 0;
 
             return 0;
         }
-        else if( 11 == rc )
-        {
-            // linux/android non blocking operation could not be done immediate error
-            VxSleep( 200 );
-            static int intRetry2Cnt = 0;
-            intRetry2Cnt++;
-            if( intRetry2Cnt > 20 )
-            {
-                intRetry2Cnt = 0;
-                LogModule( eLogAcceptConn, LOG_INFO, "VxServerMgr: non blocking operation  acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
-            }
-
-            return 0;
-        }
-		else
+ 		else
 		{
             LogModule( eLogListen, LOG_INFO, "VxServerMgr: other error acceptConnection skt %d rc %d thread 0x%x", oListenSkt, VxGetLastError(), VxGetCurrentThreadId() );
 			VxSleep( 200 );
@@ -915,9 +914,17 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 	   && ( 0 < m_iActiveListenSktCnt )
 	   && ( checkWatchdog() ) )
 	{
-		if( 0 > listen( m_aoListenSkts[0], 8 ) )
+        RCODE rc = 0;
+        int listenResult = listen( m_aoListenSkts[0], 8 );
+        if( 0 > listenResult )
 		{
-			break;
+            rc = VxGetLastError();
+#if defined(TARGET_OS_WINDOWS)
+            if( rc == WSAEWOULDBLOCK )
+            {
+                rc == EAGAIN;
+            }
+#endif // defined(TARGET_OS_WINDOWS)
 		}
 		
 		if( poVxThread->isAborted() 
@@ -927,8 +934,6 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 			break;
 		}
 		
-        RCODE rc = VxGetLastError();
-
         if( rc )
         {
             if( rc == EAGAIN )
@@ -943,6 +948,30 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
 
                 VxSleep( 200 );
                 continue;
+            }
+            else if( rc == EADDRINUSE )
+            {
+                LogModule( eLogListen, LOG_DEBUG, "listen: Another socket is already listening on the same port.");
+            }
+            else if( rc == EBADF )
+            {
+                LogModule( eLogListen, LOG_DEBUG, "listen: The argument sockfd is not a valid file descriptor.");
+                break;
+            }
+            else if( rc == ENOTSOCK )
+            {
+                LogModule( eLogListen, LOG_DEBUG, "listen: The file descriptor sockfd does not refer to a socket.");
+                break;
+            }
+            else if( rc == EOPNOTSUPP )
+            {
+                LogModule( eLogListen, LOG_DEBUG, "Tlisten: he socket is not of a type that supports the listen() operations.");
+                break;
+            }
+            else
+            {
+                LogModule( eLogListen, LOG_DEBUG, "listen: UNKNOW ERROR");
+                break;
             }
         }
 
@@ -964,93 +993,7 @@ void VxServerMgr::listenForConnectionsToAccept( VxThread * poVxThread )
         LogModule( eLogListen, LOG_ERROR, "Listen Failed Watchdog\n" );
 		std::terminate();
 	}
-/*
-#else
-	
-	int iSelectResult;
-	RCODE rc = 0;
-	//LogMsg( LOG_INFO, "Listen VxThread start\n" );
-    fd_set					oListenSocketFileDescriptors;
-    fd_set					oReadSocketFileDescriptors;
-	struct timeval			oListenTimeout;
 
-    FD_ZERO( &oListenSocketFileDescriptors );
-    FD_ZERO( &oReadSocketFileDescriptors );
-
-    LogModule( eLogConnect, LOG_INFO, "listenForConnectionsToAccept has %d listen sockets thread 0x%x", m_iActiveListenSktCnt, VxGetCurrentThreadId() );
-    // keep track of the biggest file descriptor
-    SOCKET largestFileDescriptor = 0;
-     for( int iSktSetIdx = 0; iSktSetIdx < m_iActiveListenSktCnt; iSktSetIdx++ )
-    {
-        FD_SET( m_aoListenSkts[ iSktSetIdx ], &oListenSocketFileDescriptors);
-        if( m_aoListenSkts[ iSktSetIdx ] > largestFileDescriptor )
-        {
-            largestFileDescriptor = m_aoListenSkts[ iSktSetIdx ];
-        }
-    }
-
-    while( ( false == poVxThread->isAborted() )
-           && ( false == VxIsAppShuttingDown() )
-           && ( 0 < m_iActiveListenSktCnt ) )
-	{
-        oReadSocketFileDescriptors = oListenSocketFileDescriptors;
-        // use a timeout so that thread can exit if aborted
-        oListenTimeout.tv_sec	= 3;
-        oListenTimeout.tv_usec	= 0;
-        iSelectResult = select( largestFileDescriptor + 1, &oReadSocketFileDescriptors, 0, 0, &oListenTimeout );
-        // LogModule( eLogConnect, LOG_INFO, "Listen VxThread select result %d at %d seconds", iSelectResult, GetApplicationAliveSec() );
-
-		if( poVxThread->isAborted() 
-			|| VxIsAppShuttingDown()
-			|| ( 0 >= m_iActiveListenSktCnt ) ) 
-		{
-			break;
-		}
-
-        if( 0 < iSelectResult )
-		{
-			// at least one valid selected
-            for( int iSelectedIdx = 0; iSelectedIdx < m_iActiveListenSktCnt; iSelectedIdx++ )
-			{
-                if( FD_ISSET( m_aoListenSkts[iSelectedIdx], &oReadSocketFileDescriptors) )
-				{
-                    LogModule( eLogConnect, LOG_INFO, "#### VxServerMgr::acceptConnection: accepting at index %d\n", iSelectedIdx );
-					rc = acceptConnection( poVxThread, m_aoListenSkts[iSelectedIdx] );
-					if( rc )
-					{
-						LogMsg( LOG_ERROR, "#### VxServerMgr::acceptConnection: error %d %s doing accept\n", rc, VxDescribeSktError(rc) );
-					}
-					else
-					{
-						LogModule( eLogConnect, LOG_INFO, "#### VxServerMgr::acceptConnection: success doing accept\n" );
-					}
-
-                    FD_CLR( m_aoListenSkts[iSelectedIdx], &oReadSocketFileDescriptors);
-				}
-			}
-		}
-#ifndef TARGET_OS_WINDOWS
-        else if( ( 0 > iSelectResult ) 
-			&& ( EINTR == errno ) )
-		{
-			// errno 4 can occur if in Linux and app gets CTRL-C signal
-			break;
-		}
-#endif
-        else if( 0 > iSelectResult )
-        {
-            LogMsg( LOG_INFO, "listenForConnectionsToAccept error %d\n", VxGetLastError() );
-        }
-
-		if( poVxThread->isAborted() 
-			|| VxIsAppShuttingDown()
-			|| ( 0 >= m_iActiveListenSktCnt ) ) 
-		{
-			break;
-		}
-    }
-#endif 
-*/
     LogModule( eLogConnect, LOG_INFO, "Listen Thread is exiting thread 0x%x", VxGetCurrentThreadId() );
 	m_IsReadyToAcceptConnections = false;
 }

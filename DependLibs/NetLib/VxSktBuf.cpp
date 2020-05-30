@@ -35,7 +35,7 @@ VxSktBuf::VxSktBuf( int iBufSize )
 //============================================================================
 VxSktBuf::~VxSktBuf()
 {
-    delete m_pau8SktBuf[];
+    delete m_pau8SktBuf;
     m_pau8SktBuf = nullptr;
 }
 
