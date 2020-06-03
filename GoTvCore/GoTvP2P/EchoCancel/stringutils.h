@@ -108,10 +108,11 @@ GOTV_INLINE wchar_t tolowercase(wchar_t c) {
 #endif  // TARGET_OS_WINDOWS 
 
 #if defined(TARGET_POSIX)
-
+#if !defined(_stricmp)
 GOTV_INLINE int _stricmp(const char* s1, const char* s2) {
   return strcasecmp(s1, s2);
 }
+#endif // !defined(_stricmp)
 GOTV_INLINE int _strnicmp(const char* s1, const char* s2, size_t n) {
   return strncasecmp(s1, s2, n);
 }

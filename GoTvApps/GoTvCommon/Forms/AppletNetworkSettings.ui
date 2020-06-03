@@ -15,42 +15,45 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
-    <number>0</number>
+    <number>2</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>2</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>2</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>2</number>
    </property>
-   <property name="spacing">
-    <number>0</number>
+   <property name="horizontalSpacing">
+    <number>2</number>
    </property>
    <item row="0" column="0">
     <widget class="QGroupBox" name="DialogItemsGroupBox">
      <property name="title">
       <string/>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <property name="spacing">
+       <number>2</number>
+      </property>
       <property name="leftMargin">
-       <number>5</number>
+       <number>2</number>
       </property>
       <property name="topMargin">
-       <number>5</number>
+       <number>2</number>
       </property>
       <property name="rightMargin">
-       <number>5</number>
+       <number>2</number>
       </property>
       <property name="bottomMargin">
-       <number>5</number>
+       <number>2</number>
       </property>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_5">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
         <property name="spacing">
-         <number>3</number>
+         <number>1</number>
         </property>
         <item>
          <widget class="QLabel" name="m_SelectNetworkSettingLabel">
@@ -79,18 +82,22 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="m_SaveSettingsButton">
-          <property name="text">
-           <string>Save Network Setting</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="m_DeleteSettingsButton">
-          <property name="text">
-           <string>Delete Network Setting</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QPushButton" name="m_SaveSettingsButton">
+            <property name="text">
+             <string>Save Network Setting</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_DeleteSettingsButton">
+            <property name="text">
+             <string>Delete Network Setting</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
@@ -463,19 +470,26 @@
        </widget>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="WirelessIpLayout">
-        <property name="spacing">
-         <number>1</number>
+       <widget class="QLabel" name="WirelessIpLabel">
+        <property name="text">
+         <string>Local Network Adapter IP ( recommend blank (any adapter) )</string>
         </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_7">
         <item>
-         <widget class="QLabel" name="WirelessIpLabel">
-          <property name="text">
-           <string>Local Network Adapter IP ( recommend default )</string>
-          </property>
-         </widget>
+         <widget class="QLineEdit" name="m_AdapterIpEdit"/>
         </item>
         <item>
-         <widget class="QComboBox" name="m_LclIpListComboBox"/>
+         <widget class="QComboBox" name="m_LclIpListComboBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

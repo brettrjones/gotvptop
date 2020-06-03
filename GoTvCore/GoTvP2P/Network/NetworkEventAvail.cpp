@@ -56,14 +56,7 @@ void NetworkEventAvail::runNetworkEvent( void )
             m_Engine.getPeerMgr().stopListening();
         }
 
-        if( !m_LclIp.empty() )
-        {
-            m_Engine.getPeerMgr().startListening( m_LclIp.c_str(), m_Engine.getEngineSettings().getTcpIpPort() );
-        }
-        else
-        {
-            m_Engine.getPeerMgr().startListening( m_Engine.getEngineSettings().getTcpIpPort() );
-        }
+        m_Engine.getPeerMgr().startListening( m_Engine.getEngineSettings().getTcpIpPort(), m_LclIp.c_str() );
     }
 
 	//m_PktAnn.getLanIPv4().setIp( m_LclIp.c_str() );
