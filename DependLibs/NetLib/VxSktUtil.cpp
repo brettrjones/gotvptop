@@ -982,6 +982,11 @@ SOCKET VxConnectTo( InetAddress& lclIp, InetAddress& rmtIp, uint16_t u16Port, in
                                 sktHandle,
                                 strRmtIp.c_str(),
                                 TimeElapsedGmtSec( timeStartConnect ) );
+                if( !lclIp.isValid() )
+                {
+                    VxGetLclAddress(sktHandle, lclIp);
+                }
+
 				bConnectSuccess = true;
                 return sktHandle;
 			}
@@ -1544,7 +1549,7 @@ RCODE VxGetLclAddress( SOCKET sktHandle, InetAddrAndPort& oRetAddr )
 	socklen_t iSktAddrLen = sizeof( oSktAddr );
 	memset( &oSktAddr, 0, sizeof( oSktAddr ) );
 
-	if ( getsockname( sktHandle, ( struct sockaddr* )&oSktAddr, &iSktAddrLen ) )
+    if( getsockname( sktHandle, ( struct sockaddr* )&oSktAddr, &iSktAddrLen ) )
 	{
 		// error occurred
 		oRetAddr.setToInvalid();
@@ -1560,6 +1565,30 @@ RCODE VxGetLclAddress( SOCKET sktHandle, InetAddrAndPort& oRetAddr )
 	return rc;
 }
 
+//============================================================================
+RCODE VxGetLclAddress( SOCKET sktHandle, InetAddress& retAddr )
+{
+    // Get the IP address of the the local side of connection
+    RCODE rc = 0;
+    struct sockaddr oSktAddr;
+    socklen_t iSktAddrLen = sizeof( oSktAddr );
+    memset( &oSktAddr, 0, sizeof( oSktAddr ) );
+
+    if( getsockname( sktHandle, ( struct sockaddr* )&oSktAddr, &iSktAddrLen ) )
+    {
+        // error occurred
+        retAddr.setToInvalid();
+        rc = VxGetLastError();
+        //if( IsLogEnabled( eLogSkt ) )
+            LogMsg( LOG_DEBUG, "VxGetRmtAddress: skt handle %d error %d %s\n", sktHandle, rc, VxDescribeSktError( rc ) );
+    }
+    else
+    {
+        retAddr.setIp( oSktAddr );
+    }
+
+    return rc;
+}
 
 //============================================================================
 std::string VxGetRmtHostName( SOCKET& skt )

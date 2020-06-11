@@ -269,7 +269,7 @@ void VxSktBaseMgr::handleSktCloseEvent( VxSktBase * sktBase )
 	bool deletedSkt = true;
 	while( deletedSkt )
 	{
-		VxSktBase * sktToDelete = NULL;
+		VxSktBase * sktToDelete = nullptr;
 		deletedSkt = false;
 		sktBaseMgrLock();
 		std::vector<VxSktBase *>::iterator iter = m_aoSktsToDelete.begin();
@@ -277,7 +277,7 @@ void VxSktBaseMgr::handleSktCloseEvent( VxSktBase * sktBase )
 		while( iter != m_aoSktsToDelete.end() )
 		{
 			sktToDelete = (*iter);
-			if( timeNowMs > sktToDelete->m_ToDeleteTimeGmtMs )
+			if( !sktToDelete->getInUseByRxThread() && (timeNowMs > sktToDelete->getToDeleteTimeMs() ))
 			{
 				iter = m_aoSktsToDelete.erase( iter );
 				//LogMsg( LOG_INFO, "deleting skt %d\n", sktToDelete->m_iSktId );
@@ -298,30 +298,26 @@ void VxSktBaseMgr::handleSktCloseEvent( VxSktBase * sktBase )
 		}
 	}
 
-	sktBaseMgrLock();
-	// put this skt in delete list to be deleted later
-	std::vector<VxSktBase *>::iterator activeSktIter = m_aoSkts.begin();
-	while( activeSktIter != m_aoSkts.end() )
-	{
-		VxSktBase * thisSkt = (*activeSktIter);
-		if( ( thisSkt == sktBase )
-			|| ( false == thisSkt->isConnected() ) )
-		{
-			//if( !thisSkt->isUdpSocket() )
-			//{
-			//	LogMsg( LOG_INFO, "moving skt %s to delete list\n", thisSkt->describeSktType().c_str() );
-			//}
-
-			thisSkt->m_ToDeleteTimeGmtMs = timeNowMs + 30000;
-			m_aoSktsToDelete.push_back( thisSkt );
-			activeSktIter = m_aoSkts.erase( activeSktIter );
-		}
-		else
-		{
-			++activeSktIter;
-		}
-	}
-
-	sktBaseMgrUnlock();
+    // put this skt in delete list to be deleted later
+    moveToEraseList( sktBase );
 }
 
+
+//============================================================================
+//! move to erase/delete when safe to do so
+void VxSktBaseMgr::moveToEraseList( VxSktBase * sktBase )
+{
+    m_SktMgrMutex.lock( __FILE__, __LINE__ ); // dont let other threads mess with array while we remove the socket
+    for( auto iter = m_aoSkts.begin(); iter != m_aoSkts.end(); ++iter )
+    {
+        if( *iter == sktBase )
+        {
+            m_aoSkts.erase( iter );
+            break;
+        }
+    }
+
+    sktBase->setToDeleteTimeMs( GetGmtTimeMs() + 30000 );
+    m_aoSktsToDelete.push_back( sktBase );
+    m_SktMgrMutex.unlock( __FILE__, __LINE__ );
+}

@@ -39,11 +39,10 @@ public:
     void                        setIsInternetAvailable( bool isAvail )      { m_InternetAvailable = isAvail; }
     bool                        getIsInternetAvailable( void )              { return m_InternetAvailable; }
 
-    void                        doNetworkMonitoring( VxThread * startupThread );
+    void                        doNetworkConnectTestThread( VxThread * startupThread );
 
 protected:
     void                        triggerDetermineIp( void );
-    void                        onDetermineIp( void );
     std::string                 determineLocalIp( void );
 
 	P2PEngine&					m_Engine;
@@ -56,4 +55,12 @@ protected:
 	std::string					m_strPreferredAdapterIp;
 	std::string					m_strCellNetIp;
 	std::string					m_strLastFoundIp;
+    uint64_t                    m_LastConnectAttemptTimeGmtMs{ 0 };
+    uint64_t                    m_LastConnectSuccessTimeGmtMs{ 0 };
+    bool                        m_ConnectAttemptSucessfull{ false };
+    bool                        m_ConnectAttemptCompleted{ false };
+    std::string                 m_ConnectedLclIp;
+
+    std::string                 m_LastConnectedLclIp;
+    bool                        m_LastConnectAttemptSuccessfull{ false };
 };

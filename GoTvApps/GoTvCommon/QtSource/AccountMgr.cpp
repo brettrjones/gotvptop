@@ -19,7 +19,6 @@ AccountMgr::AccountMgr()
 {
 }
 
-
 //============================================================================
 void AccountMgr::startupAccountMgr( const char * dbPathAndName )
 {

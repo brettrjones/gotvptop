@@ -79,6 +79,8 @@ public:
 											bool		bDelete = true );	// if true delete the skt
 	virtual bool				isSktActive( VxSktBase * sktBase );
 
+    //! move to erase/delete when safe to do so
+    virtual void				moveToEraseList( VxSktBase * sktBase );
 
 	//=== vars ===//
 	RCODE						m_rcLastError;

@@ -131,6 +131,13 @@ public:
 	virtual int64_t		    	getLastActiveTimeMs( void )					    { return m_LastActiveTimeGmtMs; }
 	virtual void                updateLastActiveTime( void );
 
+    virtual void				setToDeleteTimeMs( int64_t gmtTimeMs )          { m_ToDeleteTimeGmtMs = gmtTimeMs; }
+    virtual int64_t		    	getToDeleteTimeMs( void )                       { return m_ToDeleteTimeGmtMs; }
+
+    virtual void				setInUseByRxThread( bool inUse )                { m_InUseByRxThread = inUse; }
+    virtual bool		    	getInUseByRxThread( void )                      { return m_InUseByRxThread; }
+
+
 	virtual RCODE				connectTo(	InetAddress&	oLclIp,	
 											const char *	pIpOrUrl,						// remote ip or url
 											uint16_t		u16Port,						// port to connect to
@@ -291,5 +298,6 @@ protected:
 	bool						m_bIsPluginSpecificSkt;
 	uint8_t						m_u8PluginSpecificNum;
 	RCODE						m_rcLastSktError;			// last error that occurred
+    bool                        m_InUseByRxThread{ false };
 };
 

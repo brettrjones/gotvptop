@@ -35,6 +35,18 @@ namespace
     const int NET_INTERNET_VERIFY_ACITIVE_TIMEOUT_MS = 55000;
 
     const char * NET_TEST_WEB_CONNECTION_HOST = "www.google.com";
+
+
+    //============================================================================
+    static void * NetworkMonitorThreadFunc( void * pvContext )
+    {
+        VxThread * poThread = ( VxThread * )pvContext;
+        poThread->setIsThreadRunning( true );
+        NetworkMonitor * netMonitor = ( NetworkMonitor * )poThread->getThreadUserParam();
+        netMonitor->doNetworkConnectTestThread( poThread );
+        poThread->threadAboutToExit();
+        return nullptr;
+    }
 }
 
 //============================================================================
@@ -59,10 +71,12 @@ void NetworkMonitor::networkMonitorStartup( const char * preferredNetIp, const c
 //============================================================================
 void NetworkMonitor::networkMonitorShutdown( void )
 {
+    m_NetMonitorThread.abortThreadRun( true );
     m_bIsStarted		= false;
     m_strPreferredAdapterIp	= "";
     m_strCellNetIp		= "";
-    m_Engine.fromGuiNetworkLost();
+    m_NetMonitorThread.killThread();
+    //m_Engine.fromGuiNetworkLost();
 }
 
 //============================================================================
@@ -71,6 +85,12 @@ void NetworkMonitor::onOncePerSecond( void )
     if( ( false == m_bIsStarted )
         || VxIsAppShuttingDown() )
     {
+        return;
+    }
+
+    if( m_NetMonitorThread.isThreadRunning() )
+    {
+        // still trying to get ip from connection.. wait till next time
         return;
     }
 
@@ -93,7 +113,6 @@ void NetworkMonitor::onOncePerSecond( void )
     std::vector<InetAddress> aipAddresses;
     InetAddress	netAddr;
     netAddr.getAllAddresses( aipAddresses );
-    //netAddr.dumpAddresses( aipAddresses );
 
     for( InetAddress& inetAddr : aipAddresses )
     {
@@ -146,16 +165,55 @@ void NetworkMonitor::onOncePerSecond( void )
         return;
     }
 
-    // only reevaluate network every 10 seconds
-    static int findIpTryCnt = 0;
-    static int64_t timeLastAttempt = 0;
     int64_t timeNow = GetTimeStampMs();
 
-    if( ( !getIsInternetAvailable() && ( timeNow - timeLastAttempt ) > NET_INTERNET_ATTEMPT_CONNECT_TIMEOUT_MS ) || // time to attempt internet connect/verifiy local ip
-        ( getIsInternetAvailable() && ( timeNow - timeLastAttempt ) > NET_INTERNET_VERIFY_ACITIVE_TIMEOUT_MS ) ) // time to verify internet still connected and what is local ip
+    if( m_ConnectAttemptCompleted )
     {
-        findIpTryCnt++;
-        timeLastAttempt = timeNow;
+        m_ConnectAttemptCompleted = false;
+        if( m_ConnectAttemptSucessfull && !m_ConnectedLclIp.empty() )
+        {
+            if( m_LastConnectAttemptSuccessfull && ( m_LastConnectedLclIp == m_ConnectedLclIp ) )
+            {
+                // same as last time connection test was executed
+                LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond same as last ip %s", m_ConnectedLclIp.c_str() );
+            }
+            else
+            {
+                m_LastConnectedLclIp = m_ConnectedLclIp;
+                LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond new ip %s", m_ConnectedLclIp.c_str() );
+                setIsInternetAvailable( true );
+                m_Engine.fromGuiNetworkAvailable( m_ConnectedLclIp.c_str(), false );
+                m_Engine.getNetStatusAccum().setNetHostAvail( true );
+            }
+        }
+        else
+        {
+            // failed .. if the last attempt was successfull let it try one more time
+            if( !m_LastConnectAttemptSuccessfull )
+            {
+                LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond network lost" );
+                m_Engine.getNetStatusAccum().setInternetAvail( false );
+                m_Engine.getNetStatusAccum().setNetHostAvail( false );
+                setIsInternetAvailable( false );
+                m_Engine.fromGuiNetworkLost();
+            }
+        }
+
+        m_LastConnectAttemptSuccessfull = m_ConnectAttemptSucessfull;
+    }
+    else if( ( !getIsInternetAvailable() && ( timeNow - m_LastConnectAttemptTimeGmtMs ) > NET_INTERNET_ATTEMPT_CONNECT_TIMEOUT_MS ) || // time to attempt internet connect/verifiy local ip
+        ( getIsInternetAvailable() && ( timeNow - m_LastConnectAttemptTimeGmtMs ) > NET_INTERNET_VERIFY_ACITIVE_TIMEOUT_MS ) ) // time to verify internet still connected and what is local ip
+    {
+        // only reevaluate network every 10 seconds
+        m_LastConnectAttemptTimeGmtMs = timeNow;
+        m_ConnectAttemptCompleted = false;
+        m_ConnectAttemptSucessfull = false;
+        m_ConnectedLclIp = "";
+
+        netAddr.dumpAddresses( aipAddresses );
+        triggerDetermineIp();
+
+        /*
         std::string lclIp = determineLocalIp();
 
         if( lclIp.length() )
@@ -189,6 +247,28 @@ void NetworkMonitor::onOncePerSecond( void )
                 }
             }
         }
+        */
+    }
+}
+
+//============================================================================
+void NetworkMonitor::triggerDetermineIp( void )
+{
+    // connection test must be done in thread of may hang the gui thread for many seconds
+    if( !m_NetMonitorThread.isThreadRunning() )
+    {
+        m_NetMonitorThread.startThread( ( VX_THREAD_FUNCTION_T )NetworkMonitorThreadFunc, this, "NetMonitorThread" );
+    }
+}
+
+//============================================================================
+void NetworkMonitor::doNetworkConnectTestThread( VxThread * startupThread )
+{
+    if( startupThread )
+    {
+        m_ConnectedLclIp = determineLocalIp();
+        m_ConnectAttemptSucessfull = !m_ConnectedLclIp.empty();
+        m_ConnectAttemptCompleted = true;
     }
 }
 
@@ -201,8 +281,9 @@ std::string NetworkMonitor::determineLocalIp( void )
 
     VxSktConnectSimple sktConnect;
 
+    // only attempt connect to network host if we are not the host
     if( !m_Engine.getHasHostService( eHostServiceNetworkHost )
-        || ( VxIsIPv4Address( VxGetNetworkHostName() ) && !externIp.empty() && ( externIp != VxGetNetworkHostName() ) ) )
+        || ( VxIsIPv4Address( VxGetNetworkHostName() ) && !( !externIp.empty() && ( externIp == VxGetNetworkHostName() ) ) ) )
     {
         SOCKET skt = sktConnect.connectTo( VxGetNetworkHostName(),		// remote ip or url
                                            VxGetNetworkHostPort(),		// port to connect to
@@ -219,11 +300,6 @@ std::string NetworkMonitor::determineLocalIp( void )
                     LogModule( eLogNetworkState, LOG_INFO, "determineLocalIp sktConnect.connectTo invalid local ip" );
                     localIp = "";
                 }
-
-                if( !localIp.empty() )
-                {
-                    m_Engine.getNetStatusAccum().setNetHostAvail( true );
-                }
             }
 
             VxCloseSkt( skt );
@@ -234,7 +310,7 @@ std::string NetworkMonitor::determineLocalIp( void )
     {
         LogModule( eLogNetworkState, LOG_WARNING, "Failed verify No Limit Hosted internet conection to %s:%d", VxGetNetworkHostName(), VxGetNetworkHostPort() );
 
-        // try again but use google
+        // try using google.. a really bad idea but since we have no official site we can connect to this should be reliable
         SOCKET skt = sktConnect.connectTo( NET_TEST_WEB_CONNECTION_HOST,		// remote ip or url
                                            80,						// port to connect to
                                            NET_MONITOR_CONNECT_TO_HOST_TIMOUT_MS );	// timeout attempt to connect

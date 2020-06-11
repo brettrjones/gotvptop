@@ -472,15 +472,12 @@
       <item>
        <widget class="QLabel" name="WirelessIpLabel">
         <property name="text">
-         <string>Local Network Adapter IP ( recommend blank (any adapter) )</string>
+         <string>Local Network Adapter IP ( recommend default (any adapter) )</string>
         </property>
        </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_7">
-        <item>
-         <widget class="QLineEdit" name="m_AdapterIpEdit"/>
-        </item>
         <item>
          <widget class="QComboBox" name="m_LclIpListComboBox">
           <property name="sizePolicy">

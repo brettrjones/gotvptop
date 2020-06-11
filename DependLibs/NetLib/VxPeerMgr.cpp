@@ -76,7 +76,7 @@ VxSktBase * VxPeerMgr::makeNewSkt( void )
 //============================================================================
 //! Connect to ip or url and return socket.. if cannot connect return NULL
 VxSktConnect * VxPeerMgr::connectTo(	const char *	pIpOrUrl,				// remote ip or url 
-										uint16_t				u16Port,				// port to connect to
+										uint16_t		u16Port,				// port to connect to
 										int				iTimeoutMilliSeconds )	// milli seconds before connect attempt times out
 {
 	if( NULL ==  m_pfnUserReceive )

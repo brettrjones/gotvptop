@@ -325,7 +325,7 @@ void NetworkStateRelaySearch::doRelaySearchState( void )
 
 			//BRJ.. we queried anchors and tried all.. just start over
 			LogModule( eLogConnect, LOG_INFO, "NetworkStateRelaySearch Search Timeout.. resetting network\n" );
-			m_NetworkStateMachine.restartNetwork();
+			// m_NetworkStateMachine.restartNetwork();
 			return;
 		}
 	}

@@ -877,12 +877,8 @@ static int acceptErrCnt = 0;
 	{
 		sktBase->closeSkt(67823);
 		LogMsg( LOG_ERROR, "VxServerMgr: error %d doing accept skt %d skt id %d thread 0x%x", rc, sktBase->m_Socket, sktBase->getSktId(), VxGetCurrentThreadId() );
-		// if error occurred then remove it from our list or it
-		// will never get removed
-		m_SktMgrMutex.lock(__FILE__, __LINE__); // dont let other threads mess with array while we remove
-		m_aoSkts.pop_back();
-		m_SktMgrMutex.unlock(__FILE__, __LINE__);
-		delete sktBase;
+        moveToEraseList( sktBase );
+
         rc = -5;
 	}
     else

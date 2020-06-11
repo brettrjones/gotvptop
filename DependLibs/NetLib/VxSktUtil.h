@@ -86,6 +86,7 @@ SOCKET							VxConnectTo( InetAddress&		oLclIp,
 
 
 RCODE							VxGetLclAddress( SOCKET oSkt, InetAddrAndPort& oRetAddr );
+RCODE                           VxGetLclAddress( SOCKET sktHandle, InetAddress& oRetAddr );
 RCODE							VxGetRmtAddress( SOCKET oSkt, InetAddrAndPort& oRetAddr );
 
 bool							VxIsIPv6Address( const char *addr );

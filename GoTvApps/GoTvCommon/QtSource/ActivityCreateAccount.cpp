@@ -31,7 +31,7 @@
 ActivityCreateAccount::ActivityCreateAccount( AppCommon& app, QWidget * parent )
 : ActivityBase( OBJNAME_ACTIVITY_CREATE_ACCOUNT, app, parent, eAppletCreateAccount, true, false, true )
 {
-	ui.setupUi( this );
+    ui.setupUi( this );
     setTitleBarText( QObject::tr( "Create Account" ) );
 
     connectBarWidgets();
