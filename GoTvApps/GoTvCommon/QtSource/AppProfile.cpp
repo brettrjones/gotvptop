@@ -138,7 +138,7 @@ void AppProfile::loadProfile( void )
 
 	if( u32UseExeDir )
 	{
-		m_strRootUserDataDir = m_strExeDir + VxGetApplicationNameNoSpaces();
+        m_strRootUserDataDir = m_strExeDir + VxGetApplicationNameNoSpacesLowerCase();
 		m_strRootUserDataDir += "/";
 		makeDirectory( m_strRootUserDataDir.c_str() );
 		m_strRootXferDir = m_strRootUserDataDir;
@@ -153,7 +153,7 @@ void AppProfile::loadProfile( void )
 	{
 		//=== determine root path to store all application data and settings etc ===//
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
-		QString dataPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+        QString dataPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 #else
         QString dataPath =  QStandardPaths::writableLocation(QStandardPaths::AppDataLocation );
 #endif //TARGET_OS_WINDOWS
@@ -168,13 +168,42 @@ void AppProfile::loadProfile( void )
 #endif // DEBUG
 
 		VxFileUtil::makeForwardSlashPath( m_strRootUserDataDir );
-		m_strRootUserDataDir += "/";
+        VxFileUtil::assurePathEndWithSlash( m_strRootUserDataDir );
+
 		// No need to put application in path because when call QCoreApplication::setApplicationName("MyP2PWeb")
+        makeDirectory( m_strRootUserDataDir.c_str() );
+
 		// it made it a sub directory of DataLocation
 		VxSetRootDataStorageDirectory(m_strRootUserDataDir.c_str());
 
-		makeDirectory( m_strRootUserDataDir.c_str() );
 		int exePathHash = 0;
+#if defined(TARGET_OS_ANDROID)
+        // in some cases android may give a new exe directory for each launch and we get a different hash each time
+        // so for android only use the data directory
+        if( m_strRootUserDataDir.length() )
+        {
+            const char * exePath = m_strRootUserDataDir.c_str();
+            for( unsigned int i = 0; i < m_strRootUserDataDir.length(); i++ )
+            {
+                exePathHash += exePath[ i ];
+            }
+        }
+
+        char as8ExePathHash[16];
+        sprintf( as8ExePathHash, "z%x", exePathHash );
+        // android does not allow numbers in file path so substitute )
+        for( size_t i = 0; i < strlen(as8ExePathHash); i++)
+        {
+            if( !isalpha(as8ExePathHash[i]))
+            {
+                as8ExePathHash[i] = 'z';
+            }
+        }
+
+        m_strRootUserDataDir += as8ExePathHash;
+
+#else
+        // use exe directory to make a hash as part of path so can run multiple instances
 		if( m_strExeDir.length() )
 		{
 			const char * exePath = m_strExeDir.c_str();
@@ -184,10 +213,18 @@ void AppProfile::loadProfile( void )
 			}
 		}
 
-		char as8ExePathHash[16];
-		sprintf( as8ExePathHash, "%x/", exePathHash );
-		m_strRootUserDataDir += as8ExePathHash;
-		makeDirectory( m_strRootUserDataDir.c_str() );
+        char as8ExePathHash[16];
+        sprintf( as8ExePathHash, "z%x", exePathHash );
+        m_strRootUserDataDir += as8ExePathHash;
+
+#endif // defined(TARGET_OS_ANDROID)
+
+        VxFileUtil::assurePathEndWithSlash( m_strRootUserDataDir );
+        makeDirectory( m_strRootUserDataDir.c_str() );
+        if(!VxFileUtil::directoryExists(m_strRootUserDataDir.c_str()))
+        {
+            LogMsg( LOG_ERROR, "AppProfile::loadProfile Could not create root data dir %s", m_strRootUserDataDir.c_str());
+        }
 
 		VxSetRootUserDataDirectory( m_strRootUserDataDir.c_str() );
 
@@ -204,8 +241,8 @@ void AppProfile::loadProfile( void )
 			}
 	#endif // TARGET_OS_WINDOWS		
 #else
-	#ifdef TARGET_OS_WINDOWS
-		QString docsPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    #if defined(TARGET_OS_WINDOWS) || defined(TARGET_OS_ANDROID)
+        QString docsPath = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
 	#else
 		// linux hides document under .local so use desktop if possible
 		QString docsPath = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
@@ -219,22 +256,26 @@ void AppProfile::loadProfile( void )
 		m_strRootXferDir = docsPath.toUtf8().constData();
 
 		VxFileUtil::makeForwardSlashPath( m_strRootXferDir );
-		m_strRootXferDir += "/";
-		m_strRootXferDir += VxGetApplicationNameNoSpaces();
-		m_strRootXferDir += "/";
+        VxFileUtil::assurePathEndWithSlash( m_strRootXferDir );
+
+        m_strRootXferDir += VxGetApplicationNameNoSpacesLowerCase();
+        VxFileUtil::assurePathEndWithSlash( m_strRootXferDir );
+
 		makeDirectory( m_strRootXferDir.c_str() );
 		m_strRootXferDir += as8ExePathHash;
+        VxFileUtil::assurePathEndWithSlash( m_strRootXferDir );
 		makeDirectory( m_strRootXferDir.c_str() );
-
+        if(!VxFileUtil::directoryExists(m_strRootXferDir.c_str()))
+        {
+            LogMsg( LOG_ERROR, "AppProfile::loadProfile Could not create xfer dir %s", m_strRootXferDir.c_str());
+        }
 	}
-
 
 	LogMsg( LOG_INFO, "User Data Dir %s Xfer Dir %s app data dir %s doc dir %s\n", 
 			m_strRootUserDataDir.c_str(),
 			m_strRootXferDir.c_str(),
 			getOsSpecificAppDataDir().c_str(),
 			getOsSpecificHomeDir().c_str()
-
 			);
 	//LogMsg( LOG_INFO, "App Data Directory %s\n", m_strRootAppDataDir.c_str() );
 
@@ -327,7 +368,7 @@ std::string& AppProfile::getOsSpecificHomeDir( void )
 #endif //QT_5_OR_GREATER
 	m_strOsSpecificHomeDir = homeLocation.toStdString();
 	makeForwardSlashPath( m_strOsSpecificHomeDir );
-	m_strOsSpecificHomeDir += "/";
+    VxFileUtil::assurePathEndWithSlash( m_strOsSpecificHomeDir );
 	return m_strOsSpecificHomeDir;
 }
 
@@ -342,6 +383,6 @@ std::string& AppProfile::getOsSpecificDocumentsDir( void )
 #endif //QT_5_OR_GREATER
 	m_strOsSpecificDocumentsDir = docsLocation.toStdString();
 	makeForwardSlashPath( m_strOsSpecificDocumentsDir );
-	m_strOsSpecificDocumentsDir += "/";
+    VxFileUtil::assurePathEndWithSlash( m_strOsSpecificDocumentsDir );
 	return m_strOsSpecificDocumentsDir;
 }

@@ -57,11 +57,11 @@ namespace
                     | eLogNetworkState
                     | eLogNetworkMgr
                     | eLogIsPortOpenTest
-                    | eLogThread
+                    // | eLogThread
                     | eLogStorage
                     | eLogAssets
                     | eLogPlugins
-                    | eLogStartup
+                    // | eLogStartup
                     | eLogHosts
                     | eLogTcpData
                     | eLogUdpData

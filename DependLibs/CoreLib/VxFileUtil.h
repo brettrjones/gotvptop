@@ -166,6 +166,8 @@ public:
 
 	//! return true if last char is '/' else '\\'
 	static bool					doesPathEndWithSlash( const char * pFileName );
+    //! append slash if needed
+    static void					assurePathEndWithSlash( std::string &csFileName );
 
 	//! return true if is a root path like C:\dir or /dir
 	static bool					isFullPath( const char * pFileName );

@@ -166,6 +166,7 @@ uint16_t EngineSettings::getTcpIpPort( bool bGetRandomIfDoesntExist )
 		setTcpIpPort( u16IpPort );
 	}
 
+    LogMsg( LOG_DEBUG, "BRJ EngineSettings::getTcpIpPort %d", u16IpPort );
     return u16IpPort;
 }
 
@@ -173,7 +174,8 @@ uint16_t EngineSettings::getTcpIpPort( bool bGetRandomIfDoesntExist )
 void EngineSettings::setTcpIpPort( uint16_t u16IpPort )
 {
     m_SettingsDbMutex.lock();
-	setIniValue( MY_SETTINGS_KEY, "TcpIpPort", u16IpPort );
+    LogMsg( LOG_DEBUG, "BRJ EngineSettings::setTcpIpPort %d", u16IpPort );
+    setIniValue( MY_SETTINGS_KEY, "TcpIpPort", u16IpPort );
     m_SettingsDbMutex.unlock();
 }
 

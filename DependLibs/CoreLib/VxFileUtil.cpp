@@ -429,7 +429,7 @@ bool VxFileUtil::directoryExists( const char * pDir )
 			bIsDir = false;
 		}
 	}
-	else
+    else
 	{
 		bIsDir = false;
 	}
@@ -570,7 +570,7 @@ RCODE VxFileUtil::makeDirectory( const char * pDirectoryPath )
                 }
                 else
                 {
-                    LogModule( eLogStorage, LOG_VERBOSE, "created directory %s", tempDir);
+                    // LogModule( eLogStorage, LOG_VERBOSE, "created directory %s", tempDir);
                     createdDirectories = true;
                 }
             }
@@ -1113,7 +1113,6 @@ void VxFileUtil::makeBackwardSlashPath( char * pFilePath )
 	}
 }
 
-
 //============================================================================
 //! return true if last char is '/' else '\\'
 bool VxFileUtil::doesPathEndWithSlash( const char * pFileName )
@@ -1125,6 +1124,16 @@ bool VxFileUtil::doesPathEndWithSlash( const char * pFileName )
 		return true;
 	}
 	return false;
+}
+
+//============================================================================
+//! append slash if needed
+void VxFileUtil::assurePathEndWithSlash( std::string &csFileName )
+{
+    if (!doesPathEndWithSlash(csFileName.c_str()))
+    {
+        csFileName += '/';
+    }
 }
 
 //============================================================================

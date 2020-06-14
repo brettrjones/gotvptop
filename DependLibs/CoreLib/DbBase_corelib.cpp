@@ -310,6 +310,11 @@ RCODE DbBase::dbStartup( int iDbVersion, const char * pDbName )
 			VxFileUtil::makeDirectory( tmpDir );
 		}
 
+        if( ! VxFileUtil::directoryExists( tmpDir ) )
+        {
+            LogMsg( LOG_DEBUG, "ERROR DbBase::dbStartup could not create directory for db %s", tmpDir);
+        }
+
 		rc = onCreateDatabase(iDbVersion);
 		if( 0 != rc )
 		{

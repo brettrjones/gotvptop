@@ -210,44 +210,11 @@ void NetworkMonitor::onOncePerSecond( void )
         m_ConnectAttemptSucessfull = false;
         m_ConnectedLclIp = "";
 
-        netAddr.dumpAddresses( aipAddresses );
+        // for debug only
+        // netAddr.dumpAddresses( aipAddresses );
+
+        // start thread that will run ping/pong is port open test
         triggerDetermineIp();
-
-        /*
-        std::string lclIp = determineLocalIp();
-
-        if( lclIp.length() )
-        {
-            findIpTryCnt = 0;
-            m_Engine.getNetStatusAccum().setIpAddress( lclIp );
-            m_Engine.getNetStatusAccum().setIpPort( m_Engine.getEngineSettings().getTcpIpPort() );
-            m_Engine.getNetStatusAccum().setInternetAvail( true );
-
-            // LogModule( eLogNetworkState, LOG_VERBOSE, " NetworkMonitor::onOncePerSecond net avail %s", lclIp.c_str() );
-            if( ( lclIp != m_strLastFoundIp ) || !getIsInternetAvailable() )
-            {
-                m_strLastFoundIp = lclIp;
-                setIsInternetAvailable( true );
-                m_Engine.fromGuiNetworkAvailable( m_strLastFoundIp.c_str(), false );
-            }
-        }
-        else
-        {
-            m_Engine.getNetStatusAccum().setInternetAvail( false );
-            m_Engine.getNetStatusAccum().setNetHostAvail( false );
-
-            LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond network lost" );
-            if( findIpTryCnt > 3 )
-            {
-                LogMsg( LOG_ERROR, "Could Not Get Connection To Internet" );
-                if( getIsInternetAvailable() )
-                {
-                    setIsInternetAvailable( false );
-                    m_Engine.fromGuiNetworkLost();
-                }
-            }
-        }
-        */
     }
 }
 

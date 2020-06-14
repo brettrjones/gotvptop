@@ -51,13 +51,52 @@ namespace{
     }
 }
 
+#if defined (Q_OS_ANDROID)
+#include <QtAndroid>
+const QVector<QString> permissions({"android.permission.READ_EXTERNAL_STORAGE",
+                                    "android.permission.WRITE_EXTERNAL_STORAGE",
+                                    "android.permission.INTERNET",
+                                    "android.permission.ACCESS_WIFI_STATE",
+                                    "android.permission.CHANGE_WIFI_STATE",
+                                    "android.permission.ACCESS_NETWORK_STATE",
+                                    "android.permission.RECORD_AUDIO",
+                                    "android.permission.CAMERA",
+                                    "android.permission.VIBRATE",
+                                    "android.permission.READ_PHONE_STATE",
+                                    "android.permission.KILL_BACKGROUND_PROCESSES"});
+#endif
+
 int main(int argc, char **argv)
 {
+    // for some reason QApplication must be newed or does not initialize
+    QApplication* myApp = new QApplication( argc, argv );
+
+#if defined (Q_OS_ANDROID)
+    //Request requiered permissions at runtime
+    for(const QString &permission : permissions)
+    {
+        LogMsg( LOG_DEBUG, "requesting permission %s", permission.toUtf8().constData() );
+        auto result = QtAndroid::checkPermission(permission);
+        if(result == QtAndroid::PermissionResult::Denied)
+        {
+            auto resultHash = QtAndroid::requestPermissionsSync(QStringList({permission}));
+            if(resultHash[permission] == QtAndroid::PermissionResult::Denied)
+            {
+                LogMsg( LOG_DEBUG, "DENIED permission %s", permission.toUtf8().constData() );
+                delete myApp;
+                return 0;
+            }
+
+            LogMsg( LOG_DEBUG, "ACCEPTED permission %s", permission.toUtf8().constData() );
+        }
+    }
+#endif
+
+    LogMsg( LOG_DEBUG, "permission done" );
     QApplication::setAttribute( Qt::AA_ShareOpenGLContexts );
     QApplication::setAttribute( Qt::AA_DontCheckOpenGLContextThreadAffinity );
 
-	// for some reason QApplication must be newed or does not initialize 
-	QApplication* myApp = new QApplication( argc, argv );
+
 
 #if !defined(TARGET_OS_ANDROID) // on android it causes main page to be quarter size
     //if( myApp->screens().at( 0 )->geometry().width() > 1090 )
