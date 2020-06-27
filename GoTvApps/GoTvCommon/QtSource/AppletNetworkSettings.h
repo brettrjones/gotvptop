@@ -20,6 +20,8 @@
 #include "AppDefs.h"
 #include "AppletNetworkSettingsData.h"
 
+#include <QTimer>
+
 class AppletNetworkSettings : public AppletBase
 {
 	Q_OBJECT
@@ -50,6 +52,8 @@ protected slots:
     void                        slotShowConnectUrlInformation( void );
     void						slotShowConnetTestInformation( void );
 
+    void						slotUpdateTimer( void );
+
 protected:
     void						closeEvent( QCloseEvent *event );
 
@@ -61,11 +65,12 @@ protected:
     void						updateDlgFromSettings( bool initialSettings );
     void						updateSettingsFromDlg( void );
     void						populateDlgFromNetHostSetting( NetHostSetting& anchorSetting );
-    void						setFirewallTest( EngineSettings::EFirewallTestType eFirewallType );
+    void						setFirewallTest( FirewallSettings::EFirewallTestType eFirewallType );
     void                        populateNetData( AppletNetworkSettingsData& netData );
 
 	Ui::AppletNetworkSettingsWidget		ui;
     AppletNetworkSettingsData   m_OriginalSettings;
+    QTimer *                    m_UpdateTimer{ nullptr };
 };
 
 

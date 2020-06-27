@@ -127,8 +127,8 @@ void EngineSettings::setWhichContactsToView( EFriendViewType eViewType )
 void EngineSettings::getExternalIp( std::string& strIpAddress )
 {
     strIpAddress = "";
-    EngineSettings::EFirewallTestType firewallType = getFirewallTestSetting();
-    if( eFirewallTestAssumeNoFirewall == firewallType )
+    FirewallSettings::EFirewallTestType firewallType = getFirewallTestSetting();
+    if( FirewallSettings::eFirewallTestAssumeNoFirewall == firewallType )
     {
         // only get extern ip if set to assume can connect directly
         m_SettingsDbMutex.lock();
@@ -174,7 +174,6 @@ uint16_t EngineSettings::getTcpIpPort( bool bGetRandomIfDoesntExist )
 void EngineSettings::setTcpIpPort( uint16_t u16IpPort )
 {
     m_SettingsDbMutex.lock();
-    LogMsg( LOG_DEBUG, "BRJ EngineSettings::setTcpIpPort %d", u16IpPort );
     setIniValue( MY_SETTINGS_KEY, "TcpIpPort", u16IpPort );
     m_SettingsDbMutex.unlock();
 }
@@ -342,15 +341,15 @@ void EngineSettings::setUseNatPortForward( bool bUseNatPortForward )
 }
 
 //============================================================================
-EngineSettings::EFirewallTestType EngineSettings::getFirewallTestSetting( void )
+FirewallSettings::EFirewallTestType EngineSettings::getFirewallTestSetting( void )
 {
 	uint16_t u16Setting;
 	getIniValue( MY_SETTINGS_KEY, "FirewallTest", u16Setting, 0 );
-	return (EngineSettings::EFirewallTestType)u16Setting;
+	return ( FirewallSettings::EFirewallTestType)u16Setting;
 }
 
 //============================================================================
-void EngineSettings::setFirewallTestSetting( EngineSettings::EFirewallTestType eFirewallTestType )
+void EngineSettings::setFirewallTestSetting( FirewallSettings::EFirewallTestType eFirewallTestType )
 {
 	uint16_t u16Setting = (uint16_t)eFirewallTestType;
     m_SettingsDbMutex.lock();

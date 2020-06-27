@@ -661,8 +661,8 @@ static int uint16_t = 0;
 		}
 	}
 
-    EngineSettings::EFirewallTestType testType = getEngineSettings().getFirewallTestSetting();
-    if( EngineSettings::eFirewallTestAssumeNoFirewall == testType )
+    FirewallSettings::EFirewallTestType testType = getEngineSettings().getFirewallTestSetting();
+    if( FirewallSettings::eFirewallTestAssumeNoFirewall == testType )
     {
         m_EngineSettings.getExternalIp( retMyExternalIp );
         if( !retMyExternalIp.empty() )

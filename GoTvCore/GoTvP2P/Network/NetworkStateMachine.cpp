@@ -381,6 +381,7 @@ void NetworkStateMachine::updateFromEngineSettings( EngineSettings& engineSettin
 
     // will restore only if network key has changed
     m_Engine.getBigListMgr().dbRestoreAll( networkKey.c_str() );
+    m_Engine.getNetStatusAccum().setIpPort( u16TcpPort );
 }
 
 //============================================================================
@@ -416,6 +417,7 @@ void NetworkStateMachine::fromGuiNetworkAvailable( const char * lclIp, bool isCe
         m_PktAnn.getLanIPv4().setIp( lclIp );
         m_PktAnn.setOnlinePort( u16TcpPort );
         m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
+        m_Engine.getNetStatusAccum().setIpPort( u16TcpPort );
         LogModule( eLogNetworkState, LOG_INFO, " fromGuiNetworkAvailable hasChanged %s", m_LocalNetworkIp.c_str() );
     }
 
@@ -424,6 +426,7 @@ void NetworkStateMachine::fromGuiNetworkAvailable( const char * lclIp, bool isCe
 	m_NetworkStateMutex.lock();
 	m_NetworkEventList.push_back( new NetworkEventAvail( *this, lclIp, isCellularNetwork ) );
 	m_NetworkStateMutex.unlock();
+
 }
 
 //============================================================================
@@ -493,6 +496,8 @@ ENetLayerState NetworkStateMachine::getNetLayerState( ENetLayerType netLayer )
 //============================================================================
 void NetworkStateMachine::fromGuiNetworkSettingsChanged( void )
 {
+    m_Engine.getNetStatusAccum().setFirewallTestType( m_Engine.getEngineSettings().getFirewallTestSetting() );
+
 	if( m_LocalNetworkIp.length() )
 	{
 		bool isCell = isCellularNetwork();

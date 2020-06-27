@@ -49,6 +49,7 @@ void NetworkEventAvail::runNetworkEvent( void )
 	LogModule( eLogNetworkState, LOG_VERBOSE, "NetworkEventAvail::runNetworkEvent start\n" );
 	m_NetworkStateMachine.resolveWebsiteUrls();
     uint16_t listenPort = m_Engine.getEngineSettings().getTcpIpPort();
+    m_Engine.getNetStatusAccum().setIpPort( listenPort );
     if( !m_Engine.getPeerMgr().isListening() || ( listenPort != m_Engine.getPeerMgr().getListenPort() ) )
     {
         if( m_Engine.getPeerMgr().isListening() )

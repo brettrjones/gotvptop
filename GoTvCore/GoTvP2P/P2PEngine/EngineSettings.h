@@ -21,14 +21,6 @@
 class EngineSettings : public VxSettings
 {
 public:
-	enum EFirewallTestType
-	{
-		eFirewallTestUrlConnectionTest	= 0,
-		eFirewallTestAssumeNoFirewall	= 1,
-        eFirewallTestAssumeFirewalled   = 2,
-
-        eMaxFirewallTestType
-	};
 
 	EngineSettings();
 	virtual ~EngineSettings();
@@ -74,8 +66,8 @@ public:
 	void						setUseNatPortForward( bool bUseNatPortForward );
 	bool						getUseNatPortForward( void );
 
-	void						setFirewallTestSetting( EngineSettings::EFirewallTestType eFirewallTestType );
-	EngineSettings::EFirewallTestType getFirewallTestSetting( void );
+	void						setFirewallTestSetting( FirewallSettings::EFirewallTestType eFirewallTestType );
+    FirewallSettings::EFirewallTestType           getFirewallTestSetting( void );
 
 	void						setPreferredNetworkAdapterIp( const char * wirelessIpAddress );
 	std::string					getPreferredNetworkAdapterIp( void );

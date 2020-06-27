@@ -1198,6 +1198,20 @@ void P2PEngine::fromGuiGetNodeUrl( std::string& nodeUrl )
 }
 
 //============================================================================
+/// Get internet status
+EInternetStatus P2PEngine::fromGuiGetInternetStatus( void )
+{
+    return getNetStatusAccum().getInternetStatus();
+}
+
+//============================================================================
+/// Get network status
+ENetAvailStatus P2PEngine::fromGuiGetNetAvailStatus( void )
+{
+    return getNetStatusAccum().getNetAvailStatus();
+}
+
+//============================================================================
 #ifdef TARGET_OS_ANDROID
 int P2PEngine::fromGuiMulitcastPkt( unsigned char * data, int len )
 {

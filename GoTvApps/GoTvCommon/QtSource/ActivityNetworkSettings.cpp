@@ -68,7 +68,7 @@ void ActivityNetworkSettings::updateDlgFromSettings()
 	ui.AutoDetectProxyRadioButton->setChecked( false );
 	ui.AssumeNoProxyRadioButton->setChecked( false );
 	ui.AssumeProxyRadioButton->setChecked( false );
-	EngineSettings::EFirewallTestType iDetectProxySetting = m_Engine.getEngineSettings().getFirewallTestSetting();
+    FirewallSettings::EFirewallTestType iDetectProxySetting = m_Engine.getEngineSettings().getFirewallTestSetting();
 	switch( iDetectProxySetting )
 	{
 	case EngineSettings::eFirewallTestAssumeNoFirewall:
@@ -144,10 +144,10 @@ void ActivityNetworkSettings::updateSettingsFromDlg()
 		m_Engine.getEngineSettings().setExternalIp( externIp );
 	}
 
-	EngineSettings::EFirewallTestType eFirewallTestType = EngineSettings::eFirewallTestUrlConnectionTest;
+    FirewallSettings::EFirewallTestType eFirewallTestType = EngineSettings::eFirewallTestUrlConnectionTest;
 	if( ui.AssumeNoProxyRadioButton->isChecked() )
 	{
-		eFirewallTestType= EngineSettings::eFirewallTestAssumeNoFirewall;
+		eFirewallTestType= FirewallSettings::eFirewallTestAssumeNoFirewall;
 		if( externIp.length() )
 		{
 			m_Engine.getMyPktAnnounce().setOnlineIpAddress( externIp.c_str() );
@@ -212,7 +212,7 @@ void ActivityNetworkSettings::slotYesProxyClick( void )
 }
 
 //============================================================================
-void ActivityNetworkSettings::SetFirewallTest( EngineSettings::EFirewallTestType eFirewallType )
+void ActivityNetworkSettings::SetFirewallTest( FirewallSettings::EFirewallTestType eFirewallType )
 {
 	ui.AutoDetectProxyRadioButton->setChecked( false );
 	ui.AssumeNoProxyRadioButton->setChecked( false );
@@ -220,15 +220,15 @@ void ActivityNetworkSettings::SetFirewallTest( EngineSettings::EFirewallTestType
 
 	switch( eFirewallType )
 	{
-	case EngineSettings::eFirewallTestUrlConnectionTest:
+	case FirewallSettings::eFirewallTestUrlConnectionTest:
 		ui.AutoDetectProxyRadioButton->setChecked( true );
 		break;
 
-	case EngineSettings::eFirewallTestAssumeFirewalled:
+	case FirewallSettings::eFirewallTestAssumeFirewalled:
 		ui.AssumeProxyRadioButton->setChecked( true );
 		break;
 
-	case EngineSettings::eFirewallTestAssumeNoFirewall:
+	case FirewallSettings::eFirewallTestAssumeNoFirewall:
 		ui.AssumeNoProxyRadioButton->setChecked( true );
 		break;
 	}

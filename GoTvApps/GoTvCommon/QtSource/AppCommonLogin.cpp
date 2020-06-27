@@ -275,6 +275,8 @@ void AppCommon::setupAccountResources( VxNetIdent& userAccountIdent )
     {
         GuiHelpers::copyResourceToOnDiskFile( ":/AppRes/Resources/storyboard_background.png", storyBoardBackground.c_str() );
     }
+
+    getEngine().getNetStatusAccum().setIpPort( tcpPort );
 }
 
 //============================================================================
@@ -348,6 +350,7 @@ void AppCommon::loadAccountSpecificSettings( const char * userName )
     uint64_t aliveMs = GetApplicationAliveMs();
     LogMsg( LOG_DEBUG, "Account Loaded ms %lld alive ms %lld", aliveMs - loadStartMs, aliveMs );
     setIsAppInitialized( true );
+    getEngine().getNetStatusAccum().setIpPort( tcpPort );
 }
 
 //============================================================================
@@ -428,6 +431,7 @@ void AppCommon::checkForIniSettings( VxNetIdent * netIdent, std::string& strNetw
     {
         m_Engine.getEngineSettings().setTcpIpPort( m_AppSettings.m_u16TcpPort );
         netIdent->m_DirectConnectId.setPort( m_AppSettings.m_u16TcpPort );
+        m_Engine.getNetStatusAccum().setIpPort( m_AppSettings.m_u16TcpPort );
     }
 
     if( 0 != m_AppSettings.m_strUserName.length() )

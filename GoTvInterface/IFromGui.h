@@ -374,6 +374,10 @@ public:
 
     /// Get url for this node
     virtual void                fromGuiGetNodeUrl( std::string& nodeUrl ) = 0;
+    /// Get internet status
+    virtual EInternetStatus     fromGuiGetInternetStatus( void ) = 0;
+    /// Get network status
+    virtual ENetAvailStatus     fromGuiGetNetAvailStatus( void ) = 0;
 #ifdef TARGET_OS_ANDROID
 	/// Not used.. in android multicast for discovery of contact on same LAN is done in Jave code
 	virtual int					fromGuiMulitcastPkt( unsigned char * data, int len ) = 0;

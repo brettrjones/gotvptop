@@ -335,8 +335,8 @@ void NetworkStateRelaySearch::doRelaySearchState( void )
 void NetworkStateRelaySearch::moveToAnnounceState( void )
 {
 	// try one more time to see if port is open
-	EngineSettings::EFirewallTestType firewallTestType = m_Engine.getEngineSettings().getFirewallTestSetting();
-	if( EngineSettings::eFirewallTestUrlConnectionTest == firewallTestType )
+    FirewallSettings::EFirewallTestType firewallTestType = m_Engine.getEngineSettings().getFirewallTestSetting();
+	if( FirewallSettings::eFirewallTestUrlConnectionTest == firewallTestType )
 	{
         LogModule( eLogConnect, LOG_INFO, "111 NetworkStateRelaySearch Starting Direct connect Test\n" );
 		DirectConnectTestResults& directConnectTestResults = m_DirectConnectTester.getDirectConnectTestResults();

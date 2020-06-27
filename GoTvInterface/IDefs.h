@@ -282,6 +282,34 @@ enum ENetLayerState
     eMaxNetLayerState		            //< max must be last
 };
 
+namespace FirewallSettings
+{
+    enum EFirewallTestType
+    {
+        eFirewallTestUrlConnectionTest = 0,
+        eFirewallTestAssumeNoFirewall = 1,
+        eFirewallTestAssumeFirewalled = 2,
+
+        eMaxFirewallTestType
+    };
+};
+
+enum EInternetStatus
+{
+    eInternetNoInternet = 0,
+    eInternetInternetAvailable,
+    eInternetTestHostUnavailable,
+    eInternetTestHostAvailable,
+    eInternetAssumeDirectConnect,
+    eInternetCanDirectConnect,
+    eInternetRequiresRelay,
+
+    eMaxInternetStatus
+};
+
+//! Internet Status as text
+const char * DescribeInternetStatus( EInternetStatus internetStatus );
+
 enum ENetAvailStatus
 {
     eNetAvailNoInternet = 0,
@@ -293,3 +321,6 @@ enum ENetAvailStatus
 
     eMaxNetAvailStatus
 };
+
+//! Net Available Status as text
+const char * DescribeNetAvailStatus( ENetAvailStatus netAvailStatus );

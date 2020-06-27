@@ -38,6 +38,7 @@ namespace
 //============================================================================
 AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
 : AppletBase( OBJNAME_APPLET_NETWORK_SETTINGS, app, parent )
+, m_UpdateTimer( new QTimer(this) )
 {
 	setAppletType( eAppletNetworkSettings );
 	ui.setupUi( getContentItemsFrame() );
@@ -57,6 +58,8 @@ AppletNetworkSettings::AppletNetworkSettings( AppCommon& app, QWidget * parent )
 
 	m_MyApp.activityStateChange( this, true );
     fillMyNodeUrl( ui.m_NodeUrlLabel );
+    m_UpdateTimer->setInterval( 2000 );
+    m_UpdateTimer->start();
 }
 
 //============================================================================
@@ -88,6 +91,8 @@ void AppletNetworkSettings::connectSignals( void )
 
     connect( ui.m_NetworkSettingsNameComboBox, SIGNAL( currentIndexChanged( const QString& ) ), this, SLOT( onComboBoxSelectionChange( const QString& ) ) );
     connect( ui.m_NetworkSettingsNameComboBox, SIGNAL( editTextChanged( const QString& ) ), this, SLOT( onComboBoxTextChanged( const QString& ) ) );
+
+    connect( m_UpdateTimer, SIGNAL( timeout() ), this, SLOT( slotUpdateTimer() ) );
 }
 
 //============================================================================
@@ -164,18 +169,18 @@ void AppletNetworkSettings::updateDlgFromSettings( bool origSettings )
     ui.AutoDetectProxyRadioButton->setChecked( false );
     ui.AssumeNoProxyRadioButton->setChecked( false );
     ui.AssumeProxyRadioButton->setChecked( false );
-    EngineSettings::EFirewallTestType iDetectProxySetting = m_Engine.getEngineSettings().getFirewallTestSetting();
+    FirewallSettings::EFirewallTestType iDetectProxySetting = m_Engine.getEngineSettings().getFirewallTestSetting();
     switch( iDetectProxySetting )
     {
-    case EngineSettings::eFirewallTestAssumeNoFirewall:
+    case FirewallSettings::eFirewallTestAssumeNoFirewall:
         ui.AssumeNoProxyRadioButton->setChecked( true );
         break;
 
-    case EngineSettings::eFirewallTestAssumeFirewalled:
+    case FirewallSettings::eFirewallTestAssumeFirewalled:
         ui.AssumeProxyRadioButton->setChecked( true );
         break;
 
-    case EngineSettings::eFirewallTestUrlConnectionTest:
+    case FirewallSettings::eFirewallTestUrlConnectionTest:
     default:
         ui.AutoDetectProxyRadioButton->setChecked( true );
         break;
@@ -241,6 +246,7 @@ void AppletNetworkSettings::updateSettingsFromDlg()
             m_Engine.getEngineSettings().setTcpIpPort( curData.getTcpPort() );
             m_Engine.getMyPktAnnounce().setMyOnlinePort( curData.getTcpPort() );
             m_MyApp.getAppGlobals().getUserIdent()->m_DirectConnectId.setPort( curData.getTcpPort() );
+            m_Engine.getNetStatusAccum().setIpPort( curData.getTcpPort() );
         }
 
         if( !curData.getExternalIp().empty() )
@@ -249,8 +255,8 @@ void AppletNetworkSettings::updateSettingsFromDlg()
             m_Engine.getMyPktAnnounce().setOnlineIpAddress( curData.getExternalIp().c_str() );
         }
 
-        EngineSettings::EFirewallTestType eFirewallTestType = curData.getFirewallTestType();
-        if( eFirewallTestType == EngineSettings::eFirewallTestAssumeNoFirewall )
+        FirewallSettings::EFirewallTestType eFirewallTestType = curData.getFirewallTestType();
+        if( eFirewallTestType == FirewallSettings::eFirewallTestAssumeNoFirewall )
         {
             if( !curData.getExternalIp().empty() )
             {
@@ -318,14 +324,14 @@ void AppletNetworkSettings::populateNetData( AppletNetworkSettingsData& netData 
         netData.setExternalIp( externIp );
     }
 
-    EngineSettings::EFirewallTestType eFirewallTestType = EngineSettings::eFirewallTestUrlConnectionTest;
+    FirewallSettings::EFirewallTestType eFirewallTestType = FirewallSettings::eFirewallTestUrlConnectionTest;
     if( ui.AssumeNoProxyRadioButton->isChecked() )
     {
-        eFirewallTestType = EngineSettings::eFirewallTestAssumeNoFirewall;
+        eFirewallTestType = FirewallSettings::eFirewallTestAssumeNoFirewall;
     }
     else if( ui.AssumeProxyRadioButton->isChecked() )
     {
-        eFirewallTestType = EngineSettings::eFirewallTestAssumeFirewalled;
+        eFirewallTestType = FirewallSettings::eFirewallTestAssumeFirewalled;
     }
 
     netData.setFirewallTestType( eFirewallTestType );
@@ -348,23 +354,23 @@ void AppletNetworkSettings::slotGoToNetHostSettingsButtonClick()
 //============================================================================
 void AppletNetworkSettings::slotAutoDetectProxyClick( void )
 {
-    setFirewallTest( EngineSettings::eFirewallTestUrlConnectionTest );
+    setFirewallTest( FirewallSettings::eFirewallTestUrlConnectionTest );
 }
 
 //============================================================================
 void AppletNetworkSettings::slotNoProxyClick( void )
 {
-    setFirewallTest( EngineSettings::eFirewallTestAssumeNoFirewall );
+    setFirewallTest( FirewallSettings::eFirewallTestAssumeNoFirewall );
 }
 
 //============================================================================
 void AppletNetworkSettings::slotYesProxyClick( void )
 {
-    setFirewallTest( EngineSettings::eFirewallTestAssumeFirewalled );
+    setFirewallTest( FirewallSettings::eFirewallTestAssumeFirewalled );
 }
 
 //============================================================================
-void AppletNetworkSettings::setFirewallTest( EngineSettings::EFirewallTestType eFirewallType )
+void AppletNetworkSettings::setFirewallTest( FirewallSettings::EFirewallTestType eFirewallType )
 {
     ui.AutoDetectProxyRadioButton->setChecked( false );
     ui.AssumeNoProxyRadioButton->setChecked( false );
@@ -372,19 +378,19 @@ void AppletNetworkSettings::setFirewallTest( EngineSettings::EFirewallTestType e
 
     switch( eFirewallType )
     {
-    case EngineSettings::eFirewallTestUrlConnectionTest:
+    case FirewallSettings::eFirewallTestUrlConnectionTest:
         ui.AutoDetectProxyRadioButton->setChecked( true );
         break;
 
-    case EngineSettings::eFirewallTestAssumeFirewalled:
+    case FirewallSettings::eFirewallTestAssumeFirewalled:
         ui.AssumeProxyRadioButton->setChecked( true );
         break;
 
-    case EngineSettings::eFirewallTestAssumeNoFirewall:
+    case FirewallSettings::eFirewallTestAssumeNoFirewall:
         ui.AssumeNoProxyRadioButton->setChecked( true );
         break;
 
-    case EngineSettings::eMaxFirewallTestType:
+    case FirewallSettings::eMaxFirewallTestType:
     default:
         break;
     }
@@ -558,6 +564,13 @@ void AppletNetworkSettings::slotShowConnetTestInformation( void )
 {
     ActivityInformation * activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypeConnectTestSettings );
     activityInfo->show();
+}
+
+//============================================================================
+void AppletNetworkSettings::slotUpdateTimer( void )
+{
+    ui.m_InternetStateLabel->setText( DescribeInternetStatus( m_MyApp.getEngine().fromGuiGetInternetStatus() ) );
+    ui.m_NetAvailStateLabel->setText( DescribeNetAvailStatus( m_MyApp.getEngine().fromGuiGetNetAvailStatus() ) );
 }
 
 //============================================================================

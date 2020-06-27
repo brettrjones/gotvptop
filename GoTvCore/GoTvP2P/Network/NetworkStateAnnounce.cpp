@@ -40,8 +40,8 @@ void NetworkStateAnnounce::runNetworkState( void )
 	if( m_PktAnn.requiresRelay() )
 	{
 		// try one more time to see if port is open
-		EngineSettings::EFirewallTestType firewallTestType = m_Engine.getEngineSettings().getFirewallTestSetting();
-		if( EngineSettings::eFirewallTestUrlConnectionTest == firewallTestType )
+        FirewallSettings::EFirewallTestType firewallTestType = m_Engine.getEngineSettings().getFirewallTestSetting();
+		if( FirewallSettings::eFirewallTestUrlConnectionTest == firewallTestType )
 		{
 			//LogMsg( LOG_INFO, "111 NetworkStateRelaySearch Starting Direct connect Test\n" );
 			DirectConnectTestResults& directConnectTestResults = m_DirectConnectTester.getDirectConnectTestResults();

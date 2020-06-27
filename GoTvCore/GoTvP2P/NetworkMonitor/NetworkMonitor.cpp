@@ -80,6 +80,13 @@ void NetworkMonitor::networkMonitorShutdown( void )
 }
 
 //============================================================================
+void NetworkMonitor::setIsInternetAvailable( bool isAvail )
+{
+    m_InternetAvailable = isAvail;
+    m_Engine.getNetStatusAccum().setInternetAvail( isAvail );
+}
+
+//============================================================================
 void NetworkMonitor::onOncePerSecond( void )
 {
     if( ( false == m_bIsStarted )
@@ -183,8 +190,7 @@ void NetworkMonitor::onOncePerSecond( void )
                 LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond new ip %s", m_ConnectedLclIp.c_str() );
                 setIsInternetAvailable( true );
                 m_Engine.fromGuiNetworkAvailable( m_ConnectedLclIp.c_str(), false );
-                m_Engine.getNetStatusAccum().setNetHostAvail( true );
-            }
+             }
         }
         else
         {
@@ -192,7 +198,6 @@ void NetworkMonitor::onOncePerSecond( void )
             if( !m_LastConnectAttemptSuccessfull )
             {
                 LogModule( eLogNetworkState, LOG_INFO, " NetworkMonitor::onOncePerSecond network lost" );
-                m_Engine.getNetStatusAccum().setInternetAvail( false );
                 m_Engine.getNetStatusAccum().setNetHostAvail( false );
                 setIsInternetAvailable( false );
                 m_Engine.fromGuiNetworkLost();
@@ -257,6 +262,7 @@ std::string NetworkMonitor::determineLocalIp( void )
                                            NET_MONITOR_CONNECT_TO_HOST_TIMOUT_MS );	// timeout attempt to connect
         if( INVALID_SOCKET != skt )
         {
+            m_Engine.getNetStatusAccum().setInternetAvail( true );
             // get local address
             InetAddrAndPort lclAddr;
             if( 0 == VxGetLclAddress( skt, lclAddr ) )
@@ -266,10 +272,23 @@ std::string NetworkMonitor::determineLocalIp( void )
                 {
                     LogModule( eLogNetworkState, LOG_INFO, "determineLocalIp sktConnect.connectTo invalid local ip" );
                     localIp = "";
+                    m_Engine.getNetStatusAccum().setNetHostAvail( false );
                 }
+                else
+                {
+                    m_Engine.getNetStatusAccum().setNetHostAvail( true );
+                }
+            }
+            else
+            {
+                m_Engine.getNetStatusAccum().setNetHostAvail( true );
             }
 
             VxCloseSkt( skt );
+        }
+        else
+        {
+            m_Engine.getNetStatusAccum().setNetHostAvail( false );
         }
     }
 
@@ -283,6 +302,7 @@ std::string NetworkMonitor::determineLocalIp( void )
                                            NET_MONITOR_CONNECT_TO_HOST_TIMOUT_MS );	// timeout attempt to connect
         if( INVALID_SOCKET != skt )
         {
+            m_Engine.getNetStatusAccum().setInternetAvail( true );
             // get local address
             InetAddrAndPort lclAddr;
             if( 0 == VxGetLclAddress( skt, lclAddr ) )
@@ -310,6 +330,10 @@ std::string NetworkMonitor::determineLocalIp( void )
                 m_strLastFoundIp.clear();
             }
             */
+        }
+        else
+        {
+            m_Engine.getNetStatusAccum().setInternetAvail( false );
         }
 
         if( localIp.empty() )

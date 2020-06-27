@@ -36,7 +36,7 @@ public:
 	void						onOncePerSecond( void );
 
     bool                        getIsInitialized( void )                    { return m_bIsStarted; }
-    void                        setIsInternetAvailable( bool isAvail )      { m_InternetAvailable = isAvail; }
+    void                        setIsInternetAvailable( bool isAvail );
     bool                        getIsInternetAvailable( void )              { return m_InternetAvailable; }
 
     void                        doNetworkConnectTestThread( VxThread * startupThread );

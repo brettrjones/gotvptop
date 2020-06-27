@@ -49,7 +49,7 @@ public slots:
 	void						slotUseUpnpCheckBoxClick( void );
 
 protected:
-	void						SetFirewallTest( EngineSettings::EFirewallTestType eFirewallType );
+	void						SetFirewallTest( FirewallSettings::EFirewallTestType eFirewallType );
 
 	void						connectSignals( void );
 	void						updateDlgFromSettings( void );

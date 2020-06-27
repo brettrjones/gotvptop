@@ -36,8 +36,8 @@ public:
     uint16_t                    getTcpPort( void ) { return m_TcpPort; }
     void                        setExternalIp( std::string& externIp ) { m_ExternalIp = externIp; }
     std::string&                getExternalIp( void ) { return m_ExternalIp; }
-    void                        setFirewallTestType( EngineSettings::EFirewallTestType firewallTestType ) { m_FirewallTestType = firewallTestType; }
-    EngineSettings::EFirewallTestType getFirewallTestType( void ) { return m_FirewallTestType; }
+    void                        setFirewallTestType( FirewallSettings::EFirewallTestType firewallTestType ) { m_FirewallTestType = firewallTestType; }
+    FirewallSettings::EFirewallTestType getFirewallTestType( void ) { return m_FirewallTestType; }
     void                        setUseUpnpPortForward( bool useUpnp ) { m_UseUpnp = useUpnp; }
     bool                        getUseUpnpPortForward( void ) { return m_UseUpnp; }
 
@@ -46,7 +46,7 @@ public:
     std::string					m_PreferredNetworkAdapterIp;
     uint16_t                    m_TcpPort{ NET_DEFAULT_NETSERVICE_PORT };
     std::string					m_ExternalIp;
-    EngineSettings::EFirewallTestType m_FirewallTestType{ EngineSettings::EFirewallTestType::eFirewallTestUrlConnectionTest };
+    FirewallSettings::EFirewallTestType m_FirewallTestType{ FirewallSettings::eFirewallTestUrlConnectionTest };
     bool					    m_UseUpnp{ false };
 };
 

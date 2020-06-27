@@ -32,8 +32,9 @@ public:
     void                        setConnectionTestAvail( bool avail );
     void                        setDirectConnectTested( bool isTested, bool requiresRelay = false );
     void                        setConnectToRelay( bool connectedToRelay );
-    void                        setIpAddress( std::string& ipAddr );
+    void                        setIpAddress( std::string ipAddr );
     void                        setIpPort( uint16_t ipPort );
+    void                        setFirewallTestType( FirewallSettings::EFirewallTestType firewallTestType );
 
     bool                        isInternetAvailable( void )       { return m_InternetAvail; };
     bool                        isNetHostAvailable( void )        { return m_NetworkHostAvail; };
@@ -41,8 +42,12 @@ public:
     bool                        isP2PAvailable( void )            { return m_DirectConnectTested && (!m_RequriesRelay || m_ConnectedToRelay); };
     bool                        requiresRelay( void )             { return m_RequriesRelay; };
     void                        getNodeUrl( std::string& retNodeUrl );
+
     std::string                 getIpAddress( void );
     uint16_t                    getIpPort( void );
+
+    EInternetStatus             getInternetStatus( void ) { return m_InternetStatus; }
+    ENetAvailStatus             getNetAvailStatus( void ) { return m_NetAvailStatus; }
 
 protected:
     void                        onNetStatusChange( void );
@@ -61,4 +66,8 @@ protected:
     bool                        m_IsConnectedGroupHost{ false };
     std::string                 m_IpAddr;
     uint16_t                    m_IpPort{ 0 };
+
+    FirewallSettings::EFirewallTestType           m_FirewallTestType{ FirewallSettings::eFirewallTestUrlConnectionTest };
+    EInternetStatus             m_InternetStatus{ eInternetNoInternet };
+    ENetAvailStatus             m_NetAvailStatus{ eNetAvailNoInternet };
 };

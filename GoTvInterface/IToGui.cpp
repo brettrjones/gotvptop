@@ -93,6 +93,41 @@ namespace
 
 		"Max Phone Shake Status ",
 	};
+
+    const char * InternetStatusEnumStrings[] =
+    {
+        "Internet: No Internet ",
+        "Internet: Internet Available ",
+        "Internet: No Connection Test Host ",
+        "Internet: Connection Test Host Available ",
+        "Internet: Assume Direct Connect ",
+        "Internet: Can Direct Connect ",
+        "Internet: Relay ",
+        "Internet: Max Internet Status ",
+    };
+
+    const char * NetAvailStatusEnumStrings[] =
+    {
+        "Net Avail: No Internet ",
+        "Net Avail: Host Available ",
+        "Net Avail: P2P Available ",
+        "Net Avail: Group Host ",
+        "Net Avail: Online With Relay ",
+        "Net Avail: Online And Can Direct Connect ",
+        "Net Avail: Max Net Avail Status ",
+    };
+}
+
+//! Internet Status as text
+const char * DescribeInternetStatus( EInternetStatus internetStatus )
+{
+    return InternetStatusEnumStrings[ internetStatus ];
+}
+
+//! Net Available Status as text
+const char * DescribeNetAvailStatus( ENetAvailStatus netAvailStatus )
+{
+    return NetAvailStatusEnumStrings[ netAvailStatus ];
 }
 
 const char * DescribeNetworkState( ENetworkStateType networkStateType )

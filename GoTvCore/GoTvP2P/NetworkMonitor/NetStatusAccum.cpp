@@ -44,6 +44,60 @@ void NetStatusAccum::resetNetStatus( void )
 //============================================================================
 void NetStatusAccum::onNetStatusChange( void )
 {
+    EInternetStatus internetStatus = m_InternetAvail ? eInternetNoInternet : eInternetInternetAvailable;
+    if( FirewallSettings::eFirewallTestAssumeNoFirewall == m_FirewallTestType )
+    {
+        if( m_InternetAvail )
+        {
+            internetStatus = eInternetAssumeDirectConnect;
+
+            std::string externIp;
+            m_Engine.getEngineSettings().getExternalIp( externIp );
+            setIpAddress( externIp );
+        }
+    }
+    else if( FirewallSettings::eFirewallTestAssumeFirewalled == m_FirewallTestType )
+    {
+        if( m_InternetAvail )
+        {
+            internetStatus = eInternetRequiresRelay;
+        }
+    }
+    else if( FirewallSettings::eFirewallTestUrlConnectionTest == m_FirewallTestType )
+    {
+        if( m_InternetAvail )
+        {
+            if( m_ConnectionTestAvail )
+            {
+                internetStatus = eInternetTestHostAvailable;
+                if( m_DirectConnectTested )
+                {
+                    if( m_RequriesRelay )
+                    {
+                        internetStatus = eInternetRequiresRelay;
+                    }
+                    else
+                    {
+                        internetStatus = eInternetCanDirectConnect;
+                    }
+                }
+            }
+            else
+            {
+                internetStatus = eInternetTestHostUnavailable;
+            }
+        }
+    }
+
+    if( m_InternetStatus != internetStatus )
+    {
+        m_AccumMutex.lock();
+        m_InternetStatus = internetStatus;
+        m_AccumMutex.unlock();
+
+        LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Internet Status %s", DescribeInternetStatus( internetStatus ) );
+    }
+
     ENetAvailStatus netAvailStatus = eNetAvailNoInternet;
     if( m_NetworkHostAvail )
     {
@@ -67,6 +121,15 @@ void NetStatusAccum::onNetStatusChange( void )
                 }
             }
         }
+    }
+
+    if( m_NetAvailStatus != netAvailStatus )
+    {
+        m_AccumMutex.lock();
+        m_NetAvailStatus = netAvailStatus;
+        m_AccumMutex.unlock();
+
+        LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Net Avail Status %s", DescribeNetAvailStatus( netAvailStatus ) );
     }
 
     m_Engine.getToGui().toGuiNetAvailableStatus( netAvailStatus );
@@ -129,7 +192,7 @@ void NetStatusAccum::setConnectToRelay( bool connectedToRelay )
 }
 
 //============================================================================
-void NetStatusAccum::setIpAddress( std::string& ipAddr )
+void NetStatusAccum::setIpAddress( std::string ipAddr )
 {
     m_AccumMutex.lock();
     m_IpAddr = ipAddr;
@@ -142,6 +205,19 @@ void NetStatusAccum::setIpPort( uint16_t ipPort )
     m_AccumMutex.lock();
     m_IpPort = ipPort;
     m_AccumMutex.unlock();
+}
+
+//============================================================================
+void NetStatusAccum::setFirewallTestType( FirewallSettings::EFirewallTestType firewallTestType )
+{
+    if( firewallTestType != m_FirewallTestType )
+    {
+        m_AccumMutex.lock();
+        m_FirewallTestType = firewallTestType;
+        m_AccumMutex.unlock();
+
+        onNetStatusChange();
+    }
 }
 
 //============================================================================

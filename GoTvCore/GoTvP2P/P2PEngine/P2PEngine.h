@@ -280,6 +280,10 @@ public:
     virtual uint16_t			fromGuiGetRandomTcpPort( void ) override;
     /// Get url for this node
     virtual void                fromGuiGetNodeUrl( std::string& nodeUrl ) override;
+    /// Get internet status
+    virtual EInternetStatus     fromGuiGetInternetStatus( void ) override;
+    /// Get network status
+    virtual ENetAvailStatus     fromGuiGetNetAvailStatus( void ) override;
 
 #ifdef TARGET_OS_ANDROID
     virtual int					fromGuiMulitcastPkt( unsigned char * data, int len ) override;
