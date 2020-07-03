@@ -96,10 +96,10 @@ void NetActionAnnounce::doAction( void )
 	}
 
 	NetServiceHdr netServiceHdr;
-	char rxBuf[4096 * 4];
+	char rxBuf[(4096 * 4) + 1];
 	if( false == m_NetServiceUtils.rxNetServiceCmd( &netServConn, 
 													rxBuf, 
-													sizeof( rxBuf ), 
+													sizeof( rxBuf ) - 1, 
 													netServiceHdr,
 													ANCHOR_RX_HDR_TIMEOUT,
 													ANCHOR_RX_DATA_TIMEOUT ) )
@@ -111,6 +111,7 @@ void NetActionAnnounce::doAction( void )
 		return;
 	}
 
+    rxBuf[ sizeof( rxBuf ) - 1 ] = 0;
 	if( false == decryptHostList( rxBuf, netServiceHdr.m_ContentDataLen, acceptedPort ) )
 	{
 		netServConn.closeSkt();

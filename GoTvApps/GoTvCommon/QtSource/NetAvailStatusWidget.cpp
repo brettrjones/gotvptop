@@ -26,9 +26,11 @@ NetAvailStatusWidget::NetAvailStatusWidget( QWidget * parent )
 , m_MyApp( GetAppInstance() )
 , m_NotAvailColor( COLOR_GREY_MEDIUM )
 , m_InProgressColor( COLOR_YELLOW_MEDIUM )
+, m_NoRelayColor( COLOR_ORANGE )
 , m_WithRelayColor( COLOR_GREEN_MEDIUM )
 , m_DirectConnectColor( COLOR_GREEN )
 {
+    toGuiNetAvailStatus( m_MyApp.getEngine().getNetStatusAccum().getNetAvailStatus() );
 }
 
 //============================================================================
@@ -95,13 +97,24 @@ QColor NetAvailStatusWidget::determineBarColor( int barNum )
 {
     bool isInactive = ( barNum > m_NetAvailStatus );
     QColor barColor = isInactive ? m_NotAvailColor : m_InProgressColor;
-    if( ( eNetAvailFullOnlineWithRelay == m_NetAvailStatus ) && !isInactive )
+    if( !isInactive )
     {
-        barColor = m_WithRelayColor;
-    }
-    else if( eNetAvailFullOnlineWithRelay == m_NetAvailStatus )
-    {
-        barColor = m_DirectConnectColor;
+        if( eNetAvailOnlineButNoRelay == m_NetAvailStatus )
+        {
+            barColor = m_NoRelayColor;
+        }
+        else if( eNetAvailFullOnlineWithRelay == m_NetAvailStatus )
+        {
+            barColor = m_WithRelayColor;
+        }
+        else if( eNetAvailFullOnlineWithRelay == m_NetAvailStatus )
+        {
+            barColor = m_DirectConnectColor;
+        }
+        else if( eNetAvailFullOnlineDirectConnect == m_NetAvailStatus )
+        {
+            barColor = m_DirectConnectColor;
+        }
     }
 
     return barColor;

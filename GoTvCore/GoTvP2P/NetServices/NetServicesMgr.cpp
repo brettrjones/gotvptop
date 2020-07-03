@@ -331,10 +331,10 @@ bool NetServicesMgr::sendAndRecievePing( VxTimer& pingTimer, VxSktConnectSimple&
 	}
 
 	double endSendTime = pingTimer.elapsedSec();
-	char rxBuf[ 512 ];
+	char rxBuf[ 513 ];
 	rxBuf[0] = 0;
 	NetServiceHdr netServiceHdr;
-	if( false == m_NetServiceUtils.rxNetServiceCmd( &toClientConn, rxBuf, sizeof( rxBuf ), netServiceHdr, receiveTimeout, receiveTimeout )  )
+	if( false == m_NetServiceUtils.rxNetServiceCmd( &toClientConn, rxBuf, sizeof( rxBuf ) - 1, netServiceHdr, receiveTimeout, receiveTimeout )  )
 	{
 		double failResponseTime = pingTimer.elapsedSec();
         LogModule( eLogIsPortOpenTest, LOG_ERROR, "##P NetServicesMgr::sendAndRecievePing: no response with timeout spec %d and times connect %3.3f sec send %3.3f sec fail respond %3.3f sec thread 0x%x",
@@ -343,6 +343,7 @@ bool NetServicesMgr::sendAndRecievePing( VxTimer& pingTimer, VxSktConnectSimple&
 		return false;
 	}
 
+    rxBuf[ sizeof( rxBuf ) - 1 ] = 0;
 	toClientConn.closeSkt();
 
 	double successResponseTime = pingTimer.elapsedSec();
@@ -453,10 +454,23 @@ void NetServicesMgr::netActionResultRandomConnect( EAppErr eAppErr, HostList * a
 //============================================================================
 void NetServicesMgr::netActionResultIsMyPortOpen( EAppErr eAppErr, std::string& myExternalIp )
 {
-	LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen err %d extern ip %s\n", eAppErr, myExternalIp.c_str() );
-    if( eAppErr != eAppErrNone )
+    if( eAppErr == eAppErrNone )
     {
-        m_Engine.getNetStatusAccum().setDirectConnectTested( false, false );
+        LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen CAN DIRECT CONNECT extern ip %s\n", myExternalIp.c_str() );
+        // tested and can direct connect
+        m_Engine.getNetStatusAccum().setDirectConnectTested( true, false, myExternalIp );
+    }
+    else if( eAppErr == eAppErrPortIsClosed )
+    {
+        // tested but cannot direct connect
+        LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen REQUIRES RELAY extern ip %s\n", myExternalIp.c_str() );
+        m_Engine.getNetStatusAccum().setDirectConnectTested( true, true, myExternalIp );
+    }
+    else
+    {
+        // port open test failed with other error
+        LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen err %d extern ip %s\n", eAppErr, myExternalIp.c_str() );
+        m_Engine.getNetStatusAccum().setDirectConnectTested( false, false, myExternalIp );
     }
 
  	if( m_pfuncPortOpenCallbackHandler )
@@ -844,12 +858,12 @@ EAppErr NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
 	}
 
 	VxSleep( 1000 );
-	char rxBuf[ 512 ];
+	char rxBuf[ 513 ];
 	rxBuf[ 0 ] = 0;
 	NetServiceHdr netServiceHdr;
 	if( false == m_NetServiceUtils.rxNetServiceCmd( netServConn, 
 													rxBuf, 
-													sizeof( rxBuf ), 
+													sizeof( rxBuf ) - 1, 
 													netServiceHdr, 
 													IS_PORT_OPEN_RX_HDR_TIMEOUT, 
 													IS_PORT_OPEN_RX_DATA_TIMEOUT ) )
@@ -863,6 +877,7 @@ EAppErr NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
 		return eAppErrNetServicesFailedToRespond;
 	}
 
+    rxBuf[ sizeof( rxBuf ) - 1 ] = 0;
 	std::string content = rxBuf;
 	if( 0 == content.length() )
 	{

@@ -680,336 +680,302 @@ SOCKET VxConnectTo( InetAddress& lclIp, InetAddress& rmtIp, uint16_t u16Port, in
 		*retSktErr = 0;
 	}
 
-	fd_set			oSktSet; 
-    socklen_t		iSktLen;
-	struct timeval	tv;
     SOCKET			sktHandle = INVALID_SOCKET;
-    int             iResult = 0;
 	std::string		strRmtIp = rmtIp.toStdString();
 
 	RCODE rc = 0;
 
-#if USE_SKT_HINTS
-	struct addrinfo * poAddrInfo;
-	struct addrinfo * poResultAddr;
-	struct addrinfo oHints;
-	VxFillHints( oHints, false, false );
-
-	char as8Port[16];
-	sprintf( as8Port, "%d", u16Port);
-
-	//LogMsg( LOG_INFO, "VxConnectTo port %d ms %d\n", u16Port, iConnectTimeoutMs ); 
-	int error = getaddrinfo( strRmtIp.c_str(), as8Port, &oHints, &poAddrInfo );
-	if( error != 0 ) 
-	{
-		if( 0 != retSktErr )
-		{
-			LogMsg( LOG_INFO, "VxConnectTo port %d ms %d getaddrinfo FAILED with error %d\n", u16Port, iConnectTimeoutMs, error ); 
-			*retSktErr = error;
-		}
-
-		return INVALID_SOCKET;
-	}
-#else
-    struct sockaddr_storage sktAddrStorage;
-    memset(&sktAddrStorage, 0, sizeof(struct sockaddr_storage));
-    socklen_t sktAddrLen = sizeof(struct sockaddr_storage);
-
-    struct sockaddr_in *sktAddrIn = (struct sockaddr_in*)&sktAddrStorage;
-    sktAddrIn->sin_family = AF_INET;
-    sktAddrIn->sin_port = htons((unsigned short) (u16Port & 0xFFFF));
-    sktAddrIn->sin_addr.s_addr = inet_addr( strRmtIp.c_str() );
-    struct sockaddr *sktAddr = (struct sockaddr*)&sktAddrStorage;
-#endif // USE_SKT_HINTS
-
-	bool bConnectSuccess = false;
-    int64_t timeStartConnect = GetGmtTimeMs();
 	// Try all returned addresses until one works
 #if USE_SKT_HINTS
-    for( poResultAddr = poAddrInfo; poResultAddr != NULL; poResultAddr = poResultAddr->ai_next )
-#endif // USE_SKT_HINTS
+    struct addrinfo * poAddrInfo;
+    struct addrinfo * poResultAddr;
+    struct addrinfo oHints;
+    VxFillHints( oHints, false, false );
+
+    char as8Port[ 16 ];
+    sprintf( as8Port, "%d", u16Port );
+
+    //LogMsg( LOG_INFO, "VxConnectTo port %d ms %d\n", u16Port, iConnectTimeoutMs ); 
+    int error = getaddrinfo( strRmtIp.c_str(), as8Port, &oHints, &poAddrInfo );
+    if( error != 0 )
     {
-		//LogMsg( LOG_SKT, "VxConnectTo: create socket for ip %s port %d\n", strRmtIp.c_str(), u16Port );
-#if USE_SKT_HINTS
-        sktHandle = socket( poResultAddr->ai_family, poResultAddr->ai_socktype, poResultAddr->ai_protocol )
-#else
-        sktHandle = socket( AF_INET, SOCK_STREAM, IPPROTO_TCP );
-#endif // USE_SKT_HINTS
+        if( 0 != retSktErr )
+        {
+            LogMsg( LOG_INFO, "VxConnectTo port %d ms %d getaddrinfo FAILED with error %d\n", u16Port, iConnectTimeoutMs, error );
+            *retSktErr = error;
+        }
+
+        return INVALID_SOCKET;
+    }
+
+    for( poResultAddr = poAddrInfo; poResultAddr != NULL; poResultAddr = poResultAddr->ai_next )
+    {
+        sktHandle = socket( poResultAddr->ai_family, poResultAddr->ai_socktype, poResultAddr->ai_protocol );
         if( INVALID_SOCKET == sktHandle )
-		{
-			// create socket error
-			rc = VxGetLastError();
+        {
+            // create socket error
+            rc = VxGetLastError();
             LogModule( eLogConnect, LOG_VERBOSE, "VxConnectTo: socket create error %s\n", VxDescribeSktError( rc ) );
-            return INVALID_SOCKET;
-		}
+            continue;
+        }
 
-        //VxSetSktAllowReusePort( sktHandle );
-
-		if( iConnectTimeoutMs )
-		{
-			//LogMsg( LOG_SKT, "VxConnectTo: timeout %d skt handle %d connect no block ip %s port %d\n", iConnectTimeoutMs, sktHandle, strRmtIp.c_str(), u16Port );
-			// connect to the ip without timeout
-			// set to non blocking
-			::VxSetSktBlocking( sktHandle, false );
-			//LogMsg( LOG_INFO, "VxConnectTo: skt %d attempt no block connect\n", m_iSktId );
-#if USE_SKT_HINTS
-            iResult = connect( sktHandle, poResultAddr->ai_addr, poResultAddr->ai_addrlen );
+        socklen_t sktAddrLen = sizeof( struct sockaddr_storage );
+        sktHandle = VxConnectToAddr( sktHandle, poAddrInfo, sktAddrLen, iConnectTimeoutMs, retSktErr );
+        if( INVALID_SOCKET != sktHandle )
+        {
+            break;
+        }
+    }
 #else
-            iResult = connect( sktHandle, sktAddr, sktAddrLen );
+    struct sockaddr_storage sktAddrStorage;
+    memset( &sktAddrStorage, 0, sizeof( struct sockaddr_storage ) );
+
+    struct sockaddr_in *sktAddrIn = ( struct sockaddr_in* )&sktAddrStorage;
+    sktAddrIn->sin_family = AF_INET;
+    sktAddrIn->sin_port = htons( ( unsigned short )( u16Port & 0xFFFF ) );
+    sktAddrIn->sin_addr.s_addr = inet_addr( strRmtIp.c_str() );
+    socklen_t sktAddrLen = sizeof( struct sockaddr_storage );
+    struct sockaddr *sktAddr = ( struct sockaddr* )&sktAddrStorage;
+
+    sktHandle = socket( AF_INET, SOCK_STREAM, IPPROTO_TCP );
+    if( INVALID_SOCKET != sktHandle )
+    {
+        sktHandle = VxConnectToAddr( sktHandle, sktAddr, sktAddrLen, iConnectTimeoutMs, retSktErr );
+    }
 #endif // USE_SKT_HINTS
-			if( 0 == iResult )
-			{
-				// connected
-				::VxSetSktBlocking( sktHandle, true );
-                LogModule( eLogConnect, LOG_VERBOSE, "VxConnectTo: SUCCESS skt handle %d connect no block ip %s port %d in %d seconds\n",
-                           sktHandle, strRmtIp.c_str(), u16Port, TimeElapsedGmtSec( timeStartConnect ) );
-				bConnectSuccess = true;
-				goto connected;
-			}
 
-			rc = VxGetLastError();
+    if( INVALID_SOCKET == sktHandle )
+	{
+        rc = VxGetLastError();
+        LogModule( eLogConnect, LOG_VERBOSE, "VxConnectTo: socket connect error %s to %s", VxDescribeSktError( rc ), strRmtIp.c_str() );
+        if( 0 != retSktErr )
+        {
+            if( 0 == *retSktErr )
+            {
+                *retSktErr = rc;
+            }
+        }
+    }
+
+    return sktHandle;
+}
+
+//============================================================================
+std::string VxSktAddrToString( struct sockaddr* sktAddr, int sktAddrLen )
+{
+    std::string ipAndPort = "0.0.0.0:0";
+    if( sktAddr )
+    {
+        struct sockaddr_in *sktAddrIn = ( struct sockaddr_in* )sktAddr;
+        if( sktAddrIn->sin_family == AF_INET )
+        {
+            ipAndPort = inet_ntoa( sktAddrIn->sin_addr );
+            ipAndPort += ":";
+            ipAndPort += std::to_string( ntohs( sktAddrIn->sin_port ) );
+        }
+    }
+
+    return ipAndPort;
+}
+
+//============================================================================
+SOCKET VxConnectToAddr(SOCKET sktHandle, struct sockaddr* sktAddr, socklen_t sktAddrLen, int iConnectTimeoutMs, RCODE * retSktErr)
+{
+    if( INVALID_SOCKET == sktHandle )
+    {
+        LogModule( eLogConnect, LOG_ERROR, "VxConnectToAddr: invalid socket handle" );
+        return INVALID_SOCKET;
+    }
+
+    if( !sktAddr )
+    {
+        LogModule( eLogConnect, LOG_ERROR, "VxConnectToAddr: null sktAddr" );
+        return INVALID_SOCKET;
+    }
+
+    std::string ipAndPort = VxSktAddrToString( sktAddr, sktAddrLen );
+
+    int64_t timeStartConnect = GetGmtTimeMs();
+    //VxSetSktAllowReusePort( sktHandle );
+
+    if( iConnectTimeoutMs > 0 )
+    {
+        //LogMsg( LOG_SKT, "VxConnectTo: timeout %d skt handle %d connect no block ip %s port %d\n", iConnectTimeoutMs, sktHandle, strRmtIp.c_str(), u16Port );
+        // first try connect to the ip without timeout
+        // set to non blocking
+        ::VxSetSktBlocking( sktHandle, false );
+
+        int iResult = connect( sktHandle, sktAddr, sktAddrLen );
+
+        if( 0 == iResult )
+        {
+            // connected
+            ::VxSetSktBlocking( sktHandle, true );
+            LogModule( eLogConnect, LOG_VERBOSE, "VxConnectToAddr: SUCCESS skt handle %d to %s in %d sec",
+                       sktHandle, ipAndPort.c_str(), TimeElapsedGmtSec( timeStartConnect ) );
+            return sktHandle;
+        }
+
+        RCODE rc = VxGetLastError();
 #ifdef TARGET_OS_WINDOWS
-			if( rc != WSAEWOULDBLOCK )
+        if( rc != WSAEWOULDBLOCK )
 #else
-			if( rc != EINPROGRESS )
+        if( rc != EINPROGRESS )
 #endif // TARGET_OS_WINDOWS
-			{
-				// some other error other than need more time
-                LogModule( eLogConnect, LOG_VERBOSE,  "VxConnectTo: skt connect to %s %d error %s in %d seconds\n",
-                           strRmtIp.c_str(), u16Port, VxDescribeSktError( rc ), TimeElapsedGmtSec( timeStartConnect ) );
+        {
+            // some other error other than need more time
+            LogModule( eLogConnect, LOG_VERBOSE,  "VxConnectToAddr: skt connect error %s in %d seconds to %s\n",
+                       VxDescribeSktError( rc ), TimeElapsedGmtSec( timeStartConnect ), ipAndPort.c_str() );
 
-				VxCloseSktNow( sktHandle );
-                return INVALID_SOCKET;
-			}
+            VxCloseSktNow( sktHandle );
+            return INVALID_SOCKET;
+        }
 
-			// needed more time so do connect with timeout
+        // needed more time so do connect with timeout
+        ::VxSetSktBlocking( sktHandle, true );
+        struct timeval tv;
+        fd_set sktSet;
 
-			VxTimer connectTimer;
-            //::VxSetSktBlocking( sktHandle, true );
-			do
-			{ 
-#ifdef DEBUG_SKTS
-				LogMsg( LOG_SKT, "VxConnectTo: skt handle %d Attempt connect with timeout %d\n", sktHandle, iConnectTimeoutMs );
-#endif // DEBUG_SKTS
-				tv.tv_sec = iConnectTimeoutMs / 1000; 
-				tv.tv_usec = (iConnectTimeoutMs % 1000) * 1000; 
-				FD_ZERO( &oSktSet ); 
-				FD_SET( sktHandle, &oSktSet ); 
-                iResult = select( sktHandle+1,  // __nfds
-                                  NULL,         // read ready
-                                  &oSktSet,     // write ready
-                                  NULL,         // exceptions
-                                  &tv );        // time spec
-                if ( ( iResult > 0 ) && FD_ISSET(sktHandle, &oSktSet) )
+        do
+        {
+            LogModule( eLogConnect, LOG_VERBOSE, "VxConnectToAddr: skt handle %d Attempt connect with timeout %d to %s\n", sktHandle, iConnectTimeoutMs, ipAndPort.c_str() );
+
+            tv.tv_sec = iConnectTimeoutMs / 1000;
+            tv.tv_usec = (iConnectTimeoutMs % 1000) * 1000;
+            FD_ZERO( &sktSet );
+            FD_SET( sktHandle, &sktSet );
+            iResult = select( sktHandle+1,  // __nfds
+                              NULL,         // read ready
+                              &sktSet,      // write ready
+                              NULL,         // exceptions
+                              &tv );        // time spec
+
+            if( iResult < 0 && TimeElapsedGmtMs( timeStartConnect ) < iConnectTimeoutMs)
+            {
+                LogMsg( LOG_ERROR, "VxConnectToAddr: ERROR socket select time out is %d but %lld ms elapsed to %s",
+                        iConnectTimeoutMs, TimeElapsedGmtMs( timeStartConnect ), ipAndPort.c_str() );
+            }
+
+            if ( ( iResult > 0 ) && FD_ISSET(sktHandle, &sktSet ) )
+            {
+                LogModule( eLogConnect, LOG_VERBOSE, "VxConnectToAddr: Connect Success skt handle %d to %s in %d sec",
+                           sktHandle, ipAndPort.c_str(), TimeElapsedGmtSec( timeStartConnect ));
+                ::VxSetSktBlocking( sktHandle, true );
+                return sktHandle;
+            }
+            else if (iResult < 0 && errno == EINTR)
+            {
+                /* We were interrupted by a signal.  Just indicate a
+                   timeout even though we are early. */
+                if( 0 != retSktErr )
                 {
-                    ::VxSetSktBlocking( sktHandle, true );
-                    bConnectSuccess = true;
-                    return sktHandle;
+                    *retSktErr = errno;
                 }
-                else if (iResult < 0 && errno == EINTR) {
-                    /* We were interrupted by a signal.  Just indicate a
-                       timeout even though we are early. */
-                    if( 0 != retSktErr )
-                    {
-                        *retSktErr = errno;
-                    }
 
+                LogModule( eLogConnect, LOG_VERBOSE, "VxConnectToAddr: skt handle %d timeout %d select error %d to %s in %d sec",
+                           sktHandle, iConnectTimeoutMs, errno, ipAndPort.c_str(), TimeElapsedGmtSec( timeStartConnect ) );
+                VxCloseSktNow( sktHandle );
+                sktHandle = INVALID_SOCKET;
+                break;
+            }
+            else if( ( iResult < 0 )
+               && ( errno != 4 )
+               && ( errno != 10004 ) )
+            {
+                LogModule( eLogConnect, LOG_VERBOSE, "VxConnectToAddr: skt handle %d timeout %d select error %d to %s in %d sec",
+                           sktHandle, iConnectTimeoutMs, errno, ipAndPort.c_str(), TimeElapsedGmtSec( timeStartConnect ) );
+
+                if( 0 != retSktErr )
+                {
+                    *retSktErr = errno;
+                }
+
+                VxCloseSktNow( sktHandle );
+                sktHandle = INVALID_SOCKET;
+                break;
+            }
+            else if( iResult > 0 )
+            {
+                // Socket selected for write
+                int iSktLen = sizeof(int);
+                int valopt = 0;
+                if( getsockopt( sktHandle, SOL_SOCKET, SO_ERROR, (char*)(&valopt), &iSktLen ) < 0 )
+                {
+                    rc = VxGetLastError();
+                    LogModule( eLogConnect, LOG_VERBOSE, "VxConnectToAddr: skt handle %d Error %d in getsockopt() to %s in %d sec",
+                               sktHandle, rc, ipAndPort.c_str(), TimeElapsedGmtSec( timeStartConnect ) );
                     VxCloseSktNow( sktHandle );
                     sktHandle = INVALID_SOCKET;
                     break;
                 }
-
-				//LogMsg( LOG_INFO, "VxConnectTo: skt %d Attempt connect with timeout result %d\n", m_iSktId, iResult );
-                else if( ( iResult < 0 )
-				   && ( errno != 4 ) 
-				   && ( errno != 10004 ) )
-				{ 
-					// error
-#ifdef DEBUG_SKTS
-					LogMsg( LOG_SKT, "VxConnectTo: skt handle %d timeout %d select error %d\n", sktHandle, iConnectTimeoutMs, errno );
-#endif // DEBUG_SKTS
-					if( 0 != retSktErr )
-					{
-						*retSktErr = errno;
-					}
-
-					VxCloseSktNow( sktHandle );
-					break;
-				} 
-				else if( iResult > 0 )
-				{ 
-					//LogMsg( LOG_INFO, "VxConnectTo: skt %d Selecting for write\n", m_iSktId );
-					// Socket selected for write 
-					iSktLen = sizeof(int); 
-                    int valopt = 0;
-					if( getsockopt( sktHandle, SOL_SOCKET, SO_ERROR, (char*)(&valopt), &iSktLen ) < 0 )
-					{ 
-						rc = VxGetLastError();
-#ifdef DEBUG_SKTS
-						LogMsg( LOG_INFO, "VxConnectTo: skt handle %d Error %d in getsockopt() to ip %s\n", sktHandle, rc, strRmtIp.c_str() );
-#endif // DEBUG_SKTS
-						VxCloseSktNow( sktHandle );
-						break;
-					} 
-					else
-					{
-						//LogMsg( LOG_INFO, "VxConnectTo: skt %d Selecting for write value returned %d\n", m_iSktId, valopt );
-						// Check the value returned... 
-						if( valopt ) 
-                        {
-                            #ifdef DEBUG_SKTS
-                                 LogMsg( LOG_INFO, "VxConnectTo: skt handle %d timeout %d getsockopt valopt %d result %d in delayed connection to ip %s\n", sktHandle, iConnectTimeoutMs, valopt, iResult, strRmtIp.c_str() );
-                            #endif // DEBUG_SKTS
-
-                            if( 0 != retSktErr )
-                            {
-                                *retSktErr = valopt;
-                            }
-
-                            VxCloseSktNow( sktHandle );
-
-//#define	ETIMEDOUT	110	/* Connection timed out */
-//#define	ECONNREFUSED	111	/* Connection refused */
-//#define	EHOSTDOWN	112	/* Host is down */
-//#define	EHOSTUNREACH	113	/* No route to host */
-//#define	EALREADY	114	/* Operation already in progress */
-//#define	EINPROGRESS	115	/* Operation now in progress */
-#if 0 // doesn't seem to help 
-							/*
-							if( ECONNREFUSED == valopt )
-							{
-								if( connectTimer.elapsedMs() < iConnectTimeoutMs )
-								{
-									// may be able to connect on retry so try in blocking mode
-                                    sktHandle = socket( poResultAddr->ai_family, poResultAddr->ai_socktype, poResultAddr->ai_protocol );
-                                    if( INVALID_SOCKET == sktHandle )
-                                    {
-                                        // create socket error
-                                        rc = VxGetLastError();
-                                        LogMsg( LOG_INFO, "VxConnectTo: retry socket create error %s\n", VxDescribeSktError( rc ) );
-                                        break;
-                                    }
-
-                                    VxSetSktAllowReusePort( sktHandle );
-                                    VxSleep( 1000 );
-
-									int blockConnResult = connect( sktHandle, poResultAddr->ai_addr, poResultAddr->ai_addrlen );
-									if( 0 == blockConnResult )
-									{
-                                        //LogMsg( LOG_INFO, "VxConnectTo: retry skt handle %d timeout %d SUCCESS retry blocked connection to ip %s\n", sktHandle, iConnectTimeoutMs, strRmtIp.c_str() );
-                                        if( 0 != retSktErr )
-                                        {
-                                            *retSktErr = 0;
-                                        }
-
-										return sktHandle;
-									}
-									else
-									{
-										rc = VxGetLastError();
-										LogMsg( LOG_INFO, "VxConnectTo: retry skt handle %d timeout %d FAIL result %d error %d retry blocked connection to ip %s\n", sktHandle, iConnectTimeoutMs, blockConnResult, rc, strRmtIp.c_str() );
-										VxCloseSktNow( sktHandle );
-                                        sktHandle = INVALID_SOCKET;
-									}
-								}
-							}*/
-#endif // TARGET_OS_WINDOWS
-
-                            break;
-						}
-						else
-						{
-							// connected
-#ifdef DEBUG_SKTS
-							LogMsg( LOG_SKT, "VxConnectTo: SUCCESS skt handle %d connected in delayed connection to ip %s\n", sktHandle, strRmtIp.c_str() );
-#endif // DEBUG_SKTS
-							::VxSetSktBlocking( sktHandle, true );
-							bConnectSuccess = true;
-							break;
-						} 
-					}
-				} 
-				else 
-				{ 
-                    LogModule( eLogConnect, LOG_VERBOSE, "VxConnectTo: skt handle %d connect to %s port %d timed out %d ... canceling at %d seconds\n",
-                               sktHandle, strRmtIp.c_str(), u16Port, iConnectTimeoutMs, TimeElapsedGmtSec( timeStartConnect ) );
-					if( 0 != retSktErr )
-					{
-						*retSktErr = -1;
-					}
-
-					VxCloseSktNow( sktHandle );
-					break; 
-				} 
-			} while (1); 
-			
-			if( bConnectSuccess )
-			{
-                return sktHandle;
-			}
-		}
-		else
-		{
-            // connect with no timeout
-#ifdef DEBUG_SKTS
-			LogMsg( LOG_SKT, "VxConnectTo: NO TIMEOUT skt handle %d connect no block ip %s port %d\n", sktHandle, strRmtIp.c_str(), u16Port );
-#endif // DEBUG_SKTS
-			// connect to the ip without timeout
-#if USE_SKT_HINTS
-            iResult = connect( sktHandle, poResultAddr->ai_addr, poResultAddr->ai_addrlen );
-#else
-            iResult = connect( sktHandle, sktAddr, sktAddrLen );
-#endif // USE_SKT_HINTS
-			if( 0 != iResult )
-			{
-				// connect error
-				rc = VxGetLastError();
-                LogModule( eLogConnect, LOG_VERBOSE, "VxConnectTo: skt handle %d connect to %s error %s in %d seconds\n",
-								sktHandle,
-								strRmtIp.c_str(),
-                                VxDescribeSktError( rc ), TimeElapsedGmtSec( timeStartConnect ) );
-				if( 0 != retSktErr )
-				{
-					*retSktErr = rc;
-				}
-
-				VxCloseSktNow( sktHandle );
-				return INVALID_SOCKET;
-			}
-			else
-			{
-                LogModule( eLogConnect, LOG_VERBOSE, "VxConnectTo: SUCCESS skt handle %d connect to %s in %d seconds\n",
-                                sktHandle,
-                                strRmtIp.c_str(),
-                                TimeElapsedGmtSec( timeStartConnect ) );
-                if( !lclIp.isValid() )
+                else
                 {
-                    VxGetLclAddress(sktHandle, lclIp);
+                    //LogMsg( LOG_INFO, "VxConnectTo: skt %d Selecting for write value returned %d\n", m_iSktId, valopt );
+                    // Check the value returned...
+                    if( valopt )
+                    {
+                        LogModule( eLogConnect, LOG_VERBOSE, "VxConnectToAddr: skt handle %d timeout %d getsockopt valopt %d result %d in delayed connection to %s in %d sec\n",
+                                   sktHandle, iConnectTimeoutMs, valopt, iResult, ipAndPort.c_str(), TimeElapsedGmtSec( timeStartConnect ) );
+
+                        if( 0 != retSktErr )
+                        {
+                            *retSktErr = valopt;
+                        }
+
+                        VxCloseSktNow( sktHandle );
+                        sktHandle = INVALID_SOCKET;
+                        break;
+                    }
+                    else
+                    {
+                        // connected
+                        LogModule( eLogConnect, LOG_VERBOSE, "VxConnectTo: SUCCESS skt handle %d connected in delayed connection to %s in %d sec\n",
+                                   sktHandle, ipAndPort.c_str(), TimeElapsedGmtSec( timeStartConnect ) );
+                        ::VxSetSktBlocking( sktHandle, true );
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                LogModule( eLogConnect, LOG_VERBOSE, "VxConnectTo: skt handle %d connect timed out %d ... canceling at %d seconds to %s",
+                           sktHandle, iConnectTimeoutMs, TimeElapsedGmtSec( timeStartConnect ), ipAndPort.c_str() );
+                if( 0 != retSktErr )
+                {
+                    *retSktErr = -1;
                 }
 
-				bConnectSuccess = true;
-                return sktHandle;
-			}
-		}
-	}
+                VxCloseSktNow( sktHandle );
+                sktHandle = INVALID_SOCKET;
+                break;
+            }
+        } while (1);
+    }
+    else
+    {
+        // connect with no timeout
+        LogModule( eLogConnect, LOG_VERBOSE, "VxConnectToAddr: NO TIMEOUT skt handle %d connect no block to %s", sktHandle, ipAndPort.c_str() );
 
-connected:
-	if( bConnectSuccess )
-	{
-		return sktHandle;
-	}
-	else
-	{
-		if( 0 != retSktErr )
-		{
-			if( 0 == *retSktErr )
-			{
-				*retSktErr = rc;
-			}
-		}
+        ::VxSetSktBlocking( sktHandle, true );
+        int iResult = connect( sktHandle, sktAddr, sktAddrLen );
+        if( 0 != iResult )
+        {
+            // connect error
+            RCODE rc = VxGetLastError();
+            LogModule( eLogConnect, LOG_VERBOSE, "VxConnectToAddr: skt handle %d connect error %s in %d seconds to %s",
+                            sktHandle,
+                            VxDescribeSktError( rc ), TimeElapsedGmtSec( timeStartConnect ), ipAndPort.c_str() );
+            if( 0 != retSktErr )
+            {
+                *retSktErr = rc;
+            }
 
-		return INVALID_SOCKET;
-	}
+            VxCloseSktNow( sktHandle );
+            sktHandle = INVALID_SOCKET;
+        }
+    }
+
+    return sktHandle;
 }
 
 //============================================================================
@@ -1252,63 +1218,6 @@ SOCKET VxConnectTo(		InetAddress&		lclIp,
 	}
 
 	return sktHandle;
-	/*
-	SOCKET sktHandle;
-	struct addrinfo hints, *servinfo, *p;
-	int rv;
-
-	memset(&hints, 0, sizeof hints);
-	//hints.ai_family = AF_UNSPEC;
-	//hints.ai_family = AF_INET
-	//hints.ai_family = AF_INET6
-	hints.ai_family = AF_INET;
-	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_protocol = IPPROTO_TCP;
-
-
-	char as8Buf[ 16 ];
-	sprintf( as8Buf, "%d", u16Port );
-
-	if( 0 != (rv = getaddrinfo(pIpAddr, as8Buf, &hints, &servinfo)) ) 
-	{
-		LogMsg( LOG_ERROR, "getaddrinfo: %s\n", gai_strerror(rv) );
-		return 1;
-	}
-
-	// loop through all the results and connect to the first we can
-	for( p = servinfo; p != NULL; p = p->ai_next ) 
-	{
-		if( -1 == (sktHandle = socket(p->ai_family, p->ai_socktype, p->ai_protocol) ) ) 
-		{
-			//perror("client: socket");
-			continue;
-		}
-
-		if( -1 == connect( sktHandle, p->ai_addr, p->ai_addrlen ) ) 
-		{
-			VxCloseSktNow(sktHandle);
-			//perror("client: connect");
-			continue;
-		}
-
-		VxGetRmtAddress( sktHandle, rmtIp );
-		break;
-	}
-
-	freeaddrinfo( servinfo ); // all done with this structure
-	if (p == NULL) 
-	{
-		fprintf(stderr, "client: failed to connect\n");
-		return INVALID_SOCKET;
-	}
-
-	//	inet_ntop(p->ai_family, get_in_addr((struct sockaddr *)p->ai_addr),
-	//		s, sizeof s);
-	//	printf("client: connecting to %s\n", s);
-
-
-	return sktHandle;
-	*/
 }
 
 //============================================================================
@@ -1357,6 +1266,7 @@ bool VxBindSkt( SOCKET oSocket, InetAddress & oLclAddr, uint16_t u16Port )
 	oLclAddr.fillAddress( oSktAddr, u16Port );
 	return VxBindSkt( oSocket, &oSktAddr );
 }
+
 //============================================================================
 bool VxTestConnectionOnSpecificLclAddress( InetAddress& oLclAddr )
 {

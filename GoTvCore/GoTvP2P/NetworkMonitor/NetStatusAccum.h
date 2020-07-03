@@ -30,7 +30,7 @@ public:
     void                        setInternetAvail( bool avail );
     void                        setNetHostAvail( bool avail );
     void                        setConnectionTestAvail( bool avail );
-    void                        setDirectConnectTested( bool isTested, bool requiresRelay = false );
+    void                        setDirectConnectTested( bool isTested, bool requiresRelay, std::string& myExternalIp );
     void                        setConnectToRelay( bool connectedToRelay );
     void                        setIpAddress( std::string ipAddr );
     void                        setIpPort( uint16_t ipPort );

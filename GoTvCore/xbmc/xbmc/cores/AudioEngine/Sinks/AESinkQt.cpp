@@ -144,7 +144,7 @@ void CAESinkQt::Deinitialize()
 //============================================================================
 inline CAEChannelInfo CAESinkQt::GetChannelLayout( const AEAudioFormat& format )
 {
-    int count = 2;
+    // int count = 2;
     CAEChannelInfo info;
 	info.setTo2ChannelLayout();
  //   for( unsigned int i = 0; i < count; ++i )

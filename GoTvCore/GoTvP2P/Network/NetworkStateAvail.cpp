@@ -205,18 +205,15 @@ void NetworkStateAvail::runNetworkState( void )
 
     if( eAppErrNone == directConnectTestResults.m_eAppErr )
     {
-        m_Engine.getNetStatusAccum().setConnectionTestAvail( true );
-        m_Engine.getNetStatusAccum().setDirectConnectTested( true, false );
+        m_Engine.getNetStatusAccum().setDirectConnectTested( true, false, directConnectTestResults.m_MyIpAddr );
     }
     else if( eAppErrPortIsClosed == directConnectTestResults.m_eAppErr )
     {
-        m_Engine.getNetStatusAccum().setConnectionTestAvail( true );
-        m_Engine.getNetStatusAccum().setDirectConnectTested( true, false );
+        m_Engine.getNetStatusAccum().setDirectConnectTested( true, true, directConnectTestResults.m_MyIpAddr );
     }
     else
     {
-        m_Engine.getNetStatusAccum().setConnectionTestAvail( false );
-        m_Engine.getNetStatusAccum().setDirectConnectTested( false, false );
+        m_Engine.getNetStatusAccum().setDirectConnectTested( false, false, directConnectTestResults.m_MyIpAddr );
         LogModule( eLogNetworkState, LOG_STATUS, "eNetworkStateTypeAvail Failed To Connect To Connection Test Server %s  %3.3f\n", netServiceUrl.c_str(), availTimer.elapsedSec() );
 
         if( IsLogEnabled( eLogNetworkState ) )

@@ -105,21 +105,31 @@ void NetStatusAccum::onNetStatusChange( void )
         if( m_DirectConnectTested )
         {
             netAvailStatus = eNetAvailP2PAvail;
-            if( m_GroupHostAvail || !m_GroupHostAvail ) // TODO implement group available status
+            if( requiresRelay() )
             {
-                netAvailStatus = eNetAvailGroupHost;
-                if( requiresRelay() )
+                if( m_ConnectedToRelay )
                 {
-                    if( m_ConnectedToRelay )
-                    {
-                        netAvailStatus = eNetAvailFullOnlineWithRelay;
-                    }
+                    netAvailStatus = eNetAvailFullOnlineWithRelay;
                 }
                 else
                 {
-                    netAvailStatus = eNetAvailFullOnlineDirectConnect;
+                    netAvailStatus = eNetAvailOnlineButNoRelay;
                 }
             }
+            else
+            {
+                netAvailStatus = eNetAvailFullOnlineDirectConnect;
+            }
+
+            if( eNetAvailFullOnlineDirectConnect == netAvailStatus || eNetAvailFullOnlineDirectConnect == netAvailStatus )
+            {
+                // fully connected
+                if( m_GroupHostAvail )
+                {
+                    netAvailStatus = eNetAvailGroupHost;
+                }
+            }
+           
         }
     }
 
@@ -169,13 +179,19 @@ void NetStatusAccum::setConnectionTestAvail( bool avail )
 }
 
 //============================================================================
-void NetStatusAccum::setDirectConnectTested( bool isTested, bool requiresRelay )
+void NetStatusAccum::setDirectConnectTested( bool isTested, bool requiresRelay, std::string& myExternalIp )
 {
-    if( isTested != m_DirectConnectTested || requiresRelay != m_RequriesRelay )
+    if( isTested != m_ConnectionTestAvail || isTested != m_DirectConnectTested || requiresRelay != m_RequriesRelay )
     {
+        m_ConnectionTestAvail = isTested;
         m_DirectConnectTested = isTested;
         m_RequriesRelay = requiresRelay;
-        LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Direct Connect Tested %d relay required ? %d", isTested, requiresRelay );
+        if( isTested && !myExternalIp.empty() )
+        {
+            setIpAddress( myExternalIp );
+        }
+
+        LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Direct Connect Tested %d relay required ? %d extern ip %s", isTested, requiresRelay, myExternalIp.c_str() );
         onNetStatusChange();
     }
 }

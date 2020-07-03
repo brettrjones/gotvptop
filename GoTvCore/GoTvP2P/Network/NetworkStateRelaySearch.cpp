@@ -153,6 +153,14 @@ void NetworkStateRelaySearch::startAnnounceServersListAndSearchThread( void )
 //============================================================================
 void NetworkStateRelaySearch::doRelaySearchState( void )
 {
+    // BRJ for now do not do relay search.. later on will design a way to attempt relay search if we connect to a group host
+    // group host will provide relay service
+    return;
+    if( eNetAvailOnlineButNoRelay != m_Engine.getNetStatusAccum().getNetAvailStatus() )
+    {
+        return;
+    }
+
 	m_RelaySearchMutex.lock();
 	m_BusyRelayList.clear();
 	m_RelaySearchMutex.unlock();
@@ -209,8 +217,7 @@ void NetworkStateRelaySearch::doRelaySearchState( void )
 	int64_t timeStartSearch = timeNow;
 	if( 120 > ( timeNow - timeLastGetList ) )
 	{
-        if( IsLogEnabled( eLogConnect ) )
-		    LogMsg( LOG_INFO, "Waiting 120 seconds before getting relays from anchor\n" );
+        LogModule( eLogConnect, LOG_INFO, "Waiting 120 seconds before getting relays from anchor\n" );
 		m_SearchThreadComplete = true;
 	}
 	else
@@ -219,14 +226,12 @@ void NetworkStateRelaySearch::doRelaySearchState( void )
 		startAnnounceServersListAndSearchThread();
 	}
 
-    if( IsLogEnabled( eLogConnect ) )
-	    LogMsg( LOG_STATUS, "eMyRelayStatusSearching\n" );
+    LogModule( eLogConnect, LOG_STATUS, "eMyRelayStatusSearching\n" );
 	//m_Engine.getToGui().toGuiMyRelayStatus( eMyRelayStatusSearching );
 
 	if( 0 == m_PreferredRelayList.m_ContactList.size() )
 	{
-        if( IsLogEnabled( eLogConnect ) )
-		    LogMsg( LOG_STATUS, "eMyRelayStatusNoRelaysListed 0 == m_PreferredRelayList.m_ContactList.size()\n" );
+        LogModule( eLogConnect, LOG_STATUS, "eMyRelayStatusNoRelaysListed 0 == m_PreferredRelayList.m_ContactList.size()\n" );
 		//m_Engine.getToGui().toGuiMyRelayStatus( eMyRelayStatusNoRelaysListed );
 	}
 
@@ -616,10 +621,10 @@ void NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers( void )
 	}
 
 	NetServiceHdr netServiceHdr;
-	char rxBuf[ sizeof( HostList ) + 1024 ];
+	char rxBuf[ (sizeof( HostList ) + 1024) + 1 ];
 	if( false == m_NetServiceUtils.rxNetServiceCmd( &netServConn, 
 													rxBuf, 
-													sizeof( rxBuf ), 
+													sizeof( rxBuf ) - 1, 
 													netServiceHdr,
 													ANCHOR_RX_HDR_TIMEOUT,
 													ANCHOR_RX_DATA_TIMEOUT ) )
@@ -629,6 +634,7 @@ void NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers( void )
 		return;
 	}
 
+    rxBuf[ sizeof( rxBuf ) - 1 ] = 0;
 	if( false == decryptHostList( rxBuf, netServiceHdr.m_ContentDataLen, acceptedPort ) )
 	{
 		netServConn.closeSkt();

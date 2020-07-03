@@ -56,6 +56,7 @@ protected:
 
     QColor                      m_NotAvailColor;
     QColor                      m_InProgressColor;
+    QColor                      m_NoRelayColor;
     QColor                      m_WithRelayColor;
     QColor                      m_DirectConnectColor;
 };

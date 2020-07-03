@@ -130,28 +130,28 @@ public:
 
     virtual ~DllLibass() override;
 
-    void ass_set_extract_fonts( ASS_Library * p1, int p2 );
-    void ass_set_fonts_dir( ASS_Library * p1, const char * p2 );
-    ASS_Library * ass_library_init( );
-    ASS_Renderer * ass_renderer_init( ASS_Library * p1 );
-    void ass_set_frame_size( ASS_Renderer * p1, int p2, int p3 );
-    void ass_set_aspect_ratio( ASS_Renderer * p1, double p2, double p3 );
-    void ass_set_margins( ASS_Renderer * p1, int p2, int p3, int p4, int p5 );
-    void ass_set_use_margins( ASS_Renderer * p1, int p2 );
-    void ass_set_line_position( ASS_Renderer * p1, double p2 );
-    void  ass_set_font_scale( ASS_Renderer * p1, double p2 );
-    ASS_Image * ass_render_frame( ASS_Renderer * p1, ASS_Track * p2, long long p3, int * p4 );
-    ASS_Track * ass_new_track( ASS_Library * p1 );
-    ASS_Track * ass_read_file( ASS_Library * p1, char * p2, char * p3 );
-    ASS_Track * ass_read_memory( ASS_Library * p1, char * p2, size_t p3, char * p4 );
-    void ass_free_track( ASS_Track * p1 );
-    void ass_set_fonts( ASS_Renderer* p1, const char* p2, const char* p3, int p4, const char* p5, int p6 );
-    void ass_set_style_overrides( ASS_Library* p1, char** p2 );
-    void ass_library_done( ASS_Library* p1 );
-    void ass_renderer_done( ASS_Renderer* p1 );
-    void ass_process_chunk( ASS_Track* p1, char* p2, int p3, long long p4, long long p5 );
-    void ass_process_codec_private( ASS_Track* p1, char* p2, int p3 );
-    void ass_set_message_cb( ASS_Library* p1, void( *p2 )( int level, const char *fmt, va_list args, void *data ), void* p3 );
+    void ass_set_extract_fonts( ASS_Library * p1, int p2 ) override;
+    void ass_set_fonts_dir( ASS_Library * p1, const char * p2 ) override;
+    ASS_Library * ass_library_init( ) override;
+    ASS_Renderer * ass_renderer_init( ASS_Library * p1 ) override;
+    void ass_set_frame_size( ASS_Renderer * p1, int p2, int p3 ) override;
+    void ass_set_aspect_ratio( ASS_Renderer * p1, double p2, double p3 ) override;
+    void ass_set_margins( ASS_Renderer * p1, int p2, int p3, int p4, int p5 ) override;
+    void ass_set_use_margins( ASS_Renderer * p1, int p2 ) override;
+    void ass_set_line_position( ASS_Renderer * p1, double p2 ) override;
+    void  ass_set_font_scale( ASS_Renderer * p1, double p2 ) override;
+    ASS_Image * ass_render_frame( ASS_Renderer * p1, ASS_Track * p2, long long p3, int * p4 ) override;
+    ASS_Track * ass_new_track( ASS_Library * p1 ) override;
+    ASS_Track * ass_read_file( ASS_Library * p1, char * p2, char * p3 ) override;
+    ASS_Track * ass_read_memory( ASS_Library * p1, char * p2, size_t p3, char * p4 ) override;
+    void ass_free_track( ASS_Track * p1 ) override;
+    void ass_set_fonts( ASS_Renderer* p1, const char* p2, const char* p3, int p4, const char* p5, int p6 ) override;
+    void ass_set_style_overrides( ASS_Library* p1, char** p2 ) override;
+    void ass_library_done( ASS_Library* p1 ) override;
+    void ass_renderer_done( ASS_Renderer* p1 ) override;
+    void ass_process_chunk( ASS_Track* p1, char* p2, int p3, long long p4, long long p5 ) override;
+    void ass_process_codec_private( ASS_Track* p1, char* p2, int p3 ) override;
+    void ass_set_message_cb( ASS_Library* p1, void( *p2 )( int level, const char *fmt, va_list args, void *data ), void* p3 ) override;
 };
 
 #endif // !USE_STATIC_LIBS

@@ -47,7 +47,7 @@ public:
     double                      GetCacheTotal( ) override;
    
     // This method returns latency of hardware ( in us )
-    virtual double              GetLatency() { return 0.0; };
+    virtual double              GetLatency() override { return 0.0; };
 
     unsigned int                AddPackets( uint8_t **data, unsigned int frames, unsigned int offset ) override;
     void                        Drain() override;

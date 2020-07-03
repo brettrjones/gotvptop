@@ -281,10 +281,10 @@ bool NetTestUtil::sendAndRecievePing( VxTimer& pingTimer, VxSktConnectSimple& to
     }
 
     double endSendTime = pingTimer.elapsedSec();
-    char rxBuf[ 512 ];
+    char rxBuf[ 513 ];
     rxBuf[ 0 ] = 0;
     NetServiceHdr netServiceHdr;
-    if( false == NetTestUtil::rxNetServiceCmd( &toClientConn, rxBuf, sizeof( rxBuf ), netServiceHdr, receiveTimeout, receiveTimeout ) )
+    if( false == NetTestUtil::rxNetServiceCmd( &toClientConn, rxBuf, sizeof( rxBuf ) - 1, netServiceHdr, receiveTimeout, receiveTimeout ) )
     {
         double failResponseTime = pingTimer.elapsedSec();
         LogModule( eLogIsPortOpenTest, LOG_ERROR, "## NetTestUtil::sendAndRecievePing: no response with timeout spec %d and times connect %3.3f sec send %3.3f sec fail respond %3.3f sec thread 0x%x",
@@ -293,6 +293,7 @@ bool NetTestUtil::sendAndRecievePing( VxTimer& pingTimer, VxSktConnectSimple& to
         return false;
     }
 
+    rxBuf[ sizeof( rxBuf ) - 1 ]
     toClientConn.closeSkt();
 
     double successResponseTime = pingTimer.elapsedSec();

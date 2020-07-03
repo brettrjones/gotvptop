@@ -18,7 +18,7 @@
 #ifdef TARGET_OS_WINDOWS
 # include "WS2tcpip.h"
 #endif // TARGET_OS_WINDOWS
-#define USE_BIND_LOCAL_IP 1  // bind to local ip address when using vpn causes connect fail with error 110 (Connection timed out)
+// #define USE_BIND_LOCAL_IP 1  // bind to local ip address when using vpn causes connect fail with error 110 (Connection timed out)
 
 #define EIM_ALIVE_TIMEDOUT          20000
 
@@ -72,22 +72,23 @@ SOCKET							VxConnectToWebsite( InetAddress&		oLclIp,			// ip of adapter to use
 													const char *		pWebsiteUrl,
 													std::string&		strHost,		// return host name.. example http://www.mysite.com/index.htm returns www.mysite.com
 													std::string&		strFile,		// return file name.. images/me.jpg
-													uint16_t&				u16Port,		// return port
+                                                    uint16_t&			u16Port,		// return port
 													int					iConnectTimeoutMs );
 
-bool							VxBindSkt( SOCKET oSocket, InetAddress & oLclAddr, uint16_t u16Port );
-SOCKET							VxConnectTo( InetAddress& oLclIp, InetAddress& oRmtIp, uint16_t u16Port, int iTimeoutMs = SKT_CONNECT_TIMEOUT, RCODE * retSktErr = 0 );
+bool							VxBindSkt( SOCKET sktHandle, InetAddress & oLclAddr, uint16_t u16Port );
+SOCKET							VxConnectTo( InetAddress& oLclIp, InetAddress& oRmtIp, uint16_t u16Port, int iTimeoutMs = SKT_CONNECT_TIMEOUT, RCODE * retSktErr = nullptr );
 SOCKET							VxConnectTo( InetAddress&		oLclIp,
 											 InetAddrAndPort&	oRmtIp,
 											 const char *		pIpOrUrl,				// remote ip or url
-											 uint16_t					u16Port,				// port to connect to
-											 int					iTimeoutMilliSeconds,	// milli seconds before connect attempt times out
-											 RCODE *				retSktErr = 0 );		// return connect error if retSktErr is not null
+                                             uint16_t			u16Port,				// port to connect to
+                                             int				iTimeoutMilliSeconds,	// milli seconds before connect attempt times out
+                                             RCODE *			retSktErr = 0 );		// return connect error if retSktErr is not null
+SOCKET                          VxConnectToAddr(SOCKET sktHandle, struct sockaddr* sktAddr, socklen_t sktAddrLen, int iConnectTimeoutMs = SKT_CONNECT_TIMEOUT, RCODE * retSktErr = nullptr);
+std::string                     VxSktAddrToString( struct sockaddr* sktAddr, int sktAddrLen );
 
-
-RCODE							VxGetLclAddress( SOCKET oSkt, InetAddrAndPort& oRetAddr );
+RCODE							VxGetLclAddress( SOCKET sktHandle, InetAddrAndPort& oRetAddr );
 RCODE                           VxGetLclAddress( SOCKET sktHandle, InetAddress& oRetAddr );
-RCODE							VxGetRmtAddress( SOCKET oSkt, InetAddrAndPort& oRetAddr );
+RCODE							VxGetRmtAddress( SOCKET sktHandle, InetAddrAndPort& oRetAddr );
 
 bool							VxIsIPv6Address( const char *addr );
 bool							VxIsIPv4Address( const char *addr );
@@ -96,14 +97,14 @@ const char *					VxStripIPv6ScopeID( const char *addr, std::string &buf );
 //! if new connection refresh default ip(s)
 void							VxRefreshDefaultIps( void );
 bool							VxCanConnectUsingIPv6( void );
-SOCKET							VxConnectToIPv6( const char * ipv6, uint16_t u16Port, int iTimeoutMs = SKT_IPV6_CONNECT_TIMEOUT, RCODE * retSktErr = 0 );
+SOCKET							VxConnectToIPv6( const char * ipv6, uint16_t u16Port, int iTimeoutMs = SKT_IPV6_CONNECT_TIMEOUT, RCODE * retSktErr = nullptr );
 																										//! receive data.. if timeout is set then will keep trying till buffer is full or error or timeout expires
 RCODE							VxReceiveSktData( SOCKET&			oSkt,
 												  char *			pRetBuf,				// buffer to receive data into
 												  int				iBufLenIn,				// length of buffer
-												  int *			iRetBytesReceived,		// number of bytes actually received
+                                                  int *             iRetBytesReceived,		// number of bytes actually received
 												  int				iTimeoutMilliSeconds = SKT_RECEIVE_TIMEOUT,	// milliseconds before receive attempt times out ( 0 = do not wait )
-												  bool			bAbortIfCrLfCrLf = false,		// if true then abort receive when \r\n\r\n is received
+                                                  bool              bAbortIfCrLfCrLf = false,		// if true then abort receive when \r\n\r\n is received
 												  bool *			pbRetGotCrLfCrLf = NULL );		// if received \r\n\r\n set to truevoid							VxFillHints( struct addrinfo& oHints, bool bUdpSkt = false, bool ipv6Only = false );
 
 bool							VxBindSkt( SOCKET oSocket, struct sockaddr_storage * poAddr );

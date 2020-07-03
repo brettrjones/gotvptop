@@ -252,6 +252,8 @@ std::string NetworkMonitor::determineLocalIp( void )
     m_Engine.getEngineSettings().getExternalIp( externIp );
 
     VxSktConnectSimple sktConnect;
+    static int connectAttemptCnt = 0;
+    connectAttemptCnt++;
 
     // only attempt connect to network host if we are not the host
     if( !m_Engine.getHasHostService( eHostServiceNetworkHost )
@@ -262,6 +264,7 @@ std::string NetworkMonitor::determineLocalIp( void )
                                            NET_MONITOR_CONNECT_TO_HOST_TIMOUT_MS );	// timeout attempt to connect
         if( INVALID_SOCKET != skt )
         {
+            connectAttemptCnt = 0;
             m_Engine.getNetStatusAccum().setInternetAvail( true );
             // get local address
             InetAddrAndPort lclAddr;
@@ -302,6 +305,7 @@ std::string NetworkMonitor::determineLocalIp( void )
                                            NET_MONITOR_CONNECT_TO_HOST_TIMOUT_MS );	// timeout attempt to connect
         if( INVALID_SOCKET != skt )
         {
+            connectAttemptCnt = 0;
             m_Engine.getNetStatusAccum().setInternetAvail( true );
             // get local address
             InetAddrAndPort lclAddr;
@@ -331,15 +335,17 @@ std::string NetworkMonitor::determineLocalIp( void )
             }
             */
         }
-        else
-        {
-            m_Engine.getNetStatusAccum().setInternetAvail( false );
-        }
 
         if( localIp.empty() )
         {
             LogModule( eLogNetworkState, LOG_WARNING, "Failed verify internet conection to %s:%d", NET_TEST_WEB_CONNECTION_HOST, VxGetNetworkHostName(), 80 );
         }
+    }
+
+    if( connectAttemptCnt > 1 )
+    {
+        // if failed to even connect multiple times then mark internet unavailable
+        m_Engine.getNetStatusAccum().setInternetAvail( false );
     }
 
     return localIp;

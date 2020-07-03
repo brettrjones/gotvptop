@@ -315,9 +315,10 @@ enum ENetAvailStatus
     eNetAvailNoInternet = 0,
     eNetAvailHostAvail,
     eNetAvailP2PAvail,
-    eNetAvailGroupHost,
+    eNetAvailOnlineButNoRelay,
     eNetAvailFullOnlineWithRelay,
     eNetAvailFullOnlineDirectConnect,
+    eNetAvailGroupHost,
 
     eMaxNetAvailStatus
 };

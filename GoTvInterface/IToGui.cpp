@@ -111,9 +111,10 @@ namespace
         "Net Avail: No Internet ",
         "Net Avail: Host Available ",
         "Net Avail: P2P Available ",
-        "Net Avail: Group Host ",
+        "Net Avail: Online But Requires Relay ",
         "Net Avail: Online With Relay ",
         "Net Avail: Online And Can Direct Connect ",
+        "Net Avail: Group Host ",
         "Net Avail: Max Net Avail Status ",
     };
 }
