@@ -71,6 +71,8 @@ enum ELogModule
     eLogUdpData       = 0x00040000,
     eLogAcceptConn    = 0x00080000,
 
+    eLogNetworkRelay  = 0x00100000,
+
     eMaxLogModule
 };
 

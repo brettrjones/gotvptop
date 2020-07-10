@@ -64,16 +64,17 @@ enum EApplet
     eAppletLibrary,
     eAppletGroupUser,	
     eAppletSearchPage,
-    eAppletShareServicesPage,   // page to setup share with others services
+    eAppletShareServicesPage,       // page to setup share with others services
+    eAppletPermissionList,          // group listing host service for group hosts. provide search for groups to join, provide ip address etc
 
     eAppletSettings,
     eAppletNetworkSettings,
-    eAppletNetHostingPage,	    // page to setup network/group hosts and services
+    eAppletNetHostingPage,	        // page to setup network/group hosts and services
     eAppletTheme,
     eAppletApplicationInfo,
     eAppletAboutNoLimitConnect,
 
-	eMaxBasicApplets,           // marker.. past here is search applets
+	eMaxBasicApplets,            // marker.. past here is search applets
 
     eAppletSearchPersons,           // search for person in group by name
     eAppletSearchMood,              // search for mood message
@@ -84,11 +85,10 @@ enum EApplet
 
     eAppletClientRandomConnect,      // connect to random person
 
-    eMaxSearchApplets,          // marker.. past here is hosting applets
+    eMaxSearchApplets,              // marker.. past here is hosting applets
 
     eAppletServiceChatRoom,	        // hosts a chat room. provide chat room services for group users
     eAppletServiceHostGroup,	    // hosts a group. provide search and relay services for group users
-    eAppletServiceHostGroupListing, // group listing host service for group hosts. provide search for groups to join, provide ip address etc
     eAppletServiceHostNetwork,      // network host service for a nolimitconnect network.. requires fixed ip address, group list hosts announce to network host
     eAppletServiceConnectionTest,   // network test service for users to test if they have a open port
     eAppletServiceRelay,            // network relay service for users without a open port
@@ -96,7 +96,7 @@ enum EApplet
     eAppletServiceRandomConnect,     // connect to random person service
     eAppletServiceRandomConnectRelay,   // connect to random person relay service for users without a open port
 
-    eMaxHostApplets,            // marker.. past here is service applets for user share services
+    eMaxHostApplets,                // marker.. past here is service applets for user share services
 
     eAppletServiceAvatarImage,
     eAppletServiceAboutMe,
@@ -104,7 +104,7 @@ enum EApplet
     eAppletServiceShareWebCam,
     eAppletServiceShareFiles,
 
-    eMaxSharedServicesApplets,  // marker.. past here is applets not launched by user page icon
+    eMaxSharedServicesApplets,      // marker.. past here is applets not launched by user page icon
 
     // not launched from launch page icon
     eActivityAppSetup,	            // application initialize
@@ -138,12 +138,12 @@ enum EApplet
     eAppletSettingsShareFiles,
     eAppletSettingsFileXfer,
     eAppletSettingsHostGroup,
-    eAppletSettingsHostGroupListing,
+    // eAppletSettingsHostGroupListing,
     eAppletSettingsHostNetwork,
     eAppletSettingsMessenger,
     eAppletSettingsRandomConnect,
     eAppletSettingsRandomConnectRelay,
-    eAppletSettingsRelay,
+    // eAppletSettingsRelay,
     eAppletSettingsStoryboard,
     eAppletSettingsTruthOrDare,
     eAppletSettingsVideoPhone,

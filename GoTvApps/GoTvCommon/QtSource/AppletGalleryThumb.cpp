@@ -32,6 +32,7 @@
 #include <PktLib/VxSearchDefs.h>
 #include <NetLib/VxFileXferInfo.h>
 #include <CoreLib/VxFileInfo.h>
+#include <CoreLib/VxGlobals.h>
 
 #include <QResizeEvent>
 
@@ -43,6 +44,7 @@ AppletGalleryThumb::AppletGalleryThumb(	AppCommon& app, QWidget * parent )
     setAppletType( eAppletGalleryThumb );
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
+    ui.m_ThumbDirLabel->setText( VxGetAppDirectory( eAppDirThumbs ).c_str() );
 
     connect( ui.m_ImageListWidget, SIGNAL( signalImageClicked( ThumbnailViewWidget * ) ), this, SLOT( slotImageClicked( ThumbnailViewWidget * ) ) );
 

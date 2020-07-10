@@ -123,12 +123,12 @@ void NetworkStateRelaySearch::fromGuiUseRelay( VxConnectInfo& connectInfo, bool 
 //============================================================================
 void NetworkStateRelaySearch::runNetworkState( void )
 {
-    if( IsLogEnabled( eLogConnect ) )
-	    LogMsg( LOG_INFO, "111 NetworkStateRelaySearch::runNetworkState start\n" ); 
-	doRelaySearchState();
-	m_RelaySearchThread.abortThreadRun( true );
-    if( IsLogEnabled( eLogConnect ) )
-	    LogMsg( LOG_INFO, "111 NetworkStateRelaySearch::runNetworkState done\n" ); 
+    LogModule( eLogNetworkRelay, LOG_INFO, "111 NetworkStateRelaySearch::runNetworkState start\n" );
+    // BRJ for now do not do relay stuff.. relay service now must be provided by group host
+    VxSleep( 200 );
+	// doRelaySearchState();
+	// m_RelaySearchThread.abortThreadRun( true );
+	// LogModule( eLogNetworkRelay, LOG_INFO, "111 NetworkStateRelaySearch::runNetworkState done\n" );
 }
 
 //============================================================================
@@ -137,8 +137,7 @@ void NetworkStateRelaySearch::startAnnounceServersListAndSearchThread( void )
 	m_RelaySearchThread.abortThreadRun( true );
 	while( m_RelaySearchThread.isThreadRunning() )
 	{
-        if( IsLogEnabled( eLogConnect ) )
-		    LogMsg( LOG_INFO, "m_RelaySearchThread::startup waiting for old connect thread to die\n" );
+        LogModule( eLogNetworkRelay, LOG_INFO, "m_RelaySearchThread::startup waiting for old connect thread to die\n" );
 		VxSleep( 200 );
 	}
 
@@ -217,7 +216,7 @@ void NetworkStateRelaySearch::doRelaySearchState( void )
 	int64_t timeStartSearch = timeNow;
 	if( 120 > ( timeNow - timeLastGetList ) )
 	{
-        LogModule( eLogConnect, LOG_INFO, "Waiting 120 seconds before getting relays from anchor\n" );
+        LogModule( eLogNetworkRelay, LOG_INFO, "Waiting 120 seconds before getting relays from anchor\n" );
 		m_SearchThreadComplete = true;
 	}
 	else
@@ -226,12 +225,12 @@ void NetworkStateRelaySearch::doRelaySearchState( void )
 		startAnnounceServersListAndSearchThread();
 	}
 
-    LogModule( eLogConnect, LOG_STATUS, "eMyRelayStatusSearching\n" );
+    LogModule( eLogNetworkRelay, LOG_STATUS, "eMyRelayStatusSearching\n" );
 	//m_Engine.getToGui().toGuiMyRelayStatus( eMyRelayStatusSearching );
 
 	if( 0 == m_PreferredRelayList.m_ContactList.size() )
 	{
-        LogModule( eLogConnect, LOG_STATUS, "eMyRelayStatusNoRelaysListed 0 == m_PreferredRelayList.m_ContactList.size()\n" );
+        LogModule( eLogNetworkRelay, LOG_STATUS, "eMyRelayStatusNoRelaysListed 0 == m_PreferredRelayList.m_ContactList.size()\n" );
 		//m_Engine.getToGui().toGuiMyRelayStatus( eMyRelayStatusNoRelaysListed );
 	}
 
@@ -329,7 +328,7 @@ void NetworkStateRelaySearch::doRelaySearchState( void )
             }
 
 			//BRJ.. we queried anchors and tried all.. just start over
-			LogModule( eLogConnect, LOG_INFO, "NetworkStateRelaySearch Search Timeout.. resetting network\n" );
+            LogModule( eLogNetworkRelay, LOG_INFO, "NetworkStateRelaySearch Search Timeout.. resetting network\n" );
 			// m_NetworkStateMachine.restartNetwork();
 			return;
 		}
@@ -343,7 +342,7 @@ void NetworkStateRelaySearch::moveToAnnounceState( void )
     FirewallSettings::EFirewallTestType firewallTestType = m_Engine.getEngineSettings().getFirewallTestSetting();
 	if( FirewallSettings::eFirewallTestUrlConnectionTest == firewallTestType )
 	{
-        LogModule( eLogConnect, LOG_INFO, "111 NetworkStateRelaySearch Starting Direct connect Test\n" );
+        LogModule( eLogNetworkRelay, LOG_INFO, "111 NetworkStateRelaySearch Starting Direct connect Test\n" );
 		DirectConnectTestResults& directConnectTestResults = m_DirectConnectTester.getDirectConnectTestResults();
 		m_DirectConnectTester.testCanDirectConnect();
 		while( ( false == m_NetworkStateMachine.checkAndHandleNetworkEvents() )
@@ -359,16 +358,14 @@ void NetworkStateRelaySearch::moveToAnnounceState( void )
 
 		if( directConnectTestResults.getCanDirectConnect() )
 		{
-            if( IsLogEnabled( eLogConnect ) )
-			    LogMsg( LOG_INFO, "NetworkStateRelaySearch Can Direct Connect.. switching to announce\n" );
+            LogModule( eLogNetworkRelay, LOG_INFO, "NetworkStateRelaySearch Can Direct Connect.. switching to announce\n" );
 			m_ConnectionList.cancelRelayService();
 			m_PktAnn.setRequiresRelay( false );
 			m_PktAnn.setHasRelay( false );			
 		}
 		else
 		{
-            if( IsLogEnabled( eLogConnect ) )
-			    LogMsg( LOG_INFO, "NetworkStateRelaySearch Cannot Direct Connect.. announcing with relay\n" );
+            LogModule( eLogNetworkRelay, LOG_INFO, "NetworkStateRelaySearch Cannot Direct Connect.. announcing with relay\n" );
 		}
 	}
 
@@ -417,8 +414,7 @@ void NetworkStateRelaySearch::doCurrentConnectionsList( void )
 					ERelayStatus relayStatus = requestRelayService( bigInfo->getMyOnlineId(), sktBase );
 					if( eRelayStatusOk ==  relayStatus )
 					{
-                        if( IsLogEnabled( eLogConnect ) )
-						    LogMsg( LOG_ERROR, "NetworkStateRelaySearch::connectRelayService: id %s Relay Service Success\n", bigInfo->getMyOnlineId().toHexString().c_str());
+                        LogModule( eLogNetworkRelay, LOG_ERROR, "NetworkStateRelaySearch::connectRelayService: id %s Relay Service Success\n", bigInfo->getMyOnlineId().toHexString().c_str());
 						return;
 					}
 
@@ -570,8 +566,7 @@ void NetworkStateRelaySearch::doRelayAnnounceListAndSearch( void )
 //============================================================================
 void NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers( void )
 {
-    if( IsLogEnabled( eLogConnect ) )
-	    LogMsg( LOG_STATUS, "NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers\n" );
+    LogModule( eLogNetworkRelay, LOG_STATUS, "NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers\n" );
 	if( m_Engine.getHasHostService( eHostServiceNetworkHost ) )
 	{
 		// we are the anchor
@@ -589,8 +584,7 @@ void NetworkStateRelaySearch::getMoreRelaysFromAnnounceServers( void )
 	VxSktConnectSimple netServConn;
 	if( false == m_NetServicesMgr.actionReqConnectToHost( netServConn ) )
 	{
-        if( IsLogEnabled( eLogConnect ) )
-		    LogMsg( LOG_ERROR, "getMoreRelaysFromAnnounceServers: Could not connect to Host\n" );
+        LogModule( eLogNetworkRelay, LOG_ERROR, "getMoreRelaysFromAnnounceServers: Could not connect to Host\n" );
 		return;
 	}
 
@@ -835,7 +829,7 @@ ERelayStatus NetworkStateRelaySearch::requestRelayService( VxGUID& onlineId, VxS
 		onlineId.toHexString( strRelayOnlineName );
 	}
 
-	LogMsg( LOG_STATUS, " Requesting Relay Service ( %s )\n", strRelayOnlineName.c_str()  );
+    LogModule( eLogNetworkRelay, LOG_STATUS, " Requesting Relay Service ( %s )\n", strRelayOnlineName.c_str()  );
 	//m_Engine.getToGui().toGuiMyRelayStatus( eMyRelayStatusRequestService, strRelayOnlineName.c_str() );
 	m_WaitForPktRelayServiceSemaphore.wait( RELAY_SERVICE_REQUEST_TIMEOUT_MS );
 	return m_eRelayRequestStatus;

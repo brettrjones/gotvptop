@@ -15,7 +15,6 @@
 
 #include "AppletServiceBase.h"
 
-
 class AppletServiceHostGroupListing : public AppletServiceBase
 {
 	Q_OBJECT
@@ -27,8 +26,6 @@ protected:
     void setupApplet();
     void loadFromSettings();
     void saveToSettings();
-
-
 };
 
 

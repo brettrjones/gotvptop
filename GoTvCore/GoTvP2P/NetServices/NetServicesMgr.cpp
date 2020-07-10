@@ -21,13 +21,11 @@
 #include "NetActionRandomConnect.h"
 #include <GoTvCore/GoTvP2P/Network/NetworkStateMachine.h>
 #include <GoTvCore/GoTvP2P/Network/NetworkMgr.h>
+#include <GoTvCore/GoTvP2P/Network/NetConnector.h>
 
 #include <GoTvCore/GoTvP2P/P2PEngine/EngineSettingsDefaultValues.h>
-
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
-
-#include <GoTvCore/GoTvP2P/Network/NetConnector.h>
 
 #include <NetLib/VxSktBase.h>
 #include <NetLib/VxSktUtil.h>
@@ -210,7 +208,6 @@ void NetServicesMgr::runNetActions( void )
 //============================================================================
 RCODE NetServicesMgr::handleNetCmdPing( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
 {
-	
 	return  sendPong( sktBase, netServiceHdr );
 }
 
@@ -246,7 +243,7 @@ RCODE NetServicesMgr::handleNetCmdIsMyPortOpenReq( VxSktBase * sktBase, NetServi
 		return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdIsMyPortOpenReply, toClientContent, (int)eAppErrFailedToResolveAddr );
 	}
 
-	char *	pSktBuf = (char *)sktBase->getSktReadBuf();
+	char * pSktBuf = (char *)sktBase->getSktReadBuf();
 	if( false == ( '/' == pSktBuf[ netServiceHdr.m_TotalDataLen - 1 ] ) )
 	{
 		sktBase->sktBufAmountRead( 0 );
@@ -269,7 +266,7 @@ RCODE NetServicesMgr::handleNetCmdIsMyPortOpenReq( VxSktBase * sktBase, NetServi
 	uint16_t u16Port = (uint16_t)atoi( fromClientContent.c_str() );
 	if( 0 == u16Port )
 	{
-        LogModule( eLogIsPortOpenTest, LOG_ERROR, "NetServicesMgr::handleNetCmdIsMyPortOpenReq: could not parse client port\n");
+        LogModule( eLogIsPortOpenTest, LOG_ERROR, "NetServicesMgr::handleNetCmdIsMyPortOpenReq: could not parse client port\n" );
 		return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdIsMyPortOpenReply, toClientContent, (int)eAppErrParseError );
 	}
 

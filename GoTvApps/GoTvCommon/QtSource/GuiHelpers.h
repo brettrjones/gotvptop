@@ -59,6 +59,9 @@ public:
     static EApplet              pluginTypeToViewApplet( EPluginType pluginType );
 
     static bool                 isPluginSingleSession( EPluginType ePluginType );
+    //! which plugins to show in permission list
+    static bool                 isPluginAPrimaryService( EPluginType ePluginType );
+    static bool                 getSecondaryPlugins( EPluginType ePluginType, QVector<EPluginType> secondaryPlugins );
 
     static std::string			describePlugin( EPluginType ePluginType, bool rmtInitiated );
 	static const char *			describeResponse( EOfferResponse eOfferResponse );
@@ -76,6 +79,9 @@ public:
 
     static void                 setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident, QLineEdit * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
     static void                 setIdentityFromValues( QWidget * curWidget, VxNetIdent * ident, QLineEdit * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
+
+    static EFriendState         comboIdxToFriendState( int comboIdx );
+    static int                  friendStateToComboIdx( EFriendState friendState );
 
     static QString              describeAge( int age );
 

@@ -18,7 +18,6 @@
 #include "AppDefs.h"
 #include "AppProfile.h"
 #include "HomeWindow.h"
-//#include "VxAppTheme.h"
 
 #include <CoreLib/VxSettings.h>
 

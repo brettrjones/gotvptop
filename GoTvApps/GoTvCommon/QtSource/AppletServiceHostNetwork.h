@@ -15,15 +15,12 @@
 
 #include "AppletServiceBase.h"
 
-
 class AppletServiceHostNetwork : public AppletServiceBase
 {
 	Q_OBJECT
 public:
     AppletServiceHostNetwork( AppCommon& app, QWidget * parent );
 	virtual ~AppletServiceHostNetwork() = default;
-
-
 
 protected:
     void loadFromSettings();

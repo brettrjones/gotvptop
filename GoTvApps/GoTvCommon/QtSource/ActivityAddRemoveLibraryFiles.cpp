@@ -118,10 +118,10 @@ FileShareItemWidget * ActivityAddRemoveLibraryFiles::fileToWidget( uint8_t u8Fil
 }
 
 //============================================================================
-void ActivityAddRemoveLibraryFiles::addFile(		uint8_t				u8FileType,
-										uint64_t				u64FileLen, 
-										const char *	pFileName,
-										bool			isShared )
+void ActivityAddRemoveLibraryFiles::addFile(uint8_t			u8FileType,
+										    uint64_t		u64FileLen, 
+										    const char *	pFileName,
+										    bool			isShared )
 {
 	FileShareItemWidget * item = fileToWidget( u8FileType, pFileName, u64FileLen, isShared );
 	if( item )

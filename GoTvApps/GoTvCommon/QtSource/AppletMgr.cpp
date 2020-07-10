@@ -44,6 +44,7 @@
 
 #include "AppletNetHostingPage.h"
 #include "AppletNetworkSettings.h"
+#include "AppletPermissionList.h"
 #include "AppletPersonalRecorder.h"
 #include "AppletPlayerVideo.h"
 
@@ -67,13 +68,13 @@
 #include "AppletSettingsConnectionTest.h"
 #include "AppletSettingsFileXfer.h"
 #include "AppletSettingsHostGroup.h"
-#include "AppletSettingsHostGroupListing.h"
+// #include "AppletSettingsHostGroupListing.h"
 #include "AppletSettingsHostNetwork.h"
 #include "AppletSettingsMessenger.h"
 #include "AppletSettingsHostNetwork.h"
 #include "AppletSettingsRandomConnect.h"
 #include "AppletSettingsRandomConnectRelay.h"
-#include "AppletSettingsRelay.h"
+// #include "AppletSettingsRelay.h"
 #include "AppletSettingsShareFiles.h"
 #include "AppletSettingsShareWebCam.h"
 #include "AppletSettingsStoryboard.h"
@@ -209,7 +210,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletServiceChatRoom:            appletDialog = new AppletServiceChatRoom( m_MyApp, parent ); break;
     case eAppletServiceConnectionTest:      appletDialog = new AppletServiceConnectionTest( m_MyApp, parent ); break;
     case eAppletServiceHostGroup:           appletDialog = new AppletServiceHostGroup( m_MyApp, parent ); break;
-    case eAppletServiceHostGroupListing:    appletDialog = new AppletServiceHostGroupListing( m_MyApp, parent ); break;
+    case eAppletPermissionList:             appletDialog = new AppletPermissionList( m_MyApp, parent ); break;
     case eAppletServiceHostNetwork:         appletDialog = new AppletServiceHostNetwork( m_MyApp, parent ); break;
     case eAppletServiceRandomConnect:       appletDialog = new AppletServiceRandomConnect( m_MyApp, parent ); break;
     case eAppletServiceRandomConnectRelay:  appletDialog = new AppletServiceRandomConnectRelay ( m_MyApp, parent ); break;
@@ -224,12 +225,12 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletSettingsConnectTest:        appletDialog = new AppletSettingsConnectionTest( m_MyApp, parent ); break;
     case eAppletSettingsFileXfer:           appletDialog = new AppletSettingsFileXfer( m_MyApp, parent ); break;
     case eAppletSettingsHostGroup:          appletDialog = new AppletSettingsHostGroup( m_MyApp, parent ); break;
-    case eAppletSettingsHostGroupListing:   appletDialog = new AppletSettingsHostGroupListing( m_MyApp, parent ); break;
+    // case eAppletSettingsHostGroupListing:   appletDialog = new AppletSettingsHostGroupListing( m_MyApp, parent ); break;
     case eAppletSettingsHostNetwork:        appletDialog = new AppletSettingsHostNetwork( m_MyApp, parent ); break;
     case eAppletSettingsMessenger:          appletDialog = new AppletSettingsMessenger( m_MyApp, parent ); break;
     case eAppletSettingsRandomConnect:      appletDialog = new AppletSettingsRandomConnect( m_MyApp, parent ); break;
     case eAppletSettingsRandomConnectRelay: appletDialog = new AppletSettingsRandomConnectRelay( m_MyApp, parent ); break;
-    case eAppletSettingsRelay:              appletDialog = new AppletSettingsRelay( m_MyApp, parent ); break;
+    // case eAppletSettingsRelay:              appletDialog = new AppletSettingsRelay( m_MyApp, parent ); break;
     case eAppletSettingsShareFiles:         appletDialog = new AppletSettingsShareFiles( m_MyApp, parent ); break;
     case eAppletSettingsStoryboard:         appletDialog = new AppletSettingsStoryboard( m_MyApp, parent ); break;
     case eAppletSettingsTruthOrDare:        appletDialog = new AppletSettingsTruthOrDare( m_MyApp, parent ); break;

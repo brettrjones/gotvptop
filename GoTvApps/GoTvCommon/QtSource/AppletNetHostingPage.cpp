@@ -52,11 +52,17 @@ void AppletNetHostingPage::setupAppletNetHostingPage( void )
 	if( ! m_IsInitialized )
     {
         m_AppletList.clear();
-        // create launchers for the basic applets
+        // create launchers for the hosting applets
         for( int i = int( eMaxSearchApplets + 1 ); i < eMaxHostApplets; i++ )
         {
-            AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ( EApplet )i, this );
-            m_AppletList.push_back( applet );
+            // do not include hidden or secondary service hosting plugins
+            if( ( eAppletServiceRelay != i ) &&
+                ( eAppletServiceRandomConnect != i ) &&
+                ( eAppletServiceRandomConnectRelay != i ) )
+            {
+                AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ( EApplet )i, this );
+                    m_AppletList.push_back( applet );
+            }
         }
 
         m_IsInitialized = true;

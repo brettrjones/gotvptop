@@ -336,26 +336,66 @@ const char * DescribePluginLclName( EPluginType ePluginType )
 {
 	switch( ePluginType )
 	{
-	case	ePluginTypeWebServer:	// web server plugin ( for profile web page )
-		return "About Me Web Page";
-	case	ePluginTypeRelay:	// web server plugin ( for profile web page )
+    case ePluginTypeInvalid:
+        return "Invalid Plugin";
+    case ePluginTypeAboutMePage:
+        return "About Me Web Page";
+    case ePluginTypeAvatarImage:
+        return "User Avatar Image";
+    case ePluginTypeCamServer:	// web cam broadcast plugin
+        return "Shared Video Broadcast";
+    case ePluginTypeChatRoom:
+        return "Chat Room Service";
+    case ePluginTypeFileServer:
+        return "Shared Files";
+    case ePluginTypeFileXfer:	// file transfer plugin
+        return "Offer A File";
+    case ePluginTypeMessenger:
+        return "Chat Session";
+    case ePluginTypeStoryboard:	// User Web Page Storyboard
+        return "Story Board";
+    case ePluginTypeTruthOrDare:	// Web Cam Truth Or Dare game p2p plugin
+        return "Web Cam Truth Or Dare";
+    case ePluginTypeVideoPhone:	// Video phone p2p plugin
+        return "Video Phone";
+    case ePluginTypeVoicePhone:
+        return "VOIP Voice Phone";
+    case ePluginTypeHostGroup:
+        return "Group Host Sevice";
+    case ePluginTypeHostNetwork:
+        return "Network Host Sevice";
+    case ePluginTypeServiceConnectTest:
+        return "Connection Test Service";
+    case ePluginTypeClientConnectTest:
+        return "Connection Test Client";
+    case ePluginTypeHostGroupListing:
+        return "Group Listing Service";
+    case ePluginTypeRandomConnect:
+        return "Random Connect Service";
+    case ePluginTypeRandomConnectRelay:
+        return "Random Connect Relay Service";
+	case ePluginTypeRelay:
 		return "Connection Relay";
-	case 	ePluginTypeFileServer:	// file share plugin
-		return "Shared Files";	
-	case 	ePluginTypeFileXfer:	// file share plugin
-		return "Offer A File";
-	case 	ePluginTypeCamServer:	// web cam broadcast plugin
-		return "Shared Video Broadcast";
-	case 	ePluginTypeMessenger:	// instant message p2p plugin
-		return "Chat Session";
-	case 	ePluginTypeVoicePhone:	// VOIP p2p plugin
-		return "VOIP Voice Phone";
-	case 	ePluginTypeVideoPhone:	// Video phone p2p plugin
-		return "Video Phone";
-	case 	ePluginTypeTruthOrDare:	// Web Cam Truth Or Dare game p2p plugin
-		return "Web Cam Truth Or Dare";
-	case 	ePluginTypeStoryboard:	// Web Cam Truth Or Dare game p2p plugin
-		return "Story Board";
+
+    case ePluginTypeCameraService:
+        return "Camera Feed Service";
+    case ePluginTypeMJPEGReader:
+        return "MJPEG Reader";
+    case ePluginTypeMJPEGWriter:
+        return "MJPEG Writer";
+    case ePluginTypePersonalRecorder:
+        return "Personal Recorder";
+    case ePluginTypeNetServices:
+        return "Net Service";
+    case ePluginTypeSearch:
+        return "Search Service";
+    case ePluginTypeSndReader:
+        return "Audio Playback";
+    case ePluginTypeSndWriter:
+        return "Audio Recorder";
+    case ePluginTypeWebServer:
+        return "Web Page Services";
+
 	default:		
 		return "Unknown Plugin";
 	}

@@ -23,14 +23,10 @@ public:
     AppletSettingsHostNetwork( AppCommon& app, QWidget * parent );
 	virtual ~AppletSettingsHostNetwork() = default;
 
-
-
 protected:
     void setupApplet();
     void loadFromSettings();
     void saveToSettings();
-
-
 };
 
 

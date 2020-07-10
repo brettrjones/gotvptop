@@ -46,12 +46,8 @@ enum EAppState
 #define USE_PLUGIN_FILE_SERVER		1
 #define USE_PLUGIN_STORY_BOARD		1
 
-
 //! describe plugin local name
 const char * DescribePluginLclName( EPluginType ePluginType );
-//! describe plugin remote name
-const char * DescribePluginRmtName( EPluginType ePluginType );
-
 
 // permission bits
 // 0000		disabled or ignore

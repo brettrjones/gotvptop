@@ -49,10 +49,10 @@ void P2PEngine::handleTcpData( VxSktBase * sktBase )
 		m_PluginMgr.handlePluginSpecificSkt( sktBase );
 	}
 
-	uint32_t				u32UsedLen = 0;
+	uint32_t u32UsedLen = 0;
 	// app should get the buffer ( this also locks it from being modified by threads )
 	// then read the data then call Amount read
-    uint8_t *	pSktBuf = (uint8_t *)sktBase->getSktReadBuf();
+    uint8_t * pSktBuf = (uint8_t *)sktBase->getSktReadBuf();
 	VxPktHdr * pktHdr = (VxPktHdr *)pSktBuf;
 	if( sktBase->isFirstRxPacket() )
 	{

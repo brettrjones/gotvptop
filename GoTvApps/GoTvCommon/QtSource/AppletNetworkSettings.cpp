@@ -571,6 +571,7 @@ void AppletNetworkSettings::slotUpdateTimer( void )
 {
     ui.m_InternetStateLabel->setText( DescribeInternetStatus( m_MyApp.getEngine().fromGuiGetInternetStatus() ) );
     ui.m_NetAvailStateLabel->setText( DescribeNetAvailStatus( m_MyApp.getEngine().fromGuiGetNetAvailStatus() ) );
+    fillMyNodeUrl( ui.m_NodeUrlLabel );
 }
 
 //============================================================================

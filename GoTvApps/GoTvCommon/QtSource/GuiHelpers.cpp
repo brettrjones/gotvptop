@@ -432,7 +432,6 @@ bool GuiHelpers::isAppletAService( EApplet applet )
              || ( eAppletServiceAvatarImage == applet )
              || ( eAppletServiceConnectionTest == applet )
              || ( eAppletServiceHostGroup == applet )
-             || ( eAppletServiceHostGroupListing == applet )
              || ( eAppletServiceHostNetwork == applet )
              || ( eAppletServiceRandomConnect == applet )
              || ( eAppletServiceRandomConnectRelay == applet )
@@ -483,7 +482,6 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletServiceAvatarImage:          return ePluginTypeAvatarImage;
     case eAppletServiceConnectionTest:       return ePluginTypeServiceConnectTest;
     case eAppletServiceHostGroup:            return ePluginTypeHostGroup;
-    case eAppletServiceHostGroupListing:     return ePluginTypeHostGroupListing;
     case eAppletServiceHostNetwork:          return ePluginTypeHostNetwork;
     case eAppletServiceRandomConnect:        return ePluginTypeRandomConnect;
     case eAppletServiceRandomConnectRelay:   return ePluginTypeRandomConnectRelay;
@@ -499,12 +497,12 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletSettingsShareFiles:         return ePluginTypeFileServer;
     case eAppletSettingsFileXfer:           return ePluginTypeFileXfer;
     case eAppletSettingsHostGroup:          return ePluginTypeHostGroup;
-    case eAppletSettingsHostGroupListing:   return ePluginTypeHostGroupListing;
+    // case eAppletSettingsHostGroupListing:   return ePluginTypeHostGroupListing;
     case eAppletSettingsHostNetwork:        return ePluginTypeHostNetwork;
     case eAppletSettingsMessenger:          return ePluginTypeMessenger;
     case eAppletSettingsRandomConnect:      return ePluginTypeRandomConnect;
     case eAppletSettingsRandomConnectRelay: return ePluginTypeRandomConnectRelay;
-    case eAppletSettingsRelay:              return ePluginTypeRelay;
+    // case eAppletSettingsRelay:              return ePluginTypeRelay;
     case eAppletSettingsStoryboard:         return ePluginTypeStoryboard;
     case eAppletSettingsTruthOrDare:        return ePluginTypeTruthOrDare;
     case eAppletSettingsVideoPhone:         return ePluginTypeVideoPhone;
@@ -560,12 +558,12 @@ EApplet GuiHelpers::pluginTypeToSettingsApplet( EPluginType pluginType )
     case ePluginTypeFileServer:             return eAppletSettingsShareFiles;
     case ePluginTypeFileXfer:               return eAppletSettingsFileXfer;
     case ePluginTypeHostGroup:              return eAppletSettingsHostGroup;
-    case ePluginTypeHostGroupListing:       return eAppletSettingsHostGroupListing;
+    // case ePluginTypeHostGroupListing:       return eAppletSettingsHostGroupListing;
     case ePluginTypeHostNetwork:            return eAppletSettingsHostNetwork;
     case ePluginTypeMessenger:              return eAppletSettingsMessenger;
     case ePluginTypeRandomConnect:          return eAppletSettingsRandomConnect;
     case ePluginTypeRandomConnectRelay:     return eAppletSettingsRandomConnectRelay;
-    case ePluginTypeRelay:                  return eAppletSettingsRelay;
+    // case ePluginTypeRelay:                  return eAppletSettingsRelay;
     case ePluginTypeStoryboard:             return eAppletSettingsStoryboard;
     case ePluginTypeTruthOrDare:            return eAppletSettingsTruthOrDare;
     case ePluginTypeVideoPhone:             return eAppletSettingsVideoPhone;
@@ -657,11 +655,70 @@ bool GuiHelpers::isPluginSingleSession( EPluginType ePluginType )
 	case ePluginTypeStoryboard: 
 	case ePluginTypeFileServer:
 	case ePluginTypeFileXfer:
+    case ePluginTypeChatRoom:
 	default:
 		break;
 	}
 
 	return isSingleSessionPlugin;
+}
+
+//============================================================================
+//! which plugins to show in permission list
+bool GuiHelpers::isPluginAPrimaryService( EPluginType ePluginType )
+{
+    bool isPrimaryPlugin = false;
+    switch( ePluginType )
+    {
+    case ePluginTypeVoicePhone:
+    case ePluginTypeVideoPhone:
+    case ePluginTypeTruthOrDare:
+    case ePluginTypeMessenger:
+    case ePluginTypeAdmin:
+    case ePluginTypeWebServer:
+    case ePluginTypeCamServer:
+    case ePluginTypeStoryboard:
+    case ePluginTypeFileServer:
+    case ePluginTypeFileXfer:
+    case ePluginTypeChatRoom:
+    case ePluginTypeHostNetwork:
+    case ePluginTypeHostGroup:
+    // connection test is special in that we want to be able to set it up seperately
+    // but is required if user is network host or group host
+    case ePluginTypeServiceConnectTest:
+        isPrimaryPlugin = true;
+        break;
+    case ePluginTypeRelay:
+    case ePluginTypeHostGroupListing:
+    case ePluginTypeClientConnectTest:
+    default:
+        break;
+    }
+
+    return isPrimaryPlugin;
+}
+
+//============================================================================
+bool GuiHelpers::getSecondaryPlugins( EPluginType ePluginType, QVector<EPluginType> secondaryPlugins )
+{
+    secondaryPlugins.clear();
+    switch( ePluginType )
+    {
+    case ePluginTypeHostNetwork:
+        secondaryPlugins.push_back( ePluginTypeHostGroupListing );
+        secondaryPlugins.push_back( ePluginTypeServiceConnectTest );
+        break;
+
+    case ePluginTypeHostGroup:
+        secondaryPlugins.push_back( ePluginTypeRelay );
+        secondaryPlugins.push_back( ePluginTypeServiceConnectTest );
+        break;
+
+    default:
+        break;
+    }
+
+    return !secondaryPlugins.isEmpty();
 }
 
 //============================================================================
@@ -1137,6 +1194,42 @@ void GuiHelpers::fillLanguage( QComboBox * comboBox )
         {
             comboBox->addItem( describeLanguage( (ELanguageType)i ) );
         }
+    }
+}
+
+//============================================================================
+EFriendState GuiHelpers::comboIdxToFriendState( int comboIdx )
+{
+    switch( comboIdx )
+    {
+    case 0:
+        return eFriendStateAdmin;
+    case 1:
+        return eFriendStateFriend;
+    case 2:
+        return eFriendStateGuest;
+    case 3:
+        return eFriendStateAnonymous;
+    default:
+        return eFriendStateIgnore;
+    }   
+}
+
+//============================================================================
+int GuiHelpers::friendStateToComboIdx( EFriendState friendState )
+{
+    switch( friendState )
+    {
+    case eFriendStateAdmin:
+        return 0;
+    case eFriendStateFriend:
+        return 1;
+    case eFriendStateGuest:
+        return 2;
+    case eFriendStateAnonymous:
+        return 3;
+    default:
+        return 4;
     }
 }
 

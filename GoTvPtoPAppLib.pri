@@ -200,6 +200,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettingsData.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPermissionList.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerVideo.h \
@@ -211,7 +212,6 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceChatRoom.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceConnectionTest.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceHostGroup.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceHostGroupListing.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceHostNetwork.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceRandomConnect.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceRandomConnectRelay.h \
@@ -226,12 +226,10 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsConnectionTest.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsFileXfer.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostGroup.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostGroupListing.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostNetwork.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsMessenger.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsRandomConnect.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsRandomConnectRelay.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsRelay.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsShareFiles.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsShareWebCam.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsStoryboard.h \
@@ -255,6 +253,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/NetAvailStatusWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionListItem.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailEditWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailViewWidget.h \
@@ -484,6 +483,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettingsData.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPermissionList.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerVideo.cpp \
@@ -494,12 +494,9 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceBaseSettings.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceChatRoom.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceConnectionTest.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceHostGroup.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceHostGroupListing.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceHostNetwork.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceRandomConnect.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceRandomConnectRelay.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceRelay.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceShareFiles.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceShareWebCam.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceStoryboard.cpp \
@@ -515,7 +512,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsMessenger.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsRandomConnect.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsRandomConnectRelay.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsRelay.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsShareFiles.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsShareWebCam.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsStoryboard.cpp \
@@ -540,6 +536,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ListEntryWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionListItem.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailEditWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailViewWidget.cpp \
@@ -688,6 +685,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletLogView.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkKey.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkSettings.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletPermissionList.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPersonalRecorder.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPlayerVideo.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletServiceBase.ui \
@@ -697,6 +695,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletTheme.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletUserIdentity.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/BottomBarWidget.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/PermissionListItemWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PlayerGlWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/StoryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ThumbnailEditWidget.ui \

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GroupUserDlgClass</class>
- <widget class="QWidget" name="GroupUserDlgClass">
+ <class>AppletGroupHostUi</class>
+ <widget class="QWidget" name="AppletGroupHostUi">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>269</width>
-    <height>702</height>
+    <height>540</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -91,28 +91,6 @@ border-image: none;
     <number>0</number>
    </property>
    <item>
-    <widget class="TitleBarWidget" name="m_TitleBarWidget" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>50</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>103</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QGroupBox" name="ItemsGroupBox">
      <property name="minimumSize">
       <size>
@@ -125,19 +103,19 @@ border-image: none;
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
-       <number>5</number>
+       <number>3</number>
       </property>
       <property name="leftMargin">
-       <number>2</number>
+       <number>5</number>
       </property>
       <property name="topMargin">
-       <number>2</number>
+       <number>5</number>
       </property>
       <property name="rightMargin">
-       <number>2</number>
+       <number>5</number>
       </property>
       <property name="bottomMargin">
-       <number>2</number>
+       <number>5</number>
       </property>
       <item>
        <widget class="QLabel" name="m_StatusLabel">
@@ -149,7 +127,7 @@ border-image: none;
       <item>
        <widget class="QLabel" name="SearchLabel">
         <property name="text">
-         <string>Host Network ( List Group Hosts Services )</string>
+         <string>Host A Group Service</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -174,14 +152,11 @@ border-image: none;
        <widget class="PermissionWidget" name="m_PermissionWidget" native="true"/>
       </item>
       <item>
-       <widget class="QLabel" name="m_GoTvHostLabel">
+       <widget class="QCheckBox" name="m_AnnounceGroupCheckBox">
         <property name="text">
-         <string>Group Listing Host To Announce To</string>
+         <string>Announce To Network Host (Recommended)</string>
         </property>
        </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEdit"/>
       </item>
       <item>
        <widget class="QLabel" name="m_GroupHostLabel">
@@ -214,30 +189,37 @@ border-image: none;
        <widget class="QLineEdit" name="lineEdit_4"/>
       </item>
       <item>
-       <widget class="QPushButton" name="m_StartButton">
-        <property name="text">
-         <string>Start Group Host Service</string>
-        </property>
-       </widget>
+       <widget class="RelayServiceWidget" name="m_RelayServiceWidget" native="true"/>
       </item>
       <item>
-       <widget class="QPushButton" name="m_ConnectToHostButton">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Stop Group Host Service</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="m_StartButton">
+          <property name="text">
+           <string>Start Service</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_ConnectToHostButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Stop Service</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QLabel" name="m_GroupUserStatusLabel">
@@ -268,12 +250,6 @@ border-image: none;
  </widget>
  <customwidgets>
   <customwidget>
-   <class>TitleBarWidget</class>
-   <extends>QWidget</extends>
-   <header>TitleBarWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>FriendListWidget</class>
    <extends>QWidget</extends>
    <header>FriendListWidget.h</header>
@@ -283,6 +259,12 @@ border-image: none;
    <class>PermissionWidget</class>
    <extends>QWidget</extends>
    <header>PermissionWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>RelayServiceWidget</class>
+   <extends>QWidget</extends>
+   <header>RelayServiceWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

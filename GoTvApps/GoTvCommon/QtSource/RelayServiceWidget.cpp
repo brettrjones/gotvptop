@@ -1,5 +1,5 @@
 //============================================================================
-// Copyright (C) 2019 Brett R. Jones
+// Copyright (C) 2020 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PermissionWidget.h"
+#include "RelayServiceWidget.h"
 #include "AppCommon.h"
 #include "AppGlobals.h"
 #include "ActivityInformation.h"
@@ -21,15 +21,15 @@
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
 //============================================================================
-PermissionWidget::PermissionWidget( QWidget * parent )
+RelayServiceWidget::RelayServiceWidget( QWidget * parent )
 	: QWidget( parent )
     , m_MyApp( GetAppInstance() )
 {
-	initPermissionWidget();
+	initRelayServiceWidget();
 }
 
 //============================================================================
-void PermissionWidget::initPermissionWidget( void )
+void RelayServiceWidget::initRelayServiceWidget( void )
 {
 	ui.setupUi( this );
     ui.m_PermissionInfoButton->setIcon( eMyIconInformation );
@@ -41,7 +41,7 @@ void PermissionWidget::initPermissionWidget( void )
 }
 
 //============================================================================
-void PermissionWidget::fillPermissionComboBox( void )
+void RelayServiceWidget::fillPermissionComboBox( void )
 {
     ui.m_PermissionComboBox->addItem( DescribePermissionLevel( eFriendStateAdmin ) );
     ui.m_PermissionComboBox->addItem( DescribePermissionLevel( eFriendStateFriend ) );
@@ -52,7 +52,7 @@ void PermissionWidget::fillPermissionComboBox( void )
 }
 
 //============================================================================
-void PermissionWidget::updateUi( void )
+void RelayServiceWidget::updateUi( void )
 {
     if( m_PluginType == ePluginTypeInvalid )
     {
@@ -80,7 +80,7 @@ void PermissionWidget::updateUi( void )
 }
 
 //============================================================================
-void PermissionWidget::setPluginType( EPluginType pluginType, int subType ) 
+void RelayServiceWidget::setPluginType( EPluginType pluginType, int subType ) 
 { 
     if( pluginType == ePluginTypeInvalid )
     {
@@ -102,7 +102,7 @@ void PermissionWidget::setPluginType( EPluginType pluginType, int subType )
 }
 
 //============================================================================
-void PermissionWidget::updatePermissionIcon( void )
+void RelayServiceWidget::updatePermissionIcon( void )
 {
     if( m_PluginType == ePluginTypeInvalid )
     {
@@ -114,7 +114,7 @@ void PermissionWidget::updatePermissionIcon( void )
 }
 
 //============================================================================
-void PermissionWidget::slotHandleSelectionChanged( int )
+void RelayServiceWidget::slotHandleSelectionChanged( int )
 {
     if( m_PluginType == ePluginTypeInvalid )
     {
@@ -127,21 +127,21 @@ void PermissionWidget::slotHandleSelectionChanged( int )
 }
 
 //============================================================================
-void PermissionWidget::slotShowPermissionInformation()
+void RelayServiceWidget::slotShowPermissionInformation()
 {
     ActivityInformation * activityInfo = new ActivityInformation( m_MyApp, this, eInfoTypePermission );
     activityInfo->show();
 }
 
 //============================================================================
-void PermissionWidget::slotShowPluginInformation()
+void RelayServiceWidget::slotShowPluginInformation()
 {
     ActivityInformation * activityInfo = new ActivityInformation( m_MyApp, this, m_PluginType );
     activityInfo->show();
 }
 
 //============================================================================
-void PermissionWidget::setPermissionLevel( EFriendState permLevel )
+void RelayServiceWidget::setPermissionLevel( EFriendState permLevel )
 {
     if( m_PluginType == ePluginTypeInvalid )
     {
@@ -152,12 +152,12 @@ void PermissionWidget::setPermissionLevel( EFriendState permLevel )
 }
 
 //============================================================================
-EFriendState PermissionWidget::getPermissionLevel( void )
+EFriendState RelayServiceWidget::getPermissionLevel( void )
 {
     if( m_PluginType == ePluginTypeInvalid )
     {
         return eFriendStateIgnore;
     }
 
-    return  GuiHelpers::comboIdxToFriendState( ui.m_PermissionComboBox->currentIndex() );
+    return GuiHelpers::comboIdxToFriendState( ui.m_PermissionComboBox->currentIndex() );
 }
