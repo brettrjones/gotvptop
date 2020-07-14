@@ -46,7 +46,6 @@ AppletEditAvatarImage::AppletEditAvatarImage( AppCommon& app, QWidget * parent )
     ui.m_ServiceSettingsWidget->setPluginType( ePluginTypeAvatarImage );
     ui.m_ServiceSettingsWidget->setViewServiceVisible( false );
 
- 
     m_MyIdent = m_MyApp.getAppGlobals().getUserIdent();
     m_strOrigOnlineName = m_MyIdent->getOnlineName();
     m_strOrigMoodMessage = m_MyIdent->getOnlineDescription();

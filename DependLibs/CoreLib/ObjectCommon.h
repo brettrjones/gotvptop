@@ -64,6 +64,7 @@
 #define OBJNAME_ACTIVITY_YES_NO_MSG_BOX					"ActivityYesNoMsgBox"
 
 #define OBJNAME_APPLET_BASE								"AppletBase"
+#define OBJNAME_APPLET_CHOOSE_THUMBNAIL					"AppletChooseThumbnail"
 #define OBJNAME_APPLET_EDIT_ABOUT_ME					"AppletEditAboutMe"
 #define OBJNAME_APPLET_EDIT_AVATAR_IMAGE				"AppletEditAvatarImage"
 #define OBJNAME_APPLET_EDIT_STORYBOARD				    "AppletEditStoryboard"
@@ -131,6 +132,8 @@
 #define OBJNAME_APPLET_SETTINGS_TRUTH_OR_DARE			"AppletSettingsTruthOrDare"
 #define OBJNAME_APPLET_SETTINGS_VIDEO_PHONE			    "AppletSettingsVideoPhone"
 #define OBJNAME_APPLET_SETTINGS_VOICE_PHONE			    "AppletSettingsVoicePhone"
+
+#define OBJNAME_APPLET_SNAPSHOT		                    "AppletSnapshot"
 
 #define OBJNAME_APPLET_THEME							"AppletTheme"
 #define OBJNAME_APPLET_USER_IDENTITY				    "AppletUserIdentity"

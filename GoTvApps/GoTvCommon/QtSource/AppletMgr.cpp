@@ -29,6 +29,7 @@
 
 #include "AppletAboutApp.h"
 
+#include "AppletChooseThumbnail.h"
 #include "AppletClientChatRoom.h"
 #include "AppletClientRandomConnect.h"
 #include "AppletEditAboutMe.h"
@@ -71,7 +72,6 @@
 // #include "AppletSettingsHostGroupListing.h"
 #include "AppletSettingsHostNetwork.h"
 #include "AppletSettingsMessenger.h"
-#include "AppletSettingsHostNetwork.h"
 #include "AppletSettingsRandomConnect.h"
 #include "AppletSettingsRandomConnectRelay.h"
 // #include "AppletSettingsRelay.h"
@@ -89,6 +89,7 @@
 #include "AppletTheme.h"
 #include "AppletRemoteControl.h"
 #include "AppletUserIdentity.h"
+#include "AppletSnapshot.h"
 
 #include "HomeWindow.h"
 
@@ -140,7 +141,7 @@ QWidget * AppletMgr::getActiveWindow( void )
 }
 
 //============================================================================
-QFrame *  AppletMgr::getAppletFrame( EApplet applet )
+QFrame * AppletMgr::getAppletFrame( EApplet applet )
 {
 	return m_MyApp.getAppletFrame( applet );
 }
@@ -174,8 +175,11 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletApplicationInfo:            appletDialog = new AppletApplicationInfo( m_MyApp, parent ); break;
     case eAppletEditAvatarImage:            appletDialog = new AppletEditAvatarImage( m_MyApp, parent ); break;
     case eAppletEditStoryboard:             appletDialog = new AppletEditStoryboard( m_MyApp, parent ); break;
+    case eAppletChooseThumbnail:            appletDialog = new AppletChooseThumbnail( m_MyApp, parent ); break;
     case eAppletGalleryImage:               appletDialog = new AppletGalleryImage( m_MyApp, parent ); break;
     case eAppletGalleryThumb:               appletDialog = new AppletGalleryThumb( m_MyApp, parent ); break;
+    case eAppletSnapshot:                   appletDialog = new AppletSnapshot( m_MyApp, parent ); break;
+        
     case eAppletGroupUser:                  appletDialog = new AppletGroupUser( m_MyApp, parent ); break;
 
     case eAppletHomePage:                   m_MyApp.errMessageBox( appletMissingTitle, "Home Page Not Implemented" ); return nullptr;

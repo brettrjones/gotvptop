@@ -13,20 +13,33 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "AppletServiceBaseSettings.h"
+#include "AppletBase.h"
+#include "PluginSettingsWidget.h"
+#include "PermissionWidget.h"
+
+#include <GoTvInterface/IToGui.h>
+#include <GoTvCore/GoTvP2P/P2PEngine/PluginSettingMgr.h>
+
+#include "ui_AppletSettingsHostNetwork.h"
 
 
-class AppletSettingsHostNetwork: public AppletServiceBaseSettings
+class AppletSettingsHostNetwork: public AppletBase
 {
 	Q_OBJECT
 public:
     AppletSettingsHostNetwork( AppCommon& app, QWidget * parent );
-	virtual ~AppletSettingsHostNetwork() = default;
+	virtual ~AppletSettingsHostNetwork();
+
+    PluginSettingsWidget*       getPluginSettingsWidget()           { return ui.m_PluginSettingsWidget; }
+    PermissionWidget*           getGroupListingWidget()             { return ui.m_GroupListPermissionWidget; }
+    PermissionWidget*           getConnectionTestWidget()           { return ui.m_ConnectTestPermissinWidget; }
 
 protected:
     void setupApplet();
     void loadFromSettings();
     void saveToSettings();
+
+    Ui::AppletSettingsHostNetworkUi     ui;
 };
 
 

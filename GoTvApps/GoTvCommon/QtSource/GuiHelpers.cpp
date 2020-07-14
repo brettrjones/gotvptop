@@ -543,7 +543,6 @@ EApplet GuiHelpers::pluginTypeToEditApplet( EPluginType pluginType )
     return appletType;
 }
 
-
 //============================================================================
 EApplet GuiHelpers::pluginTypeToSettingsApplet( EPluginType pluginType )
 {
@@ -558,16 +557,75 @@ EApplet GuiHelpers::pluginTypeToSettingsApplet( EPluginType pluginType )
     case ePluginTypeFileServer:             return eAppletSettingsShareFiles;
     case ePluginTypeFileXfer:               return eAppletSettingsFileXfer;
     case ePluginTypeHostGroup:              return eAppletSettingsHostGroup;
-    // case ePluginTypeHostGroupListing:       return eAppletSettingsHostGroupListing;
+        // case ePluginTypeHostGroupListing:       return eAppletSettingsHostGroupListing;
     case ePluginTypeHostNetwork:            return eAppletSettingsHostNetwork;
     case ePluginTypeMessenger:              return eAppletSettingsMessenger;
     case ePluginTypeRandomConnect:          return eAppletSettingsRandomConnect;
     case ePluginTypeRandomConnectRelay:     return eAppletSettingsRandomConnectRelay;
-    // case ePluginTypeRelay:                  return eAppletSettingsRelay;
+        // case ePluginTypeRelay:                  return eAppletSettingsRelay;
     case ePluginTypeStoryboard:             return eAppletSettingsStoryboard;
     case ePluginTypeTruthOrDare:            return eAppletSettingsTruthOrDare;
     case ePluginTypeVideoPhone:             return eAppletSettingsVideoPhone;
     case ePluginTypeVoicePhone:             return eAppletSettingsVoicePhone;
+
+    default:
+        break;
+    }
+
+    return appletType;
+}
+
+//============================================================================
+EApplet GuiHelpers::pluginTypeToViewApplet( EPluginType pluginType )
+{
+    EApplet appletType = eAppletUnknown;
+
+    switch( pluginType )
+    {
+    case ePluginTypeAboutMePage:            return eAppletEditAboutMe;
+    case ePluginTypeAvatarImage:            return eAppletEditAvatarImage;
+    case ePluginTypeStoryboard:             return eAppletEditStoryboard;
+    case ePluginTypeCamServer:              return eAppletUnknown;
+    case ePluginTypeServiceConnectTest:     return eAppletSettingsConnectTest;
+    case ePluginTypeFileServer:             return eAppletUnknown;
+    case ePluginTypeFileXfer:               return eAppletUnknown;
+    case ePluginTypeHostGroup:              return eAppletUnknown;
+    case ePluginTypeHostGroupListing:       return eAppletUnknown;
+    case ePluginTypeHostNetwork:            return eAppletUnknown;
+    case ePluginTypeRandomConnect:          return eAppletUnknown;
+    case ePluginTypeRandomConnectRelay:     return eAppletUnknown;
+    case ePluginTypeRelay:                  return eAppletUnknown;
+    default:
+        break;
+    }
+
+    return appletType;
+}
+
+//============================================================================
+EApplet GuiHelpers::pluginTypeToUserApplet( EPluginType pluginType )
+{
+    EApplet appletType = eAppletUnknown;
+
+    switch( pluginType )
+    {
+    case ePluginTypeAboutMePage:            return eAppletEditAboutMe;
+    case ePluginTypeAvatarImage:            return eAppletEditAvatarImage;
+    //case ePluginTypeCamServer:              return eAppletSettingsWebCamServer;
+    // case ePluginTypeServiceConnectTest:     return eAppletSettingsConnectTest;
+    //case ePluginTypeFileServer:             return eAppletShareFiles;
+    // case ePluginTypeFileXfer:               return eAppletSettingsFileXfer;
+    case ePluginTypeHostGroup:              return eAppletSettingsHostGroup;
+    // case ePluginTypeHostGroupListing:       return eAppletSettingsHostGroupListing;
+    case ePluginTypeHostNetwork:            return eAppletSettingsHostNetwork;
+    //case ePluginTypeMessenger:              return eAppletSettingsMessenger;
+    case ePluginTypeRandomConnect:          return eAppletServiceRandomConnect;
+    case ePluginTypeRandomConnectRelay:     return eAppletServiceRandomConnectRelay;
+    case ePluginTypeRelay:                  return eAppletServiceRelay;
+    case ePluginTypeStoryboard:             return eAppletEditStoryboard;
+    //case ePluginTypeTruthOrDare:            return eAppletSettingsTruthOrDare;
+    //case ePluginTypeVideoPhone:             return eAppletSettingsVideoPhone;
+    //case ePluginTypeVoicePhone:             return eAppletSettingsVoicePhone;
 
     default:
         break;
@@ -606,34 +664,6 @@ EMyIcons GuiHelpers::pluginTypeToSettingsIcon( EPluginType pluginType )
     }
 
     return iconType;
-}
-
-
-//============================================================================
-EApplet GuiHelpers::pluginTypeToViewApplet( EPluginType pluginType )
-{
-    EApplet appletType = eAppletUnknown;
-
-    switch( pluginType )
-    {
-    case ePluginTypeAboutMePage:            return eAppletEditAboutMe;
-    case ePluginTypeAvatarImage:            return eAppletEditAvatarImage;
-    case ePluginTypeStoryboard:             return eAppletEditStoryboard;
-    case ePluginTypeCamServer:              return eAppletUnknown;
-    case ePluginTypeServiceConnectTest:     return eAppletSettingsConnectTest;
-    case ePluginTypeFileServer:             return eAppletUnknown;
-    case ePluginTypeFileXfer:               return eAppletUnknown;
-    case ePluginTypeHostGroup:              return eAppletUnknown;
-    case ePluginTypeHostGroupListing:       return eAppletUnknown;
-    case ePluginTypeHostNetwork:            return eAppletUnknown;
-    case ePluginTypeRandomConnect:          return eAppletUnknown;
-    case ePluginTypeRandomConnectRelay:     return eAppletUnknown;
-    case ePluginTypeRelay:                  return eAppletUnknown;
-    default:
-        break;
-    }
-
-    return appletType;
 }
 
 //============================================================================
@@ -815,7 +845,7 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         break;
 
     case ePluginTypeHostNetwork:
-        strPluginDesc = QObject::tr( "Host NoLimitConnect Network Service" ).toUtf8().constData();
+        strPluginDesc = QObject::tr( "Host A NoLimitConnect Network" ).toUtf8().constData();
         break;
 
     case ePluginTypeMessenger:
@@ -847,7 +877,7 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         break;
 
     case ePluginTypeTruthOrDare:
-        strPluginDesc = QObject::tr( "Truth Or Dare Game With Video Chat" ).toUtf8().constData();
+        strPluginDesc = QObject::tr( "Truth Or Dare Video Chat Game" ).toUtf8().constData();
         break;
 
     case ePluginTypeVideoPhone:
@@ -936,6 +966,25 @@ QWidget * GuiHelpers::getParentPageFrame( QWidget * curWidget )
     return parentActivity;
 }
 
+//============================================================================
+AppletBase * GuiHelpers::findParentApplet( QWidget * parent )
+{
+    AppletBase * appletBase = nullptr;
+    if( parent )
+    {
+        appletBase = dynamic_cast< AppletBase * >( parent );
+        while( parent && !appletBase )
+        {
+            parent = dynamic_cast< QWidget * >( parent->parent() );
+            if( parent )
+            {
+                appletBase = dynamic_cast< AppletBase * >( parent );
+            }
+        }
+    }
+
+    return appletBase;
+}
 
 //============================================================================
 bool GuiHelpers::validateUserName( QWidget * curWidget, QString strUserName )
@@ -949,7 +998,7 @@ bool GuiHelpers::validateUserName( QWidget * curWidget, QString strUserName )
         || strUserName.contains( "nolimitconnectweb" )
         || strUserName.contains( "gotv ptop web" ) )
     {
-        QMessageBox::warning( curWidget, QObject::tr( "Invalid User Name" ), QObject::tr( "User Name cannot have GoTv PtoP Web in name." ) );
+        QMessageBox::warning( curWidget, QObject::tr( "Invalid User Name" ), QObject::tr( "User Name cannot have NoLimitConnect in name." ) );
         return false;
     }
 
@@ -1154,7 +1203,6 @@ void GuiHelpers::fillContentCatagory( QComboBox * comboBox )
     }
 }
 
-
 //============================================================================
 QString GuiHelpers::describeLanguage( ELanguageType language )
 {
@@ -1194,6 +1242,20 @@ void GuiHelpers::fillLanguage( QComboBox * comboBox )
         {
             comboBox->addItem( describeLanguage( (ELanguageType)i ) );
         }
+    }
+}
+
+//============================================================================
+void GuiHelpers::fillPermissionComboBox( QComboBox * permissionComboBox )
+{
+    if( permissionComboBox )
+    {
+        permissionComboBox->clear();
+        permissionComboBox->addItem( DescribePermissionLevel( eFriendStateAdmin ) );
+        permissionComboBox->addItem( DescribePermissionLevel( eFriendStateFriend ) );
+        permissionComboBox->addItem( DescribePermissionLevel( eFriendStateGuest ) );
+        permissionComboBox->addItem( DescribePermissionLevel( eFriendStateAnonymous ) );
+        permissionComboBox->addItem( DescribePermissionLevel( eFriendStateIgnore ) );
     }
 }
 
@@ -1350,25 +1412,4 @@ ActivityBase * GuiHelpers::findLaunchWindow( QWidget * widget )
     }
 
     return nullptr;
-}
-
-//============================================================================
-AppletBase * GuiHelpers::findParentApplet( QWidget * widget )
-{
-    AppletBase * actBase = nullptr;
-    QObject * objWidget = widget;
-    while( objWidget )
-    {
-        AppletBase * actTemp = dynamic_cast<AppletBase *>( objWidget );
-        if( actTemp )
-        {
-            actBase = actTemp;
-            break;
-        }
-
-        objWidget = objWidget->parent();
-    }
-
-    return actBase;
-
 }

@@ -58,12 +58,20 @@ void AppletNetHostingPage::setupAppletNetHostingPage( void )
             // do not include hidden or secondary service hosting plugins
             if( ( eAppletServiceRelay != i ) &&
                 ( eAppletServiceRandomConnect != i ) &&
-                ( eAppletServiceRandomConnectRelay != i ) )
+                ( eAppletServiceRandomConnectRelay != i ) &&
+                ( eAppletServiceHostGroup != i ) &&
+                ( eAppletServiceHostNetwork != i ) &&
+                ( eAppletServiceConnectionTest != i ) )
             {
                 AppletLaunchWidget * applet = new AppletLaunchWidget( m_MyApp, ( EApplet )i, this );
                     m_AppletList.push_back( applet );
             }
         }
+
+        AppletLaunchWidget * appletHostNetwork = new AppletLaunchWidget( m_MyApp, eAppletSettingsHostNetwork, this );
+        m_AppletList.push_back( appletHostNetwork );
+        AppletLaunchWidget * appletHostGroup = new AppletLaunchWidget( m_MyApp, eAppletSettingsHostGroup, this );
+        m_AppletList.push_back( appletHostGroup );
 
         m_IsInitialized = true;
     }

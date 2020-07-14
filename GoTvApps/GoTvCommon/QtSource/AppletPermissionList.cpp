@@ -37,16 +37,6 @@ AppletPermissionList::AppletPermissionList( AppCommon& app, QWidget * parent )
 	ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
-    /*
-    ui.m_NetworkHostInfoButton->setIcon( eMyIconInformation );
-    ui.m_NetworkHostButton->setIcon( eMyIconServiceHostNetwork );
-    ui.m_NetworkKeyInfoButton->setIcon( eMyIconInformation );
-    ui.m_NetworkKeyButton->setIcon( eMyIconNetworkKey );
-    ui.m_ConnectTestUrlInfoButton->setIcon( eMyIconInformation );
-    ui.m_ConnectIsOpenInfoButton->setIcon( eMyIconInformation );
-    ui.m_ConnectTestHostButton->setIcon( eMyIconServiceConnectionTest );
-    */
-
     initializePermissionList();
 
     connectSignals();
@@ -69,7 +59,8 @@ void AppletPermissionList::connectSignals( void )
 //============================================================================
 void AppletPermissionList::initializePermissionList( void )
 {
-    for( int i = ePluginTypeAdmin; i < eMaxImplementedPluginType; ++i )
+    // ePluginTypeAdmin not implemented yet
+    for( int i = ePluginTypeAdmin + 1; i < eMaxImplementedPluginType; ++i )
     {
         if( GuiHelpers::isPluginAPrimaryService( ( EPluginType )i ) )
         {
@@ -83,9 +74,8 @@ void AppletPermissionList::initializePermissionList( void )
 //============================================================================
 void AppletPermissionList::createPermissionItem( EPluginType pluginType )
 {
-    PermissionListItem * item = new PermissionListItem( ui.m_PermissionItemList );
-    item->setPluginType( pluginType );
-    item->initPermissionListItem();
+    PermissionListItem * item = new PermissionListItem( ui.m_PermissionItemList, this );
+    item->initPermissionListItem( pluginType );
     ui.m_PermissionItemList->addItem( ( QListWidgetItem * )item );
     ui.m_PermissionItemList->setItemWidget( ( QListWidgetItem * )item, ( QWidget * )item );
 }

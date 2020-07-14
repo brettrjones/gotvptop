@@ -1,6 +1,5 @@
 //============================================================================
 // Copyright (C) 2019 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -16,6 +15,7 @@
 #include "ThumbnailEditWidget.h"
 #include "ActivitySnapShot.h"
 #include "AppletGalleryThumb.h"
+#include "AppletSnapshot.h"
 #include "AppletMgr.h"
 
 #include "AppCommon.h"
@@ -39,6 +39,7 @@ ThumbnailEditWidget::ThumbnailEditWidget( QWidget * parent )
     : QWidget( parent )
     , m_MyApp( GetAppInstance() )
 {
+    m_ParentApplet = GuiHelpers::findParentApplet( parent );
     m_CameraSourceAvail = GuiHelpers::isCameraSourceAvailable();
     ui.setupUi( this );
     QSize frameSize( GuiParams::getThumbnailSize().width() + 30, GuiParams::getThumbnailSize().height() + 30 );
@@ -105,18 +106,25 @@ void ThumbnailEditWidget::slotSnapShotButClick( void )
 {
     if( m_CameraSourceAvail )
     {
-        ActivitySnapShot oDlg( m_MyApp, this );
-        connect( &oDlg, SIGNAL( signalJpgSnapshot( uint8_t*, uint32_t, int, int ) ), ui.m_ThumbnailViewWidget, SLOT( slotJpgSnapshot( uint8_t*, uint32_t, int, int ) ) );
-        oDlg.exec();
-        m_IsCircle = !ui.m_ThumbnailViewWidget->getIsUserPickedImage();
-        if( ui.m_ThumbnailViewWidget->getIsUserPickedImage() )
+        AppletSnapshot * appletSnapshot = dynamic_cast< AppletSnapshot * >( m_MyApp.getAppletMgr().launchApplet( eAppletSnapshot, m_ParentApplet ) );
+        if( appletSnapshot )
         {
-            clearAssetId();
+            connect( appletSnapshot, SIGNAL( signalJpgSnapshot( uint8_t*, uint32_t, int, int ) ), this, SLOT( slotJpgSnapshot( uint8_t*, uint32_t, int, int ) ) );
         }
     }
     else
     {
         QMessageBox::warning( this, QObject::tr( "Camera Capture" ), QObject::tr( "No Camera Source Available." ) );
+    }
+}
+
+//============================================================================
+void ThumbnailEditWidget::slotJpgSnapshot( uint8_t* pu8JpgData, uint32_t u32DataLen, int iWidth, int iHeight )
+{
+    QPixmap bitmap;
+    if( bitmap.loadFromData( pu8JpgData, u32DataLen, "JPG" ) )
+    {
+        ui.m_ThumbnailViewWidget->setThumbnailImage( bitmap );
     }
 }
 
@@ -176,7 +184,7 @@ QPixmap ThumbnailEditWidget::makeCircleImage( QPixmap& pixmap )
 //============================================================================
 void ThumbnailEditWidget::slotThumbGalleryClick( void )
 {
-    AppletGalleryThumb * galleryThumb = dynamic_cast< AppletGalleryThumb * >( m_MyApp.getAppletMgr().launchApplet( eAppletGalleryThumb ) );
+    AppletGalleryThumb * galleryThumb = dynamic_cast< AppletGalleryThumb * >( m_MyApp.getAppletMgr().launchApplet( eAppletGalleryThumb, m_ParentApplet ) );
     if( galleryThumb )
     {
         connect( galleryThumb, SIGNAL( signalThumbSelected( AppletBase *, ThumbnailViewWidget * ) ), this, SLOT( slotThumbSelected( AppletBase *, ThumbnailViewWidget * ) ) );

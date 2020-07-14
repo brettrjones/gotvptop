@@ -32,4 +32,5 @@ AppletSettingsHostGroup::AppletSettingsHostGroup( AppCommon& app, QWidget * pare
 //============================================================================
 AppletSettingsHostGroup::~AppletSettingsHostGroup()
 {
+    m_MyApp.activityStateChange( this, false );
 }

@@ -329,6 +329,5 @@ enum EMyIcons
     eMyIconSettingsVoicePhone,
     eMyIconSettingsVideoPhone,
 
-
 	eMaxMyIcon	// must be last
 };

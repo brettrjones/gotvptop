@@ -177,6 +177,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChooseThumbnail.h \	
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientAvatarImage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientChatRoom.h \
@@ -237,6 +238,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVideoPhone.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVoicePhone.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareServicesPage.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletSnapshot.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletTheme.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppDefs.h \
@@ -254,8 +256,10 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/NetAvailStatusWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionListItem.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/PluginSettingsWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailEditWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailChooseWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailViewWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppStyle.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppTheme.h \
@@ -460,6 +464,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChooseThumbnail.cpp \	
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientAvatarImage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientBase.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientChatRoom.cpp \
@@ -519,6 +524,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVideoPhone.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVoicePhone.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareServicesPage.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletSnapshot.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletTheme.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommon.cpp \
@@ -537,8 +543,10 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionListItem.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/PluginSettingsWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailEditWidget.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailChooseWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailViewWidget.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/VxAppStyle.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppTheme.cpp \
@@ -668,6 +676,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AcceptCancelWidget.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletAboutApp.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletApplicationInfo.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletChooseThumbnail.ui \	
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletClientRandomConnect.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletEditAboutMe.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletEditAvatarImage.ui \
@@ -690,15 +699,20 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletPlayerVideo.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletServiceBase.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletServiceBaseSettings.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletServiceHostNetwork.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletSharedContent.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletSnapshot.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletTheme.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletUserIdentity.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/BottomBarWidget.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/PermissionListItemWidget.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/PermissionmWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PlayerGlWidget.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/PluginSettingsWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/StoryWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ThumbnailEditWidget.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/ThumbnailChooseWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/TitleBarWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/TodGameWidget.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/VidWidget.ui

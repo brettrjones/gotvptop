@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>383</width>
+    <width>328</width>
     <height>45</height>
    </rect>
   </property>
@@ -54,19 +54,19 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <property name="spacing">
-       <number>2</number>
+       <number>3</number>
       </property>
       <property name="leftMargin">
-       <number>2</number>
+       <number>3</number>
       </property>
       <property name="topMargin">
-       <number>2</number>
+       <number>3</number>
       </property>
       <property name="rightMargin">
-       <number>2</number>
+       <number>3</number>
       </property>
       <property name="bottomMargin">
-       <number>2</number>
+       <number>3</number>
       </property>
       <item>
        <widget class="VxPushButton" name="m_PermissionButton">
@@ -152,7 +152,7 @@
        </layout>
       </item>
       <item>
-       <widget class="VxPushButton" name="m_PluginInfoButton">
+       <widget class="VxPushButton" name="m_PluginRunButton">
         <property name="minimumSize">
          <size>
           <width>32</width>
@@ -177,7 +177,32 @@
        </widget>
       </item>
       <item>
-       <widget class="VxPushButton" name="m_PermissionInfoButton">
+       <widget class="VxPushButton" name="m_PluginSettingsButton">
+        <property name="minimumSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="VxPushButton" name="m_PluginInfoButton">
         <property name="minimumSize">
          <size>
           <width>32</width>

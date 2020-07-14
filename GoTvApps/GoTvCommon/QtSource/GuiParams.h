@@ -36,6 +36,8 @@ public:
     static int                  getControlIndicatorWidth( void );
     /// @brief thumbnails are square so this is both width and height
     static QSize                getThumbnailSize( void );
+    /// @brief camera video size mulitiplied by display scale
+    static QSize                getSnapshotSize( void );
 
 protected:
 

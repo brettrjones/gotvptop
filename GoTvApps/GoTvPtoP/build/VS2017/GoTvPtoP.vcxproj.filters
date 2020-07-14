@@ -100,9 +100,6 @@
     <Filter Include="GoTvCommon\Source Files\soundio">
       <UniqueIdentifier>{960707f6-388b-4625-acc0-3b69fe551878}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GoTvCommon\Source Files\GuiSettings">
-      <UniqueIdentifier>{3dbb3c17-a9e6-4751-aff2-0b8f6035f2be}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GoTvCommon\Source Files\NetService">
       <UniqueIdentifier>{1c03ddd4-be42-473c-9889-e12658320184}</UniqueIdentifier>
     </Filter>
@@ -941,6 +938,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\RelayServiceWidget.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailChooseWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PluginSettingsWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChooseThumbnail.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSnapshot.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1879,6 +1888,18 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RelayServiceWidget.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ThumbnailChooseWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\PluginSettingsWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChooseThumbnail.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSnapshot.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -2987,6 +3008,21 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\RelayServiceWidget.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ThumbnailChooseWidget.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\PluginSettingsWidget.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSettingsHostNetwork.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChooseThumbnail.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSnapShot.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

@@ -52,6 +52,12 @@ AppletGalleryThumb::AppletGalleryThumb(	AppCommon& app, QWidget * parent )
 }
 
 //============================================================================
+AppletGalleryThumb::~AppletGalleryThumb()
+{
+    m_MyApp.activityStateChange( this, false );
+}
+
+//============================================================================
 void AppletGalleryThumb::resizeEvent( QResizeEvent * ev )
 {
     AppletBase::resizeEvent( ev );

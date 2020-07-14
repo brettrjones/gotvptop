@@ -355,7 +355,7 @@ const char * DescribePluginLclName( EPluginType ePluginType )
     case ePluginTypeStoryboard:	// User Web Page Storyboard
         return "Story Board";
     case ePluginTypeTruthOrDare:	// Web Cam Truth Or Dare game p2p plugin
-        return "Web Cam Truth Or Dare";
+        return "Truth Or Dare Video Chat";
     case ePluginTypeVideoPhone:	// Video phone p2p plugin
         return "Video Phone";
     case ePluginTypeVoicePhone:

@@ -1,5 +1,5 @@
 //============================================================================
-// Copyright (C) 2019 Brett R. Jones
+// Copyright (C) 2020 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,22 +13,23 @@
 //============================================================================
 #pragma once
 
-#include <QWidget>
-#include "ui_ThumbnailEditWidget.h"
-
 #include <CoreLib/VxGUID.h>
 
+#include "ui_ThumbnailChooseWidget.h"
+#include <QLabel>
 
-class IVxVidCap;
-class AssetInfo;  
+
+class AppCommon;
+class QPixmap;
+class AssetInfo;
 class AppletBase;
 
-class ThumbnailEditWidget : public QWidget
+class ThumbnailChooseWidget : public QLabel
 {
     Q_OBJECT
 public:
-    ThumbnailEditWidget( QWidget * parent );
-    ~ThumbnailEditWidget() override = default;
+    ThumbnailChooseWidget( QWidget * parent );
+    virtual ~ThumbnailChooseWidget() override = default;
 
     void                        setIsUserPickedImage( bool userPicked )         { ui.m_ThumbnailViewWidget->setIsUserPickedImage( userPicked ); }
     bool                        getIsUserPickedImage( void )                    { return ui.m_ThumbnailViewWidget->getIsUserPickedImage(); }
@@ -41,33 +42,21 @@ public:
     void                        clearAssetId( void )                            { m_AsssetId.clearVxGUID(); }
     bool                        isAssetIdValid( void )                          { return m_AsssetId.isVxGUIDValid(); }
 
-    bool                        generateThumbAsset( AssetInfo& assetInfo );
-
-    bool                        loadThumbnail( VxGUID& assetGuid );
+    VxGUID&                     getThumbnailId( void )                          { return m_ThumbnailId; }
     VxGUID                      updateAndGetThumbnailId( void );
 
-protected slots:
-    void                        slotThumbGalleryClick( void );
-    void                        slotSnapShotButClick( void );
-    void                        slotBrowseButClick( void );
-    void                        slotMakeCircleButClick( void );
-    void                        slotUndoCircleClick( void );
-    void                        slotThumbSelected( AppletBase * thumbGallery, ThumbnailViewWidget * thumb );
-    void                        slotJpgSnapshot( uint8_t* pu8JpgData, uint32_t u32DataLen, int iWidth, int iHeight );
+    bool                        loadThumbnail( VxGUID& assetGuid );
 
+protected slots:
+    void                        slotChooseThumb();
+    void                        slotThumbSelected( AppletBase * thumbGallery, ThumbnailViewWidget * thumb );
 
 protected:
-    QPixmap                     makeCircleImage( QPixmap& pixmap );
-
-    Ui::ThumnailEditWidgetUi	ui;
+    Ui::ThumnailChooseWidgetUi	ui;
     AppCommon&					m_MyApp;
     AppletBase*                 m_ParentApplet{ nullptr };
-    IVxVidCap *					m_VidCap = nullptr;
-    bool 					    m_CameraSourceAvail = false;
-    bool 					    m_IsCircle = false;
-    QPixmap                     m_SquarePixmap;
     VxGUID                      m_AsssetId;
-    bool                        m_WasModifiedByUser = false;
-    uint8_t *					m_pu8BitmapData = nullptr;	// snapshot bitmap
-    uint32_t					m_u32BitmapLen = 0;		// bitmap length
+    VxGUID                      m_ThumbnailId;
+
+    bool                        m_bUserPickedImage = false;
 };

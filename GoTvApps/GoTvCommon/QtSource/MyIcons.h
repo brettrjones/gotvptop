@@ -48,6 +48,8 @@ public:
     EMyIcons					getPluginSettingsIcon( EPluginType ePluginType );
 	//! get icon for given plugin
 	EMyIcons					getPluginIcon( EPluginType ePluginType, EPluginAccessState ePluginAccess = ePluginAccessOk );
+    //! get setup icon for given plugin
+    EMyIcons                    getPluginSetupIcon( EPluginType ePluginType );
 	//! get locked plugin icon
 	EMyIcons					getLockedPluginIcon( EPluginType ePluginType );
 	//! get disabled plugin icon

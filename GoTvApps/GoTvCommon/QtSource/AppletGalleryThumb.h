@@ -25,7 +25,7 @@ class AppletGalleryThumb : public AppletBase
 	Q_OBJECT
 public:
 	AppletGalleryThumb( AppCommon& app, QWidget * parent = NULL );
-	virtual ~AppletGalleryThumb() override = default;
+	virtual ~AppletGalleryThumb() override;
 
 signals:
     void                        signalThumbSelected( AppletBase * applet, ThumbnailViewWidget * thumb );

@@ -672,7 +672,6 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
     case eMyIconTruthOrDare:
         return ":/AppRes/Resources/truth-or-dare.svg";
 
-
 	default:
 		return ":/AppRes/Resources/question_mark.svg";// Icon with question mark
 	}
@@ -724,6 +723,9 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
     case ePluginTypeCamServer:
         return eMyIconSettingsShareWebCam;
 
+    case ePluginTypeChatRoom:
+        return eMyIconSettingsChatRoom;
+
     case ePluginTypeServiceConnectTest:
         return eMyIconSettingsConnectionTest;
 
@@ -737,16 +739,16 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
         return eMyIconSettingsShareFiles;
 
     case ePluginTypeHostGroup:
-        return eMyIconServiceHostGroup;
+        return eMyIconSettingsHostGroup;
 
     case ePluginTypeHostGroupListing:
-        return eMyIconServiceHostGroupListing;
+        return eMyIconSettingsHostGroupListing;
 
     case ePluginTypeHostNetwork:
-        return eMyIconServiceHostNetwork;
+        return eMyIconSettingsHostNetwork;
 
     case ePluginTypeMessenger:
-        return eMyIconMessenger; // eMyIconMultiSession
+        return eMyIconSettingsMessenger; // eMyIconMultiSession
 
     case ePluginTypeRelay:
         return eMyIconSettingsRelay;
@@ -782,7 +784,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 {
 	switch( ePluginType )
 	{
-	case	ePluginTypeAdmin:
+	case ePluginTypeAdmin:
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
@@ -799,7 +801,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 
 		break;
 
-    case	ePluginTypeAboutMePage:
+    case ePluginTypeAboutMePage:
         switch( ePluginAccess )
         {
         case ePluginAccessOk:
@@ -925,7 +927,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
         }
         break;
 
-	case	ePluginTypeRelay:
+	case ePluginTypeRelay:
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
@@ -961,7 +963,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 		}
 		break;
 
-	case	ePluginTypeWebServer:	// web server plugin ( for profile web page )
+	case ePluginTypeWebServer:	// web server plugin ( for profile web page )
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
@@ -979,7 +981,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 		}
 		break;
 
-	case 	ePluginTypeFileXfer:	// file offer plugin
+	case ePluginTypeFileXfer:	// file offer plugin
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
@@ -997,7 +999,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 		}
 		break;
 
-	case 	ePluginTypeFileServer:	// file share plugin
+	case ePluginTypeFileServer:	// file share plugin
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
@@ -1015,11 +1017,11 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 		}
 		break;
 
-	case 	ePluginTypeCamServer:	// web cam broadcast plugin
+	case ePluginTypeCamServer:	// web cam broadcast plugin
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
-			return eMyIconWebCamServer;
+			return eMyIconServiceShareWebCam;
 		case ePluginAccessDisabled:
 		case ePluginAccessInactive:
 		case ePluginAccessRequiresDirectConnect:
@@ -1033,7 +1035,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 		}
 		break;
 
-	case 	ePluginTypeVoicePhone:	// VOIP p2p plugin
+	case ePluginTypeVoicePhone:	// VOIP p2p plugin
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
@@ -1051,7 +1053,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 		}
 		break;
 
-	case 	ePluginTypeVideoPhone:	// Video phone p2p plugin
+	case ePluginTypeVideoPhone:	// Video phone p2p plugin
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
@@ -1069,7 +1071,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 		}
 		break;
 
-	case 	ePluginTypeTruthOrDare:	// Web Cam Truth Or Dare game p2p plugin
+	case ePluginTypeTruthOrDare:	// Web Cam Truth Or Dare game p2p plugin
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
@@ -1086,7 +1088,9 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 			return eMyIconTruthOrDareIgnored;
 		}
 
-	case 	ePluginTypeMessenger:	// multisession p2p plugin
+        break;
+
+	case ePluginTypeMessenger:	// multisession p2p plugin
 		switch( ePluginAccess )
 		{
 		case ePluginAccessOk:
@@ -1121,6 +1125,84 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 	}
 	return eMyIconUnknown;
 }
+
+//============================================================================
+//! get setup icon for given plugin
+EMyIcons MyIcons::getPluginSetupIcon( EPluginType ePluginType)
+{
+    switch( ePluginType )
+    {
+    case ePluginTypeAdmin:
+        return eMyIconUnknown; // not implemented
+
+    case ePluginTypeAboutMePage:
+        return eMyIconSettingsAboutMe;
+
+    case ePluginTypeAvatarImage:
+         return eMyIconSettingsAvatarImage;
+
+    case ePluginTypeChatRoom:
+        return eMyIconSettingsChatRoom;
+
+    case ePluginTypeServiceConnectTest:
+        return eMyIconSettingsConnectionTest;
+
+    case ePluginTypeClientConnectTest:
+        return eMyIconSettingsConnectionTest;
+
+    case ePluginTypeRandomConnect:
+        return eMyIconSettingsRandomConnect;
+
+    case ePluginTypeRandomConnectRelay:
+        return eMyIconSettingsRandomConnectRelay;
+
+    case ePluginTypeRelay:
+        return eMyIconSettingsRelay;
+
+    case ePluginTypeStoryboard:
+        return eMyIconSettingsShareStoryboard;
+
+    case ePluginTypeWebServer:	// web server plugin ( for profile web page )
+        return eMyIconSettingsShareWebCam;
+
+    case ePluginTypeFileXfer:	// file offer plugin
+        return eMyIconSettingsFileXfer;
+
+    case ePluginTypeFileServer:	// file share plugin
+        return eMyIconSettingsShareFiles;
+
+    case ePluginTypeCamServer:	// web cam broadcast plugin
+        return eMyIconSettingsShareWebCam;
+
+    case ePluginTypeVoicePhone:	// VOIP p2p plugin
+        return eMyIconSettingsVoicePhone;
+
+    case ePluginTypeVideoPhone:	// Video phone p2p plugin
+        return eMyIconSettingsVideoPhone;
+
+    case ePluginTypeTruthOrDare:	// Web Cam Truth Or Dare game p2p plugin
+        return eMyIconSettingsTruthOrDare;
+
+    case ePluginTypeMessenger:	// multisession p2p plugin
+        return eMyIconSettingsMessenger;
+
+    case ePluginTypeHostGroup:
+        return eMyIconSettingsHostGroup;
+
+    case ePluginTypeHostGroupListing:
+        return eMyIconSettingsHostGroupListing;
+
+    case ePluginTypeHostNetwork:
+        return eMyIconSettingsHostNetwork;
+
+    default:
+        LogMsg( LOG_ERROR, "MyIcons::getPluginIcon: unrecognized plugin type %d\n", ePluginType );
+        return eMyIconUnknown;
+    }
+
+    return eMyIconUnknown;
+}
+
 //============================================================================
 //! get disabled plugin icon
 EMyIcons MyIcons::getDisabledPluginIcon( EPluginType ePluginType )

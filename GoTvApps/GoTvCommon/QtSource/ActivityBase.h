@@ -294,10 +294,11 @@ protected:
     QWidget *					m_ParentWidget{nullptr};
 
 	EApplet						m_EAppletType = eAppletUnknown;
+    EPluginType					m_ePluginType = ePluginTypeInvalid;
+
     bool                        m_IsAppletLaunchWidget{false};
     QLabel *					m_StatusMsgLabel{nullptr};
 
-	EPluginType					m_ePluginType = ePluginTypeInvalid;
     VxNetIdent *				m_HisIdent{nullptr};
     QTimer *					m_ResizingTimer{nullptr};
     bool						m_IsResizing{false};

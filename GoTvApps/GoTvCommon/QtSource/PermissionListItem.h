@@ -22,10 +22,9 @@ class PermissionListItem : public QWidget, public QListWidgetItem
 	Q_OBJECT
 
 public:
-    PermissionListItem( QListWidget * parent = 0 );
+    PermissionListItem( QListWidget * parent, AppletBase *parentApplet );
 
-    void						setPluginType( EPluginType pluginType, int subType = 0 );
-    void						initPermissionListItem( void );
+    void						initPermissionListItem( EPluginType pluginType, int subType = 0 );
 
     void						setPermissionLevel( EFriendState permLevel );
     EFriendState                getPermissionLevel( void );
@@ -34,6 +33,8 @@ protected slots:
     void                        slotHandleSelectionChanged( int );
     void                        slotShowPermissionInformation();
     void                        slotShowPluginInformation();
+    void                        slotRunPlugin();
+    void                        slotSetupPlugin();
 
 protected:
     void						fillPermissionComboBox( void );
@@ -44,6 +45,7 @@ protected:
 
     Ui::PermissionListItemUi	ui;
     AppCommon&                  m_MyApp;
+    AppletBase *                m_ParentApplet{ nullptr };
     QSize                       m_SizeHint;
     EPluginType                 m_PluginType = ePluginTypeInvalid;
     int                         m_SubPluginType = 0;

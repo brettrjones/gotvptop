@@ -272,9 +272,9 @@ border-image: none;
  </widget>
  <customwidgets>
   <customwidget>
-   <class>TitleBarWidget</class>
+   <class>PermissionWidget</class>
    <extends>QWidget</extends>
-   <header>TitleBarWidget.h</header>
+   <header>PermissionWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
@@ -284,9 +284,9 @@ border-image: none;
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>PermissionWidget</class>
+   <class>TitleBarWidget</class>
    <extends>QWidget</extends>
-   <header>PermissionWidget.h</header>
+   <header>TitleBarWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

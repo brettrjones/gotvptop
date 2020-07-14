@@ -125,8 +125,10 @@ enum EApplet
     eAppletClientShareWebCam,
     eAppletClientStoryboard,
 
+    eAppletChooseThumbnail,
     eAppletGalleryImage,
     eAppletGalleryThumb,
+    eAppletSnapshot,
 
     eAppletServiceSettings,
 

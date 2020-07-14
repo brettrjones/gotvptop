@@ -27,11 +27,15 @@ public:
     void						setPluginType( EPluginType pluginType, int subType = 0 );
     void						setPermissionLevel( EFriendState permLevel );
     EFriendState                getPermissionLevel( void );
+    VxPushButton *              getPluginRunButton()            { return ui.m_PluginRunButton; }
+    VxPushButton *              getPluginSettingsButton()       { return ui.m_PluginSettingsButton; }
 
 protected slots:
     void                        slotHandleSelectionChanged( int );
     void                        slotShowPermissionInformation();
     void                        slotShowPluginInformation();
+    void                        slotRunPlugin();
+    void                        slotSetupPlugin();
 
 protected:
 	void						initPermissionWidget( void );
@@ -42,6 +46,7 @@ protected:
 
     Ui::PermissionWidgetUi	    ui;
     AppCommon&                  m_MyApp;
+    AppletBase*                 m_ParentApplet{ nullptr };
     EPluginType                 m_PluginType = ePluginTypeInvalid;
     int                         m_SubPluginType = 0;
     bool                        m_OrigPermissionIsSet = false;

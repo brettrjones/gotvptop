@@ -48,7 +48,6 @@ public:
 	static bool				    playFile( AppCommon& myApp, QString fullFileName, int pos0to100000 );
     static void					splitPathAndFileName( QString& fileNameAndPath, QString& retFileName, QString& retPath );
 
-
     static bool                 isAppletAService( EApplet applet );
     static bool                 isAppletAClient( EApplet applet );
 
@@ -56,6 +55,7 @@ public:
     static EApplet              pluginTypeToEditApplet( EPluginType pluginType );
     static EApplet              pluginTypeToSettingsApplet( EPluginType pluginType );
     static EMyIcons             pluginTypeToSettingsIcon( EPluginType pluginType );
+    static EApplet              pluginTypeToUserApplet( EPluginType pluginType );
     static EApplet              pluginTypeToViewApplet( EPluginType pluginType );
 
     static bool                 isPluginSingleSession( EPluginType ePluginType );
@@ -80,6 +80,7 @@ public:
     static void                 setValuesFromIdentity( QWidget * curWidget, VxNetIdent * ident, QLineEdit * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
     static void                 setIdentityFromValues( QWidget * curWidget, VxNetIdent * ident, QLineEdit * age, QComboBox * genderCombo, QComboBox * languageCombo, QComboBox * contentCombo );
 
+    static void                 fillPermissionComboBox( QComboBox * permissionComboBox );
     static EFriendState         comboIdxToFriendState( int comboIdx );
     static int                  friendStateToComboIdx( EFriendState friendState );
 
@@ -104,5 +105,7 @@ public:
     static QWidget *            findAppletContentFrame( QWidget * widget );
     static ActivityBase *       findLaunchWindow( QWidget * widget );
     static AppletBase *         findParentApplet( QWidget * widget );
+
+
 };
 

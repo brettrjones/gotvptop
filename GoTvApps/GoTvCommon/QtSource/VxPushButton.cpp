@@ -433,6 +433,11 @@ void VxPushButton::setAppIcon( EMyIcons appletIcon, QWidget * parentAppFrame )
 //============================================================================
 void VxPushButton::mousePressEvent( QMouseEvent * event )
 {
+    if( !isVisible() )
+    {
+        return;
+    }
+
 	if( m_IsSlideLeftButton )
 	{
 		m_MousePressedPoint = event->pos();
