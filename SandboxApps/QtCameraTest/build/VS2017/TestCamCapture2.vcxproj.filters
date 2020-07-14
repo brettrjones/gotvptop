@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Forms">
+      <UniqueIdentifier>{00c4d699-3cd2-46ed-a9c9-8a126d6765e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="QtSource">
+      <UniqueIdentifier>{012294a1-e4d2-4b28-9fd8-0ce998bfe9bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QtSource\CoreLib">
+      <UniqueIdentifier>{6fb040bc-aa51-40d2-a6a6-2f6cb7cce8c7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\Forms\camera.ui">
+      <Filter>Forms</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Forms\imagesettings.ui">
+      <Filter>Forms</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Forms\videosettings.ui">
+      <Filter>Forms</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\QtSource\CamCamera.h">
+      <Filter>QtSource</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\QtSource\CamViewWidget.h">
+      <Filter>QtSource</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\QtSource\imagesettings.h">
+      <Filter>QtSource</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\QtSource\videosettings.h">
+      <Filter>QtSource</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Forms\CamViewWidget.ui">
+      <Filter>Forms</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\QtSource\VxAspectFrame.h">
+      <Filter>QtSource</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\QtSource\VxLabel.h">
+      <Filter>QtSource</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\QtSource\VxPushButton.h">
+      <Filter>QtSource</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\QtSource\camera.h">
+      <Filter>QtSource</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resources\shutter.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GeneratedFiles\ui_camera.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_imagesettings.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_videosettings.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_CamViewWidget.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\QtSource\CoreLib\VxDebug.h">
+      <Filter>QtSource\CoreLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\QtSource\CoreLib\VxDefs.h">
+      <Filter>QtSource\CoreLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\QtSource\CoreLib\VxFileUtil.h">
+      <Filter>QtSource\CoreLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\QtSource\CoreLib\VxGUID.h">
+      <Filter>QtSource\CoreLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\QtSource\CoreLib\VxTime.h">
+      <Filter>QtSource\CoreLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\QtSource\CoreLib\VxTimer.h">
+      <Filter>QtSource\CoreLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\QtSource\CoreLib\VxTimeUtil.h">
+      <Filter>QtSource\CoreLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\QtSource\CoreLib\VxParse.h">
+      <Filter>QtSource\CoreLib</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\QtSource\CamCamera.cpp">
+      <Filter>QtSource</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CamCamera.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CamCamera.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\CamViewWidget.cpp">
+      <Filter>QtSource</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CamViewWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CamViewWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\imagesettings.cpp">
+      <Filter>QtSource</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_imagesettings.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_imagesettings.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\main.cpp">
+      <Filter>QtSource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\videosettings.cpp">
+      <Filter>QtSource</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_videosettings.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_videosettings.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\VxAspectFrame.cpp">
+      <Filter>QtSource</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_VxAspectFrame.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_VxAspectFrame.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\VxLabel.cpp">
+      <Filter>QtSource</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_VxLabel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_VxLabel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\VxPushButton.cpp">
+      <Filter>QtSource</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_VxPushButton.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_VxPushButton.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\CoreLib\VxDebug.cpp">
+      <Filter>QtSource\CoreLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\CoreLib\VxFileUtil.cpp">
+      <Filter>QtSource\CoreLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\CoreLib\VxGUID.cpp">
+      <Filter>QtSource\CoreLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\CoreLib\VxTime.cpp">
+      <Filter>QtSource\CoreLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\CoreLib\VxTimer.cpp">
+      <Filter>QtSource\CoreLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\CoreLib\VxTimeUtil.cpp">
+      <Filter>QtSource\CoreLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\CoreLib\VxParse.cpp">
+      <Filter>QtSource\CoreLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\camera.cpp">
+      <Filter>QtSource</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_camera.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_camera.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

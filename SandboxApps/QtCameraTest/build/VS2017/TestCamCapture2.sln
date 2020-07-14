@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtOpenglThreadTest", "QtOpenglThreadTest.vcxproj", "{C2E07B6F-6AE9-3CDB-B857-CF8D6CA1BF1B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCamCapture2", "TestCamCapture2.vcxproj", "{C2E07B6F-6AE9-3CDB-B857-CF8D6CA1BF1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,7 +20,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D1BCADC5-FBF0-4B9D-BD12-840274F712E8}
 		Qt5Version = 64BitVs2017Qt5.12.3
-		SolutionGuid = {81B64B1F-C59B-4436-9FF3-B3CFA5F524A7}
 	EndGlobalSection
 EndGlobal
