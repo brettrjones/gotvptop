@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>VidWidgetClass</class>
- <widget class="QWidget" name="VidWidgetClass">
+ <class>CamViewWidgetUi</class>
+ <widget class="QWidget" name="CamViewWidgetUi">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -604,7 +604,7 @@
   <customwidget>
    <class>VxLabel</class>
    <extends>QLabel</extends>
-   <header>VxLabel.h</header>
+   <header location="global">VxLabel.h</header>
   </customwidget>
   <customwidget>
    <class>VxAspectFrame</class>

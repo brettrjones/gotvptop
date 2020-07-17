@@ -51,7 +51,33 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
     </CustomBuild>
-    <None Include="..\..\Resources\shutter.svg" />
+    <CustomBuild Include="..\..\app_resources.qrc">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(FullPath);..\..\Resources\shutter.svg;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Rcc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(FullPath);..\..\Resources\shutter.svg;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Rcc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
+    </CustomBuild>
+    <CustomBuild Include="..\..\Forms\MainWindow.ui">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+    </CustomBuild>
+    <None Include="..\..\QtSource\libjpg\JpgLib.pro" />
+    <None Include="..\..\QtSource\libjpg\README" />
+    <None Include="..\..\QtSource\NetLib\NetLib.pro" />
+    <None Include="..\..\Resources\shutter.svg">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\..\QtSource\CamCamera.h">
@@ -74,26 +100,6 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_CONSOLE -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions) "-I." "-I$(QTDIR)\include" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
     </CustomBuild>
-    <CustomBuild Include="..\..\QtSource\imagesettings.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing %(Identity)...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DTARGET_OS_WINDOWS -DWIN64 -D_DEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions)  "-I$(ProjectDir)..\..\QtSource" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)" "-I$(QTDIR)\mkspecs\win64-msvc" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing %(Identity)...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_CONSOLE -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions) "-I." "-I$(QTDIR)\include" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
-    </CustomBuild>
-    <CustomBuild Include="..\..\QtSource\videosettings.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing %(Identity)...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DTARGET_OS_WINDOWS -DWIN64 -D_DEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions)  "-I$(ProjectDir)..\..\QtSource" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)" "-I$(QTDIR)\mkspecs\win64-msvc" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing %(Identity)...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_CONSOLE -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions) "-I." "-I$(QTDIR)\include" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
-    </CustomBuild>
     <CustomBuild Include="..\..\QtSource\VxAspectFrame.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing %(Identity)...</Message>
@@ -104,7 +110,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_CONSOLE -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions) "-I." "-I$(QTDIR)\include" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
     </CustomBuild>
-    <CustomBuild Include="..\..\QtSource\camera.h">
+    <CustomBuild Include="..\..\QtSource\AppCommon.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
@@ -114,12 +120,52 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_CONSOLE -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions) "-I." "-I$(QTDIR)\include" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
     </CustomBuild>
+    <ClInclude Include="..\..\QtSource\AppDefs.h" />
+    <ClInclude Include="..\..\QtSource\AppSettings.h" />
+    <CustomBuild Include="..\..\QtSource\CamLogic.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DTARGET_OS_WINDOWS -DWIN64 -D_DEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions) "-I$(ProjectDir)..\..\QtSource" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)" "-I$(QTDIR)\mkspecs\win64-msvc" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_CONSOLE -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions) "-I." "-I$(QTDIR)\include" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
+    </CustomBuild>
+    <ClInclude Include="..\..\QtSource\CoreLib\AppErr.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\Blowfish.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\config_corelib.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\dirent_sim.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\IsBigEndianCpu.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\md5.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\MediaCallbackInterface.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\SHA1.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\StdMinMaxForWindows.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VarToString.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxAppInfo.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxBuffer.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxChop.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxChopMap.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxCrypto.h" />
     <ClInclude Include="..\..\QtSource\CoreLib\VxDebug.h" />
     <ClInclude Include="..\..\QtSource\CoreLib\VxDefs.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxFileCrc32.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxFileInfo.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxFileTypeMasks.h" />
     <ClInclude Include="..\..\QtSource\CoreLib\VxFileUtil.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxGlobals.h" />
     <ClInclude Include="..\..\QtSource\CoreLib\VxGUID.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxLinuxOnly.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxMacros.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxMutex.h" />
     <ClInclude Include="..\..\QtSource\CoreLib\VxParse.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxSemaphore.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxSha1Hash.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxSupportedFiles.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxTextStreamReader.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxThread.h" />
     <ClInclude Include="..\..\QtSource\CoreLib\VxTime.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxTimeDefs.h" />
     <ClInclude Include="..\..\QtSource\CoreLib\VxTimer.h" />
     <ClInclude Include="..\..\QtSource\CoreLib\VxTimeUtil.h" />
     <CustomBuild Include="..\..\QtSource\VxLabel.h">
@@ -142,41 +188,334 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_CONSOLE -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions) "-I." "-I$(QTDIR)\include" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
     </CustomBuild>
+    <ClInclude Include="..\..\QtSource\CoreLib\VxUrl.h" />
+    <ClInclude Include="..\..\QtSource\CoreLib\VxValuePair.h" />
+    <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\MediaClient.h" />
+    <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\MediaProcessor.h" />
+    <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\RawAudio.h" />
+    <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\RawVideo.h" />
+    <ClInclude Include="..\..\QtSource\GoTvCore\GoTvP2P\P2PEngine\P2PEngine.h" />
+    <ClInclude Include="..\..\QtSource\GoTvInterface\IDefs.h" />
+    <ClInclude Include="..\..\QtSource\GoTvInterface\IFromGui.h" />
+    <ClInclude Include="..\..\QtSource\GoTvInterface\IGoTv.h" />
+    <ClInclude Include="..\..\QtSource\GoTvInterface\IToGui.h" />
+    <CustomBuild Include="..\..\QtSource\MainWindow.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DTARGET_OS_WINDOWS -DWIN64 -D_DEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions) "-I$(ProjectDir)..\..\QtSource" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)" "-I$(QTDIR)\mkspecs\win64-msvc" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_CONSOLE -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions) "-I." "-I$(QTDIR)\include" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
+    </CustomBuild>
+    <CustomBuild Include="..\..\QtSource\ImageSettings.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DTARGET_OS_WINDOWS -DWIN64 -D_DEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions) "-I$(ProjectDir)..\..\QtSource" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)" "-I$(QTDIR)\mkspecs\win64-msvc" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_CONSOLE -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions) "-I." "-I$(QTDIR)\include" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
+    </CustomBuild>
+    <ClInclude Include="..\..\QtSource\libjpg\jchuff.h" />
+    <ClInclude Include="..\..\QtSource\libjpg\jconfig.h" />
+    <ClInclude Include="..\..\QtSource\libjpg\jdct.h" />
+    <ClInclude Include="..\..\QtSource\libjpg\jdhuff.h" />
+    <ClInclude Include="..\..\QtSource\libjpg\jerror.h" />
+    <ClInclude Include="..\..\QtSource\libjpg\jinclude.h" />
+    <ClInclude Include="..\..\QtSource\libjpg\jmemsys.h" />
+    <ClInclude Include="..\..\QtSource\libjpg\jmorecfg.h" />
+    <ClInclude Include="..\..\QtSource\libjpg\jpegint.h" />
+    <ClInclude Include="..\..\QtSource\libjpg\jpeglib.h" />
+    <ClInclude Include="..\..\QtSource\libjpg\jversion.h" />
+    <ClInclude Include="..\..\QtSource\libjpg\transupp.h" />
+    <ClInclude Include="..\..\QtSource\libjpg\VxJpgLib.h" />
+    <ClInclude Include="..\..\QtSource\MyIcons.h" />
+    <ClInclude Include="..\..\QtSource\MyIconsDefs.h" />
+    <CustomBuild Include="..\..\QtSource\VxAppTheme.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DTARGET_OS_WINDOWS -DWIN64 -D_DEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions) "-I$(ProjectDir)..\..\QtSource" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)" "-I$(QTDIR)\mkspecs\win64-msvc" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_CONSOLE -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions) "-I." "-I$(QTDIR)\include" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
+    </CustomBuild>
+    <ClInclude Include="..\..\QtSource\NetLib\ifaddrs-android-impl.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\InetAddress.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\JniHelpers.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\NetHostSetting.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\NetSettings.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\ScopedFd.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxAnyRandomPort.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxBaseSktInfo.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxClientMgr.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxFileXferInfo.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxGetExternalIps.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxGetRandomPort.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxHttpParse.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxHttpRequest.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxHttpValuePair.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxParseUrlComponents.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxPeerMgr.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxProxy.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxResolveHost.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxServerMgr.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxSktAccept.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxSktBase.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxSktBaseMgr.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxSktBuf.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxSktConnect.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxSktConnectSimple.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxSktCrypto.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxSktDefs.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxSktInfo.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxSktRandomData.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxSktThrottle.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxSktUdp.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxSktUdpBroadcast.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxSktUtil.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxSktWaitingList.h" />
+    <ClInclude Include="..\..\QtSource\NetLib\VxXferDefs.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\AllPkts.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktAnnList.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktAnnounce.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktChatReq.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktDebugHelpers.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktLogReply.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktLogReq.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktPluginHandlerBase.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktRequestErrors.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsAssetXfer.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktSearch.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsFileList.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsFileShare.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsGroupList.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsImAlive.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsMultiSession.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsPing.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsPluginOffer.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsPluginSetting.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsRelay.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsSession.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsStoryBoard.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsThumb.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsTodGame.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsVideoFeed.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktsWebServer.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktSysHandlerBase.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktTcpPunch.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktTypes.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktVoiceReply.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\PktVoiceReq.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\VxCommon.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\VxConnectId.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\VxConnectInfo.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\VxFriendMatch.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\VxNetIdentBase.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\VxOnlineStatusFlags.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\VxPktHdr.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\VxRelayFlags.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\VxSearchDefs.h" />
+    <ClInclude Include="..\..\QtSource\PktLib\VxSearchFlags.h" />
+    <ClInclude Include="..\..\QtSource\VxVideoLib\GdvBufferUtil.h" />
+    <ClInclude Include="..\..\QtSource\VxVideoLib\IVxVidCap.h" />
+    <ClInclude Include="..\..\QtSource\VxVideoLib\VxRescaleRgb.h" />
+    <ClInclude Include="..\..\QtSource\VxVideoLib\VxVidCap.h" />
+    <ClInclude Include="..\..\QtSource\VxVideoLib\VxVidCapImp.h" />
+    <ClInclude Include="..\..\QtSource\VxVideoLib\VxVideoConvert.h" />
+    <ClInclude Include="..\..\QtSource\VxVideoLib\VxVideoLib.h" />
     <ClInclude Include="GeneratedFiles\ui_camera.h" />
     <ClInclude Include="GeneratedFiles\ui_CamViewWidget.h" />
     <ClInclude Include="GeneratedFiles\ui_imagesettings.h" />
+    <ClInclude Include="GeneratedFiles\ui_MainWindow.h" />
     <ClInclude Include="GeneratedFiles\ui_videosettings.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\QtSource\AppCommon.cpp" />
+    <ClCompile Include="..\..\QtSource\AppDefs.cpp" />
+    <ClCompile Include="..\..\QtSource\AppSettings.cpp" />
     <ClCompile Include="..\..\QtSource\CamCamera.cpp" />
-    <ClCompile Include="..\..\QtSource\camera.cpp" />
+    <ClCompile Include="..\..\QtSource\CamLogic.cpp" />
     <ClCompile Include="..\..\QtSource\CamViewWidget.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\AppErr_corelib.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\Blowfish_corelib.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\dirent_sim.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\md5_corelib.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\SHA1_corelib.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxAppInfo.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxBuffer.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxChop.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxChopMap.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxCrypto.cpp" />
     <ClCompile Include="..\..\QtSource\CoreLib\VxDebug.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxFileCrc32.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxFileInfo.cpp" />
     <ClCompile Include="..\..\QtSource\CoreLib\VxFileUtil.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxFunctionsMissingInPosix.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxFunctionsMissingInWindows.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxGlobals.cpp" />
     <ClCompile Include="..\..\QtSource\CoreLib\VxGUID.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxLinuxOnly.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxMutex.cpp" />
     <ClCompile Include="..\..\QtSource\CoreLib\VxParse.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxSemaphore.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxSha1Hash.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxTextStreamReader.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxThread.cpp" />
     <ClCompile Include="..\..\QtSource\CoreLib\VxTime.cpp" />
     <ClCompile Include="..\..\QtSource\CoreLib\VxTimer.cpp" />
     <ClCompile Include="..\..\QtSource\CoreLib\VxTimeUtil.cpp" />
-    <ClCompile Include="..\..\QtSource\imagesettings.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxUrl.cpp" />
+    <ClCompile Include="..\..\QtSource\CoreLib\VxValuePair.cpp" />
+    <ClCompile Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\MediaProcessor.cpp" />
+    <ClCompile Include="..\..\QtSource\GoTvCore\GoTvP2P\P2PEngine\P2PEngine.cpp" />
+    <ClCompile Include="..\..\QtSource\GoTvInterface\IGoTv.cpp" />
+    <ClCompile Include="..\..\QtSource\ImageSettings.cpp" />
+    <ClCompile Include="..\..\QtSource\libjpg\jcapimin.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jcapistd.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jccoefct.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jccolor.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jcdctmgr.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jchuff.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jcinit.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jcmainct.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jcmarker.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jcmaster.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jcomapi.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jcparam.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jcphuff.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jcprepct.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jcsample.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jctrans.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdapimin.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdapistd.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdatadst.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdatasrc.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdcoefct.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdcolor.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jddctmgr.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdhuff.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdinput.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdmainct.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdmarker.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdmaster.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdmerge.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdphuff.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdpostct.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdsample.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jdtrans.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jerror.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jfdctflt.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jfdctfst.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jfdctint.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jidctflt.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jidctfst.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jidctint.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jidctred.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jmemansi.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jmemmgr.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jquant1.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jquant2.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\jutils.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\transupp.c" />
+    <ClCompile Include="..\..\QtSource\libjpg\VxJpg.cpp" />
     <ClCompile Include="..\..\QtSource\main.cpp" />
-    <ClCompile Include="..\..\QtSource\videosettings.cpp" />
+    <ClCompile Include="..\..\QtSource\MainWindow.cpp" />
+    <ClCompile Include="..\..\QtSource\MyIcons.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\InetAddress.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\NetHostSetting.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\NetSettings.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxBaseSktInfo.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxClientMgr.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxFileXferInfo.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxGetExternalIps.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxGetRandomPort.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxHttpParse.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxHttpRequest.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxHttpValuePair.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxParseUrlComponents.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxPeerMgr.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxProxy.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxResolveHost.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxServerMgr.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxSktAccept.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxSktBase.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxSktBaseMgr.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxSktBuf.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxSktConnect.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxSktConnectSimple.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxSktCrypto.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxSktThrottle.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxSktUdp.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxSktUdpBroadcast.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxSktUtil.cpp" />
+    <ClCompile Include="..\..\QtSource\NetLib\VxSktWaitingList.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktAnnList.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktAnnounce.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktChatReq.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktDebugHelpers.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktLogReply.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktLogReq.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktPluginHandlerBase.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktSearch.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktsFileList.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktsFileShare.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktsImAlive.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktsMultiSession.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktsPing.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktsPluginOffer.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktsRelay.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktsSession.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktsStoryBoard.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktsThumb.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktsTodGame.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktsVideoFeed.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktsWebServer.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktSysHandlerBase.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktTcpPunch.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktVoiceReply.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\PktVoiceReq.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\VxCommon.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\VxConnectId.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\VxConnectInfo.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\VxFriendMatch.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\VxNetIdentBase.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\VxOnlineStatusFlags.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\VxPktHdr.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\VxRelayFlags.cpp" />
+    <ClCompile Include="..\..\QtSource\PktLib\VxSearchFlags.cpp" />
+    <ClCompile Include="..\..\QtSource\VxAppTheme.cpp" />
     <ClCompile Include="..\..\QtSource\VxAspectFrame.cpp" />
     <ClCompile Include="..\..\QtSource\VxLabel.cpp" />
     <ClCompile Include="..\..\QtSource\VxPushButton.cpp" />
+    <ClCompile Include="..\..\QtSource\VxVideoLib\GdvBufferUtil.cpp" />
+    <ClCompile Include="..\..\QtSource\VxVideoLib\VxRescaleRgb.cpp" />
+    <ClCompile Include="..\..\QtSource\VxVideoLib\VxVidCap.cpp" />
+    <ClCompile Include="..\..\QtSource\VxVideoLib\VxVidCapImp.cpp" />
+    <ClCompile Include="..\..\QtSource\VxVideoLib\VxVideoConvert.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_AppCommon.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_CamCamera.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_camera.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_CamLogic.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_CamViewWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_imagesettings.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_ImageSettings.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_videosettings.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_MainWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_VxAppTheme.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_VxAspectFrame.cpp">
@@ -188,19 +527,31 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_VxPushButton.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_app_resources.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AppCommon.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_CamCamera.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_camera.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_CamLogic.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_CamViewWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_imagesettings.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_ImageSettings.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_videosettings.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_MainWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_VxAppTheme.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_VxAspectFrame.cpp">
@@ -315,7 +666,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>

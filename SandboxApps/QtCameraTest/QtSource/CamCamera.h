@@ -1,5 +1,18 @@
-
 #pragma once
+//============================================================================
+// Copyright (C) 2020 Brett R. Jones
+// Issued to MIT style license by Brett R. Jones in 2017
+//
+// You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
+// provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
+//
+// This code is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//
+// bjones.engineer@gmail.com
+// http://www.nolimitconnect.com
+//============================================================================
 
 #include <QCamera>
 #include <QCameraImageCapture>
@@ -8,12 +21,14 @@
 
 #include <QWidget>
 
+class AppCommon;
+class CamLogic;
 
 class CamCamera : public QWidget
 {
     Q_OBJECT
 public:
-    CamCamera();
+    CamCamera( AppCommon& myApp, CamLogic& camLogic );
 
 private slots:
     void setCamera(const QCameraInfo &cameraInfo);
@@ -63,13 +78,16 @@ protected:
 private:
     //Ui::CamCamera *ui;
 
+    AppCommon&                  m_MyApp;
+    CamLogic&                   m_CamLogic;
+
     QScopedPointer<QCamera> m_camera;
     QScopedPointer<QCameraImageCapture> m_imageCapture;
-    QScopedPointer<QMediaRecorder> m_mediaRecorder;
+    //QScopedPointer<QMediaRecorder> m_mediaRecorder;
 
     QImageEncoderSettings m_imageSettings;
     QAudioEncoderSettings m_audioSettings;
-    QVideoEncoderSettings m_videoSettings;
+    //QVideoEncoderSettings m_videoSettings;
     QString m_videoContainerFormat;
     bool m_isCapturingImage = false;
     bool m_applicationExiting = false;

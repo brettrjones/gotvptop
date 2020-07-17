@@ -47,6 +47,44 @@ typedef void (*LOG_FUNCTION )( void *, uint32_t, char * );
 #ifdef __cplusplus
 #include <string>
 #include <vector>
+enum ELogModule
+{
+    eLogNone = 0,
+
+    eLogMulticast = 0x0001,
+    eLogConnect = 0x0002,
+    eLogListen = 0x0004,
+    eLogSkt = 0x0008,
+
+    eLogPkt = 0x0010,
+    eLogNetAccessStatus = 0x0020,  // internet and p2p access status
+    eLogNetworkState = 0x0040,
+    eLogNetworkMgr = 0x0080,
+
+    eLogIsPortOpenTest = 0x0100,
+    eLogThread = 0x0200,
+    eLogStorage = 0x0400, // mostly user and app directories
+    eLogAssets = 0x0800,
+
+    eLogPlugins = 0x1000,
+    eLogWindowPositions = 0x2000,
+    eLogStartup = 0x4000,
+    eLogHosts = 0x8000,
+
+    eLogPlayer = 0x00010000,
+    eLogTcpData = 0x00020000,
+    eLogUdpData = 0x00040000,
+    eLogAcceptConn = 0x00080000,
+
+    eLogNetworkRelay = 0x00100000,
+
+    eMaxLogModule
+};
+
+void LogModule( ELogModule eLog, unsigned long u32MsgType, const char* msg, ... );
+
+/// @brief return true if should log the given module
+bool IsLogEnabled( ELogModule logModule );
 class LogEntry
 {
 public:

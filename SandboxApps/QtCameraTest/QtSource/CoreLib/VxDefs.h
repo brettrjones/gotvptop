@@ -20,6 +20,10 @@
 //#include <CoreLib/config_corelib.h>
 #include <stdint.h>
 
+#ifndef RCODE
+# define RCODE long
+#endif
+
 
 #pragma pack(1)
 typedef union U128

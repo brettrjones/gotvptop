@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>Resources/shutter.svg</file>
-    </qresource>
-</RCC>

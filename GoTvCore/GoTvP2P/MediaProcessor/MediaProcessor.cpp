@@ -42,6 +42,11 @@
 
 #include <stdlib.h>
 
+#include <algorithm> 
+
+// requried due to some wierd microsoft std::min / max issue
+using namespace std;
+
 //#define TEST_JPG_SPEED 1
 #ifdef TEST_JPG_SPEED
 void testJpgSpeed( void );
@@ -556,10 +561,10 @@ static void yuvToRgb( uint8_t * yuvData, int outOffset, /*out*/uint8_t * rgbOut)
 	float b = y + 1.772f * (cb - 128.0f); 
 
 	// clamp to [0,255] 
-    rgbOut[outOffset]		= (uint8_t) std::max(0.0f, std::min(COLOR_MAX, r));
-    rgbOut[outOffset + 1]	= (uint8_t) std::max(0.0f, std::min(COLOR_MAX, g));
-    rgbOut[outOffset + 2]	= (uint8_t) std::max(0.0f, std::min(COLOR_MAX, b));
-} 
+    rgbOut[ outOffset ] = ( uint8_t )max( 0.0f, min( COLOR_MAX, r ) );
+    rgbOut[ outOffset + 1 ] = ( uint8_t )max( 0.0f, min( COLOR_MAX, g ) );
+    rgbOut[ outOffset + 2 ] = ( uint8_t )max( 0.0f, min( COLOR_MAX, b ) );
+}
 
 //============================================================================
 void MediaProcessor::fromGuiYUV420CaptureImage(	uint8_t * yBytes, uint8_t * uBytes, uint8_t * vBytes, 

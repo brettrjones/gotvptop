@@ -48,7 +48,10 @@
 **
 ****************************************************************************/
 
-#include "camera.h"
+//#include "camera.h"
+#include "MainWindow.h"
+#include "AppCommon.h"
+
 
 #include <QtWidgets>
 
@@ -56,8 +59,12 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    Camera camera;
-    camera.show();
+    AppCommon& appCommon( CreateAppCommonInstance( app ) );
 
-    return app.exec();
+    MainWindow mainWindow;
+    mainWindow.show();
+    mainWindow.resize( 2048, 1024 );
+
+    int result = app.exec();
+    DestroyAppCommonInstance();
 };

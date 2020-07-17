@@ -110,7 +110,7 @@ protected:
 	void						enableVidFilesButton( bool enable );
 
 	//=== vars ===//
-	Ui::VidWidgetClass			ui;
+	Ui::CamViewWidgetUi			ui;
 	//AppCommon&				    m_MyApp;
 	//P2PEngine&					m_Engine;
 	//AppSettings&				m_AppSettings;

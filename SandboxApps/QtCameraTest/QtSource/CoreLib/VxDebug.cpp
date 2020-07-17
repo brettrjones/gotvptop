@@ -37,7 +37,33 @@ bool g_StreamActive = false;
 
 namespace
 {
-    uint32_t                    g_ModuleEnableLoggingFlags      = LOG_FLAG_VIDEO_PLAY | LOG_FLAG_PLAYER_SYNC | LOG_FLAG_THREADS;
+#if defined(DEBUG)
+    uint32_t g_ModuleEnableLoggingFlags = ( uint32_t )(
+        eLogMulticast
+        | eLogConnect
+        | eLogListen
+        | eLogSkt
+        | eLogPkt
+        | eLogNetworkState
+        | eLogNetworkMgr
+        | eLogIsPortOpenTest
+        // | eLogThread
+        | eLogStorage
+        | eLogAssets
+        | eLogPlugins
+        // | eLogStartup
+        | eLogHosts
+        | eLogTcpData
+        | eLogUdpData
+        //| eLogNetworkRelay
+        //| eLogAcceptConn
+        //| eLogPlayer
+        //| eLogWindowPositions
+        );
+#else
+    uint32_t g_ModuleEnableLoggingFlags = 0;
+#endif // defined(DEBUG)
+
     unsigned long				g_u32LogFlags                   = LOG_PRIORITY_MASK;
 
     void *						g_pvUserData                    = 0;
@@ -63,61 +89,80 @@ namespace
 }
 
 //============================================================================
-void VxGetLogMessages( unsigned long u32MsgTypes, std::vector<LogEntry>& retMsgs )
-{
-#if ENABLE_LOG_LIST
-	retMsgs.clear();
-	//BRJ FIXME... can cause crash
-	g_oFileLogMutex.lock();
-	g_LogEntryList.clear();
-	return;
-	std::vector<LogEntry>::iterator iter;
-	g_oFileLogMutex.lock();
-	for( iter = g_LogEntryList.begin(); iter != g_LogEntryList.end(); ++iter )
-	{
-		LogEntry& logEntry = (*iter);
-		if( ( 0 == u32MsgTypes )
-			|| ( u32MsgTypes && logEntry.m_LogFlags ) )
-		{
-			retMsgs.push_back( logEntry );
-		}
-	}
-
-	g_oFileLogMutex.unlock();
-#endif // ENABLE_LOG_LIST
-}
-
-//============================================================================
 void                    default_log_handler( void * userData, uint32_t u32MsgType, char * pLogMsg );
 void                    vx_error( unsigned long u32MsgType, const char* msg, ... );
 
 LOG_FUNCTION		    g_pfuncLogHandler = default_log_handler;
 //============================================================================
 
-
 //============================================================================
-uint32_t VxGetModuleLogFlags( void )
+void LogAppendLineFeed( char * buf, size_t sizeOfBuf )
 {
-    return g_ModuleEnableLoggingFlags;
+    int strLen = strlen( buf );
+    if( ( sizeOfBuf > 2 ) && ( 0 < strLen ) && ( strLen < ( sizeOfBuf - 2 ) ) )
+    {
+        if( buf[ strLen - 1 ] != '\n' )
+        {
+            buf[ strLen ] = '\n';
+            buf[ strLen + 1 ] = 0;
+        }
+    }
 }
 
 //============================================================================
-void  VxSetLogPriorityMask( uint32_t flags )
+/// @brief return true if should log the given module
+bool IsLogEnabled( ELogModule logModule )
 {
-    g_ModuleEnableLoggingFlags = flags;
+    return ( g_ModuleEnableLoggingFlags & logModule ) ? true : false;
 }
 
 //============================================================================
-uint32_t VxGetLogPriorityMask( void )
+void LogModule( ELogModule eLog, unsigned long u32MsgType, const char* msg, ... )
 {
-    return g_u32LogFlags;
+    if( 0 == ( g_u32LogFlags && u32MsgType ) )
+    {
+        return; // don't log
+    }
+
+    if( IsLogEnabled( eLog ) )
+    {
+        char as8Buf[ MAX_ERR_MSG_SIZE ];
+        va_list argList;
+        va_start( argList, msg );
+        vsnprintf( as8Buf, sizeof( as8Buf ), msg, argList );
+        as8Buf[ sizeof( as8Buf ) - 1 ] = 0;
+        LogAppendLineFeed( as8Buf, sizeof( as8Buf ) );
+        va_end( argList );
+
+        VxHandleLogMsg( u32MsgType, as8Buf );
+    }
 }
 
-//============================================================================
-void  VxSetModuleLogFlags( uint32_t flags )
-{
-    g_u32LogFlags = flags;
-}
+
+
+////============================================================================
+//uint32_t VxGetModuleLogFlags( void )
+//{
+//    return g_ModuleEnableLoggingFlags;
+//}
+//
+////============================================================================
+//void  VxSetLogPriorityMask( uint32_t flags )
+//{
+//    g_ModuleEnableLoggingFlags = flags;
+//}
+//
+////============================================================================
+//uint32_t VxGetLogPriorityMask( void )
+//{
+//    return g_u32LogFlags;
+//}
+//
+////============================================================================
+//void  VxSetModuleLogFlags( uint32_t flags )
+//{
+//    g_u32LogFlags = flags;
+//}
 
 //============================================================================
 void log_to_file( const char * pFileName, const char * pMsg )
@@ -145,20 +190,6 @@ static bool firstLog = true;
             //g_oFileLogMutex.unlock();
 		}
 	}
-}
-
-//============================================================================
-void LogAppendLineFeed( char * buf, size_t sizeOfBuf )
-{
-    int strLen = strlen( buf );
-    if( ( sizeOfBuf > 2 ) && ( 0 < strLen ) && ( strLen < ( sizeOfBuf - 2 ) ) )
-    {
-        if( buf[ strLen - 1 ] != '\n' )
-        {
-             buf[ strLen ] = '\n';
-             buf[ strLen + 1 ] = 0;
-        }
-    }
 }
 
 //============================================================================

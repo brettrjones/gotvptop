@@ -1,6 +1,8 @@
 //============================================================================
 // Created by Brett R. Jones in 2018 and issued to public domain
 //============================================================================
+#include "GoTvCompilerConfig.h"
+
 #include "VxTime.h"
 #include "VxTimeUtil.h"
 #include "VxDebug.h"
@@ -20,11 +22,11 @@
 const __int64 DELTA_EPOCH_IN_MICROSECS = DEF_DELTA_EPOCH_IN_MICROSECS;
 
 // simulate gettimeofday
-struct timezone
-{
-    int  tz_minuteswest; /* minutes W of Greenwich */
-    int  tz_dsttime;     /* type of dst correction */
-};
+//struct timezone
+//{
+//    int  tz_minuteswest; /* minutes W of Greenwich */
+//    int  tz_dsttime;     /* type of dst correction */
+//};
 #endif // TARGET_OS_WINDOWS
 
 #if !defined(TARGET_OS_WINDOWS)
@@ -74,7 +76,7 @@ uint64_t GetTickCount64()
 }
 #endif // TARGET_OS_WINDOWS
 
-
+GOTV_BEGIN_CDECLARES
 #if defined( TARGET_OS_ANDROID )
 #include "VxDefs.h"
 
@@ -102,6 +104,7 @@ int VxSleep( int milliSec )
     return 0;
 }
 #endif // TARGET_OS_ANDROID
+GOTV_END_CDECLARES
 
 namespace
 {
