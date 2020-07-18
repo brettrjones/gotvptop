@@ -14,11 +14,14 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-//#include "SoundDefs.h"
-//#include "MyIconsDefs.h"
+#include "SoundDefs.h"
+#include "MyIconsDefs.h"
 
 #include <QPushButton>
 
+class AppCommon;
+class VxAppTheme;
+class MyIcons;
 class QTimer;
 
 class VxPushButton : public QPushButton
@@ -44,15 +47,16 @@ public:
     virtual void				setMaximumSize( int maxw, int maxh );
 
 
-	//MyIcons&					getMyIcons( void );
+	AppCommon&					getMyApp( void )                                    { return m_MyApp; }
+	MyIcons&					getMyIcons( void );
 
 	void						setEnabled( bool enabled );
 	void						setUseTheme( bool useTheme )						{ m_UseTheme = useTheme; }
 	bool						getUseTheme( void )									{ return m_UseTheme; }
-	//void						setNotifyEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyOverlay );
-	//bool						getNotifyEnabled( void )							{ return m_NotifyEnabled; }
+	void						setNotifyEnabled( bool enabled, EMyIcons eNotifyIcon = eMyIconNotifyOverlay );
+	bool						getNotifyEnabled( void )							{ return m_NotifyEnabled; }
 
-	//void						setIcon( EMyIcons myIcon );
+	void						setIcon( EMyIcons myIcon );
 	void						setIconColor( QColor iconColor );
 	void						setDrawButtonBorder( bool drawBoarder )				{ m_DrawButtonBorder = drawBoarder; }
 	bool						getDrawButtonBorder( void )							{ return m_DrawButtonBorder; }
@@ -65,12 +69,12 @@ public:
 	void						setIsSlideLeftButton( bool isSlideLeftButton )		{ m_IsSlideLeftButton = isSlideLeftButton; }
 	bool						getIsSlideLeftButton( void )						{ return m_IsSlideLeftButton; }
 
-	//void						setPressedSound( ESndDef sndDef )					{ m_ESndDefPressed = sndDef; }
+	void						setPressedSound( ESndDef sndDef )					{ m_ESndDefPressed = sndDef; }
 
-	//void						setIcons(	EMyIcons	normalIcon, 
-	//										EMyIcons	overlay1Icon		= eMyIconNone );
+	void						setIcons(	EMyIcons	normalIcon, 
+											EMyIcons	overlay1Icon		= eMyIconNone );
 
-    //virtual void                setAppIcon( EMyIcons appletIcon, QWidget * parentAppFrame );
+    virtual void                setAppIcon( EMyIcons appletIcon, QWidget * parentAppFrame );
 
 signals:
 	void						buttonToggleState( bool isOn );
@@ -86,31 +90,31 @@ protected:
 	virtual void				mousePressEvent( QMouseEvent * event ) override;
 	virtual void				mouseReleaseEvent( QMouseEvent * event ) override;
 	virtual void				mouseMoveEvent( QMouseEvent * event ) override;
-    //virtual void				paintEvent( QPaintEvent* ev ) override;
-    //void                        drawBorder( VxAppTheme& appTheme, QPainter& painter );
+    virtual void				paintEvent( QPaintEvent* ev ) override;
+    void                        drawBorder( VxAppTheme& appTheme, QPainter& painter );
 
 	//=== vars ===//
-	//AppCommon&					m_MyApp;
+	AppCommon&					m_MyApp;
 	QColor						m_DefaultIconColor;
     bool						m_IconColorWasSet{ false };
 	bool						m_DrawButtonBorder{ false };
 	bool						m_UseTheme{ true };
 	bool						m_NotifyEnabled{ false };
 
-	//EMyIcons					m_MyIcon;
-    //EMyIcons					m_MyIconLast;
+	EMyIcons					m_MyIcon;
+    EMyIcons					m_MyIconLast;
 	QPixmap						m_IconImage;
 	QColor						m_LastIconColor;
 	QSize						m_LastIconSize;
 
-	//EMyIcons					m_NotifyIcon;
-	//EMyIcons					m_LastNotifyIcon;
+	EMyIcons					m_NotifyIcon;
+	EMyIcons					m_LastNotifyIcon;
 	QPixmap						m_NotifyIconImage;
 	QColor						m_NotifyLastIconColor;
 	QSize						m_NotifyLastIconSize;
 
-	//EMyIcons					m_OverlayIcon;
-	//EMyIcons					m_LastOverlayIcon;
+	EMyIcons					m_OverlayIcon;
+	EMyIcons					m_LastOverlayIcon;
 	QPixmap						m_OverlayIconImage;
 	QColor						m_OverlayLastIconColor;
 	QSize						m_OverlayLastIconSize;
@@ -119,7 +123,7 @@ protected:
 	bool						m_IsToggleButton{ false };
 	bool						m_IsSlideLeftButton{ false };
 	bool						m_InSlideLeftMode{ false };
-	//ESndDef						m_ESndDefPressed;
+	ESndDef						m_ESndDefPressed;
 	QPoint						m_MousePressedPoint;
 	QPoint						m_ButtonPressedPos;
 	QPoint						m_MouseCurPoint;

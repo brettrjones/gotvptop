@@ -1,11 +1,10 @@
 #include "AppCommon.h"
 #include "AppSettings.h"
 
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxGlobals.h>
-
-
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
 namespace
 {
@@ -18,7 +17,7 @@ AppCommon& CreateAppCommonInstance( QApplication& myQApp )
     if( !g_AppCommon )
     {
         // constructor of AppCommon will set g_AppCommon
-        new AppCommon( myQApp, appSettings );
+        g_AppCommon = new AppCommon( myQApp, appSettings );
     }
 
     return *g_AppCommon;

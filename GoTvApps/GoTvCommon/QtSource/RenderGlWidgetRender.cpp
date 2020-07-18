@@ -20,7 +20,6 @@
 #include "GuiHelpers.h"
 #include "RenderKodiThread.h"
 #include "RenderGlOffScreenSurface.h"
-#include "GoTvDebugConfig.h"
 
 #include "GoTvInterface/GoTvRenderFrame.h"
 

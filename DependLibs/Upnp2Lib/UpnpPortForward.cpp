@@ -23,8 +23,6 @@
 #include <NetLib/VxSktUtil.h>
 #include <NetLib/VxParseUrlComponents.h>
 
-#include "GoTvDebugConfig.h"
-
 #include <time.h>
 #include <string.h>
 #include <atomic>

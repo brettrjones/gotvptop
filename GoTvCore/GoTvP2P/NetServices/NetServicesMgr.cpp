@@ -35,8 +35,6 @@
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxTime.h>
 
-#include "GoTvDebugConfig.h"
-
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>

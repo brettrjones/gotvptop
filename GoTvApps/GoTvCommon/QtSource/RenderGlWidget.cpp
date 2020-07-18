@@ -19,7 +19,6 @@
 #include "MyIcons.h"
 #include "GuiHelpers.h"
 #include "MyIcons.h"
-#include "GoTvDebugConfig.h"
 #include "RenderGlOffScreenSurface.h"
 
 #include "GoTvInterface/GoTvRenderFrame.h"

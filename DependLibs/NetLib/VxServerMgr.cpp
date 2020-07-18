@@ -16,7 +16,6 @@
 #include "VxSktUtil.h"
 #include "VxSktAccept.h"
 #include "VxServerMgr.h"
-#include "GoTvDebugConfig.h"
 
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGlobals.h>

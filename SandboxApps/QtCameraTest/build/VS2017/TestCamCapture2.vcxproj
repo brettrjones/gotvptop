@@ -219,6 +219,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_CONSOLE -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -D%(PreprocessorDefinitions) "-I." "-I$(QTDIR)\include" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtSvg" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
     </CustomBuild>
+    <ClInclude Include="..\..\QtSource\GuiParams.h" />
     <ClInclude Include="..\..\QtSource\libjpg\jchuff.h" />
     <ClInclude Include="..\..\QtSource\libjpg\jconfig.h" />
     <ClInclude Include="..\..\QtSource\libjpg\jdct.h" />
@@ -321,6 +322,7 @@
     <ClInclude Include="..\..\QtSource\PktLib\VxRelayFlags.h" />
     <ClInclude Include="..\..\QtSource\PktLib\VxSearchDefs.h" />
     <ClInclude Include="..\..\QtSource\PktLib\VxSearchFlags.h" />
+    <ClInclude Include="..\..\QtSource\SoundDefs.h" />
     <ClInclude Include="..\..\QtSource\VxVideoLib\GdvBufferUtil.h" />
     <ClInclude Include="..\..\QtSource\VxVideoLib\IVxVidCap.h" />
     <ClInclude Include="..\..\QtSource\VxVideoLib\VxRescaleRgb.h" />
@@ -374,6 +376,7 @@
     <ClCompile Include="..\..\QtSource\GoTvCore\GoTvP2P\MediaProcessor\MediaProcessor.cpp" />
     <ClCompile Include="..\..\QtSource\GoTvCore\GoTvP2P\P2PEngine\P2PEngine.cpp" />
     <ClCompile Include="..\..\QtSource\GoTvInterface\IGoTv.cpp" />
+    <ClCompile Include="..\..\QtSource\GuiParams.cpp" />
     <ClCompile Include="..\..\QtSource\ImageSettings.cpp" />
     <ClCompile Include="..\..\QtSource\libjpg\jcapimin.c" />
     <ClCompile Include="..\..\QtSource\libjpg\jcapistd.c" />

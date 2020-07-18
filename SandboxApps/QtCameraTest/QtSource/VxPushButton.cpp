@@ -14,10 +14,10 @@
 //============================================================================
 
 #include "VxPushButton.h"
-//#include "AppCommon.h"
-//#include "VxAppTheme.h"
-//#include "MyIcons.h"
-//#include "GuiParams.h"
+#include "AppCommon.h"
+#include "VxAppTheme.h"
+#include "MyIcons.h"
+#include "GuiParams.h"
 
 #include <CoreLib/VxTime.h>
 #include <CoreLib/VxDebug.h>
@@ -34,35 +34,31 @@ namespace
     const int APP_CLICK_MAX_MS_BETWEEN_SEQUENCE_CLICKS = 4000;
 }
 
-namespace GuiParams
-{
-    int getButtonSize() { return 48;  }
-    int getGuiScale() { return 1; }
-}
-
 //============================================================================
 VxPushButton::VxPushButton( QWidget *parent ) 
 : QPushButton( parent ) 
+, m_MyApp( GetAppInstance() )
+, m_DefaultIconColor( COLOR_UNKNOWN )
 
-//, m_MyIcon( eMyIconNone )
-//, m_MyIconLast( eMyIconNone )
+, m_MyIcon( eMyIconNone )
+, m_MyIconLast( eMyIconNone )
 , m_IconImage()
-//, m_LastIconColor( COLOR_TRANSPARENT)
+, m_LastIconColor( COLOR_TRANSPARENT)
 , m_LastIconSize( 0, 0 )
 
-//, m_NotifyIcon( eMyIconNone )
-//, m_LastNotifyIcon( eMyIconNone )
+, m_NotifyIcon( eMyIconNone )
+, m_LastNotifyIcon( eMyIconNone )
 , m_NotifyIconImage()
-//, m_NotifyLastIconColor( COLOR_TRANSPARENT)
+, m_NotifyLastIconColor( COLOR_TRANSPARENT)
 , m_NotifyLastIconSize( 0, 0 )
 
-//, m_OverlayIcon( eMyIconNone )
-//, m_LastOverlayIcon( eMyIconNone )
+, m_OverlayIcon( eMyIconNone )
+, m_LastOverlayIcon( eMyIconNone )
 , m_OverlayIconImage()
-//, m_OverlayLastIconColor( COLOR_TRANSPARENT)
+, m_OverlayLastIconColor( COLOR_TRANSPARENT)
 , m_OverlayLastIconSize( 0, 0 )
 
-//, m_ESndDefPressed( eSndDefButtonClick )
+, m_ESndDefPressed( eSndDefButtonClick )
 , m_MousePressedPoint( 0, 0 )
 , m_MouseCurPoint( 0, 0 )
 , m_BlinkTimer( new QTimer( this ) )
@@ -74,27 +70,27 @@ VxPushButton::VxPushButton( QWidget *parent )
 //============================================================================
 VxPushButton::VxPushButton( const QString &text, QWidget *parent ) 
 : QPushButton( text, parent ) 
-//, m_MyApp( GetAppInstance() )
-//, m_DefaultIconColor( COLOR_UNKNOWN )
+, m_MyApp( GetAppInstance() )
+, m_DefaultIconColor( COLOR_UNKNOWN )
 
-//, m_MyIcon( eMyIconNone )
+, m_MyIcon( eMyIconNone )
 , m_IconImage()
-//, m_LastIconColor( COLOR_TRANSPARENT )
+, m_LastIconColor( COLOR_TRANSPARENT )
 , m_LastIconSize( 0, 0 )
 
-//, m_NotifyIcon( eMyIconNone )
-//, m_LastNotifyIcon( eMyIconNone )
+, m_NotifyIcon( eMyIconNone )
+, m_LastNotifyIcon( eMyIconNone )
 , m_NotifyIconImage()
-//, m_NotifyLastIconColor( COLOR_TRANSPARENT )
+, m_NotifyLastIconColor( COLOR_TRANSPARENT )
 , m_NotifyLastIconSize( 0, 0 )
 
-//, m_OverlayIcon( eMyIconNone )
-//, m_LastOverlayIcon( eMyIconNone )
+, m_OverlayIcon( eMyIconNone )
+, m_LastOverlayIcon( eMyIconNone )
 , m_OverlayIconImage()
-//, m_OverlayLastIconColor( COLOR_TRANSPARENT )
+, m_OverlayLastIconColor( COLOR_TRANSPARENT )
 , m_OverlayLastIconSize( 0, 0 )
 
-//, m_ESndDefPressed( eSndDefButtonClick )
+, m_ESndDefPressed( eSndDefButtonClick )
 , m_MousePressedPoint( 0, 0 )
 , m_MouseCurPoint( 0, 0 )
 , m_BlinkTimer( new QTimer( this ) )
@@ -104,10 +100,10 @@ VxPushButton::VxPushButton( const QString &text, QWidget *parent )
 }
 
 //============================================================================
-//MyIcons&  VxPushButton::getMyIcons( void )
-//{
-//	return m_MyApp.getMyIcons();
-//}
+MyIcons&  VxPushButton::getMyIcons( void )
+{
+	return m_MyApp.getMyIcons();
+}
 
 //============================================================================
 void VxPushButton::initQButtonPro( void )
@@ -250,34 +246,34 @@ void VxPushButton::setEnabled( bool enabled )
 }
 
 //============================================================================
-//void VxPushButton::setNotifyEnabled( bool enabled, EMyIcons eNotifyIcon )
-//{
-//	m_NotifyEnabled = enabled;
-//	if( enabled )
-//	{
-//		if( eMyIconNone != eNotifyIcon )
-//		{
-//			m_NotifyIcon = eNotifyIcon;
-//		}
-//
-//		m_BlinkState = 1;
-//		m_BlinkTimer->start();
-//	}
-//	else
-//	{
-//		m_BlinkTimer->stop();
-//		m_BlinkState = 0;
-//	}
-//
-//	update();
-//}
+void VxPushButton::setNotifyEnabled( bool enabled, EMyIcons eNotifyIcon )
+{
+	m_NotifyEnabled = enabled;
+	if( enabled )
+	{
+		if( eMyIconNone != eNotifyIcon )
+		{
+			m_NotifyIcon = eNotifyIcon;
+		}
 
-////============================================================================
-//void VxPushButton::setIcon( EMyIcons myIcon )
-//{
-//	m_MyIcon = myIcon;
-//    update();
-//}
+		m_BlinkState = 1;
+		m_BlinkTimer->start();
+	}
+	else
+	{
+		m_BlinkTimer->stop();
+		m_BlinkState = 0;
+	}
+
+	update();
+}
+
+//============================================================================
+void VxPushButton::setIcon( EMyIcons myIcon )
+{
+	m_MyIcon = myIcon;
+    update();
+}
 
 //============================================================================
 void VxPushButton::setIconColor( QColor iconColor )
@@ -287,152 +283,152 @@ void VxPushButton::setIconColor( QColor iconColor )
     update();
 }
 
-////============================================================================
-//void VxPushButton::drawBorder(  VxAppTheme& appTheme, QPainter& painter )
-//{
-//    // draw button border if needed
-//    if( m_DrawButtonBorder )
-//    {
-//        painter.save();
-//        appTheme.drawButton( this, painter );
-//        painter.restore();
-//    }
-//}
+//============================================================================
+void VxPushButton::drawBorder(  VxAppTheme& appTheme, QPainter& painter )
+{
+    // draw button border if needed
+    if( m_DrawButtonBorder )
+    {
+        painter.save();
+        appTheme.drawButton( this, painter );
+        painter.restore();
+    }
+}
 
-////============================================================================
-//void VxPushButton::paintEvent( QPaintEvent* ev )
-//{
-//	QPainter painter( this );
-//    VxAppTheme& appTheme = m_MyApp.getAppTheme();
-//    if( !text().isEmpty() )
-//    {
-//        QPushButton::paintEvent( ev );
-//        drawBorder( appTheme, painter );
-//        painter.end();
-//        return;
-//    }
-//
-//	if( eMyIconNone == m_MyIcon )
-//	{
-//		// no icon set yet
-//		return;
-//	}
-//
-//#define IMAGE_PADDING  2
-//	QRect drawRect( IMAGE_PADDING, IMAGE_PADDING, this->width() - ( IMAGE_PADDING * 2 ), this->height() - ( IMAGE_PADDING * 2 ) );
-//	if( drawRect.width() < 8 )
-//	{
-//		LogMsg( LOG_ERROR, "VxPushButton::paintEvent invalid drawRect.width()  %d ", drawRect.width() );
-//		return;
-//	}
-//
-//
-//	QColor iconColor = m_IconColorWasSet ? m_DefaultIconColor : appTheme.getButtonColor( this, eColorLayerIcon );
-//    drawBorder( appTheme, painter );
-//
-//	// draw button icon
-//	painter.setRenderHint( QPainter::Antialiasing, true );
-//	painter.setRenderHint( QPainter::TextAntialiasing, true );
-//	painter.setRenderHint( QPainter::SmoothPixmapTransform, true );
-//
-//	if( ( m_LastIconColor != iconColor )
-//		|| m_IconImage.isNull()
-//        || ( m_MyIconLast != m_MyIcon )
-//		|| ( drawRect.size() != m_LastIconSize ) )
-//	{
-//		if( m_UseTheme )
-//		{
-//			m_IconImage = getMyIcons().getIconPixmap( m_MyIcon, drawRect.size(), iconColor );
-//		}
-//		else
-//		{
-//			m_IconImage = getMyIcons().getIconPixmap( m_MyIcon, drawRect.size() );
-//		}
-//
-//		if( !m_IconImage.isNull() )
-//		{
-//            m_MyIconLast = m_MyIcon;
-//		    m_LastIconColor = iconColor;
-//			m_LastIconSize = drawRect.size();
-//		}
-//	}
-//
-//	if( ! m_IconImage.isNull() )
-//	{
-//		painter.drawPixmap( drawRect, m_IconImage );
-//	}
-//
-//	if( eMyIconNone != m_OverlayIcon )
-//	{
-//		// draw overlay
-//		iconColor = appTheme.getButtonColor( this, eColorLayerOverlay );
-//		if( ( m_OverlayLastIconColor != iconColor )
-//			|| m_OverlayIconImage.isNull()
-//			|| ( drawRect.size() != m_OverlayLastIconSize )
-//			|| ( m_OverlayIcon != m_LastOverlayIcon ) )
-//		{
-//			// get overlay pixmap
-//			m_OverlayIconImage = getMyIcons().getIconPixmap( m_OverlayIcon, drawRect.size(), iconColor );
-//			if( ! m_OverlayIconImage.isNull() )
-//			{
-//				m_LastOverlayIcon = m_OverlayIcon;
-//				m_LastIconColor = iconColor;
-//				m_OverlayLastIconSize = drawRect.size();
-//			}
-//		}
-//
-//		if( ! m_OverlayIconImage.isNull() )
-//		{
-//			painter.drawPixmap( drawRect, m_OverlayIconImage );
-//		}
-//	}
-//
-//	if( m_NotifyEnabled
-//		&& ( eMyIconNone != m_NotifyIcon ) 
-//		&& ( 1 == m_BlinkState ) )
-//	{
-//		// draw notify dot
-//		iconColor = appTheme.getButtonColor( this, eColorLayerNotify );
-//
-//		if( ( m_LastIconColor != iconColor )
-//			|| m_NotifyIconImage.isNull()
-//			|| ( drawRect.size() != m_LastIconSize )
-//			|| ( m_NotifyIcon != m_LastNotifyIcon ) )
-//		{
-//			m_NotifyIconImage = getMyIcons().getIconPixmap( m_NotifyIcon, drawRect.size(), iconColor );
-//			if( ! m_IconImage.isNull() )
-//			{
-//				m_LastNotifyIcon = m_NotifyIcon;
-//				m_NotifyLastIconColor = iconColor;
-//				m_NotifyLastIconSize = drawRect.size();
-//			}
-//		}
-//
-//		if( ! m_NotifyIconImage.isNull() )
-//		{
-//			painter.drawPixmap( drawRect, m_IconImage );
-//		}
-//	}
-//
-//	painter.end();
-//}
-//
-////============================================================================
-//void VxPushButton::setIcons(	EMyIcons	normalIcon,
-//								EMyIcons	overlay1Icon )
-//{
-//	m_MyIcon = normalIcon;
-//	m_OverlayIcon = overlay1Icon;
-//	update();
-//}
-//
-////============================================================================
-//void VxPushButton::setAppIcon( EMyIcons appletIcon, QWidget * parentAppFrame )
-//{
-//    m_AppFrame = parentAppFrame;
-//    m_AppClickCount = 0;
-//    setIcons( appletIcon );
-//}
+//============================================================================
+void VxPushButton::paintEvent( QPaintEvent* ev )
+{
+	QPainter painter( this );
+    VxAppTheme& appTheme = m_MyApp.getAppTheme();
+    if( !text().isEmpty() )
+    {
+        QPushButton::paintEvent( ev );
+        drawBorder( appTheme, painter );
+        painter.end();
+        return;
+    }
+
+	if( eMyIconNone == m_MyIcon )
+	{
+		// no icon set yet
+		return;
+	}
+
+#define IMAGE_PADDING  2
+	QRect drawRect( IMAGE_PADDING, IMAGE_PADDING, this->width() - ( IMAGE_PADDING * 2 ), this->height() - ( IMAGE_PADDING * 2 ) );
+	if( drawRect.width() < 8 )
+	{
+		LogMsg( LOG_ERROR, "VxPushButton::paintEvent invalid drawRect.width()  %d ", drawRect.width() );
+		return;
+	}
+
+
+	QColor iconColor = m_IconColorWasSet ? m_DefaultIconColor : appTheme.getButtonColor( this, eColorLayerIcon );
+    drawBorder( appTheme, painter );
+
+	// draw button icon
+	painter.setRenderHint( QPainter::Antialiasing, true );
+	painter.setRenderHint( QPainter::TextAntialiasing, true );
+	painter.setRenderHint( QPainter::SmoothPixmapTransform, true );
+
+	if( ( m_LastIconColor != iconColor )
+		|| m_IconImage.isNull()
+        || ( m_MyIconLast != m_MyIcon )
+		|| ( drawRect.size() != m_LastIconSize ) )
+	{
+		if( m_UseTheme )
+		{
+			m_IconImage = getMyIcons().getIconPixmap( m_MyIcon, drawRect.size(), iconColor );
+		}
+		else
+		{
+			m_IconImage = getMyIcons().getIconPixmap( m_MyIcon, drawRect.size() );
+		}
+
+		if( !m_IconImage.isNull() )
+		{
+            m_MyIconLast = m_MyIcon;
+		    m_LastIconColor = iconColor;
+			m_LastIconSize = drawRect.size();
+		}
+	}
+
+	if( ! m_IconImage.isNull() )
+	{
+		painter.drawPixmap( drawRect, m_IconImage );
+	}
+
+	if( eMyIconNone != m_OverlayIcon )
+	{
+		// draw overlay
+		iconColor = appTheme.getButtonColor( this, eColorLayerOverlay );
+		if( ( m_OverlayLastIconColor != iconColor )
+			|| m_OverlayIconImage.isNull()
+			|| ( drawRect.size() != m_OverlayLastIconSize )
+			|| ( m_OverlayIcon != m_LastOverlayIcon ) )
+		{
+			// get overlay pixmap
+			m_OverlayIconImage = getMyIcons().getIconPixmap( m_OverlayIcon, drawRect.size(), iconColor );
+			if( ! m_OverlayIconImage.isNull() )
+			{
+				m_LastOverlayIcon = m_OverlayIcon;
+				m_LastIconColor = iconColor;
+				m_OverlayLastIconSize = drawRect.size();
+			}
+		}
+
+		if( ! m_OverlayIconImage.isNull() )
+		{
+			painter.drawPixmap( drawRect, m_OverlayIconImage );
+		}
+	}
+
+	if( m_NotifyEnabled
+		&& ( eMyIconNone != m_NotifyIcon ) 
+		&& ( 1 == m_BlinkState ) )
+	{
+		// draw notify dot
+		iconColor = appTheme.getButtonColor( this, eColorLayerNotify );
+
+		if( ( m_LastIconColor != iconColor )
+			|| m_NotifyIconImage.isNull()
+			|| ( drawRect.size() != m_LastIconSize )
+			|| ( m_NotifyIcon != m_LastNotifyIcon ) )
+		{
+			m_NotifyIconImage = getMyIcons().getIconPixmap( m_NotifyIcon, drawRect.size(), iconColor );
+			if( ! m_IconImage.isNull() )
+			{
+				m_LastNotifyIcon = m_NotifyIcon;
+				m_NotifyLastIconColor = iconColor;
+				m_NotifyLastIconSize = drawRect.size();
+			}
+		}
+
+		if( ! m_NotifyIconImage.isNull() )
+		{
+			painter.drawPixmap( drawRect, m_IconImage );
+		}
+	}
+
+	painter.end();
+}
+
+//============================================================================
+void VxPushButton::setIcons(	EMyIcons	normalIcon,
+								EMyIcons	overlay1Icon )
+{
+	m_MyIcon = normalIcon;
+	m_OverlayIcon = overlay1Icon;
+	update();
+}
+
+//============================================================================
+void VxPushButton::setAppIcon( EMyIcons appletIcon, QWidget * parentAppFrame )
+{
+    m_AppFrame = parentAppFrame;
+    m_AppClickCount = 0;
+    setIcons( appletIcon );
+}
 
 //============================================================================
 void VxPushButton::mousePressEvent( QMouseEvent * event )
@@ -479,7 +475,7 @@ void VxPushButton::mousePressEvent( QMouseEvent * event )
 	//	setNotifyEnabled( false );
 	//}
 
-	//m_MyApp.playSound( m_ESndDefPressed );
+	m_MyApp.playSound( m_ESndDefPressed );
 
     if( m_AppFrame )
     {
@@ -552,7 +548,7 @@ void VxPushButton::mouseReleaseEvent( QMouseEvent * event )
 	m_InSlideLeftMode = false;
 	if( !m_IsToggleButton )
 	{
-		//setNotifyEnabled( false );
+		setNotifyEnabled( false );
 	}
 
 	QPushButton::mouseReleaseEvent( event );

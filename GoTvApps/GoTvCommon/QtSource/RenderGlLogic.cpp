@@ -6,7 +6,6 @@
 #include <QOpenGLContext>
 #include <QOpenGLFunctions>
 
-#include "GoTvDebugConfig.h"
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxThread.h>
 

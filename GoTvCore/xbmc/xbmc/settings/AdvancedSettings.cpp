@@ -35,8 +35,6 @@
 #include "utils/Variant.h"
 #include "utils/XMLUtils.h"
 
-#include "GoTvDebugConfig.h"
-
 #if defined(TARGET_DARWIN_IOS)
 #include "platform/darwin/DarwinUtils.h"
 #endif

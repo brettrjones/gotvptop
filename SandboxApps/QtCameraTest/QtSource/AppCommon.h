@@ -20,6 +20,7 @@
 #include "CamLogic.h"
 #include "VxAppTheme.h"
 #include "MyIcons.h"
+#include "SoundDefs.h"
 
 #include <GoTvInterface/IToGui.h>
 
@@ -42,7 +43,10 @@ public:
     AppSettings&				getAppSettings( void )						{ return m_AppSettings; }
     VxAppTheme&					getAppTheme( void )							{ return m_AppTheme; }
     MyIcons&					getMyIcons( void )							{ return m_MyIcons; }
+    CamLogic&					getCamLogic( void )							{ return m_CamLogic; }
     P2PEngine&					getEngine( void )							{ return m_Engine; }
+
+    void						playSound( ESndDef sndDef ){};
 
     virtual void				toGuiWantVideoCapture( bool wantVidCapture ) override;
     virtual void				toGuiPlayVideoFrame( VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgDataLen, int motion0To100000 ) override;

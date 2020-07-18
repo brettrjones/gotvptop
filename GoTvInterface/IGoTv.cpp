@@ -29,7 +29,6 @@ echo traget os is not defined
 
 #include "GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h"
 #include "GoTvApps/GoTvCommon/QtSource/AppCommon.h"
-#include "GoTvDebugConfig.h"
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxMutex.h>

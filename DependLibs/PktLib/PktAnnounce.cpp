@@ -15,7 +15,6 @@
 
 #include "PktAnnounce.h"
 #include "PktTypes.h"
-#include "GoTvDebugConfig.h"
 
 #include <CoreLib/VxParse.h>
 #include <CoreLib/VxGlobals.h>

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1011</width>
+    <width>723</width>
     <height>680</height>
    </rect>
   </property>
@@ -321,7 +321,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1011</width>
+     <width>723</width>
      <height>21</height>
     </rect>
    </property>
@@ -368,15 +368,15 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>VxLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">VxLabel.h</header>
+  </customwidget>
+  <customwidget>
    <class>QCameraViewfinder</class>
    <extends>QWidget</extends>
    <header>qcameraviewfinder.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>VxLabel</class>
-   <extends>QLabel</extends>
-   <header location="global">VxLabel.h</header>
   </customwidget>
   <customwidget>
    <class>CamViewWidget</class>

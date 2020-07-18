@@ -2,8 +2,6 @@
 #include <GoTvInterface/IGoTv.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
-
-#include "GoTvDebugConfig.h"
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxThread.h>
 #include <CoreLib/VxGlobals.h>

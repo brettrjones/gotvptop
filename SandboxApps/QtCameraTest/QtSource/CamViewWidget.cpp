@@ -55,7 +55,7 @@ CamViewWidget::CamViewWidget(QWidget *parent)
 	m_ThumbnailPreview = new VxLabel( ui.m_VideoScreen );
     ui.m_VideoFrame->setThumbnailPreview( m_ThumbnailPreview );
     ui.m_VideoFrame->setVideoScreen( ui.m_VideoScreen );
-    m_ThumbnailPreview->setImageFromFile( ":/AppRes/Resources/web_cam_buffering.png" );
+    //m_ThumbnailPreview->setImageFromFile( ":/AppRes/Resources/web_cam_buffering.png" );
 
 	ui.m_CamSourceButton->setEnabled( false );
 

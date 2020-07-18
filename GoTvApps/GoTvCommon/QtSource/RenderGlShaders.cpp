@@ -2,8 +2,6 @@
 #include "RenderShaderQt.h"
 #include "RenderGlWidget.h"
 
-#include "GoTvDebugConfig.h"
-
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxThread.h>
 

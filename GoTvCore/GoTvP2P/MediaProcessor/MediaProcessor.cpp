@@ -461,15 +461,17 @@ void MediaProcessor::fromGuiVideoData( uint32_t u32FourCc, uint8_t * pu8VidDataI
 
 	uint8_t * pu8VidData = pu8VidDataIn;
 	bool bConvert =  ( FOURCC_RGB != u32FourCc );
-#ifdef TARGET_OS_WINDOWS
-	if( FOURCC_RGB == u32FourCc )
-	{
-		// windows the red and blue are swapped and image is upside down convert anyway.. converter will know what to do
-		u32FourCc = FOURCC_BGR;
-		bConvert = true;
-		iRotation += 180;
-	}
-#endif // TARGET_OS_WINDOWS
+
+// windows no longer needs this when source is from QT instead of raw vid capture
+//#ifdef TARGET_OS_WINDOWS
+//	if( FOURCC_RGB == u32FourCc )
+//	{
+//		// windows the red and blue are swapped and image is upside down convert anyway.. converter will know what to do
+//		u32FourCc = FOURCC_BGR;
+//		bConvert = true;
+//		iRotation += 180;
+//	}
+//#endif // TARGET_OS_WINDOWS
 
 	if( bConvert )
 	{

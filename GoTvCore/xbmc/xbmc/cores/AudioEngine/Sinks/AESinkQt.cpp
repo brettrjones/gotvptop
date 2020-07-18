@@ -39,7 +39,6 @@
 
 #include "GoTvInterface/IGoTv.h"
 #include <CoreLib/VxDebug.h>
-#include "GoTvDebugConfig.h"
 
 #define OSS_FRAMES 256
 

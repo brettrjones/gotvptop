@@ -14,7 +14,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <stdint.h>
+#include "config_gotvapps.h"
 
 #include <QTimer>
 #include <QKeyEvent>
@@ -42,7 +42,15 @@ public:
     CamLogic( AppCommon& myApp );
     virtual ~CamLogic() = default;
 
-    void                        initCamLogic( void );
+    void                        cameraEnable( bool wantVidCapture );
+
+    // set application is exiting.. returt true if cam is busy with capture
+    bool                        setAppIsExiting( bool isExiting );
+    bool                        getAppIsExiting( void )                             { return m_applicationExiting; }
+
+
+    void                        setViewfinder( QCameraViewfinder *viewfinder );
+
 
     void						setCamSourceId( uint32_t camId )                        { m_CamId = camId; }
     uint32_t					getCamSourceId( void )                                  { return m_CamId; }
@@ -58,7 +66,7 @@ public:
 
     void                        toGuiWantVideoCapture( bool wantVidCapture );
 
-private slots:
+public slots:
     void setCamera( const QCameraInfo &cameraInfo );
 
     void startCamera();
@@ -70,7 +78,6 @@ private slots:
     void setMuted( bool );
 
     void toggleLock();
-    void takeImage();
     void displayCaptureError( int, QCameraImageCapture::Error, const QString &errorString );
 
     void configureCaptureSettings();
@@ -115,6 +122,7 @@ private:
     QTimer *                    m_SnapshotTimer{ nullptr };
 
     QScopedPointer<QCamera>     m_camera;
+    QCameraViewfinder *         m_ViewFinder{ nullptr };
     QScopedPointer<QCameraImageCapture> m_imageCapture;
 
     QImageEncoderSettings       m_imageSettings;
@@ -123,6 +131,7 @@ private:
     QString                     m_videoContainerFormat;
     bool                        m_isCapturingImage = false;
     bool                        m_applicationExiting = false;
+    bool                        m_CamIsStarted = false;
 
 };
 

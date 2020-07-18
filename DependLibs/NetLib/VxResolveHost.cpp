@@ -20,8 +20,6 @@
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxTimer.h>
 
-#include <GoTvDebugConfig.h>
-
 #include <stdio.h>
 #include <memory.h>
 

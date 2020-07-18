@@ -572,6 +572,12 @@
     <ClInclude Include="..\..\QtSource\CoreLib\VxTimeDefs.h">
       <Filter>QtSource\CoreLib</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\QtSource\GuiParams.h">
+      <Filter>QtSource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\QtSource\SoundDefs.h">
+      <Filter>QtSource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\QtSource\CamCamera.cpp">
@@ -1122,6 +1128,9 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_ImageSettings.cpp">
       <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\QtSource\GuiParams.cpp">
+      <Filter>QtSource</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

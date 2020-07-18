@@ -15,51 +15,108 @@
 
 #include "CamLogic.h"
 #include "ImageSettings.h"
+#include "AppCommon.h"
+
+
+#include <CoreLib/VxDebug.h>
 
 Q_DECLARE_METATYPE( QCameraInfo )
 
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+
+
 //============================================================================
 CamLogic::CamLogic( AppCommon& myApp )
-    : m_MyApp( myApp )
+    : QWidget(nullptr)
+    , m_MyApp( myApp )
+    , m_SnapshotTimer( new QTimer( this ))
 {
-
 }
 
 //============================================================================
 void CamLogic::toGuiWantVideoCapture( bool wantVidCapture )
 {
+    cameraEnable( wantVidCapture );
+}
+
+//============================================================================
+void CamLogic::cameraEnable( bool wantVidCapture )
+{
+    if( getAppIsExiting() )
+    {
+        if( m_CamIsStarted )
+        {
+            stopCamera();
+        }
+
+        return;
+    }
+
+    if( wantVidCapture != m_CamIsStarted )
+    {
+        if( wantVidCapture )
+        {
+            startCamera();
+        }
+        else
+        {
+            stopCamera();
+        }
+    }
 }
 
 //============================================================================
 void CamLogic::slotTakeSnapshot( void )
 {
-
+    if( !m_isCapturingImage )
+    {
+        m_isCapturingImage = true;
+        m_imageCapture->capture();
+    }
 }
 
 //============================================================================
-void CamLogic::initCamLogic( void ) //: ui(new Ui::Camera)
-{
+//void CamLogic::initCamLogic( void ) //: ui(new Ui::Camera)
+//{
     //ui->setupUi(this);
 
     //CamLogic devices:
 
-    QActionGroup *videoDevicesGroup = new QActionGroup( this );
-    videoDevicesGroup->setExclusive( true );
-    const QList<QCameraInfo> availableCameras = QCameraInfo::availableCameras();
-    for( const QCameraInfo &cameraInfo : availableCameras ) {
-        QAction *videoDeviceAction = new QAction( cameraInfo.description(), videoDevicesGroup );
-        videoDeviceAction->setCheckable( true );
-        videoDeviceAction->setData( QVariant::fromValue( cameraInfo ) );
-        if( cameraInfo == QCameraInfo::defaultCamera() )
-            videoDeviceAction->setChecked( true );
+    //QActionGroup *videoDevicesGroup = new QActionGroup( this );
+    //videoDevicesGroup->setExclusive( true );
+    //const QList<QCameraInfo> availableCameras = QCameraInfo::availableCameras();
+    //for( const QCameraInfo &cameraInfo : availableCameras ) {
+    //    QAction *videoDeviceAction = new QAction( cameraInfo.description(), videoDevicesGroup );
+    //    videoDeviceAction->setCheckable( true );
+    //    videoDeviceAction->setData( QVariant::fromValue( cameraInfo ) );
+    //    if( cameraInfo == QCameraInfo::defaultCamera() )
+    //        videoDeviceAction->setChecked( true );
 
-        //ui->menuDevices->addAction(videoDeviceAction);
-    }
+    //    //ui->menuDevices->addAction(videoDeviceAction);
+    //}
 
-    connect( videoDevicesGroup, &QActionGroup::triggered, this, &CamLogic::updateCameraDevice );
-    //connect(ui->captureWidget, &QTabWidget::currentChanged, this, &CamLogic::updateCaptureMode);
+    //connect( videoDevicesGroup, &QActionGroup::triggered, this, &CamLogic::updateCameraDevice );
+    ////connect(ui->captureWidget, &QTabWidget::currentChanged, this, &CamLogic::updateCaptureMode);
 
-    setCamera( QCameraInfo::defaultCamera() );
+    //setCamera( QCameraInfo::defaultCamera() );
+//}
+
+//============================================================================
+// set application is exiting.. returt true if cam is busy with capture
+bool CamLogic::setAppIsExiting( bool isExiting )
+{
+    m_applicationExiting = isExiting;
+    return m_isCapturingImage;
+}
+
+//============================================================================
+void CamLogic::setViewfinder( QCameraViewfinder *viewfinder )
+{
+    //m_ViewFinder = viewfinder;
+    //if( m_ViewFinder && !m_camera.isNull() )
+    //{
+    //    m_camera->setViewfinder( viewfinder );
+    //}
 }
 
 //============================================================================
@@ -99,7 +156,8 @@ void CamLogic::setCamera( const QCameraInfo &cameraInfo )
     settings.setResolution( QSize( 320, 240 ) );
     m_imageCapture->setEncodingSettings( settings );
 
-    m_camera->start();
+    connect( m_SnapshotTimer, SIGNAL( timeout() ), this, SLOT( slotTakeSnapshot() ) );
+    m_SnapshotTimer->setInterval( 60 );
 }
 
 //============================================================================
@@ -110,14 +168,15 @@ void CamLogic::keyPressEvent( QKeyEvent * event )
 
     switch( event->key() ) {
     case Qt::Key_CameraFocus:
-        displayViewfinder();
-        m_camera->searchAndLock();
+        //displayViewfinder();
+        //m_camera->searchAndLock();
         event->accept();
         break;
     case Qt::Key_Camera:
-        if( m_camera->captureMode() == QCamera::CaptureStillImage ) {
-            takeImage();
-        }
+        //if( m_camera->captureMode() == QCamera::CaptureStillImage ) 
+        //{
+        //    slotTakeSnapshot();
+        //}
         event->accept();
         break;
     default:
@@ -133,7 +192,7 @@ void CamLogic::keyReleaseEvent( QKeyEvent *event )
 
     switch( event->key() ) {
     case Qt::Key_CameraFocus:
-        m_camera->unlock();
+        //m_camera->unlock();
         break;
     default:
         QWidget::keyReleaseEvent( event );
@@ -149,6 +208,27 @@ void CamLogic::updateRecordTime()
 void CamLogic::processCapturedImage( int requestId, const QImage& img )
 {
     Q_UNUSED( requestId );
+    if( !img.isNull() )
+    {
+        LogMsg( LOG_DEBUG, "processCapturedImage x%d y%d ", img.width(), img.height() );
+    }
+
+    QImage toSendImage;
+    if( !img.format() != QImage::Format_RGB888 )
+    {
+        toSendImage = img.convertToFormat( QImage::Format_RGB888 );
+    }
+    else
+    {
+        toSendImage = img;
+    }
+
+    if( !toSendImage.isNull() )
+    {
+        uint32_t imageLen = toSendImage.bytesPerLine() * toSendImage.height();
+        m_MyApp.getEngine().fromGuiVideoData( FOURCC_RGB, toSendImage.bits(), toSendImage.width(), toSendImage.height(), imageLen, 0 );
+    }
+
     //QImage scaledImage = img.scaled(ui->viewfinder->size(),
     //                                Qt::KeepAspectRatio,
     //                                Qt::SmoothTransformation);
@@ -158,6 +238,7 @@ void CamLogic::processCapturedImage( int requestId, const QImage& img )
     //// Display captured image for 4 seconds.
     //displayCapturedImage();
     //QTimer::singleShot(4000, this, &CamLogic::displayViewfinder);
+    m_isCapturingImage = false;
 }
 
 //============================================================================
@@ -208,7 +289,8 @@ void CamLogic::configureImageSettings()
 
     settingsDialog.setImageSettings( m_imageSettings );
 
-    if( settingsDialog.exec() ) {
+    if( settingsDialog.exec() ) 
+    {
         m_imageSettings = settingsDialog.imageSettings();
         m_imageCapture->setEncodingSettings( m_imageSettings );
     }
@@ -280,12 +362,7 @@ void CamLogic::updateLockStatus( QCamera::LockStatus status, QCamera::LockChange
     //ui->lockButton->setPalette(palette);
 }
 
-void CamLogic::takeImage()
-{
-    m_isCapturingImage = true;
-    m_imageCapture->capture();
-}
-
+//============================================================================
 void CamLogic::displayCaptureError( int id, const QCameraImageCapture::Error error, const QString &errorString )
 {
     Q_UNUSED( id );
@@ -294,16 +371,30 @@ void CamLogic::displayCaptureError( int id, const QCameraImageCapture::Error err
     m_isCapturingImage = false;
 }
 
+//============================================================================
 void CamLogic::startCamera()
 {
+    m_CamIsStarted = true;
     m_camera->start();
+    m_SnapshotTimer->start();
+    if( !m_ViewFinder )
+    {
+        m_ViewFinder = new QCameraViewfinder();
+        m_ViewFinder->show();
+        m_camera->setViewfinder( m_ViewFinder );
+        m_ViewFinder->hide();
+    }
 }
 
+//============================================================================
 void CamLogic::stopCamera()
 {
+    m_SnapshotTimer->stop();
     m_camera->stop();
+    m_CamIsStarted = false;
 }
 
+//============================================================================
 void CamLogic::updateCaptureMode(int)
 {
     //int tabIndex = ui->captureWidget->currentIndex();
@@ -314,6 +405,7 @@ void CamLogic::updateCaptureMode(int)
         m_camera->setCaptureMode( captureMode );
 }
 
+//============================================================================
 void CamLogic::updateCameraState( QCamera::State state )
 {
     //switch (state) {

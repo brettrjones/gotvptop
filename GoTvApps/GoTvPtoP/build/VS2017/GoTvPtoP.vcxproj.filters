@@ -951,6 +951,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSnapshot.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\CamLogic.cpp">
+      <Filter>GoTvCommon\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -1900,6 +1903,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSnapshot.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\CamLogic.h">
+      <Filter>GoTvCommon\Source Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

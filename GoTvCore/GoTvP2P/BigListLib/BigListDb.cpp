@@ -27,7 +27,6 @@
 #include <memory.h>
 #include <stdio.h>
 
-#include "GoTvDebugConfig.h"
 
 //============================================================================
 //! thread function to load all nodes in big list

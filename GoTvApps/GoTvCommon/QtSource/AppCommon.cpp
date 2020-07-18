@@ -77,7 +77,6 @@
 #include <QSettings>
 
 #include "RenderGlWidget.h"
-#include "GoTvDebugConfig.h"
 
 
 namespace

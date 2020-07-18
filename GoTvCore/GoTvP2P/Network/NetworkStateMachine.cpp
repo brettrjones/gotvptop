@@ -38,8 +38,6 @@
 #include <NetLib/VxResolveHost.h>
 #include <NetLib/VxPeerMgr.h>
 
-#include "GoTvDebugConfig.h"
-
 #include <time.h>
 #include <atomic>
 

@@ -21,7 +21,6 @@
 #include "VxDebug.h"
 #include "VxParse.h"
 #include "AppErr.h"
-#include "GoTvDebugConfig.h"
 
 #include "memory.h"
 
