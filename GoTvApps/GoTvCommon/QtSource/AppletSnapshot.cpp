@@ -49,33 +49,22 @@ AppletSnapshot::AppletSnapshot(	AppCommon& app, QWidget * parent )
     ui.setupUi( getContentItemsFrame() );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
 
-    ui.imageScreen->setFixedSize( 320, 240 );
+    ui.m_ImageScreen->setFixedSize( 320, 240 );
+    ui.m_SnapshotScreen->setFixedSize( 320, 240 );
 
     connect( ui.snapshotButton, SIGNAL( clicked() ), this, SLOT( onSnapShotButClick() ) );
     connect( ui.cancelButton, SIGNAL( clicked() ), this, SLOT( onCancelButClick() ) );
-#ifdef TARGET_OS_WINDOWS
-    m_VidCap = VxGetVidCapInterface();
-#endif // TARGET_OS_WINDOWS
-    if( !m_VidCap || 0 == m_VidCap->startupVidCap() )
+
+    if( m_MyApp.getCamLogic().isCamAvailable() )
+    {
+        m_MyApp.getEngine().fromGuiWantMediaInput( eMediaInputVideoJpgSmall, this, this, true );
+    }
+    else
     {
         QMessageBox::warning( this, QObject::tr( "Camera Capture" ), QObject::tr( "No Camera Source Available." ) );
         connect( m_CloseDlgTimer, SIGNAL( timeout() ), this, SLOT( onCancelButClick() ) );
         m_CloseDlgTimer->setSingleShot( true );
         m_CloseDlgTimer->start( 1000 );
-    }
-    else
-    {
-        // start preview
-        QRect oWndRect = ui.imageScreen->geometry();
-        if( m_VidCap )
-        {
-            m_VidCap->startPreview( ( void * )ui.imageScreen->winId(),
-                                    0,
-                                    oWndRect.left(),
-                                    oWndRect.top(),
-                                    oWndRect.width(),
-                                    oWndRect.height() );
-        }
     }
 
     m_MyApp.activityStateChange( this, true );
@@ -91,46 +80,51 @@ AppletSnapshot::~AppletSnapshot()
 //! take picture for me
 void AppletSnapshot::onSnapShotButClick( void )
 {
-#ifdef TARGET_OS_WINDOWS
-    uint32_t u32Format;
-    m_pu8BitmapData = m_VidCap->takeSnapShot( 0, m_u32BitmapLen, u32Format );
-    m_VidCap->shutdownVidCap();
-    BITMAPINFO * poBitmap = ( BITMAPINFO * )m_pu8BitmapData;
-    if( poBitmap )
+    m_SnapShotPending = true;
+}
+
+//============================================================================
+void AppletSnapshot::callbackVideoJpgSmall( void * userData, VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen, int motion0to100000 )
+{
+    if( jpgData && jpgDataLen && ( vidFeedId == m_MyApp.getMyOnlineId() ) )
     {
-        if( ( 0 == u32Format ) &&
-            ( 0 != poBitmap->bmiHeader.biSizeImage ) &&
-            ( poBitmap->bmiHeader.biSizeImage == ( poBitmap->bmiHeader.biWidth * poBitmap->bmiHeader.biHeight * 3 ) ) )
+        VxLabel* camScreen = ui.m_ImageScreen;
+        if( camScreen )
         {
-            // some cams do not place format in bitmap even though data is valid ie (Microsoft LifeCam VX-3000)
-            u32Format = FOURCC_RGB;
+            camScreen->playVideoFrame( jpgData, jpgDataLen, motion0to100000 );
         }
-        uint32_t u32JpgDataLen = 0;
-        uint8_t * pu8JpgData = VxConvertToJpg( u32Format, // format
-            ( uint8_t * )&m_pu8BitmapData[ poBitmap->bmiHeader.biSize ],
-                                               poBitmap->bmiHeader.biSizeImage,
-                                               poBitmap->bmiHeader.biWidth,
-                                               poBitmap->bmiHeader.biHeight,
-                                               u32JpgDataLen,
-                                               320,
-                                               240 );
-        emit signalJpgSnapshot( pu8JpgData, u32JpgDataLen, 320, 240 );
-        delete pu8JpgData;
-        delete m_pu8BitmapData;
-        m_pu8BitmapData = NULL;
+
+        if( m_SnapShotPending )
+        {
+            QImage capBitmap;
+            if( capBitmap.loadFromData( jpgData, jpgDataLen, "JPG" ) )
+            {
+                VxLabel* camScreen = ui.m_SnapshotScreen;
+                if( camScreen )
+                {
+                    camScreen->playVideoFrame( jpgData, jpgDataLen, motion0to100000 );
+                }
+
+                m_ImageBitmap = capBitmap;
+                emit signalSnapshotImage( m_ImageBitmap );
+            }
+
+            m_SnapShotPending = false;
+        }
     }
-#endif // TARGET_OS_WINDOWS
 }
 
 //============================================================================
 //! Implement the OnClickListener callback    
 void AppletSnapshot::onCancelButClick( void )
 {
-    if( m_VidCap )
-    {
-        m_VidCap->shutdownVidCap();
-    }
-
     onBackButtonClicked();
+}
+
+//============================================================================
+void AppletSnapshot::onCloseEvent( void )
+{
+    m_MyApp.getEngine().fromGuiWantMediaInput( eMediaInputVideoJpgSmall, this, this, false );
+    AppletBase::onCloseEvent();
 }
 

@@ -109,7 +109,8 @@ void ThumbnailEditWidget::slotSnapShotButClick( void )
         AppletSnapshot * appletSnapshot = dynamic_cast< AppletSnapshot * >( m_MyApp.getAppletMgr().launchApplet( eAppletSnapshot, m_ParentApplet ) );
         if( appletSnapshot )
         {
-            connect( appletSnapshot, SIGNAL( signalJpgSnapshot( uint8_t*, uint32_t, int, int ) ), this, SLOT( slotJpgSnapshot( uint8_t*, uint32_t, int, int ) ) );
+            //connect( appletSnapshot, SIGNAL( signalJpgSnapshot( uint8_t*, uint32_t, int, int ) ), this, SLOT( slotJpgSnapshot( uint8_t*, uint32_t, int, int ) ) );
+            connect( appletSnapshot, SIGNAL( signalSnapshotImage( QImage ) ), this, SLOT( slotImageSnapshot( QImage ) ) );
         }
     }
     else
@@ -126,6 +127,12 @@ void ThumbnailEditWidget::slotJpgSnapshot( uint8_t* pu8JpgData, uint32_t u32Data
     {
         ui.m_ThumbnailViewWidget->setThumbnailImage( bitmap );
     }
+}
+
+//============================================================================
+void ThumbnailEditWidget::slotImageSnapshot( QImage snapshotImage )
+{
+    ui.m_ThumbnailViewWidget->setThumbnailImage( QPixmap::fromImage( snapshotImage ) );
 }
 
 //============================================================================

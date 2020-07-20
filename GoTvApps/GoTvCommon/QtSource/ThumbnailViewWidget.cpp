@@ -32,7 +32,6 @@
 #include <QFileDialog>
 #include <QResizeEvent>
 
-
 //============================================================================
 ThumbnailViewWidget::ThumbnailViewWidget( QWidget * parent )
     : QLabel( parent )

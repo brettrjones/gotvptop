@@ -17,10 +17,13 @@
 #include "config_gotvapps.h"
 #include "AppDefs.h"
 #include "AppGlobals.h"
+#include "CamLogic.h"
 #include "VxAppDisplay.h"
+
 #include "ToGuiActivityClient.h"
 #include "ToGuiFileXferClient.h"
 #include "ToGuiHardwareCtrlClient.h"
+
 #include "GoTvInterface/IToGui.h"
 #include "GoTvInterface/IGoTvRender.h"
 #include "GoTvInterface/IGoTvEvents.h"
@@ -113,7 +116,9 @@ public:
     bool						getIsMicrophoneHardwareEnabled( void )		{ return m_MicrophoneHardwareEnabled; }
     bool						getIsSpeakerHardwareEnabled( void )			{ return m_SpeakerHardwareEnabled; }
     MyIcons&					getMyIcons( void )							{ return m_MyIcons; }
+    CamLogic&					getCamLogic( void )							{ return m_CamLogic; }
     VxNetIdent *				getMyIdentity( void );
+    VxGUID				        getMyOnlineId( void );
     ENetworkStateType			getNetworkState( void )						{ return m_LastNetworkState; }
     OffersMgr&					getOffersMgr( void )						{ return m_OffersMgr; }
     VxPeerMgr&					getPeerMgr( void )							{ return m_VxPeerMgr; }
@@ -714,6 +719,7 @@ private:
 	VxAppStyle					m_AppStyle;
     VxAppDisplay				m_AppDisplay;
 	VxTilePositioner&			m_TilePositioner;
+    CamLogic                    m_CamLogic;
 
 	P2PEngine&					m_Engine; // engine before sound so can initialize engine sound interface
 	MySndMgr&					m_MySndMgr;

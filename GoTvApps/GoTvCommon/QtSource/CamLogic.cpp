@@ -38,6 +38,20 @@ void CamLogic::toGuiWantVideoCapture( bool wantVidCapture )
 }
 
 //============================================================================
+bool CamLogic::isCamAvailable( void )
+{
+    assureCamInitiated();
+    return !m_camera.isNull() && m_camera->isAvailable();
+}
+
+//============================================================================
+bool CamLogic::isCamCaptureRunning( void )
+{
+    assureCamInitiated();
+    return m_CamIsStarted && !m_camera.isNull() && m_camera->isAvailable();
+}
+
+//============================================================================
 void CamLogic::cameraEnable( bool wantVidCapture )
 {
     if( getAppIsExiting() )
@@ -118,6 +132,17 @@ void CamLogic::setViewfinder( QCameraViewfinder *viewfinder )
 }
 
 //============================================================================
+bool CamLogic::assureCamInitiated( void )
+{
+    if( !m_CamInitiated )
+    {
+        setCamera( QCameraInfo::defaultCamera() );
+    }
+
+    return  !m_camera.isNull() && m_camera->isAvailable();
+}
+
+//============================================================================
 void CamLogic::setCamera( const QCameraInfo &cameraInfo )
 {
     m_camera.reset( new QCamera( cameraInfo ) );
@@ -129,7 +154,6 @@ void CamLogic::setCamera( const QCameraInfo &cameraInfo )
     m_imageCapture->setCaptureDestination( QCameraImageCapture::CaptureToBuffer );
 
     //connect(ui->exposureCompensation, &QAbstractSlider::valueChanged, this, &CamLogic::setExposureCompensation);
-
     //m_camera->setViewfinder(ui->viewfinder);
 
     updateCameraState( m_camera->state() );
@@ -156,6 +180,7 @@ void CamLogic::setCamera( const QCameraInfo &cameraInfo )
 
     connect( m_SnapshotTimer, SIGNAL( timeout() ), this, SLOT( slotTakeSnapshot() ) );
     m_SnapshotTimer->setInterval( 60 );
+    m_CamInitiated = true;
 }
 
 //============================================================================
@@ -375,15 +400,18 @@ void CamLogic::displayCaptureError( int id, const QCameraImageCapture::Error err
 //============================================================================
 void CamLogic::startCamera()
 {
-    m_CamIsStarted = true;
-    m_camera->start();
-    m_SnapshotTimer->start();
-    if( !m_ViewFinder )
+    if( assureCamInitiated() )
     {
-        m_ViewFinder = new QCameraViewfinder();
-        m_ViewFinder->show();
-        m_camera->setViewfinder( m_ViewFinder );
-        m_ViewFinder->hide();
+        m_CamIsStarted = true;
+        m_camera->start();
+        m_SnapshotTimer->start();
+        if( !m_ViewFinder )
+        {
+            m_ViewFinder = new QCameraViewfinder();
+            m_ViewFinder->show();
+            m_camera->setViewfinder( m_ViewFinder );
+            m_ViewFinder->hide();
+        }
     }
 }
 
@@ -391,8 +419,11 @@ void CamLogic::startCamera()
 void CamLogic::stopCamera()
 {
     m_SnapshotTimer->stop();
-    m_camera->stop();
     m_CamIsStarted = false;
+    if( !m_camera.isNull() )
+    {
+        m_camera->stop();
+    }
 }
 
 //============================================================================

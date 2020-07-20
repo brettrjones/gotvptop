@@ -41,54 +41,28 @@ void AppCommon::toGuiWantVideoCapture( bool wantVidCapture )
 //============================================================================
 void AppCommon::slotEnableVideoCapture( bool enableVidCapture )
 {
+    m_CamLogic.toGuiWantVideoCapture( enableVidCapture );
 	if( enableVidCapture )
 	{
 		static bool bFirstTimeVideoCaptureStarted = true;
 		if( bFirstTimeVideoCaptureStarted )
 		{
-			if( NULL == m_VidCapTimer )
-			{
-				m_VidCapTimer = new QTimer(this);
-				m_VidCapTimer->setInterval(50); // we want about 20 frames per second 1000/20 = 50ms
-				connect(m_VidCapTimer, SIGNAL(timeout()), this, SLOT(onVidCapTimer()));
-#ifdef TARGET_OS_WINDOWS
-				m_VidCap = VxGetVidCapInterface();
-#endif // TARGET_OS_WINDOWS
-			}
-
-			uint32_t iDevices = m_VidCap->startupVidCap();
-			if( 0 == iDevices )
+			if( !m_CamLogic.isCamCaptureRunning() )
 			{
 				QMessageBox::warning(this, tr("Web Cam Video"), tr("No Video Capture Devices Found" ) );
 				return;
 			}
 			
-			m_CamSourceId = m_AppSettings.getCamSourceId();
-			if( m_CamSourceId > iDevices )
-			{
-				m_CamSourceId = 1;
-				m_AppSettings.setCamSourceId( m_CamSourceId );
-			}
+			m_CamSourceId = m_CamLogic.getCamSourceId();
 
 			setCamCaptureRotation( m_AppSettings.getCamRotation( m_CamSourceId ) );
 
 			bFirstTimeVideoCaptureStarted = false;
 		}
-
-		if( false == m_VidCapTimer->isActive() )
-		{
-			LogMsg( LOG_INFO, "AppCommon::slotEnableVideoCapture start capture\n" );
-			m_VidCapTimer->start();
-		}
 	}
 	else
 	{
-		if( m_VidCapTimer &&
-			m_VidCapTimer->isActive() )
-		{
-			LogMsg( LOG_INFO, "AppCommon::slotEnableVideoCapture stopping capture\n" );
-			m_VidCapTimer->stop();
-		}
+        LogMsg( LOG_INFO, "AppCommon::slotEnableVideoCapture stopping capture\n" );
 	}
 
 	m_VidCaptureEnabled = enableVidCapture;

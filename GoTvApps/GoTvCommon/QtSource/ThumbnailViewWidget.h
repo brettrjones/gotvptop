@@ -21,7 +21,6 @@ class AppCommon;
 class QPixmap;
 class AssetInfo;
 
-
 class ThumbnailViewWidget : public QLabel
 {
     Q_OBJECT
@@ -43,7 +42,6 @@ public:
 
     bool                        saveToPngFile( QString pngFileName );
     void                        browseForImage( void );
-
 
 signals:
     void                        clicked( void );

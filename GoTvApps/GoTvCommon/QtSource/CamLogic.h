@@ -42,15 +42,17 @@ public:
     virtual ~CamLogic() = default;
 
     void                        cameraEnable( bool wantVidCapture );
+    bool                        assureCamInitiated( void );
+    bool                        isCamAvailable( void );
+    bool                        isCamCaptureRunning( void );
 
-    // set application is exiting.. returt true if cam is busy with capture
+    // set application is exiting.. return true if cam is busy with capture
     bool                        setAppIsExiting( bool isExiting );
     bool                        getAppIsExiting( void )                             { return m_applicationExiting; }
 
-
     void                        setViewfinder( QCameraViewfinder *viewfinder );
 
-
+    /// TODO implement option to select cam hardware
     void						setCamSourceId( uint32_t camId )                        { m_CamId = camId; }
     uint32_t					getCamSourceId( void )                                  { return m_CamId; }
 
@@ -113,8 +115,9 @@ protected:
 
 private:
     AppCommon&                  m_MyApp;
-    uint32_t                    m_CamId{ 0 };
-    bool                        m_ShowPreview;
+    uint32_t                    m_CamId{ 1 };
+    bool                        m_CamInitiated = false;
+    bool                        m_ShowPreview{ false };
     uint32_t                    m_CamRotation{ 0 };
     uint32_t                    m_FeedRotation{ 0 };
 

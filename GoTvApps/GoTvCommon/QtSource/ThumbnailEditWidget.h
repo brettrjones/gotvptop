@@ -54,7 +54,7 @@ protected slots:
     void                        slotUndoCircleClick( void );
     void                        slotThumbSelected( AppletBase * thumbGallery, ThumbnailViewWidget * thumb );
     void                        slotJpgSnapshot( uint8_t* pu8JpgData, uint32_t u32DataLen, int iWidth, int iHeight );
-
+    void                        slotImageSnapshot( QImage snapshotImage );
 
 protected:
     QPixmap                     makeCircleImage( QPixmap& pixmap );

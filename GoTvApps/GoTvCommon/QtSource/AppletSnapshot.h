@@ -16,12 +16,13 @@
 #include "AppletBase.h"
 #include "ui_AppletSnapshot.h"
 
+#include <CoreLib/MediaCallbackInterface.h>
 
 class ThumbnailViewWidget;
 class AssetMgr;
 class IVxVidCap;
 
-class AppletSnapshot : public AppletBase
+class AppletSnapshot : public AppletBase, public MediaCallbackInterface
 {
 	Q_OBJECT
 public:
@@ -29,18 +30,20 @@ public:
 	virtual ~AppletSnapshot() override;
 
 signals:
-    void						signalJpgSnapshot( uint8_t* pu8JpgData, uint32_t u32DataLen, int iWidth, int iHeight );
+    void						signalSnapshotImage( QImage snapshotImage );
 
 public slots:
     void						onSnapShotButClick( void );
     void						onCancelButClick( void );
 
 protected:
+    virtual void				callbackVideoJpgSmall( void * userData, VxGUID& vidFeedId, uint8_t * jpgData, uint32_t jpgDataLen, int motion0to100000 ) override;
+    virtual void                onCloseEvent( void ) override;
+
+
     Ui::AppletSnapshotUi		ui;
-    IVxVidCap *					m_VidCap = nullptr;
     bool 					    m_CameraSourceAvail = false;
     QTimer *                    m_CloseDlgTimer = nullptr;
-
-    uint8_t *					m_pu8BitmapData = nullptr;	// snapshot bitmap
-    uint32_t					m_u32BitmapLen = 0;		// bitmap length
+    bool 					    m_SnapShotPending = false;
+    QImage	                    m_ImageBitmap;
 };

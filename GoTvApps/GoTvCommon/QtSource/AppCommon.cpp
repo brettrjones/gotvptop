@@ -78,7 +78,6 @@
 
 #include "RenderGlWidget.h"
 
-
 namespace
 {
 	AppCommon * g_AppCommon = 0;
@@ -149,7 +148,8 @@ AppCommon& GetAppInstance( void )
 //============================================================================
 void DestroyAppInstance()
 {
-
+    delete g_AppCommon;
+    g_AppCommon = nullptr;
 }
 
 //============================================================================
@@ -174,6 +174,7 @@ AppCommon::AppCommon(	QApplication&	myQApp,
 , m_AppStyle( *this, m_AppTheme )
 , m_AppDisplay( *this )
 , m_TilePositioner( * new VxTilePositioner( *this ) )
+, m_CamLogic( *this )
 
 , m_Engine( gotv.getPtoP() )
 , m_MySndMgr( * new MySndMgr( *this ) )
@@ -746,6 +747,12 @@ void AppCommon::slotMainWindowMoved( void )
 VxNetIdent * AppCommon::getMyIdentity( void )
 {
 	return getAppGlobals().getUserIdent();
+}
+
+//============================================================================
+VxGUID AppCommon::getMyOnlineId( void )
+{
+    return getAppGlobals().getUserIdent()->getMyOnlineId();
 }
 
 //============================================================================
