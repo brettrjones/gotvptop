@@ -27,6 +27,7 @@ PluginSettingsWidget::PluginSettingsWidget( QWidget * parent )
 {
     m_ParentApplet = GuiHelpers::findParentApplet( parent );
     ui.setupUi( this );
+    connect( ui.m_ThumbnailChooseWidget, SIGNAL( signalThumbnailAssetChanged() ), this, SLOT( slotThumbnailAssetChanged() ) );
 }
 
 //============================================================================
@@ -129,4 +130,12 @@ void PluginSettingsWidget::slotApplyServiceSettings()
     saveUiToSetting();
     m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
     QMessageBox::information( this, QObject::tr( "Service Settings" ), QObject::tr( "Service Settings Applied" ), QMessageBox::Ok );
+}
+
+//============================================================================
+void PluginSettingsWidget::slotThumbnailAssetChanged()
+{
+    VxGUID thumbGuid = ui.m_ThumbnailChooseWidget->getAssetId();
+    LogMsg( LOG_DEBUG, "slotThumbnailAssetChanged %s", thumbGuid.toGUIDStandardFormatedString().c_str() );
+    m_PluginSetting.setThumnailId( thumbGuid );
 }

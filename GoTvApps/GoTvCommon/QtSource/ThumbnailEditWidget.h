@@ -46,6 +46,9 @@ public:
     bool                        loadThumbnail( VxGUID& assetGuid );
     VxGUID                      updateAndGetThumbnailId( void );
 
+signals:
+    void                        signalImageChanged();
+
 protected slots:
     void                        slotThumbGalleryClick( void );
     void                        slotSnapShotButClick( void );

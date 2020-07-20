@@ -24,8 +24,11 @@ public:
     AppletChooseThumbnail( AppCommon& app, QWidget * parent );
 	virtual ~AppletChooseThumbnail();
 
+signals:
+    void						signalThumbSelected( AppletBase * baseApplet, ThumbnailEditWidget * widget );
+
 private slots:
-    void						slotStoryBoardSavedModified();
+    void						slotImageChanged();
 
 protected:
     //=== vars ===//

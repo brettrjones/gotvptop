@@ -263,9 +263,6 @@ void VxLabel::slotPlayVideoFrame( QImage picBitmap, int iRotate )
         {
             QSize screenSize( this->width(), this->height() );
             QImage resizedPicmap = picBitmap.scaled( screenSize, Qt::KeepAspectRatio );
-            LogMsg( LOG_DEBUG, " VxLabel::slotPlayVideoFrame pixmap isNull ? %d", resizedPicmap.isNull()  );
-            //QImage resizedPicmap m_PreResizeImage = picBitmap;
-            //resizeBitmapToFitScreen( picBitmap );
             if( iRotate )
             {
                 QMatrix rm;
@@ -306,7 +303,7 @@ void VxLabel::slotPlayVideoFrame( QImage picBitmap, int iRotate )
     }
     else
     {
-        LogMsg( LOG_DEBUG, " VxLabel::slotPlayVideoFrame NULL picBitmap" );
+        LogMsg( LOG_ERROR, " VxLabel::slotPlayVideoFrame NULL picBitmap" );
     }
 
 }

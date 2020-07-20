@@ -41,7 +41,7 @@ AppletChooseThumbnail::AppletChooseThumbnail( AppCommon& app, QWidget * parent )
     ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
 
-    //connect( ui.m_ThumbnailEditWidget, SIGNAL( signalStoryBoardSavedModified() ), this, SLOT( slotStoryBoardSavedModified() ) );
+    connect( ui.m_ThumbnailEditWidget, SIGNAL( signalImageChanged() ), this, SLOT( slotImageChanged() ) );
 
 	m_MyApp.activityStateChange( this, true );
 }
@@ -53,7 +53,7 @@ AppletChooseThumbnail::~AppletChooseThumbnail()
 }
 
 //============================================================================
-void AppletChooseThumbnail::slotStoryBoardSavedModified( void )
+void AppletChooseThumbnail::slotImageChanged( void )
 {
-    //m_FromGui.fromGuiUserModifiedStoryboard();
+    emit signalThumbSelected( this, ui.m_ThumbnailEditWidget );
 }

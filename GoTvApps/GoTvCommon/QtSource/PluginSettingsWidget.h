@@ -45,10 +45,11 @@ public:
     virtual PermissionWidget *  getPermissionWidget() { return ui.m_PermissionWidget; }
     virtual InformationWidget * getInformationWidget() { return ui.m_InfoWidget; }
 
-    virtual ThumbnailChooseWidget *   getThumbChooseWidget() { return ui.m_ThumbnailChooseWidget; }
+    virtual ThumbnailChooseWidget * getThumbChooseWidget() { return ui.m_ThumbnailChooseWidget; }
 
 protected slots:
     virtual void                slotApplyServiceSettings();
+    virtual void                slotThumbnailAssetChanged();
 
 protected:
     EPluginType                 getPluginType() { return m_PluginType; }

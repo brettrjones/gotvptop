@@ -23,6 +23,7 @@ class AppCommon;
 class QPixmap;
 class AssetInfo;
 class AppletBase;
+class ThumbnailEditWidget;
 
 class ThumbnailChooseWidget : public QLabel
 {
@@ -47,9 +48,12 @@ public:
 
     bool                        loadThumbnail( VxGUID& assetGuid );
 
+signals:
+    void                        signalThumbnailAssetChanged( void );
+
 protected slots:
     void                        slotChooseThumb();
-    void                        slotThumbSelected( AppletBase * thumbGallery, ThumbnailViewWidget * thumb );
+    void                        slotThumbSelected( AppletBase * thumbGallery, ThumbnailEditWidget * thumb );
 
 protected:
     Ui::ThumnailChooseWidgetUi	ui;

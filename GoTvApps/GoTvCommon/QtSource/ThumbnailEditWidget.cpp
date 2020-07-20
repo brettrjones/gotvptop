@@ -69,7 +69,7 @@ bool ThumbnailEditWidget::loadFromAsset( AssetInfo * thumbAsset )
 }
 
 //============================================================================
-bool ThumbnailEditWidget::generateThumbAsset( AssetInfo& assetInfo )
+bool ThumbnailEditWidget::generateThumbAsset( AssetInfo& assetInfoOut )
 {
     bool assetGenerated = false;
     VxGUID assetGuid;
@@ -85,6 +85,7 @@ bool ThumbnailEditWidget::generateThumbAsset( AssetInfo& assetInfo )
         if( m_MyApp.getEngine().getAssetMgr().addAsset( assetInfo ) )
         {
             assetGenerated = true;
+            assetInfoOut = assetInfo;
         }
         else
         {
@@ -125,14 +126,25 @@ void ThumbnailEditWidget::slotJpgSnapshot( uint8_t* pu8JpgData, uint32_t u32Data
     QPixmap bitmap;
     if( bitmap.loadFromData( pu8JpgData, u32DataLen, "JPG" ) )
     {
+        VxGUID nullGUID;
+        ui.m_ThumbnailViewWidget->setThumbnailId( nullGUID );
         ui.m_ThumbnailViewWidget->setThumbnailImage( bitmap );
+        ui.m_ThumbnailViewWidget->setIsUserPickedImage( true );
+        emit signalImageChanged();
     }
 }
 
 //============================================================================
 void ThumbnailEditWidget::slotImageSnapshot( QImage snapshotImage )
 {
-    ui.m_ThumbnailViewWidget->setThumbnailImage( QPixmap::fromImage( snapshotImage ) );
+    if( !snapshotImage.isNull() )
+    {
+        VxGUID nullGUID;
+        ui.m_ThumbnailViewWidget->setThumbnailId( nullGUID );
+        ui.m_ThumbnailViewWidget->setThumbnailImage( QPixmap::fromImage( snapshotImage ) );
+        ui.m_ThumbnailViewWidget->setIsUserPickedImage( true );
+        emit signalImageChanged();
+    }
 }
 
 //============================================================================
@@ -215,6 +227,7 @@ void ThumbnailEditWidget::slotThumbSelected( AppletBase * thumbGallery, Thumbnai
 
         disconnect( thumbGallery, SIGNAL( signalThumbSelected( AppletBase *, ThumbnailViewWidget * ) ), this, SLOT( slotThumbSelected( AppletBase *, ThumbnailViewWidget * ) ) );
         thumbGallery->close();
+        emit signalImageChanged();
     }
 }
 

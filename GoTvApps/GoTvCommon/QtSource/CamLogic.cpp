@@ -234,10 +234,13 @@ void CamLogic::updateRecordTime()
 void CamLogic::processCapturedImage( int requestId, const QImage& img )
 {
     Q_UNUSED( requestId );
-    if( !img.isNull() )
+    if( img.isNull() )
     {
-        LogMsg( LOG_DEBUG, "processCapturedImage x%d y%d ", img.width(), img.height() );
+        LogMsg( LOG_ERROR, "processCapturedImage null image " );
+        return;
     }
+
+    // LogMsg( LOG_DEBUG, "processCapturedImage x%d y%d ", img.width(), img.height() );
 
     QImage toSendImage;
     if( img.format() == QImage::Format_RGB888 )
@@ -255,15 +258,6 @@ void CamLogic::processCapturedImage( int requestId, const QImage& img )
         m_MyApp.getEngine().fromGuiVideoData( FOURCC_RGB, toSendImage.bits(), toSendImage.width(), toSendImage.height(), imageLen, 0 );
     }
 
-    //QImage scaledImage = img.scaled(ui->viewfinder->size(),
-    //                                Qt::KeepAspectRatio,
-    //                                Qt::SmoothTransformation);
-
-    ////ui->lastImagePreviewLabel->setPixmap(QPixmap::fromImage(scaledImage));
-
-    //// Display captured image for 4 seconds.
-    //displayCapturedImage();
-    //QTimer::singleShot(4000, this, &CamLogic::displayViewfinder);
     m_isCapturingImage = false;
 }
 

@@ -55,7 +55,7 @@ void ThumbnailChooseWidget::slotChooseThumb()
     AppletChooseThumbnail * galleryThumb = dynamic_cast< AppletChooseThumbnail * >( m_MyApp.getAppletMgr().launchApplet( eAppletChooseThumbnail, m_ParentApplet ) );
     if( galleryThumb )
     {
-        connect( galleryThumb, SIGNAL( signalThumbSelected( AppletBase *, ThumbnailViewWidget * ) ), this, SLOT( slotThumbSelected( AppletBase *, ThumbnailViewWidget * ) ) );
+        connect( galleryThumb, SIGNAL( signalThumbSelected( AppletBase *, ThumbnailEditWidget * ) ), this, SLOT( slotThumbSelected( AppletBase *, ThumbnailEditWidget * ) ) );
     }
 }
 
@@ -76,17 +76,18 @@ bool ThumbnailChooseWidget::loadFromAsset( AssetInfo * thumbAsset )
 }
 
 //============================================================================
-void ThumbnailChooseWidget::slotThumbSelected( AppletBase * thumbGallery, ThumbnailViewWidget * thumb )
+void ThumbnailChooseWidget::slotThumbSelected( AppletBase * thumbGallery, ThumbnailEditWidget * thumb )
 {
     if( thumbGallery && thumb )
     {
-        VxGUID assetGuid = thumb->getThumbnailId();
+        VxGUID assetGuid = thumb->updateAndGetThumbnailId();
         AssetInfo * thumbAsset = m_MyApp.getEngine().getAssetMgr().findAsset( assetGuid );
         if( thumbAsset )
         {
             if( loadFromAsset( thumbAsset ) )
             {
                 setAssetId( assetGuid );
+                emit signalThumbnailAssetChanged();
             }
         }
         else
