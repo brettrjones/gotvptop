@@ -163,9 +163,9 @@ bool CopyIfRequiredAssetFile( std::string assetFileName, std::string destFile, b
             }
 
             char* buffer = (char*)malloc( assetLength + 1 );
-            VxFileUtil::readWholeFile( assetFileName.c_str(), buffer, assetLength );
+            VxFileUtil::readWholeFile( assetFileName.c_str(), buffer, ( uint32_t )assetLength );
             buffer[ assetLength ] = 0;
-            result = ( 0 == VxFileUtil::writeWholeFile( destFile.c_str(), buffer, assetLength ) );
+            result = ( 0 == VxFileUtil::writeWholeFile( destFile.c_str(), buffer, ( uint32_t )assetLength ) );
             free( buffer );
         }
 

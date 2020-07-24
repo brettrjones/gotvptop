@@ -70,6 +70,8 @@ class AppletMgr;
 class IGoTv;
 class RenderGlWidget;
 class KodiThread;
+class HostListInfo;
+
 
 // media
 class CRenderBuffer;
@@ -524,9 +526,14 @@ public:
                                                                 const char *	pFileName ) override;
 	//=== to gui asset ===//
     virtual void				toGuiAssetAdded( AssetInfo * assetInfo ) override;
-    virtual void				toGuiSessionHistory( AssetInfo * assetInfo ) override;
+    virtual void				toGuiAssetSessionHistory( AssetInfo * assetInfo ) override;
     virtual void				toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
     virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
+
+    //=== to gui host list ===//
+    virtual void				toGuiHostListAdded( HostListInfo * assetInfo ) override;
+    virtual void				toGuiHostListSessionHistory( HostListInfo * assetInfo ) override;
+    virtual void				toGuiHostListAction( EHostListAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
 
 	/// a module has changed state
 	virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState )  override;
@@ -585,6 +592,7 @@ signals:
 
 	void						signalRefreshFriend( VxGuidQt onlineId ); // emitted if friend has changed
 	void						signalAssetViewMsgAction( EAssetAction, VxGuidQt onlineId, int pos0to100000 );
+    void						signalHostListViewMsgAction( EHostListAction, VxGuidQt onlineId, int pos0to100000 );
 
 	void						signalToGuiInstMsg( VxNetIdent * netIdent, EPluginType ePluginType, QString pMsg );
 	void						signalRemoveContact( VxNetIdent * netIdent );

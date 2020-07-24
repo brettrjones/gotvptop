@@ -25,18 +25,6 @@ void P2PEngine::callbackFileWasShredded( std::string& fileName )
 }
 
 //============================================================================
-void P2PEngine::callbackAssetAdded( AssetInfo * assetInfo )
-{
-	IToGui::getToGui().toGuiAssetAdded( assetInfo );
-}
-
-//============================================================================
-void P2PEngine::callbackAssetRemoved( AssetInfo * assetInfo )
-{
-	IToGui::getToGui().toGuiAssetAction( eAssetActionRemoveFromAssetMgr, assetInfo->getAssetUniqueId(), 0 );
-}
-
-//============================================================================
 void P2PEngine::callbackSharedFileTypesChanged( uint16_t fileTypes )
 {
 }
@@ -47,8 +35,20 @@ void P2PEngine::callbackSharedPktFileListUpdated( void )
 }
 
 //============================================================================
+void P2PEngine::callbackAssetAdded( AssetInfo * assetInfo )
+{
+    IToGui::getToGui().toGuiAssetAdded( assetInfo );
+}
+
+//============================================================================
+void P2PEngine::callbackAssetRemoved( AssetInfo * assetInfo )
+{
+    IToGui::getToGui().toGuiAssetAction( eAssetActionRemoveFromAssetMgr, assetInfo->getAssetUniqueId(), 0 );
+}
+
+//============================================================================
 void P2PEngine::callbackAssetHistory( void * /*userData*/, AssetInfo * assetInfo )
 {
-	IToGui::getToGui().toGuiSessionHistory( assetInfo );
+	IToGui::getToGui().toGuiAssetSessionHistory( assetInfo );
 }
 

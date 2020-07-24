@@ -77,7 +77,7 @@ PktHandlerBase::PktHandlerBase()
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_CHUNK_REPLY ]				= &PktHandlerBase::onPktAssetChunkReply;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_SEND_COMPLETE_REQ ]			= &PktHandlerBase::onPktAssetSendCompleteReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_SEND_COMPLETE_REPLY ]		= &PktHandlerBase::onPktAssetSendCompleteReply;
-	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_XFER_ERR ]					= &PktHandlerBase::onPktAssetSendCompleteReply;
+	m_aBaseSysPktFuncTable[ PKT_TYPE_ASSET_XFER_ERR ]					= &PktHandlerBase::onPktAssetXferErr;
 
 	m_aBaseSysPktFuncTable[ PKT_TYPE_MSESSION_REQ ]						= &PktHandlerBase::onPktMultiSessionReq;
 	m_aBaseSysPktFuncTable[ PKT_TYPE_MSESSION_REPLY ]					= &PktHandlerBase::onPktMultiSessionReply;
@@ -134,7 +134,15 @@ PktHandlerBase::PktHandlerBase()
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_FILE_CHUNK_REQ ]             = &PktHandlerBase::onPktThumbFileChunkReq;
     m_aBaseSysPktFuncTable[ PKT_TYPE_THUMB_FILE_CHUNK_REPLY ]           = &PktHandlerBase::onPktThumbFileChunkReply;
 
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_ANNOUNCE ]                    = &PktHandlerBase::onPktHostAnnounce;
 
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_REQ ]               = &PktHandlerBase::onPktHostListSendReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_REPLY ]             = &PktHandlerBase::onPktHostListSendReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_CHUNK_REQ ]              = &PktHandlerBase::onPktHostListChunkReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_CHUNK_REPLY ]            = &PktHandlerBase::onPktHostListChunkReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_COMPLETE_REQ ]      = &PktHandlerBase::onPktHostListSendCompleteReq;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_SEND_COMPLETE_REPLY ]    = &PktHandlerBase::onPktHostListSendCompleteReply;
+    m_aBaseSysPktFuncTable[ PKT_TYPE_HOST_LIST_XFER_ERR ]               = &PktHandlerBase::onPktHostListXferErr;
 }
 
 //============================================================================
@@ -683,6 +691,54 @@ void PktHandlerBase::onPktThumbFileChunkReq( VxSktBase * sktBase, VxPktHdr * pkt
 
 //============================================================================
 void PktHandlerBase::onPktThumbFileChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostListSendReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostListSendReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostListChunkReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostListChunkReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostListSendCompleteReq( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostListSendCompleteReply( VxSktBase * sktBase, VxPktHdr * pktHdr )
+{
+    onPktUnhandled( sktBase, pktHdr );
+}
+
+//============================================================================
+void PktHandlerBase::onPktHostListXferErr( VxSktBase * sktBase, VxPktHdr * pktHdr )
 {
     onPktUnhandled( sktBase, pktHdr );
 }

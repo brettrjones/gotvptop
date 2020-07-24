@@ -309,7 +309,7 @@ NativeToJavaClass * GetNativeToJavaClass( void )
 
 	poClass->m_methToGuiAssetAdded 				= poClass->m_poEnv->GetStaticMethodID( ( jclass )poClass->m_JavaClass, "toGuiAssetAdded", "(Lcom/waycoolapps/myp2pweb/AssetGuiInfo;)V" );
 	//MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiAssetAdded 0x%x\n", poClass->m_methToGuiGuiAssetAdded );
-	poClass->m_methToGuiSessionHistory 			= poClass->m_poEnv->GetStaticMethodID( ( jclass )poClass->m_JavaClass, "toGuiSessionHistory", "(Lcom/waycoolapps/myp2pweb/AssetGuiInfo;)V" );
+	poClass->m_methToGuiSessionHistory 			= poClass->m_poEnv->GetStaticMethodID( ( jclass )poClass->m_JavaClass, "toGuiAssetSessionHistory", "(Lcom/waycoolapps/myp2pweb/AssetGuiInfo;)V" );
 	//MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiSessionHistory 0x%x\n", poClass->m_methToGuiSessionHistory );
 	poClass->m_methToGuiAssetAction 			= poClass->m_poEnv->GetStaticMethodID( ( jclass )poClass->m_JavaClass, "toGuiAssetAction", "(IJJI)V" );
 	//MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiAssetAction 0x%x\n", poClass->m_methToGuiAssetAction );

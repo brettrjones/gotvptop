@@ -447,12 +447,6 @@ void IGoTv::toGuiAssetAdded( AssetInfo * assetInfo )
 }
 
 //============================================================================
-void IGoTv::toGuiSessionHistory( AssetInfo * assetInfo )
-{
-    getAppCommon().toGuiSessionHistory( assetInfo );
-}
-
-//============================================================================
 void IGoTv::toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
 {
     getAppCommon().toGuiAssetAction( assetAction,
@@ -466,4 +460,29 @@ void IGoTv::toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onl
     getAppCommon().toGuiMultiSessionAction( mSessionAction,
                                  onlineId,
                                  pos0to100000 );
+}
+
+//============================================================================
+void IGoTv::toGuiAssetSessionHistory( AssetInfo * assetInfo )
+{
+    getAppCommon().toGuiAssetSessionHistory( assetInfo );
+}
+
+//============================================================================
+void IGoTv::toGuiHostListAdded( HostListInfo * hostListInfo )
+{
+    getAppCommon().toGuiHostListAdded( hostListInfo );
+}
+
+//============================================================================
+void IGoTv::toGuiHostListAction( EHostListAction assetAction, VxGUID& assetId, int pos0to100000 )
+{
+    getAppCommon().toGuiHostListAction( assetAction,
+                                        assetId,
+                                        pos0to100000 );
+}
+//============================================================================
+void IGoTv::toGuiHostListSessionHistory( HostListInfo * hostListInfo )
+{
+    getAppCommon().toGuiHostListSessionHistory( hostListInfo );
 }

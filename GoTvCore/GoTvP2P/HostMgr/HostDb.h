@@ -42,9 +42,9 @@ protected:
 	bool						validatePort( std::string& port );
 	bool						validateIPv4( std::string& ipv4 );
 	bool						validateIPv6( std::string& ipv6 );
-	RCODE						handleRandomConnect(	HostListEntry&	callerEntry, 
-													HostList&			anchorListOut,
-													int64_t					s64PostTimeMs );
+	RCODE						handleRandomConnect(	HostListEntry&	    callerEntry, 
+													    HostList&			anchorListOut,
+													    int64_t				s64PostTimeMs );
 
 	int							m_iInseredEntryCount;
 	std::vector<RandomConnectEntry>	m_RandomConnectList;

@@ -19,10 +19,12 @@
 
 #include <CoreLib/AppErr.h>
 #include <CoreLib/AssetDefs.h>
+#include <CoreLib/HostListDefs.h>
 #include <PktLib/VxCommon.h>
 
 class VxNetIdent;
 class AssetInfo;
+class HostListInfo;
 class VxGUID;
 
 //! \public Enumeration of Relay Search Status
@@ -251,13 +253,19 @@ public:
 	virtual void				toGuiFileXferState( VxGUID& lclSessionId, EXferState eXferState, int param1, int param2 ) = 0;
 
 	/// Video file or audio file or emote icon or text message asset info in result of request to get Text Chat session assets
-	virtual void				toGuiSessionHistory( AssetInfo * assetInfo ) = 0;
+	virtual void				toGuiAssetSessionHistory( AssetInfo * assetInfo ) = 0;
 	/// Video file or audio file or emote icon or text message has been added to Text Chat session
 	virtual void				toGuiAssetAdded( AssetInfo * assetInfo ) = 0;
 	/// Asset state has changed ( like transfer has failed )
 	virtual void				toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) = 0;
 	/// Text Chat session action like video chat session requested
 	virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) = 0;
+
+    //=== to gui host list ===//
+    virtual void				toGuiHostListAdded( HostListInfo * assetInfo ) = 0;
+    virtual void				toGuiHostListAction( EHostListAction assetAction, VxGUID& assetId, int pos0to100000 ) = 0;
+    virtual void				toGuiHostListSessionHistory( HostListInfo * assetInfo ) = 0;
+
 	/// Game variable has changed ( Used by Truth Or Dare video chat game )
 	virtual bool				toGuiSetGameValueVar(	EPluginType	    ePluginType, 
 														VxGUID&		    oOnlineId, 

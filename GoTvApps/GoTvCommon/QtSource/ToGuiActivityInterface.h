@@ -17,6 +17,7 @@
 #include "config_gotvapps.h"
 #include <CoreLib/VxDefs.h>
 #include <CoreLib/AssetDefs.h>
+#include <CoreLib/HostListDefs.h>
 #include <PktLib/VxCommon.h>
 
 #include <GoTvInterface/IDefs.h>
@@ -27,6 +28,7 @@ class VxGUID;
 class VxNetIdent;
 class GuiOfferSession;
 class AssetInfo;
+class HostListInfo;
 
 class ToGuiActivityInterface
 {
@@ -52,11 +54,16 @@ public:
 	virtual void				toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType ){};
 
 	virtual void				toGuiClientAssetAction( void * callbackData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ){};
-	virtual void				toGuiSessionHistory( void * userData, AssetInfo * assetInfo ){};
+	virtual void				toGuiAssetSessionHistory( void * userData, AssetInfo * assetInfo ){};
 	virtual void				toGuiAssetAdded( void * userData, AssetInfo * assetInfo ){};
 
 	virtual void				toGuiMultiSessionAction( void * callbackData, EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ){};
 	virtual void				toGuiSetGameValueVar( void * callbackData, EPluginType ePluginType, VxGUID& onlineId, int32_t varId, int32_t varValue ){};
 	virtual void				toGuiSetGameActionVar( void * callbackData, EPluginType ePluginType, VxGUID& onlineId, int32_t actionId, int32_t varValue ){};
+
+    virtual void				toGuiClientHostListAction( void * callbackData, EHostListAction assetAction, VxGUID& assetId, int pos0to100000 ){};
+    virtual void				toGuiHostListAdded( void * userData, HostListInfo * assetInfo ){};
+    virtual void				toGuiHostListSessionHistory( void * userData, HostListInfo * assetInfo ){};
+
 };
 

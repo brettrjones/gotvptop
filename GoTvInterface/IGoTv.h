@@ -300,58 +300,58 @@ public:
     //! add offer to notify list
     virtual void				toGuiRxedPluginOffer( VxNetIdent *		netIdent,
                                                       EPluginType		ePluginType,
-                                                      const char *	pMsg,
+                                                      const char *	    pMsg,
                                                       int				pvUserData,
-                                                      const char *	pFileName = NULL,
+                                                      const char *	    pFileName = NULL,
                                                       uint8_t *			fileHashData = 0,
                                                       VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
                                                       VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) override;
     //! response to offer
-    virtual void				toGuiRxedOfferReply( VxNetIdent *	netIdent,
+    virtual void				toGuiRxedOfferReply( VxNetIdent *	    netIdent,
                                                      EPluginType		ePluginType,
                                                      int				pvUserData,
-                                                     EOfferResponse	eOfferResponse,
-                                                     const char *	pFileName = NULL,
+                                                     EOfferResponse	    eOfferResponse,
+                                                     const char *	    pFileName = NULL,
                                                      uint8_t *			fileHashData = 0,
                                                      VxGUID&			lclSessionId = VxGUID::nullVxGUID(),
                                                      VxGUID&			rmtSessionId = VxGUID::nullVxGUID() ) override;
 
-    virtual void				toGuiPluginSessionEnded( VxNetIdent *	netIdent,
+    virtual void				toGuiPluginSessionEnded( VxNetIdent *	    netIdent,
                                                          EPluginType		ePluginType,
                                                          int				pvUserData,
-                                                         EOfferResponse	eOfferResponse,
+                                                         EOfferResponse	    eOfferResponse,
                                                          VxGUID&			lclSessionId = VxGUID::nullVxGUID() ) override;
 
     virtual void				toGuiPluginStatus( EPluginType		ePluginType,
                                                    int				statusType,
                                                    int				statusValue ) override;
 
-    virtual void				toGuiInstMsg( VxNetIdent *	netIdent,
+    virtual void				toGuiInstMsg( VxNetIdent *	    netIdent,
                                               EPluginType		ePluginType,
-                                              const char *	pMsg ) override;
+                                              const char *	    pMsg ) override;
 
     virtual void				toGuiFileListReply( VxNetIdent *	netIdent,
                                                     EPluginType		ePluginType,
-                                                    uint8_t				u8FileType,
-                                                    uint64_t				u64FileLen,
+                                                    uint8_t			u8FileType,
+                                                    uint64_t		u64FileLen,
                                                     const char *	pFileName,
-                                                    uint8_t *			fileHashData ) override;
+                                                    uint8_t *		fileHashData ) override;
 
-    virtual void				toGuiStartUpload( VxNetIdent *	netIdent,
+    virtual void				toGuiStartUpload( VxNetIdent *	    netIdent,
                                                   EPluginType		ePluginType,
                                                   VxGUID&			fileInstanceId,
-                                                  uint8_t				u8FileType,
-                                                  uint64_t				u64FileLen,
-                                                  const char *	pFileName,
+                                                  uint8_t			u8FileType,
+                                                  uint64_t			u64FileLen,
+                                                  const char *	    pFileName,
                                                   uint8_t *			fileHashData ) override;
 
     virtual void				toGuiStartDownload( VxNetIdent *	netIdent,
                                                     EPluginType		ePluginType,
                                                     VxGUID&			fileInstanceId,
-                                                    uint8_t				u8FileType,
-                                                    uint64_t				u64FileLen,
+                                                    uint8_t			u8FileType,
+                                                    uint64_t		u64FileLen,
                                                     const char *	pFileName,
-                                                    uint8_t *			fileHashData ) override;
+                                                    uint8_t *		fileHashData ) override;
 
     virtual void				toGuiFileDownloadComplete( VxGUID& lclSessionId, const char * newFileName, EXferError xferError ) override;
     virtual void				toGuiFileUploadComplete( VxGUID& lclSessionId, EXferError xferError ) override;
@@ -373,27 +373,31 @@ public:
                                                              uint64_t       u64FileLen,
                                                              const char *	pFileName ) override;
 
-    virtual bool				toGuiSetGameValueVar( EPluginType	ePluginType,
-                                                      VxGUID&	oOnlineId,
+    virtual bool				toGuiSetGameValueVar( EPluginType	    ePluginType,
+                                                      VxGUID&	        oOnlineId,
                                                       int32_t			s32VarId,
                                                       int32_t			s32VarValue ) override;
 
     virtual bool				toGuiSetGameActionVar( EPluginType	ePluginType,
-                                                       VxGUID&	oOnlineId,
-                                                       int32_t			s32VarId,
-                                                       int32_t			s32VarValue ) override;
+                                                       VxGUID&	    oOnlineId,
+                                                       int32_t		s32VarId,
+                                                       int32_t		s32VarValue ) override;
 
     virtual void				toGuiFileList( const char *	fileName,
-                                               uint64_t				fileLen,
-                                               uint8_t				fileType,
+                                               uint64_t		fileLen,
+                                               uint8_t		fileType,
                                                bool			isShared,
                                                bool			isInLibrary,
-                                               uint8_t *			fileHashId = 0 ) override;
+                                               uint8_t *	fileHashId = 0 ) override;
 
     virtual void				toGuiAssetAdded( AssetInfo * assetInfo ) override;
-    virtual void				toGuiSessionHistory( AssetInfo * assetInfo ) override;
     virtual void				toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
+    virtual void				toGuiAssetSessionHistory( AssetInfo * assetInfo ) override;
     virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 ) override;
+
+    virtual void				toGuiHostListAdded( HostListInfo * assetInfo ) override;
+    virtual void				toGuiHostListAction( EHostListAction assetAction, VxGUID& assetId, int pos0to100000 ) override;
+    virtual void				toGuiHostListSessionHistory( HostListInfo * assetInfo ) override;
 
     //============================================================================
     //=== from gui ===//

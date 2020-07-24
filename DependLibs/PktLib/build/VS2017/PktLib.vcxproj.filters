@@ -130,6 +130,12 @@
     <ClInclude Include="..\..\PktsPluginSetting.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\PktHostAnnounce.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PktsHostListXfer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\PktAnnList.cpp">
@@ -238,6 +244,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\PktsPluginSetting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PktHostAnnounce.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PktsHostListXfer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

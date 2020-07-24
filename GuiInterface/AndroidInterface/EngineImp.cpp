@@ -488,7 +488,7 @@ void EngineImp::toGuiAssetAdded( AssetInfo * assetInfo )
 }
 
 //============================================================================
-void EngineImp::toGuiSessionHistory( AssetInfo * assetInfo )
+void EngineImp::toGuiAssetSessionHistory( AssetInfo * assetInfo )
 {
 	JavaToGuiSessionHistory( assetInfo );
 }

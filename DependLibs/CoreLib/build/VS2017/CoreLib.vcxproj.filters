@@ -328,6 +328,9 @@
     <ClInclude Include="..\..\StringListBinary.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\HostListDefs.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppErr_corelib.cpp">

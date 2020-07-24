@@ -613,6 +613,36 @@
     <ClCompile Include="..\..\GoTvP2P\NetworkMonitor\NetStatusAccum.cpp">
       <Filter>GoTvP2P\NetworkMonitor</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListInfo.cpp">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListInfoDb.cpp">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListMgr.cpp">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListMgrBase.cpp">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListRxSession.cpp">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListTxSession.cpp">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListXferDb.cpp">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListXferMgr.cpp">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListXferSession.cpp">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineHostList.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1330,6 +1360,36 @@
     <ClInclude Include="..\..\GoTvP2P\NetworkMonitor\NetStatusAccum.h">
       <Filter>GoTvP2P\NetworkMonitor</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListCallbackInterface.h">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListInfo.h">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListInfoDb.h">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListMgr.h">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListMgrBase.h">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListRxSession.h">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListTxSession.h">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListXferDb.h">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListXferMgr.h">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListXferSession.h">
+      <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="system">
@@ -1409,6 +1469,9 @@
     </Filter>
     <Filter Include="QtBuild">
       <UniqueIdentifier>{0921fc77-19ec-4125-8b2f-00cc5b3f5e56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\HostListMgr">
+      <UniqueIdentifier>{4ecc7908-7e5d-461b-8c9f-226e2b8ab83b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

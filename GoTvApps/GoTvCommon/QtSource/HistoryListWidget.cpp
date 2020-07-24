@@ -102,7 +102,7 @@ void HistoryListWidget::toGuiClientAssetAction( void * userData, EAssetAction as
 }
 
 //============================================================================
-void HistoryListWidget::toGuiSessionHistory( void * userData, AssetInfo * assetInfo )
+void HistoryListWidget::toGuiAssetSessionHistory( void * userData, AssetInfo * assetInfo )
 {
 	Q_UNUSED( userData );
 	emit signalToGuiSessionHistory( assetInfo );

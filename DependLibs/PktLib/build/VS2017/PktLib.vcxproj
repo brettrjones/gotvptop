@@ -179,6 +179,7 @@
     <ClInclude Include="..\..\PktAnnounce.h" />
     <ClInclude Include="..\..\PktChatReq.h" />
     <ClInclude Include="..\..\PktDebugHelpers.h" />
+    <ClInclude Include="..\..\PktHostAnnounce.h" />
     <ClInclude Include="..\..\PktLogReply.h" />
     <ClInclude Include="..\..\PktLogReq.h" />
     <ClInclude Include="..\..\PktPluginHandlerBase.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="..\..\PktSearch.h" />
     <ClInclude Include="..\..\PktsFileList.h" />
     <ClInclude Include="..\..\PktsFileShare.h" />
+    <ClInclude Include="..\..\PktsHostListXfer.h" />
     <ClInclude Include="..\..\PktsImAlive.h" />
     <ClInclude Include="..\..\PktsMultiSession.h" />
     <ClInclude Include="..\..\PktsPing.h" />
@@ -220,6 +222,7 @@
     <ClCompile Include="..\..\PktAnnounce.cpp" />
     <ClCompile Include="..\..\PktChatReq.cpp" />
     <ClCompile Include="..\..\PktDebugHelpers.cpp" />
+    <ClCompile Include="..\..\PktHostAnnounce.cpp" />
     <ClCompile Include="..\..\PktLogReply.cpp" />
     <ClCompile Include="..\..\PktLogReq.cpp" />
     <ClCompile Include="..\..\PktPluginHandlerBase.cpp" />
@@ -227,6 +230,7 @@
     <ClCompile Include="..\..\PktSearch.cpp" />
     <ClCompile Include="..\..\PktsFileList.cpp" />
     <ClCompile Include="..\..\PktsFileShare.cpp" />
+    <ClCompile Include="..\..\PktsHostListXfer.cpp" />
     <ClCompile Include="..\..\PktsImAlive.cpp" />
     <ClCompile Include="..\..\PktsMultiSession.cpp" />
     <ClCompile Include="..\..\PktsPing.cpp" />

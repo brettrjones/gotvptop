@@ -1318,7 +1318,7 @@ void AppCommon::toGuiAssetAdded( AssetInfo * assetInfo )
 }
 
 //============================================================================
-void AppCommon::toGuiSessionHistory( AssetInfo * assetInfo )
+void AppCommon::toGuiAssetSessionHistory( AssetInfo * assetInfo )
 {
 	if( VxIsAppShuttingDown() )
 	{
@@ -1327,7 +1327,7 @@ void AppCommon::toGuiSessionHistory( AssetInfo * assetInfo )
 
 	//emit signalSessionHistory( assetInfo );
 	//#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiSessionHistory: toGuiActivityClientsLock\n" );
+	LogMsg( LOG_INFO, "toGuiAssetSessionHistory: toGuiActivityClientsLock\n" );
 	//#endif // DEBUG_TOGUI_CLIENT_MUTEX
 
 	toGuiActivityClientsLock();
@@ -1335,11 +1335,11 @@ void AppCommon::toGuiSessionHistory( AssetInfo * assetInfo )
 	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
 	{
 		ToGuiActivityClient& client = *iter;
-		client.m_Callback->toGuiSessionHistory( client.m_UserData, assetInfo );
+		client.m_Callback->toGuiAssetSessionHistory( client.m_UserData, assetInfo );
 	}
 
 	//#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiSessionHistory toGuiActivityClientsUnlock\n");
+	LogMsg( LOG_INFO, "toGuiAssetSessionHistory toGuiActivityClientsUnlock\n");
 	//#endif // DEBUG_TOGUI_CLIENT_MUTEX
 
 	toGuiActivityClientsUnlock();
@@ -1348,16 +1348,73 @@ void AppCommon::toGuiSessionHistory( AssetInfo * assetInfo )
 //============================================================================
 void AppCommon::toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 )
 {
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    if( ( eAssetActionRxNotifyNewMsg == assetAction )
+        || ( eAssetActionRxViewingMsg == assetAction ) )
+    {
+        VxGuidQt qAssetViewId( assetId.getVxGUIDHiPart(), assetId.getVxGUIDLoPart() );
+        emit signalAssetViewMsgAction( assetAction, qAssetViewId, pos0to100000 );
+        return;
+    }
+
+#ifdef DEBUG_TOGUI_CLIENT_MUTEX
+    LogMsg( LOG_INFO, "toGuiAssetAction: toGuiActivityClientsLock\n" );
+#endif // DEBUG_TOGUI_CLIENT_MUTEX
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiClientAssetAction( client.m_UserData, assetAction, assetId, pos0to100000 );
+    }
+
+#ifdef DEBUG_TOGUI_CLIENT_MUTEX
+    LogMsg( LOG_INFO, "toGuiAssetAction toGuiActivityClientsUnlock\n" );
+#endif // DEBUG_TOGUI_CLIENT_MUTEX
+    toGuiActivityClientsUnlock();
+}
+
+//============================================================================
+void AppCommon::toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    VxGuidQt idPro( onlineId.getVxGUIDHiPart(), onlineId.getVxGUIDLoPart() );
+    emit signalMultiSessionAction( idPro, mSessionAction, pos0to100000 );
+#ifdef DEBUG_TOGUI_CLIENT_MUTEX
+    LogMsg( LOG_INFO, "toGuiMultiSessionAction: toGuiActivityClientsLock\n" );
+#endif // DEBUG_TOGUI_CLIENT_MUTEX
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiMultiSessionAction( client.m_UserData, mSessionAction, onlineId, pos0to100000 );
+    }
+
+    toGuiActivityClientsUnlock();
+}
+
+//============================================================================
+void AppCommon::toGuiHostListAction( EHostListAction assetAction, VxGUID& assetId, int pos0to100000 )
+{
 	if( VxIsAppShuttingDown() )
 	{
 		return;
 	}
 
-	if( ( eAssetActionRxNotifyNewMsg == assetAction )
-		|| ( eAssetActionRxViewingMsg == assetAction ) )
+	if( ( eHostListActionRxNotifyNewMsg == assetAction )
+		|| ( eHostListActionRxViewingMsg == assetAction ) )
 	{
 		VxGuidQt qAssetViewId( assetId.getVxGUIDHiPart(), assetId.getVxGUIDLoPart() );
-		emit signalAssetViewMsgAction( assetAction, qAssetViewId, pos0to100000 );
+		emit signalHostListViewMsgAction( assetAction, qAssetViewId, pos0to100000 );
 		return;
 	}
 
@@ -1369,7 +1426,7 @@ void AppCommon::toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int
 	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
 	{
 		ToGuiActivityClient& client = *iter;
-		client.m_Callback->toGuiClientAssetAction( client.m_UserData, assetAction, assetId, pos0to100000 );
+		client.m_Callback->toGuiClientHostListAction( client.m_UserData, assetAction, assetId, pos0to100000 );
 	}
 
 #ifdef DEBUG_TOGUI_CLIENT_MUTEX
@@ -1379,27 +1436,59 @@ void AppCommon::toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int
 }
 
 //============================================================================
-void AppCommon::toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 )
+void AppCommon::toGuiHostListAdded( HostListInfo * assetInfo )
 {
-	if( VxIsAppShuttingDown() )
-	{
-		return;
-	}
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
 
-	VxGuidQt idPro( onlineId.getVxGUIDHiPart(), onlineId.getVxGUIDLoPart() );
-	emit signalMultiSessionAction( idPro, mSessionAction, pos0to100000 );
-#ifdef DEBUG_TOGUI_CLIENT_MUTEX
-	LogMsg( LOG_INFO, "toGuiMultiSessionAction: toGuiActivityClientsLock\n" );
-#endif // DEBUG_TOGUI_CLIENT_MUTEX
-	toGuiActivityClientsLock();
-	std::vector<ToGuiActivityClient>::iterator iter;
-	for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
-	{
-		ToGuiActivityClient& client = *iter;
-		client.m_Callback->toGuiMultiSessionAction( client.m_UserData, mSessionAction, onlineId, pos0to100000 );
-	}
+    if( IsLogEnabled( eLogAssets ) )
+        LogMsg( LOG_INFO, "toGuiHostListAdded: toGuiActivityClientsLock\n" );
+    //#endif // DEBUG_TOGUI_CLIENT_MUTEX
 
-	toGuiActivityClientsUnlock();
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiHostListAdded( client.m_UserData, assetInfo );
+    }
+
+    if( IsLogEnabled( eLogAssets ) )
+        LogMsg( LOG_INFO, "toGuiHostListAdded toGuiActivityClientsUnlock\n" );
+
+    toGuiActivityClientsUnlock();
+
+    //emit signalAssetAdded( assetInfo );
+}
+
+//============================================================================
+void AppCommon::toGuiHostListSessionHistory( HostListInfo * assetInfo )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    //emit signalSessionHistory( assetInfo );
+    //#ifdef DEBUG_TOGUI_CLIENT_MUTEX
+    LogMsg( LOG_INFO, "toGuiHostListSessionHistory: toGuiActivityClientsLock\n" );
+    //#endif // DEBUG_TOGUI_CLIENT_MUTEX
+
+    toGuiActivityClientsLock();
+    std::vector<ToGuiActivityClient>::iterator iter;
+    for( iter = m_ToGuiActivityClientList.begin(); iter != m_ToGuiActivityClientList.end(); ++iter )
+    {
+        ToGuiActivityClient& client = *iter;
+        client.m_Callback->toGuiHostListSessionHistory( client.m_UserData, assetInfo );
+    }
+
+    //#ifdef DEBUG_TOGUI_CLIENT_MUTEX
+    LogMsg( LOG_INFO, "toGuiHostListSessionHistory toGuiActivityClientsUnlock\n" );
+    //#endif // DEBUG_TOGUI_CLIENT_MUTEX
+
+    toGuiActivityClientsUnlock();
 }
 
 //============================================================================

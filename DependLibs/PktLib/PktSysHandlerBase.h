@@ -143,6 +143,17 @@ public:
     virtual void				onPktThumbFileChunkReq      ( VxSktBase * sktBase, VxPktHdr * pktHdr );
     virtual void				onPktThumbFileChunkReply    ( VxSktBase * sktBase, VxPktHdr * pktHdr );
 
+    virtual void				onPktHostAnnounce           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+
+    virtual void				onPktHostListSendReq            ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktHostListSendReply          ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktHostListChunkReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktHostListChunkReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktHostListSendCompleteReq    ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktHostListSendCompleteReply  ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+    virtual void				onPktHostListXferErr            ( VxSktBase * sktBase, VxPktHdr * pktHdr );
+
+
 	//packet type 250 and greater not allowed
 	typedef void (PktHandlerBase::*RC_SYS_BASE_PKT_FUNCTION)( VxSktBase *, VxPktHdr * );  
 protected:

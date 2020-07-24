@@ -13,10 +13,9 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <config_gotvcore.h>
-#include "AssetMgr.h"
-#include "AssetInfo.h"
-#include "AssetInfoDb.h"
+#include "HostListMgr.h"
+#include "HostListInfo.h"
+#include "HostListInfoDb.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 #include <GoTvInterface/IToGui.h>
@@ -34,14 +33,14 @@
 
 namespace
 {
-	const char * ASSET_INFO_DB_NAME = "AssetInfoDb.db3";
+	const char * ASSET_INFO_DB_NAME = "HostListInfoDb.db3";
 
 	//============================================================================
-    static void * AssetMgrGenHashIdsThreadFunc( void * pvContext )
+    static void * HostListMgrGenHashIdsThreadFunc( void * pvContext )
 	{
 		VxThread * poThread = (VxThread *)pvContext;
 		poThread->setIsThreadRunning( true );
-		AssetMgr * poMgr = (AssetMgr *)poThread->getThreadUserParam();
+		HostListMgr * poMgr = (HostListMgr *)poThread->getThreadUserParam();
         if( poMgr )
         {
             poMgr->assetInfoMgrStartup( poThread );
@@ -53,32 +52,32 @@ namespace
 }
 
 //============================================================================
-AssetMgr::AssetMgr( P2PEngine& engine )
-: AssetMgrBase( engine )
+HostListMgr::HostListMgr( P2PEngine& engine )
+: HostListMgrBase( engine )
 , m_Initialized( false )
-, m_AssetListInitialized( false )
-, m_AssetInfoDb( * new AssetInfoDb( *this ) )
+, m_HostListListInitialized( false )
+, m_HostListInfoDb( * new HostListInfoDb( *this ) )
 {
 }
 
 //============================================================================
-AssetMgr::~AssetMgr()
+HostListMgr::~HostListMgr()
 {
-	delete &m_AssetInfoDb;
+	delete &m_HostListInfoDb;
 }
 
 //============================================================================
-void AssetMgr::fromGuiUserLoggedOn( void )
+void HostListMgr::fromGuiUserLoggedOn( void )
 {
 	if( !m_Initialized )
 	{
 		m_Initialized = true;
-		m_GenHashThread.startThread( (VX_THREAD_FUNCTION_T)AssetMgrGenHashIdsThreadFunc, this, "AssetMgrGenHash" );			
+		m_GenHashThread.startThread( (VX_THREAD_FUNCTION_T)HostListMgrGenHashIdsThreadFunc, this, "HostListMgrGenHash" );			
 	}
 }
 
 //============================================================================
-void AssetMgr::assetInfoMgrStartup( VxThread * startupThread )
+void HostListMgr::assetInfoMgrStartup( VxThread * startupThread )
 {
 	if( startupThread->isAborted() )
 		return;
@@ -86,34 +85,34 @@ void AssetMgr::assetInfoMgrStartup( VxThread * startupThread )
 	std::string dbName = VxGetSettingsDirectory();
 	dbName += ASSET_INFO_DB_NAME; 
 	lockResources();
-	m_AssetInfoDb.dbShutdown();
-	m_AssetInfoDb.dbStartup( 1, dbName );
+	m_HostListInfoDb.dbShutdown();
+	m_HostListInfoDb.dbStartup( 1, dbName );
 	unlockResources();
 	if( startupThread->isAborted() )
 		return;
-	updateAssetListFromDb( startupThread );
-	m_AssetListInitialized = true;
+	updateHostListListFromDb( startupThread );
+	m_HostListListInitialized = true;
 	if( startupThread->isAborted() )
 		return;
 	generateHashIds( startupThread );
 }
 
 //============================================================================
-void AssetMgr::assetInfoMgrShutdown( void )
+void HostListMgr::assetInfoMgrShutdown( void )
 {
 	m_GenHashThread.abortThreadRun( true );
 	m_GenHashSemaphore.signal();
 	lockResources();
-	clearAssetInfoList();
-	clearAssetFileListPackets();
-	m_AssetInfoDb.dbShutdown();
+	clearHostListInfoList();
+	clearHostListFileListPackets();
+	m_HostListInfoDb.dbShutdown();
 	unlockResources();
-	m_AssetListInitialized = false;
+	m_HostListListInitialized = false;
 	m_Initialized = false;
 }
 
 //============================================================================
-void AssetMgr::generateHashForFile( std::string fileName )
+void HostListMgr::generateHashForFile( std::string fileName )
 {
 	m_GenHashMutex.lock();
 	m_GenHashList.push_back( fileName );
@@ -122,7 +121,7 @@ void AssetMgr::generateHashForFile( std::string fileName )
 }
 
 //============================================================================
-void AssetMgr::generateHashIds( VxThread * genHashThread )
+void HostListMgr::generateHashIds( VxThread * genHashThread )
 {
 	while( false == genHashThread->isAborted() )
 	{
@@ -151,37 +150,37 @@ void AssetMgr::generateHashIds( VxThread * genHashThread )
 					return;
 				}
 
-				std::vector<AssetInfo*>::iterator iter;
-				AssetInfo * assetInfo = 0;
+				std::vector<HostListInfo*>::iterator iter;
+				HostListInfo * assetInfo = 0;
 				lockResources();
 				// move from waiting to completed
 				for( iter = m_WaitingForHastList.begin(); iter != m_WaitingForHastList.end(); ++iter )
 				{
-					AssetInfo * inListAssetInfo = *iter;
-					if( inListAssetInfo->getAssetName() == thisFile )
+					HostListInfo * inListHostListInfo = *iter;
+					if( inListHostListInfo->getHostListName() == thisFile )
 					{
-						assetInfo = inListAssetInfo;
+						assetInfo = inListHostListInfo;
 						m_WaitingForHastList.erase( iter );
-						assetInfo->setAssetHashId( fileHash );
-						m_AssetInfoList.push_back( assetInfo );
+						assetInfo->setHostListHashId( fileHash );
+						m_HostListInfoList.push_back( assetInfo );
 						break;
 					}
 				}
 
 				unlockResources();
-				std::vector<AssetCallbackInterface *>::iterator callbackIter;
+				std::vector<HostListCallbackInterface *>::iterator callbackIter;
 				lockClientList();
-				for( callbackIter = m_AssetClients.begin(); callbackIter != m_AssetClients.end(); ++callbackIter )
+				for( callbackIter = m_HostListClients.begin(); callbackIter != m_HostListClients.end(); ++callbackIter )
 				{
-					AssetCallbackInterface * client = *callbackIter;
+					HostListCallbackInterface * client = *callbackIter;
 					client->callbackHashIdGenerated( thisFile, fileHash );
 				}
 
 				unlockClientList();
 				if( assetInfo )
 				{
-					m_AssetInfoDb.addAsset( assetInfo );
-					announceAssetAdded( assetInfo );
+					m_HostListInfoDb.addHostList( assetInfo );
+					announceHostListAdded( assetInfo );
 				}
 			}
 		}
@@ -189,12 +188,12 @@ void AssetMgr::generateHashIds( VxThread * genHashThread )
 }
 
 //============================================================================
-AssetInfo * AssetMgr::findAsset( std::string& fileName )
+HostListInfo * HostListMgr::findHostList( std::string& fileName )
 {
-	std::vector<AssetInfo*>::iterator iter;
-	for( iter = m_AssetInfoList.begin(); iter != m_AssetInfoList.end(); ++iter )
+	std::vector<HostListInfo*>::iterator iter;
+	for( iter = m_HostListInfoList.begin(); iter != m_HostListInfoList.end(); ++iter )
 	{
-		if( (*iter)->getAssetName() == fileName )
+		if( (*iter)->getHostListName() == fileName )
 		{
 			return (*iter);
 		}
@@ -204,18 +203,18 @@ AssetInfo * AssetMgr::findAsset( std::string& fileName )
 }
 
 //============================================================================
-AssetInfo * AssetMgr::findAsset( VxSha1Hash& fileHashId )
+HostListInfo * HostListMgr::findHostList( VxSha1Hash& fileHashId )
 {
 	if( false == fileHashId.isHashValid() )
 	{
-		LogMsg( LOG_ERROR, "AssetMgr::findAsset: invalid file hash id\n" );
+		LogMsg( LOG_ERROR, "HostListMgr::findHostList: invalid file hash id\n" );
 		return 0;
 	}
 
-	std::vector<AssetInfo*>::iterator iter;
-	for( iter = m_AssetInfoList.begin(); iter != m_AssetInfoList.end(); ++iter )
+	std::vector<HostListInfo*>::iterator iter;
+	for( iter = m_HostListInfoList.begin(); iter != m_HostListInfoList.end(); ++iter )
 	{
-		if( (*iter)->getAssetHashId() == fileHashId )
+		if( (*iter)->getHostListHashId() == fileHashId )
 		{
 			return (*iter);
 		}
@@ -225,18 +224,18 @@ AssetInfo * AssetMgr::findAsset( VxSha1Hash& fileHashId )
 }
 
 //============================================================================
-AssetInfo * AssetMgr::findAsset( VxGUID& assetId )
+HostListInfo * HostListMgr::findHostList( VxGUID& assetId )
 {
 	if( false == assetId.isVxGUIDValid() )
 	{
-		//LogMsg( LOG_ERROR, "AssetMgr::findAsset: invalid VxGUID asset id\n" );
+		//LogMsg( LOG_ERROR, "HostListMgr::findHostList: invalid VxGUID asset id\n" );
         return nullptr;
 	}
 
-	std::vector<AssetInfo*>::iterator iter;
-	for( AssetInfo * assetInfo : m_AssetInfoList )
+	std::vector<HostListInfo*>::iterator iter;
+	for( HostListInfo * assetInfo : m_HostListInfoList )
 	{
-		if( assetInfo->getAssetUniqueId() == assetId )
+		if( assetInfo->getHostListUniqueId() == assetId )
 		{
 			return assetInfo;
 		}
@@ -246,9 +245,9 @@ AssetInfo * AssetMgr::findAsset( VxGUID& assetId )
 }
 
 //============================================================================
-AssetInfo * AssetMgr::addAssetFile( const char * fileName, uint64_t fileLen, uint8_t fileType )
+HostListInfo * HostListMgr::addHostListFile( const char * fileName, uint64_t fileLen, uint8_t fileType )
 {
-    AssetInfo * assetInfo = createAssetInfo( fileName, fileLen, fileType );
+    HostListInfo * assetInfo = createHostListInfo( fileName, fileLen, fileType );
     if( assetInfo )
     {
         if( insertNewInfo( assetInfo ) )
@@ -261,14 +260,14 @@ AssetInfo * AssetMgr::addAssetFile( const char * fileName, uint64_t fileLen, uin
 }
 
 //============================================================================
-bool AssetMgr::addAssetFile(	    const char *	fileName, 
+bool HostListMgr::addHostListFile(	    const char *	fileName, 
 									VxGUID&			assetId,  
 									uint8_t *		hashId, 
-									EAssetLocation	locationFlags, 
+									EHostListLocation	locationFlags, 
 									const char *	assetTag, 
                                     int64_t			timestamp )
 {
-	AssetInfo * assetInfo = createAssetInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
+	HostListInfo * assetInfo = createHostListInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
 	if( assetInfo )
 	{
 		return insertNewInfo( assetInfo );
@@ -278,16 +277,16 @@ bool AssetMgr::addAssetFile(	    const char *	fileName,
 }
 
 //============================================================================
-bool AssetMgr::addAssetFile(	    const char *	fileName, 
+bool HostListMgr::addHostListFile(	    const char *	fileName, 
 									VxGUID&			assetId,  
 									VxGUID&		    creatorId, 
 									VxGUID&		    historyId, 
 									uint8_t *		hashId, 
-									EAssetLocation	locationFlags, 
+									EHostListLocation	locationFlags, 
 									const char *	assetTag, 
                                     int64_t			timestamp )
 {
-	AssetInfo * assetInfo = createAssetInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
+	HostListInfo * assetInfo = createHostListInfo( fileName, assetId, hashId, locationFlags, assetTag, timestamp );
 	if( assetInfo )
 	{
 		assetInfo->setCreatorId( creatorId );
@@ -299,30 +298,30 @@ bool AssetMgr::addAssetFile(	    const char *	fileName,
 }
 
 //============================================================================
-bool AssetMgr::addAsset( AssetInfo& assetInfo )
+bool HostListMgr::addHostList( HostListInfo& assetInfo )
 {
-	AssetInfo * newAssetInfo = new AssetInfo( assetInfo );
-	LogMsg( LOG_INFO, "AssetMgr::addAsset\n" );
-	return insertNewInfo( newAssetInfo );
+	HostListInfo * newHostListInfo = new HostListInfo( assetInfo );
+	LogMsg( LOG_INFO, "HostListMgr::addHostList\n" );
+	return insertNewInfo( newHostListInfo );
 }
 
 //============================================================================
-AssetInfo * AssetMgr::createAssetInfo( const char * fileName, uint64_t fileLen, uint8_t fileType )
+HostListInfo * HostListMgr::createHostListInfo( const char * fileName, uint64_t fileLen, uint8_t fileType )
 {
-    AssetInfo * assetInfo = new AssetInfo( fileName, fileLen, fileType );
+    HostListInfo * assetInfo = new HostListInfo( fileName, fileLen, fileType );
     if( assetInfo )
     {
-        assetInfo->getAssetUniqueId().initializeWithNewVxGUID();
+        assetInfo->getHostListUniqueId().initializeWithNewVxGUID();
     }
 
     return assetInfo;
 }
 
 //============================================================================
-AssetInfo * AssetMgr::createAssetInfo( 	const char *	fileName, 
+HostListInfo * HostListMgr::createHostListInfo( 	const char *	fileName, 
 										VxGUID&			assetId,  
 										uint8_t *	    hashId, 
-										EAssetLocation	locationFlags, 
+										EHostListLocation	locationFlags, 
 										const char *	assetTag, 
                                         int64_t			timestamp )
 {
@@ -331,33 +330,33 @@ AssetInfo * AssetMgr::createAssetInfo( 	const char *	fileName,
 	if( ( false == isAllowedFileOrDir( fileName ) )
 		|| ( 0 == fileLen ) )
 	{
-		LogMsg( LOG_ERROR, "ERROR %d AssetMgr::createAssetInfo could not get file info %s\n", VxGetLastError(), fileName );
+		LogMsg( LOG_ERROR, "ERROR %d HostListMgr::createHostListInfo could not get file info %s\n", VxGetLastError(), fileName );
 		return NULL;
 	}
 
-	AssetInfo * assetInfo = new AssetInfo( fileName, fileLen, fileType );
-	assetInfo->setAssetUniqueId( assetId );
-	if( false == assetInfo->getAssetUniqueId().isVxGUIDValid() )
+	HostListInfo * assetInfo = new HostListInfo( fileName, fileLen, fileType );
+	assetInfo->setHostListUniqueId( assetId );
+	if( false == assetInfo->getHostListUniqueId().isVxGUIDValid() )
 	{
-		assetInfo->getAssetUniqueId().initializeWithNewVxGUID();
+		assetInfo->getHostListUniqueId().initializeWithNewVxGUID();
 	}
 
-	assetInfo->getAssetHashId().setHashData( hashId );
+	assetInfo->getHostListHashId().setHashData( hashId );
 	assetInfo->setLocationFlags( locationFlags );
-	assetInfo->setAssetTag( assetTag );
+	assetInfo->setHostListTag( assetTag );
 	assetInfo->setCreationTime( timestamp ? timestamp : GetTimeStampMs() );
 
 	return assetInfo;
 }
 
 //============================================================================
-bool AssetMgr::insertNewInfo( AssetInfo * assetInfo )
+bool HostListMgr::insertNewInfo( HostListInfo * assetInfo )
 {
 	bool result = false;
-	AssetInfo * assetInfoExisting = findAsset( assetInfo->getAssetUniqueId() );
+	HostListInfo * assetInfoExisting = findHostList( assetInfo->getHostListUniqueId() );
 	if( assetInfoExisting )
 	{
-		LogMsg( LOG_ERROR, "ERROR AssetMgr::insertNewInfo: duplicate assset %s\n", assetInfo->getAssetName().c_str() );
+		LogMsg( LOG_ERROR, "ERROR HostListMgr::insertNewInfo: duplicate assset %s\n", assetInfo->getHostListName().c_str() );
 		if( assetInfoExisting != assetInfo )
 		{
 			*assetInfoExisting = *assetInfo;
@@ -375,7 +374,7 @@ bool AssetMgr::insertNewInfo( AssetInfo * assetInfo )
 	//	lockResources();
 	//	m_WaitingForHastList.push_back( assetInfo );
 	//	unlockResources();
-	//	generateHashForFile( assetInfo->getAssetName() );
+	//	generateHashForFile( assetInfo->getHostListName() );
 	//	result = true;
 	//}
 	//else
@@ -383,9 +382,9 @@ bool AssetMgr::insertNewInfo( AssetInfo * assetInfo )
 		if( 0 == assetInfoExisting )
 		{
 			lockResources();
-			m_AssetInfoList.push_back( assetInfo );
+			m_HostListInfoList.push_back( assetInfo );
 			unlockResources();
-			announceAssetAdded( assetInfo );
+			announceHostListAdded( assetInfo );
 		}
 
 		updateDatabase( assetInfo );
@@ -396,76 +395,76 @@ bool AssetMgr::insertNewInfo( AssetInfo * assetInfo )
 }
 
 //============================================================================
-void AssetMgr::announceAssetAdded( AssetInfo * assetInfo )
+void HostListMgr::announceHostListAdded( HostListInfo * assetInfo )
 {
-	LogMsg( LOG_INFO, "AssetMgr::announceAssetAdded start\n" );
-	if( assetInfo->getIsFileAsset() )
+	LogMsg( LOG_INFO, "HostListMgr::announceHostListAdded start\n" );
+	if( assetInfo->getIsFileHostList() )
 	{
 		updateFileListPackets();
-		updateAssetFileTypes();
+		updateHostListFileTypes();
 	}
 	
 	lockClientList();
-	std::vector<AssetCallbackInterface *>::iterator iter;
-	for( iter = m_AssetClients.begin();	iter != m_AssetClients.end(); ++iter )
+	std::vector<HostListCallbackInterface *>::iterator iter;
+	for( iter = m_HostListClients.begin();	iter != m_HostListClients.end(); ++iter )
 	{
-		AssetCallbackInterface * client = *iter;
-		client->callbackAssetAdded( assetInfo );
+		HostListCallbackInterface * client = *iter;
+		client->callbackHostListAdded( assetInfo );
 	}
 
 	unlockClientList();
-	LogMsg( LOG_INFO, "AssetMgr::announceAssetAdded done\n" );
+	LogMsg( LOG_INFO, "HostListMgr::announceHostListAdded done\n" );
 }
 
 //============================================================================
-void AssetMgr::announceAssetRemoved( AssetInfo * assetInfo )
+void HostListMgr::announceHostListRemoved( HostListInfo * assetInfo )
 {
-	//if( assetInfo->getIsAsset() )
+	//if( assetInfo->getIsHostList() )
 	{
 		updateFileListPackets();
-		updateAssetFileTypes();
+		updateHostListFileTypes();
 	}
 
 	lockClientList();
-	std::vector<AssetCallbackInterface *>::iterator iter;
-	for( iter = m_AssetClients.begin();	iter != m_AssetClients.end(); ++iter )
+	std::vector<HostListCallbackInterface *>::iterator iter;
+	for( iter = m_HostListClients.begin();	iter != m_HostListClients.end(); ++iter )
 	{
-		AssetCallbackInterface * client = *iter;
-		client->callbackAssetRemoved( assetInfo );
+		HostListCallbackInterface * client = *iter;
+		client->callbackHostListRemoved( assetInfo );
 	}
 
 	unlockClientList();
 }
 
 //============================================================================
-void AssetMgr::announceAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param )
+void HostListMgr::announceHostListXferState( VxGUID& assetUniqueId, EHostListSendState assetSendState, int param )
 {
-	LogMsg( LOG_INFO, "AssetMgr::announceAssetXferState state %d start\n", assetSendState );
+	LogMsg( LOG_INFO, "HostListMgr::announceHostListXferState state %d start\n", assetSendState );
 	lockClientList();
-	std::vector<AssetCallbackInterface *>::iterator iter;
-	for( iter = m_AssetClients.begin();	iter != m_AssetClients.end(); ++iter )
+	std::vector<HostListCallbackInterface *>::iterator iter;
+	for( iter = m_HostListClients.begin();	iter != m_HostListClients.end(); ++iter )
 	{
-		AssetCallbackInterface * client = *iter;
-		client->callbackAssetSendState( assetUniqueId, assetSendState, param );
+		HostListCallbackInterface * client = *iter;
+		client->callbackHostListSendState( assetUniqueId, assetSendState, param );
 	}
 
 	unlockClientList();
-	LogMsg( LOG_INFO, "AssetMgr::announceAssetXferState state %d done\n", assetSendState );
+	LogMsg( LOG_INFO, "HostListMgr::announceHostListXferState state %d done\n", assetSendState );
 }
 
 //============================================================================
-bool AssetMgr::removeAsset( std::string fileName )
+bool HostListMgr::removeHostList( std::string fileName )
 {
 	bool assetRemoved = false;
-	std::vector<AssetInfo*>::iterator iter;
-	for( iter = m_AssetInfoList.begin(); iter != m_AssetInfoList.end(); ++iter )
+	std::vector<HostListInfo*>::iterator iter;
+	for( iter = m_HostListInfoList.begin(); iter != m_HostListInfoList.end(); ++iter )
 	{
-		if( fileName == (*iter)->getAssetName() )
+		if( fileName == (*iter)->getHostListName() )
 		{
-			AssetInfo * assetInfo = *iter;
-			m_AssetInfoList.erase( iter );
-			m_AssetInfoDb.removeAsset( fileName.c_str() );
-			announceAssetRemoved( assetInfo );
+			HostListInfo * assetInfo = *iter;
+			m_HostListInfoList.erase( iter );
+			m_HostListInfoDb.removeHostList( fileName.c_str() );
+			announceHostListRemoved( assetInfo );
 			delete assetInfo;
 			assetRemoved = true;
 			break;
@@ -476,18 +475,18 @@ bool AssetMgr::removeAsset( std::string fileName )
 }
 
 //============================================================================
-bool AssetMgr::removeAsset( VxGUID& assetUniqueId )
+bool HostListMgr::removeHostList( VxGUID& assetUniqueId )
 {
 	bool assetRemoved = false;
-	std::vector<AssetInfo*>::iterator iter;
-	for ( iter = m_AssetInfoList.begin(); iter != m_AssetInfoList.end(); ++iter )
+	std::vector<HostListInfo*>::iterator iter;
+	for ( iter = m_HostListInfoList.begin(); iter != m_HostListInfoList.end(); ++iter )
 	{
-		if( assetUniqueId == ( *iter )->getAssetUniqueId() )
+		if( assetUniqueId == ( *iter )->getHostListUniqueId() )
 		{
-			AssetInfo * assetInfo = *iter;
-			m_AssetInfoList.erase( iter );
-			m_AssetInfoDb.removeAsset( assetInfo );
-			announceAssetRemoved( assetInfo );
+			HostListInfo * assetInfo = *iter;
+			m_HostListInfoList.erase( iter );
+			m_HostListInfoDb.removeHostList( assetInfo );
+			announceHostListRemoved( assetInfo );
 			delete assetInfo;
 			assetRemoved = true;
 			break;
@@ -498,50 +497,50 @@ bool AssetMgr::removeAsset( VxGUID& assetUniqueId )
 }
 
 //============================================================================
-void AssetMgr::clearAssetInfoList( void )
+void HostListMgr::clearHostListInfoList( void )
 {
-	std::vector<AssetInfo*>::iterator iter;
-	for( iter = m_AssetInfoList.begin(); iter != m_AssetInfoList.end(); ++iter )
+	std::vector<HostListInfo*>::iterator iter;
+	for( iter = m_HostListInfoList.begin(); iter != m_HostListInfoList.end(); ++iter )
 	{
 		delete (*iter);
 	}
 
-	m_AssetInfoList.clear();
+	m_HostListInfoList.clear();
 }
 
 //============================================================================
-void AssetMgr::updateAssetListFromDb( VxThread * startupThread )
+void HostListMgr::updateHostListListFromDb( VxThread * startupThread )
 {
-	std::vector<AssetInfo*>::iterator iter;
+	std::vector<HostListInfo*>::iterator iter;
 	lockResources();
-	clearAssetInfoList();
-	m_AssetInfoDb.getAllAssets( m_AssetInfoList );
+	clearHostListInfoList();
+	m_HostListInfoDb.getAllHostLists( m_HostListInfoList );
 	bool movedToGenerateHash = true;
 	while(	movedToGenerateHash 
 			&& ( false == startupThread->isAborted() ) )
 	{
 		// there should not be any without valid hash but if is then generate it
 		movedToGenerateHash = false;
-		for( iter = m_AssetInfoList.begin(); iter != m_AssetInfoList.end(); ++iter )
+		for( iter = m_HostListInfoList.begin(); iter != m_HostListInfoList.end(); ++iter )
 		{
-			AssetInfo* assetInfo = (*iter);
-			EAssetSendState sendState = assetInfo->getAssetSendState();
-			if( eAssetSendStateTxProgress == sendState ) 
+			HostListInfo* assetInfo = (*iter);
+			EHostListSendState sendState = assetInfo->getHostListSendState();
+			if( eHostListSendStateTxProgress == sendState ) 
 			{
-				assetInfo->setAssetSendState( eAssetSendStateTxFail );
-				m_AssetInfoDb.updateAssetSendState( assetInfo->getAssetUniqueId(), eAssetSendStateTxFail );
+				assetInfo->setHostListSendState( eHostListSendStateTxFail );
+				m_HostListInfoDb.updateHostListSendState( assetInfo->getHostListUniqueId(), eHostListSendStateTxFail );
 			}
-			else if(  eAssetSendStateRxProgress == sendState  )
+			else if(  eHostListSendStateRxProgress == sendState  )
 			{
-				assetInfo->setAssetSendState( eAssetSendStateRxFail );
-				m_AssetInfoDb.updateAssetSendState( assetInfo->getAssetUniqueId(), eAssetSendStateRxFail );
+				assetInfo->setHostListSendState( eHostListSendStateRxFail );
+				m_HostListInfoDb.updateHostListSendState( assetInfo->getHostListUniqueId(), eHostListSendStateRxFail );
 			}
 
 			if( assetInfo->needsHashGenerated() )
 			{
 				m_WaitingForHastList.push_back( assetInfo );
-				m_AssetInfoList.erase( iter );
-				generateHashForFile( assetInfo->getAssetName() );
+				m_HostListInfoList.erase( iter );
+				generateHashForFile( assetInfo->getHostListName() );
 				movedToGenerateHash = true;
 				break;
 			}
@@ -550,27 +549,27 @@ void AssetMgr::updateAssetListFromDb( VxThread * startupThread )
 
 	unlockResources();
 	updateFileListPackets();
-	updateAssetFileTypes();
+	updateHostListFileTypes();
 }
 
 //============================================================================
-void AssetMgr::updateAssetFileTypes( void )
+void HostListMgr::updateHostListFileTypes( void )
 {
 	uint16_t u16FileTypes = 0;
-	std::vector<AssetInfo*>::iterator iter;
+	std::vector<HostListInfo*>::iterator iter;
 	lockResources();
-	for( iter = m_AssetInfoList.begin(); iter != m_AssetInfoList.end(); ++iter )
+	for( iter = m_HostListInfoList.begin(); iter != m_HostListInfoList.end(); ++iter )
 	{
-		if( (*iter)->getIsFileAsset() )
+		if( (*iter)->getIsFileHostList() )
 		{
-			u16FileTypes		|= (*iter)->getAssetType();
+			u16FileTypes		|= (*iter)->getHostListType();
 		}
 	}
 
 	unlockResources();
 	// ignore extended types
 	u16FileTypes = u16FileTypes & 0xff;
-	m_u16AssetFileTypes = u16FileTypes;
+	m_u16HostListFileTypes = u16FileTypes;
 	bool fileTypesChanged = false;
 
 	m_Engine.lockAnnouncePktAccess();
@@ -585,11 +584,11 @@ void AssetMgr::updateAssetFileTypes( void )
 	if( fileTypesChanged )
 	{
 		lockClientList();
-		std::vector<AssetCallbackInterface *>::iterator iter;
-		for( iter = m_AssetClients.begin();	iter != m_AssetClients.end(); ++iter )
+		std::vector<HostListCallbackInterface *>::iterator iter;
+		for( iter = m_HostListClients.begin();	iter != m_HostListClients.end(); ++iter )
 		{
-			AssetCallbackInterface * client = *iter;
-			client->callbackAssetFileTypesChanged( u16FileTypes );
+			HostListCallbackInterface * client = *iter;
+			client->callbackHostListFileTypesChanged( u16FileTypes );
 		}
 
 		unlockClientList();
@@ -597,18 +596,18 @@ void AssetMgr::updateAssetFileTypes( void )
 }
 
 //============================================================================
-void AssetMgr::updateFileListPackets( void )
+void HostListMgr::updateFileListPackets( void )
 {
-	bool hadAssetFiles = m_FileListPackets.size() ? true : false;
+	bool hadHostListFiles = m_FileListPackets.size() ? true : false;
 	PktFileListReply * pktFileList = 0;
-	clearAssetFileListPackets();
+	clearHostListFileListPackets();
 	lockFileListPackets();
 	lockResources();
-	std::vector<AssetInfo*>::iterator iter;
-	for( iter = m_AssetInfoList.begin(); iter != m_AssetInfoList.end(); ++iter )
+	std::vector<HostListInfo*>::iterator iter;
+	for( iter = m_HostListInfoList.begin(); iter != m_HostListInfoList.end(); ++iter )
 	{
-		AssetInfo * assetInfo = (*iter); 
-		if( ( false == assetInfo->getIsFileAsset() ) || ( false == assetInfo->getAssetHashId().isHashValid() ) )
+		HostListInfo * assetInfo = (*iter); 
+		if( ( false == assetInfo->getIsFileHostList() ) || ( false == assetInfo->getHostListHashId().isHashValid() ) )
 			continue;
 
 		if( 0 == pktFileList )
@@ -617,22 +616,22 @@ void AssetMgr::updateFileListPackets( void )
 			pktFileList->setListIndex( (uint32_t)m_FileListPackets.size() );
 		}
 
-		if( pktFileList->canAddFile( (uint32_t)(assetInfo->getRemoteAssetName().size() + 1) ) )
+		if( pktFileList->canAddFile( (uint32_t)(assetInfo->getRemoteHostListName().size() + 1) ) )
 		{
-			pktFileList->addFile(	assetInfo->getAssetHashId(),
-									assetInfo->getAssetLength(),
-									assetInfo->getAssetType(),
-									assetInfo->getRemoteAssetName().c_str() );
+			pktFileList->addFile(	assetInfo->getHostListHashId(),
+									assetInfo->getHostListLength(),
+									assetInfo->getHostListType(),
+									assetInfo->getRemoteHostListName().c_str() );
 		}
 		else
 		{
 			m_FileListPackets.push_back( pktFileList );
 			pktFileList = new PktFileListReply();
 			pktFileList->setListIndex( (uint32_t)m_FileListPackets.size() );
-			pktFileList->addFile(	assetInfo->getAssetHashId(),
-									assetInfo->getAssetLength(),
-									assetInfo->getAssetType(),
-									assetInfo->getAssetName().c_str() );
+			pktFileList->addFile(	assetInfo->getHostListHashId(),
+									assetInfo->getHostListLength(),
+									assetInfo->getHostListType(),
+									assetInfo->getHostListName().c_str() );
 		}
 	}
 
@@ -651,14 +650,14 @@ void AssetMgr::updateFileListPackets( void )
 
 	unlockResources();
 	unlockFileListPackets();
-	if( hadAssetFiles || m_FileListPackets.size() )
+	if( hadHostListFiles || m_FileListPackets.size() )
 	{
 		lockClientList();
-		std::vector<AssetCallbackInterface *>::iterator iter;
-		for( iter = m_AssetClients.begin();	iter != m_AssetClients.end(); ++iter )
+		std::vector<HostListCallbackInterface *>::iterator iter;
+		for( iter = m_HostListClients.begin();	iter != m_HostListClients.end(); ++iter )
 		{
-			AssetCallbackInterface * client = *iter;
-			client->callbackAssetPktFileListUpdated();
+			HostListCallbackInterface * client = *iter;
+			client->callbackHostListPktFileListUpdated();
 		}
 
 		unlockClientList();
@@ -666,7 +665,7 @@ void AssetMgr::updateFileListPackets( void )
 }
 
 //============================================================================
-void AssetMgr::clearAssetFileListPackets( void )
+void HostListMgr::clearHostListFileListPackets( void )
 {
 	lockFileListPackets();
 	std::vector<PktFileListReply*>::iterator iter;
@@ -680,18 +679,18 @@ void AssetMgr::clearAssetFileListPackets( void )
 }
 
 //============================================================================
-bool AssetMgr::fromGuiSetFileIsShared( std::string fileName, bool shareFile, uint8_t * fileHashId )
+bool HostListMgr::fromGuiSetFileIsShared( std::string fileName, bool shareFile, uint8_t * fileHashId )
 {
 	lockResources();
-	AssetInfo* assetInfo = findAsset( fileName );
+	HostListInfo* assetInfo = findHostList( fileName );
 	if( assetInfo )
 	{
-		if( ( false == shareFile ) && assetInfo->getIsSharedFileAsset() )
+		if( ( false == shareFile ) && assetInfo->getIsSharedFileHostList() )
 		{
-			assetInfo->setIsSharedFileAsset( false );
+			assetInfo->setIsSharedFileHostList( false );
 			updateDatabase( assetInfo );
 			unlockResources();
-			updateAssetFileTypes();
+			updateHostListFileTypes();
 			updateFileListPackets();
 			return true;
 		}
@@ -701,9 +700,9 @@ bool AssetMgr::fromGuiSetFileIsShared( std::string fileName, bool shareFile, uin
 
 	if( shareFile )
 	{
-		// file is not currently Asset and should be
+		// file is not currently HostList and should be
 		VxGUID guid;
-		AssetInfo * assetInfo = createAssetInfo( fileName.c_str(), guid, fileHashId, eAssetLocShared );
+		HostListInfo * assetInfo = createHostListInfo( fileName.c_str(), guid, fileHashId, eHostListLocShared );
 		if( assetInfo )
 		{
 			insertNewInfo( assetInfo );
@@ -719,47 +718,47 @@ bool AssetMgr::fromGuiSetFileIsShared( std::string fileName, bool shareFile, uin
 
 /*
 //============================================================================
-bool AssetMgr::isFileAsset( std::string& fileName )
+bool HostListMgr::isFileHostList( std::string& fileName )
 {
-	bool isAsset = false;
+	bool isHostList = false;
 	lockResources();
-	AssetInfo * assetInfo = findAsset( fileName );
+	HostListInfo * assetInfo = findHostList( fileName );
 	if( assetInfo )
 	{
-		isAsset = assetInfo->getIsAsset();
+		isHostList = assetInfo->getIsHostList();
 	}
 
 	unlockResources();
-	return isAsset;
+	return isHostList;
 }
 
 //============================================================================
-bool AssetMgr::isFileAsset( VxSha1Hash& fileHashId )
+bool HostListMgr::isFileHostList( VxSha1Hash& fileHashId )
 {
-	bool isAsset = false;
+	bool isHostList = false;
 	lockResources();
-	AssetInfo * assetInfo = findAsset( fileHashId );
+	HostListInfo * assetInfo = findHostList( fileHashId );
 	if( assetInfo )
 	{
-		isAsset = assetInfo->getIsAsset();
+		isHostList = assetInfo->getIsHostList();
 	}
 
 	unlockResources();
-	return isAsset;
+	return isHostList;
 }
 */
 
 //============================================================================
-bool AssetMgr::getFileHashId( std::string& fileFullName, VxSha1Hash& retFileHashId )
+bool HostListMgr::getFileHashId( std::string& fileFullName, VxSha1Hash& retFileHashId )
 {
 	bool foundHash = false;
 	lockResources();
-	std::vector<AssetInfo*>::iterator iter;
-	for( iter = m_AssetInfoList.begin(); iter != m_AssetInfoList.end(); ++iter )
+	std::vector<HostListInfo*>::iterator iter;
+	for( iter = m_HostListInfoList.begin(); iter != m_HostListInfoList.end(); ++iter )
 	{
-		if( fileFullName == (*iter)->getAssetName() )
+		if( fileFullName == (*iter)->getHostListName() )
 		{
-			retFileHashId = (*iter)->getAssetHashId();
+			retFileHashId = (*iter)->getHostListHashId();
 			foundHash = retFileHashId.isHashValid();
 			break;
 		}
@@ -770,44 +769,44 @@ bool AssetMgr::getFileHashId( std::string& fileFullName, VxSha1Hash& retFileHash
 }
 
 //============================================================================
-bool AssetMgr::getFileFullName( VxSha1Hash& fileHashId, std::string& retFileFullName )
+bool HostListMgr::getFileFullName( VxSha1Hash& fileHashId, std::string& retFileFullName )
 {
-	bool isAsset = false;
+	bool isHostList = false;
 	lockResources();
-	std::vector<AssetInfo*>::iterator iter;
-	for( iter = m_AssetInfoList.begin(); iter != m_AssetInfoList.end(); ++iter )
+	std::vector<HostListInfo*>::iterator iter;
+	for( iter = m_HostListInfoList.begin(); iter != m_HostListInfoList.end(); ++iter )
 	{
-		if( fileHashId == (*iter)->getAssetHashId() )
+		if( fileHashId == (*iter)->getHostListHashId() )
 		{
-			isAsset = true;
-			retFileFullName = (*iter)->getAssetName();
+			isHostList = true;
+			retFileFullName = (*iter)->getHostListName();
 			break;
 		}
 	}
 
 	unlockResources();
-	return isAsset;
+	return isHostList;
 }
 
 
 //============================================================================
-bool AssetMgr::fromGuiGetAssetInfo( uint8_t fileTypeFilter )
+bool HostListMgr::fromGuiGetHostListInfo( uint8_t fileTypeFilter )
 {
 	lockResources();
-	std::vector<AssetInfo*>::iterator iter;
-	for( iter = m_AssetInfoList.begin(); iter != m_AssetInfoList.end(); ++iter )
+	std::vector<HostListInfo*>::iterator iter;
+	for( iter = m_HostListInfoList.begin(); iter != m_HostListInfoList.end(); ++iter )
 	{
-		AssetInfo* assetInfo = (*iter);
-		if( 0 != ( fileTypeFilter & assetInfo->getAssetType() ) )
+		HostListInfo* assetInfo = (*iter);
+		if( 0 != ( fileTypeFilter & assetInfo->getHostListType() ) )
 		{
-			if( assetInfo->getIsSharedFileAsset() || assetInfo->getIsInLibary() )
+			if( assetInfo->getIsSharedFileHostList() || assetInfo->getIsInLibary() )
 			{
-				IToGui::getToGui().toGuiFileList(	assetInfo->getAssetName().c_str(), 
-										assetInfo->getAssetLength(), 
-										assetInfo->getAssetType(), 
-										assetInfo->getIsSharedFileAsset(),
+				IToGui::getToGui().toGuiFileList(	assetInfo->getHostListName().c_str(), 
+										assetInfo->getHostListLength(), 
+										assetInfo->getHostListType(), 
+										assetInfo->getIsSharedFileHostList(),
 										assetInfo->getIsInLibary(),
-										assetInfo->getAssetHashId().getHashData() );
+										assetInfo->getHostListHashId().getHashData() );
 			}
 		}
 	}
@@ -818,29 +817,29 @@ bool AssetMgr::fromGuiGetAssetInfo( uint8_t fileTypeFilter )
 }
 
 //============================================================================
-void AssetMgr::updateDatabase( AssetInfo * assetInfo )
+void HostListMgr::updateDatabase( HostListInfo * assetInfo )
 {
-	m_AssetInfoDb.addAsset( assetInfo );
+	m_HostListInfoDb.addHostList( assetInfo );
 }
 
 //============================================================================
-void AssetMgr::updateAssetDatabaseSendState( VxGUID& assetUniqueId, EAssetSendState sendState )
+void HostListMgr::updateHostListDatabaseSendState( VxGUID& assetUniqueId, EHostListSendState sendState )
 {
-	m_AssetInfoDb.updateAssetSendState( assetUniqueId, sendState );
+	m_HostListInfoDb.updateHostListSendState( assetUniqueId, sendState );
 }
 
 //============================================================================
-void AssetMgr::queryHistoryAssets( VxGUID& historyId )
+void HostListMgr::queryHistoryHostLists( VxGUID& historyId )
 {
-	std::vector<AssetInfo*>::iterator iter;
-	AssetInfo * assetInfo;
+	std::vector<HostListInfo*>::iterator iter;
+	HostListInfo * assetInfo;
 	lockResources();
-	for( iter = m_AssetInfoList.begin(); iter != m_AssetInfoList.end(); ++iter )
+	for( iter = m_HostListInfoList.begin(); iter != m_HostListInfoList.end(); ++iter )
 	{
 		assetInfo = (*iter);
 		if( assetInfo->getHistoryId() == historyId )
 		{
-			IToGui::getToGui().toGuiAssetSessionHistory( assetInfo );
+			IToGui::getToGui().toGuiHostListSessionHistory( assetInfo );
 		}
 	}
 
@@ -848,81 +847,81 @@ void AssetMgr::queryHistoryAssets( VxGUID& historyId )
 }
 
 //============================================================================
-void AssetMgr::updateAssetXferState( VxGUID& assetUniqueId, EAssetSendState assetSendState, int param )
+void HostListMgr::updateHostListXferState( VxGUID& assetUniqueId, EHostListSendState assetSendState, int param )
 {
-	LogMsg( LOG_INFO, "AssetMgr::updateAssetXferState state %d start\n", assetSendState );
-	std::vector<AssetInfo*>::iterator iter;
-	AssetInfo* assetInfo;
+	LogMsg( LOG_INFO, "HostListMgr::updateHostListXferState state %d start\n", assetSendState );
+	std::vector<HostListInfo*>::iterator iter;
+	HostListInfo* assetInfo;
 	bool assetSendStateChanged = false;
 	lockResources();
-	for( iter = m_AssetInfoList.begin(); iter != m_AssetInfoList.end(); ++iter )
+	for( iter = m_HostListInfoList.begin(); iter != m_HostListInfoList.end(); ++iter )
 	{
 		assetInfo = (*iter);
-		if( assetInfo->getAssetUniqueId() == assetUniqueId )
+		if( assetInfo->getHostListUniqueId() == assetUniqueId )
 		{
-			EAssetSendState oldSendState = assetInfo->getAssetSendState();
+			EHostListSendState oldSendState = assetInfo->getHostListSendState();
 			if( oldSendState != assetSendState )
 			{
-				assetInfo->setAssetSendState( assetSendState );
+				assetInfo->setHostListSendState( assetSendState );
 				assetSendStateChanged = true;
 				//updateDatabase( assetInfo );
-				updateAssetDatabaseSendState( assetUniqueId, assetSendState );
+				updateHostListDatabaseSendState( assetUniqueId, assetSendState );
 				switch( assetSendState )
 				{
-				case eAssetSendStateTxProgress:
-					if( eAssetSendStateNone == oldSendState )
+				case eHostListSendStateTxProgress:
+					if( eHostListSendStateNone == oldSendState )
 					{
-						IToGui::getToGui().toGuiAssetAction( eAssetActionTxBegin, assetUniqueId, param );
+						IToGui::getToGui().toGuiHostListAction( eHostListActionTxBegin, assetUniqueId, param );
 					}
 
-					IToGui::getToGui().toGuiAssetAction( eAssetActionTxProgress, assetUniqueId, param );
+					IToGui::getToGui().toGuiHostListAction( eHostListActionTxProgress, assetUniqueId, param );
 					break;
 
-				case eAssetSendStateRxProgress:
-					if( eAssetSendStateNone == oldSendState )
+				case eHostListSendStateRxProgress:
+					if( eHostListSendStateNone == oldSendState )
 					{
-						IToGui::getToGui().toGuiAssetAction( eAssetActionRxBegin, assetUniqueId, param );
+						IToGui::getToGui().toGuiHostListAction( eHostListActionRxBegin, assetUniqueId, param );
 					}
 
-					IToGui::getToGui().toGuiAssetAction( eAssetActionRxProgress, assetUniqueId, param );
+					IToGui::getToGui().toGuiHostListAction( eHostListActionRxProgress, assetUniqueId, param );
 					break;
 
-				case eAssetSendStateRxSuccess:
-					if( ( eAssetSendStateNone == oldSendState )
-						|| ( eAssetSendStateRxProgress == oldSendState ) )
+				case eHostListSendStateRxSuccess:
+					if( ( eHostListSendStateNone == oldSendState )
+						|| ( eHostListSendStateRxProgress == oldSendState ) )
 					{
-						IToGui::getToGui().toGuiAssetAction( eAssetActionRxSuccess, assetUniqueId, param );
-						IToGui::getToGui().toGuiAssetAction( eAssetActionRxNotifyNewMsg, assetInfo->getCreatorId(), 100 );
+						IToGui::getToGui().toGuiHostListAction( eHostListActionRxSuccess, assetUniqueId, param );
+						IToGui::getToGui().toGuiHostListAction( eHostListActionRxNotifyNewMsg, assetInfo->getCreatorId(), 100 );
 					}
 					else 
 					{
-						IToGui::getToGui().toGuiAssetAction( eAssetActionRxSuccess, assetUniqueId, param );
+						IToGui::getToGui().toGuiHostListAction( eHostListActionRxSuccess, assetUniqueId, param );
 					}
 
 					break;
 
-				case eAssetSendStateTxSuccess:
-					IToGui::getToGui().toGuiAssetAction( eAssetActionTxSuccess, assetUniqueId, param );
+				case eHostListSendStateTxSuccess:
+					IToGui::getToGui().toGuiHostListAction( eHostListActionTxSuccess, assetUniqueId, param );
 					break;
 
-				case eAssetSendStateRxFail:
-					IToGui::getToGui().toGuiAssetAction( eAssetActionRxError, assetUniqueId, param );
+				case eHostListSendStateRxFail:
+					IToGui::getToGui().toGuiHostListAction( eHostListActionRxError, assetUniqueId, param );
 					break;
 
-				case eAssetSendStateTxFail:
-					IToGui::getToGui().toGuiAssetAction( eAssetActionTxError, assetUniqueId, param );
+				case eHostListSendStateTxFail:
+					IToGui::getToGui().toGuiHostListAction( eHostListActionTxError, assetUniqueId, param );
 					break;
 
-				case eAssetSendStateTxPermissionErr:
-					IToGui::getToGui().toGuiAssetAction( eAssetActionTxError, assetUniqueId, param );
+				case eHostListSendStateTxPermissionErr:
+					IToGui::getToGui().toGuiHostListAction( eHostListActionTxError, assetUniqueId, param );
 					break;
 
-				case eAssetSendStateRxPermissionErr:
-					IToGui::getToGui().toGuiAssetAction( eAssetActionRxError, assetUniqueId, param );
+				case eHostListSendStateRxPermissionErr:
+					IToGui::getToGui().toGuiHostListAction( eHostListActionRxError, assetUniqueId, param );
 					break;
 
 
-				case eAssetSendStateNone:
+				case eHostListSendStateNone:
 				default:
 					break;
 				}
@@ -935,16 +934,16 @@ void AssetMgr::updateAssetXferState( VxGUID& assetUniqueId, EAssetSendState asse
 	unlockResources();
 	if( assetSendStateChanged )
 	{
-		announceAssetXferState( assetUniqueId, assetSendState, param );
+		announceHostListXferState( assetUniqueId, assetSendState, param );
 	}
 
-	LogMsg( LOG_INFO, "AssetMgr::updateAssetXferState state %d done\n", assetSendState );
+	LogMsg( LOG_INFO, "HostListMgr::updateHostListXferState state %d done\n", assetSendState );
 }
 
 
 /*
 //============================================================================
-RCODE AssetMgr::SendMatchList(	uint32_t			u32SktNum,		// Tronacom socket number
+RCODE HostListMgr::SendMatchList(	uint32_t			u32SktNum,		// Tronacom socket number
 									CString &	csMatchString,	// Search Match name
 									uint16_t			u16FileTypes,	// types of files to match
 									uint16_t			u16LimitType,	// file size limit type
@@ -979,7 +978,7 @@ RCODE AssetMgr::SendMatchList(	uint32_t			u32SktNum,		// Tronacom socket number
 	}
 	if( rc )
 	{
-		LogMsg( LOG_INFO, "AssetMgr::SendMatchList Error 0x%x occured parsing string\n", rc );
+		LogMsg( LOG_INFO, "HostListMgr::SendMatchList Error 0x%x occured parsing string\n", rc );
 		ASSERT( false );
 	}
 	else
@@ -998,7 +997,7 @@ RCODE AssetMgr::SendMatchList(	uint32_t			u32SktNum,		// Tronacom socket number
 			{
 				if( 0 == poInfo->m_s64FileLen )
 				{
-					LogMsg( LOG_INFO, "AssetMgr::Zero Length File %s\n", (const char *) poInfo->m_csDisplayName );
+					LogMsg( LOG_INFO, "HostListMgr::Zero Length File %s\n", (const char *) poInfo->m_csDisplayName );
 					continue;
 				}
 				//add file to PktFileList
@@ -1118,7 +1117,7 @@ RCODE AssetMgr::SendMatchList(	uint32_t			u32SktNum,		// Tronacom socket number
 }
 
 //============================================================================
-RCODE AssetMgr::AddDir( CString & csDirPath )
+RCODE HostListMgr::AddDir( CString & csDirPath )
 {
 	HRESULT hr;
 	char as8FullPath[ VX_MAX_PATH ];
@@ -1129,15 +1128,15 @@ RCODE AssetMgr::AddDir( CString & csDirPath )
 
     CArray<CString, CString&> acsWildNameList;//Extensions ( file extentions )
 	acsWildNameList.Add( CString( "*.*" ) );
-	CArray<AssetInfo, AssetInfo&> agAssetInfoList;//return FileInfo in array
+	CArray<HostListInfo, HostListInfo&> agHostListInfoList;//return FileInfo in array
 
 	VxFindFilesByName(	csDirPath,				//start path to search in
 						acsWildNameList,//Extensions ( file extentions )
-						agAssetInfoList,//return FileInfo in array
+						agHostListInfoList,//return FileInfo in array
 						true,						//recurse subdirectories if TRUE
 						false		//if TRUE dont return files matching filter else return files that do
  						);
-	int iCnt = agAssetInfoList.GetSize();
+	int iCnt = agHostListInfoList.GetSize();
 	//expand list to include the new files
 	int iCurListCnt = m_List.GetSize();
 	m_List.SetSize( iCnt + iCurListCnt );
@@ -1145,8 +1144,8 @@ RCODE AssetMgr::AddDir( CString & csDirPath )
 
 	for( i = 0; i < iCnt; i++ )
 	{
-		CString cs = agAssetInfoList[ i ];
-		__int64 s64FileLen = agAssetInfoList[ i ].m_s64Len;
+		CString cs = agHostListInfoList[ i ];
+		__int64 s64FileLen = agHostListInfoList[ i ].m_s64Len;
 		makeForwardSlashPath( cs );
 
 		//get file extension
@@ -1281,7 +1280,7 @@ RCODE AssetMgr::AddDir( CString & csDirPath )
 }
 //============================================================================
 //! make array of packets with matching files
-RCODE AssetMgr::MakeMatchList(	CPtrArray * paoRetListPkts, // return list of packets of file lists
+RCODE HostListMgr::MakeMatchList(	CPtrArray * paoRetListPkts, // return list of packets of file lists
 									CString &	csMatchString,	// Search Match name
 									uint16_t			u16FileTypes,	// types of files to match
 									uint16_t			u16LimitType,	// file size limit type
@@ -1312,7 +1311,7 @@ RCODE AssetMgr::MakeMatchList(	CPtrArray * paoRetListPkts, // return list of pac
 	}
 	if( rc )
 	{
-		LogMsg( LOG_INFO, "AssetMgr::SendMatchList Error 0x%x occured parsing string\n", rc );
+		LogMsg( LOG_INFO, "HostListMgr::SendMatchList Error 0x%x occured parsing string\n", rc );
 		ASSERT( false );
 	}
 	else
@@ -1331,7 +1330,7 @@ RCODE AssetMgr::MakeMatchList(	CPtrArray * paoRetListPkts, // return list of pac
 			{
 				if( 0 == poInfo->m_s64FileLen )
 				{
-					LogMsg( LOG_INFO, "AssetMgr::Zero Length File %s\n", (const char *) poInfo->m_csDisplayName );
+					LogMsg( LOG_INFO, "HostListMgr::Zero Length File %s\n", (const char *) poInfo->m_csDisplayName );
 					continue;
 				}
 				//add file to PktFileList

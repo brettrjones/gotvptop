@@ -21,6 +21,7 @@
 #include "EngineParams.h"
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.h>
+#include <GoTvCore/GoTvP2P/HostListMgr/HostListCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h>
 
 #include <GoTvInterface/IFromGui.h>
@@ -40,6 +41,7 @@ class FileShareSettings;
 class VxPeerMgr;
 class PluginMgr;
 class AssetMgr;
+class HostListMgr;
 class HostTest;
 class IsPortOpenTest;
 class RcConnectInfo;
@@ -59,6 +61,7 @@ class PluginSettingMgr;
 class P2PEngine :	public IFromGui,
 					public PktHandlerBase,
 					public AssetCallbackInterface,
+                    public HostListCallbackInterface,
 					public MediaCallbackInterface,
                     public IAudioCallbacks
 {
@@ -73,6 +76,7 @@ public:
 	IFromGui&					getFromGuiInterface( void )						{ return *this; }
     IAudioRequests&			    getAudioRequest( void );
     AssetMgr&					getAssetMgr( void )								{ return m_AssetMgr; }
+    HostListMgr&				getHostListMgr( void )							{ return m_HostListMgr; }
     BigListMgr&					getBigListMgr( void )							{ return m_BigListMgr; }
     EngineSettings&				getEngineSettings( void )						{ return m_EngineSettings; }
 	EngineParams&				getEngineParams( void )							{ return m_EngineParams; }
@@ -339,6 +343,13 @@ public:
 	virtual void				callbackSharedPktFileListUpdated( void );
 
     virtual void				callbackAssetHistory( void * userData, AssetInfo * assetInfo ) override;
+    //========================================================================
+    // host list mgr callbacks
+    //========================================================================
+    virtual void				callbackHostListAdded( HostListInfo * assetInfo ) override;
+    virtual void				callbackHostListRemoved( HostListInfo * assetInfo ) override;
+    virtual void				callbackHostListHistory( void * userData, HostListInfo * assetInfo ) override;
+
 	//========================================================================
 	// media processor callbacks
 	//========================================================================
@@ -510,6 +521,15 @@ protected:
     virtual void				onPktImAliveReq					( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
     virtual void				onPktImAliveReply				( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
 
+    virtual void				onPktHostAnnounce               ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostListSendReq            ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostListSendReply          ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostListChunkReq           ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostListChunkReply         ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostListSendCompleteReq    ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+    virtual void				onPktHostListSendCompleteReply  ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+     virtual void				onPktHostListXferErr            ( VxSktBase * sktBase, VxPktHdr * pktHdr ) override;
+
     //========================================================================
     //========================================================================
     void						iniitializePtoPEngine( void );
@@ -540,6 +560,7 @@ protected:
 	EngineParams				m_EngineParams;
     NetStatusAccum              m_NetStatusAccum;
 	AssetMgr&					m_AssetMgr;
+    HostListMgr&				m_HostListMgr;
 	P2PConnectList				m_ConnectionList;
     MediaProcessor&				m_MediaProcessor;
     NetworkMgr&					m_NetworkMgr;

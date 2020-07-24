@@ -171,7 +171,7 @@ public:
 												uint8_t *			fileHashId = 0 );
 
 	virtual void				toGuiAssetAdded( AssetInfo * assetInfo );
-	virtual void				toGuiSessionHistory( AssetInfo * assetInfo );
+	virtual void				toGuiAssetSessionHistory( AssetInfo * assetInfo );
 	virtual void				toGuiAssetAction( EAssetAction assetAction, VxGUID& assetId, int pos0to100000 );
 	virtual void				toGuiMultiSessionAction( EMSessionAction mSessionAction, VxGUID& onlineId, int pos0to100000 );
 

@@ -54,7 +54,7 @@ protected:
 	void						hideEvent( QHideEvent * ev );
 
 	virtual void				toGuiClientAssetAction( void * userData, EAssetAction assetAction, VxGUID& assetId, int pos0to100000 );
-	virtual void				toGuiSessionHistory( void * userData, AssetInfo * assetInfo );
+	virtual void				toGuiAssetSessionHistory( void * userData, AssetInfo * assetInfo );
 	virtual void				toGuiAssetAdded( void * userData, AssetInfo * assetInfo );
 
 	AssetBaseWidget *			createAssetWidget( AssetInfo * assetInfo );
