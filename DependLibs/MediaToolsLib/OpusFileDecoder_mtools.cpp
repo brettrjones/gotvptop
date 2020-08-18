@@ -384,7 +384,7 @@ int OpusFileDecoder::decodedNextFrame( uint8_t * frameBuffer, int frameBufferLen
 		/*Read bitstream from input file*/
 		if( 0 != m_FileHandle )
 		{
-			nb_read = fread( data, sizeof(char), 1800, m_FileHandle );
+			nb_read = (int)fread( data, sizeof(char), 1800, m_FileHandle );
 			m_FilePos += nb_read;
 			if( 0 == m_TotalSndFramesInFile )
 			{
@@ -818,7 +818,7 @@ bool OpusFileDecoder::seekOpusFile( FILE * fileHandle, int pos0to100000 )
 			/*Read bitstream from input file*/
 			if( 0 != m_FileHandle )
 			{
-				int nb_read = fread( data, sizeof(char), 1800, m_FileHandle );
+				int nb_read = (int)fread( data, sizeof(char), 1800, m_FileHandle );
 				m_FilePos += nb_read;
 				ogg_sync_wrote(&m_OggSyncState, nb_read);
 				if( 1800 != nb_read )
@@ -934,7 +934,7 @@ bool OpusFileDecoder::seekOpusFile( FILE * fileHandle, int pos0to100000 )
 	// 4 byte OggS then 1 byte struct version ( 0 ) then flags and stuff 
 	char dataBuf[2048];
 	int sigPos = -1;
-	int amtRead = fread( dataBuf, 1, 2048, fileHandle );
+	int amtRead = (int)fread( dataBuf, 1, 2048, fileHandle );
 	if( amtRead > 5 )
 	{
 		for( int i = 0; i < amtRead; i++ )

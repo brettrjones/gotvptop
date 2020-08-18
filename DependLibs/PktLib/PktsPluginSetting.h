@@ -19,8 +19,7 @@
 #include "VxCommon.h"
 #include <GoTvInterface/IScan.h>
 
-#include <GoTvCore/GoTvP2P/P2PEngine/PluginSettingBinary.h>
-
+#include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingBinary.h>
 
 #pragma pack(push) 
 #pragma pack(1)
@@ -40,7 +39,7 @@ class PktPluginSettingReply : public VxPktHdr
 public:
     PktPluginSettingReply();
 
-	void calcPktLen( void );
+	void                        calcPktLen( void );
 
     PluginSettingBinary *       getSettingBinary( void );
     void                        setSettingBinary( PluginSettingBinary& settingBinary );

@@ -25,6 +25,8 @@ public:
     PermissionWidget( QWidget * parent = 0 );
 
     void						setPluginType( EPluginType pluginType, int subType = 0 );
+    EPluginType					getPluginType( void )           { return m_PluginType; }
+
     void						setPermissionLevel( EFriendState permLevel );
     EFriendState                getPermissionLevel( void );
     VxPushButton *              getPluginRunButton()            { return ui.m_PluginRunButton; }

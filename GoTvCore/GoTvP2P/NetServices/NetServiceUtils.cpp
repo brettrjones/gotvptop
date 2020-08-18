@@ -137,13 +137,13 @@ void  NetServiceUtils::buildNetCmd( std::string& retResult, ENetCmdType netCmd, 
 	//http://GET /url version/Crypto Key/total length of data/Net service command/cmd version/error code/content/"
 	// total header = 16 + 6 + 32 + 13 + 19 + 3 + 8   = 96
 
-	int totalLen = 16 + 6
+	int totalLen = (int)(16 + 6
 				+ netServChallengeHash.length()
 				+ MAX_CONTENT_LEN_DIGITS 
 				+ MAX_NET_CMD_LEN_CHARS
 				+ MAX_CMD_VERSION_LEN_DIGITS
 				+ MAX_ERROR_LEN_DIGITS
-				+ strContent.length();
+				+ strContent.length());
 
 	if( strContent.length() )
 	{
@@ -173,13 +173,13 @@ int  NetServiceUtils::buildNetCmdHeader( std::string& retResult, ENetCmdType net
 	//http://GET /  1/ = len 16
 	// + 5 /s  = 22 for header and /'s
 
-	int totalLen = 16 + 5
+	int totalLen = (int)(16 + 5
 		+ netServChallengeHash.length()
 		+ MAX_CONTENT_LEN_DIGITS 
 		+ MAX_NET_CMD_LEN_CHARS
 		+ MAX_CMD_VERSION_LEN_DIGITS
 		+ MAX_ERROR_LEN_DIGITS
-		+ contentLength;
+		+ contentLength);
 
 	StdStringFormat( retResult, "http://GET /  1/%s/%13d/%s/%3d/%8d/", 
 		netServChallengeHash.c_str(), 
@@ -385,7 +385,7 @@ int  NetServiceUtils::getNextPartOfUrl( char * buf, std::string& strValue )
 		*pTemp = 0;
 		strValue = buf;
 		*pTemp = cSave;
-		len = strValue.length();
+		len = (int)strValue.length();
 	}
 	return len;
 }
@@ -501,7 +501,7 @@ int  NetServiceUtils::getIndexOfCrLfCrLf( VxSktBase * sktBase )
 		char * pEndPtr = strstr( pSktBuf, "\r\n\r\n" );
 		if( pEndPtr )
 		{
-			indexOfCrLfCrLf = ( pEndPtr - pSktBuf );
+			indexOfCrLfCrLf = (int)( pEndPtr - pSktBuf );
 		}
 
 		sktBase->sktBufAmountRead( 0 );
@@ -518,7 +518,7 @@ RCODE NetServiceUtils::buildAndSendCmd( VxSktBase * sktBase, ENetCmdType netCmd,
 	generateNetServiceChallengeHash( netServChallengeHash, sktBase );
 	buildNetCmd( retResult, netCmd, netServChallengeHash, cmdContent, errCode, version );
 
-	return sktBase->sendData( retResult.c_str(), retResult.length() );
+	return sktBase->sendData( retResult.c_str(), (int)retResult.length() );
 }
 
 //============================================================================

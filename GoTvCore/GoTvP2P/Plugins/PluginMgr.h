@@ -62,6 +62,7 @@ public:
 	void						setPluginPermission( EPluginType ePluginType, EFriendState ePluginPermission );
 
     bool                        setPluginSetting( PluginSetting& pluginSetting );
+    void                        onPluginSettingChange( PluginSetting& pluginSetting );
 
 	virtual void				fromGuiNetworkAvailable( void );
 

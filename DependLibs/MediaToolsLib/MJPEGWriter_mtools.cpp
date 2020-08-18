@@ -190,8 +190,8 @@ void MJPEGWriter::stopAviWrite( bool deleteFile )
 		}
 
 		// save totals before changed
-		m_TotalFrameCnt			= m_FrameOffsetList.size();
-		uint32_t audioTotalChunks	= m_PcmOffsetList.size();
+		m_TotalFrameCnt			    = (uint32_t)m_FrameOffsetList.size();
+		uint32_t audioTotalChunks	= ( uint32_t )m_PcmOffsetList.size();
 		uint32_t videoTotalFrames	= m_TotalFrameCnt - audioTotalChunks;
 
 		uint32_t lastOffsetWritten	= 0;
@@ -207,7 +207,7 @@ void MJPEGWriter::stopAviWrite( bool deleteFile )
 				return;
 			}
 
-			uint32_t idxListLen = 16 * m_FrameOffsetList.size();
+			uint32_t idxListLen = ( uint32_t )(16 * m_FrameOffsetList.size());
 			if( sizeof( idxListLen ) != fwrite( &idxListLen, 1, sizeof( idxListLen ), m_FileHandle ) )
 			{
 				LogMsg( LOG_ERROR, "MJPEGWriter::stopAviWrite error %d writing file %s\n", VxGetLastError(), m_FileName.c_str() );
@@ -215,7 +215,7 @@ void MJPEGWriter::stopAviWrite( bool deleteFile )
 				return;
 			}
 
-			m_TotalFrameCnt = m_FrameOffsetList.size();
+			m_TotalFrameCnt = ( uint32_t )m_FrameOffsetList.size();
 			uint32_t lastDataOffset = m_FrameOffsetList.size() ? m_FrameOffsetList[ m_FrameOffsetList.size() - 1 ] + m_PrevFrameJpgLen + 8 : 4;
 			m_FrameOffsetList.push_back( lastDataOffset );
 

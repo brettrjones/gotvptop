@@ -122,6 +122,19 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Groups/GroupDefs.h \
     $$PWD/GoTvCore/GoTvP2P/IsPortOpenTest/IsPortOpenTest.h \
     $$PWD/GoTvCore/GoTvP2P/IsPortOpenTest/PingResponseServer.h \
+	$$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectInfo.h \
+	$$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectInterface.h \
+    $$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectMgr.h \
+	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListCallbackInterface.h \
+	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListInfo.h \
+    $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListInfoDb.h \
+    $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListMgr.h \
+	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListMgrBase.h \
+    $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListRxSession.h \
+	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListTxSession.h \
+	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferDb.h \
+	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferMger.h \
+	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferSession.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDefs.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostList.h \
@@ -140,6 +153,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionIdle.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionIsMyPortOpen.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionRandomConnect.h \
+	$$PWD/GoTvCore/GoTvP2P/NetServices/NetActionQueryHostOnlineId.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionQueryMyIp.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceHost.h \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceDefs.h \
@@ -179,10 +193,10 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/FileShareSettings.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PConnectList.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h \
-    $$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSetting.h \
-    $$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingBinary.h \
-    $$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingDb.h \
-    $$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSetting.h \
+    $$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingBinary.h \
+    $$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingDb.h \
+    $$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/AudioJitterBuffer.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/FileLibraryDb.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/FileLibraryMgr.h \
@@ -320,6 +334,18 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32filesystem.cpp \
     $$PWD/GoTvCore/GoTvP2P/IsPortOpenTest/IsPortOpenTest.cpp \
     $$PWD/GoTvCore/GoTvP2P/IsPortOpenTest/PingResponseServer.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectInfo.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectInterface.cpp \
+    $$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectMgr.cpp \
+    $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListInfo.cpp \
+    $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListInfoDb.cpp \
+    $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListMgr.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListMgrBase.cpp \
+    $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListRxSession.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListTxSession.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferDb.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferMger.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostList.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostListEntry.cpp \
@@ -334,6 +360,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionIdle.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionIsMyPortOpen.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionRandomConnect.cpp \
+    $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionHostOnlineId.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionQueryMyIp.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceHost.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceDefs.cpp \
@@ -383,10 +410,10 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineScan.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineSearch.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineSktCallback.cpp \
-	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSetting.cpp \
-	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingBinary.cpp \
-	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingDb.cpp \
-	$$PWD/GoTvCore/GoTvP2P/P2PEngine/PluginSettingMgr.cpp \
+	$$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSetting.cpp \
+	$$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingBinary.cpp \
+	$$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingDb.cpp \
+	$$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/AudioJitterBuffer.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/FileLibraryDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/FileLibraryMgr.cpp \

@@ -532,6 +532,9 @@
     <ClCompile Include="..\..\GoTvP2P\EchoCancel\wav_header.cpp" />
     <ClCompile Include="..\..\GoTvP2P\EchoCancel\win32.cpp" />
     <ClCompile Include="..\..\GoTvP2P\EchoCancel\win32filesystem.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostConnect\HostConnectInfo.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostConnect\HostConnectInterface.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostConnect\HostConnectMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListInfo.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListInfoDb.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListMgr.cpp" />
@@ -556,6 +559,7 @@
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionBase.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionIdle.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionIsMyPortOpen.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionQueryHostOnlineId.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionQueryMyIp.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionRandomConnect.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceDefs.cpp" />
@@ -610,10 +614,11 @@
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineScan.cpp" />
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineSearch.cpp" />
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineSktCallback.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSetting.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSettingBinary.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSettingDb.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSettingMgr.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineTimerThread.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSetting.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSettingBinary.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSettingDb.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSettingMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\AudioJitterBuffer.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\FileLibraryDb.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\FileLibraryMgr.cpp" />
@@ -793,6 +798,9 @@
     <ClInclude Include="..\..\GoTvP2P\EchoCancel\win32.h" />
     <ClInclude Include="..\..\GoTvP2P\EchoCancel\win32filesystem.h" />
     <ClInclude Include="..\..\GoTvP2P\Groups\GroupDefs.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostConnect\HostConnectInfo.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostConnect\HostConnectInterface.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostConnect\HostConnectMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListCallbackInterface.h" />
     <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListInfoDb.h" />
@@ -822,6 +830,7 @@
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionBase.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionIdle.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionIsMyPortOpen.h" />
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionQueryHostOnlineId.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionQueryMyIp.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionRandomConnect.h" />
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceDefs.h" />
@@ -862,10 +871,10 @@
     <ClInclude Include="..\..\GoTvP2P\P2PEngine\FileShareSettings.h" />
     <ClInclude Include="..\..\GoTvP2P\P2PEngine\P2PConnectList.h" />
     <ClInclude Include="..\..\GoTvP2P\P2PEngine\P2PEngine.h" />
-    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSetting.h" />
-    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSettingBinary.h" />
-    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSettingDb.h" />
-    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSettingMgr.h" />
+    <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSetting.h" />
+    <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingBinary.h" />
+    <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingDb.h" />
+    <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\AudioJitterBuffer.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\FileLibraryDb.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\FileLibraryMgr.h" />

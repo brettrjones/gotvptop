@@ -37,7 +37,6 @@ public:
     //! move operator
     PluginSettingHdr& operator =( PluginSettingHdr && rhs ) = default;
 
-
     void                        setSettingTotalLen( int totalStorageLen )           { m_SettingTotalLen = totalStorageLen; }
     int                         getSettingTotalLen( void )                          { return m_SettingTotalLen; }
 
@@ -66,10 +65,13 @@ public:
     VxGUID&                     getSecondaryThumnailId( void )                      { return m_SecondaryPluginThumb; }
     void                        setSecondaryIdentGuid( VxGUID&  identGuid )         { m_SecondaryIdentGuid = identGuid; }
     VxGUID&                     getSecondaryIdentGuid( void )                       { return m_SecondaryIdentGuid; }
-    void                        setRes1( int res1 )                                 { m_Reserve1Setting = (uint32_t)res1; }
-    int                         getRes1( void )                                     { return m_Reserve1Setting; }
-    void                        setRes2( int res2 )                                 { m_Reserve2Setting = (uint32_t)res2; }
-    int                         getRes2( void )                                     { return m_Reserve2Setting; }
+    void                        setAnnounceToHost( bool announce )                  { m_AnnounceToHost = ( uint8_t )announce; }
+    bool                        getAnnounceToHost( void )                           { return m_AnnounceToHost; }
+
+    void                        setRes1( uint32_t res1 )                            { m_Reserve1Setting = (uint32_t)res1; }
+    uint32_t                    getRes1( void )                                     { return m_Reserve1Setting; }
+    void                        setRes2( uint32_t res2 )                            { m_Reserve2Setting = (uint32_t)res2; }
+    uint32_t                    getRes2( void )                                     { return m_Reserve2Setting; }
 
     void                        setLastUpdateTimestamp( int64_t timeStamp )         { m_UpdateTimestamp = timeStamp; }
     int64_t                     getLastUpdateTimestamp( void )                      { return m_UpdateTimestamp; }
@@ -90,8 +92,9 @@ protected:
     uint16_t                    m_ContentSubCatagory = 0;
     uint16_t                    m_MaxConnectionsPerUser = 0;
     uint16_t                    m_MaxStoreAndForwardPerUser = 0;
+    uint8_t                     m_AnnounceToHost = 0;
+    uint8_t                     m_ResByte1 = 0;
     uint16_t                    m_ResBw1 = 0;
-    uint16_t                    m_ResBw2 = 0;
     uint32_t                    m_Reserve1Setting = 0;
     uint32_t                    m_Reserve2Setting = 0;
 

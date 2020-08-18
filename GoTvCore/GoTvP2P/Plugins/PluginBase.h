@@ -19,7 +19,7 @@
 #include <PktLib/PktsPluginSetting.h>
 #include <PktLib/VxCommon.h>
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetXferMgr.h>
-#include <GoTvCore/GoTvP2P/P2PEngine/PluginSetting.h>
+#include <GoTvCore/GoTvP2P/PluginSettings/PluginSetting.h>
 
 #include <CoreLib/VxMutex.h>
 #include <CoreLib/MediaCallbackInterface.h>
@@ -29,6 +29,7 @@ class IToGui;
 class NetServiceHdr;
 class P2PEngine;
 class P2PSession;
+class PktAnnounce;
 class PluginMgr;
 class PluginSessionBase;
 class PluginSetting;
@@ -145,6 +146,9 @@ public:
 												EOfferResponse eOfferResponse = eOfferResponseUserOffline ) {};
 
 	virtual void				onSharedFilesUpdated( uint16_t u16FileTypes )							{};
+    virtual void				onMyPktAnnounceChange( PktAnnounce& pktAnn )							{};
+    virtual void				onThreadOncePer15Minutes( void )							            {};
+    virtual	void				onPluginSettingChange( PluginSetting& pluginSetting )                   {};
 
     virtual void				onPktUserConnect			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );
     virtual void				onPktUserDisconnect			( VxSktBase * sktBase, VxPktHdr * pktHdr, VxNetIdent * netIdent );

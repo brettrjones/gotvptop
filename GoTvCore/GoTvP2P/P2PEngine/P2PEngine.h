@@ -21,8 +21,10 @@
 #include "EngineParams.h"
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.h>
+#include <GoTvCore/GoTvP2P/HostConnect/HostConnectMgr.h>
 #include <GoTvCore/GoTvP2P/HostListMgr/HostListCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h>
+#include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
 
 #include <GoTvInterface/IFromGui.h>
 #include <GoTvInterface/IAudioInterface.h>
@@ -77,6 +79,7 @@ public:
     IAudioRequests&			    getAudioRequest( void );
     AssetMgr&					getAssetMgr( void )								{ return m_AssetMgr; }
     HostListMgr&				getHostListMgr( void )							{ return m_HostListMgr; }
+    HostConnectMgr&             getHostConnectMgr( void )						{ return m_HostConnectMgr; }
     BigListMgr&					getBigListMgr( void )							{ return m_BigListMgr; }
     EngineSettings&				getEngineSettings( void )						{ return m_EngineSettings; }
 	EngineParams&				getEngineParams( void )							{ return m_EngineParams; }
@@ -105,7 +108,7 @@ public:
     bool                        getPluginSetting( EPluginType pluginType, PluginSetting& pluginSetting );
 
     virtual void				setPluginPermission( EPluginType ePluginType, int iPluginPermission );
-    virtual int					getPluginPermission( int iPluginType );
+    virtual EFriendState		getPluginPermission( int iPluginType );
 
 	PluginServiceRelay&			getPluginServiceRelay( void )					{ return * m_PluginServiceRelay; }
 	PluginServiceFileShare&		getPluginServiceFileShare( void )				{ return * m_PluginServiceFileShare; }
@@ -363,6 +366,17 @@ public:
 	void						onOncePerMinute( void );
 	void						onOncePerHour( void );
 
+    // called by timer thread to conserve main thread cpu time
+    void                        enableTimerThread( bool enable );
+
+    void                        executeTimerThreadFunctions( void );
+    void						onThreadOncePerSecond( void );
+    void						onThreadOncePer30Seconds( void );
+    void						onThreadOncePerMinute( void );
+    void						onThreadOncePer15Minutes( void );
+    void						onThreadOncePer30Minutes( void );
+    void						onThreadOncePerHour( void );
+
 	void						onBigListInfoRestored( BigListInfo * poInfo ); 
 	void						onBigListLoadComplete( RCODE rc );
 	void						onBigListInfoDelete( BigListInfo * poInfo );
@@ -561,6 +575,7 @@ protected:
     NetStatusAccum              m_NetStatusAccum;
 	AssetMgr&					m_AssetMgr;
     HostListMgr&				m_HostListMgr;
+    HostConnectMgr&             m_HostConnectMgr;
 	P2PConnectList				m_ConnectionList;
     MediaProcessor&				m_MediaProcessor;
     NetworkMgr&					m_NetworkMgr;
@@ -571,7 +586,7 @@ protected:
 	HostTest&					m_HostTest;
 
 	PluginMgr&					m_PluginMgr;
-    PluginSettingMgr&			m_PluginSettingMgr;
+    PluginSettingMgr			m_PluginSettingMgr;
 
 	PluginServiceRelay *		m_PluginServiceRelay;
 	PluginServiceFileShare *	m_PluginServiceFileShare;
@@ -592,6 +607,8 @@ protected:
     bool                        m_EngineInitialized{ false };
 
 	PktImAliveReq				m_PktImAliveReq;
+
+    VxThread                    m_TimerThread;
 
 private:
 	P2PEngine() = delete; // don't allow default constructor

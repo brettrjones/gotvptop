@@ -316,7 +316,7 @@ bool NetServicesMgr::sendAndRecievePing( VxTimer& pingTimer, VxSktConnectSimple&
 
     // startSendTime is also the time it took to connect
 	double startSendTime = pingTimer.elapsedSec();
-	RCODE rc = toClientConn.sendData( strNetCmd.c_str(), strNetCmd.length(), 8000 );
+	RCODE rc = toClientConn.sendData( strNetCmd.c_str(), ( int )strNetCmd.length(), 8000 );
 	if( rc )
 	{
 		double failSendTime = pingTimer.elapsedSec();
@@ -406,6 +406,13 @@ void NetServicesMgr::setMyPortOpenResultCallback( MY_PORT_OPEN_CALLBACK_FUNCTION
 }
 
 //============================================================================
+void NetServicesMgr::setQueryHostOnlineIdResultCallback( QUERY_HOST_ID_CALLBACK_FUNCTION pfuncQueryHostIdCallbackHandler, void * userData )
+{
+    m_pfuncQueryHostIdCallbackHandler = pfuncQueryHostIdCallbackHandler;
+    m_QueryHostIdCallbackUserData = userData;
+}
+
+//============================================================================
 void NetServicesMgr::testIsMyPortOpen( void )
 {
 	addNetActionCommand( new NetActionIsMyPortOpen( *this ) );
@@ -472,6 +479,28 @@ void NetServicesMgr::netActionResultIsMyPortOpen( EAppErr eAppErr, std::string& 
 	{
 		m_pfuncPortOpenCallbackHandler( m_PortOpenCallbackUserData, eAppErr, myExternalIp );
 	}
+}
+
+//============================================================================
+void NetServicesMgr::netActionResultQueryHostOnlineId( EAppErr eAppErr, std::string& onlineId )
+{
+    if( eAppErr == eAppErrNone )
+    {
+        LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultQueryHostOnlineIp result %s\n", onlineId.c_str() );
+        // tested and can direct connect
+        m_Engine.getNetStatusAccum().setQueryHostOnlineId( true, onlineId );
+    }
+    else
+    {
+        // port open test failed with other error
+        LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen err %d extern ip %s\n", eAppErr, onlineId.c_str() );
+        m_Engine.getNetStatusAccum().setQueryHostOnlineId( false, onlineId );
+    }
+
+    if( m_pfuncQueryHostIdCallbackHandler )
+    {
+        m_pfuncPortOpenCallbackHandler( m_pfuncQueryHostIdCallbackHandler, eAppErr, onlineId );
+    }
 }
 
 //============================================================================
@@ -840,7 +869,7 @@ EAppErr NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
 
 	LogMsg( LOG_INFO, "Is Port %d Open Connected in  %3.3f sec now Sending data thread 0x%x", tcpListenPort, portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
 	portTestTimer.startTimer();
-	RCODE rc = netServConn->sendData( strNetActionUrl.c_str(), strNetActionUrl.length() );
+	RCODE rc = netServConn->sendData( strNetActionUrl.c_str(), ( int )strNetActionUrl.length() );
 	if( rc )
 	{
 		LogMsg( LOG_ERROR, "Is TCP Port %d Open Send Command Error (%3.3f sec) thread 0x%x", tcpListenPort, portTestTimer.elapsedSec(), VxGetCurrentThreadId() );

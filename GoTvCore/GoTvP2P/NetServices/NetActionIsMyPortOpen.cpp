@@ -30,7 +30,7 @@ NetActionIsMyPortOpen::NetActionIsMyPortOpen( NetServicesMgr& netServicesMgr )
 void NetActionIsMyPortOpen::doAction( void )
 {
 	std::string myIp = "";
-	EAppErr eResult = 	m_NetServicesMgr.doIsMyPortOpen( myIp, false );
+	EAppErr eResult = m_NetServicesMgr.doIsMyPortOpen( myIp, false );
 	LogModule( eLogIsPortOpenTest, LOG_INFO, "NetActionIsMyPortOpen::doAction result %d ip %s\n", eResult, myIp.c_str() );
 	m_NetServicesMgr.netActionResultIsMyPortOpen( eResult, myIp );
 }

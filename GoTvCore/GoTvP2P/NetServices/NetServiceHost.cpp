@@ -108,7 +108,7 @@ RCODE NetServiceHost::handleNetCmdHostReq( VxSktBase * sktBase, NetServiceHdr& n
 
 	if( sktBase->isConnected() )
 	{
-		sktBase->sendData( cmdHdr.c_str(), cmdHdr.length() );
+		sktBase->sendData( cmdHdr.c_str(), (int)cmdHdr.length() );
 		sktBase->sendData( (char *)&anchorResult, sendContentLen );
 	}
 	else

@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AppletSettingsHostNetworkUi</class>
- <widget class="QWidget" name="AppletSettingsHostNetworkUi">
+ <class>AppletSettingsHostGroupUi</class>
+ <widget class="QWidget" name="AppletSettingsHostGroupUi">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>269</width>
+    <width>292</width>
     <height>512</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
-   <string>Host A Network</string>
+   <string>Host A Group</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -44,7 +50,7 @@
       <item>
        <widget class="QLabel" name="m_Special1Label">
         <property name="text">
-         <string>Hosting a network has special network requirements</string>
+         <string>Hosting a group has special network requirements</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -59,9 +65,23 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>2. Relay service must be provided for users who connot</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>open a port (relay service may use alot of bandwidth)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="m_GroupHostLabel">
         <property name="text">
-         <string>2. A fixed ip or url is recommended</string>
+         <string>3. A fixed ip is not required but will speed up connection times</string>
         </property>
        </widget>
       </item>
@@ -71,19 +91,19 @@
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Other Services Required To Host Network</string>
+         <string>Other Services Required To Host A Group</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Recommend same permission as host net permission</string>
+         <string>Recommend same permission as host group permission</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="PermissionWidget" name="m_GroupListPermissionWidget" native="true">
+       <widget class="PermissionWidget" name="m_RelayPermissionWidget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
           <horstretch>0</horstretch>

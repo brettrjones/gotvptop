@@ -17,6 +17,7 @@
 #include "AppCommon.h"
 #include "ActivityNetHostSettings.h"
 #include "ActivityIsPortOpenTest.h"
+#include "ActivityNetworkHostTest.h"
 #include "AppGlobals.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
@@ -47,7 +48,7 @@ ActivityNetworkSettings::ActivityNetworkSettings( AppCommon& app, QWidget * pare
 void ActivityNetworkSettings::connectSignals( void )
 {
 	connect( ui.m_TitleBarWidget,					SIGNAL(signalBackButtonClicked()), this, SLOT( slotExitButtonClick() ) );
-	connect( ui.m_GoToNetHostSettingsButton,			SIGNAL(clicked()), this, SLOT( slotGoToNetHostSettingsButtonClick() ) );
+	connect( ui.m_GoToNetHostSettingsButton,		SIGNAL(clicked()), this, SLOT( slotGoToNetHostSettingsButtonClick() ) );
 
 	connect( ui.AutoDetectProxyRadioButton,			SIGNAL(clicked()), this, SLOT( slotAutoDetectProxyClick() ) );
 	connect( ui.AssumeNoProxyRadioButton,			SIGNAL(clicked()), this, SLOT( slotNoProxyClick() ) );
@@ -55,6 +56,7 @@ void ActivityNetworkSettings::connectSignals( void )
 
 	connect( ui.RandomPortButton,					SIGNAL(clicked()), this, SLOT( slotRandomPortButtonClick() ) );
 	connect( ui.m_IsPortOpenTesButton,				SIGNAL(clicked()), this, SLOT( slotRunIsPortOpenButtonClick() ) );
+    connect( ui.m_IsPortOpenTesButton,              SIGNAL( clicked() ), this, SLOT( slotRunNetworkHostTestButtonClick() ) );
 	connect( ui.m_UseUpnpCheckBox,					SIGNAL(clicked()), this, SLOT( slotUseUpnpCheckBoxClick() ) );
 	connect( ui.m_ExternIpHelpButton,				SIGNAL(clicked()), this, SLOT( slotExternIpHelpButtonClick() ) );
 }
@@ -262,6 +264,26 @@ void ActivityNetworkSettings::slotRunIsPortOpenButtonClick( void )
 		QMessageBox::information(this, tr("Error"), tr("TCP Port cannot be zero." ) );
 	}
 }
+
+//============================================================================
+void ActivityNetworkSettings::slotRunNetworkHostTestButtonClick( void )
+{
+    uint16_t u16Port = ui.PortEdit->text().toUShort();
+    if( 0 != u16Port )
+    {
+        updateSettingsFromDlg();
+        ActivityNetworkHostTest * dlg = new ActivityNetworkHostTest(
+            m_MyApp,
+            u16Port,
+            this );
+        dlg->exec();
+    }
+    else
+    {
+        QMessageBox::information( this, tr( "Error" ), tr( "TCP Port cannot be zero." ) );
+    }
+}
+
 
 //============================================================================
 void ActivityNetworkSettings::slotUseUpnpCheckBoxClick( void )

@@ -641,13 +641,13 @@ void NetworkStateMachine::setPktAnnounceWithRelayInfo( const char * relayOnlineI
 //============================================================================
 bool NetworkStateMachine::resolveWebsiteUrls( void )
 {
-	std::string anchorWebsiteUrl;
-	m_EngineSettings.getNetHostWebsiteUrl( anchorWebsiteUrl );
-	std::string netServiceWebsiteUrl;
-	m_EngineSettings.getNetServiceWebsiteUrl( netServiceWebsiteUrl );
+	std::string networkHostUrl;
+	m_EngineSettings.getNetHostWebsiteUrl( networkHostUrl );
+	std::string connectTestHostUrl;
+	m_EngineSettings.getNetServiceWebsiteUrl( connectTestHostUrl );
 	if( m_bWebsiteUrlsResolved
-		&& ( anchorWebsiteUrl == m_LastResolvedHostWebsite )
-		&& ( netServiceWebsiteUrl == m_LastResolvedNetServiceWebsite ) )
+		&& ( networkHostUrl == m_LastResolvedHostWebsite )
+		&& ( connectTestHostUrl == m_LastResolvedNetServiceWebsite ) )
 	{
 		//LogMsg( LOG_INFO, "NetworkStateMachine::resolveWebsiteUrls already resolved\n" );
 		return true;
@@ -658,35 +658,36 @@ bool NetworkStateMachine::resolveWebsiteUrls( void )
 	}
 
 	//LogMsg( LOG_INFO, "NetworkStateMachine::resolveWebsiteUrls\n" );
-	bool resolveHostResult		= resolveUrl( anchorWebsiteUrl, m_HostIp, m_u16HostPort );
-	bool resolveConnectTestResult	= resolveUrl( netServiceWebsiteUrl, m_NetServiceIp, m_u16NetServicePort );
+	bool resolveNetHostResult		= resolveUrl( networkHostUrl, m_HostIp, m_u16HostPort );
+	bool resolveConnectTestResult	= resolveUrl( connectTestHostUrl, m_NetServiceIp, m_u16NetServicePort );
 	EngineParams& engineParams		= m_Engine.getEngineParams();
-	if( resolveHostResult )
+	if( resolveNetHostResult )
 	{
-		m_LastResolvedHostWebsite = anchorWebsiteUrl;
+		m_LastResolvedHostWebsite = networkHostUrl;
 		engineParams.setLastHostWebsiteUrl( m_LastResolvedHostWebsite );
 		engineParams.setLastHostWebsiteResolvedIp( m_HostIp );
+        //m_Engine.getHostConnectMgr().addHostInfo( ePluginType, m_HostIp, m_u16HostPort, m_LastResolvedHostWebsite.c_str() );
 	}
 	else
 	{
 		// use last known resolved ip
 		std::string lastHostUrl;
 		engineParams.getLastHostWebsiteUrl( lastHostUrl );
-		if( lastHostUrl == anchorWebsiteUrl )
+		if( lastHostUrl == networkHostUrl )
 		{
 			std::string lastHostIp = "";
 			engineParams.setLastHostWebsiteResolvedIp( lastHostIp );
 			if( 0 != lastHostIp.length() )
 			{
 				m_HostIp = lastHostIp;
-				resolveHostResult = true;
+                resolveNetHostResult = true;
 			}
 		}
 	}
 
 	if( resolveConnectTestResult )
 	{
-		m_LastResolvedNetServiceWebsite = netServiceWebsiteUrl;
+		m_LastResolvedNetServiceWebsite = connectTestHostUrl;
 		engineParams.setLastNetServiceWebsiteUrl( m_LastResolvedNetServiceWebsite );
 		engineParams.setLastNetServiceWebsiteResolvedIp( m_NetServiceIp );
 	}
@@ -695,7 +696,7 @@ bool NetworkStateMachine::resolveWebsiteUrls( void )
 		// use last known resolved ip
 		std::string lastNetServiceUrl;
 		engineParams.getLastNetServiceWebsiteUrl( lastNetServiceUrl );
-		if( lastNetServiceUrl == netServiceWebsiteUrl )
+		if( lastNetServiceUrl == connectTestHostUrl )
 		{
 			std::string lastNetServiceIp;
 			engineParams.getLastNetServiceWebsiteResolvedIp( lastNetServiceIp );
@@ -707,7 +708,7 @@ bool NetworkStateMachine::resolveWebsiteUrls( void )
 		}
 	}
 
-	if( resolveHostResult && resolveConnectTestResult )
+	if( resolveNetHostResult && resolveConnectTestResult )
 	{
 		m_bWebsiteUrlsResolved = true;
 		std::string myLclIp = VxGetLclIpAddress();
@@ -726,11 +727,11 @@ bool NetworkStateMachine::resolveWebsiteUrls( void )
 	}
 	else
 	{
-        LogModule( eLogNetworkState, LOG_ERROR, "Failed to resolve network websites %s %s\n", anchorWebsiteUrl.c_str(), netServiceWebsiteUrl.c_str() );
+        LogModule( eLogNetworkState, LOG_ERROR, "Failed to resolve network websites %s %s\n", networkHostUrl.c_str(), connectTestHostUrl.c_str() );
 	}
 
 
-	return ( resolveHostResult && resolveConnectTestResult );
+	return ( resolveNetHostResult && resolveConnectTestResult );
 }
 
 //============================================================================

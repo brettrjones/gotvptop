@@ -39,6 +39,8 @@ enum ENetCmdType
 	eNetCmdHostReply					= 6,		
 	eNetCmdAboutMePage					= 7,		
 	eNetCmdStoryboardPage				= 8,		
+    eNetCmdQueryHostOnlineIdReq         = 9,
+    eNetCmdQueryHostOnlineIdReply       = 10,
 
 	eMaxNetCmdType
 };

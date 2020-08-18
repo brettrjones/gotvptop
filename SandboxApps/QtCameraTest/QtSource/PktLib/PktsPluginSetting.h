@@ -19,7 +19,7 @@
 #include "VxCommon.h"
 #include <GoTvInterface/IScan.h>
 
-#include <GoTvCore/GoTvP2P/P2PEngine/PluginSettingBinary.h>
+#include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingBinary.h>
 
 
 #pragma pack(push) 

@@ -14,19 +14,15 @@
 
 #include "PluginSettingMgr.h"
 #include "PluginSettingDb.h"
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginMgr.h>
+
 #include <CoreLib/VxGlobals.h>
 
-
 //============================================================================
-PluginSettingMgr& GetPluginSettingMgrInstance()
-{
-    static PluginSettingMgr g_PluginSettingMgr;
-    return g_PluginSettingMgr;
-}
-
-//============================================================================
-PluginSettingMgr::PluginSettingMgr()
-    : m_PluginSettingDb( GetPluginSettingDbInstance() )
+PluginSettingMgr::PluginSettingMgr( P2PEngine& engine )
+    : m_Engine( engine )
+    , m_PluginSettingDb( GetPluginSettingDbInstance() )
 {
 }
 
@@ -44,6 +40,7 @@ bool PluginSettingMgr::initPluginSettingMgr( void )
             {
                 m_PluginSettingDb.getAllPluginSettings( m_SettingList );
                 m_SettingMgrInitied = true;
+                result = true;
             }
         }
     }
@@ -51,13 +48,14 @@ bool PluginSettingMgr::initPluginSettingMgr( void )
     return result;
 }
 
-
 //============================================================================
 bool PluginSettingMgr::setPluginSetting( PluginSetting& pluginSetting )
 {
+    m_SettingMutex.lock();
     bool result = initPluginSettingMgr();
     if( result )
     {
+        result = false;
         if( pluginSetting.getPluginType() != ePluginTypeInvalid )
         {
             for( PluginSetting& setting : m_SettingList )
@@ -65,49 +63,66 @@ bool PluginSettingMgr::setPluginSetting( PluginSetting& pluginSetting )
                 if( setting.getPluginType() == pluginSetting.getPluginType() )
                 {
                     setting = pluginSetting;
-                    return m_PluginSettingDb.updatePluginSetting( setting.getPluginType(), setting );
+                    result = m_PluginSettingDb.updatePluginSetting( setting.getPluginType(), setting );
                 }
             }
 
-            m_SettingList.push_back( pluginSetting );
-            return m_PluginSettingDb.updatePluginSetting( pluginSetting.getPluginType(), pluginSetting );
+            if( !result )
+            {
+                m_SettingList.push_back( pluginSetting );
+                result = m_PluginSettingDb.updatePluginSetting( pluginSetting.getPluginType(), pluginSetting );
+            }
+
+            if( result )
+            {
+                m_Engine.getPluginMgr().onPluginSettingChange( pluginSetting );
+            }
         }
         else
         {
             LogMsg( LOG_ERROR, "setPluginSetting invalid plugin type " );
-            result = false;
         }
     }
 
+    m_SettingMutex.unlock();
     return result;
 }
 
 //============================================================================
 bool PluginSettingMgr::getPluginSetting( EPluginType pluginType, PluginSetting& pluginSetting )
 {
+    m_SettingMutex.lock();
     bool result = initPluginSettingMgr();
-    if( pluginSetting.getPluginType() != ePluginTypeInvalid )
+    if( result )
     {
-        for( PluginSetting& setting : m_SettingList )
+        result = false;
+        if( pluginSetting.getPluginType() != ePluginTypeInvalid )
         {
-            if( setting.getPluginType() == pluginType )
+            for( PluginSetting& setting : m_SettingList )
             {
+                if( setting.getPluginType() == pluginType )
+                {
+                    pluginSetting = setting;
+                    result = true;
+                }
+            }
+
+            if( !result )
+            {
+                PluginSetting setting;
+                setting.setPluginType( pluginType );
+                m_SettingList.push_back( setting );
                 pluginSetting = setting;
-                return true;
+                result = true;
             }
         }
-
-        PluginSetting setting;
-        setting.setPluginType( pluginType );
-        m_SettingList.push_back( setting );
-        pluginSetting = setting;
-        return true;
-    }
-    else
-    {
-        LogMsg( LOG_ERROR, "getPluginSetting invalid plugin type " );
-        result = false;
+        else
+        {
+            LogMsg( LOG_ERROR, "getPluginSetting invalid plugin type " );
+            result = false;
+        }
     }
 
+    m_SettingMutex.unlock();
     return result;
 }

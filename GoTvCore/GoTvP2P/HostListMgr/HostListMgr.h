@@ -114,9 +114,9 @@ protected:
 	bool						m_Initialized;
 	bool						m_HostListListInitialized;
 	HostListInfoDb&				m_HostListInfoDb;
-	std::vector<HostListInfo*>		m_HostListInfoList;
+	std::vector<HostListInfo*>	m_HostListInfoList;
 
-	std::vector<HostListInfo*>		m_WaitingForHastList;
+	std::vector<HostListInfo*>	m_WaitingForHastList;
 	std::vector<std::string>	m_GenHashList;
 	VxMutex						m_GenHashMutex;
 	VxThread					m_GenHashThread;

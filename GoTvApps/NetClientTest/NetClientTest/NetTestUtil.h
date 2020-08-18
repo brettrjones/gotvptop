@@ -124,6 +124,7 @@ namespace NetTestUtil
     int                         getNextPartOfUrl( char * buf, std::string& strValue );
     bool                        getNetServiceUrlContent( std::string& netServiceUrl, std::string& retFromClientContent );
     bool                        sendAndRecievePing( VxTimer& pingTimer, VxSktConnectSimple& toClientConn, std::string& retPong, int receiveTimeout );
+    bool                        sendAndRecieveQueryHostOnlineId( VxTimer& pingTimer, VxSktConnectSimple& toClientConn, std::string& retPong, int receiveTimeout );
     void                        generateNetServiceChallengeHash( std::string& strKeyHash, uint16_t clientPort );
 
     void                        generateNetServiceChallengeHash( std::string& strKey, VxSktBase * skt );

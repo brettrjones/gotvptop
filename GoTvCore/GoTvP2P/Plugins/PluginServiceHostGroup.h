@@ -15,14 +15,35 @@
 
 #include "PluginBaseHostService.h"
 
-class PluginServiceHostGroup : public PluginBaseHostService
+#include <GoTvCore/GoTvP2P/HostConnect/HostConnectInterface.h>
+
+#include <CoreLib/VxMutex.h>
+
+#include <PktLib/PktHostAnnounce.h>
+
+class PluginServiceHostGroup : public PluginBaseHostService, public IHostConnectCallback
 {
 public:
 
     PluginServiceHostGroup( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
 	virtual ~PluginServiceHostGroup() override = default;
 
+    virtual void				pluginStartup( void ) override;
+
+    virtual bool                setPluginSetting( PluginSetting& pluginSetting ) override;
+    virtual void				onThreadOncePer15Minutes( void ) override;
 
 protected:
+    virtual	void				onPluginSettingChange( PluginSetting& pluginSetting ) override;
+    /// return true if have use for this connection
+    virtual bool                onContactConnected( EHostConnectType hostConnectType, RcConnectInfo * poInfo, bool connectionListLocked ) override;
+    virtual void                onContactDisconnected( EHostConnectType hostConnectType, RcConnectInfo * poInfo, bool connectionListLocked ) override;
 
+    void                        buildHostGroupAnnounce( PluginSetting& pluginSetting );
+    void                        sendHostGroupAnnounce( void );
+
+    bool                        m_SendAnnounceEnabled{ false };
+    bool                        m_HostAnnounceBuilt{ false };
+    PktHostAnnounce             m_PktHostAnnounce;
+    VxMutex                     m_AnnMutex;
 };

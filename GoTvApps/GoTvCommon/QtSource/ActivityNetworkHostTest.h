@@ -15,48 +15,45 @@
 //============================================================================
 
 #include "ActivityBase.h"
-#include "ui_ActivityNetworkSettings.h"
+#include "ui_ActivityNetworkHostTest.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
+#include <GoTvInterface/IToGui.h>
+#include <NetLib/InetAddress.h>
 
 #include <QDialog>
 
 class VxNetIdent;
+class NetSettings;
 
-class ActivityNetworkSettings : public ActivityBase
+class ActivityNetworkHostTest : public ActivityBase
 {
 	Q_OBJECT
-
 public:
-	ActivityNetworkSettings(	AppCommon& app,
-								QWidget * parent = NULL );
-	virtual ~ActivityNetworkSettings() override = default;
+	ActivityNetworkHostTest(	AppCommon&	app,
+							uint16_t	port,
+							QWidget *	parent );
+
+	virtual ~ActivityNetworkHostTest() override = default;
 
     // overrides required for dialogs with there own title bar and bottom bar widgets
     virtual TitleBarWidget *	getTitleBarWidget( void ) override { return ui.m_TitleBarWidget; }
     virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 public slots:
-	void						slotExitButtonClick( void );
-	void						slotGoToNetHostSettingsButtonClick( void );
-	void						slotRandomPortButtonClick( void );
-	void						slotRunIsPortOpenButtonClick( void );
-    void                        slotRunNetworkHostTestButtonClick( void );
-	void						slotExternIpHelpButtonClick( void );
+	void						slotIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, QString strMsg );
 
-	void						slotAutoDetectProxyClick( void );
-	void						slotNoProxyClick( void );
-	void						slotYesProxyClick( void );
-	void						slotUseUpnpCheckBoxClick( void );
+	void						slotExitDialogButtonClick( void );
+	void						slotRunTestButClick( void );
+	void						slotDialogWasShown( void );
 
 protected:
-	void						SetFirewallTest( FirewallSettings::EFirewallTestType eFirewallType );
-
-	void						connectSignals( void );
-	void						updateDlgFromSettings( void );
-	void						updateSettingsFromDlg( void );
-
+ 
 	//=== vars ===//
-	Ui::NetworkSettingsDlg		ui; 
-	NetSettings					m_NetSettings;
+	Ui::NetworkHostTestUi		ui; 
+	uint16_t					m_Port;
+	std::vector<InetAddress>	m_aoIpAddress;
+	QTimer *					m_Timer;
+
+	std::string					m_strMyExternalIPv4;
+	std::string					m_strMyLclIPv4;
 };

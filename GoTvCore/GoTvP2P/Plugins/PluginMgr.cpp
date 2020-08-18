@@ -274,6 +274,16 @@ bool PluginMgr::setPluginSetting( PluginSetting& pluginSetting )
 }
 
 //============================================================================
+void PluginMgr::onPluginSettingChange( PluginSetting& pluginSetting )
+{
+    PluginBase * plugin = getPlugin( pluginSetting.getPluginType() );
+    if( plugin )
+    {
+        plugin->setPluginSetting( pluginSetting );
+    }
+}
+
+//============================================================================
 void PluginMgr::pluginApiLog( EPluginType ePluginType, const char * pMsg, ... )
 {
 	char szBuffer[2048];

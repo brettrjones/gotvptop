@@ -197,6 +197,15 @@ void NetStatusAccum::setDirectConnectTested( bool isTested, bool requiresRelay, 
 }
 
 //============================================================================
+void NetStatusAccum::setQueryHostOnlineId( bool noError, std::string& onlineId )
+{
+    if( noError )
+    {
+
+    }
+}
+
+//============================================================================
 void NetStatusAccum::setConnectToRelay( bool connectedToRelay )
 {
     if( connectedToRelay != m_ConnectedToRelay )

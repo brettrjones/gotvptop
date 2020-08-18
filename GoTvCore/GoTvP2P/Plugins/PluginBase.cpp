@@ -60,6 +60,7 @@ bool PluginBase::setPluginSetting( PluginSetting& pluginSetting )
 {
     m_PluginSetting = pluginSetting;
     generateSettingPkt( pluginSetting );
+    onPluginSettingChange( m_PluginSetting );
     return true;
 }
 

@@ -41,9 +41,9 @@ namespace
 }
 
 //============================================================================
-HostListInfoDb::HostListInfoDb( HostListMgr& assetInfoMgr )
+HostListInfoDb::HostListInfoDb( HostListMgr& hostListMgr )
 : DbBase( "HostListInfoDb" )
-, m_HostListMgr( assetInfoMgr )
+, m_HostListMgr( hostListMgr )
 {
 }
 

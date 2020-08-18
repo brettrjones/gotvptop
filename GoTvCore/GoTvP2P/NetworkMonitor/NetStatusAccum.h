@@ -15,6 +15,7 @@
 
 #include <GoTvInterface/IDefs.h>
 #include <CoreLib/VxMutex.h>
+#include <CoreLib/VxGUID.h>
 
 class P2PEngine;
 
@@ -31,6 +32,7 @@ public:
     void                        setNetHostAvail( bool avail );
     void                        setConnectionTestAvail( bool avail );
     void                        setDirectConnectTested( bool isTested, bool requiresRelay, std::string& myExternalIp );
+    void                        setQueryHostOnlineId( bool noError, std::string& onlineId );
     void                        setConnectToRelay( bool connectedToRelay );
     void                        setIpAddress( std::string ipAddr );
     void                        setIpPort( uint16_t ipPort );
@@ -38,6 +40,7 @@ public:
 
     bool                        isInternetAvailable( void )       { return m_InternetAvail; };
     bool                        isNetHostAvailable( void )        { return m_NetworkHostAvail; };
+    bool                        isNetHostOnlineIdAvailable( void )  { return m_NetHostIdAvail; };
     bool                        isDirectConnectTested( void )     { return m_DirectConnectTested; };
     bool                        isP2PAvailable( void )            { return m_DirectConnectTested && (!m_RequriesRelay || m_ConnectedToRelay); };
     bool                        requiresRelay( void )             { return m_RequriesRelay; };
@@ -66,6 +69,8 @@ protected:
     bool                        m_IsConnectedGroupHost{ false };
     std::string                 m_IpAddr;
     uint16_t                    m_IpPort{ 0 };
+    bool                        m_NetHostIdAvail{ false };
+    VxGUID                      m_NetNostOnlineId;
 
     FirewallSettings::EFirewallTestType           m_FirewallTestType{ FirewallSettings::eFirewallTestUrlConnectionTest };
     EInternetStatus             m_InternetStatus{ eInternetNoInternet };

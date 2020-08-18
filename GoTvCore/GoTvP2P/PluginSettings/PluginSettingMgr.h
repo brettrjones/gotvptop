@@ -18,11 +18,12 @@
 #include <CoreLib/VxMutex.h>
 
 class PluginSettingDb;
+class P2PEngine;
 
 class PluginSettingMgr 
 {
 public:
-    PluginSettingMgr();
+    PluginSettingMgr( P2PEngine& engine );
     virtual ~PluginSettingMgr() = default;
 
     bool                        setPluginSetting( PluginSetting& pluginSetting );
@@ -32,10 +33,12 @@ protected:
     bool                        initPluginSettingMgr( void );
     PluginSettingDb&            getPluginSettingDb() { return m_PluginSettingDb; }
 
+    //=== vars ===//
+    P2PEngine&					m_Engine;
+
     bool                        m_SettingMgrInitied = false;
     VxMutex                     m_SettingMutex;
     PluginSettingDb&            m_PluginSettingDb;
     std::vector<PluginSetting>  m_SettingList;
 };
 
-PluginSettingMgr& GetPluginSettingMgrInstance();

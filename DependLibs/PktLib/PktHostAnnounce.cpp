@@ -23,6 +23,8 @@
 
 #include <memory.h>
 
+#define PKT_HOST_ANNOUNCE_VERSION 1
+
 //============================================================================
 //============================================================================
 PktHostAnnounce::PktHostAnnounce()
@@ -47,7 +49,42 @@ PktHostAnnounce *	PktHostAnnounce::makeHostAnnCopy( void )
 }
 
 //============================================================================
-PktHostAnnounce *	PktHostAnnounce::makeHostAnnReverseCopy( void )
+void PktHostAnnounce::setPktAnn( PktAnnounce& pktAnn )
+{
+    const char * pktAnnData = ( const char *)&pktAnn;
+    int pktAnnDataLen = pktAnn.getPktLength() - sizeof( VxPktHdr );
+    pktAnnData += sizeof( VxPktHdr );
+    char * pktHost = ( char * )this;
+    pktHost += sizeof( VxPktHdr );
+    if( pktAnnDataLen > 0 && pktAnnDataLen < sizeof( PktHostAnnounce ) )
+    {
+        memcpy( pktHost, pktAnnData, pktAnnDataLen );
+    }
+
+    setSrcOnlineId( pktAnn.getSrcOnlineId() );
+}
+
+//============================================================================
+void PktHostAnnounce::calcPktLen( void )
+{
+    setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktHostAnnounce ) - ( MAX_PLUGIN_SETTING_STORAGE_LEN + 16 ) + getSettingBinary()->getSettingTotalStorgeLength() ) );
+}
+
+//============================================================================
+PluginSettingBinary * PktHostAnnounce::getSettingBinary( void )
+{
+    return ( PluginSettingBinary * )m_SettingData;
+}
+
+//============================================================================
+void PktHostAnnounce::setSettingBinary( PluginSettingBinary& settingBinary )
+{
+    memcpy( m_SettingData, &settingBinary, settingBinary.getSettingTotalStorgeLength() );
+    calcPktLen();
+}
+
+//============================================================================
+PktHostAnnounce * PktHostAnnounce::makeHostAnnReverseCopy( void )
 {
 	PktHostAnnounce * pTemp = makeHostAnnCopy();
 	pTemp->reversePermissions();
@@ -60,7 +97,6 @@ bool PktHostAnnounce::isValidPktHostAnn( void )
 	return ( ( getPktLength() == sizeof( PktHostAnnounce ) ) &&
 			 ( getPktType() == PKT_TYPE_HOST_ANNOUNCE ) );
 }
-
 
 //============================================================================
 //! dump contents of pkt announce for debug

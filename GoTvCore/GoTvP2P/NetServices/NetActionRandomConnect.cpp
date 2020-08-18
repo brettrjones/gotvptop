@@ -105,7 +105,7 @@ bool NetActionRandomConnect::doRandomConnectAction( VxSktConnectSimple& netServC
     buildAnnounceCmd( strNetCmdHdr, cryptoPort, anchorList, eHostActionRandomConnect );
 	int anchorDataLen = anchorList.m_TotalLen;
 
-	RCODE rc = netServConn.sendData( strNetCmdHdr.c_str(), strNetCmdHdr.length() );
+	RCODE rc = netServConn.sendData( strNetCmdHdr.c_str(), (int)strNetCmdHdr.length() );
 	if( rc )
 	{
 		netServConn.closeSkt();

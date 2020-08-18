@@ -254,7 +254,6 @@ bool NetTestUtil::getNetServiceUrlContent( std::string& netServiceUrl, std::stri
     return true;
 }
 
-
 //============================================================================
 bool NetTestUtil::sendAndRecievePing( VxTimer& pingTimer, VxSktConnectSimple& toClientConn, std::string& retPong, int receiveTimeout )
 {
@@ -295,6 +294,72 @@ bool NetTestUtil::sendAndRecievePing( VxTimer& pingTimer, VxSktConnectSimple& to
 
     rxBuf[ sizeof( rxBuf ) - 1 ]
     toClientConn.closeSkt();
+
+    double successResponseTime = pingTimer.elapsedSec();
+
+    if( netServiceHdr.m_ContentDataLen <= 0 )
+    {
+        LogModule( eLogIsPortOpenTest, LOG_ERROR, "## NetTestUtil::sendAndRecievePing: No Content connect %3.3f sec send %3.3f sec fail respond %3.3f sec thread 0x%x",
+                   startSendTime, endSendTime - startSendTime, successResponseTime - startSendTime, VxGetCurrentThreadId() );
+        return false;
+    }
+
+    if( ( 0 == netServiceHdr.m_TotalDataLen )
+        || ( 511 <= netServiceHdr.m_TotalDataLen )
+        || ( '/' != rxBuf[ netServiceHdr.m_ContentDataLen - 1 ] ) )
+    {
+        LogModule( eLogIsPortOpenTest, LOG_ERROR, "## NetTestUtil::sendAndRecievePing: invalid response  connect %3.3f sec send %3.3f sec fail respond %3.3f sec thread 0x%x",
+                   startSendTime, endSendTime - startSendTime, successResponseTime - startSendTime, VxGetCurrentThreadId() );
+        return false;
+    }
+
+    LogModule( eLogIsPortOpenTest, LOG_VERBOSE, "## NetTestUtil::sendAndRecievePing: SUCCESS  connect %3.3f sec send %3.3f sec response %3.3f sec thread 0x%x",
+               startSendTime, endSendTime - startSendTime, successResponseTime - startSendTime, VxGetCurrentThreadId() );
+    rxBuf[ netServiceHdr.m_ContentDataLen - 1 ] = 0;
+    retPong = rxBuf;
+    return true;
+}
+
+//============================================================================
+bool NetTestUtil::sendAndRecieveQueryHostOnlineId( VxTimer& pingTimer, VxSktConnectSimple& toClientConn, std::string& retPong, int receiveTimeout )
+{
+    std::string strNetCmd;
+    std::string strPing = "QUERYHOSTID";
+
+    std::string netServChallengeHash;
+    uint16_t cryptoKeyPort = toClientConn.getCryptoKeyPort();
+    generateNetServiceChallengeHash( netServChallengeHash, cryptoKeyPort );
+
+    NetTestUtil::buildNetCmd( strNetCmd, eNetCmdQueryHostOnlineIdReq, netServChallengeHash, strPing, 0, 1 );
+
+    LogModule( eLogIsPortOpenTest, LOG_ERROR, "## NetTestUtil::sendAndRecievePing: cypto port %d strNetCmd(%s) thread 0x%x", cryptoKeyPort, strNetCmd.c_str(), VxGetCurrentThreadId() );
+
+    // startSendTime is also the time it took to connect
+    double startSendTime = pingTimer.elapsedSec();
+    RCODE rc = toClientConn.sendData( strNetCmd.c_str(), ( int )strNetCmd.length(), 8000 );
+    if( rc )
+    {
+        double failSendTime = pingTimer.elapsedSec();
+        LogModule( eLogIsPortOpenTest, LOG_ERROR, "## NetTestUtil::sendAndRecievePing: sendData error %d in %3.3f sec thread 0x%x", rc, failSendTime - startSendTime, VxGetCurrentThreadId() );
+        toClientConn.closeSkt();
+        return false;
+    }
+
+    double endSendTime = pingTimer.elapsedSec();
+    char rxBuf[ 513 ];
+    rxBuf[ 0 ] = 0;
+    NetServiceHdr netServiceHdr;
+    if( false == NetTestUtil::rxNetServiceCmd( &toClientConn, rxBuf, sizeof( rxBuf ) - 1, netServiceHdr, receiveTimeout, receiveTimeout ) )
+    {
+        double failResponseTime = pingTimer.elapsedSec();
+        LogModule( eLogIsPortOpenTest, LOG_ERROR, "## NetTestUtil::sendAndRecievePing: no response with timeout spec %d and times connect %3.3f sec send %3.3f sec fail respond %3.3f sec thread 0x%x",
+                   receiveTimeout, startSendTime, startSendTime - endSendTime, failResponseTime - startSendTime, VxGetCurrentThreadId() );
+        toClientConn.closeSkt();
+        return false;
+    }
+
+    rxBuf[ sizeof( rxBuf ) - 1 ]
+        toClientConn.closeSkt();
 
     double successResponseTime = pingTimer.elapsedSec();
 

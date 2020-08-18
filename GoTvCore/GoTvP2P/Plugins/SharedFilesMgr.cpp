@@ -295,14 +295,14 @@ void SharedFilesMgr::updateFileListPackets( void )
 			if ( 0 == pktFileListReply )
 			{
 				pktFileListReply = new PktFileListReply();
-				pktFileListReply->setListIndex( m_FileListPackets.size() );
+				pktFileListReply->setListIndex( ( uint32_t )m_FileListPackets.size() );
 			}
 
 			std::string remoteFileName = shareInfo->getRemoteFileName().c_str();
 			if( ( 0 != remoteFileName.size() )
 				&& ( 0 != shareInfo->getFileName().size() ))
 			{
-				if ( pktFileListReply->canAddFile( remoteFileName.size() + 1 ) )
+				if ( pktFileListReply->canAddFile( (int)(remoteFileName.size() + 1 ) ) )
 				{
 					pktFileListReply->addFile(	shareInfo->getFileHashId(),
 												shareInfo->getFileLength(),
@@ -313,7 +313,7 @@ void SharedFilesMgr::updateFileListPackets( void )
 				{
 					m_FileListPackets.push_back( pktFileListReply );
 					pktFileListReply = new PktFileListReply();
-					pktFileListReply->setListIndex( m_FileListPackets.size() );
+					pktFileListReply->setListIndex( (uint32_t)m_FileListPackets.size() );
 					pktFileListReply->addFile(	shareInfo->getFileHashId(),
 												shareInfo->getFileLength(),
 												shareInfo->getFileType(),

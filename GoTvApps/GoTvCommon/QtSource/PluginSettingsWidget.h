@@ -15,7 +15,7 @@
 
 #include "AppletBase.h"
 #include <GoTvInterface/IToGui.h>
-#include <GoTvCore/GoTvP2P/P2PEngine/PluginSettingMgr.h>
+#include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
 
 #include "ui_PluginSettingsWidget.h"
 
@@ -30,22 +30,27 @@ public:
 
     void						setupSettingsWidget( EApplet applet, EPluginType pluginType );
 
-    virtual QLabel *            getServiceUrlLabel() { return ui.m_UrlDescriptionLabel; }
-    virtual QLineEdit *         getServiceUrlEdit() { return ui.m_UrlEdit; }
+    virtual QLabel *            getServiceUrlLabel()        { return ui.m_UrlDescriptionLabel; }
+    virtual QLineEdit *         getServiceUrlEdit()         { return ui.m_UrlEdit; }
 
-    virtual QLabel *            getServiceNameLabel() { return ui.m_UserDisplayedNameLabel; }
-    virtual QLineEdit *         getServiceNameEdit() { return ui.m_NameEdit; }
+    virtual QLabel *            getServiceNameLabel()       { return ui.m_UserDisplayedNameLabel; }
+    virtual QLineEdit *         getServiceNameEdit()        { return ui.m_NameEdit; }
 
     virtual QLabel *            getServiceDescriptionLabel() { return ui.m_DescriptionLabel; }
     virtual QPlainTextEdit *    getServiceDescriptionEdit() { return ui.m_DescriptionEdit; }
 
-    virtual QPushButton *       getStartButton() { return ui.m_StartButton; }
-    virtual QPushButton *       getStopButton() { return ui.m_StopButton; }
+    virtual QPushButton *       getStartButton()            { return ui.m_StartButton; }
+    virtual QPushButton *       getStopButton()             { return ui.m_StopButton; }
+    virtual QPushButton *       getApplyButton()            { return ui.m_ApplyButton; }
 
-    virtual PermissionWidget *  getPermissionWidget() { return ui.m_PermissionWidget; }
-    virtual InformationWidget * getInformationWidget() { return ui.m_InfoWidget; }
+    virtual QComboBox *         getContentRatingComboBox()  { return ui.m_ContentRatingComboBox; }
+    virtual QComboBox *         getLanguageComboBox()       { return ui.m_LanguageComboBox; }
 
-    virtual ThumbnailChooseWidget * getThumbChooseWidget() { return ui.m_ThumbnailChooseWidget; }
+
+    virtual PermissionWidget *  getPermissionWidget()       { return ui.m_PermissionWidget; }
+    virtual InformationWidget * getInformationWidget()      { return ui.m_InfoWidget; }
+
+    virtual ThumbnailChooseWidget * getThumbnailChooseWidget()  { return ui.m_ThumbnailChooseWidget; }
 
 protected slots:
     virtual void                slotApplyServiceSettings();

@@ -417,7 +417,7 @@ void PluginBaseWebServer::onPktMyPicSendReq( VxSktBase * sktBase, VxPktHdr * pkt
 					poPkt->init();
 					poPkt->setThisDataLen( u32MyPicLen );
 					poPkt->setTotalDataLen( u32MyPicLen );
-					uint32_t u32ReadLen = fread( poPkt->getPayloadBuffer(), 1, u32MyPicLen, hMyPicFile );
+					uint32_t u32ReadLen = ( uint32_t )(fread( poPkt->getPayloadBuffer(), 1, u32MyPicLen, hMyPicFile ));
 					if( u32ReadLen == u32MyPicLen )
 					{
 						txPacket( netIdent, sktBase, &oPkt );
@@ -472,7 +472,7 @@ void PluginBaseWebServer::sendNextPicChunk( VxSktBase * sktBase, VxNetIdent * ne
 			poPkt->init();
 			poPkt->setThisDataLen( u32LenThisSend );
 			poPkt->setTotalDataLen( poSession->m_u32MyPicLen );
-			uint32_t u32ReadLen = fread( poPkt->getPayloadBuffer(), 1, u32LenThisSend, poSession->m_hMyPicFile );
+			uint32_t u32ReadLen = ( uint32_t )( fread( poPkt->getPayloadBuffer(), 1, u32LenThisSend, poSession->m_hMyPicFile ));
 			if( u32ReadLen == u32LenThisSend )
 			{
 				poPkt->calcPktLen();

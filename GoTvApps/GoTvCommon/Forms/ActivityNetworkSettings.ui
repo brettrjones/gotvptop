@@ -10,6 +10,12 @@
     <height>572</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Network Settings</string>
   </property>
@@ -38,6 +44,12 @@
    </item>
    <item>
     <widget class="QGroupBox" name="DialogItemsGroupBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="title">
       <string/>
      </property>
@@ -209,11 +221,22 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="m_IsPortOpenTesButton">
-        <property name="text">
-         <string>Test Is Port Open ( Can Direct Connect )</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="m_IsPortOpenTesButton">
+          <property name="text">
+           <string>Test Is Port Open ( Can Direct Connect )</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_NetworkHostTestButton">
+          <property name="text">
+           <string>Test Network Host</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <spacer name="verticalSpacer_2">

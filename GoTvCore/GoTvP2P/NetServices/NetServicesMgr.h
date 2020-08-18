@@ -40,6 +40,7 @@ class NetworkMgr;
 class HostList;
 
 typedef void (*MY_PORT_OPEN_CALLBACK_FUNCTION )( void *, EAppErr, std::string& );
+typedef void( *QUERY_HOST_ID_CALLBACK_FUNCTION )( void *, EAppErr, std::string& );
 
 class NetServicesMgr
 {
@@ -69,10 +70,12 @@ public:
 	void						queryWhatsMyIp( void );
 	void						netActionResultQueryWhatsMyIp( const char * ipAddress );
 	void						netActionResultIsMyPortOpen( EAppErr eAppErr, std::string& myExternalIp );
+    void                        netActionResultQueryHostOnlineId( EAppErr eAppErr, std::string& onlineId );
 	void						netActionResultAnnounce( EAppErr eAppErr, HostList * anchorList, EHostAction eHostAction = eHostActionAnnounce );
 	void						netActionResultRandomConnect( EAppErr eAppErr, HostList * anchorList );
 
 	void						setMyPortOpenResultCallback( MY_PORT_OPEN_CALLBACK_FUNCTION pfuncPortOpenCallbackHandler, void * userData );
+    void						setQueryHostOnlineIdResultCallback( QUERY_HOST_ID_CALLBACK_FUNCTION pfuncQueryHostIdCallbackHandler, void * userData );
 
 	RCODE						handleNetCmdPing( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 	RCODE						handleNetCmdPong( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
@@ -126,7 +129,10 @@ protected:
 
 	VxSktConnectSimple			m_SktToNetServices;
     MY_PORT_OPEN_CALLBACK_FUNCTION	m_pfuncPortOpenCallbackHandler{nullptr};
+    QUERY_HOST_ID_CALLBACK_FUNCTION	m_pfuncQueryHostIdCallbackHandler{ nullptr };
+
     void *						m_PortOpenCallbackUserData{nullptr};
+    void *						m_QueryHostIdCallbackUserData{ nullptr };
 
 	VxSktConnectSimple			m_SktToHost;
 

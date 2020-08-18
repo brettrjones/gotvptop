@@ -592,18 +592,6 @@
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceHost.cpp">
       <Filter>GoTvP2P\NetServices</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSetting.cpp">
-      <Filter>GoTvP2P\P2PEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSettingMgr.cpp">
-      <Filter>GoTvP2P\P2PEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSettingDb.cpp">
-      <Filter>GoTvP2P\P2PEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\P2PEngine\PluginSettingBinary.cpp">
-      <Filter>GoTvP2P\P2PEngine</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginClientConnectionTest.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
@@ -642,6 +630,33 @@
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineHostList.cpp">
       <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSetting.cpp">
+      <Filter>GoTvP2P\PluginSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSettingBinary.cpp">
+      <Filter>GoTvP2P\PluginSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSettingDb.cpp">
+      <Filter>GoTvP2P\PluginSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSettingMgr.cpp">
+      <Filter>GoTvP2P\PluginSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineTimerThread.cpp">
+      <Filter>GoTvP2P\P2PEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostConnect\HostConnectInfo.cpp">
+      <Filter>GoTvP2P\HostConnect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostConnect\HostConnectMgr.cpp">
+      <Filter>GoTvP2P\HostConnect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostConnect\HostConnectInterface.cpp">
+      <Filter>GoTvP2P\HostConnect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionQueryHostOnlineId.cpp">
+      <Filter>GoTvP2P\NetServices</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1339,18 +1354,6 @@
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceHost.h">
       <Filter>GoTvP2P\NetServices</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSetting.h">
-      <Filter>GoTvP2P\P2PEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSettingDb.h">
-      <Filter>GoTvP2P\P2PEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSettingMgr.h">
-      <Filter>GoTvP2P\P2PEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\P2PEngine\PluginSettingBinary.h">
-      <Filter>GoTvP2P\P2PEngine</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginClientConnectionTest.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
@@ -1389,6 +1392,30 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListXferSession.h">
       <Filter>GoTvP2P\HostListMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSetting.h">
+      <Filter>GoTvP2P\PluginSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingBinary.h">
+      <Filter>GoTvP2P\PluginSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingDb.h">
+      <Filter>GoTvP2P\PluginSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingMgr.h">
+      <Filter>GoTvP2P\PluginSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostConnect\HostConnectInterface.h">
+      <Filter>GoTvP2P\HostConnect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostConnect\HostConnectMgr.h">
+      <Filter>GoTvP2P\HostConnect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostConnect\HostConnectInfo.h">
+      <Filter>GoTvP2P\HostConnect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionQueryHostOnlineId.h">
+      <Filter>GoTvP2P\NetServices</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1472,6 +1499,12 @@
     </Filter>
     <Filter Include="GoTvP2P\HostListMgr">
       <UniqueIdentifier>{4ecc7908-7e5d-461b-8c9f-226e2b8ab83b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\PluginSettings">
+      <UniqueIdentifier>{79d61f45-dfd4-45b2-aff4-e88593f636a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoTvP2P\HostConnect">
+      <UniqueIdentifier>{eef67d46-4085-403c-b9c7-2575275f79cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

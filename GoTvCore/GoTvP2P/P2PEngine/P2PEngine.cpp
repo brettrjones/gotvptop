@@ -17,7 +17,7 @@
 #include "P2PConnectList.h"
 #include <GoTvInterface/IToGui.h>
 #include "Application.h"
-#include "PluginSettingMgr.h"
+#include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
 
 #include <GoTvCore/GoTvP2P/Network/NetworkMgr.h>
 #include <GoTvCore/GoTvP2P/Network/NetworkStateMachine.h>
@@ -81,6 +81,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
 , m_NetStatusAccum( *this )
 , m_AssetMgr( * new AssetMgr( *this ) )
 , m_HostListMgr( *new HostListMgr( *this ) )
+, m_HostConnectMgr( *new HostConnectMgr( *this ) )
 , m_ConnectionList( *this )
 , m_MediaProcessor( * ( new MediaProcessor( *this ) ) )
 , m_NetworkMgr( * new NetworkMgr( *this, peerMgr, m_BigListMgr, m_ConnectionList ) )
@@ -90,7 +91,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
 , m_NetworkStateMachine( * new NetworkStateMachine( *this, m_NetworkMgr ) )
 , m_HostTest( * ( new HostTest( *this, m_EngineSettings, m_NetServicesMgr ) ) )
 , m_PluginMgr( * new PluginMgr( *this ) )
-, m_PluginSettingMgr( GetPluginSettingMgrInstance() )
+, m_PluginSettingMgr( *this )
 , m_PluginServiceRelay( new PluginServiceRelay( *this, m_PluginMgr, &m_PktAnn ) )
 , m_PluginServiceFileShare( new PluginServiceFileShare( *this, m_PluginMgr, &m_PktAnn ) )
 , m_PluginNetServices( new PluginNetServices( *this, m_PluginMgr, &m_PktAnn ) )
@@ -337,9 +338,9 @@ bool P2PEngine::getPluginSetting( EPluginType pluginType, PluginSetting& pluginS
 }
 
 //============================================================================
-int P2PEngine::getPluginPermission( int iPluginType )
+EFriendState P2PEngine::getPluginPermission( int iPluginType )
 {
-	int iPermission = 0;
+    EFriendState iPermission = eFriendStateIgnore;
 	EPluginType ePluginType = (EPluginType)iPluginType;
 	if( ( ePluginTypeInvalid < ePluginType ) && 
 		( eMaxPluginType > ePluginType ) )

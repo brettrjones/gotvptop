@@ -16,11 +16,13 @@
 
 #include "PktAnnounce.h"
 
-
-#define PKT_HOST_ANNOUNCE_VERSION 1
+#include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingBinary.h>
 
 #pragma pack(push) 
 #pragma pack(1)
+
+class PluginSetting;
+
 class PktHostAnnounce :  public PktAnnounce
 {
 public:
@@ -28,9 +30,18 @@ public:
 
 	bool						isValidPktHostAnn( void );
 
+    void                        calcPktLen( void );
+    void                        setPktAnn( PktAnnounce& pktAnn );
+    void                        setSettingBinary( PluginSettingBinary& settingBinary );
+    PluginSettingBinary *       getSettingBinary( void );
+
     PktHostAnnounce *			makeHostAnnCopy( void );
     PktHostAnnounce *			makeHostAnnReverseCopy( void );
 	void						DebugHostDump( void );
+
+    uint32_t					m_SettingRes1 = 0;
+    uint32_t					m_SettingRes2 = 0;
+    uint8_t						m_SettingData[ MAX_PLUGIN_SETTING_STORAGE_LEN + 16 ];
 };
 
 #pragma pack(pop)

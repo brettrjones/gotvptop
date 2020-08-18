@@ -14,7 +14,6 @@
 
 #include "PktTypes.h"
 #include "PktsPluginSetting.h"
-#include "PktsPluginSetting.h"
 
 #include <string.h>
 

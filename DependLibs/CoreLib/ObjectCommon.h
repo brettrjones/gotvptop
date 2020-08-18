@@ -29,6 +29,7 @@
 #define OBJNAME_ACTIVITY_IS_PORT_OPEN_TEST		        "ActivityIsPortOpenTest"
 #define OBJNAME_ACTIVITY_MESSAGE_BOX					"ActivityMessageBox"
 #define OBJNAME_ACTIVITY_NET_SERVICE_TEST				"ActivityNetServiceTest"
+#define OBJNAME_ACTIVITY_NETWORK_HOST_TEST				"ActivityNetworkHostTest"
 #define OBJNAME_ACTIVITY_NETWORK_STATE					"ActivityNetworkState"
 #define OBJNAME_ACTIVITY_PERMISSIONS					"ActivityPermissions"
 #define OBJNAME_ACTIVITY_PERMISSIONS_RELAY				"ActivityPermissionsRelay"
