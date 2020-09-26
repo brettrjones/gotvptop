@@ -23,6 +23,7 @@
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/HostConnect/HostConnectMgr.h>
 #include <GoTvCore/GoTvP2P/HostListMgr/HostListCallbackInterface.h>
+#include <GoTvCore/GoTvP2P/HostMgr/OtherHostSrvMgr.h>
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h>
 #include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h>
 
@@ -98,6 +99,7 @@ public:
 	bool						isAppPaused( void )								{ return m_AppIsPaused; }
 	bool						isP2POnline( void );
     bool                        getHasHostService( EHostServiceType hostService );
+    OtherHostSrvMgr&            getOtherHostSrvMgr()                            { return m_OtherHostSrvMgr; }
 
 	void						lockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.lock(); }
 	PktAnnounce&				getMyPktAnnounce( void )						{ return m_PktAnn; }
@@ -609,6 +611,7 @@ protected:
 	PktImAliveReq				m_PktImAliveReq;
 
     VxThread                    m_TimerThread;
+    OtherHostSrvMgr             m_OtherHostSrvMgr;
 
 private:
 	P2PEngine() = delete; // don't allow default constructor

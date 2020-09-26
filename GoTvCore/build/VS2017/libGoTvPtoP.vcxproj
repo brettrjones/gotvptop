@@ -549,6 +549,9 @@
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostListEntry.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostSettingBase.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostTest.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\MyHostSrvMgr.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\OtherHostInfo.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\OtherHostSrvMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\RandomConnectEntry.cpp" />
     <ClCompile Include="..\..\GoTvP2P\IsPortOpenTest\IsPortOpenTest.cpp" />
     <ClCompile Include="..\..\GoTvP2P\IsPortOpenTest\PingResponseServer.cpp" />
@@ -817,6 +820,9 @@
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostListEntry.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostSettingBase.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostTest.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\MyHostSrvMgr.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\OtherHostInfo.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\OtherHostSrvMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\RandomConnectEntry.h" />
     <ClInclude Include="..\..\GoTvP2P\IsPortOpenTest\IsPortOpenTest.h" />
     <ClInclude Include="..\..\GoTvP2P\IsPortOpenTest\PingResponseServer.h" />

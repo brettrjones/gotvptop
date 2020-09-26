@@ -256,6 +256,8 @@ void NetworkStateAvail::runNetworkState( void )
         m_Engine.getNetStatusAccum().setIpAddress( directConnectTestResults.m_MyIpAddr );
     }
 
+    bool canDirectConnect = false;
+    bool testConnectHadError = false;
 	if( ( false == directConnectTestResults.getCanDirectConnect() )
 		&& m_Engine.getEngineSettings().getUseUpnpPortForward() )
 	{
@@ -296,6 +298,7 @@ void NetworkStateAvail::runNetworkState( void )
             m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, false );
 			m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
 			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeAnnounce );
+            canDirectConnect = true;
 		}
 	}
 	else
@@ -312,6 +315,7 @@ void NetworkStateAvail::runNetworkState( void )
             m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, false );
 			m_Engine.getToGui().toGuiUpdateMyIdent( &m_PktAnn );
 			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeAnnounce );
+            canDirectConnect = true;
 		}
 		else if( FirewallSettings::eFirewallTestAssumeFirewalled == firewallTestType )
 		{
@@ -324,9 +328,21 @@ void NetworkStateAvail::runNetworkState( void )
             LogModule( eLogNetworkState, LOG_ERROR, "ERROR invalid firewall test type %d  %3.3f\n", firewallTestType, availTimer.elapsedSec() );
 			m_NetworkStateMachine.setPktAnnounceWithCanDirectConnect( directConnectTestResults.m_MyIpAddr, true );
 			m_NetworkStateMachine.changeNetworkState( eNetworkStateTypeTestConnection );
+            testConnectHadError = true;
 		}
 	}
 
-	//LogModule( eLogNetworkState,  LOG_INFO, "111 NetworkStateAvail::runNetworkState done  %3.3f\n", availTimer.elapsedSec() );
+    /*
+    if( !testConnectHadError )
+    {
+        //LogModule( eLogNetworkState,  LOG_INFO, "111 NetworkStateAvail::runNetworkState done  %3.3f\n", availTimer.elapsedSec() );
+        // setup our hosting services
+        //m_Engine.getMyHostSrvMgr().enableHostedServices( true, canDirectConnect );
+
+        // setup connect to other hosting services
+        m_Engine.getOtherHostSrvMgr().enableHostedServices( true, canDirectConnect );
+
+    }
+    */
 }
 

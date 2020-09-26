@@ -15,6 +15,17 @@
 
 #include "config_gotvcore.h"
 
+enum EOtherHostType
+{
+    eOtherHostUnknown = 0,
+    eOtherHostNetworkHost = 1,
+    eOtherHostConnectTest = 2,
+    eOtherHostGroupHost = 3,
+    eOtherHostChatHost = 4,
+
+    eMaxOtherHostType
+};
+
 enum EHostAction
 {
 	eHostActionUnknown					= 0,

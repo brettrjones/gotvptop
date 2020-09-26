@@ -17,6 +17,12 @@
 #include <CoreLib/VxMutex.h>
 #include <CoreLib/VxGUID.h>
 
+class NetAvailStatusCallbackInterface
+{
+public:
+    virtual void				callbackNetAvailStatusChanged( ENetAvailStatus netAvalilStatus ) = 0;
+};
+
 class P2PEngine;
 
 // network state accumulator
@@ -25,6 +31,9 @@ class NetStatusAccum
 public:
     NetStatusAccum( P2PEngine& toGui );
     virtual ~NetStatusAccum() = default;
+
+    void                        addCallback( NetAvailStatusCallbackInterface* callbackInt );
+    void                        removeCallback( NetAvailStatusCallbackInterface* callbackInt );
 
     void                        resetNetStatus( void );
 
@@ -50,13 +59,15 @@ public:
     uint16_t                    getIpPort( void );
 
     EInternetStatus             getInternetStatus( void ) { return m_InternetStatus; }
-    ENetAvailStatus             getNetAvailStatus( void ) { return m_NetAvailStatus; }
+    ENetAvailStatus             getNetAvailStatus( void ) { m_AccumMutex.lock(); ENetAvailStatus status = m_NetAvailStatus;  m_AccumMutex.unlock(); return status;  }
 
 protected:
     void                        onNetStatusChange( void );
 
     P2PEngine&					m_Engine;
     VxMutex                     m_AccumMutex;
+    VxMutex                     m_AccumCallbackMutex;
+    std::vector<NetAvailStatusCallbackInterface*> m_CallbackList;
 
     bool                        m_InternetAvail{ false };
     bool                        m_NetworkHostAvail{ false };

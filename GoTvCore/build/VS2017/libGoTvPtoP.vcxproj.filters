@@ -658,6 +658,15 @@
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionQueryHostOnlineId.cpp">
       <Filter>GoTvP2P\NetServices</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\MyHostSrvMgr.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\OtherHostSrvMgr.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\OtherHostInfo.cpp">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config_gotvcore.h" />
@@ -1416,6 +1425,15 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetActionQueryHostOnlineId.h">
       <Filter>GoTvP2P\NetServices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\MyHostSrvMgr.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\OtherHostSrvMgr.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\OtherHostInfo.h">
+      <Filter>GoTvP2P\HostMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

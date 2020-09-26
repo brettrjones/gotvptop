@@ -139,10 +139,63 @@ void NetStatusAccum::onNetStatusChange( void )
         m_NetAvailStatus = netAvailStatus;
         m_AccumMutex.unlock();
 
-        LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Net Avail Status %s", DescribeNetAvailStatus( netAvailStatus ) );
-    }
+        m_AccumCallbackMutex.lock();
+        for( auto callback : m_CallbackList )
+        {
+            callback->callbackNetAvailStatusChanged( netAvailStatus );
+        }
 
-    m_Engine.getToGui().toGuiNetAvailableStatus( netAvailStatus );
+        m_AccumCallbackMutex.unlock();
+
+        LogModule( eLogNetAccessStatus, LOG_VERBOSE, "Net Avail Status %s", DescribeNetAvailStatus( netAvailStatus ) );
+        m_Engine.getToGui().toGuiNetAvailableStatus( netAvailStatus );
+    }   
+}
+
+//============================================================================
+void NetStatusAccum::addCallback( NetAvailStatusCallbackInterface* callbackInt )
+{
+    if( callbackInt )
+    {
+        ENetAvailStatus netAvailStatus = getNetAvailStatus();
+        m_AccumCallbackMutex.lock();
+        bool alreadyExist = false;
+        for( auto callback : m_CallbackList )
+        {
+            if( callback == callbackInt )
+            {
+                alreadyExist = true;
+                break;
+            }
+        }
+
+        if( !alreadyExist )
+        {
+            m_CallbackList.push_back( callbackInt );
+            callbackInt->callbackNetAvailStatusChanged( netAvailStatus );
+        }
+
+        m_AccumCallbackMutex.unlock();
+    }
+}
+
+//============================================================================
+void NetStatusAccum::removeCallback( NetAvailStatusCallbackInterface* callbackInt )
+{
+    if( callbackInt )
+    {
+        m_AccumCallbackMutex.lock();
+        for( auto iter = m_CallbackList.begin(); iter != m_CallbackList.begin(); ++iter )
+        {
+            if( *iter == callbackInt )
+            {
+                m_CallbackList.erase( iter );
+                break;
+            }
+        }
+
+        m_AccumCallbackMutex.unlock();
+    }
 }
 
 //============================================================================
