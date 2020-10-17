@@ -120,8 +120,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32filesystem.h \
     $$PWD/GoTvCore/GoTvP2P/Groups/GroupDefs.h \
-    $$PWD/GoTvCore/GoTvP2P/IsPortOpenTest/IsPortOpenTest.h \
-    $$PWD/GoTvCore/GoTvP2P/IsPortOpenTest/PingResponseServer.h \
 	$$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectInfo.h \
 	$$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectInterface.h \
     $$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectMgr.h \
@@ -185,6 +183,10 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Network/RcMulticastListen.h \
     $$PWD/GoTvCore/GoTvP2P/NetworkMonitor/NetworkMonitor.h \
     $$PWD/GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h \
+	$$PWD/GoTvCore/GoTvP2P/NetworkTest/IsPortOpenTest.h \
+    $$PWD/GoTvCore/GoTvP2P/NetworkTest/NetworkTestBase.h \
+    $$PWD/GoTvCore/GoTvP2P/NetworkTest/PingResponseServer.h \
+	$$PWD/GoTvCore/GoTvP2P/NetworkTest/QueryHostIdTest.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/BrowserHttpConnection.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/ContactList.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/EngineParams.h \
@@ -258,6 +260,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/TxSession.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/VideoFeedMgr.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/VoiceFeedMgr.h \
+	$$PWD/GoTvCore/GoTvP2P/QueryHostIdTest/QueryHostIdTest.h \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScan.h \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanAction.h \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanMatchedConnection.h \
@@ -332,8 +335,6 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/wav_header.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32filesystem.cpp \
-    $$PWD/GoTvCore/GoTvP2P/IsPortOpenTest/IsPortOpenTest.cpp \
-    $$PWD/GoTvCore/GoTvP2P/IsPortOpenTest/PingResponseServer.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectInfo.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectInterface.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectMgr.cpp \
@@ -390,6 +391,10 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/Network/RcMulticastListen.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetworkMonitor/NetworkMonitor.cpp \
+	$$PWD/GoTvCore/GoTvP2P/NetworkTest/IsPortOpenTest.cpp \
+    $$PWD/GoTvCore/GoTvP2P/NetworkTest/NetworkTestBase.cpp \
+    $$PWD/GoTvCore/GoTvP2P/NetworkTest/PingResponseServer.cpp \
+	$$PWD/GoTvCore/GoTvP2P/NetworkTest/QueryHostIdTest.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/BrowserHttpConnection.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/ContactList.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/EngineParams.cpp \
@@ -479,6 +484,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/Plugins/TxSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/VideoFeedMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/VoiceFeedMgr.cpp \
+	$$PWD/GoTvCore/GoTvP2P/QueryHostIdTest/QueryHostIdTest.cpp \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScan.cpp \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanAction.cpp \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanMatchedConnection.cpp \

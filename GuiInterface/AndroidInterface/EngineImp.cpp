@@ -165,6 +165,12 @@ void EngineImp::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, cons
 }
 
 //============================================================================
+void EngineImp::toGuiIsPortOpenStatus( const char *testName, ERunTestStatus eIsPortOpenStatus, const char * msg )
+{
+    JavaToGuiIsPortOpenStatus( testName, eIsPortOpenStatus, msg );
+}
+
+//============================================================================
 void EngineImp::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg )
 {
 	JavaToGuiRandomConnectStatus( eRandomConnectStatus, msg );

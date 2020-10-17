@@ -223,7 +223,9 @@ NativeToJavaClass * GetNativeToJavaClass( void )
 	poClass->m_methToGuiHostStatus 			= poClass->m_poEnv->GetStaticMethodID( ( jclass )poClass->m_JavaClass, "toGuiHostStatus", "(ILjava/lang/String;)V" );
 	//MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiHostStatus 0x%x\n", poClass->m_methToGuiHostStatus );
 	poClass->m_methToGuiIsPortOpenStatus 		= poClass->m_poEnv->GetStaticMethodID( ( jclass )poClass->m_JavaClass, "toGuiIsPortOpenStatus", "(ILjava/lang/String;)V" );
-	//MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiIsPortOpenStatus 0x%x\n", poClass->m_methToGuiIsPortOpenStatus );
+    //MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiHostStatus 0x%x\n", poClass->m_methToGuiHostStatus );
+    //poClass->m_methToGuiIsPortOpenStatus        = poClass->m_poEnv->GetStaticMethodID( ( jclass )poClass->m_JavaClass, "toGuiIsPortOpenStatus", "(Ljava/lang/String;ILjava/lang/String;)V" );
+    //MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiIsPortOpenStatus 0x%x\n", poClass->m_methToGuiIsPortOpenStatus );
 	poClass->m_methToGuiRandomConnectStatus 		= poClass->m_poEnv->GetStaticMethodID( ( jclass )poClass->m_JavaClass, "toGuiRandomConnectStatus", "(ILjava/lang/String;)V" );
 	//MyAndroidPrint( ANDROID_LOG_INFO, NATIVE_TO_JAVA_TAG, "m_methToGuiRandomConnectStatus 0x%x\n", poClass->m_methToGuiRandomConnectStatus );
 

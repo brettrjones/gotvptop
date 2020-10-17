@@ -56,12 +56,12 @@ VxGUID& VxConnectBaseInfo::getMyOnlineId()
 	return m_DirectConnectId; 
 }
 
-void			VxConnectBaseInfo::getMyOnlineId( std::string& strRetId )		{ return m_DirectConnectId.toHexString( strRetId ); }
+bool			VxConnectBaseInfo::getMyOnlineId( std::string& strRetId )		{ return m_DirectConnectId.toHexString( strRetId ); }
 uint64_t		VxConnectBaseInfo::getMyOnlineIdLoPart()						{ return m_DirectConnectId.getVxGUIDLoPart(); }
 uint64_t		VxConnectBaseInfo::getMyOnlineIdHiPart()						{ return m_DirectConnectId.getVxGUIDHiPart(); }
 
 VxGUID&			VxConnectBaseInfo::getRelayOnlineId()							{ return m_RelayConnectId; }
-void			VxConnectBaseInfo::getRelayOnlineId( std::string& strRetId )	{ return m_RelayConnectId.toHexString( strRetId ); }
+bool			VxConnectBaseInfo::getRelayOnlineId( std::string& strRetId )	{ return m_RelayConnectId.toHexString( strRetId ); }
 uint64_t		VxConnectBaseInfo::getRelayOnlineIdLoPart()						{ return m_RelayConnectId.getVxGUIDLoPart(); }
 uint64_t		VxConnectBaseInfo::getRelayOnlineIdHiPart()						{ return m_RelayConnectId.getVxGUIDHiPart(); }
 void			VxConnectBaseInfo::setRelayPort( uint16_t port )						{ m_RelayConnectId.setPort( port ); }		

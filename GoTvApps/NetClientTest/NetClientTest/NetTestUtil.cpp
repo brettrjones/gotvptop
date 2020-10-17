@@ -39,11 +39,12 @@ void NetTestUtil::buildNetCmd( std::string& retResult, ENetCmdType netCmd, std::
         + MAX_NET_CMD_LEN_CHARS
         + MAX_CMD_VERSION_LEN_DIGITS
         + MAX_ERROR_LEN_DIGITS
-        + ( int )strContent.length();
+        + ( int )strContent.length()
+        + 5; // \n\n and terminating 0
 
     if( strContent.length() )
     {
-        StdStringFormat( retResult, "http://GET /  1/%s/%13d/%s/%3d/%8d/%s/",
+        StdStringFormat( retResult, "http://GET /  1/%s/%13d/%s/%3d/%8d/%s/\r\n\r\n",
                             netServChallengeHash.c_str(),
                             totalLen,
                             strNetCmd.c_str(),
@@ -53,7 +54,7 @@ void NetTestUtil::buildNetCmd( std::string& retResult, ENetCmdType netCmd, std::
     }
     else
     {
-        StdStringFormat( retResult, "http://GET /  1/%s/%13d/%s/%3d/%8d//",
+        StdStringFormat( retResult, "http://GET /  1/%s/%13d/%s/%3d/%8d//\r\n\r\n",
                             netServChallengeHash.c_str(),
                             totalLen,
                             strNetCmd.c_str(),
@@ -97,6 +98,14 @@ ENetCmdType NetTestUtil::netCmdStringToEnum( const char * netCmd )
     {
         return eNetCmdIsMyPortOpenReply;
     }
+    else if( 0 == strcmp( NET_CMD_HOST_ID_REQ, netCmd ) )
+    {
+        return eNetCmdQueryHostOnlineIdReq;
+    }
+    else if( 0 == strcmp( NET_CMD_HOST_ID_REPLY, netCmd ) )
+    {
+        return eNetCmdQueryHostOnlineIdReply;
+    }
     else
     {
         return eNetCmdUnknown;
@@ -124,6 +133,10 @@ const char * NetTestUtil::netCmdEnumToString( ENetCmdType	eNetCmdType )
         return NET_CMD_PROFILE;
     case eNetCmdStoryboardPage:
         return NET_CMD_STORYBOARD;
+    case eNetCmdQueryHostOnlineIdReq:
+        return NET_CMD_HOST_ID_REQ;
+    case eNetCmdQueryHostOnlineIdReply:
+        return NET_CMD_HOST_ID_REPLY;
     case eNetCmdUnknown:
     default:
         return NET_CMD_UNKNOWN;
@@ -146,16 +159,16 @@ bool NetTestUtil::rxNetServiceCmd( VxSktConnectSimple * netServConn, char * rxBu
 
     if( iRxed != NET_SERVICE_HDR_LEN )
     {
-        LogMsg( LOG_ERROR, "### ERROR NetTestUtil::rxNetServiceCmd: hdr timeout %3.3f sec rxed data len %d\n", rxCmdTimer.elapsedSec(), iRxed );
+        LogMsg( LOG_ERROR, "### ERROR NetTestUtil::rxNetServiceCmd: hdr timeout %3.3f sec rxed data len %d", rxCmdTimer.elapsedSec(), iRxed );
         return false;
     }
 
     rxBuf[ NET_SERVICE_HDR_LEN ] = 0;
-    LogMsg( LOG_DEBUG, "### OK NetTestUtil::rxNetServiceCmd: elapsed %3.3f sec rxed data len %d (%s)\n", rxCmdTimer.elapsedSec(), iRxed, rxBuf );
+    LogMsg( LOG_DEBUG, "### OK NetTestUtil::rxNetServiceCmd: elapsed %3.3f sec rxed data len %d (%s)", rxCmdTimer.elapsedSec(), iRxed, rxBuf );
 
     if( ePluginTypeNetServices != parseHttpNetServiceHdr( rxBuf, NET_SERVICE_HDR_LEN, netServiceHdr ) )
     {
-        LogMsg( LOG_ERROR, "### ERROR NetTestUtil::rxNetServiceCmd: hdr parse error\n" );
+        LogMsg( LOG_ERROR, "### ERROR NetTestUtil::rxNetServiceCmd: hdr parse error" );
         return false;
     }
 
@@ -324,15 +337,10 @@ bool NetTestUtil::sendAndRecievePing( VxTimer& pingTimer, VxSktConnectSimple& to
 bool NetTestUtil::sendAndRecieveQueryHostOnlineId( VxTimer& pingTimer, VxSktConnectSimple& toClientConn, std::string& retPong, int receiveTimeout )
 {
     std::string strNetCmd;
-    std::string strPing = "QUERYHOSTID";
 
-    std::string netServChallengeHash;
-    uint16_t cryptoKeyPort = toClientConn.getCryptoKeyPort();
-    generateNetServiceChallengeHash( netServChallengeHash, cryptoKeyPort );
+    buildQueryHostIdUrl( VxSktConnectSimple * netServConn, std::string& strNetCmd );
 
-    NetTestUtil::buildNetCmd( strNetCmd, eNetCmdQueryHostOnlineIdReq, netServChallengeHash, strPing, 0, 1 );
-
-    LogModule( eLogIsPortOpenTest, LOG_ERROR, "## NetTestUtil::sendAndRecievePing: cypto port %d strNetCmd(%s) thread 0x%x", cryptoKeyPort, strNetCmd.c_str(), VxGetCurrentThreadId() );
+    LogModule( eLogNetService, LOG_ERROR, "## NetTestUtil::sendAndRecieveQueryHostOnlineId: cypto port %d strNetCmd(%s) thread 0x%x", cryptoKeyPort, strNetCmd.c_str(), VxGetCurrentThreadId() );
 
     // startSendTime is also the time it took to connect
     double startSendTime = pingTimer.elapsedSec();
@@ -340,7 +348,7 @@ bool NetTestUtil::sendAndRecieveQueryHostOnlineId( VxTimer& pingTimer, VxSktConn
     if( rc )
     {
         double failSendTime = pingTimer.elapsedSec();
-        LogModule( eLogIsPortOpenTest, LOG_ERROR, "## NetTestUtil::sendAndRecievePing: sendData error %d in %3.3f sec thread 0x%x", rc, failSendTime - startSendTime, VxGetCurrentThreadId() );
+        LogModule( eLogNetService, LOG_ERROR, "## NetTestUtil::sendAndRecieveQueryHostOnlineId: sendData error %d in %3.3f sec thread 0x%x", rc, failSendTime - startSendTime, VxGetCurrentThreadId() );
         toClientConn.closeSkt();
         return false;
     }
@@ -352,7 +360,7 @@ bool NetTestUtil::sendAndRecieveQueryHostOnlineId( VxTimer& pingTimer, VxSktConn
     if( false == NetTestUtil::rxNetServiceCmd( &toClientConn, rxBuf, sizeof( rxBuf ) - 1, netServiceHdr, receiveTimeout, receiveTimeout ) )
     {
         double failResponseTime = pingTimer.elapsedSec();
-        LogModule( eLogIsPortOpenTest, LOG_ERROR, "## NetTestUtil::sendAndRecievePing: no response with timeout spec %d and times connect %3.3f sec send %3.3f sec fail respond %3.3f sec thread 0x%x",
+        LogModule( eLogNetService, LOG_ERROR, "## NetTestUtil::sendAndRecieveQueryHostOnlineId: no response with timeout spec %d and times connect %3.3f sec send %3.3f sec fail respond %3.3f sec thread 0x%x",
                    receiveTimeout, startSendTime, startSendTime - endSendTime, failResponseTime - startSendTime, VxGetCurrentThreadId() );
         toClientConn.closeSkt();
         return false;
@@ -365,7 +373,7 @@ bool NetTestUtil::sendAndRecieveQueryHostOnlineId( VxTimer& pingTimer, VxSktConn
 
     if( netServiceHdr.m_ContentDataLen <= 0 )
     {
-        LogModule( eLogIsPortOpenTest, LOG_ERROR, "## NetTestUtil::sendAndRecievePing: No Content connect %3.3f sec send %3.3f sec fail respond %3.3f sec thread 0x%x",
+        LogModule( eLogNetService, LOG_ERROR, "## NetTestUtil::sendAndRecieveQueryHostOnlineId: No Content connect %3.3f sec send %3.3f sec fail respond %3.3f sec thread 0x%x",
                    startSendTime, endSendTime - startSendTime, successResponseTime - startSendTime, VxGetCurrentThreadId() );
         return false;
     }
@@ -374,12 +382,12 @@ bool NetTestUtil::sendAndRecieveQueryHostOnlineId( VxTimer& pingTimer, VxSktConn
         || ( 511 <= netServiceHdr.m_TotalDataLen )
         || ( '/' != rxBuf[ netServiceHdr.m_ContentDataLen - 1 ] ) )
     {
-        LogModule( eLogIsPortOpenTest, LOG_ERROR, "## NetTestUtil::sendAndRecievePing: invalid response  connect %3.3f sec send %3.3f sec fail respond %3.3f sec thread 0x%x",
+        LogModule( eLogNetService, LOG_ERROR, "## NetTestUtil::sendAndRecieveQueryHostOnlineId: invalid response  connect %3.3f sec send %3.3f sec fail respond %3.3f sec thread 0x%x",
                    startSendTime, endSendTime - startSendTime, successResponseTime - startSendTime, VxGetCurrentThreadId() );
         return false;
     }
 
-    LogModule( eLogIsPortOpenTest, LOG_VERBOSE, "## NetTestUtil::sendAndRecievePing: SUCCESS  connect %3.3f sec send %3.3f sec response %3.3f sec thread 0x%x",
+    LogModule( eLogNetService, LOG_VERBOSE, "## NetTestUtil::sendAndRecieveQueryHostOnlineId: SUCCESS  connect %3.3f sec send %3.3f sec response %3.3f sec thread 0x%x",
                startSendTime, endSendTime - startSendTime, successResponseTime - startSendTime, VxGetCurrentThreadId() );
     rxBuf[ netServiceHdr.m_ContentDataLen - 1 ] = 0;
     retPong = rxBuf;
@@ -453,7 +461,6 @@ bool NetTestUtil::verifyAllDataArrivedOfNetServiceUrl( VxSktBase * sktBase )
     {
         sktBase->sktBufAmountRead( 0 );
         LogMsg( LOG_ERROR, "verifyAllDataArrivedOfNetServiceUrl: not valid\n" );
-        LogMsg( LOG_ERROR, "parseHttpNetServiceUrl: not http prefix\n" );
         sktBase->closeSkt( 633 );
         return false;
     }

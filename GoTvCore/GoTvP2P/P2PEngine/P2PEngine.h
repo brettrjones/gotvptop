@@ -60,6 +60,8 @@ class PluginServiceFileShare;
 class PluginServiceRelay;
 class PluginSetting;
 class PluginSettingMgr;
+class QueryHostIdTest;
+
 
 class P2PEngine :	public IFromGui,
 					public PktHandlerBase,
@@ -103,7 +105,7 @@ public:
 
 	void						lockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.lock(); }
 	PktAnnounce&				getMyPktAnnounce( void )						{ return m_PktAnn; }
-	VxGUID&						getMyOnlineId( void )							{ return m_PktAnn.getMyOnlineId(); }
+    VxGUID						getMyOnlineId( void )							{ m_AnnouncePktMutex.lock(); VxGUID myId = m_PktAnn.getMyOnlineId(); m_AnnouncePktMutex.unlock(); return myId; }
 	void						unlockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.unlock(); }
 
     bool                        setPluginSetting( PluginSetting& pluginSetting );
@@ -200,6 +202,7 @@ public:
 
     virtual void				fromGuiVerifyNetHostSettings( void ) override;
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) override;
+    virtual void				fromGuiRunQueryHostIdTest( void ) override;
 
 	virtual void				fromGuiUpdateWebPageProfile(	const char *	pProfileDir,	// directory containing user profile
 																const char *	strGreeting,	// greeting text
@@ -594,6 +597,7 @@ protected:
 	PluginServiceFileShare *	m_PluginServiceFileShare;
 	PluginNetServices *			m_PluginNetServices;
 	IsPortOpenTest&				m_IsPortOpenTest;
+    QueryHostIdTest&			m_QueryHostIdTest;
 
 	RcScan						m_RcScan;
 

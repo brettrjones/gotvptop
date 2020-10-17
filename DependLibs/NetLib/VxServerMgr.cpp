@@ -179,8 +179,6 @@ bool VxServerMgr::startListening( uint16_t u16ListenPort, const char * ip )
         // don't know why reuse port doesn't work
         VxSetSktAllowReusePort( sock );
 
-        LogModule( eLogListen, LOG_INFO, "StartListen binding ip %s port %d thread 0x%x", ip, u16ListenPort, VxGetCurrentThreadId() );
-
         struct sockaddr_in listenAddr;
         memset( &listenAddr, 0, sizeof( struct sockaddr_in ) );
         listenAddr.sin_family = AF_INET;
@@ -243,8 +241,6 @@ bool VxServerMgr::startListening( uint16_t u16ListenPort, const char * ip )
 
 	// don't know why reuse port doesn't work
 	VxSetSktAllowReusePort( sock );
-
-    LogModule( eLogListen, LOG_INFO, "StartListen binding ip %s port %d thread 0x%x", ip, u16ListenPort, VxGetCurrentThreadId() );
 
 	struct sockaddr_in listenAddr;
     memset(&listenAddr, 0, sizeof( struct sockaddr_in ) );

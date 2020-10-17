@@ -33,7 +33,9 @@
 //#include <GoTvCore/GoTvP2P/WebRelay/RcWebRelaysMgr.h>
 #include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>
 
-#include <GoTvCore/GoTvP2P/IsPortOpenTest/IsPortOpenTest.h>
+#include <GoTvCore/GoTvP2P/NetworkTest/IsPortOpenTest.h>
+#include <GoTvCore/GoTvP2P/NetworkTest/QueryHostIdTest.h>
+
 #include <GoTvCore/GoTvP2P/HostMgr/HostTest.h>
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetMgr.h>
@@ -96,6 +98,7 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
     , m_PluginServiceFileShare( new PluginServiceFileShare( *this, m_PluginMgr, &m_PktAnn ) )
     , m_PluginNetServices( new PluginNetServices( *this, m_PluginMgr, &m_PktAnn ) )
     , m_IsPortOpenTest( *new IsPortOpenTest( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
+    , m_QueryHostIdTest( *new QueryHostIdTest( *this, m_EngineSettings, m_NetServicesMgr, m_NetServicesMgr.getNetUtils() ) )
     , m_RcScan( *this, m_ConnectionList )
     , m_eAppState( eAppStateInvalid )
     , m_eFriendView( eFriendViewEverybody )

@@ -38,16 +38,22 @@ public:
 
 	EPluginType					parseHttpNetServiceUrl( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 	EPluginType					parseHttpNetServiceHdr( char * dataBuf, int dataLen, NetServiceHdr& netServiceHdr );
-	//bool						getNetServiceUrlContent( VxSktBase * sktBase, std::string& retFromClientContent );
 	bool						getNetServiceUrlContent( std::string& netServiceUrl, std::string& retFromClientContent );
 
 	int							getIndexOfCrLfCrLf( VxSktBase * sktBase );
 
 	RCODE						buildAndSendCmd( VxSktBase * sktBase, ENetCmdType netCmd, std::string& cmdContent, int errCode = 0, int version = 1 );
-	void						buildNetCmd( std::string& retResult, ENetCmdType netCmd, std::string& netServChallengeHash, std::string& strContent, int errCode = 0, int version = 1 );
-	// returns total length of data to send
-	int							buildNetCmdHeader( std::string& retResult, ENetCmdType netCmd, std::string& netServChallengeHash, int contentLength, int errCode = 0, int version = 1 );
-	void						buildIsMyPortOpenUrl( VxSktConnectSimple * netServConn, std::string& strHttpUrl, uint16_t u16Port );
+    RCODE                       buildAndSendCmd( VxSktConnectSimple * sktBase, ENetCmdType netCmd, std::string& cmdContent, int errCode = 0, int version = 1 );
+    
+    bool						buildIsMyPortOpenUrl( VxSktConnectSimple * netServConn, std::string& strHttpUrl, uint16_t u16Port );
+    bool						buildQueryHostIdUrl( VxSktConnectSimple * netServConn, std::string& strNetCmdHttpUrl );
+    
+    bool 						buildNetCmd( VxSktConnectSimple * netServConn, std::string& retResult, ENetCmdType netCmd, std::string& strContent, int errCode = 0, int version = 1 );
+    bool 						buildNetCmd( uint16_t cryptoPort, std::string& retResult, ENetCmdType netCmd, std::string& strContent, int errCode = 0, int version = 1 );
+    void						buildNetCmd( std::string& retResult, ENetCmdType netCmd, std::string& netServChallengeHash, std::string& strContent, int errCode = 0, int version = 1 );
+
+    // returns total length of data to send
+    int							buildNetCmdHeader( std::string& retResult, ENetCmdType netCmd, std::string& netServChallengeHash, int contentLength, int errCode = 0, int version = 1 );
 
 	void						generateNetServiceChallengeHash(	std::string&			strKey,	
 																	VxSktBase *				skt );

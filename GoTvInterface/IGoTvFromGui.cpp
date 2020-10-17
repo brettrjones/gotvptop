@@ -344,6 +344,12 @@ void IGoTv::fromGuiRunIsPortOpenTest( uint16_t port )
 }
 
 //============================================================================
+void IGoTv::fromGuiRunQueryHostIdTest( void )
+{
+    getPtoP().fromGuiRunQueryHostIdTest();
+}
+
+//============================================================================
 void IGoTv::fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings )
 {
     getPtoP().fromGuiGetFileShareSettings( fileShareSettings );

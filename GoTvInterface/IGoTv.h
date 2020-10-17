@@ -274,6 +274,7 @@ public:
     virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) override;
     virtual void				toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg = "" ) override;
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
+    virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) override;
     virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) override;
 
     virtual void				toGuiContactOnline( VxNetIdent * netIdent, bool newContact = false ) override;
@@ -467,6 +468,7 @@ public:
 
     virtual void				fromGuiVerifyNetHostSettings( void );
     virtual void				fromGuiRunIsPortOpenTest( uint16_t port );
+    virtual void				fromGuiRunQueryHostIdTest( void );
 
     virtual void				fromGuiGetFileShareSettings( FileShareSettings& fileShareSettings );
     virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings );

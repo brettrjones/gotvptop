@@ -268,22 +268,13 @@ void ActivityNetworkSettings::slotRunIsPortOpenButtonClick( void )
 //============================================================================
 void ActivityNetworkSettings::slotRunNetworkHostTestButtonClick( void )
 {
-    uint16_t u16Port = ui.PortEdit->text().toUShort();
-    if( 0 != u16Port )
-    {
-        updateSettingsFromDlg();
-        ActivityNetworkHostTest * dlg = new ActivityNetworkHostTest(
-            m_MyApp,
-            u16Port,
-            this );
-        dlg->exec();
-    }
-    else
-    {
-        QMessageBox::information( this, tr( "Error" ), tr( "TCP Port cannot be zero." ) );
-    }
+    updateSettingsFromDlg();
+    ActivityNetworkHostTest * dlg = new ActivityNetworkHostTest(
+        m_MyApp,
+        u16Port,
+        this );
+    dlg->exec();
 }
-
 
 //============================================================================
 void ActivityNetworkSettings::slotUseUpnpCheckBoxClick( void )

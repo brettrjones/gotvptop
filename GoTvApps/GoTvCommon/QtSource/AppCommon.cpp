@@ -1077,6 +1077,31 @@ void AppCommon::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, cons
 	emit signalIsPortOpenStatus( eIsPortOpenStatus, formatedMsg.c_str() );
 }
 
+//============================================================================
+void AppCommon::toGuiRunTestStatus( const char *testName, ERunTestStatus eIsPortOpenStatus, const char * msg )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    const char * portOpenStatus = DescribePortOpenStatus( eIsPortOpenStatus );
+    std::string formatedMsg;
+    if( msg )
+    {
+        StdStringFormat( formatedMsg, "#%s %s", portOpenStatus, msg );
+    }
+    else
+    {
+        StdStringFormat( formatedMsg, "#%s", portOpenStatus );
+    }
+
+    emit signalLog( 0, formatedMsg.c_str() );
+    emit signalStatusMsg( formatedMsg.c_str() );
+
+    emit signalIsPortOpenStatus( eIsPortOpenStatus, formatedMsg.c_str() );
+}
+
 
 //============================================================================
 void AppCommon::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg )

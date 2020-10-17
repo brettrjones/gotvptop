@@ -231,6 +231,8 @@ public:
 	virtual void				fromGuiVerifyNetHostSettings( void ) = 0;
 	/// Run test to see if TCP port is open and what the external IP Address is
 	virtual void				fromGuiRunIsPortOpenTest( uint16_t port ) = 0;
+    /// Run test to query host guid
+    virtual void				fromGuiRunQueryHostIdTest( void ) = 0;
 
 	/// Set file share settings
 	virtual void				fromGuiSetFileShareSettings( FileShareSettings& fileShareSettings ) = 0;

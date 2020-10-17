@@ -61,14 +61,18 @@ namespace
                     | eLogStorage
                     | eLogAssets
                     | eLogPlugins
+                    // | eLogWindowPositions
                     // | eLogStartup
                     | eLogHosts
+                    //| eLogPlayer
                     | eLogTcpData
                     | eLogUdpData
-        //| eLogNetworkRelay
-        //| eLogAcceptConn
-        //| eLogPlayer
-        //| eLogWindowPositions
+                    //| eLogAcceptConn
+                    //| eLogNetworkRelay
+                    | eLogNetService
+                    | eLogQueryHostIdTest
+
+
                     );
 #else
     uint32_t g_ModuleEnableLoggingFlags = 0;

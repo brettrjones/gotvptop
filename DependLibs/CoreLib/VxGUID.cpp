@@ -271,11 +271,12 @@ bool VxGUID::isVxGUIDValid() const
 }
 
 //============================================================================
-void VxGUID::toHexString( std::string& strRetId )	
+bool VxGUID::toHexString( std::string& strRetId )	
 { 
 	char lclBuf[ 33 ];
     toHexString( lclBuf );
 	strRetId = lclBuf; 
+    return isVxGUIDValid() && !strRetId.empty();
 } 
 
 //============================================================================
@@ -415,7 +416,7 @@ VxGUID&	VxGUID::getVxGUID( void )						            { return *this; }
 
 //============================================================================
 //! return users online id as string
-void VxGUID::getVxGUID( std::string& strRetId )			            { return this->toHexString( strRetId ); }
+bool VxGUID::getVxGUID( std::string& strRetId )			            { return this->toHexString( strRetId ); }
 
 //============================================================================
 //! set users online id

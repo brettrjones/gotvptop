@@ -553,8 +553,6 @@
     <ClCompile Include="..\..\GoTvP2P\HostMgr\OtherHostInfo.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\OtherHostSrvMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\RandomConnectEntry.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\IsPortOpenTest\IsPortOpenTest.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\IsPortOpenTest\PingResponseServer.cpp" />
     <ClCompile Include="..\..\GoTvP2P\MediaProcessor\AudioUtil.cpp" />
     <ClCompile Include="..\..\GoTvP2P\MediaProcessor\EchoCancel.cpp" />
     <ClCompile Include="..\..\GoTvP2P\MediaProcessor\MediaProcessor.cpp" />
@@ -571,6 +569,10 @@
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceUtils.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetworkMonitor\NetStatusAccum.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetworkMonitor\NetworkMonitor.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\NetworkTest\IsPortOpenTest.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\NetworkTest\NetworkTestBase.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\NetworkTest\PingResponseServer.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\NetworkTest\QueryHostIdTest.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Network\ConnectRequest.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Network\DirectConnectTester.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Network\Firewall.cpp" />
@@ -824,8 +826,6 @@
     <ClInclude Include="..\..\GoTvP2P\HostMgr\OtherHostInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\OtherHostSrvMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\RandomConnectEntry.h" />
-    <ClInclude Include="..\..\GoTvP2P\IsPortOpenTest\IsPortOpenTest.h" />
-    <ClInclude Include="..\..\GoTvP2P\IsPortOpenTest\PingResponseServer.h" />
     <ClInclude Include="..\..\GoTvP2P\MediaProcessor\AudioUtil.h" />
     <ClInclude Include="..\..\GoTvP2P\MediaProcessor\EchoCancel.h" />
     <ClInclude Include="..\..\GoTvP2P\MediaProcessor\MediaClient.h" />
@@ -846,6 +846,10 @@
     <ClInclude Include="..\..\GoTvP2P\NetServices\NetServiceUtils.h" />
     <ClInclude Include="..\..\GoTvP2P\NetworkMonitor\NetStatusAccum.h" />
     <ClInclude Include="..\..\GoTvP2P\NetworkMonitor\NetworkMonitor.h" />
+    <ClInclude Include="..\..\GoTvP2P\NetworkTest\IsPortOpenTest.h" />
+    <ClInclude Include="..\..\GoTvP2P\NetworkTest\NetworkTestBase.h" />
+    <ClInclude Include="..\..\GoTvP2P\NetworkTest\PingResponseServer.h" />
+    <ClInclude Include="..\..\GoTvP2P\NetworkTest\QueryHostIdTest.h" />
     <ClInclude Include="..\..\GoTvP2P\Network\ConnectRequest.h" />
     <ClInclude Include="..\..\GoTvP2P\Network\DirectConnectTester.h" />
     <ClInclude Include="..\..\GoTvP2P\Network\Firewall.h" />

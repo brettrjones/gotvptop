@@ -41,7 +41,7 @@ public:
     void                        setNetHostAvail( bool avail );
     void                        setConnectionTestAvail( bool avail );
     void                        setDirectConnectTested( bool isTested, bool requiresRelay, std::string& myExternalIp );
-    void                        setQueryHostOnlineId( bool noError, std::string& onlineId );
+    void                        setQueryHostOnlineId( bool noError, VxGUID& onlineId );
     void                        setConnectToRelay( bool connectedToRelay );
     void                        setIpAddress( std::string ipAddr );
     void                        setIpPort( uint16_t ipPort );

@@ -11,7 +11,7 @@
 //
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
-//============================================================================Service for port
+//============================================================================
 
 #include "NetActionAnnounce.h"
 #include "NetServicesMgr.h"

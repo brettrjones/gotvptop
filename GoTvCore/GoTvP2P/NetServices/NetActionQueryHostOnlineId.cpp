@@ -32,11 +32,11 @@ NetActionQueryHostOnlineId::NetActionQueryHostOnlineId( NetServicesMgr& netServi
 //============================================================================
 void NetActionQueryHostOnlineId::doAction( void )
 {
-    std::string hostOnlineId;
+    VxGUID hostOnlineId;
 	VxSktConnectSimple * netServConn = m_NetServicesMgr.actionReqConnectToNetService();
 	if( NULL == netServConn )
 	{
-		m_NetServicesMgr.netActionResultQueryHostOnlineId( eAppErrFailedToConnect, hostOnlineId );
+		m_NetServicesMgr.netActionResultQueryHostId( eAppErrFailedToConnect, hostOnlineId );
 		return;
 	}
 
@@ -47,7 +47,7 @@ void NetActionQueryHostOnlineId::doAction( void )
 	if( rc )
 	{
 		LogMsg( LOG_ERROR, "NetActionQueryHostOnlineId::doAction: sendData error %d\n", rc );
-		m_NetServicesMgr.netActionResultQueryHostOnlineId( eAppErrFailedToConnect, hostOnlineId );
+		m_NetServicesMgr.netActionResultQueryHostId( eAppErrFailedToConnect, hostOnlineId );
 		return;
 	}
 
@@ -67,7 +67,7 @@ void NetActionQueryHostOnlineId::doAction( void )
 		|| ( false == bGotCrLfCrLf ) )
 	{
 		LogMsg( LOG_ERROR, "NetActionQueryHostOnlineId::doAction: failed to recieve response\n" );
-		m_NetServicesMgr.netActionResultQueryHostOnlineId( eAppErrRxError, hostOnlineId );
+		m_NetServicesMgr.netActionResultQueryHostId( eAppErrRxError, hostOnlineId );
 		return;
 	}
 
@@ -78,31 +78,29 @@ void NetActionQueryHostOnlineId::doAction( void )
 
 	if( 6 != astrParts.size() )
 	{
-		LogMsg( LOG_ERROR, "NetActionQueryHostOnlineId::doAction: failed to recieve valid ip\n" );
-		m_NetServicesMgr.netActionResultQueryHostOnlineId( eAppErrParseError, hostOnlineId );
+		LogMsg( LOG_ERROR, "NetActionQueryHostOnlineId::doAction: failed to recieve valid id\n" );
+		m_NetServicesMgr.netActionResultQueryHostId( eAppErrParseError, hostOnlineId );
 		return;
 	}
 
-	std::string strPing = astrParts[4];
-	const char * pIp = strchr( strPing.c_str(), '-' );
-	if( 0 == pIp )
-	{
-		LogMsg( LOG_ERROR, "NetActionQueryHostOnlineId::doAction: failed to parse id\n" );
-		m_NetServicesMgr.netActionResultQueryHostOnlineId( eAppErrParseError, hostOnlineId );
-		return;
-	}
-	
-	pIp++;
-    hostOnlineId = pIp;
-    if( hostOnlineId.empty() )
+	std::string strContent = astrParts[4];
+    if( strContent.empty() )
     {
         LogMsg( LOG_ERROR, "NetActionQueryHostOnlineId::doAction: failed to parse online id\n" );
-        m_NetServicesMgr.netActionResultQueryHostOnlineId( eAppErrParseError, hostOnlineId );
+        m_NetServicesMgr.netActionResultQueryHostId( eAppErrParseError, hostOnlineId );
         return;
     }
 
-	LogMsg( LOG_INFO, "NetActionQueryHostOnlineId::doAction: host online id is %s\n", hostOnlineId.c_str() );
-	m_NetServicesMgr.netActionResultQueryHostOnlineId( eAppErrNone, hostOnlineId );
+    hostOnlineId.fromVxGUIDHexString( strContent.c_str() );
+    if( !hostOnlineId.isVxGUIDValid() )
+    {
+        LogMsg( LOG_ERROR, "NetActionQueryHostOnlineId::doAction: failed to parse online id\n" );
+        m_NetServicesMgr.netActionResultQueryHostId( eAppErrParseError, hostOnlineId );
+        return;
+    }
+
+    LogMsg( LOG_INFO, "NetActionQueryHostOnlineId::doAction: host online id is %s\n", strContent.c_str() );
+	m_NetServicesMgr.netActionResultQueryHostId( eAppErrNone, hostOnlineId );
 }
 
 //============================================================================

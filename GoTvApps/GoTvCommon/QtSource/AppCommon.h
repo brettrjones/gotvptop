@@ -404,6 +404,7 @@ public:
     virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" ) override;
     virtual void				toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg = "" ) override;
     virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) override;
+    virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) override;
     virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) override;
 
     virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) override;
@@ -586,6 +587,7 @@ signals:
 	void						signalUserMsg( QString strMsg );
 	void						signalHostStatus( EHostTestStatus eHostStatus, QString strMsg );
 	void						signalIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, QString strMsg );
+    void						signalRunTestStatus( QString testName, ERunTestStatus eRunTestStatus, QString strMsg );
 	void						signalRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, QString strMsg );
     void						signalNetworkStateChanged( ENetworkStateType eNetworkState );
     void						signalNetAvailStatus( ENetAvailStatus eNetAvailStatus );

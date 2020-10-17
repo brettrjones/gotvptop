@@ -49,7 +49,7 @@ public:
 
 	void						setMyOnlineId( uint64_t u64HiPart, uint64_t u64LoPart );
 	VxGUID&						getMyOnlineId();
-	void						getMyOnlineId( std::string& strRetId );
+	bool						getMyOnlineId( std::string& strRetId );
     std::string				    getMyOnlineIdHexString( void )  { return m_DirectConnectId.toHexString(); }
     uint64_t					getMyOnlineIdLoPart();
 	uint64_t					getMyOnlineIdHiPart();
@@ -57,7 +57,7 @@ public:
 	uint16_t					getMyOnlinePort( void );
 
 	VxGUID&						getRelayOnlineId();
-	void						getRelayOnlineId( std::string& strRetId );
+    bool						getRelayOnlineId( std::string& strRetId );
 	uint64_t					getRelayOnlineIdLoPart();
 	uint64_t					getRelayOnlineIdHiPart();
 	void						setRelayPort( uint16_t port );

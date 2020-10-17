@@ -47,7 +47,7 @@ public:
 
 	bool						isVxGUIDValid()	const;
 	std::string					toGUIDStandardFormatedString( void );
-	void						toHexString( std::string& strRetId );
+	bool						toHexString( std::string& strRetId );
     // buffer must be at least 33 characters in length
     void                        toHexString( char * retBuf );
 	std::string					toHexString( void );
@@ -59,7 +59,7 @@ public:
 	uint64_t					getVxGUIDHiPart() const;
 	//! return users online id
 	VxGUID&						getVxGUID( void );
-	void						getVxGUID( std::string& strRetId );
+	bool 						getVxGUID( std::string& strRetId );
 	void						setVxGUID( const char * pId );
 	void						setVxGUID( VxGUID& oId );
 	void						setVxGUID( uint64_t& u64HiPart, uint64_t& u64LoPart );
@@ -68,7 +68,6 @@ public:
 	int							compareTo( VxGUID& guid );
 	// returns true if guids are same value
 	bool						isEqualTo( VxGUID& guid );
-
 
 	std::string					describeVxGUID( void );
 	static bool					isVxGUIDHexStringValid( const char * pId );

@@ -40,7 +40,7 @@ class NetworkMgr;
 class HostList;
 
 typedef void (*MY_PORT_OPEN_CALLBACK_FUNCTION )( void *, EAppErr, std::string& );
-typedef void( *QUERY_HOST_ID_CALLBACK_FUNCTION )( void *, EAppErr, std::string& );
+typedef void( *QUERY_HOST_ID_CALLBACK_FUNCTION )( void *, EAppErr, VxGUID& );
 
 class NetServicesMgr
 {
@@ -70,7 +70,7 @@ public:
 	void						queryWhatsMyIp( void );
 	void						netActionResultQueryWhatsMyIp( const char * ipAddress );
 	void						netActionResultIsMyPortOpen( EAppErr eAppErr, std::string& myExternalIp );
-    void                        netActionResultQueryHostOnlineId( EAppErr eAppErr, std::string& onlineId );
+    void                        netActionResultQueryHostId( EAppErr eAppErr, VxGUID& hostId );
 	void						netActionResultAnnounce( EAppErr eAppErr, HostList * anchorList, EHostAction eHostAction = eHostActionAnnounce );
 	void						netActionResultRandomConnect( EAppErr eAppErr, HostList * anchorList );
 
@@ -83,6 +83,8 @@ public:
 	RCODE						handleNetCmdIsMyPortOpenReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 	RCODE						handleNetCmdHostReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 	RCODE						handleNetCmdHostReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+    RCODE						handleNetCmdQueryHostIdReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
+    RCODE						handleNetCmdQueryHostIdReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 
 	void						runNetActions( void );
 
@@ -100,6 +102,10 @@ public:
 															int						tcpListenPort,
 															std::string&			retMyExternalIp,
 															bool					sendMsgToUser );
+    EAppErr                     sendAndRecieveQueryHostId( VxTimer&				portTestTimer,
+                                                           VxSktConnectSimple *	netServConn,
+                                                           VxGUID&			    retHostId,
+                                                           bool					sendMsgToUser );
 	bool						sendAndRecievePing( VxTimer& pingTimer, VxSktConnectSimple& toClientConn, std::string& retPong, int receiveTimeout = 3000 );
 
 protected:

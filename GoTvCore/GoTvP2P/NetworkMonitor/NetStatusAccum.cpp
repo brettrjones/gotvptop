@@ -250,7 +250,7 @@ void NetStatusAccum::setDirectConnectTested( bool isTested, bool requiresRelay, 
 }
 
 //============================================================================
-void NetStatusAccum::setQueryHostOnlineId( bool noError, std::string& onlineId )
+void NetStatusAccum::setQueryHostOnlineId( bool noError, VxGUID& onlineId )
 {
     if( noError )
     {

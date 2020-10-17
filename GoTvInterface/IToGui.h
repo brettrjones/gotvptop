@@ -105,6 +105,23 @@ enum EIsPortOpenStatus
 	eMaxIsPortOpenStatusType
 };
 
+//! \public run a test like query host id state
+enum ERunTestStatus
+{
+    eRunTestStatusUnknown = 0,
+    eRunTestStatusLogMsg = 1,
+
+    eRunTestStatusTestSuccess = 2,
+    eRunTestStatusTestFail = 3,
+    eRunTestStatusConnectFail = 4,
+    eRunTestStatusConnectionDropped = 5,
+    eRunTestStatusInvalidResponse = 6,
+    eRunTestStatusTestComplete = 7,
+
+    eMaxRunTestStatusType
+};
+
+
 //! Describe Direct Connect test state as text
 const char * DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus );
 
@@ -146,6 +163,8 @@ public:
 
 	/// Send is port open test state/status to GUI
 	virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" ) = 0;
+    /// Send state/status to GUI (currently just query host id)
+    virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) = 0;
 	/// Send connect by phone shake status to GUI
 	virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) = 0;
 	/// Send relay status to GUI for display

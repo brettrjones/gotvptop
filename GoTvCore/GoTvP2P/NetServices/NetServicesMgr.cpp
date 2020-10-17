@@ -367,14 +367,6 @@ bool NetServicesMgr::sendAndRecievePing( VxTimer& pingTimer, VxSktConnectSimple&
 }
 
 //============================================================================
-RCODE NetServicesMgr::handleNetCmdIsMyPortOpenReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
-{
-	RCODE rc = -1;
-	// not called here.. handled in NetAction
-	return rc;
-}
-
-//============================================================================
 RCODE NetServicesMgr::handleNetCmdHostReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
 {
 	return m_NetServiceHost.handleNetCmdHostReq( sktBase, netServiceHdr );
@@ -479,28 +471,6 @@ void NetServicesMgr::netActionResultIsMyPortOpen( EAppErr eAppErr, std::string& 
 	{
 		m_pfuncPortOpenCallbackHandler( m_PortOpenCallbackUserData, eAppErr, myExternalIp );
 	}
-}
-
-//============================================================================
-void NetServicesMgr::netActionResultQueryHostOnlineId( EAppErr eAppErr, std::string& onlineId )
-{
-    if( eAppErr == eAppErrNone )
-    {
-        LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultQueryHostOnlineIp result %s\n", onlineId.c_str() );
-        // tested and can direct connect
-        m_Engine.getNetStatusAccum().setQueryHostOnlineId( true, onlineId );
-    }
-    else
-    {
-        // port open test failed with other error
-        LogModule( eLogNetworkState, LOG_INFO, "NetServicesMgr::netActionResultIsMyPortOpen err %d extern ip %s\n", eAppErr, onlineId.c_str() );
-        m_Engine.getNetStatusAccum().setQueryHostOnlineId( false, onlineId );
-    }
-
-    if( m_pfuncQueryHostIdCallbackHandler )
-    {
-        m_pfuncPortOpenCallbackHandler( m_pfuncQueryHostIdCallbackHandler, eAppErr, onlineId );
-    }
 }
 
 //============================================================================
@@ -784,33 +754,6 @@ static int uint16_t = 0;
 		return portOpenTestError; // messages sent and result set and no sense in retying because all ports blocked on cell network
 	}
 
-	// try again with new connection
-    /*
-    LogModule( eLogIsPortOpenTest, "NetActionIsMyPortOpen::doAction: retry port open test\n" );
-
-	VxSktConnectSimple portOpenConn2;
-	if( actionReqConnectToNetService( portOpenConn2 ) )
-	{
-		portOpenTestError = sendAndRecieveIsMyPortOpen( portTestTimer, 
-														&portOpenConn2, 
-														tcpListenPort,
-														retMyExternalIp,
-														true );
-		portOpenConn2.closeSkt();
-	}
-
-	if( eAppErrNone == portOpenTestError )
-	{
-        LogModule( eLogIsPortOpenTest, "NetActionIsMyPortOpen::doAction: (2)Your TCP Port %d IS OPEN :) IP is lcl ip %s->%s result %s in %3.3f sec\n", tcpListenPort, lclIP.c_str(), netSrvUrl.c_str(), retMyExternalIp.c_str(), portTestTimer.elapsedSec() );
-		m_Engine.sendToGuiStatusMessage( "(2)Your TCP Port %d IS OPEN :)", tcpListenPort  );
-	}
-	else
-	{
-		LogModule( eLogIsPortOpenTest, LOG_INFO, "NetActionIsMyPortOpen::doAction: (2)Your TCP Port %d IS CLOSED :) IP lcl ip %s->%s in %3.3f sec\n", tcpListenPort, lclIP.c_str(), netSrvUrl.c_str(), portTestTimer.elapsedSec() );
-		m_Engine.sendToGuiStatusMessage( "(2)Your TCP Port %d IS CLOSED :( IP is lcl ip %s->%s  (%3.3f sec)", tcpListenPort, lclIP.c_str(), netSrvUrl.c_str(), portTestTimer.elapsedSec() );
-	}
-    */
-
 	return portOpenTestError; 
 }
 
@@ -842,23 +785,12 @@ EAppErr NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
 													std::string&			retMyExternalIp,
 													bool					sendMsgToUser )
 {
-	if( NULL == netServConn )
-	{
+    if( nullptr == netServConn || !netServConn->isConnected() )
+    {
 		LogMsg( LOG_INFO, "Is Your TCP Port %d Open Test Connect FAILED (%3.3f sec) thread 0x%x", tcpListenPort, portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
 		if( sendMsgToUser )
 		{
 			m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open Test Connect FAILED (%3.3f sec)\n", tcpListenPort, portTestTimer.elapsedSec()  );
-		}
-
-		return eAppErrFailedToConnect;
-	}
-
-	if( false == netServConn->isConnected() )
-	{
-		LogMsg( LOG_INFO, "Is Your TCP Port %d Open Test Connect FAILED (NO SERVER CONNECTION) (%3.3f sec) thread 0x%x", tcpListenPort, portTestTimer.elapsedSec(), VxGetCurrentThreadId() );
-		if( sendMsgToUser )
-		{
-			m_Engine.sendToGuiStatusMessage( "Is TCP Port %d Open Test Connect FAILED (NO SERVER CONNECTION) (%3.3f sec)\n", tcpListenPort, portTestTimer.elapsedSec()  );
 		}
 
 		return eAppErrFailedToConnect;
@@ -949,4 +881,179 @@ EAppErr NetServicesMgr::sendAndRecieveIsMyPortOpen( VxTimer&				portTestTimer,
     LogModule( eLogConnect, LOG_INFO, "NetActionIsMyPortOpen::doAction: can direct connect %s my ip %s:%d thread 0x%x", strPayload.c_str(), retMyExternalIp.c_str(), tcpListenPort, VxGetCurrentThreadId() );
 
 	return iIsOpen ? eAppErrNone : eAppErrPortIsClosed;
+}
+
+//============================================================================
+RCODE NetServicesMgr::handleNetCmdIsMyPortOpenReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+{
+    RCODE rc = -1;
+    // not called here.. handled in NetAction
+    return rc;
+}
+
+//============================================================================
+RCODE NetServicesMgr::handleNetCmdQueryHostIdReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+{
+    std::string toClientContent = "0"; // assume fail
+
+    char * pSktBuf = ( char * )sktBase->getSktReadBuf();
+    if( false == ( '/' == pSktBuf[ netServiceHdr.m_TotalDataLen - 1 ] ) )
+    {
+        sktBase->sktBufAmountRead( 0 );
+        LogModule( eLogNetService, LOG_ERROR, "NetServicesMgr::handleNetCmdQueryHostIdReq: invalid content\n" );
+        return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, toClientContent, ( int )eAppErrBadParameter );
+    }
+
+    if( !m_Engine.getHasHostService( eHostServiceNetworkHost ) )
+    {
+        // only allowed to query host Id if we have Network Host Service
+        LogModule( eLogNetService, LOG_ERROR, "NetServicesMgr::handleNetCmdQueryHostIdReq: Access Denied.. Not a Network Host" );
+        return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, toClientContent, ( int )eAppErrAccessDenied );
+    }
+
+    VxGUID myId = m_Engine.getMyOnlineId();
+    std::string hexMyId;
+    if( !myId.toHexString( hexMyId ) )
+    {
+        LogModule( eLogNetService, LOG_ERROR, "NetServicesMgr::handleNetCmdQueryHostIdReq: Access Denied.. Invalid My Online Id" );
+        return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, toClientContent, ( int )eAppErrAccessDenied );
+    }
+
+    LogModule( eLogNetService, LOG_INFO, "handleNetCmdQueryHostIdReq: SUCCESS %s", hexMyId.c_str() );
+    return m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, hexMyId, ( int )eAppErrNone );
+}
+
+//============================================================================
+EAppErr NetServicesMgr::sendAndRecieveQueryHostId( VxTimer&				testTimer,
+                                                   VxSktConnectSimple *	netServConn,
+                                                   VxGUID&			    retHostId,
+                                                   bool					sendMsgToUser )
+{
+    retHostId.clearVxGUID();
+    if( nullptr == netServConn || !netServConn->isConnected() ) 
+    {
+        LogModule( eLogNetService, LOG_INFO, "Query Host Online Id Connect FAILED (%3.3f sec) thread 0x%x", testTimer.elapsedSec(), VxGetCurrentThreadId() );
+        if( sendMsgToUser )
+        {
+            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Connect FAILED (%3.3f sec)\n", testTimer.elapsedSec() );
+        }
+
+        return eAppErrFailedToConnect;
+    }
+
+    std::string strContent("0");
+
+    LogMsg( LOG_INFO, "Query Host Online Id Connected in  %3.3f sec now Sending data thread 0x%x", testTimer.elapsedSec(), VxGetCurrentThreadId() );
+    testTimer.startTimer();
+    RCODE rc = m_NetServiceUtils.buildAndSendCmd( netServConn, eNetCmdQueryHostOnlineIdReq, strContent, ( int )eAppErrNone );
+    if( rc )
+    {
+        LogMsg( LOG_ERROR, "Query Host Online Id Send Command Error (%3.3f sec) thread 0x%x", testTimer.elapsedSec(), VxGetCurrentThreadId() );
+        if( sendMsgToUser )
+        {
+            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Send Command Error (%3.3f sec)\n", testTimer.elapsedSec() );
+        }
+
+        return eAppErrTxError;
+    }
+
+    VxSleep( 100 );
+    char rxBuf[ 513 ];
+    rxBuf[ 0 ] = 0;
+    NetServiceHdr netServiceHdr;
+    if( false == m_NetServiceUtils.rxNetServiceCmd( netServConn,
+                                                    rxBuf,
+                                                    sizeof( rxBuf ) - 1,
+                                                    netServiceHdr,
+                                                    IS_PORT_OPEN_RX_HDR_TIMEOUT,
+                                                    IS_PORT_OPEN_RX_DATA_TIMEOUT ) )
+    {
+        if( sendMsgToUser )
+        {
+            LogMsg( LOG_ERROR, "Query Host Online Id Server Response Time Out (%3.3f sec) thread 0x%x", testTimer.elapsedSec(), VxGetCurrentThreadId() );
+        }
+
+        m_Engine.sendToGuiStatusMessage( "Query Host Online Id Server Response Time Out (%3.3f sec)\n", testTimer.elapsedSec() );
+        return eAppErrNetServicesFailedToRespond;
+    }
+
+    if( netServiceHdr.getError() )
+    {
+        LogMsg( LOG_ERROR, "Query Host Online Id Server Response Has Error %d (%3.3f sec) thread 0x%x", netServiceHdr.getError(), testTimer.elapsedSec(), VxGetCurrentThreadId() );
+        if( sendMsgToUser )
+        {
+            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Server ResponseHas Error Code %d (%3.3f sec)\n", netServiceHdr.getError(), testTimer.elapsedSec() );
+        }
+
+        return eAppErrRxError;
+    }
+
+    rxBuf[ sizeof( rxBuf ) - 1 ] = 0;
+    std::string content = rxBuf;
+    if( 0 == content.length() )
+    {
+        LogMsg( LOG_ERROR, "Query Host Online Id Server Response Content (%3.3f sec) thread 0x%x", testTimer.elapsedSec(), VxGetCurrentThreadId() );
+        if( sendMsgToUser )
+        {
+            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Server Response Content (%3.3f sec)\n", testTimer.elapsedSec() );
+        }
+
+        return eAppErrRxError;
+    }
+
+    const char * contentBuf = content.c_str();
+    if( '/' != contentBuf[ content.length() - 1 ] )
+    {
+        LogMsg( LOG_ERROR, "Query Host Online Id Invalid Response Content (%3.3f sec) thread 0x%x", testTimer.elapsedSec(), VxGetCurrentThreadId() );
+        if( sendMsgToUser )
+        {
+            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Invalid Response Content (%3.3f sec)\n", testTimer.elapsedSec() );
+        }
+
+        return eAppErrSeviceError;
+    }
+
+    ( ( char * )contentBuf )[ content.length() - 1 ] = 0;
+
+    VxGUID hostId;
+    hostId.fromVxGUIDHexString( content.c_str() );
+    if( !hostId.isVxGUIDValid() )
+    {
+        LogMsg( LOG_ERROR, "Query Host Online Id Invalid Content (%3.3f sec) thread 0x%x", testTimer.elapsedSec(), VxGetCurrentThreadId() );
+        if( sendMsgToUser )
+        {
+            m_Engine.sendToGuiStatusMessage( "Query Host Online Id Invalid Content (%3.3f sec)\n", testTimer.elapsedSec() );
+        }
+
+        return eAppErrParseError;
+    }
+
+    retHostId = hostId;
+    return eAppErrNone;
+}
+
+//============================================================================
+RCODE NetServicesMgr::handleNetCmdQueryHostIdReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr )
+{
+    RCODE rc = -1;
+    // not called here.. handled in NetAction
+    return rc;
+}
+
+//============================================================================
+void NetServicesMgr::netActionResultQueryHostId( EAppErr eAppErr, VxGUID& hostId )
+{
+    if( eAppErr == eAppErrNone )
+    {
+        m_Engine.getNetStatusAccum().setQueryHostOnlineId( true, hostId );
+    }
+    else
+    {
+        m_Engine.getNetStatusAccum().setQueryHostOnlineId( false, hostId );
+    }
+
+    if( m_pfuncQueryHostIdCallbackHandler )
+    {
+        m_pfuncQueryHostIdCallbackHandler( m_pfuncQueryHostIdCallbackHandler, eAppErr, hostId );
+    }
 }

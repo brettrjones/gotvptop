@@ -166,7 +166,6 @@ uint16_t EngineSettings::getTcpIpPort( bool bGetRandomIfDoesntExist )
 		setTcpIpPort( u16IpPort );
 	}
 
-    LogMsg( LOG_DEBUG, "BRJ EngineSettings::getTcpIpPort %d", u16IpPort );
     return u16IpPort;
 }
 

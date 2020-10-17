@@ -957,6 +957,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkHostTest.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityQueryHostIdTest.cpp">
+      <Filter>GoTvCommon\Source Files\Activities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -1911,6 +1914,9 @@
       <Filter>GoTvCommon\Source Files</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkHostTest.h">
+      <Filter>GoTvCommon\Source Files\Activities</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityQueryHostIdTest.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
   </ItemGroup>
@@ -3041,6 +3047,9 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityNetworkHostTest.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityQueryHostIdTest.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

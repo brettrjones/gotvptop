@@ -54,6 +54,7 @@ public:
 	virtual void				toGuiMyRelayStatus( EMyRelayStatus eRelayStatus, const char * msg = "" );
 	virtual void				toGuiHostStatus( EHostTestStatus eHostStatus, const char * msg = "" );
 	virtual void				toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const char * msg = "" );
+    virtual void				toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg = "" ) override;
 	virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" );
 
 	virtual void				toGuiContactOnline( VxNetIdent * netIdent, bool newContact = false );

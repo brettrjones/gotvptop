@@ -164,6 +164,8 @@ void  NetServiceUtils::buildNetCmd( std::string& retResult, ENetCmdType netCmd, 
 			version, 
 			errCode );
 	}
+
+    LogModule( eLogNetService, LOG_INFO, "buildNetCmd %s", retResult.c_str() );
 }
 
 //============================================================================
@@ -191,14 +193,46 @@ int  NetServiceUtils::buildNetCmdHeader( std::string& retResult, ENetCmdType net
 }
 
 //============================================================================
-void NetServiceUtils::buildIsMyPortOpenUrl( VxSktConnectSimple * netServConn, std::string& strHttpUrl, uint16_t u16Port )
+bool NetServiceUtils::buildIsMyPortOpenUrl( VxSktConnectSimple * netServConn, std::string& strHttpUrl, uint16_t u16Port )
 {
-	std::string netServChallengeHash;
-	generateNetServiceChallengeHash( netServChallengeHash, netServConn );
+    std::string strContent;
+    StdStringFormat( strContent, "%d", u16Port );
 
-	std::string strContent;
-	StdStringFormat( strContent, "%d", u16Port );
-	buildNetCmd( strHttpUrl, eNetCmdIsMyPortOpenReq, netServChallengeHash, strContent );
+    return buildNetCmd( netServConn, strHttpUrl, eNetCmdIsMyPortOpenReq, strContent );
+}
+
+//============================================================================
+bool NetServiceUtils::buildQueryHostIdUrl( VxSktConnectSimple * netServConn, std::string& strNetCmdHttpUrl )
+{
+    std::string strContent = "QUERYHOSTID";
+
+    return buildNetCmd( netServConn, strNetCmdHttpUrl, eNetCmdQueryHostOnlineIdReq, strContent );
+}
+
+//============================================================================
+bool NetServiceUtils::buildNetCmd( VxSktConnectSimple * netServConn, std::string& retResult, ENetCmdType netCmd, std::string& strContent, int errCode, int version )
+{
+    if( netServConn && netServConn->isConnected() )
+    {
+        uint16_t cryptoKeyPort = netServConn->getCryptoKeyPort();
+        return buildNetCmd( cryptoKeyPort, retResult, netCmd, strContent, errCode, version );
+    }
+
+    return false;
+}
+
+//============================================================================
+bool NetServiceUtils::buildNetCmd( uint16_t cryptoKeyPort, std::string& retResult, ENetCmdType netCmd, std::string& strContent, int errCode, int version )
+{
+    if( cryptoKeyPort )
+    {
+        std::string netServChallengeHash;
+        generateNetServiceChallengeHash( netServChallengeHash, cryptoKeyPort );
+        buildNetCmd( retResult, netCmd, netServChallengeHash, strContent, errCode, version );
+        return !retResult.empty();
+    }
+
+    return false;
 }
 
 //============================================================================
@@ -522,6 +556,17 @@ RCODE NetServiceUtils::buildAndSendCmd( VxSktBase * sktBase, ENetCmdType netCmd,
 }
 
 //============================================================================
+RCODE NetServiceUtils::buildAndSendCmd( VxSktConnectSimple * sktBase, ENetCmdType netCmd, std::string& cmdContent, int errCode, int version )
+{
+    std::string retResult;
+    std::string netServChallengeHash;
+    generateNetServiceChallengeHash( netServChallengeHash, sktBase );
+    buildNetCmd( retResult, netCmd, netServChallengeHash, cmdContent, errCode, version );
+
+    return sktBase->sendData( retResult.c_str(), ( int )retResult.length() );
+}
+
+//============================================================================
 void NetServiceUtils::generateNetServiceChallengeHash(	std::string&			strKey,	
 														VxSktBase *				skt )
 {
@@ -543,7 +588,6 @@ void NetServiceUtils::generateNetServiceChallengeHash(	std::string&			strKey,
 														VxSktConnectSimple *	skt )
 {
 	uint16_t clientPort = skt->m_LclIp.getPort();
-	//LogMsg( LOG_INFO, "NetServiceUtils::generateNetServiceKey: clientPort = %d, network %s\n", clientPort, m_NetworkMgr.getNetworkKey() );
 	generateNetServiceChallengeHash( strKey, clientPort );
 }
 
@@ -560,6 +604,8 @@ void NetServiceUtils::generateNetServiceChallengeHash(	std::string&			strKeyHash
 	VxKey key;
 	key.setKeyFromPassword( strPwd.c_str(), (int)strPwd.size() );
 	key.exportToAsciiString( strKeyHash );
+    LogModule( eLogNetService, LOG_INFO, "generateNetServiceChallengeHash: clientPort = %d, network %s hash %s", 
+               clientPort, m_NetworkMgr.getNetworkKey(), strPwd.c_str() );
 }
 
 //============================================================================
@@ -567,9 +613,9 @@ void NetServiceUtils::generateNetServiceCryptoKey(	VxKey& key, uint16_t clientPo
 {
 	std::string strPwd;
 	StdStringFormat( strPwd, "xz&gdf%d%s!?d%d759sdc", 
-		clientPort,
-		m_NetworkMgr.getNetworkKey(), 
-		clientPort );
+		             clientPort,
+		             m_NetworkMgr.getNetworkKey(), 
+		             clientPort );
 	key.setKeyFromPassword( strPwd.c_str(), (int)strPwd.size() );
 }
 
@@ -626,7 +672,7 @@ bool NetServiceUtils::rxNetServiceCmd( VxSktConnectSimple * netServConn, char * 
 
 	if( netServiceHdr.m_TotalDataLen > rxBufLen )
 	{
-		LogMsg( LOG_ERROR, "### ERROR NetActionAnnounce::rxNetServiceCmd: too large netServiceHdr.m_TotalDataLen %d\n", netServiceHdr.m_TotalDataLen );
+		LogMsg( LOG_ERROR, "### ERROR NetServiceUtils::rxNetServiceCmd: too large netServiceHdr.m_TotalDataLen %d\n", netServiceHdr.m_TotalDataLen );
 		return false;
 	}
 
@@ -640,7 +686,7 @@ bool NetServiceUtils::rxNetServiceCmd( VxSktConnectSimple * netServConn, char * 
 									&bGotCrLfCrLf );	
 	if( contentLen != iRxed )
 	{
-		LogMsg( LOG_ERROR, "### ERROR NetActionAnnounce::rxNetServiceCmd: timeout %3.3f sec recieving content\n", rxTimer.elapsedSec() );
+		LogMsg( LOG_ERROR, "### ERROR NetServiceUtils::rxNetServiceCmd: timeout %3.3f sec recieving content\n", rxTimer.elapsedSec() );
 		return false;
 	}
 

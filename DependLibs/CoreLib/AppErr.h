@@ -37,9 +37,10 @@ enum EAppErr
 	eAppErrFileWrite						= 1000014,
 	eAppErrFileSeek							= 1000015,
 	eAppErrBusy								= 1000016,
-	eAppErrSslMgrFileMissing				= 1100017,
-	eAppErrSslMgrUnassignedLogOn			= 1100018,
+    eAppErrSeviceError                      = 1000017,
 
+	eAppErrSslMgrFileMissing				= 1100100,
+	eAppErrSslMgrUnassignedLogOn			= 1100101,
 
 	eMaxAppErr
 };

@@ -27,6 +27,8 @@
 #define NET_CMD_ANCHOR_REPLY		"CMD_ANCHOR_REPLY   "
 #define NET_CMD_PROFILE				"CMD_PROFILE        "
 #define NET_CMD_STORYBOARD			"CMD_STORYBOARD     "
+#define NET_CMD_HOST_ID_REQ		    "CMD_HOST_ID_REQ    "
+#define NET_CMD_HOST_ID_REPLY		"CMD_HOST_ID_REPLY  "
 
 enum ENetCmdType
 {
@@ -38,9 +40,9 @@ enum ENetCmdType
 	eNetCmdHostReq					    = 5,		
 	eNetCmdHostReply					= 6,		
 	eNetCmdAboutMePage					= 7,		
-	eNetCmdStoryboardPage				= 8,		
+	eNetCmdStoryboardPage				= 8,	
     eNetCmdQueryHostOnlineIdReq         = 9,
-    eNetCmdQueryHostOnlineIdReply       = 10,
+    eNetCmdQueryHostOnlineIdReply      = 10,
 
 	eMaxNetCmdType
 };

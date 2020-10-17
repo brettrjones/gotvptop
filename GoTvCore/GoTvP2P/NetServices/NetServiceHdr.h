@@ -22,25 +22,19 @@ class VxNetIdent;
 class NetServiceHdr
 {
 public:
-	NetServiceHdr()
-    : m_CmdVersion(0)
-    , m_CmdError(0)
-    , m_TotalDataLen(0)
-    , m_ContentDataLen(0)
-    , m_Ident(0)
-	, m_SktDataUsed(0)
-	{
-	}
+    NetServiceHdr() = default;
+
+    int                         getError() { return m_CmdError; }
 
 	std::string					m_ChallengeHash;
-	ENetCmdType					m_NetCmdType; 
-	int							m_CmdVersion; 
-	int							m_CmdError; 
-	int							m_TotalDataLen;
-	int							m_ContentDataLen;
+    ENetCmdType					m_NetCmdType{ eNetCmdUnknown };
+    int							m_CmdVersion{ 0 };
+	int							m_CmdError{ 0 };
+	int							m_TotalDataLen{ 0 };
+	int							m_ContentDataLen{ 0 };
 	VxGUID					    m_OnlineId;
-	VxNetIdent *				m_Ident;
-	int							m_SktDataUsed;
+	VxNetIdent *				m_Ident{ nullptr };
+	int							m_SktDataUsed{ 0 };
 };
 
 #endif // NET_SERVICE_HDR_H
