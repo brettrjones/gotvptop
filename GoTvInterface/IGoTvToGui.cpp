@@ -120,6 +120,12 @@ void IGoTv::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, const ch
 }
 
 //============================================================================
+void IGoTv::toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg )
+{
+    getAppCommon().toGuiRunTestStatus( testName, eRunTestStatus, msg );
+}
+
+//============================================================================
 void IGoTv::toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg )
 {
     getAppCommon().toGuiRandomConnectStatus( eRandomConnectStatus, msg );

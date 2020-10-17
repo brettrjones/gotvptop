@@ -437,7 +437,6 @@ void AppletNetworkSettings::slotTestQueryHostIdButtonClick( void )
         updateSettingsFromDlg();
         ActivityQueryHostIdTest * dlg = new ActivityQueryHostIdTest(
             m_MyApp,
-            u16Port,
             this );
         dlg->exec();
     }

@@ -1078,28 +1078,28 @@ void AppCommon::toGuiIsPortOpenStatus( EIsPortOpenStatus eIsPortOpenStatus, cons
 }
 
 //============================================================================
-void AppCommon::toGuiRunTestStatus( const char *testName, ERunTestStatus eIsPortOpenStatus, const char * msg )
+void AppCommon::toGuiRunTestStatus( const char *testName, ERunTestStatus eRunTestStatus, const char * msg )
 {
     if( VxIsAppShuttingDown() )
     {
         return;
     }
 
-    const char * portOpenStatus = DescribePortOpenStatus( eIsPortOpenStatus );
+    const char * runTestStatus = DescribeRunTestStatus( eRunTestStatus );
     std::string formatedMsg;
     if( msg )
     {
-        StdStringFormat( formatedMsg, "#%s %s", portOpenStatus, msg );
+        StdStringFormat( formatedMsg, "#%s %s", runTestStatus, msg );
     }
     else
     {
-        StdStringFormat( formatedMsg, "#%s", portOpenStatus );
+        StdStringFormat( formatedMsg, "#%s", runTestStatus );
     }
 
     emit signalLog( 0, formatedMsg.c_str() );
     emit signalStatusMsg( formatedMsg.c_str() );
 
-    emit signalIsPortOpenStatus( eIsPortOpenStatus, formatedMsg.c_str() );
+    emit signalRunTestStatus( testName,  eRunTestStatus, formatedMsg.c_str() );
 }
 
 
@@ -1872,6 +1872,7 @@ void  AppCommon::registerMetaData( void )
     qRegisterMetaType<EFriendViewType>( "EFriendViewType" );
     qRegisterMetaType<EHostTestStatus>( "EHostTestStatus" );
     qRegisterMetaType<EIsPortOpenStatus>( "EIsPortOpenStatus" );
+    qRegisterMetaType<ERunTestStatus>( "ERunTestStatus" );
     qRegisterMetaType<EMyRelayStatus>( "EMyRelayStatus" );
     qRegisterMetaType<ENetAvailStatus>( "ENetAvailStatus" );
     qRegisterMetaType<ENetworkStateType>( "ENetworkStateType" );

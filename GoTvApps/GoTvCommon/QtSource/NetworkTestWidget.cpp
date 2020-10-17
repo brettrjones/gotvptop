@@ -47,7 +47,6 @@ NetworkTestWidget::NetworkTestWidget( QWidget *		parent )
 
     connect( ui.m_RunFullTestButton, SIGNAL( clicked() ), this, SLOT( slotRunFullTestButClick() ) );
     connect( ui.m_IsMyPortOpenButton, SIGNAL( clicked() ), this, SLOT( slotIsPortOpenButClick() ) );
-
 }
 
 //============================================================================

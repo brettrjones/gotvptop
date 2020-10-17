@@ -33,10 +33,8 @@
 //============================================================================
 ActivityQueryHostIdTest::ActivityQueryHostIdTest( 
 				AppCommon&	app,
-				uint16_t				port,
 				QWidget *		parent )
 : ActivityBase( OBJNAME_ACTIVITY_QUERY_HOST_ID_TEST, app, parent, eAppletMessenger, true )
-, m_Port( port )
 , m_Timer(new QTimer(this))
 {
 	m_Timer->setSingleShot(true);
@@ -50,9 +48,9 @@ ActivityQueryHostIdTest::ActivityQueryHostIdTest(
 	connect( this, SIGNAL(signalDialogWasShown()), this, SLOT(slotDialogWasShown()) );
 
 	connect(	&app, 
-				SIGNAL(signalIsPortOpenStatus(EIsPortOpenStatus,QString)), 
+				SIGNAL(signalRunTestStatus( QString,ERunTestStatus,QString )),
 				this, 
-				SLOT(slotIsPortOpenStatus(EIsPortOpenStatus,QString)) );
+				SLOT(slotRunTestStatus( QString, ERunTestStatus,QString)) );
     fillMyNodeUrl( ui.m_NodeUrlLabel );
 }
 
@@ -77,7 +75,7 @@ void ActivityQueryHostIdTest::slotDialogWasShown( void )
 }
 
 //============================================================================
-void ActivityQueryHostIdTest::slotIsPortOpenStatus( EIsPortOpenStatus ePortStatus, QString strMsg )
+void ActivityQueryHostIdTest::slotRunTestStatus( QString strTestName, ERunTestStatus eTestStatus, QString strMsg )
 {
 	strMsg.remove(QRegExp("[\\n\\r]"));
 	ui.m_LogEdit->append(strMsg);

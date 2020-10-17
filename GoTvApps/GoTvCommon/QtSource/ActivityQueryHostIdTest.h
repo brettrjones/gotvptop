@@ -37,7 +37,7 @@ public:
     virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 public slots:
-	void						slotQueryHostIdStatus( EIsPortOpenStatus eIsPortOpenStatus, QString strMsg );
+	void						slotRunTestStatus( QString strTestName, ERunTestStatus eTestStatus, QString strMsg );
 
 	void						slotExitDialogButtonClick( void );
 	void						slotRunTestButClick( void );

@@ -121,10 +121,11 @@ enum ERunTestStatus
     eMaxRunTestStatusType
 };
 
-
 //! Describe Direct Connect test state as text
 const char * DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus );
 
+//! Describe run network test state as text
+const char * DescribeRunTestStatus( ERunTestStatus eTestStatus );
 
 //! Describe connect by shaking phone ( or press simulate phone shake ) status as text
 const char * DescribeRandomConnectStatus( ERandomConnectStatus ePortOpenStatus );

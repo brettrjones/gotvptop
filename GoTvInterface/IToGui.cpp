@@ -78,6 +78,21 @@ namespace
 
 		"Max Port Open Status",
 	};
+    
+    const char * RunTestStatusEnumStrings[] =
+    {
+        "Run Test: Status Unknown",
+        "Run Test: LogMsg",
+
+        "Run Test: Test Success",
+        "Run Test: Test Fail",
+        "Run Test: Connect Fail",
+        "Run Test: Connection Dropped",
+        "Run Test: Invalid Response",
+        "Run Test: Test Complete",
+
+        "Max Run Testn Status",
+    };
 
 	const char * RandomConnectStatusEnumStrings[] = 
 	{ 
@@ -149,6 +164,11 @@ const char * DescribeHostStatus( EHostTestStatus eHostStatus )
 const char * DescribePortOpenStatus( EIsPortOpenStatus ePortOpenStatus )
 {
 	return PortOpenStatusEnumStrings[ ePortOpenStatus ];
+}
+
+const char * DescribeRunTestStatus( ERunTestStatus eTestStatus )
+{
+    return RunTestStatusEnumStrings[ eTestStatus ];
 }
 
 const char * DescribeRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus )
