@@ -37,30 +37,11 @@
 # pragma warning(disable: 4355) //'this' : used in base member initializer list
 #endif //_MSC_VER
 
-namespace
-{
-	//============================================================================
-    void * QueryHostIdTestThreadFunc( void * pvContext )
-	{
-		VxThread * poThread = (VxThread *)pvContext;
-		poThread->setIsThreadRunning( true );
-		QueryHostIdTest * anchorTest = (QueryHostIdTest *)poThread->getThreadUserParam();
-        if( anchorTest && false == poThread->isAborted() )
-		{
-			anchorTest->doQueryHostIdTest();
-		}
-
-		poThread->threadAboutToExit();
-        return nullptr;
-	}
-}
-
 //============================================================================
 QueryHostIdTest::QueryHostIdTest( P2PEngine& engine, EngineSettings& engineSettings, NetServicesMgr& netServicesMgr, NetServiceUtils& netServiceUtils )
     : NetworkTestBase( engine, engineSettings, netServicesMgr, netServiceUtils )
 {
-    setClientTestName( "QUERY HOST ID: " );
-    setHostTestName( "QUERY HOST ID: " );
+    setTestName( "QUERY HOST ID: " );
 }
 
 //============================================================================
@@ -87,7 +68,7 @@ void QueryHostIdTest::fromGuiRunQueryHostIdTest( void )
 }
 
 //============================================================================
-void QueryHostIdTest::doQueryHostIdTest( void )
+void QueryHostIdTest::threadRunNetworkTest( void )
 {
     std::string netHostUrl;
 
@@ -95,15 +76,6 @@ void QueryHostIdTest::doQueryHostIdTest( void )
     LogModule( eLogQueryHostIdTest, LOG_INFO, "attempting connection test with host test url %s thread 0x%x", 
                netHostUrl.c_str(), VxGetCurrentThreadId() );
     doRunTest( netHostUrl );
-	{
-        LogModule( eLogQueryHostIdTest, LOG_INFO, "attempting connection test with host %s thread 0x%x", 
-                   netHostUrl.c_str(), VxGetCurrentThreadId() );
-		if( eRunTestStatusTestComplete != doRunTest( netHostUrl ) )
-		{
-            LogModule( eLogQueryHostIdTest, LOG_INFO, "failed connection test with both host %s thread 0x%x", 
-                       netHostUrl.c_str(), VxGetCurrentThreadId() );
-		}
-	}
 }
 
 //============================================================================

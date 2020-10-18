@@ -401,6 +401,14 @@ EPluginType NetServiceUtils::parseHttpNetServiceHdr( char * dataBuf, int dataLen
 	{
 		ePluginType = ePluginTypeStoryboard; 
 	}
+    else if( eNetCmdQueryHostOnlineIdReq == netServiceHdr.m_NetCmdType )
+    {
+        ePluginType = ePluginTypeHostNetwork;
+    }
+    else if( eNetCmdIsMyPortOpenReq == netServiceHdr.m_NetCmdType )
+    {
+        ePluginType = ePluginTypeServiceConnectTest;
+    }
 
     LogMsg( LOG_VERBOSE, "parseHttpNetServiceUrl: cmd %s plugin %d\n", netCmdEnumToString( netServiceHdr.m_NetCmdType ), ePluginType );
 
@@ -489,6 +497,14 @@ ENetCmdType  NetServiceUtils::netCmdStringToEnum( const char * netCmd )
 	{
 		return eNetCmdIsMyPortOpenReply;
 	}
+    else if( 0 == strcmp( NET_CMD_HOST_ID_REQ, netCmd ) )
+    {
+        return eNetCmdQueryHostOnlineIdReq;
+    }
+    else if( 0 == strcmp( NET_CMD_HOST_ID_REPLY, netCmd ) )
+    {
+        return eNetCmdQueryHostOnlineIdReply;
+    }
 	else
 	{
 		return eNetCmdUnknown;
@@ -516,6 +532,10 @@ const char *  NetServiceUtils::netCmdEnumToString( ENetCmdType	eNetCmdType )
 		return NET_CMD_PROFILE;
 	case eNetCmdStoryboardPage:
 		return NET_CMD_STORYBOARD;
+    case eNetCmdQueryHostOnlineIdReq:
+        return NET_CMD_HOST_ID_REQ;
+    case eNetCmdQueryHostOnlineIdReply:
+        return NET_CMD_HOST_ID_REPLY;
 	case eNetCmdUnknown:
 	default:
 		return NET_CMD_UNKNOWN;
@@ -598,7 +618,7 @@ void NetServiceUtils::generateNetServiceChallengeHash(	std::string&			strKeyHash
 	std::string strPwd;
 	StdStringFormat( strPwd, "xs%ddfj%sd%d75!?jsaf", 
 		clientPort,
-		m_NetworkMgr.getNetworkKey(), 
+        m_NetworkMgr.getNetworkKey(),
 		clientPort );
 
 	VxKey key;

@@ -404,6 +404,24 @@ void PluginMgr::handleFirstNetServiceConnection( VxSktBase * sktBase )
 
 	NetServiceHdr netServiceHdr;
 	EPluginType pluginType = m_NetServiceUtils.parseHttpNetServiceUrl( sktBase, netServiceHdr );
+    if( ( ePluginTypeHostNetwork == pluginType ) && ( netServiceHdr.m_NetCmdType == eNetCmdQueryHostOnlineIdReq ) )
+    {
+        // only allowed if Network Host feature is enabled
+        PluginBase * poPlugin = getPlugin( pluginType );
+        if( poPlugin && ( eAppStatePermissionErr != poPlugin->getPluginState() ) )
+        {
+            std::string onlineId = m_Engine.getMyOnlineId().toHexString();
+            m_NetServiceUtils.buildAndSendCmd( sktBase, eNetCmdQueryHostOnlineIdReply, onlineId );
+        }
+        else
+        {
+            m_Engine.hackerOffense( NULL, 1, sktBase->getRemoteIpBinary(), "Hacker http attack from ip %s query host ID not allowed\n", sktBase->getRemoteIp() );
+        }
+
+        // flush then close
+        sktBase->closeSkt( 658, true );
+        return;
+    }
 
 	if( ePluginTypeInvalid != pluginType )
 	{

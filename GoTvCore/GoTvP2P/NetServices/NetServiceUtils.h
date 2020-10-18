@@ -33,8 +33,8 @@ public:
 	NetServiceUtils( P2PEngine& engine );
 	virtual ~NetServiceUtils();
 
-	ENetCmdType					netCmdStringToEnum( const char * netCmd );
-	const char *				netCmdEnumToString( ENetCmdType	eNetCmdType );
+    static ENetCmdType			netCmdStringToEnum( const char * netCmd );
+	static const char *			netCmdEnumToString( ENetCmdType	eNetCmdType );
 
 	EPluginType					parseHttpNetServiceUrl( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 	EPluginType					parseHttpNetServiceHdr( char * dataBuf, int dataLen, NetServiceHdr& netServiceHdr );

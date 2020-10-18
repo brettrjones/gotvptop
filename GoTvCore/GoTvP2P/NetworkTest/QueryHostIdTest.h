@@ -26,7 +26,7 @@ public:
 	virtual void				fromGuiRunQueryHostIdTest( void );
 	void						runTestShutdown( void );
 
-	void						doQueryHostIdTest( void );
+	void						threadRunNetworkTest( void ) override;
 
 private:
     ERunTestStatus			    doRunTest( std::string& nodeUrl );

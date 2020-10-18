@@ -111,8 +111,8 @@ public:
 
 namespace NetTestUtil
 {
-    ENetCmdType			        netCmdStringToEnum( const char * netCmd );
-    const char *			    netCmdEnumToString( ENetCmdType	eNetCmdType );
+    static ENetCmdType			netCmdStringToEnum( const char * netCmd );
+    static const char *			netCmdEnumToString( ENetCmdType	eNetCmdType );
     const char *				getNetworkKey( void );
 
     void                        buildNetCmd( std::string& retResult, ENetCmdType netCmd, std::string& netServChallengeHash, std::string& strContent, int errCode /*=0*/, int version /*=1*/ );

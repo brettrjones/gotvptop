@@ -34,6 +34,9 @@ public:
     void                        setIsHost( bool isHost ) { m_IsHost = isHost; }
     bool                        getIsHost( void ) { return m_IsHost; }
 
+    // sets both client and host test to same name
+    void                        setTestName( std::string name ) { setClientTestName( name ); setHostTestName( name ); }
+    // get test name depending on if m_IsHost is set or not
     std::string                 getTestName( void ) { return m_IsHost ? getHostTestName() : getClientTestName(); }
 
     void                        setClientTestName( std::string name ) { m_TestMutex.lock(); m_ClientTestName = name; m_TestMutex.unlock(); }
@@ -47,7 +50,7 @@ public:
     virtual void				stopNetworkTest( void );
 
     /// called from thread to run test
-    virtual void				threadRunNetworkTest( void ) {};
+    virtual void				threadRunNetworkTest( void ) = 0;
     /// called from thread just before thread exit
     virtual void				networkTestComplete( void ){};
 
