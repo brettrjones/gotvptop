@@ -545,6 +545,7 @@
     <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListXferMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListXferSession.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostDb.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostInfoBase.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostList.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostListEntry.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostSettingBase.cpp" />
@@ -818,6 +819,7 @@
     <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListXferSession.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDb.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDefs.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostInfoBase.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostList.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostListEntry.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostSettingBase.h" />

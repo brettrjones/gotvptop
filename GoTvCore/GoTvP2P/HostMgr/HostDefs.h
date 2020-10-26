@@ -22,6 +22,7 @@ enum EOtherHostType
     eOtherHostConnectTest = 2,
     eOtherHostGroupHost = 3,
     eOtherHostChatHost = 4,
+    eOtherPeerUserHost = 5,
 
     eMaxOtherHostType
 };

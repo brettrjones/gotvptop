@@ -135,10 +135,13 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferSession.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDefs.h \
+	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostInfoBase.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostList.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostListEntry.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostSettingBase.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostTest.h \
+	$$PWD/GoTvCore/GoTvP2P/HostMgr/OtherHostInfo.h \
+	$$PWD/GoTvCore/GoTvP2P/HostMgr/OtherHostSrvMgr.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/RandomConnectEntry.h \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/AudioUtil.h \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/EchoCancel.h \
@@ -348,10 +351,13 @@ SOURCES += \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferMger.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostInfoBase.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostList.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostListEntry.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostSettingBase.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostTest.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostMgr/OtherHostInfo.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostMgr/OtherHostSrvMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/RandomConnectEntry.cpp \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/AudioUtil.cpp \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/EchoCancel.cpp \

@@ -13,11 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GoTvCore/GoTvP2P/HostConnect/HostConnectInterface.h>
-
 #include <GoTvCore/GoTvP2P/HostConnect/HostConnectInfo.h>
-
-#include <CoreLib/VxMutex.h>
 
 class P2PEngine;
 

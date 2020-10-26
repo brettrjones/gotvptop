@@ -14,6 +14,8 @@
 //============================================================================
 
 #include "HostDefs.h"
+#include "OtherHostInfo.h"
+
 #include <GoTvCore/GoTvP2P/HostConnect/HostConnectInterface.h>
 #include <GoTvCore/GoTvP2P/HostConnect/HostConnectInfo.h>
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h>
@@ -29,6 +31,11 @@ public:
     void                        addHostInfo( EOtherHostType otherHostType, std::string& hostIp, uint16_t hostPort, const char * hostUrl = "" );
     void                        addHostInfo( EOtherHostType otherHostType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrl );
     void                        addHostInfo( EPluginType ePluginType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrl = "" );
+
+    void                        addHostInfo( OtherHostInfo& otherHostInfo );
+    // not mutex protected
+    OtherHostInfo*              findHostMatch( OtherHostInfo& otherHostInfo );
+
     void                        requestHostConnection( EHostConnectType connectType, IHostConnectCallback* callback );
 
     virtual void                onEngineContactConnected( RcConnectInfo * poInfo, bool connectionListLocked );
@@ -39,7 +46,6 @@ protected:
 
     //=== vars ===//
     P2PEngine&                  m_Engine;
-    VxMutex                     m_CallbackMutex;
-    std::vector<IHostConnectCallback *> m_ConnectionCallbacks;
-    std::vector<HostConnectInfo> m_HostConnectList;
+    VxMutex                     m_HostListMutex;
+    std::vector<OtherHostInfo>  m_HostInfoList;
 };

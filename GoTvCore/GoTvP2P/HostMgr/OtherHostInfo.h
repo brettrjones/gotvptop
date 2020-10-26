@@ -13,10 +13,38 @@
 //============================================================================
 #pragma once
 
+#include "HostInfoBase.h"
+#include <GoTvCore/GoTvP2P/HostConnect/HostConnectInterface.h>
 
-class OtherHostInfo
+#include <CoreLib/VxMutex.h>
+
+class RcConnectInfo;
+class OtherHostSrvMgr;
+
+class OtherHostInfo : public HostInfoBase
 {
 public:
+    OtherHostInfo() = delete;
+    virtual ~OtherHostInfo() = default;
+
+    OtherHostInfo( const OtherHostInfo& rhs );
+    OtherHostInfo( OtherHostSrvMgr* srvMgr, EOtherHostType otherHostType, std::string& hostIp, uint16_t hostPort, const char * hostUrl );
+    OtherHostInfo( OtherHostSrvMgr* srvMgr, EOtherHostType otherHostType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrl );
+    OtherHostInfo( OtherHostSrvMgr* srvMgr, EPluginType ePluginType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrll );
+
+    OtherHostInfo&				operator=( const OtherHostInfo& rhs );
+    bool        				operator==( const OtherHostInfo& rhs );
+
+    void                        setNeedQueryHostId( bool needQuery )        { m_NeedHostQueryId = needQuery; }
+    bool                        getNeedQueryHostId( void )                  { return m_NeedHostQueryId; }
+
+protected:
+    //=== vars ===//
+    OtherHostSrvMgr*            m_SrvMgr{ nullptr };
+    VxMutex                     m_CallbackMutex;
+    std::vector<IHostConnectCallback *> m_ConnectionCallbacks;
+    RcConnectInfo*              m_RcConnectInfo{ nullptr };
+    bool                        m_NeedHostQueryId{ false };
 };
 
 

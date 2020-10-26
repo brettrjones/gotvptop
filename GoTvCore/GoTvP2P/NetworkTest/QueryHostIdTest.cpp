@@ -137,8 +137,8 @@ ERunTestStatus QueryHostIdTest::doRunTest( std::string& nodeUrl )
 													rxBuf, 
 													sizeof( rxBuf ) - 1, 
 													netServiceHdr, 
-													IS_PORT_OPEN_RX_HDR_TIMEOUT, 
-													IS_PORT_OPEN_RX_DATA_TIMEOUT ) )
+                                                    QUERY_HOST_ID_RX_HDR_TIMEOUT,
+                                                    QUERY_HOST_ID_RX_DATA_TIMEOUT ) )
 	{
 		sendRunTestStatus( eRunTestStatusConnectionDropped,
 			"%s Connected to %s but failed to respond (wrong network key ?) thread 0x%x", testName.c_str(), nodeUrl.c_str(), VxGetCurrentThreadId() );

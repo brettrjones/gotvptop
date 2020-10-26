@@ -13,6 +13,8 @@
 //============================================================================
 
 #include "OtherHostSrvMgr.h"
+#include "OtherHostInfo.h"
+
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
 //============================================================================
@@ -31,25 +33,66 @@ void OtherHostSrvMgr::callbackNetAvailStatusChanged( ENetAvailStatus netAvalilSt
 //============================================================================
 void OtherHostSrvMgr::addHostInfo( EOtherHostType otherHostType, std::string& hostIp, uint16_t hostPort, const char * hostUrl )
 {
-
+    bool needQueryHostId = otherHostType == eOtherHostNetworkHost;
+    OtherHostInfo otherHostInfo( this, otherHostType, hostIp, hostPort, hostUrl );
+    otherHostInfo.setNeedQueryHostId( needQueryHostId );
+    addHostInfo( otherHostInfo );
 }
 
 //============================================================================
 void OtherHostSrvMgr::addHostInfo( EOtherHostType otherHostType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrl )
 {
-
+    OtherHostInfo otherHostInfo( this, otherHostType, onlineId, hostIp, hostPort, hostUrl );
+    addHostInfo( otherHostInfo );
 }
 
 //============================================================================
 void OtherHostSrvMgr::addHostInfo( EPluginType ePluginType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrl )
 {
+    OtherHostInfo otherHostInfo( this, ePluginType, onlineId, hostIp, hostPort, hostUrl );
+    addHostInfo( otherHostInfo );
+}
 
+//============================================================================
+void OtherHostSrvMgr::addHostInfo( OtherHostInfo& otherHostInfo )
+{
+    m_HostListMutex.lock();
+    OtherHostInfo *hostInfo = findHostMatch( otherHostInfo );
+    if( hostInfo )
+    {
+        hostInfo->addPluginService( otherHostInfo );
+    }
+    else
+    {
+        m_HostInfoList.push_back( otherHostInfo );
+    }
+
+    m_HostListMutex.unlock();
+}
+
+//============================================================================
+OtherHostInfo* OtherHostSrvMgr::findHostMatch( OtherHostInfo& otherHostInfo )
+{
+    OtherHostInfo* foundEntry = nullptr;
+    for( auto iter = m_HostInfoList.begin(); iter != m_HostInfoList.end(); ++iter )
+    {
+        OtherHostInfo& hostEntry = *iter;
+        if( hostEntry.isMatch( otherHostInfo ) )
+        {
+            foundEntry = &( *iter );
+            break;
+        }
+    }
+
+    return foundEntry;
 }
 
 //============================================================================
 void OtherHostSrvMgr::requestHostConnection( EHostConnectType connectType, IHostConnectCallback* callback )
 {
+    /*
     bool alreadyConnected = false;
+
 
     if( callback )
     {
@@ -91,7 +134,7 @@ void OtherHostSrvMgr::requestHostConnection( EHostConnectType connectType, IHost
     {
         // do the connection request
     }
-
+    */
 }
 
 //============================================================================
