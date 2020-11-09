@@ -13,6 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <app_precompiled_hdr.h>
 #include "SessionWidget.h"
 #include "ui_SessionWidget.h"
 

@@ -13,6 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <app_precompiled_hdr.h>
 #include "MultiSessionState.h"
 #include "ActivityToFriendMultiSession.h"
 #include "AppCommon.h"

@@ -1,4 +1,6 @@
 
+#include <app_precompiled_hdr.h>
+
 #define QT_NO_PRINTER
 #include "StoryWidget.h"
 

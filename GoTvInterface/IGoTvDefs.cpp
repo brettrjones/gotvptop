@@ -1,3 +1,4 @@
+#include <app_precompiled_hdr.h>
 #include "IGoTvDefs.h"
 #include "IDefs.h"
 

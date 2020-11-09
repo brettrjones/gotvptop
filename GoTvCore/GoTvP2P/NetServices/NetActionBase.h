@@ -38,7 +38,7 @@ public:
 	virtual ~NetActionBase();
 
 	virtual ENetActionType		getNetActionType( void )			{ return eNetActionUnknown; }
-	virtual VxGUID&			getMyOnlineId( void );
+	virtual VxGUID&			    getMyOnlineId( void );
 
 	virtual void				enterAction( void )					{};
 	virtual void				doAction( void )					{};

@@ -14,14 +14,39 @@
 
 #include "HostInfoBase.h"
 
+#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include <GoTvCore/GoTvP2P/NetServices/NetServicesMgr.h>
+#include <GoTvCore/GoTvP2P/NetServices/NetServiceHdr.h>
+
+#include <NetLib/VxSktConnectSimple.h>
+#include <NetLib/VxSktBase.h>
+
+#include <CoreLib/VxParse.h>
+#include <CoreLib/VxDebug.h>
+#include <CoreLib/VxTime.h>
+
+namespace
+{
+    const uint64_t HOST_ACTION_TIMEOUT_MS = 30000;
+    const uint64_t HOST_CONNECT_ATTEMPT_TIMEOUT_MS = 60000;
+}
+
+//============================================================================
+HostInfoBase::HostInfoBase( P2PEngine& engine )
+    : m_Engine( engine )
+{
+}
+
 //============================================================================
 HostInfoBase::HostInfoBase( const HostInfoBase& rhs )
+    : m_Engine( rhs.m_Engine )
 {
     *this = rhs;
 }
 
 //============================================================================
-HostInfoBase::HostInfoBase( EOtherHostType otherHostType, std::string& hostIp, uint16_t hostPort, const char * hostUrl )
+HostInfoBase::HostInfoBase( P2PEngine& engine, EOtherHostType otherHostType, std::string& hostIp, uint16_t hostPort, const char * hostUrl )
+    : m_Engine( engine )
 {
     setOtherHostType( otherHostType );
     m_HostIpAddr = hostIp;
@@ -30,7 +55,8 @@ HostInfoBase::HostInfoBase( EOtherHostType otherHostType, std::string& hostIp, u
 }
 
 //============================================================================
-HostInfoBase::HostInfoBase( EOtherHostType otherHostType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrl )
+HostInfoBase::HostInfoBase( P2PEngine& engine, EOtherHostType otherHostType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrl )
+    : m_Engine( engine )
 {
     setOtherHostType( otherHostType );
     m_OnlineId = onlineId;
@@ -40,7 +66,8 @@ HostInfoBase::HostInfoBase( EOtherHostType otherHostType, VxGUID onlineId, std::
 }
 
 //============================================================================
-HostInfoBase::HostInfoBase( EPluginType ePluginType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrl )
+HostInfoBase::HostInfoBase( P2PEngine& engine, EPluginType ePluginType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrl )
+    : m_Engine( engine )
 {
     addPluginService( ePluginType );
     m_OnlineId = onlineId;
@@ -60,7 +87,6 @@ HostInfoBase& HostInfoBase::operator=( const HostInfoBase& rhs )
         m_HostIpAddr = rhs.m_HostIpAddr;
         m_HostPort = rhs.m_HostPort;
         m_OnlineId = rhs.m_OnlineId;
-        m_RequiresAction = rhs.m_RequiresAction;
     }
 
     return *this;
@@ -74,8 +100,7 @@ bool HostInfoBase::operator==( const HostInfoBase& rhs )
         m_HostUrl == rhs.m_HostUrl &&
         m_HostIpAddr == rhs.m_HostIpAddr &&
         m_HostPort == rhs.m_HostPort &&
-        m_OnlineId == rhs.m_OnlineId &&
-        m_RequiresAction == rhs.m_RequiresAction;
+        m_OnlineId == rhs.m_OnlineId;
 }
 
 //============================================================================
@@ -195,4 +220,452 @@ bool HostInfoBase::isMatch( HostInfoBase& rhs )
     }
 
     return matches;
+}
+
+//============================================================================
+/// query for host online id
+bool HostInfoBase::doActionQueryHostId( VxGUID& retHostId )
+{
+    VxSktConnectSimple netServConn;
+    if( !connectSimpleSkt( netServConn ) )
+    {
+        LogModule( eLogQueryHostIdTest, LOG_ERROR, "HostInfoBase::doActionQueryHostId failed connect %s\n", describeHostInfo().c_str());
+        return false;
+    }
+
+    std::string strNetActionUrl;
+    StdStringFormat( strNetActionUrl, "ptop://%s:%d", m_HostIpAddr.c_str(), m_HostPort );
+
+    NetServiceUtils& netUtils( getEngine().getNetServicesMgr().getNetUtils() );
+    netUtils.buildQueryHostIdUrl( &netServConn, strNetActionUrl );
+
+    RCODE rc = netServConn.sendData( strNetActionUrl.c_str(), ( int )strNetActionUrl.length() );
+    if( rc )
+    {
+        LogModule( eLogQueryHostIdTest, LOG_ERROR, "HostInfoBase::doActionQueryHostId: sendData error %d", rc );
+        return false;
+    }
+
+    char rxBuf[ 513 ];
+    rxBuf[ 0 ] = 0;
+    NetServiceHdr netServiceHdr;
+    if( false == netUtils.rxNetServiceCmd( &netServConn,
+                                                    rxBuf,
+                                                    sizeof( rxBuf ) - 1,
+                                                    netServiceHdr,
+                                                    QUERY_HOST_ID_RX_HDR_TIMEOUT,
+                                                    QUERY_HOST_ID_RX_DATA_TIMEOUT ) )
+    {
+        LogModule( eLogQueryHostIdTest, LOG_ERROR, "HostInfoBase::doActionQueryHostId: Connected to %s but failed to respond (wrong network key ?)", strNetActionUrl.c_str() );
+        return false;
+    }
+
+    rxBuf[ sizeof( rxBuf ) - 1 ] = 0;
+    std::string content = rxBuf;
+    if( 0 == content.length() )
+    {
+        LogModule( eLogQueryHostIdTest, LOG_ERROR, "QueryHostIdTest: no content in response");
+        return false;
+    }
+
+    const char * contentBuf = content.c_str();
+    if( '/' != contentBuf[ content.length() - 1 ] )
+    {
+        LogModule( eLogQueryHostIdTest, LOG_ERROR, "QueryHostIdTest no trailing / in content");
+        return false;
+    }
+
+    ( ( char * )contentBuf )[ content.length() - 1 ] = 0;
+
+    std::string strPayload = content;
+    if( content.empty() )
+    {
+        LogModule( eLogQueryHostIdTest, LOG_ERROR, "QueryHostIdTest no host id in content");
+        return false;
+    }
+
+    VxGUID hostId;
+    hostId.fromVxGUIDHexString( strPayload.c_str() );
+    if( !hostId.isVxGUIDValid() )
+    {
+        LogMsg( LOG_ERROR, "Query Host Online Id %s Invalid Content", content.c_str());
+        return false;
+    }
+
+    std::string hostIdStr = hostId.toHexString();
+    LogModule( eLogQueryHostIdTest, LOG_VERBOSE, " success host id %s", hostIdStr.c_str());
+    return true;
+}
+
+//============================================================================
+bool HostInfoBase::connectSimpleSkt( VxSktConnectSimple& sktSimple )
+{
+    bool result = false;
+    sktSimple.closeSkt();
+    if( !m_HostIpAddr.empty() && m_HostPort )
+    {
+        std::string ptopUrl;
+        StdStringFormat( ptopUrl, "ptop://%s:%d", m_HostIpAddr.c_str(), m_HostPort );
+
+        std::string strHost;
+        std::string strFile;
+        uint16_t u16Port;
+
+        if( false == sktSimple.connectToWebsite( ptopUrl.c_str(), strHost, strFile, u16Port, WEBSITE_CONNECT_TIMEOUT ) )
+        {
+            LogModule( eLogConnect, LOG_ERROR, "HostInfoBase::connectSimpleSkt: FAILED to Connect to %s\n", ptopUrl.c_str() );
+            return false;
+        }
+    }
+
+    return result;
+}
+
+//============================================================================
+std::string HostInfoBase::describeHostInfo( void )
+{
+    std::string url = m_HostUrl.empty() ? "" : m_HostUrl;
+    std::string infoDesc;
+    StdStringFormat( infoDesc, " %s:%d %s", m_HostIpAddr.c_str(), m_HostPort, url.c_str() );
+    return infoDesc;
+}
+
+//============================================================================
+bool HostInfoBase::addConnectionRequest( EHostConnectType connectType, IConnectRequestCallback* connectReq )
+{
+    bool callbackAdded = false;
+    m_CallbackListMutex.lock();
+
+    std::map<EHostConnectType, std::vector<IConnectRequestCallback*>>::iterator mapIter = m_CallbackList.find( connectType );
+
+    if( mapIter != m_CallbackList.end() )
+    {
+        // type already exists
+        std::vector<IConnectRequestCallback*>& callbackList = mapIter->second;
+        for( auto & callback : callbackList )
+        {
+            bool callbackExists = false;
+            if( callback == connectReq )
+            {
+                // already exists
+                callbackExists = true;
+                break;
+            }
+
+            if( !callbackExists )
+            {
+                callbackList.push_back( connectReq );
+                callbackAdded = true;
+            }
+        }
+    }
+    else
+    {
+        // and new request type and list
+        std::vector<IConnectRequestCallback*> reqList;
+        reqList.push_back( connectReq );
+        m_CallbackList.emplace( connectType, reqList );
+        callbackAdded = true;
+    }
+
+    if( callbackAdded )
+    {
+        sendConnectionToCallback( connectType, connectReq );
+    }
+
+    m_CallbackListMutex.unlock();
+
+    return callbackAdded;
+}
+
+//============================================================================
+void HostInfoBase::sendConnectionToCallback( EHostConnectType connectType, IConnectRequestCallback* connectReq )
+{
+    if( connectReq && !m_SktList.empty() )
+    {
+        m_SktListMutex.lock();
+        for( VxSktBase* sktBase : m_SktList )
+        {
+            connectReq->onContactConnected( connectType, sktBase );
+        }
+
+        m_SktListMutex.unlock();
+    }
+}
+
+//============================================================================
+bool HostInfoBase::removeConnectionRequest( EHostConnectType connectType, IConnectRequestCallback* connectReq )
+{
+    bool callbackRemoved = false;
+
+    if( connectType != eHostConnectNone )
+    {
+        m_CallbackListMutex.lock();
+
+        auto mapIter = m_CallbackList.find( connectType );
+        if( mapIter != m_CallbackList.end() )
+        {
+            std::vector<IConnectRequestCallback*>& callbackList = mapIter->second;
+            for( auto iter = callbackList.begin(); iter != callbackList.end(); ++iter )
+            {
+                if( *iter == connectReq )
+                {
+                    // exists so remove it
+                    callbackList.erase(iter);
+                    callbackRemoved = true;
+                    break;
+                }
+            }
+        }
+
+        m_CallbackListMutex.unlock();
+    }
+
+    return callbackRemoved;
+}
+
+//============================================================================
+void HostInfoBase::addToSktListIfSktNotInUse( std::vector<VxSktBase *>& sktList )
+{
+    bool allRequestsRemoved = true;
+
+    m_CallbackListMutex.lock();
+    m_SktListMutex.lock();
+
+    if( !m_SktList.empty() )
+    {
+        for( auto iter = m_CallbackList.begin(); iter != m_CallbackList.end(); ++iter )
+        {
+            if( !iter->second.empty() )
+            {
+                allRequestsRemoved = false;
+                break;
+            }
+        }
+
+        if( allRequestsRemoved )
+        {
+            for( auto sktBase : m_SktList )
+            {
+                addToSktListIfMissing( sktList, sktBase );
+            }
+        }
+    }
+
+    m_SktListMutex.unlock();
+    m_CallbackListMutex.unlock();
+}
+
+//============================================================================
+void HostInfoBase::addToSktListIfMissing( std::vector<VxSktBase *>& sktList, VxSktBase* sktBase )
+{
+    auto iter = std::find( sktList.begin(), sktList.end(), sktBase );
+
+    // If element was found
+    if( iter == sktList.end() )
+    {
+        sktList.push_back( sktBase );
+    }
+}
+
+//============================================================================
+    /// return false if no current requests for given connection
+bool HostInfoBase::isSktInUse( VxSktBase* sktBase )
+{
+    bool allRequestsRemoved = true;
+
+    for( auto iter = m_CallbackList.begin(); iter != m_CallbackList.end(); ++iter )
+    {
+        if( !iter->second.empty() )
+        {
+            allRequestsRemoved = false;
+            break;
+        }
+    }
+
+    return allRequestsRemoved;
+}
+
+
+//============================================================================
+void HostInfoBase::updateActionTakenTime( void )
+{
+    m_ActionTimeMs = GetGmtTimeMs();
+}
+
+//============================================================================
+bool HostInfoBase::isActionTakenTimeExpired( void )
+{
+    return GetGmtTimeMs() - m_ActionTimeMs > HOST_ACTION_TIMEOUT_MS;
+}
+
+//============================================================================
+void HostInfoBase::updateConnectAttemptTime( void )
+{
+    m_ConnectAttemptTimeMs = GetGmtTimeMs();
+}
+
+//============================================================================
+bool HostInfoBase::isConnectAttemptTimeExpired( void )
+{
+    return GetGmtTimeMs() - m_ActionTimeMs > HOST_CONNECT_ATTEMPT_TIMEOUT_MS;
+}
+
+//============================================================================
+void HostInfoBase::onSktConnectedWithPktAnn( VxSktBase* sktBase )
+{
+    if( sktBase && sktBase->getIsPeerPktAnnSet() )
+    {
+        PktAnnounce& peerPktAnn = sktBase->getPeerPktAnn();
+        if( hasHostMatch( peerPktAnn ) )
+        {
+            // has a service that matches our host type
+            bool isSktMatch = false;
+            VxGUID peerOnlineId = peerPktAnn.getConnectInfo().getMyOnlineId();
+            if( m_OnlineId.isVxGUIDValid() && peerOnlineId.isVxGUIDValid() && ( peerOnlineId == m_OnlineId ) )
+            {
+                // is a match by online id
+                isSktMatch = true;
+            }
+            else if( m_HostPort && !m_HostIpAddr.empty() )
+            {
+                // is a match by ip and port ?
+                InetAddress inetIp;
+                uint16_t peerPort = sktBase->getRemotePort();
+                if( peerPort == m_HostPort )
+                {
+                    std::string rmtIp;
+                    sktBase->getRemoteIp( rmtIp );
+                    isSktMatch = rmtIp == m_HostIpAddr;
+                }
+            }
+        }
+    }
+}
+
+//============================================================================
+EOtherHostType HostInfoBase::connectTypeToHostType( EHostConnectType connectType )
+{
+    EOtherHostType hostType = eOtherHostUnknown;
+    switch( connectType )
+    {
+    case eHostConnectRelayFind:
+    case eHostConnectRelayJoin:
+        // relays mus be provided by group host for now
+        hostType = eOtherHostGroupHost;
+        break;
+
+    case eHostConnectGroupAnnounce:
+    case eHostConnectGroupFind:
+        hostType = eOtherHostNetworkHost;
+        break;
+
+    case eHostConnectGroupJoin:
+        hostType = eOtherHostGroupHost;
+        break;
+
+    /// chat rooms can be hosted by groups or individuals in a grou;
+    case eHostConnectChatRoomAnnounce:
+    case eHostConnectChatRoomFind:
+        hostType = eOtherHostGroupHost;
+        break;
+
+    case eHostConnectChatRoomJoin:
+        hostType = eOtherHostChatHost;
+        break;
+
+    default:
+        break;
+    }
+
+    return hostType;
+}
+
+//============================================================================
+/// return true if has a service that matches our host type
+bool HostInfoBase::hasHostMatch( PktAnnounce& peerPktAnn )
+{
+    bool hasMatch = false;
+
+    /*
+
+    ePluginTypeAdmin = 1,	//!< Administration ( intended for updates but not currently used )
+        ePluginTypeAboutMePage = 2,	//!< about me page plugin ( using web page server )
+        ePluginTypeAvatarImage = 3,	//!< handle users avatar image
+        ePluginTypeCamServer = 4,	//!< Web cam broadcast plugin
+        ePluginTypeChatRoom = 5,	//!< chat room host plugin
+        ePluginTypeFileServer = 6,	//!< Shared files server
+        ePluginTypeFileXfer = 7,	//!< Offer/accept send a file person to person
+        ePluginTypeMessenger = 8,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
+        ePluginTypeStoryboard = 9,	//!< User editable story board web page server
+        ePluginTypeTruthOrDare = 10,	//!< Video Chat Truth Or Dare game  
+        ePluginTypeVideoPhone = 11,	//!< Video Chat with motion detect and stream recording
+        ePluginTypeVoicePhone = 12,	//!< VOIP audio only phone call
+        ePluginTypeHostGroup = 13,	//!< group host
+        ePluginTypeHostNetwork = 14,	//!< master network host
+        ePluginTypeServiceConnectTest = 15,	//!< Connection Test Service
+
+        ePluginTypeClientConnectTest = 16,	//!< Connection Test Client
+        ePluginTypeHostGroupListing = 17,	//!< group list host
+        ePluginTypeRandomConnect = 18,	//!< Random connect to another person ( Using Phone Shake )
+        ePluginTypeRandomConnectRelay = 19,	//!< Random connect to another person relay service
+        ePluginTypeRelay = 20,	//!< Relay services plugin
+        */
+
+    switch( m_HostType )
+    {
+    case eOtherHostNetworkHost:
+        hasMatch = ( eFriendStateIgnore != peerPktAnn.getPluginPermission( ePluginTypeHostNetwork ) ) || ( eFriendStateIgnore != peerPktAnn.getPluginPermission( ePluginTypeHostGroupListing ) );
+        break;
+    case eOtherHostConnectTest:
+        hasMatch = ( eFriendStateIgnore != peerPktAnn.getPluginPermission( ePluginTypeServiceConnectTest ) );
+        break;
+    case eOtherHostGroupHost:
+        hasMatch = ( eFriendStateIgnore != peerPktAnn.getPluginPermission( ePluginTypeHostGroup ) );
+        break;
+    case eOtherHostChatHost:
+        hasMatch = ( eFriendStateIgnore != peerPktAnn.getPluginPermission( ePluginTypeChatRoom ) );
+        break;
+
+    case eOtherPeerUserHost:
+        hasMatch = true;
+        break;
+
+    default:
+        break;
+    }
+
+    return hasMatch;
+}
+
+//============================================================================
+void HostInfoBase::onSktDisconnected( VxSktBase* sktBase )
+{
+    if( sktBase )
+    {
+        m_SktListMutex.lock();
+
+        auto iter = std::find( m_SktList.begin(), m_SktList.end(), sktBase );
+
+        if( iter == m_SktList.end() )
+        {
+            m_CallbackListMutex.lock();
+            for( auto iter = m_CallbackList.begin(); iter != m_CallbackList.end(); ++iter )
+            {
+                if( !iter->second.empty() )
+                {
+                    std::vector<IConnectRequestCallback*>& callbackList = iter->second;
+                    for( IConnectRequestCallback* callback : callbackList )
+                    {
+                        callback->onContactDisconnected( iter->first, sktBase );
+                    }
+                }
+            }
+
+            m_SktList.erase( iter );
+            m_CallbackListMutex.unlock();
+        }
+
+        m_SktListMutex.unlock();
+    }
 }

@@ -33,7 +33,7 @@ public:
 	void						netServiceHostStartup( void );
 	void						netServiceHostShutdown( void );
 
-	HostDb&					getHostDb( void )						{ return m_HostDb; }
+	HostDb&					    getHostDb( void )						{ return m_HostDb; }
 
 	RCODE						handleNetCmdHostReq( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
 	RCODE						handleNetCmdHostReply( VxSktBase * sktBase, NetServiceHdr& netServiceHdr );
@@ -44,9 +44,9 @@ protected:
 	P2PEngine&					m_Engine;
 	NetServicesMgr&				m_NetServicesMgr;
 	NetServiceUtils&			m_NetServiceUtils;
-	HostDb					m_HostDb;
+	HostDb					    m_HostDb;
 
 private:
-	NetServiceHost(); // don't allow default constructor
-	NetServiceHost(const NetServiceHost&); // don't allow copy constructor
+	NetServiceHost() = delete; // don't allow default constructor
+	NetServiceHost(const NetServiceHost&) = delete; // don't allow copy constructor
 };

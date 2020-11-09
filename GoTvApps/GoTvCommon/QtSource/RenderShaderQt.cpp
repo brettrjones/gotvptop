@@ -18,6 +18,7 @@
  *
  */
 
+#include <app_precompiled_hdr.h>
 #include "RenderShaderQt.h"
 #include "RenderGlWidget.h"
 

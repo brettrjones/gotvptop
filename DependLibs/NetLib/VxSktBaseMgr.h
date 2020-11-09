@@ -82,24 +82,29 @@ public:
     //! move to erase/delete when safe to do so
     virtual void				moveToEraseList( VxSktBase * sktBase );
 
+    /// if skt exists in connection list then lock access to connection list
+    virtual bool				lockSkt( VxSktBase* sktBase );
+    virtual void				unlockSkt( VxSktBase* sktBase );
+
 	//=== vars ===//
-	RCODE						m_rcLastError;
-	ESktMgrType					m_eSktMgrType;				// type of sockets we manage
-	std::vector<VxSktBase *>	m_aoSkts;					// array of sockets to manage
-	std::vector<VxSktBase *>	m_aoSktsToDelete;			// skts that will be deleted after 10 sec 
-	VxMutex						m_SktMgrMutex;			// thread mutex
+	RCODE						m_rcLastError{ 0 };
+    ESktMgrType					m_eSktMgrType{ eSktMgrTypeNone };   // type of sockets we manage
+	std::vector<VxSktBase *>	m_aoSkts;					        // array of sockets to manage
+	std::vector<VxSktBase *>	m_aoSktsToDelete;			        // skts that will be deleted after 10 sec 
+	VxMutex						m_SktMgrMutex;			            // thread mutex
 
-	VX_SKT_CALLBACK				m_pfnUserReceive;			// receive function must be set by user
-	VX_SKT_CALLBACK				m_pfnOurReceive;			// our receive function to receive Socket states etc
-	VX_SKT_CALLBACK				m_pfnUserTransmit;			// receive function may be set by user
-	VX_SKT_CALLBACK				m_pfnOurTransmit;			// our transmit function to get Socket transmit stats
-	void *						m_pvRxCallbackUserData;		// user defined rx callback data
-	void *						m_pvTxCallbackUserData;		// user defined tx callback data
+	VX_SKT_CALLBACK				m_pfnUserReceive{ nullptr };		// receive function must be set by user
+	VX_SKT_CALLBACK				m_pfnOurReceive{ nullptr };		    // our receive function to receive Socket states etc
+	VX_SKT_CALLBACK				m_pfnUserTransmit{ nullptr };		// receive function may be set by user
+	VX_SKT_CALLBACK				m_pfnOurTransmit{ nullptr };		// our transmit function to get Socket transmit stats
+	void *						m_pvRxCallbackUserData{ nullptr };	// user defined rx callback data
+	void *						m_pvTxCallbackUserData{ nullptr };	// user defined tx callback data
 
-	uint32_t					m_u32MaxConnections;		// max connections we will accept
-	UINT						m_uiCreatorVxThreadId;		// thread id of thread that created this object
+	uint32_t					m_u32MaxConnections{ 10000 };	    // max connections we will accept
+	UINT						m_uiCreatorVxThreadId{ 0 };		    // thread id of thread that created this object
 
 	InetAddress					m_LclIp;
+    uint32_t                    m_LockRequestCnt{ 0 };
 
 protected:
 	virtual void				deleteAllSockets();

@@ -13,6 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <app_precompiled_hdr.h>
 #include "FriendListDelegate.h"
 #include "ListEntryWidget.h"
 

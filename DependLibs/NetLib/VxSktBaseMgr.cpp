@@ -44,16 +44,6 @@ namespace
 
 //============================================================================
 VxSktBaseMgr::VxSktBaseMgr()
-: m_rcLastError( 0 )
-, m_eSktMgrType( eSktMgrTypeNone )
-, m_pfnUserReceive( 0 )
-, m_pfnOurReceive( 0 )
-, m_pfnUserTransmit( 0 )
-, m_pfnOurTransmit( 0 )
-, m_pvRxCallbackUserData( 0 )
-, m_pvTxCallbackUserData( 0 )
-, m_u32MaxConnections( 10000 )
-, m_uiCreatorVxThreadId( 0 )
 {
 	m_pfnOurReceive = VxSktBaseMgrReceiveFunction;
 	m_uiCreatorVxThreadId = VxGetCurrentThreadId();
@@ -67,10 +57,47 @@ VxSktBaseMgr::~VxSktBaseMgr()
 }
 
 //============================================================================
+/// if skt exists in connection list then lock access to connection list
+bool VxSktBaseMgr::lockSkt( VxSktBase* sktBase )
+{
+    bool lockResult = false;
+    sktBaseMgrLock();
+    m_LockRequestCnt++;
+    for( auto iter = m_aoSkts.begin(); iter != m_aoSkts.end(); ++iter )
+    {
+        if( ( *iter ) == sktBase )
+        {
+            // found it in our list
+            lockResult = true;
+            break;
+        }
+    }
+
+    if( !lockResult )
+    {
+        m_LockRequestCnt--;
+        sktBaseMgrUnlock();
+    }
+
+    return lockResult;
+}
+
+//============================================================================
+void VxSktBaseMgr::unlockSkt( VxSktBase* sktBase )
+{
+    if( m_LockRequestCnt )
+    {
+        m_LockRequestCnt--;
+        sktBaseMgrUnlock();
+    }
+}
+
+//============================================================================
 void VxSktBaseMgr::sktMgrSetLocalIp( InetAddress& oLclIp )
 {
 	m_LclIp = oLclIp;
 }
+
 
 //============================================================================
 void VxSktBaseMgr::sktMgrShutdown( void )
@@ -81,8 +108,7 @@ void VxSktBaseMgr::sktMgrShutdown( void )
 //============================================================================
 void VxSktBaseMgr::deleteAllSockets()
 {
-	std::vector<VxSktBase *>::iterator iter;
-	for( iter = m_aoSktsToDelete.begin(); iter != m_aoSktsToDelete.end(); ++iter )
+	for( auto iter = m_aoSktsToDelete.begin(); iter != m_aoSktsToDelete.end(); ++iter )
 	{
 		delete (*iter);
 	}
@@ -129,9 +155,8 @@ RCODE VxSktBaseMgr::removeSkt(  VxSktBase *	sktBase,		// skt to remove
 {
 	//LogMsg( LOG_INFO, "Removing Skt ID %d  type %s from VxSktBaseMgr skt list\n", sktBase->getSktId(), sktBase->describeSktType().c_str() );
 	RCODE rc = -1;
-	std::vector<VxSktBase *>::iterator iter;
 	sktBaseMgrLock();
-	for( iter = m_aoSkts.begin(); iter != m_aoSkts.end(); ++iter )
+	for( auto iter = m_aoSkts.begin(); iter != m_aoSkts.end(); ++iter )
 	{
 		if( (*iter) == sktBase )
 		{

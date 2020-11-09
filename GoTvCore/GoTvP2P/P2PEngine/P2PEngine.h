@@ -21,7 +21,6 @@
 #include "EngineParams.h"
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetCallbackInterface.h>
-#include <GoTvCore/GoTvP2P/HostConnect/HostConnectMgr.h>
 #include <GoTvCore/GoTvP2P/HostListMgr/HostListCallbackInterface.h>
 #include <GoTvCore/GoTvP2P/HostMgr/OtherHostSrvMgr.h>
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h>
@@ -82,7 +81,6 @@ public:
     IAudioRequests&			    getAudioRequest( void );
     AssetMgr&					getAssetMgr( void )								{ return m_AssetMgr; }
     HostListMgr&				getHostListMgr( void )							{ return m_HostListMgr; }
-    HostConnectMgr&             getHostConnectMgr( void )						{ return m_HostConnectMgr; }
     BigListMgr&					getBigListMgr( void )							{ return m_BigListMgr; }
     EngineSettings&				getEngineSettings( void )						{ return m_EngineSettings; }
 	EngineParams&				getEngineParams( void )							{ return m_EngineParams; }
@@ -104,6 +102,10 @@ public:
     OtherHostSrvMgr&            getOtherHostSrvMgr()                            { return m_OtherHostSrvMgr; }
 
 	void						lockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.lock(); }
+    /// if skt exists in connection list then lock access to connection list
+    bool						lockSkt( VxSktBase* sktBase );
+    void						unlockSkt( VxSktBase* sktBase );
+
 	PktAnnounce&				getMyPktAnnounce( void )						{ return m_PktAnn; }
     VxGUID						getMyOnlineId( void )							{ m_AnnouncePktMutex.lock(); VxGUID myId = m_PktAnn.getMyOnlineId(); m_AnnouncePktMutex.unlock(); return myId; }
 	void						unlockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.unlock(); }
@@ -580,7 +582,6 @@ protected:
     NetStatusAccum              m_NetStatusAccum;
 	AssetMgr&					m_AssetMgr;
     HostListMgr&				m_HostListMgr;
-    HostConnectMgr&             m_HostConnectMgr;
 	P2PConnectList				m_ConnectionList;
     MediaProcessor&				m_MediaProcessor;
     NetworkMgr&					m_NetworkMgr;

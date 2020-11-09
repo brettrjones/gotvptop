@@ -1,3 +1,5 @@
+
+#include <app_precompiled_hdr.h>
 #include "RenderGlOffScreenSurface.h"
 #include "RenderGlWidget.h"
 

@@ -153,7 +153,7 @@ ERunTestStatus QueryHostIdTest::doRunTest( std::string& nodeUrl )
 		reponseTime, connectTime, sendTime - connectTime, reponseTime - sendTime, VxGetCurrentThreadId() );
 	if( 0 == content.length() )
 	{
-        LogModule( eLogQueryHostIdTest, LOG_ERROR, "QueryHostIdTest: no content in response thread 0x%x" );
+        LogModule( eLogQueryHostIdTest, LOG_ERROR, "QueryHostIdTest: no content in response" );
 		sendRunTestStatus( eRunTestStatusInvalidResponse, "%s invalid response content %s\n", testName.c_str(), content.c_str(), VxGetCurrentThreadId() );
 		return doRunTestFailed();
 	}

@@ -83,7 +83,6 @@ P2PEngine::P2PEngine( VxPeerMgr& peerMgr, BigListMgr& bigListMgr )
     , m_NetStatusAccum( *this )
     , m_AssetMgr( *new AssetMgr( *this ) )
     , m_HostListMgr( *new HostListMgr( *this ) )
-    , m_HostConnectMgr( *new HostConnectMgr( *this ) )
     , m_ConnectionList( *this )
     , m_MediaProcessor( *( new MediaProcessor( *this ) ) )
     , m_NetworkMgr( *new NetworkMgr( *this, peerMgr, m_BigListMgr, m_ConnectionList ) )
@@ -116,6 +115,19 @@ P2PEngine::~P2PEngine()
 }
 
 //============================================================================
+/// if skt exists in connection list then lock access to connection list
+bool P2PEngine::lockSkt( VxSktBase* sktBase )
+{
+    return m_PeerMgr.lockSkt( sktBase );
+}
+
+//============================================================================
+void P2PEngine::unlockSkt( VxSktBase* sktBase )
+{
+    m_PeerMgr.unlockSkt( sktBase );
+}
+
+//============================================================================
 IToGui& P2PEngine::getToGui()
 {
     return IToGui::getToGui();
@@ -132,7 +144,6 @@ void P2PEngine::startupEngine()
 {
     iniitializePtoPEngine();
 
-	//m_PluginMgr.pluginMgrStartup();
 	m_NetworkStateMachine.stateMachineStartup();
 	m_PluginMgr.onAppStartup();
 }

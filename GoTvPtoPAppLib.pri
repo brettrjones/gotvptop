@@ -1,5 +1,7 @@
 #message("Building NoLimitConnect")
 
+PRECOMPILED_HEADER = $$PWD/app_precompiled_hdr.h
+
 INCLUDEPATH += $$PWD/GoTvApps/GoTvCommon/QtSource
 INCLUDEPATH += $$PWD/GoTvApps
 #so use our static linked version of freetype

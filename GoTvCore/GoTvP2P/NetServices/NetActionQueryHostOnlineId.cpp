@@ -43,7 +43,7 @@ void NetActionQueryHostOnlineId::doAction( void )
 	std::string strHttpUrl;
     buildQueryHostOnlineIdUrl( netServConn, strHttpUrl );
 
-	RCODE rc = netServConn->sendData( strHttpUrl.c_str(), strHttpUrl.length() );
+	RCODE rc = netServConn->sendData( strHttpUrl.c_str(), (int)strHttpUrl.length() );
 	if( rc )
 	{
 		LogMsg( LOG_ERROR, "NetActionQueryHostOnlineId::doAction: sendData error %d\n", rc );

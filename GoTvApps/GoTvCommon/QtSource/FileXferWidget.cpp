@@ -13,10 +13,10 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <app_precompiled_hdr.h>
 #include "FileXferWidget.h"
 #include "AppCommon.h"
 #include "MyIcons.h"
-
 
 #include "GuiFileXferSession.h"
 #include "VxMyFileInfo.h"

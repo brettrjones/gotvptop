@@ -30,8 +30,9 @@ void MyHostSrvMgr::addHostInfo( EPluginType ePluginType, VxGUID onlineId, std::s
 
 
 //============================================================================
-void MyHostSrvMgr::requestHostConnection( EHostConnectType connectType, IHostConnectCallback* callback )
+void MyHostSrvMgr::requestHostConnection( EHostConnectType connectType, IHostConnectCallback* callback, bool enableCallback )
 {
+    /*
     bool alreadyConnected = false;
 
     if( callback )
@@ -74,17 +75,19 @@ void MyHostSrvMgr::requestHostConnection( EHostConnectType connectType, IHostCon
     {
         // do the connection request
     }
+    */
 
 }
 
 //============================================================================
-void MyHostSrvMgr::onEngineContactConnected( RcConnectInfo * poInfo, bool connectionListLocked )
+void MyHostSrvMgr::onSktConnectedWithPktAnn( VxSktBase* sktBase )
 {
 
 }
 
 //============================================================================
-void MyHostSrvMgr::onEngineContactDisconnected( RcConnectInfo * poInfo, bool connectionListLocked )
+void MyHostSrvMgr::onSktDisconnected( VxSktBase* sktBase )
 {
 
 }
+

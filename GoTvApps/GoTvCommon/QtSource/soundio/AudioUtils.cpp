@@ -1,4 +1,6 @@
 
+#include <app_precompiled_hdr.h>
+
 #include <QAudioFormat>
 #include "AudioUtils.h"
 

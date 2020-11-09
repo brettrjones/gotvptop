@@ -12,6 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <app_precompiled_hdr.h>
 #include "InformationWidget.h"
 #include "AppCommon.h"
 #include "MyIcons.h"

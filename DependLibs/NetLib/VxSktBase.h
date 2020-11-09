@@ -19,10 +19,13 @@
 #include "VxSktThrottle.h"
 #include "InetAddress.h"
 
+#include <PktLib/PktAnnounce.h>
+
 #include <CoreLib/VxThread.h>
 #include <CoreLib/VxSemaphore.h>
 #include <CoreLib/VxMutex.h>
 #include <CoreLib/VxCrypto.h>
+
 
 #ifdef TARGET_OS_WINDOWS
 	#include <WinSock2.h>
@@ -71,8 +74,7 @@ class VxSktBase : public VxSktBuf, public VxSktThrottle
 {
 public:	
 	VxSktBase();
-	
-	virtual ~VxSktBase();
+	virtual ~VxSktBase() override;
 
 	virtual int					getSktId( void )								{ return m_iSktId; }
 
@@ -137,7 +139,6 @@ public:
     virtual void				setInUseByRxThread( bool inUse )                { m_InUseByRxThread = inUse; }
     virtual bool		    	getInUseByRxThread( void )                      { return m_InUseByRxThread; }
 
-
 	virtual RCODE				connectTo(	InetAddress&	oLclIp,	
 											const char *	pIpOrUrl,						// remote ip or url
 											uint16_t		u16Port,						// port to connect to
@@ -172,6 +173,10 @@ public:
 												uint16_t &u16RetPort );	// return port
 	//! get remote ip as string
 	virtual const char *		getRemoteIp( void );
+
+    //! get remote ip as string
+    virtual void 		        getRemoteIp( std::string& rmtIp ) { rmtIp = m_strRmtIp.empty() ? "" : m_strRmtIp; }
+
 	//! simpler version of getRemoteIp returns ip as host order int32_t
 	//virtual RCODE				getRemoteIp( InetAddress &u32RetIp );			// return ip
 	//! get remote port connection is on
@@ -230,6 +235,16 @@ public:
 	static int					getCurrentSktCount( void )				        { return m_CurrentSktCnt; }
     static const char *		    describeSktError( RCODE rc );
     static const char *		    describeSktCallbackReason( ESktCallbackReason reason );
+
+    virtual bool                setPeerPktAnn( PktAnnounce& pktAnn );
+    virtual PktAnnounce&        getPeerPktAnn( void )                           { return m_PeerPktAnn; }
+
+    void                        setIsPeerPktAnnSet( bool isSet ) { m_IsPeerPktAnnSet = isSet; }  
+    bool                        getIsPeerPktAnnSet( void ) { return m_IsPeerPktAnnSet; }
+    bool                        getPeerPktAnnCopy( PktAnnounce &peerAnn );
+
+    // returns peer online id. check VxGUID::isVxGUIDValid() for validity
+    VxGUID                      getPeerOnlineId( void );
 
 protected:
 	bool						toSocketAddrInfo(	int sockType, 
@@ -299,5 +314,9 @@ protected:
 	uint8_t						m_u8PluginSpecificNum;
 	RCODE						m_rcLastSktError;			// last error that occurred
     bool                        m_InUseByRxThread{ false };
+
+    bool                        m_IsPeerPktAnnSet{ false };
+    PktAnnounce                 m_PeerPktAnn;
+    VxMutex                     m_PeerAnnMutex;
 };
 

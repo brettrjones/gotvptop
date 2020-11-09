@@ -91,7 +91,7 @@ const char * RcWebServerGetContentType(const char *pFileExtensionIn)
 	// make extension upper case
 	char pFileExtension[6];
 	strcpy( pFileExtension, &pFileExtensionIn[1] );
-	int iExtLen = strlen(pFileExtension);
+	int iExtLen = (int)strlen(pFileExtension);
 	for( int i = 0; i < iExtLen; i++ )
 	{
 		pFileExtension[i] = toupper(pFileExtension[i]);
@@ -257,7 +257,7 @@ RCODE PluginBaseWebServer::doSendFile(	VxNetIdent *	netIdent,
             lenToSend = (unsigned int)u64LenLeft;
 		}
 
-        int iLenRead = fread( as8SendBuf, 1, lenToSend, m_File );
+        int iLenRead = (int)fread( as8SendBuf, 1, lenToSend, m_File );
         if( iLenRead != lenToSend )
 		{
 			rc =  VxGetLastError();

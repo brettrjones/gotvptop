@@ -12,7 +12,7 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-
+#include <app_precompiled_hdr.h>
 #include "AppSettings.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/EngineSettingsDefaultValues.h>

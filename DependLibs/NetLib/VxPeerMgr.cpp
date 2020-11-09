@@ -44,6 +44,48 @@ VxPeerMgr::~VxPeerMgr()
 	sktMgrShutdown();
 }
 
+
+//============================================================================
+/// if skt exists in connection list then lock access to connection list
+bool VxPeerMgr::lockSkt( VxSktBase* sktBase )
+{
+    if( sktBase )
+    {
+        if( sktBase->isAcceptSocket() )
+        {
+            // one we handle
+            return VxSktBaseMgr::lockSkt( sktBase );
+        }
+        else
+        {
+            // client skt
+            return m_ClientMgr.lockSkt( sktBase );
+        }
+    }
+    else
+    {
+        return false;
+    }
+}
+
+//============================================================================
+void VxPeerMgr::unlockSkt( VxSktBase* sktBase )
+{
+    if( sktBase )
+    {
+        if( sktBase->isAcceptSocket() )
+        {
+            // one we handle
+            return VxSktBaseMgr::unlockSkt( sktBase );
+        }
+        else
+        {
+            // client skt
+            return m_ClientMgr.unlockSkt( sktBase );
+        }
+    }
+}
+
 //============================================================================
 void VxPeerMgr::sktMgrShutdown( void )
 {

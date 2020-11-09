@@ -120,9 +120,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32.h \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32filesystem.h \
     $$PWD/GoTvCore/GoTvP2P/Groups/GroupDefs.h \
-	$$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectInfo.h \
-	$$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectInterface.h \
-    $$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectMgr.h \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListCallbackInterface.h \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListInfo.h \
     $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListInfoDb.h \
@@ -338,9 +335,6 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/wav_header.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32.cpp \
     $$PWD/GoTvCore/GoTvP2P/EchoCancel/win32filesystem.cpp \
-	$$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectInfo.cpp \
-	$$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectInterface.cpp \
-    $$PWD/GoTvCore/GoTvP2P/HostConnect/HostConnectMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListInfo.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListInfoDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListMgr.cpp \
@@ -351,6 +345,7 @@ SOURCES += \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferMger.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.cpp \
+	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostDefs.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostInfoBase.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostList.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostListEntry.cpp \
@@ -370,7 +365,6 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionHostOnlineId.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionQueryMyIp.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceHost.cpp \
-    $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceDefs.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceUtils.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServicesMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/Network/ConnectRequest.cpp \

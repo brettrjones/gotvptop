@@ -16,11 +16,11 @@
 #include "HostDefs.h"
 #include "OtherHostInfo.h"
 
-#include <GoTvCore/GoTvP2P/HostConnect/HostConnectInterface.h>
-#include <GoTvCore/GoTvP2P/HostConnect/HostConnectInfo.h>
+#include <GoTvCore/GoTvP2P/HostMgr/OtherHostInfo.h>
 #include <GoTvCore/GoTvP2P/NetworkMonitor/NetStatusAccum.h>
 
 #include <CoreLib/VxMutex.h>
+#include <CoreLib/VxThread.h>
 
 class P2PEngine;
 
@@ -36,16 +36,26 @@ public:
     // not mutex protected
     OtherHostInfo*              findHostMatch( OtherHostInfo& otherHostInfo );
 
-    void                        requestHostConnection( EHostConnectType connectType, IHostConnectCallback* callback );
+    bool                        requestHostConnection( EHostConnectType connectType, IHostConnectCallback* callback, bool enableCallback );
 
-    virtual void                onEngineContactConnected( RcConnectInfo * poInfo, bool connectionListLocked );
-    virtual void                onEngineContactDisconnected( RcConnectInfo * poInfo, bool connectionListLocked );
+    virtual void                onSktConnectedWithPktAnn( VxSktBase* sktBase );
+    virtual void                onSktDisconnected( VxSktBase* sktBase );
+
+    /// called by action thread
+    void                        actionThreadFunction( VxThread * poThread );
+
+    P2PEngine&                  getEngine() { return m_Engine; }
 
 protected:
     virtual void				callbackNetAvailStatusChanged( ENetAvailStatus netAvalilStatus ) override;
 
+    void                        startActionThread();
+
     //=== vars ===//
     P2PEngine&                  m_Engine;
     VxMutex                     m_HostListMutex;
+    VxThread                    m_ActionThread;
     std::vector<OtherHostInfo>  m_HostInfoList;
+    std::vector<OtherHostInfo*> m_HostDirtyList;    // hosts that require action like query host id
+    std::vector<OtherHostInfo*> m_NeedConnectList;  // hosts that need connection 
 };

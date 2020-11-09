@@ -1,4 +1,5 @@
 
+#include <app_precompiled_hdr.h>
 #include "config_gotvapps.h"
 
 #include <QPainter>

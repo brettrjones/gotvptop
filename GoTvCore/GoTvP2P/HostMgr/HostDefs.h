@@ -39,6 +39,9 @@ enum EHostAction
 	eMaxHostAction
 };
 
+EOtherHostType			        OtherHostTypeStringToEnum( const char * hostType );
+const char *			        OtherHostTypeEnumToString( EOtherHostType eHostType );
+
 EHostAction			            HostActionStringToEnum( const char * action );
 const char *			        HostActionEnumToString( EHostAction eHostAction );
 

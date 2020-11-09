@@ -1,4 +1,4 @@
-
+#include <app_precompiled_hdr.h>
 #include "IGoTv.h"
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxThread.h>

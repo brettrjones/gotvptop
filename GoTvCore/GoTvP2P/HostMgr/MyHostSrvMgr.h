@@ -13,7 +13,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include <GoTvCore/GoTvP2P/HostConnect/HostConnectInfo.h>
+#include "HostInfoBase.h"
+#include <CoreLib/VxMutex.h>
 
 class P2PEngine;
 
@@ -23,10 +24,10 @@ public:
     MyHostSrvMgr( P2PEngine& engine );
 
     void                        addHostInfo( EPluginType ePluginType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrl = "" );
-    void                        requestHostConnection( EHostConnectType connectType, IHostConnectCallback* callback );
+    void                        requestHostConnection( EHostConnectType connectType, IHostConnectCallback* callback, bool enableCallback );
 
-    virtual void                onEngineContactConnected( RcConnectInfo * poInfo, bool connectionListLocked );
-    virtual void                onEngineContactDisconnected( RcConnectInfo * poInfo, bool connectionListLocked );
+    virtual void                onSktConnectedWithPktAnn( VxSktBase* sktBase );
+    virtual void                onSktDisconnected( VxSktBase* sktBase );
 protected:
 
 
@@ -34,5 +35,4 @@ protected:
     P2PEngine&                  m_Engine;
     VxMutex                     m_CallbackMutex;
     std::vector<IHostConnectCallback *> m_ConnectionCallbacks;
-    std::vector<HostConnectInfo> m_HostConnectList;
 };

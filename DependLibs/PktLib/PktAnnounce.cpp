@@ -146,7 +146,7 @@ bool PktAnnBase::hasFriendDataChanged( PktAnnBase * poOther )
 //============================================================================
 PktAnnounce::PktAnnounce()	
 { 
-#if defined(DEBUG_PKT_LIB)
+#if defined(DEBUG)
 static bool firstTime = true;
     if( firstTime )
     {

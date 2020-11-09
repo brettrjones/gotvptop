@@ -13,6 +13,7 @@
 //============================================================================
 
 #include "OtherHostInfo.h"
+#include "OtherHostSrvMgr.h"
 
 //============================================================================
 OtherHostInfo::OtherHostInfo( const OtherHostInfo& rhs )
@@ -24,21 +25,21 @@ OtherHostInfo::OtherHostInfo( const OtherHostInfo& rhs )
 
 //============================================================================
 OtherHostInfo::OtherHostInfo( OtherHostSrvMgr* srvMgr, EOtherHostType otherHostType, std::string& hostIp, uint16_t hostPort, const char * hostUrl )
-    : HostInfoBase( otherHostType, hostIp, hostPort, hostUrl )
+    : HostInfoBase( srvMgr->getEngine(), otherHostType, hostIp, hostPort, hostUrl )
     , m_SrvMgr( srvMgr )
 {
 }
 
 //============================================================================
 OtherHostInfo::OtherHostInfo( OtherHostSrvMgr* srvMgr, EOtherHostType otherHostType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrl )
-    : HostInfoBase( otherHostType, onlineId, hostIp, hostPort, hostUrl )
+    : HostInfoBase( srvMgr->getEngine(), otherHostType, onlineId, hostIp, hostPort, hostUrl )
     , m_SrvMgr( srvMgr )
 {
 }
 
 //============================================================================
 OtherHostInfo::OtherHostInfo( OtherHostSrvMgr* srvMgr, EPluginType ePluginType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrl )
-    : HostInfoBase( ePluginType, onlineId, hostIp, hostPort, hostUrl )
+    : HostInfoBase( srvMgr->getEngine(), ePluginType, onlineId, hostIp, hostPort, hostUrl )
     , m_SrvMgr( srvMgr )
 {
 }
@@ -65,4 +66,10 @@ bool OtherHostInfo::operator==( const OtherHostInfo& rhs )
     }
 
     return isEqual;
+}
+
+//============================================================================
+bool OtherHostInfo::requiresAction( void )
+{
+    return m_NeedHostQueryId;
 }

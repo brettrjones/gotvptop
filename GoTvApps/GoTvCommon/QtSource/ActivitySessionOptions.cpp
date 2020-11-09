@@ -12,6 +12,8 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
+
+#include <app_precompiled_hdr.h>
 #include "GuiOfferSession.h"
 #include "ActivitySessionOptions.h"
 #include "AppGlobals.h"

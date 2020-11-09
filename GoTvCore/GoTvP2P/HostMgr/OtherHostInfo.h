@@ -14,7 +14,6 @@
 #pragma once
 
 #include "HostInfoBase.h"
-#include <GoTvCore/GoTvP2P/HostConnect/HostConnectInterface.h>
 
 #include <CoreLib/VxMutex.h>
 
@@ -35,16 +34,20 @@ public:
     OtherHostInfo&				operator=( const OtherHostInfo& rhs );
     bool        				operator==( const OtherHostInfo& rhs );
 
+    virtual bool                requiresAction( void ) override;
     void                        setNeedQueryHostId( bool needQuery )        { m_NeedHostQueryId = needQuery; }
     bool                        getNeedQueryHostId( void )                  { return m_NeedHostQueryId; }
+    void                        setFailedActionCnt( int failedCnt )         { m_FailedActionCnt = failedCnt; }
+    int                         getFailedActionCnt( void )                  { return m_FailedActionCnt; }
 
 protected:
     //=== vars ===//
     OtherHostSrvMgr*            m_SrvMgr{ nullptr };
     VxMutex                     m_CallbackMutex;
     std::vector<IHostConnectCallback *> m_ConnectionCallbacks;
-    RcConnectInfo*              m_RcConnectInfo{ nullptr };
     bool                        m_NeedHostQueryId{ false };
+    int                         m_FailedActionCnt{ 0 };
+
 };
 
 

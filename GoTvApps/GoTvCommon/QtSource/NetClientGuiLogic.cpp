@@ -11,7 +11,8 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
-#pragma once
+
+#include <app_precompiled_hdr.h>
 
 #include "NetClientGuiLogic.h"
 

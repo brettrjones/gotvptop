@@ -13,6 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <app_precompiled_hdr.h>
 #include "OfferBarWidget.h"
 #include "OffersMgr.h"
 

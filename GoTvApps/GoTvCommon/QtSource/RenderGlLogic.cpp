@@ -1,3 +1,5 @@
+
+#include <app_precompiled_hdr.h>
 #include "RenderGlLogic.h"
 #include "RenderKodiThread.h"
 #include "RenderGlOffScreenSurface.h"

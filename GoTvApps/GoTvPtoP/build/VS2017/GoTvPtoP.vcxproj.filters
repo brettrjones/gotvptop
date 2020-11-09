@@ -960,6 +960,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityQueryHostIdTest.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\app_precompiled_hdr.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -2897,6 +2900,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettingsData.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\app_precompiled_hdr.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

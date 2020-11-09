@@ -1309,3 +1309,43 @@ std::string VxSktBase::describeSktType( void )
 					 ( 0 == getLastActiveTimeMs() ) ? "never" : VxTimeUtil::formatTimeStampIntoHoursAndMinutesAndSeconds( getLastActiveTimeMs() ).c_str() );
     return typeDesc;
 }
+
+//============================================================================
+bool VxSktBase::setPeerPktAnn( PktAnnounce &peerAnn )
+{
+    m_PeerAnnMutex.lock();
+    bool isSameSize = peerAnn.getPktLength() && peerAnn.getPktLength() == m_PeerPktAnn.getPktLength();
+    if( isSameSize )
+    {
+        memcpy( &m_PeerPktAnn, &peerAnn, m_PeerPktAnn.getPktLength() );
+        setIsPeerPktAnnSet( isSameSize );
+    }
+
+    m_PeerAnnMutex.unlock();
+    return isSameSize;
+}
+
+//============================================================================
+bool VxSktBase::getPeerPktAnnCopy( PktAnnounce &peerAnn )
+{
+    m_PeerAnnMutex.lock();
+    bool copyResult = getIsPeerPktAnnSet() && peerAnn.getPktLength() && peerAnn.getPktLength() == m_PeerPktAnn.getPktLength();
+    if( copyResult )
+    {
+        memcpy( &peerAnn, &m_PeerPktAnn, m_PeerPktAnn.getPktLength() );
+    }
+
+    m_PeerAnnMutex.unlock();
+    return copyResult;
+}
+
+//============================================================================
+VxGUID VxSktBase::getPeerOnlineId( void )
+{
+    VxGUID onlineId;
+    m_PeerAnnMutex.lock();
+    onlineId = m_PeerPktAnn.getMyOnlineId();
+    m_PeerAnnMutex.unlock();
+
+    return onlineId;
+}

@@ -226,7 +226,7 @@
       </PrecompiledHeaderOutputFile>
       <CallingConvention>Cdecl</CallingConvention>
       <BufferSecurityCheck>true</BufferSecurityCheck>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <FloatingPointModel>Fast</FloatingPointModel>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -532,9 +532,6 @@
     <ClCompile Include="..\..\GoTvP2P\EchoCancel\wav_header.cpp" />
     <ClCompile Include="..\..\GoTvP2P\EchoCancel\win32.cpp" />
     <ClCompile Include="..\..\GoTvP2P\EchoCancel\win32filesystem.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\HostConnect\HostConnectInfo.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\HostConnect\HostConnectInterface.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\HostConnect\HostConnectMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListInfo.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListInfoDb.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListMgr.cpp" />
@@ -544,7 +541,9 @@
     <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListXferDb.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListXferMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostListMgr\HostListXferSession.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostConnectInterface.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostDb.cpp" />
+    <ClCompile Include="..\..\GoTvP2P\HostMgr\HostDefs.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostInfoBase.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostList.cpp" />
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostListEntry.cpp" />
@@ -564,7 +563,6 @@
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionQueryHostOnlineId.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionQueryMyIp.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetActionRandomConnect.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceDefs.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceHost.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServicesMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\NetServices\NetServiceUtils.cpp" />
@@ -804,9 +802,6 @@
     <ClInclude Include="..\..\GoTvP2P\EchoCancel\win32.h" />
     <ClInclude Include="..\..\GoTvP2P\EchoCancel\win32filesystem.h" />
     <ClInclude Include="..\..\GoTvP2P\Groups\GroupDefs.h" />
-    <ClInclude Include="..\..\GoTvP2P\HostConnect\HostConnectInfo.h" />
-    <ClInclude Include="..\..\GoTvP2P\HostConnect\HostConnectInterface.h" />
-    <ClInclude Include="..\..\GoTvP2P\HostConnect\HostConnectMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListCallbackInterface.h" />
     <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListInfo.h" />
     <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListInfoDb.h" />
@@ -817,6 +812,7 @@
     <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListXferDb.h" />
     <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListXferMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\HostListMgr\HostListXferSession.h" />
+    <ClInclude Include="..\..\GoTvP2P\HostMgr\HostConnectInterface.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDb.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostDefs.h" />
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostInfoBase.h" />

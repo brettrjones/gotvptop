@@ -13,6 +13,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <app_precompiled_hdr.h>
+
 #include "ActivityToFriendViewSharedFiles.h"
 #include "FileListReplySession.h"
 #include "AppCommon.h"

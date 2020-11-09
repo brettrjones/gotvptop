@@ -13,6 +13,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <app_precompiled_hdr.h>
 #include "AccountDb.h"
 
 #include <CoreLib/sqlite3.h>

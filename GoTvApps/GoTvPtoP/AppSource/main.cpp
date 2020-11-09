@@ -1,4 +1,6 @@
 
+#include <app_precompiled_hdr.h>
+
 #include "GoTvAppConfig.h"
 #ifdef BUILD_GOTV_APP
 

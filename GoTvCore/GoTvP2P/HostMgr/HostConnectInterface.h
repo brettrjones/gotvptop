@@ -33,14 +33,22 @@ enum EHostConnectType
     eMaxHostConnectNone
 };
 
-class RcConnectInfo;
+class VxSktBase;
 
-class IHostConnectCallback
+class IConnectRequestCallback
 {
 public:
     /// return true if have use for this connection
-    virtual bool                onContactConnected( EHostConnectType hostConnectType, RcConnectInfo * poInfo, bool connectionListLocked ) = 0;
-    virtual void                onContactDisconnected( EHostConnectType hostConnectType, RcConnectInfo * poInfo, bool connectionListLocked ) = 0;
+    virtual bool                onContactConnected( EHostConnectType hostConnectType, VxSktBase* sktBase ) = 0;
+    virtual void                onContactDisconnected( EHostConnectType hostConnectType, VxSktBase* sktBase ) = 0;
+};
+
+class IHostConnectCallback : public IConnectRequestCallback
+{
+public:
+    /// return true if have use for this connection
+    virtual bool                onContactConnected( EHostConnectType hostConnectType, VxSktBase* sktBase ) = 0;
+    virtual void                onContactDisconnected( EHostConnectType hostConnectType, VxSktBase* sktBased ) = 0;
 
     // these should only be called by Host Connect Mgr
     bool                        hasHostConnectType( EHostConnectType hostConnectType );

@@ -26,7 +26,6 @@
 #include <NetLib/VxSktBase.h>
 #include <CoreLib/VxFileUtil.h>
 
-
 //============================================================================
 PluginServiceHostGroup::PluginServiceHostGroup( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PluginBaseHostService( engine, pluginMgr, myIdent )
@@ -73,9 +72,9 @@ void PluginServiceHostGroup::buildHostGroupAnnounce( PluginSetting& pluginSettin
 //============================================================================
 void PluginServiceHostGroup::sendHostGroupAnnounce( void )
 {
-    if( m_SendAnnounceEnabled && m_HostAnnounceBuilt )
+    if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
     {
-        m_Engine.getHostConnectMgr().requestHostConnection( eHostConnectGroupAnnounce, this );
+        m_Engine.getOtherHostSrvMgr().requestHostConnection( eHostConnectGroupAnnounce, this, true );
     }
 }
 
@@ -87,24 +86,38 @@ void PluginServiceHostGroup::onPluginSettingChange( PluginSetting& pluginSetting
 }
 
 //============================================================================
-bool PluginServiceHostGroup::onContactConnected( EHostConnectType hostConnectType, RcConnectInfo * poInfo, bool connectionListLocked )
+bool PluginServiceHostGroup::onContactConnected( EHostConnectType hostConnectType, VxSktBase* sktBase )
 {
-    if( m_SendAnnounceEnabled && m_HostAnnounceBuilt )
+    if( m_SendAnnounceEnabled && m_HostAnnounceBuilt && isPluginEnabled() )
     {
-        m_AnnMutex.lock();
-        if( poInfo && poInfo->getSkt() && poInfo->getBigListInfo() && poInfo->getBigListInfo()->getMyOnlineId().isVxGUIDValid() )
+        if( eHostConnectGroupAnnounce == hostConnectType )
         {
-            poInfo->getSkt()->txPacket( poInfo->getBigListInfo()->getMyOnlineId(), &m_PktHostAnnounce );
-        }
+            m_AnnMutex.lock();
+            if( m_Engine.lockSkt( sktBase ) )
+            {
 
-        m_AnnMutex.unlock();
+                if( sktBase && sktBase->getPeerPktAnn().getMyOnlineId().isVxGUIDValid() )
+                {
+                    sktBase->txPacket( sktBase->getPeerPktAnn().getMyOnlineId(), &m_PktHostAnnounce );
+                }
+
+                m_Engine.unlockSkt( sktBase );
+            }
+
+            m_AnnMutex.unlock();
+        }
     }
+
+    m_Engine.getOtherHostSrvMgr().requestHostConnection( eHostConnectGroupAnnounce, this, false );
 
     return false;
 }
 
 //============================================================================
-void PluginServiceHostGroup::onContactDisconnected( EHostConnectType hostConnectType, RcConnectInfo * poInfo, bool connectionListLocked )
+void PluginServiceHostGroup::onContactDisconnected( EHostConnectType hostConnectType, VxSktBase* sktBase )
 {
-
+    if( eHostConnectGroupAnnounce == hostConnectType )
+    {
+        // no action needed. we connect and send our group listing then disconnect
+    }
 }

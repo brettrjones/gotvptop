@@ -13,10 +13,9 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include <app_precompiled_hdr.h>
+
 #include "PopupMenu.h"
-#include "AppCommon.h"
-#include "MyIcons.h"
-#include "AppGlobals.h"
 #include "ActivitySoundOptions.h"
 #include "ActivityPermissions.h"
 #include "ActivityPermissionsRelay.h"

@@ -96,6 +96,11 @@ void P2PEngine::onPktAnnounce( VxSktBase * sktBase, VxPktHdr * pktHdr )
 											false );
 	}
 
+    if( sktBase->setPeerPktAnn( *pkt ) )
+    {
+        getOtherHostSrvMgr().onSktConnectedWithPktAnn( sktBase );
+    }
+
 	getConnectList().addConnection( sktBase, bigListInfo, ( ePktAnnUpdateTypeNewContact == updateType ) );
 
 	if( pkt->getIsTopTenRequested() )

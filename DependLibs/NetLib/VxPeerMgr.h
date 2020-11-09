@@ -29,6 +29,10 @@ public:
 
 	virtual void				sktMgrShutdown( void );
 
+    /// if skt exists in connection list then lock access to connection list
+    virtual bool				lockSkt( VxSktBase* sktBase ) override;
+    virtual void				unlockSkt( VxSktBase* sktBase ) override;
+
 	VxClientMgr&				getClientMgr( void )			{ return m_ClientMgr; }
 
 	virtual void				setReceiveCallback( VX_SKT_CALLBACK pfnReceive, void * pvUserData );

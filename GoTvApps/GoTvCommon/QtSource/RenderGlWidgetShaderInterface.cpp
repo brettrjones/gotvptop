@@ -1,5 +1,7 @@
-#include "RenderGlWidget.h"
 
+#include <app_precompiled_hdr.h>
+
+#include "RenderGlWidget.h"
 
 //============================================================================
 bool RenderGlWidget::enableShader( ESHADERMETHOD method )

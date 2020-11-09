@@ -17,6 +17,27 @@
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
+#include <NetLib/VxSktBase.h>
+
+namespace
+{
+    //============================================================================
+    static void * OtherHostSrvMgrThreadFunc( void * pvContext )
+    {
+        VxThread * poThread = ( VxThread * )pvContext;
+        poThread->setIsThreadRunning( true );
+        OtherHostSrvMgr * poMgr = ( OtherHostSrvMgr * )poThread->getThreadUserParam();
+        if( poMgr )
+        {
+            poMgr->actionThreadFunction( poThread );
+        }
+
+        poThread->threadAboutToExit();
+        return nullptr;
+    }
+}
+
+
 //============================================================================
 OtherHostSrvMgr::OtherHostSrvMgr( P2PEngine& engine )
     : m_Engine( engine )
@@ -28,6 +49,91 @@ OtherHostSrvMgr::OtherHostSrvMgr( P2PEngine& engine )
 void OtherHostSrvMgr::callbackNetAvailStatusChanged( ENetAvailStatus netAvalilStatus )
 {
     LogMsg( LOG_DEBUG, "OtherHostSrvMgr callbackNetAvailStatusChanged %s", DescribeNetAvailStatus( netAvalilStatus ));
+}
+
+//============================================================================
+void OtherHostSrvMgr::startActionThread()
+{
+    if( !m_ActionThread.isThreadRunning() )
+    {
+        m_ActionThread.startThread( ( VX_THREAD_FUNCTION_T )OtherHostSrvMgrThreadFunc, this, "OtherHostSrvMgrThreadFunc" );
+    }
+}
+
+//============================================================================
+/// called by action thread
+void OtherHostSrvMgr::actionThreadFunction( VxThread * poThread )
+{
+    while( m_HostDirtyList.size() )
+    {
+        bool actionTacken = false;
+        m_HostListMutex.lock();
+        if( m_HostDirtyList.size() )
+        {
+            // we make a copy of the host info we need to avoid locking the list for long periods while performing action
+            OtherHostInfo *otherHostSave = m_HostDirtyList.front();
+            OtherHostInfo otherHostInfo = *otherHostSave;
+            m_HostDirtyList.erase( m_HostDirtyList.begin() );
+            m_HostListMutex.unlock();
+
+            bool actionSuccess;
+            if( otherHostInfo.getNeedQueryHostId() && otherHostInfo.isActionTakenTimeExpired() )
+            {
+                actionTacken = true; 
+                VxGUID hostId;
+                if( otherHostInfo.doActionQueryHostId( hostId ) )
+                {
+                    m_HostListMutex.lock();
+                    OtherHostInfo* listInfo = findHostMatch( otherHostInfo );
+                    if( listInfo )
+                    {
+                        listInfo->setHostOnlineId( hostId );
+                        listInfo->setNeedQueryHostId( false );
+                        listInfo->setFailedActionCnt( 0 );
+                        if( !listInfo->requiresAction() && listInfo->needConnection() )
+                        {
+                            m_NeedConnectList.push_back( listInfo );
+                        }
+                    }
+
+                    actionSuccess = true;
+                    m_HostListMutex.unlock();
+                }
+                else
+                {
+                    // TODO.. what if fails .. should it be put back in dirty queue?
+                    m_HostListMutex.lock();
+                    otherHostSave->updateActionTakenTime();
+                    m_HostDirtyList.push_back( otherHostSave );
+                    m_HostListMutex.unlock();
+                }
+            }
+
+            if( !actionSuccess )
+            {
+                m_HostListMutex.lock();
+                OtherHostInfo* listInfo = findHostMatch( otherHostInfo );
+                if( listInfo )
+                {
+                    int failedActionCnt = listInfo->getFailedActionCnt();
+                    listInfo->setFailedActionCnt( failedActionCnt + 1 );
+
+                    /// TODO  should probably quit trying or expand time between attempts
+                    // for now just put it at the end of the action required list
+                    m_HostDirtyList.push_back( listInfo );
+                }
+
+                m_HostListMutex.unlock();
+            }
+        }
+        else
+        {
+            m_HostListMutex.unlock();
+        }
+
+
+
+    }
 }
 
 //============================================================================
@@ -56,6 +162,7 @@ void OtherHostSrvMgr::addHostInfo( EPluginType ePluginType, VxGUID onlineId, std
 //============================================================================
 void OtherHostSrvMgr::addHostInfo( OtherHostInfo& otherHostInfo )
 {
+    bool actionNeeded = false;
     m_HostListMutex.lock();
     OtherHostInfo *hostInfo = findHostMatch( otherHostInfo );
     if( hostInfo )
@@ -65,9 +172,34 @@ void OtherHostSrvMgr::addHostInfo( OtherHostInfo& otherHostInfo )
     else
     {
         m_HostInfoList.push_back( otherHostInfo );
+        hostInfo = &m_HostInfoList[ m_HostInfoList.size() - 1 ];
+    }
+
+    if( hostInfo && hostInfo->requiresAction() )
+    {
+        // first see if already in the action list
+        bool isInList = false;
+        for( auto hostEntry : m_HostDirtyList )
+        {
+            if( ( hostEntry == hostInfo ) || hostEntry->isMatch( *hostInfo ) )
+            {
+                isInList = true;
+                break;
+            }
+        }
+
+        if( !isInList )
+        {
+            m_HostDirtyList.push_back( hostInfo );
+            actionNeeded = true;
+        }
     }
 
     m_HostListMutex.unlock();
+    if( actionNeeded )
+    {
+        startActionThread();
+    }
 }
 
 //============================================================================
@@ -87,64 +219,128 @@ OtherHostInfo* OtherHostSrvMgr::findHostMatch( OtherHostInfo& otherHostInfo )
     return foundEntry;
 }
 
+/*
 //============================================================================
-void OtherHostSrvMgr::requestHostConnection( EHostConnectType connectType, IHostConnectCallback* callback )
+EOtherHostType OtherHostSrvMgr::connectTypeToHostType( EHostConnectType connectType )
 {
-    /*
-    bool alreadyConnected = false;
-
-
-    if( callback )
+    EOtherHostType hostType = eOtherHostUnknown;
+    switch( connectType )
     {
-        m_CallbackMutex.lock();
-        bool alreadyExists = false;
+    case eHostConnectGroupFind:
+    case eHostConnectGroupAnnounce:
+        hostType = eOtherHostNetworkHost;
+        break;
+
+    case eHostConnectRelayFind:
+    case eHostConnectRelayJoin:
+    case eHostConnectGroupJoin:
+        hostType = eOtherHostGroupHost;
+        break;
+
+    case eHostConnectChatRoomAnnounce:
+    case eHostConnectChatRoomFind:
+    case eHostConnectChatRoomJoin:
+        hostType = eOtherHostChatHost;
+        break;
+
+    default:
+        break;
+    }
+
+    return hostType;
+}
+*/
+
+//============================================================================
+bool OtherHostSrvMgr::requestHostConnection( EHostConnectType connectType, IHostConnectCallback* callback, bool enableCallback )
+{
+    bool addedOrExists = false;
+    EOtherHostType hostType = HostInfoBase::connectTypeToHostType( connectType );
+    if( callback && ( hostType != eOtherHostUnknown ) )
+    {
         callback->addHostConnectType( connectType );
-        // make sure not a duplicate
-        for( auto cb : m_ConnectionCallbacks )
+        m_HostListMutex.lock();
+
+        bool wasTypeFound = false;
+        std::vector<VxSktBase *> sktList;
+
+        for( OtherHostInfo& hostEntry : m_HostInfoList )
         {
-            if( cb == callback )
+            if( hostType == hostEntry.getOtherHostType() )
             {
-                alreadyExists = true;
-                break;
+                if( enableCallback )
+                {
+                    addedOrExists |= hostEntry.addConnectionRequest( connectType, callback );
+                }
+                else
+                {
+                    bool callbackRemoved = hostEntry.removeConnectionRequest( connectType, callback );
+                    addedOrExists |= callbackRemoved;
+                    if( callbackRemoved )
+                    {
+                        hostEntry.addToSktListIfSktNotInUse( sktList );
+                    }
+                }
             }
         }
 
-        if( !alreadyExists )
+        if( !enableCallback && addedOrExists && !sktList.empty() )
         {
-            m_ConnectionCallbacks.push_back( callback );
-        }
-
-        // see if we already have a connection
-        for( auto hostInfo : m_HostConnectList )
-        {
-            if( hostInfo.hasHostService( connectType ) && hostInfo.isConnected( connectType ))
+            // decide if we can close a skt because no longer needed
+            std::vector<VxSktBase *> sktList;
+            for( auto sktBase : sktList )
             {
-                m_Engine.getConnectList().connectListLock();
-                alreadyConnected = true;
-                callback->onContactConnected( connectType, hostInfo.getConnectInfo(), true );
-                m_Engine.getConnectList().connectListUnlock();
-                break;
+                bool isSktInUse = false;
+                for( OtherHostInfo& hostEntry : m_HostInfoList )
+                {
+                    if( hostType == hostEntry.getOtherHostType() )
+                    {
+                        if( hostEntry.isSktInUse( sktBase ) )
+                        {
+                            isSktInUse = true;
+                            break;
+                        }
+                    }
+                }
+
+                if( !isSktInUse )
+                {
+                    // we are done with socket
+                    sktBase->closeSkt(444, true);
+                }
             }
         }
 
-        m_CallbackMutex.unlock();
+        m_HostListMutex.unlock();
     }
-
-    if( !alreadyConnected )
+    else
     {
-        // do the connection request
+        LogMsg( LOG_ERROR, "OtherHostSrvMgr::requestHostConnection null callback" );
     }
-    */
+
+    return addedOrExists;
 }
 
 //============================================================================
-void OtherHostSrvMgr::onEngineContactConnected( RcConnectInfo * poInfo, bool connectionListLocked )
+void OtherHostSrvMgr::onSktConnectedWithPktAnn( VxSktBase* sktBase )
 {
+    m_HostListMutex.lock();
+    for( OtherHostInfo& hostInfo : m_HostInfoList )
+    {
+        hostInfo.onSktConnectedWithPktAnn( sktBase );
+    }
 
+    m_HostListMutex.unlock();
 }
 
 //============================================================================
-void OtherHostSrvMgr::onEngineContactDisconnected( RcConnectInfo * poInfo, bool connectionListLocked )
+void OtherHostSrvMgr::onSktDisconnected( VxSktBase* sktBase )
 {
+    m_HostListMutex.lock();
+    for( OtherHostInfo& hostInfo : m_HostInfoList )
+    {
+        hostInfo.onSktDisconnected( sktBase );
+    }
 
+    m_HostListMutex.unlock();
 }
