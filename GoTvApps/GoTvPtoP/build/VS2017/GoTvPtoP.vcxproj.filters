@@ -1484,9 +1484,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxFlatButton.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
-    <QtRcc Include="..\..\..\GoTvCommon\gotvcommon.qrc">
-      <Filter>GoTvCommon</Filter>
-    </QtRcc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxPushButton.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
@@ -3058,5 +3055,10 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityQueryHostIdTest.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="..\..\..\GoTvCommon\gotvcommon.qrc">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </QtRcc>
   </ItemGroup>
 </Project>

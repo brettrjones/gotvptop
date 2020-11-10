@@ -338,7 +338,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <ProgramDataBaseFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -352,9 +352,9 @@
       <OpenMPSupport>
       </OpenMPSupport>
       <XMLDocumentationFileName>$(SolutionDir)objs\$(TargetName)\$(Configuration)\</XMLDocumentationFileName>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>app_precompiled_hdr.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(ProjectDir)/../../../app_precompiled_hdr.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
@@ -405,263 +405,773 @@
     </QtUic>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\app_precompiled_hdr.cpp" />
-    <ClCompile Include="..\..\..\..\GoTvInterface\GoTvRenderFrame.cpp" />
-    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTv.cpp" />
-    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvDefs.cpp" />
-    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvFromGui.cpp" />
-    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvRender.cpp" />
-    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvToGui.cpp" />
-    <ClCompile Include="..\..\..\..\GoTvInterface\ILog.cpp" />
-    <ClCompile Include="..\..\..\..\GoTvInterface\IToGui.cpp" />
+    <ClCompile Include="..\..\..\..\app_precompiled_hdr.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GoTvInterface\GoTvRenderFrame.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTv.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvDefs.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvFromGui.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvRender.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GoTvInterface\IGoTvToGui.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GoTvInterface\ILog.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GoTvInterface\IToGui.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\GoTvInterface\OsInterface\OsInterface.cpp" />
     <ClCompile Include="..\..\..\..\GoTvInterface\OsWin32\IWin32.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AccountDb.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AccountMgr.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityAddRemoveLibraryFiles.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityAppSetup.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityBase.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityBrowseFiles.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityChooseTestWebsiteUrl.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityCreateAccount.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDebugSettings.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDownloadItemMenu.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDownloads.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityFileSearch.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityInformation.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityIsPortOpenTest.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityMessageBox.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetServiceTest.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkHostTest.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkState.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPermissions.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPermissionsRelay.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPersonalRecorder.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityQueryHostIdTest.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityReplyFileOffer.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityScanPeopleSearch.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityScanProfiles.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityScanStoryBoards.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityScanWebCams.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySelectFileToSend.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySessionFileOffer.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySessionOptions.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityShowHelp.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySoundOptions.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityTimedMessage.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendBase.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendChangeFriendship.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendMultiSession.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendRequestRelay.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendTodGame.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendVideoPhone.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendViewSharedFiles.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendVoicePhone.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityUploads.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityVideoOptions.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewAudioFile.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewLibraryFiles.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewMySharedFiles.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewVideoFile.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityWebCamClient.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityYesNoMsgBox.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommon.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonAudio.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonEvents.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonLogin.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonRender.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppDefs.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppGlobals.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletAboutApp.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletApplicationInfo.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletBase.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChooseThumbnail.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientAvatarImage.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientBase.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientChatRoom.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientRandomConnect.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientShareFiles.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientShareWebCam.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientStoryboard.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletEditAboutMe.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletEditAvatarImage.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletEditStoryboard.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGalleryImage.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGalleryThumb.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupUser.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletKodi.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLibrary.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLogSettings.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLogView.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletMgr.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetHostingPage.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettings.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettingsData.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPermissionList.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPersonalRecorder.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerBase.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSearchPage.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceAboutMe.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceAvatarImage.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceBase.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceBaseSettings.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceChatRoom.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceConnectionTest.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceHostGroup.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceHostNetwork.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceRandomConnect.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceRandomConnectRelay.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceRelay.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceShareFiles.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceShareWebCam.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceStoryboard.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettings.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsAboutMe.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsAvatarImage.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsChatRoom.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsConnectionTest.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsFileXfer.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostGroup.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostNetwork.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsMessenger.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsRandomConnect.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsRandomConnectRelay.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsShareFiles.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsShareWebCam.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsStoryboard.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsTruthOrDare.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsVideoPhone.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsVoicePhone.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletShareServicesPage.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSnapshot.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletTheme.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerVideo.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletUserIdentity.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppProfile.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppSettings.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppSetup.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetBaseWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetFaceWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetPhotoWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetTextWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetVideoWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetVoiceWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AvatarBar.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\BottomBarWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\CamLogic.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ChatEntryWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLaunchWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLaunchPage.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiParams.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImageListEntry.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImageListRow.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImageListWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImagePickBar.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InformationWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\LogMgr.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\LogWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MessengerPage.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetAvailStatusWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetClientGuiLogic.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetHostGuiLogic.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetworkKeyWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetworkTestWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PermissionListItem.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PermissionWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PlayerGlWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PluginSettingsWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RelayServiceWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlLogic.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlMatrix.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlOffScreenSurface.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlShaders.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetFonts.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetRender.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetShaderInterface.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetTextures.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderKodiThread.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderLogoShaders.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderDefsGl.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderDefsGles.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ServiceSettingsWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInIo.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInThread.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioIoMgr.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioMixer.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioOutIo.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioOutThread.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioTestGenerator.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioUtils.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailChooseWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailEditWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailViewWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppTheme.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAspectFrame.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxComboBox.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxContextMenu.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\DialogConfirmRemoveMessage.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileActionBarWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileActionMenu.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileItemInfo.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileItemWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileListReplySession.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileShareItemWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileXferWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\Friend.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendList.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListDelegate.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileActionSession.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileXferSession.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferSession.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HistoryEntryWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HistoryListWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HomeWindow.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\IdentWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputAllWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputBaseWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputFaceWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputPhotoWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputTextWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputVideoWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputVoiceWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InstMsgWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ListEntryWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MultiSessionState.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MyIcons.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MySndMgr.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferBarWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferSessionLogic.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferSessionState.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OffersMgr.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFileMenu.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFileShare.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFriend.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingNotify.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingOfferToFriend.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingOptions.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingScan.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingSearch.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingServers.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingMedia.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PopupMenu.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PopupMenuDelegate.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAvatarImage.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppDisplay.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxFrame.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenu.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenuButton.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenuButtonBottom.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenuButtonTop.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AccountDb.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AccountMgr.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityAddRemoveLibraryFiles.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityAppSetup.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityBase.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityBrowseFiles.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityChooseTestWebsiteUrl.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityCreateAccount.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDebugSettings.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDownloadItemMenu.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityDownloads.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityFileSearch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityInformation.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityIsPortOpenTest.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityMessageBox.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetServiceTest.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkHostTest.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityNetworkState.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPermissions.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPermissionsRelay.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPersonalRecorder.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityQueryHostIdTest.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityReplyFileOffer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityScanPeopleSearch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityScanProfiles.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityScanStoryBoards.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityScanWebCams.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySelectFileToSend.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySessionFileOffer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySessionOptions.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityShowHelp.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySnapShot.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivitySoundOptions.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityTimedMessage.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendBase.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendChangeFriendship.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendMultiSession.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendRequestRelay.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendTodGame.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendVideoPhone.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendViewSharedFiles.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityToFriendVoicePhone.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityUploads.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityVideoOptions.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewAudioFile.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewLibraryFiles.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewMySharedFiles.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityViewVideoFile.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityWebCamClient.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityYesNoMsgBox.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommon.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonAudio.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonEvents.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonLogin.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppCommonRender.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppDefs.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppGlobals.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletAboutApp.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletApplicationInfo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletBase.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChooseThumbnail.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientAvatarImage.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientBase.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientChatRoom.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientRandomConnect.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientShareFiles.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientShareWebCam.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientStoryboard.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletEditAboutMe.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletEditAvatarImage.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletEditStoryboard.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGalleryImage.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGalleryThumb.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupUser.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletKodi.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLibrary.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLogSettings.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLogView.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletMgr.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetHostingPage.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettings.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettingsData.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPermissionList.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPersonalRecorder.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerBase.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSearchPage.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceAboutMe.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceAvatarImage.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceBase.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceBaseSettings.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceChatRoom.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceConnectionTest.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceHostGroup.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceHostNetwork.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceRandomConnect.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceRandomConnectRelay.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceRelay.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceShareFiles.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceShareWebCam.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletServiceStoryboard.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettings.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsAboutMe.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsAvatarImage.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsChatRoom.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsConnectionTest.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsFileXfer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostGroup.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostNetwork.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsMessenger.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsRandomConnect.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsRandomConnectRelay.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsShareFiles.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsShareWebCam.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsStoryboard.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsTruthOrDare.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsVideoPhone.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsVoicePhone.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletShareServicesPage.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSnapshot.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletTheme.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletPlayerVideo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletUserIdentity.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppProfile.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppSettings.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppSetup.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetBaseWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetFaceWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetPhotoWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetTextWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetVideoWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AssetVoiceWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AvatarBar.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\BottomBarWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\CamLogic.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ChatEntryWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLaunchWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletLaunchPage.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\EventsQtToGoTv.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiParams.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImageListEntry.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImageListRow.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImageListWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ImagePickBar.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InformationWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\LogMgr.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\LogWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MessengerPage.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetAvailStatusWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetClientGuiLogic.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetHostGuiLogic.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetworkKeyWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\NetworkTestWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PermissionListItem.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PermissionWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PlayerGlWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PluginSettingsWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RelayServiceWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlLogic.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlMatrix.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlOffScreenSurface.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlShaders.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetFonts.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetRender.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetShaderInterface.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderGlWidgetTextures.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderKodiThread.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderLogoShaders.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderDefsGl.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderDefsGles.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RenderShaderQt.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ServiceSettingsWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInIo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioInThread.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioIoMgr.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioMixer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioOutIo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioOutThread.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioTestGenerator.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\soundio\AudioUtils.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailChooseWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailEditWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ThumbnailViewWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppStyle2.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppTheme.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAspectFrame.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxComboBox.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxContextMenu.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\DialogConfirmRemoveMessage.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileActionBarWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileActionMenu.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileItemInfo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileItemWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileListReplySession.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileShareItemWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FileXferWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\Friend.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendList.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListDelegate.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\FriendListWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileActionSession.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiFileXferSession.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiHelpers.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\GuiOfferSession.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HistoryEntryWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HistoryListWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\HomeWindow.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\IdentWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputAllWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputBaseWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputFaceWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputPhotoWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputTextWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputVideoWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InputVoiceWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\InstMsgWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ListEntryWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MultiSessionState.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MyIcons.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\MySndMgr.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferBarWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferSessionLogic.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferSessionState.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OffersMgr.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\OfferWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFileMenu.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFileShare.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingFriend.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingNotify.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingOfferToFriend.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingOptions.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingScan.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingSearch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingServers.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\P2PThingMedia.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PopupMenu.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\PopupMenuDelegate.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAvatarImage.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxAppDisplay.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxFrame.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenu.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenuButton.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenuButtonBottom.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMenuButtonTop.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxPlainTextEdit.cpp">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">input</DynamicSource>
@@ -678,35 +1188,92 @@
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\$(ConfigurationName)\%(Filename).moc</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\release;$(QTDIR)\mkspecs\win64-msvc</IncludePath>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxPushButton.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxComboBoxFileFilter.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxFlatButton.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxGuidQt.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxLabel.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMyFileInfo.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxSndInstance.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxResourceToRealFile.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxScrollArea.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxShredderButton.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxSpinProgress.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxTagLabel.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxTilePositioner.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RasterWindow.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\SessionWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\SoundCtrlWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\StoryWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TextChatLogic.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TitleBarWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TodGameDefs.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TodGameLogic.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TodGameWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityClient.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferClient.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VidWidget.cpp" />
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxWidgetBase.cpp" />
-    <ClCompile Include="..\..\AppSource\main.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxPushButton.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxComboBoxFileFilter.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxFlatButton.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxGuidQt.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxLabel.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxMyFileInfo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxSndInstance.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxResourceToRealFile.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxScrollArea.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxShredderButton.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxSpinProgress.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxTagLabel.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxTilePositioner.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\RasterWindow.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\SessionWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\SoundCtrlWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\StoryWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TextChatLogic.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TitleBarWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TodGameDefs.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TodGameLogic.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\TodGameWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiActivityClient.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiFileXferClient.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ToGuiHardwareCtrlClient.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VidWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxWidgetBase.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\AppSource\main.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="..\..\..\GoTvCommon\gotvcommon.qrc">

@@ -4,7 +4,14 @@
 #if defined __cplusplus
 // Add C++ includes here
 
-#include "AppCommon.h"
+#include "AppCommon.h"	
+#include "AppSettings.h"
+#include "AppSetup.h"
+#include "AppletMgr.h"
+
+#include "MyIcons.h"
+#include "VxAppTheme.h"
+#include "VxAppStyle.h"
 
 #include "ToGuiActivityClient.h"
 #include "ToGuiFileXferClient.h"
@@ -26,11 +33,5 @@
 #include <QMessageBox>
 #include <QDialog>
 #include <QObject>
-
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
-
-#include "MyIcons.h"
-#include "VxAppTheme.h"
-#include "VxAppStyle.h"
 
 #endif

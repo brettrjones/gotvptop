@@ -12,18 +12,24 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
+
 #include <app_precompiled_hdr.h>
+/*
 #include "AppCommon.h"	
 #include "AppGlobals.h"
-#include "VxAppDisplay.h"
-#include "LogMgr.h"
+
 #include "MyIcons.h"
+#include "VxAppDisplay.h"
+#include "VxAppTheme.h"
+*/
+#include "LogMgr.h"
+
 #include "PopupMenu.h"
 #include "ToGuiActivityInterface.h"
 #include "OffersMgr.h"
 #include "MySndMgr.h"
 #include "MyIcons.h"
-#include "VxAppTheme.h"
+
 #include "VxTilePositioner.h"
 
 #include "HomeWindow.h"
