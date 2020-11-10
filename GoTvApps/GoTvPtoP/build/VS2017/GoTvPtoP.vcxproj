@@ -432,8 +432,12 @@
     <ClCompile Include="..\..\..\..\GoTvInterface\IToGui.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\GoTvInterface\OsInterface\OsInterface.cpp" />
-    <ClCompile Include="..\..\..\..\GoTvInterface\OsWin32\IWin32.cpp" />
+    <ClCompile Include="..\..\..\..\GoTvInterface\OsInterface\OsInterface.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GoTvInterface\OsWin32\IWin32.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AcceptCancelWidget.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>

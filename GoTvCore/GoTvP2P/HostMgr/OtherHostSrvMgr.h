@@ -55,7 +55,7 @@ protected:
     P2PEngine&                  m_Engine;
     VxMutex                     m_HostListMutex;
     VxThread                    m_ActionThread;
-    std::vector<OtherHostInfo>  m_HostInfoList;
+    std::vector<OtherHostInfo*> m_HostInfoList;
     std::vector<OtherHostInfo*> m_HostDirtyList;    // hosts that require action like query host id
     std::vector<OtherHostInfo*> m_NeedConnectList;  // hosts that need connection 
 };
