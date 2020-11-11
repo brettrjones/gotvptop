@@ -89,7 +89,7 @@ void OtherHostSrvMgr::actionThreadFunction( VxThread * poThread )
             {
                 actionTacken = true; 
                 VxGUID hostId;
-                if( otherHostInfo.doActionQueryHostId( hostId ) )
+                if( otherHostInfo.doActionQueryHostId( hostId ) && hostId.isVxGUIDValid() )
                 {
                     m_HostListMutex.lock();
                     OtherHostInfo* listInfo = findHostMatch( otherHostInfo );

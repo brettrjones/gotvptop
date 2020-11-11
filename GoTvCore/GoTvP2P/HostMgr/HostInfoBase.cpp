@@ -291,6 +291,10 @@ bool HostInfoBase::doActionQueryHostId( VxGUID& retHostId )
         LogMsg( LOG_ERROR, "Query Host Online Id %s Invalid Content", content.c_str());
         return false;
     }
+    else
+    {
+        retHostId = hostId;
+    }
 
     std::string hostIdStr = hostId.toHexString();
     LogModule( eLogQueryHostIdTest, LOG_VERBOSE, " success host id %s", hostIdStr.c_str());
@@ -314,7 +318,11 @@ bool HostInfoBase::connectSimpleSkt( VxSktConnectSimple& sktSimple )
         if( false == sktSimple.connectToWebsite( ptopUrl.c_str(), strHost, strFile, u16Port, WEBSITE_CONNECT_TIMEOUT ) )
         {
             LogModule( eLogConnect, LOG_ERROR, "HostInfoBase::connectSimpleSkt: FAILED to Connect to %s\n", ptopUrl.c_str() );
-            return false;
+            result = false;
+        }
+        else
+        {
+            result = true;
         }
     }
 
