@@ -60,6 +60,8 @@ public:
     std::string&                getHostUrl( void )                      { return m_HostUrl; }
 
     std::vector<EPluginType>&   getPluginList( void )                   { return m_PluginList; }
+    std::vector<VxSktBase*>&    getSktList( void )                      { return m_SktList; }
+    int                         getSktListCount( void )                 { return (int)m_SktList.size(); }
 
     void                        addPluginService( EPluginType pluginType );
     void                        addPluginService( HostInfoBase& rhs );

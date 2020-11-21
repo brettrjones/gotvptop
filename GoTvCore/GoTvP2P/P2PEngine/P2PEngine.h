@@ -101,14 +101,15 @@ public:
     bool                        getHasHostService( EHostServiceType hostService );
     OtherHostSrvMgr&            getOtherHostSrvMgr()                            { return m_OtherHostSrvMgr; }
 
-	void						lockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.lock(); }
     /// if skt exists in connection list then lock access to connection list
     bool						lockSkt( VxSktBase* sktBase );
     void						unlockSkt( VxSktBase* sktBase );
 
+    void						lockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.lock(); }
+    void						unlockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.unlock(); }
+
 	PktAnnounce&				getMyPktAnnounce( void )						{ return m_PktAnn; }
     VxGUID						getMyOnlineId( void )							{ m_AnnouncePktMutex.lock(); VxGUID myId = m_PktAnn.getMyOnlineId(); m_AnnouncePktMutex.unlock(); return myId; }
-	void						unlockAnnouncePktAccess( void )					{ m_AnnouncePktMutex.unlock(); }
 
     bool                        setPluginSetting( PluginSetting& pluginSetting );
     bool                        getPluginSetting( EPluginType pluginType, PluginSetting& pluginSetting );

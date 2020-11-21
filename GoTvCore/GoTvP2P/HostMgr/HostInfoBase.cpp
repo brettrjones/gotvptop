@@ -516,7 +516,7 @@ void HostInfoBase::updateConnectAttemptTime( void )
 //============================================================================
 bool HostInfoBase::isConnectAttemptTimeExpired( void )
 {
-    return GetGmtTimeMs() - m_ActionTimeMs > HOST_CONNECT_ATTEMPT_TIMEOUT_MS;
+    return GetGmtTimeMs() - m_ConnectAttemptTimeMs > HOST_CONNECT_ATTEMPT_TIMEOUT_MS;
 }
 
 //============================================================================

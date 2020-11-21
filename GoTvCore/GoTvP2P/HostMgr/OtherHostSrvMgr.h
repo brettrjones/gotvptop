@@ -23,11 +23,16 @@
 #include <CoreLib/VxThread.h>
 
 class P2PEngine;
+class VxPktHdr;
 
 class OtherHostSrvMgr : public NetAvailStatusCallbackInterface
 {
 public:
+    const int CONNECT_TO_HOST_TIMEOUT_MS = 5000;
+
     OtherHostSrvMgr( P2PEngine& engine );
+    void                        shutdownOtherHostSrvMgr( void );
+
     void                        addHostInfo( EOtherHostType otherHostType, std::string& hostIp, uint16_t hostPort, const char * hostUrl = "" );
     void                        addHostInfo( EOtherHostType otherHostType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrl );
     void                        addHostInfo( EPluginType ePluginType, VxGUID onlineId, std::string& hostIp, uint16_t hostPort, const char * hostUrl = "" );
@@ -46,10 +51,28 @@ public:
 
     P2PEngine&                  getEngine() { return m_Engine; }
 
+    /// returns true if list was modified
+    bool                        manageHostList( std::vector<OtherHostInfo*>& hostList, OtherHostInfo* hostInfo, bool addTrueRemoveFalse, bool isListLocked = false );
+
+    //! encrypt and send my PktAnnounce to someone of whom we have no biglist record
+    bool                        sendMyPktAnnounce( VxGUID&				destinationId,
+                                                   VxSktBase *			sktBase,
+                                                   bool					requestAnnReply,
+                                                   bool					requestTop10,
+                                                   bool					requestReverseConnection,
+                                                   bool					requestSTUN );
+
+    bool                        txPacket( VxGUID&				destinationId,
+                                          VxSktBase *			sktBase,
+                                          VxPktHdr *			poPkt );
+
 protected:
     virtual void				callbackNetAvailStatusChanged( ENetAvailStatus netAvalilStatus ) override;
 
     void                        startActionThread();
+
+    bool                        executeHostActions( void );
+    bool                        executeHostConnections( void );
 
     //=== vars ===//
     P2PEngine&                  m_Engine;
