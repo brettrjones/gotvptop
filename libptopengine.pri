@@ -216,6 +216,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseClient.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseFileXfer.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseHostService.h \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseMultimedia.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseRelay.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseService.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseWebServer.h \
@@ -227,9 +228,10 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginNetServices.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAboutMe.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAvatarImage.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceChatRoom.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceChatRoomClient.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceConnectionTest.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceFileShare.h \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostChatRoom.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroup.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroupListing.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostNetwork.h \
@@ -437,6 +439,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseFileXfer.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseFileXferPktHandlers.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseHostService.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseMultimedia.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseRelay.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseRelayPktHandlers.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseRelayTests.cpp \
@@ -453,9 +456,10 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginNetServices.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAboutMe.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAvatarImage.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceChatRoom.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceChatRoomClient.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceConnectionTest.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceFileShare.cpp \
+	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostChatRoom.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroup.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroupListing.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostNetwork.cpp \

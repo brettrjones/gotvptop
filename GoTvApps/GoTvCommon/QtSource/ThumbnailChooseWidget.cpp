@@ -47,6 +47,7 @@ ThumbnailChooseWidget::ThumbnailChooseWidget( QWidget * parent )
     QSize frameSize( GuiParams::getThumbnailSize().width() + 20, GuiParams::getThumbnailSize().height() + 20 );
     ui.m_ThumbnailFrame->setFixedSize( frameSize );
     setFixedHeight( GuiParams::getThumbnailSize().height() + 30 );
+
     connect( ui.m_ChooseThumbButton, SIGNAL( clicked() ), this, SLOT( slotChooseThumb() ) );
 }
 
@@ -107,7 +108,7 @@ void ThumbnailChooseWidget::slotThumbSelected( AppletBase * thumbGallery, Thumbn
 bool ThumbnailChooseWidget::loadThumbnail( VxGUID& assetId )
 {
     bool result = false;
-    if( false == assetId.isVxGUIDValid() )
+    if( assetId.isVxGUIDValid() )
     {
         AssetInfo * thumbAsset = m_MyApp.getEngine().getAssetMgr().findAsset( assetId );
         if( thumbAsset )

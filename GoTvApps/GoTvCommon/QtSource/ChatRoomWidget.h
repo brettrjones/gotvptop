@@ -15,19 +15,19 @@
 //============================================================================
 
 #include "config_gotvapps.h"
-#include "ui_SessionWidget.h"
+#include "ui_ChatRoomWidget.h"
 
 #include <CoreLib/AssetDefs.h>
 
 class VxNetIdent;
 
-class SessionWidget : public QWidget
+class ChatRoomWidget : public QWidget
 {
 	Q_OBJECT
 
 public:
-	SessionWidget( QWidget *parent = 0, EAssetType inputMode = eAssetTypeUnknown );
-	virtual ~SessionWidget();
+	ChatRoomWidget( QWidget *parent = 0, EAssetType inputMode = eAssetTypeUnknown );
+	virtual ~ChatRoomWidget();
 
 	void						setIdents( VxNetIdent * myIdent, VxNetIdent * hisIdent );
 	void						setEntryMode( EAssetType inputMode );
@@ -38,15 +38,15 @@ public:
 
 	void						onActivityStop( void );
 
-    QLabel *                    getSessionStatusLabel( void ) { return ui.m_StatusLabel; }
-    HistoryListWidget *         getSessionHistoryList( void ) { return ui.m_HistoryList; }
-    ChatEntryWidget *           getSessionChatEntry( void ) { return ui.m_ChatEntry; }
+    QLabel *                    getSessionStatusLabel( void ) { return ui.m_SessionWidget->getSessionStatusLabel(); }
+    HistoryListWidget *         getSessionHistoryList( void ) { return ui.m_SessionWidget->getSessionHistoryList(); }
+    ChatEntryWidget *           getSessionChatEntry( void ) { return ui.m_SessionWidget->getSessionChatEntry(); }
 
 signals:
 	void						signalUserInputButtonClicked( void );
 
 protected:
-	Ui::SessionWidgetClass		ui;
+	Ui::ChatRoomWidgetUi		ui;
 	EAssetType					m_InputMode;
 	bool						m_IsInitialized;
 };

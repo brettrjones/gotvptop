@@ -12,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 #include <app_precompiled_hdr.h>
-#include "AppletClientChatRoom.h"
+#include "AppletChatRoomClient.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
@@ -20,18 +20,19 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletClientChatRoom::AppletClientChatRoom( AppCommon& app, QWidget * parent )
-: AppletClientBase( OBJNAME_APPLET_CLIENT_CHAT_ROOM, app, parent )
+AppletChatRoomClient::AppletChatRoomClient( AppCommon& app, QWidget * parent )
+: AppletChatRoomBase( OBJNAME_APPLET_CLIENT_CHAT_ROOM, app, parent )
 {
-	setAppletType( eAppletClientAvatarImage );
+	setAppletType( eAppletClientChatRoom );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
+
 	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
 
 	m_MyApp.activityStateChange( this, true );
 }
 
 //============================================================================
-AppletClientChatRoom::~AppletClientChatRoom()
+AppletChatRoomClient::~AppletChatRoomClient()
 {
     m_MyApp.activityStateChange( this, false );
 }

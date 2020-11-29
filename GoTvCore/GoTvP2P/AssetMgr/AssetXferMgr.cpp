@@ -67,7 +67,7 @@ namespace
 
 
 //============================================================================
-AssetXferMgr::AssetXferMgr( PluginMessenger&		plugin, 
+AssetXferMgr::AssetXferMgr( PluginBaseMultimedia&	plugin,
 							PluginSessionMgr&		pluginSessionMgr )
 : m_Plugin( plugin )
 , m_PluginSessionMgr( pluginSessionMgr )

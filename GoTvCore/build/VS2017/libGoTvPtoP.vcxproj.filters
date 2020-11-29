@@ -556,9 +556,6 @@
     <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseRelayTests.cpp">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceChatRoom.cpp">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostList.cpp">
       <Filter>GoTvP2P\HostMgr</Filter>
     </ClCompile>
@@ -669,6 +666,15 @@
     </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\HostMgr\HostConnectInterface.cpp">
       <Filter>GoTvP2P\HostMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginServiceHostChatRoom.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginChatRoomClient.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GoTvP2P\Plugins\PluginBaseMultimedia.cpp">
+      <Filter>GoTvP2P\Plugins</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1330,9 +1336,6 @@
     <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseWebServer.h">
       <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceChatRoom.h">
-      <Filter>GoTvP2P\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostList.h">
       <Filter>GoTvP2P\HostMgr</Filter>
     </ClInclude>
@@ -1440,6 +1443,15 @@
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\HostMgr\HostConnectInterface.h">
       <Filter>GoTvP2P\HostMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginServiceHostChatRoom.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginChatRoomClient.h">
+      <Filter>GoTvP2P\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GoTvP2P\Plugins\PluginBaseMultimedia.h">
+      <Filter>GoTvP2P\Plugins</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

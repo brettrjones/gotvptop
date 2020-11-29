@@ -28,11 +28,11 @@ class ActivityToFriendMultiSession : public ActivityToFriendBase
 {
 	Q_OBJECT
 public:
-	ActivityToFriendMultiSession(	AppCommon&			app,
+	ActivityToFriendMultiSession(	AppCommon&			    app,
 									VxNetIdent *			netIdent, 
 									QWidget *				parent = NULL );
 
-	ActivityToFriendMultiSession(	AppCommon&			app,
+	ActivityToFriendMultiSession(	AppCommon&			    app,
 									GuiOfferSession *		poOffer, 
 									QWidget *				parent = NULL );
 	virtual ~ActivityToFriendMultiSession() override = default;
@@ -79,15 +79,15 @@ protected:
 	void						setupMultiSessionActivity(  VxNetIdent * hisIdent );
 	void						setStatusMsg( QString strStatus );
 
-	void						toGuiSetGameValueVar(	void *		userData, 
-														EPluginType ePluginType, 
-														VxGUID&		onlineId, 
+	void						toGuiSetGameValueVar(	void *		    userData, 
+														EPluginType     ePluginType, 
+														VxGUID&		    onlineId, 
 														int32_t			s32VarId, 
                                                         int32_t			s32VarValue ) override;
 
-	void						toGuiSetGameActionVar(	void *		userData, 
-														EPluginType ePluginType, 
-														VxGUID&		onlineId, 
+	void						toGuiSetGameActionVar(	void *		    userData, 
+														EPluginType     ePluginType, 
+														VxGUID&		    onlineId, 
 														int32_t			s32VarId, 
                                                         int32_t			s32VarValue ) override;
 	void						setup( void );

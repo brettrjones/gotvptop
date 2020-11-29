@@ -1,6 +1,6 @@
+#pragma once
 //============================================================================
-// Copyright (C) 2010 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2019 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,19 +13,21 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginServiceChatRoom.h"
-#include "PluginMgr.h"
-#include "P2PSession.h"
-#include "RxSession.h"
-#include "TxSession.h"
+#include "ui_AppletChatRoomClient.h"
 
-#include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
+#include "AppletChatRoomBase.h"
 
-#include <CoreLib/VxFileUtil.h>
-
-//============================================================================
-PluginServiceChatRoom::PluginServiceChatRoom( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
-: PluginBase( engine, pluginMgr, myIdent )
+class AppletChatRoomClient : public AppletChatRoomBase
 {
-    setPluginType( ePluginTypeChatRoom );
-}
+	Q_OBJECT
+public:
+    AppletChatRoomClient( AppCommon& app, QWidget * parent );
+	virtual ~AppletChatRoomClient() override;
+
+protected:
+    //=== vars ===//
+    Ui::AppletChatRoomClientUi	ui;
+
+};
+
+

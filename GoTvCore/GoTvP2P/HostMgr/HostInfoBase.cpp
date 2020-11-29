@@ -115,7 +115,7 @@ void HostInfoBase::addPluginService( EPluginType pluginType )
     {
         switch( pluginType )
         {
-        case ePluginTypeChatRoom:
+        case ePluginTypeHostChatRoom:
             m_HostType = eOtherHostChatHost;
             break;
         case ePluginTypeHostGroup:
@@ -189,7 +189,7 @@ void HostInfoBase::setOtherHostType( EOtherHostType hostType )
         addPluginService( ePluginTypeHostGroup );
         break;
     case eOtherHostChatHost:
-        addPluginService( ePluginTypeChatRoom );
+        addPluginService( ePluginTypeHostChatRoom );
         break;
   
     case eOtherPeerUserHost:
@@ -632,7 +632,7 @@ bool HostInfoBase::hasHostMatch( PktAnnounce& peerPktAnn )
         hasMatch = ( eFriendStateIgnore != peerPktAnn.getPluginPermission( ePluginTypeHostGroup ) );
         break;
     case eOtherHostChatHost:
-        hasMatch = ( eFriendStateIgnore != peerPktAnn.getPluginPermission( ePluginTypeChatRoom ) );
+        hasMatch = ( eFriendStateIgnore != peerPktAnn.getPluginPermission( ePluginTypeHostChatRoom ) );
         break;
 
     case eOtherPeerUserHost:

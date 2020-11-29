@@ -13,7 +13,7 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-#include "AppletSettingsHostGroup.h"
+#include "AppletSettingsHostChatRoom.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
 #include "MyIcons.h"
@@ -22,14 +22,14 @@
 #include <CoreLib/VxDebug.h>
 
 //============================================================================
-AppletSettingsHostGroup::AppletSettingsHostGroup( AppCommon& app, QWidget * parent )
-    : AppletBase( OBJNAME_APPLET_SETTINGS_HOST_GROUP, app, parent )
+AppletSettingsHostChatRoom::AppletSettingsHostChatRoom( AppCommon& app, QWidget * parent )
+    : AppletBase( OBJNAME_APPLET_SETTINGS_HOST_CHAT_ROOM, app, parent )
 {
     ui.setupUi( getContentItemsFrame() );
-    setAppletType( eAppletSettingsHostGroup );
-    setPluginType( ePluginTypeHostGroup );
+    setAppletType( eAppletSettingsHostChatRoom );
+    setPluginType( ePluginTypeHostChatRoom );
     setTitleBarText( DescribeApplet( m_EAppletType ) );
-    getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostGroup, ePluginTypeHostGroup );
+    getPluginSettingsWidget()->setupSettingsWidget( eAppletSettingsHostChatRoom, ePluginTypeHostChatRoom );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginRunButton()->setVisible( false );
     getPluginSettingsWidget()->getPermissionWidget()->getPluginSettingsButton()->setVisible( false );
     getRelayWidget()->setPluginType( ePluginTypeRelay );
@@ -41,19 +41,19 @@ AppletSettingsHostGroup::AppletSettingsHostGroup( AppCommon& app, QWidget * pare
 }
 
 //============================================================================
-AppletSettingsHostGroup::~AppletSettingsHostGroup()
+AppletSettingsHostChatRoom::~AppletSettingsHostChatRoom()
 {
     m_MyApp.activityStateChange( this, false );
 }
 
 //============================================================================
-void AppletSettingsHostGroup::connectServiceWidgets()
+void AppletSettingsHostChatRoom::connectServiceWidgets()
 {
     connect( getPluginSettingsWidget()->getApplyButton(), SIGNAL( clicked() ), this, SLOT( slotApplyServiceSettings() ) );
 }
 
 //============================================================================
-void AppletSettingsHostGroup::loadPluginSetting()
+void AppletSettingsHostChatRoom::loadPluginSetting()
 {
     if( ePluginTypeInvalid != getPluginType() )
     {
@@ -71,17 +71,18 @@ void AppletSettingsHostGroup::loadPluginSetting()
 }
 
 //============================================================================
-void AppletSettingsHostGroup::savePluginSetting()
+void AppletSettingsHostChatRoom::savePluginSetting()
 {
-    if( ( ePluginTypeInvalid != getPluginType() ) && ( ePluginTypeInvalid != m_PluginSetting.getPluginType() ) )
+    if( ePluginTypeInvalid != getPluginType() )
     {
         saveUiToSetting();
+        m_PluginSetting.setPluginType( getPluginType() );
         m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
     }
 }
 
 //============================================================================
-void AppletSettingsHostGroup::loadUiFromSetting()
+void AppletSettingsHostChatRoom::loadUiFromSetting()
 {
     if( ePluginTypeInvalid != getPluginType() )
     {
@@ -95,7 +96,7 @@ void AppletSettingsHostGroup::loadUiFromSetting()
 }
 
 //============================================================================
-void AppletSettingsHostGroup::saveUiToSetting()
+void AppletSettingsHostChatRoom::saveUiToSetting()
 {
     if( ePluginTypeInvalid != getPluginType() )
     {
@@ -103,7 +104,9 @@ void AppletSettingsHostGroup::saveUiToSetting()
         m_PluginSetting.setContentRating( ( EContentRating )getPluginSettingsWidget()->getContentRatingComboBox()->currentIndex() );
         m_PluginSetting.setLanguage( ( ELanguageType )getPluginSettingsWidget()->getLanguageComboBox()->currentIndex() );
         m_PluginSetting.setPluginUrl( getPluginSettingsWidget()->getServiceUrlEdit()->text().toUtf8().constData() );
-        m_PluginSetting.setTitle( getPluginSettingsWidget()->getServiceNameEdit()->text().toUtf8().constData() );
+        std::string serviceName = getPluginSettingsWidget()->getServiceNameEdit()->text().toUtf8().constData();
+        m_PluginSetting.setTitle( serviceName.c_str() );
+        VxGUID thumbId = getPluginSettingsWidget()->getThumbnailChooseWidget()->updateAndGetThumbnailId();
         m_PluginSetting.setThumnailId( getPluginSettingsWidget()->getThumbnailChooseWidget()->updateAndGetThumbnailId() );
 
         QString description = getPluginSettingsWidget()->getServiceDescriptionEdit()->toPlainText().trimmed();
@@ -115,34 +118,52 @@ void AppletSettingsHostGroup::saveUiToSetting()
         {
             m_PluginSetting.setDescription( "" );
         }
+
+        LogMsg( LOG_DEBUG, "chat settings title %s thumb id %s", serviceName.c_str(), thumbId.toGUIDStandardFormatedString().c_str() );
     }
 }
 
 //============================================================================
-void AppletSettingsHostGroup::slotApplyServiceSettings()
+void AppletSettingsHostChatRoom::slotApplyServiceSettings()
 {
     saveUiToSetting();
-    m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
-
-    EFriendState newPermissionLevel = getPluginSettingsWidget()->getPermissionWidget()->getPermissionLevel();
-    EFriendState newRelayPermission = getRelayWidget()->getPermissionLevel();
-    EFriendState newConnectionTestPermission = getConnectionTestWidget()->getPermissionLevel();
-    if( newPermissionLevel != m_OrigPermissionLevel )
+    if( verifyPluginSettings() )
     {
-        m_MyApp.getEngine().setPluginPermission( getPluginSettingsWidget()->getPermissionWidget()->getPluginType(), newPermissionLevel );
-    }
+        m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
 
-    if( newRelayPermission != m_OrigRelayPermission )
+        EFriendState newPermissionLevel = getPluginSettingsWidget()->getPermissionWidget()->getPermissionLevel();
+        EFriendState newRelayPermission = getRelayWidget()->getPermissionLevel();
+        EFriendState newConnectionTestPermission = getConnectionTestWidget()->getPermissionLevel();
+        if( newPermissionLevel != m_OrigPermissionLevel )
+        {
+            m_MyApp.getEngine().setPluginPermission( getPluginSettingsWidget()->getPermissionWidget()->getPluginType(), newPermissionLevel );
+        }
+
+        if( newRelayPermission != m_OrigRelayPermission )
+        {
+            m_MyApp.getEngine().setPluginPermission( getRelayWidget()->getPluginType(), newRelayPermission );
+        }
+
+        if( newConnectionTestPermission != m_OrigConnectTestPermission )
+        {
+            m_MyApp.getEngine().setPluginPermission( getConnectionTestWidget()->getPluginType(), newConnectionTestPermission );
+        }
+
+        m_MyApp.getEngine().setPluginPermission( ePluginTypeRelay, getRelayWidget()->getPermissionLevel() );
+        savePluginSetting();
+        QMessageBox::information( this, QObject::tr( "Service Settings" ), QObject::tr( "Service Settings Applied" ), QMessageBox::Ok );
+    }
+}
+
+//============================================================================
+bool AppletSettingsHostChatRoom::verifyPluginSettings()
+{
+    bool settingsOk = true;
+    if( m_PluginSetting.getTitle().size() < 3 )
     {
-        m_MyApp.getEngine().setPluginPermission( getRelayWidget()->getPluginType(), newRelayPermission );
+        QMessageBox::warning( this, QObject::tr( "Chat Room Title" ), QObject::tr( "Chat Room Title must be at least 3 charcters long (title is used in user searches)" ), QMessageBox::Ok );
+        settingsOk = false;
     }
-
-    if( newConnectionTestPermission != m_OrigConnectTestPermission )
-    {
-        m_MyApp.getEngine().setPluginPermission( getConnectionTestWidget()->getPluginType(), newConnectionTestPermission );
-    }
-
-    savePluginSetting();
-    m_MyApp.getEngine().setPluginPermission( ePluginTypeRelay, getRelayWidget()->getPermissionLevel() );
-    QMessageBox::information( this, QObject::tr( "Service Settings" ), QObject::tr( "Service Settings Applied" ), QMessageBox::Ok );
+    
+    return settingsOk && ( ePluginTypeInvalid != getPluginType() );
 }

@@ -496,6 +496,7 @@ EPluginType GuiHelpers::getAppletAssociatedPlugin( EApplet applet )
     case eAppletSettingsConnectTest:        return ePluginTypeServiceConnectTest;
     case eAppletSettingsShareFiles:         return ePluginTypeFileServer;
     case eAppletSettingsFileXfer:           return ePluginTypeFileXfer;
+    case eAppletSettingsHostChatRoom:       return ePluginTypeHostChatRoom;
     case eAppletSettingsHostGroup:          return ePluginTypeHostGroup;
     // case eAppletSettingsHostGroupListing:   return ePluginTypeHostGroupListing;
     case eAppletSettingsHostNetwork:        return ePluginTypeHostNetwork;
@@ -556,6 +557,7 @@ EApplet GuiHelpers::pluginTypeToSettingsApplet( EPluginType pluginType )
     case ePluginTypeServiceConnectTest:     return eAppletSettingsConnectTest;
     case ePluginTypeFileServer:             return eAppletSettingsShareFiles;
     case ePluginTypeFileXfer:               return eAppletSettingsFileXfer;
+    case ePluginTypeHostChatRoom:           return eAppletSettingsHostChatRoom;
     case ePluginTypeHostGroup:              return eAppletSettingsHostGroup;
         // case ePluginTypeHostGroupListing:       return eAppletSettingsHostGroupListing;
     case ePluginTypeHostNetwork:            return eAppletSettingsHostNetwork;
@@ -615,6 +617,7 @@ EApplet GuiHelpers::pluginTypeToUserApplet( EPluginType pluginType )
     // case ePluginTypeServiceConnectTest:     return eAppletSettingsConnectTest;
     //case ePluginTypeFileServer:             return eAppletShareFiles;
     // case ePluginTypeFileXfer:               return eAppletSettingsFileXfer;
+    case ePluginTypeHostChatRoom:           return eAppletSettingsHostChatRoom;
     case ePluginTypeHostGroup:              return eAppletSettingsHostGroup;
     // case ePluginTypeHostGroupListing:       return eAppletSettingsHostGroupListing;
     case ePluginTypeHostNetwork:            return eAppletSettingsHostNetwork;
@@ -685,7 +688,7 @@ bool GuiHelpers::isPluginSingleSession( EPluginType ePluginType )
 	case ePluginTypeStoryboard: 
 	case ePluginTypeFileServer:
 	case ePluginTypeFileXfer:
-    case ePluginTypeChatRoom:
+    case ePluginTypeChatRoomClient:
 	default:
 		break;
 	}
@@ -710,7 +713,8 @@ bool GuiHelpers::isPluginAPrimaryService( EPluginType ePluginType )
     case ePluginTypeStoryboard:
     case ePluginTypeFileServer:
     case ePluginTypeFileXfer:
-    case ePluginTypeChatRoom:
+    case ePluginTypeChatRoomClient:
+    case ePluginTypeHostChatRoom:
     case ePluginTypeHostNetwork:
     case ePluginTypeHostGroup:
     // connection test is special in that we want to be able to set it up seperately
@@ -736,6 +740,11 @@ bool GuiHelpers::getSecondaryPlugins( EPluginType ePluginType, QVector<EPluginTy
     {
     case ePluginTypeHostNetwork:
         secondaryPlugins.push_back( ePluginTypeHostGroupListing );
+        secondaryPlugins.push_back( ePluginTypeServiceConnectTest );
+        break;
+
+    case ePluginTypeHostChatRoom:
+        secondaryPlugins.push_back( ePluginTypeRelay );
         secondaryPlugins.push_back( ePluginTypeServiceConnectTest );
         break;
 
@@ -788,14 +797,25 @@ std::string GuiHelpers::describePlugin( EPluginType ePluginType, bool rmtInitiat
         }
         break;
 
-    case ePluginTypeChatRoom:
+    case ePluginTypeChatRoomClient:
         if( rmtInitiated )
         {
-            strPluginDesc = QObject::tr( "Shared Chat Room" ).toUtf8().constData();
+            strPluginDesc = QObject::tr( "Chat Room User" ).toUtf8().constData();
         }
         else
         {
-            strPluginDesc = QObject::tr( "Chat Room Service" ).toUtf8().constData();
+            strPluginDesc = QObject::tr( "Chat Room Host" ).toUtf8().constData();
+        }
+        break;
+
+    case ePluginTypeHostChatRoom:
+        if( rmtInitiated )
+        {
+            strPluginDesc = QObject::tr( "Chat Room User" ).toUtf8().constData();
+        }
+        else
+        {
+            strPluginDesc = QObject::tr( "Hosted Chat Room" ).toUtf8().constData();
         }
         break;
 

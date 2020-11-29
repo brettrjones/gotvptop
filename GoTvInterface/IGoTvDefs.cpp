@@ -51,11 +51,12 @@ const char * getPluginName( EPluginType pluginType )
     case ePluginTypeAboutMePage: return "ePluginTypeAboutMePage";
     case ePluginTypeAvatarImage: return "ePluginTypeAvatarImage";
     case ePluginTypeCamServer: return "ePluginTypeCamServer";
-    case ePluginTypeChatRoom: return "ePluginTypeChatRoom";
+    case ePluginTypeChatRoomClient: return "ePluginTypeChatRoomClient";
     case ePluginTypeServiceConnectTest: return "ePluginTypeServiceConnectTest";
     case ePluginTypeClientConnectTest: return "ePluginTypeClientConnectTest";
     case ePluginTypeFileServer: return "ePluginTypeFileServer";
     case ePluginTypeFileXfer: return "ePluginTypeFileXfer";
+    case ePluginTypeHostChatRoom: return "ePluginTypeHostChatRoom";
     case ePluginTypeHostGroup: return "ePluginTypeHostGroup";
     case ePluginTypeHostGroupListing: return "ePluginTypeHostGroupListing";
     case ePluginTypeHostNetwork: return "ePluginTypeHostNetwork";

@@ -103,6 +103,7 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletSettingsConnectTest:        return eMyIconSettingsConnectionTest;
     case eAppletSettingsShareFiles:         return eMyIconSettingsShareFiles;
     case eAppletSettingsFileXfer:           return eMyIconSettingsFileXfer;
+    case eAppletSettingsHostChatRoom:       return eMyIconSettingsChatRoom;
     case eAppletSettingsHostGroup:          return eMyIconSettingsHostGroup;
     // case eAppletSettingsHostGroupListing:            return eMyIconSettingsHostGroupListing;
 
@@ -186,7 +187,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletShareServicesPage:          return QObject::tr( "Share with others sevices" );
     case eAppletServiceAboutMe:             return QObject::tr( "Share About Me Page" );
     case eAppletServiceAvatarImage:         return QObject::tr( "Share Your Avatar Image For Contact List" );
-    case eAppletServiceChatRoom:            return QObject::tr( "Host A Chat Room" );
+    case eAppletServiceChatRoom:            return QObject::tr( "View My Hosted Chat Room" );
     case eAppletServiceConnectionTest:      return QObject::tr( "Service Connection Test" );
     case eAppletServiceHostGroup:           return QObject::tr( "Host A Group" );
     case eAppletServiceHostNetwork:         return QObject::tr( "Host A NoLimitConnect Network" );
@@ -206,6 +207,7 @@ QString DescribeApplet( EApplet applet )
     case eAppletSettingsConnectTest:        return QObject::tr( "Connection Test Service Settings" );
     case eAppletSettingsShareFiles:         return QObject::tr( "Shared Files Settings" );
     case eAppletSettingsFileXfer:           return QObject::tr( "Person To Person File Xfer Settings" );
+    case eAppletSettingsHostChatRoom:       return QObject::tr( "Host A Chat Room Settings" );
     case eAppletSettingsHostGroup:          return QObject::tr( "Host A Group Settings" );
     // case eAppletSettingsHostGroupListing:   return QObject::tr( "Group Host Listing Service Settings" );
     case eAppletSettingsHostNetwork:        return QObject::tr( "Host A Network Settings" );

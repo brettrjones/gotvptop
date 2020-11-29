@@ -68,6 +68,8 @@ void AppletNetHostingPage::setupAppletNetHostingPage( void )
             }
         }
 
+        AppletLaunchWidget * appletHostChatRoom = new AppletLaunchWidget( m_MyApp, eAppletSettingsHostChatRoom, this );
+        m_AppletList.push_back( appletHostChatRoom );
         AppletLaunchWidget * appletHostNetwork = new AppletLaunchWidget( m_MyApp, eAppletSettingsHostNetwork, this );
         m_AppletList.push_back( appletHostNetwork );
         AppletLaunchWidget * appletHostGroup = new AppletLaunchWidget( m_MyApp, eAppletSettingsHostGroup, this );

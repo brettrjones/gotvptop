@@ -870,9 +870,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityAppSetup.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletClientChatRoom.cpp">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxPlainTextEdit.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
@@ -962,6 +959,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\app_precompiled_hdr.cpp">
       <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostChatRoom.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ChatRoomWidget.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomBase.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomClient.cpp">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1841,9 +1850,6 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityAppSetup.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletClientChatRoom.h">
-      <Filter>GoTvCommon\Source Files\Applets</Filter>
-    </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppSetup.h">
       <Filter>GoTvCommon\Source Files\AppCommon</Filter>
     </QtMoc>
@@ -1918,6 +1924,18 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityQueryHostIdTest.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletSettingsHostChatRoom.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ChatRoomWidget.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomBase.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomClient.h">
+      <Filter>GoTvCommon\Source Files\Applets</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -3053,6 +3071,18 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityQueryHostIdTest.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletSettingsHostChatRoom.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ChatRoomWidget.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChatRoomClient.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletServiceChatRoom.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

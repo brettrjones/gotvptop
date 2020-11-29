@@ -52,6 +52,9 @@ public:
 
     virtual ThumbnailChooseWidget * getThumbnailChooseWidget()  { return ui.m_ThumbnailChooseWidget; }
 
+signals:
+    void                        signalPluginSettingsApplied();
+
 protected slots:
     virtual void                slotApplyServiceSettings();
     virtual void                slotThumbnailAssetChanged();

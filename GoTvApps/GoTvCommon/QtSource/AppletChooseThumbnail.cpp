@@ -21,6 +21,7 @@
 #include "AppCommon.h"
 #include "AccountMgr.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include <QMessageBox>
 #include <QUuid>
@@ -40,6 +41,13 @@ AppletChooseThumbnail::AppletChooseThumbnail( AppCommon& app, QWidget * parent )
     setAppletType( eAppletChooseThumbnail );
     ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
+
+    QString infoText = QObject::tr( "Image for thumbnail will be resized to width " );
+    infoText += QString::number( GuiParams::getThumbnailSize().width() );
+    infoText += QObject::tr( " height " );
+    infoText += QString::number( GuiParams::getThumbnailSize().height() );
+    infoText += QObject::tr( " pixels. " );
+    ui.m_InfoLabel->setText( infoText );
 
     connect( ui.m_ThumbnailEditWidget, SIGNAL( signalImageChanged() ), this, SLOT( slotImageChanged() ) );
 

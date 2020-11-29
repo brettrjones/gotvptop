@@ -85,7 +85,7 @@ public:
 	void						checkDiskSpace( void );
 
 	void						setPluginType( EPluginType ePluginType )			{ m_ePluginType = ePluginType; }
-	EPluginType					getPluginType( void )								{ return m_ePluginType; }
+	virtual EPluginType			getPluginType( void )								{ return m_ePluginType; }
 	void						setHisIdent( VxNetIdent * hisIdent )				{ m_HisIdent = hisIdent; }
 	VxNetIdent *				getHisIdent( void )									{ return m_HisIdent; }
 

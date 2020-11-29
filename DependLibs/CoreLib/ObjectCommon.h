@@ -121,6 +121,8 @@
 #define OBJNAME_APPLET_SETTINGS_CHAT_ROOM   			"AppletSettingsChatRoom"
 #define OBJNAME_APPLET_SETTINGS_CONNECT_TEST			"AppletSettingsConnectTest"
 #define OBJNAME_APPLET_SETTINGS_FILE_XFER			    "AppletSettingsFileXfer"
+#define OBJNAME_APPLET_SETTINGS_HOST_CHAT_ROOM			"AppletSettingsHostChatRoom"
+#define OBJNAME_APPLET_SETTINGS_HOST_CHAT_ROOM_LISTING	"AppletSettingsHostChatRoomListing"
 #define OBJNAME_APPLET_SETTINGS_HOST_GROUP				"AppletSettingsHostGroup"
 #define OBJNAME_APPLET_SETTINGS_HOST_GROUP_LISTING		"AppletSettingsHostGroupListing"
 #define OBJNAME_APPLET_SETTINGS_HOST_NETWORK			"AppletSettingsHostNetwork"

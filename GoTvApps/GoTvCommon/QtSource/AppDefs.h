@@ -139,6 +139,7 @@ enum EApplet
     eAppletSettingsConnectTest,
     eAppletSettingsShareFiles,
     eAppletSettingsFileXfer,
+    eAppletSettingsHostChatRoom,
     eAppletSettingsHostGroup,
     // eAppletSettingsHostGroupListing,
     eAppletSettingsHostNetwork,

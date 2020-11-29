@@ -724,7 +724,7 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
     case ePluginTypeCamServer:
         return eMyIconSettingsShareWebCam;
 
-    case ePluginTypeChatRoom:
+    case ePluginTypeChatRoomClient:
         return eMyIconSettingsChatRoom;
 
     case ePluginTypeServiceConnectTest:
@@ -738,6 +738,9 @@ EMyIcons MyIcons::getPluginSettingsIcon( EPluginType ePluginType )
 
     case ePluginTypeFileServer:
         return eMyIconSettingsShareFiles;
+
+    case ePluginTypeHostChatRoom:
+        return eMyIconServiceChatRoom;
 
     case ePluginTypeHostGroup:
         return eMyIconSettingsHostGroup;
@@ -838,7 +841,7 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
         }
         break;
 
-    case ePluginTypeChatRoom:
+    case ePluginTypeChatRoomClient:
         switch( ePluginAccess )
         {
         case ePluginAccessOk:
@@ -1109,6 +1112,24 @@ EMyIcons MyIcons::getPluginIcon( EPluginType ePluginType, EPluginAccessState ePl
 		}
 		break;
 
+    case ePluginTypeHostChatRoom:
+        switch( ePluginAccess )
+        {
+        case ePluginAccessOk:
+            return eMyIconServiceChatRoom;
+        case ePluginAccessDisabled:
+        case ePluginAccessInactive:
+        case ePluginAccessRequiresDirectConnect:
+        case ePluginAccessRequiresOnline:
+            return eMyIconServiceChatRoom;
+        case ePluginAccessLocked:
+            return eMyIconServiceChatRoom;
+        case ePluginAccessIgnored:
+        case ePluginAccessBusy:
+            return eMyIconServiceChatRoom;
+        }
+        break;
+
     case ePluginTypeHostGroup:
         return eMyIconServiceHostGroup;
         break;
@@ -1142,7 +1163,7 @@ EMyIcons MyIcons::getPluginSetupIcon( EPluginType ePluginType)
     case ePluginTypeAvatarImage:
          return eMyIconSettingsAvatarImage;
 
-    case ePluginTypeChatRoom:
+    case ePluginTypeChatRoomClient:
         return eMyIconSettingsChatRoom;
 
     case ePluginTypeServiceConnectTest:
@@ -1186,6 +1207,9 @@ EMyIcons MyIcons::getPluginSetupIcon( EPluginType ePluginType)
 
     case ePluginTypeMessenger:	// multisession p2p plugin
         return eMyIconSettingsMessenger;
+
+    case ePluginTypeHostChatRoom:
+        return eMyIconServiceChatRoom;
 
     case ePluginTypeHostGroup:
         return eMyIconSettingsHostGroup;

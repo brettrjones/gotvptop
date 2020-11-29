@@ -30,7 +30,7 @@
 #include "AppletAboutApp.h"
 
 #include "AppletChooseThumbnail.h"
-#include "AppletClientChatRoom.h"
+#include "AppletChatRoomClient.h"
 #include "AppletClientRandomConnect.h"
 #include "AppletEditAboutMe.h"
 #include "AppletEditAvatarImage.h"
@@ -68,6 +68,7 @@
 #include "AppletSettingsChatRoom.h"
 #include "AppletSettingsConnectionTest.h"
 #include "AppletSettingsFileXfer.h"
+#include "AppletSettingsHostChatRoom.h"
 #include "AppletSettingsHostGroup.h"
 // #include "AppletSettingsHostGroupListing.h"
 #include "AppletSettingsHostNetwork.h"
@@ -202,7 +203,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletScanSharedFiles:            appletDialog = new ActivityFileSearch( m_MyApp, launchFrame ); break;
     case eAppletScanWebCam:                 appletDialog = new ActivityScanWebCams( m_MyApp, launchFrame ); break;
 
-    case eAppletClientChatRoom:             appletDialog = new AppletClientChatRoom( m_MyApp, parent ); break;
+    case eAppletClientChatRoom:             appletDialog = new AppletChatRoomClient( m_MyApp, parent ); break;
     case eAppletClientRandomConnect:        appletDialog = new AppletClientRandomConnect( m_MyApp, parent ); break;
     case eAppletClientStoryboard:           appletDialog = new AppletClientStoryboard( m_MyApp, parent ); break;
 
@@ -228,6 +229,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletSettingsChatRoom:           appletDialog = new AppletSettingsChatRoom( m_MyApp, parent ); break;
     case eAppletSettingsConnectTest:        appletDialog = new AppletSettingsConnectionTest( m_MyApp, parent ); break;
     case eAppletSettingsFileXfer:           appletDialog = new AppletSettingsFileXfer( m_MyApp, parent ); break;
+    case eAppletSettingsHostChatRoom:       appletDialog = new AppletSettingsHostChatRoom( m_MyApp, parent ); break;
     case eAppletSettingsHostGroup:          appletDialog = new AppletSettingsHostGroup( m_MyApp, parent ); break;
     // case eAppletSettingsHostGroupListing:   appletDialog = new AppletSettingsHostGroupListing( m_MyApp, parent ); break;
     case eAppletSettingsHostNetwork:        appletDialog = new AppletSettingsHostNetwork( m_MyApp, parent ); break;

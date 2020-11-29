@@ -156,6 +156,7 @@ void ThumbnailEditWidget::slotBrowseButClick( void )
     if( ui.m_ThumbnailViewWidget->getIsUserPickedImage() )
     {
         clearAssetId();
+        emit signalImageChanged();
     }
 }
 

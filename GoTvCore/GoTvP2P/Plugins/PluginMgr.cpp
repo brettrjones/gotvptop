@@ -18,6 +18,7 @@
 
 #include <GoTvCore/GoTvP2P/MediaProcessor/MediaProcessor.h>
 
+#include <GoTvCore/GoTvP2P/Plugins/PluginChatRoomClient.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginFileXfer.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginInvalid.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginMessenger.h>
@@ -25,6 +26,7 @@
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceAvatarImage.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceConnectionTest.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceFileShare.h>
+#include <GoTvCore/GoTvP2P/Plugins/PluginServiceHostChatRoom.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroup.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceHostGroupListing.h>
 #include <GoTvCore/GoTvP2P/Plugins/PluginServiceHostNetwork.h>
@@ -115,6 +117,14 @@ void PluginMgr::pluginMgrStartup( void )
 
     LogModule( eLogPlugins, LOG_INFO, "pluginMgrStartup create file share plugin\n" );
     m_aoPlugins.push_back( &m_Engine.getPluginServiceFileShare() );
+
+    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create chat room client plugin\n" );
+    poPlugin = new PluginChatRoomClient( m_Engine, *this, &this->m_PktAnn );
+    m_aoPlugins.push_back( poPlugin );
+
+    LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create host chat room plugin\n" );
+    poPlugin = new PluginServiceHostChatRoom( m_Engine, *this, &this->m_PktAnn );
+    m_aoPlugins.push_back( poPlugin );
 
     LogModule( eLogPlugins, LOG_VERBOSE, "pluginMgrStartup create host group plugin\n" );
     poPlugin = new PluginServiceHostGroup( m_Engine, *this, &this->m_PktAnn );

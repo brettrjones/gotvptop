@@ -23,12 +23,12 @@
 #pragma pack(1)
 
 
-// do not add any virtual s so can be used in network packets directly
+// do not add any virtual functions so can be used in network packets directly
 class PluginSettingHdr
 {
 public:
-    PluginSettingHdr() = default;  // default constructor
-    ~PluginSettingHdr() = default;
+    PluginSettingHdr(){};  // default constructor
+    ~PluginSettingHdr(){};
 
     //! copy constructor
     PluginSettingHdr( const PluginSettingHdr & rhs ) = default;

@@ -130,7 +130,7 @@ void PluginSettingsWidget::slotApplyServiceSettings()
 {
     saveUiToSetting();
     m_MyApp.getEngine().getPluginSettingMgr().setPluginSetting( m_PluginSetting );
-    QMessageBox::information( this, QObject::tr( "Service Settings" ), QObject::tr( "Service Settings Applied" ), QMessageBox::Ok );
+    emit signalPluginSettingsApplied();
 }
 
 //============================================================================

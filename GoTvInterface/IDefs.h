@@ -28,26 +28,27 @@ enum EPluginType
     ePluginTypeAboutMePage      = 2,	//!< about me page plugin ( using web page server )
     ePluginTypeAvatarImage      = 3,	//!< handle users avatar image
     ePluginTypeCamServer        = 4,	//!< Web cam broadcast plugin
-    ePluginTypeChatRoom         = 5,	//!< chat room host plugin
-    ePluginTypeFileServer       = 6,	//!< Shared files server
-    ePluginTypeFileXfer         = 7,	//!< Offer/accept send a file person to person
-    ePluginTypeMessenger        = 8,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
-    ePluginTypeStoryboard       = 9,	//!< User editable story board web page server
-    ePluginTypeTruthOrDare      = 10,	//!< Video Chat Truth Or Dare game  
-    ePluginTypeVideoPhone       = 11,	//!< Video Chat with motion detect and stream recording
-    ePluginTypeVoicePhone       = 12,	//!< VOIP audio only phone call
-    ePluginTypeHostGroup        = 13,	//!< group host
-    ePluginTypeHostNetwork      = 14,	//!< master network host
-    ePluginTypeServiceConnectTest = 15,	//!< Connection Test Service
+    ePluginTypeFileServer       = 5,	//!< Shared files server
+    ePluginTypeFileXfer         = 6,	//!< Offer/accept send a file person to person
+    ePluginTypeMessenger        = 7,	//!< Text, voice and video message texting with voice phone, video chat and truth or dare game available in session
+    ePluginTypeStoryboard       = 8,	//!< User editable story board web page server
+    ePluginTypeTruthOrDare      = 9,	//!< Video Chat Truth Or Dare game  
+    ePluginTypeVideoPhone       = 10,	//!< Video Chat with motion detect and stream recording
+    ePluginTypeVoicePhone       = 11,	//!< VOIP audio only phone call
+    ePluginTypeChatRoomClient   = 12,	//!< chat room user client plugin
+    ePluginTypeHostChatRoom     = 13,	//!< chat room hosting plugin
+    ePluginTypeHostGroup        = 14,	//!< group hosting
+    ePluginTypeHostNetwork      = 15,	//!< master network hosting
+    ePluginTypeServiceConnectTest = 16,	//!< Connection Test Service
 
-    ePluginTypeClientConnectTest = 16,	//!< Connection Test Client
-    ePluginTypeHostGroupListing = 17,	//!< group list host
-    ePluginTypeRandomConnect    = 18,	//!< Random connect to another person ( Using Phone Shake )
-    ePluginTypeRandomConnectRelay = 19,	//!< Random connect to another person relay service
-    ePluginTypeRelay            = 20,	//!< Relay services plugin
+    ePluginTypeClientConnectTest = 17,	//!< Connection Test Client
+    ePluginTypeHostGroupListing = 18,	//!< group list host
+    ePluginTypeRandomConnect    = 19,	//!< Random connect to another person ( Using Phone Shake )
+    ePluginTypeRandomConnectRelay = 20,	//!< Random connect to another person relay service
+    ePluginTypeRelay            = 21,	//!< Relay services plugin
 
-	// NOTE: plugin types 20 - 47 not implemented .. reserved for future use
-	eMaxImplementedPluginType	= 21, 
+	// NOTE: plugin types 22 - 47 not implemented .. reserved for future use
+	eMaxImplementedPluginType	= 22, 
 	// plugins 0-47 are part of PktAnnounce
 	// plugins after 47 are system plugins and do not go out in announcement pkt
     eMaxUserPluginType = 48, // this marks end of announced permission

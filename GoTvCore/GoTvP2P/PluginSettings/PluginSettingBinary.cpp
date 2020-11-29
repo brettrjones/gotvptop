@@ -38,8 +38,9 @@ void PluginSettingBinary::initPluginSettingBinary()
 //============================================================================
 bool PluginSettingBinary::isPluginSettingBinaryValid( void )
 {
+    int binaryLen = *m_StorageTotalLen;
     return ( *m_StorageVersion == PLUGIN_SETTING_STORAGE_VERSION )
         && ( *m_StorageReserved1 == 0 )
-        && ( getSettingTotalStorgeLength() <= MAX_PLUGIN_SETTING_STORAGE_LEN )
-        && ( getSettingTotalStorgeLength() >= PLUGIN_SETTING_BINARY_HDR_SIZE );
+        && ( binaryLen <= MAX_PLUGIN_SETTING_STORAGE_LEN )
+        && ( binaryLen >= PLUGIN_SETTING_BINARY_HDR_SIZE );
 }

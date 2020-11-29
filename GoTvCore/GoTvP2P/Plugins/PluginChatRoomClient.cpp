@@ -1,6 +1,5 @@
 //============================================================================
-// Copyright (C) 2010 Brett R. Jones
-// Issued to MIT style license by Brett R. Jones in 2017
+// Copyright (C) 2020 Brett R. Jones
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,7 +12,7 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginMessenger.h"
+#include "PluginChatRoomClient.h"
 #include "P2PSession.h"
 #include "PluginMgr.h"
 
@@ -31,8 +30,8 @@
 #endif //_MSC_VER
 
 //============================================================================
-PluginMessenger::PluginMessenger( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
+PluginChatRoomClient::PluginChatRoomClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent )
 : PluginBaseMultimedia( engine, pluginMgr, myIdent )
 {
-	setPluginType( ePluginTypeMessenger );
+	setPluginType( ePluginTypeChatRoomClient );
 }

@@ -34,7 +34,6 @@ protected slots:
 	virtual void				slotToGuiAssetAction( EAssetAction assetAction, int pos );
 
 protected:
-
 	//=== vars ===//
 	AssetInfo					m_AssetInfo;
 	bool						m_ActivityCallbacksEnabled;

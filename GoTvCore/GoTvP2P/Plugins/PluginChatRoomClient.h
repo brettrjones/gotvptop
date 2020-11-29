@@ -1,6 +1,6 @@
 #pragma once
 //============================================================================
-// Copyright (C) 2019 Brett R. Jones
+// Copyright (C) 2020 Brett R. JonesPluginServiceChatRoomClient
 //
 // You may use, copy, modify, merge, publish, distribute, sub-license, and/or sell this software
 // provided this Copyright is not modified or removed and is included all copies or substantial portions of the Software
@@ -13,16 +13,15 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "PluginBase.h"
+#include "PluginBaseMultimedia.h"
+#include "PluginSessionMgr.h"
+#include "VoiceFeedMgr.h"
+#include "VideoFeedMgr.h"
 
-class PluginServiceChatRoom : public PluginBase
+class PluginChatRoomClient : public PluginBaseMultimedia
 {
 public:
-
-    PluginServiceChatRoom( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
-	virtual ~PluginServiceChatRoom() override = default;
-
-
-protected:
-
+	PluginChatRoomClient( P2PEngine& engine, PluginMgr& pluginMgr, VxNetIdent * myIdent );
+	virtual ~PluginChatRoomClient() = default;
 };
+

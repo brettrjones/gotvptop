@@ -1,4 +1,3 @@
-#pragma once
 //============================================================================
 // Copyright (C) 2019 Brett R. Jones
 //
@@ -12,16 +11,21 @@
 // bjones.engineer@gmail.com
 // http://www.nolimitconnect.com
 //============================================================================
+#include <app_precompiled_hdr.h>
+#include "AppletChatRoomBase.h"
+#include "AppCommon.h"
+#include "AppSettings.h"
+#include "MyIcons.h"
 
-#include "AppletClientBase.h"
+#include <CoreLib/VxDebug.h>
 
-class AppletClientChatRoom : public AppletClientBase
+//============================================================================
+AppletChatRoomBase::AppletChatRoomBase( const char *name, AppCommon& app, QWidget * parent )
+: AppletClientBase( name, app, parent )
 {
-	Q_OBJECT
-public:
-    AppletClientChatRoom( AppCommon& app, QWidget * parent );
-	virtual ~AppletClientChatRoom() override;
+}
 
-};
-
-
+//============================================================================
+AppletChatRoomBase::~AppletChatRoomBase()
+{
+}

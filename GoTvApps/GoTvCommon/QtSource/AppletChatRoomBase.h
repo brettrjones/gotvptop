@@ -13,20 +13,15 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
-#include "ui_AppletServiceChatRoom.h"
+#include "AppletClientBase.h"
 
-#include "AppletChatRoomBase.h"
-
-class AppletServiceChatRoom : public AppletChatRoomBase
+class AppletChatRoomBase : public AppletClientBase
 {
 	Q_OBJECT
 public:
-    AppletServiceChatRoom( AppCommon& app, QWidget * parent );
-	virtual ~AppletServiceChatRoom() override;
+    AppletChatRoomBase( const char *name, AppCommon& app, QWidget * parent );
+	virtual ~AppletChatRoomBase() override;
 
-protected:
-    //=== vars ===//
-    Ui::AppletServiceChatRoomUi ui;
 };
 
 

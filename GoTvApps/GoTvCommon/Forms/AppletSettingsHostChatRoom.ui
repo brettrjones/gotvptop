@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AppletSettingsHostGroupUi</class>
- <widget class="QWidget" name="AppletSettingsHostGroupUi">
+ <class>AppletSettingsHostChatRoomUi</class>
+ <widget class="QWidget" name="AppletSettingsHostChatRoomUi">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Host A Group</string>
+   <string>Host A Chat Room</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -50,7 +50,7 @@
       <item>
        <widget class="QLabel" name="m_Special1Label">
         <property name="text">
-         <string>Hosting a group has special network requirements</string>
+         <string>Hosting a chat room has special network requirements</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -86,19 +86,26 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>View My Chat Room</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="PluginSettingsWidget" name="m_PluginSettingsWidget" native="true"/>
       </item>
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Other Services Required To Host A Group</string>
+         <string>Other Services Required To Host A Chat Room</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Recommend same permission as host group permission</string>
+         <string>Recommend same permission as host chat room permission</string>
         </property>
        </widget>
       </item>

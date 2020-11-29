@@ -32,10 +32,10 @@ bool PluginSettingMgr::initPluginSettingMgr( void )
     bool result = m_SettingMgrInitied;
     if( !m_SettingMgrInitied )
     {
-        std::string dbFileName = VxGetAppDirectory( eAppDirThumbs );
+        std::string dbFileName = VxGetAppDirectory( eAppDirUserSpecific );
         if( !dbFileName.empty() )
         {
-            dbFileName += "thumbs.db";
+            dbFileName += "pluginSettings.db3";
             if( 0 == m_PluginSettingDb.dbStartup( 1, dbFileName ) )
             {
                 m_PluginSettingDb.getAllPluginSettings( m_SettingList );
@@ -104,6 +104,7 @@ bool PluginSettingMgr::getPluginSetting( EPluginType pluginType, PluginSetting& 
                 {
                     pluginSetting = setting;
                     result = true;
+                    break;
                 }
             }
 

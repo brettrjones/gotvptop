@@ -20,6 +20,9 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AccountMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppSetup.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomBase.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ChatRoomWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileItemInfo.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/Friend.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FriendList.h \
@@ -302,6 +305,9 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AccountMgr.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppSetup.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomBase.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ChatRoomWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/DialogConfirmRemoveMessage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileActionBarWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/FileActionMenu.cpp \
@@ -684,6 +690,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AcceptCancelWidget.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletAboutApp.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletApplicationInfo.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomClient.ui \	
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletChooseThumbnail.ui \	
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletClientRandomConnect.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletEditAboutMe.ui \
@@ -709,11 +716,15 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletServiceBaseSettings.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletServiceHostNetwork.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletSettings.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletSettingsHostChatRoom.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletSettingsHostGroup.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletSettingsHostNetwork.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletSharedContent.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletSnapshot.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletTheme.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletUserIdentity.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/BottomBarWidget.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/ChatRoomWidget.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/PermissionListItemWidget.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/PermissionmWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PlayerGlWidget.ui \

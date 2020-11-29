@@ -128,7 +128,7 @@ bool PluginSettingDb::getPluginSetting( EPluginType pluginType, PluginSetting& p
             {
                 int iBlobLen = 0;
                 PluginSettingBinary * settingBinary = ( PluginSettingBinary * )cursor->getBlob( 1, &iBlobLen );
-                if( iBlobLen && iBlobLen <= sizeof( PluginSettingBinary ) )
+                if( settingBinary && iBlobLen > PLUGIN_SETTING_BINARY_HDR_SIZE && iBlobLen <= MAX_PLUGIN_SETTING_STORAGE_LEN )
                 {
                     PluginSetting pluginSetting;
                     if( pluginSetting.fromBinary( *settingBinary ) )
@@ -176,7 +176,7 @@ bool PluginSettingDb::getAllPluginSettings( std::vector<PluginSetting>& settingL
             if( !pluginName.empty() )
             {
                 PluginSettingBinary * settingBinary = ( PluginSettingBinary * )cursor->getBlob( 1, &iBlobLen );
-                if( iBlobLen && iBlobLen <= sizeof( PluginSettingBinary ) )
+                if( settingBinary && iBlobLen > PLUGIN_SETTING_BINARY_HDR_SIZE && iBlobLen <= MAX_PLUGIN_SETTING_STORAGE_LEN )
                 {
                     PluginSetting pluginSetting;
                     if( pluginSetting.fromBinary( *settingBinary ) )

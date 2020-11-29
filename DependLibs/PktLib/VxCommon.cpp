@@ -129,7 +129,6 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
     setPluginPermission( ePluginTypeServiceConnectTest, eFriendStateAnonymous );
     setPluginPermission( ePluginTypeClientConnectTest, eFriendStateAnonymous );
     setPluginPermission( ePluginTypeCamServer, eFriendStateAnonymous );
-    setPluginPermission( ePluginTypeChatRoom, eFriendStateAnonymous );
     setPluginPermission( ePluginTypeFileServer, eFriendStateAnonymous );
     setPluginPermission( ePluginTypeFileXfer, eFriendStateFriend );
     setPluginPermission( ePluginTypeHostGroup, eFriendStateIgnore );
@@ -142,6 +141,7 @@ void PluginPermission::setPluginPermissionsToDefaultValues( void )
     setPluginPermission( ePluginTypeTruthOrDare, eFriendStateAnonymous );
     setPluginPermission( ePluginTypeVideoPhone, eFriendStateAnonymous );
     setPluginPermission( ePluginTypeVoicePhone, eFriendStateAnonymous );
+    setPluginPermission( ePluginTypeChatRoomClient, eFriendStateGuest ); // gives guest permission to whoever is in chat room at the same time
 } 
 
 //============================================================================
@@ -344,8 +344,6 @@ const char * DescribePluginLclName( EPluginType ePluginType )
         return "User Avatar Image";
     case ePluginTypeCamServer:	// web cam broadcast plugin
         return "Shared Video Broadcast";
-    case ePluginTypeChatRoom:
-        return "Chat Room Service";
     case ePluginTypeFileServer:
         return "Shared Files";
     case ePluginTypeFileXfer:	// file transfer plugin
@@ -360,6 +358,10 @@ const char * DescribePluginLclName( EPluginType ePluginType )
         return "Video Phone";
     case ePluginTypeVoicePhone:
         return "VOIP Voice Phone";
+    case ePluginTypeChatRoomClient:
+        return "Chat Room Client";
+    case ePluginTypeHostChatRoom:
+        return "Chat Room Host Service";
     case ePluginTypeHostGroup:
         return "Group Host Sevice";
     case ePluginTypeHostNetwork:
