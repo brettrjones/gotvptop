@@ -15,6 +15,7 @@
 
 #include <GoTvInterface/IDefs.h>
 #include <CoreLib/VxGUID.h>
+#include <CoreLib/BinaryBlob.h>
 
 #include <string>
 #include <vector>
@@ -36,9 +37,6 @@ public:
     PluginSettingHdr& operator =( const PluginSettingHdr & rhs ) = default;
     //! move operator
     PluginSettingHdr& operator =( PluginSettingHdr && rhs ) = default;
-
-    void                        setSettingTotalLen( int totalStorageLen )           { m_SettingTotalLen = totalStorageLen; }
-    int                         getSettingTotalLen( void )                          { return m_SettingTotalLen; }
 
     void                        setPluginType( EPluginType pluginType )             { m_PluginType = ( uint16_t )pluginType; }
     EPluginType                 getPluginType( void )                               { return ( EPluginType )m_PluginType; }
@@ -77,7 +75,7 @@ public:
     int64_t                     getLastUpdateTimestamp( void )                      { return m_UpdateTimestamp; }
 
 protected:
-    uint16_t                    m_SettingTotalLen = 0;
+    uint16_t                    m_BlobStorageVersion = BLOB_PLUGIN_SETTING_STORAGE_VERSION;
     uint16_t                    m_SecondaryPermissionLevel = 0;
     uint16_t                    m_PluginType = ( uint16_t )ePluginTypeInvalid;
     uint16_t                    m_SecondaryPluginType = ( uint16_t )ePluginTypeInvalid;
@@ -102,7 +100,7 @@ protected:
 
 #pragma pack(pop)
 
-class PluginSettingBinary;
+class BinaryBlob;
 
 class PluginSetting : public PluginSettingHdr
 {
@@ -131,8 +129,8 @@ public:
     void                        setSecondaryUrl( std::string  url )                 { m_SecondaryUrl = url; }
     std::string&                getSecondaryUrl( void )                             { return m_SecondaryUrl; }
 
-    bool                        toBinary( PluginSettingBinary& binarySetting );
-    bool                        fromBinary( PluginSettingBinary& binarySetting );
+    bool                        toBinary( BinaryBlob& binarySetting, bool networkOrder = false );
+    bool                        fromBinary( BinaryBlob& binarySetting, bool networkOrder = false );
 
 protected:
     bool                        setStringList( std::vector<std::string>& stringList );

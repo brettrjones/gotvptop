@@ -13,11 +13,10 @@
 //============================================================================
 
 #include "PluginSettingDb.h"
-#include "PluginSettingBinary.h"
 #include "PluginSetting.h"
 
-
 #include <CoreLib/sqlite3.h>
+#include <CoreLib/BinaryBlob.h>
 #include <PktLib/VxCommon.h>
 
 #include <stdio.h>
@@ -89,25 +88,29 @@ bool PluginSettingDb::pluginExistsInTable( std::string pluginName, std::string& 
 bool PluginSettingDb::updatePluginSetting( EPluginType pluginType, PluginSetting& pluginSetting )
 {
     bool result = false;
-    PluginSettingBinary settingBinary;
+    BinaryBlob settingBinary;
     if( pluginSetting.toBinary( settingBinary ) )
     {
         std::string strPluginName = getPluginName( pluginType );
-        if( !strPluginName.empty() && settingBinary.getSettingTotalStorgeLength() )
+        if( !strPluginName.empty() && settingBinary.getBlobLen() )
         {
             DbBindList bindList( strPluginName.c_str() );
             sqlExec( "DELETE FROM plugin_setting WHERE plugin_name=?", bindList );
-            bindList.add( &settingBinary, settingBinary.getSettingTotalStorgeLength() );
+            bindList.add( settingBinary.getBlobData(), settingBinary.getBlobLen() );
 
             RCODE rc = sqlExec( "INSERT INTO plugin_setting (plugin_name,setting_blob) values(?,?)", bindList );
             if( rc )
             {
-                LogMsg( LOG_ERROR, "updatePluginSetting: ERROR %d %s\n", rc, sqlite3_errmsg( m_Db ) );
+                LogMsg( LOG_ERROR, "PluginSettingDb::updatePluginSetting: ERROR %d %s\n", rc, sqlite3_errmsg( m_Db ) );
             }
             else
             {
                 result = true;
             }
+        }
+        else
+        {
+            LogMsg( LOG_ERROR, "PluginSettingDb::updatePluginSetting: Invalid params\n" );
         }
     }
 
@@ -127,25 +130,26 @@ bool PluginSettingDb::getPluginSetting( EPluginType pluginType, PluginSetting& p
             if( cursor->getNextRow() )
             {
                 int iBlobLen = 0;
-                PluginSettingBinary * settingBinary = ( PluginSettingBinary * )cursor->getBlob( 1, &iBlobLen );
-                if( settingBinary && iBlobLen > PLUGIN_SETTING_BINARY_HDR_SIZE && iBlobLen <= MAX_PLUGIN_SETTING_STORAGE_LEN )
+                uint8_t* settingData = ( uint8_t* )cursor->getBlob( 1, &iBlobLen );
+                if( settingData && iBlobLen > 1 && iBlobLen <= BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN )
                 {
-                    PluginSetting pluginSetting;
-                    if( pluginSetting.fromBinary( *settingBinary ) )
+                    BinaryBlob pluginBlob;
+                    pluginBlob.setBlobData( settingData, iBlobLen, true, true );
+                    if( pluginSetting.fromBinary( pluginBlob ) )
                     {
                         result = true;
                     }
                 }
-                else if( iBlobLen >= sizeof( PluginSettingBinary ) )
+                else
                 {
-                    LogMsg( LOG_ERROR, "PluginSettingDb::getAllPluginSettings: incorrect blob len in db.. was code changed????\n" );
+                    LogMsg( LOG_ERROR, "PluginSettingDb::getPluginSettings: incorrect blob len in db.. was code changed????\n" );
                     cursor->close();
                     // remove the invalid blob
                     DbBindList bindList( pluginName.c_str() );
                     RCODE rc = sqlExec( "DELETE FROM plugin_setting WHERE plugin_name=?", bindList );
                     if( rc )
                     {
-                        LogMsg( LOG_ERROR, "PluginSettingDb::getAllPluginSettings: could not remove plugin by name %s\n", pluginName.c_str() );
+                        LogMsg( LOG_ERROR, "PluginSettingDb::getPluginSettings: could not remove plugin by name %s\n", pluginName.c_str() );
                     }
 
                     return false;
@@ -175,17 +179,20 @@ bool PluginSettingDb::getAllPluginSettings( std::vector<PluginSetting>& settingL
             std::string pluginName = cursor->getString( 0 );
             if( !pluginName.empty() )
             {
-                PluginSettingBinary * settingBinary = ( PluginSettingBinary * )cursor->getBlob( 1, &iBlobLen );
-                if( settingBinary && iBlobLen > PLUGIN_SETTING_BINARY_HDR_SIZE && iBlobLen <= MAX_PLUGIN_SETTING_STORAGE_LEN )
+                int iBlobLen = 0;
+                uint8_t* settingData = ( uint8_t* )cursor->getBlob( 1, &iBlobLen );
+                if( settingData && iBlobLen > 1 && iBlobLen <= BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN )
                 {
+                    BinaryBlob pluginBlob;
+                    pluginBlob.setBlobData( settingData, iBlobLen, true, true );
                     PluginSetting pluginSetting;
-                    if( pluginSetting.fromBinary( *settingBinary ) )
+                    if( pluginSetting.fromBinary( pluginBlob ) )
                     {
                         settingList.push_back( pluginSetting );
                         bResult = true;
                     }
                 }
-                else if( iBlobLen >= sizeof( VxConnectIdent ) )
+                else
                 {
                     LogMsg( LOG_ERROR, "PluginSettingDb::getAllPluginSettings: incorrect blob len in db.. was code changed????\n" );
                     cursor->close();
@@ -202,7 +209,7 @@ bool PluginSettingDb::getAllPluginSettings( std::vector<PluginSetting>& settingL
             }
             else
             {
-
+                LogMsg( LOG_ERROR, "PluginSettingDb::getAllPluginSettings: null plugin name\n" );
             }
         }
 

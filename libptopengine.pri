@@ -196,7 +196,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PConnectList.h \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h \
     $$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSetting.h \
-    $$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingBinary.h \
     $$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingDb.h \
     $$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/AudioJitterBuffer.h \
@@ -418,7 +417,6 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineSearch.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineSktCallback.cpp \
 	$$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSetting.cpp \
-	$$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingBinary.cpp \
 	$$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingDb.cpp \
 	$$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/AudioJitterBuffer.cpp \

@@ -19,7 +19,7 @@
 #include "VxCommon.h"
 #include <GoTvInterface/IScan.h>
 
-#include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingBinary.h>
+#include <CoreLib/BinaryBlob.h>
 
 #pragma pack(push) 
 #pragma pack(1)
@@ -41,14 +41,14 @@ public:
 
 	void                        calcPktLen( void );
 
-    PluginSettingBinary *       getSettingBinary( void );
-    void                        setSettingBinary( PluginSettingBinary& settingBinary );
+    bool                        getSettingBinary( BinaryBlob& settingBinary );
+    bool                        setSettingBinary( BinaryBlob& settingBinary );
 
 private:
 	//=== vars ===//
     uint32_t					m_SettingRes1 = 0;
-    uint32_t					m_SettingRes2 = 0;
-    uint8_t						m_SettingData[ MAX_PLUGIN_SETTING_STORAGE_LEN + 16 ];
+    uint32_t					m_SettingLen = 0;
+    uint8_t						m_SettingData[ BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN + 16 ];
 };
 
 #pragma pack(pop)

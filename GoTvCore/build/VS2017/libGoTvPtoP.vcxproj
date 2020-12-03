@@ -620,7 +620,6 @@
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineSktCallback.cpp" />
     <ClCompile Include="..\..\GoTvP2P\P2PEngine\P2PEngineTimerThread.cpp" />
     <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSetting.cpp" />
-    <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSettingBinary.cpp" />
     <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSettingDb.cpp" />
     <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSettingMgr.cpp" />
     <ClCompile Include="..\..\GoTvP2P\Plugins\AudioJitterBuffer.cpp" />
@@ -882,7 +881,6 @@
     <ClInclude Include="..\..\GoTvP2P\P2PEngine\P2PConnectList.h" />
     <ClInclude Include="..\..\GoTvP2P\P2PEngine\P2PEngine.h" />
     <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSetting.h" />
-    <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingBinary.h" />
     <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingDb.h" />
     <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingMgr.h" />
     <ClInclude Include="..\..\GoTvP2P\Plugins\AudioJitterBuffer.h" />

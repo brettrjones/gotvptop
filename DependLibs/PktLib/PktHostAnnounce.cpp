@@ -67,20 +67,32 @@ void PktHostAnnounce::setPktAnn( PktAnnounce& pktAnn )
 //============================================================================
 void PktHostAnnounce::calcPktLen( void )
 {
-    setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktHostAnnounce ) - ( MAX_PLUGIN_SETTING_STORAGE_LEN + 16 ) + getSettingBinary()->getSettingTotalStorgeLength() ) );
+    setPktLength( ROUND_TO_16BYTE_BOUNDRY( sizeof( PktHostAnnounce ) - ( BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN + 16 ) + m_SettingLength ) );
 }
 
 //============================================================================
-PluginSettingBinary * PktHostAnnounce::getSettingBinary( void )
+bool PktHostAnnounce::getSettingBinary( BinaryBlob& settingBinary )
 {
-    return ( PluginSettingBinary * )m_SettingData;
+    if( m_SettingLength && m_SettingLength <= BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN )
+    {
+
+    }
+
+    return false;
 }
 
 //============================================================================
-void PktHostAnnounce::setSettingBinary( PluginSettingBinary& settingBinary )
+bool PktHostAnnounce::setSettingBinary( BinaryBlob& settingBinary )
 {
-    memcpy( m_SettingData, &settingBinary, settingBinary.getSettingTotalStorgeLength() );
-    calcPktLen();
+    if( settingBinary.getBlobLen() && settingBinary.getBlobLen() <= BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN )
+    {
+        m_SettingLength = settingBinary.getBlobLen();
+        memcpy( m_SettingData, settingBinary.getBlobData(), settingBinary.getBlobLen() );
+        calcPktLen();
+        return true;
+    }
+
+    return false;
 }
 
 //============================================================================

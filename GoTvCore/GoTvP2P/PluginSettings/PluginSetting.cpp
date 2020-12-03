@@ -13,102 +13,102 @@
 //============================================================================
 
 #include "PluginSetting.h"
-#include "PluginSettingBinary.h"
-#include <string.h>
+
+#include <CoreLib/BinaryBlob.h>
 #include <CoreLib/StringListBinary.h>
 #include <CoreLib/VxDebug.h>
+
+#include <string.h>
 
 #define PLUGIN_SETTINGS_STRING_COUNT 7
 
 //============================================================================
-bool PluginSetting::toBinary( PluginSettingBinary& binarySetting )
+bool PluginSetting::toBinary( BinaryBlob& binaryBlob, bool networkOrder )
 {
-    bool result = false;
-    binarySetting.initPluginSettingBinary();
-    uint8_t * storageData = binarySetting.getStorageData();
+    binaryBlob.createStorage( BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN );
+    binaryBlob.resetWrite();
+    binaryBlob.setUseNetworkOrder( networkOrder );
 
-    int totalLen = sizeof( PluginSettingHdr );
-    PluginSettingHdr * settingHdr = dynamic_cast< PluginSettingHdr * >( this );
-    if( settingHdr )
+    bool result = binaryBlob.setValue( m_BlobStorageVersion );
+    result &= binaryBlob.setValue( m_SecondaryPermissionLevel );
+    result &= binaryBlob.setValue( m_PluginType );
+    result &= binaryBlob.setValue( m_SecondaryPluginType );
+    result &= binaryBlob.setValue( m_UpdateTimestamp );
+    result &= binaryBlob.setValue( m_PluginThumb );
+    result &= binaryBlob.setValue( m_SecondaryPluginThumb );
+    result &= binaryBlob.setValue( m_SecondaryIdentGuid );
+
+    result &= binaryBlob.setValue( m_Language );
+    result &= binaryBlob.setValue( m_ContentRating );
+    result &= binaryBlob.setValue( m_ContentCatagory );
+    result &= binaryBlob.setValue( m_ContentSubCatagory );
+    result &= binaryBlob.setValue( m_MaxConnectionsPerUser );
+    result &= binaryBlob.setValue( m_MaxStoreAndForwardPerUser );
+    result &= binaryBlob.setValue( m_AnnounceToHost );
+    result &= binaryBlob.setValue( m_ResByte1 );
+    result &= binaryBlob.setValue( m_ResBw1 );
+    result &= binaryBlob.setValue( m_Reserve1Setting );
+    result &= binaryBlob.setValue( m_Reserve2Setting );
+
+    result &= binaryBlob.setValue( m_PluginTitle );
+    result &= binaryBlob.setValue( m_PluginDesc );
+    result &= binaryBlob.setValue( m_PluginUrl );
+    result &= binaryBlob.setValue( m_KeyWords );
+    result &= binaryBlob.setValue( m_SecondaryPluginTitle );
+    result &= binaryBlob.setValue( m_SecondaryPluginDesc );
+    result &= binaryBlob.setValue( m_SecondaryUrl );
+    
+    if( !result )
     {
-        memcpy( storageData, settingHdr, sizeof( PluginSettingHdr ) );
-        storageData += sizeof( PluginSettingHdr );
-        StringListBinary * strBinaryList = ( StringListBinary * )storageData;
-        strBinaryList->initStringStorage();
-
-        std::vector<std::string> stringList;
-        if( getStringList( stringList ) )
-        {
-            if( strBinaryList->addStrings( stringList ) )
-            {
-                totalLen += strBinaryList->getStringStorgeLength();
-                binarySetting.setSettingTotalStorgeLength( totalLen );
-                result = true;
-            }
-            else
-            {
-                LogMsg( LOG_WARNING, "PluginSetting::toBinary failed addStrings" );
-            }
-        }
-        else
-        {
-            LogMsg( LOG_WARNING, "PluginSetting::toBinary failed getStringList" );
-        }
+        LogMsg( LOG_ERROR, "PluginSetting::toBinary failed" );
     }
-    else
-    {
-        LogMsg( LOG_WARNING, "PluginSetting::toBinary failed cast to PluginSettingHdr" );
-    }
-
 
     return result;
 }
 
 //============================================================================
-bool PluginSetting::fromBinary( PluginSettingBinary& binarySetting )
+bool PluginSetting::fromBinary( BinaryBlob& binaryBlob, bool networkOrder )
 {
-    bool result = binarySetting.isPluginSettingBinaryValid();
-    if( result )
+    binaryBlob.resetRead();
+    // not sure if this is needed binaryBlob.setUseNetworkOrder( networkOrder );
+    uint16_t blobStorageVersion;
+    if( !binaryBlob.getValue( blobStorageVersion ) || blobStorageVersion != m_BlobStorageVersion )
     {
-        uint8_t * storageData = binarySetting.getStorageData();
-        PluginSettingHdr * settingHdr = dynamic_cast< PluginSettingHdr * >( this );
-        if( settingHdr )
-        {
-            memcpy( settingHdr, storageData, sizeof( PluginSettingHdr ) );
-            storageData += sizeof( PluginSettingHdr );
-            StringListBinary * strBinaryList = ( StringListBinary * )storageData;
-            if( strBinaryList->isStringStorageValid() )
-            {
-                std::vector<std::string> stringList;
-                if( strBinaryList->getStrings( stringList ) )
-                {
-                    if( PLUGIN_SETTINGS_STRING_COUNT == stringList.size() )
-                    {
-                        if( strBinaryList->addStrings( stringList ) )
-                        {
-                            setStringList( stringList );
-                            result = true;
-                        }
-                    }
-                    else
-                    {
-                        LogMsg( LOG_WARNING, "PluginSetting::toBinary invalid number of strings %d", stringList.size() );
-                    }
-                }
-                else
-                {
-                    LogMsg( LOG_WARNING, "PluginSetting::toBinary failed getStringList" );
-                }
-            }
-            else
-            {
-                LogMsg( LOG_WARNING, "PluginSetting::fromBinary invalid string storage" );
-            }
-        }
-        else
-        {
-            LogMsg( LOG_WARNING, "PluginSetting::fromBinary failed cast to PluginSettingHdr" );
-        }
+        LogMsg( LOG_ERROR, "PluginSetting::fromBinary invalid storage version" );
+        return false;
+    }
+
+    bool result = binaryBlob.getValue( m_SecondaryPermissionLevel );
+    result &= binaryBlob.getValue( m_PluginType );
+    result &= binaryBlob.getValue( m_SecondaryPluginType );
+    result &= binaryBlob.getValue( m_UpdateTimestamp );
+    result &= binaryBlob.getValue( m_PluginThumb );
+    result &= binaryBlob.getValue( m_SecondaryPluginThumb );
+    result &= binaryBlob.getValue( m_SecondaryIdentGuid );
+
+    result &= binaryBlob.getValue( m_Language );
+    result &= binaryBlob.getValue( m_ContentRating );
+    result &= binaryBlob.getValue( m_ContentCatagory );
+    result &= binaryBlob.getValue( m_ContentSubCatagory );
+    result &= binaryBlob.getValue( m_MaxConnectionsPerUser );
+    result &= binaryBlob.getValue( m_MaxStoreAndForwardPerUser );
+    result &= binaryBlob.getValue( m_AnnounceToHost );
+    result &= binaryBlob.getValue( m_ResByte1 );
+    result &= binaryBlob.getValue( m_ResBw1 );
+    result &= binaryBlob.getValue( m_Reserve1Setting );
+    result &= binaryBlob.getValue( m_Reserve2Setting );
+
+    result &= binaryBlob.getValue( m_PluginTitle );
+    result &= binaryBlob.getValue( m_PluginDesc );
+    result &= binaryBlob.getValue( m_PluginUrl );
+    result &= binaryBlob.getValue( m_KeyWords );
+    result &= binaryBlob.getValue( m_SecondaryPluginTitle );
+    result &= binaryBlob.getValue( m_SecondaryPluginDesc );
+    result &= binaryBlob.getValue( m_SecondaryUrl );
+
+    if( !result )
+    {
+        LogMsg( LOG_ERROR, "PluginSetting::fromBinary failed" );
     }
 
     return result;

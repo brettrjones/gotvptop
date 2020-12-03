@@ -622,9 +622,6 @@
     <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSetting.cpp">
       <Filter>GoTvP2P\PluginSettings</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSettingBinary.cpp">
-      <Filter>GoTvP2P\PluginSettings</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\GoTvP2P\PluginSettings\PluginSettingDb.cpp">
       <Filter>GoTvP2P\PluginSettings</Filter>
     </ClCompile>
@@ -1403,9 +1400,6 @@
       <Filter>GoTvP2P\HostListMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSetting.h">
-      <Filter>GoTvP2P\PluginSettings</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingBinary.h">
       <Filter>GoTvP2P\PluginSettings</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GoTvP2P\PluginSettings\PluginSettingDb.h">

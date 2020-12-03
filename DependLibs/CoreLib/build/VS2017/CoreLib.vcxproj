@@ -255,6 +255,7 @@
     <ClInclude Include="..\..\AppDefines.h" />
     <ClInclude Include="..\..\AppErr.h" />
     <ClInclude Include="..\..\AssetDefs.h" />
+    <ClInclude Include="..\..\BinaryBlob.h" />
     <ClInclude Include="..\..\Blowfish.h" />
     <ClInclude Include="..\..\config_corelib.h" />
     <ClInclude Include="..\..\DbBase.h" />
@@ -326,6 +327,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AppErr_corelib.cpp" />
+    <ClCompile Include="..\..\BinaryBlob.cpp" />
     <ClCompile Include="..\..\Blowfish_corelib.cpp" />
     <ClCompile Include="..\..\DbBase_corelib.cpp" />
     <ClCompile Include="..\..\DbDataset_corelib.cpp" />

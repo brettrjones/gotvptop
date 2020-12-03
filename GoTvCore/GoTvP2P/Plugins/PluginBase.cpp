@@ -67,7 +67,7 @@ bool PluginBase::setPluginSetting( PluginSetting& pluginSetting )
 //============================================================================
 bool PluginBase::generateSettingPkt( PluginSetting& pluginSetting )
 {
-    PluginSettingBinary settingBinary;
+    BinaryBlob settingBinary;
     pluginSetting.toBinary( settingBinary );
     m_PktPluginSettingReply.setSettingBinary( settingBinary );
     return true;

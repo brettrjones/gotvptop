@@ -62,7 +62,7 @@ void PluginServiceHostGroup::buildHostGroupAnnounce( PluginSetting& pluginSettin
     m_PktHostAnnounce.setPktAnn( m_Engine.getMyPktAnnounce() );
     m_Engine.unlockAnnouncePktAccess();
     m_PluginSetting = pluginSetting;
-    PluginSettingBinary binarySetting;
+    BinaryBlob binarySetting;
     m_PluginSetting.toBinary( binarySetting );
     m_PktHostAnnounce.setSettingBinary( binarySetting );
     m_HostAnnounceBuilt = true;

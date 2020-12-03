@@ -16,7 +16,7 @@
 
 #include "PktAnnounce.h"
 
-#include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingBinary.h>
+#include <CoreLib/BinaryBlob.h>
 
 #pragma pack(push) 
 #pragma pack(1)
@@ -32,16 +32,16 @@ public:
 
     void                        calcPktLen( void );
     void                        setPktAnn( PktAnnounce& pktAnn );
-    void                        setSettingBinary( PluginSettingBinary& settingBinary );
-    PluginSettingBinary *       getSettingBinary( void );
+    bool                        setSettingBinary( BinaryBlob& settingBinary );
+    bool                        getSettingBinary( BinaryBlob& settingBinary );
 
     PktHostAnnounce *			makeHostAnnCopy( void );
     PktHostAnnounce *			makeHostAnnReverseCopy( void );
 	void						DebugHostDump( void );
 
     uint32_t					m_SettingRes1 = 0;
-    uint32_t					m_SettingRes2 = 0;
-    uint8_t						m_SettingData[ MAX_PLUGIN_SETTING_STORAGE_LEN + 16 ];
+    uint32_t					m_SettingLength = 0;
+    uint8_t						m_SettingData[ BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN + 16 ];
 };
 
 #pragma pack(pop)
