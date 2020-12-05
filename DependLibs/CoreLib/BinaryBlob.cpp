@@ -29,7 +29,7 @@ bool BinaryBlob::createStorage( int maxStorageLen, bool useNetworkOrder )
     m_UseNetworkOrder = useNetworkOrder;
     m_BlobData = new uint8_t[ maxStorageLen + sizeof( int ) ];
     m_MaxDataLen = maxStorageLen;
-    m_BlobLen = maxStorageLen;
+    m_BlobLen = 0;
     m_OwnBlob = true;
     m_DataIdx = 0;
     m_PastEnd = false;
@@ -61,6 +61,7 @@ bool BinaryBlob::setBlobData( uint8_t* blob, int len, bool deleteOnDestruct, boo
         if( copyTheData )
         {
             m_BlobData = new uint8_t[ len + sizeof( int ) ];
+            memcpy( m_BlobData, blob, len );
         }
         else
         {
@@ -69,20 +70,6 @@ bool BinaryBlob::setBlobData( uint8_t* blob, int len, bool deleteOnDestruct, boo
     }
 
     return true;
-}
-
-//============================================================================
-bool BinaryBlob::haveRoom( size_t valSize  )
-{
-    bool haveRoom = m_BlobData && ( ( m_MaxDataLen - m_DataIdx ) >= valSize );
-    return haveRoom;
-}
-
-//============================================================================
-bool BinaryBlob::haveData( size_t valSize )
-{
-    bool haveRoom = m_BlobData && ( ( m_BlobLen - m_DataIdx ) >= valSize );
-    return haveRoom;
 }
 
 //============================================================================

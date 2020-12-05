@@ -32,21 +32,21 @@ public:
 
     bool                        createStorage( int maxStorageLen, bool useNetworkOrder = false );
 
-    void                        setBlobLen( int len ) { m_BlobLen = len; }
-    int                         getBlobLen( void ) { return m_BlobLen; }
+    void                        setBlobLen( int len )           { m_BlobLen = len; }
+    int                         getBlobLen( void )              { return m_BlobLen; }
 
     bool                        setBlobData( uint8_t* blob, int len, bool deleteOnDestruct, bool copyTheData );                     
-    uint8_t*                    getBlobData( void ) { return m_BlobData; }
+    uint8_t*                    getBlobData( void )             { return m_BlobData; }
 
     void                        setUseNetworkOrder( bool useNetOrder ) { m_UseNetworkOrder = useNetOrder; }
-    bool                        getUseNetworkOrder( void ) { return m_UseNetworkOrder; }
+    bool                        getUseNetworkOrder( void )      { return m_UseNetworkOrder; }
 
     void                        resetWrite() { m_DataIdx = 0; m_PastEnd = 0; }
-    bool                        haveRoom( size_t valSize );
+    bool                        haveRoom( size_t valSize )      { return m_BlobData && ( ( m_MaxDataLen - m_DataIdx ) >= valSize ); }
     bool                        incDataWrite( size_t valSize );
 
-    void                        resetRead() { m_DataIdx = m_BlobLen; m_PastEnd = 0; }
-    bool                        haveData( size_t valSize );
+    void                        resetRead() { m_DataIdx = 0; m_PastEnd = 0; }
+    bool                        haveData( size_t valSize )      { return m_BlobData && ( ( m_BlobLen - m_DataIdx ) >= valSize ); }
     bool                        incDataRead( size_t valSize );
 
     bool                        isPastEnd() { return m_PastEnd; }
