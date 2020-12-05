@@ -42,6 +42,8 @@ public:
     EPluginType                 getPluginType( void )                               { return ( EPluginType )m_PluginType; }
     void                        setThumnailId( VxGUID  thumbAssetId )               { m_PluginThumb = thumbAssetId; }
     VxGUID&                     getThumnailId( void )                               { return m_PluginThumb; }
+    void                        setThumnailIsCircle( bool isCircle )                { m_PluginThumbIsCircular = isCircle; }
+    bool                        getThumnailIsCircle( void )                         { return m_PluginThumbIsCircular; }
 
     void                        setLanguage( ELanguageType language )               { m_Language = ( uint16_t )language; }
     ELanguageType               getLanguage( void )                                 { return ( ELanguageType )m_Language; }
@@ -91,7 +93,7 @@ protected:
     uint16_t                    m_MaxConnectionsPerUser = 0;
     uint16_t                    m_MaxStoreAndForwardPerUser = 0;
     uint8_t                     m_AnnounceToHost = 0;
-    uint8_t                     m_ResByte1 = 0;
+    uint8_t                     m_PluginThumbIsCircular = 0;
     uint16_t                    m_ResBw1 = 0;
     uint32_t                    m_Reserve1Setting = 0;
     uint32_t                    m_Reserve2Setting = 0;

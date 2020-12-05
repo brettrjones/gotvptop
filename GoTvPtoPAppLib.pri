@@ -184,6 +184,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoinSearch.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChooseThumbnail.h \	
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientAvatarImage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientBase.h \
@@ -197,6 +198,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditStoryboard.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryImage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryThumb.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoinSearch.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupUser.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletKodi.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.h \
@@ -476,6 +478,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoinSearch.cpp \	
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChooseThumbnail.cpp \	
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientAvatarImage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientBase.cpp \
@@ -489,6 +492,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditStoryboard.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryImage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryThumb.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoinSearch.cpp \	
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupUser.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletKodi.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.cpp \
@@ -691,6 +695,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletAboutApp.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletApplicationInfo.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomClient.ui \	
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomJoinSearch.ui \	
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletChooseThumbnail.ui \	
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletClientRandomConnect.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletEditAboutMe.ui \
@@ -698,10 +703,12 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletEditStoryBoard.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGalleryImage.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletGalleryThumb.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupJoinSearch.ui \	
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGoTvPtoPNetworkHost.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupAnchor.ui \
  	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupHost.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupUser.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupJoinSearch.ui \	
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletKodi.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletLaunchWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AppletLibrary.ui \

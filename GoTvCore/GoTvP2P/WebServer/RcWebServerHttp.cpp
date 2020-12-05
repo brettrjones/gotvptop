@@ -172,7 +172,7 @@ bool RcWebServer::parseWebRxData(	char *			pDataBuf,
 									int&			iRetDataUsed, 
 									int&			iHttpError,
 									std::string&	strRetFileName,
-									uint64_t&			retFileLen,
+									uint64_t&		retFileLen,
 									int&			iFileOffset,
 									bool&			bCloseConnection,
 									EWbMyFiles *	eRetFileType, 
@@ -340,7 +340,7 @@ bool RcWebServer::parseWebRxData(	char *			pDataBuf,
 			goto error_exit;
 		}
 
-		iTokenLen = strlen( cpToken );
+		iTokenLen = (int)strlen( cpToken );
 		if( ( 1 < iTokenLen ) && ( sizeof( as8Buf ) > iTokenLen ) )
 		{
 			int iFileNameIdx = 0;

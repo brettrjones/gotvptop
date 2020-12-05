@@ -45,7 +45,7 @@ bool PluginSetting::toBinary( BinaryBlob& binaryBlob, bool networkOrder )
     result &= binaryBlob.setValue( m_MaxConnectionsPerUser );
     result &= binaryBlob.setValue( m_MaxStoreAndForwardPerUser );
     result &= binaryBlob.setValue( m_AnnounceToHost );
-    result &= binaryBlob.setValue( m_ResByte1 );
+    result &= binaryBlob.setValue( m_PluginThumbIsCircular );
     result &= binaryBlob.setValue( m_ResBw1 );
     result &= binaryBlob.setValue( m_Reserve1Setting );
     result &= binaryBlob.setValue( m_Reserve2Setting );
@@ -93,7 +93,7 @@ bool PluginSetting::fromBinary( BinaryBlob& binaryBlob, bool networkOrder )
     result &= binaryBlob.getValue( m_MaxConnectionsPerUser );
     result &= binaryBlob.getValue( m_MaxStoreAndForwardPerUser );
     result &= binaryBlob.getValue( m_AnnounceToHost );
-    result &= binaryBlob.getValue( m_ResByte1 );
+    result &= binaryBlob.getValue( m_PluginThumbIsCircular );
     result &= binaryBlob.getValue( m_ResBw1 );
     result &= binaryBlob.getValue( m_Reserve1Setting );
     result &= binaryBlob.getValue( m_Reserve2Setting );

@@ -22,21 +22,25 @@
 #include "ActivityFileSearch.h"
 #include "ActivityPersonalRecorder.h"
 #include "ActivityScanPeopleSearch.h"
-#include "ActivityScanPeopleSearch.h"
 #include "ActivityScanProfiles.h"
 #include "ActivityScanStoryBoards.h"
 #include "ActivityScanWebCams.h"
 
 #include "AppletAboutApp.h"
 
+#include "AppletChatRoomJoinSearch.h"
+#include "AppletGroupJoinSearch.h"
+
 #include "AppletChooseThumbnail.h"
 #include "AppletChatRoomClient.h"
+#include "AppletChatRoomJoinSearch.h"
 #include "AppletClientRandomConnect.h"
 #include "AppletEditAboutMe.h"
 #include "AppletEditAvatarImage.h"
 #include "AppletEditStoryboard.h"
 #include "AppletGalleryImage.h"
 #include "AppletGalleryThumb.h"
+#include "AppletGroupJoinSearch.h"
 #include "AppletGroupUser.h"
 #include "AppletKodi.h"
 #include "AppletLibrary.h"
@@ -176,9 +180,11 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
     case eAppletApplicationInfo:            appletDialog = new AppletApplicationInfo( m_MyApp, parent ); break;
     case eAppletEditAvatarImage:            appletDialog = new AppletEditAvatarImage( m_MyApp, parent ); break;
     case eAppletEditStoryboard:             appletDialog = new AppletEditStoryboard( m_MyApp, parent ); break;
+    case eAppletChatRoomJoinSearch:         appletDialog = new AppletChatRoomJoinSearch( m_MyApp, parent ); break;
     case eAppletChooseThumbnail:            appletDialog = new AppletChooseThumbnail( m_MyApp, parent ); break;
     case eAppletGalleryImage:               appletDialog = new AppletGalleryImage( m_MyApp, parent ); break;
     case eAppletGalleryThumb:               appletDialog = new AppletGalleryThumb( m_MyApp, parent ); break;
+    case eAppletGroupJoinSearch:            appletDialog = new AppletGroupJoinSearch( m_MyApp, parent ); break;
     case eAppletSnapshot:                   appletDialog = new AppletSnapshot( m_MyApp, parent ); break;
         
     case eAppletGroupUser:                  appletDialog = new AppletGroupUser( m_MyApp, parent ); break;

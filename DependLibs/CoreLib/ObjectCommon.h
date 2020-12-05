@@ -66,10 +66,12 @@
 #define OBJNAME_ACTIVITY_YES_NO_MSG_BOX					"ActivityYesNoMsgBox"
 
 #define OBJNAME_APPLET_BASE								"AppletBase"
+#define OBJNAME_APPLET_CHAT_ROOM_JOIN_SEARCH			"AppletChatRoomJoinSearch"
 #define OBJNAME_APPLET_CHOOSE_THUMBNAIL					"AppletChooseThumbnail"
 #define OBJNAME_APPLET_EDIT_ABOUT_ME					"AppletEditAboutMe"
 #define OBJNAME_APPLET_EDIT_AVATAR_IMAGE				"AppletEditAvatarImage"
 #define OBJNAME_APPLET_EDIT_STORYBOARD				    "AppletEditStoryboard"
+#define OBJNAME_APPLET_GROUP_JOIN_SEARCH			    "AppletGroupJoinSearch"
 #define OBJNAME_APPLET_LAUNCH_PAGE						"AppletLaunchPage"
 #define OBJNAME_APPLET_MESSAGER_PAGE					"AppletMessengerPage"
 #define OBJNAME_APPLET_LAUNCH_WIDGET					"AppletLaunchWidget"

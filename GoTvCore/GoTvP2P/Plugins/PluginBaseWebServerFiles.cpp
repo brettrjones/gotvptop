@@ -199,7 +199,7 @@ static bool BuildFileSendHeader(	const char * pFileName,
 						RcWebServerGetContentType(pExtension));
 
 	pTemp += sprintf( pTemp, "Content-Length: %lld\r\n\r\n", u64FileLen );
-	iRetHeaderTextLength = pTemp - pSendBuf;
+	iRetHeaderTextLength = (int)(pTemp - pSendBuf);
 	return true;
 }
 

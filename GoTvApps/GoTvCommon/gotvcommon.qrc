@@ -249,5 +249,7 @@
         <file>Resources/client-chat-room-settings.svg</file>
         <file>Resources/client-webcam.svg</file>
         <file>Resources/video-chat-settings.svg</file>
+        <file>Resources/search-chat-room.svg</file>
+        <file>Resources/search-group.svg</file>
     </qresource>
 </RCC>

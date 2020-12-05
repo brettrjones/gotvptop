@@ -16,7 +16,7 @@
 #include "AppCommon.h"
 #include "AppGlobals.h"
 #include "PopupMenu.h"
-#include "ActivityScanPeopleSearch.h"
+#include "AppletChatRoomJoinSearch.h"
 #include "ActivityMessageBox.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
@@ -26,17 +26,17 @@
 #include <QString>
 
 //============================================================================
-ActivityScanPeopleSearch::ActivityScanPeopleSearch(	AppCommon&		    app, 
-													EScanType			eSearchType,
+AppletChatRoomJoinSearch::AppletChatRoomJoinSearch(	AppCommon&		    app, 
 													QWidget *			parent )
-: ActivityBase( OBJNAME_ACTIVITY_PEOPLE_SEARCH, app, parent, eAppletSearchPersons, true )
-, m_eScanType( eSearchType )
+: AppletBase( OBJNAME_APPLET_CHAT_ROOM_JOIN_SEARCH, app, parent, true )
+, m_eScanType( eScanTypeChatRoomJoinSearch )
 {
-	ui.setupUi(this);
+    setAppletType( eAppletChatRoomJoinSearch );
+	ui.setupUi( getContentItemsFrame() );
+    setTitleBarText( DescribeApplet( m_EAppletType ) );
 
     connectBarWidgets();
 
-    connect( ui.m_TitleBarWidget,	SIGNAL(signalBackButtonClicked()),			this, SLOT(close()) );
 	connect( this,					SIGNAL(finished(int)),						this, SLOT(slotHomeButtonClicked()) );
 
 	connect( ui.StartSearchButton,	SIGNAL(clicked()),							this, SLOT(slotStartSearchClicked()) );
@@ -46,30 +46,19 @@ ActivityScanPeopleSearch::ActivityScanPeopleSearch(	AppCommon&		    app,
 
 	if( eScanTypePeopleSearch == getScanType() )
 	{
-		setTitle( QObject::tr( "Search for people by name" ) );
+        setStatusLabel( QObject::tr( "Search For Chat Room To Join" ) );
 		ui.SearchLabel->setText( QObject::tr( "Search for name (at least 3 characters)" ) );
 	}
-	else
-	{
-		setTitle( QObject::tr( "Search for people by mood message" ) );
-		ui.SearchLabel->setText( QObject::tr( "Search for mood message (at least 3 characters)" ) );
-	}
 }
 
 //============================================================================
-void ActivityScanPeopleSearch::setTitle( QString strTitle )
-{
-	ui.m_TitleBarWidget->setTitleBarText( strTitle );
-}
-
-//============================================================================
-void ActivityScanPeopleSearch::setStatusLabel( QString strMsg )
+void AppletChatRoomJoinSearch::setStatusLabel( QString strMsg )
 {
 	ui.ScanStatusLabel->setText( strMsg );
 }
 
 //============================================================================
-void ActivityScanPeopleSearch::toGuiSearchResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent )
+void AppletChatRoomJoinSearch::toGuiSearchResultSuccess( void * callbackData, EScanType eScanType, VxNetIdent * netIdent )
 {
 	Q_UNUSED( callbackData );
 	if( VxIsAppShuttingDown() )
@@ -84,7 +73,7 @@ void ActivityScanPeopleSearch::toGuiSearchResultSuccess( void * callbackData, ES
 };
 
 //============================================================================
-void ActivityScanPeopleSearch::toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType )
+void AppletChatRoomJoinSearch::toGuiClientScanSearchComplete( void * callbackData, EScanType eScanType )
 {
 	Q_UNUSED( callbackData );
 	if( VxIsAppShuttingDown() )
@@ -99,28 +88,28 @@ void ActivityScanPeopleSearch::toGuiClientScanSearchComplete( void * callbackDat
 }
 
 //============================================================================
-void ActivityScanPeopleSearch::showEvent( QShowEvent * ev )
+void AppletChatRoomJoinSearch::showEvent( QShowEvent * ev )
 {
 	ActivityBase::showEvent( ev );
 	m_MyApp.wantToGuiActivityCallbacks( this, this, true );
 }
 
 //============================================================================
-void ActivityScanPeopleSearch::hideEvent( QHideEvent * ev )
+void AppletChatRoomJoinSearch::hideEvent( QHideEvent * ev )
 {
 	m_MyApp.wantToGuiActivityCallbacks( this, this, false );
 	ActivityBase::hideEvent( ev );
 }
 
 //============================================================================
-void ActivityScanPeopleSearch::slotHomeButtonClicked( void )
+void AppletChatRoomJoinSearch::slotHomeButtonClicked( void )
 {
 }
 
 //============================================================================
-void ActivityScanPeopleSearch::slotStartSearchClicked()
+void AppletChatRoomJoinSearch::slotStartSearchClicked()
 {
-	ui.friendListWidget->clear();
+	ui.m_FriendListWidget->clear();
 	QString strSearch = ui.searchEdit->text();
 	if( 3 > strSearch.length() )
 	{
@@ -135,20 +124,20 @@ void ActivityScanPeopleSearch::slotStartSearchClicked()
 }
 
 //============================================================================
-void ActivityScanPeopleSearch::slotStopSearchClicked()
+void AppletChatRoomJoinSearch::slotStopSearchClicked()
 {
 	m_FromGui.fromGuiStopScan( m_eScanType );
 	setStatusLabel( QObject::tr( "Search Stopped" ) );
 }
 
 //============================================================================
-void ActivityScanPeopleSearch::slotSearchComplete()
+void AppletChatRoomJoinSearch::slotSearchComplete()
 {
 	setStatusLabel( QObject::tr( "Search Complete" ) );
 }
 
 ////============================================================================
-//void ActivityScanPeopleSearch::slotFriendClicked( VxNetIdent * netIdent )
+//void AppletChatRoomJoinSearch::slotFriendClicked( VxNetIdent * netIdent )
 //{
 //	PopupMenu oPopupMenu( (QWidget *)this->parent() );
 //	if( false == connect( &oPopupMenu, SIGNAL(menuItemClicked(int, PopupMenu *, ActivityBase *)), &oPopupMenu, SLOT(onFriendActionSelected(int)) ) )
@@ -160,9 +149,9 @@ void ActivityScanPeopleSearch::slotSearchComplete()
 //}
 
 //============================================================================
-void ActivityScanPeopleSearch::slotSearchResult( VxNetIdent * netIdent )
+void AppletChatRoomJoinSearch::slotSearchResult( VxNetIdent * netIdent )
 {
 	setStatusLabel( QString("Found Match %1").arg( netIdent->getOnlineName() ) );
-	ui.friendListWidget->updateFriend( netIdent, false );
+	ui.m_FriendListWidget->updateFriend( netIdent, false );
 }
 

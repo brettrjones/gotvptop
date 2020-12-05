@@ -18,6 +18,8 @@ enum EMyIcons
 	eMyIconFileServer,
 
     eMyIconSearch,
+    eMyIconSearchJoinGroup,
+    eMyIconSearchJoinChatRoom,
     eMyIconSearchPerson,
     eMyIconSearchHeart,
     eMyIconSearchWebCam,

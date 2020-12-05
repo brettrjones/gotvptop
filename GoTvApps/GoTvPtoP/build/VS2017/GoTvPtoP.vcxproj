@@ -623,6 +623,7 @@
     </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomBase.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomClient.cpp" />
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoinSearch.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletChooseThumbnail.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -659,6 +660,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGalleryThumb.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoinSearch.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupUser.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -1389,6 +1391,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletAboutApp.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletApplicationInfo.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChatRoomClient.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChatRoomJoinSearch.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletChooseThumbnail.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletClientRandomConnect.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletEditAboutMe.ui" />
@@ -1399,6 +1402,7 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGoTvPtoPNetworkHost.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupAnchor.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupHost.ui" />
+    <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupJoinSearch.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupUser.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletLibrary.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletLogSettings.ui" />
@@ -2055,6 +2059,8 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomBase.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomClient.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletChatRoomJoinSearch.h" />
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoinSearch.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppletNetworkSettingsData.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletPermissionList.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>

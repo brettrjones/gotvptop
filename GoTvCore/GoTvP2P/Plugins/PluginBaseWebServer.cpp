@@ -96,7 +96,7 @@ RCODE PluginBaseWebServer::handleHttpConnection( VxSktBase * sktBase, VxNetIdent
 		else
 		{
 			// failed to connect.. just send Error
-			sktBase->sendData(strOffline.c_str(), strOffline.length(), true);
+			sktBase->sendData(strOffline.c_str(), ( int )strOffline.length(), true);
 		}
 	}
 	else

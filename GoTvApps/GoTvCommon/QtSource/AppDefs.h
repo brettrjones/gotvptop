@@ -74,8 +74,10 @@ enum EApplet
     eAppletApplicationInfo,
     eAppletAboutNoLimitConnect,
 
-	eMaxBasicApplets,            // marker.. past here is search applets
+	eMaxBasicApplets,               // marker.. past here is search applets
 
+    eAppletChatRoomJoinSearch,      // search for chat room to join
+    eAppletGroupJoinSearch,         // search for group to join
     eAppletSearchPersons,           // search for person in group by name
     eAppletSearchMood,              // search for mood message
     eAppletScanAboutMe,             // scan group for pictures in about me page
@@ -83,7 +85,7 @@ enum EApplet
     eAppletScanSharedFiles,         // searc group for shared files
     eAppletScanWebCam,              // scan group for shared web cams
 
-    eAppletClientRandomConnect,      // connect to random person
+    eAppletClientRandomConnect,     // connect to random person
 
     eMaxSearchApplets,              // marker.. past here is hosting applets
 

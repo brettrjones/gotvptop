@@ -60,6 +60,8 @@ EMyIcons GetAppletIcon( EApplet applet )
     case eAppletClientStoryboard:       return eMyIconStoryBoardNormal;
    
     case eAppletSearchPage:	            return eMyIconSearch;
+    case eAppletGroupJoinSearch:	    return eMyIconSearchJoinGroup;
+    case eAppletChatRoomJoinSearch:	    return eMyIconSearchJoinChatRoom;
     case eAppletSearchPersons:	        return eMyIconSearchPerson;
     case eAppletSearchMood:	            return eMyIconSearchHeart;
     case eAppletScanAboutMe:	        return eMyIconSearchImage;
@@ -146,10 +148,12 @@ QString DescribeApplet( EApplet applet )
     case eAppletHomePage:				    return QObject::tr( "Home" );
     case eAppletAboutNoLimitConnect:        return QObject::tr( "About No Limit Connect" );
     case eAppletApplicationInfo:            return QObject::tr( "Application Information" );
+    case eAppletChatRoomJoinSearch:			return QObject::tr( "Join Chat Room Search" );
     case eAppletChooseThumbnail:		    return QObject::tr( "Choose Thumbnail" );
     case eAppletCreateAccount:			    return QObject::tr( "Create Account" );
     case eAppletGalleryImage:			    return QObject::tr( "Image Gallery" );
     case eAppletGalleryThumb:			    return QObject::tr( "Thumbnail Gallery" );
+    case eAppletGroupJoinSearch:			return QObject::tr( "Join Group Search" );
     case eAppletSnapshot:				    return QObject::tr( "Take Snapshot" );
     case eAppletKodi:				        return QObject::tr( "Kodi (TM)" );
     case eAppletUserIdentity:			    return QObject::tr( "User Identity" );

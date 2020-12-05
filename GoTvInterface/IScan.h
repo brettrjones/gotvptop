@@ -19,14 +19,16 @@
 //! \public Scan/search type enumeration
 enum EScanType
 {
-	eScanTypeNone,				//!< Unknown or not set search type
-	eScanTypeRandomConnect,		//!< Get contacts who have done phone shake connect in last 20 seconds
-	eScanTypePeopleSearch,		//!< Search for contact of given name 
-	eScanTypeMoodMsgSearch,		//!< Search for contacts with given text in mood message
-	eScanTypeProfilePic,		//!< Search for contacts with not default About Me Web Page picture
-	eScanTypeCamServer,			//!< Search for contacts with shared web cam
-	eScanTypeFileSearch,		//!< Search for contacts with shared files containing given search text
-	eScanTypeStoryBoard,		//!< Search for contacts with modified Story Board Web Page
+	eScanTypeNone,				    //!< Unknown or not set search type
+    eScanTypeChatRoomJoinSearch,	//!< Search for Chat Room to Join
+    eScanTypeGroupJoinSearch,	    //!< Search for Group to Join
+	eScanTypeRandomConnect,		    //!< Get contacts who have done phone shake connect in last 20 seconds
+	eScanTypePeopleSearch,		    //!< Search for contact of given name 
+	eScanTypeMoodMsgSearch,		    //!< Search for contacts with given text in mood message
+	eScanTypeProfilePic,		    //!< Search for contacts with not default About Me Web Page picture
+	eScanTypeCamServer,			    //!< Search for contacts with shared web cam
+	eScanTypeFileSearch,		    //!< Search for contacts with shared files containing given search text
+	eScanTypeStoryBoard,		    //!< Search for contacts with modified Story Board Web Page
 
 	eMaxScanType
 };
