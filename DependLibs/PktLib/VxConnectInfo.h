@@ -113,10 +113,12 @@ public:
 
     void 						setNetHostUrl( const char * netHostUrl );
     char *						getNetHostUrl( void )                               { return m_NetHostUrl; }
-    void 						setGroupListHostUrl( const char * groupListUrl );
-    char *						getGroupListHostUrl( void )                         { return m_GroupListHostUrl; }
+    void 						setChatRoomHostUrl( const char * groupListUrl );
+    char *						getChatRoomHostUrl( void )                          { return m_ChatRoomHostUrl; }
     void 						setGroupHostUrl( const char * groupHostUrl );
     char *						getGroupHostUrl( void )                             { return m_GroupHostUrl; }
+    void 						setRandomConnectUrl( const char * groupHostUrl );
+    char *						getRandomConnectUrl( void )                         { return m_RandomConnectUrl; }
 
 	void 						setTimeLastContact( int64_t timeStamp )				{ m_TimeLastContactMs = timeStamp; }
 	int64_t	    				getTimeLastContact( void )					        { return m_TimeLastContactMs; }
@@ -124,14 +126,16 @@ public:
     /// @brief return indenty unique folder name in the form of OnlineName_GuidHexString
     std::string	    			getIdentFolderName( void );
 
-    void                        setAvatarGuid( VxGUID& guid )       { m_AvatarGuid = guid;  }
-    VxGUID&                     getAvatarGuid( void )               { return m_AvatarGuid; }
-    void                        setNetHostGuid( VxGUID& guid )      { m_NetHostGuid = guid; }
-    VxGUID&                     getNetHostGuid( void )              { return m_NetHostGuid; }
-    void                        setGroupListGuid( VxGUID& guid )    { m_GroupListGuid = guid; }
-    VxGUID&                     getGroupListGuid( void )            { return m_NetHostGuid; }
-    void                        setGroupHostGuid( VxGUID& guid )    { m_GroupHostGuid = guid; }
-    VxGUID&                     getGroupHostGuid( void )            { return m_GroupHostGuid; }
+    void                        setAvatarGuid( VxGUID& guid )           { m_AvatarGuid = guid;  }
+    VxGUID&                     getAvatarGuid( void )                   { return m_AvatarGuid; }
+    void                        setNetHostGuid( VxGUID& guid )          { m_NetHostGuid = guid; }
+    VxGUID&                     getNetHostGuid( void )                  { return m_NetHostGuid; }
+    void                        setChatRoomHostGuid( VxGUID& guid )     { m_ChatRoomHostGuid = guid; }
+    VxGUID&                     getChatRoomHostGuid( void )             { return m_ChatRoomHostGuid; }
+    void                        setGroupHostGuid( VxGUID& guid )        { m_GroupHostGuid = guid; }
+    VxGUID&                     getGroupHostGuid( void )                { return m_GroupHostGuid; }
+    void                        setRandomConnectGuid( VxGUID& guid )    { m_RandomConnectGuid = guid; }
+    VxGUID&                     getRandomConnectGuid( void )            { return m_RandomConnectGuid; }
 
 	//=== vars ===//
 private:
@@ -143,11 +147,13 @@ private:
     VxGUID                      m_AvatarGuid;
 
     VxGUID                      m_NetHostGuid;
-    VxGUID                      m_GroupListGuid;
+    VxGUID                      m_ChatRoomHostGuid;
     VxGUID                      m_GroupHostGuid;
+    VxGUID                      m_RandomConnectGuid;
     char						m_NetHostUrl[ MAX_NET_HOST_URL_LEN ];
-    char						m_GroupListHostUrl[ MAX_NET_HOST_URL_LEN ]; 
+    char						m_ChatRoomHostUrl[ MAX_NET_HOST_URL_LEN ]; 
     char						m_GroupHostUrl[ MAX_NET_HOST_URL_LEN ];
+    char						m_RandomConnectUrl[ MAX_NET_HOST_URL_LEN ];
 };
 
 //   152 bytes VxConnectBaseInfo

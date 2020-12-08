@@ -31,7 +31,8 @@ InputFaceWidget::InputFaceWidget( QWidget * parent )
 	qDebug() << "InputFaceWidget::InputFaceWidget ";
 
 	ui.setupUi( this );
-	//this->setFixedHeight( 230 );
+    QSize buttonSize( GuiParams::SMALL_PUSHBUTTON_SIZE, GuiParams::SMALL_PUSHBUTTON_SIZE );
+    ui.m_CancelFaceButton->setFixedSizeAbsolute( buttonSize );
 
 	connect( ui.m_FaceLabel1_1,		SIGNAL(clicked()),	this, SLOT(slotFace1LabelClicked()) );
 	m_FaceList.push_back( ui.m_FaceLabel1_1 );
@@ -103,7 +104,15 @@ InputFaceWidget::InputFaceWidget( QWidget * parent )
 	for( int i = 0; i < m_FaceList.size(); i++ )
 	{
 		VxLabel * faceLabel = m_FaceList[i];
-		sprintf( resBuf, ":/AppRes/Resources/face%d", i+1 );
+        if( i + 1 > 9 )
+        {
+            sprintf( resBuf, ":/AppRes/Resources/emoj%d.svg", i + 1 );
+        }
+        else
+        {
+            sprintf( resBuf, ":/AppRes/Resources/emoj0%d.svg", i + 1 );
+        }
+
 		QPixmap faceImage( resBuf );
 		QPixmap picPixmap = faceImage.scaled(imageSize, Qt::KeepAspectRatio);
 		faceLabel->setPixmap( picPixmap );
@@ -131,7 +140,15 @@ void InputFaceWidget::slotCancelFaceButtonClicked( void )
 void InputFaceWidget::faceLabelClicked( int faceNum )
 {
 	char assetBuf[128];
-	sprintf( assetBuf, "face%d", faceNum );
+    if( faceNum > 9 )
+    {
+        sprintf( assetBuf, "emoj%d", faceNum );
+    }
+    else
+    {
+        sprintf( assetBuf, "emoj0%d", faceNum );
+    }
+
 	m_AssetInfo.setAssetName( assetBuf );
 	m_AssetInfo.generateNewUniqueId();
 	m_AssetInfo.setAssetLength( 0 );

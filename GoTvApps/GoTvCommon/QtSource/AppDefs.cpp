@@ -183,7 +183,7 @@ QString DescribeApplet( EApplet applet )
 
     case eAppletGroupUser:                  return QObject::tr( "Join Group" );
     case eAppletNetHostingPage:             return QObject::tr( "Group And Network Hosting" );
-    case eAppletPermissionList:             return QObject::tr( "Services Permission List" );
+    case eAppletPermissionList:             return QObject::tr( "Share Permission List" );
 
     case eAppletClientAvatarImage:          return QObject::tr( "Get Persons Avatar Image For Contact List" );
     case eAppletClientStoryboard:           return QObject::tr( "Share story (Blog)" );

@@ -29,7 +29,7 @@ class DialogConfirmRemoveMessage : public QDialog
 
 public:
 	DialogConfirmRemoveMessage( AssetInfo& assetInfo, QWidget * parent = NULL );
-	virtual ~DialogConfirmRemoveMessage();
+	virtual ~DialogConfirmRemoveMessage() = default;
 
 	AppCommon&					getMyApp( void )					{ return m_MyApp; }
 	MyIcons&					getMyIcons( void );

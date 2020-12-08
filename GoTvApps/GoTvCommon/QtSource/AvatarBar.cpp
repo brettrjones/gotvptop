@@ -17,6 +17,7 @@
 #include "AvatarBar.h"
 #include "AppCommon.h"
 #include "MyIcons.h"
+#include "GuiParams.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
@@ -29,6 +30,10 @@ AvatarBar::AvatarBar( QWidget * parent )
 , m_MyApp( GetAppInstance() )
 {
 	ui.setupUi( this );
+    QSize buttonSize( GuiParams::SMALL_PUSHBUTTON_SIZE, GuiParams::SMALL_PUSHBUTTON_SIZE );
+    ui.m_ShredButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_ResendButton->setFixedSize( buttonSize );
+
 	this->setFixedWidth( 60 );
 	setShredButtonIcon( eMyIconShredderNormal  );
 	ui.m_ProgressSpinner->setVisible( false );
@@ -126,7 +131,7 @@ void AvatarBar::showXferProgress( bool show )
 	ui.m_ProgressSpinner->setVisible( show );
 	if( show )
 	{
-		ui.m_ProgressSpinner->setImage( 48, 48, ":/AppRes/Resources/ic_progress_spin.png"  );
+		ui.m_ProgressSpinner->setImage( 48, 48, ":/AppRes/Resources/spinner-clockwise.svg"  );
 	}
 }
 

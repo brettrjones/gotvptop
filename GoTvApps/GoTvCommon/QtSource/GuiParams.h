@@ -24,6 +24,8 @@ public:
 
     static const int            MIN_TITLE_BAR_BUTTON_SIZE = 30;
     static const int            MIN_PUSHBUTTON_SIZE = 30;
+    static const int            SMALL_PUSHBUTTON_SIZE = 32;
+    static const int            MEDIUM_PUSHBUTTON_SIZE = 48;
 
     /// @brief initialize gui scaling etc
     static void                 initGuiParams();

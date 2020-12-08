@@ -16,6 +16,7 @@
 #include "InputVideoWidget.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
+#include "GuiParams.h"
 
 #include <CoreLib/VxGlobals.h>
 
@@ -30,9 +31,15 @@ InputVideoWidget::InputVideoWidget( QWidget * parent )
 	m_AssetInfo.setAssetType( eAssetTypeVideo );
 
 	ui.setupUi( this );
+    QSize buttonSize( GuiParams::SMALL_PUSHBUTTON_SIZE, GuiParams::SMALL_PUSHBUTTON_SIZE );
+    ui.m_CancelRecordButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_StartStopRecButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_RotateCamButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_SelectVidSrcButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_SelectVidSrcButton->setFixedSizeAbsolute( buttonSize );
+
 
 	ui.m_CancelRecordButton->setIcons( eMyIconCamcorderCancel );
-	//ui.m_CancelRecordButton->setVisible( false );
 
 	ui.m_StartStopRecButton->setIsToggleButton( true );
 	ui.m_StartStopRecButton->setIcons( eMyIconCamcorderNormal );

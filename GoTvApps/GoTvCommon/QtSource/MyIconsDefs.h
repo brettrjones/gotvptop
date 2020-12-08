@@ -331,5 +331,31 @@ enum EMyIcons
     eMyIconSettingsVoicePhone,
     eMyIconSettingsVideoPhone,
 
+    eMyIconEditRedo,
+    eMyIconEditUndo,
+    eMyIconEditAlignCenter,
+    eMyIconEditAlignLeft,
+    eMyIconEditAlignLeftAndRight,
+    eMyIconEditAlignRight,
+    eMyIconEditBold,
+    eMyIconEditCopy,
+    eMyIconEditCut,
+    eMyIconEditFileNew,
+    eMyIconEditHeader,
+    eMyIconEditItalic,
+    eMyIconEditPaperClip,
+    eMyIconEditPaste,
+    eMyIconEditPrint,
+    eMyIconEditText,
+    eMyIconEditUnderline,
+
+    eMyIconEditHyperLink,
+
+    eMyIconFileOpen,
+    eMyIconFileSave,
+    eMyIconFileSaveAs,
+    eMyIconZoomIn,
+    eMyIconZoomOut,
+
 	eMaxMyIcon	// must be last
 };

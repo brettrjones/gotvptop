@@ -1563,6 +1563,23 @@
     <None Include="..\..\..\GoTvCommon\Resources\cloud-upload.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\dice.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\earth-globe.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-action-redo.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-action-undo.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-align-center.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-align-left-right.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-align-left.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-align-right.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-bold.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-copy.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-cut.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-file-new.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-header.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-italic.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-paperclip.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-paste.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-print.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-text.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\edit-underline.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\emoj01.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\emoj02.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\emoj03.svg" />
@@ -1612,7 +1629,9 @@
     <None Include="..\..\..\GoTvCommon\Resources\file-folder-plus.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\file-folder-search.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\file-folder-share.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\file-open.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\file-picture.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\file-save-as.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\file-save.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\file-text.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\file-video.svg" />
@@ -1700,6 +1719,8 @@
     <None Include="..\..\..\GoTvCommon\Resources\wireless-setup.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\x-mark.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\x-overlay.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\zoom-in.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\zoom-out.svg" />
     <None Include="gotvptop_en.ts" />
   </ItemGroup>
   <ItemGroup>

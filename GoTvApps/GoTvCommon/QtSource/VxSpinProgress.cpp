@@ -125,6 +125,6 @@ void VxSpinProgress::slotAnimationTickTock( void )
 void VxSpinProgress::updateImage( void )
 {
 	QSize screenSize( width(), height() );
-	QImage picBitmap( ":/AppRes/Resources/ic_progress_spin.png" ); 
+	QImage picBitmap( ":/AppRes/Resources/spinner-clockwise.svg" ); 
 	m_ProgressPixmap = picBitmap.scaled(screenSize, Qt::KeepAspectRatio);
 }

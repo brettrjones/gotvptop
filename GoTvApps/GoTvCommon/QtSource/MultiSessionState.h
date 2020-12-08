@@ -94,7 +94,7 @@ protected:
 	bool						canSend( void );
 	std::string					describeCantSendReason( void );
 
-	AppCommon& 				m_MyApp;
+	AppCommon& 				    m_MyApp;
 	IFromGui&					m_IFromGui;
 	ActivityToFriendMultiSession&  	m_Activity;
 	EMSessionType				m_eMSessionType;

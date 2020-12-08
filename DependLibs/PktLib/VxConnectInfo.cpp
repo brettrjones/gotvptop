@@ -64,7 +64,7 @@ VxGUID&			VxConnectBaseInfo::getRelayOnlineId()							{ return m_RelayConnectId;
 bool			VxConnectBaseInfo::getRelayOnlineId( std::string& strRetId )	{ return m_RelayConnectId.toHexString( strRetId ); }
 uint64_t		VxConnectBaseInfo::getRelayOnlineIdLoPart()						{ return m_RelayConnectId.getVxGUIDLoPart(); }
 uint64_t		VxConnectBaseInfo::getRelayOnlineIdHiPart()						{ return m_RelayConnectId.getVxGUIDHiPart(); }
-void			VxConnectBaseInfo::setRelayPort( uint16_t port )						{ m_RelayConnectId.setPort( port ); }		
+void			VxConnectBaseInfo::setRelayPort( uint16_t port )				{ m_RelayConnectId.setPort( port ); }		
 uint16_t		VxConnectBaseInfo::getRelayPort( void )							{ return m_RelayConnectId.getPort(); }
 
 void			VxConnectBaseInfo::getMyOnlineIPv4( std::string& strRetIp )		{ strRetIp = m_DirectConnectId.m_IPv4OnlineIp.toStdString(); }
@@ -163,8 +163,9 @@ VxConnectIdent::VxConnectIdent()
 	m_OnlineName[ 0 ] = 0;
 	m_OnlineDesc[ 0 ] = 0;
     m_NetHostUrl[ 0 ] = 0;
-    m_GroupListHostUrl[ 0 ] = 0;
+    m_ChatRoomHostUrl[ 0 ] = 0;
     m_GroupHostUrl[ 0 ] = 0;
+    m_RandomConnectUrl[ 0 ] = 0;
 }
 
 //============================================================================
@@ -194,15 +195,15 @@ void VxConnectIdent::setNetHostUrl( const char * netHostUrl )
 }
 
 //============================================================================
-void VxConnectIdent::setGroupListHostUrl( const char * groupListUrl )
+void VxConnectIdent::setChatRoomHostUrl( const char * groupListUrl )
 {
     if( !groupListUrl )
     {
-        m_GroupListHostUrl[ 0 ] = 0;
+        m_ChatRoomHostUrl[ 0 ] = 0;
     }
     else
     {
-        SafeStrCopy( m_GroupListHostUrl, groupListUrl, sizeof( m_GroupListHostUrl ) );
+        SafeStrCopy( m_ChatRoomHostUrl, groupListUrl, sizeof( m_ChatRoomHostUrl ) );
     }
 }
 
@@ -216,6 +217,19 @@ void VxConnectIdent::setGroupHostUrl( const char * groupHostUrl )
     else
     {
         SafeStrCopy( m_GroupHostUrl, groupHostUrl, sizeof( m_GroupHostUrl ) );
+    }
+}
+
+//============================================================================
+void VxConnectIdent::setRandomConnectUrl( const char * randomConnecttUrl )
+{
+    if( !randomConnecttUrl )
+    {
+        m_RandomConnectUrl[ 0 ] = 0;
+    }
+    else
+    {
+        SafeStrCopy( m_RandomConnectUrl, randomConnecttUrl, sizeof( m_RandomConnectUrl ) );
     }
 }
 

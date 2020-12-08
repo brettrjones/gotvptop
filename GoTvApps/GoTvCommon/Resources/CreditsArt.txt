@@ -15,7 +15,10 @@ Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
  search-image.svg 			( modified )
  search-storyboard.svg 		( modified )
  search-webcam.svg 			( modified )
-
+ search-chat-room.svg 		( modified )
+ search-group.svg 			( modified )
+ zoom-in.svg 			    ( modified )
+ zoom-out.svg 			    ( modified )
   
  https://commons.wikimedia.org
  all emocons are from creative commons
@@ -91,6 +94,7 @@ wireless-7.svg
 wireless-key.svg (modified)
 wireless-setup.svg (modified)
 
+
 By Anton Barbarov, RU at https://thenounproject.com
 camera-snapshot.svg
 
@@ -123,8 +127,31 @@ arrow-expand.svg
 arrow-shrink.svg
 heart.svg
 pause.svg
+file-open.svg
 
- 
+ # Not sure but from one of the above copywrites (will determaine correct one later)
+ file-open.svg
+ file-save.svg
+ file-save-as.svg (modified)
+
+ edit-action-redo.svg
+ edit-action-undo.svg
+ edit-align-center.svg
+ edit-align-left.svg
+ edit-align-left-right.svg (modified)
+ edit-align-right.svg
+ edit-bold.svg
+ edit-copy.svg
+ edit-cut.svg
+ edit-file-new.svg
+ edit-header.svg
+ edit-italic.svg
+ edit-paperclip.svg
+ edit-paste.svg
+ edit-print.svg
+ edit-text.svg
+ edit-underline.svg
+
 
  
  

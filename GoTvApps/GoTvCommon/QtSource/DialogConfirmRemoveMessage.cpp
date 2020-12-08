@@ -17,6 +17,7 @@
 #include "DialogConfirmRemoveMessage.h"
 #include "MyIcons.h"
 #include "AppCommon.h"
+#include "GuiParams.h"
 
 #include <GoTvCore/GoTvP2P/AssetMgr/AssetInfo.h>
 
@@ -28,17 +29,15 @@ DialogConfirmRemoveMessage::DialogConfirmRemoveMessage( AssetInfo& assetInfo, QW
 , m_AssetAction( eAssetActionUnknown )
 {
 	ui.setupUi(this);
-	//QRect oRect = parent->geometry();
-	//oRect.setRight(oRect.right() - oRect.left());
-	//oRect.setLeft(0);
-	//oRect.setBottom(oRect.bottom() - oRect.top());
-	//oRect.setTop(0);
-	//this->setGeometry(oRect);
+    QSize buttonSize( GuiParams::MEDIUM_PUSHBUTTON_SIZE, GuiParams::MEDIUM_PUSHBUTTON_SIZE );
+    ui.m_ExitDlgButton->setFixedSize( buttonSize );
+    ui.m_CancelButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_RemoveButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_ShredButton->setFixedSizeAbsolute( buttonSize );
 
 	ui.m_CancelButton->setIcon( eMyIconCancelNormal );
 	ui.m_RemoveButton->setIcon( eMyIconTrash );
-	ui.m_ShredButton->setIcon( eMyIconShredderNormal  );
-
+	ui.m_ShredButton->setIcon( eMyIconTrash );
 
 	connect( ui.m_ExitDlgButton,		SIGNAL(clicked()), this, SLOT(reject()) );
 	connect( ui.m_CancelButton,			SIGNAL(clicked()), this, SLOT(reject()) );
@@ -47,13 +46,9 @@ DialogConfirmRemoveMessage::DialogConfirmRemoveMessage( AssetInfo& assetInfo, QW
 	if( false == m_AssetInfo.getIsFileAsset() )
 	{
 		ui.m_ShredButton->setVisible( false );
+        ui.m_ShreadButtonTextLabel->setVisible( false );
 		ui.m_ShredTextLabel->setVisible( false );
 	}
-}
-
-//============================================================================
-DialogConfirmRemoveMessage::~DialogConfirmRemoveMessage()
-{
 }
 
 //============================================================================

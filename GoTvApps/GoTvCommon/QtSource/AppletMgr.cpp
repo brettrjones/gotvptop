@@ -20,7 +20,6 @@
 #include "ActivityAppSetup.h"
 #include "AppletApplicationInfo.h"
 #include "ActivityFileSearch.h"
-#include "ActivityPersonalRecorder.h"
 #include "ActivityScanPeopleSearch.h"
 #include "ActivityScanProfiles.h"
 #include "ActivityScanStoryBoards.h"
@@ -49,6 +48,7 @@
 
 #include "AppletNetHostingPage.h"
 #include "AppletNetworkSettings.h"
+#include "ActivityPersonalRecorder.h"
 #include "AppletPermissionList.h"
 #include "AppletPersonalRecorder.h"
 #include "AppletPlayerVideo.h"
@@ -198,7 +198,7 @@ ActivityBase * AppletMgr::launchApplet( EApplet applet, QWidget * parent )
 
     case eAppletMessenger:                  makeMessengerFullSized(); return appletDialog;
     case eAppletNetworkSettings:            appletDialog = new AppletNetworkSettings( m_MyApp, parent ); break;
-    case eAppletPersonalRecorder:           appletDialog = new ActivityPersonalRecorder( m_MyApp, m_MyApp.getAppGlobals().getUserIdent(), parent ); break;
+    case eAppletPersonalRecorder:           appletDialog = new AppletPersonalRecorder( m_MyApp, parent ); break;
     case eAppletSettings:                   appletDialog = new AppletSettings( m_MyApp, parent ); break;
 
     case eAppletSearchPage:	                appletDialog = new AppletSearchPage( m_MyApp, parent ); break;

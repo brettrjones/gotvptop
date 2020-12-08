@@ -29,7 +29,16 @@
    <property name="spacing">
     <number>1</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>5</number>
+   </property>
+   <property name="topMargin">
+    <number>5</number>
+   </property>
+   <property name="rightMargin">
+    <number>5</number>
+   </property>
+   <property name="bottomMargin">
     <number>5</number>
    </property>
    <item>
@@ -62,11 +71,20 @@
       <property name="spacing">
        <number>0</number>
       </property>
-      <property name="margin">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
        <number>0</number>
       </property>
       <item>
-       <widget class="QToolButton" name="m_CreateHyperLinkButton">
+       <widget class="VxPushButton" name="m_CreateHyperLinkButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -91,10 +109,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/filenew.png</normaloff>:/MyP2PWeb/Resources/filenew.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -104,7 +118,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_FileNewButton">
+       <widget class="VxPushButton" name="m_FileNewButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -129,10 +143,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/filenew.png</normaloff>:/MyP2PWeb/Resources/filenew.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -142,7 +152,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_FileOpenButton">
+       <widget class="VxPushButton" name="m_FileOpenButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -167,10 +177,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/fileopen.png</normaloff>:/MyP2PWeb/Resources/fileopen.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -180,7 +186,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_FileSaveAsButton">
+       <widget class="VxPushButton" name="m_FileSaveAsButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -205,10 +211,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/filesaveas.png</normaloff>:/MyP2PWeb/Resources/filesaveas.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -218,7 +220,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_ExportPdfButton">
+       <widget class="VxPushButton" name="m_ExportPdfButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -242,10 +244,6 @@
         </property>
         <property name="text">
          <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/exportpdf.png</normaloff>:/MyP2PWeb/Resources/exportpdf.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -288,11 +286,20 @@
       <property name="spacing">
        <number>0</number>
       </property>
-      <property name="margin">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
        <number>0</number>
       </property>
       <item>
-       <widget class="QToolButton" name="m_FileSaveButton">
+       <widget class="VxPushButton" name="m_FileSaveButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -317,10 +324,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/filesave.png</normaloff>:/MyP2PWeb/Resources/filesave.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -330,7 +333,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_InsertPictureButton">
+       <widget class="VxPushButton" name="m_InsertPictureButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -355,10 +358,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/button_gallery_normal.png</normaloff>:/MyP2PWeb/Resources/button_gallery_normal.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -368,7 +367,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_UndoButton">
+       <widget class="VxPushButton" name="m_UndoButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -393,10 +392,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/editundo.png</normaloff>:/MyP2PWeb/Resources/editundo.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -406,7 +401,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_RedoButton">
+       <widget class="VxPushButton" name="m_RedoButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -431,10 +426,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/editredo.png</normaloff>:/MyP2PWeb/Resources/editredo.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -444,7 +435,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_CutButton">
+       <widget class="VxPushButton" name="m_CutButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -467,11 +458,7 @@
          <string>Cut</string>
         </property>
         <property name="text">
-         <string>...</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/editcut.png</normaloff>:/MyP2PWeb/Resources/editcut.png</iconset>
+         <string/>
         </property>
         <property name="iconSize">
          <size>
@@ -482,7 +469,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_CopyButton">
+       <widget class="VxPushButton" name="m_CopyButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -507,10 +494,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/editcopy.png</normaloff>:/MyP2PWeb/Resources/editcopy.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -520,7 +503,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_PasteButton">
+       <widget class="VxPushButton" name="m_PasteButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -545,10 +528,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/editpaste.png</normaloff>:/MyP2PWeb/Resources/editpaste.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -558,7 +537,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_PrinterButton">
+       <widget class="VxPushButton" name="m_PrinterButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -582,10 +561,6 @@
         </property>
         <property name="text">
          <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/fileprint.png</normaloff>:/MyP2PWeb/Resources/fileprint.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -628,11 +603,20 @@
       <property name="spacing">
        <number>0</number>
       </property>
-      <property name="margin">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
        <number>0</number>
       </property>
       <item>
-       <widget class="QToolButton" name="m_BoldButton">
+       <widget class="VxPushButton" name="m_BoldButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -657,10 +641,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/textbold.png</normaloff>:/MyP2PWeb/Resources/textbold.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -673,7 +653,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_ItalicsButton">
+       <widget class="VxPushButton" name="m_ItalicsButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -698,10 +678,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/textitalic.png</normaloff>:/MyP2PWeb/Resources/textitalic.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -714,7 +690,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_UnderlineButton">
+       <widget class="VxPushButton" name="m_UnderlineButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -739,10 +715,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/textunder.png</normaloff>:/MyP2PWeb/Resources/textunder.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -755,7 +727,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_LeftJustifyButton">
+       <widget class="VxPushButton" name="m_LeftJustifyButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -780,10 +752,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/textleft.png</normaloff>:/MyP2PWeb/Resources/textleft.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -793,7 +761,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_CenterTextButton">
+       <widget class="VxPushButton" name="m_CenterTextButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -816,11 +784,7 @@
          <string>Center Text</string>
         </property>
         <property name="text">
-         <string>Center</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/textcenter.png</normaloff>:/MyP2PWeb/Resources/textcenter.png</iconset>
+         <string/>
         </property>
         <property name="iconSize">
          <size>
@@ -831,7 +795,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_RightJustifyButton">
+       <widget class="VxPushButton" name="m_RightJustifyButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -856,10 +820,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/textright.png</normaloff>:/MyP2PWeb/Resources/textright.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -869,7 +829,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_FullLineButton">
+       <widget class="VxPushButton" name="m_FullLineButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -894,10 +854,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset resource="../gotvcommon.qrc">
-          <normaloff>:/MyP2PWeb/Resources/textjustify.png</normaloff>:/MyP2PWeb/Resources/textjustify.png</iconset>
-        </property>
         <property name="iconSize">
          <size>
           <width>32</width>
@@ -907,7 +863,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="m_TextColorButton">
+       <widget class="VxPushButton" name="m_TextColorButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>32</horstretch>
@@ -982,6 +938,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VxPushButton</class>
+   <extends>QPushButton</extends>
+   <header>VxPushButton.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../gotvcommon.qrc"/>
  </resources>

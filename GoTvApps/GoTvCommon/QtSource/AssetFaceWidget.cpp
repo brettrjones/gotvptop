@@ -16,6 +16,7 @@
 #include "AppCommon.h"
 #include "AssetFaceWidget.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
@@ -37,6 +38,10 @@ AssetFaceWidget::AssetFaceWidget( AppCommon& appCommon, QWidget * parent )
 void AssetFaceWidget::initAssetFaceWidget( void )
 {
 	ui.setupUi( this );
+    QSize buttonSize( GuiParams::SMALL_PUSHBUTTON_SIZE, GuiParams::SMALL_PUSHBUTTON_SIZE );
+    ui.m_ShredButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_SendButton->setFixedSizeAbsolute( buttonSize );
+
 	setXferBar( ui.m_XferProgressBar );
 	ui.m_ShredButton->setIcon( eMyIconTrash );
 	ui.m_SendButton->setVisible( false );
@@ -61,7 +66,7 @@ void AssetFaceWidget::setAssetInfo( AssetInfo& assetInfo )
 
 	QString faceRes = ":/AppRes/Resources/";
 	faceRes += m_AssetInfo.getAssetName().c_str();
-	faceRes += ".png";
+	faceRes += ".svg";
 	QPixmap faceImage( faceRes );
 	if( faceImage.isNull() )
 	{

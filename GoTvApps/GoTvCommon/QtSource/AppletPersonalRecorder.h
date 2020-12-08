@@ -13,6 +13,8 @@
 // http://www.nolimitconnect.com
 //============================================================================
 
+#include "ui_AppletPersonalRecorder.h"
+
 #include "AppletBase.h"
 
 class AppletPersonalRecorder : public AppletBase
@@ -23,8 +25,16 @@ public:
 	virtual ~AppletPersonalRecorder();
 
 
+    virtual void				toGuiClientPlayVideoFrame( void *			userData,
+                                                           VxGUID&          onlineId,
+                                                           uint8_t *		pu8Jpg,
+                                                           uint32_t		    u32JpgDataLen,
+                                                           int				motion0To100000 ) override;
 
 protected:
+    void						setupMultiSessionActivity( void );
+
+    Ui::PersonalRecorderUi	    ui;
 };
 
 

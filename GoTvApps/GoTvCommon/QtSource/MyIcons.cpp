@@ -677,6 +677,55 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
     case eMyIconTruthOrDare:
         return ":/AppRes/Resources/truth-or-dare.svg";
 
+    case eMyIconEditRedo:
+        return ":/AppRes/Resources/edit-action-redo.svg";
+    case eMyIconEditUndo:
+        return ":/AppRes/Resources/edit-action-undo.svg";
+
+    case eMyIconEditAlignCenter:
+        return ":/AppRes/Resources/edit-align-center.svg";
+    case eMyIconEditAlignLeft:
+        return ":/AppRes/Resources/edit-align-left.svg";
+    case eMyIconEditAlignLeftAndRight:
+        return ":/AppRes/Resources/edit-align-left-right.svg";
+    case eMyIconEditAlignRight:
+        return ":/AppRes/Resources/edit-align-right.svg";
+
+    case eMyIconEditBold:
+        return ":/AppRes/Resources/edit-bold.svg";
+    case eMyIconEditCopy:
+        return ":/AppRes/Resources/edit-copy.svg";
+    case eMyIconEditCut:
+        return ":/AppRes/Resources/edit-cut.svg";
+    case eMyIconEditFileNew:
+        return ":/AppRes/Resources/edit-file-new.svg";
+    case eMyIconEditHeader:
+        return ":/AppRes/Resources/edit-print.svg";
+    case eMyIconEditItalic:
+        return ":/AppRes/Resources/edit-italic.svg";
+    case eMyIconEditPaperClip:
+        return ":/AppRes/Resources/edit-paperclip.svg";
+    case eMyIconEditPaste:
+        return ":/AppRes/Resources/edit-paste.svg";
+    case eMyIconEditPrint:
+        return ":/AppRes/Resources/edit-print.svg";
+    case eMyIconEditText:
+        return ":/AppRes/Resources/edit-text.svg";
+    case eMyIconEditUnderline:
+        return ":/AppRes/Resources/edit-underline.svg";
+
+    case eMyIconFileOpen:
+        return ":/AppRes/Resources/file-open.svg";
+    case eMyIconFileSave:
+        return ":/AppRes/Resources/file-save.svg";
+    case eMyIconFileSaveAs:
+        return ":/AppRes/Resources/file-save-as.svg";
+
+    case eMyIconZoomIn:
+        return ":/AppRes/Resources/zoom-in.svg";
+    case eMyIconZoomOut:
+        return ":/AppRes/Resources/zoom-out.svg";
+
 	default:
 		return ":/AppRes/Resources/question_mark.svg";// Icon with question mark
 	}

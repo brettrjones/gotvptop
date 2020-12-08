@@ -1,8 +1,5 @@
 <RCC>
     <qresource prefix="/AppRes">
-        <file>Resources/align-center.svg</file>
-        <file>Resources/align-left.svg</file>
-        <file>Resources/align-right.svg</file>
         <file>Resources/arrow-down.svg</file>
         <file>Resources/arrow-left.svg</file>
         <file>Resources/arrow-right.svg</file>
@@ -113,7 +110,6 @@
         <file>Resources/emoj38.svg</file>
         <file>Resources/emoj39.svg</file>
         <file>Resources/emoj40.svg</file>
-        <file>Resources/emoj41.svg</file>
         <file>Resources/file-audio.svg</file>
         <file>Resources/file-folder-cancel.svg</file>
         <file>Resources/file-folder-locked.svg</file>
@@ -251,5 +247,26 @@
         <file>Resources/video-chat-settings.svg</file>
         <file>Resources/search-chat-room.svg</file>
         <file>Resources/search-group.svg</file>
+        <file>Resources/edit-action-redo.svg</file>
+        <file>Resources/edit-action-undo.svg</file>
+        <file>Resources/edit-align-center.svg</file>
+        <file>Resources/edit-align-left.svg</file>
+        <file>Resources/edit-align-left-right.svg</file>
+        <file>Resources/edit-align-right.svg</file>
+        <file>Resources/edit-bold.svg</file>
+        <file>Resources/edit-copy.svg</file>
+        <file>Resources/edit-cut.svg</file>
+        <file>Resources/edit-file-new.svg</file>
+        <file>Resources/edit-header.svg</file>
+        <file>Resources/edit-italic.svg</file>
+        <file>Resources/edit-paperclip.svg</file>
+        <file>Resources/edit-paste.svg</file>
+        <file>Resources/edit-print.svg</file>
+        <file>Resources/edit-text.svg</file>
+        <file>Resources/edit-underline.svg</file>
+        <file>Resources/file-open.svg</file>
+        <file>Resources/file-save-as.svg</file>
+        <file>Resources/zoom-in.svg</file>
+        <file>Resources/zoom-out.svg</file>
     </qresource>
 </RCC>

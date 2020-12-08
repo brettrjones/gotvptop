@@ -16,6 +16,7 @@
 #include "InputPhotoWidget.h"
 #include "AppCommon.h"
 #include "AppSettings.h"
+#include "GuiParams.h"
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxFileUtil.h>
@@ -32,6 +33,12 @@ InputPhotoWidget::InputPhotoWidget( QWidget * parent )
 	qDebug() << "InputPhotoWidget::InputPhotoWidget ";
 
 	ui.setupUi( this );
+    QSize buttonSize( GuiParams::SMALL_PUSHBUTTON_SIZE, GuiParams::SMALL_PUSHBUTTON_SIZE );
+    ui.m_SnapShotButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_RotateCamButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_SelectCamButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_CancelPhotoButton->setFixedSizeAbsolute( buttonSize );
+
 	ui.m_SnapShotButton->setIcons( eMyIconCameraNormal );
 	ui.m_RotateCamButton->setIcons( eMyIconCamRotateNormal );
 	ui.m_SelectCamButton->setIcons( eMyIconCamSelectNormal );

@@ -23,15 +23,38 @@
 AppletPersonalRecorder::AppletPersonalRecorder( AppCommon& app, QWidget * parent )
 : AppletBase( OBJNAME_APPLET_PERSONAL_RECORDER, app, parent )
 {
-	m_EAppletType = eAppletPersonalRecorder;
+    setAppletType( eAppletPersonalRecorder );
+    ui.setupUi( getContentItemsFrame() );
 	setTitleBarText( DescribeApplet( m_EAppletType ) );
-	connect( this, SIGNAL(signalBackButtonClicked()), this, SLOT(close()) );
 
+    setupMultiSessionActivity();
 	m_MyApp.activityStateChange( this, true );
+    m_MyApp.wantToGuiActivityCallbacks( this, this, true );
 }
 
 //============================================================================
 AppletPersonalRecorder::~AppletPersonalRecorder()
 {
+    ui.m_SessionWidget->onActivityStop();
+    m_MyApp.wantToGuiActivityCallbacks( this, this, false );
     m_MyApp.activityStateChange( this, false );
 }
+
+//============================================================================
+void AppletPersonalRecorder::setupMultiSessionActivity( void )
+{
+    ui.m_SessionWidget->setIsPersonalRecorder( true );
+    ui.m_SessionWidget->setIdents( &m_Engine.getMyPktAnnounce(), &m_Engine.getMyPktAnnounce() );
+    ui.m_SessionWidget->setEntryMode( eAssetTypeUnknown );
+}
+
+//============================================================================
+void AppletPersonalRecorder::toGuiClientPlayVideoFrame( void *			userData,
+                                                        VxGUID&			onlineId,
+                                                        uint8_t *		pu8Jpg,
+                                                        uint32_t		u32JpgDataLen,
+                                                        int				motion0To100000 )
+{
+    ui.m_SessionWidget->playVideoFrame( onlineId, pu8Jpg, u32JpgDataLen, motion0To100000 );
+}
+

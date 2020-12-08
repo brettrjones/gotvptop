@@ -43,6 +43,59 @@ StoryWidget::StoryWidget(QWidget *parent, QString initialFile)
 	m_TextEdit = ui.m_StoryTextEdit;
 	ui.m_FileButtonsFrame->setVisible( false );
 
+    int buttonWidth = 16;
+    QSize buttonSize( buttonWidth, buttonWidth );
+    ui.m_CreateHyperLinkButton->setFixedSize( buttonSize );
+    ui.m_FileNewButton->setFixedSize( buttonSize );
+    ui.m_FileOpenButton->setFixedSize( buttonSize );
+    ui.m_FileSaveAsButton->setFixedSize( buttonSize );
+    // ui.m_ExportPdfButton->setFixedSize( buttonSize );
+    ui.m_FileSaveButton->setFixedSize( buttonSize );
+    ui.m_InsertPictureButton->setFixedSize( buttonSize );
+    ui.m_UndoButton->setFixedSize( buttonSize );
+    ui.m_RedoButton->setFixedSize( buttonSize );
+    ui.m_CutButton->setFixedSize( buttonSize );
+    ui.m_CopyButton->setFixedSize( buttonSize );
+    ui.m_PasteButton->setFixedSize( buttonSize );
+    ui.m_PrinterButton->setFixedSize( buttonSize );
+    ui.m_BoldButton->setFixedSize( buttonSize );
+    ui.m_ItalicsButton->setFixedSize( buttonSize );
+    ui.m_UnderlineButton->setFixedSize( buttonSize );
+    ui.m_LeftJustifyButton->setFixedSize( buttonSize );
+    ui.m_CenterTextButton->setFixedSize( buttonSize );
+    ui.m_RightJustifyButton->setFixedSize( buttonSize );
+    ui.m_FullLineButton->setFixedSize( buttonSize );
+    ui.m_TextColorButton->setFixedSize( buttonSize );
+
+
+    ui.m_CreateHyperLinkButton->setIcon( eMyIconEditHyperLink );
+    ui.m_FileNewButton->setIcon( eMyIconEditFileNew );
+    ui.m_FileOpenButton->setIcon( eMyIconFileOpen );
+    ui.m_FileSaveAsButton->setIcon( eMyIconFileSaveAs );
+
+    // ui.m_ExportPdfButton->setIcon( eMyIconEditFileNew );
+
+    ui.m_FileSaveButton->setIcon( eMyIconFileSave );
+    ui.m_InsertPictureButton->setIcon( eMyIconEditFileNew );
+
+    ui.m_UndoButton->setIcon( eMyIconEditUndo );
+    ui.m_RedoButton->setIcon( eMyIconEditRedo );
+    ui.m_CutButton->setIcon( eMyIconEditCut );
+    ui.m_CopyButton->setIcon( eMyIconEditCopy );
+
+    ui.m_PasteButton->setIcon( eMyIconEditPaste );
+    ui.m_PrinterButton->setIcon( eMyIconEditPrint );
+    ui.m_BoldButton->setIcon( eMyIconEditBold );
+    ui.m_ItalicsButton->setIcon( eMyIconEditItalic );
+    ui.m_UnderlineButton->setIcon( eMyIconEditUnderline );
+
+    ui.m_LeftJustifyButton->setIcon( eMyIconEditAlignLeft );
+    ui.m_CenterTextButton->setIcon( eMyIconEditAlignCenter );
+    ui.m_RightJustifyButton->setIcon( eMyIconEditAlignRight );
+    ui.m_FullLineButton->setIcon( eMyIconEditAlignLeftAndRight );
+
+    ui.m_TextColorButton->setIcon( eMyIconEditText );
+
     setupFileActions();
     setupEditActions();
     setupTextActions();
@@ -113,9 +166,11 @@ void StoryWidget::setupFileActions()
 	connect(ui.m_FileOpenButton, SIGNAL(clicked()), this, SLOT(fileOpen()));
 	connect(ui.m_FileSaveButton, SIGNAL(clicked()), this, SLOT(fileSave()));
 	connect(ui.m_FileSaveAsButton, SIGNAL(clicked()), this, SLOT(fileSaveAs()));
+
+    ui.m_ExportPdfButton->setVisible( false );
 #ifndef QT_NO_PRINTER
 	connect(ui.m_PrinterButton, SIGNAL(clicked()), this, SLOT(filePrint()));
-	connect(ui.m_ExportPdfButton, SIGNAL(clicked()), this, SLOT(filePrintPdf()));
+	//connect(ui.m_ExportPdfButton, SIGNAL(clicked()), this, SLOT(filePrintPdf()));
 #endif
 }
 
@@ -682,6 +737,6 @@ void StoryWidget::colorChanged(const QColor &c)
 {
     QPixmap pix(16, 16);
     pix.fill(c);
-	ui.m_TextColorButton->setIcon(pix);
+	//ui.m_TextColorButton->setIcon(pix);
 }
 

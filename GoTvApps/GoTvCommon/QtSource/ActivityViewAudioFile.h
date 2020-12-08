@@ -32,7 +32,7 @@ class ActivityViewAudioFile : public ActivityBase
 public:
 
 	ActivityViewAudioFile(	AppCommon&			app,
-							QWidget *				parent = NULL );
+							QWidget *			parent = NULL );
 
 	virtual ~ActivityViewAudioFile() override = default;
 

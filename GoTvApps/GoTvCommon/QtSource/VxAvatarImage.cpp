@@ -44,7 +44,7 @@ VxAvatarImage::~VxAvatarImage()
 //============================================================================
 void VxAvatarImage::initQAvatarImage( void )
 {
-	setImage( ":/AppRes/Resources/ic_avatar.png" );
+	setImage( ":/AppRes/Resources/avatar.svg" );
 }
 
 //============================================================================
@@ -72,6 +72,6 @@ void VxAvatarImage::mousePressEvent(QMouseEvent * event)
 //void VxAvatarImage::updateImage( void )
 //{
 //	QSize screenSize( width(), height() );
-//	QImage picBitmap( ":/AppRes/Resources/ic_progress_spin.png" ); 
+//	QImage picBitmap( ":/AppRes/Resources/spinner-clockwise.svg" ); 
 //	m_ProgressPixmap = picBitmap.scaled(screenSize, Qt::KeepAspectRatio);
 //}

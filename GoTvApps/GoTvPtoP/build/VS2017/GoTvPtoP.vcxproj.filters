@@ -2446,6 +2446,69 @@
     <None Include="..\..\..\GoTvCommon\Resources\share-services.svg">
       <Filter>GoTvCommon\Resource Files</Filter>
     </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-action-redo.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-action-undo.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-align-center.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-align-left.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-align-left-right.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-align-right.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-bold.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-copy.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-cut.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-file-new.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-header.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-italic.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-paperclip.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-paste.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-print.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-text.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\edit-underline.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\file-open.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\file-save-as.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\zoom-in.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\GoTvCommon\Resources\zoom-out.svg">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_ActivityAddRemoveLibraryFiles.h">

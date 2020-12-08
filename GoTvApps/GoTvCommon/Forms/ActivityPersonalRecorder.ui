@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>PersonalRecorderDialog</class>
- <widget class="QDialog" name="PersonalRecorderDialog">
+ <widget class="QWidget" name="PersonalRecorderDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -139,6 +139,12 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>SessionWidget</class>
+   <extends>QWidget</extends>
+   <header>SessionWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>TitleBarWidget</class>
    <extends>QWidget</extends>
    <header>TitleBarWidget.h</header>
@@ -148,12 +154,6 @@
    <class>BottomBarWidget</class>
    <extends>QWidget</extends>
    <header location="global">BottomBarWidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>SessionWidget</class>
-   <extends>QWidget</extends>
-   <header>SessionWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -298,7 +298,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="m_ShreadButtonTextLabel">
           <property name="text">
            <string>Shred File And Remove Message</string>
           </property>
@@ -406,15 +406,15 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>VxPushButton</class>
+   <extends>QPushButton</extends>
+   <header>VxPushButton.h</header>
+  </customwidget>
+  <customwidget>
    <class>BottomBarWidget</class>
    <extends>QWidget</extends>
    <header location="global">BottomBarWidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>VxPushButton</class>
-   <extends>QPushButton</extends>
-   <header>VxPushButton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
