@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AvatarBarWidgetClass</class>
- <widget class="QWidget" name="AvatarBarWidgetClass">
+ <class>AvatarBarWidgetUi</class>
+ <widget class="QWidget" name="AvatarBarWidgetUi">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,20 +11,20 @@
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+   <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
-    <width>42</width>
+    <width>0</width>
     <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>42</width>
+    <width>16777215</width>
     <height>16777215</height>
    </size>
   </property>
@@ -56,6 +56,9 @@ border-radius: 4px;
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
+   </property>
+   <property name="sizeConstraint">
+    <enum>QLayout::SetMinimumSize</enum>
    </property>
    <property name="leftMargin">
     <number>5</number>

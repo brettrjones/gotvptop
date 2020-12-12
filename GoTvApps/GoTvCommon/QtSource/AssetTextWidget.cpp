@@ -16,6 +16,7 @@
 #include "AppCommon.h"
 #include "AssetTextWidget.h"
 #include "GuiHelpers.h"
+#include "GuiParams.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
@@ -37,6 +38,10 @@ AssetTextWidget::AssetTextWidget( AppCommon& appCommon, QWidget * parent )
 void AssetTextWidget::initAssetTextWidget( void )
 {
 	ui.setupUi( this );
+    QSize buttonSize( GuiParams::SMALL_PUSHBUTTON_SIZE, GuiParams::SMALL_PUSHBUTTON_SIZE );
+    ui.m_SendButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_ShredButton->setFixedSizeAbsolute( buttonSize );
+
 	setXferBar( ui.m_XferProgressBar );
 	ui.m_ShredButton->setIcon( eMyIconTrash );
 

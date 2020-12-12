@@ -259,6 +259,7 @@ void VxAppStyle2::drawControl( ControlElement			element,
         return;
     }
 
+    /*
     if( element == CE_ScrollBarSlider )
     {
         if( !( option->state & State_Enabled ) )
@@ -301,6 +302,7 @@ void VxAppStyle2::drawControl( ControlElement			element,
         painter->restore();
         return;
     }
+    */
 
     if( element == CE_ScrollBarAddPage || element == CE_ScrollBarSubPage )
     {

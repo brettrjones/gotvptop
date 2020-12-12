@@ -49,6 +49,6 @@ signals:
 protected:
 
 	//=== vars ===//
-	Ui::AvatarBarWidgetClass	ui;
+	Ui::AvatarBarWidgetUi	ui;
 	AppCommon&					m_MyApp;
 };

@@ -43,6 +43,9 @@ AssetVoiceWidget::AssetVoiceWidget( AppCommon& appCommon, QWidget * parent )
 void AssetVoiceWidget::initAssetVoiceWidget( void )
 {
 	ui.setupUi( this );
+    QSize buttonSize( 24, 24 );
+    ui.m_PlayPauseButton->setFixedSizeAbsolute( buttonSize );
+
 	setXferBar( ui.m_XferProgressBar );
 
 	ui.m_PlayPauseButton->setIcons( eMyIconPlayNormal );
@@ -59,6 +62,8 @@ void AssetVoiceWidget::initAssetVoiceWidget( void )
 	connect( ui.m_PlayPosSlider, SIGNAL( sliderPressed() ), this, SLOT( slotSliderPressed() ) );
 	connect( ui.m_PlayPosSlider, SIGNAL( sliderReleased() ), this, SLOT( slotSliderReleased() ) );
 	connect( ui.m_LeftAvatarBar, SIGNAL( signalResendAsset() ), this, SLOT( slotResendAsset() ) );
+
+    ui.m_PlayPosSlider->setVisible( true );
 }
 
 //============================================================================

@@ -746,8 +746,8 @@ void VxAppTheme::updateWindowTheme( void )
     palette.setColor( QPalette::BrightText, isBlackOnWhite() ? buttonTextColor.darker() : buttonTextColor.lighter() );        // BrightText
     palette.setColor( QPalette::WindowText, windowTextColor );                  // WindowText
     palette.setColor( QPalette::Text, windowTextColor );                        // Text and foreground
-    //palette.setColor( QPalette::WindowText, COLOR_RED );                  // WindowText
-    //palette.setColor( QPalette::Text, COLOR_RED );                        // Text and foreground
+    //palette.setColor( QPalette::WindowText, COLOR_RED );                      // WindowText
+    //palette.setColor( QPalette::Text, COLOR_RED );                            // Text and foreground
 
     palette.setColor( QPalette::Window, windowBkgColor );                       // Window and background
 
@@ -760,7 +760,7 @@ void VxAppTheme::updateWindowTheme( void )
     palette.setColor( QPalette::ToolTipText, windowTextColor );                 // ToolTipText
     palette.setColor( QPalette::ToolTipBase, QColor( COLOR_YELLOW_DARK ) );     // ToolTipBase
 
-    palette.setColor( QPalette::Shadow, getColor( eShadowColor ) );                // shadow
+    palette.setColor( QPalette::Shadow, getColor( eShadowColor ) );             // shadow
 
     palette.setColor( QPalette::Light, windowTextColor );                       // Light
     palette.setColor( QPalette::Midlight, windowTextColor.darker() );           // Midlight.. mostly for 
@@ -772,7 +772,7 @@ void VxAppTheme::updateWindowTheme( void )
     palette.setColor( QPalette::ButtonText, buttonTextColor );                  // ButtonText and drop down button icon color
     palette.setColor( QPalette::Button, buttonBkgColor );                       // Scroll and spin button background color
 
-    palette.setColor( QPalette::Light, QColor( COLOR_RED ) );                       // Light
+    palette.setColor( QPalette::Light, QColor( COLOR_RED ) );                   // Light
     palette.setColor( QPalette::Midlight, QColor( COLOR_RED ) );                // Midlight.. mostly for 
     palette.setColor( QPalette::Mid, QColor( COLOR_RED ) );                     // Mid
     palette.setColor( QPalette::Dark, QColor( COLOR_RED ) );                    // Dark .. mostly for frame shadow and radio button outline

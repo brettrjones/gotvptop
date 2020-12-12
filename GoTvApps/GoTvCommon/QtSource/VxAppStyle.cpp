@@ -321,6 +321,16 @@ void VxAppStyle::drawControl(   ControlElement			element,
 
     if( element == CE_ScrollBarSlider )
     {
+        /*
+        QStyleOption opt = *option;
+        QColor bkgColor( COLOR_GREEN );
+        QColor fgdColor( COLOR_ORANGE_BURNT );
+        m_AppTheme.setEveryColorPossible( opt.palette, bkgColor, fgdColor );
+        QCommonStyle::drawControl( element, &opt, painter, widget );
+        qDrawWinButton( painter, opt.rect, opt.palette, false, &option->palette.brush( QPalette::Button ) );
+        painter->restore();
+        return;
+       */
         if( !( option->state & State_Enabled ) )
         {
             QBrush br;
@@ -494,7 +504,7 @@ void VxAppStyle::drawControl(   ControlElement			element,
         return;
     }
 
-    QProxyStyle::drawControl( element, option, painter, widget );
+    QCommonStyle::drawControl( element, option, painter, widget );
     painter->restore();
 }
 
@@ -710,14 +720,46 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
         const QStyleOptionSlider *slider = qstyleoption_cast<const QStyleOptionSlider *>( option );
         if( slider )
         {
-            int thickness = proxy()->pixelMetric( PM_SliderControlThickness, slider, widget );
-            int len = proxy()->pixelMetric( PM_SliderLength, slider, widget );
-            int ticks = slider->tickPosition;
+            QBrush handleBrush;
+            QBrush handleGroove = option->palette.midlight();
+            if( slider->state & State_Enabled )
+            {
+                handleBrush = option->palette.highlight();
+            }
+            else
+            {
+                handleBrush = QBrush( slider->palette.color( QPalette::Button ), Qt::Dense4Pattern );
+            }
 
-            QRect groove = subControlRect( CC_Slider, slider, SC_SliderGroove, widget );
-            QRect handle = subControlRect( CC_Slider, slider, SC_SliderHandle, widget );
+            painter->setBrush( handleBrush );
+
+            int thickness = pixelMetric( PM_SliderControlThickness, option, widget ); // total slider thickness
+            int len = pixelMetric( PM_SliderLength, option, widget );           // total length of slider
+            int grooveLen = pixelMetric( PM_SliderSpaceAvailable, option, widget );   // available space for slider to move
+            int ticks = slider->tickPosition; // ticks not supoorted
+
+            QRect grooveRect = subControlRect( CC_Slider, option, SC_SliderGroove, widget );
+            QRect handleRect = subControlRect( CC_Slider, option, SC_SliderHandle, widget );
+
+            if( grooveRect.isValid() )
+            {
+                QColor groveColor( COLOR_PINK_LIGHT );
+                QColor handleColor( COLOR_ORANGE );
+                qDrawWinPanel( painter, grooveRect.x(), grooveRect.y(), grooveRect.width(), 8, option->palette, true, &handleGroove );
+            }
+
+            if( handleRect.isValid() )
+            {
+                QColor groveColor( COLOR_PINK_LIGHT );
+                QColor handleColor( COLOR_ORANGE );
+                qDrawWinPanel( painter, handleRect.x(), handleRect.y(), handleRect.width(), handleRect.height(), option->palette, true, &handleBrush );
+            }
+
+            painter->restore();
+            return;
 
 
+            /*
             if( ( slider->subControls & SC_SliderGroove ) && groove.isValid() )
             {
                 int mid = thickness / 2;
@@ -763,7 +805,7 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
 
                 if( slider->state & State_Enabled )
                 {
-                    handleBrush = slider->palette.color( QPalette::Button );
+                    handleBrush = option->palette.highlight();
                 }
                 else
                 {
@@ -795,6 +837,7 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
                     painter->setBackgroundMode( Qt::OpaqueMode );
                     qDrawWinButton( painter, QRect( x, y, wi, he ), slider->palette, false, &handleBrush );
                     painter->setBackgroundMode( oldMode );
+                    painter->restore();
                     return;
                 }
 
@@ -950,6 +993,7 @@ void VxAppStyle::drawComplexControl( ComplexControl				control,
                     break;
                 }
             }
+            */
         }
 
         painter->restore();
@@ -1101,14 +1145,23 @@ int VxAppStyle::pixelMetric( PixelMetric			metric,
     case PM_ButtonShiftVertical:
         break;
 
-    case PM_SliderControlThickness:
+    case PM_SliderThickness: // height of slider handle
+        return widget->geometry().height() < widget->geometry().width() ? widget->geometry().height() : widget->geometry().width();
+
+    case PM_SliderControlThickness: // slider handle width
+        return widget->geometry().height() < widget->geometry().width() ? widget->geometry().height() : widget->geometry().width();
         break;
 
-    case PM_SliderLength:
-        break;
+    case PM_SliderLength: // total length of slider
+        return widget->geometry().height() > widget->geometry().width() ? widget->geometry().height() : widget->geometry().width();
 
-    case PM_SliderTickmarkOffset:
-         break;
+    case PM_SliderSpaceAvailable:        // available space for slider to move
+        return widget->geometry().height() < widget->geometry().width() ? 
+            widget->geometry().width() - widget->geometry().height() : widget->geometry().height() - widget->geometry().width();
+
+    case PM_SliderTickmarkOffset: // ticks not supported
+        return 0;
+        break;
 
     case PM_ButtonIconSize:
         break;
@@ -1204,6 +1257,26 @@ QStyle::SubControl VxAppStyle::hitTestComplexControl(   ComplexControl				contro
 
         return subControl;
 
+    case CC_Slider:
+        if( const QStyleOptionSlider *slider = qstyleoption_cast< const QStyleOptionSlider * >( option ) )
+        {     
+            uint ctrl = SC_SliderGroove;
+            QRect r;
+            while( ctrl <= SC_SliderTickmarks )
+            {
+                r = subControlRect( control, slider, QStyle::SubControl( ctrl ), widget );
+                if( r.isValid() && r.contains( position ) )
+                {
+                    subControl = QStyle::SubControl( ctrl );
+                    break;
+                }
+
+                ctrl <<= 1;
+            }
+        }
+
+        return subControl;
+
     default:
         break;
     }
@@ -1251,27 +1324,38 @@ QRect VxAppStyle::subControlRect(   ComplexControl control,
 
         if( const QStyleOptionSlider *slider = qstyleoption_cast<const QStyleOptionSlider *>( option ) )
         {
-            int tickOffset = pixelMetric( PM_SliderTickmarkOffset, slider, widget );
-            int thickness = pixelMetric( PM_SliderControlThickness, slider, widget );
+            int tickOffset = pixelMetric( PM_SliderTickmarkOffset, option, widget );
+
+            int ctrWidth = pixelMetric( PM_SliderControlThickness, option, widget );
+            int ctrlHeight = widget->geometry().height();
+
+            int totallength = pixelMetric( PM_SliderLength, option, widget );
+            int groovelength = pixelMetric( PM_SliderSpaceAvailable, option, widget );
+            int grooveXOffs = (totallength - groovelength) / 2;
+            int grooveheight = ctrlHeight / 5;
+            int grooveYOffs = ( ctrlHeight - grooveheight ) / 2;
 
             switch( subControl ) 
             {
             case SC_SliderHandle:
             {
                 int sliderPos = 0;
-                int len = pixelMetric( PM_SliderLength, slider, widget );
+                int sliderLen = pixelMetric( PM_SliderLength, option, widget );
+                int grooveLen = pixelMetric( PM_SliderSpaceAvailable, option, widget );
+                int grooveOffs = 0;// ( sliderLen - grooveLen ) / 2;
                 bool horizontal = slider->orientation == Qt::Horizontal;
                 sliderPos = sliderPositionFromValue( slider->minimum, slider->maximum,
                                                     slider->sliderPosition,
-                                                    ( horizontal ? slider->rect.width() : slider->rect.height() ) - len,
+                                                    grooveLen,
                                                     slider->upsideDown );
+                qWarning() << "slider pos " << slider->sliderPosition;
                 if( horizontal )
                 {
-                    ret.setRect( slider->rect.x() + sliderPos, slider->rect.y() + tickOffset, len, thickness );
+                    ret.setRect( slider->rect.x() + sliderPos + grooveOffs, slider->rect.y() + tickOffset, ctrlHeight, ctrWidth );
                 }
                 else
                 {
-                    ret.setRect( slider->rect.x() + tickOffset, slider->rect.y() + sliderPos, thickness, len );
+                    ret.setRect( slider->rect.x() + tickOffset, slider->rect.y() + sliderPos + grooveOffs, ctrWidth, ctrlHeight );
                 }
 
                 break; 
@@ -1280,11 +1364,11 @@ QRect VxAppStyle::subControlRect(   ComplexControl control,
             case SC_SliderGroove:
                 if( slider->orientation == Qt::Horizontal )
                 {
-                    ret.setRect( slider->rect.x(), slider->rect.y() + tickOffset, slider->rect.width(), thickness );
+                    ret.setRect( grooveXOffs, grooveYOffs + tickOffset, groovelength, grooveheight );
                 }
                 else
                 {
-                    ret.setRect( slider->rect.x() + tickOffset, slider->rect.y(), thickness, slider->rect.height() );
+                    ret.setRect( grooveYOffs + tickOffset, grooveXOffs, grooveheight, groovelength );
                 }
 
                 break;
