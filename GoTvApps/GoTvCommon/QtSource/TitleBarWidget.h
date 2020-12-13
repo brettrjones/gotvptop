@@ -99,6 +99,7 @@ signals:
 public slots:
 	virtual void				slotPowerButtonClicked( void );
 	virtual void				slotHomeButtonClicked( void );
+    virtual void				slotMicrophonePeak( int peekVal0to32768 );
 	virtual void				slotMuteMicButtonClicked( void );
 	virtual void				slotMuteSpeakerButtonClicked( void );
 	virtual void				slotCameraSnapshotButtonClicked( void );

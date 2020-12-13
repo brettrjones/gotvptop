@@ -81,6 +81,7 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 	connect( &m_MyApp,						SIGNAL(signalStatusMsg(QString)),	this, SLOT(slotTitleStatusBarMsg(QString)) );
 	connect( &m_MyApp,						SIGNAL(signalToGuiPluginStatus(EPluginType,int,int)),	this, SLOT(slotToGuiPluginStatus(EPluginType,int,int)) );
     connect( &m_MyApp,                      SIGNAL( signalNetAvailStatus( ENetAvailStatus ) ), this, SLOT( slotToGuiNetAvailStatus( ENetAvailStatus ) ) );
+    connect( &m_MyApp,                      SIGNAL( signalMicrophonePeak( int ) ), this, SLOT( slotMicrophonePeak( int ) ) );
 }
 
 //============================================================================
@@ -147,6 +148,8 @@ void TitleBarWidget::enableVideoControls( bool enable )
 void TitleBarWidget::enableAudioControls( bool enable )
 {
 	ui.m_MuteMicButton->setVisible( enable );
+    ui.m_MicVolPeakBar->setVisible( !m_MuteMic );
+    ui.m_MicVolPeakBar->setValue( 0 );
 	ui.m_MuteSpeakerButton->setVisible( enable );
 }
 
@@ -166,14 +169,24 @@ void TitleBarWidget::slotHomeButtonClicked( void )
 void TitleBarWidget::slotMuteMicButtonClicked( void )
 {
 	m_MuteMic = !m_MuteMic;
+    m_MyApp.fromGuiMuteMicrophone( m_MuteMic );
 	setMicrophoneIcon( m_MuteMic ? eMyIconMicrophoneOff : eMyIconMicrophoneOn );
+    ui.m_MicVolPeakBar->setVisible( !m_MuteMic );
+    ui.m_MicVolPeakBar->setValue( 0 );
 	emit signalMuteMicButtonClicked( m_MuteMic );
+}
+
+//============================================================================
+void TitleBarWidget::slotMicrophonePeak( int peekVal0to32768 )
+{
+    ui.m_MicVolPeakBar->setValue( peekVal0to32768 );
 }
 
 //============================================================================
 void TitleBarWidget::slotMuteSpeakerButtonClicked( void )
 {
 	m_MuteSpeaker = !m_MuteSpeaker;
+    m_MyApp.fromGuiMuteSpeaker( m_MuteSpeaker );
 	setSpeakerIcon( m_MuteSpeaker ? eMyIconSpeakerOff : eMyIconSpeakerOn );
 	emit signalMuteSpeakerButtonClicked( m_MuteSpeaker );
 }

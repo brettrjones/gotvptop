@@ -16,6 +16,10 @@
 
 #include <GoTvDependLibrariesConfig.h>
 
+#define	    NO_LIMIT_OPUS_SIGNITURE "nolimitconnect.com v"
+#define	    NO_LIMIT_OPUS_SIGNITURE_LEN 20
+#define	    NO_LIMIT_OPUS_SIGNITURE_OFFS 0x99
+
 class MyOpusHeader 
 {
 public:
@@ -23,9 +27,9 @@ public:
 
 	uint8_t							m_Version;
 	uint8_t							m_Channels;			// Number of channels: 1..255 
-	uint16_t							m_Preskip;			// calculated from look ahead and 
-	uint32_t							m_InputSampleRate;	// rate in frequency
-	uint16_t							m_Gain;				// in dB S7.8 should be zero whenever possible 
+	uint16_t						m_Preskip;			// calculated from look ahead and 
+	uint32_t						m_InputSampleRate;	// rate in frequency
+	uint16_t						m_Gain;				// in dB S7.8 should be zero whenever possible 
 	uint8_t							m_ChannelMapping;
 	// These used only used if channel_mapping != 0 
 	uint8_t							m_StreamCnt;

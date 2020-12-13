@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
+    <width>500</width>
     <height>103</height>
    </rect>
   </property>
@@ -275,6 +275,56 @@
          </size>
         </property>
        </widget>
+      </item>
+      <item>
+       <widget class="VxProgressBar" name="m_MicVolPeakBar">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>5</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>5</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximum">
+         <number>32768</number>
+        </property>
+        <property name="value">
+         <number>3000</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="textDirection">
+         <enum>QProgressBar::BottomToTop</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>5</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
       <item>
        <widget class="VxPushButton" name="m_MuteSpeakerButton">
@@ -579,6 +629,11 @@ background-color: rgb(255,255,191);
    <extends>QWidget</extends>
    <header>NetAvailStatusWidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>VxProgressBar</class>
+   <extends>QProgressBar</extends>
+   <header>VxProgressBar.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

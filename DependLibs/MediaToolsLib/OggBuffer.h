@@ -24,13 +24,13 @@ class OggBuffer
 {
 public:
 	OggBuffer();
-	~OggBuffer();
+	~OggBuffer() = default;
 
-	void						setDataBuf( uint8_t * dataBuf )					{ m_DataBuf = dataBuf; }
-	uint8_t *						getDataBuf( void )							{ return m_DataBuf; }
+	void						setDataBuf( uint8_t * dataBuf )				{ m_DataBuf = dataBuf; }
+	uint8_t *					getDataBuf( void )							{ return m_DataBuf; }
 	void						setMaxLen( int maxLen )						{ m_MaxLen = maxLen; }
 	int							getMaxLen( void )							{ return m_MaxLen; }
-	void						setBuffer( uint8_t * dataBuf, int len )			{ m_DataBuf = dataBuf; m_MaxLen = len; }
+	void						setBuffer( uint8_t * dataBuf, int len )		{ m_DataBuf = dataBuf; m_MaxLen = len; }
 
 	void						setPos( int pos )							{ m_Pos = pos; }
 	int							getPos( void )								{ return m_Pos; }
@@ -56,7 +56,7 @@ public:
 															MyOpusHeader&			opusHeader );
 
 
-	uint8_t *						m_DataBuf;
+	uint8_t *					m_DataBuf;
 	int							m_MaxLen;
 	int							m_Pos;
 };

@@ -353,7 +353,6 @@ public:
     virtual void                frameBufferBind( unsigned int fboId ) override;
     virtual bool                frameBufferStatus() override;
 
-
     // gl functions
     void                        glFuncDrawElements( GLenum mode, GLsizei count, GLenum type, const GLvoid *indices ) override;
     void                        glFuncDisable( GLenum cap ) override;
@@ -408,6 +407,8 @@ public:
     virtual void				toGuiRandomConnectStatus( ERandomConnectStatus eRandomConnectStatus, const char * msg = "" ) override;
 
     virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) override;
+    // microphone sound input samples peak value
+    virtual void				toGuiMicrophonePeak( EAppModule appModule, int peekVal0to32768 );
     virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) override;
     virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
     virtual int				    toGuiPlayAudio( EAppModule appModule, float * pu16PcmData, int pcmDataLenInBytes ) override;
@@ -614,6 +615,7 @@ signals:
 
 	void						signalEnableVideoCapture( bool enableCapture );
 	void						signalEnableMicrophoneRecording( bool enableMicInput );
+    void						signalMicrophonePeak( int peekVal0to32768 );
 	void						signalEnableSpeakerOutput( bool enableSpeakerOutput );
 
 	void						signalSetRelayHelpButtonVisibility( bool isVisible );

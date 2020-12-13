@@ -172,6 +172,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenuButton.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenuButtonBottom.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenuButtonTop.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/VxProgressBar.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxScrollArea.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxShredderButton.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxSpinProgress.h \
@@ -458,6 +459,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenuButtonBottom.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenuButtonTop.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxPushButton.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/VxProgressBar.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxComboBoxFileFilter.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxFlatButton.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxGuidQt.cpp \

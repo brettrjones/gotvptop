@@ -34,6 +34,17 @@ void AppCommon::toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMic
 }
 
 //============================================================================
+void AppCommon::toGuiMicrophonePeak( EAppModule appModule, int peekVal0to32768 )
+{
+    if( VxIsAppShuttingDown() )
+    {
+        return;
+    }
+
+    emit signalMicrophonePeak( peekVal0to32768 );
+}
+
+//============================================================================
 void AppCommon::slotEnableMicrophoneRecording( bool enableMicInput )
 {
 	if( VxIsAppShuttingDown() )

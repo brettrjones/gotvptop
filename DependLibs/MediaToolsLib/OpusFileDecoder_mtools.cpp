@@ -103,11 +103,6 @@ namespace
 	const int		    OPUS_FILE_HEADER_LEN			= 0x349; // (decimal 841)
 	const int		    OPUS_MAX_PKT_LEN				= 390*6;
 
-    const char *	    OPUS_SIGNITURE					= "nolimitconnect.com v";
-    const uint32_t		OPUS_SIGNITURE_LEN				= 20;
-    const uint32_t		OPUS_SIGNITURE_OFFS             = 0x99;
-
-
 	//============================================================================
 	int OpusHeaderParse( const unsigned char *packet, int len, MyOpusHeader * h )
 	{
@@ -975,19 +970,22 @@ bool OpusFileDecoder::readTotalSndFrames( FILE * fileHandle )
 	m_TotalSndFramesInFile = 0;
 	m_ConsumedSndFrames = 0;
 	char readBuf[ 512 ];
-    if( 0 == fseek( fileHandle, OPUS_SIGNITURE_OFFS, SEEK_SET ) )
+    if( 0 == fseek( fileHandle, NO_LIMIT_OPUS_SIGNITURE_OFFS, SEEK_SET ) )
     {
         if( sizeof( readBuf ) == fread( readBuf, 1, sizeof( readBuf ), fileHandle ) )
 	    {
             uint64_t totalFrames = 0;
-            if( 0 == strncmp( OPUS_SIGNITURE, readBuf, OPUS_SIGNITURE_LEN ) )
+            for( int i = 0; i < 10; i++ )
             {
-                if( VxFileUtil::hexAsciiToU64( &readBuf[ OPUS_SIGNITURE_LEN ], totalFrames ) )
+                if( 0 == strncmp( NO_LIMIT_OPUS_SIGNITURE, &readBuf[i], NO_LIMIT_OPUS_SIGNITURE_LEN ) )
                 {
-                    if( 0 != totalFrames )
+                    if( VxFileUtil::hexAsciiToU64( &readBuf[ NO_LIMIT_OPUS_SIGNITURE_LEN + i ], totalFrames ) )
                     {
-                        m_TotalSndFramesInFile = htonU64( totalFrames );
-                        return true;
+                        if( 0 != totalFrames )
+                        {
+                            m_TotalSndFramesInFile = htonU64( totalFrames );
+                            return true;
+                        }
                     }
                 }
             }

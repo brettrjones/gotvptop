@@ -146,9 +146,9 @@ int OggStream::writeHeader( MyOpusHeader& opusHeader, uint8_t * packetBuf, int b
 		m_Date = VxTimeUtil::getLocalDateAndTimeWithTextMonths();
 	}
 
-	char commentBuf[764];
+	char commentBuf[ 770 + 1];
 	memset( commentBuf, 0, sizeof( commentBuf ) );
-	m_OggBuffer.setBuffer( (uint8_t *)commentBuf, 764 );
+	m_OggBuffer.setBuffer( (uint8_t *)commentBuf, 770 );
 	m_OggBuffer.writeChars( "OpusTags", 8 );
 	m_OggBuffer.writeStringLengthThenString( opus_get_version_string() );
 	m_OggBuffer.writeStringLengthThenString( " " );
@@ -161,7 +161,7 @@ int OggStream::writeHeader( MyOpusHeader& opusHeader, uint8_t * packetBuf, int b
 	m_OggBuffer.writeStringLengthThenString( m_UserTag );
 
 	m_OggPkt.packet		= (uint8_t *)commentBuf;
-	m_OggPkt.bytes		= 764;
+	m_OggPkt.bytes		= 770;
 	m_OggPkt.b_o_s		= 0;
 	m_OggPkt.e_o_s		= 0;
 	m_OggPkt.granulepos	= 0;

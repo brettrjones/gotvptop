@@ -276,59 +276,81 @@ void EchoCancel::fromGuiSoundDelayTest( void )
 //============================================================================
 void EchoCancel::processFromMicrophone( int16_t * pcmDataFromMic, uint32_t dataLenBytes, int16_t * pcmRetDataProcessed, uint32_t totalDelayMs, int clockDrift )
 {
-	// Cancel echo
-	if( 0 == m_Aec  )  
-	{
-		memcpy( pcmRetDataProcessed, pcmDataFromMic, dataLenBytes );
-		return;
-	}
+    // Cancel echo
+    if( 0 == m_Aec )
+    {
+        memcpy( pcmRetDataProcessed, pcmDataFromMic, dataLenBytes );
+        return;
+    }
 
-	int samplesToProcess = dataLenBytes >> 1;
-	sendMixerDataToEchoProcessor( samplesToProcess, totalDelayMs );
-	PcmS16ToFloats( pcmDataFromMic, dataLenBytes, &m_MicInBuf[0][0] );
-	if( m_EchoDelayTestStart  && m_EchoTestSignalSent )
-	{
-		int samplesThisChunk = dataLenBytes >> 1;
-		float * floatData = &m_MicInBuf[0][0];
-		int consecutiveHighVolume = 0;
-		for( int i = 0; i < samplesThisChunk ; i++ )
-		{
-			if( ( *floatData > 0.07 ) || ( *floatData < -0.07 ) )
-			{
-				consecutiveHighVolume++;
-				if( consecutiveHighVolume > 3 )
-				{
-					double elapsedMs		= m_EchoDelayTimer.elapsedMs();
-					m_EchoDelayTestStart	= false;
-					LogMsg( LOG_INFO, "Audio Delay measured %3.3f ms, estimated %d ms samples%d  \n", elapsedMs, totalDelayMs,  m_EchoDelaySampleCnt );
-					break;
-				}
-			}
-			else
-			{
-				consecutiveHighVolume = 0;
-			}
+    int samplesToProcess = dataLenBytes >> 1;
+    PcmS16ToFloats( pcmDataFromMic, dataLenBytes, &m_MicInBuf[ 0 ][ 0 ] );
+    /*
+    if( m_EchoDelayTestStart  && m_EchoTestSignalSent )
+    {
+        int samplesThisChunk = dataLenBytes >> 1;
+        float * floatData = &m_MicInBuf[ 0 ][ 0 ];
+        int consecutiveHighVolume = 0;
+        for( int i = 0; i < samplesThisChunk; i++ )
+        {
+            if( ( *floatData > 0.07 ) || ( *floatData < -0.07 ) )
+            {
+                consecutiveHighVolume++;
+                if( consecutiveHighVolume > 3 )
+                {
+                    double elapsedMs = m_EchoDelayTimer.elapsedMs();
+                    m_EchoDelayTestStart = false;
+                    LogMsg( LOG_INFO, "Audio Delay measured %3.3f ms, estimated %d ms samples%d  \n", elapsedMs, totalDelayMs, m_EchoDelaySampleCnt );
+                    break;
+                }
+            }
+            else
+            {
+                consecutiveHighVolume = 0;
+            }
 
-			m_EchoDelaySampleCnt++;
-		}
-	}
+            m_EchoDelaySampleCnt++;
+        }
+    }
+    */
 
+    int processResult = 0;
+    // process in 8 chunks else echo canceler will error out
+    samplesToProcess = samplesToProcess / 8;
+    for( int i = 0; i < 8; i++ )
+    {
+        sendMixerDataToEchoProcessor( samplesToProcess, totalDelayMs );
 
-	const float * thisInChunkBuf	= &m_MicInBuf[0][0];
-	float * thisOutChunkBuf			= &m_MicOutBuf[0][0];
-	processMicrophoneChunk(	(const float * const *)(&thisInChunkBuf), 
-							1,
-							(float * const *)(&thisOutChunkBuf),
-							samplesToProcess,
-							(uint16_t)totalDelayMs,
-							clockDrift );
-	if( m_EchoCancelEnabled  )  
+        const float * thisInChunkBuf = &m_MicInBuf[ i ][ 0 ];
+        float * thisOutChunkBuf = &m_MicOutBuf[ i ][ 0 ];
+        int chunkResult = processMicrophoneChunk( ( const float * const*)( &thisInChunkBuf ),
+                                                    1,
+                                                    ( float *  const* )( &thisOutChunkBuf ),
+                                                    samplesToProcess,
+                                                    ( uint16_t )totalDelayMs,
+                                                    clockDrift );
+        if( chunkResult )
+        {
+            processResult = chunkResult;
+            break;
+        }
+
+        totalDelayMs += 10; 
+        thisInChunkBuf++;
+        thisOutChunkBuf++;
+    }
+
+	if( m_EchoCancelEnabled && 0 == processResult )
 	{
 		FloatsToPcmS16( &m_MicOutBuf[0][0], pcmRetDataProcessed, dataLenBytes );
 	}
 	else
 	{
 		memcpy( pcmRetDataProcessed, pcmDataFromMic, dataLenBytes );
+        if( 0 != processResult )
+        {
+            LogMsg( LOG_DEBUG, "Error:  EchoCancel::processFromMicrophone result %d", processResult );
+        }
 	}
 }
 

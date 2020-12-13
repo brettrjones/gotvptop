@@ -1197,6 +1197,7 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\release;$(QTDIR)\mkspecs\win64-msvc</IncludePath>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxProgressBar.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxPushButton.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -2403,6 +2404,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxPlainTextEdit.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxProgressBar.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\VxResourceToRealFile.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxScrollArea.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>

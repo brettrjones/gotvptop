@@ -22,6 +22,12 @@ void IGoTv::toGuiStatusMessage( const char * statusMsg )
 }
 
 //============================================================================
+void IGoTv::toGuiMicrophonePeak( EAppModule appModule, int peekVal0to32768 )
+{
+    getAppCommon().toGuiMicrophonePeak( appModule, peekVal0to32768 );
+}
+
+//============================================================================
 void IGoTv::toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput )
 {
     getAppCommon().toGuiWantMicrophoneRecording( appModule, wantMicInput );

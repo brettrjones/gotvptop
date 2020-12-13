@@ -978,6 +978,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoinSearch.cpp">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxProgressBar.cpp">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -1948,6 +1951,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletGroupJoinSearch.h">
       <Filter>GoTvCommon\Source Files\Applets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxProgressBar.h">
+      <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

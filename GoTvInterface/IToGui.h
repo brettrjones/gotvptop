@@ -148,6 +148,8 @@ public:
     /// a module has changed state
     virtual void				toGuiModuleState( EAppModule moduleNum, EModuleState moduleState ) = 0;
 
+    /// microphone sound input samples peak value
+    virtual void				toGuiMicrophonePeak( EAppModule appModule, int peekVal0to32768 ) = 0;
 	/// Start/Stop camera capture
 	virtual void				toGuiWantVideoCapture( bool wantVidCapture ) = 0;
 	/// Send video feed frame to GUI for playback.. includes amount of motion detected

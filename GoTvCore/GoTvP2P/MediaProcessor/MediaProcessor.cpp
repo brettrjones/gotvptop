@@ -295,10 +295,32 @@ void MediaProcessor::processAudioIn( void )
 //============================================================================
 void MediaProcessor::processRawAudioIn( RawAudio * rawAudio )
 {
-	int16_t * pcmData		= rawAudio->m_PcmData;
+	int16_t * pcmData		    = rawAudio->m_PcmData;
 	uint16_t  pcmDataLen		= rawAudio->m_PcmDataLen;
 	// PCM data len = 1280 at 8000 HZ sampling = 640 samples = 80ms of sound
 	// it seams that microphone volume is a bit low.. especially on android so increase volume before processing
+    // TODO microphone boost
+
+    // calculate microphone peak value
+    if( !isMicrophoneMuted() )
+    {
+        static int peakCounter = 0;
+        peakCounter++;
+        if( peakCounter % 0x03 == 0 ) // avoid to fast of update to gui
+        {
+            int16_t micPeakVal = 0;
+            for( int i = 0; i < pcmDataLen / 4; i+=2 ) // dont need acurracy so skip every other sample
+            {
+                if( pcmData[ i ] > micPeakVal )
+                {
+                    micPeakVal = pcmData[ i ];
+                }
+            }
+
+            LogMsg( LOG_INFO, "mic peak %d", micPeakVal );
+            m_Engine.getToGui().toGuiMicrophonePeak( eAppModuleAll, micPeakVal );
+        }
+    }
 
 	if( m_AudioPcmList.size() )
 	{
@@ -1677,7 +1699,14 @@ void MediaProcessor::fromGuiMicrophoneDataWithInfo( int16_t * pcmData, int pcmDa
 	if( freeSpace >= sampleCnt )
 	{
 #ifdef USE_ECHO_CANCEL
-		m_EchoCancel.processFromMicrophone( pcmData, pcmDataLenBytes, &m_EchoOutBuf[ m_EchoOutBufIdx ], totalDelayTimeMs, clockDrift );
+        if( fromGuiIsEchoCancelEnabled() )
+        {
+            m_EchoCancel.processFromMicrophone( pcmData, pcmDataLenBytes, &m_EchoOutBuf[ m_EchoOutBufIdx ], totalDelayTimeMs, clockDrift );
+        }
+        else
+        {
+            memcpy( &m_EchoOutBuf[ m_EchoOutBufIdx ], pcmData, pcmDataLenBytes );
+        }
 #else
 		memcpy( &m_EchoOutBuf[ m_EchoOutBufIdx ], pcmData, pcmDataLenBytes );
 #endif // USE_ECHO_CANCEL

@@ -41,7 +41,7 @@ public:
 	bool						openOggStream( FILE * fileHandle, int streamSerialNumber = 0 ); // if streamSerialNumber is zero then generate random serial number
 	int							writeHeader( MyOpusHeader& opusHeader, uint8_t * packetBuf, int packetBufLen );
 	int							writeEncodedFrame( uint8_t * encodedFrame, int32_t encodedLen );
-	uint64_t							closeOggStream( void ); // returns total bytes written
+	uint64_t					closeOggStream( void ); // returns total bytes written
 
 	void						setOpusHeader( MyOpusHeader& opusHeader )	{ m_OpusHeader = &opusHeader; }
 
@@ -61,7 +61,7 @@ protected:
 	ogg_int32_t					m_id;
 	int							m_LastSegments;
 	int							m_Eos;
-	uint64_t							m_TotalBytesWritten;	
+	uint64_t					m_TotalBytesWritten;	
 	int							m_PagesOut;	
 	std::string					m_Title;
 	std::string					m_Artist;

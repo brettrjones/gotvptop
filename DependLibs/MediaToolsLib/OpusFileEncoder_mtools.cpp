@@ -182,13 +182,32 @@ bool OpusFileEncoder::writeTotalSndFrames( FILE * fileHandle )
 	bool writeSuccess = false;
 	std::string hexTotal;
 	VxFileUtil::u64ToHexAscii( htonU64( m_TotalSndFramesInFile ), hexTotal );
-	uint32_t totalFramesOffs = 0xAD;
+
+    uint32_t totalFramesOffs = 0xAD;
 	if( ( 16 == hexTotal.length() ) && ( 0  == VxFileUtil::fileSeek( fileHandle, totalFramesOffs ) ) )
 	{
-		if( 16 == fwrite( hexTotal.c_str(), 1, 16, fileHandle ) )
-		{
-			writeSuccess = true;
-		}
+        char readBuf[ 512 ];
+        if( 0 == fseek( fileHandle, NO_LIMIT_OPUS_SIGNITURE_OFFS, SEEK_SET ) )
+        {
+            if( sizeof( readBuf ) == fread( readBuf, 1, sizeof( readBuf ), fileHandle ) )
+            {
+                uint64_t totalFrames = 0;
+                for( int i = 0; i < 10; i++ )
+                {
+                    if( 0 == strncmp( NO_LIMIT_OPUS_SIGNITURE, &readBuf[ i ], NO_LIMIT_OPUS_SIGNITURE_LEN ) )
+                    {
+                        memcpy( &readBuf[ i + NO_LIMIT_OPUS_SIGNITURE_LEN ], hexTotal.c_str(), 16);
+
+                        if( (0 == fseek( fileHandle, NO_LIMIT_OPUS_SIGNITURE_OFFS, SEEK_SET )) &&
+                            (16 == fwrite( readBuf, 1, sizeof( readBuf ), fileHandle )) )
+                        {
+                            writeSuccess = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 	}
 
 	if( false == writeSuccess )
