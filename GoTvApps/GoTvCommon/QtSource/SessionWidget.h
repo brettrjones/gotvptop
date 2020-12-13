@@ -27,7 +27,7 @@ class SessionWidget : public QWidget
 
 public:
 	SessionWidget( QWidget *parent = 0, EAssetType inputMode = eAssetTypeUnknown );
-	virtual ~SessionWidget();
+    virtual ~SessionWidget() = default;
 
 	void						setIdents( VxNetIdent * myIdent, VxNetIdent * hisIdent );
 	void						setEntryMode( EAssetType inputMode );
@@ -45,8 +45,12 @@ public:
 signals:
 	void						signalUserInputButtonClicked( void );
 
+protected slots:
+    void                        slotStatusMsg( QString );
+
 protected:
 	Ui::SessionWidgetClass		ui;
+    AppCommon&                  m_MyApp;
 	EAssetType					m_InputMode;
 	bool						m_IsInitialized;
 };

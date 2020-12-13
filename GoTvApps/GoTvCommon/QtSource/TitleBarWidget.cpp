@@ -57,8 +57,8 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 	setTopMenuButtonIcon();
 	setBackButtonIcon();
 
-	enableAudioControls( false );
-	enableVideoControls( false );
+	enableAudioControls( true );
+	enableVideoControls( true );
 
 	setCameraButtonVisibility( false );
 	setTrashButtonVisibility( false );

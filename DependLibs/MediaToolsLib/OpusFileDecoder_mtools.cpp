@@ -100,13 +100,13 @@ static GOTV_INLINE unsigned int fast_rand(void) {
 
 namespace
 {
-	const int		OPUS_FILE_HEADER_LEN			= 0x349; // (decimal 841)
-	const int		OPUS_MAX_PKT_LEN				= 390*6;
-	const int		MIN_OPUS_FILE_LEN				= OPUS_FILE_HEADER_LEN + 256;
+	const int		    OPUS_FILE_HEADER_LEN			= 0x349; // (decimal 841)
+	const int		    OPUS_MAX_PKT_LEN				= 390*6;
 
-	const uint32_t		OPUS_SIGNITURE_OFFS				= 0x9C;
-	const char *	OPUS_SIGNITURE					= "myp2pweb.com v";
-	const uint32_t		OPUS_SIGNITURE_LEN				= 14;
+    const char *	    OPUS_SIGNITURE					= "nolimitconnect.com v";
+    const uint32_t		OPUS_SIGNITURE_LEN				= 20;
+    const uint32_t		OPUS_SIGNITURE_OFFS             = 0x99;
+
 
 	//============================================================================
 	int OpusHeaderParse( const unsigned char *packet, int len, MyOpusHeader * h )
@@ -971,27 +971,26 @@ bool OpusFileDecoder::seekOpusFile( FILE * fileHandle, int pos0to100000 )
 //============================================================================
 bool OpusFileDecoder::readTotalSndFrames( FILE * fileHandle )
 {
-	// at 0x9c ( should be signature myp2pweb.com v0000000000000000-XXv where the zeros are hex ascii of total snd frames and XX is version number
+	// at 0x9c ( should be signature nolimitconnect.com v0000000000000000-XXv where the zeros are hex ascii of total snd frames and XX is version number
 	m_TotalSndFramesInFile = 0;
 	m_ConsumedSndFrames = 0;
-	char readBuf[ 16 + OPUS_SIGNITURE_LEN + 1 ];
-	if( seekFile( fileHandle, OPUS_SIGNITURE_OFFS ) )
-	{
-		if( sizeof( readBuf ) == fread( readBuf, 1, sizeof( readBuf ), fileHandle ) )
-		{
-			if( 0 == strncmp( OPUS_SIGNITURE, readBuf, OPUS_SIGNITURE_LEN ) )
-			{
-				readBuf[ sizeof( readBuf ) - 1 ] = 0;
-				uint64_t totalFrames = 0;
-				if( VxFileUtil::hexAsciiToU64( &readBuf[OPUS_SIGNITURE_LEN], totalFrames ) )
-				{
-					if( 0 != totalFrames )
-					{
-						m_TotalSndFramesInFile = htonU64( totalFrames );
-						return true;
-					}
-				}
-			}
+	char readBuf[ 512 ];
+    if( 0 == fseek( fileHandle, OPUS_SIGNITURE_OFFS, SEEK_SET ) )
+    {
+        if( sizeof( readBuf ) == fread( readBuf, 1, sizeof( readBuf ), fileHandle ) )
+	    {
+            uint64_t totalFrames = 0;
+            if( 0 == strncmp( OPUS_SIGNITURE, readBuf, OPUS_SIGNITURE_LEN ) )
+            {
+                if( VxFileUtil::hexAsciiToU64( &readBuf[ OPUS_SIGNITURE_LEN ], totalFrames ) )
+                {
+                    if( 0 != totalFrames )
+                    {
+                        m_TotalSndFramesInFile = htonU64( totalFrames );
+                        return true;
+                    }
+                }
+            }
 		}
 	}
 

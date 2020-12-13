@@ -23,8 +23,8 @@
 
 //============================================================================
 ActivityPersonalRecorder::ActivityPersonalRecorder(	AppCommon&			app,
-													VxNetIdent *			ident, 
-													QWidget *				parent )
+													VxNetIdent *		ident, 
+													QWidget *			parent )
 : ActivityToFriendBase( OBJNAME_ACTIVITY_PERSONAL_RECORDER, app, ePluginTypePersonalRecorder, ident, parent, eAppletMessenger, true )
 {
 	setupMultiSessionActivity();

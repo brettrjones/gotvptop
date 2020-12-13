@@ -29,6 +29,7 @@
 #include <MediaToolsLib/OpusTools/speex_resampler.h>
 
 #define OPUS_OUT_MAX_SAMPLES (MY_OPUS_FRAME_SAMPLE_CNT * 9) 
+#define MIN_OPUS_FILE_LEN 1104
 
 struct OpusDecoder;
 

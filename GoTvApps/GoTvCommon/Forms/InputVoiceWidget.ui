@@ -48,7 +48,16 @@ border-radius: 4px;
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <property name="spacing">
@@ -84,11 +93,20 @@ border-radius: 4px;
       <property name="spacing">
        <number>5</number>
       </property>
-      <property name="margin">
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
        <number>3</number>
       </property>
       <item>
-       <widget class="VxPushButton" name="m_CancelVoiceButton">
+       <widget class="VxPushButton" name="m_BackButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -119,7 +137,7 @@ border-radius: 4px;
        </widget>
       </item>
       <item>
-       <widget class="VxShredderButton" name="m_ShredderButton">
+       <widget class="VxPushButton" name="m_CancelRecordButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -188,7 +206,16 @@ border-radius: 4px;
          <property name="spacing">
           <number>5</number>
          </property>
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item>
@@ -219,8 +246,7 @@ border-radius: 4px;
             </size>
            </property>
            <property name="text">
-            <string>Slide Left To Cancel Recording
-Click To Start Recording</string>
+            <string>Slide Microphone Button Left To Cancel Recording</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -271,11 +297,6 @@ Click To Start Recording</string>
    <class>VxPushButton</class>
    <extends>QPushButton</extends>
    <header>VxPushButton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>VxShredderButton</class>
-   <extends>QPushButton</extends>
-   <header>VxShredderButton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

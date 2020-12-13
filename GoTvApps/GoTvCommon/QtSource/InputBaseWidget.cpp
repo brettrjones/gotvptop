@@ -18,7 +18,10 @@
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxFileUtil.h>
+#include <CoreLib/VxTime.h>
 #include <CoreLib/VxTimeUtil.h>
+
+#include <MediaToolsLib/OpusAudioDecoder.h>
 
 #include <QTimer>
 
@@ -105,7 +108,7 @@ bool InputBaseWidget::voiceRecord( EAssetAction action )
 			m_MyApp.getEngine().fromGuiSndRecord( eSndRecordStateStopRecording, m_AssetInfo.getCreatorId(), m_FileName.c_str() );
 			uint64_t fileLen = VxFileUtil::getFileLen( m_FileName.c_str() );
 			m_AssetInfo.setAssetLength( fileLen );
-			if( 2700 < m_AssetInfo.getAssetLength() )
+			if( MIN_OPUS_FILE_LEN < m_AssetInfo.getAssetLength() )
 			{
 				m_MyApp.getEngine().fromGuiAssetAction( m_IsPersonalRecorder ? eAssetActionAddToAssetMgr : eAssetActionAddAssetAndSend,  m_AssetInfo );
 				actionResult = true;
@@ -238,7 +241,7 @@ void InputBaseWidget::generateFileName( EAssetType assetType, VxGUID& uniqueId )
 	//VxFileUtil::makeDirectory( m_FileName );
 	m_FileName += m_MyIdent->getOnlineName();
 	m_FileName += "_";
-	m_FileName += VxTimeUtil::getFileNameCompatibleDateAndTime( time(0) );
+	m_FileName += VxTimeUtil::getFileNameCompatibleDateAndTime( GetLocalTimeMs() );
 	m_FileName += "#";
 	m_FileName += uniqueId.toHexString();
 	m_FileName += AssetInfo::getDefaultFileExtension( assetType );

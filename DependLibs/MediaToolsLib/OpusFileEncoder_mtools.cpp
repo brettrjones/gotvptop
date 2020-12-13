@@ -41,23 +41,6 @@ OpusFileEncoder::OpusFileEncoder(  )
 , m_TotalSndFramesInFile( 0 )
 , m_EncoderInitialized( false )
 {
-	//uint32_t u32Len = 0;
-	//void * pvData = 0;
-	//VxFileUtil::readWholeFile( "F://audio_test/bluegrass.pcm", &pvData, &u32Len );
-	//if( u32Len )
-	//{
-		//uint8_t * pcmData = ( uint8_t *) pvData;
-		//beginFileEncode( "F://audio_test/opus_outTest.opus" );
-		//while( u32Len > 1280 )
-		//{
-			//encodePcmData( (uint16_t *) pcmData, 1280 );
-			//pcmData += 1280;
-			//u32Len -= 1280;
-		//}
-		//
-		//finishFileEncode();
-		//delete pvData;
-	//}
 }
 
 //============================================================================
@@ -199,7 +182,7 @@ bool OpusFileEncoder::writeTotalSndFrames( FILE * fileHandle )
 	bool writeSuccess = false;
 	std::string hexTotal;
 	VxFileUtil::u64ToHexAscii( htonU64( m_TotalSndFramesInFile ), hexTotal );
-	uint32_t totalFramesOffs = 0xAA;
+	uint32_t totalFramesOffs = 0xAD;
 	if( ( 16 == hexTotal.length() ) && ( 0  == VxFileUtil::fileSeek( fileHandle, totalFramesOffs ) ) )
 	{
 		if( 16 == fwrite( hexTotal.c_str(), 1, 16, fileHandle ) )

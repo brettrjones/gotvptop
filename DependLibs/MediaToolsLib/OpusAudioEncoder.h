@@ -24,13 +24,13 @@ class OpusAudioEncoder
 {
 public:
 	OpusAudioEncoder( int sampleRate = 8000, int channels = 1  );
-	virtual ~OpusAudioEncoder();
+	virtual ~OpusAudioEncoder() = default;
 
 	bool						isInitialized( void )						{ return m_EncoderInitialized; }
 	MyOpusHeader&				getOpusHeader( void )						{ return m_OpusHeader; }
 
 	int							encodePcmData(		int16_t *	pcmData, 
-													uint16_t		pcmDataLen, 
+													uint16_t	pcmDataLen, 
 													uint8_t *	outBuf,	
 													int32_t&	retEncodeFrame1Len,
 													int32_t&	retEncodeFrame2Len );

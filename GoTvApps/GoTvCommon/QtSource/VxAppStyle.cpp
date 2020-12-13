@@ -1348,7 +1348,6 @@ QRect VxAppStyle::subControlRect(   ComplexControl control,
                                                     slider->sliderPosition,
                                                     grooveLen,
                                                     slider->upsideDown );
-                qWarning() << "slider pos " << slider->sliderPosition;
                 if( horizontal )
                 {
                     ret.setRect( slider->rect.x() + sliderPos + grooveOffs, slider->rect.y() + tickOffset, ctrlHeight, ctrWidth );

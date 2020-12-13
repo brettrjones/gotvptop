@@ -32,22 +32,23 @@ InputVoiceWidget::InputVoiceWidget( QWidget * parent )
 	ui.setupUi( this );
     QSize buttonSize( GuiParams::SMALL_PUSHBUTTON_SIZE, GuiParams::SMALL_PUSHBUTTON_SIZE );
     ui.m_RecVoiceButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_CancelVoiceButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_ShredderButton->setFixedSize( buttonSize );
+    ui.m_CancelRecordButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_BackButton->setFixedSizeAbsolute( buttonSize );
 
 	ui.m_RecVoiceButton->setIcons( eMyIconMicrophoneOn );
 	ui.m_RecVoiceButton->setIsSlideLeftButton( true );
 	ui.m_RecVoiceButton->setPressedSound( eSndDefNone );
-	ui.m_CancelVoiceButton->setIcons( eMyIconMicrophoneCancelNormal );
-	ui.m_CancelVoiceButton->setPressedSound( eSndDefCancel );
-	ui.m_ShredderButton->setVisible( false );
+	ui.m_CancelRecordButton->setIcons( eMyIconMicrophoneCancelNormal );
+	ui.m_CancelRecordButton->setPressedSound( eSndDefCancel );
+	ui.m_CancelRecordButton->setVisible( false );
+    //ui.m_SlideToCancleLabel->setIcons( eMyIconMicrophoneOn );
+    ui.m_BackButton->setIcons( eMyIconBack );
 
-	//connect( ui.m_RecVoiceButton,		SIGNAL(pressed()),				this, SLOT(slotBeginRecord()) );
 	connect( ui.m_RecVoiceButton,		SIGNAL(clicked()),				this, SLOT(slotBeginRecord()) );
 	//connect( ui.m_RecVoiceButton,		SIGNAL(released()),				this, SLOT(slotEndRecord()) );
-	connect( ui.m_RecVoiceButton,		SIGNAL(slideLeftCompleted()),	this, SLOT(slotRecVoiceCancel()) );
-	connect( ui.m_CancelVoiceButton,	SIGNAL(clicked()),				this, SLOT(slotRecVoiceCancel()) );
-	connect( ui.m_ShredderButton,		SIGNAL(animationCompleted()),	this, SLOT(slotShredComplete()) );
+	connect( ui.m_RecVoiceButton,		SIGNAL(slideLeftCompleted()),	this, SLOT(slotSlideLeftCompleted()) );
+	connect( ui.m_CancelRecordButton,	SIGNAL(clicked()),				this, SLOT(slotRecVoiceCancel()) );
+	connect( ui.m_BackButton,		    SIGNAL( clicked() ),	        this, SLOT( slotExitVoiceWidget()) );
 }
 
 //============================================================================
@@ -58,12 +59,14 @@ void InputVoiceWidget::slotBeginRecord( void )
 		m_IsRecording = false;
 		voiceRecord( eAssetActionRecordEnd );
 		ui.m_RecVoiceButton->setIcon( eMyIconMicrophoneOn );
+        ui.m_CancelRecordButton->setVisible( false );
 	}
 	else
 	{
 		m_IsRecording = true;
 		voiceRecord( eAssetActionRecordBegin );
 		ui.m_RecVoiceButton->setIcon( eMyIconMicrophoneOff );
+        ui.m_CancelRecordButton->setVisible( true );
 	}
 }
 
@@ -71,20 +74,39 @@ void InputVoiceWidget::slotBeginRecord( void )
 void InputVoiceWidget::slotEndRecord( void )
 {
 	voiceRecord( eAssetActionRecordEnd );
+    ui.m_CancelRecordButton->setVisible( false );
 }
 
 //============================================================================
 void InputVoiceWidget::slotRecVoiceCancel( void )
 {
-	ui.m_CancelVoiceButton->setVisible( false );
-	ui.m_ShredderButton->setVisible( true );
-	ui.m_ShredderButton->playSndAndAnimation( 4 );
-	voiceRecord( eAssetActionRecordCancel );
+    if( m_IsRecording )
+    {
+        voiceRecord( eAssetActionRecordCancel );
+        m_IsRecording = false;
+    }
+
+    ui.m_RecVoiceButton->setIcon( eMyIconMicrophoneOn );
+    ui.m_CancelRecordButton->setVisible( false );
 }
 
 //============================================================================
-void InputVoiceWidget::slotShredComplete( void )
+void InputVoiceWidget::slotSlideLeftCompleted()
 {
+    m_MyApp.playSound( eSndDefCancel );
+    slotRecVoiceCancel();
+}
+
+//============================================================================
+void InputVoiceWidget::slotExitVoiceWidget( void )
+{
+    if( m_IsRecording )
+    {
+        voiceRecord( eAssetActionRecordCancel );
+        m_IsRecording = false;
+        m_MyApp.playSound( eSndDefCancel );
+    }
+
 	if( m_ChatEntryWidget )
 	{
 		this->setVisible( false );

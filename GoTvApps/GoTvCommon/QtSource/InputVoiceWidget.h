@@ -31,7 +31,8 @@ private slots:
     void						slotBeginRecord( void );
 	void						slotEndRecord( void );
 	void						slotRecVoiceCancel( void );
-	void						slotShredComplete( void );
+	void						slotSlideLeftCompleted();
+    void						slotExitVoiceWidget();
 
 private:
 	Ui::InputVoiceWidget		ui;

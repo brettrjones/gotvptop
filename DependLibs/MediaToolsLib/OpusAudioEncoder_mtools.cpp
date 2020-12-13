@@ -35,11 +35,6 @@ OpusAudioEncoder::OpusAudioEncoder( int sampleRate, int channels )
 }
 
 //============================================================================
-OpusAudioEncoder::~OpusAudioEncoder()
-{
-}
-
-//============================================================================
 void OpusAudioEncoder::initEncoder( void )
 {
 	m_OpusHeader.m_Channels			= m_Channels;

@@ -170,8 +170,11 @@ void AssetVoiceWidget::slotPlayButtonClicked( void )
 //========================================================================
 void AssetVoiceWidget::startMediaPlay( int startPos )
 {	
+    updateGuiPlayControls( true ); // assume will start playing
+    setReadyForCallbacks( true );
 	bool playStarted = m_Engine.fromGuiAssetAction( eAssetActionPlayBegin, m_AssetInfo, startPos );
-	updateGuiPlayControls( playStarted );
+	updateGuiPlayControls( playStarted ); // in case failed to start
+    setReadyForCallbacks( playStarted );
 	if( false == playStarted )
 	{
 		m_MyApp.toGuiStatusMessage( "Voice Play FAILED TO Begin" );
@@ -193,8 +196,9 @@ void AssetVoiceWidget::updateGuiPlayControls( bool isPlaying )
 		else
 		{
 			// stop playing
+            setReadyForCallbacks( false );
 			ui.m_PlayPauseButton->setIcons( eMyIconPlayNormal );
-			ui.m_PlayPosSlider->setValue( 0 );
+			ui.m_PlayPosSlider->setValue( 0 );        
 		}
 	}
 }

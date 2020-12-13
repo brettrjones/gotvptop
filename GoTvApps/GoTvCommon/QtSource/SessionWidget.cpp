@@ -22,19 +22,25 @@
 //============================================================================
 SessionWidget::SessionWidget( QWidget *parent, EAssetType inputMode )
 : QWidget( parent )
+, m_MyApp(GetAppInstance())
 , m_InputMode( inputMode )
 , m_IsInitialized( false )
 {
 	qDebug() << "SessionWidget input mode " << inputMode;
 	ui.setupUi(this);
 	connect( ui.m_ChatEntry, SIGNAL(signalUserInputButtonClicked()), this, SIGNAL(signalUserInputButtonClicked()) );
+    connect( &m_MyApp, SIGNAL( signalStatusMsg( QString ) ), this, SLOT( slotStatusMsg( QString ) ) );
 
 	setEntryMode( m_InputMode );
 }
 
 //============================================================================
-SessionWidget::~SessionWidget()
+void SessionWidget::slotStatusMsg( QString msg )
 {
+    if( !msg.isEmpty() )
+    {
+        ui.m_StatusLabel->setText( msg );
+    }
 }
 
 //============================================================================
