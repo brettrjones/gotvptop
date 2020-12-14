@@ -1558,6 +1558,7 @@
     <None Include="..\..\..\GoTvCommon\Resources\camera-flash.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\camera-snapshot.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\camera.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\cancel.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\check-mark.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\cloud-check.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\cloud-download.svg" />
@@ -1714,6 +1715,7 @@
     <None Include="..\..\..\GoTvCommon\Resources\volume-mute2.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\volume-muted.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\volume-normal.svg" />
+    <None Include="..\..\..\GoTvCommon\Resources\webcam-stop.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\webcam.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\wireless-7.svg" />
     <None Include="..\..\..\GoTvCommon\Resources\wireless-key.svg" />

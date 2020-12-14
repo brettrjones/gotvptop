@@ -354,6 +354,9 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconRedX:
 		return ":/AppRes/Resources/x-overlay.svg";
 
+    case eMyIconCancel:
+        return ":/AppRes/Resources/cancel.svg";
+
 	case eMyIconTrash:
 		return ":/AppRes/Resources/trash.svg";
 
@@ -411,7 +414,7 @@ QString MyIcons::getIconFile( EMyIcons eMyIcon )
 	case eMyIconCamcorderDisabled:
 		return ":/AppRes/Resources/webcam.svg";
 	case eMyIconCamcorderCancel:
-		return ":/AppRes/Resources/webcam.svg";
+		return ":/AppRes/Resources/webcam-stop.svg";
 
 	case eMyIconSelectCameraDisabled:
 		return ":/AppRes/Resources/cam-select.svg";

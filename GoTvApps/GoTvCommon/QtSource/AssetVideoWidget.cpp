@@ -15,6 +15,7 @@
 #include <app_precompiled_hdr.h>
 #include "AssetVideoWidget.h"
 #include "AppCommon.h"
+#include "GuiParams.h"
 
 #include <GoTvCore/GoTvP2P/P2PEngine/P2PEngine.h>
 
@@ -68,32 +69,24 @@ void AssetVideoWidget::initAssetVideoWidget( void )
 }
 
 //============================================================================
-AssetVideoWidget::~AssetVideoWidget()
-{
-}
-
-//============================================================================
 void AssetVideoWidget::setAssetInfo( AssetInfo& assetInfo )
 {
 	AssetBaseWidget::setAssetInfo( assetInfo );
 	ui.m_TagLabel->setAssetInfo( &getAssetInfo() );
 	ui.m_FileNameLabel->setText( getAssetInfo().getRemoteAssetName().c_str() );
-	//ui.m_ShredButton->setShredFile( getAssetInfo().getRemoteAssetName().c_str() );
-	//ui.m_LeftAvatarBar->setShredFile( getAssetInfo().getRemoteAssetName().c_str() );
-	//ui.m_RightAvatarBar->setShredFile( getAssetInfo().getRemoteAssetName().c_str() );
 
 	ui.m_VidWidget->setVideoFeedId( m_AssetInfo.getAssetUniqueId() );
 	if( ui.m_TagLabel->text().isEmpty() )
 	{
 		ui.m_TagLabel->setVisible( false );
 		ui.m_TagTitleLabel->setVisible( false );
-		this->setSizeHint( QSize( 100, 224 - 16 ) );
+		this->setSizeHint( QSize( 100 * GuiParams::getGuiScale(), 224 * GuiParams::getGuiScale() - 16 ) );
 	}
 	else
 	{
 		ui.m_TagLabel->setVisible( true );
 		ui.m_TagTitleLabel->setVisible( true );
-		this->setSizeHint( QSize( 100, 224 ) );
+		this->setSizeHint( QSize( 100 * GuiParams::getGuiScale(), 224 * GuiParams::getGuiScale() ) );
 	}
 
 	if( assetInfo.isMine() )

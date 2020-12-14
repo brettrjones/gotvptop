@@ -36,6 +36,7 @@ Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
  
 https://iconmonstr.com/
 avatar.svg
+cancel.svg
 check-mark.svg
 connection-test.svg (modified)
 file-folder-cancel.svg
@@ -93,6 +94,9 @@ window-shrink.svg
 wireless-7.svg
 wireless-key.svg (modified)
 wireless-setup.svg (modified)
+webcam.svg
+webcam-server.svg (modified)
+webcam-stop.svg (modified)
 
 
 By Anton Barbarov, RU at https://thenounproject.com

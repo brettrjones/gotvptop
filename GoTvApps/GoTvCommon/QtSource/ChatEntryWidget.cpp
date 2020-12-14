@@ -198,6 +198,7 @@ void ChatEntryWidget::slotAllMicButtonPressed( void )
 void ChatEntryWidget::slotInputCompleted( void )
 {
 	setEntryMode( eAssetTypeUnknown );	
+    setVisible( true );
 }
 
 //============================================================================
@@ -257,6 +258,7 @@ void ChatEntryWidget::setEntryMode( EAssetType inputMode )
 		break;
 
 	default:
+
 		if( eAssetTypeVideo == m_InputMode )
 		{
 			AppCommon& myApp = GetAppInstance();
@@ -264,6 +266,7 @@ void ChatEntryWidget::setEntryMode( EAssetType inputMode )
 			myApp.toGuiUserMessage( useMsg.toUtf8().constData() );
 			//QMessageBox::information( this, QObject::tr( "Information" ), QObject::tr( "Use camcorder button on left to start and stop recording video." ), QObject::tr( "OK" ) );
 		}
+
 
 		ui.m_InputTextWidget->setVisible( false );
 		ui.m_InputFaceWidget->setVisible( false );

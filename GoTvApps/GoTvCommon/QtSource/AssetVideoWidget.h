@@ -24,7 +24,7 @@ class AssetVideoWidget : public AssetBaseWidget
 public:
 	AssetVideoWidget( QWidget * parent = 0 );
 	AssetVideoWidget( AppCommon& appCommon, QWidget * parent = 0 );
-	virtual ~AssetVideoWidget();
+	virtual ~AssetVideoWidget() = default;
 
 	virtual void				setAssetInfo( AssetInfo& assetInfo );
 	virtual void				onActivityStop( void );

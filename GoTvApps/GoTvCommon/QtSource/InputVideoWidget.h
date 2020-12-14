@@ -32,6 +32,7 @@ public:
 protected slots:
 	void						slotRotateCamButtonClicked( void );
     void						slotRecordCancelButtonClicked( void );
+    void                        slotExitVideoWidget( void );
 	void						slotBeginRecord( void );
 
 protected:

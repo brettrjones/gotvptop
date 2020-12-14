@@ -256,7 +256,7 @@ void CamLogic::processCapturedImage( int requestId, const QImage& img )
     if( !toSendImage.isNull() )
     {
         uint32_t imageLen = toSendImage.bytesPerLine() * toSendImage.height();
-        m_MyApp.getEngine().fromGuiVideoData( FOURCC_RGB, toSendImage.bits(), toSendImage.width(), toSendImage.height(), imageLen, 0 );
+        m_MyApp.getEngine().fromGuiVideoData( FOURCC_RGB, toSendImage.bits(), toSendImage.width(), toSendImage.height(), imageLen, m_MyApp.getCamCaptureRotation() );
     }
 
     m_isCapturingImage = false;

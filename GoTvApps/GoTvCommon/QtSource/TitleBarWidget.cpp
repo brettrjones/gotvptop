@@ -18,6 +18,8 @@
 #include "MyIcons.h"
 #include "AppCommon.h"
 
+#include <CoreLib/VxGlobals.h>
+
 namespace
 {
     const int MIN_CAM_PREVIEW_HEIGHT = 30;
@@ -28,9 +30,7 @@ namespace
 TitleBarWidget::TitleBarWidget( QWidget * parent )
 : QWidget( parent )
 , m_MyApp( GetAppInstance() )
-, m_MuteMic( false )
-, m_MuteSpeaker( false )
-, m_EchoCancelEnabled( false )
+, m_CamTimer(new QTimer(this))
 {
 	ui.setupUi( this );
 	ui.m_StatusLabel->setVisible( false );
@@ -82,6 +82,56 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 	connect( &m_MyApp,						SIGNAL(signalToGuiPluginStatus(EPluginType,int,int)),	this, SLOT(slotToGuiPluginStatus(EPluginType,int,int)) );
     connect( &m_MyApp,                      SIGNAL( signalNetAvailStatus( ENetAvailStatus ) ), this, SLOT( slotToGuiNetAvailStatus( ENetAvailStatus ) ) );
     connect( &m_MyApp,                      SIGNAL( signalMicrophonePeak( int ) ), this, SLOT( slotMicrophonePeak( int ) ) );
+
+    connect( m_CamTimer, SIGNAL( timeout() ), this, SLOT( slotCamTimeout() ) );
+}
+
+//============================================================================
+void TitleBarWidget::toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineId, uint8_t * pu8Jpg, uint32_t u32JpgLen, int motion0To100000 )
+{
+    Q_UNUSED( userData );
+    if( !m_MyOnlineId.isVxGUIDValid() )
+    {
+        m_MyOnlineId = m_MyApp.getMyOnlineId();
+    }
+
+    if( m_MyOnlineId == onlineId )
+    {
+        m_CamTimer->setSingleShot( true );
+        m_CamTimer->start( 1000 );
+        ui.m_CamPreviewScreen->playVideoFrame( pu8Jpg, u32JpgLen, motion0To100000 );
+    }
+}
+
+//============================================================================
+void TitleBarWidget::showEvent( QShowEvent * showEvent )
+{
+    QWidget::showEvent( showEvent );
+    if( ( false == VxIsAppShuttingDown() )
+        && ( false == m_CallbacksRequested ) )
+    {
+        m_CallbacksRequested = true;
+        m_MyApp.wantToGuiActivityCallbacks( this, this, true );
+    }
+}
+
+//============================================================================
+void TitleBarWidget::hideEvent( QHideEvent * ev )
+{
+    if( m_CallbacksRequested && ( false == VxIsAppShuttingDown() ) )
+    {
+        m_MyApp.wantToGuiActivityCallbacks( this, this, false );
+        m_CallbacksRequested = false;
+    }
+
+    QWidget::hideEvent( ev );
+}
+
+//============================================================================
+void TitleBarWidget::slotCamTimeout()
+{
+    m_CamTimer->stop();
+    ui.m_CamPreviewScreen->setImageFromFile( ":/AppRes/Resources/ic_cam_black.png" );
 }
 
 //============================================================================

@@ -131,6 +131,7 @@ enum EMyIcons
 	eMyIconRedX,
 	eMyIconCheckMark,
 
+    eMyIconCancel,
 	eMyIconTrash,
 
 	eMyIconShredderDisabled,

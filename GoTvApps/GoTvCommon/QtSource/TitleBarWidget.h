@@ -15,10 +15,14 @@
 //============================================================================
 
 #include "ToGuiOfferInterface.h"
+#include "ToGuiActivityInterface.h"
 #include "MyIconsDefs.h"
 
 #include "ui_TitleBarWidget.h"
 #include <QListWidgetItem>
+#include <QTimer>
+
+#include <CoreLib/VxGUID.h>
 
 class Friend;
 class GuiOfferSession;
@@ -26,7 +30,7 @@ class QLabel;
 class AppCommon;
 class MyIcons;
 
-class TitleBarWidget : public QWidget
+class TitleBarWidget : public QWidget, public ToGuiActivityInterface
 {
 	Q_OBJECT
 
@@ -113,11 +117,23 @@ public slots:
 	virtual void				slotTitleStatusBarMsg( QString msg );
 	virtual void				slotToGuiPluginStatus( EPluginType ePluginType, int statusType, int statusValue );
     virtual void				slotToGuiNetAvailStatus( ENetAvailStatus eNetAvailStatus );
+    virtual void				slotCamTimeout();
 
 protected:
+    void						showEvent( QShowEvent * ev );
+    void						hideEvent( QHideEvent * ev );
+
+    virtual void				toGuiClientPlayVideoFrame( void *			userData,
+                                                           VxGUID&          onlineId,
+                                                           uint8_t *		pu8Jpg,
+                                                           uint32_t		    u32JpgDataLen,
+                                                           int				motion0To100000 ) override;
 	Ui::TitleBarWidgetClass		ui;
 	AppCommon&					m_MyApp;
-	bool						m_MuteMic;
-	bool						m_MuteSpeaker;
-	bool						m_EchoCancelEnabled;
+	bool						m_MuteMic{ false };
+	bool						m_MuteSpeaker{ false };
+	bool						m_EchoCancelEnabled{ false };
+    VxGUID                      m_MyOnlineId;
+    QTimer*                     m_CamTimer;
+    bool                        m_CallbacksRequested{ false };
 };

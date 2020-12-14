@@ -14,8 +14,10 @@
 //============================================================================
 #include <app_precompiled_hdr.h>
 #include "InputVideoWidget.h"
+
 #include "AppCommon.h"
 #include "AppSettings.h"
+#include "ChatEntryWidget.h"
 #include "GuiParams.h"
 
 #include <CoreLib/VxGlobals.h>
@@ -36,19 +38,24 @@ InputVideoWidget::InputVideoWidget( QWidget * parent )
     ui.m_StartStopRecButton->setFixedSizeAbsolute( buttonSize );
     ui.m_RotateCamButton->setFixedSizeAbsolute( buttonSize );
     ui.m_SelectVidSrcButton->setFixedSizeAbsolute( buttonSize );
-    ui.m_SelectVidSrcButton->setFixedSizeAbsolute( buttonSize );
+    ui.m_BackButton->setFixedSizeAbsolute( buttonSize );
 
+	ui.m_CancelRecordButton->setIcons( eMyIconCancel );
+    ui.m_CancelRecordButton->setVisible( false );
 
-	ui.m_CancelRecordButton->setIcons( eMyIconCamcorderCancel );
+    ui.m_BackButton->setIcons( eMyIconBack );
 
 	ui.m_StartStopRecButton->setIsToggleButton( true );
 	ui.m_StartStopRecButton->setIcons( eMyIconCamcorderNormal );
 	ui.m_RotateCamButton->setIcons( eMyIconCamRotateNormal );
 	ui.m_SelectVidSrcButton->setIcons( eMyIconCamSelectNormal );
 	ui.m_SelectVidSrcButton->setEnabled( false );
+    ui.m_SelectVidSrcButton->setVisible( false );
+    
 	connect( ui.m_StartStopRecButton,		SIGNAL(clicked()),	this, SLOT(slotBeginRecord()) );
 	connect( ui.m_RotateCamButton,			SIGNAL(clicked()),	this, SLOT(slotRotateCamButtonClicked()) );
 	connect( ui.m_CancelRecordButton,		SIGNAL(clicked()),	this, SLOT(slotRecordCancelButtonClicked()) );
+    connect( ui.m_BackButton, SIGNAL( clicked() ), this, SLOT( slotExitVideoWidget() ) );
 }
 
 //============================================================================
@@ -71,7 +78,9 @@ void InputVideoWidget::hideEvent(QHideEvent * hideEvent)
 		{
 			m_IsRecording = false;
 			videoRecord( eAssetActionRecordCancel );
-			ui.m_StartStopRecButton->setToggleState( false );
+			//ui.m_StartStopRecButton->setToggleState( false );
+            ui.m_StartStopRecButton->setIcon( eMyIconCamcorderNormal );
+            ui.m_CancelRecordButton->setVisible( false );      
 		}
 
 		ui.m_VidWidget->setVideoFeedId( m_AssetInfo.getCreatorId() );
@@ -94,6 +103,7 @@ void InputVideoWidget::slotRotateCamButtonClicked( void )
 
 	m_MyApp.getAppSettings().setCamRotation( camId, camRotation );
 	m_MyApp.setCamCaptureRotation( camRotation );
+    
 }
 
 //============================================================================
@@ -103,15 +113,37 @@ void InputVideoWidget::slotBeginRecord( void )
 	{
 		m_IsRecording = false;
 		videoRecord( eAssetActionRecordEnd );
-		ui.m_StartStopRecButton->setToggleState( false );
+        ui.m_StartStopRecButton->setIcon( eMyIconCamcorderNormal );
+        ui.m_CancelRecordButton->setVisible( false );
 		emit signalInputCompleted();
 	}
 	else
 	{
 		m_IsRecording = true;
 		videoRecord( eAssetActionRecordBegin );
-		ui.m_StartStopRecButton->setToggleState( true );
+        ui.m_StartStopRecButton->setIcon( eMyIconCamcorderCancel );
+        ui.m_CancelRecordButton->setVisible( true );
 	}
+}
+
+//============================================================================
+void InputVideoWidget::slotExitVideoWidget( void )
+{
+    if( m_IsRecording )
+    {
+        m_IsRecording = false;
+        videoRecord( eAssetActionRecordCancel );
+        ui.m_StartStopRecButton->setIcon( eMyIconCamcorderNormal );
+        ui.m_CancelRecordButton->setVisible( false );
+    }
+
+    if( m_ChatEntryWidget )
+    {
+        //m_MyApp.getEngine().fromGuiWantMediaInput( m_AssetInfo.getCreatorId(), eMediaInputVideoJpgSmall, false );
+        this->setVisible( false );
+        m_ChatEntryWidget->setEntryMode( eAssetTypeUnknown );
+        m_ChatEntryWidget->setVisible( true );
+    }
 }
 
 //============================================================================
@@ -121,7 +153,7 @@ void InputVideoWidget::slotRecordCancelButtonClicked( void )
 	{
 		m_IsRecording = false;
 		videoRecord( eAssetActionRecordCancel );
-		ui.m_StartStopRecButton->setToggleState( false );
+        ui.m_StartStopRecButton->setIcon( eMyIconCamcorderNormal );
 	}
 
 	emit signalInputCompleted();

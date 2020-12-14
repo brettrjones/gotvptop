@@ -14,14 +14,7 @@
 //============================================================================
 
 #include <app_precompiled_hdr.h>
-/*
-#include "AppCommon.h"	
-#include "AppGlobals.h"
 
-#include "MyIcons.h"
-#include "VxAppDisplay.h"
-#include "VxAppTheme.h"
-*/
 #include "LogMgr.h"
 
 #include "PopupMenu.h"
