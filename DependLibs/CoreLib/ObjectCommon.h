@@ -25,6 +25,7 @@
 #define OBJNAME_ACTIVITY_DOWNLOADS						"ActivityDownloads"
 #define OBJNAME_ACTIVITY_EDIT_ACCOUNT					"ActivityEditAccount"
 #define OBJNAME_ACTIVITY_FILE_SEARCH					"ActivityFileSearch"
+#define OBJNAME_ACTIVITY_HELP_SIGNAL					"ActivityHelpSignal"
 #define OBJNAME_ACTIVITY_INFORMATION					"ActivityInformation"
 #define OBJNAME_ACTIVITY_IS_PORT_OPEN_TEST		        "ActivityIsPortOpenTest"
 #define OBJNAME_ACTIVITY_MESSAGE_BOX					"ActivityMessageBox"

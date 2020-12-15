@@ -321,7 +321,8 @@ enum ENetAvailStatus
     eNetAvailOnlineButNoRelay,
     eNetAvailFullOnlineWithRelay,
     eNetAvailFullOnlineDirectConnect,
-    eNetAvailGroupHost,
+    eNetAvailRelayGroupHost,
+    eNetAvailDirectGroupHost,
 
     eMaxNetAvailStatus
 };

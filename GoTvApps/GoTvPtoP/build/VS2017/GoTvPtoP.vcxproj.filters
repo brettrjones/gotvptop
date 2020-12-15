@@ -981,6 +981,9 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\VxProgressBar.cpp">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityHelpSignal.cpp">
+      <Filter>GoTvCommon\Source Files\Activities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\RasterWindow.h">
@@ -1954,6 +1957,9 @@
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\VxProgressBar.h">
       <Filter>GoTvCommon\Source Files\QtWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityHelpSignal.h">
+      <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -3012,6 +3018,30 @@
       <Filter>GoTvCommon\Resource Files</Filter>
     </Image>
     <Image Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.ico" />
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_1_internet.png">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_2_test_avail.png">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_3_net_avail.png">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_4_relay_search.png">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_5_onlie_with_relay.png">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_6_direct.png">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_7_hosted_direct.png">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_7_hosted_with_relay.png">
+      <Filter>GoTvCommon\Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.rc" />
@@ -3176,6 +3206,9 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\AppletGroupJoinSearch.ui">
+      <Filter>GoTvCommon\Forms</Filter>
+    </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityHelpSignal.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
   </ItemGroup>

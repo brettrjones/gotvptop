@@ -99,6 +99,7 @@ signals:
 	void						signalShareButtonClicked( void );
 	void						signalMenuTopButtonClicked( void );
 	void						signalBackButtonClicked( void );
+    void                        signalCamPlaying( bool isPlaying );
 
 public slots:
 	virtual void				slotPowerButtonClicked( void );
@@ -117,7 +118,9 @@ public slots:
 	virtual void				slotTitleStatusBarMsg( QString msg );
 	virtual void				slotToGuiPluginStatus( EPluginType ePluginType, int statusType, int statusValue );
     virtual void				slotToGuiNetAvailStatus( ENetAvailStatus eNetAvailStatus );
-    virtual void				slotCamTimeout();
+    virtual void                slotCamPlaying( bool isPlaying );
+    virtual void				slotCamTimeout( void );
+    virtual void				slotSignalHelpClick( void );
 
 protected:
     void						showEvent( QShowEvent * ev );
@@ -136,4 +139,6 @@ protected:
     VxGUID                      m_MyOnlineId;
     QTimer*                     m_CamTimer;
     bool                        m_CallbacksRequested{ false };
+    bool                        m_CamPlaying{ false };
+    uint64_t                    m_LastCamFrameTimeMs{ 0 };
 };

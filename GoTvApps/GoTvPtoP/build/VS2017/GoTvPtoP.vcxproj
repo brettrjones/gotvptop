@@ -477,6 +477,7 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityFileSearch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityHelpSignal.cpp" />
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityInformation.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -1304,6 +1305,7 @@
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityFileSearch.ui">
     </QtUic>
+    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityHelpSignal.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityInformation.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityIsPortOpenTest.ui">
     </QtUic>
@@ -1896,6 +1898,7 @@
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityQueryHostIdTest.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
+    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityHelpSignal.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppDefs.h" />
     <ClInclude Include="..\..\..\GoTvCommon\QtSource\AppGlobals.h" />
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\AppletMgr.h">
@@ -2563,6 +2566,14 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\GoTvCommon\QtSource\GoTvP2P.ico" />
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_1_internet.png" />
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_2_test_avail.png" />
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_3_net_avail.png" />
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_4_relay_search.png" />
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_5_onlie_with_relay.png" />
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_6_direct.png" />
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_7_hosted_direct.png" />
+    <Image Include="..\..\..\GoTvCommon\Resources\bars_7_hosted_with_relay.png" />
     <Image Include="..\..\..\GoTvCommon\Resources\msg_state_fail_resend.png" />
   </ItemGroup>
   <ItemGroup>

@@ -42,9 +42,13 @@ public:
     virtual void				setMaximumSize( const QSize & maxSize );
     virtual void				setMaximumSize( int maxw, int maxh );
 
+signals:
+    void                        clicked( void );
+
 protected:
     virtual void                paintEvent( QPaintEvent* ev ) override;
     virtual void                resizeEvent( QResizeEvent * ev ) override;
+    virtual void				mousePressEvent( QMouseEvent * ev ) override;
 
     void                        drawNetBars( QPainter& painter );
     void                        drawNetBar( QPainter& painter, QRect& widgetRect, int barNum );

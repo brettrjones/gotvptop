@@ -92,6 +92,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloadItemMenu.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloads.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityFileSearch.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityHelpSignal.h \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityInformation.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityIsPortOpenTest.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityMessageBox.h \
@@ -386,6 +387,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloads.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityFileSearch.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityIsPortOpenTest.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityHelpSignal.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityInformation.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityMessageBox.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetServiceTest.cpp \
@@ -393,7 +395,6 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkState.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissions.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissionsRelay.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPersonalRecorder.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityQueryHostIdTest.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityReplyFileOffer.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanPeopleSearch.cpp \
@@ -604,6 +605,7 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDownloadItemMenu.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityDownloads.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityFileSearch.ui \
+	$$PWD/GoTvApps/GoTvCommon/Forms/ActivityHelpSignal.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/ActivityInformation.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityIsPortOpenTest.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityMessageBox.ui \
@@ -615,7 +617,6 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityNetworkTest.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPermissions.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPermissionsRelay.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityPersonalRecorder.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/ActivityQueryHostIdTest.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityReplyFileOffer.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityScanPeopleSearch.ui \

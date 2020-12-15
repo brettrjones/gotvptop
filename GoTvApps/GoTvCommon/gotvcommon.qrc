@@ -270,5 +270,13 @@
         <file>Resources/zoom-out.svg</file>
         <file>Resources/cancel.svg</file>
         <file>Resources/webcam-stop.svg</file>
+        <file>Resources/bars_1_internet.png</file>
+        <file>Resources/bars_2_test_avail.png</file>
+        <file>Resources/bars_3_net_avail.png</file>
+        <file>Resources/bars_4_relay_search.png</file>
+        <file>Resources/bars_5_onlie_with_relay.png</file>
+        <file>Resources/bars_6_direct.png</file>
+        <file>Resources/bars_7_hosted_direct.png</file>
+        <file>Resources/bars_7_hosted_with_relay.png</file>
     </qresource>
 </RCC>

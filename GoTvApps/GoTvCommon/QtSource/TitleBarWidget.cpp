@@ -17,8 +17,10 @@
 #include "TitleBarWidget.h"
 #include "MyIcons.h"
 #include "AppCommon.h"
+#include "ActivityHelpSignal.h"
 
 #include <CoreLib/VxGlobals.h>
+#include <CoreLib/VxTime.h>
 
 namespace
 {
@@ -50,40 +52,47 @@ TitleBarWidget::TitleBarWidget( QWidget * parent )
 	setPowerButtonIcon();
 	setHomeButtonIcon();
 	setMicrophoneIcon( m_MuteMic ? eMyIconMicrophoneOff : eMyIconMicrophoneOn );
-	setSpeakerIcon( m_MuteSpeaker ? eMyIconSpeakerOff : eMyIconSpeakerOn );
-	setCameraIcon();
-	setTrashButtonIcon();
-	setShareButtonIcon();
-	setTopMenuButtonIcon();
-	setBackButtonIcon();
+    setSpeakerIcon( m_MuteSpeaker ? eMyIconSpeakerOff : eMyIconSpeakerOn );
+    setCameraIcon();
+    setTrashButtonIcon();
+    setShareButtonIcon();
+    setTopMenuButtonIcon();
+    setBackButtonIcon();
 
-	enableAudioControls( true );
-	enableVideoControls( true );
+    enableAudioControls( true );
+    enableVideoControls( true );
 
-	setCameraButtonVisibility( false );
-	setTrashButtonVisibility( false );
-	setShareButtonVisibility( false );
-	setMenuTopButtonVisibility( false );
+    setCameraButtonVisibility( false );
+    setTrashButtonVisibility( false );
+    setShareButtonVisibility( false );
+    setMenuTopButtonVisibility( false );
 
-	// everyone except home page has home button and back button but not power off button
-	setPowerButtonVisibility( false );
-	//setHomeButtonVisibility( true );
+    // everyone except home page has home button and back button but not power off button
+    setPowerButtonVisibility( false );
     setHomeButtonVisibility( false );
     setBackButtonVisibility( true );
 
-	connect( ui.m_PowerOffButton,			SIGNAL(clicked()),		this, SLOT(slotPowerButtonClicked()) );
-	connect( ui.m_HomeButton,				SIGNAL( clicked() ),	this, SLOT( slotHomeButtonClicked() ) );
-	connect( ui.m_BackDlgButton,			SIGNAL( clicked() ),	this, SLOT( slotBackButtonClicked() ) );
-	connect( ui.m_MuteMicButton,			SIGNAL(clicked()),		this, SLOT(slotMuteMicButtonClicked()) );
-	connect( ui.m_MuteSpeakerButton,		SIGNAL(clicked()),		this, SLOT(slotMuteSpeakerButtonClicked()) );
-	connect( ui.m_CameraButton,				SIGNAL(clicked()),		this, SLOT(slotCameraSnapshotButtonClicked()) );
-	connect( ui.m_CamPreviewScreen,			SIGNAL(clicked()),		this, SLOT(slotCamPreviewClicked()) );
-	connect( &m_MyApp,						SIGNAL(signalStatusMsg(QString)),	this, SLOT(slotTitleStatusBarMsg(QString)) );
-	connect( &m_MyApp,						SIGNAL(signalToGuiPluginStatus(EPluginType,int,int)),	this, SLOT(slotToGuiPluginStatus(EPluginType,int,int)) );
-    connect( &m_MyApp,                      SIGNAL( signalNetAvailStatus( ENetAvailStatus ) ), this, SLOT( slotToGuiNetAvailStatus( ENetAvailStatus ) ) );
-    connect( &m_MyApp,                      SIGNAL( signalMicrophonePeak( int ) ), this, SLOT( slotMicrophonePeak( int ) ) );
-
+    connect( ui.m_PowerOffButton, SIGNAL( clicked() ), this, SLOT( slotPowerButtonClicked() ) );
+    connect( ui.m_HomeButton, SIGNAL( clicked() ), this, SLOT( slotHomeButtonClicked() ) );
+    connect( ui.m_BackDlgButton, SIGNAL( clicked() ), this, SLOT( slotBackButtonClicked() ) );
+    connect( ui.m_MuteMicButton, SIGNAL( clicked() ), this, SLOT( slotMuteMicButtonClicked() ) );
+    connect( ui.m_MuteSpeakerButton, SIGNAL( clicked() ), this, SLOT( slotMuteSpeakerButtonClicked() ) );
+    connect( ui.m_CameraButton, SIGNAL( clicked() ), this, SLOT( slotCameraSnapshotButtonClicked() ) );
+    connect( ui.m_CamPreviewScreen, SIGNAL( clicked() ), this, SLOT( slotCamPreviewClicked() ) );
+    connect( &m_MyApp, SIGNAL( signalStatusMsg( QString ) ), this, SLOT( slotTitleStatusBarMsg( QString ) ) );
+    connect( &m_MyApp, SIGNAL( signalToGuiPluginStatus( EPluginType, int, int ) ), this, SLOT( slotToGuiPluginStatus( EPluginType, int, int ) ) );
+    connect( &m_MyApp, SIGNAL( signalNetAvailStatus( ENetAvailStatus ) ), this, SLOT( slotToGuiNetAvailStatus( ENetAvailStatus ) ) );
+    connect( &m_MyApp, SIGNAL( signalMicrophonePeak( int ) ), this, SLOT( slotMicrophonePeak( int ) ) );
     connect( m_CamTimer, SIGNAL( timeout() ), this, SLOT( slotCamTimeout() ) );
+    connect( this, SIGNAL( signalCamPlaying( bool ) ), this, SLOT( slotCamPlaying( bool ) ) );
+    connect( ui.m_NetAvailStatusWidget, SIGNAL( clicked() ), this, SLOT( slotSignalHelpClick() ) );
+}
+
+//============================================================================
+void TitleBarWidget::slotSignalHelpClick( void )
+{
+    ActivityHelpSignal * activityHelpSignal = new ActivityHelpSignal( m_MyApp, this );
+    activityHelpSignal->show();
 }
 
 //============================================================================
@@ -97,8 +106,14 @@ void TitleBarWidget::toGuiClientPlayVideoFrame( void * userData, VxGUID& onlineI
 
     if( m_MyOnlineId == onlineId )
     {
-        m_CamTimer->setSingleShot( true );
-        m_CamTimer->start( 1000 );
+        m_LastCamFrameTimeMs = GetApplicationAliveMs();
+        if( !m_CamPlaying )
+        {
+            m_CamPlaying = true;
+            // callback is from thread so use signals and slots
+            emit signalCamPlaying( true );
+        }
+
         ui.m_CamPreviewScreen->playVideoFrame( pu8Jpg, u32JpgLen, motion0To100000 );
     }
 }
@@ -128,10 +143,27 @@ void TitleBarWidget::hideEvent( QHideEvent * ev )
 }
 
 //============================================================================
+void TitleBarWidget::slotCamPlaying( bool isPlaying )
+{
+    if( isPlaying )
+    {
+        m_CamTimer->start( 1500 );
+    }
+    else
+    {
+        m_CamTimer->stop();
+        ui.m_CamPreviewScreen->setImageFromFile( ":/AppRes/Resources/ic_cam_black.png" );
+    }
+}
+
+//============================================================================
 void TitleBarWidget::slotCamTimeout()
 {
-    m_CamTimer->stop();
-    ui.m_CamPreviewScreen->setImageFromFile( ":/AppRes/Resources/ic_cam_black.png" );
+    if( GetApplicationAliveMs() - m_LastCamFrameTimeMs > 1000)
+    {
+        m_CamTimer->stop();
+        emit signalCamPlaying( false );
+    }
 }
 
 //============================================================================

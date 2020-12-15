@@ -42,6 +42,13 @@ void NetAvailStatusWidget::toGuiNetAvailStatus( ENetAvailStatus netStatus )
 }
 
 //============================================================================
+void NetAvailStatusWidget::mousePressEvent( QMouseEvent * event )
+{
+    QWidget::mousePressEvent( event );
+    emit clicked();
+}
+
+//============================================================================
 void NetAvailStatusWidget::paintEvent( QPaintEvent* ev )
 {
     QPainter painter( this );
@@ -61,7 +68,7 @@ void NetAvailStatusWidget::resizeEvent( QResizeEvent * ev )
 void NetAvailStatusWidget::drawNetBars( QPainter& painter )
 {
     QRect widgetRect( 0, 0, size().width(), size().height() );
-    for( int barNum = 0; barNum < eMaxNetAvailStatus; barNum++ )
+    for( int barNum = 0; barNum < (eMaxNetAvailStatus - 1); barNum++ )
     {
         drawNetBar( painter, widgetRect, barNum );
     }
@@ -70,7 +77,7 @@ void NetAvailStatusWidget::drawNetBars( QPainter& painter )
 //============================================================================
 void NetAvailStatusWidget::drawNetBar( QPainter& painter, QRect& widgetRect, int barNum )
 {
-    int totalBarCnt = ( int )eMaxNetAvailStatus;
+    int totalBarCnt = ( int )(eMaxNetAvailStatus - 1);
     int marginBetweenBars = 1;
     int margin = 3;
     if( ( widgetRect.width() > margin * 2 ) && ( widgetRect.height() > margin * 2 ) )
@@ -100,27 +107,29 @@ QColor NetAvailStatusWidget::determineBarColor( int barNum )
     QColor barColor = isInactive ? m_NotAvailColor : m_InProgressColor;
     if( !isInactive )
     {
-        if( eNetAvailOnlineButNoRelay == m_NetAvailStatus )
+        switch( m_NetAvailStatus )
         {
+        case eNetAvailOnlineButNoRelay:
             barColor = m_NoRelayColor;
-        }
-        else if( eNetAvailFullOnlineWithRelay == m_NetAvailStatus )
-        {
+            break;
+
+        case eNetAvailFullOnlineWithRelay:
+        case eNetAvailRelayGroupHost:
             barColor = m_WithRelayColor;
-        }
-        else if( eNetAvailFullOnlineWithRelay == m_NetAvailStatus )
-        {
+            break;
+
+        case eNetAvailFullOnlineDirectConnect:
+        case eNetAvailDirectGroupHost:
             barColor = m_DirectConnectColor;
-        }
-        else if( eNetAvailFullOnlineDirectConnect == m_NetAvailStatus )
-        {
-            barColor = m_DirectConnectColor;
+            break;
+        
+        default:
+            break;
         }
     }
 
     return barColor;
 }
-
 
 //============================================================================
 int NetAvailStatusWidget::heightForWidth( int width ) const

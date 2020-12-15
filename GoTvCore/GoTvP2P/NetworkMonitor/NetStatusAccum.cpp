@@ -121,12 +121,21 @@ void NetStatusAccum::onNetStatusChange( void )
                 netAvailStatus = eNetAvailFullOnlineDirectConnect;
             }
 
-            if( eNetAvailFullOnlineDirectConnect == netAvailStatus || eNetAvailFullOnlineDirectConnect == netAvailStatus )
+            if( eNetAvailFullOnlineDirectConnect == netAvailStatus )
             {
                 // fully connected
                 if( m_GroupHostAvail )
                 {
-                    netAvailStatus = eNetAvailGroupHost;
+                    netAvailStatus = eNetAvailDirectGroupHost;
+                }
+            }
+
+            if( eNetAvailFullOnlineWithRelay == netAvailStatus )
+            {
+                // fully connected
+                if( m_GroupHostAvail )
+                {
+                    netAvailStatus = eNetAvailRelayGroupHost;
                 }
             }
            
