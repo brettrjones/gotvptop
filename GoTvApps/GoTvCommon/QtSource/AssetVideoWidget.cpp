@@ -66,6 +66,7 @@ void AssetVideoWidget::initAssetVideoWidget( void )
 	connect( this,					SIGNAL(signalPlayProgress(int)),		this, SLOT(slotPlayProgress(int)) );
 	connect( this,					SIGNAL(signalPlayEnd()),				this, SLOT(slotPlayEnd()) );
 	connect( ui.m_LeftAvatarBar,	SIGNAL( signalResendAsset() ),			this, SLOT( slotResendAsset() ) );
+    ui.m_VidWidget->setVidImageRotation( 0 );
 }
 
 //============================================================================

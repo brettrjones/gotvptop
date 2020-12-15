@@ -66,6 +66,7 @@ void InputVideoWidget::showEvent(QShowEvent * showEvent)
 	{
 		ui.m_VidWidget->setVideoFeedId( m_AssetInfo.getCreatorId() );
 		m_MyApp.getEngine().fromGuiWantMediaInput( m_AssetInfo.getCreatorId(), eMediaInputVideoJpgSmall, true );
+        ui.m_VidWidget->setVidImageRotation( 0 );
 	}
 }
 
@@ -103,7 +104,8 @@ void InputVideoWidget::slotRotateCamButtonClicked( void )
 
 	m_MyApp.getAppSettings().setCamRotation( camId, camRotation );
 	m_MyApp.setCamCaptureRotation( camRotation );
-    
+    // always keep the video on screen at zero rotation. capture system should rotate it
+    ui.m_VidWidget->setVidImageRotation( 0 );
 }
 
 //============================================================================

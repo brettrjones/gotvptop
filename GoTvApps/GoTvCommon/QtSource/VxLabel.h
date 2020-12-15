@@ -60,7 +60,7 @@ protected:
 	QString						m_ImageFileName;
 	QString						m_OrigText;
 	int							m_MaxLines;
-	int							m_VidImageRotation;
+    int							m_VidImageRotation{ 0 };
 	QImage						m_PreResizeImage;
 };
 
