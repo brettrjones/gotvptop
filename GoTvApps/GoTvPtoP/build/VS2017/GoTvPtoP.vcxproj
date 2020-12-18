@@ -502,9 +502,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPermissionsRelay.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPersonalRecorder.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityQueryHostIdTest.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -1324,8 +1321,6 @@
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityPermissionsRelay.ui">
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityPersonalRecorder.ui">
-    </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityQueryHostIdTest.ui" />
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityReplyFileOffer.ui">
     </QtUic>
@@ -1453,8 +1448,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\FileShareItemWidget.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\FileXferWidget.ui">
-    </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\FriendListDlg.ui">
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\HistoryEntryWidget.ui">
     </QtUic>
@@ -1789,9 +1782,6 @@
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityPermissionsRelay.h">
-      <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityPersonalRecorder.h">
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">app_precompiled_hdr.h;../../../../GoTvCommon/QtSource/%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityReplyFileOffer.h">
@@ -2474,7 +2464,6 @@
     <ClInclude Include="GeneratedFiles\ui_ActivityNetworkTest.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityPermissions.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityPermissionsRelay.h" />
-    <ClInclude Include="GeneratedFiles\ui_ActivityPersonalRecorder.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityReplyFileOffer.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityScanPeopleSearch.h" />
     <ClInclude Include="GeneratedFiles\ui_ActivityScanProfiles.h" />
@@ -2531,7 +2520,6 @@
     <ClInclude Include="GeneratedFiles\ui_FileItemWidget.h" />
     <ClInclude Include="GeneratedFiles\ui_FileShareItemWidget.h" />
     <ClInclude Include="GeneratedFiles\ui_FileXferWidget.h" />
-    <ClInclude Include="GeneratedFiles\ui_FriendListDlg.h" />
     <ClInclude Include="GeneratedFiles\ui_HistoryEntryWidget.h" />
     <ClInclude Include="GeneratedFiles\ui_HomeWindow.h" />
     <ClInclude Include="GeneratedFiles\ui_IdentWidget.h" />

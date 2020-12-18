@@ -276,9 +276,6 @@
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPermissionsRelay.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityPersonalRecorder.cpp">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\GoTvCommon\QtSource\ActivityReplyFileOffer.cpp">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </ClCompile>
@@ -1031,9 +1028,6 @@
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityPermissionsRelay.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityPersonalRecorder.ui">
-      <Filter>GoTvCommon\Forms</Filter>
-    </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\ActivityReplyFileOffer.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
@@ -1176,9 +1170,6 @@
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\FileXferWidget.ui">
-      <Filter>GoTvCommon\Forms</Filter>
-    </QtUic>
-    <QtUic Include="..\..\..\GoTvCommon\Forms\FriendListDlg.ui">
       <Filter>GoTvCommon\Forms</Filter>
     </QtUic>
     <QtUic Include="..\..\..\GoTvCommon\Forms\HistoryEntryWidget.ui">
@@ -1344,9 +1335,6 @@
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityPermissionsRelay.h">
-      <Filter>GoTvCommon\Source Files\Activities</Filter>
-    </QtMoc>
-    <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityPersonalRecorder.h">
       <Filter>GoTvCommon\Source Files\Activities</Filter>
     </QtMoc>
     <QtMoc Include="..\..\..\GoTvCommon\QtSource\ActivityReplyFileOffer.h">
@@ -2571,9 +2559,6 @@
     <ClInclude Include="GeneratedFiles\ui_ActivityPermissionsRelay.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_ActivityPersonalRecorder.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_ActivityReplyFileOffer.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -2716,9 +2701,6 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_FileXferWidget.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_FriendListDlg.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_HistoryEntryWidget.h">

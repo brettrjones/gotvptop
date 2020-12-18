@@ -23,8 +23,9 @@
 #include "ActivityDownloads.h"
 #include "ActivityBrowseFiles.h"
 #include "ActivityViewMySharedFiles.h"
-#include "ActivityPersonalRecorder.h"
 #include "ActivityViewLibraryFiles.h"
+#include "AppletPersonalRecorder.h"
+
 #include <GoTvCore/GoTvP2P/P2PEngine/FileShareSettings.h>
 #include <GoTvCore/GoTvP2P/P2PEngine/EngineSettings.h>
 #include <CoreLib/VxGlobals.h>
@@ -56,8 +57,7 @@ void AppCommon::onMenuFileSelected( int iMenuId, PopupMenu * senderPopupMenu, Ac
 	{
 	case 1:
 		{
-			ActivityPersonalRecorder * dlg = new ActivityPersonalRecorder(	*this,
-				getAppGlobals().getUserIdent(),
+			AppletPersonalRecorder * dlg = new AppletPersonalRecorder(	*this,
 				getCentralWidget() );
 			dlg->show();
 			break;

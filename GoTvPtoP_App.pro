@@ -7,7 +7,7 @@ PROJECT_NAME = nolimitconnect
 
 TARGET_NAME = nolimitconnect
 
-QT += gui core concurrent widgets network multimedia opengl xml svg quickwidgets
+QT += gui core concurrent widgets network multimedia opengl xml svg quickwidgets multimediawidgets
 android:{
     QT += androidextras
 }
@@ -47,7 +47,10 @@ include(config_os_detect.pri)
 include(config_compiler.pri)
 include(config_opensslp_include.pri)
 
-
+PRECOMPILED_HEADER = $$PWD/AppPrecompiledHdr.h
+precompile_header:!isEmpty(PRECOMPILED_HEADER) {
+DEFINES += USING_PCH
+}
 include(GoTvPtoPAppLib.pri)
 
 

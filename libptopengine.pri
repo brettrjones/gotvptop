@@ -128,7 +128,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListRxSession.h \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListTxSession.h \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferDb.h \
-	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferMger.h \
+    $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferMgr.h \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferSession.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDefs.h \
@@ -219,6 +219,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseRelay.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseService.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseWebServer.h \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginChatRoomClient.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginClientConnectionTest.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginFileXfer.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginInvalid.h \
@@ -227,7 +228,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginNetServices.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAboutMe.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAvatarImage.h \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceChatRoomClient.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceConnectionTest.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceFileShare.h \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostChatRoom.h \
@@ -261,7 +261,6 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/TxSession.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/VideoFeedMgr.h \
     $$PWD/GoTvCore/GoTvP2P/Plugins/VoiceFeedMgr.h \
-	$$PWD/GoTvCore/GoTvP2P/QueryHostIdTest/QueryHostIdTest.h \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScan.h \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanAction.h \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanMatchedConnection.h \
@@ -343,7 +342,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListRxSession.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListTxSession.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferDb.cpp \
-	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferMger.cpp \
+    $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferMgr.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostDefs.cpp \
@@ -363,7 +362,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionIdle.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionIsMyPortOpen.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionRandomConnect.cpp \
-    $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionHostOnlineId.cpp \
+    $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionQueryHostOnlineId.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetActionQueryMyIp.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceHost.cpp \
     $$PWD/GoTvCore/GoTvP2P/NetServices/NetServiceUtils.cpp \
@@ -416,6 +415,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineScan.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineSearch.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineSktCallback.cpp \
+    $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineTimerThread.cpp \
 	$$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSetting.cpp \
 	$$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingDb.cpp \
 	$$PWD/GoTvCore/GoTvP2P/PluginSettings/PluginSettingMgr.cpp \
@@ -445,6 +445,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseWebServer.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseWebServerFiles.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginBaseWebServerPktHandlers.cpp \
+    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginChatRoomClient.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginClientConnectionTest.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginFileXfer.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginInvalid.cpp \
@@ -454,7 +455,6 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginNetServices.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAboutMe.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceAvatarImage.cpp \
-    $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceChatRoomClient.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceConnectionTest.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceFileShare.cpp \
 	$$PWD/GoTvCore/GoTvP2P/Plugins/PluginServiceHostChatRoom.cpp \
@@ -486,7 +486,6 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/Plugins/TxSession.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/VideoFeedMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/Plugins/VoiceFeedMgr.cpp \
-	$$PWD/GoTvCore/GoTvP2P/QueryHostIdTest/QueryHostIdTest.cpp \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScan.cpp \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanAction.cpp \
     $$PWD/GoTvCore/GoTvP2P/Search/RcScanMatchedConnection.cpp \

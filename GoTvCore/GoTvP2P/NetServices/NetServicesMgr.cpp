@@ -1054,6 +1054,6 @@ void NetServicesMgr::netActionResultQueryHostId( EAppErr eAppErr, VxGUID& hostId
 
     if( m_pfuncQueryHostIdCallbackHandler )
     {
-        m_pfuncQueryHostIdCallbackHandler( m_pfuncQueryHostIdCallbackHandler, eAppErr, hostId );
+        m_pfuncQueryHostIdCallbackHandler( m_QueryHostIdCallbackUserData, eAppErr, hostId );
     }
 }

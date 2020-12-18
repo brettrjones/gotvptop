@@ -38,6 +38,7 @@ public:
 
 	void						setIdents( VxNetIdent * myIdent, VxNetIdent * hisIdent );
 	void						setIsPersonalRecorder( bool isPersonal );
+    void                        setIsChatRoom( bool isChatRoom );
 
 signals:
 	void						signalChatMessage( QString chatMsg );
@@ -51,18 +52,19 @@ public slots:
 protected:
 	bool						voiceRecord( EAssetAction action );
 	bool						videoRecord( EAssetAction action );
-	void						generateFileName( EAssetType assetType, VxGUID& uniqueId );
+    bool						generateFileName( EAssetType assetType, VxGUID& uniqueId );
 	void						updateElapsedTime( void );
 
 	//=== vars ===//
 	AppCommon&				    m_MyApp;
-	ChatEntryWidget *			m_ChatEntryWidget;
-	VxNetIdent *				m_MyIdent;
-	VxNetIdent *				m_HisIdent;
+	ChatEntryWidget *			m_ChatEntryWidget{ nullptr };
+	VxNetIdent *				m_MyIdent{ nullptr };
+	VxNetIdent *				m_HisIdent{ nullptr };
 	AssetInfo					m_AssetInfo;
 	std::string					m_FileName;
-	int64_t						m_TimeRecStart;
-    int64_t						m_TimeRecCurrent;
-	QTimer *					m_ElapseTimer;
-	bool						m_IsPersonalRecorder;
+	int64_t						m_TimeRecStart{ 0 };
+    int64_t						m_TimeRecCurrent{ 0 };
+	QTimer *					m_ElapseTimer{ nullptr };
+    bool						m_IsPersonalRecorder{ false };
+    bool						m_IsChatRoom{ false };
 };

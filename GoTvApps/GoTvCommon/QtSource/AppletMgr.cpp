@@ -48,7 +48,6 @@
 
 #include "AppletNetHostingPage.h"
 #include "AppletNetworkSettings.h"
-#include "ActivityPersonalRecorder.h"
 #include "AppletPermissionList.h"
 #include "AppletPersonalRecorder.h"
 #include "AppletPlayerVideo.h"

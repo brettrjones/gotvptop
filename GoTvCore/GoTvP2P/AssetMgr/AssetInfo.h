@@ -25,6 +25,7 @@
 #define ASSET_LOC_FLAG_PERSONAL_RECORD			0x0001
 #define ASSET_LOC_FLAG_LIBRARY					0x0002
 #define ASSET_LOC_FLAG_SHARED_FILE				0x0004
+#define ASSET_LOC_FLAG_CHAT_ROOM				0x0008
 
 class VxThread;
 
@@ -55,6 +56,8 @@ public:
 
 	void						setIsPersonalRecord( bool isRecord )		{ if(isRecord) m_LocationFlags|=ASSET_LOC_FLAG_PERSONAL_RECORD;else m_LocationFlags&=~ASSET_LOC_FLAG_PERSONAL_RECORD; }
 	bool						getIsPersonalRecord( void )					{ return m_LocationFlags&ASSET_LOC_FLAG_PERSONAL_RECORD?true:false; }
+    void						setIsChatRoomRecord( bool isSharedAsset )	{ if( isSharedAsset ) m_LocationFlags |= ASSET_LOC_FLAG_CHAT_ROOM; else m_LocationFlags &= ~ASSET_LOC_FLAG_CHAT_ROOM; }
+    bool						setIsChatRoomRecord( void )				    { return m_LocationFlags & ASSET_LOC_FLAG_CHAT_ROOM ? true : false; }
 	void						setIsInLibary( bool isInLibrary )			{ if(isInLibrary) m_LocationFlags|=ASSET_LOC_FLAG_LIBRARY;else m_LocationFlags&=~ASSET_LOC_FLAG_LIBRARY; }
 	bool						getIsInLibary( void )						{ return m_LocationFlags&ASSET_LOC_FLAG_LIBRARY?true:false; }
 	void						setIsSharedFileAsset( bool isSharedAsset )	{ if(isSharedAsset) m_LocationFlags|=ASSET_LOC_FLAG_SHARED_FILE;else m_LocationFlags&=~ASSET_LOC_FLAG_SHARED_FILE; }

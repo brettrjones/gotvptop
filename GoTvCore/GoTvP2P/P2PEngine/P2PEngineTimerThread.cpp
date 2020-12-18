@@ -109,10 +109,10 @@ void P2PEngine::onThreadOncePerSecond( void )
     }
 
     static int minute30CntSeconds = 60 * 30 + 4;
-    minuteCntInSeconds--;
-    if( 0 >= minuteCntInSeconds )
+    minute30CntSeconds--;
+    if( 0 >= minute30CntSeconds )
     {
-        minuteCntInSeconds = 60 * 30;
+        minute30CntSeconds = 60 * 30;
         onThreadOncePer30Minutes();
     }
 

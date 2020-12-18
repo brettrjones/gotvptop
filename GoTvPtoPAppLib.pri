@@ -19,70 +19,7 @@ INCLUDEPATH += $$PWD
 HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AccountMgr.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppSetup.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomBase.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ChatRoomWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FileItemInfo.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/Friend.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendList.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListDelegate.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileXferSession.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHelpers.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/MyIcons.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionCallbackInterface.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionLogic.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionState.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenuDelegate.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/SoundDefs.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiActivityClient.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiActivityInterface.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiFileXferClient.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiFileXferInterface.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiHardwareControlInterface.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiHardwareCtrlClient.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiOfferInterface.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/UserProfile.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/DialogConfirmRemoveMessage.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FileActionBarWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FileActionMenu.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FileItemWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FileListReplySession.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FileShareItemWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FileXferWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileActionSession.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferSession.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryListWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/IdentWidget.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ImageListEntry.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ImageListRow.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ImageListWidget.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/InformationWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InstMsgWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/MultiSessionState.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/NetworkKeyWidget.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/NetworkTestWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/TitleBarWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferBarWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OffersMgr.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenu.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenu.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/SessionWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/SoundCtrlWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/StoryWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/TextChatLogic.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ChatEntryWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InputAllWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InputBaseWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InputFaceWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InputPhotoWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InputTextWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InputVideoWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InputVoiceWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AcceptCancelWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityAppSetup.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityAddRemoveLibraryFiles.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityBrowseFiles.h \
@@ -92,17 +29,16 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloadItemMenu.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloads.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityFileSearch.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityHelpSignal.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityInformation.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityHelpSignal.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityInformation.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityIsPortOpenTest.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityMessageBox.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetServiceTest.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkHostTest.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkHostTest.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkState.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissions.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissionsRelay.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPersonalRecorder.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityQueryHostIdTest.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityQueryHostIdTest.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityReplyFileOffer.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanPeopleSearch.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanProfiles.h \
@@ -133,64 +69,22 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityWebCamClient.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityYesNoMsgBox.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AssetFaceWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AssetPhotoWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AssetTextWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AssetVideoWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AssetVoiceWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AssetBaseWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioDefs.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioInIo.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioInThread.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioIoMgr.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioMixer.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioOutIo.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioOutThread.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioTestGenerator.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioUtils.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/MySndMgr.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxResourceToRealFile.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxTilePositioner.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AcceptCancelWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AvatarBar.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/BottomBarWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ImagePickBar.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/PlayerGlWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlOffScreenSurface.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxAspectFrame.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxContextMenu.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxComboBox.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxAvatarImage.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxPushButton.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxComboBoxFileFilter.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxGuidQt.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxLabel.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxMyFileInfo.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxSndInstance.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxFlatButton.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxFrame.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenuButton.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenuButtonBottom.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenuButtonTop.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/VxProgressBar.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxScrollArea.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxShredderButton.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxSpinProgress.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxTagLabel.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VidWidget.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxWidgetBase.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameDefs.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameLogic.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppDefs.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommon.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppGlobals.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppProfile.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppSettings.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppSetup.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomBase.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoinSearch.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChooseThumbnail.h \	
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoinSearch.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChooseThumbnail.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientAvatarImage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientBase.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientChatRoom.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientRandomConnect.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientShareFiles.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientShareWebCam.h \
@@ -200,20 +94,20 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditStoryboard.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryImage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryThumb.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoinSearch.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoinSearch.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupUser.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletKodi.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLibrary.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogSettings.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogView.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogSettings.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogView.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettingsData.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPermissionList.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPermissionList.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerVideo.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSearchPage.h \
@@ -221,6 +115,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceAvatarImage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceBaseSettings.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceRelay.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceChatRoom.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceConnectionTest.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceHostGroup.h \
@@ -237,6 +132,7 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsChatRoom.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsConnectionTest.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsFileXfer.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostChatRoom.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostGroup.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostNetwork.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsMessenger.h \
@@ -249,33 +145,146 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVideoPhone.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVoicePhone.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareServicesPage.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletSnapshot.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSnapshot.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletTheme.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppDefs.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppGlobals.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppProfile.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppSettings.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AssetFaceWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AssetPhotoWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AssetTextWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AssetVideoWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AssetVoiceWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AssetBaseWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AvatarBar.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/BottomBarWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ChatRoomWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/CamLogic.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ChatEntryWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/DialogConfirmRemoveMessage.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/EventsQtToGoTv.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/MenuDefs.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommon.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FileItemInfo.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/Friend.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendList.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListDelegate.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FileActionBarWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FileActionMenu.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FileItemWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FileListReplySession.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FileShareItemWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FileXferWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileActionSession.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileXferSession.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHelpers.h
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferSession.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryListWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/IdentWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ImagePickBar.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ImageListEntry.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ImageListRow.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ImageListWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InformationWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InstMsgWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InputAllWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InputBaseWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InputFaceWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InputPhotoWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InputTextWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InputVideoWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InputVoiceWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/MenuDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ListEntryWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogMgr.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/LogoRenderer.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/MyIcons.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/MySndMgr.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/NetAvailStatusWidget.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionListItem.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/PluginSettingsWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionCallbackInterface.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionLogic.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionState.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/PermissionListItem.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/PluginSettingsWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenuDelegate.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/SoundDefs.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailEditWidget.h \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailChooseWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailChooseWidget.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailViewWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameDefs.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameLogic.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiActivityClient.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiActivityInterface.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiFileXferClient.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiFileXferInterface.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiHardwareControlInterface.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiHardwareCtrlClient.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiOfferInterface.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/UserProfile.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/MultiSessionState.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/NetworkKeyWidget.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/NetworkTestWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/TitleBarWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferBarWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/OffersMgr.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenu.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/PlayerGlWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlOffScreenSurface.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderKodiThread.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlLogic.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlShaders.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderLogoShaders.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderShaderQt.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/SessionWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/SoundCtrlWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/StoryWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/TextChatLogic.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioDefs.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioInIo.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioInThread.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioIoMgr.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioMixer.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioOutIo.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioOutThread.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioTestGenerator.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioUtils.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxAspectFrame.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxContextMenu.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxComboBox.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxAvatarImage.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxPushButton.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxComboBoxFileFilter.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxGuidQt.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxLabel.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxMyFileInfo.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxSndInstance.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxFlatButton.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxFrame.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenu.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenuButton.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenuButtonBottom.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenuButtonTop.h \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/VxProgressBar.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxResourceToRealFile.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxScrollArea.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxShredderButton.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxSpinProgress.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxTagLabel.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxTilePositioner.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VidWidget.h \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxWidgetBase.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppStyle.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppTheme.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppDisplay.h \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxPlainTextEdit.h \
+    $$PWD/GoTvApps/GoTvPtoP/AppSource/exportdialog.h \
     $$PWD/GoTvAppConfig.h \
     $$PWD/GoTvCompilerConfig.h \
     $$PWD/GoTvCpuArchDefines.h \
@@ -295,87 +304,12 @@ HEADERS += $$PWD/GoTvApps/GoTvCommon/QtSource/MyIconsDefs.h \
     $$PWD/GoTvInterface/OsInterface/OsInterface.h \
     $$PWD/GoTvInterface/OsWin32/IWin32.h \
     $$PWD/GoTvInterface/OsLinux/ILinux.h \
-    $$PWD/GoTvInterface/OsAndroid/IAndroid.h \
-    $$PWD/GoTvApps/GoTvPtoP/AppSource/exportdialog.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderKodiThread.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlLogic.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlShaders.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderLogoShaders.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/LogoRenderer.h \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderShaderQt.h
-
+    $$PWD/GoTvInterface/OsAndroid/IAndroid.h
 
 SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AcceptCancelWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AccountDb.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AccountMgr.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppSetup.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomBase.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ChatRoomWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/DialogConfirmRemoveMessage.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FileActionBarWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FileActionMenu.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FileItemInfo.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FileItemWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FileListReplySession.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FileShareItemWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FileXferWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/Friend.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendList.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListDelegate.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileActionSession.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileXferSession.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHelpers.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferSession.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryListWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/IdentWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InstMsgWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/MultiSessionState.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/MyIcons.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/NetAvailStatusWidget.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/NetworkKeyWidget.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/NetworkTestWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferBarWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionLogic.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionState.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OffersMgr.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFileMenu.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFileShare.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFriend.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingNotify.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingOfferToFriend.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingOptions.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingScan.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingSearch.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingServers.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingMedia.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenu.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenuDelegate.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenu.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/SessionWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/SoundCtrlWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/StoryWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/TextChatLogic.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/TitleBarWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiActivityClient.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiFileXferClient.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiHardwareCtrlClient.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ChatEntryWidget.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ImageListEntry.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ImageListRow.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ImageListWidget.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/InformationWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InputAllWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InputBaseWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InputFaceWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InputPhotoWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InputTextWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InputVideoWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/InputVoiceWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityAddRemoveLibraryFiles.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityAppSetup.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityBase.cpp \
@@ -387,15 +321,15 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityDownloads.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityFileSearch.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityIsPortOpenTest.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityHelpSignal.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityInformation.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityHelpSignal.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityInformation.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityMessageBox.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetServiceTest.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNeworkHostTest.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkHostTest.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityNetworkState.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissions.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityPermissionsRelay.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ActivityQueryHostIdTest.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityQueryHostIdTest.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityReplyFileOffer.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanPeopleSearch.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityScanProfiles.cpp \
@@ -425,25 +359,164 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityViewVideoFile.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityWebCamClient.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ActivityYesNoMsgBox.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommon.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommonAudio.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommonEvents.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommonLogin.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommonRender.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppDefs.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppGlobals.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppProfile.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppSettings.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppSetup.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomBase.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomClient.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoinSearch.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChooseThumbnail.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientAvatarImage.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientBase.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientRandomConnect.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientShareFiles.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientShareWebCam.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientStoryboard.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditAboutMe.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditAvatarImage.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditStoryboard.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryImage.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryThumb.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoinSearch.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupUser.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletKodi.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLibrary.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogSettings.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogView.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettingsData.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPermissionList.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerVideo.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSearchPage.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceAboutMe.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceAvatarImage.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceBase.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceBaseSettings.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceChatRoom.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceConnectionTest.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceHostGroup.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceHostNetwork.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceRandomConnect.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceRandomConnectRelay.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceRelay.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceShareFiles.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceShareWebCam.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceStoryboard.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettings.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsAboutMe.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsAvatarImage.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsChatRoom.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsConnectionTest.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsFileXfer.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostChatRoom.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostGroup.cpp \
+#    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostGroupListing.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostNetwork.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsMessenger.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsRandomConnect.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsRandomConnectRelay.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsShareFiles.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsShareWebCam.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsStoryboard.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsTruthOrDare.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVideoPhone.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVoicePhone.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareServicesPage.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSnapshot.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletTheme.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/BottomBarWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetBaseWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetFaceWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetPhotoWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetTextWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetVideoWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AssetVoiceWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioInIo.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioInThread.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioIoMgr.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioMixer.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioOutIo.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioOutThread.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioTestGenerator.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioUtils.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/MySndMgr.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AcceptCancelWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/AvatarBar.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/BottomBarWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/CamLogic.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/ChatRoomWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ChatEntryWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/DialogConfirmRemoveMessage.cpp
+    $$PWD/GoTvApps/GoTvCommon/QtSource/EventsQtToGoTv.cpp \\
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FileActionBarWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FileActionMenu.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FileItemInfo.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FileItemWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FileListReplySession.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FileShareItemWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FileXferWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/Friend.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendList.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListDelegate.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/FriendListWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileActionSession.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiFileXferSession.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiHelpers.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiOfferSession.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryEntryWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/HistoryListWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ImageListEntry.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/ImagePickBar.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ImageListRow.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ImageListWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InformationWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InputAllWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InputBaseWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InputFaceWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InputPhotoWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InputTextWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InputVideoWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InputVoiceWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/IdentWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/InstMsgWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ListEntryWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/LogMgr.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/LogoRenderer.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/MultiSessionState.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/MyIcons.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/MySndMgr.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/NetAvailStatusWidget.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/NetworkKeyWidget.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/NetworkTestWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferBarWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionLogic.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferSessionState.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/OffersMgr.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/OfferWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFileMenu.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFileShare.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingFriend.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingNotify.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingOfferToFriend.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingOptions.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingScan.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingSearch.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingServers.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/P2PThingMedia.cpp \
+	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/PermissionListItem.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/PluginSettingsWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenu.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/PopupMenuDelegate.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/PlayerGlWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlMatrix.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlOffScreenSurface.cpp \
@@ -451,6 +524,36 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidgetFonts.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidgetRender.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidgetTextures.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderKodiThread.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlLogic.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderShaderDefsGl.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlShaders.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderShaderQt.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderLogoShaders.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidgetShaderInterface.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/SessionWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioInIo.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioInThread.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioIoMgr.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioMixer.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioOutIo.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioOutThread.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioTestGenerator.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/soundio/AudioUtils.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/SoundCtrlWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/StoryWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/TextChatLogic.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/TitleBarWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameDefs.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameLogic.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailEditWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailChooseWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailViewWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiActivityClient.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiFileXferClient.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/ToGuiHardwareCtrlClient.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAspectFrame.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxComboBox.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxContextMenu.cpp \
@@ -475,98 +578,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxTilePositioner.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VidWidget.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxWidgetBase.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameDefs.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameLogic.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/TodGameWidget.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletAboutApp.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletApplicationInfo.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletBase.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletChatRoomJoinSearch.cpp \	
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletChooseThumbnail.cpp \	
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientAvatarImage.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientBase.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientChatRoom.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientRandomConnect.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientShareFiles.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientShareWebCam.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletClientStoryboard.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditAboutMe.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditAvatarImage.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletEditStoryboard.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryImage.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGalleryThumb.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupJoinSearch.cpp \	
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletGroupUser.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletKodi.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchPage.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLaunchWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletLibrary.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogSettings.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletLogView.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletMgr.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetHostingPage.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettings.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletNetworkSettingsData.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPermissionList.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletPersonalRecorder.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerBase.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletPlayerVideo.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSearchPage.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceAboutMe.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceAvatarImage.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceBase.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceBaseSettings.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceChatRoom.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceConnectionTest.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceHostNetwork.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceRandomConnect.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceRandomConnectRelay.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceShareFiles.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceShareWebCam.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletServiceStoryboard.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettings.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsAboutMe.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsAvatarImage.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsChatRoom.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsConnectionTest.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsFileXfer.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostGroup.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostGroupListing.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsHostNetwork.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsMessenger.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsRandomConnect.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsRandomConnectRelay.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsShareFiles.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsShareWebCam.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsStoryboard.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsTruthOrDare.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVideoPhone.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletSettingsVoicePhone.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletShareServicesPage.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/AppletSnapshot.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletTheme.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppletUserIdentity.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommon.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommonAudio.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommonEvents.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommonLogin.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppCommonRender.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppDefs.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppGlobals.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppProfile.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/AppSettings.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/GuiParams.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/EventsQtToGoTv.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/HomeWindow.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ListEntryWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/LogMgr.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/LogWidget.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/PermissionListItem.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/PluginSettingsWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ServiceSettingsWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailEditWidget.cpp \
-	$$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailChooseWidget.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/ThumbnailViewWidget.cpp \
+    $$PWD/GoTvApps/GoTvCommon/QtSource/VxMenu.cpp \
 	$$PWD/GoTvApps/GoTvCommon/QtSource/VxAppStyle.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppTheme.cpp \
     $$PWD/GoTvApps/GoTvCommon/QtSource/VxAppDisplay.cpp \
@@ -585,15 +597,7 @@ SOURCES += $$PWD/GoTvApps/GoTvCommon/QtSource/MessengerPage.cpp \
     $$PWD/GoTvInterface/OsInterface/AssetDirectoryList.hh \
     $$PWD/GoTvInterface/OsWin32/IWin32.cpp \
     $$PWD/GoTvInterface/OsLinux/ILinux.cpp \
-    $$PWD/GoTvInterface/OsAndroid/IAndroid.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderKodiThread.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlLogic.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderShaderDefsGl.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlShaders.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderShaderQt.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderLogoShaders.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/LogoRenderer.cpp \
-    $$PWD/GoTvApps/GoTvCommon/QtSource/RenderGlWidgetShaderInterface.cpp
+    $$PWD/GoTvInterface/OsAndroid/IAndroid.cpp
 
 FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAppSetup.ui \
@@ -650,6 +654,46 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityViewVideoFile.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityWebCamClient.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/ActivityYesNo.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityBase.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AcceptCancelWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletAboutApp.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletApplicationInfo.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomClient.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomJoinSearch.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletChooseThumbnail.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletClientRandomConnect.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletEditAboutMe.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletEditAvatarImage.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletEditStoryBoard.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletGalleryImage.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletGalleryThumb.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupJoinSearch.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletGoTvPtoPNetworkHost.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupAnchor.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupHost.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupUser.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupJoinSearch.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletKodi.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletLaunchWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletLibrary.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletLogSettings.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletLogView.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkKey.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkSettings.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPermissionList.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPersonalRecorder.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPlayerVideo.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletServiceBase.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletServiceBaseSettings.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletServiceChatRoom.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletSettings.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletSettingsHostChatRoom.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletSettingsHostGroup.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletSettingsHostNetwork.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletSharedContent.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletSnapshot.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletTheme.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/AppletUserIdentity.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AssetFaceWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AssetPhotoWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/AssetTextWidget.ui \
@@ -693,50 +737,10 @@ FORMS += $$PWD/GoTvApps/GoTvCommon/Forms/ActivityAddRemoveLibraryFiles.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/SessionWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/SoundCtrlWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/HomeWindow.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/ActivityBase.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AcceptCancelWidget.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletAboutApp.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletApplicationInfo.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomClient.ui \	
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletChatRoomJoinSearch.ui \	
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletChooseThumbnail.ui \	
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletClientRandomConnect.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletEditAboutMe.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletEditAvatarImage.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletEditStoryBoard.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletGalleryImage.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletGalleryThumb.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupJoinSearch.ui \	
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGoTvPtoPNetworkHost.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupAnchor.ui \
- 	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupHost.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupUser.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletGroupJoinSearch.ui \	
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletKodi.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletLaunchWidget.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletLibrary.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletLogSettings.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletLogView.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkKey.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletNetworkSettings.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletPermissionList.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPersonalRecorder.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletPlayerVideo.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletServiceBase.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletServiceBaseSettings.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletServiceHostNetwork.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletSettings.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletSettingsHostChatRoom.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletSettingsHostGroup.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletSettingsHostNetwork.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletSharedContent.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/AppletSnapshot.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletTheme.ui \
-    $$PWD/GoTvApps/GoTvCommon/Forms/AppletUserIdentity.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/BottomBarWidget.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/ChatRoomWidget.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/PermissionListItemWidget.ui \
-	$$PWD/GoTvApps/GoTvCommon/Forms/PermissionmWidget.ui \
+    $$PWD/GoTvApps/GoTvCommon/Forms/PermissionWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/PlayerGlWidget.ui \
 	$$PWD/GoTvApps/GoTvCommon/Forms/PluginSettingsWidget.ui \
     $$PWD/GoTvApps/GoTvCommon/Forms/StoryWidget.ui \

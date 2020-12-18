@@ -36,7 +36,8 @@ bool PluginBaseRelay::doRelayTest( VxNetIdent * netIdent )
 
 		PktRelayTestReq pktReq;
         pktReq.setTimeStampMs( GetGmtTimeMs() );
-        pktReq.setLclSessionId( getEngine().getMyOnlineId() );
+        VxGUID myOnlineId = getEngine().getMyOnlineId();
+        pktReq.setLclSessionId( myOnlineId );
 		pktReq.setRmtSessionId( netIdent->getMyOnlineId() );
 		bResult = txPacket( netIdent, sktBase, &pktReq );
 		if( bResult )

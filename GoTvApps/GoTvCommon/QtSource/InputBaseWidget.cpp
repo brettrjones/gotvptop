@@ -64,6 +64,13 @@ void InputBaseWidget::setIsPersonalRecorder( bool isPersonal )
 }
 
 //============================================================================
+void InputBaseWidget::setIsChatRoom( bool isChatRoom )
+{
+    m_IsPersonalRecorder = false;
+    m_AssetInfo.setIsChatRoomRecord( isChatRoom );
+}
+
+//============================================================================
 void InputBaseWidget::slotChatMessage( QString chatMsg )
 {
 }
@@ -73,24 +80,26 @@ bool InputBaseWidget::voiceRecord( EAssetAction action )
 {
 	EAssetType assetType = eAssetTypeAudio;
 	bool actionResult = true;
-	switch( action )
-	{
-	case eAssetActionRecordBegin:
-		m_AssetInfo.generateNewUniqueId();
-		generateFileName( assetType, m_AssetInfo.getAssetUniqueId() );
-		m_AssetInfo.setAssetName( m_FileName );
-		actionResult = m_MyApp.getEngine().fromGuiSndRecord( eSndRecordStateStartRecording, m_AssetInfo.getCreatorId(), m_FileName.c_str() );
-		if( true == actionResult )
-		{
-			m_TimeRecStart		= GetTimeStampMs();
-			m_TimeRecCurrent	= m_TimeRecStart;
-			m_AssetInfo.setCreationTime( m_TimeRecCurrent );
-			m_ElapseTimer->start( 400 );
-		}
-		else
-		{
-			LogMsg( LOG_ERROR, "Could Not start Audio Record\n" );
-		}
+    switch( action )
+    {
+    case eAssetActionRecordBegin:
+        m_AssetInfo.generateNewUniqueId();
+        if( generateFileName( assetType, m_AssetInfo.getAssetUniqueId() ) )
+        {
+            m_AssetInfo.setAssetName( m_FileName );
+            actionResult = m_MyApp.getEngine().fromGuiSndRecord( eSndRecordStateStartRecording, m_AssetInfo.getCreatorId(), m_FileName.c_str() );
+            if( true == actionResult )
+            {
+                m_TimeRecStart = GetTimeStampMs();
+                m_TimeRecCurrent = m_TimeRecStart;
+                m_AssetInfo.setCreationTime( m_TimeRecCurrent );
+                m_ElapseTimer->start( 400 );
+            }
+            else
+            {
+                LogMsg( LOG_ERROR, "Could Not start Audio Record\n" );
+            }
+        }
 
 		break;
 
@@ -146,20 +155,22 @@ bool InputBaseWidget::videoRecord( EAssetAction action )
 	{
 	case eAssetActionRecordBegin:
 		m_AssetInfo.generateNewUniqueId();
-		generateFileName( assetType, m_AssetInfo.getAssetUniqueId() );
-		m_AssetInfo.setAssetName( m_FileName );
-		actionResult = m_MyApp.getEngine().fromGuiVideoRecord( eVideoRecordStateStartRecording, m_AssetInfo.getCreatorId(), m_FileName.c_str() );
-		if( true == actionResult )
-		{
-			m_TimeRecStart		= GetTimeStampMs();
-			m_TimeRecCurrent	= m_TimeRecStart;
-			m_AssetInfo.setCreationTime( m_TimeRecCurrent );
-			m_ElapseTimer->start( 400 );
-		}
-		else
-		{
-			LogMsg( LOG_ERROR, "Could Not start Video Record\n" );
-		}
+        if( generateFileName( assetType, m_AssetInfo.getAssetUniqueId() ) )
+        {
+		    m_AssetInfo.setAssetName( m_FileName );
+		    actionResult = m_MyApp.getEngine().fromGuiVideoRecord( eVideoRecordStateStartRecording, m_AssetInfo.getCreatorId(), m_FileName.c_str() );
+		    if( true == actionResult )
+		    {
+			    m_TimeRecStart		= GetTimeStampMs();
+			    m_TimeRecCurrent	= m_TimeRecStart;
+			    m_AssetInfo.setCreationTime( m_TimeRecCurrent );
+			    m_ElapseTimer->start( 400 );
+		    }
+		    else
+		    {
+			    LogMsg( LOG_ERROR, "Could Not start Video Record\n" );
+		    }
+        }
 
 		break;
 
@@ -224,25 +235,36 @@ void InputBaseWidget::updateElapsedTime( void )
 }
 
 //============================================================================
-void InputBaseWidget::generateFileName( EAssetType assetType, VxGUID& uniqueId )
+bool InputBaseWidget::generateFileName( EAssetType assetType, VxGUID& uniqueId )
 {
 	//std::string hisOnlineId;
 	//m_HisIdent->getMyOnlineId().toHexString( hisOnlineId );
 	//m_FileName = VxGetUserXferDirectory() + hisOnlineId + "/" + AssetInfo::getSubDirectoryName( assetType );
-	std::string mediaSubDir = "contacts/";
-	if( m_HisIdent->getMyOnlineId() == m_MyIdent->getMyOnlineId() )
-	{
-		mediaSubDir = "me/";
-	}
+    bool result = false;
+    if( m_HisIdent )
+    {
+        std::string mediaSubDir = "contacts/";
+        if( m_HisIdent->getMyOnlineId() == m_MyIdent->getMyOnlineId() )
+        {
+            mediaSubDir = "me/";
+        }
 
-	m_FileName = VxGetUserXferDirectory() + mediaSubDir;
-	VxFileUtil::makeDirectory( m_FileName );
-	//m_FileName += AssetInfo::getSubDirectoryName( assetType );
-	//VxFileUtil::makeDirectory( m_FileName );
-	m_FileName += m_MyIdent->getOnlineName();
-	m_FileName += "_";
-	m_FileName += VxTimeUtil::getFileNameCompatibleDateAndTime( GetLocalTimeMs() );
-	m_FileName += "#";
-	m_FileName += uniqueId.toHexString();
-	m_FileName += AssetInfo::getDefaultFileExtension( assetType );
+        m_FileName = VxGetUserXferDirectory() + mediaSubDir;
+        VxFileUtil::makeDirectory( m_FileName );
+        //m_FileName += AssetInfo::getSubDirectoryName( assetType );
+        //VxFileUtil::makeDirectory( m_FileName );
+        m_FileName += m_MyIdent->getOnlineName();
+        m_FileName += "_";
+        m_FileName += VxTimeUtil::getFileNameCompatibleDateAndTime( GetLocalTimeMs() );
+        m_FileName += "#";
+        m_FileName += uniqueId.toHexString();
+        m_FileName += AssetInfo::getDefaultFileExtension( assetType );
+        result = true;
+    }
+    else
+    {
+        LogMsg( LOG_ERROR, "InputBaseWidget::generateFileName m_HisIdent is null" );
+    }
+
+    return result;
 }

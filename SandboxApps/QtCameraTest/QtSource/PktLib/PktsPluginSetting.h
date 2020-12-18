@@ -19,7 +19,7 @@
 #include "VxCommon.h"
 #include <GoTvInterface/IScan.h>
 
-#include <GoTvCore/GoTvP2P/PluginSettings/PluginSettingBinary.h>
+#include <CoreLib/BinaryBlob.h>
 
 
 #pragma pack(push) 
@@ -40,16 +40,16 @@ class PktPluginSettingReply : public VxPktHdr
 public:
     PktPluginSettingReply();
 
-	void calcPktLen( void );
+	void                        calcPktLen( void );
 
-    PluginSettingBinary *       getSettingBinary( void );
-    void                        setSettingBinary( PluginSettingBinary& settingBinary );
+    bool                        getSettingBinary( BinaryBlob& binarySetting );
+    bool                        setSettingBinary( BinaryBlob& binarySetting );
 
 private:
 	//=== vars ===//
     uint32_t					m_SettingRes1 = 0;
     uint32_t					m_SettingRes2 = 0;
-    uint8_t						m_SettingData[ MAX_PLUGIN_SETTING_STORAGE_LEN + 16 ];
+    uint8_t						m_SettingData[ BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN + 16 ];
 };
 
 #pragma pack(pop)

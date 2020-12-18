@@ -14,7 +14,6 @@
 
 #include "PktTypes.h"
 #include "PktsPluginSetting.h"
-#include "PktsPluginSetting.h"
 
 #include <string.h>
 
@@ -38,14 +37,21 @@ void PktPluginSettingReply::calcPktLen( void )
 }
 
 //============================================================================
-PluginSettingBinary * PktPluginSettingReply::getSettingBinary( void )
+bool PktPluginSettingReply::getSettingBinary( BinaryBlob& binarySetting )
 {
-    return ( PluginSettingBinary * )m_SettingData;
+    return settingBinary.setBlobData( m_SettingData, m_SettingLen, false, true );
 }
 
 //============================================================================
-void PktPluginSettingReply::setSettingBinary( PluginSettingBinary& settingBinary )
+bool PktPluginSettingReply::setSettingBinary( BinaryBlob& binarySetting )
 {
-    memcpy( m_SettingData, &settingBinary, settingBinary.getSettingTotalStorgeLength() );
-    calcPktLen();
+    if( settingBinary.getBlobLen() <= BLOB_PLUGIN_SETTING_MAX_STORAGE_LEN )
+    {
+        m_SettingLen = settingBinary.getBlobLen();
+        memcpy( m_SettingData, settingBinary.getBlobData(), settingBinary.getBlobLen() );
+        calcPktLen();
+        return true;
+    }
+
+    return true;
 }
