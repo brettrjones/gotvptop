@@ -341,11 +341,14 @@
     <ClCompile Include="..\..\encoder\sei_x265.cpp" />
     <ClCompile Include="..\..\encoder\slicetype_x265.cpp" />
     <ClCompile Include="..\..\encoder\weightPrediction_x265.cpp" />
-    <ClCompile Include="..\..\x265.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\common\CMakeLists.txt" />
     <Text Include="..\..\common\x86\README.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\libx265.pri" />
+    <None Include="..\..\..\..\libx265.pro" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

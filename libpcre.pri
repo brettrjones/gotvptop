@@ -32,7 +32,7 @@ SOURCES += 	$$PWD/DependLibs/libpcre/config_pcre.c \
     $$PWD/DependLibs/libpcre/pcre_version.c \
     $$PWD/DependLibs/libpcre/pcre_xclass.c \
     $$PWD/DependLibs/libpcre/pcrecpp.cc \
-    $$PWD/DependLibs/libpcre/pcregrep.c \
+#    $$PWD/DependLibs/libpcre/pcregrep.c \
     $$PWD/DependLibs/libpcre/pcreposix.c \
     $$PWD/DependLibs/libpcre/dftables_pcre.c \
     $$PWD/DependLibs/libpcre/ucptable_pcre.c

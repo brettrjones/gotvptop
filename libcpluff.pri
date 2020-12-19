@@ -13,7 +13,7 @@ SOURCES += 	$$PWD/DependLibs/libcpluff/context.c \
     $$PWD/DependLibs/libcpluff/cpluff.c \
     $$PWD/DependLibs/libcpluff/kazlib/hash.c \
     $$PWD/DependLibs/libcpluff/kazlib/list_cp.c \
-    $$PWD/DependLibs/libcpluff/loader/loader.c \
+#    $$PWD/DependLibs/libcpluff/loader/loader.c \
     $$PWD/DependLibs/libcpluff/logging_cpluff.c \
     $$PWD/DependLibs/libcpluff/pcontrol.c \
     $$PWD/DependLibs/libcpluff/pinfo.c \

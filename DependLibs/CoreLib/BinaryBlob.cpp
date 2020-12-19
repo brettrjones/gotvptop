@@ -16,6 +16,7 @@
 #include "IsBigEndianCpu.h"
 #include "VxGUID.h"
 #include "VxDebug.h"
+#include <memory.h>
 
 //============================================================================
 bool BinaryBlob::createStorage( int maxStorageLen, bool useNetworkOrder )

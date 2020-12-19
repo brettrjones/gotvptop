@@ -92,14 +92,14 @@ SOURCES += 	\
     $$PWD/DependLibs/libxml2/SAX2_xml2.c \
     $$PWD/DependLibs/libxml2/schematron_xml2.c \
     $$PWD/DependLibs/libxml2/trio_xml2.c \
-    $$PWD/DependLibs/libxml2/trionan_xml2.c \
+#    $$PWD/DependLibs/libxml2/trionan_xml2.c \
     $$PWD/DependLibs/libxml2/triostr_xml2.c \
     $$PWD/DependLibs/libxml2/uri_xml2.c \
     $$PWD/DependLibs/libxml2/valid_xml2.c \
     $$PWD/DependLibs/libxml2/xinclude_xml2.c \
     $$PWD/DependLibs/libxml2/xlink_xml2.c \
     $$PWD/DependLibs/libxml2/xmlIO_xml2.c \
-    $$PWD/DependLibs/libxml2/xmllint_xml2.c \
+#    $$PWD/DependLibs/libxml2/xmllint_xml2.c \
     $$PWD/DependLibs/libxml2/xmlmemory_xml2.c \
     $$PWD/DependLibs/libxml2/xmlmodule_xml2.c \
     $$PWD/DependLibs/libxml2/xmlreader_xml2.c \

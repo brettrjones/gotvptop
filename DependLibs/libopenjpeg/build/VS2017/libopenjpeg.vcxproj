@@ -316,6 +316,9 @@
   <ItemGroup>
     <Text Include="..\..\thirdparty\README.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\libopenjpeg.pri" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

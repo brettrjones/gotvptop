@@ -26,7 +26,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libx264/x264cli.h
 
 SOURCES += 	\
-    $$PWD/DependLibs/libx264/x264.c \
+#    $$PWD/DependLibs/libx264/x264.c \
     $$PWD/DependLibs/libx264/common/cpu_x264.c \
     $$PWD/DependLibs/libx264/common/common_x264.c \
     $$PWD/DependLibs/libx264/common/bitstream_x264.c \

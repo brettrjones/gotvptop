@@ -66,7 +66,7 @@ SOURCES += 	$$PWD/DependLibs/libopenjpeg/src/lib/openjp2/bench_dwt.c \
     $$PWD/DependLibs/libopenjpeg/src/lib/openjp2/pi.c \
     $$PWD/DependLibs/libopenjpeg/src/lib/openjp2/ppix_manager.c \
     $$PWD/DependLibs/libopenjpeg/src/lib/openjp2/t1.c \
-    $$PWD/DependLibs/libopenjpeg/src/lib/openjp2/t1_generate_luts.c \
+#    $$PWD/DependLibs/libopenjpeg/src/lib/openjp2/t1_generate_luts.c \
     $$PWD/DependLibs/libopenjpeg/src/lib/openjp2/t2.c \
     $$PWD/DependLibs/libopenjpeg/src/lib/openjp2/tcd.c \
     $$PWD/DependLibs/libopenjpeg/src/lib/openjp2/tgt.c \

@@ -25,6 +25,8 @@
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxTime.h>
 
+#include <algorithm>
+
 namespace
 {
     const uint64_t HOST_ACTION_TIMEOUT_MS = 30000;

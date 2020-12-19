@@ -383,6 +383,7 @@
     <ClCompile Include="..\..\simple\x86.c" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\liblzma.pri" />
     <None Include="..\..\check\crc32_x86.S" />
     <None Include="..\..\check\crc64_x86.S" />
   </ItemGroup>

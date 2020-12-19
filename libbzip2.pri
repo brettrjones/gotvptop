@@ -12,5 +12,5 @@ SOURCES += 	$$PWD/DependLibs/libbzip2/blocksort.c \
     $$PWD/DependLibs/libbzip2/mk251.c \
     $$PWD/DependLibs/libbzip2/randtable.c \
     $$PWD/DependLibs/libbzip2/spewG.c \
-    $$PWD/DependLibs/libbzip2/unzcrash.c
+#    $$PWD/DependLibs/libbzip2/unzcrash.c
 

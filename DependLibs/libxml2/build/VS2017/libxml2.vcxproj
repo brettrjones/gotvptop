@@ -46,14 +46,12 @@
     <ClCompile Include="..\..\threads_xml2.c" />
     <ClCompile Include="..\..\tree_xml2.c" />
     <ClCompile Include="..\..\trio_xml2.c" />
-    <ClCompile Include="..\..\trionan_xml2.c" />
     <ClCompile Include="..\..\triostr_xml2.c" />
     <ClCompile Include="..\..\uri_xml2.c" />
     <ClCompile Include="..\..\valid_xml2.c" />
     <ClCompile Include="..\..\xinclude_xml2.c" />
     <ClCompile Include="..\..\xlink_xml2.c" />
     <ClCompile Include="..\..\xmlIO_xml2.c" />
-    <ClCompile Include="..\..\xmllint_xml2.c" />
     <ClCompile Include="..\..\xmlmemory_xml2.c" />
     <ClCompile Include="..\..\xmlmodule_xml2.c" />
     <ClCompile Include="..\..\xmlreader_xml2.c" />
@@ -129,6 +127,10 @@
     <ClInclude Include="..\..\xmlwriter.h" />
     <ClInclude Include="..\..\xpath.h" />
     <ClInclude Include="..\..\xpathInternals.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\libxml2.pri" />
+    <None Include="..\..\..\..\libxml2.pro" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>libxml2</ProjectName>

@@ -264,7 +264,10 @@
     <ClCompile Include="..\..\common\threadpool_x264.c" />
     <ClCompile Include="..\..\common\vlc_x264.c" />
     <ClCompile Include="..\..\common\win32thread_x264.c" />
-    <ClCompile Include="..\..\x264.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\libx264.pri" />
+    <None Include="..\..\..\..\libx264.pro" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

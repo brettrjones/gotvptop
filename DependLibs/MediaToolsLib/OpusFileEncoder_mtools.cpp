@@ -25,7 +25,10 @@
 #include <CoreLib/IsBigEndianCpu.h>
 #include <CoreLib/VxDebug.h>
 #include <CoreLib/VxFileUtil.h>
- 
+
+#include <string.h>
+#include <memory.h>
+
 namespace
 {
 

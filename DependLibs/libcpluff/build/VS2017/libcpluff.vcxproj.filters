@@ -49,9 +49,6 @@
     <ClCompile Include="..\..\thread_windows.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\loader\loader.c">
-      <Filter>Source Files\loader</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\kazlib\hash.c">
       <Filter>Source Files\kazlib</Filter>
     </ClCompile>

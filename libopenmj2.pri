@@ -55,7 +55,7 @@ SOURCES += 	$$PWD/../../src/lib/openjp2/bio.c \
 	$$PWD/../../src/lib/openjp2/ppix_manager.c \
 	$$PWD/../../src/lib/openjp2/raw.c \
 	$$PWD/../../src/lib/openjp2/t1.c \
-	$$PWD/../../src/lib/openjp2/t1_generate_luts.c \
+#	$$PWD/../../src/lib/openjp2/t1_generate_luts.c \
 	$$PWD/../../src/lib/openjp2/t2.c \
 	$$PWD/../../src/lib/openjp2/tcd.c \
 	$$PWD/../../src/lib/openjp2/tgt.c \

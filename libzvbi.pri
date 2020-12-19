@@ -87,7 +87,7 @@ SOURCES += 	\
     $$PWD/DependLibs/libzvbi/src/exp-txt_zvbi.c \
     $$PWD/DependLibs/libzvbi/src/exp-vtx_zvbi.c \
     $$PWD/DependLibs/libzvbi/src/hamm_zvbi.c \
-    $$PWD/DependLibs/libzvbi/src/hammgen_zvbi.c \
+#    $$PWD/DependLibs/libzvbi/src/hammgen_zvbi.c \
     $$PWD/DependLibs/libzvbi/src/idl_demux_zvbi.c \
     $$PWD/DependLibs/libzvbi/src/io-bktr_zvbi.c \
     $$PWD/DependLibs/libzvbi/src/io-dvb_zvbi.c \

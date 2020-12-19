@@ -278,7 +278,6 @@
     <ClInclude Include="..\..\wavreader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\amrwb-enc.c" />
     <ClCompile Include="..\..\SoftAMRWBEncoder.cpp" />
     <ClCompile Include="..\..\src\autocorr.c" />
     <ClCompile Include="..\..\src\az_isp.c" />
@@ -332,6 +331,8 @@
     <ClCompile Include="..\..\wrapper.c" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\libarmrwbenc.pri" />
+    <None Include="..\..\..\..\libarmrwbenc.pro" />
     <None Include="..\..\inc\grid100.tab" />
     <None Include="..\..\inc\ham_wind.tab" />
     <None Include="..\..\inc\homing.tab" />

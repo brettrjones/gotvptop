@@ -47,6 +47,20 @@ include(config_os_detect.pri)
 include(config_compiler.pri)
 include(config_opensslp_include.pri)
 
+INCLUDEPATH += $$PWD/GoTvApps/GoTvCommon/QtSource
+INCLUDEPATH += $$PWD/GoTvApps
+#so use our static linked version of freetype
+#INCLUDEPATH += $$PWD/DependLibs/libfreetype/include
+#INCLUDEPATH += $$PWD/GoTvApps/GoTvCommon
+#INCLUDEPATH += $$PWD/GoTvApps/GoTvCommon/QtSource
+INCLUDEPATH += $$PWD/DependLibs
+#INCLUDEPATH += $$PWD/DependLibs/libcurl/include
+#INCLUDEPATH += $$PWD/DependLibs/libcurl/lib
+INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
+INCLUDEPATH += $$PWD/DependLibs/ffmpeg
+INCLUDEPATH += $$PWD/GoTvCore
+INCLUDEPATH += $$PWD
+
 PRECOMPILED_HEADER = $$PWD/AppPrecompiledHdr.h
 precompile_header:!isEmpty(PRECOMPILED_HEADER) {
 DEFINES += USING_PCH

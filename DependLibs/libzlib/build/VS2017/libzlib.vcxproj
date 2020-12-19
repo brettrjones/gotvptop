@@ -227,6 +227,8 @@
     <ClInclude Include="..\..\zutil.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\libzlib.pri" />
+    <None Include="..\..\..\..\libzlib.pro" />
     <None Include="..\..\ChangeLog" />
     <None Include="..\..\configure" />
     <None Include="..\..\contrib\minizip\Makefile" />

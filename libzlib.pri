@@ -18,7 +18,7 @@ SOURCES += 	\
     $$PWD/DependLibs/libzlib/inffast_zlib.c \
     $$PWD/DependLibs/libzlib/inflate_zlib.c \
     $$PWD/DependLibs/libzlib/inftrees_zlib.c \
-    $$PWD/DependLibs/libzlib/minigzip_zlib.c \
+#    $$PWD/DependLibs/libzlib/minigzip_zlib.c \
     $$PWD/DependLibs/libzlib/trees_zlib.c \
     $$PWD/DependLibs/libzlib/uncompr_zlib.c \
     $$PWD/DependLibs/libzlib/zutil_zlib.c

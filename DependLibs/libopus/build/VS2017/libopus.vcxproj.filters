@@ -34,6 +34,9 @@
     <Filter Include="opus">
       <UniqueIdentifier>{6e54c9c3-d080-4ec5-87e9-4baeb3814beb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="QtBuild">
+      <UniqueIdentifier>{d753d58e-0215-44e9-b1ea-88f1166c23ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\celt\arm\arm_celt_map_opus.c">
@@ -290,7 +293,12 @@
     <None Include="..\..\opus\genversion.bat">
       <Filter>opus</Filter>
     </None>
-    <None Include="..\..\..\..\libopus.pri" />
+    <None Include="..\..\..\..\libopus.pro">
+      <Filter>QtBuild</Filter>
+    </None>
+    <None Include="..\..\..\..\libopus.pri">
+      <Filter>QtBuild</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\celt\arm\armcpu.h">

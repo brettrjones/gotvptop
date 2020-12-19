@@ -56,7 +56,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libx265/x265cli.h
 
 SOURCES += 	\
-    $$PWD/DependLibs/libx265/x265.cpp \
+#    $$PWD/DependLibs/libx265/x265.cpp \
     $$PWD/DependLibs/libx265/common/bitstream_x265.cpp \
     $$PWD/DependLibs/libx265/common/common_x265.cpp \
     $$PWD/DependLibs/libx265/common/cpu_x265.cpp \

@@ -345,7 +345,7 @@ void file_uncompress(file)
  *   -r : compress with Z_RLE
  *   -1 to -9 : compression level
  */
-
+#ifndef LIB_STATIC
 int main(argc, argv)
     int argc;
     char *argv[];
@@ -438,3 +438,4 @@ int main(argc, argv)
     }
     return 0;
 }
+#endif // LIB_STATIC

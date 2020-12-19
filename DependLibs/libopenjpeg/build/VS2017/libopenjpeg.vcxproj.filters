@@ -28,6 +28,9 @@
     <Filter Include="thirdparty\liblcms2\src">
       <UniqueIdentifier>{1d0ac536-c6d1-4e8f-95e2-5076b596fa5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="QtBuild">
+      <UniqueIdentifier>{f0780810-6468-4e0e-8d04-f3a9381b1910}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h">
@@ -325,5 +328,10 @@
     <Text Include="..\..\thirdparty\README.txt">
       <Filter>thirdparty</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\libopenjpeg.pri">
+      <Filter>QtBuild</Filter>
+    </None>
   </ItemGroup>
 </Project>

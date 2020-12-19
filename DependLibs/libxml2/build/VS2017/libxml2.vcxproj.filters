@@ -5,6 +5,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="QtBuild">
+      <UniqueIdentifier>{be79e36d-d0a0-4970-8931-0ade249dfd31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\c14n_xml2.c">
@@ -52,12 +55,6 @@
     <ClCompile Include="..\..\list_xml2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\nanoftp_xml2.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\nanohttp_xml2.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\parser_xml2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -88,9 +85,6 @@
     <ClCompile Include="..\..\trio_xml2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\trionan_xml2.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\triostr_xml2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -107,9 +101,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xmlIO_xml2.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xmllint_xml2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xmlmemory_xml2.c">
@@ -142,10 +133,16 @@
     <ClCompile Include="..\..\xmlwriter_xml2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xpath_xml2.c">
+    <ClCompile Include="..\..\xpointer_xml2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xpointer_xml2.c">
+    <ClCompile Include="..\..\nanoftp_xml2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nanohttp_xml2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xpath_xml2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -333,5 +330,13 @@
     <ClInclude Include="..\..\libxml2_config_windows.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\libxml2.pri">
+      <Filter>QtBuild</Filter>
+    </None>
+    <None Include="..\..\..\..\libxml2.pro">
+      <Filter>QtBuild</Filter>
+    </None>
   </ItemGroup>
 </Project>

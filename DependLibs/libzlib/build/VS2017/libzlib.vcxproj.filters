@@ -14,6 +14,9 @@
     <Filter Include="Source Files\contrib\minizip">
       <UniqueIdentifier>{19511f4c-d142-4988-b1bb-2ace7c530ea4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="QtBuild">
+      <UniqueIdentifier>{f77fece9-5a9c-4521-9c0e-38970c6e528b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\adler32_zlib.c">
@@ -181,6 +184,12 @@
     </None>
     <None Include="..\..\contrib\minizip\Makefile">
       <Filter>Source Files\contrib\minizip</Filter>
+    </None>
+    <None Include="..\..\..\..\libzlib.pri">
+      <Filter>QtBuild</Filter>
+    </None>
+    <None Include="..\..\..\..\libzlib.pro">
+      <Filter>QtBuild</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

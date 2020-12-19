@@ -4,9 +4,9 @@
 #include "GoTvAppConfig.h"
 #ifdef BUILD_GOTV_APP
 
-#include <GoTvCommon/QtSource/AppCommon.h>
-#include <GoTvCommon/QtSource/HomeWindow.h>
-#include <GoTvCommon/QtSource/GuiParams.h>
+#include <GoTvApps/GoTvCommon/QtSource/AppCommon.h>
+#include <GoTvApps/GoTvCommon/QtSource/HomeWindow.h>
+#include <GoTvApps/GoTvCommon/QtSource/GuiParams.h>
 
 #include <QApplication>
 #include <QCommandLineParser>
@@ -19,7 +19,7 @@
 
 #include <CoreLib/VxGlobals.h>
 #include <CoreLib/VxFileUtil.h>
-#include "AccountMgr.h"
+#include <GoTvApps/GoTvCommon/QtSource/AccountMgr.h>
 #include <NetLib/VxPeerMgr.h>
 #include <GoTvInterface/IGoTv.h>
 

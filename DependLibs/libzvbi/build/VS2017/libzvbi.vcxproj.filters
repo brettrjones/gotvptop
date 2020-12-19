@@ -68,9 +68,6 @@
     <ClCompile Include="..\..\src\hamm_zvbi.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\hammgen_zvbi.c">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\idl_demux_zvbi.c">
       <Filter>src</Filter>
     </ClCompile>

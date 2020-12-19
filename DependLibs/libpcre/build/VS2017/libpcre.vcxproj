@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\dftables_pcre.c" />
     <ClCompile Include="..\..\pcrecpp.cc" />
-    <ClCompile Include="..\..\pcregrep.c" />
     <ClCompile Include="..\..\pcreposix.c" />
     <ClCompile Include="..\..\pcre_chartables.c" />
     <ClCompile Include="..\..\pcre_compile.c" />
@@ -61,6 +60,10 @@
     <ClInclude Include="..\..\pcre_stringpiece.h" />
     <ClInclude Include="..\..\ucp.h" />
     <ClInclude Include="..\..\ucpinternal.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\libpcre.pri" />
+    <None Include="..\..\..\..\libpcre.pro" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>libpcre</ProjectName>

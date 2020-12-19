@@ -40,7 +40,6 @@
     <ClCompile Include="..\..\src\exp-vtx_zvbi.c" />
     <ClCompile Include="..\..\src\export_zvbi.c" />
     <ClCompile Include="..\..\src\hamm_zvbi.c" />
-    <ClCompile Include="..\..\src\hammgen_zvbi.c" />
     <ClCompile Include="..\..\src\idl_demux_zvbi.c" />
     <ClCompile Include="..\..\src\io-bktr_zvbi.c" />
     <ClCompile Include="..\..\src\io-dvb_zvbi.c" />

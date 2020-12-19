@@ -1771,7 +1771,9 @@ if (locale != NULL)
       locale, locale_from);
     return 2;
     }
+#ifdef BUILD_PCRE_TABLES  
   pcretables = pcre_maketables();
+#endif // BUILD_PCRE_TABLES  
   }
 
 /* Sort out colouring */

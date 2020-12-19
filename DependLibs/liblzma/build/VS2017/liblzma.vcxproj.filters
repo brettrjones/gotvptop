@@ -50,6 +50,9 @@
     <Filter Include="Source Files\api\lzma">
       <UniqueIdentifier>{ba21989b-d04e-42d3-a233-194e1fc37637}</UniqueIdentifier>
     </Filter>
+    <Filter Include="QtBuild">
+      <UniqueIdentifier>{0788204e-74e3-47ce-b422-fbfcfa2a1f7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h">
@@ -556,6 +559,9 @@
     </None>
     <None Include="..\..\check\crc64_x86.S">
       <Filter>Source Files\check</Filter>
+    </None>
+    <None Include="..\..\..\..\liblzma.pri">
+      <Filter>QtBuild</Filter>
     </None>
   </ItemGroup>
 </Project>

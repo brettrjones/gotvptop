@@ -41,6 +41,9 @@
     <Filter Include="Source Files\src\asm\ARMV7">
       <UniqueIdentifier>{19ac2f79-3357-4f35-ae61-1eb59b02804f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="QtBuild">
+      <UniqueIdentifier>{ec608b8d-17ba-4f1e-a8df-9e5aac95b8ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\GoTvCompilerConfig.h">
@@ -381,9 +384,6 @@
     <ClCompile Include="..\..\src\weight_a.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\amrwb-enc.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\inc\grid100.tab">
@@ -415,6 +415,12 @@
     </None>
     <None Include="..\..\inc\qpisf_2s.tab">
       <Filter>Source Files\inc</Filter>
+    </None>
+    <None Include="..\..\..\..\libarmrwbenc.pri">
+      <Filter>QtBuild</Filter>
+    </None>
+    <None Include="..\..\..\..\libarmrwbenc.pro">
+      <Filter>QtBuild</Filter>
     </None>
   </ItemGroup>
 </Project>

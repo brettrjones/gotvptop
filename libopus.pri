@@ -118,7 +118,7 @@ SOURCES += 	\
     $$PWD/DependLibs/libopus/celt/mathops_opus.c \
     $$PWD/DependLibs/libopus/celt/mdct_opus.c \
     $$PWD/DependLibs/libopus/celt/modes_opus.c \
-    $$PWD/DependLibs/libopus/celt/opus_custom_demo_opus.c \
+#    $$PWD/DependLibs/libopus/celt/opus_custom_demo_opus.c \
     $$PWD/DependLibs/libopus/celt/pitch_opus.c \
     $$PWD/DependLibs/libopus/celt/quant_bands_opus.c \
     $$PWD/DependLibs/libopus/celt/rate_opus.c \
@@ -128,7 +128,7 @@ SOURCES += 	\
     $$PWD/DependLibs/libopus/opus/mlp_data_opus.c \
     $$PWD/DependLibs/libopus/opus/opus_opus.c \
     $$PWD/DependLibs/libopus/opus/opus_decoder_opus.c \
-    $$PWD/DependLibs/libopus/opus/opus_compare_opus.c \
+#    $$PWD/DependLibs/libopus/opus/opus_compare_opus.c \
     $$PWD/DependLibs/libopus/opus/opus_encoder_opus.c \
     $$PWD/DependLibs/libopus/opus/opus_multistream_opus.c \
     $$PWD/DependLibs/libopus/opus/opus_multistream_encoder_opus.c \

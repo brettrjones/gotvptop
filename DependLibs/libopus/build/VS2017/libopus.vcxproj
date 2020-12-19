@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\libopus.pri" />
+    <None Include="..\..\..\..\libopus.pro" />
     <None Include="..\..\celt\arm\arm2gnu.pl" />
     <None Include="..\..\celt\arm\armopts.s.in" />
     <None Include="..\..\celt\arm\celt_pitch_xcorr_arm-gnu.S" />

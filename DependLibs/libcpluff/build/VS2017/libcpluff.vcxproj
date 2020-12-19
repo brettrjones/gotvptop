@@ -23,7 +23,6 @@
     <ClCompile Include="..\..\cpluff.c" />
     <ClCompile Include="..\..\kazlib\hash.c" />
     <ClCompile Include="..\..\kazlib\list_cp.c" />
-    <ClCompile Include="..\..\loader\loader.c" />
     <ClCompile Include="..\..\logging_cpluff.c" />
     <ClCompile Include="..\..\pcontrol.c" />
     <ClCompile Include="..\..\pinfo.c" />
