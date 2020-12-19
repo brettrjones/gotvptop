@@ -48,20 +48,6 @@ include(config_os_detect.pri)
 include(config_compiler.pri)
 include(config_opensslp_include.pri)
 
-INCLUDEPATH += $$PWD/GoTvApps/GoTvCommon/QtSource
-INCLUDEPATH += $$PWD/GoTvApps
-#so use our static linked version of freetype
-#INCLUDEPATH += $$PWD/DependLibs/libfreetype/include
-#INCLUDEPATH += $$PWD/GoTvApps/GoTvCommon
-#INCLUDEPATH += $$PWD/GoTvApps/GoTvCommon/QtSource
-INCLUDEPATH += $$PWD/DependLibs
-#INCLUDEPATH += $$PWD/DependLibs/libcurl/include
-#INCLUDEPATH += $$PWD/DependLibs/libcurl/lib
-INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
-INCLUDEPATH += $$PWD/DependLibs/ffmpeg
-INCLUDEPATH += $$PWD/GoTvCore
-INCLUDEPATH += $$PWD
-
 PRE_TARGETDEPS += $$PWD/libptopengine.pro
 PRE_TARGETDEPS += $$PWD/libnetlib.pro
 PRE_TARGETDEPS += $$PWD/libpktlib.pro
@@ -112,12 +98,39 @@ UI_DIR =.ui/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYP
 
 # fails because command line limit in windoz is 32,768.. so
 #short obj path so does not overflow windows command line limit "make (e=87): The parameter is incorrect"
-CONFIG(debug, debug|release){
-    OBJECTS_DIR=.ad
+
+# fails because command line limit in windoz is 32,768.. so
+#short obj path so does not overflow windows command line limit "make (e=87): The parameter is incorrect"
+unix:!android{
+    CONFIG(debug, debug|release){
+        OBJECTS_DIR=.ad
+        MOC_DIR =.mocd
+        RCC_DIR =.qrcd
+    }
+
+    CONFIG(release, debug|release){
+        OBJECTS_DIR=.ar
+        MOC_DIR =.mocr
+        RCC_DIR =.qrcr
+    }
 }
 
-CONFIG(release, debug|release){
-    OBJECTS_DIR=.ar
+unix:!android{
+    CONFIG(debug, debug|release){
+        OBJECTS_DIR=$$PWD//objs/obs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+        MOC_DIR =$$PWD/objs/moc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+        RCC_DIR =$$PWD/objs/qrc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+        UI_DIR =$$PWD/objs/ui/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+    }
+
+    CONFIG(release, debug|release){
+        OBJECTS_DIR=$$PWD/objs/obs/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+        MOC_DIR =$$PWD/objs/moc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+        RCC_DIR =$$PWD/objs/qrc/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+        UI_DIR =$$PWD/objs/ui/$${TARGET_NAME}/$${TARGET_OS_NAME}/$${TARGET_ARCH_NAME}/$${BUILD_TYPE}
+    }
+
+    message( linux dirs obj $${OBJECTS_DIR} moc $${MOC_DIR} qrc $${RCC_DIR} ui $${UI_DIR} )
 }
 
 include(GoTvPtoPAppLib.pri)

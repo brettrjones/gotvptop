@@ -5,9 +5,14 @@ precompile_header:!isEmpty(PRECOMPILED_HEADER) {
 DEFINES += USING_PCH
 }
 
+unix:!android{
+    INCLUDEPATH += $${UI_DIR}
+    INCLUDEPATH += $${MOC_DIR}
+    message( linx generated include paths $${INCLUDEPATH})
+}
+
 INCLUDEPATH += $$PWD/GoTvApps/GoTvCommon/QtSource
 INCLUDEPATH += $$PWD/GoTvApps
-INCLUDEPATH += $$PWD/DependLibs
 INCLUDEPATH += $$PWD/GoTvCore/xbmc/xbmc
 INCLUDEPATH += $$PWD/DependLibs/ffmpeg
 INCLUDEPATH += $$PWD/GoTvCore
