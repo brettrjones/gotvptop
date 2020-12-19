@@ -2,6 +2,8 @@
 TARGET = nolimitconnect
 TEMPLATE = app
 
+include(GoTvPtoPAppLib.pri)
+
 # keep it all lowercase to match program naming convention on *nix systems
 PROJECT_NAME = nolimitconnect
 
@@ -35,6 +37,7 @@ MOBILITY =
 !android:{
 QMAKE_RESOURCE_FLAGS += -compress 9 -threshold 5
 }
+
 RESOURCES += $$PWD/GoTvApps/GoTvCommon/gotvcommon.qrc
 
 
@@ -61,12 +64,10 @@ INCLUDEPATH += $$PWD/DependLibs/ffmpeg
 INCLUDEPATH += $$PWD/GoTvCore
 INCLUDEPATH += $$PWD
 
-PRECOMPILED_HEADER = $$PWD/AppPrecompiledHdr.h
+PRECOMPILED_HEADER = $$PWD/app_precompiled_hdr.h
 precompile_header:!isEmpty(PRECOMPILED_HEADER) {
 DEFINES += USING_PCH
 }
-include(GoTvPtoPAppLib.pri)
-
 
 PRE_TARGETDEPS += $$PWD/libptopengine.pro
 PRE_TARGETDEPS += $$PWD/libnetlib.pro
@@ -337,7 +338,6 @@ android:{
     qnx: target.path = /tmp/$${TARGET}/bin
     else: unix:!android: target.path = /opt/$${TARGET}/bin
     !isEmpty(target.path): INSTALLS += target
-}
 
 ANDROID_PACKAGE_SOURCE_DIR = \
         $$PWD/bin-Android
@@ -351,3 +351,5 @@ DISTFILES += \
     bin-Android/gradle/wrapper/gradle-wrapper.properties \
     bin-Android/gradlew.bat \
     bin-Android/res/values/strings.xml
+}
+
