@@ -38,36 +38,46 @@
 **
 ****************************************************************************/
 
-#include <QApplication>
-#include <QCommandLineParser>
-#include <QCommandLineOption>
-#include <QStringList>
-#ifndef QT_NO_OPENGL
-#include <QGLFormat>
-#endif
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#include "mainwindow.h"
+#include <QMainWindow>
+#include <QString>
 
-int main(int argc, char **argv)
+class SvgView;
+
+QT_BEGIN_NAMESPACE
+class QAction;
+class QGraphicsView;
+class QGraphicsScene;
+class QGraphicsRectItem;
+QT_END_NAMESPACE
+
+class MainWindow : public QMainWindow
 {
-    Q_INIT_RESOURCE(gotvcommon);
+    Q_OBJECT
 
-    QApplication app(argc, argv);
-    QCoreApplication::setApplicationName("SVG Viewer");
-    QGuiApplication::setApplicationDisplayName(QCoreApplication::applicationName());
-    QCoreApplication::setOrganizationName("QtProject");
-    QCoreApplication::setApplicationVersion(QT_VERSION_STR);
+public:
+    MainWindow();
 
-    QCommandLineParser parser;
-    parser.setApplicationDescription("Qt SVG Viewer");
-    parser.addHelpOption();
-    parser.addVersionOption();
-    parser.addPositionalArgument("file", "The file to open.");
-    parser.process(app);
+    bool loadFile(const QString &path);
 
-    MainWindow window;
-    if (!window.loadFile(parser.positionalArguments().value(0, QLatin1String(":/Resources/bubbles.svg"))))
-        return -1;
-    window.show();
-    return app.exec();
-}
+public slots:
+    void openFile();
+    void exportImage();
+    void setRenderer(int renderMode);
+
+private:
+    QAction *m_nativeAction;
+    QAction *m_glAction;
+    QAction *m_imageAction;
+    QAction *m_highQualityAntialiasingAction;
+    QAction *m_backgroundAction;
+    QAction *m_outlineAction;
+
+    SvgView *m_view;
+
+    QString m_currentPath;
+};
+
+#endif

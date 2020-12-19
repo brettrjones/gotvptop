@@ -39,7 +39,7 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
     $$PWD/DependLibs/libarmrwbenc/wavreader.h
 
 SOURCES += 	$$PWD/DependLibs/libarmrwbenc/SoftAMRWBEncoder.cpp \
-    $$PWD/DependLibs/libarmrwbenc/amrwb-enc.c \
+#    $$PWD/DependLibs/libarmrwbenc/amrwb-enc.c \
     $$PWD/DependLibs/libarmrwbenc/common/cmnMemory.c \
     $$PWD/DependLibs/libarmrwbenc/src/autocorr.c \
     $$PWD/DependLibs/libarmrwbenc/src/az_isp.c \

@@ -38,6 +38,7 @@
 **
 ****************************************************************************/
 
+// this is just a minimal app to test if your build enviroment is working
 #include "exportdialog.h"
 
 #include <QApplication>

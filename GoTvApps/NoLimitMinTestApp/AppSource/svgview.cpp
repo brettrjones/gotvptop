@@ -37,6 +37,9 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
+
+// this is just a minimal app to test if your build enviroment is working
+
 #include "svgview.h"
 
 #include <QSvgRenderer>

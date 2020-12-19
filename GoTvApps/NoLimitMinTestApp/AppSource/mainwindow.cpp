@@ -38,6 +38,8 @@
 **
 ****************************************************************************/
 
+// this is just a minimal app to test if your build enviroment is working
+
 #include "mainwindow.h"
 #include "exportdialog.h"
 
