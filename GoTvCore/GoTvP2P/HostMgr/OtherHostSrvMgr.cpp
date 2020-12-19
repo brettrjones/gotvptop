@@ -95,7 +95,6 @@ bool OtherHostSrvMgr::executeHostActions( void )
 {
     bool actionTaken = false;
     int actionIdx = 0;
-
     m_HostListMutex.lock();
     int listSize = (int)m_HostDirtyList.size();
     m_HostListMutex.unlock();
@@ -535,7 +534,6 @@ bool OtherHostSrvMgr::requestHostConnection( EHostConnectType connectType, IHost
         callback->addHostConnectType( connectType );
         m_HostListMutex.lock();
 
-        bool wasTypeFound = false;
         std::vector<VxSktBase *> sktList;
 
         for( OtherHostInfo* hostEntry : m_HostInfoList )

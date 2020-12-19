@@ -287,13 +287,13 @@ void BottomBarWidget::slotMediaPlayButtonClicked( void )
 //============================================================================
 void BottomBarWidget::slotMediaTrashButtonClicked( void )
 {
-	emit slotMediaTrashButtonClicked();
+    emit signalMediaTrashButtonClicked();
 }
 
 //============================================================================
 void BottomBarWidget::slot30SecForwardButtonClicked( void )
 {
-	emit slot30SecForwardButtonClicked();
+    emit signal30SecForwardButtonClicked();
 }
 
 //============================================================================

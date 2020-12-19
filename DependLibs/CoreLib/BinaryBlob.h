@@ -42,12 +42,12 @@ public:
     bool                        getUseNetworkOrder( void )      { return m_UseNetworkOrder; }
 
     void                        resetWrite() { m_DataIdx = 0; m_PastEnd = 0; }
-    bool                        haveRoom( size_t valSize )      { return m_BlobData && ( ( m_MaxDataLen - m_DataIdx ) >= valSize ); }
-    bool                        incDataWrite( size_t valSize );
+    bool                        haveRoom( int valSize )          { return m_BlobData && ( ( m_MaxDataLen - m_DataIdx ) >= (int)valSize ); }
+    bool                        incDataWrite( int valSize );
 
     void                        resetRead() { m_DataIdx = 0; m_PastEnd = 0; }
-    bool                        haveData( size_t valSize )      { return m_BlobData && ( ( m_BlobLen - m_DataIdx ) >= valSize ); }
-    bool                        incDataRead( size_t valSize );
+    bool                        haveData( int valSize )      { return m_BlobData && ( ( m_BlobLen - m_DataIdx ) >= (int)valSize ); }
+    bool                        incDataRead( int valSize );
 
     bool                        isPastEnd() { return m_PastEnd; }
 

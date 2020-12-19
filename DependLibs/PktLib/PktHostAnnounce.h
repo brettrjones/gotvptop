@@ -21,8 +21,6 @@
 #pragma pack(push) 
 #pragma pack(1)
 
-class PluginSetting;
-
 class PktHostAnnounce :  public PktAnnounce
 {
 public:

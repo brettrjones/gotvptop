@@ -74,7 +74,7 @@ bool BinaryBlob::setBlobData( uint8_t* blob, int len, bool deleteOnDestruct, boo
 }
 
 //============================================================================
-bool BinaryBlob::incDataWrite( size_t valSize )
+bool BinaryBlob::incDataWrite( int valSize )
 {
     if( ( m_MaxDataLen - m_DataIdx ) >= valSize )
     {
@@ -95,7 +95,7 @@ bool BinaryBlob::incDataWrite( size_t valSize )
 }
 
 //============================================================================
-bool BinaryBlob::incDataRead( size_t valSize )
+bool BinaryBlob::incDataRead( int valSize )
 {
     if( ( m_BlobLen - m_DataIdx ) >= valSize )
     {
@@ -369,7 +369,6 @@ bool BinaryBlob::setValue( const char * pRetBuf, int iBufLen )
 //============================================================================
 bool BinaryBlob::setValue( void * pvRetBuf, int iBufLen )
 {
-    bool result = false;
     if( haveRoom( iBufLen + sizeof( uint32_t ) ) )
     {
         if( pvRetBuf )
@@ -445,7 +444,6 @@ bool BinaryBlob::getValue( uint8_t& u8Value )
 //============================================================================
 bool BinaryBlob::getValue( uint16_t& u16Value )
 {
-    bool result = false;
     if( haveData( sizeof( uint16_t ) ) )
     {
         uint16_t* data = ( uint16_t* )( &m_BlobData[ m_DataIdx ] );
@@ -468,7 +466,6 @@ bool BinaryBlob::getValue( uint16_t& u16Value )
 //============================================================================
 bool BinaryBlob::getValue( int32_t& s32Value )
 {
-    bool result = false;
     if( haveData( sizeof( int32_t ) ) )
     {
         int32_t* data = ( int32_t* )( &m_BlobData[ m_DataIdx ] );
@@ -491,7 +488,6 @@ bool BinaryBlob::getValue( int32_t& s32Value )
 //============================================================================
 bool BinaryBlob::getValue( uint32_t& u32Value )
 {
-    bool result = false;
     if( haveData( sizeof( uint32_t ) ) )
     {
         uint32_t* data = ( uint32_t* )( &m_BlobData[ m_DataIdx ] );
@@ -514,7 +510,6 @@ bool BinaryBlob::getValue( uint32_t& u32Value )
 //============================================================================
 bool BinaryBlob::getValue( int64_t& s64Value )
 {
-    bool result = false;
     if( haveData( sizeof( int64_t ) ) )
     {
         int64_t* data = ( int64_t* )( &m_BlobData[ m_DataIdx ] );
@@ -537,7 +532,6 @@ bool BinaryBlob::getValue( int64_t& s64Value )
 //============================================================================
 bool BinaryBlob::getValue( uint64_t& u64Value )
 {
-    bool result = false;
     if( haveData( sizeof( uint64_t ) ) )
     {
         uint64_t* data = ( uint64_t* )( &m_BlobData[ m_DataIdx ] );
@@ -560,7 +554,6 @@ bool BinaryBlob::getValue( uint64_t& u64Value )
 //============================================================================
 bool BinaryBlob::getValue( float& f32Value )
 {
-    bool result = false;
     if( haveData( sizeof( float ) ) )
     {
         float* data = ( float* )( &m_BlobData[ m_DataIdx ] );
@@ -584,7 +577,6 @@ bool BinaryBlob::getValue( float& f32Value )
 //============================================================================
 bool BinaryBlob::getValue( double& f64Value )
 {
-    bool result = false;
     if( haveData( sizeof( double ) ) )
     {
         double* data = ( double* )( &m_BlobData[ m_DataIdx ] );
@@ -607,7 +599,6 @@ bool BinaryBlob::getValue( double& f64Value )
 //============================================================================
 bool BinaryBlob::getValue( std::string& strValue )
 {
-    bool result = false;
     if( haveData( sizeof( uint32_t ) ) )
     {
         uint32_t dataLen = 0;
@@ -642,7 +633,6 @@ bool BinaryBlob::getValue( std::string& strValue )
 //============================================================================
 bool BinaryBlob::getValue( char * pRetBuf, int& iBufLen )
 {
-    bool result = false;
     if( haveData( sizeof( uint32_t ) ) )
     {
         uint32_t dataLen = 0;
@@ -698,7 +688,6 @@ bool BinaryBlob::getValue( std::vector<std::string>& aoStrValues )
 //============================================================================
 bool BinaryBlob::getValue( void* pvRetBuf, int& iBufLen )
 {
-    bool result = false;
     if( haveData( sizeof( uint32_t ) ) )
     {
         uint32_t dataLen = 0;

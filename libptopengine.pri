@@ -132,13 +132,15 @@ HEADERS += 	$$PWD/GoTvCompilerConfig.h \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferSession.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDefs.h \
-	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostInfoBase.h \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostInfoBase.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostList.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostListEntry.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostSettingBase.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostTest.h \
-	$$PWD/GoTvCore/GoTvP2P/HostMgr/OtherHostInfo.h \
-	$$PWD/GoTvCore/GoTvP2P/HostMgr/OtherHostSrvMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostConnectInterface.h \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/MyHostSrvMgr.h \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/OtherHostInfo.h \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/OtherHostSrvMgr.h \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/RandomConnectEntry.h \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/AudioUtil.h \
     $$PWD/GoTvCore/GoTvP2P/MediaProcessor/EchoCancel.h \
@@ -344,6 +346,7 @@ SOURCES += \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferDb.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferMgr.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostListMgr/HostListXferSession.cpp \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/HostConnectInterface.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostDb.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostDefs.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostMgr/HostInfoBase.cpp \
@@ -351,6 +354,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostListEntry.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostSettingBase.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/HostTest.cpp \
+    $$PWD/GoTvCore/GoTvP2P/HostMgr/MyHostSrvMgr.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostMgr/OtherHostInfo.cpp \
 	$$PWD/GoTvCore/GoTvP2P/HostMgr/OtherHostSrvMgr.cpp \
     $$PWD/GoTvCore/GoTvP2P/HostMgr/RandomConnectEntry.cpp \
@@ -407,6 +411,7 @@ SOURCES += \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineConnections.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineContact.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineFromGui.cpp \
+    $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineHostList.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineIgnoredAndHackers.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEngineMediaProcessorCallbacks.cpp \
     $$PWD/GoTvCore/GoTvP2P/P2PEngine/P2PEnginePktAnnChanged.cpp \

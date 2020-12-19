@@ -394,18 +394,20 @@ void AppSettings::setupAppModeSettings( EDefaultAppMode appDefaultMode )
 	// enable app mode specific features
 	switch( appDefaultMode )
 	{
-	case eAppFeatureViewer:
+    case eAppModeGoTvViewer:
 		setFeatureEnable( eAppFeatureViewer, true );
 		break;
-	case eAppFeatureProvider:
+    case eAppModeGoTvProvider:
 		setFeatureEnable( eAppFeatureProvider, true );
 		break;
-	case eAppFeatureStation:
+    case eAppModeGoTvStation:
 		setFeatureEnable( eAppFeatureStation, true );
 		break;
-	case eAppFeatureNetworkHost:
+    case eAppModeGoTvNetworkHost:
 		setFeatureEnable( eAppFeatureNetworkHost, true );
 		break;
+    default:
+        break;
 	}
 
 	// mare database as intialized with app mode settings

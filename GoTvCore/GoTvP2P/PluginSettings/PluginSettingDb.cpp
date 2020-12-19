@@ -175,7 +175,6 @@ bool PluginSettingDb::getAllPluginSettings( std::vector<PluginSetting>& settingL
     {
         while( cursor->getNextRow() )
         {
-            int iBlobLen = 0;
             std::string pluginName = cursor->getString( 0 );
             if( !pluginName.empty() )
             {

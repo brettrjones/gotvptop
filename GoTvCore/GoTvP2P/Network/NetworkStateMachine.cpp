@@ -389,7 +389,6 @@ void NetworkStateMachine::restartNetwork( void )
 	std::string ip	= m_LocalNetworkIp;
     LogModule( eLogNetworkState, LOG_INFO, "##NetworkStateMachine::restartNetwork" );
 
-    static bool hasCnaged = false;
     static bool lastIsCell = false;
     static std::string lastIpFound;
     if( ( lastIpFound != m_LocalNetworkIp )  || ( lastIsCell != isCell ) )

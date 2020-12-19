@@ -408,7 +408,7 @@ public:
 
     virtual void				toGuiWantMicrophoneRecording( EAppModule appModule, bool wantMicInput ) override;
     // microphone sound input samples peak value
-    virtual void				toGuiMicrophonePeak( EAppModule appModule, int peekVal0to32768 );
+    virtual void				toGuiMicrophonePeak( EAppModule appModule, int peekVal0to32768 ) override;
     virtual void				toGuiWantSpeakerOutput( EAppModule appModule, bool wantSpeakerOutput ) override;
     virtual int				    toGuiPlayAudio( EAppModule appModule, int16_t * pu16PcmData, int pcmDataLenInBytes, bool isSilence ) override;
     virtual int				    toGuiPlayAudio( EAppModule appModule, float * pu16PcmData, int pcmDataLenInBytes ) override;

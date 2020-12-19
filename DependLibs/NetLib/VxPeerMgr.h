@@ -27,7 +27,7 @@ public:
 	VxPeerMgr();
 	virtual ~VxPeerMgr();
 
-	virtual void				sktMgrShutdown( void );
+    virtual void				sktMgrShutdown( void ) override;
 
     /// if skt exists in connection list then lock access to connection list
     virtual bool				lockSkt( VxSktBase* sktBase ) override;
@@ -35,10 +35,10 @@ public:
 
 	VxClientMgr&				getClientMgr( void )			{ return m_ClientMgr; }
 
-	virtual void				setReceiveCallback( VX_SKT_CALLBACK pfnReceive, void * pvUserData );
+    virtual void				setReceiveCallback( VX_SKT_CALLBACK pfnReceive, void * pvUserData ) override;
 	void						setLocalIp( InetAddress& newLocalIp );
 
-	virtual VxSktBase *			makeNewSkt( void );
+    virtual VxSktBase *			makeNewSkt( void ) override;
 
 	virtual	void				handleSktCallback( VxSktBase * sktBase );
 

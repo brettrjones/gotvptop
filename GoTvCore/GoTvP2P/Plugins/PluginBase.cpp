@@ -286,7 +286,7 @@ bool PluginBase::fromGuiInstMsg(	VxNetIdent *	netIdent,
 //============================================================================ 
 void PluginBase::makeShortFileName( const char * pFullFileName, std::string& strShortFileName )
 {
-	makeShortFileName( pFullFileName, strShortFileName );
+    VxFileUtil::makeShortFileName( pFullFileName, strShortFileName );
 }
 
 //============================================================================ 

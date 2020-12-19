@@ -6,6 +6,8 @@ HEADERS += 	$$PWD/DependLibs/PktLib/AllPkts.h \
     $$PWD/DependLibs/PktLib/PktAnnounce.h \
     $$PWD/DependLibs/PktLib/PktChatReq.h \
     $$PWD/DependLibs/PktLib/PktDebugHelpers.h \
+    $$PWD/DependLibs/PktLib/PktHostAnnounce.h \
+    $$PWD/DependLibs/PktLib/PktsHostListXfer.h \
     $$PWD/DependLibs/PktLib/PktLogReply.h \
     $$PWD/DependLibs/PktLib/PktLogReq.h \
     $$PWD/DependLibs/PktLib/PktPluginHandlerBase.h \
@@ -45,6 +47,8 @@ SOURCES += 	$$PWD/DependLibs/PktLib/PktAnnList.cpp \
     $$PWD/DependLibs/PktLib/PktAnnounce.cpp \
     $$PWD/DependLibs/PktLib/PktChatReq.cpp \
     $$PWD/DependLibs/PktLib/PktDebugHelpers.cpp \
+    $$PWD/DependLibs/PktLib/PktHostAnnounce.cpp \
+    $$PWD/DependLibs/PktLib/PktsHostListXfer.cpp \
     $$PWD/DependLibs/PktLib/PktLogReply.cpp \
     $$PWD/DependLibs/PktLib/PktLogReq.cpp \
     $$PWD/DependLibs/PktLib/PktPluginHandlerBase.cpp \

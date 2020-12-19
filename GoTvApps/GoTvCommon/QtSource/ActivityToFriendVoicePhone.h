@@ -39,15 +39,15 @@ public:
     virtual BottomBarWidget *	getBottomBarWidget( void ) override { return ui.m_BottomBarWidget; }
 
 	//! called by base class with in session state
-	virtual void				onInSession( bool isInSession );
+    virtual void				onInSession( bool isInSession ) override;
 
 protected:
 	// override of ToGuiActivityInterface
-	virtual void				doToGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer );
-	virtual void				doToGuiRxedOfferReply( void * callbackData, GuiOfferSession * offer );
+    virtual void				doToGuiRxedPluginOffer( void * callbackData, GuiOfferSession * offer ) override;
+    virtual void				doToGuiRxedOfferReply( void * callbackData, GuiOfferSession * offer ) override;
 
 	void						setupActivityVoicePhone( void );
-	void						toGuiInstMsg( void * callbackData, VxNetIdent * friendIdent, EPluginType ePluginType, QString instMsg );
+    void						toGuiInstMsg( void * callbackData, VxNetIdent * friendIdent, EPluginType ePluginType, QString instMsg ) override;
 
 	//=== vars ===//
 	Ui::ToFriendVoicePhoneDialog	ui;

@@ -2,8 +2,6 @@
 TARGET = nolimitconnect
 TEMPLATE = app
 
-include(GoTvPtoPAppLib.pri)
-
 # keep it all lowercase to match program naming convention on *nix systems
 PROJECT_NAME = nolimitconnect
 
@@ -64,11 +62,6 @@ INCLUDEPATH += $$PWD/DependLibs/ffmpeg
 INCLUDEPATH += $$PWD/GoTvCore
 INCLUDEPATH += $$PWD
 
-PRECOMPILED_HEADER = $$PWD/app_precompiled_hdr.h
-precompile_header:!isEmpty(PRECOMPILED_HEADER) {
-DEFINES += USING_PCH
-}
-
 PRE_TARGETDEPS += $$PWD/libptopengine.pro
 PRE_TARGETDEPS += $$PWD/libnetlib.pro
 PRE_TARGETDEPS += $$PWD/libpktlib.pro
@@ -126,6 +119,8 @@ CONFIG(debug, debug|release){
 CONFIG(release, debug|release){
     OBJECTS_DIR=.ar
 }
+
+include(GoTvPtoPAppLib.pri)
 
 # look in same directory as executable for shared libraries
 unix:{

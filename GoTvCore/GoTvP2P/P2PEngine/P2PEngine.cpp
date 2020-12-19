@@ -333,7 +333,6 @@ void P2PEngine::doAppStateChange( EAppState eAppState )
 //============================================================================
 bool P2PEngine::setPluginSetting( PluginSetting& pluginSetting )
 {
-    bool result = false;
     if( ( ePluginTypeInvalid < pluginSetting.getPluginType() ) && ( eMaxPluginType > pluginSetting.getPluginType() ) )
     {
         return getPluginSettingMgr().setPluginSetting( pluginSetting );

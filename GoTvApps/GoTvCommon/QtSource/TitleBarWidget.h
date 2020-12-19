@@ -123,8 +123,8 @@ public slots:
     virtual void				slotSignalHelpClick( void );
 
 protected:
-    void						showEvent( QShowEvent * ev );
-    void						hideEvent( QHideEvent * ev );
+    void						showEvent( QShowEvent * ev ) override;
+    void						hideEvent( QHideEvent * ev ) override;
 
     virtual void				toGuiClientPlayVideoFrame( void *			userData,
                                                            VxGUID&          onlineId,
